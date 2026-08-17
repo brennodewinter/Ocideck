@@ -792,8 +792,6 @@ const _dutchSourceEt = {
   'Selectie opheffen': 'Tühista valik',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Nõustun EUPL 1.2 litsentsiga ja olen lugenud, milliseid andmeid OciDeck säilitab.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Sinu valikust saab rakenduse vaikekeel.',
   'Lees de volledige licentie': 'Loe kogu litsentsi',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck on vaba tarkvara EUPL 1.2 litsentsi all. Enne alustamist palume sul litsentsiga nõustuda. Allpool saad lugeda ka, milliseid andmeid OciDeck sellel seadmel säilitab ja millal miski su seadmest lahkub.',
@@ -817,9 +815,6 @@ const _dutchSourceEt = {
   'Ongeldige server-URL': 'Vigane serveri URL',
   'Het antwoord van de server was te groot': 'Serveri vastus oli liiga suur',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-allikas (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Ava ja salvesta esitlused oma Nextcloud\'i kausta. Parool säilitatakse krüpteeritult võtmehoidlas, mitte muude seadete kõrval.',
   'Server-URL': 'Serveri URL',
   'Gebruikersnaam': 'Kasutajanimi',
   'App-wachtwoord': 'Rakenduse parool',
@@ -833,21 +828,12 @@ const _dutchSourceEt = {
   'Verbinding gelukt': 'Ühendus õnnestus',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Muudatused salvestatakse, kui klõpsad Salvesta.',
-  'Afbeelding kiezen op Nextcloud': 'Vali pilt Nextcloud\'ist',
-  'Openen vanaf Nextcloud': 'Ava Nextcloud\'ist',
   'Vernieuwen': 'Värskenda',
   'Deze map is leeg': 'See kaust on tühi',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Ühtegi Nextcloud-serverit pole seadistatud. Seadista see kaudu Seaded → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Kausta ei õnnestunud laadida. Kontrolli oma ühendust ja seadeid.',
   'Kon dit bestand niet openen.': 'Seda faili ei õnnestunud avada.',
   'Dit is geen Marp/OciDeck-presentatie.': 'See pole Marp/OciDeck esitlus.',
   'Downloaden mislukt:': 'Allalaadimine ebaõnnestus:',
-  'Opgeslagen op Nextcloud:': 'Salvestatud Nextcloud\'i:',
   'Opslaan mislukt:': 'Salvestamine ebaõnnestus:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Seadista esmalt Nextcloud-server kaudu Seaded → Nextcloud.',
   'Opslaan naar Nextcloud': 'Salvesta Nextcloud\'i',
   'Doelpad (zonder extensie)': 'Sihttee (ilma laiendita)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -858,9 +844,6 @@ const _dutchSourceEt = {
   'Tijden-overzicht tonen na afloop': 'Näita aegade ülevaadet lõpus',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Aeg slaidi kohta mõõdetakse alati; see määrab vaid, kas ülevaade ilmub pärast seda esitlust.',
-  'Oefenoverzicht tonen na afloop': 'Näita harjutuse kokkuvõtet lõpus',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Näita pärast esitlust ülevaadet slaidi kohta kulunud ajast. Aega mõõdetakse alati; see määrab vaid, kas ekraan ilmub.',
   'Onveilige presentatie geblokkeerd': 'Ebaturvaline esitlus blokeeritud',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Seda esitlust ei avatud. Fail sisaldab sisu, mis võib koodi käivitada, kuid esitlus tohib sisaldada ainult andmeid — mitte midagi käivitatavat.',
@@ -941,7 +924,6 @@ const _dutchSourceEt = {
   'Online': 'Veebis',
   'Lokaal bestand': 'Lokaalne fail',
   'Geen video': 'Videot pole',
-  'Vraag (meerkeuze)': 'Küsimus (valikvastused)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Pealkirja tekstil on taustapildiga liiga vähe kontrasti',
   'Herstel': 'Paranda',
@@ -956,8 +938,6 @@ const _dutchSourceEt = {
   'Huidig punt weghalen': 'Eemalda praegune punkt',
   'Stap voor stap': 'Samm-sammult',
   'Geen animatie': 'Animatsioonita',
-  'Animatiesnelheid': 'Animatsiooni kiirus',
-  'Langzaam': 'Aeglane',
   'Snel': 'Kiire',
   'Gebeurtenissen': 'Sündmused',
   'Gebeurtenis toevoegen': 'Lisa sündmus',
@@ -970,8 +950,6 @@ const _dutchSourceEt = {
   'Vraag': 'Küsimus',
   'Wat wil je vragen?': 'Mida soovid küsida?',
   'Antwoorden': 'Vastused',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Märgi õiged vastused. Kuni kaheksa vastust; esitamisel näidatakse juhuslikult 1 õige ja ülejäänud valed.',
   'Antwoord': 'Vastus',
   'Antwoord toevoegen': 'Lisa vastus',
   'Goed antwoord': 'Õige vastus',
@@ -1004,8 +982,6 @@ const _dutchSourceEt = {
   'Stelling': 'Väide',
   'Formuleer een stelling die juist of onjuist is':
       'Sõnasta väide, mis on õige või vale',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Märgi kõik õiged vastused. Esitamisel näidatakse juhuslikku komplekti vähemalt ühe õige ja ühe valega.',
   'Juist': 'Õige',
   'Onjuist': 'Vale',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1026,7 +1002,6 @@ const _dutchSourceEt = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Cockpiti mõõdikute olekuvärvid. Loo nimega variante; valitud skeem kehtib kõigile cockpiti slaididele.',
   'Standaard': 'Vaikimisi',
-  'Standaardkleuren gebruiken': 'Kasuta vaikevärve',
   'Kleurschema verwijderen': 'Kustuta värviskeem',
   'Schemanaam': 'Skeemi nimi',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1103,7 +1078,6 @@ const _dutchSourceEt = {
   'Logo en footer': 'Logo ja jalus',
   'Pagina': 'Lehekülg',
   'Presentatiestijl': 'Esitlusstiil',
-  'Presentatiestijl: ': 'Esitlusstiil: ',
   'Tekst...': 'Tekst...',
   'Teksteditor': 'Tekstiredaktor',
   'Volgende pagina': 'Järgmine lehekülg',
@@ -1116,8 +1090,6 @@ const _dutchSourceEt = {
   'Doeltijd': 'Sihtaeg',
   'Doeltijd (aftellen)': 'Sihtaeg (loendus)',
   'Geen aftelling': 'Loenduseta',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Vaikimisi sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
   'uit': 'väljas',
   'Doeltijd / aftellen (K)': 'Sihtaeg / loendus (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Sea sihtaeg / loendus (MMSS)',
@@ -1187,14 +1159,8 @@ const _dutchSourceEt = {
   'Cirkel': 'Sektor',
   'Spider': 'Ämblik',
   'CSV importeren': 'Impordi CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Andmed (CSV: esimene rida = seeriate nimed, esimene veerg = sildid)',
   'Gekoppeld aan': 'Seotud',
   'Ontkoppelen': 'Eemalda seos',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Salvestada andmed slaidile või hoida eraldi CSV-failina esitluse kõrval?',
-  'In de slide': 'Slaidile',
-  'Als CSV-bestand': 'CSV-failina',
   'Geen grafiekgegevens': 'Graafiku andmed puuduvad',
   'Label': 'Silt',
   'Rij': 'Rida',
@@ -1224,7 +1190,6 @@ const _dutchSourceEt = {
   'Eigen kleur (hex)': 'Oma värv (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Näiteks #33FF33 CRT-rohelise ekraani jaoks.',
-  'Onderdeel van stijlprofiel ': 'Stiiliprofiili osa ',
   'Broncode lettertype': 'Lähtekoodi font',
   'Kop (optioneel)': 'Pealkiri (valikuline)',
   'Subkop (optioneel)': 'Alapealkiri (valikuline)',
@@ -1262,16 +1227,7 @@ const _dutchSourceEt = {
   'Zet het filter uit om alles weer te zien.':
       'Lülita filter välja, et kõike uuesti näha.',
   'Welkom bij OciDeck': 'Tere tulemast OciDecki',
-  'Privacy en gebruik': 'Privaatsus ja kasutus',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck on kohalik töölauarakendus. Teie esitlused ja andmed salvestatakse ainult teie arvutisse.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Rakendus ei kogu isikuandmeid, statistikat ega kasutusandmeid. Teie privaatsus on meie prioriteet.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Kõik andmed, mille sisestate OciDecki, jäävad teie kohalikku süsteemi ega saadeta välisserveritesse.',
   'Licentie (EUPL 1.2)': 'Litsents (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Klõpsates "Nõustun", aktsepteerite need tingimused ja nõustute OciDecki kasutamisega.',
   'Volledige licentie online': 'Täislitsents veebis',
   'Akkoord gaan': 'Nõustun',
   'Privacy': 'Privaatsus',
@@ -1360,8 +1316,6 @@ const _dutchSourceEt = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Eksport blokeeritud tõsiste kvaliteediprobleemide tõttu.',
   'Alle meldingen': 'Kõik teated',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… ja veel probleeme kvaliteedipaneelis.',
   'Classificatie-handhaving': 'Klassifikatsiooni jõustamine',
   'Vrijgaveplafond': 'Vabastuse lagi',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1380,11 +1334,9 @@ const _dutchSourceEt = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Sea TLP-tase — eksport on klassifikatsioonipoliitika tõttu blokeeritud.',
   'Tabel bewerken': 'Redigeeri tabelit',
-  'Pijltjes · Tab · Esc': 'Nooled · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Redigeeri tabelit (tabelislaididel)',
   'Tabel bewerken (E)': 'Redigeeri tabelit (E)',
   'Tab wisselt cel · Esc sluit': 'Tab vahetab lahtrit · Esc sulgeb',
-  'Pen · markeerstift · ⇧E': 'Pliiats · marker · ⇧E',
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lehitseb slaide',
@@ -1427,10 +1379,6 @@ const _dutchSourceEt = {
       'Võrguviga — kontrolli ühendust ja proovi uuesti.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Midagi läks ootamatult valesti. Üksikasjad leiad logist.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server pole kättesaadav — kontrolli ühendust ja serveri URL-i.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1458,8 +1406,6 @@ const _dutchSourceEt = {
   'Uit recente bestanden verwijderen': 'Eemalda hiljutistest failidest',
   'OciDeck wordt gestart…': 'OciDecki käivitamine…',
   'Herstelbestanden': 'Taastefailid',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Taastefailid sisaldavad sinu esitluste kogu sisu lihttekstina. Need koristatakse automaatselt 7 päeva pärast; siin saad need kohe kustutada.',
   'Herstelbestanden nu wissen': 'Kustuta taastefailid kohe',
   'Er waren geen herstelbestanden.': 'Taastefaile polnud.',
   'herstelbestand(en) gewist.': 'taastefail(i) kustutatud.',
@@ -1887,7 +1833,6 @@ const _dutchSourceAddEt = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Loome koopia uuel kaardil; sinu algne fail jääb muutumatuks.',
   'Welk formaat?': 'Milline vorming?',
-  'dia\'s, gesplitst op kop.': 'slaidi, jagatud pealkirja järgi.',
   'document': 'dokument',
   'volledig': 'täielik',
   'Invoegen': 'Lisa',
@@ -2047,12 +1992,8 @@ const _dutchSourceAddEt = <String, String>{
   'Alle integraties': 'Kõik integratsioonid',
   'Alles inschakelen': 'Luba kõik',
   'Alles uitschakelen': 'Keela kõik',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Aruannete kaust on juba määratud, seega jääb ühendus kättesaadavaks ja olemasolevat OpenKAT-esitlust saab endiselt uuendada.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Ühendused teiste süsteemidega. Iga ühendus on vaikimisi välja lülitatud ja jääb passiivseks, kuni te selle sisse lülitate.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Loe OpenKAT-i aruandekaustad sisse ühe juhtimisülevaatena.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Esitluste toomine programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muudetava deck\'ina. Ühendused teiste süsteemidega, näiteks OpenKAT, on jaotises Integratsioonid.',
   'Media (WebRTC)': 'Meedia (WebRTC)',
@@ -2217,7 +2158,6 @@ const _dutchSourceAddEt = <String, String>{
   'Van toepassing': 'Kohaldatav',
   'Voortgang': 'Edenemine',
   'Voortgang managementsysteem': 'Juhtimissüsteemi edenemine',
-  'Voortgangsoverzicht bijgewerkt': 'Edenemise ülevaade uuendatud',
   'Welk deel?': 'Milline osa?',
   'beheersmaatregelen geladen': 'meedet laaditud',
   'geïmplementeerd': 'rakendatud',
@@ -2295,10 +2235,6 @@ const _dutchSourceAddEt = <String, String>{
       'See ei tundu olevat kehtiv taastevõti.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'See taastevõti pärineb OciDecki uuemast versioonist.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Piltide veebimälu on täis (kuni 256 MB). Andmekao vältimiseks salvesta töö esmalt .ocideck-failina. Seejärel kasuta vähem või väiksemaid pilte, sulge teised esitlused või laadi uuesti ilma teisi esitlusi avamata.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Piltide veebimälu on täis (kuni 256 MB). Salvesta töö .ocideck-failina ja laadi leht enne uute piltide lisamist uuesti.',
   'Afbeeldingsrechten': 'Pildi õigused',
   'Afbeeldingsrechten controleren…': 'Kontrolli pildi õigusi…',
   'Afdoening': 'Arveldamine',
@@ -2349,8 +2285,6 @@ const _dutchSourceAddEt = <String, String>{
   'Verifiëren': 'Kinnita',
   'Deelnemers verifiëren': 'Kinnita osalejad',
   '(dit apparaat)': '(see seade)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Võrdle iga seadme sõrmejälge usaldusväärse kanali kaudu — lugege see üksteisele ette või saada see teed pidi, mida usaldad. Kui need kattuvad, töötad päris seadmetega ja keegi pole vahele pugenud. Kui need erinevad, katkesta koostöö.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'See ei ole kehtiv kutselink.',
   'De Matrix-homeserver is niet bereikbaar.':
@@ -2410,7 +2344,6 @@ const _dutchSourceAddEt = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Tee esitluse kallal reaalajas koostööd Matrixi homeserveri kaudu krüpteeritud edastajana. Sisu krüpteeritakse otsast otsani OciDecki enda võtmetega; server näeb ainult krüpteeritud andmeid. Sisesta homeserver ja mujal loodud juurdepääsuluba — OciDeck ei küsi kunagi sinu parooli. Luba hoitakse krüpteerituna võtmehoidjas, mitte koos muude seadetega.',
   'wordt door de test ingevuld': 'täidetakse testiga',
-  'Versleuteld doorgeefluik (ontwerp)': 'Krüpteeritud relee (kavand)',
   'Meer documentatie op de repository': 'Rohkem dokumentatsiooni hoidlas',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Täielik dokumentatsioon — sealhulgas arhitektuur, ehitus, lähtekood ja disain — asub hoidlas.',
@@ -2648,50 +2581,14 @@ const _dutchSourceAddEt = <String, String>{
       'Millised mõõtmisandmed puuduvad või on aegunud?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Millistel andmetel see aruanne põhineb?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Lai, kuid faktiline juhtimisülevaade koos jälgitavate mõõtmishetkedega.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Auastmed ilma koondhindeta ja puuduvad mõõtmised kuvatakse eraldi.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Kuvab raskusastme loendeid, panustajaid ja edasikantud mõõtmisi hetkede kaupa.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Korraldab tüüpide otsimist mõjutatud organisatsioonide, süsteemide ja vaatluste järgi.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Näitab kriitilisi/kõrgeid numbreid ilma kaalumiseta.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Näitab lugejat, nimetajat ja ainult usaldusväärseid protsente.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Rühmitab OpenKATi sõnasõnalised soovitused ilma oma prioriteedita.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Sihitud hetkekujutis ühest organisatsioonist ja selle mõõtmiskuupäev.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Võrdleb kahte valitud mõõtmismomenti ühes organisatsioonis.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Eristab uut, uut ja enam mitte vaadeldavat.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Kasutab ainult usaldusväärseid esmavaatluse kuupäevi.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Järjestab süsteeme eraldi raskusastme loenduritega.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Näitab individuaalseid deltaväärtusi ilma kaalutud skoorita.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Võrdleb lugejat ja nimetajat tõestatavalt võrreldava ulatusega.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Varude allikas tõestatud süsteemid, hostinimed ja IP-aadressid.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Eraldab jälgitava, jälgimata ja tundmatu.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Näitab ainult selgelt tõestatud jälgimismutatsioone.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Näitab organisatsioone ja süsteeme ühe usaldusväärse CVE-lingi ümber.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Järjestab CVE-d selgesõnalise dubleerimisega.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Eristab uusi, uusi ja enam jälgimata CVE-sid.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Näitab puuduvaid, aegunud ja tegelikult kasutatud mõõte.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Arvestab võtmekuupäevi, lähtefaile, adaptereid ja lähteräsi.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Pole veel saadaval: allikas ei tõenda kõigi varade jälgimise olekut.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2734,12 +2631,6 @@ const _dutchSourceAddEt = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Milline aruanne vastab teie küsimusele?',
   'Meer rapportvragen': 'Rohkem aruandeküsimusi',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Millised süsteemid on CVE suhtes haavatavad?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisatsioonid ja haavatavad süsteemid ühe haavatavuse ümber.',
-  'Organisaties met kwetsbare systemen':
-      'Haavatavate süsteemidega organisatsioonid',
   'Kwetsbare systemen': 'Haavatavad süsteemid',
   'Kritiek/hoog': 'Kriitiline/kõrge',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2761,8 +2652,6 @@ const _dutchSourceAddEt = <String, String>{
   'Bruikbaar': 'Kasutatav',
   'CVE zoeken': 'CVE otsing',
   'Critical/high': 'Kriitiline/kõrge',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Andmete kvaliteet, puuduvad mõõtmised ja vananemine.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Valitud aruanded ei sisalda selle osa kohta piisavalt usaldusväärseid andmeid.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2788,10 +2677,6 @@ const _dutchSourceAddEt = <String, String>{
   'Geen bruikbare meetdatum': 'Kasutatav mõõtmiskuupäev puudub',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Loodud slaide värskendatakse. Teie enda slaidid ja koopiad jäävad alles.',
-  'Getroffen organisaties en systemen':
-      'Mõjutatud organisatsioonid ja süsteemid',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Mõjutatud organisatsioonid ja süsteemid ühe haavatavuse ümber.',
   'Getroffen systemen': 'Mõjutatud süsteemid',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Aruannet ei saanud luua. Teie valikud on säilinud; kontrollige hoiatusi ja proovige uuesti.',
@@ -2801,20 +2686,15 @@ const _dutchSourceAddEt = <String, String>{
   'Keuzes wijzigen…': 'Muuda valikuid…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Valige kaust, kuhu OpenKAT on aruanded paigutanud. OciDeck loeb ainult seda kausta; midagi ei muudeta ega saadeta.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Valige küsimus, millele aruanne peaks vastama. OciDeck määrab sobiva struktuuri.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Valige aruannetest leitud CVE.',
   'Laatste bruikbare meting': 'Viimane kasutatav mõõt',
   'Live voorvertoning van de rapportopbouw':
       'Aruande struktuuri reaalajas eelvaade',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Haldus- ja kontrolliteave mitme organisatsiooni kohta.',
   'Meer instellingen': 'Rohkem seadeid',
   'Nederlands': 'hollandi keel',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Mitte igal valitud organisatsioonil pole selle perioodi mõõtmist.',
-  'Nieuwe en verdwenen bevindingen': 'Uued ja puuduvad leiud',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Pole veel saadaval: need aruanded ei sisalda usaldusväärseid CVE numbreid.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2849,8 +2729,6 @@ const _dutchSourceAddEt = <String, String>{
       'Ühe või mitme organisatsiooni jaoks puudub kasulik voolumõõtmine.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Võrdluseks on vaja kahte mõõtemomenti. Nüüd on leitud üks mõõt.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Edenemine võrreldes eelmise mõõtmishetkega.',
   'Waar staan de OpenKAT-rapportages?': 'Kus on OpenKAT-i aruanded?',
   'Wat veranderde er bij één organisatie?': 'Mis ühes organisatsioonis muutus?',
   'Wat wilt u laten zien?': 'Mida sa näidata tahad?',
@@ -2863,7 +2741,6 @@ const _dutchSourceAddEt = <String, String>{
   'bruikbaar': 'kasutatav',
   'metingen': 'mõõtmised',
   'organisaties': 'organisatsioonid',
-  'organisaties geselecteerd': 'valitud organisatsioonid',
   'rapportages gebruikt': 'kasutatud aruanded',
   'systemen': 'süsteemid',
   'Nog geen specificatielimiet': 'Spetsifikatsioonipiiri veel pole',
@@ -3006,7 +2883,6 @@ const _dutchSourceAddEt = <String, String>{
       'on puu-slaidil, kuid mujal ei kasutata — seo see maatriksiga, vooga või muu slaidiga.',
   'Nieuw verbeteringsproject': 'Uus parendusprojekt',
   'Kader': 'Raamistik',
-  'Projecttitel': 'Projekti pealkiri',
   'Primaire Y-metriek (Y-01)': 'Peamine Y-mõõdik (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Näiteks: order intake läbimise aeg tööpäevades',
@@ -3062,10 +2938,6 @@ const _dutchSourceAddEt = <String, String>{
   'Bron niet toegestaan': 'Allikas pole lubatud',
   'Deze URL is door de beveiliging geweigerd.':
       'Turve lükkas selle URL-i tagasi.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Materjali toomine teistest süsteemidest. Kaks allikat: esitlused programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muutuvad muudetavaks deck\'iks ning OpenKAT-i aruanded (kaust JSON-iga) muutuvad üheks juhtimisülevaateks. Kus OpenKAT-i kaust asub, määratakse jaotises Integratsioonid.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Esitluste toomine programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muudetava deck\'ina. OpenKAT-i aruandekaustade lugemine on saadaval ainult lauaarvuti versioonis.',
   'Alinea': 'Lõik',
   'Audio "{bestand}"': 'Heli "{bestand}"',
   'Deck opbouwen…': 'Esitluse koostamine…',
@@ -3186,8 +3058,6 @@ const _dutchSourceAddEt = <String, String>{
       'Kontrollnimekirja register: iga testi kohta püsiv id, kanooniline pealkiri ja kategooria. Juhendi enda sisu ei ole kaasas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testiregister: iga testi kohta püsiv id, kanooniline pealkiri, MASVS-kategooria ja MASWE-nõrkus. Tagasi võetud v1-testid ja kohatäited ei ole kaasas; juhendi sisu samuti mitte.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Nõrkuste loend (117): id, pealkiri, MASVS-kategooria, platvorm ja CWE-seos. Kolm neljandikku ei ole allikas veel lahti kirjutatud; need on kaasas, märgistatuna. Tagasi võetud nõrkused ei ole.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Täisloend (id, nimi, kirjeldus) ning oma valitud tuumik koos meie parandusmärkustega.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3234,33 +3104,16 @@ const _dutchSourceAddEt = <String, String>{
       'Iga fail teisendatakse eraldi ja salvestatakse omaette esitlusena sihtkausta. Kui üks ebaõnnestub, läheb järjekord lihtsalt edasi.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Mitme esitluse korraga importimine kirjutab need failidena kausta; brauseriversioonis see ei õnnestu.',
-  'Nu importeren': 'Impordi kohe',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ülevaade on valmis uuel vahekaardil.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Loeb OpenKAT-i aruannete kausta (JSON) ja koostab sellest ühe juhtimisülevaate: süsteemid, leiud raskusastme järgi, kõige kauem lahtised punktid ja suundumuse järjestikuste mõõtmiste lõikes. Sama toiming olemasoleval OpenKAT-esitlusel uuendab seda ja jätab teie enda slaidid alles.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Import ainult loeb; selles kaustas ei muudeta ega saadeta midagi. Failid, mis pole OpenKAT-i aruanded, jäetakse vahele ja nimetatakse impordiaruandes.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Osutage kaustale, kus asuvad teie OpenKAT-i aruanded (JSON). Import loeb selle kausta ja koostab sellest ühe juhtimisülevaate; kui kaust on siin määratud, ei pea seda iga kord uuesti valima.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'OpenKAT-i import loeb kausta kettalt ja on saadaval ainult lauaarvuti versioonis.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Aruannete kausta pole veel määratud, seega küsib import seda iga kord.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Aruannete kaust on juba määratud, seega jääb sisenemispunkt kättesaadavaks ja olemasolevat OpenKAT-esitlust saab endiselt uuendada.',
   'Integraties': 'Integratsioonid',
-  'Naar Integraties': 'Integratsioonide juurde',
   'Map kiezen…': 'Vali kaust…',
   'Map wissen': 'Tühjenda kaust',
-  'OpenKAT-rapportages importeren…': 'Impordi OpenKAT-i aruanded…',
   'Map met OpenKAT-rapportages kiezen': 'Vali OpenKAT-i aruannete kaust',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-i aruanded imporditud.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT-i deck uuendatud; käsitsi lisatud slaidid on alles.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Sellest kaustast ei leitud ühtegi OpenKAT-i aruannet.',
-  'OpenKAT-import mislukt.': 'OpenKAT-i import ebaõnnestus.',
   'rapportages': 'aruannet',
   'overgeslagen': 'vahele jäetud',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3319,8 +3172,6 @@ const _dutchSourceAddEt = <String, String>{
   'Label op de primaire knop': 'Põhinupu silt',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Leiud, mille oled üle vaadanud ja alles jätnud. Neist enam ei teatata, kuid skannimine leiab need endiselt ja neid ei loeta lahendatuks. Puuduta, et üks taastada.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Privaatsusleiu kõrvalejätmine (kavand)',
   'Deze is beoordeeld en mag blijven': 'Üle vaadatud, see võib jääda',
   'Mogelijk gemaakt door': 'Võimalikuks teinud',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3332,10 +3183,8 @@ const _dutchSourceAddEt = <String, String>{
   'Technische melding:': 'Tehniline teade:',
   'presentaties': 'esitlused',
   '/Presentaties': '/Esitlused',
-  'Rapportagedistributie (ontwerp)': 'Aruannete levitamine (kavand)',
   'De export is mislukt.': 'Eksport ebaõnnestus.',
   'Presenteer vanaf hier': 'Esita siit',
-  'Teams-gastclient (ontwerp)': 'Teamsi külalisklient (kavand)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kui laialt tohib seda materjali jagada?',
   'Wat betekenen deze niveaus?': 'Mida need tasemed tähendavad?',
@@ -3453,8 +3302,6 @@ const _dutchSourceAddEt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitlused, mis jäävad tavalisteks Markdown-failideks: loetavad, otsitavad ja avatavad mis tahes redaktoriga.',
   'sjablonen om mee te beginnen, of leeg': 'malli alustamiseks või tühi',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Väljajätmine on sees: leitud andmed muudetakse mustaks ning selle slaidi kõik pildid, video ja heli ei lähe ekraanile ega ekspordisse. Sinu markdown-fail säilitab kõik.',
   'Mijn tekst': 'Minu tekst',
   'Wat zij zien': 'Mida nemad näevad',
   'Presentatiegegevens': 'Esitluse andmed',
@@ -3677,7 +3524,6 @@ const _dutchSourceAddEt = <String, String>{
   'Opslaan naar…': 'Salvesta asukohta…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Seadista esmalt ühendus jaotises Seaded → Salvestusruum.',
-  'Beginnen met:': 'Alusta sellega:',
   'Verlopen datums markeren': 'Märgi möödunud kuupäevad',
   'Datums gemarkeerd': 'Kuupäevad märgitud',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3703,28 +3549,15 @@ const _dutchSourceAddEt = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Ründepind objektiliigi kaupa: kui palju neid on, kui palju vajab tööd, mis on uus ja mis ei kuulu kellelegi. Viimane on tavaliselt see vestlus.',
   'Acties en besluiten': 'Tegevused ja otsused',
-  'Actie toevoegen': 'Lisa tegevus',
-  'Actie verwijderen': 'Eemalda tegevus',
   'Actie': 'Tegevus',
   'Deadline': 'Tähtaeg',
-  'Op de lijst sinds': 'Nimekirjas alates',
   'Stand': 'Olek',
-  'Wat vraagt u': 'Mida te palute',
   'geen datum': 'kuupäevata',
-  'Ter informatie': 'Teadmiseks',
   'Besluit gevraagd': 'Vajalik otsus',
   'Escalatie': 'Eskaleerimine',
   'Open': 'Avatud',
   'Loopt': 'Käimas',
   'Afgerond': 'Valmis',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Slaidil saab sildi ainult otsus või eskaleerimine; "hilinenud" tuleneb tähtajast ega ole teie määrata.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Kuupäevad kujul aaaa-kk-pp. Muu kirjapilt lükatakse tagasi, mitte ei arvata: 05-08-2026 on kaks eri päeva.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Tegevuste slaid kannab kõige rohkem kaheksat rida; edasi saal sirvib otsustamise asemel.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Mis peab juhtuma, kes seda teeb ja mis ajaks. Märkige iga rea kohta, kas see on teadmiseks või palute otsust — seda saal otsib.',
   'Scorecard': 'Näitajate kaart',
   'Cijfer toevoegen': 'Lisa näitaja',
   'Cijfer verwijderen': 'Eemalda näitaja',
@@ -3811,8 +3644,6 @@ const _dutchSourceAddEt = <String, String>{
       'Luba on kehtiv, kuid ei tohi seda teha — anna sellele hoidlale rohkem õigusi.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Sisse logitud, kuid ligipääsu pole — parool ei ole probleem. Küsi õigusi sellele kaustale.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Leksikonide litsentsid: mida on veel vaja küsida',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'See näeb välja nagu täielik DAV-URL. Nextcloudi puhul tuletab OciDeck selle tee ise — siia kuulub ainult server.',
   'Overnemen': 'Rakenda',
@@ -3855,8 +3686,6 @@ const _dutchSourceAddEt = <String, String>{
   'kenteken': 'registreerimisnumber',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Selle esitluse keele jaoks pole eriliigiliste isikuandmete märksõnaloendit. Kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad; sõnu nagu "diagnoos" või "kahtlustatav" ei tuvastata.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Eriliigiliste isikuandmete märksõnaloend on selle esitluse keele jaoks väga õhuke. Ära looda, et leitakse sõnu nagu "diagnoos" või "kahtlustatav".',
   'Landpakketten voor identificatienummers':
       'Riikide paketid isikukoodide jaoks',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3887,8 +3716,6 @@ const _dutchSourceAddEt = <String, String>{
       'Serveri nime ei ole olemas või seda ei õnnestu leida. Kontrolli serveri URL-i trükivea suhtes.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Sellel serveril on privaat- või LAN-aadress. Märgi see usaldusväärseks sisemiseks jaotises Seaded → Salvestusruum.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Selle serveri sertifikaati ei usaldata. Ise allkirjastatud sertifikaat ei tööta; kasuta tunnustatud väljaandja oma.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Server suunab teisele aadressile. Sisesta see aadress otse — ümbersuunamisi me ei järgi, sest need võivad turvakontrollist mööda minna.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3924,8 +3751,6 @@ const _dutchSourceAddEt = <String, String>{
   'Opslaan naar S3': 'Salvesta S3-sse',
   'Opgeslagen in S3:': 'Salvestatud S3-sse:',
   'Hier staat niets': 'Siin pole midagi',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Sisu ei õnnestunud laadida. Kontrolli ühendust ja seadeid.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Lõpp-punkt pole kättesaadav — kontrolli ühendust ja lõpp-punkti.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3934,8 +3759,6 @@ const _dutchSourceAddEt = <String, String>{
       'Lõpp-punkt tagastas vea. Proovi hiljem uuesti.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'See lõpp-punkt ei oska tingimuslikult kirjutada, seega pole sinu töö teise töö eest kaitstud. Salvesta uue nimega, kui keegi teine samuti seda esitlust teeb.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'S3 ämbrit pole seadistatud. Seadista see kaudu Seaded → Salvestusruum.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Seadista esmalt S3 ämber kaudu Seaded → Salvestusruum.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3981,10 +3804,6 @@ const _dutchSourceAddEt = <String, String>{
       'Sellel pildil on vähemalt {count} äratuntavat nägu.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Seda pilti ei saanud nägude suhtes kontrollida. Vorming ei ole toetatud (näiteks HEIC). See ei tähenda, et pildil poleks kedagi — see tähendab, et ei vaadatud.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Sellel pildil on äratuntav nägu.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Sellel pildil on {count} äratuntavat nägu.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Pilt, millel keegi on äratuntav, on isikuandmed ka ilma nimeta.',
   'herkenbaar gezicht op een afbeelding': 'äratuntav nägu pildil',
@@ -4000,8 +3819,6 @@ const _dutchSourceAddEt = <String, String>{
   'Organisatie': 'Organisatsioon',
   'Welke verbinding?': 'Milline ühendus?',
   'Bestandsverbindingen': 'Failiühendused',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Kohad, kus hoiad ja otsid oma esitlusi — kaustad selles arvutis, WebDAV-serverid ja git-hoidlad läbisegi. Lohista need soovitud järjekorda: iga liigi ülemine kehtib vaikimisi.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git-hoidla; iga salvestatud versioon säilib.',
   'Een map op de schijf van deze computer.': 'Kaust selle arvuti kettal.',
@@ -4025,15 +3842,7 @@ const _dutchSourceAddEt = <String, String>{
   'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
   'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
   'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Seadista esmalt WebDAV-server kaudu Seaded → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Vali pilt WebDAV\'ist',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Ühtegi WebDAV-serverit pole seadistatud. Seadista see kaudu Seaded → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → WebDAV.',
   'Servertype': 'Serveri tüüp',
   'Nextcloud of ownCloud': 'Nextcloud või ownCloud',
   'Andere WebDAV-server': 'Muu WebDAV-server',
@@ -4055,23 +3864,11 @@ const _dutchSourceAddEt = <String, String>{
   'Haal volle pagina uit de reeks': 'Eemalda täis lehekülg jadast',
   'Opslag': 'Salvestusruum',
   'Opslagwijzen': 'Salvestusviisid',
-  'Deze computer': 'See arvuti',
   'Ingesteld': 'Seadistatud',
   'Niet ingesteld': 'Seadistamata',
-  'Nog geen bibliotheek ingesteld': 'Ühtegi teeki pole veel seadistatud',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Teed, mille kaudu saate esitlusi avada ja salvestada. Klõpsake viisi, et see seadistada.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Esitlused ülalolevates kaustades, selle arvuti kettal.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Avage ja salvestage esitlusi oma Nextcloudi kaustas.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Avage esitlusi git-hoidlast; iga salvestatud versioon säilib.',
-  'Nog te verifiëren': 'Veel kinnitamata',
   'MASWE-zwakheid kiezen': 'Vali MASWE nõrkus',
   'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',
   'Geen zwakheid gevonden': 'Nõrkust ei leitud',
-  'uitleg nog niet geschreven': 'juhis pole veel kirjutatud',
   'Getalnotatie herkennen': 'Tuvasta arvude vorming',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'See fail sisaldab arve, mille koma saab lugeda kahel viisil:',
@@ -4188,12 +3985,10 @@ const _dutchSourceAddEt = <String, String>{
   'Veelgestelde vragen': 'Korduma kippuvad küsimused',
   'Probleemoplossing': 'Probleemide lahendamine',
   'Begrippenlijst': 'Sõnastik',
-  'API-documentatie': 'API dokumentatsioon',
   'Prestaties': 'Jõudlus',
   'Beveiligingsontwerp': 'Turbe kavand',
   'Hosting en uitrol': 'Majutus ja juurutamine',
   'Bijdragen': 'Kaasautamine',
-  'Ontwikkelomgeving': 'Arenduskeskkond',
   'Migratiegids': 'Migreerimisjuhend',
   'Versies…': 'Versioonid…',
   'Versies:': 'Versioonid:',
@@ -4235,8 +4030,6 @@ const _dutchSourceAddEt = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haru on liikunud; laadi deck uuesti ja salvesta uuesti.',
   'Bijgewerkt met OciDeck': 'Uuendatud OciDeckiga',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Seadistage kõigepealt Giti hoidla jaotises Seaded → Giti hoidla.',
   'Git-repository': 'Giti hoidla',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Avage esitlusi Giti hoidlast. Iga salvestatud versioon säilib. Luba hoitakse krüpteerituna võtmehoidjas, mitte koos muude seadetega.',
@@ -4251,7 +4044,6 @@ const _dutchSourceAddEt = <String, String>{
       'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Võrdlusandmed on rakenduses endas, seega töötab moodul kohe ja täielikult võrguühenduseta.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; need jäävad peidetuks, kuni te need sisse lülitate.',
-  'Procesverbetering (ontwerp)': 'Protsesside parendamine (kavand)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'See projekt on Pilot Informatieautonomie kõrvalsaadus.',
   'Stijlprofiel exporteren': 'Ekspordi stiiliprofiil',
@@ -4391,7 +4183,6 @@ const _dutchSourceAddEt = <String, String>{
   'genetisch gegeven': 'geneetilised andmed',
   'parketnummer': 'kriminaalasja number',
   'nationaal identificatienummer': 'riiklik isikukood',
-  'OciWacht (ontwerp)': 'OciWacht (kavand)',
   'Mogelijk geheim': 'Võimalik saladus',
   'sleutel of token': 'võti või luba',
   'private sleutel': 'privaatvõti',
@@ -4424,7 +4215,6 @@ const _dutchSourceAddEt = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Pane täielik CVE-loend sellesse seadmesse, et otsingud toimuksid võrguühenduseta ja su otsingusõna ei läheks kuhugi. Andmebaas pärineb allikast CVE List V5 (ametlik CVE-programm, GitHubi kaudu).',
   'Wat er lokaal beschikbaar is': 'Mis on kohapeal saadaval',
-  'Gegevenspakket': 'Andmepakett',
   'Nu bijwerken': 'Uuenda kohe',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Andmed on kohapeal saadaval — otsingud toimuvad selles seadmes; midagi ei lahku.',
@@ -4443,7 +4233,6 @@ const _dutchSourceAddEt = <String, String>{
       'Nõustu: andmed kuuluvad siia ja teade kaob. Nõustu + hoiata: saaja näeb märki, et slaidil on isikuandmed. Jäta välja: leitud andmed muudetakse ekraanil ja ekspordis loetamatuks — su Markdown-fail säilitab algse teksti.',
   'Alleen melden': 'Ainult teavita',
   'PERSOONSGEGEVENS': 'ISIKUANDMED',
-  'Persoonsgegevens op deze slide': 'Isikuandmed sellel slaidil',
   'Volg de presentatie': 'Järgi esitlust',
   'Weglaten uit tonen en exporteren': 'Jäta kuvamisest ja ekspordist välja',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4564,8 +4353,6 @@ const _dutchSourceAddEt = <String, String>{
   'Bewerk deze slide': 'Muuda seda slaidi',
   'Bewijs verwijderen': 'Eemalda tõend',
   '(nog leeg)': '(veel tühi)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Tõendite lisamiseks sisesta esmalt leiu ID.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Lisa tõendiks ekraanipilte või videoid. Iga tõend saab kohe leiu järel oma slaidi ja kaasatakse eksporti.',
   'Uitvoering testen conform standaard': 'Testimine vastavalt standardile',

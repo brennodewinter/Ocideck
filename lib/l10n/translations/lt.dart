@@ -796,8 +796,6 @@ const _dutchSourceLt = {
   'Selectie opheffen': 'Panaikinti pasirinkimą',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Sutinku su EUPL 1.2 licencija ir perskaičiau, kokius duomenis saugo OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Jūsų pasirinkimas taps numatytąja programos kalba.',
   'Lees de volledige licentie': 'Skaityti visą licenciją',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck yra laisva programinė įranga pagal EUPL 1.2 licenciją. Prieš pradedant prašome priimti licenciją. Toliau taip pat perskaitysite, kokius duomenis OciDeck saugo šiame įrenginyje ir kada kas nors išeina iš jūsų įrenginio.',
@@ -823,9 +821,6 @@ const _dutchSourceLt = {
   'Het antwoord van de server was te groot':
       'Serverio atsakymas buvo per didelis',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud šaltinis (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Atverkite ir išsaugokite pristatymus jūsų Nextcloud aplanke. Slaptažodis saugomas šifruotas raktinėje, o ne kartu su kitais nustatymais.',
   'Server-URL': 'Serverio URL',
   'Gebruikersnaam': 'Naudotojo vardas',
   'App-wachtwoord': 'Programos slaptažodis',
@@ -839,21 +834,12 @@ const _dutchSourceLt = {
   'Verbinding gelukt': 'Ryšys pavyko',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Pakeitimai išsaugomi paspaudus Išsaugoti.',
-  'Afbeelding kiezen op Nextcloud': 'Pasirinkti paveikslėlį Nextcloud',
-  'Openen vanaf Nextcloud': 'Atverti iš Nextcloud',
   'Vernieuwen': 'Atnaujinti',
   'Deze map is leeg': 'Šis aplankas tuščias',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nenustatytas Nextcloud serveris. Nustatykite jį per Nustatymai → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Nepavyko įkelti aplanko. Patikrinkite ryšį ir nustatymus.',
   'Kon dit bestand niet openen.': 'Nepavyko atverti šio failo.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Tai nėra Marp/OciDeck pristatymas.',
   'Downloaden mislukt:': 'Atsisiųsti nepavyko:',
-  'Opgeslagen op Nextcloud:': 'Išsaugota į Nextcloud:',
   'Opslaan mislukt:': 'Išsaugoti nepavyko:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Pirmiausia nustatykite Nextcloud serverį per Nustatymai → Nextcloud.',
   'Opslaan naar Nextcloud': 'Išsaugoti į Nextcloud',
   'Doelpad (zonder extensie)': 'Paskirties kelias (be plėtinio)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -864,9 +850,6 @@ const _dutchSourceLt = {
   'Tijden-overzicht tonen na afloop': 'Rodyti laikų apžvalgą pabaigoje',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Laikas kiekvienai skaidrei visada matuojamas; tai tik nustato, ar apžvalga pasirodys po šio pristatymo.',
-  'Oefenoverzicht tonen na afloop': 'Rodyti repeticijos suvestinę pabaigoje',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Po pristatymo rodyti apžvalgą su kiekvienai skaidrei skirtu laiku. Laikas visada matuojamas; tai tik nustato, ar ekranas pasirodys.',
   'Onveilige presentatie geblokkeerd': 'Nesaugus pristatymas užblokuotas',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Šis pristatymas nebuvo atvertas. Faile yra turinio, galinčio vykdyti kodą, o pristatyme turi būti tik duomenys — nieko vykdomo.',
@@ -948,7 +931,6 @@ const _dutchSourceLt = {
   'Online': 'Internete',
   'Lokaal bestand': 'Vietinis failas',
   'Geen video': 'Nėra vaizdo įrašo',
-  'Vraag (meerkeuze)': 'Klausimas (pasirenkamas)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Antraštės tekstas per mažai kontrastuoja su fono paveikslėliu',
   'Herstel': 'Taisyti',
@@ -963,8 +945,6 @@ const _dutchSourceLt = {
   'Huidig punt weghalen': 'Pašalinti dabartinį tašką',
   'Stap voor stap': 'Žingsnis po žingsnio',
   'Geen animatie': 'Be animacijos',
-  'Animatiesnelheid': 'Animacijos greitis',
-  'Langzaam': 'Lėtas',
   'Snel': 'Greitas',
   'Gebeurtenissen': 'Įvykiai',
   'Gebeurtenis toevoegen': 'Pridėti įvykį',
@@ -977,8 +957,6 @@ const _dutchSourceLt = {
   'Vraag': 'Klausimas',
   'Wat wil je vragen?': 'Ką norite paklausti?',
   'Antwoorden': 'Atsakymai',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Pažymėkite teisingus atsakymus. Daugiausia aštuoni atsakymai; pristatant atsitiktinai rodomas 1 teisingas ir likę neteisingi.',
   'Antwoord': 'Atsakymas',
   'Antwoord toevoegen': 'Pridėti atsakymą',
   'Goed antwoord': 'Teisingas atsakymas',
@@ -1011,8 +989,6 @@ const _dutchSourceLt = {
   'Stelling': 'Teiginys',
   'Formuleer een stelling die juist of onjuist is':
       'Suformuluokite teiginį, kuris yra tiesa arba netiesa',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Pažymėkite visus teisingus atsakymus. Pristatant rodomas atsitiktinis rinkinys su bent vienu teisingu ir vienu neteisingu.',
   'Juist': 'Tiesa',
   'Onjuist': 'Netiesa',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1033,7 +1009,6 @@ const _dutchSourceLt = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Kabinos matuoklių būsenos spalvos. Kurkite pavadintas variantas; pasirinkta schema taikoma visoms kabinos skaidrėms.',
   'Standaard': 'Numatytoji',
-  'Standaardkleuren gebruiken': 'Naudoti numatytąsias spalvas',
   'Kleurschema verwijderen': 'Ištrinti spalvų schemą',
   'Schemanaam': 'Schemos pavadinimas',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1111,7 +1086,6 @@ const _dutchSourceLt = {
   'Logo en footer': 'Logotipas ir poraštė',
   'Pagina': 'Puslapis',
   'Presentatiestijl': 'Prezentacijos stilius',
-  'Presentatiestijl: ': 'Prezentacijos stilius: ',
   'Tekst...': 'Tekstas...',
   'Teksteditor': 'Teksto redaktorius',
   'Volgende pagina': 'Kitas puslapis',
@@ -1124,8 +1098,6 @@ const _dutchSourceLt = {
   'Doeltijd': 'Tikslinis laikas',
   'Doeltijd (aftellen)': 'Tikslinis laikas (atgalinis skaičiavimas)',
   'Geen aftelling': 'Be atgalinio skaičiavimo',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Numatytasis tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
   'uit': 'išjungta',
   'Doeltijd / aftellen (K)': 'Tikslas / atgalinis skaičiavimas (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1197,14 +1169,8 @@ const _dutchSourceLt = {
   'Cirkel': 'Skritulinė',
   'Spider': 'Voratinklinė',
   'CSV importeren': 'Importuoti CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Duomenys (CSV: pirma eilutė = serijų pavadinimai, pirmas stulpelis = etiketės)',
   'Gekoppeld aan': 'Susieta su',
   'Ontkoppelen': 'Atsieti',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Saugoti duomenis skaidrėje ar laikyti juos kaip atskirą CSV failą šalia prezentacijos?',
-  'In de slide': 'Skaidrėje',
-  'Als CSV-bestand': 'Kaip CSV failą',
   'Geen grafiekgegevens': 'Nėra diagramos duomenų',
   'Label': 'Etiketė',
   'Rij': 'Eilutė',
@@ -1234,7 +1200,6 @@ const _dutchSourceLt = {
   'Eigen kleur (hex)': 'Sava spalva (šešioliktainė)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Pavyzdžiui, #33FF33 CRT žaliam ekranui.',
-  'Onderdeel van stijlprofiel ': 'Stiliaus profilio dalis ',
   'Broncode lettertype': 'Kodo šriftas',
   'Kop (optioneel)': 'Antraštė (nebūtina)',
   'Subkop (optioneel)': 'Paantraštė (nebūtina)',
@@ -1272,16 +1237,7 @@ const _dutchSourceLt = {
   'Zet het filter uit om alles weer te zien.':
       'Išjunkite filtrą, kad vėl matytumėte viską.',
   'Welkom bij OciDeck': 'Sveiki atvykę į OciDeck',
-  'Privacy en gebruik': 'Privatumas ir naudojimas',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck yra vietinė darbalaukio programa. Jūsų prezentacijos ir duomenys saugomi tik jūsų kompiuteryje.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Programa nerenka jokių asmens duomenų, jokios statistikos ir jokių naudojimo duomenų. Jūsų privatumas yra mūsų prioritetas.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Visi jūsų į OciDeck įvesti duomenys lieka jūsų vietinėje sistemoje ir nesiunčiami į išorinius serverius.',
   'Licentie (EUPL 1.2)': 'Licencija (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Spustelėdami „Sutinku“, jūs priimate šias sąlygas ir sutinkate naudoti OciDeck.',
   'Volledige licentie online': 'Visa licencija internete',
   'Akkoord gaan': 'Sutinku',
   'Privacy': 'Privatumas',
@@ -1371,8 +1327,6 @@ const _dutchSourceLt = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Eksportas užblokuotas dėl rimtų kokybės problemų.',
   'Alle meldingen': 'Visos problemos',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… ir daugiau problemų kokybės skydelyje.',
   'Classificatie-handhaving': 'Klasifikacijos vykdymas',
   'Vrijgaveplafond': 'Išleidimo riba',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1391,11 +1345,9 @@ const _dutchSourceLt = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Nustatykite TLP lygį — eksportas užblokuotas klasifikacijos politikos.',
   'Tabel bewerken': 'Redaguoti lentelę',
-  'Pijltjes · Tab · Esc': 'Rodyklės · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Redaguoti lentelę (lentelės skaidrėse)',
   'Tabel bewerken (E)': 'Redaguoti lentelę (E)',
   'Tab wisselt cel · Esc sluit': 'Tab keičia langelį · Esc uždaro',
-  'Pen · markeerstift · ⇧E': 'Rašiklis · žymeklis · ⇧E',
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn verčia skaidres',
@@ -1438,10 +1390,6 @@ const _dutchSourceLt = {
       'Tinklo klaida — patikrinkite ryšį ir bandykite dar kartą.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Kažkas netikėtai nepavyko. Išsamiau žurnale.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Serveris nepasiekiamas — patikrinkite ryšį ir serverio URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1469,8 +1417,6 @@ const _dutchSourceLt = {
   'Uit recente bestanden verwijderen': 'Pašalinti iš paskutinių failų',
   'OciDeck wordt gestart…': 'Paleidžiama OciDeck…',
   'Herstelbestanden': 'Atkūrimo failai',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Atkūrimo failuose yra visas jūsų pristatymų turinys paprastu tekstu. Jie automatiškai išvalomi po 7 dienų; čia galite juos ištrinti iš karto.',
   'Herstelbestanden nu wissen': 'Ištrinti atkūrimo failus dabar',
   'Er waren geen herstelbestanden.': 'Atkūrimo failų nebuvo.',
   'herstelbestand(en) gewist.': 'atkūrimo failas(-ai) ištrinti.',
@@ -1901,7 +1847,6 @@ const _dutchSourceAddLt = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Sukuriame kopiją naujoje kortelėje; jūsų originalus failas lieka nepakitęs.',
   'Welk formaat?': 'Koks formatas?',
-  'dia\'s, gesplitst op kop.': 'skaidrių, padalytų pagal antraštę.',
   'document': 'dokumentas',
   'volledig': 'pilnas',
   'Invoegen': 'Įterpti',
@@ -2061,12 +2006,8 @@ const _dutchSourceAddLt = <String, String>{
   'Alle integraties': 'Visos integracijos',
   'Alles inschakelen': 'Įjungti viską',
   'Alles uitschakelen': 'Išjungti viską',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Ataskaitų aplankas jau nustatytas, todėl ryšys lieka pasiekiamas ir esamą „OpenKAT“ pateiktį vis dar galima atnaujinti.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Ryšiai su kitomis sistemomis. Kiekvienas ryšys pagal numatytuosius nustatymus išjungtas ir lieka neaktyvus, kol jį įjungiate.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Nuskaitykite OpenKAT ataskaitų aplankus kaip vieną vadovybės apžvalgą.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Pristatymų įtraukimas iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) kaip redaguojamas dekas. Ryšiai su kitomis sistemomis, pavyzdžiui, „OpenKAT“, yra skiltyje Integracijos.',
   'Media (WebRTC)': 'Medija (WebRTC)',
@@ -2231,7 +2172,6 @@ const _dutchSourceAddLt = <String, String>{
   'Van toepassing': 'Taikoma',
   'Voortgang': 'Pažanga',
   'Voortgang managementsysteem': 'Valdymo sistemos pažanga',
-  'Voortgangsoverzicht bijgewerkt': 'Pažangos apžvalga atnaujinta',
   'Welk deel?': 'Kuri dalis?',
   'beheersmaatregelen geladen': 'kontrolių įkelta',
   'geïmplementeerd': 'įgyvendinta',
@@ -2308,10 +2248,6 @@ const _dutchSourceAddLt = <String, String>{
       'Tai nepanašu į galiojantį atkūrimo raktą.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Pirmiausia įrašykite darbą kaip .ocideck failą, kad neprarastumėte duomenų. Tada naudokite mažiau arba mažesnių vaizdų, užverkite kitas pateiktis arba įkelkite iš naujo neatverdami kitų pateikčių.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Įrašykite darbą kaip .ocideck failą ir prieš pridėdami daugiau vaizdų iš naujo įkelkite puslapį.',
   'Afbeeldingsrechten': 'Vaizdo teisės',
   'Afbeeldingsrechten controleren…': 'Patikrinkite vaizdo teises…',
   'Afdoening': 'Atsiskaitymas',
@@ -2362,8 +2298,6 @@ const _dutchSourceAddLt = <String, String>{
   'Verifiëren': 'Patvirtinti',
   'Deelnemers verifiëren': 'Patikrinti dalyvius',
   '(dit apparaat)': '(šis įrenginys)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Palyginkite kiekvieno įrenginio kontrolinį kodą patikimu kanalu — perskaitykite jį vienas kitam arba atsiųskite keliu, kuriuo pasitikite. Jei sutampa, dirbate su tikrais įrenginiais ir niekas neįsiterpė. Jei skiriasi, nutraukite bendradarbiavimą.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Tai nėra galiojanti pakvietimo nuoroda.',
@@ -2426,8 +2360,6 @@ const _dutchSourceAddLt = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Bendradarbiaukite tiesiogiai rengdami pristatymą per Matrix homeserver kaip šifruotą perdavimo tašką. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis. Įveskite homeserver ir kitur sukurtą prieigos raktą — OciDeck niekada neprašo jūsų slaptažodžio. Prieigos raktas laikomas užšifruotas raktinėje, o ne kartu su kitais nustatymais.',
   'wordt door de test ingevuld': 'užpildo testas',
-  'Versleuteld doorgeefluik (ontwerp)':
-      'Užšifruotas retransliatorius (projektas)',
   'Meer documentatie op de repository': 'Daugiau dokumentacijos saugykloje',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Visa dokumentacija — įskaitant architektūrą, kūrimą, pirminį kodą ir dizainą — yra saugykloje.',
@@ -2669,50 +2601,14 @@ const _dutchSourceAddLt = <String, String>{
       'Kurių matavimo duomenų trūksta arba kurie pasenę?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Kokiais duomenimis pagrįsta ši ataskaita?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Plati, bet faktinė valdymo apžvalga su atsekamomis matavimo akimirkomis.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Reitingai be bendro balo ir atskirai rodomi trūkstami matavimai.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Rodomi sunkumo skaičiai, pagalbininkai ir perkeliami matavimai pagal akimirką.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizuoja tipų paiešką pagal paveiktas organizacijas, sistemas ir stebėjimus.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Rodo kritinius / didelius skaičius be jokio svėrimo.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Rodo skaitiklį, vardiklį ir tik patikimus procentus.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Grupuoja pažodines OpenKAT rekomendacijas be savo prioriteto.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Tikslinis dabartinis vienos organizacijos įvaizdis ir jo matavimo data.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Lygina du pasirinktus matavimo momentus vienoje organizacijoje.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Išskiria naujus, naujus ir nebestebėtus.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Naudoja tik patikimas pirmojo stebėjimo datas.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Reitinguoja sistemas su atskirais sunkumo skaitikliais.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Rodo atskiras delta vertes be svertinio balo.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Lygina skaitiklį ir vardiklį su akivaizdžiai palyginama aprėptimi.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Atsargų šaltinio patikrintos sistemos, pagrindinio kompiuterio pavadinimai ir IP adresai.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Atskiria stebimą, nestebimą ir nežinomą.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Rodo tik aiškiai įrodytas stebėjimo mutacijas.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Rodo organizacijas ir sistemas aplink vieną patikimą CVE nuorodą.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'CVE reitinguoja aiškiai deduplikuojant.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Išskiria naujus, naujus ir nebestebėtus CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Rodo trūkstamus, pasenusius ir faktiškai naudotus matavimus.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Apskaitos pagrindinės datos, šaltinio failai, adapteriai ir šaltinio maišos.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Dar nepasiekiama: šaltinis neįrodo visų išteklių stebėjimo būsenos.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2756,12 +2652,6 @@ const _dutchSourceAddLt = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Kuri ataskaita atsako į jūsų klausimą?',
   'Meer rapportvragen': 'Daugiau pranešimų apie klausimus',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Kurios sistemos pažeidžiamos CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizacijos ir pažeidžiamos sistemos aplink vieną pažeidžiamumą.',
-  'Organisaties met kwetsbare systemen':
-      'Organizacijos su pažeidžiamomis sistemomis',
   'Kwetsbare systemen': 'Pažeidžiamos sistemos',
   'Kritiek/hoog': 'Kritinis/aukštas',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2783,8 +2673,6 @@ const _dutchSourceAddLt = <String, String>{
   'Bruikbaar': 'Naudoti',
   'CVE zoeken': 'CVE paieška',
   'Critical/high': 'Kritinis/aukštas',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Duomenų kokybė, trūkstami matavimai ir pasenimas.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Pasirinktose ataskaitose nėra pakankamai patikimų šios dalies duomenų.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2810,9 +2698,6 @@ const _dutchSourceAddLt = <String, String>{
   'Geen bruikbare meetdatum': 'Nėra tinkamos naudoti matavimo datos',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Sugeneruotos skaidrės atnaujinamos. Jūsų skaidrės ir kopijos išsaugomos.',
-  'Getroffen organisaties en systemen': 'Paveiktos organizacijos ir sistemos',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Paveiktos organizacijos ir sistemos aplink vieną pažeidžiamumą.',
   'Getroffen systemen': 'Paveiktos sistemos',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Nepavyko sukurti ataskaitos. Jūsų pasirinkimai išsaugomi; patikrinkite įspėjimus ir bandykite dar kartą.',
@@ -2823,20 +2708,15 @@ const _dutchSourceAddLt = <String, String>{
   'Keuzes wijzigen…': 'Keisti pasirinkimus…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Pasirinkite aplanką, kuriame OpenKAT įdėjo ataskaitas. OciDeck skaito tik šį aplanką; niekas nekeičiama ir nesiunčiama.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Pasirinkite klausimą, į kurį turėtų atsakyti ataskaita. OciDeck nustato tinkamą struktūrą.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Pasirinkite ataskaitose rastą CVE.',
   'Laatste bruikbare meting': 'Paskutinis naudoti matavimas',
   'Live voorvertoning van de rapportopbouw':
       'Tiesioginė ataskaitos struktūros peržiūra',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Valdymo ir kontrolės informacija apie kelias organizacijas.',
   'Meer instellingen': 'Daugiau nustatymų',
   'Nederlands': 'olandų',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Ne kiekviena pasirinkta organizacija turi šio laikotarpio matavimus.',
-  'Nieuwe en verdwenen bevindingen': 'Nauji ir trūkstami radiniai',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Dar nepasiekiama: šiose ataskaitose nėra patikimų CVE numerių.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2871,8 +2751,6 @@ const _dutchSourceAddLt = <String, String>{
       'Vienai ar kelioms organizacijoms trūksta naudingo srovės matavimo.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Palyginimui reikalingi du matavimo momentai. Dabar rastas vienas matavimas.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Pažanga, palyginti su ankstesniu matavimo momentu.',
   'Waar staan de OpenKAT-rapportages?': 'Kur yra OpenKAT ataskaitos?',
   'Wat veranderde er bij één organisatie?':
       'Kas pasikeitė vienoje organizacijoje?',
@@ -2886,7 +2764,6 @@ const _dutchSourceAddLt = <String, String>{
   'bruikbaar': 'tinkamas naudoti',
   'metingen': 'matavimai',
   'organisaties': 'organizacijose',
-  'organisaties geselecteerd': 'atrinktos organizacijos',
   'rapportages gebruikt': 'panaudotos ataskaitos',
   'systemen': 'sistemos',
   'Nog geen specificatielimiet': 'Dar nėra specifikacijos ribos',
@@ -3031,7 +2908,6 @@ const _dutchSourceAddLt = <String, String>{
       'yra medžio skaidlėje, bet niekur kitur nenaudojamas — susiekite jį su matrica, srautu ar kita skaidle.',
   'Nieuw verbeteringsproject': 'Naujas tobulinimo projektas',
   'Kader': 'Sistema',
-  'Projecttitel': 'Projekto pavadinimas',
   'Primaire Y-metriek (Y-01)': 'Pirminė Y metrika (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Pavyzdžiui: order intake trukmė darbo dienomis',
@@ -3085,10 +2961,6 @@ const _dutchSourceAddLt = <String, String>{
       'Naršyklė blokuoja mediją iš išorinio šaltinio. Atidarykite šią prezentaciją programoje, kad būtų rodoma internetinė medija.',
   'Bron niet toegestaan': 'Šaltinis neleidžiamas',
   'Deze URL is door de beveiliging geweigerd.': 'Šį URL atmetė sauga.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Medžiagos įtraukimas iš kitų sistemų. Du šaltiniai: pristatymai iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) tampa redaguojamu deku, o OpenKAT ataskaitos (aplankas su JSON) tampa viena vadovybės apžvalga. Kur yra OpenKAT aplankas, nustatoma skiltyje Integracijos.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Pristatymų įtraukimas iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) kaip redaguojamas dekas. OpenKAT ataskaitų aplankų nuskaitymas galimas tik darbalaukio versijoje.',
   'Alinea': 'Pastraipa',
   'Audio "{bestand}"': 'Garsas "{bestand}"',
   'Deck opbouwen…': 'Kuriama prezentacija…',
@@ -3209,8 +3081,6 @@ const _dutchSourceAddLt = <String, String>{
       'Kontrolinio sąrašo rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas ir kategorija. Paties vadovo turinys neįtrauktas.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testų rodyklė: kiekvienam testui stabilus id, kanoninis pavadinimas, MASVS kategorija ir MASWE silpnybė. Atšaukti v1 testai ir vietaženkliai neįtraukti; vadovo turinys taip pat ne.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Silpnybių sąrašas (117): id, pavadinimas, MASVS kategorija, platforma ir CWE sąsaja. Trys ketvirtadaliai šaltinyje dar neaprašyti; jie įtraukti ir pažymėti. Atšauktos silpnybės — ne.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Visas sąrašas (id, pavadinimas, aprašas) ir mūsų pačių atrinktas branduolys su taisymo pastabomis.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3257,34 +3127,17 @@ const _dutchSourceAddLt = <String, String>{
       'Kiekvienas failas konvertuojamas atskirai ir įrašomas kaip atskira prezentacija paskirties aplanke. Jei vienas nepavyksta, eilė tiesiog tęsiasi.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Kelių prezentacijų importavimas iš karto įrašo jas kaip failus į aplanką; naršyklės versijoje tai neįmanoma.',
-  'Nu importeren': 'Importuoti dabar',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Apžvalga paruošta naujoje kortelėje.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Perskaito aplanką su „OpenKAT“ ataskaitomis (JSON) ir sukuria iš jų vieną vadovybės apžvalgą: sistemas, radinius pagal pavojingumą, ilgiausiai neuždarytus punktus ir tendenciją per iš eilės einančius matavimus. Tas pats veiksmas su esama „OpenKAT“ pateiktimi ją atnaujina ir palieka jūsų pačių skaidres vietoje.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Importas tik skaito; šiame aplanke niekas nekeičiama ir niekur nesiunčiama. Rinkmenos, kurios nėra „OpenKAT“ ataskaitos, praleidžiamos ir paminimos importo ataskaitoje.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Nurodykite aplanką, kuriame yra jūsų „OpenKAT“ ataskaitos (JSON). Importas perskaito tą aplanką ir sukuria iš jo vieną vadovybės apžvalgą; kai aplankas nustatytas čia, jo nereikia rinktis kaskart.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      '„OpenKAT“ importas skaito aplanką iš disko ir veikia tik darbalaukio versijoje.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Ataskaitų aplankas dar nenurodytas, todėl importas jo klausia kaskart.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Ataskaitų aplankas jau nustatytas, todėl įėjimo taškas lieka pasiekiamas ir esamą „OpenKAT“ pateiktį vis dar galima atnaujinti.',
   'Integraties': 'Integracijos',
-  'Naar Integraties': 'Į Integracijas',
   'Map kiezen…': 'Pasirinkti aplanką…',
   'Map wissen': 'Išvalyti aplanką',
-  'OpenKAT-rapportages importeren…': 'Importuoti OpenKAT ataskaitas…',
   'Map met OpenKAT-rapportages kiezen':
       'Pasirinkti aplanką su OpenKAT ataskaitomis',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT ataskaitos importuotos.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT dekas atnaujintas; rankinės skaidrės išsaugotos.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Šiame aplanke OpenKAT ataskaitų nerasta.',
-  'OpenKAT-import mislukt.': 'OpenKAT importas nepavyko.',
   'rapportages': 'ataskaitos',
   'overgeslagen': 'praleistos',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3344,8 +3197,6 @@ const _dutchSourceAddLt = <String, String>{
   'Label op de primaire knop': 'Užrašas ant pagrindinio mygtuko',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Radiniai, kurie buvo įvertinti ir palikti. Apie juos nebepranešama, bet nuskaitymas juos vis tiek randa ir jie nelaikomi išspręstais. Bakstelėk, kad vieną grąžintum.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Privatumo radinio atidėjimas (projektas)',
   'Deze is beoordeeld en mag blijven': 'Peržiūrėta, šis gali likti',
   'Mogelijk gemaakt door': 'Galimybę suteikė',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3357,10 +3208,8 @@ const _dutchSourceAddLt = <String, String>{
   'Technische melding:': 'Techninis pranešimas:',
   'presentaties': 'prezentacijos',
   '/Presentaties': '/Prezentacijos',
-  'Rapportagedistributie (ontwerp)': 'Ataskaitų platinimas (projektas)',
   'De export is mislukt.': 'Eksportas nepavyko.',
   'Presenteer vanaf hier': 'Pristatyti nuo čia',
-  'Teams-gastclient (ontwerp)': 'Teams svečio klientas (projektas)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kaip plačiai galima dalytis šia medžiaga?',
   'Wat betekenen deze niveaus?': 'Ką reiškia šie lygiai?',
@@ -3477,8 +3326,6 @@ const _dutchSourceAddLt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Pristatymai, kurie lieka paprasti Markdown failai: skaitomi, juose galima ieškoti ir atveriami bet kuria rengykle.',
   'sjablonen om mee te beginnen, of leeg': 'šablonų pradžiai arba tuščia',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Praleidimas įjungtas: rasti duomenys užjuodinami, o visi šios skaidrės vaizdai, vaizdo ir garso įrašai nepatenka nei į ekraną, nei į eksportą. Tavo markdown failas išsaugo viską.',
   'Mijn tekst': 'Mano tekstas',
   'Wat zij zien': 'Ką jie mato',
   'Presentatiegegevens': 'Pristatymo duomenys',
@@ -3698,7 +3545,6 @@ const _dutchSourceAddLt = <String, String>{
   'Opslaan naar…': 'Įrašyti į…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Pirmiausia nustatykite ryšį skiltyje Nustatymai → Saugykla.',
-  'Beginnen met:': 'Pradėti nuo:',
   'Verlopen datums markeren': 'Žymėti pasibaigusias datas',
   'Datums gemarkeerd': 'Datos pažymėtos',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3724,28 +3570,15 @@ const _dutchSourceAddLt = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Atakos paviršius pagal objekto rūšį: kiek jų yra, kiek reikia darbo, kas nauja ir kas niekam nepriklauso. Pastarasis dalykas paprastai ir yra pokalbis.',
   'Acties en besluiten': 'Veiksmai ir sprendimai',
-  'Actie toevoegen': 'Pridėti veiksmą',
-  'Actie verwijderen': 'Pašalinti veiksmą',
   'Actie': 'Veiksmas',
   'Deadline': 'Terminas',
-  'Op de lijst sinds': 'Sąraše nuo',
   'Stand': 'Būsena',
-  'Wat vraagt u': 'Ko prašote',
   'geen datum': 'be datos',
-  'Ter informatie': 'Susipažinti',
   'Besluit gevraagd': 'Reikia sprendimo',
   'Escalatie': 'Eskalavimas',
   'Open': 'Atvira',
   'Loopt': 'Vykdoma',
   'Afgerond': 'Baigta',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Tik sprendimas ar eskalavimas gauna etiketę skaidrėje; "vėluoja" išplaukia iš termino ir jo nenustatote patys.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datos kaip mmmm-mm-dd. Kitoks užrašas atmetamas, o ne spėjamas: 05-08-2026 yra dvi skirtingos dienos.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Veiksmų skaidrė talpina daugiausiai aštuonias eilutes; toliau salė peržvelgia, o ne sprendžia.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Kas turi įvykti, kas tai padarys ir iki kada. Kiekvienoje eilutėje nurodykite, ar tai susipažinti, ar prašote sprendimo — to ieško salė.',
   'Scorecard': 'Rodiklių kortelė',
   'Cijfer toevoegen': 'Pridėti rodiklį',
   'Cijfer verwijderen': 'Pašalinti rodiklį',
@@ -3832,8 +3665,6 @@ const _dutchSourceAddLt = <String, String>{
       'Raktas galioja, bet tam neturi teisių — suteikite jam daugiau teisių saugyklai.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Prisijungta, bet prieigos nėra — slaptažodis nėra problema. Paprašykite teisių į šį aplanką.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Leksikonų licencijos: ko dar reikia paklausti',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Tai atrodo kaip pilnas DAV URL. Su Nextcloud OciDeck šį kelią išveda pats — čia turi būti tik serveris.',
   'Overnemen': 'Taikyti',
@@ -3876,8 +3707,6 @@ const _dutchSourceAddLt = <String, String>{
   'kenteken': 'valstybinis numeris',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šios pateikties kalbai nėra raktinių žodžių sąrašo ypatingų kategorijų asmens duomenims. Šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia; žodžiai kaip „diagnozė“ ar „įtariamasis“ neatpažįstami.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Ypatingų kategorijų asmens duomenų raktinių žodžių sąrašas šios pateikties kalbai labai menkas. Nesitikėkite, kad bus rasti žodžiai kaip „diagnozė“ ar „įtariamasis“.',
   'Landpakketten voor identificatienummers':
       'Šalių paketai identifikaciniams numeriams',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3909,8 +3738,6 @@ const _dutchSourceAddLt = <String, String>{
       'Serverio pavadinimo nėra arba jo nepavyksta rasti. Patikrinkite, ar serverio URL nėra rašybos klaidos.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Šis serveris turi privatų arba LAN adresą. Pažymėkite jį kaip patikimą vidinį skiltyje Nustatymai → Saugykla.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Šio serverio sertifikatas nėra patikimas. Savarankiškai pasirašytas sertifikatas neveiks; naudokite pripažinto išdavėjo sertifikatą.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Serveris nukreipia į kitą adresą. Įveskite tą adresą tiesiogiai — peradresavimų nesekame, nes jie gali apeiti saugumo patikrą.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3946,8 +3773,6 @@ const _dutchSourceAddLt = <String, String>{
   'Opslaan naar S3': 'Įrašyti į S3',
   'Opgeslagen in S3:': 'Įrašyta į S3:',
   'Hier staat niets': 'Čia nieko nėra',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Nepavyko įkelti turinio. Patikrink ryšį ir nustatymus.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Galinis taškas nepasiekiamas — patikrink ryšį ir galinį tašką.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3956,8 +3781,6 @@ const _dutchSourceAddLt = <String, String>{
       'Galinis taškas grąžino klaidą. Bandyk vėliau.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Šis galinis taškas negali rašyti sąlygiškai, todėl tavo darbas neapsaugotas nuo kito darbo. Įrašyk nauju pavadinimu, jei prie šios prezentacijos dirba dar kas nors.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nenustatyta S3 saugykla. Nustatyk ją per Nustatymai → Saugykla.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Pirmiausia nustatyk S3 saugyklą per Nustatymai → Saugykla.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4004,10 +3827,6 @@ const _dutchSourceAddLt = <String, String>{
       'Šiame vaizde matoma bent tiek atpažįstamų veidų: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Šio vaizdo nepavyko patikrinti dėl veidų. Formatas nepalaikomas (pavyzdžiui, HEIC). Tai nereiškia, kad jame nieko nėra, — tai reiškia, kad nebuvo tikrinta.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Šiame vaizde matomas atpažįstamas veidas.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Šiame vaizde matomi atpažįstami veidai: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Vaizdas, kuriame kas nors atpažįstamas, yra asmens duomenys net ir be vardo.',
   'herkenbaar gezicht op een afbeelding': 'atpažįstamas veidas vaizde',
@@ -4023,8 +3842,6 @@ const _dutchSourceAddLt = <String, String>{
   'Organisatie': 'Organizacija',
   'Welke verbinding?': 'Kuri jungtis?',
   'Bestandsverbindingen': 'Failų jungtys',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Vietos, kuriose laikote ir ieškote pristatymų — aplankai šiame kompiuteryje, WebDAV serveriai ir git saugyklos kartu. Vilkite jas norima tvarka: viršutinė kiekvienos rūšies laikoma numatytąja.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git saugykla; kiekviena įrašyta versija išsaugoma.',
   'Een map op de schijf van deze computer.': 'Aplankas šio kompiuterio diske.',
@@ -4047,15 +3864,7 @@ const _dutchSourceAddLt = <String, String>{
   'Openen vanaf WebDAV': 'Atverti iš WebDAV',
   'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',
   'Opgeslagen op WebDAV:': 'Išsaugota į WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Pirmiausia nustatykite WebDAV serverį per Nustatymai → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Pasirinkti paveikslėlį WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nenustatytas WebDAV serveris. Nustatykite jį per Nustatymai → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → WebDAV.',
   'Servertype': 'Serverio tipas',
   'Nextcloud of ownCloud': 'Nextcloud arba ownCloud',
   'Andere WebDAV-server': 'Kitas WebDAV serveris',
@@ -4077,24 +3886,11 @@ const _dutchSourceAddLt = <String, String>{
   'Haal volle pagina uit de reeks': 'Pašalinti pilną puslapį iš sekos',
   'Opslag': 'Saugykla',
   'Opslagwijzen': 'Saugojimo būdai',
-  'Deze computer': 'Šis kompiuteris',
   'Ingesteld': 'Sukonfigūruota',
   'Niet ingesteld': 'Nesukonfigūruota',
-  'Nog geen bibliotheek ingesteld':
-      'Kol kas nesukonfigūruota nė viena biblioteka',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Keliai, kuriais galite atverti ir įrašyti pateiktis. Spustelėkite būdą, kad jį sukonfigūruotumėte.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Pateiktys aukščiau nurodytuose aplankuose, šio kompiuterio diske.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Atverkite ir įrašykite pateiktis aplanke savo Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Atverkite pateiktis iš git saugyklos; kiekviena įrašyta versija išsaugoma.',
-  'Nog te verifiëren': 'Dar reikia patikrinti',
   'MASWE-zwakheid kiezen': 'Pasirinkite MASWE silpnybę',
   'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',
   'Geen zwakheid gevonden': 'Silpnybių nerasta',
-  'uitleg nog niet geschreven': 'paaiškinimas dar neparašytas',
   'Getalnotatie herkennen': 'Atpažinti skaičių formatą',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Šiame faile yra skaičių, kurių kablelį galima skaityti dviem būdais:',
@@ -4215,12 +4011,10 @@ const _dutchSourceAddLt = <String, String>{
   'Veelgestelde vragen': 'Dažni klausimai',
   'Probleemoplossing': 'Trikčių šalinimas',
   'Begrippenlijst': 'Terminų žodynas',
-  'API-documentatie': 'API dokumentacija',
   'Prestaties': 'Našumas',
   'Beveiligingsontwerp': 'Saugumo projektavimas',
   'Hosting en uitrol': 'Talpinimas ir diegimas',
   'Bijdragen': 'Prisidėjimas',
-  'Ontwikkelomgeving': 'Kūrimo aplinka',
   'Migratiegids': 'Migracijos vadovas',
   'Versies…': 'Versijos…',
   'Versies:': 'Versijos:',
@@ -4261,8 +4055,6 @@ const _dutchSourceAddLt = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Šaka pasislinko; iš naujo įkelkite rinkinį ir įrašykite dar kartą.',
   'Bijgewerkt met OciDeck': 'Atnaujinta su OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Pirmiausia nustatykite Git saugyklą skiltyje Nustatymai → Git saugykla.',
   'Git-repository': 'Git saugykla',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Atverkite pristatymus iš Git saugyklos. Kiekviena įrašyta versija išsaugoma. Prieigos raktas laikomas užšifruotas raktinėje, o ne kartu su kitais nustatymais.',
@@ -4277,7 +4069,6 @@ const _dutchSourceAddLt = <String, String>{
       'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Nuorodų duomenys yra pačioje programoje, todėl modulis veikia iš karto ir visiškai neprisijungus.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie lieka paslėpti, kol jų neįjungiate.',
-  'Procesverbetering (ontwerp)': 'Procesų tobulinimas (projektas)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Šis projektas yra šalutinis Pilot Informatieautonomie produktas.',
   'Stijlprofiel exporteren': 'Eksportuoti stiliaus profilį',
@@ -4417,7 +4208,6 @@ const _dutchSourceAddLt = <String, String>{
   'genetisch gegeven': 'genetiniai duomenys',
   'parketnummer': 'baudžiamosios bylos numeris',
   'nationaal identificatienummer': 'nacionalinis identifikavimo numeris',
-  'OciWacht (ontwerp)': 'OciWacht (projektas)',
   'Mogelijk geheim': 'Galima paslaptis',
   'sleutel of token': 'raktas arba prieigos raktas',
   'private sleutel': 'privatusis raktas',
@@ -4450,7 +4240,6 @@ const _dutchSourceAddLt = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Įkelk visą CVE sąrašą į šį įrenginį, kad paieška vyktų neprisijungus ir tavo paieškos žodis niekur nekeliautų. Duomenų bazė gaunama iš CVE List V5 (oficialios CVE programos, per GitHub).',
   'Wat er lokaal beschikbaar is': 'Kas prieinama vietoje',
-  'Gegevenspakket': 'Duomenų paketas',
   'Nu bijwerken': 'Atnaujinti dabar',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Duomenys prieinami vietoje — paieška vyksta šiame įrenginyje; niekas neišsiunčiama.',
@@ -4469,7 +4258,6 @@ const _dutchSourceAddLt = <String, String>{
       'Priimti: duomenys čia priklauso ir pranešimas dingsta. Priimti + įspėti: gavėjas mato ženklelį, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys ekrane ir eksporte tampa neįskaitomi — tavo Markdown failas išsaugo originalų tekstą.',
   'Alleen melden': 'Tik pranešti',
   'PERSOONSGEGEVENS': 'ASMENS DUOMENYS',
-  'Persoonsgegevens op deze slide': 'Asmens duomenys šioje skaidrėje',
   'Volg de presentatie': 'Kaip pristatyme',
   'Weglaten uit tonen en exporteren': 'Praleisti rodant ir eksportuojant',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4590,8 +4378,6 @@ const _dutchSourceAddLt = <String, String>{
   'Bewerk deze slide': 'Redaguoti šią skaidrę',
   'Bewijs verwijderen': 'Pašalinti įrodymą',
   '(nog leeg)': '(dar tuščia)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Pirma įveskite radinio ID, kad pridėtumėte įrodymus.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Pridėkite ekrano nuotraukų arba vaizdo įrašų kaip įrodymus. Kiekvienas įrodymas tampa atskira skaidre iškart po radinio ir įtraukiamas į eksportą.',
   'Uitvoering testen conform standaard': 'Testavimas pagal standartą',

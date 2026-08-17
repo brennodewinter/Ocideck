@@ -799,8 +799,6 @@ const _dutchSourceMt = {
   'Selectie opheffen': 'Neħħi l-għażla',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Naqbel mal-liċenzja EUPL 1.2 u qrajt liema data OciDeck iżomm.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'L-għażla tiegħek issir il-lingwa awtomatika tal-app.',
   'Lees de volledige licentie': 'Aqra l-liċenzja sħiħa',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck huwa software liberu taħt il-liċenzja EUPL 1.2. Qabel tibda, nitolbuk taċċetta l-liċenzja. Hawn taħt tista\' wkoll taqra liema data OciDeck iżomm fuq dan l-apparat u meta xi ħaġa titlaq mill-apparat tiegħek.',
@@ -826,9 +824,6 @@ const _dutchSourceMt = {
   'Het antwoord van de server was te groot':
       'It-tweġiba tas-server kienet kbira wisq',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Sors Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Iftaħ u ssalva preżentazzjonijiet f\'folder fuq in-Nextcloud tiegħek. Il-password tinżamm kriptata fis-sensiela taċ-ċwievet, mhux flimkien mas-settings l-oħra.',
   'Server-URL': 'URL tas-server',
   'Gebruikersnaam': 'Isem tal-utent',
   'App-wachtwoord': 'Password tal-app',
@@ -842,22 +837,13 @@ const _dutchSourceMt = {
   'Verbinding gelukt': 'Il-konnessjoni rnexxiet',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Il-bidliet jinżammu meta tikklikkja Issalva.',
-  'Afbeelding kiezen op Nextcloud': 'Agħżel immaġni fuq Nextcloud',
-  'Openen vanaf Nextcloud': 'Iftaħ minn Nextcloud',
   'Vernieuwen': 'Aġġorna',
   'Deze map is leeg': 'Dan il-folder huwa vojt',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'L-ebda server Nextcloud issettjat. Issettja wieħed f\'Settings → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Ma stajniex intellgħu l-folder. Iċċekkja l-konnessjoni u s-settings tiegħek.',
   'Kon dit bestand niet openen.': 'Ma stajniex niftħu dan il-fajl.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Din mhijiex preżentazzjoni Marp/OciDeck.',
   'Downloaden mislukt:': 'It-tniżżil falla:',
-  'Opgeslagen op Nextcloud:': 'Salvat fuq Nextcloud:',
   'Opslaan mislukt:': 'L-issejvjar falla:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'L-ewwel issettja server Nextcloud f\'Settings → Nextcloud.',
   'Opslaan naar Nextcloud': 'Issalva fuq Nextcloud',
   'Doelpad (zonder extensie)': 'Path tad-destinazzjoni (mingħajr estensjoni)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -869,9 +855,6 @@ const _dutchSourceMt = {
       'Uri l-ħarsa ġenerali tal-ħinijiet fl-aħħar',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Il-ħin għal kull slide dejjem jitkejjel; dan jiddetermina biss jekk il-ħarsa ġenerali tidhirx wara din il-preżentazzjoni.',
-  'Oefenoverzicht tonen na afloop': 'Uri s-sommarju tal-prova fl-aħħar',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Wara preżentazzjoni, uri l-ħarsa ġenerali tal-ħin li ntefaq għal kull slide. Il-ħin dejjem jitkejjel; dan jiddetermina biss jekk l-iskrin jidhirx.',
   'Onveilige presentatie geblokkeerd': 'Preżentazzjoni mhux sigura mblukkata',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Din il-preżentazzjoni ma nfetħitx. Il-fajl fih kontenut li jista\' jesegwixxi kodiċi, u preżentazzjoni għandu jkun fiha biss data — xejn eżegwibbli.',
@@ -954,7 +937,6 @@ const _dutchSourceMt = {
   'Online': 'Online',
   'Lokaal bestand': 'Fajl lokali',
   'Geen video': 'L-ebda vidjo',
-  'Vraag (meerkeuze)': 'Mistoqsija (għażla multipla)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'It-test tat-titlu għandu kuntrast żgħir wisq mal-immaġni tal-isfond',
   'Herstel': 'Irranġa',
@@ -969,8 +951,6 @@ const _dutchSourceMt = {
   'Huidig punt weghalen': 'Neħħi l-punt attwali',
   'Stap voor stap': 'Pass pass',
   'Geen animatie': 'L-ebda animazzjoni',
-  'Animatiesnelheid': 'Veloċità tal-animazzjoni',
-  'Langzaam': 'Bil-mod',
   'Snel': 'Malajr',
   'Gebeurtenissen': 'Avvenimenti',
   'Gebeurtenis toevoegen': 'Żid avveniment',
@@ -983,8 +963,6 @@ const _dutchSourceMt = {
   'Vraag': 'Mistoqsija',
   'Wat wil je vragen?': 'X\'trid tistaqsi?',
   'Antwoorden': 'Tweġibiet',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Immarka t-tweġibiet korretti. Mhux aktar minn tmien tweġibiet; waqt il-preżentazzjoni tintwera b\'mod każwali waħda korretta u l-bqija ħażina.',
   'Antwoord': 'Tweġiba',
   'Antwoord toevoegen': 'Żid tweġiba',
   'Goed antwoord': 'Tweġiba korretta',
@@ -1018,8 +996,6 @@ const _dutchSourceMt = {
   'Stelling': 'Stqarrija',
   'Formuleer een stelling die juist of onjuist is':
       'Fformula stqarrija li tkun vera jew falza',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Immarka t-tweġibiet korretti kollha. Waqt il-preżentazzjoni jintwera sett każwali b\'mill-inqas waħda korretta u waħda ħażina.',
   'Juist': 'Veru',
   'Onjuist': 'Falz',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1040,7 +1016,6 @@ const _dutchSourceMt = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Il-kuluri tal-istatus tal-miters tal-cockpit. Oħloq varjanti bl-isem; l-iskema magħżula tapplika għas-slides tal-cockpit kollha.',
   'Standaard': 'Awtomatiku',
-  'Standaardkleuren gebruiken': 'Uża l-kuluri awtomatiċi',
   'Kleurschema verwijderen': 'Ħassar l-iskema tal-kuluri',
   'Schemanaam': 'Isem tal-iskema',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1119,7 +1094,6 @@ const _dutchSourceMt = {
   'Logo en footer': 'Logo u footer',
   'Pagina': 'Paġna',
   'Presentatiestijl': 'Stil ta\' preżentazzjoni',
-  'Presentatiestijl: ': 'Stil ta\' preżentazzjoni: ',
   'Tekst...': 'Test...',
   'Teksteditor': 'Editur tat-test',
   'Volgende pagina': 'Paġna li jmiss',
@@ -1132,8 +1106,6 @@ const _dutchSourceMt = {
   'Doeltijd': 'Ħin fil-mira',
   'Doeltijd (aftellen)': 'Ħin fil-mira (għadd lura)',
   'Geen aftelling': 'L-ebda għadd lura',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Ħin fil-mira awtomatiku għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
   'uit': 'mitfi',
   'Doeltijd / aftellen (K)': 'Mira / għadd lura (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Issettja mira / għadd lura (MMSS)',
@@ -1204,14 +1176,8 @@ const _dutchSourceMt = {
   'Cirkel': 'Torta',
   'Spider': 'Spider',
   'CSV importeren': 'Importa CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: l-ewwel ringiela = ismijiet tas-serje, l-ewwel kolonna = tikketti)',
   'Gekoppeld aan': 'Marbut ma\'',
   'Ontkoppelen': 'Aqla\' r-rabta',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Taħżen id-data fl-islajd, jew iżżommha bħala fajl CSV separat maġenb il-preżentazzjoni?',
-  'In de slide': 'Fl-islajd',
-  'Als CSV-bestand': 'Bħala fajl CSV',
   'Geen grafiekgegevens': 'L-ebda data tal-grafika',
   'Label': 'Tikketta',
   'Rij': 'Ringiela',
@@ -1241,7 +1207,6 @@ const _dutchSourceMt = {
   'Eigen kleur (hex)': 'Kulur personalizzat (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Pereżempju #33FF33 għal skrin aħdar CRT.',
-  'Onderdeel van stijlprofiel ': 'Parti mill-profil tal-istil ',
   'Broncode lettertype': 'Font tal-kodiċi',
   'Kop (optioneel)': 'Intestatura (fakultattiva)',
   'Subkop (optioneel)': 'Sottotitlu (fakultattiv)',
@@ -1280,16 +1245,7 @@ const _dutchSourceMt = {
   'Zet het filter uit om alles weer te zien.':
       'Itfi l-filtru biex tara kollox mill-ġdid.',
   'Welkom bij OciDeck': 'Merħba f\'OciDeck',
-  'Privacy en gebruik': 'Privatezza u użu',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck hija applikazzjoni desktop lokali. Il-preżentazzjonijiet u d-data tiegħek jinħażnu biss fuq il-kompjuter tiegħek.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'L-app ma tiġbor l-ebda data personali, l-ebda statistika u l-ebda data ta\' użu. Il-privatezza tiegħek hija l-prijorità tagħna.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Id-data kollha li ddaħħal f\'OciDeck tibqa\' fuq is-sistema lokali tiegħek u ma tintbagħatx lil servers esterni.',
   'Licentie (EUPL 1.2)': 'Liċenzja (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Billi tikklikkja fuq "Naqbel", taċċetta dawn it-termini u tagħti l-kunsens tiegħek għall-użu ta\' OciDeck.',
   'Volledige licentie online': 'Liċenzja sħiħa online',
   'Akkoord gaan': 'Naqbel',
   'Privacy': 'Privatezza',
@@ -1379,8 +1335,6 @@ const _dutchSourceMt = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Esportazzjoni mblukkata minħabba problemi serji ta\' kwalità.',
   'Alle meldingen': 'Il-messaġġi kollha',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… u aktar problemi fil-pannell tal-kwalità.',
   'Classificatie-handhaving': 'Infurzar tal-klassifikazzjoni',
   'Vrijgaveplafond': 'Limitu tar-rilaxx',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1399,11 +1353,9 @@ const _dutchSourceMt = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Issettja livell TLP — l-esportazzjoni hija mblukkata mill-politika tal-klassifikazzjoni.',
   'Tabel bewerken': 'Editja t-tabella',
-  'Pijltjes · Tab · Esc': 'Vleġeġ · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editja t-tabella (fuq slajds tat-tabella)',
   'Tabel bewerken (E)': 'Editja t-tabella (E)',
   'Tab wisselt cel · Esc sluit': 'Tab jaqleb iċ-ċella · Esc jagħlaq',
-  'Pen · markeerstift · ⇧E': 'Pinna · markatur · ⇧E',
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn iqalleb bejn l-islajds',
@@ -1446,10 +1398,6 @@ const _dutchSourceMt = {
       'Żball tan-netwerk — iċċekkja l-konnessjoni u erġa\' pprova.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Xi ħaġa marret ħażin bla mistenni. Ara l-log għad-dettalji.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Is-server mhux jintlaħaq — iċċekkja l-konnessjoni u l-URL tas-server.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1477,8 +1425,6 @@ const _dutchSourceMt = {
   'Uit recente bestanden verwijderen': 'Neħħi mill-fajls riċenti',
   'OciDeck wordt gestart…': 'OciDeck qed jinbeda…',
   'Herstelbestanden': 'Fajls tal-irkupru',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Il-fajls tal-irkupru fihom il-kontenut sħiħ tal-preżentazzjonijiet tiegħek f\'test sempliċi. Jitnaddfu awtomatikament wara 7 ijiem; hawnhekk tista\' tħassarhom minnufih.',
   'Herstelbestanden nu wissen': 'Ħassar il-fajls tal-irkupru issa',
   'Er waren geen herstelbestanden.': 'Ma kienx hemm fajls tal-irkupru.',
   'herstelbestand(en) gewist.': 'fajl(s) tal-irkupru mħassra.',
@@ -1915,7 +1861,6 @@ const _dutchSourceAddMt = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Noħolqu kopja f\'tab ġdid; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
   'Welk formaat?': 'Liema format?',
-  'dia\'s, gesplitst op kop.': 'slajds, maqsuma skont it-titlu.',
   'document': 'dokument',
   'volledig': 'sħiħ',
   'Invoegen': 'Daħħal',
@@ -2078,12 +2023,8 @@ const _dutchSourceAddMt = <String, String>{
   'Alle integraties': 'L-integrazzjonijiet kollha',
   'Alles inschakelen': 'Attiva kollox',
   'Alles uitschakelen': 'Iddiżattiva kollox',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Diġà hemm folder tar-rapporti mħaddem, għalhekk il-konnessjoni tibqa\' aċċessibbli u preżentazzjoni OpenKAT eżistenti tista\' tibqa\' tiġi aġġornata.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Konnessjonijiet ma\' sistemi oħra. Kull konnessjoni hija mitfija b\'mod awtomatiku u tibqa\' inattiva sakemm int tixgħelha.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Aqra l-folders tar-rapporti ta\' OpenKAT bħala ħarsa ġenerali waħda għall-maniġment.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Iddaħħal preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) bħala deck editabbli. Il-konnessjonijiet ma\' sistemi oħra, bħal OpenKAT, jinsabu taħt Integrazzjonijiet.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2249,8 +2190,6 @@ const _dutchSourceAddMt = <String, String>{
   'Van toepassing': 'Applikabbli',
   'Voortgang': 'Progress',
   'Voortgang managementsysteem': 'Progress tas-sistema ta\' ġestjoni',
-  'Voortgangsoverzicht bijgewerkt':
-      'Il-ħarsa ġenerali tal-progress ġiet aġġornata',
   'Welk deel?': 'Liema parti?',
   'beheersmaatregelen geladen': 'kontrolli mgħobbija',
   'geïmplementeerd': 'implimentat',
@@ -2329,10 +2268,6 @@ const _dutchSourceAddMt = <String, String>{
       'Din ma tidhirx bħal ċavetta ta\' rkupru valida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Din iċ-ċavetta ta\' rkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Il-memorja tal-web għall-immaġnijiet hija mimlija (massimu ta’ 256 MB). L-ewwel issejvja x-xogħol tiegħek bħala fajl .ocideck biex tevita t-telf tad-data. Imbagħad uża inqas immaġnijiet jew immaġnijiet iżgħar, agħlaq decks oħra, jew erġa’ tella’ mingħajr ma tiftaħ decks oħra.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Il-memorja tal-web għall-istampi hija mimlija (massimu ta’ 256 MB). Issejvja x-xogħol bħala fajl .ocideck u erġa’ tella’ l-paġna qabel iżżid aktar stampi.',
   'Afbeeldingsrechten': 'Diritti di immagine',
   'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
   'Afdoening': 'Insediamento',
@@ -2384,8 +2319,6 @@ const _dutchSourceAddMt = <String, String>{
   'Verifiëren': 'Ivverifika',
   'Deelnemers verifiëren': 'Verifika l-parteċipanti',
   '(dit apparaat)': '(dan l-apparat)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Qabbel il-marka tas-swaba\' ta\' kull apparat permezz ta\' kanal fdat — aqrawha lil xulxin, jew ibgħatha minn triq li tafda. Jekk jaqblu, qed taħdem mal-apparati veri u ħadd ma daħal bejniethom. Jekk ikunu differenti, waqqaf il-kollaborazzjoni.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Din mhijiex link tal-istedina valida.',
@@ -2448,7 +2381,6 @@ const _dutchSourceAddMt = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' homeserver Matrix bħala relay ikkriptat. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata. Daħħal homeserver u token tal-aċċess maħluq band\'oħra — OciDeck qatt ma jitlob il-password tiegħek. It-token jinħażen ikkriptat fiċ-ċavetta, mhux mal-issettjar l-ieħor.',
   'wordt door de test ingevuld': 'jimtela mit-test',
-  'Versleuteld doorgeefluik (ontwerp)': 'Relay kriptat (disinn)',
   'Meer documentatie op de repository': 'Aktar dokumentazzjoni fir-repożitorju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Id-dokumentazzjoni sħiħa — inklużi l-arkitettura, il-bini, il-kodiċi sors u d-disinn — tinsab fir-repożitorju.',
@@ -2693,50 +2625,14 @@ const _dutchSourceAddMt = <String, String>{
       'Liema data tal-kejl hija nieqsa jew skaduta?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Fuq liema data huwa bbażat dan ir-rapport?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Ħarsa ġenerali tal-ġestjoni wiesgħa iżda fattwali b\'mumenti ta\' kejl traċċabbli.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Jikklassifika mingħajr punteġġ totali u juri kejl nieqes separatament.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Juri l-għadd tas-severità, il-kontributuri, u l-kejl \'il quddiem bil-mument.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Jorganizza sejba ta\' tipi minn organizzazzjonijiet, sistemi u osservazzjonijiet affettwati.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Juri numri kritiċi/għoli mingħajr ebda użin imfassal.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Juri numeratur, denominatur u perċentwali affidabbli biss.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Gruppi rakkomandazzjonijiet letterali minn OpenKAT mingħajr il-prijorità tagħhom stess.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Immaġni attwali mmirata ta\' organizzazzjoni waħda u d-data tal-kejl tagħha.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Tqabbel żewġ mumenti ta \'kejl magħżula fi ħdan organizzazzjoni waħda.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Tiddistingwi ġodda, ġodda u li m\'għadhomx osservati.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Juża biss dati affidabbli tal-ewwel osservazzjoni.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Jikklassifika sistemi b\'meters separati tas-severità.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Juri valuri delta individwali mingħajr punteġġ peżat.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Iqabbel in-numeratur u d-denominatur b\'kopertura komparabbli b\'mod dimostrabbli.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarji ta\' sistemi ppruvati mis-sors, ismijiet tal-hosts u indirizzi IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Tissepara mmonitorjati, mhux immonitorjati u mhux magħrufa.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Juri biss mutazzjonijiet ta\' monitoraġġ ippruvati b\'mod espliċitu.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Juri organizzazzjonijiet u sistemi madwar link CVE wieħed affidabbli.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Jikklassifika CVEs b\'deduplikazzjoni espliċita.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Tiddistingwi CVEs ġodda, ġodda u li ma għadhomx osservati.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Juri kejl nieqes, skadut u attwalment użat.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Kontijiet għal dati ewlenin, fajls tas-sors, adapters u hashes tas-sors.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Għadu mhux disponibbli: is-sors ma jipprovax l-istatus ta\' monitoraġġ għall-assi kollha.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2782,12 +2678,6 @@ const _dutchSourceAddMt = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Liema rapport iwieġeb il-mistoqsija tiegħek?',
   'Meer rapportvragen': 'Aktar mistoqsijiet dwar ir-rapport',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Liema sistemi huma vulnerabbli għal CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizzazzjonijiet u sistemi vulnerabbli madwar vulnerabbiltà waħda.',
-  'Organisaties met kwetsbare systemen':
-      'Organizzazzjonijiet b\'sistemi vulnerabbli',
   'Kwetsbare systemen': 'Sistemi vulnerabbli',
   'Kritiek/hoog': 'Kritika/għolja',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2809,8 +2699,6 @@ const _dutchSourceAddMt = <String, String>{
   'Bruikbaar': 'Użabbli',
   'CVE zoeken': 'Tfittxija CVE',
   'Critical/high': 'Kritika/għolja',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Kwalità tad-dejta, kejl nieqes u obsolexxenza.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Ir-rapporti magħżula ma fihomx biżżejjed dejta affidabbli għal din il-parti.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2836,10 +2724,6 @@ const _dutchSourceAddMt = <String, String>{
   'Geen bruikbare meetdatum': 'L-ebda data ta \'kejl li tista\' tintuża',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Slajds iġġenerati huma aggornati. Is-slajds u l-kopji tiegħek jinżammu.',
-  'Getroffen organisaties en systemen':
-      'Organizzazzjonijiet u sistemi affettwati',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organizzazzjonijiet u sistemi affettwati madwar vulnerabbiltà waħda.',
   'Getroffen systemen': 'Sistemi affettwati',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Ir-rapport ma setax jinħoloq. L-għażliet tiegħek huma ppreservati; iċċekkja t-twissijiet u erġa\' pprova.',
@@ -2849,20 +2733,15 @@ const _dutchSourceAddMt = <String, String>{
   'Keuzes wijzigen…': 'Ibdel l-għażliet...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Agħżel il-folder li fih OpenKAT poġġa r-rapporti. OciDeck jaqra biss dan il-folder; xejn ma jinbidel jew jintbagħat.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Agħżel il-mistoqsija li r-rapport għandu jwieġeb. OciDeck jiddetermina l-istruttura xierqa.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Agħżel CVE misjub fir-rapporti.',
   'Laatste bruikbare meting': 'L-aħħar kejl li jista\' jintuża',
   'Live voorvertoning van de rapportopbouw':
       'Preview live tal-istruttura tar-rapport',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Informazzjoni ta \'ġestjoni u kontroll dwar organizzazzjonijiet multipli.',
   'Meer instellingen': 'Aktar settings',
   'Nederlands': 'Olandiż',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Mhux kull organizzazzjoni magħżula għandha kejl għal dan il-perjodu.',
-  'Nieuwe en verdwenen bevindingen': 'Sejbiet ġodda u neqsin',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Għadu mhux disponibbli: dawn ir-rapporti ma fihomx numri CVE affidabbli.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2897,8 +2776,6 @@ const _dutchSourceAddMt = <String, String>{
       'Kejl kurrenti utli huwa nieqes għal organizzazzjoni waħda jew aktar.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Żewġ mumenti tal-kejl huma meħtieġa għal paragun. Issa nstab kejl wieħed.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progress meta mqabbel ma \'mument ta\' kejl preċedenti.',
   'Waar staan de OpenKAT-rapportages?': 'Fejn huma r-rapporti tal-OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'X\'inbidel f\'organizzazzjoni waħda?',
@@ -2911,7 +2788,6 @@ const _dutchSourceAddMt = <String, String>{
   'bruikbaar': 'użabbli',
   'metingen': 'kejl',
   'organisaties': 'organizzazzjonijiet',
-  'organisaties geselecteerd': 'organizzazzjonijiet magħżula',
   'rapportages gebruikt': 'rapporti użati',
   'systemen': 'sistemi',
   'Nog geen specificatielimiet': 'Għad m\'hemmx limitu ta\' speċifikazzjoni',
@@ -3055,7 +2931,6 @@ const _dutchSourceAddMt = <String, String>{
       'jinsab fuq diaposittiva siġra imma ma jintużax f\'post ieħor — qabbdu ma\' matriċi, fluss jew diaposittiva oħra.',
   'Nieuw verbeteringsproject': 'Proġett ġdid ta\' titjib',
   'Kader': 'Qafas',
-  'Projecttitel': 'Titlu tal-proġett',
   'Primaire Y-metriek (Y-01)': 'Metrika Y primarja (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Pereżempju: ħin ta\' order intake f\'jiem tax-xogħol',
@@ -3110,10 +2985,6 @@ const _dutchSourceAddMt = <String, String>{
   'Bron niet toegestaan': 'Sors mhux permess',
   'Deze URL is door de beveiliging geweigerd.':
       'Din l-URL ġiet miċħuda mis-sigurtà.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Iddaħħal materjal minn sistemi oħra. Żewġ sorsi: il-preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) isiru deck editabbli, u r-rapporti OpenKAT (folder bl-JSON) isiru ħarsa ġenerali waħda għall-maniġment. Fejn jinsab il-folder OpenKAT jiġi ssettjat taħt Integrazzjonijiet.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Iddaħħal preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) bħala deck editabbli. Il-qari tal-folders tar-rapporti OpenKAT huwa disponibbli biss fil-verżjoni desktop.',
   'Alinea': 'Paragrafu',
   'Audio "{bestand}"': 'Awdjo "{bestand}"',
   'Deck opbouwen…': 'Qed tinbena l-preżentazzjoni…',
@@ -3235,8 +3106,6 @@ const _dutchSourceAddMt = <String, String>{
       'L-indiċi tal-lista ta\' kontroll: għal kull test l-id stabbli, it-titlu kanoniku u l-kategorija. Il-kontenut tal-gwida nnifisha mhuwiex inkluż.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'L-indiċi tat-testijiet ta\' v2.0.0: għal kull test l-id stabbli, it-titlu kanoniku, il-kategorija MASVS u d-dgħufija MASWE. It-testijiet v1 irtirati u l-placeholders mhumiex inklużi; lanqas il-kontenut tal-gwida.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Il-lista tad-dgħufijiet (117): id, titlu, kategorija MASVS, pjattaforma u r-rabta CWE. Tliet kwarti għadhom mhux miktuba fis-sors; dawk huma inklużi, immarkati. Id-dgħufijiet irtirati le.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Il-lista sħiħa (id, isem, deskrizzjoni) flimkien ma\' qalba magħżula minna bin-noti tagħna għar-rimedju.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3284,35 +3153,17 @@ const _dutchSourceAddMt = <String, String>{
       'Kull fajl jiġi kkonvertit separatament u jinħażen bħala preżentazzjoni għalih fil-folder ta\' destinazzjoni. Jekk wieħed ifalli, il-kju sempliċement ikompli.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'L-importazzjoni ta\' diversi preżentazzjonijiet f\'daqqa tiktibhom bħala fajls f\'folder; fil-verżjoni tal-browser dan mhuwiex possibbli.',
-  'Nu importeren': 'Importa issa',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Il-ħarsa ġenerali hija lesta f’tab ġdid.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Jaqra folder b\'rapporti ta\' OpenKAT (JSON) u jibni minnu ħarsa ġenerali waħda għall-maniġment: sistemi, sejbiet skont il-gravità, il-punti li ilhom l-aktar miftuħa u x-xejra tul kejliet suċċessivi. L-istess azzjoni fuq preżentazzjoni OpenKAT eżistenti taġġornaha u tħalli l-islajds tiegħek stess f\'posthom.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'L-importazzjoni taqra biss; xejn f\'dan il-folder ma jinbidel jew jintbagħat. Fajls li ma jirriżultawx rapporti ta\' OpenKAT jinqabżu u jissemmew fir-rapport tal-importazzjoni.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Indika l-folder fejn jinsabu r-rapporti OpenKAT tiegħek (JSON). L-importazzjoni taqra dak il-folder u tibni minnu ħarsa ġenerali waħda għall-maniġment; jekk il-folder ikun issettjat hawn, ma jkollokx għalfejn tagħżlu kull darba.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'L-importazzjoni ta\' OpenKAT taqra folder mid-diska u hija disponibbli biss fil-verżjoni desktop.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Għadu ma ġiex indikat folder tar-rapporti, għalhekk l-importazzjoni titolbu kull darba.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Diġà hemm folder tar-rapporti mħaddem, għalhekk il-punt tad-dħul jibqa\' aċċessibbli u preżentazzjoni OpenKAT eżistenti tista\' tibqa\' tiġi aġġornata.',
   'Integraties': 'Integrazzjonijiet',
-  'Naar Integraties': 'Mur għall-Integrazzjonijiet',
   'Map kiezen…': 'Agħżel folder…',
   'Map wissen': 'Neħħi l-folder',
-  'OpenKAT-rapportages importeren…': 'Importa rapporti ta\' OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Agħżel folder b\'rapporti ta\' OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.':
-      'Ir-rapporti ta\' OpenKAT ġew importati.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Id-deck ta\' OpenKAT ġie aġġornat; is-slides manwali nżammu.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Ma nstab l-ebda rapport ta\' OpenKAT f\'dan il-folder.',
-  'OpenKAT-import mislukt.': 'L-importazzjoni minn OpenKAT falliet.',
   'rapportages': 'rapporti',
   'overgeslagen': 'maqbużin',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3372,8 +3223,6 @@ const _dutchSourceAddMt = <String, String>{
   'Label op de primaire knop': 'It-tikketta fuq il-buttuna primarja',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Sejbiet li rrevedejt u ħallejt kif inhuma. Dawn ma jiġux irrapportati aktar, iżda l-iskennjar xorta jsibhom u ma jgħoddux bħala solvuti. Mess biex terġa\' ddaħħal waħda.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Tqegħid fil-ġenb ta\' sejba dwar il-privatezza (disinn)',
   'Deze is beoordeeld en mag blijven': 'Rivedut, dan jista\' jibqa\'',
   'Mogelijk gemaakt door': 'Sar possibbli minn',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3385,10 +3234,8 @@ const _dutchSourceAddMt = <String, String>{
   'Technische melding:': 'Messaġġ tekniku:',
   'presentaties': 'prezentazzjonijiet',
   '/Presentaties': '/Preżentazzjonijiet',
-  'Rapportagedistributie (ontwerp)': 'Distribuzzjoni tar-rapporti (disinn)',
   'De export is mislukt.': 'L-esportazzjoni falliet.',
   'Presenteer vanaf hier': 'Ippreżenta minn hawn',
-  'Teams-gastclient (ontwerp)': 'Klijent mistieden ta\' Teams (disinn)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kemm wiesa\' jista\' jinqasam dan il-materjal?',
   'Wat betekenen deze niveaus?': 'Xi jfissru dawn il-livelli?',
@@ -3505,8 +3352,6 @@ const _dutchSourceAddMt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Preżentazzjonijiet li jibqgħu fajls Markdown sempliċi: jinqraw, jitfittxew u jinfetħu bi kwalunkwe editur.',
   'sjablonen om mee te beginnen, of leeg': 'mudelli biex tibda, jew vojta',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'It-tħassir huwa mixgħul: id-data misjuba tiġi mgħottija bl-iswed u l-immaġni, il-video u l-awdjo kollha ta\' din is-slide ma jmorrux fuq l-iskrin jew fl-esportazzjoni. Il-fajl markdown tiegħek iżomm kollox.',
   'Mijn tekst': 'It-test tiegħi',
   'Wat zij zien': 'Dak li jaraw',
   'Presentatiegegevens': 'Data tal-preżentazzjoni',
@@ -3732,7 +3577,6 @@ const _dutchSourceAddMt = <String, String>{
   'Opslaan naar…': 'Issejvja fi…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'L-ewwel issettja konnessjoni f\'Issettjar → Ħażna.',
-  'Beginnen met:': 'Ibda b:',
   'Verlopen datums markeren': 'Immarka d-dati skaduti',
   'Datums gemarkeerd': 'Dati mmarkati',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3758,28 +3602,15 @@ const _dutchSourceAddMt = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Il-wiċċ tal-attakk skont it-tip ta\' oġġett: kemm hemm, kemm jeħtieġu xogħol, x\'inhu ġdid u x\'ma huwiex ta\' ħadd. Din tal-aħħar ġeneralment tkun il-konversazzjoni.',
   'Acties en besluiten': 'Azzjonijiet u deċiżjonijiet',
-  'Actie toevoegen': 'Żid azzjoni',
-  'Actie verwijderen': 'Neħħi l-azzjoni',
   'Actie': 'Azzjoni',
   'Deadline': 'Skadenza',
-  'Op de lijst sinds': 'Fil-lista minn',
   'Stand': 'Status',
-  'Wat vraagt u': 'X\'qed titlob',
   'geen datum': 'bla data',
-  'Ter informatie': 'Għall-informazzjoni',
   'Besluit gevraagd': 'Deċiżjoni meħtieġa',
   'Escalatie': 'Eskalazzjoni',
   'Open': 'Miftuħ',
   'Loopt': 'Għaddej',
   'Afgerond': 'Lest',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Deċiżjoni jew eskalazzjoni biss tingħata tikketta fuq is-slide; "tard" joħroġ mill-iskadenza u ma tissettjahx int.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Dati bħala ssss-xx-jj. Kull forma oħra tiġi rrifjutata minflok maħsuba: 05-08-2026 huma żewġ ġranet differenti.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Slide tal-azzjonijiet iġġorr mhux aktar minn tmien linji; wara dan is-sala tgħaddi malajr minflok tiddeċiedi.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'X\'għandu jiġri, min jagħmlu u sa meta. Indika f\'kull linja jekk hux għall-informazzjoni jew jekk qed titlob deċiżjoni — dak li tfittex is-sala.',
   'Scorecard': 'Karta tal-punteġġ',
   'Cijfer toevoegen': 'Żid ċifra',
   'Cijfer verwijderen': 'Neħħi ċ-ċifra',
@@ -3867,8 +3698,6 @@ const _dutchSourceAddMt = <String, String>{
       'It-token huwa validu, imma m\'huwiex permess jagħmel dan — agħtih aktar drittijiet fuq ir-repożitorju.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Illogjat, imma bla aċċess — il-password mhijiex il-problema. Itlob drittijiet fuq din il-folder.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Dan jidher bħal URL DAV sħiħ. Bi Nextcloud, OciDeck jidderiva dak il-mogħdija waħdu — hawn jappartjeni s-server biss.',
   'Overnemen': 'Applika',
@@ -3911,8 +3740,6 @@ const _dutchSourceAddMt = <String, String>{
   'kenteken': 'numru tar-reġistrazzjoni',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Għal-lingwa ta\' din il-preżentazzjoni ma hemmx lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali. Mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) jaħdmu; kliem bħal "dijanjosi" jew "suspettat" ma jingħarfux.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Il-lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali hija rqiqa ħafna għal-lingwa ta\' din il-preżentazzjoni. Toqgħodx tistenna li kliem bħal "dijanjosi" jew "suspettat" jinstabu.',
   'Landpakketten voor identificatienummers':
       'Pakketti tal-pajjiżi għan-numri ta\' identifikazzjoni',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3942,8 +3769,6 @@ const _dutchSourceAddMt = <String, String>{
       'L-isem tas-server ma jeżistix, jew ma jistax jinstab. Iċċekkja l-URL tas-server għal żball tal-ittajpjar.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Dan is-server għandu indirizz privat jew tal-LAN. Immarkah bħala intern fdat taħt Settings → Ħażna.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Iċ-ċertifikat ta\' dan is-server mhuwiex fdat. Ċertifikat iffirmat minnu nnifsu ma jaħdimx; uża wieħed minn emittent rikonoxxut.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Is-server jidderieġi lejn indirizz ieħor. Daħħal dak l-indirizz direttament — ma nsegwux ridirezzjonijiet, għax jistgħu jevitaw il-kontroll tas-sigurtà.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3979,8 +3804,6 @@ const _dutchSourceAddMt = <String, String>{
   'Opslaan naar S3': 'Issejvja f’S3',
   'Opgeslagen in S3:': 'Issejvjat f’S3:',
   'Hier staat niets': 'M’hawn xejn hawn',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Ma setax jitgħabba l-kontenut. Iċċekkja l-konnessjoni u s-settings.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Il-punt tat-tmiem ma jistax jintlaħaq — iċċekkja l-konnessjoni u l-punt tat-tmiem.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3989,8 +3812,6 @@ const _dutchSourceAddMt = <String, String>{
       'Il-punt tat-tmiem ta żball. Erġa’ pprova aktar tard.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Dan il-punt tat-tmiem ma jistax jikteb b’mod kondizzjonali, allura x-xogħol tiegħek mhux protett minn ta’ ħaddieħor. Issejvja b’isem ġdid jekk hemm ħaddieħor jaħdem fuq din il-preżentazzjoni.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'L-ebda barmil S3 issettjat. Issettja wieħed f’Settings → Ħażna.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'L-ewwel issettja barmil S3 f’Settings → Ħażna.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4036,10 +3857,6 @@ const _dutchSourceAddMt = <String, String>{
       'Din l-immaġni turi mill-inqas {count} uċuħ rikonoxxibbli.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Din l-immaġni ma setgħetx tiġi ċċekkjata għal uċuħ. Il-format mhuwiex appoġġjat (per eżempju HEIC). Dan ma jfissirx li m\'hemm ħadd fiha — ifisser li ħadd ma ħares.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Din l-immaġni turi wiċċ rikonoxxibbli.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Din l-immaġni turi {count} uċuħ rikonoxxibbli.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Immaġni li fiha xi ħadd huwa rikonoxxibbli hija data personali, anke mingħajr isem.',
   'herkenbaar gezicht op een afbeelding': 'wiċċ rikonoxxibbli f\'immaġni',
@@ -4056,8 +3873,6 @@ const _dutchSourceAddMt = <String, String>{
   'Organisatie': 'Organizzazzjoni',
   'Welke verbinding?': 'Liema konnessjoni?',
   'Bestandsverbindingen': 'Konnessjonijiet tal-fajls',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Il-postijiet fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek — folders fuq dan il-kompjuter, servers WebDAV u repożitorji git flimkien. Kaxkarhom fl-ordni li trid: ta\' fuq ta\' kull tip jgħodd bħala l-istandard.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Repożitorju git; kull verżjoni salvata tinżamm.',
   'Een map op de schijf van deze computer.':
@@ -4082,15 +3897,7 @@ const _dutchSourceAddMt = <String, String>{
   'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
   'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'L-ewwel issettja server WebDAV f\'Settings → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Agħżel immaġni fuq WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'L-ebda server WebDAV issettjat. Issettja wieħed f\'Settings → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → WebDAV.',
   'Servertype': 'Tip ta\' server',
   'Nextcloud of ownCloud': 'Nextcloud jew ownCloud',
   'Andere WebDAV-server': 'Server WebDAV ieħor',
@@ -4112,24 +3919,11 @@ const _dutchSourceAddMt = <String, String>{
   'Haal volle pagina uit de reeks': 'Neħħi l-paġna mimlija mis-sensiela',
   'Opslag': 'Ħażna',
   'Opslagwijzen': 'Modi ta\' ħażna',
-  'Deze computer': 'Dan il-kompjuter',
   'Ingesteld': 'Ikkonfigurat',
   'Niet ingesteld': 'Mhux ikkonfigurat',
-  'Nog geen bibliotheek ingesteld':
-      'Għadha ma ġiet stabbilita l-ebda librerija',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'It-toroq li bihom tista\' tiftaħ u tissejvja preżentazzjonijiet. Ikklikkja modu biex tikkonfigurah.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Preżentazzjonijiet fil-folders ta\' hawn fuq, fuq id-diska ta\' dan il-kompjuter.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Iftaħ u ssejvja preżentazzjonijiet f\'folder fuq in-Nextcloud tiegħek.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Iftaħ preżentazzjonijiet minn repożitorju git; kull verżjoni ssejvjata tinżamm.',
-  'Nog te verifiëren': 'Għad irid jiġi verifikat',
   'MASWE-zwakheid kiezen': 'Agħżel dgħufija MASWE',
   'Zoek op naam, id of categorie': 'Fittex bl-isem, l-id jew il-kategorija',
   'Geen zwakheid gevonden': 'Ma nstabet l-ebda dgħufija',
-  'uitleg nog niet geschreven': 'l-ispjegazzjoni għadha ma nkitbitx',
   'Getalnotatie herkennen': 'Agħraf il-format tan-numri',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Dan il-fajl fih numri li l-virgola tagħhom tista\' tinqara b\'żewġ modi:',
@@ -4248,12 +4042,10 @@ const _dutchSourceAddMt = <String, String>{
   'Veelgestelde vragen': 'Mistoqsijiet frekwenti',
   'Probleemoplossing': 'Soluzzjoni tal-problemi',
   'Begrippenlijst': 'Glossarju',
-  'API-documentatie': 'Dokumentazzjoni tal-API',
   'Prestaties': 'Prestazzjoni',
   'Beveiligingsontwerp': 'Disinn tas-sigurtà',
   'Hosting en uitrol': 'Hosting u tqassim',
   'Bijdragen': 'Kontribuzzjoni',
-  'Ontwikkelomgeving': 'Ambjent tal-iżvilupp',
   'Migratiegids': 'Gwida għall-migrazzjoni',
   'Versies…': 'Verżjonijiet…',
   'Versies:': 'Verżjonijiet:',
@@ -4294,8 +4086,6 @@ const _dutchSourceAddMt = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Il-branch iċċaqlaq; erġa\' għabbi d-deck u ħażen mill-ġdid.',
   'Bijgewerkt met OciDeck': 'Aġġornat b\'OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'L-ewwel issettja repożitorju Git taħt Issettjar → Repożitorju Git.',
   'Git-repository': 'Repożitorju Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Iftaħ preżentazzjonijiet minn repożitorju Git. Kull verżjoni salvata tinżamm. It-token jinħażen ikkriptat fiċ-ċavetta, mhux mal-issettjar l-ieħor.',
@@ -4311,7 +4101,6 @@ const _dutchSourceAddMt = <String, String>{
       'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. Id-dejta ta\' referenza tinsab fl-app innifisha, għalhekk il-modulu jaħdem mill-ewwel u kompletament offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; jibqgħu moħbija sakemm ma tattivahomx.',
-  'Procesverbetering (ontwerp)': 'Titjib tal-proċessi (disinn)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dan il-proġett huwa prodott sekondarju tal-Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Esporta l-profil tal-istil',
@@ -4455,7 +4244,6 @@ const _dutchSourceAddMt = <String, String>{
   'genetisch gegeven': 'data ġenetika',
   'parketnummer': 'numru tal-kawża tal-prosekuzzjoni',
   'nationaal identificatienummer': 'numru ta\' identifikazzjoni nazzjonali',
-  'OciWacht (ontwerp)': 'OciWacht (disinn)',
   'Mogelijk geheim': 'Sigriet possibbli',
   'sleutel of token': 'ċavetta jew token',
   'private sleutel': 'ċavetta privata',
@@ -4488,7 +4276,6 @@ const _dutchSourceAddMt = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Poġġi l-lista sħiħa tas-CVE fuq dan l-apparat, biex it-tfittxija ssir offline u t-terminu ta\' tfittxija tiegħek ma jmur imkien. Id-database tiġi minn CVE List V5 (il-programm uffiċjali tas-CVE, permezz ta\' GitHub).',
   'Wat er lokaal beschikbaar is': 'X\'inhu disponibbli lokalment',
-  'Gegevenspakket': 'Pakkett tad-data',
   'Nu bijwerken': 'Aġġorna issa',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data disponibbli lokalment — it-tfittxija ssir fuq dan l-apparat; xejn ma joħroġ.',
@@ -4507,7 +4294,6 @@ const _dutchSourceAddMt = <String, String>{
       'Aċċetta: id-data tappartjeni hawn u l-avviż jisparixxi. Aċċetta + wissi: min jirċievi jara badge li s-slide fiha data personali. Ħalli barra: id-data misjuba ssir illeġġibbli fuq l-iskrin u fl-esportazzjoni — il-fajl Markdown tiegħek iżomm it-test oriġinali.',
   'Alleen melden': 'Irrapporta biss',
   'PERSOONSGEGEVENS': 'DATA PERSONALI',
-  'Persoonsgegevens op deze slide': 'Data personali f\'din is-slide',
   'Volg de presentatie': 'Segwi l-preżentazzjoni',
   'Weglaten uit tonen en exporteren': 'Ħalli barra mill-wiri u l-esportazzjoni',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4630,8 +4416,6 @@ const _dutchSourceAddMt = <String, String>{
   'Bewerk deze slide': 'Editja din is-slide',
   'Bewijs verwijderen': 'Neħħi l-evidenza',
   '(nog leeg)': '(għadu vojt)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'L-ewwel daħħal ID tas-sejba biex tehmeż evidenza.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Żid screenshots jew vidjows bħala evidenza. Kull biċċa evidenza ssir slide għaliha eżatt wara s-sejba u tiddaħħal fl-esportazzjoni.',
   'Uitvoering testen conform standaard': 'Ittestjar skont l-istandard',

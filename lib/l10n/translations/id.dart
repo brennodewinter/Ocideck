@@ -790,8 +790,6 @@ const _dutchSourceId = {
   'Selectie opheffen': 'Hapus pilihan',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Saya menerima lisensi EUPL 1.2 dan telah membaca data apa yang disimpan OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Pilihan Anda menjadi bahasa default aplikasi.',
   'Lees de volledige licentie': 'Baca lisensi lengkap',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck adalah perangkat lunak bebas di bawah lisensi EUPL 1.2. Sebelum Anda mulai, kami meminta Anda untuk menerima lisensi tersebut. Di bawah ini Anda juga dapat membaca data apa yang disimpan OciDeck di perangkat ini dan kapan sesuatu meninggalkan perangkat Anda.',
@@ -817,9 +815,6 @@ const _dutchSourceId = {
   'Ongeldige server-URL': 'URL server tidak valid',
   'Het antwoord van de server was te groot': 'Respons server terlalu besar',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Sumber Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Buka dan simpan presentasi di folder pada Nextcloud Anda. Kata sandi disimpan terenkripsi di keychain, tidak bersama pengaturan lainnya.',
   'Server-URL': 'URL server',
   'Gebruikersnaam': 'Nama pengguna',
   'App-wachtwoord': 'Kata sandi aplikasi',
@@ -833,21 +828,12 @@ const _dutchSourceId = {
   'Verbinding gelukt': 'Koneksi berhasil',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Perubahan disimpan saat Anda mengeklik Simpan.',
-  'Afbeelding kiezen op Nextcloud': 'Pilih gambar di Nextcloud',
-  'Openen vanaf Nextcloud': 'Buka dari Nextcloud',
   'Vernieuwen': 'Segarkan',
   'Deze map is leeg': 'Folder ini kosong',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Tidak ada server Nextcloud yang dikonfigurasi. Siapkan satu di Pengaturan → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Tidak dapat memuat folder. Periksa koneksi dan pengaturan Anda.',
   'Kon dit bestand niet openen.': 'Tidak dapat membuka berkas ini.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Ini bukan presentasi Marp/OciDeck.',
   'Downloaden mislukt:': 'Unduhan gagal:',
-  'Opgeslagen op Nextcloud:': 'Disimpan ke Nextcloud:',
   'Opslaan mislukt:': 'Penyimpanan gagal:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Siapkan dulu server Nextcloud di Pengaturan → Nextcloud.',
   'Opslaan naar Nextcloud': 'Simpan ke Nextcloud',
   'Doelpad (zonder extensie)': 'Jalur tujuan (tanpa ekstensi)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -859,10 +845,6 @@ const _dutchSourceId = {
       'Tampilkan ikhtisar waktu setelah selesai',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Waktu per slide selalu diukur; ini hanya mengontrol apakah ikhtisar muncul setelah presentasi ini.',
-  'Oefenoverzicht tonen na afloop':
-      'Tampilkan ringkasan latihan setelah selesai',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Setelah presentasi, tampilkan ikhtisar waktu yang dihabiskan per slide. Waktu selalu diukur; ini hanya mengontrol apakah layar muncul.',
   'Onveilige presentatie geblokkeerd': 'Presentasi tidak aman diblokir',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Presentasi ini tidak dibuka. Berkas berisi konten yang dapat menjalankan kode, dan presentasi seharusnya hanya berisi data — tidak ada yang dapat dieksekusi.',
@@ -944,7 +926,6 @@ const _dutchSourceId = {
   'Online': 'Daring',
   'Lokaal bestand': 'Berkas lokal',
   'Geen video': 'Tidak ada video',
-  'Vraag (meerkeuze)': 'Pertanyaan (pilihan ganda)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Teks judul memiliki kontras yang terlalu rendah dengan gambar latar',
   'Herstel': 'Perbaiki',
@@ -959,8 +940,6 @@ const _dutchSourceId = {
   'Huidig punt weghalen': 'Hapus titik saat ini',
   'Stap voor stap': 'Langkah demi langkah',
   'Geen animatie': 'Tanpa animasi',
-  'Animatiesnelheid': 'Kecepatan animasi',
-  'Langzaam': 'Lambat',
   'Snel': 'Cepat',
   'Gebeurtenissen': 'Peristiwa',
   'Gebeurtenis toevoegen': 'Tambah peristiwa',
@@ -973,8 +952,6 @@ const _dutchSourceId = {
   'Vraag': 'Pertanyaan',
   'Wat wil je vragen?': 'Apa yang ingin Anda tanyakan?',
   'Antwoorden': 'Jawaban',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Tandai jawaban yang benar. Maksimal delapan jawaban; saat mempresentasikan, satu jawaban benar dan sisanya salah ditampilkan secara acak.',
   'Antwoord': 'Jawaban',
   'Antwoord toevoegen': 'Tambah jawaban',
   'Goed antwoord': 'Jawaban benar',
@@ -1007,8 +984,6 @@ const _dutchSourceId = {
   'Stelling': 'Pernyataan',
   'Formuleer een stelling die juist of onjuist is':
       'Rumuskan pernyataan yang benar atau salah',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Tandai semua jawaban benar. Saat mempresentasikan, sekumpulan acak ditampilkan dengan setidaknya satu benar dan satu salah.',
   'Juist': 'Benar',
   'Onjuist': 'Salah',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1029,7 +1004,6 @@ const _dutchSourceId = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Warna status meter cockpit. Buat varian bernama; skema yang dipilih berlaku untuk semua slide cockpit.',
   'Standaard': 'Default',
-  'Standaardkleuren gebruiken': 'Gunakan warna default',
   'Kleurschema verwijderen': 'Hapus skema warna',
   'Schemanaam': 'Nama skema',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1107,7 +1081,6 @@ const _dutchSourceId = {
   'Logo en footer': 'Logo dan footer',
   'Pagina': 'Halaman',
   'Presentatiestijl': 'Gaya presentasi',
-  'Presentatiestijl: ': 'Gaya presentasi: ',
   'Tekst...': 'Teks...',
   'Teksteditor': 'Editor teks',
   'Volgende pagina': 'Halaman berikutnya',
@@ -1120,8 +1093,6 @@ const _dutchSourceId = {
   'Doeltijd': 'Waktu target',
   'Doeltijd (aftellen)': 'Waktu target (hitung mundur)',
   'Geen aftelling': 'Tanpa hitung mundur',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Waktu target default untuk hitung mundur presenter. Sesuaikan secara halus saat mempresentasikan dengan tombol K.',
   'uit': 'mati',
   'Doeltijd / aftellen (K)': 'Target / hitung mundur (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Atur target / hitung mundur (MMSS)',
@@ -1192,14 +1163,8 @@ const _dutchSourceId = {
   'Cirkel': 'Lingkaran',
   'Spider': 'Spider',
   'CSV importeren': 'Impor CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: baris pertama = nama seri, kolom pertama = label)',
   'Gekoppeld aan': 'Tertaut ke',
   'Ontkoppelen': 'Putuskan tautan',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Simpan data dalam slide, atau simpan sebagai berkas CSV terpisah di samping presentasi?',
-  'In de slide': 'Dalam slide',
-  'Als CSV-bestand': 'Sebagai berkas CSV',
   'Geen grafiekgegevens': 'Tidak ada data bagan',
   'Label': 'Label',
   'Rij': 'Baris',
@@ -1229,7 +1194,6 @@ const _dutchSourceId = {
   'Eigen kleur (hex)': 'Warna kustom (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Misalnya #33FF33 untuk layar hijau CRT.',
-  'Onderdeel van stijlprofiel ': 'Bagian dari profil gaya ',
   'Broncode lettertype': 'Font kode',
   'Kop (optioneel)': 'Judul (opsional)',
   'Subkop (optioneel)': 'Subjudul (opsional)',
@@ -1267,16 +1231,7 @@ const _dutchSourceId = {
   'Zet het filter uit om alles weer te zien.':
       'Nonaktifkan filter untuk melihat semuanya lagi.',
   'Welkom bij OciDeck': 'Selamat datang di OciDeck',
-  'Privacy en gebruik': 'Privasi dan penggunaan',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck adalah aplikasi desktop lokal. Presentasi dan data Anda disimpan hanya di komputer Anda.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Aplikasi ini tidak mengumpulkan data pribadi, statistik, maupun data penggunaan. Privasi Anda adalah prioritas kami.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Semua data yang Anda masukkan di OciDeck tetap berada di sistem lokal Anda dan tidak dikirim ke server eksternal.',
   'Licentie (EUPL 1.2)': 'Lisensi (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Dengan mengeklik "Setuju", Anda menerima ketentuan ini dan menyetujui penggunaan OciDeck.',
   'Volledige licentie online': 'Lisensi lengkap daring',
   'Akkoord gaan': 'Setuju',
   'Privacy': 'Privasi',
@@ -1365,8 +1320,6 @@ const _dutchSourceId = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Ekspor diblokir karena masalah kualitas serius.',
   'Alle meldingen': 'Semua masalah',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… dan lebih banyak masalah di panel kualitas.',
   'Classificatie-handhaving': 'Penegakan klasifikasi',
   'Vrijgaveplafond': 'Batas atas rilis',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1385,11 +1338,9 @@ const _dutchSourceId = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Tetapkan tingkat TLP — ekspor diblokir oleh kebijakan klasifikasi.',
   'Tabel bewerken': 'Edit tabel',
-  'Pijltjes · Tab · Esc': 'Tombol panah · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Edit tabel (pada slide tabel)',
   'Tabel bewerken (E)': 'Edit tabel (E)',
   'Tab wisselt cel · Esc sluit': 'Tab berpindah sel · Esc menutup',
-  'Pen · markeerstift · ⇧E': 'Pena · stabilo · ⇧E',
   'Gestapelde staaf': 'Batang bertumpuk',
   'Spreiding': 'Sebar',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn berpindah antar slide',
@@ -1432,10 +1383,6 @@ const _dutchSourceId = {
       'Kesalahan jaringan — periksa koneksi Anda dan coba lagi.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Terjadi kesalahan tak terduga. Lihat log untuk detailnya.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud belum diatur (dengan benar) — periksa detail server di Pengaturan → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server tidak terjangkau — periksa koneksi dan URL server.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1463,8 +1410,6 @@ const _dutchSourceId = {
   'Uit recente bestanden verwijderen': 'Hapus dari file terbaru',
   'OciDeck wordt gestart…': 'Memulai OciDeck…',
   'Herstelbestanden': 'File pemulihan',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'File pemulihan berisi seluruh isi presentasi Anda dalam teks biasa. Dibersihkan otomatis setelah 7 hari; di sini Anda dapat menghapusnya langsung.',
   'Herstelbestanden nu wissen': 'Hapus file pemulihan sekarang',
   'Er waren geen herstelbestanden.': 'Tidak ada file pemulihan.',
   'herstelbestand(en) gewist.': 'file pemulihan dihapus.',
@@ -1894,7 +1839,6 @@ const _dutchSourceAddId = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Kami membuat salinan di tab baru; berkas asli Anda tetap tidak berubah.',
   'Welk formaat?': 'Format apa?',
-  'dia\'s, gesplitst op kop.': 'slide, dibagi berdasarkan judul.',
   'document': 'dokumen',
   'volledig': 'lengkap',
   'Invoegen': 'Sisipkan',
@@ -2053,12 +1997,8 @@ const _dutchSourceAddId = <String, String>{
   'Alle integraties': 'Semua integrasi',
   'Alles inschakelen': 'Aktifkan semua',
   'Alles uitschakelen': 'Nonaktifkan semua',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Folder laporan sudah ditetapkan, sehingga koneksi tetap tersedia dan dek OpenKAT yang ada masih dapat diperbarui.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Koneksi dengan sistem lain. Setiap koneksi mati secara bawaan dan tetap tidak aktif sampai Anda mengaktifkannya.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Baca folder laporan OpenKAT sebagai satu ikhtisar manajemen.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Membawa masuk presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) sebagai deck yang dapat diedit. Koneksi dengan sistem lain, seperti OpenKAT, ada di Integrasi.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2223,7 +2163,6 @@ const _dutchSourceAddId = <String, String>{
   'Van toepassing': 'Berlaku',
   'Voortgang': 'Kemajuan',
   'Voortgang managementsysteem': 'Kemajuan sistem manajemen',
-  'Voortgangsoverzicht bijgewerkt': 'Ringkasan kemajuan diperbarui',
   'Welk deel?': 'Bagian mana?',
   'beheersmaatregelen geladen': 'kontrol dimuat',
   'geïmplementeerd': 'diterapkan',
@@ -2301,10 +2240,6 @@ const _dutchSourceAddId = <String, String>{
       'Ini sepertinya bukan kunci pemulihan yang valid.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda sebagai berkas .ocideck dan muat ulang halaman sebelum menambahkan gambar lagi.',
   'Afbeeldingsrechten': 'Hak gambar',
   'Afbeeldingsrechten controleren…': 'Periksa hak gambar…',
   'Afdoening': 'Hunian',
@@ -2355,8 +2290,6 @@ const _dutchSourceAddId = <String, String>{
   'Verifiëren': 'Verifikasi',
   'Deelnemers verifiëren': 'Verifikasi peserta',
   '(dit apparaat)': '(perangkat ini)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Bandingkan sidik jari setiap perangkat melalui saluran tepercaya — bacakan satu sama lain, atau kirim lewat jalur yang Anda percaya. Jika cocok, Anda bekerja dengan perangkat asli dan tidak ada yang menyelinap di antaranya. Jika berbeda, akhiri kolaborasi.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Ini bukan tautan undangan yang valid.',
@@ -2418,7 +2351,6 @@ const _dutchSourceAddId = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Berkolaborasi secara langsung pada presentasi melalui homeserver Matrix sebagai relai terenkripsi. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi. Masukkan homeserver dan token akses yang dibuat di tempat lain — OciDeck tidak pernah meminta kata sandi Anda. Token disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
   'wordt door de test ingevuld': 'diisi oleh pengujian',
-  'Versleuteld doorgeefluik (ontwerp)': 'Relai terenkripsi (desain)',
   'Meer documentatie op de repository':
       'Dokumentasi selengkapnya di repositori',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
@@ -2659,50 +2591,14 @@ const _dutchSourceAddId = <String, String>{
       'Data pengukuran mana yang hilang atau ketinggalan jaman?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Berdasarkan data apa laporan ini?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Tinjauan manajemen yang luas namun faktual dengan momen pengukuran yang dapat ditelusuri.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Memberi peringkat tanpa skor total dan menunjukkan pengukuran yang hilang secara terpisah.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Menampilkan jumlah tingkat keparahan, kontributor, dan pengukuran lanjutan berdasarkan momen.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Mengatur jenis temuan berdasarkan organisasi, sistem, dan pengamatan yang terkena dampak.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Menampilkan angka kritis/tinggi tanpa rancangan penimbangan apa pun.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Menampilkan pembilang, penyebut, dan hanya persentase yang dapat diandalkan.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Mengelompokkan rekomendasi literal dari OpenKAT tanpa prioritasnya sendiri.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Gambar terkini yang ditargetkan dari suatu organisasi dan tanggal pengukurannya.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Membandingkan dua momen pengukuran yang dipilih dalam satu organisasi.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Membedakan baru, baru dan tidak lagi diamati.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Hanya menggunakan tanggal observasi pertama yang dapat diandalkan.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Memberi peringkat pada sistem dengan penghitung tingkat keparahan terpisah.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Menampilkan nilai delta individual tanpa skor tertimbang.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Membandingkan pembilang dan penyebut dengan cakupan yang terbukti sebanding.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarisasi sistem, nama host, dan alamat IP yang terbukti sumbernya.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Memisahkan terpantau, tidak terpantau dan tidak diketahui.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Hanya menunjukkan mutasi pemantauan yang terbukti secara eksplisit.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Menunjukkan organisasi dan sistem di sekitar satu tautan CVE yang andal.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Memberi peringkat CVE dengan deduplikasi eksplisit.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Membedakan CVE baru, baru, dan tidak lagi diamati.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Menunjukkan pengukuran yang hilang, ketinggalan jaman, dan benar-benar digunakan.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Memperhitungkan tanggal-tanggal penting, file sumber, adaptor, dan hash sumber.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Belum tersedia: sumber tidak membuktikan status pemantauan seluruh aset.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2745,11 +2641,6 @@ const _dutchSourceAddId = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Laporan mana yang menjawab pertanyaan Anda?',
   'Meer rapportvragen': 'Pertanyaan laporan lainnya',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Sistem mana yang rentan terhadap CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisasi dan sistem rentan di sekitar satu kerentanan.',
-  'Organisaties met kwetsbare systemen': 'Organisasi dengan sistem rentan',
   'Kwetsbare systemen': 'Sistem rentan',
   'Kritiek/hoog': 'Kritis/tinggi',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2771,8 +2662,6 @@ const _dutchSourceAddId = <String, String>{
   'Bruikbaar': 'Dapat digunakan',
   'CVE zoeken': 'pencarian CVE',
   'Critical/high': 'Kritis/tinggi',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Kualitas data, pengukuran yang hilang, dan keusangan.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Laporan yang dipilih tidak berisi data yang cukup andal untuk bagian ini.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2801,10 +2690,6 @@ const _dutchSourceAddId = <String, String>{
       'Tidak ada tanggal pengukuran yang dapat digunakan',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Slide yang dihasilkan disegarkan. Slide dan salinan Anda sendiri disimpan.',
-  'Getroffen organisaties en systemen':
-      'Organisasi dan sistem yang terkena dampak',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organisasi dan sistem yang terkena dampak berada pada satu kerentanan.',
   'Getroffen systemen': 'Sistem yang terkena dampak',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Laporan tidak dapat dibuat. Pilihan Anda dipertahankan; periksa peringatannya dan coba lagi.',
@@ -2814,20 +2699,15 @@ const _dutchSourceAddId = <String, String>{
   'Keuzes wijzigen…': 'Ubah pilihan…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Pilih folder tempat OpenKAT meletakkan laporannya. OciDeck hanya membaca folder ini; tidak ada yang diubah atau dikirim.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Pilih pertanyaan yang harus dijawab oleh laporan. OciDeck menentukan struktur yang sesuai.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Pilih CVE yang ditemukan dalam laporan.',
   'Laatste bruikbare meting': 'Pengukuran terakhir yang dapat digunakan',
   'Live voorvertoning van de rapportopbouw':
       'Pratinjau langsung dari struktur laporan',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Manajemen dan pengendalian informasi tentang berbagai organisasi.',
   'Meer instellingen': 'Pengaturan lainnya',
   'Nederlands': 'Belanda',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Tidak semua organisasi yang dipilih memiliki pengukuran untuk periode ini.',
-  'Nieuwe en verdwenen bevindingen': 'Temuan baru dan hilang',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Belum tersedia: laporan ini tidak berisi nomor CVE yang dapat diandalkan.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2862,8 +2742,6 @@ const _dutchSourceAddId = <String, String>{
       'Pengukuran arus yang berguna tidak ada untuk satu atau lebih organisasi.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Dua momen pengukuran diperlukan untuk perbandingan. Satu pengukuran kini telah ditemukan.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Kemajuan dibandingkan momen pengukuran sebelumnya.',
   'Waar staan de OpenKAT-rapportages?': 'Di mana laporan OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'Apa yang berubah di satu organisasi?',
@@ -2877,7 +2755,6 @@ const _dutchSourceAddId = <String, String>{
   'bruikbaar': 'dapat digunakan',
   'metingen': 'pengukuran',
   'organisaties': 'organisasi',
-  'organisaties geselecteerd': 'organisasi yang dipilih',
   'rapportages gebruikt': 'laporan yang digunakan',
   'systemen': 'sistem',
   'Nog geen specificatielimiet': 'Belum ada batas spesifikasi',
@@ -3022,7 +2899,6 @@ const _dutchSourceAddId = <String, String>{
       'ada di slide pohon tetapi tidak dipakai di tempat lain — hubungkan ke matriks, aliran atau slide lain.',
   'Nieuw verbeteringsproject': 'Proyek peningkatan baru',
   'Kader': 'Kerangka',
-  'Projecttitel': 'Judul proyek',
   'Primaire Y-metriek (Y-01)': 'Metrik Y utama (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Misalnya: waktu tunggu order intake dalam hari kerja',
@@ -3078,10 +2954,6 @@ const _dutchSourceAddId = <String, String>{
   'Bron niet toegestaan': 'Sumber tidak diizinkan',
   'Deze URL is door de beveiliging geweigerd.':
       'URL ini ditolak oleh keamanan.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Membawa masuk materi dari sistem lain. Dua sumber: presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) menjadi deck yang dapat diedit, dan laporan OpenKAT (folder berisi JSON) menjadi satu ikhtisar manajemen. Lokasi folder OpenKAT diatur di Integrasi.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Membawa masuk presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) sebagai deck yang dapat diedit. Membaca folder laporan OpenKAT hanya tersedia di versi desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Membangun deck…',
@@ -3203,8 +3075,6 @@ const _dutchSourceAddId = <String, String>{
       'Indeks daftar periksa: id stabil, judul kanonik, dan kategori per pengujian. Isi panduan itu sendiri tidak disertakan.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Indeks pengujian v2.0.0: id stabil, judul kanonik, kategori MASVS, dan kelemahan MASWE per pengujian. Pengujian v1 yang ditarik dan placeholder tidak termasuk; begitu pula isi panduan.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Daftar kelemahan (117): id, judul, kategori MASVS, platform, dan tautan CWE. Tiga perempat belum ditulis lengkap di sumbernya; yang itu tetap disertakan, dengan penanda. Kelemahan yang ditarik tidak.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Daftar lengkap (id, nama, deskripsi) ditambah inti pilihan kami sendiri dengan catatan remediasi.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3250,33 +3120,16 @@ const _dutchSourceAddId = <String, String>{
       'Setiap berkas dikonversi secara terpisah dan disimpan sebagai presentasi tersendiri di folder tujuan. Jika satu gagal, antrean tetap berjalan.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Mengimpor beberapa presentasi sekaligus menulisnya sebagai berkas ke sebuah folder; versi peramban tidak dapat melakukannya.',
-  'Nu importeren': 'Impor sekarang',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Ikhtisar sudah siap di tab baru.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Membaca folder berisi laporan OpenKAT (JSON) dan menyusun satu ikhtisar manajemen darinya: sistem, temuan menurut tingkat keparahan, butir yang paling lama terbuka, dan tren pada pengukuran berturut-turut. Tindakan yang sama pada dek OpenKAT yang ada akan memperbaruinya dan membiarkan salindia Anda sendiri tetap ada.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Impor hanya membaca; tidak ada yang diubah atau dikirim dari folder ini. Berkas yang ternyata bukan laporan OpenKAT dilewati dan disebutkan dalam catatan impor.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Tunjukkan folder tempat laporan OpenKAT Anda (JSON) berada. Impor membaca folder itu dan menyusun satu ikhtisar manajemen darinya; jika folder disetel di sini, Anda tidak perlu memilihnya setiap kali.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Impor OpenKAT membaca folder dari disk dan hanya tersedia di versi desktop.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Belum ada folder laporan yang ditetapkan, sehingga impor menanyakannya setiap kali.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Folder laporan sudah ditetapkan, sehingga titik masuk tetap tersedia dan dek OpenKAT yang ada masih dapat diperbarui.',
   'Integraties': 'Integrasi',
-  'Naar Integraties': 'Ke Integrasi',
   'Map kiezen…': 'Pilih folder…',
   'Map wissen': 'Hapus folder',
-  'OpenKAT-rapportages importeren…': 'Impor laporan OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Pilih folder berisi laporan OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Laporan OpenKAT diimpor.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck OpenKAT diperbarui; slide manual tetap dipertahankan.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Tidak ada laporan OpenKAT ditemukan di folder ini.',
-  'OpenKAT-import mislukt.': 'Impor OpenKAT gagal.',
   'rapportages': 'laporan',
   'overgeslagen': 'dilewati',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3337,8 +3190,6 @@ const _dutchSourceAddId = <String, String>{
   'Label op de primaire knop': 'Label pada tombol utama',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Temuan yang sudah kamu tinjau dan kamu biarkan. Temuan ini tidak dilaporkan lagi, tetapi pemindaian tetap menemukannya dan tidak dihitung sebagai selesai. Ketuk untuk memulihkan salah satunya.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Mengesampingkan temuan privasi (rancangan)',
   'Deze is beoordeeld en mag blijven': 'Ditinjau, yang ini boleh tetap',
   'Mogelijk gemaakt door': 'Dimungkinkan oleh',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3350,10 +3201,8 @@ const _dutchSourceAddId = <String, String>{
   'Technische melding:': 'Pesan teknis:',
   'presentaties': 'presentasi',
   '/Presentaties': '/Presentasi',
-  'Rapportagedistributie (ontwerp)': 'Distribusi laporan (desain)',
   'De export is mislukt.': 'Ekspor gagal.',
   'Presenteer vanaf hier': 'Presentasikan dari sini',
-  'Teams-gastclient (ontwerp)': 'Klien tamu Teams (desain)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: seberapa luas materi ini boleh dibagikan?',
   'Wat betekenen deze niveaus?': 'Apa arti tingkatan ini?',
@@ -3469,8 +3318,6 @@ const _dutchSourceAddId = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentasi yang tetap berupa berkas Markdown biasa: dapat dibaca, dicari, dan dibuka dengan editor apa pun.',
   'sjablonen om mee te beginnen, of leeg': 'templat untuk memulai, atau kosong',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Penyembunyian aktif: data yang ditemukan dihitamkan dan semua gambar, video, dan audio pada slide ini tidak ikut ke layar atau ekspor. Berkas markdown Anda menyimpan semuanya.',
   'Mijn tekst': 'Teks saya',
   'Wat zij zien': 'Yang mereka lihat',
   'Presentatiegegevens': 'Data presentasi',
@@ -3692,7 +3539,6 @@ const _dutchSourceAddId = <String, String>{
   'Opslaan naar…': 'Simpan ke…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Siapkan koneksi terlebih dahulu di Pengaturan → Penyimpanan.',
-  'Beginnen met:': 'Mulai dengan:',
   'Verlopen datums markeren': 'Tandai tanggal yang lewat',
   'Datums gemarkeerd': 'Tanggal ditandai',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3718,28 +3564,15 @@ const _dutchSourceAddId = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Permukaan serangan per jenis objek: berapa banyak, berapa yang perlu dikerjakan, apa yang baru dan apa yang tidak dimiliki siapa pun. Yang terakhir biasanya jadi percakapannya.',
   'Acties en besluiten': 'Tindakan dan keputusan',
-  'Actie toevoegen': 'Tambah tindakan',
-  'Actie verwijderen': 'Hapus tindakan',
   'Actie': 'Tindakan',
   'Deadline': 'Tenggat',
-  'Op de lijst sinds': 'Dalam daftar sejak',
   'Stand': 'Status',
-  'Wat vraagt u': 'Apa yang Anda minta',
   'geen datum': 'tanpa tanggal',
-  'Ter informatie': 'Sebagai informasi',
   'Besluit gevraagd': 'Perlu keputusan',
   'Escalatie': 'Eskalasi',
   'Open': 'Terbuka',
   'Loopt': 'Berjalan',
   'Afgerond': 'Selesai',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Hanya keputusan atau eskalasi yang diberi label pada slide; "terlambat" mengikuti tenggat dan bukan Anda yang menetapkannya.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Tanggal sebagai tttt-bb-hh. Bentuk lain ditolak, bukan ditebak: 05-08-2026 adalah dua hari yang berbeda.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Slide tindakan memuat paling banyak delapan baris; lebih dari itu ruangan hanya melirik, bukan memutuskan.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Apa yang harus terjadi, siapa yang melakukannya dan kapan. Tentukan per baris apakah itu informasi atau Anda meminta keputusan — itulah yang dicari ruangan.',
   'Scorecard': 'Kartu skor',
   'Cijfer toevoegen': 'Tambah angka',
   'Cijfer verwijderen': 'Hapus angka',
@@ -3827,8 +3660,6 @@ const _dutchSourceAddId = <String, String>{
       'Token valid, tetapi tidak diizinkan melakukan ini — beri lebih banyak hak pada repositori.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Sudah masuk, tetapi tanpa akses — kata sandi bukan masalahnya. Mintalah hak atas folder ini.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Lisensi leksikon: apa yang masih perlu ditanyakan',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Ini tampak seperti URL DAV lengkap. Untuk Nextcloud, OciDeck menurunkan jalur itu sendiri — di sini hanya server yang perlu diisi.',
   'Overnemen': 'Terapkan',
@@ -3871,8 +3702,6 @@ const _dutchSourceAddId = <String, String>{
   'kenteken': 'nomor pelat kendaraan',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Tidak ada daftar kata kunci untuk kategori khusus data pribadi dalam bahasa dek ini. Pola dengan digit periksa (NIK, IBAN, paspor) tetap bekerja; kata seperti "diagnosis" atau "tersangka" tidak dikenali.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Daftar kata kunci untuk kategori khusus data pribadi sangat tipis untuk bahasa dek ini. Jangan mengandalkan kata seperti "diagnosis" atau "tersangka" akan ditemukan.',
   'Landpakketten voor identificatienummers':
       'Paket negara untuk nomor identifikasi',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3902,8 +3731,6 @@ const _dutchSourceAddId = <String, String>{
       'Nama server tidak ada, atau tidak dapat dicari. Periksa URL server dari salah ketik.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Server ini memiliki alamat privat atau LAN. Tandai sebagai internal tepercaya di Pengaturan → Penyimpanan.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Sertifikat server ini tidak tepercaya. Sertifikat yang ditandatangani sendiri tidak berfungsi; gunakan sertifikat dari penerbit yang diakui.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Server mengalihkan ke alamat lain. Masukkan alamat itu secara langsung — kami tidak mengikuti pengalihan, karena dapat melewati pemeriksaan keamanan.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3939,8 +3766,6 @@ const _dutchSourceAddId = <String, String>{
   'Opslaan naar S3': 'Simpan ke S3',
   'Opgeslagen in S3:': 'Disimpan ke S3:',
   'Hier staat niets': 'Tidak ada apa-apa di sini',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Tidak dapat memuat isi. Periksa koneksi dan pengaturan Anda.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Titik akhir tidak dapat dijangkau — periksa koneksi dan titik akhirnya.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3949,8 +3774,6 @@ const _dutchSourceAddId = <String, String>{
       'Titik akhir mengembalikan galat. Coba lagi nanti.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Titik akhir ini tidak bisa menulis bersyarat, jadi pekerjaanmu tidak terlindungi dari pekerjaan orang lain. Simpan dengan nama baru jika ada orang lain yang mengerjakan presentasi ini.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Belum ada bucket S3. Siapkan satu di Pengaturan → Penyimpanan.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Siapkan dulu bucket S3 di Pengaturan → Penyimpanan.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3997,10 +3820,6 @@ const _dutchSourceAddId = <String, String>{
       'Gambar ini menampilkan setidaknya {count} wajah yang dapat dikenali.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Gambar ini tidak dapat diperiksa untuk wajah. Formatnya tidak didukung (misalnya HEIC). Itu tidak berarti tidak ada orang di dalamnya — artinya belum diperiksa.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Gambar ini menampilkan wajah yang dapat dikenali.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Gambar ini menampilkan {count} wajah yang dapat dikenali.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Gambar yang memperlihatkan seseorang secara dapat dikenali adalah data pribadi, bahkan tanpa nama.',
   'herkenbaar gezicht op een afbeelding':
@@ -4017,8 +3836,6 @@ const _dutchSourceAddId = <String, String>{
   'Organisatie': 'Organisasi',
   'Welke verbinding?': 'Koneksi yang mana?',
   'Bestandsverbindingen': 'Koneksi berkas',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Tempat Anda menyimpan dan mencari presentasi — folder di komputer ini, server WebDAV, dan repositori git bercampur. Seret ke urutan yang Anda inginkan: yang teratas dari setiap jenis menjadi bawaan.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Repositori git; setiap versi yang disimpan tetap tersimpan.',
   'Een map op de schijf van deze computer.': 'Folder di diska komputer ini.',
@@ -4042,15 +3859,7 @@ const _dutchSourceAddId = <String, String>{
   'Openen vanaf WebDAV': 'Buka dari WebDAV',
   'Opslaan naar WebDAV': 'Simpan ke WebDAV',
   'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Siapkan dulu server WebDAV di Pengaturan → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Pilih gambar di WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Tidak ada server WebDAV yang dikonfigurasi. Siapkan satu di Pengaturan → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV belum diatur (dengan benar) — periksa detail server di Pengaturan → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → WebDAV.',
   'Servertype': 'Jenis server',
   'Nextcloud of ownCloud': 'Nextcloud atau ownCloud',
   'Andere WebDAV-server': 'Server WebDAV lainnya',
@@ -4072,23 +3881,11 @@ const _dutchSourceAddId = <String, String>{
   'Haal volle pagina uit de reeks': 'Keluarkan halaman penuh dari rangkaian',
   'Opslag': 'Penyimpanan',
   'Opslagwijzen': 'Metode penyimpanan',
-  'Deze computer': 'Komputer ini',
   'Ingesteld': 'Dikonfigurasi',
   'Niet ingesteld': 'Belum dikonfigurasi',
-  'Nog geen bibliotheek ingesteld': 'Belum ada pustaka yang disiapkan',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Jalur untuk membuka dan menyimpan presentasi. Klik salah satu metode untuk mengaturnya.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Presentasi dalam folder di atas, pada diska komputer ini.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Buka dan simpan presentasi dalam folder di Nextcloud Anda.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Buka presentasi dari repositori git; setiap versi yang disimpan tetap tersimpan.',
-  'Nog te verifiëren': 'Masih harus diverifikasi',
   'MASWE-zwakheid kiezen': 'Pilih kelemahan MASWE',
   'Zoek op naam, id of categorie': 'Cari berdasarkan nama, id, atau kategori',
   'Geen zwakheid gevonden': 'Tidak ada kelemahan ditemukan',
-  'uitleg nog niet geschreven': 'penjelasan belum ditulis',
   'Getalnotatie herkennen': 'Kenali format angka',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Berkas ini berisi angka yang komanya dapat dibaca dengan dua cara:',
@@ -4205,12 +4002,10 @@ const _dutchSourceAddId = <String, String>{
   'Veelgestelde vragen': 'Pertanyaan umum',
   'Probleemoplossing': 'Pemecahan masalah',
   'Begrippenlijst': 'Glosarium',
-  'API-documentatie': 'Dokumentasi API',
   'Prestaties': 'Kinerja',
   'Beveiligingsontwerp': 'Desain keamanan',
   'Hosting en uitrol': 'Hosting dan penerapan',
   'Bijdragen': 'Berkontribusi',
-  'Ontwikkelomgeving': 'Lingkungan pengembangan',
   'Migratiegids': 'Panduan migrasi',
   'Versies…': 'Versi…',
   'Versies:': 'Versi:',
@@ -4251,8 +4046,6 @@ const _dutchSourceAddId = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Branch telah berpindah; muat ulang dek dan simpan lagi.',
   'Bijgewerkt met OciDeck': 'Diperbarui dengan OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Siapkan repositori Git terlebih dahulu di Pengaturan → Repositori Git.',
   'Git-repository': 'Repositori Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Buka presentasi dari repositori Git. Setiap versi yang disimpan tetap tersimpan. Token disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
@@ -4268,7 +4061,6 @@ const _dutchSourceAddId = <String, String>{
       'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Data referensi ada di dalam aplikasi itu sendiri, jadi modul langsung bekerja dan sepenuhnya offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tetap tersembunyi sampai Anda mengaktifkannya.',
-  'Procesverbetering (ontwerp)': 'Peningkatan proses (desain)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Proyek ini merupakan produk sampingan dari Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Ekspor profil gaya',
@@ -4408,7 +4200,6 @@ const _dutchSourceAddId = <String, String>{
   'genetisch gegeven': 'data genetik',
   'parketnummer': 'nomor perkara kejaksaan',
   'nationaal identificatienummer': 'nomor identifikasi nasional',
-  'OciWacht (ontwerp)': 'OciWacht (desain)',
   'Mogelijk geheim': 'Kemungkinan rahasia',
   'sleutel of token': 'kunci atau token',
   'private sleutel': 'kunci privat',
@@ -4441,7 +4232,6 @@ const _dutchSourceAddId = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Tempatkan daftar CVE lengkap di perangkat ini, agar pencarian berlangsung offline dan kata kuncimu tidak pergi ke mana-mana. Basis data ini berasal dari CVE List V5 (program CVE resmi, melalui GitHub).',
   'Wat er lokaal beschikbaar is': 'Yang tersedia secara lokal',
-  'Gegevenspakket': 'Paket data',
   'Nu bijwerken': 'Perbarui sekarang',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data tersedia secara lokal — pencarian dilakukan di perangkat ini; tidak ada yang keluar.',
@@ -4460,7 +4250,6 @@ const _dutchSourceAddId = <String, String>{
       'Terima: datanya memang milik sini dan pemberitahuan hilang. Terima + peringatkan: penerima melihat lencana bahwa slide memuat data pribadi. Hilangkan: data yang ditemukan dibuat tak terbaca di layar dan di ekspor — berkas Markdown Anda tetap menyimpan teks aslinya.',
   'Alleen melden': 'Hanya laporkan',
   'PERSOONSGEGEVENS': 'DATA PRIBADI',
-  'Persoonsgegevens op deze slide': 'Data pribadi pada slide ini',
   'Volg de presentatie': 'Ikuti presentasi',
   'Weglaten uit tonen en exporteren': 'Hilangkan dari tampilan dan ekspor',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4581,8 +4370,6 @@ const _dutchSourceAddId = <String, String>{
   'Bewerk deze slide': 'Edit slide ini',
   'Bewijs verwijderen': 'Hapus bukti',
   '(nog leeg)': '(masih kosong)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Masukkan dulu ID temuan untuk melampirkan bukti.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Tambahkan tangkapan layar atau video sebagai bukti. Setiap bukti menjadi slide tersendiri tepat setelah temuan dan disertakan dalam ekspor.',
   'Uitvoering testen conform standaard': 'Pengujian sesuai standar',

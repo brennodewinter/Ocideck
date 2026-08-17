@@ -778,8 +778,6 @@ const _dutchSourceTlh = {
   'Selectie opheffen': 'wIv teq',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'EUPL 1.2 chaw\' vIlaj \'ej De\' polbogh OciDeck vIlaDpu\'.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'wIvlIj mojpu\' app Hol motlh.',
   'Lees de volledige licentie': 'chaw\' naQ yIlaD',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck ghaH EUPL 1.2 chaw\' bIngDaq tlhorghqut lolaltaHghach. bItaghpa\', chaw\' Dalaj net poQ. bIng, De\' polbogh OciDeck jan vamDaq je nuqDaq nItebHa\' Daq je DalaD.',
@@ -803,9 +801,6 @@ const _dutchSourceTlh = {
   'Ongeldige server-URL': 'Server-URL lI\'be\'',
   'Het antwoord van de server was te groot': 'tIn law\' Server jang',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud mung (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'NextcloudlIj ghomDaq cha\'navmey yIpoSmoH yIpol je. mu\'tlhegh polqutlu\' ghewmey velDaq, latlh DuHIvmeymeyDaq QIchbe\'.',
   'Server-URL': 'Server-URL',
   'Gebruikersnaam': 'lo\'wI\'pong',
   'App-wachtwoord': 'app mu\'tlhegh',
@@ -819,21 +814,12 @@ const _dutchSourceTlh = {
   'Verbinding gelukt': 'rar Qapla\'',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'pol yI\'uyDI\' choHmey polqutlu\'.',
-  'Afbeelding kiezen op Nextcloud': 'NextcloudDaq mIllogh yIwIv',
-  'Openen vanaf Nextcloud': 'Nextcloudvo\' poSmoH',
   'Vernieuwen': 'chu\'moH',
   'Deze map is leeg': 'chImmoH ghom vam',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nextcloud-Server DuHIvmoHbe\'lu\'. DuHIvmeymey → Nextcloud yIchenmoH.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'ghom lI\'be\'. rarlIj DuHIvmeymey je yInoH.',
   'Kon dit bestand niet openen.': 'De\' vam poSmoHlaHbe\'.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Marp/OciDeck cha\'nav ghaHbe\'.',
   'Downloaden mislukt:': 'pI\'ang Qaghpu\':',
-  'Opgeslagen op Nextcloud:': 'NextcloudDaq polpu\':',
   'Opslaan mislukt:': 'pol Qaghpu\':',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'wa\'DIch DuHIvmeymey → Nextcloud Nextcloud-Server yIchenmoH.',
   'Opslaan naar Nextcloud': 'NextcloudDaq pol',
   'Doelpad (zonder extensie)': 'Daq (velbe\' extension)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -844,9 +830,6 @@ const _dutchSourceTlh = {
   'Tijden-overzicht tonen na afloop': 'rInpa\' poHmey Hoch cha\'',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'reH juvlu\' slide poH; cha\'nav vam rInpu\'DI\' Hoch nargh\'a\' juvchugh neH.',
-  'Oefenoverzicht tonen na afloop': 'rInpa\' ghojmoH Hoch cha\'',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'cha\'nav rInpu\'DI\', slide poH lo\'lu\'bogh Hoch yIcha\'. reH poH juvlu\'; HaSta nargh\'a\' juvchugh neH.',
   'Onveilige presentatie geblokkeerd': 'Qobbogh cha\'nav botlu\'',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'cha\'nav vam poSmoHbe\'lu\'. ngoq vumnISbogh De\' ghaj De\', \'ej cha\'nav De\' neH ghaj — pagh vumbogh.',
@@ -927,7 +910,6 @@ const _dutchSourceTlh = {
   'Online': 'online',
   'Lokaal bestand': 'local De\'',
   'Geen video': 'video pagh',
-  'Vraag (meerkeuze)': 'ghel (wIv law\')',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'ghItlh per bing mIllogh pIm puS Doch',
   'Herstel': 'lorghmoH',
@@ -942,8 +924,6 @@ const _dutchSourceTlh = {
   'Huidig punt weghalen': 'DaH Daq teq',
   'Stap voor stap': 'vangtaH vangtaH',
   'Geen animatie': 'lolal pagh',
-  'Animatiesnelheid': 'lolal Do',
-  'Langzaam': 'QIt',
   'Snel': 'nom',
   'Gebeurtenissen': 'wanI\'mey',
   'Gebeurtenis toevoegen': 'wanI\' chel',
@@ -956,8 +936,6 @@ const _dutchSourceTlh = {
   'Vraag': 'ghel',
   'Wat wil je vragen?': 'nuq DaghelnISqu\'?',
   'Antwoorden': 'jangmey',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'jangmey lugh yIper. chorgh jang neH; jatlhtaHDI\' teblu\'be\'chugh wa\' lugh \'ej latlh Qagh cha\'lu\'.',
   'Antwoord': 'jang',
   'Antwoord toevoegen': 'jang chel',
   'Goed antwoord': 'jang lugh',
@@ -990,8 +968,6 @@ const _dutchSourceTlh = {
   'Stelling': '\'el',
   'Formuleer een stelling die juist of onjuist is':
       'lughbogh pagh Qaghbogh \'el yIper',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Hoch lughbogh jangmey yIper. jatlhtaHDI\' teblu\'be\' Segh cha\'lu\' puS wa\' lugh wa\' Qagh je.',
   'Juist': 'lugh',
   'Onjuist': 'Qagh',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1011,7 +987,6 @@ const _dutchSourceTlh = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Dujqoq juvwI\'mey Segh rItlhmey. pongbogh pImmey yIchenmoH; wIvlu\' Segh Hoch Dujqoq slidemeyvaD lo\'.',
   'Standaard': 'motlh',
-  'Standaardkleuren gebruiken': 'motlh rItlhmey lo\'',
   'Kleurschema verwijderen': 'rItlh pat teq',
   'Schemanaam': 'pat pong',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1088,7 +1063,6 @@ const _dutchSourceTlh = {
   'Logo en footer': 'logo \'ej bIng',
   'Pagina': 'nav',
   'Presentatiestijl': '\'echletHom Segh',
-  'Presentatiestijl: ': '\'echletHom Segh: ',
   'Tekst...': 'mu\'ghom...',
   'Teksteditor': 'mu\'ghom choHwI\'',
   'Volgende pagina': 'veb nav',
@@ -1101,8 +1075,6 @@ const _dutchSourceTlh = {
   'Doeltijd': 'ngoQ poH',
   'Doeltijd (aftellen)': 'ngoQ poH (mI\' Ha\')',
   'Geen aftelling': 'mI\' Ha\' pagh',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'presenter tera\' ngeD ngoQ poH motlh. bItamlI\'taHvIS K DaghajlaHqu\' vaj DapoQ.',
   'uit': 'chu\'Ha\'',
   'Doeltijd / aftellen (K)': 'ngoQ / mI\' Ha\' (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'ngoQ / mI\' Ha\' yIcher (MMSS)',
@@ -1172,14 +1144,8 @@ const _dutchSourceTlh = {
   'Cirkel': '\'ID',
   'Spider': 'ghevI\'',
   'CSV importeren': 'CSV yIroQmoH',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'De\' (CSV: wa\'DIch ret = tlha\' pong, wa\'DIch pel\'aQ = per)',
   'Gekoppeld aan': 'rar',
   'Ontkoppelen': 'yIrarHa\'',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      '\'echletHomDaq De\' yIpol, pagh \'echletHom retlh CSV mob mob yIpol?',
-  'In de slide': '\'echletHomDaq',
-  'Als CSV-bestand': 'CSV mob rur',
   'Geen grafiekgegevens': 'De\'wI\'ghom De\' Hutlh',
   'Label': 'per',
   'Rij': 'ret',
@@ -1209,7 +1175,6 @@ const _dutchSourceTlh = {
   'Eigen kleur (hex)': 'SeH rItlh (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'lo\': #33FF33 CRT-SuD jIHvaD.',
-  'Onderdeel van stijlprofiel ': 'Segh Doch \'ay\' ',
   'Broncode lettertype': 'De\' mob mu\' Segh',
   'Kop (optioneel)': 'nach (DaH poQbe\'lu\')',
   'Subkop (optioneel)': 'nach bIng (DaH poQbe\'lu\')',
@@ -1248,16 +1213,7 @@ const _dutchSourceTlh = {
   'Zet het filter uit om alles weer te zien.':
       'Hoch Dalegh \'e\' DaneHchugh SIv yIchu\'Ha\'.',
   'Welkom bij OciDeck': 'OciDeck yIboSmoH',
-  'Privacy en gebruik': 'pegh \'ej lo\'',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck \'oH lam desktop lo\'wI\'ghom\'e\'. De\'wI\'lIjDaq neH \'echletHomlIj De\'lIj je pollu\'.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'vay\' pegh De\', togh, \'ej lo\' De\' boSbe\' lo\'wI\'ghom. wIH\'e\' \'oH peghlIj\'e\'.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'OciDeckDaq De\' Damaghbogh Hoch ratlh De\'wI\'patlIjDaq \'ej pumbe\' Hurgh De\'wI\'ghommey.',
   'Licentie (EUPL 1.2)': 'chap (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      '"jItlho\'" DaghoDDI\', chutmeyvam DalajlaH \'ej OciDeck lo\' Dalaj.',
   'Volledige licentie online': 'chap naQ HurghDaq',
   'Akkoord gaan': 'jItlho\'',
   'Privacy': 'pegh',
@@ -1345,8 +1301,6 @@ const _dutchSourceTlh = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'ram Dun Qaghmey lujmo\' boS botlu\'.',
   'Alle meldingen': 'Hoch ja\'chuqghach',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… \'ej Dun \'echletDaq latlh Qaghmey.',
   'Classificatie-handhaving': 'Segh chotwI\'',
   'Vrijgaveplafond': 'tlhabchoH \'aqroS',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1365,11 +1319,9 @@ const _dutchSourceTlh = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'TLP patlh yIcher — Segh chot chutmo\' boS botlu\'.',
   'Tabel bewerken': 'raS yIchoH',
-  'Pijltjes · Tab · Esc': 'De\'mey · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'raS yIchoH (\'echletHom rasDaq)',
   'Tabel bewerken (E)': 'raS yIchoH (E)',
   'Tab wisselt cel · Esc sluit': 'Tab: nagh choH · Esc: SoQmoH',
-  'Pen · markeerstift · ⇧E': 'ghItlhwI\' · boch \'ang · ⇧E',
   'Gestapelde staaf': 'SIrgh muvlu\'bogh',
   'Spreiding': 'boch',
   'PgUp/PgDn bladert door de slides':
@@ -1413,10 +1365,6 @@ const _dutchSourceTlh = {
       'mIr Qagh — rarwI\' yI\'ol \'ej yInIDqa\'.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'vay\' Qagh net pIHbe\'. QIn tetlh yIlegh.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud lIjchoHbe\'lu\' — Settings → Nextcloud Daq jabwI\' De\' yI\'ol.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'jabwI\'vam chaw\'be\'lu\'. Settings → Nextcloud Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'jabwI\' SIchlaHbe\'lu\' — rarwI\' jabwI\' URL je yI\'ol.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1444,8 +1392,6 @@ const _dutchSourceTlh = {
   'Uit recente bestanden verwijderen': 'teHwI\'mey chu\'vo\' teq',
   'OciDeck wordt gestart…': 'OciDeck taghlu\'…',
   'Herstelbestanden': 'qa\'meH teHwI\'mey',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'qa\'meH teHwI\'mey Hoch \'anghom ngaS, ghItlh nIt. 7 jaj tlhoch Say\'moHlu\' \'e\' ngoq; naDev SIbI\' bIteqlaH.',
   'Herstelbestanden nu wissen': 'DaH qa\'meH teHwI\'mey teq',
   'Er waren geen herstelbestanden.': 'qa\'meH teHwI\'mey tu\'lu\'be\'.',
   'herstelbestand(en) gewist.': 'qa\'meH teHwI\'(mey) teqlu\'ta\'.',
@@ -1869,7 +1815,6 @@ const _dutchSourceAddTlh = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'chu\' tabDaq ghItlh velqa\' wIchenmoH; ghItlh niHlIj choHbe\'lu\'.',
   'Welk formaat?': 'nuq Segh?',
-  'dia\'s, gesplitst op kop.': 'HaSta\'mey, nav pIn vItlhutlh chevlu\'.',
   'document': 'ghItlh',
   'volledig': 'naQ',
   'Invoegen': 'chel',
@@ -2025,12 +1970,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Alle integraties': 'Hoch muvmoHghachmey',
   'Alles inschakelen': 'Hoch tIchu\'moH',
   'Alles uitschakelen': 'Hoch tIchu\'Ha\'moH',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'ja\'chuq ngaSwI\' Sovlu\'pu\'; vaj muvmoHghach lo\'laH, \'ej OpenKAT De\'meywI\' chu\'moHlaH.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'latlh patmey muvmoHghachmey. muvmoHghach chu\'Ha\'lu\'pu\' motlh, \'ej Dachu\'moHpa\' lo\'laHbe\' taH.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'wa\' che\'wI\' Sovmey rurmoHmeH OpenKAT ja\'chuq ngaSwI\'mey tIlaD.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH tIqem. latlh patmey muvmoHghachmey, OpenKAT rurbogh, muvmoHmeH bIngDaq tu\'lu\'.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2189,7 +2130,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Van toepassing': 'lo\'laH',
   'Voortgang': 'Qap',
   'Voortgang managementsysteem': 'che\'meH pat Qap',
-  'Voortgangsoverzicht bijgewerkt': 'Qap much chu\'qa\'lu\'pu\'',
   'Welk deel?': 'nuq \'ay\'?',
   'beheersmaatregelen geladen': 'Hubmey Suqlu\'pu\'',
   'geïmplementeerd': 'rInpu\'',
@@ -2267,10 +2207,6 @@ const _dutchSourceAddTlh = <String, String>{
       'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'naghmeyvaDvaD De\'wI\' QulmeH qawHaq teblu\' (256 MB \'oH veH\'e\'). De\' Dachbe\'meH, wa\'DIch .ocideck De\' QaywI\' rur Qu\'lIj pol. ghIq nagh puS pagh nagh mach lo\', latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe\'taHvIS chu\'qa\'.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'mIllogh web qawHaq teblu’ (256 MB ‘aqroS). latlh mIllogh Dachelpa’ .ocideck De’ ‘angghalDaq Qu’lIj yIpol ’ej nav yIQayqa’.',
   'Afbeeldingsrechten': 'Image rights — tlhIngan Hol',
   'Afbeeldingsrechten controleren…': 'Check image rights… — tlhIngan Hol',
   'Afdoening': 'Settlement — tlhIngan Hol',
@@ -2322,8 +2258,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Verifiëren': 'yIlaj',
   'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
   '(dit apparaat)': '(jan vam)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Hoch jan nItlhDu\' Segh pat yIrar, voqbogh QIn He yIlo\'. rap chugh, jan teH \'oH \'ej pagh joj \'elpu\'. rapbe\' chugh, tay\' vum yImev.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'rI\'ghach link ngeb \'oH.',
   'De Matrix-homeserver is niet bereikbaar.': 'SIchlaHbe\' Matrix homeserver.',
@@ -2382,7 +2316,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Matrix homeserver So\'wI\' Da lo\'lu\'taHvIS \'echlet DawI\'chuq. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server. homeserver \'ej latlhDaq chenmoHlu\'pu\'bogh \'elmeH token yIghItlh — not mu\'wIj pegh Datlhob OciDeck. QulHom So\'lu\'pu\'bogh \'oH nuHmey qawHaqDaq polluvtaH, latlh chuqmey tlhejbe\'.',
   'wordt door de test ingevuld': 'poj polmoH',
-  'Versleuteld doorgeefluik (ontwerp)': 'labwI\' So\'lu\'pu\'bogh (nab)',
   'Meer documentatie op de repository': 'qawHaqDaq ghItlhmey law\'',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'qawHaqDaq ghItlhmey naQ tu\'lu\': qach nab, chenmoH, De\'wI\' ghItlh, \'ej nab.',
@@ -2621,50 +2554,14 @@ const _dutchSourceAddTlh = <String, String>{
       'OpenKAT ja\'chuq: Welche Messdaten fehlen oder sind veraltet?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'OpenKAT ja\'chuq: Auf welchen Daten basiert dieser Bericht?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'OpenKAT ja\'chuq: Ein umfassender, aber sachlicher Managementüberblick mit nachvollziehbaren Messmomenten.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'OpenKAT ja\'chuq: Rangliste ohne Gesamtpunktzahl und zeigt fehlende Messungen separat an.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'OpenKAT ja\'chuq: Zeigt Schweregrade, Mitwirkende und übertragene Messungen nach Moment an.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'OpenKAT ja\'chuq: Organisiert Befundtypen nach betroffenen Organisationen, Systemen und Beobachtungen.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'OpenKAT ja\'chuq: Zeigt kritische/hohe Zahlen ohne geplantes Wiegen an.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'OpenKAT ja\'chuq: Zeigt Zähler, Nenner und nur zuverlässige Prozentsätze an.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'OpenKAT ja\'chuq: Gruppiert wörtliche Empfehlungen von OpenKAT ohne eigene Priorität.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'OpenKAT ja\'chuq: Ein gezieltes aktuelles Bild einer Organisation und deren Messdatum.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'OpenKAT ja\'chuq: Vergleicht zwei ausgewählte Messzeitpunkte innerhalb einer Organisation.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'OpenKAT ja\'chuq: Unterscheidet neu, neu und nicht mehr beobachtet.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'OpenKAT ja\'chuq: Verwendet nur zuverlässige erste Beobachtungsdaten.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'OpenKAT ja\'chuq: Rangsysteme mit separaten Schweregradzählern.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'OpenKAT ja\'chuq: Zeigt einzelne Deltawerte ohne gewichtete Bewertung.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'OpenKAT ja\'chuq: Vergleicht Zähler und Nenner mit nachweislich vergleichbarer Abdeckung.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'OpenKAT ja\'chuq: Inventarisiert quellengeprüfte Systeme, Hostnamen und IP-Adressen.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'OpenKAT ja\'chuq: Unterscheidet überwacht, unüberwacht und unbekannt.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'OpenKAT ja\'chuq: Zeigt nur explizit nachgewiesene Monitoring-Mutationen an.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'OpenKAT ja\'chuq: Zeigt Organisationen und Systeme rund um einen zuverlässigen CVE-Link.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'OpenKAT ja\'chuq: Rangt CVEs mit expliziter Deduplizierung.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'OpenKAT ja\'chuq: Unterscheidet zwischen neuen, neuen und nicht mehr beobachteten CVEs.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'OpenKAT ja\'chuq: Zeigt fehlende, veraltete und tatsächlich verwendete Messungen an.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'OpenKAT ja\'chuq: Konten für Schlüsseldaten, Quelldateien, Adapter und Quell-Hashes.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'OpenKAT ja\'chuq: Noch nicht verfügbar: Die Quelle belegt nicht den Überwachungsstatus für alle Assets.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2717,10 +2614,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'OpenKAT ja\'chuq: Welcher Bericht beantwortet Ihre Frage?',
   'Meer rapportvragen': 'OpenKAT ja\'chuq: Weitere Berichtsfragen',
-  'Welke systemen zijn kwetsbaar voor een CVE?': 'CVE QobmoH patmey nuq?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'wa\' QobmoHghach DopDaq pat puj je DIvI\'mey.',
-  'Organisaties met kwetsbare systemen': 'pat puj ghajbogh DIvI\'mey',
   'Kwetsbare systemen': 'pat puj',
   'Kritiek/hoog': 'Qobqu\'/Qob',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2742,8 +2635,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Bruikbaar': 'lo\'laH',
   'CVE zoeken': 'CVE yISam',
   'Critical/high': 'Qobqu\'/Qob',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'De\' QaD, tI\'laHbe\'bogh mI\'ghachmey, qan je.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'ja\'chuqmey wIvwI\' ghaHbogh qaStaHvIS, De\'na\' poQbogh pagh.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2770,9 +2661,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Geen bruikbare meetdatum': 'mI\'ghach jaj lo\'laH pagh',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'navmey chenmoHlu\'bogh choHlu\'. navmeylIj je chenqa\'meylIj je pollu\'.',
-  'Getroffen organisaties en systemen': 'ghompu\' patmey je QobmoHlu\'bogh',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'wa\' QobmoHbogh mIwDaq ghompu\' patmey je QobmoHlu\'bogh.',
   'Getroffen systemen': 'patmey QobmoHlu\'bogh',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'ja\'chuq chenmoHlu\'laHbe\'. wIvwI\'meylIj pollu\'; \'ach Qobmey yIlegh \'ej yInIDqa\'.',
@@ -2782,19 +2670,14 @@ const _dutchSourceAddTlh = <String, String>{
   'Keuzes wijzigen…': 'wIvwI\'mey yIchoH…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'OpenKAT ja\'chuqmey ngaSbogh ngaSwI\' yIwIv. ngaSwI\'vam neH laD OciDeck; choHlu\'be\' pagh qemlu\'be\'.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'ja\'chuq rInmoHmeH mu\'mey yIwIv. pat rapbogh wIv OciDeck.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'ja\'chuqmeyDaq tu\'lu\'bogh CVE yIwIv.',
   'Laatste bruikbare meting': 'mI\'ghach lo\'laH Qav',
   'Live voorvertoning van de rapportopbouw': 'ja\'chuq pat \'angqa\'',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'ghompu\' law\'vaD che\'wI\' De\' je.',
   'Meer instellingen': 'chermeH De\' law\'',
   'Nederlands': 'Holanda Hol',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'poHvamDaq Hoch ghompu\' wIvwI\' mI\'ghach ghajbe\'.',
-  'Nieuwe en verdwenen bevindingen': 'tu\'lu\'bogh chu\' je polHa\'lu\'bogh je',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'DaH lo\'laHbe\': ja\'chuqmeyvamDaq CVE mI\'mey De\'na\' pagh.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2829,8 +2712,6 @@ const _dutchSourceAddTlh = <String, String>{
       'ghompu\' wa\' pagh law\'vaD mI\'ghach lo\'laH DaH ghajbe\'.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'rapmeH cha\' mI\'ghach poH poQlu\'. DaH wa\' mI\'ghach tu\'lu\'.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'mI\'ghach poH pa\'Daq rapmeH Qap.',
   'Waar staan de OpenKAT-rapportages?': 'nuqDaq OpenKAT ja\'chuqmey?',
   'Wat veranderde er bij één organisatie?': 'wa\' ghomDaq nuq choH?',
   'Wat wilt u laten zien?': 'nuq \'ang DaneH?',
@@ -2842,7 +2723,6 @@ const _dutchSourceAddTlh = <String, String>{
   'bruikbaar': 'lo\'laH',
   'metingen': 'mI\'ghachmey',
   'organisaties': 'ghompu\'',
-  'organisaties geselecteerd': 'ghompu\' wIvwI\'',
   'rapportages gebruikt': 'ja\'chuqmey lo\'lu\'',
   'systemen': 'patmey',
   'Nog geen specificatielimiet': 'wej Segh HeH tu\'lu\'',
@@ -2984,7 +2864,6 @@ const _dutchSourceAddTlh = <String, String>{
       'Sor DabDaq \'oH, \'ach vay\' lulo\'be\' — mIr, mej pagh latlh DabDaq rar.',
   'Nieuw verbeteringsproject': 'DubtaHghach Qu\' chu\'',
   'Kader': 'rIn',
-  'Projecttitel': 'Qu\' pong',
   'Primaire Y-metriek (Y-01)': 'wa\'DIch Y mIw (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'qaStaHvIS: order intake \'ab jen woch',
@@ -3036,10 +2915,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Bron niet toegestaan': 'mung chaw\'be\'lu\'',
   'Deze URL is door de beveiliging geweigerd.':
       'Qan meqmo\' URL vam lajlu\'be\'.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'latlh patmeyvo\' De\' qem. cha\' De\' Daq: PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH moj, \'ej OpenKAT ja\'chuqmey (JSON ngaSbogh ngaSwI\') wa\' che\'wI\' Sovmey moj. OpenKAT ngaSwI\' Daq muvmoHmeHDaq wIvlu\'.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH qem. OpenKAT ja\'chuqmey ngaSwI\'mey laDlaH De\'wI\' tIn neH.',
   'Alinea': 'mu\'tlhegh',
   'Audio "{bestand}"': 'wab "{bestand}"',
   'Deck opbouwen…': 'nav chenmoHtaH…',
@@ -3160,8 +3035,6 @@ const _dutchSourceAddTlh = <String, String>{
       'chenmoHwI\' tetlh: Hoch waw\' luj pong nItebHa\', pong ngeb, je Segh. QaH nav nIvbogh ngoDmey tu\'lu\'be\'.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 waw\'mey tetlh: Hoch waw\' luj pong nItebHa\', pong ngeb, MASVS Segh, je MASWE puj. v1 waw\'mey lonlu\'bogh je qawHaqHom tu\'lu\'be\'; QaH nav ngoDmey je tu\'lu\'be\'.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'puj tetlh (117): pong nItebHa\', pong, MASVS Segh, De\'wI\' Segh, je CWE rar. wej loS: qaStaHvIS mIw ghItlhlu\'be\'pu\'; tu\'lu\' \'ach per. pujmey lonlu\'bogh tu\'lu\'be\'.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'naQbogh tetlh (pong nItebHa\', pong, QIj) je maH wIwIvpu\'bogh \'ay\' potlh, DuHmey ghItlh tIq.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3207,34 +3080,17 @@ const _dutchSourceAddTlh = <String, String>{
       'Hoch De\'mey pIm choHlu\' \'ej ghoSmeH DaqDaq presentation pIm pollu\'. wa\' luj chugh, tlhegh taH.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'wa\' poH presentationmey law\' kII\'lu\'chugh, DaqDaq De\'mey ghItlhlu\'; browser version vam ruchlaHbe\'.',
-  'Nu importeren': 'DaH yIkII\'',
   'Het overzicht staat klaar in een nieuw tabblad.':
       '\'echlet chu\'Daq Hoch poStaH.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'OpenKAT ja\'chuqmey (JSON) ngaSbogh ngaSwI\' laD \'ej wa\' che\'wI\' Sovmey chenmoH: pat, qay\'ghachmey \'ay\'mey, ram tIqqu\'bogh qay\'ghachmey, \'ej juHmey rap wanI\'mey. OpenKAT De\'meywI\' tu\'lu\'bogh chu\'moH rap vang, \'ej De\'meylIj ratlhmoH.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'laD neH nge\'wI\'; ngaSwI\'vamDaq pagh choHlu\' pagh ngeHlu\'. OpenKAT ja\'chuqmey ghobe\'bogh De\'mey lIjlu\' \'ej nge\'ghach ja\'chuqDaq pongmoHlu\'.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'OpenKAT ja\'chuqmeylIj (JSON) ngaSbogh ngaSwI\' \'agh. ngaSwI\'vam laD nge\'wI\' \'ej wa\' che\'wI\' Sovmey chenmoH; naDev ngaSwI\' Sovlu\'chugh, Hoch poH wIvnISbe\'.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'nagh HeHDaq ngaSwI\' laDlaH OpenKAT nge\'wI\'; De\'wI\' tIn neH lo\'lu\'laH.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'ja\'chuq ngaSwI\' Sovbe\'lu\'; vaj Hoch poH ghel nge\'wI\'.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'ja\'chuq ngaSwI\' Sovlu\'pu\'; vaj poSmoHwI\' poS taH, \'ej OpenKAT De\'meywI\' chu\'moHlaH.',
   'Integraties': 'muvmoHmeH',
-  'Naar Integraties': 'muvmoHmeHDaq jaH',
   'Map kiezen…': 'ngaSwI\' wIv…',
   'Map wissen': 'ngaSwI\' teq',
-  'OpenKAT-rapportages importeren…': 'OpenKAT ja\'ghachmey \'elmoH…',
   'Map met OpenKAT-rapportages kiezen':
       'OpenKAT ja\'ghachmey ngaSbogh Daq yIwIv',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT ja\'ghachmey \'elmoHlu\'pu\'.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT deck choHlu\'pu\'; ghop slidemey pollu\'.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'DaqvamDaq OpenKAT ja\'ghachmey tu\'lu\'be\'.',
-  'OpenKAT-import mislukt.': 'OpenKAT \'elmoH luj.',
   'rapportages': 'ja\'ghachmey',
   'overgeslagen': 'juSlu\'',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3293,8 +3149,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Label op de primaire knop': 'wa\'DIch \'uy\' per',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'DanoHpu\'bogh \'ej Dateqbe\'pu\'bogh SamwI\'ghachmey. luja\'lu\'be\'taH, \'ach luSamtaH nejwI\', \'ej rInpu\'be\'. wa\' DatatlhmeH yI\'uy.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'pegh Sam lo\'laHbe\'ghach (nab)',
   'Deze is beoordeeld en mag blijven': 'wa\'vam vInoHpu\': taH net chaw\'',
   'Mogelijk gemaakt door': 'qaSmoHta\'',
   'De export is gestopt tijdens het voorbereiden.': 'ngeH mev; ghuHmeH poHDaq.',
@@ -3305,10 +3159,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Technische melding:': 'QaQbe\'ghach De\':',
   'presentaties': 'presentationmey',
   '/Presentaties': '/presentationmey',
-  'Rapportagedistributie (ontwerp)': 'ja\'ghach ngeHghach (nab)',
   'De export is mislukt.': 'luj ngeH.',
   'Presenteer vanaf hier': 'naDevvo\' yIjatlh',
-  'Teams-gastclient (ontwerp)': 'Teams meb jan (nab)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: De\'vam luHevlaH nuv \'ar?',
   'Wat betekenen deze niveaus?': 'nuq lu\'oS patlhmeyvam?',
@@ -3421,8 +3273,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Markdown ghItlhmey neH rurtaH \'echletHommey: laDlaH, nejlaH, \'ej Hoch choHwI\' lo\'laH.',
   'sjablonen om mee te beginnen, of leeg': 'taghmeH ghItlh\'a\'mey, pagh chIm',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'chIllu\': De\' tu\'lu\'bogh qIjlu\' \'ej cha\'nobvam mIlloghmey, HaSta, wab je cha\'be\'lu\' \'ej ngeHbe\'lu\'. markdown ghItlhlIj Hoch polta\'.',
   'Mijn tekst': 'mu\'wIj',
   'Wat zij zien': 'bejwI\' legh',
   'Presentatiegegevens': '\'echletHommey De\'',
@@ -3639,7 +3489,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Opslaan naar…': 'polmeH…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'wa\'DIch rar\'egh yIchenmoH: Do\'Ha\'ghach → nISwI\'.',
-  'Beginnen met:': 'vam Do\'',
   'Verlopen datums markeren': 'jajmey vI\'ang',
   'Datums gemarkeerd': 'jajmey \'angbogh',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3665,28 +3514,15 @@ const _dutchSourceAddTlh = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Doch Segh, HIv \'ay\': \'ar tu\'lu\', \'ar vum poQ, nuq chu\', nuq pIn Hutlh. Qav: ghojmeH ja\'chuq.',
   'Acties en besluiten': 'vangmeH chutmey',
-  'Actie toevoegen': 'vang chel',
-  'Actie verwijderen': 'vang teq',
   'Actie': 'vang',
   'Deadline': 'poH ngeH',
-  'Op de lijst sinds': 'tetlh yInmo\'',
   'Stand': 'Dotlh',
-  'Wat vraagt u': 'nuq Datlhob',
   'geen datum': 'jaj Hutlh',
-  'Ter informatie': 'De\' neH',
   'Besluit gevraagd': 'wuq poQlu\'',
   'Escalatie': 'qaD',
   'Open': 'poSmoH',
   'Loopt': 'qaS',
   'Afgerond': 'rIn',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'wuq qaD je neH per \'oH nav; "paSqu\'" poH ngeHmo\' \'oH, DaqIchbe\'.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'jajmey: aaaa-mm-dd. latlh mI\' lulajbe\'; 05-08-2026 cha\' jaj pIm.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'chorgh mIw neH qeng nav; law\'qu\'chugh, wuqbe\' ghom; laD neH.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'nuq qaSnIS, \'Iv vang, ghorgh je. Hoch mIw, De\' neH ghap wuq DatlhobmeH \'e\' yIper — ghom qelmeH \'oH.',
   'Scorecard': 'mI\'mey nav',
   'Cijfer toevoegen': 'mI\' chel',
   'Cijfer verwijderen': 'mI\' teq',
@@ -3773,8 +3609,6 @@ const _dutchSourceAddTlh = <String, String>{
       'token Dun, \'ach vam chaw\'be\' — repository-Daq ghob law\' yInob.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'bI\'elpu\', \'ach bIjaHlaHbe\' — mu\'wIj Qagh ghobe\'. vam nagh ghob yItlhob.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'DAV URL naQ rur vam. Nextcloud-Daq He \'oH OciDeck \'e\' chenmoH — naDev pat neH.',
   'Overnemen': 'yIlo\'',
@@ -3817,8 +3651,6 @@ const _dutchSourceAddTlh = <String, String>{
   'kenteken': 'Duj mI\'',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'vam De\' Hol vIghaj be\' potlhqu\' nuv De\' mu\' tetlh. mI\' toblu\'ta\' (BSN, IBAN, nav) vumtaH; mu\'mey rur "rop ngu\'" ghap "pIch ghaj" luleghbe\'.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'potlhqu\' nuv De\' mu\' tetlh \'oH puS vam Hol. mu\'mey rur "rop ngu\'" ghap "pIch ghaj" tu\'lu\'meH Qob.',
   'Landpakketten voor identificatienummers': 'Sep ngeH mI\' ngaq',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
       'BSN PESEL je Sep chaw\'. Hoch Europa chu\' \'e\' pIm mI\' toblu\'ta\' ghaj: chu\'meH mIS puS. IBAN, QIn, pegh, nav tIq je pIm \'ej reH luleghlu\'.',
@@ -3846,8 +3678,6 @@ const _dutchSourceAddTlh = <String, String>{
       'pat pong tu\'lu\'be\', ghap nejlaHbe\'. pat URL yIlaD; qelI\'qam Do\'Ha\' yInej.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'pat vam ghajbogh privé ghap LAN inscription. Settings → Storage-Daq voqlu\'bogh qoDDaq yIper.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'pat vam teywI\' voqlu\'be\'. teywI\' qapbe\' \'e\' bIH; teywI\' Sovbogh nuvpu\' yIlo\'.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'pat latlh inscription-Daq ngeH. inscription yIchel — ngeHmeH mIw wItlha\'be\', \'ej Hung waw\' buSHa\'laH.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3883,8 +3713,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Opslaan naar S3': 'S3 yIQIj',
   'Opgeslagen in S3:': 'S3 QIjlu\':',
   'Hier staat niets': 'pagh tu\'lu\'',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'qawHaq laDlaHbe\'. rar \'ej DuHIvmeymey yInoH.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Dech SIchlaHbe\' — rar \'ej Dech yInoH.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3893,8 +3721,6 @@ const _dutchSourceAddTlh = <String, String>{
       'Qagh ngeH Dech. tugh yInID.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'qonwI\' chotbe\' Dechvam, vaj Qu\'lIj QanlaHbe\'. latlh vumchugh, pong chu\' yIlo\'.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'S3 nagh baS tu\'lu\'be\'. DuHIvmeymey → waHtaHghach yIchenmoH.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'wa\'DIch DuHIvmeymey → waHtaHghach S3 nagh baS yIchenmoH.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3940,10 +3766,6 @@ const _dutchSourceAddTlh = <String, String>{
       'qab ngu\'lu\'bogh {count} puS \'oS nagh beq vam.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'nagh beq vam qab ngu\'meH nujDaq Qapbe\'. rap Sovbe\'lu\'. nuv tu\'be\'lu\' \'e\' \'oSbe\'; bejbe\'lu\' \'e\' \'oS.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'qab ngu\'lu\'bogh \'oS nagh beq vam.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'qab ngu\'lu\'bogh {count} \'oS nagh beq vam.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'nuv ngu\'lu\'meH nagh beq \'oH nuv De\'\'e\', pongHa\'taHvIS je.',
   'herkenbaar gezicht op een afbeelding': 'nagh beq qab ngu\'lu\'bogh',
@@ -3959,8 +3781,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Organisatie': 'ghom',
   'Welke verbinding?': 'nuq rar?',
   'Bestandsverbindingen': 'De\' rarmey',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Daqmey, nuqDaq QIchmey Dapol \'ej DanejlaH — De\'wI\'vamDaq Daqmey, WebDAV lIwmey, git qawHaqmey je. mIr DaneHbogh yIchenmoH: Hoch Segh joqDaq ratlhbogh \'oH De\' motlh\'e\'.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'git qawHaq; Hoch mucher pollu\'pu\'bogh ratlh.',
   'Een map op de schijf van deze computer.': 'De\'wI\'vam naQHomDaq Daq.',
@@ -3983,15 +3803,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
   'Opslaan naar WebDAV': 'WebDAVDaq pol',
   'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'wa\'DIch DuHIvmeymey → WebDAV WebDAV-Server yIchenmoH.',
   'Afbeelding kiezen op WebDAV': 'WebDAVDaq mIllogh yIwIv',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'WebDAV-Server DuHIvmoHbe\'lu\'. DuHIvmeymey → WebDAV yIchenmoH.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV lIjchoHbe\'lu\' — Settings → WebDAV Daq jabwI\' De\' yI\'ol.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'jabwI\'vam chaw\'be\'lu\'. Settings → WebDAV Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
   'Servertype': 'De\'wI\' Segh',
   'Nextcloud of ownCloud': 'Nextcloud ownCloud joq',
   'Andere WebDAV-server': 'latlh WebDAV De\'wI\'',
@@ -4013,23 +3825,11 @@ const _dutchSourceAddTlh = <String, String>{
   'Haal volle pagina uit de reeks': 'rarvo\' \'echletHom buy\' yITeq',
   'Opslag': 'waHtaHghach',
   'Opslagwijzen': 'waHtaHghach mIwmey',
-  'Deze computer': 'De\'wI\'vam',
   'Ingesteld': 'cherlu\'pu\'',
   'Niet ingesteld': 'cherlu\'be\'pu\'',
-  'Nog geen bibliotheek ingesteld': 'qumwI\' pagh cherlu\'pu\'',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Hutlhbe\'chugh vay\' \'ej ta\'mey poSmoH \'ej polmoH. mIw yIwIv \'ej yIcher.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Dat ta\'mey, De\'wI\'vam nagh Daq.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Nextcloud DaqDaq ta\'mey yIpoSmoH \'ej yIpolmoH.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'git qach vo\' ta\'mey yIpoSmoH; Hoch pollu\'pu\'bogh Segh polqu\'lu\'.',
-  'Nog te verifiëren': 'ngu\'nISlu\'bogh',
   'MASWE-zwakheid kiezen': 'MASWE puj wIv',
   'Zoek op naam, id of categorie': 'pong, id, Segh je Sam',
   'Geen zwakheid gevonden': 'puj tu\'lu\'be\'',
-  'uitleg nog niet geschreven': 'QIn qonlu\'be\'taH',
   'Getalnotatie herkennen': 'mI\' Segh yISov',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'mI\'mey ghaj De\'. cha\' mIw lulaDlu\'laH:',
@@ -4144,12 +3944,10 @@ const _dutchSourceAddTlh = <String, String>{
   'Veelgestelde vragen': 'pIj yu\'lu\'bogh',
   'Probleemoplossing': 'Qagh tI\'',
   'Begrippenlijst': 'mu\' tetlh',
-  'API-documentatie': 'API ghItlh',
   'Prestaties': 'laH',
   'Beveiligingsontwerp': 'Hub nab',
   'Hosting en uitrol': 'qengwI\' Qu\'',
   'Bijdragen': 'boQ',
-  'Ontwikkelomgeving': 'chenmoHmeH Daq',
   'Migratiegids': 'ghoS ghItlh',
   'Versies…': 'mI\'mey…',
   'Versies:': 'mI\'mey:',
@@ -4189,8 +3987,6 @@ const _dutchSourceAddTlh = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'branch vIHpu\'; deck yISamqa\' \'ej yIQaw\'qa\'.',
   'Bijgewerkt met OciDeck': 'OciDeck lo\'lu\'pu\'',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'wa\'DIch Git qawHaq yIcher: chuqmey → Git qawHaq.',
   'Git-repository': 'Git qawHaq',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Git qawHaqvo\' HaSta\' poQwI\' poSmoH. Hoch Qawlu\'pu\'bogh De\' polluvtaH. QulHom So\'lu\'pu\'bogh \'oH nuHmey qawHaqDaq polluvtaH, latlh chuqmey tlhejbe\'.',
@@ -4206,7 +4002,6 @@ const _dutchSourceAddTlh = <String, String>{
       'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. app qojDaq De\' Qan tu\'lu\', vaj SIbI\' \'ej offline vumtaH ngoQ.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' So\'lu\'taH.',
-  'Procesverbetering (ontwerp)': 'Qu\' DubtaHghach (nab)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Pilot Informatieautonomie vumtaHvIS chenpu\' Dochvam.',
   'Stijlprofiel exporteren': 'Segh nab DoQmeH yIngeH',
@@ -4341,7 +4136,6 @@ const _dutchSourceAddTlh = <String, String>{
   'genetisch gegeven': 'tIq De\'',
   'parketnummer': 'qIch mI\'',
   'nationaal identificatienummer': 'wo\' nuv mI\'',
-  'OciWacht (ontwerp)': 'OciWacht (qech)',
   'Mogelijk geheim': 'chaq pegh',
   'sleutel of token': 'ngaQHa\'moHwI\' pagh token',
   'private sleutel': 'pegh ngaQHa\'moHwI\'',
@@ -4374,7 +4168,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'naDev CVE tetlh naQ yIlan, vaj Do\'Ha\'be\' nejmeH Qu\' \'ej pagh Daq ghoS nejwI\' mu\'lIj. CVE List V5 vo\' qawHaq Hegh (CVE nab motlh, GitHub Dung).',
   'Wat er lokaal beschikbaar is': 'naDev tu\'lu\'bogh De\'',
-  'Gegevenspakket': 'De\' ngeD',
   'Nu bijwerken': 'DaH yIchoH',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'naDev De\' tu\'lu\' — naDev nej; pagh mej.',
@@ -4393,7 +4186,6 @@ const _dutchSourceAddTlh = <String, String>{
       'yIlaj: naDev De\' lunge\' \'ej QIn chIl. yIlaj \'ej yIghuHmoH: nagh beQDaq nuv De\' tu\'lu\' \'e\' \'ang degh. yIteq: De\' tu\'lu\'bogh laDlaHbe\'lu\' HaSta\'Daq je ngeHmeHDaq — Markdown teywI\'lIj ghItlh wa\'DIch polt.',
   'Alleen melden': 'yIja\' neH',
   'PERSOONSGEGEVENS': 'NUV DE\'',
-  'Persoonsgegevens op deze slide': 'nagh beQvamDaq nuv De\'',
   'Volg de presentatie': 'cha\'nav yItlha\'',
   'Weglaten uit tonen en exporteren': 'cha\'meH ngeHmeH je yIteq',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4511,8 +4303,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Bewerk deze slide': 'vam slide choH',
   'Bewijs verwijderen': '\'ol teq',
   '(nog leeg)': '(chIm)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      '\'ol DaghajmeH wa\'DIch finding-id yInob.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       '\'ol \'e\' DachelmeH HaSta nabmey pagh videos yIchel. finding tlha\' \'ol Hoch slide mojpu\' \'ej export-Daq chel.',
   'Uitvoering testen conform standaard': 'test poQlu\'bogh',

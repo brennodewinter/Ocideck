@@ -795,8 +795,6 @@ const _dutchSourceGsw = {
   'Selectie opheffen': 'Uswahl ufhebe',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Ich bi mit de EUPL 1.2-Lizänz iiverstande und ha gläse, weli Date OciDeck speicheret.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Dini Wahl wird d Standardsprach vo de App.',
   'Lees de volledige licentie': 'Ganzi Lizänz läse',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck isch freii Software under de EUPL 1.2-Lizänz. Bevor du aafangsch, bitte mir di, d Lizänz z akzeptiere. Unde chasch au läse, weli Date OciDeck uf däm Grät speicheret und wänn öppis dis Grät verlaht.',
@@ -821,9 +819,6 @@ const _dutchSourceGsw = {
   'Het antwoord van de server was te groot':
       'D Antwort vom Server isch z gross gsi',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-Quelle (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Öffne und speicher Präsentatione in eme Ordner uf dine Nextcloud. S Passwort wird verschlüsselet im Schlüsselbund gspeicheret, nöd bi de andere Iistellige.',
   'Server-URL': 'Server-URL',
   'Gebruikersnaam': 'Benutzername',
   'App-wachtwoord': 'App-Passwort',
@@ -837,22 +832,13 @@ const _dutchSourceGsw = {
   'Verbinding gelukt': 'Verbindig glunge',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Änderige wärded gspeicheret, wänn du uf Speichere klicksch.',
-  'Afbeelding kiezen op Nextcloud': 'Bild uf Nextcloud uswähle',
-  'Openen vanaf Nextcloud': 'Vo Nextcloud öffne',
   'Vernieuwen': 'Aktualisiere',
   'Deze map is leeg': 'De Ordner isch leer',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Kei Nextcloud-Server iigrichtet. Richt eine ii under Iistellige → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Ha de Ordner nöd chöne lade. Kontrollier dini Verbindig und Iistellige.',
   'Kon dit bestand niet openen.': 'Ha das Datei nöd chöne öffne.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Das isch kei Marp/OciDeck-Präsentation.',
   'Downloaden mislukt:': 'Download fehlgschlage:',
-  'Opgeslagen op Nextcloud:': 'Uf Nextcloud gspeicheret:',
   'Opslaan mislukt:': 'Speichere fehlgschlage:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Richt zerscht en Nextcloud-Server ii under Iistellige → Nextcloud.',
   'Opslaan naar Nextcloud': 'Uf Nextcloud speichere',
   'Doelpad (zonder extensie)': 'Zielpfad (ohni Ändig)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -863,9 +849,6 @@ const _dutchSourceGsw = {
   'Tijden-overzicht tonen na afloop': 'Ziit-Überblick nach em Schluss zeige',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'D Ziit pro Slide wird immer gmässe; das bestimmt nume, öb de Überblick nach dere Präsentation erschiint.',
-  'Oefenoverzicht tonen na afloop': 'Übigs-Überblick nach em Schluss zeige',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Nach ere Präsentation de Überblick mit de verbruuchte Ziit pro Slide zeige. D Ziit wird immer gmässe; das bestimmt nume, öb de Bildschirm erschiint.',
   'Onveilige presentatie geblokkeerd': 'Unsicheri Präsentation blockiert',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Die Präsentation isch nöd göffnet worde. S Datei enthaltet Inhalt, wo Code chan usfüehre, und e Präsentation söll nume Date enthalte — nüt Usfüehrbars.',
@@ -947,7 +930,6 @@ const _dutchSourceGsw = {
   'Online': 'Online',
   'Lokaal bestand': 'Lokals Datei',
   'Geen video': 'Kei Video',
-  'Vraag (meerkeuze)': 'Frag (Mehrfachuswahl)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'De Titeltext het z wenig Kontrast mit em Hintergrundbild',
   'Herstel': 'Behäbe',
@@ -962,8 +944,6 @@ const _dutchSourceGsw = {
   'Huidig punt weghalen': 'Aktuelle Punkt ewegneh',
   'Stap voor stap': 'Schritt für Schritt',
   'Geen animatie': 'Kei Animation',
-  'Animatiesnelheid': 'Animationsgschwindigkeit',
-  'Langzaam': 'Langsam',
   'Snel': 'Schnäll',
   'Gebeurtenissen': 'Ereignis',
   'Gebeurtenis toevoegen': 'Ereignis hinzuefüege',
@@ -976,8 +956,6 @@ const _dutchSourceGsw = {
   'Vraag': 'Frag',
   'Wat wil je vragen?': 'Was wotsch fröge?',
   'Antwoorden': 'Antworte',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markier di richtige Antworte. Höchschtens acht Antworte; bim Präsentiere wird zuefällig eini richtig und de Rest falsch zeigt.',
   'Antwoord': 'Antwort',
   'Antwoord toevoegen': 'Antwort hinzuefüege',
   'Goed antwoord': 'Richtigi Antwort',
@@ -1010,8 +988,6 @@ const _dutchSourceGsw = {
   'Stelling': 'Uussag',
   'Formuleer een stelling die juist of onjuist is':
       'Formulier e Uussag wo richtig oder falsch isch',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Markier alli richtige Antworte. Bim Presentiere wird zuefällig e Set aazeigt mit mindeschtens eim richtige und eim falsche.',
   'Juist': 'Richtig',
   'Onjuist': 'Falsch',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1032,7 +1008,6 @@ const _dutchSourceGsw = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'D Statusfarbe vo de Cockpit-Mäter. Mach benannti Variante; s gwählte Schema gilt für alli Cockpit-Slides.',
   'Standaard': 'Standard',
-  'Standaardkleuren gebruiken': 'Standardfarbe bruuche',
   'Kleurschema verwijderen': 'Farbschema lösche',
   'Schemanaam': 'Schemaname',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1110,7 +1085,6 @@ const _dutchSourceGsw = {
   'Logo en footer': 'Logo und Footer',
   'Pagina': 'Siite',
   'Presentatiestijl': 'Presentationsstil',
-  'Presentatiestijl: ': 'Presentationsstil: ',
   'Tekst...': 'Text...',
   'Teksteditor': 'Texteditor',
   'Volgende pagina': 'Nächsti Siite',
@@ -1123,8 +1097,6 @@ const _dutchSourceGsw = {
   'Doeltijd': 'Zielziit',
   'Doeltijd (aftellen)': 'Zielziit (Abläser)',
   'Geen aftelling': 'Kein Abläser',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Standard-Zielziit für de Abläser im Presenter. Während em Presentiere fein iistellbar mit de Taschte K.',
   'uit': 'us',
   'Doeltijd / aftellen (K)': 'Zielziit / Abläser (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Zielziit / Abläser iistelle (MMSS)',
@@ -1194,14 +1166,8 @@ const _dutchSourceGsw = {
   'Cirkel': 'Chueche',
   'Spider': 'Spider',
   'CSV importeren': 'CSV importiere',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Date (CSV: erschti Zile = Reihenäme, erschti Spalte = Label)',
   'Gekoppeld aan': 'Verchnüpft mit',
   'Ontkoppelen': 'Entchnüpfe',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'D Date i de Folie speichere, oder als separats CSV-File näbe de Präsentation bhalte?',
-  'In de slide': 'I de Folie',
-  'Als CSV-bestand': 'Als CSV-File',
   'Geen grafiekgegevens': 'Kei Diagrammdate',
   'Label': 'Label',
   'Rij': 'Zile',
@@ -1231,7 +1197,6 @@ const _dutchSourceGsw = {
   'Eigen kleur (hex)': 'Eigeni Farb (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Zum Bispiel #33FF33 für en CRT-grüene Bildschirm.',
-  'Onderdeel van stijlprofiel ': 'Teil vom Stilprofil ',
   'Broncode lettertype': 'Code-Schrift',
   'Kop (optioneel)': 'Titel (optional)',
   'Subkop (optioneel)': 'Undertitel (optional)',
@@ -1269,16 +1234,7 @@ const _dutchSourceGsw = {
   'Zet het filter uit om alles weer te zien.':
       'Schalt de Filter us, zum wider alles gseh.',
   'Welkom bij OciDeck': 'Willkomme bi OciDeck',
-  'Privacy en gebruik': 'Privatsphäre und Gebruuch',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck isch e lokali Desktop-Applikation. Dini Präsentatione und Date wärded usschliesslich uf dim Computer gspeicheret.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'D App sammlet kei persönlichi Date, kei Statischtik und kei Nutzigsdate. Dini Privatsphäre isch üsi Priorität.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Alli Date wo du i OciDeck igisch, blibed uf dim lokale Syschtem und wärded nöd a externi Server gschickt.',
   'Licentie (EUPL 1.2)': 'Lizänz (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Wänn du uf "Iverschtande" klicksch, akzeptiersch du die Bedingige und bisch iverschtande mit em Gebruuch vo OciDeck.',
   'Volledige licentie online': 'Volli Lizänz online',
   'Akkoord gaan': 'Iverschtande',
   'Privacy': 'Privatsphäre',
@@ -1367,8 +1323,6 @@ const _dutchSourceGsw = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Export gsperrt wäge schwere Qualitätsprobläm.',
   'Alle meldingen': 'Alli Mäldige',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… und meh Probläm im Qualitätspanel.',
   'Classificatie-handhaving': 'Klassifizierigs-Durchsetzig',
   'Vrijgaveplafond': 'Freigab-Plafond',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1387,11 +1341,9 @@ const _dutchSourceGsw = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Schtell es TLP-Niveau i — de Export isch gsperrt dur d Klassifizierigsrichtlinie.',
   'Tabel bewerken': 'Tabälle bearbeite',
-  'Pijltjes · Tab · Esc': 'Pfiiltaschte · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Tabälle bearbeite (uf Tabällefolie)',
   'Tabel bewerken (E)': 'Tabälle bearbeite (E)',
   'Tab wisselt cel · Esc sluit': 'Tab wächslet d Zälle · Esc schlüsst',
-  'Pen · markeerstift · ⇧E': 'Schtift · Markierer · ⇧E',
   'Gestapelde staaf': 'Gschtaplete Balke',
   'Spreiding': 'Schtreuig',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blätteret dur d Folie',
@@ -1434,10 +1386,6 @@ const _dutchSourceGsw = {
       'Netzwärkfähler — lueg dini Verbindig aa und probier\'s nomol.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Öppis isch unerwartet schiefgloffe. Details stöhn im Protokoll.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → Nextcloud aa.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server nit erreichbar — lueg dini Verbindig und d Server-URL aa.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1465,8 +1413,6 @@ const _dutchSourceGsw = {
   'Uit recente bestanden verwijderen': 'Us de letschte Dateie entferne',
   'OciDeck wordt gestart…': 'OciDeck wird gstartet…',
   'Herstelbestanden': 'Wiederherstelligs-Dateie',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Absturz-Wiederherstelligs-Dateie enthalte dr ganz Inhalt vo dine Präsentatione im Klartext. Si wärde nach 7 Täg automatisch ufgruumt; do chasch si sofort lösche.',
   'Herstelbestanden nu wissen': 'Wiederherstelligs-Dateie jetz lösche',
   'Er waren geen herstelbestanden.': 'Es het kei Wiederherstelligs-Dateie gha.',
   'herstelbestand(en) gewist.': 'Wiederherstelligs-Datei(e) glöscht.',
@@ -1895,7 +1841,6 @@ const _dutchSourceAddGsw = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Mir mached e Kopie i mene neue Tab; dis Originaldatei bliibt unveränderet.',
   'Welk formaat?': 'Weles Format?',
-  'dia\'s, gesplitst op kop.': 'Folie, ufteilt nach Überschrift.',
   'document': 'Dokumänt',
   'volledig': 'vollständig',
   'Invoegen': 'Iifüege',
@@ -2055,12 +2000,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Alle integraties': 'Alli Integratione',
   'Alles inschakelen': 'Alles iischalte',
   'Alles uitschakelen': 'Alles usschalte',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Es isch scho en Bricht-Ornder iigstellt; drum bliibt d Verbindig erreichbar, damit e bestehendi OpenKAT-Presentation wiiter aktualisiert werde cha.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Verbindige mit anderne Systeem. Jedi Verbindig isch standardmässig us und bliibt inaktiv, bis du sie iischaltisch.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'OpenKAT-Brichtordner as ei Management-Übersicht iiläse.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) as bearbeitbars Deck inehole. Verbindige mit anderne Systeem, wie OpenKAT, findsch under Integratione.',
   'Media (WebRTC)': 'Medie (WebRTC)',
@@ -2226,7 +2167,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Van toepassing': 'Aawändbar',
   'Voortgang': 'Fortschritt',
   'Voortgang managementsysteem': 'Fortschritt vom Managementsystem',
-  'Voortgangsoverzicht bijgewerkt': 'Fortschrittsübersicht aktualisiert',
   'Welk deel?': 'Wele Teil?',
   'beheersmaatregelen geladen': 'Massnahme glade',
   'geïmplementeerd': 'umgsetzt',
@@ -2304,10 +2244,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Das gseht nöd nach eme gültige Wiederherstelligsschlüssel us.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dä Wiederherstelligsschlüssel chunnt vo ere nöiere Version vo OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet als .ocideck-Datei und lad d Syte neu, bevor du wyteri Bilder hinzufüegsch.',
   'Afbeeldingsrechten': 'Bildrechte',
   'Afbeeldingsrechten controleren…': 'Bildrechte prüfen…',
   'Afdoening': 'Siedlung',
@@ -2358,8 +2294,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Verifiëren': 'Verifiziere',
   'Deelnemers verifiëren': 'Teilnehmer verifiziere',
   '(dit apparaat)': '(das Grät)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Vergliich de Fingerabdruck vo jedem Grät über en vertroute Kanal — läsed en enand vor oder schick en über en Wäg, wo du em vertrousch. Stimmed si überii, schaffsch mit de echte Grät und niemer het sich dezwüsche gschobe. Wiiched si ab, denn brich d Zämenarbet ab.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Das isch kei gültige Iiladigs-Link.',
@@ -2420,7 +2354,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Schaff live zäme an ere Präsentation über en Matrix-Homeserver als verschlüsslets Wiiterleitigsglid. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date. Gib en Homeserver und es andersch erstellts Zuegriffstoken y — OciDeck fragt nie nach dym Passwort. S Token wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
   'wordt door de test ingevuld': 'wird dur de Test uusgfüllt',
-  'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsslets Relais (Design)',
   'Meer documentatie op de repository': 'Meh Dokumentation im Repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Di ganz Dokumentation — au Architektur, Build, Quellcode und Design — isch im Repository.',
@@ -2661,50 +2594,14 @@ const _dutchSourceAddGsw = <String, String>{
       'Welche Messdaten fehlen oder sind veraltet?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Auf welchen Daten basiert dieser Bericht?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Ein umfassender, aber sachlicher Managementüberblick mit nachvollziehbaren Messmomenten.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Rangliste ohne Gesamtpunktzahl und zeigt fehlende Messungen separat an.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Zeigt Schweregrade, Mitwirkende und übertragene Messungen nach Moment an.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organisiert Befundtypen nach betroffenen Organisationen, Systemen und Beobachtungen.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Zeigt kritische/hohe Zahlen ohne geplantes Wiegen an.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Zeigt Zähler, Nenner und nur zuverlässige Prozentsätze an.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Gruppiert wörtliche Empfehlungen von OpenKAT ohne eigene Priorität.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Ein gezieltes aktuelles Bild einer Organisation und deren Messdatum.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Vergleicht zwei ausgewählte Messzeitpunkte innerhalb einer Organisation.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Unterscheidet neu, neu und nicht mehr beobachtet.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Verwendet nur zuverlässige erste Beobachtungsdaten.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Rangsysteme mit separaten Schweregradzählern.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Zeigt einzelne Deltawerte ohne gewichtete Bewertung.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Vergleicht Zähler und Nenner mit nachweislich vergleichbarer Abdeckung.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarisiert quellengeprüfte Systeme, Hostnamen und IP-Adressen.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Unterscheidet überwacht, unüberwacht und unbekannt.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Zeigt nur explizit nachgewiesene Monitoring-Mutationen an.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Zeigt Organisationen und Systeme rund um einen zuverlässigen CVE-Link.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Rangt CVEs mit expliziter Deduplizierung.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Unterscheidet zwischen neuen, neuen und nicht mehr beobachteten CVEs.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Zeigt fehlende, veraltete und tatsächlich verwendete Messungen an.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Konten für Schlüsseldaten, Quelldateien, Adapter und Quell-Hashes.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Noch nicht verfügbar: Die Quelle belegt nicht den Überwachungsstatus für alle Assets.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2749,11 +2646,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Welcher Bericht beantwortet Ihre Frage?',
   'Meer rapportvragen': 'Weitere Berichtsfragen',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Welli System sind für e CVE aafällig?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisatione und aafälligi System um e Schwachstell ume.',
-  'Organisaties met kwetsbare systemen': 'Organisatione mit aafällige System',
   'Kwetsbare systemen': 'Aafälligi Systeem',
   'Kritiek/hoog': 'kritisch/hoch',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2775,8 +2667,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Bruikbaar': 'Bruchbar',
   'CVE zoeken': 'Nach ere CVE sueche',
   'Critical/high': 'kritisch/hoch',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Datequalität, fählendi Messige und Veralterig.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'D usgwählte Bricht händ für dä Teil nöd gnueg verlässligi Date.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2804,9 +2694,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Geen bruikbare meetdatum': 'Kei bruchbars Messdatum',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Generierti Folie werded erneuert. Ihri eigete Folie und Kopie bliibed erhalte.',
-  'Getroffen organisaties en systemen': 'Betroffeni Organisatione und System',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Betroffeni Organisatione und System rund um e Schwachstell.',
   'Getroffen systemen': 'Betroffeni System',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Dä Bricht het nöd chöne erstellt werde. Ihri Uswahle bliibed erhalte; prüefed Si d Warnige und versueched Si s nomal.',
@@ -2816,19 +2703,14 @@ const _dutchSourceAddGsw = <String, String>{
   'Keuzes wijzigen…': 'Uswahle ändere…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Wähled Si de Ordner, wo OpenKAT d Bricht abgleit het. OciDeck list dä Ordner nume; es wird nüt gändert oder verschickt.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Wähled Si d Frog, wo dä Bricht söll beantworte. OciDeck bestimmt dr passendi Ufbau.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Wähled Si e CVE, wo i de Bricht gfunde worde isch.',
   'Laatste bruikbare meting': 'Letschti bruchbari Messig',
   'Live voorvertoning van de rapportopbouw': 'Live-Vorschau vom Brichtufbau',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Füehrigs- und Steuerigsinformatione über mehri Organisatione.',
   'Meer instellingen': 'Meh Istellige',
   'Nederlands': 'Niderländisch',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Nöd jedi usgwählti Organisation het e Messig für die Period.',
-  'Nieuwe en verdwenen bevindingen': 'Nöii und verschwundeni Befund',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'No nöd verfüegbar: Die Bricht enthalted kei verlässliche CVE-Nummer.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2863,8 +2745,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Für eini oder mehri Organisatione fählt e bruchbari aktuelli Messig.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Für en Vergliich bruchts zwei Messzytpünkt. Jetzt isch e Messig gfunde worde.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Fortschritt im Vergliich zu me früehere Messzytpunkt.',
   'Waar staan de OpenKAT-rapportages?': 'Wo sind d OpenKAT-Bricht?',
   'Wat veranderde er bij één organisatie?':
       'Was het sich bi einere Organisation gändert?',
@@ -2878,7 +2758,6 @@ const _dutchSourceAddGsw = <String, String>{
   'bruikbaar': 'bruchbar',
   'metingen': 'Messige',
   'organisaties': 'Organisatione',
-  'organisaties geselecteerd': 'Organisatione usgwählt',
   'rapportages gebruikt': 'Bricht bruucht',
   'systemen': 'System',
   'Nog geen specificatielimiet': 'No kei Spezifikationsgränze',
@@ -3021,7 +2900,6 @@ const _dutchSourceAddGsw = <String, String>{
       'staht uf ere Baum-Folie, wird aber nüdwo anders brucht — verbind ihn mit ere Matrix, em Fluss oder ere andere Folie.',
   'Nieuw verbeteringsproject': 'Neus Verbesserigsprojäkt',
   'Kader': 'Rahme',
-  'Projecttitel': 'Projekttitel',
   'Primaire Y-metriek (Y-01)': 'Primäri Y-Metrik (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Zum Bispil: Durchlaufziit Orderintake in Arbetstäg',
@@ -3074,10 +2952,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Bron niet toegestaan': 'Quelle nöd zuegloh',
   'Deze URL is door de beveiliging geweigerd.':
       'Die URL isch vo de Sicherheit abglehnt worde.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Material us andere Systeem inehole. Zwoo Quelle: Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) werde zumene bearbeitbare Deck, und OpenKAT-Bricht (en Ornder mit JSON) werde ei Management-Übersicht. Wo de OpenKAT-Ornder isch, stellsch under Integratione ii.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) as bearbeitbars Deck inehole. S Iiläse vo OpenKAT-Brichtordner gaht nume i de Desktop-Version.',
   'Alinea': 'Absatz',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Deck wird erstellt…',
@@ -3197,8 +3071,6 @@ const _dutchSourceAddGsw = <String, String>{
       'De Checklischte-Index: pro Test d stabili ID, de kanonisch Titel und d Kategorie. De Inhalt vom Leitfade sälber isch nöd derbi.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'De Test-Index vo v2.0.0: pro Test d stabili ID, de kanonisch Titel, d MASVS-Kategorie und d MASWE-Schwechi. Zrugzoge v1-Tests und Platzhalter sind nöd derbi; de Inhalt vom Leitfade au nöd.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'D Schwechine-Lischte (117): ID, Titel, MASVS-Kategorie, Plattform und de CWE-Verchnüpfig. Drüü Viertel sind a de Quelle no nöd usgschribe; die sind derbi, markiert. Zrugzogeni Schwechine nöd.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'D ganzi Lischte (ID, Name, Beschriibig) plus en eigne uusgwählte Chärn mit üsne Behebigs-Notize.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3245,33 +3117,16 @@ const _dutchSourceAddGsw = <String, String>{
       'Jedi Datei wird einzeln umgwandlet und as eigeni Präsentation im Zielordner gspeicheret. Wenn eini schief gaht, lauft d Warteschlange eifach witer.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Mehreri Präsentatione uf eimal importiere schriibt si as Dateie in en Ordner; i de Browser-Version gaht das nöd.',
-  'Nu importeren': 'Jetz importiere',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'D’Übersicht isch parat imene nöie Tab.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Liist en Ornder mit OpenKAT-Bricht (JSON) und macht drus ei Management-Übersicht: Systeem, Befund noch Schweregrad, die am längschte offene Pünkt und de Verlauf über ufenandfolgendi Mässige. Die gliich Aktion uf ere bestehende OpenKAT-Presentation aktualisiert si und loot Dini eigene Folie stoh.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'De Import liist nume; i dem Ornder wird nüt gänderet oder verschickt. Datei, wo kei OpenKAT-Bricht sind, werde übergange und im Import-Protokoll gnennt.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Gib de Ornder aa, wo Dini OpenKAT-Bricht (JSON) drin sind. De Import liist de Ornder und macht drus ei Management-Übersicht; wenn de Ornder do iigstellt isch, muesch en nöd jedes Mal neu uuswähle.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'De OpenKAT-Import liist en Ornder vo de Platte und isch nume i de Desktop-Version verfüegbar.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Es isch no kein Bricht-Ornder feschtgleit; de Import fröget denn jedes Mal drum.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Es isch scho en Bricht-Ornder iigstellt; drum bliibt de Iistiegspunkt erreichbar, damit e bestehendi OpenKAT-Presentation wiiter aktualisiert werde cha.',
   'Integraties': 'Integratione',
-  'Naar Integraties': 'Zu de Integratione',
   'Map kiezen…': 'Ornder uuswähle…',
   'Map wissen': 'Ornder lösche',
-  'OpenKAT-rapportages importeren…': 'OpenKAT-Bricht importiere…',
   'Map met OpenKAT-rapportages kiezen': 'Ordner mit OpenKAT-Bricht wähle',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-Bricht importiert.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'S OpenKAT-Deck isch aktualisiert; manuelli Slides sind erhalte blibe.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Kei OpenKAT-Bricht i dem Ordner gfunde.',
-  'OpenKAT-import mislukt.': 'OpenKAT-Import fehlgschlage.',
   'rapportages': 'Bricht',
   'overgeslagen': 'übersprunge',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3331,8 +3186,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Label op de primaire knop': 'Beschriftig uf em Hauptchnopf',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befünd wo du aagluegt und stoh gloh häsch. Die wärded nüme gmäldet, aber de Scan findt si witerhin und si gälted nöd als glöst. Tipp zum eis zrugghole.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'E Datenschutz-Befund zruggstelle (Entwurf)',
   'Deze is beoordeeld en mag blijven': 'Prüeft, das da cha bliibe',
   'Mogelijk gemaakt door': 'Müglich gmacht vo',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3344,10 +3197,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Technische melding:': 'Technischi Möldig:',
   'presentaties': 'praesentatione',
   '/Presentaties': '/Präsentatione',
-  'Rapportagedistributie (ontwerp)': 'Brichtverteilig (Design)',
   'De export is mislukt.': 'De Export isch fehlgschlage.',
   'Presenteer vanaf hier': 'Ab do präsentiere',
-  'Teams-gastclient (ontwerp)': 'Teams-Gaschtclient (Entwurf)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: wie breit dörf das Material teilt werde?',
   'Wat betekenen deze niveaus?': 'Was bedüted die Stuefe?',
@@ -3463,8 +3314,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentatione, wo eifachi Markdown-Dateie bliibed: läsbar, durchsuechbar und mit jedem Editor z öffne.',
   'sjablonen om mee te beginnen, of leeg': 'Vorlage zum Aafange, oder leer',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'S Weglah isch aa: gfundeni Date werded gschwärzt und alli Bilder, Video und Audio vo dere Folie chömed nid uf de Bildschirm oder in Export. Dis Markdown-File behaltet alles.',
   'Mijn tekst': 'Min Täxt',
   'Wat zij zien': 'Was si gsehnd',
   'Presentatiegegevens': 'Presentationsdate',
@@ -3688,7 +3537,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Opslaan naar…': 'Speichere uf…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Richte Sie zerscht e Verbindig i under Istellige → Speicher.',
-  'Beginnen met:': 'Aafange mit:',
   'Verlopen datums markeren': 'Abglaufeni Date markiere',
   'Datums gemarkeerd': 'Date markiert',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3714,28 +3562,15 @@ const _dutchSourceAddGsw = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'D Aagriffsflächi nach Objektart: wieviel s git, wieviel Arbet mached, was neu isch und was niemertem ghört. S Letschte isch meischtens s Gspröch.',
   'Acties en besluiten': 'Aktione und Entscheidige',
-  'Actie toevoegen': 'Aktion hinzuefüege',
-  'Actie verwijderen': 'Aktion entferne',
   'Actie': 'Aktion',
   'Deadline': 'Frischt',
-  'Op de lijst sinds': 'Uf de Lischte sit',
   'Stand': 'Stand',
-  'Wat vraagt u': 'Was Si verlanged',
   'geen datum': 'kes Datum',
-  'Ter informatie': 'Zur Information',
   'Besluit gevraagd': 'Entscheid nötig',
   'Escalatie': 'Eskalation',
   'Open': 'Offe',
   'Loopt': 'Lauft',
   'Afgerond': 'Fertig',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Nume en Entscheid oder e Eskalation überchunnt es Label uf de Folie; "z spot" ergit sich us de Frischt und setzt me nöd sälber.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datum als jjjj-mm-tt. En anderi Schriibwiis wird abglehnt statt grate: 05-08-2026 sind zwei verschideni Täg.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'E Aktionsfolie treit höchstens acht Zile; denn überflügt de Ruum statt z entscheide.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Was passiere mues, wer\'s macht und bis wenn. Gib pro Zile aa, öb\'s zur Information isch oder öb Si en Entscheid verlanged — druf luegt de Ruum.',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Chennzahl hinzuefüege',
   'Cijfer verwijderen': 'Chennzahl entferne',
@@ -3822,8 +3657,6 @@ const _dutchSourceAddGsw = <String, String>{
       'S Token isch gültig, darf das aber nid — gib em meh Rächt uf s Repository.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Ahgmäldet, aber kein Zuegriff — dis Passwort isch nid s Problem. Frag um Rächt für dä Ordner.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Lexikonlizänze: was no z klääre isch',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Das gseht uus wie e vollständigi DAV-URL. Bi Nextcloud leitet OciDeck dä Pfad sälber ab — da ghört nur de Server ane.',
   'Overnemen': 'Übernäh',
@@ -3866,8 +3699,6 @@ const _dutchSourceAddGsw = <String, String>{
   'kenteken': 'Autonummere',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Für d Sproch vo dere Presentation git s kei Stichwortlischte für bsunderi persönlichi Date. Muschter mit ere Prüefziffere (Steuer-ID, IBAN, Pass) laufe; Wörter wie "Diagnose" oder "Verdächtige" wärde nid erkennt.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'D Stichwortlischte für bsunderi persönlichi Date isch für d Sproch vo dere Presentation sehr dünn. Verloss di nid druf, dass Wörter wie "Diagnose" oder "Verdächtige" gfunde wärde.',
   'Landpakketten voor identificatienummers':
       'Länderpaket für Identifikationsnummere',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3897,8 +3728,6 @@ const _dutchSourceAddGsw = <String, String>{
       'De Servername git\'s nid, oder er lat sich nid uflöse. Lueg d Server-URL uf en Tippfähler ah.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Dä Server het e privati oder LAN-Adrässe. Markier ne under Istellige → Spycher als vertrouenswürdig intern.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Em Zertifikat vo däm Server wird nid vertrout. Es sälbersignierts Zertifikat funktioniert nid; nimm eis vo mene anerkännte Userschtäller.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'De Server leitet uf en anderi Adrässe um. Gib die Adrässe direkt ih — Wyterleitige folge mer nid, wil si d Sicherheitsprüefig umgah chöi.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3934,8 +3763,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Opslaan naar S3': 'I S3 spichere',
   'Opgeslagen in S3:': 'I S3 gspicheret:',
   'Hier staat niets': 'Da isch nüt',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Inhalt het nöd chöne glade werde. Prüef Verbindig und Iistellige.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Ändpunkt nöd erreichbar — prüef dini Verbindig und de Ändpunkt.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3944,8 +3771,6 @@ const _dutchSourceAddGsw = <String, String>{
       'De Ändpunkt het en Fähler gmäldet. Probier s spöter nomol.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Dä Ändpunkt cha nöd bedingt schriibe, drum isch dini Arbet nöd vor dere vomene andere gschützt. Spicher under eme neue Name, wenn no öpper anders a dere Präsentation schaffet.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Kei S3-Bucket iigrichtet. Richt eine under Iistellige → Spiicher ii.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Richt zerscht en S3-Bucket ii under Iistellige → Spiicher.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3991,10 +3816,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Das Bild zeigt mindeschtens {count} erkennbari Gsichter.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Das Bild het nöd chöne uf Gsichter prüeft werde. S Format wird nöd unterstützt (zum Bispil HEIC). Das heisst nöd, dass niemert drufisch — es heisst, dass niemert nagluegt het.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Das Bild zeigt es erkennbars Gsicht.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Das Bild zeigt {count} erkennbari Gsichter.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Es Bild, wo öpper erkennbar isch, isch es persöönlichs Datum — au ohni Name.',
   'herkenbaar gezicht op een afbeelding': 'erkennbars Gsicht uf eme Bild',
@@ -4010,8 +3831,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Organisatie': 'Organisation',
   'Welke verbinding?': 'Weli Verbindig?',
   'Bestandsverbindingen': 'Dateiverbindige',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'D Ort, wo du dini Präsentatione ufbewahrsch und duresuechsch — Ordner uf dem Computer, WebDAV-Server und git-Repositories durenand. Zieh si i d Reihefolg, wo du wotsch: s oberschte vo jeder Art gilt als Standard.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Es git-Repository; jedi gspeicherti Version blibt erhalte.',
   'Een map op de schijf van deze computer.':
@@ -4036,15 +3855,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Openen vanaf WebDAV': 'Vo WebDAV öffne',
   'Opslaan naar WebDAV': 'Uf WebDAV speichere',
   'Opgeslagen op WebDAV:': 'Uf WebDAV gspeicheret:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Richt zerscht en WebDAV-Server ii under Iistellige → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Bild uf WebDAV uswähle',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Kei WebDAV-Server iigrichtet. Richt eine ii under Iistellige → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → WebDAV aa.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → WebDAV.',
   'Servertype': 'Servertyp',
   'Nextcloud of ownCloud': 'Nextcloud oder ownCloud',
   'Andere WebDAV-server': 'En andere WebDAV-Server',
@@ -4066,23 +3877,11 @@ const _dutchSourceAddGsw = <String, String>{
   'Haal volle pagina uit de reeks': 'Volli Site us dr Reihe neh',
   'Opslag': 'Spiicher',
   'Opslagwijzen': 'Spiicherarte',
-  'Deze computer': 'Dä Computer',
   'Ingesteld': 'Iigrichtet',
   'Niet ingesteld': 'Nöd iigrichtet',
-  'Nog geen bibliotheek ingesteld': 'No kei Bibliothek iigrichtet',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'D Wääg, wo Sie Präsentatione chönd uufmache und spichere. Klicked e Spiicherart uuf, zum sie iizrichte.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Präsentatione i de Ordner obedra, uf de Feschtplatte vo dem Computer.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Präsentatione in emene Ordner uf Ihrer Nextcloud uufmache und spichere.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Präsentatione us eme Git-Repository uufmache; jedi gspicherti Version blibt erhalte.',
-  'Nog te verifiëren': 'No z verifiziere',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstell uswähle',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',
   'Geen zwakheid gevonden': 'Kei Schwachstell gfunde',
-  'uitleg nog niet geschreven': 'Erklärig no nid gschribe',
   'Getalnotatie herkennen': 'Zahleformat erkenne',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Die Datei het Zahle, wo s Komma uf zwei Arte glääse werde cha:',
@@ -4201,12 +4000,10 @@ const _dutchSourceAddGsw = <String, String>{
   'Veelgestelde vragen': 'Hüüfigi Frooge',
   'Probleemoplossing': 'Fählersuechi',
   'Begrippenlijst': 'Glossar',
-  'API-documentatie': 'API-Dokumentation',
   'Prestaties': 'Leischtig',
   'Beveiligingsontwerp': 'Sicherheitskonzept',
   'Hosting en uitrol': 'Hosting und Uusroll',
   'Bijdragen': 'Mitmache',
-  'Ontwikkelomgeving': 'Entwicklungsumgäbig',
   'Migratiegids': 'Migrationsaaleitig',
   'Versies…': 'Versione…',
   'Versies:': 'Versione:',
@@ -4247,8 +4044,6 @@ const _dutchSourceAddGsw = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De Branch isch verschobe; lad s Deck neu und spicher nomol.',
   'Bijgewerkt met OciDeck': 'Mit OciDeck aktualisiert',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Richt zerscht es Git-Repository i under Iistellige → Git-Repository.',
   'Git-repository': 'Git-Repository',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Presentatione us eme Git-Repository ufmache. Jedi gspeicherti Version bliibt erhalte. S Token wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
@@ -4264,7 +4059,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. D\'Referänzdate stecke i de App sälber, drum lauft s Modul grad und ganz offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si bliibe verborge, bis du si iischaltisch.',
-  'Procesverbetering (ontwerp)': 'Prozessverbesserig (Design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Das Projäkt isch es Näbeprodukt vom Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Stilprofil exportiere',
@@ -4402,7 +4196,6 @@ const _dutchSourceAddGsw = <String, String>{
   'genetisch gegeven': 'genetischs Datum',
   'parketnummer': 'Aktezeiche vo de Staatsawaltschaft',
   'nationaal identificatienummer': 'nationali Identifikationsnummere',
-  'OciWacht (ontwerp)': 'OciWacht (Entwurf)',
   'Mogelijk geheim': 'Möglichs Gheimnis',
   'sleutel of token': 'Schlüssel oder Token',
   'private sleutel': 'private Schlüssel',
@@ -4435,7 +4228,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Leg di ganzi CVE-Lischte uf das Grät, damit s Nachschlage offline passiert und din Suechbegriff niene ane gaht. D Datebank chunnt vo CVE List V5 (em offizielle CVE-Programm, über GitHub).',
   'Wat er lokaal beschikbaar is': 'Was lokal verfüegbar isch',
-  'Gegevenspakket': 'Datepäckli',
   'Nu bijwerken': 'Jetz aktualisiere',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Date lokal verfüegbar — s Nachschlage passiert uf däm Grät; es gaht nüt use.',
@@ -4454,7 +4246,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Akzeptiere: d Date ghöred da häre und de Hiiwiis verschwindet. Akzeptiere + warne: de Empfänger gseht es Abzeiche, dass uf de Folie Persoonedate sind. Weglah: die gfundene Date wärded uf em Bildschirm und im Export unläsbar gmacht — dini Markdown-Datei bhaltet de Originaltäxt.',
   'Alleen melden': 'Nur mälde',
   'PERSOONSGEGEVENS': 'PERSOONEDATE',
-  'Persoonsgegevens op deze slide': 'Persoonedate uf dere Folie',
   'Volg de presentatie': 'De Präsentation folge',
   'Weglaten uit tonen en exporteren': 'Us Azeig und Export wegglah',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4576,8 +4367,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Bewerk deze slide': 'Die Folie bearbeite',
   'Bewijs verwijderen': 'Beweis entferne',
   '(nog leeg)': '(no läär)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Gib zerscht e Befund-ID a, zum Beweis aahänke.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Füeg Screenshots oder Videos as Beweis zue. Jede Beweis wird e eigeni Folie grad nach em Befund und chunt im Export mit.',
   'Uitvoering testen conform standaard': 'Tests gmäss Standard',

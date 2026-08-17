@@ -805,8 +805,6 @@ const _dutchSourcePt = {
   'Selectie opheffen': 'Limpar seleção',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Aceito a licença EUPL 1.2 e li quais os dados que o OciDeck guarda.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'A sua escolha torna-se o idioma predefinido da aplicação.',
   'Lees de volledige licentie': 'Ler a licença completa',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'O OciDeck é software livre sob a licença EUPL 1.2. Antes de começar, pedimos que aceite a licença. Em baixo pode também ler quais os dados que o OciDeck guarda neste dispositivo e quando algo sai do seu dispositivo.',
@@ -833,9 +831,6 @@ const _dutchSourcePt = {
   'Het antwoord van de server was te groot':
       'A resposta do servidor era demasiado grande',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Fonte Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Abra e guarde apresentações numa pasta no seu Nextcloud. A palavra-passe é guardada encriptada no porta-chaves, não junto das restantes definições.',
   'Server-URL': 'URL do servidor',
   'Gebruikersnaam': 'Nome de utilizador',
   'App-wachtwoord': 'Palavra-passe da aplicação',
@@ -849,22 +844,13 @@ const _dutchSourcePt = {
   'Verbinding gelukt': 'Ligação bem-sucedida',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'As alterações são guardadas quando clica em Guardar.',
-  'Afbeelding kiezen op Nextcloud': 'Escolher imagem no Nextcloud',
-  'Openen vanaf Nextcloud': 'Abrir a partir do Nextcloud',
   'Vernieuwen': 'Atualizar',
   'Deze map is leeg': 'Esta pasta está vazia',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nenhum servidor Nextcloud configurado. Configure um em Definições → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Não foi possível carregar a pasta. Verifique a sua ligação e definições.',
   'Kon dit bestand niet openen.': 'Não foi possível abrir este ficheiro.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Isto não é uma apresentação Marp/OciDeck.',
   'Downloaden mislukt:': 'Falha na transferência:',
-  'Opgeslagen op Nextcloud:': 'Guardado no Nextcloud:',
   'Opslaan mislukt:': 'Falha ao guardar:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Configure primeiro um servidor Nextcloud em Definições → Nextcloud.',
   'Opslaan naar Nextcloud': 'Guardar no Nextcloud',
   'Doelpad (zonder extensie)': 'Caminho de destino (sem extensão)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -875,9 +861,6 @@ const _dutchSourcePt = {
   'Tijden-overzicht tonen na afloop': 'Mostrar resumo de tempos no final',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'O tempo por slide é sempre medido; isto apenas determina se o resumo aparece após esta apresentação.',
-  'Oefenoverzicht tonen na afloop': 'Mostrar resumo do ensaio no final',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Após uma apresentação, mostrar o resumo do tempo gasto por slide. O tempo é sempre medido; isto apenas determina se o ecrã aparece.',
   'Onveilige presentatie geblokkeerd': 'Apresentação insegura bloqueada',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Esta apresentação não foi aberta. O ficheiro contém conteúdo que pode executar código, e uma apresentação deve conter apenas dados — nada executável.',
@@ -960,7 +943,6 @@ const _dutchSourcePt = {
   'Online': 'Online',
   'Lokaal bestand': 'Ficheiro local',
   'Geen video': 'Sem vídeo',
-  'Vraag (meerkeuze)': 'Pergunta (escolha múltipla)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'O texto do título tem pouco contraste com a imagem de fundo',
   'Herstel': 'Corrigir',
@@ -975,8 +957,6 @@ const _dutchSourcePt = {
   'Huidig punt weghalen': 'Remover o ponto atual',
   'Stap voor stap': 'Passo a passo',
   'Geen animatie': 'Sem animação',
-  'Animatiesnelheid': 'Velocidade da animação',
-  'Langzaam': 'Lenta',
   'Snel': 'Rápida',
   'Gebeurtenissen': 'Eventos',
   'Gebeurtenis toevoegen': 'Adicionar evento',
@@ -989,8 +969,6 @@ const _dutchSourcePt = {
   'Vraag': 'Pergunta',
   'Wat wil je vragen?': 'O que quer perguntar?',
   'Antwoorden': 'Respostas',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marque as respostas corretas. No máximo oito respostas; ao apresentar, é mostrada aleatoriamente uma correta e as restantes erradas.',
   'Antwoord': 'Resposta',
   'Antwoord toevoegen': 'Adicionar resposta',
   'Goed antwoord': 'Resposta correta',
@@ -1023,8 +1001,6 @@ const _dutchSourcePt = {
   'Stelling': 'Afirmação',
   'Formuleer een stelling die juist of onjuist is':
       'Formule uma afirmação verdadeira ou falsa',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Marque todas as respostas corretas. Ao apresentar, é mostrado um conjunto aleatório com pelo menos uma correta e uma errada.',
   'Juist': 'Verdadeiro',
   'Onjuist': 'Falso',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1045,7 +1021,6 @@ const _dutchSourcePt = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'As cores de estado dos medidores do cockpit. Crie variantes com nome; o esquema escolhido aplica-se a todos os slides de cockpit.',
   'Standaard': 'Predefinição',
-  'Standaardkleuren gebruiken': 'Usar as cores predefinidas',
   'Kleurschema verwijderen': 'Eliminar esquema de cores',
   'Schemanaam': 'Nome do esquema',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1124,7 +1099,6 @@ const _dutchSourcePt = {
   'Logo en footer': 'Logótipo e rodapé',
   'Pagina': 'Página',
   'Presentatiestijl': 'Estilo de apresentação',
-  'Presentatiestijl: ': 'Estilo de apresentação: ',
   'Tekst...': 'Texto...',
   'Teksteditor': 'Editor de texto',
   'Volgende pagina': 'Página seguinte',
@@ -1137,8 +1111,6 @@ const _dutchSourcePt = {
   'Doeltijd': 'Tempo-alvo',
   'Doeltijd (aftellen)': 'Tempo-alvo (contagem decrescente)',
   'Geen aftelling': 'Sem contagem decrescente',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Tempo-alvo predefinido para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
   'uit': 'desligado',
   'Doeltijd / aftellen (K)': 'Alvo / contagem decrescente (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1212,14 +1184,8 @@ const _dutchSourcePt = {
   'Cirkel': 'Circular',
   'Spider': 'Radar',
   'CSV importeren': 'Importar CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Dados (CSV: primeira linha = nomes das séries, primeira coluna = etiquetas)',
   'Gekoppeld aan': 'Ligado a',
   'Ontkoppelen': 'Desassociar',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Guardar os dados no diapositivo ou mantê-los como ficheiro CSV separado junto à apresentação?',
-  'In de slide': 'No diapositivo',
-  'Als CSV-bestand': 'Como ficheiro CSV',
   'Geen grafiekgegevens': 'Sem dados de gráfico',
   'Label': 'Etiqueta',
   'Rij': 'Linha',
@@ -1249,7 +1215,6 @@ const _dutchSourcePt = {
   'Eigen kleur (hex)': 'Cor personalizada (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Por exemplo #33FF33 para um ecrã verde CRT.',
-  'Onderdeel van stijlprofiel ': 'Parte do perfil de estilo ',
   'Broncode lettertype': 'Tipo de letra do código-fonte',
   'Kop (optioneel)': 'Cabeçalho (opcional)',
   'Subkop (optioneel)': 'Subcabeçalho (opcional)',
@@ -1289,16 +1254,7 @@ const _dutchSourcePt = {
   'Zet het filter uit om alles weer te zien.':
       'Desligue o filtro para ver tudo novamente.',
   'Welkom bij OciDeck': 'Bem-vindo ao OciDeck',
-  'Privacy en gebruik': 'Privacidade e utilização',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'O OciDeck é uma aplicação de ambiente de trabalho local. As suas apresentações e dados são armazenados exclusivamente no seu computador.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'A aplicação não recolhe dados pessoais, nem estatísticas, nem dados de utilização. A sua privacidade é a nossa prioridade.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Todos os dados que introduzir no OciDeck permanecem no seu sistema local e não são enviados para servidores externos.',
   'Licentie (EUPL 1.2)': 'Licença (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Ao clicar em "Concordar", aceita estes termos e consente a utilização do OciDeck.',
   'Volledige licentie online': 'Licença completa online',
   'Akkoord gaan': 'Concordar',
   'Privacy': 'Privacidade',
@@ -1388,8 +1344,6 @@ const _dutchSourcePt = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Exportação bloqueada devido a problemas de qualidade graves.',
   'Alle meldingen': 'Todas as notificações',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… e mais problemas no painel de qualidade.',
   'Classificatie-handhaving': 'Aplicação da classificação',
   'Vrijgaveplafond': 'Limite de divulgação',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1408,11 +1362,9 @@ const _dutchSourcePt = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Defina um nível TLP — a exportação está bloqueada pela política de classificação.',
   'Tabel bewerken': 'Editar tabela',
-  'Pijltjes · Tab · Esc': 'Setas · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editar tabela (em diapositivos de tabela)',
   'Tabel bewerken (E)': 'Editar tabela (E)',
   'Tab wisselt cel · Esc sluit': 'Tab muda de célula · Esc fecha',
-  'Pen · markeerstift · ⇧E': 'Caneta · marcador · ⇧E',
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn percorre os diapositivos',
@@ -1455,10 +1407,6 @@ const _dutchSourcePt = {
       'Erro de rede — verifique a ligação e tente novamente.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Algo correu mal inesperadamente. Consulte o registo para detalhes.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'O Nextcloud não está (bem) configurado — verifique os dados do servidor em Definições → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Servidor inacessível — verifique a ligação e o URL do servidor.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1486,8 +1434,6 @@ const _dutchSourcePt = {
   'Uit recente bestanden verwijderen': 'Remover dos ficheiros recentes',
   'OciDeck wordt gestart…': 'A iniciar o OciDeck…',
   'Herstelbestanden': 'Ficheiros de recuperação',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Os ficheiros de recuperação contêm todo o conteúdo das suas apresentações em texto simples. São limpos automaticamente após 7 dias; aqui pode apagá-los de imediato.',
   'Herstelbestanden nu wissen': 'Apagar ficheiros de recuperação agora',
   'Er waren geen herstelbestanden.': 'Não havia ficheiros de recuperação.',
   'herstelbestand(en) gewist.': 'ficheiro(s) de recuperação apagado(s).',
@@ -1921,7 +1867,6 @@ const _dutchSourceAddPt = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Criamos uma cópia num novo separador; o seu ficheiro original permanece inalterado.',
   'Welk formaat?': 'Que formato?',
-  'dia\'s, gesplitst op kop.': 'diapositivos, divididos por título.',
   'document': 'documento',
   'volledig': 'completo',
   'Invoegen': 'Inserir',
@@ -2083,12 +2028,8 @@ const _dutchSourceAddPt = <String, String>{
   'Alle integraties': 'Todas as integrações',
   'Alles inschakelen': 'Ativar tudo',
   'Alles uitschakelen': 'Desativar tudo',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Já está definida uma pasta de relatórios, por isso a ligação continua acessível e uma apresentação OpenKAT existente ainda pode ser atualizada.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Ligações com outros sistemas. Cada ligação está desativada por predefinição e permanece inativa até que a ative.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Leia as pastas de relatórios do OpenKAT como uma única visão de gestão.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Trazer apresentações do PowerPoint (.pptx), Keynote (.key) e Impress (.odp) como deck editável. As ligações com outros sistemas, como o OpenKAT, encontram-se em Integrações.',
   'Media (WebRTC)': 'Multimédia (WebRTC)',
@@ -2253,7 +2194,6 @@ const _dutchSourceAddPt = <String, String>{
   'Van toepassing': 'Aplicável',
   'Voortgang': 'Progresso',
   'Voortgang managementsysteem': 'Progresso do sistema de gestão',
-  'Voortgangsoverzicht bijgewerkt': 'Resumo de progresso atualizado',
   'Welk deel?': 'Que parte?',
   'beheersmaatregelen geladen': 'controlos carregados',
   'geïmplementeerd': 'implementado',
@@ -2331,10 +2271,6 @@ const _dutchSourceAddPt = <String, String>{
       'Isto não parece uma chave de recuperação válida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Esta chave de recuperação vem de uma versão mais recente do OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'A memória web para imagens está cheia (máximo de 256 MB). Primeiro, guarde o seu trabalho como ficheiro .ocideck para evitar a perda de dados. Depois, use menos imagens ou imagens menores, feche outros decks ou recarregue sem abrir outros decks.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'A memória web para imagens está cheia (máximo de 256 MB). Guarde o trabalho como ficheiro .ocideck e recarregue a página antes de adicionar mais imagens.',
   'Afbeeldingsrechten': 'Direitos de imagem',
   'Afbeeldingsrechten controleren…': 'Verifique os direitos da imagem…',
   'Afdoening': 'Povoado',
@@ -2386,8 +2322,6 @@ const _dutchSourceAddPt = <String, String>{
   'Verifiëren': 'Verificar',
   'Deelnemers verifiëren': 'Verificar participantes',
   '(dit apparaat)': '(este dispositivo)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Compara a impressão digital de cada dispositivo por um canal de confiança — leiam-na um ao outro, ou envia-a por uma via em que confies. Se coincidirem, estás a trabalhar com os dispositivos reais e ninguém se meteu no meio. Se diferirem, interrompe a colaboração.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Esta não é uma ligação de convite válida.',
@@ -2449,7 +2383,6 @@ const _dutchSourceAddPt = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Colabora ao vivo numa apresentação através de um homeserver Matrix como retransmissor cifrado. O conteúdo é cifrado ponta a ponta com as próprias chaves do OciDeck; o servidor só vê dados cifrados. Introduz um homeserver e um token de acesso criado noutro lugar — o OciDeck nunca pede a tua palavra-passe. O token é guardado cifrado no porta-chaves, não junto às restantes definições.',
   'wordt door de test ingevuld': 'preenchido pelo teste',
-  'Versleuteld doorgeefluik (ontwerp)': 'Retransmissor encriptado (design)',
   'Meer documentatie op de repository': 'Mais documentação no repositório',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'A documentação completa — incluindo arquitetura, compilação, código-fonte e design — está no repositório.',
@@ -2691,50 +2624,14 @@ const _dutchSourceAddPt = <String, String>{
       'Quais dados de medição estão faltando ou desatualizados?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Em quais dados este relatório se baseia?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Uma visão geral de gerenciamento ampla, mas factual, com momentos de medição rastreáveis.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Classifica sem pontuação total e mostra as medidas ausentes separadamente.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Mostra contagens de gravidade, contribuidores e medições transportadas por momento.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organiza tipos de descoberta por organizações, sistemas e observações afetados.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Mostra números críticos/altos sem qualquer pesagem planejada.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Mostra numerador, denominador e apenas porcentagens confiáveis.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Agrupa recomendações literais do OpenKAT sem prioridade própria.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Uma imagem atual direcionada de uma organização e sua data de medição.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Compara dois momentos de medição escolhidos dentro de uma organização.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Distingue novo, novo e não mais observado.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Usa apenas primeiras datas de observação confiáveis.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Classifica sistemas com contadores de gravidade separados.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Mostra valores delta individuais sem pontuação ponderada.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Compara o numerador e o denominador com uma cobertura comprovadamente comparável.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventaria sistemas, nomes de host e endereços IP comprovados na origem.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Separa monitorado, não monitorado e desconhecido.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Mostra apenas mutações de monitoramento explicitamente comprovadas.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Mostra organizações e sistemas em torno de um link CVE confiável.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Classifica CVEs com desduplicação explícita.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Distingue CVEs novos, novos e não mais observados.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Mostra medidas faltantes, desatualizadas e realmente utilizadas.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Contabiliza datas importantes, arquivos de origem, adaptadores e hashes de origem.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Ainda não disponível: a fonte não comprova o estado de monitoramento de todos os ativos.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2779,12 +2676,6 @@ const _dutchSourceAddPt = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Qual relatório responde à sua pergunta?',
   'Meer rapportvragen': 'Mais perguntas sobre relatórios',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Que sistemas são vulneráveis a uma CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizações e sistemas vulneráveis em torno de uma vulnerabilidade.',
-  'Organisaties met kwetsbare systemen':
-      'Organizações com sistemas vulneráveis',
   'Kwetsbare systemen': 'Sistemas vulneráveis',
   'Kritiek/hoog': 'Crítico/alto',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2806,8 +2697,6 @@ const _dutchSourceAddPt = <String, String>{
   'Bruikbaar': 'Utilizável',
   'CVE zoeken': 'Pesquisa CVE',
   'Critical/high': 'Crítico/alto',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Qualidade dos dados, falta de medições e obsolescência.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Os relatórios selecionados não contêm dados confiáveis ​​suficientes para esta parte.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2835,9 +2724,6 @@ const _dutchSourceAddPt = <String, String>{
   'Geen bruikbare meetdatum': 'Nenhuma data de medição utilizável',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Os slides gerados são atualizados. Seus próprios slides e cópias serão retidos.',
-  'Getroffen organisaties en systemen': 'Organizações e sistemas afetados',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organizações e sistemas afetados em torno de uma vulnerabilidade.',
   'Getroffen systemen': 'Sistemas afetados',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Não foi possível criar o relatório. Suas escolhas são preservadas; verifique os avisos e tente novamente.',
@@ -2847,20 +2733,15 @@ const _dutchSourceAddPt = <String, String>{
   'Keuzes wijzigen…': 'Mude as escolhas…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Escolha a pasta na qual o OpenKAT colocou os relatórios. OciDeck apenas lê esta pasta; nada é alterado ou enviado.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Escolha a pergunta que o relatório deve responder. A OciDeck determina a estrutura apropriada.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Escolha um CVE encontrado nos relatórios.',
   'Laatste bruikbare meting': 'Última medição utilizável',
   'Live voorvertoning van de rapportopbouw':
       'Visualização ao vivo da estrutura do relatório',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Gerenciar e controlar informações sobre múltiplas organizações.',
   'Meer instellingen': 'Mais configurações',
   'Nederlands': 'Holandês',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Nem toda organização escolhida possui uma medição para esse período.',
-  'Nieuwe en verdwenen bevindingen': 'Descobertas novas e ausentes',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Ainda não disponível: estes relatórios não contêm números CVE fiáveis.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2895,8 +2776,6 @@ const _dutchSourceAddPt = <String, String>{
       'Falta uma medição atual útil para uma ou mais organizações.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Dois momentos de medição são necessários para uma comparação. Uma medição foi encontrada agora.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progresso comparado a um momento de medição anterior.',
   'Waar staan de OpenKAT-rapportages?': 'Onde estão os relatórios do OpenKAT?',
   'Wat veranderde er bij één organisatie?': 'O que mudou em uma organização?',
   'Wat wilt u laten zien?': 'O que você quer mostrar?',
@@ -2908,7 +2787,6 @@ const _dutchSourceAddPt = <String, String>{
   'bruikbaar': 'utilizável',
   'metingen': 'medições',
   'organisaties': 'organizações',
-  'organisaties geselecteerd': 'organizações selecionadas',
   'rapportages gebruikt': 'relatórios usados',
   'systemen': 'sistemas',
   'Nog geen specificatielimiet': 'Ainda sem limite de especificação',
@@ -3054,7 +2932,6 @@ const _dutchSourceAddPt = <String, String>{
       'está num slide de árvore mas não é usado noutro sítio — ligue-o a uma matriz, fluxo ou outro slide.',
   'Nieuw verbeteringsproject': 'Novo projeto de melhoria',
   'Kader': 'Quadro',
-  'Projecttitel': 'Título do projeto',
   'Primaire Y-metriek (Y-01)': 'Métrica Y principal (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Por exemplo: tempo de order intake em dias úteis',
@@ -3110,10 +2987,6 @@ const _dutchSourceAddPt = <String, String>{
   'Bron niet toegestaan': 'Origem não permitida',
   'Deze URL is door de beveiliging geweigerd.':
       'Este URL foi rejeitado pela segurança.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Trazer material de outros sistemas. Duas fontes: as apresentações do PowerPoint (.pptx), Keynote (.key) e Impress (.odp) tornam-se um deck editável, e os relatórios OpenKAT (uma pasta de JSON) tornam-se uma única visão de gestão. Onde está a pasta OpenKAT define-se em Integrações.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Trazer apresentações do PowerPoint (.pptx), Keynote (.key) e Impress (.odp) como deck editável. A leitura de pastas de relatórios OpenKAT só está disponível na versão para computador.',
   'Alinea': 'Parágrafo',
   'Audio "{bestand}"': 'Áudio "{bestand}"',
   'Deck opbouwen…': 'A construir a apresentação…',
@@ -3236,8 +3109,6 @@ const _dutchSourceAddPt = <String, String>{
       'O índice da lista de verificação: por teste, o id estável, o título canónico e a categoria. O conteúdo do próprio guia não está incluído.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'O índice de testes da v2.0.0: por teste, o id estável, o título canónico, a categoria MASVS e a fraqueza MASWE. Os testes v1 retirados e os marcadores de posição não estão incluídos; o conteúdo do guia também não.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'A lista de fraquezas (117): id, título, categoria MASVS, plataforma e a ligação CWE. Três quartos ainda não estão redigidos na fonte; esses estão incluídos, assinalados. As fraquezas retiradas não.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'A lista completa (id, nome, descrição) mais um núcleo próprio selecionado com as nossas notas de remediação.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3284,34 +3155,17 @@ const _dutchSourceAddPt = <String, String>{
       'Cada ficheiro é convertido separadamente e guardado como apresentação própria na pasta de destino. Se um falhar, a fila continua na mesma.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Importar várias apresentações ao mesmo tempo escreve-as como ficheiros numa pasta; a versão de navegador não consegue fazê-lo.',
-  'Nu importeren': 'Importar agora',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'A visão geral está pronta numa aba nova.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Lê uma pasta com relatórios OpenKAT (JSON) e constrói a partir dela uma única visão de gestão: sistemas, constatações por gravidade, os pontos há mais tempo em aberto e a evolução ao longo de medições sucessivas. A mesma ação numa apresentação OpenKAT existente atualiza-a e deixa os seus próprios diapositivos no lugar.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'A importação apenas lê; nada nesta pasta é alterado ou enviado. Os ficheiros que não sejam relatórios OpenKAT são ignorados e indicados no relatório de importação.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Indique a pasta onde estão os seus relatórios OpenKAT (JSON). A importação lê essa pasta e constrói a partir dela uma única visão de gestão; com a pasta definida aqui, não precisa de a escolher de cada vez.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'A importação do OpenKAT lê uma pasta do disco e só está disponível na versão para computador.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Ainda não foi indicada uma pasta de relatórios, por isso a importação pede-a sempre.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Já está definida uma pasta de relatórios, por isso o ponto de entrada continua acessível e uma apresentação OpenKAT existente ainda pode ser atualizada.',
   'Integraties': 'Integrações',
-  'Naar Integraties': 'Ir para Integrações',
   'Map kiezen…': 'Escolher pasta…',
   'Map wissen': 'Limpar pasta',
-  'OpenKAT-rapportages importeren…': 'Importar relatórios do OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Escolher pasta com relatórios do OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Relatórios do OpenKAT importados.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck do OpenKAT atualizado; os slides manuais foram mantidos.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Nenhum relatório do OpenKAT encontrado nesta pasta.',
-  'OpenKAT-import mislukt.': 'A importação do OpenKAT falhou.',
   'rapportages': 'relatórios',
   'overgeslagen': 'ignorados',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3370,8 +3224,6 @@ const _dutchSourceAddPt = <String, String>{
   'Label op de primaire knop': 'Etiqueta no botão principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatações que analisaste e deixaste ficar. Já não são comunicadas, mas a análise continua a encontrá-las e não contam como resolvidas. Toca para repor uma.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Pôr de lado um achado de privacidade (desenho)',
   'Deze is beoordeeld en mag blijven': 'Revisto, este pode ficar',
   'Mogelijk gemaakt door': 'Possibilitado por',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3383,10 +3235,8 @@ const _dutchSourceAddPt = <String, String>{
   'Technische melding:': 'Mensagem técnica:',
   'presentaties': 'apresentacoes',
   '/Presentaties': '/Apresentações',
-  'Rapportagedistributie (ontwerp)': 'Distribuição de relatórios (design)',
   'De export is mislukt.': 'A exportação falhou.',
   'Presenteer vanaf hier': 'Apresentar a partir daqui',
-  'Teams-gastclient (ontwerp)': 'Cliente convidado do Teams (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: até que ponto este material pode ser partilhado?',
   'Wat betekenen deze niveaus?': 'O que significam estes níveis?',
@@ -3505,8 +3355,6 @@ const _dutchSourceAddPt = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Apresentações que continuam a ser simples ficheiros Markdown: legíveis, pesquisáveis e abertos com qualquer editor.',
   'sjablonen om mee te beginnen, of leeg': 'modelos para começar, ou em branco',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'A omissão está ativa: os dados encontrados são tapados a preto e todas as imagens, vídeos e áudio deste slide não seguem para o ecrã nem para a exportação. O seu ficheiro markdown mantém tudo.',
   'Mijn tekst': 'O meu texto',
   'Wat zij zien': 'O que eles veem',
   'Presentatiegegevens': 'Dados da apresentação',
@@ -3730,7 +3578,6 @@ const _dutchSourceAddPt = <String, String>{
   'Opslaan naar…': 'Guardar em…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Configure primeiro uma ligação em Definições → Armazenamento.',
-  'Beginnen met:': 'Começar com:',
   'Verlopen datums markeren': 'Assinalar datas vencidas',
   'Datums gemarkeerd': 'Datas assinaladas',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3756,28 +3603,15 @@ const _dutchSourceAddPt = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'A superfície de ataque por tipo de objeto: quantos há, quantos requerem trabalho, o que é novo e o que ninguém possui. Este último é normalmente a conversa.',
   'Acties en besluiten': 'Ações e decisões',
-  'Actie toevoegen': 'Adicionar ação',
-  'Actie verwijderen': 'Remover ação',
   'Actie': 'Ação',
   'Deadline': 'Prazo',
-  'Op de lijst sinds': 'Na lista desde',
   'Stand': 'Estado',
-  'Wat vraagt u': 'O que está a pedir',
   'geen datum': 'sem data',
-  'Ter informatie': 'Para informação',
   'Besluit gevraagd': 'Decisão necessária',
   'Escalatie': 'Escalonamento',
   'Open': 'Em aberto',
   'Loopt': 'Em curso',
   'Afgerond': 'Concluído',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Só uma decisão ou escalonamento recebe etiqueta no slide; "em atraso" decorre do prazo e não é definido por si.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datas como aaaa-mm-dd. Qualquer outra forma é recusada em vez de adivinhada: 05-08-2026 são dois dias diferentes.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Um slide de ações leva no máximo oito linhas; para além disso a sala passa os olhos em vez de decidir.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'O que tem de acontecer, quem o faz e até quando. Indique por linha se é para informação ou se está a pedir uma decisão — é isso que a sala procura.',
   'Scorecard': 'Painel de indicadores',
   'Cijfer toevoegen': 'Adicionar indicador',
   'Cijfer verwijderen': 'Remover indicador',
@@ -3864,8 +3698,6 @@ const _dutchSourceAddPt = <String, String>{
       'O token é válido, mas não tem permissão para isto — dá-lhe mais permissões no repositório.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Com sessão iniciada, mas sem acesso — a tua palavra-passe não é o problema. Pede permissões nesta pasta.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licenças dos léxicos: o que falta perguntar',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Isto parece um URL DAV completo. No Nextcloud, o OciDeck deduz esse caminho sozinho — aqui só pertence o servidor.',
   'Overnemen': 'Aplicar',
@@ -3908,8 +3740,6 @@ const _dutchSourceAddPt = <String, String>{
   'kenteken': 'matrícula do veículo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Não existe lista de palavras-chave para categorias especiais de dados pessoais no idioma desta apresentação. Os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam; palavras como "diagnóstico" ou "suspeito" não são reconhecidas.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'A lista de palavras-chave para categorias especiais de dados pessoais é muito reduzida no idioma desta apresentação. Não conte com a deteção de palavras como "diagnóstico" ou "suspeito".',
   'Landpakketten voor identificatienummers':
       'Pacotes de país para números de identificação',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3939,8 +3769,6 @@ const _dutchSourceAddPt = <String, String>{
       'O nome do servidor não existe ou não pode ser consultado. Verifica se há uma gralha no URL do servidor.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Este servidor tem um endereço privado ou de LAN. Marca-o como interno fidedigno em Definições → Armazenamento.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'O certificado deste servidor não é fidedigno. Um certificado autoassinado não funciona; usa um de uma entidade reconhecida.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'O servidor redireciona para outro endereço. Introduz esse endereço diretamente — não seguimos redirecionamentos, porque podem contornar a verificação de segurança.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3976,8 +3804,6 @@ const _dutchSourceAddPt = <String, String>{
   'Opslaan naar S3': 'Guardar no S3',
   'Opgeslagen in S3:': 'Guardado no S3:',
   'Hier staat niets': 'Aqui não há nada',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Não foi possível carregar o conteúdo. Verifica a ligação e as definições.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Ponto de extremidade inacessível — verifica a ligação e o ponto de extremidade.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3986,8 +3812,6 @@ const _dutchSourceAddPt = <String, String>{
       'O ponto de extremidade devolveu um erro. Tenta mais tarde.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Este ponto de extremidade não consegue escrever condicionalmente, por isso o teu trabalho não está protegido do de outra pessoa. Guarda com um nome novo se houver mais alguém a trabalhar nesta apresentação.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nenhum bucket S3 configurado. Configure um em Definições → Armazenamento.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Configure primeiro um bucket S3 em Definições → Armazenamento.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4033,10 +3857,6 @@ const _dutchSourceAddPt = <String, String>{
       'Esta imagem mostra pelo menos {count} rostos reconhecíveis.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Não foi possível verificar rostos nesta imagem. O formato não é suportado (HEIC, por exemplo). Isso não significa que não há ninguém — significa que não se olhou.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Esta imagem mostra um rosto reconhecível.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Esta imagem mostra {count} rostos reconhecíveis.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Uma imagem em que alguém é reconhecível é um dado pessoal, mesmo sem nome.',
   'herkenbaar gezicht op een afbeelding': 'rosto reconhecível numa imagem',
@@ -4052,8 +3872,6 @@ const _dutchSourceAddPt = <String, String>{
   'Organisatie': 'Organização',
   'Welke verbinding?': 'Que ligação?',
   'Bestandsverbindingen': 'Ligações de ficheiros',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Os locais onde guarda e pesquisa as suas apresentações — pastas neste computador, servidores WebDAV e repositórios git misturados. Arraste-os pela ordem que quiser: o primeiro de cada tipo vale como predefinição.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Um repositório git; cada versão guardada é mantida.',
   'Een map op de schijf van deze computer.':
@@ -4078,15 +3896,7 @@ const _dutchSourceAddPt = <String, String>{
   'Openen vanaf WebDAV': 'Abrir a partir do WebDAV',
   'Opslaan naar WebDAV': 'Guardar no WebDAV',
   'Opgeslagen op WebDAV:': 'Guardado no WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Configure primeiro um servidor WebDAV em Definições → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Escolher imagem no WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nenhum servidor WebDAV configurado. Configure um em Definições → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'O WebDAV não está (bem) configurado — verifique os dados do servidor em Definições → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → WebDAV.',
   'Servertype': 'Tipo de servidor',
   'Nextcloud of ownCloud': 'Nextcloud ou ownCloud',
   'Andere WebDAV-server': 'Outro servidor WebDAV',
@@ -4108,24 +3918,11 @@ const _dutchSourceAddPt = <String, String>{
   'Haal volle pagina uit de reeks': 'Retirar página cheia da série',
   'Opslag': 'Armazenamento',
   'Opslagwijzen': 'Modos de armazenamento',
-  'Deze computer': 'Este computador',
   'Ingesteld': 'Configurado',
   'Niet ingesteld': 'Não configurado',
-  'Nog geen bibliotheek ingesteld':
-      'Ainda não há nenhuma biblioteca configurada',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'As vias pelas quais pode abrir e guardar apresentações. Clique num modo para o configurar.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Apresentações nas pastas acima, no disco deste computador.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Abra e guarde apresentações numa pasta no seu Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Abra apresentações a partir de um repositório git; cada versão guardada é mantida.',
-  'Nog te verifiëren': 'Ainda por verificar',
   'MASWE-zwakheid kiezen': 'Escolher uma fraqueza MASWE',
   'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',
   'Geen zwakheid gevonden': 'Nenhuma fraqueza encontrada',
-  'uitleg nog niet geschreven': 'explicação ainda não escrita',
   'Getalnotatie herkennen': 'Reconhecer o formato dos números',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Este ficheiro contém números cuja vírgula pode ser lida de duas formas:',
@@ -4244,12 +4041,10 @@ const _dutchSourceAddPt = <String, String>{
   'Veelgestelde vragen': 'Perguntas frequentes',
   'Probleemoplossing': 'Resolução de problemas',
   'Begrippenlijst': 'Glossário',
-  'API-documentatie': 'Documentação da API',
   'Prestaties': 'Desempenho',
   'Beveiligingsontwerp': 'Design de segurança',
   'Hosting en uitrol': 'Hospedagem e implantação',
   'Bijdragen': 'Contribuir',
-  'Ontwikkelomgeving': 'Ambiente de desenvolvimento',
   'Migratiegids': 'Guia de migração',
   'Versies…': 'Versões…',
   'Versies:': 'Versões:',
@@ -4290,8 +4085,6 @@ const _dutchSourceAddPt = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'O branch mudou; recarrega o deck e guarda de novo.',
   'Bijgewerkt met OciDeck': 'Atualizado com OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Configure primeiro um repositório Git em Definições → Repositório Git.',
   'Git-repository': 'Repositório Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Abra apresentações de um repositório Git. Cada versão guardada é preservada. O token é guardado cifrado no porta-chaves, não junto às restantes definições.',
@@ -4307,7 +4100,6 @@ const _dutchSourceAddPt = <String, String>{
       'Diapositivos de relatório e dados de referência para a segurança da informação: constatações, listas de tarefas, matrizes de escopo e assinatura. Estruturado segundo o MIAUW e amplamente utilizável para pentests, auditorias e investigação de segurança. Os dados de referência estão na própria aplicação, pelo que o módulo funciona de imediato e totalmente offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulos opcionais. Desativados por predefinição; permanecem ocultos até os ativar.',
-  'Procesverbetering (ontwerp)': 'Melhoria de processos (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Este projeto é um subproduto do Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportar perfil de estilo',
@@ -4449,7 +4241,6 @@ const _dutchSourceAddPt = <String, String>{
   'genetisch gegeven': 'dado genético',
   'parketnummer': 'número de processo do Ministério Público',
   'nationaal identificatienummer': 'número de identificação nacional',
-  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Possível segredo',
   'sleutel of token': 'chave ou token',
   'private sleutel': 'chave privada',
@@ -4483,7 +4274,6 @@ const _dutchSourceAddPt = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Coloca a lista CVE completa neste aparelho, para que as pesquisas sejam feitas offline e o teu termo de pesquisa não vá a lado nenhum. A base de dados vem de CVE List V5 (o programa CVE oficial, via GitHub).',
   'Wat er lokaal beschikbaar is': 'O que está disponível localmente',
-  'Gegevenspakket': 'Pacote de dados',
   'Nu bijwerken': 'Atualizar agora',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Dados disponíveis localmente — as pesquisas acontecem neste dispositivo; nada sai dele.',
@@ -4502,7 +4292,6 @@ const _dutchSourceAddPt = <String, String>{
       'Aceitar: os dados pertencem aqui e o aviso desaparece. Aceitar + avisar: quem recebe vê um emblema a indicar dados pessoais no diapositivo. Omitir: os dados encontrados tornam-se ilegíveis no ecrã e na exportação — o teu ficheiro Markdown mantém o texto original.',
   'Alleen melden': 'Apenas comunicar',
   'PERSOONSGEGEVENS': 'DADOS PESSOAIS',
-  'Persoonsgegevens op deze slide': 'Dados pessoais neste diapositivo',
   'Volg de presentatie': 'Seguir a apresentação',
   'Weglaten uit tonen en exporteren': 'Omitir da apresentação e exportação',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4625,8 +4414,6 @@ const _dutchSourceAddPt = <String, String>{
   'Bewerk deze slide': 'Editar este diapositivo',
   'Bewijs verwijderen': 'Remover prova',
   '(nog leeg)': '(ainda vazio)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Introduza primeiro um ID de constatação para anexar provas.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adicione capturas de ecrã ou vídeos como prova. Cada prova torna-se um diapositivo próprio logo após a constatação e é incluída na exportação.',
   'Uitvoering testen conform standaard': 'Testes conforme a norma',

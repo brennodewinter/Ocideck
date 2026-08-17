@@ -431,14 +431,8 @@ const _dutchSourceFy = {
   'Lijn': 'Line',
   'Cirkel': 'Sirkel',
   'CSV importeren': 'CSV ymportearje',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: earste rige = rige-nammen, earste kolom = labels)',
   'Gekoppeld aan': 'Keppele oan',
   'Ontkoppelen': 'Ûntkeppelje',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Data yn de slide bewarje, of as los CSV-bestân neist de presintaasje hâlde?',
-  'In de slide': 'Yn de slide',
-  'Als CSV-bestand': 'As CSV-bestân',
   'Geen grafiekgegevens': 'Gjin grafykgegevens',
   'Label': 'Label',
   'Rij': 'Rige',
@@ -608,16 +602,7 @@ const _dutchSourceFy = {
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P publyk · H leginda · S skerm · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
   'Akkoord gaan': 'Akseptyf gean',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Alle gegevens dy\'t jo yn OciDeck ynfiere, bliuwe op jo lokale systeem en wurde net stjoerd nei eksterne servers.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'De app sammelt gjin persoanlike gegevens, statistiken of gebrûksgegevens. Jo privacy is ús prioriteit.',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Troch op "Akseptyf gean" te klikken, akseptearje jo dizze betingsten en akseptyf jo it brûken fan OciDeck.',
   'Licentie (EUPL 1.2)': 'Lisintse (EUPL 1.2)',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck is in lokaal bureauprogram. Jo presintatoarjes en gegevens wurde allinnich op jo kompjûter opslein.',
-  'Privacy en gebruik': 'Privacy en brûk',
   'Toestemming ingetrokken': 'Tastimming yntrokken',
   'Toestemming intrekken': 'Tastimming yntrekke',
   'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
@@ -884,7 +869,6 @@ const _dutchSourceAddFy = {
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Wy meitsje in kopy yn in nij ljepblêd; jo oarspronklike bestân bliuwt ûnferoare.',
   'Welk formaat?': 'Hokker formaat?',
-  'dia\'s, gesplitst op kop.': 'dia\'s, splitst op kop.',
   'document': 'dokumint',
   'volledig': 'folslein',
   'Invoegen': 'Ynfoegje',
@@ -1043,12 +1027,8 @@ const _dutchSourceAddFy = {
   'Alle integraties': 'Alle yntegraasjes',
   'Alles inschakelen': 'Alles ynskeakelje',
   'Alles uitschakelen': 'Alles útskeakelje',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Der is al in rapportaazjemap ynsteld; de keppeling bliuwt dêrom berikber, sadat in besteand OpenKAT-deck by te wurkjen bliuwt.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Keppelings mei oare systemen. Eltse keppeling stiet standert út en bliuwt ynaktyf oant jo har ynskeakelje.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Lês rapportaazjemappen fan OpenKAT yn as ien managementoersjoch.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhelje as bewurkber deck. Keppelings mei oare systemen, lykas OpenKAT, steane ûnder Yntegraasjes.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -1213,7 +1193,6 @@ const _dutchSourceAddFy = {
   'Van toepassing': 'Fan tapassing',
   'Voortgang': 'Fuortgong',
   'Voortgang managementsysteem': 'Fuortgong behearsysteem',
-  'Voortgangsoverzicht bijgewerkt': 'Fuortgongsoersjoch bywurke',
   'Welk deel?': 'Hokker diel?',
   'beheersmaatregelen geladen': 'behearsmaatregels laden',
   'geïmplementeerd': 'ymplementearre',
@@ -1291,10 +1270,6 @@ const _dutchSourceAddFy = {
       'Dit liket gjin jildige herstelkaai.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dizze herstelkaai komt út in nijere ferzje fan OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'It webûnthâld foar ôfbyldingen is fol (maksimaal 256 MB). Bewarje dyn wurk earst as in .ocideck-bestân om gegevensferlies foar te kommen. Brûk dêrnei minder of lytsere ôfbyldingen, slút oare decks of laad opnij sûnder oare decks te iepenjen.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'It webûnthâld foar ôfbyldingen is fol (maksimaal 256 MB). Bewarje dyn wurk as in .ocideck-bestân en laad de side opnij foardatst mear ôfbyldingen tafoegest.',
   'Afbeeldingsrechten': 'Afbeeldingsrechten',
   'Afbeeldingsrechten controleren…': 'Afbeeldingsrechten controleren…',
   'Afdoening': 'Afdoening',
@@ -1346,8 +1321,6 @@ const _dutchSourceAddFy = {
   'Verifiëren': 'Ferifiearje',
   'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
   '(dit apparaat)': '(dit apparaat)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Ferlykje de fingerprint fan elk apparaat fia in fertroud kanaal — lês him inoar foar, of stjoer him lâns in wei dy\'tsto fertrouwst. Komme se oerien, dan wurkesto mei de echte apparaten en hat nimmen dertusken sitten. Wike se ôf, ferbrek dan de gearwurking.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Dat is gjin jildige útnûgingskeppeling.',
@@ -1409,7 +1382,6 @@ const _dutchSourceAddFy = {
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Wurkje live gear oan in presintaasje fia in Matrix-homeserver as fersifere trochjefte. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens. Folje in homeserver en in earne oars oanmakke tagongstoken yn — OciDeck freget nea om dyn wachtwurd. It token wurdt fersifere yn de kaaiketting bewarre, net by de oare ynstellingen.',
   'wordt door de test ingevuld': 'wurdt troch de test ynfolle',
-  'Versleuteld doorgeefluik (ontwerp)': 'Fersifere relais (ûntwerp)',
   'Meer documentatie op de repository': 'Mear dokumintaasje yn it repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'De folsleine dokumintaasje — ek arsjitektuer, bou, boarnekoade en ûntwerp — stiet yn it repository.',
@@ -1649,50 +1621,14 @@ const _dutchSourceAddFy = {
       'Hokker mjitgegevens ûntbrekke of ferâldere?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Op hokker gegevens is dit rapport basearre?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'In breed mar feitlik behearoersjoch mei traceerbere mjitmominten.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Rangs sûnder totale skoare en toant ûntbrekkende mjittingen apart.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Toant tellen fan earnst, bydragen, en oerdroegen mjittingen per momint.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organisearret it finen fan soarten troch troffen organisaasjes, systemen en observaasjes.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Toant krityske / hege nûmers sûnder betocht weagjen.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Toant teller, neamer en allinich betroubere persintaazjes.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Groepearret letterlike oanbefellings fan OpenKAT sûnder har eigen prioriteit.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'In rjochte aktuele ôfbylding fan ien organisaasje en har mjittingsdatum.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Fergeliket twa keazen mjitmominten binnen ien organisaasje.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Ûnderskiedt nij, nij en net mear waarnommen.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Brûkt allinich betroubere datums foar earste observaasje.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Ranks systemen mei aparte earnsttellers.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Toant yndividuele deltawearden sûnder gewogen skoare.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Fergeliket teller en neamer mei oannimlik fergelykbere dekking.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Ynventarissen boarne-bewiisde systemen, hostnammen en IP-adressen.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Skiedt kontrolearre, net kontrolearre en ûnbekend.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Toant allinich eksplisyt bewiisde monitoaringsmutaasjes.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Toant organisaasjes en systemen om ien betroubere CVE-keppeling.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Rangearret CVE\'s mei eksplisite deduplikaasje.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Ûnderskiedt nije, nije en net mear waarnommen CVEs.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Toant ûntbrekkende, ferâldere en feitlik brûkte mjittingen.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Akkounts foar wichtige datums, boarnebestannen, adapters en boarne-hashes.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Noch net beskikber: de boarne bewiist gjin tafersjochstatus foar alle aktiva.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -1735,11 +1671,6 @@ const _dutchSourceAddFy = {
   'Onderwerp': 'Ûnderwerp',
   'Welk rapport beantwoordt uw vraag?': 'Hokker rapport beantwurdet jo fraach?',
   'Meer rapportvragen': 'Mear rapport fragen',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Hokker systemen binne kwetsber foar in CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisaasjes en kwetsbere systemen om ien kwetsberens hinne.',
-  'Organisaties met kwetsbare systemen': 'Organisaasjes mei kwetsbere systemen',
   'Kwetsbare systemen': 'Kwetsbere systemen',
   'Kritiek/hoog': 'Kritysk / heech',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -1761,8 +1692,6 @@ const _dutchSourceAddFy = {
   'Bruikbaar': 'Brûkber',
   'CVE zoeken': 'CVE sykje',
   'Critical/high': 'Kritysk / heech',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Gegevenskwaliteit, ûntbrekkende mjittingen en ferâldering.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'De selektearre rapporten befetsje net genôch betroubere gegevens foar dit diel.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -1790,9 +1719,6 @@ const _dutchSourceAddFy = {
   'Geen bruikbare meetdatum': 'Gjin brûkbere mjittingsdatum',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Generearre dia\'s wurde ferfarske. Jo eigen dia\'s en kopyen wurde bewarre.',
-  'Getroffen organisaties en systemen': 'Beynfloede organisaasjes en systemen',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Beynfloede organisaasjes en systemen om ien kwetsberens.',
   'Getroffen systemen': 'Beynfloede systemen',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'It rapport koe net oanmakke wurde. Jo karren wurde bewarre; kontrolearje de warskôgings en besykje it nochris.',
@@ -1802,20 +1728,15 @@ const _dutchSourceAddFy = {
   'Keuzes wijzigen…': 'Feroarje karren ...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Kies de map wêryn OpenKAT de rapporten pleatst hat. OciDeck lêst allinich dizze map; neat wurdt feroare of ferstjoerd.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Kies de fraach dy\'t it rapport beantwurdzje moat. OciDeck bepaalt de passende struktuer.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Kies in CVE fûn yn \'e rapporten.',
   'Laatste bruikbare meting': 'Lêste brûkbere mjitting',
   'Live voorvertoning van de rapportopbouw':
       'Live foarbyld fan it rapport struktuer',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Behear en kontrôle ynformaasje oer meardere organisaasjes.',
   'Meer instellingen': 'Mear ynstellings',
   'Nederlands': 'Nederlânsk',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Net elke keazen organisaasje hat in mjitting foar dizze perioade.',
-  'Nieuwe en verdwenen bevindingen': 'Nije en ûntbrekkende fynsten',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Noch net beskikber: dizze rapporten befetsje gjin betroubere CVE-nûmers.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -1850,8 +1771,6 @@ const _dutchSourceAddFy = {
       'In brûkbere aktuele mjitting ûntbrekt foar ien of mear organisaasjes.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Twa mjitmominten binne nedich foar in ferliking. Der is no ien mjitting fûn.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Foarútgong yn ferliking mei in earder mjitmomint.',
   'Waar staan de OpenKAT-rapportages?': 'Wêr binne de OpenKAT-rapporten?',
   'Wat veranderde er bij één organisatie?': 'Wat feroare by ien organisaasje?',
   'Wat wilt u laten zien?': 'Wat wolle jo sjen litte?',
@@ -1864,7 +1783,6 @@ const _dutchSourceAddFy = {
   'bruikbaar': 'brûkber',
   'metingen': 'mjittingen',
   'organisaties': 'organisaasjes',
-  'organisaties geselecteerd': 'organisaasjes selektearre',
   'rapportages gebruikt': 'rapporten brûkt',
   'systemen': 'systemen',
   'Nog geen specificatielimiet': 'Noch gjin spesifikaasjelimyt',
@@ -2007,7 +1925,6 @@ const _dutchSourceAddFy = {
       'stiet op in beam-dia mar wurdt nêrens oars brûkt — kepple him oan in matrix, stream of oare dia.',
   'Nieuw verbeteringsproject': 'Nij ferbetteringsprojekt',
   'Kader': 'Kader',
-  'Projecttitel': 'Projekttitel',
   'Primaire Y-metriek (Y-01)': 'Primaire Y-metriek (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Bygelyk: trochrinnendei orderintake yn wurkdagen',
@@ -2061,10 +1978,6 @@ const _dutchSourceAddFy = {
   'Bron niet toegestaan': 'Boarne net tastien',
   'Deze URL is door de beveiliging geweigerd.':
       'Dizze URL is troch de befeiliging wegere.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Materiaal út oare systemen binnenhelje. Twa boarnen: presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) wurde in bewurkber deck, en OpenKAT-rapportaazjes (in map mei JSON) wurde ien managementoersjoch. Wêr\'t de OpenKAT-map stiet, stelle jo yn ûnder Yntegraasjes.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhelje as bewurkber deck. It ynlêzen fan OpenKAT-rapportaazjemappen kin allinnich yn de desktopferzje.',
   'Alinea': 'Alinea',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Deck opbouwe…',
@@ -2186,8 +2099,6 @@ const _dutchSourceAddFy = {
       'De checklist-yndeks: de stabile id, de kanonike titel en de kategory per test. De ynhâld fan de gids sels sit der net by.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'De test-yndeks fan v2.0.0: per test de stabile id, de kanonike titel, de MASVS-kategory en de MASWE-swakte. De ynlutsen v1-tests en de placeholders sitte der net yn; de ynhâld fan de gids likemin.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'De swakteslist (117): id, titel, MASVS-kategory, platfoarm en de CWE-keppeling. Trijekwart is by de boarne noch net útskreaun; dy steane der wól yn, markearre. Ynlutsen swakten net.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'De folsleine list (id, namme, beskriuwing) plus in eigen selektearre kearn mei ús remediaasje-notysjes.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -2234,33 +2145,16 @@ const _dutchSourceAddFy = {
       'Elk bestân wurdt apart omset en as eigen presintaasje yn de doelmap bewarre. Giet der ien mis, dan rint de rige gewoan troch.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Meardere presintaasjes tagelyk ymportearje skriuwt se as bestannen nei in map; yn de browserferzje kin dat net.',
-  'Nu importeren': 'No ymportearje',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'It oersjoch stiet klear yn in nij ljepblêd.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Lêst in map mei OpenKAT-rapportaazjes (JSON) en bout dêr ien managementoersjoch fan: systemen, befinings per earnst, de langst iepensteande punten en de trend oer opienfolgjende mjittings. Deselde aksje op in besteand OpenKAT-deck wurket it by en lit jo eigen dia\'s stean.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'De ymport lêst allinnich; der wurdt neat yn dizze map feroare of ferstjoerd. Bestannen dy\'t gjin OpenKAT-rapportaazje blike, wurde oerslein en yn it ymportferslach neamd.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Wiis de map oan wêryn\'t jo OpenKAT-rapportaazjes (JSON) steane. De ymport lêst dy map en bout dêr ien managementoersjoch fan; stiet de map hjir ynsteld, dan hoege jo him net eltse kear opnij te kiezen.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'De OpenKAT-ymport lêst in map fan skiif en is allinnich beskikber yn de desktopferzje.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Der is noch gjin rapportaazjemap oanwiisd; de ymport freget der dan eltse kear om.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Der is al in rapportaazjemap ynsteld; it ynfierpunt bliuwt dêrom berikber, sadat in besteand OpenKAT-deck by te wurkjen bliuwt.',
   'Integraties': 'Yntegraasjes',
-  'Naar Integraties': 'Nei Yntegraasjes',
   'Map kiezen…': 'Map kieze…',
   'Map wissen': 'Map wiskje',
-  'OpenKAT-rapportages importeren…': 'OpenKAT-rapportaazjes ymportearje…',
   'Map met OpenKAT-rapportages kiezen': 'Map mei OpenKAT-rapportaazjes kieze',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-rapportaazjes ymportearre.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT-deck bywurke; hânmjittige dia\'s binne behâlden.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Gjin OpenKAT-rapportaazjes fûn yn dizze map.',
-  'OpenKAT-import mislukt.': 'OpenKAT-ymport mislearre.',
   'rapportages': 'rapportaazjes',
   'overgeslagen': 'oerslein',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -2319,8 +2213,6 @@ const _dutchSourceAddFy = {
   'Label op de primaire knop': 'Label op de primêre knop',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Befiningen dy\'t sto beoardield en stean litten hast. Dy wurde net mear meld, mar de scan fynt se noch altyd en se telle net as oplost. Tik om der ien werom te setten.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'In privacybefining oan \'e kant sette (ûntwerp)',
   'Deze is beoordeeld en mag blijven': 'Neisjoen, dizze mei bliuwe',
   'Mogelijk gemaakt door': 'Mooglik makke troch',
   'De export is gestopt tijdens het voorbereiden.':
@@ -2332,10 +2224,8 @@ const _dutchSourceAddFy = {
   'Technische melding:': 'Technyske melding:',
   'presentaties': 'presintaasjes',
   '/Presentaties': '/Presintaasjes',
-  'Rapportagedistributie (ontwerp)': 'Rapportaazjedistribúsje (ûntwerp)',
   'De export is mislukt.': 'De eksport is mislearre.',
   'Presenteer vanaf hier': 'Presintearje fanôf hjir',
-  'Teams-gastclient (ontwerp)': 'Teams-gastclient (ûntwerp)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hoe breed mei dit materiaal dield wurde?',
   'Wat betekenen deze niveaus?': 'Wat betsjutte dizze nivo\'s?',
@@ -2452,8 +2342,6 @@ const _dutchSourceAddFy = {
       'Presintaasjes dy\'t gewoane Markdown-bestannen bliuwe: lêsber, trochsykber en te iepenjen mei elke editor.',
   'sjablonen om mee te beginnen, of leeg':
       'sjabloanen om mei te begjinnen, of leech',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Weilitte stiet oan: fûne gegevens wurde swart makke en álle ôfbyldings, fideo en audio fan dizze dia geane net mei nei it skerm of de eksport. Dyn markdown-bestân hâldt alles.',
   'Mijn tekst': 'Myn tekst',
   'Wat zij zien': 'Wat sy sjogge',
   'Presentatiegegevens': 'Presintaasjegegevens',
@@ -2689,7 +2577,6 @@ const _dutchSourceAddFy = {
   'Opslaan naar…': 'Bewarje nei…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Stel earst in ferbining yn by Ynstellings → Opslach.',
-  'Beginnen met:': 'Begjinne mei:',
   'Verlopen datums markeren': 'Ferrûne datums markearje',
   'Datums gemarkeerd': 'Datums markearre',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -2715,28 +2602,15 @@ const _dutchSourceAddFy = {
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'It oanfalsflak per soarte objekt: hoefolle der binne, hoefolle wurk kostje, wat nij is en wat nimmen besit. Dat lêste is meastal it petear.',
   'Acties en besluiten': 'Aksjes en beslissings',
-  'Actie toevoegen': 'Aksje tafoegje',
-  'Actie verwijderen': 'Aksje fuortsmite',
   'Actie': 'Aksje',
   'Deadline': 'Deadline',
-  'Op de lijst sinds': 'Op de list sûnt',
   'Stand': 'Stân',
-  'Wat vraagt u': 'Wat freegje jo',
   'geen datum': 'gjin datum',
-  'Ter informatie': 'Ta ynformaasje',
   'Besluit gevraagd': 'Beslissing frege',
   'Escalatie': 'Eskalaasje',
   'Open': 'Iepen',
   'Loopt': 'Rint',
   'Afgerond': 'Ofrûne',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Allinnich in beslissing of eskalaasje krijt in label op de slide; "te let" folget út de deadline en sette jo net sels.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datums as jjjj-mm-dd. In oare skriuwwize wurdt net rieden: 05-08-2026 binne twa ferskillende dagen.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'In aksjeslide draacht op syn heechst acht rigels; dêrnei giet de seal skimme yn stee fan beslute.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Wat der barre moat, wa\'t it docht en wannear. Jou per rigel oan oft it ta ynformaasje is, of dat jo in beslissing freegje — dêr scant de seal op.',
   'Scorecard': 'Skoarkaart',
   'Cijfer toevoegen': 'Sifer tafoegje',
   'Cijfer verwijderen': 'Sifer fuortsmite',
@@ -2823,8 +2697,6 @@ const _dutchSourceAddFy = {
       'It token is jildich, mar mei dit net — jou it mear rjochten op de repository.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Oanmeld, mar gjin tagong — dyn wachtwurd is net it probleem. Freegje rjochten op dizze map.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Leksikonlisinsjes: wat noch neifrege wurde moat',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Dit liket in folsleine DAV-URL. By Nextcloud liedt OciDeck dat paad sels ôf — hjir heart allinnich de server.',
   'Overnemen': 'Oernimme',
@@ -2867,8 +2739,6 @@ const _dutchSourceAddFy = {
   'kenteken': 'kenteken',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Foar de taal fan dit deck is der gjin trefwurdlist foar bysûndere persoansgegevens. Patroanen mei in kontrôlesifer (BSN, IBAN, paspoart) wurkje wol; wurden as "diagnoaze" of "fertochte" wurde net herkend.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'De trefwurdlist foar bysûndere persoansgegevens is foar de taal fan dit deck hiel tin. Rekkenje der net op dat wurden as "diagnoaze" of "fertochte" fûn wurde.',
   'Landpakketten voor identificatienummers':
       'Lânpakketten foar identifikaasjenûmers',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -2898,8 +2768,6 @@ const _dutchSourceAddFy = {
       'De servernamme bestiet net, of is net op te sykjen. Kontrolearje de server-URL op in typflater.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Dizze server hat in privee- of LAN-adres. Markearje him as fertroud yntern by Ynstellingen → Opslach.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'It sertifikaat fan dizze server wurdt net fertroud. In sels-ûndertekene sertifikaat wurket net; brûk der ien fan in erkende útjouwer.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'De server stjoert troch nei in oar adres. Folje dat adres streekrjocht yn — in trochferwizing folgje wy net, want dy kin de feilichheidskontrôle omsile.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -2935,8 +2803,6 @@ const _dutchSourceAddFy = {
   'Opslaan naar S3': 'Bewarje nei S3',
   'Opgeslagen in S3:': 'Bewarre yn S3:',
   'Hier staat niets': 'Hjir stiet neat',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Koe de ynhâld net lade. Kontrolearje dyn ferbining en ynstellings.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Einpunt net berikber — kontrolearje dyn ferbining en it einpunt.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -2945,8 +2811,6 @@ const _dutchSourceAddFy = {
       'It einpunt joech in flater. Besykje it letter opnij.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Dit einpunt kin net betingst skriuwe, dus dyn wurk is net beskerme tsjin dat fan in oar. Bewarje ûnder in nije namme as der immen oars oan dizze presintaasje wurket.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Gjin S3-bucket ynsteld. Stel der ien yn by Ynstellings → Opslach.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Stel earst in S3-bucket yn by Ynstellings → Opslach.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -2992,10 +2856,6 @@ const _dutchSourceAddFy = {
       'Dizze ôfbylding lit op syn minst {count} werkenbere gesichten sjen.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Dizze ôfbylding koe net neisjoen wurde op gesichten. It formaat wurdt net stipe (HEIC bygelyks). Dat betsjut net dat der nimmen op stiet — der is net sjoen.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Dizze ôfbylding lit in werkenber gesicht sjen.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Dizze ôfbylding lit {count} werkenbere gesichten sjen.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'In ôfbylding dêr\'t ien werkenber op stiet is in persoansgegeven, ek sûnder namme derby.',
   'herkenbaar gezicht op een afbeelding': 'werkenber gesicht op in ôfbylding',
@@ -3010,8 +2870,6 @@ const _dutchSourceAddFy = {
   'Persoonsgegevens gevonden': 'Persoansgegevens fûn',
   'Welke verbinding?': 'Hokker ferbining?',
   'Bestandsverbindingen': 'Bestânsferbiningen',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'De plakken dêr\'tsto dyn presintaasjes bewarrest en trochsikest — mappen op dizze kompjûter, WebDAV-servers en git-repositories trochinoar. Sleep se yn de folchoarder dy\'tsto wolst: de boppeste fan in soarte jildt as standert.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'In git-repository; eltse bewarre ferzje bliuwt behâlden.',
   'Een map op de schijf van deze computer.':
@@ -3036,15 +2894,7 @@ const _dutchSourceAddFy = {
   'Openen vanaf WebDAV': 'Iepenje fan WebDAV',
   'Opslaan naar WebDAV': 'Bewarje nei WebDAV',
   'Opgeslagen op WebDAV:': 'Bewarre op WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Stel earst in WebDAV-server yn by Ynstellings → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Ofbylding kieze op WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Gjin WebDAV-server ynsteld. Stel der ien yn by Ynstellings → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Dizze server is net tastien. Markearje in privee/LAN-server earst as fertroud by Ynstellingen → WebDAV.',
   'Servertype': 'Servertype',
   'Nextcloud of ownCloud': 'Nextcloud of ownCloud',
   'Andere WebDAV-server': 'Oare WebDAV-server',
@@ -3066,23 +2916,11 @@ const _dutchSourceAddFy = {
   'Haal volle pagina uit de reeks': 'Helje folle side út de rige',
   'Opslag': 'Opslach',
   'Opslagwijzen': 'Opslachwizen',
-  'Deze computer': 'Dizze kompjûter',
   'Ingesteld': 'Ynsteld',
   'Niet ingesteld': 'Net ynsteld',
-  'Nog geen bibliotheek ingesteld': 'Noch gjin biblioteek ynsteld',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'De wegen wêrlangs jo presintaasjes iepenje en bewarje kinne. Klik in wize iepen om him yn te stellen.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Presintaasjes yn de mappen hjirboppe, op de skiif fan dizze kompjûter.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Iepenje en bewarje presintaasjes yn in map op jo Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Iepenje presintaasjes út in git-repository; eltse bewarre ferzje bliuwt bewarre.',
-  'Nog te verifiëren': 'Noch te ferifiearjen',
   'MASWE-zwakheid kiezen': 'MASWE-swakte kieze',
   'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',
   'Geen zwakheid gevonden': 'Gjin swakte fûn',
-  'uitleg nog niet geschreven': 'útlis noch net skreaun',
   'Getalnotatie herkennen': 'Getalnotaasje werkenne',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Yn dit bestân steane getallen wêrfan de komma op twa manieren te lêzen is:',
@@ -3200,12 +3038,10 @@ const _dutchSourceAddFy = {
   'Veelgestelde vragen': 'Faak stelde fragen',
   'Probleemoplossing': 'Swierrichheden oplosse',
   'Begrippenlijst': 'Wurdlist',
-  'API-documentatie': 'API-dokumintaasje',
   'Prestaties': 'Prestaasjes',
   'Beveiligingsontwerp': 'Feiligensûntwerp',
   'Hosting en uitrol': 'Hosting en útrol',
   'Bijdragen': 'Bydrage',
-  'Ontwikkelomgeving': 'Untwikkelomjouwing',
   'Migratiegids': 'Migraasjegids',
   'Versies…': 'Ferzjes…',
   'Versies:': 'Ferzjes:',
@@ -3246,8 +3082,6 @@ const _dutchSourceAddFy = {
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De branch is ferpleatst; laad it deck opnij en bewarje wer.',
   'Bijgewerkt met OciDeck': 'Bywurke mei OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Stel earst in git-repository yn by Ynstellingen → Git-repository.',
   'Git-repository': 'Git-repository',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Iepenje presintaasjes út in git-repository. Eltse bewarre ferzje bliuwt bewarre. It token wurdt fersifere yn de kaaiketting bewarre, net by de oare ynstellingen.',
@@ -3263,7 +3097,6 @@ const _dutchSourceAddFy = {
       'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. De referinsjegegevens sitte yn de app sels, dus de module wurket fuortendaliks en folslein offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se bliuwe ferburgen oant jo se ynskeakelje.',
-  'Procesverbetering (ontwerp)': 'Prosesferbettering (ûntwerp)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dit projekt is byfangst fan de Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Styleprofyl eksportearje',
@@ -3403,7 +3236,6 @@ const _dutchSourceAddFy = {
   'genetisch gegeven': 'genetysk gegeven',
   'parketnummer': 'parketnûmer',
   'nationaal identificatienummer': 'nasjonaal identifikaasjenûmer',
-  'OciWacht (ontwerp)': 'OciWacht (ûntwerp)',
   'Mogelijk geheim': 'Mooglik geheim',
   'sleutel of token': 'kaai of token',
   'private sleutel': 'privee kaai',
@@ -3436,7 +3268,6 @@ const _dutchSourceAddFy = {
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Set de folsleine CVE-list op dit apparaat, sadat opsykjen offline bart en dyn sykterm nearne hinne giet. De databank komt fan CVE List V5 (it offisjele CVE-programma, fia GitHub).',
   'Wat er lokaal beschikbaar is': 'Wat der lokaal beskikber is',
-  'Gegevenspakket': 'Gegevenspakket',
   'Nu bijwerken': 'No bywurkje',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Gegevens lokaal beskikber — it opsykjen bart op dit apparaat, der giet neat nei bûten.',
@@ -3455,7 +3286,6 @@ const _dutchSourceAddFy = {
       'Akseptearje: de gegevens hearre hjir en de melding ferdwynt. Akseptearje + warskôgje: de ûntfanger sjocht in badge dat der persoansgegevens op de dia steane. Weilitte: de fûne gegevens wurde ûnlêsber makke op it skerm en yn de eksport — dyn markdown-bestân hâldt de oarspronklike tekst.',
   'Alleen melden': 'Allinnich melde',
   'PERSOONSGEGEVENS': 'PERSOANSGEGEVENS',
-  'Persoonsgegevens op deze slide': 'Persoansgegevens op dizze dia',
   'Volg de presentatie': 'Folgje de presintaasje',
   'Weglaten uit tonen en exporteren': 'Weilitte út toanen en eksportearjen',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -3575,8 +3405,6 @@ const _dutchSourceAddFy = {
   'Bewerk deze slide': 'Bewurkje dizze slide',
   'Bewijs verwijderen': 'Bewiis fuortsmite',
   '(nog leeg)': '(noch leech)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Jou earst in befiningskoade op om bewiis te keppeljen.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Foegje skermôfdrukken of fideo\'s ta as bewiis. Elk bewiis wurdt in eigen slide fuort nei de befining en giet mei yn de eksport.',
   'Uitvoering testen conform standaard': 'Testen neffens de standert',
@@ -3585,8 +3413,6 @@ const _dutchSourceAddFy = {
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Ik gean akkoard mei de EUPL 1.2-lisinsje en haw lêzen hokker gegevens OciDeck bewarret.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Dyn kar wurdt de standerttaal fan de app.',
   'Lees de volledige licentie': 'Lês de folsleine lisinsje',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck is frije software ûnder de EUPL 1.2-lisinsje. Foardatst begjinst, freegje we dy de lisinsje te akseptearjen. Hjirûnder lêst ek hokker gegevens OciDeck op dit apparaat bewarret en wannear\'t der wat dyn apparaat ferlit.',
@@ -3613,9 +3439,6 @@ const _dutchSourceAddFy = {
   'Het antwoord van de server was te groot':
       'It antwurd fan de server wie te grut',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-boarne (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Iepenje en bewarje presintaasjes yn in map op dyn Nextcloud. It wachtwurd wurdt fersifere yn de kaaibosk bewarre, net by de oare ynstellings.',
   'Server-URL': 'Server-URL',
   'Gebruikersnaam': 'Brûkersnamme',
   'App-wachtwoord': 'App-wachtwurd',
@@ -3629,22 +3452,13 @@ const _dutchSourceAddFy = {
   'Verbinding gelukt': 'Ferbining slagge',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Wizigingen wurde bewarre as do op Bewarje klikst.',
-  'Afbeelding kiezen op Nextcloud': 'Ofbylding kieze op Nextcloud',
-  'Openen vanaf Nextcloud': 'Iepenje fan Nextcloud',
   'Vernieuwen': 'Fernije',
   'Deze map is leeg': 'Dizze map is leech',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Gjin Nextcloud-server ynsteld. Stel der ien yn by Ynstellings → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Koe de map net lade. Kontrolearje dyn ferbining en ynstellings.',
   'Kon dit bestand niet openen.': 'Koe dit bestân net iepenje.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Dit is gjin Marp/OciDeck-presintaasje.',
   'Downloaden mislukt:': 'Downloaden mislearre:',
-  'Opgeslagen op Nextcloud:': 'Bewarre op Nextcloud:',
   'Opslaan mislukt:': 'Bewarjen mislearre:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Stel earst in Nextcloud-server yn by Ynstellings → Nextcloud.',
   'Opslaan naar Nextcloud': 'Bewarje nei Nextcloud',
   'Doelpad (zonder extensie)': 'Doelpaad (sûnder ekstinsje)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -3656,9 +3470,6 @@ const _dutchSourceAddFy = {
   'Tijden-overzicht tonen na afloop': 'Tiidenoersjoch nei ôfrin toane',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'De tiid per slide wurdt altyd metten; dit bepaalt allinne oft it oersjoch nei dizze presintaasje ferskynt.',
-  'Oefenoverzicht tonen na afloop': 'Oefenoersjoch nei ôfrin toane',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Lit nei in presintaasje it oersjoch sjen mei de bestede tiid de dia. De tiid wurdt altyd metten; dit bepaalt allinnich oft it skerm ferskynt.',
   'Onveilige presentatie geblokkeerd': 'Unfeilige presintaasje blokkearre',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Dizze presintaasje is net iepene. It bestân befettet ynhâld dy\'t koade útfiere kin, wylst in presintaasje allinnich gegevens befetsje mei — neat útfierbers.',
@@ -3745,7 +3556,6 @@ const _dutchSourceAddFy = {
   'Lokaal bestand': 'Lokaal bestân',
   'Geen video': 'Gjin fideo',
   // Vraag-slides (multiple choice question).
-  'Vraag (meerkeuze)': 'Fraach (merkar)',
   // Titel-contrast (slidekwaliteit).
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Titeltekst hat te min kontrast mei de eftergrûnôfbylding',
@@ -3762,8 +3572,6 @@ const _dutchSourceAddFy = {
   'Huidig punt weghalen': 'Aktueel punt fuorthelje',
   'Stap voor stap': 'Stap foar stap',
   'Geen animatie': 'Gjin animaasje',
-  'Animatiesnelheid': 'Animaasjesnelheid',
-  'Langzaam': 'Stadich',
   'Snel': 'Fluch',
   'Gebeurtenissen': 'Foarfallen',
   'Gebeurtenis toevoegen': 'Foarfal tafoegje',
@@ -3776,8 +3584,6 @@ const _dutchSourceAddFy = {
   'Vraag': 'Fraach',
   'Wat wil je vragen?': 'Wat wolsto freegje?',
   'Antwoorden': 'Antwurden',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markearje de goede antwurden. Maksimaal acht antwurden; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
   'Antwoord': 'Antwurd',
   'Antwoord toevoegen': 'Antwurd tafoegje',
   'Goed antwoord': 'Goed antwurd',
@@ -3810,8 +3616,6 @@ const _dutchSourceAddFy = {
   'Stelling': 'Stelling',
   'Formuleer een stelling die juist of onjuist is':
       'Formulearje in stelling dy\'t wier of net wier is',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Markearje alle juste antwurden. By it presintearjen wurdt willekeurich in set toand mei op syn minst ien goed en ien fout.',
   'Juist': 'Wier',
   'Onjuist': 'Net wier',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -3832,7 +3636,6 @@ const _dutchSourceAddFy = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'De statuskleuren fan de cockpitmeters. Meitsje beneamde farianten; it keazen skema jildt foar alle cockpit-slides.',
   'Standaard': 'Standert',
-  'Standaardkleuren gebruiken': 'Standertkleuren brûke',
   'Kleurschema verwijderen': 'Kleurskema fuortsmite',
   'Schemanaam': 'Skemanamme',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -3911,7 +3714,6 @@ const _dutchSourceAddFy = {
   'Notities weggooien': 'Notysjes fuortsmite',
   'Pagina': 'Side',
   'Presentatiestijl': 'Presintaasjestyl',
-  'Presentatiestijl: ': 'Presintaasjestyl: ',
   'Sprekersnotities': 'Sprekkersnotysjes',
   'Tekst...': 'Tekst...',
   'Teksteditor': 'Tekstbewurker',
@@ -3925,8 +3727,6 @@ const _dutchSourceAddFy = {
   'Doeltijd': 'Doeltiid',
   'Doeltijd (aftellen)': 'Doeltiid (ôftelle)',
   'Geen aftelling': 'Gjin ôftelling',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Standert doeltiid foar it ôftellen yn de presinter. Under it presintearjen fyn ôf te stellen mei de toets K.',
   'uit': 'út',
   'Doeltijd / aftellen (K)': 'Doeltiid / ôftelle (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Doeltiid / ôftelle ynstelle (MMSS)',
@@ -3997,7 +3797,6 @@ const _dutchSourceAddFy = {
   'Eigen kleur (hex)': 'Eigen kleur (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Bygelyks #33FF33 foar in CRT-grien skerm.',
-  'Onderdeel van stijlprofiel ': 'Underdiel fan stylprofyl ',
   'Broncode lettertype': 'Boarnekoade lettertype',
   'Kop (optioneel)': 'Kop (opsjoneel)',
   'Subkop (optioneel)': 'Subkop (opsjoneel)',
@@ -4323,8 +4122,6 @@ const _dutchSourceAddFy = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Eksport blokkearre fanwegen earnstige kwaliteitsproblemen.',
   'Alle meldingen': 'Alle meldingen',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… en mear problemen yn it kwaliteitspaneel.',
   'Classificatie-handhaving': 'Klassifikaasje-ôfstimming',
   'Vrijgaveplafond': 'Frijwaringsplafond',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -4343,11 +4140,9 @@ const _dutchSourceAddFy = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Stel in TLP-nivo yn — eksport blokkearre troch it klassifikaasjebelied.',
   'Tabel bewerken': 'Tabel bewurkje',
-  'Pijltjes · Tab · Esc': 'Pylktoetsen · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Tabel bewurkje (op tabelslide)',
   'Tabel bewerken (E)': 'Tabel bewurkje (E)',
   'Tab wisselt cel · Esc sluit': 'Tab wikselet sel · Esc slút',
-  'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
   'Gestapelde staaf': 'Stapele staven',
   'Spreiding': 'Sparring',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blêdet troch de slides',
@@ -4390,10 +4185,6 @@ const _dutchSourceAddFy = {
       'Netwurkflater — kontrolearje jo ferbining en besykje it nochris.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Der gie ûnferwachts wat mis. Sjoch yn it lochboek foar details.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Dizze server is net tastien. Markearje in privee/LAN-server earst as fertroud by Ynstellingen → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server net berikber — kontrolearje jo ferbining en de server-URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -4421,8 +4212,6 @@ const _dutchSourceAddFy = {
   'Uit recente bestanden verwijderen': 'Ut resinte bestannen fuortsmite',
   'OciDeck wordt gestart…': 'OciDeck wurdt start…',
   'Herstelbestanden': 'Werstelbestannen',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Crash-werstelbestannen befetsje de folsleine ynhâld fan jo presintaasjes yn platte tekst. Se wurde nei 7 dagen automatysk oprêden; hjir kinne jo se daliks wiskje.',
   'Herstelbestanden nu wissen': 'Werstelbestannen no wiskje',
   'Er waren geen herstelbestanden.': 'Der wiene gjin werstelbestannen.',
   'herstelbestand(en) gewist.': 'werstelbestân(nen) wiske.',

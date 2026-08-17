@@ -793,8 +793,6 @@ const _dutchSourceDa = {
   'Selectie opheffen': 'Ryd markering',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Jeg accepterer EUPL 1.2-licensen og har læst, hvilke data OciDeck gemmer.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Dit valg bliver appens standardsprog.',
   'Lees de volledige licentie': 'Læs den fulde licens',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck er fri software under EUPL 1.2-licensen. Før du starter, beder vi dig acceptere licensen. Nedenfor kan du også læse, hvilke data OciDeck gemmer på denne enhed, og hvornår noget forlader din enhed.',
@@ -818,9 +816,6 @@ const _dutchSourceDa = {
   'Ongeldige server-URL': 'Ugyldig server-URL',
   'Het antwoord van de server was te groot': 'Serverens svar var for stort',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-kilde (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Åbn og gem præsentationer i en mappe på din Nextcloud. Adgangskoden gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
   'Server-URL': 'Server-URL',
   'Gebruikersnaam': 'Brugernavn',
   'App-wachtwoord': 'App-adgangskode',
@@ -834,22 +829,13 @@ const _dutchSourceDa = {
   'Verbinding gelukt': 'Forbindelse lykkedes',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Ændringer gemmes, når du klikker på Gem.',
-  'Afbeelding kiezen op Nextcloud': 'Vælg billede på Nextcloud',
-  'Openen vanaf Nextcloud': 'Åbn fra Nextcloud',
   'Vernieuwen': 'Opdater',
   'Deze map is leeg': 'Denne mappe er tom',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Ingen Nextcloud-server konfigureret. Konfigurér en under Indstillinger → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Kunne ikke indlæse mappen. Kontrollér din forbindelse og dine indstillinger.',
   'Kon dit bestand niet openen.': 'Kunne ikke åbne denne fil.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Dette er ikke en Marp/OciDeck-præsentation.',
   'Downloaden mislukt:': 'Download mislykkedes:',
-  'Opgeslagen op Nextcloud:': 'Gemt på Nextcloud:',
   'Opslaan mislukt:': 'Lagring mislykkedes:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Konfigurér først en Nextcloud-server under Indstillinger → Nextcloud.',
   'Opslaan naar Nextcloud': 'Gem til Nextcloud',
   'Doelpad (zonder extensie)': 'Målsti (uden filtype)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -860,9 +846,6 @@ const _dutchSourceDa = {
   'Tijden-overzicht tonen na afloop': 'Vis tidsoversigt bagefter',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Tiden pr. slide måles altid; dette bestemmer kun, om oversigten vises efter denne præsentation.',
-  'Oefenoverzicht tonen na afloop': 'Vis øvelsesoversigt bagefter',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Efter en præsentation vises oversigten over den brugte tid pr. slide. Tiden måles altid; dette bestemmer kun, om skærmen vises.',
   'Onveilige presentatie geblokkeerd': 'Usikker præsentation blokeret',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Denne præsentation blev ikke åbnet. Filen indeholder indhold, der kan udføre kode, og en præsentation bør kun indeholde data — intet eksekverbart.',
@@ -945,7 +928,6 @@ const _dutchSourceDa = {
   'Online': 'Online',
   'Lokaal bestand': 'Lokal fil',
   'Geen video': 'Ingen video',
-  'Vraag (meerkeuze)': 'Spørgsmål (multiple choice)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Titeltekst har for lidt kontrast med baggrundsbilledet',
   'Herstel': 'Ret',
@@ -960,8 +942,6 @@ const _dutchSourceDa = {
   'Huidig punt weghalen': 'Fjern nuværende punkt',
   'Stap voor stap': 'Trin for trin',
   'Geen animatie': 'Ingen animation',
-  'Animatiesnelheid': 'Animationshastighed',
-  'Langzaam': 'Langsom',
   'Snel': 'Hurtig',
   'Gebeurtenissen': 'Begivenheder',
   'Gebeurtenis toevoegen': 'Tilføj begivenhed',
@@ -974,8 +954,6 @@ const _dutchSourceDa = {
   'Vraag': 'Spørgsmål',
   'Wat wil je vragen?': 'Hvad vil du spørge om?',
   'Antwoorden': 'Svar',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markér de rigtige svar. Højst otte svar; ved præsentation vises tilfældigt ét rigtigt og resten forkerte.',
   'Antwoord': 'Svar',
   'Antwoord toevoegen': 'Tilføj svar',
   'Goed antwoord': 'Rigtigt svar',
@@ -1008,8 +986,6 @@ const _dutchSourceDa = {
   'Stelling': 'Udsagn',
   'Formuleer een stelling die juist of onjuist is':
       'Formulér et udsagn, der er sandt eller falsk',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Markér alle rigtige svar. Ved præsentation vises et tilfældigt sæt med mindst ét rigtigt og ét forkert.',
   'Juist': 'Sandt',
   'Onjuist': 'Falsk',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1030,7 +1006,6 @@ const _dutchSourceDa = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Statusfarverne for cockpit-målerne. Opret navngivne varianter; det valgte skema gælder for alle cockpit-slides.',
   'Standaard': 'Standard',
-  'Standaardkleuren gebruiken': 'Brug standardfarver',
   'Kleurschema verwijderen': 'Slet farveskema',
   'Schemanaam': 'Skemanavn',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1107,7 +1082,6 @@ const _dutchSourceDa = {
   'Logo en footer': 'Logo og sidefod',
   'Pagina': 'Side',
   'Presentatiestijl': 'Præsentationsstil',
-  'Presentatiestijl: ': 'Præsentationsstil: ',
   'Tekst...': 'Tekst...',
   'Teksteditor': 'Teksteditor',
   'Volgende pagina': 'Næste side',
@@ -1120,8 +1094,6 @@ const _dutchSourceDa = {
   'Doeltijd': 'Måltid',
   'Doeltijd (aftellen)': 'Måltid (nedtælling)',
   'Geen aftelling': 'Ingen nedtælling',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Standardmåltid for nedtællingen i præsentatoren. Finjustér den under præsentationen med tasten K.',
   'uit': 'fra',
   'Doeltijd / aftellen (K)': 'Mål / nedtælling (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Indstil mål / nedtælling (MMSS)',
@@ -1191,14 +1163,8 @@ const _dutchSourceDa = {
   'Cirkel': 'Cirkel',
   'Spider': 'Spider',
   'CSV importeren': 'Importér CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: første række = serienavne, første kolonne = labels)',
   'Gekoppeld aan': 'Knyttet til',
   'Ontkoppelen': 'Fjern kobling',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Gem data i sliden, eller behold dem som en separat CSV-fil ved siden af præsentationen?',
-  'In de slide': 'I sliden',
-  'Als CSV-bestand': 'Som en CSV-fil',
   'Geen grafiekgegevens': 'Ingen diagramdata',
   'Label': 'Label',
   'Rij': 'Række',
@@ -1228,7 +1194,6 @@ const _dutchSourceDa = {
   'Eigen kleur (hex)': 'Brugerdefineret farve (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'For eksempel #33FF33 til en CRT-grøn skærm.',
-  'Onderdeel van stijlprofiel ': 'Del af stilprofil ',
   'Broncode lettertype': 'Kodeskrifttype',
   'Kop (optioneel)': 'Overskrift (valgfri)',
   'Subkop (optioneel)': 'Underoverskrift (valgfri)',
@@ -1266,16 +1231,7 @@ const _dutchSourceDa = {
   'Zet het filter uit om alles weer te zien.':
       'Slå filteret fra for at se alt igen.',
   'Welkom bij OciDeck': 'Velkommen til OciDeck',
-  'Privacy en gebruik': 'Privatliv og brug',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck er et lokalt desktopprogram. Dine præsentationer og data gemmes udelukkende på din computer.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Appen indsamler ingen personoplysninger, ingen statistik og ingen brugsdata. Dit privatliv er vores prioritet.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Alle data, du indtaster i OciDeck, forbliver på dit lokale system og sendes ikke til eksterne servere.',
   'Licentie (EUPL 1.2)': 'Licens (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Ved at klikke på "Acceptér" accepterer du disse vilkår og giver samtykke til brugen af OciDeck.',
   'Volledige licentie online': 'Fuld licens online',
   'Akkoord gaan': 'Acceptér',
   'Privacy': 'Privatliv',
@@ -1364,8 +1320,6 @@ const _dutchSourceDa = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Eksport blokeret på grund af alvorlige kvalitetsproblemer.',
   'Alle meldingen': 'Alle meldinger',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… og flere problemer i kvalitetspanelet.',
   'Classificatie-handhaving': 'Klassifikationshåndhævelse',
   'Vrijgaveplafond': 'Frigivelsesloft',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1384,11 +1338,9 @@ const _dutchSourceDa = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Angiv et TLP-niveau — eksport er blokeret af klassifikationspolitikken.',
   'Tabel bewerken': 'Redigér tabel',
-  'Pijltjes · Tab · Esc': 'Piletaster · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Redigér tabel (på tabelslides)',
   'Tabel bewerken (E)': 'Redigér tabel (E)',
   'Tab wisselt cel · Esc sluit': 'Tab skifter celle · Esc lukker',
-  'Pen · markeerstift · ⇧E': 'Pen · overstregning · ⇧E',
   'Gestapelde staaf': 'Stablet søjle',
   'Spreiding': 'Spredning',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bladrer gennem slides',
@@ -1431,10 +1383,6 @@ const _dutchSourceDa = {
       'Netværksfejl — tjek din forbindelse og prøv igen.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Noget gik uventet galt. Se loggen for detaljer.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud er ikke sat (korrekt) op — tjek serveroplysningerne under Indstillinger → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Denne server er ikke tilladt. Markér først en privat/LAN-server som betroet under Indstillinger → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Serveren kan ikke nås — tjek din forbindelse og serverens URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1462,8 +1410,6 @@ const _dutchSourceDa = {
   'Uit recente bestanden verwijderen': 'Fjern fra seneste filer',
   'OciDeck wordt gestart…': 'Starter OciDeck…',
   'Herstelbestanden': 'Gendannelsesfiler',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Gendannelsesfiler indeholder hele indholdet af dine præsentationer i klartekst. De ryddes automatisk op efter 7 dage; her kan du slette dem med det samme.',
   'Herstelbestanden nu wissen': 'Slet gendannelsesfiler nu',
   'Er waren geen herstelbestanden.': 'Der var ingen gendannelsesfiler.',
   'herstelbestand(en) gewist.': 'gendannelsesfil(er) slettet.',
@@ -1895,7 +1841,6 @@ const _dutchSourceAddDa = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Vi laver en kopi i en ny fane; din oprindelige fil forbliver uændret.',
   'Welk formaat?': 'Hvilket format?',
-  'dia\'s, gesplitst op kop.': 'dias, opdelt efter overskrift.',
   'document': 'dokument',
   'volledig': 'fuldstændig',
   'Invoegen': 'Indsæt',
@@ -2055,12 +2000,8 @@ const _dutchSourceAddDa = <String, String>{
   'Alle integraties': 'Alle integrationer',
   'Alles inschakelen': 'Aktivér alt',
   'Alles uitschakelen': 'Deaktivér alt',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Der er allerede valgt en rapportmappe, så forbindelsen forbliver tilgængelig, og en eksisterende OpenKAT-præsentation kan stadig opdateres.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Forbindelser med andre systemer. Hver forbindelse er som standard slået fra og forbliver inaktiv, indtil du slår den til.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Læs OpenKAT-rapportmapper ind som ét ledelsesoverblik.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) hentes ind som et redigerbart deck. Forbindelser med andre systemer, som OpenKAT, findes under Integrationer.',
   'Media (WebRTC)': 'Medier (WebRTC)',
@@ -2225,7 +2166,6 @@ const _dutchSourceAddDa = <String, String>{
   'Van toepassing': 'Relevant',
   'Voortgang': 'Fremdrift',
   'Voortgang managementsysteem': 'Ledelsessystemets fremdrift',
-  'Voortgangsoverzicht bijgewerkt': 'Fremdriftsoversigt opdateret',
   'Welk deel?': 'Hvilken del?',
   'beheersmaatregelen geladen': 'kontroller indlæst',
   'geïmplementeerd': 'implementeret',
@@ -2303,10 +2243,6 @@ const _dutchSourceAddDa = <String, String>{
       'Dette ligner ikke en gyldig gendannelsesnøgle.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Denne gendannelsesnøgle stammer fra en nyere version af OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Webhukommelsen til billeder er fuld (maks. 256 MB). Gem først dit arbejde som en .ocideck-fil for at undgå datatab. Brug derefter færre eller mindre billeder, luk andre decks, eller genindlæs uden at åbne andre decks.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Webhukommelsen til billeder er fuld (maks. 256 MB). Gem dit arbejde som en .ocideck-fil, og genindlæs siden, før du tilføjer flere billeder.',
   'Afbeeldingsrechten': 'Billedrettigheder',
   'Afbeeldingsrechten controleren…': 'Tjek billedrettigheder...',
   'Afdoening': 'Afregning',
@@ -2357,8 +2293,6 @@ const _dutchSourceAddDa = <String, String>{
   'Verifiëren': 'Verificér',
   'Deelnemers verifiëren': 'Verificér deltagere',
   '(dit apparaat)': '(denne enhed)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Sammenlign hver enheds fingeraftryk via en betroet kanal — læs det op for hinanden, eller send det ad en vej, du stoler på. Passer de, arbejder du med de rigtige enheder, og ingen har blandet sig imellem. Afviger de, så afbryd samarbejdet.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Det er ikke et gyldigt invitationslink.',
@@ -2419,7 +2353,6 @@ const _dutchSourceAddDa = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Samarbejd live om en præsentation via en Matrix-homeserver som krypteret relæ. Indholdet krypteres ende-til-ende med OciDecks egne nøgler; serveren ser kun krypterede data. Indtast en homeserver og et adgangstoken oprettet et andet sted — OciDeck beder aldrig om din adgangskode. Token gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
   'wordt door de test ingevuld': 'udfyldes af testen',
-  'Versleuteld doorgeefluik (ontwerp)': 'Krypteret relæ (design)',
   'Meer documentatie op de repository': 'Mere dokumentation i repositoryet',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Den fulde dokumentation — herunder arkitektur, build, kildekode og design — findes i repositoryet.',
@@ -2657,50 +2590,14 @@ const _dutchSourceAddDa = <String, String>{
       'Hvilke måledata mangler eller er forældede?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Hvilke data er denne rapport baseret på?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'En bred men saglig ledelsesoversigt med sporbare målemomenter.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Rangerer uden totalscore og viser manglende mål separat.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Viser alvorlighedstal, bidragydere og videreførte målinger efter øjeblik.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organiserer findetyper efter berørte organisationer, systemer og observationer.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Viser kritiske/høje tal uden nogen udtænkt vejning.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Viser tæller, nævner og kun pålidelige procenter.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Grupperer bogstavelige anbefalinger fra OpenKAT uden deres egen prioritet.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Et målrettet aktuelt billede af én organisation og dens måledato.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Sammenligner to valgte målemomenter inden for én organisation.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Adskiller nyt, nyt og ikke længere observeret.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Bruger kun pålidelige første observationsdatoer.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Rangerer systemer med separate sværhedstællere.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Viser individuelle deltaværdier uden vægtet score.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Sammenligner tæller og nævner med påviselig sammenlignelig dækning.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarer kildebeviste systemer, værtsnavne og IP-adresser.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Adskiller overvåget, uovervåget og ukendt.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Viser kun eksplicit dokumenterede overvågningsmutationer.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Viser organisationer og systemer omkring ét pålideligt CVE-link.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Rangerer CVE\'er med eksplicit deduplikering.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Adskiller nye, nye og ikke længere observerede CVE\'er.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Viser manglende, forældede og faktisk brugte mål.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Regner med nøgledatoer, kildefiler, adaptere og kildehash.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Ikke tilgængelig endnu: Kilden beviser ikke overvågningsstatus for alle aktiver.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2745,11 +2642,6 @@ const _dutchSourceAddDa = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Hvilken rapport besvarer dit spørgsmål?',
   'Meer rapportvragen': 'Flere rapportspørgsmål',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Hvilke systemer er sårbare over for en CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisationer og sårbare systemer omkring én sårbarhed.',
-  'Organisaties met kwetsbare systemen': 'Organisationer med sårbare systemer',
   'Kwetsbare systemen': 'Sårbare systemer',
   'Kritiek/hoog': 'Kritisk/høj',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2771,8 +2663,6 @@ const _dutchSourceAddDa = <String, String>{
   'Bruikbaar': 'Brugbar',
   'CVE zoeken': 'CVE-søgning',
   'Critical/high': 'Kritisk/høj',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Datakvalitet, manglende mål og forældelse.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'De valgte rapporter indeholder ikke nok pålidelige data til denne del.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2799,9 +2689,6 @@ const _dutchSourceAddDa = <String, String>{
   'Geen bruikbare meetdatum': 'Ingen brugbar måledato',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Genererede dias opdateres. Dine egne dias og kopier bevares.',
-  'Getroffen organisaties en systemen': 'Berørte organisationer og systemer',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Berørte organisationer og systemer omkring én sårbarhed.',
   'Getroffen systemen': 'Berørte systemer',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Rapporten kunne ikke oprettes. Dine valg er bevaret; tjek advarslerne og prøv igen.',
@@ -2811,20 +2698,15 @@ const _dutchSourceAddDa = <String, String>{
   'Keuzes wijzigen…': 'Skift valg...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Vælg den mappe, hvor OpenKAT har placeret rapporterne. OciDeck læser kun denne mappe; intet ændres eller sendes.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Vælg det spørgsmål, rapporten skal besvare. OciDeck bestemmer den passende struktur.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Vælg en CVE fundet i rapporterne.',
   'Laatste bruikbare meting': 'Sidste brugbare måling',
   'Live voorvertoning van de rapportopbouw':
       'Live preview af rapportstrukturen',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Ledelses- og kontroloplysninger om flere organisationer.',
   'Meer instellingen': 'Flere indstillinger',
   'Nederlands': 'hollandsk',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Ikke alle udvalgte organisationer har en måling for denne periode.',
-  'Nieuwe en verdwenen bevindingen': 'Nye og manglende fund',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Endnu ikke tilgængelig: disse rapporter indeholder ikke pålidelige CVE-numre.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2859,8 +2741,6 @@ const _dutchSourceAddDa = <String, String>{
       'En nyttig strømmåling mangler for en eller flere organisationer.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'To målemomenter er nødvendige for en sammenligning. En måling er nu fundet.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Fremskridt sammenlignet med et tidligere målemoment.',
   'Waar staan de OpenKAT-rapportages?': 'Hvor er OpenKAT-rapporterne?',
   'Wat veranderde er bij één organisatie?':
       'Hvad ændrede sig i én organisation?',
@@ -2874,7 +2754,6 @@ const _dutchSourceAddDa = <String, String>{
   'bruikbaar': 'brugbar',
   'metingen': 'målinger',
   'organisaties': 'organisationer',
-  'organisaties geselecteerd': 'udvalgte organisationer',
   'rapportages gebruikt': 'anvendte rapporter',
   'systemen': 'systemer',
   'Nog geen specificatielimiet': 'Endnu ingen specifikationsgrænse',
@@ -3015,7 +2894,6 @@ const _dutchSourceAddDa = <String, String>{
       'findes på et træ-slide, men bruges ikke andre steder — kobl den til en matrix, flow eller andet slide.',
   'Nieuw verbeteringsproject': 'Nyt forbedringsprojekt',
   'Kader': 'Ramme',
-  'Projecttitel': 'Projekttitel',
   'Primaire Y-metriek (Y-01)': 'Primær Y-metrik (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'For eksempel: orderintake gennemløbstid i arbejdsdage',
@@ -3068,10 +2946,6 @@ const _dutchSourceAddDa = <String, String>{
   'Bron niet toegestaan': 'Kilde ikke tilladt',
   'Deze URL is door de beveiliging geweigerd.':
       'Denne URL blev afvist af sikkerheden.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Hente materiale ind fra andre systemer. To kilder: præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) bliver til et redigerbart deck, og OpenKAT-rapporter (en mappe med JSON) bliver til ét ledelsesoverblik. Hvor OpenKAT-mappen ligger, indstilles under Integrationer.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) hentes ind som et redigerbart deck. Indlæsning af OpenKAT-rapportmapper er kun mulig i skrivebordsversionen.',
   'Alinea': 'Afsnit',
   'Audio "{bestand}"': 'Lyd "{bestand}"',
   'Deck opbouwen…': 'Bygger deck…',
@@ -3193,8 +3067,6 @@ const _dutchSourceAddDa = <String, String>{
       'Tjeklisteindekset: pr. test det stabile id, den kanoniske titel og kategorien. Selve vejledningens indhold er ikke med.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Testindekset for v2.0.0: pr. test det stabile id, den kanoniske titel, MASVS-kategorien og MASWE-svagheden. Tilbagetrukne v1-test og pladsholdere er ikke med; det er vejledningens indhold heller ikke.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Svaghedslisten (117): id, titel, MASVS-kategori, platform og CWE-koblingen. Tre fjerdedele er endnu ikke skrevet ud ved kilden; de er med, markeret. Tilbagetrukne svagheder er ikke.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Den fulde liste (id, navn, beskrivelse) plus en egen udvalgt kerne med vores udbedringsnoter.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3241,33 +3113,16 @@ const _dutchSourceAddDa = <String, String>{
       'Hver fil konverteres separat og gemmes som sin egen præsentation i målmappen. Går én galt, fortsætter køen bare.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'At importere flere præsentationer på én gang skriver dem som filer til en mappe; det kan browserversionen ikke.',
-  'Nu importeren': 'Importér nu',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Oversigten er klar i en ny fane.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Læser en mappe med OpenKAT-rapporter (JSON) og bygger ét ledelsesoverblik ud fra den: systemer, fund efter alvorlighed, de længst åbne punkter og udviklingen over på hinanden følgende målinger. Samme handling på en eksisterende OpenKAT-præsentation opdaterer den og lader dine egne dias blive stående.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Importen læser kun; intet i denne mappe ændres eller sendes. Filer, der ikke viser sig at være OpenKAT-rapporter, springes over og nævnes i importrapporten.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Angiv den mappe, hvor dine OpenKAT-rapporter (JSON) ligger. Importen læser den mappe og bygger ét ledelsesoverblik ud fra den; er mappen sat her, behøver du ikke vælge den hver gang.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'OpenKAT-importen læser en mappe fra disken og er kun tilgængelig i skrivebordsversionen.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Der er endnu ikke valgt en rapportmappe, så importen spørger om den hver gang.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Der er allerede valgt en rapportmappe, så indgangen forbliver tilgængelig, og en eksisterende OpenKAT-præsentation kan stadig opdateres.',
   'Integraties': 'Integrationer',
-  'Naar Integraties': 'Gå til Integrationer',
   'Map kiezen…': 'Vælg mappe…',
   'Map wissen': 'Ryd mappe',
-  'OpenKAT-rapportages importeren…': 'Importér OpenKAT-rapporter…',
   'Map met OpenKAT-rapportages kiezen': 'Vælg mappe med OpenKAT-rapporter',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-rapporter importeret.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT-decket opdateret; manuelle slides er bevaret.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Ingen OpenKAT-rapporter fundet i denne mappe.',
-  'OpenKAT-import mislukt.': 'OpenKAT-import mislykkedes.',
   'rapportages': 'rapporter',
   'overgeslagen': 'sprunget over',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3327,8 +3182,6 @@ const _dutchSourceAddDa = <String, String>{
   'Label op de primaire knop': 'Teksten på den primære knap',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fund, du har vurderet og ladet stå. De rapporteres ikke længere, men scanningen finder dem stadig, og de tæller ikke som løst. Tryk for at gendanne et.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'At lægge et privatlivsfund til side (design)',
   'Deze is beoordeeld en mag blijven': 'Gennemgået, denne må blive',
   'Mogelijk gemaakt door': 'Muliggjort af',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3340,10 +3193,8 @@ const _dutchSourceAddDa = <String, String>{
   'Technische melding:': 'Teknisk meddelelse:',
   'presentaties': 'praesentationer',
   '/Presentaties': '/Præsentationer',
-  'Rapportagedistributie (ontwerp)': 'Rapportdistribution (design)',
   'De export is mislukt.': 'Eksporten mislykkedes.',
   'Presenteer vanaf hier': 'Præsentér herfra',
-  'Teams-gastclient (ontwerp)': 'Teams-gæsteklient (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: hvor bredt må dette materiale deles?',
   'Wat betekenen deze niveaus?': 'Hvad betyder disse niveauer?',
@@ -3461,8 +3312,6 @@ const _dutchSourceAddDa = <String, String>{
       'Præsentationer, der forbliver almindelige Markdown-filer: læsbare, søgbare og kan åbnes med enhver editor.',
   'sjablonen om mee te beginnen, of leeg':
       'skabeloner at starte med, eller tom',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Udeladelse er slået til: fundne data sværtes, og alle billeder, video og lyd på dette slide kommer ikke med på skærmen eller i eksporten. Din markdown-fil beholder alt.',
   'Mijn tekst': 'Min tekst',
   'Wat zij zien': 'Hvad de ser',
   'Presentatiegegevens': 'Præsentationsoplysninger',
@@ -3687,7 +3536,6 @@ const _dutchSourceAddDa = <String, String>{
   'Opslaan naar…': 'Gem til…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Opsæt først en forbindelse under Indstillinger → Lager.',
-  'Beginnen met:': 'Start med:',
   'Verlopen datums markeren': 'Markér udløbne datoer',
   'Datums gemarkeerd': 'Datoer markeret',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3713,28 +3561,15 @@ const _dutchSourceAddDa = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Angrebsfladen pr. objekttype: hvor mange der er, hvor mange der kræver arbejde, hvad der er nyt, og hvad ingen ejer. Det sidste er som regel samtalen.',
   'Acties en besluiten': 'Handlinger og beslutninger',
-  'Actie toevoegen': 'Tilføj handling',
-  'Actie verwijderen': 'Fjern handling',
   'Actie': 'Handling',
   'Deadline': 'Frist',
-  'Op de lijst sinds': 'På listen siden',
   'Stand': 'Status',
-  'Wat vraagt u': 'Hvad du beder om',
   'geen datum': 'ingen dato',
-  'Ter informatie': 'Til orientering',
   'Besluit gevraagd': 'Beslutning påkrævet',
   'Escalatie': 'Eskalering',
   'Open': 'Åben',
   'Loopt': 'I gang',
   'Afgerond': 'Afsluttet',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Kun en beslutning eller eskalering får et mærkat på sliden; "forsinket" følger af fristen og sættes ikke af dig.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datoer som åååå-mm-dd. Enhver anden skrivemåde afvises frem for at blive gættet: 05-08-2026 er to forskellige dage.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'En handlingsslide bærer højst otte linjer; derefter skimmer rummet i stedet for at beslutte.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Hvad der skal ske, hvem der gør det og hvornår. Angiv pr. linje, om det er til orientering, eller om du beder om en beslutning — det er dét, rummet leder efter.',
   'Scorecard': 'Nøgletalskort',
   'Cijfer toevoegen': 'Tilføj nøgletal',
   'Cijfer verwijderen': 'Fjern nøgletal',
@@ -3821,8 +3656,6 @@ const _dutchSourceAddDa = <String, String>{
       'Tokenet er gyldigt, men må ikke dette — giv det flere rettigheder til repositoryet.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Logget ind, men ingen adgang — din adgangskode er ikke problemet. Bed om rettigheder til denne mappe.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Leksikonlicenser: hvad der stadig skal spørges om',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Det ligner en fuld DAV-URL. Ved Nextcloud udleder OciDeck selv den sti — her hører kun serveren til.',
   'Overnemen': 'Anvend',
@@ -3865,8 +3698,6 @@ const _dutchSourceAddDa = <String, String>{
   'kenteken': 'nummerplade',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Der findes ingen nøgleordsliste for særlige kategorier af personoplysninger på dette decks sprog. Mønstre med kontrolciffer (CPR, IBAN, pas) virker; ord som "diagnose" eller "mistænkt" genkendes ikke.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Nøgleordslisten for særlige kategorier af personoplysninger er meget tynd for dette decks sprog. Regn ikke med, at ord som "diagnose" eller "mistænkt" bliver fundet.',
   'Landpakketten voor identificatienummers':
       'Landepakker til identifikationsnumre',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3896,8 +3727,6 @@ const _dutchSourceAddDa = <String, String>{
       'Servernavnet findes ikke eller kan ikke slås op. Tjek server-URL\'en for en tastefejl.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Denne server har en privat- eller LAN-adresse. Marker den som betroet intern under Indstillinger → Lagring.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Denne servers certifikat er ikke betroet. Et selvsigneret certifikat virker ikke; brug et fra en anerkendt udsteder.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Serveren omdirigerer til en anden adresse. Indtast den adresse direkte — vi følger ikke omdirigeringer, fordi de kan omgå sikkerhedskontrollen.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3933,8 +3762,6 @@ const _dutchSourceAddDa = <String, String>{
   'Opslaan naar S3': 'Gem til S3',
   'Opgeslagen in S3:': 'Gemt i S3:',
   'Hier staat niets': 'Her er ingenting',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Indholdet kunne ikke indlæses. Kontrollér din forbindelse og dine indstillinger.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Slutpunktet kan ikke nås — kontrollér din forbindelse og slutpunktet.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3943,8 +3770,6 @@ const _dutchSourceAddDa = <String, String>{
       'Slutpunktet returnerede en fejl. Prøv igen senere.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Dette slutpunkt kan ikke skrive betinget, så dit arbejde er ikke beskyttet mod en andens. Gem under et nyt navn, hvis andre arbejder på denne præsentation.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Ingen S3-bucket konfigureret. Opsæt en under Indstillinger → Lagring.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Konfigurér først en S3-bucket under Indstillinger → Lagring.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3990,10 +3815,6 @@ const _dutchSourceAddDa = <String, String>{
       'Dette billede viser mindst {count} genkendelige ansigter.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Dette billede kunne ikke kontrolleres for ansigter. Formatet understøttes ikke (for eksempel HEIC). Det betyder ikke, at der ikke er nogen på det — det betyder, at der ikke er set efter.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Dette billede viser et genkendeligt ansigt.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Dette billede viser {count} genkendelige ansigter.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Et billede, hvor nogen er genkendelig, er personoplysninger — også uden navn.',
   'herkenbaar gezicht op een afbeelding': 'genkendeligt ansigt på et billede',
@@ -4010,8 +3831,6 @@ const _dutchSourceAddDa = <String, String>{
   'Organisatie': 'Organisation',
   'Welke verbinding?': 'Hvilken forbindelse?',
   'Bestandsverbindingen': 'Filforbindelser',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'De steder, hvor du gemmer og søger i dine præsentationer — mapper på denne computer, WebDAV-servere og git-arkiver mellem hinanden. Træk dem i den rækkefølge, du vil have: den øverste af hver slags gælder som standard.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Et git-arkiv; hver gemt version bevares.',
   'Een map op de schijf van deze computer.':
@@ -4035,15 +3854,7 @@ const _dutchSourceAddDa = <String, String>{
   'Openen vanaf WebDAV': 'Åbn fra WebDAV',
   'Opslaan naar WebDAV': 'Gem til WebDAV',
   'Opgeslagen op WebDAV:': 'Gemt på WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Konfigurér først en WebDAV-server under Indstillinger → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Vælg billede på WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Ingen WebDAV-server konfigureret. Konfigurér en under Indstillinger → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV er ikke sat (korrekt) op — tjek serveroplysningerne under Indstillinger → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Denne server er ikke tilladt. Markér først en privat/LAN-server som betroet under Indstillinger → WebDAV.',
   'Servertype': 'Servertype',
   'Nextcloud of ownCloud': 'Nextcloud eller ownCloud',
   'Andere WebDAV-server': 'Anden WebDAV-server',
@@ -4065,24 +3876,11 @@ const _dutchSourceAddDa = <String, String>{
   'Haal volle pagina uit de reeks': 'Fjern fuld side fra rækken',
   'Opslag': 'Lagring',
   'Opslagwijzen': 'Lagringsmåder',
-  'Deze computer': 'Denne computer',
   'Ingesteld': 'Konfigureret',
   'Niet ingesteld': 'Ikke konfigureret',
-  'Nog geen bibliotheek ingesteld':
-      'Der er endnu ikke oprettet noget bibliotek',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'De veje, du kan åbne og gemme præsentationer ad. Klik en måde op for at konfigurere den.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Præsentationer i mapperne ovenfor, på denne computers disk.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Åbn og gem præsentationer i en mappe på din Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Åbn præsentationer fra et git-lager; hver gemt version bevares.',
-  'Nog te verifiëren': 'Skal stadig verificeres',
   'MASWE-zwakheid kiezen': 'Vælg en MASWE-svaghed',
   'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',
   'Geen zwakheid gevonden': 'Ingen svaghed fundet',
-  'uitleg nog niet geschreven': 'vejledning endnu ikke skrevet',
   'Getalnotatie herkennen': 'Genkend talformatet',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Denne fil indeholder tal, hvor kommaet kan læses på to måder:',
@@ -4198,12 +3996,10 @@ const _dutchSourceAddDa = <String, String>{
   'Veelgestelde vragen': 'Ofte stillede spørgsmål',
   'Probleemoplossing': 'Fejlfinding',
   'Begrippenlijst': 'Ordliste',
-  'API-documentatie': 'API-dokumentation',
   'Prestaties': 'Ydeevne',
   'Beveiligingsontwerp': 'Sikkerhedsdesign',
   'Hosting en uitrol': 'Hosting og udrulning',
   'Bijdragen': 'Bidrag',
-  'Ontwikkelomgeving': 'Udviklingsmiljø',
   'Migratiegids': 'Migrationsvejledning',
   'Versies…': 'Versioner…',
   'Versies:': 'Versioner:',
@@ -4244,8 +4040,6 @@ const _dutchSourceAddDa = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen er flyttet; genindlæs decket og gem igen.',
   'Bijgewerkt met OciDeck': 'Opdateret med OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Opsæt først et Git-repository under Indstillinger → Git-repository.',
   'Git-repository': 'Git-repository',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Åbn præsentationer fra et Git-repository. Hver gemt version bevares. Token gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
@@ -4261,7 +4055,6 @@ const _dutchSourceAddDa = <String, String>{
       'Rapporteringsslides og referencedata til informationssikkerhed: fund, tjeklister, scope-matricer og godkendelse. Struktureret efter MIAUW og bredt anvendelig til pentests, audits og sikkerhedsundersøgelser. Referencedataene ligger i selve appen, så modulet virker med det samme og helt offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de forbliver skjulte, indtil du aktiverer dem.',
-  'Procesverbetering (ontwerp)': 'Procesforbedring (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dette projekt er et biprodukt af Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Eksportér stilprofil',
@@ -4399,7 +4192,6 @@ const _dutchSourceAddDa = <String, String>{
   'genetisch gegeven': 'genetisk oplysning',
   'parketnummer': 'sagsnummer hos anklagemyndigheden',
   'nationaal identificatienummer': 'nationalt identifikationsnummer',
-  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Mulig hemmelighed',
   'sleutel of token': 'nøgle eller token',
   'private sleutel': 'privat nøgle',
@@ -4432,7 +4224,6 @@ const _dutchSourceAddDa = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Læg hele CVE-listen på denne enhed, så opslag sker offline, og din søgeterm ikke går nogen steder hen. Databasen kommer fra CVE List V5 (det officielle CVE-program, via GitHub).',
   'Wat er lokaal beschikbaar is': 'Hvad der er tilgængeligt lokalt',
-  'Gegevenspakket': 'Datapakke',
   'Nu bijwerken': 'Opdater nu',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data tilgængelige lokalt — opslag sker på denne enhed; intet forlader den.',
@@ -4451,7 +4242,6 @@ const _dutchSourceAddDa = <String, String>{
       'Acceptér: dataene hører til her, og meddelelsen forsvinder. Acceptér + advar: modtageren ser et mærke om, at sliden indeholder personoplysninger. Udelad: de fundne data gøres ulæselige på skærmen og i eksporten — din Markdown-fil beholder den oprindelige tekst.',
   'Alleen melden': 'Kun rapportér',
   'PERSOONSGEGEVENS': 'PERSONOPLYSNINGER',
-  'Persoonsgegevens op deze slide': 'Personoplysninger på denne slide',
   'Volg de presentatie': 'Følg præsentationen',
   'Weglaten uit tonen en exporteren': 'Udelad fra visning og eksport',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4571,8 +4361,6 @@ const _dutchSourceAddDa = <String, String>{
   'Bewerk deze slide': 'Rediger dette dias',
   'Bewijs verwijderen': 'Fjern bevis',
   '(nog leeg)': '(stadig tom)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Angiv først et fund-id for at vedhæfte bevis.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Tilføj skærmbilleder eller videoer som bevis. Hvert bevis bliver sit eget dias lige efter fundet og kommer med i eksporten.',
   'Uitvoering testen conform standaard': 'Test i henhold til standard',

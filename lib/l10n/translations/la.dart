@@ -796,8 +796,6 @@ const _dutchSourceLa = {
   'Selectie opheffen': 'Electionem tollere',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Licentiam EUPL 1.2 accipio et legi quos datos OciDeck servat.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Electio tua fit lingua praedefinita applicationis.',
   'Lees de volledige licentie': 'Licentiam plenam legere',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck est programma liberum sub licentia EUPL 1.2. Antequam incipias, te rogamus ut licentiam accipias. Infra etiam legere potes quos datos OciDeck in hoc instrumento servat et quando aliquid instrumentum tuum relinquit.',
@@ -824,9 +822,6 @@ const _dutchSourceLa = {
   'Het antwoord van de server was te groot':
       'Responsum servatoris nimis magnum erat',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Fons Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Praesentationes in plica in Nextcloud tua aperi et serva. Tessera cifrata in claviculario servatur, non apud ceteras optiones.',
   'Server-URL': 'URL servatoris',
   'Gebruikersnaam': 'Nomen usoris',
   'App-wachtwoord': 'Tessera applicationis',
@@ -840,22 +835,13 @@ const _dutchSourceLa = {
   'Verbinding gelukt': 'Conexio successit',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Mutationes servantur cum Servare premis.',
-  'Afbeelding kiezen op Nextcloud': 'Imaginem in Nextcloud eligere',
-  'Openen vanaf Nextcloud': 'Ex Nextcloud aperire',
   'Vernieuwen': 'Renovare',
   'Deze map is leeg': 'Haec plica vacua est',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nullus servator Nextcloud constitutus. Constitue unum apud Optiones → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Plicam onerare non potui. Verifica conexionem et optiones tuas.',
   'Kon dit bestand niet openen.': 'Hunc fasciculum aperire non potui.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Haec non est praesentatio Marp/OciDeck.',
   'Downloaden mislukt:': 'Descensus defecit:',
-  'Opgeslagen op Nextcloud:': 'In Nextcloud servatum:',
   'Opslaan mislukt:': 'Servatio defecit:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Primum servatorem Nextcloud constitue apud Optiones → Nextcloud.',
   'Opslaan naar Nextcloud': 'In Nextcloud servare',
   'Doelpad (zonder extensie)': 'Semita destinationis (sine extensione)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -866,10 +852,6 @@ const _dutchSourceLa = {
   'Tijden-overzicht tonen na afloop': 'Conspectum temporum postea monstrare',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Tempus per scidam semper metitur; hoc solum regit num conspectus post hanc praesentationem appareat.',
-  'Oefenoverzicht tonen na afloop':
-      'Conspectum exercitationis postea monstrare',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Post praesentationem, conspectum temporis per scidam impensi monstra. Tempus semper metitur; hoc solum regit num pagina appareat.',
   'Onveilige presentatie geblokkeerd': 'Praesentatio non tuta impedita',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Haec praesentatio non aperta est. Fasciculus continet contentum quod codicem exsequi potest, et praesentatio solum data continere debet — nihil exsecutabile.',
@@ -952,7 +934,6 @@ const _dutchSourceLa = {
   'Online': 'Online',
   'Lokaal bestand': 'Fasciculus localis',
   'Geen video': 'Nulla pellicula',
-  'Vraag (meerkeuze)': 'Quaestio (electio multiplex)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Textus tituli nimis parvam contrarietatem cum imagine fundi habet',
   'Herstel': 'Corrigere',
@@ -967,8 +948,6 @@ const _dutchSourceLa = {
   'Huidig punt weghalen': 'Punctum praesens removere',
   'Stap voor stap': 'Gradatim',
   'Geen animatie': 'Nulla animatio',
-  'Animatiesnelheid': 'Celeritas animationis',
-  'Langzaam': 'Lente',
   'Snel': 'Celeriter',
   'Gebeurtenissen': 'Eventus',
   'Gebeurtenis toevoegen': 'Eventum addere',
@@ -981,8 +960,6 @@ const _dutchSourceLa = {
   'Vraag': 'Quaestio',
   'Wat wil je vragen?': 'Quid rogare vis?',
   'Antwoorden': 'Responsa',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Signa responsa recta. Ad summum octo responsa; cum praesentas, unum rectum et cetera falsa fortuito monstrantur.',
   'Antwoord': 'Responsum',
   'Antwoord toevoegen': 'Responsum addere',
   'Goed antwoord': 'Responsum rectum',
@@ -1015,8 +992,6 @@ const _dutchSourceLa = {
   'Stelling': 'Enuntiatio',
   'Formuleer een stelling die juist of onjuist is':
       'Enuntiationem forma quae vera aut falsa est',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Signa omnia responsa recta. Cum praesentatur, ordo fortuitus ostenditur cum saltem uno recto et uno falso.',
   'Juist': 'Verum',
   'Onjuist': 'Falsum',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1036,7 +1011,6 @@ const _dutchSourceLa = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Colores status metrorum cockpit. Crea varietates nominatas; schema electum ad omnia schemata cockpit valet.',
   'Standaard': 'Praedefinitum',
-  'Standaardkleuren gebruiken': 'Coloribus praedefinitis uti',
   'Kleurschema verwijderen': 'Schema colorum delere',
   'Schemanaam': 'Nomen schematis',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1113,7 +1087,6 @@ const _dutchSourceLa = {
   'Logo en footer': 'Insigne et pes',
   'Pagina': 'Pagina',
   'Presentatiestijl': 'Stilus praesentationis',
-  'Presentatiestijl: ': 'Stilus praesentationis: ',
   'Tekst...': 'Textus...',
   'Teksteditor': 'Editor textus',
   'Volgende pagina': 'Pagina proxima',
@@ -1126,8 +1099,6 @@ const _dutchSourceLa = {
   'Doeltijd': 'Tempus metae',
   'Doeltijd (aftellen)': 'Tempus metae (numeratio retrograda)',
   'Geen aftelling': 'Nulla numeratio retrograda',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Tempus metae praedefinitum pro numeratione retrograda in praesentante. Dum praesentas, subtiliter ordina tasto K.',
   'uit': 'off',
   'Doeltijd / aftellen (K)': 'Meta / numeratio retrograda (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1201,14 +1172,8 @@ const _dutchSourceLa = {
   'Cirkel': 'Circulus',
   'Spider': 'Spider',
   'CSV importeren': 'CSV importa',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: primus ordo = nomina serierum, prima columna = tituli)',
   'Gekoppeld aan': 'Nexum ad',
   'Ontkoppelen': 'Nexum solve',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Data in tabella serva, an ut separatum CSV-scriptum iuxta praesentationem custodi?',
-  'In de slide': 'In tabella',
-  'Als CSV-bestand': 'Ut CSV-scriptum',
   'Geen grafiekgegevens': 'Nulla data diagrammatis',
   'Label': 'Titulus',
   'Rij': 'Ordo',
@@ -1238,7 +1203,6 @@ const _dutchSourceLa = {
   'Eigen kleur (hex)': 'Color proprius (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Exempli gratia #33FF33 pro schermate viridi CRT.',
-  'Onderdeel van stijlprofiel ': 'Pars profili stili ',
   'Broncode lettertype': 'Genus litterarum codicis',
   'Kop (optioneel)': 'Caput (optionalis)',
   'Subkop (optioneel)': 'Subcaput (optionalis)',
@@ -1276,16 +1240,7 @@ const _dutchSourceLa = {
   'Zet het filter uit om alles weer te zien.':
       'Filtrum exstingue ut omnia rursus videas.',
   'Welkom bij OciDeck': 'Salve in OciDeck',
-  'Privacy en gebruik': 'Privatio et usus',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck est applicatio localis pro computatro. Praesentationes et data tua solum in computatro tuo servantur.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Applicatio nulla data personalia, nullas statisticas, nullaque data usus colligit. Privatio tua prioritas nostra est.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Omnia data quae in OciDeck inseris in systemate locali tuo manent nec ad servos externos mittuntur.',
   'Licentie (EUPL 1.2)': 'Licentia (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      '"Consentio" premendo, has condiciones accipis et usui OciDeck consentis.',
   'Volledige licentie online': 'Licentia plena online',
   'Akkoord gaan': 'Consentio',
   'Privacy': 'Privatio',
@@ -1374,8 +1329,6 @@ const _dutchSourceLa = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Exportatio impedita propter problemata qualitatis gravia.',
   'Alle meldingen': 'Omnes nuntii',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… et plura problemata in pinace qualitatis.',
   'Classificatie-handhaving': 'Coactio classificationis',
   'Vrijgaveplafond': 'Fastigium emissionis',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1394,11 +1347,9 @@ const _dutchSourceLa = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Statue gradum TLP — exportatio a politia classificationis impedita est.',
   'Tabel bewerken': 'Recense tabulam',
-  'Pijltjes · Tab · Esc': 'Claves sagittarum · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Recense tabulam (in tabellis tabulae)',
   'Tabel bewerken (E)': 'Recense tabulam (E)',
   'Tab wisselt cel · Esc sluit': 'Tab cellam mutat · Esc claudit',
-  'Pen · markeerstift · ⇧E': 'Stilus · illuminator · ⇧E',
   'Gestapelde staaf': 'Columna cumulata',
   'Spreiding': 'Dispersio',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn folia percurrit',
@@ -1441,10 +1392,6 @@ const _dutchSourceLa = {
       'Error retis — nexum tuum proba et iterum conare.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Aliquid inopinatum accidit. Acta pro singulis inspice.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud non (recte) constitutum est — indicia moderatri in Optionibus → Nextcloud proba.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → Nextcloud designa.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Moderatrus attingi non potest — nexum tuum et URL moderatri proba.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1472,8 +1419,6 @@ const _dutchSourceLa = {
   'Uit recente bestanden verwijderen': 'Ex plicis recentibus remove',
   'OciDeck wordt gestart…': 'OciDeck incipitur…',
   'Herstelbestanden': 'Plicae recuperationis',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Plicae recuperationis totum contentum praesentationum tuarum in textu plano continent. Post 7 dies automatice purgantur; hic eas statim delere potes.',
   'Herstelbestanden nu wissen': 'Plicas recuperationis nunc dele',
   'Er waren geen herstelbestanden.': 'Nullae plicae recuperationis erant.',
   'herstelbestand(en) gewist.': 'plicae recuperationis deletae.',
@@ -1910,7 +1855,6 @@ const _dutchSourceAddLa = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Exemplum in nova scida facimus; fasciculus tuus originalis immutatus manet.',
   'Welk formaat?': 'Quae forma?',
-  'dia\'s, gesplitst op kop.': 'paginae, secundum titulum divisae.',
   'document': 'documentum',
   'volledig': 'plenum',
   'Invoegen': 'Insere',
@@ -2073,12 +2017,8 @@ const _dutchSourceAddLa = <String, String>{
   'Alle integraties': 'Omnes integrationes',
   'Alles inschakelen': 'Omnia activare',
   'Alles uitschakelen': 'Omnia deactivare',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Plica relationum iam constituta est; itaque coniunctio pervia manet, ut fasciculus OpenKAT exsistens renovari possit.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Coniunctiones cum aliis systematibus. Quaeque coniunctio ex more inactiva est et inactiva manet donec eam actives.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Plicas relationum OpenKAT ut unum conspectum administrationis lege.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Praesentationes ex PowerPoint (.pptx), Keynote (.key) et Impress (.odp) ut fasciculum mutabilem inferre. Coniunctiones cum aliis systematibus, ut OpenKAT, sub Integrationibus sunt.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2245,7 +2185,6 @@ const _dutchSourceAddLa = <String, String>{
   'Van toepassing': 'Applicabile',
   'Voortgang': 'Progressus',
   'Voortgang managementsysteem': 'Progressus systematis administrationis',
-  'Voortgangsoverzicht bijgewerkt': 'Conspectus progressus renovatus',
   'Welk deel?': 'Quae pars?',
   'beheersmaatregelen geladen': 'praesidia onerata',
   'geïmplementeerd': 'effectum',
@@ -2322,10 +2261,6 @@ const _dutchSourceAddLa = <String, String>{
       'Haec clavis restitutionis valida esse non videtur.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Haec clavis restitutionis ex recentiore versione OciDeck orta est.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Memoria interretialis imaginum plena est (summum 256 MB). Opus primum ut fasciculum .ocideck serva, ne data perdas. Deinde paucioribus minoribusve imaginibus utere, alias collectiones claude, aut denuo onera sine aliis collectionibus apertis.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Memoria interretialis imaginum plena est (summum 256 MB). Opus tuum ut fasciculum .ocideck serva et paginam renova antequam plures imagines addas.',
   'Afbeeldingsrechten': 'Diritti di immagine',
   'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
   'Afdoening': 'Insediamento',
@@ -2377,8 +2312,6 @@ const _dutchSourceAddLa = <String, String>{
   'Verifiëren': 'Proba',
   'Deelnemers verifiëren': 'Participes probare',
   '(dit apparaat)': '(hoc instrumentum)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Cuiusque instrumenti vestigium per canalem fidum compara — invicem recitate, vel per viam cui confidis mitte. Si congruunt, cum veris instrumentis laboras neque quisquam se interposuit. Si discrepant, cooperationem rumpe.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Hic nexus invitationis validus non est.',
@@ -2439,7 +2372,6 @@ const _dutchSourceAddLa = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'In praesentatione viva per homeserver Matrix ut relatorem cifratum collabora. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt. Homeserver et tesseram accessus alibi creatam insere — OciDeck numquam verbum secretum tuum petit. Signum in clavium anulo cifratum conditur, non apud ceteras optiones.',
   'wordt door de test ingevuld': 'a probatione impletur',
-  'Versleuteld doorgeefluik (ontwerp)': 'Transmissor cifratus (designatio)',
   'Meer documentatie op de repository': 'Amplior documentatio in repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Documentatio plena — comprehensis architectura, compilatione, codice fontis et forma — in repositorio est.',
@@ -2679,50 +2611,14 @@ const _dutchSourceAddLa = <String, String>{
       'Quae mensurae notitia desit vel evasissent?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Quae data est haec fama fundatur?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Lata sed scientifica administratio perspicitur cum momentorum mensurarum deprauatione.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Ordines sine summa score et singulas mensuras absentis ostendit.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Comites, contributores, et mensuras momento ferri, severitatem ostendit.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Typi inventio ordinat cum affectata institutiones, systemata et observationes.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Monstrat criticam/altum numerum sine ullo excogitato pondere.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Numeratorem, denominatorem et solum certas percentages ostendit.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Commendationes litterariae sodalitates ab OpenKAT sine sua prioritate.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Imago currentis iaculis unius organizationis ac mensurae date.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Electa duo momenta mensurae intra unam ordinationem comparat.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Distinguit nova, nova et non iam observata.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Sola observatione certa utitur primis temporibus.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Ordinum ratio cum severitate separata calculis.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Ostendit singula valores della sine score ponderati.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Numeratorem et denominatorem comparat cum comparabili coverage demonstrabili.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventaria systemata principia probata, hostnames et inscriptiones IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'viverra disiungit, unmonitored et ignotus.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Tantum ostendit magnas mutationes explicite probatas.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Monstrat instituta et systemata circa unum certum vinculum CVE.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'ORDINIS CVEs cum expressa deduplicatione.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Distinguit nova, nova et non amplius observata CVEs.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Desunt, outdated et usi sunt mensuras ostendit.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Rationes praecipuarum temporum, fontium fasciculorum, adaptorum et fontium hashes.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Nondum in promptu est: fons status vigilantiae omnium bonorum non probat.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2765,12 +2661,6 @@ const _dutchSourceAddLa = <String, String>{
   'Onderwerp': 'Subiectum',
   'Welk rapport beantwoordt uw vraag?': 'Quae fama respondet quaeris?',
   'Meer rapportvragen': 'More fama quaestiones',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Quae systemata ad CVE vulnerabilia sunt?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Institutiones et systemata vulnerabilia circa unam vulnerabilitatem.',
-  'Organisaties met kwetsbare systemen':
-      'Institutiones cum systematibus vulnerabilibus',
   'Kwetsbare systemen': 'Systemata vulnerabilia',
   'Kritiek/hoog': 'Critical/high',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2792,8 +2682,6 @@ const _dutchSourceAddLa = <String, String>{
   'Bruikbaar': 'Usabilis',
   'CVE zoeken': 'CVE quaerere',
   'Critical/high': 'Critical/high',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Data qualitatis, desunt mensurae et obsolescentiae.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Renuntiationes selectae satis certae notitiae huic parti non continent.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2820,9 +2708,6 @@ const _dutchSourceAddLa = <String, String>{
   'Geen bruikbare meetdatum': 'Nulla utilis mensura diem',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Generantur labitur reficiuntur. Pro- prium labitur et codices servantur.',
-  'Getroffen organisaties en systemen': 'Affectus organizations et systemata',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Institutiones et systemata affectata circa unum vulnerability.',
   'Getroffen systemen': 'systemata affectata',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Fama creari non potuit. Tuae electiones conservatae sunt; monita reprehendo rursum.',
@@ -2832,19 +2717,14 @@ const _dutchSourceAddLa = <String, String>{
   'Keuzes wijzigen…': 'Mutare electiones…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Elige folder in quo OpenKAT relationes posuit. OciDeck solum hunc folder legit; nihil mutatur aut mittitur.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Elige quaestio fama respondere debet. OciDeck aptam structuram eflicit.',
   'Kies een CVE die in de rapportages is aangetroffen.': 'Elige CVE in tradit.',
   'Laatste bruikbare meting': 'Last utibile measurement',
   'Live voorvertoning van de rapportopbouw':
       'Vivamus preview of the report structure',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Procuratio et moderatio informationes circa plures consociationes.',
   'Meer instellingen': 'Plures occasus',
   'Nederlands': 'Batavica',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Non omnis ordinatio electa mensuram huius temporis habet.',
-  'Nieuwe en verdwenen bevindingen': 'Nova et absentis Inventiones',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Not yet available: hae relationes certos CVE numeros non continent.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2879,8 +2759,6 @@ const _dutchSourceAddLa = <String, String>{
       'Mensuratioris currentis utilis desit pro uno vel pluribus Institutis.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Ad comparationem requiruntur duo momenta mensurae. Mensura una nunc inventa est.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progressus comparatur ad momentum praecedens mensurae.',
   'Waar staan de OpenKAT-rapportages?': 'Ubi est OpenKAT tradit?',
   'Wat veranderde er bij één organisatie?': 'Quid in uno ordine mutatum?',
   'Wat wilt u laten zien?': 'Quid vis ostendere?',
@@ -2892,7 +2770,6 @@ const _dutchSourceAddLa = <String, String>{
   'bruikbaar': 'utilis',
   'metingen': 'mensurae',
   'organisaties': 'organizations',
-  'organisaties geselecteerd': 'organizations electus',
   'rapportages gebruikt': 'tradit usus',
   'systemen': 'systems',
   'Nog geen specificatielimiet': 'Nondum limes specificationis',
@@ -3035,7 +2912,6 @@ const _dutchSourceAddLa = <String, String>{
       'in tabula arboris est sed alibi non adhibetur — coniunge ad matricem, fluxum vel aliam tabulam.',
   'Nieuw verbeteringsproject': 'Novum propositum emendationis',
   'Kader': 'Structura',
-  'Projecttitel': 'Titulus propositi',
   'Primaire Y-metriek (Y-01)': 'Metrum Y primarium (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Exempli gratia: tempus per orderintake in diebus laboris',
@@ -3089,10 +2965,6 @@ const _dutchSourceAddLa = <String, String>{
   'Bron niet toegestaan': 'Fons non permissus',
   'Deze URL is door de beveiliging geweigerd.':
       'Hoc URL a securitate reiectum est.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Materiam ex aliis systematibus inferre. Duo fontes: praesentationes ex PowerPoint (.pptx), Keynote (.key) et Impress (.odp) fiunt fasciculus mutabilis, et relationes OpenKAT (plica JSON) fiunt unus conspectus administrationis. Ubi plica OpenKAT sit, sub Integrationibus constituis.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Praesentationes ex PowerPoint (.pptx), Keynote (.key) et Impress (.odp) ut fasciculum mutabilem inferre. Lectio plicarum relationum OpenKAT in versione mensali tantum fieri potest.',
   'Alinea': 'Paragraphus',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Fasciculum aedificare…',
@@ -3212,8 +3084,6 @@ const _dutchSourceAddLa = <String, String>{
       'Index indicis probationum: pro singulis probationibus id stabile, titulus canonicus et genus. Ipsius ducis contenta non adiunguntur.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Index probationum v2.0.0: pro singulis probationibus id stabile, titulus canonicus, genus MASVS et infirmitas MASWE. Probationes v1 retractae et vicaria non insunt; nec ducis contenta.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Index infirmitatum (117): id, titulus, genus MASVS, suggestum et nexus CWE. Tres quartae partes apud fontem nondum perscriptae sunt; eae tamen insunt, notatae. Infirmitates retractae non insunt.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Index plenus (id, nomen, descriptio) atque nucleus proprius delectus cum notis nostris remediorum.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3260,34 +3130,17 @@ const _dutchSourceAddLa = <String, String>{
       'Quodque documentum seorsum convertitur et ut praesentatio propria in plica destinata servatur. Si unum deficit, ordo simpliciter pergit.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Plures praesentationes simul importare eas ut documenta in plicam scribit; in navigatro hoc fieri non potest.',
-  'Nu importeren': 'Nunc importare',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Conspectus in nova tabula paratus est.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Plicam relationum OpenKAT (JSON) legit et unum conspectum administrationis inde struit: systemata, inventa pro gravitate, res diutissime apertas et progressum per mensuras continuas. Eadem actio in fasciculo OpenKAT exsistente eum renovat et tabellas tuas proprias relinquit.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Importatio tantum legit; nihil in hac plica mutatur aut mittitur. Fasciculi qui relationes OpenKAT non sunt praetermittuntur et in tabula importationis nominantur.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Plicam designa in qua relationes OpenKAT tuae (JSON) sunt. Importatio hanc plicam legit et unum conspectum administrationis inde struit; plica hic constituta, eam singulis vicibus eligere non debes.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Importatio OpenKAT plicam e disco legit et in versione mensali tantum praesto est.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Nulla plica relationum adhuc designata est; itaque importatio eam singulis vicibus poscit.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Plica relationum iam constituta est; itaque aditus pervius manet, ut fasciculus OpenKAT exsistens renovari possit.',
   'Integraties': 'Integrationes',
-  'Naar Integraties': 'Ad Integrationes',
   'Map kiezen…': 'Plicam elige…',
   'Map wissen': 'Plicam dele',
-  'OpenKAT-rapportages importeren…': 'Relationes OpenKAT importare…',
   'Map met OpenKAT-rapportages kiezen':
       'Plicarium cum relationibus OpenKAT eligere',
-  'OpenKAT-rapportages geïmporteerd.': 'Relationes OpenKAT importatae.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Fasciculus OpenKAT renovatus; scidae manu factae servatae sunt.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Nullae relationes OpenKAT in hoc plicario inventae.',
-  'OpenKAT-import mislukt.': 'Importatio OpenKAT defecit.',
   'rapportages': 'relationes',
   'overgeslagen': 'praetermissae',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3347,8 +3200,6 @@ const _dutchSourceAddLa = <String, String>{
   'Label op de primaire knop': 'Titulus in pulsatorio primario',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Inventa quae recensuisti et manere sivisti. Non amplius nuntiantur, sed scrutatio ea etiamnunc invenit neque pro solutis habentur. Tange ut unum restituas.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Inventum de privatis seponere (consilium)',
   'Deze is beoordeeld en mag blijven': 'Recognitum, hoc manere potest',
   'Mogelijk gemaakt door': 'Possibile factum ab',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3360,10 +3211,8 @@ const _dutchSourceAddLa = <String, String>{
   'Technische melding:': 'Nuntius technicus:',
   'presentaties': 'praesentationes',
   '/Presentaties': '/Praesentationes',
-  'Rapportagedistributie (ontwerp)': 'Distributio relationum (designatio)',
   'De export is mislukt.': 'Exportatio defecit.',
   'Presenteer vanaf hier': 'Hinc praesentare',
-  'Teams-gastclient (ontwerp)': 'Cliens hospes Teams (consilium)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: quam late haec materia communicari licet?',
   'Wat betekenen deze niveaus?': 'Quid significant hi gradus?',
@@ -3480,8 +3329,6 @@ const _dutchSourceAddLa = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Praesentationes quae simplices fasciculi Markdown manent: legibiles, investigabiles et quovis editore aperiendae.',
   'sjablonen om mee te beginnen, of leeg': 'exempla ad incipiendum, vel vacuum',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Omissio activa est: data inventa denigrantur et omnes imagines, pelliculae et soni huius laminae neque ad scrinium neque ad exportationem eunt. Fasciculus tuus markdown omnia servat.',
   'Mijn tekst': 'Textus meus',
   'Wat zij zien': 'Quod vident',
   'Presentatiegegevens': 'Data praesentationis',
@@ -3701,7 +3548,6 @@ const _dutchSourceAddLa = <String, String>{
   'Opslaan naar…': 'Servare in…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Nexum primum in Optionibus → Repositorio institue.',
-  'Beginnen met:': 'Incipe cum:',
   'Verlopen datums markeren': 'Dies elapsos notare',
   'Datums gemarkeerd': 'Dies notati',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3727,28 +3573,15 @@ const _dutchSourceAddLa = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Area impetus per genus rei: quot sint, quot opus poscant, quid novum sit et quid nemo possideat. Illud postremum plerumque sermo est.',
   'Acties en besluiten': 'Acta et decreta',
-  'Actie toevoegen': 'Actum addere',
-  'Actie verwijderen': 'Actum removere',
   'Actie': 'Actum',
   'Deadline': 'Dies constituta',
-  'Op de lijst sinds': 'In indice ab',
   'Stand': 'Status',
-  'Wat vraagt u': 'Quid petis',
   'geen datum': 'sine die',
-  'Ter informatie': 'Ad notitiam',
   'Besluit gevraagd': 'Decretum petitur',
   'Escalatie': 'Provocatio',
   'Open': 'Apertum',
   'Loopt': 'In cursu',
   'Afgerond': 'Perfectum',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Solum decretum aut provocatio in tabula titulum accipit; "serum" ex die constituta sequitur nec a te ponitur.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Dies ut aaaa-mm-dd. Alia forma respuitur nec coniectatur: 05-08-2026 duo dies diversi sunt.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Tabula actorum ad summum octo versus fert; ultra, aula percurrit potius quam decernit.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Quid fieri debeat, quis faciat, et quando. Pro quoque versu indica utrum ad notitiam sit an decretum petas — id aula quaerit.',
   'Scorecard': 'Tabula numerorum',
   'Cijfer toevoegen': 'Numerum addere',
   'Cijfer verwijderen': 'Numerum removere',
@@ -3835,8 +3668,6 @@ const _dutchSourceAddLa = <String, String>{
       'Signum validum est, sed hoc facere non licet — plura iura in promptuario ei da.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Admissus, sed sine aditu — tessera tua non est impedimentum. Iura in hac plica pete.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licentiae lexicorum: quae adhuc roganda sunt',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Hoc URL DAV plenum videtur. Apud Nextcloud OciDeck illam viam ipse derivat — hic solus servitor pertinet.',
   'Overnemen': 'Adhibe',
@@ -3879,8 +3710,6 @@ const _dutchSourceAddLa = <String, String>{
   'kenteken': 'numerus vehiculi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro lingua huius fasciculi nullus est index verborum clavium pro singularibus generibus datorum personalium. Formae cum numero probationis (BSN, IBAN, diploma) valent; verba ut "diagnosis" vel "suspectus" non agnoscuntur.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Index verborum clavium pro singularibus generibus datorum personalium huius linguae tenuissimus est. Noli confidere verba ut "diagnosis" vel "suspectus" inveniri.',
   'Landpakketten voor identificatienummers':
       'Fasciculi nationales pro numeris identitatis',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3910,8 +3739,6 @@ const _dutchSourceAddLa = <String, String>{
       'Nomen servitoris non exstat, vel inveniri non potest. URL servitoris de mendo typographico inspice.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Hic servitor inscriptionem privatam vel LAN habet. Eum ut internum fidum nota apud Optiones → Repositorium.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Testimonium huius servitoris non creditur. Testimonium a se signatum non valet; utere uno ab editore agnito.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Servitor ad aliam inscriptionem dirigit. Illam inscriptionem recta insere — deductiones non sequimur, quia custodiam securitatis circumire possunt.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3947,8 +3774,6 @@ const _dutchSourceAddLa = <String, String>{
   'Opslaan naar S3': 'In S3 servare',
   'Opgeslagen in S3:': 'In S3 servatum:',
   'Hier staat niets': 'Hic nihil est',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Contenta onerari non potuerunt. Conexionem et optiones inspice.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Terminus inaccessibilis — conexionem et terminum inspice.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3957,8 +3782,6 @@ const _dutchSourceAddLa = <String, String>{
       'Terminus errorem reddidit. Postea itera.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Hic terminus condicionaliter scribere non potest, ergo opus tuum ab alieno non tutum est. Sub novo nomine serva si alius in hac presentatione laborat.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nulla situla S3 constituta. Unam apud Optiones → Repositorium constitue.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Primum situlam S3 constitue apud Optiones → Repositorium.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4004,10 +3827,6 @@ const _dutchSourceAddLa = <String, String>{
       'Haec imago saltem {count} vultus agnoscibiles ostendit.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Haec imago de vultibus inspici non potuit. Forma non sustinetur (velut HEIC). Non significat neminem adesse — significat non esse inspectum.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Haec imago vultum agnoscibilem ostendit.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Haec imago {count} vultus agnoscibiles ostendit.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Imago in qua quis agnosci potest datum personale est, etiam sine nomine.',
   'herkenbaar gezicht op een afbeelding': 'vultus agnoscibilis in imagine',
@@ -4023,8 +3842,6 @@ const _dutchSourceAddLa = <String, String>{
   'Organisatie': 'Institutum',
   'Welke verbinding?': 'Quae conexio?',
   'Bestandsverbindingen': 'Conexiones fasciculorum',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Loci ubi praesentationes tuas servas et quaeris — plicae in hoc computatro, servitia WebDAV et repositoria git permixta. Trahe ea in ordinem quem vis: summum cuiusque generis pro norma valet.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Repositorium git; omnis versio servata manet.',
   'Een map op de schijf van deze computer.': 'Plica in disco huius computatri.',
@@ -4047,15 +3864,7 @@ const _dutchSourceAddLa = <String, String>{
   'Openen vanaf WebDAV': 'Ex WebDAV aperire',
   'Opslaan naar WebDAV': 'In WebDAV servare',
   'Opgeslagen op WebDAV:': 'In WebDAV servatum:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Primum servatorem WebDAV constitue apud Optiones → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Imaginem in WebDAV eligere',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nullus servator WebDAV constitutus. Constitue unum apud Optiones → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV non (recte) constitutum est — indicia moderatri in Optionibus → WebDAV proba.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → WebDAV designa.',
   'Servertype': 'Genus servitoris',
   'Nextcloud of ownCloud': 'Nextcloud vel ownCloud',
   'Andere WebDAV-server': 'Alius servitor WebDAV',
@@ -4077,23 +3886,11 @@ const _dutchSourceAddLa = <String, String>{
   'Haal volle pagina uit de reeks': 'Paginam plenam ex serie tolle',
   'Opslag': 'Repositorium',
   'Opslagwijzen': 'Modi repositorii',
-  'Deze computer': 'Hic computatrum',
   'Ingesteld': 'Constitutum',
   'Niet ingesteld': 'Non constitutum',
-  'Nog geen bibliotheek ingesteld': 'Nulla bibliotheca adhuc constituta',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Viae quibus proscaenia aperire et servare potes. Modum aperi ut eum constituas.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Proscaenia in plicis supra positis, in disco huius computatri.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Proscaenia in plica in Nextcloud tua aperi et serva.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Proscaenia ex repositorio git aperi; omnis versio servata manet.',
-  'Nog te verifiëren': 'Adhuc probanda',
   'MASWE-zwakheid kiezen': 'Infirmitatem MASWE eligere',
   'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',
   'Geen zwakheid gevonden': 'Nulla infirmitas inventa',
-  'uitleg nog niet geschreven': 'explicatio nondum scripta',
   'Getalnotatie herkennen': 'Formam numerorum agnoscere',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Hic liber numeros continet quorum comma duobus modis legi potest:',
@@ -4211,12 +4008,10 @@ const _dutchSourceAddLa = <String, String>{
   'Veelgestelde vragen': 'Quaestiones frequentes',
   'Probleemoplossing': 'Solutio difficultatum',
   'Begrippenlijst': 'Glossarium',
-  'API-documentatie': 'Documentatio API',
   'Prestaties': 'Efficientia',
   'Beveiligingsontwerp': 'Consilium securitatis',
   'Hosting en uitrol': 'Hospitium et distributio',
   'Bijdragen': 'Conferre',
-  'Ontwikkelomgeving': 'Ambitus explicationis',
   'Migratiegids': 'Dux migrationis',
   'Versies…': 'Versiones…',
   'Versies:': 'Versiones:',
@@ -4257,8 +4052,6 @@ const _dutchSourceAddLa = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramus motus est; fasciculum recarga et iterum serva.',
   'Bijgewerkt met OciDeck': 'Cum OciDeck renovatum',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Primum repositorium Git in Optiones → Repositorium Git constitue.',
   'Git-repository': 'Repositorium Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Presentationes ex repositorio Git aperi. Omnis versio servata manet. Signum in clavium anulo cifratum conditur, non apud ceteras optiones.',
@@ -4274,7 +4067,6 @@ const _dutchSourceAddLa = <String, String>{
       'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Data referentiae in ipsa applicatione insunt, itaque modulus statim et plene sine rete operatur.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; latent donec eos actives.',
-  'Procesverbetering (ontwerp)': 'Emendatio processuum (designatio)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Hoc opus fructus secundarius Pilot Informatieautonomie est.',
   'Stijlprofiel exporteren': 'Prosopographiam stili exportare',
@@ -4414,7 +4206,6 @@ const _dutchSourceAddLa = <String, String>{
   'genetisch gegeven': 'datum geneticum',
   'parketnummer': 'numerus causae criminalis',
   'nationaal identificatienummer': 'numerus identitatis nationalis',
-  'OciWacht (ontwerp)': 'OciWacht (consilium)',
   'Mogelijk geheim': 'Arcanum possibile',
   'sleutel of token': 'clavis vel signum',
   'private sleutel': 'clavis privata',
@@ -4447,7 +4238,6 @@ const _dutchSourceAddLa = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Indicem CVE plenum in hac machina pone, ut quaestiones sine nexu fiant et verbum quaesitum tuum nusquam eat. Copia datorum ex CVE List V5 venit (programma CVE publicum, per GitHub).',
   'Wat er lokaal beschikbaar is': 'Quae localiter praesto sunt',
-  'Gegevenspakket': 'Fasciculus datorum',
   'Nu bijwerken': 'Nunc renovare',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data localiter praesto — inquisitio in hoc instrumento fit; nihil egreditur.',
@@ -4466,7 +4256,6 @@ const _dutchSourceAddLa = <String, String>{
       'Accipere: data hic pertinent et monitum evanescit. Accipere + monere: accipiens insigne videt data personalia in pagina esse. Omittere: data reperta in schermate et in exportatione illegibilia fiunt — plica Markdown tua textum originalem servat.',
   'Alleen melden': 'Tantum nuntiare',
   'PERSOONSGEGEVENS': 'DATA PERSONALIA',
-  'Persoonsgegevens op deze slide': 'Data personalia in hac pagina',
   'Volg de presentatie': 'Praesentationem sequi',
   'Weglaten uit tonen en exporteren': 'Ex ostensione et exportatione omittere',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4587,8 +4376,6 @@ const _dutchSourceAddLa = <String, String>{
   'Bewerk deze slide': 'Hanc paginam recensere',
   'Bewijs verwijderen': 'Documentum removere',
   '(nog leeg)': '(adhuc vacuum)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Inde documenta annectere, prius indicem inventi da.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Imagines screen aut pelliculas ut documenta adde. Quodque documentum fit pagina propria statim post inventum et in exportatione includitur.',
   'Uitvoering testen conform standaard': 'Probationes secundum normam',

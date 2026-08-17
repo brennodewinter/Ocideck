@@ -794,8 +794,6 @@ const _dutchSourceCs = {
   'Selectie opheffen': 'Zrušit výběr',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Přijímám licenci EUPL 1.2 a přečetl(a) jsem si, jaká data OciDeck ukládá.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Vaše volba se stane výchozím jazykem aplikace.',
   'Lees de volledige licentie': 'Přečíst celou licenci',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck je svobodný software pod licencí EUPL 1.2. Než začnete, žádáme vás o přijetí licence. Níže si také můžete přečíst, jaká data OciDeck ukládá na tomto zařízení a kdy něco toto zařízení opouští.',
@@ -821,9 +819,6 @@ const _dutchSourceCs = {
   'Het antwoord van de server was te groot':
       'Odpověď serveru byla příliš velká',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Zdroj Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Otevírejte a ukládejte prezentace ve složce na vašem Nextcloud. Heslo se ukládá zašifrované v klíčence, nikoli spolu s ostatními nastaveními.',
   'Server-URL': 'URL serveru',
   'Gebruikersnaam': 'Uživatelské jméno',
   'App-wachtwoord': 'Heslo aplikace',
@@ -837,21 +832,12 @@ const _dutchSourceCs = {
   'Verbinding gelukt': 'Připojení úspěšné',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Změny se uloží, když kliknete na Uložit.',
-  'Afbeelding kiezen op Nextcloud': 'Vybrat obrázek na Nextcloud',
-  'Openen vanaf Nextcloud': 'Otevřít z Nextcloud',
   'Vernieuwen': 'Obnovit',
   'Deze map is leeg': 'Tato složka je prázdná',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Není nastaven žádný server Nextcloud. Nastavte jej v Nastavení → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Nepodařilo se načíst složku. Zkontrolujte připojení a nastavení.',
   'Kon dit bestand niet openen.': 'Tento soubor se nepodařilo otevřít.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Toto není prezentace Marp/OciDeck.',
   'Downloaden mislukt:': 'Stahování se nezdařilo:',
-  'Opgeslagen op Nextcloud:': 'Uloženo na Nextcloud:',
   'Opslaan mislukt:': 'Uložení se nezdařilo:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Nejprve nastavte server Nextcloud v Nastavení → Nextcloud.',
   'Opslaan naar Nextcloud': 'Uložit na Nextcloud',
   'Doelpad (zonder extensie)': 'Cílová cesta (bez přípony)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -862,9 +848,6 @@ const _dutchSourceCs = {
   'Tijden-overzicht tonen na afloop': 'Zobrazit přehled časů po skončení',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Čas na snímek se měří vždy; toto pouze určuje, zda se přehled po této prezentaci zobrazí.',
-  'Oefenoverzicht tonen na afloop': 'Zobrazit shrnutí nácviku po skončení',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Po prezentaci zobrazit přehled času stráveného na jednotlivých snímcích. Čas se měří vždy; toto pouze určuje, zda se obrazovka zobrazí.',
   'Onveilige presentatie geblokkeerd': 'Nebezpečná prezentace zablokována',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Tato prezentace nebyla otevřena. Soubor obsahuje obsah, který může spustit kód, a prezentace by měla obsahovat pouze data — nic spustitelného.',
@@ -946,7 +929,6 @@ const _dutchSourceCs = {
   'Online': 'Online',
   'Lokaal bestand': 'Místní soubor',
   'Geen video': 'Žádné video',
-  'Vraag (meerkeuze)': 'Otázka (výběr z možností)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Text titulku má příliš malý kontrast s obrázkem na pozadí',
   'Herstel': 'Opravit',
@@ -961,8 +943,6 @@ const _dutchSourceCs = {
   'Huidig punt weghalen': 'Odebrat aktuální bod',
   'Stap voor stap': 'Krok za krokem',
   'Geen animatie': 'Bez animace',
-  'Animatiesnelheid': 'Rychlost animace',
-  'Langzaam': 'Pomalu',
   'Snel': 'Rychle',
   'Gebeurtenissen': 'Události',
   'Gebeurtenis toevoegen': 'Přidat událost',
@@ -975,8 +955,6 @@ const _dutchSourceCs = {
   'Vraag': 'Otázka',
   'Wat wil je vragen?': 'Na co se chcete zeptat?',
   'Antwoorden': 'Odpovědi',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označte správné odpovědi. Nejvýše osm odpovědí; při prezentování se náhodně zobrazí jedna správná a zbytek nesprávných.',
   'Antwoord': 'Odpověď',
   'Antwoord toevoegen': 'Přidat odpověď',
   'Goed antwoord': 'Správná odpověď',
@@ -1009,8 +987,6 @@ const _dutchSourceCs = {
   'Stelling': 'Tvrzení',
   'Formuleer een stelling die juist of onjuist is':
       'Zformulujte tvrzení, které je pravdivé nebo nepravdivé',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Označte všechny správné odpovědi. Při prezentování se zobrazí náhodná sada s alespoň jednou správnou a jednou nesprávnou.',
   'Juist': 'Pravda',
   'Onjuist': 'Nepravda',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1031,7 +1007,6 @@ const _dutchSourceCs = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Stavové barvy měřidel kokpitu. Vytvořte pojmenované varianty; zvolené schéma platí pro všechny snímky kokpitu.',
   'Standaard': 'Výchozí',
-  'Standaardkleuren gebruiken': 'Použít výchozí barvy',
   'Kleurschema verwijderen': 'Smazat barevné schéma',
   'Schemanaam': 'Název schématu',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1109,7 +1084,6 @@ const _dutchSourceCs = {
   'Logo en footer': 'Logo a zápatí',
   'Pagina': 'Stránka',
   'Presentatiestijl': 'Styl prezentace',
-  'Presentatiestijl: ': 'Styl prezentace: ',
   'Tekst...': 'Text...',
   'Teksteditor': 'Textový editor',
   'Volgende pagina': 'Další stránka',
@@ -1122,8 +1096,6 @@ const _dutchSourceCs = {
   'Doeltijd': 'Cílový čas',
   'Doeltijd (aftellen)': 'Cílový čas (odpočet)',
   'Geen aftelling': 'Bez odpočtu',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Výchozí cílový čas pro odpočet v prezentačním režimu. Během prezentace jej dolaďte klávesou K.',
   'uit': 'vyp.',
   'Doeltijd / aftellen (K)': 'Cíl / odpočet (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Nastavit cíl / odpočet (MMSS)',
@@ -1194,14 +1166,8 @@ const _dutchSourceCs = {
   'Cirkel': 'Koláčový',
   'Spider': 'Paprskový',
   'CSV importeren': 'Importovat CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: první řádek = názvy řad, první sloupec = popisky)',
   'Gekoppeld aan': 'Propojeno s',
   'Ontkoppelen': 'Zrušit propojení',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Uložit data do snímku, nebo je ponechat jako samostatný soubor CSV vedle prezentace?',
-  'In de slide': 'Do snímku',
-  'Als CSV-bestand': 'Jako soubor CSV',
   'Geen grafiekgegevens': 'Žádná data grafu',
   'Label': 'Popisek',
   'Rij': 'Řádek',
@@ -1231,7 +1197,6 @@ const _dutchSourceCs = {
   'Eigen kleur (hex)': 'Vlastní barva (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Například #33FF33 pro zelenou obrazovku CRT.',
-  'Onderdeel van stijlprofiel ': 'Součást stylového profilu ',
   'Broncode lettertype': 'Písmo kódu',
   'Kop (optioneel)': 'Nadpis (volitelné)',
   'Subkop (optioneel)': 'Podnadpis (volitelné)',
@@ -1269,16 +1234,7 @@ const _dutchSourceCs = {
   'Zet het filter uit om alles weer te zien.':
       'Vypněte filtr, abyste opět viděli vše.',
   'Welkom bij OciDeck': 'Vítejte v OciDeck',
-  'Privacy en gebruik': 'Soukromí a používání',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck je lokální desktopová aplikace. Vaše prezentace a data jsou ukládány výhradně ve vašem počítači.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Aplikace neshromažďuje žádná osobní data, žádné statistiky ani žádná data o používání. Vaše soukromí je naší prioritou.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Veškerá data, která do OciDeck zadáte, zůstávají ve vašem lokálním systému a nejsou odesílána na externí servery.',
   'Licentie (EUPL 1.2)': 'Licence (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Kliknutím na „Souhlasím“ přijímáte tyto podmínky a souhlasíte s používáním OciDeck.',
   'Volledige licentie online': 'Úplná licence online',
   'Akkoord gaan': 'Souhlasím',
   'Privacy': 'Soukromí',
@@ -1367,8 +1323,6 @@ const _dutchSourceCs = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Export zablokován kvůli závažným problémům s kvalitou.',
   'Alle meldingen': 'Všechny problémy',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… a další problémy v panelu kvality.',
   'Classificatie-handhaving': 'Vynucování klasifikace',
   'Vrijgaveplafond': 'Strop pro uvolnění',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1387,11 +1341,9 @@ const _dutchSourceCs = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Nastavte úroveň TLP — export je zablokován zásadami klasifikace.',
   'Tabel bewerken': 'Upravit tabulku',
-  'Pijltjes · Tab · Esc': 'Šipky · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Upravit tabulku (na tabulkových snímcích)',
   'Tabel bewerken (E)': 'Upravit tabulku (E)',
   'Tab wisselt cel · Esc sluit': 'Tab přepíná buňku · Esc zavírá',
-  'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skládaný sloupcový',
   'Spreiding': 'Bodový',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn listuje snímky',
@@ -1434,10 +1386,6 @@ const _dutchSourceCs = {
       'Chyba sítě — zkontrolujte připojení a zkuste to znovu.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Něco se nečekaně pokazilo. Podrobnosti najdete v protokolu.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Tento server není povolen. Nejprve označte privátní/LAN server jako důvěryhodný v Nastavení → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server je nedostupný — zkontrolujte připojení a URL serveru.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1465,8 +1413,6 @@ const _dutchSourceCs = {
   'Uit recente bestanden verwijderen': 'Odebrat z posledních souborů',
   'OciDeck wordt gestart…': 'Spouštění OciDecku…',
   'Herstelbestanden': 'Soubory obnovení',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Soubory obnovení obsahují úplný obsah vašich prezentací v prostém textu. Automaticky se mažou po 7 dnech; zde je můžete smazat hned.',
   'Herstelbestanden nu wissen': 'Smazat soubory obnovení nyní',
   'Er waren geen herstelbestanden.': 'Žádné soubory obnovení nebyly.',
   'herstelbestand(en) gewist.': 'soubor(y) obnovení smazány.',
@@ -1895,7 +1841,6 @@ const _dutchSourceAddCs = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Vytvoříme kopii na nové kartě; váš původní soubor zůstane beze změny.',
   'Welk formaat?': 'Jaký formát?',
-  'dia\'s, gesplitst op kop.': 'snímků, rozdělených podle nadpisu.',
   'document': 'dokument',
   'volledig': 'úplný',
   'Invoegen': 'Vložit',
@@ -2057,12 +2002,8 @@ const _dutchSourceAddCs = <String, String>{
   'Alle integraties': 'Všechny integrace',
   'Alles inschakelen': 'Zapnout vše',
   'Alles uitschakelen': 'Vypnout vše',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Složka s hlášeními je již nastavena, takže propojení zůstává dostupné a stávající prezentaci OpenKAT lze dál aktualizovat.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Propojení s jinými systémy. Každé propojení je ve výchozím nastavení vypnuté a zůstává neaktivní, dokud ho nezapnete.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Načtěte složky s hlášeními OpenKAT jako jeden manažerský přehled.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Vtažení prezentací z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) jako upravitelný deck. Propojení s jinými systémy, jako je OpenKAT, najdete v Integracích.',
   'Media (WebRTC)': 'Média (WebRTC)',
@@ -2228,7 +2169,6 @@ const _dutchSourceAddCs = <String, String>{
   'Van toepassing': 'Použitelné',
   'Voortgang': 'Průběh',
   'Voortgang managementsysteem': 'Průběh systému řízení',
-  'Voortgangsoverzicht bijgewerkt': 'Přehled průběhu aktualizován',
   'Welk deel?': 'Která část?',
   'beheersmaatregelen geladen': 'načtených opatření',
   'geïmplementeerd': 'zavedeno',
@@ -2305,10 +2245,6 @@ const _dutchSourceAddCs = <String, String>{
       'Toto nevypadá jako platný klíč pro obnovení.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tento klíč pro obnovení pochází z novější verze OciDecku.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Webová paměť pro obrázky je plná (maximálně 256 MB). Nejprve uložte svou práci jako soubor .ocideck, abyste předešli ztrátě dat. Poté použijte méně obrázků nebo menší obrázky, zavřete ostatní prezentace nebo načtěte stránku znovu bez otevření dalších prezentací.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Webová paměť pro obrázky je plná (nejvýše 256 MB). Uložte práci jako soubor .ocideck a před přidáním dalších obrázků stránku znovu načtěte.',
   'Afbeeldingsrechten': 'Obrazová práva',
   'Afbeeldingsrechten controleren…': 'Zkontrolujte práva k obrázku…',
   'Afdoening': 'Vyrovnání',
@@ -2359,8 +2295,6 @@ const _dutchSourceAddCs = <String, String>{
   'Verifiëren': 'Ověřit',
   'Deelnemers verifiëren': 'Ověřit účastníky',
   '(dit apparaat)': '(toto zařízení)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Porovnejte otisk každého zařízení přes důvěryhodný kanál — přečtěte si ho navzájem nebo ho pošlete cestou, které věříte. Pokud se shodují, pracujete se skutečnými zařízeními a nikdo se mezi vás nedostal. Pokud se liší, spolupráci ukončete.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'To není platný odkaz s pozvánkou.',
   'De Matrix-homeserver is niet bereikbaar.':
@@ -2420,7 +2354,6 @@ const _dutchSourceAddCs = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Spolupracujte živě na prezentaci přes homeserver Matrix jako šifrovaný přenašeč. Obsah je šifrován end-to-end vlastními klíči OciDecku; server vidí jen šifrovaná data. Zadejte homeserver a přístupový token vytvořený jinde — OciDeck si nikdy neřekne o heslo. Token se ukládá zašifrovaný v klíčence, nikoli k ostatním nastavením.',
   'wordt door de test ingevuld': 'vyplní test',
-  'Versleuteld doorgeefluik (ontwerp)': 'Zašifrovaný přenašeč (návrh)',
   'Meer documentatie op de repository': 'Více dokumentace v repozitáři',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Úplná dokumentace — včetně architektury, sestavení, zdrojového kódu a návrhu — je v repozitáři.',
@@ -2659,50 +2592,14 @@ const _dutchSourceAddCs = <String, String>{
       'Která naměřená data chybí nebo jsou zastaralá?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Na jakých datech je tato zpráva založena?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Široký, ale faktický přehled řízení s sledovatelnými momenty měření.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Hodnotí bez celkového skóre a zobrazuje chybějící měření samostatně.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Zobrazuje počty závažnosti, přispěvatele a přenesená měření podle okamžiku.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizuje typy hledání podle postižených organizací, systémů a pozorování.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Zobrazuje kritická/vysoká čísla bez jakéhokoli plánovaného vážení.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Zobrazuje čitatel, jmenovatel a pouze spolehlivá procenta.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Seskupuje doslovná doporučení z OpenKAT bez vlastní priority.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Cílený aktuální obraz jedné organizace a její datum měření.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Porovnává dva vybrané momenty měření v rámci jedné organizace.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Rozlišuje nové, nové a již nepozorované.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Používá pouze spolehlivá data prvního pozorování.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Seřadí systémy pomocí samostatných čítačů závažnosti.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Zobrazuje jednotlivé hodnoty delta bez váženého skóre.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Porovná čitatel a jmenovatel s prokazatelně srovnatelným pokrytím.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Zásoby ověřených systémů, názvů hostitelů a IP adres.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Samostatné sledované, nesledované a neznámé.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Vykazuje pouze výslovně prokázané monitorovací mutace.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Ukazuje organizacím a systémům kolem jednoho spolehlivého propojení CVE.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Řadí CVE s explicitní deduplikací.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Rozlišuje nové, nové a již nepozorované CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Zobrazuje chybějící, zastaralé a skutečně používané míry.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Zohledňuje klíčová data, zdrojové soubory, adaptéry a zdrojové hashe.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Zatím není k dispozici: zdroj neprokazuje stav monitorování pro všechna aktiva.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2745,11 +2642,6 @@ const _dutchSourceAddCs = <String, String>{
   'Onderwerp': 'Podrobit',
   'Welk rapport beantwoordt uw vraag?': 'Která zpráva odpovídá na vaši otázku?',
   'Meer rapportvragen': 'Další otázky týkající se zpráv',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Které systémy jsou zranitelné vůči CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizace a zranitelné systémy kolem jedné zranitelnosti.',
-  'Organisaties met kwetsbare systemen': 'Organizace se zranitelnými systémy',
   'Kwetsbare systemen': 'Zranitelné systémy',
   'Kritiek/hoog': 'Kritické/vysoké',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2771,8 +2663,6 @@ const _dutchSourceAddCs = <String, String>{
   'Bruikbaar': 'Použitelný',
   'CVE zoeken': 'CVE vyhledávání',
   'Critical/high': 'Kritické/vysoké',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Kvalita dat, chybějící měření a zastaralost.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Vybrané sestavy neobsahují dostatek spolehlivých dat pro tuto část.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2799,9 +2689,6 @@ const _dutchSourceAddCs = <String, String>{
   'Geen bruikbare meetdatum': 'Žádné použitelné datum měření',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Vygenerované snímky se obnoví. Vaše vlastní snímky a kopie zůstanou zachovány.',
-  'Getroffen organisaties en systemen': 'Dotčené organizace a systémy',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Postižené organizace a systémy kolem jedné zranitelnosti.',
   'Getroffen systemen': 'Postižené systémy',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Přehled se nepodařilo vytvořit. Vaše volby jsou zachovány; zkontrolujte varování a zkuste to znovu.',
@@ -2811,19 +2698,14 @@ const _dutchSourceAddCs = <String, String>{
   'Keuzes wijzigen…': 'Změnit volby…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Vyberte složku, do které OpenKAT umístil sestavy. OciDeck čte pouze tuto složku; nic není změněno ani odesláno.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Vyberte otázku, na kterou má zpráva odpovědět. OciDeck určí vhodnou strukturu.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Vyberte CVE nalezený v přehledech.',
   'Laatste bruikbare meting': 'Poslední použitelné měření',
   'Live voorvertoning van de rapportopbouw': 'Živý náhled struktury sestavy',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Správa a kontrola informací o více organizacích.',
   'Meer instellingen': 'Další nastavení',
   'Nederlands': 'holandský',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Ne každá vybraná organizace má měření pro toto období.',
-  'Nieuwe en verdwenen bevindingen': 'Nové a chybějící poznatky',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Zatím není k dispozici: tyto zprávy neobsahují spolehlivá čísla CVE.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2857,8 +2739,6 @@ const _dutchSourceAddCs = <String, String>{
       'U jedné nebo více organizací chybí užitečné měření proudu.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Pro srovnání jsou zapotřebí dva měřicí momenty. Jedno měření bylo nyní nalezeno.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Pokrok ve srovnání s předchozím okamžikem měření.',
   'Waar staan de OpenKAT-rapportages?': 'Kde jsou zprávy OpenKAT?',
   'Wat veranderde er bij één organisatie?': 'Co se změnilo v jedné organizaci?',
   'Wat wilt u laten zien?': 'co chceš ukázat?',
@@ -2869,7 +2749,6 @@ const _dutchSourceAddCs = <String, String>{
   'bruikbaar': 'použitelný',
   'metingen': 'měření',
   'organisaties': 'organizací',
-  'organisaties geselecteerd': 'vybraných organizací',
   'rapportages gebruikt': 'použité zprávy',
   'systemen': 'systémy',
   'Nog geen specificatielimiet': 'Zatím žádný limit specifikace',
@@ -3011,7 +2890,6 @@ const _dutchSourceAddCs = <String, String>{
       'je na snímku stromu, ale jinde se nepoužívá — propojte ho s maticí, tokem nebo jiným snímkem.',
   'Nieuw verbeteringsproject': 'Nový projekt zlepšování',
   'Kader': 'Rámec',
-  'Projecttitel': 'Název projektu',
   'Primaire Y-metriek (Y-01)': 'Primární Y metrika (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Například: průběh order intake v pracovních dnech',
@@ -3065,10 +2943,6 @@ const _dutchSourceAddCs = <String, String>{
   'Bron niet toegestaan': 'Zdroj není povolen',
   'Deze URL is door de beveiliging geweigerd.':
       'Tuto adresu URL zamítlo zabezpečení.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Vtažení materiálu z jiných systémů. Dva zdroje: prezentace z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) se stanou upravitelným deckem a hlášení OpenKAT (složka s JSON) se stanou jedním manažerským přehledem. Kde je složka OpenKAT, se nastavuje v Integracích.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Vtažení prezentací z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) jako upravitelný deck. Čtení složek s hlášeními OpenKAT je dostupné pouze v desktopové verzi.',
   'Alinea': 'Odstavec',
   'Audio "{bestand}"': 'Zvuk "{bestand}"',
   'Deck opbouwen…': 'Sestavování prezentace…',
@@ -3189,8 +3063,6 @@ const _dutchSourceAddCs = <String, String>{
       'Rejstřík kontrolního seznamu: u každého testu stabilní id, kanonický název a kategorie. Obsah samotné příručky součástí není.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Rejstřík testů v2.0.0: u každého testu stabilní id, kanonický název, kategorie MASVS a slabina MASWE. Stažené testy v1 a zástupné položky obsaženy nejsou; obsah příručky rovněž ne.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Seznam slabin (117): id, název, kategorie MASVS, platforma a vazba na CWE. Tři čtvrtiny nejsou u zdroje dosud rozepsané; ty obsaženy jsou, označené. Stažené slabiny ne.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Úplný seznam (id, název, popis) plus vlastní vybrané jádro s našimi poznámkami k nápravě.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3237,33 +3109,16 @@ const _dutchSourceAddCs = <String, String>{
       'Každý soubor se převádí zvlášť a ukládá se jako samostatná prezentace do cílové složky. Když se jeden nezdaří, fronta prostě pokračuje.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Import více prezentací najednou je zapíše jako soubory do složky; ve verzi pro prohlížeč to nejde.',
-  'Nu importeren': 'Importovat nyní',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Přehled je připraven na nové kartě.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Přečte složku s hlášeními OpenKAT (JSON) a sestaví z ní jeden manažerský přehled: systémy, zjištění podle závažnosti, nejdéle otevřené body a vývoj napříč po sobě jdoucími měřeními. Stejná akce na stávající prezentaci OpenKAT ji aktualizuje a vaše vlastní snímky ponechá na místě.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Import pouze čte; v této složce se nic nemění ani neodesílá. Soubory, které nejsou hlášeními OpenKAT, se přeskočí a uvedou v protokolu importu.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Určete složku, ve které jsou vaše hlášení OpenKAT (JSON). Import tuto složku přečte a sestaví z ní jeden manažerský přehled; je-li složka nastavena zde, nemusíte ji vybírat pokaždé.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Import OpenKAT čte složku z disku a je dostupný pouze v desktopové verzi.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Složka s hlášeními zatím není určena, takže se na ni import ptá pokaždé.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Složka s hlášeními je již nastavena, takže vstupní bod zůstává dostupný a stávající prezentaci OpenKAT lze dál aktualizovat.',
   'Integraties': 'Integrace',
-  'Naar Integraties': 'Přejít na Integrace',
   'Map kiezen…': 'Vybrat složku…',
   'Map wissen': 'Vymazat složku',
-  'OpenKAT-rapportages importeren…': 'Importovat zprávy OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Zvolit složku se zprávami OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Zprávy OpenKAT importovány.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck OpenKAT aktualizován; ruční snímky byly zachovány.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'V této složce nebyly nalezeny žádné zprávy OpenKAT.',
-  'OpenKAT-import mislukt.': 'Import z OpenKAT se nezdařil.',
   'rapportages': 'zpráv',
   'overgeslagen': 'přeskočeno',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3322,8 +3177,6 @@ const _dutchSourceAddCs = <String, String>{
   'Label op de primaire knop': 'Popisek na hlavním tlačítku',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Zjištění, která byla posouzena a ponechána. Už se nehlásí, ale sken je stále nachází a nepočítají se jako vyřešená. Klepnutím jedno vrátíš.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Odložení zjištění o soukromí (návrh)',
   'Deze is beoordeeld en mag blijven': 'Zkontrolováno, toto může zůstat',
   'Mogelijk gemaakt door': 'Umožněno díky',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3335,10 +3188,8 @@ const _dutchSourceAddCs = <String, String>{
   'Technische melding:': 'Technická zpráva:',
   'presentaties': 'prezentace',
   '/Presentaties': '/Prezentace',
-  'Rapportagedistributie (ontwerp)': 'Distribuce zpráv (návrh)',
   'De export is mislukt.': 'Export se nezdařil.',
   'Presenteer vanaf hier': 'Prezentovat odsud',
-  'Teams-gastclient (ontwerp)': 'Klient Teams pro hosty (návrh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: jak široce se tento materiál smí sdílet?',
   'Wat betekenen deze niveaus?': 'Co znamenají tyto úrovně?',
@@ -3455,8 +3306,6 @@ const _dutchSourceAddCs = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentace, které zůstávají obyčejnými soubory Markdown: čitelné, prohledatelné a otevřitelné v jakémkoli editoru.',
   'sjablonen om mee te beginnen, of leeg': 'šablon pro začátek, nebo prázdná',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Vynechání je zapnuté: nalezené údaje se začerní a všechny obrázky, video i zvuk tohoto snímku nejdou na obrazovku ani do exportu. Tvůj soubor markdown si vše ponechá.',
   'Mijn tekst': 'Můj text',
   'Wat zij zien': 'Co vidí oni',
   'Presentatiegegevens': 'Údaje prezentace',
@@ -3674,7 +3523,6 @@ const _dutchSourceAddCs = <String, String>{
   'Opslaan naar…': 'Uložit do…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Nejprve nastavte připojení v Nastavení → Úložiště.',
-  'Beginnen met:': 'Začít s:',
   'Verlopen datums markeren': 'Označit prošlá data',
   'Datums gemarkeerd': 'Data označena',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3700,28 +3548,15 @@ const _dutchSourceAddCs = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Útočná plocha podle druhu objektu: kolik jich je, kolik vyžaduje práci, co je nové a co nikdo nevlastní. To poslední bývá ten rozhovor.',
   'Acties en besluiten': 'Akce a rozhodnutí',
-  'Actie toevoegen': 'Přidat akci',
-  'Actie verwijderen': 'Odebrat akci',
   'Actie': 'Akce',
   'Deadline': 'Termín',
-  'Op de lijst sinds': 'Na seznamu od',
   'Stand': 'Stav',
-  'Wat vraagt u': 'Oč žádáte',
   'geen datum': 'bez data',
-  'Ter informatie': 'Pro informaci',
   'Besluit gevraagd': 'Vyžaduje rozhodnutí',
   'Escalatie': 'Eskalace',
   'Open': 'Otevřené',
   'Loopt': 'Probíhá',
   'Afgerond': 'Hotovo',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Štítek na snímku dostane jen rozhodnutí nebo eskalace; "po termínu" vyplývá z termínu a nenastavujete to sami.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Data jako rrrr-mm-dd. Jiný zápis se odmítne, místo aby se hádal: 05-08-2026 jsou dva různé dny.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Snímek akcí unese nejvýše osm řádků; potom sál listuje místo aby rozhodoval.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Co se má stát, kdo to udělá a do kdy. U každého řádku uveďte, zda jde o informaci, nebo žádáte rozhodnutí — to sál hledá.',
   'Scorecard': 'Karta ukazatelů',
   'Cijfer toevoegen': 'Přidat ukazatel',
   'Cijfer verwijderen': 'Odebrat ukazatel',
@@ -3808,8 +3643,6 @@ const _dutchSourceAddCs = <String, String>{
       'Token je platný, ale toto nesmí — dej mu více práv k repozitáři.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Přihlášen, ale bez přístupu — heslo není problém. Požádej o práva k této složce.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licence lexikonů: na co je ještě třeba se zeptat',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Vypadá to jako úplná DAV URL. U Nextcloudu si OciDeck tuto cestu odvodí sám — sem patří jen server.',
   'Overnemen': 'Použít',
@@ -3852,8 +3685,6 @@ const _dutchSourceAddCs = <String, String>{
   'kenteken': 'registrační značka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro jazyk této prezentace neexistuje seznam klíčových slov pro zvláštní kategorie osobních údajů. Vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují; slova jako „diagnóza“ nebo „podezřelý“ rozpoznána nejsou.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Seznam klíčových slov pro zvláštní kategorie osobních údajů je pro jazyk této prezentace velmi tenký. Nepočítejte s tím, že se najdou slova jako „diagnóza“ nebo „podezřelý“.',
   'Landpakketten voor identificatienummers':
       'Balíčky zemí pro identifikační čísla',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3883,8 +3714,6 @@ const _dutchSourceAddCs = <String, String>{
       'Název serveru neexistuje nebo jej nelze vyhledat. Zkontrolujte, zda v URL serveru není překlep.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Tento server má privátní nebo LAN adresu. Označte jej jako důvěryhodný interní v Nastavení → Úložiště.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Certifikát tohoto serveru není důvěryhodný. Vlastnoručně podepsaný certifikát nefunguje; použijte certifikát od uznávaného vydavatele.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Server přesměrovává na jinou adresu. Zadejte tuto adresu přímo — přesměrování nenásledujeme, protože může obejít bezpečnostní kontrolu.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3920,8 +3749,6 @@ const _dutchSourceAddCs = <String, String>{
   'Opslaan naar S3': 'Uložit do S3',
   'Opgeslagen in S3:': 'Uloženo do S3:',
   'Hier staat niets': 'Tady nic není',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Obsah se nepodařilo načíst. Zkontroluj připojení a nastavení.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Koncový bod není dostupný — zkontroluj připojení a koncový bod.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3930,8 +3757,6 @@ const _dutchSourceAddCs = <String, String>{
       'Koncový bod vrátil chybu. Zkus to později.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Tento koncový bod neumí podmíněný zápis, takže tvoje práce není chráněná před cizí. Ulož pod novým názvem, pokud na této prezentaci pracuje ještě někdo.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Není nastavené úložiště S3. Nastav ho v Nastavení → Úložiště.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Nejprve nastav úložiště S3 v Nastavení → Úložiště.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3977,10 +3802,6 @@ const _dutchSourceAddCs = <String, String>{
       'Tento obrázek zobrazuje alespoň tolik rozpoznatelných tváří: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Tento obrázek nebylo možné zkontrolovat na tváře. Formát není podporován (například HEIC). Neznamená to, že na něm nikdo není — znamená to, že se nekontrolovalo.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Tento obrázek zobrazuje rozpoznatelnou tvář.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Tento obrázek zobrazuje rozpoznatelné tváře: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Obrázek, na kterém je někdo rozpoznatelný, je osobním údajem, i bez uvedení jména.',
   'herkenbaar gezicht op een afbeelding': 'rozpoznatelná tvář na obrázku',
@@ -3997,8 +3818,6 @@ const _dutchSourceAddCs = <String, String>{
   'Organisatie': 'Organizace',
   'Welke verbinding?': 'Které připojení?',
   'Bestandsverbindingen': 'Připojení souborů',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Místa, kde uchováváte a prohledáváte prezentace — složky v tomto počítači, servery WebDAV a git repozitáře pohromadě. Přetáhněte je do pořadí, jaké chcete: nejvyšší z každého druhu platí jako výchozí.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git repozitář; každá uložená verze zůstane zachována.',
   'Een map op de schijf van deze computer.': 'Složka na disku tohoto počítače.',
@@ -4021,15 +3840,7 @@ const _dutchSourceAddCs = <String, String>{
   'Openen vanaf WebDAV': 'Otevřít z WebDAV',
   'Opslaan naar WebDAV': 'Uložit na WebDAV',
   'Opgeslagen op WebDAV:': 'Uloženo na WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Nejprve nastavte server WebDAV v Nastavení → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Vybrat obrázek na WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Není nastaven žádný server WebDAV. Nastavte jej v Nastavení → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Tento server není povolen. Nejprve označte privátní/LAN server jako důvěryhodný v Nastavení → WebDAV.',
   'Servertype': 'Typ serveru',
   'Nextcloud of ownCloud': 'Nextcloud nebo ownCloud',
   'Andere WebDAV-server': 'Jiný server WebDAV',
@@ -4051,23 +3862,11 @@ const _dutchSourceAddCs = <String, String>{
   'Haal volle pagina uit de reeks': 'Odebrat plnou stránku z řady',
   'Opslag': 'Úložiště',
   'Opslagwijzen': 'Způsoby uložení',
-  'Deze computer': 'Tento počítač',
   'Ingesteld': 'Nastaveno',
   'Niet ingesteld': 'Nenastaveno',
-  'Nog geen bibliotheek ingesteld': 'Zatím není nastavena žádná knihovna',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Cesty, kterými můžete otevírat a ukládat prezentace. Kliknutím způsob rozbalíte a nastavíte.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Prezentace ve výše uvedených složkách, na disku tohoto počítače.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Otevírejte a ukládejte prezentace ve složce na svém Nextcloudu.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Otevírejte prezentace z git repozitáře; každá uložená verze zůstává zachována.',
-  'Nog te verifiëren': 'Zbývá ověřit',
   'MASWE-zwakheid kiezen': 'Vybrat slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hledat podle názvu, id nebo kategorie',
   'Geen zwakheid gevonden': 'Nenalezena žádná slabina',
-  'uitleg nog niet geschreven': 'vysvětlení zatím nenapsáno',
   'Getalnotatie herkennen': 'Rozpoznat formát čísel',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Tento soubor obsahuje čísla, jejichž čárku lze číst dvěma způsoby:',
@@ -4184,12 +3983,10 @@ const _dutchSourceAddCs = <String, String>{
   'Veelgestelde vragen': 'Časté dotazy',
   'Probleemoplossing': 'Řešení potíží',
   'Begrippenlijst': 'Slovníček pojmů',
-  'API-documentatie': 'Dokumentace API',
   'Prestaties': 'Výkon',
   'Beveiligingsontwerp': 'Návrh zabezpečení',
   'Hosting en uitrol': 'Hosting a nasazení',
   'Bijdragen': 'Přispívání',
-  'Ontwikkelomgeving': 'Vývojové prostředí',
   'Migratiegids': 'Průvodce migrací',
   'Versies…': 'Verze…',
   'Versies:': 'Verze:',
@@ -4230,8 +4027,6 @@ const _dutchSourceAddCs = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Větev se posunula; načti sadu znovu a ulož znovu.',
   'Bijgewerkt met OciDeck': 'Aktualizováno pomocí OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Nejprve nastavte repozitář Git v Nastavení → Repozitář Git.',
   'Git-repository': 'Repozitář Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otevírejte prezentace z repozitáře Git. Každá uložená verze zůstává zachována. Token se ukládá zašifrovaný v klíčence, nikoli k ostatním nastavením.',
@@ -4247,7 +4042,6 @@ const _dutchSourceAddCs = <String, String>{
       'Reportové snímky a referenční data pro informační bezpečnost: zjištění, kontrolní seznamy, matice rozsahu a podpis. Strukturováno podle MIAUW a široce použitelné pro pentesty, audity a bezpečnostní výzkum. Referenční data jsou přímo v aplikaci, takže modul funguje ihned a zcela offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Volitelné moduly. Ve výchozím nastavení vypnuté; zůstávají skryté, dokud je nezapnete.',
-  'Procesverbetering (ontwerp)': 'Zlepšování procesů (návrh)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Tento projekt je vedlejším produktem Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportovat profil stylu',
@@ -4386,7 +4180,6 @@ const _dutchSourceAddCs = <String, String>{
   'genetisch gegeven': 'genetický údaj',
   'parketnummer': 'spisová značka trestní věci',
   'nationaal identificatienummer': 'národní identifikační číslo',
-  'OciWacht (ontwerp)': 'OciWacht (návrh)',
   'Mogelijk geheim': 'Možné tajemství',
   'sleutel of token': 'klíč nebo token',
   'private sleutel': 'soukromý klíč',
@@ -4419,7 +4212,6 @@ const _dutchSourceAddCs = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Ulož celý seznam CVE do tohoto zařízení, aby vyhledávání probíhalo offline a tvůj hledaný výraz nikam neputoval. Databáze pochází z CVE List V5 (oficiálního programu CVE, přes GitHub).',
   'Wat er lokaal beschikbaar is': 'Co je k dispozici lokálně',
-  'Gegevenspakket': 'Datový balíček',
   'Nu bijwerken': 'Aktualizovat nyní',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data k dispozici lokálně — vyhledávání probíhá na tomto zařízení; nic je neopouští.',
@@ -4438,7 +4230,6 @@ const _dutchSourceAddCs = <String, String>{
       'Přijmout: údaje sem patří a upozornění zmizí. Přijmout + upozornit: příjemce uvidí odznak, že snímek obsahuje osobní údaje. Vynechat: nalezené údaje se na obrazovce i v exportu znečitelní — tvůj soubor Markdown si ponechá původní text.',
   'Alleen melden': 'Jen hlásit',
   'PERSOONSGEGEVENS': 'OSOBNÍ ÚDAJE',
-  'Persoonsgegevens op deze slide': 'Osobní údaje na tomto snímku',
   'Volg de presentatie': 'Podle prezentace',
   'Weglaten uit tonen en exporteren': 'Vynechat ze zobrazení i exportu',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4559,8 +4350,6 @@ const _dutchSourceAddCs = <String, String>{
   'Bewerk deze slide': 'Upravit tento snímek',
   'Bewijs verwijderen': 'Odebrat důkaz',
   '(nog leeg)': '(zatím prázdné)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Nejprve zadejte ID zjištění, abyste mohli připojit důkazy.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Přidejte snímky obrazovky nebo videa jako důkaz. Každý důkaz se stane vlastním snímkem hned za zjištěním a je součástí exportu.',
   'Uitvoering testen conform standaard': 'Testování podle standardu',

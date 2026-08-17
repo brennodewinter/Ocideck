@@ -431,14 +431,8 @@ const _dutchSourcePap = {
   'Lijn': 'Liña',
   'Cirkel': 'Sirkel',
   'CSV importeren': 'Importá CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Dato (CSV: promé fila = nòmber di serie, promé kolom = etiketnan)',
   'Gekoppeld aan': 'Konektá na',
   'Ontkoppelen': 'Deskonektá',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Warda e dato den e slide, òf keda komo un archivo CSV separá banda di e presentashon?',
-  'In de slide': 'Den e slide',
-  'Als CSV-bestand': 'Komo archivo CSV',
   'Geen grafiekgegevens': 'Sin dato di gráfiko',
   'Label': 'Etiket',
   'Rij': 'Fila',
@@ -607,16 +601,7 @@ const _dutchSourcePap = {
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
   'Akkoord gaan': 'Akuerdo',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Tur datos ku bo ta entrá den OciDeck ta keda riba bo sistema lokal i no ta mandá pa servidor eksterno.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'E aplikashon no ta kolektá datos personal, estadístika o datos di uso. Bo privacidad ta nos prioridad.',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Dor ku bo ta klikí "Akuerdo", bo ta akseptá e termino aki i bo ta akuerdo ku e uso di OciDeck.',
   'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck ta un programa di buró lokal. Bo presentashon i datos ta almasená solamente riba bo komputer.',
-  'Privacy en gebruik': 'Privacidad i Uso',
   'Toestemming ingetrokken': 'Aprobashon retirá',
   'Toestemming intrekken': 'Retirá Aprobashon',
   'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
@@ -881,7 +866,6 @@ const _dutchSourceAddPap = {
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Nos ta traha un kopia den un tab nobo; bo dokumento original ta keda sin kambio.',
   'Welk formaat?': 'Ki formato?',
-  'dia\'s, gesplitst op kop.': 'slide, dividí pa titulo.',
   'document': 'dokumento',
   'volledig': 'kompleto',
   'Invoegen': 'Inserta',
@@ -1042,12 +1026,8 @@ const _dutchSourceAddPap = {
   'Alle integraties': 'Tur integrashon',
   'Alles inschakelen': 'Aktivá tur',
   'Alles uitschakelen': 'Desaktivá tur',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Ya tin un karpeta di rapòrt konfigurá; p\'esei e konekshon ta keda alkansabel, di manera ku un presentashon OpenKAT eksistente por keda aktualisá.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Konekshon ku otro sistemanan. Kada konekshon ta paga pa defekto i ta keda inaktivo te ora bo aktivé.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Lesa karpetanan di rapòrt di OpenKAT komo un solo bista di gerensia.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Trese presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) komo deck editabel. Konekshonnan ku otro sistemanan, manera OpenKAT, ta bou di Integrashonnan.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -1211,7 +1191,6 @@ const _dutchSourceAddPap = {
   'Van toepassing': 'Aplikabel',
   'Voortgang': 'Progreso',
   'Voortgang managementsysteem': 'Progreso di sistema di gestion',
-  'Voortgangsoverzicht bijgewerkt': 'Resúmen di progreso aktualisá',
   'Welk deel?': 'Kua parti?',
   'beheersmaatregelen geladen': 'kontrol kargá',
   'geïmplementeerd': 'implementá',
@@ -1288,10 +1267,6 @@ const _dutchSourceAddPap = {
       'Esaki no ta parse un yabi di rekuperashon válido.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'E yabi di rekuperashon aki ta bini di un vershon mas nobo di OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'E memoria web pa imágen ta yen (máksimo 256 MB). Warda bo trabou promé komo un archivo .ocideck pa evita pèrdida di dato. Despues usa ménos imágen òf imágen mas chikí, sera otro decks òf karga di nobo sin habri otro decks.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'E memoria web pa imágenen ta yen (máksimo 256 MB). Warda bo trabou komo un fail .ocideck i karga e página di nobo promé ku bo agregá mas imágenen.',
   'Afbeeldingsrechten': 'Derechos de imagen',
   'Afbeeldingsrechten controleren…': 'Consultar derechos de imagen…',
   'Afdoening': 'Asentamiento',
@@ -1343,8 +1318,6 @@ const _dutchSourceAddPap = {
   'Verifiëren': 'Verifiká',
   'Deelnemers verifiëren': 'Verifiká partisipantenan',
   '(dit apparaat)': '(e aparato aki)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Kompará e wela di dede di kada aparato via un kanal di konfiansa — lesa e na otro, of manda e via un kaminda ku bo ta konfia. Si nan ta igual, bo ta traha ku e aparatonan real i ningun hende no a mete su kurpa meimei. Si nan ta diferente, kòrta e kolaborashon.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Esaki no ta un link di invitashon válido.',
@@ -1406,7 +1379,6 @@ const _dutchSourceAddPap = {
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Kolaborá na bibo riba un presentashon via un homeserver di Matrix komo un relè enkriptá. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá. Yena un homeserver i un token di akseso trahá na un otro lugá — OciDeck nunka ta pidi bo kontrasenja. E token ta wòrdu wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
   'wordt door de test ingevuld': 'ta wòrdu yená pa e tèst',
-  'Versleuteld doorgeefluik (ontwerp)': 'Relè enkriptá (diseño)',
   'Meer documentatie op de repository': 'Mas dokumentashon den e repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'E dokumentashon kompleto — inkluso arkitektura, konstrukshon, kódigo fuente i diseño — ta den e repositorio.',
@@ -1648,50 +1620,14 @@ const _dutchSourceAddPap = {
       'Kua dato di midimentu ta falta òf antikuá?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Riba ki dato e rapòrt aki ta basá?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Un bista amplio pero faktual di maneho ku momentunan di midimentu trasabel.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Rango sin puntuashon total i ta mustra midimentunan ku falta separadamente.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Ta mustra kantidat di severidat, kontribuyentenan, i midimentunan hibá dilanti pa momentu.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organisá tiponan di hañamentu pa organisashonnan, sistemanan i opservashonnan afektá.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Ta mustra sifranan krítiko/haltu sin ningun pesahe diseñá.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Ta mustra numerador, denominador i solamente porsentahenan konfiabel.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Gruponan rekomendashonnan literal di OpenKAT sin nan propio prioridat.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Un imágen aktual dirigí di un organisashon i su fecha di midimentu.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Kompará dos momentu di midimentu skohé denter di un organisashon.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Ta distinguí nobo, nobo i no ta wòrdu opservá mas.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Ta usa solamente fechanan di promé opservashon konfiabel.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Ta ranka sistemanan ku kontadónan di severidat separá.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Ta mustra balornan di delta individual sin puntuashon ponderá.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Kompará numerador i denominador ku kobertura demostrabelmente komparábel.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarisá sistemanan probá pa fuente, nòmbernan di anfitrion i adrèsnan IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Ta separá monitoriá, no monitoriá i deskonosí.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Ta mustra solamente mutashonnan di monitoreo probá eksplísitamente.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Ta mustra organisashonnan i sistemanan rònt di un link di CVE konfiabel.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Ranking CVEs ku deduplikashon eksplísito.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Ta distinguí CVEnan nobo, nobo i ku no ta wòrdu opservá mas.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Ta mustra midimentunan ku falta, antikuá i realmente usá.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Ta konta pa fechanan klave, archivonan di fuente, adaptadornan i hashnan di fuente.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'No ta disponibel ainda: e fuente no ta proba status di monitoreo pa tur aktivo.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -1736,12 +1672,6 @@ const _dutchSourceAddPap = {
   'Onderwerp': 'Tópiko',
   'Welk rapport beantwoordt uw vraag?': 'Kua rapòrt ta kontestá bo pregunta?',
   'Meer rapportvragen': 'Mas pregunta pa rapòrt',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Ki sistemanan ta vulnerabel pa un CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisashonnan i sistemanan vulnerabel rònt di un vulnerabilidat.',
-  'Organisaties met kwetsbare systemen':
-      'Organisashonnan ku sistemanan vulnerabel',
   'Kwetsbare systemen': 'Sistemanan vulnerabel',
   'Kritiek/hoog': 'Krítiko/haltu',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -1763,8 +1693,6 @@ const _dutchSourceAddPap = {
   'Bruikbaar': 'Uzabel',
   'CVE zoeken': 'Búskeda di CVE',
   'Critical/high': 'Krítiko/haltu',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Kalidat di dato, midimentunan ku falta i obsolesensia.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'E rapòrtnan selektá no ta kontené sufisiente dato konfiabel pa e parti aki.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -1791,9 +1719,6 @@ const _dutchSourceAddPap = {
   'Geen bruikbare meetdatum': 'No tin fecha di midimentu usabel',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Slides generá ta wòrdu refreská. Bo mes slides i kopianan ta wòrdu retené.',
-  'Getroffen organisaties en systemen': 'Organisashonnan i sistemanan afektá',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organisashonnan i sistemanan afektá rònt di un vulnerabilidat.',
   'Getroffen systemen': 'Sistemanan afektá',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'E rapòrt no por a wòrdu kreá. Bo eskohonan ta wòrdu konserbá; kontrolá e atvertensianan i purba atrobe.',
@@ -1803,20 +1728,15 @@ const _dutchSourceAddPap = {
   'Keuzes wijzigen…': 'Kambia eskohonan…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Skohe e map den kua OpenKAT a pone e rapòrtnan. OciDeck ta lesa solamente e map aki; nada no ta wordo cambia of manda.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Skohe e pregunta ku e rapòrt mester kontestá. OciDeck ta determiná e struktura apropiá.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Skohe un CVE ku bo ta haña den e rapòrtnan.',
   'Laatste bruikbare meting': 'Ultimo midimentu usabel',
   'Live voorvertoning van de rapportopbouw':
       'Bista bibu di e struktura di rapòrt',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Maneho i informashon di kòntròl tokante vários organisashon.',
   'Meer instellingen': 'Mas setting',
   'Nederlands': 'Hulandes',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'No ta tur organisashon skohé tin un midi pa e periodo aki.',
-  'Nieuwe en verdwenen bevindingen': 'Deskubrimentunan nobo i ku falta',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'No ta disponibel ainda: e rapòrtnan aki no ta kontené numbernan di CVE konfiabel.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -1851,8 +1771,6 @@ const _dutchSourceAddPap = {
       'Un midimentu di koriente útil ta falta pa un òf mas organisashon.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Dos momentu di midimentu ta nesesario pa un komparashon. Un midimentu awor a wòrdu hañá.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progreso kompará ku un momentu di midimentu anterior.',
   'Waar staan de OpenKAT-rapportages?': 'Unda e rapòrtnan di OpenKAT ta?',
   'Wat veranderde er bij één organisatie?': 'Kiko a kambia na un organisashon?',
   'Wat wilt u laten zien?': 'Kiko bo ke mustra?',
@@ -1865,7 +1783,6 @@ const _dutchSourceAddPap = {
   'bruikbaar': 'usabel',
   'metingen': 'midimentunan',
   'organisaties': 'organisashonnan',
-  'organisaties geselecteerd': 'organisashonnan selektá',
   'rapportages gebruikt': 'rapòrtnan usá',
   'systemen': 'sistemanan',
   'Nog geen specificatielimiet': 'Noch no tin límite di spesifikashon',
@@ -2011,7 +1928,6 @@ const _dutchSourceAddPap = {
       'ta riba un diapositiva di árbol pero no ta usa den otro lugar — konektá\'é ku un matris, flujo of otro diapositiva.',
   'Nieuw verbeteringsproject': 'Proyekto nobo di mehoramentu',
   'Kader': 'Marco',
-  'Projecttitel': 'Título di proyekto',
   'Primaire Y-metriek (Y-01)': 'Métrica Y primario (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Por ehèmpel: tempo di orderintake den dianan laboral',
@@ -2065,10 +1981,6 @@ const _dutchSourceAddPap = {
   'Bron niet toegestaan': 'Fuente no permití',
   'Deze URL is door de beveiliging geweigerd.':
       'E URL aki a wòrdu rechasá pa seguridat.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Trese material for di otro sistemanan. Dos fuente: presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) ta bira un deck editabel, i rapòrtnan OpenKAT (un karpeta ku JSON) ta bira un solo bista di gerensia. Unda e karpeta OpenKAT ta, bo ta konfigurá bou di Integrashonnan.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Trese presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) komo deck editabel. Lesa karpetanan di rapòrt OpenKAT ta posibel solamente den e vershon di desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Ta konstruí e deck…',
@@ -2191,8 +2103,6 @@ const _dutchSourceAddPap = {
       'E indeks di checklist: pa kada test e id stabil, e título kanóniko i e kategoria. E kontenido di e guia mes no ta inkluí.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'E indeks di test di v2.0.0: pa kada test e id stabil, e título kanóniko, e kategoria MASVS i e debilidat MASWE. E testnan v1 retirá i e placeholdernan no ta aden; e kontenido di e guia tampoko.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'E lista di debilidat (117): id, título, kategoria MASVS, plataforma i e enlase CWE. Tres kuarto no ta skirbí kompletu na e fuente ainda; esakinan ta aden, marká. Debilidatnan retirá nò.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'E lista kompleto (id, nòmber, deskripshon) plus un núkleo selektá pa nos ku nos notanan di remediashon.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -2239,34 +2149,17 @@ const _dutchSourceAddPap = {
       'Kada archivo ta wòrdu konvertí apart i wardá komo su mes presentashon den e karpeta di destino. Si un faya, e fila ta sigui.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Importá vários presentashon na mes momento ta skirbi nan komo archivo den un karpeta; den e vershon di browser esaki no ta posibel.',
-  'Nu importeren': 'Importá awor',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'E resúmen ta kla den un tab nobo.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Ta lesa un karpeta ku rapòrtnan di OpenKAT (JSON) i ta traha un solo bista di gerensia: sistemanan, hayasgonan pa gravedat, e puntonan ku ta habrí mas largu i e tendensia riba midimentunan konsekutivo. E mesun akshon riba un presentashon OpenKAT eksistente ta aktualis\'é i ta laga bo mes slaidnan keda.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'E importashon ta lesa so; nada den e karpeta aki ta wòrdu kambiá ni mandá. Dokumentonan ku no ta rapòrt di OpenKAT ta wòrdu saltá i menshoná den e rapòrt di importashon.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Indiká e karpeta kaminda bo rapòrtnan di OpenKAT (JSON) ta. E importashon ta lesa e karpeta ei i ta traha un solo bista di gerensia; ku e karpeta konfigurá aki, bo no tin ku skohé kada bes.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'E importashon di OpenKAT ta lesa un karpeta for di disko i ta disponibel solamente den e vershon di desktop.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Ainda no tin un karpeta di rapòrt indiká; p\'esei e importashon ta puntra p\'e kada bes.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Ya tin un karpeta di rapòrt konfigurá; p\'esei e punto di entrada ta keda alkansabel, di manera ku un presentashon OpenKAT eksistente por keda aktualisá.',
   'Integraties': 'Integrashonnan',
-  'Naar Integraties': 'Bai na Integrashonnan',
   'Map kiezen…': 'Skohe karpeta…',
   'Map wissen': 'Kita karpeta',
-  'OpenKAT-rapportages importeren…': 'Importá rapòrtnan di OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Skohe e folder ku rapòrtnan di OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Rapòrtnan di OpenKAT importá.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck di OpenKAT aktualisá; láminanan manual a keda konservá.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'No a haña ningun rapòrt di OpenKAT den e folder aki.',
-  'OpenKAT-import mislukt.': 'Importashon di OpenKAT a faya.',
   'rapportages': 'rapòrt',
   'overgeslagen': 'pasá over',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -2325,8 +2218,6 @@ const _dutchSourceAddPap = {
   'Label op de primaire knop': 'E lèter riba e boton prinsipal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatashonnan ku bo a evaluá i a laga keda. Nan no ta wòrdu reportá mas, pero e scan ta sigui haña nan i nan no ta konta komo resolvé. Toka pa pone un bèk.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Pone un konstatashon di privasidat un banda (diseño)',
   'Deze is beoordeeld en mag blijven': 'Revisá, esaki por keda',
   'Mogelijk gemaakt door': 'Hasí posibel pa',
   'De export is gestopt tijdens het voorbereiden.':
@@ -2338,10 +2229,8 @@ const _dutchSourceAddPap = {
   'Technische melding:': 'Mensahe tékniko:',
   'presentaties': 'presentashonnan',
   '/Presentaties': '/Presentashonnan',
-  'Rapportagedistributie (ontwerp)': 'Distribushon di rapòrt (diseño)',
   'De export is mislukt.': 'E eksport a frakasá.',
   'Presenteer vanaf hier': 'Presentá for di aki',
-  'Teams-gastclient (ontwerp)': 'Kliènt invitá di Teams (diseño)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: te unda e material aki por wòrdu kompartí?',
   'Wat betekenen deze niveaus?': 'Kiko e nivelnan aki ta nifiká?',
@@ -2458,8 +2347,6 @@ const _dutchSourceAddPap = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentashonnan ku ta keda simpel archivo Markdown: legibel, buskabel i bo por habri nan ku kualke editor.',
   'sjablonen om mee te beginnen, of leeg': 'plantia pa kuminsá kuné, òf bashí',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Laga afó ta prendí: datos hañá ta wòrdu tapá pretu i tur imagen, video i audio di e dia aki no ta bai na pantaya ni na eksportashon. Bo archivo markdown ta warda tur kos.',
   'Mijn tekst': 'Mi teksto',
   'Wat zij zien': 'Loke nan ta mira',
   'Presentatiegegevens': 'Datos di e presentashon',
@@ -2697,7 +2584,6 @@ const _dutchSourceAddPap = {
   'Opslaan naar…': 'Warda na…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Konfigurá promé un konekshon na Konfigurashon → Almasenamentu.',
-  'Beginnen met:': 'Kuminsá ku:',
   'Verlopen datums markeren': 'Marka fechanan vensí',
   'Datums gemarkeerd': 'Fechanan marká',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -2723,28 +2609,15 @@ const _dutchSourceAddPap = {
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'E superfisie di atake pa tipo di opheto: kuantu tin, kuantu ta rekerí trabou, kiko ta nobo i kiko no tin doño. Esun último ta generalmente e kombersashon.',
   'Acties en besluiten': 'Akshon i desishon',
-  'Actie toevoegen': 'Agregá akshon',
-  'Actie verwijderen': 'Kita akshon',
   'Actie': 'Akshon',
   'Deadline': 'Fecha límite',
-  'Op de lijst sinds': 'Riba e lista for di',
   'Stand': 'Estado',
-  'Wat vraagt u': 'Kiko bo ta pidi',
   'geen datum': 'sin fecha',
-  'Ter informatie': 'Pa informashon',
   'Besluit gevraagd': 'Desishon rekerí',
   'Escalatie': 'Eskalashon',
   'Open': 'Habrí',
   'Loopt': 'Ta kore',
   'Afgerond': 'Kabá',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Solamente un desishon òf eskalashon ta haña un etiket riba e slide; "lat" ta sali for di e fecha límite i bo no ta pon\'é.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Fecha manera aaaa-mm-dd. Un otro forma no ta wòrdu adiviná: 05-08-2026 ta dos dia diferente.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Un slide di akshon ta karga maksimo ocho liña; despues e sala ta lesa lihé en bes di disidí.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Kiko mester pasa, ken ta hasié i pa ki ora. Indiká pa liña si ta pa informashon òf si bo ta pidi un desishon — ta esei e sala ta buska.',
   'Scorecard': 'Karchi di resultado',
   'Cijfer toevoegen': 'Agregá sifra',
   'Cijfer verwijderen': 'Kita sifra',
@@ -2831,8 +2704,6 @@ const _dutchSourceAddPap = {
       'E token ta bálido, pero no tin mag pa esaki — dun\'é mas derecho riba e repositorio.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Logiá aden, pero sin akseso — bo kontraseña no ta e problema. Pidi derecho riba e karpeta aki.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Lisensia di leksikon: kiko mester puntra ainda',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Esaki ta parse un URL DAV kompleto. Ku Nextcloud, OciDeck ta deriva e kaminda su mes — aki solamente e servidor ta pertenesé.',
   'Overnemen': 'Apliká',
@@ -2875,8 +2746,6 @@ const _dutchSourceAddPap = {
   'kenteken': 'number di plachi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pa e idioma di e presentashon aki no tin un lista di palabra klave pa datonan personal spesial. Patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) ta funshoná; palabranan manera "diagnóstiko" òf "sospechoso" no ta wòrdu rekonosí.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'E lista di palabra klave pa datonan personal spesial ta masha limitá pa e idioma di e presentashon aki. No konta ku palabranan manera "diagnóstiko" òf "sospechoso" lo wòrdu hañá.',
   'Landpakketten voor identificatienummers':
       'Paketenan di país pa number di identifikashon',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -2906,8 +2775,6 @@ const _dutchSourceAddPap = {
       'E nòmber di servidor no ta eksistí, of no por wòrdu buskí. Kontrolá e URL di servidor pa un eror di tipeo.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'E servidor aki tin un adrès privá of di LAN. Marké e komo konfiá interno na Konfigurashon → Almasenamentu.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'E sertifikado di e servidor aki no ta konfiá. Un sertifikado outo-firmá no ta funshoná; usa un di un emisor rekonosí.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'E servidor ta redirigí na un otro adrès. Yena e adrès ei direktamente — nos no ta sigui redirekshon, pasobra nan por evitá e kontrol di siguridat.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -2943,8 +2810,6 @@ const _dutchSourceAddPap = {
   'Opslaan naar S3': 'Warda den S3',
   'Opgeslagen in S3:': 'Wardá den S3:',
   'Hier staat niets': 'Aki no tin nada',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'No por a karga e kontenido. Kontrolá bo konekshon i konfigurashon.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Punto final no ta alkansabel — kontrolá bo konekshon i e punto final.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -2953,8 +2818,6 @@ const _dutchSourceAddPap = {
       'E punto final a duna un eror. Purba atrobe despues.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'E punto final aki no por skirbi kondishonal, pues bo trabou no ta protehá kontra esun di otro. Warda bou di un nòmber nobo si tin otro hende ta traha riba e presentashon aki.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'No tin bucket di S3 konfigurá. Konfigurá un na Konfigurashon → Almasenamentu.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Promé konfigurá un bucket di S3 na Konfigurashon → Almasenamentu.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3000,10 +2863,6 @@ const _dutchSourceAddPap = {
       'E imagen aki ta mustra por lo ménos {count} kara rekonosibel.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'No por a chek e imagen aki pa kara. E formato no ta soportá (HEIC por ehèmpel). Esaki no ta nifiká ku no tin ningun hende — ta nifiká ku no a wak.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'E imagen aki ta mustra un kara rekonosibel.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'E imagen aki ta mustra {count} kara rekonosibel.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Un imagen kaminda un hende ta rekonosibel ta un dato personal, asta sin nòmber.',
   'herkenbaar gezicht op een afbeelding': 'kara rekonosibel den un imagen',
@@ -3018,8 +2877,6 @@ const _dutchSourceAddPap = {
   'Persoonsgegevens gevonden': 'Datonan personal hañá',
   'Welke verbinding?': 'Kua konekshon?',
   'Bestandsverbindingen': 'Konekshonnan di archivo',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'E lugánan kaminda bo ta warda i buska bo presentashonnan — kárpetanan riba e komputadó akí, servidónan WebDAV i repositorionan git huntu. Lastra nan den e órden ku bo ke: esun di ariba di kada tipo ta e standard.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Un repositorio git; kada vershon wardá ta keda konservá.',
   'Een map op de schijf van deze computer.':
@@ -3044,15 +2901,7 @@ const _dutchSourceAddPap = {
   'Openen vanaf WebDAV': 'Habri for di WebDAV',
   'Opslaan naar WebDAV': 'Warda riba WebDAV',
   'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Promé konfigurá un servidó WebDAV na Konfigurashon → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Skohe imagen riba WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'No tin servidó WebDAV konfigurá. Konfigurá un na Konfigurashon → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → WebDAV.',
   'Servertype': 'Tipo di server',
   'Nextcloud of ownCloud': 'Nextcloud òf ownCloud',
   'Andere WebDAV-server': 'Otro server WebDAV',
@@ -3074,23 +2923,11 @@ const _dutchSourceAddPap = {
   'Haal volle pagina uit de reeks': 'Kita e página yen for di e serie',
   'Opslag': 'Almasenamentu',
   'Opslagwijzen': 'Manera di almasená',
-  'Deze computer': 'E computer aki',
   'Ingesteld': 'Konfigurá',
   'Niet ingesteld': 'No konfigurá',
-  'Nog geen bibliotheek ingesteld': 'Ainda no tin biblioteka konfigurá',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'E kamindanan pa habri i warda presentashonnan. Klek riba un manera pa konfigurá e.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Presentashonnan den e mapnan ariba, riba e disko di e computer aki.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Habri i warda presentashonnan den un mapa riba bo Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Habri presentashonnan for di un repositorio git; tur vershon wardá ta keda warda.',
-  'Nog te verifiëren': 'Ainda pa verifiká',
   'MASWE-zwakheid kiezen': 'Skohe un debilidat MASWE',
   'Zoek op naam, id of categorie': 'Buska pa nòmber, id òf kategoria',
   'Geen zwakheid gevonden': 'No a hañá ningun debilidat',
-  'uitleg nog niet geschreven': 'splikashon ainda no skirbí',
   'Getalnotatie herkennen': 'Rekonosé e formato di number',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'E archivo aki tin number kua nan koma por wòrdu lesá di dos manera:',
@@ -3209,12 +3046,10 @@ const _dutchSourceAddPap = {
   'Veelgestelde vragen': 'Preguntanan frekuente',
   'Probleemoplossing': 'Solushon di problema',
   'Begrippenlijst': 'Glosario',
-  'API-documentatie': 'Dokumentashon di API',
   'Prestaties': 'Rendimentu',
   'Beveiligingsontwerp': 'Diseño di seguridat',
   'Hosting en uitrol': 'Hosting i despliegue',
   'Bijdragen': 'Kontribuí',
-  'Ontwikkelomgeving': 'Ambiente di desaroyo',
   'Migratiegids': 'Guia di migrashon',
   'Versies…': 'Vershonnan…',
   'Versies:': 'Vershonnan:',
@@ -3255,8 +3090,6 @@ const _dutchSourceAddPap = {
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'E branch a move; recarga e deck i warda atrobe.',
   'Bijgewerkt met OciDeck': 'Aktualisá ku OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Konfigurá promé un repositorio Git na Konfigurashon → Repositorio Git.',
   'Git-repository': 'Repositorio Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Habri presentashonnan for di un repositorio Git. Tur vershon warda ta keda warda. E token ta wòrdu wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
@@ -3272,7 +3105,6 @@ const _dutchSourceAddPap = {
       'Slide di raportahe i datonan di referensia pa seguridat di informashon: hallazgonan, lista di kontrol, matris di scope i firma. Strukturá segun MIAUW i ampliamente uzabel pa pentest, audit i investigashon di seguridat. E datonan di referensia ta den e app mes, p\'esei e módulo ta funshoná mesora i kompletamente offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulonan opcional. Pa defekto apagá; nan ta keda skondí te ora bo aktivá nan.',
-  'Procesverbetering (ontwerp)': 'Mehoramentu di proseso (diseño)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'E proyekto aki ta un subprodukto di e Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Eksportá perfil di estilo',
@@ -3413,7 +3245,6 @@ const _dutchSourceAddPap = {
   'genetisch gegeven': 'dato genétiko',
   'parketnummer': 'number di kaso di fiskalia',
   'nationaal identificatienummer': 'number di identifikashon nashonal',
-  'OciWacht (ontwerp)': 'OciWacht (diseño)',
   'Mogelijk geheim': 'Posibel sekreto',
   'sleutel of token': 'yabi òf token',
   'private sleutel': 'yabi privá',
@@ -3447,7 +3278,6 @@ const _dutchSourceAddPap = {
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Pone e lista kompletu di CVE riba e aparato aki, pa buskeda sosodé offline i bo término di buskeda no bai ningun kaminda. E database ta bin di CVE List V5 (e programa CVE ofisial, via GitHub).',
   'Wat er lokaal beschikbaar is': 'Kiko ta disponibel lokalmente',
-  'Gegevenspakket': 'Pakete di dato',
   'Nu bijwerken': 'Aktualisá awor',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Dato disponibel lokalmente — e buskeda ta sosodé riba e aparato aki; nada no ta sali.',
@@ -3466,7 +3296,6 @@ const _dutchSourceAddPap = {
       'Aseptá: e datos ta pertenesé aki i e mensahe ta disparsé. Aseptá + advertí: e risibidó ta mira un badge ku tin datos personal riba e slide. Laga afó: e datos hañá ta wòrdu hasí ilegibel riba pantaya i den eksportashon — bo file Markdown ta warda e teksto original.',
   'Alleen melden': 'Solamente reportá',
   'PERSOONSGEGEVENS': 'DATOS PERSONAL',
-  'Persoonsgegevens op deze slide': 'Datos personal riba e slide aki',
   'Volg de presentatie': 'Sigui e presentashon',
   'Weglaten uit tonen en exporteren': 'Laga afó di mustra i eksportá',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -3589,8 +3418,6 @@ const _dutchSourceAddPap = {
   'Bewerk deze slide': 'Editá e slide aki',
   'Bewijs verwijderen': 'Kita prueba',
   '(nog leeg)': '(ainda bashí)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Duna promé un id di finding pa pega prueba.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Añadí screenshot òf video komo prueba. Kada prueba ta bira un slide propio djis despues di e finding i ta bai den e eksportashon.',
   'Uitvoering testen conform standaard': 'Testnan konforme standard',
@@ -3599,8 +3426,6 @@ const _dutchSourceAddPap = {
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Mi ta aseptá e lisensia EUPL 1.2 i mi a lesa ki datos OciDeck ta warda.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Bo skohe ta bira e idioma standard di e app.',
   'Lees de volledige licentie': 'Lesa e lisensia kompleto',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck ta software liber bou di e lisensia EUPL 1.2. Promé ku bo kuminsá, nos ta pidi bo aseptá e lisensia. Abou bo por lesa tambe ki datos OciDeck ta warda riba e aparato aki i ki ora algu ta sali for di bo aparato.',
@@ -3628,9 +3453,6 @@ const _dutchSourceAddPap = {
   'Het antwoord van de server was te groot':
       'E respondi di servidó tabata muchu grandi',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Fuente Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Habri i warda presentashonnan den un karpeta riba bo Nextcloud. E kontrasenja ta wòrdu wardá sífrá den e yabero, no huntu ku e otro konfigurashonnan.',
   'Server-URL': 'URL di servidó',
   'Gebruikersnaam': 'Nòmber di usuario',
   'App-wachtwoord': 'Kontrasenja di app',
@@ -3644,22 +3466,13 @@ const _dutchSourceAddPap = {
   'Verbinding gelukt': 'Konekshon a logra',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Kambionan ta wòrdu wardá ora bo klik riba Warda.',
-  'Afbeelding kiezen op Nextcloud': 'Skohe imagen riba Nextcloud',
-  'Openen vanaf Nextcloud': 'Habri for di Nextcloud',
   'Vernieuwen': 'Refreská',
   'Deze map is leeg': 'E karpeta aki ta bashí',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'No tin servidó Nextcloud konfigurá. Konfigurá un na Konfigurashon → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'No por a karga e karpeta. Chèk bo konekshon i konfigurashon.',
   'Kon dit bestand niet openen.': 'No por a habri e dokumento aki.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Esaki no ta un presentashon Marp/OciDeck.',
   'Downloaden mislukt:': 'Download a faya:',
-  'Opgeslagen op Nextcloud:': 'Wardá riba Nextcloud:',
   'Opslaan mislukt:': 'Warda a faya:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Promé konfigurá un servidó Nextcloud na Konfigurashon → Nextcloud.',
   'Opslaan naar Nextcloud': 'Warda riba Nextcloud',
   'Doelpad (zonder extensie)': 'Kaminda destino (sin ekstenshon)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -3671,9 +3484,6 @@ const _dutchSourceAddPap = {
   'Tijden-overzicht tonen na afloop': 'Mustra resúmen di tempo despues',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'E tempo pa slide ta wòrdu midí semper; esaki ta determiná solamente si e resúmen ta aparesé despues di e presentashon aki.',
-  'Oefenoverzicht tonen na afloop': 'Mustra resúmen di práktika despues',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Despues di un presentashon, mustra e resúmen di tempu pasá pa slide. Semper ta midi tempu; esaki solamente ta determiná si e pantaya ta aparesé.',
   'Onveilige presentatie geblokkeerd': 'Presentashon insigur blokeá',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'E presentashon aki no a wòrdu habrí. E archivo ta kontené kontenido ku por ehekutá kódigo, miéntras un presentashon mester kontené solamente datos — nada ehekutabel.',
@@ -3760,7 +3570,6 @@ const _dutchSourceAddPap = {
   'Lokaal bestand': 'Archivo lokal',
   'Geen video': 'Sin video',
   // Vraag-slides (multiple choice question).
-  'Vraag (meerkeuze)': 'Pregunta (selekshon múltiple)',
   // Titel-contrast (slidekwaliteit).
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Teksto di título tin muhigu poko kontraste ku e imagen di fondo',
@@ -3777,8 +3586,6 @@ const _dutchSourceAddPap = {
   'Huidig punt weghalen': 'Kita punto aktual',
   'Stap voor stap': 'Paso pa paso',
   'Geen animatie': 'Sin animashon',
-  'Animatiesnelheid': 'Velosidat di animashon',
-  'Langzaam': 'Slo',
   'Snel': 'Lihé',
   'Gebeurtenissen': 'Eventonan',
   'Gebeurtenis toevoegen': 'Agregá evento',
@@ -3791,8 +3598,6 @@ const _dutchSourceAddPap = {
   'Vraag': 'Pregunta',
   'Wat wil je vragen?': 'Kiko bo ke puntra?',
   'Antwoorden': 'Kontestanan',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marka e kontestanan korekto. Máksimo ocho kontesta; ora di presentá ta mustra na zar 1 korekto i e rest robes.',
   'Antwoord': 'Kontesta',
   'Antwoord toevoegen': 'Agregá kontesta',
   'Goed antwoord': 'Kontesta korekto',
@@ -3825,8 +3630,6 @@ const _dutchSourceAddPap = {
   'Stelling': 'Deklarashon',
   'Formuleer een stelling die juist of onjuist is':
       'Formulá un deklarashon ku ta bèrdat òf falsu',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Marka tur e kontestanan korekto. Ora di presentá ta mustra un set na zar ku por lo ménos un korekto i un robes.',
   'Juist': 'Bèrdat',
   'Onjuist': 'Falsu',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -3847,7 +3650,6 @@ const _dutchSourceAddPap = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'E kolónan di estado di e meternan di cockpit. Krea variantenan ku nòmber; e skema skohé ta konta pa tur slide di cockpit.',
   'Standaard': 'Standart',
-  'Standaardkleuren gebruiken': 'Usa koló standart',
   'Kleurschema verwijderen': 'Kita skema di koló',
   'Schemanaam': 'Nòmber di skema',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -3926,7 +3728,6 @@ const _dutchSourceAddPap = {
   'Notities weggooien': 'Tira nota afo',
   'Pagina': 'Página',
   'Presentatiestijl': 'Estilo di presentashon',
-  'Presentatiestijl: ': 'Estilo di presentashon: ',
   'Sprekersnotities': 'Nota di presentadó',
   'Tekst...': 'Teksto...',
   'Teksteditor': 'Editor di teksto',
@@ -3940,8 +3741,6 @@ const _dutchSourceAddPap = {
   'Doeltijd': 'Tempo meta',
   'Doeltijd (aftellen)': 'Tempo meta (kuenta atras)',
   'Geen aftelling': 'Sin kuenta atras',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Tempo meta default pa e kuenta atras di e presentadó. Ahustá durante presentashon ku e tekla K.',
   'uit': 'pagá',
   'Doeltijd / aftellen (K)': 'Meta / kuenta atras (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -4014,7 +3813,6 @@ const _dutchSourceAddPap = {
   'Eigen kleur (hex)': 'Koló propio (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Por ehèmpel #33FF33 pa un pantaya berde CRT.',
-  'Onderdeel van stijlprofiel ': 'Parti di e perfil di estilo ',
   'Broncode lettertype': 'Tipo di lèter di kódigo',
   'Kop (optioneel)': 'Enkabesado (opshonal)',
   'Subkop (optioneel)': 'Subtítulo (opshonal)',
@@ -4341,8 +4139,6 @@ const _dutchSourceAddPap = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Export bloká pa problema serio di kalidad.',
   'Alle meldingen': 'Tur alertanan',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… i mas problema den e panel di kalidad.',
   'Classificatie-handhaving': 'Aplikashon di klasifikashon',
   'Vrijgaveplafond': 'Techo di difushon',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -4361,11 +4157,9 @@ const _dutchSourceAddPap = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Pone un nivel TLP — exportá blokeá pa e polítika di klasifikashon.',
   'Tabel bewerken': 'Edita tabel',
-  'Pijltjes · Tab · Esc': 'Flechanan · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Edita tabel (riba slide di tabel)',
   'Tabel bewerken (E)': 'Edita tabel (E)',
   'Tab wisselt cel · Esc sluit': 'Tab ta kambia selda · Esc ta sera',
-  'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
   'Gestapelde staaf': 'Baranan apilá',
   'Spreiding': 'Dispershon',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn ta pasa dor di e slidenan',
@@ -4408,10 +4202,6 @@ const _dutchSourceAddPap = {
       'Eror di rèt — kontrolá bo konekshon i purba atrobe.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Algu a bai robes inesperadamente. Wak e log pa detaye.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server no ta alkansabel — kontrolá bo konekshon i e URL di server.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -4438,8 +4228,6 @@ const _dutchSourceAddPap = {
   'Uit recente bestanden verwijderen': 'Kita for di archivonan resien',
   'OciDeck wordt gestart…': 'OciDeck ta ser inisiá…',
   'Herstelbestanden': 'Archivonan di rekuperashon',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Archivonan di rekuperashon ta kontené henter e kontenido di bo presentashonnan den teksto simpel. Nan ta ser limpiá outomátikamente despues di 7 dia; akinan bo por wisa nan mesora.',
   'Herstelbestanden nu wissen': 'Wisa archivonan di rekuperashon awor',
   'Er waren geen herstelbestanden.': 'No tabatin archivo di rekuperashon.',
   'herstelbestand(en) gewist.': 'archivo(nan) di rekuperashon wisá.',
