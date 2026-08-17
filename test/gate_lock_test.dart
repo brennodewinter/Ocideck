@@ -125,4 +125,80 @@ void main() {
     final result = await run([]);
     expect(result.exitCode, 2);
   });
+
+  /// De CMake-stempel. Elke worktree noemt dezelfde fysieke buildmap anders,
+  /// en CMake weigert dan hard in plaats van te herconfigureren. Serialiseren
+  /// maakt dat erger, niet beter: elke run stempelt op zijn eigen pad, dus de
+  /// volgende faalt gegarandeerd. Het slot ruimt daarom op.
+  Directory writeCache(String stampedDir) {
+    final build = Directory(
+      '${sandbox.path}/.dart_tool/hooks_runner/shared/dartcv4/build/7ad245dadc',
+    )..createSync(recursive: true);
+    File(
+      '${build.path}/CMakeCache.txt',
+    ).writeAsStringSync('CMAKE_CACHEFILE_DIR:INTERNAL=$stampedDir\n');
+    Directory('${build.path}/CMakeFiles').createSync();
+    // Het gedownloade bronarchief mag niet sneuvelen: opnieuw ophalen loopt
+    // stuk op de 429 van GitHub.
+    Directory('${build.path}/_deps').createSync();
+    return build;
+  }
+
+  test('een cache van een andere worktree wordt opgeruimd', () async {
+    final build = writeCache('/ergens/anders/dartcv4/build/7ad245dadc');
+
+    final result = await run(['sh', '-c', 'echo gedraaid']);
+
+    expect(result.exitCode, 0);
+    expect(File('${build.path}/CMakeCache.txt').existsSync(), isFalse);
+    expect(Directory('${build.path}/CMakeFiles').existsSync(), isFalse);
+    expect(
+      Directory('${build.path}/_deps').existsSync(),
+      isTrue,
+      reason: 'zonder _deps volgt een herdownload, en die weigert GitHub',
+    );
+    expect(result.stderr, contains('/ergens/anders'));
+  });
+
+  test('een cache van deze worktree blijft staan', () async {
+    final build = writeCache(
+      '${sandbox.path}/.dart_tool/hooks_runner/shared/dartcv4/build/7ad245dadc',
+    );
+
+    final result = await run(['sh', '-c', 'echo gedraaid']);
+
+    expect(result.exitCode, 0);
+    expect(
+      File('${build.path}/CMakeCache.txt').existsSync(),
+      isTrue,
+      reason: 'onnodig wissen kost een volledige herbouw van OpenCV',
+    );
+    expect(Directory('${build.path}/CMakeFiles').existsSync(), isTrue);
+  });
+
+  test('de bouw laat kernen vrij', () async {
+    // Zonder rem bouwt CMake met zoveel taken als er kernen zijn; op een
+    // laptop trok dat meer stroom dan de adapter kon leveren.
+    final cores = Platform.numberOfProcessors;
+    final result = await run([
+      'sh',
+      '-c',
+      r'echo "niveau=$CMAKE_BUILD_PARALLEL_LEVEL"',
+    ]);
+
+    final level = int.parse(
+      RegExp(r'niveau=(\d+)').firstMatch('${result.stdout}')!.group(1)!,
+    );
+    expect(level, greaterThanOrEqualTo(2));
+    if (cores > 6) expect(level, lessThan(cores));
+  });
+
+  test('een eigen rem blijft staan', () async {
+    final result = await run(
+      ['sh', '-c', r'echo "niveau=$CMAKE_BUILD_PARALLEL_LEVEL"'],
+      env: {'CMAKE_BUILD_PARALLEL_LEVEL': '3'},
+    );
+
+    expect(result.stdout, contains('niveau=3'));
+  });
 }

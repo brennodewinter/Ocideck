@@ -1409,6 +1409,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **het poortslot krijgt een rem, en een correctie.** Bij #1541 schreef ik dat
+  een worktree-wissel de CMake-cache "opnieuw stempelt — traag maar correct".
+  Dat was onjuist: CMake weigert hard, en door het serialiseren gebeurde dat
+  niet af en toe maar gegarandeerd, want elke run stempelt op zijn eigen pad.
+  Het slot ruimt zo'n vreemde stempel nu op terwijl het het slot vasthoudt, dus
+  zonder iemand mid-build te storen; `_deps` blijft liggen, zodat er niets
+  opnieuw wordt gedownload. Daarnaast een rem: zonder begrenzing bouwt CMake
+  met één taak per kern en start `flutter test` één werker per kern, en dat trok
+  op een laptop meer stroom dan de adapter kon leveren — de accu liep leeg aan
+  de lader. Vier kernen blijven nu vrij, aan beide kanten, en beide grenzen
+  zijn te overrulen. Bewust géén `nice`: prioriteit verdeelt rekentijd, maar
+  verlaagt het opgenomen vermogen niet.
+
 - **een poortslot, zodat parallelle runs elkaar niet meer omleggen.** Elke
   worktree wijst `.dart_tool/hooks_runner/shared` naar dezelfde map — dat
   bespaart een verse worktree het herbouwen van de native OpenCV-laag, en dat

@@ -92,12 +92,39 @@ make check        # format-check + analyze + conventions + method-length + dead-
 > gate — dead-code, method-length, coverage — with nothing wrong in the change.
 > A gate that points at the wrong place is worse than a slow one.
 >
-> **What it does not fix.** Alternating between worktrees still re-stamps the
-> CMake cache, so the first run after a switch rebuilds OpenCV. That is slow
-> but correct. If you want to avoid it, give a worktree its own
-> `.dart_tool/hooks_runner` (roughly 2 GB, and it needs the download to work)
-> instead of the shared symlink — the lock notices: with a real directory
-> instead of a symlink, the scope is that worktree alone and nobody waits.
+> **The CMake stamp.** An earlier version of this note claimed a worktree
+> switch merely re-stamps the CMake cache — "slow but correct". That was
+> wrong. Each worktree names the same physical build directory by a different
+> path (through the `shared` symlink), and CMake refuses outright: *"The
+> current CMakeCache.txt directory … is different than the directory … where
+> CMakeCache.txt was created"*. Serialising made it **predictable** rather than
+> occasional — every run stamps its own path, so the next one fails for
+> certain. The lock therefore clears a cache stamped by another worktree while
+> it holds the lock, so nobody is interrupted mid-build. Only `CMakeCache.txt`
+> and `CMakeFiles/` go; `_deps` stays, so there is no re-download (GitHub would
+> answer it with a 429 anyway). A rebuild after a switch is still slow — that
+> part was true.
+>
+> **The brake.** Left alone, CMake builds with one job per core and
+> `flutter test` starts one worker per core. On a laptop that drew more power
+> than the adapter could supply: the battery ran down while plugged in. The
+> lock therefore sets `CMAKE_BUILD_PARALLEL_LEVEL` to four below the core
+> count, and the suite targets pass `--concurrency=$(TEST_JOBS)` with the same
+> default. Both are overridable — `make test TEST_JOBS=18` on a machine that is
+> doing nothing else, or your own `CMAKE_BUILD_PARALLEL_LEVEL`. Deliberately
+> *not* `nice`: priority redistributes CPU time, it does not lower power draw.
+>
+> **Writing the output to a file? Make the name unique.** Three separate gate
+> runs in this repo have written to the same `check1.log` in a shared scratch
+> directory and read each other's results — one nearly reported another
+> worktree's green as its own, another nearly "fixed" a failure from a
+> different branch. Put the worktree name or `$$` in the filename.
+>
+> **What it still does not fix.** A worktree switch rebuilds OpenCV. To avoid
+> that, give a worktree its own `.dart_tool/hooks_runner` (roughly 2 GB, and it
+> needs the download to work) instead of the shared symlink — the lock notices:
+> with a real directory instead of a symlink, the scope is that worktree alone
+> and nobody waits.
 >
 > **Escape hatches.** `OCIDECK_NO_GATE_LOCK=1` skips the lock (a CI runner has
 > one worktree, so there is nothing to queue for);
