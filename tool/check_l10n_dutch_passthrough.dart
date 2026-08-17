@@ -97,7 +97,7 @@ const int minimumWords = 3;
 /// dat er nóg een taal of nóg een blok bijkomt. Zakt het getal, zet het dan
 /// meteen omlaag — een basislijn die boven de werkelijkheid blijft hangen is
 /// stille ruimte voor de volgende fout.
-const int passthroughBaseline = 394;
+const int passthroughBaseline = 385;
 
 /// Bronsleutels waarvoor een identieke waarde GOED is, niet fout.
 ///
