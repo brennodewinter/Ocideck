@@ -120,15 +120,10 @@ const Map<String, int> fileSizeBaseline = {
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
   // dit is de chokepoint die elk formaat langskomt.
-  'lib/services/export_service.dart': 1023,
   // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
-  // +58 (#1500): documentmodus — de paginamaat-indicator in _visualLayout en
-  // _insertToc (het invoeg-palet dat de `<!-- toc -->`-marker plaatst). De
-  // ontleedde blokken en de weergave gingen wél naar aparte parts; dit is de
-  // schermklasse zelf, die zijn eigen invoegacties draagt.
-  'lib/widgets/document_editor_screen.dart': 960,
+  'lib/services/export_service.dart': 1023,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -153,55 +148,12 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1407): imageTitleAbove-veld + constructor/copyFrom/copyWith-doorvoer.
   // +8: imageZoom-veld + doc + constructor/duplicate/copyWith-doorvoer.
   'lib/models/slide.dart': 1071,
-  // +17 (#1355, #1360): SealTamperWarning-klasse + sealTamperWarningProvider
-  // voor de automatische zegelverificatie bij openen, en de diskFull-case in
-  // _packageOpenResult. Beide zijn tightly coupled aan de bestaande providers
-  // en _reportOpenOutcome in dit bestand — verplaatsen creëert indirectie.
-  'lib/state/tabs_provider.dart': 1017,
-  // Procesverbetering module card / reveal wiring in the shell.
-  // +1 (#1037): the url_launcher_util import so the play-only landing can open
-  // slide links in the browser, like every other presentation surface. The file
-  // was already exactly at its ceiling; the behaviour itself is one shared call.
-  // +2 (#977): the two imports the realtime-Matrix collaboration commands need —
-  // `matrix_client_provider` (matrixAccountProvider) and `matrix_collab_dialogs`.
-  // The commands themselves live in the collab part file, not here; only their
-  // imports must sit in the library head.
-  // +1 (#977): the collab_chat_panel import for the chat rail.
-  // +1: the collaboration_provider import (matrixCollabActive) gating the
-  // realtime-collab palette commands on the module.
-  // +1 (#978): the collab_verify_banner import for the device-verification banner.
-  // #1053 verplaatste de web-dropafhandeling naar shell_actions.dart; #1078
-  // voegde daarna de cockpit-integratie op main toe.
-  // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
-  // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
-  'lib/widgets/app_shell.dart':
-      823, // +9 (#1270): deckProvider.overrideWith valt terug op een verse DeckNotifier als de tab al disposed is — voorkomt "Tried to use DeckNotifier after dispose" in de privacyketen bij sluiten.
-  // +1 (#1235): session_export import — de afloop-flow wordt aangeroepen vanuit shell_actions_present.dart (een part-of zonder eigen imports), dus de import hoort in de library-head.
-  // +7 (#1175): _onFilesDropped krijgt de presentatie-tak — een gesleepte
-  // .pptx/.odp/.key gaat de import in (routing gedeeld in importDroppedPresentations).
-  // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
-  // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
-  // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
-  // listen has to sit in build. The file was already exactly at its ceiling.
-  // +1 (#977): the matching listenMatrixCollab hook for the realtime session
-  // outcome — same one-line build-time listen, behaviour in the collab part file.
-  // +4 (#977): the chat rail spread into the workspace row; its logic lives in
-  // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
-  'lib/widgets/app_shell_main_layout.dart':
-      985, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
-  // +5 (#1209): het desktop- én web-openpad wachten nu op de geladen module-stand
-  // (importModuleRevealedWhenReady) vóór ze de melding kiezen, met de bijhorende
-  // mounted-guard. Onherleidbare plumbing: de wacht + guard horen in elk openpad
-  // zelf, en beide paden delen al `_reportOpenFailure`. Het bestand stond exact op
-  // zijn plafond.
-  // +16: document-open via Bladeren (browseRequested + openFileByPath) en
-  // image-search-pad-helper (deckImageSearchPaths) naast bestaande open-routes.
-  'lib/widgets/shell/shell_actions.dart': 1021,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
   // `menu`-takken in de kiezer-switches.
-  'lib/widgets/dialogs/add_slide_dialog.dart': 1115,
+  // Verlaagd van 1115 naar 1112: het bestand meet 1110.
+  'lib/widgets/dialogs/add_slide_dialog.dart': 1112,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
   // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
@@ -218,7 +170,8 @@ const Map<String, int> fileSizeBaseline = {
   // chart_preview_touch) om chart_preview_extra.dart onder de 1000 te houden.
   // +1 (#1282): `fitScaleOverride` doorgeven aan `_FindingPreview`, zodat de
   // inhoud-bewuste header-fit te overschrijven is (o.a. voor de kostentoets).
-  'lib/widgets/slides/slide_preview.dart': 1027,
+  // Verlaagd van 1027 naar 1023: het bestand meet 1023.
+  'lib/widgets/slides/slide_preview.dart': 1023,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1073,
@@ -226,7 +179,8 @@ const Map<String, int> fileSizeBaseline = {
   // dialoog-import in de settings_dialog library-head.
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
   // import van de paginamaat-lokalisatie.
-  'lib/widgets/dialogs/settings_dialog.dart': 1034,
+  // Verlaagd van 1034 naar 1033: het bestand meet 1033.
+  'lib/widgets/dialogs/settings_dialog.dart': 1033,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -325,10 +279,12 @@ const Map<String, int> classSizeBaseline = {
   // herbruikbare kern staat al buiten de State: het `ChartHover`-model +
   // controller + scope in chart_hover.dart, `composedChartHoverText` en het
   // verhuisde `_HoverPieChart` in chart_preview_touch.dart.
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3160,
+  // Verlaagd van 3160 naar 3159: de klasse meet 3159.
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3159,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2235,
+  // Verlaagd van 2235 naar 2232: de klasse meet 2227.
+  'lib/state/tabs_provider.dart#TabsNotifier': 2232,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`
@@ -350,8 +306,9 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
+  // Verlaagd van 1449 naar 1447: de klasse meet 1447.
   'lib/widgets/app_shell.dart#_MainLayoutState':
-      1449, // +1 (video-calls F1): callRail spread
+      1447, // +1 (video-calls F1): callRail spread
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
@@ -390,12 +347,14 @@ const Map<String, int> classSizeBaseline = {
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
   // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in
   // [Slide.imagePath], dus de generieke controles slaan er (vooralsnog) niet op.
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1130,
+  // Verlaagd van 1130 naar 1125: de klasse meet 1118.
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1125,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd
   // van 1198 naar 1081.
-  'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1081,
+  // Verlaagd van 1081 naar 1080: de klasse meet 1079.
+  'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1080,
   // +10 (#977): each thumbnail reads collab presence and wraps in the presence
   // overlay. The overlay's real work (filter + Stack + dots) lives in the
   // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
