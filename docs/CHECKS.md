@@ -196,6 +196,51 @@ guards plus formatting), handy while iterating on translations.
   everywhere if it is a leftover — if it still sits in only one language, that is
   the likelier reading.
 
+### `make check-l10n-passthrough`
+- **Runs:** `dart run tool/check_l10n_dutch_passthrough.dart` (`--list` groups
+  every finding by key, `--by-lang` counts them per language)
+- **Covers:** the *third* direction. `l10n-check` asks whether a value is
+  present, `check-l10n-parity` whether the key exists everywhere, and
+  `test/l10n_untranslated_test.dart` whether that value is not simply the
+  **English** sentence. Nothing asked whether it is the **Dutch source**. #1524
+  found 44 such keys in `tlh.dart` alone — including a whole LibrePlan-connector
+  block of full sentences — and that same block sits untranslated in thirty
+  languages.
+- **How it measures:** two families, read via the AST. In the `d()` tables
+  (`_dutchSource*` plus `_dutchSourceAdd*`) the key *is* the Dutch source, so a
+  pass-through is `key == value`. In the `t()` table (`_strings*`) the key is a
+  name, so the source comes from `_stringsNl` and a pass-through is
+  `value == _stringsNl[key]`. `nl` itself never counts: there the value *is* the
+  source.
+- **Only from three words up:** exactly the trade-off in
+  `test/l10n_untranslated_test.dart`, for the same reason. Single words are
+  identical wholesale without anything being wrong — `Logo`, `Audio`, `Mermaid`,
+  `Gantt`, `OK`. Without the threshold the gate finds 1,800 and is wrong about
+  most of them; that is not a gate but noise, and noise gets clicked away. The
+  price is stated plainly: an untranslated source string of one or two words
+  slips through.
+- **Exceptions go per key, never per language:** see `loanKeys`. The criterion
+  is strict — the Dutch source sentence contains no translatable Dutch word at
+  all: a proper name, a fixed technical term, a formatting placeholder, or an
+  English phrase Dutch itself borrowed untranslated (`Access key ID`,
+  `Sprint review / demo`, `P {pitch}  B {bank}`). Only then is equality evidence
+  that the translator picked the right term rather than evidence that he did
+  nothing. An exception phrased per language ("tlh may have this") says something
+  about the translator and covers up the next mistake in that same language; an
+  exception per key says something about the *source sentence*, and that stays
+  true. What that costs is stated too: a key listed there is silent for every
+  language, including ones in another script that would transliterate it.
+- **Why `check-full` and not `check`,** like its sibling `check-l10n-orphans`
+  and unlike `check-l10n-parity`: the judgement is a textual heuristic, and at
+  introduction it finds 394 — a gate that is red on arrival cannot go into
+  `check` without a baseline. So: a `passthroughBaseline` ratchet that may fall
+  and never rise, with zero as the goal. The strictest part still touches every
+  commit, because the same ratchet is asserted in
+  `test/l10n_dutch_passthrough_test.dart`, which runs in the suite.
+- **Failure means:** another language or another block started passing the Dutch
+  source through. Translate it. If there is genuinely nothing to translate, add
+  the **key** to `loanKeys` with its reason — not the baseline.
+
 ## How intensively is it tested?
 
 To give a sense of scale. These are counts from one moment, and they only grow,
@@ -316,6 +361,7 @@ now the only passing state.
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
 | [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — |
 | [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — |
+| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | — | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
