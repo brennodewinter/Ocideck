@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-16 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). Since 2026-08-17 that page setup may also **travel in the document itself**, in the Pandoc keys `papersize:` and `geometry:`, written only on request — which reverses the "settings, not file content" position of §14.5 (§15, including the open point in §15.4). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-17 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -1074,3 +1074,118 @@ The serialised form of `PageMargins` gains an optional fifth field
 unchanged with `bleedMm: 0`, and a six-field value from the short-lived crop-marks
 period still yields its margins and bleed rather than silently falling back to
 the defaults.
+
+---
+
+## 15. Page setup that travels with the document (added 2026-08-17)
+
+§14.5 closed with two properties of the bleed: nothing is written to the `.md`,
+and the setting is app-wide. They were written down as consequences of a
+deliberate choice. They turned out to be the design flaw, and this section
+records the reversal and its reasoning; `FILE_FORMAT.md` §14.7 carries the same
+course change on the format side, and §14.8 there states what is on disk.
+
+### 15.1 Why the settings-only model broke
+
+A page size is close enough to a viewing preference that keeping it in
+`AppSettings` looked right, and §12.5 had already settled that the *default*
+style belongs there. The bleed is not that kind of thing. It exists for one print
+job, on one document, agreed with one printer. Two failures followed directly
+from storing it app-wide:
+
+- **It leaks forward in time.** A bleed set for a poster keeps enlarging every
+  next export until someone remembers to zero it. The editor's corner indicator
+  was added to make that visible, which is a mitigation for a problem the storage
+  location created.
+- **It does not travel sideways.** The `.md` is the master a document mode exists
+  to protect (§3). Handing that master to a colleague or a printer and having the
+  sheet silently change is exactly the loss of authorial control the mode is
+  supposed to prevent. The old text answered this with "tell the printer out of
+  band", which asks the human to carry information the file could carry itself.
+
+So the sheet becomes a property the *document* may hold, with the settings as the
+fallback for every document that says nothing. Opt-in, because writing to
+someone's file without being asked is the other way to lose their trust.
+
+### 15.2 Why Pandoc's vocabulary, and not an owned prefix
+
+The obvious implementation is `ocideck_page_size: A4` and friends: unambiguous,
+trivially round-trippable, no clash with anything. It was rejected.
+
+`FILE_FORMAT.md` §14.1 promises that a document is a file any Markdown tool reads
+without knowing anything about OciDeck, and that OciDeck adds no key that only
+means something inside OciDeck. An owned prefix would put bytes in a user's file
+that no other program can act on — the file would still be *readable* elsewhere,
+but the page setup would be OciDeck-only metadata riding along, and the promise
+would have quietly become "no owned keys, except ours".
+
+`papersize:` and `geometry:` are keys **Pandoc executes**. Run the file through
+your own Pandoc and you get the page the keys describe; the same keys reach the
+LaTeX `geometry` package that OciDeck's own `.tex` export already writes to. This
+is the same test `theme:` passed in §12.1: join a vocabulary others already speak,
+or do not write at all. That the vocabulary is slightly awkward for us — no
+orientation on `papersize:`, no notion of a bleed — is the price of that rule, and
+§15.3 pays it rather than escaping it with a private key.
+
+To keep the promise checkable rather than cultural, the writable keys are a
+register: `kDocumentOwnedKeys` in
+[`document_front_matter.dart`](../../lib/utils/document_front_matter.dart) holds
+exactly `theme`, `papersize` and `geometry`, and the generic writer asserts
+against it. Beside it stands `kDocumentRetiredKeys`, the recorded exit: the entry
+point for a key is easy, and the way out has to be equally easy or the format
+accretes forever. It is declared and empty; no write path consults it yet, which
+is fine while nothing has been withdrawn, but it is a stub and not a mechanism.
+
+### 15.3 Why the bleed goes as explicit millimetres
+
+A bleed makes the sheet larger than the trim format. `papersize: a4` on a sheet
+of 216 × 303 mm would be a false statement in the file — and a dangerous one,
+because a printer's toolchain would believe it and produce a page 6 mm too small
+with the text block in the wrong place. There is no Pandoc key for "A4 plus 3 mm".
+
+So with a bleed (and, for the same reason, in landscape, which `papersize:`
+cannot express) the paper name is dropped and the sheet is written as
+`paperwidth`/`paperheight` inside `geometry`, with the margins measured from the
+edge of the enlarged sheet. That is not a new convention: it is byte-for-byte the
+shape `articlePreamble` already emits for a bleed (§14.5). The file and the LaTeX
+export therefore cannot disagree about the page — and a foreign toolchain that
+knows nothing of bleeds still lays out the correct sheet, because what it reads
+is the effective size, which is complete on its own.
+
+The cost is that "A4 + 3 mm" is not literally in the file. OciDeck reconstructs it
+on the way back in: a sheet evenly larger than a known ISO format on both axes
+(same amount, up to 20 mm) is read as that format plus a bleed, purely so the
+editor can say *A4 · +3mm* instead of *216 × 303 mm*. That inference is interface
+sugar. If it ever disagrees with the file, the file wins — the millimetres are
+the record.
+
+### 15.4 Open point: the format does not survive the round trip
+
+The reconstruction above recovers the bleed and the margins. It does **not**
+recover the *format*: `documentPageSetup` derives the size from `papersize:`
+only, so a document pinned with a bleed or in landscape reads back with
+`size: null` and falls through to the receiving machine's setting. A document
+pinned as A4 + 3 mm, opened where the setting says A5, is laid out on A5 + 3 mm.
+
+This is a gap, not a decision. Pandoc is unaffected (it reads the explicit
+millimetres and is correct), but OciDeck's own screen and exports are not. Two
+things follow from the same root and belong in one fix: `_inferBleed` already
+searches the ISO grid for the matching format and then throws that format away
+instead of returning it, and the editor's "pinned to this document" state keys on
+`papersize:` alone, so precisely the documents that most need pinning — bleed
+work for a printer — are shown as unpinned. Recorded here and in
+`FILE_FORMAT.md` §14.8 so it is not rediscovered as a surprise.
+
+### 15.5 The write is a decision, not a toggle
+
+The control is the page-size indicator that already sat in the corner of the
+visual editor. It stopped being decorative: it now shows *where the current page
+setup comes from* — a pin and an accent border when the document carries it,
+the plain border when it comes from settings — and clicking it opens a
+confirmation dialog that says what will happen before it happens.
+
+That is deliberately heavier than a switch in the settings panel. The action
+writes into the user's own file, which is the one place OciDeck has promised to
+touch only when asked (§3, §12.2). A control that lives where the information
+already is, and that asks once, is the shape that fits a byte-faithful format:
+nobody discovers afterwards that their `.md` grew two lines.

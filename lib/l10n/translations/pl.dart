@@ -1662,6 +1662,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Te ustawienia strony są zapisane w tym dokumencie',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Te ustawienia strony pochodzą z Twoich ustawień',
+  'Paginaopmaak': 'Ustawienia strony',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Rozmiar strony i marginesy są teraz zapisane w tym dokumencie; każdy, kto go otworzy, zobaczy tę samą stronę. Usuń je, aby obowiązywały Twoje własne ustawienia.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Rozmiar strony i marginesy pochodzą teraz z Twoich ustawień, więc u kogoś innego dokument może wyglądać inaczej. Zapisz je w dokumencie, aby to utrwalić.',
+  'Uit het document halen': 'Usuń z dokumentu',
+  'In dit document vastleggen': 'Zapisz w tym dokumencie',
   'Rij erboven': 'Wiersz powyżej',
   'Rij eronder': 'Wiersz poniżej',
   'Rij weghalen': 'Usuń wiersz',

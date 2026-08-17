@@ -677,6 +677,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze paginaopmaak staat in dit document':
+      'Dizze side-opmaak stiet yn dit dokumint',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Dizze side-opmaak komt út dyn ynstellings',
+  'Paginaopmaak': 'Side-opmaak',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'De sidegrutte en marzjes steane no yn dit dokumint; wa\'t it iepenet, krijt deselde side. Helje se derút om dyn eigen ynstelling jilde te litten.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'De sidegrutte en marzjes komme no út dyn ynstellings, dus by in oar kin it dokumint oars útpakke. Set se yn it dokumint om dat fêst te lizzen.',
+  'Uit het document halen': 'Ut it dokumint helje',
+  'In dit document vastleggen': 'Yn dit dokumint fêstlizze',
   'Rij erboven': 'Rige derboppe',
   'Rij eronder': 'Rige derûnder',
   'Rij weghalen': 'Rige wiskje',

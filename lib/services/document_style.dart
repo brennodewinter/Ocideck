@@ -1,3 +1,4 @@
+import 'document_page_setup.dart';
 import '../models/settings.dart';
 
 /// Resolves the effective style [ThemeProfile] for a document, or `null` when a
@@ -43,4 +44,22 @@ String? effectiveDocumentStyleName(AppSettings settings, String? docStyleName) {
     return settings.documentDefaultStyle;
   }
   return docStyleName;
+}
+
+/// De paginaopmaak die voor dít document geldt: wat het document zelf draagt,
+/// anders de app-instelling.
+///
+/// Dezelfde volgorde als bij de stijl ([effectiveDocumentStyleName]) — een
+/// afgedwongen huisstijl zou er als eerste stap bij komen; die bestaat voor de
+/// paginaopmaak nog niet. Maat en marges gelden los van elkaar: een document dat
+/// alleen `papersize:` draagt houdt de ingestelde marges.
+DocumentPageSetup effectiveDocumentPageSetup(
+  AppSettings settings,
+  String source,
+) {
+  final own = documentPageSetup(source);
+  return (
+    size: own.size ?? settings.documentPageSize,
+    margins: own.margins ?? settings.documentPageMargins,
+  );
 }

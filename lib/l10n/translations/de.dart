@@ -677,6 +677,17 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze paginaopmaak staat in dit document':
+      'Diese Seiteneinrichtung steht in diesem Dokument',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Diese Seiteneinrichtung stammt aus deinen Einstellungen',
+  'Paginaopmaak': 'Seiteneinrichtung',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Seitengröße und Ränder stehen jetzt in diesem Dokument; wer es öffnet, bekommt dieselbe Seite. Entferne sie, damit deine eigene Einstellung gilt.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Seitengröße und Ränder stammen jetzt aus deinen Einstellungen, bei jemand anderem kann das Dokument also anders aussehen. Schreibe sie ins Dokument, um das festzulegen.',
+  'Uit het document halen': 'Aus dem Dokument entfernen',
+  'In dit document vastleggen': 'Im Dokument festlegen',
   'Rij erboven': 'Zeile darüber',
   'Rij eronder': 'Zeile darunter',
   'Rij weghalen': 'Zeile löschen',

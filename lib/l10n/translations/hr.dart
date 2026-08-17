@@ -1655,6 +1655,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Ovo postavljanje stranice spremljeno je u ovom dokumentu',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Ovo postavljanje stranice dolazi iz vaših postavki',
+  'Paginaopmaak': 'Postavljanje stranice',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Veličina stranice i margine sada su spremljene u ovom dokumentu; tko ga otvori, dobiva istu stranicu. Uklonite ih kako bi vrijedila vaša vlastita postavka.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Veličina stranice i margine sada dolaze iz vaših postavki, pa kod nekog drugog dokument može izgledati drukčije. Spremite ih u dokument da to učvrstite.',
+  'Uit het document halen': 'Ukloni iz dokumenta',
+  'In dit document vastleggen': 'Spremi u ovaj dokument',
   'Rij erboven': 'Redak iznad',
   'Rij eronder': 'Redak ispod',
   'Rij weghalen': 'Izbriši redak',

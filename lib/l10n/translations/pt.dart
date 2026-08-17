@@ -1678,6 +1678,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Esta configuração da página está guardada neste documento',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Esta configuração da página vem das suas definições',
+  'Paginaopmaak': 'Configuração da página',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'O tamanho da página e as margens estão agora guardados neste documento; quem o abrir obtém a mesma página. Retire-os para que a sua própria definição seja aplicada.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'O tamanho da página e as margens vêm agora das suas definições, por isso noutra pessoa o documento pode ficar diferente. Guarde-os no documento para os fixar.',
+  'Uit het document halen': 'Remover do documento',
+  'In dit document vastleggen': 'Guardar neste documento',
   'Rij erboven': 'Linha acima',
   'Rij eronder': 'Linha abaixo',
   'Rij weghalen': 'Eliminar linha',

@@ -4315,9 +4315,11 @@ style rather than the default. The **Source** editor deliberately stays neutral,
 monospaced Markdown: the source remains readable as text instead of pretending to be
 the finished document. Choosing a style writes a small `theme:` line into the file's front matter,
 and nothing else; **Geen (platte tekst)** ("None") takes that line back out. A
-document you never style stays a plain `.md` with no front matter at all — opening
-and saving it again is byte-for-byte the same file, and setting a style and then
-choosing *Geen* returns you to the original bytes. A style is only styling: it never
+document you never style — and never pin a
+[page setup](#letting-the-page-setup-travel-with-the-document) on — stays a plain
+`.md` with no front matter at all; opening and saving it again is byte-for-byte
+the same file, and setting a style and then choosing *Geen* returns you to the
+original bytes. A style is only styling: it never
 turns a document into a presentation, and if it names a profile that no longer exists
 the document falls back to the default rather than failing. *(Added 2026-08-08.)*
 
@@ -4442,17 +4444,72 @@ sheet with the trim line marked, so you can see what gets cut away.
 Two things to know about it. **There are no crop marks** — no output path emits
 them, so OciDeck does not offer a switch that would promise printing work nobody
 delivers; tell your printer what the trim size is. And the bleed is an
-**app-wide** setting, not a property of the document: once set it applies to
-every next document you export until you put it back to 0. To keep that from
+**app-wide** setting unless you record it in the document itself (see below):
+once set it applies to every next document you export until you put it back to 0. To keep that from
 happening quietly, a non-zero bleed is shown beside the page size in the
 bottom-right corner of the visual editor. *(Added 2026-08-16.)*
 
 The **writing width** beside it (*Schrijfbreedte editor*: narrow 860 px, standard
 1100 px, wide 1400 px, or full width) is not about the export but about your own
 screen — how wide the visual writing surface is. Narrow reads more calmly, wide
-uses a large screen. None of these settings — size, margins, bleed or writing
-width — writes anything into your `.md`; they are display-and-export choices,
-like the default document style.
+uses a large screen. It is a display choice only and never reaches your file.
+
+#### Letting the page setup travel with the document
+
+The settings above are what applies to a document that does not say otherwise.
+That is fine for everyday work, and awkward the moment a document is *meant* for
+a particular sheet: hand the `.md` to a colleague whose settings say A5, or to a
+printer, and it comes out on their format instead of yours. So a document can
+carry its own page setup. *(Added 2026-08-17; until then none of this was written
+to the file.)*
+
+The control is the size indicator in the bottom-right corner of the writing
+surface — the one that shows, say, `A4 · 25/25/20/20mm`. It is now clickable, and
+it also tells you **where the current setup comes from**: with a pin and a
+coloured border when the document itself carries it, plain when it comes from
+your settings. Click it and OciDeck asks once, in a dialog, before doing
+anything: *In dit document vastleggen* ("Record in this document") writes the
+current size and margins into the file, and *Uit het document halen* ("Take out
+of the document") removes them again so your settings apply.
+
+What lands in your `.md` is two lines of ordinary front matter:
+
+```
+---
+papersize: a4
+geometry: top=25mm,bottom=25mm,left=20mm,right=20mm
+---
+```
+
+Those are not OciDeck's own invention — they are the keys **Pandoc** reads, so
+anyone who runs your document through their own tooling gets the same page
+without OciDeck. Nothing else is touched: any front matter you wrote by hand
+stays exactly as it was, and taking the setup out again returns the file to the
+bytes it had before. A document you never pin keeps no front matter at all.
+
+With a bleed, or on a landscape sheet, the lines look different — the paper
+*name* is dropped and the sheet is written out in millimetres, because "A4" would
+be untrue of a sheet that has been enlarged for the printer, and `papersize:` has
+no way to say "landscape":
+
+```
+---
+geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,right=23mm
+---
+```
+
+That is A4 (210 × 297 mm) with 3 mm on every side. When OciDeck opens such a file
+again it recognises the enlarged sheet and shows it as *A4 · +3mm*.
+
+Two limitations worth knowing before you rely on it. **Only what is in the file
+travels** — pinning a document does not pin the writing width, the chapter page
+break or the style, and it changes nothing about documents you pinned earlier.
+And **a pinned bleed or landscape document currently keeps its margins and bleed
+but takes its format from the opening machine**: an A4-plus-3 mm document opened
+where the setting says A5 lays out on A5 plus 3 mm, and the corner indicator does
+not show the pin for those documents. Pandoc reads the file correctly; it is
+OciDeck's own reading that is incomplete here, and it is recorded as an open
+point in [FILE_FORMAT.md](FILE_FORMAT.md) §14.8.
 
 ### A table of contents
 

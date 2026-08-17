@@ -3124,8 +3124,18 @@ new on-disk marker** to claim a file as OciDeck's — no `kind:` key, no
 does not opens as a document. This keeps an ordinary README or note maximally
 interchangeable and means a document is a file any Markdown tool reads without
 knowing anything about OciDeck. A document may legitimately carry the front
-matter its author wrote (for example Jekyll, Hugo or Obsidian keys); OciDeck adds
-no owned keys of its own.
+matter its author wrote (for example Jekyll, Hugo or Obsidian keys).
+
+**OciDeck invents no front-matter vocabulary of its own.** It does write a small,
+closed set of keys when you ask it to (§14.5), but every one of them is a key
+other tools already read and act on: `theme:` (Pandoc, Obsidian, GitHub Pages)
+and, since 2026-08-17, `papersize:` and `geometry:` (Pandoc, which passes them to
+the LaTeX `geometry` package). Running the same file through your own Pandoc
+gives you the page those keys describe, without OciDeck in the loop. What is
+absent — and stays absent — is a key that only means something *inside* OciDeck:
+there is no `kind:`, no `ocideck:` block and no `ocideck_`-prefixed key anywhere
+in the format. That is the line: OciDeck may join a vocabulary, it may not
+create a private one and call it interchangeable.
 
 ### 14.2 Working directory
 
@@ -3146,11 +3156,12 @@ strip) that deck slide bodies go through. The `.md` you save is the byte-faithfu
 master you keep, back up and eventually clean — the same role §9 describes for a
 deck's Markdown, held to a stricter no-normalisation rule.
 
-The one thing the document path can write into the front matter is a document
-**style** (`theme:`), and only when you deliberately choose one — it is opt-in,
-byte-surgical, and does not touch the rest of the file (§14.5). A document you
-never style carries no front matter at all, so the byte-identity above holds
-unchanged.
+What the document path can write into the front matter is a short, closed set of
+keys — the document **style** (`theme:`) and the **page setup** (`papersize:`,
+`geometry:`) — and each only when you deliberately ask for it. Every write is
+opt-in, byte-surgical, and leaves the rest of the file alone (§14.5, §14.8). A
+document you never style and never pin a page setup on carries no front matter at
+all, so the byte-identity above holds unchanged.
 
 ### 14.4 Export is a derived, projected artefact — on a new file
 
@@ -3180,9 +3191,24 @@ theme: LibreKAT
 …
 ```
 
-This is the **only** front-matter key the document path ever writes, and it is
-written **only on request** (the Style picker in the document editor), never
-automatically. Facts that matter on disk:
+`theme:` is one of the keys the document path writes, and it is written **only on
+request** (the Style picker in the document editor), never automatically.
+
+*(Corrected 2026-08-17: until then this paragraph said `theme:` was the **only**
+key the document path would ever write. Page setup can now travel in the file as
+well (§14.8), so it is a set, not a single key.)* The set is a register in the
+code rather than a habit spread over the call sites:
+`kDocumentOwnedKeys` in
+[`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
+lists exactly `theme`, `papersize` and `geometry`, and the generic writer asserts
+against it, so a fourth key cannot slip in on the side. Beside it sits
+`kDocumentRetiredKeys`, the place where a key OciDeck *stops* writing is to be
+recorded — the intended exit route, so a withdrawn key can be cleaned out of
+existing files instead of sitting in them forever. It is empty today, and no
+write path reads it yet; the route is declared, not yet built. Nothing has been
+withdrawn so far, so nothing depends on it.
+
+Facts that matter on disk:
 
 - **It is not a recognition marker.** Recognition stays the *absence* of
   `marp: true` (§14.1); a document that carries only `theme:` still opens as a
@@ -3240,27 +3266,51 @@ puts a `\newpage` before every `\section` but the first. The design is in
 §13.5), and the author-facing description is in the
 [User Guide](USER_GUIDE.md#inserting-a-page-break).
 
-### 14.7 Page size, margins and bleed — settings, not file content *(added 2026-08-16)*
+### 14.7 Page size, margins and bleed — the settings side *(added 2026-08-16, scope narrowed 2026-08-17)*
+
+> **Course change, 2026-08-17.** This section used to be titled *"settings, not
+> file content"* and closed with two consequences it called deliberate: **the
+> sheet does not travel with the file**, and **the settings are app-wide, not per
+> document**. Both are now half-truths, so they are not quietly rewritten into
+> their opposite here — they are withdrawn on the record.
+>
+> What stood, and why: writing nothing to the `.md` was the cheapest way to keep
+> the byte-faithful round trip of §14.3 intact, and page setup looked like a
+> viewing preference of the kind §12.5 keeps in settings.
+>
+> What changed: bleed proved that reading wrong. A bleed is not a preference of
+> the reader — it is a property of *this* print job, and an app-wide bleed keeps
+> applying to the next document until someone remembers to set it back. A file
+> handed to a printer, or to a colleague on another machine, then silently came
+> out on a different sheet than the author saw. That is the failure mode the old
+> text described as a deliberate choice.
+>
+> What holds now: page setup **may** travel in the file, in the Pandoc keys
+> `papersize:` and `geometry:` — see §14.8, which is where the on-disk facts now
+> live. It is opt-in and written only on request, so the round trip of §14.3 is
+> still intact for anyone who does not ask; the settings below remain the
+> fallback for every document that says nothing.
 
 The sheet a document is laid out on — its **page size** (any of the 66 ISO 216
 formats: series A, B or C, number 0 through 10, portrait or landscape), its four
 **margins** and the printer's **bleed** — is an application setting
 (`AppSettings.documentPageSize` and `AppSettings.documentPageMargins`, the latter
 carrying `bleedMm`, default `0`), reached under *Settings → General →
-Pagina-instellingen export*. **None of it is written to the `.md`.** There is no
-`page-size:`, `margin:` or `bleed:` front-matter key; the only key the document
-path ever writes remains `theme:` (§14.5), so the byte-faithful round trip of
-§14.3 is unaffected by any of these choices.
+Pagina-instellingen export*. Nothing about them is written to the `.md` by
+itself: the settings are what applies to a document that says nothing, and a
+document only carries a page setup once you ask for it (§14.8). There is still no
+`page-size:`, `margin:` or `bleed:` key — where a document does carry its setup,
+it does so in Pandoc's own `papersize:`/`geometry:` (§14.1).
 
-Two consequences follow from that, and both are deliberate:
+Two things follow, and they are the reason the file-side route in §14.8 exists:
 
-- **The sheet does not travel with the file.** Hand the `.md` to someone else, or
-  open it on another machine, and it is laid out on *their* settings, not yours.
-  A document that must be printed on a particular format carries that fact
-  outside the file — in the job description you give the printer, not in the
-  Markdown.
 - **The settings are app-wide, not per document.** A bleed set for one print job
   keeps applying to every document exported afterwards until it is put back to 0.
+  That is why the editor shows a non-zero bleed beside the page size instead of
+  keeping it quiet.
+- **What is not pinned in the file does not travel with it.** Hand a `.md` that
+  carries no page setup to someone else, or open it on another machine, and it is
+  laid out on *their* settings, not yours.
 
 Where the settings *do* land is the paged outputs. The continuous HTML export
 writes them into a single `@page` rule — `size` (the format name, or an explicit
@@ -3281,3 +3331,92 @@ export: three different engines paginate (OciDeck's renderer, the browser
 printing the HTML, LaTeX compiling the `.tex`) and they need not break in the
 same place. See the
 [User Guide](USER_GUIDE.md#page-size-margins-bleed-and-writing-width).
+
+### 14.8 Page setup in the file — `papersize:` and `geometry:` *(added 2026-08-17)*
+
+A document may carry the sheet it is meant for. It does so in two keys Pandoc
+already reads and hands to the LaTeX `geometry` package, so the file describes
+its page to any toolchain, not only to OciDeck (§14.1). An ordinary A4 document
+looks like this:
+
+```
+---
+papersize: a4
+geometry: top=25mm,bottom=25mm,left=20mm,right=20mm
+---
+
+# Report
+…
+```
+
+**With a bleed, or in landscape, `papersize:` is dropped and explicit
+millimetres carry the sheet.** A paper *name* can only describe a trim format; a
+sheet enlarged for the printer is no longer A4, and Pandoc's `papersize:` has no
+orientation. So the same route the LaTeX export already takes is taken here — the
+sheet goes into `geometry` as `paperwidth`/`paperheight`. A4 with a 3 mm bleed:
+
+```
+---
+geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,right=23mm
+---
+```
+
+210 × 297 mm plus 3 mm on all four sides is 216 × 303 mm, and the margins are
+measured from the edge of that enlarged sheet, so 25 mm from the trim line is
+28 mm here. This is the same arithmetic as `PageMargins.latexMargin` and the
+LaTeX preamble, and it means an author can hand the plain `.md` to a printer's
+Pandoc and get the sheet the author saw.
+
+Facts that matter on disk:
+
+- **Written only on request.** The page-size indicator in the bottom-right corner
+  of the visual editor is the control: clicking it asks, in a confirmation
+  dialog, whether the current page setup should be recorded in this document or
+  come from your settings. Nothing is written by opening, editing or saving a
+  document, and there is no automatic migration of existing files.
+- **Byte-surgical, like `theme:`.** Pinning a page setup and taking it back out
+  returns the original bytes; a hand-written key next to it (`title:`, Jekyll,
+  Hugo, Obsidian) survives verbatim, and when the page-setup keys were the only
+  ones in the block, the block itself is dropped and the bare body returns
+  (§14.3). Both keys live in the same register as `theme:` (§14.5).
+- **The values are plain, unquoted scalars.** `geometry` is written without
+  quotes even though it contains commas: in YAML block context a comma is an
+  ordinary character in a plain scalar, and a quoted string reads worse in a file
+  people open by hand.
+- **Reading is forgiving, not strict.** `papersize: a4` and `papersize: a4paper`
+  are both read, case-insensitively, for the A, B and C series. A value OciDeck
+  does not recognise is not an error: it falls back to the setting, the same way
+  an unknown `theme:` profile does (§14.5). From a `geometry` value OciDeck reads
+  the `top`, `bottom`, `left`, `right`, `paperwidth` and `paperheight` fields it
+  finds and ignores the rest of the `geometry` package's vocabulary; a margin
+  field that is absent falls back to the shipped default for that side
+  (25/25/20/20 mm), not to your setting, since the value that *is* there is taken
+  as the author's description of the page.
+- **Size and margins apply independently.** A document that carries only
+  `papersize:` keeps the margins from the settings, and one that carries only
+  `geometry:` keeps the size from the settings. The precedence, per field, is
+  document → settings (`effectiveDocumentPageSetup`,
+  [`lib/services/document_style.dart`](../lib/services/document_style.dart)).
+- **The bleed is inferred on the way back in.** OciDeck reads an explicit
+  `paperwidth`/`paperheight` and, when the sheet is evenly larger than a known
+  ISO 216 format on both axes (by the same amount, up to 20 mm), treats that
+  difference as the bleed and subtracts it from the margins again, so the editor
+  can show "A4 · 25/25/20/20mm · +3mm". That is a convenience for the interface,
+  not a meaning stored in the file: what stands in the file is the effective
+  sheet, and it is complete on its own. A sheet that matches no ISO format is
+  simply a free size with no bleed.
+
+**A known gap, stated rather than glossed over.** OciDeck derives the *format*
+only from `papersize:`. It does not read a format back out of an explicit
+`paperwidth`/`paperheight`, so a document pinned in landscape or with a bleed
+reproduces its margins (and its bleed) everywhere, but takes its **format** from
+the receiving machine's setting. Open an A4-plus-3 mm document on a machine set
+to A5 and you get A5 plus 3 mm. Pandoc, which reads the explicit millimetres, is
+not affected — this is OciDeck's own read path. For the same reason the
+indicator's "this page setup is in this document" state keys on `papersize:`,
+so a landscape or bleed document is not marked as pinned even though it is. Both
+are tracked; neither changes what the file says.
+
+The design — why Pandoc's vocabulary instead of an owned prefix, and why the
+bleed goes as explicit millimetres — is in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §15.

@@ -1649,6 +1649,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Šis lapas iestatījums ir saglabāts šajā dokumentā',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Šis lapas iestatījums nāk no jūsu iestatījumiem',
+  'Paginaopmaak': 'Lapas iestatīšana',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Lapas izmērs un malas tagad ir saglabāti šajā dokumentā; ikviens, kas to atver, iegūst tādu pašu lapu. Noņemiet tos, lai būtu spēkā jūsu pašu iestatījums.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Lapas izmērs un malas tagad nāk no jūsu iestatījumiem, tāpēc pie kāda cita dokuments var izskatīties citādi. Saglabājiet tos dokumentā, lai tos nostiprinātu.',
+  'Uit het document halen': 'Noņemt no dokumenta',
+  'In dit document vastleggen': 'Saglabāt šajā dokumentā',
   'Rij erboven': 'Rinda augšpusē',
   'Rij eronder': 'Rinda lejpusē',
   'Rij weghalen': 'Dzēst rindu',

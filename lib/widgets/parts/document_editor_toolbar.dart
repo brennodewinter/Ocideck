@@ -406,46 +406,87 @@ Widget _outlineItem(
 /// De paginamaat-indicator rechtsonder in de Visuele modus: op welk formaat,
 /// met welke marges en — als hij aanstaat — met hoeveel afloop je schrijft.
 ///
+/// Klikbaar sinds de paginaopmaak per document kan gelden: hij toont niet
+/// alleen op welk formaat je schrijft, maar ook *waar die keuze vandaan komt* —
+/// uit dit document of uit je instellingen. Dat onderscheid moet zichtbaar zijn
+/// op de plek waar je de maat toch al ziet staan, anders schrijft een knop
+/// ergens anders ongemerkt sleutels in je bestand.
+///
 /// Staat buiten de schermklasse omdat hij niets van het scherm nodig heeft
 /// behalve de maat en de marges, net als [_documentOutlineRail] hieronder.
+///
+/// Een echte [TextButton] en geen kale [InkWell]: hij gedraagt zich als een
+/// knop, dus hoort hij er ook een te zijn — met knop-semantiek, toetsenbordfocus
+/// en een focusring. Een kale InkWell op deze plek liet bovendien de
+/// semantiek-opbouw van Flutter vastlopen op
+/// `identical(childRenderObject, parentRenderObject)`, wat met een screenreader
+/// aan een crash zou zijn geweest.
 Widget _documentPageIndicator(
   BuildContext context,
   ThemeData theme, {
   required PageSizeSpec pageSize,
   required PageMargins margins,
-}) => Positioned(
-  right: 8,
-  bottom: 8,
-  child: IgnorePointer(
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.85),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: theme.colorScheme.outlineVariant),
-      ),
-      child: Text(
-        // Zelf samengesteld, niet door l10n.d(): de indicator draagt alleen
-        // data — de maatnaam en vier getallen in mm. Door d() halen zou een
-        // onvertaalbare sleutel per papiermaat-en-margecombinatie opleveren.
-        // Het enige wóórd zit in pageSizeLabel (de oriëntatie), en dat is wél
-        // vertaald.
-        '${pageSizeLabel(context.l10n, pageSize)} · '
-        '${margins.topMm.toStringAsFixed(0)}/'
-        '${margins.bottomMm.toStringAsFixed(0)}/'
-        '${margins.leftMm.toStringAsFixed(0)}/'
-        '${margins.rightMm.toStringAsFixed(0)}mm'
-        // De afloop geldt app-breed en werkt door op het volgende document;
-        // hem hier tonen houdt dat zichtbaar in plaats van stil.
-        '${margins.hasBleed ? ' · +${margins.bleedMm.toStringAsFixed(0)}mm' : ''}',
-        style: theme.textTheme.labelSmall?.copyWith(
-          color: theme.colorScheme.onSurfaceVariant,
-          fontSize: 10,
+  required bool fromDocument,
+  required VoidCallback onTap,
+}) {
+  final l10n = context.l10n;
+  // De speld en zijn rand volgen de modus: `primary` is in een donker profiel
+  // de donkere merkkleur en zou daar wegvallen — zie [AppPalette.accentInk].
+  final accent = AppPalette.of(theme).accentInk;
+  return Positioned(
+    right: 8,
+    bottom: 8,
+    child: Tooltip(
+      message: fromDocument
+          ? l10n.d('Deze paginaopmaak staat in dit document')
+          : l10n.d('Deze paginaopmaak komt uit je instellingen'),
+      child: TextButton(
+        onPressed: onTap,
+        style: TextButton.styleFrom(
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.85),
+          foregroundColor: theme.colorScheme.onSurfaceVariant,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+            side: BorderSide(
+              color: fromDocument ? accent : theme.colorScheme.outlineVariant,
+            ),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (fromDocument) ...[
+              Icon(Icons.push_pin_outlined, size: 11, color: accent),
+              const SizedBox(width: 4),
+            ],
+            Text(
+              // Zelf samengesteld, niet door l10n.d(): de indicator draagt
+              // alleen data — de maatnaam en vier getallen in mm. Door d()
+              // halen zou een onvertaalbare sleutel per papiermaat-en-
+              // margecombinatie opleveren. Het enige wóórd zit in
+              // pageSizeLabel (de oriëntatie), en dat is wél vertaald.
+              '${pageSizeLabel(l10n, pageSize)} · '
+              '${margins.topMm.toStringAsFixed(0)}/'
+              '${margins.bottomMm.toStringAsFixed(0)}/'
+              '${margins.leftMm.toStringAsFixed(0)}/'
+              '${margins.rightMm.toStringAsFixed(0)}mm'
+              // De afloop werkt door op élke export; hem hier tonen houdt dat
+              // zichtbaar in plaats van stil.
+              '${margins.hasBleed ? ' · +${margins.bleedMm.toStringAsFixed(0)}mm' : ''}',
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                fontSize: 10,
+              ),
+            ),
+          ],
         ),
       ),
     ),
-  ),
-);
+  );
+}
 
 /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
 /// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot

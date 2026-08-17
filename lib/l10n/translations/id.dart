@@ -1649,6 +1649,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Pengaturan halaman ini tersimpan di dokumen ini',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Pengaturan halaman ini berasal dari pengaturan Anda',
+  'Paginaopmaak': 'Pengaturan halaman',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Ukuran halaman dan margin kini tersimpan di dokumen ini; siapa pun yang membukanya mendapat halaman yang sama. Hapus agar pengaturan Anda sendiri yang berlaku.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Ukuran halaman dan margin kini berasal dari pengaturan Anda, jadi pada orang lain dokumen bisa tampak berbeda. Simpan di dokumen untuk menetapkannya.',
+  'Uit het document halen': 'Hapus dari dokumen',
+  'In dit document vastleggen': 'Simpan di dokumen ini',
   'Rij erboven': 'Baris di atas',
   'Rij eronder': 'Baris di bawah',
   'Rij weghalen': 'Hapus baris',

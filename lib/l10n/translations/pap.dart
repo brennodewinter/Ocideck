@@ -676,6 +676,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze paginaopmaak staat in dit document':
+      'E formato di página aki ta den e dokumento aki',
+  'Deze paginaopmaak komt uit je instellingen':
+      'E formato di página aki ta bini for di bo konfigurashon',
+  'Paginaopmaak': 'Formato di página',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Awor e tamaño di página i e marge ta den e dokumento aki; ken ku habri e ta haña e mesun página. Kita nan pa bo mes konfigurashon apliká.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'E tamaño di página i e marge ta bini for di bo konfigurashon, pues serka un otro hende e dokumento por parse diferente. Pone nan den e dokumento pa fiha esaki.',
+  'Uit het document halen': 'Kita for di dokumento',
+  'In dit document vastleggen': 'Warda den e dokumento aki',
   'Rij erboven': 'Rei ariba',
   'Rij eronder': 'Rei abou',
   'Rij weghalen': 'Kita rei',

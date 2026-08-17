@@ -1,3 +1,4 @@
+import '../services/document_page_setup.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -24,7 +25,7 @@ import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
-import '../services/image_service.dart' show ImageImportFailure;
+import '../services/image_service.dart' show ImageImportFailure, ImageService;
 import '../services/markdown_table_codec.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
@@ -268,6 +269,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final filePath = state.filePath;
     final projectPath = filePath == null ? null : p.dirname(filePath);
     final settings = ref.read(settingsProvider);
+    final exportSetup = effectiveDocumentPageSetup(
+      settings,
+      state.document?.source ?? '',
+    );
     final fileService = ref.read(fileServiceProvider);
     final imageService = ref.read(imageServiceProvider);
     final markdownService = ref.read(markdownServiceProvider);
@@ -295,40 +300,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       return _writePackageExport(bundle);
     }
 
-    // Kies een pad. De extensie én het profiel staan in de naam, zodat een
-    // verwisseling (volledig ↔ geredigeerd) zichtbaar is.
-    final ext = switch (format) {
-      DocumentExportFormat.md => 'md',
-      DocumentExportFormat.html => 'html',
-      DocumentExportFormat.latex => 'tex',
-      DocumentExportFormat.ocideck => 'ocideck',
-    };
-    final tag = profile == PrivacyExportProfile.redacted
-        ? l10n.d('geredigeerd')
-        : l10n.d('volledig');
-    final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
-    final dest = await pickDocumentExportDestination(
-      dialogTitle: l10n.t('export'),
-      fileName: '$base-$tag.$ext',
-      initialDirectory: projectPath,
+    final outputPath = await _pickDocumentExportPath(
+      l10n,
+      format: format,
+      profile: profile,
+      title: title,
+      projectPath: projectPath,
     );
-    if (dest == null) return null;
-    final outputPath = dest.endsWith('.$ext') ? dest : '$dest.$ext';
-
-    // Afbeeldingen ingesloten als data:-URI, begrensd binnen de projectmap —
-    // dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
-    // geweigerd, niet gevolgd.
-    Future<String?> embed(String src) async {
-      final bytes = src == effectiveTheme.logoPath
-          ? await readStyleLogoBytes(src, projectPath: projectPath)
-          : await imageService.readSlideImageBytes(
-              src,
-              projectPath: projectPath,
-            );
-      if (bytes == null) return null;
-      final encoded = encodeForHtmlEmbed(bytes, src);
-      return encoded == null ? null : htmlImageDataUri(encoded);
-    }
+    if (outputPath == null) return null;
 
     return writeDocumentExport(
       bundle,
@@ -342,10 +321,17 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         title: title,
         language: l10n.languageCode,
       ),
-      embedImage: embed,
+      embedImage: (src) => _embedDocumentExportImage(
+        src,
+        imageService: imageService,
+        logoPath: effectiveTheme.logoPath,
+        projectPath: projectPath,
+      ),
       chapterPageBreak: settings.documentChapterPageBreak,
-      pageSize: settings.documentPageSize,
-      pageMargins: settings.documentPageMargins,
+      // De export volgt dezelfde volgorde als het scherm: draagt het document
+      // zelf een paginaopmaak, dan geldt die.
+      pageSize: exportSetup.size!,
+      pageMargins: exportSetup.margins!,
       outputPath: outputPath,
     );
   }
@@ -859,6 +845,54 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onCollapsedChanged: (v) => setState(() => _outlineCollapsed = v),
     onSelect: _scrollToHeading,
   );
+}
+
+/// Kiest het uitvoerpad voor een documentexport. De extensie én het profiel
+/// staan in de naam, zodat een verwisseling (volledig ↔ geredigeerd) zichtbaar
+/// is. `null` wanneer de gebruiker de bestandskiezer wegklikt. Top-level zodat
+/// het bewerkscherm zelf onder zijn regelplafond blijft.
+Future<String?> _pickDocumentExportPath(
+  AppLocalizations l10n, {
+  required DocumentExportFormat format,
+  required PrivacyExportProfile profile,
+  required String title,
+  required String? projectPath,
+}) async {
+  final ext = switch (format) {
+    DocumentExportFormat.md => 'md',
+    DocumentExportFormat.html => 'html',
+    DocumentExportFormat.latex => 'tex',
+    DocumentExportFormat.ocideck => 'ocideck',
+  };
+  final tag = profile == PrivacyExportProfile.redacted
+      ? l10n.d('geredigeerd')
+      : l10n.d('volledig');
+  final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
+  final dest = await pickDocumentExportDestination(
+    dialogTitle: l10n.t('export'),
+    fileName: '$base-$tag.$ext',
+    initialDirectory: projectPath,
+  );
+  if (dest == null) return null;
+  return dest.endsWith('.$ext') ? dest : '$dest.$ext';
+}
+
+/// Afbeeldingen ingesloten als data:-URI, begrensd binnen de projectmap —
+/// dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
+/// geweigerd, niet gevolgd. Top-level zodat het bewerkscherm zelf onder zijn
+/// regelplafond blijft.
+Future<String?> _embedDocumentExportImage(
+  String src, {
+  required ImageService imageService,
+  required String? logoPath,
+  required String? projectPath,
+}) async {
+  final bytes = src == logoPath
+      ? await readStyleLogoBytes(src, projectPath: projectPath)
+      : await imageService.readSlideImageBytes(src, projectPath: projectPath);
+  if (bytes == null) return null;
+  final encoded = encodeForHtmlEmbed(bytes, src);
+  return encoded == null ? null : htmlImageDataUri(encoded);
 }
 
 Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {

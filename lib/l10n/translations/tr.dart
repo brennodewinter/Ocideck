@@ -2567,6 +2567,16 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze paginaopmaak staat in dit document': 'Bu sayfa düzeni bu belgede saklı',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Bu sayfa düzeni ayarlarınızdan geliyor',
+  'Paginaopmaak': 'Sayfa düzeni',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Sayfa boyutu ve kenar boşlukları artık bu belgede saklı; belgeyi açan herkes aynı sayfayı görür. Kendi ayarınızın geçerli olması için bunları kaldırın.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Sayfa boyutu ve kenar boşlukları artık ayarlarınızdan geliyor; bu yüzden belge başkasında farklı görünebilir. Sabitlemek için bunları belgeye kaydedin.',
+  'Uit het document halen': 'Belgeden kaldır',
+  'In dit document vastleggen': 'Bu belgeye kaydet',
   'Rij erboven': 'Üste satır',
   'Rij eronder': 'Alta satır',
   'Rij weghalen': 'Satırı sil',

@@ -1652,6 +1652,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Das Sitelayout staht i dem Dokumänt',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Das Sitelayout chunnt us dine Istellige',
+  'Paginaopmaak': 'Sitelayout',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'D Sitegrössi und d Ränder stöhnd jetz i dem Dokumänt; wer\'s uufmacht, überchunnt die glych Site. Nimm si use, damit dini eigeti Istellig gilt.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'D Sitegrössi und d Ränder chömed jetz us dine Istellige, drum cha s Dokumänt bi öpper anderem anders uusgseh. Schrib si is Dokumänt, damit\'s fixiert isch.',
+  'Uit het document halen': 'Us em Dokumänt neh',
+  'In dit document vastleggen': 'I dem Dokumänt festlege',
   'Rij erboven': 'Zile drüber',
   'Rij eronder': 'Zile drunder',
   'Rij weghalen': 'Zile lösche',

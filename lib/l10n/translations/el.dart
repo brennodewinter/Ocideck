@@ -1675,6 +1675,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Αυτή η διαμόρφωση σελίδας είναι αποθηκευμένη σε αυτό το έγγραφο',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Αυτή η διαμόρφωση σελίδας προέρχεται από τις ρυθμίσεις σας',
+  'Paginaopmaak': 'Διαμόρφωση σελίδας',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Το μέγεθος σελίδας και τα περιθώρια είναι τώρα αποθηκευμένα σε αυτό το έγγραφο· όποιος το ανοίξει βλέπει την ίδια σελίδα. Αφαιρέστε τα για να ισχύσει η δική σας ρύθμιση.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Το μέγεθος σελίδας και τα περιθώρια προέρχονται τώρα από τις ρυθμίσεις σας, οπότε σε κάποιον άλλο το έγγραφο μπορεί να φαίνεται διαφορετικό. Αποθηκεύστε τα στο έγγραφο για να τα σταθεροποιήσετε.',
+  'Uit het document halen': 'Αφαίρεση από το έγγραφο',
+  'In dit document vastleggen': 'Αποθήκευση σε αυτό το έγγραφο',
   'Rij erboven': 'Γραμμή επάνω',
   'Rij eronder': 'Γραμμή κάτω',
   'Rij weghalen': 'Διαγραφή γραμμής',

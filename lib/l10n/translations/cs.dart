@@ -1652,6 +1652,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Tento vzhled stránky je uložen v tomto dokumentu',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Tento vzhled stránky pochází z vašeho nastavení',
+  'Paginaopmaak': 'Vzhled stránky',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Velikost stránky a okraje jsou nyní uloženy v tomto dokumentu; kdo jej otevře, uvidí stejnou stránku. Odeberte je, aby platilo vaše vlastní nastavení.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Velikost stránky a okraje nyní pocházejí z vašeho nastavení, takže u někoho jiného může dokument vypadat jinak. Uložte je do dokumentu, abyste to ukotvili.',
+  'Uit het document halen': 'Odebrat z dokumentu',
+  'In dit document vastleggen': 'Uložit do tohoto dokumentu',
   'Rij erboven': 'Řádek nad',
   'Rij eronder': 'Řádek pod',
   'Rij weghalen': 'Smazat řádek',

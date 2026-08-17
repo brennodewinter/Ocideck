@@ -57,12 +57,15 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// in de visuele of de bron-stand.
   Widget _pagesLayout(ThemeData theme, String source) {
     final settings = ref.watch(settingsProvider);
+    // Draagt het document zelf een paginaopmaak, dan wint die van de instelling
+    // — zie [effectiveDocumentPageSetup].
+    final setup = effectiveDocumentPageSetup(settings, source);
     return Container(
       color: theme.colorScheme.surfaceContainerHighest,
       child: PagedDocumentView(
         markdown: source,
-        pageSize: settings.documentPageSize,
-        margins: settings.documentPageMargins,
+        pageSize: setup.size!,
+        margins: setup.margins!,
         profile: _styleProfile,
         projectPath: _projectPath,
         chapterPageBreak: settings.documentChapterPageBreak,
@@ -91,8 +94,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     // vel vol is. Die einden worden gemeten aan de blokken die er echt staan —
     // zie [WritingPageBreakOverlay].
     final settings = ref.watch(settingsProvider);
-    final pageSize = settings.documentPageSize;
-    final margins = settings.documentPageMargins;
+    final setup = effectiveDocumentPageSetup(settings, source);
+    final pageSize = setup.size!;
+    final margins = setup.margins!;
     final (_, pageHeightMm) = pageSize.dimensions;
     final pageContentHeight =
         (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm;
@@ -119,6 +123,15 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
                 theme,
                 pageSize: pageSize,
                 margins: margins,
+                fromDocument: documentCarriesPageSetup(source),
+                onTap: () => unawaited(
+                  _choosePageSetupScope(
+                    context,
+                    ref,
+                    pageSize: pageSize,
+                    margins: margins,
+                  ),
+                ),
               ),
             ],
           ),
@@ -148,10 +161,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
     // dan geldt de ingestelde schrijfbreedte.
     documentMaxWidth: _showPageBreaks
-        ? pageTextWidthPx(
-            ref.watch(settingsProvider).documentPageSize,
-            ref.watch(settingsProvider).documentPageMargins,
-          )
+        ? _documentPageTextWidthPx(ref)
         : ref.watch(settingsProvider).documentEditorMaxWidth,
     editorKey: _visualEditorKey,
     bordered: false,
@@ -227,4 +237,71 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
           ),
         ),
       );
+}
+
+/// De tekstbreedte van de pagina die nu geldt: die van het document zelf als
+/// het er een paginaopmaak draagt, anders die van de app-instelling. Top-level
+/// zodat het bewerkscherm zelf onder zijn regelplafond blijft.
+double _documentPageTextWidthPx(WidgetRef ref) {
+  final setup = effectiveDocumentPageSetup(
+    ref.read(settingsProvider),
+    ref.read(documentProvider).document?.source ?? '',
+  );
+  return pageTextWidthPx(setup.size!, setup.margins!);
+}
+
+/// Laat kiezen of de huidige paginaopmaak in dít document komt te staan of uit
+/// de instellingen blijft komen.
+///
+/// Bewust een expliciete keuze en geen schakelaar die meteen schrijft: de
+/// sleutels landen in het bestand van de gebruiker, en dat hoort een besluit te
+/// zijn dat je neemt, niet een dat je per ongeluk aanzet. Top-level zodat het
+/// bewerkscherm zelf onder zijn regelplafond blijft.
+Future<void> _choosePageSetupScope(
+  BuildContext context,
+  WidgetRef ref, {
+  required PageSizeSpec pageSize,
+  required PageMargins margins,
+}) async {
+  final l10n = context.l10n;
+  final doc = ref.read(documentProvider).document;
+  if (doc == null) return;
+  final inDocument = documentCarriesPageSetup(doc.source);
+  final choice = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(l10n.d('Paginaopmaak')),
+      content: Text(
+        inDocument
+            ? l10n.d(
+                'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.',
+              )
+            : l10n.d(
+                'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.',
+              ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(context).pop(!inDocument),
+          child: Text(
+            inDocument
+                ? l10n.d('Uit het document halen')
+                : l10n.d('In dit document vastleggen'),
+          ),
+        ),
+      ],
+    ),
+  );
+  if (choice == null) return;
+  final next = withDocumentPageSetup(
+    doc.source,
+    size: choice ? pageSize : null,
+    margins: choice ? margins : null,
+  );
+  if (next == doc.source) return;
+  ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
 }
