@@ -454,6 +454,7 @@ const _dutchSourceEs = {
   'Titel (optioneel)': 'Título (opcional)',
   'Slide titel': 'Título de diapositiva',
   'Ondertitel': 'Subtítulo',
+  'Subtitel': 'Subtítulo',
   'Optionele subtitel': 'Subtítulo opcional',
   'Bullets': 'Viñetas',
   'Bullet toevoegen': 'Añadir viñeta',
@@ -600,10 +601,7 @@ const _dutchSourceEs = {
       'P público · H leyenda · S pantalla · G vista general · B/W negro/blanco · R tiempo · Esc detener',
   'Akkoord gaan': 'Aceptar',
   'Licentie (EUPL 1.2)': 'Licencia (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Consentimiento revocado',
   'Toestemming intrekken': 'Revocar consentimiento',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Debe aceptar los términos de privacidad y uso antes de poder usar OciDeck.',
   'Volledige licentie online': 'Licencia completa en línea',
   'Welkom bij OciDeck': 'Bienvenido a OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).
@@ -3845,6 +3843,7 @@ const _dutchSourceAddEs = {
   'Subkop (optioneel)': 'Subtítulo (opcional)',
   'Subkop': 'Subtítulo',
   'Systeem (monospace)': 'Sistema (monospace)',
+  'Platte tekst': 'Texto sin formato',
   'Kleur van reeks': 'Color de la serie',
   'Kleur van rij': 'Color de la fila',
   'Hexkleur': 'Color hexadecimal',
@@ -3922,6 +3921,8 @@ const _dutchSourceAddEs = {
   'Ingezoomd': 'Ampliado',
   'Inzoomen (minder van de foto zichtbaar)': 'Acercar (se ve menos de la foto)',
   'Kies een afbeelding': 'Elige una imagen',
+  'Kies een video': 'Elige un vídeo',
+  'Kies een audiobestand': 'Elige un archivo de audio',
   'Kies een map met presentaties om te beginnen.':
       'Elige una carpeta con presentaciones para empezar.',
   'Kon dit pakket niet importeren.': 'No se pudo importar este paquete.',

@@ -448,6 +448,7 @@ const _dutchSourceFy = {
   'Titel (optioneel)': 'Titel (opsjoneel)',
   'Slide titel': 'Slidetitel',
   'Ondertitel': 'Undertitel',
+  'Subtitel': 'Undertitel',
   'Optionele subtitel': 'Opsjonele subtitel',
   'Bullets': 'Bullets',
   'Bullet toevoegen': 'Bullet tafoegje',
@@ -603,10 +604,7 @@ const _dutchSourceFy = {
       'P publyk · H leginda · S skerm · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
   'Akkoord gaan': 'Akseptyf gean',
   'Licentie (EUPL 1.2)': 'Lisintse (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Tastimming yntrokken',
   'Toestemming intrekken': 'Tastimming yntrekke',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Jo moatte de privacy- en brûksbetingsten akseptyf gean foardat jo OciDeck brûke kûnne.',
   'Volledige licentie online': 'Folsleine lisintse online',
   'Welkom bij OciDeck': 'Wolkom by OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).
@@ -3813,6 +3811,7 @@ const _dutchSourceAddFy = {
   'Subkop (optioneel)': 'Subkop (opsjoneel)',
   'Subkop': 'Subkop',
   'Systeem (monospace)': 'Systeem (monospace)',
+  'Platte tekst': 'Gewoane tekst',
   'Kleur van reeks': 'Rigekleur',
   'Kleur van rij': 'Rijekleur',
   'Hexkleur': 'Hekskleur',
@@ -3883,6 +3882,8 @@ const _dutchSourceAddFy = {
   'Inzoomen (minder van de foto zichtbaar)':
       'Ynzoome (minder fan de foto sichtber)',
   'Kies een afbeelding': 'Kies in ôfbylding',
+  'Kies een video': 'Kies in fideo',
+  'Kies een audiobestand': 'Kies in audiobestân',
   'Kies een map met presentaties om te beginnen.':
       'Kies in map mei presintaasjes om te begjinnen.',
   'Kon dit pakket niet importeren.': 'Koe dit pakket net ymportearje.',

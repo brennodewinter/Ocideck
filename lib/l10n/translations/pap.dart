@@ -448,6 +448,7 @@ const _dutchSourcePap = {
   'Titel (optioneel)': 'Título (opshonal)',
   'Slide titel': 'Título di slide',
   'Ondertitel': 'Subtítulo',
+  'Subtitel': 'Subtítulo',
   'Optionele subtitel': 'Subtítulo opshonal',
   'Bullets': 'Bullets',
   'Bullet toevoegen': 'Añadí bullet',
@@ -602,10 +603,7 @@ const _dutchSourcePap = {
       'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
   'Akkoord gaan': 'Akuerdo',
   'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Aprobashon retirá',
   'Toestemming intrekken': 'Retirá Aprobashon',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Bo mester akseptá e termino di privacidad i uso antes bo por usa OciDeck.',
   'Volledige licentie online': 'Lisencia kompleto online',
   'Welkom bij OciDeck': 'Bienvenido na OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).
@@ -3829,6 +3827,7 @@ const _dutchSourceAddPap = {
   'Subkop (optioneel)': 'Subtítulo (opshonal)',
   'Subkop': 'Subtítulo',
   'Systeem (monospace)': 'Sistema (monospace)',
+  'Platte tekst': 'Teksto simpel',
   'Kleur van reeks': 'Koló di serie',
   'Kleur van rij': 'Koló di liña',
   'Hexkleur': 'Koló hexadecimal',
@@ -3899,6 +3898,8 @@ const _dutchSourceAddPap = {
   'Inzoomen (minder van de foto zichtbaar)':
       'Zoom paden (ménos di e potrèt visibel)',
   'Kies een afbeelding': 'Skohe un imágen',
+  'Kies een video': 'Skohe un video',
+  'Kies een audiobestand': 'Skohe un file di audio',
   'Kies een map met presentaties om te beginnen.':
       'Skohe un karpeta ku presentashon pa kuminsá.',
   'Kon dit pakket niet importeren.': 'No por a importá e paket aki.',

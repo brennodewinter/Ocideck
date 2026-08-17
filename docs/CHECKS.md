@@ -160,6 +160,42 @@ guards plus formatting), handy while iterating on translations.
   out. If it *is* used along a route the gate cannot see, widen `useRoots` /
   `textExtensions` in `tool/check_l10n_orphans.dart`; do not raise the baseline.
 
+### `make check-l10n-parity`
+- **Runs:** `dart run tool/check_l10n_table_parity.dart` (`--list` prints every
+  gap with the languages that miss the key and the ones that carry it)
+- **Covers:** the only translation gate that compares the tables *with each
+  other* instead of against usage in `lib/`. Every key present in one language
+  must exist in all of them, whether or not anything looks it up right now.
+- **Why it was needed:** `l10n-check` and `app_localizations_test.dart` reason
+  from `d('…')` literals found in `lib/`, and `check-l10n-orphans` asks whether a
+  key is still fetched. A key that sits in the tables but is momentarily looked
+  up nowhere slips through both, and may then exist in one language and be
+  absent in another with nothing complaining. That is exactly what #1520 turned
+  up: six languages (de, es, fr, fy, it, pap) had been missing four source keys
+  for a while and nobody noticed.
+- **How it measures:** the keys of the three top-level maps per language file,
+  read via the AST. They form **two** families, not three:
+  `_strings<Lang>` (the `t()` table) on one side, and `_dutchSource<Lang>` plus
+  `_dutchSourceAdd<Lang>` on the other — those two are one namespace, because
+  `make add-l10n` writes into the additions overlay while `d()` reads from both,
+  and where the cut between them falls differs per language purely by history
+  (most sit at 1266/2014, de/es/fr/it at 501/2777, tr at 1949/1331). Comparing
+  them separately would report over a thousand meaningless differences per
+  language.
+- **The `nl` exception:** Dutch is the source language. `d('Opslaan')` returns
+  `'Opslaan'` for `nl` without consulting a table, so `nl.dart` carries no
+  Dutch-source tables at all and is left out of that family. It does take part in
+  the `_strings*` family, where `t()` genuinely needs a Dutch value.
+- **Why `check` and not `check-full`,** unlike its sibling
+  `check-l10n-orphans`: this is an exact set comparison, not a textual
+  heuristic. There is nothing to interpret, so no false finding is possible and
+  no baseline is needed — zero is the only state. It reads 32 files and is done
+  in a second, which is affordable in the gate that stops every commit.
+- **Failure means:** a language drifted out of line. Fill the gap with the
+  translation from a language that does have the key, or remove the key
+  everywhere if it is a leftover — if it still sits in only one language, that is
+  the likelier reading.
+
 ## How intensively is it tested?
 
 To give a sense of scale. These are counts from one moment, and they only grow,
@@ -278,6 +314,7 @@ now the only passing state.
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
+| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — |
 | [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
