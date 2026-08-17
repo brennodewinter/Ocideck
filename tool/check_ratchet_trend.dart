@@ -202,6 +202,13 @@ const List<Ratchet> ratchets = [
     wat: 'lib/-bestanden die in geen enkele test voorkomen',
   ),
   Ratchet(
+    naam: 'orphanBaseline',
+    bestand: 'tool/check_l10n_orphans.dart',
+    soort: RatchetSoort.getal,
+    richting: Richting.omlaag,
+    wat: 'vertaalsleutels die nergens meer worden opgehaald',
+  ),
+  Ratchet(
     naam: 'perFileFloorPercent',
     bestand: 'tool/coverage_summary.dart',
     soort: RatchetSoort.getal,
