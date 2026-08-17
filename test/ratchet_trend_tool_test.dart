@@ -166,6 +166,8 @@ const int perFileFloorPercent = $bestandsvloer;
       int gemengd = 0,
       // Idem voor de wezenratchet uit check_l10n_orphans.dart.
       int wezen = 0,
+      // Idem voor de doorlaatratchet uit check_l10n_dutch_passthrough.dart.
+      int doorlaat = 0,
     }) => {
       'tool/check_conventions.dart': conventies(
         katch: katch,
@@ -182,6 +184,8 @@ const int perFileFloorPercent = $bestandsvloer;
       'tool/check_comment_language.dart':
           'const int mixedCommentBaseline = $gemengd;',
       'tool/check_l10n_orphans.dart': 'const int orphanBaseline = $wezen;',
+      'tool/check_l10n_dutch_passthrough.dart':
+          'const int passthroughBaseline = $doorlaat;',
       'Makefile': 'coverage_summary.dart --min=$vloer --require-instrumented',
     };
 

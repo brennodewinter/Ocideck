@@ -209,6 +209,13 @@ const List<Ratchet> ratchets = [
     wat: 'vertaalsleutels die nergens meer worden opgehaald',
   ),
   Ratchet(
+    naam: 'passthroughBaseline',
+    bestand: 'tool/check_l10n_dutch_passthrough.dart',
+    soort: RatchetSoort.getal,
+    richting: Richting.omlaag,
+    wat: 'vertalingen die de Nederlandse bron letterlijk doorlaten',
+  ),
+  Ratchet(
     naam: 'perFileFloorPercent',
     bestand: 'tool/coverage_summary.dart',
     soort: RatchetSoort.getal,

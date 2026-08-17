@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -85,6 +85,7 @@ help:
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make check-l10n-orphans  Ratchet: translation keys nothing looks up any more (in check-full)."
 	@echo "  make check-l10n-parity   Every key present in one language table must exist in all (in check)."
+	@echo "  make check-l10n-passthrough  Ratchet: values that are the Dutch source verbatim (in check-full)."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make clean-test-cache  Gooi alleen de kernelcache van 'flutter test' weg (bij een laadfout op een test die los groen is)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -927,6 +928,41 @@ check-l10n-parity:
 	@echo "        Volledige lijst: dart run tool/check_l10n_table_parity.dart --list"
 	dart run tool/check_l10n_table_parity.dart
 
+# De DERDE kant van de vertaalpoorten. l10n-check vraagt "staat er een waarde
+# bij deze sleutel", check-l10n-parity vraagt "staat de sleutel overal", en
+# test/l10n_untranslated_test.dart vraagt "is die waarde niet gewoon de ENGELSE
+# zin". Niemand vroeg of de waarde de NEDERLANDSE bron is. Bij #1524 bleek dat
+# tlh.dart 44 zulke sleutels droeg — inclusief een compleet LibrePlan-blok van
+# hele zinnen — en dat blok staat onvertaald in dertig talen.
+#
+# WAAROM IN check-full EN NIET IN check, net als haar zusterpoort
+# check-l10n-orphans en anders dan check-l10n-parity. Twee redenen, en ze
+# horen bij elkaar. (1) Het oordeel is een TEKSTHEURISTIEK: gelijkheid vanaf
+# drie woorden. Dat is scherp genoeg om bruikbaar te zijn en te grof om
+# onfeilbaar te zijn — precies het soort weging dat niet thuishoort in de ronde
+# die élke commit tegenhoudt. (2) Bij invoering vindt hij er 394. Een poort die
+# meteen rood staat kan niet in `check` zonder basislijn, en een basislijn ís
+# hier het eerlijke antwoord: de opruimronde (#1526 e.v.) brengt hem naar nul
+# en dan pas kan hij verhuizen. Tot die tijd houdt de ratchet tegen dat er nóg
+# een taal of nóg een blok bijkomt — dat deel raakt wél elke commit, via
+# test/l10n_dutch_passthrough_test.dart, dat in de suite meedraait.
+check-l10n-passthrough:
+	@echo "== OciDeck check: doorgelaten Nederlandse bronzinnen =="
+	@echo "Command: dart run tool/check_l10n_dutch_passthrough.dart"
+	@echo "Covers: vertaalregels die de Nederlandse bron letterlijk als"
+	@echo "        vertaling dragen. Twee families: de d()-brontabellen (sleutel"
+	@echo "        == waarde) en de t()-tabel (waarde == de Nederlandse waarde"
+	@echo "        bij dezelfde sleutel). Alleen vanaf drie woorden — losse"
+	@echo "        woorden zijn massaal identiek zonder dat er iets mis is."
+	@echo "        Ratchet: het aantal mag dalen, nooit stijgen."
+	@echo "Failure means: er is een taal of een blok bijgekomen dat de bron"
+	@echo "        doorlaat. Vertaal het. Valt er niets te vertalen (eigennaam,"
+	@echo "        vakterm, leenuitdrukking), zet de SLEUTEL dan in loanKeys in"
+	@echo "        tool/check_l10n_dutch_passthrough.dart mét de reden — niet de"
+	@echo "        basislijn omhoog."
+	@echo "        Volledige lijst: dart run tool/check_l10n_dutch_passthrough.dart --list"
+	dart run tool/check_l10n_dutch_passthrough.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -1240,9 +1276,9 @@ check-registrations:
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-l10n-orphans check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, unused translation keys, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
+	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
 
 # The "ready for tagging" quality pass. Run this BY HAND before `git push origin
 # v*`: it is the last moment a finding can hold back a release instead of ending
