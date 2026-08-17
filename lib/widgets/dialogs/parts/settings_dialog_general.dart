@@ -878,6 +878,25 @@ Widget _printBleedControls(
         ),
         style: const TextStyle(fontSize: 11),
       ),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        value: m.hasBleed && settings.documentCropMarks,
+        // Zonder afloop wijzen snijtekens nergens naar.
+        onChanged: m.hasBleed
+            ? (v) => ref.read(settingsProvider.notifier).setDocumentCropMarks(v)
+            : null,
+        title: Text(l10n.d('Snijtekens'), style: const TextStyle(fontSize: 12)),
+        subtitle: Text(
+          // Eerlijk over het bereik: het LaTeX-pad zet ze echt, de
+          // browser-afdruk van de HTML-export niet — die kent `marks` uit CSS
+          // Paged Media niet. Dat verschil hoort hier te staan en niet alleen
+          // in de code.
+          l10n.d(
+            'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.',
+          ),
+          style: const TextStyle(fontSize: 11),
+        ),
+      ),
     ],
   );
 }

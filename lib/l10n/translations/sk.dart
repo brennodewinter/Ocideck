@@ -1656,6 +1656,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Snijtekens': 'Orezové značky',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Len v exporte LaTeX/PDF a len so spadávkou. Vyžaduje balík crop vo vašej inštalácii TeX; tlač HTML exportu z prehliadača ich nepridá.',
   'Deze paginaopmaak staat in dit document':
       'Tento vzhľad strany je uložený v tomto dokumente',
   'Deze paginaopmaak komt uit je instellingen':

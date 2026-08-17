@@ -1670,6 +1670,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Snijtekens': 'Marki tal-qtugħ',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Biss fl-esportazzjoni LaTeX/PDF, u biss bil-bleed. Jeħtieġ il-pakkett crop fl-installazzjoni TeX tiegħek; l-istampar tal-esportazzjoni HTML minn browser ma jżidhomx.',
   'Deze paginaopmaak staat in dit document':
       'Dan is-setup tal-paġna huwa maħżun f\'dan id-dokument',
   'Deze paginaopmaak komt uit je instellingen':

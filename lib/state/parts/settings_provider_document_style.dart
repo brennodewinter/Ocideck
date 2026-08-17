@@ -62,6 +62,18 @@ Future<void> _applyDocumentChapterPageBreak(
   );
 }
 
+/// Documentmodus: snijtekens rond het snijformaat in de LaTeX/PDF-export.
+/// Alleen zinvol met een afloop; raakt geen `.md`-bestand.
+Future<void> _applyDocumentCropMarks(SettingsNotifier notifier, bool enabled) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentCropMarks: enabled,
+  );
+  return notifier._persist(
+    'documentCropMarks',
+    (prefs) => prefs.setBool('documentCropMarks', enabled),
+  );
+}
+
 /// Documentmodus: stel de maximale schrijfbreedte van de visuele editor in
 /// (px), of `null` voor volledige breedte. Feature 2.
 Future<void> _applyDocumentEditorMaxWidth(
@@ -90,6 +102,34 @@ double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
       <= 0 => null,
       final width => width,
     };
+
+/// Alle documentmodus-instellingen zoals ze op schijf staan, in één keer.
+///
+/// Het lezen hoort in dezelfde `part` als het schrijven: ze delen de sleutels
+/// en de standaardwaarden, en zo blijft het lezen buiten het regelplafond van
+/// [SettingsNotifier]. Spiegelt [_loadCockpitSettings] in het hoofdbestand.
+({
+  String? defaultStyle,
+  bool styleEnforced,
+  bool chapterPageBreak,
+  bool cropMarks,
+  double? editorMaxWidth,
+  PageSizeSpec pageSize,
+  PageMargins pageMargins,
+})
+_readDocumentSettings(SharedPreferences prefs) => (
+  defaultStyle: prefs.getString('documentDefaultStyle'),
+  styleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
+  chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? false,
+  cropMarks: prefs.getBool('documentCropMarks') ?? false,
+  editorMaxWidth: _readDocumentEditorMaxWidth(prefs),
+  pageSize:
+      PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
+      PageSizeSpec.a4,
+  pageMargins:
+      PageMargins.fromId(prefs.getString('documentPageMargins')) ??
+      const PageMargins(),
+);
 
 /// Documentmodus: stel de paginamaat voor export in (ISO-216). Feature 3.
 Future<void> _applyDocumentPageSize(

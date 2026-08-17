@@ -847,6 +847,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Snijtekens': 'Crop marks',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Only in the LaTeX/PDF export, and only with bleed. Requires the crop package in your TeX installation; printing the HTML export from a browser does not add them.',
   'Deze paginaopmaak staat in dit document':
       'This page setup is stored in this document',
   'Deze paginaopmaak komt uit je instellingen':

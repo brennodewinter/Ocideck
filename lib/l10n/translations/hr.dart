@@ -1655,6 +1655,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Snijtekens': 'Oznake reza',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Samo u izvozu LaTeX/PDF i samo s napustom. Zahtijeva paket crop u vašoj TeX instalaciji; ispis HTML izvoza iz preglednika ih ne dodaje.',
   'Deze paginaopmaak staat in dit document':
       'Ovo postavljanje stranice spremljeno je u ovom dokumentu',
   'Deze paginaopmaak komt uit je instellingen':

@@ -1649,6 +1649,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Snijtekens': 'Skärmärken',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Endast i LaTeX/PDF-exporten och endast med utfall. Kräver paketet crop i din TeX-installation; en webbläsarutskrift av HTML-exporten lägger inte till dem.',
   'Deze paginaopmaak staat in dit document':
       'Den här sidlayouten är sparad i det här dokumentet',
   'Deze paginaopmaak komt uit je instellingen':

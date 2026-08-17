@@ -1657,6 +1657,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Snijtekens': 'Pjovimo žymos',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Tik LaTeX/PDF eksporte ir tik su išleistimi. Reikia paketo crop jūsų TeX diegime; HTML eksporto spausdinimas iš naršyklės jų neprideda.',
   'Deze paginaopmaak staat in dit document':
       'Šie puslapio parametrai įrašyti šiame dokumente',
   'Deze paginaopmaak komt uit je instellingen':

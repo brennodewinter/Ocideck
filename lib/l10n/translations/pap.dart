@@ -674,6 +674,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Snijtekens': 'Marka di korta',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Solamente den e eksportashon LaTeX/PDF, i solamente ku sangrado. Ta rekerí e paket crop den bo instalashon di TeX; imprimí e eksportashon HTML for di un browser no ta pone nan.',
   'Deze paginaopmaak staat in dit document':
       'E formato di página aki ta den e dokumento aki',
   'Deze paginaopmaak komt uit je instellingen':

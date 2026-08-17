@@ -675,6 +675,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Snijtekens': 'Traits de coupe',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Uniquement dans l\'export LaTeX/PDF, et seulement avec fond perdu. Nécessite le paquet crop dans votre installation TeX ; une impression de l\'export HTML depuis le navigateur ne les ajoute pas.',
   'Deze paginaopmaak staat in dit document':
       'Cette mise en page est enregistrée dans ce document',
   'Deze paginaopmaak komt uit je instellingen':

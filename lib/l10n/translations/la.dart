@@ -1665,6 +1665,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Snijtekens': 'Signa sectionis',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Tantum in exportatione LaTeX/PDF, et tantum cum excursu. Fasciculum crop in institutione TeX requirit; exportatio HTML e navigatro impressa ea non ponit.',
   'Deze paginaopmaak staat in dit document':
       'Haec dispositio paginae in hoc documento inest',
   'Deze paginaopmaak komt uit je instellingen':

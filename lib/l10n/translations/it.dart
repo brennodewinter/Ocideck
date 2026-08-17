@@ -672,6 +672,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Snijtekens': 'Crocini di taglio',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Solo nell\'esportazione LaTeX/PDF e solo con l\'abbondanza. Richiede il pacchetto crop nella tua installazione TeX; la stampa dell\'esportazione HTML dal browser non li aggiunge.',
   'Deze paginaopmaak staat in dit document':
       'Questa impostazione pagina è salvata in questo documento',
   'Deze paginaopmaak komt uit je instellingen':

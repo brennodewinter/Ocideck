@@ -1650,6 +1650,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Snijtekens': 'Leikkuumerkit',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Vain LaTeX/PDF-viennissä ja vain leikkuuvaran kanssa. Vaatii crop-paketin TeX-asennukseesi; HTML-viennin tulostaminen selaimesta ei lisää niitä.',
   'Deze paginaopmaak staat in dit document':
       'Tämä sivun asettelu on tallennettu tähän asiakirjaan',
   'Deze paginaopmaak komt uit je instellingen':

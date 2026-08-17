@@ -1666,6 +1666,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Snijtekens': 'Мітки обрізу',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Лише в експорті LaTeX/PDF і лише з вилетом. Потребує пакет crop у вашій встановленій системі TeX; друк HTML-експорту з браузера їх не додає.',
   'Deze paginaopmaak staat in dit document':
       'Ці параметри сторінки збережені в цьому документі',
   'Deze paginaopmaak komt uit je instellingen':

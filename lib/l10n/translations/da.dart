@@ -1650,6 +1650,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Snijtekens': 'Skæremærker',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Kun i LaTeX/PDF-eksporten og kun med beskæring. Kræver crop-pakken i din TeX-installation; en browserudskrift af HTML-eksporten tilføjer dem ikke.',
   'Deze paginaopmaak staat in dit document':
       'Denne sideopsætning er gemt i dette dokument',
   'Deze paginaopmaak komt uit je instellingen':

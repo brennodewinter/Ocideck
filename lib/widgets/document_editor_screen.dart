@@ -330,6 +330,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       chapterPageBreak: settings.documentChapterPageBreak,
       // De export volgt dezelfde volgorde als het scherm: draagt het document
       // zelf een paginaopmaak, dan geldt die.
+      cropMarks: settings.documentCropMarks,
       pageSize: exportSetup.size!,
       pageMargins: exportSetup.margins!,
       outputPath: outputPath,

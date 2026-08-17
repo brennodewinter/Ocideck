@@ -98,6 +98,18 @@ class AppSettings {
   /// het raakt de `.md` niet.
   final bool documentChapterPageBreak;
 
+  /// Snijtekens rond het snijformaat in de LaTeX/PDF-export.
+  ///
+  /// Bewust hier en niet in [PageMargins]: die reist sinds de paginaopmaak per
+  /// document mee in het `.md`, en voor snijtekens bestaat geen vocabulaire dat
+  /// een andere lezer uitvoert. Ze zijn bovendien een keuze per drukgang, niet
+  /// een eigenschap van de tekst.
+  ///
+  /// Werkt alleen samen met een afloop, en alleen in het LaTeX-pad: geen
+  /// browser kent `marks` uit CSS Paged Media, dus de HTML-export belooft ze
+  /// niet.
+  final bool documentCropMarks;
+
   /// Documentmodus: maximale schrijfbreedte van de visuele editor in px, of
   /// `null` voor volledige breedte. Standaard 1100 — breder dan de vorige
   /// vaste 860, zodat de editor meer van het scherm gebruikt. De gebruiker kan
@@ -314,6 +326,7 @@ class AppSettings {
     this.documentDefaultStyle,
     this.documentStyleEnforced = false,
     this.documentChapterPageBreak = false,
+    this.documentCropMarks = false,
     this.documentEditorMaxWidth = 1100,
     this.documentPageSize = PageSizeSpec.a4,
     this.documentPageMargins = const PageMargins(),
@@ -408,6 +421,7 @@ class AppSettings {
     String? documentDefaultStyle,
     bool? documentStyleEnforced,
     bool? documentChapterPageBreak,
+    bool? documentCropMarks,
     double? documentEditorMaxWidth,
     PageSizeSpec? documentPageSize,
     PageMargins? documentPageMargins,
@@ -480,6 +494,7 @@ class AppSettings {
           documentStyleEnforced ?? this.documentStyleEnforced,
       documentChapterPageBreak:
           documentChapterPageBreak ?? this.documentChapterPageBreak,
+      documentCropMarks: documentCropMarks ?? this.documentCropMarks,
       documentEditorMaxWidth: clearDocumentEditorMaxWidth
           ? null
           : (documentEditorMaxWidth ?? this.documentEditorMaxWidth),

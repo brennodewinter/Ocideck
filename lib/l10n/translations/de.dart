@@ -675,6 +675,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Snijtekens': 'Schnittmarken',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Nur im LaTeX/PDF-Export und nur mit Anschnitt. Erfordert das Paket crop in der TeX-Installation; ein Browser-Ausdruck des HTML-Exports setzt sie nicht.',
   'Deze paginaopmaak staat in dit document':
       'Diese Seiteneinrichtung steht in diesem Dokument',
   'Deze paginaopmaak komt uit je instellingen':
