@@ -705,10 +705,10 @@ const _dutchSourceTlh = {
   'klik': '\'uy',
   'cijfers': 'mI\'mey',
   'Klik of druk op H / Esc om te sluiten': 'SoQmeH H / Esc yI\'uy pagh yISom',
-  'Naar slidenummer': 'slide mI\'Daq jaH',
-  'Eerste · laatste slide': 'wa\'DIch · Qav slide',
-  'Slide-overzicht': 'slide Hoch',
-  'Slide-overzicht (pijltjes + Enter)': 'slide Hoch (naQ + Enter)',
+  'Naar slidenummer': '\'echletHom mI\'Daq jaH',
+  'Eerste · laatste slide': 'wa\'DIch · Qav \'echletHom',
+  'Slide-overzicht': '\'echletHom Hoch',
+  'Slide-overzicht (pijltjes + Enter)': '\'echletHom Hoch (naQ + Enter)',
   'Presenter view (notities, klok)': 'jatlhwI\' legh (ghItlh, tlhup)',
   'Scherm wisselen (meerdere schermen)': 'HaSta choH (law\' HaSta)',
   'Zwart · wit scherm': 'qIj · chIS HaSta',
@@ -717,16 +717,17 @@ const _dutchSourceTlh = {
   'Deze legenda': 'HeS vam',
   'Terug / afsluiten': 'chegh / mev',
   'Tijd resetten (R)': 'poH yIchoH (R)',
-  'HUIDIGE SLIDE': 'DAH slide',
+  'HUIDIGE SLIDE': 'DAH \'echletHom',
   'VOLGENDE': 'veb',
   'NOTITIES': 'ghItlhmey',
   'Einde van de presentatie': 'cha\'nav rInmoH',
   'Verstreken': 'qaSpu\'',
   'Klok': 'tlhup',
-  'Geen notities voor deze slide.': 'slide vam ghItlh tu\'lu\'be\'.',
+  'Geen notities voor deze slide.': '\'echletHomvam ghItlh tu\'lu\'be\'.',
   'Mijn notities': 'ghItlhmeywIj',
   'Gebruikersnotities': 'lo\'wI\' ghItlhmey',
-  'Gebruikersnotities voor deze slide...': 'slide vam lo\'wI\' ghItlhmey...',
+  'Gebruikersnotities voor deze slide...':
+      '\'echletHomvam lo\'wI\' ghItlhmey...',
   'Notities weggooien': 'ghItlhmey woD',
   'Notities voor de ontvanger tijdens een cursus':
       'Qaghmey ghojmoH poH ghItlhmey lo\'wI\'vaD',
@@ -740,16 +741,16 @@ const _dutchSourceTlh = {
   'pijltjes + Enter of klik om te springen': 'naQ + Enter pagh \'uy vaj Sup',
   'Afsluiten (Escape)': 'mev (Escape)',
   'Sluiten (G of Esc)': 'Som (G pagh Esc)',
-  'Slide renderen…': 'slide chenmoH…',
-  'Slide gekopieerd naar klembord.': 'slide velneH velDaq boS.',
+  'Slide renderen…': '\'echletHom chenmoH…',
+  'Slide gekopieerd naar klembord.': '\'echletHom velneH velDaq boS.',
   'Kopiëren mislukt.': 'boSlaHbe\'.',
   'Geen ander deck open. Open eerst een ander tabblad.':
       'latlh deck poSmoHlu\'pu\'be\'. wa\'DIch latlh raStaghqut yIpoSmoH.',
-  '1 slide kopiëren naar…': '1 slide boS Daq…',
-  'slides kopiëren naar…': 'slide boS Daq…',
-  'slide(s) gekopieerd naar': 'slide(mey) boSlu\' Daq',
-  '1 slide geïmporteerd.': '1 slide \'elmoHlu\'.',
-  'slides geïmporteerd.': 'slide \'elmoHlu\'.',
+  '1 slide kopiëren naar…': '1 \'echletHom boS Daq…',
+  'slides kopiëren naar…': '\'echletHom boS Daq…',
+  'slide(s) gekopieerd naar': '\'echletHom(mey) boSlu\' Daq',
+  '1 slide geïmporteerd.': '1 \'echletHom \'elmoHlu\'.',
+  'slides geïmporteerd.': '\'echletHom \'elmoHlu\'.',
   'Export wordt voorbereid…': 'tlha\'moHmeH vum…',
   'tip(s)': 'qeS(mey)',
   'fout(en)': 'Qagh(mey)',
@@ -761,16 +762,16 @@ const _dutchSourceTlh = {
   'Fouten': 'Qaghmey',
   'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
       'qeS: \'elpu\'ghach ghojmeH latlh ghItlh / Q\'ang yIchel',
-  'Zoek in slides…': 'slidemeyDaq yISam…',
-  'Geen slides met': 'slide tu\'be\'lu\' ghaj',
+  'Zoek in slides…': '\'echletHommeyDaq yISam…',
+  'Geen slides met': '\'echletHom tu\'be\'lu\' ghaj',
   'SLIDES': 'SLIDEmey',
   'Geen afbeelding op het klembord gevonden.':
       'velDaq nagh mIllogh tu\'be\'lu\'.',
   'Afbeelding plakken': 'mIllogh lan',
-  'Slide toevoegen': 'slide chel',
-  'Slide plakken': 'slide lan',
-  '1 slide overgeslagen': '1 slide juSlu\'',
-  'slides overgeslagen': 'slidemey juSlu\'',
+  'Slide toevoegen': '\'echletHom chel',
+  'Slide plakken': '\'echletHom lan',
+  '1 slide overgeslagen': '1 \'echletHom juSlu\'',
+  'slides overgeslagen': '\'echletHommey juSlu\'',
   'Alles tonen': 'Hoch cha\'',
   'geselecteerd': 'wIvlu\'',
   'Kopiëren naar ander deck': 'latlh deckDaq boS',
@@ -829,7 +830,7 @@ const _dutchSourceTlh = {
   'Presenteren': 'jatlhtaH',
   'Tijden-overzicht tonen na afloop': 'rInpa\' poHmey Hoch cha\'',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
-      'reH juvlu\' slide poH; cha\'nav vam rInpu\'DI\' Hoch nargh\'a\' juvchugh neH.',
+      'reH juvlu\' \'echletHom poH; cha\'nav vam rInpu\'DI\' Hoch nargh\'a\' juvchugh neH.',
   'Onveilige presentatie geblokkeerd': 'Qobbogh cha\'nav botlu\'',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'cha\'nav vam poSmoHbe\'lu\'. ngoq vumnISbogh De\' ghaj De\', \'ej cha\'nav De\' neH ghaj — pagh vumbogh.',
@@ -863,7 +864,7 @@ const _dutchSourceTlh = {
   'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
       'ghItlh Sar: \'elpu\'ghachmey, mu\'mey, mu\'meymey, tlhoy\'mey, ngoq je',
   'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
-      'segh, slidemey, bIngHom, noHmey ghItlhmey je mIllogh Dungdaq nuqmey, WCAG AA juvlu\' (4,5:1 ghItlhvaD, 3:1 ghItlh tInvaD).',
+      'segh, \'echletHommey, bIngHom, noHmey ghItlhmey je mIllogh Dungdaq nuqmey, WCAG AA juvlu\' (4,5:1 ghItlhvaD, 3:1 ghItlh tInvaD).',
   'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
       'Hoch mIllogh, sech, video, QoQ je QIj poQ HaStamey chov QIjmey je.',
   'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
@@ -898,7 +899,7 @@ const _dutchSourceTlh = {
       'De\' Daq pagh URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'De\' wIv',
   'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
-      'slide vam \'ay\' cha\'meyDaq yIchu\' \'ej Daq lI\'moHnISbogh yIpe\': cha\'DIch \'ay\' chu\' slideDaq jaH.',
+      '\'echletHomvam \'ay\' cha\'meyDaq yIchu\' \'ej Daq lI\'moHnISbogh yIpe\': cha\'DIch \'ay\' chu\' \'echletHomDaq jaH.',
   'Begin (sec)': 'taghghach (lup)',
   'Einde (sec)': 'rInghach (lup)',
   'einde': 'rIn',
@@ -985,7 +986,7 @@ const _dutchSourceTlh = {
       'HaSta buy\' rur mIllogh cha\'lu\' bIng. per jotHa\' pagh pIm poQqu\'DI\' \'echmoH yIlo\'.',
   'Cockpit-kleurschema': 'Dujqoq rItlh pat',
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
-      'Dujqoq juvwI\'mey Segh rItlhmey. pongbogh pImmey yIchenmoH; wIvlu\' Segh Hoch Dujqoq slidemeyvaD lo\'.',
+      'Dujqoq juvwI\'mey Segh rItlhmey. pongbogh pImmey yIchenmoH; wIvlu\' Segh Hoch Dujqoq \'echletHommeyvaD lo\'.',
   'Standaard': 'motlh',
   'Kleurschema verwijderen': 'rItlh pat teq',
   'Schemanaam': 'pat pong',
@@ -999,16 +1000,16 @@ const _dutchSourceTlh = {
   'Grond (horizon)': 'yav (SorHom)',
   'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
       'Segh rItlhmey tlha\' Dujqoq rItlh pat; DuHIvmeymey → Dujqoq vaj yIchoH pagh pImmey yIchenmoH.',
-  'Veel bullets op deze slide': 'slide vam \'elpu\'ghachmey law\'',
+  'Veel bullets op deze slide': '\'echletHomvam \'elpu\'ghachmey law\'',
   'bullets': '\'elpu\'ghachmey',
   'Overweeg de inhoud te splitsen.': 'De\' lI\'moHmeH yIqel.',
-  'Erg veel bullets op deze slide': 'slide vam \'elpu\'ghachmey law\'qu\'',
+  'Erg veel bullets op deze slide': '\'echletHomvam \'elpu\'ghachmey law\'qu\'',
   'Splits deze inhoud over meerdere slides.':
-      'De\' vam slidemey law\'Daq yIlI\'moH.',
+      'De\' vam \'echletHommey law\'Daq yIlI\'moH.',
   'Veel woorden in bullets': '\'elpu\'ghachmeyDaq mu\'mey law\'',
   'woorden': 'mu\'mey',
   'Maak bullets korter of splits de slide.':
-      '\'elpu\'ghachmey yImachHa\'moH pagh slide yIlI\'moH.',
+      '\'elpu\'ghachmey yImachHa\'moH pagh \'echletHom yIlI\'moH.',
   'Erg veel woorden in bullets': '\'elpu\'ghachmeyDaq mu\'mey law\'qu\'',
   'Gemiddeld lange bullets': 'motlh \'elpu\'ghachmey tIn',
   'woorden per bullet': 'bI\'reSDaq mu\'mey',
@@ -2144,12 +2145,12 @@ const _dutchSourceAddTlh = <String, String>{
   'beheersmaatregelen geladen': 'Hubmey Suqlu\'pu\'',
   'geïmplementeerd': 'rInpu\'',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
-      'chu\' module. De\'wI\' mIw, slide patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
+      'chu\' module. De\'wI\' mIw, \'echletHom patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
   'SIPOC-procesoverzicht': 'SIPOC ghu\'vam',
   'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
       'ghu\'vam \'ej ghaytanHa\'ghachmey SIPOC Daqel: lIlwI\', \'el, wa\'DIch mIw, mej, je ghotpu\'.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
-      'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template slide De\' patmey je lo\'laHmeH extension chu\'.',
+      'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template \'echletHom De\' patmey je lo\'laHmeH extension chu\'.',
   'Videovergaderingen': 'HaSta qepmey',
   'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
       'HaSta qepmeyDaq yIjeS \'ej OciDeckvo\' yISoQmoH; SoQmoHwI\' Da\'armey Daghaj. HaSta cha\'wI\'pu\' Slide retlhDaq, latlh ghItlh lojmItDaq ghobe\'. Bring-your-own-server (Jitsi Matrix je); pagh polHa\' OciDeck \'ej ja\'chuqmey De\' IAvo\' Hoch chel. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
@@ -3071,8 +3072,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Presentaties geïmporteerd.': 'presentationmey kII\'lu\'pu\'.',
   'Niet meer tonen': 'yIcha\'qa\'Qo\'',
   'met verlies': 'chIllu\'pu\'',
-  'dia’s': 'slidemey',
-  'dia’s vragen aandacht': 'slidemey buSnISlu\'',
+  'dia’s': '\'echletHommey',
+  'dia’s vragen aandacht': '\'echletHommey buSnISlu\'',
   'Doelmap': 'ghoSmeH Daq',
   'Nog geen doelmap gekozen': 'ghoSmeH Daq wIvlu\'be\'',
   'Uit de rij halen': 'tlheghvo\' yIteq',
@@ -3084,7 +3085,7 @@ const _dutchSourceAddTlh = <String, String>{
   'mislukt': 'lujpu\'',
   'niet meer aan de beurt gekomen': 'vangbe\'lu\'pu\'',
   'Importeren is best-effort en geen één-op-één-kopie: OciDeck heeft een eenvoudiger diamodel dan PowerPoint. Wat niet past, komt op een “niet overgenomen”-notitie te staan; controleer het resultaat na afloop.':
-      'kII\'ghach nID neH; wa\' \'ej wa\' velqa\' \'oHbe\'. OciDeck slide ngoq ngeD law\' PowerPoint slide ngoq ngeD puS. luchuqbe\'bogh Doch “tlhapbe\'lu\'” QInDaq lanlu\'; Qav De\' yInuD.',
+      'kII\'ghach nID neH; wa\' \'ej wa\' velqa\' \'oHbe\'. OciDeck \'echletHom ngoq ngeD law\' PowerPoint \'echletHom ngoq ngeD puS. luchuqbe\'bogh Doch “tlhapbe\'lu\'” QInDaq lanlu\'; Qav De\' yInuD.',
   'Tip: bewaar geïmporteerde presentaties in een aparte map. De kwaliteit verschilt per bron, en zo blijft geïmporteerd materiaal gescheiden van uw eigen werk.':
       'qeS: kII\'lu\'pu\'bogh presentationmey Daq pIm yIpol. Segh pIm nIvghach, vaj kII\'lu\'pu\'bogh De\' Qu\'lIjvo\' pIm.',
   'Elk bestand wordt apart omgezet en als eigen presentatie in de doelmap opgeslagen. Gaat er één mis, dan loopt de rij gewoon door.':
@@ -3395,18 +3396,18 @@ const _dutchSourceAddTlh = <String, String>{
   'Achtergehouden': '\'angbe\'lu\'',
   'Achtergehouden: strenger geclassificeerd dan de presentatie':
       '\'angbe\'lu\': \'echletHom patlh jen law\' cha\'nob patlh jen puS',
-  '1 slide achtergehouden door haar TLP': '1 slide \'angbe\'lu\' TLPmo\'',
-  'slides achtergehouden door hun TLP': 'slidemey \'angbe\'lu\' TLPmo\'',
+  '1 slide achtergehouden door haar TLP': '1 \'echletHom \'angbe\'lu\' TLPmo\'',
+  'slides achtergehouden door hun TLP': '\'echletHommey \'angbe\'lu\' TLPmo\'',
   'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
-      'presentDI\', boSDI\' je ngaSwI\'Daq slidemeyvam tlhapbe\'lu\'. chaH tlhapmeH Presentatie-info-Daq cha\'nob TLP patlh yIghurmoH.',
+      'presentDI\', boSDI\' je ngaSwI\'Daq \'echletHommeyvam tlhapbe\'lu\'. chaH tlhapmeH Presentatie-info-Daq cha\'nob TLP patlh yIghurmoH.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
-      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+      'Hoch \'echletHommey \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
   'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
-      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+      'Hoch \'echletHommey \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
   'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
-      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+      'Hoch \'echletHommey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
   'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
-      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+      'Hoch \'echletHommey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
       'ta\'nom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
@@ -4311,11 +4312,11 @@ const _dutchSourceAddTlh = <String, String>{
   'Bewijs': '\'ol',
   'Screenshot toevoegen': 'HaSta nabmey chel',
   'Video toevoegen': 'video chel',
-  'Bewerk deze slide': 'vam slide choH',
+  'Bewerk deze slide': '\'echletHomvam choH',
   'Bewijs verwijderen': '\'ol teq',
   '(nog leeg)': '(chIm)',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      '\'ol \'e\' DachelmeH HaSta nabmey pagh videos yIchel. finding tlha\' \'ol Hoch slide mojpu\' \'ej export-Daq chel.',
+      '\'ol \'e\' DachelmeH HaSta nabmey pagh videos yIchel. finding tlha\' \'ol Hoch \'echletHom mojpu\' \'ej export-Daq chel.',
   'Uitvoering testen conform standaard': 'test poQlu\'bogh',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',
