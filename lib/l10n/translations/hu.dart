@@ -2674,7 +2674,7 @@ const _dutchSourceAddHu = <String, String>{
   'Bestand kon niet worden gelezen': 'A fájlt nem sikerült beolvasni',
   'Aanbevolen': 'Ajánlott',
   'Alleen wat nodig is': 'Csak ami szükséges',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Minden ezen az eszközön marad',
   'Als nieuw rapport maken': 'Hozzon létre új jelentésként',
   'Andere map kiezen': 'Válasszon másik mappát',
   'Bekijk importverslag': 'Importálási jelentés megtekintése',
@@ -4396,39 +4396,39 @@ const _dutchSourceAddHu = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'LibrePlan-csatoló',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'A LibrePlan-csatoló csak az asztali változatban érhető el.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'A LibrePlan-csatoló nem kötelező, és alapértelmezés szerint ki van kapcsolva. Semmi nem töltődik le addig, amíg be nem kapcsolja, és maga be nem állít egy kiszolgálót. Csak olvasható: a csatoló semmit nem ír vissza a LibrePlanbe. A jelszó az operációs rendszer kulcstartójában tárolódik, nem a deckben.',
+  'Opgeslagen in de sleutelhanger': 'A kulcstartóban tárolva',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Csak a saját hálózat (LAN) kiszolgálóihoz. Engedélyezi a sima HTTP-t, és átengedi a privát címeket a NetGuardon. Kikapcsolva: HTTPS kötelező.',
+  'Verbinding succesvol.': 'A kapcsolat sikeres.',
+  'Onverwachte fout.': 'Váratlan hiba.',
+  'Importeren uit LibrePlan': 'Importálás LibrePlanből',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Válassza ki, mely diákat szeretné lehívni a LibrePlan-projektből. Az import csak olvasható, és semmit nem ír vissza.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Kritikus út (folyamat)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Lehívás a LibrePlanből…',
+  'Geen slides gevonden.': 'Nem található dia.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Állítsa be a kiszolgálót a LibrePlan-csatoló lapon. Amíg ott nincs semmi, nem történik semmi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Importáljon egy projektpillanatképet egy LibrePlan-példányból diákként: Gantt, WBS, erőforrás-terhelés, munkaidő-kimutatás és más. Csak olvasható, kérésre — semmi nem megy ki, amíg be nem állít egy kiszolgálót, és el nem indít egy importot.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Adja meg a kiszolgáló URL-jét és a felhasználónevet.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

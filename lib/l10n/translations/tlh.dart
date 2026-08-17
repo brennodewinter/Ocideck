@@ -2961,9 +2961,9 @@ const _dutchSourceAddTlh = <String, String>{
   'IWA-tekst salvage…': 'IWA mu\'mey toDlu\'…',
   'Keynote IWA-intern': 'Keynote IWA qoD',
   'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA qoD (~{n} \'echletHom)',
-  'Keynote tabel footer': 'Keynote tabel footer',
-  'Keynote tabel header': 'Keynote tabel header',
-  'Keynote tabel headerkolommen': 'Keynote tabel header columns',
+  'Keynote tabel footer': 'Keynote romuS bIng',
+  'Keynote tabel header': 'Keynote romuS nach',
+  'Keynote tabel headerkolommen': 'Keynote romuS nach \'ochmey',
   'Klaar.': 'rIn.',
   'Koppeling “{tekst}”': 'rar "{tekst}"',
   'Meerdere audio': 'wab law\'',
@@ -4325,7 +4325,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'LibrePlan rarwI\'',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
       'desktop patDaq neH lo\'lu\'laH LibrePlan rarwI\'.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
@@ -4333,9 +4333,9 @@ const _dutchSourceAddTlh = <String, String>{
   'Opgeslagen in de sleutelhanger': 'ghewmey velDaq pollu\'',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
       'qoD net (LAN) De\'wI\'meyvaD neH. plain-HTTP chaw\' \'ej NetGuard vegh pegh Daqmey chaw\'. chu\'Ha\'lu\'DI\': HTTPS poQlu\'.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+  'Verbinding succesvol.': 'rarlu\'pu\'.',
+  'Onverwachte fout.': 'Qagh pIHbe\'lu\'bogh.',
+  'Importeren uit LibrePlan': 'LibrePlanvo\' yIkII\'',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
       'LibrePlan Qu\'vo\' \'echletHommey DaSuqbogh yIwIv. laD neH kII\'ghach; pagh qonqa\'lu\'.',
@@ -4343,11 +4343,11 @@ const _dutchSourceAddTlh = <String, String>{
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'He Qob (mej)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'jo \'ugh (De\'wI\'ghom)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
+  'Ophalen uit LibrePlan…': 'LibrePlanvo\' Suqlu\'taH…',
   'Geen slides gevonden.': '\'echletHommey tu\'lu\'be\'.',
   "dia's geïmporteerd.": '\'echletHommey kII\'lu\'pu\'.',
   'Import mislukt: ': 'Import mislukt: ',

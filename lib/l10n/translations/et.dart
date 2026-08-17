@@ -2657,7 +2657,7 @@ const _dutchSourceAddEt = <String, String>{
   'Bestand kon niet worden gelezen': 'Faili ei saanud lugeda',
   'Aanbevolen': 'Soovitatav',
   'Alleen wat nodig is': 'Ainult seda, mis on vajalik',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Kõik jääb sellesse seadmesse',
   'Als nieuw rapport maken': 'Loo uue aruandena',
   'Andere map kiezen': 'Valige teine ​​kaust',
   'Bekijk importverslag': 'Kuva impordiaruanne',
@@ -4373,39 +4373,39 @@ const _dutchSourceAddEt = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liiga väike kontrast taustaga — võib olla loetamatu.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'LibrePlani konnektor',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'LibrePlani konnektor on saadaval ainult töölauaversioonis.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'LibrePlani konnektor on valikuline ja vaikimisi välja lülitatud. Midagi ei tõmmata enne, kui te selle sisse lülitate ja ise serveri seadistate. Ainult lugemiseks: konnektor ei kirjuta midagi LibrePlani tagasi. Parool salvestatakse operatsioonisüsteemi võtmehoidlasse, mitte decki.',
+  'Opgeslagen in de sleutelhanger': 'Salvestatud võtmehoidlasse',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Ainult oma võrgu (LAN) serverite jaoks. Lubab lihtsa HTTP ja laseb privaataadressid NetGuardist läbi. Välja lülitatud: HTTPS on kohustuslik.',
+  'Verbinding succesvol.': 'Ühendus õnnestus.',
+  'Onverwachte fout.': 'Ootamatu viga.',
+  'Importeren uit LibrePlan': 'Impordi LibrePlanist',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Valige, millised slaidid LibrePlani projektist tuua. Import on ainult lugemiseks ega kirjuta midagi tagasi.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Kriitiline tee (voog)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Toomine LibrePlanist…',
+  'Geen slides gevonden.': 'Slaide ei leitud.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Seadistage server vahekaardil LibrePlani konnektor. Kuni seal pole midagi, ei juhtu midagi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Importige projekti hetktõmmis LibrePlani eksemplarist slaididena: Gantt, WBS, ressursikoormus, tööajatabel ja muud. Ainult lugemiseks, nõudmisel — midagi ei lähe välja enne, kui seadistate serveri ja käivitate impordi.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Sisestage serveri URL ja kasutajanimi.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

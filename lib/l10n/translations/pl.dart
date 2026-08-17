@@ -4406,39 +4406,39 @@ const _dutchSourceAddPl = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'Łącznik LibrePlan',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'Łącznik LibrePlan jest dostępny tylko w wersji desktopowej.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'Łącznik LibrePlan jest opcjonalny i domyślnie wyłączony. Nic nie jest pobierane, dopóki go nie włączysz i sam nie skonfigurujesz serwera. Tylko do odczytu: łącznik niczego nie zapisuje z powrotem w LibrePlan. Hasło jest przechowywane w menedżerze haseł systemu, nie w decku.',
+  'Opgeslagen in de sleutelhanger': 'Zapisane w menedżerze haseł',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Tylko dla serwerów we własnej sieci (LAN). Zezwala na zwykły HTTP i przepuszcza adresy prywatne przez NetGuard. Wyłączone: wymagany HTTPS.',
+  'Verbinding succesvol.': 'Połączenie udane.',
+  'Onverwachte fout.': 'Nieoczekiwany błąd.',
+  'Importeren uit LibrePlan': 'Importuj z LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Wybierz slajdy, które chcesz pobrać z projektu LibrePlan. Import jest tylko do odczytu i niczego nie zapisuje z powrotem.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Ścieżka krytyczna (przepływ)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Pobieranie z LibrePlan…',
+  'Geen slides gevonden.': 'Nie znaleziono slajdów.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Skonfiguruj serwer na karcie Łącznik LibrePlan. Dopóki nic tam nie ma, nic się nie dzieje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Zaimportuj migawkę projektu z instancji LibrePlan jako slajdy: Gantt, WBS, obciążenie zasobów, karta pracy i więcej. Tylko do odczytu, na żądanie — nic nie wychodzi na zewnątrz, dopóki nie skonfigurujesz serwera i nie uruchomisz importu.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Podaj adres URL serwera i nazwę użytkownika.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

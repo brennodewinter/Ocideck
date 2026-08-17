@@ -2678,7 +2678,7 @@ const _dutchSourceAddLt = <String, String>{
   'Bestand kon niet worden gelezen': 'Nepavyko perskaityti failo',
   'Aanbevolen': 'Rekomenduojama',
   'Alleen wat nodig is': 'Tik tai, kas būtina',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Viskas lieka šiame įrenginyje',
   'Als nieuw rapport maken': 'Sukurti kaip naują ataskaitą',
   'Andere map kiezen': 'Pasirinkite kitą aplanką',
   'Bekijk importverslag': 'Peržiūrėti importavimo ataskaitą',
@@ -4398,39 +4398,39 @@ const _dutchSourceAddLt = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Per mažas kontrastas su fonu — gali būti neįskaitoma.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'LibrePlan jungtis',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'LibrePlan jungtis pasiekiama tik darbalaukio versijoje.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'LibrePlan jungtis nėra privaloma ir pagal numatytuosius nustatymus išjungta. Nieko neatsiunčiama, kol jos neįjungiate ir patys nesukonfigūruojate serverio. Tik skaitymui: jungtis nieko nerašo atgal į LibrePlan. Slaptažodis saugomas operacinės sistemos raktų saugykloje, o ne decke.',
+  'Opgeslagen in de sleutelhanger': 'Įrašyta raktų saugykloje',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Tik serveriams savame tinkle (LAN). Leidžia paprastą HTTP ir praleidžia privačius adresus pro NetGuard. Išjungta: būtinas HTTPS.',
+  'Verbinding succesvol.': 'Prisijungta sėkmingai.',
+  'Onverwachte fout.': 'Netikėta klaida.',
+  'Importeren uit LibrePlan': 'Importuoti iš LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Pasirinkite, kurias skaidres paimti iš LibrePlan projekto. Importas yra tik skaitymui ir nieko nerašo atgal.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Kritinis kelias (srautas)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Gaunama iš LibrePlan…',
+  'Geen slides gevonden.': 'Skaidrių nerasta.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Sukonfigūruokite serverį kortelėje LibrePlan jungtis. Kol ten nieko nėra, nieko ir nevyksta.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Importuokite projekto momentinę kopiją iš LibrePlan egzemplioriaus kaip skaidres: Gantt, WBS, išteklių apkrova, darbo laiko apskaita ir daugiau. Tik skaitymui, pagal pageidavimą — niekas neišeina į išorę, kol nesukonfigūruojate serverio ir nepaleidžiate importo.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Įveskite serverio URL ir naudotojo vardą.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
