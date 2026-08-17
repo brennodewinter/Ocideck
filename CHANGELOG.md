@@ -1409,6 +1409,25 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **de taaltabellen worden nu ónderling vergeleken.** Twee vertaalpoorten
+  redeneerden allebei vanuit het gebruik in `lib/`: `l10n-check` eist een
+  vertaling voor elke `d('…')` die daar staat, en de wezenpoort vraagt of een
+  sleutel nog wordt opgehaald. Een sleutel die wél in de tabellen stond maar
+  even nergens werd opgevraagd viel door beide mazen — hij mocht in de ene taal
+  bestaan en in de andere ontbreken zonder dat iets klaagde. Zo misten Duits,
+  Spaans, Frans, Fries, Italiaans en Papiaments al een tijd vier bronsleutels
+  ('Subtitel', 'Kies een video', 'Kies een audiobestand' en 'Platte tekst'):
+  wie de app in die talen gebruikte kreeg de mediakiezer en de taalkeuze van
+  het codeblok in het Engels. Die vier zijn vertaald in de stem die de
+  zusterregels er al hadden. `make check-l10n-parity` vergelijkt voortaan de 32
+  tabellen met elkaar in plaats van met `lib/`: elke sleutel die in één taal
+  bestaat hoort in álle talen te bestaan. Het is een exacte
+  verzamelingsvergelijking — geen tekstheuristiek, geen basislijn — en hij
+  draait daarom mee in `make check` en niet pas in `check-full`. Bij invoering
+  bleek er ook 30 regels stof te liggen die geen mens ooit te zien kreeg: 28
+  identiteitsregels van de LibrePlan-connector in de Nederlandse `t()`-tabel en
+  twee bronsleutels die maar in zes talen stonden en nergens werden opgehaald.
+  Die zijn opgeruimd in plaats van in de resterende talen nagebouwd. (#1523)
 - **de paginaopmaak kan met het document meereizen.** Papiermaat, marges en een
   drukkersafloop stonden alleen in de instellingen. Dat betekende dat een `.md`
   die je aan een collega of aan de drukker gaf op hún vel uitkwam, en dat een
