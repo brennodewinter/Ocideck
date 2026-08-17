@@ -19,17 +19,33 @@ import 'dart:math' as math;
 ///   het tekstvlak) begint op een verse pagina en loopt door over zoveel
 ///   pagina's als het nodig heeft. Daar is snijden onvermijdelijk;
 /// * na zo'n blok begint het volgende blok weer op een verse pagina, zodat een
-///   losse regel niet onder een half doorgesneden tabel plakt.
+///   losse regel niet onder een half doorgesneden tabel plakt;
+/// * en een blok waarvan de index in [forcedBreakBefore] staat begint áltijd op
+///   een verse pagina, hoeveel ruimte er ook over was.
+///
+/// Dat laatste is geen luxe maar het formaat: een `---` in de body ís een
+/// pagina-einde, en de instelling "nieuw hoofdstuk op een nieuwe pagina" doet
+/// hetzelfde voor elke `H1` (FILE_FORMAT.md §14.6). De HTML- en LaTeX-export
+/// honoreren die allebei; deed de weergave dat niet, dan zou het scherm iets
+/// anders zeggen dan de druk.
 List<double> documentPageOffsets({
   required List<double> blockHeights,
   required double pageHeight,
+  Set<int> forcedBreakBefore = const {},
 }) {
   if (pageHeight <= 0) return const [0];
   final offsets = <double>[0];
   var pageTop = 0.0;
   var y = 0.0;
 
-  for (final height in blockHeights) {
+  for (var index = 0; index < blockHeights.length; index++) {
+    final height = blockHeights[index];
+    // Een geforceerd einde telt alleen wanneer er al iets op het vel staat:
+    // een breuk bovenaan een verse pagina zou een leeg vel opleveren.
+    if (forcedBreakBefore.contains(index) && y > pageTop) {
+      pageTop = y;
+      offsets.add(pageTop);
+    }
     if (height > pageHeight) {
       // Past op geen enkele pagina: verse pagina, en dan zoveel vensters als
       // het blok hoog is.
@@ -66,7 +82,9 @@ List<double> documentPageOffsets({
 int documentPageCount({
   required List<double> blockHeights,
   required double pageHeight,
+  Set<int> forcedBreakBefore = const {},
 }) => documentPageOffsets(
   blockHeights: blockHeights,
   pageHeight: pageHeight,
+  forcedBreakBefore: forcedBreakBefore,
 ).length;

@@ -156,6 +156,29 @@ class DocumentMarkdownView extends StatelessWidget {
   static List<String> blockTexts(String markdown) =>
       _parse(markdown).map((b) => b.searchText).toList(growable: false);
 
+  /// De blokken die op een verse pagina horen te beginnen, als index in
+  /// dezelfde lijst als [blockTexts].
+  ///
+  /// Twee soorten, allebei uit het formaat en allebei gehonoreerd door de HTML-
+  /// en LaTeX-export (FILE_FORMAT.md §14.6): een `---` in de body ís een
+  /// pagina-einde, en met [chapterBreak] begint elk hoofdstuk (`H1`) op een
+  /// nieuw vel. Het eerste blok telt nooit mee — een breuk vóór de eerste regel
+  /// zou een leeg vel opleveren.
+  static Set<int> forcedPageBreaks(
+    String markdown, {
+    bool chapterBreak = false,
+  }) {
+    final blocks = _parse(markdown);
+    return <int>{
+      for (var i = 1; i < blocks.length; i++)
+        if (blocks[i].kind == _Kind.rule ||
+            (chapterBreak &&
+                blocks[i].kind == _Kind.heading &&
+                blocks[i].level == 1))
+          i,
+    };
+  }
+
   /// The absolute block index (into the same block list [build] renders) of the
   /// first heading whose [headingSlug] equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
@@ -726,69 +749,4 @@ class DocumentMarkdownView extends StatelessWidget {
     onTapLink: onTapLink,
     textAlign: textAlign,
   );
-
-  // ── Line classification helpers ───────────────────────────────────────────
-
-  static String? _fenceMarker(String trimmed) {
-    if (trimmed.startsWith('```')) return '```';
-    if (trimmed.startsWith('~~~')) return '~~~';
-    return null;
-  }
-
-  static int _headingLevel(String trimmed) {
-    var n = 0;
-    while (n < trimmed.length && trimmed[n] == '#') {
-      n++;
-    }
-    // A real ATX heading needs a space after the hashes and at most six.
-    if (n >= 1 && n <= 6 && n < trimmed.length && trimmed[n] == ' ') return n;
-    return 0;
-  }
-
-  static bool _isHorizontalRule(String trimmed) {
-    return RegExp(
-      r'^(-{3,}|\*{3,}|_{3,})$',
-    ).hasMatch(trimmed.replaceAll(' ', ''));
-  }
-
-  static _ListLine? _listItem(String line) {
-    final m = RegExp(r'^(\s*)([-*+]|\d+\.)\s+(.*)$').firstMatch(line);
-    if (m == null) return null;
-    final indent = m.group(1)!.length;
-    final bullet = m.group(2)!;
-    final ordered = bullet.endsWith('.');
-    var text = m.group(3)!;
-
-    // GFM task item: the content starts with `[ ]` or `[x]`. Strip the marker
-    // so it becomes a rendered box instead of literal brackets in the text.
-    // Without this the reader showed documentation checklists as "• [ ] item".
-    bool? checked;
-    final task = RegExp(r'^\[([ xX])\]\s+(.*)$').firstMatch(text);
-    if (task != null) {
-      checked = task.group(1)! != ' ';
-      text = task.group(2)!;
-    }
-
-    return _ListLine(
-      text: text,
-      ordered: ordered,
-      number: ordered
-          ? int.tryParse(bullet.substring(0, bullet.length - 1)) ?? 1
-          : 0,
-      depth: indent ~/ 2,
-      checked: checked,
-    );
-  }
-
-  static bool _isParagraphLine(String line) {
-    final trimmed = line.trim();
-    if (trimmed.isEmpty) return false;
-    if (_headingLevel(trimmed) > 0) return false;
-    if (_fenceMarker(trimmed) != null) return false;
-    if (_isHorizontalRule(trimmed)) return false;
-    if (trimmed.startsWith('>')) return false;
-    if (_listItem(line) != null) return false;
-    if (isMarkdownTableLine(line)) return false;
-    return true;
-  }
 }
