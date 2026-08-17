@@ -72,6 +72,25 @@ void main() {
       );
     });
 
+    testWidgets('in de lezer blijft een --- gewoon een streep', (tester) async {
+      // De keerzijde van `hideRules`, en die stond nergens vastgelegd: zet
+      // iemand die vlag ooit standaard aan, dan verdwijnt de horizontale lijn
+      // stil uit de documentatielezer zonder dat één test omvalt.
+      await tester.binding.setSurfaceSize(const Size(900, 600));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 900,
+              child: DocumentMarkdownView('Eerste.\n\n---\n\nTweede.\n'),
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(Divider), findsOneWidget);
+    });
+
     testWidgets('de streep zelf wordt in de pagina-weergave niet getekend', (
       tester,
     ) async {
