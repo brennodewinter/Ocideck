@@ -129,6 +129,62 @@ void main() {
       expect(withDocumentPageSetup(set, size: null, margins: null), styled);
     });
 
+    // De documentatie-agent vond dit door de code tegen de tekst te leggen:
+    // met afloop of liggend schrijven we geen papiernaam, en het leespad viel
+    // dan terug op de instelling. Een vastgelegde maat die niet terugkomt maakt
+    // het vastleggen zinloos.
+    test('een vastgelegde maat overleeft ook mét afloop', () {
+      final out = withDocumentPageSetup(
+        plain,
+        size: PageSizeSpec.a4,
+        margins: const PageMargins(bleedMm: 3),
+      );
+      final back = documentPageSetup(out);
+      expect(back.size, PageSizeSpec.a4);
+      expect(back.margins?.bleedMm, 3);
+      expect(back.margins?.topMm, 25);
+    });
+
+    test('een vastgelegde liggende maat overleeft ook', () {
+      final out = withDocumentPageSetup(
+        plain,
+        size: PageSizeSpec.a4Landscape,
+        margins: const PageMargins(),
+      );
+      expect(documentPageSetup(out).size, PageSizeSpec.a4Landscape);
+    });
+
+    test('een vrije maat blijft een vrije maat', () {
+      const source =
+          '---\ngeometry: paperwidth=200mm,paperheight=200mm,top=10mm\n'
+          '---\n\n# Kop\n';
+      expect(documentPageSetup(source).size, isNull);
+    });
+
+    test('draagt het document een opmaak, in alle vier de vormen', () {
+      // De indicator hing aan de papiernaam alleen, en merkte daardoor juist de
+      // documenten die OciDeck zelf had vastgelegd aan als "uit je
+      // instellingen".
+      expect(documentCarriesPageSetup(plain), isFalse);
+      for (final margins in [
+        const PageMargins(),
+        const PageMargins(bleedMm: 3),
+      ]) {
+        for (final size in [PageSizeSpec.a4, PageSizeSpec.a4Landscape]) {
+          final out = withDocumentPageSetup(
+            plain,
+            size: size,
+            margins: margins,
+          );
+          expect(
+            documentCarriesPageSetup(out),
+            isTrue,
+            reason: '$size met afloop ${margins.bleedMm} wordt niet herkend',
+          );
+        }
+      }
+    });
+
     test('heen en weer door de codec verandert de opmaak niet', () {
       const size = PageSizeSpec(series: PaperSeries.b, number: 5);
       const margins = PageMargins(topMm: 18, bottomMm: 22, bleedMm: 5);

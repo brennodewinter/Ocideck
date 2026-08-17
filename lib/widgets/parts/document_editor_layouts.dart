@@ -56,7 +56,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final l10n = context.l10n;
     final doc = ref.read(documentProvider).document;
     if (doc == null) return;
-    final inDocument = documentPageSetup(doc.source).size != null;
+    final inDocument = documentCarriesPageSetup(doc.source);
     final choice = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -183,7 +183,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
                 theme,
                 pageSize: pageSize,
                 margins: margins,
-                fromDocument: documentPageSetup(source).size != null,
+                fromDocument: documentCarriesPageSetup(source),
                 onTap: () =>
                     unawaited(_choosePageSetupScope(pageSize, margins)),
               ),

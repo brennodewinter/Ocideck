@@ -15,21 +15,45 @@ import '../utils/document_front_matter.dart';
 /// die alleen binnen OciDeck betekenis hebben, en FILE_FORMAT.md §14.1 belooft
 /// dat OciDeck geen eigen sleutels toevoegt.
 ///
-/// De `geometry`-string komt uit dezelfde bron als de LaTeX-export
-/// ([PageMargins.latexMargin] en [PageSizeSpec.latexPaperWith]), zodat het
-/// bestand en de export het niet oneens kunnen zijn.
+/// De marges in `geometry` komen uit [PageMargins.latexMargin] — dezelfde bron
+/// als de LaTeX-export. De papiermaat wordt hier lokaal uitgerekend en niet uit
+/// [PageSizeSpec.latexPaperWith] gehaald: die geeft niets terug zonder afloop,
+/// terwijl een liggend vel hier óók expliciete maten nodig heeft. Zelfde
+/// pagina, andere route — de LaTeX-export schrijft voor liggend-zonder-afloop
+/// een papiernaam met `landscape`, dit bestand millimeters.
 typedef DocumentPageSetup = ({PageSizeSpec? size, PageMargins? margins});
 
 /// Niets gezet: het document laat de opmaak aan de instellingen.
 const DocumentPageSetup kNoDocumentPageSetup = (size: null, margins: null);
 
+/// Of [source] zélf een paginaopmaak draagt.
+///
+/// Kijkt naar béide sleutels en niet alleen naar de papiernaam: een document
+/// dat OciDeck met afloop of liggend heeft vastgelegd draagt juist géén
+/// `papersize:`, en werd dan aangemerkt als "komt uit je instellingen" —
+/// precies verkeerd om.
+bool documentCarriesPageSetup(String source) {
+  final setup = documentPageSetup(source);
+  return setup.size != null || setup.margins != null;
+}
+
 /// De paginaopmaak die [source] draagt. Beide velden zijn `null` wanneer het
 /// document er niets over zegt; ze kunnen ook los voorkomen (alleen een maat,
 /// alleen marges).
-DocumentPageSetup documentPageSetup(String source) => (
-  size: _parsePaperSize(documentFrontMatterValue(source, 'papersize')),
-  margins: _parseGeometry(documentFrontMatterValue(source, 'geometry')),
-);
+DocumentPageSetup documentPageSetup(String source) {
+  final geometry = _parseGeometry(documentFrontMatterValue(source, 'geometry'));
+  return (
+    // De papiernaam wint wanneer hij er staat; anders komt de maat uit de
+    // expliciete millimeters in `geometry`. Dat tweede pad is niet optioneel:
+    // met een afloop of liggend schríjven we geen papiernaam, want die zou
+    // liegen — zonder deze terugweg viel de vastgelegde maat bij het inlezen
+    // terug op de instelling, en was het vastleggen dus zinloos.
+    size:
+        _parsePaperSize(documentFrontMatterValue(source, 'papersize')) ??
+        geometry.size,
+    margins: geometry.margins,
+  );
+}
 
 /// [source] met de paginaopmaak gezet, of eruit gehaald wanneer beide `null`
 /// zijn. Byte-chirurgisch, met dezelfde regels als de stijl: zetten en weer
@@ -87,11 +111,11 @@ PageSizeSpec? _parsePaperSize(String? value) {
   return PageSizeSpec.fromId('${m.group(1)!.toUpperCase()}${m.group(2)}');
 }
 
-/// Leest een `geometry`-waarde terug naar marges plus, wanneer het vel groter
-/// is dan een ISO-maat, de afloop die dat verschil verklaart.
-PageMargins? _parseGeometry(String? value) {
+/// Leest een `geometry`-waarde terug naar de maat (als het vel een ISO-formaat
+/// is, eventueel plus afloop) en de marges.
+DocumentPageSetup _parseGeometry(String? value) {
   final v = value?.trim();
-  if (v == null || v.isEmpty) return null;
+  if (v == null || v.isEmpty) return kNoDocumentPageSetup;
   final fields = <String, double>{};
   for (final part in v.split(',')) {
     final kv = part.split('=');
@@ -99,47 +123,57 @@ PageMargins? _parseGeometry(String? value) {
     final mm = double.tryParse(kv[1].trim().replaceAll('mm', '').trim());
     if (mm != null) fields[kv[0].trim().toLowerCase()] = mm;
   }
-  if (fields.isEmpty) return null;
-  final bleed = _inferBleed(fields);
-  return PageMargins(
-    // De marges in het bestand zijn gemeten vanaf de rand van het vél; de
-    // afloop hoort er weer af, want intern rekent OciDeck vanaf het
-    // snijformaat.
-    topMm: (fields['top'] ?? 25) - bleed,
-    bottomMm: (fields['bottom'] ?? 25) - bleed,
-    leftMm: (fields['left'] ?? 20) - bleed,
-    rightMm: (fields['right'] ?? 20) - bleed,
-    bleedMm: bleed,
+  if (fields.isEmpty) return kNoDocumentPageSetup;
+  final paper = _inferPaper(fields);
+  final bleed = paper?.bleedMm ?? 0;
+  return (
+    size: paper?.size,
+    margins: PageMargins(
+      // De marges in het bestand zijn gemeten vanaf de rand van het vél; de
+      // afloop hoort er weer af, want intern rekent OciDeck vanaf het
+      // snijformaat.
+      topMm: (fields['top'] ?? 25) - bleed,
+      bottomMm: (fields['bottom'] ?? 25) - bleed,
+      leftMm: (fields['left'] ?? 20) - bleed,
+      rightMm: (fields['right'] ?? 20) - bleed,
+      bleedMm: bleed,
+    ),
   );
 }
 
-/// De afloop die uit een expliciete papiermaat volgt: is het vel aan beide
-/// zijden even veel groter dan een bestaande ISO-maat, dan is dat verschil de
-/// afloop. Anders is het gewoon een vrije maat en is er geen afloop.
+/// Het vel dat uit een expliciete papiermaat volgt: welke ISO-maat het is, en
+/// hoeveel afloop er dan omheen zit.
+///
+/// Is het vel aan beide zijden even veel groter dan een bestaande ISO-maat, dan
+/// is dat verschil de afloop. Past het op geen enkele maat, dan is het een vrije
+/// maat: geen ISO-naam, geen afloop.
 ///
 /// Dit is een gemak voor de interface ("A4 + 3 mm"), geen betekenis in het
 /// bestand: daar staat de effectieve maat, en die is op zichzelf compleet.
-double _inferBleed(Map<String, double> fields) {
+({PageSizeSpec size, double bleedMm})? _inferPaper(Map<String, double> fields) {
   final w = fields['paperwidth'];
   final h = fields['paperheight'];
-  if (w == null || h == null) return 0;
+  if (w == null || h == null) return null;
   for (final series in PaperSeries.values) {
     for (var n = 0; n <= 10; n++) {
       for (final landscape in [false, true]) {
-        final (pw, ph) = PageSizeSpec(
+        final spec = PageSizeSpec(
           series: series,
           number: n,
           landscape: landscape,
-        ).dimensions;
+        );
+        final (pw, ph) = spec.dimensions;
         final dw = w - pw;
         final dh = h - ph;
-        if (dw > 0 && (dw - dh).abs() < 0.51 && dw / 2 <= 20) {
-          return (dw / 2 * 10).roundToDouble() / 10;
+        // Even veel eraf aan beide zijden, en niet negatief: dan is dit de maat
+        // met die afloop eromheen. Nul verschil is gewoon de maat zelf.
+        if (dw >= -0.01 && (dw - dh).abs() < 0.51 && dw / 2 <= 20) {
+          return (size: spec, bleedMm: (dw / 2 * 10).roundToDouble() / 10);
         }
       }
     }
   }
-  return 0;
+  return null;
 }
 
 String _mm(double mm) =>

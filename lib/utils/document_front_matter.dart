@@ -150,7 +150,10 @@ String withDocumentFrontMatterKey(String source, String key, String? value) {
 
   if (trimmed.isEmpty) {
     if (split.block.isEmpty) return source;
-    final without = _removeKeysFromBlock(split.block, {key});
+    final without = _removeKeysFromBlock(split.block, {
+      key,
+      ...kDocumentRetiredKeys,
+    });
     return without == null ? split.body : without + split.body;
   }
 
@@ -158,7 +161,15 @@ String withDocumentFrontMatterKey(String source, String key, String? value) {
   if (split.block.isEmpty) {
     return '$_fence$eol$key: $scalar$eol$_fence$eol$eol${split.body}';
   }
-  return _setKeyInBlock(split.block, key, scalar) + split.body;
+  // Een ingetrokken sleutel verdwijnt bij het eerstvolgende bewuste schrijven.
+  // Dat is de terugtrekroute die het register belooft: zonder deze regel zou
+  // een sleutel die we niet meer schrijven tot in lengte van dagen in bestaande
+  // bestanden blijven staan.
+  final block = kDocumentRetiredKeys.isEmpty
+      ? split.block
+      : (_removeKeysFromBlock(split.block, kDocumentRetiredKeys) ??
+            split.block);
+  return _setKeyInBlock(block, key, scalar) + split.body;
 }
 
 // --- block editors -----------------------------------------------------------
