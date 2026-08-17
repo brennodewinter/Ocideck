@@ -17,6 +17,27 @@ library;
 
 const _fence = '---';
 
+/// De front-matter-sleutels die het documentpad zelf schrijft.
+///
+/// Bewust een register en geen losse regexen: zodra er meer dan één sleutel is,
+/// heeft het documentpad dezelfde discipline nodig als het deckpad
+/// (`front_matter_merge.dart`). Zonder register is er geen pad om een sleutel
+/// ooit nog uit bestaande bestanden te krijgen — die blijft er dan tot in
+/// lengte van dagen in staan, en de uitgang hoort net zo makkelijk te zijn als
+/// de ingang.
+///
+/// Elke sleutel hier is er een die andere gereedschappen al kennen en
+/// uitvoeren: `theme:` (Pandoc, Obsidian, GitHub), `papersize:` en `geometry:`
+/// (Pandoc). OciDeck voegt geen eigen dialect toe — zie FILE_FORMAT.md §14.1.
+const Set<String> kDocumentOwnedKeys = {'theme', 'papersize', 'geometry'};
+
+/// Sleutels die het documentpad ooit schreef en niet meer schrijft.
+///
+/// Ze worden bij het volgende bewuste schrijven verwijderd, zodat een
+/// ingetrokken sleutel vanzelf uit bestaande bestanden verdwijnt in plaats van
+/// er voor altijd in te blijven staan. Leeg zolang er niets is ingetrokken.
+const Set<String> kDocumentRetiredKeys = {};
+
 /// A document split into its leading front-matter [block] (verbatim, including
 /// the blank line(s) that separate it from the body — `''` when there is none)
 /// and the [body] that follows. Always `block + body == source`.
@@ -74,15 +95,8 @@ String documentBody(String source) => splitDocumentFrontMatter(source).body;
 /// The style (`theme:` value) declared in the leading front matter, or `null`
 /// when the document has no front matter or no `theme:` key. Quotes are removed.
 String? documentStyleName(String source) {
-  final block = splitDocumentFrontMatter(source).block;
-  if (block.isEmpty) return null;
-  for (final raw in block.split('\n')) {
-    final m = _themeLine.firstMatch(_stripCr(raw));
-    if (m == null) continue;
-    final value = _unquote(m.group(1)!.trim());
-    return value.isEmpty ? null : value;
-  }
-  return null;
+  final value = documentFrontMatterValue(source, 'theme');
+  return (value == null || value.isEmpty) ? null : value;
 }
 
 /// Returns [source] with its document style set to [name], or removed when
@@ -94,53 +108,89 @@ String? documentStyleName(String source) {
 /// returns the same bytes.
 String withDocumentStyleName(String source, String? name) {
   final split = splitDocumentFrontMatter(source);
-  final eol = _detectEol(source);
   final trimmed = name?.trim() ?? '';
 
   if (trimmed.isEmpty) {
     if (split.block.isEmpty) return source;
-    final without = _removeThemeFromBlock(split.block, eol);
-    // `null` means the block held only the theme key → drop it entirely.
+    final without = _removeKeysFromBlock(split.block, {'theme'});
+    // `null`: er stond niets anders dan de stijl → het hele blok mag weg.
     return without == null ? split.body : without + split.body;
   }
 
-  final value = _yamlScalar(trimmed);
-  if (split.block.isEmpty) {
-    return '$_fence$eol'
-        'theme: $value$eol'
-        '$_fence$eol$eol${split.body}';
+  return withDocumentFrontMatterKey(source, 'theme', trimmed);
+}
+
+/// De waarde van [key] uit de frontmatter van [source], of `null` wanneer de
+/// sleutel er niet staat. Alleen voor sleutels die OciDeck zelf schrijft.
+String? documentFrontMatterValue(String source, String key) {
+  final block = splitDocumentFrontMatter(source).block;
+  if (block.isEmpty) return null;
+  final matcher = _keyLine(key);
+  for (final raw in block.split('\n')) {
+    final m = matcher.firstMatch(_stripCr(raw));
+    if (m != null) return _unquote(m.group(1)!.trim());
   }
-  return _setThemeInBlock(split.block, value, eol) + split.body;
+  return null;
+}
+
+/// Zet [key] op [value], of haalt hem weg bij `null`/leeg.
+///
+/// Byte-chirurgisch, met dezelfde regels als de stijl: een plat document krijgt
+/// een minimaal blok, en valt de laatste eigen sleutel weg dan verdwijnt het
+/// hele blok en staat de kale body er weer. Handgeschreven sleutels blijven
+/// verbatim staan.
+String withDocumentFrontMatterKey(String source, String key, String? value) {
+  assert(
+    kDocumentOwnedKeys.contains(key),
+    'alleen sleutels uit kDocumentOwnedKeys mogen geschreven worden',
+  );
+  final split = splitDocumentFrontMatter(source);
+  final eol = _detectEol(source);
+  final trimmed = value?.trim() ?? '';
+
+  if (trimmed.isEmpty) {
+    if (split.block.isEmpty) return source;
+    final without = _removeKeysFromBlock(split.block, {key});
+    return without == null ? split.body : without + split.body;
+  }
+
+  final scalar = _yamlScalar(trimmed);
+  if (split.block.isEmpty) {
+    return '$_fence$eol$key: $scalar$eol$_fence$eol$eol${split.body}';
+  }
+  return _setKeyInBlock(split.block, key, scalar) + split.body;
 }
 
 // --- block editors -----------------------------------------------------------
 
 /// Replaces the `theme:` line in [block] with `theme: <value>`, or inserts one
 /// before the closing fence when absent. Preserves every other line verbatim.
-String _setThemeInBlock(String block, String value, String eol) {
+String _setKeyInBlock(String block, String key, String value) {
   final lines = block.split('\n');
+  final matcher = _keyLine(key);
   for (var i = 0; i < lines.length; i++) {
-    if (_themeLine.hasMatch(_stripCr(lines[i]))) {
-      lines[i] = 'theme: $value${_trailingCr(lines[i])}';
+    if (matcher.hasMatch(_stripCr(lines[i]))) {
+      lines[i] = '$key: $value${_trailingCr(lines[i])}';
       return lines.join('\n');
     }
   }
-  // No theme key yet: insert before the closing fence (the last `---` line).
+  // Nog geen sleutel: invoegen vóór de sluitende fence (de laatste `---`).
   for (var i = lines.length - 1; i >= 0; i--) {
     if (_stripCr(lines[i]) == _fence) {
-      lines.insert(i, 'theme: $value${i == 0 ? '' : _trailingCr(lines[i])}');
+      lines.insert(i, '$key: $value${i == 0 ? '' : _trailingCr(lines[i])}');
       return lines.join('\n');
     }
   }
-  return block; // defensive: splitDocumentFrontMatter guarantees a closing fence
+  return block; // defensief: splitDocumentFrontMatter garandeert een fence
 }
 
 /// Removes the `theme:` line from [block]. Returns `null` when nothing but the
 /// fences (and blank lines) remains, signalling the whole block should be
 /// dropped; otherwise the block without its theme line.
-String? _removeThemeFromBlock(String block, String eol) {
+String? _removeKeysFromBlock(String block, Set<String> keys) {
   final lines = block.split('\n');
-  lines.removeWhere((l) => _themeLine.hasMatch(_stripCr(l)));
+  final matchers = [for (final k in keys) _keyLine(k)];
+  lines.removeWhere((l) => matchers.any((m) => m.hasMatch(_stripCr(l))));
   final hasOtherKeys = lines.any((l) {
     final s = _stripCr(l).trim();
     return s.isNotEmpty && s != _fence;
@@ -150,7 +200,8 @@ String? _removeThemeFromBlock(String block, String eol) {
 
 // --- small helpers -----------------------------------------------------------
 
-final _themeLine = RegExp(r'^\s*theme\s*:\s*(.*)$');
+/// Een regel die [key] zet, met de waarde als groep 1.
+RegExp _keyLine(String key) => RegExp('^\\s*$key\\s*:\\s*(.*)\$');
 
 /// A YAML mapping key: a name starting with a letter or underscore, then a colon.
 /// Deliberately excludes a leading digit (so a stray `12:30` line is not read as
@@ -189,7 +240,11 @@ String _yamlScalar(String s) {
   final needsQuote =
       s.isEmpty ||
       s != s.trim() ||
-      RegExp('''[:#\\n"'\\[\\]{},&*!|>%@`]''').hasMatch(s) ||
+      // Geen komma in deze lijst: in blokcontext is die in YAML gewoon onderdeel
+      // van een platte scalar. Hem toch aanhalen maakte `geometry:
+      // top=25mm,bottom=25mm,…` onnodig een string-met-quotes, en dat leest
+      // slechter in een bestand dat mensen openslaan.
+      RegExp('''[:#\\n"'\\[\\]{}&*!|>%@`]''').hasMatch(s) ||
       RegExp(r'^[-?]').hasMatch(s);
   if (!needsQuote) return s;
   return '"${s.replaceAll('\\', r'\\').replaceAll('"', r'\"')}"';

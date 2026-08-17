@@ -1,3 +1,4 @@
+import '../services/document_page_setup.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -268,6 +269,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final filePath = state.filePath;
     final projectPath = filePath == null ? null : p.dirname(filePath);
     final settings = ref.read(settingsProvider);
+    final exportSetup = effectiveDocumentPageSetup(
+      settings,
+      state.document?.source ?? '',
+    );
     final fileService = ref.read(fileServiceProvider);
     final imageService = ref.read(imageServiceProvider);
     final markdownService = ref.read(markdownServiceProvider);
@@ -344,8 +349,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
       embedImage: embed,
       chapterPageBreak: settings.documentChapterPageBreak,
-      pageSize: settings.documentPageSize,
-      pageMargins: settings.documentPageMargins,
+      // De export volgt dezelfde volgorde als het scherm: draagt het document
+      // zelf een paginaopmaak, dan geldt die.
+      pageSize: exportSetup.size!,
+      pageMargins: exportSetup.margins!,
       outputPath: outputPath,
     );
   }
