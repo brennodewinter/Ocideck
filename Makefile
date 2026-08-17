@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -84,6 +84,7 @@ help:
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make check-l10n-orphans  Ratchet: translation keys nothing looks up any more (in check-full)."
+	@echo "  make check-l10n-parity   Every key present in one language table must exist in all (in check)."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make clean-test-cache  Gooi alleen de kernelcache van 'flutter test' weg (bij een laadfout op een test die los groen is)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -894,6 +895,38 @@ check-l10n-orphans:
 	@echo "        Volledige lijst: dart run tool/check_l10n_orphans.dart --list"
 	dart run tool/check_l10n_orphans.dart
 
+# De DERDE vertaalpoort, en de enige die de tabellen ónderling vergelijkt.
+# `l10n-check` en app_localizations_test redeneren vanuit het GEBRUIK in lib/;
+# check-l10n-orphans vraagt of een sleutel nog wordt opgehaald. Een sleutel die
+# wél in de tabellen staat maar even nergens wordt opgevraagd valt door beide
+# mazen en mag dan in de ene taal bestaan en in de andere ontbreken. Bij #1520
+# stond dat er al een tijd (zes talen misten vier bronsleutels) zonder dat
+# iemand het zag.
+#
+# WAAROM IN check EN NIET IN check-full — anders dan haar zusterpoort
+# check-l10n-orphans. Die leunt op tekstbewijs ("komt deze sleutel ergens voor
+# in de boom?") en kan zich dus vergissen; daarom draagt ze een ratchet en
+# draait ze in de trage ronde. Deze poort doet iets anders: ze vergelijkt twee
+# verzamelingen sleutels op gelijkheid. Er valt niets te interpreteren, dus er
+# is geen valse melding mogelijk en geen basislijn nodig — nul is de enige
+# stand. Ze leest 32 bestanden en is in een seconde klaar. Een poort die exact,
+# snel en niet te sussen is hoort in de ronde die élke commit tegenhoudt.
+check-l10n-parity:
+	@echo "== OciDeck check: gelijke sleutels in alle taaltabellen =="
+	@echo "Command: dart run tool/check_l10n_table_parity.dart"
+	@echo "Covers: elke sleutel die in één taaltabel staat moet in álle staan,"
+	@echo "        ongeacht of hij nu wordt opgevraagd. Twee families: de"
+	@echo "        t()-tabel (_strings*) en de d()-brontabellen (_dutchSource*"
+	@echo "        plus _dutchSourceAdd*, samen één naamruimte). nl is de"
+	@echo "        brontaal en heeft geen d()-tabellen — die uitzondering zit"
+	@echo "        in de poort."
+	@echo "Failure means: een taal loopt uit de pas. Vul het gat met de vertaling"
+	@echo "        uit een taal die de sleutel wél heeft, of haal de sleutel"
+	@echo "        overal weg als hij een restant is (staat hij nog maar in één"
+	@echo "        taal, dan is dat het waarschijnlijkst). Geen basislijn."
+	@echo "        Volledige lijst: dart run tool/check_l10n_table_parity.dart --list"
+	dart run tool/check_l10n_table_parity.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -1134,7 +1167,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-parity translate-docs-check
 
 check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="
