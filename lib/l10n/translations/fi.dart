@@ -2672,7 +2672,7 @@ const _dutchSourceAddFi = <String, String>{
   'Andere map kiezen': 'Valitse toinen kansio',
   'Bekijk importverslag': 'Näytä tuontiraportti',
   'Bekijk verslag': 'Näytä raportti',
-  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bijvoorbeeld CVE-2026-12345': 'Esimerkiksi CVE-2026-12345',
   'Bruikbaar': 'Käyttökelpoinen',
   'CVE zoeken': 'CVE-haku',
   'Critical/high': 'Kriittinen/korkea',

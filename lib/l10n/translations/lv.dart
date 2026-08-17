@@ -2672,7 +2672,7 @@ const _dutchSourceAddLv = <String, String>{
   'Andere map kiezen': 'Izvēlieties citu mapi',
   'Bekijk importverslag': 'Skatīt importēšanas pārskatu',
   'Bekijk verslag': 'Skatīt pārskatu',
-  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bijvoorbeeld CVE-2026-12345': 'Piemēram, CVE-2026-12345',
   'Bruikbaar': 'Izmantojams',
   'CVE zoeken': 'CVE meklēšana',
   'Critical/high': 'Kritisks/augsts',

@@ -2679,7 +2679,7 @@ const _dutchSourceAddHu = <String, String>{
   'Andere map kiezen': 'Válasszon másik mappát',
   'Bekijk importverslag': 'Importálási jelentés megtekintése',
   'Bekijk verslag': 'Jelentés megtekintése',
-  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bijvoorbeeld CVE-2026-12345': 'Például CVE-2026-12345',
   'Bruikbaar': 'Használható',
   'CVE zoeken': 'CVE keresés',
   'Critical/high': 'Kritikus/magas',

@@ -2683,7 +2683,7 @@ const _dutchSourceAddLt = <String, String>{
   'Andere map kiezen': 'Pasirinkite kitą aplanką',
   'Bekijk importverslag': 'Peržiūrėti importavimo ataskaitą',
   'Bekijk verslag': 'Žiūrėti ataskaitą',
-  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bijvoorbeeld CVE-2026-12345': 'Pavyzdžiui, CVE-2026-12345',
   'Bruikbaar': 'Naudoti',
   'CVE zoeken': 'CVE paieška',
   'Critical/high': 'Kritinis/aukštas',

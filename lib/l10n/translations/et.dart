@@ -2662,7 +2662,7 @@ const _dutchSourceAddEt = <String, String>{
   'Andere map kiezen': 'Valige teine ​​kaust',
   'Bekijk importverslag': 'Kuva impordiaruanne',
   'Bekijk verslag': 'Vaata aruannet',
-  'Bijvoorbeeld CVE-2026-12345': 'Bijvoorbeeld CVE-2026-12345',
+  'Bijvoorbeeld CVE-2026-12345': 'Näiteks CVE-2026-12345',
   'Bruikbaar': 'Kasutatav',
   'CVE zoeken': 'CVE otsing',
   'Critical/high': 'Kriitiline/kõrge',

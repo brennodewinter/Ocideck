@@ -35,17 +35,63 @@
 //
 // ── Waarom pas vanaf drie woorden ────────────────────────────────────────────
 //
-// Precies dezelfde afweging als in test/l10n_untranslated_test.dart, en om
-// dezelfde reden. Losse woorden zijn massaal identiek zonder dat er iets mis
-// is: `Logo`, `Audio`, `Video`, `Status`, `Canvas`, `Mermaid`, `Gantt`, `OK`.
-// Zonder drempel vindt deze poort er 1.800 en heeft ze in de meeste gevallen
-// ongelijk — dat is geen poort maar ruis, en ruis wordt weggeklikt. Met de
-// drempel blijven er 435 over, en na de uitzonderingen 394 — vrijwel allemaal
-// echte gevallen.
+// Losse woorden zijn massaal identiek zonder dat er iets mis is: `Logo`,
+// `Audio`, `Video`, `Status`, `Canvas`, `Mermaid`, `Gantt`, `OK`. Zonder
+// drempel vindt deze poort er 1.800 en heeft ze in de meeste gevallen ongelijk
+// — dat is geen poort maar ruis, en ruis wordt weggeklikt. Met de drempel
+// blijven er 435 over, en na de uitzonderingen 394 — vrijwel allemaal echte
+// gevallen.
+//
+// ── Waarom drie blijft, ook nu de zusterpoort naar twee ging (#1534) ─────────
+//
+// De drempel stond op drie omdat deze poort en test/l10n_untranslated_test.dart
+// hetzelfde soort bewijs wegen. Bij #1534 is die zusterpoort verlaagd naar
+// twee. Deze niet, en dat is een gemeten keuze, geen vergeten keuze. Herhaal de
+// meting niet — hier staat wat eruit kwam.
+//
+// Geteld op unieke SLEUTELS, niet op regels: één doorgelaten bronzin telt
+// anders dertig keer mee en dat maakt het probleem groter dan het is.
+//
+//   drempel 1 → 249 sleutels, 1.317 regels — onbruikbaar;
+//   drempel 2 →  47 sleutels,   187 regels;
+//   drempel 3 →  17 sleutels,    70 regels — precies de [loanKeys] hieronder.
+//
+// De 30 sleutels die drempel twee er bovenop legt, één voor één nagelopen:
+//
+//   * 25 zijn een ECHT leenwoord of cognaat. `Laser (X)`, `Logo px`,
+//     `Server: {name}`, `Audio "{bestand}"`, `Media (WebRTC)`, `ACT {value}°`,
+//     `Run chart`, `Online media` — daar staat geen vertaalbaar woord in. En de
+//     grote groep daarnaast is Germaanse verwantschap: `Links (mm)` en
+//     `Rechts (mm)` ZIJN Duits, `Titel (H1)` is Deens, Duits, Fries en Zweeds,
+//     `Bullets links` is Zwitserduits, `Tabel koptekst` en `Eigen checklists`
+//     zijn Fries. Gelijkheid bewijst daar de verwantschap van de talen, niet de
+//     luiheid van de vertaler, en deze poort kan die twee niet uit elkaar
+//     houden;
+//   * 5 waren echt onvertaald. Die zijn bij #1534 gewoon vertaald zonder de
+//     drempel aan te raken: `Bijvoorbeeld CVE-2026-12345` stond nog Nederlands
+//     in et/fi/hu/lt/lv, en het Fries zei `Links (mm)` waar het elders `Lofts`
+//     zegt, `Tussentitel` waar het elders `Tuskenkop` zegt, en
+//     `informatieveiligheid` waar het elders `Ynformaasjefeiligens` zegt.
+//
+// Zestien procent raak dus. Dat alleen zou nog te verdedigen zijn; de reden dat
+// drie blijft staan is de VORM van de uitzondering hier. [loanKeys] gaat per
+// SLEUTEL en dekt daarmee meteen alle 31 talen — zie de afweging daar. `Titel
+// (H1)` vrijstellen omdat het Deens toevallig `Titel` zegt, maakt diezelfde
+// sleutel ook stil voor het Grieks en het Bulgaars, waar een Nederlandse waarde
+// onmiskenbaar fout is. Verlagen naar twee zou de lijst van 18 naar 43 sleutels
+// duwen, grotendeels met zulke cognaten, en dat kost meer dekking dan het
+// oplevert.
+//
+// In test/l10n_untranslated_test.dart ligt dat andersom: daar gaat de
+// uitzondering per (TAAL, waarde), dus een Franse `Image 1` vrijstellen zegt
+// niets over het Grieks. Daarom kon dáár de drempel wél omlaag. Twee poorten
+// die hetzelfde bewijs wegen mogen een andere grens trekken zodra hun
+// uitzonderingen niet even duur zijn.
 //
 // De prijs staat er eerlijk bij: een onvertaalde bron van één of twee woorden
-// glipt hier doorheen. Dat is te betalen — de fout uit #1524 bestond uit hele
-// zinnen.
+// glipt hier doorheen — de vijf hierboven deden dat jarenlang. Dat is te
+// betalen zolang iemand af en toe met de hand meet; de fout uit #1524 bestond
+// uit hele zinnen.
 //
 // ── Waarom de uitzonderingen per SLEUTEL gaan ────────────────────────────────
 //
@@ -84,9 +130,10 @@ const String keyedFamily = 'strings';
 
 /// Vanaf hoeveel woorden een gelijke waarde als doorlaat telt.
 ///
-/// Zie de kop van dit bestand voor de afweging. Drie, gelijk aan de drempel in
-/// test/l10n_untranslated_test.dart — twee poorten die hetzelfde soort bewijs
-/// wegen horen dezelfde grens te trekken.
+/// Drie. Zie de kop van dit bestand voor de meting achter dat getal, inclusief
+/// waarom de zusterpoort in test/l10n_untranslated_test.dart bij #1534 wél naar
+/// twee ging en deze niet: daar gaat de uitzondering per (taal, waarde), hier
+/// per sleutel en dus meteen over alle 31 talen.
 const int minimumWords = 3;
 
 /// Hoeveel doorgelaten bronzinnen er nog staan. RATCHET: mag dalen, nooit
