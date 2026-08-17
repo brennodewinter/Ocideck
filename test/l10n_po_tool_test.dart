@@ -48,6 +48,24 @@ void main() {
     expect(map.values.every((v) => v is String), isTrue);
   });
 
+  test('een sleutel met een apostrof staat gewoon in de export', () {
+    // `dart format` schrijft een string met een apostrof in DUBBELE quotes:
+    // `"dia's geïmporteerd.":`. Las dit gereedschap alleen enkelaangehaalde
+    // literals, dan viel zo'n sleutel stil uit de export — de vertaler kreeg
+    // hem nooit te zien en kon hem met een import ook niet verbeteren. Dat is
+    // geen randgeval: `dia's`, `'s ochtends` en `'t` zijn gewoon Nederlands.
+    final out = '${temp.path}/ga.json';
+    expect(run(['export', 'ga', out]).exitCode, 0);
+    final map =
+        jsonDecode(File(out).readAsStringSync()) as Map<String, dynamic>;
+    final withApostrophe = map.keys.where((k) => k.contains("'")).toList();
+    expect(
+      withApostrophe,
+      isNotEmpty,
+      reason: 'geen enkele sleutel met apostrof — de parser leest ze niet',
+    );
+  });
+
   test('een onbekende taal wordt geweigerd, niet stil overgeslagen', () {
     final r = run(['export', 'xx', '${temp.path}/x.json']);
     expect(r.exitCode, isNot(0));
