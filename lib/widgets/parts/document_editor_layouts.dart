@@ -7,6 +7,19 @@
 // dus de standen gebruiken de staat van het scherm ongewijzigd.
 part of '../document_editor_screen.dart';
 
+/// De volledige bron van het document, mét frontmatter.
+///
+/// Het schrijfvlak krijgt `document.body` — de tekst zónder frontmatter, want
+/// die hoort niet als tekst in de editor. Maar de paginaopmaak stáát in die
+/// frontmatter, dus wie hem daar zoekt moet de hele bron hebben. Met de body
+/// vond de app zijn eigen sleutels nooit terug: het speldje verscheen nooit, en
+/// een document dat A4 had vastgelegd werd alsnog op de ingestelde maat
+/// getoond. De bytes reisden mee, de app deed er niets mee.
+///
+/// Staat bewust top-level en niet op de staat: de klasse zat op haar plafond.
+String _pageSetupSource(WidgetRef ref) =>
+    ref.watch(documentProvider).document?.source ?? '';
+
 /// De weergavestanden van [_DocumentEditorScreenState]. Een extensie op de
 /// staat zelf (zelfde library), zodat de methoden ongewijzigd blijven werken —
 /// hetzelfde patroon als de tabel-part van de documentweergave.
@@ -43,17 +56,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
   }
 
-  /// De volledige bron van het document, mét frontmatter.
-  ///
-  /// Het schrijfvlak krijgt `document.body` — de tekst zónder frontmatter, want
-  /// die hoort niet als tekst in de editor. Maar de paginaopmaak stáát in die
-  /// frontmatter, dus wie hem daar zoekt moet de hele bron hebben. Met de body
-  /// vond de app zijn eigen sleutels nooit terug: het speldje verscheen nooit,
-  /// en een document dat A4 had vastgelegd werd alsnog op de ingestelde maat
-  /// getoond. De bytes reisden mee, de app deed er niets mee.
-  String get _pageSetupSource =>
-      ref.watch(documentProvider).document?.source ?? '';
-
   /// De map waarin het document staat, voor het oplossen van een logo in de
   /// kop- of voetband. `null` als het nog nergens is opgeslagen.
   String? get _projectPath {
@@ -70,7 +72,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final settings = ref.watch(settingsProvider);
     // Draagt het document zelf een paginaopmaak, dan wint die van de instelling
     // — zie [effectiveDocumentPageSetup].
-    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource);
+    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
     return Container(
       color: theme.colorScheme.surfaceContainerHighest,
       child: PagedDocumentView(
@@ -105,7 +107,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     // vel vol is. Die einden worden gemeten aan de blokken die er echt staan —
     // zie [WritingPageBreakOverlay].
     final settings = ref.watch(settingsProvider);
-    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource);
+    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
     final pageSize = setup.size!;
     final margins = setup.margins!;
     final (_, pageHeightMm) = pageSize.dimensions;
@@ -134,7 +136,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
                 theme,
                 pageSize: pageSize,
                 margins: margins,
-                fromDocument: documentCarriesPageSetup(_pageSetupSource),
+                fromDocument: documentCarriesPageSetup(_pageSetupSource(ref)),
                 onTap: () => unawaited(
                   _choosePageSetupScope(
                     context,
