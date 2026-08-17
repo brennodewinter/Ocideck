@@ -30,10 +30,6 @@ const int maxMethodLines = 150;
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
 const Map<String, int> methodLengthBaseline = {
-  // +1 (#1360): disk-full try/catch rond writeBytesAtomic — security-fix
-  // die in het extractie-pad landt. De methode stond al op de limiet.
-  'lib/services/file/file_service_import.dart::FileServiceImport.importPackageBytesDetailed':
-      151,
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
@@ -57,14 +53,10 @@ const Map<String, int> methodLengthBaseline = {
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
-  // +1: Y-01 uit export-markdown voor resolve-at-draw in chart SVG.
-  'lib/services/marp_html_service.dart::MarpHtmlService.build': 129,
   // Procesverbetering engine thumbnails in the add-slide picker.
   // +2 (#1162): de `menu`-case (de wireframe zelf zit in `_paintMenuWireframe`).
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
       130,
-  // Procesverbetering project-wizard entry on the welcome column.
-  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
   // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
   // +3 (#1164): splitRunPosition-doorgifte in de drie bullet-cases (bullets,
@@ -83,8 +75,9 @@ const Map<String, int> methodLengthBaseline = {
   // +2: imageZoom-parameter + doorvoer in copyWith.
   'lib/models/slide.dart::Slide.copyWith': 164,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
+  // Verlaagd van 188 naar 186: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
-      188,
+      186,
   // +2: reportLanguage-parameter + getalnotatie in cell().
   'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 152,
   // +8: tabel-split actie bij tableDensityMinimum-warning.
