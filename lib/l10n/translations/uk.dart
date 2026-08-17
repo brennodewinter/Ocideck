@@ -1666,6 +1666,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Ці параметри сторінки збережені в цьому документі',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Ці параметри сторінки взяті з ваших налаштувань',
+  'Paginaopmaak': 'Параметри сторінки',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Розмір сторінки та поля тепер збережені в цьому документі; кожен, хто його відкриє, отримає таку саму сторінку. Приберіть їх, щоб діяли ваші власні налаштування.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Розмір сторінки та поля тепер беруться з ваших налаштувань, тож в іншої людини документ може виглядати інакше. Збережіть їх у документі, щоб це закріпити.',
+  'Uit het document halen': 'Прибрати з документа',
+  'In dit document vastleggen': 'Зберегти в цьому документі',
   'Rij erboven': 'Рядок вище',
   'Rij eronder': 'Рядок нижче',
   'Rij weghalen': 'Видалити рядок',

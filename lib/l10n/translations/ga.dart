@@ -1681,6 +1681,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Tá socrú an leathanaigh seo stóráilte sa cháipéis seo',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Tagann socrú an leathanaigh seo ó do chuid socruithe',
+  'Paginaopmaak': 'Socrú leathanaigh',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Tá méid an leathanaigh agus na himill stóráilte sa cháipéis seo anois; gheobhaidh gach duine a osclóidh í an leathanach céanna. Bain amach iad chun go mbeidh do shocrú féin i bhfeidhm.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Tagann méid an leathanaigh agus na himill ó do chuid socruithe anois, agus mar sin d\'fhéadfadh an cháipéis breathnú difriúil ag duine eile. Stóráil sa cháipéis iad chun iad a shocrú.',
+  'Uit het document halen': 'Bain as an gcáipéis',
+  'In dit document vastleggen': 'Stóráil sa cháipéis seo',
   'Rij erboven': 'Ró thuas',
   'Rij eronder': 'Ró thíos',
   'Rij weghalen': 'Scrios an ró',

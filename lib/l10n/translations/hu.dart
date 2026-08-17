@@ -1652,6 +1652,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Ez az oldalbeállítás ebben a dokumentumban van tárolva',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Ez az oldalbeállítás a beállításaidból származik',
+  'Paginaopmaak': 'Oldalbeállítás',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Az oldalméret és a margók most ebben a dokumentumban vannak tárolva; aki megnyitja, ugyanazt az oldalt kapja. Távolítsd el őket, hogy a saját beállításod érvényesüljön.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Az oldalméret és a margók most a beállításaidból származnak, így másnál a dokumentum eltérően jelenhet meg. Mentsd őket a dokumentumba, hogy rögzítsd.',
+  'Uit het document halen': 'Eltávolítás a dokumentumból',
+  'In dit document vastleggen': 'Rögzítés ebben a dokumentumban',
   'Rij erboven': 'Sor fölé',
   'Rij eronder': 'Sor alá',
   'Rij weghalen': 'Sor törlése',

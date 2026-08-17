@@ -677,6 +677,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Deze paginaopmaak staat in dit document':
+      'Cette mise en page est enregistrée dans ce document',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Cette mise en page provient de vos réglages',
+  'Paginaopmaak': 'Mise en page',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Le format de page et les marges sont maintenant enregistrés dans ce document ; celui qui l’ouvre obtient la même page. Retirez-les pour que vos propres réglages s’appliquent.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Le format de page et les marges proviennent maintenant de vos réglages ; chez quelqu’un d’autre, le document peut donc être différent. Enregistrez-les dans le document pour les fixer.',
+  'Uit het document halen': 'Retirer du document',
+  'In dit document vastleggen': 'Enregistrer dans ce document',
   'Rij erboven': 'Ligne au-dessus',
   'Rij eronder': 'Ligne en dessous',
   'Rij weghalen': 'Supprimer la ligne',

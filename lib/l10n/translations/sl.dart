@@ -1651,6 +1651,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Ta postavitev strani je shranjena v tem dokumentu',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Ta postavitev strani izhaja iz vaših nastavitev',
+  'Paginaopmaak': 'Postavitev strani',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Velikost strani in robovi so zdaj shranjeni v tem dokumentu; kdor ga odpre, dobi enako stran. Odstranite jih, da bo veljala vaša lastna nastavitev.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Velikost strani in robovi zdaj izhajajo iz vaših nastavitev, zato je pri nekom drugem dokument lahko videti drugače. Shranite jih v dokument, da to določite.',
+  'Uit het document halen': 'Odstrani iz dokumenta',
+  'In dit document vastleggen': 'Shrani v ta dokument',
   'Rij erboven': 'Vrstica zgoraj',
   'Rij eronder': 'Vrstica spodaj',
   'Rij weghalen': 'Izbriši vrstico',

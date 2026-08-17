@@ -1665,6 +1665,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Haec dispositio paginae in hoc documento inest',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Haec dispositio paginae ex optionibus tuis venit',
+  'Paginaopmaak': 'Dispositio paginae',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Magnitudo paginae et margines nunc in hoc documento insunt; quisquis id aperit eandem paginam accipit. Eos remove ut optio tua propria valeat.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Magnitudo paginae et margines nunc ex optionibus tuis veniunt; itaque apud alium documentum aliter apparere potest. Eos in documentum insere ut hoc firmes.',
+  'Uit het document halen': 'E documento removere',
+  'In dit document vastleggen': 'In hoc documento figere',
   'Rij erboven': 'Ordo supra',
   'Rij eronder': 'Ordo infra',
   'Rij weghalen': 'Ordinem delere',

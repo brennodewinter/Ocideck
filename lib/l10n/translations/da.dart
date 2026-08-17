@@ -1650,6 +1650,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Denne sideopsætning er gemt i dette dokument',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Denne sideopsætning kommer fra dine indstillinger',
+  'Paginaopmaak': 'Sideopsætning',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Sidestørrelsen og margenerne står nu i dette dokument; den der åbner det, får den samme side. Fjern dem, så din egen indstilling gælder.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Sidestørrelsen og margenerne kommer nu fra dine indstillinger, så hos en anden kan dokumentet se anderledes ud. Gem dem i dokumentet for at fastlægge det.',
+  'Uit het document halen': 'Fjern fra dokumentet',
+  'In dit document vastleggen': 'Gem i dette dokument',
   'Rij erboven': 'Række ovenfor',
   'Rij eronder': 'Række nedenfor',
   'Rij weghalen': 'Slet række',

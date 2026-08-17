@@ -1627,6 +1627,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze paginaopmaak staat in dit document': 'nav nabvam ghaj navvam',
+  'Deze paginaopmaak komt uit je instellingen':
+      'DuHmeylIjvo\' nav nabvam Suqlu\'',
+  'Paginaopmaak': 'nav nab',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'nav \'aD HeH je ghaj navvam; nav rap legh poSmoHbogh Hoch. DuHmeylIj lulo\'lu\'meH tIteq.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'DuHmeylIjvo\' nav \'aD HeH je Suqlu\'; vaj latlh nuvvaD pIm navvam. DaratlhmoHmeH navvamDaq tIchel.',
+  'Uit het document halen': 'navvamvo\' tIteq',
+  'In dit document vastleggen': 'navvamDaq tIchel',
   'Rij erboven': 'tlhoy\' Dung',
   'Rij eronder': 'tlhoy\' bIng',
   'Rij weghalen': 'tlhoy\' yIteq',

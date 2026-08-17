@@ -1667,6 +1667,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Această configurare a paginii este salvată în acest document',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Această configurare a paginii vine din setările tale',
+  'Paginaopmaak': 'Configurarea paginii',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Dimensiunea paginii și marginile sunt acum salvate în acest document; oricine îl deschide obține aceeași pagină. Elimină-le pentru ca propria ta setare să se aplice.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Dimensiunea paginii și marginile vin acum din setările tale, așa că la altcineva documentul poate arăta diferit. Salvează-le în document pentru a le fixa.',
+  'Uit het document halen': 'Elimină din document',
+  'In dit document vastleggen': 'Salvează în acest document',
   'Rij erboven': 'Rând deasupra',
   'Rij eronder': 'Rând dedesubt',
   'Rij weghalen': 'Șterge rândul',

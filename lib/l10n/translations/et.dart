@@ -1643,6 +1643,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'See lehe kujundus on salvestatud sellesse dokumenti',
+  'Deze paginaopmaak komt uit je instellingen':
+      'See lehe kujundus tuleb sinu seadetest',
+  'Paginaopmaak': 'Lehe kujundus',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Lehe suurus ja veerised on nüüd salvestatud sellesse dokumenti; igaüks, kes selle avab, saab sama lehe. Eemalda need, et kehtiks sinu enda säte.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Lehe suurus ja veerised tulevad nüüd sinu seadetest, nii et kellegi teise juures võib dokument välja näha teistsugune. Salvesta need dokumenti, et see paika panna.',
+  'Uit het document halen': 'Eemalda dokumendist',
+  'In dit document vastleggen': 'Salvesta sellesse dokumenti',
   'Rij erboven': 'Rida ülespoole',
   'Rij eronder': 'Rida allapoole',
   'Rij weghalen': 'Kustuta rida',

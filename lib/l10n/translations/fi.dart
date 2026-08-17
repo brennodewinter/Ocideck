@@ -1650,6 +1650,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Tämä sivun asettelu on tallennettu tähän asiakirjaan',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Tämä sivun asettelu tulee asetuksistasi',
+  'Paginaopmaak': 'Sivun asettelu',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Sivukoko ja marginaalit on nyt tallennettu tähän asiakirjaan; jokainen sen avaava saa saman sivun. Poista ne, jotta oma asetuksesi on voimassa.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Sivukoko ja marginaalit tulevat nyt asetuksistasi, joten toisella asiakirja voi näyttää erilaiselta. Tallenna ne asiakirjaan, jotta ne pysyvät.',
+  'Uit het document halen': 'Poista asiakirjasta',
+  'In dit document vastleggen': 'Tallenna tähän asiakirjaan',
   'Rij erboven': 'Rivi yläpuolelle',
   'Rij eronder': 'Rivi alapuolelle',
   'Rij weghalen': 'Poista rivi',

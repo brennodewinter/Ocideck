@@ -1649,6 +1649,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Den här sidlayouten är sparad i det här dokumentet',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Den här sidlayouten kommer från dina inställningar',
+  'Paginaopmaak': 'Sidlayout',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Sidstorleken och marginalerna finns nu i det här dokumentet; den som öppnar det får samma sida. Ta bort dem så gäller din egen inställning.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Sidstorleken och marginalerna kommer nu från dina inställningar, så hos någon annan kan dokumentet se annorlunda ut. Spara dem i dokumentet för att låsa fast det.',
+  'Uit het document halen': 'Ta bort från dokumentet',
+  'In dit document vastleggen': 'Spara i det här dokumentet',
   'Rij erboven': 'Rad ovanför',
   'Rij eronder': 'Rad nedanför',
   'Rij weghalen': 'Radera rad',

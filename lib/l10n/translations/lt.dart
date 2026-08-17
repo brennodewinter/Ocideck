@@ -1657,6 +1657,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Šie puslapio parametrai įrašyti šiame dokumente',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Šie puslapio parametrai paimti iš jūsų nustatymų',
+  'Paginaopmaak': 'Puslapio parametrai',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Puslapio dydis ir paraštės dabar įrašyti šiame dokumente; kiekvienas, kuris jį atvers, matys tą patį puslapį. Pašalinkite juos, kad galiotų jūsų pačių nustatymas.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Puslapio dydis ir paraštės dabar imami iš jūsų nustatymų, todėl pas kitą žmogų dokumentas gali atrodyti kitaip. Įrašykite juos į dokumentą, kad tai užfiksuotumėte.',
+  'Uit het document halen': 'Pašalinti iš dokumento',
+  'In dit document vastleggen': 'Įrašyti į šį dokumentą',
   'Rij erboven': 'Eilutė aukščiau',
   'Rij eronder': 'Eilutė žemiau',
   'Rij weghalen': 'Ištrinti eilutę',

@@ -1656,6 +1656,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Tento vzhľad strany je uložený v tomto dokumente',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Tento vzhľad strany pochádza z vašich nastavení',
+  'Paginaopmaak': 'Vzhľad strany',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Veľkosť strany a okraje sú teraz uložené v tomto dokumente; kto ho otvorí, uvidí rovnakú stranu. Odstráňte ich, aby platilo vaše vlastné nastavenie.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Veľkosť strany a okraje teraz pochádzajú z vašich nastavení, takže u niekoho iného môže dokument vyzerať inak. Uložte ich do dokumentu, aby to bolo pevne dané.',
+  'Uit het document halen': 'Odstrániť z dokumentu',
+  'In dit document vastleggen': 'Uložiť do tohto dokumentu',
   'Rij erboven': 'Riadok nad',
   'Rij eronder': 'Riadok pod',
   'Rij weghalen': 'Zmazať riadok',

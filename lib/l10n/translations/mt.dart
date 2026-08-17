@@ -1670,6 +1670,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Dan is-setup tal-paġna huwa maħżun f\'dan id-dokument',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Dan is-setup tal-paġna ġej mis-settings tiegħek',
+  'Paginaopmaak': 'Setup tal-paġna',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Id-daqs tal-paġna u l-marġini issa huma maħżuna f\'dan id-dokument; min jiftħu jġib l-istess paġna. Neħħihom biex japplika s-setting tiegħek stess.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Id-daqs tal-paġna u l-marġini issa ġejjin mis-settings tiegħek, għalhekk għand ħaddieħor id-dokument jista\' jidher differenti. Aħżinhom fid-dokument biex tiffissahom.',
+  'Uit het document halen': 'Neħħi mid-dokument',
+  'In dit document vastleggen': 'Aħżen f\'dan id-dokument',
   'Rij erboven': 'Ringiela fuq',
   'Rij eronder': 'Ringiela taħt',
   'Rij weghalen': 'Ħassar ir-ringiela',

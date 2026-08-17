@@ -847,6 +847,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze paginaopmaak staat in dit document':
+      'This page setup is stored in this document',
+  'Deze paginaopmaak komt uit je instellingen':
+      'This page setup comes from your settings',
+  'Paginaopmaak': 'Page setup',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'The page size and margins are now stored in this document; anyone who opens it gets the same page. Remove them to let your own setting apply.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'The page size and margins now come from your settings, so the document may turn out differently for someone else. Store them in the document to lock that in.',
+  'Uit het document halen': 'Remove from document',
+  'In dit document vastleggen': 'Store in this document',
   'Rij erboven': 'Row above',
   'Rij eronder': 'Row below',
   'Rij weghalen': 'Delete row',

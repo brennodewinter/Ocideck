@@ -1670,6 +1670,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze paginaopmaak staat in dit document':
+      'Това оформление на страницата е записано в този документ',
+  'Deze paginaopmaak komt uit je instellingen':
+      'Това оформление на страницата идва от вашите настройки',
+  'Paginaopmaak': 'Оформление на страницата',
+  'De paginamaat en marges staan nu in dit document; wie het opent krijgt dezelfde pagina. Haal ze eruit om je eigen instelling te laten gelden.':
+      'Размерът на страницата и полетата вече са записани в този документ; всеки, който го отвори, получава същата страница. Премахнете ги, за да важи вашата собствена настройка.',
+  'De paginamaat en marges komen nu uit je instellingen, dus bij een ander kan het document anders uitvallen. Zet ze in het document om dat vast te leggen.':
+      'Размерът на страницата и полетата сега идват от вашите настройки, така че при друг човек документът може да изглежда различно. Запишете ги в документа, за да ги фиксирате.',
+  'Uit het document halen': 'Премахване от документа',
+  'In dit document vastleggen': 'Записване в този документ',
   'Rij erboven': 'Ред отгоре',
   'Rij eronder': 'Ред отдолу',
   'Rij weghalen': 'Изтриване на реда',
