@@ -1409,6 +1409,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **een poortslot, zodat parallelle runs elkaar niet meer omleggen.** Elke
+  worktree wijst `.dart_tool/hooks_runner/shared` naar dezelfde map — dat
+  bespaart een verse worktree het herbouwen van de native OpenCV-laag, en dat
+  is geen luxe zolang GitHub het archief met een 429 weigert. De prijs bleek
+  dat vier gelijktijdige `make check`-runs één lock en één CMake-buildmap
+  deelden: CMake weigerde omdat de cache op naam van een andere worktree stond,
+  bouwde OpenCV opnieuw, hield de lock vast, en de rest sneuvelde op een
+  time-out. `make check` faalde dan op een wíllekeurige poort zonder dat er
+  iets mis was met de wijziging — en een poort die naar de verkeerde plek wijst
+  is erger dan een trage. `scripts/gate_lock.sh` laat runs nu op elkaar
+  wachten, met de houder erbij vermeld. Bewust géén Dart: elke `dart run` in
+  dit pakket start zélf de native-assets-hook en grijpt naar precies de lock
+  waar je op wacht. Wat het niet oplost staat er hardop bij — wisselen tussen
+  worktrees herbouwt OpenCV nog steeds (#1541).
+
 - **een poort op vertalingen die de Nederlandse bron laten staan.** De
   vertaalwachters keken alle drie langs hetzelfde gat. `make l10n-check` vraagt
   of er een waarde bij de sleutel staat, `check-l10n-parity` of de sleutel in

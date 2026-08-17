@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -1205,7 +1205,20 @@ sign-release:
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
 STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-parity translate-docs-check
 
-check: $(STATIC_GATES) coverage coverage-per-file
+# De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
+# worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
+# twee gelijktijdige runs delen één native-assets-lock en één CMake-buildmap.
+# Zonder slot lopen ze elkaars lock af en faalt `make check` op een wíllekeurige
+# poort, zonder dat er iets mis is met de wijziging — de poort wees dan naar de
+# verkeerde plek. Zie docs/CHECKS.md.
+#
+# `check-locked` is het echte werk en bestaat alleen om onder het slot te
+# draaien; roep hem niet rechtstreeks aan tenzij je weet dat je alleen bent
+# (dat is precies wat OCIDECK_NO_GATE_LOCK=1 doet).
+check:
+	@scripts/gate_lock.sh $(MAKE) check-locked
+
+check-locked: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="
 	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
 
@@ -1276,7 +1289,10 @@ check-registrations:
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
+check-full:
+	@scripts/gate_lock.sh $(MAKE) check-full-locked
+
+check-full-locked: check-locked check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
 

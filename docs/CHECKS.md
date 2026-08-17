@@ -74,6 +74,38 @@ make check        # format-check + analyze + conventions + method-length + dead-
 > [Development setup](DEVELOPMENT_SETUP_GUIDE.md)) — and confirm with
 > `cmake --version` before running the gate.
 
+> **Running the gate in more than one worktree at once? It queues.** Since
+> 2026-08-17 `make check` and `make check-full` run under a gate lock
+> (`scripts/gate_lock.sh`): a second run waits for the first instead of
+> starting alongside it. It prints which worktree holds the lock and for how
+> long.
+>
+> **Why.** Every worktree of this repo points `.dart_tool/hooks_runner/shared`
+> at the same directory, so a fresh worktree does not have to rebuild the
+> native OpenCV layer — and cannot, while GitHub answers the archive download
+> with an HTTP 429. The price of sharing is that concurrent runs also share one
+> native-assets lock and one CMake build directory. Run four at once and you
+> get CMake refusing (*"The current CMakeCache.txt directory … is different
+> than the directory … where CMakeCache.txt was created"*), a full OpenCV
+> rebuild, and then other runs dying on *"Could not acquire the lock …
+> TimeoutException after 0:05:00"*. `make check` then fails on a **random**
+> gate — dead-code, method-length, coverage — with nothing wrong in the change.
+> A gate that points at the wrong place is worse than a slow one.
+>
+> **What it does not fix.** Alternating between worktrees still re-stamps the
+> CMake cache, so the first run after a switch rebuilds OpenCV. That is slow
+> but correct. If you want to avoid it, give a worktree its own
+> `.dart_tool/hooks_runner` (roughly 2 GB, and it needs the download to work)
+> instead of the shared symlink — the lock notices: with a real directory
+> instead of a symlink, the scope is that worktree alone and nobody waits.
+>
+> **Escape hatches.** `OCIDECK_NO_GATE_LOCK=1` skips the lock (a CI runner has
+> one worktree, so there is nothing to queue for);
+> `OCIDECK_GATE_LOCK_TIMEOUT=<seconds>` bounds the wait (default 5400, and it
+> exits 75 with the path of the lock to remove if you are sure it is stale). A
+> lock whose holder process is gone is released automatically — an aborted run
+> does not block the machine.
+
 Run this before every push — it is the enforced gate. For the extended
 local sweep that also covers licences and dependency health:
 
