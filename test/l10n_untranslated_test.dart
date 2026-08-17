@@ -115,8 +115,28 @@ final x = {
         });
       },
     );
+
+    test('een sleutel in dubbele quotes komt mee', () {
+      // Dit is de vorm die `dart format` écht schrijft zodra er een apostrof
+      // in staat — niet de ontsnapte variant hierboven. Zolang deze regel niet
+      // gelezen werd, was `"dia's geïmporteerd.": 'slides imported.'` in
+      // dertig talen onzichtbaar voor de poort die er nu net over gaat.
+      const body = '''
+final x = {
+  "dia's geïmporteerd.": 'slides imported.',
+  'zonder apostrof': "een waarde met 'aanhaling'",
+};
+''';
+      expect(_pairs(body), {
+        "dia's geïmporteerd.": 'slides imported.',
+        'zonder apostrof': "een waarde met 'aanhaling'",
+      });
+    });
   });
 }
+
+/// Eén Dart-stringliteral: met enkele óf met dubbele aanhalingstekens.
+const _literal = r"""('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")""";
 
 /// Sleutel → waarde voor elk paar in [source].
 ///
@@ -125,17 +145,26 @@ final x = {
 /// detail — juist de lange waarden worden gebroken, en dat zijn precies de
 /// zinnen waar deze poort over gaat. Een parser die alleen enkelregelige paren
 /// las, keek langs zijn eigen doelgroep heen.
+///
+/// En ook de paren die `dart format` in DUBBELE aanhalingstekens zette. Dat
+/// doet hij zodra de string zelf een apostrof draagt en geen dubbele quote:
+/// `"dia's geïmporteerd."`. De zelftoets hieronder dacht dat af te dekken met
+/// `'De voorbeelddia\'s'`, maar díe vorm schrijft de formatter juist nooit —
+/// hij normaliseert hem weg naar de dubbele quote. Gevolg: elke sleutel met
+/// een apostrof was voor deze poort onzichtbaar, en dat is in het Nederlands
+/// geen zeldzame vorm (`dia's`, `'s ochtends`).
 Map<String, String> _pairs(String source) {
   final out = <String, String>{};
-  final re = RegExp(
-    r"^\s*'((?:[^'\\]|\\.)*)':\s*'((?:[^'\\]|\\.)*)',\s*$",
-    multiLine: true,
-  );
+  final re = RegExp('^\\s*$_literal:\\s*$_literal,\\s*\$', multiLine: true);
   for (final m in re.allMatches(source)) {
     out[_unescape(m.group(1)!)] = _unescape(m.group(2)!);
   }
   return out;
 }
 
-String _unescape(String literal) =>
-    literal.replaceAll(r"\'", "'").replaceAll(r'\\', r'\');
+/// De inhoud van een Dart-stringliteral [literal], quotes eraf.
+String _unescape(String literal) => literal
+    .substring(1, literal.length - 1)
+    .replaceAll(r"\'", "'")
+    .replaceAll(r'\"', '"')
+    .replaceAll(r'\\', r'\');

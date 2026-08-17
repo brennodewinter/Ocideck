@@ -61,14 +61,22 @@ String dutchSourceRegion(String text, String code) {
 /// Leest ook een paar dat `dart format` na de dubbele punt over twee regels
 /// brak: de witruimte ertussen mag een regeleinde bevatten. Juist de lange
 /// waarden worden gebroken, en dat zijn de zinnen waar een vertaler aan werkt.
-final _pair = RegExp(
-  r"^\s*'((?:[^'\\]|\\.)*)':\s*'((?:[^'\\]|\\.)*)',\s*$",
-  multiLine: true,
-);
+///
+/// En ook de paren die `dart format` in DUBBELE aanhalingstekens zette: dat
+/// doet hij zodra de string zelf een apostrof draagt (`"dia's geïmporteerd."`).
+/// Zolang die vorm niet werd gelezen, kreeg een vertaler zo'n sleutel nooit te
+/// zien in zijn export en kon hij hem met een import ook niet verbeteren — de
+/// string was voor dit gereedschap onzichtbaar in plaats van onvertaald.
+const _literal = r"""('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")""";
 
+final _pair = RegExp('^\\s*$_literal:\\s*$_literal,\\s*\$', multiLine: true);
+
+/// De inhoud van een Dart-stringliteral [literal], quotes eraf.
 String unescapeDart(String literal) => literal
+    .substring(1, literal.length - 1)
     .replaceAll(r'\n', '\n')
     .replaceAll(r"\'", "'")
+    .replaceAll(r'\"', '"')
     .replaceAll(r'\$', r'$')
     .replaceAll(r'\\', r'\');
 
@@ -144,7 +152,10 @@ void doImport(String code, String path) {
     if (value == unescapeDart(m.group(2)!)) return m.group(0)!;
     changed++;
     final indent = RegExp(r'^\s*').firstMatch(m.group(0)!)!.group(0)!;
-    return "$indent'${m.group(1)}': ${dartLiteral(value)},";
+    // De sleutel gaat ONGEWIJZIGD terug, quotes en al: hij mag enkel- of
+    // dubbelaangehaald zijn en het is niet aan een vertaalronde om die keuze
+    // om te zetten. `dart format` beslist daar zelf over.
+    return '$indent${m.group(1)}: ${dartLiteral(value)},';
   });
   text = text.substring(0, regionAt) + updated;
   target.writeAsStringSync(text);
