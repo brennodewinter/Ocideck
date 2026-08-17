@@ -62,6 +62,18 @@ Future<void> _applyDocumentChapterPageBreak(
   );
 }
 
+/// Documentmodus: snijtekens rond het snijformaat in de LaTeX/PDF-export.
+/// Alleen zinvol met een afloop; raakt geen `.md`-bestand.
+Future<void> _applyDocumentCropMarks(SettingsNotifier notifier, bool enabled) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentCropMarks: enabled,
+  );
+  return notifier._persist(
+    'documentCropMarks',
+    (prefs) => prefs.setBool('documentCropMarks', enabled),
+  );
+}
+
 /// Documentmodus: stel de maximale schrijfbreedte van de visuele editor in
 /// (px), of `null` voor volledige breedte. Feature 2.
 Future<void> _applyDocumentEditorMaxWidth(

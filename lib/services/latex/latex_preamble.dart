@@ -25,6 +25,7 @@ String articlePreamble(
   ExportDocumentMetadata meta, {
   PageSizeSpec pageSize = PageSizeSpec.a4,
   PageMargins pageMargins = const PageMargins(),
+  bool cropMarks = false,
 }) {
   final buf = StringBuffer();
   buf.write('\\documentclass[11pt,${pageSize.latexName}]{article}\n');
@@ -88,6 +89,24 @@ String articlePreamble(
       ? pageMargins.latexMargin
       : '$paper,${pageMargins.latexMargin}';
   buf.write('\\usepackage[$geometry]{geometry}\n');
+  // Snijtekens: alleen wanneer erom gevraagd is én er afloop is, want zonder
+  // afloop wijzen ze nergens naar. `crop` tekent ze rond het snijformaat op het
+  // grotere vel — precies wat een drukker nodig heeft om te weten waar hij
+  // snijdt.
+  //
+  // Dit pakket zit niet in de kaalste TeX-installatie (`scheme-basic`), wél in
+  // de gangbare volledige. Daarom staat het alleen in de preamble wanneer de
+  // gebruiker de snijtekens zelf aanzet: wie ze niet vraagt krijgt geen extra
+  // afhankelijkheid, en wie ze wél vraagt accepteert er één die de interface
+  // en de documentatie noemen. Het HTML-pad belooft ze niet — geen browser kent
+  // `marks` uit CSS Paged Media.
+  if (cropMarks && pageMargins.hasBleed) {
+    final (trimW, trimH) = pageSize.dimensions;
+    buf.write(
+      '\\usepackage[width=${_mm(trimW)}mm,height=${_mm(trimH)}mm,'
+      'cam,center]{crop}\n',
+    );
+  }
   buf.write('\n');
   // Metadata
   if (meta.title.trim().isNotEmpty) {
@@ -301,3 +320,7 @@ String _escapeLatex(String s) {
       .replaceAll('~', r'\textasciitilde{}')
       .replaceAll('^', r'\textasciicircum{}');
 }
+
+/// Millimeters zonder overbodige nullen — `210` in plaats van `210.0`.
+String _mm(double mm) =>
+    mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();

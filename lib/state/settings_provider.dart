@@ -268,6 +268,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
       documentChapterPageBreak:
           prefs.getBool('documentChapterPageBreak') ?? false,
+      documentCropMarks: prefs.getBool('documentCropMarks') ?? false,
       documentEditorMaxWidth: _readDocumentEditorMaxWidth(prefs),
       documentPageSize:
           PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
@@ -549,6 +550,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> setDocumentChapterPageBreak(bool enabled) =>
       _applyDocumentChapterPageBreak(this, enabled);
+
+  /// Snijtekens rond het snijformaat in de LaTeX/PDF-export.
+  Future<void> setDocumentCropMarks(bool enabled) =>
+      _applyDocumentCropMarks(this, enabled);
 
   Future<void> setDocumentEditorMaxWidth(double? width) =>
       _applyDocumentEditorMaxWidth(this, width);

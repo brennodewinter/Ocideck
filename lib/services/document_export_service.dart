@@ -104,6 +104,7 @@ Future<String?> writeDocumentExport(
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
   bool chapterPageBreak = false,
+  bool cropMarks = false,
   PageSizeSpec? pageSize,
   PageMargins? pageMargins,
   required String outputPath,
@@ -153,7 +154,7 @@ Future<String?> writeDocumentExport(
         tableBorderStyle: theme?.tableBorderStyle ?? TableBorderStyle.lined,
       );
       final tex =
-          '${articlePreamble(meta, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins())}\n$body\n$articlePostamble\n';
+          '${articlePreamble(meta, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
       await writeStringAtomic(File(outputPath), tex);
       return outputPath;
     case DocumentExportFormat.ocideck:
