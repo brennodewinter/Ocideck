@@ -1127,6 +1127,9 @@ MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, ThemeProfile? profile) =>
       scheme: theme.colorScheme,
       fontFamily: profile?.fontFamily,
       profile: profile,
+      // In de documentmodus schrijf je op een pagina, dus in de typografie van
+      // die pagina — zie [MarkdownEditorTheme.documentTypography].
+      documentTypography: true,
     );
 
 /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De

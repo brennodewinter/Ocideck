@@ -1,3 +1,5 @@
+import '../reader/document_markdown_view.dart'
+    show kDocumentBodyFontSize, kDocumentBodyLineHeight;
 import 'package:flutter/material.dart';
 import '../../models/settings.dart';
 import '../../theme/app_theme.dart';
@@ -34,7 +36,19 @@ class MarkdownEditorTheme {
     this.lineHeight = 1.5,
     this.fontFamily,
     this.profile,
+    this.documentTypography = false,
   });
+
+  /// Schrijf je op een pagina, dan schrijf je in de lettermaten van die
+  /// pagina. De documentmodus zet dit aan; dan neemt het schrijfvlak de
+  /// typografie van de documentweergave over — dezelfde lettergrootte,
+  /// regelafstand, kopmaten en blokafstanden.
+  ///
+  /// Dat is geen smaakkwestie maar rekenwerk: de pagina-einden in de
+  /// schrijfstand worden gemeten aan wat er staat, en met kleinere letters
+  /// paste er ruim een kwart te veel op een vel. De lijn stond dan wel op een
+  /// blokgrens, maar op de verkeerde.
+  final bool documentTypography;
 
   TextStyle get bodyStyle => TextStyle(
     fontFamily: fontFamily,
@@ -97,6 +111,7 @@ class MarkdownEditorTheme {
     double fontSize = 15,
     String? fontFamily,
     ThemeProfile? profile,
+    bool documentTypography = false,
   }) {
     final paper = profile == null
         ? scheme.surfaceContainerLowest
@@ -122,11 +137,15 @@ class MarkdownEditorTheme {
       border: profile == null
           ? scheme.outlineVariant
           : text.withValues(alpha: 0.22),
-      fontSize: fontSize,
+      // Met documenttypografie gelden de maten van de documentweergave, zodat
+      // schrijven en drukken dezelfde hoogte opleveren.
+      fontSize: documentTypography ? kDocumentBodyFontSize : fontSize,
+      lineHeight: documentTypography ? kDocumentBodyLineHeight : 1.5,
       // Het lettertype van de gekozen documentstijl; `null` = het app-lettertype
       // (dan leest een plat document precies als voorheen).
       fontFamily: fontFamily,
       profile: profile,
+      documentTypography: documentTypography,
     );
   }
 

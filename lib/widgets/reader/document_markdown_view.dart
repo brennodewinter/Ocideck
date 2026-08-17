@@ -526,15 +526,12 @@ class DocumentMarkdownView extends StatelessWidget {
   // ── Block builders ────────────────────────────────────────────────────────
 
   Widget _heading(_Theme t, int level, String text) {
-    final size = switch (level) {
-      1 => 27.0,
-      2 => 22.0,
-      3 => 18.5,
-      4 => 16.0,
-      _ => 14.5,
-    };
+    final size = documentHeadingSize(level);
     return Padding(
-      padding: EdgeInsets.only(top: level <= 2 ? 26 : 18, bottom: 8),
+      padding: EdgeInsets.only(
+        top: level <= 2 ? kDocumentHeadingGapTop : kDocumentSubheadingGapTop,
+        bottom: kDocumentHeadingGapBottom,
+      ),
       child: _inline(
         text,
         t.body.copyWith(
@@ -549,7 +546,7 @@ class DocumentMarkdownView extends StatelessWidget {
   }
 
   Widget _paragraph(_Theme t, String text) => Padding(
-    padding: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.only(bottom: kDocumentParagraphGap),
     child: _inline(text, t.body, t),
   );
 
