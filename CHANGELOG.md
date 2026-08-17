@@ -1423,6 +1423,21 @@ that before deciding whether this alpha fits what you are doing.
   dit pakket start zélf de native-assets-hook en grijpt naar precies de lock
   waar je op wacht. Wat het niet oplost staat er hardop bij — wisselen tussen
   worktrees herbouwt OpenCV nog steeds (#1541).
+- **de geprojecteerde `.md`-export draagt de paginaopmaak mee (#1536).** Sinds
+  #1525 kan een document zijn vel zelf dragen in `papersize:`/`geometry:`, maar
+  de export naar `.md` liet die sleutels weg. Je stuurde iemand een document dat
+  bij jou op A4 met afloop stond, en hij drukte het af op zijn eigen vel. De
+  export schrijft nu de opmaak die op het moment van exporteren geldt — de
+  uitkomst van `effectiveDocumentPageSetup`, dus document boven instelling — vóór
+  de geprojecteerde body, met bij een afloop dezelfde expliciete millimeters als
+  de LaTeX-route. Ook wanneer de opmaak alleen in de instellingen stond, want de
+  ontvanger heeft die instellingen niet. De stijl (`theme:`) reist bewust níet
+  mee, en dat verschil is nu vastgelegd in de code en in FILE_FORMAT.md §14.4:
+  een papiermaat is een **maat**, in millimeters die overal hetzelfde betekenen,
+  terwijl een stijlnaam een **verwijzing** is naar een profiel dat alleen op deze
+  machine bestaat. Een maat kun je kopiëren, een verwijzing niet — dus wordt de
+  stijl vóór export opgelost en in de uitvoer gerenderd. De bron blijft
+  onaangeraakt; de export schrijft zoals altijd een nieuw bestand (§14.4).
 
 - **een poort op vertalingen die de Nederlandse bron laten staan.** De
   vertaalwachters keken alle drie langs hetzelfde gat. `make l10n-check` vraagt

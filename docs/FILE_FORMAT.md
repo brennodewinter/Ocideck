@@ -3175,6 +3175,34 @@ the chosen privacy profile is written into the export's filename. There is no
 built-in PDF writer for a document — a PDF is made by printing the exported HTML
 from the browser (see the [User Guide](USER_GUIDE.md#documents)).
 
+**What travels into the projected `.md`, and what does not** *(settled
+2026-08-17)*. The export is a copy for someone else's machine, so the question
+per key is whether it still means anything there.
+
+- **The page setup travels.** The projected `.md` opens with the page setup that
+  applied at the moment of export, in `papersize:`/`geometry:` (§14.8) — the same
+  arithmetic, including the explicit millimetres when there is a bleed. It is
+  written even when the setup came from the *settings* rather than from the file:
+  the recipient does not have those settings, and without the keys the document
+  would be laid out on whatever sheet their machine happens to be set to. The
+  order of precedence is not re-decided here; the export writes the outcome of
+  `effectiveDocumentPageSetup`
+  ([`lib/services/document_style.dart`](../lib/services/document_style.dart)),
+  which is the same value the editor shows.
+- **The style does not travel.** `theme:` names a *style profile*, and a profile
+  is resolved by name against the profiles on the machine that opens the file. At
+  the recipient the name would point at nothing, or — worse — at a different
+  profile with the same name. So the style is resolved before export and rendered
+  into the output itself (§14.5).
+
+The difference is not that one key is more important than the other: it is that a
+paper size is a **measure**, complete on its own in millimetres any toolchain
+reads, while a style name is a **reference** into a local register. A measure can
+be copied; a reference cannot. That is also why the page setup is content of the
+export and not a preference of the reader — a bleed belongs to *this* print job
+(§14.7). The source is untouched either way: this is a fresh file, and §14.3's
+byte-faithfulness for the original holds.
+
 ### 14.5 Document style — the `theme:` front-matter key *(added 2026-08-08)*
 
 A document may carry one **style**: a `theme: <profile-name>` key in a leading
@@ -3392,6 +3420,10 @@ Facts that matter on disk:
   field that is absent falls back to the shipped default for that side
   (25/25/20/20 mm), not to your setting, since the value that *is* there is taken
   as the author's description of the page.
+- **It travels on export.** The projected `.md` export (§14.4) writes these two
+  keys, with the setup that applies at that moment — also when that setup came
+  from the settings and the file itself said nothing. A recipient therefore gets
+  the sheet the author saw, not their own default.
 - **Size and margins apply independently.** A document that carries only
   `papersize:` keeps the margins from the settings, and one that carries only
   `geometry:` keeps the size from the settings. The precedence, per field, is

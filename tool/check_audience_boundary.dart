@@ -104,7 +104,11 @@ const Map<String, Surface> _registry = {
     'De documentmodus-export (§11.2): schrijft het geprojecteerde `.md` of het '
     'doorlopende HTML weg. De geredigeerde body komt via de ExportBundle binnen '
     '(projectedDocumentBody leest bundle.audience.deck), nooit de rauwe bron; '
-    'daarom neemt de schrijfsignatuur een ExportBundle en geen rauwe Deck.',
+    'daarom neemt de schrijfsignatuur een ExportBundle en geen rauwe Deck. '
+    'Het `.md` krijgt daarnaast de geldende paginaopmaak als frontmatter mee '
+    '(#1536): papiermaat, marges en afloop in millimeters. Dat is de enige '
+    'inhoud die niet door de projectie komt, en het kán er ook niet doorheen — '
+    'het zijn afmetingen uit de instellingen, geen tekst uit het document.',
   ),
 
   // ── De bron terug naar de gebruiker: redigeren zou hier fout zijn ────────

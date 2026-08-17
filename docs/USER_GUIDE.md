@@ -4501,6 +4501,16 @@ geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,righ
 That is A4 (210 × 297 mm) with 3 mm on every side. When OciDeck opens such a file
 again it recognises the enlarged sheet and shows it as *A4 · +3mm*.
 
+**Exporting to `.md` always takes the page setup along.** *(Added 2026-08-17.)*
+The exported copy — a new file, your own document is never touched — opens with
+these same two lines, filled in with the setup that applies at that moment. You
+do not have to pin the document first: if the size and margins came from your
+settings, they are written into the export anyway, because the person receiving
+it does not have your settings. What you saw is what they print. The **style** is
+the one thing that does not travel this way — a style is a profile living on your
+machine, so instead of sending its name OciDeck renders the style into the
+exported HTML or `.tex` itself.
+
 Two limitations worth knowing before you rely on it. **Only what is in the file
 travels** — pinning a document does not pin the writing width, the chapter page
 break or the style, and it changes nothing about documents you pinned earlier.

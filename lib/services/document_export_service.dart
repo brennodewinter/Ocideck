@@ -7,6 +7,7 @@ import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
 import 'document_chart_hydration.dart';
 import 'document_deck_bridge.dart';
+import 'document_page_setup.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
 import 'latex/latex_preamble.dart';
@@ -87,7 +88,10 @@ String projectedDocumentBody(ExportBundle bundle) =>
 /// (`tool/check_audience_boundary.dart`) verlangt van een schrijver die
 /// `writeStringAtomic` raakt.
 ///
-/// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg.
+/// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg,
+///   met de geldende paginaopmaak ([pageSize]/[pageMargins]) in Pandoc-front
+///   matter ervoor — anders dan de stijl reist de maat wél mee (zie de
+///   toelichting in die tak, en FILE_FORMAT.md §14.4).
 /// - [DocumentExportFormat.html] rendert die body als één doorlopend HTML-
 ///   document (`continuous: true`) en schrijft het resultaat atomisch weg.
 /// - [DocumentExportFormat.latex] zet de geprojecteerde body om naar een
@@ -124,7 +128,24 @@ Future<String?> writeDocumentExport(
       final mdOut = hasTocMarker(mdBody)
           ? replaceTocMarker(mdBody, toc, keepMarker: false)
           : mdBody;
-      await writeStringAtomic(File(outputPath), mdOut);
+      // De paginaopmaak reist wél mee, de stijl niet — en dat is geen
+      // inconsistentie maar het verschil tussen een verwijzing en een maat.
+      // `theme:` noemt een stijlprofiel dat alleen op déze machine bestaat: bij
+      // de ontvanger zou de naam nergens naar wijzen, dus wordt de stijl vóór
+      // export opgelost en in de uitvoer zelf gerenderd (§14.5). `papersize:` en
+      // `geometry:` zijn geen verwijzing maar het vel zelf, in millimeters die
+      // overal hetzelfde betekenen, en ze horen bij hoe dít drukwerk eruit moet
+      // komen — een afloop is een eigenschap van de opdracht, niet van de lezer.
+      // Daarom schrijven we hier de opmaak die op dit moment geldt
+      // (`effectiveDocumentPageSetup`: document boven instelling), juist ook
+      // wanneer die alleen in de instellingen stond: de ontvanger heeft die
+      // instellingen niet. Zie FILE_FORMAT.md §14.4.
+      final mdWithPageSetup = withDocumentPageSetup(
+        mdOut,
+        size: pageSize,
+        margins: pageMargins,
+      );
+      await writeStringAtomic(File(outputPath), mdWithPageSetup);
       return outputPath;
     case DocumentExportFormat.html:
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
