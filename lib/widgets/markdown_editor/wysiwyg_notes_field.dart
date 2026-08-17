@@ -47,10 +47,13 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
   DefaultTextBlockStyle block(TextStyle style) => DefaultTextBlockStyle(
     style,
     HorizontalSpacing.zero,
-    doc ? VerticalSpacing.zero : const VerticalSpacing(6, 0),
+    // Derde plek is de ruimte *om het blok*, vierde die tússen de regels erin.
+    // De witruimte na een alinea hoort dus in de derde. In de vierde gezet deed
+    // hij niets zichtbaars, en werd het schrijfvlak één muur tekst.
     doc
         ? const VerticalSpacing(0, kDocumentParagraphGap)
-        : VerticalSpacing.zero,
+        : const VerticalSpacing(6, 0),
+    VerticalSpacing.zero,
     null,
   );
 

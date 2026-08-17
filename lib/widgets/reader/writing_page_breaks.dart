@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart' show BoxParentData;
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../services/document_pagination.dart';
-import 'document_markdown_view.dart' show kDocumentParagraphGap;
 
 /// De hoogtes van de blokken in de schrijfstand, in de volgorde waarin ze
 /// staan — inclusief de witruimte die er ónder elk blok zit.
@@ -36,30 +35,9 @@ List<double> writingBlockHeights(RenderEditor? editor) {
     for (var i = 0; i < tops.length; i++)
       // Tot aan de bovenkant van het volgende blok; het laatste blok telt
       // alleen zijn eigen hoogte, want daaronder komt niets meer.
-      (i + 1 < tops.length ? tops[i + 1] - tops[i] : ownHeights[i]) +
-          kQuillMissingBlockGap,
+      i + 1 < tops.length ? tops[i + 1] - tops[i] : ownHeights[i],
   ];
 }
-
-/// De witruimte na een alinea die de schrijfeditor niet meetekent.
-///
-/// Quill negeert de `verticalSpacing` die wij voor een alinea meegeven — dat is
-/// nagemeten, niet vermoed: op honderd beeldpunten gezet veranderde de
-/// gerenderde hoogte geen pixel. De weergave zet die ruimte er wél onder
-/// ([kDocumentParagraphGap]), en zonder deze correctie past er in de
-/// schrijfstand structureel te veel op een vel — het scheelde over drie
-/// pagina's een heel vel.
-///
-/// Bewust bij het *meten* opgeteld en niet bij het tekenen: de lijn moet blijven
-/// vallen waar de editor zijn blokken echt neerzet. Kopregels krijgen hun
-/// afstand van Quill wél mee en tellen die twaalf punten dus dubbel; dat is
-/// hooguit een procent van een A4 en het valt de goede kant op, want de lijn
-/// zegt dan eerder "vol" in plaats van ruimte te beloven die er niet is.
-///
-/// `writing_typography_match_test.dart` pint de verhouding tussen beide werelden
-/// vast: gaat Quill de afstand ooit wél toepassen, dan valt die test om in
-/// plaats van dat de lijnen stil verschuiven.
-const double kQuillMissingBlockGap = kDocumentParagraphGap;
 
 /// De bovenkant van het eerste blok binnen de editor.
 ///
