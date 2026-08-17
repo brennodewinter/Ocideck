@@ -5,9 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
-import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/state/document_provider.dart';
-import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
