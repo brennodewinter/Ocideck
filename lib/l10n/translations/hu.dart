@@ -1795,6 +1795,8 @@ const _dutchSourceAddHu = <String, String>{
   'enveloppen': 'borítékok',
   'Afloop voor de drukker (mm)': 'Kifutó a nyomdának (mm)',
   'Pagina {n} van {m}': '{n}. oldal, összesen {m}',
+  'Pagina-einden tonen': 'Oldaltörések megjelenítése',
+  'Pagina-einden verbergen': 'Oldaltörések elrejtése',
   'Boven (mm)': 'Fent (mm)',
   'Onder (mm)': 'Lent (mm)',
   'Links (mm)': 'Bal (mm)',

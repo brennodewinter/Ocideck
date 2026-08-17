@@ -1808,6 +1808,8 @@ const _dutchSourceAddRo = <String, String>{
   'enveloppen': 'plicuri',
   'Afloop voor de drukker (mm)': 'Bleed pentru tipografie (mm)',
   'Pagina {n} van {m}': 'Pagina {n} din {m}',
+  'Pagina-einden tonen': 'Afișează sfârșiturile de pagină',
+  'Pagina-einden verbergen': 'Ascunde sfârșiturile de pagină',
   'Boven (mm)': 'Sus (mm)',
   'Onder (mm)': 'Jos (mm)',
   'Links (mm)': 'Stânga (mm)',

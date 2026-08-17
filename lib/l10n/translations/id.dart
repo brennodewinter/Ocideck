@@ -1791,6 +1791,8 @@ const _dutchSourceAddId = <String, String>{
   'enveloppen': 'amplop',
   'Afloop voor de drukker (mm)': 'Bleed untuk percetakan (mm)',
   'Pagina {n} van {m}': 'Halaman {n} dari {m}',
+  'Pagina-einden tonen': 'Tampilkan pemisah halaman',
+  'Pagina-einden verbergen': 'Sembunyikan pemisah halaman',
   'Boven (mm)': 'Atas (mm)',
   'Onder (mm)': 'Bawah (mm)',
   'Links (mm)': 'Kiri (mm)',

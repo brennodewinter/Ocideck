@@ -1813,6 +1813,8 @@ const _dutchSourceAddBg = <String, String>{
   'enveloppen': 'пликове',
   'Afloop voor de drukker (mm)': 'Разлив за печатницата (мм)',
   'Pagina {n} van {m}': 'Страница {n} от {m}',
+  'Pagina-einden tonen': 'Показване на прекъсванията на страниците',
+  'Pagina-einden verbergen': 'Скриване на прекъсванията на страниците',
   'Boven (mm)': 'Отгоре (mm)',
   'Onder (mm)': 'Отдолу (mm)',
   'Links (mm)': 'Ляво (mm)',

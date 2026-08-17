@@ -1790,6 +1790,8 @@ const _dutchSourceAddLv = <String, String>{
   'enveloppen': 'aploksnes',
   'Afloop voor de drukker (mm)': 'Apgriešanas rezerve tipogrāfijai (mm)',
   'Pagina {n} van {m}': 'Lappuse {n} no {m}',
+  'Pagina-einden tonen': 'Rādīt lappušu pārtraukumus',
+  'Pagina-einden verbergen': 'Slēpt lappušu pārtraukumus',
   'Boven (mm)': 'Augšā (mm)',
   'Onder (mm)': 'Apakšā (mm)',
   'Links (mm)': 'Pa kreisi (mm)',

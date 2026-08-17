@@ -1790,6 +1790,8 @@ const _dutchSourceAddDa = <String, String>{
   'enveloppen': 'konvolutter',
   'Afloop voor de drukker (mm)': 'Beskæring til trykkeriet (mm)',
   'Pagina {n} van {m}': 'Side {n} af {m}',
+  'Pagina-einden tonen': 'Vis sideskift',
+  'Pagina-einden verbergen': 'Skjul sideskift',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bund (mm)',
   'Links (mm)': 'Venstre (mm)',

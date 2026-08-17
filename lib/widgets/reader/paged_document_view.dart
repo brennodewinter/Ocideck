@@ -14,6 +14,16 @@ import 'document_markdown_view.dart';
 /// A4 wordt hier net zo breed als daar.
 const double kPxPerMm = 96 / 25.4;
 
+/// De tekstbreedte van één pagina in beeldpunten: de paginabreedte min de
+/// zijmarges. Puur, en hier thuis omdat dit dezelfde paginameetkunde is als
+/// waarmee de vellen worden opgezet — de schrijfstand rekent er zijn
+/// tekstkolom mee uit, zodat een pagina-einde daar op dezelfde breedte valt
+/// als op papier.
+double pageTextWidthPx(PageSizeSpec size, PageMargins margins) {
+  final (widthMm, _) = size.dimensions;
+  return (widthMm - margins.leftMm - margins.rightMm) * kPxPerMm;
+}
+
 /// Toont een document als échte pagina's: op maat, met de gekozen marges, een
 /// kop- en voetband per pagina en een paginanummer.
 ///
@@ -112,32 +122,45 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       blockHeights: heights,
       pageHeight: _contentHeightPx,
     );
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            for (var i = 0; i < offsets.length; i++) ...[
-              _sheet(
-                context,
-                document,
-                offsets[i],
-                // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                // een volle paginahoogte verder. Een blok dat niet meer paste
-                // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                // te blijven in plaats van de eerste regels van dat blok
-                // doormidden te tonen.
-                i + 1 < offsets.length
-                    ? offsets[i + 1] - offsets[i]
-                    : _contentHeightPx,
-                i + 1,
-                offsets.length,
-              ),
-              const SizedBox(height: 16),
-            ],
-          ],
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
+        // vellen staan in een verticale rol, dus er is geen horizontale
+        // schuifbalk om naar de rechterhelft te gaan. A0 staat gewoon in de
+        // maatlijst, dus dat geval is niet theoretisch — schaal terug tot het
+        // past, nooit verder omhoog dan ware grootte.
+        final (sheetW, _) = _sheetPx;
+        final room = constraints.maxWidth - 32;
+        final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
+        return SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 16),
+                for (var i = 0; i < offsets.length; i++) ...[
+                  _sheet(
+                    context,
+                    document,
+                    offsets[i],
+                    // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                    // een volle paginahoogte verder. Een blok dat niet meer paste
+                    // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                    // te blijven in plaats van de eerste regels van dat blok
+                    // doormidden te tonen.
+                    i + 1 < offsets.length
+                        ? offsets[i + 1] - offsets[i]
+                        : _contentHeightPx,
+                    i + 1,
+                    offsets.length,
+                    fit,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -183,6 +206,34 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     });
   }
 
+  /// De kop- of voetband van één vel, in de marge geplaatst.
+  Widget _chromeBand(
+    ThemeProfile profile,
+    double bleedPx,
+    int pageNumber, {
+    required bool header,
+  }) => Positioned(
+    // Binnen de zijmarges, niet tegen de snijrand: een kop- of voetband hoort
+    // op dezelfde lijn te beginnen en eindigen als de tekst eronder. Tegen de
+    // papierrand geplakt liep het woordmerk er half af.
+    left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
+    right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
+    top: header ? bleedPx : null,
+    bottom: header ? null : bleedPx,
+    height:
+        (header ? widget.margins.topMm : widget.margins.bottomMm) * kPxPerMm,
+    child: Align(
+      alignment: header ? Alignment.bottomCenter : Alignment.topCenter,
+      child: DocumentChromeBand(
+        profile: profile,
+        header: header,
+        pageLabel: '$pageNumber',
+        projectPath: widget.projectPath,
+        compact: true,
+      ),
+    ),
+  );
+
   /// Eén vel: papier, afloopmarkering, kop- en voetband en het venster op het
   /// doorlopende document dat op deze pagina hoort.
   Widget _sheet(
@@ -192,6 +243,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     double windowHeight,
     int pageNumber,
     int pageCount,
+    double fit,
   ) {
     final (sheetW, sheetH) = _sheetPx;
     final bleedPx = widget.margins.bleedMm * kPxPerMm;
@@ -224,38 +276,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           // en verdween er onderaan elk vel een stuk tekst dat nergens meer
           // terugkwam.
           if (profile != null) ...[
-            Positioned(
-              left: bleedPx,
-              right: bleedPx,
-              top: bleedPx,
-              height: widget.margins.topMm * kPxPerMm,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: DocumentChromeBand(
-                  profile: profile,
-                  header: true,
-                  pageLabel: '$pageNumber',
-                  projectPath: widget.projectPath,
-                  compact: true,
-                ),
-              ),
-            ),
-            Positioned(
-              left: bleedPx,
-              right: bleedPx,
-              bottom: bleedPx,
-              height: widget.margins.bottomMm * kPxPerMm,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: DocumentChromeBand(
-                  profile: profile,
-                  header: false,
-                  pageLabel: '$pageNumber',
-                  projectPath: widget.projectPath,
-                  compact: true,
-                ),
-              ),
-            ),
+            _chromeBand(profile, bleedPx, pageNumber, header: true),
+            _chromeBand(profile, bleedPx, pageNumber, header: false),
           ],
           Positioned(
             left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
@@ -297,15 +319,41 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         ],
       ),
     );
+    final label = context.l10n
+        .d('Pagina {n} van {m}')
+        .replaceAll('{n}', '$pageNumber')
+        .replaceAll('{m}', '$pageCount');
     return Semantics(
-      label: context.l10n
-          .d('Pagina {n} van {m}')
-          .replaceAll('{n}', '$pageNumber')
-          .replaceAll('{m}', '$pageCount'),
-      child: Transform.scale(
-        scale: widget.scale,
-        alignment: Alignment.topCenter,
-        child: page,
+      label: label,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // `scale` is de keuze van de aanroeper, `fit` de correctie die een
+          // vel dat breder is dan het venster binnen beeld houdt.
+          SizedBox(
+            // Met een sleutel: dit is het vel zoals het in beeld staat, de maat
+            // waar een toets over gaat.
+            key: const Key('document-sheet'),
+            width: sheetW * widget.scale * fit,
+            height: sheetH * widget.scale * fit,
+            child: FittedBox(fit: BoxFit.contain, child: page),
+          ),
+          const SizedBox(height: 4),
+          // Het nummer staat ónder het vel, niet erop: op het papier zou het
+          // doen alsof het meegedrukt wordt, en dat is het niet — een
+          // paginanummer in de uitvoer komt uit de voetband van het
+          // stijlprofiel. Zonder dit bijschrift had een document zonder
+          // profielband nergens een nummer, terwijl je deze stand juist
+          // opent om te zien wat op welke bladzijde komt.
+          ExcludeSemantics(
+            child: Text(
+              label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

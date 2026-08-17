@@ -5,6 +5,14 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import 'divider_embed_builder.dart';
+import '../reader/document_markdown_view.dart'
+    show
+        documentHeadingSize,
+        kDocumentHeadingGapBottom,
+        kDocumentHeadingGapTop,
+        kDocumentListRowGap,
+        kDocumentParagraphGap,
+        kDocumentSubheadingGapTop;
 import 'markdown_editor_theme.dart';
 import 'table_embed_builder.dart';
 import 'toc_embed_builder.dart';
@@ -31,13 +39,43 @@ import 'toc_embed_builder.dart';
 @visibleForTesting
 DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
   final body = theme.bodyStyle;
+  final doc = theme.documentTypography;
+  // Op een pagina schrijven betekent in de maten van die pagina schrijven: dan
+  // levert dezelfde tekst dezelfde hoogte op als in de weergave, en valt een
+  // pagina-einde in de schrijfstand op dezelfde plek als in de druk. Zonder die
+  // stand blijft de compacte notitietypografie gelden.
   DefaultTextBlockStyle block(TextStyle style) => DefaultTextBlockStyle(
     style,
     HorizontalSpacing.zero,
-    const VerticalSpacing(6, 0),
-    VerticalSpacing.zero,
+    doc ? VerticalSpacing.zero : const VerticalSpacing(6, 0),
+    doc
+        ? const VerticalSpacing(0, kDocumentParagraphGap)
+        : VerticalSpacing.zero,
     null,
   );
+
+  DefaultTextBlockStyle heading(int level) {
+    final size = documentHeadingSize(level);
+    return DefaultTextBlockStyle(
+      body.copyWith(
+        fontSize: doc
+            ? size
+            : theme.fontSize + (level == 1 ? 8 : (level == 2 ? 4 : 2)),
+        fontWeight: doc && level <= 2 ? FontWeight.w800 : FontWeight.bold,
+        height: doc ? 1.25 : null,
+        color: level == 1 ? theme.heading : theme.subheading,
+      ),
+      HorizontalSpacing.zero,
+      doc
+          ? VerticalSpacing(
+              level <= 2 ? kDocumentHeadingGapTop : kDocumentSubheadingGapTop,
+              kDocumentHeadingGapBottom,
+            )
+          : const VerticalSpacing(6, 0),
+      VerticalSpacing.zero,
+      null,
+    );
+  }
 
   return DefaultStyles(
     paragraph: block(body),
@@ -47,8 +85,12 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
     lists: DefaultListBlockStyle(
       body,
       HorizontalSpacing.zero,
-      const VerticalSpacing(6, 0),
-      const VerticalSpacing(0, 6),
+      doc
+          ? const VerticalSpacing(0, kDocumentParagraphGap)
+          : const VerticalSpacing(6, 0),
+      doc
+          ? const VerticalSpacing(0, kDocumentListRowGap)
+          : const VerticalSpacing(0, 6),
       null,
       null,
     ),
@@ -62,27 +104,9 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
       VerticalSpacing.zero,
       null,
     ),
-    h1: block(
-      body.copyWith(
-        fontSize: theme.fontSize + 8,
-        fontWeight: FontWeight.bold,
-        color: theme.heading,
-      ),
-    ),
-    h2: block(
-      body.copyWith(
-        fontSize: theme.fontSize + 4,
-        fontWeight: FontWeight.bold,
-        color: theme.subheading,
-      ),
-    ),
-    h3: block(
-      body.copyWith(
-        fontSize: theme.fontSize + 2,
-        fontWeight: FontWeight.bold,
-        color: theme.subheading,
-      ),
-    ),
+    h1: heading(1),
+    h2: heading(2),
+    h3: heading(3),
     bold: body.copyWith(fontWeight: FontWeight.bold),
     italic: body.copyWith(fontStyle: FontStyle.italic),
     strikeThrough: body.copyWith(decoration: TextDecoration.lineThrough),
@@ -123,6 +147,12 @@ class WysiwygNotesField extends StatefulWidget {
   /// wanneer de plak is afgehandeld (bijv. klembord-afbeelding → markdown).
   final Future<bool> Function()? tryConsumePaste;
 
+  /// Sleutel op de Quill-editor, zodat de aanroeper zijn render-object kan
+  /// bereiken. De documentmodus leest daaruit waar de blokken staan en hoe hoog
+  /// ze zijn — de enige eerlijke bron voor een pagina-einde in de schrijfstand,
+  /// want dat einde hoort te vallen waar het geschreven blok werkelijk eindigt.
+  final GlobalKey<EditorState>? editorKey;
+
   const WysiwygNotesField({
     super.key,
     required this.controller,
@@ -134,6 +164,7 @@ class WysiwygNotesField extends StatefulWidget {
     this.contentPadding = const EdgeInsets.all(10),
     this.bordered = true,
     this.tryConsumePaste,
+    this.editorKey,
   });
 
   @override
@@ -194,6 +225,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               focusNode: widget.focusNode,
               scrollController: widget.scrollController,
               config: QuillEditorConfig(
+                editorKey: widget.editorKey,
                 expands: widget.expand,
                 padding: widget.contentPadding,
                 placeholder: widget.hintText,

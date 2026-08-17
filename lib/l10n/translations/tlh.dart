@@ -1766,6 +1766,8 @@ const _dutchSourceAddTlh = <String, String>{
   'enveloppen': 'QIn navmey',
   'Afloop voor de drukker (mm)': 'HeH juS (mm)',
   'Pagina {n} van {m}': '{m} navvo\' nav {n}',
+  'Pagina-einden tonen': 'nav chu\'mey \'ang',
+  'Pagina-einden verbergen': 'nav chu\'mey So\'',
   'Boven (mm)': 'Dung (mm)',
   'Onder (mm)': 'bIng (mm)',
   'Links (mm)': 'poS (mm)',

@@ -750,6 +750,8 @@ const _dutchSourceAddDe = {
   'enveloppen': 'Umschläge',
   'Afloop voor de drukker (mm)': 'Anschnitt für die Druckerei (mm)',
   'Pagina {n} van {m}': 'Seite {n} von {m}',
+  'Pagina-einden tonen': 'Seitenumbrüche anzeigen',
+  'Pagina-einden verbergen': 'Seitenumbrüche ausblenden',
   'Boven (mm)': 'Oben (mm)',
   'Onder (mm)': 'Unten (mm)',
   'Links (mm)': 'Links (mm)',

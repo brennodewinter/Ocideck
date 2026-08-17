@@ -1818,6 +1818,8 @@ const _dutchSourceAddEl = <String, String>{
   'enveloppen': 'φάκελοι',
   'Afloop voor de drukker (mm)': 'Διαφυγή για το τυπογραφείο (mm)',
   'Pagina {n} van {m}': 'Σελίδα {n} από {m}',
+  'Pagina-einden tonen': 'Εμφάνιση αλλαγών σελίδας',
+  'Pagina-einden verbergen': 'Απόκρυψη αλλαγών σελίδας',
   'Boven (mm)': 'Επάνω (mm)',
   'Onder (mm)': 'Κάτω (mm)',
   'Links (mm)': 'Αριστερά (mm)',

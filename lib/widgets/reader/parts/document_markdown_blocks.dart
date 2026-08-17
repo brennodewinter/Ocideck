@@ -100,6 +100,30 @@ Color _profileColor(String? value, Color fallback) => value == null
     ? fallback
     : AppTheme.parseHexColor(value, fallback: fallback);
 
+/// De typografie van een documentpagina, gedeeld met het schrijfvlak.
+///
+/// De visuele editor neemt deze maten over wanneer je op een pagina schrijft.
+/// Ze horen dus op één plek te staan: liepen ze uiteen, dan liep ook de
+/// pagina-indeling van de schrijfstand uiteen met die van de druk — en dat is
+/// niet zichtbaar aan de code, alleen aan een lijn die op de verkeerde plek
+/// staat.
+const double kDocumentBodyFontSize = 15.5;
+const double kDocumentBodyLineHeight = 1.55;
+const double kDocumentParagraphGap = 12;
+const double kDocumentHeadingGapTop = 26;
+const double kDocumentSubheadingGapTop = 18;
+const double kDocumentHeadingGapBottom = 8;
+const double kDocumentListRowGap = 4;
+
+/// De lettergrootte van een kop op niveau [level].
+double documentHeadingSize(int level) => switch (level) {
+  1 => 27.0,
+  2 => 22.0,
+  3 => 18.5,
+  4 => 16.0,
+  _ => 14.5,
+};
+
 class _Theme {
   _Theme(ThemeData theme, ThemeProfile? profile)
     : dark = theme.brightness == Brightness.dark,
@@ -109,8 +133,8 @@ class _Theme {
       ),
       body = TextStyle(
         fontFamily: profile?.fontFamily,
-        fontSize: 15.5,
-        height: 1.55,
+        fontSize: kDocumentBodyFontSize,
+        height: kDocumentBodyLineHeight,
         color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
       ),
       heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),

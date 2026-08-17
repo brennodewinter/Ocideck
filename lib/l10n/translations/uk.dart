@@ -1808,6 +1808,8 @@ const _dutchSourceAddUk = <String, String>{
   'enveloppen': 'конверти',
   'Afloop voor de drukker (mm)': 'Виліт для друкарні (мм)',
   'Pagina {n} van {m}': 'Сторінка {n} з {m}',
+  'Pagina-einden tonen': 'Показати розриви сторінок',
+  'Pagina-einden verbergen': 'Приховати розриви сторінок',
   'Boven (mm)': 'Зверху (mm)',
   'Onder (mm)': 'Знизу (mm)',
   'Links (mm)': 'Ліворуч (mm)',

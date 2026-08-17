@@ -750,6 +750,8 @@ const _dutchSourceAddPap = {
   'enveloppen': 'envelòpnan',
   'Afloop voor de drukker (mm)': 'Sangrado pa e imprenta (mm)',
   'Pagina {n} van {m}': 'Página {n} di {m}',
+  'Pagina-einden tonen': 'Mustra saltonan di página',
+  'Pagina-einden verbergen': 'Skonde saltonan di página',
   'Boven (mm)': 'Ariba (mm)',
   'Onder (mm)': 'Abou (mm)',
   'Links (mm)': 'Robes (mm)',

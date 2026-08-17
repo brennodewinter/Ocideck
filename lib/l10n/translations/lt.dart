@@ -1798,6 +1798,8 @@ const _dutchSourceAddLt = <String, String>{
   'enveloppen': 'vokai',
   'Afloop voor de drukker (mm)': 'Išleistis spaustuvei (mm)',
   'Pagina {n} van {m}': 'Puslapis {n} iš {m}',
+  'Pagina-einden tonen': 'Rodyti puslapių lūžius',
+  'Pagina-einden verbergen': 'Slėpti puslapių lūžius',
   'Boven (mm)': 'Viršus (mm)',
   'Onder (mm)': 'Apačia (mm)',
   'Links (mm)': 'Kairė (mm)',

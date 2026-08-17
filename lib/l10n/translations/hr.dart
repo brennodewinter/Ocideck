@@ -1797,6 +1797,8 @@ const _dutchSourceAddHr = <String, String>{
   'enveloppen': 'omotnice',
   'Afloop voor de drukker (mm)': 'Napust za tiskaru (mm)',
   'Pagina {n} van {m}': 'Stranica {n} od {m}',
+  'Pagina-einden tonen': 'Prikaži prijelome stranica',
+  'Pagina-einden verbergen': 'Sakrij prijelome stranica',
   'Boven (mm)': 'Gore (mm)',
   'Onder (mm)': 'Dolje (mm)',
   'Links (mm)': 'Lijevo (mm)',

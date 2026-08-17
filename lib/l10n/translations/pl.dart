@@ -1803,6 +1803,8 @@ const _dutchSourceAddPl = <String, String>{
   'enveloppen': 'koperty',
   'Afloop voor de drukker (mm)': 'Spad dla drukarni (mm)',
   'Pagina {n} van {m}': 'Strona {n} z {m}',
+  'Pagina-einden tonen': 'Pokaż podziały stron',
+  'Pagina-einden verbergen': 'Ukryj podziały stron',
   'Boven (mm)': 'Góra (mm)',
   'Onder (mm)': 'Dół (mm)',
   'Links (mm)': 'Lewo (mm)',

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart' show EditorState;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -57,9 +58,11 @@ import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
 import 'reader/paged_document_view.dart';
+import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
+part 'parts/document_source_rewrites.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -103,6 +106,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// de brug niet aankan) als schrijfoppervlak. [_DocViewMode.source] toont de
   /// platte bron naast een live weergave.
   _DocViewMode _viewMode = _DocViewMode.visual;
+
+  /// Pagina-einden in de schrijfstand. Standaard aan: dat is de vraag waarvoor
+  /// je een paginamaat kiest — wat komt er nog op deze bladzijde. Uit zetten
+  /// kan, en dan geldt de ingestelde schrijfbreedte weer in plaats van de
+  /// tekstbreedte van de pagina.
+  bool _showPageBreaks = true;
+
+  /// Sleutel op de Quill-editor van de visuele stand, zodat de pagina-einden
+  /// aan de echte blokgeometrie gemeten kunnen worden.
+  final GlobalKey<EditorState> _visualEditorKey = GlobalKey<EditorState>();
 
   /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
   /// terug na een klik, zodat je meteen verder typt.
@@ -536,6 +549,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                     ? settings.documentDefaultStyle
                     : null,
                 onStyleChanged: (name) => _setDocumentStyle(ref, name),
+                showPageBreaks: _showPageBreaks,
+                onShowPageBreaksChanged: (v) =>
+                    setState(() => _showPageBreaks = v),
               ),
               Divider(
                 height: 1,
@@ -640,14 +656,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
-    // Feature 3: paginamaat-indicator — toont de gekozen paginamaat en marge
-    // in de hoek van de visuele modus, zodat duidelijk is op welk formaat men
-    // schrijft. De echte pagina-einden komen pas bij afdrukken; dit is een
-    // bewustwordings-indicator, geen paginabreak-engine.
-    // ponytail: indicatieve paginabreak-schatting; exacte break bij afdrukken.
+    // De paginamaat-indicator in de hoek toont op welk formaat en met welke
+    // marges je schrijft; de streepjeslijnen in het schrijfvlak tonen waar dat
+    // vel vol is. Die einden worden gemeten aan de blokken die er echt staan —
+    // zie [WritingPageBreakOverlay].
     final settings = ref.watch(settingsProvider);
     final pageSize = settings.documentPageSize;
     final margins = settings.documentPageMargins;
+    final (_, pageHeightMm) = pageSize.dimensions;
+    final pageContentHeight =
+        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm;
     return Row(
       children: [
         if (showRail) ...[
@@ -657,7 +675,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         Expanded(
           child: Stack(
             children: [
-              _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+              WritingPageBreakOverlay(
+                editorKey: _visualEditorKey,
+                pageContentHeight: pageContentHeight,
+                enabled: _showPageBreaks,
+                child: _styledDocumentSurface(
+                  _styleProfile,
+                  _wysiwygEditor(theme),
+                ),
+              ),
               _documentPageIndicator(
                 context,
                 theme,
@@ -687,7 +713,17 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    documentMaxWidth: ref.watch(settingsProvider).documentEditorMaxWidth,
+    // Met pagina-einden aan schrijf je op de tekstbreedte van de pagina: een
+    // einde dat op een bredere kolom is uitgerekend zou ergens anders vallen
+    // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
+    // dan geldt de ingestelde schrijfbreedte.
+    documentMaxWidth: _showPageBreaks
+        ? pageTextWidthPx(
+            ref.watch(settingsProvider).documentPageSize,
+            ref.watch(settingsProvider).documentPageMargins,
+          )
+        : ref.watch(settingsProvider).documentEditorMaxWidth,
+    editorKey: _visualEditorKey,
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
@@ -1022,15 +1058,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         .read(imageServiceProvider)
         .importIntoDeck(picked.path, projectPath: projectPath);
     if (!mounted) return;
-    final alt = _markdownImageAlt(picked.caption);
+    final alt = markdownImageAlt(picked.caption);
     _insertBlock('![$alt]($reference)');
-  }
-
-  /// Alt-tekst voor `![…](…)`: carrousel-bijschrift, met `[`/`]` gestript zodat
-  /// de markdown-syntaxis heel blijft.
-  String _markdownImageAlt(String caption) {
-    if (caption.isEmpty) return '';
-    return caption.replaceAll('[', '').replaceAll(']', '');
   }
 
   /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
@@ -1099,6 +1128,9 @@ MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, ThemeProfile? profile) =>
       scheme: theme.colorScheme,
       fontFamily: profile?.fontFamily,
       profile: profile,
+      // In de documentmodus schrijf je op een pagina, dus in de typografie van
+      // die pagina — zie [MarkdownEditorTheme.documentTypography].
+      documentTypography: true,
     );
 
 /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De
@@ -1131,79 +1163,6 @@ void _setDocumentStyle(WidgetRef ref, String? name) {
 /// afwijking opleveren die §2.1 verbiedt.
 enum _DocViewMode { visual, source, pages }
 
-/// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
-/// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege
-/// regels om een eigen alinea te vormen zonder er ooit meer dan één dubbele
-/// witregel van te maken. Geeft de nieuwe bron én de cursorpositie ná het
-/// ingevoegde blok terug. Top-level en puur, zodat de invoeglogica los toetsbaar
-/// is van het editor-scherm — net als de terugschrijf-helpers hierboven.
-(String, int) insertBlockIntoSource(
-  String source,
-  int selStart,
-  int selEnd,
-  String block,
-) {
-  final start = selStart < 0 ? source.length : math.min(selStart, selEnd);
-  final end = selEnd < 0 ? source.length : math.max(selStart, selEnd);
-  final before = source.substring(0, start);
-  final after = source.substring(end);
-  final lead = before.isEmpty
-      ? ''
-      : before.endsWith('\n\n')
-      ? ''
-      : before.endsWith('\n')
-      ? '\n'
-      : '\n\n';
-  final trail = after.isEmpty
-      ? '\n'
-      : after.startsWith('\n')
-      ? ''
-      : '\n\n';
-  final insertion = '$lead$block$trail';
-  return ('$before$insertion$after', before.length + insertion.length);
-}
-
-/// Een bestandsnaam-veilige vorm van [title] voor de voorgestelde exportnaam:
-/// alles wat geen letter/cijfer/koppelteken is wordt een koppelteken, samengedrukt
-/// en getrimd. Top-level en puur, los toetsbaar van het editor-scherm.
-String _safeExportName(String title) {
-  final cleaned = title
-      .replaceAll(RegExp(r'[^\w\- ]+'), '')
-      .trim()
-      .replaceAll(RegExp(r'[\s]+'), '-');
-  return cleaned.isEmpty ? 'document' : cleaned;
-}
-
 class _DocSmartPasteIntent extends Intent {
   const _DocSmartPasteIntent();
-}
-
-/// Vervang de inhoud van het `chartOrdinal`-de ```chart-blok (vanaf 0) in
-/// [source] door [newContent] (de kale spec-tekst, zonder fence). Andere blokken
-/// — en alle tekst eromheen — blijven byte-getrouw staan; een `chartOrdinal`
-/// buiten bereik laat de bron ongemoeid. Top-level en puur, zodat de
-/// terugschrijf-logica los toetsbaar is van het editor-scherm.
-String replaceNthChartBlock(
-  String source,
-  int chartOrdinal,
-  String newContent,
-) {
-  var seen = 0;
-  return source.replaceAllMapped(chartFencePattern, (m) {
-    if (seen++ != chartOrdinal) return m.group(0)!;
-    return '```chart\n$newContent\n```';
-  });
-}
-
-/// Vervang het `tableOrdinal`-de GFM-tabelblok (vanaf 0) in [source] door
-/// [newGfm], en laat elke andere byte staan. De regel-reikwijdte komt van
-/// [DocumentMarkdownView.nthTableBlockRange], zodat de telling exact die van de
-/// weergave volgt; een ordinaal buiten bereik laat de bron ongemoeid. Top-level
-/// en puur, zodat de terugschrijf-logica los toetsbaar is.
-String replaceNthTableBlock(String source, int tableOrdinal, String newGfm) {
-  final range = DocumentMarkdownView.nthTableBlockRange(source, tableOrdinal);
-  if (range == null) return source;
-  final lines = source.split('\n');
-  lines.replaceRange(range[0], range[1], newGfm.split('\n'));
-  return lines.join('\n');
 }

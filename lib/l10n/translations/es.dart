@@ -747,6 +747,8 @@ const _dutchSourceAddEs = {
   'enveloppen': 'sobres',
   'Afloop voor de drukker (mm)': 'Sangrado para la imprenta (mm)',
   'Pagina {n} van {m}': 'Página {n} de {m}',
+  'Pagina-einden tonen': 'Mostrar saltos de página',
+  'Pagina-einden verbergen': 'Ocultar saltos de página',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',
   'Links (mm)': 'Izquierda (mm)',

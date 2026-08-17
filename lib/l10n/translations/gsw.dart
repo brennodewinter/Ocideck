@@ -1794,6 +1794,8 @@ const _dutchSourceAddGsw = <String, String>{
   'enveloppen': 'Couvert',
   'Afloop voor de drukker (mm)': 'Aaschnitt für d Druckerei (mm)',
   'Pagina {n} van {m}': 'Siite {n} vo {m}',
+  'Pagina-einden tonen': 'Sytenumbrüch zeige',
+  'Pagina-einden verbergen': 'Sytenumbrüch verstecke',
   'Boven (mm)': 'Obe (mm)',
   'Onder (mm)': 'Une (mm)',
   'Links (mm)': 'Links (mm)',

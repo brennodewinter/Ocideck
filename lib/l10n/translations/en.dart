@@ -932,6 +932,8 @@ const _dutchSourceAddEn = {
   'enveloppen': 'envelopes',
   'Afloop voor de drukker (mm)': 'Bleed for the printer (mm)',
   'Pagina {n} van {m}': 'Page {n} of {m}',
+  'Pagina-einden tonen': 'Show page breaks',
+  'Pagina-einden verbergen': 'Hide page breaks',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bottom (mm)',
   'Links (mm)': 'Left (mm)',
