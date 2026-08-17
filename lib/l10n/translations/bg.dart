@@ -42,17 +42,13 @@ const _stringsBg = {
   'settings': 'Настройки',
   'settingsGeneral': 'Общи',
   'settingsColors': 'Цветове',
-  'settingsLogo': 'Лого',
   'language': 'Език',
   'applicationLanguage': 'Език на приложението',
   'languageHelp':
       'Интерфейсът сменя езика веднага. Съдържанието на презентацията остава непроменено.',
-  'presentationFolder': 'Папка за презентации',
   'exportFolderSetting': 'Папка за експорт',
-  'notSet': 'Не е зададено',
   'nextToPresentationFile': 'До файла на презентацията',
   'choose': 'Избор',
-  'removeDefaultFolder': 'Премахване на папката по подразбиране',
   'removeExportFolder': 'Премахване на папката за експорт',
   'exportFolderHelp':
       'Всички експорти (PDF/PPTX) се запазват тук. Ако не е зададено, експортите се запазват до файла на презентацията.',
@@ -86,8 +82,6 @@ const _dutchSourceBg = {
   'Handtekening tekenen': 'Начертай подпис',
   'Teken je handtekening in het vak hieronder.':
       'Начертайте подписа си в полето по-долу.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Пакетът с данни е .zip с референтните данни за този модул. Първо се проверява спрямо отпечатъка, вграден в приложението; приема се само пакет, който съответства на тази версия на приложението.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площна',
   'Horizontale staaf': 'Хоризонтална стълбовидна',
@@ -194,7 +188,6 @@ const _dutchSourceBg = {
       'Изображенията и медията се споделят от презентациите в същата папка. Точното име ще изберете след малко в системния прозорец.',
   'Alle bibliotheken': 'Всички библиотеки',
   'Andere map…': 'Друга папка…',
-  'Bibliotheek verwijderen': 'Премахване на библиотеката',
   'Bibliotheken': 'Библиотеки',
   'Geen bibliotheek': 'Няма библиотека',
   'Geen presentaties (.md) gevonden.': 'Не са намерени презентации (.md).',
@@ -206,10 +199,6 @@ const _dutchSourceBg = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Изберете в коя библиотека да попадне презентацията.',
   'Map toevoegen': 'Добавяне на папка',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Папки, в които съхранявате и търсите презентациите си. Дайте на всяка собствено име, за да ги различавате. Всички библиотеки се претърсват при отваряне и в библиотеката с изображения.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Все още няма библиотека — добавете папка.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Все още няма библиотека. Добавете една в Настройки или изберете папка по-горе за търсене.',
   'Presentatie opslaan': 'Запазване на презентацията',
@@ -291,22 +280,11 @@ const _dutchSourceBg = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Декларацията за достоверност с докладчика, сертифицирането, подписа и печата.',
   'Uitbreidingen': 'Разширения',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
   'Gegevens opschonen': 'Изчистване на данните',
   'Gegevens lokaal beschikbaar': 'Данните са налични локално',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Първо дайте съгласие за изходящ трафик в раздел Лиценз и поверителност.',
   'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Няма достъпен източник — референтните данни не можаха да бъдат изтеглени отникъде. Опитайте отново или импортирайте пакета ръчно.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Изтеглените данни не съвпаднаха с очаквания отпечатък и бяха отхвърлени от предпазливост.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Пакетът с данни беше повреден или невалиден и затова беше отхвърлен.',
-  'Gegevenspakket kiezen': 'Избор на пакет с данни',
-  'Kon het gekozen bestand niet lezen.':
-      'Избраният файл не можа да бъде прочетен.',
   'Nog niet opgehaald': 'Още не е изтеглено',
   'AI-assistentie': 'AI помощ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -323,22 +301,15 @@ const _dutchSourceBg = {
       'Облачна услуга първо изисква вашето съгласие за поверителност в "Лиценз и поверителност" и не работи в уеб версията.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Разбирам, че данни се изпращат до тази външна услуга',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI помощ (изключена по подразбиране): ако изберете самостоятелно хостван или облачен бекенд, текстовете или изображенията, които обработвате, се изпращат на този адрес. Локален AI модел на това устройство не изпраща нищо.',
   'Zoek een slidetype': 'Търсене на тип слайд',
   'Alfabetisch sorteren': 'Азбучно сортиране',
   'Algemeen': 'Общи',
   'Informatieveiligheid': 'Информационна безопасност',
   'Alle': 'Всички',
-  'Pentestrapportage (ontwerp)': 'Доклад от пентест (проект)',
-  'AI-assistentie (ontwerp)': 'AI помощ (проект)',
-  'Agentisch bouwplan (ontwerp)': 'Агентен план за изграждане (проект)',
-  'Bijsnijden': 'Изрязване',
   'Linksom': 'Завърти наляво',
   'Rechtsom': 'Завърти надясно',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Плъзнете изображението, за да изберете коя част да остане видима.',
-  'Git-opslag (ontwerp)': 'Git хранилище (проект)',
   'Zoek in documentatie…': 'Търсене в документацията…',
   'Geen documenten gevonden': 'Няма намерени документи',
   'Alleen afspelen (vergrendeld)': 'Само за представяне (заключено)',
@@ -352,12 +323,8 @@ const _dutchSourceBg = {
   'Techniek': 'Технически',
   'Licentie en naleving': 'Лиценз и съответствие',
   'Architectuur': 'Архитектура',
-  'Bouwinstructies': 'Инструкции за компилиране',
-  'Kwaliteitscontroles': 'Проверки на качеството',
-  'Broncodekaart': 'Карта на изходния код',
   'Licentienaleving': 'Съответствие с лицензите',
   'Softwarestuklijst (SBOM)': 'Списък на софтуерните компоненти (SBOM)',
-  'Samenwerking (ontwerp)': 'Сътрудничество (проект)',
   'Beschermen met een wachtwoord (AES-256)': 'Защита с парола (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Пазете добре тази парола: ако я загубите, този пакет вече не може да бъде отворен.',
@@ -436,10 +403,6 @@ const _dutchSourceBg = {
   'Instelling opslaan is mislukt.': 'Запазването на настройката е неуспешно.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Забележка: уеб версията може да изтегля само от сървъри, които го позволяват (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Пакетите (.ocideck) все още не се поддържат в уеб версията.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'В уеб версията могат да се отварят само .md презентации.',
   'Geen': 'Няма',
   'Nieuw': 'Нов',
   'Verwijderen': 'Изтриване',
@@ -530,10 +493,8 @@ const _dutchSourceBg = {
   'Audio bij deze slide': 'Аудио за този слайд',
   'Audio automatisch afspelen': 'Автоматично възпроизвеждане на аудио',
   'Audio verwijderen': 'Премахване на аудио',
-  'Geen audio gekozen': 'Няма избрано аудио',
   'Geen audiobestand gekozen': 'Няма избран аудиофайл',
   'Video automatisch afspelen': 'Автоматично възпроизвеждане на видео',
-  'Geen video gekozen': 'Няма избрано видео',
   'Kiezen': 'Избор',
   'Uit bibliotheek…': 'От библиотеката…',
   'Van computer…': 'От компютъра…',
@@ -563,7 +524,6 @@ const _dutchSourceBg = {
   'Pakket importeren': 'Импортиране на пакет',
   'Pakket exporteren': 'Експортиране на пакет',
   'Map met presentaties kiezen': 'Избор на папка с презентации',
-  'Standaard map voor presentaties': 'Папка по подразбиране за презентации',
   'Map voor exports': 'Папка за експорти',
   'Logo kiezen': 'Избор на лого',
   'Kies een afbeelding': 'Изберете изображение',
@@ -576,8 +536,6 @@ const _dutchSourceBg = {
   'Map kiezen': 'Избор на папка',
   'Kies een map met presentaties om te beginnen.':
       'Изберете папка с презентации, за да започнете.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Не са намерени презентации (.md) в тази папка.',
   'Geen presentaties gevonden voor': 'Не са намерени презентации за',
   'meer treffer(s)': 'още съвпадение(я)',
   'Slide zoeken': 'Намиране на слайд',
@@ -599,7 +557,6 @@ const _dutchSourceBg = {
       'Въведете думи за търсене, за да намерите слайдове от вашите презентации.',
   'toegevoegd': 'добавено',
   'Eerste': 'Първи',
-  'treffers — verfijn je zoekopdracht': 'съвпадения — уточнете търсенето',
   'treffer(s)': 'съвпадение(я)',
   'slide': 'слайд',
   'Zoeken en vervangen': 'Търсене и заместване',
@@ -658,7 +615,6 @@ const _dutchSourceBg = {
   'Tekst op zijpanelen': 'Текст на странични панели',
   'Voorbeeldtekst': 'Примерен текст',
   'Knop': 'Бутон',
-  'Profielnaam': 'Име на профил',
   'Naam van het stijlprofiel': 'Име на стиловия профил',
   'Stijlprofiel': 'Стилов профил',
   'Nieuw profiel': 'Нов профил',
@@ -722,17 +678,10 @@ const _dutchSourceBg = {
   'TYPE': 'ТИП',
   'STIJL': 'СТИЛ',
   'Terug naar standaardstijl': 'Обратно към стил по подразбиране',
-  'Automatisch doorgaan na': 'Автоматично напред след',
-  'Logo tonen op deze slide': 'Показвай лого на този слайд',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Таблица, редактируема по време на представяне',
-  'Footer tonen op deze slide': 'Показвай долен колонтитул на този слайд',
   'Sprekersnotities...': 'Бележки за лектора...',
   'Sprekersnotities': 'Бележки за лектора',
   'Notities voor tijdens het presenteren':
       'Бележки за по време на представянето',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown режим — редактирайте цялата презентация като Marp Markdown',
   'Toepassen': 'Прилагане',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown не можа да бъде обработен. Проверете синтаксиса.',
@@ -757,8 +706,6 @@ const _dutchSourceBg = {
   'Geen resultaten voor': 'Няма резултати за',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Коригирайте думата за търсене или добавете описание.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Използвайте „Преглед“, за да изберете изображения от всяко местоположение.',
   'Selecteer een\nafbeelding': 'Изберете\nизображение',
   'Gekopieerd': 'Копирано',
   'Afbeelding verwijderen?': 'Изтриване на изображение?',
@@ -775,8 +722,6 @@ const _dutchSourceBg = {
   'spatie': 'интервал',
   'klik': 'клик',
   'cijfers': 'цифри',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Кликнете или натиснете ? / H / Esc за затваряне',
   'Klik of druk op H / Esc om te sluiten':
       'Кликнете или натиснете H / Esc за затваряне',
   'Naar slidenummer': 'Към номер на слайд',
@@ -787,20 +732,10 @@ const _dutchSourceBg = {
   'Presenter view (notities, klok)': 'Изглед за водещ (бележки, часовник)',
   'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
-  'Verstreken tijd resetten': 'Нулиране на изтеклото време',
   'Automatische modus aan/uit': 'Автоматичен режим вкл./изкл.',
   'Herhalen (loop) aan/uit': 'Повтаряне (цикъл) вкл./изкл.',
-  'Na audio automatisch doorgaan': 'Автоматично напред след аудио',
-  'Dit overzicht': 'Този преглед',
   'Deze legenda': 'Тази легенда',
   'Terug / afsluiten': 'Назад / изход',
-  'Auto (A)': 'Авто (A)',
-  'Handmatig (A)': 'Ръчно (A)',
-  'Herhalen (L)': 'Повтаряне (L)',
-  'Na audio (M)': 'След аудио (M)',
-  'Sneltoetsen (?)': 'Клавишни комбинации (?)',
-  'Slide-overzicht (G)': 'Преглед на слайдовете (G)',
-  'Presenter view (P)': 'Изглед за водещ (P)',
   'Tijd resetten (R)': 'Нулиране на таймера (R)',
   'HUIDIGE SLIDE': 'ТЕКУЩ СЛАЙД',
   'VOLGENDE': 'СЛЕДВАЩ',
@@ -816,15 +751,9 @@ const _dutchSourceBg = {
   'Notities weggooien': 'Отхвърляне на бележките',
   'Notities voor de ontvanger tijdens een cursus':
       'Бележки за получателя по време на курс',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Превключете към режим Markdown, за да добавите бележки.',
   'Mijn notities aan/uit': 'Моите бележки вкл./изкл.',
   'Wissel scherm (S)': 'Смяна на екрана (S)',
   'Kon niet van scherm wisselen.': 'Не беше възможно да се сменят екраните.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -871,8 +800,6 @@ const _dutchSourceBg = {
   'Selectie opheffen': 'Изчистване на избора',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Приемам лиценза EUPL 1.2 и прочетох какви данни съхранява OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Вашият избор става езикът по подразбиране на приложението.',
   'Lees de volledige licentie': 'Прочетете пълния лиценз',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck е свободен софтуер под лиценза EUPL 1.2. Преди да започнете, ви молим да приемете лиценза. По-долу можете също да прочетете какви данни OciDeck съхранява на това устройство и кога нещо напуска вашето устройство.',
@@ -899,9 +826,6 @@ const _dutchSourceBg = {
   'Het antwoord van de server was te groot':
       'Отговорът на сървъра беше твърде голям',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud източник (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Отваряйте и запазвайте презентации в папка на вашия Nextcloud. Паролата се съхранява криптирана в ключодържателя, а не заедно с останалите настройки.',
   'Server-URL': 'URL на сървъра',
   'Gebruikersnaam': 'Потребителско име',
   'App-wachtwoord': 'Парола за приложение',
@@ -915,22 +839,13 @@ const _dutchSourceBg = {
   'Verbinding gelukt': 'Връзката е успешна',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Промените се запазват, когато щракнете върху Запазване.',
-  'Afbeelding kiezen op Nextcloud': 'Избор на изображение в Nextcloud',
-  'Openen vanaf Nextcloud': 'Отваряне от Nextcloud',
   'Vernieuwen': 'Опресняване',
   'Deze map is leeg': 'Тази папка е празна',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Няма зададен Nextcloud сървър. Настройте го от Настройки → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Папката не можа да се зареди. Проверете връзката и настройките си.',
   'Kon dit bestand niet openen.': 'Този файл не можа да се отвори.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Това не е презентация на Marp/OciDeck.',
   'Downloaden mislukt:': 'Изтеглянето не бе успешно:',
-  'Opgeslagen op Nextcloud:': 'Запазено в Nextcloud:',
   'Opslaan mislukt:': 'Запазването не бе успешно:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Първо настройте Nextcloud сървър от Настройки → Nextcloud.',
   'Opslaan naar Nextcloud': 'Запазване в Nextcloud',
   'Doelpad (zonder extensie)': 'Целеви път (без разширение)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -942,10 +857,6 @@ const _dutchSourceBg = {
       'Показване на преглед на времената след края',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Времето за всеки слайд винаги се измерва; това определя само дали прегледът се появява след тази презентация.',
-  'Oefenoverzicht tonen na afloop':
-      'Показване на обобщение на репетицията след края',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'След презентация показвайте прегледа с прекараното време за всеки слайд. Времето винаги се измерва; това определя само дали екранът се появява.',
   'Onveilige presentatie geblokkeerd': 'Небезопасна презентация — блокирана',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Тази презентация не беше отворена. Файлът съдържа съдържание, което може да изпълнява код, а презентацията трябва да съдържа само данни — нищо изпълнимо.',
@@ -1028,7 +939,6 @@ const _dutchSourceBg = {
   'Online': 'Онлайн',
   'Lokaal bestand': 'Локален файл',
   'Geen video': 'Без видео',
-  'Vraag (meerkeuze)': 'Въпрос (с избор)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Заглавният текст има твърде малък контраст с фоновото изображение',
   'Herstel': 'Поправяне',
@@ -1043,8 +953,6 @@ const _dutchSourceBg = {
   'Huidig punt weghalen': 'Премахни текущата точка',
   'Stap voor stap': 'Стъпка по стъпка',
   'Geen animatie': 'Без анимация',
-  'Animatiesnelheid': 'Скорост на анимацията',
-  'Langzaam': 'Бавно',
   'Snel': 'Бързо',
   'Gebeurtenissen': 'Събития',
   'Gebeurtenis toevoegen': 'Добавяне на събитие',
@@ -1057,8 +965,6 @@ const _dutchSourceBg = {
   'Vraag': 'Въпрос',
   'Wat wil je vragen?': 'Какво искате да попитате?',
   'Antwoorden': 'Отговори',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Отбележете верните отговори. Най-много осем отговора; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
   'Antwoord': 'Отговор',
   'Antwoord toevoegen': 'Добавяне на отговор',
   'Goed antwoord': 'Верен отговор',
@@ -1091,8 +997,6 @@ const _dutchSourceBg = {
   'Stelling': 'Твърдение',
   'Formuleer een stelling die juist of onjuist is':
       'Формулирайте твърдение, което е вярно или невярно',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Отбележете всички верни отговори. При презентиране се показва случаен набор с поне един верен и един грешен.',
   'Juist': 'Вярно',
   'Onjuist': 'Невярно',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1113,7 +1017,6 @@ const _dutchSourceBg = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Статусните цветове на измервателите на кокпита. Създайте наименувани варианти; избраната схема важи за всички слайдове с кокпит.',
   'Standaard': 'По подразбиране',
-  'Standaardkleuren gebruiken': 'Използване на цветовете по подразбиране',
   'Kleurschema verwijderen': 'Изтриване на цветовата схема',
   'Schemanaam': 'Име на схемата',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1191,7 +1094,6 @@ const _dutchSourceBg = {
   'Logo en footer': 'Лого и долен колонтитул',
   'Pagina': 'Страница',
   'Presentatiestijl': 'Стил на презентация',
-  'Presentatiestijl: ': 'Стил на презентация: ',
   'Tekst...': 'Текст...',
   'Teksteditor': 'Текстов редактор',
   'Volgende pagina': 'Следваща страница',
@@ -1204,8 +1106,6 @@ const _dutchSourceBg = {
   'Doeltijd': 'Целево време',
   'Doeltijd (aftellen)': 'Целево време (обратно броене)',
   'Geen aftelling': 'Без обратно броене',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Стандартно целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
   'uit': 'изкл',
   'Doeltijd / aftellen (K)': 'Целево време / броене (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Задай целево време / броене (MMSS)',
@@ -1277,14 +1177,8 @@ const _dutchSourceBg = {
   'Cirkel': 'Кръгова',
   'Spider': 'Радарна',
   'CSV importeren': 'Импортирай CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Данни (CSV: първи ред = имена на серии, първа колона = етикети)',
   'Gekoppeld aan': 'Свързано с',
   'Ontkoppelen': 'Прекъсни връзката',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Данните да се съхранят в слайда или да се запазят като отделен CSV файл до презентацията?',
-  'In de slide': 'В слайда',
-  'Als CSV-bestand': 'Като CSV файл',
   'Geen grafiekgegevens': 'Няма данни за диаграма',
   'Label': 'Етикет',
   'Rij': 'Ред',
@@ -1314,7 +1208,6 @@ const _dutchSourceBg = {
   'Eigen kleur (hex)': 'Собствен цвят (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Например #33FF33 за CRT-зелен екран.',
-  'Onderdeel van stijlprofiel ': 'Част от стилов профил ',
   'Broncode lettertype': 'Шрифт на изходния код',
   'Kop (optioneel)': 'Заглавие (по избор)',
   'Subkop (optioneel)': 'Подзаглавие (по избор)',
@@ -1354,16 +1247,7 @@ const _dutchSourceBg = {
   'Zet het filter uit om alles weer te zien.':
       'Изключете филтъра, за да видите всичко отново.',
   'Welkom bij OciDeck': 'Добре дошли в OciDeck',
-  'Privacy en gebruik': 'Поверителност и употреба',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck е локално настолно приложение. Вашите презентации и данни се съхраняват единствено на вашия компютър.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Приложението не събира лични данни, статистика или данни за употреба. Вашата поверителност е наш приоритет.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Всички данни, които въвеждате в OciDeck, остават на вашата локална система и не се изпращат към външни сървъри.',
   'Licentie (EUPL 1.2)': 'Лиценз (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'С натискане на „Съгласявам се“ приемате тези условия и се съгласявате с използването на OciDeck.',
   'Volledige licentie online': 'Пълен лиценз онлайн',
   'Akkoord gaan': 'Съгласявам се',
   'Privacy': 'Поверителност',
@@ -1452,8 +1336,6 @@ const _dutchSourceBg = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Експортът е блокиран поради сериозни проблеми с качеството.',
   'Alle meldingen': 'Всички съобщения',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… и още проблеми в панела за качество.',
   'Classificatie-handhaving': 'Прилагане на класификацията',
   'Vrijgaveplafond': 'Таван за освобождаване',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1472,12 +1354,10 @@ const _dutchSourceBg = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Задайте TLP ниво — експортът е блокиран от политиката за класификация.',
   'Tabel bewerken': 'Редактирай таблицата',
-  'Pijltjes · Tab · Esc': 'Стрелки · Tab · Esc',
   'Tabel bewerken (op tabeldia)':
       'Редактиране на таблица (на слайдове с таблици)',
   'Tabel bewerken (E)': 'Редактирай таблицата (E)',
   'Tab wisselt cel · Esc sluit': 'Tab сменя клетката · Esc затваря',
-  'Pen · markeerstift · ⇧E': 'Химикал · маркер · ⇧E',
   'Gestapelde staaf': 'Наслоена стълбовидна',
   'Spreiding': 'Разсейване',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn прелиства слайдовете',
@@ -1520,10 +1400,6 @@ const _dutchSourceBg = {
       'Мрежова грешка — проверете връзката и опитайте отново.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Нещо се обърка неочаквано. Вижте дневника за подробности.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud не е настроен (правилно) — проверете данните за сървъра в Настройки → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Сървърът е недостъпен — проверете връзката и URL адреса на сървъра.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1550,8 +1426,6 @@ const _dutchSourceBg = {
   'Uit recente bestanden verwijderen': 'Премахни от скорошните файлове',
   'OciDeck wordt gestart…': 'Стартиране на OciDeck…',
   'Herstelbestanden': 'Файлове за възстановяване',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Файловете за възстановяване съдържат цялото съдържание на презентациите ви в обикновен текст. Изчистват се автоматично след 7 дни; тук можете да ги изтриете веднага.',
   'Herstelbestanden nu wissen': 'Изтрий файловете за възстановяване сега',
   'Er waren geen herstelbestanden.': 'Нямаше файлове за възстановяване.',
   'herstelbestand(en) gewist.': 'файл(а) за възстановяване изтрити.',
@@ -1988,7 +1862,6 @@ const _dutchSourceAddBg = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Правим копие в нов раздел; оригиналният ви файл остава непроменен.',
   'Welk formaat?': 'Кой формат?',
-  'dia\'s, gesplitst op kop.': 'слайда, разделени по заглавие.',
   'document': 'документ',
   'volledig': 'пълен',
   'Invoegen': 'Вмъкване',
@@ -2149,12 +2022,8 @@ const _dutchSourceAddBg = <String, String>{
   'Alle integraties': 'Всички интеграции',
   'Alles inschakelen': 'Включи всичко',
   'Alles uitschakelen': 'Изключи всичко',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Вече е зададена папка с отчети, затова връзката остава достъпна и съществуваща презентация на OpenKAT може да се обновява.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Връзки с други системи. Всяка връзка е изключена по подразбиране и остава неактивна, докато не я включите.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Прочетете папките с отчети на OpenKAT като един управленски преглед.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Внасяне на презентации от PowerPoint (.pptx), Keynote (.key) и Impress (.odp) като редактируемо тесте. Връзките с други системи, като OpenKAT, се намират в Интеграции.',
   'Media (WebRTC)': 'Медия (WebRTC)',
@@ -2322,7 +2191,6 @@ const _dutchSourceAddBg = <String, String>{
   'Van toepassing': 'Приложимо',
   'Voortgang': 'Напредък',
   'Voortgang managementsysteem': 'Напредък на системата за управление',
-  'Voortgangsoverzicht bijgewerkt': 'Прегледът на напредъка е обновен',
   'Welk deel?': 'Коя част?',
   'beheersmaatregelen geladen': 'контроли заредени',
   'geïmplementeerd': 'внедрено',
@@ -2401,10 +2269,6 @@ const _dutchSourceAddBg = <String, String>{
       'Това не изглежда като валиден ключ за възстановяване.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Този ключ за възстановяване е от по-нова версия на OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Уеб паметта за изображения е пълна (максимум 256 MB). Първо запазете работата си като .ocideck файл, за да предотвратите загуба на данни. След това използвайте по-малко или по-малки изображения, затворете другите презентации или презаредете, без да отваряте други презентации.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Уеб паметта за изображения е пълна (максимум 256 MB). Запазете работата си като файл .ocideck и презаредете страницата, преди да добавите още изображения.',
   'Afbeeldingsrechten': 'Права за изображения',
   'Afbeeldingsrechten controleren…': 'Проверете правата на изображението...',
   'Afdoening': 'Уреждане',
@@ -2455,8 +2319,6 @@ const _dutchSourceAddBg = <String, String>{
   'Verifiëren': 'Потвърди',
   'Deelnemers verifiëren': 'Провери участниците',
   '(dit apparaat)': '(това устройство)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Сравнете отпечатъка на всяко устройство през надежден канал — прочетете си го един на друг или го изпратете по път, на който имате доверие. Ако съвпадат, работите с истинските устройства и никой не се е вмъкнал между вас. Ако се различават, прекъснете сътрудничеството.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Това не е валидна връзка за покана.',
@@ -2517,7 +2379,6 @@ const _dutchSourceAddBg = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Работете съвместно на живо върху презентация чрез Matrix homeserver като криптиран препредавател. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни. Въведете homeserver и токен за достъп, създаден другаде — OciDeck никога не иска паролата ви. Токенът се пази криптиран в ключодържателя, а не при останалите настройки.',
   'wordt door de test ingevuld': 'попълва се от теста',
-  'Versleuteld doorgeefluik (ontwerp)': 'Шифрован ретранслатор (проект)',
   'Meer documentatie op de repository': 'Повече документация в хранилището',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Пълната документация — включително архитектура, компилиране, изходен код и дизайн — е в хранилището.',
@@ -2759,50 +2620,14 @@ const _dutchSourceAddBg = <String, String>{
       'Кои данни от измерванията липсват или са остарели?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'На какви данни се основава този отчет?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Широк, но фактологичен преглед на управлението с проследими моменти на измерване.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Класира се без общ резултат и показва отделно липсващите измервания.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Показва броя на сериозността, участниците и пренесените измервания по момент.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Организира видовете намиране по засегнати организации, системи и наблюдения.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Показва критични/високи числа без никакво измислено претегляне.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Показва числител, знаменател и само надеждни проценти.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Групира буквални препоръки от OpenKAT без собствен приоритет.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Насочен текущ имидж на една организация и нейната дата на измерване.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Сравнява два избрани момента на измерване в рамките на една организация.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Разграничава нови, нови и вече ненаблюдавани.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Използва само надеждни първи дати за наблюдение.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Класира системите с отделни броячи на тежест.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Показва индивидуални делта стойности без претеглен резултат.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Сравнява числителя и знаменателя с видимо сравнимо покритие.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Инвентаризира системи с доказан източник, имена на хостове и IP адреси.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Разделя наблюдаваните, ненаблюдаваните и неизвестните.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Показва само изрично доказани мониторингови мутации.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Показва организации и системи около една надеждна CVE връзка.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Класира CVE с изрична дедупликация.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Разграничава нови, нови и вече ненаблюдавани CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Показва липсващи, остарели и действително използвани измервания.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Отчита ключови дати, изходни файлове, адаптери и изходни хешове.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Все още не е налично: източникът не доказва статус на мониторинг за всички активи.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2846,11 +2671,6 @@ const _dutchSourceAddBg = <String, String>{
   'Onderwerp': 'Предмет',
   'Welk rapport beantwoordt uw vraag?': 'Кой доклад отговаря на вашия въпрос?',
   'Meer rapportvragen': 'Още въпроси за доклада',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Кои системи са уязвими към CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Организации и уязвими системи около една уязвимост.',
-  'Organisaties met kwetsbare systemen': 'Организации с уязвими системи',
   'Kwetsbare systemen': 'Уязвими системи',
   'Kritiek/hoog': 'Критично/високо',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2873,8 +2693,6 @@ const _dutchSourceAddBg = <String, String>{
   'Bruikbaar': 'Използваема',
   'CVE zoeken': 'CVE търсене',
   'Critical/high': 'Критично/високо',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Качество на данните, липсващи измервания и остаряване.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Избраните отчети не съдържат достатъчно надеждни данни за тази част.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2902,9 +2720,6 @@ const _dutchSourceAddBg = <String, String>{
   'Geen bruikbare meetdatum': 'Няма използваема дата на измерване',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Генерираните слайдове се обновяват. Вашите собствени слайдове и копия се запазват.',
-  'Getroffen organisaties en systemen': 'Засегнати организации и системи',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Засегнати организации и системи около една уязвимост.',
   'Getroffen systemen': 'Засегнати системи',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Отчетът не можа да бъде създаден. Вашите избори се запазват; проверете предупрежденията и опитайте отново.',
@@ -2914,20 +2729,15 @@ const _dutchSourceAddBg = <String, String>{
   'Keuzes wijzigen…': 'Промяна на избора...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Изберете папката, в която OpenKAT е поставил отчетите. OciDeck чете само тази папка; нищо не се променя или изпраща.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Изберете въпроса, на който докладът трябва да отговори. OciDeck определя подходящата структура.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Изберете CVE, намерен в отчетите.',
   'Laatste bruikbare meting': 'Последно използваемо измерване',
   'Live voorvertoning van de rapportopbouw':
       'Преглед на живо на структурата на отчета',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Информация за управление и контрол на множество организации.',
   'Meer instellingen': 'Още настройки',
   'Nederlands': 'холандски',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Не всяка избрана организация има измерване за този период.',
-  'Nieuwe en verdwenen bevindingen': 'Нови и липсващи открития',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Все още не е налично: тези отчети не съдържат надеждни CVE числа.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2962,8 +2772,6 @@ const _dutchSourceAddBg = <String, String>{
       'Липсва полезно текущо измерване за една или повече организации.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'За сравнение са необходими два момента на измерване. Вече е намерено едно измерване.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Напредък в сравнение с предишен момент на измерване.',
   'Waar staan de OpenKAT-rapportages?': 'Къде са отчетите на OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'Какво се промени в една организация?',
@@ -2976,7 +2784,6 @@ const _dutchSourceAddBg = <String, String>{
   'bruikbaar': 'използваем',
   'metingen': 'измервания',
   'organisaties': 'организации',
-  'organisaties geselecteerd': 'избрани организации',
   'rapportages gebruikt': 'използвани отчети',
   'systemen': 'системи',
   'Nog geen specificatielimiet': 'Все още няма лимит на спецификацията',
@@ -3120,7 +2927,6 @@ const _dutchSourceAddBg = <String, String>{
       'е на слайд с дърво, но не се използва другаде — свържете го с матрица, поток или друг слайд.',
   'Nieuw verbeteringsproject': 'Нов проект за подобрение',
   'Kader': 'Рамка',
-  'Projecttitel': 'Заглавие на проекта',
   'Primaire Y-metriek (Y-01)': 'Основна Y метрика (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Например: време на order intake в работни дни',
@@ -3175,10 +2981,6 @@ const _dutchSourceAddBg = <String, String>{
   'Bron niet toegestaan': 'Източникът не е разрешен',
   'Deze URL is door de beveiliging geweigerd.':
       'Този URL адрес беше отхвърлен от защитата.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Внасяне на материал от други системи. Два източника: презентациите от PowerPoint (.pptx), Keynote (.key) и Impress (.odp) стават редактируемо тесте, а отчетите OpenKAT (папка с JSON) стават един управленски преглед. Къде се намира папката OpenKAT се задава в Интеграции.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Внасяне на презентации от PowerPoint (.pptx), Keynote (.key) и Impress (.odp) като редактируемо тесте. Четенето на папки с отчети OpenKAT е достъпно само в настолната версия.',
   'Alinea': 'Абзац',
   'Audio "{bestand}"': 'Аудио "{bestand}"',
   'Deck opbouwen…': 'Изграждане на презентацията…',
@@ -3299,8 +3101,6 @@ const _dutchSourceAddBg = <String, String>{
       'Индексът на контролния списък: за всеки тест стабилният идентификатор, каноничното заглавие и категорията. Съдържанието на самото ръководство не е включено.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Индексът на тестовете от v2.0.0: за всеки тест стабилният идентификатор, каноничното заглавие, категорията MASVS и слабостта MASWE. Оттеглените тестове от v1 и запълващите елементи не са включени; съдържанието на ръководството също не.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Списъкът със слабости (117): идентификатор, заглавие, категория MASVS, платформа и връзката с CWE. Три четвърти още не са разписани в източника; те са включени, обозначени. Оттеглените слабости — не.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Пълният списък (идентификатор, име, описание) плюс собствено подбрано ядро с нашите бележки за отстраняване.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3347,33 +3147,16 @@ const _dutchSourceAddBg = <String, String>{
       'Всеки файл се преобразува поотделно и се записва като отделна презентация в целевата папка. Ако един се провали, опашката просто продължава.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Импортирането на няколко презентации наведнъж ги записва като файлове в папка; във версията за браузър това не е възможно.',
-  'Nu importeren': 'Импортиране сега',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Обзорът е готов в нов раздел.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Чете папка с отчети на OpenKAT (JSON) и изгражда от нея един управленски преглед: системи, констатации по тежест, най-дълго отворените точки и тенденцията през последователни измервания. Същото действие върху съществуваща презентация на OpenKAT я обновява и оставя вашите собствени слайдове на място.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Импортът само чете; в тази папка нищо не се променя и не се изпраща. Файловете, които не са отчети на OpenKAT, се пропускат и се посочват в отчета за импорта.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Посочете папката, в която са вашите отчети на OpenKAT (JSON). Импортът чете тази папка и изгражда от нея един управленски преглед; ако папката е зададена тук, не се налага да я избирате всеки път.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Импортът от OpenKAT чете папка от диска и е достъпен само в настолната версия.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Все още не е посочена папка с отчети, затова импортът я пита всеки път.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Вече е зададена папка с отчети, затова входната точка остава достъпна и съществуваща презентация на OpenKAT може да се обновява.',
   'Integraties': 'Интеграции',
-  'Naar Integraties': 'Към Интеграции',
   'Map kiezen…': 'Избор на папка…',
   'Map wissen': 'Изчистване на папката',
-  'OpenKAT-rapportages importeren…': 'Импортиране на доклади от OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Избор на папка с доклади от OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Докладите от OpenKAT са импортирани.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Тестето от OpenKAT е обновено; ръчните слайдове са запазени.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Няма намерени доклади от OpenKAT в тази папка.',
-  'OpenKAT-import mislukt.': 'Импортирането от OpenKAT не успя.',
   'rapportages': 'доклада',
   'overgeslagen': 'пропуснати',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3433,8 +3216,6 @@ const _dutchSourceAddBg = <String, String>{
   'Label op de primaire knop': 'Надписът върху основния бутон',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Констатации, които сте прегледали и сте оставили. Те вече не се съобщават, но сканирането продължава да ги открива и не се броят за отстранени. Докоснете, за да върнете една от тях.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Отлагане на констатация за поверителност (проект)',
   'Deze is beoordeeld en mag blijven': 'Прегледано, това може да остане',
   'Mogelijk gemaakt door': 'Стана възможно благодарение на',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3446,10 +3227,8 @@ const _dutchSourceAddBg = <String, String>{
   'Technische melding:': 'Техническо съобщение:',
   'presentaties': 'prezentatsii',
   '/Presentaties': '/Презентации',
-  'Rapportagedistributie (ontwerp)': 'Разпространение на отчети (проект)',
   'De export is mislukt.': 'Експортът се провали.',
   'Presenteer vanaf hier': 'Презентиране оттук',
-  'Teams-gastclient (ontwerp)': 'Клиент за гости на Teams (дизайн)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: колко широко може да се споделя този материал?',
   'Wat betekenen deze niveaus?': 'Какво означават тези нива?',
@@ -3567,8 +3346,6 @@ const _dutchSourceAddBg = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентации, които остават обикновени файлове Markdown: четими, с възможност за търсене и отваряеми с всеки редактор.',
   'sjablonen om mee te beginnen, of leeg': 'шаблона за начало или празна',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Пропускането е включено: намерените данни се зачерняват и всички изображения, видео и звук от този слайд не отиват на екрана или в експорта. Вашият markdown файл запазва всичко.',
   'Mijn tekst': 'Моят текст',
   'Wat zij zien': 'Какво виждат те',
   'Presentatiegegevens': 'Данни за презентацията',
@@ -3792,7 +3569,6 @@ const _dutchSourceAddBg = <String, String>{
   'Opslaan naar…': 'Запазване в…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Първо настройте връзка в Настройки → Хранилище.',
-  'Beginnen met:': 'Започнете с:',
   'Verlopen datums markeren': 'Отбелязване на изтекли дати',
   'Datums gemarkeerd': 'Датите са отбелязани',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3818,28 +3594,15 @@ const _dutchSourceAddBg = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Атакуемата повърхност по вид обект: колко са, колко изискват работа, какво е ново и какво никой не притежава. Последното обикновено е разговорът.',
   'Acties en besluiten': 'Действия и решения',
-  'Actie toevoegen': 'Добавяне на действие',
-  'Actie verwijderen': 'Премахване на действие',
   'Actie': 'Действие',
   'Deadline': 'Краен срок',
-  'Op de lijst sinds': 'В списъка от',
   'Stand': 'Състояние',
-  'Wat vraagt u': 'Какво искате',
   'geen datum': 'без дата',
-  'Ter informatie': 'За информация',
   'Besluit gevraagd': 'Необходимо е решение',
   'Escalatie': 'Ескалация',
   'Open': 'Отворено',
   'Loopt': 'В ход',
   'Afgerond': 'Завършено',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Само решение или ескалация получава етикет на слайда; "просрочено" следва от крайния срок и не се задава ръчно.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Дати като гггг-мм-дд. Друг запис се отхвърля, вместо да се отгатва: 05-08-2026 са два различни дни.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Слайд с действия носи най-много осем реда; след това залата преглежда, вместо да решава.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Какво трябва да се случи, кой го прави и до кога. За всеки ред посочете дали е за информация, или искате решение — това търси залата.',
   'Scorecard': 'Карта с показатели',
   'Cijfer toevoegen': 'Добавяне на показател',
   'Cijfer verwijderen': 'Премахване на показател',
@@ -3927,8 +3690,6 @@ const _dutchSourceAddBg = <String, String>{
       'Токенът е валиден, но няма права за това — дайте му повече права върху хранилището.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Влезли сте, но без достъп — паролата не е проблемът. Поискайте права за тази папка.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Лицензи на лексикони: какво още трябва да се попита',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Това прилича на пълен DAV адрес. При Nextcloud OciDeck сам извежда този път — тук принадлежи само сървърът.',
   'Overnemen': 'Приложи',
@@ -3971,8 +3732,6 @@ const _dutchSourceAddBg = <String, String>{
   'kenteken': 'регистрационен номер',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'За езика на тази презентация няма списък с ключови думи за специални категории лични данни. Шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят; думи като „диагноза“ или „заподозрян“ не се разпознават.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Списъкът с ключови думи за специални категории лични данни е много беден за езика на тази презентация. Не разчитайте, че думи като „диагноза“ или „заподозрян“ ще бъдат намерени.',
   'Landpakketten voor identificatienummers':
       'Пакети по държави за идентификационни номера',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -4002,8 +3761,6 @@ const _dutchSourceAddBg = <String, String>{
       'Името на сървъра не съществува или не може да бъде намерено. Проверете URL адреса на сървъра за печатна грешка.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Този сървър има частен или LAN адрес. Отбележете го като доверен вътрешен в Настройки → Хранилище.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Сертификатът на този сървър не е доверен. Самоподписан сертификат не работи; използвайте такъв от признат издател.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Сървърът пренасочва към друг адрес. Въведете този адрес директно — не следваме пренасочвания, защото могат да заобиколят проверката за сигурност.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4039,8 +3796,6 @@ const _dutchSourceAddBg = <String, String>{
   'Opslaan naar S3': 'Запис в S3',
   'Opgeslagen in S3:': 'Записано в S3:',
   'Hier staat niets': 'Тук няма нищо',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Съдържанието не можа да се зареди. Провери връзката и настройките.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Крайната точка е недостъпна — провери връзката и крайната точка.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4049,8 +3804,6 @@ const _dutchSourceAddBg = <String, String>{
       'Крайната точка върна грешка. Опитайте по-късно.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Тази крайна точка не може да пише условно, така че работата ви не е защитена от чужда. Запишете под ново име, ако и някой друг работи по тази презентация.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Няма настроен S3 контейнер. Настройте го от Настройки → Съхранение.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Първо настройте S3 контейнер от Настройки → Съхранение.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4096,10 +3849,6 @@ const _dutchSourceAddBg = <String, String>{
       'Това изображение показва поне толкова разпознаваеми лица: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Това изображение не можа да бъде проверено за лица. Форматът не се поддържа (например HEIC). Това не означава, че на него няма никого — означава, че не е проверявано.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Това изображение показва разпознаваемо лице.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Това изображение показва разпознаваеми лица: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Изображение, на което някой е разпознаваем, е лични данни дори без име.',
   'herkenbaar gezicht op een afbeelding': 'разпознаваемо лице в изображение',
@@ -4115,8 +3864,6 @@ const _dutchSourceAddBg = <String, String>{
   'Organisatie': 'Организация',
   'Welke verbinding?': 'Коя връзка?',
   'Bestandsverbindingen': 'Файлови връзки',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Местата, където съхранявате и търсите презентациите си — папки на този компютър, WebDAV сървъри и git хранилища заедно. Плъзнете ги в реда, който искате: най-горното от всеки вид важи като подразбирано.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git хранилище; всяка запазена версия се съхранява.',
   'Een map op de schijf van deze computer.': 'Папка на диска на този компютър.',
@@ -4139,15 +3886,7 @@ const _dutchSourceAddBg = <String, String>{
   'Openen vanaf WebDAV': 'Отваряне от WebDAV',
   'Opslaan naar WebDAV': 'Запазване в WebDAV',
   'Opgeslagen op WebDAV:': 'Запазено в WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Първо настройте WebDAV сървър от Настройки → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Избор на изображение в WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Няма зададен WebDAV сървър. Настройте го от Настройки → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV не е настроен (правилно) — проверете данните за сървъра в Настройки → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → WebDAV.',
   'Servertype': 'Тип сървър',
   'Nextcloud of ownCloud': 'Nextcloud или ownCloud',
   'Andere WebDAV-server': 'Друг WebDAV сървър',
@@ -4170,23 +3909,11 @@ const _dutchSourceAddBg = <String, String>{
       'Премахване на пълната страница от поредицата',
   'Opslag': 'Съхранение',
   'Opslagwijzen': 'Начини на съхранение',
-  'Deze computer': 'Този компютър',
   'Ingesteld': 'Настроено',
   'Niet ingesteld': 'Не е настроено',
-  'Nog geen bibliotheek ingesteld': 'Все още няма настроена библиотека',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Пътищата, по които можете да отваряте и запазвате презентации. Щракнете върху начин, за да го настроите.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Презентации в горните папки, на диска на този компютър.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Отваряйте и запазвайте презентации в папка на вашия Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Отваряйте презентации от git хранилище; всяка запазена версия се пази.',
-  'Nog te verifiëren': 'Още за проверка',
   'MASWE-zwakheid kiezen': 'Избор на слабост MASWE',
   'Zoek op naam, id of categorie': 'Търсене по име, id или категория',
   'Geen zwakheid gevonden': 'Не е намерена слабост',
-  'uitleg nog niet geschreven': 'обяснението още не е написано',
   'Getalnotatie herkennen': 'Разпознаване на формата на числата',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Този файл съдържа числа, чиято запетая може да се чете по два начина:',
@@ -4307,12 +4034,10 @@ const _dutchSourceAddBg = <String, String>{
   'Veelgestelde vragen': 'Често задавани въпроси',
   'Probleemoplossing': 'Отстраняване на проблеми',
   'Begrippenlijst': 'Речник на термините',
-  'API-documentatie': 'API документация',
   'Prestaties': 'Производителност',
   'Beveiligingsontwerp': 'Дизайн на сигурността',
   'Hosting en uitrol': 'Хостинг и внедряване',
   'Bijdragen': 'Принос',
-  'Ontwikkelomgeving': 'Среда за разработка',
   'Migratiegids': 'Ръководство за миграция',
   'Versies…': 'Версии…',
   'Versies:': 'Версии:',
@@ -4353,8 +4078,6 @@ const _dutchSourceAddBg = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Клонът е преместен; презаредете тестето и запазете отново.',
   'Bijgewerkt met OciDeck': 'Обновено с OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Първо настройте Git хранилище в Настройки → Git хранилище.',
   'Git-repository': 'Git хранилище',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Отваряйте презентации от Git хранилище. Всяка запазена версия се съхранява. Токенът се пази криптиран в ключодържателя, а не при останалите настройки.',
@@ -4369,7 +4092,6 @@ const _dutchSourceAddBg = <String, String>{
       'Слайдове за докладване и референтни данни за информационната сигурност: констатации, контролни списъци, матрици на обхвата и подписване. Структурирано по MIAUW и широко приложимо за пентестове, одити и проучвания на сигурността. Референтните данни са в самото приложение, затова модулът работи веднага и напълно офлайн.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; остават скрити, докато не ги включите.',
-  'Procesverbetering (ontwerp)': 'Подобряване на процесите (проект)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Този проект е страничен продукт на Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Експортиране на стилов профил',
@@ -4511,7 +4233,6 @@ const _dutchSourceAddBg = <String, String>{
   'genetisch gegeven': 'генетични данни',
   'parketnummer': 'номер на прокурорска преписка',
   'nationaal identificatienummer': 'национален идентификационен номер',
-  'OciWacht (ontwerp)': 'OciWacht (проект)',
   'Mogelijk geheim': 'Възможна тайна',
   'sleutel of token': 'ключ или токен',
   'private sleutel': 'частен ключ',
@@ -4544,7 +4265,6 @@ const _dutchSourceAddBg = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Сложи пълния списък с CVE на това устройство, така че търсенето да става офлайн и терминът ти да не отива никъде. Базата данни идва от CVE List V5 (официалната CVE програма, през GitHub).',
   'Wat er lokaal beschikbaar is': 'Какво е налично локално',
-  'Gegevenspakket': 'Пакет с данни',
   'Nu bijwerken': 'Актуализирай сега',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Данните са налични локално — търсенето се извършва на това устройство; нищо не излиза навън.',
@@ -4563,7 +4283,6 @@ const _dutchSourceAddBg = <String, String>{
       'Приемане: данните са на място и известието изчезва. Приемане + предупреждение: получателят вижда значка, че слайдът съдържа лични данни. Заличаване: намерените данни стават нечетливи на екрана и в експорта — вашият Markdown файл запазва оригиналния текст.',
   'Alleen melden': 'Само съобщаване',
   'PERSOONSGEGEVENS': 'ЛИЧНИ ДАННИ',
-  'Persoonsgegevens op deze slide': 'Лични данни на този слайд',
   'Volg de presentatie': 'Като презентацията',
   'Weglaten uit tonen en exporteren': 'Заличаване при показване и експорт',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4686,8 +4405,6 @@ const _dutchSourceAddBg = <String, String>{
   'Bewerk deze slide': 'Редактирай този слайд',
   'Bewijs verwijderen': 'Премахни доказателство',
   '(nog leeg)': '(все още празно)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Първо въведете ID на констатацията, за да прикачите доказателства.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Добавете екранни снимки или видеа като доказателство. Всяко доказателство става отделен слайд веднага след констатацията и се включва в експорта.',
   'Uitvoering testen conform standaard': 'Тестване съгласно стандарта',

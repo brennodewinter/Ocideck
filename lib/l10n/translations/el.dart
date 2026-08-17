@@ -41,17 +41,13 @@ const _stringsEl = {
   'settings': 'Ρυθμίσεις',
   'settingsGeneral': 'Γενικά',
   'settingsColors': 'Χρώματα',
-  'settingsLogo': 'Λογότυπο',
   'language': 'Γλώσσα',
   'applicationLanguage': 'Γλώσσα εφαρμογής',
   'languageHelp':
       'Η διεπαφή αλλάζει γλώσσα άμεσα. Το περιεχόμενο της παρουσίασης παραμένει αμετάβλητο.',
-  'presentationFolder': 'Φάκελος παρουσιάσεων',
   'exportFolderSetting': 'Φάκελος εξαγωγών',
-  'notSet': 'Δεν έχει οριστεί',
   'nextToPresentationFile': 'Δίπλα στο αρχείο παρουσίασης',
   'choose': 'Επιλογή',
-  'removeDefaultFolder': 'Αφαίρεση προεπιλεγμένου φακέλου',
   'removeExportFolder': 'Αφαίρεση φακέλου εξαγωγών',
   'exportFolderHelp':
       'Όλες οι εξαγωγές (PDF/PPTX) αποθηκεύονται εδώ. Αν δεν έχει οριστεί, οι εξαγωγές αποθηκεύονται δίπλα στο αρχείο παρουσίασης.',
@@ -85,8 +81,6 @@ const _dutchSourceEl = {
   'Handtekening tekenen': 'Σχεδίαση υπογραφής',
   'Teken je handtekening in het vak hieronder.':
       'Σχεδιάστε την υπογραφή σας στο πλαίσιο παρακάτω.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Ένα πακέτο δεδομένων είναι ένα .zip με τα δεδομένα αναφοράς αυτής της ενότητας. Ελέγχεται πρώτα ως προς το αποτύπωμα που είναι ενσωματωμένο στην εφαρμογή· γίνεται δεκτό μόνο πακέτο που ταιριάζει με αυτή την έκδοση της εφαρμογής.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
@@ -195,7 +189,6 @@ const _dutchSourceEl = {
       'Οι εικόνες και τα πολυμέσα μοιράζονται από τις παρουσιάσεις στον ίδιο φάκελο. Το ακριβές όνομα θα το επιλέξετε αμέσως στο παράθυρο του συστήματος.',
   'Alle bibliotheken': 'Όλες οι βιβλιοθήκες',
   'Andere map…': 'Άλλος φάκελος…',
-  'Bibliotheek verwijderen': 'Αφαίρεση βιβλιοθήκης',
   'Bibliotheken': 'Βιβλιοθήκες',
   'Geen bibliotheek': 'Καμία βιβλιοθήκη',
   'Geen presentaties (.md) gevonden.': 'Δεν βρέθηκαν παρουσιάσεις (.md).',
@@ -207,10 +200,6 @@ const _dutchSourceEl = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Επιλέξτε σε ποια βιβλιοθήκη θα μπει η παρουσίαση.',
   'Map toevoegen': 'Προσθήκη φακέλου',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Φάκελοι όπου αποθηκεύετε και αναζητάτε τις παρουσιάσεις σας. Δώστε στον καθένα δικό του όνομα για να τους ξεχωρίζετε. Όλες οι βιβλιοθήκες αναζητούνται κατά το άνοιγμα και στη βιβλιοθήκη εικόνων.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Καμία βιβλιοθήκη ακόμη — προσθέστε έναν φάκελο.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Καμία βιβλιοθήκη ακόμη. Προσθέστε μία στις Ρυθμίσεις ή επιλέξτε παραπάνω έναν φάκελο για αναζήτηση.',
   'Presentatie opslaan': 'Αποθήκευση παρουσίασης',
@@ -293,22 +282,11 @@ const _dutchSourceEl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Η δήλωση ακρίβειας με τον συντάκτη, την πιστοποίηση, την υπογραφή και τη σφράγιση.',
   'Uitbreidingen': 'Επεκτάσεις',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Άδεια και Απόρρητο.',
   'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Καμία πηγή δεν είναι προσβάσιμη — τα δεδομένα αναφοράς δεν ήταν δυνατό να ληφθούν από πουθενά. Δοκιμάστε ξανά ή εισαγάγετε το πακέτο χειροκίνητα.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Τα δεδομένα που λήφθηκαν δεν ταίριαζαν με το αναμενόμενο αποτύπωμα και απορρίφθηκαν προληπτικά.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Το πακέτο δεδομένων ήταν κατεστραμμένο ή μη έγκυρο και επομένως απορρίφθηκε.',
-  'Gegevenspakket kiezen': 'Επιλογή πακέτου δεδομένων',
-  'Kon het gekozen bestand niet lezen.':
-      'Δεν ήταν δυνατή η ανάγνωση του επιλεγμένου αρχείου.',
   'Nog niet opgehaald': 'Δεν έχει ληφθεί ακόμη',
   'AI-assistentie': 'Υποστήριξη AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -325,22 +303,15 @@ const _dutchSourceEl = {
       'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Άδεια και Απόρρητο" και δεν λειτουργεί στην έκδοση web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Κατανοώ ότι δεδομένα αποστέλλονται σε αυτή την εξωτερική υπηρεσία',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Υποστήριξη AI (απενεργοποιημένη από προεπιλογή): αν επιλέξετε ένα αυτοφιλοξενούμενο ή cloud backend, τα κείμενα ή οι εικόνες που επεξεργάζεστε αποστέλλονται σε αυτή τη διεύθυνση. Ένα τοπικό μοντέλο AI σε αυτή τη συσκευή δεν αποστέλλει τίποτα.',
   'Zoek een slidetype': 'Αναζήτηση τύπου διαφάνειας',
   'Alfabetisch sorteren': 'Αλφαβητική ταξινόμηση',
   'Algemeen': 'Γενικά',
   'Informatieveiligheid': 'Ασφάλεια πληροφοριών',
   'Alle': 'Όλα',
-  'Pentestrapportage (ontwerp)': 'Αναφορά δοκιμής διείσδυσης (σχεδίαση)',
-  'AI-assistentie (ontwerp)': 'Βοήθεια AI (σχεδίαση)',
-  'Agentisch bouwplan (ontwerp)': 'Πρακτορικό πλάνο κατασκευής (σχεδίαση)',
-  'Bijsnijden': 'Περικοπή',
   'Linksom': 'Περιστροφή αριστερά',
   'Rechtsom': 'Περιστροφή δεξιά',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Σύρετε την εικόνα για να επιλέξετε ποιο μέρος παραμένει ορατό.',
-  'Git-opslag (ontwerp)': 'Αποθήκευση Git (σχεδίαση)',
   'Zoek in documentatie…': 'Αναζήτηση στην τεκμηρίωση…',
   'Geen documenten gevonden': 'Δεν βρέθηκαν έγγραφα',
   'Alleen afspelen (vergrendeld)': 'Μόνο προβολή (κλειδωμένο)',
@@ -354,12 +325,8 @@ const _dutchSourceEl = {
   'Techniek': 'Τεχνικά',
   'Licentie en naleving': 'Άδεια και συμμόρφωση',
   'Architectuur': 'Αρχιτεκτονική',
-  'Bouwinstructies': 'Οδηγίες δημιουργίας',
-  'Kwaliteitscontroles': 'Έλεγχοι ποιότητας',
-  'Broncodekaart': 'Χάρτης πηγαίου κώδικα',
   'Licentienaleving': 'Συμμόρφωση αδειών',
   'Softwarestuklijst (SBOM)': 'Κατάλογος υλικών λογισμικού (SBOM)',
-  'Samenwerking (ontwerp)': 'Συνεργασία (σχεδίαση)',
   'Beschermen met een wachtwoord (AES-256)':
       'Προστασία με κωδικό πρόσβασης (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -440,10 +407,6 @@ const _dutchSourceEl = {
   'Instelling opslaan is mislukt.': 'Η αποθήκευση της ρύθμισης απέτυχε.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Τα πακέτα (.ocideck) δεν υποστηρίζονται ακόμη στην έκδοση για τον ιστό.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Στην έκδοση για τον ιστό μπορούν να ανοιχτούν μόνο παρουσιάσεις .md.',
   'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
   'Verwijderen': 'Διαγραφή',
@@ -534,10 +497,8 @@ const _dutchSourceEl = {
   'Audio bij deze slide': 'Ήχος για αυτή τη διαφάνεια',
   'Audio automatisch afspelen': 'Αυτόματη αναπαραγωγή ήχου',
   'Audio verwijderen': 'Αφαίρεση ήχου',
-  'Geen audio gekozen': 'Δεν επιλέχθηκε ήχος',
   'Geen audiobestand gekozen': 'Δεν επιλέχθηκε αρχείο ήχου',
   'Video automatisch afspelen': 'Αυτόματη αναπαραγωγή βίντεο',
-  'Geen video gekozen': 'Δεν επιλέχθηκε βίντεο',
   'Kiezen': 'Επιλογή',
   'Uit bibliotheek…': 'Από τη βιβλιοθήκη…',
   'Van computer…': 'Από τον υπολογιστή…',
@@ -566,7 +527,6 @@ const _dutchSourceEl = {
   'Pakket importeren': 'Εισαγωγή πακέτου',
   'Pakket exporteren': 'Εξαγωγή πακέτου',
   'Map met presentaties kiezen': 'Επιλογή φακέλου παρουσιάσεων',
-  'Standaard map voor presentaties': 'Προεπιλεγμένος φάκελος παρουσιάσεων',
   'Map voor exports': 'Φάκελος εξαγωγών',
   'Logo kiezen': 'Επιλογή λογότυπου',
   'Kies een afbeelding': 'Επιλέξτε μια εικόνα',
@@ -579,8 +539,6 @@ const _dutchSourceEl = {
   'Map kiezen': 'Επιλογή φακέλου',
   'Kies een map met presentaties om te beginnen.':
       'Επιλέξτε έναν φάκελο με παρουσιάσεις για να ξεκινήσετε.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Δεν βρέθηκαν παρουσιάσεις (.md) σε αυτόν τον φάκελο.',
   'Geen presentaties gevonden voor': 'Δεν βρέθηκαν παρουσιάσεις για',
   'meer treffer(s)': 'περισσότερα αποτελέσματα',
   'Slide zoeken': 'Εύρεση διαφάνειας',
@@ -602,8 +560,6 @@ const _dutchSourceEl = {
       'Πληκτρολογήστε όρους αναζήτησης για να βρείτε διαφάνειες σε όλες τις παρουσιάσεις σας.',
   'toegevoegd': 'προστέθηκε',
   'Eerste': 'Πρώτα',
-  'treffers — verfijn je zoekopdracht':
-      'αποτελέσματα, περιορίστε την αναζήτησή σας',
   'treffer(s)': 'αποτέλεσμα(τα)',
   'slide': 'διαφάνεια',
   'Zoeken en vervangen': 'Εύρεση και αντικατάσταση',
@@ -662,7 +618,6 @@ const _dutchSourceEl = {
   'Tekst op zijpanelen': 'Κείμενο σε πλαϊνά πάνελ',
   'Voorbeeldtekst': 'Δείγμα κειμένου',
   'Knop': 'Κουμπί',
-  'Profielnaam': 'Όνομα προφίλ',
   'Naam van het stijlprofiel': 'Όνομα του προφίλ στυλ',
   'Stijlprofiel': 'Προφίλ στυλ',
   'Nieuw profiel': 'Νέο προφίλ',
@@ -725,16 +680,9 @@ const _dutchSourceEl = {
   'TYPE': 'ΤΥΠΟΣ',
   'STIJL': 'ΣΤΥΛ',
   'Terug naar standaardstijl': 'Πίσω στο προεπιλεγμένο στυλ',
-  'Automatisch doorgaan na': 'Αυτόματη προώθηση μετά από',
-  'Logo tonen op deze slide': 'Εμφάνιση λογότυπου σε αυτή τη διαφάνεια',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Πίνακας επεξεργάσιμος κατά την παρουσίαση',
-  'Footer tonen op deze slide': 'Εμφάνιση υποσέλιδου σε αυτή τη διαφάνεια',
   'Sprekersnotities...': 'Σημειώσεις ομιλητή...',
   'Sprekersnotities': 'Σημειώσεις ομιλητή',
   'Notities voor tijdens het presenteren': 'Σημειώσεις για κατά την παρουσίαση',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Λειτουργία Markdown — επεξεργαστείτε ολόκληρη την παρουσίαση ως Marp Markdown',
   'Toepassen': 'Εφαρμογή',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Δεν ήταν δυνατή η επεξεργασία του Markdown. Ελέγξτε τη σύνταξη.',
@@ -759,8 +707,6 @@ const _dutchSourceEl = {
   'Geen resultaten voor': 'Χωρίς αποτελέσματα για',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Προσαρμόστε τον όρο αναζήτησης ή προσθέστε μια περιγραφή.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Χρησιμοποιήστε την «Περιήγηση» για να επιλέξετε εικόνες από οποιαδήποτε τοποθεσία.',
   'Selecteer een\nafbeelding': 'Επιλέξτε μια\nεικόνα',
   'Gekopieerd': 'Αντιγράφηκε',
   'Afbeelding verwijderen?': 'Διαγραφή εικόνας;',
@@ -777,8 +723,6 @@ const _dutchSourceEl = {
   'spatie': 'διάστημα',
   'klik': 'κλικ',
   'cijfers': 'αριθμοί',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Κάντε κλικ ή πατήστε ? / H / Esc για κλείσιμο',
   'Klik of druk op H / Esc om te sluiten':
       'Κάντε κλικ ή πατήστε H / Esc για κλείσιμο',
   'Naar slidenummer': 'Μετάβαση σε αριθμό διαφάνειας',
@@ -788,20 +732,10 @@ const _dutchSourceEl = {
   'Presenter view (notities, klok)': 'Προβολή παρουσιαστή (σημειώσεις, ρολόι)',
   'Scherm wisselen (meerdere schermen)': 'Εναλλαγή οθόνης (πολλαπλές οθόνες)',
   'Zwart · wit scherm': 'Μαύρη · λευκή οθόνη',
-  'Verstreken tijd resetten': 'Μηδενισμός χρόνου που πέρασε',
   'Automatische modus aan/uit': 'Αυτόματη λειτουργία ναι/όχι',
   'Herhalen (loop) aan/uit': 'Επανάληψη (βρόχος) ναι/όχι',
-  'Na audio automatisch doorgaan': 'Αυτόματη συνέχεια μετά τον ήχο',
-  'Dit overzicht': 'Αυτή η επισκόπηση',
   'Deze legenda': 'Αυτό το υπόμνημα',
   'Terug / afsluiten': 'Πίσω / έξοδος',
-  'Auto (A)': 'Αυτόματα (A)',
-  'Handmatig (A)': 'Χειροκίνητα (A)',
-  'Herhalen (L)': 'Επανάληψη (L)',
-  'Na audio (M)': 'Μετά τον ήχο (M)',
-  'Sneltoetsen (?)': 'Συντομεύσεις πληκτρολογίου (?)',
-  'Slide-overzicht (G)': 'Επισκόπηση διαφανειών (G)',
-  'Presenter view (P)': 'Προβολή παρουσιαστή (P)',
   'Tijd resetten (R)': 'Μηδενισμός χρονομέτρου (R)',
   'HUIDIGE SLIDE': 'ΤΡΕΧΟΥΣΑ ΔΙΑΦΑΝΕΙΑ',
   'VOLGENDE': 'ΕΠΟΜΕΝΗ',
@@ -818,15 +752,9 @@ const _dutchSourceEl = {
   'Notities weggooien': 'Απόρριψη σημειώσεων',
   'Notities voor de ontvanger tijdens een cursus':
       'Σημειώσεις για τον παραλήπτη κατά τη διάρκεια ενός μαθήματος',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Μεταβείτε σε λειτουργία Markdown για να προσθέσετε σημειώσεις.',
   'Mijn notities aan/uit': 'Εναλλαγή των σημειώσεών μου ναι/όχι',
   'Wissel scherm (S)': 'Εναλλαγή οθόνης (S)',
   'Kon niet van scherm wisselen.': 'Δεν ήταν δυνατή η εναλλαγή οθονών.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · S οθόνη · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P κοινό · H υπόμνημα · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -872,8 +800,6 @@ const _dutchSourceEl = {
   'Selectie opheffen': 'Κατάργηση επιλογής',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Αποδέχομαι την άδεια EUPL 1.2 και έχω διαβάσει ποια δεδομένα αποθηκεύει το OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Η επιλογή σας γίνεται η προεπιλεγμένη γλώσσα της εφαρμογής.',
   'Lees de volledige licentie': 'Διαβάστε την πλήρη άδεια',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'Το OciDeck είναι ελεύθερο λογισμικό υπό την άδεια EUPL 1.2. Πριν ξεκινήσετε, σας ζητάμε να αποδεχτείτε την άδεια. Παρακάτω μπορείτε επίσης να διαβάσετε ποια δεδομένα αποθηκεύει το OciDeck σε αυτή τη συσκευή και πότε κάτι φεύγει από τη συσκευή σας.',
@@ -900,9 +826,6 @@ const _dutchSourceEl = {
   'Het antwoord van de server was te groot':
       'Η απόκριση του διακομιστή ήταν πολύ μεγάλη',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Πηγή Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο στο Nextcloud σας. Ο κωδικός αποθηκεύεται κρυπτογραφημένος στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
   'Server-URL': 'URL διακομιστή',
   'Gebruikersnaam': 'Όνομα χρήστη',
   'App-wachtwoord': 'Κωδικός εφαρμογής',
@@ -916,23 +839,14 @@ const _dutchSourceEl = {
   'Verbinding gelukt': 'Η σύνδεση επιτεύχθηκε',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Οι αλλαγές αποθηκεύονται όταν κάνετε κλικ στο Αποθήκευση.',
-  'Afbeelding kiezen op Nextcloud': 'Επιλογή εικόνας στο Nextcloud',
-  'Openen vanaf Nextcloud': 'Άνοιγμα από το Nextcloud',
   'Vernieuwen': 'Ανανέωση',
   'Deze map is leeg': 'Αυτός ο φάκελος είναι κενός',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Δεν έχει ρυθμιστεί διακομιστής Nextcloud. Ρυθμίστε έναν στις Ρυθμίσεις → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Δεν ήταν δυνατή η φόρτωση του φακέλου. Ελέγξτε τη σύνδεση και τις ρυθμίσεις σας.',
   'Kon dit bestand niet openen.':
       'Δεν ήταν δυνατό το άνοιγμα αυτού του αρχείου.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Αυτή δεν είναι παρουσίαση Marp/OciDeck.',
   'Downloaden mislukt:': 'Η λήψη απέτυχε:',
-  'Opgeslagen op Nextcloud:': 'Αποθηκεύτηκε στο Nextcloud:',
   'Opslaan mislukt:': 'Η αποθήκευση απέτυχε:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Ρυθμίστε πρώτα έναν διακομιστή Nextcloud στις Ρυθμίσεις → Nextcloud.',
   'Opslaan naar Nextcloud': 'Αποθήκευση στο Nextcloud',
   'Doelpad (zonder extensie)': 'Διαδρομή προορισμού (χωρίς επέκταση)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -944,9 +858,6 @@ const _dutchSourceEl = {
       'Εμφάνιση επισκόπησης χρόνων μετά το τέλος',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Ο χρόνος ανά διαφάνεια μετριέται πάντα· αυτό καθορίζει μόνο αν εμφανίζεται η επισκόπηση μετά από αυτή την παρουσίαση.',
-  'Oefenoverzicht tonen na afloop': 'Εμφάνιση σύνοψης πρόβας μετά το τέλος',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Μετά από μια παρουσίαση, εμφανίστε την επισκόπηση του χρόνου που δαπανήθηκε ανά διαφάνεια. Ο χρόνος μετριέται πάντα· αυτό καθορίζει μόνο αν εμφανίζεται η οθόνη.',
   'Onveilige presentatie geblokkeerd': 'Η μη ασφαλής παρουσίαση αποκλείστηκε',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Αυτή η παρουσίαση δεν άνοιξε. Το αρχείο περιέχει περιεχόμενο που μπορεί να εκτελέσει κώδικα, και μια παρουσίαση πρέπει να περιέχει μόνο δεδομένα — τίποτα εκτελέσιμο.',
@@ -1029,7 +940,6 @@ const _dutchSourceEl = {
   'Online': 'Διαδικτυακά',
   'Lokaal bestand': 'Τοπικό αρχείο',
   'Geen video': 'Χωρίς βίντεο',
-  'Vraag (meerkeuze)': 'Ερώτηση (πολλαπλής επιλογής)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Το κείμενο του τίτλου έχει πολύ μικρή αντίθεση με την εικόνα φόντου',
   'Herstel': 'Διόρθωση',
@@ -1044,8 +954,6 @@ const _dutchSourceEl = {
   'Huidig punt weghalen': 'Αφαίρεση τρέχοντος σημείου',
   'Stap voor stap': 'Βήμα προς βήμα',
   'Geen animatie': 'Χωρίς κίνηση',
-  'Animatiesnelheid': 'Ταχύτητα κίνησης',
-  'Langzaam': 'Αργή',
   'Snel': 'Γρήγορη',
   'Gebeurtenissen': 'Γεγονότα',
   'Gebeurtenis toevoegen': 'Προσθήκη γεγονότος',
@@ -1058,8 +966,6 @@ const _dutchSourceEl = {
   'Vraag': 'Ερώτηση',
   'Wat wil je vragen?': 'Τι θέλετε να ρωτήσετε;',
   'Antwoorden': 'Απαντήσεις',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Επισημάνετε τις σωστές απαντήσεις. Έως οκτώ απαντήσεις· κατά την παρουσίαση εμφανίζεται τυχαία μία σωστή και οι υπόλοιπες λανθασμένες.',
   'Antwoord': 'Απάντηση',
   'Antwoord toevoegen': 'Προσθήκη απάντησης',
   'Goed antwoord': 'Σωστή απάντηση',
@@ -1092,8 +998,6 @@ const _dutchSourceEl = {
   'Stelling': 'Δήλωση',
   'Formuleer een stelling die juist of onjuist is':
       'Διατυπώστε μια δήλωση που είναι σωστή ή λανθασμένη',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Επισημάνετε όλες τις σωστές απαντήσεις. Κατά την παρουσίαση εμφανίζεται ένα τυχαίο σύνολο με τουλάχιστον μία σωστή και μία λανθασμένη.',
   'Juist': 'Σωστό',
   'Onjuist': 'Λάθος',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1114,7 +1018,6 @@ const _dutchSourceEl = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Τα χρώματα κατάστασης των μετρητών του cockpit. Δημιουργήστε επώνυμες παραλλαγές· το επιλεγμένο σχήμα ισχύει για όλες τις διαφάνειες cockpit.',
   'Standaard': 'Προεπιλογή',
-  'Standaardkleuren gebruiken': 'Χρήση προεπιλεγμένων χρωμάτων',
   'Kleurschema verwijderen': 'Διαγραφή χρωματικού σχήματος',
   'Schemanaam': 'Όνομα σχήματος',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1194,7 +1097,6 @@ const _dutchSourceEl = {
   'Logo en footer': 'Λογότυπο και υποσέλιδο',
   'Pagina': 'Σελίδα',
   'Presentatiestijl': 'Στυλ παρουσίασης',
-  'Presentatiestijl: ': 'Στυλ παρουσίασης: ',
   'Tekst...': 'Κείμενο...',
   'Teksteditor': 'Επεξεργαστής κειμένου',
   'Volgende pagina': 'Επόμενη σελίδα',
@@ -1207,8 +1109,6 @@ const _dutchSourceEl = {
   'Doeltijd': 'Χρόνος-στόχος',
   'Doeltijd (aftellen)': 'Χρόνος-στόχος (αντίστροφη μέτρηση)',
   'Geen aftelling': 'Χωρίς αντίστροφη μέτρηση',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Προεπιλεγμένος χρόνος-στόχος για την αντίστροφη μέτρηση στον presenter. Ρυθμίστε τον με ακρίβεια κατά την παρουσίαση με το πλήκτρο K.',
   'uit': 'ανενεργό',
   'Doeltijd / aftellen (K)': 'Στόχος / αντίστροφη μέτρηση (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1280,14 +1180,8 @@ const _dutchSourceEl = {
   'Cirkel': 'Πίτα',
   'Spider': 'Spider',
   'CSV importeren': 'Εισαγωγή CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Δεδομένα (CSV: πρώτη σειρά = ονόματα σειρών, πρώτη στήλη = ετικέτες)',
   'Gekoppeld aan': 'Συνδεδεμένο με',
   'Ontkoppelen': 'Αποσύνδεση',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Αποθήκευση των δεδομένων στη διαφάνεια ή διατήρησή τους ως ξεχωριστό αρχείο CSV δίπλα στην παρουσίαση;',
-  'In de slide': 'Στη διαφάνεια',
-  'Als CSV-bestand': 'Ως αρχείο CSV',
   'Geen grafiekgegevens': 'Χωρίς δεδομένα γραφήματος',
   'Label': 'Ετικέτα',
   'Rij': 'Σειρά',
@@ -1317,7 +1211,6 @@ const _dutchSourceEl = {
   'Eigen kleur (hex)': 'Προσαρμοσμένο χρώμα (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Για παράδειγμα #33FF33 για μια πράσινη οθόνη CRT.',
-  'Onderdeel van stijlprofiel ': 'Μέρος του προφίλ στυλ ',
   'Broncode lettertype': 'Γραμματοσειρά κώδικα',
   'Kop (optioneel)': 'Επικεφαλίδα (προαιρετικό)',
   'Subkop (optioneel)': 'Υποεπικεφαλίδα (προαιρετικό)',
@@ -1357,16 +1250,7 @@ const _dutchSourceEl = {
   'Zet het filter uit om alles weer te zien.':
       'Απενεργοποιήστε το φίλτρο για να δείτε ξανά τα πάντα.',
   'Welkom bij OciDeck': 'Καλώς ήρθατε στο OciDeck',
-  'Privacy en gebruik': 'Απόρρητο και χρήση',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'Το OciDeck είναι μια τοπική εφαρμογή για υπολογιστή. Οι παρουσιάσεις και τα δεδομένα σας αποθηκεύονται αποκλειστικά στον υπολογιστή σας.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Η εφαρμογή δεν συλλέγει προσωπικά δεδομένα, στατιστικά ούτε δεδομένα χρήσης. Το απόρρητό σας είναι προτεραιότητά μας.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Όλα τα δεδομένα που εισάγετε στο OciDeck παραμένουν στο τοπικό σας σύστημα και δεν αποστέλλονται σε εξωτερικούς διακομιστές.',
   'Licentie (EUPL 1.2)': 'Άδεια (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Κάνοντας κλικ στο "Συμφωνώ", αποδέχεστε αυτούς τους όρους και συναινείτε στη χρήση του OciDeck.',
   'Volledige licentie online': 'Πλήρης άδεια online',
   'Akkoord gaan': 'Συμφωνώ',
   'Privacy': 'Απόρρητο',
@@ -1455,8 +1339,6 @@ const _dutchSourceEl = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Η εξαγωγή αποκλείστηκε λόγω σοβαρών προβλημάτων ποιότητας.',
   'Alle meldingen': 'Όλα τα προβλήματα',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… και περισσότερα προβλήματα στον πίνακα ποιότητας.',
   'Classificatie-handhaving': 'Επιβολή ταξινόμησης',
   'Vrijgaveplafond': 'Ανώτατο όριο δημοσίευσης',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1475,11 +1357,9 @@ const _dutchSourceEl = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Ορίστε ένα επίπεδο TLP — η εξαγωγή αποκλείεται από την πολιτική ταξινόμησης.',
   'Tabel bewerken': 'Επεξεργασία πίνακα',
-  'Pijltjes · Tab · Esc': 'Βελάκια · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Επεξεργασία πίνακα (σε διαφάνειες πίνακα)',
   'Tabel bewerken (E)': 'Επεξεργασία πίνακα (E)',
   'Tab wisselt cel · Esc sluit': 'Το Tab αλλάζει κελί · το Esc κλείνει',
-  'Pen · markeerstift · ⇧E': 'Πένα · μαρκαδόρος · ⇧E',
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
   'PgUp/PgDn bladert door de slides': 'Το PgUp/PgDn ξεφυλλίζει τις διαφάνειες',
@@ -1523,10 +1403,6 @@ const _dutchSourceEl = {
       'Σφάλμα δικτύου — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Κάτι πήγε απρόσμενα στραβά. Δείτε το αρχείο καταγραφής για λεπτομέρειες.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Το Nextcloud δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Ο διακομιστής δεν είναι προσβάσιμος — ελέγξτε τη σύνδεση και το URL του διακομιστή.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1554,8 +1430,6 @@ const _dutchSourceEl = {
   'Uit recente bestanden verwijderen': 'Αφαίρεση από τα πρόσφατα αρχεία',
   'OciDeck wordt gestart…': 'Εκκίνηση του OciDeck…',
   'Herstelbestanden': 'Αρχεία ανάκτησης',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Τα αρχεία ανάκτησης περιέχουν το πλήρες περιεχόμενο των παρουσιάσεών σας σε απλό κείμενο. Καθαρίζονται αυτόματα μετά από 7 ημέρες· εδώ μπορείτε να τα σβήσετε αμέσως.',
   'Herstelbestanden nu wissen': 'Σβήσιμο αρχείων ανάκτησης τώρα',
   'Er waren geen herstelbestanden.': 'Δεν υπήρχαν αρχεία ανάκτησης.',
   'herstelbestand(en) gewist.': 'αρχείο(-α) ανάκτησης σβήστηκαν.',
@@ -1992,7 +1866,6 @@ const _dutchSourceAddEl = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Δημιουργούμε ένα αντίγραφο σε νέα καρτέλα· το αρχικό σας αρχείο παραμένει αμετάβλητο.',
   'Welk formaat?': 'Ποια μορφή;',
-  'dia\'s, gesplitst op kop.': 'διαφάνειες, χωρισμένες ανά επικεφαλίδα.',
   'document': 'έγγραφο',
   'volledig': 'πλήρες',
   'Invoegen': 'Εισαγωγή',
@@ -2154,12 +2027,8 @@ const _dutchSourceAddEl = <String, String>{
   'Alle integraties': 'Όλες οι ενσωματώσεις',
   'Alles inschakelen': 'Ενεργοποίηση όλων',
   'Alles uitschakelen': 'Απενεργοποίηση όλων',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Έχει ήδη οριστεί φάκελος αναφορών, οπότε η σύνδεση παραμένει προσβάσιμη και μια υπάρχουσα παρουσίαση OpenKAT μπορεί να ενημερώνεται.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Συνδέσεις με άλλα συστήματα. Κάθε σύνδεση είναι εξ ορισμού απενεργοποιημένη και παραμένει ανενεργή μέχρι να την ενεργοποιήσετε.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Διαβάστε τους φακέλους αναφορών του OpenKAT ως μία διοικητική επισκόπηση.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Εισαγωγή παρουσιάσεων από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) ως επεξεργάσιμο deck. Οι συνδέσεις με άλλα συστήματα, όπως το OpenKAT, βρίσκονται στις Ενσωματώσεις.',
   'Media (WebRTC)': 'Πολυμέσα (WebRTC)',
@@ -2329,7 +2198,6 @@ const _dutchSourceAddEl = <String, String>{
   'Van toepassing': 'Εφαρμόσιμο',
   'Voortgang': 'Πρόοδος',
   'Voortgang managementsysteem': 'Πρόοδος συστήματος διαχείρισης',
-  'Voortgangsoverzicht bijgewerkt': 'Η επισκόπηση προόδου ενημερώθηκε',
   'Welk deel?': 'Ποιο μέρος;',
   'beheersmaatregelen geladen': 'έλεγχοι φορτώθηκαν',
   'geïmplementeerd': 'υλοποιημένο',
@@ -2407,10 +2275,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτό δεν μοιάζει με έγκυρο κλειδί ανάκτησης.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Η μνήμη ιστού για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Η μνήμη web για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε την εργασία σας ως αρχείο .ocideck και επαναφορτώστε τη σελίδα πριν προσθέσετε περισσότερες εικόνες.',
   'Afbeeldingsrechten': 'Δικαιώματα εικόνας',
   'Afbeeldingsrechten controleren…': 'Ελέγξτε τα δικαιώματα εικόνας…',
   'Afdoening': 'Επίλυση',
@@ -2462,8 +2326,6 @@ const _dutchSourceAddEl = <String, String>{
   'Verifiëren': 'Επαλήθευση',
   'Deelnemers verifiëren': 'Επαλήθευση συμμετεχόντων',
   '(dit apparaat)': '(αυτή η συσκευή)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Σύγκρινε το αποτύπωμα κάθε συσκευής μέσω ενός έμπιστου καναλιού — διαβάστε το ο ένας στον άλλον ή στείλ\' το από μια οδό που εμπιστεύεσαι. Αν ταιριάζουν, δουλεύεις με τις πραγματικές συσκευές και κανείς δεν παρεμβλήθηκε. Αν διαφέρουν, διέκοψε τη συνεργασία.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Αυτός δεν είναι έγκυρος σύνδεσμος πρόσκλησης.',
@@ -2526,8 +2388,6 @@ const _dutchSourceAddEl = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός homeserver Matrix ως κρυπτογραφημένου αναμεταδότη. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα. Εισαγάγετε έναν homeserver και ένα διακριτικό πρόσβασης που δημιουργήθηκε αλλού — το OciDeck δεν ζητά ποτέ τον κωδικό σας. Το διακριτικό αποθηκεύεται κρυπτογραφημένο στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
   'wordt door de test ingevuld': 'συμπληρώνεται από τον έλεγχο',
-  'Versleuteld doorgeefluik (ontwerp)':
-      'Κρυπτογραφημένος αναμεταδότης (σχεδίαση)',
   'Meer documentatie op de repository': 'Περισσότερη τεκμηρίωση στο αποθετήριο',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Η πλήρης τεκμηρίωση — συμπεριλαμβανομένων της αρχιτεκτονικής, της κατασκευής, του πηγαίου κώδικα και του σχεδιασμού — βρίσκεται στο αποθετήριο.',
@@ -2771,50 +2631,14 @@ const _dutchSourceAddEl = <String, String>{
       'Ποια δεδομένα μέτρησης λείπουν ή είναι παλιά;',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Σε ποια δεδομένα βασίζεται αυτή η αναφορά;',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Μια ευρεία αλλά τεκμηριωμένη επισκόπηση διαχείρισης με ανιχνεύσιμες στιγμές μέτρησης.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Κατατάσσεται χωρίς συνολική βαθμολογία και εμφανίζει μετρήσεις που λείπουν ξεχωριστά.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Εμφανίζει μετρήσεις σοβαρότητας, συνεισφέροντες και μεταφερόμενες μετρήσεις ανά στιγμή.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Οργανώνει την εύρεση τύπων από επηρεαζόμενους οργανισμούς, συστήματα και παρατηρήσεις.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Εμφανίζει κρίσιμους/υψηλούς αριθμούς χωρίς καμία επινοημένη στάθμιση.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Εμφανίζει αριθμητή, παρονομαστή και μόνο αξιόπιστα ποσοστά.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Ομαδοποιεί κυριολεκτικές συστάσεις από το OpenKAT χωρίς τη δική τους προτεραιότητα.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Μια στοχευμένη τρέχουσα εικόνα ενός οργανισμού και η ημερομηνία μέτρησής του.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Συγκρίνει δύο επιλεγμένες στιγμές μέτρησης σε έναν οργανισμό.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Διακρίνει νέα, νέα και δεν παρατηρούνται πλέον.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Χρησιμοποιεί μόνο αξιόπιστες ημερομηνίες πρώτης παρατήρησης.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Ταξινομεί συστήματα με ξεχωριστούς μετρητές σοβαρότητας.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Εμφανίζει μεμονωμένες τιμές δέλτα χωρίς σταθμισμένη βαθμολογία.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Συγκρίνει αριθμητή και παρονομαστή με αποδεδειγμένα συγκρίσιμη κάλυψη.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Αποθέματα αποδεδειγμένα συστήματα, ονόματα κεντρικών υπολογιστών και διευθύνσεις IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Διαχωρίζει παρακολουθούμενο, μη ελεγχόμενο και άγνωστο.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Εμφανίζει μόνο ρητά αποδεδειγμένες μεταλλάξεις παρακολούθησης.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Δείχνει οργανισμούς και συστήματα γύρω από έναν αξιόπιστο σύνδεσμο CVE.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Κατατάσσει τα CVE με ρητή κατάργηση διπλότυπων.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Διακρίνει νέα, νέα και μη παρατηρούμενα πλέον CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Εμφανίζει μετρήσεις που λείπουν, είναι ξεπερασμένες και όντως χρησιμοποιήθηκαν.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Λογαριασμοί για βασικές ημερομηνίες, αρχεία προέλευσης, προσαρμογείς και κατακερματισμούς πηγής.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Δεν είναι ακόμη διαθέσιμη: η πηγή δεν αποδεικνύει την κατάσταση παρακολούθησης για όλα τα στοιχεία.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2858,11 +2682,6 @@ const _dutchSourceAddEl = <String, String>{
   'Onderwerp': 'Θέμα',
   'Welk rapport beantwoordt uw vraag?': 'Ποια αναφορά απαντά στην ερώτησή σας;',
   'Meer rapportvragen': 'Περισσότερες ερωτήσεις αναφοράς',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Ποια συστήματα είναι ευάλωτα σε ένα CVE;',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Οργανισμοί και ευάλωτα συστήματα γύρω από μία ευπάθεια.',
-  'Organisaties met kwetsbare systemen': 'Οργανισμοί με ευάλωτα συστήματα',
   'Kwetsbare systemen': 'Ευάλωτα συστήματα',
   'Kritiek/hoog': 'Κρίσιμο/υψηλό',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2884,8 +2703,6 @@ const _dutchSourceAddEl = <String, String>{
   'Bruikbaar': 'Χρησιμοποιήσιμος',
   'CVE zoeken': 'Αναζήτηση CVE',
   'Critical/high': 'Κρίσιμο/υψηλό',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Ποιότητα δεδομένων, μετρήσεις που λείπουν και απαξίωση.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Οι επιλεγμένες αναφορές δεν περιέχουν αρκετά αξιόπιστα δεδομένα για αυτό το τμήμα.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2912,10 +2729,6 @@ const _dutchSourceAddEl = <String, String>{
   'Geen bruikbare meetdatum': 'Δεν χρησιμοποιήσιμη ημερομηνία μέτρησης',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Οι δημιουργημένες διαφάνειες ανανεώνονται. Οι δικές σας διαφάνειες και αντίγραφα διατηρούνται.',
-  'Getroffen organisaties en systemen':
-      'Οργανισμοί και συστήματα που επηρεάζονται',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Επηρεασμένοι οργανισμοί και συστήματα γύρω από μια ευπάθεια.',
   'Getroffen systemen': 'Συστήματα που επηρεάζονται',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Δεν ήταν δυνατή η δημιουργία της αναφοράς. Οι επιλογές σας διατηρούνται. ελέγξτε τις προειδοποιήσεις και δοκιμάστε ξανά.',
@@ -2925,20 +2738,15 @@ const _dutchSourceAddEl = <String, String>{
   'Keuzes wijzigen…': 'Αλλαγή επιλογών…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Επιλέξτε το φάκελο στον οποίο το OpenKAT έχει τοποθετήσει τις αναφορές. Το OciDeck διαβάζει μόνο αυτόν τον φάκελο. τίποτα δεν αλλάζει ή αποστέλλεται.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Επιλέξτε την ερώτηση που πρέπει να απαντήσει η αναφορά. Το OciDeck καθορίζει την κατάλληλη δομή.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Επιλέξτε ένα CVE που βρίσκεται στις αναφορές.',
   'Laatste bruikbare meting': 'Τελευταία χρησιμοποιήσιμη μέτρηση',
   'Live voorvertoning van de rapportopbouw':
       'Ζωντανή προεπισκόπηση της δομής της αναφοράς',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Πληροφορίες διαχείρισης και ελέγχου για πολλούς οργανισμούς.',
   'Meer instellingen': 'Περισσότερες ρυθμίσεις',
   'Nederlands': 'Ολλανδός',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Δεν έχει κάθε επιλεγμένος οργανισμός μέτρηση για αυτήν την περίοδο.',
-  'Nieuwe en verdwenen bevindingen': 'Νέα ευρήματα που λείπουν',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Δεν είναι ακόμη διαθέσιμο: αυτές οι αναφορές δεν περιέχουν αξιόπιστους αριθμούς CVE.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2973,8 +2781,6 @@ const _dutchSourceAddEl = <String, String>{
       'Λείπει μια χρήσιμη μέτρηση ρεύματος για έναν ή περισσότερους οργανισμούς.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Για μια σύγκριση απαιτούνται δύο ροπές μέτρησης. Βρέθηκε τώρα μία μέτρηση.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Πρόοδος σε σύγκριση με προηγούμενη στιγμή μέτρησης.',
   'Waar staan de OpenKAT-rapportages?': 'Πού είναι οι αναφορές OpenKAT;',
   'Wat veranderde er bij één organisatie?': 'Τι άλλαξε σε έναν οργανισμό;',
   'Wat wilt u laten zien?': 'Τι θέλετε να δείξετε;',
@@ -2986,7 +2792,6 @@ const _dutchSourceAddEl = <String, String>{
   'bruikbaar': 'χρησιμοποιήσιμος',
   'metingen': 'μετρήσεις',
   'organisaties': 'οργανώσεις',
-  'organisaties geselecteerd': 'οργανώσεις που έχουν επιλεγεί',
   'rapportages gebruikt': 'χρησιμοποιήθηκαν αναφορές',
   'systemen': 'συστήματα',
   'Nog geen specificatielimiet': 'Δεν υπάρχει ακόμη όριο προδιαγραφής',
@@ -3132,7 +2937,6 @@ const _dutchSourceAddEl = <String, String>{
       'βρίσκεται σε διαφάνεια δέντρου αλλά δεν χρησιμοποιείται αλλού — συνδέστε το με πίνακα, ροή ή άλλη διαφάνεια.',
   'Nieuw verbeteringsproject': 'Νέο έργο βελτίωσης',
   'Kader': 'Πλαίσιο',
-  'Projecttitel': 'Τίτλος έργου',
   'Primaire Y-metriek (Y-01)': 'Κύρια μέτρηση Y (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Για παράδειγμα: χρόνος order intake σε εργάσιμες ημέρες',
@@ -3187,10 +2991,6 @@ const _dutchSourceAddEl = <String, String>{
   'Bron niet toegestaan': 'Μη επιτρεπτή πηγή',
   'Deze URL is door de beveiliging geweigerd.':
       'Αυτή η διεύθυνση URL απορρίφθηκε από την ασφάλεια.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Εισαγωγή υλικού από άλλα συστήματα. Δύο πηγές: οι παρουσιάσεις από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) γίνονται ένα επεξεργάσιμο deck και οι αναφορές OpenKAT (ένας φάκελος με JSON) γίνονται μία διοικητική επισκόπηση. Πού βρίσκεται ο φάκελος OpenKAT ορίζεται στις Ενσωματώσεις.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Εισαγωγή παρουσιάσεων από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) ως επεξεργάσιμο deck. Η ανάγνωση φακέλων αναφορών OpenKAT είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'Alinea': 'Παράγραφος',
   'Audio "{bestand}"': 'Ήχος "{bestand}"',
   'Deck opbouwen…': 'Δημιουργία παρουσίασης…',
@@ -3313,8 +3113,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το ευρετήριο της λίστας ελέγχου: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος και η κατηγορία. Το περιεχόμενο του ίδιου του οδηγού δεν περιλαμβάνεται.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Το ευρετήριο δοκιμών της v2.0.0: ανά δοκιμή το σταθερό αναγνωριστικό, ο κανονικός τίτλος, η κατηγορία MASVS και η αδυναμία MASWE. Οι αποσυρμένες δοκιμές v1 και τα σύμβολα κράτησης θέσης δεν περιλαμβάνονται· ούτε το περιεχόμενο του οδηγού.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Ο κατάλογος αδυναμιών (117): αναγνωριστικό, τίτλος, κατηγορία MASVS, πλατφόρμα και η σύνδεση με CWE. Τα τρία τέταρτα δεν έχουν ακόμη γραφτεί στην πηγή· αυτά περιλαμβάνονται, σημειωμένα. Οι αποσυρμένες αδυναμίες όχι.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Ο πλήρης κατάλογος (αναγνωριστικό, όνομα, περιγραφή) συν έναν δικό μας επιλεγμένο πυρήνα με τις σημειώσεις αποκατάστασης.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3361,33 +3159,16 @@ const _dutchSourceAddEl = <String, String>{
       'Κάθε αρχείο μετατρέπεται ξεχωριστά και αποθηκεύεται ως δική του παρουσίαση στον φάκελο προορισμού. Αν κάποιο αποτύχει, η ουρά συνεχίζει κανονικά.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Η ταυτόχρονη εισαγωγή πολλών παρουσιάσεων τις γράφει ως αρχεία σε έναν φάκελο· στην έκδοση για προγράμματα περιήγησης αυτό δεν γίνεται.',
-  'Nu importeren': 'Εισαγωγή τώρα',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Η επισκόπηση είναι έτοιμη σε νέα καρτέλα.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Διαβάζει έναν φάκελο με αναφορές OpenKAT (JSON) και δημιουργεί από αυτόν μία διοικητική επισκόπηση: συστήματα, ευρήματα ανά σοβαρότητα, τα σημεία που παραμένουν ανοιχτά περισσότερο και την τάση σε διαδοχικές μετρήσεις. Η ίδια ενέργεια σε υπάρχουσα παρουσίαση OpenKAT την ενημερώνει και αφήνει τις δικές σας διαφάνειες στη θέση τους.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Η εισαγωγή μόνο διαβάζει· τίποτα σε αυτόν τον φάκελο δεν αλλάζει ούτε αποστέλλεται. Τα αρχεία που δεν αποδεικνύονται αναφορές OpenKAT παραλείπονται και αναφέρονται στο αρχείο καταγραφής εισαγωγής.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Υποδείξτε τον φάκελο όπου βρίσκονται οι αναφορές OpenKAT (JSON). Η εισαγωγή διαβάζει αυτόν τον φάκελο και δημιουργεί από αυτόν μία διοικητική επισκόπηση· αν ο φάκελος οριστεί εδώ, δεν χρειάζεται να τον επιλέγετε κάθε φορά.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Η εισαγωγή OpenKAT διαβάζει έναν φάκελο από τον δίσκο και είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Δεν έχει οριστεί ακόμη φάκελος αναφορών, οπότε η εισαγωγή τον ζητά κάθε φορά.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Έχει ήδη οριστεί φάκελος αναφορών, οπότε το σημείο εισόδου παραμένει προσβάσιμο και μια υπάρχουσα παρουσίαση OpenKAT μπορεί να ενημερώνεται.',
   'Integraties': 'Ενσωματώσεις',
-  'Naar Integraties': 'Στις Ενσωματώσεις',
   'Map kiezen…': 'Επιλογή φακέλου…',
   'Map wissen': 'Εκκαθάριση φακέλου',
-  'OpenKAT-rapportages importeren…': 'Εισαγωγή αναφορών OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Επιλογή φακέλου με αναφορές OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Οι αναφορές OpenKAT εισήχθησαν.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Το deck OpenKAT ενημερώθηκε· οι χειροκίνητες διαφάνειες διατηρήθηκαν.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Δεν βρέθηκαν αναφορές OpenKAT σε αυτόν τον φάκελο.',
-  'OpenKAT-import mislukt.': 'Η εισαγωγή OpenKAT απέτυχε.',
   'rapportages': 'αναφορές',
   'overgeslagen': 'παραλείφθηκαν',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3449,8 +3230,6 @@ const _dutchSourceAddEl = <String, String>{
   'Label op de primaire knop': 'Ετικέτα στο κύριο κουμπί',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ευρήματα που έχεις εξετάσει και άφησες όπως είναι. Δεν αναφέρονται πλέον, αλλά η σάρωση συνεχίζει να τα βρίσκει και δεν μετρούν ως επιλυμένα. Πάτησε για να επαναφέρεις ένα.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Παραμερισμός ευρήματος ιδιωτικότητας (σχεδίαση)',
   'Deze is beoordeeld en mag blijven': 'Ελεγμένο, αυτό μπορεί να μείνει',
   'Mogelijk gemaakt door': 'Έγινε δυνατό χάρη σε',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3462,11 +3241,8 @@ const _dutchSourceAddEl = <String, String>{
   'Technische melding:': 'Τεχνικό μήνυμα:',
   'presentaties': 'parousiaseis',
   '/Presentaties': '/Παρουσιάσεις',
-  'Rapportagedistributie (ontwerp)': 'Διανομή αναφορών (σχεδίαση)',
   'De export is mislukt.': 'Η εξαγωγή απέτυχε.',
   'Presenteer vanaf hier': 'Παρουσίαση από εδώ',
-  'Teams-gastclient (ontwerp)':
-      'Πρόγραμμα-πελάτης επισκέπτη Teams (σχεδιασμός)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: πόσο ευρέως επιτρέπεται να κοινοποιηθεί αυτό το υλικό;',
   'Wat betekenen deze niveaus?': 'Τι σημαίνουν αυτά τα επίπεδα;',
@@ -3585,8 +3361,6 @@ const _dutchSourceAddEl = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
   'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Η παράλειψη είναι ενεργή: τα δεδομένα που βρέθηκαν μαυρίζονται και όλες οι εικόνες, τα βίντεο και ο ήχος αυτής της διαφάνειας δεν πηγαίνουν στην οθόνη ούτε στην εξαγωγή. Το αρχείο markdown σας τα κρατά όλα.',
   'Mijn tekst': 'Το κείμενό μου',
   'Wat zij zien': 'Τι βλέπουν',
   'Presentatiegegevens': 'Στοιχεία παρουσίασης',
@@ -3812,7 +3586,6 @@ const _dutchSourceAddEl = <String, String>{
   'Opslaan naar…': 'Αποθήκευση σε…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Ρυθμίστε πρώτα μια σύνδεση στις Ρυθμίσεις → Αποθήκευση.',
-  'Beginnen met:': 'Ξεκινήστε με:',
   'Verlopen datums markeren': 'Επισήμανση ληγμένων ημερομηνιών',
   'Datums gemarkeerd': 'Ημερομηνίες επισημασμένες',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3838,28 +3611,15 @@ const _dutchSourceAddEl = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Η επιφάνεια επίθεσης ανά είδος αντικειμένου: πόσα υπάρχουν, πόσα θέλουν δουλειά, τι είναι νέο και τι δεν ανήκει σε κανέναν. Το τελευταίο είναι συνήθως η συζήτηση.',
   'Acties en besluiten': 'Ενέργειες και αποφάσεις',
-  'Actie toevoegen': 'Προσθήκη ενέργειας',
-  'Actie verwijderen': 'Αφαίρεση ενέργειας',
   'Actie': 'Ενέργεια',
   'Deadline': 'Προθεσμία',
-  'Op de lijst sinds': 'Στη λίστα από',
   'Stand': 'Κατάσταση',
-  'Wat vraagt u': 'Τι ζητάτε',
   'geen datum': 'χωρίς ημερομηνία',
-  'Ter informatie': 'Προς ενημέρωση',
   'Besluit gevraagd': 'Απαιτείται απόφαση',
   'Escalatie': 'Κλιμάκωση',
   'Open': 'Ανοιχτό',
   'Loopt': 'Σε εξέλιξη',
   'Afgerond': 'Ολοκληρώθηκε',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Μόνο μια απόφαση ή κλιμάκωση παίρνει ετικέτα στη διαφάνεια· το "εκπρόθεσμο" προκύπτει από την προθεσμία και δεν το ορίζετε εσείς.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Ημερομηνίες ως εεεε-μμ-ηη. Κάθε άλλη γραφή απορρίπτεται αντί να μαντευτεί: 05-08-2026 είναι δύο διαφορετικές ημέρες.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Μια διαφάνεια ενεργειών σηκώνει το πολύ οκτώ γραμμές· πέρα από αυτό η αίθουσα ξεφυλλίζει αντί να αποφασίζει.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Τι πρέπει να γίνει, ποιος το κάνει και πότε. Δηλώστε ανά γραμμή αν είναι προς ενημέρωση ή αν ζητάτε απόφαση — αυτό ψάχνει η αίθουσα.',
   'Scorecard': 'Κάρτα δεικτών',
   'Cijfer toevoegen': 'Προσθήκη δείκτη',
   'Cijfer verwijderen': 'Αφαίρεση δείκτη',
@@ -3947,8 +3707,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το διακριτικό είναι έγκυρο, αλλά δεν επιτρέπεται αυτό — δώσε του περισσότερα δικαιώματα στο αποθετήριο.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Συνδεδεμένος, αλλά χωρίς πρόσβαση — ο κωδικός σου δεν είναι το πρόβλημα. Ζήτησε δικαιώματα σε αυτόν τον φάκελο.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Άδειες λεξικών: τι μένει να ρωτηθεί',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Αυτό μοιάζει με πλήρες URL DAV. Στο Nextcloud το OciDeck παράγει μόνο του αυτή τη διαδρομή — εδώ ανήκει μόνο ο διακομιστής.',
   'Overnemen': 'Εφαρμογή',
@@ -3991,8 +3749,6 @@ const _dutchSourceAddEl = <String, String>{
   'kenteken': 'αριθμός κυκλοφορίας',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Για τη γλώσσα αυτής της παρουσίασης δεν υπάρχει λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων. Τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν· λέξεις όπως «διάγνωση» ή «ύποπτος» δεν αναγνωρίζονται.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Η λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων είναι πολύ φτωχή για τη γλώσσα αυτής της παρουσίασης. Μη βασίζεστε στο ότι θα βρεθούν λέξεις όπως «διάγνωση» ή «ύποπτος».',
   'Landpakketten voor identificatienummers':
       'Πακέτα χωρών για αριθμούς ταυτοποίησης',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -4022,8 +3778,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το όνομα του διακομιστή δεν υπάρχει ή δεν μπορεί να αναζητηθεί. Ελέγξτε το URL του διακομιστή για τυπογραφικό λάθος.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Αυτός ο διακομιστής έχει ιδιωτική διεύθυνση ή διεύθυνση LAN. Σημειώστε τον ως έμπιστο εσωτερικό στις Ρυθμίσεις → Αποθήκευση.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Το πιστοποιητικό αυτού του διακομιστή δεν είναι έμπιστο. Ένα αυτο-υπογεγραμμένο πιστοποιητικό δεν λειτουργεί· χρησιμοποιήστε ένα από αναγνωρισμένο εκδότη.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Ο διακομιστής ανακατευθύνει σε άλλη διεύθυνση. Εισαγάγετε απευθείας αυτή τη διεύθυνση — δεν ακολουθούμε ανακατευθύνσεις, γιατί μπορούν να παρακάμψουν τον έλεγχο ασφαλείας.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4059,8 +3813,6 @@ const _dutchSourceAddEl = <String, String>{
   'Opslaan naar S3': 'Αποθήκευση στο S3',
   'Opgeslagen in S3:': 'Αποθηκεύτηκε στο S3:',
   'Hier staat niets': 'Εδώ δεν υπάρχει τίποτα',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Δεν ήταν δυνατή η φόρτωση του περιεχομένου. Έλεγξε τη σύνδεση και τις ρυθμίσεις.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Το τελικό σημείο δεν είναι προσβάσιμο — έλεγξε τη σύνδεση και το τελικό σημείο.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4069,8 +3821,6 @@ const _dutchSourceAddEl = <String, String>{
       'Το τελικό σημείο επέστρεψε σφάλμα. Δοκίμασε ξανά αργότερα.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Αυτό το τελικό σημείο δεν μπορεί να γράψει υπό όρους, οπότε η δουλειά σου δεν προστατεύεται από κάποιου άλλου. Αποθήκευσε με νέο όνομα αν δουλεύει και κάποιος άλλος σε αυτή την παρουσίαση.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Δεν έχει ρυθμιστεί κάδος S3. Ρύθμισε έναν στις Ρυθμίσεις → Αποθήκευση.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Ρύθμισε πρώτα έναν κάδο S3 στις Ρυθμίσεις → Αποθήκευση.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4117,10 +3867,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτή η εικόνα δείχνει τουλάχιστον {count} αναγνωρίσιμα πρόσωπα.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Δεν ήταν δυνατός ο έλεγχος αυτής της εικόνας για πρόσωπα. Η μορφή δεν υποστηρίζεται (π.χ. HEIC). Αυτό δεν σημαίνει ότι δεν υπάρχει κανείς — σημαίνει ότι δεν έγινε έλεγχος.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Αυτή η εικόνα δείχνει ένα αναγνωρίσιμο πρόσωπο.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Αυτή η εικόνα δείχνει {count} αναγνωρίσιμα πρόσωπα.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Μια εικόνα στην οποία κάποιος είναι αναγνωρίσιμος αποτελεί προσωπικό δεδομένο, ακόμη και χωρίς όνομα.',
   'herkenbaar gezicht op een afbeelding': 'αναγνωρίσιμο πρόσωπο σε εικόνα',
@@ -4137,8 +3883,6 @@ const _dutchSourceAddEl = <String, String>{
   'Organisatie': 'Οργανισμός',
   'Welke verbinding?': 'Ποια σύνδεση;',
   'Bestandsverbindingen': 'Συνδέσεις αρχείων',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Τα μέρη όπου φυλάσσετε και αναζητάτε τις παρουσιάσεις σας — φάκελοι σε αυτόν τον υπολογιστή, διακομιστές WebDAV και αποθετήρια git μαζί. Σύρετέ τα στη σειρά που θέλετε: το πρώτο κάθε είδους ισχύει ως προεπιλογή.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Ένα αποθετήριο git· κάθε αποθηκευμένη έκδοση διατηρείται.',
   'Een map op de schijf van deze computer.':
@@ -4163,15 +3907,7 @@ const _dutchSourceAddEl = <String, String>{
   'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
   'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',
   'Opgeslagen op WebDAV:': 'Αποθηκεύτηκε στο WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Ρυθμίστε πρώτα έναν διακομιστή WebDAV στις Ρυθμίσεις → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Επιλογή εικόνας στο WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Δεν έχει ρυθμιστεί διακομιστής WebDAV. Ρυθμίστε έναν στις Ρυθμίσεις → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'Το WebDAV δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → WebDAV.',
   'Servertype': 'Τύπος διακομιστή',
   'Nextcloud of ownCloud': 'Nextcloud ή ownCloud',
   'Andere WebDAV-server': 'Άλλος διακομιστής WebDAV',
@@ -4193,23 +3929,11 @@ const _dutchSourceAddEl = <String, String>{
   'Haal volle pagina uit de reeks': 'Αφαίρεση γεμάτης σελίδας από τη σειρά',
   'Opslag': 'Αποθήκευση',
   'Opslagwijzen': 'Τρόποι αποθήκευσης',
-  'Deze computer': 'Αυτός ο υπολογιστής',
   'Ingesteld': 'Ρυθμισμένο',
   'Niet ingesteld': 'Δεν έχει ρυθμιστεί',
-  'Nog geen bibliotheek ingesteld': 'Δεν έχει ρυθμιστεί ακόμη βιβλιοθήκη',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Οι διαδρομές μέσω των οποίων μπορείτε να ανοίγετε και να αποθηκεύετε παρουσιάσεις. Κάντε κλικ σε έναν τρόπο για να τον ρυθμίσετε.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Παρουσιάσεις στους παραπάνω φακέλους, στον δίσκο αυτού του υπολογιστή.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο στο Nextcloud σας.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Ανοίξτε παρουσιάσεις από ένα αποθετήριο git· κάθε αποθηκευμένη έκδοση διατηρείται.',
-  'Nog te verifiëren': 'Προς επαλήθευση',
   'MASWE-zwakheid kiezen': 'Επιλογή αδυναμίας MASWE',
   'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',
   'Geen zwakheid gevonden': 'Δεν βρέθηκε αδυναμία',
-  'uitleg nog niet geschreven': 'η επεξήγηση δεν έχει γραφτεί ακόμη',
   'Getalnotatie herkennen': 'Αναγνώριση μορφής αριθμών',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Αυτό το αρχείο περιέχει αριθμούς των οποίων το κόμμα διαβάζεται με δύο τρόπους:',
@@ -4330,12 +4054,10 @@ const _dutchSourceAddEl = <String, String>{
   'Veelgestelde vragen': 'Συχνές ερωτήσεις',
   'Probleemoplossing': 'Αντιμετώπιση προβλημάτων',
   'Begrippenlijst': 'Γλωσσάρι',
-  'API-documentatie': 'Τεκμηρίωση API',
   'Prestaties': 'Επιδόσεις',
   'Beveiligingsontwerp': 'Σχεδίαση ασφάλειας',
   'Hosting en uitrol': 'Φιλοξενία και ανάπτυξη',
   'Bijdragen': 'Συνεισφορά',
-  'Ontwikkelomgeving': 'Περιβάλλον ανάπτυξης',
   'Migratiegids': 'Οδηγός μετάβασης',
   'Versies…': 'Εκδόσεις…',
   'Versies:': 'Εκδόσεις:',
@@ -4378,8 +4100,6 @@ const _dutchSourceAddEl = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ο κλάδος μετακινήθηκε· φόρτωσε ξανά το deck και αποθήκευσε πάλι.',
   'Bijgewerkt met OciDeck': 'Ενημερώθηκε με το OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Ρυθμίστε πρώτα ένα αποθετήριο Git στις Ρυθμίσεις → Αποθετήριο Git.',
   'Git-repository': 'Αποθετήριο Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Ανοίξτε παρουσιάσεις από ένα αποθετήριο Git. Κάθε αποθηκευμένη έκδοση διατηρείται. Το διακριτικό αποθηκεύεται κρυπτογραφημένο στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
@@ -4395,7 +4115,6 @@ const _dutchSourceAddEl = <String, String>{
       'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Τα δεδομένα αναφοράς βρίσκονται μέσα στην ίδια την εφαρμογή, οπότε η μονάδα λειτουργεί αμέσως και πλήρως εκτός σύνδεσης.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· παραμένουν κρυφές μέχρι να τις ενεργοποιήσετε.',
-  'Procesverbetering (ontwerp)': 'Βελτίωση διεργασιών (σχεδίαση)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Αυτό το έργο είναι παραπροϊόν του Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Εξαγωγή προφίλ στυλ',
@@ -4537,7 +4256,6 @@ const _dutchSourceAddEl = <String, String>{
   'genetisch gegeven': 'γενετικό δεδομένο',
   'parketnummer': 'αριθμός δικογραφίας',
   'nationaal identificatienummer': 'εθνικός αριθμός ταυτοποίησης',
-  'OciWacht (ontwerp)': 'OciWacht (σχεδιασμός)',
   'Mogelijk geheim': 'Πιθανό μυστικό',
   'sleutel of token': 'κλειδί ή διακριτικό',
   'private sleutel': 'ιδιωτικό κλειδί',
@@ -4570,7 +4288,6 @@ const _dutchSourceAddEl = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Βάλε την πλήρη λίστα CVE σε αυτή τη συσκευή, ώστε οι αναζητήσεις να γίνονται εκτός σύνδεσης και ο όρος αναζήτησής σου να μην πηγαίνει πουθενά. Η βάση δεδομένων προέρχεται από το CVE List V5 (το επίσημο πρόγραμμα CVE, μέσω GitHub).',
   'Wat er lokaal beschikbaar is': 'Τι είναι διαθέσιμο τοπικά',
-  'Gegevenspakket': 'Πακέτο δεδομένων',
   'Nu bijwerken': 'Ενημέρωση τώρα',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Τα δεδομένα είναι διαθέσιμα τοπικά — οι αναζητήσεις γίνονται σε αυτή τη συσκευή· τίποτα δεν φεύγει.',
@@ -4589,7 +4306,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αποδοχή: τα δεδομένα ανήκουν εδώ και η ειδοποίηση εξαφανίζεται. Αποδοχή + προειδοποίηση: ο παραλήπτης βλέπει σήμα ότι η διαφάνεια περιέχει προσωπικά δεδομένα. Παράλειψη: τα δεδομένα που βρέθηκαν γίνονται δυσανάγνωστα στην οθόνη και στην εξαγωγή — το αρχείο Markdown σου κρατά το αρχικό κείμενο.',
   'Alleen melden': 'Μόνο αναφορά',
   'PERSOONSGEGEVENS': 'ΠΡΟΣΩΠΙΚΑ ΔΕΔΟΜΕΝΑ',
-  'Persoonsgegevens op deze slide': 'Προσωπικά δεδομένα σε αυτή τη διαφάνεια',
   'Volg de presentatie': 'Ακολούθησε την παρουσίαση',
   'Weglaten uit tonen en exporteren': 'Παράλειψη από προβολή και εξαγωγή',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4712,8 +4428,6 @@ const _dutchSourceAddEl = <String, String>{
   'Bewerk deze slide': 'Επεξεργασία διαφάνειας',
   'Bewijs verwijderen': 'Αφαίρεση απόδειξης',
   '(nog leeg)': '(ακόμα κενό)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Δώσε πρώτα ένα αναγνωριστικό ευρήματος για να επισυνάψεις αποδείξεις.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Πρόσθεσε στιγμιότυπα ή βίντεο ως αποδείξεις. Κάθε απόδειξη γίνεται δική της διαφάνεια αμέσως μετά το εύρημα και περιλαμβάνεται στην εξαγωγή.',
   'Uitvoering testen conform standaard': 'Δοκιμές σύμφωνα με το πρότυπο',

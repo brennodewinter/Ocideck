@@ -42,17 +42,13 @@ const _stringsUk = {
   'settings': 'Налаштування',
   'settingsGeneral': 'Загальні',
   'settingsColors': 'Кольори',
-  'settingsLogo': 'Логотип',
   'language': 'Мова',
   'applicationLanguage': 'Мова застосунку',
   'languageHelp':
       'Інтерфейс змінює мову негайно. Вміст презентації залишається незмінним.',
-  'presentationFolder': 'Тека презентацій',
   'exportFolderSetting': 'Тека експорту',
-  'notSet': 'Не встановлено',
   'nextToPresentationFile': 'Поряд із файлом презентації',
   'choose': 'Обрати',
-  'removeDefaultFolder': 'Видалити типову теку',
   'removeExportFolder': 'Видалити теку експорту',
   'exportFolderHelp':
       'Усі експорти (PDF/PPTX) зберігаються тут. Якщо не встановлено, експорти зберігаються поряд із файлом презентації.',
@@ -86,8 +82,6 @@ const _dutchSourceUk = {
   'Handtekening tekenen': 'Намалювати підпис',
   'Teken je handtekening in het vak hieronder.':
       'Намалюйте свій підпис у полі нижче.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Пакет даних — це .zip із довідковими даними для цього модуля. Спершу він перевіряється за відбитком, вбудованим у застосунок; приймається лише пакет, що відповідає цій версії застосунку.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площинна',
   'Horizontale staaf': 'Горизонтальна стовпчикова',
@@ -195,7 +189,6 @@ const _dutchSourceUk = {
       'Зображення та медіа спільно використовуються презентаціями в тій самій теці. Точну назву ви оберете за мить у системному вікні.',
   'Alle bibliotheken': 'Усі бібліотеки',
   'Andere map…': 'Інша тека…',
-  'Bibliotheek verwijderen': 'Видалити бібліотеку',
   'Bibliotheken': 'Бібліотеки',
   'Geen bibliotheek': 'Немає бібліотеки',
   'Geen presentaties (.md) gevonden.': 'Презентацій (.md) не знайдено.',
@@ -207,10 +200,6 @@ const _dutchSourceUk = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Оберіть, до якої бібліотеки потрапить презентація.',
   'Map toevoegen': 'Додати теку',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Теки, у яких ви зберігаєте й шукаєте свої презентації. Дайте кожній власну назву, щоб їх розрізняти. Усі бібліотеки переглядаються під час відкриття та в бібліотеці зображень.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Бібліотеки ще немає — додайте теку.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Бібліотеки ще немає. Додайте її в Налаштуваннях або оберіть теку вгорі для пошуку.',
   'Presentatie opslaan': 'Зберегти презентацію',
@@ -292,21 +281,11 @@ const _dutchSourceUk = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Декларація про достовірність із доповідачем, сертифікацією, підписом і печаткою.',
   'Uitbreidingen': 'Розширення',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Необов\'язкові модулі. Типово вимкнені; вони нічого не додають до базового застосунку, доки ви їх не увімкнете.',
   'Gegevens opschonen': 'Очистити дані',
   'Gegevens lokaal beschikbaar': 'Дані доступні локально',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Спершу надайте згоду на вихідний трафік у розділі «Ліцензія та конфіденційність».',
   'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Жодне джерело недоступне — довідкові дані не вдалося завантажити ніде. Спробуйте ще раз або імпортуйте пакет вручну.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Отримані дані не збіглися з очікуваним відбитком і з обережності були відхилені.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Пакет даних був пошкоджений або недійсний і тому був відхилений.',
-  'Gegevenspakket kiezen': 'Вибрати пакет даних',
-  'Kon het gekozen bestand niet lezen.': 'Не вдалося прочитати вибраний файл.',
   'Nog niet opgehaald': 'Ще не завантажено',
   'AI-assistentie': 'Підтримка ШІ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -323,22 +302,15 @@ const _dutchSourceUk = {
       'Хмарний сервіс спершу потребує вашої згоди на конфіденційність у розділі "Ліцензія та конфіденційність" і не працює у веб-версії.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Я розумію, що дані надсилаються до цього зовнішнього сервісу',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Підтримка ШІ (вимкнена за замовчуванням): якщо ви оберете власний або хмарний бекенд, тексти чи зображення, які ви обробляєте, надсилаються на цю адресу. Локальна модель ШІ на цьому пристрої нічого не надсилає.',
   'Zoek een slidetype': 'Пошук типу слайда',
   'Alfabetisch sorteren': 'Сортувати за абеткою',
   'Algemeen': 'Загальні',
   'Informatieveiligheid': 'Інформаційна безпека',
   'Alle': 'Усі',
-  'Pentestrapportage (ontwerp)': 'Звіт про пентест (проєкт)',
-  'AI-assistentie (ontwerp)': 'Допомога ШІ (проєкт)',
-  'Agentisch bouwplan (ontwerp)': 'Агентний план складання (проєкт)',
-  'Bijsnijden': 'Обрізати',
   'Linksom': 'Повернути ліворуч',
   'Rechtsom': 'Повернути праворуч',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Перетягніть зображення, щоб вибрати, яка частина залишиться видимою.',
-  'Git-opslag (ontwerp)': 'Сховище Git (проєкт)',
   'Zoek in documentatie…': 'Пошук у документації…',
   'Geen documenten gevonden': 'Документів не знайдено',
   'Alleen afspelen (vergrendeld)': 'Тільки презентування (заблоковано)',
@@ -352,12 +324,8 @@ const _dutchSourceUk = {
   'Techniek': 'Технічне',
   'Licentie en naleving': 'Ліцензія та відповідність',
   'Architectuur': 'Архітектура',
-  'Bouwinstructies': 'Інструкції зі складання',
-  'Kwaliteitscontroles': 'Перевірки якості',
-  'Broncodekaart': 'Карта вихідного коду',
   'Licentienaleving': 'Дотримання ліцензій',
   'Softwarestuklijst (SBOM)': 'Специфікація ПЗ (SBOM)',
-  'Samenwerking (ontwerp)': 'Співпраця (проєкт)',
   'Beschermen met een wachtwoord (AES-256)': 'Захистити паролем (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Збережіть цей пароль надійно: якщо ви його втратите, цей пакет більше не вдасться відкрити.',
@@ -437,10 +405,6 @@ const _dutchSourceUk = {
   'Instelling opslaan is mislukt.': 'Не вдалося зберегти налаштування.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Увага: веб-версія може завантажувати лише із серверів, які це дозволяють (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Пакети (.ocideck) поки не підтримуються у веб-версії.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'У веб-версії можна відкривати лише презентації .md.',
   'Geen': 'Немає',
   'Nieuw': 'Новий',
   'Verwijderen': 'Видалити',
@@ -530,10 +494,8 @@ const _dutchSourceUk = {
   'Audio bij deze slide': 'Аудіо для цього слайда',
   'Audio automatisch afspelen': 'Відтворювати аудіо автоматично',
   'Audio verwijderen': 'Вилучити аудіо',
-  'Geen audio gekozen': 'Аудіо не вибрано',
   'Geen audiobestand gekozen': 'Аудіофайл не вибрано',
   'Video automatisch afspelen': 'Відтворювати відео автоматично',
-  'Geen video gekozen': 'Відео не вибрано',
   'Kiezen': 'Вибрати',
   'Uit bibliotheek…': 'З бібліотеки…',
   'Van computer…': 'З комп’ютера…',
@@ -563,7 +525,6 @@ const _dutchSourceUk = {
   'Pakket importeren': 'Імпортувати пакет',
   'Pakket exporteren': 'Експортувати пакет',
   'Map met presentaties kiezen': 'Вибрати теку презентацій',
-  'Standaard map voor presentaties': 'Типова тека презентацій',
   'Map voor exports': 'Тека для експорту',
   'Logo kiezen': 'Вибрати логотип',
   'Kies een afbeelding': 'Виберіть зображення',
@@ -576,8 +537,6 @@ const _dutchSourceUk = {
   'Map kiezen': 'Вибрати теку',
   'Kies een map met presentaties om te beginnen.':
       'Виберіть теку з презентаціями, щоб почати.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'У цій теці не знайдено презентацій (.md).',
   'Geen presentaties gevonden voor': 'Не знайдено презентацій для',
   'meer treffer(s)': 'більше збігів',
   'Slide zoeken': 'Знайти слайд',
@@ -599,7 +558,6 @@ const _dutchSourceUk = {
       'Введіть пошукові запити, щоб знайти слайди у ваших презентаціях.',
   'toegevoegd': 'додано',
   'Eerste': 'Перші',
-  'treffers — verfijn je zoekopdracht': 'збіги — уточніть свій пошук',
   'treffer(s)': 'збіг(и)',
   'slide': 'слайд',
   'Zoeken en vervangen': 'Знайти й замінити',
@@ -658,7 +616,6 @@ const _dutchSourceUk = {
   'Tekst op zijpanelen': 'Текст на бічних панелях',
   'Voorbeeldtekst': 'Зразок тексту',
   'Knop': 'Кнопка',
-  'Profielnaam': 'Назва профілю',
   'Naam van het stijlprofiel': 'Назва стильового профілю',
   'Stijlprofiel': 'Стильовий профіль',
   'Nieuw profiel': 'Новий профіль',
@@ -722,17 +679,10 @@ const _dutchSourceUk = {
   'TYPE': 'ТИП',
   'STIJL': 'СТИЛЬ',
   'Terug naar standaardstijl': 'Назад до стандартного стилю',
-  'Automatisch doorgaan na': 'Автоматично переходити через',
-  'Logo tonen op deze slide': 'Показувати логотип на цьому слайді',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Таблиця редагована під час презентації',
-  'Footer tonen op deze slide': 'Показувати нижній колонтитул на цьому слайді',
   'Sprekersnotities...': 'Нотатки доповідача...',
   'Sprekersnotities': 'Нотатки доповідача',
   'Notities voor tijdens het presenteren':
       'Нотатки для показу під час презентації',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Режим Markdown — редагуйте всю презентацію як Marp Markdown',
   'Toepassen': 'Застосувати',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Не вдалося обробити Markdown. Перевірте синтаксис.',
@@ -757,8 +707,6 @@ const _dutchSourceUk = {
   'Geen resultaten voor': 'Немає результатів для',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Змініть пошуковий запит або додайте опис.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Використайте «Огляд», щоб вибрати зображення з будь-якого розташування.',
   'Selecteer een\nafbeelding': 'Виберіть\nзображення',
   'Gekopieerd': 'Скопійовано',
   'Afbeelding verwijderen?': 'Видалити зображення?',
@@ -775,8 +723,6 @@ const _dutchSourceUk = {
   'spatie': 'пробіл',
   'klik': 'клік',
   'cijfers': 'цифри',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Натисніть або клавішу ? / H / Esc, щоб закрити',
   'Klik of druk op H / Esc om te sluiten':
       'Натисніть або клавішу H / Esc, щоб закрити',
   'Naar slidenummer': 'Перейти до номера слайда',
@@ -786,20 +732,10 @@ const _dutchSourceUk = {
   'Presenter view (notities, klok)': 'Вигляд доповідача (нотатки, годинник)',
   'Scherm wisselen (meerdere schermen)': 'Змінити екран (кілька екранів)',
   'Zwart · wit scherm': 'Чорний · білий екран',
-  'Verstreken tijd resetten': 'Скинути минулий час',
   'Automatische modus aan/uit': 'Автоматичний режим увімк./вимк.',
   'Herhalen (loop) aan/uit': 'Повтор (цикл) увімк./вимк.',
-  'Na audio automatisch doorgaan': 'Автоматично переходити після аудіо',
-  'Dit overzicht': 'Цей огляд',
   'Deze legenda': 'Ця легенда',
   'Terug / afsluiten': 'Назад / вихід',
-  'Auto (A)': 'Авто (A)',
-  'Handmatig (A)': 'Вручну (A)',
-  'Herhalen (L)': 'Повтор (L)',
-  'Na audio (M)': 'Після аудіо (M)',
-  'Sneltoetsen (?)': 'Комбінації клавіш (?)',
-  'Slide-overzicht (G)': 'Огляд слайдів (G)',
-  'Presenter view (P)': 'Вигляд доповідача (P)',
   'Tijd resetten (R)': 'Скинути таймер (R)',
   'HUIDIGE SLIDE': 'ПОТОЧНИЙ СЛАЙД',
   'VOLGENDE': 'НАСТУПНИЙ',
@@ -815,15 +751,9 @@ const _dutchSourceUk = {
   'Notities weggooien': 'Відхилити нотатки',
   'Notities voor de ontvanger tijdens een cursus':
       'Нотатки для отримувача під час курсу',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Перемкніться в режим Markdown, щоб додати нотатки.',
   'Mijn notities aan/uit': 'Увімкнути/вимкнути мої нотатки',
   'Wissel scherm (S)': 'Змінити екран (S)',
   'Kon niet van scherm wisselen.': 'Не вдалося змінити екрани.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P аудиторія · G огляд · B/W чорний/білий · R час · Esc стоп',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P аудиторія · S екран · G огляд · B/W чорний/білий · R час · Esc стоп',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P аудиторія · H легенда · G огляд · B/W чорний/білий · R час · Esc стоп',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -870,8 +800,6 @@ const _dutchSourceUk = {
   'Selectie opheffen': 'Скасувати вибір',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Я приймаю ліцензію EUPL 1.2 і ознайомився з тим, які дані зберігає OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Ваш вибір стане мовою застосунку за замовчуванням.',
   'Lees de volledige licentie': 'Прочитати повний текст ліцензії',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck — це вільне програмне забезпечення за ліцензією EUPL 1.2. Перш ніж почати, ми просимо вас прийняти ліцензію. Нижче ви також можете прочитати, які дані OciDeck зберігає на цьому пристрої та коли щось залишає ваш пристрій.',
@@ -897,9 +825,6 @@ const _dutchSourceUk = {
   'Ongeldige server-URL': 'Недійсний URL сервера',
   'Het antwoord van de server was te groot': 'Відповідь сервера була завеликою',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Джерело Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Відкривайте та зберігайте презентації в теці на вашому Nextcloud. Пароль зберігається зашифрованим у сховищі ключів, а не разом з іншими налаштуваннями.',
   'Server-URL': 'URL сервера',
   'Gebruikersnaam': 'Ім’я користувача',
   'App-wachtwoord': 'Пароль застосунку',
@@ -913,21 +838,12 @@ const _dutchSourceUk = {
   'Verbinding gelukt': 'Підключення успішне',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Зміни зберігаються, коли ви натискаєте «Зберегти».',
-  'Afbeelding kiezen op Nextcloud': 'Вибрати зображення на Nextcloud',
-  'Openen vanaf Nextcloud': 'Відкрити з Nextcloud',
   'Vernieuwen': 'Оновити',
   'Deze map is leeg': 'Ця тека порожня',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Сервер Nextcloud не налаштовано. Налаштуйте його в Налаштування → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Не вдалося завантажити теку. Перевірте підключення та налаштування.',
   'Kon dit bestand niet openen.': 'Не вдалося відкрити цей файл.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Це не презентація Marp/OciDeck.',
   'Downloaden mislukt:': 'Не вдалося завантажити:',
-  'Opgeslagen op Nextcloud:': 'Збережено на Nextcloud:',
   'Opslaan mislukt:': 'Не вдалося зберегти:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Спершу налаштуйте сервер Nextcloud у Налаштування → Nextcloud.',
   'Opslaan naar Nextcloud': 'Зберегти на Nextcloud',
   'Doelpad (zonder extensie)': 'Цільовий шлях (без розширення)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -938,10 +854,6 @@ const _dutchSourceUk = {
   'Tijden-overzicht tonen na afloop': 'Показувати огляд часу після завершення',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Час на кожен слайд вимірюється завжди; це лише визначає, чи з’явиться огляд після цієї презентації.',
-  'Oefenoverzicht tonen na afloop':
-      'Показувати підсумок репетиції після завершення',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Після презентації показувати огляд витраченого часу на кожен слайд. Час вимірюється завжди; це лише визначає, чи з’явиться цей екран.',
   'Onveilige presentatie geblokkeerd': 'Небезпечну презентацію заблоковано',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Цю презентацію не відкрито. Файл містить вміст, що може виконувати код, а презентація має містити лише дані — нічого виконуваного.',
@@ -1024,7 +936,6 @@ const _dutchSourceUk = {
   'Online': 'Онлайн',
   'Lokaal bestand': 'Локальний файл',
   'Geen video': 'Немає відео',
-  'Vraag (meerkeuze)': 'Питання (множинний вибір)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Текст заголовка має замалий контраст із фоновим зображенням',
   'Herstel': 'Виправити',
@@ -1039,8 +950,6 @@ const _dutchSourceUk = {
   'Huidig punt weghalen': 'Прибрати поточну точку',
   'Stap voor stap': 'Крок за кроком',
   'Geen animatie': 'Без анімації',
-  'Animatiesnelheid': 'Швидкість анімації',
-  'Langzaam': 'Повільно',
   'Snel': 'Швидко',
   'Gebeurtenissen': 'Події',
   'Gebeurtenis toevoegen': 'Додати подію',
@@ -1053,8 +962,6 @@ const _dutchSourceUk = {
   'Vraag': 'Питання',
   'Wat wil je vragen?': 'Що ви хочете запитати?',
   'Antwoorden': 'Відповіді',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Позначте правильні відповіді. Щонайбільше вісім відповідей; під час презентування випадково показується одна правильна, а решта — неправильні.',
   'Antwoord': 'Відповідь',
   'Antwoord toevoegen': 'Додати відповідь',
   'Goed antwoord': 'Правильна відповідь',
@@ -1088,8 +995,6 @@ const _dutchSourceUk = {
   'Stelling': 'Твердження',
   'Formuleer een stelling die juist of onjuist is':
       'Сформулюйте твердження, яке є правдивим або неправдивим',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Позначте всі правильні відповіді. Під час презентації показується випадковий набір із щонайменше однією правильною та однією неправильною.',
   'Juist': 'Правда',
   'Onjuist': 'Неправда',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1110,7 +1015,6 @@ const _dutchSourceUk = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Кольори стану вимірювачів кабіни. Створюйте іменовані варіанти; обрана схема застосовується до всіх слайдів кабіни.',
   'Standaard': 'За замовчуванням',
-  'Standaardkleuren gebruiken': 'Використовувати кольори за замовчуванням',
   'Kleurschema verwijderen': 'Видалити колірну схему',
   'Schemanaam': 'Назва схеми',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1188,7 +1092,6 @@ const _dutchSourceUk = {
   'Logo en footer': 'Логотип і нижній колонтитул',
   'Pagina': 'Сторінка',
   'Presentatiestijl': 'Стиль презентації',
-  'Presentatiestijl: ': 'Стиль презентації: ',
   'Tekst...': 'Текст...',
   'Teksteditor': 'Текстовий редактор',
   'Volgende pagina': 'Наступна сторінка',
@@ -1201,8 +1104,6 @@ const _dutchSourceUk = {
   'Doeltijd': 'Цільовий час',
   'Doeltijd (aftellen)': 'Цільовий час (зворотний відлік)',
   'Geen aftelling': 'Без зворотного відліку',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Цільовий час за замовчуванням для зворотного відліку в презентері. Під час презентації точно налаштовується клавішею K.',
   'uit': 'вимк.',
   'Doeltijd / aftellen (K)': 'Ціль / зворотний відлік (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1276,14 +1177,8 @@ const _dutchSourceUk = {
   'Cirkel': 'Кругова',
   'Spider': 'Пелюсткова',
   'CSV importeren': 'Імпортувати CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Дані (CSV: перший рядок = назви рядів, перший стовпець = мітки)',
   'Gekoppeld aan': 'Пов\'язано з',
   'Ontkoppelen': 'Відв\'язати',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Зберегти дані у слайді чи тримати їх як окремий файл CSV поряд із презентацією?',
-  'In de slide': 'У слайді',
-  'Als CSV-bestand': 'Як файл CSV',
   'Geen grafiekgegevens': 'Немає даних діаграми',
   'Label': 'Мітка',
   'Rij': 'Рядок',
@@ -1313,7 +1208,6 @@ const _dutchSourceUk = {
   'Eigen kleur (hex)': 'Власний колір (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Наприклад, #33FF33 для CRT-зеленого екрана.',
-  'Onderdeel van stijlprofiel ': 'Частина профілю стилю ',
   'Broncode lettertype': 'Шрифт коду',
   'Kop (optioneel)': 'Заголовок (необов\'язково)',
   'Subkop (optioneel)': 'Підзаголовок (необов\'язково)',
@@ -1352,16 +1246,7 @@ const _dutchSourceUk = {
   'Zet het filter uit om alles weer te zien.':
       'Вимкніть фільтр, щоб знову побачити все.',
   'Welkom bij OciDeck': 'Ласкаво просимо до OciDeck',
-  'Privacy en gebruik': 'Конфіденційність і використання',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck — це локальна десктопна програма. Ваші презентації та дані зберігаються виключно на вашому комп\'ютері.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Програма не збирає жодних персональних даних, статистики чи даних про використання. Ваша конфіденційність — наш пріоритет.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Усі дані, які ви вводите в OciDeck, залишаються на вашій локальній системі й не надсилаються на зовнішні сервери.',
   'Licentie (EUPL 1.2)': 'Ліцензія (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Натискаючи «Погодитися», ви приймаєте ці умови й даєте згоду на використання OciDeck.',
   'Volledige licentie online': 'Повна ліцензія онлайн',
   'Akkoord gaan': 'Погодитися',
   'Privacy': 'Конфіденційність',
@@ -1450,8 +1335,6 @@ const _dutchSourceUk = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Експорт заблоковано через серйозні проблеми з якістю.',
   'Alle meldingen': 'Усі проблеми',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… та інші проблеми на панелі якості.',
   'Classificatie-handhaving': 'Застосування класифікації',
   'Vrijgaveplafond': 'Стеля випуску',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1470,11 +1353,9 @@ const _dutchSourceUk = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Установіть рівень TLP — експорт заблоковано політикою класифікації.',
   'Tabel bewerken': 'Редагувати таблицю',
-  'Pijltjes · Tab · Esc': 'Клавіші зі стрілками · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Редагувати таблицю (на слайдах з таблицями)',
   'Tabel bewerken (E)': 'Редагувати таблицю (E)',
   'Tab wisselt cel · Esc sluit': 'Tab перемикає комірку · Esc закриває',
-  'Pen · markeerstift · ⇧E': 'Ручка · маркер · ⇧E',
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn гортає слайди',
@@ -1517,10 +1398,6 @@ const _dutchSourceUk = {
       'Помилка мережі — перевірте з\'єднання і спробуйте ще раз.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Сталася неочікувана помилка. Подробиці в журналі.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud не налаштовано (правильно) — перевірте дані сервера в Налаштування → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Цей сервер не дозволено. Спочатку позначте приватний/LAN-сервер як довірений у Налаштування → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Сервер недоступний — перевірте з\'єднання та URL сервера.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1548,8 +1425,6 @@ const _dutchSourceUk = {
   'Uit recente bestanden verwijderen': 'Прибрати з останніх файлів',
   'OciDeck wordt gestart…': 'Запуск OciDeck…',
   'Herstelbestanden': 'Файли відновлення',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Файли відновлення містять увесь вміст ваших презентацій у відкритому тексті. Вони автоматично очищуються через 7 днів; тут їх можна стерти одразу.',
   'Herstelbestanden nu wissen': 'Стерти файли відновлення зараз',
   'Er waren geen herstelbestanden.': 'Файлів відновлення не було.',
   'herstelbestand(en) gewist.': 'файл(и) відновлення стерто.',
@@ -1982,7 +1857,6 @@ const _dutchSourceAddUk = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Ми створюємо копію в новій вкладці; ваш вихідний файл залишається без змін.',
   'Welk formaat?': 'Який формат?',
-  'dia\'s, gesplitst op kop.': 'слайдів, поділених за заголовком.',
   'document': 'документ',
   'volledig': 'повний',
   'Invoegen': 'Вставити',
@@ -2144,12 +2018,8 @@ const _dutchSourceAddUk = <String, String>{
   'Alle integraties': 'Усі інтеграції',
   'Alles inschakelen': 'Увімкнути все',
   'Alles uitschakelen': 'Вимкнути все',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Теку зі звітами вже вказано, тож з\'єднання залишається доступним і наявну презентацію OpenKAT можна оновлювати далі.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'З\'єднання з іншими системами. Кожне з\'єднання типово вимкнене й лишається неактивним, доки ви його не ввімкнете.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Зчитайте теки зі звітами OpenKAT як єдиний управлінський огляд.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Втягування презентацій з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) як редагована колода. З\'єднання з іншими системами, як-от OpenKAT, розміщені в Інтеграціях.',
   'Media (WebRTC)': 'Медіа (WebRTC)',
@@ -2314,7 +2184,6 @@ const _dutchSourceAddUk = <String, String>{
   'Van toepassing': 'Застосовно',
   'Voortgang': 'Прогрес',
   'Voortgang managementsysteem': 'Прогрес системи управління',
-  'Voortgangsoverzicht bijgewerkt': 'Огляд прогресу оновлено',
   'Welk deel?': 'Яка частина?',
   'beheersmaatregelen geladen': 'контролів завантажено',
   'geïmplementeerd': 'впроваджено',
@@ -2392,10 +2261,6 @@ const _dutchSourceAddUk = <String, String>{
       'Це не схоже на дійсний ключ відновлення.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Цей ключ відновлення походить із новішої версії OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Вебпам’ять для зображень заповнена (максимум 256 МБ). Спочатку збережіть роботу як файл .ocideck, щоб запобігти втраті даних. Потім використайте менше зображень або зображення меншого розміру, закрийте інші колоди чи перезавантажте сторінку, не відкриваючи інших колод.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Вебпам’ять для зображень заповнена (максимум 256 МБ). Збережіть роботу як файл .ocideck і перезавантажте сторінку, перш ніж додавати інші зображення.',
   'Afbeeldingsrechten': 'Права на зображення',
   'Afbeeldingsrechten controleren…': 'Перевірити права на зображення…',
   'Afdoening': 'Поселення',
@@ -2446,8 +2311,6 @@ const _dutchSourceAddUk = <String, String>{
   'Verifiëren': 'Перевірити',
   'Deelnemers verifiëren': 'Перевірити учасників',
   '(dit apparaat)': '(цей пристрій)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Порівняйте відбиток кожного пристрою через надійний канал — зачитайте його одне одному або надішліть шляхом, якому ви довіряєте. Якщо вони збігаються, ви працюєте зі справжніми пристроями й ніхто не втрутився. Якщо відрізняються, розірвіть співпрацю.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'Це недійсне посилання-запрошення.',
   'De Matrix-homeserver is niet bereikbaar.': 'Homeserver Matrix недоступний.',
@@ -2506,7 +2369,6 @@ const _dutchSourceAddUk = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Співпрацюйте наживо над презентацією через homeserver Matrix як зашифрований ретранслятор. Вміст шифрується наскрізно власними ключами OciDeck; сервер бачить лише зашифровані дані. Введіть homeserver і створений деінде токен доступу — OciDeck ніколи не запитує ваш пароль. Токен зберігається зашифрованим у сховищі ключів, а не разом з іншими налаштуваннями.',
   'wordt door de test ingevuld': 'заповнюється тестом',
-  'Versleuteld doorgeefluik (ontwerp)': 'Зашифрований ретранслятор (проєкт)',
   'Meer documentatie op de repository': 'Більше документації в репозиторії',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Повна документація — зокрема архітектура, збірка, вихідний код і дизайн — міститься в репозиторії.',
@@ -2746,50 +2608,14 @@ const _dutchSourceAddUk = <String, String>{
       'Які дані вимірювань відсутні або застаріли?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'На яких даних базується цей звіт?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Широкий, але фактичний огляд управління з відстежуваними моментами вимірювання.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Рейтинги без загального балу та окремо показують відсутні вимірювання.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Показує підрахунок серйозності, співавторів і перенесені вимірювання за момент.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Організовує пошук типів за постраждалими організаціями, системами та спостереженнями.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Показує критичні/високі числа без спеціального зважування.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Показує чисельник, знаменник і лише надійні відсотки.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Групує буквальні рекомендації з OpenKAT без власного пріоритету.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Цільовий поточний імідж однієї організації та дата його вимірювання.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Порівнює два обраних моменти вимірювання в одній організації.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Розрізняє нове, нове і вже не спостерігається.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Використовує лише надійні дати перших спостережень.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Рангує системи з окремими лічильниками серйозності.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Показує окремі дельта-значення без зваженої оцінки.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Порівнює чисельник і знаменник із явно порівнянним покриттям.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Інвентаризує перевірені системи, імена хостів та IP-адреси.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Розділяє контрольованих, неконтрольованих і невідомих.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Показує лише чітко доведені моніторингові мутації.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Показує організації та системи навколо одного надійного посилання CVE.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Ранжує CVE з явною дедуплікацією.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Розрізняє нові, нові та більше не спостерігаються CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Показує відсутні, застарілі та фактично використовувані вимірювання.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Виправдовує ключові дати, вихідні файли, адаптери та вихідні хеші.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Ще недоступно: джерело не підтверджує статус моніторингу для всіх активів.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2834,10 +2660,6 @@ const _dutchSourceAddUk = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Який звіт відповідає на ваше запитання?',
   'Meer rapportvragen': 'Більше запитань до звіту',
-  'Welke systemen zijn kwetsbaar voor een CVE?': 'Які системи вразливі до CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Організації та вразливі системи навколо однієї вразливості.',
-  'Organisaties met kwetsbare systemen': 'Організації з вразливими системами',
   'Kwetsbare systemen': 'Вразливі системи',
   'Kritiek/hoog': 'Критичний/високий',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2859,8 +2681,6 @@ const _dutchSourceAddUk = <String, String>{
   'Bruikbaar': 'Можна використовувати',
   'CVE zoeken': 'Пошук CVE',
   'Critical/high': 'Критичний/високий',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Якість даних, відсутні вимірювання та застарілість.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Вибрані звіти не містять достатньо надійних даних для цієї частини.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2887,9 +2707,6 @@ const _dutchSourceAddUk = <String, String>{
   'Geen bruikbare meetdatum': 'Немає придатної дати вимірювання',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Створені слайди оновлюються. Ваші власні слайди та копії зберігаються.',
-  'Getroffen organisaties en systemen': 'Постраждалі організації та системи',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Постраждали організації та системи навколо однієї вразливості.',
   'Getroffen systemen': 'Уражені системи',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Не вдалося створити звіт. Ваш вибір збережено; перевірте попередження та повторіть спробу.',
@@ -2899,20 +2716,15 @@ const _dutchSourceAddUk = <String, String>{
   'Keuzes wijzigen…': 'Змінити вибір…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Виберіть папку, до якої OpenKAT розмістив звіти. OciDeck читає лише цю папку; нічого не змінено і не відправлено.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Виберіть питання, на яке має відповісти звіт. OciDeck визначає відповідну структуру.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Виберіть CVE, знайдений у звітах.',
   'Laatste bruikbare meting': 'Останнє придатне вимірювання',
   'Live voorvertoning van de rapportopbouw':
       'Попередній перегляд структури звіту',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Інформація про управління та контроль кількох організацій.',
   'Meer instellingen': 'Більше налаштувань',
   'Nederlands': 'голландська',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Не кожна обрана організація має вимірювання цього періоду.',
-  'Nieuwe en verdwenen bevindingen': 'Нові та відсутні знахідки',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Ще недоступно: ці звіти не містять надійних номерів CVE.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2947,8 +2759,6 @@ const _dutchSourceAddUk = <String, String>{
       'Відсутнє корисне поточне вимірювання для однієї чи кількох організацій.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Для порівняння потрібні два моменти вимірювання. Наразі знайдено одне вимірювання.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Прогрес порівняно з попереднім моментом вимірювання.',
   'Waar staan de OpenKAT-rapportages?': 'Де звіти OpenKAT?',
   'Wat veranderde er bij één organisatie?': 'Що змінилося в одній організації?',
   'Wat wilt u laten zien?': 'Що ти хочеш показати?',
@@ -2959,7 +2769,6 @@ const _dutchSourceAddUk = <String, String>{
   'bruikbaar': 'придатний для використання',
   'metingen': 'вимірювань',
   'organisaties': 'організацій',
-  'organisaties geselecteerd': 'вибраних організацій',
   'rapportages gebruikt': 'використаних звітів',
   'systemen': 'системи',
   'Nog geen specificatielimiet': 'Ще немає межі специфікації',
@@ -3101,7 +2910,6 @@ const _dutchSourceAddUk = <String, String>{
       'є на слайді-дереві, але більше ніде не використовується — пов\'яжіть його з матрицею, потоком або іншим слайдом.',
   'Nieuw verbeteringsproject': 'Новий проєкт удосконалення',
   'Kader': 'Рамка',
-  'Projecttitel': 'Назва проєкту',
   'Primaire Y-metriek (Y-01)': 'Основна Y-метрика (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Наприклад: час проходження order intake у робочих днях',
@@ -3155,10 +2963,6 @@ const _dutchSourceAddUk = <String, String>{
   'Bron niet toegestaan': 'Джерело не дозволено',
   'Deze URL is door de beveiliging geweigerd.':
       'Цю URL-адресу відхилила система безпеки.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Втягування матеріалу з інших систем. Два джерела: презентації з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) стають редагованою колодою, а звіти OpenKAT (тека з JSON) стають єдиним управлінським оглядом. Розташування теки OpenKAT задається в Інтеграціях.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Втягування презентацій з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) як редагована колода. Читання тек зі звітами OpenKAT доступне лише в настільній версії.',
   'Alinea': 'Абзац',
   'Audio "{bestand}"': 'Аудіо "{bestand}"',
   'Deck opbouwen…': 'Побудова презентації…',
@@ -3280,8 +3084,6 @@ const _dutchSourceAddUk = <String, String>{
       'Покажчик контрольного списку: для кожного тесту стабільний ідентифікатор, канонічна назва та категорія. Вміст самого посібника не входить.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Покажчик тестів v2.0.0: для кожного тесту стабільний ідентифікатор, канонічна назва, категорія MASVS і слабкість MASWE. Відкликані тести v1 і заповнювачі не входять; вміст посібника також ні.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Список слабкостей (117): ідентифікатор, назва, категорія MASVS, платформа та зв’язок із CWE. Три чверті ще не описані в джерелі; вони входять, із позначкою. Відкликані слабкості — ні.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Повний список (ідентифікатор, назва, опис) плюс власне дібране ядро з нашими нотатками щодо усунення.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3328,33 +3130,16 @@ const _dutchSourceAddUk = <String, String>{
       'Кожен файл перетворюється окремо і зберігається як власна презентація в цільовій теці. Якщо один не вдасться, черга просто продовжується.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Імпорт кількох презентацій одночасно записує їх файлами в теку; у браузерній версії це неможливо.',
-  'Nu importeren': 'Імпортувати зараз',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Огляд готовий у новій вкладці.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Читає теку зі звітами OpenKAT (JSON) і будує з неї єдиний управлінський огляд: системи, знахідки за критичністю, найдовше відкриті пункти та динаміку за послідовними вимірюваннями. Та сама дія на наявній презентації OpenKAT оновлює її та лишає ваші власні слайди на місці.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Імпорт лише читає: у цій теці нічого не змінюється й нікуди не надсилається. Файли, які не є звітами OpenKAT, пропускаються та згадуються у звіті про імпорт.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Укажіть теку, у якій лежать ваші звіти OpenKAT (JSON). Імпорт читає цю теку й будує з неї єдиний управлінський огляд; коли теку вказано тут, не доведеться обирати її щоразу.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Імпорт OpenKAT читає теку з диска й доступний лише в настільній версії.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Теку зі звітами ще не вказано, тож імпорт запитує її щоразу.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Теку зі звітами вже вказано, тож точка входу залишається доступною і наявну презентацію OpenKAT можна оновлювати далі.',
   'Integraties': 'Інтеграції',
-  'Naar Integraties': 'До інтеграцій',
   'Map kiezen…': 'Вибрати теку…',
   'Map wissen': 'Очистити теку',
-  'OpenKAT-rapportages importeren…': 'Імпортувати звіти OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Вибрати теку зі звітами OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Звіти OpenKAT імпортовано.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Колоду OpenKAT оновлено; ручні слайди збережено.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'У цій теці не знайдено звітів OpenKAT.',
-  'OpenKAT-import mislukt.': 'Не вдалося імпортувати з OpenKAT.',
   'rapportages': 'звітів',
   'overgeslagen': 'пропущено',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3414,8 +3199,6 @@ const _dutchSourceAddUk = <String, String>{
   'Label op de primaire knop': 'Напис на головній кнопці',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Виявлення, які ви переглянули й залишили. Про них більше не повідомляється, але сканування далі їх знаходить, і вони не вважаються усуненими. Торкніться, щоб повернути одне з них.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Відкладення висновку щодо приватності (проєкт)',
   'Deze is beoordeeld en mag blijven': 'Перевірено, це може залишитися',
   'Mogelijk gemaakt door': 'Стало можливим завдяки',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3427,10 +3210,8 @@ const _dutchSourceAddUk = <String, String>{
   'Technische melding:': 'Технічне повідомлення:',
   'presentaties': 'prezentatsii',
   '/Presentaties': '/Презентації',
-  'Rapportagedistributie (ontwerp)': 'Розповсюдження звітів (проєкт)',
   'De export is mislukt.': 'Експорт не вдався.',
   'Presenteer vanaf hier': 'Презентувати звідси',
-  'Teams-gastclient (ontwerp)': 'Гостьовий клієнт Teams (проєкт)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: наскільки широко можна поширювати цей матеріал?',
   'Wat betekenen deze niveaus?': 'Що означають ці рівні?',
@@ -3547,8 +3328,6 @@ const _dutchSourceAddUk = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентації, що лишаються звичайними файлами Markdown: читабельні, придатні для пошуку й такі, що відкриваються будь-яким редактором.',
   'sjablonen om mee te beginnen, of leeg': 'шаблонів для початку або порожня',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Приховування ввімкнено: знайдені дані зачорнюються, а всі зображення, відео та звук цього слайда не потрапляють ані на екран, ані в експорт. Ваш markdown-файл зберігає все.',
   'Mijn tekst': 'Мій текст',
   'Wat zij zien': 'Що бачать вони',
   'Presentatiegegevens': 'Дані презентації',
@@ -3770,7 +3549,6 @@ const _dutchSourceAddUk = <String, String>{
   'Opslaan naar…': 'Зберегти до…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Спершу налаштуйте з\'єднання в Налаштування → Сховище.',
-  'Beginnen met:': 'Почати з:',
   'Verlopen datums markeren': 'Позначати прострочені дати',
   'Datums gemarkeerd': 'Дати позначено',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3796,28 +3574,15 @@ const _dutchSourceAddUk = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Поверхня атаки за видом об\'єкта: скільки їх, скільки потребують роботи, що нове і що нікому не належить. Останнє зазвичай і є розмовою.',
   'Acties en besluiten': 'Дії та рішення',
-  'Actie toevoegen': 'Додати дію',
-  'Actie verwijderen': 'Видалити дію',
   'Actie': 'Дія',
   'Deadline': 'Термін',
-  'Op de lijst sinds': 'У списку з',
   'Stand': 'Стан',
-  'Wat vraagt u': 'Що ви просите',
   'geen datum': 'без дати',
-  'Ter informatie': 'До відома',
   'Besluit gevraagd': 'Потрібне рішення',
   'Escalatie': 'Ескалація',
   'Open': 'Відкрито',
   'Loopt': 'Виконується',
   'Afgerond': 'Завершено',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Лише рішення або ескалація отримує позначку на слайді; "прострочено" випливає з терміну і не встановлюється вручну.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Дати у форматі рррр-мм-дд. Інший запис відхиляється, а не вгадується: 05-08-2026 — це два різні дні.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Слайд дій вміщує щонайбільше вісім рядків; далі зала переглядає замість того, щоб вирішувати.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Що має статися, хто це зробить і до якого часу. Для кожного рядка вкажіть, чи це до відома, чи ви просите рішення — саме це шукає зала.',
   'Scorecard': 'Оцінна картка',
   'Cijfer toevoegen': 'Додати показник',
   'Cijfer verwijderen': 'Видалити показник',
@@ -3904,8 +3669,6 @@ const _dutchSourceAddUk = <String, String>{
       'Токен дійсний, але не має на це прав — надайте йому більше прав на репозиторій.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Ви увійшли, але доступу немає — проблема не в паролі. Попросіть права на цю теку.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Ліцензії лексиконів: що ще треба з\'ясувати',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Це схоже на повну DAV-адресу. Для Nextcloud OciDeck сам виводить цей шлях — тут має бути лише сервер.',
   'Overnemen': 'Застосувати',
@@ -3948,8 +3711,6 @@ const _dutchSourceAddUk = <String, String>{
   'kenteken': 'номерний знак',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Для мови цієї презентації немає списку ключових слів для особливих категорій персональних даних. Шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють; слова на кшталт «діагноз» або «підозрюваний» не розпізнаються.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Список ключових слів для особливих категорій персональних даних дуже бідний для мови цієї презентації. Не розраховуйте, що слова на кшталт «діагноз» або «підозрюваний» буде знайдено.',
   'Landpakketten voor identificatienummers':
       'Пакети країн для ідентифікаційних номерів',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3979,8 +3740,6 @@ const _dutchSourceAddUk = <String, String>{
       'Ім\'я сервера не існує або його не вдається знайти. Перевірте URL сервера на друкарську помилку.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Цей сервер має приватну або LAN-адресу. Позначте його як довірений внутрішній у Налаштування → Сховище.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Сертифікат цього сервера не є довіреним. Самопідписаний сертифікат не працює; використайте сертифікат визнаного видавця.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Сервер перенаправляє на іншу адресу. Введіть цю адресу напряму — ми не переходимо за перенаправленнями, бо вони можуть обійти перевірку безпеки.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4016,8 +3775,6 @@ const _dutchSourceAddUk = <String, String>{
   'Opslaan naar S3': 'Зберегти в S3',
   'Opgeslagen in S3:': 'Збережено в S3:',
   'Hier staat niets': 'Тут нічого немає',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Не вдалося завантажити вміст. Перевірте з’єднання та налаштування.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Кінцева точка недоступна — перевірте з’єднання та кінцеву точку.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4026,8 +3783,6 @@ const _dutchSourceAddUk = <String, String>{
       'Кінцева точка повернула помилку. Спробуйте пізніше.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Ця кінцева точка не вміє записувати умовно, тому ваша робота не захищена від чужої. Збережіть під новою назвою, якщо над цією презентацією працює ще хтось.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Сегмент S3 не налаштовано. Налаштуйте його в Налаштування → Сховище.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Спершу налаштуйте сегмент S3 у Налаштування → Сховище.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4073,10 +3828,6 @@ const _dutchSourceAddUk = <String, String>{
       'На цьому зображенні видно щонайменше стільки впізнаваних облич: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Це зображення не вдалося перевірити на обличчя. Формат не підтримується (наприклад, HEIC). Це не означає, що на ньому нікого немає, — це означає, що ніхто не дивився.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'На цьому зображенні видно впізнаване обличчя.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'На цьому зображенні видно впізнаваних облич: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Зображення, на якому когось можна впізнати, є персональними даними, навіть без імені.',
   'herkenbaar gezicht op een afbeelding': 'впізнаване обличчя на зображенні',
@@ -4093,8 +3844,6 @@ const _dutchSourceAddUk = <String, String>{
   'Organisatie': 'Організація',
   'Welke verbinding?': 'Яке з\'єднання?',
   'Bestandsverbindingen': 'Файлові з\'єднання',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Місця, де ви зберігаєте та шукаєте презентації — теки на цьому комп\'ютері, сервери WebDAV і git-репозиторії разом. Перетягніть їх у потрібному порядку: найвищий у кожному виді є типовим.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git-репозиторій; кожна збережена версія залишається.',
   'Een map op de schijf van deze computer.': 'Тека на диску цього комп\'ютера.',
@@ -4117,15 +3866,7 @@ const _dutchSourceAddUk = <String, String>{
   'Openen vanaf WebDAV': 'Відкрити з WebDAV',
   'Opslaan naar WebDAV': 'Зберегти на WebDAV',
   'Opgeslagen op WebDAV:': 'Збережено на WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Спершу налаштуйте сервер WebDAV у Налаштування → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Вибрати зображення на WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Сервер WebDAV не налаштовано. Налаштуйте його в Налаштування → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV не налаштовано (правильно) — перевірте дані сервера в Налаштування → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Цей сервер не дозволено. Спочатку позначте приватний/LAN-сервер як довірений у Налаштування → WebDAV.',
   'Servertype': 'Тип сервера',
   'Nextcloud of ownCloud': 'Nextcloud або ownCloud',
   'Andere WebDAV-server': 'Інший сервер WebDAV',
@@ -4147,23 +3888,11 @@ const _dutchSourceAddUk = <String, String>{
   'Haal volle pagina uit de reeks': 'Вилучити повну сторінку із серії',
   'Opslag': 'Сховище',
   'Opslagwijzen': 'Способи зберігання',
-  'Deze computer': 'Цей комп’ютер',
   'Ingesteld': 'Налаштовано',
   'Niet ingesteld': 'Не налаштовано',
-  'Nog geen bibliotheek ingesteld': 'Бібліотеку ще не налаштовано',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Шляхи, якими можна відкривати та зберігати презентації. Натисніть спосіб, щоб налаштувати його.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Презентації в теках вище, на диску цього комп’ютера.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Відкривайте та зберігайте презентації в теці на вашому Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Відкривайте презентації з репозиторію git; кожна збережена версія зберігається.',
-  'Nog te verifiëren': 'Ще перевірити',
   'MASWE-zwakheid kiezen': 'Вибрати слабкість MASWE',
   'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',
   'Geen zwakheid gevonden': 'Слабкість не знайдено',
-  'uitleg nog niet geschreven': 'пояснення ще не написано',
   'Getalnotatie herkennen': 'Розпізнати формат чисел',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'У цьому файлі є числа, кому в яких можна прочитати двома способами:',
@@ -4283,12 +4012,10 @@ const _dutchSourceAddUk = <String, String>{
   'Veelgestelde vragen': 'Поширені запитання',
   'Probleemoplossing': 'Усунення несправностей',
   'Begrippenlijst': 'Глосарій',
-  'API-documentatie': 'Документація API',
   'Prestaties': 'Продуктивність',
   'Beveiligingsontwerp': 'Проєктування безпеки',
   'Hosting en uitrol': 'Хостинг і розгортання',
   'Bijdragen': 'Внесок',
-  'Ontwikkelomgeving': 'Середовище розробки',
   'Migratiegids': 'Посібник з міграції',
   'Versies…': 'Версії…',
   'Versies:': 'Версії:',
@@ -4329,8 +4056,6 @@ const _dutchSourceAddUk = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Гілку переміщено; перезавантажте колоду й збережіть знову.',
   'Bijgewerkt met OciDeck': 'Оновлено за допомогою OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Спершу налаштуйте репозиторій Git у Налаштування → Репозиторій Git.',
   'Git-repository': 'Репозиторій Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Відкривайте презентації з репозиторію Git. Кожна збережена версія зберігається. Токен зберігається зашифрованим у сховищі ключів, а не разом з іншими налаштуваннями.',
@@ -4346,7 +4071,6 @@ const _dutchSourceAddUk = <String, String>{
       'Слайди звітів і довідкові дані для інформаційної безпеки: висновки, контрольні списки, матриці обсягу та підписання. Структуровано за MIAUW і широко застосовно для пентестів, аудитів і досліджень безпеки. Довідкові дані містяться в самому застосунку, тож модуль працює одразу й повністю офлайн.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Необов\'язкові модулі. Типово вимкнені; вони лишаються прихованими, доки ви їх не увімкнете.',
-  'Procesverbetering (ontwerp)': 'Удосконалення процесів (проєкт)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Цей проєкт є побічним продуктом Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Експортувати профіль стилю',
@@ -4487,7 +4211,6 @@ const _dutchSourceAddUk = <String, String>{
   'genetisch gegeven': 'генетичні дані',
   'parketnummer': 'номер кримінального провадження',
   'nationaal identificatienummer': 'національний ідентифікаційний номер',
-  'OciWacht (ontwerp)': 'OciWacht (проєкт)',
   'Mogelijk geheim': 'Можливий секрет',
   'sleutel of token': 'ключ або токен',
   'private sleutel': 'приватний ключ',
@@ -4520,7 +4243,6 @@ const _dutchSourceAddUk = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Розмісти повний список CVE на цьому пристрої, щоб пошук відбувався офлайн і твій запит нікуди не йшов. База даних походить із CVE List V5 (офіційної програми CVE, через GitHub).',
   'Wat er lokaal beschikbaar is': 'Що доступно локально',
-  'Gegevenspakket': 'Пакет даних',
   'Nu bijwerken': 'Оновити зараз',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Дані доступні локально — пошук відбувається на цьому пристрої; нічого не надсилається назовні.',
@@ -4539,7 +4261,6 @@ const _dutchSourceAddUk = <String, String>{
       'Прийняти: дані тут доречні й повідомлення зникає. Прийняти + попередити: одержувач бачить позначку, що на слайді є персональні дані. Вилучити: знайдені дані стають нечитабельними на екрані та в експорті — ваш Markdown-файл зберігає початковий текст.',
   'Alleen melden': 'Лише повідомляти',
   'PERSOONSGEGEVENS': 'ПЕРСОНАЛЬНІ ДАНІ',
-  'Persoonsgegevens op deze slide': 'Персональні дані на цьому слайді',
   'Volg de presentatie': 'Як у презентації',
   'Weglaten uit tonen en exporteren': 'Вилучити з показу та експорту',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4662,8 +4383,6 @@ const _dutchSourceAddUk = <String, String>{
   'Bewerk deze slide': 'Редагувати цей слайд',
   'Bewijs verwijderen': 'Видалити доказ',
   '(nog leeg)': '(ще порожньо)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Спершу вкажіть ідентифікатор виявлення, щоб долучити докази.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Додайте знімки екрана або відео як докази. Кожен доказ стає окремим слайдом одразу після виявлення й потрапляє в експорт.',
   'Uitvoering testen conform standaard': 'Тестування за стандартом',

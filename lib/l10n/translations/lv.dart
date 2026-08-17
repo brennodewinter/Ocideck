@@ -41,17 +41,13 @@ const _stringsLv = {
   'settings': 'Iestatījumi',
   'settingsGeneral': 'Vispārīgi',
   'settingsColors': 'Krāsas',
-  'settingsLogo': 'Logo',
   'language': 'Valoda',
   'applicationLanguage': 'Lietotnes valoda',
   'languageHelp':
       'Saskarne uzreiz maina valodu. Prezentācijas saturs paliek nemainīgs.',
-  'presentationFolder': 'Prezentāciju mape',
   'exportFolderSetting': 'Eksporta mape',
-  'notSet': 'Nav iestatīts',
   'nextToPresentationFile': 'Blakus prezentācijas failam',
   'choose': 'Izvēlēties',
-  'removeDefaultFolder': 'Noņemt noklusējuma mapi',
   'removeExportFolder': 'Noņemt eksporta mapi',
   'exportFolderHelp':
       'Visi eksporti (PDF/PPTX) tiek saglabāti šeit. Ja nav iestatīts, eksporti tiek saglabāti blakus prezentācijas failam.',
@@ -85,8 +81,6 @@ const _dutchSourceLv = {
   'Handtekening tekenen': 'Zīmēt parakstu',
   'Teken je handtekening in het vak hieronder.':
       'Uzzīmējiet savu parakstu lodziņā zemāk.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Datu pakotne ir .zip ar šī moduļa atsauces datiem. Vispirms to pārbauda pret lietotnē iebūvēto nospiedumu; tiek pieņemta tikai pakotne, kas atbilst šai lietotnes versijai.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
@@ -192,7 +186,6 @@ const _dutchSourceLv = {
       'Attēlus un multividi koplieto prezentācijas vienā mapē. Precīzo nosaukumu tūlīt izvēlēsies sistēmas logā.',
   'Alle bibliotheken': 'Visas bibliotēkas',
   'Andere map…': 'Cita mape…',
-  'Bibliotheek verwijderen': 'Noņemt bibliotēku',
   'Bibliotheken': 'Bibliotēkas',
   'Geen bibliotheek': 'Nav bibliotēkas',
   'Geen presentaties (.md) gevonden.':
@@ -205,10 +198,6 @@ const _dutchSourceLv = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Izvēlies, kurā bibliotēkā nonāks prezentācija.',
   'Map toevoegen': 'Pievienot mapi',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mapes, kurās glabā un meklē savas prezentācijas. Piešķir katrai savu nosaukumu, lai tās atšķirtu. Visas bibliotēkas tiek pārmeklētas atverot un attēlu bibliotēkā.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Vēl nav bibliotēkas — pievieno mapi.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Vēl nav bibliotēkas. Pievieno to Iestatījumos vai izvēlies mapi augšā, lai meklētu.',
   'Presentatie opslaan': 'Saglabāt prezentāciju',
@@ -290,21 +279,11 @@ const _dutchSourceLv = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Patiesuma apliecinājums ar ziņotāju, sertifikāciju, parakstu un aizzīmogojumu.',
   'Uitbreidingen': 'Paplašinājumi',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Mēģiniet vēlreiz vai importējiet pakotni manuāli.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Lejupielādētie dati neatbilda gaidītajam ciparnospiedumam un piesardzības nolūkā tika atteikti.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Datu pakotne bija bojāta vai nederīga, tāpēc tā tika atteikta.',
-  'Gegevenspakket kiezen': 'Izvēlēties datu pakotni',
-  'Kon het gekozen bestand niet lezen.': 'Neizdevās nolasīt izvēlēto failu.',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,22 +300,15 @@ const _dutchSourceLv = {
       'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Licence un privātums", un tas nedarbojas tīmekļa versijā.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Es saprotu, ka dati tiek nosūtīti šim ārējam pakalpojumam',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'MI palīdzība (pēc noklusējuma izslēgta): ja izvēlaties pašmitinātu vai mākoņa aizmugursistēmu, teksti vai attēli, ko apstrādājat, tiek nosūtīti uz šo adresi. Lokāls MI modelis šajā ierīcē neko nenosūta.',
   'Zoek een slidetype': 'Meklēt slaida tipu',
   'Alfabetisch sorteren': 'Kārtot alfabētiski',
   'Algemeen': 'Vispārīgi',
   'Informatieveiligheid': 'Informācijas drošība',
   'Alle': 'Visi',
-  'Pentestrapportage (ontwerp)': 'Ielaušanās testa atskaite (dizains)',
-  'AI-assistentie (ontwerp)': 'MI palīdzība (dizains)',
-  'Agentisch bouwplan (ontwerp)': 'Aģentisks veidošanas plāns (dizains)',
-  'Bijsnijden': 'Apgriezt',
   'Linksom': 'Pagriezt pa kreisi',
   'Rechtsom': 'Pagriezt pa labi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Velciet attēlu, lai izvēlētos, kura daļa paliek redzama.',
-  'Git-opslag (ontwerp)': 'Git krātuve (dizains)',
   'Zoek in documentatie…': 'Meklēt dokumentācijā…',
   'Geen documenten gevonden': 'Nav atrasts neviens dokuments',
   'Alleen afspelen (vergrendeld)': 'Tikai atskaņošana (bloķēts)',
@@ -350,12 +322,8 @@ const _dutchSourceLv = {
   'Techniek': 'Tehniskā daļa',
   'Licentie en naleving': 'Licence un atbilstība',
   'Architectuur': 'Arhitektūra',
-  'Bouwinstructies': 'Būvēšanas instrukcijas',
-  'Kwaliteitscontroles': 'Kvalitātes pārbaudes',
-  'Broncodekaart': 'Pirmkoda karte',
   'Licentienaleving': 'Licenču atbilstība',
   'Softwarestuklijst (SBOM)': 'Programmatūras sastāvdaļu saraksts (SBOM)',
-  'Samenwerking (ontwerp)': 'Sadarbība (dizains)',
   'Beschermen met een wachtwoord (AES-256)': 'Aizsargāt ar paroli (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Glabājiet šo paroli drošā vietā: ja to pazaudēsiet, šo pakotni vairs nevarēs atvērt.',
@@ -433,10 +401,6 @@ const _dutchSourceLv = {
   'Instelling opslaan is mislukt.': 'Neizdevās saglabāt iestatījumu.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Piezīme: tīmekļa versija var ielādēt tikai no serveriem, kas to atļauj (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pakotnes (.ocideck) tīmekļa versijā vēl netiek atbalstītas.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Tīmekļa versijā var atvērt tikai .md prezentācijas.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',
@@ -525,10 +489,8 @@ const _dutchSourceLv = {
   'Audio bij deze slide': 'Audio šim slaidam',
   'Audio automatisch afspelen': 'Atskaņot audio automātiski',
   'Audio verwijderen': 'Noņemt audio',
-  'Geen audio gekozen': 'Audio nav izvēlēts',
   'Geen audiobestand gekozen': 'Audio fails nav izvēlēts',
   'Video automatisch afspelen': 'Atskaņot video automātiski',
-  'Geen video gekozen': 'Video nav izvēlēts',
   'Kiezen': 'Izvēlēties',
   'Uit bibliotheek…': 'No bibliotēkas…',
   'Van computer…': 'No datora…',
@@ -557,7 +519,6 @@ const _dutchSourceLv = {
   'Pakket importeren': 'Importēt pakotni',
   'Pakket exporteren': 'Eksportēt pakotni',
   'Map met presentaties kiezen': 'Izvēlēties prezentāciju mapi',
-  'Standaard map voor presentaties': 'Noklusējuma prezentāciju mape',
   'Map voor exports': 'Eksporta mape',
   'Logo kiezen': 'Izvēlēties logotipu',
   'Kies een afbeelding': 'Izvēlieties attēlu',
@@ -570,8 +531,6 @@ const _dutchSourceLv = {
   'Map kiezen': 'Izvēlēties mapi',
   'Kies een map met presentaties om te beginnen.':
       'Izvēlieties mapi ar prezentācijām, lai sāktu.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Šajā mapē nav atrasta neviena prezentācija (.md).',
   'Geen presentaties gevonden voor': 'Nav atrasta neviena prezentācija',
   'meer treffer(s)': 'vēl atbilstība(-as)',
   'Slide zoeken': 'Atrast slaidu',
@@ -593,7 +552,6 @@ const _dutchSourceLv = {
       'Ierakstiet meklēšanas vārdus, lai atrastu slaidus visās prezentācijās.',
   'toegevoegd': 'pievienots',
   'Eerste': 'Pirmās',
-  'treffers — verfijn je zoekopdracht': 'atbilstības — precizējiet meklēšanu',
   'treffer(s)': 'atbilstība(-as)',
   'slide': 'slaids',
   'Zoeken en vervangen': 'Meklēt un aizstāt',
@@ -652,7 +610,6 @@ const _dutchSourceLv = {
   'Tekst op zijpanelen': 'Teksts sānu paneļos',
   'Voorbeeldtekst': 'Parauga teksts',
   'Knop': 'Poga',
-  'Profielnaam': 'Profila nosaukums',
   'Naam van het stijlprofiel': 'Stila profila nosaukums',
   'Stijlprofiel': 'Stila profils',
   'Nieuw profiel': 'Jauns profils',
@@ -715,16 +672,9 @@ const _dutchSourceLv = {
   'TYPE': 'TIPS',
   'STIJL': 'STILS',
   'Terug naar standaardstijl': 'Atpakaļ uz noklusējuma stilu',
-  'Automatisch doorgaan na': 'Automātiski pāriet pēc',
-  'Logo tonen op deze slide': 'Rādīt logotipu šajā slaidā',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabula rediģējama prezentēšanas laikā',
-  'Footer tonen op deze slide': 'Rādīt kājeni šajā slaidā',
   'Sprekersnotities...': 'Runātāja piezīmes...',
   'Sprekersnotities': 'Runātāja piezīmes',
   'Notities voor tijdens het presenteren': 'Piezīmes prezentēšanas laikam',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown režīms — rediģējiet visu prezentāciju kā Marp Markdown',
   'Toepassen': 'Lietot',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown neizdevās apstrādāt. Pārbaudiet sintaksi.',
@@ -749,8 +699,6 @@ const _dutchSourceLv = {
   'Geen resultaten voor': 'Nav rezultātu vaicājumam',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Pielāgojiet meklēšanas vārdu vai pievienojiet aprakstu.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Izmantojiet “Pārlūkot”, lai izvēlētos attēlus no jebkuras vietas.',
   'Selecteer een\nafbeelding': 'Atlasiet\nattēlu',
   'Gekopieerd': 'Nokopēts',
   'Afbeelding verwijderen?': 'Dzēst attēlu?',
@@ -767,8 +715,6 @@ const _dutchSourceLv = {
   'spatie': 'atstarpe',
   'klik': 'klikšķis',
   'cijfers': 'cipari',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Noklikšķiniet vai nospiediet ? / H / Esc, lai aizvērtu',
   'Klik of druk op H / Esc om te sluiten':
       'Noklikšķiniet vai nospiediet H / Esc, lai aizvērtu',
   'Naar slidenummer': 'Pāriet uz slaida numuru',
@@ -779,20 +725,10 @@ const _dutchSourceLv = {
       'Prezentētāja skats (piezīmes, pulkstenis)',
   'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
-  'Verstreken tijd resetten': 'Atiestatīt pagājušo laiku',
   'Automatische modus aan/uit': 'Automātiskais režīms ieslēgts/izslēgts',
   'Herhalen (loop) aan/uit': 'Atkārtot (cilpa) ieslēgts/izslēgts',
-  'Na audio automatisch doorgaan': 'Pēc audio automātiski turpināt',
-  'Dit overzicht': 'Šis pārskats',
   'Deze legenda': 'Šī leģenda',
   'Terug / afsluiten': 'Atpakaļ / iziet',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuāli (A)',
-  'Herhalen (L)': 'Atkārtot (L)',
-  'Na audio (M)': 'Pēc audio (M)',
-  'Sneltoetsen (?)': 'Īsinājumtaustiņi (?)',
-  'Slide-overzicht (G)': 'Slaidu pārskats (G)',
-  'Presenter view (P)': 'Prezentētāja skats (P)',
   'Tijd resetten (R)': 'Atiestatīt laiku (R)',
   'HUIDIGE SLIDE': 'PAŠREIZĒJAIS SLAIDS',
   'VOLGENDE': 'NĀKAMAIS',
@@ -807,15 +743,9 @@ const _dutchSourceLv = {
   'Notities weggooien': 'Atmest piezīmes',
   'Notities voor de ontvanger tijdens een cursus':
       'Piezīmes saņēmējam kursa laikā',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Pārslēdzieties uz Markdown režīmu, lai pievienotu piezīmes.',
   'Mijn notities aan/uit': 'Pārslēgt manas piezīmes ieslēgt/izslēgt',
   'Wissel scherm (S)': 'Pārslēgt ekrānu (S)',
   'Kon niet van scherm wisselen.': 'Neizdevās pārslēgt ekrānus.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -862,8 +792,6 @@ const _dutchSourceLv = {
   'Selectie opheffen': 'Notīrīt atlasi',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Es piekrītu EUPL 1.2 licencei un esmu izlasījis, kādus datus OciDeck saglabā.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Jūsu izvēle kļūst par lietotnes noklusējuma valodu.',
   'Lees de volledige licentie': 'Lasīt pilnu licenci',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck ir brīvā programmatūra ar EUPL 1.2 licenci. Pirms sākat, mēs lūdzam jūs pieņemt licenci. Zemāk varat arī izlasīt, kādus datus OciDeck saglabā šajā ierīcē un kad kaut kas atstāj jūsu ierīci.',
@@ -888,9 +816,6 @@ const _dutchSourceLv = {
   'Ongeldige server-URL': 'Nederīgs servera URL',
   'Het antwoord van de server was te groot': 'Servera atbilde bija pārāk liela',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud avots (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Atveriet un saglabājiet prezentācijas mapē jūsu Nextcloud. Parole tiek saglabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
   'Server-URL': 'Servera URL',
   'Gebruikersnaam': 'Lietotājvārds',
   'App-wachtwoord': 'Lietotnes parole',
@@ -904,21 +829,12 @@ const _dutchSourceLv = {
   'Verbinding gelukt': 'Savienojums izdevās',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Izmaiņas tiek saglabātas, kad noklikšķiniet uz Saglabāt.',
-  'Afbeelding kiezen op Nextcloud': 'Izvēlēties attēlu Nextcloud',
-  'Openen vanaf Nextcloud': 'Atvērt no Nextcloud',
   'Vernieuwen': 'Atsvaidzināt',
   'Deze map is leeg': 'Šī mape ir tukša',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nav iestatīts Nextcloud serveris. Iestatiet to sadaļā Iestatījumi → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Neizdevās ielādēt mapi. Pārbaudiet savienojumu un iestatījumus.',
   'Kon dit bestand niet openen.': 'Neizdevās atvērt šo failu.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Šī nav Marp/OciDeck prezentācija.',
   'Downloaden mislukt:': 'Lejupielāde neizdevās:',
-  'Opgeslagen op Nextcloud:': 'Saglabāts Nextcloud:',
   'Opslaan mislukt:': 'Saglabāšana neizdevās:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Vispirms iestatiet Nextcloud serveri sadaļā Iestatījumi → Nextcloud.',
   'Opslaan naar Nextcloud': 'Saglabāt Nextcloud',
   'Doelpad (zonder extensie)': 'Mērķa ceļš (bez paplašinājuma)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -929,9 +845,6 @@ const _dutchSourceLv = {
   'Tijden-overzicht tonen na afloop': 'Rādīt laika pārskatu pēc beigām',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Laiks katram slaidam vienmēr tiek mērīts; tas tikai nosaka, vai pārskats parādās pēc šīs prezentācijas.',
-  'Oefenoverzicht tonen na afloop': 'Rādīt mēģinājuma kopsavilkumu pēc beigām',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Pēc prezentācijas rādīt pārskatu ar katram slaidam veltīto laiku. Laiks vienmēr tiek mērīts; tas tikai nosaka, vai ekrāns parādās.',
   'Onveilige presentatie geblokkeerd': 'Nedroša prezentācija bloķēta',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Šī prezentācija netika atvērta. Fails satur saturu, kas var izpildīt kodu, un prezentācijai jāsatur tikai dati — nekas izpildāms.',
@@ -1013,7 +926,6 @@ const _dutchSourceLv = {
   'Online': 'Tiešsaistē',
   'Lokaal bestand': 'Lokāls fails',
   'Geen video': 'Nav video',
-  'Vraag (meerkeuze)': 'Jautājums (izvēles)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Virsraksta tekstam ir pārāk mazs kontrasts ar fona attēlu',
   'Herstel': 'Labot',
@@ -1028,8 +940,6 @@ const _dutchSourceLv = {
   'Huidig punt weghalen': 'Noņemt pašreizējo punktu',
   'Stap voor stap': 'Soli pa solim',
   'Geen animatie': 'Bez animācijas',
-  'Animatiesnelheid': 'Animācijas ātrums',
-  'Langzaam': 'Lēni',
   'Snel': 'Ātri',
   'Gebeurtenissen': 'Notikumi',
   'Gebeurtenis toevoegen': 'Pievienot notikumu',
@@ -1042,8 +952,6 @@ const _dutchSourceLv = {
   'Vraag': 'Jautājums',
   'Wat wil je vragen?': 'Ko vēlaties jautāt?',
   'Antwoorden': 'Atbildes',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Atzīmējiet pareizās atbildes. Ne vairāk kā astoņas atbildes; prezentējot nejauši tiek rādīta viena pareizā un pārējās nepareizās.',
   'Antwoord': 'Atbilde',
   'Antwoord toevoegen': 'Pievienot atbildi',
   'Goed antwoord': 'Pareizā atbilde',
@@ -1076,8 +984,6 @@ const _dutchSourceLv = {
   'Stelling': 'Apgalvojums',
   'Formuleer een stelling die juist of onjuist is':
       'Formulējiet apgalvojumu, kas ir patiess vai nepatiess',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Atzīmējiet visas pareizās atbildes. Prezentējot tiek rādīts nejaušs komplekts ar vismaz vienu pareizu un vienu nepareizu.',
   'Juist': 'Patiess',
   'Onjuist': 'Nepatiess',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1098,7 +1004,6 @@ const _dutchSourceLv = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Cockpit mērītāju statusa krāsas. Izveidojiet nosauktus variantus; izvēlētā shēma attiecas uz visiem cockpit slaidiem.',
   'Standaard': 'Noklusējums',
-  'Standaardkleuren gebruiken': 'Izmantot noklusējuma krāsas',
   'Kleurschema verwijderen': 'Dzēst krāsu shēmu',
   'Schemanaam': 'Shēmas nosaukums',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1177,7 +1082,6 @@ const _dutchSourceLv = {
   'Logo en footer': 'Logotips un kājene',
   'Pagina': 'Lapa',
   'Presentatiestijl': 'Prezentācijas stils',
-  'Presentatiestijl: ': 'Prezentācijas stils: ',
   'Tekst...': 'Teksts...',
   'Teksteditor': 'Teksta redaktors',
   'Volgende pagina': 'Nākamā lapa',
@@ -1190,8 +1094,6 @@ const _dutchSourceLv = {
   'Doeltijd': 'Mērķa laiks',
   'Doeltijd (aftellen)': 'Mērķa laiks (atskaite)',
   'Geen aftelling': 'Bez atskaites',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Noklusētais mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
   'uit': 'izsl.',
   'Doeltijd / aftellen (K)': 'Mērķis / atskaite (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Iestatīt mērķi / atskaiti (MMSS)',
@@ -1262,14 +1164,8 @@ const _dutchSourceLv = {
   'Cirkel': 'Apļa',
   'Spider': 'Zirnekļa',
   'CSV importeren': 'Importēt CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Dati (CSV: pirmā rinda = sēriju nosaukumi, pirmā kolonna = etiķetes)',
   'Gekoppeld aan': 'Saistīts ar',
   'Ontkoppelen': 'Atsaistīt',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Saglabāt datus slaidā vai glabāt kā atsevišķu CSV failu blakus prezentācijai?',
-  'In de slide': 'Slaidā',
-  'Als CSV-bestand': 'Kā CSV failu',
   'Geen grafiekgegevens': 'Nav diagrammas datu',
   'Label': 'Etiķete',
   'Rij': 'Rinda',
@@ -1299,7 +1195,6 @@ const _dutchSourceLv = {
   'Eigen kleur (hex)': 'Pielāgota krāsa (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Piemēram, #33FF33 CRT zaļam ekrānam.',
-  'Onderdeel van stijlprofiel ': 'Stila profila daļa ',
   'Broncode lettertype': 'Pirmkoda fonts',
   'Kop (optioneel)': 'Virsraksts (neobligāti)',
   'Subkop (optioneel)': 'Apakšvirsraksts (neobligāti)',
@@ -1337,16 +1232,7 @@ const _dutchSourceLv = {
   'Zet het filter uit om alles weer te zien.':
       'Izslēdziet filtru, lai atkal redzētu visu.',
   'Welkom bij OciDeck': 'Laipni lūdzam OciDeck',
-  'Privacy en gebruik': 'Privātums un lietošana',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck ir lokāla darbvirsmas lietotne. Jūsu prezentācijas un dati tiek glabāti tikai jūsu datorā.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Lietotne nevāc personas datus, statistiku vai lietošanas datus. Jūsu privātums ir mūsu prioritāte.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Visi dati, ko ievadāt OciDeck, paliek jūsu lokālajā sistēmā un netiek sūtīti uz ārējiem serveriem.',
   'Licentie (EUPL 1.2)': 'Licence (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Noklikšķinot uz "Piekrītu", jūs pieņemat šos noteikumus un piekrītat OciDeck lietošanai.',
   'Volledige licentie online': 'Pilna licence tiešsaistē',
   'Akkoord gaan': 'Piekrītu',
   'Privacy': 'Privātums',
@@ -1435,8 +1321,6 @@ const _dutchSourceLv = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Eksports bloķēts nopietnu kvalitātes problēmu dēļ.',
   'Alle meldingen': 'Visi paziņojumi',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… un vairāk problēmu kvalitātes panelī.',
   'Classificatie-handhaving': 'Klasifikācijas ieviešana',
   'Vrijgaveplafond': 'Izlaišanas griesti',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1455,11 +1339,9 @@ const _dutchSourceLv = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Iestatiet TLP līmeni — eksportu bloķē klasifikācijas politika.',
   'Tabel bewerken': 'Rediģēt tabulu',
-  'Pijltjes · Tab · Esc': 'Bultiņas · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Rediģēt tabulu (tabulas slaidos)',
   'Tabel bewerken (E)': 'Rediģēt tabulu (E)',
   'Tab wisselt cel · Esc sluit': 'Tab pārslēdz šūnu · Esc aizver',
-  'Pen · markeerstift · ⇧E': 'Pildspalva · marķieris · ⇧E',
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn pāršķir slaidus',
@@ -1502,10 +1384,6 @@ const _dutchSourceLv = {
       'Tīkla kļūda — pārbaudiet savienojumu un mēģiniet vēlreiz.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Kaut kas negaidīti nogāja greizi. Sīkāku informāciju skatiet žurnālā.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Šis serveris nav atļauts. Vispirms atzīmējiet privātu/LAN serveri kā uzticamu sadaļā Iestatījumi → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Serveris nav sasniedzams — pārbaudiet savienojumu un servera URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1532,8 +1410,6 @@ const _dutchSourceLv = {
   'Uit recente bestanden verwijderen': 'Noņemt no nesenajiem failiem',
   'OciDeck wordt gestart…': 'Startē OciDeck…',
   'Herstelbestanden': 'Atkopšanas faili',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Atkopšanas faili satur visu jūsu prezentāciju saturu vienkāršā tekstā. Tie tiek automātiski iztīrīti pēc 7 dienām; šeit tos var izdzēst uzreiz.',
   'Herstelbestanden nu wissen': 'Izdzēst atkopšanas failus tagad',
   'Er waren geen herstelbestanden.': 'Atkopšanas failu nebija.',
   'herstelbestand(en) gewist.': 'atkopšanas fails(-i) izdzēsti.',
@@ -1962,7 +1838,6 @@ const _dutchSourceAddLv = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Mēs izveidojam kopiju jaunā cilnē; jūsu sākotnējais fails paliek nemainīgs.',
   'Welk formaat?': 'Kāds formāts?',
-  'dia\'s, gesplitst op kop.': 'slaidi, sadalīti pēc virsraksta.',
   'document': 'dokuments',
   'volledig': 'pilns',
   'Invoegen': 'Ievietot',
@@ -2122,12 +1997,8 @@ const _dutchSourceAddLv = <String, String>{
   'Alle integraties': 'Visas integrācijas',
   'Alles inschakelen': 'Ieslēgt visu',
   'Alles uitschakelen': 'Izslēgt visu',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Atskaišu mape jau ir iestatīta, tāpēc savienojums paliek pieejams un esošu OpenKAT prezentāciju joprojām var atjaunināt.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Savienojumi ar citām sistēmām. Katrs savienojums pēc noklusējuma ir izslēgts un paliek neaktīvs, līdz to ieslēdzat.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Nolasiet OpenKAT atskaišu mapes kā vienu vadības pārskatu.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Prezentāciju ievilkšana no PowerPoint (.pptx), Keynote (.key) un Impress (.odp) kā rediģējams deks. Savienojumi ar citām sistēmām, piemēram, OpenKAT, atrodas sadaļā Integrācijas.',
   'Media (WebRTC)': 'Multivide (WebRTC)',
@@ -2292,7 +2163,6 @@ const _dutchSourceAddLv = <String, String>{
   'Van toepassing': 'Piemērojams',
   'Voortgang': 'Progress',
   'Voortgang managementsysteem': 'Pārvaldības sistēmas progress',
-  'Voortgangsoverzicht bijgewerkt': 'Progresa pārskats atjaunināts',
   'Welk deel?': 'Kura daļa?',
   'beheersmaatregelen geladen': 'kontroles ielādētas',
   'geïmplementeerd': 'ieviests',
@@ -2369,10 +2239,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šī neizskatās pēc derīgas atkopšanas atslēgas.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Attēlu tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk attēlu vai mazākus attēlus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Attēliem paredzētā tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Saglabājiet darbu kā .ocideck failu un pārlādējiet lapu, pirms pievienojat citus attēlus.',
   'Afbeeldingsrechten': 'Attēla tiesības',
   'Afbeeldingsrechten controleren…': 'Pārbaudiet attēla tiesības…',
   'Afdoening': 'Norēķins',
@@ -2423,8 +2289,6 @@ const _dutchSourceAddLv = <String, String>{
   'Verifiëren': 'Pārbaudīt',
   'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
   '(dit apparaat)': '(šī ierīce)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Salīdziniet katras ierīces nospiedumu pa uzticamu kanālu — nolasiet to viens otram vai nosūtiet pa ceļu, kuram uzticaties. Ja tie sakrīt, jūs strādājat ar īstajām ierīcēm un neviens nav iejaucies. Ja tie atšķiras, pārtrauciet sadarbību.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'Šī nav derīga ielūguma saite.',
   'De Matrix-homeserver is niet bereikbaar.':
@@ -2485,7 +2349,6 @@ const _dutchSourceAddLv = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Sadarbojieties tiešsaistē pie prezentācijas caur Matrix homeserver kā šifrētu retranslatoru. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus. Ievadiet homeserver un citur izveidotu piekļuves pilnvaru — OciDeck nekad neprasa jūsu paroli. Pilnvara tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
   'wordt door de test ingevuld': 'aizpilda tests',
-  'Versleuteld doorgeefluik (ontwerp)': 'Šifrēts retranslators (dizains)',
   'Meer documentatie op de repository': 'Vairāk dokumentācijas repozitorijā',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Pilnā dokumentācija — tostarp arhitektūra, būvējums, pirmkods un dizains — atrodas repozitorijā.',
@@ -2727,50 +2590,14 @@ const _dutchSourceAddLv = <String, String>{
       'Kuru mērījumu datu trūkst vai tie ir novecojuši?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Uz kādiem datiem ir balstīts šis pārskats?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Plašs, bet faktisks pārvaldības pārskats ar izsekojamiem mērījumu momentiem.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Sarindo bez kopvērtējuma un atsevišķi parāda trūkstošos mērījumus.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Rāda smaguma skaitļus, veicinātājus un pārnestos mērījumus pēc brīža.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizē tipu atrašanu pēc ietekmētajām organizācijām, sistēmām un novērojumiem.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Rāda kritiskos/augstos skaitļus bez izdomātas svēršanas.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Rāda skaitītāju, saucēju un tikai uzticamus procentus.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Sagrupē burtiskus OpenKAT ieteikumus bez savas prioritātes.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Mērķtiecīgs vienas organizācijas pašreizējais attēls un tā mērīšanas datums.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Salīdzina divus izvēlētos mērījumu momentus vienas organizācijas ietvaros.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Atšķir jauno, jauno un vairs neievēroto.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Izmanto tikai uzticamus pirmo novērojumu datumus.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Sarindo sistēmas ar atsevišķiem smaguma pakāpes skaitītājiem.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Rāda atsevišķas delta vērtības bez svērtā rezultāta.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Salīdzina skaitītāju un saucēju ar uzskatāmi salīdzināmu pārklājumu.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventāra avota pārbaudītas sistēmas, resursdatora nosaukumi un IP adreses.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Atdala uzraudzīto, neuzraudzīto un nezināmo.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Parāda tikai skaidri pierādītas uzraudzības mutācijas.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Parāda organizācijas un sistēmas ap vienu uzticamu CVE saiti.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Sarindo CVE ar nepārprotamu dublēšanas atcelšanu.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Atšķir jaunus, jaunus un vairs neievērotus CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Parāda trūkstošos, novecojušos un faktiski izmantotos mērījumus.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Uzskaita galvenos datumus, avota failus, adapterus un avota jaucējus.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Vēl nav pieejams: avots nepierāda visu līdzekļu uzraudzības statusu.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2814,12 +2641,6 @@ const _dutchSourceAddLv = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Kurš pārskats atbild uz jūsu jautājumu?',
   'Meer rapportvragen': 'Vairāk ziņojuma jautājumu',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Kuras sistēmas ir ievainojamas pret CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizācijas un ievainojamas sistēmas ap vienu ievainojamību.',
-  'Organisaties met kwetsbare systemen':
-      'Organizācijas ar ievainojamām sistēmām',
   'Kwetsbare systemen': 'Ievainojamas sistēmas',
   'Kritiek/hoog': 'Kritisks/augsts',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2841,8 +2662,6 @@ const _dutchSourceAddLv = <String, String>{
   'Bruikbaar': 'Izmantojams',
   'CVE zoeken': 'CVE meklēšana',
   'Critical/high': 'Kritisks/augsts',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Datu kvalitāte, trūkstošie mērījumi un novecošanās.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Atlasītajos pārskatos nav pietiekami daudz ticamu datu par šo daļu.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2869,9 +2688,6 @@ const _dutchSourceAddLv = <String, String>{
   'Geen bruikbare meetdatum': 'Nav izmantojama mērījumu datuma',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Ģenerētie slaidi tiek atsvaidzināti. Jūsu pašu slaidi un kopijas tiek saglabāti.',
-  'Getroffen organisaties en systemen': 'Ietekmētās organizācijas un sistēmas',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Ietekmētās organizācijas un sistēmas ap vienu ievainojamību.',
   'Getroffen systemen': 'Ietekmētās sistēmas',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Pārskatu nevarēja izveidot. Jūsu izvēles tiek saglabātas; pārbaudiet brīdinājumus un mēģiniet vēlreiz.',
@@ -2881,20 +2697,15 @@ const _dutchSourceAddLv = <String, String>{
   'Keuzes wijzigen…': 'Mainīt izvēli…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Izvēlieties mapi, kurā OpenKAT ir ievietojis atskaites. OciDeck lasa tikai šo mapi; nekas netiek mainīts vai nosūtīts.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Izvēlieties jautājumu, uz kuru jāatbild ziņojumā. OciDeck nosaka atbilstošo struktūru.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Izvēlieties pārskatos atrasto CVE.',
   'Laatste bruikbare meting': 'Pēdējais izmantojamais mērījums',
   'Live voorvertoning van de rapportopbouw':
       'Pārskata struktūras tiešraides priekšskatījums',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Pārvaldības un kontroles informācija par vairākām organizācijām.',
   'Meer instellingen': 'Vairāk iestatījumu',
   'Nederlands': 'holandiešu valoda',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Ne katrai izvēlētajai organizācijai ir mērījums šim periodam.',
-  'Nieuwe en verdwenen bevindingen': 'Jauni un trūkstošie atradumi',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Vēl nav pieejams: šajos pārskatos nav uzticamu CVE numuru.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2929,8 +2740,6 @@ const _dutchSourceAddLv = <String, String>{
       'Vienai vai vairākām organizācijām trūkst noderīga strāvas mērījuma.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Salīdzināšanai nepieciešami divi mērīšanas momenti. Tagad ir atrasts viens mērījums.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progress salīdzinājumā ar iepriekšējo mērījumu brīdi.',
   'Waar staan de OpenKAT-rapportages?': 'Kur ir OpenKAT pārskati?',
   'Wat veranderde er bij één organisatie?': 'Kas mainījās vienā organizācijā?',
   'Wat wilt u laten zien?': 'Ko jūs vēlaties parādīt?',
@@ -2943,7 +2752,6 @@ const _dutchSourceAddLv = <String, String>{
   'bruikbaar': 'lietojams',
   'metingen': 'mērījumi',
   'organisaties': 'organizācijām',
-  'organisaties geselecteerd': 'atlasītās organizācijas',
   'rapportages gebruikt': 'izmantotās atskaites',
   'systemen': 'sistēmas',
   'Nog geen specificatielimiet': 'Vēl nav specifikācijas limitu',
@@ -3086,7 +2894,6 @@ const _dutchSourceAddLv = <String, String>{
       'atrodas uz koka slaida, bet citur netiek lietots — saistiet to ar matricu, plūsmu vai citu slaidu.',
   'Nieuw verbeteringsproject': 'Jauns uzlabošanas projekts',
   'Kader': 'Ietvars',
-  'Projecttitel': 'Projekta nosaukums',
   'Primaire Y-metriek (Y-01)': 'Primārā Y metrika (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Piemēram: order intake cikla laiks darba dienās',
@@ -3139,10 +2946,6 @@ const _dutchSourceAddLv = <String, String>{
       'Pārlūks bloķē multividi no ārēja avota. Atveriet šo prezentāciju lietotnē, lai rādītu tiešsaistes multividi.',
   'Bron niet toegestaan': 'Avots nav atļauts',
   'Deze URL is door de beveiliging geweigerd.': 'Šo URL noraidīja drošība.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Materiāla ievilkšana no citām sistēmām. Divi avoti: prezentācijas no PowerPoint (.pptx), Keynote (.key) un Impress (.odp) kļūst par rediģējamu deku, un OpenKAT atskaites (mape ar JSON) kļūst par vienu vadības pārskatu. Kur atrodas OpenKAT mape, iestata sadaļā Integrācijas.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Prezentāciju ievilkšana no PowerPoint (.pptx), Keynote (.key) un Impress (.odp) kā rediģējams deks. OpenKAT atskaišu mapju lasīšana ir pieejama tikai darbvirsmas versijā.',
   'Alinea': 'Rindkopa',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Prezentācijas veidošana…',
@@ -3263,8 +3066,6 @@ const _dutchSourceAddLv = <String, String>{
       'Kontrolsaraksta rādītājs: katram testam stabilais id, kanoniskais nosaukums un kategorija. Pašas rokasgrāmatas saturs nav iekļauts.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 testu rādītājs: katram testam stabilais id, kanoniskais nosaukums, MASVS kategorija un MASWE vājība. Atsauktie v1 testi un vietturi nav iekļauti; arī rokasgrāmatas saturs ne.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Vājību saraksts (117): id, nosaukums, MASVS kategorija, platforma un CWE saite. Trīs ceturtdaļas avotā vēl nav izvērstas; tās ir iekļautas, atzīmētas. Atsauktās vājības nav.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Pilns saraksts (id, nosaukums, apraksts) un pašu atlasīts kodols ar mūsu novēršanas piezīmēm.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3311,33 +3112,16 @@ const _dutchSourceAddLv = <String, String>{
       'Katrs fails tiek pārveidots atsevišķi un saglabāts kā sava prezentācija mērķa mapē. Ja kāds neizdodas, rinda vienkārši turpinās.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Vairāku prezentāciju importēšana vienlaikus tās ieraksta kā failus mapē; pārlūka versijā tas nav iespējams.',
-  'Nu importeren': 'Importēt tagad',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Pārskats ir sagatavots jaunā cilnē.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Nolasa mapi ar OpenKAT atskaitēm (JSON) un veido no tās vienu vadības pārskatu: sistēmas, atradumus pēc smaguma, visilgāk atvērtos punktus un tendenci vairākos secīgos mērījumos. Tā pati darbība esošā OpenKAT prezentācijā to atjaunina un atstāj jūsu pašu slaidus savā vietā.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Imports tikai nolasa; šajā mapē nekas netiek mainīts vai nosūtīts. Faili, kas nav OpenKAT atskaites, tiek izlaisti un nosaukti importa pārskatā.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Norādiet mapi, kurā atrodas jūsu OpenKAT atskaites (JSON). Imports nolasa šo mapi un veido no tās vienu vadības pārskatu; ja mape ir iestatīta šeit, tā nav jāizvēlas katru reizi.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'OpenKAT imports nolasa mapi no diska un ir pieejams tikai darbvirsmas versijā.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Atskaišu mape vēl nav norādīta, tāpēc imports to prasa katru reizi.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Atskaišu mape jau ir iestatīta, tāpēc ieejas punkts paliek pieejams un esošu OpenKAT prezentāciju joprojām var atjaunināt.',
   'Integraties': 'Integrācijas',
-  'Naar Integraties': 'Uz Integrācijām',
   'Map kiezen…': 'Izvēlēties mapi…',
   'Map wissen': 'Notīrīt mapi',
-  'OpenKAT-rapportages importeren…': 'Importēt OpenKAT pārskatus…',
   'Map met OpenKAT-rapportages kiezen': 'Izvēlēties mapi ar OpenKAT pārskatiem',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT pārskati importēti.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT deks atjaunināts; manuālie slaidi ir saglabāti.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Šajā mapē nav atrasts neviens OpenKAT pārskats.',
-  'OpenKAT-import mislukt.': 'OpenKAT imports neizdevās.',
   'rapportages': 'pārskati',
   'overgeslagen': 'izlaisti',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3396,8 +3180,6 @@ const _dutchSourceAddLv = <String, String>{
   'Label op de primaire knop': 'Uzraksts uz galvenās pogas',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Konstatējumi, kas ir izvērtēti un atstāti. Par tiem vairs neziņo, taču skenēšana tos joprojām atrod, un tie netiek uzskatīti par novērstiem. Pieskaries, lai vienu atjaunotu.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Privātuma konstatējuma atlikšana (projekts)',
   'Deze is beoordeeld en mag blijven': 'Pārbaudīts, šis var palikt',
   'Mogelijk gemaakt door': 'Iespējams, pateicoties',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3409,10 +3191,8 @@ const _dutchSourceAddLv = <String, String>{
   'Technische melding:': 'Tehnisks ziņojums:',
   'presentaties': 'prezentacijas',
   '/Presentaties': '/Prezentācijas',
-  'Rapportagedistributie (ontwerp)': 'Pārskatu izplatīšana (dizains)',
   'De export is mislukt.': 'Eksports neizdevās.',
   'Presenteer vanaf hier': 'Prezentēt no šejienes',
-  'Teams-gastclient (ontwerp)': 'Teams viesu klients (dizains)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cik plaši šo materiālu drīkst kopīgot?',
   'Wat betekenen deze niveaus?': 'Ko nozīmē šie līmeņi?',
@@ -3529,8 +3309,6 @@ const _dutchSourceAddLv = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentācijas, kas paliek parasti Markdown faili: lasāmi, meklējami un atverami jebkurā redaktorā.',
   'sjablonen om mee te beginnen, of leeg': 'veidnes, ar ko sākt, vai tukša',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Izlaišana ir ieslēgta: atrastie dati tiek nomelnoti un visi šī slaida attēli, video un audio nenonāk ne ekrānā, ne eksportā. Tavs markdown fails saglabā visu.',
   'Mijn tekst': 'Mans teksts',
   'Wat zij zien': 'Ko redz viņi',
   'Presentatiegegevens': 'Prezentācijas dati',
@@ -3751,7 +3529,6 @@ const _dutchSourceAddLv = <String, String>{
   'Opslaan naar…': 'Saglabāt uz…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Vispirms iestatiet savienojumu sadaļā Iestatījumi → Krātuve.',
-  'Beginnen met:': 'Sākt ar:',
   'Verlopen datums markeren': 'Atzīmēt nokavētos datumus',
   'Datums gemarkeerd': 'Datumi atzīmēti',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3777,28 +3554,15 @@ const _dutchSourceAddLv = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Uzbrukuma virsma pēc objekta veida: cik to ir, cik prasa darbu, kas ir jauns un kas nevienam nepieder. Pēdējais parasti ir tā saruna.',
   'Acties en besluiten': 'Darbības un lēmumi',
-  'Actie toevoegen': 'Pievienot darbību',
-  'Actie verwijderen': 'Noņemt darbību',
   'Actie': 'Darbība',
   'Deadline': 'Termiņš',
-  'Op de lijst sinds': 'Sarakstā kopš',
   'Stand': 'Statuss',
-  'Wat vraagt u': 'Ko jūs lūdzat',
   'geen datum': 'bez datuma',
-  'Ter informatie': 'Zināšanai',
   'Besluit gevraagd': 'Nepieciešams lēmums',
   'Escalatie': 'Eskalācija',
   'Open': 'Atvērts',
   'Loopt': 'Norit',
   'Afgerond': 'Pabeigts',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Tikai lēmums vai eskalācija saņem etiķeti slaidā; "nokavēts" izriet no termiņa un netiek iestatīts pašrocīgi.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datumi kā gggg-mm-dd. Cits pieraksts tiek noraidīts, nevis uzminēts: 05-08-2026 ir divas dažādas dienas.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Darbību slaids nes ne vairāk kā astoņas rindas; tālāk zāle pārskata, nevis lemj.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Kam jānotiek, kurš to dara un līdz kuram laikam. Katrā rindā norādiet, vai tas ir zināšanai vai lūdzat lēmumu — to zāle meklē.',
   'Scorecard': 'Rādītāju karte',
   'Cijfer toevoegen': 'Pievienot rādītāju',
   'Cijfer verwijderen': 'Noņemt rādītāju',
@@ -3885,8 +3649,6 @@ const _dutchSourceAddLv = <String, String>{
       'Pilnvara ir derīga, bet to nedrīkst — piešķir tai vairāk tiesību uz repozitoriju.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Pieteicies, bet bez piekļuves — parole nav problēma. Palūdz tiesības uz šo mapi.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Leksikonu licences: kas vēl jānoskaidro',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Šis izskatās pēc pilnas DAV adreses. Nextcloud gadījumā OciDeck šo ceļu atvasina pats — šeit pieder tikai serveris.',
   'Overnemen': 'Lietot',
@@ -3929,8 +3691,6 @@ const _dutchSourceAddLv = <String, String>{
   'kenteken': 'transportlīdzekļa numurs',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šīs prezentācijas valodai nav atslēgvārdu saraksta īpašām personas datu kategorijām. Raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas; vārdi kā "diagnoze" vai "aizdomās turētais" netiek atpazīti.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Atslēgvārdu saraksts īpašām personas datu kategorijām šīs prezentācijas valodai ir ļoti trūcīgs. Nepaļaujieties, ka tiks atrasti vārdi kā "diagnoze" vai "aizdomās turētais".',
   'Landpakketten voor identificatienummers':
       'Valstu pakotnes identifikācijas numuriem',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3961,8 +3721,6 @@ const _dutchSourceAddLv = <String, String>{
       'Servera nosaukums neeksistē vai nav atrodams. Pārbaudiet, vai servera URL nav drukas kļūdas.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Šim serverim ir privāta vai LAN adrese. Atzīmējiet to kā uzticamu iekšējo sadaļā Iestatījumi → Krātuve.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Šī servera sertifikāts nav uzticams. Pašparakstīts sertifikāts nedarbosies; izmantojiet atzīta izdevēja sertifikātu.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Serveris novirza uz citu adresi. Ievadiet šo adresi tieši — mēs nesekojam novirzēm, jo tās var apiet drošības pārbaudi.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3998,8 +3756,6 @@ const _dutchSourceAddLv = <String, String>{
   'Opslaan naar S3': 'Saglabāt S3',
   'Opgeslagen in S3:': 'Saglabāts S3:',
   'Hier staat niets': 'Šeit nekā nav',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Saturu neizdevās ielādēt. Pārbaudi savienojumu un iestatījumus.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Galapunkts nav sasniedzams — pārbaudi savienojumu un galapunktu.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4008,8 +3764,6 @@ const _dutchSourceAddLv = <String, String>{
       'Galapunkts atgrieza kļūdu. Mēģini vēlāk vēlreiz.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Šis galapunkts nevar rakstīt nosacīti, tāpēc tavs darbs nav aizsargāts no cita darba. Saglabā ar jaunu nosaukumu, ja pie šīs prezentācijas strādā vēl kāds.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nav iestatīta S3 tvertne. Iestati to sadaļā Iestatījumi → Krātuve.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Vispirms iestati S3 tvertni sadaļā Iestatījumi → Krātuve.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4055,10 +3809,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šajā attēlā redzamas vismaz tik atpazīstamas sejas: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Šo attēlu nevarēja pārbaudīt uz sejām. Formāts netiek atbalstīts (piemēram, HEIC). Tas nenozīmē, ka tajā nav neviena, — tas nozīmē, ka nav skatīts.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Šajā attēlā redzama atpazīstama seja.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Šajā attēlā redzamas atpazīstamas sejas: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Attēls, kurā kāds ir atpazīstams, ir personas dati arī bez vārda.',
   'herkenbaar gezicht op een afbeelding': 'atpazīstama seja attēlā',
@@ -4074,8 +3824,6 @@ const _dutchSourceAddLv = <String, String>{
   'Organisatie': 'Organizācija',
   'Welke verbinding?': 'Kurš savienojums?',
   'Bestandsverbindingen': 'Failu savienojumi',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Vietas, kur glabājat un meklējat prezentācijas — mapes šajā datorā, WebDAV serveri un git repozitoriji jauktā secībā. Velciet tos vēlamajā secībā: augšējais no katra veida ir noklusējums.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git repozitorijs; katra saglabātā versija tiek paturēta.',
   'Een map op de schijf van deze computer.': 'Mape šī datora diskā.',
@@ -4098,15 +3846,7 @@ const _dutchSourceAddLv = <String, String>{
   'Openen vanaf WebDAV': 'Atvērt no WebDAV',
   'Opslaan naar WebDAV': 'Saglabāt WebDAV',
   'Opgeslagen op WebDAV:': 'Saglabāts WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Vispirms iestatiet WebDAV serveri sadaļā Iestatījumi → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Izvēlēties attēlu WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nav iestatīts WebDAV serveris. Iestatiet to sadaļā Iestatījumi → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Šis serveris nav atļauts. Vispirms atzīmējiet privātu/LAN serveri kā uzticamu sadaļā Iestatījumi → WebDAV.',
   'Servertype': 'Servera veids',
   'Nextcloud of ownCloud': 'Nextcloud vai ownCloud',
   'Andere WebDAV-server': 'Cits WebDAV serveris',
@@ -4128,23 +3868,11 @@ const _dutchSourceAddLv = <String, String>{
   'Haal volle pagina uit de reeks': 'Izņemt pilno lapu no virknes',
   'Opslag': 'Krātuve',
   'Opslagwijzen': 'Glabāšanas veidi',
-  'Deze computer': 'Šis dators',
   'Ingesteld': 'Konfigurēts',
   'Niet ingesteld': 'Nav konfigurēts',
-  'Nog geen bibliotheek ingesteld': 'Neviena bibliotēka vēl nav izveidota',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Ceļi, pa kuriem varat atvērt un saglabāt prezentācijas. Noklikšķiniet uz veida, lai to konfigurētu.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Prezentācijas iepriekš norādītajās mapēs, šī datora diskā.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Atveriet un saglabājiet prezentācijas mapē savā Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Atveriet prezentācijas no git krātuves; katra saglabātā versija tiek paturēta.',
-  'Nog te verifiëren': 'Vēl jāpārbauda',
   'MASWE-zwakheid kiezen': 'Izvēlieties MASWE vājumu',
   'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',
   'Geen zwakheid gevonden': 'Vājums nav atrasts',
-  'uitleg nog niet geschreven': 'skaidrojums vēl nav uzrakstīts',
   'Getalnotatie herkennen': 'Atpazīt skaitļu formātu',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Šajā failā ir skaitļi, kuru komatu var lasīt divos veidos:',
@@ -4264,12 +3992,10 @@ const _dutchSourceAddLv = <String, String>{
   'Veelgestelde vragen': 'Biežāk uzdotie jautājumi',
   'Probleemoplossing': 'Problēmu novēršana',
   'Begrippenlijst': 'Terminu vārdnīca',
-  'API-documentatie': 'API dokumentācija',
   'Prestaties': 'Veiktspēja',
   'Beveiligingsontwerp': 'Drošības projektējums',
   'Hosting en uitrol': 'Mitināšana un izvietošana',
   'Bijdragen': 'Ieguldījums',
-  'Ontwikkelomgeving': 'Izstrādes vide',
   'Migratiegids': 'Migrācijas ceļvedis',
   'Versies…': 'Versijas…',
   'Versies:': 'Versijas:',
@@ -4310,8 +4036,6 @@ const _dutchSourceAddLv = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Zars ir pārvietots; pārlādē klāju un saglabā vēlreiz.',
   'Bijgewerkt met OciDeck': 'Atjaunināts ar OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Vispirms iestatiet Git repozitoriju sadaļā Iestatījumi → Git repozitorijs.',
   'Git-repository': 'Git repozitorijs',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Atveriet prezentācijas no Git repozitorija. Katra saglabātā versija tiek paturēta. Pilnvara tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
@@ -4327,7 +4051,6 @@ const _dutchSourceAddLv = <String, String>{
       'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Atsauces dati atrodas pašā lietotnē, tāpēc modulis darbojas uzreiz un pilnībā bezsaistē.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie paliek paslēpti, līdz tos ieslēdzat.',
-  'Procesverbetering (ontwerp)': 'Procesu uzlabošana (dizains)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Šis projekts ir Pilot Informatieautonomie blakusprodukts.',
   'Stijlprofiel exporteren': 'Eksportēt stila profilu',
@@ -4466,7 +4189,6 @@ const _dutchSourceAddLv = <String, String>{
   'genetisch gegeven': 'ģenētiskie dati',
   'parketnummer': 'krimināllietas numurs',
   'nationaal identificatienummer': 'valsts identifikācijas numurs',
-  'OciWacht (ontwerp)': 'OciWacht (dizains)',
   'Mogelijk geheim': 'Iespējams noslēpums',
   'sleutel of token': 'atslēga vai marķieris',
   'private sleutel': 'privātā atslēga',
@@ -4499,7 +4221,6 @@ const _dutchSourceAddLv = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Ievieto pilnu CVE sarakstu šajā ierīcē, lai meklēšana notiktu bezsaistē un tavs meklējamais vārds nekur neaizietu. Datubāze nāk no CVE List V5 (oficiālās CVE programmas, caur GitHub).',
   'Wat er lokaal beschikbaar is': 'Kas ir pieejams lokāli',
-  'Gegevenspakket': 'Datu pakotne',
   'Nu bijwerken': 'Atjaunināt tagad',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Dati pieejami lokāli — meklēšana notiek šajā ierīcē; nekas to nepamet.',
@@ -4518,7 +4239,6 @@ const _dutchSourceAddLv = <String, String>{
       'Pieņemt: dati šeit pieder un paziņojums pazūd. Pieņemt + brīdināt: saņēmējs redz nozīmīti, ka slaidā ir personas dati. Izlaist: atrastie dati tiek padarīti nesalasāmi ekrānā un eksportā — tavs Markdown fails saglabā sākotnējo tekstu.',
   'Alleen melden': 'Tikai ziņot',
   'PERSOONSGEGEVENS': 'PERSONAS DATI',
-  'Persoonsgegevens op deze slide': 'Personas dati šajā slaidā',
   'Volg de presentatie': 'Sekot prezentācijai',
   'Weglaten uit tonen en exporteren': 'Izlaist no rādīšanas un eksporta',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4639,8 +4359,6 @@ const _dutchSourceAddLv = <String, String>{
   'Bewerk deze slide': 'Rediģēt šo slaidu',
   'Bewijs verwijderen': 'Noņemt pierādījumu',
   '(nog leeg)': '(vēl tukšs)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Vispirms norādiet konstatējuma ID, lai pievienotu pierādījumus.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Pievienojiet ekrānuzņēmumus vai videoklipus kā pierādījumus. Katrs pierādījums kļūst par atsevišķu slaidu tūlīt pēc konstatējuma un tiek iekļauts eksportā.',
   'Uitvoering testen conform standaard': 'Testēšana saskaņā ar standartu',

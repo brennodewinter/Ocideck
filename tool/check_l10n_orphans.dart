@@ -80,10 +80,11 @@ import 'package:analyzer/dart/ast/visitor.dart';
 
 /// Hoeveel wezen er nog in de tabel staan. RATCHET: mag dalen, nooit stijgen.
 ///
-/// Niet nul, want dit is de eerste meting: de opruiming is bewust een aparte
-/// stap (#1512). Wat de ratchet nú al doet is de aanwas stoppen — een sleutel
-/// die je toevoegt en nooit aanroept laat het getal stijgen en faalt de poort.
-const int orphanBaseline = 181;
+/// Nul sinds #1520: de eerste meting stond op 181 en die zijn alle 181 uit de
+/// 32 taaltabellen gehaald. Nul is hier de enige rustige stand — een sleutel
+/// die je toevoegt en nooit aanroept laat het getal stijgen en faalt de poort,
+/// en er is geen erfenis meer die dat signaal kan verbergen.
+const int orphanBaseline = 0;
 
 /// Het bestand dat de sleutelvoorraad definieert.
 ///

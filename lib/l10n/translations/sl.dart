@@ -41,17 +41,13 @@ const _stringsSl = {
   'settings': 'Nastavitve',
   'settingsGeneral': 'Splošno',
   'settingsColors': 'Barve',
-  'settingsLogo': 'Logotip',
   'language': 'Jezik',
   'applicationLanguage': 'Jezik aplikacije',
   'languageHelp':
       'Vmesnik takoj zamenja jezik. Vsebina predstavitve ostane nespremenjena.',
-  'presentationFolder': 'Mapa predstavitev',
   'exportFolderSetting': 'Mapa za izvoz',
-  'notSet': 'Ni nastavljeno',
   'nextToPresentationFile': 'Ob datoteki predstavitve',
   'choose': 'Izberi',
-  'removeDefaultFolder': 'Odstrani privzeto mapo',
   'removeExportFolder': 'Odstrani mapo za izvoz',
   'exportFolderHelp':
       'Vsi izvozi (PDF/PPTX) se shranijo tukaj. Če ni nastavljeno, se izvoz shrani ob datoteki predstavitve.',
@@ -85,8 +81,6 @@ const _dutchSourceSl = {
   'Handtekening tekenen': 'Nariši podpis',
   'Teken je handtekening in het vak hieronder.':
       'Narišite svoj podpis v polje spodaj.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Podatkovni paket je datoteka .zip z referenčnimi podatki za ta modul. Najprej se preveri glede na prstni odtis, vgrajen v aplikacijo; sprejet je le paket, ki ustreza tej različici aplikacije.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stolpci',
@@ -193,7 +187,6 @@ const _dutchSourceSl = {
       'Slike in medije si delijo predstavitve v isti mapi. Točno ime izbereš kar v sistemskem oknu.',
   'Alle bibliotheken': 'Vse knjižnice',
   'Andere map…': 'Druga mapa…',
-  'Bibliotheek verwijderen': 'Odstrani knjižnico',
   'Bibliotheken': 'Knjižnice',
   'Geen bibliotheek': 'Ni knjižnice',
   'Geen presentaties (.md) gevonden.': 'Ni najdenih predstavitev (.md).',
@@ -205,9 +198,6 @@ const _dutchSourceSl = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Izberi, v katero knjižnico gre predstavitev.',
   'Map toevoegen': 'Dodaj mapo',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mape, v katerih hraniš in iščeš svoje predstavitve. Vsaki daj svoje ime, da jih ločiš. Vse knjižnice se preiščejo ob odpiranju in v knjižnici slik.',
-  'Nog geen bibliotheek — voeg een map toe.': 'Še ni knjižnice — dodaj mapo.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Še ni knjižnice. Dodaj jo v Nastavitvah ali zgoraj izberi mapo za iskanje.',
   'Presentatie opslaan': 'Shrani predstavitev',
@@ -289,22 +279,11 @@ const _dutchSourceSl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Izjava o resničnosti s poročevalcem, certificiranjem, podpisom in pečatom.',
   'Uitbreidingen': 'Razširitve',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Izbirni moduli. Privzeto izklopljeni; osnovni aplikaciji ne dodajo ničesar, dokler jih ne omogočite.',
   'Gegevens opschonen': 'Počisti podatke',
   'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprej podajte soglasje za odhodni promet v razdelku Licenca in zasebnost.',
   'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Noben vir ni dosegljiv — referenčnih podatkov ni bilo mogoče nikjer prenesti. Poskusite znova ali ročno uvozite paket.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Preneseni podatki se niso ujemali s pričakovanim prstnim odtisom in so bili iz previdnosti zavrnjeni.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Podatkovni paket je bil poškodovan ali neveljaven in je bil zato zavrnjen.',
-  'Gegevenspakket kiezen': 'Izberi podatkovni paket',
-  'Kon het gekozen bestand niet lezen.':
-      'Izbrane datoteke ni bilo mogoče prebrati.',
   'Nog niet opgehaald': 'Še ni preneseno',
   'AI-assistentie': 'Pomoč UI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,22 +300,15 @@ const _dutchSourceSl = {
       'Oblačna storitev najprej zahteva vaše soglasje o zasebnosti pod "Licenca in zasebnost" in ne deluje v spletni različici.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Razumem, da se podatki pošiljajo tej zunanji storitvi',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Pomoč UI (privzeto izklopljena): če izberete lastno gostovano ali oblačno zaledje, se besedila ali slike, ki jih obdelate, pošljejo na ta naslov. Lokalni model UI na tej napravi ne pošlje ničesar.',
   'Zoek een slidetype': 'Poišči vrsto diapozitiva',
   'Alfabetisch sorteren': 'Razvrsti po abecedi',
   'Algemeen': 'Splošno',
   'Informatieveiligheid': 'Informacijska varnost',
   'Alle': 'Vse',
-  'Pentestrapportage (ontwerp)': 'Poročilo o pentestu (zasnova)',
-  'AI-assistentie (ontwerp)': 'Pomoč AI (zasnova)',
-  'Agentisch bouwplan (ontwerp)': 'Agentni načrt gradnje (zasnova)',
-  'Bijsnijden': 'Obreži',
   'Linksom': 'Zavrti levo',
   'Rechtsom': 'Zavrti desno',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povlecite sliko, da izberete, kateri del ostane viden.',
-  'Git-opslag (ontwerp)': 'Shramba Git (zasnova)',
   'Zoek in documentatie…': 'Iskanje po dokumentaciji…',
   'Geen documenten gevonden': 'Ni najdenih dokumentov',
   'Alleen afspelen (vergrendeld)': 'Samo za predstavljanje (zaklenjeno)',
@@ -350,12 +322,8 @@ const _dutchSourceSl = {
   'Techniek': 'Tehnika',
   'Licentie en naleving': 'Licenca in skladnost',
   'Architectuur': 'Arhitektura',
-  'Bouwinstructies': 'Navodila za gradnjo',
-  'Kwaliteitscontroles': 'Preverjanja kakovosti',
-  'Broncodekaart': 'Zemljevid izvorne kode',
   'Licentienaleving': 'Skladnost z licencami',
   'Softwarestuklijst (SBOM)': 'Kosovnica programske opreme (SBOM)',
-  'Samenwerking (ontwerp)': 'Sodelovanje (zasnova)',
   'Beschermen met een wachtwoord (AES-256)': 'Zaščiti z geslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Dobro shranite to geslo: če ga izgubite, tega paketa ni več mogoče odpreti.',
@@ -433,10 +401,6 @@ const _dutchSourceSl = {
   'Instelling opslaan is mislukt.': 'Shranjevanje nastavitve ni uspelo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Opomba: spletna različica lahko prenaša le s strežnikov, ki to dovoljujejo (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketi (.ocideck) v spletni različici še niso podprti.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'V spletni različici je mogoče odpreti samo predstavitve .md.',
   'Geen': 'Brez',
   'Nieuw': 'Nova',
   'Verwijderen': 'Izbriši',
@@ -525,10 +489,8 @@ const _dutchSourceSl = {
   'Audio bij deze slide': 'Zvok za ta diapozitiv',
   'Audio automatisch afspelen': 'Samodejno predvajaj zvok',
   'Audio verwijderen': 'Odstrani zvok',
-  'Geen audio gekozen': 'Zvok ni izbran',
   'Geen audiobestand gekozen': 'Zvočna datoteka ni izbrana',
   'Video automatisch afspelen': 'Samodejno predvajaj video',
-  'Geen video gekozen': 'Video ni izbran',
   'Kiezen': 'Izberi',
   'Uit bibliotheek…': 'Iz knjižnice …',
   'Van computer…': 'Iz računalnika …',
@@ -557,7 +519,6 @@ const _dutchSourceSl = {
   'Pakket importeren': 'Uvozi paket',
   'Pakket exporteren': 'Izvozi paket',
   'Map met presentaties kiezen': 'Izberi mapo s predstavitvami',
-  'Standaard map voor presentaties': 'Privzeta mapa za predstavitve',
   'Map voor exports': 'Mapa za izvoze',
   'Logo kiezen': 'Izberi logotip',
   'Kies een afbeelding': 'Izberi sliko',
@@ -570,8 +531,6 @@ const _dutchSourceSl = {
   'Map kiezen': 'Izberi mapo',
   'Kies een map met presentaties om te beginnen.':
       'Za začetek izberite mapo s predstavitvami.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'V tej mapi ni najdenih predstavitev (.md).',
   'Geen presentaties gevonden voor': 'Ni najdenih predstavitev za',
   'meer treffer(s)': 'več zadetkov',
   'Slide zoeken': 'Poišči diapozitiv',
@@ -593,8 +552,6 @@ const _dutchSourceSl = {
       'Vnesite iskalne izraze za iskanje diapozitivov po vseh predstavitvah.',
   'toegevoegd': 'dodano',
   'Eerste': 'Prvih',
-  'treffers — verfijn je zoekopdracht':
-      'zadetkov — natančneje določite iskanje',
   'treffer(s)': 'zadetkov',
   'slide': 'diapozitiv',
   'Zoeken en vervangen': 'Poišči in zamenjaj',
@@ -653,7 +610,6 @@ const _dutchSourceSl = {
   'Tekst op zijpanelen': 'Besedilo na stranskih panelih',
   'Voorbeeldtekst': 'Vzorčno besedilo',
   'Knop': 'Gumb',
-  'Profielnaam': 'Ime profila',
   'Naam van het stijlprofiel': 'Ime slogovnega profila',
   'Stijlprofiel': 'Slogovni profil',
   'Nieuw profiel': 'Nov profil',
@@ -713,16 +669,9 @@ const _dutchSourceSl = {
   'TYPE': 'VRSTA',
   'STIJL': 'SLOG',
   'Terug naar standaardstijl': 'Nazaj na privzeti slog',
-  'Automatisch doorgaan na': 'Samodejno napreduj po',
-  'Logo tonen op deze slide': 'Prikaži logotip na tem diapozitivu',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabela urejljiva med predstavljanjem',
-  'Footer tonen op deze slide': 'Prikaži nogo na tem diapozitivu',
   'Sprekersnotities...': 'Opombe govorca ...',
   'Sprekersnotities': 'Opombe govorca',
   'Notities voor tijdens het presenteren': 'Opombe za med predstavljanjem',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Način Markdown — uredite celotno predstavitev kot Marp Markdown',
   'Toepassen': 'Uporabi',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown ni bilo mogoče obdelati. Preverite sintakso.',
@@ -747,8 +696,6 @@ const _dutchSourceSl = {
   'Geen resultaten voor': 'Ni rezultatov za',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Prilagodite iskalni izraz ali dodajte opis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Uporabite »Prebrskaj« za izbiro slik s katere koli lokacije.',
   'Selecteer een\nafbeelding': 'Izberite\nsliko',
   'Gekopieerd': 'Kopirano',
   'Afbeelding verwijderen?': 'Izbrišem sliko?',
@@ -765,8 +712,6 @@ const _dutchSourceSl = {
   'spatie': 'presledek',
   'klik': 'klik',
   'cijfers': 'številke',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kliknite ali pritisnite ? / H / Esc za zaprtje',
   'Klik of druk op H / Esc om te sluiten':
       'Kliknite ali pritisnite H / Esc za zaprtje',
   'Naar slidenummer': 'Na številko diapozitiva',
@@ -777,20 +722,10 @@ const _dutchSourceSl = {
   'Presenter view (notities, klok)': 'Pogled predavatelja (opombe, ura)',
   'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
-  'Verstreken tijd resetten': 'Ponastavi pretečeni čas',
   'Automatische modus aan/uit': 'Samodejni način vklop/izklop',
   'Herhalen (loop) aan/uit': 'Ponavljanje (zanka) vklop/izklop',
-  'Na audio automatisch doorgaan': 'Samodejno nadaljuj po zvoku',
-  'Dit overzicht': 'Ta pregled',
   'Deze legenda': 'Ta legenda',
   'Terug / afsluiten': 'Nazaj / izhod',
-  'Auto (A)': 'Samodejno (A)',
-  'Handmatig (A)': 'Ročno (A)',
-  'Herhalen (L)': 'Ponavljanje (L)',
-  'Na audio (M)': 'Po zvoku (M)',
-  'Sneltoetsen (?)': 'Bližnjice (?)',
-  'Slide-overzicht (G)': 'Pregled diapozitivov (G)',
-  'Presenter view (P)': 'Pogled predavatelja (P)',
   'Tijd resetten (R)': 'Ponastavi čas (R)',
   'HUIDIGE SLIDE': 'TRENUTNI DIAPOZITIV',
   'VOLGENDE': 'NASLEDNJI',
@@ -806,15 +741,9 @@ const _dutchSourceSl = {
   'Notities weggooien': 'Zavrzi opombe',
   'Notities voor de ontvanger tijdens een cursus':
       'Opombe za prejemnika med tečajem',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Preklopite v način Markdown za dodajanje opomb.',
   'Mijn notities aan/uit': 'Vklop/izklop mojih opomb',
   'Wissel scherm (S)': 'Preklop zaslona (S)',
   'Kon niet van scherm wisselen.': 'Zaslona ni bilo mogoče preklopiti.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -861,8 +790,6 @@ const _dutchSourceSl = {
   'Selectie opheffen': 'Počisti izbor',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Sprejemam licenco EUPL 1.2 in sem prebral(a), katere podatke shranjuje OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Vaša izbira postane privzeti jezik aplikacije.',
   'Lees de volledige licentie': 'Preberi celotno licenco',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck je prosto programje pod licenco EUPL 1.2. Preden začnete, vas prosimo, da sprejmete licenco. Spodaj lahko preberete tudi, katere podatke OciDeck shranjuje na tej napravi in kdaj kaj zapusti vašo napravo.',
@@ -888,9 +815,6 @@ const _dutchSourceSl = {
   'Het antwoord van de server was te groot':
       'Odgovor strežnika je bil prevelik',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Vir Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Odpirajte in shranjujte predstavitve v mapo na svojem Nextcloud. Geslo se shrani šifrirano v ključavnici, ne skupaj z ostalimi nastavitvami.',
   'Server-URL': 'URL strežnika',
   'Gebruikersnaam': 'Uporabniško ime',
   'App-wachtwoord': 'Geslo aplikacije',
@@ -904,21 +828,12 @@ const _dutchSourceSl = {
   'Verbinding gelukt': 'Povezava uspela',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Spremembe se shranijo, ko kliknete Shrani.',
-  'Afbeelding kiezen op Nextcloud': 'Izberi sliko na Nextcloud',
-  'Openen vanaf Nextcloud': 'Odpri iz Nextcloud',
   'Vernieuwen': 'Osveži',
   'Deze map is leeg': 'Ta mapa je prazna',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Ni nastavljenega strežnika Nextcloud. Nastavite ga v Nastavitve → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Mape ni bilo mogoče naložiti. Preverite povezavo in nastavitve.',
   'Kon dit bestand niet openen.': 'Te datoteke ni bilo mogoče odpreti.',
   'Dit is geen Marp/OciDeck-presentatie.': 'To ni predstavitev Marp/OciDeck.',
   'Downloaden mislukt:': 'Prenos ni uspel:',
-  'Opgeslagen op Nextcloud:': 'Shranjeno na Nextcloud:',
   'Opslaan mislukt:': 'Shranjevanje ni uspelo:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Najprej nastavite strežnik Nextcloud v Nastavitve → Nextcloud.',
   'Opslaan naar Nextcloud': 'Shrani na Nextcloud',
   'Doelpad (zonder extensie)': 'Ciljna pot (brez končnice)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -929,9 +844,6 @@ const _dutchSourceSl = {
   'Tijden-overzicht tonen na afloop': 'Po koncu pokaži pregled časov',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Čas na diapozitiv se vedno meri; to določa le, ali se po tej predstavitvi prikaže pregled.',
-  'Oefenoverzicht tonen na afloop': 'Po koncu pokaži povzetek vaje',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Po predstavitvi pokaži pregled porabljenega časa na diapozitiv. Čas se vedno meri; to določa le, ali se zaslon prikaže.',
   'Onveilige presentatie geblokkeerd': 'Nevarna predstavitev blokirana',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Ta predstavitev ni bila odprta. Datoteka vsebuje vsebino, ki lahko izvaja kodo, predstavitev pa naj vsebuje samo podatke — nič izvršljivega.',
@@ -1014,7 +926,6 @@ const _dutchSourceSl = {
   'Online': 'Splet',
   'Lokaal bestand': 'Lokalna datoteka',
   'Geen video': 'Ni videa',
-  'Vraag (meerkeuze)': 'Vprašanje (izbirno)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Naslovno besedilo ima premalo kontrasta s sliko ozadja',
   'Herstel': 'Popravi',
@@ -1029,8 +940,6 @@ const _dutchSourceSl = {
   'Huidig punt weghalen': 'Odstrani trenutno točko',
   'Stap voor stap': 'Korak za korakom',
   'Geen animatie': 'Brez animacije',
-  'Animatiesnelheid': 'Hitrost animacije',
-  'Langzaam': 'Počasi',
   'Snel': 'Hitro',
   'Gebeurtenissen': 'Dogodki',
   'Gebeurtenis toevoegen': 'Dodaj dogodek',
@@ -1043,8 +952,6 @@ const _dutchSourceSl = {
   'Vraag': 'Vprašanje',
   'Wat wil je vragen?': 'Kaj želite vprašati?',
   'Antwoorden': 'Odgovori',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označite pravilne odgovore. Največ osem odgovorov; pri predstavljanju se naključno prikaže en pravilen in ostali napačni.',
   'Antwoord': 'Odgovor',
   'Antwoord toevoegen': 'Dodaj odgovor',
   'Goed antwoord': 'Pravilen odgovor',
@@ -1077,8 +984,6 @@ const _dutchSourceSl = {
   'Stelling': 'Trditev',
   'Formuleer een stelling die juist of onjuist is':
       'Oblikujte trditev, ki je pravilna ali napačna',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Označite vse pravilne odgovore. Pri predstavljanju se prikaže naključen nabor z vsaj enim pravilnim in enim napačnim.',
   'Juist': 'Prav',
   'Onjuist': 'Narobe',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1099,7 +1004,6 @@ const _dutchSourceSl = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Statusne barve merilnikov kokpita. Ustvarite poimenovane različice; izbrana shema velja za vse diapozitive kokpita.',
   'Standaard': 'Privzeto',
-  'Standaardkleuren gebruiken': 'Uporabi privzete barve',
   'Kleurschema verwijderen': 'Izbriši barvno shemo',
   'Schemanaam': 'Ime sheme',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1177,7 +1081,6 @@ const _dutchSourceSl = {
   'Logo en footer': 'Logotip in noga',
   'Pagina': 'Stran',
   'Presentatiestijl': 'Slog predstavitve',
-  'Presentatiestijl: ': 'Slog predstavitve: ',
   'Tekst...': 'Besedilo ...',
   'Teksteditor': 'Urejevalnik besedila',
   'Volgende pagina': 'Naslednja stran',
@@ -1190,8 +1093,6 @@ const _dutchSourceSl = {
   'Doeltijd': 'Ciljni čas',
   'Doeltijd (aftellen)': 'Ciljni čas (odštevanje)',
   'Geen aftelling': 'Brez odštevanja',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Privzeti ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
   'uit': 'izklop',
   'Doeltijd / aftellen (K)': 'Ciljni čas / odštevanje (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1264,14 +1165,8 @@ const _dutchSourceSl = {
   'Cirkel': 'Krog',
   'Spider': 'Pajek',
   'CSV importeren': 'Uvozi CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Podatki (CSV: prva vrstica = imena nizov, prvi stolpec = oznake)',
   'Gekoppeld aan': 'Povezano z',
   'Ontkoppelen': 'Prekini povezavo',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Podatke shraniti v prosojnico ali jih obdržati kot ločeno datoteko CSV ob predstavitvi?',
-  'In de slide': 'V prosojnici',
-  'Als CSV-bestand': 'Kot datoteka CSV',
   'Geen grafiekgegevens': 'Ni podatkov grafa',
   'Label': 'Oznaka',
   'Rij': 'Vrstica',
@@ -1301,7 +1196,6 @@ const _dutchSourceSl = {
   'Eigen kleur (hex)': 'Lastna barva (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Na primer #33FF33 za zeleni zaslon CRT.',
-  'Onderdeel van stijlprofiel ': 'Del slogovnega profila ',
   'Broncode lettertype': 'Pisava izvorne kode',
   'Kop (optioneel)': 'Naslov (neobvezno)',
   'Subkop (optioneel)': 'Podnaslov (neobvezno)',
@@ -1339,16 +1233,7 @@ const _dutchSourceSl = {
   'Zet het filter uit om alles weer te zien.':
       'Izklopite filter, da spet vidite vse.',
   'Welkom bij OciDeck': 'Dobrodošli v OciDeck',
-  'Privacy en gebruik': 'Zasebnost in uporaba',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck je lokalna namizna aplikacija. Vaše predstavitve in podatki se shranjujejo izključno na vašem računalniku.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Aplikacija ne zbira osebnih podatkov, statistik ali podatkov o uporabi. Vaša zasebnost je naša prednostna naloga.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Vsi podatki, ki jih vnesete v OciDeck, ostanejo v vašem lokalnem sistemu in se ne pošiljajo na zunanje strežnike.',
   'Licentie (EUPL 1.2)': 'Licenca (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'S klikom na »Sprejmem« sprejemate te pogoje in soglašate z uporabo OciDeck.',
   'Volledige licentie online': 'Celotna licenca na spletu',
   'Akkoord gaan': 'Sprejmem',
   'Privacy': 'Zasebnost',
@@ -1437,8 +1322,6 @@ const _dutchSourceSl = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Izvoz blokiran zaradi resnih težav s kakovostjo.',
   'Alle meldingen': 'Vse težave',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… in več težav v plošči kakovosti.',
   'Classificatie-handhaving': 'Uveljavljanje klasifikacije',
   'Vrijgaveplafond': 'Zgornja meja objave',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1457,11 +1340,9 @@ const _dutchSourceSl = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Nastavite raven TLP — izvoz je blokiran s pravilnikom o klasifikaciji.',
   'Tabel bewerken': 'Uredi tabelo',
-  'Pijltjes · Tab · Esc': 'Puščice · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Uredi tabelo (na tabelnih prosojnicah)',
   'Tabel bewerken (E)': 'Uredi tabelo (E)',
   'Tab wisselt cel · Esc sluit': 'Tab preklopi celico · Esc zapre',
-  'Pen · markeerstift · ⇧E': 'Pero · označevalnik · ⇧E',
   'Gestapelde staaf': 'Naložen stolpec',
   'Spreiding': 'Razpršenost',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lista prosojnice',
@@ -1504,10 +1385,6 @@ const _dutchSourceSl = {
       'Omrežna napaka — preverite povezavo in poskusite znova.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Nekaj je nepričakovano šlo narobe. Podrobnosti so v dnevniku.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud ni (pravilno) nastavljen — preverite podatke strežnika v Nastavitve → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Ta strežnik ni dovoljen. Zasebni/LAN strežnik najprej označite kot zaupanja vreden v Nastavitve → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Strežnik ni dosegljiv — preverite povezavo in URL strežnika.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1535,8 +1412,6 @@ const _dutchSourceSl = {
   'Uit recente bestanden verwijderen': 'Odstrani iz nedavnih datotek',
   'OciDeck wordt gestart…': 'Zagon OciDecka…',
   'Herstelbestanden': 'Obnovitvene datoteke',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Obnovitvene datoteke vsebujejo celotno vsebino vaših predstavitev v navadnem besedilu. Samodejno se počistijo po 7 dneh; tukaj jih lahko izbrišete takoj.',
   'Herstelbestanden nu wissen': 'Izbriši obnovitvene datoteke zdaj',
   'Er waren geen herstelbestanden.': 'Obnovitvenih datotek ni bilo.',
   'herstelbestand(en) gewist.': 'obnovitvenih datotek izbrisanih.',
@@ -1965,7 +1840,6 @@ const _dutchSourceAddSl = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Ustvarimo kopijo v novem zavihku; vaša izvirna datoteka ostane nespremenjena.',
   'Welk formaat?': 'Katera oblika?',
-  'dia\'s, gesplitst op kop.': 'diapozitivov, razdeljenih po naslovu.',
   'document': 'dokument',
   'volledig': 'popolno',
   'Invoegen': 'Vstavi',
@@ -2124,12 +1998,8 @@ const _dutchSourceAddSl = <String, String>{
   'Alle integraties': 'Vse integracije',
   'Alles inschakelen': 'Omogoči vse',
   'Alles uitschakelen': 'Onemogoči vse',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Mapa s poročili je že nastavljena, zato povezava ostane dostopna in obstoječo predstavitev OpenKAT je še vedno mogoče posodobiti.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Povezave z drugimi sistemi. Vsaka povezava je privzeto izklopljena in ostane neaktivna, dokler je ne vklopite.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Preberi mape s poročili OpenKAT kot en sam vodstveni pregled.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Uvoz predstavitev iz PowerPoint (.pptx), Keynote (.key) in Impress (.odp) kot uredljiv komplet. Povezave z drugimi sistemi, kot je OpenKAT, so pod Integracije.',
   'Media (WebRTC)': 'Predstavnost (WebRTC)',
@@ -2293,7 +2163,6 @@ const _dutchSourceAddSl = <String, String>{
   'Van toepassing': 'Velja',
   'Voortgang': 'Napredek',
   'Voortgang managementsysteem': 'Napredek sistema upravljanja',
-  'Voortgangsoverzicht bijgewerkt': 'Pregled napredka posodobljen',
   'Welk deel?': 'Kateri del?',
   'beheersmaatregelen geladen': 'naloženih kontrol',
   'geïmplementeerd': 'uvedeno',
@@ -2371,10 +2240,6 @@ const _dutchSourceAddSl = <String, String>{
       'To ni videti kot veljaven ključ za obnovitev.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ta ključ za obnovitev izvira iz novejše različice OciDecka.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Spletni pomnilnik za slike je poln (največ 256 MB). Najprej shranite svoje delo kot datoteko .ocideck, da preprečite izgubo podatkov. Nato uporabite manj slik ali manjše slike, zaprite druge predstavitve ali znova naložite brez odpiranja drugih predstavitev.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Spletni pomnilnik za slike je poln (največ 256 MB). Shranite delo kot datoteko .ocideck in znova naložite stran, preden dodate več slik.',
   'Afbeeldingsrechten': 'Pravice do slike',
   'Afbeeldingsrechten controleren…': 'Preverite pravice do slike ...',
   'Afdoening': 'Poravnava',
@@ -2425,8 +2290,6 @@ const _dutchSourceAddSl = <String, String>{
   'Verifiëren': 'Preveri',
   'Deelnemers verifiëren': 'Preveri udeležence',
   '(dit apparaat)': '(ta naprava)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Primerjaj prstni odtis vsake naprave prek zaupanja vrednega kanala — preberita si ga med seboj ali ga pošlji po poti, ki ji zaupaš. Če se ujemata, delaš s pravimi napravami in nihče se ni vrinil vmes. Če se razlikujeta, prekini sodelovanje.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'To ni veljavna povezava za povabilo.',
@@ -2486,7 +2349,6 @@ const _dutchSourceAddSl = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Sodelujte v živo pri predstavitvi prek homeserverja Matrix kot šifriranega posrednika. Vsebina je šifrirana od konca do konca z lastnimi ključi OciDecka; strežnik vidi samo šifrirane podatke. Vnesite homeserver in drugje ustvarjen dostopni žeton — OciDeck nikoli ne zahteva vašega gesla. Žeton je shranjen šifrirano v zbirki ključev, ne poleg drugih nastavitev.',
   'wordt door de test ingevuld': 'izpolni preizkus',
-  'Versleuteld doorgeefluik (ontwerp)': 'Šifriran posredovalnik (zasnova)',
   'Meer documentatie op de repository': 'Več dokumentacije v repozitoriju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Celotna dokumentacija — vključno z arhitekturo, gradnjo, izvorno kodo in zasnovo — je v repozitoriju.',
@@ -2726,50 +2588,14 @@ const _dutchSourceAddSl = <String, String>{
       'Kateri merilni podatki manjkajo ali so zastareli?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Na katerih podatkih temelji to poročilo?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Širok, a dejanski pregled upravljanja s sledljivimi merilnimi trenutki.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Uvršča se brez skupnega rezultata in ločeno prikazuje manjkajoče meritve.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Prikazuje število resnosti, udeležence in prenesene meritve glede na trenutek.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizira vrste iskanja po prizadetih organizacijah, sistemih in opazovanjih.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Prikazuje kritične/visoke številke brez načrtnega tehtanja.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Prikazuje števec, imenovalec in samo zanesljive odstotke.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Združuje dobesedna priporočila iz OpenKAT brez lastne prioritete.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Ciljna trenutna podoba ene organizacije in njen datum merjenja.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Primerja dva izbrana merilna trenutka znotraj ene organizacije.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Razlikuje novo, novo in neopaženo.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Uporablja le zanesljive datume prvih opazovanj.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Razvršča sisteme z ločenimi števci resnosti.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Prikazuje posamezne delta vrednosti brez tehtanega rezultata.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Primerja števec in imenovalec z dokazljivo primerljivo pokritostjo.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Popisuje preverjene sisteme, imena gostiteljev in naslove IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Loči nadzorovano, nenadzorovano in neznano.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Prikazuje samo eksplicitno dokazane spremljajoče mutacije.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Prikazuje organizacije in sisteme okoli ene zanesljive povezave CVE.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Razvrsti CVE z eksplicitno deduplikacijo.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Razlikuje nove, nove in neopažene CVE.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Prikazuje manjkajoče, zastarele in dejansko uporabljene meritve.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Računi za ključne datume, izvorne datoteke, adapterje in izvorne zgoščene vrednosti.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Še ni na voljo: vir ne dokazuje statusa spremljanja za vsa sredstva.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2813,11 +2639,6 @@ const _dutchSourceAddSl = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Katero poročilo odgovarja na vaše vprašanje?',
   'Meer rapportvragen': 'Več vprašanj o poročilu',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Kateri sistemi so ranljivi za CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizacije in ranljivi sistemi okoli ene ranljivosti.',
-  'Organisaties met kwetsbare systemen': 'Organizacije z ranljivimi sistemi',
   'Kwetsbare systemen': 'Ranljivi sistemi',
   'Kritiek/hoog': 'Kritično/visoko',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2839,8 +2660,6 @@ const _dutchSourceAddSl = <String, String>{
   'Bruikbaar': 'Uporabno',
   'CVE zoeken': 'CVE iskanje',
   'Critical/high': 'Kritično/visoko',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Kakovost podatkov, manjkajoče meritve in zastarelost.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Izbrana poročila ne vsebujejo dovolj zanesljivih podatkov za ta del.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2867,9 +2686,6 @@ const _dutchSourceAddSl = <String, String>{
   'Geen bruikbare meetdatum': 'Ni uporabnega datuma meritve',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Ustvarjeni diapozitivi se osvežijo. Vaši lastni diapozitivi in ​​kopije se ohranijo.',
-  'Getroffen organisaties en systemen': 'Prizadete organizacije in sistemi',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Prizadete organizacije in sistemi okoli ene ranljivosti.',
   'Getroffen systemen': 'Prizadeti sistemi',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Poročila ni bilo mogoče ustvariti. Vaše izbire so ohranjene; preverite opozorila in poskusite znova.',
@@ -2879,20 +2695,15 @@ const _dutchSourceAddSl = <String, String>{
   'Keuzes wijzigen…': 'Spremeni izbire ...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Izberite mapo, v katero je OpenKAT postavil poročila. OciDeck bere samo to mapo; nič se ne spremeni ali pošlje.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Izberite vprašanje, na katero naj poročilo odgovori. OciDeck določi ustrezno strukturo.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Izberite CVE, ki ga najdete v poročilih.',
   'Laatste bruikbare meting': 'Zadnja uporabna meritev',
   'Live voorvertoning van de rapportopbouw':
       'Predogled strukture poročila v živo',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Informacije o upravljanju in nadzoru več organizacij.',
   'Meer instellingen': 'Več nastavitev',
   'Nederlands': 'nizozemščina',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Vsaka izbrana organizacija nima meritev za to obdobje.',
-  'Nieuwe en verdwenen bevindingen': 'Nove in manjkajoče ugotovitve',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Še ni na voljo: ta poročila ne vsebujejo zanesljivih številk CVE.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2927,8 +2738,6 @@ const _dutchSourceAddSl = <String, String>{
       'Za eno ali več organizacij manjka uporabna trenutna meritev.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Za primerjavo sta potrebna dva merilna momenta. Zdaj je bila najdena ena meritev.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Napredek v primerjavi s prejšnjim trenutkom merjenja.',
   'Waar staan de OpenKAT-rapportages?': 'Kje so poročila OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'Kaj se je spremenilo v eni organizaciji?',
@@ -2942,7 +2751,6 @@ const _dutchSourceAddSl = <String, String>{
   'bruikbaar': 'uporaben',
   'metingen': 'meritve',
   'organisaties': 'organizacije',
-  'organisaties geselecteerd': 'izbranih organizacij',
   'rapportages gebruikt': 'uporabljenih poročil',
   'systemen': 'sistemi',
   'Nog geen specificatielimiet': 'Še ni specifikacijske meje',
@@ -3085,7 +2893,6 @@ const _dutchSourceAddSl = <String, String>{
       'je na diapozitivu drevesa, a se drugje ne uporablja — povežite ga z matriko, tokom ali drugim diapozitivom.',
   'Nieuw verbeteringsproject': 'Nov projekt izboljšav',
   'Kader': 'Okvir',
-  'Projecttitel': 'Naslov projekta',
   'Primaire Y-metriek (Y-01)': 'Primarna Y metrika (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Na primer: čas order intake v delovnih dneh',
@@ -3139,10 +2946,6 @@ const _dutchSourceAddSl = <String, String>{
       'Brskalnik blokira medije iz zunanjega vira. Odprite to predstavitev v aplikaciji za prikaz spletnih medijev.',
   'Bron niet toegestaan': 'Vir ni dovoljen',
   'Deze URL is door de beveiliging geweigerd.': 'Ta URL je varnost zavrnila.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Uvoz gradiva iz drugih sistemov. Dva vira: predstavitve iz PowerPoint (.pptx), Keynote (.key) in Impress (.odp) postanejo uredljiv komplet, poročila OpenKAT (mapa z JSON) pa en sam vodstveni pregled. Kje je mapa OpenKAT, se nastavi pod Integracije.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Uvoz predstavitev iz PowerPoint (.pptx), Keynote (.key) in Impress (.odp) kot uredljiv komplet. Branje map s poročili OpenKAT je na voljo samo v namizni različici.',
   'Alinea': 'Odstavek',
   'Audio "{bestand}"': 'Zvok "{bestand}"',
   'Deck opbouwen…': 'Sestavljanje predstavitve…',
@@ -3263,8 +3066,6 @@ const _dutchSourceAddSl = <String, String>{
       'Kazalo kontrolnega seznama: za vsak test stabilni id, kanonični naslov in kategorija. Vsebina samega vodnika ni vključena.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Kazalo testov v2.0.0: za vsak test stabilni id, kanonični naslov, kategorija MASVS in šibkost MASWE. Umaknjeni testi v1 in ograde niso vključeni; prav tako ne vsebina vodnika.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Seznam šibkosti (117): id, naslov, kategorija MASVS, platforma in povezava CWE. Tri četrtine pri viru še niso izpisane; te so vključene, označene. Umaknjene šibkosti niso.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Celoten seznam (id, ime, opis) in lastno izbrano jedro z našimi opombami za odpravo.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3311,33 +3112,16 @@ const _dutchSourceAddSl = <String, String>{
       'Vsaka datoteka se pretvori posebej in shrani kot lastna predstavitev v ciljni mapi. Če ena spodleti, se vrsta preprosto nadaljuje.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Uvoz več predstavitev hkrati jih zapiše kot datoteke v mapo; v brskalniški različici to ni mogoče.',
-  'Nu importeren': 'Uvozi zdaj',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Pregled je pripravljen v novem zavihku.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Prebere mapo s poročili OpenKAT (JSON) in iz nje zgradi en sam vodstveni pregled: sisteme, ugotovitve po resnosti, najdlje odprte točke in gibanje skozi zaporedne meritve. Isto dejanje na obstoječi predstavitvi OpenKAT jo posodobi in vaše lastne prosojnice pusti na mestu.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Uvoz samo bere; v tej mapi se nič ne spremeni in nič ne pošlje. Datoteke, ki niso poročila OpenKAT, se preskočijo in navedejo v poročilu o uvozu.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Določite mapo, v kateri so vaša poročila OpenKAT (JSON). Uvoz prebere to mapo in iz nje zgradi en sam vodstveni pregled; če je mapa nastavljena tukaj, je ni treba izbirati vsakič.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Uvoz OpenKAT bere mapo z diska in je na voljo samo v namizni različici.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Mapa s poročili še ni določena, zato uvoz zanjo vpraša vsakič.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Mapa s poročili je že nastavljena, zato vstopna točka ostane dostopna in obstoječo predstavitev OpenKAT je še vedno mogoče posodobiti.',
   'Integraties': 'Integracije',
-  'Naar Integraties': 'Na Integracije',
   'Map kiezen…': 'Izberi mapo…',
   'Map wissen': 'Počisti mapo',
-  'OpenKAT-rapportages importeren…': 'Uvozi poročila OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Izberi mapo s poročili OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Poročila OpenKAT uvožena.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Komplet OpenKAT posodobljen; ročni diapozitivi so ohranjeni.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'V tej mapi ni najdenih poročil OpenKAT.',
-  'OpenKAT-import mislukt.': 'Uvoz iz OpenKAT ni uspel.',
   'rapportages': 'poročil',
   'overgeslagen': 'preskočenih',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3396,8 +3180,6 @@ const _dutchSourceAddSl = <String, String>{
   'Label op de primaire knop': 'Oznaka na glavnem gumbu',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Ugotovitve, ki so bile pregledane in puščene. Ne javljajo se več, vendar jih pregled še vedno najde in ne štejejo kot razrešene. Tapni za vrnitev ene.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Odlaganje ugotovitve o zasebnosti (zasnova)',
   'Deze is beoordeeld en mag blijven': 'Pregledano, to lahko ostane',
   'Mogelijk gemaakt door': 'Omogočil',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3409,10 +3191,8 @@ const _dutchSourceAddSl = <String, String>{
   'Technische melding:': 'Tehnično sporočilo:',
   'presentaties': 'predstavitve',
   '/Presentaties': '/Predstavitve',
-  'Rapportagedistributie (ontwerp)': 'Distribucija poročil (zasnova)',
   'De export is mislukt.': 'Izvoz ni uspel.',
   'Presenteer vanaf hier': 'Predstavi od tukaj',
-  'Teams-gastclient (ontwerp)': 'Odjemalec Teams za goste (zasnova)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kako široko se sme to gradivo deliti?',
   'Wat betekenen deze niveaus?': 'Kaj pomenijo te ravni?',
@@ -3531,8 +3311,6 @@ const _dutchSourceAddSl = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Predstavitve, ki ostanejo navadne datoteke Markdown: berljive, po njih je mogoče iskati in odpreti jih je mogoče s katerim koli urejevalnikom.',
   'sjablonen om mee te beginnen, of leeg': 'predlog za začetek ali prazna',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Izpuščanje je vklopljeno: najdeni podatki so počrnjeni, vse slike, video in zvok tega diapozitiva pa ne gredo na zaslon ali v izvoz. Tvoja datoteka markdown ohrani vse.',
   'Mijn tekst': 'Moje besedilo',
   'Wat zij zien': 'Kar vidijo oni',
   'Presentatiegegevens': 'Podatki predstavitve',
@@ -3756,7 +3534,6 @@ const _dutchSourceAddSl = <String, String>{
   'Opslaan naar…': 'Shrani v…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Najprej nastavite povezavo v Nastavitve → Shramba.',
-  'Beginnen met:': 'Začnite z:',
   'Verlopen datums markeren': 'Označi pretekle datume',
   'Datums gemarkeerd': 'Datumi označeni',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3782,28 +3559,15 @@ const _dutchSourceAddSl = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Napadalna površina po vrsti predmeta: koliko jih je, koliko zahteva delo, kaj je novo in kaj ni nikogaršnje. Zadnje je običajno tisti pogovor.',
   'Acties en besluiten': 'Ukrepi in odločitve',
-  'Actie toevoegen': 'Dodaj ukrep',
-  'Actie verwijderen': 'Odstrani ukrep',
   'Actie': 'Ukrep',
   'Deadline': 'Rok',
-  'Op de lijst sinds': 'Na seznamu od',
   'Stand': 'Stanje',
-  'Wat vraagt u': 'Kaj prosite',
   'geen datum': 'brez datuma',
-  'Ter informatie': 'V vednost',
   'Besluit gevraagd': 'Potrebna odločitev',
   'Escalatie': 'Eskalacija',
   'Open': 'Odprto',
   'Loopt': 'V teku',
   'Afgerond': 'Zaključeno',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Oznako na prosojnici dobi le odločitev ali eskalacija; "zamuja" izhaja iz roka in ga ne nastavljate sami.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Datumi kot llll-mm-dd. Drugačen zapis je zavrnjen, ne uganjen: 05-08-2026 sta dva različna dneva.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Prosojnica ukrepov nosi največ osem vrstic; nato dvorana preleti, namesto da bi odločala.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Kaj se mora zgoditi, kdo to naredi in do kdaj. Pri vsaki vrstici navedite, ali je v vednost ali prosite za odločitev — to dvorana išče.',
   'Scorecard': 'Kartica kazalnikov',
   'Cijfer toevoegen': 'Dodaj kazalnik',
   'Cijfer verwijderen': 'Odstrani kazalnik',
@@ -3892,8 +3656,6 @@ const _dutchSourceAddSl = <String, String>{
       'Žeton je veljaven, a tega ne sme — daj mu več pravic na repozitoriju.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Prijavljen, a brez dostopa — geslo ni težava. Prosi za pravice na tej mapi.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licence leksikonov: kaj je treba še vprašati',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'To je videti kot celoten DAV URL. Pri Nextcloudu OciDeck to pot izpelje sam — sem sodi samo strežnik.',
   'Overnemen': 'Uporabi',
@@ -3936,8 +3698,6 @@ const _dutchSourceAddSl = <String, String>{
   'kenteken': 'registrska številka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Za jezik te predstavitve ni seznama ključnih besed za posebne vrste osebnih podatkov. Vzorci s kontrolno številko (EMŠO, IBAN, potni list) delujejo; besede kot »diagnoza« ali »osumljenec« niso prepoznane.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Seznam ključnih besed za posebne vrste osebnih podatkov je za jezik te predstavitve zelo skromen. Ne računajte na to, da bodo najdene besede kot »diagnoza« ali »osumljenec«.',
   'Landpakketten voor identificatienummers':
       'Državni paketi za identifikacijske številke',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3967,8 +3727,6 @@ const _dutchSourceAddSl = <String, String>{
       'Ime strežnika ne obstaja ali ga ni mogoče poiskati. Preveri, ali je v URL-ju strežnika tipkarska napaka.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Ta strežnik ima zasebni ali LAN naslov. Označi ga kot zaupanja vreden interni v Nastavitve → Shramba.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Potrdilu tega strežnika ni zaupanja. Samopodpisano potrdilo ne deluje; uporabi potrdilo priznanega izdajatelja.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Strežnik preusmerja na drug naslov. Vnesi ta naslov neposredno — preusmeritvam ne sledimo, ker lahko obidejo varnostno preverjanje.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4004,8 +3762,6 @@ const _dutchSourceAddSl = <String, String>{
   'Opslaan naar S3': 'Shrani v S3',
   'Opgeslagen in S3:': 'Shranjeno v S3:',
   'Hier staat niets': 'Tu ni ničesar',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Vsebine ni bilo mogoče naložiti. Preveri povezavo in nastavitve.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Končna točka ni dosegljiva — preveri povezavo in končno točko.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4014,8 +3770,6 @@ const _dutchSourceAddSl = <String, String>{
       'Končna točka je vrnila napako. Poskusi pozneje.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Ta končna točka ne zna pisati pogojno, zato tvoje delo ni zaščiteno pred tujim. Shrani pod novim imenom, če na tej predstavitvi dela še kdo.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Vedro S3 ni nastavljeno. Nastavi ga v Nastavitve → Shramba.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Najprej nastavi vedro S3 v Nastavitve → Shramba.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4061,10 +3815,6 @@ const _dutchSourceAddSl = <String, String>{
       'Ta slika prikazuje vsaj toliko prepoznavnih obrazov: {count}.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Te slike ni bilo mogoče preveriti za obraze. Format ni podprt (na primer HEIC). To ne pomeni, da na njej ni nikogar — pomeni, da ni bilo pregledano.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Ta slika prikazuje prepoznaven obraz.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Ta slika prikazuje prepoznavne obraze: {count}.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Slika, na kateri je nekdo prepoznaven, je osebni podatek, tudi brez imena.',
   'herkenbaar gezicht op een afbeelding': 'prepoznaven obraz na sliki',
@@ -4080,8 +3830,6 @@ const _dutchSourceAddSl = <String, String>{
   'Organisatie': 'Organizacija',
   'Welke verbinding?': 'Katera povezava?',
   'Bestandsverbindingen': 'Datotečne povezave',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Mesta, kjer hranite in iščete predstavitve — mape v tem računalniku, strežniki WebDAV in repozitoriji git vperemeš. Povlecite jih v želeni vrstni red: najvišji vsake vrste velja kot privzeti.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Repozitorij git; vsaka shranjena različica se ohrani.',
   'Een map op de schijf van deze computer.': 'Mapa na disku tega računalnika.',
@@ -4105,15 +3853,7 @@ const _dutchSourceAddSl = <String, String>{
   'Openen vanaf WebDAV': 'Odpri iz WebDAV',
   'Opslaan naar WebDAV': 'Shrani na WebDAV',
   'Opgeslagen op WebDAV:': 'Shranjeno na WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Najprej nastavite strežnik WebDAV v Nastavitve → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Izberi sliko na WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Ni nastavljenega strežnika WebDAV. Nastavite ga v Nastavitve → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV ni (pravilno) nastavljen — preverite podatke strežnika v Nastavitve → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Ta strežnik ni dovoljen. Zasebni/LAN strežnik najprej označite kot zaupanja vreden v Nastavitve → WebDAV.',
   'Servertype': 'Vrsta strežnika',
   'Nextcloud of ownCloud': 'Nextcloud ali ownCloud',
   'Andere WebDAV-server': 'Drug strežnik WebDAV',
@@ -4135,23 +3875,11 @@ const _dutchSourceAddSl = <String, String>{
   'Haal volle pagina uit de reeks': 'Odstrani polno stran iz zaporedja',
   'Opslag': 'Shramba',
   'Opslagwijzen': 'Načini shranjevanja',
-  'Deze computer': 'Ta računalnik',
   'Ingesteld': 'Nastavljeno',
   'Niet ingesteld': 'Ni nastavljeno',
-  'Nog geen bibliotheek ingesteld': 'Nobena knjižnica še ni nastavljena',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Poti, po katerih lahko odpirate in shranjujete predstavitve. Kliknite način, da ga nastavite.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Predstavitve v zgornjih mapah, na disku tega računalnika.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Odpirajte in shranjujte predstavitve v mapi na svojem Nextcloudu.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Odpirajte predstavitve iz repozitorija git; vsaka shranjena različica se ohrani.',
-  'Nog te verifiëren': 'Še je treba preveriti',
   'MASWE-zwakheid kiezen': 'Izberi šibkost MASWE',
   'Zoek op naam, id of categorie': 'Iskanje po imenu, id-ju ali kategoriji',
   'Geen zwakheid gevonden': 'Šibkosti ni bilo mogoče najti',
-  'uitleg nog niet geschreven': 'razlaga še ni napisana',
   'Getalnotatie herkennen': 'Prepoznaj obliko števil',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Ta datoteka vsebuje števila, katerih vejico je mogoče brati na dva načina:',
@@ -4268,12 +3996,10 @@ const _dutchSourceAddSl = <String, String>{
   'Veelgestelde vragen': 'Pogosta vprašanja',
   'Probleemoplossing': 'Odpravljanje težav',
   'Begrippenlijst': 'Slovarček',
-  'API-documentatie': 'Dokumentacija API',
   'Prestaties': 'Zmogljivost',
   'Beveiligingsontwerp': 'Zasnova varnosti',
   'Hosting en uitrol': 'Gostovanje in uvajanje',
   'Bijdragen': 'Prispevanje',
-  'Ontwikkelomgeving': 'Razvojno okolje',
   'Migratiegids': 'Vodnik za migracijo',
   'Versies…': 'Različice…',
   'Versies:': 'Različice:',
@@ -4314,8 +4040,6 @@ const _dutchSourceAddSl = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Veja se je premaknila; znova naloži komplet in shrani znova.',
   'Bijgewerkt met OciDeck': 'Posodobljeno z OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Najprej nastavite repozitorij Git v Nastavitve → Repozitorij Git.',
   'Git-repository': 'Repozitorij Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Odprite predstavitve iz repozitorija Git. Vsaka shranjena različica se ohrani. Žeton je shranjen šifrirano v zbirki ključev, ne poleg drugih nastavitev.',
@@ -4331,7 +4055,6 @@ const _dutchSourceAddSl = <String, String>{
       'Poročilne prosojnice in referenčni podatki za informacijsko varnost: ugotovitve, kontrolni seznami, matrike obsega in podpis. Strukturirano po MIAUW in široko uporabno za penteste, revizije in varnostne raziskave. Referenčni podatki so v sami aplikaciji, zato modul deluje takoj in povsem brez povezave.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Izbirni moduli. Privzeto izklopljeni; ostanejo skriti, dokler jih ne omogočite.',
-  'Procesverbetering (ontwerp)': 'Izboljševanje procesov (zasnova)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ta projekt je stranski produkt projekta Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Izvozi profil sloga',
@@ -4471,7 +4194,6 @@ const _dutchSourceAddSl = <String, String>{
   'genetisch gegeven': 'genetski podatek',
   'parketnummer': 'opravilna številka kazenske zadeve',
   'nationaal identificatienummer': 'nacionalna identifikacijska številka',
-  'OciWacht (ontwerp)': 'OciWacht (zasnova)',
   'Mogelijk geheim': 'Možna skrivnost',
   'sleutel of token': 'ključ ali žeton',
   'private sleutel': 'zasebni ključ',
@@ -4504,7 +4226,6 @@ const _dutchSourceAddSl = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Postavi celoten seznam CVE na to napravo, da iskanje poteka brez povezave in tvoj iskalni izraz ne gre nikamor. Zbirka podatkov prihaja iz CVE List V5 (uradni program CVE, prek GitHuba).',
   'Wat er lokaal beschikbaar is': 'Kaj je na voljo lokalno',
-  'Gegevenspakket': 'Paket podatkov',
   'Nu bijwerken': 'Posodobi zdaj',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Podatki so na voljo lokalno — iskanje poteka na tej napravi; nič je ne zapusti.',
@@ -4523,7 +4244,6 @@ const _dutchSourceAddSl = <String, String>{
       'Sprejmi: podatki sodijo sem in obvestilo izgine. Sprejmi + opozori: prejemnik vidi značko, da so na prosojnici osebni podatki. Izpusti: najdeni podatki postanejo nečitljivi na zaslonu in v izvozu — tvoja datoteka Markdown obdrži izvirno besedilo.',
   'Alleen melden': 'Samo javi',
   'PERSOONSGEGEVENS': 'OSEBNI PODATKI',
-  'Persoonsgegevens op deze slide': 'Osebni podatki na tej prosojnici',
   'Volg de presentatie': 'Sledi predstavitvi',
   'Weglaten uit tonen en exporteren': 'Izpusti iz prikaza in izvoza',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4643,8 +4363,6 @@ const _dutchSourceAddSl = <String, String>{
   'Bewerk deze slide': 'Uredi ta diapozitiv',
   'Bewijs verwijderen': 'Odstrani dokaz',
   '(nog leeg)': '(še prazno)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Za pripenjanje dokazov najprej vnesite ID ugotovitve.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Dodajte posnetke zaslona ali videoposnetke kot dokaz. Vsak dokaz postane svoj diapozitiv takoj za ugotovitvijo in je vključen v izvoz.',
   'Uitvoering testen conform standaard': 'Testiranje po standardu',

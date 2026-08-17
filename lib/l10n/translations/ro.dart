@@ -42,17 +42,13 @@ const _stringsRo = {
   'settings': 'Setări',
   'settingsGeneral': 'General',
   'settingsColors': 'Culori',
-  'settingsLogo': 'Logo',
   'language': 'Limbă',
   'applicationLanguage': 'Limba aplicației',
   'languageHelp':
       'Interfața își schimbă limba imediat. Conținutul prezentării rămâne neschimbat.',
-  'presentationFolder': 'Folder prezentări',
   'exportFolderSetting': 'Folder export',
-  'notSet': 'Nesetat',
   'nextToPresentationFile': 'Lângă fișierul prezentării',
   'choose': 'Alege',
-  'removeDefaultFolder': 'Elimină folderul implicit',
   'removeExportFolder': 'Elimină folderul de export',
   'exportFolderHelp':
       'Toate exporturile (PDF/PPTX) se salvează aici. Dacă nu e setat, exporturile se salvează lângă fișierul prezentării.',
@@ -86,8 +82,6 @@ const _dutchSourceRo = {
   'Handtekening tekenen': 'Desenează semnătura',
   'Teken je handtekening in het vak hieronder.':
       'Desenează-ți semnătura în caseta de mai jos.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Un pachet de date este un .zip cu datele de referință pentru acest modul. Este mai întâi verificat față de amprenta încorporată în aplicație; se acceptă doar un pachet care corespunde acestei versiuni a aplicației.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',
@@ -195,7 +189,6 @@ const _dutchSourceRo = {
       'Imaginile și media sunt partajate de prezentările din același folder. Numele exact îl alegi imediat în fereastra de sistem.',
   'Alle bibliotheken': 'Toate bibliotecile',
   'Andere map…': 'Alt folder…',
-  'Bibliotheek verwijderen': 'Elimină biblioteca',
   'Bibliotheken': 'Biblioteci',
   'Geen bibliotheek': 'Nicio bibliotecă',
   'Geen presentaties (.md) gevonden.': 'Nu s-au găsit prezentări (.md).',
@@ -207,10 +200,6 @@ const _dutchSourceRo = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Alege în care bibliotecă ajunge prezentarea.',
   'Map toevoegen': 'Adaugă folder',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Foldere în care îți păstrezi și cauți prezentările. Dă-i fiecăruia un nume propriu ca să le deosebești. Toate bibliotecile sunt căutate la deschidere și în biblioteca de imagini.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Încă nicio bibliotecă — adaugă un folder.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Încă nicio bibliotecă. Adaugă una în Setări sau alege mai sus un folder pentru căutare.',
   'Presentatie opslaan': 'Salvează prezentarea',
@@ -292,21 +281,11 @@ const _dutchSourceRo = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Declarația de veridicitate cu raportorul, certificarea, semnătura și sigilarea.',
   'Uitbreidingen': 'Extensii',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
   'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nicio sursă accesibilă — datele de referință nu au putut fi descărcate de nicăieri. Încearcă din nou sau importă pachetul manual.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Datele descărcate nu au corespuns amprentei așteptate și au fost refuzate ca măsură de precauție.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Pachetul de date era deteriorat sau nevalid și, prin urmare, a fost refuzat.',
-  'Gegevenspakket kiezen': 'Alege pachetul de date',
-  'Kon het gekozen bestand niet lezen.': 'Fișierul ales nu a putut fi citit.',
   'Nog niet opgehaald': 'Încă nedescărcat',
   'AI-assistentie': 'Asistență IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -323,22 +302,15 @@ const _dutchSourceRo = {
       'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Licență și confidențialitate" și nu funcționează în versiunea web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Înțeleg că datele sunt trimise către acest serviciu extern',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Asistență IA (dezactivată implicit): dacă alegi un backend auto-găzduit sau cloud, textele sau imaginile pe care le procesezi sunt trimise la acea adresă. Un model IA local pe acest dispozitiv nu trimite nimic.',
   'Zoek een slidetype': 'Căutați un tip de slide',
   'Alfabetisch sorteren': 'Sortează alfabetic',
   'Algemeen': 'General',
   'Informatieveiligheid': 'Siguranța informației',
   'Alle': 'Toate',
-  'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
-  'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
-  'Agentisch bouwplan (ontwerp)': 'Plan de construcție agentic (proiectare)',
-  'Bijsnijden': 'Decupează',
   'Linksom': 'Rotește la stânga',
   'Rechtsom': 'Rotește la dreapta',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trageți imaginea pentru a alege ce parte rămâne vizibilă.',
-  'Git-opslag (ontwerp)': 'Stocare Git (proiectare)',
   'Zoek in documentatie…': 'Caută în documentație…',
   'Geen documenten gevonden': 'Nu s-au găsit documente',
   'Alleen afspelen (vergrendeld)': 'Doar redare (blocat)',
@@ -352,12 +324,8 @@ const _dutchSourceRo = {
   'Techniek': 'Tehnic',
   'Licentie en naleving': 'Licență și conformitate',
   'Architectuur': 'Arhitectură',
-  'Bouwinstructies': 'Instrucțiuni de compilare',
-  'Kwaliteitscontroles': 'Verificări de calitate',
-  'Broncodekaart': 'Harta codului sursă',
   'Licentienaleving': 'Conformitatea licențelor',
   'Softwarestuklijst (SBOM)': 'Listă de materiale software (SBOM)',
-  'Samenwerking (ontwerp)': 'Colaborare (proiectare)',
   'Beschermen met een wachtwoord (AES-256)': 'Protejează cu o parolă (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Păstrează parola în siguranță: dacă o pierzi, acest pachet nu mai poate fi deschis.',
@@ -435,10 +403,6 @@ const _dutchSourceRo = {
   'Instelling opslaan is mislukt.': 'Salvarea setării a eșuat.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Notă: versiunea web poate prelua doar de la servere care permit acest lucru (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pachetele (.ocideck) nu sunt încă acceptate în versiunea web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'În versiunea web pot fi deschise doar prezentări .md.',
   'Geen': 'Niciuna',
   'Nieuw': 'Nou',
   'Verwijderen': 'Șterge',
@@ -527,10 +491,8 @@ const _dutchSourceRo = {
   'Audio bij deze slide': 'Audio pentru acest slide',
   'Audio automatisch afspelen': 'Redă audio automat',
   'Audio verwijderen': 'Elimină audio',
-  'Geen audio gekozen': 'Niciun audio selectat',
   'Geen audiobestand gekozen': 'Niciun fișier audio selectat',
   'Video automatisch afspelen': 'Redă video automat',
-  'Geen video gekozen': 'Niciun video selectat',
   'Kiezen': 'Alege',
   'Uit bibliotheek…': 'Din bibliotecă…',
   'Van computer…': 'De pe computer…',
@@ -559,7 +521,6 @@ const _dutchSourceRo = {
   'Pakket importeren': 'Importă pachet',
   'Pakket exporteren': 'Exportă pachet',
   'Map met presentaties kiezen': 'Alege folderul cu prezentări',
-  'Standaard map voor presentaties': 'Folder implicit pentru prezentări',
   'Map voor exports': 'Folder pentru exporturi',
   'Logo kiezen': 'Alege logo',
   'Kies een afbeelding': 'Alege o imagine',
@@ -572,8 +533,6 @@ const _dutchSourceRo = {
   'Map kiezen': 'Alege folder',
   'Kies een map met presentaties om te beginnen.':
       'Alege un folder cu prezentări pentru a începe.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nu s-au găsit prezentări (.md) în acest folder.',
   'Geen presentaties gevonden voor': 'Nu s-au găsit prezentări pentru',
   'meer treffer(s)': 'potrivire/potriviri în plus',
   'Slide zoeken': 'Găsește slide',
@@ -595,7 +554,6 @@ const _dutchSourceRo = {
       'Introdu termeni de căutare pentru a găsi slide-uri din toate prezentările tale.',
   'toegevoegd': 'adăugat',
   'Eerste': 'Primele',
-  'treffers — verfijn je zoekopdracht': 'potriviri — rafinează căutarea',
   'treffer(s)': 'potrivire/potriviri',
   'slide': 'slide',
   'Zoeken en vervangen': 'Caută și înlocuiește',
@@ -654,7 +612,6 @@ const _dutchSourceRo = {
   'Tekst op zijpanelen': 'Text pe panourile laterale',
   'Voorbeeldtekst': 'Text exemplu',
   'Knop': 'Buton',
-  'Profielnaam': 'Nume profil',
   'Naam van het stijlprofiel': 'Numele profilului de stil',
   'Stijlprofiel': 'Profil de stil',
   'Nieuw profiel': 'Profil nou',
@@ -718,16 +675,9 @@ const _dutchSourceRo = {
   'TYPE': 'TIP',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Înapoi la stilul implicit',
-  'Automatisch doorgaan na': 'Avansează automat după',
-  'Logo tonen op deze slide': 'Afișează logo pe acest slide',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabel editabil în timpul prezentării',
-  'Footer tonen op deze slide': 'Afișează subsol pe acest slide',
   'Sprekersnotities...': 'Note pentru vorbitor...',
   'Sprekersnotities': 'Note pentru vorbitor',
   'Notities voor tijdens het presenteren': 'Note pentru timpul prezentării',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mod Markdown — editează întreaga prezentare ca Markdown Marp',
   'Toepassen': 'Aplică',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown nu a putut fi procesat. Verifică sintaxa.',
@@ -752,8 +702,6 @@ const _dutchSourceRo = {
   'Geen resultaten voor': 'Niciun rezultat pentru',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ajustează termenul de căutare sau adaugă o descriere.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Folosește „Răsfoiește” pentru a alege imagini din orice locație.',
   'Selecteer een\nafbeelding': 'Selectează o\nimagine',
   'Gekopieerd': 'Copiat',
   'Afbeelding verwijderen?': 'Ștergi imaginea?',
@@ -770,8 +718,6 @@ const _dutchSourceRo = {
   'spatie': 'spațiu',
   'klik': 'clic',
   'cijfers': 'cifre',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Fă clic sau apasă ? / H / Esc pentru a închide',
   'Klik of druk op H / Esc om te sluiten':
       'Fă clic sau apasă H / Esc pentru a închide',
   'Naar slidenummer': 'Salt la numărul slide-ului',
@@ -782,20 +728,10 @@ const _dutchSourceRo = {
   'Presenter view (notities, klok)': 'Vizualizare prezentator (note, ceas)',
   'Scherm wisselen (meerdere schermen)': 'Schimbă ecranul (mai multe ecrane)',
   'Zwart · wit scherm': 'Ecran negru · alb',
-  'Verstreken tijd resetten': 'Resetează timpul scurs',
   'Automatische modus aan/uit': 'Mod automat activat/dezactivat',
   'Herhalen (loop) aan/uit': 'Repetare (buclă) activat/dezactivat',
-  'Na audio automatisch doorgaan': 'Avansează automat după audio',
-  'Dit overzicht': 'Această prezentare generală',
   'Deze legenda': 'Această legendă',
   'Terug / afsluiten': 'Înapoi / ieșire',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manual (A)',
-  'Herhalen (L)': 'Repetare (L)',
-  'Na audio (M)': 'După audio (M)',
-  'Sneltoetsen (?)': 'Scurtături de tastatură (?)',
-  'Slide-overzicht (G)': 'Prezentare generală a slide-urilor (G)',
-  'Presenter view (P)': 'Vizualizare prezentator (P)',
   'Tijd resetten (R)': 'Resetează cronometrul (R)',
   'HUIDIGE SLIDE': 'SLIDE-UL CURENT',
   'VOLGENDE': 'URMĂTORUL',
@@ -811,15 +747,9 @@ const _dutchSourceRo = {
   'Notities weggooien': 'Renunță la note',
   'Notities voor de ontvanger tijdens een cursus':
       'Note pentru destinatar în timpul unui curs',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Comută în modul Markdown pentru a adăuga note.',
   'Mijn notities aan/uit': 'Comută notele mele',
   'Wissel scherm (S)': 'Schimbă ecranul (S)',
   'Kon niet van scherm wisselen.': 'Nu s-a putut schimba ecranul.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P public · H legendă · G prezentare · B/W negru/alb · R timp · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -866,8 +796,6 @@ const _dutchSourceRo = {
   'Selectie opheffen': 'Anulează selecția',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Accept licența EUPL 1.2 și am citit ce date păstrează OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Alegerea ta devine limba implicită a aplicației.',
   'Lees de volledige licentie': 'Citește licența completă',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck este software liber sub licența EUPL 1.2. Înainte de a începe, îți cerem să accepți licența. Mai jos poți citi și ce date păstrează OciDeck pe acest dispozitiv și când ceva părăsește dispozitivul tău.',
@@ -894,9 +822,6 @@ const _dutchSourceRo = {
   'Het antwoord van de server was te groot':
       'Răspunsul serverului a fost prea mare',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Sursă Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Deschide și salvează prezentări într-un folder de pe Nextcloud. Parola este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
   'Server-URL': 'URL server',
   'Gebruikersnaam': 'Nume de utilizator',
   'App-wachtwoord': 'Parolă de aplicație',
@@ -910,22 +835,13 @@ const _dutchSourceRo = {
   'Verbinding gelukt': 'Conexiune reușită',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Modificările sunt salvate când faci clic pe Salvează.',
-  'Afbeelding kiezen op Nextcloud': 'Alege imaginea pe Nextcloud',
-  'Openen vanaf Nextcloud': 'Deschide din Nextcloud',
   'Vernieuwen': 'Reîmprospătează',
   'Deze map is leeg': 'Acest folder este gol',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Niciun server Nextcloud configurat. Configurează unul în Setări → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Nu s-a putut încărca folderul. Verifică conexiunea și setările.',
   'Kon dit bestand niet openen.': 'Nu s-a putut deschide acest fișier.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Aceasta nu este o prezentare Marp/OciDeck.',
   'Downloaden mislukt:': 'Descărcare eșuată:',
-  'Opgeslagen op Nextcloud:': 'Salvat pe Nextcloud:',
   'Opslaan mislukt:': 'Salvare eșuată:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Configurează mai întâi un server Nextcloud în Setări → Nextcloud.',
   'Opslaan naar Nextcloud': 'Salvează pe Nextcloud',
   'Doelpad (zonder extensie)': 'Cale destinație (fără extensie)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -937,9 +853,6 @@ const _dutchSourceRo = {
       'Arată prezentarea generală a timpilor la final',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Timpul pe slide este întotdeauna măsurat; aceasta controlează doar dacă prezentarea generală apare după această prezentare.',
-  'Oefenoverzicht tonen na afloop': 'Arată rezumatul repetiției la final',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'După o prezentare, arată prezentarea generală a timpului petrecut pe fiecare slide. Timpul este întotdeauna măsurat; aceasta controlează doar dacă apare ecranul.',
   'Onveilige presentatie geblokkeerd': 'Prezentare nesigură blocată',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Această prezentare nu a fost deschisă. Fișierul conține conținut care poate executa cod, iar o prezentare ar trebui să conțină doar date — nimic executabil.',
@@ -1022,7 +935,6 @@ const _dutchSourceRo = {
   'Online': 'Online',
   'Lokaal bestand': 'Fișier local',
   'Geen video': 'Fără video',
-  'Vraag (meerkeuze)': 'Întrebare (alegere multiplă)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Textul titlului are prea puțin contrast cu imaginea de fundal',
   'Herstel': 'Corectează',
@@ -1037,8 +949,6 @@ const _dutchSourceRo = {
   'Huidig punt weghalen': 'Elimină punctul curent',
   'Stap voor stap': 'Pas cu pas',
   'Geen animatie': 'Fără animație',
-  'Animatiesnelheid': 'Viteza animației',
-  'Langzaam': 'Lent',
   'Snel': 'Rapid',
   'Gebeurtenissen': 'Evenimente',
   'Gebeurtenis toevoegen': 'Adaugă eveniment',
@@ -1051,8 +961,6 @@ const _dutchSourceRo = {
   'Vraag': 'Întrebare',
   'Wat wil je vragen?': 'Ce vrei să întrebi?',
   'Antwoorden': 'Răspunsuri',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marchează răspunsurile corecte. Cel mult opt răspunsuri; la prezentare, se afișează aleatoriu unul corect și restul greșite.',
   'Antwoord': 'Răspuns',
   'Antwoord toevoegen': 'Adaugă răspuns',
   'Goed antwoord': 'Răspuns corect',
@@ -1085,8 +993,6 @@ const _dutchSourceRo = {
   'Stelling': 'Afirmație',
   'Formuleer een stelling die juist of onjuist is':
       'Formulează o afirmație care este adevărată sau falsă',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Marchează toate răspunsurile corecte. La prezentare, se afișează un set aleatoriu cu cel puțin unul corect și unul greșit.',
   'Juist': 'Adevărat',
   'Onjuist': 'Fals',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1107,7 +1013,6 @@ const _dutchSourceRo = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Culorile de stare ale indicatoarelor cabinei. Creează variante denumite; schema aleasă se aplică tuturor slide-urilor cabinei.',
   'Standaard': 'Implicit',
-  'Standaardkleuren gebruiken': 'Folosește culorile implicite',
   'Kleurschema verwijderen': 'Șterge schema de culori',
   'Schemanaam': 'Numele schemei',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1187,7 +1092,6 @@ const _dutchSourceRo = {
   'Logo en footer': 'Logo și subsol',
   'Pagina': 'Pagină',
   'Presentatiestijl': 'Stil de prezentare',
-  'Presentatiestijl: ': 'Stil de prezentare: ',
   'Tekst...': 'Text...',
   'Teksteditor': 'Editor de text',
   'Volgende pagina': 'Pagina următoare',
@@ -1200,8 +1104,6 @@ const _dutchSourceRo = {
   'Doeltijd': 'Timp-țintă',
   'Doeltijd (aftellen)': 'Timp-țintă (cronometru invers)',
   'Geen aftelling': 'Fără cronometru invers',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Timpul-țintă implicit pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
   'uit': 'oprit',
   'Doeltijd / aftellen (K)': 'Timp-țintă / cronometru invers (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1272,14 +1174,8 @@ const _dutchSourceRo = {
   'Cirkel': 'Cerc',
   'Spider': 'Spider',
   'CSV importeren': 'Importă CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Date (CSV: primul rând = nume serii, prima coloană = etichete)',
   'Gekoppeld aan': 'Legat de',
   'Ontkoppelen': 'Deleagă',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Stochezi datele în slide sau le păstrezi ca fișier CSV separat lângă prezentare?',
-  'In de slide': 'În slide',
-  'Als CSV-bestand': 'Ca fișier CSV',
   'Geen grafiekgegevens': 'Fără date de grafic',
   'Label': 'Etichetă',
   'Rij': 'Rând',
@@ -1309,7 +1205,6 @@ const _dutchSourceRo = {
   'Eigen kleur (hex)': 'Culoare proprie (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'De exemplu #33FF33 pentru un ecran verde CRT.',
-  'Onderdeel van stijlprofiel ': 'Parte din profilul de stil ',
   'Broncode lettertype': 'Font cod sursă',
   'Kop (optioneel)': 'Titlu (opțional)',
   'Subkop (optioneel)': 'Subtitlu (opțional)',
@@ -1348,16 +1243,7 @@ const _dutchSourceRo = {
   'Zet het filter uit om alles weer te zien.':
       'Dezactivează filtrul pentru a vedea din nou totul.',
   'Welkom bij OciDeck': 'Bun venit la OciDeck',
-  'Privacy en gebruik': 'Confidențialitate și utilizare',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck este o aplicație desktop locală. Prezentările și datele tale sunt stocate exclusiv pe computerul tău.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Aplicația nu colectează date personale, statistici sau date de utilizare. Confidențialitatea ta este prioritatea noastră.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Toate datele pe care le introduci în OciDeck rămân pe sistemul tău local și nu sunt trimise către servere externe.',
   'Licentie (EUPL 1.2)': 'Licență (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Făcând clic pe „Sunt de acord”, accepți acești termeni și consimți la utilizarea OciDeck.',
   'Volledige licentie online': 'Licența completă online',
   'Akkoord gaan': 'Sunt de acord',
   'Privacy': 'Confidențialitate',
@@ -1446,8 +1332,6 @@ const _dutchSourceRo = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Export blocat din cauza problemelor grave de calitate.',
   'Alle meldingen': 'Toate mesajele',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… și mai multe probleme în panoul de calitate.',
   'Classificatie-handhaving': 'Aplicarea clasificării',
   'Vrijgaveplafond': 'Plafon de eliberare',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1466,11 +1350,9 @@ const _dutchSourceRo = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Setează un nivel TLP — exportul este blocat de politica de clasificare.',
   'Tabel bewerken': 'Editează tabela',
-  'Pijltjes · Tab · Esc': 'Săgeți · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editează tabela (pe slide-uri cu tabelă)',
   'Tabel bewerken (E)': 'Editează tabela (E)',
   'Tab wisselt cel · Esc sluit': 'Tab schimbă celula · Esc închide',
-  'Pen · markeerstift · ⇧E': 'Stilou · marker · ⇧E',
   'Gestapelde staaf': 'Bare stivuite',
   'Spreiding': 'Dispersie',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn răsfoiește diapozitivele',
@@ -1513,10 +1395,6 @@ const _dutchSourceRo = {
       'Eroare de rețea — verificați conexiunea și încercați din nou.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Ceva a mers neașteptat de prost. Vedeți jurnalul pentru detalii.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud nu este configurat (corect) — verificați datele serverului la Setări → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Serverul nu poate fi contactat — verificați conexiunea și URL-ul serverului.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1544,8 +1422,6 @@ const _dutchSourceRo = {
   'Uit recente bestanden verwijderen': 'Elimină din fișierele recente',
   'OciDeck wordt gestart…': 'Se pornește OciDeck…',
   'Herstelbestanden': 'Fișiere de recuperare',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Fișierele de recuperare conțin întregul conținut al prezentărilor în text simplu. Sunt curățate automat după 7 zile; aici le puteți șterge imediat.',
   'Herstelbestanden nu wissen': 'Șterge fișierele de recuperare acum',
   'Er waren geen herstelbestanden.': 'Nu existau fișiere de recuperare.',
   'herstelbestand(en) gewist.': 'fișier(e) de recuperare șterse.',
@@ -1980,7 +1856,6 @@ const _dutchSourceAddRo = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Creăm o copie într-o filă nouă; fișierul tău original rămâne neschimbat.',
   'Welk formaat?': 'Ce format?',
-  'dia\'s, gesplitst op kop.': 'diapozitive, împărțite după titlu.',
   'document': 'document',
   'volledig': 'complet',
   'Invoegen': 'Inserează',
@@ -2142,12 +2017,8 @@ const _dutchSourceAddRo = <String, String>{
   'Alle integraties': 'Toate integrările',
   'Alles inschakelen': 'Activează tot',
   'Alles uitschakelen': 'Dezactivează tot',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Există deja un folder de rapoarte configurat, așa că conexiunea rămâne accesibilă și o prezentare OpenKAT existentă poate fi actualizată în continuare.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Conexiuni cu alte sisteme. Fiecare conexiune este dezactivată în mod implicit și rămâne inactivă până când o activați.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Citește folderele cu rapoarte OpenKAT ca o singură privire de ansamblu pentru conducere.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Aducerea prezentărilor din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) ca deck editabil. Conexiunile cu alte sisteme, precum OpenKAT, se află la Integrări.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2315,8 +2186,6 @@ const _dutchSourceAddRo = <String, String>{
   'Van toepassing': 'Aplicabil',
   'Voortgang': 'Progres',
   'Voortgang managementsysteem': 'Progresul sistemului de management',
-  'Voortgangsoverzicht bijgewerkt':
-      'Prezentarea generală a progresului a fost actualizată',
   'Welk deel?': 'Ce parte?',
   'beheersmaatregelen geladen': 'controale încărcate',
   'geïmplementeerd': 'implementat',
@@ -2395,10 +2264,6 @@ const _dutchSourceAddRo = <String, String>{
       'Aceasta nu pare o cheie de recuperare validă.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Această cheie de recuperare provine dintr-o versiune mai nouă de OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Memoria web pentru imagini este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini sau imagini mai mici, închideți celelalte prezentări ori reîncărcați fără a deschide alte prezentări.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Memoria web pentru imagini este plină (maximum 256 MB). Salvați lucrarea ca fișier .ocideck și reîncărcați pagina înainte de a adăuga alte imagini.',
   'Afbeeldingsrechten': 'Drepturi de imagine',
   'Afbeeldingsrechten controleren…': 'Verificați drepturile de imagine...',
   'Afdoening': 'Așezarea',
@@ -2450,8 +2315,6 @@ const _dutchSourceAddRo = <String, String>{
   'Verifiëren': 'Verifică',
   'Deelnemers verifiëren': 'Verifică participanții',
   '(dit apparaat)': '(acest dispozitiv)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Compară amprenta fiecărui dispozitiv printr-un canal de încredere — citiți-o unul altuia sau trimite-o pe o cale în care ai încredere. Dacă se potrivesc, lucrezi cu dispozitivele reale și nimeni nu s-a interpus. Dacă diferă, întrerupe colaborarea.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Acesta nu este un link de invitație valid.',
@@ -2512,7 +2375,6 @@ const _dutchSourceAddRo = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Colaborează în direct la o prezentare printr-un homeserver Matrix ca releu criptat. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate. Introdu un homeserver și un token de acces creat în altă parte — OciDeck nu îți cere niciodată parola. Jetonul este stocat criptat în inelul de chei, nu alături de celelalte setări.',
   'wordt door de test ingevuld': 'completat de test',
-  'Versleuteld doorgeefluik (ontwerp)': 'Releu criptat (proiectare)',
   'Meer documentatie op de repository': 'Mai multă documentație în depozit',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Documentația completă — inclusiv arhitectura, compilarea, codul sursă și proiectarea — se află în depozit.',
@@ -2754,50 +2616,14 @@ const _dutchSourceAddRo = <String, String>{
       'Ce date de măsurare lipsesc sau sunt învechite?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Pe ce date se bazează acest raport?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'O privire de ansamblu a managementului amplă, dar reală, cu momente de măsurare urmăribile.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Clasează fără scor total și arată separat măsurătorile lipsă.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Afișează numărul de severitate, contributorii și măsurătorile reportate în funcție de moment.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizează tipurile de găsire de către organizațiile, sistemele și observațiile afectate.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Afișează numere critice/înalte fără nicio cântărire concepută.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Afișează numărătorul, numitorul și numai procentele de încredere.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Grupează recomandările literale de la OpenKAT fără propria lor prioritate.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'O imagine curentă vizată a unei organizații și data măsurării acesteia.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Compară două momente alese de măsurare în cadrul unei singure organizații.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Distinge nou, nou și nu mai observat.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Folosește numai date fiabile de primă observație.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Clasifică sistemele cu contoare separate de severitate.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Afișează valorile delta individuale fără scor ponderat.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Compară numărătorul și numitorul cu o acoperire care poate fi comparabilă.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventarează sisteme dovedite la sursă, nume de gazdă și adrese IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Separă monitorizat, nemonitorizat și necunoscut.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Afișează doar mutații de monitorizare dovedite explicit.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Afișează organizațiile și sistemele în jurul unei legături CVE de încredere.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Clasifică CVE-urile cu deduplicare explicită.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Distinge CVE noi, noi și nemai observate.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Afișează măsurători lipsă, învechite și utilizate efectiv.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Conturi pentru date cheie, fișiere sursă, adaptoare și hash sursă.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Nu este încă disponibilă: sursa nu dovedește starea de monitorizare pentru toate activele.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2842,11 +2668,6 @@ const _dutchSourceAddRo = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Care raport răspunde la întrebarea dvs.?',
   'Meer rapportvragen': 'Mai multe întrebări despre raport',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Ce sisteme sunt vulnerabile la un CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizații și sisteme vulnerabile în jurul unei vulnerabilități.',
-  'Organisaties met kwetsbare systemen': 'Organizații cu sisteme vulnerabile',
   'Kwetsbare systemen': 'Sisteme vulnerabile',
   'Kritiek/hoog': 'Critic/ridicat',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2868,8 +2689,6 @@ const _dutchSourceAddRo = <String, String>{
   'Bruikbaar': 'Utilizabil',
   'CVE zoeken': 'căutare CVE',
   'Critical/high': 'Critic/ridicat',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Calitatea datelor, măsurători lipsă și uzură.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Rapoartele selectate nu conțin suficiente date fiabile pentru această parte.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2897,9 +2716,6 @@ const _dutchSourceAddRo = <String, String>{
   'Geen bruikbare meetdatum': 'Nu există o dată de măsurare utilizabilă',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Diapozitivele generate sunt reîmprospătate. Sunt păstrate propriile diapozitive și copii.',
-  'Getroffen organisaties en systemen': 'Organizațiile și sistemele afectate',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organizațiile și sistemele afectate în jurul unei vulnerabilități.',
   'Getroffen systemen': 'Sisteme afectate',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Raportul nu a putut fi creat. Alegerile tale sunt păstrate; verificați avertismentele și încercați din nou.',
@@ -2909,20 +2725,15 @@ const _dutchSourceAddRo = <String, String>{
   'Keuzes wijzigen…': 'Schimbați alegerile...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Alegeți folderul în care OpenKAT a plasat rapoartele. OciDeck citește doar acest folder; nimic nu este schimbat sau trimis.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Alegeți întrebarea la care trebuie să răspundă raportul. OciDeck determină structura adecvată.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Alegeți un CVE găsit în rapoarte.',
   'Laatste bruikbare meting': 'Ultima măsurătoare utilizabilă',
   'Live voorvertoning van de rapportopbouw':
       'Previzualizare live a structurii raportului',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Informații de management și control despre mai multe organizații.',
   'Meer instellingen': 'Mai multe setări',
   'Nederlands': 'olandeză',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Nu fiecare organizație aleasă are o măsurătoare pentru această perioadă.',
-  'Nieuwe en verdwenen bevindingen': 'Descoperiri noi și lipsă',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Nu este încă disponibil: aceste rapoarte nu conțin numere CVE de încredere.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2957,8 +2768,6 @@ const _dutchSourceAddRo = <String, String>{
       'O măsurare utilă a curentului lipsește pentru una sau mai multe organizații.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Pentru o comparație sunt necesare două momente de măsurare. Acum a fost găsită o măsurătoare.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progres comparativ cu un moment de măsurare anterior.',
   'Waar staan de OpenKAT-rapportages?': 'Unde sunt rapoartele OpenKAT?',
   'Wat veranderde er bij één organisatie?': 'Ce s-a schimbat la o organizație?',
   'Wat wilt u laten zien?': 'Ce vrei să arăți?',
@@ -2970,7 +2779,6 @@ const _dutchSourceAddRo = <String, String>{
   'bruikbaar': 'utilizabil',
   'metingen': 'măsurători',
   'organisaties': 'organizatii',
-  'organisaties geselecteerd': 'organizațiile selectate',
   'rapportages gebruikt': 'rapoartele utilizate',
   'systemen': 'sisteme',
   'Nog geen specificatielimiet': 'Încă fără limită de specificație',
@@ -3113,7 +2921,6 @@ const _dutchSourceAddRo = <String, String>{
       'se află pe un slide de arbore, dar nu este folosit în altă parte — legați-l de o matrice, flux sau alt slide.',
   'Nieuw verbeteringsproject': 'Proiect nou de îmbunătățire',
   'Kader': 'Cadru',
-  'Projecttitel': 'Titlul proiectului',
   'Primaire Y-metriek (Y-01)': 'Metrică Y principală (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'De exemplu: timp de order intake în zile lucrătoare',
@@ -3169,10 +2976,6 @@ const _dutchSourceAddRo = <String, String>{
   'Bron niet toegestaan': 'Sursă nepermisă',
   'Deze URL is door de beveiliging geweigerd.':
       'Această adresă URL a fost respinsă de securitate.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Aducerea de material din alte sisteme. Două surse: prezentările din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) devin un deck editabil, iar rapoartele OpenKAT (un folder cu JSON) devin o singură privire de ansamblu pentru conducere. Unde se află folderul OpenKAT se setează la Integrări.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Aducerea prezentărilor din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) ca deck editabil. Citirea folderelor cu rapoarte OpenKAT este disponibilă doar în versiunea desktop.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Se construiește prezentarea…',
@@ -3293,8 +3096,6 @@ const _dutchSourceAddRo = <String, String>{
       'Indexul listei de verificare: per test, id-ul stabil, titlul canonic și categoria. Conținutul ghidului în sine nu este inclus.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Indexul testelor din v2.0.0: per test, id-ul stabil, titlul canonic, categoria MASVS și slăbiciunea MASWE. Testele v1 retrase și substituenții nu sunt incluși; nici conținutul ghidului.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Lista slăbiciunilor (117): id, titlu, categorie MASVS, platformă și legătura CWE. Trei sferturi nu sunt încă redactate la sursă; acelea sunt incluse, marcate. Slăbiciunile retrase nu.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Lista completă (id, nume, descriere) plus un nucleu propriu selectat, cu notele noastre de remediere.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3341,33 +3142,16 @@ const _dutchSourceAddRo = <String, String>{
       'Fiecare fișier este convertit separat și salvat ca prezentare proprie în folderul de destinație. Dacă unul eșuează, coada continuă pur și simplu.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Importul mai multor prezentări deodată le scrie ca fișiere într-un folder; versiunea din browser nu poate face asta.',
-  'Nu importeren': 'Importă acum',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Prezentarea generală este pregătită într-o filă nouă.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Citește un folder cu rapoarte OpenKAT (JSON) și construiește din el o singură privire de ansamblu pentru conducere: sisteme, constatări după gravitate, punctele deschise de cel mai mult timp și tendința pe măsurători succesive. Aceeași acțiune pe o prezentare OpenKAT existentă o actualizează și lasă propriile dumneavoastră diapozitive la locul lor.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Importul doar citește; nimic din acest folder nu este modificat sau trimis. Fișierele care nu se dovedesc a fi rapoarte OpenKAT sunt omise și menționate în raportul de import.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Indicați folderul în care se află rapoartele dumneavoastră OpenKAT (JSON). Importul citește acel folder și construiește din el o singură privire de ansamblu pentru conducere; dacă folderul este setat aici, nu trebuie să îl alegeți de fiecare dată.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Importul OpenKAT citește un folder de pe disc și este disponibil doar în versiunea desktop.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Încă nu a fost indicat un folder de rapoarte, așa că importul îl cere de fiecare dată.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Există deja un folder de rapoarte configurat, așa că punctul de intrare rămâne accesibil și o prezentare OpenKAT existentă poate fi actualizată în continuare.',
   'Integraties': 'Integrări',
-  'Naar Integraties': 'Mergi la Integrări',
   'Map kiezen…': 'Alege folderul…',
   'Map wissen': 'Șterge folderul',
-  'OpenKAT-rapportages importeren…': 'Importă rapoarte OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Alege folderul cu rapoarte OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Rapoartele OpenKAT au fost importate.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck-ul OpenKAT a fost actualizat; slide-urile manuale au fost păstrate.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Nu s-au găsit rapoarte OpenKAT în acest folder.',
-  'OpenKAT-import mislukt.': 'Importul OpenKAT a eșuat.',
   'rapportages': 'rapoarte',
   'overgeslagen': 'omise',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3426,8 +3210,6 @@ const _dutchSourceAddRo = <String, String>{
   'Label op de primaire knop': 'Eticheta de pe butonul principal',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Constatări pe care le-ai analizat și le-ai lăsat așa. Nu mai sunt raportate, dar scanarea continuă să le găsească și nu contează ca rezolvate. Atinge pentru a repune una.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Punerea deoparte a unei constatări de confidențialitate (proiect)',
   'Deze is beoordeeld en mag blijven': 'Verificat, acesta poate rămâne',
   'Mogelijk gemaakt door': 'Făcut posibil de',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3439,10 +3221,8 @@ const _dutchSourceAddRo = <String, String>{
   'Technische melding:': 'Mesaj tehnic:',
   'presentaties': 'prezentari',
   '/Presentaties': '/Prezentări',
-  'Rapportagedistributie (ontwerp)': 'Distribuirea rapoartelor (proiectare)',
   'De export is mislukt.': 'Exportul a eșuat.',
   'Presenteer vanaf hier': 'Prezintă de aici',
-  'Teams-gastclient (ontwerp)': 'Client Teams pentru invitați (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cât de larg poate fi distribuit acest material?',
   'Wat betekenen deze niveaus?': 'Ce înseamnă aceste niveluri?',
@@ -3562,8 +3342,6 @@ const _dutchSourceAddRo = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentări care rămân simple fișiere Markdown: lizibile, în care se poate căuta și care se deschid cu orice editor.',
   'sjablonen om mee te beginnen, of leeg': 'șabloane pentru a începe sau goală',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Omiterea este activă: datele găsite sunt înnegrite, iar toate imaginile, videoclipurile și sunetul acestui slide nu ajung pe ecran sau în export. Fișierul tău markdown păstrează tot.',
   'Mijn tekst': 'Textul meu',
   'Wat zij zien': 'Ce văd ei',
   'Presentatiegegevens': 'Datele prezentării',
@@ -3788,7 +3566,6 @@ const _dutchSourceAddRo = <String, String>{
   'Opslaan naar…': 'Salvează în…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Configurați mai întâi o conexiune în Setări → Stocare.',
-  'Beginnen met:': 'Începeți cu:',
   'Verlopen datums markeren': 'Marchează datele expirate',
   'Datums gemarkeerd': 'Date marcate',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3814,28 +3591,15 @@ const _dutchSourceAddRo = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Suprafața de atac pe tip de obiect: câte sunt, câte necesită lucru, ce este nou și ce nu aparține nimănui. Ultimul aspect este de obicei discuția.',
   'Acties en besluiten': 'Acțiuni și decizii',
-  'Actie toevoegen': 'Adaugă acțiune',
-  'Actie verwijderen': 'Elimină acțiunea',
   'Actie': 'Acțiune',
   'Deadline': 'Termen',
-  'Op de lijst sinds': 'Pe listă din',
   'Stand': 'Stare',
-  'Wat vraagt u': 'Ce solicitați',
   'geen datum': 'fără dată',
-  'Ter informatie': 'Spre informare',
   'Besluit gevraagd': 'Este necesară o decizie',
   'Escalatie': 'Escaladare',
   'Open': 'Deschis',
   'Loopt': 'În curs',
   'Afgerond': 'Finalizat',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Doar o decizie sau o escaladare primește etichetă pe slide; "întârziat" rezultă din termen și nu îl stabiliți dumneavoastră.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Date ca aaaa-ll-zz. Orice altă formă este refuzată, nu ghicită: 05-08-2026 înseamnă două zile diferite.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Un slide de acțiuni poartă cel mult opt rânduri; dincolo de asta sala parcurge în loc să decidă.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Ce trebuie să se întâmple, cine face și până când. Indicați pe fiecare rând dacă este spre informare sau dacă solicitați o decizie — asta caută sala.',
   'Scorecard': 'Fișă de indicatori',
   'Cijfer toevoegen': 'Adaugă indicator',
   'Cijfer verwijderen': 'Elimină indicatorul',
@@ -3924,8 +3688,6 @@ const _dutchSourceAddRo = <String, String>{
       'Tokenul este valid, dar nu are voie să facă asta — acordă-i mai multe drepturi pe depozit.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Autentificat, dar fără acces — parola nu este problema. Cere drepturi pe acest dosar.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licențele lexicoanelor: ce mai trebuie întrebat',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Aceasta pare o adresă DAV completă. La Nextcloud, OciDeck deduce singur acea cale — aici aparține doar serverul.',
   'Overnemen': 'Aplică',
@@ -3968,8 +3730,6 @@ const _dutchSourceAddRo = <String, String>{
   'kenteken': 'număr de înmatriculare',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pentru limba acestei prezentări nu există o listă de cuvinte-cheie pentru categorii speciale de date personale. Tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează; cuvinte precum „diagnostic” sau „suspect” nu sunt recunoscute.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Lista de cuvinte-cheie pentru categorii speciale de date personale este foarte săracă pentru limba acestei prezentări. Nu vă bazați pe găsirea unor cuvinte precum „diagnostic” sau „suspect”.',
   'Landpakketten voor identificatienummers':
       'Pachete de țară pentru numere de identificare',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3999,8 +3759,6 @@ const _dutchSourceAddRo = <String, String>{
       'Numele serverului nu există sau nu poate fi căutat. Verifică dacă adresa URL a serverului conține o greșeală de tastare.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Acest server are o adresă privată sau de LAN. Marchează-l ca intern de încredere în Setări → Stocare.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Certificatul acestui server nu este de încredere. Un certificat autosemnat nu funcționează; folosește unul de la un emitent recunoscut.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Serverul redirecționează către o altă adresă. Introdu direct acea adresă — nu urmăm redirecționări, deoarece pot ocoli verificarea de securitate.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4036,8 +3794,6 @@ const _dutchSourceAddRo = <String, String>{
   'Opslaan naar S3': 'Salvează în S3',
   'Opgeslagen in S3:': 'Salvat în S3:',
   'Hier staat niets': 'Aici nu este nimic',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Conținutul nu a putut fi încărcat. Verifică conexiunea și setările.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Punctul final este inaccesibil — verifică conexiunea și punctul final.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4046,8 +3802,6 @@ const _dutchSourceAddRo = <String, String>{
       'Punctul final a returnat o eroare. Încearcă mai târziu.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Acest punct final nu poate scrie condiționat, așa că munca ta nu este protejată de a altcuiva. Salvează sub un nume nou dacă mai lucrează cineva la această prezentare.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Niciun compartiment S3 configurat. Configurează unul în Setări → Stocare.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Configurează mai întâi un compartiment S3 în Setări → Stocare.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4094,10 +3848,6 @@ const _dutchSourceAddRo = <String, String>{
       'Această imagine arată cel puțin {count} chipuri recognoscibile.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Această imagine nu a putut fi verificată pentru chipuri. Formatul nu este acceptat (de exemplu HEIC). Asta nu înseamnă că nu este nimeni în ea — înseamnă că nu s-a verificat.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Această imagine arată un chip recognoscibil.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Această imagine arată {count} chipuri recognoscibile.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'O imagine în care cineva este recognoscibil este o dată cu caracter personal, chiar și fără nume.',
   'herkenbaar gezicht op een afbeelding': 'chip recognoscibil într-o imagine',
@@ -4114,8 +3864,6 @@ const _dutchSourceAddRo = <String, String>{
   'Organisatie': 'Organizație',
   'Welke verbinding?': 'Care conexiune?',
   'Bestandsverbindingen': 'Conexiuni de fișiere',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Locurile unde îți păstrezi și cauți prezentările — dosare pe acest computer, servere WebDAV și depozite git amestecate. Trage-le în ordinea dorită: primul din fiecare tip este cel implicit.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Un depozit git; fiecare versiune salvată se păstrează.',
   'Een map op de schijf van deze computer.':
@@ -4140,15 +3888,7 @@ const _dutchSourceAddRo = <String, String>{
   'Openen vanaf WebDAV': 'Deschide din WebDAV',
   'Opslaan naar WebDAV': 'Salvează pe WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Configurează mai întâi un server WebDAV în Setări → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Alege imaginea pe WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Niciun server WebDAV configurat. Configurează unul în Setări → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV nu este configurat (corect) — verificați datele serverului la Setări → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → WebDAV.',
   'Servertype': 'Tip de server',
   'Nextcloud of ownCloud': 'Nextcloud sau ownCloud',
   'Andere WebDAV-server': 'Alt server WebDAV',
@@ -4170,23 +3910,11 @@ const _dutchSourceAddRo = <String, String>{
   'Haal volle pagina uit de reeks': 'Scoate pagina plină din serie',
   'Opslag': 'Stocare',
   'Opslagwijzen': 'Moduri de stocare',
-  'Deze computer': 'Acest computer',
   'Ingesteld': 'Configurat',
   'Niet ingesteld': 'Neconfigurat',
-  'Nog geen bibliotheek ingesteld': 'Nicio bibliotecă configurată încă',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Căile prin care puteți deschide și salva prezentări. Faceți clic pe un mod pentru a-l configura.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Prezentări în folderele de mai sus, pe discul acestui computer.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Deschideți și salvați prezentări într-un folder de pe Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Deschideți prezentări dintr-un depozit git; fiecare versiune salvată este păstrată.',
-  'Nog te verifiëren': 'Rămâne de verificat',
   'MASWE-zwakheid kiezen': 'Alege o slăbiciune MASWE',
   'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',
   'Geen zwakheid gevonden': 'Nu s-a găsit nicio slăbiciune',
-  'uitleg nog niet geschreven': 'explicația nu a fost încă scrisă',
   'Getalnotatie herkennen': 'Recunoaște formatul numerelor',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Acest fișier conține numere a căror virgulă poate fi citită în două moduri:',
@@ -4308,12 +4036,10 @@ const _dutchSourceAddRo = <String, String>{
   'Veelgestelde vragen': 'Întrebări frecvente',
   'Probleemoplossing': 'Depanare',
   'Begrippenlijst': 'Glosar',
-  'API-documentatie': 'Documentație API',
   'Prestaties': 'Performanță',
   'Beveiligingsontwerp': 'Proiectarea securității',
   'Hosting en uitrol': 'Găzduire și implementare',
   'Bijdragen': 'Contribuție',
-  'Ontwikkelomgeving': 'Mediu de dezvoltare',
   'Migratiegids': 'Ghid de migrare',
   'Versies…': 'Versiuni…',
   'Versies:': 'Versiuni:',
@@ -4354,8 +4080,6 @@ const _dutchSourceAddRo = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramura s-a mutat; reîncarcă deck-ul și salvează din nou.',
   'Bijgewerkt met OciDeck': 'Actualizat cu OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Configurați mai întâi un depozit Git în Setări → Depozit Git.',
   'Git-repository': 'Depozit Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Deschideți prezentări dintr-un depozit Git. Fiecare versiune salvată este păstrată. Jetonul este stocat criptat în inelul de chei, nu alături de celelalte setări.',
@@ -4370,7 +4094,6 @@ const _dutchSourceAddRo = <String, String>{
       'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Datele de referință se află în aplicația însăși, așa că modulul funcționează imediat și complet offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; rămân ascunse până nu le activați.',
-  'Procesverbetering (ontwerp)': 'Îmbunătățirea proceselor (proiectare)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Acest proiect este un produs secundar al Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportă profilul de stil',
@@ -4511,7 +4234,6 @@ const _dutchSourceAddRo = <String, String>{
   'genetisch gegeven': 'dată genetică',
   'parketnummer': 'număr de dosar penal',
   'nationaal identificatienummer': 'număr național de identificare',
-  'OciWacht (ontwerp)': 'OciWacht (proiect)',
   'Mogelijk geheim': 'Posibil secret',
   'sleutel of token': 'cheie sau token',
   'private sleutel': 'cheie privată',
@@ -4544,7 +4266,6 @@ const _dutchSourceAddRo = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Pune lista CVE completă pe acest dispozitiv, astfel încât căutările să se facă offline, iar termenul tău de căutare să nu ajungă nicăieri. Baza de date provine din CVE List V5 (programul CVE oficial, prin GitHub).',
   'Wat er lokaal beschikbaar is': 'Ce este disponibil local',
-  'Gegevenspakket': 'Pachet de date',
   'Nu bijwerken': 'Actualizează acum',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Date disponibile local — căutările au loc pe acest dispozitiv; nimic nu iese.',
@@ -4563,7 +4284,6 @@ const _dutchSourceAddRo = <String, String>{
       'Acceptă: datele își au locul aici și notificarea dispare. Acceptă + avertizează: destinatarul vede o insignă că diapozitivul conține date personale. Omite: datele găsite devin ilizibile pe ecran și în export — fișierul tău Markdown păstrează textul original.',
   'Alleen melden': 'Doar raportează',
   'PERSOONSGEGEVENS': 'DATE PERSONALE',
-  'Persoonsgegevens op deze slide': 'Date personale pe acest diapozitiv',
   'Volg de presentatie': 'Urmează prezentarea',
   'Weglaten uit tonen en exporteren': 'Omite din afișare și export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4685,8 +4405,6 @@ const _dutchSourceAddRo = <String, String>{
   'Bewerk deze slide': 'Editează acest slide',
   'Bewijs verwijderen': 'Elimină dovada',
   '(nog leeg)': '(încă gol)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Introdu mai întâi un ID de constatare pentru a atașa dovezi.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adaugă capturi de ecran sau videoclipuri ca dovezi. Fiecare dovadă devine un slide propriu imediat după constatare și este inclusă în export.',
   'Uitvoering testen conform standaard': 'Testare conform standardului',

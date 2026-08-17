@@ -146,11 +146,20 @@ void main() {
     late final List<OrphanKey> found;
     setUpAll(() => found = findOrphanKeys('.'));
 
-    test('vindt de met de hand bevestigde wezen', () {
-      final keys = found.map((o) => o.key).toSet();
-      expect(keys, contains('Logo tonen op deze slide'));
-      expect(keys, contains('Verstreken tijd resetten'));
-      expect(keys, contains('settingsLogo'));
+    // De met de hand bevestigde wezen ('Logo tonen op deze slide',
+    // 'Verstreken tijd resetten', 'settingsLogo') stonden hier tot #1520 als
+    // vangnet: ze bewezen dat de poort op de échte boom iets vindt. Ze zijn nu
+    // opgeruimd, dus die verwachting kan niet blijven staan. Dat de poort
+    // vindt wat er te vinden is, blijft bewezen door de mini-repo's hierboven
+    // — élke richting daar plant een wees en eist dat hij gemeld wordt.
+    test('is leeg: er staat geen enkele wees meer in de tabel', () {
+      expect(
+        found.map((o) => '${o.table}: ${o.key}'),
+        isEmpty,
+        reason:
+            'Nieuwe wees: roep de sleutel aan of haal hem uit alle 32 '
+            'taaltabellen. De basislijn hoort nul te blijven.',
+      );
     });
 
     test('meldt geen sleutel die overduidelijk in gebruik is', () {

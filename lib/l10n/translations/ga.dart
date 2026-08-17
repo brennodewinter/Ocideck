@@ -43,17 +43,13 @@ const _stringsGa = {
   'settings': 'Socruithe',
   'settingsGeneral': 'Ginearálta',
   'settingsColors': 'Dathanna',
-  'settingsLogo': 'Lógó',
   'language': 'Teanga',
   'applicationLanguage': 'Teanga an fheidhmchláir',
   'languageHelp':
       'Athraíonn teanga an chomhéadain láithreach. Fanann ábhar na láithreoireachta gan athrú.',
-  'presentationFolder': 'Fillteán láithreoireachta',
   'exportFolderSetting': 'Fillteán easpórtála',
-  'notSet': 'Gan socrú',
   'nextToPresentationFile': 'In aice le comhad na láithreoireachta',
   'choose': 'Roghnaigh',
-  'removeDefaultFolder': 'Bain an fillteán réamhshocraithe',
   'removeExportFolder': 'Bain an fillteán easpórtála',
   'exportFolderHelp':
       'Sábháiltear gach easpórtáil (PDF/PPTX) anseo. Mura bhfuil sé socraithe, sábháiltear easpórtálacha in aice le comhad na láithreoireachta.',
@@ -87,8 +83,6 @@ const _dutchSourceGa = {
   'Handtekening tekenen': 'Tarraing síniú',
   'Teken je handtekening in het vak hieronder.':
       'Tarraing do shíniú sa bhosca thíos.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Is éard is pacáiste sonraí ann ná .zip leis na sonraí tagartha don mhodúl seo. Seiceáiltear ar dtús é in aghaidh an mhéarloirg atá tógtha isteach san aip; ní ghlactar ach le pacáiste a fhreagraíonn don leagan aipe seo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Achar',
   'Horizontale staaf': 'Barra chothrománach',
@@ -196,7 +190,6 @@ const _dutchSourceGa = {
       'Roinntear íomhánna agus meáin ar na láithreoireachtaí san fhillteán céanna. Roghnóidh tú an t-ainm cruinn ar ball san fhuinneog chórais.',
   'Alle bibliotheken': 'Gach leabharlann',
   'Andere map…': 'Fillteán eile…',
-  'Bibliotheek verwijderen': 'Bain leabharlann',
   'Bibliotheken': 'Leabharlanna',
   'Geen bibliotheek': 'Gan leabharlann',
   'Geen presentaties (.md) gevonden.':
@@ -209,10 +202,6 @@ const _dutchSourceGa = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Roghnaigh cén leabharlann ina rachaidh an láithreoireacht.',
   'Map toevoegen': 'Cuir fillteán leis',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Fillteáin ina stórálann agus ina gcuardaíonn tú do láithreoireachtaí. Tabhair ainm dá gcuid féin do gach ceann chun iad a idirdhealú. Cuardaítear gach leabharlann agus tú ag oscailt agus sa leabharlann íomhánna.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Gan leabharlann fós — cuir fillteán leis.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Gan leabharlann fós. Cuir ceann leis sna Socruithe, nó roghnaigh fillteán thuas le cuardach.',
   'Presentatie opslaan': 'Sábháil an láithreoireacht',
@@ -294,22 +283,11 @@ const _dutchSourceGa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'An dearbhú fírinne le tuairisceoir, deimhniú, síniú agus séalú.',
   'Uitbreidingen': 'Breiseáin',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',
   'Gegevens opschonen': 'Glan na sonraí',
   'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Níl aon fhoinse insroichte — níorbh fhéidir na sonraí tagartha a íoslódáil áit ar bith. Bain triail eile as nó iompórtáil an pacáiste de láimh.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Níor mheaitseáil na sonraí a íoslódáladh leis an méarlorg a bhíothas ag súil leis agus diúltaíodh dóibh mar réamhchúram.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Bhí an paca sonraí damáistithe nó neamhbhailí agus diúltaíodh dó dá bhrí sin.',
-  'Gegevenspakket kiezen': 'Roghnaigh paca sonraí',
-  'Kon het gekozen bestand niet lezen.':
-      'Níorbh fhéidir an comhad roghnaithe a léamh.',
   'Nog niet opgehaald': 'Gan íoslódáil fós',
   'AI-assistentie': 'Cúnamh II',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -326,22 +304,15 @@ const _dutchSourceGa = {
       'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Ceadúnas agus Príobháideachas" agus ní oibríonn sí sa leagan gréasáin.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Tuigim go seoltar sonraí chuig an tseirbhís sheachtrach seo',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Cúnamh II (múchta de réir réamhshocraithe): má roghnaíonn tú inneall féinóstáilte nó néil, seoltar na téacsanna nó na híomhánna a phróiseálann tú chuig an seoladh sin. Ní sheolann múnla II áitiúil ar an ngléas seo aon rud.',
   'Zoek een slidetype': 'Cuardaigh cineál sleamhnáin',
   'Alfabetisch sorteren': 'Sórtáil in ord aibítre',
   'Algemeen': 'Ginearálta',
   'Informatieveiligheid': 'Slándáil faisnéise',
   'Alle': 'Gach ceann',
-  'Pentestrapportage (ontwerp)': 'Tuairisc tástála treá (dearadh)',
-  'AI-assistentie (ontwerp)': 'Cúnamh AI (dearadh)',
-  'Agentisch bouwplan (ontwerp)': 'Plean tógála gníomhaireach (dearadh)',
-  'Bijsnijden': 'Bearr',
   'Linksom': 'Rothlaigh ar chlé',
   'Rechtsom': 'Rothlaigh ar dheis',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Tarraing an íomhá chun a roghnú cén chuid a fhanann le feiceáil.',
-  'Git-opslag (ontwerp)': 'Stóráil Git (dearadh)',
   'Zoek in documentatie…': 'Cuardaigh sa doiciméadú…',
   'Geen documenten gevonden': 'Níor aimsíodh aon doiciméad',
   'Alleen afspelen (vergrendeld)': 'Seinm amháin (glasáilte)',
@@ -355,12 +326,8 @@ const _dutchSourceGa = {
   'Techniek': 'Teicniúil',
   'Licentie en naleving': 'Ceadúnas agus comhlíonadh',
   'Architectuur': 'Ailtireacht',
-  'Bouwinstructies': 'Treoracha tógála',
-  'Kwaliteitscontroles': 'Seiceálacha cáilíochta',
-  'Broncodekaart': 'Léarscáil an chóid fhoinsigh',
   'Licentienaleving': 'Comhlíonadh ceadúnas',
   'Softwarestuklijst (SBOM)': 'Bille Ábhar Bogearraí (SBOM)',
-  'Samenwerking (ontwerp)': 'Comhoibriú (dearadh)',
   'Beschermen met een wachtwoord (AES-256)': 'Cosain le pasfhocal (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Coinnigh an pasfhocal seo slán: má chailleann tú é, ní bheifear in ann an pacáiste seo a oscailt a thuilleadh.',
@@ -440,10 +407,6 @@ const _dutchSourceGa = {
   'Instelling opslaan is mislukt.': 'Theip ar an socrú a shábháil.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Ní thacaítear le pacáistí (.ocideck) go fóill sa leagan gréasáin.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Ní féidir ach láithreoireachtaí .md a oscailt sa leagan gréasáin.',
   'Geen': 'Gan aon',
   'Nieuw': 'Nua',
   'Verwijderen': 'Scrios',
@@ -534,10 +497,8 @@ const _dutchSourceGa = {
   'Audio bij deze slide': 'Fuaim don sleamhnán seo',
   'Audio automatisch afspelen': 'Seinn fuaim go huathoibríoch',
   'Audio verwijderen': 'Bain an fhuaim',
-  'Geen audio gekozen': 'Níor roghnaíodh aon fhuaim',
   'Geen audiobestand gekozen': 'Níor roghnaíodh aon chomhad fuaime',
   'Video automatisch afspelen': 'Seinn físeán go huathoibríoch',
-  'Geen video gekozen': 'Níor roghnaíodh aon fhíseán',
   'Kiezen': 'Roghnaigh',
   'Uit bibliotheek…': 'Ón leabharlann…',
   'Van computer…': 'Ón ríomhaire…',
@@ -568,8 +529,6 @@ const _dutchSourceGa = {
   'Pakket importeren': 'Iompórtáil pacáiste',
   'Pakket exporteren': 'Easpórtáil pacáiste',
   'Map met presentaties kiezen': 'Roghnaigh fillteán na gcur i láthair',
-  'Standaard map voor presentaties':
-      'Fillteán réamhshocraithe do chuir i láthair',
   'Map voor exports': 'Fillteán le haghaidh easpórtálacha',
   'Logo kiezen': 'Roghnaigh lógó',
   'Kies een afbeelding': 'Roghnaigh íomhá',
@@ -582,8 +541,6 @@ const _dutchSourceGa = {
   'Map kiezen': 'Roghnaigh fillteán',
   'Kies een map met presentaties om te beginnen.':
       'Roghnaigh fillteán le cuir i láthair chun tosú.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Níor aimsíodh aon chur i láthair (.md) san fhillteán seo.',
   'Geen presentaties gevonden voor': 'Níor aimsíodh aon chur i láthair do',
   'meer treffer(s)': 'tuilleadh torthaí',
   'Slide zoeken': 'Aimsigh sleamhnán',
@@ -605,7 +562,6 @@ const _dutchSourceGa = {
       'Clóscríobh téarmaí cuardaigh chun sleamhnáin a aimsiú ar fud do chuir i láthair.',
   'toegevoegd': 'curtha leis',
   'Eerste': 'Céad',
-  'treffers — verfijn je zoekopdracht': 'torthaí — beachtaigh do chuardach',
   'treffer(s)': 'toradh/torthaí',
   'slide': 'sleamhnán',
   'Zoeken en vervangen': 'Aimsigh agus ionadaigh',
@@ -665,7 +621,6 @@ const _dutchSourceGa = {
   'Tekst op zijpanelen': 'Téacs ar phainéil taoibh',
   'Voorbeeldtekst': 'Téacs samplach',
   'Knop': 'Cnaipe',
-  'Profielnaam': 'Ainm na próifíle',
   'Naam van het stijlprofiel': 'Ainm na próifíle stíle',
   'Stijlprofiel': 'Próifíl stíle',
   'Nieuw profiel': 'Próifíl nua',
@@ -728,16 +683,9 @@ const _dutchSourceGa = {
   'TYPE': 'CINEÁL',
   'STIJL': 'STÍL',
   'Terug naar standaardstijl': 'Ar ais go dtí an stíl réamhshocraithe',
-  'Automatisch doorgaan na': 'Téigh ar aghaidh go huathoibríoch tar éis',
-  'Logo tonen op deze slide': 'Taispeáin an lógó ar an sleamhnán seo',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tábla ineagarthóireachta agus tú ag cur i láthair',
-  'Footer tonen op deze slide': 'Taispeáin an buntásc ar an sleamhnán seo',
   'Sprekersnotities...': 'Nótaí cainteora...',
   'Sprekersnotities': 'Nótaí cainteora',
   'Notities voor tijdens het presenteren': 'Nótaí le haghaidh cur i láthair',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mód Markdown — cuir an cur i láthair iomlán in eagar mar Marp Markdown',
   'Toepassen': 'Cuir i bhfeidhm',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Níorbh fhéidir an Markdown a phróiseáil. Seiceáil an chomhréir.',
@@ -762,8 +710,6 @@ const _dutchSourceGa = {
   'Geen resultaten voor': 'Gan torthaí do',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Coigeartaigh do théarma cuardaigh nó cuir cur síos leis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Úsáid "Brabhsáil" chun íomhánna a roghnú ó áit ar bith.',
   'Selecteer een\nafbeelding': 'Roghnaigh\níomhá',
   'Gekopieerd': 'Cóipeáilte',
   'Afbeelding verwijderen?': 'Scrios an íomhá?',
@@ -780,8 +726,6 @@ const _dutchSourceGa = {
   'spatie': 'spás',
   'klik': 'cliceáil',
   'cijfers': 'uimhreacha',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Cliceáil nó brúigh ? / H / Esc chun dúnadh',
   'Klik of druk op H / Esc om te sluiten':
       'Cliceáil nó brúigh H / Esc chun dúnadh',
   'Naar slidenummer': 'Go dtí uimhir sleabhráin',
@@ -793,21 +737,10 @@ const _dutchSourceGa = {
   'Scherm wisselen (meerdere schermen)':
       'Athraigh scáileán (scáileáin iomadúla)',
   'Zwart · wit scherm': 'Scáileán dubh · bán',
-  'Verstreken tijd resetten': 'Athshocraigh am caite',
   'Automatische modus aan/uit': 'Mód uathoibríoch as/air',
   'Herhalen (loop) aan/uit': 'Athdhéan (lúb) as/air',
-  'Na audio automatisch doorgaan':
-      'Lean ar aghaidh go huathoibríoch tar éis fuaime',
-  'Dit overzicht': 'An forbhreathnú seo',
   'Deze legenda': 'An finscéal seo',
   'Terug / afsluiten': 'Ar ais / imigh',
-  'Auto (A)': 'Uath (A)',
-  'Handmatig (A)': 'De láimh (A)',
-  'Herhalen (L)': 'Athdhéan (L)',
-  'Na audio (M)': 'Tar éis fuaime (M)',
-  'Sneltoetsen (?)': 'Aicearraí méarchláir (?)',
-  'Slide-overzicht (G)': 'Forbhreathnú sleamhnán (G)',
-  'Presenter view (P)': 'Amharc an láithreora (P)',
   'Tijd resetten (R)': 'Athshocraigh an t-amadóir (R)',
   'HUIDIGE SLIDE': 'SLEAMHNÁN REATHA',
   'VOLGENDE': 'AR AGHAIDH',
@@ -823,15 +756,9 @@ const _dutchSourceGa = {
   'Notities weggooien': 'Caith nótaí i leataobh',
   'Notities voor de ontvanger tijdens een cursus':
       'Nótaí don fhaighteoir le linn cúrsa',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Athraigh go mód Markdown chun nótaí a chur leis.',
   'Mijn notities aan/uit': 'Scoránaigh mo nótaí as/air',
   'Wissel scherm (S)': 'Athraigh scáileán (S)',
   'Kon niet van scherm wisselen.': 'Níorbh fhéidir scáileáin a athrú.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P lucht féachana · H finscéal · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -879,8 +806,6 @@ const _dutchSourceGa = {
   'Selectie opheffen': 'Glan an rogha',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Glacaim le ceadúnas EUPL 1.2 agus léigh mé cé na sonraí a stórálann OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Éiríonn do rogha ina teanga réamhshocraithe don aip.',
   'Lees de volledige licentie': 'Léigh an ceadúnas iomlán',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'Is bogearra saor é OciDeck faoi cheadúnas EUPL 1.2. Sula dtosaíonn tú, iarraimid ort glacadh leis an gceadúnas. Thíos is féidir leat léamh freisin cé na sonraí a stórálann OciDeck ar an ngléas seo agus cathain a fhágann rud éigin do ghléas.',
@@ -907,9 +832,6 @@ const _dutchSourceGa = {
   'Het antwoord van de server was te groot':
       'Bhí freagra an fhreastalaí rómhór',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Foinse Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar do Nextcloud. Stóráiltear an pasfhocal criptithe sa slabhra eochracha, ní in éineacht leis na socruithe eile.',
   'Server-URL': 'URL freastalaí',
   'Gebruikersnaam': 'Ainm úsáideora',
   'App-wachtwoord': 'Pasfhocal aipe',
@@ -923,22 +845,13 @@ const _dutchSourceGa = {
   'Verbinding gelukt': 'D\'éirigh leis an nasc',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Sábháiltear athruithe nuair a chliceálann tú Sábháil.',
-  'Afbeelding kiezen op Nextcloud': 'Roghnaigh íomhá ar Nextcloud',
-  'Openen vanaf Nextcloud': 'Oscail ó Nextcloud',
   'Vernieuwen': 'Athnuaigh',
   'Deze map is leeg': 'Tá an fillteán seo folamh',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Níl aon fhreastalaí Nextcloud socraithe. Socraigh ceann i Socruithe → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Níorbh fhéidir an fillteán a luchtú. Seiceáil do nasc agus do shocruithe.',
   'Kon dit bestand niet openen.': 'Níorbh fhéidir an comhad seo a oscailt.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Ní láithreoireacht Marp/OciDeck é seo.',
   'Downloaden mislukt:': 'Theip ar an íoslódáil:',
-  'Opgeslagen op Nextcloud:': 'Sábháilte chuig Nextcloud:',
   'Opslaan mislukt:': 'Theip ar an sábháil:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Socraigh freastalaí Nextcloud ar dtús i Socruithe → Nextcloud.',
   'Opslaan naar Nextcloud': 'Sábháil chuig Nextcloud',
   'Doelpad (zonder extensie)': 'Conair sprice (gan iarmhír)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -950,10 +863,6 @@ const _dutchSourceGa = {
       'Taispeáin forbhreathnú amanna ina dhiaidh',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Déantar an t-am in aghaidh an tsleamhnáin a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an forbhreathnú tar éis na láithreoireachta seo.',
-  'Oefenoverzicht tonen na afloop':
-      'Taispeáin achoimre chleachtaidh ina dhiaidh',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Tar éis láithreoireachta, taispeáin an forbhreathnú ar an am a caitheadh in aghaidh an tsleamhnáin. Déantar an t-am a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an scáileán.',
   'Onveilige presentatie geblokkeerd':
       'Cuireadh cosc ar láithreoireacht neamhshábháilte',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
@@ -1037,7 +946,6 @@ const _dutchSourceGa = {
   'Online': 'Ar líne',
   'Lokaal bestand': 'Comhad áitiúil',
   'Geen video': 'Gan físeán',
-  'Vraag (meerkeuze)': 'Ceist (ilrogha)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Tá codarsnacht rólag ag téacs an teidil leis an íomhá chúlra',
   'Herstel': 'Deisigh',
@@ -1052,8 +960,6 @@ const _dutchSourceGa = {
   'Huidig punt weghalen': 'Bain an pointe reatha',
   'Stap voor stap': 'Céim ar chéim',
   'Geen animatie': 'Gan beochan',
-  'Animatiesnelheid': 'Luas beochana',
-  'Langzaam': 'Mall',
   'Snel': 'Tapa',
   'Gebeurtenissen': 'Imeachtaí',
   'Gebeurtenis toevoegen': 'Cuir imeacht leis',
@@ -1066,8 +972,6 @@ const _dutchSourceGa = {
   'Vraag': 'Ceist',
   'Wat wil je vragen?': 'Cad ba mhaith leat a fhiafraí?',
   'Antwoorden': 'Freagraí',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marcáil na freagraí cearta. Ocht bhfreagra ar a mhéad; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
   'Antwoord': 'Freagra',
   'Antwoord toevoegen': 'Cuir freagra leis',
   'Goed antwoord': 'Freagra ceart',
@@ -1100,8 +1004,6 @@ const _dutchSourceGa = {
   'Stelling': 'Ráiteas',
   'Formuleer een stelling die juist of onjuist is':
       'Cum ráiteas atá fíor nó bréagach',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Marcáil na freagraí cearta go léir. Agus tú ag láithriú, taispeántar tacar randamach le ceann ceart amháin ar a laghad agus ceann mícheart.',
   'Juist': 'Fíor',
   'Onjuist': 'Bréagach',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1122,7 +1024,6 @@ const _dutchSourceGa = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Dathanna stádais méadar na cábáine. Cruthaigh leaganacha ainmnithe; baineann an scéim roghnaithe le gach sleamhnán cábáine.',
   'Standaard': 'Réamhshocrú',
-  'Standaardkleuren gebruiken': 'Úsáid dathanna réamhshocraithe',
   'Kleurschema verwijderen': 'Scrios scéim datha',
   'Schemanaam': 'Ainm na scéime',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1200,7 +1101,6 @@ const _dutchSourceGa = {
   'Logo en footer': 'Lógó agus buntásc',
   'Pagina': 'Leathanach',
   'Presentatiestijl': 'Stíl láithrithe',
-  'Presentatiestijl: ': 'Stíl láithrithe: ',
   'Tekst...': 'Téacs...',
   'Teksteditor': 'Eagarthóir téacs',
   'Volgende pagina': 'An chéad leathanach eile',
@@ -1213,8 +1113,6 @@ const _dutchSourceGa = {
   'Doeltijd': 'Sprioc-am',
   'Doeltijd (aftellen)': 'Sprioc-am (comhaireamh síos)',
   'Geen aftelling': 'Gan chomhaireamh síos',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Sprioc-am réamhshocraithe le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
   'uit': 'as',
   'Doeltijd / aftellen (K)': 'Sprioc / comhaireamh síos (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1289,14 +1187,8 @@ const _dutchSourceGa = {
   'Cirkel': 'Pióg',
   'Spider': 'Damhán alla',
   'CSV importeren': 'Iompórtáil CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Sonraí (CSV: an chéad ró = ainmneacha sraithe, an chéad cholún = lipéid)',
   'Gekoppeld aan': 'Nasctha le',
   'Ontkoppelen': 'Dínasc',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Stóráil na sonraí sa sleamhnán, nó coinnigh mar chomhad CSV ar leithligh in aice leis an láithreoireacht?',
-  'In de slide': 'Sa sleamhnán',
-  'Als CSV-bestand': 'Mar chomhad CSV',
   'Geen grafiekgegevens': 'Gan sonraí cairte',
   'Label': 'Lipéad',
   'Rij': 'Ró',
@@ -1326,7 +1218,6 @@ const _dutchSourceGa = {
   'Eigen kleur (hex)': 'Dath saincheaptha (heics)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Mar shampla #33FF33 do scáileán glas CRT.',
-  'Onderdeel van stijlprofiel ': 'Cuid de phróifíl stíle ',
   'Broncode lettertype': 'Cló cóid',
   'Kop (optioneel)': 'Ceannteideal (roghnach)',
   'Subkop (optioneel)': 'Focheannteideal (roghnach)',
@@ -1367,16 +1258,7 @@ const _dutchSourceGa = {
   'Zet het filter uit om alles weer te zien.':
       'Múch an scagaire chun gach rud a fheiceáil arís.',
   'Welkom bij OciDeck': 'Fáilte go OciDeck',
-  'Privacy en gebruik': 'Príobháideacht agus úsáid',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'Is feidhmchlár deisce logánta é OciDeck. Stóráiltear do láithreoireachtaí agus do shonraí ar do ríomhaire féin amháin.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Ní bhailíonn an aip aon sonraí pearsanta, aon staitisticí ná aon sonraí úsáide. Is í do phríobháideacht ár dtosaíocht.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Fanann gach sonra a chuireann tú isteach in OciDeck ar do chóras logánta agus ní sheoltar chuig freastalaithe seachtracha é.',
   'Licentie (EUPL 1.2)': 'Ceadúnas (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Trí chliceáil ar "Aontaím", glacann tú leis na téarmaí seo agus toilíonn tú le húsáid OciDeck.',
   'Volledige licentie online': 'Ceadúnas iomlán ar líne',
   'Akkoord gaan': 'Aontaím',
   'Privacy': 'Príobháideacht',
@@ -1465,8 +1347,6 @@ const _dutchSourceGa = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Bacadh an t-easpórtáil de bharr fadhbanna cáilíochta tromchúiseacha.',
   'Alle meldingen': 'Gach fadhb',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… agus tuilleadh fadhbanna sa phainéal cáilíochta.',
   'Classificatie-handhaving': 'Forfheidhmiú aicmithe',
   'Vrijgaveplafond': 'Uasteorainn scaoilte',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1485,11 +1365,9 @@ const _dutchSourceGa = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Socraigh leibhéal TLP — tá easpórtáil bactha ag an mbeartas aicmithe.',
   'Tabel bewerken': 'Cuir tábla in eagar',
-  'Pijltjes · Tab · Esc': 'Saigheada · Táb · Esc',
   'Tabel bewerken (op tabeldia)': 'Cuir tábla in eagar (ar shleamhnáin tábla)',
   'Tabel bewerken (E)': 'Cuir tábla in eagar (E)',
   'Tab wisselt cel · Esc sluit': 'Athraíonn Táb cill · Dúnann Esc',
-  'Pen · markeerstift · ⇧E': 'Peann · aibhsitheoir · ⇧E',
   'Gestapelde staaf': 'Barra cruachta',
   'Spreiding': 'Scaipthe',
   'PgUp/PgDn bladert door de slides': 'Bogann PgUp/PgDn idir na sleamhnáin',
@@ -1532,10 +1410,6 @@ const _dutchSourceGa = {
       'Earráid líonra — seiceáil do nasc agus bain triail eile as.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Chuaigh rud éigin amú gan choinne. Féach an logchomhad le haghaidh sonraí.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Níl Nextcloud socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Ní cheadaítear an freastalaí seo. Marcáil freastalaí príobháideach/LAN mar iontaofa ar dtús faoi Socruithe → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Ní féidir an freastalaí a shroicheadh — seiceáil do nasc agus URL an fhreastalaí.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1563,8 +1437,6 @@ const _dutchSourceGa = {
   'Uit recente bestanden verwijderen': 'Bain de na comhaid le déanaí',
   'OciDeck wordt gestart…': 'OciDeck á thosú…',
   'Herstelbestanden': 'Comhaid athshlánaithe',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Bíonn ábhar iomlán do chur i láthair i ngnáth-théacs sna comhaid athshlánaithe. Glantar go huathoibríoch iad tar éis 7 lá; is féidir leat iad a scriosadh láithreach anseo.',
   'Herstelbestanden nu wissen': 'Scrios comhaid athshlánaithe anois',
   'Er waren geen herstelbestanden.': 'Ní raibh aon chomhaid athshlánaithe ann.',
   'herstelbestand(en) gewist.': 'comhad/comhaid athshlánaithe scriosta.',
@@ -2000,7 +1872,6 @@ const _dutchSourceAddGa = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Cruthaímid cóip i gcluaisín nua; fanann do bhunchomhad gan athrú.',
   'Welk formaat?': 'Cén fhormáid?',
-  'dia\'s, gesplitst op kop.': 'sleamhnán, roinnte de réir ceannteideal.',
   'document': 'doiciméad',
   'volledig': 'iomlán',
   'Invoegen': 'Ionsáigh',
@@ -2163,12 +2034,8 @@ const _dutchSourceAddGa = <String, String>{
   'Alle integraties': 'Gach comhtháthú',
   'Alles inschakelen': 'Cumasaigh gach ceann',
   'Alles uitschakelen': 'Díchumasaigh gach ceann',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Tá fillteán tuairiscí socraithe cheana, mar sin fanann an nasc inrochtana agus is féidir taispeántas OpenKAT atá ann a nuashonrú fós.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Naisc le córais eile. Tá gach nasc múchta de réir réamhshocraithe agus fanann sé neamhghníomhach go dtí go gcumasaíonn tú é.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Léigh fillteáin tuairiscí OpenKAT isteach mar fhorbhreathnú bainistíochta amháin.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Láithreoireachtaí a thabhairt isteach ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp) mar deck ineagarthóireachta. Tá naisc le córais eile, ar nós OpenKAT, faoi Chomhtháthuithe.',
   'Media (WebRTC)': 'Meáin (WebRTC)',
@@ -2335,8 +2202,6 @@ const _dutchSourceAddGa = <String, String>{
   'Van toepassing': 'Infheidhme',
   'Voortgang': 'Dul chun cinn',
   'Voortgang managementsysteem': 'Dul chun cinn an chórais bainistíochta',
-  'Voortgangsoverzicht bijgewerkt':
-      'Nuashonraíodh an forbhreathnú ar an dul chun cinn',
   'Welk deel?': 'Cén chuid?',
   'beheersmaatregelen geladen': 'rialú luchtaithe',
   'geïmplementeerd': 'curtha i bhfeidhm',
@@ -2414,10 +2279,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ní cosúil gur eochair aisghabhála bhailí é seo.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tagann an eochair aisghabhála seo ó leagan níos nuaí de OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Tá cuimhne gréasáin na n-íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna nó íomhánna níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Tá an chuimhne ghréasáin d’íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck agus athlódáil an leathanach sula gcuireann tú tuilleadh íomhánna leis.',
   'Afbeeldingsrechten': 'Cearta íomhá',
   'Afbeeldingsrechten controleren…': 'Seiceáil cearta íomhá…',
   'Afdoening': 'Socrú',
@@ -2469,8 +2330,6 @@ const _dutchSourceAddGa = <String, String>{
   'Verifiëren': 'Fíoraigh',
   'Deelnemers verifiëren': 'Fíoraigh na rannpháirtithe',
   '(dit apparaat)': '(an gléas seo)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Cuir méarlorg gach gléis i gcomparáid trí bhealach iontaofa — léigh amach dá chéile é, nó seol é ar shlí a bhfuil muinín agat aisti. Má tá siad mar an gcéanna, tá tú ag obair leis na fíorghléasanna agus níor tháinig aon duine eatarthu. Má tá siad éagsúil, cuir deireadh leis an gcomhoibriú.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'Ní nasc cuiridh bailí é sin.',
   'De Matrix-homeserver is niet bereikbaar.':
@@ -2531,7 +2390,6 @@ const _dutchSourceAddGa = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Comhoibrigh beo ar láithreoireacht trí homeserver Matrix mar athsheachadán criptithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe. Cuir isteach homeserver agus comhartha rochtana a cruthaíodh in áit eile — ní iarrann OciDeck do phasfhocal riamh. Stóráiltear an ceadchomhartha criptithe san eochairslabhra, ní in aice leis na socruithe eile.',
   'wordt door de test ingevuld': 'líonann an tástáil isteach é',
-  'Versleuteld doorgeefluik (ontwerp)': 'Athsheachadán criptithe (dearadh)',
   'Meer documentatie op de repository': 'Tuilleadh doiciméadaithe sa stór',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Tá an doiciméadú iomlán — lena n-áirítear ailtireacht, tógáil, cód foinseach agus dearadh — sa stór.',
@@ -2774,50 +2632,14 @@ const _dutchSourceAddGa = <String, String>{
       'Cé na sonraí tomhais atá in easnamh nó as dáta?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Cé na sonraí ar a bhfuil an tuarascáil seo bunaithe?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Forbhreathnú bainistíochta leathan ach fíorasach le chuimhneacháin tomhais inrianaithe.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Ranganna gan scór iomlán agus taispeánann siad tomhais ar iarraidh ar leithligh.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Léiríonn comhaireamh déine, rannchuiditheoirí, agus tomhais tugtha ar aghaidh de réir nóiméad.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Eagraíonn eagraíochtaí a aimsiú cineálacha, córais agus tuairimí....',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Léiríonn uimhreacha criticiúla/ard gan aon mheá ceaptha.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Taispeánann sé uimhreoir, ainmneoir agus gan ach céatadáin iontaofa.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Grúpaí moltaí litriúil ó OpenKAT gan a dtosaíocht féin.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Íomhá reatha spriocdhírithe d\'eagraíocht amháin agus a dáta tomhais.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Comparáid a dhéanamh idir dhá mhóimint tomhais roghnaithe laistigh d’eagraíocht amháin.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Déanann sé idirdhealú idir nua, nua agus nach bhfeictear a thuilleadh.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Ní úsáideann sé ach dátaí céadbhreathnaithe iontaofa.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Córais céimeanna le cuntair déine ar leith.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Taispeánann sé luachanna deilt aonair gan scór ualaithe.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Cuirtear uimhreoir agus ainmneoir i gcomparáid le clúdach inchomparáide le feiceáil.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Fardail córais foinse-chruthaithe, óstainmneacha agus seoltaí IP.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Deighilteoirí monatóireachta, gan monatóireacht agus anaithnid.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Ní thaispeánann ach sócháin mhonatóireachta atá cruthaithe go sainráite.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Léiríonn eagraíochtaí agus córais timpeall ar nasc iontaofa CVE amháin.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Rangaítear CVEanna le dídúblú follasach.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Déanann sé idirdhealú idir CVEanna nua, CVEanna agus nach bhfeictear a thuilleadh.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Taispeánann sé tomhais atá in easnamh, atá as dáta agus a úsáidtear i ndáiríre.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Cuntais le haghaidh dátaí tábhachtacha, comhaid foinse, oiriúntóirí agus hashes foinse.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Níl sé ar fáil fós: ní chruthaíonn an fhoinse stádas monatóireachta do na sócmhainní go léir.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2863,11 +2685,6 @@ const _dutchSourceAddGa = <String, String>{
   'Welk rapport beantwoordt uw vraag?':
       'Cén tuairisc a fhreagraíonn do cheist?',
   'Meer rapportvragen': 'Tuilleadh ceisteanna tuairisce',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Cé na córais atá leochaileach do CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Eagraíochtaí agus córais leochaileacha thart ar leochaileacht amháin.',
-  'Organisaties met kwetsbare systemen': 'Eagraíochtaí le córais leochaileacha',
   'Kwetsbare systemen': 'Córais leochaileacha',
   'Kritiek/hoog': 'Criticiúil/ard',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2890,8 +2707,6 @@ const _dutchSourceAddGa = <String, String>{
   'Bruikbaar': 'Inúsáidte',
   'CVE zoeken': 'Cuardach CVE',
   'Critical/high': 'Criticiúil/ard',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Cáilíocht sonraí, tomhais in easnamh agus dífheidhmeacht.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Níl go leor sonraí iontaofa sna tuarascálacha roghnaithe don chuid seo.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2918,10 +2733,6 @@ const _dutchSourceAddGa = <String, String>{
   'Geen bruikbare meetdatum': 'Gan dáta tomhais inúsáidte',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Athnuachann sleamhnáin ginte. Coinnítear do shleamhnáin agus do chóipeanna féin.',
-  'Getroffen organisaties en systemen':
-      'Eagraíochtaí agus córais lena mbaineann',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Eagraíochtaí agus córais a bhfuil tionchar acu thart ar leochaileacht amháin.',
   'Getroffen systemen': 'Córais a bhfuil tionchar orthu',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Níorbh fhéidir an tuarascáil a chruthú. Tá do roghanna caomhnaithe; seiceáil na rabhaidh agus bain triail eile as.',
@@ -2931,20 +2742,15 @@ const _dutchSourceAddGa = <String, String>{
   'Keuzes wijzigen…': 'Athraigh roghanna…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Roghnaigh an fillteán inar chuir OpenKAT na tuarascálacha. Ní léann OciDeck ach an fillteán seo; ní athraítear ná ní sheoltar aon rud.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Roghnaigh an cheist ba cheart don tuarascáil a fhreagairt. Cinneann OciDeck an struchtúr cuí.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Roghnaigh CVE a fhaightear sna tuarascálacha.',
   'Laatste bruikbare meting': 'An tomhas is déanaí inúsáidte',
   'Live voorvertoning van de rapportopbouw':
       'Réamhamharc beo ar struchtúr na tuairisce',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Eolas bainistíochta agus rialaithe faoi eagraíochtaí iolracha.',
   'Meer instellingen': 'Tuilleadh socruithe',
   'Nederlands': 'Ollainnis',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Níl tomhas ag gach eagraíocht roghnaithe don tréimhse seo.',
-  'Nieuwe en verdwenen bevindingen': 'Torthaí nua agus in easnamh',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Níl sé ar fáil fós: níl uimhreacha iontaofa CVE sna tuarascálacha seo.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2979,8 +2785,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá tomhas reatha úsáideach in easnamh d’eagraíocht amháin nó níos mó.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Teastaíonn dhá nóiméad tomhais le haghaidh comparáide. Tá tomhas amháin aimsithe anois.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Dul chun cinn i gcomparáid le nóiméad tomhais roimhe seo.',
   'Waar staan de OpenKAT-rapportages?': 'Cá bhfuil na tuarascálacha OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'Cad a d’athraigh ag eagraíocht amháin?',
@@ -2994,7 +2798,6 @@ const _dutchSourceAddGa = <String, String>{
   'bruikbaar': 'inúsáidte',
   'metingen': 'tomhais',
   'organisaties': 'eagraíochtaí',
-  'organisaties geselecteerd': 'eagraíochtaí roghnaithe',
   'rapportages gebruikt': 'tuarascálacha a úsáideadh',
   'systemen': 'córais',
   'Nog geen specificatielimiet': 'Níl teorainn sonraíochta fós',
@@ -3139,7 +2942,6 @@ const _dutchSourceAddGa = <String, String>{
       'tá sé ar sleamhnán crann ach ní úsáidtear é in áit eile — nasc é le maitrís, sruth nó sleamhnán eile.',
   'Nieuw verbeteringsproject': 'Tionscadal feabhsúcháin nua',
   'Kader': 'Creat',
-  'Projecttitel': 'Teideal an tionscadail',
   'Primaire Y-metriek (Y-01)': 'Príomh-mheicneoir Y (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Mar shampla: am order intake i laethanta oibre',
@@ -3195,10 +2997,6 @@ const _dutchSourceAddGa = <String, String>{
   'Bron niet toegestaan': 'Foinse neamhcheadaithe',
   'Deze URL is door de beveiliging geweigerd.':
       'Dhiúltaigh an tslándáil don URL seo.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Ábhar a thabhairt isteach ó chórais eile. Dhá fhoinse: déantar deck ineagarthóireachta as láithreoireachtaí ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp), agus déantar forbhreathnú bainistíochta amháin as tuairiscí OpenKAT (fillteán le JSON). Socraítear suíomh fhillteán OpenKAT faoi Chomhtháthuithe.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Láithreoireachtaí a thabhairt isteach ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp) mar deck ineagarthóireachta. Níl léamh fhillteáin tuairiscí OpenKAT ar fáil ach sa leagan deisce.',
   'Alinea': 'Alt',
   'Audio "{bestand}"': 'Fuaim "{bestand}"',
   'Deck opbouwen…': 'Deic á thógáil…',
@@ -3320,8 +3118,6 @@ const _dutchSourceAddGa = <String, String>{
       'Innéacs an tseicliosta: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta agus an chatagóir. Níl ábhar an treoraí féin faoi iamh.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Innéacs tástálacha v2.0.0: in aghaidh gach tástála, an t-aitheantóir seasmhach, an teideal canónta, an chatagóir MASVS agus an laige MASWE. Níl tástálacha v1 a tarraingíodh siar ná ionadchoinneálaithe san áireamh; ná ábhar an treoraí ach oiread.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Liosta na laigí (117): aitheantóir, teideal, catagóir MASVS, ardán agus an nasc CWE. Níl trí cheathrú díobh scríofa amach ag an bhfoinse fós; tá siad sin san áireamh, marcáilte. Níl laigí a tarraingíodh siar.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'An liosta iomlán (aitheantóir, ainm, cur síos) chomh maith le croí roghnaithe dár gcuid féin le nótaí leigheasta.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3368,34 +3164,17 @@ const _dutchSourceAddGa = <String, String>{
       'Tiontaítear gach comhad ar leith agus sábháiltear é mar láithreoireacht dá chuid féin san fhillteán sprice. Má theipeann ar cheann, leanann an scuaine ar aghaidh.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Nuair a iompórtáiltear roinnt láithreoireachtaí ag an am céanna, scríobhtar mar chomhaid i bhfillteán iad; ní féidir leis an leagan brabhsálaí é sin a dhéanamh.',
-  'Nu importeren': 'Iompórtáil anois',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Tá an forbhreathnú réidh i gcluaisín nua.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Léann sé fillteán de thuairiscí OpenKAT (JSON) agus tógann forbhreathnú bainistíochta amháin as: córais, torthaí de réir déine, na míreanna is faide ar oscailt agus an treocht thar thomhais i ndiaidh a chéile. Nuashonraíonn an gníomh céanna taispeántas OpenKAT atá ann cheana agus fágann sé do shleamhnáin féin mar atá.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Ní dhéanann an t-iompórtáil ach léamh; ní athraítear ná ní sheoltar aon rud san fhillteán seo. Déantar comhaid nach tuairiscí OpenKAT iad a scipeáil agus a ainmniú sa logáil iompórtála.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Sonraigh an fillteán ina bhfuil do thuairiscí OpenKAT (JSON). Léann an t-iompórtáil an fillteán sin agus tógann forbhreathnú bainistíochta amháin as; má tá an fillteán socraithe anseo, ní gá duit é a roghnú gach uair.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Léann an t-iompórtáil OpenKAT fillteán ón diosca agus níl sé ar fáil ach sa leagan deisce.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Níl fillteán tuairiscí socraithe fós, mar sin iarrann an t-iompórtáil ceann gach uair.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Tá fillteán tuairiscí socraithe cheana, mar sin fanann an pointe iontrála inrochtana agus is féidir taispeántas OpenKAT atá ann a nuashonrú fós.',
   'Integraties': 'Comhtháthuithe',
-  'Naar Integraties': 'Go dtí Comhtháthuithe',
   'Map kiezen…': 'Roghnaigh fillteán…',
   'Map wissen': 'Glan an fillteán',
-  'OpenKAT-rapportages importeren…': 'Iompórtáil tuairiscí OpenKAT…',
   'Map met OpenKAT-rapportages kiezen':
       'Roghnaigh fillteán le tuairiscí OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Tuairiscí OpenKAT iompórtáilte.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck OpenKAT nuashonraithe; coinníodh na sleamhnáin láimhe.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Níor aimsíodh aon tuairiscí OpenKAT san fhillteán seo.',
-  'OpenKAT-import mislukt.': 'Theip ar an iompórtáil OpenKAT.',
   'rapportages': 'tuairiscí',
   'overgeslagen': 'fágtha ar lár',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3456,8 +3235,6 @@ const _dutchSourceAddGa = <String, String>{
   'Label op de primaire knop': 'Lipéad ar an bpríomhchnaipe',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Fionnachtana a ndearna tú athbhreithniú orthu agus a d\'fhág tú mar atá. Ní thuairiscítear a thuilleadh iad, ach aimsíonn an scanadh fós iad agus ní áirítear réitithe iad. Tapáil chun ceann a chur ar ais.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Fionnachtain phríobháideachais a chur i leataobh (dearadh)',
   'Deze is beoordeeld en mag blijven': 'Seiceáilte, féadann sé seo fanacht',
   'Mogelijk gemaakt door': 'Arna chumasú ag',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3469,10 +3246,8 @@ const _dutchSourceAddGa = <String, String>{
   'Technische melding:': 'Teachtaireacht theicniúil:',
   'presentaties': 'laithreoidi',
   '/Presentaties': '/Láithreoidí',
-  'Rapportagedistributie (ontwerp)': 'Dáileadh tuairiscí (dearadh)',
   'De export is mislukt.': 'Theip ar an easpórtáil.',
   'Presenteer vanaf hier': 'Cuir i láthair ón áit seo',
-  'Teams-gastclient (ontwerp)': 'Cliant aoi Teams (dearadh)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: cé chomh forleathan is féidir an t-ábhar seo a roinnt?',
   'Wat betekenen deze niveaus?': 'Cad is brí leis na leibhéil seo?',
@@ -3591,8 +3366,6 @@ const _dutchSourceAddGa = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Láithreoireachtaí a fhanann ina ngnáthchomhaid Markdown: inléite, inchuardaithe agus infhoscailte le heagarthóir ar bith.',
   'sjablonen om mee te beginnen, of leeg': 'teimpléad le tosú leo, nó folamh',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Tá an fágáil ar lár ann: cuirtear dubh ar na sonraí a aimsíodh agus ní théann na híomhánna, an físeán ná an fhuaim ar fad ón sleamhnán seo chuig an scáileán ná chuig an easpórtáil. Coinníonn do chomhad markdown gach rud.',
   'Mijn tekst': 'Mo théacs',
   'Wat zij zien': 'A bhfeiceann siad',
   'Presentatiegegevens': 'Sonraí na láithreoireachta',
@@ -3816,7 +3589,6 @@ const _dutchSourceAddGa = <String, String>{
   'Opslaan naar…': 'Sábháil chuig…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Socraigh ceangal ar dtús faoi Socruithe → Stóráil.',
-  'Beginnen met:': 'Tosaigh le:',
   'Verlopen datums markeren': 'Marcáil dátaí atá thart',
   'Datums gemarkeerd': 'Dátaí marcáilte',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3842,28 +3614,15 @@ const _dutchSourceAddGa = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'An dromchla ionsaithe de réir cineál ruda: cé mhéad atá ann, cé mhéad a bhfuil obair de dhíth orthu, cad atá nua agus cad nach le duine ar bith é. Is é an ceann deireanach sin an comhrá de ghnáth.',
   'Acties en besluiten': 'Gníomhartha agus cinntí',
-  'Actie toevoegen': 'Cuir gníomh leis',
-  'Actie verwijderen': 'Bain an gníomh',
   'Actie': 'Gníomh',
   'Deadline': 'Spriocdháta',
-  'Op de lijst sinds': 'Ar an liosta ó',
   'Stand': 'Stádas',
-  'Wat vraagt u': 'Cad atá á iarraidh agat',
   'geen datum': 'gan dáta',
-  'Ter informatie': 'Mar eolas',
   'Besluit gevraagd': 'Cinneadh de dhíth',
   'Escalatie': 'Géarú',
   'Open': 'Oscailte',
   'Loopt': 'Ar siúl',
   'Afgerond': 'Déanta',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Ní bhfaigheann ach cinneadh nó géarú lipéad ar an sleamhnán; leanann "déanach" ón spriocdháta agus ní tusa a shocraíonn é.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Dátaí mar bbbb-mm-ll. Diúltaítear d\'aon fhoirm eile seachas buille faoi thuairim: is dhá lá éagsúla é 05-08-2026.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Iompraíonn sleamhnán gníomhartha ocht líne ar a mhéad; thar sin, déanann an seomra scimeáil in ionad cinneadh.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Cad nach mór a tharlú, cé a dhéanfaidh é agus cathain. Luaigh de réir líne an mar eolas atá sé nó an bhfuil cinneadh á iarraidh agat — sin a lorgaíonn an seomra.',
   'Scorecard': 'Cárta scóir',
   'Cijfer toevoegen': 'Cuir figiúr leis',
   'Cijfer verwijderen': 'Bain an figiúr',
@@ -3952,8 +3711,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá an comhartha bailí, ach níl cead aige é seo a dhéanamh — tabhair níos mó cearta dó ar an stór.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Sínithe isteach, ach gan rochtain — ní hé do phasfhocal an fhadhb. Iarr cearta don fhillteán seo.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Ceadúnais foclóra: a bhfuil fós le fiafraí',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Tá cuma URL DAV iomlán air seo. I gcás Nextcloud, díorthaíonn OciDeck an chonair sin é féin — níl anseo ach an freastalaí.',
   'Overnemen': 'Cuir i bhfeidhm',
@@ -3996,8 +3753,6 @@ const _dutchSourceAddGa = <String, String>{
   'kenteken': 'uimhir chláraithe feithicle',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Tá an liosta eochairfhocal do chatagóirí speisialta sonraí pearsanta an-tanaí i dteanga an deic seo. Ná bí ag brath ar fhocail ar nós "diagnóis" nó "duine faoi amhras" a aimsiú.',
   'Landpakketten voor identificatienummers':
       'Pacáistí tíre d\'uimhreacha aitheantais',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -4027,8 +3782,6 @@ const _dutchSourceAddGa = <String, String>{
       'Níl ainm an fhreastalaí ann, nó ní féidir é a chuardach. Seiceáil URL an fhreastalaí le haghaidh botúin chlóscríofa.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Tá seoladh príobháideach nó LAN ag an bhfreastalaí seo. Marcáil é mar inmheánach iontaofa faoi Socruithe → Stóráil.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Níl muinín as teastas an fhreastalaí seo. Ní oibreoidh teastas féinsínithe; úsáid ceann ó eisitheoir aitheanta.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Atreoraíonn an freastalaí chuig seoladh eile. Cuir an seoladh sin isteach go díreach — ní leanaimid atreoruithe, mar is féidir leo an tseiceáil slándála a sheachaint.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4064,8 +3817,6 @@ const _dutchSourceAddGa = <String, String>{
   'Opslaan naar S3': 'Sábháil chuig S3',
   'Opgeslagen in S3:': 'Sábháilte chuig S3:',
   'Hier staat niets': 'Níl aon rud anseo',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Níorbh fhéidir an t-ábhar a lódáil. Seiceáil do cheangal agus do shocruithe.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Ní féidir an críochphointe a bhaint amach — seiceáil do cheangal agus an críochphointe.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4074,8 +3825,6 @@ const _dutchSourceAddGa = <String, String>{
       'Thug an críochphointe earráid ar ais. Bain triail eile as ar ball.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Ní féidir leis an gcríochphointe seo scríobh go coinníollach, mar sin níl do chuid oibre cosanta ar obair duine eile. Sábháil faoi ainm nua má tá duine eile ag obair ar an láithreoireacht seo.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Níl buicéad S3 socraithe. Socraigh ceann i Socruithe → Stóráil.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Socraigh buicéad S3 ar dtús i Socruithe → Stóráil.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4121,10 +3870,6 @@ const _dutchSourceAddGa = <String, String>{
       'Taispeánann an íomhá seo {count} aghaidh inaitheanta ar a laghad.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Níorbh fhéidir an íomhá seo a sheiceáil le haghaidh aghaidheanna. Ní thacaítear leis an bhformáid (HEIC mar shampla). Ní chiallaíonn sé sin nach bhfuil aon duine inti — ciallaíonn sé nár breathnaíodh.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Taispeánann an íomhá seo aghaidh inaitheanta.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Taispeánann an íomhá seo {count} aghaidh inaitheanta.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Is sonraí pearsanta é íomhá ina bhfuil duine inaitheanta, fiú gan ainm.',
   'herkenbaar gezicht op een afbeelding': 'aghaidh inaitheanta in íomhá',
@@ -4141,8 +3886,6 @@ const _dutchSourceAddGa = <String, String>{
   'Organisatie': 'Eagraíocht',
   'Welke verbinding?': 'Cén nasc?',
   'Bestandsverbindingen': 'Naisc chomhad',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Na háiteanna ina gcoinníonn tú agus ina gcuardaíonn tú do chuid láithreoireachtaí — fillteáin ar an ríomhaire seo, freastalaithe WebDAV agus stórais git measctha. Tarraing iad san ord is mian leat: is é an ceann is airde de gach cineál an réamhshocrú.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Stóras git; coinnítear gach leagan sábháilte.',
   'Een map op de schijf van deze computer.':
@@ -4167,15 +3910,7 @@ const _dutchSourceAddGa = <String, String>{
   'Openen vanaf WebDAV': 'Oscail ó WebDAV',
   'Opslaan naar WebDAV': 'Sábháil chuig WebDAV',
   'Opgeslagen op WebDAV:': 'Sábháilte chuig WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Socraigh freastalaí WebDAV ar dtús i Socruithe → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Roghnaigh íomhá ar WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Níl aon fhreastalaí WebDAV socraithe. Socraigh ceann i Socruithe → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'Níl WebDAV socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Ní cheadaítear an freastalaí seo. Marcáil freastalaí príobháideach/LAN mar iontaofa ar dtús faoi Socruithe → WebDAV.',
   'Servertype': 'Cineál freastalaí',
   'Nextcloud of ownCloud': 'Nextcloud nó ownCloud',
   'Andere WebDAV-server': 'Freastalaí WebDAV eile',
@@ -4197,24 +3932,12 @@ const _dutchSourceAddGa = <String, String>{
   'Haal volle pagina uit de reeks': 'Bain leathanach lán as an tsraith',
   'Opslag': 'Stóráil',
   'Opslagwijzen': 'Modhanna stórála',
-  'Deze computer': 'An ríomhaire seo',
   'Ingesteld': 'Cumraithe',
   'Niet ingesteld': 'Gan cumrú',
-  'Nog geen bibliotheek ingesteld': 'Níl leabharlann ar bith socraithe fós',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Na bealaí ar féidir leat láithreoireachtaí a oscailt agus a shábháil. Cliceáil modh chun é a chumrú.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Láithreoireachtaí sna fillteáin thuas, ar dhiosca an ríomhaire seo.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar do Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Oscail láithreoireachtaí ó stór git; coinnítear gach leagan sábháilte.',
-  'Nog te verifiëren': 'Le fíorú fós',
   'MASWE-zwakheid kiezen': 'Roghnaigh laige MASWE',
   'Zoek op naam, id of categorie':
       'Cuardaigh de réir ainm, aitheantóir nó catagóir',
   'Geen zwakheid gevonden': 'Níor aimsíodh aon laige',
-  'uitleg nog niet geschreven': 'níl an treoir scríofa fós',
   'Getalnotatie herkennen': 'Aithin formáid na n-uimhreacha',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Tá uimhreacha sa chomhad seo ar féidir an camóg iontu a léamh ar dhá bhealach:',
@@ -4334,12 +4057,10 @@ const _dutchSourceAddGa = <String, String>{
   'Veelgestelde vragen': 'Ceisteanna coitianta',
   'Probleemoplossing': 'Fabhtcheartú',
   'Begrippenlijst': 'Gluais',
-  'API-documentatie': 'Doiciméadú API',
   'Prestaties': 'Feidhmíocht',
   'Beveiligingsontwerp': 'Dearadh slándála',
   'Hosting en uitrol': 'Óstáil agus imscaradh',
   'Bijdragen': 'Rannchuidiú',
-  'Ontwikkelomgeving': 'Timpeallacht forbartha',
   'Migratiegids': 'Treoir aistrithe',
   'Versies…': 'Leaganacha…',
   'Versies:': 'Leaganacha:',
@@ -4380,8 +4101,6 @@ const _dutchSourceAddGa = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Bhog an bhrainse; athluchtaigh an deic agus sábháil arís.',
   'Bijgewerkt met OciDeck': 'Nuashonraithe le OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Socraigh stór Git ar dtús faoi Socruithe → Stór Git.',
   'Git-repository': 'Stór Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Oscail láithreoireachtaí ó stór Git. Coinnítear gach leagan sábháilte. Stóráiltear an ceadchomhartha criptithe san eochairslabhra, ní in aice leis na socruithe eile.',
@@ -4397,7 +4116,6 @@ const _dutchSourceAddGa = <String, String>{
       'Sleamhnáin tuairiscithe agus sonraí tagartha don slándáil faisnéise: fionnachtana, seicliostaí, maitrísí raon feidhme agus síniú. Struchtúrtha de réir MIAUW agus inúsáidte go forleathan le haghaidh pentestanna, iniúchtaí agus taighde slándála. Tá na sonraí tagartha san aip féin, mar sin oibríonn an modúl láithreach agus go hiomlán as líne.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modúil roghnacha. Múchta de réir réamhshocraithe; fanann siad i bhfolach go dtí go gcumasaíonn tú iad.',
-  'Procesverbetering (ontwerp)': 'Feabhsú próiseas (dearadh)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Is seachtháirge de chuid an Pilot Informatieautonomie é an tionscadal seo.',
   'Stijlprofiel exporteren': 'Easpórtáil próifíl stíle',
@@ -4539,7 +4257,6 @@ const _dutchSourceAddGa = <String, String>{
   'genetisch gegeven': 'sonraí géiniteacha',
   'parketnummer': 'uimhir cháis ionchúisimh',
   'nationaal identificatienummer': 'uimhir aitheantais náisiúnta',
-  'OciWacht (ontwerp)': 'OciWacht (dearadh)',
   'Mogelijk geheim': 'Rún féideartha',
   'sleutel of token': 'eochair nó comharthán',
   'private sleutel': 'eochair phríobháideach',
@@ -4572,7 +4289,6 @@ const _dutchSourceAddGa = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Cuir an liosta CVE iomlán ar an ngléas seo, ionas go ndéanfar cuardaigh as líne agus nach dtéann do théarma cuardaigh áit ar bith. Tagann an bunachar sonraí ó CVE List V5 (an clár oifigiúil CVE, trí GitHub).',
   'Wat er lokaal beschikbaar is': 'A bhfuil ar fáil go háitiúil',
-  'Gegevenspakket': 'Pacáiste sonraí',
   'Nu bijwerken': 'Nuashonraigh anois',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Sonraí ar fáil go háitiúil — déantar cuardaigh ar an ngléas seo; ní fhágann aon rud é.',
@@ -4591,7 +4307,6 @@ const _dutchSourceAddGa = <String, String>{
       'Glac leis: baineann na sonraí leis an áit seo agus imíonn an fógra. Glac leis + tabhair rabhadh: feiceann an faighteoir suaitheantas go bhfuil sonraí pearsanta ar an sleamhnán. Fág ar lár: déantar na sonraí a aimsíodh doléite ar an scáileán agus san easpórtáil — coinníonn do chomhad Markdown an téacs bunaidh.',
   'Alleen melden': 'Tuairiscigh amháin',
   'PERSOONSGEGEVENS': 'SONRAÍ PEARSANTA',
-  'Persoonsgegevens op deze slide': 'Sonraí pearsanta ar an sleamhnán seo',
   'Volg de presentatie': 'Lean an láithreoireacht',
   'Weglaten uit tonen en exporteren':
       'Fág ar lár ón taispeáint agus ón easpórtáil',
@@ -4713,8 +4428,6 @@ const _dutchSourceAddGa = <String, String>{
   'Bewerk deze slide': 'Cuir an sleamhnán seo in eagar',
   'Bewijs verwijderen': 'Bain an fhianaise',
   '(nog leeg)': '(folamh fós)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Cuir aitheantas fionnachtana isteach ar dtús chun fianaise a cheangal.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Cuir gabhálacha scáileáin nó físeáin leis mar fhianaise. Éiríonn gach píosa fianaise ina sleamhnán féin díreach i ndiaidh na fionnachtana agus cuirtear san easpórtáil é.',
   'Uitvoering testen conform standaard': 'Tástáil de réir an chaighdeáin',

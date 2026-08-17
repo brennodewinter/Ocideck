@@ -41,17 +41,13 @@ const _stringsIt = {
   'settings': 'Impostazioni',
   'settingsGeneral': 'Generale',
   'settingsColors': 'Colori',
-  'settingsLogo': 'Logo',
   'language': 'Lingua',
   'applicationLanguage': 'Lingua applicazione',
   'languageHelp':
       'L’interfaccia cambia lingua subito. Il contenuto della presentazione resta invariato.',
-  'presentationFolder': 'Cartella presentazioni',
   'exportFolderSetting': 'Cartella esportazione',
-  'notSet': 'Non impostata',
   'nextToPresentationFile': 'Accanto al file della presentazione',
   'choose': 'Scegli',
-  'removeDefaultFolder': 'Rimuovi cartella predefinita',
   'removeExportFolder': 'Rimuovi cartella esportazione',
   'exportFolderHelp':
       'Tutte le esportazioni (PDF/PPTX) vengono salvate qui. Se non impostata, accanto al file della presentazione.',
@@ -85,8 +81,6 @@ const _dutchSourceIt = {
   'Handtekening tekenen': 'Disegna firma',
   'Teken je handtekening in het vak hieronder.':
       'Disegna la tua firma nel riquadro qui sotto.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Un pacchetto di dati è un .zip con i dati di riferimento di questo modulo. Viene prima verificato rispetto all\'impronta incorporata nell\'app; è accettato solo un pacchetto compatibile con questa versione dell\'app.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Barre orizzontali',
@@ -194,7 +188,6 @@ const _dutchSourceIt = {
       'Le immagini e i media sono condivisi dalle presentazioni nella stessa cartella. Il nome esatto lo scegli tra poco nella finestra di sistema.',
   'Alle bibliotheken': 'Tutte le librerie',
   'Andere map…': 'Altra cartella…',
-  'Bibliotheek verwijderen': 'Rimuovi libreria',
   'Bibliotheken': 'Librerie',
   'Geen bibliotheek': 'Nessuna libreria',
   'Geen presentaties (.md) gevonden.': 'Nessuna presentazione (.md) trovata.',
@@ -206,10 +199,6 @@ const _dutchSourceIt = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Scegli in quale libreria inserire la presentazione.',
   'Map toevoegen': 'Aggiungi cartella',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Cartelle in cui conservi e cerchi le tue presentazioni. Dai a ciascuna un nome proprio per distinguerle. Tutte le librerie vengono cercate all\'apertura e nella libreria immagini.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Ancora nessuna libreria — aggiungi una cartella.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Ancora nessuna libreria. Aggiungine una nelle Impostazioni, oppure scegli sopra una cartella da consultare.',
   'Presentatie opslaan': 'Salva presentazione',
@@ -292,21 +281,11 @@ const _dutchSourceIt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'La dichiarazione di veridicità con relatore, certificazione, firma e sigillatura.',
   'Uitbreidingen': 'Estensioni',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Moduli opzionali. Disattivati per impostazione predefinita; non aggiungono nulla all\'app di base finché non li attivi.',
   'Gegevens opschonen': 'Pulisci dati',
   'Gegevens lokaal beschikbaar': 'Dati disponibili localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Concedi prima il consenso al traffico in uscita in Licenza e privacy.',
   'Op het web nog niet beschikbaar': 'Non ancora disponibile sul web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nessuna fonte raggiungibile — non è stato possibile scaricare i dati di riferimento da nessuna parte. Riprova o importa il pacchetto manualmente.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'I dati scaricati non corrispondevano all\'impronta digitale prevista e sono stati rifiutati per precauzione.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Il pacchetto di dati era danneggiato o non valido ed è stato quindi rifiutato.',
-  'Gegevenspakket kiezen': 'Scegli pacchetto di dati',
-  'Kon het gekozen bestand niet lezen.': 'Impossibile leggere il file scelto.',
   'Nog niet opgehaald': 'Non ancora scaricato',
   'AI-assistentie': 'Assistenza IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -323,22 +302,15 @@ const _dutchSourceIt = {
       'Un servizio cloud richiede prima il tuo consenso alla privacy in "Licenza e privacy" e non funziona nella versione web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Capisco che i dati vengono inviati a questo servizio esterno',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Assistenza IA (disattivata per impostazione predefinita): se scegli un backend self-hosted o cloud, i testi o le immagini che fai elaborare vengono inviati a quell\'indirizzo. Un modello IA locale su questo dispositivo non invia nulla.',
   'Zoek een slidetype': 'Cerca un tipo di slide',
   'Alfabetisch sorteren': 'Ordina alfabeticamente',
   'Algemeen': 'Generale',
   'Informatieveiligheid': 'Sicurezza delle informazioni',
   'Alle': 'Tutti',
-  'Pentestrapportage (ontwerp)': 'Rapporto penetration test (progetto)',
-  'AI-assistentie (ontwerp)': 'Assistenza AI (progetto)',
-  'Agentisch bouwplan (ontwerp)': 'Piano di build agentico (progetto)',
-  'Bijsnijden': 'Ritaglia',
   'Linksom': 'Ruota a sinistra',
   'Rechtsom': 'Ruota a destra',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trascina l\'immagine per scegliere quale parte rimane visibile.',
-  'Git-opslag (ontwerp)': 'Archiviazione Git (progetto)',
   'Zoek in documentatie…': 'Cerca nella documentazione…',
   'Geen documenten gevonden': 'Nessun documento trovato',
   'Alleen afspelen (vergrendeld)': 'Solo riproduzione (bloccato)',
@@ -352,12 +324,8 @@ const _dutchSourceIt = {
   'Techniek': 'Tecnica',
   'Licentie en naleving': 'Licenza e conformità',
   'Architectuur': 'Architettura',
-  'Bouwinstructies': 'Istruzioni di compilazione',
-  'Kwaliteitscontroles': 'Controlli di qualità',
-  'Broncodekaart': 'Mappa del codice sorgente',
   'Licentienaleving': 'Conformità delle licenze',
   'Softwarestuklijst (SBOM)': 'Distinta base del software (SBOM)',
-  'Samenwerking (ontwerp)': 'Collaborazione (progetto)',
   'Beschermen met een wachtwoord (AES-256)':
       'Proteggi con una password (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -436,10 +404,6 @@ const _dutchSourceIt = {
   'Instelling opslaan is mislukt.': 'Salvataggio impostazione non riuscito.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: la versione web può scaricare solo da server che lo consentono (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'I pacchetti (.ocideck) non sono ancora supportati nella versione web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Nella versione web è possibile aprire solo presentazioni .md.',
   'Geen': 'Nessuno',
   'Nieuw': 'Nuovo',
   'Verwijderen': 'Elimina',
@@ -469,14 +433,8 @@ const _dutchSourceIt = {
   'Lijn': 'Linee',
   'Cirkel': 'Torta',
   'CSV importeren': 'Importa CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Dati (CSV: prima riga = nomi serie, prima colonna = etichette)',
   'Gekoppeld aan': 'Collegato a',
   'Ontkoppelen': 'Scollega',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Salvare i dati nella slide o tenerli come file CSV separato accanto alla presentazione?',
-  'In de slide': 'Nella slide',
-  'Als CSV-bestand': 'Come file CSV',
   'Geen grafiekgegevens': 'Nessun dato del grafico',
   'Label': 'Etichetta',
   'Rij': 'Riga',
@@ -510,7 +468,6 @@ const _dutchSourceIt = {
   'Audio automatisch afspelen': 'Riproduci audio automaticamente',
   'Video automatisch afspelen': 'Riproduci video automaticamente',
   'Geen audiobestand gekozen': 'Nessun file audio scelto',
-  'Geen video gekozen': 'Nessun video scelto',
   'Kiezen': 'Scegli',
   'Uit bibliotheek…': 'Dalla libreria…',
   'Van computer…': 'Dal computer…',
@@ -579,7 +536,6 @@ const _dutchSourceIt = {
   'Tekst op zijpanelen': 'Testo sui pannelli laterali',
   'Voorbeeldtekst': 'Testo di esempio',
   'Knop': 'Pulsante',
-  'Profielnaam': 'Nome profilo',
   'Stijlprofiel': 'Profilo stile',
   'Lettertype': 'Carattere',
   'Kleuren': 'Colori',
@@ -625,10 +581,8 @@ const _dutchSourceIt = {
   'Presenter view (notities, klok)': 'Vista relatore (note, orologio)',
   'Scherm wisselen (meerdere schermen)': 'Cambia schermo (piu schermi)',
   'Zwart · wit scherm': 'Schermo nero · bianco',
-  'Verstreken tijd resetten': 'Reimposta tempo trascorso',
   'Automatische modus aan/uit': 'Modalita automatica on/off',
   'Herhalen (loop) aan/uit': 'Ripetizione (loop) on/off',
-  'Na audio automatisch doorgaan': 'Avanza automaticamente dopo audio',
   'Deze legenda': 'Questa legenda',
   'Terug / afsluiten': 'Indietro / esci',
   'HUIDIGE SLIDE': 'SLIDE ATTUALE',
@@ -642,16 +596,7 @@ const _dutchSourceIt = {
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P pubblico · H legenda · S schermo · G panoramica · B/W nero/bianco · R tempo · Esc stop',
   'Akkoord gaan': 'Accetto',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Tutti i dati che inserisci in OciDeck rimangono sul tuo sistema locale e non vengono inviati a server esterni.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'L\'app non raccoglie dati personali, statistiche o dati di utilizzo. La tua privacy è la nostra priorità.',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Facendo clic su "Accetto", accetti questi termini e accetti l\'uso di OciDeck.',
   'Licentie (EUPL 1.2)': 'Licenza (EUPL 1.2)',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck è un\'applicazione desktop locale. Le tue presentazioni e i tuoi dati vengono archiviati esclusivamente sul tuo computer.',
-  'Privacy en gebruik': 'Privacy e utilizzo',
   'Toestemming ingetrokken': 'Consenso revocato',
   'Toestemming intrekken': 'Revoca consenso',
   'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
@@ -919,7 +864,6 @@ const _dutchSourceAddIt = {
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Creiamo una copia in una nuova scheda; il tuo file originale resta invariato.',
   'Welk formaat?': 'Quale formato?',
-  'dia\'s, gesplitst op kop.': 'diapositive, divise per intestazione.',
   'document': 'documento',
   'volledig': 'completo',
   'Invoegen': 'Inserisci',
@@ -1080,12 +1024,8 @@ const _dutchSourceAddIt = {
   'Alle integraties': 'Tutte le integrazioni',
   'Alles inschakelen': 'Attiva tutto',
   'Alles uitschakelen': 'Disattiva tutto',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'È già impostata una cartella dei rapporti, quindi il collegamento resta disponibile e una presentazione OpenKAT esistente può ancora essere aggiornata.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Collegamenti con altri sistemi. Ogni collegamento è disattivato per impostazione predefinita e resta inattivo finché non lo attivi.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Leggi le cartelle dei rapporti di OpenKAT come un unico quadro direzionale.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Portare dentro le presentazioni da PowerPoint (.pptx), Keynote (.key) e Impress (.odp) come deck modificabile. I collegamenti con altri sistemi, come OpenKAT, si trovano in Integrazioni.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -1254,7 +1194,6 @@ const _dutchSourceAddIt = {
   'Van toepassing': 'Applicabile',
   'Voortgang': 'Avanzamento',
   'Voortgang managementsysteem': 'Avanzamento del sistema di gestione',
-  'Voortgangsoverzicht bijgewerkt': 'Panoramica dell\'avanzamento aggiornata',
   'Welk deel?': 'Quale parte?',
   'beheersmaatregelen geladen': 'controlli caricati',
   'geïmplementeerd': 'attuato',
@@ -1332,10 +1271,6 @@ const _dutchSourceAddIt = {
       'Questa non sembra una chiave di ripristino valida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Questa chiave di ripristino proviene da una versione più recente di OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'La memoria web per le immagini è piena (massimo 256 MB). Prima salva il lavoro come file .ocideck per evitare perdite di dati. Poi usa meno immagini o immagini più piccole, chiudi gli altri deck oppure ricarica senza aprire altri deck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'La memoria web per le immagini è piena (massimo 256 MB). Salva il lavoro come file .ocideck e ricarica la pagina prima di aggiungere altre immagini.',
   'Afbeeldingsrechten': 'Diritti di immagine',
   'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
   'Afdoening': 'Insediamento',
@@ -1387,8 +1322,6 @@ const _dutchSourceAddIt = {
   'Verifiëren': 'Verifica',
   'Deelnemers verifiëren': 'Verifica partecipanti',
   '(dit apparaat)': '(questo dispositivo)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Confronta l\'impronta di ogni dispositivo tramite un canale fidato — leggetevela a vicenda o inviala per una via di cui ti fidi. Se coincidono, stai lavorando con i dispositivi reali e nessuno si è messo in mezzo. Se differiscono, interrompi la collaborazione.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Questo non è un link di invito valido.',
@@ -1450,7 +1383,6 @@ const _dutchSourceAddIt = {
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Collabora dal vivo a una presentazione tramite un homeserver Matrix come inoltro cifrato. Il contenuto è cifrato end-to-end con le chiavi di OciDeck; il server vede solo dati cifrati. Inserisci un homeserver e un token di accesso creato altrove — OciDeck non chiede mai la tua password. Il token è archiviato cifrato nel portachiavi, non insieme alle altre impostazioni.',
   'wordt door de test ingevuld': 'compilato dal test',
-  'Versleuteld doorgeefluik (ontwerp)': 'Relay cifrato (progetto)',
   'Meer documentatie op de repository': 'Altra documentazione nel repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'La documentazione completa — inclusi architettura, build, codice sorgente e progettazione — si trova nel repository.',
@@ -1694,50 +1626,14 @@ const _dutchSourceAddIt = {
       'Quali dati di misurazione mancano o sono obsoleti?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Su quali dati si basa questo rapporto?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Una panoramica gestionale ampia ma fattuale con momenti di misurazione tracciabili.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Classifica senza punteggio totale e mostra separatamente le misurazioni mancanti.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Mostra i conteggi della gravità, i contributori e le misurazioni riportate per momento.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizza i tipi di ricerca in base alle organizzazioni, ai sistemi e alle osservazioni interessati.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Mostra numeri critici/alti senza alcuna pesatura ideata.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Mostra numeratore, denominatore e solo percentuali affidabili.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Raggruppa i consigli letterali di OpenKAT senza la propria priorità.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Un\'immagine attuale mirata di un\'organizzazione e la relativa data di misurazione.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Confronta due momenti di misurazione scelti all\'interno di un\'organizzazione.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Distingue nuovo, nuovo e non più osservato.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Utilizza solo date affidabili della prima osservazione.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Classifica i sistemi con contatori di gravità separati.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Mostra i valori delta individuali senza punteggio ponderato.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Confronta numeratore e denominatore con una copertura dimostrabilmente comparabile.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventaria sistemi, nomi host e indirizzi IP comprovati.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Separa monitorato, non monitorato e sconosciuto.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Mostra solo le mutazioni di monitoraggio esplicitamente provate.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Mostra organizzazioni e sistemi attorno a un collegamento CVE affidabile.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Classifica i CVE con deduplicazione esplicita.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Distingue CVE nuovi, nuovi e non più osservati.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Mostra le misurazioni mancanti, obsolete e effettivamente utilizzate.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Tiene conto delle date chiave, dei file di origine, degli adattatori e degli hash di origine.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Non ancora disponibile: la fonte non dimostra lo stato di monitoraggio per tutte le risorse.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -1784,12 +1680,6 @@ const _dutchSourceAddIt = {
   'Welk rapport beantwoordt uw vraag?':
       'Quale rapporto risponde alla tua domanda?',
   'Meer rapportvragen': 'Altre domande sul rapporto',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Quali sistemi sono vulnerabili a una CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizzazioni e sistemi vulnerabili attorno a una vulnerabilità.',
-  'Organisaties met kwetsbare systemen':
-      'Organizzazioni con sistemi vulnerabili',
   'Kwetsbare systemen': 'Sistemi vulnerabili',
   'Kritiek/hoog': 'Critico/alto',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -1811,8 +1701,6 @@ const _dutchSourceAddIt = {
   'Bruikbaar': 'Utilizzabile',
   'CVE zoeken': 'Ricerca CVE',
   'Critical/high': 'Critico/alto',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Qualità dei dati, misurazioni mancanti e obsolescenza.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'I report selezionati non contengono dati sufficientemente affidabili per questa parte.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -1840,9 +1728,6 @@ const _dutchSourceAddIt = {
   'Geen bruikbare meetdatum': 'Nessuna data di misurazione utilizzabile',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Le diapositive generate vengono aggiornate. Le tue diapositive e copie vengono conservate.',
-  'Getroffen organisaties en systemen': 'Organizzazioni e sistemi interessati',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Organizzazioni e sistemi interessati attorno a una vulnerabilità.',
   'Getroffen systemen': 'Sistemi interessati',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Impossibile creare il report. Le tue scelte vengono preservate; controlla gli avvisi e riprova.',
@@ -1852,20 +1737,15 @@ const _dutchSourceAddIt = {
   'Keuzes wijzigen…': 'Modificare le scelte...',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Scegli la cartella in cui OpenKAT ha inserito i report. OciDeck legge solo questa cartella; nulla viene modificato o inviato.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Scegli la domanda a cui deve rispondere il report. OciDeck determina la struttura appropriata.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Scegli un CVE trovato nei report.',
   'Laatste bruikbare meting': 'Ultima misurazione utilizzabile',
   'Live voorvertoning van de rapportopbouw':
       'Anteprima in tempo reale della struttura del report',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Gestione e controllo delle informazioni su più organizzazioni.',
   'Meer instellingen': 'Più impostazioni',
   'Nederlands': 'Olandese',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Non tutte le organizzazioni scelte hanno una misurazione per questo periodo.',
-  'Nieuwe en verdwenen bevindingen': 'Risultati nuovi e mancanti',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Non ancora disponibile: questi rapporti non contengono numeri CVE affidabili.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -1900,8 +1780,6 @@ const _dutchSourceAddIt = {
       'Manca una misurazione della corrente utile per una o più organizzazioni.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Per il confronto sono necessari due momenti di misura. Ora è stata trovata una misurazione.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Avanzamento rispetto a un momento di misurazione precedente.',
   'Waar staan de OpenKAT-rapportages?': 'Dove sono i report OpenKAT?',
   'Wat veranderde er bij één organisatie?':
       'Cosa è cambiato in un\'organizzazione?',
@@ -1915,7 +1793,6 @@ const _dutchSourceAddIt = {
   'bruikbaar': 'utilizzabile',
   'metingen': 'misurazioni',
   'organisaties': 'organizzazioni',
-  'organisaties geselecteerd': 'organizzazioni selezionate',
   'rapportages gebruikt': 'rapporti utilizzati',
   'systemen': 'sistemi',
   'Nog geen specificatielimiet': 'Nessun limite di specifica ancora',
@@ -2059,7 +1936,6 @@ const _dutchSourceAddIt = {
       'compare su una diapositiva ad albero ma non è usato altrove — collegalo a una matrice, flusso o altra diapositiva.',
   'Nieuw verbeteringsproject': 'Nuovo progetto di miglioramento',
   'Kader': 'Framework',
-  'Projecttitel': 'Titolo del progetto',
   'Primaire Y-metriek (Y-01)': 'Metrica Y primaria (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Ad esempio: tempo di attraversamento dell\'intake ordini in giorni lavorativi',
@@ -2116,10 +1992,6 @@ const _dutchSourceAddIt = {
   'Bron niet toegestaan': 'Origine non consentita',
   'Deze URL is door de beveiliging geweigerd.':
       'Questo URL è stato rifiutato dalla sicurezza.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Portare dentro materiale da altri sistemi. Due fonti: le presentazioni da PowerPoint (.pptx), Keynote (.key) e Impress (.odp) diventano un deck modificabile e i rapporti OpenKAT (una cartella di JSON) diventano un unico quadro direzionale. Dove si trova la cartella OpenKAT si imposta in Integrazioni.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Portare dentro le presentazioni da PowerPoint (.pptx), Keynote (.key) e Impress (.odp) come deck modificabile. La lettura delle cartelle di rapporti OpenKAT è disponibile solo nella versione desktop.',
   'Alinea': 'Paragrafo',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Composizione del deck…',
@@ -2243,8 +2115,6 @@ const _dutchSourceAddIt = {
       'L\'indice della checklist: per ogni test l\'id stabile, il titolo canonico e la categoria. Il contenuto della guida non è incluso.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'L\'indice dei test di v2.0.0: per ogni test l\'id stabile, il titolo canonico, la categoria MASVS e la debolezza MASWE. I test v1 ritirati e i segnaposto non ci sono; nemmeno il contenuto della guida.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'La lista delle debolezze (117): id, titolo, categoria MASVS, piattaforma e il collegamento CWE. Tre quarti non sono ancora redatti alla fonte; quelli ci sono, contrassegnati. Le debolezze ritirate no.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'L\'elenco completo (id, nome, descrizione) più un nucleo selezionato da noi con le nostre note di rimedio.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -2291,33 +2161,16 @@ const _dutchSourceAddIt = {
       'Ogni file viene convertito separatamente e salvato come presentazione a sé nella cartella di destinazione. Se uno fallisce, la coda prosegue.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Importare più presentazioni insieme le scrive come file in una cartella; nella versione browser non è possibile.',
-  'Nu importeren': 'Importa ora',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'La panoramica è pronta in una nuova scheda.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Legge una cartella di rapporti OpenKAT (JSON) e ne ricava un unico quadro direzionale: sistemi, rilievi per gravità, i punti aperti da più tempo e l\'andamento su misurazioni successive. La stessa azione su una presentazione OpenKAT esistente la aggiorna e lascia al loro posto le tue diapositive.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'L\'importazione si limita a leggere: nulla in questa cartella viene modificato o inviato. I file che non risultano rapporti OpenKAT vengono saltati e indicati nel resoconto d\'importazione.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Indica la cartella che contiene i tuoi rapporti OpenKAT (JSON). L\'importazione legge quella cartella e ne ricava un unico quadro direzionale; impostando qui la cartella non dovrai sceglierla ogni volta.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'L\'importazione OpenKAT legge una cartella dal disco ed è disponibile solo nella versione desktop.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Non è ancora stata indicata una cartella dei rapporti, quindi l\'importazione la chiede ogni volta.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'È già impostata una cartella dei rapporti, quindi il punto di accesso resta disponibile e una presentazione OpenKAT esistente può ancora essere aggiornata.',
   'Integraties': 'Integrazioni',
-  'Naar Integraties': 'Vai a Integrazioni',
   'Map kiezen…': 'Scegli cartella…',
   'Map wissen': 'Cancella cartella',
-  'OpenKAT-rapportages importeren…': 'Importa report OpenKAT…',
   'Map met OpenKAT-rapportages kiezen': 'Scegli la cartella dei report OpenKAT',
-  'OpenKAT-rapportages geïmporteerd.': 'Report OpenKAT importati.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Deck OpenKAT aggiornato; le diapositive manuali sono state mantenute.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Nessun report OpenKAT trovato in questa cartella.',
-  'OpenKAT-import mislukt.': 'Importazione OpenKAT non riuscita.',
   'rapportages': 'report',
   'overgeslagen': 'saltati',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -2378,8 +2231,6 @@ const _dutchSourceAddIt = {
   'Label op de primaire knop': 'Etichetta sul pulsante principale',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Rilievi che hai esaminato e lasciato al loro posto. Non vengono più segnalati, ma la scansione continua a trovarli e non contano come risolti. Tocca per ripristinarne uno.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Mettere da parte un rilievo sulla privacy (progetto)',
   'Deze is beoordeeld en mag blijven': 'Verificato, questo può restare',
   'Mogelijk gemaakt door': 'Reso possibile da',
   'De export is gestopt tijdens het voorbereiden.':
@@ -2391,10 +2242,8 @@ const _dutchSourceAddIt = {
   'Technische melding:': 'Messaggio tecnico:',
   'presentaties': 'presentazioni',
   '/Presentaties': '/Presentazioni',
-  'Rapportagedistributie (ontwerp)': 'Distribuzione dei report (progetto)',
   'De export is mislukt.': 'L\'esportazione non è riuscita.',
   'Presenteer vanaf hier': 'Presenta da qui',
-  'Teams-gastclient (ontwerp)': 'Client guest di Teams (progetto)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: quanto ampiamente può essere condiviso questo materiale?',
   'Wat betekenen deze niveaus?': 'Che cosa significano questi livelli?',
@@ -2513,8 +2362,6 @@ const _dutchSourceAddIt = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentazioni che restano semplici file Markdown: leggibili, ricercabili e apribili con qualsiasi editor.',
   'sjablonen om mee te beginnen, of leeg': 'modelli per iniziare, oppure vuoto',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'L\'omissione è attiva: i dati trovati vengono oscurati e tutte le immagini, i video e l\'audio di questa diapositiva non arrivano allo schermo né all\'esportazione. Il tuo file markdown conserva tutto.',
   'Mijn tekst': 'Il mio testo',
   'Wat zij zien': 'Ciò che vedono',
   'Presentatiegegevens': 'Dati della presentazione',
@@ -2753,7 +2600,6 @@ const _dutchSourceAddIt = {
   'Opslaan naar…': 'Salva su…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Configura prima una connessione in Impostazioni → Archiviazione.',
-  'Beginnen met:': 'Iniziare con:',
   'Verlopen datums markeren': 'Evidenzia le date scadute',
   'Datums gemarkeerd': 'Date evidenziate',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -2779,28 +2625,15 @@ const _dutchSourceAddIt = {
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'La superficie di attacco per tipo di oggetto: quanti sono, quanti richiedono lavoro, cosa è nuovo e cosa non ha un proprietario. Di solito è quest\'ultimo il discorso.',
   'Acties en besluiten': 'Azioni e decisioni',
-  'Actie toevoegen': 'Aggiungi azione',
-  'Actie verwijderen': 'Rimuovi azione',
   'Actie': 'Azione',
   'Deadline': 'Scadenza',
-  'Op de lijst sinds': 'In elenco dal',
   'Stand': 'Stato',
-  'Wat vraagt u': 'Che cosa chiedi',
   'geen datum': 'nessuna data',
-  'Ter informatie': 'Per informazione',
   'Besluit gevraagd': 'Decisione richiesta',
   'Escalatie': 'Escalation',
   'Open': 'Aperto',
   'Loopt': 'In corso',
   'Afgerond': 'Completato',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Solo una decisione o un\'escalation riceve un\'etichetta sulla slide; "in ritardo" deriva dalla scadenza e non lo imposti tu.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Date come aaaa-mm-gg. Ogni altra forma viene rifiutata anziché indovinata: 05-08-2026 sono due giorni diversi.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Una slide di azioni porta al massimo otto righe; oltre, la sala scorre invece di decidere.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Che cosa deve accadere, chi lo fa ed entro quando. Indica per riga se è per informazione o se chiedi una decisione: è ciò che la sala cerca.',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Aggiungi dato',
   'Cijfer verwijderen': 'Rimuovi dato',
@@ -2889,8 +2722,6 @@ const _dutchSourceAddIt = {
       'Il token è valido, ma non è autorizzato a farlo: concedigli più permessi sul repository.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Accesso effettuato, ma nessun permesso: la password non è il problema. Chiedi i diritti su questa cartella.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Licenze dei lessici: cosa resta da chiedere',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Sembra un URL DAV completo. Con Nextcloud, OciDeck ricava da sé quel percorso: qui va solo il server.',
   'Overnemen': 'Applica',
@@ -2933,8 +2764,6 @@ const _dutchSourceAddIt = {
   'kenteken': 'targa del veicolo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Per la lingua di questa presentazione non esiste un elenco di parole chiave per le categorie particolari di dati personali. I modelli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano; parole come "diagnosi" o "indagato" non vengono riconosciute.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'L\'elenco di parole chiave per le categorie particolari di dati personali è molto ridotto per la lingua di questa presentazione. Non contare sul fatto che parole come "diagnosi" o "indagato" vengano trovate.',
   'Landpakketten voor identificatienummers':
       'Pacchetti nazionali per i numeri identificativi',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -2964,8 +2793,6 @@ const _dutchSourceAddIt = {
       'Il nome del server non esiste o non è consultabile. Controlla che l\'URL del server non contenga errori di battitura.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Questo server ha un indirizzo privato o LAN. Contrassegnalo come interno attendibile in Impostazioni → Archiviazione.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Il certificato di questo server non è attendibile. Un certificato autofirmato non funziona; usane uno di un\'autorità riconosciuta.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Il server reindirizza a un altro indirizzo. Inserisci direttamente quell\'indirizzo: non seguiamo i reindirizzamenti, perché possono aggirare il controllo di sicurezza.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3001,8 +2828,6 @@ const _dutchSourceAddIt = {
   'Opslaan naar S3': 'Salva su S3',
   'Opgeslagen in S3:': 'Salvato su S3:',
   'Hier staat niets': 'Qui non c’è nulla',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Impossibile caricare il contenuto. Controlla la connessione e le impostazioni.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Endpoint non raggiungibile — controlla la connessione e l’endpoint.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3011,8 +2836,6 @@ const _dutchSourceAddIt = {
       'L’endpoint ha restituito un errore. Riprova più tardi.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Questo endpoint non può scrivere in modo condizionale, quindi il tuo lavoro non è protetto da quello di un altro. Salva con un nuovo nome se qualcun altro sta lavorando a questa presentazione.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nessun bucket S3 configurato. Configuralo in Impostazioni → Archiviazione.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Configura prima un bucket S3 in Impostazioni → Archiviazione.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3058,10 +2881,6 @@ const _dutchSourceAddIt = {
       'Questa immagine mostra almeno {count} volti riconoscibili.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Non è stato possibile controllare i volti in questa immagine. Il formato non è supportato (ad esempio HEIC). Non significa che non ci sia nessuno: significa che non è stato controllato.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Questa immagine mostra un volto riconoscibile.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Questa immagine mostra {count} volti riconoscibili.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Un\'immagine in cui qualcuno è riconoscibile è un dato personale, anche senza un nome.',
   'herkenbaar gezicht op een afbeelding': 'volto riconoscibile in un\'immagine',
@@ -3077,8 +2896,6 @@ const _dutchSourceAddIt = {
   'Persoonsgegevens gevonden': 'Dati personali trovati',
   'Welke verbinding?': 'Quale connessione?',
   'Bestandsverbindingen': 'Connessioni file',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'I luoghi in cui conservi e cerchi le tue presentazioni: cartelle su questo computer, server WebDAV e repository git insieme. Trascinali nell\'ordine che preferisci: il primo di ogni tipo vale come predefinito.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Un repository git; ogni versione salvata viene conservata.',
   'Een map op de schijf van deze computer.':
@@ -3103,15 +2920,7 @@ const _dutchSourceAddIt = {
   'Openen vanaf WebDAV': 'Apri da WebDAV',
   'Opslaan naar WebDAV': 'Salva su WebDAV',
   'Opgeslagen op WebDAV:': 'Salvato su WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Configura prima un server WebDAV in Impostazioni → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Scegli un’immagine su WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nessun server WebDAV configurato. Configuralo in Impostazioni → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV non è configurato (correttamente) — controlla i dati del server in Impostazioni → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Questo server non è consentito. Contrassegna prima un server privato/LAN come attendibile in Impostazioni → WebDAV.',
   'Servertype': 'Tipo di server',
   'Nextcloud of ownCloud': 'Nextcloud o ownCloud',
   'Andere WebDAV-server': 'Altro server WebDAV',
@@ -3133,23 +2942,11 @@ const _dutchSourceAddIt = {
   'Haal volle pagina uit de reeks': 'Togli la pagina piena dalla sequenza',
   'Opslag': 'Archiviazione',
   'Opslagwijzen': 'Modalità di archiviazione',
-  'Deze computer': 'Questo computer',
   'Ingesteld': 'Configurato',
   'Niet ingesteld': 'Non configurato',
-  'Nog geen bibliotheek ingesteld': 'Nessuna raccolta ancora configurata',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Le vie attraverso cui puoi aprire e salvare le presentazioni. Fai clic su una modalità per configurarla.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Presentazioni nelle cartelle qui sopra, sul disco di questo computer.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Apri e salva le presentazioni in una cartella sul tuo Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Apri presentazioni da un repository git; ogni versione salvata viene conservata.',
-  'Nog te verifiëren': 'Ancora da verificare',
   'MASWE-zwakheid kiezen': 'Scegli una debolezza MASWE',
   'Zoek op naam, id of categorie': 'Cerca per nome, id o categoria',
   'Geen zwakheid gevonden': 'Nessuna debolezza trovata',
-  'uitleg nog niet geschreven': 'spiegazione non ancora scritta',
   'Getalnotatie herkennen': 'Riconoscere il formato dei numeri',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Questo file contiene numeri la cui virgola si può leggere in due modi:',
@@ -3269,12 +3066,10 @@ const _dutchSourceAddIt = {
   'Veelgestelde vragen': 'Domande frequenti',
   'Probleemoplossing': 'Risoluzione dei problemi',
   'Begrippenlijst': 'Glossario',
-  'API-documentatie': 'Documentazione API',
   'Prestaties': 'Prestazioni',
   'Beveiligingsontwerp': 'Progettazione della sicurezza',
   'Hosting en uitrol': 'Hosting e distribuzione',
   'Bijdragen': 'Come contribuire',
-  'Ontwikkelomgeving': 'Ambiente di sviluppo',
   'Migratiegids': 'Guida alla migrazione',
   'Versies…': 'Versioni…',
   'Versies:': 'Versioni:',
@@ -3315,8 +3110,6 @@ const _dutchSourceAddIt = {
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Il branch è stato spostato; ricarica il deck e salva di nuovo.',
   'Bijgewerkt met OciDeck': 'Aggiornato con OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Configura prima un repository Git in Impostazioni → Repository Git.',
   'Git-repository': 'Repository Git',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Apri presentazioni da un repository Git. Ogni versione salvata viene conservata. Il token è archiviato cifrato nel portachiavi, non insieme alle altre impostazioni.',
@@ -3332,7 +3125,6 @@ const _dutchSourceAddIt = {
       'Slide di rendicontazione e dati di riferimento per la sicurezza delle informazioni: rilievi, liste di controllo, matrici dell\'ambito e firma. Strutturato secondo MIAUW e ampiamente utilizzabile per pentest, audit e ricerca sulla sicurezza. I dati di riferimento sono nell\'app stessa, quindi il modulo funziona subito e completamente offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli opzionali. Disattivati per impostazione predefinita; restano nascosti finché non li attivi.',
-  'Procesverbetering (ontwerp)': 'Miglioramento dei processi (progetto)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Questo progetto è un sottoprodotto del Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Esporta profilo di stile',
@@ -3476,7 +3268,6 @@ const _dutchSourceAddIt = {
   'genetisch gegeven': 'dato genetico',
   'parketnummer': 'numero di procedimento penale',
   'nationaal identificatienummer': 'numero di identificazione nazionale',
-  'OciWacht (ontwerp)': 'OciWacht (progetto)',
   'Mogelijk geheim': 'Possibile segreto',
   'sleutel of token': 'chiave o token',
   'private sleutel': 'chiave privata',
@@ -3509,7 +3300,6 @@ const _dutchSourceAddIt = {
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Metti l\'elenco CVE completo su questo dispositivo, così le ricerche avvengono offline e il tuo termine di ricerca non va da nessuna parte. Il database proviene da CVE List V5 (il programma CVE ufficiale, tramite GitHub).',
   'Wat er lokaal beschikbaar is': 'Cosa è disponibile localmente',
-  'Gegevenspakket': 'Pacchetto dati',
   'Nu bijwerken': 'Aggiorna ora',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Dati disponibili localmente — le ricerche avvengono su questo dispositivo; nulla esce.',
@@ -3528,7 +3318,6 @@ const _dutchSourceAddIt = {
       'Accetta: i dati sono al loro posto e l\'avviso sparisce. Accetta + avvisa: il destinatario vede un contrassegno che indica dati personali sulla diapositiva. Ometti: i dati trovati diventano illeggibili a schermo e nell\'esportazione — il tuo file Markdown conserva il testo originale.',
   'Alleen melden': 'Solo segnala',
   'PERSOONSGEGEVENS': 'DATI PERSONALI',
-  'Persoonsgegevens op deze slide': 'Dati personali su questa diapositiva',
   'Volg de presentatie': 'Segui la presentazione',
   'Weglaten uit tonen en exporteren':
       'Ometti dalla visualizzazione e dall\'esportazione',
@@ -3650,8 +3439,6 @@ const _dutchSourceAddIt = {
   'Bewerk deze slide': 'Modifica questa slide',
   'Bewijs verwijderen': 'Rimuovi prova',
   '(nog leeg)': '(ancora vuoto)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Inserisci prima un ID del rilievo per allegare le prove.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Aggiungi screenshot o video come prova. Ogni prova diventa una slide subito dopo il rilievo ed è inclusa nell\'esportazione.',
   'Uitvoering testen conform standaard': 'Test secondo lo standard',
@@ -3660,8 +3447,6 @@ const _dutchSourceAddIt = {
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Accetto la licenza EUPL 1.2 e ho letto quali dati OciDeck conserva.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'La tua scelta diventa la lingua predefinita dell\'app.',
   'Lees de volledige licentie': 'Leggi la licenza completa',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck è software libero con licenza EUPL 1.2. Prima di iniziare, ti chiediamo di accettare la licenza. Di seguito puoi anche leggere quali dati OciDeck conserva su questo dispositivo e quando qualcosa lascia il tuo dispositivo.',
@@ -3689,9 +3474,6 @@ const _dutchSourceAddIt = {
   'Het antwoord van de server was te groot':
       'La risposta del server era troppo grande',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Origine Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Apri e salva presentazioni in una cartella sul tuo Nextcloud. La password è memorizzata cifrata nel portachiavi, non insieme alle altre impostazioni.',
   'Server-URL': 'URL del server',
   'Gebruikersnaam': 'Nome utente',
   'App-wachtwoord': 'Password dell’app',
@@ -3705,22 +3487,13 @@ const _dutchSourceAddIt = {
   'Verbinding gelukt': 'Connessione riuscita',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Le modifiche vengono salvate quando fai clic su Salva.',
-  'Afbeelding kiezen op Nextcloud': 'Scegli un’immagine su Nextcloud',
-  'Openen vanaf Nextcloud': 'Apri da Nextcloud',
   'Vernieuwen': 'Aggiorna',
   'Deze map is leeg': 'Questa cartella è vuota',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nessun server Nextcloud configurato. Configuralo in Impostazioni → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Impossibile caricare la cartella. Controlla la connessione e le impostazioni.',
   'Kon dit bestand niet openen.': 'Impossibile aprire questo file.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'Questa non è una presentazione Marp/OciDeck.',
   'Downloaden mislukt:': 'Download non riuscito:',
-  'Opgeslagen op Nextcloud:': 'Salvato su Nextcloud:',
   'Opslaan mislukt:': 'Salvataggio non riuscito:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Configura prima un server Nextcloud in Impostazioni → Nextcloud.',
   'Opslaan naar Nextcloud': 'Salva su Nextcloud',
   'Doelpad (zonder extensie)': 'Percorso di destinazione (senza estensione)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -3732,10 +3505,6 @@ const _dutchSourceAddIt = {
   'Tijden-overzicht tonen na afloop': 'Mostra il riepilogo dei tempi alla fine',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Il tempo per diapositiva viene sempre misurato; questo determina solo se il riepilogo appare dopo questa presentazione.',
-  'Oefenoverzicht tonen na afloop':
-      'Mostra il riepilogo della prova al termine',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Dopo una presentazione, mostra il riepilogo del tempo trascorso per diapositiva. Il tempo viene sempre misurato; questa opzione determina solo se la schermata appare.',
   'Onveilige presentatie geblokkeerd': 'Presentazione non sicura bloccata',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Questa presentazione non è stata aperta. Il file contiene contenuti che possono eseguire codice, mentre una presentazione deve contenere solo dati — nulla di eseguibile.',
@@ -3822,7 +3591,6 @@ const _dutchSourceAddIt = {
   'Lokaal bestand': 'File locale',
   'Geen video': 'Nessun video',
   // Vraag-slides (multiple choice question).
-  'Vraag (meerkeuze)': 'Domanda (scelta multipla)',
   // Titel-contrast (slidekwaliteit).
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Il testo del titolo ha troppo poco contrasto con l\'immagine di sfondo',
@@ -3839,8 +3607,6 @@ const _dutchSourceAddIt = {
   'Huidig punt weghalen': 'Rimuovi il punto attuale',
   'Stap voor stap': 'Passo dopo passo',
   'Geen animatie': 'Nessuna animazione',
-  'Animatiesnelheid': 'Velocità animazione',
-  'Langzaam': 'Lento',
   'Snel': 'Veloce',
   'Gebeurtenissen': 'Eventi',
   'Gebeurtenis toevoegen': 'Aggiungi evento',
@@ -3853,8 +3619,6 @@ const _dutchSourceAddIt = {
   'Vraag': 'Domanda',
   'Wat wil je vragen?': 'Cosa vuoi chiedere?',
   'Antwoorden': 'Risposte',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Contrassegna le risposte corrette. Al massimo otto risposte; durante la presentazione vengono mostrate a caso una giusta e le altre sbagliate.',
   'Antwoord': 'Risposta',
   'Antwoord toevoegen': 'Aggiungi risposta',
   'Goed antwoord': 'Risposta corretta',
@@ -3887,8 +3651,6 @@ const _dutchSourceAddIt = {
   'Stelling': 'Affermazione',
   'Formuleer een stelling die juist of onjuist is':
       'Formula un\'affermazione vera o falsa',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Contrassegna tutte le risposte corrette. Durante la presentazione viene mostrato un set casuale con almeno una giusta e una sbagliata.',
   'Juist': 'Vero',
   'Onjuist': 'Falso',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -3909,7 +3671,6 @@ const _dutchSourceAddIt = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'I colori di stato degli strumenti del cockpit. Crea varianti con nome; lo schema scelto vale per tutte le slide cockpit.',
   'Standaard': 'Predefinito',
-  'Standaardkleuren gebruiken': 'Usa colori predefiniti',
   'Kleurschema verwijderen': 'Elimina schema colori',
   'Schemanaam': 'Nome schema',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -3990,7 +3751,6 @@ const _dutchSourceAddIt = {
   'Notities weggooien': 'Elimina note',
   'Pagina': 'Pagina',
   'Presentatiestijl': 'Stile di presentazione',
-  'Presentatiestijl: ': 'Stile di presentazione: ',
   'Sprekersnotities': 'Note del relatore',
   'Tekst...': 'Testo...',
   'Teksteditor': 'Editor di testo',
@@ -4004,8 +3764,6 @@ const _dutchSourceAddIt = {
   'Doeltijd': 'Tempo obiettivo',
   'Doeltijd (aftellen)': 'Tempo obiettivo (conto alla rovescia)',
   'Geen aftelling': 'Nessun conto alla rovescia',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Tempo obiettivo predefinito per il conto alla rovescia del presentatore. Regolalo durante la presentazione con il tasto K.',
   'uit': 'off',
   'Doeltijd / aftellen (K)': 'Obiettivo / conto alla rovescia (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -4079,7 +3837,6 @@ const _dutchSourceAddIt = {
   'Eigen kleur (hex)': 'Colore personalizzato (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Ad esempio #33FF33 per uno schermo verde CRT.',
-  'Onderdeel van stijlprofiel ': 'Parte del profilo di stile ',
   'Broncode lettertype': 'Font del codice',
   'Kop (optioneel)': 'Intestazione (facoltativa)',
   'Subkop (optioneel)': 'Sottotitolo (facoltativo)',
@@ -4112,7 +3869,6 @@ const _dutchSourceAddIt = {
       'Tutte le diapositive sono state saltate: non c\'è nulla da mostrare.',
   'Alles tonen': 'Mostra tutto',
   'Audio verwijderen': 'Rimuovi audio',
-  'Automatisch doorgaan na': 'Avanza automaticamente dopo',
   'Bijv. Kwartaalupdate Q4': 'Es. Aggiornamento Q4',
   'Bullet': 'Punto elenco',
   'Caption / bronvermelding (bijv. © Naam Fotograaf)':
@@ -4136,9 +3892,6 @@ const _dutchSourceAddIt = {
   'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
       'Ci sono presentazioni con modifiche non salvate. Salvale prima di chiudere l\'app.',
   'Export mislukt:': 'Esportazione non riuscita:',
-  'Footer tonen op deze slide': 'Mostra il piè di pagina su questa diapositiva',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Usa "Sfoglia" per scegliere immagini da qualsiasi posizione.',
   'Geen afbeelding op het klembord gevonden.':
       'Nessuna immagine trovata negli appunti.',
   'Geen ander deck open. Open eerst een ander tabblad.':
@@ -4152,11 +3905,7 @@ const _dutchSourceAddIt = {
       'Note utente per questa diapositiva...',
   'Notities voor de ontvanger tijdens een cursus':
       'Note per il destinatario durante un corso',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Passa alla modalità Markdown per aggiungere note.',
   'Mijn notities aan/uit': 'Attiva/disattiva le mie note',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nessuna presentazione (.md) trovata in questa cartella.',
   'Geen presentaties gevonden voor': 'Nessuna presentazione trovata per',
   'Geen resultaten': 'Nessun risultato',
   'Geen resultaten voor': 'Nessun risultato per',
@@ -4187,15 +3936,10 @@ const _dutchSourceAddIt = {
       'Attenzione: questa immagine è ancora usata in',
   'Logo kiezen': 'Scegli logo',
   'Logo px': 'Logo px',
-  'Logo tonen op deze slide': 'Mostra il logo su questa diapositiva',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabella modificabile durante la presentazione',
   'Map met presentaties kiezen': 'Scegli la cartella delle presentazioni',
   'Map voor exports': 'Cartella per le esportazioni',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Impossibile elaborare il Markdown. Controlla la sintassi.',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Modalità Markdown: modifica l\'intera presentazione come Marp Markdown',
   'Markdown voor laatste slide': 'Markdown per la slide finale',
   'Naam van het stijlprofiel': 'Nome del profilo di stile',
   'Niet-opgeslagen werk herstellen?': 'Ripristinare il lavoro non salvato?',
@@ -4233,8 +3977,6 @@ const _dutchSourceAddIt = {
   'Sluiten (G of Esc)': 'Chiudi (G o Esc)',
   'Sprekersnotities...': 'Note del relatore...',
   'Standaard laatste slide gebruiken': 'Usa slide finale predefinita',
-  'Standaard map voor presentaties':
-      'Cartella predefinita per le presentazioni',
   'Standaardprofiel laden': 'Carica profilo predefinito',
   'TLP-classificatie (Traffic Light Protocol)':
       'Classificazione TLP (Traffic Light Protocol)',
@@ -4294,7 +4036,6 @@ const _dutchSourceAddIt = {
   'slides overgeslagen': 'diapositive saltate',
   'toegevoegd': 'aggiunta',
   'treffer(s)': 'risultato/i',
-  'treffers — verfijn je zoekopdracht': 'risultati: affina la ricerca',
   'van de foto zichtbaar': 'della foto visibile',
   'vervangen': 'sostituito',
   'verwijderen': 'rimuovi',
@@ -4428,8 +4169,6 @@ const _dutchSourceAddIt = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Esportazione bloccata per problemi di qualità gravi.',
   'Alle meldingen': 'Tutte le segnalazioni',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… e altri problemi nel pannello qualità.',
   'Classificatie-handhaving': 'Applicazione classificazione',
   'Vrijgaveplafond': 'Limite di rilascio',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -4448,11 +4187,9 @@ const _dutchSourceAddIt = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Imposta un livello TLP — l\'export è bloccato dalla policy di classificazione.',
   'Tabel bewerken': 'Modifica tabella',
-  'Pijltjes · Tab · Esc': 'Frecce · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Modifica tabella (su slide tabella)',
   'Tabel bewerken (E)': 'Modifica tabella (E)',
   'Tab wisselt cel · Esc sluit': 'Tab cambia cella · Esc chiude',
-  'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
   'Gestapelde staaf': 'Barre impilate',
   'Spreiding': 'Dispersione',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn scorre le diapositive',
@@ -4495,10 +4232,6 @@ const _dutchSourceAddIt = {
       'Errore di rete — controlla la connessione e riprova.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Qualcosa è andato storto in modo inatteso. Vedi il log per i dettagli.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud non è configurato (correttamente) — controlla i dati del server in Impostazioni → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Questo server non è consentito. Contrassegna prima un server privato/LAN come attendibile in Impostazioni → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server non raggiungibile — controlla la connessione e l\'URL del server.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -4526,8 +4259,6 @@ const _dutchSourceAddIt = {
   'Uit recente bestanden verwijderen': 'Rimuovi dai file recenti',
   'OciDeck wordt gestart…': 'Avvio di OciDeck…',
   'Herstelbestanden': 'File di ripristino',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'I file di ripristino contengono l\'intero contenuto delle tue presentazioni in testo semplice. Vengono ripuliti automaticamente dopo 7 giorni; qui puoi cancellarli subito.',
   'Herstelbestanden nu wissen': 'Cancella subito i file di ripristino',
   'Er waren geen herstelbestanden.': 'Non c\'erano file di ripristino.',
   'herstelbestand(en) gewist.': 'file di ripristino cancellati.',

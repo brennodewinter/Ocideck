@@ -41,17 +41,13 @@ const _stringsFi = {
   'settings': 'Asetukset',
   'settingsGeneral': 'Yleiset',
   'settingsColors': 'Värit',
-  'settingsLogo': 'Logo',
   'language': 'Kieli',
   'applicationLanguage': 'Sovelluksen kieli',
   'languageHelp':
       'Käyttöliittymän kieli vaihtuu välittömästi. Esityksen sisältö pysyy ennallaan.',
-  'presentationFolder': 'Esityskansio',
   'exportFolderSetting': 'Vientikansio',
-  'notSet': 'Ei asetettu',
   'nextToPresentationFile': 'Esitystiedoston viereen',
   'choose': 'Valitse',
-  'removeDefaultFolder': 'Poista oletuskansio',
   'removeExportFolder': 'Poista vientikansio',
   'exportFolderHelp':
       'Kaikki viennit (PDF/PPTX) tallennetaan tänne. Jos ei asetettu, viennit tallennetaan esitystiedoston viereen.',
@@ -85,8 +81,6 @@ const _dutchSourceFi = {
   'Handtekening tekenen': 'Piirrä allekirjoitus',
   'Teken je handtekening in het vak hieronder.':
       'Piirrä allekirjoituksesi alla olevaan ruutuun.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Datapaketti on .zip, joka sisältää tämän moduulin viitetiedot. Se tarkistetaan ensin sovellukseen sisäänrakennettua sormenjälkeä vasten; vain tähän sovellusversioon sopiva paketti hyväksytään.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
@@ -193,7 +187,6 @@ const _dutchSourceFi = {
       'Kuvat ja media ovat samassa kansiossa olevien esitysten yhteisiä. Tarkan nimen valitset kohta järjestelmäikkunassa.',
   'Alle bibliotheken': 'Kaikki kirjastot',
   'Andere map…': 'Toinen kansio…',
-  'Bibliotheek verwijderen': 'Poista kirjasto',
   'Bibliotheken': 'Kirjastot',
   'Geen bibliotheek': 'Ei kirjastoa',
   'Geen presentaties (.md) gevonden.': 'Esityksiä (.md) ei löytynyt.',
@@ -205,10 +198,6 @@ const _dutchSourceFi = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Valitse, mihin kirjastoon esitys tulee.',
   'Map toevoegen': 'Lisää kansio',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Kansiot, joihin tallennat ja joista haet esityksiäsi. Anna kullekin oma nimi, jotta erotat ne toisistaan. Kaikki kirjastot haetaan avattaessa ja kuvakirjastossa.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Ei vielä kirjastoa — lisää kansio.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Ei vielä kirjastoa. Lisää sellainen Asetuksissa tai valitse yllä kansio, josta haetaan.',
   'Presentatie opslaan': 'Tallenna esitys',
@@ -290,21 +279,11 @@ const _dutchSourceFi = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Totuudenvakuutus raportoijan, sertifioinnin, allekirjoituksen ja sinetöinnin kanssa.',
   'Uitbreidingen': 'Laajennukset',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',
   'Gegevens opschonen': 'Siivoa tiedot',
   'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Yhtään lähdettä ei tavoitettu — viitetietoja ei voitu hakea mistään. Yritä uudelleen tai tuo paketti manuaalisesti.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Haetut tiedot eivät vastanneet odotettua sormenjälkeä, ja ne hylättiin varotoimena.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Tietopaketti oli vaurioitunut tai virheellinen, ja se siksi hylättiin.',
-  'Gegevenspakket kiezen': 'Valitse tietopaketti',
-  'Kon het gekozen bestand niet lezen.': 'Valittua tiedostoa ei voitu lukea.',
   'Nog niet opgehaald': 'Ei vielä haettu',
   'AI-assistentie': 'Tekoälyavustus',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,23 +300,15 @@ const _dutchSourceFi = {
       'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Lisenssi ja yksityisyys" eikä toimi verkkoversiossa.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Ymmärrän, että tietoja lähetetään tähän ulkoiseen palveluun',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Tekoälyavustus (oletuksena pois päältä): jos valitset itse isännöidyn tai pilvipohjaisen taustajärjestelmän, käsittelemäsi tekstit tai kuvat lähetetään kyseiseen osoitteeseen. Paikallinen tekoälymalli tällä laitteella ei lähetä mitään.',
   'Zoek een slidetype': 'Etsi diatyyppiä',
   'Alfabetisch sorteren': 'Lajittele aakkosjärjestykseen',
   'Algemeen': 'Yleiset',
   'Informatieveiligheid': 'Tietoturva',
   'Alle': 'Kaikki',
-  'Pentestrapportage (ontwerp)': 'Pentest-raportti (suunnitelma)',
-  'AI-assistentie (ontwerp)': 'Tekoälyavustus (suunnitelma)',
-  'Agentisch bouwplan (ontwerp)':
-      'Agenttinen rakennussuunnitelma (suunnitelma)',
-  'Bijsnijden': 'Rajaa',
   'Linksom': 'Kierrä vasemmalle',
   'Rechtsom': 'Kierrä oikealle',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vedä kuvaa valitaksesi, mikä osa jää näkyviin.',
-  'Git-opslag (ontwerp)': 'Git-tallennus (suunnitelma)',
   'Zoek in documentatie…': 'Etsi dokumentaatiosta…',
   'Geen documenten gevonden': 'Dokumentteja ei löytynyt',
   'Alleen afspelen (vergrendeld)': 'Vain toisto (lukittu)',
@@ -351,12 +322,8 @@ const _dutchSourceFi = {
   'Techniek': 'Tekniikka',
   'Licentie en naleving': 'Lisenssi ja vaatimustenmukaisuus',
   'Architectuur': 'Arkkitehtuuri',
-  'Bouwinstructies': 'Käännösohjeet',
-  'Kwaliteitscontroles': 'Laatutarkistukset',
-  'Broncodekaart': 'Lähdekoodikartta',
   'Licentienaleving': 'Lisenssien noudattaminen',
   'Softwarestuklijst (SBOM)': 'Ohjelmiston osaluettelo (SBOM)',
-  'Samenwerking (ontwerp)': 'Yhteistyö (suunnitelma)',
   'Beschermen met een wachtwoord (AES-256)': 'Suojaa salasanalla (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Säilytä tämä salasana huolellisesti: jos menetät sen, tätä pakettia ei voi enää avata.',
@@ -434,10 +401,6 @@ const _dutchSourceFi = {
   'Instelling opslaan is mislukt.': 'Asetuksen tallennus epäonnistui.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketteja (.ocideck) ei vielä tueta verkkoversiossa.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Verkkoversiossa voi avata vain .md-esityksiä.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',
@@ -525,10 +488,8 @@ const _dutchSourceFi = {
   'Audio bij deze slide': 'Ääni tähän diaan',
   'Audio automatisch afspelen': 'Toista ääni automaattisesti',
   'Audio verwijderen': 'Poista ääni',
-  'Geen audio gekozen': 'Ääntä ei valittu',
   'Geen audiobestand gekozen': 'Äänitiedostoa ei valittu',
   'Video automatisch afspelen': 'Toista video automaattisesti',
-  'Geen video gekozen': 'Videota ei valittu',
   'Kiezen': 'Valitse',
   'Uit bibliotheek…': 'Kirjastosta…',
   'Van computer…': 'Tietokoneelta…',
@@ -557,7 +518,6 @@ const _dutchSourceFi = {
   'Pakket importeren': 'Tuo paketti',
   'Pakket exporteren': 'Vie paketti',
   'Map met presentaties kiezen': 'Valitse esityskansio',
-  'Standaard map voor presentaties': 'Esitysten oletuskansio',
   'Map voor exports': 'Vientikansio',
   'Logo kiezen': 'Valitse logo',
   'Kies een afbeelding': 'Valitse kuva',
@@ -570,8 +530,6 @@ const _dutchSourceFi = {
   'Map kiezen': 'Valitse kansio',
   'Kies een map met presentaties om te beginnen.':
       'Aloita valitsemalla esityksiä sisältävä kansio.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Tästä kansiosta ei löytynyt esityksiä (.md).',
   'Geen presentaties gevonden voor': 'Esityksiä ei löytynyt haulle',
   'meer treffer(s)': 'osumaa lisää',
   'Slide zoeken': 'Etsi dia',
@@ -593,7 +551,6 @@ const _dutchSourceFi = {
       'Kirjoita hakusanoja löytääksesi dioja kaikista esityksistäsi.',
   'toegevoegd': 'lisätty',
   'Eerste': 'Ensimmäinen',
-  'treffers — verfijn je zoekopdracht': 'osumaa — tarkenna hakuasi',
   'treffer(s)': 'osuma(t)',
   'slide': 'dia',
   'Zoeken en vervangen': 'Etsi ja korvaa',
@@ -652,7 +609,6 @@ const _dutchSourceFi = {
   'Tekst op zijpanelen': 'Sivupaneelien teksti',
   'Voorbeeldtekst': 'Esimerkkiteksti',
   'Knop': 'Painike',
-  'Profielnaam': 'Profiilin nimi',
   'Naam van het stijlprofiel': 'Tyyliprofiilin nimi',
   'Stijlprofiel': 'Tyyliprofiili',
   'Nieuw profiel': 'Uusi profiili',
@@ -715,15 +671,9 @@ const _dutchSourceFi = {
   'TYPE': 'TYYPPI',
   'STIJL': 'TYYLI',
   'Terug naar standaardstijl': 'Takaisin oletustyyliin',
-  'Automatisch doorgaan na': 'Siirry automaattisesti eteenpäin ajan',
-  'Logo tonen op deze slide': 'Näytä logo tällä dialla',
-  'Tabel bewerkbaar tijdens presenteren': 'Taulukko muokattavissa esitettäessä',
-  'Footer tonen op deze slide': 'Näytä alatunniste tällä dialla',
   'Sprekersnotities...': 'Puhujan muistiinpanot...',
   'Sprekersnotities': 'Puhujan muistiinpanot',
   'Notities voor tijdens het presenteren': 'Muistiinpanot esittämisen ajaksi',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-tila — muokkaa koko esitystä Marp-Markdownina',
   'Toepassen': 'Käytä',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdownia ei voitu käsitellä. Tarkista syntaksi.',
@@ -748,8 +698,6 @@ const _dutchSourceFi = {
   'Geen resultaten voor': 'Ei tuloksia haulle',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Muokkaa hakusanaa tai lisää kuvaus.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Käytä ”Selaa”-toimintoa valitaksesi kuvia mistä tahansa sijainnista.',
   'Selecteer een\nafbeelding': 'Valitse\nkuva',
   'Gekopieerd': 'Kopioitu',
   'Afbeelding verwijderen?': 'Poistetaanko kuva?',
@@ -766,8 +714,6 @@ const _dutchSourceFi = {
   'spatie': 'väli',
   'klik': 'napsauta',
   'cijfers': 'numerot',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Napsauta tai sulje painamalla ? / H / Esc',
   'Klik of druk op H / Esc om te sluiten':
       'Napsauta tai sulje painamalla H / Esc',
   'Naar slidenummer': 'Siirry dian numeroon',
@@ -777,20 +723,10 @@ const _dutchSourceFi = {
   'Presenter view (notities, klok)': 'Esittäjänäkymä (muistiinpanot, kello)',
   'Scherm wisselen (meerdere schermen)': 'Vaihda näyttöä (useita näyttöjä)',
   'Zwart · wit scherm': 'Musta · valkoinen näyttö',
-  'Verstreken tijd resetten': 'Nollaa kulunut aika',
   'Automatische modus aan/uit': 'Automaattinen tila päälle/pois',
   'Herhalen (loop) aan/uit': 'Toisto (silmukka) päälle/pois',
-  'Na audio automatisch doorgaan': 'Siirry automaattisesti äänen jälkeen',
-  'Dit overzicht': 'Tämä katsaus',
   'Deze legenda': 'Tämä legenda',
   'Terug / afsluiten': 'Takaisin / poistu',
-  'Auto (A)': 'Automaattinen (A)',
-  'Handmatig (A)': 'Manuaalinen (A)',
-  'Herhalen (L)': 'Toisto (L)',
-  'Na audio (M)': 'Äänen jälkeen (M)',
-  'Sneltoetsen (?)': 'Pikanäppäimet (?)',
-  'Slide-overzicht (G)': 'Diakatsaus (G)',
-  'Presenter view (P)': 'Esittäjänäkymä (P)',
   'Tijd resetten (R)': 'Nollaa ajastin (R)',
   'HUIDIGE SLIDE': 'NYKYINEN DIA',
   'VOLGENDE': 'SEURAAVA',
@@ -806,15 +742,9 @@ const _dutchSourceFi = {
   'Notities weggooien': 'Hylkää muistiinpanot',
   'Notities voor de ontvanger tijdens een cursus':
       'Muistiinpanot vastaanottajalle kurssin aikana',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Vaihda Markdown-tilaan lisätäksesi muistiinpanoja.',
   'Mijn notities aan/uit': 'Näytä omat muistiinpanot päälle/pois',
   'Wissel scherm (S)': 'Vaihda näyttöä (S)',
   'Kon niet van scherm wisselen.': 'Näyttöä ei voitu vaihtaa.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · S näyttö · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P yleisö · H legenda · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -861,8 +791,6 @@ const _dutchSourceFi = {
   'Selectie opheffen': 'Tyhjennä valinta',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Hyväksyn EUPL 1.2 -lisenssin ja olen lukenut, mitä tietoja OciDeck tallentaa.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Valinnastasi tulee sovelluksen oletuskieli.',
   'Lees de volledige licentie': 'Lue koko lisenssi',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck on vapaa ohjelmisto EUPL 1.2 -lisenssin alaisena. Ennen kuin aloitat, pyydämme sinua hyväksymään lisenssin. Alla voit myös lukea, mitä tietoja OciDeck tallentaa tälle laitteelle ja milloin jotain lähtee laitteeltasi.',
@@ -888,9 +816,6 @@ const _dutchSourceFi = {
   'Het antwoord van de server was te groot':
       'Palvelimen vastaus oli liian suuri',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-lähde (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Avaa ja tallenna esityksiä Nextcloudin kansioon. Salasana tallennetaan salattuna avainnippuun, ei muiden asetusten yhteyteen.',
   'Server-URL': 'Palvelimen URL',
   'Gebruikersnaam': 'Käyttäjänimi',
   'App-wachtwoord': 'Sovellussalasana',
@@ -904,21 +829,12 @@ const _dutchSourceFi = {
   'Verbinding gelukt': 'Yhteys onnistui',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Muutokset tallennetaan, kun napsautat Tallenna.',
-  'Afbeelding kiezen op Nextcloud': 'Valitse kuva Nextcloudista',
-  'Openen vanaf Nextcloud': 'Avaa Nextcloudista',
   'Vernieuwen': 'Päivitä',
   'Deze map is leeg': 'Tämä kansio on tyhjä',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nextcloud-palvelinta ei ole määritetty. Määritä se kohdassa Asetukset → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Kansiota ei voitu ladata. Tarkista yhteytesi ja asetuksesi.',
   'Kon dit bestand niet openen.': 'Tätä tiedostoa ei voitu avata.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Tämä ei ole Marp/OciDeck-esitys.',
   'Downloaden mislukt:': 'Lataus epäonnistui:',
-  'Opgeslagen op Nextcloud:': 'Tallennettu Nextcloudiin:',
   'Opslaan mislukt:': 'Tallennus epäonnistui:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Määritä ensin Nextcloud-palvelin kohdassa Asetukset → Nextcloud.',
   'Opslaan naar Nextcloud': 'Tallenna Nextcloudiin',
   'Doelpad (zonder extensie)': 'Kohdepolku (ilman tunnistetta)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -929,9 +845,6 @@ const _dutchSourceFi = {
   'Tijden-overzicht tonen na afloop': 'Näytä aikakatsaus jälkeenpäin',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Aika diaa kohden mitataan aina; tämä ohjaa vain sitä, näkyykö katsaus tämän esityksen jälkeen.',
-  'Oefenoverzicht tonen na afloop': 'Näytä harjoittelun yhteenveto jälkeenpäin',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Näytä esityksen jälkeen katsaus diaa kohden käytetystä ajasta. Aika mitataan aina; tämä ohjaa vain sitä, näkyykö näyttö.',
   'Onveilige presentatie geblokkeerd': 'Turvaton esitys estetty',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Tätä esitystä ei avattu. Tiedosto sisältää sisältöä, joka voi suorittaa koodia, ja esityksen tulisi sisältää vain dataa — ei mitään suoritettavaa.',
@@ -1013,7 +926,6 @@ const _dutchSourceFi = {
   'Online': 'Verkossa',
   'Lokaal bestand': 'Paikallinen tiedosto',
   'Geen video': 'Ei videota',
-  'Vraag (meerkeuze)': 'Kysymys (monivalinta)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Otsikkotekstin kontrasti taustakuvan kanssa on liian pieni',
   'Herstel': 'Korjaa',
@@ -1028,8 +940,6 @@ const _dutchSourceFi = {
   'Huidig punt weghalen': 'Poista nykyinen piste',
   'Stap voor stap': 'Vaihe vaiheelta',
   'Geen animatie': 'Ei animaatiota',
-  'Animatiesnelheid': 'Animaationopeus',
-  'Langzaam': 'Hidas',
   'Snel': 'Nopea',
   'Gebeurtenissen': 'Tapahtumat',
   'Gebeurtenis toevoegen': 'Lisää tapahtuma',
@@ -1042,8 +952,6 @@ const _dutchSourceFi = {
   'Vraag': 'Kysymys',
   'Wat wil je vragen?': 'Mitä haluat kysyä?',
   'Antwoorden': 'Vastaukset',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Merkitse oikeat vastaukset. Enintään kahdeksan vastausta; esitettäessä näytetään satunnaisesti yksi oikea ja loput väärät.',
   'Antwoord': 'Vastaus',
   'Antwoord toevoegen': 'Lisää vastaus',
   'Goed antwoord': 'Oikea vastaus',
@@ -1076,8 +984,6 @@ const _dutchSourceFi = {
   'Stelling': 'Väittämä',
   'Formuleer een stelling die juist of onjuist is':
       'Muotoile väittämä, joka on tosi tai epätosi',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Merkitse kaikki oikeat vastaukset. Esitettäessä näytetään satunnainen joukko, jossa on vähintään yksi oikea ja yksi väärä.',
   'Juist': 'Tosi',
   'Onjuist': 'Epätosi',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1098,7 +1004,6 @@ const _dutchSourceFi = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Ohjaamon mittareiden tilavärit. Luo nimettyjä muunnelmia; valittu teema koskee kaikkia ohjaamodioja.',
   'Standaard': 'Oletus',
-  'Standaardkleuren gebruiken': 'Käytä oletusvärejä',
   'Kleurschema verwijderen': 'Poista väriteema',
   'Schemanaam': 'Teeman nimi',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1177,7 +1082,6 @@ const _dutchSourceFi = {
   'Logo en footer': 'Logo ja alatunniste',
   'Pagina': 'Sivu',
   'Presentatiestijl': 'Esitystyyli',
-  'Presentatiestijl: ': 'Esitystyyli: ',
   'Tekst...': 'Teksti...',
   'Teksteditor': 'Tekstieditori',
   'Volgende pagina': 'Seuraava sivu',
@@ -1190,8 +1094,6 @@ const _dutchSourceFi = {
   'Doeltijd': 'Tavoiteaika',
   'Doeltijd (aftellen)': 'Tavoiteaika (lähtölaskenta)',
   'Geen aftelling': 'Ei lähtölaskentaa',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Oletustavoiteaika esittäjän lähtölaskennalle. Hienosäädä sitä esityksen aikana K-näppäimellä.',
   'uit': 'pois',
   'Doeltijd / aftellen (K)': 'Tavoite / lähtölaskenta (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1263,14 +1165,8 @@ const _dutchSourceFi = {
   'Cirkel': 'Ympyrä',
   'Spider': 'Hämähäkki',
   'CSV importeren': 'Tuo CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: ensimmäinen rivi = sarjojen nimet, ensimmäinen sarake = nimet)',
   'Gekoppeld aan': 'Linkitetty kohteeseen',
   'Ontkoppelen': 'Poista linkitys',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Tallennetaanko data diaan vai säilytetäänkö se erillisenä CSV-tiedostona esityksen vieressä?',
-  'In de slide': 'Diaan',
-  'Als CSV-bestand': 'CSV-tiedostona',
   'Geen grafiekgegevens': 'Ei kaaviodataa',
   'Label': 'Nimi',
   'Rij': 'Rivi',
@@ -1300,7 +1196,6 @@ const _dutchSourceFi = {
   'Eigen kleur (hex)': 'Oma väri (heksa)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Esimerkiksi #33FF33 CRT-vihreälle näytölle.',
-  'Onderdeel van stijlprofiel ': 'Osa tyyliprofiilia ',
   'Broncode lettertype': 'Koodin fontti',
   'Kop (optioneel)': 'Otsikko (valinnainen)',
   'Subkop (optioneel)': 'Alaotsikko (valinnainen)',
@@ -1339,16 +1234,7 @@ const _dutchSourceFi = {
   'Zet het filter uit om alles weer te zien.':
       'Poista suodatin käytöstä nähdäksesi kaiken uudelleen.',
   'Welkom bij OciDeck': 'Tervetuloa OciDeckiin',
-  'Privacy en gebruik': 'Yksityisyys ja käyttö',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck on paikallinen työpöytäsovellus. Esityksesi ja tietosi tallennetaan yksinomaan tietokoneellesi.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Sovellus ei kerää henkilötietoja, tilastoja eikä käyttötietoja. Yksityisyytesi on meille etusijalla.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Kaikki OciDeckiin syöttämäsi tiedot pysyvät paikallisessa järjestelmässäsi eikä niitä lähetetä ulkoisille palvelimille.',
   'Licentie (EUPL 1.2)': 'Lisenssi (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Napsauttamalla ”Hyväksy” hyväksyt nämä ehdot ja suostut OciDeckin käyttöön.',
   'Volledige licentie online': 'Koko lisenssi verkossa',
   'Akkoord gaan': 'Hyväksy',
   'Privacy': 'Yksityisyys',
@@ -1438,8 +1324,6 @@ const _dutchSourceFi = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Vienti estetty vakavien laatuongelmien vuoksi.',
   'Alle meldingen': 'Kaikki ilmoitukset',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… ja lisää ongelmia laatupaneelissa.',
   'Classificatie-handhaving': 'Luokituksen valvonta',
   'Vrijgaveplafond': 'Julkaisukatto',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1458,11 +1342,9 @@ const _dutchSourceFi = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Aseta TLP-taso — vienti on estetty luokituskäytännön vuoksi.',
   'Tabel bewerken': 'Muokkaa taulukkoa',
-  'Pijltjes · Tab · Esc': 'Nuolinäppäimet · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Muokkaa taulukkoa (taulukkodioilla)',
   'Tabel bewerken (E)': 'Muokkaa taulukkoa (E)',
   'Tab wisselt cel · Esc sluit': 'Tab vaihtaa solua · Esc sulkee',
-  'Pen · markeerstift · ⇧E': 'Kynä · korostuskynä · ⇧E',
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn selaa dioja',
@@ -1505,10 +1387,6 @@ const _dutchSourceFi = {
       'Verkkovirhe — tarkista yhteys ja yritä uudelleen.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Jokin meni odottamatta pieleen. Katso lisätiedot lokista.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloudia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Palvelin ei ole tavoitettavissa — tarkista yhteys ja palvelimen URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1536,8 +1414,6 @@ const _dutchSourceFi = {
   'Uit recente bestanden verwijderen': 'Poista viimeisimmistä tiedostoista',
   'OciDeck wordt gestart…': 'Käynnistetään OciDeckiä…',
   'Herstelbestanden': 'Palautustiedostot',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Palautustiedostot sisältävät esitystesi koko sisällön selkokielisenä tekstinä. Ne siivotaan automaattisesti 7 päivän jälkeen; täällä voit pyyhkiä ne heti.',
   'Herstelbestanden nu wissen': 'Pyyhi palautustiedostot nyt',
   'Er waren geen herstelbestanden.': 'Palautustiedostoja ei ollut.',
   'herstelbestand(en) gewist.': 'palautustiedosto(a) pyyhitty.',
@@ -1963,7 +1839,6 @@ const _dutchSourceAddFi = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Luomme kopion uuteen välilehteen; alkuperäinen tiedostosi pysyy muuttumattomana.',
   'Welk formaat?': 'Mikä muoto?',
-  'dia\'s, gesplitst op kop.': 'diaa, jaettu otsikon mukaan.',
   'document': 'asiakirja',
   'volledig': 'täysi',
   'Invoegen': 'Lisää',
@@ -2122,12 +1997,8 @@ const _dutchSourceAddFi = <String, String>{
   'Alle integraties': 'Kaikki integraatiot',
   'Alles inschakelen': 'Ota kaikki käyttöön',
   'Alles uitschakelen': 'Poista kaikki käytöstä',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Raporttikansio on jo asetettu, joten yhteys pysyy käytettävissä ja olemassa olevaa OpenKAT-esitystä voi yhä päivittää.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Yhteydet muihin järjestelmiin. Jokainen yhteys on oletuksena pois päältä ja pysyy passiivisena, kunnes otat sen käyttöön.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Lue OpenKAT-raporttikansiot yhdeksi johdon yleiskatsaukseksi.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Esitysten tuominen ohjelmista PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muokattavaksi deckiksi. Yhteydet muihin järjestelmiin, kuten OpenKAT, ovat kohdassa Integraatiot.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -2292,7 +2163,6 @@ const _dutchSourceAddFi = <String, String>{
   'Van toepassing': 'Sovellettavissa',
   'Voortgang': 'Edistyminen',
   'Voortgang managementsysteem': 'Hallintajärjestelmän edistyminen',
-  'Voortgangsoverzicht bijgewerkt': 'Edistymisyhteenveto päivitetty',
   'Welk deel?': 'Mikä osa?',
   'beheersmaatregelen geladen': 'hallintakeinoa ladattu',
   'geïmplementeerd': 'toteutettu',
@@ -2370,10 +2240,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä ei näytä kelvolliselta palautusavaimelta.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tämä palautusavain on peräisin OciDeckin uudemmasta versiosta.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Kuvien verkkosovellusmuisti on täynnä (enintään 256 Mt). Tallenna työsi ensin .ocideck-tiedostona tietojen menetyksen estämiseksi. Käytä sen jälkeen vähemmän tai pienempiä kuvia, sulje muut esitykset tai lataa uudelleen avaamatta muita esityksiä.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Kuville varattu verkkosovelluksen muisti on täynnä (enintään 256 Mt). Tallenna työ .ocideck-tiedostona ja lataa sivu uudelleen ennen uusien kuvien lisäämistä.',
   'Afbeeldingsrechten': 'Kuvan oikeudet',
   'Afbeeldingsrechten controleren…': 'Tarkista kuvan oikeudet…',
   'Afdoening': 'Ratkaisu',
@@ -2424,8 +2290,6 @@ const _dutchSourceAddFi = <String, String>{
   'Verifiëren': 'Vahvista',
   'Deelnemers verifiëren': 'Varmenna osallistujat',
   '(dit apparaat)': '(tämä laite)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Vertaa jokaisen laitteen sormenjälkeä luotettavan kanavan kautta — lukekaa se toisillenne tai lähetä se reittiä, johon luotat. Jos ne täsmäävät, työskentelet oikeiden laitteiden kanssa eikä kukaan ole tunkeutunut väliin. Jos ne eroavat, katkaise yhteistyö.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Tämä ei ole kelvollinen kutsulinkki.',
@@ -2488,7 +2352,6 @@ const _dutchSourceAddFi = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Tee reaaliaikaista yhteistyötä esityksestä Matrix-homeserverin kautta salattuna välittäjänä. Sisältö salataan päästä päähän OciDeckin omilla avaimilla; palvelin näkee vain salattua tietoa. Anna homeserver ja muualla luotu käyttöpoletti — OciDeck ei koskaan kysy salasanaasi. Tunnus tallennetaan salattuna avainnippuun, ei muiden asetusten joukkoon.',
   'wordt door de test ingevuld': 'täytetään testillä',
-  'Versleuteld doorgeefluik (ontwerp)': 'Salattu välitin (suunnitelma)',
   'Meer documentatie op de repository': 'Lisää dokumentaatiota tietovarastossa',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Täydellinen dokumentaatio — mukaan lukien arkkitehtuuri, koonti, lähdekoodi ja suunnittelu — on tietovarastossa.',
@@ -2726,50 +2589,14 @@ const _dutchSourceAddFi = <String, String>{
       'Mitkä mittaustiedot puuttuvat tai ovat vanhentuneita?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Mihin tietoihin tämä raportti perustuu?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Laaja mutta asiallinen johtamisen yleiskatsaus jäljitettävillä mittaushetkillä.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Sijoitukset ilman kokonaispisteitä ja puuttuvat mitat näkyvät erikseen.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Näyttää vakavuuslaskelmat, tekijät ja siirretyt mittaukset hetken mukaan.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Järjestää hakutyypit vaikuttavien organisaatioiden, järjestelmien ja havaintojen mukaan.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Näyttää kriittiset/korkeat luvut ilman suunniteltua punnitusta.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Näyttää osoittajan, nimittäjän ja vain luotettavat prosenttiosuudet.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Ryhmittelee kirjaimellisia suosituksia OpenKATista ilman omaa prioriteettiaan.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Kohdennettu nykyinen kuva yhdestä organisaatiosta ja sen mittauspäivämäärä.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Vertaa kahta valittua mittaushetkeä yhden organisaation sisällä.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Erottaa uuden, uuden ja ei enää havaittu.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Käyttää vain luotettavia ensimmäisiä havainnointipäiviä.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Luokittelee järjestelmät erillisillä vakavuuslaskurilla.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Näyttää yksittäiset delta-arvot ilman painotettuja pisteitä.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Vertaa osoittajaa ja nimittäjää todistettavasti vertailukelpoisella kattavuudella.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Varastoi lähdetestatut järjestelmät, isäntänimet ja IP-osoitteet.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Erottelee valvotun, valvomattoman ja tuntemattoman.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Näyttää vain nimenomaisesti todistetut seurantamutaatiot.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Näyttää organisaatiot ja järjestelmät yhden luotettavan CVE-linkin ympärillä.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Luokittelee CVE:t nimenomaisella duplikoinnin poistamisella.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Erottaa uudet, uudet ja enää havaitsemattomat CVE:t.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Näyttää puuttuvat, vanhentuneet ja todella käytetyt mitat.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Kirjaa avainpäivämäärät, lähdetiedostot, sovittimet ja lähdetiivisteet.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Ei vielä saatavilla: lähde ei osoita kaikkien omaisuuserien seurantatilannetta.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2814,12 +2641,6 @@ const _dutchSourceAddFi = <String, String>{
   'Onderwerp': 'Aihe',
   'Welk rapport beantwoordt uw vraag?': 'Mikä raportti vastaa kysymykseesi?',
   'Meer rapportvragen': 'Lisää raporttikysymyksiä',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Mitkä järjestelmät ovat haavoittuvia CVE:lle?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organisaatiot ja haavoittuvat järjestelmät yhden haavoittuvuuden ympärillä.',
-  'Organisaties met kwetsbare systemen':
-      'Organisaatiot, joissa on haavoittuvia järjestelmiä',
   'Kwetsbare systemen': 'Haavoittuvat järjestelmät',
   'Kritiek/hoog': 'Kriittinen/korkea',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2841,8 +2662,6 @@ const _dutchSourceAddFi = <String, String>{
   'Bruikbaar': 'Käyttökelpoinen',
   'CVE zoeken': 'CVE-haku',
   'Critical/high': 'Kriittinen/korkea',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Tietojen laatu, puuttuvat mittaukset ja vanhentuminen.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Valitut raportit eivät sisällä tarpeeksi luotettavaa tietoa tälle osalle.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2870,10 +2689,6 @@ const _dutchSourceAddFi = <String, String>{
   'Geen bruikbare meetdatum': 'Ei käyttökelpoista mittauspäivää',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Luodut diat päivitetään. Omat diasi ja kopiosi säilytetään.',
-  'Getroffen organisaties en systemen':
-      'Vaikuttavat organisaatiot ja järjestelmät',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Vaikuttavat organisaatiot ja järjestelmät yhden haavoittuvuuden ympärillä.',
   'Getroffen systemen': 'Vaikuttavat järjestelmät',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Raporttia ei voitu luoda. Valintasi säilytetään; tarkista varoitukset ja yritä uudelleen.',
@@ -2883,20 +2698,15 @@ const _dutchSourceAddFi = <String, String>{
   'Keuzes wijzigen…': 'Muuta valintoja…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Valitse kansio, johon OpenKAT on sijoittanut raportit. OciDeck lukee vain tämän kansion; mitään ei muuteta tai lähetetä.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Valitse kysymys, johon raportin tulee vastata. OciDeck määrittää sopivan rakenteen.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Valitse raporteista löytyvä CVE.',
   'Laatste bruikbare meting': 'Viimeinen käytössä oleva mitta',
   'Live voorvertoning van de rapportopbouw':
       'Raportin rakenteen live esikatselu',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Hallinta- ja ohjaustiedot useista organisaatioista.',
   'Meer instellingen': 'Lisää asetuksia',
   'Nederlands': 'hollantilainen',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Kaikilla valituilla organisaatioilla ei ole mittausta tälle ajanjaksolle.',
-  'Nieuwe en verdwenen bevindingen': 'Uusia ja puuttuvia löytöjä',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Ei vielä saatavilla: nämä raportit eivät sisällä luotettavia CVE-numeroita.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2931,8 +2741,6 @@ const _dutchSourceAddFi = <String, String>{
       'Hyödyllinen virtamittaus puuttuu yhdestä tai useammasta organisaatiosta.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Vertailua varten tarvitaan kaksi mittausmomenttia. Yksi mitta on nyt löytynyt.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Edistyminen verrattuna edelliseen mittaushetkeen.',
   'Waar staan de OpenKAT-rapportages?': 'Missä OpenKAT-raportit ovat?',
   'Wat veranderde er bij één organisatie?':
       'Mikä yhdessä organisaatiossa muuttui?',
@@ -2946,7 +2754,6 @@ const _dutchSourceAddFi = <String, String>{
   'bruikbaar': 'käyttökelpoinen',
   'metingen': 'mittaukset',
   'organisaties': 'järjestöt',
-  'organisaties geselecteerd': 'valitut organisaatiot',
   'rapportages gebruikt': 'käytettyjä raportteja',
   'systemen': 'järjestelmät',
   'Nog geen specificatielimiet': 'Ei vielä spesifikaatiorajaa',
@@ -3088,7 +2895,6 @@ const _dutchSourceAddFi = <String, String>{
       'on puu-dialla, mutta sitä ei käytetä muualla — linkitä se matriisiin, virtaukseen tai muuhun diaan.',
   'Nieuw verbeteringsproject': 'Uusi parannusprojekti',
   'Kader': 'Viitekehys',
-  'Projecttitel': 'Projektin otsikko',
   'Primaire Y-metriek (Y-01)': 'Ensisijainen Y-mittari (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Esimerkiksi: order intake -läpimenoaika työpäivinä',
@@ -3141,10 +2947,6 @@ const _dutchSourceAddFi = <String, String>{
   'Bron niet toegestaan': 'Lähdettä ei sallita',
   'Deze URL is door de beveiliging geweigerd.':
       'Suojaus hylkäsi tämän URL-osoitteen.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Aineiston tuominen muista järjestelmistä. Kaksi lähdettä: esitykset ohjelmista PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muuttuvat muokattavaksi deckiksi, ja OpenKAT-raportit (kansiollinen JSONia) muuttuvat yhdeksi johdon yleiskatsaukseksi. Missä OpenKAT-kansio sijaitsee, asetetaan kohdassa Integraatiot.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Esitysten tuominen ohjelmista PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muokattavaksi deckiksi. OpenKAT-raporttikansioiden lukeminen on käytettävissä vain työpöytäversiossa.',
   'Alinea': 'Kappale',
   'Audio "{bestand}"': 'Ääni "{bestand}"',
   'Deck opbouwen…': 'Rakennetaan esitystä…',
@@ -3264,8 +3066,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tarkistuslistan hakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko ja luokka. Itse oppaan sisältö ei ole mukana.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'Version v2.0.0 testihakemisto: testikohtainen pysyvä tunnus, kanoninen otsikko, MASVS-luokka ja MASWE-heikkous. Poistetut v1-testit ja paikkamerkit eivät ole mukana; ei myöskään oppaan sisältö.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Heikkouslista (117): tunnus, otsikko, MASVS-luokka, alusta ja CWE-kytkentä. Kolmea neljäsosaa ei ole lähteessä vielä kirjoitettu auki; ne ovat mukana, merkittyinä. Poistetut heikkoudet eivät.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Koko luettelo (tunnus, nimi, kuvaus) sekä oma valittu ydin korjausmuistiinpanoineen.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3312,33 +3112,16 @@ const _dutchSourceAddFi = <String, String>{
       'Jokainen tiedosto muunnetaan erikseen ja tallennetaan omana esityksenään kohdekansioon. Jos yksi epäonnistuu, jono jatkuu silti.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Useamman esityksen tuonti kerralla kirjoittaa ne tiedostoina kansioon; selainversiossa se ei onnistu.',
-  'Nu importeren': 'Tuo nyt',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Yhteenveto on valmiina uudessa välilehdessä.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Lukee kansiollisen OpenKAT-raportteja (JSON) ja rakentaa niistä yhden johdon yleiskatsauksen: järjestelmät, havainnot vakavuuden mukaan, pisimpään auki olleet kohdat ja kehityksen peräkkäisissä mittauksissa. Sama toiminto olemassa olevalle OpenKAT-esitykselle päivittää sen ja jättää omat diasi paikoilleen.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Tuonti vain lukee; tässä kansiossa ei muuteta eikä lähetetä mitään. Tiedostot, jotka eivät ole OpenKAT-raportteja, ohitetaan ja mainitaan tuontiraportissa.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Osoita kansio, jossa OpenKAT-raporttisi (JSON) ovat. Tuonti lukee sen kansion ja rakentaa siitä yhden johdon yleiskatsauksen; kun kansio on asetettu tähän, sitä ei tarvitse valita joka kerta.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'OpenKAT-tuonti lukee kansion levyltä ja on käytettävissä vain työpöytäversiossa.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Raporttikansiota ei ole vielä valittu, joten tuonti kysyy sitä joka kerta.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Raporttikansio on jo asetettu, joten aloituskohta pysyy käytettävissä ja olemassa olevaa OpenKAT-esitystä voi yhä päivittää.',
   'Integraties': 'Integraatiot',
-  'Naar Integraties': 'Siirry Integraatioihin',
   'Map kiezen…': 'Valitse kansio…',
   'Map wissen': 'Tyhjennä kansio',
-  'OpenKAT-rapportages importeren…': 'Tuo OpenKAT-raportit…',
   'Map met OpenKAT-rapportages kiezen': 'Valitse OpenKAT-raporttien kansio',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT-raportit tuotu.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT-deck päivitetty; manuaaliset diat on säilytetty.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Tästä kansiosta ei löytynyt OpenKAT-raportteja.',
-  'OpenKAT-import mislukt.': 'OpenKAT-tuonti epäonnistui.',
   'rapportages': 'raporttia',
   'overgeslagen': 'ohitettu',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3398,8 +3181,6 @@ const _dutchSourceAddFi = <String, String>{
   'Label op de primaire knop': 'Ensisijaisen painikkeen teksti',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Havainnot, jotka olet arvioinut ja jättänyt paikalleen. Niistä ei enää ilmoiteta, mutta skannaus löytää ne edelleen eikä niitä lasketa ratkaistuiksi. Napauta palauttaaksesi yhden.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Yksityisyyshavainnon sivuun siirtäminen (suunnitelma)',
   'Deze is beoordeeld en mag blijven': 'Tarkistettu, tämä saa jäädä',
   'Mogelijk gemaakt door': 'Mahdollistanut',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3411,10 +3192,8 @@ const _dutchSourceAddFi = <String, String>{
   'Technische melding:': 'Tekninen viesti:',
   'presentaties': 'esitykset',
   '/Presentaties': '/Esitykset',
-  'Rapportagedistributie (ontwerp)': 'Raporttien jakelu (suunnitelma)',
   'De export is mislukt.': 'Vienti epäonnistui.',
   'Presenteer vanaf hier': 'Esitä tästä',
-  'Teams-gastclient (ontwerp)': 'Teams-vierasohjelma (suunnitelma)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: kuinka laajasti tätä aineistoa saa jakaa?',
   'Wat betekenen deze niveaus?': 'Mitä nämä tasot tarkoittavat?',
@@ -3531,8 +3310,6 @@ const _dutchSourceAddFi = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitykset, jotka pysyvät tavallisina Markdown-tiedostoina: luettavia, haettavia ja avattavissa millä tahansa editorilla.',
   'sjablonen om mee te beginnen, of leeg': 'mallia aloittamiseen, tai tyhjä',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Poisjättö on käytössä: löytyneet tiedot mustataan, eivätkä tämän dian kuvat, video ja ääni mene näytölle tai vientiin. Markdown-tiedostosi säilyttää kaiken.',
   'Mijn tekst': 'Oma teksti',
   'Wat zij zien': 'Mitä he näkevät',
   'Presentatiegegevens': 'Esityksen tiedot',
@@ -3757,7 +3534,6 @@ const _dutchSourceAddFi = <String, String>{
   'Opslaan naar…': 'Tallenna sijaintiin…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Määritä ensin yhteys kohdassa Asetukset → Tallennustila.',
-  'Beginnen met:': 'Aloita tästä:',
   'Verlopen datums markeren': 'Merkitse menneet päivämäärät',
   'Datums gemarkeerd': 'Päivämäärät merkitty',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3783,28 +3559,15 @@ const _dutchSourceAddFi = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Hyökkäyspinta kohdetyypeittäin: montako niitä on, montako vaatii työtä, mikä on uutta ja mitä kukaan ei omista. Viimeksi mainittu on yleensä se keskustelu.',
   'Acties en besluiten': 'Toimet ja päätökset',
-  'Actie toevoegen': 'Lisää toimi',
-  'Actie verwijderen': 'Poista toimi',
   'Actie': 'Toimi',
   'Deadline': 'Määräaika',
-  'Op de lijst sinds': 'Listalla alkaen',
   'Stand': 'Tila',
-  'Wat vraagt u': 'Mitä pyydät',
   'geen datum': 'ei päivämäärää',
-  'Ter informatie': 'Tiedoksi',
   'Besluit gevraagd': 'Päätös tarvitaan',
   'Escalatie': 'Eskalointi',
   'Open': 'Avoin',
   'Loopt': 'Käynnissä',
   'Afgerond': 'Valmis',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Vain päätös tai eskalointi saa dialla merkinnän; "myöhässä" seuraa määräajasta etkä aseta sitä itse.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Päivämäärät muodossa vvvv-kk-pp. Muu kirjoitustapa hylätään eikä arvata: 05-08-2026 on kaksi eri päivää.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Toimenpidedia kantaa enintään kahdeksan riviä; sen jälkeen sali silmäilee päättämisen sijaan.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Mitä pitää tapahtua, kuka sen tekee ja mihin mennessä. Kerro riveittäin, onko se tiedoksi vai pyydätkö päätöstä — sitä sali etsii.',
   'Scorecard': 'Tunnuslukukortti',
   'Cijfer toevoegen': 'Lisää tunnusluku',
   'Cijfer verwijderen': 'Poista tunnusluku',
@@ -3891,8 +3654,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tunnus on kelvollinen, mutta sillä ei ole tähän lupaa — anna sille lisää oikeuksia repositorioon.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Kirjautunut, mutta ei pääsyä — salasana ei ole ongelma. Pyydä oikeuksia tähän kansioon.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Sanastojen lisenssit: mitä on vielä kysyttävä',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Tämä näyttää täydeltä DAV-osoitteelta. Nextcloudissa OciDeck päättelee polun itse — tähän kuuluu vain palvelin.',
   'Overnemen': 'Käytä',
@@ -3935,8 +3696,6 @@ const _dutchSourceAddFi = <String, String>{
   'kenteken': 'rekisterinumero',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Tämän esityksen kielelle ei ole avainsanaluetteloa erityisiin henkilötietoryhmiin. Tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat; sanoja kuten "diagnoosi" tai "epäilty" ei tunnisteta.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Erityisten henkilötietoryhmien avainsanaluettelo on tämän esityksen kielelle hyvin ohut. Älä luota siihen, että sanat kuten "diagnoosi" tai "epäilty" löytyvät.',
   'Landpakketten voor identificatienummers': 'Maapaketit tunnistenumeroille',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
       'Numerot kuten alankomaalainen BSN tai puolalainen PESEL ovat maakohtaisia. Koko Eurooppa on päällä, koska useimmissa näistä numeroista on tarkistusnumero: niiden käyttöönotto ei juuri maksa vääriä hälytyksiä. IBAN, sähköposti, salaisuudet ja passirivit ovat tästä riippumattomia ja tarkistetaan aina.',
@@ -3965,8 +3724,6 @@ const _dutchSourceAddFi = <String, String>{
       'Palvelimen nimeä ei ole olemassa tai sitä ei voi hakea. Tarkista palvelimen URL-osoitteen kirjoitusasu.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Tällä palvelimella on yksityinen tai LAN-osoite. Merkitse se luotetuksi sisäiseksi kohdassa Asetukset → Tallennus.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Tämän palvelimen varmennetta ei luoteta. Itse allekirjoitettu varmenne ei toimi; käytä tunnustetun myöntäjän varmennetta.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Palvelin ohjaa toiseen osoitteeseen. Syötä se osoite suoraan — emme seuraa uudelleenohjauksia, koska ne voivat ohittaa turvatarkistuksen.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4002,8 +3759,6 @@ const _dutchSourceAddFi = <String, String>{
   'Opslaan naar S3': 'Tallenna S3:een',
   'Opgeslagen in S3:': 'Tallennettu S3:een:',
   'Hier staat niets': 'Täällä ei ole mitään',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Sisältöä ei voitu ladata. Tarkista yhteys ja asetukset.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Päätepistettä ei tavoiteta — tarkista yhteys ja päätepiste.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4012,8 +3767,6 @@ const _dutchSourceAddFi = <String, String>{
       'Päätepiste palautti virheen. Yritä myöhemmin uudelleen.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Tämä päätepiste ei osaa kirjoittaa ehdollisesti, joten työsi ei ole suojattu toisen työltä. Tallenna uudella nimellä, jos joku muukin työstää tätä esitystä.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'S3-säilöä ei ole määritetty. Määritä se kohdassa Asetukset → Tallennus.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Määritä ensin S3-säilö kohdassa Asetukset → Tallennus.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4059,10 +3812,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tässä kuvassa näkyy vähintään {count} tunnistettavaa kasvoa.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Tätä kuvaa ei voitu tarkistaa kasvojen varalta. Muotoa ei tueta (esimerkiksi HEIC). Se ei tarkoita, ettei kuvassa ole ketään — se tarkoittaa, ettei ole katsottu.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Tässä kuvassa näkyy tunnistettavat kasvot.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Tässä kuvassa näkyy {count} tunnistettavaa kasvoa.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Kuva, jossa joku on tunnistettavissa, on henkilötieto myös ilman nimeä.',
   'herkenbaar gezicht op een afbeelding': 'tunnistettavat kasvot kuvassa',
@@ -4078,8 +3827,6 @@ const _dutchSourceAddFi = <String, String>{
   'Organisatie': 'Organisaatio',
   'Welke verbinding?': 'Mikä yhteys?',
   'Bestandsverbindingen': 'Tiedostoyhteydet',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Paikat, joissa säilytät ja haet esityksiäsi — kansiot tässä tietokoneessa, WebDAV-palvelimet ja git-arkistot sekaisin. Vedä ne haluamaasi järjestykseen: kunkin lajin ylin on oletus.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Git-arkisto; jokainen tallennettu versio säilyy.',
   'Een map op de schijf van deze computer.':
@@ -4104,15 +3851,7 @@ const _dutchSourceAddFi = <String, String>{
   'Openen vanaf WebDAV': 'Avaa WebDAVista',
   'Opslaan naar WebDAV': 'Tallenna WebDAViin',
   'Opgeslagen op WebDAV:': 'Tallennettu WebDAViin:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Määritä ensin WebDAV-palvelin kohdassa Asetukset → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Valitse kuva WebDAVista',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'WebDAV-palvelinta ei ole määritetty. Määritä se kohdassa Asetukset → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAVia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → WebDAV.',
   'Servertype': 'Palvelimen tyyppi',
   'Nextcloud of ownCloud': 'Nextcloud tai ownCloud',
   'Andere WebDAV-server': 'Muu WebDAV-palvelin',
@@ -4134,23 +3873,11 @@ const _dutchSourceAddFi = <String, String>{
   'Haal volle pagina uit de reeks': 'Poista täysi sivu sarjasta',
   'Opslag': 'Tallennus',
   'Opslagwijzen': 'Tallennustavat',
-  'Deze computer': 'Tämä tietokone',
   'Ingesteld': 'Määritetty',
   'Niet ingesteld': 'Ei määritetty',
-  'Nog geen bibliotheek ingesteld': 'Kirjastoa ei ole vielä määritetty',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Reitit, joiden kautta voit avata ja tallentaa esityksiä. Napsauta tapa auki määrittääksesi sen.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Esitykset yllä olevissa kansioissa, tämän tietokoneen levyllä.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Avaa ja tallenna esityksiä Nextcloud-kansioosi.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Avaa esityksiä git-tietovarastosta; jokainen tallennettu versio säilyy.',
-  'Nog te verifiëren': 'Vielä varmennettava',
   'MASWE-zwakheid kiezen': 'Valitse MASWE-heikkous',
   'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',
   'Geen zwakheid gevonden': 'Heikkoutta ei löytynyt',
-  'uitleg nog niet geschreven': 'ohjeistusta ei ole vielä kirjoitettu',
   'Getalnotatie herkennen': 'Tunnista lukumuoto',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Tässä tiedostossa on lukuja, joiden pilkku voidaan lukea kahdella tavalla:',
@@ -4268,12 +3995,10 @@ const _dutchSourceAddFi = <String, String>{
   'Veelgestelde vragen': 'Usein kysytyt kysymykset',
   'Probleemoplossing': 'Vianmääritys',
   'Begrippenlijst': 'Sanasto',
-  'API-documentatie': 'API-dokumentaatio',
   'Prestaties': 'Suorituskyky',
   'Beveiligingsontwerp': 'Tietoturvasuunnittelu',
   'Hosting en uitrol': 'Isännöinti ja käyttöönotto',
   'Bijdragen': 'Osallistuminen',
-  'Ontwikkelomgeving': 'Kehitysympäristö',
   'Migratiegids': 'Siirto-opas',
   'Versies…': 'Versiot…',
   'Versies:': 'Versiot:',
@@ -4314,8 +4039,6 @@ const _dutchSourceAddFi = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haara siirtyi; lataa setti uudelleen ja tallenna uudestaan.',
   'Bijgewerkt met OciDeck': 'Päivitetty OciDeckillä',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Määritä ensin Git-tietovarasto kohdassa Asetukset → Git-tietovarasto.',
   'Git-repository': 'Git-tietovarasto',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Avaa esityksiä Git-tietovarastosta. Jokainen tallennettu versio säilyy. Tunnus tallennetaan salattuna avainnippuun, ei muiden asetusten joukkoon.',
@@ -4331,7 +4054,6 @@ const _dutchSourceAddFi = <String, String>{
       'Raportointidiat ja viitetiedot tietoturvaa varten: havainnot, tarkistuslistat, scope-matriisit ja hyväksyntä. Jäsennelty MIAUW:n mukaisesti ja laajasti käytettävissä pentesteihin, auditointeihin ja tietoturvatutkimukseen. Viitetiedot ovat itse sovelluksessa, joten moduuli toimii heti ja täysin offline-tilassa.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valinnaiset moduulit. Oletuksena pois; ne pysyvät piilossa, kunnes otat ne käyttöön.',
-  'Procesverbetering (ontwerp)': 'Prosessien parantaminen (suunnitelma)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Tämä projekti on Pilot Informatieautonomie -hankkeen sivutuote.',
   'Stijlprofiel exporteren': 'Vie tyyliprofiili',
@@ -4473,7 +4195,6 @@ const _dutchSourceAddFi = <String, String>{
   'genetisch gegeven': 'geneettinen tieto',
   'parketnummer': 'syyttäjän asianumero',
   'nationaal identificatienummer': 'kansallinen henkilötunnus',
-  'OciWacht (ontwerp)': 'OciWacht (suunnitelma)',
   'Mogelijk geheim': 'Mahdollinen salaisuus',
   'sleutel of token': 'avain tai poletti',
   'private sleutel': 'yksityinen avain',
@@ -4506,7 +4227,6 @@ const _dutchSourceAddFi = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Vie koko CVE-luettelo tälle laitteelle, jotta haut tehdään offline-tilassa eikä hakusanasi mene minnekään. Tietokanta tulee CVE List V5 -lähteestä (virallinen CVE-ohjelma, GitHubin kautta).',
   'Wat er lokaal beschikbaar is': 'Mitä on saatavilla paikallisesti',
-  'Gegevenspakket': 'Datapaketti',
   'Nu bijwerken': 'Päivitä nyt',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Tiedot saatavilla paikallisesti — haut tehdään tällä laitteella; mitään ei lähde ulos.',
@@ -4525,7 +4245,6 @@ const _dutchSourceAddFi = <String, String>{
       'Hyväksy: tiedot kuuluvat tänne ja ilmoitus katoaa. Hyväksy + varoita: vastaanottaja näkee merkin, että diassa on henkilötietoja. Jätä pois: löydetyt tiedot tehdään lukukelvottomiksi näytöllä ja viennissä — Markdown-tiedostosi säilyttää alkuperäisen tekstin.',
   'Alleen melden': 'Vain ilmoita',
   'PERSOONSGEGEVENS': 'HENKILÖTIETOJA',
-  'Persoonsgegevens op deze slide': 'Henkilötietoja tässä diassa',
   'Volg de presentatie': 'Seuraa esitystä',
   'Weglaten uit tonen en exporteren': 'Jätä pois näytöstä ja viennistä',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4648,8 +4367,6 @@ const _dutchSourceAddFi = <String, String>{
   'Bewerk deze slide': 'Muokkaa tätä diaa',
   'Bewijs verwijderen': 'Poista todiste',
   '(nog leeg)': '(vielä tyhjä)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Anna ensin löydöksen tunnus, jotta voit liittää todisteita.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Lisää kuvakaappauksia tai videoita todisteeksi. Jokainen todiste tulee omaksi diakseen heti löydöksen jälkeen ja on mukana viennissä.',
   'Uitvoering testen conform standaard': 'Testaus standardin mukaan',

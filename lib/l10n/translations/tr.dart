@@ -41,17 +41,13 @@ const _stringsTr = {
   'settings': 'Ayarlar',
   'settingsGeneral': 'Genel',
   'settingsColors': 'Renkler',
-  'settingsLogo': 'Logo',
   'language': 'Dil',
   'applicationLanguage': 'Uygulama dili',
   'languageHelp':
       'Arayüz anında dil değiştirir. Sunum içeriği değişmeden kalır.',
-  'presentationFolder': 'Sunum klasörü',
   'exportFolderSetting': 'Dışa aktarma klasörü',
-  'notSet': 'Ayarlanmadı',
   'nextToPresentationFile': 'Sunum dosyasının yanına',
   'choose': 'Seç',
-  'removeDefaultFolder': 'Varsayılan klasörü kaldır',
   'removeExportFolder': 'Dışa aktarma klasörünü kaldır',
   'exportFolderHelp':
       'Tüm dışa aktarmalar (PDF/PPTX) buraya kaydedilir. Ayarlanmadıysa dışa aktarma sunum dosyasının yanına gelir.',
@@ -85,8 +81,6 @@ const _dutchSourceTr = {
   'Handtekening tekenen': 'İmza çiz',
   'Teken je handtekening in het vak hieronder.':
       'İmzanızı aşağıdaki kutuya çizin.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Veri paketi, bu modüle ait referans verileri içeren bir .zip dosyasıdır. Önce uygulamaya gömülü parmak izine karşı denetlenir; yalnızca bu uygulama sürümüne ait bir paket kabul edilir.',
   'Vlak': 'Alan',
   'Horizontale staaf': 'Yatay çubuk',
   'Waterval': 'Şelale',
@@ -193,7 +187,6 @@ const _dutchSourceTr = {
       'Görseller ve medya, aynı klasördeki sunumlar arasında paylaşılır. Tam adı birazdan sistem penceresinde seçeceksiniz.',
   'Alle bibliotheken': 'Tüm kitaplıklar',
   'Andere map…': 'Başka klasör…',
-  'Bibliotheek verwijderen': 'Kitaplığı kaldır',
   'Bibliotheken': 'Kitaplıklar',
   'Geen bibliotheek': 'Kitaplık yok',
   'Geen presentaties (.md) gevonden.': 'Sunum (.md) bulunamadı.',
@@ -205,10 +198,6 @@ const _dutchSourceTr = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Sunumun hangi kitaplığa geleceğini seçin.',
   'Map toevoegen': 'Klasör ekle',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Sunumlarınızı sakladığınız ve içinde arama yaptığınız klasörler. Ayırt edebilmek için her birine kendi adını verin. Açarken ve görsel kitaplığında tüm kitaplıklarda arama yapılır.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Henüz kitaplık yok — bir klasör ekleyin.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Henüz kitaplık yok. Ayarlar\'dan bir tane ekleyin veya aranacak bir klasörü yukarıdan seçin.',
   'Presentatie opslaan': 'Sunumu kaydet',
@@ -290,21 +279,11 @@ const _dutchSourceTr = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Raportör, sertifikasyon, imza ve mühürleme ile doğruluk beyanı.',
   'Uitbreidingen': 'Eklentiler',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'İsteğe bağlı modüller. Varsayılan olarak kapalıdır; siz etkinleştirene kadar temel uygulamaya hiçbir şey eklemezler.',
   'Gegevens opschonen': 'Verileri temizle',
   'Gegevens lokaal beschikbaar': 'Veriler yerel olarak mevcut',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Önce Lisans ve Gizlilik bölümünden giden trafiğe izin verin.',
   'Op het web nog niet beschikbaar': 'Web\'de henüz kullanılamıyor',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ulaşılabilir kaynak yok — referans veriler hiçbir kaynaktan alınamadı. Yeniden deneyin veya paketi elle içe aktarın.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Alınan veriler beklenen parmak iziyle eşleşmedi ve önlem olarak reddedildi.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Veri paketi bozuk veya geçersizdi, bu nedenle reddedildi.',
-  'Gegevenspakket kiezen': 'Veri paketi seç',
-  'Kon het gekozen bestand niet lezen.': 'Seçilen dosya okunamadı.',
   'Nog niet opgehaald': 'Henüz alınmadı',
   'AI-assistentie': 'AI yardımı',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,22 +300,15 @@ const _dutchSourceTr = {
       'Bulut hizmeti için önce "Lisans ve Gizlilik" bölümünde gizlilik izniniz gerekir; web sürümünde çalışmaz.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Verilerin bu harici hizmete gönderileceğini anlıyorum',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI yardımı (varsayılan olarak kapalıdır): kendi barındırdığınız veya bulut tabanlı bir arka uç seçerseniz, işlenmesini istediğiniz metinler veya görseller o adrese gönderilir. Bu cihazdaki yerel bir AI modeli hiçbir şey göndermez.',
   'Zoek een slidetype': 'Slayt türü ara',
   'Alfabetisch sorteren': 'Alfabetik sırala',
   'Algemeen': 'Genel',
   'Informatieveiligheid': 'Bilgi güvenliği',
   'Alle': 'Tümü',
-  'Pentestrapportage (ontwerp)': 'Sızma testi raporlaması (tasarım)',
-  'AI-assistentie (ontwerp)': 'AI yardımı (tasarım)',
-  'Agentisch bouwplan (ontwerp)': 'Ajan tabanlı yapım planı (tasarım)',
-  'Bijsnijden': 'Kırp',
   'Linksom': 'Sola döndür',
   'Rechtsom': 'Sağa döndür',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Hangi bölümün görünür kalacağını seçmek için görseli sürükleyin.',
-  'Git-opslag (ontwerp)': 'Git depolama (tasarım)',
   'Zoek in documentatie…': 'Belgelerde ara…',
   'Geen documenten gevonden': 'Belge bulunamadı',
   'Alleen afspelen (vergrendeld)': 'Yalnızca oynatma (kilitli)',
@@ -350,12 +322,8 @@ const _dutchSourceTr = {
   'Techniek': 'Teknik',
   'Licentie en naleving': 'Lisans ve uyumluluk',
   'Architectuur': 'Mimari',
-  'Bouwinstructies': 'Yapım talimatları',
-  'Kwaliteitscontroles': 'Kalite denetimleri',
-  'Broncodekaart': 'Kaynak kod haritası',
   'Licentienaleving': 'Lisans uyumluluğu',
   'Softwarestuklijst (SBOM)': 'Yazılım bileşen listesi (SBOM)',
-  'Samenwerking (ontwerp)': 'İş birliği (tasarım)',
   'Beschermen met een wachtwoord (AES-256)': 'Parola ile koru (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Bu parolayı iyi saklayın: kaybederseniz bu paket bir daha açılamaz.',
@@ -432,10 +400,6 @@ const _dutchSourceTr = {
   'Instelling opslaan is mislukt.': 'Ayar kaydedilemedi.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Dikkat: web sürümü yalnızca buna izin veren sunuculardan veri alabilir (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketler (.ocideck) web sürümünde henüz desteklenmiyor.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Web sürümünde yalnızca .md sunumları açılabilir.',
   'Geen': 'Yok',
   'Nieuw': 'Yeni',
   'Verwijderen': 'Sil',
@@ -521,10 +485,8 @@ const _dutchSourceTr = {
   'Audio bij deze slide': 'Bu slayda ait ses',
   'Audio automatisch afspelen': 'Sesi otomatik oynat',
   'Audio verwijderen': 'Sesi kaldır',
-  'Geen audio gekozen': 'Ses seçilmedi',
   'Geen audiobestand gekozen': 'Ses dosyası seçilmedi',
   'Video automatisch afspelen': 'Videoyu otomatik oynat',
-  'Geen video gekozen': 'Video seçilmedi',
   'Kiezen': 'Seç',
   'Uit bibliotheek…': 'Kitaplıktan…',
   'Van computer…': 'Bilgisayardan…',
@@ -553,7 +515,6 @@ const _dutchSourceTr = {
   'Pakket importeren': 'Paketi içe aktar',
   'Pakket exporteren': 'Paketi dışa aktar',
   'Map met presentaties kiezen': 'Sunumların bulunduğu klasörü seç',
-  'Standaard map voor presentaties': 'Sunumlar için varsayılan klasör',
   'Map voor exports': 'Dışa aktarma klasörü',
   'Logo kiezen': 'Logo seç',
   'Kies een afbeelding': 'Bir görsel seçin',
@@ -566,8 +527,6 @@ const _dutchSourceTr = {
   'Map kiezen': 'Klasör seç',
   'Kies een map met presentaties om te beginnen.':
       'Başlamak için sunumların bulunduğu bir klasör seçin.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Bu klasörde sunum (.md) bulunamadı.',
   'Geen presentaties gevonden voor': 'Şunun için sunum bulunamadı',
   'meer treffer(s)': 'eşleşme daha',
   'Slide zoeken': 'Slayt ara',
@@ -589,7 +548,6 @@ const _dutchSourceTr = {
       'Tüm sunumlarınızdaki slaytları bulmak için arama terimleri yazın.',
   'toegevoegd': 'eklendi',
   'Eerste': 'İlk',
-  'treffers — verfijn je zoekopdracht': 'eşleşme — aramanızı daraltın',
   'treffer(s)': 'eşleşme',
   'slide': 'slayt',
   'Zoeken en vervangen': 'Bul ve değiştir',
@@ -648,7 +606,6 @@ const _dutchSourceTr = {
   'Tekst op zijpanelen': 'Yan panellerdeki metin',
   'Voorbeeldtekst': 'Örnek metin',
   'Knop': 'Düğme',
-  'Profielnaam': 'Profil adı',
   'Naam van het stijlprofiel': 'Stil profilinin adı',
   'Stijlprofiel': 'Stil profili',
   'Nieuw profiel': 'Yeni profil',
@@ -710,14 +667,7 @@ const _dutchSourceTr = {
   'TYPE': 'TÜR',
   'STIJL': 'STİL',
   'Terug naar standaardstijl': 'Varsayılan stile dön',
-  'Automatisch doorgaan na': 'Otomatik ilerleme süresi',
-  'Logo tonen op deze slide': 'Bu slaytta logoyu göster',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Sunum sırasında tablo düzenlenebilir',
-  'Footer tonen op deze slide': 'Bu slaytta altbilgiyi göster',
   'Sprekersnotities...': 'Sunucu notları...',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown modu — sunumun tamamını Marp Markdown olarak düzenleyin',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown işlenemedi. Söz dizimini denetleyin.',
   'Controleren': 'Denetle',
@@ -741,8 +691,6 @@ const _dutchSourceTr = {
   'Geen resultaten voor': 'Şunun için sonuç yok',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Arama terimini değiştirin veya bir açıklama ekleyin.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Herhangi bir konumdan görsel seçmek için "Gözat"ı kullanın.',
   'Selecteer een\nafbeelding': 'Bir görsel\nseçin',
   'Gekopieerd': 'Kopyalandı',
   'Afbeelding verwijderen?': 'Görsel silinsin mi?',
@@ -759,8 +707,6 @@ const _dutchSourceTr = {
   'spatie': 'boşluk',
   'klik': 'tıklama',
   'cijfers': 'rakamlar',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kapatmak için tıklayın veya ? / H / Esc tuşuna basın',
   'Klik of druk op H / Esc om te sluiten':
       'Kapatmak için tıklayın veya H / Esc tuşuna basın',
   'Naar slidenummer': 'Slayt numarasına git',
@@ -771,20 +717,10 @@ const _dutchSourceTr = {
   'Presenter view (notities, klok)': 'Sunucu görünümü (notlar, saat)',
   'Scherm wisselen (meerdere schermen)': 'Ekran değiştir (birden fazla ekran)',
   'Zwart · wit scherm': 'Siyah · beyaz ekran',
-  'Verstreken tijd resetten': 'Geçen süreyi sıfırla',
   'Automatische modus aan/uit': 'Otomatik mod açık/kapalı',
   'Herhalen (loop) aan/uit': 'Tekrar (döngü) açık/kapalı',
-  'Na audio automatisch doorgaan': 'Sesten sonra otomatik ilerle',
-  'Dit overzicht': 'Bu genel görünüm',
   'Deze legenda': 'Bu açıklama',
   'Terug / afsluiten': 'Geri / çıkış',
-  'Auto (A)': 'Otomatik (A)',
-  'Handmatig (A)': 'Elle (A)',
-  'Herhalen (L)': 'Tekrar (L)',
-  'Na audio (M)': 'Sesten sonra (M)',
-  'Sneltoetsen (?)': 'Kısayol tuşları (?)',
-  'Slide-overzicht (G)': 'Slayt genel görünümü (G)',
-  'Presenter view (P)': 'Sunucu görünümü (P)',
   'Tijd resetten (R)': 'Süreyi sıfırla (R)',
   'HUIDIGE SLIDE': 'GEÇERLİ SLAYT',
   'VOLGENDE': 'SONRAKİ',
@@ -798,15 +734,9 @@ const _dutchSourceTr = {
   'Gebruikersnotities voor deze slide...': 'Bu slayt için kullanıcı notları...',
   'Notities voor de ontvanger tijdens een cursus':
       'Kurs sırasında alıcı için notlar',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Not eklemek için Markdown moduna geçin.',
   'Mijn notities aan/uit': 'Notlarım açık/kapalı',
   'Wissel scherm (S)': 'Ekran değiştir (S)',
   'Kon niet van scherm wisselen.': 'Ekran değiştirilemedi.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · S ekran · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P izleyici · H açıklama · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -993,7 +923,6 @@ const _dutchSourceTr = {
   'Opslaan naar…': 'Şuraya kaydet…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Önce Ayarlar → Depolama bölümünde bir bağlantı ayarlayın.',
-  'Beginnen met:': 'Şununla başlayın:',
   'Verlopen datums markeren': 'Süresi geçmiş tarihleri işaretle',
   'Datums gemarkeerd': 'Tarihler işaretlendi',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -1019,28 +948,15 @@ const _dutchSourceTr = {
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'Nesne türüne göre saldırı yüzeyi: kaç tane var, kaçı iş gerektiriyor, ne yeni ve neyin sahibi yok. Sonuncusu genelde asıl konudur.',
   'Acties en besluiten': 'Eylemler ve kararlar',
-  'Actie toevoegen': 'Eylem ekle',
-  'Actie verwijderen': 'Eylem kaldır',
   'Actie': 'Eylem',
   'Deadline': 'Son tarih',
-  'Op de lijst sinds': 'Listeye eklenme',
   'Stand': 'Durum',
-  'Wat vraagt u': 'Ne istiyorsunuz',
   'geen datum': 'tarih yok',
-  'Ter informatie': 'Bilgi için',
   'Besluit gevraagd': 'Karar isteniyor',
   'Escalatie': 'Eskalasyon',
   'Open': 'Açık',
   'Loopt': 'Devam ediyor',
   'Afgerond': 'Tamamlandı',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Slaytta yalnızca bir karar veya eskalasyon etiket alır; "gecikti" son tarihten çıkar, onu siz koymazsınız.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Tarihler yyyy-aa-gg biçiminde. Başka bir yazım tahmin edilmez: 05-08-2026 iki farklı gündür.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Bir eylem slaydı en fazla sekiz satır taşır; sonrasında salon karar vermek yerine göz gezdirmeye başlar.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Ne yapılması gerektiği, kimin yapacağı ve ne zaman. Her satırda bunun bilgi için mi olduğunu yoksa bir karar mı istediğinizi belirtin — salonun taradığı şey budur.',
   'Scorecard': 'Karne',
   'Cijfer toevoegen': 'Rakam ekle',
   'Cijfer verwijderen': 'Rakam kaldır',
@@ -1127,8 +1043,6 @@ const _dutchSourceTr = {
       'Belirteç geçerli, ancak buna izni yok — ona repository üzerinde daha fazla yetki verin.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Oturum açık, ama erişim yok — sorun parolanız değil. Bu klasör için yetki isteyin.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Sözlük lisansları: hâlâ sorulması gerekenler',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Bu, tam bir DAV URL\'si gibi görünüyor. Nextcloud\'da OciDeck bu yolu kendisi türetir — buraya yalnızca sunucu yazılır.',
   'Overnemen': 'Uygula',
@@ -1171,8 +1085,6 @@ const _dutchSourceTr = {
   'kenteken': 'araç plakası',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Bu sunumun dili için özel nitelikli kişisel verilere dair bir anahtar kelime listesi yok. Kontrol haneli desenler (ulusal kimlik numarası, IBAN, pasaport) çalışır; "teşhis" veya "şüpheli" gibi kelimeler tanınmaz.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'Özel nitelikli kişisel veriler için anahtar kelime listesi, bu sunumun dilinde çok zayıf. "teşhis" veya "şüpheli" gibi kelimelerin bulunacağına güvenmeyin.',
   'Landpakketten voor identificatienummers':
       'Kimlik numaraları için ülke paketleri',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -1202,8 +1114,6 @@ const _dutchSourceTr = {
       'Sunucu adı yok veya çözümlenemiyor. Sunucu URL\'sinde yazım hatası olup olmadığını denetleyin.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Bu sunucu özel veya LAN adresine sahip. Ayarlar → Depolama bölümünde güvenilir dahili olarak işaretleyin.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Bu sunucunun sertifikasına güvenilmiyor. Kendinden imzalı bir sertifika işe yaramaz; tanınmış bir sağlayıcıdan alınmış bir sertifika kullanın.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'Sunucu başka bir adrese yönlendiriyor. O adresi doğrudan girin — yönlendirmeleri izlemiyoruz, çünkü güvenlik denetimini atlatabilirler.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -1239,8 +1149,6 @@ const _dutchSourceTr = {
   'Opslaan naar S3': 'S3\'e kaydet',
   'Opgeslagen in S3:': 'S3\'e kaydedildi:',
   'Hier staat niets': 'Burada hiçbir şey yok',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'İçerik yüklenemedi. Bağlantınızı ve ayarlarınızı denetleyin.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Endpoint\'e ulaşılamıyor — bağlantınızı ve endpoint\'i denetleyin.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -1249,8 +1157,6 @@ const _dutchSourceTr = {
       'Endpoint bir hata döndürdü. Daha sonra tekrar deneyin.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Bu endpoint koşullu yazma yapamıyor, bu yüzden çalışmanız bir başkasınınkine karşı korumasız. Bu sunum üzerinde başka biri çalışıyorsa yeni bir adla kaydedin.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Ayarlanmış bir S3 bucket\'ı yok. Ayarlar → Depolama bölümünde bir tane ayarlayın.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Önce Ayarlar → Depolama bölümünde bir S3 bucket\'ı ayarlayın.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -1296,10 +1202,6 @@ const _dutchSourceTr = {
       'Bu görselde en az {count} tanınabilir yüz var.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Bu görsel yüzler açısından denetlenemedi. Biçim desteklenmiyor (örneğin HEIC). Bu, görselde kimsenin olmadığı anlamına gelmez — bakılmadı.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Bu görselde tanınabilir bir yüz var.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Bu görselde {count} tanınabilir yüz var.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Birinin tanınabilir olduğu bir görsel, yanında isim olmasa da kişisel veridir.',
   'herkenbaar gezicht op een afbeelding': 'görselde tanınabilir yüz',
@@ -1315,8 +1217,6 @@ const _dutchSourceTr = {
   'Organisatie': 'Kuruluş',
   'Welke verbinding?': 'Hangi bağlantı?',
   'Bestandsverbindingen': 'Dosya bağlantıları',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'Sunumlarınızı sakladığınız ve içlerinde arama yaptığınız yerler — bu bilgisayardaki klasörler, WebDAV sunucuları ve git depoları bir arada. İstediğiniz sıraya sürükleyin: her türün en üsttekisi varsayılan sayılır.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Bir git deposu; kaydedilen her sürüm saklanır.',
   'Een map op de schijf van deze computer.':
@@ -1341,15 +1241,7 @@ const _dutchSourceTr = {
   'Openen vanaf WebDAV': 'WebDAV\'den aç',
   'Opslaan naar WebDAV': 'WebDAV\'e kaydet',
   'Opgeslagen op WebDAV:': 'WebDAV\'e kaydedildi:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Önce Ayarlar → WebDAV bölümünde bir WebDAV sunucusu ayarlayın.',
   'Afbeelding kiezen op WebDAV': 'WebDAV\'de görsel seç',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'WebDAV sunucusu ayarlanmadı. Ayarlar → WebDAV bölümünde bir tane ayarlayın.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV (doğru) ayarlanmadı — Ayarlar → WebDAV bölümünde sunucu bilgilerini denetleyin.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Bu sunucuya izin verilmiyor. Özel/LAN sunucusunu önce Ayarlar → WebDAV bölümünde güvenilir olarak işaretleyin.',
   'Servertype': 'Sunucu türü',
   'Nextcloud of ownCloud': 'Nextcloud veya ownCloud',
   'Andere WebDAV-server': 'Başka bir WebDAV sunucusu',
@@ -1371,23 +1263,11 @@ const _dutchSourceTr = {
   'Haal volle pagina uit de reeks': 'Dolu sayfayı seriden çıkar',
   'Opslag': 'Depolama',
   'Opslagwijzen': 'Depolama yöntemleri',
-  'Deze computer': 'Bu bilgisayar',
   'Ingesteld': 'Ayarlandı',
   'Niet ingesteld': 'Ayarlanmadı',
-  'Nog geen bibliotheek ingesteld': 'Henüz kitaplık ayarlanmadı',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Sunumları hangi yollarla açıp saklayabileceğiniz. Ayarlamak için bir yöntemi tıklayarak açın.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Yukarıdaki klasörlerde, bu bilgisayarın diskinde bulunan sunumlar.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Sunumları Nextcloud\'unuzdaki bir klasörde açın ve saklayın.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Sunumları bir git deposundan açın; kaydedilen her sürüm saklanır.',
-  'Nog te verifiëren': 'Henüz doğrulanmadı',
   'MASWE-zwakheid kiezen': 'MASWE zayıflığı seç',
   'Zoek op naam, id of categorie': 'Ada, kimliğe veya kategoriye göre arayın',
   'Geen zwakheid gevonden': 'Zayıflık bulunamadı',
-  'uitleg nog niet geschreven': 'açıklama henüz yazılmadı',
   'Getalnotatie herkennen': 'Sayı biçimini tanıma',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Bu dosyada, virgülü iki şekilde okunabilen sayılar var:',
@@ -1506,12 +1386,10 @@ const _dutchSourceTr = {
   'Veelgestelde vragen': 'Sık sorulan sorular',
   'Probleemoplossing': 'Sorun giderme',
   'Begrippenlijst': 'Sözlük',
-  'API-documentatie': 'API belgeleri',
   'Prestaties': 'Performans',
   'Beveiligingsontwerp': 'Güvenlik tasarımı',
   'Hosting en uitrol': 'Barındırma ve dağıtım',
   'Bijdragen': 'Katkıda bulunma',
-  'Ontwikkelomgeving': 'Geliştirme ortamı',
   'Migratiegids': 'Geçiş kılavuzu',
   'Versies…': 'Sürümler…',
   'Versies:': 'Sürümler:',
@@ -1552,8 +1430,6 @@ const _dutchSourceTr = {
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Dal ilerlemiş; sunumu yeniden yükleyip tekrar kaydedin.',
   'Bijgewerkt met OciDeck': 'OciDeck ile güncellendi',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Önce Ayarlar → Git deposu bölümünde bir git deposu ayarlayın.',
   'Git-repository': 'Git deposu',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Sunumları bir git deposundan açın. Kaydedilen her sürüm saklanır. Token, diğer ayarların yanında değil, anahtar zincirinde şifrelenmiş olarak saklanır.',
@@ -1568,7 +1444,6 @@ const _dutchSourceTr = {
       'Bilgi güvenliği için raporlama slaytları ve referans verileri: bulgular, kontrol listeleri, kapsam matrisleri ve imzalama. MIAUW\'ya göre yapılandırılmıştır ve pentestler, denetimler ve güvenlik araştırmaları için geniş çapta kullanılabilir. Referans veriler uygulamanın kendi içindedir, bu yüzden modül anında ve tamamen çevrimdışı çalışır.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'İsteğe bağlı modüller. Varsayılan olarak kapalı; siz açana kadar gizli kalır.',
-  'Procesverbetering (ontwerp)': 'Süreç iyileştirme (tasarım)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Bu proje, Pilot Informatieautonomie\'nin yan ürünüdür.',
   'Stijlprofiel exporteren': 'Stil profilini dışa aktar',
@@ -1708,7 +1583,6 @@ const _dutchSourceTr = {
   'genetisch gegeven': 'genetik veri',
   'parketnummer': 'savcılık dosya numarası',
   'nationaal identificatienummer': 'ulusal kimlik numarası',
-  'OciWacht (ontwerp)': 'OciWacht (tasarım)',
   'Mogelijk geheim': 'Olası sır',
   'sleutel of token': 'anahtar veya token',
   'private sleutel': 'özel anahtar',
@@ -1741,7 +1615,6 @@ const _dutchSourceTr = {
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Tam CVE listesini bu cihaza yerleştirin; böylece aramalar çevrimdışı yapılır ve arama teriminiz hiçbir yere gitmez. Veritabanı CVE List V5\'ten gelir (resmî CVE programı, GitHub üzerinden).',
   'Wat er lokaal beschikbaar is': 'Yerel olarak neler kullanılabilir',
-  'Gegevenspakket': 'Veri paketi',
   'Nu bijwerken': 'Şimdi güncelle',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Veriler yerel olarak kullanılabilir — aramalar bu cihazda yapılır, dışarı hiçbir şey çıkmaz.',
@@ -1760,7 +1633,6 @@ const _dutchSourceTr = {
       'Kabul et: veriler buraya aittir ve bildirim kaybolur. Kabul et + uyar: alıcı, slaytta kişisel veri bulunduğunu belirten bir rozet görür. Çıkar: bulunan veriler ekranda ve dışa aktarmada okunamaz hâle getirilir — Markdown dosyanız özgün metni korur.',
   'Alleen melden': 'Yalnızca bildir',
   'PERSOONSGEGEVENS': 'KİŞİSEL VERİLER',
-  'Persoonsgegevens op deze slide': 'Bu slayttaki kişisel veriler',
   'Volg de presentatie': 'Sunumu takip et',
   'Weglaten uit tonen en exporteren': 'Gösterimden ve dışa aktarmadan çıkar',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -1882,8 +1754,6 @@ const _dutchSourceTr = {
   'Bewerk deze slide': 'Bu slaydı düzenle',
   'Bewijs verwijderen': 'Kanıtı kaldır',
   '(nog leeg)': '(henüz boş)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Kanıt bağlamak için önce bir bulgu kimliği girin.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Kanıt olarak ekran görüntüleri veya videolar ekleyin. Her kanıt, bulgunun hemen ardından kendi slaydı olarak yer alır ve dışa aktarmaya dâhil edilir.',
   'Uitvoering testen conform standaard':
@@ -1892,8 +1762,6 @@ const _dutchSourceTr = {
       'Arka planla kontrast çok düşük — okunamayabilir.',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'EUPL 1.2 lisansını kabul ediyorum ve OciDeck\'in hangi verileri sakladığını okudum.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Seçiminiz uygulamanın varsayılan dili olur.',
   'Lees de volledige licentie': 'Lisansın tamamını okuyun',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck, EUPL 1.2 lisansı altında özgür yazılımdır. Başlamadan önce lisansı kabul etmenizi rica ediyoruz. Aşağıda ayrıca OciDeck\'in bu cihazda hangi verileri sakladığını ve ne zaman bir şeyin cihazınızdan ayrıldığını okuyabilirsiniz.',
@@ -1918,9 +1786,6 @@ const _dutchSourceTr = {
   'Ongeldige server-URL': 'Geçersiz sunucu URL\'si',
   'Het antwoord van de server was te groot': 'Sunucunun yanıtı çok büyüktü',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud kaynağı (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Sunumları Nextcloud\'unuzdaki bir klasörde açın ve saklayın. Parola, diğer ayarların yanında değil, anahtar zincirinde şifrelenmiş olarak saklanır.',
   'Server-URL': 'Sunucu URL\'si',
   'Gebruikersnaam': 'Kullanıcı adı',
   'App-wachtwoord': 'Uygulama parolası',
@@ -1934,21 +1799,12 @@ const _dutchSourceTr = {
   'Verbinding gelukt': 'Bağlantı başarılı',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Değişiklikler Kaydet\'e tıkladığınızda kaydedilir.',
-  'Afbeelding kiezen op Nextcloud': 'Nextcloud\'da görsel seç',
-  'Openen vanaf Nextcloud': 'Nextcloud\'dan aç',
   'Vernieuwen': 'Yenile',
   'Deze map is leeg': 'Bu klasör boş',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nextcloud sunucusu ayarlanmadı. Ayarlar → Nextcloud bölümünden bir sunucu tanımlayın.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Klasör yüklenemedi. Bağlantınızı ve ayarlarınızı kontrol edin.',
   'Kon dit bestand niet openen.': 'Bu dosya açılamadı.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Bu bir Marp/OciDeck sunumu değil.',
   'Downloaden mislukt:': 'İndirme başarısız:',
-  'Opgeslagen op Nextcloud:': 'Nextcloud\'a kaydedildi:',
   'Opslaan mislukt:': 'Kaydetme başarısız:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Önce Ayarlar → Nextcloud bölümünden bir Nextcloud sunucusu tanımlayın.',
   'Opslaan naar Nextcloud': 'Nextcloud\'a kaydet',
   'Doelpad (zonder extensie)': 'Hedef yol (uzantısız)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -1959,9 +1815,6 @@ const _dutchSourceTr = {
   'Tijden-overzicht tonen na afloop': 'Bitişte süre özetini göster',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Slayt başına süre her zaman ölçülür; bu yalnızca özetin bu sunumdan sonra görünüp görünmeyeceğini belirler.',
-  'Oefenoverzicht tonen na afloop': 'Bitişte prova özetini göster',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Sunumdan sonra slayt başına harcanan sürenin özetini gösterin. Süre her zaman ölçülür; bu yalnızca ekranın görünüp görünmeyeceğini belirler.',
   'Onveilige presentatie geblokkeerd': 'Güvenli olmayan sunum engellendi',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Bu sunum açılmadı. Dosya, kod çalıştırabilecek içerik barındırıyor; oysa bir sunum yalnızca veri içermelidir — çalıştırılabilir hiçbir şey değil.',
@@ -2042,7 +1895,6 @@ const _dutchSourceTr = {
   'Online': 'Çevrimiçi',
   'Lokaal bestand': 'Yerel dosya',
   'Geen video': 'Video yok',
-  'Vraag (meerkeuze)': 'Soru (çoktan seçmeli)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Başlık metninin arka plan görseliyle kontrastı yetersiz',
   'Herstel': 'Düzelt',
@@ -2057,8 +1909,6 @@ const _dutchSourceTr = {
   'Huidig punt weghalen': 'Geçerli nokta işaretini kaldır',
   'Stap voor stap': 'Adım adım',
   'Geen animatie': 'Animasyon yok',
-  'Animatiesnelheid': 'Animasyon hızı',
-  'Langzaam': 'Yavaş',
   'Snel': 'Hızlı',
   'Gebeurtenissen': 'Olaylar',
   'Gebeurtenis toevoegen': 'Olay ekle',
@@ -2071,8 +1921,6 @@ const _dutchSourceTr = {
   'Vraag': 'Soru',
   'Wat wil je vragen?': 'Ne sormak istiyorsunuz?',
   'Antwoorden': 'Yanıtlar',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Doğru yanıtları işaretleyin. En fazla sekiz yanıt; sunum sırasında rastgele 1 doğru ve gerisi yanlış olarak gösterilir.',
   'Antwoord': 'Yanıt',
   'Antwoord toevoegen': 'Yanıt ekle',
   'Goed antwoord': 'Doğru yanıt',
@@ -2105,8 +1953,6 @@ const _dutchSourceTr = {
   'Stelling': 'Önerme',
   'Formuleer een stelling die juist of onjuist is':
       'Doğru ya da yanlış olan bir önerme yazın',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Tüm doğru yanıtları işaretleyin. Sunum sırasında en az bir doğru ve bir yanlış içeren rastgele bir küme gösterilir.',
   'Juist': 'Doğru',
   'Onjuist': 'Yanlış',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -2127,7 +1973,6 @@ const _dutchSourceTr = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Kokpit göstergelerinin durum renkleri. Adlandırılmış çeşitler oluşturun; seçilen şema tüm kokpit slaytları için geçerlidir.',
   'Standaard': 'Varsayılan',
-  'Standaardkleuren gebruiken': 'Varsayılan renkleri kullan',
   'Kleurschema verwijderen': 'Renk şemasını sil',
   'Schemanaam': 'Şema adı',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -2208,7 +2053,6 @@ const _dutchSourceTr = {
   'Notities weggooien': 'Notları at',
   'Pagina': 'Sayfa',
   'Presentatiestijl': 'Sunum stili',
-  'Presentatiestijl: ': 'Sunum stili: ',
   'Sprekersnotities': 'Konuşmacı notları',
   'Tekst...': 'Metin...',
   'Teksteditor': 'Metin düzenleyici',
@@ -2222,8 +2066,6 @@ const _dutchSourceTr = {
   'Doeltijd': 'Hedef süre',
   'Doeltijd (aftellen)': 'Hedef süre (geri sayım)',
   'Geen aftelling': 'Geri sayım yok',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Sunucu görünümündeki geri sayım için varsayılan hedef süre. Sunum sırasında K tuşuyla ince ayar yapabilirsiniz.',
   'uit': 'kapalı',
   'Doeltijd / aftellen (K)': 'Hedef süre / geri sayım (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -2296,14 +2138,8 @@ const _dutchSourceTr = {
   'Cirkel': 'Pasta',
   'Spider': 'Radar',
   'CSV importeren': 'CSV içe aktar',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Veri (CSV: ilk satır = seri adları, ilk sütun = etiketler)',
   'Gekoppeld aan': 'Şuna bağlı',
   'Ontkoppelen': 'Bağlantıyı kaldır',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Veriler slaytta mı saklansın, yoksa sunumun yanında ayrı bir CSV dosyası olarak mı tutulsun?',
-  'In de slide': 'Slaytta',
-  'Als CSV-bestand': 'CSV dosyası olarak',
   'Geen grafiekgegevens': 'Grafik verisi yok',
   'Label': 'Etiket',
   'Rij': 'Satır',
@@ -2334,7 +2170,6 @@ const _dutchSourceTr = {
   'Eigen kleur (hex)': 'Özel renk (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Örneğin CRT yeşili bir ekran için #33FF33.',
-  'Onderdeel van stijlprofiel ': 'Stil profilinin parçası ',
   'Broncode lettertype': 'Kaynak kodu yazı tipi',
   'Kop (optioneel)': 'Başlık (isteğe bağlı)',
   'Subkop (optioneel)': 'Alt başlık (isteğe bağlı)',
@@ -2374,16 +2209,7 @@ const _dutchSourceTr = {
   'Zet het filter uit om alles weer te zien.':
       'Her şeyi yeniden görmek için filtreyi kapatın.',
   'Welkom bij OciDeck': 'OciDeck\'e hoş geldiniz',
-  'Privacy en gebruik': 'Gizlilik ve kullanım',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck yerel bir masaüstü uygulamasıdır. Sunumlarınız ve verileriniz yalnızca bilgisayarınızda saklanır.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Uygulama hiçbir kişisel veri, istatistik veya kullanım verisi toplamaz. Gizliliğiniz önceliğimizdir.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'OciDeck\'e girdiğiniz tüm veriler yerel sisteminizde kalır ve harici sunuculara gönderilmez.',
   'Licentie (EUPL 1.2)': 'Lisans (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      '"Kabul et" düğmesine tıklayarak bu koşulları kabul eder ve OciDeck\'i kullanmaya onay verirsiniz.',
   'Volledige licentie online': 'Tam lisans metni çevrimiçi',
   'Akkoord gaan': 'Kabul et',
   'Privacy': 'Gizlilik',
@@ -2474,8 +2300,6 @@ const _dutchSourceTr = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Ciddi kalite sorunları nedeniyle dışa aktarma engellendi.',
   'Alle meldingen': 'Tüm bildirimler',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… ve kalite panelinde daha fazla sorun.',
   'Classificatie-handhaving': 'Sınıflandırma zorunluluğu',
   'Vrijgaveplafond': 'Yayın üst sınırı',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -2494,11 +2318,9 @@ const _dutchSourceTr = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Bir TLP düzeyi belirleyin — sınıflandırma politikası dışa aktarmayı engelliyor.',
   'Tabel bewerken': 'Tabloyu düzenle',
-  'Pijltjes · Tab · Esc': 'Ok tuşları · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Tabloyu düzenle (tablo slaytlarında)',
   'Tabel bewerken (E)': 'Tabloyu düzenle (E)',
   'Tab wisselt cel · Esc sluit': 'Tab hücre değiştirir · Esc kapatır',
-  'Pen · markeerstift · ⇧E': 'Kalem · fosforlu kalem · ⇧E',
   'Gestapelde staaf': 'Yığılmış çubuk',
   'Spreiding': 'Dağılım',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn slaytlar arasında gezinir',
@@ -2541,10 +2363,6 @@ const _dutchSourceTr = {
       'Ağ hatası — bağlantınızı kontrol edip yeniden deneyin.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Beklenmedik bir hata oluştu. Ayrıntılar için günlüğe bakın.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud (doğru) yapılandırılmamış — Ayarlar → Nextcloud altındaki sunucu bilgilerini kontrol edin.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Bu sunucuya izin verilmiyor. Özel/LAN sunucusunu önce Ayarlar → Nextcloud altında güvenilir olarak işaretleyin.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Sunucuya ulaşılamıyor — bağlantınızı ve sunucu URL\'sini kontrol edin.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -2571,8 +2389,6 @@ const _dutchSourceTr = {
   'Uit recente bestanden verwijderen': 'Son kullanılan dosyalardan kaldır',
   'OciDeck wordt gestart…': 'OciDeck başlatılıyor…',
   'Herstelbestanden': 'Kurtarma dosyaları',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Çökme kurtarma dosyaları, sunumlarınızın tüm içeriğini düz metin olarak barındırır. 7 gün sonra otomatik olarak temizlenir; burada hemen silebilirsiniz.',
   'Herstelbestanden nu wissen': 'Kurtarma dosyalarını şimdi sil',
   'Er waren geen herstelbestanden.': 'Kurtarma dosyası yoktu.',
   'herstelbestand(en) gewist.': 'kurtarma dosyası silindi.',
@@ -2940,7 +2756,6 @@ const _dutchSourceAddTr = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Yeni bir sekmede bir kopya oluştururuz; orijinal dosyanız değişmeden kalır.',
   'Welk formaat?': 'Hangi biçim?',
-  'dia\'s, gesplitst op kop.': 'slayt, başlığa göre bölünmüş.',
   'document': 'belge',
   'volledig': 'tam',
   'Invoegen': 'Ekle',
@@ -3099,12 +2914,8 @@ const _dutchSourceAddTr = <String, String>{
   'Alle integraties': 'Tüm entegrasyonlar',
   'Alles inschakelen': 'Tümünü etkinleştir',
   'Alles uitschakelen': 'Tümünü devre dışı bırak',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Bir rapor klasörü zaten ayarlı; bu nedenle bağlantı erişilebilir kalır ve mevcut bir OpenKAT sunumu güncellenmeye devam edebilir.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Diğer sistemlerle bağlantılar. Her bağlantı varsayılan olarak kapalıdır ve siz etkinleştirene kadar etkin olmadan kalır.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'OpenKAT rapor klasörlerini tek bir yönetim özeti olarak okuyun.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'PowerPoint (.pptx), Keynote (.key) ve Impress (.odp) sunumlarını düzenlenebilir deck olarak içeri alma. Diğer sistemlerle bağlantılar, örneğin OpenKAT, Entegrasyonlar altında bulunur.',
   'Media (WebRTC)': 'Medya (WebRTC)',
@@ -3268,7 +3079,6 @@ const _dutchSourceAddTr = <String, String>{
   'Van toepassing': 'Uygulanabilir',
   'Voortgang': 'İlerleme',
   'Voortgang managementsysteem': 'Yönetim sistemi ilerlemesi',
-  'Voortgangsoverzicht bijgewerkt': 'İlerleme genel bakışı güncellendi',
   'Welk deel?': 'Hangi bölüm?',
   'beheersmaatregelen geladen': 'kontrol yüklendi',
   'geïmplementeerd': 'uygulandı',
@@ -3344,10 +3154,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bu geçerli bir kurtarma anahtarına benzemiyor.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'Görseller için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel kullanın, diğer sunumları kapatın ya da başka sunumları açmadan yeniden yükleyin.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'Görseller için web belleği dolu (en fazla 256 MB). Daha fazla görsel eklemeden önce çalışmanızı bir .ocideck dosyası olarak kaydedin ve sayfayı yeniden yükleyin.',
   'Afbeeldingsrechten': 'Resim hakları',
   'Afbeeldingsrechten controleren…': 'Resim haklarını kontrol edin…',
   'Afdoening': 'Yerleşim',
@@ -3398,8 +3204,6 @@ const _dutchSourceAddTr = <String, String>{
   'Verifiëren': 'Doğrula',
   'Deelnemers verifiëren': 'Katılımcıları doğrula',
   '(dit apparaat)': '(bu cihaz)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Her cihazın parmak izini güvenilir bir kanaldan karşılaştırın — birbirinize okuyun ya da güvendiğiniz bir yoldan gönderin. Eşleşiyorlarsa gerçek cihazlarla çalışıyorsunuz ve kimse araya girmemiş demektir. Farklıysalar iş birliğini sonlandırın.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Bu geçerli bir davet bağlantısı değil.',
@@ -3462,7 +3266,6 @@ const _dutchSourceAddTr = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Bir sunumda Matrix homeserver aracılığıyla şifreli aktarıcı olarak canlı iş birliği yapın. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür. Bir homeserver ve başka bir yerde oluşturulmuş bir erişim belirteci girin — OciDeck asla parolanızı istemez. Token, diğer ayarların yanında değil, anahtar zincirinde şifrelenmiş olarak saklanır.',
   'wordt door de test ingevuld': 'test tarafından doldurulur',
-  'Versleuteld doorgeefluik (ontwerp)': 'Şifreli aktarıcı (tasarım)',
   'Meer documentatie op de repository': 'Depoda daha fazla belge',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Tüm belgeler — mimari, derleme, kaynak kodu ve tasarım dâhil — depoda bulunur.',
@@ -3700,50 +3503,14 @@ const _dutchSourceAddTr = <String, String>{
       'Hangi ölçüm verileri eksik veya güncel değil?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Bu rapor hangi verilere dayanıyor?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'İzlenebilir ölçüm anlarına sahip geniş ancak gerçeklere dayanan bir yönetime genel bakış.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Toplam puan olmadan sıralanır ve eksik ölçümleri ayrı ayrı gösterir.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Önemlilik sayımlarını, katkıda bulunanları ve anlık ölçümleri gösterir.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Bulgu türlerini etkilenen kuruluşlara, sistemlere ve gözlemlere göre düzenler.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Herhangi bir tartım yapılmadan kritik/yüksek sayıları gösterir.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Pay, payda ve yalnızca güvenilir yüzdeleri gösterir.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'OpenKAT\'tan gelen gerçek önerileri kendi öncelikleri olmadan gruplandırır.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Bir kuruluşun hedeflenen güncel görüntüsü ve ölçüm tarihi.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Bir kuruluşta seçilen iki ölçüm anını karşılaştırır.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Yeni, yeni ve artık gözlenmeyenleri ayırt eder.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Yalnızca güvenilir ilk gözlem tarihlerini kullanır.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Sistemleri ayrı şiddet sayaçlarıyla sıralar.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Ağırlıklı puan olmadan bireysel delta değerlerini gösterir.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Pay ve paydayı açıkça karşılaştırılabilir kapsam ile karşılaştırır.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Kaynağı kanıtlanmış sistemlerin, ana bilgisayar adlarının ve IP adreslerinin envanterleri.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'İzlenen, izlenmeyen ve bilinmeyenleri ayırır.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Yalnızca açıkça kanıtlanmış izleme mutasyonlarını gösterir.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Kuruluşları ve sistemleri tek bir güvenilir CVE bağlantısı etrafında gösterir.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Açık veri tekilleştirme ile CVE\'leri sıralar.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Yeni, yeni ve artık gözlemlenmeyen CVE\'leri ayırt eder.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Eksik, güncelliğini kaybetmiş ve gerçekten kullanılmış ölçümleri gösterir.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Anahtar tarihler, kaynak dosyalar, bağdaştırıcılar ve kaynak karmaları için hesaplar.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Henüz mevcut değil: Kaynak, tüm varlıklar için izleme durumunu kanıtlamıyor.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -3787,12 +3554,6 @@ const _dutchSourceAddTr = <String, String>{
   'Onderwerp': 'Ders',
   'Welk rapport beantwoordt uw vraag?': 'Sorunuzu hangi rapor yanıtlıyor?',
   'Meer rapportvragen': 'Daha fazla rapor sorusu',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Hangi sistemler bir CVE\'ye karşı savunmasızdır?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Bir güvenlik açığı etrafındaki kuruluşlar ve savunmasız sistemler.',
-  'Organisaties met kwetsbare systemen':
-      'Savunmasız sistemlere sahip kuruluşlar',
   'Kwetsbare systemen': 'Savunmasız sistemler',
   'Kritiek/hoog': 'Kritik/yüksek',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -3814,8 +3575,6 @@ const _dutchSourceAddTr = <String, String>{
   'Bruikbaar': 'Kullanılabilir',
   'CVE zoeken': 'CVE araması',
   'Critical/high': 'Kritik/yüksek',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Veri kalitesi, eksik ölçümler ve eskime.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'Seçilen raporlar bu bölüm için yeterli güvenilir veri içermiyor.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -3842,9 +3601,6 @@ const _dutchSourceAddTr = <String, String>{
   'Geen bruikbare meetdatum': 'Kullanılabilir ölçüm tarihi yok',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Oluşturulan slaytlar yenilenir. Kendi slaytlarınız ve kopyalarınız korunur.',
-  'Getroffen organisaties en systemen': 'Etkilenen kuruluşlar ve sistemler',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Bir güvenlik açığı etrafında etkilenen kuruluşlar ve sistemler.',
   'Getroffen systemen': 'Etkilenen sistemler',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'Rapor oluşturulamadı. Seçimleriniz korunur; uyarıları kontrol edip tekrar deneyin.',
@@ -3854,19 +3610,14 @@ const _dutchSourceAddTr = <String, String>{
   'Keuzes wijzigen…': 'Seçimleri değiştir…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'OpenKAT\'in raporları yerleştirdiği klasörü seçin. OciDeck yalnızca bu klasörü okur; hiçbir şey değiştirilmez veya gönderilmez.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Raporun cevaplaması gereken soruyu seçin. OciDeck uygun yapıyı belirler.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Raporlarda bulunan bir CVE\'yi seçin.',
   'Laatste bruikbare meting': 'Kullanılabilir son ölçüm',
   'Live voorvertoning van de rapportopbouw': 'Rapor yapısının canlı önizlemesi',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Birden fazla kuruluş hakkında yönetim ve kontrol bilgileri.',
   'Meer instellingen': 'Daha fazla ayar',
   'Nederlands': 'Flemenkçe',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Seçilen her kuruluşun bu döneme ilişkin bir ölçümü yoktur.',
-  'Nieuwe en verdwenen bevindingen': 'Yeni ve eksik bulgular',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Henüz mevcut değil: Bu raporlar güvenilir CVE numaraları içermemektedir.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -3900,8 +3651,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bir veya daha fazla kuruluş için yararlı bir akım ölçümü eksik.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Karşılaştırma için iki ölçüm momenti gereklidir. Artık bir ölçüm bulunmuştur.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Önceki ölçüm anına kıyasla ilerleme.',
   'Waar staan de OpenKAT-rapportages?': 'OpenKAT raporları nerede?',
   'Wat veranderde er bij één organisatie?': 'Bir kuruluşta ne değişti?',
   'Wat wilt u laten zien?': 'Ne göstermek istiyorsun?',
@@ -3913,7 +3662,6 @@ const _dutchSourceAddTr = <String, String>{
   'bruikbaar': 'kullanılabilir',
   'metingen': 'ölçümler',
   'organisaties': 'kuruluşlar',
-  'organisaties geselecteerd': 'seçilen kuruluşlar',
   'rapportages gebruikt': 'kullanılan raporlar',
   'systemen': 'sistemler',
   'Nog geen specificatielimiet': 'Henüz spesifikasyon sınırı yok',
@@ -4054,7 +3802,6 @@ const _dutchSourceAddTr = <String, String>{
       'ağaç slaytında var ama başka yerde kullanılmıyor — matrise, akışa veya başka bir slayta bağlayın.',
   'Nieuw verbeteringsproject': 'Yeni iyileştirme projesi',
   'Kader': 'Çerçeve',
-  'Projecttitel': 'Proje başlığı',
   'Primaire Y-metriek (Y-01)': 'Birincil Y metriği (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Örneğin: order intake süresi iş günü cinsinden',
@@ -4108,10 +3855,6 @@ const _dutchSourceAddTr = <String, String>{
   'Bron niet toegestaan': 'Kaynağa izin verilmiyor',
   'Deze URL is door de beveiliging geweigerd.':
       'Bu URL güvenlik tarafından reddedildi.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Başka sistemlerden malzeme içeri alma. İki kaynak: PowerPoint (.pptx), Keynote (.key) ve Impress (.odp) sunumları düzenlenebilir bir deck olur, OpenKAT raporları (JSON içeren bir klasör) ise tek bir yönetim özetine dönüşür. OpenKAT klasörünün nerede olduğu Entegrasyonlar altında ayarlanır.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'PowerPoint (.pptx), Keynote (.key) ve Impress (.odp) sunumlarını düzenlenebilir deck olarak içeri alma. OpenKAT rapor klasörlerinin okunması yalnızca masaüstü sürümünde kullanılabilir.',
   'Alinea': 'Paragraf',
   'Audio "{bestand}"': 'Ses "{bestand}"',
   'Deck opbouwen…': 'Sunu oluşturuluyor…',
@@ -4233,8 +3976,6 @@ const _dutchSourceAddTr = <String, String>{
       'Kontrol listesi dizini: her test için kalıcı kimlik, kanonik başlık ve kategori. Kılavuzun kendi içeriği pakete dahil değil.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'v2.0.0 test dizini: her test için kalıcı kimlik, kanonik başlık, MASVS kategorisi ve MASWE zayıflığı. Geri çekilen v1 testleri ve yer tutucular dahil değil; kılavuzun içeriği de değil.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'Zayıflık listesi (117): kimlik, başlık, MASVS kategorisi, platform ve CWE bağlantısı. Dörtte üçü kaynakta henüz yazılmadı; onlar işaretli olarak dahil. Geri çekilen zayıflıklar dahil değil.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'Tam liste (kimlik, ad, açıklama) ve kendi seçtiğimiz çekirdek ile giderme notlarımız.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -4280,34 +4021,17 @@ const _dutchSourceAddTr = <String, String>{
       'Her dosya ayrı ayrı dönüştürülür ve hedef klasöre kendi sunumu olarak kaydedilir. Biri hata verirse sıra yoluna devam eder.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Birden çok sunumu aynı anda içe aktarmak onları dosya olarak bir klasöre yazar; tarayıcı sürümünde bu mümkün değil.',
-  'Nu importeren': 'Şimdi içe aktar',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Genel görünüm yeni bir sekmede hazır.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'OpenKAT raporlarının (JSON) bulunduğu bir klasörü okur ve ondan tek bir yönetim özeti oluşturur: sistemler, önem derecesine göre bulgular, en uzun süredir açık olan maddeler ve ardışık ölçümlerdeki eğilim. Aynı işlem mevcut bir OpenKAT sunumunda onu günceller ve kendi slaytlarınızı yerinde bırakır.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'İçe aktarma yalnızca okur; bu klasörde hiçbir şey değiştirilmez veya gönderilmez. OpenKAT raporu olmadığı anlaşılan dosyalar atlanır ve içe aktarma raporunda belirtilir.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'OpenKAT raporlarınızın (JSON) bulunduğu klasörü gösterin. İçe aktarma bu klasörü okur ve ondan tek bir yönetim özeti oluşturur; klasör burada ayarlıysa her seferinde yeniden seçmeniz gerekmez.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'OpenKAT içe aktarma diskten bir klasör okur ve yalnızca masaüstü sürümünde kullanılabilir.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Henüz bir rapor klasörü belirlenmedi; bu yüzden içe aktarma her seferinde sorar.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Bir rapor klasörü zaten ayarlı; bu nedenle giriş noktası erişilebilir kalır ve mevcut bir OpenKAT sunumu güncellenmeye devam edebilir.',
   'Integraties': 'Entegrasyonlar',
-  'Naar Integraties': 'Entegrasyonlara git',
   'Map kiezen…': 'Klasör seç…',
   'Map wissen': 'Klasörü temizle',
-  'OpenKAT-rapportages importeren…': 'OpenKAT raporlarını içe aktar…',
   'Map met OpenKAT-rapportages kiezen':
       'OpenKAT raporlarının bulunduğu klasörü seç',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT raporları içe aktarıldı.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT sunumu güncellendi; elle eklenen slaytlar korundu.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Bu klasörde OpenKAT raporu bulunamadı.',
-  'OpenKAT-import mislukt.': 'OpenKAT içe aktarımı başarısız oldu.',
   'rapportages': 'rapor',
   'overgeslagen': 'atlandı',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -4366,8 +4090,6 @@ const _dutchSourceAddTr = <String, String>{
   'Label op de primaire knop': 'Birincil düğmedeki etiket',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'İncelediğiniz ve olduğu gibi bıraktığınız bulgular. Bunlar artık bildirilmez, ancak tarama onları bulmaya devam eder ve çözülmüş sayılmaz. Birini geri getirmek için dokunun.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Bir gizlilik bulgusunu bir kenara koyma (tasarım)',
   'Deze is beoordeeld en mag blijven': 'Gözden geçirildi, bu kalabilir',
   'Mogelijk gemaakt door': 'Mümkün kılan',
   'De export is gestopt tijdens het voorbereiden.':
@@ -4379,10 +4101,8 @@ const _dutchSourceAddTr = <String, String>{
   'Technische melding:': 'Teknik ileti:',
   'presentaties': 'sunumlar',
   '/Presentaties': '/Sunumlar',
-  'Rapportagedistributie (ontwerp)': 'Rapor dağıtımı (tasarım)',
   'De export is mislukt.': 'Dışa aktarma başarısız oldu.',
   'Presenteer vanaf hier': 'Buradan sun',
-  'Teams-gastclient (ontwerp)': 'Teams konuk istemcisi (tasarım)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: bu materyal ne kadar geniş paylaşılabilir?',
   'Wat betekenen deze niveaus?': 'Bu düzeyler ne anlama geliyor?',
@@ -4497,8 +4217,6 @@ const _dutchSourceAddTr = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
   'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Çıkarma açık: bulunan veriler karartılır ve bu slayttaki tüm görseller, video ve ses ekrana ya da dışa aktarmaya gitmez. Markdown dosyanız her şeyi saklar.',
   'Mijn tekst': 'Kendi metnim',
   'Wat zij zien': 'Onların gördüğü',
   'Presentatiegegevens': 'Sunum bilgileri',

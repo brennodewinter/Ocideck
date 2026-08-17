@@ -41,17 +41,13 @@ const _stringsHu = {
   'settings': 'Beállítások',
   'settingsGeneral': 'Általános',
   'settingsColors': 'Színek',
-  'settingsLogo': 'Logó',
   'language': 'Nyelv',
   'applicationLanguage': 'Alkalmazás nyelve',
   'languageHelp':
       'A felület azonnal nyelvet vált. A bemutató tartalma változatlan marad.',
-  'presentationFolder': 'Bemutatók mappája',
   'exportFolderSetting': 'Export mappa',
-  'notSet': 'Nincs beállítva',
   'nextToPresentationFile': 'A bemutatófájl mellett',
   'choose': 'Kiválasztás',
-  'removeDefaultFolder': 'Alapértelmezett mappa eltávolítása',
   'removeExportFolder': 'Export mappa eltávolítása',
   'exportFolderHelp':
       'Minden export (PDF/PPTX) ide mentődik. Ha nincs beállítva, az export a bemutatófájl mellé kerül.',
@@ -85,8 +81,6 @@ const _dutchSourceHu = {
   'Handtekening tekenen': 'Aláírás rajzolása',
   'Teken je handtekening in het vak hieronder.':
       'Rajzold az aláírásodat az alábbi mezőbe.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Az adatcsomag egy .zip a modul referenciaadataival. Először az alkalmazásba épített ujjlenyomathoz ellenőrzi; csak az ehhez az alkalmazásverzióhoz illő csomag fogadható el.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Terület',
   'Horizontale staaf': 'Vízszintes oszlop',
@@ -193,7 +187,6 @@ const _dutchSourceHu = {
       'A képeket és a médiát az ugyanabban a mappában lévő prezentációk közösen használják. A pontos nevet mindjárt a rendszerablakban választod ki.',
   'Alle bibliotheken': 'Összes könyvtár',
   'Andere map…': 'Másik mappa…',
-  'Bibliotheek verwijderen': 'Könyvtár eltávolítása',
   'Bibliotheken': 'Könyvtárak',
   'Geen bibliotheek': 'Nincs könyvtár',
   'Geen presentaties (.md) gevonden.': 'Nem található prezentáció (.md).',
@@ -205,10 +198,6 @@ const _dutchSourceHu = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Válaszd ki, melyik könyvtárba kerüljön a prezentáció.',
   'Map toevoegen': 'Mappa hozzáadása',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mappák, amelyekben a prezentációidat tárolod és keresed. Adj mindegyiknek saját nevet, hogy megkülönböztethesd őket. Az összes könyvtárban keres a program megnyitáskor és a képkönyvtárban.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Még nincs könyvtár — adj hozzá egy mappát.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Még nincs könyvtár. Adj hozzá egyet a Beállításokban, vagy válassz fentebb egy mappát a kereséshez.',
   'Presentatie opslaan': 'Prezentáció mentése',
@@ -290,22 +279,11 @@ const _dutchSourceHu = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'A valódiságnyilatkozat a jelentéstevővel, tanúsítással, aláírással és pecséttel.',
   'Uitbreidingen': 'Bővítmények',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',
   'Gegevens opschonen': 'Adatok törlése',
   'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
   'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nincs elérhető forrás — a referenciaadatokat sehonnan sem sikerült letölteni. Próbáld meg újra, vagy importáld a csomagot manuálisan.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'A letöltött adatok nem egyeztek a várt ujjlenyomattal, ezért elővigyázatosságból elutasítottuk őket.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Az adatcsomag sérült vagy érvénytelen volt, ezért elutasítottuk.',
-  'Gegevenspakket kiezen': 'Adatcsomag kiválasztása',
-  'Kon het gekozen bestand niet lezen.':
-      'A kiválasztott fájlt nem sikerült beolvasni.',
   'Nog niet opgehaald': 'Még nincs letöltve',
   'AI-assistentie': 'MI-segítség',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -322,22 +300,15 @@ const _dutchSourceHu = {
       'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Licenc és adatvédelem" részben, és a webes verzióban nem működik.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Megértem, hogy adatok kerülnek elküldésre ehhez a külső szolgáltatáshoz',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'MI-segítség (alapértelmezés szerint kikapcsolva): ha saját üzemeltetésű vagy felhőalapú háttérrendszert választasz, az általad feldolgoztatott szövegek vagy képek erre a címre kerülnek elküldésre. Egy helyi MI-modell ezen az eszközön semmit sem küld.',
   'Zoek een slidetype': 'Diatípus keresése',
   'Alfabetisch sorteren': 'Betűrendes rendezés',
   'Algemeen': 'Általános',
   'Informatieveiligheid': 'Információbiztonság',
   'Alle': 'Összes',
-  'Pentestrapportage (ontwerp)': 'Behatolásteszt-beszámoló (terv)',
-  'AI-assistentie (ontwerp)': 'AI-asszisztencia (terv)',
-  'Agentisch bouwplan (ontwerp)': 'Ágensalapú építési terv (terv)',
-  'Bijsnijden': 'Levágás',
   'Linksom': 'Forgatás balra',
   'Rechtsom': 'Forgatás jobbra',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Húzza a képet, hogy kiválassza, melyik rész marad látható.',
-  'Git-opslag (ontwerp)': 'Git-tárolás (terv)',
   'Zoek in documentatie…': 'Keresés a dokumentációban…',
   'Geen documenten gevonden': 'Nem található dokumentum',
   'Alleen afspelen (vergrendeld)': 'Csak lejátszás (zárva)',
@@ -351,12 +322,8 @@ const _dutchSourceHu = {
   'Techniek': 'Technikai',
   'Licentie en naleving': 'Licenc és megfelelőség',
   'Architectuur': 'Architektúra',
-  'Bouwinstructies': 'Fordítási útmutató',
-  'Kwaliteitscontroles': 'Minőségi ellenőrzések',
-  'Broncodekaart': 'Forráskód-térkép',
   'Licentienaleving': 'Licencmegfelelőség',
   'Softwarestuklijst (SBOM)': 'Szoftver-összetevők jegyzéke (SBOM)',
-  'Samenwerking (ontwerp)': 'Együttműködés (terv)',
   'Beschermen met een wachtwoord (AES-256)': 'Védelem jelszóval (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Őrizze meg jól ezt a jelszót: ha elveszíti, ez a csomag többé nem nyitható meg.',
@@ -435,10 +402,6 @@ const _dutchSourceHu = {
   'Instelling opslaan is mislukt.': 'A beállítás mentése sikertelen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'A csomagok (.ocideck) még nem támogatottak a webes verzióban.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'A webes verzióban csak .md-prezentációk nyithatók meg.',
   'Geen': 'Nincs',
   'Nieuw': 'Új',
   'Verwijderen': 'Törlés',
@@ -527,10 +490,8 @@ const _dutchSourceHu = {
   'Audio bij deze slide': 'Hang ehhez a diához',
   'Audio automatisch afspelen': 'Hang automatikus lejátszása',
   'Audio verwijderen': 'Hang eltávolítása',
-  'Geen audio gekozen': 'Nincs kiválasztott hang',
   'Geen audiobestand gekozen': 'Nincs kiválasztott hangfájl',
   'Video automatisch afspelen': 'Videó automatikus lejátszása',
-  'Geen video gekozen': 'Nincs kiválasztott videó',
   'Kiezen': 'Kiválasztás',
   'Uit bibliotheek…': 'Könyvtárból…',
   'Van computer…': 'Számítógépről…',
@@ -559,7 +520,6 @@ const _dutchSourceHu = {
   'Pakket importeren': 'Csomag importálása',
   'Pakket exporteren': 'Csomag exportálása',
   'Map met presentaties kiezen': 'Prezentációk mappájának kiválasztása',
-  'Standaard map voor presentaties': 'Alapértelmezett prezentációmappa',
   'Map voor exports': 'Exportálási mappa',
   'Logo kiezen': 'Logó kiválasztása',
   'Kies een afbeelding': 'Válasszon egy képet',
@@ -572,8 +532,6 @@ const _dutchSourceHu = {
   'Map kiezen': 'Mappa kiválasztása',
   'Kies een map met presentaties om te beginnen.':
       'Válasszon egy prezentációkat tartalmazó mappát a kezdéshez.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nem található prezentáció (.md) ebben a mappában.',
   'Geen presentaties gevonden voor': 'Nem található prezentáció ehhez:',
   'meer treffer(s)': 'további találat',
   'Slide zoeken': 'Dia keresése',
@@ -595,7 +553,6 @@ const _dutchSourceHu = {
       'Írjon be keresőkifejezéseket a diák megtalálásához az összes prezentációban.',
   'toegevoegd': 'hozzáadva',
   'Eerste': 'Első',
-  'treffers — verfijn je zoekopdracht': 'találat – finomítsa a keresést',
   'treffer(s)': 'találat',
   'slide': 'dia',
   'Zoeken en vervangen': 'Keresés és csere',
@@ -654,7 +611,6 @@ const _dutchSourceHu = {
   'Tekst op zijpanelen': 'Szöveg az oldalsó paneleken',
   'Voorbeeldtekst': 'Mintaszöveg',
   'Knop': 'Gomb',
-  'Profielnaam': 'Profilnév',
   'Naam van het stijlprofiel': 'A stílusprofil neve',
   'Stijlprofiel': 'Stílusprofil',
   'Nieuw profiel': 'Új profil',
@@ -716,16 +672,9 @@ const _dutchSourceHu = {
   'TYPE': 'TÍPUS',
   'STIJL': 'STÍLUS',
   'Terug naar standaardstijl': 'Vissza az alapértelmezett stílushoz',
-  'Automatisch doorgaan na': 'Automatikus továbblépés ennyi után',
-  'Logo tonen op deze slide': 'Logó megjelenítése ezen a dián',
-  'Tabel bewerkbaar tijdens presenteren':
-      'A táblázat szerkeszthető bemutatás közben',
-  'Footer tonen op deze slide': 'Lábléc megjelenítése ezen a dián',
   'Sprekersnotities...': 'Előadói jegyzetek...',
   'Sprekersnotities': 'Előadói jegyzetek',
   'Notities voor tijdens het presenteren': 'Jegyzetek a bemutatáshoz',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown mód — a teljes prezentáció szerkesztése Marp Markdownként',
   'Toepassen': 'Alkalmazás',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'A Markdownt nem sikerült feldolgozni. Ellenőrizze a szintaxist.',
@@ -750,8 +699,6 @@ const _dutchSourceHu = {
   'Geen resultaten voor': 'Nincs találat erre:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Módosítsa a keresőkifejezést vagy adjon hozzá leírást.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Használja a „Tallózás” gombot képek bármely helyről történő kiválasztásához.',
   'Selecteer een\nafbeelding': 'Válasszon egy\nképet',
   'Gekopieerd': 'Másolva',
   'Afbeelding verwijderen?': 'Törli a képet?',
@@ -768,8 +715,6 @@ const _dutchSourceHu = {
   'spatie': 'szóköz',
   'klik': 'kattintás',
   'cijfers': 'számok',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kattints vagy nyomd meg a ? / H / Esc gombot a bezáráshoz',
   'Klik of druk op H / Esc om te sluiten':
       'Kattints vagy nyomd meg a H / Esc gombot a bezáráshoz',
   'Naar slidenummer': 'Ugrás diaszámra',
@@ -779,20 +724,10 @@ const _dutchSourceHu = {
   'Presenter view (notities, klok)': 'Előadói nézet (jegyzetek, óra)',
   'Scherm wisselen (meerdere schermen)': 'Képernyőváltás (több kijelző)',
   'Zwart · wit scherm': 'Fekete · fehér képernyő',
-  'Verstreken tijd resetten': 'Eltelt idő nullázása',
   'Automatische modus aan/uit': 'Automatikus mód be/ki',
   'Herhalen (loop) aan/uit': 'Ismétlés (loop) be/ki',
-  'Na audio automatisch doorgaan': 'Hang után automatikus továbblépés',
-  'Dit overzicht': 'Ez az áttekintés',
   'Deze legenda': 'Ez a jelmagyarázat',
   'Terug / afsluiten': 'Vissza / kilépés',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Kézi (A)',
-  'Herhalen (L)': 'Ismétlés (L)',
-  'Na audio (M)': 'Hang után (M)',
-  'Sneltoetsen (?)': 'Gyorsbillentyűk (?)',
-  'Slide-overzicht (G)': 'Diaáttekintés (G)',
-  'Presenter view (P)': 'Előadói nézet (P)',
   'Tijd resetten (R)': 'Idő nullázása (R)',
   'HUIDIGE SLIDE': 'AKTUÁLIS DIA',
   'VOLGENDE': 'KÖVETKEZŐ',
@@ -808,15 +743,9 @@ const _dutchSourceHu = {
   'Notities weggooien': 'Jegyzetek elvetése',
   'Notities voor de ontvanger tijdens een cursus':
       'Jegyzetek a résztvevőnek egy tanfolyam során',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Válts Markdown módra a jegyzetek hozzáadásához.',
   'Mijn notities aan/uit': 'Saját jegyzeteim be/ki',
   'Wissel scherm (S)': 'Képernyőváltás (S)',
   'Kon niet van scherm wisselen.': 'Nem sikerült képernyőt váltani.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -862,8 +791,6 @@ const _dutchSourceHu = {
   'Selectie opheffen': 'Kijelölés törlése',
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Elfogadom az EUPL 1.2 licencet, és elolvastam, milyen adatokat tárol az OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'A választásod lesz az alkalmazás alapértelmezett nyelve.',
   'Lees de volledige licentie': 'Teljes licenc elolvasása',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'Az OciDeck szabad szoftver az EUPL 1.2 licenc alatt. Mielőtt elkezded, kérünk, hogy fogadd el a licencet. Alább azt is elolvashatod, milyen adatokat tárol az OciDeck ezen az eszközön, és mikor hagy el bármi az eszközödet.',
@@ -889,9 +816,6 @@ const _dutchSourceHu = {
   'Ongeldige server-URL': 'Érvénytelen szerver-URL',
   'Het antwoord van de server was te groot': 'A szerver válasza túl nagy volt',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud-forrás (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Nyiss meg és ments prezentációkat egy mappában a Nextcloudon. A jelszó titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
   'Server-URL': 'Szerver-URL',
   'Gebruikersnaam': 'Felhasználónév',
   'App-wachtwoord': 'App-jelszó',
@@ -905,21 +829,12 @@ const _dutchSourceHu = {
   'Verbinding gelukt': 'A kapcsolat sikeres',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'A módosítások a Mentés gombra kattintva mentődnek.',
-  'Afbeelding kiezen op Nextcloud': 'Kép választása a Nextcloudon',
-  'Openen vanaf Nextcloud': 'Megnyitás a Nextcloudról',
   'Vernieuwen': 'Frissítés',
   'Deze map is leeg': 'Ez a mappa üres',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'Nincs beállítva Nextcloud-szerver. Állíts be egyet a Beállítások → Nextcloud alatt.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Nem sikerült betölteni a mappát. Ellenőrizd a kapcsolatot és a beállításokat.',
   'Kon dit bestand niet openen.': 'Nem sikerült megnyitni ezt a fájlt.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Ez nem Marp/OciDeck prezentáció.',
   'Downloaden mislukt:': 'A letöltés nem sikerült:',
-  'Opgeslagen op Nextcloud:': 'Mentve a Nextcloudra:',
   'Opslaan mislukt:': 'A mentés nem sikerült:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'Előbb állíts be egy Nextcloud-szervert a Beállítások → Nextcloud alatt.',
   'Opslaan naar Nextcloud': 'Mentés a Nextcloudra',
   'Doelpad (zonder extensie)': 'Célútvonal (kiterjesztés nélkül)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -930,10 +845,6 @@ const _dutchSourceHu = {
   'Tijden-overzicht tonen na afloop': 'Idő-áttekintés megjelenítése a végén',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'A diánkénti idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e az áttekintés ezután a prezentáció után.',
-  'Oefenoverzicht tonen na afloop':
-      'Gyakorlási összegzés megjelenítése a végén',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'Egy prezentáció után jelenítsd meg a diánként eltöltött időt tartalmazó áttekintést. Az idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e a képernyő.',
   'Onveilige presentatie geblokkeerd': 'Nem biztonságos prezentáció letiltva',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'Ez a prezentáció nem lett megnyitva. A fájl olyan tartalmat tartalmaz, amely kódot futtathat, márpedig egy prezentáció csak adatot tartalmazhat — semmi futtathatót.',
@@ -1015,7 +926,6 @@ const _dutchSourceHu = {
   'Online': 'Online',
   'Lokaal bestand': 'Helyi fájl',
   'Geen video': 'Nincs videó',
-  'Vraag (meerkeuze)': 'Kérdés (feleletválasztós)',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'A címszöveg kontrasztja túl kicsi a háttérképpel',
   'Herstel': 'Javítás',
@@ -1030,8 +940,6 @@ const _dutchSourceHu = {
   'Huidig punt weghalen': 'Aktuális pont eltávolítása',
   'Stap voor stap': 'Lépésről lépésre',
   'Geen animatie': 'Nincs animáció',
-  'Animatiesnelheid': 'Animációsebesség',
-  'Langzaam': 'Lassú',
   'Snel': 'Gyors',
   'Gebeurtenissen': 'Események',
   'Gebeurtenis toevoegen': 'Esemény hozzáadása',
@@ -1044,8 +952,6 @@ const _dutchSourceHu = {
   'Vraag': 'Kérdés',
   'Wat wil je vragen?': 'Mit szeretnél kérdezni?',
   'Antwoorden': 'Válaszok',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Jelöld meg a helyes válaszokat. Legfelj nyolc válasz; előadáskor véletlenszerűen egy helyes és a többi hibás jelenik meg.',
   'Antwoord': 'Válasz',
   'Antwoord toevoegen': 'Válasz hozzáadása',
   'Goed antwoord': 'Helyes válasz',
@@ -1078,8 +984,6 @@ const _dutchSourceHu = {
   'Stelling': 'Állítás',
   'Formuleer een stelling die juist of onjuist is':
       'Fogalmazz meg egy állítást, amely igaz vagy hamis',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Jelöld meg az összes helyes választ. Előadáskor egy véletlenszerű halmaz jelenik meg, legalább egy helyessel és egy hibással.',
   'Juist': 'Igaz',
   'Onjuist': 'Hamis',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -1100,7 +1004,6 @@ const _dutchSourceHu = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'A cockpit-mérők állapotszínei. Hozz létre elnevezett változatokat; a kiválasztott séma minden cockpit-diára érvényes.',
   'Standaard': 'Alapértelmezett',
-  'Standaardkleuren gebruiken': 'Alapértelmezett színek használata',
   'Kleurschema verwijderen': 'Színséma törlése',
   'Schemanaam': 'Séma neve',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -1178,7 +1081,6 @@ const _dutchSourceHu = {
   'Logo en footer': 'Logó és lábléc',
   'Pagina': 'Oldal',
   'Presentatiestijl': 'Prezentációs stílus',
-  'Presentatiestijl: ': 'Prezentációs stílus: ',
   'Tekst...': 'Szöveg...',
   'Teksteditor': 'Szövegszerkesztő',
   'Volgende pagina': 'Következő oldal',
@@ -1191,8 +1093,6 @@ const _dutchSourceHu = {
   'Doeltijd': 'Célidő',
   'Doeltijd (aftellen)': 'Célidő (visszaszámlálás)',
   'Geen aftelling': 'Nincs visszaszámlálás',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Alapértelmezett céldő a prezentáló visszaszámlálásához. Prezentálás közben a K billentyűvel finomhangolható.',
   'uit': 'ki',
   'Doeltijd / aftellen (K)': 'Célidő / visszaszámlálás (K)',
   'Doeltijd / aftellen instellen (MMSS)':
@@ -1265,14 +1165,8 @@ const _dutchSourceHu = {
   'Cirkel': 'Kör',
   'Spider': 'Pók',
   'CSV importeren': 'CSV importálása',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Adatok (CSV: első sor = adatsorok nevei, első oszlop = címkék)',
   'Gekoppeld aan': 'Kapcsolva ehhez',
   'Ontkoppelen': 'Leválasztás',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Adatokat a diában tárolja, vagy külön CSV-fájlként őrizze meg a prezentáció mellett?',
-  'In de slide': 'A diában',
-  'Als CSV-bestand': 'CSV-fájlként',
   'Geen grafiekgegevens': 'Nincsenek diagramadatok',
   'Label': 'Címke',
   'Rij': 'Sor',
@@ -1302,7 +1196,6 @@ const _dutchSourceHu = {
   'Eigen kleur (hex)': 'Egyéni szín (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Például #33FF33 egy CRT-zöld képernyőhöz.',
-  'Onderdeel van stijlprofiel ': 'A stílusprofil része ',
   'Broncode lettertype': 'Forráskód betűtípusa',
   'Kop (optioneel)': 'Fejléc (opcionális)',
   'Subkop (optioneel)': 'Alcím (opcionális)',
@@ -1341,16 +1234,7 @@ const _dutchSourceHu = {
   'Zet het filter uit om alles weer te zien.':
       'Kapcsolja ki a szűrőt, hogy újra mindent lásson.',
   'Welkom bij OciDeck': 'Üdvözli az OciDeck',
-  'Privacy en gebruik': 'Adatvédelem és használat',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'Az OciDeck egy helyi asztali alkalmazás. A prezentációit és adatait kizárólag a számítógépén tárolja.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'Az alkalmazás nem gyűjt személyes adatokat, statisztikákat vagy használati adatokat. A magánélete a mi prioritásunk.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'Minden adat, amelyet az OciDeckbe beír, a helyi rendszerén marad, és nem kerül külső szerverekre.',
   'Licentie (EUPL 1.2)': 'Licenc (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'Az „Elfogadom” gombra kattintva elfogadja ezeket a feltételeket, és hozzájárul az OciDeck használatához.',
   'Volledige licentie online': 'Teljes licenc online',
   'Akkoord gaan': 'Elfogadom',
   'Privacy': 'Adatvédelem',
@@ -1439,8 +1323,6 @@ const _dutchSourceHu = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Az exportálás súlyos minőségi problémák miatt letiltva.',
   'Alle meldingen': 'Minden üzenet',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… és további problémák a minőségpanelen.',
   'Classificatie-handhaving': 'Osztályozás érvényesítése',
   'Vrijgaveplafond': 'Kiadási plafon',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -1459,11 +1341,9 @@ const _dutchSourceHu = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Állítson be egy TLP-szintet — az exportálást az osztályozási házirend letiltja.',
   'Tabel bewerken': 'Táblázat szerkesztése',
-  'Pijltjes · Tab · Esc': 'Nyilak · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Táblázat szerkesztése (táblázatos dián)',
   'Tabel bewerken (E)': 'Táblázat szerkesztése (E)',
   'Tab wisselt cel · Esc sluit': 'A Tab cellát vált · az Esc bezár',
-  'Pen · markeerstift · ⇧E': 'Toll · szövegkiemelő · ⇧E',
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lapoz a diák között',
@@ -1506,10 +1386,6 @@ const _dutchSourceHu = {
       'Hálózati hiba — ellenőrizd a kapcsolatot, és próbáld újra.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Váratlan hiba történt. Részletek a naplóban.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'A Nextcloud nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → Nextcloud alatt.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → Nextcloud alatt.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'A szerver nem érhető el — ellenőrizd a kapcsolatot és a szerver URL-jét.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -1537,8 +1413,6 @@ const _dutchSourceHu = {
   'Uit recente bestanden verwijderen': 'Eltávolítás a legutóbbi fájlok közül',
   'OciDeck wordt gestart…': 'Az OciDeck indítása…',
   'Herstelbestanden': 'Helyreállítási fájlok',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'A helyreállítási fájlok a prezentációid teljes tartalmát tartalmazzák egyszerű szövegként. 7 nap után automatikusan törlődnek; itt azonnal törölheted őket.',
   'Herstelbestanden nu wissen': 'Helyreállítási fájlok törlése most',
   'Er waren geen herstelbestanden.': 'Nem voltak helyreállítási fájlok.',
   'herstelbestand(en) gewist.': 'helyreállítási fájl törölve.',
@@ -1968,7 +1842,6 @@ const _dutchSourceAddHu = <String, String>{
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'Másolatot készítünk egy új lapon; az eredeti fájlod változatlan marad.',
   'Welk formaat?': 'Melyik formátum?',
-  'dia\'s, gesplitst op kop.': 'dia, címsor szerint felosztva.',
   'document': 'dokumentum',
   'volledig': 'teljes',
   'Invoegen': 'Beszúrás',
@@ -2130,12 +2003,8 @@ const _dutchSourceAddHu = <String, String>{
   'Alle integraties': 'Összes integráció',
   'Alles inschakelen': 'Összes bekapcsolása',
   'Alles uitschakelen': 'Összes kikapcsolása',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Már be van állítva jelentésmappa, ezért a kapcsolat elérhető marad, és a meglévő OpenKAT-bemutató továbbra is frissíthető.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Kapcsolatok más rendszerekkel. Minden kapcsolat alapértelmezetten ki van kapcsolva, és inaktív marad, amíg be nem kapcsolja.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Olvassa be az OpenKAT-jelentésmappákat egyetlen vezetői áttekintésként.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'A PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók behozatala szerkeszthető deckként. A más rendszerekkel való kapcsolatok, például az OpenKAT, az Integrációk alatt találhatók.',
   'Media (WebRTC)': 'Média (WebRTC)',
@@ -2301,7 +2170,6 @@ const _dutchSourceAddHu = <String, String>{
   'Van toepassing': 'Alkalmazandó',
   'Voortgang': 'Előrehaladás',
   'Voortgang managementsysteem': 'Az irányítási rendszer előrehaladása',
-  'Voortgangsoverzicht bijgewerkt': 'Az előrehaladási áttekintés frissítve',
   'Welk deel?': 'Melyik rész?',
   'beheersmaatregelen geladen': 'intézkedés betöltve',
   'geïmplementeerd': 'megvalósítva',
@@ -2379,10 +2247,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez nem tűnik érvényes helyreállítási kulcsnak.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ez a helyreállítási kulcs az OciDeck egy újabb verziójából származik.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'A képek webes memóriája megtelt (legfeljebb 256 MB). Az adatvesztés elkerüléséhez először mentse a munkáját .ocideck-fájlként. Ezután használjon kevesebb vagy kisebb képet, zárja be a többi bemutatót, vagy töltsön újra más bemutatók megnyitása nélkül.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'A képek webes memóriája megtelt (legfeljebb 256 MB). Mentse a munkáját .ocideck-fájlként, és további képek hozzáadása előtt töltse újra az oldalt.',
   'Afbeeldingsrechten': 'Képjogok',
   'Afbeeldingsrechten controleren…': 'Ellenőrizze a képjogokat…',
   'Afdoening': 'Település',
@@ -2433,8 +2297,6 @@ const _dutchSourceAddHu = <String, String>{
   'Verifiëren': 'Ellenőrzés',
   'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
   '(dit apparaat)': '(ez az eszköz)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Hasonlítsd össze minden eszköz ujjlenyomatát egy megbízható csatornán — olvassátok fel egymásnak, vagy küldd el olyan úton, amelyben megbízol. Ha egyeznek, a valódi eszközökkel dolgozol, és senki sem furakodott közétek. Ha eltérnek, szakítsd meg az együttműködést.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Ez nem érvényes meghívó hivatkozás.',
@@ -2496,7 +2358,6 @@ const _dutchSourceAddHu = <String, String>{
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Működj együtt élőben egy bemutatón egy Matrix-homeserveren keresztül titkosított továbbítóként. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát. Adj meg egy homeservert és egy máshol létrehozott hozzáférési tokent — az OciDeck soha nem kéri a jelszavadat. A tokent titkosítva a kulcstartó őrzi, nem a többi beállítás mellett.',
   'wordt door de test ingevuld': 'a teszt tölti ki',
-  'Versleuteld doorgeefluik (ontwerp)': 'Titkosított továbbító (terv)',
   'Meer documentatie op de repository': 'További dokumentáció a tárolóban',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'A teljes dokumentáció — beleértve az architektúrát, a fordítást, a forráskódot és a tervezést — a tárolóban található.',
@@ -2736,50 +2597,14 @@ const _dutchSourceAddHu = <String, String>{
       'Melyik mérési adat hiányzik vagy elavult?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'Milyen adatokon alapul ez a jelentés?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'Széles, de tényszerű menedzsment áttekintés nyomon követhető mérési pillanatokkal.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Rangsorok összpontszám nélkül, és a hiányzó méréseket külön mutatják.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Megjeleníti a súlyossági értékeket, a közreműködőket és az átvitt méréseket pillanatok szerint.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Az érintett szervezetek, rendszerek és megfigyelések szerint rendszerezi a keresési típusokat.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Kritikus/magas számokat jelenít meg tervezett mérlegelés nélkül.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Mutatja a számlálót, a nevezőt és csak a megbízható százalékokat.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Az OpenKAT szó szerinti ajánlásait csoportosítja saját prioritás nélkül.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'Egy szervezet célzott aktuális képe és mérési dátuma.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Összehasonlít két kiválasztott mérési pillanatot egy szervezeten belül.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Megkülönbözteti az újat, az újat és a már nem megfigyelt.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Csak megbízható első megfigyelési dátumot használ.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'A rendszereket külön súlyossági számlálókkal rangsorolja.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Egyedi delta értékeket jelenít meg súlyozott pontszám nélkül.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Összehasonlítja a számlálót és a nevezőt kimutathatóan összehasonlítható lefedettséggel.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Leltár a forrás által bevált rendszereket, gazdagépneveket és IP-címeket.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Elválasztja a megfigyelt, nem felügyelt és ismeretlen.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Csak a kifejezetten bizonyított megfigyelési mutációkat mutatja.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Megmutatja a szervezeteket és a rendszereket egyetlen megbízható CVE-link körül.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'A CVE-ket explicit deduplikációval rangsorolja.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Megkülönbözteti az új, új és már nem megfigyelt CVE-ket.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Hiányzó, elavult és ténylegesen használt méréseket mutat.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Igazolja a kulcsdátumokat, a forrásfájlokat, az adaptereket és a forráskivonatokat.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Még nem érhető el: a forrás nem igazolja az összes eszköz megfigyelési állapotát.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -2823,12 +2648,6 @@ const _dutchSourceAddHu = <String, String>{
   'Onderwerp': 'Téma',
   'Welk rapport beantwoordt uw vraag?': 'Melyik jelentés válaszol a kérdésére?',
   'Meer rapportvragen': 'További jelentési kérdések',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Mely rendszerek sebezhetők egy CVE által?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Szervezetek és sérülékeny rendszerek egy sebezhetőség körül.',
-  'Organisaties met kwetsbare systemen':
-      'Sérülékeny rendszerekkel rendelkező szervezetek',
   'Kwetsbare systemen': 'Sérülékeny rendszerek',
   'Kritiek/hoog': 'Kritikus/magas',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -2850,8 +2669,6 @@ const _dutchSourceAddHu = <String, String>{
   'Bruikbaar': 'Használható',
   'CVE zoeken': 'CVE keresés',
   'Critical/high': 'Kritikus/magas',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Adatminőség, hiányzó mérések és elavulás.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'A kiválasztott jelentések nem tartalmaznak elegendő megbízható adatot ehhez a részhez.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2879,9 +2696,6 @@ const _dutchSourceAddHu = <String, String>{
   'Geen bruikbare meetdatum': 'Nincs használható mérési dátum',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'A generált diák frissül. A saját diák és másolat megmarad.',
-  'Getroffen organisaties en systemen': 'Érintett szervezetek és rendszerek',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Az érintett szervezetek és rendszerek egy sebezhetőség körül.',
   'Getroffen systemen': 'Érintett rendszerek',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'A jelentést nem sikerült létrehozni. Választásai megmaradnak; ellenőrizze a figyelmeztetéseket, és próbálja újra.',
@@ -2891,20 +2705,15 @@ const _dutchSourceAddHu = <String, String>{
   'Keuzes wijzigen…': 'Választások módosítása…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Válassza ki azt a mappát, amelybe az OpenKAT elhelyezte a jelentéseket. Az OciDeck csak ezt a mappát olvassa; semmit nem változtatnak vagy küldenek el.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Válassza ki azt a kérdést, amelyre a jelentésnek meg kell válaszolnia. Az OciDeck meghatározza a megfelelő struktúrát.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Válassza ki a jelentésekben található CVE-t.',
   'Laatste bruikbare meting': 'Utolsó használható mérés',
   'Live voorvertoning van de rapportopbouw':
       'A jelentés szerkezetének élő előnézete',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Kezelési és ellenőrzési információk több szervezetről.',
   'Meer instellingen': 'További beállítások',
   'Nederlands': 'holland',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Nem minden kiválasztott szervezet rendelkezik méréssel erre az időszakra.',
-  'Nieuwe en verdwenen bevindingen': 'Új és hiányzó leletek',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Még nem érhető el: ezek a jelentések nem tartalmaznak megbízható CVE-számokat.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2939,8 +2748,6 @@ const _dutchSourceAddHu = <String, String>{
       'Egy vagy több szervezetnél hiányzik egy hasznos árammérés.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Az összehasonlításhoz két mérési nyomaték szükséges. Most egy mérést találtak.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Haladás az előző mérési pillanathoz képest.',
   'Waar staan de OpenKAT-rapportages?': 'Hol vannak az OpenKAT jelentések?',
   'Wat veranderde er bij één organisatie?': 'Mi változott egy szervezetnél?',
   'Wat wilt u laten zien?': 'Mit akarsz megmutatni?',
@@ -2952,7 +2759,6 @@ const _dutchSourceAddHu = <String, String>{
   'bruikbaar': 'használható',
   'metingen': 'mérések',
   'organisaties': 'szervezetek',
-  'organisaties geselecteerd': 'kiválasztott szervezetek',
   'rapportages gebruikt': 'használt jelentések',
   'systemen': 'rendszerek',
   'Nog geen specificatielimiet': 'Még nincs specifikációs határ',
@@ -3095,7 +2901,6 @@ const _dutchSourceAddHu = <String, String>{
       'fa-dian szerepel, de máshol nem használják — kapcsolja össze mátrixszal, folyamattal vagy más diával.',
   'Nieuw verbeteringsproject': 'Új fejlesztési projekt',
   'Kader': 'Keretrendszer',
-  'Projecttitel': 'Projekt címe',
   'Primaire Y-metriek (Y-01)': 'Elsődleges Y-metrika (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Például: order intake átfutási idő munkanapokban',
@@ -3149,10 +2954,6 @@ const _dutchSourceAddHu = <String, String>{
   'Bron niet toegestaan': 'A forrás nem engedélyezett',
   'Deze URL is door de beveiliging geweigerd.':
       'Ezt az URL-t a biztonság elutasította.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Anyag behozatala más rendszerekből. Két forrás: a PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók szerkeszthető deckké válnak, az OpenKAT-jelentések (egy mappa JSON-nal) pedig egyetlen vezetői áttekintéssé. Hogy hol van az OpenKAT-mappa, az Integrációk alatt állítható be.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'A PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók behozatala szerkeszthető deckként. Az OpenKAT-jelentésmappák beolvasása csak az asztali változatban lehetséges.',
   'Alinea': 'Bekezdés',
   'Audio "{bestand}"': 'Hang "{bestand}"',
   'Deck opbouwen…': 'Prezentáció összeállítása…',
@@ -3273,8 +3074,6 @@ const _dutchSourceAddHu = <String, String>{
       'Az ellenőrzőlista indexe: tesztenként az állandó azonosító, a kanonikus cím és a kategória. Maga az útmutató tartalma nincs mellékelve.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'A v2.0.0 tesztindexe: tesztenként az állandó azonosító, a kanonikus cím, a MASVS-kategória és a MASWE-gyengeség. A visszavont v1-tesztek és a helykitöltők nincsenek benne; az útmutató tartalma sem.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'A gyengeséglista (117): azonosító, cím, MASVS-kategória, platform és a CWE-kapcsolat. Háromnegyedük a forrásnál még nincs kifejtve; azok benne vannak, megjelölve. A visszavont gyengeségek nem.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'A teljes lista (azonosító, név, leírás), valamint egy saját válogatott mag a javítási megjegyzéseinkkel.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -3321,34 +3120,17 @@ const _dutchSourceAddHu = <String, String>{
       'Minden fájl külön alakul át, és önálló prezentációként kerül a célmappába. Ha egy hibára fut, a sor egyszerűen tovább megy.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Több prezentáció egyszerre történő importálása fájlként ír egy mappába; a böngészős változat erre nem képes.',
-  'Nu importeren': 'Importálás most',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'Az áttekintés készen áll egy új lapon.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Beolvas egy OpenKAT-jelentéseket (JSON) tartalmazó mappát, és egyetlen vezetői áttekintést épít belőle: rendszerek, megállapítások súlyosság szerint, a legrégebben nyitott tételek és az egymást követő mérések trendje. Ugyanez a művelet egy meglévő OpenKAT-bemutatón frissíti azt, és a saját diáit a helyükön hagyja.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'Az import csak olvas; ebben a mappában semmi sem módosul és nem kerül elküldésre. A nem OpenKAT-jelentésnek bizonyuló fájlokat kihagyja, és megnevezi az importnaplóban.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Jelölje ki a mappát, amelyben az OpenKAT-jelentései (JSON) találhatók. Az import beolvassa azt a mappát, és egyetlen vezetői áttekintést épít belőle; ha a mappa itt be van állítva, nem kell minden alkalommal újra kiválasztania.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'Az OpenKAT-import egy mappát olvas be a lemezről, és csak az asztali változatban érhető el.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'Még nincs kijelölve jelentésmappa, ezért az import minden alkalommal rákérdez.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'Már be van állítva jelentésmappa, ezért a belépési pont elérhető marad, és a meglévő OpenKAT-bemutató továbbra is frissíthető.',
   'Integraties': 'Integrációk',
-  'Naar Integraties': 'Ugrás az Integrációkhoz',
   'Map kiezen…': 'Mappa választása…',
   'Map wissen': 'Mappa törlése',
-  'OpenKAT-rapportages importeren…': 'OpenKAT-jelentések importálása…',
   'Map met OpenKAT-rapportages kiezen':
       'OpenKAT-jelentések mappájának kiválasztása',
-  'OpenKAT-rapportages geïmporteerd.': 'Az OpenKAT-jelentések importálva.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'Az OpenKAT-deck frissítve; a kézi diák megmaradtak.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'Ebben a mappában nem találhatók OpenKAT-jelentések.',
-  'OpenKAT-import mislukt.': 'Az OpenKAT-importálás nem sikerült.',
   'rapportages': 'jelentés',
   'overgeslagen': 'kihagyva',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -3408,8 +3190,6 @@ const _dutchSourceAddHu = <String, String>{
   'Label op de primaire knop': 'Az elsődleges gomb felirata',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Megállapítások, amelyeket megnéztél és meghagytál. Ezeket már nem jelzi, de a vizsgálat továbbra is megtalálja őket, és nem számítanak megoldottnak. Koppints az egyik visszaállításához.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Adatvédelmi észrevétel félretétele (terv)',
   'Deze is beoordeeld en mag blijven': 'Ellenőrizve, ez maradhat',
   'Mogelijk gemaakt door': 'Lehetővé tette',
   'De export is gestopt tijdens het voorbereiden.':
@@ -3421,10 +3201,8 @@ const _dutchSourceAddHu = <String, String>{
   'Technische melding:': 'Technikai üzenet:',
   'presentaties': 'prezentaciok',
   '/Presentaties': '/Prezentációk',
-  'Rapportagedistributie (ontwerp)': 'Beszámolók terjesztése (terv)',
   'De export is mislukt.': 'Az exportálás nem sikerült.',
   'Presenteer vanaf hier': 'Bemutatás innen',
-  'Teams-gastclient (ontwerp)': 'Teams vendégkliens (terv)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: milyen széles körben osztható meg ez az anyag?',
   'Wat betekenen deze niveaus?': 'Mit jelentenek ezek a szintek?',
@@ -3542,8 +3320,6 @@ const _dutchSourceAddHu = <String, String>{
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentációk, amelyek egyszerű Markdown-fájlok maradnak: olvashatók, kereshetők és bármilyen szerkesztővel megnyithatók.',
   'sjablonen om mee te beginnen, of leeg': 'sablon a kezdéshez, vagy üres',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'A kihagyás be van kapcsolva: a megtalált adatokat kitakarjuk, és ennek a diának egyetlen képe, videója és hangja sem kerül a képernyőre vagy az exportba. A markdown-fájlod mindent megőriz.',
   'Mijn tekst': 'Saját szöveg',
   'Wat zij zien': 'Amit ők látnak',
   'Presentatiegegevens': 'Prezentációs adatok',
@@ -3765,7 +3541,6 @@ const _dutchSourceAddHu = <String, String>{
   'Opslaan naar…': 'Mentés ide…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Először állítson be egy kapcsolatot a Beállítások → Tárhely alatt.',
-  'Beginnen met:': 'Kezdés ezzel:',
   'Verlopen datums markeren': 'Lejárt dátumok jelölése',
   'Datums gemarkeerd': 'Dátumok jelölve',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -3791,28 +3566,15 @@ const _dutchSourceAddHu = <String, String>{
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'A támadási felület objektumtípusonként: hány van, hány igényel munkát, mi az új és mi az, ami senkié. Ez utóbbi rendszerint a beszélgetés tárgya.',
   'Acties en besluiten': 'Intézkedések és döntések',
-  'Actie toevoegen': 'Intézkedés hozzáadása',
-  'Actie verwijderen': 'Intézkedés eltávolítása',
   'Actie': 'Intézkedés',
   'Deadline': 'Határidő',
-  'Op de lijst sinds': 'A listán ekkortól',
   'Stand': 'Állapot',
-  'Wat vraagt u': 'Mit kér',
   'geen datum': 'nincs dátum',
-  'Ter informatie': 'Tájékoztatásul',
   'Besluit gevraagd': 'Döntés szükséges',
   'Escalatie': 'Eszkaláció',
   'Open': 'Nyitott',
   'Loopt': 'Folyamatban',
   'Afgerond': 'Kész',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'A dián csak a döntés vagy az eszkaláció kap címkét; a "késik" a határidőből következik, nem Ön állítja be.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Dátumok éééé-hh-nn formában. Más írásmódot elutasít, nem találgat: 05-08-2026 két különböző nap.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'Egy intézkedési dia legfeljebb nyolc sort bír el; azon túl a terem átfut rajta ahelyett, hogy döntene.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'Mi legyen, ki csinálja és mikorra. Soronként adja meg, hogy tájékoztatásul szolgál-e, vagy döntést kér — a terem erre keres rá.',
   'Scorecard': 'Mutatókártya',
   'Cijfer toevoegen': 'Mutató hozzáadása',
   'Cijfer verwijderen': 'Mutató eltávolítása',
@@ -3899,8 +3661,6 @@ const _dutchSourceAddHu = <String, String>{
       'A token érvényes, de ehhez nincs joga — adj neki több jogosultságot a tárolón.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Bejelentkezve, de nincs hozzáférés — nem a jelszó a gond. Kérj jogosultságot ehhez a mappához.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Lexikonlicencek: mit kell még megkérdezni',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'Ez teljes DAV URL-nek tűnik. Nextcloud esetén az OciDeck maga vezeti le ezt az útvonalat — ide csak a kiszolgáló való.',
   'Overnemen': 'Alkalmaz',
@@ -3943,8 +3703,6 @@ const _dutchSourceAddHu = <String, String>{
   'kenteken': 'rendszám',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Ennek a bemutatónak a nyelvéhez nincs kulcsszólista a személyes adatok különleges kategóriáihoz. Az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) működnek; az olyan szavak, mint „diagnózis” vagy „gyanúsított”, nem ismerhetők fel.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'A személyes adatok különleges kategóriáihoz tartozó kulcsszólista nagyon szegényes ennek a bemutatónak a nyelvéhez. Ne számítson arra, hogy az olyan szavakat, mint „diagnózis” vagy „gyanúsított”, megtalálja.',
   'Landpakketten voor identificatienummers':
       'Országcsomagok azonosító számokhoz',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3974,8 +3732,6 @@ const _dutchSourceAddHu = <String, String>{
       'A kiszolgáló neve nem létezik, vagy nem kereshető ki. Ellenőrizd, nincs-e elgépelés a kiszolgáló URL-jében.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'Ennek a kiszolgálónak privát vagy LAN-címe van. Jelöld megbízható belsőként a Beállítások → Tárhely alatt.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'Ennek a kiszolgálónak a tanúsítványa nem megbízható. Az önaláírt tanúsítvány nem működik; használj elismert kibocsátótól származót.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'A kiszolgáló másik címre irányít át. Add meg közvetlenül azt a címet — az átirányításokat nem követjük, mert megkerülhetik a biztonsági ellenőrzést.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -4011,8 +3767,6 @@ const _dutchSourceAddHu = <String, String>{
   'Opslaan naar S3': 'Mentés S3-ba',
   'Opgeslagen in S3:': 'Mentve S3-ba:',
   'Hier staat niets': 'Itt nincs semmi',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'A tartalom nem tölthető be. Ellenőrizd a kapcsolatot és a beállításokat.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'A végpont nem érhető el — ellenőrizd a kapcsolatot és a végpontot.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -4021,8 +3775,6 @@ const _dutchSourceAddHu = <String, String>{
       'A végpont hibát adott vissza. Próbáld később.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'Ez a végpont nem tud feltételesen írni, így a munkád nincs védve másokétól. Ments új néven, ha valaki más is dolgozik ezen a bemutatón.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'Nincs beállítva S3 tároló. Állíts be egyet a Beállítások → Tárolás alatt.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'Előbb állíts be egy S3 tárolót a Beállítások → Tárolás alatt.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -4069,10 +3821,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ezen a képen legalább {count} felismerhető arc látható.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'Ezt a képet nem lehetett arcokra ellenőrizni. A formátum nem támogatott (például HEIC). Ez nem azt jelenti, hogy nincs rajta senki — azt jelenti, hogy nem néztük meg.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'Ezen a képen felismerhető arc látható.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'Ezen a képen {count} felismerhető arc látható.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'Az a kép, amelyen valaki felismerhető, személyes adat — név nélkül is.',
   'herkenbaar gezicht op een afbeelding': 'felismerhető arc a képen',
@@ -4088,8 +3836,6 @@ const _dutchSourceAddHu = <String, String>{
   'Organisatie': 'Szervezet',
   'Welke verbinding?': 'Melyik kapcsolat?',
   'Bestandsverbindingen': 'Fájlkapcsolatok',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'A helyek, ahol a bemutatóidat tárolod és keresed — mappák ezen a számítógépen, WebDAV-kiszolgálók és git-tárolók vegyesen. Húzd őket a kívánt sorrendbe: fajtánként a legfelső számít alapértelmezettnek.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'Egy git-tároló; minden mentett változat megmarad.',
   'Een map op de schijf van deze computer.':
@@ -4114,15 +3860,7 @@ const _dutchSourceAddHu = <String, String>{
   'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
   'Opslaan naar WebDAV': 'Mentés a WebDAVra',
   'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'Előbb állíts be egy WebDAV-szervert a Beállítások → WebDAV alatt.',
   'Afbeelding kiezen op WebDAV': 'Kép választása a WebDAVon',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'Nincs beállítva WebDAV-szerver. Állíts be egyet a Beállítások → WebDAV alatt.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'A WebDAV nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → WebDAV alatt.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → WebDAV alatt.',
   'Servertype': 'Kiszolgáló típusa',
   'Nextcloud of ownCloud': 'Nextcloud vagy ownCloud',
   'Andere WebDAV-server': 'Másik WebDAV-kiszolgáló',
@@ -4144,24 +3882,12 @@ const _dutchSourceAddHu = <String, String>{
   'Haal volle pagina uit de reeks': 'Teli oldal eltávolítása a sorozatból',
   'Opslag': 'Tárolás',
   'Opslagwijzen': 'Tárolási módok',
-  'Deze computer': 'Ez a számítógép',
   'Ingesteld': 'Beállítva',
   'Niet ingesteld': 'Nincs beállítva',
-  'Nog geen bibliotheek ingesteld': 'Még nincs beállítva könyvtár',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'Az útvonalak, amelyeken bemutatókat nyithat meg és menthet. Kattintson egy módra a beállításához.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Bemutatók a fenti mappákban, ennek a számítógépnek a lemezén.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Bemutatók megnyitása és mentése a Nextcloud egyik mappájában.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Bemutatók megnyitása git-tárolóból; minden mentett verzió megmarad.',
-  'Nog te verifiëren': 'Még ellenőrizendő',
   'MASWE-zwakheid kiezen': 'MASWE-gyengeség kiválasztása',
   'Zoek op naam, id of categorie':
       'Keresés név, azonosító vagy kategória szerint',
   'Geen zwakheid gevonden': 'Nincs találat gyengeségre',
-  'uitleg nog niet geschreven': 'a magyarázat még nem készült el',
   'Getalnotatie herkennen': 'Számformátum felismerése',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'Ebben a fájlban olyan számok vannak, amelyek vesszője kétféleképpen olvasható:',
@@ -4280,12 +4006,10 @@ const _dutchSourceAddHu = <String, String>{
   'Veelgestelde vragen': 'Gyakori kérdések',
   'Probleemoplossing': 'Hibaelhárítás',
   'Begrippenlijst': 'Fogalomtár',
-  'API-documentatie': 'API-dokumentáció',
   'Prestaties': 'Teljesítmény',
   'Beveiligingsontwerp': 'Biztonsági terv',
   'Hosting en uitrol': 'Tárhely és üzembe helyezés',
   'Bijdragen': 'Közreműködés',
-  'Ontwikkelomgeving': 'Fejlesztői környezet',
   'Migratiegids': 'Migrációs útmutató',
   'Versies…': 'Verziók…',
   'Versies:': 'Verziók:',
@@ -4326,8 +4050,6 @@ const _dutchSourceAddHu = <String, String>{
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Az ág elmozdult; töltsd újra a csomagot, és ments újra.',
   'Bijgewerkt met OciDeck': 'Frissítve az OciDeckkel',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Először állítson be egy Git-tárolót a Beállítások → Git-tároló alatt.',
   'Git-repository': 'Git-tároló',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Nyisson meg bemutatókat egy Git-tárolóból. Minden mentett verzió megmarad. A tokent titkosítva a kulcstartó őrzi, nem a többi beállítás mellett.',
@@ -4343,7 +4065,6 @@ const _dutchSourceAddHu = <String, String>{
       'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A referenciaadatok magában az alkalmazásban vannak, így a modul azonnal és teljesen offline működik.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; rejtve maradnak, amíg be nem kapcsolja őket.',
-  'Procesverbetering (ontwerp)': 'Folyamatfejlesztés (terv)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ez a projekt a Pilot Informatieautonomie mellékterméke.',
   'Stijlprofiel exporteren': 'Stílusprofil exportálása',
@@ -4483,7 +4204,6 @@ const _dutchSourceAddHu = <String, String>{
   'genetisch gegeven': 'genetikai adat',
   'parketnummer': 'ügyészségi ügyszám',
   'nationaal identificatienummer': 'nemzeti azonosító szám',
-  'OciWacht (ontwerp)': 'OciWacht (terv)',
   'Mogelijk geheim': 'Lehetséges titok',
   'sleutel of token': 'kulcs vagy token',
   'private sleutel': 'privát kulcs',
@@ -4516,7 +4236,6 @@ const _dutchSourceAddHu = <String, String>{
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Tedd a teljes CVE-listát erre az eszközre, hogy a keresés offline történjen, és a keresőkifejezésed sehová se menjen. Az adatbázis a CVE List V5-ből származik (a hivatalos CVE-program, GitHubon keresztül).',
   'Wat er lokaal beschikbaar is': 'Ami helyben elérhető',
-  'Gegevenspakket': 'Adatcsomag',
   'Nu bijwerken': 'Frissítés most',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Az adatok helyben elérhetők — a keresés ezen az eszközön történik; semmi sem hagyja el.',
@@ -4535,7 +4254,6 @@ const _dutchSourceAddHu = <String, String>{
       'Elfogadás: az adatok ide tartoznak, és az értesítés eltűnik. Elfogadás + figyelmeztetés: a címzett jelzést lát arról, hogy a dián személyes adatok vannak. Kihagyás: a megtalált adatok olvashatatlanná válnak a képernyőn és az exportban — a Markdown-fájlod megőrzi az eredeti szöveget.',
   'Alleen melden': 'Csak jelzés',
   'PERSOONSGEGEVENS': 'SZEMÉLYES ADATOK',
-  'Persoonsgegevens op deze slide': 'Személyes adatok ezen a dián',
   'Volg de presentatie': 'Az előadás szerint',
   'Weglaten uit tonen en exporteren': 'Kihagyás a megjelenítésből és exportból',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -4658,8 +4376,6 @@ const _dutchSourceAddHu = <String, String>{
   'Bewerk deze slide': 'Dia szerkesztése',
   'Bewijs verwijderen': 'Bizonyíték eltávolítása',
   '(nog leeg)': '(még üres)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'A bizonyíték csatolásához előbb adj meg egy megállapítás-azonosítót.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adj hozzá képernyőképeket vagy videókat bizonyítékként. Minden bizonyíték külön diává válik közvetlenül a megállapítás után, és bekerül az exportba.',
   'Uitvoering testen conform standaard': 'Tesztelés a szabvány szerint',

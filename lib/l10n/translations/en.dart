@@ -41,17 +41,13 @@ const _stringsEn = {
   'settings': 'Settings',
   'settingsGeneral': 'General',
   'settingsColors': 'Colors',
-  'settingsLogo': 'Logo',
   'language': 'Language',
   'applicationLanguage': 'Application language',
   'languageHelp':
       'The interface changes language immediately. Presentation content is unchanged.',
-  'presentationFolder': 'Presentation folder',
   'exportFolderSetting': 'Export folder',
-  'notSet': 'Not set',
   'nextToPresentationFile': 'Next to the presentation file',
   'choose': 'Choose',
-  'removeDefaultFolder': 'Remove default folder',
   'removeExportFolder': 'Remove export folder',
   'exportFolderHelp':
       'All exports (PDF/PPTX) are saved here. If unset, exports are saved next to the presentation file.',
@@ -85,8 +81,6 @@ const _dutchSourceEn = {
   'Handtekening tekenen': 'Draw signature',
   'Teken je handtekening in het vak hieronder.':
       'Draw your signature in the box below.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'A data pack is a .zip with the reference data for this module. It is first checked against the fingerprint built into the app; only a pack that matches this app version is accepted.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Horizontal bar',
@@ -193,7 +187,6 @@ const _dutchSourceEn = {
       'Images and media are shared by presentations in the same folder. You choose the exact name in the system dialog in a moment.',
   'Alle bibliotheken': 'All libraries',
   'Andere map…': 'Other folder…',
-  'Bibliotheek verwijderen': 'Remove library',
   'Bibliotheken': 'Libraries',
   'Geen bibliotheek': 'No library',
   'Geen presentaties (.md) gevonden.': 'No presentations (.md) found.',
@@ -205,9 +198,6 @@ const _dutchSourceEn = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Choose which library the presentation goes into.',
   'Map toevoegen': 'Add folder',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Folders where you store and search your presentations. Give each its own name to tell them apart. All libraries are searched when opening and in the image library.',
-  'Nog geen bibliotheek — voeg een map toe.': 'No library yet — add a folder.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'No library yet. Add one in Settings, or choose a folder above to search.',
   'Presentatie opslaan': 'Save presentation',
@@ -289,21 +279,11 @@ const _dutchSourceEn = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'The statement of truth with reporter, certification, signature and sealing.',
   'Uitbreidingen': 'Extensions',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Optional modules. Off by default; they add nothing to the base app until you enable them.',
   'Gegevens opschonen': 'Clean up data',
   'Gegevens lokaal beschikbaar': 'Data available locally',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'First grant consent for outbound traffic under Licence and Privacy.',
   'Op het web nog niet beschikbaar': 'Not yet available on the web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'No source reachable — the reference data could not be fetched anywhere. Try again or import the pack manually.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'The fetched data did not match the expected fingerprint and was refused as a precaution.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'The data pack was damaged or invalid and was therefore refused.',
-  'Gegevenspakket kiezen': 'Choose data pack',
-  'Kon het gekozen bestand niet lezen.': 'Could not read the chosen file.',
   'Nog niet opgehaald': 'Not fetched yet',
   'AI-assistentie': 'AI assistance',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -320,23 +300,16 @@ const _dutchSourceEn = {
       'A cloud service first requires your privacy consent under "Licence and Privacy" and does not work in the web version.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'I understand that data is sent to this external service',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI assistance (off by default): if you choose a self-hosted or cloud backend, the texts or images you have processed are sent to that address. A local AI model on this device sends nothing.',
   'Zoek een slidetype': 'Search for a slide type',
   'Alfabetisch sorteren': 'Sort alphabetically',
   'Algemeen': 'General',
   'Informatieveiligheid': 'Information safety',
   'Alle': 'All',
-  'Pentestrapportage (ontwerp)': 'Pentest report (design)',
-  'AI-assistentie (ontwerp)': 'AI assistance (design)',
-  'Agentisch bouwplan (ontwerp)': 'Agentic build plan (design)',
-  'Bijsnijden': 'Crop',
   'Afbeelding aanpassen': 'Adjust image',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Drag the image to choose which part stays visible.',
   'Linksom': 'Rotate left',
   'Rechtsom': 'Rotate right',
-  'Git-opslag (ontwerp)': 'Git storage (design)',
   'Zoek in documentatie…': 'Search in documentation…',
   'Geen documenten gevonden': 'No documents found',
   'Alleen afspelen (vergrendeld)': 'Play-only (locked)',
@@ -350,12 +323,8 @@ const _dutchSourceEn = {
   'Techniek': 'Technical',
   'Licentie en naleving': 'License and compliance',
   'Architectuur': 'Architecture',
-  'Bouwinstructies': 'Build instructions',
-  'Kwaliteitscontroles': 'Quality checks',
-  'Broncodekaart': 'Source map',
   'Licentienaleving': 'License compliance',
   'Softwarestuklijst (SBOM)': 'Software Bill of Materials (SBOM)',
-  'Samenwerking (ontwerp)': 'Collaboration (design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Protect with a password (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -433,10 +402,6 @@ const _dutchSourceEn = {
   'Instelling opslaan is mislukt.': 'Could not save the setting.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Note: the web version can only fetch from servers that allow it (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Packages (.ocideck) are not yet supported in the web version.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Only .md presentations can be opened in the web version.',
   'Geen': 'None',
   'Nieuw': 'New',
   'Verwijderen': 'Delete',
@@ -522,10 +487,8 @@ const _dutchSourceEn = {
   'Audio bij deze slide': 'Audio for this slide',
   'Audio automatisch afspelen': 'Play audio automatically',
   'Audio verwijderen': 'Remove audio',
-  'Geen audio gekozen': 'No audio selected',
   'Geen audiobestand gekozen': 'No audio file selected',
   'Video automatisch afspelen': 'Play video automatically',
-  'Geen video gekozen': 'No video selected',
   'Kiezen': 'Choose',
   'Uit bibliotheek…': 'From library…',
   'Van computer…': 'From computer…',
@@ -554,7 +517,6 @@ const _dutchSourceEn = {
   'Pakket importeren': 'Import package',
   'Pakket exporteren': 'Export package',
   'Map met presentaties kiezen': 'Choose presentation folder',
-  'Standaard map voor presentaties': 'Default presentation folder',
   'Map voor exports': 'Export folder',
   'Logo kiezen': 'Choose logo',
   'Kies een afbeelding': 'Choose an image',
@@ -567,8 +529,6 @@ const _dutchSourceEn = {
   'Map kiezen': 'Choose folder',
   'Kies een map met presentaties om te beginnen.':
       'Choose a folder with presentations to begin.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'No presentations (.md) found in this folder.',
   'Geen presentaties gevonden voor': 'No presentations found for',
   'meer treffer(s)': 'more match(es)',
   'Slide zoeken': 'Find slide',
@@ -590,7 +550,6 @@ const _dutchSourceEn = {
       'Type search terms to find slides across your presentations.',
   'toegevoegd': 'added',
   'Eerste': 'First',
-  'treffers — verfijn je zoekopdracht': 'matches, refine your search',
   'treffer(s)': 'match(es)',
   'slide': 'slide',
   'Zoeken en vervangen': 'Find and replace',
@@ -649,7 +608,6 @@ const _dutchSourceEn = {
   'Tekst op zijpanelen': 'Text on side panels',
   'Voorbeeldtekst': 'Sample text',
   'Knop': 'Button',
-  'Profielnaam': 'Profile name',
   'Naam van het stijlprofiel': 'Name of the style profile',
   'Stijlprofiel': 'Style profile',
   'Nieuw profiel': 'New profile',
@@ -711,13 +669,7 @@ const _dutchSourceEn = {
   'TYPE': 'TYPE',
   'STIJL': 'STYLE',
   'Terug naar standaardstijl': 'Back to default style',
-  'Automatisch doorgaan na': 'Advance automatically after',
-  'Logo tonen op deze slide': 'Show logo on this slide',
-  'Tabel bewerkbaar tijdens presenteren': 'Table editable while presenting',
-  'Footer tonen op deze slide': 'Show footer on this slide',
   'Sprekersnotities...': 'Speaker notes...',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown mode — edit the full presentation as Marp Markdown',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown could not be processed. Check the syntax.',
   'Controleren': 'Check syntax',
@@ -741,8 +693,6 @@ const _dutchSourceEn = {
   'Geen resultaten voor': 'No results for',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Adjust your search term or add a description.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Use “Browse” to choose images from any location.',
   'Selecteer een\nafbeelding': 'Select an\nimage',
   'Gekopieerd': 'Copied',
   'Afbeelding verwijderen?': 'Delete image?',
@@ -759,8 +709,6 @@ const _dutchSourceEn = {
   'spatie': 'space',
   'klik': 'click',
   'cijfers': 'numbers',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Click or press ? / H / Esc to close',
   'Klik of druk op H / Esc om te sluiten': 'Click or press H / Esc to close',
   'Naar slidenummer': 'Go to slide number',
   'Eerste · laatste slide': 'First · last slide',
@@ -769,20 +717,10 @@ const _dutchSourceEn = {
   'Presenter view (notities, klok)': 'Presenter view (notes, clock)',
   'Scherm wisselen (meerdere schermen)': 'Switch screen (multiple displays)',
   'Zwart · wit scherm': 'Black · white screen',
-  'Verstreken tijd resetten': 'Reset elapsed time',
   'Automatische modus aan/uit': 'Automatic mode on/off',
   'Herhalen (loop) aan/uit': 'Repeat (loop) on/off',
-  'Na audio automatisch doorgaan': 'Advance automatically after audio',
-  'Dit overzicht': 'This overview',
   'Deze legenda': 'This legend',
   'Terug / afsluiten': 'Back / exit',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manual (A)',
-  'Herhalen (L)': 'Repeat (L)',
-  'Na audio (M)': 'After audio (M)',
-  'Sneltoetsen (?)': 'Keyboard shortcuts (?)',
-  'Slide-overzicht (G)': 'Slide overview (G)',
-  'Presenter view (P)': 'Presenter view (P)',
   'Tijd resetten (R)': 'Reset timer (R)',
   'HUIDIGE SLIDE': 'CURRENT SLIDE',
   'VOLGENDE': 'NEXT',
@@ -796,15 +734,9 @@ const _dutchSourceEn = {
   'Gebruikersnotities voor deze slide...': 'User notes for this slide...',
   'Notities voor de ontvanger tijdens een cursus':
       'Notes for the recipient during a course',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Switch to Markdown mode to add notes.',
   'Mijn notities aan/uit': 'Toggle my notes on/off',
   'Wissel scherm (S)': 'Switch screen (S)',
   'Kon niet van scherm wisselen.': 'Could not switch screens.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audience · G overview · B/W black/white · R time · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audience · S screen · G overview · B/W black/white · R time · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P audience · H legend · G overview · B/W black/white · R time · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -1103,7 +1035,6 @@ const _dutchSourceAddEn = {
   'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
       'We make a copy in a new tab; your original file stays unchanged.',
   'Welk formaat?': 'Which format?',
-  'dia\'s, gesplitst op kop.': 'slides, split by heading.',
   'document': 'document',
   'volledig': 'full',
   'Invoegen': 'Insert',
@@ -1262,12 +1193,8 @@ const _dutchSourceAddEn = {
   'Alle integraties': 'All integrations',
   'Alles inschakelen': 'Enable all',
   'Alles uitschakelen': 'Disable all',
-  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'A report folder is already set, so the connection stays available and an existing OpenKAT deck can still be updated.',
   'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
       'Connections with other systems. Each connection is off by default and stays inactive until you enable it.',
-  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
-      'Read OpenKAT report folders in as a single management overview.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Bring in presentations from PowerPoint (.pptx), Keynote (.key) and Impress (.odp) as an editable deck. Connections with other systems, such as OpenKAT, are under Integrations.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -1431,7 +1358,6 @@ const _dutchSourceAddEn = {
   'Van toepassing': 'Applicable',
   'Voortgang': 'Progress',
   'Voortgang managementsysteem': 'Management system progress',
-  'Voortgangsoverzicht bijgewerkt': 'Progress overview updated',
   'Welk deel?': 'Which part?',
   'beheersmaatregelen geladen': 'controls loaded',
   'geïmplementeerd': 'implemented',
@@ -1509,10 +1435,6 @@ const _dutchSourceAddEn = {
       'This doesn\'t look like a valid recovery key.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'This recovery key comes from a newer version of OciDeck.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
-      'The web image memory is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, close other decks, or reload without opening other decks.',
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
-      'The web image memory is full (maximum 256 MB). Save your work as an .ocideck file and reload the page before adding more images.',
   'Afbeeldingsrechten': 'Image rights',
   'Afbeeldingsrechten controleren…': 'Check image rights…',
   'Afdoening': 'Settlement',
@@ -1563,8 +1485,6 @@ const _dutchSourceAddEn = {
   'Verifiëren': 'Verify',
   'Deelnemers verifiëren': 'Verify participants',
   '(dit apparaat)': '(this device)',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
-      'Compare each device\'s fingerprint over a trusted channel — read it out to each other, or send it along a route you trust. If they match, you are working with the real devices and no one has slipped in between. If they differ, break off the collaboration.',
   'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'That is not a valid invitation link.',
@@ -1625,7 +1545,6 @@ const _dutchSourceAddEn = {
   'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Collaborate live on a presentation through a Matrix homeserver as an encrypted relay. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data. Enter a homeserver and an access token created elsewhere — OciDeck never asks for your password. The token is stored encrypted in the keychain, not alongside the other settings.',
   'wordt door de test ingevuld': 'filled in by the test',
-  'Versleuteld doorgeefluik (ontwerp)': 'Encrypted relay (design)',
   'Meer documentatie op de repository': 'More documentation on the repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'The full documentation — including architecture, build, source code and design — is on the repository.',
@@ -1865,50 +1784,14 @@ const _dutchSourceAddEn = {
       'Which measurement data is missing or outdated?',
   'Op welke gegevens is dit rapport gebaseerd?':
       'What data is this report based on?',
-  'Een breed maar feitelijk managementoverzicht met herleidbare meetmomenten.':
-      'A broad but factual management overview with traceable measurement moments.',
-  'Rangschikt zonder totaalscore en toont ontbrekende metingen afzonderlijk.':
-      'Ranks without total score and shows missing measurements separately.',
-  'Toont ernsttellingen, bijdragers en carried-forward metingen per moment.':
-      'Shows severity counts, contributors, and carried-forward measurements by moment.',
-  'Rangschikt findingtypen op getroffen organisaties, systemen en waarnemingen.':
-      'Organizes finding types by affected organizations, systems and observations.',
-  'Toont critical/high-aantallen zonder zelfbedachte weging.':
-      'Shows critical/high numbers without any devised weighing.',
-  'Toont teller, noemer en alleen betrouwbare percentages.':
-      'Shows numerator, denominator and only reliable percentages.',
-  'Groepeert letterlijke aanbevelingen uit OpenKAT zonder eigen prioriteit.':
-      'Groups literal recommendations from OpenKAT without their own priority.',
   'Een gericht actueel beeld van één organisatie en haar meetdatum.':
       'A targeted current image of one organization and its measurement date.',
   'Vergelijkt twee gekozen meetmomenten binnen één organisatie.':
       'Compares two chosen measurement moments within one organization.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen.':
-      'Distinguishes new, new and no longer observed.',
-  'Gebruikt alleen betrouwbare eerste waarnemingsdatums.':
-      'Uses only reliable first observation dates.',
-  'Rangschikt systemen met afzonderlijke severitytellers.':
-      'Ranks systems with separate severity counters.',
-  'Toont afzonderlijke deltawaarden zonder gewogen score.':
-      'Shows individual delta values ​​without weighted score.',
-  'Vergelijkt teller en noemer bij aantoonbaar vergelijkbare dekking.':
-      'Compares numerator and denominator with demonstrably comparable coverage.',
-  'Inventariseert bronbewezen systemen, hostnames en IP-adressen.':
-      'Inventories source-proven systems, hostnames and IP addresses.',
   'Scheidt gemonitord, niet gemonitord en onbekend.':
       'Separates monitored, unmonitored and unknown.',
-  'Toont alleen expliciet bewezen monitoringmutaties.':
-      'Only shows explicitly proven monitoring mutations.',
-  'Toont organisaties en systemen rond één betrouwbare CVE-koppeling.':
-      'Shows organizations and systems around one reliable CVE link.',
-  'Rangschikt CVE’s met expliciete deduplicatie.':
-      'Ranks CVEs with explicit deduplication.',
-  'Onderscheidt nieuw, opnieuw en niet meer waargenomen CVE’s.':
-      'Distinguishes new, new and no longer observed CVEs.',
   'Toont ontbrekende, verouderde en werkelijk gebruikte metingen.':
       'Shows missing, outdated and actually used measurements.',
-  'Verantwoordt peildatums, bronbestanden, adapters en bronhashes.':
-      'Accounts for key dates, source files, adapters and source hashes.',
   'Nog niet beschikbaar: de bron bewijst geen monitoringstatus voor alle assets.':
       'Not yet available: the source does not prove monitoring status for all assets.',
   'Nog niet beschikbaar: niet iedere finding heeft een betrouwbare eerste waarnemingsdatum.':
@@ -1952,12 +1835,6 @@ const _dutchSourceAddEn = {
   'Onderwerp': 'Subject',
   'Welk rapport beantwoordt uw vraag?': 'Which report answers your question?',
   'Meer rapportvragen': 'More report questions',
-  'Welke systemen zijn kwetsbaar voor een CVE?':
-      'Which systems are vulnerable to a CVE?',
-  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
-      'Organizations and vulnerable systems around one vulnerability.',
-  'Organisaties met kwetsbare systemen':
-      'Organizations with vulnerable systems',
   'Kwetsbare systemen': 'Vulnerable systems',
   'Kritiek/hoog': 'Critical or high',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
@@ -1979,8 +1856,6 @@ const _dutchSourceAddEn = {
   'Bruikbaar': 'Usable',
   'CVE zoeken': 'CVE search',
   'Critical/high': 'Critical or high',
-  'Datakwaliteit, ontbrekende metingen en veroudering.':
-      'Data quality, missing measurements and obsolescence.',
   'De gekozen rapportages bevatten niet genoeg betrouwbare gegevens voor dit onderdeel.':
       'The selected reports do not contain enough reliable data for this part.',
   'De inhoud verschijnt zodra alle noodzakelijke keuzes zijn gemaakt.':
@@ -2008,9 +1883,6 @@ const _dutchSourceAddEn = {
   'Geen bruikbare meetdatum': 'No usable measurement date',
   'Gegenereerde dia’s worden vernieuwd. Uw eigen dia’s en kopieën blijven behouden.':
       'Generated slides are refreshed. Your own slides and copies are retained.',
-  'Getroffen organisaties en systemen': 'Affected organizations and systems',
-  'Getroffen organisaties en systemen rond één kwetsbaarheid.':
-      'Affected organizations and systems around one vulnerability.',
   'Getroffen systemen': 'Affected systems',
   'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.':
       'The report could not be created. Your choices are preserved; check the warnings and try again.',
@@ -2020,20 +1892,15 @@ const _dutchSourceAddEn = {
   'Keuzes wijzigen…': 'Change choices…',
   'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.':
       'Choose the folder in which OpenKAT has placed the reports. OciDeck only reads this folder; nothing is changed or sent.',
-  'Kies de vraag die het rapport moet beantwoorden. OciDeck bepaalt de passende opbouw.':
-      'Choose the question the report should answer. OciDeck determines the appropriate structure.',
   'Kies een CVE die in de rapportages is aangetroffen.':
       'Choose a CVE found in the reports.',
   'Laatste bruikbare meting': 'Last usable measurement',
   'Live voorvertoning van de rapportopbouw':
       'Live preview of the report structure',
-  'Management- en stuurinformatie over meerdere organisaties.':
-      'Management and control information about multiple organizations.',
   'Meer instellingen': 'More settings',
   'Nederlands': 'Dutch',
   'Niet iedere gekozen organisatie heeft een meting voor deze periode.':
       'Not every chosen organization has a measurement for this period.',
-  'Nieuwe en verdwenen bevindingen': 'New and missing findings',
   'Nog niet beschikbaar: deze rapportages bevatten geen betrouwbare CVE-nummers.':
       'Not yet available: these reports do not contain reliable CVE numbers.',
   'OciDeck gebruikt dezelfde bron en keuzes en neemt de nieuwste geschikte metingen. Uw eigen dia’s en kopieën blijven behouden.':
@@ -2068,8 +1935,6 @@ const _dutchSourceAddEn = {
       'A useful current measurement is missing for one or more organizations.',
   'Voor een vergelijking zijn twee meetmomenten nodig. Er is nu één meting gevonden.':
       'Two measuring moments are required for a comparison. One measurement has now been found.',
-  'Voortgang ten opzichte van een eerder meetmoment.':
-      'Progress compared to a previous measurement moment.',
   'Waar staan de OpenKAT-rapportages?': 'Where are the OpenKAT reports?',
   'Wat veranderde er bij één organisatie?': 'What changed at one organization?',
   'Wat wilt u laten zien?': 'What do you want to show?',
@@ -2082,7 +1947,6 @@ const _dutchSourceAddEn = {
   'bruikbaar': 'usable',
   'metingen': 'measurements',
   'organisaties': 'organizations',
-  'organisaties geselecteerd': 'organizations selected',
   'rapportages gebruikt': 'reports used',
   'systemen': 'systems',
   'Nog geen specificatielimiet': 'No specification limit yet',
@@ -2223,7 +2087,6 @@ const _dutchSourceAddEn = {
       'is on a tree slide but not used elsewhere — link it to a matrix, flow or other slide.',
   'Nieuw verbeteringsproject': 'New improvement project',
   'Kader': 'Framework',
-  'Projecttitel': 'Project title',
   'Primaire Y-metriek (Y-01)': 'Primary Y metric (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'For example: order intake lead time in working days',
@@ -2277,10 +2140,6 @@ const _dutchSourceAddEn = {
   'Bron niet toegestaan': 'Source not allowed',
   'Deze URL is door de beveiliging geweigerd.':
       'This URL was rejected by security.',
-  'Materiaal uit andere systemen binnenhalen. Twee bronnen: presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) worden een bewerkbaar deck, en OpenKAT-rapportages (een map met JSON) worden één managementoverzicht. Waar de OpenKAT-map staat, stelt u in onder Integraties.':
-      'Bring in material from other systems. Two sources: presentations from PowerPoint (.pptx), Keynote (.key) and Impress (.odp) become an editable deck, and OpenKAT reports (a folder of JSON) become a single management overview. Where the OpenKAT folder lives is set under Integrations.',
-  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Het inlezen van OpenKAT-rapportagemappen kan alleen in de desktopversie.':
-      'Bring in presentations from PowerPoint (.pptx), Keynote (.key) and Impress (.odp) as an editable deck. Reading OpenKAT report folders is only available in the desktop version.',
   'Alinea': 'Paragraph',
   'Audio "{bestand}"': 'Audio "{bestand}"',
   'Deck opbouwen…': 'Building deck…',
@@ -2401,8 +2260,6 @@ const _dutchSourceAddEn = {
       'The checklist index: the stable id, canonical title and category per test. The guide\'s own content is not bundled.',
   'De test-index van v2.0.0: per test het stabiele id, de canonieke titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken v1-tests en de placeholders zitten er niet in; de inhoud van de gids evenmin.':
       'The v2.0.0 test index: the stable id, canonical title, MASVS category and MASWE weakness per test. Withdrawn v1 tests and placeholders are not included; neither is the guide\'s content.',
-  'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.':
-      'The weakness list (117): id, title, MASVS category, platform and the CWE link. Three quarters are not yet written up at the source; those are included, marked. Withdrawn weaknesses are not.',
   'De volledige lijst (id, naam, beschrijving) plus een eigen geselecteerde kern met onze remediatie-notities.':
       'The full list (id, name, description) plus our own curated core with remediation notes.',
   'Het volledige EIS-schema (88 toetsbare eisen).':
@@ -2449,33 +2306,16 @@ const _dutchSourceAddEn = {
       'Each file is converted separately and saved as its own presentation in the target folder. If one fails, the queue simply carries on.',
   'Meerdere presentaties tegelijk importeren schrijft ze als bestanden naar een map; in de browserversie kan dat niet.':
       'Importing several presentations at once writes them as files to a folder; the browser version cannot do that.',
-  'Nu importeren': 'Import now',
   'Het overzicht staat klaar in een nieuw tabblad.':
       'The overview is ready in a new tab.',
-  'Leest een map met OpenKAT-rapportages (JSON) en bouwt er één managementoverzicht van: systemen, bevindingen per ernst, de langst openstaande punten en de trend over opeenvolgende metingen. Dezelfde actie op een bestaand OpenKAT-deck werkt het bij en laat uw eigen dia’s staan.':
-      'Reads a folder of OpenKAT reports (JSON) and builds a single management overview from it: systems, findings by severity, the longest-open items and the trend across successive measurements. The same action on an existing OpenKAT deck updates it and leaves your own slides in place.',
   'De import leest alleen; er wordt niets in deze map gewijzigd of verstuurd. Bestanden die geen OpenKAT-rapportage blijken, worden overgeslagen en in het importverslag benoemd.':
       'The import only reads: nothing in this folder is changed or sent anywhere. Files that turn out not to be OpenKAT reports are skipped and named in the import log.',
-  'Wijs de map aan waarin uw OpenKAT-rapportages (JSON) staan. De import leest die map en bouwt er één managementoverzicht van; staat de map hier ingesteld, dan hoeft u hem niet elke keer opnieuw te kiezen.':
-      'Point to the folder holding your OpenKAT reports (JSON). The import reads that folder and builds a single management overview from it; with the folder set here you do not have to choose it again every time.',
-  'De OpenKAT-import leest een map van schijf en is alleen beschikbaar in de desktopversie.':
-      'The OpenKAT import reads a folder from disk and is only available in the desktop version.',
-  'Er is nog geen rapportagemap aangewezen; de import vraagt er dan elke keer om.':
-      'No report folder has been set yet, so the import asks for one every time.',
-  'Er staat al een rapportagemap ingesteld; het invoerpunt blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
-      'A report folder is already set, so the entry point stays available and an existing OpenKAT deck can still be updated.',
   'Integraties': 'Integrations',
-  'Naar Integraties': 'Go to Integrations',
   'Map kiezen…': 'Choose folder…',
   'Map wissen': 'Clear folder',
-  'OpenKAT-rapportages importeren…': 'Import OpenKAT reports…',
   'Map met OpenKAT-rapportages kiezen': 'Choose folder with OpenKAT reports',
-  'OpenKAT-rapportages geïmporteerd.': 'OpenKAT reports imported.',
-  'OpenKAT-deck bijgewerkt; handmatige dia’s zijn behouden.':
-      'OpenKAT deck updated; manual slides are kept.',
   'Geen OpenKAT-rapportages gevonden in deze map.':
       'No OpenKAT reports found in this folder.',
-  'OpenKAT-import mislukt.': 'OpenKAT import failed.',
   'rapportages': 'reports',
   'overgeslagen': 'skipped',
   'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)':
@@ -2534,8 +2374,6 @@ const _dutchSourceAddEn = {
   'Label op de primaire knop': 'Label on the primary button',
   'Bevindingen die je hebt beoordeeld en hebt laten staan. Ze worden niet meer gemeld, maar de scan blijft ze vinden en ze tellen niet als opgelost. Tik om er een terug te zetten.':
       'Findings you reviewed and left in place. They are no longer reported, but the scan still finds them and they do not count as resolved. Tap to restore one.',
-  'Privacybevinding terzijde leggen (ontwerp)':
-      'Setting a privacy finding aside (design)',
   'Deze is beoordeeld en mag blijven': 'Reviewed, this one can stay',
   'Mogelijk gemaakt door': 'Made possible by',
   'De export is gestopt tijdens het voorbereiden.':
@@ -2547,10 +2385,8 @@ const _dutchSourceAddEn = {
   'Technische melding:': 'Technical message:',
   'presentaties': 'presentations',
   '/Presentaties': '/Presentations',
-  'Rapportagedistributie (ontwerp)': 'Report distribution (design)',
   'De export is mislukt.': 'The export failed.',
   'Presenteer vanaf hier': 'Present from here',
-  'Teams-gastclient (ontwerp)': 'Teams guest client (design)',
   'Traffic Light Protocol: hoe breed mag dit materiaal gedeeld worden?':
       'Traffic Light Protocol: how widely may this material be shared?',
   'Wat betekenen deze niveaus?': 'What do these levels mean?',
@@ -2665,8 +2501,6 @@ const _dutchSourceAddEn = {
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentations that stay plain Markdown files: readable, searchable and openable with any editor.',
   'sjablonen om mee te beginnen, of leeg': 'templates to start with, or blank',
-  'Weglaten staat aan: gevonden gegevens worden zwart gemaakt en álle afbeeldingen, video en audio van deze dia gaan niet mee naar het scherm of de export. Je markdown-bestand houdt alles.':
-      'Redaction is on: data that was found is blacked out and all images, video and audio on this slide do not go to the screen or the export. Your markdown file keeps everything.',
   'Mijn tekst': 'My text',
   'Wat zij zien': 'What they see',
   'Presentatiegegevens': 'Presentation details',
@@ -2887,7 +2721,6 @@ const _dutchSourceAddEn = {
   'Opslaan naar…': 'Save to…',
   'Stel eerst een verbinding in bij Instellingen → Opslag.':
       'Set up a connection first, under Settings → Storage.',
-  'Beginnen met:': 'Start with:',
   'Verlopen datums markeren': 'Mark expired dates',
   'Datums gemarkeerd': 'Dates marked',
   'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
@@ -2913,28 +2746,15 @@ const _dutchSourceAddEn = {
   'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
       'The attack surface by kind of object: how many there are, how many need work, what is new and what nobody owns. That last one is usually the conversation.',
   'Acties en besluiten': 'Actions and decisions',
-  'Actie toevoegen': 'Add action',
-  'Actie verwijderen': 'Remove action',
   'Actie': 'Action',
   'Deadline': 'Deadline',
-  'Op de lijst sinds': 'On the list since',
   'Stand': 'Status',
-  'Wat vraagt u': 'What you are asking',
   'geen datum': 'no date',
-  'Ter informatie': 'For information',
   'Besluit gevraagd': 'Decision required',
   'Escalatie': 'Escalation',
   'Open': 'Open',
   'Loopt': 'In progress',
   'Afgerond': 'Done',
-  'Alleen een besluit of escalatie krijgt een label op de slide; "te laat" volgt uit de deadline en zet u niet zelf.':
-      'Only a decision or escalation is labelled on the slide; "late" follows from the deadline and is not yours to set.',
-  'Datums als jjjj-mm-dd. Een andere schrijfwijze wordt niet geraden: 05-08-2026 is twee verschillende dagen.':
-      'Dates as yyyy-mm-dd. Any other form is refused rather than guessed: 05-08-2026 is two different days.',
-  'Een actieslide draagt hoogstens acht regels; daarna gaat de zaal skimmen in plaats van besluiten.':
-      'An actions slide carries at most eight lines; past that the room skims instead of deciding.',
-  'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.':
-      'What has to happen, who does it and by when. Say per line whether it is for information or whether you are asking for a decision — that is what the room scans for.',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Add figure',
   'Cijfer verwijderen': 'Remove figure',
@@ -3021,8 +2841,6 @@ const _dutchSourceAddEn = {
       'The token is valid, but not allowed to do this — give it more rights on the repository.',
   'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
       'Signed in, but no access — your password is not the problem. Ask for rights on this folder.',
-  'Lexiconlicenties: wat er nog nagevraagd moet worden':
-      'Lexicon licences: what still needs to be asked',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
       'This looks like a full DAV URL. For Nextcloud, OciDeck derives that path itself — only the server belongs here.',
   'Overnemen': 'Apply',
@@ -3065,8 +2883,6 @@ const _dutchSourceAddEn = {
   'kenteken': 'vehicle registration number',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'There is no keyword list for special categories of personal data in this deck\'s language. Patterns with a check digit (national ID, IBAN, passport) still work; words like "diagnosis" or "suspect" are not recognised.',
-  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
-      'The keyword list for special categories of personal data is very thin for this deck\'s language. Do not count on words like "diagnosis" or "suspect" being found.',
   'Landpakketten voor identificatienummers':
       'Country packs for identification numbers',
   'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
@@ -3096,8 +2912,6 @@ const _dutchSourceAddEn = {
       'The server name does not exist, or cannot be looked up. Check the server URL for a typo.',
   'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
       'This server has a private or LAN address. Mark it as trusted internal under Settings → Storage.',
-  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
-      'This server\'s certificate is not trusted. A self-signed certificate will not work; use one from a recognised issuer.',
   'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
       'The server redirects to a different address. Enter that address directly — we do not follow redirects, because they can bypass the security check.',
   'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
@@ -3133,8 +2947,6 @@ const _dutchSourceAddEn = {
   'Opslaan naar S3': 'Save to S3',
   'Opgeslagen in S3:': 'Saved to S3:',
   'Hier staat niets': 'Nothing here',
-  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
-      'Could not load the contents. Check your connection and settings.',
   'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
       'Endpoint unreachable — check your connection and the endpoint.',
   'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
@@ -3143,8 +2955,6 @@ const _dutchSourceAddEn = {
       'The endpoint returned an error. Try again later.',
   'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
       'This endpoint cannot write conditionally, so your work is not protected against someone else’s. Save under a new name if anyone else is working on this deck.',
-  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
-      'No S3 bucket configured. Set one up in Settings → Storage.',
   'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
       'First set up an S3 bucket in Settings → Storage.',
   'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
@@ -3191,10 +3001,6 @@ const _dutchSourceAddEn = {
       'This image shows at least {count} recognisable faces.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
       'This image could not be checked for faces. The format is not supported (HEIC, for instance). That does not mean nobody is in it — it means nobody looked.',
-  'Deze afbeelding toont een herkenbaar gezicht.':
-      'This image shows a recognisable face.',
-  'Deze afbeelding toont {count} herkenbare gezichten.':
-      'This image shows {count} recognisable faces.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
       'An image in which someone is recognisable is personal data, even with no name attached.',
   'herkenbaar gezicht op een afbeelding': 'recognisable face in an image',
@@ -3210,8 +3016,6 @@ const _dutchSourceAddEn = {
   'Organisatie': 'Organisation',
   'Welke verbinding?': 'Which connection?',
   'Bestandsverbindingen': 'File connections',
-  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
-      'The places where you keep and search your presentations — folders on this computer, WebDAV servers and git repositories side by side. Drag them into the order you want: the topmost of each kind counts as the default.',
   'Een git-repository; elke opgeslagen versie blijft bewaard.':
       'A git repository; every saved version is kept.',
   'Een map op de schijf van deze computer.':
@@ -3235,15 +3039,7 @@ const _dutchSourceAddEn = {
   'Openen vanaf WebDAV': 'Open from WebDAV',
   'Opslaan naar WebDAV': 'Save to WebDAV',
   'Opgeslagen op WebDAV:': 'Saved to WebDAV:',
-  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
-      'First set up a WebDAV server in Settings → WebDAV.',
   'Afbeelding kiezen op WebDAV': 'Choose image on WebDAV',
-  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
-      'No WebDAV server configured. Set one up in Settings → WebDAV.',
-  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
-      'WebDAV is not set up (correctly) — check the server details under Settings → WebDAV.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
-      'This server is not allowed. Mark a private/LAN server as trusted first under Settings → WebDAV.',
   'Servertype': 'Server type',
   'Nextcloud of ownCloud': 'Nextcloud or ownCloud',
   'Andere WebDAV-server': 'Other WebDAV server',
@@ -3265,23 +3061,11 @@ const _dutchSourceAddEn = {
   'Haal volle pagina uit de reeks': 'Take the full page out of the run',
   'Opslag': 'Storage',
   'Opslagwijzen': 'Storage methods',
-  'Deze computer': 'This computer',
   'Ingesteld': 'Configured',
   'Niet ingesteld': 'Not configured',
-  'Nog geen bibliotheek ingesteld': 'No library set up yet',
-  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
-      'The routes by which you can open and save presentations. Click a method open to configure it.',
-  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
-      'Presentations in the folders above, on this computer’s disk.',
-  'Open en bewaar presentaties in een map op je Nextcloud.':
-      'Open and save presentations in a folder on your Nextcloud.',
-  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
-      'Open presentations from a git repository; every saved version is kept.',
-  'Nog te verifiëren': 'Still to verify',
   'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
   'Zoek op naam, id of categorie': 'Search by name, id or category',
   'Geen zwakheid gevonden': 'No weakness found',
-  'uitleg nog niet geschreven': 'guidance not written yet',
   'Getalnotatie herkennen': 'Recognise the number format',
   'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
       'This file contains numbers whose comma can be read in two ways:',
@@ -3399,12 +3183,10 @@ const _dutchSourceAddEn = {
   'Veelgestelde vragen': 'Frequently asked questions',
   'Probleemoplossing': 'Troubleshooting',
   'Begrippenlijst': 'Glossary',
-  'API-documentatie': 'API documentation',
   'Prestaties': 'Performance',
   'Beveiligingsontwerp': 'Security design',
   'Hosting en uitrol': 'Hosting and deployment',
   'Bijdragen': 'Contributing',
-  'Ontwikkelomgeving': 'Development setup',
   'Migratiegids': 'Migration guide',
   'Versies…': 'Versions…',
   'Versies:': 'Versions:',
@@ -3445,8 +3227,6 @@ const _dutchSourceAddEn = {
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'The branch has moved; reload the deck and save again.',
   'Bijgewerkt met OciDeck': 'Updated with OciDeck',
-  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
-      'Set up a git repository first, under Settings → Git repository.',
   'Git-repository': 'Git repository',
   'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Open presentations from a git repository. Every saved version is kept. The token is stored encrypted in the keychain, not alongside the other settings.',
@@ -3462,7 +3242,6 @@ const _dutchSourceAddEn = {
       'Reporting slides and reference data for information safety: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and safety research. The reference data sits inside the app itself, so the module works right away and fully offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optional modules. Off by default; they stay hidden until you enable them.',
-  'Procesverbetering (ontwerp)': 'Process improvement (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'This project is a by-product of the Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Export style profile',
@@ -3600,7 +3379,6 @@ const _dutchSourceAddEn = {
   'genetisch gegeven': 'genetic data',
   'parketnummer': 'prosecution case number',
   'nationaal identificatienummer': 'national identification number',
-  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Possible secret',
   'sleutel of token': 'key or token',
   'private sleutel': 'private key',
@@ -3633,7 +3411,6 @@ const _dutchSourceAddEn = {
   'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
       'Put the full CVE list on this device, so lookups happen offline and your search term goes nowhere. The database comes from CVE List V5 (the official CVE programme, via GitHub).',
   'Wat er lokaal beschikbaar is': 'What is available locally',
-  'Gegevenspakket': 'Data pack',
   'Nu bijwerken': 'Update now',
   'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
       'Data available locally — lookups happen on this device; nothing leaves it.',
@@ -3652,7 +3429,6 @@ const _dutchSourceAddEn = {
       'Accept: the data belongs here and the notice disappears. Accept + warn: the recipient sees a badge saying the slide holds personal data. Leave out: the data found is made unreadable on screen and in the export — your Markdown file keeps the original text.',
   'Alleen melden': 'Only report',
   'PERSOONSGEGEVENS': 'PERSONAL DATA',
-  'Persoonsgegevens op deze slide': 'Personal data on this slide',
   'Volg de presentatie': 'Follow the presentation',
   'Weglaten uit tonen en exporteren': 'Leave out of display and export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
@@ -3773,8 +3549,6 @@ const _dutchSourceAddEn = {
   'Bewerk deze slide': 'Edit this slide',
   'Bewijs verwijderen': 'Remove evidence',
   '(nog leeg)': '(still empty)',
-  'Geef eerst een bevinding-id op om bewijs te koppelen.':
-      'Enter a finding id first to attach evidence.',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Add screenshots or videos as evidence. Each piece of evidence becomes its own slide right after the finding and is included in the export.',
   'Uitvoering testen conform standaard': 'Testing per standard',
@@ -3783,8 +3557,6 @@ const _dutchSourceAddEn = {
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'I accept the EUPL 1.2 licence and have read what data OciDeck stores.',
-  'Je keuze wordt de standaardtaal van de app.':
-      'Your choice becomes the app\'s default language.',
   'Lees de volledige licentie': 'Read the full licence',
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck is free software under the EUPL 1.2 licence. Before you start, we ask you to accept the licence. Below you can also read what data OciDeck stores on this device and when anything leaves your device.',
@@ -3810,9 +3582,6 @@ const _dutchSourceAddEn = {
   'Het antwoord van de server was te groot':
       'The server response was too large',
   'Nextcloud': 'Nextcloud',
-  'Nextcloud-bron (WebDAV)': 'Nextcloud source (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Open and save presentations in a folder on your Nextcloud. The password is stored encrypted in the keychain, not alongside the other settings.',
   'Server-URL': 'Server URL',
   'Gebruikersnaam': 'Username',
   'App-wachtwoord': 'App password',
@@ -3826,22 +3595,13 @@ const _dutchSourceAddEn = {
   'Verbinding gelukt': 'Connection succeeded',
   'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
       'Changes are saved when you click Save.',
-  'Afbeelding kiezen op Nextcloud': 'Choose image on Nextcloud',
-  'Openen vanaf Nextcloud': 'Open from Nextcloud',
   'Vernieuwen': 'Refresh',
   'Deze map is leeg': 'This folder is empty',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
-      'No Nextcloud server configured. Set one up in Settings → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.':
-      'Could not load the folder. Check your connection and settings.',
   'Kon dit bestand niet openen.': 'Could not open this file.',
   'Dit is geen Marp/OciDeck-presentatie.':
       'This isn\'t a Marp/OciDeck presentation.',
   'Downloaden mislukt:': 'Download failed:',
-  'Opgeslagen op Nextcloud:': 'Saved to Nextcloud:',
   'Opslaan mislukt:': 'Save failed:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
-      'First set up a Nextcloud server in Settings → Nextcloud.',
   'Opslaan naar Nextcloud': 'Save to Nextcloud',
   'Doelpad (zonder extensie)': 'Target path (without extension)',
   'Als .ocideck-pakket (één bestand, met assets)':
@@ -3853,9 +3613,6 @@ const _dutchSourceAddEn = {
   'Tijden-overzicht tonen na afloop': 'Show timing overview afterwards',
   'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
       'Time per slide is always measured; this only controls whether the overview appears after this presentation.',
-  'Oefenoverzicht tonen na afloop': 'Show rehearsal summary afterwards',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
-      'After a presentation, show the overview of time spent per slide. Time is always measured; this only controls whether the screen appears.',
   'Onveilige presentatie geblokkeerd': 'Unsafe presentation blocked',
   'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
       'This presentation was not opened. The file contains content that can execute code, and a presentation should contain only data — nothing executable.',
@@ -3941,7 +3698,6 @@ const _dutchSourceAddEn = {
   'Lokaal bestand': 'Local file',
   'Geen video': 'No video',
   // Vraag-slides (multiple choice question).
-  'Vraag (meerkeuze)': 'Question (multiple choice)',
   // Titel-contrast (slidekwaliteit).
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'Title text has too little contrast with the background image',
@@ -3958,8 +3714,6 @@ const _dutchSourceAddEn = {
   'Huidig punt weghalen': 'Remove current point',
   'Stap voor stap': 'Step by step',
   'Geen animatie': 'No animation',
-  'Animatiesnelheid': 'Animation speed',
-  'Langzaam': 'Slow',
   'Snel': 'Fast',
   'Gebeurtenissen': 'Events',
   'Gebeurtenis toevoegen': 'Add event',
@@ -3972,8 +3726,6 @@ const _dutchSourceAddEn = {
   'Vraag': 'Question',
   'Wat wil je vragen?': 'What do you want to ask?',
   'Antwoorden': 'Answers',
-  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Mark the correct answers. At most eight answers; when presenting, one correct and the rest wrong answers are shown at random.',
   'Antwoord': 'Answer',
   'Antwoord toevoegen': 'Add answer',
   'Goed antwoord': 'Correct answer',
@@ -4006,8 +3758,6 @@ const _dutchSourceAddEn = {
   'Stelling': 'Statement',
   'Formuleer een stelling die juist of onjuist is':
       'Phrase a statement that is true or false',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
-      'Mark all correct answers. When presenting, a random set is shown with at least one correct and one wrong.',
   'Juist': 'True',
   'Onjuist': 'False',
   'De stelling hierboven is juist of onjuist; kies welke.':
@@ -4028,7 +3778,6 @@ const _dutchSourceAddEn = {
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'The status colours of the cockpit meters. Create named variants; the chosen scheme applies to all cockpit slides.',
   'Standaard': 'Default',
-  'Standaardkleuren gebruiken': 'Use default colours',
   'Kleurschema verwijderen': 'Delete colour scheme',
   'Schemanaam': 'Scheme name',
   'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
@@ -4107,7 +3856,6 @@ const _dutchSourceAddEn = {
   'Notities weggooien': 'Discard notes',
   'Pagina': 'Page',
   'Presentatiestijl': 'Presentation style',
-  'Presentatiestijl: ': 'Presentation style: ',
   'Sprekersnotities': 'Speaker notes',
   'Tekst...': 'Text...',
   'Teksteditor': 'Text editor',
@@ -4121,8 +3869,6 @@ const _dutchSourceAddEn = {
   'Doeltijd': 'Target time',
   'Doeltijd (aftellen)': 'Target time (countdown)',
   'Geen aftelling': 'No countdown',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
-      'Default target time for the presenter countdown. Fine-tune it while presenting with the K key.',
   'uit': 'off',
   'Doeltijd / aftellen (K)': 'Target / countdown (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Set target / countdown (MMSS)',
@@ -4192,14 +3938,8 @@ const _dutchSourceAddEn = {
   'Cirkel': 'Pie',
   'Spider': 'Spider',
   'CSV importeren': 'Import CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
-      'Data (CSV: first row = series names, first column = labels)',
   'Gekoppeld aan': 'Linked to',
   'Ontkoppelen': 'Unlink',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
-      'Store the data in the slide, or keep it as a separate CSV file next to the presentation?',
-  'In de slide': 'In the slide',
-  'Als CSV-bestand': 'As a CSV file',
   'Geen grafiekgegevens': 'No chart data',
   'Label': 'Label',
   'Rij': 'Row',
@@ -4230,7 +3970,6 @@ const _dutchSourceAddEn = {
   'Eigen kleur (hex)': 'Custom colour (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'For example #33FF33 for a CRT-green screen.',
-  'Onderdeel van stijlprofiel ': 'Part of style profile ',
   'Broncode lettertype': 'Code font',
   'Kop (optioneel)': 'Heading (optional)',
   'Subkop (optioneel)': 'Subheading (optional)',
@@ -4269,16 +4008,7 @@ const _dutchSourceAddEn = {
   'Zet het filter uit om alles weer te zien.':
       'Turn off the filter to see everything again.',
   'Welkom bij OciDeck': 'Welcome to OciDeck',
-  'Privacy en gebruik': 'Privacy and use',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
-      'OciDeck is a local desktop application. Your presentations and data are stored solely on your computer.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
-      'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
-      'All data you enter in OciDeck stays on your local system and is not sent to external servers.',
   'Licentie (EUPL 1.2)': 'License (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
-      'By clicking "Agree", you accept these terms and consent to the use of OciDeck.',
   'Volledige licentie online': 'Full license online',
   'Akkoord gaan': 'Agree',
   'Privacy': 'Privacy',
@@ -4369,8 +4099,6 @@ const _dutchSourceAddEn = {
   'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
       'Export blocked due to serious quality issues.',
   'Alle meldingen': 'All issues',
-  '… en meer problemen in het kwaliteitspaneel.':
-      '… and more issues in the quality panel.',
   'Classificatie-handhaving': 'Classification enforcement',
   'Vrijgaveplafond': 'Release ceiling',
   'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
@@ -4389,11 +4117,9 @@ const _dutchSourceAddEn = {
   'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
       'Set a TLP level — export is blocked by the classification policy.',
   'Tabel bewerken': 'Edit table',
-  'Pijltjes · Tab · Esc': 'Arrow keys · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Edit table (on table slides)',
   'Tabel bewerken (E)': 'Edit table (E)',
   'Tab wisselt cel · Esc sluit': 'Tab switches cell · Esc closes',
-  'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
   'Gestapelde staaf': 'Stacked bar',
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn moves between slides',
@@ -4436,10 +4162,6 @@ const _dutchSourceAddEn = {
       'Network error — check your connection and try again.',
   'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
       'Something went unexpectedly wrong. See the log for details.',
-  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
-      'Nextcloud is not set up (correctly) — check the server details under Settings → Nextcloud.',
-  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
-      'This server is not allowed. Mark a private/LAN server as trusted first under Settings → Nextcloud.',
   'Server niet bereikbaar — controleer je verbinding en de server-URL.':
       'Server unreachable — check your connection and the server URL.',
   'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
@@ -4467,8 +4189,6 @@ const _dutchSourceAddEn = {
   'Uit recente bestanden verwijderen': 'Remove from recent files',
   'OciDeck wordt gestart…': 'Starting OciDeck…',
   'Herstelbestanden': 'Recovery files',
-  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
-      'Crash-recovery files contain the full content of your presentations in plain text. They are cleaned up automatically after 7 days; here you can wipe them immediately.',
   'Herstelbestanden nu wissen': 'Wipe recovery files now',
   'Er waren geen herstelbestanden.': 'There were no recovery files.',
   'herstelbestand(en) gewist.': 'recovery file(s) wiped.',

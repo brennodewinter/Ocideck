@@ -1409,6 +1409,18 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **181 vertaalsleutels die niemand meer opvroeg, weg uit alle 32 tabellen.**
+  De poort uit #1512 wees ze aan; deze tak ruimt ze op. Vier `t()`-sleutels
+  (`settingsLogo`, `presentationFolder`, `notSet`, `removeDefaultFolder`) en 177
+  Nederlandse bronstrings — oude presentatiebalk-labels, ontwerp-titels en
+  instellingenteksten die met hun scherm zijn meeverdwenen. Dat scheelt 8.681
+  regels vertaling voor tekst die geen mens ooit te zien kreeg. Het vangnet was
+  `make check`: elke sleutel die tóch nog via `d()` of `t()` wordt opgehaald
+  laat `all literal Dutch source strings are translated in every language`
+  vallen. Geen enkele viel om, dus de poort had het bij het rechte eind — geen
+  valse positieven. `orphanBaseline` gaat van 181 naar 0: vanaf nu faalt élke
+  nieuwe wees de poort, zonder erfenis die dat signaal kan verbergen. (#1520)
+
 - **een poort die ongebruikte vertaalsleutels aanwijst.** De vertaalpoorten
   keken maar één kant op: `make l10n-check` en `app_localizations_test` bewaken
   dat elke gebruikte sleutel in alle 32 talen bestaat, maar niets vroeg of een
