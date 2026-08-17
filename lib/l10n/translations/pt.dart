@@ -1678,6 +1678,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Snijtekens': 'Marcas de corte',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Apenas na exportação LaTeX/PDF e apenas com sangria. Requer o pacote crop na sua instalação do TeX; imprimir a exportação HTML a partir de um navegador não as adiciona.',
   'Deze paginaopmaak staat in dit document':
       'Esta configuração da página está guardada neste documento',
   'Deze paginaopmaak komt uit je instellingen':

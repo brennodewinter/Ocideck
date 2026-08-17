@@ -1649,6 +1649,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Snijtekens': 'Griešanas atzīmes',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Tikai LaTeX/PDF eksportā un tikai ar apgriešanas rezervi. Nepieciešama pakotne crop jūsu TeX instalācijā; HTML eksporta izdrukāšana no pārlūka tās nepievieno.',
   'Deze paginaopmaak staat in dit document':
       'Šis lapas iestatījums ir saglabāts šajā dokumentā',
   'Deze paginaopmaak komt uit je instellingen':

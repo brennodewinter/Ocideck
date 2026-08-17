@@ -1652,6 +1652,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Snijtekens': 'Schnittmarke',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Nume im LaTeX/PDF-Export und nume mit Aaschnitt. Bruucht s Paket crop i de TeX-Installation; en Browser-Uusdruck vom HTML-Export setzt si nöd.',
   'Deze paginaopmaak staat in dit document':
       'Das Sitelayout staht i dem Dokumänt',
   'Deze paginaopmaak komt uit je instellingen':

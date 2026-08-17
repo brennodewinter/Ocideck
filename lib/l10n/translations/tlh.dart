@@ -1629,6 +1629,10 @@ const _dutchSourceTlh = {
 
 const _dutchSourceAddTlh = <String, String>{
   'Deze paginaopmaak staat in dit document': 'nav nabvam ghaj ghItlhvam',
+  'Snijtekens': 'pe\'meH deghmey',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'LaTeX/PDF ngeHmeH neH lo\'lu\', \'ej HeH juS tu\'lu\'chugh neH. TeX lo\'meH crop paq poQlu\'. browserDaq HTML ngeH ghItlhlu\'chugh, pe\'meH deghmey chelbe\'lu\'.',
+  'Deze paginaopmaak staat in dit document': 'nav nabvam ghaj navvam',
   'Deze paginaopmaak komt uit je instellingen':
       'DuHmeylIjvo\' nav nabvam Suqlu\'',
   'Paginaopmaak': 'nav nab',

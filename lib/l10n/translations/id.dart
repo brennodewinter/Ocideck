@@ -1649,6 +1649,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Snijtekens': 'Tanda potong',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Hanya pada ekspor LaTeX/PDF, dan hanya dengan bleed. Memerlukan paket crop pada instalasi TeX Anda; mencetak ekspor HTML dari browser tidak menambahkannya.',
   'Deze paginaopmaak staat in dit document':
       'Pengaturan halaman ini tersimpan di dokumen ini',
   'Deze paginaopmaak komt uit je instellingen':

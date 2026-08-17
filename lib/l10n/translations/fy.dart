@@ -677,6 +677,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Snijtekens': 'Snijtekens',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Allinne yn de LaTeX/PDF-eksport, en allinne mei ôfrin. Freget it crop-pakket yn dyn TeX-ynstallaasje; in browserprint fan de HTML-eksport set se net.',
   'Deze paginaopmaak staat in dit document':
       'Dizze side-opmaak stiet yn dit dokumint',
   'Deze paginaopmaak komt uit je instellingen':

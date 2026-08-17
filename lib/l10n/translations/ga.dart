@@ -1681,6 +1681,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Snijtekens': 'Marcanna bearrtha',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'San easpórtáil LaTeX/PDF amháin, agus le fuiliú amháin. Tá an pacáiste crop de dhíth i do shuiteáil TeX; ní chuireann priontáil na heaspórtála HTML ó bhrabhsálaí isteach iad.',
   'Deze paginaopmaak staat in dit document':
       'Tá socrú an leathanaigh seo stóráilte sa cháipéis seo',
   'Deze paginaopmaak komt uit je instellingen':

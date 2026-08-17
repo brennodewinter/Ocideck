@@ -1667,6 +1667,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Snijtekens': 'Marcaje de tăiere',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Doar în exportul LaTeX/PDF și doar cu bleed. Necesită pachetul crop în instalarea ta de TeX; tipărirea exportului HTML din browser nu le adaugă.',
   'Deze paginaopmaak staat in dit document':
       'Această configurare a paginii este salvată în acest document',
   'Deze paginaopmaak komt uit je instellingen':

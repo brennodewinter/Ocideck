@@ -1662,6 +1662,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Snijtekens': 'Znaczniki cięcia',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Tylko w eksporcie LaTeX/PDF i tylko ze spadem. Wymaga pakietu crop w twojej instalacji TeX; wydruk eksportu HTML z przeglądarki ich nie doda.',
   'Deze paginaopmaak staat in dit document':
       'Te ustawienia strony są zapisane w tym dokumencie',
   'Deze paginaopmaak komt uit je instellingen':

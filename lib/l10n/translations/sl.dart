@@ -1651,6 +1651,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Snijtekens': 'Oznake za rez',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Samo pri izvozu LaTeX/PDF in samo z dodatkom za porezavo. Zahteva paket crop v vaši namestitvi TeX; tiskanje izvoza HTML iz brskalnika jih ne doda.',
   'Deze paginaopmaak staat in dit document':
       'Ta postavitev strani je shranjena v tem dokumentu',
   'Deze paginaopmaak komt uit je instellingen':

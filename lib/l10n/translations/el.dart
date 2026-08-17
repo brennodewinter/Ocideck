@@ -1675,6 +1675,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Snijtekens': 'Σημάδια κοπής',
+  'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
+      'Μόνο στην εξαγωγή LaTeX/PDF και μόνο με διαφυγή. Απαιτεί το πακέτο crop στην εγκατάσταση TeX σας· η εκτύπωση της εξαγωγής HTML από το πρόγραμμα περιήγησης δεν τα προσθέτει.',
   'Deze paginaopmaak staat in dit document':
       'Αυτή η διαμόρφωση σελίδας είναι αποθηκευμένη σε αυτό το έγγραφο',
   'Deze paginaopmaak komt uit je instellingen':
