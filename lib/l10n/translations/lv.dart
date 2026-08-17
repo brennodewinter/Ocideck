@@ -2667,7 +2667,7 @@ const _dutchSourceAddLv = <String, String>{
   'Bestand kon niet worden gelezen': 'Failu nevarēja nolasīt',
   'Aanbevolen': 'Ieteicams',
   'Alleen wat nodig is': 'Tikai to, kas ir nepieciešams',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Viss paliek šajā ierīcē',
   'Als nieuw rapport maken': 'Izveidot kā jaunu pārskatu',
   'Andere map kiezen': 'Izvēlieties citu mapi',
   'Bekijk importverslag': 'Skatīt importēšanas pārskatu',

@@ -2674,7 +2674,7 @@ const _dutchSourceAddHu = <String, String>{
   'Bestand kon niet worden gelezen': 'A fájlt nem sikerült beolvasni',
   'Aanbevolen': 'Ajánlott',
   'Alleen wat nodig is': 'Csak ami szükséges',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Minden ezen az eszközön marad',
   'Als nieuw rapport maken': 'Hozzon létre új jelentésként',
   'Andere map kiezen': 'Válasszon másik mappát',
   'Bekijk importverslag': 'Importálási jelentés megtekintése',

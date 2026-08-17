@@ -251,8 +251,8 @@ const _dutchSourceFy = {
   'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
       'Gjin sichtbere ferskillen — de slides binne ynhâldlik gelyk.',
   'In meerdere presentaties': 'Yn meardere presintaasjes',
-  'Kop kolom 1': 'Kop kolom 1',
-  'Kop kolom 2': 'Kop kolom 2',
+  'Kop kolom 1': 'Kop fan kolom 1',
+  'Kop kolom 2': 'Kop fan kolom 2',
   'Lijststijl': 'Liststyl',
   'Notities': 'Notysjes',
   'Tweede bijschrift': 'Twadde byskrift',
@@ -291,7 +291,7 @@ const _dutchSourceFy = {
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'AI-stipe is opsjoneel en stiet standert út. Der wurdt neat ferstjoerd oant do it ynskeakelest en sels in backend kiest. Dizze funksje wurket allinnich yn de desktopferzje.',
   'AI-backend': 'AI-backend',
-  'Lokaal (op dit apparaat)': 'Lokaal (op dit apparaat)',
+  'Lokaal (op dit apparaat)': 'Pleatslik (op dit apparaat)',
   'Zelf gehost (eigen server)': 'Sels host (eigen server)',
   'Cloud (externe dienst)': 'Cloud (eksterne tsjinst)',
   'Modelnaam': 'Modelnamme',
@@ -545,7 +545,7 @@ const _dutchSourceFy = {
   'Rechtsboven': 'Rjochtsboppe',
   'Linksonder': 'Loftsûnder',
   'Rechtsonder': 'Rjochtsûnder',
-  'Footertekst': 'Footer-tekst',
+  'Footertekst': 'Fuottekst',
   'Footerpositie': 'Footer-posysje',
   'Links': 'Lofts',
   'Midden': 'Midden',
@@ -702,7 +702,7 @@ const _dutchSourceAddFy = {
   'Staand': 'Steand',
   'Liggend': 'Lizzend',
   'documenten': 'dokuminten',
-  'posters en boeken': 'posters en boeken',
+  'posters en boeken': 'affysjes en boeken',
   'enveloppen': 'slûven',
   'Afloop voor de drukker (mm)': 'Ôfrin foar de drukker (mm)',
   'Pagina {n} van {m}': 'Side {n} fan {m}',
@@ -714,7 +714,7 @@ const _dutchSourceAddFy = {
   'Rechts (mm)': 'Rjochts (mm)',
   'Smal (860 px)': 'Smel (860 px)',
   'Standaard (1100 px)': 'Standert (1100 px)',
-  'Breed (1400 px)': 'Breed (1400 px)',
+  'Breed (1400 px)': 'Wiid (1400 px)',
   'Volledige breedte': 'Folle breedte',
   'Paginamaat': 'Sidegrutte',
   'Randstijl': 'Rânestyl',
@@ -1282,29 +1282,29 @@ const _dutchSourceAddFy = {
       'Dit liket gjin jildige herstelkaai.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dizze herstelkaai komt út in nijere ferzje fan OciDeck.',
-  'Afbeeldingsrechten': 'Afbeeldingsrechten',
-  'Afbeeldingsrechten controleren…': 'Afbeeldingsrechten controleren…',
-  'Afdoening': 'Afdoening',
-  'Afdoening vastleggen': 'Afdoening vastleggen',
+  'Afbeeldingsrechten': 'Ôfbyldingsrjochten',
+  'Afbeeldingsrechten controleren…': 'Ôfbyldingsrjochten kontrolearje…',
+  'Afdoening': 'Ôfhanneling',
+  'Afdoening vastleggen': 'Ôfhanneling fêstlizze',
   'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
-      'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing',
+      'Bygelyks in faktuer-, lisinsje- of dossierferwizing',
   'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
-      'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.',
+      'Kontrolearret ôfbyldings pleatslik op mooglike auteursrjochtlike risiko’s. Nije repositoryôfbyldings en de folsleine assetpool kinne scand wurde; in behearder hannelet warskôgings ôf. Dit is in sinjalearring, gjin juridysk oardiel, en der wurde gjin ôfbyldings nei tredden stjoerd.',
   'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
-      'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.',
+      'De ôfhanneling koe net bewarre wurde. Scan op \'e nij en besykje it nochris.',
   'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
-      'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.',
-  'Geen openstaande aanwijzingen.': 'Geen openstaande aanwijzingen.',
-  'Geldige rechten aangetoond': 'Geldige rechten aangetoond',
+      'Dit is in technyske sinjalearring, gjin juridysk oardiel. In behearder beoardielet de oanwizings.',
+  'Geen openstaande aanwijzingen.': 'Gjin iepensteande oanwizings.',
+  'Geldige rechten aangetoond': 'Jildige rjochten oantoand',
   'Mogelijke auteursrechtelijke risico’s':
-      'Mogelijke auteursrechtelijke risico’s',
-  'Niet gebruiken': 'Niet gebruiken',
-  'Notitie (optioneel)': 'Notitie (optioneel)',
-  'Onterechte signalering': 'Onterechte signalering',
-  'afbeeldingen vragen om beoordeling': 'afbeeldingen vragen om beoordeling',
+      'Mooglike auteursrjochtlike risiko’s',
+  'Niet gebruiken': 'Net brûke',
+  'Notitie (optioneel)': 'Notysje (opsjoneel)',
+  'Onterechte signalering': 'Unterjochte sinjalearring',
+  'afbeeldingen vragen om beoordeling': 'ôfbyldings freegje om beoardieling',
   'bestanden konden niet veilig worden beoordeeld':
-      'bestanden konden niet veilig worden beoordeeld',
-  'nieuw gescand': 'nieuw gescand',
+      'bestannen koenen net feilich beoardiele wurde',
+  'nieuw gescand': 'nij scand',
   'Realtime samenwerken': 'Realtime gearwurkje',
   'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
@@ -1937,7 +1937,7 @@ const _dutchSourceAddFy = {
       'stiet op in beam-dia mar wurdt nêrens oars brûkt — kepple him oan in matrix, stream of oare dia.',
   'Nieuw verbeteringsproject': 'Nij ferbetteringsprojekt',
   'Kader': 'Kader',
-  'Primaire Y-metriek (Y-01)': 'Primaire Y-metriek (Y-01)',
+  'Primaire Y-metriek (Y-01)': 'Primêre Y-metryk (Y-01)',
   'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
       'Bygelyk: trochrinnendei orderintake yn wurkdagen',
   'Project starten': 'Projekt starte',
@@ -3671,7 +3671,7 @@ const _dutchSourceAddFy = {
   'Maak bullets korter of splits de slide.':
       'Meitsje bullets koarter of split de dia op.',
   'Erg veel woorden in bullets': 'Te folle wurden yn bullets',
-  'Gemiddeld lange bullets': 'Gemiddeld lange bullets',
+  'Gemiddeld lange bullets': 'Trochsneed lange bullets',
   'woorden per bullet': 'wurden de bullet',
   'Maak elke bullet kernachtiger.': 'Meitsje elke bullet bondiger.',
   'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
@@ -3721,7 +3721,7 @@ const _dutchSourceAddFy = {
   'Cockpit': 'Cockpit-dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Doeltiid foar de ôftelling yn de presenter. By it presintearjen fyn ôf te stellen mei de toets K.',
-  'Logo en footer': 'Logo en footer',
+  'Logo en footer': 'Logo en fuottekst',
   'Notities voor tijdens het presenteren': 'Notysjes foar by it presintearjen',
   'Notities weggooien': 'Notysjes fuortsmite',
   'Pagina': 'Side',
@@ -3806,7 +3806,7 @@ const _dutchSourceAddFy = {
   'Syntaxkleuring': 'Syntakskleuring',
   'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
       'Ut = alles yn ien kleur (bgl. grien op swart foar in CRT-skerm).',
-  'Eigen kleur (hex)': 'Eigen kleur (hex)',
+  'Eigen kleur (hex)': 'Kleur nei eigen kar (hex)',
   'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
       'Bygelyks #33FF33 foar in CRT-grien skerm.',
   'Broncode lettertype': 'Boarnekoade lettertype',
@@ -4125,8 +4125,8 @@ const _dutchSourceAddFy = {
   'ernstige probleem(en)': 'earnstige probleem/problemen',
   'De presentatie heeft kwaliteitsproblemen (':
       'De presintaasje hat kwaliteitsproblemen (',
-  'Lange quote (': 'Lange quote (',
-  'Footer-tekst': 'Footer-tekst',
+  'Lange quote (': 'Lang sitaat (',
+  'Footer-tekst': 'Fuottekst',
   'Checklist (niet aangevinkt)': 'Checklist (net oanfinkt)',
   'Checklist (aangevinkt)': 'Checklist (oanfinkt)',
   ': bestand niet gevonden (': ': bestân net fûn (',

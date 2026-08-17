@@ -2667,7 +2667,7 @@ const _dutchSourceAddFi = <String, String>{
   'Bestand kon niet worden gelezen': 'Tiedostoa ei voitu lukea',
   'Aanbevolen': 'Suositeltava',
   'Alleen wat nodig is': 'Vain se, mikä on välttämätöntä',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Kaikki pysyy tässä laitteessa',
   'Als nieuw rapport maken': 'Luo uutena raporttina',
   'Andere map kiezen': 'Valitse toinen kansio',
   'Bekijk importverslag': 'Näytä tuontiraportti',

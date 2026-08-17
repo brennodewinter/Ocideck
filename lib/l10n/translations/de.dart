@@ -1197,7 +1197,7 @@ const _dutchSourceAddDe = {
   'Genereer voortgangsoverzicht': 'Fortschrittsübersicht erzeugen',
   'Geïmplementeerd': 'Umgesetzt',
   'ISO 27001 · Annex A — Organisatorisch (A.5)':
-      'ISO 27001 · Annex A — Organisatorisch (A.5)',
+      'ISO 27001 · Annex A — Organisatorische Maßnahmen (A.5)',
   'Kies een norm': 'Norm auswählen',
   'Managementsysteem': 'Managementsystem',
   'Niet gescoord': 'Nicht bewertet',

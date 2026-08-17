@@ -2678,7 +2678,7 @@ const _dutchSourceAddLt = <String, String>{
   'Bestand kon niet worden gelezen': 'Nepavyko perskaityti failo',
   'Aanbevolen': 'Rekomenduojama',
   'Alleen wat nodig is': 'Tik tai, kas būtina',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Viskas lieka šiame įrenginyje',
   'Als nieuw rapport maken': 'Sukurti kaip naują ataskaitą',
   'Andere map kiezen': 'Pasirinkite kitą aplanką',
   'Bekijk importverslag': 'Peržiūrėti importavimo ataskaitą',

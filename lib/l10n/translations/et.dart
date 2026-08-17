@@ -2657,7 +2657,7 @@ const _dutchSourceAddEt = <String, String>{
   'Bestand kon niet worden gelezen': 'Faili ei saanud lugeda',
   'Aanbevolen': 'Soovitatav',
   'Alleen wat nodig is': 'Ainult seda, mis on vajalik',
-  'Alles blijft op dit apparaat': 'Alles blijft op dit apparaat',
+  'Alles blijft op dit apparaat': 'Kõik jääb sellesse seadmesse',
   'Als nieuw rapport maken': 'Loo uue aruandena',
   'Andere map kiezen': 'Valige teine ​​kaust',
   'Bekijk importverslag': 'Kuva impordiaruanne',

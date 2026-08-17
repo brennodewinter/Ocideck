@@ -2169,7 +2169,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Genereer voortgangsoverzicht': 'Fortschrittsübersicht generiere',
   'Geïmplementeerd': 'Umgsetzt',
   'ISO 27001 · Annex A — Organisatorisch (A.5)':
-      'ISO 27001 · Annex A — Organisatorisch (A.5)',
+      'ISO 27001 · Annex A — Organisatorischi Massnahme (A.5)',
   'Kies een norm': 'Norm uswähle',
   'Managementsysteem': 'Managementsystem',
   'Niet gescoord': 'Nöd bewertet',
