@@ -21,8 +21,9 @@
 - [11. Exportmetadata (niet in `.md`)](#11-exportmetadata-niet-in-md)
 - [12. Redactiemanifest-bestanden (naast een export)](#12-redactie-manifestbestanden-naast-een-export)
 - [13. Aanvaarde bestanden en hun grenzen](#13-geaccepteerde-bestanden-en-hun-grenzen)
+- [14. Documenten (gewone `.md`, geen deck)](#14-documenten-gewone-md-geen-deck)
 
-*(Toegevoegd 2026-07-22: dit document telt ongeveer 2.253 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repository-pagina niet.)*
+*(Toegevoegd 2026-07-22: dit document had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repository-pagina niet. De noot gaf vroeger een regelaantal — ongeveer 2.253 — dat stilletjes was doorgegroeid naar ruwweg 3.280 op 2026-08-16; een getal dat niemand bijwerkt kun je beter weglaten dan verkeerd laten staan.)*
 
 OciDeck slaat presentaties op als **standaard [Marp](https://marp.app/)-Markdown**
 (`.md`). Er is geen eigen binair formaat: een opgeslagen presentatie is *ontworpen*
@@ -618,6 +619,7 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 | Flow (procesverbetering) | `flow` | Opsommingsstappen + `ocideck_template` + `ocideck_layout` |
 | Fasepoort (procesverbetering) | `phase-gate` | Poortchecklist als opsomming |
 | Beheersmaatregelstatus (managementsysteem) | `control-status` | — (een gewone tabel valt terug op `table`) |
+| Gantt (procesverbetering) | `gantt` | — (een gewone tabel valt terug op `table`) |
 | Alleen opsomming | *(geen)* | opsomming aanwezig |
 | Twee afbeeldingen | *(geen)* | twee achtergrondafbeeldingen |
 | Grote afbeelding | *(geen)* | één afbeelding, geen opsomming |
@@ -699,6 +701,17 @@ afbeelding.
 **Titel** (`title`)
 ```markdown
 ![bg 60% opacity:.45](images/background.png)   <!-- optional background -->
+# Title
+## Subtitle
+```
+
+**Titel met beeldkolommen** (`title`, #1405) — één of twee beeldkolommen naast de
+titeltekst, met de eigen Marp-syntaxis `![bg left:W%]` / `![bg right:W%]` (geen
+OciDeck-token). `imagePath` is de linkerkolom, `imagePath2` de rechter. De
+kolombreedte `W` is een percentage (10–40, standaard 25).
+```markdown
+![bg left:25%](images/left.png)
+![bg right:25%](images/right.png)
 # Title
 ## Subtitle
 ```
@@ -3122,3 +3135,337 @@ bestand serveert.
 Een deck dat via een van deze routes binnenkomt, passeert dezelfde
 `MarkdownSafetyScanner`-poort als een lokaal deck; geen ervan is een sluiproute
 eromheen.
+
+---
+
+## 14. Documenten (gewone `.md`, geen deck)
+
+*(Toegevoegd 2026-08-06.)* Naast presentaties bewerkt OciDeck **documenten**: een
+doorlopend Markdown-bestand dat **geen** deck met slides is. Het ontwerp — het
+schijfcontract, wat een rondgang overleeft en wat niet — staat beschreven in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md); deze sectie legt de
+feiten op schijf vast.
+
+### 14.1 Herkenning — de afwezigheid van `marp: true`
+
+Een document op schijf is een **gewoon `.md`** zonder diastructuur. Er is **geen
+nieuwe markering op schijf** die een bestand als dat van OciDeck opeist — geen
+`kind:`-sleutel, geen `ocideck:`-front-matter-sleutel. Het onderscheid is de
+**afwezigheid van `marp: true`**: een `.md` dat de Marp-directive draagt opent als
+deck, een dat dat niet doet opent als document. Zo blijft een gewone README of
+notitie maximaal uitwisselbaar en is een document een bestand dat elk
+Markdown-gereedschap leest zonder iets van OciDeck te weten. Een document mag met
+recht de front matter dragen die de auteur zelf schreef (bijvoorbeeld sleutels van
+Jekyll, Hugo of Obsidian).
+
+**OciDeck verzint geen eigen front-matter-vocabulaire.** Het schrijft wel een
+kleine, gesloten verzameling sleutels als je erom vraagt (§14.5), maar elke sleutel
+daarvan is er een die andere gereedschappen al lezen en waar ze naar handelen:
+`theme:` (Pandoc, Obsidian, GitHub Pages) en, sinds 2026-08-17, `papersize:` en
+`geometry:` (Pandoc, dat ze doorgeeft aan het LaTeX-pakket `geometry`). Datzelfde
+bestand door je eigen Pandoc halen levert je de pagina op die die sleutels
+beschrijven, zonder OciDeck ertussen. Wat ontbreekt — en ontbreken blijft — is een
+sleutel die alleen *binnen* OciDeck iets betekent: er is geen `kind:`, geen
+`ocideck:`-blok en nergens in het formaat een sleutel met het voorvoegsel
+`ocideck_`. Dat is de grens: OciDeck mag zich bij een vocabulaire aansluiten, het
+mag er geen eigen verzinnen en dat uitwisselbaar noemen.
+
+### 14.2 Werkmap
+
+Een document gebruikt **hetzelfde werkmapbegrip als een deck** (§1): afbeeldingen
+in `images/` en grafiekdata in `data/*.json`, **naast** het `.md`. Er is geen
+aparte backend en geen nieuw mapschema. Een ` ```chart `-blok verwijst naar zijn
+cijfers met `source: data/<name>.json`, precies zoals op een slide, en dezelfde
+insluitingswacht geldt — een dataverwijzing die met `../` of een absoluut pad uit
+de projectmap probeert te ontsnappen wordt geweigerd, niet gevolgd.
+
+### 14.3 Byte-getrouwe rondgang
+
+Openen → (niets bewerken) → Opslaan levert een **byte-identiek** bestand op. Anders
+dan het deckpad injecteert het documentpad **geen** eigen front matter, dwingt het
+**geen** `---`-diascheidingen af, bouwt het **geen** `themes/`/`logos/`-steigerwerk
+en past het **niets** toe van de byte-veranderende normalisatie (CRLF→LF,
+NBSP→spatie, het strippen van onzichtbare tekens) die de bodies van deckslides
+ondergaan. Het `.md` dat je opslaat is het byte-getrouwe origineel dat je bewaart,
+back-upt en uiteindelijk opschoont — dezelfde rol die §9 beschrijft voor de
+Markdown van een deck, gehouden aan een strengere regel van geen normalisatie.
+
+Wat het documentpad wél in de front matter kan schrijven is een korte, gesloten
+verzameling sleutels — de **stijl** van het document (`theme:`) en de
+**paginaopmaak** (`papersize:`, `geometry:`) — en elk daarvan alleen als je er
+bewust om vraagt. Elke schrijfactie is opt-in, byte-chirurgisch en laat de rest van
+het bestand met rust (§14.5, §14.8). Een document dat je nooit een stijl geeft en
+waarin je nooit een paginaopmaak vastlegt draagt helemaal geen front matter, dus de
+byte-identiteit hierboven blijft onveranderd gelden.
+
+### 14.4 Export is een afgeleid, geprojecteerd artefact — op een nieuw bestand
+
+Een document exporteren is **niet** het opslaan ervan. Export schrijft een
+**afgeleide, geredigeerde kopie voor een ontvanger** naar een **nieuw** bestand en
+raakt het origineel nooit aan, en valt dus **buiten** de byte-getrouwe garantie van
+§14.3. Er bestaan twee uitvoervormen: een geprojecteerd `.md` (een geredigeerde
+kopie van de platte tekst) en één **doorlopend** zelfstandig HTML-document. Beide
+dragen de privacygeprojecteerde (OciWacht) inhoud in plaats van de ruwe bron, langs
+dezelfde publieksgrens als een deckexport; het gekozen privacyprofiel wordt in de
+bestandsnaam van de export geschreven. Er is geen ingebouwde PDF-schrijver voor een
+document — een PDF maak je door de geëxporteerde HTML vanuit de browser af te
+drukken (zie de [Gebruikershandleiding](USER_GUIDE.md#documents)).
+
+### 14.5 Documentstijl — de front-matter-sleutel `theme:` *(toegevoegd 2026-08-08)*
+
+Een document mag één **stijl** dragen: een sleutel `theme: <profielnaam>` in een
+YAML-front-matter-blok vooraan het gewone `.md`. De naam verwijst naar een
+stijlprofiel (de ingebouwde `LibreKAT`, `Standaard`, `Security`, `Vigilis`, of een
+profiel dat je zelf maakte — dezelfde profielen die een deck gebruikt, §3.2), dat
+een lettertype en vormgeving draagt. Het ziet er zo uit:
+
+```
+---
+theme: LibreKAT
+---
+
+# Report
+…
+```
+
+`theme:` is een van de sleutels die het documentpad schrijft, en hij wordt **alleen
+op verzoek** geschreven (de stijlkiezer in de documentbewerker), nooit automatisch.
+
+*(Gecorrigeerd 2026-08-17: tot dan zei deze alinea dat `theme:` de **enige** sleutel
+was die het documentpad ooit zou schrijven. De paginaopmaak kan nu ook in het
+bestand meereizen (§14.8), dus het is een verzameling, geen enkele sleutel.)* Die
+verzameling is een register in de code en geen gewoonte verspreid over de
+aanroepplekken: `kDocumentOwnedKeys` in
+[`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
+somt precies `theme`, `papersize` en `geometry` op, en de generieke schrijver
+asserteert daartegen, zodat er niet stilletjes een vierde sleutel bij kan glippen.
+Ernaast staat `kDocumentRetiredKeys`, de plek waar een sleutel die OciDeck *niet
+langer* schrijft moet worden vastgelegd — de bedoelde uitgang, zodat een
+teruggetrokken sleutel uit bestaande bestanden kan worden opgeruimd in plaats van er
+voor altijd in te blijven staan. Hij is vandaag leeg, en geen enkel schrijfpad leest
+hem nog; de route is verklaard, nog niet gebouwd. Er is tot nu toe niets
+teruggetrokken, dus er hangt niets van af.
+
+Feiten die op schijf tellen:
+
+- **Het is geen herkenningsmarkering.** Herkenning blijft de *afwezigheid* van
+  `marp: true` (§14.1); een document dat alleen `theme:` draagt opent nog steeds als
+  document, nooit als deck, en de sleutel `theme:` sleept nooit `marp:`/`paginate:`
+  mee.
+- **Byte-chirurgisch.** Een stijl kiezen zet er een minimaal
+  `---`/`theme:`/`---`-blok voor; "Geen" kiezen haalt het weg. Was `theme:` de enige
+  sleutel, dan verdwijnt het hele blok en keert precies de platte body terug;
+  front-matter-sleutels die je zelf schreef (Jekyll, Hugo, Obsidian) en de body
+  blijven letterlijk behouden, en alleen de `theme:`-regel wordt aangeraakt. Een
+  stijl instellen en weer wissen keert terug naar de oorspronkelijke bytes.
+- **Een ontbrekend profiel is geen fout.** Bestaat het genoemde profiel niet
+  (hernoemd, verwijderd, een typefout), dan valt het document terug op de
+  standaard-/appstijl in plaats van te falen.
+- **De stijl reist niet mee bij conversie.** Een document omzetten naar een
+  presentatie (§14.4 / [Gebruikershandleiding](USER_GUIDE.md#documents)) leest de
+  body, niet de front matter, dus de `theme:`-regel vervalt; de export rendert
+  eveneens met het opgeloste profiel in plaats van `theme:` naar de uitvoer te
+  kopiëren.
+
+Het ontwerp — de voorrangsorde van de resolver (afdwingen → `theme:` per document →
+standaard uit de instellingen → projectprofiel) en waarom de schrijfactie
+byte-chirurgisch is — staat in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §12.
+
+### 14.6 Pagina-einde — een thematische scheiding `---` *(toegevoegd 2026-08-08)*
+
+Een `---`-regel in een documentbody is een **pagina-einde**: een gewone thematische
+scheiding uit Markdown, dezelfde constructie die elke Markdown-lezer als een
+horizontale streep rendert. Er is **geen** OciDeck-eigen syntaxis en geen nieuwe
+front-matter-sleutel — een vreemde lezer ziet gewoon een scheidingslijn, en het
+bestand blijft maximaal uitwisselbaar. Op schijf is het een letterlijke `---` in de
+body; de herkenning van het bestand als document op schijf verandert niet (de
+*afwezigheid* van `marp: true`, §14.1). Omdat een document **nooit** op `---` wordt
+gesplitst (anders dan een deck, §3), blijft het einde een byte-schone thematische
+scheiding en veroorzaakt het nooit de streepjes-ontsnapping met een breedteloze
+spatie van het deckpad.
+
+Waar het einde effect heeft is de **export**, niet de byte-indeling:
+
+- De **doorlopende HTML**-export rendert elke `---` als een echte `<hr>`; op het
+  scherm leest dat als een streep, maar drukt de ontvanger het af (of bewaart hij het
+  als PDF), dan begint de inhoud na elk einde op een **nieuw vel** (`.document hr`
+  draagt `page-break-after:always` onder `@media print`).
+- De **LaTeX (`.tex`)**-export vertaalt elke thematische scheiding (`---`, `- - -`,
+  `***`) naar `\newpage`, zodat de gecompileerde PDF daar een verse pagina begint in
+  plaats van een streep te tekenen.
+
+Elk nieuw `H1`-hoofdstuk op een nieuwe pagina laten beginnen kan ook worden
+aangezet **zonder ook maar één einde in het bestand te zetten**: de instelling
+*Nieuw hoofdstuk op een nieuwe pagina* (Instellingen → Algemeen → Documentstijl;
+`AppSettings.documentChapterPageBreak`, standaard uit) *(toegevoegd 2026-08-08)*.
+Net als het `---`-einde is dit puur een export-/drukkeuze en schrijft het **niets**
+naar schijf — het `.md` is onveranderd, of de instelling nu aan of uit staat. Staat
+hij aan, dan draagt de HTML/PDF-export een alleen-voor-druk-regel
+`.document h1{page-break-before:always}` (het eerste hoofdstuk uitgezonderd, zodat de
+export niet met een blanco vel opent) en zet de LaTeX-export een `\newpage` vóór elke
+`\section` behalve de eerste. Het ontwerp staat in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §13 (de instelling in
+§13.5), en de beschrijving voor de auteur staat in de
+[Gebruikershandleiding](USER_GUIDE.md#inserting-a-page-break).
+
+### 14.7 Paginamaat, marges en afloop — de instellingenkant *(toegevoegd 2026-08-16, reikwijdte versmald 2026-08-17)*
+
+> **Koerswijziging, 2026-08-17.** Deze sectie heette eerder *"instellingen, geen
+> bestandsinhoud"* en sloot af met twee gevolgen die ze bewust noemde: **het vel
+> reist niet mee met het bestand**, en **de instellingen zijn appbreed, niet per
+> document**. Beide zijn nu halve waarheden, dus ze worden hier niet stilzwijgend
+> in hun tegendeel herschreven — ze worden voor de goede orde ingetrokken.
+>
+> Wat er stond, en waarom: niets naar het `.md` schrijven was de goedkoopste manier
+> om de byte-getrouwe rondgang van §14.3 heel te houden, en de paginaopmaak zag
+> eruit als een weergavevoorkeur van het soort dat §12.5 in de instellingen houdt.
+>
+> Wat er veranderde: de afloop bewees dat die lezing verkeerd was. Een afloop is
+> geen voorkeur van de lezer — het is een eigenschap van *dit* drukwerk, en een
+> appbrede afloop blijft op het volgende document van toepassing tot iemand eraan
+> denkt hem terug te zetten. Een bestand dat je aan een drukker gaf, of aan een
+> collega op een andere machine, kwam er dan stil op een ander vel uit dan de auteur
+> zag. Dat is de faalwijze die de oude tekst als een bewuste keuze beschreef.
+>
+> Wat nu geldt: de paginaopmaak **mag** in het bestand meereizen, in de
+> Pandoc-sleutels `papersize:` en `geometry:` — zie §14.8, waar de feiten op schijf
+> nu staan. Het is opt-in en wordt alleen op verzoek geschreven, dus de rondgang van
+> §14.3 is nog steeds heel voor wie er niet om vraagt; de instellingen hieronder
+> blijven de terugval voor elk document dat niets zegt.
+
+Het vel waarop een document wordt opgemaakt — zijn **paginamaat** (elk van de 66
+ISO 216-formaten: serie A, B of C, nummer 0 tot en met 10, staand of liggend), zijn
+vier **marges** en de **afloop** voor de drukker — is een applicatie-instelling
+(`AppSettings.documentPageSize` en `AppSettings.documentPageMargins`, waarbij de
+laatste `bleedMm` draagt, standaard `0`), te bereiken onder *Instellingen →
+Algemeen → Pagina-instellingen export*. Uit zichzelf wordt daar niets van naar het
+`.md` geschreven: de instellingen zijn wat geldt voor een document dat niets zegt,
+en een document draagt pas een paginaopmaak zodra je erom vraagt (§14.8). Er is nog
+steeds geen sleutel `page-size:`, `margin:` of `bleed:` — waar een document zijn
+opmaak wél draagt, doet het dat in Pandocs eigen `papersize:`/`geometry:` (§14.1).
+
+Twee dingen volgen daaruit, en ze zijn de reden dat de bestandsroute in §14.8
+bestaat:
+
+- **De instellingen zijn appbreed, niet per document.** Een afloop die voor één
+  drukwerk is gezet blijft gelden voor elk document dat daarna wordt geëxporteerd,
+  tot hij weer op 0 staat. Daarom toont de bewerker een afloop die niet 0 is naast
+  de paginamaat in plaats van erover te zwijgen.
+- **Wat niet in het bestand is vastgelegd, reist er niet mee.** Geef een `.md` dat
+  geen paginaopmaak draagt aan iemand anders, of open het op een andere machine, en
+  het wordt opgemaakt op *diens* instellingen, niet de jouwe.
+
+Waar de instellingen wél landen zijn de gepagineerde uitvoeren. De doorlopende
+HTML-export schrijft ze in één `@page`-regel — `size` (de formaatnaam, of een
+expliciet millimetervel als er een afloop is, omdat een naam een vergroot vel niet
+meer kan beschrijven), `margin` (met de afloop aan elke kant erbij opgeteld, zodat
+de tekstspiegel zijn plek ten opzichte van de snijlijn houdt) en, met een afloop,
+een `bleed`-declaratie voor een engine die CSS Paged Media implementeert. De
+LaTeX-export zet dezelfde cijfers in `geometry` (`paperwidth`/`paperheight` als er
+een afloop is, anders de papiernaam uit `\documentclass`, plus de marges).
+**Snijtekens worden door geen enkel uitvoerpad geschreven**, en OciDeck biedt er
+geen instelling voor: de gedocumenteerde PDF-route is de geëxporteerde HTML
+afdrukken, en geen enkele browser implementeert de CSS-eigenschap `marks`. Een
+ontvanger die een vel met afloop krijgt, hoort het snijformaat buiten het bestand om.
+
+Op het scherm legt de weergave **Pagina's** van de documentbewerker het document op
+deze vellen op, gemeten tegen zijn eigen render. Het is een weergave, geen belofte
+over de export: drie verschillende engines pagineren (de renderer van OciDeck, de
+browser die de HTML afdrukt, LaTeX die de `.tex` compileert) en ze hoeven niet op
+dezelfde plek af te breken. Zie de
+[Gebruikershandleiding](USER_GUIDE.md#page-size-margins-bleed-and-writing-width).
+
+### 14.8 Paginaopmaak in het bestand — `papersize:` en `geometry:` *(toegevoegd 2026-08-17)*
+
+Een document mag het vel dragen waarvoor het bedoeld is. Het doet dat in twee
+sleutels die Pandoc al leest en doorgeeft aan het LaTeX-pakket `geometry`, zodat het
+bestand zijn pagina aan elke gereedschapsketen beschrijft en niet alleen aan OciDeck
+(§14.1). Een gewoon A4-document ziet er zo uit:
+
+```
+---
+papersize: a4
+geometry: top=25mm,bottom=25mm,left=20mm,right=20mm
+---
+
+# Report
+…
+```
+
+**Met een afloop, of in liggende stand, vervalt `papersize:` en dragen expliciete
+millimeters het vel.** Een papier*naam* kan alleen een snijformaat beschrijven; een
+vel dat voor de drukker is vergroot is geen A4 meer, en Pandocs `papersize:` kent
+geen oriëntatie. Daarom wordt hier dezelfde route genomen die de LaTeX-export al
+neemt — het vel gaat als `paperwidth`/`paperheight` in `geometry`. A4 met 3 mm
+afloop:
+
+```
+---
+geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,right=23mm
+---
+```
+
+210 × 297 mm plus 3 mm aan alle vier de kanten is 216 × 303 mm, en de marges worden
+gemeten vanaf de rand van dat vergrote vel, dus 25 mm vanaf de snijlijn is hier
+28 mm. Dit is dezelfde rekensom als `PageMargins.latexMargin` en de LaTeX-preambule,
+en het betekent dat een auteur het gewone `.md` aan de Pandoc van een drukker kan
+geven en het vel krijgt dat de auteur zag.
+
+Feiten die op schijf tellen:
+
+- **Alleen op verzoek geschreven.** De paginamaat-indicator rechtsonder in de
+  visuele bewerker is de bediening: erop klikken vraagt, in een
+  bevestigingsdialoog, of de huidige paginaopmaak in dit document moet worden
+  vastgelegd of uit je instellingen moet komen. Er wordt niets geschreven door een
+  document te openen, te bewerken of op te slaan, en er is geen automatische
+  migratie van bestaande bestanden.
+- **Byte-chirurgisch, net als `theme:`.** Een paginaopmaak vastleggen en er weer
+  uithalen levert de oorspronkelijke bytes op; een sleutel die je er zelf naast
+  schreef (`title:`, Jekyll, Hugo, Obsidian) blijft letterlijk staan, en waren de
+  paginaopmaak-sleutels de enige in het blok, dan verdwijnt het blok zelf en keert
+  de kale body terug (§14.3). Beide sleutels staan in hetzelfde register als
+  `theme:` (§14.5).
+- **De waarden zijn platte, ongequote scalairen.** `geometry` wordt zonder
+  aanhalingstekens geschreven, ook al staan er komma's in: in YAML-blokcontext is
+  een komma een gewoon teken in een platte scalair, en een gequote tekenreeks leest
+  slechter in een bestand dat mensen met de hand openen.
+- **Lezen is inschikkelijk, niet streng.** `papersize: a4` en `papersize: a4paper`
+  worden allebei gelezen, hoofdletterongevoelig, voor de series A, B en C. Een
+  waarde die OciDeck niet herkent is geen fout: hij valt terug op de instelling,
+  net zoals een onbekend `theme:`-profiel doet (§14.5). Uit een `geometry`-waarde
+  leest OciDeck de velden `top`, `bottom`, `left`, `right`, `paperwidth` en
+  `paperheight` die het aantreft en negeert het de rest van het vocabulaire van het
+  `geometry`-pakket; een margeveld dat ontbreekt valt terug op de meegeleverde
+  standaard voor die kant (25/25/20/20 mm), niet op jouw instelling, omdat de
+  waarde die er wél staat wordt opgevat als de beschrijving van de pagina door de
+  auteur.
+- **Maat en marges gelden onafhankelijk van elkaar.** Een document dat alleen
+  `papersize:` draagt houdt de marges uit de instellingen, en een dat alleen
+  `geometry:` draagt houdt de maat uit de instellingen. De voorrang is, per veld,
+  document → instellingen (`effectiveDocumentPageSetup`,
+  [`lib/services/document_style.dart`](../lib/services/document_style.dart)).
+- **De afloop wordt op de terugweg afgeleid.** OciDeck leest een expliciete
+  `paperwidth`/`paperheight` en behandelt, als het vel op beide assen gelijkmatig
+  groter is dan een bekend ISO 216-formaat (met hetzelfde bedrag, tot 20 mm), dat
+  verschil als de afloop en trekt het weer van de marges af, zodat de bewerker
+  "A4 · 25/25/20/20mm · +3mm" kan tonen. Dat is een gemak voor de interface, geen
+  betekenis die in het bestand is opgeslagen: wat in het bestand staat is het
+  effectieve vel, en dat is op zichzelf compleet. Een vel dat met geen enkel
+  ISO-formaat overeenkomt is eenvoudig een vrije maat zonder afloop.
+
+**Een bekend gat, uitgesproken in plaats van gladgestreken.** OciDeck leidt het
+*formaat* alleen af uit `papersize:`. Het leest geen formaat terug uit een
+expliciete `paperwidth`/`paperheight`, dus een document dat liggend of met een
+afloop is vastgelegd reproduceert overal zijn marges (en zijn afloop), maar neemt
+zijn **formaat** over uit de instelling van de ontvangende machine. Open een
+document van A4-plus-3 mm op een machine die op A5 staat en je krijgt A5 plus 3 mm.
+Pandoc, dat de expliciete millimeters leest, heeft er geen last van — dit is het
+eigen leespad van OciDeck. Om dezelfde reden hangt de toestand "deze paginaopmaak
+zit in dit document" van de indicator aan `papersize:`, zodat een liggend document
+of een document met afloop niet als vastgelegd wordt gemarkeerd terwijl het dat wel
+is. Beide zijn geregistreerd; geen van beide verandert wat het bestand zegt.
+
+Het ontwerp — waarom Pandocs vocabulaire in plaats van een eigen voorvoegsel, en
+waarom de afloop als expliciete millimeters gaat — staat in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §15.

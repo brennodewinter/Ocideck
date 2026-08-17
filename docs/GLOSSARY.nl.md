@@ -17,18 +17,18 @@ applicatie-backend; alle verwerking gebeurt lokaal.
 **Deck** — een volledige presentatie: metadata, een geordende lijst van slides, een
 themaprofiel en een TLP-classificatie. Onveranderlijk model (`lib/models/deck.dart`).
 
-**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (31 waarden)
+**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (32 waarden)
 kiest de layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
 `cockpit`, `question`, `timeline`, `scorecard`, `menu` (niet-lineair keuzemenu, #1162), de pentest-layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
 `signOff`), de Procesverbetering-layouts (`matrix`, `canvas`, `tree`,
-`flow`, `phaseGate`) en de Managementsysteem-layout (`controlStatus`). De zeven
+`flow`, `phaseGate`, `gantt`) en de Managementsysteem-layout (`controlStatus`). De zeven
 informatiebeveiligings-layouts blijven verborgen totdat die module is ingeschakeld; `matrix`,
-`canvas`, `tree`, `flow` en `phaseGate` volgen dezelfde auteurspoort voor
+`canvas`, `tree`, `flow`, `phaseGate` en `gantt` volgen dezelfde auteurspoort voor
 Procesverbetering, en `controlStatus` voor de Managementsysteem-module. *(Gecorrigeerd
 2026-07-29: Fase 7 voegt `phaseGate` toe; 2026-08-02: de Managementsysteem-module
-voegt `controlStatus` toe; aantal bewaakt door `test/docs_enum_counts_test.dart`.)*
+voegt `controlStatus` toe; 2026-08-05: `gantt` toegevoegd voor Procesverbetering; aantal bewaakt door `test/docs_enum_counts_test.dart`.)*
 
 **Marp** — het open Markdown-voor-presentaties-formaat dat OciDeck leest en schrijft.
 Decks blijven dicht bij gewone Marp-Markdown, zodat ze samenwerken met andere Marp-
@@ -58,6 +58,30 @@ auteur stelt de drempel per vraag in.
 **Repetitieronde** — één gemeten doorloop door een deck in de presentator: totale tijd
 tegenover een optioneel doel, tijd per slide en elke beantwoorde vraagpoging.
 Alleen voor de sessie; er wordt niets naar schijf of in de `.md` geschreven.
+
+**Snijformaat** — de paginamaat waarop een gedrukt document uitkomt nadat de
+drukker het vel heeft afgesneden: het ISO 216-formaat dat in de instellingen is
+gekozen (A4, B5, C6 …). Wat de lezer in handen heeft. *(Toegevoegd 2026-08-16.)*
+
+**Afloop** (Engels: *bleed*) — de strook waarmee het gedrukte vel aan alle kanten
+groter wordt gemaakt dan het snijformaat, zodat inkt die tot de rand doorloopt
+door de snede heen loopt in plaats van een witte streep achter te laten als de
+snede een haartje misgaat. In OciDeck is het een documentinstelling in
+millimeters (standaard 0) die het vel in de HTML- en LaTeX-export vergroot en de
+tekstspiegel meeschuift; **snijtekens** — de hoeklijnen die een drukker laten
+zien waar het snijformaat ligt — worden door geen enkel uitvoerpad geschreven.
+*(Toegevoegd 2026-08-16.)*
+
+**`papersize:` / `geometry:`** — de twee front-matter-sleutels waarin een document
+zijn eigen paginaopmaak kan meedragen, zodat het vel met het bestand meereist in
+plaats van te komen van de machine die het toevallig opent. Het zijn **Pandocs**
+sleutels, geen vinding van OciDeck: `papersize: a4` noemt het formaat en
+`geometry: top=25mm,…` geeft de marges, en elke Pandoc-run geeft ze rechtstreeks
+door aan het LaTeX-pakket `geometry`. OciDeck schrijft ze alleen op verzoek, via
+de paginamaat-indicator in de documentbewerker. Met een afloop of in liggende
+stand vervalt de naam en wordt het vel als `paperwidth`/`paperheight`
+weggeschreven, omdat een papiernaam geen vergroot of gedraaid vel kan beschrijven.
+Zie [FILE_FORMAT.md](FILE_FORMAT.md) §14.8. *(Toegevoegd 2026-08-17.)*
 
 ## Bestanden & opslag
 

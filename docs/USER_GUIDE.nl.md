@@ -909,6 +909,12 @@ puntkomma-gescheiden), of een markdown-tabel vult het raster vanaf die cel,
 en voegt rijen en kolommen toe waar nodig. Gewone tekst — zelfs een zin met een komma
 erin — plakt nog steeds in slechts die ene cel.
 
+Zolang de tabel nog leeg is biedt de bewerker een **voorzet**: één klik legt de
+kolommen van een actielijst neer (Actie, Eigenaar, Deadline, Status) en zet de
+datummarkering hieronder aan. De knop verdwijnt zodra de tabel iets bevat, zodat hij
+nooit kan overschrijven wat je hebt getypt. Dit vervangt het aparte diatype *Acties en
+besluiten*, dat je die kolommen gaf ten koste van alles wat een tabel verder kan.
+
 Vink **Verlopen datums markeren** aan in *Opties per slide* om elke cel met een
 datum vóór vandaag rood te kleuren. OciDeck berekent dit tegen de dag waarop je presenteert, zodat een
 deck dat drie maanden later terugkomt zijn eigen verlopen deadlines markeert in plaats
@@ -2439,7 +2445,7 @@ onderbreking.
 | Titels en ondertitels; sectiedia's. | Animaties en dia-overgangen — OciDeck heeft geen van beide. |
 | Opsommingslijsten, inclusief hun nestingsniveau. | Vrije plaatsing. Onafhankelijk geplaatste tekstvakken worden samengevoegd in leesvolgorde, en de notitiedia zegt hoeveel het er waren. |
 | Twee tekstkolommen, herkend aan hoe de tekstvakken naast elkaar staan. | Samengevoegde tabelcellen. GFM-tabellen hebben geen spans, dus de cellen worden afgevlakt en de samenvoeging wordt gemeld. |
-| Een of twee afbeeldingen per dia, met hun bijschriften. Identieke afbeeldingen worden één keer opgeslagen. | Audio. Er is geen audiodiatype om het op te zetten, dus de bestandsnaam belandt in de notitie. |
+| Een of twee afbeeldingen per dia, met hun bijschriften, zoals de auteur ze plaatste: een plaatje dat in PowerPoint, Impress of Keynote is gedraaid, gespiegeld of bijgesneden komt zo binnen, omdat de bijsnede en de spiegeling in de pixels zijn gebakken in plaats van te vervallen. Identieke afbeeldingen worden één keer opgeslagen. | Audio. Er is geen audiodiatype om het op te zetten, dus de bestandsnaam belandt in de notitie. |
 | Tabellen, eerste rij als de kop. | Een tabel *én* een grafiek op dezelfde dia: één van de twee per dia, en de notitie zegt welke werd weggelaten. |
 | Grafieken — type, categorieën en numerieke reeksen. | De kleuren en lettertypen van de bron. Een geïmporteerd deck neemt OciDecks eigen styling. |
 | Video (PowerPoint en Keynote), citaten, en tijdlijnen waar de opsommingen lezen als `marker :: gebeurtenis`. | |
@@ -2942,6 +2948,11 @@ gespiegeld) scherm. Opmerkingen:
   toetsen belanden in de presentatie. Klik op het beamerbeeld en `Esc`, de
   pijltjes en de rest blijven werken.
 - Op de beamer klikken zet ook door.
+- Zweven boven een grafiek wordt tussen de twee schermen gespiegeld. Wijs een
+  balk, een lijnpunt of een taartpartje aan — of een legenda-item — en de beamer
+  licht hetzelfde element op en toont zijn tooltip; zweven op de beamer doet
+  hetzelfde op je laptop. Het werkt vanaf welk scherm je ook aanraakt, en naar een
+  andere dia gaan wist het.
 - Op macOS is het "externe" scherm het scherm zonder de menubalk.
 
 ### Een groot diagram inzoomen
@@ -3023,6 +3034,18 @@ Exporteer naar:
 
 - **PDF** en **PPTX** (PPTX bevat sprekersnotities) — weergegeven vanuit de
   slide-renderer in de app.
+- **LaTeX (Beamer)** — een `.tex`-bestand met een Beamer-preambule en één frame per
+  dia. Wiskunde (`$...$` / `$$...$$`) gaat er ongewijzigd doorheen; afbeeldingen
+  worden met een relatief pad aangehaald (houd ze naast de `.tex`). Compileer met
+  `pdflatex` of `xelatex` op een gewone TeX Live-installatie. Alle 32 diatypen
+  hebben een eigen behandelaar: eenvoudige typen krijgen hun eigen Beamer-layout
+  (titel, sectie, opsomming, twee kolommen, afbeelding, citaat, code, tabel);
+  tabelgestuurde typen (checklist, scorekaart, scopematrix,
+  bevindingensamenvatting, ontdekkingen, assets, gantt, beheersmaatregelstatus,
+  verbetermatrix) delen één `tabular`-omzetter; canvas en bevinding gaan door de
+  Markdown-naar-LaTeX-omzetter; grafiek en cockpit tonen hun gegevens als een
+  codelisting; de tijdlijn gebruikt een lijst met markeringen; boom/stroom/fasepoort
+  gebruiken geneste lijsten; video wordt een hyperlink. *(Toegevoegd 2026-08-07.)*
 - **HTML** — één bestand, met de JavaScript (marked, highlight.js, MathJax,
   mermaid), de CSS, het gebundelde EB Garamond-lettertype **en je afbeeldingen** inline,
   en grafieken vooraf weergegeven als inline SVG, zodat codemarkering, wiskunde, grafieken,
@@ -3050,6 +3073,18 @@ Exporteer naar:
   balken en dekkingstellers die je in de app ziet, niet als de gewone tabel waarin ze
   zijn opgeslagen. *Bijgewerkt 2026-07-22: afbeeldingen en die zes diatypen waren vroeger
   de blinde vlekken van de export.*
+
+  **De meeste overlays op de dia blijven weg.** De HTML-export rendert de
+  dia-inhoud, de kleuren van het thema en het logo van het stijlprofiel (in dezelfde
+  hoek en op dezelfde grootte als in de app, op elke dia die het toont), maar niet
+  de rest van de laag die OciDeck *over* elke dia tekent: de voettekst (de tekst en
+  de paginanummers), het diagonale watermerk en het TLP-plaatje per dia. Die
+  resterende laag hoort bij de eigen renderer van de app en niet bij de Markdown,
+  dus hij ontbreekt in de `.html`; de classificatie van het deck reist in plaats
+  daarvan mee als een banner over de bovenkant. De **PDF- en PPTX**-exports houden
+  de voettekst en de paginanummers wél — grijp daarnaar als de ontvanger ze nodig
+  heeft. → [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md#the-web-html-export-leaves-off-the-on-slide-overlays)
+  *(Toegevoegd 2026-08-07, #1330; het logo reist sinds 2026-08-13 ook mee.)*
 - **Draagbaar pakket** (`.ocideck`) — één zip met de Markdown en alle
   assets, om het hele deck aan iemand anders te overhandigen. Een pakket dat deze versie schrijft
   is er een dat het kan heropenen: als de assets samen het boven de 512 MB zouden duwen die de
@@ -3397,7 +3432,11 @@ splitst in twee, een langere in drie of meer, en een lijst waarvan de opsomminge
 passen (maar een paar op volledige grootte) in pagina's van alleen die paar. Paginaovergangen landen op
 groepskoppen, zodat hele **tussenkoppen**-groepen op een pagina bij elkaar blijven in plaats van
 doormidden gesneden te worden. Een **opsommingen + afbeelding**-dia splitsen houdt de afbeelding op
-elke vervolgpagina, zodat alle pagina's overeenkomen en één lettergrootte delen — wissel een
+elke vervolgpagina, zodat alle pagina's overeenkomen en één lettergrootte delen; omdat
+de tekstkolom naast de afbeelding smaller is, maakt de splitsing ook evenredig kleinere
+pagina's (bij 40% afbeeldingsbreedte ongeveer vijf opsommingen in plaats van acht),
+zodat de gedeelde lettergrootte groeit om de kolom te vullen in plaats van te worden
+vastgepind door een overvolle pagina. Wissel een
 vervolg naar een gewone opsommingspagina via de dia**type**kiezer als je dat liever hebt.
 Tweekolomsdia's spreiden beide kolommen over dezelfde set pagina's. Elke pagina van een
 splitsrun toont een kleine, gedimde **`pagina/totaal`**-teller naast zijn titel (`1/3`,
@@ -3428,6 +3467,36 @@ daar is **Dia splitsen** de enige oplossing die overblijft.
 wanneer de uitleg minstens een paar woorden is) houdt het alleen het label op de dia
 en verplaatst het de volledige oorspronkelijke regel naar de sprekersnotities — het punt overleeft waar
 je het nog kunt zeggen, en één keer ongedaan maken brengt het terug.
+
+#### Eén waarschuwing voor een hele splitsrun
+
+**Dia splitsen** spreidt de opsommingen over pagina's, maar maakt ze niet korter. Een
+lijst met lange, prozaïsche opsommingen leest op elke pagina waar hij belandt nog
+steeds als *veel woorden*, *opsommingen die gemiddeld lang zijn*, *een opsomming met
+meerdere zinnen* of *diepe nesting*, en de waarschuwing *lettergrootte onder
+ontwerpgrootte gezakt* reist ook met elke pagina mee. Splitsen verlicht de dichtheid
+die voortkomt uit *hoeveel* opsommingen een pagina delen, niet de lengte van de
+opsommingen zelf — dus zonder ingreep zou het paneel elk van die lengtewaarschuwingen
+op elke pagina van de run herhalen, en het eigen advies van het paneel om te splitsen
+zou de waarschuwingen vermenigvuldigen in plaats van ze weg te nemen.
+
+Daarom vouwt het paneel ze samen. Een lengtegedreven dichtheidswaarschuwing die op
+**twee of meer** pagina's van dezelfde splitsrun terugkomt — hetzelfde soort
+opsommingsdia, aaneengeschakeld als vervolgen — wordt **één keer** vermeld voor de
+hele run, en de regel vermeldt erbij dat hij *geldt voor alle N dia's van deze
+splitsrun*, zodat die ene vermelding niet voor een probleem op één pagina wordt
+aangezien. Wat verder splitsen wél zou verlichten blijft op elke pagina staan: een
+waarschuwing over te *veel* opsommingen, en elke dichtheidsvlag met zwaarte **fout**
+(een pagina boven de harde limiet), want daar is nóg een splitsing wel de juiste zet
+en is de run nog niet klaar. Eén losse treffer blijft ook staan — het samenvouwen
+begint pas zodra een waarschuwing een eigenschap van de run is en niet van één pagina.
+
+Dit gaat alleen over wat het paneel *toont*. De miniatuurplaatjes en de
+plaatjes-popover lezen de volledige analyse, dus elke pagina die een samengevouwen
+waarschuwing draagt toont nog steeds zijn eigen markering; en **Alle problemen
+oplossen** — en dezelfde oplossing tijdens het presenteren — analyseert het deck
+opnieuw vanaf nul, dus die blijft pagina voor pagina handelen. Het samenvouwen van de
+waarschuwingen verandert hoeveel het paneel er opsomt, niet wat het deck bevat.
 
 #### Een dia die door zijn splitsrun omlaag wordt getrokken
 
@@ -4214,7 +4283,21 @@ overleeft, en waarom conversie bewust verliesgevend is — staat beschreven in
   document openen en zonder bewerking opnieuw opslaan levert een byte-identiek
   bestand op. OciDeck voegt geen front-matter toe, dwingt geen dia-scheidingen af
   en past geen eigen normalisatie toe. Dit is de kopie die je bewaart, back-upt en
-  uiteindelijk opschoont.
+  uiteindelijk opschoont. `Ctrl/Cmd + S` en het menu-item *Bestand → Opslaan* slaan
+  een document in **elke stand** op — Visueel net zo goed als Bron — precies zoals ze
+  een presentatie opslaan. Een document dat nog geen bestand heeft, of waarvan het
+  bestand niet meer geschreven kan worden (verplaatst, alleen-lezen, geen rechten),
+  valt terug op *Opslaan als…*, zodat je werk altijd als kopie bewaard blijft in
+  plaats van verloren te gaan. *(Gewijzigd 2026-08-08: opslaan op een documenttabblad
+  deed, het duidelijkst in Visueel, niets, omdat de sneltoets alleen wist hoe je een
+  deck opslaat.)*
+- **Crashherstel geldt ook voor documenten.** Een niet-opgeslagen document dat open
+  stond toen OciDeck onverwacht afsloot, wordt bij de volgende start weer aangeboden,
+  precies als een presentatie. De momentopname is de eigen bron van het document
+  (inclusief eventuele stijl-front-matter) en niets anders; een document dat je al
+  had opgeslagen en sindsdien niet hebt gewijzigd wordt niet bewaard. Net als bij een
+  presentatie is er geen crashherstel in de browserversie — er is geen map om een
+  momentopname naar te schrijven. *(Toegevoegd 2026-08-08.)*
 - Een document heeft een **werkmap** net als een deck: afbeeldingen staan in
   `images/` en grafiekdata in `data/*.json` **naast** het `.md`. Een afbeelding
   die je invoegt vóór de eerste keer opslaan leeft in het geheugen tot je opslaat
@@ -4226,12 +4309,20 @@ overleeft, en waarom conversie bewust verliesgevend is — staat beschreven in
 Een schakelaar boven aan de documentbewerker kiest hoe je werkt. *(De derde
 stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
 
-- **Visueel** toont het gerenderde document — koppen, prosa, tabellen, code,
-  Mermaid-diagrammen, grafieken en afbeeldingen — zoals een lezer het ziet. Op een
-  breed genoeg venster verschijnt ernaast een **overzichtsrail** met de koppen van
-  het document; op een kop klikken scrolt ernaartoe.
+- **Visueel** is een schrijfoppervlak met opgemaakte tekst — je typt rechtstreeks op
+  het document zoals het rendert, met tabellen, grafieken, Mermaid-diagrammen en
+  afbeeldingen als bewerkbare blokken. Op een breed genoeg venster verschijnt ernaast
+  een **overzichtsrail** met de koppen van het document; op een kop klikken scrolt
+  ernaartoe. Bevat het bestand een constructie die de visuele brug niet verliesloos
+  kan rondzetten (ruwe HTML, voetnoten, ontsnapte leestekens), dan sluit Visueel je
+  **niet** buiten: je bewerkt de brontekst daar rechtstreeks verder, met dezelfde
+  opmaak-knoppenbalk, en een korte melding zegt dat dit deel als bron wordt bewerkt.
+  De rijke mogelijkheden blijven binnen bereik — OciDeck biedt ze aan en
+  waarschuwt, in plaats van voor jou te besluiten dat het document alleen-lezen is.
+  *(Gewijzigd 2026-08-08.)*
 - **Bron** zet de ruwe Markdown naast een live gerenderde weergave (gestapeld
-  wanneer het venster te smal is voor twee leesbare kolommen). Elke toetsaanslag
+  wanneer het venster te smal is voor twee leesbare kolommen), waarbij je grafieken
+  en tabellen in de weergave met een dubbelklik bewerkt. Elke toetsaanslag
   loopt meteen door — er is geen aparte "Toepassen"-stap, anders dan de
   deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
 - **Pagina's** legt het document op echte vellen: de
@@ -4255,12 +4346,48 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   stand om te zien hoe het document ongeveer op papier valt en waar een kop
   ongelukkig terechtkomt, niet om op een einde tot op de regel te rekenen.
 
-Een **opmaak-knoppenbalk** (dezelfde als die van de notitiebewerker) staat boven
-de bewerker voor de gewone inline-opmaak. Een **invoeg-palet** voegt de rijkere
-blokken toe als draagbare Markdown: een **grafiek** (een ` ```chart `-fence met de
-data in `data/*.json`), een **tabel** (een GFM-pijptabel), een
-**Mermaid**-diagram of een **afbeelding** (gekopieerd naar `images/`). Elk blijft
-platte, parseerbare tekst zodat het bestand elders blijft openen.
+Een **opmaak-knoppenbalk** voor de gewone inline-opmaak is altijd binnen bereik — de
+knoppenbalk voor opgemaakte tekst in Visueel, de Markdown-knoppenbalk boven de bron in
+Bron én in de bronterugval van Visueel. Een **invoeg-palet** voegt de rijkere blokken
+toe als draagbare Markdown: een **grafiek** (een ` ```chart `-fence met de data in
+`data/*.json`), een **tabel** (een GFM-pijptabel), een **Mermaid**-diagram, een
+**afbeelding** (gekopieerd naar `images/`) of een **pagina-einde** (een thematische
+scheiding `---`). Elk blijft platte, parseerbare tekst zodat het bestand elders blijft
+openen. *(Pagina-einde toegevoegd 2026-08-08 — zie
+[Een pagina-einde invoegen](#een-pagina-einde-invoegen) hieronder.)*
+
+### Een pagina-einde invoegen
+
+*(Toegevoegd 2026-08-08.)* Het invoeg-palet heeft een item **Pagina-einde** dat een
+`---` — een gewone thematische scheiding uit Markdown — op de cursor neerzet. Het
+blijft platte, draagbare tekst: een document blijft in elke Markdown-lezer openen,
+waar `---` als een horizontale streep verschijnt. In de eigen visuele bewerker van
+OciDeck wordt diezelfde `---` als een horizontale lijn getekend, zodat je tijdens het
+schrijven ziet waar het einde zit.
+
+Op het scherm blijft een document **doorlopend** — een pagina-einde hakt het
+schrijfoppervlak niet in pagina's. Waar het effect heeft is de **export en de druk**:
+
+- **HTML** (en de **PDF** die je maakt door die HTML af te drukken) leest doorlopend
+  in een browser, maar zodra je hem echt afdrukt — of *Opslaan als PDF* kiest —
+  dwingt elke `---` de inhoud erna op een **nieuw vel**.
+- **LaTeX (`.tex`)** maakt van elke thematische scheiding een `\newpage`, zodat de
+  gecompileerde PDF daar een verse pagina begint in plaats van een streep te tekenen.
+
+Elke vorm van thematische scheiding die de Markdown-lezer herkent (`---`, `- - -`,
+`***`) telt bij de export als pagina-einde; het palet voegt de gewone `---` in.
+
+Zet je de einden liever **niet** met de hand, dan kun je elk **nieuw hoofdstuk (een
+`H1`-kop) voor je op een nieuwe pagina laten beginnen**. *(Toegevoegd 2026-08-08.)*
+Zet **Nieuw hoofdstuk op een nieuwe pagina** aan onder *Instellingen → Algemeen →
+Documentstijl*. Het staat standaard uit en verandert, net als het `---`-einde, alleen
+wat je exporteert of afdrukt — het document leest op het scherm nog steeds doorlopend
+en de instelling schrijft niets in het bestand. Staat hij aan, dan begint elke
+hoofdstukkop een vers vel als je de HTML afdrukt of *Opslaan als PDF* kiest, en begint
+de LaTeX-export daar een nieuwe pagina; het allereerste hoofdstuk blijft staan waar het
+staat, zodat de export niet met een blanco pagina opent. De twee werken samen: de
+instelling breekt vóór elk hoofdstuk, en elke `---` die je zelf zet breekt waar jij
+hem neerzet.
 
 ### Een document een stijl geven
 
@@ -4342,12 +4469,20 @@ dingen:
 - **Welk formaat** — **Markdown (`.md`)** is een geredigeerde kopie van de platte
   tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand,
   toegankelijk HTML-bestand dat in elke browser opent zonder internet, met zijn
-  tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd.
+  tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd;
+  **LaTeX (`.tex`)** is een LaTeX-`article`-document — wiskunde (`$...$` /
+  `$$...$$`) gaat er ongewijzigd doorheen, en afbeeldingen worden met een relatief
+  pad aangehaald (houd ze naast de `.tex`). Compileer met `pdflatex` of `xelatex`
+  op een gewone TeX Live-installatie. *(Toegevoegd 2026-08-07.)*
 
 Er is geen ingebouwde PDF-knop. Voor een **PDF** open je de geëxporteerde HTML en
 druk je die vanuit je browser af (*Opslaan als PDF*). OciDeck doet geen belofte
 over de toegankelijkheid van een zo gemaakte PDF — dat is het werk van de browser
-— maar de HTML die het exporteert is opgezet om toegankelijk te zijn.
+— maar de HTML die het exporteert is opgezet om toegankelijk te zijn. Een
+[pagina-einde](#een-pagina-einde-invoegen) `---` dat je hebt geplaatst wordt bij die
+drukstap een echt nieuw vel (en een `\newpage` in de LaTeX-export), terwijl de HTML
+op het scherm doorlopend blijft; hetzelfde geldt voor elke hoofdstukkop wanneer
+*Nieuw hoofdstuk op een nieuwe pagina* aanstaat.
 
 Elke export loopt door dezelfde privacyprojectie (OciWacht) als een deck-export,
 zodat wat de deur uit gaat de geredigeerde inhoud is, nooit de rauwe bron.
@@ -4390,7 +4525,8 @@ met de snijlijn erin, zodat je ziet wat er wegvalt.
 Twee dingen om te weten. **Snijtekens zitten er niet in** — geen enkel
 uitvoerpad zet ze, dus biedt OciDeck ook geen schakelaar die drukwerk belooft dat
 niemand levert; zeg je drukker wat het snijformaat is. En de afloop is een
-**app-brede** instelling, geen eigenschap van het document: eenmaal gezet geldt
+**app-brede** instelling, tenzij je hem in het document zelf vastlegt (zie
+hieronder): eenmaal gezet geldt
 hij voor élk volgend document dat je exporteert, tot je hem weer op 0 zet. Om te
 voorkomen dat dat stil gebeurt, staat een afloop die niet 0 is naast de
 paginamaat rechtsonder in de visuele bewerker. *(Toegevoegd 2026-08-16.)*
@@ -4398,9 +4534,66 @@ paginamaat rechtsonder in de visuele bewerker. *(Toegevoegd 2026-08-16.)*
 De **schrijfbreedte** ernaast (*Schrijfbreedte editor*: smal 860 px, standaard
 1100 px, breed 1400 px, of volledige breedte) gaat níet over de export maar over
 je eigen scherm: hoe breed het visuele schrijfoppervlak is. Smal leest rustiger,
-breed benut een groot scherm. Geen van deze instellingen — maat, marges, afloop
-of schrijfbreedte — schrijft iets in je `.md`; het zijn weergave- en
-exportkeuzes, net als de standaard documentstijl.
+breed benut een groot scherm. Het is enkel een weergavekeuze en bereikt je bestand
+nooit.
+
+#### De paginaopmaak met het document laten meereizen
+
+De instellingen hierboven zijn wat geldt voor een document dat niets anders zegt.
+Voor dagelijks werk is dat prima, en ongemakkelijk zodra een document voor een
+bepaald vel *bedoeld* is: geef de `.md` aan een collega wiens instellingen A5 zeggen,
+of aan een drukker, en hij komt op hun formaat uit in plaats van het jouwe. Daarom
+kan een document zijn eigen paginaopmaak dragen. *(Toegevoegd 2026-08-17; tot dan
+werd hier niets van naar het bestand geschreven.)*
+
+De bediening is de maatindicator rechtsonder in het schrijfoppervlak — die waar
+bijvoorbeeld `A4 · 25/25/20/20mm` staat. Je kunt er nu op klikken, en hij vertelt je
+ook **waar de huidige opmaak vandaan komt**: met een speld en een gekleurde rand als
+het document hem zelf draagt, kaal als hij uit je instellingen komt. Klik erop en
+OciDeck vraagt het één keer, in een dialoog, voordat er iets gebeurt: *In dit document
+vastleggen* schrijft de huidige maat en marges in het bestand, en *Uit het document
+halen* haalt ze er weer uit zodat je instellingen weer gelden.
+
+Wat er in je `.md` belandt zijn twee regels gewone front matter:
+
+```
+---
+papersize: a4
+geometry: top=25mm,bottom=25mm,left=20mm,right=20mm
+---
+```
+
+Dat is geen eigen vinding van OciDeck — het zijn de sleutels die **Pandoc** leest,
+zodat iedereen die jouw document door zijn eigen gereedschap haalt dezelfde pagina
+krijgt, zonder OciDeck. Verder wordt er niets aangeraakt: front matter die je zelf
+schreef blijft precies zoals hij was, en de opmaak er weer uithalen brengt het bestand
+terug op de bytes die het daarvoor had. Een document dat je nooit vastlegt houdt
+helemaal geen front matter.
+
+Met een afloop, of op een liggend vel, zien de regels er anders uit — de papier*naam*
+vervalt en het vel wordt in millimeters weggeschreven, omdat "A4" niet waar zou zijn
+voor een vel dat voor de drukker is vergroot, en `papersize:` geen manier heeft om
+"liggend" te zeggen:
+
+```
+---
+geometry: paperwidth=216mm,paperheight=303mm,top=28mm,bottom=28mm,left=23mm,right=23mm
+---
+```
+
+Dat is A4 (210 × 297 mm) met 3 mm aan alle kanten. Opent OciDeck zo'n bestand weer,
+dan herkent het het vergrote vel en toont het als *A4 · +3mm*.
+
+Twee beperkingen om te kennen voordat je erop bouwt. **Alleen wat in het bestand staat
+reist mee** — een document vastleggen legt niet de schrijfbreedte, het
+hoofdstuk-pagina-einde of de stijl vast, en het verandert niets aan documenten die je
+eerder hebt vastgelegd. En **een vastgelegd document met afloop of in liggende stand
+houdt op dit moment wel zijn marges en zijn afloop, maar neemt zijn formaat over van
+de openende machine**: een document van A4-plus-3 mm dat wordt geopend waar de
+instelling A5 zegt, valt op A5 plus 3 mm, en de hoekindicator toont de speld voor die
+documenten niet. Pandoc leest het bestand correct; het is het eigen lezen van OciDeck
+dat hier onvolledig is, en dat staat als open punt vastgelegd in
+[FILE_FORMAT.md](FILE_FORMAT.md) §14.8.
 
 ### Een inhoudsopgave
 
@@ -4472,6 +4665,24 @@ manier weggegooid als de hele-deck-weergave: niet-toegepaste fragmentbewerkingen
 van slide of scope wisselt, en alleen wat je **Apply**t verandert het deck. Gebruikersnotities
 en inkt-annotaties her-ankeren aan de opnieuw geparste slide precies als in de hele-deck-
 modus.
+
+### Visuele Marp-directives
+
+In de Markdown-modus gebruik je ook de standaard Marp-vormgeving waar geen aparte
+visuele bediening voor is. OciDeck rendert de deckbrede front matter `color`,
+`backgroundColor`, `backgroundImage`, `header` en `footer`, en hun lokale vormen per
+slide zoals `<!-- _color: red -->`. Marps `![bg contain blur:2px](image.png)`,
+`<!-- fit -->` na een kop, en veelgebruikte shortcodes zoals `:smile:` werken in het
+voorbeeld, de presentatie en PDF/PPTX. De zelfstandige HTML-export past contain en
+filters toe op het bestaande afbeeldingselement, maar voegt geen aparte, algemene
+Marpit-`![bg]`-layoutmotor toe.
+
+Kop- en voetteksten ondersteunen inline-Markdown. Een Marp-voettekst vervangt de
+tekst van de OciDeck-voettekstoverlay in plaats van ernaast te verschijnen;
+`no-footer` verbergt de overlay nog steeds voor die slide. Emoji worden omgezet naar
+lokale Unicode-tekens, dus deze functie doet geen enkele netwerkoproep. Syntaxis die
+OciDeck niet modelleert blijft ongewijzigd in de Markdown staan en blijft beschikbaar
+om in de bron te bewerken.
 
 ### Zoeken & vervangen
 
