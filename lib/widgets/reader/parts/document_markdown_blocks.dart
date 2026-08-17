@@ -85,6 +85,16 @@ class _ListLine {
   /// Null and `false` mean different things here: "not a checklist at all"
   /// versus "a box that is not ticked".
   final bool? checked;
+
+  /// Hetzelfde item met [more] eraan geplakt — voor een regel die in de bron is
+  /// afgebroken maar bij dit item hoort.
+  _ListLine continued(String more) => _ListLine(
+    text: '$text $more',
+    ordered: ordered,
+    number: number,
+    depth: depth,
+    checked: checked,
+  );
 }
 
 /// Resolved, theme-derived colours and the base text style, computed once so
