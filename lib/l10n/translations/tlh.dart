@@ -265,7 +265,7 @@ const _dutchSourceTlh = {
   'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
       'wa\' SamwI\'ghach: mIw, CVSS mI\', CWE/CVE je QIj, chenqa\'moHmeH mIw, \'ang je qeS.',
   'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
-      'che\'wI\' chevmey: \'ay\' SamwI\'ghachmey \'ugh, nav mIllogh je tlhIntagh potlh.',
+      'che\'wI\' chevmey: \'ay\' SamwI\'ghachmey \'ugh, De\'wI\'ghom je tlhIntagh potlh.',
   'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
       'chov ghItlh, ghob (OWASP WSTG rurbogh) tlha\', chov Dotlh je SamwI\'ghachmey rar.',
   'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
@@ -371,7 +371,7 @@ const _dutchSourceTlh = {
   'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
       'spreadsheet wIv Ctrl/Cmd+V lo\'DI\' pol, pagh Hoch bIQtIq ghItlh. "presenting choHlaH" tlhaw\' \'e\' Dalajchugh, DILtaH choH.',
   'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
-      'Markdown Segh: per, De\' ghItlh, LaTeX mI\' mIw je mermaid nughmeH chelmoH.',
+      'Markdown Segh: per, De\' ghItlh, LaTeX mI\' mIw, mermaid De\'wI\'ghommey je.',
   'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
       'De\' ghItlh \'ay\' Segh Doq \'ang. QIn Ho\' \'e\' wIvmeH, programming Hol yIwIv.',
   'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
@@ -468,7 +468,7 @@ const _dutchSourceTlh = {
   'Achtergrondafbeelding': '\'em mIllogh',
   'Achtergrondafbeelding (optioneel)': '\'em mIllogh (DubwI\')',
   'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
-      'HaSta naQ \'em mIllogh \'oH; mach chuvmo\' laDlaH mu\'mey.',
+      'jIH naQ \'em mIllogh \'oH; mach chuvmo\' laDlaH mu\'mey.',
   'Zoom achtergrond': '\'em mIllogh tunmoH',
   'Zoom afbeelding': 'mIllogh tunmoH',
   'Afbeelding (rechts)': 'mIllogh (nIH)',
@@ -593,7 +593,7 @@ const _dutchSourceTlh = {
       'boch, ghItlh yer, De\'wI\' \'ay\'mey je choH.',
   'Hoofdkleur en bovenbalk': 'wa\'DIch rItlh \'ej Dung \'och',
   'Knoppen en accenten': 'junmey wewmoHwI\' je',
-  'Schermachtergrond': 'HaSta \'em',
+  'Schermachtergrond': 'jIH \'em',
   'Kaarten en dialogen': 'nav ja\' je',
   'Gedempte tekst': 'tam mu\'',
   'Zijpanelen': 'retlh \'och',
@@ -710,8 +710,8 @@ const _dutchSourceTlh = {
   'Slide-overzicht': '\'echletHom Hoch',
   'Slide-overzicht (pijltjes + Enter)': '\'echletHom Hoch (naQ + Enter)',
   'Presenter view (notities, klok)': 'jatlhwI\' legh (ghItlh, tlhup)',
-  'Scherm wisselen (meerdere schermen)': 'HaSta choH (law\' HaSta)',
-  'Zwart · wit scherm': 'qIj · chIS HaSta',
+  'Scherm wisselen (meerdere schermen)': 'jIH choH (law\' jIH)',
+  'Zwart · wit scherm': 'qIj · chIS jIH',
   'Automatische modus aan/uit': 'reH DoH mIw tebHa\'/teb',
   'Herhalen (loop) aan/uit': 'tI\'ang (loop) tebHa\'/teb',
   'Deze legenda': 'HeS vam',
@@ -732,12 +732,12 @@ const _dutchSourceTlh = {
   'Notities voor de ontvanger tijdens een cursus':
       'Qaghmey ghojmoH poH ghItlhmey lo\'wI\'vaD',
   'Mijn notities aan/uit': 'ghItlhmeywIj tebHa\'/teb',
-  'Wissel scherm (S)': 'HaSta choH (S)',
-  'Kon niet van scherm wisselen.': 'HaSta choHlaHbe\'.',
+  'Wissel scherm (S)': 'jIH choH (S)',
+  'Kon niet van scherm wisselen.': 'jIH choHlaHbe\'.',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P nuvpu\' · H HeS · G Hoch · B/W qIj/chIS · R poH · Esc mev',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P nuvpu\' · H HeS · S HaSta · G Hoch · B/W qIj/chIS · R poH · Esc mev',
+      'P nuvpu\' · H HeS · S jIH · G Hoch · B/W qIj/chIS · R poH · Esc mev',
   'pijltjes + Enter of klik om te springen': 'naQ + Enter pagh \'uy vaj Sup',
   'Afsluiten (Escape)': 'mev (Escape)',
   'Sluiten (G of Esc)': 'Som (G pagh Esc)',
@@ -783,7 +783,7 @@ const _dutchSourceTlh = {
   'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
       'OciDeck ghaH EUPL 1.2 chaw\' bIngDaq tlhorghqut lolaltaHghach. bItaghpa\', chaw\' Dalaj net poQ. bIng, De\' polbogh OciDeck jan vamDaq je nuqDaq nItebHa\' Daq je DalaD.',
   'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
-      'togh HoS boSbe\' OciDeck \'ej pagh nuq lammey ngeHbe\'. motlh Hoch jan vam ratlh. Da wIvlaHchugh neH De\' mejlaH jan vam:\n\n•  Nextcloud/WebDAV: Server DamuvchughvaD, pongwIj mu\'tlhegh je polbe\' (mu\'tlhegh QaQ ghewmey velDaq) \'ej cha\'nav DapoSmoHbogh pagh Dapolbogh Serverngeh.\n•  URL vaj poSmoH: OciDeck Daq DaghItlhbogh De\' HotlhwI\' Suqbe\'.\n•  Online media (motlh mev): teblu\'chugh, OciDeck mIlloghmey videomey je DaghItlhpu\' Daqmey pI\'ang.\n•  latlh Sombogh (chaw\' online rur) yIQupmeH poSmoH.',
+      'togh HoS boSbe\' OciDeck \'ej pagh nuq lammey ngeHbe\'. motlh Hoch jan vam ratlh. Da wIvlaHchugh neH De\' mejlaH jan vam:\n\n•  Nextcloud/WebDAV: Server DamuvchughvaD, pongwIj mu\'tlhegh je polbe\' (mu\'tlhegh QaQ ghewmey velDaq) \'ej cha\'nav DapoSmoHbogh pagh Dapolbogh Serverngeh.\n•  URL vaj poSmoH: OciDeck Daq DaghItlhbogh De\' HotlhwI\' Suqbe\'.\n•  Online media (motlh mev): teblu\'chugh, OciDeck mIlloghmey HaStamey je DaghItlhpu\' Daqmey pI\'ang.\n•  latlh Sombogh (chaw\' online rur) yIQupmeH poSmoH.',
   'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
       'OciDeck ghaHmoHlu\' European Union Public Licence v1.2 bIngDaq. bIQochchugh chaw\' vam Dalaj. OciDeck yIlo\', boS, choH, ngoq je EUPL 1.2 chutmey bIngDaq.',
   'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
@@ -858,7 +858,7 @@ const _dutchSourceTlh = {
   'Contrast en leesbaarheid van tekstkleuren':
       'ghItlh rItlhmey pIm \'ej laDlaHghach',
   'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
-      'mIlloghmey seghmey media je \'elpu\'ghach ghItlhmey QIjmey je',
+      'mIlloghmey De\'wI\'ghommey media je \'elpu\'ghach ghItlhmey QIjmey je',
   'Aanwezigheid van gekoppelde mediabestanden':
       'rarpu\' media De\'mey tu\'lu\'',
   'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
@@ -866,9 +866,9 @@ const _dutchSourceTlh = {
   'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
       'segh, \'echletHommey, bIngHom, noHmey ghItlhmey je mIllogh Dungdaq nuqmey, WCAG AA juvlu\' (4,5:1 ghItlhvaD, 3:1 ghItlh tInvaD).',
   'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
-      'Hoch mIllogh, sech, video, QoQ je QIj poQ HaStamey chov QIjmey je.',
+      'Hoch mIllogh, De\'wI\'ghom, HaSta, QoQ je QIj poQ jIH laDwI\'mey chov QIjmey je.',
   'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
-      'mIlloghmey videomey QoQmey je toghmey noHlu\' project ghaj De\' tu\'lu\'ghach.',
+      'mIlloghmey HaStamey QoQmey je toghmey noHlu\' project ghaj De\' tu\'lu\'ghach.',
   'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
       '\'elpu\'ghachmey \'ar tImey je, mu\'mey, \'elqutlu\', tlhoy\' rar \'ej mu\'meymey ghItlhmey tlhoy\'mey ngoqmey je Sar vaj naQ laDlaHchoH.',
   'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
@@ -894,7 +894,7 @@ const _dutchSourceTlh = {
   'Online media staat uit': 'online media mev',
   'Online media toestaan': 'online media chaw\'',
   'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
-      'URL vaj mIlloghmey videomey je \'ej YouTube/Vimeo \'elpu\'meymey ghItlhtaH chaw\'. peghlIj QobHa\'ghachlIj je motlh mev.',
+      'URL vaj mIlloghmey HaStamey je \'ej YouTube/Vimeo \'elpu\'meymey ghItlhtaH chaw\'. peghlIj QobHa\'ghachlIj je motlh mev.',
   'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
       'De\' Daq pagh URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'De\' wIv',
@@ -904,13 +904,13 @@ const _dutchSourceTlh = {
   'Einde (sec)': 'rInghach (lup)',
   'einde': 'rIn',
   'Knip de video op het huidige afspeelpunt':
-      'DAH chu\'ghach DaqDaq video yIpe\'',
+      'DAH chu\'ghach DaqDaq HaSta yIpe\'',
   'Speel de video eerst af in het voorbeeld':
-      'wa\'DIch cha\'meyDaq video yIchu\'',
+      'wa\'DIch cha\'meyDaq HaSta yIchu\'',
   'Knip hier': 'naDev yIpe\'',
   'Online': 'online',
   'Lokaal bestand': 'local De\'',
-  'Geen video': 'video pagh',
+  'Geen video': 'HaSta pagh',
   'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
       'ghItlh per bing mIllogh pIm puS Doch',
   'Herstel': 'lorghmoH',
@@ -983,7 +983,7 @@ const _dutchSourceTlh = {
   'Jouw volgorde': 'mIrlIj',
   'Het juiste antwoord': 'lughbogh jang',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
-      'HaSta buy\' rur mIllogh cha\'lu\' bIng. per jotHa\' pagh pIm poQqu\'DI\' \'echmoH yIlo\'.',
+      'jIH buy\' rur mIllogh cha\'lu\' bIng. per jotHa\' pagh pIm poQqu\'DI\' \'echmoH yIlo\'.',
   'Cockpit-kleurschema': 'Dujqoq rItlh pat',
   'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
       'Dujqoq juvwI\'mey Segh rItlhmey. pongbogh pImmey yIchenmoH; wIvlu\' Segh Hoch Dujqoq \'echletHommeyvaD lo\'.',
@@ -1100,7 +1100,7 @@ const _dutchSourceTlh = {
       'qawmoH: Cmd/Ctrl+V lo\'DI\' spreadsheetlIjvo\' raS naghDaq yIboch, raS naQ yIteb.',
   'Annuleren': 'yImev',
   'Checklist': 'Qu\' HutlhchoH',
-  'Voortgangsgrafiek tonen': 'chavqu\' De\'wI\' \'echlet yI\'ang',
+  'Voortgangsgrafiek tonen': 'chavqu\' De\'wI\'ghom yI\'ang',
   'Toont afgevinkt en niet afgevinkt als percentages.':
       'cham \'ej cham Ha\' vatlhvI\'Daq lu\'ang.',
   'Afgevinkt': 'cham',
@@ -1117,7 +1117,7 @@ const _dutchSourceTlh = {
   'Afgevinkte tekst doorhalen': 'cham mu\' yIchevmoH',
   'Toont een streep door voltooide checklistitems.':
       'chavta\' cham Qu\' chev tlhegh \'ang.',
-  'Na media automatisch doorgaan': 'De\'wI\'ghom retlh nID vIHmoH',
+  'Na media automatisch doorgaan': 'media retlh nID vIHmoH',
   'Opsomming': 'bI\'reSmey',
   'Nummering': 'mI\'moH',
   'Varianten': 'loSDaqmey',
@@ -1777,7 +1777,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'tamwI\' ngeDbe\'chuq cha\'navvam ngeD — ngeDlIjmoHpu\' tammoH.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML browserDaq internet paghbe\'chugh \'ej code blocks, math, mermaid diagrams render. LaTeX (Beamer) pdflatex qo\' xelatex lo\' compile.',
+      'internet Hutlh Hoch browserDaq HTML poSmoH \'ej De\' mob \'ay\', mI\' QeD, \'ej mermaid De\'wI\'ghommey \'ang. LaTeX (Beamer) DachenmoHmeH pdflatex ghap xelatex yIlo\'.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article narmev. mI\' narghchu\'; ngermey lo\'lu\'ta\'vIS nughHom. pdflatex qo\' xelatex lo\' Dalo\'taHvIS chovetlh.',
   'Afbeelding geplakt': 'nagh bej ghop',
@@ -1815,7 +1815,7 @@ const _dutchSourceAddTlh = <String, String>{
       'ngeHmeH ghItlh So\'lu\' chenmoHlu\' HevwI\'vaD. byte-\'ol ghItlh niHlIj DapolmeH, choqwI\' Dalo\'.',
   'Exporteren…': 'ngeH…',
   'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
-      'wa\' HTML teywI\' lI\'laHbogh, internet Hutlh Hoch browserDaq poSbogh, tetlhmey mI\'QeD mermaid HaSta\'mey je tlhej.',
+      'wa\' HTML teywI\' lI\'laHbogh, internet Hutlh Hoch browserDaq poSbogh, tetlhmey mI\'QeD mermaid De\'wI\'ghommey je tlhej.',
   'Het thema en de opmaak per dia (_class).':
       'tema \'echletHom Segh je (_class).',
   'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
@@ -1934,13 +1934,13 @@ const _dutchSourceAddTlh = <String, String>{
   'Maand': 'tera\'',
   'Tijdschaal': 'poH ngogh',
   'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
-      'Gantt mIl chuq nIq. “Auto” wuvchoH mI\'mey Segh.',
+      'Gantt De\'wI\'ghom chuq nIq. “Auto” wuvchoH mI\'mey Segh.',
   'Sectiedelingen': 'naymey chuq',
   'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
       'yIlo\' “## ” bI\'reS De\'vam nay mI\' Degh.',
   'Secties': 'naymey',
   'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
-      'Gantt mIl chuq. romuSDaq Qu\', bI\'reS, poH, ghur, rarmeH De\' je yIghItlh; mIl chuq chenmoHlu\'. “Milestone:” bI\'reS De\'vam nul poH.',
+      'Gantt De\'wI\'ghom. romuSDaq Qu\', bI\'reS, poH, ghur, rarmeH De\' je yIghItlh; De\'wI\'ghom chenmoHlu\'. “Milestone:” bI\'reS De\'vam nul poH.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'yIqIm: chupghach De\'Daq chaq nuqDaq ghuHqoq De\' tu\'lu\'.',
   'Privacy-bevindingen in sessie-data':
@@ -2086,7 +2086,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Voortgang per sectie': '\'ay\' Qap',
   'Nog te doen': 'ratlhtaHbogh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
-      'Qap much Qap HaSta je chu\'moHlu\'pu\'',
+      'Qap much Qap De\'wI\'ghom je chu\'moHlu\'pu\'',
   'Genereer managementreview (9.3)': 'che\'wI\' nuD yIchenmoH (9.3)',
   'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
       'che\'wI\' nuD (ISO chut 9.3) buq\'Ir chellu\', DaH Qap tebbogh.',
@@ -2169,7 +2169,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Dempen': 'wab chu\'Ha\'',
   'Camera aan': 'mIllogh chu\'',
   'Camera uit': 'mIllogh chu\'Ha\'',
-  'Scherm delen': 'HaSta \'ang',
+  'Scherm delen': 'jIH \'ang',
   'Vergadering verlaten': 'qepvo\' yImej',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'tlhoy tIn mIllogh qul; mIllogh chu\' neH boch.',
@@ -2254,7 +2254,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'So\'wI\' \'echlet lo\'lu\'taHvIS SIbI\' cha\'navDaq bovumchuq. motlh chu\'be\'lu\'. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server.',
   'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Matrix homeserver \'echlet Da. vumchuqghach HaSta\'Daq lo\'wI\' yIcher. (Jitsi XMPP je tugh.)',
+      'Matrix homeserver \'echlet Da. vumchuqghach perDaq lo\'wI\' yIcher. (Jitsi XMPP je tugh.)',
   'Chat': 'ja\'chuq',
   'Chat openen': 'ja\'chuq yIpoSmoH',
   'Chat sluiten': 'ja\'chuq yISoQmoH',
@@ -2940,11 +2940,11 @@ const _dutchSourceAddTlh = <String, String>{
   'Dia bevat meerdere audiofragmenten; OciDeck ondersteunt er maar één per dia.':
       'wab law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
   'Dia bevat meerdere grafieken; OciDeck ondersteunt er maar één per dia.':
-      'HaSta law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
+      'De\'wI\'ghom law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
   'Dia bevat meerdere tabellen; OciDeck ondersteunt er maar één per dia.':
       'tabel law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
   'Dia bevat meerdere video\'s; OciDeck ondersteunt er maar één per dia.':
-      'HaSta vIH law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
+      'HaSta law\' ngaS \'echletHom; wa\' neH \'echletHom Sup OciDeck.',
   'Dia {n} overgeslagen': '\'echletHom {n} lIjlu\'',
   'Dia {n}: alleen de afbeelding overgenomen':
       '\'echletHom {n}: mIllogh neH lo\'lu\'',
@@ -2960,9 +2960,9 @@ const _dutchSourceAddTlh = <String, String>{
       'OciDeck-Daq header columns lorlu\'be\'.',
   'IWA-objecten inlezen…': 'IWA Doch laDlu\'…',
   'IWA-structuur gedeeltelijk geparseerd — de vormgeving (thema, kleuren, posities) is niet overgenomen; tekst, slide-volgorde, notities en, waar de structuren herkend werden, tabellen, grafieken en media wel':
-      'IWA qach \'op parslu\' — \'IHtaHghach (tema, rItlh, Daq) lo\'lu\'be\'; mu\'mey, \'echletHom mIw, QIn, \'ej Segh tu\'lu\'DI\', tabelmey, HaSta, media je lo\'lu\'.',
+      'IWA qach \'op parslu\' — \'IHtaHghach (tema, rItlh, Daq) lo\'lu\'be\'; mu\'mey, \'echletHom mIw, QIn, \'ej Segh tu\'lu\'DI\', tabelmey, De\'wI\'ghommey, media je lo\'lu\'.',
   'IWA-structuur niet volledig geparseerd — opmaak, tabellen, grafieken, media en slide-volgorde niet overgenomen':
-      'IWA qach naQbe\' parslu\' — \'IHtaHghach, tabelmey, HaSta, media, \'echletHom mIw je lo\'lu\'be\'',
+      'IWA qach naQbe\' parslu\' — \'IHtaHghach, tabelmey, De\'wI\'ghommey, media, \'echletHom mIw je lo\'lu\'be\'',
   'IWA-tekst salvage…': 'IWA mu\'mey toDlu\'…',
   'Keynote IWA-intern': 'Keynote IWA qoD',
   'Keynote IWA-intern (~{n} dia’s)': 'Keynote IWA qoD (~{n} \'echletHom)',
@@ -2972,24 +2972,24 @@ const _dutchSourceAddTlh = <String, String>{
   'Klaar.': 'rIn.',
   'Koppeling “{tekst}”': 'rar "{tekst}"',
   'Meerdere audio': 'wab law\'',
-  'Meerdere grafieken': 'HaSta law\'',
+  'Meerdere grafieken': 'De\'wI\'ghom law\'',
   'Meerdere headerrijen worden in Markdown niet ondersteund; alleen de eerste rij wordt als tabelheader gebruikt.':
       'Markdown-Daq header ghItlh tlhoQmey law\' lorlu\'be\'; tabel header \'oH wa\'DIch tlhoQ neH.',
   'Meerdere tabellen': 'tabel law\'',
-  'Meerdere video\'s': 'HaSta vIH law\'',
+  'Meerdere video\'s': 'HaSta law\'',
   'Metadata uitlezen…': 'metadata laDlu\'…',
   'Niet overgenomen van dit document': 'vam ghItlh vo\' lo\'lu\'be\'',
   'Niet overgenomen van slide {n}': '\'echletHom {n} vo\' lo\'lu\'be\'',
-  'Ondersteund grafiektype': 'HaSta Segh lo\'laH',
+  'Ondersteund grafiektype': 'De\'wI\'ghom Segh lo\'laH',
   'Samengevoegde cellen': 'muvchuq cellmey',
   'Samengevoegde tabelcellen worden in GFM-tabellen niet ondersteund; de tabel is platgeklapt.':
       'GFM tabelmey-Daq muvchuq tabel cellmey lorlu\'be\'; tabel HemHa\'lu\'.',
   'Scatter x-as': 'scatter x-tlhegh',
   'Scatter-grafiek met aparte x-waardes per serie kan niet volledig worden weergegeven.':
-      'scatter HaSta, tlheghmey Hoch x-mey pImchugh, naQ \'anglu\'laHbe\'.',
+      'scatter De\'wI\'ghom, tlheghmey Hoch x-mey pImchugh, naQ \'anglu\'laHbe\'.',
   'Slides classificeren…': '\'echletHommey boqHa\'lu\'…',
   'Slides reconstrueren…': '\'echletHommey chenqa\'moHlu\'…',
-  'Tabel naast grafiek': 'HaSta retlh tabel',
+  'Tabel naast grafiek': 'De\'wI\'ghom retlh tabel',
   'Voorbeeldafbeelding zoeken…': 'mIllogh nughantlhpu\' SammeH…',
   'Vorm of object': 'Segh ghap Doch',
   'de tekst blijft staan, de verwijzing niet':
@@ -2998,10 +2998,10 @@ const _dutchSourceAddTlh = <String, String>{
   'doel onschadelijk gemaakt; het wees naar {url}':
       'ghob Qaw\'lu\'; {url} \'oS',
   'eerste audio overgenomen': 'wab wa\'DIch lo\'lu\'',
-  'eerste grafiek overgenomen': 'HaSta wa\'DIch lo\'lu\'',
+  'eerste grafiek overgenomen': 'De\'wI\'ghom wa\'DIch lo\'lu\'',
   'eerste rij als header': 'header \'oH wa\'DIch tlhoQ',
   'eerste tabel overgenomen': 'tabel wa\'DIch lo\'lu\'',
-  'eerste video overgenomen': 'HaSta vIH wa\'DIch lo\'lu\'',
+  'eerste video overgenomen': 'HaSta wa\'DIch lo\'lu\'',
   'gedeelde x-as gebruikt': 'x-tlhegh Huvmey lo\'lu\'',
   'niet overgenomen (OciDeck heeft geen audio-slides)':
       'lo\'lu\'be\' (OciDeck wab \'echletHommey ghajbe\')',
@@ -3014,11 +3014,11 @@ const _dutchSourceAddTlh = <String, String>{
   'niet overgenomen (een {type}-dia toont geen losse alineatekst)':
       'lo\'lu\'be\' ({type} \'echletHom paragraph ghItlh \'angbe\')',
   'niet overgenomen (één grafiek of tabel per slide)':
-      'lo\'lu\'be\' (wa\' HaSta ghap tabel \'echletHom)',
+      'lo\'lu\'be\' (wa\' De\'wI\'ghom ghap tabel \'echletHom)',
   'objecten apart overgenomen': 'Doch pa\' pa\' lo\'lu\'',
   'samengevoegd in leesvolgorde': 'laDmeH mIw muvchuqlu\'',
   'tekst, volgorde, notities en herkende tabellen, grafieken en media':
-      'mu\'mey, mIw, QInmey, tu\'lu\'bogh tabelmey, HaSta, media je',
+      'mu\'mey, mIw, QInmey, tu\'lu\'bogh tabelmey, De\'wI\'ghommey, media je',
   '{n} afbeelding': '{n} mIllogh',
   '{n} afbeeldingen': '{n} mIllogh',
   '{n} alinea’s': '{n} mu\'tlheghmey',
@@ -3159,7 +3159,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Deze verhoudingen gaan over de app zelf, niet over je dia\'s.':
       'vam mI\'mey \'oH De\'wI\' \'e\' neH, nIteb \'echletHommeylIj rurbe\'.',
   'Tekst op kaarten en dialogen': 'nav \'ej ja\'chuq ghItlh',
-  'Tekst op de schermachtergrond': 'jIH HaSta ghItlh',
+  'Tekst op de schermachtergrond': 'jIH \'em ghItlh',
   'Tekst en pictogrammen in de zijbalk': '\'em SeHlaw ghItlh \'ej Degh',
   'Titel in de bovenbalk': 'Dung SeHlaw pong',
   'Tekstknoppen en links': 'ghItlh \'uy\'mey \'ej rar',
@@ -3175,7 +3175,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Het bestand kon niet worden opgebouwd of weggeschreven. Controleer of er schijfruimte is en of de exportmap beschrijfbaar is.':
       'De\'wI\' teywI\' chenmoHlaHbe\' ghItlhlaHbe\' je. yIlegh: \'ar Sam\'a\' \'ej ghItlhlu\'laH\'a\' ngeHwI\' raQ.',
   'Het renderen van de dia\'s naar beeld is mislukt. Dit ligt aan een dia, niet aan het bestandsformaat: de HTML-export komt hier niet langs en werkt in dit geval meestal wel.':
-      '\'echletHommey HaSta chenmoHlaHbe\'. wa\' \'echletHom vI\'oy, De\'wI\' teywI\' Segh vI\'oybe\': HTML ngeH naDev jaHbe\' \'ej motlh Qapchu\'.',
+      '\'echletHommey mIllogh chenmoHlaHbe\'. wa\' \'echletHom vI\'oy, De\'wI\' teywI\' Segh vI\'oybe\': HTML ngeH naDev jaHbe\' \'ej motlh Qapchu\'.',
   'Technische melding:': 'QaQbe\'ghach De\':',
   'presentaties': 'cha\'navmey',
   '/Presentaties': '/cha\'navmey',
@@ -3388,12 +3388,12 @@ const _dutchSourceAddTlh = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · \'elmeH nav SQL-injection',
   'https://app.voorbeeld/login': 'https://app.example/login',
-  'Deze afbeelding naar het AI-model sturen?': 'HaSta vam AIvaD DangeH\'a\'?',
-  'De afbeelding gaat ongewijzigd naar': 'HaSta choHbe\'lu\'bogh poQ',
+  'Deze afbeelding naar het AI-model sturen?': 'mIlloghvam AIvaD DangeH\'a\'?',
+  'De afbeelding gaat ongewijzigd naar': 'mIllogh choHbe\'lu\'bogh poQ',
   'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
-      'HaSta qoDDaq pagh So\' OciDeck: qabmey, ghItlh, leghlu\'bogh De\' je ngeHlu\'.',
+      'mIllogh qoDDaq pagh So\' OciDeck: qabmey, ghItlh, leghlu\'bogh De\' je ngeHlu\'.',
   'De beeldcontrole vond hier een of meer herkenbare gezichten.':
-      'naDev qabmey ngu\'lu\'bogh wa\' pagh law\' tu\' HaSta juvwI\'.',
+      'naDev qabmey ngu\'lu\'bogh wa\' pagh law\' tu\' mIllogh juvwI\'.',
   'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
       'ngeHtaHghach retlhDaq cha\' teywI\' chenmoHlu\'. So\'ta\'ghachmey toblaH HevwI\'.',
   'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
@@ -3417,7 +3417,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
       'Hoch \'echletHommey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
   'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
-      'ta\'nom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
+      'De\'wI\'ghom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
   'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
       'browserDaq Qagh vangHa\'ghach tu\'lu\'be\': \'echletvam DaSoQmoHchugh, polbe\'lu\'bogh Qu\' natlh. cha\'nav yIpol.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
@@ -3449,8 +3449,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
       'DaH Hoch mej DuHmey: nagh, HaSta je QoQ \'e\' DawIvpu\' naDev, memory Daq neH yIn. .md nagh Daq polbe\'lu\' — reH poSlu\'chugh natlhbe\'. .ocideck ngaSwI\' Daq lIngmeH so\'wI\' meq yItlhap.',
   'Media verwijderd om privacyredenen': 'So\'wI\' meq luteqta\' media',
-  'Afbeeldingen door AI laten taggen?': 'nagh HaSta pong\'a\' AI?',
-  'afbeeldingen gaan naar': 'HaSta lupoQ',
+  'Afbeeldingen door AI laten taggen?': 'mIlloghmey pong\'a\' AI?',
+  'afbeeldingen gaan naar': 'mIlloghmey lupoQ',
   'een model op dit apparaat': 'jan vam model',
   'Doorgaan': 'taH',
   'Ontdekkingen': 'tu\'bogh Doch',
@@ -3494,7 +3494,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Beknopt': 'ngaj',
   'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
       'lut \'ay\' Hurgh. naDev ngeH naQ tlhej \'echletHom; ngaj ngeHDaq Qaw\'lu\'. legh \'e\' chaw\'bogh nuv qelbe\'.',
-  'Bekijk de foto op ware grootte': 'tlhegh nagh HaSta\'e\' tIn\'a\' bejlu\'',
+  'Bekijk de foto op ware grootte': 'mIllogh\'e\' tIn\'a\' bejlu\'',
   'Azure-sleutel of SAS-token': 'Azure ngaSwI\' ghap SAS nagh',
   'wachtwoordhash': 'peQ mI\'',
   'TOTP-seed (tweede factor)': 'TOTP tIr (cha\'DIch)',
@@ -3781,18 +3781,18 @@ const _dutchSourceAddTlh = <String, String>{
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'wa\'DIch git qawHaq yIcher: DuHmey → waHtaHghach.',
   'Deze afbeelding toont minstens één herkenbaar gezicht.':
-      'qab ngu\'lu\'bogh wa\' puS \'oS nagh beq vam.',
+      'qab ngu\'lu\'bogh wa\' puS \'oS mIlloghvam.',
   'Deze afbeelding toont minstens {count} herkenbare gezichten.':
-      'qab ngu\'lu\'bogh {count} puS \'oS nagh beq vam.',
+      'qab ngu\'lu\'bogh {count} puS \'oS mIlloghvam.',
   'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
-      'nagh beq vam qab ngu\'meH nujDaq Qapbe\'. rap Sovbe\'lu\'. nuv tu\'be\'lu\' \'e\' \'oSbe\'; bejbe\'lu\' \'e\' \'oS.',
+      'mIlloghvam qab ngu\'meH nujDaq Qapbe\'. rap Sovbe\'lu\'. nuv tu\'be\'lu\' \'e\' \'oSbe\'; bejbe\'lu\' \'e\' \'oS.',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
-      'nuv ngu\'lu\'meH nagh beq \'oH nuv De\'\'e\', pongHa\'taHvIS je.',
-  'herkenbaar gezicht op een afbeelding': 'nagh beq qab ngu\'lu\'bogh',
+      'nuv ngu\'lu\'meH mIllogh \'oH nuv De\'\'e\', pongHa\'taHvIS je.',
+  'herkenbaar gezicht op een afbeelding': 'mIllogh qab ngu\'lu\'bogh',
   'Afbeeldingen nakijken op herkenbare gezichten':
-      'nagh beq qab ngu\'lu\'bogh yInej',
+      'mIlloghmey qab ngu\'lu\'bogh yInej',
   'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
-      'nuv ngu\'lu\'meH nagh beq \'oH nuv De\'\'e\', pongHa\'taHvIS je. QaDvam \'oH Qatlh law\' Hoch Qatlh puS. Hoch nagh beq DaH ngu\'lu\'. qab tu\'lu\'\'a\' toghlu\'; \'Iv \'oH toghbe\'lu\', vaj pagh polu\'.',
+      'nuv ngu\'lu\'meH mIllogh \'oH nuv De\'\'e\', pongHa\'taHvIS je. QaDvam \'oH Qatlh law\' Hoch Qatlh puS. Hoch mIllogh DaH ngu\'lu\'. qab tu\'lu\'\'a\' toghlu\'; \'Iv \'oH toghbe\'lu\', vaj pagh polu\'.',
   'Geen meldingen meer op deze slide.': '\'echletHomvamDaq QIn tu\'lu\'be\'.',
   'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
   'Mogelijk persoonsgegevens': 'chaq nuv De\'',
@@ -3856,7 +3856,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Duizendtalscheiding': 'SaD wav',
   'Decimaalteken': 'wav mI\'',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
-      'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
+      'De\'wI\'ghom De\' laDlaHbe\'; De\'wI\'ghommey chIm rutlh:',
   'Bijlage hulpmiddelen invoegen…': 'jan tetlh chel…',
   'Gebruikte hulpmiddelen': 'jan lo\'lu\'pu\'bogh',
   'Hulpmiddel': 'jan',
@@ -4122,7 +4122,7 @@ const _dutchSourceAddTlh = <String, String>{
       'nagh mIllogh — qoDDaq wIleghlaHbe\'',
   'Je eigen gegevens': 'De\'lIj\'e\'',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (example.org) dekt elk adres eronder.':
-      'wa\' Hoch tlhoy\'Daq: ponglIj, jabbI\'ID DaqlIj, jIH mI\'lIj, pagh ghom DaqlIj. naDev tu\'lu\'bogh luja\'lu\'be\' \'ej So\'lu\'be\' — ngeHwI\' \'oH, tu\'lu\'bogh \'oHbe\'. wa\' Daq (example.org) bIng Hoch Daq DevlaH.',
+      'wa\' Hoch tlhoy\'Daq: ponglIj, jabbI\'ID DaqlIj, ghogh HablI\' mI\'lIj, pagh ghom DaqlIj. naDev tu\'lu\'bogh luja\'lu\'be\' \'ej So\'lu\'be\' — ngeHwI\' \'oH, tu\'lu\'bogh \'oHbe\'. wa\' Daq (example.org) bIng Hoch Daq DevlaH.',
   'Bij onafgehandelde persoonsgegevens': 'nuv De\' Sovbe\'lu\'bogh',
   'Export afgebroken vanwege privacybevindingen.':
       'pegh tu\'lu\'mo\' ngeH mev.',
@@ -4204,7 +4204,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Accepteren': 'yIlaj',
   'Accepteren + waarschuwen': 'yIlaj \'ej yIghuHmoH',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
-      'yIlaj: naDev De\' lunge\' \'ej QIn chIl. yIlaj \'ej yIghuHmoH: \'echletHomDaq nuv De\' tu\'lu\' \'e\' \'ang degh. yIteq: De\' tu\'lu\'bogh laDlaHbe\'lu\' HaSta\'Daq je ngeHmeHDaq — Markdown teywI\'lIj ghItlh wa\'DIch polt.',
+      'yIlaj: naDev De\' lunge\' \'ej QIn chIl. yIlaj \'ej yIghuHmoH: \'echletHomDaq nuv De\' tu\'lu\' \'e\' \'ang degh. yIteq: De\' tu\'lu\'bogh laDlaHbe\'lu\' jIHDaq je ngeHmeHDaq — Markdown teywI\'lIj ghItlh wa\'DIch polt.',
   'Alleen melden': 'yIja\' neH',
   'PERSOONSGEGEVENS': 'NUV DE\'',
   'Volg de presentatie': 'cha\'nav yItlha\'',
@@ -4319,13 +4319,13 @@ const _dutchSourceAddTlh = <String, String>{
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
       'WSTG tests chel; ratlhbogh ratlh.',
   'Bewijs': '\'ol',
-  'Screenshot toevoegen': 'HaSta nabmey chel',
-  'Video toevoegen': 'video chel',
+  'Screenshot toevoegen': 'jIH mIllogh chel',
+  'Video toevoegen': 'HaSta chel',
   'Bewerk deze slide': '\'echletHomvam choH',
   'Bewijs verwijderen': '\'ol teq',
   '(nog leeg)': '(chIm)',
   'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      '\'ol \'e\' DachelmeH HaSta nabmey pagh videos yIchel. finding tlha\' \'ol Hoch \'echletHom mojpu\' \'ej export-Daq chel.',
+      '\'ol \'e\' DachelmeH jIH mIlloghmey pagh HaStamey yIchel. finding tlha\' \'ol Hoch \'echletHom mojpu\' \'ej export-Daq chel.',
   'Uitvoering testen conform standaard': 'test poQlu\'bogh',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',
