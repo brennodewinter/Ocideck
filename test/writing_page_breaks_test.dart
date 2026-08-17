@@ -165,10 +165,7 @@ void main() {
       var sum = writingContentTop(editor);
       expect(sum, tops.first);
       for (var i = 0; i < heights.length - 1; i++) {
-        // De hoogtes dragen de afstand die Quill zelf niet tekent
-        // ([kQuillMissingBlockGap]); die hoort er hier weer af, want deze toets
-        // gaat over de plek waar de blokken écht staan.
-        sum += heights[i] - kQuillMissingBlockGap;
+        sum += heights[i];
         expect(
           sum,
           closeTo(tops[i + 1], 0.01),
