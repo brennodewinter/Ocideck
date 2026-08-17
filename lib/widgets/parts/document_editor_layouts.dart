@@ -43,6 +43,17 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
   }
 
+  /// De volledige bron van het document, mét frontmatter.
+  ///
+  /// Het schrijfvlak krijgt `document.body` — de tekst zónder frontmatter, want
+  /// die hoort niet als tekst in de editor. Maar de paginaopmaak stáát in die
+  /// frontmatter, dus wie hem daar zoekt moet de hele bron hebben. Met de body
+  /// vond de app zijn eigen sleutels nooit terug: het speldje verscheen nooit,
+  /// en een document dat A4 had vastgelegd werd alsnog op de ingestelde maat
+  /// getoond. De bytes reisden mee, de app deed er niets mee.
+  String get _pageSetupSource =>
+      ref.watch(documentProvider).document?.source ?? '';
+
   /// De map waarin het document staat, voor het oplossen van een logo in de
   /// kop- of voetband. `null` als het nog nergens is opgeslagen.
   String? get _projectPath {
@@ -59,7 +70,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final settings = ref.watch(settingsProvider);
     // Draagt het document zelf een paginaopmaak, dan wint die van de instelling
     // — zie [effectiveDocumentPageSetup].
-    final setup = effectiveDocumentPageSetup(settings, source);
+    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource);
     return Container(
       color: theme.colorScheme.surfaceContainerHighest,
       child: PagedDocumentView(
@@ -94,7 +105,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     // vel vol is. Die einden worden gemeten aan de blokken die er echt staan —
     // zie [WritingPageBreakOverlay].
     final settings = ref.watch(settingsProvider);
-    final setup = effectiveDocumentPageSetup(settings, source);
+    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource);
     final pageSize = setup.size!;
     final margins = setup.margins!;
     final (_, pageHeightMm) = pageSize.dimensions;
@@ -123,7 +134,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
                 theme,
                 pageSize: pageSize,
                 margins: margins,
-                fromDocument: documentCarriesPageSetup(source),
+                fromDocument: documentCarriesPageSetup(_pageSetupSource),
                 onTap: () => unawaited(
                   _choosePageSetupScope(
                     context,

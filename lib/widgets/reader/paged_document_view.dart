@@ -122,6 +122,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       maxTextWidth: null,
       themeProfile: widget.profile,
       chartTheme: widget.profile,
+      // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
+      // vel met een streep laten openen.
+      hideRules: true,
     );
     if (heights == null) return _measure();
     final offsets = documentPageOffsets(
@@ -196,6 +199,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                 maxTextWidth: null,
                 themeProfile: widget.profile,
                 chartTheme: widget.profile,
+                hideRules: true,
                 blockWrapper: (index, block) => _MeasuredBlock(
                   index: index,
                   onMeasured: (i, height) => _onMeasured(i, height, blockCount),

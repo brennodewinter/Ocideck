@@ -61,6 +61,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.onEditTable,
     this.tableEditController,
     this.tableEditOrdinal = 0,
+    this.hideRules = false,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -135,6 +136,14 @@ class DocumentMarkdownView extends StatelessWidget {
   final TableEditController? tableEditController;
   final int tableEditOrdinal;
 
+  /// Tekent een `---` niet als streep.
+  ///
+  /// In de pagina-weergave *is* een `---` het pagina-einde (FILE_FORMAT.md
+  /// §14.6). Hem dan óók als lijn tekenen levert een vers vel op dat opent met
+  /// een streep boven de kop — een pagina-einde hoort geen inkt achter te
+  /// laten. In de lezer blijft hij gewoon een horizontale lijn.
+  final bool hideRules;
+
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
   /// is identical to the plain document (no wrappers), so non-search callers are
@@ -169,14 +178,23 @@ class DocumentMarkdownView extends StatelessWidget {
     bool chapterBreak = false,
   }) {
     final blocks = _parse(markdown);
-    return <int>{
-      for (var i = 1; i < blocks.length; i++)
-        if (blocks[i].kind == _Kind.rule ||
-            (chapterBreak &&
-                blocks[i].kind == _Kind.heading &&
-                blocks[i].level == 1))
-          i,
-    };
+    final breaks = <int>{};
+    // Wat er sinds de vorige breuk aan échte inhoud staat. Een `---` telt niet
+    // mee: in een paginaweergave ís hij het einde zelf, geen inhoud.
+    var contentSinceBreak = 0;
+    for (var i = 0; i < blocks.length; i++) {
+      final rule = blocks[i].kind == _Kind.rule;
+      final chapter =
+          chapterBreak &&
+          blocks[i].kind == _Kind.heading &&
+          blocks[i].level == 1;
+      if ((rule || chapter) && contentSinceBreak > 0) {
+        breaks.add(i);
+        contentSinceBreak = 0;
+      }
+      if (!rule) contentSinceBreak++;
+    }
+    return breaks;
   }
 
   /// The absolute block index (into the same block list [build] renders) of the
@@ -313,7 +331,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
     _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
-    _Kind.rule => _bounded(_rule(t)),
+    _Kind.rule => hideRules ? const SizedBox.shrink() : _bounded(_rule(t)),
     _Kind.toc => _bounded(_tocPreview(context, t)),
   };
 

@@ -42,6 +42,60 @@ void main() {
     });
   });
 
+  // De beeldkeuring vond deze twee: een document dat mét een `---` begon
+  // opende met een leeg vel (alleen de streep), en op elk vers vel stond de
+  // streep bovenaan afgedrukt.
+  group('een pagina-einde laat geen leeg vel en geen inkt achter', () {
+    test('een --- aan het begin levert geen leeg eerste vel op', () {
+      const markdown = '---\n\n# Hoofdstuk\n\nTekst.\n';
+      expect(
+        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
+        isEmpty,
+        reason: 'er staat vóór die kop niets dat een vel vult',
+      );
+    });
+
+    test('twee streepjes achter elkaar leveren één einde op', () {
+      const markdown = 'Tekst.\n\n---\n\n---\n\nMeer tekst.\n';
+      expect(
+        DocumentMarkdownView.forcedPageBreaks(markdown),
+        hasLength(1),
+        reason: 'de tweede streep breekt een vel af dat nog leeg is',
+      );
+    });
+
+    test('een --- vlak vóór een hoofdstuk breekt maar één keer', () {
+      const markdown = 'Tekst.\n\n---\n\n# Hoofdstuk\n\nMeer.\n';
+      expect(
+        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
+        hasLength(1),
+      );
+    });
+
+    testWidgets('de streep zelf wordt in de pagina-weergave niet getekend', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: PagedDocumentView(
+              markdown: 'Eerste.\n\n---\n\nTweede.\n',
+              pageSize: PageSizeSpec.a4,
+              margins: PageMargins(),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Twee vellen, en geen Divider: het einde is het einde, niet ook een lijn.
+      expect(find.byKey(const Key('document-sheet')).evaluate().length, 2);
+      expect(find.byType(Divider), findsNothing);
+    });
+  });
+
   testWidgets('een --- levert een tweede vel op, hoe kort de tekst ook is', (
     tester,
   ) async {
