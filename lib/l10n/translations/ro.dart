@@ -4425,39 +4425,39 @@ const _dutchSourceAddRo = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contrast prea mic cu fundalul — poate fi ilizibil.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'Conector LibrePlan',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'Conectorul LibrePlan este disponibil doar în versiunea desktop.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'Conectorul LibrePlan este opțional și dezactivat implicit. Nu se preia nimic până când nu îl activați și nu configurați chiar dumneavoastră un server. Doar citire: conectorul nu scrie nimic înapoi în LibrePlan. Parola este stocată în keychain-ul sistemului dumneavoastră de operare, nu în deck.',
+  'Opgeslagen in de sleutelhanger': 'Stocat în keychain',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Doar pentru servere din rețeaua proprie (LAN). Permite HTTP simplu și lasă adresele private să treacă prin NetGuard. Dezactivat: HTTPS obligatoriu.',
+  'Verbinding succesvol.': 'Conexiune reușită.',
+  'Onverwachte fout.': 'Eroare neașteptată.',
+  'Importeren uit LibrePlan': 'Importă din LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Alegeți ce slide-uri doriți să preluați din proiectul LibrePlan. Importul este doar în citire și nu scrie nimic înapoi.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Drum critic (flux)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Se preia din LibrePlan…',
+  'Geen slides gevonden.': 'Nu s-au găsit slide-uri.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Configurați serverul în fila Conector LibrePlan. Cât timp acolo nu este nimic, nu se întâmplă nimic.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Importați un instantaneu de proiect dintr-o instanță LibrePlan ca slide-uri: Gantt, WBS, încărcarea resurselor, pontaj și altele. Doar citire, la cerere — nu iese nimic până când nu configurați un server și nu porniți un import.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Introduceți URL-ul serverului și numele de utilizator.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

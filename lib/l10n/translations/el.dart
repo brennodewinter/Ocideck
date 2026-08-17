@@ -4448,39 +4448,39 @@ const _dutchSourceAddEl = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'Σύνδεσμος LibrePlan',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'Ο σύνδεσμος LibrePlan είναι διαθέσιμος μόνο στην έκδοση για υπολογιστή.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'Ο σύνδεσμος LibrePlan είναι προαιρετικός και απενεργοποιημένος από προεπιλογή. Δεν ανακτάται τίποτα μέχρι να τον ενεργοποιήσετε και να ρυθμίσετε μόνοι σας έναν διακομιστή. Μόνο για ανάγνωση: ο σύνδεσμος δεν γράφει τίποτα πίσω στο LibrePlan. Ο κωδικός αποθηκεύεται στο keychain του λειτουργικού σας, όχι στο deck.',
+  'Opgeslagen in de sleutelhanger': 'Αποθηκεύτηκε στο keychain',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Μόνο για διακομιστές στο δικό σας δίκτυο (LAN). Επιτρέπει απλό HTTP και αφήνει ιδιωτικές διευθύνσεις να περάσουν από το NetGuard. Απενεργοποιημένο: απαιτείται HTTPS.',
+  'Verbinding succesvol.': 'Η σύνδεση πέτυχε.',
+  'Onverwachte fout.': 'Απροσδόκητο σφάλμα.',
+  'Importeren uit LibrePlan': 'Εισαγωγή από LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Επιλέξτε ποιες διαφάνειες θέλετε να ανακτήσετε από το έργο LibrePlan. Η εισαγωγή είναι μόνο για ανάγνωση και δεν γράφει τίποτα πίσω.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Κρίσιμη διαδρομή (ροή)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Ανάκτηση από LibrePlan…',
+  'Geen slides gevonden.': 'Δεν βρέθηκαν διαφάνειες.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Ρυθμίστε τον διακομιστή στην καρτέλα Σύνδεσμος LibrePlan. Όσο εκεί δεν υπάρχει τίποτα, δεν συμβαίνει τίποτα.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Εισαγάγετε ένα στιγμιότυπο έργου από μια εγκατάσταση LibrePlan ως διαφάνειες: Gantt, WBS, φόρτο πόρων, φύλλο χρόνου και άλλα. Μόνο για ανάγνωση, κατόπιν αιτήματος — τίποτα δεν φεύγει προς τα έξω μέχρι να ρυθμίσετε διακομιστή και να ξεκινήσετε εισαγωγή.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Συμπληρώστε το URL του διακομιστή και το όνομα χρήστη.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

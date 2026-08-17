@@ -4379,39 +4379,39 @@ const _dutchSourceAddLv = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'LibrePlan savienotājs',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'LibrePlan savienotājs ir pieejams tikai darbvirsmas versijā.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'LibrePlan savienotājs nav obligāts un pēc noklusējuma ir izslēgts. Nekas netiek ielādēts, kamēr jūs to neieslēdzat un pats neiestatāt serveri. Tikai lasīšanai: savienotājs neko neraksta atpakaļ uz LibrePlan. Parole tiek glabāta operētājsistēmas atslēgu glabātavā, nevis deck.',
+  'Opgeslagen in de sleutelhanger': 'Saglabāts atslēgu glabātavā',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Tikai serveriem savā tīklā (LAN). Atļauj vienkāršu HTTP un laiž privātās adreses cauri NetGuard. Izslēgts: HTTPS obligāts.',
+  'Verbinding succesvol.': 'Savienojums izveidots veiksmīgi.',
+  'Onverwachte fout.': 'Negaidīta kļūda.',
+  'Importeren uit LibrePlan': 'Importēt no LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Izvēlieties, kurus slaidus iegūt no LibrePlan projekta. Imports ir tikai lasīšanai un neko neraksta atpakaļ.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Kritiskais ceļš (plūsma)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Ielāde no LibrePlan…',
+  'Geen slides gevonden.': 'Nav atrasts neviens slaids.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Iestatiet serveri cilnē LibrePlan savienotājs. Kamēr tur nekā nav, nekas nenotiek.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Importējiet projekta momentuzņēmumu no LibrePlan instances kā slaidus: Gantt, WBS, resursu noslodze, darba laika uzskaite un vairāk. Tikai lasīšanai, pēc pieprasījuma — nekas neaiziet ārā, kamēr neiestatāt serveri un nesākat importu.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Ievadiet servera URL un lietotājvārdu.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',

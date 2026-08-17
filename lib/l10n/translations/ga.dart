@@ -4448,39 +4448,39 @@ const _dutchSourceAddGa = <String, String>{
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
-  'LibrePlan-connector': 'LibrePlan-connector',
+  'LibrePlan-connector': 'Nascóir LibrePlan',
   'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
-      'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
+      'Níl an nascóir LibrePlan ar fáil ach sa leagan deisce.',
   'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
-      'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-  'Opgeslagen in de sleutelhanger': 'Opgeslagen in de sleutelhanger',
+      'Tá an nascóir LibrePlan roghnach agus múchta de réir réamhshocraithe. Ní thugtar aon rud anuas go dtí go gcuireann tú ar siúl é agus go gcumraíonn tú freastalaí tú féin. Léamh amháin: ní scríobhann an nascóir aon rud ar ais chuig LibrePlan. Coinnítear an focal faire i keychain do chórais, ní sa deck.',
+  'Opgeslagen in de sleutelhanger': 'Sábháilte sa keychain',
   'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
-      'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
-  'Verbinding succesvol.': 'Verbinding succesvol.',
-  'Onverwachte fout.': 'Onverwachte fout.',
-  'Importeren uit LibrePlan': 'Importeren uit LibrePlan',
+      'Do fhreastalaithe ar do líonra féin (LAN) amháin. Ceadaíonn HTTP simplí agus ligeann seoltaí príobháideacha trí NetGuard. Múchta: HTTPS riachtanach.',
+  'Verbinding succesvol.': 'D\'éirigh leis an gceangal.',
+  'Onverwachte fout.': 'Earráid gan choinne.',
+  'Importeren uit LibrePlan': 'Iompórtáil ó LibrePlan',
   'LibrePlan importeren': 'LibrePlan importeren',
   'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
-      'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
+      'Roghnaigh na sleamhnáin is mian leat a tharraingt ón tionscadal LibrePlan. Tá an t-iompórtáil léamh amháin agus ní scríobhann sé aon rud ar ais.',
   'Gantt-planning': 'Gantt-planning',
   'WBS (hiërarchie)': 'WBS (hiërarchie)',
   'Projectstatus (cockpit)': 'Projectstatus (cockpit)',
   'Milestones (tijdlijn)': 'Milestones (tijdlijn)',
-  'Kritieke pad (flow)': 'Kritieke pad (flow)',
+  'Kritieke pad (flow)': 'Cosán criticiúil (sreabhadh)',
   'Resources (tabel)': 'Resources (tabel)',
   'Timesheet (tabel)': 'Timesheet (tabel)',
   'Resourcebelasting (grafiek)': 'Resourcebelasting (grafiek)',
-  'Ophalen uit LibrePlan…': 'Ophalen uit LibrePlan…',
-  'Geen slides gevonden.': 'Geen slides gevonden.',
+  'Ophalen uit LibrePlan…': 'Á tharraingt ó LibrePlan…',
+  'Geen slides gevonden.': 'Níor aimsíodh aon sleamhnán.',
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import mislukt: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+      'Cumraigh an freastalaí sa chluaisín Nascóir LibrePlan. Fad is nach bhfuil aon rud ann, ní tharlaíonn aon rud.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
-      'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.',
+      'Iompórtáil léargas ar staid tionscadail ó ásc LibrePlan mar sleamhnáin: Gantt, WBS, ualach acmhainní, bileog ama agus tuilleadh. Léamh amháin, ar iarratas — ní théann aon rud amach go dtí go gcumraíonn tú freastalaí agus go dtosaíonn tú iompórtáil.',
   'Vul server-URL en gebruikersnaam in.':
-      'Vul server-URL en gebruikersnaam in.',
+      'Cuir isteach URL an fhreastalaí agus an t-ainm úsáideora.',
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
