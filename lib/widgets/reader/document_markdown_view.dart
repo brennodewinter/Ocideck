@@ -494,8 +494,21 @@ class DocumentMarkdownView extends StatelessWidget {
       // List (bulleted or numbered): consecutive item lines, indent = nesting.
       if (_listItem(line) != null) {
         final items = <_ListLine>[];
-        while (i < lines.length && _listItem(lines[i]) != null) {
-          items.add(_listItem(lines[i])!);
+        while (i < lines.length) {
+          final item = _listItem(lines[i]);
+          if (item != null) {
+            items.add(item);
+            i++;
+            continue;
+          }
+          // Een regel die in de bron is afgebroken hoort nog bij het item
+          // erboven (CommonMark noemt dat een lazy continuation). Zonder deze
+          // tak eindigde de lijst hier en werd de rest van de zin een losse
+          // alinea: zonder bolletje, op de linkermarge, met de lijst in tweeën.
+          // Een lege regel sluit de lijst wél af, en een regel die zelf een
+          // blok begint (kop, streep, citaat, tabel, fence) ook.
+          if (items.isEmpty || !_isParagraphLine(lines[i])) break;
+          items[items.length - 1] = items.last.continued(lines[i].trim());
           i++;
         }
         blocks.add(_Block(_Kind.list, items: items));
