@@ -1409,6 +1409,33 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **een poort op vertalingen die de Nederlandse bron laten staan.** De
+  vertaalwachters keken alle drie langs hetzelfde gat. `make l10n-check` vraagt
+  of er een waarde bij de sleutel staat, `check-l10n-parity` of de sleutel in
+  alle 32 talen staat, en de onvertaald-wachter of die waarde niet gewoon de
+  **Engelse** zin is. Niemand vroeg of de waarde de **Nederlandse bron** is —
+  en dat is precies hoe een Nederlandse zin ongemerkt als vertaling kon
+  doorgaan. Bij #1524 bleek het Klingon 44 van zulke sleutels te dragen, met
+  daarin een compleet LibrePlan-connectorblok van hele zinnen ("Kies welke
+  slides u uit het LibrePlan-project wilt halen.", "Verbinding succesvol.",
+  "Geen slides gevonden."). Het bleek allerminst tot die ene taal beperkt:
+  datzelfde blok van twaalf sleutels staat onvertaald in dertig talen, en in
+  totaal gaat het om 394 regels verspreid over dertig talen. `make
+  check-l10n-passthrough` meldt ze voortaan, in twee families: de
+  `d()`-brontabellen (sleutel gelijk aan waarde) en de `t()`-tabel (waarde
+  gelijk aan de Nederlandse waarde bij dezelfde sleutel). Alleen vanaf drie
+  woorden, dezelfde drempel en dezelfde eerlijke prijs als de zusterwachter op
+  het Engels: losse woorden zijn massaal identiek zonder dat er iets mis is
+  (`Mermaid`, `Gantt`, `Audio`, `OK`), dus een onvertaalde bron van één of twee
+  woorden glipt erdoor. De uitzonderingen gaan per **sleutel** en niet per taal
+  — "tlh mag dit" dekt de volgende fout in die taal toe, terwijl "in deze
+  bronzin valt niets te vertalen" waar blijft ongeacht wie hem opent. Er staan
+  er veertien in, alle veertien eigennamen, vaktermen of leenuitdrukkingen
+  (`Access key ID`, `Sprint review / demo`, `P {pitch}  B {bank}`). De poort
+  draait in `check-full` met een ratchet en niet in `check`: het oordeel is een
+  tekstheuristiek en hij vindt er bij invoering 394, dus zonder basislijn zou
+  hij meteen rood staan. Nul is de bedoeling; het opruimen volgt in een aparte
+  ronde. (#1526)
 - **de taaltabellen worden nu ónderling vergeleken.** Twee vertaalpoorten
   redeneerden allebei vanuit het gebruik in `lib/`: `l10n-check` eist een
   vertaling voor elke `d('…')` die daar staat, en de wezenpoort vraagt of een
