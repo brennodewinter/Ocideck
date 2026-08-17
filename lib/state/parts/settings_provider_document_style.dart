@@ -103,6 +103,34 @@ double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
       final width => width,
     };
 
+/// Alle documentmodus-instellingen zoals ze op schijf staan, in één keer.
+///
+/// Het lezen hoort in dezelfde `part` als het schrijven: ze delen de sleutels
+/// en de standaardwaarden, en zo blijft het lezen buiten het regelplafond van
+/// [SettingsNotifier]. Spiegelt [_loadCockpitSettings] in het hoofdbestand.
+({
+  String? defaultStyle,
+  bool styleEnforced,
+  bool chapterPageBreak,
+  bool cropMarks,
+  double? editorMaxWidth,
+  PageSizeSpec pageSize,
+  PageMargins pageMargins,
+})
+_readDocumentSettings(SharedPreferences prefs) => (
+  defaultStyle: prefs.getString('documentDefaultStyle'),
+  styleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
+  chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? false,
+  cropMarks: prefs.getBool('documentCropMarks') ?? false,
+  editorMaxWidth: _readDocumentEditorMaxWidth(prefs),
+  pageSize:
+      PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
+      PageSizeSpec.a4,
+  pageMargins:
+      PageMargins.fromId(prefs.getString('documentPageMargins')) ??
+      const PageMargins(),
+);
+
 /// Documentmodus: stel de paginamaat voor export in (ISO-216). Feature 3.
 Future<void> _applyDocumentPageSize(
   SettingsNotifier notifier,

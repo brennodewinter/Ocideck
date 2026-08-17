@@ -242,6 +242,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final selectedAppearance =
         prefs.getString('selectedAppAppearanceProfileName') ?? 'Europa';
     final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
+    final document = _readDocumentSettings(prefs);
     final ai = _readAiSettings(prefs);
     final matrix = _readMatrixAccount(prefs);
     final libreplan = _readLibreplanSettings(prefs);
@@ -264,18 +265,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
           : 'Europa',
-      documentDefaultStyle: prefs.getString('documentDefaultStyle'),
-      documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
-      documentChapterPageBreak:
-          prefs.getBool('documentChapterPageBreak') ?? false,
-      documentCropMarks: prefs.getBool('documentCropMarks') ?? false,
-      documentEditorMaxWidth: _readDocumentEditorMaxWidth(prefs),
-      documentPageSize:
-          PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
-          PageSizeSpec.a4,
-      documentPageMargins:
-          PageMargins.fromId(prefs.getString('documentPageMargins')) ??
-          const PageMargins(),
+      documentDefaultStyle: document.defaultStyle,
+      documentStyleEnforced: document.styleEnforced,
+      documentChapterPageBreak: document.chapterPageBreak,
+      documentCropMarks: document.cropMarks,
+      documentEditorMaxWidth: document.editorMaxWidth,
+      documentPageSize: document.pageSize,
+      documentPageMargins: document.pageMargins,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -551,7 +547,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   Future<void> setDocumentChapterPageBreak(bool enabled) =>
       _applyDocumentChapterPageBreak(this, enabled);
 
-  /// Snijtekens rond het snijformaat in de LaTeX/PDF-export.
   Future<void> setDocumentCropMarks(bool enabled) =>
       _applyDocumentCropMarks(this, enabled);
 
