@@ -82,8 +82,6 @@ const _dutchSourcePt = {
   'Handtekening tekenen': 'Desenhar assinatura',
   'Teken je handtekening in het vak hieronder.':
       'Desenhe a sua assinatura na caixa abaixo.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Um pacote de dados é um .zip com os dados de referência deste módulo. É primeiro verificado em relação à impressão digital incorporada na aplicação; só é aceite um pacote que corresponda a esta versão da aplicação.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Barras horizontais',
@@ -192,7 +190,6 @@ const _dutchSourcePt = {
       'As imagens e a mídia são compartilhadas pelas apresentações na mesma pasta. O nome exato você escolhe já na janela do sistema.',
   'Alle bibliotheken': 'Todas as bibliotecas',
   'Andere map…': 'Outra pasta…',
-  'Bibliotheek verwijderen': 'Remover biblioteca',
   'Bibliotheken': 'Bibliotecas',
   'Geen bibliotheek': 'Sem biblioteca',
   'Geen presentaties (.md) gevonden.': 'Nenhuma apresentação (.md) encontrada.',
@@ -204,10 +201,6 @@ const _dutchSourcePt = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Escolha em qual biblioteca a apresentação ficará.',
   'Map toevoegen': 'Adicionar pasta',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Pastas onde você guarda e pesquisa suas apresentações. Dê a cada uma um nome próprio para distingui-las. Todas as bibliotecas são pesquisadas ao abrir e na biblioteca de imagens.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Ainda sem biblioteca — adicione uma pasta.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Ainda sem biblioteca. Adicione uma nas Configurações ou escolha acima uma pasta para pesquisar.',
   'Presentatie opslaan': 'Salvar apresentação',
@@ -289,22 +282,11 @@ const _dutchSourcePt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'A declaração de veracidade com relator, certificação, assinatura e selagem.',
   'Uitbreidingen': 'Extensões',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Módulos opcionais. Desativados por predefinição; não acrescentam nada à aplicação base até os ativar.',
   'Gegevens opschonen': 'Limpar dados',
   'Gegevens lokaal beschikbaar': 'Dados disponíveis localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Conceda primeiro o consentimento para o tráfego de saída em Licença e privacidade.',
   'Op het web nog niet beschikbaar': 'Ainda não disponível na web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nenhuma fonte acessível — não foi possível obter os dados de referência em lado nenhum. Tente novamente ou importe o pacote manualmente.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Os dados obtidos não correspondiam à impressão digital esperada e foram recusados por precaução.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'O pacote de dados estava danificado ou inválido e foi, por isso, recusado.',
-  'Gegevenspakket kiezen': 'Escolher pacote de dados',
-  'Kon het gekozen bestand niet lezen.':
-      'Não foi possível ler o ficheiro escolhido.',
   'Nog niet opgehaald': 'Ainda não obtido',
   'AI-assistentie': 'Assistência de IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,22 +303,15 @@ const _dutchSourcePt = {
       'Um serviço na nuvem requer primeiro o seu consentimento de privacidade em "Licença e privacidade" e não funciona na versão web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Compreendo que os dados são enviados para este serviço externo',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Assistência de IA (desativada por padrão): se escolher um backend auto-hospedado ou na nuvem, os textos ou imagens que manda processar são enviados para esse endereço. Um modelo de IA local neste dispositivo não envia nada.',
   'Zoek een slidetype': 'Procurar um tipo de slide',
   'Alfabetisch sorteren': 'Ordenar alfabeticamente',
   'Algemeen': 'Geral',
   'Informatieveiligheid': 'Segurança da informação',
   'Alle': 'Todos',
-  'Pentestrapportage (ontwerp)': 'Relatório de pentest (design)',
-  'AI-assistentie (ontwerp)': 'Assistência de IA (design)',
-  'Agentisch bouwplan (ontwerp)': 'Plano de construção agêntico (design)',
-  'Bijsnijden': 'Recortar',
   'Linksom': 'Girar à esquerda',
   'Rechtsom': 'Girar à direita',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Arraste a imagem para escolher que parte permanece visível.',
-  'Git-opslag (ontwerp)': 'Armazenamento Git (design)',
   'Zoek in documentatie…': 'Procurar na documentação…',
   'Geen documenten gevonden': 'Nenhum documento encontrado',
   'Alleen afspelen (vergrendeld)': 'Apenas reprodução (bloqueado)',
@@ -350,12 +325,8 @@ const _dutchSourcePt = {
   'Techniek': 'Técnica',
   'Licentie en naleving': 'Licença e conformidade',
   'Architectuur': 'Arquitetura',
-  'Bouwinstructies': 'Instruções de compilação',
-  'Kwaliteitscontroles': 'Controlos de qualidade',
-  'Broncodekaart': 'Mapa do código-fonte',
   'Licentienaleving': 'Conformidade de licenças',
   'Softwarestuklijst (SBOM)': 'Lista de materiais de software (SBOM)',
-  'Samenwerking (ontwerp)': 'Colaboração (design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Proteger com uma palavra-passe (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -436,10 +407,6 @@ const _dutchSourcePt = {
   'Instelling opslaan is mislukt.': 'Não foi possível guardar a definição.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: a versão web só pode obter de servidores que o permitam (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Os pacotes (.ocideck) ainda não são suportados na versão web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Na versão web só podem ser abertas apresentações .md.',
   'Geen': 'Nenhum',
   'Nieuw': 'Novo',
   'Verwijderen': 'Eliminar',
@@ -528,10 +495,8 @@ const _dutchSourcePt = {
   'Audio bij deze slide': 'Áudio para este slide',
   'Audio automatisch afspelen': 'Reproduzir áudio automaticamente',
   'Audio verwijderen': 'Remover áudio',
-  'Geen audio gekozen': 'Nenhum áudio selecionado',
   'Geen audiobestand gekozen': 'Nenhum ficheiro de áudio selecionado',
   'Video automatisch afspelen': 'Reproduzir vídeo automaticamente',
-  'Geen video gekozen': 'Nenhum vídeo selecionado',
   'Kiezen': 'Escolher',
   'Uit bibliotheek…': 'Da biblioteca…',
   'Van computer…': 'Do computador…',
@@ -563,7 +528,6 @@ const _dutchSourcePt = {
   'Pakket importeren': 'Importar pacote',
   'Pakket exporteren': 'Exportar pacote',
   'Map met presentaties kiezen': 'Escolher pasta de apresentações',
-  'Standaard map voor presentaties': 'Pasta predefinida de apresentações',
   'Map voor exports': 'Pasta de exportações',
   'Logo kiezen': 'Escolher logótipo',
   'Kies een afbeelding': 'Escolher uma imagem',
@@ -576,8 +540,6 @@ const _dutchSourcePt = {
   'Map kiezen': 'Escolher pasta',
   'Kies een map met presentaties om te beginnen.':
       'Escolha uma pasta com apresentações para começar.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Não foram encontradas apresentações (.md) nesta pasta.',
   'Geen presentaties gevonden voor': 'Nenhuma apresentação encontrada para',
   'meer treffer(s)': 'resultado(s) a mais',
   'Slide zoeken': 'Localizar slide',
@@ -599,7 +561,6 @@ const _dutchSourcePt = {
       'Escreva termos de pesquisa para encontrar slides em todas as suas apresentações.',
   'toegevoegd': 'adicionado',
   'Eerste': 'Primeiros',
-  'treffers — verfijn je zoekopdracht': 'resultados — refine a sua pesquisa',
   'treffer(s)': 'resultado(s)',
   'slide': 'slide',
   'Zoeken en vervangen': 'Localizar e substituir',
@@ -658,7 +619,6 @@ const _dutchSourcePt = {
   'Tekst op zijpanelen': 'Texto nos painéis laterais',
   'Voorbeeldtekst': 'Texto de exemplo',
   'Knop': 'Botão',
-  'Profielnaam': 'Nome do perfil',
   'Naam van het stijlprofiel': 'Nome do perfil de estilo',
   'Stijlprofiel': 'Perfil de estilo',
   'Nieuw profiel': 'Novo perfil',
@@ -722,17 +682,10 @@ const _dutchSourcePt = {
   'TYPE': 'TIPO',
   'STIJL': 'ESTILO',
   'Terug naar standaardstijl': 'Voltar ao estilo predefinido',
-  'Automatisch doorgaan na': 'Avançar automaticamente após',
-  'Logo tonen op deze slide': 'Mostrar logótipo neste slide',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabela editável durante a apresentação',
-  'Footer tonen op deze slide': 'Mostrar rodapé neste slide',
   'Sprekersnotities...': 'Notas do orador...',
   'Sprekersnotities': 'Notas do orador',
   'Notities voor tijdens het presenteren':
       'Notas para usar durante a apresentação',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Modo Markdown — edite a apresentação completa como Markdown do Marp',
   'Toepassen': 'Aplicar',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Não foi possível processar o Markdown. Verifique a sintaxe.',
@@ -757,8 +710,6 @@ const _dutchSourcePt = {
   'Geen resultaten voor': 'Sem resultados para',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ajuste o termo de pesquisa ou adicione uma descrição.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Use "Procurar" para escolher imagens de qualquer localização.',
   'Selecteer een\nafbeelding': 'Selecione uma\nimagem',
   'Gekopieerd': 'Copiado',
   'Afbeelding verwijderen?': 'Eliminar imagem?',
@@ -775,8 +726,6 @@ const _dutchSourcePt = {
   'spatie': 'espaço',
   'klik': 'clique',
   'cijfers': 'números',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Clique ou prima ? / H / Esc para fechar',
   'Klik of druk op H / Esc om te sluiten':
       'Clique ou prima H / Esc para fechar',
   'Naar slidenummer': 'Ir para o número do slide',
@@ -787,20 +736,10 @@ const _dutchSourcePt = {
   'Presenter view (notities, klok)': 'Vista do apresentador (notas, relógio)',
   'Scherm wisselen (meerdere schermen)': 'Mudar de ecrã (vários ecrãs)',
   'Zwart · wit scherm': 'Ecrã preto · branco',
-  'Verstreken tijd resetten': 'Repor tempo decorrido',
   'Automatische modus aan/uit': 'Modo automático ligado/desligado',
   'Herhalen (loop) aan/uit': 'Repetir (ciclo) ligado/desligado',
-  'Na audio automatisch doorgaan': 'Avançar automaticamente após o áudio',
-  'Dit overzicht': 'Esta vista geral',
   'Deze legenda': 'Esta legenda',
   'Terug / afsluiten': 'Voltar / sair',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manual (A)',
-  'Herhalen (L)': 'Repetir (L)',
-  'Na audio (M)': 'Após áudio (M)',
-  'Sneltoetsen (?)': 'Atalhos de teclado (?)',
-  'Slide-overzicht (G)': 'Vista geral dos slides (G)',
-  'Presenter view (P)': 'Vista do apresentador (P)',
   'Tijd resetten (R)': 'Repor cronómetro (R)',
   'HUIDIGE SLIDE': 'SLIDE ATUAL',
   'VOLGENDE': 'SEGUINTE',
@@ -816,15 +755,9 @@ const _dutchSourcePt = {
   'Notities weggooien': 'Descartar notas',
   'Notities voor de ontvanger tijdens een cursus':
       'Notas para o destinatário durante um curso',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Mude para o modo Markdown para adicionar notas.',
   'Mijn notities aan/uit': 'Ativar/desativar as minhas notas',
   'Wissel scherm (S)': 'Mudar de ecrã (S)',
   'Kon niet van scherm wisselen.': 'Não foi possível mudar de ecrã.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P público · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P público · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P público · H legenda · G vista geral · B/W preto/branco · R tempo · Esc parar',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

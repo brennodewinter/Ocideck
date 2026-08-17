@@ -81,8 +81,6 @@ const _dutchSourceId = {
   'Handtekening tekenen': 'Gambar tanda tangan',
   'Teken je handtekening in het vak hieronder.':
       'Gambar tanda tangan Anda di kotak di bawah.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Paket data adalah .zip berisi data referensi untuk modul ini. Paket diperiksa dulu terhadap sidik jari yang tertanam di aplikasi; hanya paket yang cocok dengan versi aplikasi ini yang diterima.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',
@@ -188,7 +186,6 @@ const _dutchSourceId = {
       'Gambar dan media digunakan bersama oleh presentasi dalam folder yang sama. Nama persisnya kamu pilih sebentar lagi di jendela sistem.',
   'Alle bibliotheken': 'Semua pustaka',
   'Andere map…': 'Folder lain…',
-  'Bibliotheek verwijderen': 'Hapus pustaka',
   'Bibliotheken': 'Pustaka',
   'Geen bibliotheek': 'Tidak ada pustaka',
   'Geen presentaties (.md) gevonden.': 'Tidak ada presentasi (.md) ditemukan.',
@@ -200,10 +197,6 @@ const _dutchSourceId = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Pilih di pustaka mana presentasi disimpan.',
   'Map toevoegen': 'Tambah folder',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Folder tempat kamu menyimpan dan mencari presentasi. Beri masing-masing nama sendiri agar mudah dibedakan. Semua pustaka dicari saat membuka dan di pustaka gambar.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Belum ada pustaka — tambahkan folder.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Belum ada pustaka. Tambahkan satu di Pengaturan, atau pilih folder di atas untuk ditelusuri.',
   'Presentatie opslaan': 'Simpan presentasi',
@@ -285,22 +278,11 @@ const _dutchSourceId = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Pernyataan kebenaran dengan pelapor, sertifikasi, tanda tangan, dan penyegelan.',
   'Uitbreidingen': 'Ekstensi',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',
   'Gegevens opschonen': 'Bersihkan data',
   'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Berikan dulu persetujuan untuk lalu lintas keluar di Lisensi dan Privasi.',
   'Op het web nog niet beschikbaar': 'Belum tersedia di web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Tidak ada sumber yang dapat dijangkau — data referensi tidak dapat diambil dari mana pun. Coba lagi atau impor paket secara manual.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Data yang diambil tidak cocok dengan sidik jari yang diharapkan dan ditolak sebagai tindakan pencegahan.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Paket data rusak atau tidak valid sehingga ditolak.',
-  'Gegevenspakket kiezen': 'Pilih paket data',
-  'Kon het gekozen bestand niet lezen.':
-      'Tidak dapat membaca berkas yang dipilih.',
   'Nog niet opgehaald': 'Belum diambil',
   'AI-assistentie': 'Bantuan AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +299,15 @@ const _dutchSourceId = {
       'Layanan cloud terlebih dahulu memerlukan persetujuan privasi Anda di "Lisensi dan Privasi" dan tidak berfungsi di versi web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Saya memahami bahwa data dikirim ke layanan eksternal ini',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Bantuan AI (mati secara bawaan): jika Anda memilih backend hosting sendiri atau cloud, teks atau gambar yang Anda proses dikirim ke alamat tersebut. Model AI lokal di perangkat ini tidak mengirim apa pun.',
   'Zoek een slidetype': 'Cari tipe slide',
   'Alfabetisch sorteren': 'Urutkan menurut abjad',
   'Algemeen': 'Umum',
   'Informatieveiligheid': 'Keselamatan informasi',
   'Alle': 'Semua',
-  'Pentestrapportage (ontwerp)': 'Laporan pentest (desain)',
-  'AI-assistentie (ontwerp)': 'Bantuan AI (desain)',
-  'Agentisch bouwplan (ontwerp)': 'Rencana build agentik (desain)',
-  'Bijsnijden': 'Pangkas',
   'Linksom': 'Putar kiri',
   'Rechtsom': 'Putar kanan',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Seret gambar untuk memilih bagian mana yang tetap terlihat.',
-  'Git-opslag (ontwerp)': 'Penyimpanan Git (desain)',
   'Zoek in documentatie…': 'Cari di dokumentasi…',
   'Geen documenten gevonden': 'Tidak ada dokumen yang ditemukan',
   'Alleen afspelen (vergrendeld)': 'Hanya Putar (Terkunci)',
@@ -346,12 +321,8 @@ const _dutchSourceId = {
   'Techniek': 'Teknis',
   'Licentie en naleving': 'Lisensi dan kepatuhan',
   'Architectuur': 'Arsitektur',
-  'Bouwinstructies': 'Instruksi build',
-  'Kwaliteitscontroles': 'Pemeriksaan kualitas',
-  'Broncodekaart': 'Peta kode sumber',
   'Licentienaleving': 'Kepatuhan lisensi',
   'Softwarestuklijst (SBOM)': 'Daftar Komponen Perangkat Lunak (SBOM)',
-  'Samenwerking (ontwerp)': 'Kolaborasi (desain)',
   'Beschermen met een wachtwoord (AES-256)':
       'Lindungi dengan kata sandi (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -429,10 +400,6 @@ const _dutchSourceId = {
   'Instelling opslaan is mislukt.': 'Gagal menyimpan pengaturan.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Catatan: versi web hanya dapat mengambil dari server yang mengizinkannya (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paket (.ocideck) belum didukung di versi web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Hanya presentasi .md yang dapat dibuka di versi web.',
   'Geen': 'Tidak ada',
   'Nieuw': 'Baru',
   'Verwijderen': 'Hapus',
@@ -521,10 +488,8 @@ const _dutchSourceId = {
   'Audio bij deze slide': 'Audio untuk slide ini',
   'Audio automatisch afspelen': 'Putar audio otomatis',
   'Audio verwijderen': 'Hapus audio',
-  'Geen audio gekozen': 'Tidak ada audio dipilih',
   'Geen audiobestand gekozen': 'Tidak ada berkas audio dipilih',
   'Video automatisch afspelen': 'Putar video otomatis',
-  'Geen video gekozen': 'Tidak ada video dipilih',
   'Kiezen': 'Pilih',
   'Uit bibliotheek…': 'Dari pustaka…',
   'Van computer…': 'Dari komputer…',
@@ -553,7 +518,6 @@ const _dutchSourceId = {
   'Pakket importeren': 'Impor paket',
   'Pakket exporteren': 'Ekspor paket',
   'Map met presentaties kiezen': 'Pilih folder presentasi',
-  'Standaard map voor presentaties': 'Folder presentasi bawaan',
   'Map voor exports': 'Folder ekspor',
   'Logo kiezen': 'Pilih logo',
   'Kies een afbeelding': 'Pilih gambar',
@@ -566,8 +530,6 @@ const _dutchSourceId = {
   'Map kiezen': 'Pilih folder',
   'Kies een map met presentaties om te beginnen.':
       'Pilih folder berisi presentasi untuk memulai.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Tidak ada presentasi (.md) ditemukan di folder ini.',
   'Geen presentaties gevonden voor': 'Tidak ada presentasi ditemukan untuk',
   'meer treffer(s)': 'kecocokan lagi',
   'Slide zoeken': 'Cari slide',
@@ -589,7 +551,6 @@ const _dutchSourceId = {
       'Ketik kata pencarian untuk menemukan slide di seluruh presentasi Anda.',
   'toegevoegd': 'ditambahkan',
   'Eerste': 'Pertama',
-  'treffers — verfijn je zoekopdracht': 'kecocokan, perhalus pencarian Anda',
   'treffer(s)': 'kecocokan',
   'slide': 'slide',
   'Zoeken en vervangen': 'Cari dan ganti',
@@ -648,7 +609,6 @@ const _dutchSourceId = {
   'Tekst op zijpanelen': 'Teks pada panel samping',
   'Voorbeeldtekst': 'Contoh teks',
   'Knop': 'Tombol',
-  'Profielnaam': 'Nama profil',
   'Naam van het stijlprofiel': 'Nama profil gaya',
   'Stijlprofiel': 'Profil gaya',
   'Nieuw profiel': 'Profil baru',
@@ -710,15 +670,9 @@ const _dutchSourceId = {
   'TYPE': 'TIPE',
   'STIJL': 'GAYA',
   'Terug naar standaardstijl': 'Kembali ke gaya default',
-  'Automatisch doorgaan na': 'Lanjut otomatis setelah',
-  'Logo tonen op deze slide': 'Tampilkan logo pada slide ini',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabel dapat diedit saat presentasi',
-  'Footer tonen op deze slide': 'Tampilkan footer pada slide ini',
   'Sprekersnotities...': 'Catatan pembicara...',
   'Sprekersnotities': 'Catatan pembicara',
   'Notities voor tijdens het presenteren': 'Catatan untuk saat presentasi',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mode Markdown — edit seluruh presentasi sebagai Marp Markdown',
   'Toepassen': 'Terapkan',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown tidak dapat diproses. Periksa sintaksnya.',
@@ -743,8 +697,6 @@ const _dutchSourceId = {
   'Geen resultaten voor': 'Tidak ada hasil untuk',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Sesuaikan kata pencarian Anda atau tambahkan deskripsi.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Gunakan “Telusuri” untuk memilih gambar dari lokasi mana pun.',
   'Selecteer een\nafbeelding': 'Pilih sebuah\ngambar',
   'Gekopieerd': 'Disalin',
   'Afbeelding verwijderen?': 'Hapus gambar?',
@@ -761,8 +713,6 @@ const _dutchSourceId = {
   'spatie': 'spasi',
   'klik': 'klik',
   'cijfers': 'angka',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Klik atau tekan ? / H / Esc untuk menutup',
   'Klik of druk op H / Esc om te sluiten':
       'Klik atau tekan H / Esc untuk menutup',
   'Naar slidenummer': 'Ke nomor slide',
@@ -772,20 +722,10 @@ const _dutchSourceId = {
   'Presenter view (notities, klok)': 'Tampilan pembicara (catatan, jam)',
   'Scherm wisselen (meerdere schermen)': 'Ganti layar (beberapa layar)',
   'Zwart · wit scherm': 'Layar hitam · putih',
-  'Verstreken tijd resetten': 'Atur ulang waktu berlalu',
   'Automatische modus aan/uit': 'Mode otomatis nyala/mati',
   'Herhalen (loop) aan/uit': 'Ulangi (loop) nyala/mati',
-  'Na audio automatisch doorgaan': 'Lanjut otomatis setelah audio',
-  'Dit overzicht': 'Ikhtisar ini',
   'Deze legenda': 'Legenda ini',
   'Terug / afsluiten': 'Kembali / keluar',
-  'Auto (A)': 'Otomatis (A)',
-  'Handmatig (A)': 'Manual (A)',
-  'Herhalen (L)': 'Ulangi (L)',
-  'Na audio (M)': 'Setelah audio (M)',
-  'Sneltoetsen (?)': 'Pintasan keyboard (?)',
-  'Slide-overzicht (G)': 'Ikhtisar slide (G)',
-  'Presenter view (P)': 'Tampilan pembicara (P)',
   'Tijd resetten (R)': 'Atur ulang timer (R)',
   'HUIDIGE SLIDE': 'SLIDE SAAT INI',
   'VOLGENDE': 'BERIKUTNYA',
@@ -801,15 +741,9 @@ const _dutchSourceId = {
   'Notities weggooien': 'Buang catatan',
   'Notities voor de ontvanger tijdens een cursus':
       'Catatan untuk penerima selama kursus',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Beralih ke mode Markdown untuk menambahkan catatan.',
   'Mijn notities aan/uit': 'Aktifkan/nonaktifkan catatan saya',
   'Wissel scherm (S)': 'Ganti layar (S)',
   'Kon niet van scherm wisselen.': 'Tidak dapat mengganti layar.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audiens · G ikhtisar · B/W hitam/putih · R waktu · Esc berhenti',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P audiens · S layar · G ikhtisar · B/W hitam/putih · R waktu · Esc berhenti',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P audiens · H legenda · G ikhtisar · B/W hitam/putih · R waktu · Esc berhenti',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

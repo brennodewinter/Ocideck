@@ -81,8 +81,6 @@ const _dutchSourceSv = {
   'Handtekening tekenen': 'Rita signatur',
   'Teken je handtekening in het vak hieronder.':
       'Rita din signatur i rutan nedan.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Ett datapaket är en .zip med referensdata för den här modulen. Det kontrolleras först mot fingeravtrycket som är inbyggt i appen; endast ett paket som matchar den här appversionen godtas.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Yta',
   'Horizontale staaf': 'Liggande stapel',
@@ -188,7 +186,6 @@ const _dutchSourceSv = {
       'Bilder och media delas av presentationer i samma mapp. Det exakta namnet väljer du strax i systemfönstret.',
   'Alle bibliotheken': 'Alla bibliotek',
   'Andere map…': 'Annan mapp…',
-  'Bibliotheek verwijderen': 'Ta bort bibliotek',
   'Bibliotheken': 'Bibliotek',
   'Geen bibliotheek': 'Inget bibliotek',
   'Geen presentaties (.md) gevonden.': 'Inga presentationer (.md) hittades.',
@@ -200,10 +197,6 @@ const _dutchSourceSv = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Välj vilket bibliotek presentationen ska ligga i.',
   'Map toevoegen': 'Lägg till mapp',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mappar där du sparar och söker bland dina presentationer. Ge var och en ett eget namn för att hålla isär dem. Alla bibliotek genomsöks vid öppning och i bildbiblioteket.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Inget bibliotek ännu — lägg till en mapp.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Inget bibliotek ännu. Lägg till ett under Inställningar, eller välj en mapp ovan att söka i.',
   'Presentatie opslaan': 'Spara presentation',
@@ -285,21 +278,11 @@ const _dutchSourceSv = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Sanningsförsäkran med rapportör, certifiering, underskrift och försegling.',
   'Uitbreidingen': 'Tillägg',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Valfria moduler. Av som standard; de lägger inte till något i basappen förrän du aktiverar dem.',
   'Gegevens opschonen': 'Rensa data',
   'Gegevens lokaal beschikbaar': 'Data tillgängliga lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Ge först samtycke till utgående trafik under Licens och integritet.',
   'Op het web nog niet beschikbaar': 'Inte tillgängligt på webben ännu',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ingen källa nåbar — referensdata kunde inte hämtas någonstans. Försök igen eller importera paketet manuellt.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'De hämtade uppgifterna matchade inte det förväntade fingeravtrycket och avvisades som en försiktighetsåtgärd.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Datapaketet var skadat eller ogiltigt och avvisades därför.',
-  'Gegevenspakket kiezen': 'Välj datapaket',
-  'Kon het gekozen bestand niet lezen.': 'Kunde inte läsa den valda filen.',
   'Nog niet opgehaald': 'Inte hämtat ännu',
   'AI-assistentie': 'AI-assistans',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -316,22 +299,15 @@ const _dutchSourceSv = {
       'En molntjänst kräver först ditt integritetssamtycke under "Licens och integritet" och fungerar inte i webbversionen.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Jag förstår att data skickas till den här externa tjänsten',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI-assistans (avstängt som standard): om du väljer en självhostad eller molnbaserad backend skickas de texter eller bilder du låter bearbeta till den adressen. En lokal AI-modell på den här enheten skickar ingenting.',
   'Zoek een slidetype': 'Sök efter en bildtyp',
   'Alfabetisch sorteren': 'Sortera alfabetiskt',
   'Algemeen': 'Allmänt',
   'Informatieveiligheid': 'Informationssäkerhet',
   'Alle': 'Alla',
-  'Pentestrapportage (ontwerp)': 'Pentestrapport (design)',
-  'AI-assistentie (ontwerp)': 'AI-assistans (design)',
-  'Agentisch bouwplan (ontwerp)': 'Agentisk byggplan (design)',
-  'Bijsnijden': 'Beskär',
   'Linksom': 'Rotera vänster',
   'Rechtsom': 'Rotera höger',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Dra i bilden för att välja vilken del som förblir synlig.',
-  'Git-opslag (ontwerp)': 'Git-lagring (design)',
   'Zoek in documentatie…': 'Sök i dokumentation…',
   'Geen documenten gevonden': 'Inga dokument hittades',
   'Alleen afspelen (vergrendeld)': 'Endast uppspelning (låst)',
@@ -345,12 +321,8 @@ const _dutchSourceSv = {
   'Techniek': 'Teknik',
   'Licentie en naleving': 'Licens och efterlevnad',
   'Architectuur': 'Arkitektur',
-  'Bouwinstructies': 'Bygginstruktioner',
-  'Kwaliteitscontroles': 'Kvalitetskontroller',
-  'Broncodekaart': 'Källkodskarta',
   'Licentienaleving': 'Licensefterlevnad',
   'Softwarestuklijst (SBOM)': 'Programvaruförteckning (SBOM)',
-  'Samenwerking (ontwerp)': 'Samarbete (design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Skydda med ett lösenord (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -429,10 +401,6 @@ const _dutchSourceSv = {
   'Instelling opslaan is mislukt.': 'Det gick inte att spara inställningen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Obs: webbversionen kan bara hämta från servrar som tillåter det (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paket (.ocideck) stöds ännu inte i webbversionen.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Endast .md-presentationer kan öppnas i webbversionen.',
   'Geen': 'Ingen',
   'Nieuw': 'Ny',
   'Verwijderen': 'Ta bort',
@@ -520,10 +488,8 @@ const _dutchSourceSv = {
   'Audio bij deze slide': 'Ljud för den här bilden',
   'Audio automatisch afspelen': 'Spela ljud automatiskt',
   'Audio verwijderen': 'Ta bort ljud',
-  'Geen audio gekozen': 'Inget ljud valt',
   'Geen audiobestand gekozen': 'Ingen ljudfil vald',
   'Video automatisch afspelen': 'Spela video automatiskt',
-  'Geen video gekozen': 'Ingen video vald',
   'Kiezen': 'Välj',
   'Uit bibliotheek…': 'Från biblioteket…',
   'Van computer…': 'Från datorn…',
@@ -552,7 +518,6 @@ const _dutchSourceSv = {
   'Pakket importeren': 'Importera paket',
   'Pakket exporteren': 'Exportera paket',
   'Map met presentaties kiezen': 'Välj presentationsmapp',
-  'Standaard map voor presentaties': 'Standardmapp för presentationer',
   'Map voor exports': 'Exportmapp',
   'Logo kiezen': 'Välj logotyp',
   'Kies een afbeelding': 'Välj en bild',
@@ -565,8 +530,6 @@ const _dutchSourceSv = {
   'Map kiezen': 'Välj mapp',
   'Kies een map met presentaties om te beginnen.':
       'Välj en mapp med presentationer för att börja.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Inga presentationer (.md) hittades i den här mappen.',
   'Geen presentaties gevonden voor': 'Inga presentationer hittades för',
   'meer treffer(s)': 'fler träff(ar)',
   'Slide zoeken': 'Hitta bild',
@@ -588,7 +551,6 @@ const _dutchSourceSv = {
       'Skriv sökord för att hitta bilder i alla dina presentationer.',
   'toegevoegd': 'tillagd',
   'Eerste': 'Första',
-  'treffers — verfijn je zoekopdracht': 'träffar, förfina din sökning',
   'treffer(s)': 'träff(ar)',
   'slide': 'bild',
   'Zoeken en vervangen': 'Sök och ersätt',
@@ -647,7 +609,6 @@ const _dutchSourceSv = {
   'Tekst op zijpanelen': 'Text på sidopaneler',
   'Voorbeeldtekst': 'Exempeltext',
   'Knop': 'Knapp',
-  'Profielnaam': 'Profilnamn',
   'Naam van het stijlprofiel': 'Namn på stilprofilen',
   'Stijlprofiel': 'Stilprofil',
   'Nieuw profiel': 'Ny profil',
@@ -709,17 +670,10 @@ const _dutchSourceSv = {
   'TYPE': 'TYP',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Tillbaka till standardstil',
-  'Automatisch doorgaan na': 'Gå vidare automatiskt efter',
-  'Logo tonen op deze slide': 'Visa logotyp på den här bilden',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabell redigerbar under presentation',
-  'Footer tonen op deze slide': 'Visa sidfot på den här bilden',
   'Sprekersnotities...': 'Talaranteckningar...',
   'Sprekersnotities': 'Talaranteckningar',
   'Notities voor tijdens het presenteren':
       'Anteckningar för under presentationen',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-läge — redigera hela presentationen som Marp-Markdown',
   'Toepassen': 'Tillämpa',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown kunde inte bearbetas. Kontrollera syntaxen.',
@@ -744,8 +698,6 @@ const _dutchSourceSv = {
   'Geen resultaten voor': 'Inga resultat för',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Justera ditt sökord eller lägg till en beskrivning.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Använd ”Bläddra” för att välja bilder från valfri plats.',
   'Selecteer een\nafbeelding': 'Välj en\nbild',
   'Gekopieerd': 'Kopierad',
   'Afbeelding verwijderen?': 'Ta bort bild?',
@@ -762,8 +714,6 @@ const _dutchSourceSv = {
   'spatie': 'mellanslag',
   'klik': 'klick',
   'cijfers': 'siffror',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Klicka eller tryck på ? / H / Esc för att stänga',
   'Klik of druk op H / Esc om te sluiten':
       'Klicka eller tryck på H / Esc för att stänga',
   'Naar slidenummer': 'Gå till bildnummer',
@@ -773,20 +723,10 @@ const _dutchSourceSv = {
   'Presenter view (notities, klok)': 'Presentatörsvy (anteckningar, klocka)',
   'Scherm wisselen (meerdere schermen)': 'Byt skärm (flera skärmar)',
   'Zwart · wit scherm': 'Svart · vit skärm',
-  'Verstreken tijd resetten': 'Nollställ förfluten tid',
   'Automatische modus aan/uit': 'Automatiskt läge på/av',
   'Herhalen (loop) aan/uit': 'Upprepa (loop) på/av',
-  'Na audio automatisch doorgaan': 'Gå vidare automatiskt efter ljud',
-  'Dit overzicht': 'Denna översikt',
   'Deze legenda': 'Denna teckenförklaring',
   'Terug / afsluiten': 'Tillbaka / avsluta',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuell (A)',
-  'Herhalen (L)': 'Upprepa (L)',
-  'Na audio (M)': 'Efter ljud (M)',
-  'Sneltoetsen (?)': 'Kortkommandon (?)',
-  'Slide-overzicht (G)': 'Bildöversikt (G)',
-  'Presenter view (P)': 'Presentatörsvy (P)',
   'Tijd resetten (R)': 'Nollställ tid (R)',
   'HUIDIGE SLIDE': 'AKTUELL BILD',
   'VOLGENDE': 'NÄSTA',
@@ -802,15 +742,9 @@ const _dutchSourceSv = {
   'Notities weggooien': 'Släng anteckningar',
   'Notities voor de ontvanger tijdens een cursus':
       'Anteckningar för mottagaren under en kurs',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Byt till Markdown-läge för att lägga till anteckningar.',
   'Mijn notities aan/uit': 'Växla mina anteckningar på/av',
   'Wissel scherm (S)': 'Byt skärm (S)',
   'Kon niet van scherm wisselen.': 'Kunde inte byta skärm.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · G översikt · B/W svart/vit · R tid · Esc stopp',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · S skärm · G översikt · B/W svart/vit · R tid · Esc stopp',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P publik · H teckenförklaring · G översikt · B/W svart/vit · R tid · Esc stopp',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

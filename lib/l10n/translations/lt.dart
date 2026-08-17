@@ -81,8 +81,6 @@ const _dutchSourceLt = {
   'Handtekening tekenen': 'Piešti parašą',
   'Teken je handtekening in het vak hieronder.':
       'Nupieškite savo parašą laukelyje žemiau.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Duomenų paketas – tai .zip su šio modulio nuorodų duomenimis. Pirmiausia jis patikrinamas pagal į programą įtaisytą atspaudą; priimamas tik su šia programos versija suderinamas paketas.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Ploto',
   'Horizontale staaf': 'Horizontali stulpelinė',
@@ -188,7 +186,6 @@ const _dutchSourceLt = {
       'Vaizdais ir medija dalijasi tame pačiame aplanke esančios prezentacijos. Tikslų pavadinimą netrukus pasirinksi sistemos lange.',
   'Alle bibliotheken': 'Visos bibliotekos',
   'Andere map…': 'Kitas aplankas…',
-  'Bibliotheek verwijderen': 'Pašalinti biblioteką',
   'Bibliotheken': 'Bibliotekos',
   'Geen bibliotheek': 'Nėra bibliotekos',
   'Geen presentaties (.md) gevonden.': 'Prezentacijų (.md) nerasta.',
@@ -200,10 +197,6 @@ const _dutchSourceLt = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Pasirink, į kurią biblioteką pateks prezentacija.',
   'Map toevoegen': 'Pridėti aplanką',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Aplankai, kuriuose saugai ir ieškai savo prezentacijų. Suteik kiekvienam savą pavadinimą, kad juos atskirtum. Visos bibliotekos peržiūrimos atveriant ir vaizdų bibliotekoje.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Bibliotekos dar nėra — pridėk aplanką.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Bibliotekos dar nėra. Pridėk ją Nustatymuose arba viršuje pasirink aplanką paieškai.',
   'Presentatie opslaan': 'Įrašyti prezentaciją',
@@ -285,22 +278,11 @@ const _dutchSourceLt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Tikrumo deklaracija su ataskaitos rengėju, sertifikavimu, parašu ir antspaudu.',
   'Uitbreidingen': 'Plėtiniai',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',
   'Gegevens opschonen': 'Išvalyti duomenis',
   'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nepavyko pasiekti jokio šaltinio — nuorodų duomenų niekur nepavyko atsisiųsti. Bandykite dar kartą arba importuokite paketą rankiniu būdu.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Atsisiųsti duomenys neatitiko laukiamo skaitmeninio atspaudo ir dėl atsargumo buvo atmesti.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Duomenų paketas buvo sugadintas arba netinkamas, todėl buvo atmestas.',
-  'Gegevenspakket kiezen': 'Pasirinkti duomenų paketą',
-  'Kon het gekozen bestand niet lezen.':
-      'Nepavyko nuskaityti pasirinkto failo.',
   'Nog niet opgehaald': 'Dar neatsisiųsta',
   'AI-assistentie': 'DI pagalba',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +299,15 @@ const _dutchSourceLt = {
       'Debesijos paslaugai pirmiausia reikia jūsų privatumo sutikimo skiltyje "Licencija ir privatumas" ir ji neveikia žiniatinklio versijoje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Suprantu, kad duomenys siunčiami į šią išorinę paslaugą',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'DI pagalba (pagal numatytuosius nustatymus išjungta): jei pasirinksite savarankiškai talpinamą ar debesijos vidinę sistemą, tekstai ar vaizdai, kuriuos apdorojate, siunčiami tuo adresu. Vietinis DI modelis šiame įrenginyje nieko nesiunčia.',
   'Zoek een slidetype': 'Ieškoti skaidrės tipo',
   'Alfabetisch sorteren': 'Rūšiuoti abėcėlės tvarka',
   'Algemeen': 'Bendra',
   'Informatieveiligheid': 'Informacijos sauga',
   'Alle': 'Visi',
-  'Pentestrapportage (ontwerp)': 'Įsiskverbimo testo ataskaita (projektas)',
-  'AI-assistentie (ontwerp)': 'DI pagalba (projektas)',
-  'Agentisch bouwplan (ontwerp)': 'Agentinis kūrimo planas (projektas)',
-  'Bijsnijden': 'Apkarpyti',
   'Linksom': 'Sukti kairėn',
   'Rechtsom': 'Sukti dešinėn',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vilkite paveikslėlį, kad pasirinktumėte, kuri dalis liks matoma.',
-  'Git-opslag (ontwerp)': 'Git saugykla (projektas)',
   'Zoek in documentatie…': 'Ieškoti dokumentacijoje…',
   'Geen documenten gevonden': 'Dokumentų nerasta',
   'Alleen afspelen (vergrendeld)': 'Tik atkūrimas (užrakinta)',
@@ -346,12 +321,8 @@ const _dutchSourceLt = {
   'Techniek': 'Techninė dalis',
   'Licentie en naleving': 'Licencija ir atitiktis',
   'Architectuur': 'Architektūra',
-  'Bouwinstructies': 'Kūrimo instrukcijos',
-  'Kwaliteitscontroles': 'Kokybės patikros',
-  'Broncodekaart': 'Pirminio kodo žemėlapis',
   'Licentienaleving': 'Licencijų atitiktis',
   'Softwarestuklijst (SBOM)': 'Programinės įrangos komponentų sąrašas (SBOM)',
-  'Samenwerking (ontwerp)': 'Bendradarbiavimas (projektas)',
   'Beschermen met een wachtwoord (AES-256)': 'Apsaugoti slaptažodžiu (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Saugokite šį slaptažodį: jį praradę, šio paketo nebegalėsite atidaryti.',
@@ -430,10 +401,6 @@ const _dutchSourceLt = {
   'Instelling opslaan is mislukt.': 'Nepavyko išsaugoti nustatymo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pastaba: žiniatinklio versija gali parsisiųsti tik iš serverių, kurie tai leidžia (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketai (.ocideck) žiniatinklio versijoje dar nepalaikomi.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Žiniatinklio versijoje galima atidaryti tik .md pristatymus.',
   'Geen': 'Nėra',
   'Nieuw': 'Naujas',
   'Verwijderen': 'Ištrinti',
@@ -524,10 +491,8 @@ const _dutchSourceLt = {
   'Audio bij deze slide': 'Garsas šiai skaidrei',
   'Audio automatisch afspelen': 'Automatiškai leisti garsą',
   'Audio verwijderen': 'Pašalinti garsą',
-  'Geen audio gekozen': 'Garsas nepasirinktas',
   'Geen audiobestand gekozen': 'Garso failas nepasirinktas',
   'Video automatisch afspelen': 'Automatiškai leisti vaizdo įrašą',
-  'Geen video gekozen': 'Vaizdo įrašas nepasirinktas',
   'Kiezen': 'Pasirinkti',
   'Uit bibliotheek…': 'Iš bibliotekos…',
   'Van computer…': 'Iš kompiuterio…',
@@ -557,7 +522,6 @@ const _dutchSourceLt = {
   'Pakket importeren': 'Importuoti paketą',
   'Pakket exporteren': 'Eksportuoti paketą',
   'Map met presentaties kiezen': 'Pasirinkti pateikčių aplanką',
-  'Standaard map voor presentaties': 'Numatytasis pateikčių aplankas',
   'Map voor exports': 'Eksportų aplankas',
   'Logo kiezen': 'Pasirinkti logotipą',
   'Kies een afbeelding': 'Pasirinkite paveikslėlį',
@@ -570,8 +534,6 @@ const _dutchSourceLt = {
   'Map kiezen': 'Pasirinkti aplanką',
   'Kies een map met presentaties om te beginnen.':
       'Norėdami pradėti pasirinkite aplanką su pateiktimis.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Šiame aplanke nerasta pateikčių (.md).',
   'Geen presentaties gevonden voor': 'Nerasta pateikčių pagal',
   'meer treffer(s)': 'dar atitikmenų',
   'Slide zoeken': 'Rasti skaidrę',
@@ -593,7 +555,6 @@ const _dutchSourceLt = {
       'Įveskite paieškos terminus, kad rastumėte skaidres iš visų pateikčių.',
   'toegevoegd': 'pridėta',
   'Eerste': 'Pirmi',
-  'treffers — verfijn je zoekopdracht': 'atitikmenų — patikslinkite paiešką',
   'treffer(s)': 'atitikmuo (-enys)',
   'slide': 'skaidrė',
   'Zoeken en vervangen': 'Rasti ir pakeisti',
@@ -652,7 +613,6 @@ const _dutchSourceLt = {
   'Tekst op zijpanelen': 'Tekstas šoniniuose skydeliuose',
   'Voorbeeldtekst': 'Pavyzdinis tekstas',
   'Knop': 'Mygtukas',
-  'Profielnaam': 'Profilio pavadinimas',
   'Naam van het stijlprofiel': 'Stiliaus profilio pavadinimas',
   'Stijlprofiel': 'Stiliaus profilis',
   'Nieuw profiel': 'Naujas profilis',
@@ -716,15 +676,9 @@ const _dutchSourceLt = {
   'TYPE': 'TIPAS',
   'STIJL': 'STILIUS',
   'Terug naar standaardstijl': 'Atgal į numatytąjį stilių',
-  'Automatisch doorgaan na': 'Automatiškai tęsti po',
-  'Logo tonen op deze slide': 'Rodyti logotipą šioje skaidrėje',
-  'Tabel bewerkbaar tijdens presenteren': 'Lentelė redaguojama pristatant',
-  'Footer tonen op deze slide': 'Rodyti poraštę šioje skaidrėje',
   'Sprekersnotities...': 'Pranešėjo pastabos...',
   'Sprekersnotities': 'Pranešėjo pastabos',
   'Notities voor tijdens het presenteren': 'Pastabos pristatymo metu',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown režimas — redaguokite visą pateiktį kaip Marp Markdown',
   'Toepassen': 'Taikyti',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Nepavyko apdoroti Markdown. Patikrinkite sintaksę.',
@@ -749,8 +703,6 @@ const _dutchSourceLt = {
   'Geen resultaten voor': 'Nėra rezultatų pagal',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Pakeiskite paieškos terminą arba pridėkite aprašymą.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Naudokite „Naršyti“, kad pasirinktumėte paveikslėlius iš bet kurios vietos.',
   'Selecteer een\nafbeelding': 'Pasirinkite\npaveikslėlį',
   'Gekopieerd': 'Nukopijuota',
   'Afbeelding verwijderen?': 'Ištrinti paveikslėlį?',
@@ -767,8 +719,6 @@ const _dutchSourceLt = {
   'spatie': 'tarpas',
   'klik': 'spustelėti',
   'cijfers': 'skaičiai',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Spustelėkite arba paspauskite ? / H / Esc, kad uždarytumėte',
   'Klik of druk op H / Esc om te sluiten':
       'Spustelėkite arba paspauskite H / Esc, kad uždarytumėte',
   'Naar slidenummer': 'Pereiti prie skaidrės numerio',
@@ -778,20 +728,10 @@ const _dutchSourceLt = {
   'Presenter view (notities, klok)': 'Pranešėjo rodinys (pastabos, laikrodis)',
   'Scherm wisselen (meerdere schermen)': 'Perjungti ekraną (keli ekranai)',
   'Zwart · wit scherm': 'Juodas · baltas ekranas',
-  'Verstreken tijd resetten': 'Atstatyti praėjusį laiką',
   'Automatische modus aan/uit': 'Automatinis režimas įjungtas/išjungtas',
   'Herhalen (loop) aan/uit': 'Kartoti (ciklas) įjungta/išjungta',
-  'Na audio automatisch doorgaan': 'Automatiškai tęsti po garso',
-  'Dit overzicht': 'Ši apžvalga',
   'Deze legenda': 'Ši legenda',
   'Terug / afsluiten': 'Atgal / išeiti',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Rankinis (A)',
-  'Herhalen (L)': 'Kartoti (L)',
-  'Na audio (M)': 'Po garso (M)',
-  'Sneltoetsen (?)': 'Spartieji klavišai (?)',
-  'Slide-overzicht (G)': 'Skaidrių apžvalga (G)',
-  'Presenter view (P)': 'Pranešėjo rodinys (P)',
   'Tijd resetten (R)': 'Atstatyti laiką (R)',
   'HUIDIGE SLIDE': 'DABARTINĖ SKAIDRĖ',
   'VOLGENDE': 'KITA',
@@ -807,15 +747,9 @@ const _dutchSourceLt = {
   'Notities weggooien': 'Atmesti pastabas',
   'Notities voor de ontvanger tijdens een cursus':
       'Pastabos gavėjui kurso metu',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Norėdami pridėti pastabų, perjunkite į Markdown režimą.',
   'Mijn notities aan/uit': 'Įjungti/išjungti mano pastabas',
   'Wissel scherm (S)': 'Perjungti ekraną (S)',
   'Kon niet van scherm wisselen.': 'Nepavyko perjungti ekranų.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P auditorija · H legenda · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

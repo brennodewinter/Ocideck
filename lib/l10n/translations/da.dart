@@ -81,8 +81,6 @@ const _dutchSourceDa = {
   'Handtekening tekenen': 'Tegn underskrift',
   'Teken je handtekening in het vak hieronder.':
       'Tegn din underskrift i feltet nedenfor.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'En datapakke er en .zip med referencedataene til dette modul. Den kontrolleres først mod det fingeraftryk, der er indbygget i appen; kun en pakke, der passer til denne appversion, accepteres.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',
@@ -189,7 +187,6 @@ const _dutchSourceDa = {
       'Billeder og medier deles af præsentationer i samme mappe. Det præcise navn vælger du straks i systemvinduet.',
   'Alle bibliotheken': 'Alle biblioteker',
   'Andere map…': 'Anden mappe…',
-  'Bibliotheek verwijderen': 'Fjern bibliotek',
   'Bibliotheken': 'Biblioteker',
   'Geen bibliotheek': 'Intet bibliotek',
   'Geen presentaties (.md) gevonden.': 'Ingen præsentationer (.md) fundet.',
@@ -201,10 +198,6 @@ const _dutchSourceDa = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Vælg hvilket bibliotek præsentationen skal i.',
   'Map toevoegen': 'Tilføj mappe',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mapper, hvor du gemmer og søger i dine præsentationer. Giv dem hvert sit navn for at holde dem adskilt. Alle biblioteker gennemsøges ved åbning og i billedbiblioteket.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Intet bibliotek endnu — tilføj en mappe.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Intet bibliotek endnu. Tilføj et under Indstillinger, eller vælg en mappe ovenfor at søge i.',
   'Presentatie opslaan': 'Gem præsentation',
@@ -286,21 +279,11 @@ const _dutchSourceDa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Sandhedserklæringen med rapportør, certificering, underskrift og forsegling.',
   'Uitbreidingen': 'Udvidelser',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',
   'Gegevens opschonen': 'Ryd data',
   'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Giv først samtykke til udgående trafik under Licens og privatliv.',
   'Op het web nog niet beschikbaar': 'Endnu ikke tilgængelig på nettet',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ingen kilde tilgængelig — referencedataene kunne ikke hentes nogen steder. Prøv igen, eller importer pakken manuelt.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'De hentede data stemte ikke overens med det forventede fingeraftryk og blev afvist for en sikkerheds skyld.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Datapakken var beskadiget eller ugyldig og blev derfor afvist.',
-  'Gegevenspakket kiezen': 'Vælg datapakke',
-  'Kon het gekozen bestand niet lezen.': 'Kunne ikke læse den valgte fil.',
   'Nog niet opgehaald': 'Endnu ikke hentet',
   'AI-assistentie': 'AI-assistance',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +300,15 @@ const _dutchSourceDa = {
       'En skytjeneste kræver først dit privatlivssamtykke under "Licens og privatliv" og virker ikke i webversionen.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Jeg forstår, at data sendes til denne eksterne tjeneste',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI-assistance (slået fra som standard): hvis du vælger en selvhostet eller sky-backend, sendes de tekster eller billeder, du får behandlet, til den adresse. En lokal AI-model på denne enhed sender intet.',
   'Zoek een slidetype': 'Søg efter en slidetype',
   'Alfabetisch sorteren': 'Sortér alfabetisk',
   'Algemeen': 'Generelt',
   'Informatieveiligheid': 'Informationssikkerhed',
   'Alle': 'Alle',
-  'Pentestrapportage (ontwerp)': 'Pentestrapport (design)',
-  'AI-assistentie (ontwerp)': 'AI-assistance (design)',
-  'Agentisch bouwplan (ontwerp)': 'Agentisk byggeplan (design)',
-  'Bijsnijden': 'Beskær',
   'Linksom': 'Rotér til venstre',
   'Rechtsom': 'Rotér til højre',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Træk billedet for at vælge, hvilken del der forbliver synlig.',
-  'Git-opslag (ontwerp)': 'Git-lagring (design)',
   'Zoek in documentatie…': 'Søg i dokumentation…',
   'Geen documenten gevonden': 'Ingen dokumenter fundet',
   'Alleen afspelen (vergrendeld)': 'Kun afspilning (låst)',
@@ -346,12 +322,8 @@ const _dutchSourceDa = {
   'Techniek': 'Teknik',
   'Licentie en naleving': 'Licens og overholdelse',
   'Architectuur': 'Arkitektur',
-  'Bouwinstructies': 'Byggeinstruktioner',
-  'Kwaliteitscontroles': 'Kvalitetskontroller',
-  'Broncodekaart': 'Kildekodekort',
   'Licentienaleving': 'Licensoverholdelse',
   'Softwarestuklijst (SBOM)': 'Softwarestykliste (SBOM)',
-  'Samenwerking (ontwerp)': 'Samarbejde (design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Beskyt med en adgangskode (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -431,10 +403,6 @@ const _dutchSourceDa = {
   'Instelling opslaan is mislukt.': 'Indstillingen kunne ikke gemmes.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Bemærk: webversionen kan kun hente fra servere, der tillader det (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pakker (.ocideck) understøttes endnu ikke i webversionen.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Kun .md-præsentationer kan åbnes i webversionen.',
   'Geen': 'Ingen',
   'Nieuw': 'Ny',
   'Verwijderen': 'Slet',
@@ -523,10 +491,8 @@ const _dutchSourceDa = {
   'Audio bij deze slide': 'Lyd til denne slide',
   'Audio automatisch afspelen': 'Afspil lyd automatisk',
   'Audio verwijderen': 'Fjern lyd',
-  'Geen audio gekozen': 'Ingen lyd valgt',
   'Geen audiobestand gekozen': 'Ingen lydfil valgt',
   'Video automatisch afspelen': 'Afspil video automatisk',
-  'Geen video gekozen': 'Ingen video valgt',
   'Kiezen': 'Vælg',
   'Uit bibliotheek…': 'Fra bibliotek …',
   'Van computer…': 'Fra computer …',
@@ -555,7 +521,6 @@ const _dutchSourceDa = {
   'Pakket importeren': 'Importer pakke',
   'Pakket exporteren': 'Eksporter pakke',
   'Map met presentaties kiezen': 'Vælg præsentationsmappe',
-  'Standaard map voor presentaties': 'Standardmappe til præsentationer',
   'Map voor exports': 'Eksportmappe',
   'Logo kiezen': 'Vælg logo',
   'Kies een afbeelding': 'Vælg et billede',
@@ -568,8 +533,6 @@ const _dutchSourceDa = {
   'Map kiezen': 'Vælg mappe',
   'Kies een map met presentaties om te beginnen.':
       'Vælg en mappe med præsentationer for at begynde.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Ingen præsentationer (.md) fundet i denne mappe.',
   'Geen presentaties gevonden voor': 'Ingen præsentationer fundet for',
   'meer treffer(s)': 'flere match',
   'Slide zoeken': 'Find slide',
@@ -591,7 +554,6 @@ const _dutchSourceDa = {
       'Indtast søgeord for at finde slides på tværs af dine præsentationer.',
   'toegevoegd': 'tilføjet',
   'Eerste': 'Første',
-  'treffers — verfijn je zoekopdracht': 'match, forfin din søgning',
   'treffer(s)': 'match',
   'slide': 'slide',
   'Zoeken en vervangen': 'Find og erstat',
@@ -650,7 +612,6 @@ const _dutchSourceDa = {
   'Tekst op zijpanelen': 'Tekst på sidepaneler',
   'Voorbeeldtekst': 'Eksempeltekst',
   'Knop': 'Knap',
-  'Profielnaam': 'Profilnavn',
   'Naam van het stijlprofiel': 'Navn på stilprofilen',
   'Stijlprofiel': 'Stilprofil',
   'Nieuw profiel': 'Ny profil',
@@ -713,15 +674,9 @@ const _dutchSourceDa = {
   'TYPE': 'TYPE',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Tilbage til standardstil',
-  'Automatisch doorgaan na': 'Gå automatisk videre efter',
-  'Logo tonen op deze slide': 'Vis logo på denne slide',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabel redigerbar under præsentation',
-  'Footer tonen op deze slide': 'Vis sidefod på denne slide',
   'Sprekersnotities...': 'Talernoter ...',
   'Sprekersnotities': 'Talernoter',
   'Notities voor tijdens het presenteren': 'Noter til under præsentationen',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-tilstand — rediger hele præsentationen som Marp Markdown',
   'Toepassen': 'Anvend',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown kunne ikke behandles. Kontrollér syntaksen.',
@@ -746,8 +701,6 @@ const _dutchSourceDa = {
   'Geen resultaten voor': 'Ingen resultater for',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Justér dit søgeord, eller tilføj en beskrivelse.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Brug “Gennemse” for at vælge billeder fra en hvilken som helst placering.',
   'Selecteer een\nafbeelding': 'Vælg et\nbillede',
   'Gekopieerd': 'Kopieret',
   'Afbeelding verwijderen?': 'Slet billede?',
@@ -764,8 +717,6 @@ const _dutchSourceDa = {
   'spatie': 'mellemrum',
   'klik': 'klik',
   'cijfers': 'tal',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Klik eller tryk på ? / H / Esc for at lukke',
   'Klik of druk op H / Esc om te sluiten':
       'Klik eller tryk på H / Esc for at lukke',
   'Naar slidenummer': 'Gå til slidenummer',
@@ -775,20 +726,10 @@ const _dutchSourceDa = {
   'Presenter view (notities, klok)': 'Præsentatorvisning (noter, ur)',
   'Scherm wisselen (meerdere schermen)': 'Skift skærm (flere skærme)',
   'Zwart · wit scherm': 'Sort · hvid skærm',
-  'Verstreken tijd resetten': 'Nulstil forløbet tid',
   'Automatische modus aan/uit': 'Automatisk tilstand til/fra',
   'Herhalen (loop) aan/uit': 'Gentag (loop) til/fra',
-  'Na audio automatisch doorgaan': 'Fortsæt automatisk efter lyd',
-  'Dit overzicht': 'Denne oversigt',
   'Deze legenda': 'Denne legende',
   'Terug / afsluiten': 'Tilbage / afslut',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuel (A)',
-  'Herhalen (L)': 'Gentag (L)',
-  'Na audio (M)': 'Efter lyd (M)',
-  'Sneltoetsen (?)': 'Tastaturgenveje (?)',
-  'Slide-overzicht (G)': 'Slideoversigt (G)',
-  'Presenter view (P)': 'Præsentatorvisning (P)',
   'Tijd resetten (R)': 'Nulstil timer (R)',
   'HUIDIGE SLIDE': 'NUVÆRENDE SLIDE',
   'VOLGENDE': 'NÆSTE',
@@ -803,15 +744,9 @@ const _dutchSourceDa = {
   'Notities weggooien': 'Kassér noter',
   'Notities voor de ontvanger tijdens een cursus':
       'Noter til modtageren under et kursus',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Skift til Markdown-tilstand for at tilføje noter.',
   'Mijn notities aan/uit': 'Slå mine noter til/fra',
   'Wissel scherm (S)': 'Skift skærm (S)',
   'Kon niet van scherm wisselen.': 'Kunne ikke skifte skærm.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · G oversigt · B/W sort/hvid · R tid · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · S skærm · G oversigt · B/W sort/hvid · R tid · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P publikum · H legende · G oversigt · B/W sort/hvid · R tid · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

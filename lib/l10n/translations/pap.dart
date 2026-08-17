@@ -81,8 +81,6 @@ const _dutchSourcePap = {
   'Handtekening tekenen': 'Dibuhá firma',
   'Teken je handtekening in het vak hieronder.':
       'Dibuhá bo firma den e kuadro aki bou.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Un pakete di dato ta un .zip ku e datonan di referensia pa e módulo aki. Promé e ta wòrdu kontrolá kontra e fingerprint inkorporá den e app; solamente un pakete ku ta kuadra ku e vershon di app aki ta wòrdu aseptá.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Bara horizontal',
@@ -189,7 +187,6 @@ const _dutchSourcePap = {
       'Imágen i media ta wòrdu kompartí pa presentashonnan den e mesun karpeta. E nòmber eksakto bo ta skohe djaki den e bentana di sistema.',
   'Alle bibliotheken': 'Tur biblioteka',
   'Andere map…': 'Otro karpeta…',
-  'Bibliotheek verwijderen': 'Kita biblioteka',
   'Bibliotheken': 'Bibliotekanan',
   'Geen bibliotheek': 'Sin biblioteka',
   'Geen presentaties (.md) gevonden.': 'No a haña presentashon (.md).',
@@ -201,10 +198,6 @@ const _dutchSourcePap = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Skohe den kua biblioteka e presentashon ta bai.',
   'Map toevoegen': 'Agregá karpeta',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Karpetanan kaminda bo ta warda i buska bo presentashonnan. Dun\'nan un nòmber propio pa distinguí nan. Tur biblioteka ta wòrdu buská ora bo habri i den e biblioteka di imágen.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Ainda no tin biblioteka — agregá un karpeta.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Ainda no tin biblioteka. Agregá un den Konfigurashon, of skohe ariba un karpeta pa buska.',
   'Presentatie opslaan': 'Warda presentashon',
@@ -287,21 +280,11 @@ const _dutchSourcePap = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'E deklarashon di berdat ku e reportadó, sertifikashon, firma i seyo.',
   'Uitbreidingen': 'Ekstenshonnan',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Módulonan opcional. Pa defekto apagá; nan no ta agregá nada na e app básiko te ora bo aktivá nan.',
   'Gegevens opschonen': 'Limpia datonan',
   'Gegevens lokaal beschikbaar': 'Datonan disponibel lokalmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Duna promé permit pa tráfiko saliente na Lisensia i Privasidat.',
   'Op het web nog niet beschikbaar': 'Ainda no disponibel riba web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ningun fuente alkansabel — no por a baha e datonan di referensia di ningun kaminda. Purba atrobe òf importá e pakete manualmente.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'E datonan bahá no a kuadra ku e wela digital sperá i pa prekoushon a wòrdu rechazá.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'E paket di datos tabata daña òf inválido i p\'esei a wòrdu rechazá.',
-  'Gegevenspakket kiezen': 'Skohe paket di datos',
-  'Kon het gekozen bestand niet lezen.': 'No por a lesa e archivo skohí.',
   'Nog niet opgehaald': 'Ainda no a baha',
   'AI-assistentie': 'Asistensia di IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -318,22 +301,15 @@ const _dutchSourcePap = {
       'Un servisio di nubia ta rekerí promé bo konsentimentu di privasidat na "Lisensia i Privasidat" i no ta funshoná den e version web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Mi ta komprendé ku datos ta wòrdu mandá na e servisio èksterno aki',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Asistensia di IA (ta paga pa default): si bo skohe un backend ospedá bo mes òf di nubia, e tekstonan òf imágennan ku bo ta laga prosesá ta wòrdu mandá na e adres ei. Un modelo di IA lokal riba e aparato aki no ta manda nada.',
   'Zoek een slidetype': 'Buska un tipo di slide',
   'Alfabetisch sorteren': 'Ordená alfabétikamente',
   'Algemeen': 'General',
   'Informatieveiligheid': 'Seguridat di informashon',
   'Alle': 'Tur',
-  'Pentestrapportage (ontwerp)': 'Rapòrt di pentest (diseño)',
-  'AI-assistentie (ontwerp)': 'Asistensia AI (diseño)',
-  'Agentisch bouwplan (ontwerp)': 'Plan di konstrukshon agéntiko (diseño)',
-  'Bijsnijden': 'Korta',
   'Linksom': 'Bira na man robes',
   'Rechtsom': 'Bira na man drechi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lastra e imagen pa skohe ki parti ta keda visibel.',
-  'Git-opslag (ontwerp)': 'Almasenamentu Git (diseño)',
   'Zoek in documentatie…': 'Buska den dokumentashon…',
   'Geen documenten gevonden': 'No a haña ningun dokumento',
   'Alleen afspelen (vergrendeld)': 'Solo toká (blokeá)',
@@ -347,12 +323,8 @@ const _dutchSourcePap = {
   'Techniek': 'Tékniko',
   'Licentie en naleving': 'Lisensia i cumplimentu',
   'Architectuur': 'Arkitektura',
-  'Bouwinstructies': 'Instrukshonnan di konstrukshon',
-  'Kwaliteitscontroles': 'Chekeonan di kalidat',
-  'Broncodekaart': 'Mapa di código fuente',
   'Licentienaleving': 'Kumplimentu di lisensia',
   'Softwarestuklijst (SBOM)': 'Lista di Komponente di Software (SBOM)',
-  'Samenwerking (ontwerp)': 'Kolaborashon (diseño)',
   'Beschermen met een wachtwoord (AES-256)':
       'Protehá ku un kontraseña (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -430,10 +402,6 @@ const _dutchSourcePap = {
   'Instelling opslaan is mislukt.': 'Warda di konfigurashon a faya.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: e vershon web por baha solamente for di servernan ku ta permití esaki (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketnan (.ocideck) no ta sostené ainda den e vershon web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Den e vershon web por habri solamente presentashonnan .md.',
   'Geen': 'Ningun',
   'Nieuw': 'Nobo',
   'Verwijderen': 'Kita',
@@ -503,7 +471,6 @@ const _dutchSourcePap = {
   'Audio automatisch afspelen': 'Toka audio outomátiko',
   'Video automatisch afspelen': 'Toka video outomátiko',
   'Geen audiobestand gekozen': 'Ningun file di audio skohe',
-  'Geen video gekozen': 'Ningun video skohe',
   'Kiezen': 'Skohe',
   'Uit bibliotheek…': 'For di biblioteka…',
   'Van computer…': 'For di kòmpiuter…',
@@ -572,7 +539,6 @@ const _dutchSourcePap = {
   'Tekst op zijpanelen': 'Teksto riba panelnan lateral',
   'Voorbeeldtekst': 'Teksto di ehèmpel',
   'Knop': 'Boton',
-  'Profielnaam': 'Nòmber di perfil',
   'Stijlprofiel': 'Perfil di estilo',
   'Lettertype': 'Tipo di lèter',
   'Kleuren': 'Kolónan',
@@ -617,10 +583,8 @@ const _dutchSourcePap = {
   'Presenter view (notities, klok)': 'Presenter view (notanan, oloshi)',
   'Scherm wisselen (meerdere schermen)': 'Kambia pantalla (mas pantalla)',
   'Zwart · wit scherm': 'Pantalla pretu · blanku',
-  'Verstreken tijd resetten': 'Reset tempu transkurí',
   'Automatische modus aan/uit': 'Modo outomátiko on/off',
   'Herhalen (loop) aan/uit': 'Ripití (loop) on/off',
-  'Na audio automatisch doorgaan': 'Sigui outomátiko despues di audio',
   'Deze legenda': 'E legenda aki',
   'Terug / afsluiten': 'Bèk / sali',
   'HUIDIGE SLIDE': 'SLIDE AKTUAL',
@@ -635,8 +599,6 @@ const _dutchSourcePap = {
       'Notanan di usuario pa e slide aki...',
   'Notities voor de ontvanger tijdens een cursus':
       'Notanan pa e destinataro durante un kurso',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Kambia na modo Markdown pa agregá notanan.',
   'Mijn notities aan/uit': 'Mi notanan on/off',
   'Wissel scherm (S)': 'Kambia pantalla (S)',
   'Kon niet van scherm wisselen.': 'No por a kambia pantalla.',
@@ -4085,7 +4047,6 @@ const _dutchSourceAddPap = {
       'Tur lámina ta pasá over — no tin nada pa mustra.',
   'Alles tonen': 'Mustra tur',
   'Audio verwijderen': 'Kita audio',
-  'Automatisch doorgaan na': 'Sigui outomátikamente despues di',
   'Bijv. Kwartaalupdate Q4': 'Por ehèmpel Aktualisashon Q4',
   'Bullet': 'Punto',
   'Caption / bronvermelding (bijv. © Naam Fotograaf)':
@@ -4109,17 +4070,12 @@ const _dutchSourceAddPap = {
   'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
       'Tin presentashonnan ku kambionan no guardá. Guarda nan promé ku e app sera.',
   'Export mislukt:': 'Eksportashon a faya:',
-  'Footer tonen op deze slide': 'Mustra footer riba e lámina aki',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Usa "Buska" pa skohe imágennan for di kualke lokashon.',
   'Geen afbeelding op het klembord gevonden.':
       'No a haña ningun imágen riba klembord.',
   'Geen ander deck open. Open eerst een ander tabblad.':
       'No tin otro deck habrí. Habri promé un otro tab.',
   'Geen andere presentaties (.md) in deze map gevonden.':
       'No a haña otro presentashon (.md) den e karpeta aki.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'No a haña presentashon (.md) den e karpeta aki.',
   'Geen presentaties gevonden voor': 'No a haña presentashon pa',
   'Geen resultaten': 'No tin resultado',
   'Geen resultaten voor': 'No tin resultado pa',
@@ -4150,14 +4106,10 @@ const _dutchSourceAddPap = {
       'Atenshon: e imágen aki ainda ta wòrdu usá den',
   'Logo kiezen': 'Skohe logo',
   'Logo px': 'Logo px',
-  'Logo tonen op deze slide': 'Mustra logo riba e lámina aki',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabel editabel durante presentashon',
   'Map met presentaties kiezen': 'Skohe karpeta ku presentashon',
   'Map voor exports': 'Karpeta pa eksportashon',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'No por a prosesá e markdown. Kontrolá e sintaksis.',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Modo markdown — edita henter e presentashon komo Marp Markdown',
   'Markdown voor laatste slide': 'Markdown pa e último slide',
   'Naam van het stijlprofiel': 'Nòmber di e profil di stil',
   'Niet-opgeslagen werk herstellen?': 'Restorá trabou no guardá?',
@@ -4194,7 +4146,6 @@ const _dutchSourceAddPap = {
   'Sluiten (G of Esc)': 'Sera (G òf Esc)',
   'Sprekersnotities...': 'Notanan di e presentadó...',
   'Standaard laatste slide gebruiken': 'Usa e último slide standard',
-  'Standaard map voor presentaties': 'Karpeta standard pa presentashon',
   'Standaardprofiel laden': 'Karga profil standard',
   'TLP-classificatie (Traffic Light Protocol)':
       'Klasifikashon TLP (Traffic Light Protocol)',
@@ -4254,7 +4205,6 @@ const _dutchSourceAddPap = {
   'slides overgeslagen': 'lámina pasá over',
   'toegevoegd': 'agregá',
   'treffer(s)': 'resultado(nan)',
-  'treffers — verfijn je zoekopdracht': 'resultado — refiná bo buskeda',
   'van de foto zichtbaar': 'di e potrèt visibel',
   'vervangen': 'remplasá',
   'verwijderen': 'kita',

@@ -82,8 +82,6 @@ const _dutchSourceRo = {
   'Handtekening tekenen': 'Desenează semnătura',
   'Teken je handtekening in het vak hieronder.':
       'Desenează-ți semnătura în caseta de mai jos.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Un pachet de date este un .zip cu datele de referință pentru acest modul. Este mai întâi verificat față de amprenta încorporată în aplicație; se acceptă doar un pachet care corespunde acestei versiuni a aplicației.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',
@@ -191,7 +189,6 @@ const _dutchSourceRo = {
       'Imaginile și media sunt partajate de prezentările din același folder. Numele exact îl alegi imediat în fereastra de sistem.',
   'Alle bibliotheken': 'Toate bibliotecile',
   'Andere map…': 'Alt folder…',
-  'Bibliotheek verwijderen': 'Elimină biblioteca',
   'Bibliotheken': 'Biblioteci',
   'Geen bibliotheek': 'Nicio bibliotecă',
   'Geen presentaties (.md) gevonden.': 'Nu s-au găsit prezentări (.md).',
@@ -203,10 +200,6 @@ const _dutchSourceRo = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Alege în care bibliotecă ajunge prezentarea.',
   'Map toevoegen': 'Adaugă folder',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Foldere în care îți păstrezi și cauți prezentările. Dă-i fiecăruia un nume propriu ca să le deosebești. Toate bibliotecile sunt căutate la deschidere și în biblioteca de imagini.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Încă nicio bibliotecă — adaugă un folder.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Încă nicio bibliotecă. Adaugă una în Setări sau alege mai sus un folder pentru căutare.',
   'Presentatie opslaan': 'Salvează prezentarea',
@@ -288,21 +281,11 @@ const _dutchSourceRo = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Declarația de veridicitate cu raportorul, certificarea, semnătura și sigilarea.',
   'Uitbreidingen': 'Extensii',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
   'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nicio sursă accesibilă — datele de referință nu au putut fi descărcate de nicăieri. Încearcă din nou sau importă pachetul manual.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Datele descărcate nu au corespuns amprentei așteptate și au fost refuzate ca măsură de precauție.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Pachetul de date era deteriorat sau nevalid și, prin urmare, a fost refuzat.',
-  'Gegevenspakket kiezen': 'Alege pachetul de date',
-  'Kon het gekozen bestand niet lezen.': 'Fișierul ales nu a putut fi citit.',
   'Nog niet opgehaald': 'Încă nedescărcat',
   'AI-assistentie': 'Asistență IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -319,22 +302,15 @@ const _dutchSourceRo = {
       'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Licență și confidențialitate" și nu funcționează în versiunea web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Înțeleg că datele sunt trimise către acest serviciu extern',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Asistență IA (dezactivată implicit): dacă alegi un backend auto-găzduit sau cloud, textele sau imaginile pe care le procesezi sunt trimise la acea adresă. Un model IA local pe acest dispozitiv nu trimite nimic.',
   'Zoek een slidetype': 'Căutați un tip de slide',
   'Alfabetisch sorteren': 'Sortează alfabetic',
   'Algemeen': 'General',
   'Informatieveiligheid': 'Siguranța informației',
   'Alle': 'Toate',
-  'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
-  'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
-  'Agentisch bouwplan (ontwerp)': 'Plan de construcție agentic (proiectare)',
-  'Bijsnijden': 'Decupează',
   'Linksom': 'Rotește la stânga',
   'Rechtsom': 'Rotește la dreapta',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trageți imaginea pentru a alege ce parte rămâne vizibilă.',
-  'Git-opslag (ontwerp)': 'Stocare Git (proiectare)',
   'Zoek in documentatie…': 'Caută în documentație…',
   'Geen documenten gevonden': 'Nu s-au găsit documente',
   'Alleen afspelen (vergrendeld)': 'Doar redare (blocat)',
@@ -348,12 +324,8 @@ const _dutchSourceRo = {
   'Techniek': 'Tehnic',
   'Licentie en naleving': 'Licență și conformitate',
   'Architectuur': 'Arhitectură',
-  'Bouwinstructies': 'Instrucțiuni de compilare',
-  'Kwaliteitscontroles': 'Verificări de calitate',
-  'Broncodekaart': 'Harta codului sursă',
   'Licentienaleving': 'Conformitatea licențelor',
   'Softwarestuklijst (SBOM)': 'Listă de materiale software (SBOM)',
-  'Samenwerking (ontwerp)': 'Colaborare (proiectare)',
   'Beschermen met een wachtwoord (AES-256)': 'Protejează cu o parolă (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Păstrează parola în siguranță: dacă o pierzi, acest pachet nu mai poate fi deschis.',
@@ -431,10 +403,6 @@ const _dutchSourceRo = {
   'Instelling opslaan is mislukt.': 'Salvarea setării a eșuat.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Notă: versiunea web poate prelua doar de la servere care permit acest lucru (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pachetele (.ocideck) nu sunt încă acceptate în versiunea web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'În versiunea web pot fi deschise doar prezentări .md.',
   'Geen': 'Niciuna',
   'Nieuw': 'Nou',
   'Verwijderen': 'Șterge',
@@ -523,10 +491,8 @@ const _dutchSourceRo = {
   'Audio bij deze slide': 'Audio pentru acest slide',
   'Audio automatisch afspelen': 'Redă audio automat',
   'Audio verwijderen': 'Elimină audio',
-  'Geen audio gekozen': 'Niciun audio selectat',
   'Geen audiobestand gekozen': 'Niciun fișier audio selectat',
   'Video automatisch afspelen': 'Redă video automat',
-  'Geen video gekozen': 'Niciun video selectat',
   'Kiezen': 'Alege',
   'Uit bibliotheek…': 'Din bibliotecă…',
   'Van computer…': 'De pe computer…',
@@ -555,7 +521,6 @@ const _dutchSourceRo = {
   'Pakket importeren': 'Importă pachet',
   'Pakket exporteren': 'Exportă pachet',
   'Map met presentaties kiezen': 'Alege folderul cu prezentări',
-  'Standaard map voor presentaties': 'Folder implicit pentru prezentări',
   'Map voor exports': 'Folder pentru exporturi',
   'Logo kiezen': 'Alege logo',
   'Kies een afbeelding': 'Alege o imagine',
@@ -568,8 +533,6 @@ const _dutchSourceRo = {
   'Map kiezen': 'Alege folder',
   'Kies een map met presentaties om te beginnen.':
       'Alege un folder cu prezentări pentru a începe.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nu s-au găsit prezentări (.md) în acest folder.',
   'Geen presentaties gevonden voor': 'Nu s-au găsit prezentări pentru',
   'meer treffer(s)': 'potrivire/potriviri în plus',
   'Slide zoeken': 'Găsește slide',
@@ -591,7 +554,6 @@ const _dutchSourceRo = {
       'Introdu termeni de căutare pentru a găsi slide-uri din toate prezentările tale.',
   'toegevoegd': 'adăugat',
   'Eerste': 'Primele',
-  'treffers — verfijn je zoekopdracht': 'potriviri — rafinează căutarea',
   'treffer(s)': 'potrivire/potriviri',
   'slide': 'slide',
   'Zoeken en vervangen': 'Caută și înlocuiește',
@@ -650,7 +612,6 @@ const _dutchSourceRo = {
   'Tekst op zijpanelen': 'Text pe panourile laterale',
   'Voorbeeldtekst': 'Text exemplu',
   'Knop': 'Buton',
-  'Profielnaam': 'Nume profil',
   'Naam van het stijlprofiel': 'Numele profilului de stil',
   'Stijlprofiel': 'Profil de stil',
   'Nieuw profiel': 'Profil nou',
@@ -714,16 +675,9 @@ const _dutchSourceRo = {
   'TYPE': 'TIP',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Înapoi la stilul implicit',
-  'Automatisch doorgaan na': 'Avansează automat după',
-  'Logo tonen op deze slide': 'Afișează logo pe acest slide',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabel editabil în timpul prezentării',
-  'Footer tonen op deze slide': 'Afișează subsol pe acest slide',
   'Sprekersnotities...': 'Note pentru vorbitor...',
   'Sprekersnotities': 'Note pentru vorbitor',
   'Notities voor tijdens het presenteren': 'Note pentru timpul prezentării',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mod Markdown — editează întreaga prezentare ca Markdown Marp',
   'Toepassen': 'Aplică',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown nu a putut fi procesat. Verifică sintaxa.',
@@ -748,8 +702,6 @@ const _dutchSourceRo = {
   'Geen resultaten voor': 'Niciun rezultat pentru',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Ajustează termenul de căutare sau adaugă o descriere.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Folosește „Răsfoiește” pentru a alege imagini din orice locație.',
   'Selecteer een\nafbeelding': 'Selectează o\nimagine',
   'Gekopieerd': 'Copiat',
   'Afbeelding verwijderen?': 'Ștergi imaginea?',
@@ -766,8 +718,6 @@ const _dutchSourceRo = {
   'spatie': 'spațiu',
   'klik': 'clic',
   'cijfers': 'cifre',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Fă clic sau apasă ? / H / Esc pentru a închide',
   'Klik of druk op H / Esc om te sluiten':
       'Fă clic sau apasă H / Esc pentru a închide',
   'Naar slidenummer': 'Salt la numărul slide-ului',
@@ -778,20 +728,10 @@ const _dutchSourceRo = {
   'Presenter view (notities, klok)': 'Vizualizare prezentator (note, ceas)',
   'Scherm wisselen (meerdere schermen)': 'Schimbă ecranul (mai multe ecrane)',
   'Zwart · wit scherm': 'Ecran negru · alb',
-  'Verstreken tijd resetten': 'Resetează timpul scurs',
   'Automatische modus aan/uit': 'Mod automat activat/dezactivat',
   'Herhalen (loop) aan/uit': 'Repetare (buclă) activat/dezactivat',
-  'Na audio automatisch doorgaan': 'Avansează automat după audio',
-  'Dit overzicht': 'Această prezentare generală',
   'Deze legenda': 'Această legendă',
   'Terug / afsluiten': 'Înapoi / ieșire',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manual (A)',
-  'Herhalen (L)': 'Repetare (L)',
-  'Na audio (M)': 'După audio (M)',
-  'Sneltoetsen (?)': 'Scurtături de tastatură (?)',
-  'Slide-overzicht (G)': 'Prezentare generală a slide-urilor (G)',
-  'Presenter view (P)': 'Vizualizare prezentator (P)',
   'Tijd resetten (R)': 'Resetează cronometrul (R)',
   'HUIDIGE SLIDE': 'SLIDE-UL CURENT',
   'VOLGENDE': 'URMĂTORUL',
@@ -807,15 +747,9 @@ const _dutchSourceRo = {
   'Notities weggooien': 'Renunță la note',
   'Notities voor de ontvanger tijdens een cursus':
       'Note pentru destinatar în timpul unui curs',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Comută în modul Markdown pentru a adăuga note.',
   'Mijn notities aan/uit': 'Comută notele mele',
   'Wissel scherm (S)': 'Schimbă ecranul (S)',
   'Kon niet van scherm wisselen.': 'Nu s-a putut schimba ecranul.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P public · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P public · H legendă · G prezentare · B/W negru/alb · R timp · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

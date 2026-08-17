@@ -82,8 +82,6 @@ const _dutchSourceSk = {
   'Handtekening tekenen': 'Nakresliť podpis',
   'Teken je handtekening in het vak hieronder.':
       'Nakreslite svoj podpis do poľa nižšie.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Dátový balík je .zip s referenčnými údajmi pre tento modul. Najprv sa overí voči odtlačku zabudovanému v aplikácii; prijme sa iba balík, ktorý zodpovedá tejto verzii aplikácie.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Plošný',
   'Horizontale staaf': 'Vodorovný stĺpcový',
@@ -190,7 +188,6 @@ const _dutchSourceSk = {
       'Obrázky a médiá zdieľajú prezentácie v rovnakom priečinku. Presný názov zvolíš o chvíľu v systémovom okne.',
   'Alle bibliotheken': 'Všetky knižnice',
   'Andere map…': 'Iný priečinok…',
-  'Bibliotheek verwijderen': 'Odstrániť knižnicu',
   'Bibliotheken': 'Knižnice',
   'Geen bibliotheek': 'Žiadna knižnica',
   'Geen presentaties (.md) gevonden.': 'Nenašli sa žiadne prezentácie (.md).',
@@ -202,10 +199,6 @@ const _dutchSourceSk = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Zvoľ, do ktorej knižnice prezentácia patrí.',
   'Map toevoegen': 'Pridať priečinok',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Priečinky, do ktorých ukladáš a v ktorých hľadáš svoje prezentácie. Daj každému vlastný názov, aby si ich rozlíšil. Všetky knižnice sa prehľadávajú pri otváraní a v knižnici obrázkov.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Zatiaľ žiadna knižnica — pridaj priečinok.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Zatiaľ žiadna knižnica. Pridaj ju v Nastaveniach alebo vyššie zvoľ priečinok na prehľadanie.',
   'Presentatie opslaan': 'Uložiť prezentáciu',
@@ -287,22 +280,11 @@ const _dutchSourceSk = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Vyhlásenie o pravdivosti so spracovateľom, certifikáciou, podpisom a pečaťou.',
   'Uitbreidingen': 'Rozšírenia',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Voliteľné moduly. Predvolene vypnuté; do základnej aplikácie nič nepridávajú, kým ich nezapnete.',
   'Gegevens opschonen': 'Vyčistiť údaje',
   'Gegevens lokaal beschikbaar': 'Údaje dostupné lokálne',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Licencia a súkromie.',
   'Op het web nog niet beschikbaar': 'Na webe zatiaľ nedostupné',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Žiadny zdroj nie je dostupný — referenčné údaje sa nepodarilo nikde stiahnuť. Skúste to znova alebo balík importujte ručne.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Stiahnuté údaje sa nezhodovali s očakávaným odtlačkom a z opatrnosti boli odmietnuté.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Dátový balík bol poškodený alebo neplatný, a preto bol odmietnutý.',
-  'Gegevenspakket kiezen': 'Vybrať dátový balík',
-  'Kon het gekozen bestand niet lezen.':
-      'Vybraný súbor sa nepodarilo prečítať.',
   'Nog niet opgehaald': 'Zatiaľ nestiahnuté',
   'AI-assistentie': 'Asistencia AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -319,22 +301,15 @@ const _dutchSourceSk = {
       'Cloudová služba najprv vyžaduje váš súhlas so súkromím v časti "Licencia a súkromie" a vo webovej verzii nefunguje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Rozumiem, že sa údaje odosielajú tejto externej službe',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Asistencia AI (predvolene vypnutá): ak vyberiete vlastný alebo cloudový backend, texty alebo obrázky, ktoré necháte spracovať, sa odošlú na túto adresu. Lokálny model AI na tomto zariadení neodosiela nič.',
   'Zoek een slidetype': 'Vyhľadať typ snímky',
   'Alfabetisch sorteren': 'Zoradiť abecedne',
   'Algemeen': 'Všeobecné',
   'Informatieveiligheid': 'Informačná bezpečnosť',
   'Alle': 'Všetko',
-  'Pentestrapportage (ontwerp)': 'Pentestová správa (návrh)',
-  'AI-assistentie (ontwerp)': 'Asistencia AI (návrh)',
-  'Agentisch bouwplan (ontwerp)': 'Agentný plán zostavenia (návrh)',
-  'Bijsnijden': 'Orezať',
   'Linksom': 'Otočiť doľava',
   'Rechtsom': 'Otočiť doprava',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Potiahnutím obrázka vyberte, ktorá časť zostane viditeľná.',
-  'Git-opslag (ontwerp)': 'Úložisko Git (návrh)',
   'Zoek in documentatie…': 'Hľadať v dokumentácii…',
   'Geen documenten gevonden': 'Nenašli sa žiadne dokumenty',
   'Alleen afspelen (vergrendeld)': 'Iba na prezentovanie (zamknuté)',
@@ -348,12 +323,8 @@ const _dutchSourceSk = {
   'Techniek': 'Technika',
   'Licentie en naleving': 'Licencia a súlad',
   'Architectuur': 'Architektúra',
-  'Bouwinstructies': 'Pokyny na zostavenie',
-  'Kwaliteitscontroles': 'Kontroly kvality',
-  'Broncodekaart': 'Mapa zdrojového kódu',
   'Licentienaleving': 'Dodržiavanie licencií',
   'Softwarestuklijst (SBOM)': 'Kusovník softvéru (SBOM)',
-  'Samenwerking (ontwerp)': 'Spolupráca (návrh)',
   'Beschermen met een wachtwoord (AES-256)': 'Chrániť heslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Uschovajte toto heslo na bezpečnom mieste: ak ho stratíte, tento balík sa už nedá otvoriť.',
@@ -431,10 +402,6 @@ const _dutchSourceSk = {
   'Instelling opslaan is mislukt.': 'Uloženie nastavenia zlyhalo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pozor: webová verzia môže sťahovať len zo serverov, ktoré to povoľujú (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Balíky (.ocideck) zatiaľ nie sú vo webovej verzii podporované.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Vo webovej verzii možno otvoriť iba prezentácie .md.',
   'Geen': 'Žiadne',
   'Nieuw': 'Nový',
   'Verwijderen': 'Odstrániť',
@@ -523,10 +490,8 @@ const _dutchSourceSk = {
   'Audio bij deze slide': 'Zvuk k tejto snímke',
   'Audio automatisch afspelen': 'Prehrať zvuk automaticky',
   'Audio verwijderen': 'Odstrániť zvuk',
-  'Geen audio gekozen': 'Nezvolený žiadny zvuk',
   'Geen audiobestand gekozen': 'Nezvolený žiadny zvukový súbor',
   'Video automatisch afspelen': 'Prehrať video automaticky',
-  'Geen video gekozen': 'Nezvolené žiadne video',
   'Kiezen': 'Vybrať',
   'Uit bibliotheek…': 'Z knižnice…',
   'Van computer…': 'Z počítača…',
@@ -555,7 +520,6 @@ const _dutchSourceSk = {
   'Pakket importeren': 'Importovať balík',
   'Pakket exporteren': 'Exportovať balík',
   'Map met presentaties kiezen': 'Zvoliť priečinok s prezentáciami',
-  'Standaard map voor presentaties': 'Predvolený priečinok pre prezentácie',
   'Map voor exports': 'Priečinok pre exporty',
   'Logo kiezen': 'Zvoliť logo',
   'Kies een afbeelding': 'Zvoľte obrázok',
@@ -568,8 +532,6 @@ const _dutchSourceSk = {
   'Map kiezen': 'Zvoliť priečinok',
   'Kies een map met presentaties om te beginnen.':
       'Ak chcete začať, zvoľte priečinok s prezentáciami.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'V tomto priečinku sa nenašli žiadne prezentácie (.md).',
   'Geen presentaties gevonden voor': 'Nenašli sa žiadne prezentácie pre',
   'meer treffer(s)': 'ďalších zhôd',
   'Slide zoeken': 'Nájsť snímku',
@@ -591,7 +553,6 @@ const _dutchSourceSk = {
       'Zadajte hľadané výrazy na nájdenie snímok naprieč prezentáciami.',
   'toegevoegd': 'pridané',
   'Eerste': 'Prvých',
-  'treffers — verfijn je zoekopdracht': 'zhôd — spresnite hľadanie',
   'treffer(s)': 'zhôd',
   'slide': 'snímka',
   'Zoeken en vervangen': 'Nájsť a nahradiť',
@@ -650,7 +611,6 @@ const _dutchSourceSk = {
   'Tekst op zijpanelen': 'Text na bočných paneloch',
   'Voorbeeldtekst': 'Ukážkový text',
   'Knop': 'Tlačidlo',
-  'Profielnaam': 'Názov profilu',
   'Naam van het stijlprofiel': 'Názov štýlového profilu',
   'Stijlprofiel': 'Štýlový profil',
   'Nieuw profiel': 'Nový profil',
@@ -712,17 +672,10 @@ const _dutchSourceSk = {
   'TYPE': 'TYP',
   'STIJL': 'ŠTÝL',
   'Terug naar standaardstijl': 'Späť na predvolený štýl',
-  'Automatisch doorgaan na': 'Automaticky pokračovať po',
-  'Logo tonen op deze slide': 'Zobraziť logo na tejto snímke',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabuľka upraviteľná počas prezentovania',
-  'Footer tonen op deze slide': 'Zobraziť pätu na tejto snímke',
   'Sprekersnotities...': 'Poznámky rečníka...',
   'Sprekersnotities': 'Poznámky rečníka',
   'Notities voor tijdens het presenteren':
       'Poznámky na použitie počas prezentovania',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Režim Markdown — upravte celú prezentáciu ako Marp Markdown',
   'Toepassen': 'Použiť',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown sa nepodarilo spracovať. Skontrolujte syntax.',
@@ -747,8 +700,6 @@ const _dutchSourceSk = {
   'Geen resultaten voor': 'Žiadne výsledky pre',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Upravte hľadaný výraz alebo pridajte popis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Použite „Prehľadávať“ na výber obrázkov z ľubovoľného miesta.',
   'Selecteer een\nafbeelding': 'Vyberte\nobrázok',
   'Gekopieerd': 'Skopírované',
   'Afbeelding verwijderen?': 'Odstrániť obrázok?',
@@ -765,8 +716,6 @@ const _dutchSourceSk = {
   'spatie': 'medzerník',
   'klik': 'kliknutie',
   'cijfers': 'číslice',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kliknutím alebo stlačením ? / H / Esc zavriete',
   'Klik of druk op H / Esc om te sluiten':
       'Kliknutím alebo stlačením H / Esc zavriete',
   'Naar slidenummer': 'Prejsť na číslo snímky',
@@ -778,20 +727,10 @@ const _dutchSourceSk = {
   'Scherm wisselen (meerdere schermen)':
       'Prepnúť obrazovku (viacero obrazoviek)',
   'Zwart · wit scherm': 'Čierna · biela obrazovka',
-  'Verstreken tijd resetten': 'Vynulovať uplynulý čas',
   'Automatische modus aan/uit': 'Automatický režim zap./vyp.',
   'Herhalen (loop) aan/uit': 'Opakovanie (slučka) zap./vyp.',
-  'Na audio automatisch doorgaan': 'Po zvuku automaticky pokračovať',
-  'Dit overzicht': 'Tento prehľad',
   'Deze legenda': 'Táto legenda',
   'Terug / afsluiten': 'Späť / ukončiť',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuálne (A)',
-  'Herhalen (L)': 'Opakovať (L)',
-  'Na audio (M)': 'Po zvuku (M)',
-  'Sneltoetsen (?)': 'Klávesové skratky (?)',
-  'Slide-overzicht (G)': 'Prehľad snímok (G)',
-  'Presenter view (P)': 'Zobrazenie prednášajúceho (P)',
   'Tijd resetten (R)': 'Vynulovať časovač (R)',
   'HUIDIGE SLIDE': 'AKTUÁLNA SNÍMKA',
   'VOLGENDE': 'ĎALŠIA',
@@ -807,15 +746,9 @@ const _dutchSourceSk = {
   'Notities weggooien': 'Zahodiť poznámky',
   'Notities voor de ontvanger tijdens een cursus':
       'Poznámky pre príjemcu počas kurzu',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Prepnite do režimu Markdown, ak chcete pridať poznámky.',
   'Mijn notities aan/uit': 'Prepnúť moje poznámky zap./vyp.',
   'Wissel scherm (S)': 'Prepnúť obrazovku (S)',
   'Kon niet van scherm wisselen.': 'Nepodarilo sa prepnúť obrazovku.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publikum · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P publikum · H legenda · G prehľad · B/W čierna/biela · R čas · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

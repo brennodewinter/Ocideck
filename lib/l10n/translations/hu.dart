@@ -81,8 +81,6 @@ const _dutchSourceHu = {
   'Handtekening tekenen': 'Aláírás rajzolása',
   'Teken je handtekening in het vak hieronder.':
       'Rajzold az aláírásodat az alábbi mezőbe.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Az adatcsomag egy .zip a modul referenciaadataival. Először az alkalmazásba épített ujjlenyomathoz ellenőrzi; csak az ehhez az alkalmazásverzióhoz illő csomag fogadható el.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Terület',
   'Horizontale staaf': 'Vízszintes oszlop',
@@ -189,7 +187,6 @@ const _dutchSourceHu = {
       'A képeket és a médiát az ugyanabban a mappában lévő prezentációk közösen használják. A pontos nevet mindjárt a rendszerablakban választod ki.',
   'Alle bibliotheken': 'Összes könyvtár',
   'Andere map…': 'Másik mappa…',
-  'Bibliotheek verwijderen': 'Könyvtár eltávolítása',
   'Bibliotheken': 'Könyvtárak',
   'Geen bibliotheek': 'Nincs könyvtár',
   'Geen presentaties (.md) gevonden.': 'Nem található prezentáció (.md).',
@@ -201,10 +198,6 @@ const _dutchSourceHu = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Válaszd ki, melyik könyvtárba kerüljön a prezentáció.',
   'Map toevoegen': 'Mappa hozzáadása',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mappák, amelyekben a prezentációidat tárolod és keresed. Adj mindegyiknek saját nevet, hogy megkülönböztethesd őket. Az összes könyvtárban keres a program megnyitáskor és a képkönyvtárban.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Még nincs könyvtár — adj hozzá egy mappát.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Még nincs könyvtár. Adj hozzá egyet a Beállításokban, vagy válassz fentebb egy mappát a kereséshez.',
   'Presentatie opslaan': 'Prezentáció mentése',
@@ -286,22 +279,11 @@ const _dutchSourceHu = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'A valódiságnyilatkozat a jelentéstevővel, tanúsítással, aláírással és pecséttel.',
   'Uitbreidingen': 'Bővítmények',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',
   'Gegevens opschonen': 'Adatok törlése',
   'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
   'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nincs elérhető forrás — a referenciaadatokat sehonnan sem sikerült letölteni. Próbáld meg újra, vagy importáld a csomagot manuálisan.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'A letöltött adatok nem egyeztek a várt ujjlenyomattal, ezért elővigyázatosságból elutasítottuk őket.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Az adatcsomag sérült vagy érvénytelen volt, ezért elutasítottuk.',
-  'Gegevenspakket kiezen': 'Adatcsomag kiválasztása',
-  'Kon het gekozen bestand niet lezen.':
-      'A kiválasztott fájlt nem sikerült beolvasni.',
   'Nog niet opgehaald': 'Még nincs letöltve',
   'AI-assistentie': 'MI-segítség',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -318,22 +300,15 @@ const _dutchSourceHu = {
       'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Licenc és adatvédelem" részben, és a webes verzióban nem működik.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Megértem, hogy adatok kerülnek elküldésre ehhez a külső szolgáltatáshoz',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'MI-segítség (alapértelmezés szerint kikapcsolva): ha saját üzemeltetésű vagy felhőalapú háttérrendszert választasz, az általad feldolgoztatott szövegek vagy képek erre a címre kerülnek elküldésre. Egy helyi MI-modell ezen az eszközön semmit sem küld.',
   'Zoek een slidetype': 'Diatípus keresése',
   'Alfabetisch sorteren': 'Betűrendes rendezés',
   'Algemeen': 'Általános',
   'Informatieveiligheid': 'Információbiztonság',
   'Alle': 'Összes',
-  'Pentestrapportage (ontwerp)': 'Behatolásteszt-beszámoló (terv)',
-  'AI-assistentie (ontwerp)': 'AI-asszisztencia (terv)',
-  'Agentisch bouwplan (ontwerp)': 'Ágensalapú építési terv (terv)',
-  'Bijsnijden': 'Levágás',
   'Linksom': 'Forgatás balra',
   'Rechtsom': 'Forgatás jobbra',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Húzza a képet, hogy kiválassza, melyik rész marad látható.',
-  'Git-opslag (ontwerp)': 'Git-tárolás (terv)',
   'Zoek in documentatie…': 'Keresés a dokumentációban…',
   'Geen documenten gevonden': 'Nem található dokumentum',
   'Alleen afspelen (vergrendeld)': 'Csak lejátszás (zárva)',
@@ -347,12 +322,8 @@ const _dutchSourceHu = {
   'Techniek': 'Technikai',
   'Licentie en naleving': 'Licenc és megfelelőség',
   'Architectuur': 'Architektúra',
-  'Bouwinstructies': 'Fordítási útmutató',
-  'Kwaliteitscontroles': 'Minőségi ellenőrzések',
-  'Broncodekaart': 'Forráskód-térkép',
   'Licentienaleving': 'Licencmegfelelőség',
   'Softwarestuklijst (SBOM)': 'Szoftver-összetevők jegyzéke (SBOM)',
-  'Samenwerking (ontwerp)': 'Együttműködés (terv)',
   'Beschermen met een wachtwoord (AES-256)': 'Védelem jelszóval (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Őrizze meg jól ezt a jelszót: ha elveszíti, ez a csomag többé nem nyitható meg.',
@@ -431,10 +402,6 @@ const _dutchSourceHu = {
   'Instelling opslaan is mislukt.': 'A beállítás mentése sikertelen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'A csomagok (.ocideck) még nem támogatottak a webes verzióban.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'A webes verzióban csak .md-prezentációk nyithatók meg.',
   'Geen': 'Nincs',
   'Nieuw': 'Új',
   'Verwijderen': 'Törlés',
@@ -523,10 +490,8 @@ const _dutchSourceHu = {
   'Audio bij deze slide': 'Hang ehhez a diához',
   'Audio automatisch afspelen': 'Hang automatikus lejátszása',
   'Audio verwijderen': 'Hang eltávolítása',
-  'Geen audio gekozen': 'Nincs kiválasztott hang',
   'Geen audiobestand gekozen': 'Nincs kiválasztott hangfájl',
   'Video automatisch afspelen': 'Videó automatikus lejátszása',
-  'Geen video gekozen': 'Nincs kiválasztott videó',
   'Kiezen': 'Kiválasztás',
   'Uit bibliotheek…': 'Könyvtárból…',
   'Van computer…': 'Számítógépről…',
@@ -555,7 +520,6 @@ const _dutchSourceHu = {
   'Pakket importeren': 'Csomag importálása',
   'Pakket exporteren': 'Csomag exportálása',
   'Map met presentaties kiezen': 'Prezentációk mappájának kiválasztása',
-  'Standaard map voor presentaties': 'Alapértelmezett prezentációmappa',
   'Map voor exports': 'Exportálási mappa',
   'Logo kiezen': 'Logó kiválasztása',
   'Kies een afbeelding': 'Válasszon egy képet',
@@ -568,8 +532,6 @@ const _dutchSourceHu = {
   'Map kiezen': 'Mappa kiválasztása',
   'Kies een map met presentaties om te beginnen.':
       'Válasszon egy prezentációkat tartalmazó mappát a kezdéshez.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nem található prezentáció (.md) ebben a mappában.',
   'Geen presentaties gevonden voor': 'Nem található prezentáció ehhez:',
   'meer treffer(s)': 'további találat',
   'Slide zoeken': 'Dia keresése',
@@ -591,7 +553,6 @@ const _dutchSourceHu = {
       'Írjon be keresőkifejezéseket a diák megtalálásához az összes prezentációban.',
   'toegevoegd': 'hozzáadva',
   'Eerste': 'Első',
-  'treffers — verfijn je zoekopdracht': 'találat – finomítsa a keresést',
   'treffer(s)': 'találat',
   'slide': 'dia',
   'Zoeken en vervangen': 'Keresés és csere',
@@ -650,7 +611,6 @@ const _dutchSourceHu = {
   'Tekst op zijpanelen': 'Szöveg az oldalsó paneleken',
   'Voorbeeldtekst': 'Mintaszöveg',
   'Knop': 'Gomb',
-  'Profielnaam': 'Profilnév',
   'Naam van het stijlprofiel': 'A stílusprofil neve',
   'Stijlprofiel': 'Stílusprofil',
   'Nieuw profiel': 'Új profil',
@@ -712,16 +672,9 @@ const _dutchSourceHu = {
   'TYPE': 'TÍPUS',
   'STIJL': 'STÍLUS',
   'Terug naar standaardstijl': 'Vissza az alapértelmezett stílushoz',
-  'Automatisch doorgaan na': 'Automatikus továbblépés ennyi után',
-  'Logo tonen op deze slide': 'Logó megjelenítése ezen a dián',
-  'Tabel bewerkbaar tijdens presenteren':
-      'A táblázat szerkeszthető bemutatás közben',
-  'Footer tonen op deze slide': 'Lábléc megjelenítése ezen a dián',
   'Sprekersnotities...': 'Előadói jegyzetek...',
   'Sprekersnotities': 'Előadói jegyzetek',
   'Notities voor tijdens het presenteren': 'Jegyzetek a bemutatáshoz',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown mód — a teljes prezentáció szerkesztése Marp Markdownként',
   'Toepassen': 'Alkalmazás',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'A Markdownt nem sikerült feldolgozni. Ellenőrizze a szintaxist.',
@@ -746,8 +699,6 @@ const _dutchSourceHu = {
   'Geen resultaten voor': 'Nincs találat erre:',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Módosítsa a keresőkifejezést vagy adjon hozzá leírást.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Használja a „Tallózás” gombot képek bármely helyről történő kiválasztásához.',
   'Selecteer een\nafbeelding': 'Válasszon egy\nképet',
   'Gekopieerd': 'Másolva',
   'Afbeelding verwijderen?': 'Törli a képet?',
@@ -764,8 +715,6 @@ const _dutchSourceHu = {
   'spatie': 'szóköz',
   'klik': 'kattintás',
   'cijfers': 'számok',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kattints vagy nyomd meg a ? / H / Esc gombot a bezáráshoz',
   'Klik of druk op H / Esc om te sluiten':
       'Kattints vagy nyomd meg a H / Esc gombot a bezáráshoz',
   'Naar slidenummer': 'Ugrás diaszámra',
@@ -775,20 +724,10 @@ const _dutchSourceHu = {
   'Presenter view (notities, klok)': 'Előadói nézet (jegyzetek, óra)',
   'Scherm wisselen (meerdere schermen)': 'Képernyőváltás (több kijelző)',
   'Zwart · wit scherm': 'Fekete · fehér képernyő',
-  'Verstreken tijd resetten': 'Eltelt idő nullázása',
   'Automatische modus aan/uit': 'Automatikus mód be/ki',
   'Herhalen (loop) aan/uit': 'Ismétlés (loop) be/ki',
-  'Na audio automatisch doorgaan': 'Hang után automatikus továbblépés',
-  'Dit overzicht': 'Ez az áttekintés',
   'Deze legenda': 'Ez a jelmagyarázat',
   'Terug / afsluiten': 'Vissza / kilépés',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Kézi (A)',
-  'Herhalen (L)': 'Ismétlés (L)',
-  'Na audio (M)': 'Hang után (M)',
-  'Sneltoetsen (?)': 'Gyorsbillentyűk (?)',
-  'Slide-overzicht (G)': 'Diaáttekintés (G)',
-  'Presenter view (P)': 'Előadói nézet (P)',
   'Tijd resetten (R)': 'Idő nullázása (R)',
   'HUIDIGE SLIDE': 'AKTUÁLIS DIA',
   'VOLGENDE': 'KÖVETKEZŐ',
@@ -804,15 +743,9 @@ const _dutchSourceHu = {
   'Notities weggooien': 'Jegyzetek elvetése',
   'Notities voor de ontvanger tijdens een cursus':
       'Jegyzetek a résztvevőnek egy tanfolyam során',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Válts Markdown módra a jegyzetek hozzáadásához.',
   'Mijn notities aan/uit': 'Saját jegyzeteim be/ki',
   'Wissel scherm (S)': 'Képernyőváltás (S)',
   'Kon niet van scherm wisselen.': 'Nem sikerült képernyőt váltani.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P közönség · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

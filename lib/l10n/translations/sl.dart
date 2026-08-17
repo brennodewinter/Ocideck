@@ -81,8 +81,6 @@ const _dutchSourceSl = {
   'Handtekening tekenen': 'Nariši podpis',
   'Teken je handtekening in het vak hieronder.':
       'Narišite svoj podpis v polje spodaj.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Podatkovni paket je datoteka .zip z referenčnimi podatki za ta modul. Najprej se preveri glede na prstni odtis, vgrajen v aplikacijo; sprejet je le paket, ki ustreza tej različici aplikacije.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stolpci',
@@ -189,7 +187,6 @@ const _dutchSourceSl = {
       'Slike in medije si delijo predstavitve v isti mapi. Točno ime izbereš kar v sistemskem oknu.',
   'Alle bibliotheken': 'Vse knjižnice',
   'Andere map…': 'Druga mapa…',
-  'Bibliotheek verwijderen': 'Odstrani knjižnico',
   'Bibliotheken': 'Knjižnice',
   'Geen bibliotheek': 'Ni knjižnice',
   'Geen presentaties (.md) gevonden.': 'Ni najdenih predstavitev (.md).',
@@ -201,9 +198,6 @@ const _dutchSourceSl = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Izberi, v katero knjižnico gre predstavitev.',
   'Map toevoegen': 'Dodaj mapo',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mape, v katerih hraniš in iščeš svoje predstavitve. Vsaki daj svoje ime, da jih ločiš. Vse knjižnice se preiščejo ob odpiranju in v knjižnici slik.',
-  'Nog geen bibliotheek — voeg een map toe.': 'Še ni knjižnice — dodaj mapo.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Še ni knjižnice. Dodaj jo v Nastavitvah ali zgoraj izberi mapo za iskanje.',
   'Presentatie opslaan': 'Shrani predstavitev',
@@ -285,22 +279,11 @@ const _dutchSourceSl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Izjava o resničnosti s poročevalcem, certificiranjem, podpisom in pečatom.',
   'Uitbreidingen': 'Razširitve',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Izbirni moduli. Privzeto izklopljeni; osnovni aplikaciji ne dodajo ničesar, dokler jih ne omogočite.',
   'Gegevens opschonen': 'Počisti podatke',
   'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprej podajte soglasje za odhodni promet v razdelku Licenca in zasebnost.',
   'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Noben vir ni dosegljiv — referenčnih podatkov ni bilo mogoče nikjer prenesti. Poskusite znova ali ročno uvozite paket.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Preneseni podatki se niso ujemali s pričakovanim prstnim odtisom in so bili iz previdnosti zavrnjeni.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Podatkovni paket je bil poškodovan ali neveljaven in je bil zato zavrnjen.',
-  'Gegevenspakket kiezen': 'Izberi podatkovni paket',
-  'Kon het gekozen bestand niet lezen.':
-      'Izbrane datoteke ni bilo mogoče prebrati.',
   'Nog niet opgehaald': 'Še ni preneseno',
   'AI-assistentie': 'Pomoč UI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +300,15 @@ const _dutchSourceSl = {
       'Oblačna storitev najprej zahteva vaše soglasje o zasebnosti pod "Licenca in zasebnost" in ne deluje v spletni različici.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Razumem, da se podatki pošiljajo tej zunanji storitvi',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Pomoč UI (privzeto izklopljena): če izberete lastno gostovano ali oblačno zaledje, se besedila ali slike, ki jih obdelate, pošljejo na ta naslov. Lokalni model UI na tej napravi ne pošlje ničesar.',
   'Zoek een slidetype': 'Poišči vrsto diapozitiva',
   'Alfabetisch sorteren': 'Razvrsti po abecedi',
   'Algemeen': 'Splošno',
   'Informatieveiligheid': 'Informacijska varnost',
   'Alle': 'Vse',
-  'Pentestrapportage (ontwerp)': 'Poročilo o pentestu (zasnova)',
-  'AI-assistentie (ontwerp)': 'Pomoč AI (zasnova)',
-  'Agentisch bouwplan (ontwerp)': 'Agentni načrt gradnje (zasnova)',
-  'Bijsnijden': 'Obreži',
   'Linksom': 'Zavrti levo',
   'Rechtsom': 'Zavrti desno',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povlecite sliko, da izberete, kateri del ostane viden.',
-  'Git-opslag (ontwerp)': 'Shramba Git (zasnova)',
   'Zoek in documentatie…': 'Iskanje po dokumentaciji…',
   'Geen documenten gevonden': 'Ni najdenih dokumentov',
   'Alleen afspelen (vergrendeld)': 'Samo za predstavljanje (zaklenjeno)',
@@ -346,12 +322,8 @@ const _dutchSourceSl = {
   'Techniek': 'Tehnika',
   'Licentie en naleving': 'Licenca in skladnost',
   'Architectuur': 'Arhitektura',
-  'Bouwinstructies': 'Navodila za gradnjo',
-  'Kwaliteitscontroles': 'Preverjanja kakovosti',
-  'Broncodekaart': 'Zemljevid izvorne kode',
   'Licentienaleving': 'Skladnost z licencami',
   'Softwarestuklijst (SBOM)': 'Kosovnica programske opreme (SBOM)',
-  'Samenwerking (ontwerp)': 'Sodelovanje (zasnova)',
   'Beschermen met een wachtwoord (AES-256)': 'Zaščiti z geslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Dobro shranite to geslo: če ga izgubite, tega paketa ni več mogoče odpreti.',
@@ -429,10 +401,6 @@ const _dutchSourceSl = {
   'Instelling opslaan is mislukt.': 'Shranjevanje nastavitve ni uspelo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Opomba: spletna različica lahko prenaša le s strežnikov, ki to dovoljujejo (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketi (.ocideck) v spletni različici še niso podprti.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'V spletni različici je mogoče odpreti samo predstavitve .md.',
   'Geen': 'Brez',
   'Nieuw': 'Nova',
   'Verwijderen': 'Izbriši',
@@ -521,10 +489,8 @@ const _dutchSourceSl = {
   'Audio bij deze slide': 'Zvok za ta diapozitiv',
   'Audio automatisch afspelen': 'Samodejno predvajaj zvok',
   'Audio verwijderen': 'Odstrani zvok',
-  'Geen audio gekozen': 'Zvok ni izbran',
   'Geen audiobestand gekozen': 'Zvočna datoteka ni izbrana',
   'Video automatisch afspelen': 'Samodejno predvajaj video',
-  'Geen video gekozen': 'Video ni izbran',
   'Kiezen': 'Izberi',
   'Uit bibliotheek…': 'Iz knjižnice …',
   'Van computer…': 'Iz računalnika …',
@@ -553,7 +519,6 @@ const _dutchSourceSl = {
   'Pakket importeren': 'Uvozi paket',
   'Pakket exporteren': 'Izvozi paket',
   'Map met presentaties kiezen': 'Izberi mapo s predstavitvami',
-  'Standaard map voor presentaties': 'Privzeta mapa za predstavitve',
   'Map voor exports': 'Mapa za izvoze',
   'Logo kiezen': 'Izberi logotip',
   'Kies een afbeelding': 'Izberi sliko',
@@ -566,8 +531,6 @@ const _dutchSourceSl = {
   'Map kiezen': 'Izberi mapo',
   'Kies een map met presentaties om te beginnen.':
       'Za začetek izberite mapo s predstavitvami.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'V tej mapi ni najdenih predstavitev (.md).',
   'Geen presentaties gevonden voor': 'Ni najdenih predstavitev za',
   'meer treffer(s)': 'več zadetkov',
   'Slide zoeken': 'Poišči diapozitiv',
@@ -589,8 +552,6 @@ const _dutchSourceSl = {
       'Vnesite iskalne izraze za iskanje diapozitivov po vseh predstavitvah.',
   'toegevoegd': 'dodano',
   'Eerste': 'Prvih',
-  'treffers — verfijn je zoekopdracht':
-      'zadetkov — natančneje določite iskanje',
   'treffer(s)': 'zadetkov',
   'slide': 'diapozitiv',
   'Zoeken en vervangen': 'Poišči in zamenjaj',
@@ -649,7 +610,6 @@ const _dutchSourceSl = {
   'Tekst op zijpanelen': 'Besedilo na stranskih panelih',
   'Voorbeeldtekst': 'Vzorčno besedilo',
   'Knop': 'Gumb',
-  'Profielnaam': 'Ime profila',
   'Naam van het stijlprofiel': 'Ime slogovnega profila',
   'Stijlprofiel': 'Slogovni profil',
   'Nieuw profiel': 'Nov profil',
@@ -709,16 +669,9 @@ const _dutchSourceSl = {
   'TYPE': 'VRSTA',
   'STIJL': 'SLOG',
   'Terug naar standaardstijl': 'Nazaj na privzeti slog',
-  'Automatisch doorgaan na': 'Samodejno napreduj po',
-  'Logo tonen op deze slide': 'Prikaži logotip na tem diapozitivu',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabela urejljiva med predstavljanjem',
-  'Footer tonen op deze slide': 'Prikaži nogo na tem diapozitivu',
   'Sprekersnotities...': 'Opombe govorca ...',
   'Sprekersnotities': 'Opombe govorca',
   'Notities voor tijdens het presenteren': 'Opombe za med predstavljanjem',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Način Markdown — uredite celotno predstavitev kot Marp Markdown',
   'Toepassen': 'Uporabi',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown ni bilo mogoče obdelati. Preverite sintakso.',
@@ -743,8 +696,6 @@ const _dutchSourceSl = {
   'Geen resultaten voor': 'Ni rezultatov za',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Prilagodite iskalni izraz ali dodajte opis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Uporabite »Prebrskaj« za izbiro slik s katere koli lokacije.',
   'Selecteer een\nafbeelding': 'Izberite\nsliko',
   'Gekopieerd': 'Kopirano',
   'Afbeelding verwijderen?': 'Izbrišem sliko?',
@@ -761,8 +712,6 @@ const _dutchSourceSl = {
   'spatie': 'presledek',
   'klik': 'klik',
   'cijfers': 'številke',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kliknite ali pritisnite ? / H / Esc za zaprtje',
   'Klik of druk op H / Esc om te sluiten':
       'Kliknite ali pritisnite H / Esc za zaprtje',
   'Naar slidenummer': 'Na številko diapozitiva',
@@ -773,20 +722,10 @@ const _dutchSourceSl = {
   'Presenter view (notities, klok)': 'Pogled predavatelja (opombe, ura)',
   'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
-  'Verstreken tijd resetten': 'Ponastavi pretečeni čas',
   'Automatische modus aan/uit': 'Samodejni način vklop/izklop',
   'Herhalen (loop) aan/uit': 'Ponavljanje (zanka) vklop/izklop',
-  'Na audio automatisch doorgaan': 'Samodejno nadaljuj po zvoku',
-  'Dit overzicht': 'Ta pregled',
   'Deze legenda': 'Ta legenda',
   'Terug / afsluiten': 'Nazaj / izhod',
-  'Auto (A)': 'Samodejno (A)',
-  'Handmatig (A)': 'Ročno (A)',
-  'Herhalen (L)': 'Ponavljanje (L)',
-  'Na audio (M)': 'Po zvoku (M)',
-  'Sneltoetsen (?)': 'Bližnjice (?)',
-  'Slide-overzicht (G)': 'Pregled diapozitivov (G)',
-  'Presenter view (P)': 'Pogled predavatelja (P)',
   'Tijd resetten (R)': 'Ponastavi čas (R)',
   'HUIDIGE SLIDE': 'TRENUTNI DIAPOZITIV',
   'VOLGENDE': 'NASLEDNJI',
@@ -802,15 +741,9 @@ const _dutchSourceSl = {
   'Notities weggooien': 'Zavrzi opombe',
   'Notities voor de ontvanger tijdens een cursus':
       'Opombe za prejemnika med tečajem',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Preklopite v način Markdown za dodajanje opomb.',
   'Mijn notities aan/uit': 'Vklop/izklop mojih opomb',
   'Wissel scherm (S)': 'Preklop zaslona (S)',
   'Kon niet van scherm wisselen.': 'Zaslona ni bilo mogoče preklopiti.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P občinstvo · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

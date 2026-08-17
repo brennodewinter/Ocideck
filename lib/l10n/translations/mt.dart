@@ -82,8 +82,6 @@ const _dutchSourceMt = {
   'Handtekening tekenen': 'Iddisinja l-firma',
   'Teken je handtekening in het vak hieronder.':
       'Iddisinja l-firma tiegħek fil-kaxxa hawn taħt.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Pakkett tad-data huwa .zip bid-dejta ta\' referenza għal dan il-modulu. L-ewwel jiġi vverifikat mal-marka tas-swaba\' mibnija fl-app; jiġi aċċettat biss pakkett li jaqbel ma\' din il-verżjoni tal-app.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Erja',
   'Horizontale staaf': 'Bar orizzontali',
@@ -190,7 +188,6 @@ const _dutchSourceMt = {
       'L-immaġni u l-media jinqasmu mill-preżentazzjonijiet fl-istess kartella. L-isem eżatt tagħżlu mill-ewwel fit-tieqa tas-sistema.',
   'Alle bibliotheken': 'Il-libreriji kollha',
   'Andere map…': 'Kartella oħra…',
-  'Bibliotheek verwijderen': 'Neħħi l-librerija',
   'Bibliotheken': 'Libreriji',
   'Geen bibliotheek': 'L-ebda librerija',
   'Geen presentaties (.md) gevonden.':
@@ -203,10 +200,6 @@ const _dutchSourceMt = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Agħżel f\'liema librerija tmur il-preżentazzjoni.',
   'Map toevoegen': 'Żid kartella',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Kartelli fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek. Agħti lil kull waħda isem tagħha biex tiddistingwihom. Il-libreriji kollha jiġu mfittxa mal-ftuħ u fil-librerija tal-immaġni.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Għad l-ebda librerija — żid kartella.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Għad l-ebda librerija. Żid waħda fis-Settings, jew agħżel kartella hawn fuq biex tfittex.',
   'Presentatie opslaan': 'Issejvja l-preżentazzjoni',
@@ -288,21 +281,11 @@ const _dutchSourceMt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Id-dikjarazzjoni tal-verità bir-rapporteur, iċ-ċertifikazzjoni, il-firma u s-siġill.',
   'Uitbreidingen': 'Estensjonijiet',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Moduli fakultattivi. Mitfija b\'mod awtomatiku; ma jżidu xejn mal-app bażika sakemm ma tattivahomx.',
   'Gegevens opschonen': 'Naddaf id-dejta',
   'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'L-ebda sors ma huwa aċċessibbli — id-dejta ta\' referenza ma setgħetx tinġieb minn imkien. Erġa\' pprova jew importa l-pakkett manwalment.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Id-dejta miġjuba ma qablitx mal-marka tas-swaba\' mistennija u ġiet miċħuda bħala prekawzjoni.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Il-pakkett tad-dejta kien bil-ħsara jew invalidu u għalhekk ġie miċħud.',
-  'Gegevenspakket kiezen': 'Agħżel il-pakkett tad-dejta',
-  'Kon het gekozen bestand niet lezen.': 'Ma setax jinqara l-fajl magħżul.',
   'Nog niet opgehaald': 'Għadha ma tniżżlitx',
   'AI-assistentie': 'Assistenza AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -319,22 +302,15 @@ const _dutchSourceMt = {
       'Servizz tal-cloud l-ewwel jeħtieġ il-kunsens tiegħek għall-privatezza taħt "Liċenzja u Privatezza" u ma jaħdimx fil-verżjoni web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Nifhem li d-data tintbagħat lil dan is-servizz estern',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Assistenza AI (mitfija b\'default): jekk tagħżel backend ospitat minnek jew fil-cloud, it-testi jew l-immaġni li tipproċessa jintbagħtu lil dak l-indirizz. Mudell AI lokali fuq dan l-apparat ma jibgħat xejn.',
   'Zoek een slidetype': 'Fittex it-tip ta\' slide',
   'Alfabetisch sorteren': 'Issortja alfabetikament',
   'Algemeen': 'Ġenerali',
   'Informatieveiligheid': 'Sigurtà tal-informazzjoni',
   'Alle': 'Kollha',
-  'Pentestrapportage (ontwerp)': 'Rapport tal-pentest (disinn)',
-  'AI-assistentie (ontwerp)': 'Assistenza AI (disinn)',
-  'Agentisch bouwplan (ontwerp)': 'Pjan ta\' bini aġentiku (disinn)',
-  'Bijsnijden': 'Aqta\'',
   'Linksom': 'Dawwar lemin',
   'Rechtsom': 'Dawmar lemin',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Iġbed l-immaġni biex tagħżel liema parti tibqa\' viżibbli.',
-  'Git-opslag (ontwerp)': 'Ħażna Git (disinn)',
   'Zoek in documentatie…': 'Fittex fid-dokumentazzjoni…',
   'Geen documenten gevonden': 'Ma nstab l-ebda dokument',
   'Alleen afspelen (vergrendeld)': 'Daqq biss (imsakkar)',
@@ -348,12 +324,8 @@ const _dutchSourceMt = {
   'Techniek': 'Teknika',
   'Licentie en naleving': 'Liċenzja u konformità',
   'Architectuur': 'Arkitettura',
-  'Bouwinstructies': 'Struzzjonijiet tal-bini',
-  'Kwaliteitscontroles': 'Kontrolli tal-kwalità',
-  'Broncodekaart': 'Mappa tal-kodiċi sors',
   'Licentienaleving': 'Konformità tal-liċenzji',
   'Softwarestuklijst (SBOM)': 'Lista tal-Materjali tas-Software (SBOM)',
-  'Samenwerking (ontwerp)': 'Kollaborazzjoni (disinn)',
   'Beschermen met een wachtwoord (AES-256)': 'Ipproteġi b\'password (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Żomm din il-password fis-sigurtà: jekk titlifha, dan il-pakkett ma jkunx jista\' jinfetaħ aktar.',
@@ -433,10 +405,6 @@ const _dutchSourceMt = {
   'Instelling opslaan is mislukt.': 'L-issejvjar tas-setting falla.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Il-pakketti (.ocideck) għadhom mhumiex appoġġjati fil-verżjoni tal-web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Fil-verżjoni tal-web jistgħu jinfetħu biss preżentazzjonijiet .md.',
   'Geen': 'L-ebda',
   'Nieuw': 'Ġdid',
   'Verwijderen': 'Ħassar',
@@ -526,10 +494,8 @@ const _dutchSourceMt = {
   'Audio bij deze slide': 'Awdjo għal din is-slide',
   'Audio automatisch afspelen': 'Daqq l-awdjo awtomatikament',
   'Audio verwijderen': 'Neħħi l-awdjo',
-  'Geen audio gekozen': 'L-ebda awdjo magħżul',
   'Geen audiobestand gekozen': 'L-ebda fajl awdjo magħżul',
   'Video automatisch afspelen': 'Daqq il-vidjow awtomatikament',
-  'Geen video gekozen': 'L-ebda vidjow magħżul',
   'Kiezen': 'Agħżel',
   'Uit bibliotheek…': 'Mil-librerija…',
   'Van computer…': 'Mill-kompjuter…',
@@ -558,8 +524,6 @@ const _dutchSourceMt = {
   'Pakket importeren': 'Importa pakkett',
   'Pakket exporteren': 'Esporta pakkett',
   'Map met presentaties kiezen': 'Agħżel il-folder tal-preżentazzjonijiet',
-  'Standaard map voor presentaties':
-      'Folder awtomatiku għall-preżentazzjonijiet',
   'Map voor exports': 'Folder għall-esportazzjonijiet',
   'Logo kiezen': 'Agħżel logo',
   'Kies een afbeelding': 'Agħżel immaġni',
@@ -572,8 +536,6 @@ const _dutchSourceMt = {
   'Map kiezen': 'Agħżel folder',
   'Kies een map met presentaties om te beginnen.':
       'Agħżel folder bil-preżentazzjonijiet biex tibda.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Ma nstabet l-ebda preżentazzjoni (.md) f\'dan il-folder.',
   'Geen presentaties gevonden voor': 'Ma nstabet l-ebda preżentazzjoni għal',
   'meer treffer(s)': 'riżultat(i) oħra',
   'Slide zoeken': 'Sib slide',
@@ -595,8 +557,6 @@ const _dutchSourceMt = {
       'Ikteb termini ta\' tfittxija biex issib slides mill-preżentazzjonijiet kollha tiegħek.',
   'toegevoegd': 'miżjud',
   'Eerste': 'L-ewwel',
-  'treffers — verfijn je zoekopdracht':
-      'riżultati — irfina t-tfittxija tiegħek',
   'treffer(s)': 'riżultat(i)',
   'slide': 'slide',
   'Zoeken en vervangen': 'Fittex u ibdel',
@@ -656,7 +616,6 @@ const _dutchSourceMt = {
   'Tekst op zijpanelen': 'Test fuq il-panewijiet tal-ġenb',
   'Voorbeeldtekst': 'Test ta\' eżempju',
   'Knop': 'Buttuna',
-  'Profielnaam': 'Isem il-profil',
   'Naam van het stijlprofiel': 'Isem il-profil tal-istil',
   'Stijlprofiel': 'Profil tal-istil',
   'Nieuw profiel': 'Profil ġdid',
@@ -719,16 +678,9 @@ const _dutchSourceMt = {
   'TYPE': 'TIP',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Lura għall-istil awtomatiku',
-  'Automatisch doorgaan na': 'Mexxi awtomatikament wara',
-  'Logo tonen op deze slide': 'Uri l-logo fuq din is-slide',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabella li tista\' tiġi editjata waqt il-preżentazzjoni',
-  'Footer tonen op deze slide': 'Uri l-footer fuq din is-slide',
   'Sprekersnotities...': 'Noti tal-kelliem...',
   'Sprekersnotities': 'Noti tal-kelliem',
   'Notities voor tijdens het presenteren': 'Noti għal waqt il-preżentazzjoni',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Modalità Markdown — editja l-preżentazzjoni sħiħa bħala Marp Markdown',
   'Toepassen': 'Applika',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Il-Markdown ma setax jiġi pproċessat. Iċċekkja s-sintassi.',
@@ -753,8 +705,6 @@ const _dutchSourceMt = {
   'Geen resultaten voor': 'L-ebda riżultat għal',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Aġġusta t-terminu ta\' tfittxija jew żid deskrizzjoni.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Uża "Fittex" biex tagħżel immaġni minn kwalunkwe post.',
   'Selecteer een\nafbeelding': 'Agħżel\nimmaġni',
   'Gekopieerd': 'Ikkupjat',
   'Afbeelding verwijderen?': 'Tħassar l-immaġni?',
@@ -771,8 +721,6 @@ const _dutchSourceMt = {
   'spatie': 'spazju',
   'klik': 'klikk',
   'cijfers': 'numri',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Ikklikkja jew agħfas ? / H / Esc biex tagħlaq',
   'Klik of druk op H / Esc om te sluiten':
       'Ikklikkja jew agħfas H / Esc biex tagħlaq',
   'Naar slidenummer': 'Mur għan-numru tas-slide',
@@ -783,20 +731,10 @@ const _dutchSourceMt = {
   'Presenter view (notities, klok)': 'Veduta tal-preżentatur (noti, arloġġ)',
   'Scherm wisselen (meerdere schermen)': 'Biddel l-iskrin (diversi skrins)',
   'Zwart · wit scherm': 'Skrin iswed · abjad',
-  'Verstreken tijd resetten': 'Erġa\' ssettja l-ħin li għadda',
   'Automatische modus aan/uit': 'Modalità awtomatika mixgħula/mitfija',
   'Herhalen (loop) aan/uit': 'Ripetizzjoni (loop) mixgħula/mitfija',
-  'Na audio automatisch doorgaan': 'Kompli awtomatikament wara l-awdjo',
-  'Dit overzicht': 'Din il-ħarsa ġenerali',
   'Deze legenda': 'Din il-leġġenda',
   'Terug / afsluiten': 'Lura / oħroġ',
-  'Auto (A)': 'Awto (A)',
-  'Handmatig (A)': 'Manwali (A)',
-  'Herhalen (L)': 'Irrepeti (L)',
-  'Na audio (M)': 'Wara l-awdjo (M)',
-  'Sneltoetsen (?)': 'Xortcuts tat-tastiera (?)',
-  'Slide-overzicht (G)': 'Ħarsa ġenerali tal-slides (G)',
-  'Presenter view (P)': 'Veduta tal-preżentatur (P)',
   'Tijd resetten (R)': 'Erġa\' ssettja t-timer (R)',
   'HUIDIGE SLIDE': 'SLIDE ATTWALI',
   'VOLGENDE': 'LI JMISS',
@@ -812,15 +750,9 @@ const _dutchSourceMt = {
   'Notities weggooien': 'Warrab in-noti',
   'Notities voor de ontvanger tijdens een cursus':
       'Noti għar-riċevitur waqt kors',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Aqleb għall-modalità Markdown biex iżżid noti.',
   'Mijn notities aan/uit': 'Ixgħel/itfi n-noti tiegħi',
   'Wissel scherm (S)': 'Biddel l-iskrin (S)',
   'Kon niet van scherm wisselen.': 'Ma stajniex naqilbu l-iskrins.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubbliku · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P pubbliku · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P pubbliku · H leġġenda · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

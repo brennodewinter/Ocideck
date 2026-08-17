@@ -82,8 +82,6 @@ const _dutchSourceFr = {
   'Handtekening tekenen': 'Dessiner la signature',
   'Teken je handtekening in het vak hieronder.':
       'Dessinez votre signature dans le cadre ci-dessous.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Un paquet de données est un .zip contenant les données de référence de ce module. Il est d\'abord vérifié par rapport à l\'empreinte intégrée à l\'application ; seul un paquet correspondant à cette version de l\'application est accepté.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Aires',
   'Horizontale staaf': 'Barres horizontales',
@@ -193,7 +191,6 @@ const _dutchSourceFr = {
       'Les images et les médias sont partagés par les présentations du même dossier. Vous choisirez le nom exact dans la fenêtre système.',
   'Alle bibliotheken': 'Toutes les bibliothèques',
   'Andere map…': 'Autre dossier…',
-  'Bibliotheek verwijderen': 'Supprimer la bibliothèque',
   'Bibliotheken': 'Bibliothèques',
   'Geen bibliotheek': 'Aucune bibliothèque',
   'Geen presentaties (.md) gevonden.': 'Aucune présentation (.md) trouvée.',
@@ -205,10 +202,6 @@ const _dutchSourceFr = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Choisissez dans quelle bibliothèque placer la présentation.',
   'Map toevoegen': 'Ajouter un dossier',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Dossiers où vous conservez et recherchez vos présentations. Donnez-leur un nom propre pour les distinguer. Toutes les bibliothèques sont explorées à l\'ouverture et dans la bibliothèque d\'images.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Aucune bibliothèque pour l\'instant — ajoutez un dossier.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Aucune bibliothèque pour l\'instant. Ajoutez-en une dans les Réglages, ou choisissez ci-dessus un dossier à explorer.',
   'Presentatie opslaan': 'Enregistrer la présentation',
@@ -291,22 +284,11 @@ const _dutchSourceFr = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'La déclaration de véracité avec le rapporteur, la certification, la signature et le scellement.',
   'Uitbreidingen': 'Extensions',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Modules optionnels. Désactivés par défaut ; ils n\'ajoutent rien à l\'application de base jusqu\'à leur activation.',
   'Gegevens opschonen': 'Nettoyer les données',
   'Gegevens lokaal beschikbaar': 'Données disponibles localement',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Accordez d\'abord le consentement au trafic sortant sous Licence et confidentialité.',
   'Op het web nog niet beschikbaar': 'Pas encore disponible sur le web',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Aucune source accessible — les données de référence n\'ont pu être téléchargées nulle part. Réessayez ou importez le paquet manuellement.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Les données téléchargées ne correspondaient pas à l\'empreinte attendue et ont été refusées par précaution.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Le paquet de données était endommagé ou invalide et a donc été refusé.',
-  'Gegevenspakket kiezen': 'Choisir le paquet de données',
-  'Kon het gekozen bestand niet lezen.':
-      'Impossible de lire le fichier choisi.',
   'Nog niet opgehaald': 'Pas encore téléchargé',
   'AI-assistentie': 'Assistance IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -323,22 +305,15 @@ const _dutchSourceFr = {
       'Un service cloud requiert d\'abord votre consentement de confidentialité sous "Licence et confidentialité" et ne fonctionne pas dans la version web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Je comprends que des données sont envoyées à ce service externe',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Assistance IA (désactivée par défaut) : si vous choisissez un backend auto-hébergé ou cloud, les textes ou images que vous faites traiter sont envoyés à cette adresse. Un modèle IA local sur cet appareil n\'envoie rien.',
   'Zoek een slidetype': 'Rechercher un type de diapositive',
   'Alfabetisch sorteren': 'Trier par ordre alphabétique',
   'Algemeen': 'Général',
   'Informatieveiligheid': 'Sûreté de l\'information',
   'Alle': 'Tout',
-  'Pentestrapportage (ontwerp)': 'Rapport de pentest (conception)',
-  'AI-assistentie (ontwerp)': 'Assistance IA (conception)',
-  'Agentisch bouwplan (ontwerp)': 'Plan de construction agentique (conception)',
-  'Bijsnijden': 'Rogner',
   'Linksom': 'Pivoter à gauche',
   'Rechtsom': 'Pivoter à droite',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Faites glisser l\'image pour choisir la partie qui reste visible.',
-  'Git-opslag (ontwerp)': 'Stockage Git (conception)',
   'Zoek in documentatie…': 'Rechercher dans la documentation…',
   'Geen documenten gevonden': 'Aucun document trouvé',
   'Alleen afspelen (vergrendeld)': 'Lecture seule (verrouillée)',
@@ -352,12 +327,8 @@ const _dutchSourceFr = {
   'Techniek': 'Technique',
   'Licentie en naleving': 'Licence et conformité',
   'Architectuur': 'Architecture',
-  'Bouwinstructies': 'Instructions de compilation',
-  'Kwaliteitscontroles': 'Contrôles de qualité',
-  'Broncodekaart': 'Carte du code source',
   'Licentienaleving': 'Conformité des licences',
   'Softwarestuklijst (SBOM)': 'Nomenclature logicielle (SBOM)',
-  'Samenwerking (ontwerp)': 'Collaboration (conception)',
   'Beschermen met een wachtwoord (AES-256)':
       'Protéger par un mot de passe (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -438,10 +409,6 @@ const _dutchSourceFr = {
   'Instelling opslaan is mislukt.': 'Échec de l\'enregistrement du paramètre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Remarque : la version web ne peut récupérer que depuis des serveurs qui l\'autorisent (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Les paquets (.ocideck) ne sont pas encore pris en charge dans la version web.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Seules les présentations .md peuvent être ouvertes dans la version web.',
   'Geen': 'Aucun',
   'Nieuw': 'Nouveau',
   'Verwijderen': 'Supprimer',
@@ -511,7 +478,6 @@ const _dutchSourceFr = {
   'Audio automatisch afspelen': 'Lire l’audio automatiquement',
   'Video automatisch afspelen': 'Lire la vidéo automatiquement',
   'Geen audiobestand gekozen': 'Aucun fichier audio choisi',
-  'Geen video gekozen': 'Aucune vidéo choisie',
   'Kiezen': 'Choisir',
   'Uit bibliotheek…': 'Depuis la bibliothèque…',
   'Van computer…': 'Depuis l’ordinateur…',
@@ -580,7 +546,6 @@ const _dutchSourceFr = {
   'Tekst op zijpanelen': 'Texte des panneaux latéraux',
   'Voorbeeldtekst': 'Exemple de texte',
   'Knop': 'Bouton',
-  'Profielnaam': 'Nom du profil',
   'Stijlprofiel': 'Profil de style',
   'Lettertype': 'Police',
   'Kleuren': 'Couleurs',
@@ -626,10 +591,8 @@ const _dutchSourceFr = {
   'Presenter view (notities, klok)': 'Vue presentateur (notes, horloge)',
   'Scherm wisselen (meerdere schermen)': 'Changer d’ecran (plusieurs ecrans)',
   'Zwart · wit scherm': 'Ecran noir · blanc',
-  'Verstreken tijd resetten': 'Reinitialiser le temps ecoule',
   'Automatische modus aan/uit': 'Mode automatique active/desactive',
   'Herhalen (loop) aan/uit': 'Boucle activee/desactivee',
-  'Na audio automatisch doorgaan': 'Avancer automatiquement apres l’audio',
   'Deze legenda': 'Cette legende',
   'Terug / afsluiten': 'Retour / quitter',
   'HUIDIGE SLIDE': 'DIAPOSITIVE ACTUELLE',
@@ -4118,7 +4081,6 @@ const _dutchSourceAddFr = {
       'Toutes les diapositives sont ignorées — rien à afficher.',
   'Alles tonen': 'Tout afficher',
   'Audio verwijderen': 'Supprimer l\'audio',
-  'Automatisch doorgaan na': 'Avancer automatiquement après',
   'Bijv. Kwartaalupdate Q4': 'Ex. Mise à jour T4',
   'Bullet': 'Puce',
   'Caption / bronvermelding (bijv. © Naam Fotograaf)':
@@ -4142,10 +4104,6 @@ const _dutchSourceAddFr = {
   'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
       'Des présentations comportent des modifications non enregistrées. Enregistrez-les avant de fermer l\'application.',
   'Export mislukt:': 'Échec de l\'exportation :',
-  'Footer tonen op deze slide':
-      'Afficher le pied de page sur cette diapositive',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Utilisez « Parcourir » pour choisir des images de n\'importe quel emplacement.',
   'Geen afbeelding op het klembord gevonden.':
       'Aucune image trouvée dans le presse-papiers.',
   'Geen ander deck open. Open eerst een ander tabblad.':
@@ -4159,11 +4117,7 @@ const _dutchSourceAddFr = {
       'Notes utilisateur pour cette diapositive...',
   'Notities voor de ontvanger tijdens een cursus':
       'Notes pour le destinataire pendant un cours',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Passez en mode Markdown pour ajouter des notes.',
   'Mijn notities aan/uit': 'Activer/désactiver mes notes',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Aucune présentation (.md) trouvée dans ce dossier.',
   'Geen presentaties gevonden voor': 'Aucune présentation trouvée pour',
   'Geen resultaten': 'Aucun résultat',
   'Geen resultaten voor': 'Aucun résultat pour',
@@ -4196,15 +4150,10 @@ const _dutchSourceAddFr = {
       'Attention : cette image est encore utilisée dans',
   'Logo kiezen': 'Choisir un logo',
   'Logo px': 'Logo px',
-  'Logo tonen op deze slide': 'Afficher le logo sur cette diapositive',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tableau modifiable pendant la présentation',
   'Map met presentaties kiezen': 'Choisir le dossier des présentations',
   'Map voor exports': 'Dossier des exports',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Le Markdown n\'a pas pu être traité. Vérifiez la syntaxe.',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mode Markdown — modifiez la présentation entière en Markdown Marp',
   'Markdown voor laatste slide': 'Markdown pour la diapositive finale',
   'Naam van het stijlprofiel': 'Nom du profil de style',
   'Niet-opgeslagen werk herstellen?': 'Restaurer le travail non enregistré ?',
@@ -4244,7 +4193,6 @@ const _dutchSourceAddFr = {
   'Sprekersnotities...': 'Notes de l\'orateur...',
   'Standaard laatste slide gebruiken':
       'Utiliser la diapositive finale par défaut',
-  'Standaard map voor presentaties': 'Dossier par défaut des présentations',
   'Standaardprofiel laden': 'Charger le profil par défaut',
   'TLP-classificatie (Traffic Light Protocol)':
       'Classification TLP (Traffic Light Protocol)',
@@ -4305,7 +4253,6 @@ const _dutchSourceAddFr = {
   'slides overgeslagen': 'diapositives ignorées',
   'toegevoegd': 'ajouté',
   'treffer(s)': 'résultat(s)',
-  'treffers — verfijn je zoekopdracht': 'résultats — affinez votre recherche',
   'van de foto zichtbaar': 'de la photo visible',
   'vervangen': 'remplacé',
   'verwijderen': 'supprimer',

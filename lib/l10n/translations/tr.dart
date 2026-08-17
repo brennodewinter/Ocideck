@@ -81,8 +81,6 @@ const _dutchSourceTr = {
   'Handtekening tekenen': 'İmza çiz',
   'Teken je handtekening in het vak hieronder.':
       'İmzanızı aşağıdaki kutuya çizin.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Veri paketi, bu modüle ait referans verileri içeren bir .zip dosyasıdır. Önce uygulamaya gömülü parmak izine karşı denetlenir; yalnızca bu uygulama sürümüne ait bir paket kabul edilir.',
   'Vlak': 'Alan',
   'Horizontale staaf': 'Yatay çubuk',
   'Waterval': 'Şelale',
@@ -189,7 +187,6 @@ const _dutchSourceTr = {
       'Görseller ve medya, aynı klasördeki sunumlar arasında paylaşılır. Tam adı birazdan sistem penceresinde seçeceksiniz.',
   'Alle bibliotheken': 'Tüm kitaplıklar',
   'Andere map…': 'Başka klasör…',
-  'Bibliotheek verwijderen': 'Kitaplığı kaldır',
   'Bibliotheken': 'Kitaplıklar',
   'Geen bibliotheek': 'Kitaplık yok',
   'Geen presentaties (.md) gevonden.': 'Sunum (.md) bulunamadı.',
@@ -201,10 +198,6 @@ const _dutchSourceTr = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Sunumun hangi kitaplığa geleceğini seçin.',
   'Map toevoegen': 'Klasör ekle',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Sunumlarınızı sakladığınız ve içinde arama yaptığınız klasörler. Ayırt edebilmek için her birine kendi adını verin. Açarken ve görsel kitaplığında tüm kitaplıklarda arama yapılır.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Henüz kitaplık yok — bir klasör ekleyin.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Henüz kitaplık yok. Ayarlar\'dan bir tane ekleyin veya aranacak bir klasörü yukarıdan seçin.',
   'Presentatie opslaan': 'Sunumu kaydet',
@@ -286,21 +279,11 @@ const _dutchSourceTr = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Raportör, sertifikasyon, imza ve mühürleme ile doğruluk beyanı.',
   'Uitbreidingen': 'Eklentiler',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'İsteğe bağlı modüller. Varsayılan olarak kapalıdır; siz etkinleştirene kadar temel uygulamaya hiçbir şey eklemezler.',
   'Gegevens opschonen': 'Verileri temizle',
   'Gegevens lokaal beschikbaar': 'Veriler yerel olarak mevcut',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Önce Lisans ve Gizlilik bölümünden giden trafiğe izin verin.',
   'Op het web nog niet beschikbaar': 'Web\'de henüz kullanılamıyor',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ulaşılabilir kaynak yok — referans veriler hiçbir kaynaktan alınamadı. Yeniden deneyin veya paketi elle içe aktarın.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Alınan veriler beklenen parmak iziyle eşleşmedi ve önlem olarak reddedildi.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Veri paketi bozuk veya geçersizdi, bu nedenle reddedildi.',
-  'Gegevenspakket kiezen': 'Veri paketi seç',
-  'Kon het gekozen bestand niet lezen.': 'Seçilen dosya okunamadı.',
   'Nog niet opgehaald': 'Henüz alınmadı',
   'AI-assistentie': 'AI yardımı',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +300,15 @@ const _dutchSourceTr = {
       'Bulut hizmeti için önce "Lisans ve Gizlilik" bölümünde gizlilik izniniz gerekir; web sürümünde çalışmaz.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Verilerin bu harici hizmete gönderileceğini anlıyorum',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI yardımı (varsayılan olarak kapalıdır): kendi barındırdığınız veya bulut tabanlı bir arka uç seçerseniz, işlenmesini istediğiniz metinler veya görseller o adrese gönderilir. Bu cihazdaki yerel bir AI modeli hiçbir şey göndermez.',
   'Zoek een slidetype': 'Slayt türü ara',
   'Alfabetisch sorteren': 'Alfabetik sırala',
   'Algemeen': 'Genel',
   'Informatieveiligheid': 'Bilgi güvenliği',
   'Alle': 'Tümü',
-  'Pentestrapportage (ontwerp)': 'Sızma testi raporlaması (tasarım)',
-  'AI-assistentie (ontwerp)': 'AI yardımı (tasarım)',
-  'Agentisch bouwplan (ontwerp)': 'Ajan tabanlı yapım planı (tasarım)',
-  'Bijsnijden': 'Kırp',
   'Linksom': 'Sola döndür',
   'Rechtsom': 'Sağa döndür',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Hangi bölümün görünür kalacağını seçmek için görseli sürükleyin.',
-  'Git-opslag (ontwerp)': 'Git depolama (tasarım)',
   'Zoek in documentatie…': 'Belgelerde ara…',
   'Geen documenten gevonden': 'Belge bulunamadı',
   'Alleen afspelen (vergrendeld)': 'Yalnızca oynatma (kilitli)',
@@ -346,12 +322,8 @@ const _dutchSourceTr = {
   'Techniek': 'Teknik',
   'Licentie en naleving': 'Lisans ve uyumluluk',
   'Architectuur': 'Mimari',
-  'Bouwinstructies': 'Yapım talimatları',
-  'Kwaliteitscontroles': 'Kalite denetimleri',
-  'Broncodekaart': 'Kaynak kod haritası',
   'Licentienaleving': 'Lisans uyumluluğu',
   'Softwarestuklijst (SBOM)': 'Yazılım bileşen listesi (SBOM)',
-  'Samenwerking (ontwerp)': 'İş birliği (tasarım)',
   'Beschermen met een wachtwoord (AES-256)': 'Parola ile koru (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Bu parolayı iyi saklayın: kaybederseniz bu paket bir daha açılamaz.',
@@ -428,10 +400,6 @@ const _dutchSourceTr = {
   'Instelling opslaan is mislukt.': 'Ayar kaydedilemedi.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Dikkat: web sürümü yalnızca buna izin veren sunuculardan veri alabilir (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketler (.ocideck) web sürümünde henüz desteklenmiyor.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Web sürümünde yalnızca .md sunumları açılabilir.',
   'Geen': 'Yok',
   'Nieuw': 'Yeni',
   'Verwijderen': 'Sil',
@@ -517,10 +485,8 @@ const _dutchSourceTr = {
   'Audio bij deze slide': 'Bu slayda ait ses',
   'Audio automatisch afspelen': 'Sesi otomatik oynat',
   'Audio verwijderen': 'Sesi kaldır',
-  'Geen audio gekozen': 'Ses seçilmedi',
   'Geen audiobestand gekozen': 'Ses dosyası seçilmedi',
   'Video automatisch afspelen': 'Videoyu otomatik oynat',
-  'Geen video gekozen': 'Video seçilmedi',
   'Kiezen': 'Seç',
   'Uit bibliotheek…': 'Kitaplıktan…',
   'Van computer…': 'Bilgisayardan…',
@@ -549,7 +515,6 @@ const _dutchSourceTr = {
   'Pakket importeren': 'Paketi içe aktar',
   'Pakket exporteren': 'Paketi dışa aktar',
   'Map met presentaties kiezen': 'Sunumların bulunduğu klasörü seç',
-  'Standaard map voor presentaties': 'Sunumlar için varsayılan klasör',
   'Map voor exports': 'Dışa aktarma klasörü',
   'Logo kiezen': 'Logo seç',
   'Kies een afbeelding': 'Bir görsel seçin',
@@ -562,8 +527,6 @@ const _dutchSourceTr = {
   'Map kiezen': 'Klasör seç',
   'Kies een map met presentaties om te beginnen.':
       'Başlamak için sunumların bulunduğu bir klasör seçin.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Bu klasörde sunum (.md) bulunamadı.',
   'Geen presentaties gevonden voor': 'Şunun için sunum bulunamadı',
   'meer treffer(s)': 'eşleşme daha',
   'Slide zoeken': 'Slayt ara',
@@ -585,7 +548,6 @@ const _dutchSourceTr = {
       'Tüm sunumlarınızdaki slaytları bulmak için arama terimleri yazın.',
   'toegevoegd': 'eklendi',
   'Eerste': 'İlk',
-  'treffers — verfijn je zoekopdracht': 'eşleşme — aramanızı daraltın',
   'treffer(s)': 'eşleşme',
   'slide': 'slayt',
   'Zoeken en vervangen': 'Bul ve değiştir',
@@ -644,7 +606,6 @@ const _dutchSourceTr = {
   'Tekst op zijpanelen': 'Yan panellerdeki metin',
   'Voorbeeldtekst': 'Örnek metin',
   'Knop': 'Düğme',
-  'Profielnaam': 'Profil adı',
   'Naam van het stijlprofiel': 'Stil profilinin adı',
   'Stijlprofiel': 'Stil profili',
   'Nieuw profiel': 'Yeni profil',
@@ -706,14 +667,7 @@ const _dutchSourceTr = {
   'TYPE': 'TÜR',
   'STIJL': 'STİL',
   'Terug naar standaardstijl': 'Varsayılan stile dön',
-  'Automatisch doorgaan na': 'Otomatik ilerleme süresi',
-  'Logo tonen op deze slide': 'Bu slaytta logoyu göster',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Sunum sırasında tablo düzenlenebilir',
-  'Footer tonen op deze slide': 'Bu slaytta altbilgiyi göster',
   'Sprekersnotities...': 'Sunucu notları...',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown modu — sunumun tamamını Marp Markdown olarak düzenleyin',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown işlenemedi. Söz dizimini denetleyin.',
   'Controleren': 'Denetle',
@@ -737,8 +691,6 @@ const _dutchSourceTr = {
   'Geen resultaten voor': 'Şunun için sonuç yok',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Arama terimini değiştirin veya bir açıklama ekleyin.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Herhangi bir konumdan görsel seçmek için "Gözat"ı kullanın.',
   'Selecteer een\nafbeelding': 'Bir görsel\nseçin',
   'Gekopieerd': 'Kopyalandı',
   'Afbeelding verwijderen?': 'Görsel silinsin mi?',
@@ -755,8 +707,6 @@ const _dutchSourceTr = {
   'spatie': 'boşluk',
   'klik': 'tıklama',
   'cijfers': 'rakamlar',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Kapatmak için tıklayın veya ? / H / Esc tuşuna basın',
   'Klik of druk op H / Esc om te sluiten':
       'Kapatmak için tıklayın veya H / Esc tuşuna basın',
   'Naar slidenummer': 'Slayt numarasına git',
@@ -767,20 +717,10 @@ const _dutchSourceTr = {
   'Presenter view (notities, klok)': 'Sunucu görünümü (notlar, saat)',
   'Scherm wisselen (meerdere schermen)': 'Ekran değiştir (birden fazla ekran)',
   'Zwart · wit scherm': 'Siyah · beyaz ekran',
-  'Verstreken tijd resetten': 'Geçen süreyi sıfırla',
   'Automatische modus aan/uit': 'Otomatik mod açık/kapalı',
   'Herhalen (loop) aan/uit': 'Tekrar (döngü) açık/kapalı',
-  'Na audio automatisch doorgaan': 'Sesten sonra otomatik ilerle',
-  'Dit overzicht': 'Bu genel görünüm',
   'Deze legenda': 'Bu açıklama',
   'Terug / afsluiten': 'Geri / çıkış',
-  'Auto (A)': 'Otomatik (A)',
-  'Handmatig (A)': 'Elle (A)',
-  'Herhalen (L)': 'Tekrar (L)',
-  'Na audio (M)': 'Sesten sonra (M)',
-  'Sneltoetsen (?)': 'Kısayol tuşları (?)',
-  'Slide-overzicht (G)': 'Slayt genel görünümü (G)',
-  'Presenter view (P)': 'Sunucu görünümü (P)',
   'Tijd resetten (R)': 'Süreyi sıfırla (R)',
   'HUIDIGE SLIDE': 'GEÇERLİ SLAYT',
   'VOLGENDE': 'SONRAKİ',
@@ -794,15 +734,9 @@ const _dutchSourceTr = {
   'Gebruikersnotities voor deze slide...': 'Bu slayt için kullanıcı notları...',
   'Notities voor de ontvanger tijdens een cursus':
       'Kurs sırasında alıcı için notlar',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Not eklemek için Markdown moduna geçin.',
   'Mijn notities aan/uit': 'Notlarım açık/kapalı',
   'Wissel scherm (S)': 'Ekran değiştir (S)',
   'Kon niet van scherm wisselen.': 'Ekran değiştirilemedi.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P izleyici · S ekran · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P izleyici · H açıklama · G genel görünüm · B/W siyah/beyaz · R süre · Esc dur',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

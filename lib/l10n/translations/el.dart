@@ -81,8 +81,6 @@ const _dutchSourceEl = {
   'Handtekening tekenen': 'Σχεδίαση υπογραφής',
   'Teken je handtekening in het vak hieronder.':
       'Σχεδιάστε την υπογραφή σας στο πλαίσιο παρακάτω.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Ένα πακέτο δεδομένων είναι ένα .zip με τα δεδομένα αναφοράς αυτής της ενότητας. Ελέγχεται πρώτα ως προς το αποτύπωμα που είναι ενσωματωμένο στην εφαρμογή· γίνεται δεκτό μόνο πακέτο που ταιριάζει με αυτή την έκδοση της εφαρμογής.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
@@ -191,7 +189,6 @@ const _dutchSourceEl = {
       'Οι εικόνες και τα πολυμέσα μοιράζονται από τις παρουσιάσεις στον ίδιο φάκελο. Το ακριβές όνομα θα το επιλέξετε αμέσως στο παράθυρο του συστήματος.',
   'Alle bibliotheken': 'Όλες οι βιβλιοθήκες',
   'Andere map…': 'Άλλος φάκελος…',
-  'Bibliotheek verwijderen': 'Αφαίρεση βιβλιοθήκης',
   'Bibliotheken': 'Βιβλιοθήκες',
   'Geen bibliotheek': 'Καμία βιβλιοθήκη',
   'Geen presentaties (.md) gevonden.': 'Δεν βρέθηκαν παρουσιάσεις (.md).',
@@ -203,10 +200,6 @@ const _dutchSourceEl = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Επιλέξτε σε ποια βιβλιοθήκη θα μπει η παρουσίαση.',
   'Map toevoegen': 'Προσθήκη φακέλου',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Φάκελοι όπου αποθηκεύετε και αναζητάτε τις παρουσιάσεις σας. Δώστε στον καθένα δικό του όνομα για να τους ξεχωρίζετε. Όλες οι βιβλιοθήκες αναζητούνται κατά το άνοιγμα και στη βιβλιοθήκη εικόνων.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Καμία βιβλιοθήκη ακόμη — προσθέστε έναν φάκελο.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Καμία βιβλιοθήκη ακόμη. Προσθέστε μία στις Ρυθμίσεις ή επιλέξτε παραπάνω έναν φάκελο για αναζήτηση.',
   'Presentatie opslaan': 'Αποθήκευση παρουσίασης',
@@ -289,22 +282,11 @@ const _dutchSourceEl = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Η δήλωση ακρίβειας με τον συντάκτη, την πιστοποίηση, την υπογραφή και τη σφράγιση.',
   'Uitbreidingen': 'Επεκτάσεις',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Άδεια και Απόρρητο.',
   'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Καμία πηγή δεν είναι προσβάσιμη — τα δεδομένα αναφοράς δεν ήταν δυνατό να ληφθούν από πουθενά. Δοκιμάστε ξανά ή εισαγάγετε το πακέτο χειροκίνητα.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Τα δεδομένα που λήφθηκαν δεν ταίριαζαν με το αναμενόμενο αποτύπωμα και απορρίφθηκαν προληπτικά.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Το πακέτο δεδομένων ήταν κατεστραμμένο ή μη έγκυρο και επομένως απορρίφθηκε.',
-  'Gegevenspakket kiezen': 'Επιλογή πακέτου δεδομένων',
-  'Kon het gekozen bestand niet lezen.':
-      'Δεν ήταν δυνατή η ανάγνωση του επιλεγμένου αρχείου.',
   'Nog niet opgehaald': 'Δεν έχει ληφθεί ακόμη',
   'AI-assistentie': 'Υποστήριξη AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -321,22 +303,15 @@ const _dutchSourceEl = {
       'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Άδεια και Απόρρητο" και δεν λειτουργεί στην έκδοση web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Κατανοώ ότι δεδομένα αποστέλλονται σε αυτή την εξωτερική υπηρεσία',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Υποστήριξη AI (απενεργοποιημένη από προεπιλογή): αν επιλέξετε ένα αυτοφιλοξενούμενο ή cloud backend, τα κείμενα ή οι εικόνες που επεξεργάζεστε αποστέλλονται σε αυτή τη διεύθυνση. Ένα τοπικό μοντέλο AI σε αυτή τη συσκευή δεν αποστέλλει τίποτα.',
   'Zoek een slidetype': 'Αναζήτηση τύπου διαφάνειας',
   'Alfabetisch sorteren': 'Αλφαβητική ταξινόμηση',
   'Algemeen': 'Γενικά',
   'Informatieveiligheid': 'Ασφάλεια πληροφοριών',
   'Alle': 'Όλα',
-  'Pentestrapportage (ontwerp)': 'Αναφορά δοκιμής διείσδυσης (σχεδίαση)',
-  'AI-assistentie (ontwerp)': 'Βοήθεια AI (σχεδίαση)',
-  'Agentisch bouwplan (ontwerp)': 'Πρακτορικό πλάνο κατασκευής (σχεδίαση)',
-  'Bijsnijden': 'Περικοπή',
   'Linksom': 'Περιστροφή αριστερά',
   'Rechtsom': 'Περιστροφή δεξιά',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Σύρετε την εικόνα για να επιλέξετε ποιο μέρος παραμένει ορατό.',
-  'Git-opslag (ontwerp)': 'Αποθήκευση Git (σχεδίαση)',
   'Zoek in documentatie…': 'Αναζήτηση στην τεκμηρίωση…',
   'Geen documenten gevonden': 'Δεν βρέθηκαν έγγραφα',
   'Alleen afspelen (vergrendeld)': 'Μόνο προβολή (κλειδωμένο)',
@@ -350,12 +325,8 @@ const _dutchSourceEl = {
   'Techniek': 'Τεχνικά',
   'Licentie en naleving': 'Άδεια και συμμόρφωση',
   'Architectuur': 'Αρχιτεκτονική',
-  'Bouwinstructies': 'Οδηγίες δημιουργίας',
-  'Kwaliteitscontroles': 'Έλεγχοι ποιότητας',
-  'Broncodekaart': 'Χάρτης πηγαίου κώδικα',
   'Licentienaleving': 'Συμμόρφωση αδειών',
   'Softwarestuklijst (SBOM)': 'Κατάλογος υλικών λογισμικού (SBOM)',
-  'Samenwerking (ontwerp)': 'Συνεργασία (σχεδίαση)',
   'Beschermen met een wachtwoord (AES-256)':
       'Προστασία με κωδικό πρόσβασης (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -436,10 +407,6 @@ const _dutchSourceEl = {
   'Instelling opslaan is mislukt.': 'Η αποθήκευση της ρύθμισης απέτυχε.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Τα πακέτα (.ocideck) δεν υποστηρίζονται ακόμη στην έκδοση για τον ιστό.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Στην έκδοση για τον ιστό μπορούν να ανοιχτούν μόνο παρουσιάσεις .md.',
   'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
   'Verwijderen': 'Διαγραφή',
@@ -530,10 +497,8 @@ const _dutchSourceEl = {
   'Audio bij deze slide': 'Ήχος για αυτή τη διαφάνεια',
   'Audio automatisch afspelen': 'Αυτόματη αναπαραγωγή ήχου',
   'Audio verwijderen': 'Αφαίρεση ήχου',
-  'Geen audio gekozen': 'Δεν επιλέχθηκε ήχος',
   'Geen audiobestand gekozen': 'Δεν επιλέχθηκε αρχείο ήχου',
   'Video automatisch afspelen': 'Αυτόματη αναπαραγωγή βίντεο',
-  'Geen video gekozen': 'Δεν επιλέχθηκε βίντεο',
   'Kiezen': 'Επιλογή',
   'Uit bibliotheek…': 'Από τη βιβλιοθήκη…',
   'Van computer…': 'Από τον υπολογιστή…',
@@ -562,7 +527,6 @@ const _dutchSourceEl = {
   'Pakket importeren': 'Εισαγωγή πακέτου',
   'Pakket exporteren': 'Εξαγωγή πακέτου',
   'Map met presentaties kiezen': 'Επιλογή φακέλου παρουσιάσεων',
-  'Standaard map voor presentaties': 'Προεπιλεγμένος φάκελος παρουσιάσεων',
   'Map voor exports': 'Φάκελος εξαγωγών',
   'Logo kiezen': 'Επιλογή λογότυπου',
   'Kies een afbeelding': 'Επιλέξτε μια εικόνα',
@@ -575,8 +539,6 @@ const _dutchSourceEl = {
   'Map kiezen': 'Επιλογή φακέλου',
   'Kies een map met presentaties om te beginnen.':
       'Επιλέξτε έναν φάκελο με παρουσιάσεις για να ξεκινήσετε.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Δεν βρέθηκαν παρουσιάσεις (.md) σε αυτόν τον φάκελο.',
   'Geen presentaties gevonden voor': 'Δεν βρέθηκαν παρουσιάσεις για',
   'meer treffer(s)': 'περισσότερα αποτελέσματα',
   'Slide zoeken': 'Εύρεση διαφάνειας',
@@ -598,8 +560,6 @@ const _dutchSourceEl = {
       'Πληκτρολογήστε όρους αναζήτησης για να βρείτε διαφάνειες σε όλες τις παρουσιάσεις σας.',
   'toegevoegd': 'προστέθηκε',
   'Eerste': 'Πρώτα',
-  'treffers — verfijn je zoekopdracht':
-      'αποτελέσματα, περιορίστε την αναζήτησή σας',
   'treffer(s)': 'αποτέλεσμα(τα)',
   'slide': 'διαφάνεια',
   'Zoeken en vervangen': 'Εύρεση και αντικατάσταση',
@@ -658,7 +618,6 @@ const _dutchSourceEl = {
   'Tekst op zijpanelen': 'Κείμενο σε πλαϊνά πάνελ',
   'Voorbeeldtekst': 'Δείγμα κειμένου',
   'Knop': 'Κουμπί',
-  'Profielnaam': 'Όνομα προφίλ',
   'Naam van het stijlprofiel': 'Όνομα του προφίλ στυλ',
   'Stijlprofiel': 'Προφίλ στυλ',
   'Nieuw profiel': 'Νέο προφίλ',
@@ -721,16 +680,9 @@ const _dutchSourceEl = {
   'TYPE': 'ΤΥΠΟΣ',
   'STIJL': 'ΣΤΥΛ',
   'Terug naar standaardstijl': 'Πίσω στο προεπιλεγμένο στυλ',
-  'Automatisch doorgaan na': 'Αυτόματη προώθηση μετά από',
-  'Logo tonen op deze slide': 'Εμφάνιση λογότυπου σε αυτή τη διαφάνεια',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Πίνακας επεξεργάσιμος κατά την παρουσίαση',
-  'Footer tonen op deze slide': 'Εμφάνιση υποσέλιδου σε αυτή τη διαφάνεια',
   'Sprekersnotities...': 'Σημειώσεις ομιλητή...',
   'Sprekersnotities': 'Σημειώσεις ομιλητή',
   'Notities voor tijdens het presenteren': 'Σημειώσεις για κατά την παρουσίαση',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Λειτουργία Markdown — επεξεργαστείτε ολόκληρη την παρουσίαση ως Marp Markdown',
   'Toepassen': 'Εφαρμογή',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Δεν ήταν δυνατή η επεξεργασία του Markdown. Ελέγξτε τη σύνταξη.',
@@ -755,8 +707,6 @@ const _dutchSourceEl = {
   'Geen resultaten voor': 'Χωρίς αποτελέσματα για',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Προσαρμόστε τον όρο αναζήτησης ή προσθέστε μια περιγραφή.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Χρησιμοποιήστε την «Περιήγηση» για να επιλέξετε εικόνες από οποιαδήποτε τοποθεσία.',
   'Selecteer een\nafbeelding': 'Επιλέξτε μια\nεικόνα',
   'Gekopieerd': 'Αντιγράφηκε',
   'Afbeelding verwijderen?': 'Διαγραφή εικόνας;',
@@ -773,8 +723,6 @@ const _dutchSourceEl = {
   'spatie': 'διάστημα',
   'klik': 'κλικ',
   'cijfers': 'αριθμοί',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Κάντε κλικ ή πατήστε ? / H / Esc για κλείσιμο',
   'Klik of druk op H / Esc om te sluiten':
       'Κάντε κλικ ή πατήστε H / Esc για κλείσιμο',
   'Naar slidenummer': 'Μετάβαση σε αριθμό διαφάνειας',
@@ -784,20 +732,10 @@ const _dutchSourceEl = {
   'Presenter view (notities, klok)': 'Προβολή παρουσιαστή (σημειώσεις, ρολόι)',
   'Scherm wisselen (meerdere schermen)': 'Εναλλαγή οθόνης (πολλαπλές οθόνες)',
   'Zwart · wit scherm': 'Μαύρη · λευκή οθόνη',
-  'Verstreken tijd resetten': 'Μηδενισμός χρόνου που πέρασε',
   'Automatische modus aan/uit': 'Αυτόματη λειτουργία ναι/όχι',
   'Herhalen (loop) aan/uit': 'Επανάληψη (βρόχος) ναι/όχι',
-  'Na audio automatisch doorgaan': 'Αυτόματη συνέχεια μετά τον ήχο',
-  'Dit overzicht': 'Αυτή η επισκόπηση',
   'Deze legenda': 'Αυτό το υπόμνημα',
   'Terug / afsluiten': 'Πίσω / έξοδος',
-  'Auto (A)': 'Αυτόματα (A)',
-  'Handmatig (A)': 'Χειροκίνητα (A)',
-  'Herhalen (L)': 'Επανάληψη (L)',
-  'Na audio (M)': 'Μετά τον ήχο (M)',
-  'Sneltoetsen (?)': 'Συντομεύσεις πληκτρολογίου (?)',
-  'Slide-overzicht (G)': 'Επισκόπηση διαφανειών (G)',
-  'Presenter view (P)': 'Προβολή παρουσιαστή (P)',
   'Tijd resetten (R)': 'Μηδενισμός χρονομέτρου (R)',
   'HUIDIGE SLIDE': 'ΤΡΕΧΟΥΣΑ ΔΙΑΦΑΝΕΙΑ',
   'VOLGENDE': 'ΕΠΟΜΕΝΗ',
@@ -814,15 +752,9 @@ const _dutchSourceEl = {
   'Notities weggooien': 'Απόρριψη σημειώσεων',
   'Notities voor de ontvanger tijdens een cursus':
       'Σημειώσεις για τον παραλήπτη κατά τη διάρκεια ενός μαθήματος',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Μεταβείτε σε λειτουργία Markdown για να προσθέσετε σημειώσεις.',
   'Mijn notities aan/uit': 'Εναλλαγή των σημειώσεών μου ναι/όχι',
   'Wissel scherm (S)': 'Εναλλαγή οθόνης (S)',
   'Kon niet van scherm wisselen.': 'Δεν ήταν δυνατή η εναλλαγή οθονών.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P κοινό · S οθόνη · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P κοινό · H υπόμνημα · G επισκόπηση · B/W μαύρο/λευκό · R χρόνος · Esc διακοπή',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

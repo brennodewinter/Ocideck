@@ -83,8 +83,6 @@ const _dutchSourceGa = {
   'Handtekening tekenen': 'Tarraing síniú',
   'Teken je handtekening in het vak hieronder.':
       'Tarraing do shíniú sa bhosca thíos.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Is éard is pacáiste sonraí ann ná .zip leis na sonraí tagartha don mhodúl seo. Seiceáiltear ar dtús é in aghaidh an mhéarloirg atá tógtha isteach san aip; ní ghlactar ach le pacáiste a fhreagraíonn don leagan aipe seo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Achar',
   'Horizontale staaf': 'Barra chothrománach',
@@ -192,7 +190,6 @@ const _dutchSourceGa = {
       'Roinntear íomhánna agus meáin ar na láithreoireachtaí san fhillteán céanna. Roghnóidh tú an t-ainm cruinn ar ball san fhuinneog chórais.',
   'Alle bibliotheken': 'Gach leabharlann',
   'Andere map…': 'Fillteán eile…',
-  'Bibliotheek verwijderen': 'Bain leabharlann',
   'Bibliotheken': 'Leabharlanna',
   'Geen bibliotheek': 'Gan leabharlann',
   'Geen presentaties (.md) gevonden.':
@@ -205,10 +202,6 @@ const _dutchSourceGa = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Roghnaigh cén leabharlann ina rachaidh an láithreoireacht.',
   'Map toevoegen': 'Cuir fillteán leis',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Fillteáin ina stórálann agus ina gcuardaíonn tú do láithreoireachtaí. Tabhair ainm dá gcuid féin do gach ceann chun iad a idirdhealú. Cuardaítear gach leabharlann agus tú ag oscailt agus sa leabharlann íomhánna.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Gan leabharlann fós — cuir fillteán leis.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Gan leabharlann fós. Cuir ceann leis sna Socruithe, nó roghnaigh fillteán thuas le cuardach.',
   'Presentatie opslaan': 'Sábháil an láithreoireacht',
@@ -290,22 +283,11 @@ const _dutchSourceGa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'An dearbhú fírinne le tuairisceoir, deimhniú, síniú agus séalú.',
   'Uitbreidingen': 'Breiseáin',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',
   'Gegevens opschonen': 'Glan na sonraí',
   'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Níl aon fhoinse insroichte — níorbh fhéidir na sonraí tagartha a íoslódáil áit ar bith. Bain triail eile as nó iompórtáil an pacáiste de láimh.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Níor mheaitseáil na sonraí a íoslódáladh leis an méarlorg a bhíothas ag súil leis agus diúltaíodh dóibh mar réamhchúram.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Bhí an paca sonraí damáistithe nó neamhbhailí agus diúltaíodh dó dá bhrí sin.',
-  'Gegevenspakket kiezen': 'Roghnaigh paca sonraí',
-  'Kon het gekozen bestand niet lezen.':
-      'Níorbh fhéidir an comhad roghnaithe a léamh.',
   'Nog niet opgehaald': 'Gan íoslódáil fós',
   'AI-assistentie': 'Cúnamh II',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -322,22 +304,15 @@ const _dutchSourceGa = {
       'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Ceadúnas agus Príobháideachas" agus ní oibríonn sí sa leagan gréasáin.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Tuigim go seoltar sonraí chuig an tseirbhís sheachtrach seo',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Cúnamh II (múchta de réir réamhshocraithe): má roghnaíonn tú inneall féinóstáilte nó néil, seoltar na téacsanna nó na híomhánna a phróiseálann tú chuig an seoladh sin. Ní sheolann múnla II áitiúil ar an ngléas seo aon rud.',
   'Zoek een slidetype': 'Cuardaigh cineál sleamhnáin',
   'Alfabetisch sorteren': 'Sórtáil in ord aibítre',
   'Algemeen': 'Ginearálta',
   'Informatieveiligheid': 'Slándáil faisnéise',
   'Alle': 'Gach ceann',
-  'Pentestrapportage (ontwerp)': 'Tuairisc tástála treá (dearadh)',
-  'AI-assistentie (ontwerp)': 'Cúnamh AI (dearadh)',
-  'Agentisch bouwplan (ontwerp)': 'Plean tógála gníomhaireach (dearadh)',
-  'Bijsnijden': 'Bearr',
   'Linksom': 'Rothlaigh ar chlé',
   'Rechtsom': 'Rothlaigh ar dheis',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Tarraing an íomhá chun a roghnú cén chuid a fhanann le feiceáil.',
-  'Git-opslag (ontwerp)': 'Stóráil Git (dearadh)',
   'Zoek in documentatie…': 'Cuardaigh sa doiciméadú…',
   'Geen documenten gevonden': 'Níor aimsíodh aon doiciméad',
   'Alleen afspelen (vergrendeld)': 'Seinm amháin (glasáilte)',
@@ -351,12 +326,8 @@ const _dutchSourceGa = {
   'Techniek': 'Teicniúil',
   'Licentie en naleving': 'Ceadúnas agus comhlíonadh',
   'Architectuur': 'Ailtireacht',
-  'Bouwinstructies': 'Treoracha tógála',
-  'Kwaliteitscontroles': 'Seiceálacha cáilíochta',
-  'Broncodekaart': 'Léarscáil an chóid fhoinsigh',
   'Licentienaleving': 'Comhlíonadh ceadúnas',
   'Softwarestuklijst (SBOM)': 'Bille Ábhar Bogearraí (SBOM)',
-  'Samenwerking (ontwerp)': 'Comhoibriú (dearadh)',
   'Beschermen met een wachtwoord (AES-256)': 'Cosain le pasfhocal (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Coinnigh an pasfhocal seo slán: má chailleann tú é, ní bheifear in ann an pacáiste seo a oscailt a thuilleadh.',
@@ -436,10 +407,6 @@ const _dutchSourceGa = {
   'Instelling opslaan is mislukt.': 'Theip ar an socrú a shábháil.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Ní thacaítear le pacáistí (.ocideck) go fóill sa leagan gréasáin.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Ní féidir ach láithreoireachtaí .md a oscailt sa leagan gréasáin.',
   'Geen': 'Gan aon',
   'Nieuw': 'Nua',
   'Verwijderen': 'Scrios',
@@ -530,10 +497,8 @@ const _dutchSourceGa = {
   'Audio bij deze slide': 'Fuaim don sleamhnán seo',
   'Audio automatisch afspelen': 'Seinn fuaim go huathoibríoch',
   'Audio verwijderen': 'Bain an fhuaim',
-  'Geen audio gekozen': 'Níor roghnaíodh aon fhuaim',
   'Geen audiobestand gekozen': 'Níor roghnaíodh aon chomhad fuaime',
   'Video automatisch afspelen': 'Seinn físeán go huathoibríoch',
-  'Geen video gekozen': 'Níor roghnaíodh aon fhíseán',
   'Kiezen': 'Roghnaigh',
   'Uit bibliotheek…': 'Ón leabharlann…',
   'Van computer…': 'Ón ríomhaire…',
@@ -564,8 +529,6 @@ const _dutchSourceGa = {
   'Pakket importeren': 'Iompórtáil pacáiste',
   'Pakket exporteren': 'Easpórtáil pacáiste',
   'Map met presentaties kiezen': 'Roghnaigh fillteán na gcur i láthair',
-  'Standaard map voor presentaties':
-      'Fillteán réamhshocraithe do chuir i láthair',
   'Map voor exports': 'Fillteán le haghaidh easpórtálacha',
   'Logo kiezen': 'Roghnaigh lógó',
   'Kies een afbeelding': 'Roghnaigh íomhá',
@@ -578,8 +541,6 @@ const _dutchSourceGa = {
   'Map kiezen': 'Roghnaigh fillteán',
   'Kies een map met presentaties om te beginnen.':
       'Roghnaigh fillteán le cuir i láthair chun tosú.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Níor aimsíodh aon chur i láthair (.md) san fhillteán seo.',
   'Geen presentaties gevonden voor': 'Níor aimsíodh aon chur i láthair do',
   'meer treffer(s)': 'tuilleadh torthaí',
   'Slide zoeken': 'Aimsigh sleamhnán',
@@ -601,7 +562,6 @@ const _dutchSourceGa = {
       'Clóscríobh téarmaí cuardaigh chun sleamhnáin a aimsiú ar fud do chuir i láthair.',
   'toegevoegd': 'curtha leis',
   'Eerste': 'Céad',
-  'treffers — verfijn je zoekopdracht': 'torthaí — beachtaigh do chuardach',
   'treffer(s)': 'toradh/torthaí',
   'slide': 'sleamhnán',
   'Zoeken en vervangen': 'Aimsigh agus ionadaigh',
@@ -661,7 +621,6 @@ const _dutchSourceGa = {
   'Tekst op zijpanelen': 'Téacs ar phainéil taoibh',
   'Voorbeeldtekst': 'Téacs samplach',
   'Knop': 'Cnaipe',
-  'Profielnaam': 'Ainm na próifíle',
   'Naam van het stijlprofiel': 'Ainm na próifíle stíle',
   'Stijlprofiel': 'Próifíl stíle',
   'Nieuw profiel': 'Próifíl nua',
@@ -724,16 +683,9 @@ const _dutchSourceGa = {
   'TYPE': 'CINEÁL',
   'STIJL': 'STÍL',
   'Terug naar standaardstijl': 'Ar ais go dtí an stíl réamhshocraithe',
-  'Automatisch doorgaan na': 'Téigh ar aghaidh go huathoibríoch tar éis',
-  'Logo tonen op deze slide': 'Taispeáin an lógó ar an sleamhnán seo',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tábla ineagarthóireachta agus tú ag cur i láthair',
-  'Footer tonen op deze slide': 'Taispeáin an buntásc ar an sleamhnán seo',
   'Sprekersnotities...': 'Nótaí cainteora...',
   'Sprekersnotities': 'Nótaí cainteora',
   'Notities voor tijdens het presenteren': 'Nótaí le haghaidh cur i láthair',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Mód Markdown — cuir an cur i láthair iomlán in eagar mar Marp Markdown',
   'Toepassen': 'Cuir i bhfeidhm',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Níorbh fhéidir an Markdown a phróiseáil. Seiceáil an chomhréir.',
@@ -758,8 +710,6 @@ const _dutchSourceGa = {
   'Geen resultaten voor': 'Gan torthaí do',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Coigeartaigh do théarma cuardaigh nó cuir cur síos leis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Úsáid "Brabhsáil" chun íomhánna a roghnú ó áit ar bith.',
   'Selecteer een\nafbeelding': 'Roghnaigh\níomhá',
   'Gekopieerd': 'Cóipeáilte',
   'Afbeelding verwijderen?': 'Scrios an íomhá?',
@@ -776,8 +726,6 @@ const _dutchSourceGa = {
   'spatie': 'spás',
   'klik': 'cliceáil',
   'cijfers': 'uimhreacha',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Cliceáil nó brúigh ? / H / Esc chun dúnadh',
   'Klik of druk op H / Esc om te sluiten':
       'Cliceáil nó brúigh H / Esc chun dúnadh',
   'Naar slidenummer': 'Go dtí uimhir sleabhráin',
@@ -789,21 +737,10 @@ const _dutchSourceGa = {
   'Scherm wisselen (meerdere schermen)':
       'Athraigh scáileán (scáileáin iomadúla)',
   'Zwart · wit scherm': 'Scáileán dubh · bán',
-  'Verstreken tijd resetten': 'Athshocraigh am caite',
   'Automatische modus aan/uit': 'Mód uathoibríoch as/air',
   'Herhalen (loop) aan/uit': 'Athdhéan (lúb) as/air',
-  'Na audio automatisch doorgaan':
-      'Lean ar aghaidh go huathoibríoch tar éis fuaime',
-  'Dit overzicht': 'An forbhreathnú seo',
   'Deze legenda': 'An finscéal seo',
   'Terug / afsluiten': 'Ar ais / imigh',
-  'Auto (A)': 'Uath (A)',
-  'Handmatig (A)': 'De láimh (A)',
-  'Herhalen (L)': 'Athdhéan (L)',
-  'Na audio (M)': 'Tar éis fuaime (M)',
-  'Sneltoetsen (?)': 'Aicearraí méarchláir (?)',
-  'Slide-overzicht (G)': 'Forbhreathnú sleamhnán (G)',
-  'Presenter view (P)': 'Amharc an láithreora (P)',
   'Tijd resetten (R)': 'Athshocraigh an t-amadóir (R)',
   'HUIDIGE SLIDE': 'SLEAMHNÁN REATHA',
   'VOLGENDE': 'AR AGHAIDH',
@@ -819,15 +756,9 @@ const _dutchSourceGa = {
   'Notities weggooien': 'Caith nótaí i leataobh',
   'Notities voor de ontvanger tijdens een cursus':
       'Nótaí don fhaighteoir le linn cúrsa',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Athraigh go mód Markdown chun nótaí a chur leis.',
   'Mijn notities aan/uit': 'Scoránaigh mo nótaí as/air',
   'Wissel scherm (S)': 'Athraigh scáileán (S)',
   'Kon niet van scherm wisselen.': 'Níorbh fhéidir scáileáin a athrú.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P lucht féachana · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P lucht féachana · H finscéal · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

@@ -78,8 +78,6 @@ const _stringsTlh = {
 const _dutchSourceTlh = {
   'Handtekening tekenen': 'qItlh yIqon',
   'Teken je handtekening in het vak hieronder.': 'box bIngDaq qItlh yIqon.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'De\' ngaSwI\' ghaH .zip, pa\' De\' Qan module vam. wa\'DIch app qelDI\' nItlh \'oH nuDlu\'; app version vam rurbogh ngaSwI\' neH laj.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Sep',
   'Horizontale staaf': 'SIrgh SaS',
@@ -184,7 +182,6 @@ const _dutchSourceTlh = {
       'mIlloghmey media je lo\' chevmey rar Daq wa\'. pongvam DaghItlhbogh De\'wI\' Qorwaghvo\' wIv.',
   'Alle bibliotheken': 'Hoch qol\'om',
   'Andere map…': 'latlh Daq…',
-  'Bibliotheek verwijderen': 'qol\'om teq',
   'Bibliotheken': 'qol\'ommey',
   'Geen bibliotheek': 'qol\'om Suqbe\'',
   'Geen presentaties (.md) gevonden.': 'presentation (.md) tu\'be\'.',
@@ -196,9 +193,6 @@ const _dutchSourceTlh = {
   'Kies in welke bibliotheek de presentatie komt.':
       'qol\'om yIwIv, presentation DaqvaD.',
   'Map toevoegen': 'Daq chel',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Daqmey, presentationlIj DaQaw\' je DaSammeH. pong pagh yInob \'e\' DachevmeH. Hoch qol\'ommey luSam poSDI\' je mIllogh qol\'om.',
-  'Nog geen bibliotheek — voeg een map toe.': 'qol\'om Suqbe\' — Daq yIchel.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'qol\'om Suqbe\'. Settings-Daq wa\' yIchel, pagh Dung Daq yIwIv DaSammeH.',
   'Presentatie opslaan': 'presentation yISav',
@@ -279,21 +273,11 @@ const _dutchSourceTlh = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'vIt jatlhchuq, jatlhwI\', ngZ tlhob, qonta\'ghach je ghItlh Sor\'a\'.',
   'Uitbreidingen': 'chelwI\'mey',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',
   'Gegevens opschonen': 'De\' Say\'moH',
   'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'wa\'DIch Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
   'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Suplu\'laHbe\' Hal — pa\' De\' Qan Suqlu\'laHbe\'. cha\'logh yInID pagh ngaSHa\' yIkII\'.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'De\' Suqta\' pIHbogh nItlh Degh rurbe\'; Qan meqmo\' lajlu\'be\'.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'De\' ngIq QIHlu\'pu\' pagh lI\'be\'; vaj lajlu\'be\'.',
-  'Gegevenspakket kiezen': 'De\' ngIq wIv',
-  'Kon het gekozen bestand niet lezen.': 'teywI\' wIvta\' laDlu\'laHbe\'.',
   'Nog niet opgehaald': 'SuqluHbe\'taH',
   'AI-assistentie': 'AI QaH',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -310,22 +294,15 @@ const _dutchSourceTlh = {
       '"chIrgh \'ej peghmey" Daq peghmey chaw\'lIj poQ cloud Qu\'; web mIlloghDaq vumbe\'.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Hur Qu\' vamvaD De\' ngeHlu\' \'e\' vISov',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI QaH (pab chu\'be\'): SoH DaQeHmoH pagh cloud backend DawIvchugh, ghItlh pagh mIllogh Damugh \'e\' DaqvaD ngeHlu\'. jan vamDaq AI model naDev pagh ngeHlu\'.',
   'Zoek een slidetype': 'cha\'nob Segh yInej',
   'Alfabetisch sorteren': 'pIqaD yInuD',
   'Algemeen': 'motlh',
   'Informatieveiligheid': 'De\' Qan',
   'Alle': 'Hoch',
-  'Pentestrapportage (ontwerp)': 'pentest ja\'ghach (nab)',
-  'AI-assistentie (ontwerp)': 'AI QaH (nab)',
-  'Agentisch bouwplan (ontwerp)': 'agentic chenmoHmeH nab (nab)',
-  'Bijsnijden': 'yISol',
   'Linksom': 'yIveCh',
   'Rechtsom': 'yIveCh',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'nagh beQ yInIH, \'ay\' legh laHbogh wIvmeH.',
-  'Git-opslag (ontwerp)': 'Git So\' (nab)',
   'Zoek in documentatie…': 'ghItlhmeyDaq yISam…',
   'Geen documenten gevonden': 'ghItlh tu\'be\'lu\'',
   'Alleen afspelen (vergrendeld)': 'cho\'qa\' neH (ngaQmoHlu\'pu\')',
@@ -339,12 +316,8 @@ const _dutchSourceTlh = {
   'Techniek': 'QeD',
   'Licentie en naleving': 'chaw\' \'ej lobmeH',
   'Architectuur': 'qach mIw',
-  'Bouwinstructies': 'chenmoHmeH ra\'meymey',
-  'Kwaliteitscontroles': 'QaQ noHmey',
-  'Broncodekaart': 'mung De\' chIm',
   'Licentienaleving': 'chaw\' lobmeH',
   'Softwarestuklijst (SBOM)': 'De\'wI\' Doch tetlh (SBOM)',
-  'Samenwerking (ontwerp)': 'tay\' vum (nab)',
   'Beschermen met een wachtwoord (AES-256)': 'mu\'wIj Qan (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'mu\'wIjvam yImej: DachIlchugh, vaj paqvam DapoSmoHlaHbe\'.',
@@ -419,10 +392,6 @@ const _dutchSourceTlh = {
   'Instelling opslaan is mislukt.': 'choqmeH luj.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'yIqIm: chaw\'bogh jabwI\'meyvo\' neH SuqlaH web mIw (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'ngaSwI\'mey (.ocideck) wej DuH web mIwDaq.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'web mIwDaq .md qonwI\'mey neH poSmoHlu\'laH.',
   'Geen': 'pagh',
   'Nieuw': 'chu\'',
   'Verwijderen': 'Qaw\'',
@@ -511,10 +480,8 @@ const _dutchSourceTlh = {
   'Audio bij deze slide': 'cha\'nobvam QoQ',
   'Audio automatisch afspelen': '\'eDta\' QoQ chu\'',
   'Audio verwijderen': 'QoQ yIteq',
-  'Geen audio gekozen': 'QoQ wIvlu\'be\'',
   'Geen audiobestand gekozen': 'QoQ teywI\' wIvlu\'be\'',
   'Video automatisch afspelen': '\'eDta\' HaSta chu\'',
-  'Geen video gekozen': 'HaSta wIvlu\'be\'',
   'Kiezen': 'yIwIv',
   'Uit bibliotheek…': 'nItebHa\'wI\'vo\'…',
   'Van computer…': 'De\'wI\'vo\'…',
@@ -543,7 +510,6 @@ const _dutchSourceTlh = {
   'Pakket importeren': 'ngaSHa\' yIkII\'',
   'Pakket exporteren': 'ngaSHa\' yIweH',
   'Map met presentaties kiezen': 'cha\'nobmey ghajbogh Daq yIwIv',
-  'Standaard map voor presentaties': 'cha\'nobmey pagh Daq',
   'Map voor exports': 'weHmey Daq',
   'Logo kiezen': 'Degh yIwIv',
   'Kies een afbeelding': 'mIllogh yIwIv',
@@ -556,8 +522,6 @@ const _dutchSourceTlh = {
   'Map kiezen': 'Daq yIwIv',
   'Kies een map met presentaties om te beginnen.':
       'taghmeH cha\'nobmey ghajbogh Daq yIwIv.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Daqvamdaq cha\'nob (.md) tu\'lu\'be\'.',
   'Geen presentaties gevonden voor': 'cha\'nob tu\'lu\'be\'',
   'meer treffer(s)': 'latlh SamwI\'',
   'Slide zoeken': 'cha\'nob yISam',
@@ -578,7 +542,6 @@ const _dutchSourceTlh = {
       'Hoch cha\'nobmeyvo\' cha\'nobmey DaSammeH SammeH mu\'mey yISar.',
   'toegevoegd': 'chelpu\'',
   'Eerste': 'wa\'DIch',
-  'treffers — verfijn je zoekopdracht': 'SamwI\' — SammeH mIw yIQIv',
   'treffer(s)': 'SamwI\'',
   'slide': 'cha\'nob',
   'Zoeken en vervangen': 'yISam \'ej yIchoH',
@@ -637,7 +600,6 @@ const _dutchSourceTlh = {
   'Tekst op zijpanelen': 'retlh \'ochmeyDaq mu\'',
   'Voorbeeldtekst': 'chob mu\'',
   'Knop': 'jun',
-  'Profielnaam': '\'oS pong',
   'Naam van het stijlprofiel': 'Segh nab pong',
   'Stijlprofiel': 'Segh nab',
   'Nieuw profiel': 'nab chu\'',
@@ -700,15 +662,9 @@ const _dutchSourceTlh = {
   'TYPE': 'SEGH',
   'STIJL': 'SEGH nab',
   'Terug naar standaardstijl': 'motlh SeghDaq yIchegh',
-  'Automatisch doorgaan na': '\'eDta\' yIruch tlhap',
-  'Logo tonen op deze slide': 'cha\'nobvamDaq Degh yI\'ang',
-  'Tabel bewerkbaar tijdens presenteren': 'cha\'lu\'taHvIS romuS choHlaH',
-  'Footer tonen op deze slide': 'cha\'nobvamDaq bIng mu\' yI\'ang',
   'Sprekersnotities...': 'jatlhwI\' QInmey...',
   'Sprekersnotities': 'jatlhwI\' QInmey',
   'Notities voor tijdens het presenteren': 'cha\'lu\'taHvIS QInmey',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown mIw — Marp Markdown rur cha\'nob naQ yIchoH',
   'Toepassen': 'yIlo\'',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown vangbe\'lu\'laH. mu\'ghom yIlegh.',
@@ -733,8 +689,6 @@ const _dutchSourceTlh = {
   'Geen resultaten voor': 'Segh tu\'lu\'be\'',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'SammeH mu\' yIchoH pagh QIj yIchel.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Daq HochvaD mIlloghmey DawIvmeH "yISam" yIlo\'.',
   'Selecteer een\nafbeelding': 'mIllogh\nyIwIv',
   'Gekopieerd': 'velpu\'',
   'Afbeelding verwijderen?': 'mIllogh yIQaw\'?',
@@ -750,8 +704,6 @@ const _dutchSourceTlh = {
   'spatie': 'yotlh',
   'klik': '\'uy',
   'cijfers': 'mI\'mey',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'SoQmeH ? / H / Esc yI\'uy pagh yISom',
   'Klik of druk op H / Esc om te sluiten': 'SoQmeH H / Esc yI\'uy pagh yISom',
   'Naar slidenummer': 'slide mI\'Daq jaH',
   'Eerste · laatste slide': 'wa\'DIch · Qav slide',
@@ -760,20 +712,10 @@ const _dutchSourceTlh = {
   'Presenter view (notities, klok)': 'jatlhwI\' legh (ghItlh, tlhup)',
   'Scherm wisselen (meerdere schermen)': 'HaSta choH (law\' HaSta)',
   'Zwart · wit scherm': 'qIj · chIS HaSta',
-  'Verstreken tijd resetten': 'poH veb qaSpu\' yIchoH',
   'Automatische modus aan/uit': 'reH DoH mIw tebHa\'/teb',
   'Herhalen (loop) aan/uit': 'tI\'ang (loop) tebHa\'/teb',
-  'Na audio automatisch doorgaan': 'QoQ tlhej vaj DoH jaH',
-  'Dit overzicht': 'Hoch vam',
   'Deze legenda': 'HeS vam',
   'Terug / afsluiten': 'chegh / mev',
-  'Auto (A)': 'reH DoH (A)',
-  'Handmatig (A)': 'ghu\' (A)',
-  'Herhalen (L)': 'tI\'ang (L)',
-  'Na audio (M)': 'QoQ tlhej (M)',
-  'Sneltoetsen (?)': 'nav\'e\' Do\'meH (?)',
-  'Slide-overzicht (G)': 'slide Hoch (G)',
-  'Presenter view (P)': 'jatlhwI\' legh (P)',
   'Tijd resetten (R)': 'poH yIchoH (R)',
   'HUIDIGE SLIDE': 'DAH slide',
   'VOLGENDE': 'veb',
@@ -788,15 +730,9 @@ const _dutchSourceTlh = {
   'Notities weggooien': 'ghItlhmey woD',
   'Notities voor de ontvanger tijdens een cursus':
       'Qaghmey ghojmoH poH ghItlhmey lo\'wI\'vaD',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'ghItlhmey chelmeH Markdown Do\'meH yIjaH.',
   'Mijn notities aan/uit': 'ghItlhmeywIj tebHa\'/teb',
   'Wissel scherm (S)': 'HaSta choH (S)',
   'Kon niet van scherm wisselen.': 'HaSta choHlaHbe\'.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P nuvpu\' · G Hoch · B/W qIj/chIS · R poH · Esc mev',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P nuvpu\' · S HaSta · G Hoch · B/W qIj/chIS · R poH · Esc mev',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P nuvpu\' · H HeS · G Hoch · B/W qIj/chIS · R poH · Esc mev',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

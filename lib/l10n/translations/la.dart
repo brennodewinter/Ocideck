@@ -83,8 +83,6 @@ const _dutchSourceLa = {
   'Handtekening tekenen': 'Subscriptionem designare',
   'Teken je handtekening in het vak hieronder.':
       'Subscriptionem tuam in area infra designa.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Fasciculus datorum est .zip cum datis referentiae huius moduli. Primum cum nota digiti in applicatione insita comparatur; solum fasciculus qui huic applicationis versioni convenit accipitur.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
@@ -191,7 +189,6 @@ const _dutchSourceLa = {
       'Imagines et instrumenta a praesentationibus in eadem plica communiter adhibentur. Nomen exactum mox in fenestra systematis eliges.',
   'Alle bibliotheken': 'Omnes bibliothecae',
   'Andere map…': 'Alia plica…',
-  'Bibliotheek verwijderen': 'Bibliothecam removere',
   'Bibliotheken': 'Bibliothecae',
   'Geen bibliotheek': 'Nulla bibliotheca',
   'Geen presentaties (.md) gevonden.': 'Nullae praesentationes (.md) inventae.',
@@ -203,10 +200,6 @@ const _dutchSourceLa = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Elige in qua bibliotheca praesentatio ponatur.',
   'Map toevoegen': 'Plicam addere',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Plicae ubi praesentationes tuas servas et perquiris. Da eis nomen proprium ut inter se distinguantur. Omnes bibliothecae in aperiendo et in bibliotheca imaginum perquiruntur.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Nulla adhuc bibliotheca — plicam adde.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Nulla adhuc bibliotheca. Adde unam in Praeferentiis, vel supra plicam ad perquirendum elige.',
   'Presentatie opslaan': 'Praesentationem servare',
@@ -288,21 +281,11 @@ const _dutchSourceLa = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Declaratio veritatis cum relatore, certificatione, subscriptione et sigillo.',
   'Uitbreidingen': 'Extensiones',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
   'Gegevens opschonen': 'Data purgare',
   'Gegevens lokaal beschikbaar': 'Data localiter praesto',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Nullus fons attingi potest — data referentiae nusquam accersi potuerunt. Iterum conare vel fasciculum manu importa.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Data accersita cum vestigio digitali exspectato non convenerunt et ex cautione recusata sunt.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Fasciculus datorum corruptus aut invalidus erat ideoque recusatus est.',
-  'Gegevenspakket kiezen': 'Fasciculum datorum eligere',
-  'Kon het gekozen bestand niet lezen.': 'Plica electa legi non potuit.',
   'Nog niet opgehaald': 'Nondum accersitum',
   'AI-assistentie': 'Auxilium IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -319,23 +302,15 @@ const _dutchSourceLa = {
       'Servitium nubis primum consensum tuum de privata re requirit apud "Licentia et Privata" nec in versione interretiali operatur.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Intellego data ad hoc servitium externum mitti',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Auxilium IA (per praedefinitum exstinctum): si backend per te hospitatum vel nubis eligis, textus vel imagines quas tractari sinis ad illam inscriptionem mittuntur. Exemplar IA locale in hoc instrumento nihil mittit.',
   'Zoek een slidetype': 'Quaere genus paginae',
   'Alfabetisch sorteren': 'Ordina alphabetice',
   'Algemeen': 'Generalia',
   'Informatieveiligheid': 'Salus informationis',
   'Alle': 'Omnia',
-  'Pentestrapportage (ontwerp)': 'Relatio pentest (designatio)',
-  'AI-assistentie (ontwerp)': 'Auxilium AI (designatio)',
-  'Agentisch bouwplan (ontwerp)':
-      'Consilium aedificationis agenticum (designatio)',
-  'Bijsnijden': 'Recidere',
   'Linksom': 'Sinistrorsum',
   'Rechtsom': 'Dextrorsum',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trahe imaginem ut eligas quae pars visibilis maneat.',
-  'Git-opslag (ontwerp)': 'Git repositio (designatio)',
   'Zoek in documentatie…': 'Quaere in documentatione…',
   'Geen documenten gevonden': 'Nulla documenta inventa',
   'Alleen afspelen (vergrendeld)': 'Tantum ludere (clausum)',
@@ -349,12 +324,8 @@ const _dutchSourceLa = {
   'Techniek': 'Technica',
   'Licentie en naleving': 'Licentia et observantia',
   'Architectuur': 'Architectura',
-  'Bouwinstructies': 'Praecepta compilationis',
-  'Kwaliteitscontroles': 'Probationes qualitatis',
-  'Broncodekaart': 'Charta codicis fontis',
   'Licentienaleving': 'Observantia licentiarum',
   'Softwarestuklijst (SBOM)': 'Index materiarum programmatis (SBOM)',
-  'Samenwerking (ontwerp)': 'Cooperatio (designatio)',
   'Beschermen met een wachtwoord (AES-256)': 'Tessera muni (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hanc tesseram bene serva: si eam amiseris, hoc fasciculus aperiri non poterit.',
@@ -431,10 +402,6 @@ const _dutchSourceLa = {
   'Instelling opslaan is mislukt.': 'Optio servari non potuit.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Fasciculi (.ocideck) in versione interretiali nondum sustinentur.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'In versione interretiali solae praesentationes .md aperiri possunt.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',
@@ -524,10 +491,8 @@ const _dutchSourceLa = {
   'Audio bij deze slide': 'Audio pro hac pagina',
   'Audio automatisch afspelen': 'Audio automatice reddere',
   'Audio verwijderen': 'Audio removere',
-  'Geen audio gekozen': 'Nullum audio selectum',
   'Geen audiobestand gekozen': 'Nulla plica audio selecta',
   'Video automatisch afspelen': 'Video automatice reddere',
-  'Geen video gekozen': 'Nullum video selectum',
   'Kiezen': 'Eligere',
   'Uit bibliotheek…': 'Ex bibliotheca…',
   'Van computer…': 'Ex computatro…',
@@ -556,7 +521,6 @@ const _dutchSourceLa = {
   'Pakket importeren': 'Fasciculum importare',
   'Pakket exporteren': 'Fasciculum exportare',
   'Map met presentaties kiezen': 'Plicarium praesentationum eligere',
-  'Standaard map voor presentaties': 'Plicarium praedefinitum praesentationum',
   'Map voor exports': 'Plicarium exportationum',
   'Logo kiezen': 'Insigne eligere',
   'Kies een afbeelding': 'Elige imaginem',
@@ -569,8 +533,6 @@ const _dutchSourceLa = {
   'Map kiezen': 'Plicarium eligere',
   'Kies een map met presentaties om te beginnen.':
       'Elige plicarium cum praesentationibus ut incipias.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Nullae praesentationes (.md) in hoc plicario inventae.',
   'Geen presentaties gevonden voor': 'Nullae praesentationes inventae pro',
   'meer treffer(s)': 'plures congruentiae',
   'Slide zoeken': 'Paginam quaerere',
@@ -592,7 +554,6 @@ const _dutchSourceLa = {
       'Insere verba quaerendi ut paginas per omnes praesentationes tuas invenias.',
   'toegevoegd': 'additum',
   'Eerste': 'Prima',
-  'treffers — verfijn je zoekopdracht': 'congruentiae, quaestionem tuam adfina',
   'treffer(s)': 'congruentiae',
   'slide': 'pagina',
   'Zoeken en vervangen': 'Quaerere et substituere',
@@ -651,7 +612,6 @@ const _dutchSourceLa = {
   'Tekst op zijpanelen': 'Textus in panellis lateralibus',
   'Voorbeeldtekst': 'Textus exemplaris',
   'Knop': 'Pulsatorium',
-  'Profielnaam': 'Nomen prosopographiae',
   'Naam van het stijlprofiel': 'Nomen prosopographiae stili',
   'Stijlprofiel': 'Prosopographia stili',
   'Nieuw profiel': 'Nova prosopographia',
@@ -715,15 +675,9 @@ const _dutchSourceLa = {
   'TYPE': 'GENUS',
   'STIJL': 'STILUS',
   'Terug naar standaardstijl': 'Ad stilum praedefinitum redire',
-  'Automatisch doorgaan na': 'Automatice procedere post',
-  'Logo tonen op deze slide': 'Insigne in hac lamina monstrare',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabula editabilis dum praesentas',
-  'Footer tonen op deze slide': 'Pedem in hac lamina monstrare',
   'Sprekersnotities...': 'Notae oratoris...',
   'Sprekersnotities': 'Notae oratoris',
   'Notities voor tijdens het presenteren': 'Notae ad usum dum praesentas',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Modus Markdown — totam praesentationem ut Marp Markdown edere',
   'Toepassen': 'Applicare',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown tractari non potuit. Syntaxin inspice.',
@@ -748,8 +702,6 @@ const _dutchSourceLa = {
   'Geen resultaten voor': 'Nulli exitus pro',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Verbum quaesitum accommoda aut descriptionem adde.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Utere “Sfoliare” ad imagines ex quovis loco eligendas.',
   'Selecteer een\nafbeelding': 'Elige\nimaginem',
   'Gekopieerd': 'Descriptum',
   'Afbeelding verwijderen?': 'Imaginem delere?',
@@ -766,8 +718,6 @@ const _dutchSourceLa = {
   'spatie': 'spatium',
   'klik': 'ictus',
   'cijfers': 'numeri',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Preme aut clava ? / H / Esc ad claudendum',
   'Klik of druk op H / Esc om te sluiten':
       'Preme aut clava H / Esc ad claudendum',
   'Naar slidenummer': 'Ad numerum laminae ire',
@@ -779,20 +729,10 @@ const _dutchSourceLa = {
   'Scherm wisselen (meerdere schermen)':
       'Schermata permutare (plura schermata)',
   'Zwart · wit scherm': 'Schermum nigrum · album',
-  'Verstreken tijd resetten': 'Tempus elapsum restituere',
   'Automatische modus aan/uit': 'Modus automaticus activus/inactivus',
   'Herhalen (loop) aan/uit': 'Iteratio (loop) activa/inactiva',
-  'Na audio automatisch doorgaan': 'Post audio automatice procedere',
-  'Dit overzicht': 'Hic conspectus',
   'Deze legenda': 'Haec legenda',
   'Terug / afsluiten': 'Retro / exire',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuale (A)',
-  'Herhalen (L)': 'Iterare (L)',
-  'Na audio (M)': 'Post audio (M)',
-  'Sneltoetsen (?)': 'Compendia claviaturae (?)',
-  'Slide-overzicht (G)': 'Conspectus laminarum (G)',
-  'Presenter view (P)': 'Visio oratoris (P)',
   'Tijd resetten (R)': 'Tempus restituere (R)',
   'HUIDIGE SLIDE': 'LAMINA PRAESENS',
   'VOLGENDE': 'SEQUENS',
@@ -807,15 +747,9 @@ const _dutchSourceLa = {
   'Notities weggooien': 'Notas abicere',
   'Notities voor de ontvanger tijdens een cursus':
       'Notae pro accipiente durante cursu',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Ad modum Markdown transi ut notas addas.',
   'Mijn notities aan/uit': 'Notas meas activare/inactivare',
   'Wissel scherm (S)': 'Schermum permutare (S)',
   'Kon niet van scherm wisselen.': 'Schermata permutari non potuerunt.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorium · S schermum · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P auditorium · H legenda · G conspectus · B/W nigrum/album · R tempus · Esc sistere',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

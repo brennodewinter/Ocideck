@@ -81,8 +81,6 @@ const _dutchSourceGsw = {
   'Handtekening tekenen': 'Ünnerschrift zeichne',
   'Teken je handtekening in het vak hieronder.':
       'Zeichne dini Ünnerschrift is Fäld hie unde.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Es Datepaket isch es .zip mit de Referänzdate für die Modul. Es wird zerscht gäge de i de App iiboute Fingerabdruck prüeft; nume es Paket, wo zu där App-Version passt, wird akzeptiert.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flächä',
   'Horizontale staaf': 'Horizontali Balke',
@@ -189,7 +187,6 @@ const _dutchSourceGsw = {
       'Bilder und Medie wärde vo Präsentatione im gliiche Ordner gmeinsam bruucht. De genau Name wählsch grad im Systemfänschter.',
   'Alle bibliotheken': 'Alli Bibliotheke',
   'Andere map…': 'Andere Ordner…',
-  'Bibliotheek verwijderen': 'Bibliothek etferne',
   'Bibliotheken': 'Bibliotheke',
   'Geen bibliotheek': 'Kei Bibliothek',
   'Geen presentaties (.md) gevonden.': 'Kei Präsentatione (.md) gfunde.',
@@ -201,10 +198,6 @@ const _dutchSourceGsw = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Wähl, i weli Bibliothek d Präsentation chunnt.',
   'Map toevoegen': 'Ordner zuefüege',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Ordner, wo du dini Präsentatione speichersch und durchsuechsch. Gib ene en eigene Name, damit mer se usenandhalte cha. Alli Bibliotheke wärde bim Öffne und i de Bildbibliothek durchsuecht.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Na kei Bibliothek — füeg en Ordner zue.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Na kei Bibliothek. Füeg eini i de Iischtellige zue oder wähl obe en Ordner zum Durchsueche.',
   'Presentatie opslaan': 'Präsentation speichere',
@@ -286,22 +279,11 @@ const _dutchSourceGsw = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'D Wahrheitserkläärig mit em Berichterstatter, Zertifizierig, Underschrift und Versieglig.',
   'Uitbreidingen': 'Erwyterige',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',
   'Gegevens opschonen': 'Date ufruume',
   'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
   'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Kei Quelle erreichbar — d\'Referänzdate händ nienersch chöne glade werde. Probier\'s nomol oder importier s Paket vo Hand.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'D\'gladene Date händ nöd mit em erwartete Fingerabdruck übereigstimmt und sind us Vorsicht abglehnt worde.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'S Datepäckli isch beschädigt oder ungültig gsi und isch drum abglehnt worde.',
-  'Gegevenspakket kiezen': 'Datepäckli uswähle',
-  'Kon het gekozen bestand niet lezen.':
-      'S usgwählte File het nöd chöne gläse werde.',
   'Nog niet opgehaald': 'No nöd glade',
   'AI-assistentie': 'KI-Unterstützig',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -318,22 +300,15 @@ const _dutchSourceGsw = {
       'E Cloud-Dienscht bruucht zerscht dini Dateschutz-Iiwilligung under "Lizänz und Datenschutz" und lauft nöd i de Web-Version.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Mir isch bewusst, dass Date a de externi Dienscht gschickt werded',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'KI-Unterstützig (standardmässig us): wänn du es sälber ghostets oder Cloud-Backend uswählsch, werded die Text oder Bilder wo du la verarbeite lasch a die Adrässe gschickt. Es lokals KI-Modäll uf däm Grät schickt nüt.',
   'Zoek een slidetype': 'Slide-Typ suech',
   'Alfabetisch sorteren': 'Alphabetisch sortiere',
   'Algemeen': 'Allgemein',
   'Informatieveiligheid': 'Informationssicherheit',
   'Alle': 'Alli',
-  'Pentestrapportage (ontwerp)': 'Pentest-Bricht (Design)',
-  'AI-assistentie (ontwerp)': 'AI-Assistänz (Design)',
-  'Agentisch bouwplan (ontwerp)': 'Agentische Bauplan (Design)',
-  'Bijsnijden': 'Zueschniide',
   'Linksom': 'Nach links drehä',
   'Rechtsom': 'Nach rechts drehä',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Zieh s Bild, zum uswähle, weli Teil sichtbar bliibt.',
-  'Git-opslag (ontwerp)': 'Git-Speicher (Design)',
   'Zoek in documentatie…': 'I de Dokumentation sueche…',
   'Geen documenten gevonden': 'Kei Dokumänt gfunde',
   'Alleen afspelen (vergrendeld)': 'Nume abspiele (verrieglet)',
@@ -347,12 +322,8 @@ const _dutchSourceGsw = {
   'Techniek': 'Technik',
   'Licentie en naleving': 'Lizänz und Compliance',
   'Architectuur': 'Architektur',
-  'Bouwinstructies': 'Bauaaleitig',
-  'Kwaliteitscontroles': 'Qualitätsprüefige',
-  'Broncodekaart': 'Quällcode-Charte',
   'Licentienaleving': 'Lizänz-Compliance',
   'Softwarestuklijst (SBOM)': 'Software-Stückliste (SBOM)',
-  'Samenwerking (ontwerp)': 'Zämenarbet (Design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Mit eme Passwort schütze (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -432,10 +403,6 @@ const _dutchSourceGsw = {
   'Instelling opslaan is mislukt.': 'Iistellig spychere isch fehlgschlage.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Päckli (.ocideck) wärde i dr Webversion no nid understützt.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'I dr Webversion chöi nume .md-Präsentatione göffnet wärde.',
   'Geen': 'Kes',
   'Nieuw': 'Nöi',
   'Verwijderen': 'Lösche',
@@ -525,10 +492,8 @@ const _dutchSourceGsw = {
   'Audio bij deze slide': 'Audio zu dere Slide',
   'Audio automatisch afspelen': 'Audio automatisch abspiele',
   'Audio verwijderen': 'Audio ewägnäh',
-  'Geen audio gekozen': 'Kes Audio uusgwählt',
   'Geen audiobestand gekozen': 'Kes Audio-File uusgwählt',
   'Video automatisch afspelen': 'Video automatisch abspiele',
-  'Geen video gekozen': 'Kes Video uusgwählt',
   'Kiezen': 'Uuswähle',
   'Uit bibliotheek…': 'Us de Bibliothek…',
   'Van computer…': 'Vom Computer…',
@@ -557,7 +522,6 @@ const _dutchSourceGsw = {
   'Pakket importeren': 'Paket importiere',
   'Pakket exporteren': 'Paket exportiere',
   'Map met presentaties kiezen': 'Ordner mit Presentatione wähle',
-  'Standaard map voor presentaties': 'Standard-Ordner für Presentatione',
   'Map voor exports': 'Ordner für Exports',
   'Logo kiezen': 'Logo wähle',
   'Kies een afbeelding': 'Es Bild wähle',
@@ -570,8 +534,6 @@ const _dutchSourceGsw = {
   'Map kiezen': 'Ordner wähle',
   'Kies een map met presentaties om te beginnen.':
       'Wähl e Ordner mit Presentatione zum aafah.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Kei Presentatione (.md) i dem Ordner gfunde.',
   'Geen presentaties gevonden voor': 'Kei Presentatione gfunde für',
   'meer treffer(s)': 'meh Träffer',
   'Slide zoeken': 'Slide sueche',
@@ -593,7 +555,6 @@ const _dutchSourceGsw = {
       'Tipp Suechbegriff ie zum Slides us allne dine Presentatione finde.',
   'toegevoegd': 'zuegfüegt',
   'Eerste': 'Erschti',
-  'treffers — verfijn je zoekopdracht': 'Träffer, verfiiner dini Suech',
   'treffer(s)': 'Träffer',
   'slide': 'Slide',
   'Zoeken en vervangen': 'Sueche und ersetze',
@@ -653,7 +614,6 @@ const _dutchSourceGsw = {
   'Tekst op zijpanelen': 'Täxt uf de Sitepaneel',
   'Voorbeeldtekst': 'Bispiltäxt',
   'Knop': 'Chnopf',
-  'Profielnaam': 'Profilname',
   'Naam van het stijlprofiel': 'Name vom Stilprofil',
   'Stijlprofiel': 'Stilprofil',
   'Nieuw profiel': 'Neus Profil',
@@ -715,16 +675,9 @@ const _dutchSourceGsw = {
   'TYPE': 'TYP',
   'STIJL': 'STIL',
   'Terug naar standaardstijl': 'Zrug zum Standardstil',
-  'Automatisch doorgaan na': 'Automatisch witerfahre nach',
-  'Logo tonen op deze slide': 'Logo uf dere Slide zeige',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabälle bearbeitbar während em Präsentiere',
-  'Footer tonen op deze slide': 'Footer uf dere Slide zeige',
   'Sprekersnotities...': 'Sprächernotize...',
   'Sprekersnotities': 'Sprächernotize',
   'Notities voor tijdens het presenteren': 'Notize für während em Präsentiere',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-Modus — bearbeit di ganzi Präsentation als Marp Markdown',
   'Toepassen': 'Aawände',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown het nöd chöne verarbeitet werde. Kontrollier d Syntax.',
@@ -749,8 +702,6 @@ const _dutchSourceGsw = {
   'Geen resultaten voor': 'Kei Ergäbnis für',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Pass dis Suechwort aa oder füeg e Beschribig hinzue.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Bruuch „Durchsueche“, zum Bilder vo jedem Ort uuszwähle.',
   'Selecteer een\nafbeelding': 'Wähl es\nBild uus',
   'Gekopieerd': 'Kopiert',
   'Afbeelding verwijderen?': 'Bild lösche?',
@@ -767,8 +718,6 @@ const _dutchSourceGsw = {
   'spatie': 'Leertaste',
   'klik': 'Klick',
   'cijfers': 'Zahle',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Klick oder drück ? / H / Esc zum Zuemache',
   'Klik of druk op H / Esc om te sluiten':
       'Klick oder drück H / Esc zum Zuemache',
   'Naar slidenummer': 'Zur Slidenummere gah',
@@ -779,20 +728,10 @@ const _dutchSourceGsw = {
   'Scherm wisselen (meerdere schermen)':
       'Bildschirm wächsle (mehreri Bildschirm)',
   'Zwart · wit scherm': 'Schwarze · wysse Bildschirm',
-  'Verstreken tijd resetten': 'Verstrichni Zit zrugsetze',
   'Automatische modus aan/uit': 'Automatische Modus aa/us',
   'Herhalen (loop) aan/uit': 'Wiederhole (Loop) aa/us',
-  'Na audio automatisch doorgaan': 'Nach em Audio automatisch witerfahre',
-  'Dit overzicht': 'Die Übersicht',
   'Deze legenda': 'Die Legändi',
   'Terug / afsluiten': 'Zrug / verlah',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Vo Hand (A)',
-  'Herhalen (L)': 'Wiederhole (L)',
-  'Na audio (M)': 'Nach em Audio (M)',
-  'Sneltoetsen (?)': 'Tastecho (?)',
-  'Slide-overzicht (G)': 'Slide-Übersicht (G)',
-  'Presenter view (P)': 'Präsentatorvyou (P)',
   'Tijd resetten (R)': 'Zit zrugsetze (R)',
   'HUIDIGE SLIDE': 'AKTUELLI SLIDE',
   'VOLGENDE': 'NÄCHSCHTI',
@@ -807,15 +746,9 @@ const _dutchSourceGsw = {
   'Notities weggooien': 'Notize verwärfe',
   'Notities voor de ontvanger tijdens een cursus':
       'Notize für de Empfänger während eme Kurs',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Wächsle uf de Markdown-Modus, zum Notize hinzuezfüege.',
   'Mijn notities aan/uit': 'Mini Notize aa/us',
   'Wissel scherm (S)': 'Bildschirm wächsle (S)',
   'Kon niet van scherm wisselen.': 'Het d Bildschirm nöd chöne wächsle.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P Publikum · S Bildschirm · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P Publikum · H Legändi · G Übersicht · B/W schwarz/wyss · R Zit · Esc Stopp',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

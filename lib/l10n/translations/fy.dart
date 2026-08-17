@@ -81,8 +81,6 @@ const _dutchSourceFy = {
   'Handtekening tekenen': 'Hantekening tekenje',
   'Teken je handtekening in het vak hieronder.':
       'Tekenje dyn hantekening yn it fak hjirûnder.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'In gegevenspakket is in .zip mei de referinsjegegevens foar dizze module. It wurdt earst tsjin de yn de app ynboude fingerôfdruk kontrolearre; allinnich in pakket dat by dizze app-ferzje heart, wurdt akseptearre.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flak',
   'Horizontale staaf': 'Horizontale steaf',
@@ -188,7 +186,6 @@ const _dutchSourceFy = {
       'Ôfbyldings en media wurde dield troch presintaasjes yn deselde map. De krekte namme kiesto aanst yn it systeemfinster.',
   'Alle bibliotheken': 'Alle biblioteken',
   'Andere map…': 'Oare map…',
-  'Bibliotheek verwijderen': 'Bibleteek fuortsmite',
   'Bibliotheken': 'Biblioteken',
   'Geen bibliotheek': 'Gjin bibleteek',
   'Geen presentaties (.md) gevonden.': 'Gjin presintaasjes (.md) fûn.',
@@ -200,10 +197,6 @@ const _dutchSourceFy = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Kies yn hokker bibleteek de presintaasje komt.',
   'Map toevoegen': 'Map tafoegje',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mappen dêr\'tsto presintaasjes yn bewarrest en trochsikest. Jou se in eigen namme om se út inoar te hâlden. Alle biblioteken wurde trochsocht by it iepenjen en yn de ôfbyldingsbibleteek.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Noch gjin bibleteek — foegje in map ta.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Noch gjin bibleteek. Foegje der ien ta by Ynstellings, of kies hjirboppe in map om te trochsykjen.',
   'Presentatie opslaan': 'Presintaasje bewarje',
@@ -286,21 +279,11 @@ const _dutchSourceFy = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'De wierheidsferklearring mei rapporteur, sertifisearring, hantekening en fersegeling.',
   'Uitbreidingen': 'Utwreidingen',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',
   'Gegevens opschonen': 'Gegevens opromje',
   'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Jou earst tastimming foar útgeand ferkear by Lisinsje en Privacy.',
   'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Gjin boarne berikber — de referinsjegegevens koenen nearne ophelle wurde. Besykje it opnij of ymportearje it pakket mei de hân.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'De ophelle gegevens kamen net oerien mei de ferwachte fingerôfdruk en binne út foarsoarch wegere.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'It gegevenspakket wie skansearre of ûnjildich en is dêrom wegere.',
-  'Gegevenspakket kiezen': 'Gegevenspakket kieze',
-  'Kon het gekozen bestand niet lezen.': 'Koe it keazen bestân net lêze.',
   'Nog niet opgehaald': 'Noch net ophelle',
   'AI-assistentie': 'AI-stipe',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +300,15 @@ const _dutchSourceFy = {
       'In clouddienst freget earst dyn privacytastimming by "Lisinsje en Privacy" en wurket net yn de webferzje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Ik begryp dat gegevens nei dizze eksterne tsjinst ferstjoerd wurde',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI-stipe (stiet standert út): kiest do in sels-hoste of cloud-backend, dan wurde de teksten of ôfbyldings dy\'t do ferwurkje litst nei dat adres stjoerd. In lokaal AI-model op dit apparaat ferstjoert neat.',
   'Zoek een slidetype': 'Sykje in slidetype',
   'Alfabetisch sorteren': 'Alfabetysk sortearje',
   'Algemeen': 'Algemien',
   'Informatieveiligheid': 'Ynformaasjefeiligens',
   'Alle': 'Alle',
-  'Pentestrapportage (ontwerp)': 'Pentestrapportaazje (ûntwerp)',
-  'AI-assistentie (ontwerp)': 'AI-assistinsje (ûntwerp)',
-  'Agentisch bouwplan (ontwerp)': 'Agentysk bouplan (ûntwerp)',
-  'Bijsnijden': 'Bysnije',
   'Linksom': 'Linksom',
   'Rechtsom': 'Rjochtsom',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Sleep de ôfbylding om te kiezen hokker diel sichtber bliuwt.',
-  'Git-opslag (ontwerp)': 'Git-opslach (ûntwerp)',
   'Zoek in documentatie…': 'Sykje yn dokumintaasje…',
   'Geen documenten gevonden': 'Gjin dokuminten fûn',
   'Alleen afspelen (vergrendeld)': 'Allinnich ôfspylje (skoattele)',
@@ -346,12 +322,8 @@ const _dutchSourceFy = {
   'Techniek': 'Technyk',
   'Licentie en naleving': 'Lisinsje en neilibjen',
   'Architectuur': 'Arsjitektuer',
-  'Bouwinstructies': 'Bou-ynstruksjes',
-  'Kwaliteitscontroles': 'Kwaliteitskontrôles',
-  'Broncodekaart': 'Boarnekoadekaart',
   'Licentienaleving': 'Lisinsjeneilibjen',
   'Softwarestuklijst (SBOM)': 'Softwarestikliist (SBOM)',
-  'Samenwerking (ontwerp)': 'Gearwurking (ûntwerp)',
   'Beschermen met een wachtwoord (AES-256)':
       'Beskermje mei in wachtwurd (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
@@ -430,10 +402,6 @@ const _dutchSourceFy = {
   'Instelling opslaan is mislukt.': 'Ynstelling bewarje is mislearre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tink derom: de webferzje kin allinnich ophelje fan servers dy\'t dat tastean (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pakketten (.ocideck) wurde yn de webferzje noch net stipe.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Allinne .md-presintaasjes kinne yn de webferzje iepene wurde.',
   'Geen': 'Gjin',
   'Nieuw': 'Nij',
   'Verwijderen': 'Fuortsmite',
@@ -503,7 +471,6 @@ const _dutchSourceFy = {
   'Audio automatisch afspelen': 'Audio automatysk ôfspylje',
   'Video automatisch afspelen': 'Fideo automatysk ôfspylje',
   'Geen audiobestand gekozen': 'Gjin audiobestân keazen',
-  'Geen video gekozen': 'Gjin fideo keazen',
   'Kiezen': 'Kieze',
   'Uit bibliotheek…': 'Ut bibleteek…',
   'Van computer…': 'Fan kompjûter…',
@@ -572,7 +539,6 @@ const _dutchSourceFy = {
   'Tekst op zijpanelen': 'Tekst op sydpanielen',
   'Voorbeeldtekst': 'Foarbyldtekst',
   'Knop': 'Knop',
-  'Profielnaam': 'Profylnamme',
   'Stijlprofiel': 'Stylprofyl',
   'Lettertype': 'Lettertype',
   'Kleuren': 'Kleuren',
@@ -618,10 +584,8 @@ const _dutchSourceFy = {
   'Presenter view (notities, klok)': 'Presenter view (notysjes, klok)',
   'Scherm wisselen (meerdere schermen)': 'Skerm wikselje (mear skermen)',
   'Zwart · wit scherm': 'Swart · wyt skerm',
-  'Verstreken tijd resetten': 'Ferrûne tiid weromsette',
   'Automatische modus aan/uit': 'Automatyske modus oan/út',
   'Herhalen (loop) aan/uit': 'Werhelje (loop) oan/út',
-  'Na audio automatisch doorgaan': 'Nei audio automatysk trochgean',
   'Deze legenda': 'Dizze leginda',
   'Terug / afsluiten': 'Werom / ôfslute',
   'HUIDIGE SLIDE': 'AKTUELE SLIDE',
@@ -636,8 +600,6 @@ const _dutchSourceFy = {
       'Brûkersnotysjes foar dizze slide...',
   'Notities voor de ontvanger tijdens een cursus':
       'Notysjes foar de ûntfanger tidens in kursus',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Skeakel nei Markdown-modus om notysjes ta te foegjen.',
   'Mijn notities aan/uit': 'Myn notysjes oan/út',
   'Wissel scherm (S)': 'Skerm wikselje (S)',
   'Kon niet van scherm wisselen.': 'Koe net fan skerm wikselje.',
@@ -4068,7 +4030,6 @@ const _dutchSourceAddFy = {
       'Alle dia\'s binne oerslein — neat om sjen te litten.',
   'Alles tonen': 'Alles sjen litte',
   'Audio verwijderen': 'Audio fuortsmite',
-  'Automatisch doorgaan na': 'Automatysk fierder nei',
   'Bijv. Kwartaalupdate Q4': 'Bgl. Kwartaalupdate Q4',
   'Bullet': 'Puntsje',
   'Caption / bronvermelding (bijv. © Naam Fotograaf)':
@@ -4092,17 +4053,12 @@ const _dutchSourceAddFy = {
   'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
       'Der binne presintaasjes mei net-opsleine wizigingen. Bewarje se foardat de app slút.',
   'Export mislukt:': 'Eksport mislearre:',
-  'Footer tonen op deze slide': 'Foettekst sjen litte op dizze dia',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Brûk "Blêdzje" om ôfbyldingen fan elke lokaasje te kiezen.',
   'Geen afbeelding op het klembord gevonden.':
       'Gjin ôfbylding op it klamboerd fûn.',
   'Geen ander deck open. Open eerst een ander tabblad.':
       'Gjin oar deck iepen. Iepenje earst in oar ljepblêd.',
   'Geen andere presentaties (.md) in deze map gevonden.':
       'Gjin oare presintaasjes (.md) yn dizze map fûn.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Gjin presintaasjes (.md) yn dizze map fûn.',
   'Geen presentaties gevonden voor': 'Gjin presintaasjes fûn foar',
   'Geen resultaten': 'Gjin resultaten',
   'Geen resultaten voor': 'Gjin resultaten foar',
@@ -4133,15 +4089,10 @@ const _dutchSourceAddFy = {
       'Tink derom: dizze ôfbylding wurdt noch brûkt yn',
   'Logo kiezen': 'Logo kieze',
   'Logo px': 'Logo px',
-  'Logo tonen op deze slide': 'Logo sjen litte op dizze dia',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabel te bewurkjen ûnder it presintearjen',
   'Map met presentaties kiezen': 'Map mei presintaasjes kieze',
   'Map voor exports': 'Map foar eksports',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown koe net ferwurke wurde. Kontrolearje de syntaks.',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-modus — bewurkje de folsleine presintaasje as Marp Markdown',
   'Markdown voor laatste slide': 'Markdown foar de lêste slide',
   'Naam van het stijlprofiel': 'Namme fan it stylprofyl',
   'Niet-opgeslagen werk herstellen?': 'Net-opslein wurk werstelle?',
@@ -4178,7 +4129,6 @@ const _dutchSourceAddFy = {
   'Sluiten (G of Esc)': 'Slute (G of Esc)',
   'Sprekersnotities...': 'Sprekkersnotysjes...',
   'Standaard laatste slide gebruiken': 'Standert lêste slide brûke',
-  'Standaard map voor presentaties': 'Standertmap foar presintaasjes',
   'Standaardprofiel laden': 'Standertprofyl lade',
   'TLP-classificatie (Traffic Light Protocol)':
       'TLP-klassifikaasje (Traffic Light Protocol)',
@@ -4239,7 +4189,6 @@ const _dutchSourceAddFy = {
   'slides overgeslagen': 'dia\'s oerslein',
   'toegevoegd': 'tafoege',
   'treffer(s)': 'treffer(s)',
-  'treffers — verfijn je zoekopdracht': 'treffers — ferfynje dyn sykopdracht',
   'van de foto zichtbaar': 'fan de foto sichtber',
   'vervangen': 'ferfongen',
   'verwijderen': 'fuortsmite',

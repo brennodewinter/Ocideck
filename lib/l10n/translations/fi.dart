@@ -81,8 +81,6 @@ const _dutchSourceFi = {
   'Handtekening tekenen': 'Piirrä allekirjoitus',
   'Teken je handtekening in het vak hieronder.':
       'Piirrä allekirjoituksesi alla olevaan ruutuun.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Datapaketti on .zip, joka sisältää tämän moduulin viitetiedot. Se tarkistetaan ensin sovellukseen sisäänrakennettua sormenjälkeä vasten; vain tähän sovellusversioon sopiva paketti hyväksytään.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
@@ -189,7 +187,6 @@ const _dutchSourceFi = {
       'Kuvat ja media ovat samassa kansiossa olevien esitysten yhteisiä. Tarkan nimen valitset kohta järjestelmäikkunassa.',
   'Alle bibliotheken': 'Kaikki kirjastot',
   'Andere map…': 'Toinen kansio…',
-  'Bibliotheek verwijderen': 'Poista kirjasto',
   'Bibliotheken': 'Kirjastot',
   'Geen bibliotheek': 'Ei kirjastoa',
   'Geen presentaties (.md) gevonden.': 'Esityksiä (.md) ei löytynyt.',
@@ -201,10 +198,6 @@ const _dutchSourceFi = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Valitse, mihin kirjastoon esitys tulee.',
   'Map toevoegen': 'Lisää kansio',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Kansiot, joihin tallennat ja joista haet esityksiäsi. Anna kullekin oma nimi, jotta erotat ne toisistaan. Kaikki kirjastot haetaan avattaessa ja kuvakirjastossa.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Ei vielä kirjastoa — lisää kansio.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Ei vielä kirjastoa. Lisää sellainen Asetuksissa tai valitse yllä kansio, josta haetaan.',
   'Presentatie opslaan': 'Tallenna esitys',
@@ -286,21 +279,11 @@ const _dutchSourceFi = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Totuudenvakuutus raportoijan, sertifioinnin, allekirjoituksen ja sinetöinnin kanssa.',
   'Uitbreidingen': 'Laajennukset',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',
   'Gegevens opschonen': 'Siivoa tiedot',
   'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Yhtään lähdettä ei tavoitettu — viitetietoja ei voitu hakea mistään. Yritä uudelleen tai tuo paketti manuaalisesti.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Haetut tiedot eivät vastanneet odotettua sormenjälkeä, ja ne hylättiin varotoimena.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Tietopaketti oli vaurioitunut tai virheellinen, ja se siksi hylättiin.',
-  'Gegevenspakket kiezen': 'Valitse tietopaketti',
-  'Kon het gekozen bestand niet lezen.': 'Valittua tiedostoa ei voitu lukea.',
   'Nog niet opgehaald': 'Ei vielä haettu',
   'AI-assistentie': 'Tekoälyavustus',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,23 +300,15 @@ const _dutchSourceFi = {
       'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Lisenssi ja yksityisyys" eikä toimi verkkoversiossa.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Ymmärrän, että tietoja lähetetään tähän ulkoiseen palveluun',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Tekoälyavustus (oletuksena pois päältä): jos valitset itse isännöidyn tai pilvipohjaisen taustajärjestelmän, käsittelemäsi tekstit tai kuvat lähetetään kyseiseen osoitteeseen. Paikallinen tekoälymalli tällä laitteella ei lähetä mitään.',
   'Zoek een slidetype': 'Etsi diatyyppiä',
   'Alfabetisch sorteren': 'Lajittele aakkosjärjestykseen',
   'Algemeen': 'Yleiset',
   'Informatieveiligheid': 'Tietoturva',
   'Alle': 'Kaikki',
-  'Pentestrapportage (ontwerp)': 'Pentest-raportti (suunnitelma)',
-  'AI-assistentie (ontwerp)': 'Tekoälyavustus (suunnitelma)',
-  'Agentisch bouwplan (ontwerp)':
-      'Agenttinen rakennussuunnitelma (suunnitelma)',
-  'Bijsnijden': 'Rajaa',
   'Linksom': 'Kierrä vasemmalle',
   'Rechtsom': 'Kierrä oikealle',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vedä kuvaa valitaksesi, mikä osa jää näkyviin.',
-  'Git-opslag (ontwerp)': 'Git-tallennus (suunnitelma)',
   'Zoek in documentatie…': 'Etsi dokumentaatiosta…',
   'Geen documenten gevonden': 'Dokumentteja ei löytynyt',
   'Alleen afspelen (vergrendeld)': 'Vain toisto (lukittu)',
@@ -347,12 +322,8 @@ const _dutchSourceFi = {
   'Techniek': 'Tekniikka',
   'Licentie en naleving': 'Lisenssi ja vaatimustenmukaisuus',
   'Architectuur': 'Arkkitehtuuri',
-  'Bouwinstructies': 'Käännösohjeet',
-  'Kwaliteitscontroles': 'Laatutarkistukset',
-  'Broncodekaart': 'Lähdekoodikartta',
   'Licentienaleving': 'Lisenssien noudattaminen',
   'Softwarestuklijst (SBOM)': 'Ohjelmiston osaluettelo (SBOM)',
-  'Samenwerking (ontwerp)': 'Yhteistyö (suunnitelma)',
   'Beschermen met een wachtwoord (AES-256)': 'Suojaa salasanalla (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Säilytä tämä salasana huolellisesti: jos menetät sen, tätä pakettia ei voi enää avata.',
@@ -430,10 +401,6 @@ const _dutchSourceFi = {
   'Instelling opslaan is mislukt.': 'Asetuksen tallennus epäonnistui.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Paketteja (.ocideck) ei vielä tueta verkkoversiossa.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Verkkoversiossa voi avata vain .md-esityksiä.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',
@@ -521,10 +488,8 @@ const _dutchSourceFi = {
   'Audio bij deze slide': 'Ääni tähän diaan',
   'Audio automatisch afspelen': 'Toista ääni automaattisesti',
   'Audio verwijderen': 'Poista ääni',
-  'Geen audio gekozen': 'Ääntä ei valittu',
   'Geen audiobestand gekozen': 'Äänitiedostoa ei valittu',
   'Video automatisch afspelen': 'Toista video automaattisesti',
-  'Geen video gekozen': 'Videota ei valittu',
   'Kiezen': 'Valitse',
   'Uit bibliotheek…': 'Kirjastosta…',
   'Van computer…': 'Tietokoneelta…',
@@ -553,7 +518,6 @@ const _dutchSourceFi = {
   'Pakket importeren': 'Tuo paketti',
   'Pakket exporteren': 'Vie paketti',
   'Map met presentaties kiezen': 'Valitse esityskansio',
-  'Standaard map voor presentaties': 'Esitysten oletuskansio',
   'Map voor exports': 'Vientikansio',
   'Logo kiezen': 'Valitse logo',
   'Kies een afbeelding': 'Valitse kuva',
@@ -566,8 +530,6 @@ const _dutchSourceFi = {
   'Map kiezen': 'Valitse kansio',
   'Kies een map met presentaties om te beginnen.':
       'Aloita valitsemalla esityksiä sisältävä kansio.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Tästä kansiosta ei löytynyt esityksiä (.md).',
   'Geen presentaties gevonden voor': 'Esityksiä ei löytynyt haulle',
   'meer treffer(s)': 'osumaa lisää',
   'Slide zoeken': 'Etsi dia',
@@ -589,7 +551,6 @@ const _dutchSourceFi = {
       'Kirjoita hakusanoja löytääksesi dioja kaikista esityksistäsi.',
   'toegevoegd': 'lisätty',
   'Eerste': 'Ensimmäinen',
-  'treffers — verfijn je zoekopdracht': 'osumaa — tarkenna hakuasi',
   'treffer(s)': 'osuma(t)',
   'slide': 'dia',
   'Zoeken en vervangen': 'Etsi ja korvaa',
@@ -648,7 +609,6 @@ const _dutchSourceFi = {
   'Tekst op zijpanelen': 'Sivupaneelien teksti',
   'Voorbeeldtekst': 'Esimerkkiteksti',
   'Knop': 'Painike',
-  'Profielnaam': 'Profiilin nimi',
   'Naam van het stijlprofiel': 'Tyyliprofiilin nimi',
   'Stijlprofiel': 'Tyyliprofiili',
   'Nieuw profiel': 'Uusi profiili',
@@ -711,15 +671,9 @@ const _dutchSourceFi = {
   'TYPE': 'TYYPPI',
   'STIJL': 'TYYLI',
   'Terug naar standaardstijl': 'Takaisin oletustyyliin',
-  'Automatisch doorgaan na': 'Siirry automaattisesti eteenpäin ajan',
-  'Logo tonen op deze slide': 'Näytä logo tällä dialla',
-  'Tabel bewerkbaar tijdens presenteren': 'Taulukko muokattavissa esitettäessä',
-  'Footer tonen op deze slide': 'Näytä alatunniste tällä dialla',
   'Sprekersnotities...': 'Puhujan muistiinpanot...',
   'Sprekersnotities': 'Puhujan muistiinpanot',
   'Notities voor tijdens het presenteren': 'Muistiinpanot esittämisen ajaksi',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-tila — muokkaa koko esitystä Marp-Markdownina',
   'Toepassen': 'Käytä',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdownia ei voitu käsitellä. Tarkista syntaksi.',
@@ -744,8 +698,6 @@ const _dutchSourceFi = {
   'Geen resultaten voor': 'Ei tuloksia haulle',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Muokkaa hakusanaa tai lisää kuvaus.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Käytä ”Selaa”-toimintoa valitaksesi kuvia mistä tahansa sijainnista.',
   'Selecteer een\nafbeelding': 'Valitse\nkuva',
   'Gekopieerd': 'Kopioitu',
   'Afbeelding verwijderen?': 'Poistetaanko kuva?',
@@ -762,8 +714,6 @@ const _dutchSourceFi = {
   'spatie': 'väli',
   'klik': 'napsauta',
   'cijfers': 'numerot',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Napsauta tai sulje painamalla ? / H / Esc',
   'Klik of druk op H / Esc om te sluiten':
       'Napsauta tai sulje painamalla H / Esc',
   'Naar slidenummer': 'Siirry dian numeroon',
@@ -773,20 +723,10 @@ const _dutchSourceFi = {
   'Presenter view (notities, klok)': 'Esittäjänäkymä (muistiinpanot, kello)',
   'Scherm wisselen (meerdere schermen)': 'Vaihda näyttöä (useita näyttöjä)',
   'Zwart · wit scherm': 'Musta · valkoinen näyttö',
-  'Verstreken tijd resetten': 'Nollaa kulunut aika',
   'Automatische modus aan/uit': 'Automaattinen tila päälle/pois',
   'Herhalen (loop) aan/uit': 'Toisto (silmukka) päälle/pois',
-  'Na audio automatisch doorgaan': 'Siirry automaattisesti äänen jälkeen',
-  'Dit overzicht': 'Tämä katsaus',
   'Deze legenda': 'Tämä legenda',
   'Terug / afsluiten': 'Takaisin / poistu',
-  'Auto (A)': 'Automaattinen (A)',
-  'Handmatig (A)': 'Manuaalinen (A)',
-  'Herhalen (L)': 'Toisto (L)',
-  'Na audio (M)': 'Äänen jälkeen (M)',
-  'Sneltoetsen (?)': 'Pikanäppäimet (?)',
-  'Slide-overzicht (G)': 'Diakatsaus (G)',
-  'Presenter view (P)': 'Esittäjänäkymä (P)',
   'Tijd resetten (R)': 'Nollaa ajastin (R)',
   'HUIDIGE SLIDE': 'NYKYINEN DIA',
   'VOLGENDE': 'SEURAAVA',
@@ -802,15 +742,9 @@ const _dutchSourceFi = {
   'Notities weggooien': 'Hylkää muistiinpanot',
   'Notities voor de ontvanger tijdens een cursus':
       'Muistiinpanot vastaanottajalle kurssin aikana',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Vaihda Markdown-tilaan lisätäksesi muistiinpanoja.',
   'Mijn notities aan/uit': 'Näytä omat muistiinpanot päälle/pois',
   'Wissel scherm (S)': 'Vaihda näyttöä (S)',
   'Kon niet van scherm wisselen.': 'Näyttöä ei voitu vaihtaa.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P yleisö · S näyttö · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P yleisö · H legenda · G katsaus · B/W musta/valkoinen · R aika · Esc pysäytä',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

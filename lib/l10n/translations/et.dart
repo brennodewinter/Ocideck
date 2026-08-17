@@ -80,8 +80,6 @@ const _dutchSourceEt = {
   'Handtekening tekenen': 'Joonista allkiri',
   'Teken je handtekening in het vak hieronder.':
       'Joonista oma allkiri allolevasse kasti.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Andmepakett on .zip selle mooduli võrdlusandmetega. Kõigepealt kontrollitakse seda rakendusse sisseehitatud sõrmejälje suhtes; vastu võetakse ainult sellele rakenduse versioonile vastav pakett.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Pindala',
   'Horizontale staaf': 'Horisontaalne tulp',
@@ -188,7 +186,6 @@ const _dutchSourceEt = {
       'Pilte ja meediat jagavad samas kaustas olevad esitlused. Täpse nime valid kohe süsteemiaknas.',
   'Alle bibliotheken': 'Kõik teegid',
   'Andere map…': 'Muu kaust…',
-  'Bibliotheek verwijderen': 'Eemalda teek',
   'Bibliotheken': 'Teegid',
   'Geen bibliotheek': 'Teek puudub',
   'Geen presentaties (.md) gevonden.': 'Esitlusi (.md) ei leitud.',
@@ -200,9 +197,6 @@ const _dutchSourceEt = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Vali, millisesse teeki esitlus läheb.',
   'Map toevoegen': 'Lisa kaust',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Kaustad, kuhu salvestad ja kust otsid oma esitlusi. Anna igaühele oma nimi, et neid eristada. Kõiki teeke otsitakse avamisel ja pilditeegis.',
-  'Nog geen bibliotheek — voeg een map toe.': 'Teeki veel pole — lisa kaust.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Teeki veel pole. Lisa see Seadetes või vali ülal kaust, millest otsida.',
   'Presentatie opslaan': 'Salvesta esitlus',
@@ -284,21 +278,11 @@ const _dutchSourceEt = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Tõesuse kinnitus koos raportööri, sertifitseerimise, allkirja ja pitseriga.',
   'Uitbreidingen': 'Laiendused',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',
   'Gegevens opschonen': 'Puhasta andmed',
   'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Andke esmalt nõusolek väljuvale liiklusele jaotises Litsents ja privaatsus.',
   'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Ühtegi allikat pole kättesaadav — võrdlusandmeid ei õnnestunud kusagilt alla laadida. Proovi uuesti või impordi pakett käsitsi.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Allalaaditud andmed ei vastanud oodatud sõrmejäljele ja lükati ettevaatusabinõuna tagasi.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Andmepakett oli kahjustatud või vigane ja lükati seetõttu tagasi.',
-  'Gegevenspakket kiezen': 'Vali andmepakett',
-  'Kon het gekozen bestand niet lezen.': 'Valitud faili ei õnnestunud lugeda.',
   'Nog niet opgehaald': 'Pole veel alla laaditud',
   'AI-assistentie': 'Tehisintellekti abi',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -315,22 +299,15 @@ const _dutchSourceEt = {
       'Pilveteenus nõuab kõigepealt teie privaatsusnõusolekut jaotises "Litsents ja privaatsus" ega tööta veebiversioonis.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Saan aru, et andmed saadetakse sellele välisele teenusele',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'Tehisintellekti abi (vaikimisi välja lülitatud): kui valite ise majutatud või pilvepõhise taustsüsteemi, saadetakse tekstid või pildid, mida töödelda lasete, sellele aadressile. Kohalik tehisintellekti mudel selles seadmes ei saada midagi.',
   'Zoek een slidetype': 'Otsi slaiditüüpi',
   'Alfabetisch sorteren': 'Sorteeri tähestikuliselt',
   'Algemeen': 'Üldine',
   'Informatieveiligheid': 'Infoturve',
   'Alle': 'Kõik',
-  'Pentestrapportage (ontwerp)': 'Pentesti aruanne (kavand)',
-  'AI-assistentie (ontwerp)': 'AI-abi (kavand)',
-  'Agentisch bouwplan (ontwerp)': 'Agentne ehitusplaan (kavand)',
-  'Bijsnijden': 'Kärbi',
   'Linksom': 'Pööra vasakule',
   'Rechtsom': 'Pööra paremale',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lohista pilti, et valida, milline osa jääb nähtavaks.',
-  'Git-opslag (ontwerp)': 'Git-salvestus (kavand)',
   'Zoek in documentatie…': 'Otsi dokumentatsioonist…',
   'Geen documenten gevonden': 'Ühtegi dokumenti ei leitud',
   'Alleen afspelen (vergrendeld)': 'Ainult esitatav (lukustatud)',
@@ -344,12 +321,8 @@ const _dutchSourceEt = {
   'Techniek': 'Tehniline',
   'Licentie en naleving': 'Litsents ja vastavus',
   'Architectuur': 'Arhitektuur',
-  'Bouwinstructies': 'Ehitusjuhised',
-  'Kwaliteitscontroles': 'Kvaliteedikontrollid',
-  'Broncodekaart': 'Lähtekoodi kaart',
   'Licentienaleving': 'Litsentsinõuetele vastavus',
   'Softwarestuklijst (SBOM)': 'Tarkvara komponentide loend (SBOM)',
-  'Samenwerking (ontwerp)': 'Koostöö (kavand)',
   'Beschermen met een wachtwoord (AES-256)': 'Kaitse parooliga (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hoia see parool hoolikalt alles: kui kaotad selle, ei saa seda paketti enam avada.',
@@ -427,10 +400,6 @@ const _dutchSourceEt = {
   'Instelling opslaan is mislukt.': 'Sätte salvestamine ebaõnnestus.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Märkus: veebiversioon saab laadida ainult serveritest, mis seda lubavad (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pakette (.ocideck) veebiversioonis veel ei toetata.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Veebiversioonis saab avada ainult .md-esitlusi.',
   'Geen': 'Puudub',
   'Nieuw': 'Uus',
   'Verwijderen': 'Kustuta',
@@ -520,10 +489,8 @@ const _dutchSourceEt = {
   'Audio bij deze slide': 'Selle slaidi heli',
   'Audio automatisch afspelen': 'Esita heli automaatselt',
   'Audio verwijderen': 'Eemalda heli',
-  'Geen audio gekozen': 'Heli pole valitud',
   'Geen audiobestand gekozen': 'Helifaili pole valitud',
   'Video automatisch afspelen': 'Esita video automaatselt',
-  'Geen video gekozen': 'Videot pole valitud',
   'Kiezen': 'Vali',
   'Uit bibliotheek…': 'Teegist…',
   'Van computer…': 'Arvutist…',
@@ -552,7 +519,6 @@ const _dutchSourceEt = {
   'Pakket importeren': 'Impordi pakett',
   'Pakket exporteren': 'Ekspordi pakett',
   'Map met presentaties kiezen': 'Vali esitluste kaust',
-  'Standaard map voor presentaties': 'Esitluste vaikekaust',
   'Map voor exports': 'Ekspordikaust',
   'Logo kiezen': 'Vali logo',
   'Kies een afbeelding': 'Vali pilt',
@@ -565,8 +531,6 @@ const _dutchSourceEt = {
   'Map kiezen': 'Vali kaust',
   'Kies een map met presentaties om te beginnen.':
       'Alustamiseks vali esitlustega kaust.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Selles kaustas ei leitud esitlusi (.md).',
   'Geen presentaties gevonden voor': 'Esitlusi ei leitud otsingule',
   'meer treffer(s)': 'veel vaste(id)',
   'Slide zoeken': 'Otsi slaidi',
@@ -588,7 +552,6 @@ const _dutchSourceEt = {
       'Kirjuta otsingusõnad, et leida slaide kõigist esitlustest.',
   'toegevoegd': 'lisatud',
   'Eerste': 'Esimesed',
-  'treffers — verfijn je zoekopdracht': 'vastet — täpsusta otsingut',
   'treffer(s)': 'vaste(id)',
   'slide': 'slaid',
   'Zoeken en vervangen': 'Otsi ja asenda',
@@ -647,7 +610,6 @@ const _dutchSourceEt = {
   'Tekst op zijpanelen': 'Külgpaneelide tekst',
   'Voorbeeldtekst': 'Näidistekst',
   'Knop': 'Nupp',
-  'Profielnaam': 'Profiili nimi',
   'Naam van het stijlprofiel': 'Stiiliprofiili nimi',
   'Stijlprofiel': 'Stiiliprofiil',
   'Nieuw profiel': 'Uus profiil',
@@ -710,15 +672,9 @@ const _dutchSourceEt = {
   'TYPE': 'TÜÜP',
   'STIJL': 'STIIL',
   'Terug naar standaardstijl': 'Tagasi vaikestiili',
-  'Automatisch doorgaan na': 'Edasi automaatselt pärast',
-  'Logo tonen op deze slide': 'Näita logo sellel slaidil',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabel muudetav esitlemise ajal',
-  'Footer tonen op deze slide': 'Näita jalust sellel slaidil',
   'Sprekersnotities...': 'Esineja märkmed...',
   'Sprekersnotities': 'Esineja märkmed',
   'Notities voor tijdens het presenteren': 'Märkmed esitlemise ajaks',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown-režiim — muuda kogu esitlust Marp Markdown -ina',
   'Toepassen': 'Rakenda',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown-i ei õnnestunud töödelda. Kontrolli süntaksit.',
@@ -743,8 +699,6 @@ const _dutchSourceEt = {
   'Geen resultaten voor': 'Tulemusi pole otsingule',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Kohanda otsingusõna või lisa kirjeldus.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Kasuta „Sirvi”, et valida pilte mis tahes asukohast.',
   'Selecteer een\nafbeelding': 'Vali\npilt',
   'Gekopieerd': 'Kopeeritud',
   'Afbeelding verwijderen?': 'Kas kustutada pilt?',
@@ -761,8 +715,6 @@ const _dutchSourceEt = {
   'spatie': 'tühik',
   'klik': 'klõps',
   'cijfers': 'numbrid',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Sulgemiseks klõpsa või vajuta ? / H / Esc',
   'Klik of druk op H / Esc om te sluiten':
       'Sulgemiseks klõpsa või vajuta H / Esc',
   'Naar slidenummer': 'Mine slaidi numbrile',
@@ -772,20 +724,10 @@ const _dutchSourceEt = {
   'Presenter view (notities, klok)': 'Esitleja vaade (märkmed, kell)',
   'Scherm wisselen (meerdere schermen)': 'Vaheta ekraani (mitu ekraani)',
   'Zwart · wit scherm': 'Must · valge ekraan',
-  'Verstreken tijd resetten': 'Lähtesta kulunud aeg',
   'Automatische modus aan/uit': 'Automaatrežiim sees/väljas',
   'Herhalen (loop) aan/uit': 'Kordamine (silmus) sees/väljas',
-  'Na audio automatisch doorgaan': 'Jätka automaatselt pärast heli',
-  'Dit overzicht': 'See ülevaade',
   'Deze legenda': 'See legend',
   'Terug / afsluiten': 'Tagasi / välju',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Käsitsi (A)',
-  'Herhalen (L)': 'Kordamine (L)',
-  'Na audio (M)': 'Pärast heli (M)',
-  'Sneltoetsen (?)': 'Kiirklahvid (?)',
-  'Slide-overzicht (G)': 'Slaidide ülevaade (G)',
-  'Presenter view (P)': 'Esitleja vaade (P)',
   'Tijd resetten (R)': 'Lähtesta aeg (R)',
   'HUIDIGE SLIDE': 'PRAEGUNE SLAID',
   'VOLGENDE': 'JÄRGMINE',
@@ -801,15 +743,9 @@ const _dutchSourceEt = {
   'Notities weggooien': 'Loobu märkmetest',
   'Notities voor de ontvanger tijdens een cursus':
       'Märkmed vastuvõtjale kursuse ajal',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Märkmete lisamiseks lülitu Markdown-režiimi.',
   'Mijn notities aan/uit': 'Minu märkmed sees/väljas',
   'Wissel scherm (S)': 'Vaheta ekraani (S)',
   'Kon niet van scherm wisselen.': 'Ekraani ei õnnestunud vahetada.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P publik · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P publik · H legend · G ülevaade · B/W must/valge · R aeg · Esc stopp',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

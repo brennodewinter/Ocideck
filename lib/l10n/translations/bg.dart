@@ -82,8 +82,6 @@ const _dutchSourceBg = {
   'Handtekening tekenen': 'Начертай подпис',
   'Teken je handtekening in het vak hieronder.':
       'Начертайте подписа си в полето по-долу.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Пакетът с данни е .zip с референтните данни за този модул. Първо се проверява спрямо отпечатъка, вграден в приложението; приема се само пакет, който съответства на тази версия на приложението.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площна',
   'Horizontale staaf': 'Хоризонтална стълбовидна',
@@ -190,7 +188,6 @@ const _dutchSourceBg = {
       'Изображенията и медията се споделят от презентациите в същата папка. Точното име ще изберете след малко в системния прозорец.',
   'Alle bibliotheken': 'Всички библиотеки',
   'Andere map…': 'Друга папка…',
-  'Bibliotheek verwijderen': 'Премахване на библиотеката',
   'Bibliotheken': 'Библиотеки',
   'Geen bibliotheek': 'Няма библиотека',
   'Geen presentaties (.md) gevonden.': 'Не са намерени презентации (.md).',
@@ -202,10 +199,6 @@ const _dutchSourceBg = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Изберете в коя библиотека да попадне презентацията.',
   'Map toevoegen': 'Добавяне на папка',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Папки, в които съхранявате и търсите презентациите си. Дайте на всяка собствено име, за да ги различавате. Всички библиотеки се претърсват при отваряне и в библиотеката с изображения.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Все още няма библиотека — добавете папка.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Все още няма библиотека. Добавете една в Настройки или изберете папка по-горе за търсене.',
   'Presentatie opslaan': 'Запазване на презентацията',
@@ -287,22 +280,11 @@ const _dutchSourceBg = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Декларацията за достоверност с докладчика, сертифицирането, подписа и печата.',
   'Uitbreidingen': 'Разширения',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
   'Gegevens opschonen': 'Изчистване на данните',
   'Gegevens lokaal beschikbaar': 'Данните са налични локално',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Първо дайте съгласие за изходящ трафик в раздел Лиценз и поверителност.',
   'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Няма достъпен източник — референтните данни не можаха да бъдат изтеглени отникъде. Опитайте отново или импортирайте пакета ръчно.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Изтеглените данни не съвпаднаха с очаквания отпечатък и бяха отхвърлени от предпазливост.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Пакетът с данни беше повреден или невалиден и затова беше отхвърлен.',
-  'Gegevenspakket kiezen': 'Избор на пакет с данни',
-  'Kon het gekozen bestand niet lezen.':
-      'Избраният файл не можа да бъде прочетен.',
   'Nog niet opgehaald': 'Още не е изтеглено',
   'AI-assistentie': 'AI помощ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -319,22 +301,15 @@ const _dutchSourceBg = {
       'Облачна услуга първо изисква вашето съгласие за поверителност в "Лиценз и поверителност" и не работи в уеб версията.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Разбирам, че данни се изпращат до тази външна услуга',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'AI помощ (изключена по подразбиране): ако изберете самостоятелно хостван или облачен бекенд, текстовете или изображенията, които обработвате, се изпращат на този адрес. Локален AI модел на това устройство не изпраща нищо.',
   'Zoek een slidetype': 'Търсене на тип слайд',
   'Alfabetisch sorteren': 'Азбучно сортиране',
   'Algemeen': 'Общи',
   'Informatieveiligheid': 'Информационна безопасност',
   'Alle': 'Всички',
-  'Pentestrapportage (ontwerp)': 'Доклад от пентест (проект)',
-  'AI-assistentie (ontwerp)': 'AI помощ (проект)',
-  'Agentisch bouwplan (ontwerp)': 'Агентен план за изграждане (проект)',
-  'Bijsnijden': 'Изрязване',
   'Linksom': 'Завърти наляво',
   'Rechtsom': 'Завърти надясно',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Плъзнете изображението, за да изберете коя част да остане видима.',
-  'Git-opslag (ontwerp)': 'Git хранилище (проект)',
   'Zoek in documentatie…': 'Търсене в документацията…',
   'Geen documenten gevonden': 'Няма намерени документи',
   'Alleen afspelen (vergrendeld)': 'Само за представяне (заключено)',
@@ -348,12 +323,8 @@ const _dutchSourceBg = {
   'Techniek': 'Технически',
   'Licentie en naleving': 'Лиценз и съответствие',
   'Architectuur': 'Архитектура',
-  'Bouwinstructies': 'Инструкции за компилиране',
-  'Kwaliteitscontroles': 'Проверки на качеството',
-  'Broncodekaart': 'Карта на изходния код',
   'Licentienaleving': 'Съответствие с лицензите',
   'Softwarestuklijst (SBOM)': 'Списък на софтуерните компоненти (SBOM)',
-  'Samenwerking (ontwerp)': 'Сътрудничество (проект)',
   'Beschermen met een wachtwoord (AES-256)': 'Защита с парола (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Пазете добре тази парола: ако я загубите, този пакет вече не може да бъде отворен.',
@@ -432,10 +403,6 @@ const _dutchSourceBg = {
   'Instelling opslaan is mislukt.': 'Запазването на настройката е неуспешно.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Забележка: уеб версията може да изтегля само от сървъри, които го позволяват (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Пакетите (.ocideck) все още не се поддържат в уеб версията.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'В уеб версията могат да се отварят само .md презентации.',
   'Geen': 'Няма',
   'Nieuw': 'Нов',
   'Verwijderen': 'Изтриване',
@@ -526,10 +493,8 @@ const _dutchSourceBg = {
   'Audio bij deze slide': 'Аудио за този слайд',
   'Audio automatisch afspelen': 'Автоматично възпроизвеждане на аудио',
   'Audio verwijderen': 'Премахване на аудио',
-  'Geen audio gekozen': 'Няма избрано аудио',
   'Geen audiobestand gekozen': 'Няма избран аудиофайл',
   'Video automatisch afspelen': 'Автоматично възпроизвеждане на видео',
-  'Geen video gekozen': 'Няма избрано видео',
   'Kiezen': 'Избор',
   'Uit bibliotheek…': 'От библиотеката…',
   'Van computer…': 'От компютъра…',
@@ -559,7 +524,6 @@ const _dutchSourceBg = {
   'Pakket importeren': 'Импортиране на пакет',
   'Pakket exporteren': 'Експортиране на пакет',
   'Map met presentaties kiezen': 'Избор на папка с презентации',
-  'Standaard map voor presentaties': 'Папка по подразбиране за презентации',
   'Map voor exports': 'Папка за експорти',
   'Logo kiezen': 'Избор на лого',
   'Kies een afbeelding': 'Изберете изображение',
@@ -572,8 +536,6 @@ const _dutchSourceBg = {
   'Map kiezen': 'Избор на папка',
   'Kies een map met presentaties om te beginnen.':
       'Изберете папка с презентации, за да започнете.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Не са намерени презентации (.md) в тази папка.',
   'Geen presentaties gevonden voor': 'Не са намерени презентации за',
   'meer treffer(s)': 'още съвпадение(я)',
   'Slide zoeken': 'Намиране на слайд',
@@ -595,7 +557,6 @@ const _dutchSourceBg = {
       'Въведете думи за търсене, за да намерите слайдове от вашите презентации.',
   'toegevoegd': 'добавено',
   'Eerste': 'Първи',
-  'treffers — verfijn je zoekopdracht': 'съвпадения — уточнете търсенето',
   'treffer(s)': 'съвпадение(я)',
   'slide': 'слайд',
   'Zoeken en vervangen': 'Търсене и заместване',
@@ -654,7 +615,6 @@ const _dutchSourceBg = {
   'Tekst op zijpanelen': 'Текст на странични панели',
   'Voorbeeldtekst': 'Примерен текст',
   'Knop': 'Бутон',
-  'Profielnaam': 'Име на профил',
   'Naam van het stijlprofiel': 'Име на стиловия профил',
   'Stijlprofiel': 'Стилов профил',
   'Nieuw profiel': 'Нов профил',
@@ -718,17 +678,10 @@ const _dutchSourceBg = {
   'TYPE': 'ТИП',
   'STIJL': 'СТИЛ',
   'Terug naar standaardstijl': 'Обратно към стил по подразбиране',
-  'Automatisch doorgaan na': 'Автоматично напред след',
-  'Logo tonen op deze slide': 'Показвай лого на този слайд',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Таблица, редактируема по време на представяне',
-  'Footer tonen op deze slide': 'Показвай долен колонтитул на този слайд',
   'Sprekersnotities...': 'Бележки за лектора...',
   'Sprekersnotities': 'Бележки за лектора',
   'Notities voor tijdens het presenteren':
       'Бележки за по време на представянето',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown режим — редактирайте цялата презентация като Marp Markdown',
   'Toepassen': 'Прилагане',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown не можа да бъде обработен. Проверете синтаксиса.',
@@ -753,8 +706,6 @@ const _dutchSourceBg = {
   'Geen resultaten voor': 'Няма резултати за',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Коригирайте думата за търсене или добавете описание.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Използвайте „Преглед“, за да изберете изображения от всяко местоположение.',
   'Selecteer een\nafbeelding': 'Изберете\nизображение',
   'Gekopieerd': 'Копирано',
   'Afbeelding verwijderen?': 'Изтриване на изображение?',
@@ -771,8 +722,6 @@ const _dutchSourceBg = {
   'spatie': 'интервал',
   'klik': 'клик',
   'cijfers': 'цифри',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Кликнете или натиснете ? / H / Esc за затваряне',
   'Klik of druk op H / Esc om te sluiten':
       'Кликнете или натиснете H / Esc за затваряне',
   'Naar slidenummer': 'Към номер на слайд',
@@ -783,20 +732,10 @@ const _dutchSourceBg = {
   'Presenter view (notities, klok)': 'Изглед за водещ (бележки, часовник)',
   'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
-  'Verstreken tijd resetten': 'Нулиране на изтеклото време',
   'Automatische modus aan/uit': 'Автоматичен режим вкл./изкл.',
   'Herhalen (loop) aan/uit': 'Повтаряне (цикъл) вкл./изкл.',
-  'Na audio automatisch doorgaan': 'Автоматично напред след аудио',
-  'Dit overzicht': 'Този преглед',
   'Deze legenda': 'Тази легенда',
   'Terug / afsluiten': 'Назад / изход',
-  'Auto (A)': 'Авто (A)',
-  'Handmatig (A)': 'Ръчно (A)',
-  'Herhalen (L)': 'Повтаряне (L)',
-  'Na audio (M)': 'След аудио (M)',
-  'Sneltoetsen (?)': 'Клавишни комбинации (?)',
-  'Slide-overzicht (G)': 'Преглед на слайдовете (G)',
-  'Presenter view (P)': 'Изглед за водещ (P)',
   'Tijd resetten (R)': 'Нулиране на таймера (R)',
   'HUIDIGE SLIDE': 'ТЕКУЩ СЛАЙД',
   'VOLGENDE': 'СЛЕДВАЩ',
@@ -812,15 +751,9 @@ const _dutchSourceBg = {
   'Notities weggooien': 'Отхвърляне на бележките',
   'Notities voor de ontvanger tijdens een cursus':
       'Бележки за получателя по време на курс',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Превключете към режим Markdown, за да добавите бележки.',
   'Mijn notities aan/uit': 'Моите бележки вкл./изкл.',
   'Wissel scherm (S)': 'Смяна на екрана (S)',
   'Kon niet van scherm wisselen.': 'Не беше възможно да се сменят екраните.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P публика · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':

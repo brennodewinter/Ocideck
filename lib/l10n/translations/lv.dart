@@ -81,8 +81,6 @@ const _dutchSourceLv = {
   'Handtekening tekenen': 'Zīmēt parakstu',
   'Teken je handtekening in het vak hieronder.':
       'Uzzīmējiet savu parakstu lodziņā zemāk.',
-  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
-      'Datu pakotne ir .zip ar šī moduļa atsauces datiem. Vispirms to pārbauda pret lietotnē iebūvēto nospiedumu; tiek pieņemta tikai pakotne, kas atbilst šai lietotnes versijai.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
@@ -188,7 +186,6 @@ const _dutchSourceLv = {
       'Attēlus un multividi koplieto prezentācijas vienā mapē. Precīzo nosaukumu tūlīt izvēlēsies sistēmas logā.',
   'Alle bibliotheken': 'Visas bibliotēkas',
   'Andere map…': 'Cita mape…',
-  'Bibliotheek verwijderen': 'Noņemt bibliotēku',
   'Bibliotheken': 'Bibliotēkas',
   'Geen bibliotheek': 'Nav bibliotēkas',
   'Geen presentaties (.md) gevonden.':
@@ -201,10 +198,6 @@ const _dutchSourceLv = {
   'Kies in welke bibliotheek de presentatie komt.':
       'Izvēlies, kurā bibliotēkā nonāks prezentācija.',
   'Map toevoegen': 'Pievienot mapi',
-  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
-      'Mapes, kurās glabā un meklē savas prezentācijas. Piešķir katrai savu nosaukumu, lai tās atšķirtu. Visas bibliotēkas tiek pārmeklētas atverot un attēlu bibliotēkā.',
-  'Nog geen bibliotheek — voeg een map toe.':
-      'Vēl nav bibliotēkas — pievieno mapi.',
   'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
       'Vēl nav bibliotēkas. Pievieno to Iestatījumos vai izvēlies mapi augšā, lai meklētu.',
   'Presentatie opslaan': 'Saglabāt prezentāciju',
@@ -286,21 +279,11 @@ const _dutchSourceLv = {
   'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
       'Patiesuma apliecinājums ar ziņotāju, sertifikāciju, parakstu un aizzīmogojumu.',
   'Uitbreidingen': 'Paplašinājumi',
-  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
-      'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
-      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Mēģiniet vēlreiz vai importējiet pakotni manuāli.',
-  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
-      'Lejupielādētie dati neatbilda gaidītajam ciparnospiedumam un piesardzības nolūkā tika atteikti.',
-  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
-      'Datu pakotne bija bojāta vai nederīga, tāpēc tā tika atteikta.',
-  'Gegevenspakket kiezen': 'Izvēlēties datu pakotni',
-  'Kon het gekozen bestand niet lezen.': 'Neizdevās nolasīt izvēlēto failu.',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
@@ -317,22 +300,15 @@ const _dutchSourceLv = {
       'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Licence un privātums", un tas nedarbojas tīmekļa versijā.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Es saprotu, ka dati tiek nosūtīti šim ārējam pakalpojumam',
-  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
-      'MI palīdzība (pēc noklusējuma izslēgta): ja izvēlaties pašmitinātu vai mākoņa aizmugursistēmu, teksti vai attēli, ko apstrādājat, tiek nosūtīti uz šo adresi. Lokāls MI modelis šajā ierīcē neko nenosūta.',
   'Zoek een slidetype': 'Meklēt slaida tipu',
   'Alfabetisch sorteren': 'Kārtot alfabētiski',
   'Algemeen': 'Vispārīgi',
   'Informatieveiligheid': 'Informācijas drošība',
   'Alle': 'Visi',
-  'Pentestrapportage (ontwerp)': 'Ielaušanās testa atskaite (dizains)',
-  'AI-assistentie (ontwerp)': 'MI palīdzība (dizains)',
-  'Agentisch bouwplan (ontwerp)': 'Aģentisks veidošanas plāns (dizains)',
-  'Bijsnijden': 'Apgriezt',
   'Linksom': 'Pagriezt pa kreisi',
   'Rechtsom': 'Pagriezt pa labi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Velciet attēlu, lai izvēlētos, kura daļa paliek redzama.',
-  'Git-opslag (ontwerp)': 'Git krātuve (dizains)',
   'Zoek in documentatie…': 'Meklēt dokumentācijā…',
   'Geen documenten gevonden': 'Nav atrasts neviens dokuments',
   'Alleen afspelen (vergrendeld)': 'Tikai atskaņošana (bloķēts)',
@@ -346,12 +322,8 @@ const _dutchSourceLv = {
   'Techniek': 'Tehniskā daļa',
   'Licentie en naleving': 'Licence un atbilstība',
   'Architectuur': 'Arhitektūra',
-  'Bouwinstructies': 'Būvēšanas instrukcijas',
-  'Kwaliteitscontroles': 'Kvalitātes pārbaudes',
-  'Broncodekaart': 'Pirmkoda karte',
   'Licentienaleving': 'Licenču atbilstība',
   'Softwarestuklijst (SBOM)': 'Programmatūras sastāvdaļu saraksts (SBOM)',
-  'Samenwerking (ontwerp)': 'Sadarbība (dizains)',
   'Beschermen met een wachtwoord (AES-256)': 'Aizsargāt ar paroli (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Glabājiet šo paroli drošā vietā: ja to pazaudēsiet, šo pakotni vairs nevarēs atvērt.',
@@ -429,10 +401,6 @@ const _dutchSourceLv = {
   'Instelling opslaan is mislukt.': 'Neizdevās saglabāt iestatījumu.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Piezīme: tīmekļa versija var ielādēt tikai no serveriem, kas to atļauj (CORS).',
-  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
-      'Pakotnes (.ocideck) tīmekļa versijā vēl netiek atbalstītas.',
-  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
-      'Tīmekļa versijā var atvērt tikai .md prezentācijas.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',
@@ -521,10 +489,8 @@ const _dutchSourceLv = {
   'Audio bij deze slide': 'Audio šim slaidam',
   'Audio automatisch afspelen': 'Atskaņot audio automātiski',
   'Audio verwijderen': 'Noņemt audio',
-  'Geen audio gekozen': 'Audio nav izvēlēts',
   'Geen audiobestand gekozen': 'Audio fails nav izvēlēts',
   'Video automatisch afspelen': 'Atskaņot video automātiski',
-  'Geen video gekozen': 'Video nav izvēlēts',
   'Kiezen': 'Izvēlēties',
   'Uit bibliotheek…': 'No bibliotēkas…',
   'Van computer…': 'No datora…',
@@ -553,7 +519,6 @@ const _dutchSourceLv = {
   'Pakket importeren': 'Importēt pakotni',
   'Pakket exporteren': 'Eksportēt pakotni',
   'Map met presentaties kiezen': 'Izvēlēties prezentāciju mapi',
-  'Standaard map voor presentaties': 'Noklusējuma prezentāciju mape',
   'Map voor exports': 'Eksporta mape',
   'Logo kiezen': 'Izvēlēties logotipu',
   'Kies een afbeelding': 'Izvēlieties attēlu',
@@ -566,8 +531,6 @@ const _dutchSourceLv = {
   'Map kiezen': 'Izvēlēties mapi',
   'Kies een map met presentaties om te beginnen.':
       'Izvēlieties mapi ar prezentācijām, lai sāktu.',
-  'Geen presentaties (.md) in deze map gevonden.':
-      'Šajā mapē nav atrasta neviena prezentācija (.md).',
   'Geen presentaties gevonden voor': 'Nav atrasta neviena prezentācija',
   'meer treffer(s)': 'vēl atbilstība(-as)',
   'Slide zoeken': 'Atrast slaidu',
@@ -589,7 +552,6 @@ const _dutchSourceLv = {
       'Ierakstiet meklēšanas vārdus, lai atrastu slaidus visās prezentācijās.',
   'toegevoegd': 'pievienots',
   'Eerste': 'Pirmās',
-  'treffers — verfijn je zoekopdracht': 'atbilstības — precizējiet meklēšanu',
   'treffer(s)': 'atbilstība(-as)',
   'slide': 'slaids',
   'Zoeken en vervangen': 'Meklēt un aizstāt',
@@ -648,7 +610,6 @@ const _dutchSourceLv = {
   'Tekst op zijpanelen': 'Teksts sānu paneļos',
   'Voorbeeldtekst': 'Parauga teksts',
   'Knop': 'Poga',
-  'Profielnaam': 'Profila nosaukums',
   'Naam van het stijlprofiel': 'Stila profila nosaukums',
   'Stijlprofiel': 'Stila profils',
   'Nieuw profiel': 'Jauns profils',
@@ -711,16 +672,9 @@ const _dutchSourceLv = {
   'TYPE': 'TIPS',
   'STIJL': 'STILS',
   'Terug naar standaardstijl': 'Atpakaļ uz noklusējuma stilu',
-  'Automatisch doorgaan na': 'Automātiski pāriet pēc',
-  'Logo tonen op deze slide': 'Rādīt logotipu šajā slaidā',
-  'Tabel bewerkbaar tijdens presenteren':
-      'Tabula rediģējama prezentēšanas laikā',
-  'Footer tonen op deze slide': 'Rādīt kājeni šajā slaidā',
   'Sprekersnotities...': 'Runātāja piezīmes...',
   'Sprekersnotities': 'Runātāja piezīmes',
   'Notities voor tijdens het presenteren': 'Piezīmes prezentēšanas laikam',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
-      'Markdown režīms — rediģējiet visu prezentāciju kā Marp Markdown',
   'Toepassen': 'Lietot',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown neizdevās apstrādāt. Pārbaudiet sintaksi.',
@@ -745,8 +699,6 @@ const _dutchSourceLv = {
   'Geen resultaten voor': 'Nav rezultātu vaicājumam',
   'Pas je zoekterm aan of voeg een beschrijving toe.':
       'Pielāgojiet meklēšanas vārdu vai pievienojiet aprakstu.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
-      'Izmantojiet “Pārlūkot”, lai izvēlētos attēlus no jebkuras vietas.',
   'Selecteer een\nafbeelding': 'Atlasiet\nattēlu',
   'Gekopieerd': 'Nokopēts',
   'Afbeelding verwijderen?': 'Dzēst attēlu?',
@@ -763,8 +715,6 @@ const _dutchSourceLv = {
   'spatie': 'atstarpe',
   'klik': 'klikšķis',
   'cijfers': 'cipari',
-  'Klik of druk op ? / H / Esc om te sluiten':
-      'Noklikšķiniet vai nospiediet ? / H / Esc, lai aizvērtu',
   'Klik of druk op H / Esc om te sluiten':
       'Noklikšķiniet vai nospiediet H / Esc, lai aizvērtu',
   'Naar slidenummer': 'Pāriet uz slaida numuru',
@@ -775,20 +725,10 @@ const _dutchSourceLv = {
       'Prezentētāja skats (piezīmes, pulkstenis)',
   'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
-  'Verstreken tijd resetten': 'Atiestatīt pagājušo laiku',
   'Automatische modus aan/uit': 'Automātiskais režīms ieslēgts/izslēgts',
   'Herhalen (loop) aan/uit': 'Atkārtot (cilpa) ieslēgts/izslēgts',
-  'Na audio automatisch doorgaan': 'Pēc audio automātiski turpināt',
-  'Dit overzicht': 'Šis pārskats',
   'Deze legenda': 'Šī leģenda',
   'Terug / afsluiten': 'Atpakaļ / iziet',
-  'Auto (A)': 'Auto (A)',
-  'Handmatig (A)': 'Manuāli (A)',
-  'Herhalen (L)': 'Atkārtot (L)',
-  'Na audio (M)': 'Pēc audio (M)',
-  'Sneltoetsen (?)': 'Īsinājumtaustiņi (?)',
-  'Slide-overzicht (G)': 'Slaidu pārskats (G)',
-  'Presenter view (P)': 'Prezentētāja skats (P)',
   'Tijd resetten (R)': 'Atiestatīt laiku (R)',
   'HUIDIGE SLIDE': 'PAŠREIZĒJAIS SLAIDS',
   'VOLGENDE': 'NĀKAMAIS',
@@ -803,15 +743,9 @@ const _dutchSourceLv = {
   'Notities weggooien': 'Atmest piezīmes',
   'Notities voor de ontvanger tijdens een cursus':
       'Piezīmes saņēmējam kursa laikā',
-  'Schakel naar Markdown-modus om notities toe te voegen.':
-      'Pārslēdzieties uz Markdown režīmu, lai pievienotu piezīmes.',
   'Mijn notities aan/uit': 'Pārslēgt manas piezīmes ieslēgt/izslēgt',
   'Wissel scherm (S)': 'Pārslēgt ekrānu (S)',
   'Kon niet van scherm wisselen.': 'Neizdevās pārslēgt ekrānus.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
-      'P auditorija · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
       'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
   'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
