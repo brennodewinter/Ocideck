@@ -455,6 +455,7 @@ const _dutchSourceFr = {
   'Titel (optioneel)': 'Titre (facultatif)',
   'Slide titel': 'Titre de diapositive',
   'Ondertitel': 'Sous-titre',
+  'Subtitel': 'Sous-titre',
   'Optionele subtitel': 'Sous-titre facultatif',
   'Bullets': 'Puces',
   'Bullet toevoegen': 'Ajouter une puce',
@@ -3855,6 +3856,7 @@ const _dutchSourceAddFr = {
   'Subkop (optioneel)': 'Sous-titre (facultatif)',
   'Subkop': 'Sous-titre',
   'Systeem (monospace)': 'Système (monospace)',
+  'Platte tekst': 'Texte brut',
   'Kleur van reeks': 'Couleur de la série',
   'Kleur van rij': 'Couleur de la ligne',
   'Hexkleur': 'Couleur hexadécimale',
@@ -3934,6 +3936,8 @@ const _dutchSourceAddFr = {
   'Inzoomen (minder van de foto zichtbaar)':
       'Zoom avant (moins de la photo visible)',
   'Kies een afbeelding': 'Choisir une image',
+  'Kies een video': 'Choisir une vidéo',
+  'Kies een audiobestand': 'Choisir un fichier audio',
   'Kies een map met presentaties om te beginnen.':
       'Choisissez un dossier de présentations pour commencer.',
   'Kon dit pakket niet importeren.': 'Impossible d\'importer ce paquet.',

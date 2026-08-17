@@ -448,6 +448,7 @@ const _dutchSourceFy = {
   'Titel (optioneel)': 'Titel (opsjoneel)',
   'Slide titel': 'Slidetitel',
   'Ondertitel': 'Undertitel',
+  'Subtitel': 'Undertitel',
   'Optionele subtitel': 'Opsjonele subtitel',
   'Bullets': 'Bullets',
   'Bullet toevoegen': 'Bullet tafoegje',
@@ -3810,6 +3811,7 @@ const _dutchSourceAddFy = {
   'Subkop (optioneel)': 'Subkop (opsjoneel)',
   'Subkop': 'Subkop',
   'Systeem (monospace)': 'Systeem (monospace)',
+  'Platte tekst': 'Gewoane tekst',
   'Kleur van reeks': 'Rigekleur',
   'Kleur van rij': 'Rijekleur',
   'Hexkleur': 'Hekskleur',
@@ -3880,6 +3882,8 @@ const _dutchSourceAddFy = {
   'Inzoomen (minder van de foto zichtbaar)':
       'Ynzoome (minder fan de foto sichtber)',
   'Kies een afbeelding': 'Kies in ôfbylding',
+  'Kies een video': 'Kies in fideo',
+  'Kies een audiobestand': 'Kies in audiobestân',
   'Kies een map met presentaties om te beginnen.':
       'Kies in map mei presintaasjes om te begjinnen.',
   'Kon dit pakket niet importeren.': 'Koe dit pakket net ymportearje.',

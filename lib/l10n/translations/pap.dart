@@ -448,6 +448,7 @@ const _dutchSourcePap = {
   'Titel (optioneel)': 'Título (opshonal)',
   'Slide titel': 'Título di slide',
   'Ondertitel': 'Subtítulo',
+  'Subtitel': 'Subtítulo',
   'Optionele subtitel': 'Subtítulo opshonal',
   'Bullets': 'Bullets',
   'Bullet toevoegen': 'Añadí bullet',
@@ -3826,6 +3827,7 @@ const _dutchSourceAddPap = {
   'Subkop (optioneel)': 'Subtítulo (opshonal)',
   'Subkop': 'Subtítulo',
   'Systeem (monospace)': 'Sistema (monospace)',
+  'Platte tekst': 'Teksto simpel',
   'Kleur van reeks': 'Koló di serie',
   'Kleur van rij': 'Koló di liña',
   'Hexkleur': 'Koló hexadecimal',
@@ -3896,6 +3898,8 @@ const _dutchSourceAddPap = {
   'Inzoomen (minder van de foto zichtbaar)':
       'Zoom paden (ménos di e potrèt visibel)',
   'Kies een afbeelding': 'Skohe un imágen',
+  'Kies een video': 'Skohe un video',
+  'Kies een audiobestand': 'Skohe un file di audio',
   'Kies een map met presentaties om te beginnen.':
       'Skohe un karpeta ku presentashon pa kuminsá.',
   'Kon dit pakket niet importeren.': 'No por a importá e paket aki.',
