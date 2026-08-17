@@ -128,7 +128,7 @@ const Map<String, int> fileSizeBaseline = {
   // _insertToc (het invoeg-palet dat de `<!-- toc -->`-marker plaatst). De
   // ontleedde blokken en de weergave gingen wél naar aparte parts; dit is de
   // schermklasse zelf, die zijn eigen invoegacties draagt.
-  'lib/widgets/document_editor_screen.dart': 1237,
+  'lib/widgets/document_editor_screen.dart': 960,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
