@@ -42,17 +42,13 @@ const _stringsCs = {
   'settings': 'Nastavení',
   'settingsGeneral': 'Obecné',
   'settingsColors': 'Barvy',
-  'settingsLogo': 'Logo',
   'language': 'Jazyk',
   'applicationLanguage': 'Jazyk aplikace',
   'languageHelp':
       'Rozhraní okamžitě změní jazyk. Obsah prezentace zůstane beze změny.',
-  'presentationFolder': 'Složka prezentací',
   'exportFolderSetting': 'Složka exportu',
-  'notSet': 'Nenastaveno',
   'nextToPresentationFile': 'Vedle souboru prezentace',
   'choose': 'Vybrat',
-  'removeDefaultFolder': 'Odebrat výchozí složku',
   'removeExportFolder': 'Odebrat složku exportu',
   'exportFolderHelp':
       'Všechny exporty (PDF/PPTX) se ukládají sem. Pokud není nastaveno, exporty se uloží vedle souboru prezentace.',

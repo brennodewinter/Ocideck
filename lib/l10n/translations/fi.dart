@@ -41,17 +41,13 @@ const _stringsFi = {
   'settings': 'Asetukset',
   'settingsGeneral': 'Yleiset',
   'settingsColors': 'Värit',
-  'settingsLogo': 'Logo',
   'language': 'Kieli',
   'applicationLanguage': 'Sovelluksen kieli',
   'languageHelp':
       'Käyttöliittymän kieli vaihtuu välittömästi. Esityksen sisältö pysyy ennallaan.',
-  'presentationFolder': 'Esityskansio',
   'exportFolderSetting': 'Vientikansio',
-  'notSet': 'Ei asetettu',
   'nextToPresentationFile': 'Esitystiedoston viereen',
   'choose': 'Valitse',
-  'removeDefaultFolder': 'Poista oletuskansio',
   'removeExportFolder': 'Poista vientikansio',
   'exportFolderHelp':
       'Kaikki viennit (PDF/PPTX) tallennetaan tänne. Jos ei asetettu, viennit tallennetaan esitystiedoston viereen.',

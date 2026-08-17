@@ -41,17 +41,13 @@ const _stringsLt = {
   'settings': 'Nustatymai',
   'settingsGeneral': 'Bendra',
   'settingsColors': 'Spalvos',
-  'settingsLogo': 'Logotipas',
   'language': 'Kalba',
   'applicationLanguage': 'Programos kalba',
   'languageHelp':
       'Sąsajos kalba pasikeičia iškart. Prezentacijos turinys nekinta.',
-  'presentationFolder': 'Prezentacijų aplankas',
   'exportFolderSetting': 'Eksportų aplankas',
-  'notSet': 'Nenustatyta',
   'nextToPresentationFile': 'Šalia prezentacijos failo',
   'choose': 'Pasirinkti',
-  'removeDefaultFolder': 'Pašalinti numatytąjį aplanką',
   'removeExportFolder': 'Pašalinti eksportų aplanką',
   'exportFolderHelp':
       'Visi eksportai (PDF/PPTX) įrašomi čia. Jei nenustatyta, eksportai įrašomi šalia prezentacijos failo.',

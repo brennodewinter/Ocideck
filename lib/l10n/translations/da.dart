@@ -41,17 +41,13 @@ const _stringsDa = {
   'settings': 'Indstillinger',
   'settingsGeneral': 'Generelt',
   'settingsColors': 'Farver',
-  'settingsLogo': 'Logo',
   'language': 'Sprog',
   'applicationLanguage': 'Programsprog',
   'languageHelp':
       'Grænsefladen skifter sprog med det samme. Præsentationens indhold ændres ikke.',
-  'presentationFolder': 'Præsentationsmappe',
   'exportFolderSetting': 'Eksportmappe',
-  'notSet': 'Ikke angivet',
   'nextToPresentationFile': 'Ved siden af præsentationsfilen',
   'choose': 'Vælg',
-  'removeDefaultFolder': 'Fjern standardmappe',
   'removeExportFolder': 'Fjern eksportmappe',
   'exportFolderHelp':
       'Alle eksporter (PDF/PPTX) gemmes her. Hvis den ikke er angivet, gemmes eksporter ved siden af præsentationsfilen.',

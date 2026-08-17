@@ -41,17 +41,13 @@ const _stringsGsw = {
   'settings': 'Istellige',
   'settingsGeneral': 'Allgemein',
   'settingsColors': 'Farbe',
-  'settingsLogo': 'Logo',
   'language': 'Sproch',
   'applicationLanguage': 'App-Sproch',
   'languageHelp':
       'S Interface wächslet grad d Sproch. De Präsentationsinhalt blibt unveränderet.',
-  'presentationFolder': 'Präsentations-Ordner',
   'exportFolderSetting': 'Export-Ordner',
-  'notSet': 'Nöd istellt',
   'nextToPresentationFile': 'Näbe de Präsentationsdatei',
   'choose': 'Uswähle',
-  'removeDefaultFolder': 'Standard-Ordner entferne',
   'removeExportFolder': 'Export-Ordner entferne',
   'exportFolderHelp':
       'Alli Exports (PDF/PPTX) werded do gspeicheret. Wänn nöd istellt, chunt de Export näbe d Präsentationsdatei.',

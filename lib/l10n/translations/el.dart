@@ -41,17 +41,13 @@ const _stringsEl = {
   'settings': 'Ρυθμίσεις',
   'settingsGeneral': 'Γενικά',
   'settingsColors': 'Χρώματα',
-  'settingsLogo': 'Λογότυπο',
   'language': 'Γλώσσα',
   'applicationLanguage': 'Γλώσσα εφαρμογής',
   'languageHelp':
       'Η διεπαφή αλλάζει γλώσσα άμεσα. Το περιεχόμενο της παρουσίασης παραμένει αμετάβλητο.',
-  'presentationFolder': 'Φάκελος παρουσιάσεων',
   'exportFolderSetting': 'Φάκελος εξαγωγών',
-  'notSet': 'Δεν έχει οριστεί',
   'nextToPresentationFile': 'Δίπλα στο αρχείο παρουσίασης',
   'choose': 'Επιλογή',
-  'removeDefaultFolder': 'Αφαίρεση προεπιλεγμένου φακέλου',
   'removeExportFolder': 'Αφαίρεση φακέλου εξαγωγών',
   'exportFolderHelp':
       'Όλες οι εξαγωγές (PDF/PPTX) αποθηκεύονται εδώ. Αν δεν έχει οριστεί, οι εξαγωγές αποθηκεύονται δίπλα στο αρχείο παρουσίασης.',

@@ -41,17 +41,13 @@ const _stringsHu = {
   'settings': 'Beállítások',
   'settingsGeneral': 'Általános',
   'settingsColors': 'Színek',
-  'settingsLogo': 'Logó',
   'language': 'Nyelv',
   'applicationLanguage': 'Alkalmazás nyelve',
   'languageHelp':
       'A felület azonnal nyelvet vált. A bemutató tartalma változatlan marad.',
-  'presentationFolder': 'Bemutatók mappája',
   'exportFolderSetting': 'Export mappa',
-  'notSet': 'Nincs beállítva',
   'nextToPresentationFile': 'A bemutatófájl mellett',
   'choose': 'Kiválasztás',
-  'removeDefaultFolder': 'Alapértelmezett mappa eltávolítása',
   'removeExportFolder': 'Export mappa eltávolítása',
   'exportFolderHelp':
       'Minden export (PDF/PPTX) ide mentődik. Ha nincs beállítva, az export a bemutatófájl mellé kerül.',

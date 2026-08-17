@@ -42,17 +42,13 @@ const _stringsMt = {
   'settings': 'Settings',
   'settingsGeneral': 'Ġenerali',
   'settingsColors': 'Kuluri',
-  'settingsLogo': 'Logo',
   'language': 'Lingwa',
   'applicationLanguage': 'Lingwa tal-applikazzjoni',
   'languageHelp':
       'L-interfaċċa tbiddel il-lingwa minnufih. Il-kontenut tal-preżentazzjoni ma jinbidilx.',
-  'presentationFolder': 'Folder tal-preżentazzjoni',
   'exportFolderSetting': 'Folder tal-esportazzjoni',
-  'notSet': 'Mhux issettjat',
   'nextToPresentationFile': 'Ħdejn il-fajl tal-preżentazzjoni',
   'choose': 'Agħżel',
-  'removeDefaultFolder': 'Neħħi l-folder default',
   'removeExportFolder': 'Neħħi l-folder tal-esportazzjoni',
   'exportFolderHelp':
       'L-esportazzjonijiet kollha (PDF/PPTX) jiġu ssejvjati hawn. Jekk mhux issettjat, l-esportazzjonijiet jiġu ssejvjati ħdejn il-fajl tal-preżentazzjoni.',

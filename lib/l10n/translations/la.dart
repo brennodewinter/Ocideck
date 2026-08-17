@@ -43,17 +43,13 @@ const _stringsLa = {
   'settings': 'Optiones',
   'settingsGeneral': 'Generalia',
   'settingsColors': 'Colores',
-  'settingsLogo': 'Insigne',
   'language': 'Lingua',
   'applicationLanguage': 'Lingua applicationis',
   'languageHelp':
       'Interfacies statim linguam mutat. Contentus praesentationis immutatus manet.',
-  'presentationFolder': 'Directorium praesentationum',
   'exportFolderSetting': 'Directorium exportationis',
-  'notSet': 'Non constitutum',
   'nextToPresentationFile': 'Iuxta plicam praesentationis',
   'choose': 'Eligere',
-  'removeDefaultFolder': 'Directorium praedefinitum removere',
   'removeExportFolder': 'Directorium exportationis removere',
   'exportFolderHelp':
       'Omnes exportationes (PDF/PPTX) hic servantur. Si non constitutum, exportationes iuxta plicam praesentationis servantur.',

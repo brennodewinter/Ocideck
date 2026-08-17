@@ -41,17 +41,13 @@ const _stringsHr = {
   'settings': 'Postavke',
   'settingsGeneral': 'Općenito',
   'settingsColors': 'Boje',
-  'settingsLogo': 'Logotip',
   'language': 'Jezik',
   'applicationLanguage': 'Jezik aplikacije',
   'languageHelp':
       'Sučelje odmah mijenja jezik. Sadržaj prezentacije ostaje nepromijenjen.',
-  'presentationFolder': 'Mapa prezentacija',
   'exportFolderSetting': 'Mapa za izvoz',
-  'notSet': 'Nije postavljeno',
   'nextToPresentationFile': 'Uz datoteku prezentacije',
   'choose': 'Odaberi',
-  'removeDefaultFolder': 'Ukloni zadanu mapu',
   'removeExportFolder': 'Ukloni mapu za izvoz',
   'exportFolderHelp':
       'Svi izvozi (PDF/PPTX) spremaju se ovdje. Ako nije postavljeno, izvozi se spremaju uz datoteku prezentacije.',

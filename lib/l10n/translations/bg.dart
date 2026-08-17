@@ -42,17 +42,13 @@ const _stringsBg = {
   'settings': 'Настройки',
   'settingsGeneral': 'Общи',
   'settingsColors': 'Цветове',
-  'settingsLogo': 'Лого',
   'language': 'Език',
   'applicationLanguage': 'Език на приложението',
   'languageHelp':
       'Интерфейсът сменя езика веднага. Съдържанието на презентацията остава непроменено.',
-  'presentationFolder': 'Папка за презентации',
   'exportFolderSetting': 'Папка за експорт',
-  'notSet': 'Не е зададено',
   'nextToPresentationFile': 'До файла на презентацията',
   'choose': 'Избор',
-  'removeDefaultFolder': 'Премахване на папката по подразбиране',
   'removeExportFolder': 'Премахване на папката за експорт',
   'exportFolderHelp':
       'Всички експорти (PDF/PPTX) се запазват тук. Ако не е зададено, експортите се запазват до файла на презентацията.',

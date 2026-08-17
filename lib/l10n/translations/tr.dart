@@ -41,17 +41,13 @@ const _stringsTr = {
   'settings': 'Ayarlar',
   'settingsGeneral': 'Genel',
   'settingsColors': 'Renkler',
-  'settingsLogo': 'Logo',
   'language': 'Dil',
   'applicationLanguage': 'Uygulama dili',
   'languageHelp':
       'Arayüz anında dil değiştirir. Sunum içeriği değişmeden kalır.',
-  'presentationFolder': 'Sunum klasörü',
   'exportFolderSetting': 'Dışa aktarma klasörü',
-  'notSet': 'Ayarlanmadı',
   'nextToPresentationFile': 'Sunum dosyasının yanına',
   'choose': 'Seç',
-  'removeDefaultFolder': 'Varsayılan klasörü kaldır',
   'removeExportFolder': 'Dışa aktarma klasörünü kaldır',
   'exportFolderHelp':
       'Tüm dışa aktarmalar (PDF/PPTX) buraya kaydedilir. Ayarlanmadıysa dışa aktarma sunum dosyasının yanına gelir.',

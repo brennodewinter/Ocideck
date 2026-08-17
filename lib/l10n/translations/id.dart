@@ -41,17 +41,13 @@ const _stringsId = {
   'settings': 'Pengaturan',
   'settingsGeneral': 'Umum',
   'settingsColors': 'Warna',
-  'settingsLogo': 'Logo',
   'language': 'Bahasa',
   'applicationLanguage': 'Bahasa aplikasi',
   'languageHelp':
       'Antarmuka langsung berganti bahasa. Konten presentasi tidak berubah.',
-  'presentationFolder': 'Folder presentasi',
   'exportFolderSetting': 'Folder ekspor',
-  'notSet': 'Belum diatur',
   'nextToPresentationFile': 'Di samping berkas presentasi',
   'choose': 'Pilih',
-  'removeDefaultFolder': 'Hapus folder default',
   'removeExportFolder': 'Hapus folder ekspor',
   'exportFolderHelp':
       'Semua ekspor (PDF/PPTX) disimpan di sini. Jika tidak diatur, ekspor disimpan di samping berkas presentasi.',

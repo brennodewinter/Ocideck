@@ -42,17 +42,13 @@ const _stringsUk = {
   'settings': 'Налаштування',
   'settingsGeneral': 'Загальні',
   'settingsColors': 'Кольори',
-  'settingsLogo': 'Логотип',
   'language': 'Мова',
   'applicationLanguage': 'Мова застосунку',
   'languageHelp':
       'Інтерфейс змінює мову негайно. Вміст презентації залишається незмінним.',
-  'presentationFolder': 'Тека презентацій',
   'exportFolderSetting': 'Тека експорту',
-  'notSet': 'Не встановлено',
   'nextToPresentationFile': 'Поряд із файлом презентації',
   'choose': 'Обрати',
-  'removeDefaultFolder': 'Видалити типову теку',
   'removeExportFolder': 'Видалити теку експорту',
   'exportFolderHelp':
       'Усі експорти (PDF/PPTX) зберігаються тут. Якщо не встановлено, експорти зберігаються поряд із файлом презентації.',

@@ -42,17 +42,13 @@ const _stringsFr = {
   'settings': 'Paramètres',
   'settingsGeneral': 'Général',
   'settingsColors': 'Couleurs',
-  'settingsLogo': 'Logo',
   'language': 'Langue',
   'applicationLanguage': 'Langue de l’application',
   'languageHelp':
       'L’interface change de langue immédiatement. Le contenu de la présentation reste inchangé.',
-  'presentationFolder': 'Dossier des présentations',
   'exportFolderSetting': 'Dossier d’export',
-  'notSet': 'Non défini',
   'nextToPresentationFile': 'À côté du fichier de présentation',
   'choose': 'Choisir',
-  'removeDefaultFolder': 'Supprimer le dossier par défaut',
   'removeExportFolder': 'Supprimer le dossier d’export',
   'exportFolderHelp':
       'Tous les exports (PDF/PPTX) sont enregistrés ici. Si non défini, ils seront placés à côté du fichier de présentation.',

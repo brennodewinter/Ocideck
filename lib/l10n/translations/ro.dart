@@ -42,17 +42,13 @@ const _stringsRo = {
   'settings': 'Setări',
   'settingsGeneral': 'General',
   'settingsColors': 'Culori',
-  'settingsLogo': 'Logo',
   'language': 'Limbă',
   'applicationLanguage': 'Limba aplicației',
   'languageHelp':
       'Interfața își schimbă limba imediat. Conținutul prezentării rămâne neschimbat.',
-  'presentationFolder': 'Folder prezentări',
   'exportFolderSetting': 'Folder export',
-  'notSet': 'Nesetat',
   'nextToPresentationFile': 'Lângă fișierul prezentării',
   'choose': 'Alege',
-  'removeDefaultFolder': 'Elimină folderul implicit',
   'removeExportFolder': 'Elimină folderul de export',
   'exportFolderHelp':
       'Toate exporturile (PDF/PPTX) se salvează aici. Dacă nu e setat, exporturile se salvează lângă fișierul prezentării.',

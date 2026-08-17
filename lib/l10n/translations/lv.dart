@@ -41,17 +41,13 @@ const _stringsLv = {
   'settings': 'Iestatījumi',
   'settingsGeneral': 'Vispārīgi',
   'settingsColors': 'Krāsas',
-  'settingsLogo': 'Logo',
   'language': 'Valoda',
   'applicationLanguage': 'Lietotnes valoda',
   'languageHelp':
       'Saskarne uzreiz maina valodu. Prezentācijas saturs paliek nemainīgs.',
-  'presentationFolder': 'Prezentāciju mape',
   'exportFolderSetting': 'Eksporta mape',
-  'notSet': 'Nav iestatīts',
   'nextToPresentationFile': 'Blakus prezentācijas failam',
   'choose': 'Izvēlēties',
-  'removeDefaultFolder': 'Noņemt noklusējuma mapi',
   'removeExportFolder': 'Noņemt eksporta mapi',
   'exportFolderHelp':
       'Visi eksporti (PDF/PPTX) tiek saglabāti šeit. Ja nav iestatīts, eksporti tiek saglabāti blakus prezentācijas failam.',

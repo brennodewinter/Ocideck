@@ -41,17 +41,13 @@ const _stringsEn = {
   'settings': 'Settings',
   'settingsGeneral': 'General',
   'settingsColors': 'Colors',
-  'settingsLogo': 'Logo',
   'language': 'Language',
   'applicationLanguage': 'Application language',
   'languageHelp':
       'The interface changes language immediately. Presentation content is unchanged.',
-  'presentationFolder': 'Presentation folder',
   'exportFolderSetting': 'Export folder',
-  'notSet': 'Not set',
   'nextToPresentationFile': 'Next to the presentation file',
   'choose': 'Choose',
-  'removeDefaultFolder': 'Remove default folder',
   'removeExportFolder': 'Remove export folder',
   'exportFolderHelp':
       'All exports (PDF/PPTX) are saved here. If unset, exports are saved next to the presentation file.',

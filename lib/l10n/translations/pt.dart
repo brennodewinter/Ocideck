@@ -42,17 +42,13 @@ const _stringsPt = {
   'settings': 'Definições',
   'settingsGeneral': 'Geral',
   'settingsColors': 'Cores',
-  'settingsLogo': 'Logótipo',
   'language': 'Idioma',
   'applicationLanguage': 'Idioma da aplicação',
   'languageHelp':
       'A interface muda de idioma imediatamente. O conteúdo da apresentação não é alterado.',
-  'presentationFolder': 'Pasta de apresentações',
   'exportFolderSetting': 'Pasta de exportação',
-  'notSet': 'Não definido',
   'nextToPresentationFile': 'Junto ao ficheiro da apresentação',
   'choose': 'Escolher',
-  'removeDefaultFolder': 'Remover pasta predefinida',
   'removeExportFolder': 'Remover pasta de exportação',
   'exportFolderHelp':
       'Todas as exportações (PDF/PPTX) são guardadas aqui. Se não estiver definido, as exportações ficam junto ao ficheiro da apresentação.',

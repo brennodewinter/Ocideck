@@ -41,17 +41,13 @@ const _stringsIt = {
   'settings': 'Impostazioni',
   'settingsGeneral': 'Generale',
   'settingsColors': 'Colori',
-  'settingsLogo': 'Logo',
   'language': 'Lingua',
   'applicationLanguage': 'Lingua applicazione',
   'languageHelp':
       'L’interfaccia cambia lingua subito. Il contenuto della presentazione resta invariato.',
-  'presentationFolder': 'Cartella presentazioni',
   'exportFolderSetting': 'Cartella esportazione',
-  'notSet': 'Non impostata',
   'nextToPresentationFile': 'Accanto al file della presentazione',
   'choose': 'Scegli',
-  'removeDefaultFolder': 'Rimuovi cartella predefinita',
   'removeExportFolder': 'Rimuovi cartella esportazione',
   'exportFolderHelp':
       'Tutte le esportazioni (PDF/PPTX) vengono salvate qui. Se non impostata, accanto al file della presentazione.',

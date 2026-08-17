@@ -41,17 +41,13 @@ const _stringsFy = {
   'settings': 'Ynstellingen',
   'settingsGeneral': 'Algemien',
   'settingsColors': 'Kleuren',
-  'settingsLogo': 'Logo',
   'language': 'Taal',
   'applicationLanguage': 'Applikaasjetaal',
   'languageHelp':
       'De interface wikselet daliks fan taal. Presintaasje-ynhâld bliuwt itselde.',
-  'presentationFolder': 'Presintaasjemap',
   'exportFolderSetting': 'Eksportmap',
-  'notSet': 'Net ynsteld',
   'nextToPresentationFile': 'Neist it presintaasjebestân',
   'choose': 'Kieze',
-  'removeDefaultFolder': 'Standertmap fuortsmite',
   'removeExportFolder': 'Eksportmap fuortsmite',
   'exportFolderHelp':
       'Alle eksporten (PDF/PPTX) wurde hjir bewarre. Net ynsteld? Dan komme se neist it presintaasjebestân.',

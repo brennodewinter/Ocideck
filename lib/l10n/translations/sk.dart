@@ -42,17 +42,13 @@ const _stringsSk = {
   'settings': 'Nastavenia',
   'settingsGeneral': 'Všeobecné',
   'settingsColors': 'Farby',
-  'settingsLogo': 'Logo',
   'language': 'Jazyk',
   'applicationLanguage': 'Jazyk aplikácie',
   'languageHelp':
       'Rozhranie okamžite zmení jazyk. Obsah prezentácie zostáva nezmenený.',
-  'presentationFolder': 'Priečinok prezentácií',
   'exportFolderSetting': 'Priečinok exportov',
-  'notSet': 'Nenastavené',
   'nextToPresentationFile': 'Vedľa súboru prezentácie',
   'choose': 'Vybrať',
-  'removeDefaultFolder': 'Odstrániť predvolený priečinok',
   'removeExportFolder': 'Odstrániť priečinok exportov',
   'exportFolderHelp':
       'Všetky exporty (PDF/PPTX) sa ukladajú sem. Ak nie je nastavené, exporty sa uložia vedľa súboru prezentácie.',

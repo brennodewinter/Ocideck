@@ -41,17 +41,13 @@ const _stringsPap = {
   'settings': 'Preferensianan',
   'settingsGeneral': 'General',
   'settingsColors': 'Kolónan',
-  'settingsLogo': 'Logo',
   'language': 'Idioma',
   'applicationLanguage': 'Idioma di aplikashon',
   'languageHelp':
       'E interface ta cambia idioma mesora. Kontenido di presentashon ta keda igual.',
-  'presentationFolder': 'Folder di presentashon',
   'exportFolderSetting': 'Folder di eksport',
-  'notSet': 'No konfigurá',
   'nextToPresentationFile': 'Banda di e file di presentashon',
   'choose': 'Skohe',
-  'removeDefaultFolder': 'Kita folder standard',
   'removeExportFolder': 'Kita folder di eksport',
   'exportFolderHelp':
       'Tur eksportnan (PDF/PPTX) ta wordu wardá aki. Si no konfigurá, nan ta wordu wardá banda di e file di presentashon.',

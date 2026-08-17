@@ -41,17 +41,13 @@ const _stringsSv = {
   'settings': 'Inställningar',
   'settingsGeneral': 'Allmänt',
   'settingsColors': 'Färger',
-  'settingsLogo': 'Logotyp',
   'language': 'Språk',
   'applicationLanguage': 'Applikationsspråk',
   'languageHelp':
       'Gränssnittet byter språk direkt. Presentationens innehåll ändras inte.',
-  'presentationFolder': 'Presentationsmapp',
   'exportFolderSetting': 'Exportmapp',
-  'notSet': 'Inte inställd',
   'nextToPresentationFile': 'Bredvid presentationsfilen',
   'choose': 'Välj',
-  'removeDefaultFolder': 'Ta bort standardmapp',
   'removeExportFolder': 'Ta bort exportmapp',
   'exportFolderHelp':
       'Alla exporter (PDF/PPTX) sparas här. Om ingen anges sparas exporter bredvid presentationsfilen.',

@@ -43,17 +43,13 @@ const _stringsGa = {
   'settings': 'Socruithe',
   'settingsGeneral': 'Ginearálta',
   'settingsColors': 'Dathanna',
-  'settingsLogo': 'Lógó',
   'language': 'Teanga',
   'applicationLanguage': 'Teanga an fheidhmchláir',
   'languageHelp':
       'Athraíonn teanga an chomhéadain láithreach. Fanann ábhar na láithreoireachta gan athrú.',
-  'presentationFolder': 'Fillteán láithreoireachta',
   'exportFolderSetting': 'Fillteán easpórtála',
-  'notSet': 'Gan socrú',
   'nextToPresentationFile': 'In aice le comhad na láithreoireachta',
   'choose': 'Roghnaigh',
-  'removeDefaultFolder': 'Bain an fillteán réamhshocraithe',
   'removeExportFolder': 'Bain an fillteán easpórtála',
   'exportFolderHelp':
       'Sábháiltear gach easpórtáil (PDF/PPTX) anseo. Mura bhfuil sé socraithe, sábháiltear easpórtálacha in aice le comhad na láithreoireachta.',

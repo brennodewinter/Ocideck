@@ -41,17 +41,13 @@ const _stringsSl = {
   'settings': 'Nastavitve',
   'settingsGeneral': 'Splošno',
   'settingsColors': 'Barve',
-  'settingsLogo': 'Logotip',
   'language': 'Jezik',
   'applicationLanguage': 'Jezik aplikacije',
   'languageHelp':
       'Vmesnik takoj zamenja jezik. Vsebina predstavitve ostane nespremenjena.',
-  'presentationFolder': 'Mapa predstavitev',
   'exportFolderSetting': 'Mapa za izvoz',
-  'notSet': 'Ni nastavljeno',
   'nextToPresentationFile': 'Ob datoteki predstavitve',
   'choose': 'Izberi',
-  'removeDefaultFolder': 'Odstrani privzeto mapo',
   'removeExportFolder': 'Odstrani mapo za izvoz',
   'exportFolderHelp':
       'Vsi izvozi (PDF/PPTX) se shranijo tukaj. Če ni nastavljeno, se izvoz shrani ob datoteki predstavitve.',

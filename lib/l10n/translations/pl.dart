@@ -43,17 +43,13 @@ const _stringsPl = {
   'settings': 'Ustawienia',
   'settingsGeneral': 'Ogólne',
   'settingsColors': 'Kolory',
-  'settingsLogo': 'Logo',
   'language': 'Język',
   'applicationLanguage': 'Język aplikacji',
   'languageHelp':
       'Interfejs zmienia język natychmiast. Zawartość prezentacji pozostaje bez zmian.',
-  'presentationFolder': 'Folder prezentacji',
   'exportFolderSetting': 'Folder eksportu',
-  'notSet': 'Nie ustawiono',
   'nextToPresentationFile': 'Obok pliku prezentacji',
   'choose': 'Wybierz',
-  'removeDefaultFolder': 'Usuń folder domyślny',
   'removeExportFolder': 'Usuń folder eksportu',
   'exportFolderHelp':
       'Wszystkie eksporty (PDF/PPTX) są tutaj zapisywane. Jeśli nie ustawiono, eksporty są zapisywane obok pliku prezentacji.',

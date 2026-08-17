@@ -41,17 +41,13 @@ const _stringsNl = {
   'settings': 'Instellingen',
   'settingsGeneral': 'Algemeen',
   'settingsColors': 'Kleuren',
-  'settingsLogo': 'Logo',
   'language': 'Taal',
   'applicationLanguage': 'Applicatietaal',
   'languageHelp':
       'De interface wisselt direct van taal. Presentatie-inhoud blijft ongewijzigd.',
-  'presentationFolder': 'Presentatiemap',
   'exportFolderSetting': 'Exportmap',
-  'notSet': 'Niet ingesteld',
   'nextToPresentationFile': 'Naast het presentatiebestand',
   'choose': 'Kiezen',
-  'removeDefaultFolder': 'Verwijder standaard map',
   'removeExportFolder': 'Verwijder exportmap',
   'exportFolderHelp':
       'Alle exports (PDF/PPTX) worden hier opgeslagen. Niet ingesteld? Dan komt de export naast het presentatiebestand te staan.',
