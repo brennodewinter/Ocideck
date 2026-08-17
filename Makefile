@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -83,6 +83,7 @@ help:
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
+	@echo "  make check-l10n-orphans  Ratchet: translation keys nothing looks up any more (in check-full)."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make clean-test-cache  Gooi alleen de kernelcache van 'flutter test' weg (bij een laadfout op een test die los groen is)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -864,6 +865,35 @@ check-translated-mermaid:
 	@echo "        tool/check_translated_mermaid.dart."
 	dart run tool/check_translated_mermaid.dart
 
+# De ANDERE kant van de vertaalpoorten. `l10n-check` en app_localizations_test
+# bewaken dat elke gebruikte sleutel in alle 32 talen bestaat; niets vroeg of
+# een sleutel nog wordt opgehaald. Elke wees kost 32 regels onderhoud voor
+# tekst die geen mens ooit ziet.
+#
+# WAAROM IN check-full EN NIET IN check. Het bewijs van gebruik is tekstueel,
+# geen typecontrole: de poort weet dat een sleutel ergens vóórkomt, niet dat
+# hij wordt uitgevoerd. Zo'n oordeel hoort niet in de poort die élke commit
+# tegenhoudt — een valse melding daar kost iedereen tijd op iets wat geen bug
+# is (er breekt niets van een ongebruikte sleutel; er verwatert alleen
+# onderhoud). check-full draait bij een uitbrengronde en bij wie hem aanroept,
+# en dat is het tempo waarop een opruimlijst nuttig is. De maatregel die wél
+# élke commit raakt zit in de ratchet: hij mag dalen, nooit stijgen.
+check-l10n-orphans:
+	@echo "== OciDeck check: ongebruikte vertaalsleutels =="
+	@echo "Command: dart run tool/check_l10n_orphans.dart"
+	@echo "Covers: sleutels in lib/l10n/translations/en.dart die nergens meer"
+	@echo "        worden opgehaald — via d(), t(), een doorgeefluik, of"
+	@echo "        AppLocalizations.sourceFor() op een label uit assets/."
+	@echo "        Bewijs = Dart-literal (AST) of letterlijke tekst in lib/,"
+	@echo "        test/, tool/, assets/ of web/. Documentatie telt niet mee."
+	@echo "        Ratchet: het aantal mag dalen, nooit stijgen."
+	@echo "Failure means: er is een sleutel bijgekomen die niemand aanroept —"
+	@echo "        roep hem aan of laat hem weg. Wordt hij wél gebruikt langs een"
+	@echo "        weg die de poort niet ziet, breid dan useRoots/textExtensions"
+	@echo "        in tool/check_l10n_orphans.dart uit — niet de basislijn."
+	@echo "        Volledige lijst: dart run tool/check_l10n_orphans.dart --list"
+	dart run tool/check_l10n_orphans.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -1177,9 +1207,9 @@ check-registrations:
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-l10n-orphans check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
+	@echo "Validated: required quality gate, unused translation keys, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
 
 # The "ready for tagging" quality pass. Run this BY HAND before `git push origin
 # v*`: it is the last moment a finding can hold back a release instead of ending

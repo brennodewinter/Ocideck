@@ -122,6 +122,44 @@ present, and whitelists any `unchanged` loanwords. `make l10n-check` runs just
 the l10n parts of `make check` (the duplicate-key and per-language coverage
 guards plus formatting), handy while iterating on translations.
 
+### `make check-l10n-orphans`
+- **Runs:** `dart run tool/check_l10n_orphans.dart` (`--list` prints every
+  finding with its line in `lib/l10n/translations/en.dart`)
+- **Covers:** the *other* direction of the translation promise. `l10n-check` and
+  `app_localizations_test.dart` guard that every key in use exists in all 32
+  languages; nothing asked whether a key is still looked up at all. Each orphan
+  costs 32 lines of upkeep for text no one ever sees.
+- **How it measures:** the keys come from the three maps in
+  `lib/l10n/translations/en.dart`, read via the AST. A key counts as *in use*
+  when it appears either as a Dart string literal (AST again, so adjacent
+  literals split across lines and escaped quotes count) or as literal text
+  anywhere in `lib/`, `test/`, `tool/`, `assets/` or `web/`. That second rule is
+  what catches the third lookup route: `AppLocalizations.sourceFor(lang,
+  labelNl)`, used by the improvement module for labels that live in
+  `assets/improvement/templates/` and in the baked
+  `improvement_templates_floor.g.dart` — "Bedreigingen" is in no Dart literal
+  and is very much in use.
+- **Not evidence on purpose:** `docs/`, the README and the CHANGELOG (prose
+  *describes* the app, it does not look a key up — two of the three
+  hand-confirmed orphans are quoted in the CHANGELOG); `tool/*_l10n_spec.json`
+  (the *input* to `make add-l10n`, which created the key); the translation
+  tables themselves; and the gate's own two files, which name keys in comments
+  and expectations.
+- **Deliberately silent about:** a key that happens to occur as a *substring* of
+  another string ("treffer(s)" inside "meer treffer(s)"). The textual rule is
+  coarse on purpose — this gate may miss an orphan, but it must never send
+  someone hunting for a key that is actually in use.
+- **Why `check-full` and not `check`:** the evidence is textual, not a type
+  check — the gate knows a key occurs somewhere, not that it is executed. A
+  judgement like that does not belong in the gate that stops every commit, where
+  a false finding costs everyone time over something that is not a defect (an
+  unused key breaks nothing; it only dilutes upkeep). The part that *does* touch
+  every commit is the ratchet: `orphanBaseline` may fall, never rise, so a key
+  added and never called fails the check.
+- **Failure means:** a key was added that nothing calls — call it or leave it
+  out. If it *is* used along a route the gate cannot see, widen `useRoots` /
+  `textExtensions` in `tool/check_l10n_orphans.dart`; do not raise the baseline.
+
 ## How intensively is it tested?
 
 To give a sense of scale. These are counts from one moment, and they only grow,
@@ -240,6 +278,7 @@ now the only passing state.
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
+| [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |

@@ -1409,6 +1409,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **een poort die ongebruikte vertaalsleutels aanwijst.** De vertaalpoorten
+  keken maar één kant op: `make l10n-check` en `app_localizations_test` bewaken
+  dat elke gebruikte sleutel in alle 32 talen bestaat, maar niets vroeg of een
+  sleutel nog wordt opgehaald. `make check-l10n-orphans` stelt die vraag wel.
+  Bewijs van gebruik is een Dart-stringliteral (via de AST, dus ook een zin die
+  over twee regels aaneengeschakeld staat) of letterlijke tekst in lib/, test/,
+  tool/, assets/ of web/ — dat laatste vangt de derde ophaalweg,
+  `AppLocalizations.sourceFor()` op labels die uit assets komen. Documentatie
+  telt níet als gebruik: proza beschrijft de app, het roept geen sleutel op, en
+  één CHANGELOG-citaat zou precies de wees wegpoetsen die je zoekt. De poort
+  hangt in `check-full` en niet in `check`, want tekstueel bewijs is een
+  oordeel en geen typecontrole; wat élke commit wél raakt is de ratchet
+  (`orphanBaseline`, nu 181): dalen mag, stijgen niet. Opruimen is bewust een
+  volgende stap — deze tak levert alleen de controle en haar lijst. (#1512)
+
 - **werken op echte pagina's, alle ISO-maten en een drukkersafloop.** De
   documentbewerker krijgt naast Visueel en Bron een derde stand, **Pagina's**:
   het document op vellen van de gekozen maat, met de marges, de kop- en voetband
