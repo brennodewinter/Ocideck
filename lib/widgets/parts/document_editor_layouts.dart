@@ -65,6 +65,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         margins: settings.documentPageMargins,
         profile: _styleProfile,
         projectPath: _projectPath,
+        chapterPageBreak: settings.documentChapterPageBreak,
       ),
     );
   }

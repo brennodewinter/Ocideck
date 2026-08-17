@@ -42,6 +42,57 @@ void main() {
     expect(documentPageOffsets(blockHeights: [10, 10], pageHeight: 0), [0]);
   });
 
+  group('geforceerde einden', () {
+    // Het formaat kent ze al: een `---` in de body is een pagina-einde, en de
+    // hoofdstuk-instelling doet hetzelfde voor elke H1 (FILE_FORMAT.md §14.6).
+    // De export honoreert beide; de weergave hoort dat ook te doen.
+    test(
+      'een geforceerd einde begint een verse pagina, ook met ruimte over',
+      () {
+        expect(
+          documentPageOffsets(
+            blockHeights: [20, 20, 20],
+            pageHeight: 100,
+            forcedBreakBefore: {2},
+          ),
+          [0, 40],
+        );
+      },
+    );
+
+    test('een geforceerd einde bovenaan een vel levert geen leeg vel op', () {
+      // Blok 0 staat al bovenaan pagina 1; nog een breuk zou een leeg vel geven.
+      expect(
+        documentPageOffsets(
+          blockHeights: [20, 20],
+          pageHeight: 100,
+          forcedBreakBefore: {0},
+        ),
+        [0],
+      );
+      // En twee breuken achter elkaar leveren één nieuw vel op, geen twee.
+      expect(
+        documentPageOffsets(
+          blockHeights: [20, 20, 20],
+          pageHeight: 100,
+          forcedBreakBefore: {1, 2},
+        ),
+        [0, 20, 40],
+      );
+    });
+
+    test('zonder geforceerde einden verandert er niets', () {
+      expect(
+        documentPageOffsets(blockHeights: [40, 40, 40], pageHeight: 100),
+        documentPageOffsets(
+          blockHeights: [40, 40, 40],
+          pageHeight: 100,
+          forcedBreakBefore: const {},
+        ),
+      );
+    });
+  });
+
   test('het aantal pagina\'s telt de vensters', () {
     expect(
       documentPageCount(blockHeights: [40, 40, 40], pageHeight: pageHeight),

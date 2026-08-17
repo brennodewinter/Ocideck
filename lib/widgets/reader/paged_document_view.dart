@@ -45,6 +45,7 @@ class PagedDocumentView extends StatefulWidget {
     this.profile,
     this.projectPath,
     this.scale = 1.0,
+    this.chapterPageBreak = false,
   });
 
   final String markdown;
@@ -55,6 +56,10 @@ class PagedDocumentView extends StatefulWidget {
 
   /// Zoomfactor op het vel. 1,0 is ware grootte op een 96-dpi scherm.
   final double scale;
+
+  /// Laat elk hoofdstuk (`H1`) op een nieuw vel beginnen — de instelling
+  /// "Nieuw hoofdstuk op een nieuwe pagina", die de export ook honoreert.
+  final bool chapterPageBreak;
 
   @override
   State<PagedDocumentView> createState() => _PagedDocumentViewState();
@@ -77,7 +82,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     if (widget.markdown != old.markdown ||
         widget.pageSize != old.pageSize ||
         widget.margins != old.margins ||
-        widget.profile != old.profile) {
+        widget.profile != old.profile ||
+        widget.chapterPageBreak != old.chapterPageBreak) {
       _blockHeights = null;
       _measuring.clear();
     }
@@ -121,6 +127,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     final offsets = documentPageOffsets(
       blockHeights: heights,
       pageHeight: _contentHeightPx,
+      // Een `---` en (naar keuze) elk hoofdstuk beginnen een nieuw vel, net als
+      // in de export. Zonder dit zei het scherm iets anders dan de druk.
+      forcedBreakBefore: DocumentMarkdownView.forcedPageBreaks(
+        widget.markdown,
+        chapterBreak: widget.chapterPageBreak,
+      ),
     );
     return LayoutBuilder(
       builder: (context, constraints) {

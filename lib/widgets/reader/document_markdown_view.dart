@@ -156,6 +156,29 @@ class DocumentMarkdownView extends StatelessWidget {
   static List<String> blockTexts(String markdown) =>
       _parse(markdown).map((b) => b.searchText).toList(growable: false);
 
+  /// De blokken die op een verse pagina horen te beginnen, als index in
+  /// dezelfde lijst als [blockTexts].
+  ///
+  /// Twee soorten, allebei uit het formaat en allebei gehonoreerd door de HTML-
+  /// en LaTeX-export (FILE_FORMAT.md §14.6): een `---` in de body ís een
+  /// pagina-einde, en met [chapterBreak] begint elk hoofdstuk (`H1`) op een
+  /// nieuw vel. Het eerste blok telt nooit mee — een breuk vóór de eerste regel
+  /// zou een leeg vel opleveren.
+  static Set<int> forcedPageBreaks(
+    String markdown, {
+    bool chapterBreak = false,
+  }) {
+    final blocks = _parse(markdown);
+    return <int>{
+      for (var i = 1; i < blocks.length; i++)
+        if (blocks[i].kind == _Kind.rule ||
+            (chapterBreak &&
+                blocks[i].kind == _Kind.heading &&
+                blocks[i].level == 1))
+          i,
+    };
+  }
+
   /// The absolute block index (into the same block list [build] renders) of the
   /// first heading whose [headingSlug] equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
