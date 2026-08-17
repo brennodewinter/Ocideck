@@ -1409,6 +1409,30 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **de paginaopmaak kan met het document meereizen.** Papiermaat, marges en een
+  drukkersafloop stonden alleen in de instellingen. Dat betekende dat een `.md`
+  die je aan een collega of aan de drukker gaf op hún vel uitkwam, en dat een
+  afloop die je voor één drukwerk zette stil op elk volgend document bleef
+  staan. Een document kan die opmaak nu zelf dragen, in front matter die Pandoc
+  écht uitvoert: `papersize: a4` plus `geometry: top=25mm,…`. Bewust geen eigen
+  `ocideck_`-sleutel — wie het bestand door zijn eigen Pandoc haalt krijgt
+  dezelfde pagina, zonder OciDeck, en dat is de voorwaarde die FILE_FORMAT.md
+  §14.1 aan schrijven stelt. Met een afloop of liggend vervalt de papiernaam en
+  gaan de expliciete maten mee (`paperwidth=216mm,paperheight=303mm,…`), want
+  "A4" is onwaar van een vel dat voor de snijmarge is vergroot; dat is exact de
+  vorm die de LaTeX-export al schreef. Schrijven gebeurt alleen op verzoek: de
+  paginamaat-indicator in de hoek van het schrijfvlak laat zien wáár de opmaak
+  vandaan komt en vraagt met een dialoog om akkoord voordat er iets in je
+  bestand terechtkomt. Vastleggen en weer weghalen geeft exact de oorspronkelijke
+  bytes terug. Wat er in de documentatie tegenover staat: FILE_FORMAT.md §14.7
+  hield "de opmaak reist niet mee" als bewuste keuze staande — die is niet stil
+  omgeschreven maar ingetrokken met de reden erbij, en de feiten staan nu in een
+  nieuwe §14.8, met het ontwerp in DOCUMENT_MODE.md §15. Eén punt is open en
+  staat als zodanig opgeschreven (§15.4): een document met afloop of liggend
+  leest zijn *formaat* nog niet terug — marges en afloop wel — en valt daarvoor
+  terug op de instelling van de machine die het opent. Pandoc leest zo'n bestand
+  wél goed. (#1511)
+
 - **181 vertaalsleutels die niemand meer opvroeg, weg uit alle 32 tabellen.**
   De poort uit #1512 wees ze aan; deze tak ruimt ze op. Vier `t()`-sleutels
   (`settingsLogo`, `presentationFolder`, `notSet`, `removeDefaultFolder`) en 177

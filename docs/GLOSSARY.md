@@ -67,6 +67,17 @@ the HTML and LaTeX exports and shifts the text block along with it; **crop marks
 — the corner lines that show a printer where the trim size lies — are not emitted
 by any output path. *(Added 2026-08-16.)*
 
+**`papersize:` / `geometry:`** — the two front-matter keys in which a document can
+carry its own page setup, so the sheet travels with the file instead of coming
+from whichever machine opens it. They are **Pandoc's** keys, not OciDeck's
+invention: `papersize: a4` names the format and `geometry: top=25mm,…` gives the
+margins, both passed straight through to the LaTeX `geometry` package by any
+Pandoc run. OciDeck writes them only when asked, through the page-size indicator
+in the document editor. With a bleed or in landscape the name is dropped and the
+sheet is written out as `paperwidth`/`paperheight`, because a paper name cannot
+describe an enlarged or rotated sheet. See
+[FILE_FORMAT.md](FILE_FORMAT.md) §14.8. *(Added 2026-08-17.)*
+
 ## Files & storage
 
 **`.ocideck`** — a single-file package (zip) bundling a deck and its assets; can
