@@ -902,6 +902,14 @@ simpelweg met springen — geen fout, maar de kwaliteitscontrole zegt het je wé
 je het niet pas op het podium merkt. Ga je naar een andere slide, dan begint het menu
 weer bij zijn eerste categorie.
 
+**Met het toetsenbord.** Tijdens het presenteren loop je met `Tab` (en
+`Shift + Tab` terug) langs de categorieën en daarna langs de blokken; `Enter` of de
+spatiebalk volgt de sprong of wisselt van categorie, en `Escape` geeft de toetsen
+terug aan de dia zodat je meteen weer kunt bladeren. Wat de focus heeft krijgt een
+duidelijke accentring. Een menu is dus ook zonder muis te bedienen — met een
+klikker, of met een schermlezer, die de blokken als knop aankondigt.
+*(Toegevoegd 2026-08-18.)*
+
 **Meer blokken dan er passen.** Elke indeling houdt zijn tekst leesbaar. Passen er
 niet meer blokken bij zonder dat de letter te klein wordt, dan toont de slide er
 zoveel als er wél passen en zet er een blokje **+n** achter voor de rest. Dat is een

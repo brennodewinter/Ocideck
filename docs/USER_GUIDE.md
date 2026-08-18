@@ -859,6 +859,13 @@ is later deleted, the block simply stops jumping — no error, but the quality c
 does tell you, so you do not find out on stage. Moving to another slide resets the
 menu to its first category.
 
+**From the keyboard.** While presenting, `Tab` (and `Shift + Tab` to go back)
+walks the categories and then the blocks; `Enter` or the space bar follows the jump
+or switches category, and `Escape` hands the keys back to the slide so you can page
+on straight away. Whatever has focus gets a clear accent ring. A menu is therefore
+usable without a mouse — with a clicker, or with a screen reader, which announces
+the blocks as buttons. *(Added 2026-08-18.)*
+
 **More blocks than fit.** Every layout keeps its text readable. When no further
 block fits without the type becoming too small, the slide shows the ones that do fit
 and puts a **+n** tile after them for the rest. Read that as a sign the menu is too

@@ -75,6 +75,16 @@ class _MenuPreviewState extends State<_MenuPreview> {
     final blocks = categories[index].blocks;
     final text = AppTheme.parseHexColor(widget.profile.textColor);
     final accent = AppTheme.parseHexColor(widget.profile.accentColor);
+    final background = AppTheme.parseHexColor(
+      widget.profile.slideBackgroundColor,
+    );
+    // De tweede kleur van de focusring hangt van het thema af; hier uitgerekend
+    // omdat dit de enige plek is die alle drie de kleuren van de dia kent.
+    final focusHalo = menuFocusHalo(
+      accent: accent,
+      text: text,
+      background: background,
+    );
     final hasTitle = widget.slide.title.trim().isNotEmpty;
 
     // Het blokkenvlak krijgt de hoogte die na titel en keuzebalk overblijft, op
@@ -98,7 +108,7 @@ class _MenuPreviewState extends State<_MenuPreview> {
       profile: widget.profile,
       horizontalPadding: w * 0.05,
       verticalPadding: w * 0.045,
-      background: AppTheme.parseHexColor(widget.profile.slideBackgroundColor),
+      background: background,
       children: [
         if (hasTitle) ...[
           _md(
@@ -124,6 +134,7 @@ class _MenuPreviewState extends State<_MenuPreview> {
             w: w,
             text: text,
             accent: accent,
+            focusHalo: focusHalo,
             font: widget.font,
             onSelect: widget.onCategoryChanged == null ? null : _select,
           ),
@@ -142,6 +153,7 @@ class _MenuPreviewState extends State<_MenuPreview> {
             height: blocksHeight,
             child: _menuBlockArea(
               context,
+              focusHalo: focusHalo,
               blocks: blocks,
               layout: widget.slide.menuLayout,
               w: w,
@@ -165,6 +177,7 @@ class _MenuCategoryBar extends StatelessWidget {
   final double w;
   final Color text;
   final Color accent;
+  final Color focusHalo;
   final String font;
   final ValueChanged<int>? onSelect;
 
@@ -174,6 +187,7 @@ class _MenuCategoryBar extends StatelessWidget {
     required this.w,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     required this.font,
     this.onSelect,
   });
@@ -226,10 +240,18 @@ class _MenuCategoryBar extends StatelessWidget {
       ),
     );
     if (onSelect == null) return pill;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => onSelect!(index),
-      child: MouseRegion(cursor: SystemMouseCursors.click, child: pill),
+    return _MenuFocusable(
+      onActivate: () => onSelect!(index),
+      semanticLabel: label,
+      ring: accent,
+      halo: focusHalo,
+      ringWidth: w * 0.004,
+      cornerRadius: w * 0.03,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onSelect!(index),
+        child: pill,
+      ),
     );
   }
 }

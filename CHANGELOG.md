@@ -112,6 +112,18 @@ in Dutch, and it keeps growing on `main` between releases.
   presentator die erop drukt. De LaTeX-export schrijft per categorie een lijst
   met een vetgedrukt kopje.
 
+- feat(toegankelijkheid): de blokken en categoriepillen van een keuzemenu zijn
+  met het toetsenbord te bedienen (#1162, WCAG 2.1.1). `Tab`/`Shift+Tab` lopen
+  erlangs — eerst de categorieën, dan de blokken in leesvolgorde — `Enter` of de
+  spatiebalk activeert, en `Escape` geeft de toetsen terug aan de dia. Het
+  onderdeel met de focus krijgt een accentring met halo, ruim genoeg om vanaf de
+  achterste rij te zien, en een schermlezer meldt het als knop met de uitleg
+  achter het label. Enter en spatie zijn in de presentator ook "volgende dia";
+  dat botst niet, want een toetsaanslag gaat eerst naar het onderdeel met de
+  focus. De pijltjestoetsen blijven van de presentatie. Het beamervenster toont
+  geen focusring — daar is niets aanklikbaar, dus ook niets focusbaar. Dit was
+  het laatste openstaande punt uit de beeldkeuring van dit diatype.
+
 - feat(keuzemenu): een menu dat voller is dan er leesbaar past, toont wat er past
   en telt de rest in een blokje **+n** (#1162). Elke indeling houdt daarmee een
   leesbare lettergrootte; eerder werden zestien blokken onder elkaar geperst tot

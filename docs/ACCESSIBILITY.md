@@ -125,15 +125,28 @@ If the recipient needs an accessible document, the honest routes today are the
 **HTML export** (real text in a browser, though it was not built against WCAG
 either). PPTX speaker notes are real text and do travel.
 
-**The interactive parts of a choice-menu slide are pointer-only.** While
-presenting, a menu block that jumps and — since 2026-08-18 — the category bar
-above the blocks respond to a click or a tap and to nothing else: both are a
-`GestureDetector` on a drawn card, without a `Semantics` button role, without a
-focus node and without a keyboard route. A screen reader reads the labels as
-text, so the *content* of the menu is there, but there is no announcement that
-they can be activated and no way to activate them from the keyboard. The
-presenter's ordinary navigation (arrow keys, the slide grid, jump-to-slide) does
-reach every slide a menu points at, so a menu is never the only route to a slide.
+**The interactive parts of a choice-menu slide are keyboard-operable.** *(Fixed
+2026-08-18; listed as a known gap before that.)* While presenting, a menu block
+that jumps and the category bar above it are both buttons: `Tab` and
+`Shift + Tab` walk them — categories first, then the blocks in reading order —
+`Enter` or the space bar follows the jump or switches category, and `Escape`
+hands the keys back to the slide so you can page on straight away. Whatever has
+focus gets an accent ring with a halo around it, heavy enough to see from the
+back row. A screen reader announces them as buttons, with the description after
+the label (`Prijzen. Wat het kost`), and the text inside the card is excluded so
+nothing is read twice.
+
+Enter and the space bar also mean "next slide" in the presenter. That does not
+clash: a keystroke goes to the focused part first and only then to the presenter.
+With nothing focused, the space bar pages on as it always did. The arrow keys
+always belong to the presentation — intercepting them would mean you could not
+move on while a block has focus.
+
+The focus ring belongs to the presenter and does not travel to the audience
+window: blocks are not clickable there, so they are not focusable either. Beyond
+that, the presenter's ordinary navigation (arrow keys, the slide grid,
+jump-to-slide) reaches every slide a menu points at, so a menu is never the only
+route to a slide.
 
 **The HTML export is not audited for accessibility.** It produces genuine text
 and headings, which is already a great deal more than the bitmap formats, but

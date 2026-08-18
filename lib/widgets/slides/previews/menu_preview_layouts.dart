@@ -18,12 +18,14 @@ Widget _menuBlockArea(
   required String? projectPath,
   required String font,
   required void Function(String anchor)? onBlockTap,
+  required Color focusHalo,
 }) {
   Widget card(MenuBlock block, {bool wide = false}) => _MenuBlockCard(
     block: block,
     w: w,
     text: text,
     accent: accent,
+    focusHalo: focusHalo,
     projectPath: projectPath,
     font: font,
     onTap: onBlockTap,
@@ -37,6 +39,7 @@ Widget _menuBlockArea(
       w: w,
       text: text,
       accent: accent,
+      focusHalo: focusHalo,
       projectPath: projectPath,
       font: font,
       onTap: onBlockTap,
@@ -192,6 +195,9 @@ class _MenuBlockCard extends StatelessWidget {
   final double w;
   final Color text;
   final Color accent;
+
+  /// De tweede kleur van de focusring; zie [menuFocusHalo].
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
@@ -205,6 +211,7 @@ class _MenuBlockCard extends StatelessWidget {
     required this.w,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
@@ -240,10 +247,18 @@ class _MenuBlockCard extends StatelessWidget {
     // ergens heen springt (#1162). Een tekstblok of de preview in de editor blijft
     // gewoon een kaart.
     if (onTap == null || !actionable) return card;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => onTap!(block.targetAnchor),
-      child: MouseRegion(cursor: SystemMouseCursors.click, child: card),
+    return _MenuFocusable(
+      onActivate: () => onTap!(block.targetAnchor),
+      semanticLabel: _menuSemanticLabel(block),
+      ring: accent,
+      halo: focusHalo,
+      ringWidth: w * 0.005,
+      cornerRadius: w * 0.016,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onTap!(block.targetAnchor),
+        child: card,
+      ),
     );
   }
 
@@ -368,6 +383,7 @@ class _MenuCircle extends StatelessWidget {
   final double w;
   final Color text;
   final Color accent;
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
@@ -377,6 +393,7 @@ class _MenuCircle extends StatelessWidget {
     required this.w,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
@@ -408,19 +425,41 @@ class _MenuCircle extends StatelessWidget {
       final n = shown.length;
       final disc = side * menuDiscFraction(n);
       final radius = side * menuRingRadius(n);
+      // De focusring hangt buiten de schijf en eet dus van de lucht tussen twee
+      // buren; bij een volle ring is die lucht krap.
+      final ringWidth = menuDiscRingWidth(
+        side: side,
+        n: n,
+        maxWidth: w * _menuDiscRingFactor,
+      );
       return Center(
         child: SizedBox(
           width: side,
           height: side,
           child: Stack(
             alignment: Alignment.center,
+            // De focusring van een schijf steekt buiten de schijf uit, en bij
+            // de bovenste schijf ook buiten dit vierkant. Zonder dit knipte de
+            // stapel hem vlak af — en alleen bij bepaalde maten, want of een
+            // schijf de rand raakt hangt van de rendermaat af (#1162, derde
+            // beeldkeuring).
+            clipBehavior: Clip.none,
             children: [
               // Bewust géén ringlijn tussen de schijven. Hij stond er, maar de
               // schijven zijn doorschijnend, dus hij liep zichtbaar dwars door
               // hun labels — hij las als een doorhaling (#1162, beeldkeuring).
               // De ring is als vorm al af zonder hulplijn.
               for (var i = 0; i < n; i++)
-                _positioned(context, shown[i], i, n, side, disc, radius),
+                _positioned(
+                  context,
+                  shown[i],
+                  i,
+                  n,
+                  side,
+                  disc,
+                  radius,
+                  ringWidth,
+                ),
             ],
           ),
         ),
@@ -438,6 +477,7 @@ class _MenuCircle extends StatelessWidget {
     double side,
     double disc,
     double radius,
+    double ringWidth,
   ) {
     final angle = -math.pi / 2 + i * 2 * math.pi / n;
     return Positioned(
@@ -447,6 +487,7 @@ class _MenuCircle extends StatelessWidget {
       height: disc,
       child: _MenuDisc(
         block: block,
+        focusHalo: focusHalo,
         w: w,
         diameter: disc,
         text: text,
@@ -454,6 +495,7 @@ class _MenuCircle extends StatelessWidget {
         projectPath: projectPath,
         font: font,
         onTap: onTap,
+        ringWidth: ringWidth,
       ),
     );
   }
@@ -463,6 +505,11 @@ class _MenuCircle extends StatelessWidget {
 /// zwaarste van de twee, en dus de krapste inhoud. Een tekstblok heeft
 /// [_menuDiscPlainBorder].
 const double _menuDiscTargetBorder = 0.005;
+
+/// De gewenste dikte van de focusring om een schijf, als fractie van de
+/// diabreedte. Zwaarder dan bij een kaart, omdat een springende schijf zelf al
+/// een accentrand draagt; [menuDiscRingWidth] kort hem in als de ring vol staat.
+const double _menuDiscRingFactor = 0.008;
 const double _menuDiscPlainBorder = 0.0026;
 
 /// Eén blok als ronde schijf: de afbeelding klein bovenin, het label eronder,
@@ -473,9 +520,15 @@ class _MenuDisc extends StatelessWidget {
   final double diameter;
   final Color text;
   final Color accent;
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
+
+  /// De dikte van de focusring, uitgerekend door de ring eromheen: hij hangt
+  /// buiten de schijf, dus hoe dik hij mag zijn hangt af van de lucht tussen
+  /// twee buren. Zie [menuDiscRingWidth].
+  final double ringWidth;
 
   const _MenuDisc({
     required this.block,
@@ -483,9 +536,11 @@ class _MenuDisc extends StatelessWidget {
     required this.diameter,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
+    required this.ringWidth,
   });
 
   @override
@@ -610,10 +665,295 @@ class _MenuDisc extends StatelessWidget {
       ),
     );
     if (onTap == null || !actionable) return disc;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => onTap!(block.targetAnchor),
-      child: MouseRegion(cursor: SystemMouseCursors.click, child: disc),
+    return _MenuFocusable(
+      onActivate: () => onTap!(block.targetAnchor),
+      semanticLabel: _menuSemanticLabel(block),
+      ring: accent,
+      halo: focusHalo,
+      // Zwaarder dan bij een kaart — een springende schijf draagt zélf al een
+      // accentrand — maar begrensd door de lucht tussen twee buren, anders ligt
+      // de ring over de buurschijf heen (#1162, beeldkeuring).
+      ringWidth: ringWidth,
+      shape: BoxShape.circle,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onTap!(block.targetAnchor),
+        child: disc,
+      ),
+    );
+  }
+}
+
+/// De tweede kleur van de focusring: de tekstkleur, tenzij die zó dicht bij het
+/// accent ligt dat er geen tweede band meer te zien is — dan de achtergrond.
+///
+/// De ring dankt zijn zichtbaarheid aan het verschil tussen zijn twee banden. Dat
+/// vangnet verdwijnt zodra ze dezelfde kleur krijgen, en dat is geen theoretisch
+/// geval: in het meegeleverde LibreKAT-profiel zijn `textColor` en `accentColor`
+/// allebei `#003399`, en dát profiel staat standaard geselecteerd.
+///
+/// Valt hij terug op de achtergrond, dan zijn er geen twee banden meer maar één
+/// band met lucht eromheen, en draagt het accent de ring alleen. De
+/// zichtbaarheid is dan die van het accent op de dia, en dáár toetst deze functie
+/// niets aan: op een thema waarvan ook de gewone tekst onleesbaar is, is de ring
+/// dat ook. Dat is bewust — een focusring kan een kapot thema niet repareren, en
+/// het contrast van het thema zelf wordt elders gemeten.
+///
+/// De eerste poging koos "de verste van de twee", op luminantieafstand. Dat is
+/// systematisch scheef: in een deugdelijk thema ligt de achtergrond per definitie
+/// aan het uiterste van het luminantiebereik — dat is wat de tekst erop leesbaar
+/// maakt — en het accent ergens ertussen. De achtergrond wint dan bijna altijd,
+/// en dat is nu juist de kandidaat die géén inkt zet: een band in de diakleur is
+/// een gat. Drie van de vier meegeleverde profielen verloren zo hun tweede band
+/// (#1162, vierde beeldkeuring).
+///
+/// Dus andersom: de tekstkleur is de eerste keus, en de achtergrond is de
+/// terugval voor het ene geval waarvoor hij bedoeld is. En de maatstaf is niet
+/// luminantie maar het grootste kanaalverschil, want twee kleuren met dezelfde
+/// helderheid kunnen prima uit elkaar te houden zijn — rood naast teal is een
+/// duidelijke tweede band, terwijl hun luminantie bijna gelijk is.
+Color menuFocusHalo({
+  required Color accent,
+  required Color text,
+  required Color background,
+}) => _colorGap(text, accent) >= _menuHaloMinGap ? text : background;
+
+/// Het grootste verschil tussen twee kleuren over de drie kanalen, op 0..1.
+double _colorGap(Color a, Color b) =>
+    math.max((a.r - b.r).abs(), math.max((a.g - b.g).abs(), (a.b - b.b).abs()));
+
+/// Onder dit kanaalverschil doet de tekstkleur naast het accent geen werk meer
+/// als tweede band. 15% van het bereik: genoeg om een echte botsing (zoals
+/// LibreKAT, waar het verschil nul is) te vangen zonder een bruikbaar
+/// kleurverschil af te wijzen.
+const double _menuHaloMinGap = 0.15;
+
+/// De focusring van een keuzeblok, zodat een proef hem kan aanwijzen.
+const Key menuFocusRingKey = ValueKey('menuFocusRing');
+
+/// Wat een schermlezer van een keuzeblok voorleest: het label, en de uitleg
+/// erachter omdat die op de dia ook onder het label staat. De vorm — kaart of
+/// schijf — doet er voor het oor niet toe; dat het een knop is, zegt
+/// [Semantics.button] al.
+String _menuSemanticLabel(MenuBlock block) =>
+    block.hasDescription ? '${block.label}. ${block.description}' : block.label;
+
+/// Maakt een keuzeblok, een schijf of een categoriepil bedienbaar met het
+/// toetsenbord: focusbaar met Tab, activeerbaar met Enter of spatie, en met een
+/// focusring die van achter in de zaal te zien is.
+///
+/// Waarom één widget voor alle drie: de drie vormen verschillen alleen in hun
+/// omtrek. Drie keer dezelfde focus-, toets- en semantiekafhandeling
+/// uitschrijven is drie plekken waar er één achterblijft — en juist bij
+/// toegankelijkheid is dat de plek waar niemand naar kijkt tot iemand het nodig
+/// heeft.
+///
+/// **Toetsen.** Enter en spatie zijn in de presentator "volgende dia". Dat botst
+/// niet: een toetsaanslag gaat eerst naar het gefocuste onderdeel, en pas als
+/// dat hem laat lopen naar de presentator eromheen. Staat de focus dus op een
+/// blok, dan activeert spatie dat blok; staat hij nergens, dan bladert spatie
+/// door. Escape geeft de focus terug aan de dia, zodat je met één toets weer
+/// gewoon kunt bladeren. De pijltjestoetsen blijven altijd van de presentatie —
+/// ze onderscheppen zou betekenen dat je met de focus op een blok niet meer
+/// verder kunt.
+///
+/// Niet aanklikbaar = niet focusbaar: in de editor-voorvertoning, de slidestrook
+/// en het beamervenster is [onActivate] null, en dan is dit een gewone doorgeef-
+/// widget. Een focusring op het beamerscherm zou het publiek iets tonen wat van
+/// de presentator is.
+class _MenuFocusable extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onActivate;
+
+  /// Wat een schermlezer voorleest. De uitleg gaat mee, want die staat op de
+  /// dia ook onder het label.
+  final String semanticLabel;
+
+  /// De omtrek van de focusring: rond voor een schijf, afgerond voor een kaart
+  /// of een pil. [cornerRadius] is de hoekstraal van het blok zelf; de ring
+  /// eromheen krijgt die straal plus zijn eigen dikte, zodat hij evenwijdig
+  /// loopt in plaats van de hoeken af te snijden.
+  final BoxShape shape;
+  final double? cornerRadius;
+
+  /// De ringkleuren. [ring] is de accentkleur van het thema; [halo] ligt er
+  /// buiten en zorgt dat de ring ook zichtbaar is op een dia waarvan de
+  /// achtergrond toevallig dicht bij het accent ligt.
+  final Color ring;
+  final Color halo;
+  final double ringWidth;
+
+  const _MenuFocusable({
+    required this.child,
+    required this.onActivate,
+    required this.semanticLabel,
+    required this.ring,
+    required this.halo,
+    required this.ringWidth,
+    this.shape = BoxShape.rectangle,
+    this.cornerRadius,
+  });
+
+  @override
+  State<_MenuFocusable> createState() => _MenuFocusableState();
+}
+
+class _MenuFocusableState extends State<_MenuFocusable> {
+  late final _node = FocusNode(debugLabel: 'menu:${widget.semanticLabel}');
+  bool _focused = false;
+
+  @override
+  void dispose() {
+    _node.dispose();
+    super.dispose();
+  }
+
+  /// Geef de toetsen terug aan wie ze boven ons afhandelt.
+  ///
+  /// Kaal `unfocus()` is niet genoeg: de focus landt dan op de omhullende
+  /// scope, en de presentator — die zijn eigen `Focus` met `onKeyEvent` heeft —
+  /// krijgt daarna niets meer. Je drukt Escape en de spatiebalk doet niets. Dus
+  /// zoeken we de dichtstbijzijnde voorouder die wél toetsen afhandelt en geven
+  /// hem de focus. Dat is generiek: het werkt voor de presentator en voor elke
+  /// andere gastheer, zonder dat dit blok hem hoeft te kennen.
+  void _releaseFocus() {
+    for (final ancestor in _node.ancestors) {
+      if (ancestor is FocusScopeNode) continue;
+      final context = ancestor.context;
+      // De knopen die deze widget zélf opbouwt (de `Shortcuts` van de
+      // FocusableActionDetector) staan óók boven ons in de focusboom en
+      // handelen toetsen af. Die overslaan, anders geeft Escape de focus aan
+      // onszelf terug en verandert er niets.
+      if (context == null ||
+          context.findAncestorStateOfType<_MenuFocusableState>() == this) {
+        continue;
+      }
+      if (ancestor.onKeyEvent != null) {
+        ancestor.requestFocus();
+        return;
+      }
+    }
+    _node.unfocus();
+  }
+
+  /// Twee ringen **om** [child] heen: buitenom de accentkleur, daarbinnen een
+  /// dunnere lijn in de tekstkleur.
+  ///
+  /// Waarom twee kleuren en geen gloed: de eerste poging gebruikte een
+  /// `BoxShadow` zonder vervaging als halo. Een `BoxShadow` tekent geen omtrek
+  /// maar een **gevulde** vorm; normaal verdwijnt die onder de achtergrond van
+  /// de decoratie, maar deze had er geen en stond in de voorgrond. Het blok met
+  /// de focus werd dus volledig overschilderd — label, uitleg en pijl weg,
+  /// precies op het blok dat de presentator moest kunnen lezen (#1162,
+  /// beeldkeuring). Twee randen tekenen wél omtrekken, en het kleurverschil doet
+  /// hetzelfde werk als de gloed: op welke achtergrond de dia ook staat, één van
+  /// de twee steekt af.
+  ///
+  /// Waarom eromhéén en niet erin: `Border.all` tekent binnen de doosgrenzen, en
+  /// die ruimte is nergens gereserveerd. De ring is een fractie van de
+  /// diabréédte, het blok krimpt met het aantal blokken — dus bij het
+  /// gedocumenteerde maximum at een ring van 19 px een schijf van 84 px op en
+  /// werd het label aangesneden (tweede beeldkeuring). Een `Stack` met
+  /// `Clip.none` legt de ring buiten de doos zonder de layout te raken: het blok
+  /// blijft even groot en de tekst staat waar hij stond, met of zonder focus.
+  /// De ruimte ernaast is er: de tussenruimte in het raster en op de ring is
+  /// ruimer dan de ring dik is.
+  Widget _ringed(Widget child) {
+    final total = widget.ringWidth * 1.9;
+    final circle = widget.shape == BoxShape.circle;
+    BoxDecoration ring(Color color, double width, double grown) =>
+        BoxDecoration(
+          shape: widget.shape,
+          borderRadius: circle ? null : BorderRadius.circular(grown),
+          border: Border.all(color: color, width: width),
+        );
+    final radius = widget.cornerRadius ?? 0;
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        child,
+        // De ring hangt buiten het blok en mag geen tikken opvangen: die horen
+        // bij het blok eronder.
+        Positioned(
+          left: -total,
+          top: -total,
+          right: -total,
+          bottom: -total,
+          child: IgnorePointer(
+            // Gesleuteld zodat een proef de ring kan aanwijzen zonder hem te
+            // verwarren met de decoratie van de kaart eronder.
+            key: menuFocusRingKey,
+            child: DecoratedBox(
+              // Let op de volgorde: een achtergrond-decoratie schildert vóór
+              // haar kind, dus de buitenste doos komt als eerste aan de beurt en
+              // het kind schildert eroverheen. De brede contrastlijn hoort dus
+              // buitenaan te staan en de smalle accentband erbinnen — dan dekt
+              // het accent de buitenste `ringWidth` af en blijft de contrastlijn
+              // daarbinnen zichtbaar. Andersom (zoals het even stond) verdwijnt
+              // het accent volledig onder de contrastlijn en houd je een
+              // eenkleurige donut over (#1162, derde beeldkeuring).
+              decoration: ring(widget.halo, total, radius + total),
+              child: DecoratedBox(
+                decoration: ring(widget.ring, widget.ringWidth, radius + total),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final activate = widget.onActivate;
+    if (activate == null) return widget.child;
+    return Semantics(
+      container: true,
+      button: true,
+      label: widget.semanticLabel,
+      // De tekst ín het blok zegt hetzelfde als het label hierboven; zonder
+      // uitsluiten leest een schermlezer alles dubbel.
+      excludeSemantics: true,
+      child: FocusableActionDetector(
+        focusNode: _node,
+        onShowFocusHighlight: (value) {
+          if (value != _focused) setState(() => _focused = value);
+        },
+        onFocusChange: (value) {
+          if (!value && _focused) setState(() => _focused = false);
+        },
+        // Enter, numpad-Enter en spatie staan hier expliciet en niet op de
+        // standaardafspraken van het platform: Enter bleek daar niet op
+        // `ActivateIntent` te vallen, viel door naar de presentator, en deed dus
+        // "volgende dia" terwijl de focus op een blok stond. Twee proeven waren
+        // daardoor groen om de verkeerde reden — ze landden op de dia erna, die
+        // toevallig ook de doeldia was.
+        shortcuts: const {
+          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.numpadEnter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.escape): DismissIntent(),
+        },
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              activate();
+              return null;
+            },
+          ),
+          // Escape geeft de focus terug aan de dia, zodat de presentator met één
+          // toets weer gewoon bladert. Alleen bereikbaar als dit onderdeel de
+          // focus heeft, dus de gelaagde Escape van de presentator blijft heel.
+          DismissIntent: CallbackAction<DismissIntent>(
+            onInvoke: (_) {
+              _releaseFocus();
+              return null;
+            },
+          ),
+        },
+        mouseCursor: SystemMouseCursors.click,
+        child: _focused ? _ringed(widget.child) : widget.child,
+      ),
     );
   }
 }

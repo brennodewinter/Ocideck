@@ -251,6 +251,32 @@ void main() {
       }
     });
 
+    test('de focusring van een schijf past in de lucht tussen twee buren', () {
+      // De ring hangt buiten de schijf. Bij een volle ring is de lucht daar
+      // krap: twaalf schijven op een dia van 1280 stonden 98 px uit elkaar met
+      // een doorsnede van 84, en een ring van 19 px lag over de buren heen
+      // (#1162, derde beeldkeuring).
+      const side = 500.0;
+      for (var n = 2; n <= 30; n++) {
+        final gebruikt =
+            menuDiscRingWidth(side: side, n: n, maxWidth: 10) * 1.9;
+        final lucht =
+            2 * side * menuRingRadius(n) * math.sin(math.pi / n) -
+            side * menuDiscFraction(n);
+        expect(
+          gebruikt,
+          lessThanOrEqualTo(lucht),
+          reason:
+              'bij $n schijven vraagt de ring $gebruikt px terwijl er $lucht '
+              'px lucht is',
+        );
+      }
+    });
+
+    test('bij weinig schijven blijft de ring op zijn volle dikte', () {
+      expect(menuDiscRingWidth(side: 500, n: 3, maxWidth: 10), 10);
+    });
+
     test('één blok staat in het midden', () {
       expect(menuRingRadius(1), 0);
     });
