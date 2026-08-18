@@ -692,6 +692,13 @@ class _MenuDisc extends StatelessWidget {
 /// geval: in het meegeleverde LibreKAT-profiel zijn `textColor` en `accentColor`
 /// allebei `#003399`, en dát profiel staat standaard geselecteerd.
 ///
+/// Valt hij terug op de achtergrond, dan zijn er geen twee banden meer maar één
+/// band met lucht eromheen, en draagt het accent de ring alleen. De
+/// zichtbaarheid is dan die van het accent op de dia, en dáár toetst deze functie
+/// niets aan: op een thema waarvan ook de gewone tekst onleesbaar is, is de ring
+/// dat ook. Dat is bewust — een focusring kan een kapot thema niet repareren, en
+/// het contrast van het thema zelf wordt elders gemeten.
+///
 /// De eerste poging koos "de verste van de twee", op luminantieafstand. Dat is
 /// systematisch scheef: in een deugdelijk thema ligt de achtergrond per definitie
 /// aan het uiterste van het luminantiebereik — dat is wat de tekst erop leesbaar
@@ -716,7 +723,7 @@ double _colorGap(Color a, Color b) =>
     math.max((a.r - b.r).abs(), math.max((a.g - b.g).abs(), (a.b - b.b).abs()));
 
 /// Onder dit kanaalverschil doet de tekstkleur naast het accent geen werk meer
-/// als tweede band. Ruim 15% van het bereik: genoeg om een echte botsing (zoals
+/// als tweede band. 15% van het bereik: genoeg om een echte botsing (zoals
 /// LibreKAT, waar het verschil nul is) te vangen zonder een bruikbaar
 /// kleurverschil af te wijzen.
 const double _menuHaloMinGap = 0.15;
