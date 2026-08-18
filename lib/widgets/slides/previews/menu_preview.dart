@@ -2,12 +2,17 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
-/// Preview van een keuze-menudia (#1162): de blokken als raster van kaarten, in
-/// de themakleuren (achtergrond/tekst/accent uit het [ThemeProfile], nooit een
-/// eigen palet). Een blok met een doel oogt aanklikbaar met een accentrand; een
-/// blok zonder doel is een rustig tekstblok. Interactie (de sprong bij een klik)
-/// leeft in de presentator; de preview toont alleen hoe het eruitziet.
-class _MenuPreview extends StatelessWidget {
+/// Preview van een keuze-menudia (#1162): de blokken in de gekozen indeling
+/// ([MenuLayout]) — raster, onder elkaar of in een cirkel — in de themakleuren
+/// (achtergrond/tekst/accent uit het [ThemeProfile], nooit een eigen palet). Een
+/// blok met een doel oogt aanklikbaar met een accentrand en een pijl; een blok
+/// zonder doel is een rustig tekstblok. Draagt het menu categorieën, dan staat er
+/// een keuzebalk boven de blokken.
+///
+/// Interactie (de sprong bij een klik) leeft in de presentator; de preview toont
+/// hoe het eruitziet en, als de aanroeper een [onCategoryChanged] meegeeft, welke
+/// categorie open staat.
+class _MenuPreview extends StatefulWidget {
   final Slide slide;
   final double w;
   final String? projectPath;
@@ -18,6 +23,14 @@ class _MenuPreview extends StatelessWidget {
   /// doel-blokken aanklikbaar. Null = alleen tonen.
   final void Function(String anchor)? onBlockTap;
 
+  /// Welke categorie open staat. Van buiten gestuurd zodat het beamervenster
+  /// dezelfde categorie toont als het presentatorscherm.
+  final int category;
+
+  /// Gezet = de categoriebalk is aanklikbaar en meldt een wissel terug. Null =
+  /// de balk toont alleen (slidestrook, beamervenster).
+  final ValueChanged<int>? onCategoryChanged;
+
   const _MenuPreview({
     required this.slide,
     required this.w,
@@ -25,27 +38,74 @@ class _MenuPreview extends StatelessWidget {
     required this.font,
     required this.profile,
     this.onBlockTap,
+    this.category = 0,
+    this.onCategoryChanged,
   });
 
   @override
+  State<_MenuPreview> createState() => _MenuPreviewState();
+}
+
+class _MenuPreviewState extends State<_MenuPreview> {
+  /// De open categorie. Lokaal bijgehouden zodat een tik meteen zichtbaar is,
+  /// ook als de aanroeper de waarde pas een frame later terugstuurt.
+  late int _selected = widget.category;
+
+  @override
+  void didUpdateWidget(_MenuPreview old) {
+    super.didUpdateWidget(old);
+    // Van buiten gestuurde wissel (beamervenster volgt de presentator) en het
+    // wisselen van dia zelf: begin dan weer bij de eerste categorie.
+    if (widget.category != old.category) _selected = widget.category;
+    if (widget.slide.id != old.slide.id) _selected = 0;
+  }
+
+  void _select(int index) {
+    if (index == _selected) return;
+    setState(() => _selected = index);
+    widget.onCategoryChanged?.call(index);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final blocks = menuBlocksFor(slide.bullets);
-    final text = AppTheme.parseHexColor(profile.textColor);
-    final accent = AppTheme.parseHexColor(profile.accentColor);
+    final w = widget.w;
+    final categories = menuCategoriesFor(widget.slide.bullets);
+    final showTabs = menuHasCategories(categories);
+    final index = _selected.clamp(0, categories.length - 1);
+    final blocks = categories[index].blocks;
+    final text = AppTheme.parseHexColor(widget.profile.textColor);
+    final accent = AppTheme.parseHexColor(widget.profile.accentColor);
+    final hasTitle = widget.slide.title.trim().isNotEmpty;
+
+    // Het blokkenvlak krijgt de hoogte die na titel en keuzebalk overblijft, op
+    // de echte diahoogte (16:9 min de marges). Vroeger stond hier een vaste
+    // 0.46·w die mét titel niet paste, waarna de `FittedBox` de hele dia
+    // omlaagschaalde en de blokken onnodig klein werden.
+    final blocksHeight = math.max(
+      w * 0.16,
+      w * 0.4725 - (hasTitle ? w * 0.086 : 0) - (showTabs ? w * 0.062 : 0),
+    );
+
+    // De stellage houdt links en rechts een marge aan, dus het blokkenvlak is
+    // smaller dan de dia. Stond hier `w`, dan hing het vlak een halve marge uit
+    // het midden — zichtbaar als een scheve ring met een lege band ernaast
+    // (#1162, beeldkeuring).
+    final contentWidth = w - 2 * (w * 0.05);
+
     return _PreviewScaffold(
       width: w,
-      slide: slide,
-      profile: profile,
+      slide: widget.slide,
+      profile: widget.profile,
       horizontalPadding: w * 0.05,
       verticalPadding: w * 0.045,
-      background: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      background: AppTheme.parseHexColor(widget.profile.slideBackgroundColor),
       children: [
-        if (slide.title.trim().isNotEmpty) ...[
+        if (hasTitle) ...[
           _md(
             context,
-            slide.title,
+            widget.slide.title,
             _applyFont(
-              font,
+              widget.font,
               TextStyle(
                 color: text,
                 fontSize: w * 0.05,
@@ -55,21 +115,41 @@ class _MenuPreview extends StatelessWidget {
             ),
             linkColor: accent,
           ),
-          SizedBox(height: w * 0.028),
+          SizedBox(height: w * 0.014),
+        ],
+        if (showTabs) ...[
+          _MenuCategoryBar(
+            categories: categories,
+            selected: index,
+            w: w,
+            text: text,
+            accent: accent,
+            font: widget.font,
+            onSelect: widget.onCategoryChanged == null ? null : _select,
+          ),
+          SizedBox(height: w * 0.018),
         ],
         if (blocks.isNotEmpty)
+          // Alle drie de indelingen verdelen de ruimte die er is. De lijst kreeg
+          // hier even `maxHeight: infinity` om te mogen doorgroeien, maar dan
+          // ziet zijn eigen `LayoutBuilder` een oneindige hoogte, verdeelt hij
+          // niets, en krimpt de `FittedBox` van de stellage de hele dia tot een
+          // postzegel in de linkerbovenhoek (#1162, beeldkeuring). Nu de tekst
+          // meekrimpt met de regelhoogte is verdelen ook gewoon het juiste
+          // antwoord.
           SizedBox(
-            width: w,
-            height: w * 0.46,
-            child: _menuGrid(
+            width: contentWidth,
+            height: blocksHeight,
+            child: _menuBlockArea(
               context,
-              blocks,
-              w,
-              text,
-              accent,
-              projectPath,
-              font,
-              onBlockTap,
+              blocks: blocks,
+              layout: widget.slide.menuLayout,
+              w: w,
+              text: text,
+              accent: accent,
+              projectPath: widget.projectPath,
+              font: widget.font,
+              onBlockTap: widget.onBlockTap,
             ),
           ),
       ],
@@ -77,144 +157,79 @@ class _MenuPreview extends StatelessWidget {
   }
 }
 
-/// Het blokkenraster: zoveel kolommen als bij het aantal past, kaarten die de
-/// resthoogte vullen. Top-level zodat de preview-widget klein blijft.
-Widget _menuGrid(
-  BuildContext context,
-  List<MenuBlock> blocks,
-  double w,
-  Color text,
-  Color accent,
-  String? projectPath,
-  String font,
-  void Function(String anchor)? onBlockTap,
-) {
-  final n = blocks.length;
-  final cols = n <= 1
-      ? 1
-      : n <= 4
-      ? 2
-      : n <= 9
-      ? 3
-      : 4;
-  final rows = (n / cols).ceil();
-  final gap = w * 0.02;
-  return Column(
-    children: [
-      for (var r = 0; r < rows; r++) ...[
-        if (r > 0) SizedBox(height: gap),
-        Expanded(
-          child: Row(
-            children: [
-              for (var c = 0; c < cols; c++) ...[
-                if (c > 0) SizedBox(width: gap),
-                Expanded(
-                  child: (r * cols + c) < n
-                      ? _MenuBlockCard(
-                          block: blocks[r * cols + c],
-                          w: w,
-                          text: text,
-                          accent: accent,
-                          projectPath: projectPath,
-                          font: font,
-                          onTap: onBlockTap,
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ],
-    ],
-  );
-}
-
-/// Eén keuzeblok als kaart. Met afbeelding: beeld boven, label eronder. Zonder
-/// afbeelding: het label gecentreerd. De randkleur onderscheidt een blok dat
-/// ergens heen springt van een gewoon tekstblok.
-class _MenuBlockCard extends StatelessWidget {
-  final MenuBlock block;
+/// De categoriebalk: pillen waarvan er één gevuld is. Aanklikbaar zodra
+/// [onSelect] gezet is; anders alleen een aanduiding van wat er open staat.
+class _MenuCategoryBar extends StatelessWidget {
+  final List<MenuCategory> categories;
+  final int selected;
   final double w;
   final Color text;
   final Color accent;
-  final String? projectPath;
   final String font;
-  final void Function(String anchor)? onTap;
+  final ValueChanged<int>? onSelect;
 
-  const _MenuBlockCard({
-    required this.block,
+  const _MenuCategoryBar({
+    required this.categories,
+    required this.selected,
     required this.w,
     required this.text,
     required this.accent,
-    this.projectPath,
     required this.font,
-    this.onTap,
+    this.onSelect,
   });
 
   @override
   Widget build(BuildContext context) {
-    final actionable = block.hasTarget;
-    final border = actionable
-        ? accent.withValues(alpha: 0.55)
-        : text.withValues(alpha: 0.22);
-    final fill = accent.withValues(alpha: actionable ? 0.10 : 0.04);
-    // Het label moet begrensd zijn: onder een afbeelding is er weinig verticale
-    // ruimte, en een lang label liep de kaart uit (#1162, beeldkeuring). Onder een
-    // afbeelding hoogstens twee regels, een tekstblok vult de hele kaart en mag er
-    // meer; in beide gevallen breekt het af met een ellips i.p.v. over te lopen.
-    Widget labelText(int maxLines) => Padding(
-      padding: EdgeInsets.all(w * 0.02),
-      child: _md(
-        context,
-        block.label,
-        _applyFont(
+    final l10n = context.l10n;
+    return Wrap(
+      spacing: w * 0.012,
+      runSpacing: w * 0.008,
+      children: [
+        for (var i = 0; i < categories.length; i++)
+          _pill(
+            // Een naamloze eerste categorie (blokken vóór de eerste tussenkop)
+            // heeft toch een naam nodig zodra er een balk staat.
+            categories[i].isNamed ? categories[i].label : l10n.d('Algemeen'),
+            i,
+          ),
+      ],
+    );
+  }
+
+  Widget _pill(String label, int index) {
+    final on = index == selected;
+    final pill = Container(
+      padding: EdgeInsets.symmetric(horizontal: w * 0.018, vertical: w * 0.008),
+      decoration: BoxDecoration(
+        color: on ? accent.withValues(alpha: 0.16) : Colors.transparent,
+        border: Border.all(
+          color: on
+              ? accent.withValues(alpha: 0.7)
+              : text.withValues(alpha: 0.2),
+          width: w * 0.0022,
+        ),
+        borderRadius: BorderRadius.circular(w * 0.03),
+      ),
+      child: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: _applyFont(
           font,
           TextStyle(
-            color: text,
-            fontSize: w * 0.03,
-            fontWeight: FontWeight.w600,
-            height: 1.15,
+            color: on ? accent : text.withValues(alpha: 0.7),
+            fontSize: w * 0.021,
+            fontWeight: on ? FontWeight.w700 : FontWeight.w500,
+            height: 1.1,
           ),
         ),
-        linkColor: accent,
-        maxLines: maxLines,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
       ),
     );
-    final card = Container(
-      decoration: BoxDecoration(
-        color: fill,
-        border: Border.all(color: border, width: w * 0.003),
-        borderRadius: BorderRadius.circular(w * 0.014),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: block.hasImage
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _resolvedImage(
-                    context,
-                    block.imagePath,
-                    projectPath,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                labelText(2),
-              ],
-            )
-          : Center(child: labelText(5)),
-    );
-    // Aanklikbaar alleen tijdens presenteren (onTap gezet) en alleen als het blok
-    // ergens heen springt (#1162). Een tekstblok of de preview in de editor blijft
-    // gewoon een kaart.
-    if (onTap == null || !actionable) return card;
+    if (onSelect == null) return pill;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => onTap!(block.targetAnchor),
-      child: MouseRegion(cursor: SystemMouseCursors.click, child: card),
+      onTap: () => onSelect!(index),
+      child: MouseRegion(cursor: SystemMouseCursors.click, child: pill),
     );
   }
 }

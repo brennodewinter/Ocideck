@@ -1627,6 +1627,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      '«{doel}» Sup HemtIq \'echletHom tu\'lu\'be\'; cha\'taHvIS pagh qaS. latlh HemtIq \'echletHom yIwIv.',
+  'In een cirkel': '\'ID',
+  'Onder elkaar': 'tetlh',
+  'Categorie': 'Segh',
+  'Categorie toevoegen': 'Segh yIchel',
+  'Categorie opheffen (blokken blijven behouden)': 'Segh yIteq (taH blockmey)',
+  'Uitleg': 'QIjmeH mu\'mey',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'wIvmeH menu: \'uylu\'DI\' latlh \'echletHom Sup Hoch \'ay\'. Hoch \'ay\'vaD per QIjmeH mu\'mey je yIghItlh, HemtIq \'echletHom yIwIv, DaneHchugh mIllogh je. lol-lam yIwIv: beQ\'och, tetlh, \'ID ghap. cha\'taHvIS \'ay\' ghommey choHmeH Seghmey yIlo\'. HemtIq Hutlhbogh \'ay\' ghItlh nap \'oH.',
   'Hoofdstukken op nieuwe pagina': 'nav chu\'Daq Hoch \'ay\'',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'DaH nav chu\'Daq tagh Hoch \'ay\'',
@@ -1970,8 +1980,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'block tu\'lu\'be\'. wIvmeH block yIchel.',
   'Keuzemenu': 'wIvmeH menu',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'wIvmeH menu: \'uylu\'DI\' latlh \'echletHom Sup Hoch \'ay\'. Hoch \'ay\'vaD per yIghItlh, HemtIq \'echletHom yIwIv, DaneHchugh mIllogh je. HemtIq Hutlhbogh \'ay\' ghItlh nap \'oH.',
   'Hierna': 'ghIq',
   'Volgende dia': 'veb \'echletHom',
   'Sprong': 'Sup',

@@ -14,6 +14,7 @@
 
 import '../../models/deck.dart';
 import '../../models/slide.dart';
+import '../menu_blocks.dart';
 import 'markdown_to_latex.dart';
 
 /// Bouwt de Beamer-frames voor alle slides in [deck] en geeft de body-tekst
@@ -292,14 +293,28 @@ String _signOffSlide(Slide slide) {
 }
 
 String _menuSlide(Slide slide) {
-  // menu: bullets zijn links `[label](#anchor)`. itemize met hyperlink.
+  // menu: blokken zijn links `[label](#anchor)`, eventueel met uitleg. Per
+  // categorie een itemize met een vetgedrukt kopje erboven; de blokafbeelding
+  // blijft weg — op papier voegt een duimnagel per regel niets toe.
   if (slide.bullets.isEmpty) return '';
   final buf = StringBuffer();
-  buf.write('\\begin{itemize}\n');
-  for (final b in slide.bullets) {
-    buf.write('\\item ${markdownInlineToLatex(b)}\n');
+  for (final category in menuCategoriesFor(slide.bullets)) {
+    if (category.blocks.isEmpty) continue;
+    if (category.isNamed) {
+      buf.write('\\textbf{${_escapeLatex(category.label)}}\n\n');
+    }
+    buf.write('\\begin{itemize}\n');
+    for (final block in category.blocks) {
+      final link = block.hasTarget
+          ? '[${block.label}](#${block.targetAnchor})'
+          : block.label;
+      final text = block.hasDescription
+          ? '$link$kMenuDescriptionSeparator${block.description}'
+          : link;
+      buf.write('\\item ${markdownInlineToLatex(text)}\n');
+    }
+    buf.write('\\end{itemize}\n');
   }
-  buf.write('\\end{itemize}\n');
   return buf.toString();
 }
 

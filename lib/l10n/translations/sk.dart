@@ -1656,6 +1656,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok „{doel}“ odkazuje na snímku, ktorá už neexistuje; počas prezentácie sa nič nestane. Vyberte inú cieľovú snímku.',
+  'In een cirkel': 'Kruh',
+  'Onder elkaar': 'Zoznam',
+  'Categorie': 'Kategória',
+  'Categorie toevoegen': 'Pridať kategóriu',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Zrušiť kategóriu (bloky zostanú zachované)',
+  'Uitleg': 'Vysvetlenie',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie a vysvetlenie, vyberte cieľový snímok a prípadne obrázok. Zvoľte rozloženie: mriežka, zoznam alebo kruh. Pomocou kategórií počas prezentácie prepínate medzi skupinami blokov. Blok bez cieľa je bežný text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitoly na novej strane',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Každá kapitola sa teraz začína na novej strane',
@@ -2004,8 +2015,6 @@ const _dutchSourceAddSk = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Zatiaľ žiadne bloky. Pridajte blok výberu.',
   'Keuzemenu': 'Ponuka volieb',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie, vyberte cieľový snímok a prípadne obrázok. Blok bez cieľa je bežný text.',
   'Hierna': 'Potom',
   'Volgende dia': 'Ďalšia snímka',
   'Sprong': 'Skok',

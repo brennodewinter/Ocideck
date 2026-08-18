@@ -1662,6 +1662,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok „{doel}“ wskazuje slajd, który już nie istnieje; podczas prezentacji nic się nie dzieje. Wybierz inny slajd docelowy.',
+  'In een cirkel': 'Okrąg',
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Kategoria',
+  'Categorie toevoegen': 'Dodaj kategorię',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Usuń kategorię (bloki zostaną zachowane)',
+  'Uitleg': 'Opis',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Menu wyboru: każdy blok po kliknięciu przechodzi do innego slajdu. Wpisz etykietę i opis dla każdego bloku, wybierz slajd docelowy i opcjonalnie obraz. Wybierz układ: siatka, lista lub okrąg. Dzięki kategoriom podczas prezentacji przełączasz się między grupami bloków. Blok bez celu jest zwykłym tekstem.',
   'Hoofdstukken op nieuwe pagina': 'Rozdziały na nowej stronie',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Każdy rozdział zaczyna się teraz od nowej strony',
@@ -2012,8 +2023,6 @@ const _dutchSourceAddPl = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Brak bloków. Dodaj blok wyboru.',
   'Keuzemenu': 'Menu wyboru',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Menu wyboru: każdy blok po kliknięciu przechodzi do innego slajdu. Wpisz etykietę dla każdego bloku, wybierz slajd docelowy i opcjonalnie obraz. Blok bez celu jest zwykłym tekstem.',
   'Hierna': 'Następnie',
   'Volgende dia': 'Następny slajd',
   'Sprong': 'Skok',

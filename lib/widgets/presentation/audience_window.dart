@@ -72,6 +72,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   ImprovementY01Metric _improvementY01 = ImprovementY01Metric.empty;
   int _index = 0;
   int _richTextPage = 0;
+
+  /// De categorie die de presentator open heeft op een keuze-menudia (#1162);
+  /// dit venster volgt, het kiest niet zelf.
+  int _menuCategory = 0;
   int _timelineStep = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
@@ -178,6 +182,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(() {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;
+          _menuCategory = (m['menuCategory'] as num?)?.toInt() ?? 0;
           _timelineStep = (m['timelineStep'] as num?)?.toInt() ?? 0;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
@@ -423,6 +428,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     ),
                     splitRunPosition: splitRunPositionFor(_slides, _index),
                     richTextPage: _richTextPage,
+                    menuCategory: _menuCategory,
                     showRichTextPageControls: false,
                     timelineRevealedCount: _timelineRevealedFor(slide),
                     tlp: _tlp,

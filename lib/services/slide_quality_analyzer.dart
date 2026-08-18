@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
+import 'menu_blocks.dart';
 import '../models/finding_spec.dart';
 import '../models/markdown_validation.dart';
 import '../models/question.dart';
@@ -22,6 +23,7 @@ import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 
+part 'slide_quality/slide_quality_analyzer_content.dart';
 part 'slide_quality/slide_quality_analyzer_density.dart';
 
 /// Waarschuw voor een dia die niets zou tonen.
@@ -36,101 +38,6 @@ part 'slide_quality/slide_quality_analyzer_density.dart';
 /// niets te tonen, dan hoort dat gezegd te worden. Een waarschuwing en geen
 /// fout — een dia die je nog moet vullen is geen vergissing, en tijdens het
 /// schrijven mag de melding meelopen zonder je tegen te houden.
-/// Waarschuw voor vraagslides die tijdens het presenteren niet speelbaar
-/// zijn (geen geldige vraagspecificatie), vóórdat de presentator er live
-/// tegenaan loopt.
-void _checkQuestionAnswerable(
-  Slide slide,
-  int index,
-  List<SlideQualityIssue> issues,
-) {
-  if (slide.type != SlideType.question) return;
-  final spec = QuestionSpec.parse(slide.customMarkdown);
-  if (!spec.hasValidAnswerCount) {
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.questionAnswerCountHigh,
-        category: SlideQualityCategory.content,
-        severity: MarkdownValidationSeverity.error,
-        field: 'customMarkdown',
-        args: {
-          'count': '${spec.sourceAnswerCount}',
-          'maximum': '${spec.answerCountLimit}',
-        },
-      ),
-    );
-    return;
-  }
-  if (spec.isPresentable) return;
-  issues.add(
-    SlideQualityIssue(
-      slideIndex: index,
-      kind: SlideQualityIssueKind.questionNotAnswerable,
-      category: SlideQualityCategory.content,
-      severity: MarkdownValidationSeverity.warning,
-      field: 'customMarkdown',
-    ),
-  );
-}
-
-/// Waarschuw voor een `## …`-sectie in de kopkaart van een bevinding waarvan de
-/// naam geen canonieke sectie is (en ook geen herkende korte vorm — zie
-/// [FindingSpec.canonicalSectionAnchor]).
-///
-/// De kopkaart rendert alleen de vier vaste secties; een handgeschreven of
-/// geïmporteerde `## Notes` / `## References` staat wél in de `.md` maar verdwijnt
-/// uit de weergave, de presentatie én de export. Op schijf gaat er niets
-/// verloren — het bestand blijft de bron — maar een uitgeleverd pentestrapport
-/// zou de sectie stil missen. Een waarschuwing en geen fout: het bestand is niet
-/// kapot, en de auteur hoeft alleen de kop te hernoemen naar een standaardsectie.
-/// Alleen op de kop-dia (rol `header`): een detail-/bewijs-dia draagt geen
-/// kopkaart en mag vrije `##`-koppen bevatten. Gevonden bij de keuring van #1198.
-void _checkFindingSections(
-  Slide slide,
-  int index,
-  List<SlideQualityIssue> issues,
-) {
-  if (slide.type != SlideType.finding) return;
-  if (slide.findingRole != FindingRole.header) return;
-  final spec = FindingSpec.parse(slide.customMarkdown);
-  for (final title in spec.unknownSectionTitles) {
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.findingUnknownSection,
-        category: SlideQualityCategory.content,
-        severity: MarkdownValidationSeverity.warning,
-        field: 'customMarkdown',
-        args: {'section': title},
-      ),
-    );
-  }
-}
-
-void _checkChartAltText(
-  Slide slide,
-  int index,
-  List<SlideQualityIssue> issues,
-) {
-  final spec = ChartSpec.parse(slide.customMarkdown);
-  if (spec.title.trim().isNotEmpty) return;
-  if (spec.hasInlineData && spec.series.any((s) => s.name.trim().isNotEmpty)) {
-    return;
-  }
-  if (spec.source != null && spec.source!.trim().isNotEmpty) return;
-
-  issues.add(
-    SlideQualityIssue(
-      slideIndex: index,
-      kind: SlideQualityIssueKind.chartMissingDescription,
-      category: SlideQualityCategory.altText,
-      severity: MarkdownValidationSeverity.informational,
-      field: 'customMarkdown',
-    ),
-  );
-}
-
 void _checkEmptySlide(Slide slide, int index, List<SlideQualityIssue> issues) {
   if (_hasVisibleContent(slide)) return;
   issues.add(
@@ -293,6 +200,9 @@ class SlideQualityAnalyzer {
     // zijn buren, en die cache is op slide-identiteit gesleuteld. Binnen de memo
     // zou een melding blijven staan nadat de buurslide veranderde.
     _checkSplitRuns(slides, theme, font, issues);
+    // Ook deckbreed, en om dezelfde reden buiten de per-dia memo: of een sprong
+    // ergens uitkomt hangt af van de ándere dia's.
+    _checkDanglingJumps(slides, issues);
     return SlideQualityResult(issues);
   }
 

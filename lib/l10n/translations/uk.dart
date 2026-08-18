@@ -1666,6 +1666,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Перехід «{doel}» указує на слайд, якого більше немає; під час презентації нічого не відбувається. Виберіть інший цільовий слайд.',
+  'In een cirkel': 'Коло',
+  'Onder elkaar': 'Список',
+  'Categorie': 'Категорія',
+  'Categorie toevoegen': 'Додати категорію',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Прибрати категорію (блоки залишаються)',
+  'Uitleg': 'Опис',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Меню вибору: кожен блок під час натискання переходить до іншого слайда. Введіть підпис і опис для кожного блоку, виберіть цільовий слайд і за потреби зображення. Виберіть компонування: сітка, список або коло. За допомогою категорій під час презентації ви перемикаєтеся між групами блоків. Блок без цілі — це звичайний текст.',
   'Hoofdstukken op nieuwe pagina': 'Розділи з нової сторінки',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Тепер кожен розділ починається з нової сторінки',
@@ -2017,8 +2028,6 @@ const _dutchSourceAddUk = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Ще немає блоків. Додайте блок вибору.',
   'Keuzemenu': 'Меню вибору',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Меню вибору: кожен блок під час натискання переходить до іншого слайда. Введіть підпис для кожного блоку, виберіть цільовий слайд і за потреби зображення. Блок без цілі — це звичайний текст.',
   'Hierna': 'Далі',
   'Volgende dia': 'Наступний слайд',
   'Sprong': 'Перехід',

@@ -27,7 +27,7 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       );
     case SlideType.menu:
       return l10n.d(
-        'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.',
+        'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.',
       );
     case SlideType.twoBullets:
       return l10n.d(

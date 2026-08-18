@@ -136,6 +136,13 @@ extension _PresenterContent on _FullscreenPresenterState {
       ) ??
       '';
 
+  /// Een andere categorie op een keuze-menudia. Sessie-only, en meteen naar de
+  /// beamer zodat het publiek dezelfde knoppen ziet (#1162).
+  void _setMenuCategory(int index) {
+    _rebuild(() => _menuCategory = index);
+    _syncAudience();
+  }
+
   void _setRichTextPage(int page) {
     _commitActiveInk();
     _persistUserNoteFromController();

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_readiness.dart';
@@ -64,6 +65,26 @@ void main() {
       checkEnum('QuestionKind', QuestionKind.values);
       checkEnum('QuestionOnWrong', QuestionOnWrong.values);
       checkEnum('QuestionResult', QuestionResult.values);
+    });
+
+    // De keuze-menu-indeling (#1162) schrijft zijn drie waarden ook uit. Zelfde
+    // reden, zelfde vorm: een vierde indeling erbij maakt de zin stil onwaar.
+    test('de keuzemenu-indeling telt en noemt klopt', () {
+      final doc = read('docs/API_DOCUMENTATION.md');
+      final match = RegExp(r'`MenuLayout` \((\d+) values\)').firstMatch(doc);
+      expect(match, isNotNull, reason: 'de MenuLayout-telling staat er niet');
+      expect(
+        int.parse(match!.group(1)!),
+        MenuLayout.values.length,
+        reason: 'werk de MenuLayout-telling in API_DOCUMENTATION.md bij',
+      );
+      for (final layout in MenuLayout.values) {
+        expect(
+          doc,
+          contains(layout.name),
+          reason: 'MenuLayout.${layout.name} ontbreekt in API_DOCUMENTATION.md',
+        );
+      }
     });
 
     // Dezelfde vorm, dezelfde reden: de exportstatus kreeg er op 2026-07-22 een

@@ -1,0 +1,38 @@
+{
+  "additions": {
+    "In een cirkel": {
+      "en": "Circle",
+      "it": "Cerchio",
+      "de": "Kreis",
+      "fr": "Cercle",
+      "es": "Círculo",
+      "fy": "Sirkel",
+      "pap": "Sirkel",
+      "la": "Circulus",
+      "id": "Lingkaran",
+      "pl": "Okrąg",
+      "uk": "Коло",
+      "gsw": "Chreis",
+      "el": "Κύκλος",
+      "da": "Cirkel",
+      "sv": "Cirkel",
+      "hr": "Krug",
+      "cs": "Kruh",
+      "fi": "Ympyrä",
+      "bg": "Кръг",
+      "lv": "Aplis",
+      "lt": "Apskritimas",
+      "mt": "Ċirku",
+      "et": "Ring",
+      "hu": "Kör",
+      "ga": "Ciorcal",
+      "pt": "Círculo",
+      "ro": "Cerc",
+      "sl": "Krog",
+      "sk": "Kruh",
+      "tlh": "'ID",
+      "tr": "Daire"
+    }
+  },
+  "unchanged": []
+}

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -47,7 +48,8 @@ void main() {
       expect(
         html,
         contains(
-          '<div class="menu-grid" style="grid-template-columns:repeat(2,1fr)">',
+          '<div class="menu-grid" style="grid-template-columns:repeat(2,1fr);'
+          'grid-auto-rows:180px">',
         ),
       );
       // The blocks are no longer emitted as raw `- [..](#..)` bullet markdown.
@@ -64,7 +66,7 @@ void main() {
           html,
           contains(
             '<a class="menu-card" href="#prijzen" '
-            'style="border-color:#0033998c;background:#0033991a">',
+            'style="border-color:#0033998c;background:#0033991f">',
           ),
         );
         expect(html, contains('<div class="menu-label">Prijzen</div>'));
@@ -116,7 +118,7 @@ void main() {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(_menuDeckMarkdown());
       expect(html, contains('.slide .menu-card'));
-      expect(html, contains('grid-auto-rows:200px'));
+      expect(html, contains('grid-auto-rows:180px'));
     });
 
     test('a block label is HTML-escaped, never injected as markup', () async {
@@ -141,6 +143,103 @@ void main() {
         ),
       );
       expect(html, isNot(contains('<img src=x onerror')));
+    });
+
+    /// Een menu met twee categorieën en een uitleg per blok, in [layout].
+    String categorisedDeck(MenuLayout layout) {
+      final md = MarkdownService();
+      return md.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.menu).copyWith(
+              title: 'Kies',
+              menuLayout: layout,
+              bullets: [
+                groupHeadingBullet('Producten'),
+                '[Prijzen](#prijzen) — Wat het kost',
+                groupHeadingBullet('Over ons'),
+                '[Team](#team)',
+              ],
+            ),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Prijzen', anchor: 'prijzen', bullets: ['x']),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Team', anchor: 'team', bullets: ['y']),
+          ],
+        ),
+        forExport: true,
+      );
+    }
+
+    test('categories become headings with their own blocks beneath', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.grid));
+
+      // Beide categorieën staan er — een export heeft geen presentator die
+      // tabbladen indrukt, dus alles is zichtbaar.
+      expect(html, contains('class="menu-category"'));
+      expect(html, contains('>Producten</div>'));
+      expect(html, contains('>Over ons</div>'));
+      expect(html, contains('<div class="menu-desc">Wat het kost</div>'));
+      // De kop zelf mag nooit als blok meeliften.
+      expect(html, isNot(contains('menu-label">\u{E010}')));
+    });
+
+    test('the "onder elkaar" layout renders as a single-column stack', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.list));
+      // De rijhoogte komt uit het hoogtebudget van de dia, gedeeld door de
+      // categorieën: twee categorieën, dus 280 px per vlak.
+      expect(
+        html,
+        contains('<div class="menu-grid menu-stack" style="grid-auto-rows:'),
+      );
+      // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
+      expect(html, isNot(contains('class="menu-ring"')));
+    });
+
+    test(
+      'a slide fuller than fits counts the rest instead of shrinking',
+      () async {
+        // Zestien blokken onder elkaar pasten niet in het hoogtebudget; de
+        // ondergrens per rij won het van het budget en de dia werd twee schermen
+        // hoog. Nu staat er wat past, plus een telblok (#1162, beeldkeuring).
+        final md = MarkdownService();
+        final html = await MarpHtmlService(loadAsset: _diskLoader).build(
+          md.generateDeck(
+            Deck(
+              title: 'Demo',
+              slides: [
+                Slide.create(SlideType.menu).copyWith(
+                  title: 'Kies',
+                  menuLayout: MenuLayout.list,
+                  bullets: [for (var i = 0; i < 16; i++) '[Blok $i](#doel$i)'],
+                ),
+              ],
+            ),
+            forExport: true,
+          ),
+        );
+
+        expect(html, contains('>Blok 0<'));
+        expect(html, isNot(contains('>Blok 15<')));
+        // Acht rijen van 56 px plus zeven tussenruimtes past in het budget van
+        // 560; zeven blokken en een telblok voor de resterende negen.
+        expect(html, contains('>+9<'));
+      },
+    );
+
+    test('the circle layout places each disc without script', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.circle));
+      // Twee categorieën delen de hoogte, dus elke ring krijgt de halve maat.
+      expect(html, contains('<div class="menu-ring" style="max-width:280px">'));
+      // Elke schijf draagt zijn eigen plek als percentage.
+      expect(html, contains('class="menu-disc" href="#prijzen" style="left:'));
+      expect(html, contains('.slide .menu-ring{position:relative'));
     });
   });
 }

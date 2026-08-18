@@ -605,7 +605,7 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 | Vraag | `question` | — |
 | Tijdlijn | `timeline` | — |
 | Scorekaart | `scorecard` | — |
-| Menu (#1162) | `menu` | — (blokken zijn link-opsommingen; zonder het token wordt het als gewone `bullets` teruggelezen) |
+| Menu (#1162) | `menu` (+ optioneel `menu-list` / `menu-circle`) | — (blokken zijn link-opsommingen; zonder het token wordt het als gewone `bullets` teruggelezen) |
 | Assetoverzicht | `assets` | — |
 | Ontdekkingen | `discoveries` | — |
 | Bevinding | `finding` | — |
@@ -1360,6 +1360,72 @@ kop is de titel:
   als decimaalteken wanneer eenduidig (één komma, geen punt); duizendtalscheidingen
   worden geweigerd in plaats van geraden. Een rij die helemaal leeg is, wordt aan
   beide kanten weggelaten, zodat schrijven en lezen overeenkomen.
+
+**Menu** (`menu`) — een keuzemenu (#1162): een optionele `# titel` plus een gewone
+Markdown-lijst, waarbij elk lijstitem één *blok* is. Een blok dat springt is een link
+naar het anker van de doelslide, een blok zonder link is een gewoon tekstblok, en
+beide mogen een uitleg van één regel en een kleine afbeelding dragen:
+
+```markdown
+<!-- _class: menu menu-list -->
+# Waar wil je heen?
+
+- ␀Producten
+- [Prijzen](#prijzen) — Wat het kost, per maand ![](mem:9f2a1c)
+- [Demo](#demo) — Tien minuten meekijken
+- ␀Over ons
+- [Team](#team)
+- Alleen tekst, geen sprong
+```
+
+- Het **linkdoel** is het `ocideck_slide_anchor` van de doelslide (§8), nooit een
+  kop-id. Omdat het anker bij de eerste toewijzing bevriest, blijft het blok naar
+  die slide wijzen als je hem hernoemt of het deck herordent; een doel dat niet
+  meer bestaat springt gewoon niet meer.
+- De **uitleg** is wat er na het label komt, gescheiden door een gedachtestreepje
+  met spaties eromheen (` — `). Dat is wat OciDeck schrijft. Bij het lezen neemt
+  een blok **met** een link alles binnen de `[…]` als label en de hele staart als
+  uitleg, dus een gewoon `-`, een half streepje of een `:` vóór die staart telt
+  net zo goed — dat is wat een mens typt — en een streepje ín het label kan geen
+  kwaad. Een blok **zonder** link heeft geen haken om op af te gaan en splitst
+  alleen op het gedachtestreepje met spaties; een label waar er zelf een in staat
+  valt daardoor in de twee velden uiteen. Er gaat nooit tekst verloren, en de
+  tweede opslag is gelijk aan de eerste, dus de rondgang komt in beide gevallen
+  tot rust — maar hij geeft niet altijd terug wat je typte. Een blok *met* een
+  link normaliseert zijn staart: `[Prijzen](#prijzen): wat het kost` en
+  `[Prijzen](#prijzen) (nieuw)` komen terug als `[Prijzen](#prijzen) — wat het
+  kost` en `[Prijzen](#prijzen) — (nieuw)`. Alleen een blok *zonder* link schrijft
+  byte voor byte hetzelfde terug.
+- De **afbeelding** is een afsluitende `![](pad)`, hetzelfde `mem:`- of
+  deck-relatieve pad als bij elke andere slide-afbeelding. Hij wordt als klein
+  vierkantje naast de tekst getekend *(de blokafbeelding ging op 2026-08-18 van
+  een vullende achtergrond naar een duimnagel naast het label; het bestandsformaat
+  veranderde niet)*.
+- **Categorieën** zijn de groepskoppen uit de opsommingsparagraaf hierboven (`␀`
+  is de `U+E010`-markering): een tussenkop opent een categorie en de blokken
+  erna horen erbij. Blokken vóór de eerste tussenkop vormen een naamloze eerste
+  groep. Er is geen tweede lijst — de categorieën *zijn* die bullets, dus
+  herordenen, verwijderen en de rondgang lopen allemaal over één lijst. Tijdens
+  het presenteren wisselt een categoriebalk ertussen; in de HTML-export worden het
+  kopjes met hun blokken eronder, en in de LaTeX-export (Beamer) een vetgedrukte
+  regel boven een `itemize`.
+
+De **indeling** is een presentatie-optie en geen inhoud, dus hij rijdt — net als bij
+de tijdlijn hierboven — mee als extra `_class`-token naast het basistoken `menu`:
+
+- `menu-list` — één breed blok per regel, onder elkaar.
+- `menu-circle` — de blokken in een ring rond het midden van de slide.
+- afwezig, of `menu-grid` — het standaardraster van kaarten. OciDeck schrijft
+  **geen** token voor het raster, zodat een menuslide van vóór de indelingen geen
+  byte verandert; `menu-grid` wordt bij het lezen wél geaccepteerd, zodat een
+  handgeschreven deck de standaard hardop mag noemen — al haalt OciDeck hem er
+  bij de eerstvolgende opslag weer uit, want het raster schrijft geen token. Een onbekend `menu-…`-token —
+  uit een nieuwere versie bijvoorbeeld — tekent gewoon het raster in plaats van te
+  stranden, al waarschuwt de structuurcontrole (§10) wel dat ze het token niet kent.
+
+*(Toegevoegd 2026-08-18: uitleg, categorieën en de twee indelingstokens. Daarvóór
+was een menuslide een raster van link-opsommingen met een optionele afbeelding en
+verder niets; zo'n bestand leest ongewijzigd terug.)*
 
 **Assetoverzicht** (`assets`) — het aanvalsoppervlak opgesplitst in de soorten
 object waaruit het bestaat. Opgeslagen als een normale Markdown-tabel, zoals `scorecard`:
@@ -2923,7 +2989,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:` of `advance:`. |
 | **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet gesloten). |
 | **`_class`** | fout | Misvormde `<!-- _class: ... -->`. |
-| **`_class`** | waarschuwing | Onbekend token in `_class` (bekend: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
+| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder.)* |
 | **Slide-metadata** | fout | Onbekende `<!-- tlp: ... -->`, niet-numerieke `<!-- advance: ... -->`, of ongeldige `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Twee kolommen** | fout | Ongeldige base64/JSON in een verouderd `ocideck_two_bullets_*`-commentaar (vervallen; §5). |
 | **Beelden** | fout | `![...](...` zonder afsluitende `)`. |
@@ -2936,6 +3002,12 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **`table`-slide** | waarschuwing | Geen tabelrijen. |
 | **`table`-slide** | fout | Geen scheidingsrij (`\| --- \|`) of de tweede rij is geen geldig GFM-scheidingsteken. |
 | **HTML** | fout | Ongebalanceerde `<div>`/`</div>` binnen een slide. |
+
+> `table-overdue` (§4) is een token dat OciDeck wél **schrijft** maar dat niet in
+> de woordenlijst van de controle staat, dus de structuurcontrole waarschuwt over
+> een slide die de app zelf heeft gemaakt. Vastgesteld 2026-08-18; het is een gat
+> in `markdown_validator_vocabulary.dart`, niet in het bestandsformaat — het token
+> werkt gewoon.
 
 Implementatie: `lib/services/markdown_validator.dart`; tests:
 `test/markdown_validator_test.dart`. Zie ook [`USER_GUIDE.md`](USER_GUIDE.md)

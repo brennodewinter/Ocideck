@@ -92,6 +92,60 @@ Future<void> _waitForImages(WidgetTester tester) async {
 }
 
 void main() {
+  // #1162 (beeldkeuring): de plaatshouder voor een ontbrekende afbeelding stond
+  // op vaste lichtgrijze kleuren. Op een donkere dia was dat een fel blok midden
+  // in het beeld — de zesde ontsnappingsroute langs de themaregel. Hij hoort met
+  // de dia mee te kleuren, en dat raakt élk diatype met een afbeelding.
+  testWidgets('de plaatshouder van een ontbrekende afbeelding volgt het thema', (
+    tester,
+  ) async {
+    Future<Color> vlakBij(ThemeProfile profile) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 640,
+                height: 360,
+                child: SlidePreviewWidget(
+                  slide: Slide.create(
+                    SlideType.image,
+                  ).copyWith(title: 'Beeld', imagePath: 'mem:bestaat-niet'),
+                  themeProfile: profile,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      // Het vlak van de plaatshouder: de ColoredBox die de placeholder tekent.
+      final box = tester
+          .widgetList<ColoredBox>(find.byType(ColoredBox))
+          .lastWhere((b) => b.color.a > 0);
+      return box.color;
+    }
+
+    final licht = await vlakBij(const ThemeProfile());
+    final donker = await vlakBij(
+      const ThemeProfile(slideBackgroundColor: '#101418', textColor: '#F2F4F7'),
+    );
+
+    // Op een donkere dia hoort het vlak donker te zijn, niet lichtgrijs.
+    expect(
+      donker.computeLuminance(),
+      lessThan(licht.computeLuminance()),
+      reason:
+          'het vlak is even licht op een donker thema als op een licht thema '
+          '(donker ${donker.computeLuminance()}, licht ${licht.computeLuminance()})',
+    );
+    expect(
+      donker.computeLuminance(),
+      lessThan(0.2),
+      reason: 'op een donkere dia hoort de plaatshouder donker te zijn',
+    );
+  });
+
   testWidgets('a missing small logo does not overflow its bounds', (
     tester,
   ) async {

@@ -90,6 +90,65 @@ in Dutch, and it keeps growing on `main` between releases.
   Eerder reageerde elk venster alleen op zijn eigen aanwijzer; nu volgt het
   publieksvenster de presentator zoals het al een groot mermaid-diagram volgde.
 
+- feat(keuzemenu): het keuzemenu-diatype krijgt drie indelingen, categorieën en
+  een uitleg per blok (#1162). **Indeling** staat bovenaan de menu-editor en
+  biedt dezelfde blokken in drie vormen: *Raster* (het bekende kaartenraster, en
+  nog steeds de standaard), *Onder elkaar* (één breed blok per regel) en *In een
+  cirkel* (de blokken in een ring om het midden). Het is een presentatiekeuze,
+  geen inhoud — omschakelen herschikt en verandert niets aan wat je typte. Met
+  **Categorie toevoegen** deel je een lang menu op in groepen; tijdens het
+  presenteren staat er dan een balk met categoriepillen boven de blokken en
+  volgt het beamervenster de keuze van de presentator. De eerste keer krijgen de
+  blokken die er al stonden de naam *Algemeen*, zodat de balk niet met een
+  naamloze groep begint, en een categorie opheffen behoudt de blokken — die gaan
+  naar de categorie ernaast. Per blok is er een veld **Uitleg** van één regel dat
+  onder het label komt te staan. Alles rijdt mee op wat het bestandsformaat al
+  had: de indeling als extra `_class`-token (`menu-list`/`menu-circle`; het
+  raster schrijft geen token, dus een bestaand menu verandert geen byte), de
+  uitleg achter een gedachtestreepje in dezelfde link-opsomming, en de
+  categorieën op de tussenkoppen die de opsommingsslides al gebruikten. De
+  HTML-export tekent dezelfde drie indelingen en zet categorieën als kopjes met
+  hun blokken eronder — geen tabbladen, want een geëxporteerde pagina heeft geen
+  presentator die erop drukt. De LaTeX-export schrijft per categorie een lijst
+  met een vetgedrukt kopje.
+
+- feat(keuzemenu): een menu dat voller is dan er leesbaar past, toont wat er past
+  en telt de rest in een blokje **+n** (#1162). Elke indeling houdt daarmee een
+  leesbare lettergrootte; eerder werden zestien blokken onder elkaar geperst tot
+  een letter van vier pixels — de dia liep niet over en geen enkele test klaagde,
+  maar er stond een rij streepjes in plaats van een menu. Het telblok is meteen
+  het teken dat het menu te vol is voor deze vorm: het raster kan er de meeste
+  kwijt, en categorieën delen een lang menu op. In het bestand verandert er
+  niets. De HTML-export doet hetzelfde in plaats van de dia twee schermen hoog te
+  maken.
+
+- feat(kwaliteit): meld een sprong die nergens meer uitkomt (#1162). Wijst een
+  keuzemenublok — of de sprong-uit van een dia — naar een anker dat geen enkele
+  dia meer draagt, dan valt de presentator stil terug op de gewone volgorde: de
+  knop doet niets, en dat merkte je pas op het podium. De kwaliteitscontrole
+  noemt nu het label van het blok en vraagt om een andere doeldia.
+
+- fix(thema): de plaatshouder voor een ontbrekende of geblokkeerde afbeelding
+  volgt het thema van de dia (#1162, beeldkeuring). Alle drie de plaatshouders in
+  de renderer stonden op vaste lichtgrijze kleuren — keurig gewogen tegen een
+  witte dia, maar op een donker thema een fel blok midden in het beeld. Ze mengen
+  hun vlak, tekst en pictogram nu uit de tekst- en achtergrondkleur van de dia,
+  met dezelfde contrastverhoudingen als voorheen. Dit raakt elk diatype met een
+  afbeelding, niet alleen het keuzemenu.
+
+- fix(bestandsformaat): een tabeldia met "verlopen datums markeren" verloor zijn
+  typetoken bij het opslaan (#1162, onderweg gevonden). `table-overdue` stond
+  niet in de woordenlijst van de structuurcontrole, dus waarschuwde OciDeck over
+  een dia die het zelf had geschreven — en achter die waarschuwing zat een
+  ernstiger fout: de lezer filterde het token ook niet weg, waardoor het in de
+  vrije klasse van de dia belandde. Die vervangt het typetoken bij het schrijven,
+  dus `table table-overdue` werd na één keer opslaan `table-overdue
+  table-overdue`, groeide daarna elke keer met één token, en `table` verdween: de
+  dia las niet meer terug als tabel. Lezer en schrijver delen nu één lijst, en
+  een proef slaat drie keer achter elkaar op en eist dat elke `_class`-regel
+  identiek terugkomt. `image-title-above` ontbrak op dezelfde manier in de
+  woordenlijst en is meegenomen.
+
 - feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
   afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
   profiel. Profielkaarten tonen het logo wanneer dat is ingesteld. Alle
@@ -100,6 +159,16 @@ in Dutch, and it keeps growing on `main` between releases.
   tekst- en achtergrondkleur voor beide banden, logomaat, logopositie en
   paginanummering in voorbeeld, editor en HTML/print.
   De ruwe bron- en presentatiebewerker blijven sober.
+
+### Changed
+
+- keuzemenu: de afbeelding van een menublok staat nu klein náást de tekst
+  in plaats van als vullende achtergrond met het label eronder (#1162). Zo is er
+  op één kaart plaats voor het label, de uitleg en het plaatje tegelijk, en
+  blijft de tekst leesbaar op een blok dat door de indeling smaller is geworden.
+  Dat geldt op elk oppervlak: editor-voorvertoning, slidestrook, presentator,
+  beamer, PDF en de HTML-export. Aan het bestand verandert niets — het is
+  dezelfde `![](…)` in dezelfde opsomming.
 
 ### Fixed
 

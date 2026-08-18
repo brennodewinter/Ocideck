@@ -396,23 +396,20 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
       detail = l10n.d('Deze URL is door de beveiliging geweigerd.');
   }
 
+  final tint = _placeholderTint(context);
   return Container(
-    color: AppTheme.slideRuleSoft,
+    color: tint.fill,
     padding: const EdgeInsets.all(16),
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.cloud_off_outlined,
-            color: AppTheme.slideInkSoft,
-            size: 32,
-          ),
+          Icon(Icons.cloud_off_outlined, color: tint.icon, size: 32),
           const SizedBox(height: 8),
           Text(
             title,
             style: TextStyle(
-              color: AppTheme.slideInkMuted,
+              color: tint.text,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -422,14 +419,14 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
             const SizedBox(height: 4),
             Text(
               detail,
-              style: TextStyle(color: AppTheme.slideInkSoft, fontSize: 11),
+              style: TextStyle(color: tint.icon, fontSize: 11),
               textAlign: TextAlign.center,
             ),
           ],
           const SizedBox(height: 4),
           Text(
             url,
-            style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
+            style: TextStyle(color: tint.text, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -475,18 +472,16 @@ Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
   if (SlideLinkScope.mediaRedactedOf(context)) {
     return _redactedMediaPlaceholder(context);
   }
+  final tint = _placeholderTint(context);
   return Container(
-    color: AppTheme.slideRuleSoft,
+    color: tint.fill,
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppTheme.slideInkSoft, size: 32),
+          Icon(icon, color: tint.icon, size: 32),
           const SizedBox(height: 6),
-          Text(
-            label,
-            style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 12),
-          ),
+          Text(label, style: TextStyle(color: tint.text, fontSize: 12)),
         ],
       ),
     ),
@@ -583,6 +578,30 @@ Widget _redactedMediaPlaceholder(BuildContext context) {
   );
 }
 
+/// De kleuren van een plaatshouder, gemengd uit de kleuren van déze dia.
+///
+/// De drie plaatshouders in dit bestand stonden op `slideRuleSoft` met
+/// `slideInkMuted`/`slideInkSoft` erop: keurig gewogen tegen een wítte dia
+/// (#780), maar op een donker thema een fel lichtgrijs blok midden in het beeld
+/// (#1162, beeldkeuring). De verhoudingen blijven wat ze waren — vlak dicht bij
+/// de achtergrond, tekst goed leesbaar, pictogram iets zachter — maar nu gemengd
+/// uit tekst- en achtergrondkleur, dus kloppen ze op elk profiel.
+///
+/// De alfa's zijn gekozen op de oude, witte referentie: 0,12 geeft daar bijna
+/// exact `slideRuleSoft`, 0,78 haalt ruim de 4,5:1 die het bijschrift nodig
+/// heeft, en 0,5 de 3:1 voor een grafisch object (WCAG 1.4.11). Omdat ze tegen
+/// de eigen achtergrond mengen, gelden diezelfde verhoudingen op een donkere dia.
+({Color fill, Color text, Color icon}) _placeholderTint(BuildContext context) {
+  final ink = SlideLinkScope.slideTextOf(context);
+  final ground = SlideLinkScope.slideBackgroundOf(context);
+  final fill = Color.alphaBlend(ink.withValues(alpha: 0.12), ground);
+  return (
+    fill: fill,
+    text: Color.alphaBlend(ink.withValues(alpha: 0.78), fill),
+    icon: Color.alphaBlend(ink.withValues(alpha: 0.5), fill),
+  );
+}
+
 Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
   if (reason == ImagePlaceholderReason.redacted) {
     return _redactedMediaPlaceholder(context);
@@ -613,38 +632,38 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
     ),
   };
 
-  // De drie plaatshouders in dit bestand vullen zich met `slideRuleSoft` en
-  // zetten er tekst op. Die tekst stond op `slideInkFaint`: 4,4:1 op wit, maar
-  // **2,08:1** op deze eigen tint (#780) — en dit is geen decoratie. "Bestand
-  // niet gevonden", "Online media staat uit" en de URL erbij zijn het enige
-  // wat vertelt waaróm er een grijs vlak op de dia staat, en ze reizen mee de
-  // export in. Tekst dus op `slideInkMuted` (6,15:1), pictogram op
-  // `slideInkSoft` (3,86:1 — grafisch object, WCAG 1.4.11).
+  // Zie [_placeholderTint]: het bijschrift is geen decoratie maar het enige wat
+  // vertelt waaróm er een vlak op de dia staat, dus het haalt de contrastvloer.
+  final tint = _placeholderTint(context);
   return ColoredBox(
-    color: AppTheme.slideRuleSoft,
+    color: tint.fill,
     child: LayoutBuilder(
       builder: (context, constraints) {
         final shortestSide = constraints.biggest.shortestSide;
         if (shortestSide < 48) {
           return Center(
-            child: Icon(
-              icon,
-              color: AppTheme.slideInkSoft,
-              size: shortestSide * 0.65,
-            ),
+            child: Icon(icon, color: tint.icon, size: shortestSide * 0.65),
           );
         }
 
+        // Pictogram + tekst vragen samen zo'n 50 tot 60 pixels. Net boven de
+        // drempel hierboven is dat meer dan er is — een `Flexible` laat het
+        // bijschrift dan inbinden in plaats van de kolom te laten overlopen
+        // (gezien bij de kleine blokafbeelding van een keuzemenu, #1162).
         return Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: AppTheme.slideInkSoft, size: 24),
+              Icon(icon, color: tint.icon, size: 24),
               const SizedBox(height: 4),
-              Text(
-                label,
-                style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
-                textAlign: TextAlign.center,
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(color: tint.text, fontSize: 10),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

@@ -675,6 +675,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'De sprong "{doel}" wiist nei in dia dy\'t net mear bestiet; ûnder it presintearjen bart der neat. Kies in oare doeldia.',
+  'In een cirkel': 'Sirkel',
+  'Onder elkaar': 'Ûnder inoar',
+  'Categorie': 'Kategory',
+  'Categorie toevoegen': 'Kategory tafoegje',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Kategory opheffe (blokken bliuwe bewarre)',
+  'Uitleg': 'Útlis',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'In karmenu: elk blok springt by it oanklikken nei in oare dia. Typ per blok in label en in útlis, kies de doeldia en eventueel in ôfbylding. Kies de yndieling: raster, ûnder inoar of yn in sirkel. Mei kategoryen wikselje jo ûnder it presintearjen tusken groepen blokken. In blok sûnder doel is gewoane tekst.',
   'Hoofdstukken op nieuwe pagina': 'Haadstikken op nije side',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Elk haadstik begjint no op in nije side',
@@ -1025,8 +1036,6 @@ const _dutchSourceAddFy = {
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Noch gjin blokken. Foegje in karblok ta.',
   'Keuzemenu': 'Karmenu',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'In karmenu: elk blok springt by it oanklikken nei in oare dia. Typ per blok in label, kies de doeldia en eventueel in ôfbylding. In blok sûnder doel is gewoane tekst.',
   'Hierna': 'Dêrnei',
   'Volgende dia': 'Folgjende dia',
   'Sprong': 'Sprong',

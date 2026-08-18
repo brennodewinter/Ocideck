@@ -1657,6 +1657,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Šuolis „{doel}“ nurodo į skaidrę, kurios nebėra; pristatymo metu nieko neįvyksta. Pasirinkite kitą paskirties skaidrę.',
+  'In een cirkel': 'Apskritimas',
+  'Onder elkaar': 'Sąrašas',
+  'Categorie': 'Kategorija',
+  'Categorie toevoegen': 'Pridėti kategoriją',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Pašalinti kategoriją (blokai išliks)',
+  'Uitleg': 'Aprašymas',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Pasirinkimo meniu: kiekvienas blokas spustelėjus perkelia į kitą skaidrę. Kiekvienam blokui įveskite etiketę ir aprašymą, pasirinkite paskirties skaidrę ir, jei norite, paveikslėlį. Pasirinkite išdėstymą: tinklelis, sąrašas arba apskritimas. Naudodami kategorijas pristatymo metu perjungiate blokų grupes. Blokas be paskirties yra paprastas tekstas.',
   'Hoofdstukken op nieuwe pagina': 'Skyriai naujame puslapyje',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Kiekvienas skyrius dabar prasideda naujame puslapyje',
@@ -2005,8 +2016,6 @@ const _dutchSourceAddLt = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Kol kas nėra blokų. Pridėkite pasirinkimo bloką.',
   'Keuzemenu': 'Pasirinkimo meniu',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Pasirinkimo meniu: kiekvienas blokas spustelėjus perkelia į kitą skaidrę. Kiekvienam blokui įveskite etiketę, pasirinkite paskirties skaidrę ir, jei norite, paveikslėlį. Blokas be paskirties yra paprastas tekstas.',
   'Hierna': 'Toliau',
   'Volgende dia': 'Kita skaidrė',
   'Sprong': 'Šuolis',

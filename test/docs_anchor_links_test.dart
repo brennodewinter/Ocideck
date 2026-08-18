@@ -77,6 +77,67 @@ void main() {
     expect(bestanden.length, greaterThan(20));
   });
 
+  /// Wat er in een codeblok staat is een *voorbeeld*, geen verwijzing.
+  /// FILE_FORMAT toont bij het keuze-menu (#1162) de echte bulletvorm —
+  /// `[Prijzen](#prijzen)` — en dat anker is een dia in het voorbeelddeck, niet
+  /// een kop in dit document. Een gate die daarover klaagt dwingt de
+  /// documentatie om de syntaxis te omschrijven in plaats van te tonen, en dat
+  /// is precies verkeerd om.
+  ///
+  /// Simpel heen-en-weer op elke regel die met ``` begint werkt hier niet: deze
+  /// documentatie nest codeblokken (een ````markdown-blok met een ```chart-blok
+  /// erin) en heeft alinea's die met inline code openen (`` ```cockpit`` ``).
+  /// Daarom de CommonMark-regels: de infostring van een openingshek bevat geen
+  /// backtick, en alleen een hek zónder infostring dat minstens even lang is
+  /// sluit het blok.
+  ///
+  /// Alleen een hek op kolom 0 telt. Een ingesprongen hek zit in een lijstitem —
+  /// zoals de recepten in de CHANGELOG — en die staan niet allemaal netjes in
+  /// paren; ze meetellen zou daar een half document aan het oog onttrekken, en
+  /// een gate die te weinig ziet is erger dan een die te veel ziet.
+  final hekRegel = RegExp(r'^(`{3,})([^`]*)$');
+
+  String zonderCodeblokken(String tekst) {
+    final uit = StringBuffer();
+    var open = 0; // 0 = geen blok open, anders de lengte van het openingshek.
+    for (final regel in tekst.split('\n')) {
+      final hek = hekRegel.firstMatch(regel);
+      if (hek != null) {
+        final lengte = hek.group(1)!.length;
+        final info = hek.group(2)!.trim();
+        if (open == 0) {
+          open = lengte;
+          uit.writeln();
+          continue;
+        }
+        if (info.isEmpty && lengte >= open) {
+          open = 0;
+          uit.writeln();
+          continue;
+        }
+      }
+      // De regel blijft staan (leeg) zodat regelnummers niet verschuiven.
+      uit.writeln(open == 0 ? regel : '');
+    }
+    return uit.toString();
+  }
+
+  /// Dezelfde redenering als voor codeblokken, maar dan voor `code-spans` in
+  /// een lopende zin: `[Prijzen](#prijzen)` tússen backticks is een voorbeeld
+  /// van syntaxis, en Markdown maakt er zelf ook geen link van. De span wordt
+  /// door blanco's vervangen zodat regel- en kolomnummers niet verschuiven.
+  /// `dotAll`, want een span mag over een regeleinde heen lopen — in deze
+  /// documenten is dat eerder regel dan uitzondering, omdat de tekst op tachtig
+  /// tekens wordt afgebroken.
+  final codeSpan = RegExp(r'(`+)(?:(?!\1).)*?\1', dotAll: true);
+  final nietRegeleinde = RegExp(r'[^\n]');
+
+  String zonderCodeSpans(String tekst) => tekst.replaceAllMapped(
+    codeSpan,
+    // Regeleinden blijven staan zodat regelnummers niet verschuiven.
+    (m) => m.group(0)!.replaceAll(nietRegeleinde, ' '),
+  );
+
   test('elke link naar een kop komt uit bij een bestaande kop', () {
     // `](pad.md#anker)` en `](#anker)`. Absolute URL's blijven buiten schot:
     // die wijzen naar iets waar deze repo niets over kan zeggen.
@@ -84,7 +145,9 @@ void main() {
     final klachten = <String>[];
 
     for (final bestand in bestanden) {
-      final tekst = bestand.readAsStringSync();
+      final tekst = zonderCodeSpans(
+        zonderCodeblokken(bestand.readAsStringSync()),
+      );
       final hier = p.relative(bestand.path, from: wortel.path);
 
       for (final m in patroon.allMatches(tekst)) {

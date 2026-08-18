@@ -1651,6 +1651,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok »{doel}« kaže na diapozitiv, ki ne obstaja več; med predstavitvijo se ne zgodi nič. Izberite drug ciljni diapozitiv.',
+  'In een cirkel': 'Krog',
+  'Onder elkaar': 'Seznam',
+  'Categorie': 'Kategorija',
+  'Categorie toevoegen': 'Dodaj kategorijo',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Odstrani kategorijo (bloki ostanejo)',
+  'Uitleg': 'Opis',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Izbirni meni: vsak blok ob kliku preskoči na drug diapozitiv. Za vsak blok vnesite oznako in opis, izberite ciljni diapozitiv in po želji sliko. Izberite postavitev: mreža, seznam ali krog. S kategorijami med predstavitvijo preklapljate med skupinami blokov. Blok brez cilja je navadno besedilo.',
   'Hoofdstukken op nieuwe pagina': 'Poglavja na novi strani',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Vsako poglavje se zdaj začne na novi strani',
@@ -1998,8 +2009,6 @@ const _dutchSourceAddSl = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Blokov še ni. Dodajte blok izbire.',
   'Keuzemenu': 'Izbirni meni',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Izbirni meni: vsak blok ob kliku preskoči na drug diapozitiv. Za vsak blok vnesite oznako, izberite ciljni diapozitiv in po želji sliko. Blok brez cilja je navadno besedilo.',
   'Hierna': 'Nato',
   'Volgende dia': 'Naslednji diapozitiv',
   'Sprong': 'Skok',

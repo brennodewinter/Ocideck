@@ -660,6 +660,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int? _lastSentBlank;
   int? _lastSentRichTextPage;
   int? _lastSentTimelineStep;
+  int? _lastSentMenuCategory;
 
   /// Monotone teller op 'update'-berichten: method-channel-aanroepen zijn
   /// fire-and-forget en niet gegarandeerd in volgorde, dus het publieksvenster
@@ -669,6 +670,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Toegang tot de annotatielaag om een streek-in-uitvoering te committen
   /// vóór een slide-/paginawissel.
   final _annotationLayerKey = GlobalKey<AnnotationLayerState>();
+
+  /// Welke categorie open staat op een keuze-menudia met categorieën (#1162).
+  /// Sessie-only, net als [_richTextPage], en het reist naar de beamer zodat
+  /// publiek en presentator dezelfde knoppen zien.
+  int _menuCategory = 0;
 
   /// Pagina binnen een rich-text slide (0-gebaseerd).
   int _richTextPage = 0;
@@ -837,7 +843,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (_index == _lastSentIndex &&
         blank == _lastSentBlank &&
         _richTextPage == _lastSentRichTextPage &&
-        _timelineStep == _lastSentTimelineStep) {
+        _timelineStep == _lastSentTimelineStep &&
+        _menuCategory == _lastSentMenuCategory) {
       return;
     }
     final indexChanged = _index != _lastSentIndex;
@@ -845,6 +852,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _lastSentBlank = blank;
     _lastSentRichTextPage = _richTextPage;
     _lastSentTimelineStep = _timelineStep;
+    _lastSentMenuCategory = _menuCategory;
     audienceChannel
         .invokeMethod('update', {
           'seq': ++_syncSeq,
@@ -852,6 +860,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'blank': blank,
           'richTextPage': _richTextPage,
           'timelineStep': _timelineStep,
+          'menuCategory': _menuCategory,
         })
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure

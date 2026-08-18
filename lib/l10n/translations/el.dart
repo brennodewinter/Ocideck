@@ -1675,6 +1675,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Το άλμα «{doel}» οδηγεί σε διαφάνεια που δεν υπάρχει πλέον· κατά την παρουσίαση δεν συμβαίνει τίποτα. Επιλέξτε άλλη διαφάνεια προορισμού.',
+  'In een cirkel': 'Κύκλος',
+  'Onder elkaar': 'Λίστα',
+  'Categorie': 'Κατηγορία',
+  'Categorie toevoegen': 'Προσθήκη κατηγορίας',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Κατάργηση κατηγορίας (τα μπλοκ διατηρούνται)',
+  'Uitleg': 'Επεξήγηση',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Ένα μενού επιλογών: κάθε μπλοκ μεταβαίνει σε άλλη διαφάνεια όταν το πατήσετε. Πληκτρολογήστε μια ετικέτα και μια επεξήγηση για κάθε μπλοκ, επιλέξτε τη διαφάνεια προορισμού και προαιρετικά μια εικόνα. Επιλέξτε τη διάταξη: πλέγμα, λίστα ή κύκλος. Με τις κατηγορίες εναλλάσσεστε μεταξύ ομάδων μπλοκ κατά την παρουσίαση. Ένα μπλοκ χωρίς προορισμό είναι απλό κείμενο.',
   'Hoofdstukken op nieuwe pagina': 'Κεφάλαια σε νέα σελίδα',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Κάθε κεφάλαιο ξεκινά τώρα σε νέα σελίδα',
@@ -2026,8 +2037,6 @@ const _dutchSourceAddEl = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Δεν υπάρχουν ακόμη μπλοκ. Προσθέστε ένα μπλοκ επιλογής.',
   'Keuzemenu': 'Μενού επιλογών',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Ένα μενού επιλογών: κάθε μπλοκ μεταβαίνει σε άλλη διαφάνεια όταν το πατήσετε. Πληκτρολογήστε μια ετικέτα για κάθε μπλοκ, επιλέξτε τη διαφάνεια προορισμού και προαιρετικά μια εικόνα. Ένα μπλοκ χωρίς προορισμό είναι απλό κείμενο.',
   'Hierna': 'Έπειτα',
   'Volgende dia': 'Επόμενη διαφάνεια',
   'Sprong': 'Άλμα',

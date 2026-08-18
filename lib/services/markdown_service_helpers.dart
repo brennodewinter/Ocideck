@@ -5,6 +5,28 @@ part of 'markdown_service.dart';
 // private functions they share the library's imports and are called by bare
 // name from the service's generate/parse methods.
 
+/// Of [token] een `_class`-token is dat OciDeck zélf schrijft, en dat bij het
+/// teruglezen dus niet in [Slide.cssClass] thuishoort.
+///
+/// Waarom dit één lijst is en geen rij losse vergelijkingen in de parser: die
+/// rij is meegegroeid met de schrijver en raakte een keer achter. `table-overdue`
+/// stond er niet in, dus belandde het in `cssClass` — en `cssClass` *vervangt*
+/// het typetoken bij het schrijven. Gevolg: `table table-overdue` werd na één
+/// keer opslaan `table-overdue table-overdue`, na twee keer drie tokens, en het
+/// typetoken `table` was weg. De dia las daarna niet meer terug als tabel.
+///
+/// Het basistoken van het type staat er bewust níet in: dat filtert de aanroeper
+/// tegen het type dat hij zojuist heeft afgeleid.
+bool isOcideckWrittenClassToken(String token) =>
+    token == 'logo-safe' ||
+    token == 'no-logo' ||
+    token == 'no-footer' ||
+    token == 'image-title-above' ||
+    token == 'table-editable' ||
+    token == 'table-overdue' ||
+    isTimelineOptionToken(token) ||
+    isMenuOptionToken(token);
+
 // Hoisted hot-path regexes (zie markdown_service_parse.dart); [_attrRegexes]
 // cachet de per-attribuutnaam gebouwde patronen van [_parseEmbedLine].
 final _reSrcAttr = RegExp(r'src="([^"]+)"');

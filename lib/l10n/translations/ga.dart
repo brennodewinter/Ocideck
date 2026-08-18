@@ -1681,6 +1681,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Tagraíonn an léim "{doel}" do sleamhnán nach ann dó a thuilleadh; ní tharlaíonn aon rud le linn an chur i láthair. Roghnaigh sprioc-sleamhnán eile.',
+  'In een cirkel': 'Ciorcal',
+  'Onder elkaar': 'Liosta',
+  'Categorie': 'Catagóir',
+  'Categorie toevoegen': 'Cuir catagóir leis',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Bain an chatagóir (coinnítear na bloic)',
+  'Uitleg': 'Cur síos',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Roghchlár roghanna: léimeann gach bloc go sleamhnán eile nuair a chliceáiltear air. Cuir lipéad agus cur síos isteach do gach bloc, roghnaigh an sleamhnán sprice agus íomhá más mian leat. Roghnaigh an leagan amach: greille, liosta nó ciorcal. Le catagóirí athraíonn tú idir grúpaí bloc le linn an chur i láthair. Is gnáththéacs é bloc gan sprioc.',
   'Hoofdstukken op nieuwe pagina': 'Caibidlí ar leathanach nua',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Tosaíonn gach caibidil ar leathanach nua anois',
@@ -2033,8 +2044,6 @@ const _dutchSourceAddGa = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Níl aon bhloc ann fós. Cuir bloc rogha leis.',
   'Keuzemenu': 'Roghchlár roghanna',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Roghchlár roghanna: léimeann gach bloc go sleamhnán eile nuair a chliceáiltear air. Cuir lipéad isteach do gach bloc, roghnaigh an sleamhnán sprice agus íomhá más mian leat. Is gnáththéacs é bloc gan sprioc.',
   'Hierna': 'Ansin',
   'Volgende dia': 'An chéad sleamhnán eile',
   'Sprong': 'Léim',

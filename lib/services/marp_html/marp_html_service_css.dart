@@ -191,20 +191,38 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       '.document-page-number::after{content:counter(page)}}';
 }
 
-/// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
-/// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit
-/// het accent, of een rustige rand uit de tekstkleur) zet [renderMenuSlide]
-/// inline per kaart. `grid-auto-rows` geeft elke rij dezelfde hoogte, zodat het
-/// een net raster blijft; bij een afbeelding vult het beeld de kaart en zakt het
-/// label eronder, anders staat het label gecentreerd. De hoverlift maakt een
-/// aanklikbaar (doel)blok voelbaar in een geopende export.
+/// De vorm van de drie keuze-menu-indelingen (#1162). Thema-onafhankelijk, net
+/// als de rapportage-opmaak: alleen de layout staat hier, de kleuren
+/// (rand/vulling uit het accent, of een rustige rand uit de tekstkleur) zet
+/// [renderMenuSlide] inline per blok. `grid-auto-rows` geeft elke rij dezelfde
+/// hoogte, zodat het een net raster blijft; de afbeelding staat als kleine
+/// vierkante duim náást de tekst, zoals in de app. `menu-stack` is hetzelfde
+/// raster met één kolom en lagere rijen (de indeling "onder elkaar"), en
+/// `menu-ring` zet de schijven op de plek die [renderMenuSlide] per schijf als
+/// percentage meegeeft. De hoverlift maakt een aanklikbaar (doel)blok voelbaar
+/// in een geopende export.
 const _menuCss = r'''
-.slide .menu-grid{display:grid;gap:22px;margin:.5em 0;grid-auto-rows:200px}
-.slide .menu-card{display:flex;flex-direction:column;align-items:stretch;justify-content:center;overflow:hidden;border:2px solid;border-radius:16px;text-decoration:none;color:inherit}
-.slide .menu-card .menu-thumb{flex:1 1 auto;width:100%;min-height:0;object-fit:cover}
-.slide .menu-card .menu-label{padding:14px 18px;font-size:28px;font-weight:600;line-height:1.2;text-align:center}
-.slide a.menu-card{transition:filter .12s ease}
-.slide a.menu-card:hover{filter:brightness(1.06)}
+.slide .menu-grid{display:grid;gap:22px;margin:.5em 0;grid-auto-rows:180px}
+.slide .menu-stack{grid-template-columns:1fr;grid-auto-rows:120px;gap:16px}
+.slide .menu-category{margin:.6em 0 .2em;font-size:26px;font-weight:700;opacity:.75}
+.slide .menu-card{display:flex;flex-direction:row;align-items:center;gap:18px;padding:16px 20px;overflow:hidden;border:2px solid;border-radius:16px;text-decoration:none;color:inherit}
+.slide .menu-card .menu-thumb{flex:0 0 auto;width:96px;height:96px;border-radius:12px;object-fit:cover}
+.slide .menu-card .menu-text{flex:1 1 auto;min-width:0}
+.slide .menu-card .menu-label{font-size:28px;font-weight:600;line-height:1.2}
+.slide .menu-card .menu-desc{margin-top:4px;font-size:20px;line-height:1.25;opacity:.72}
+.slide .menu-card .menu-arrow{flex:0 0 auto;font-size:28px;line-height:1}
+.slide a.menu-card,.slide a.menu-disc{transition:filter .12s ease}
+.slide a.menu-card:hover,.slide a.menu-disc:hover{filter:brightness(1.06)}
+.slide .menu-dense{grid-auto-rows:110px;gap:14px}
+.slide .menu-dense .menu-card{gap:12px;padding:10px 14px}
+.slide .menu-dense .menu-card .menu-thumb{width:60px;height:60px}
+.slide .menu-dense .menu-card .menu-label{font-size:20px}
+.slide .menu-dense .menu-card .menu-desc{font-size:15px}
+.slide .menu-ring{position:relative;width:100%;aspect-ratio:1;margin:.5em auto}
+.slide .menu-disc{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;overflow:hidden;border:2px solid;border-radius:50%;text-align:center;text-decoration:none;color:inherit}
+.slide .menu-disc .menu-disc-thumb{width:38%;aspect-ratio:1;border-radius:50%;object-fit:cover}
+.slide .menu-disc .menu-label{font-size:20px;font-weight:600;line-height:1.15;overflow:hidden;overflow-wrap:anywhere}
+.slide .menu-disc .menu-desc{font-size:15px;line-height:1.15;opacity:.8;overflow:hidden;overflow-wrap:anywhere}
 ''';
 
 /// De opmaak van de zes rapportagedia's. Ook thema-onafhankelijk: kleuren die

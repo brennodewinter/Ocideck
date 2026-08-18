@@ -1198,6 +1198,77 @@ void main() {
   // ingevuld uit, rendeerde wit, kwam als "geen problemen" door de
   // kwaliteitscontrole en exporteerde een lege pagina. De controle gaat daarom
   // niet over dat ene type maar over de vorm.
+  // #1162: een keuze-menublok — of een sprong-uit — kan naar een dia wijzen die
+  // je later verwijdert of hernoemt. De presentator valt dan stil terug op de
+  // gewone volgorde: de knop doet niets, en dat merk je pas op het podium.
+  group('sprong die nergens uitkomt', () {
+    List<SlideQualityIssue> sprongenVan(List<Slide> slides) => analyzer
+        .analyze(Deck(title: 'D', slides: slides))
+        .issues
+        .where((i) => i.kind == SlideQualityIssueKind.danglingJump)
+        .toList();
+
+    test('een menublok naar een verdwenen dia wordt gemeld', () {
+      final gemeld = sprongenVan([
+        Slide.create(
+          SlideType.menu,
+        ).copyWith(title: 'Menu', bullets: const ['[Naar prijzen](#prijzen)']),
+      ]);
+      expect(gemeld, hasLength(1));
+      expect(gemeld.single.slideIndex, 0);
+      expect(gemeld.single.args['label'], 'Naar prijzen');
+    });
+
+    test('een blok waarvan de doeldia er nog is, zwijgt', () {
+      expect(
+        sprongenVan([
+          Slide.create(SlideType.menu).copyWith(
+            title: 'Menu',
+            bullets: const ['[Naar prijzen](#prijzen)'],
+          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Prijzen', anchor: 'prijzen', bullets: const ['x']),
+        ]),
+        isEmpty,
+      );
+    });
+
+    test('een tekstblok zonder doel is geen sprong', () {
+      expect(
+        sprongenVan([
+          Slide.create(
+            SlideType.menu,
+          ).copyWith(title: 'Menu', bullets: const ['Gewoon tekst']),
+        ]),
+        isEmpty,
+      );
+    });
+
+    test('een sprong-uit naar een verdwenen anker wordt ook gemeld', () {
+      final gemeld = sprongenVan([
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Kop', bullets: const ['x'], nextAnchor: 'hoofdmenu'),
+      ]);
+      expect(gemeld, hasLength(1));
+      expect(gemeld.single.args['label'], 'hoofdmenu');
+    });
+
+    test('een overgeslagen dia meldt niets', () {
+      expect(
+        sprongenVan([
+          Slide.create(SlideType.menu).copyWith(
+            title: 'Menu',
+            bullets: const ['[Weg](#weg)'],
+            skipped: true,
+          ),
+        ]),
+        isEmpty,
+      );
+    });
+  });
+
   group('lege dia', () {
     List<SlideQualityIssue> leegheidVan(Slide slide) => analyzer
         .analyze(Deck(title: 'D', slides: [slide]))

@@ -16,6 +16,7 @@ import 'privacy_disposition.dart';
 import 'quality_disposition.dart';
 import 'finding_spec.dart';
 import 'marp_style.dart';
+import 'menu.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
 import 'control_status_spec.dart';
@@ -560,6 +561,10 @@ class Slide {
   /// themselves are stored in [bullets] as `marker :: title :: description`
   /// strings; the layout/reveal options round-trip as `_class` tokens and the
   /// draw-in duration as an `ocideck_timeline_duration` comment.
+  /// Keuze-menudia (#1162): in welke vorm de blokken staan. Reist als
+  /// `_class`-token mee; zie [menuClassTokens].
+  final MenuLayout menuLayout;
+
   final TimelineLayout timelineLayout;
   final TimelineReveal timelineReveal;
 
@@ -712,6 +717,7 @@ class Slide {
     this.ganttSections = false,
     this.viewLimit,
     this.isDetail = false,
+    this.menuLayout = MenuLayout.grid,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
@@ -882,6 +888,7 @@ class Slide {
       ganttSections: src.ganttSections,
       viewLimit: src.viewLimit,
       isDetail: src.isDetail,
+      menuLayout: src.menuLayout,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
@@ -960,6 +967,7 @@ class Slide {
     DisplayWindowSpec? viewLimit,
     bool clearViewLimit = false,
     bool? isDetail,
+    MenuLayout? menuLayout,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
@@ -1041,6 +1049,7 @@ class Slide {
     ganttSections: ganttSections ?? this.ganttSections,
     viewLimit: clearViewLimit ? null : (viewLimit ?? this.viewLimit),
     isDetail: isDetail ?? this.isDetail,
+    menuLayout: menuLayout ?? this.menuLayout,
     timelineLayout: timelineLayout ?? this.timelineLayout,
     timelineReveal: timelineReveal ?? this.timelineReveal,
     timelineAnimationMs: clearTimelineAnimation

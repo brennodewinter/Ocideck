@@ -1670,6 +1670,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Скокът „{doel}“ сочи към слайд, който вече не съществува; по време на презентацията не се случва нищо. Изберете друг целеви слайд.',
+  'In een cirkel': 'Кръг',
+  'Onder elkaar': 'Списък',
+  'Categorie': 'Категория',
+  'Categorie toevoegen': 'Добавяне на категория',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Премахване на категорията (блоковете се запазват)',
+  'Uitleg': 'Описание',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Меню за избор: всеки блок при щракване преминава към друг слайд. Въведете етикет и описание за всеки блок, изберете целевия слайд и по желание изображение. Изберете оформлението: мрежа, списък или кръг. С категориите превключвате между групи блокове по време на презентацията. Блок без цел е обикновен текст.',
   'Hoofdstukken op nieuwe pagina': 'Глави на нова страница',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Сега всяка глава започва на нова страница',
@@ -2021,8 +2032,6 @@ const _dutchSourceAddBg = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Все още няма блокове. Добавете блок за избор.',
   'Keuzemenu': 'Меню за избор',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Меню за избор: всеки блок при щракване преминава към друг слайд. Въведете етикет за всеки блок, изберете целевия слайд и по желание изображение. Блок без цел е обикновен текст.',
   'Hierna': 'След това',
   'Volgende dia': 'Следващ слайд',
   'Sprong': 'Скок',

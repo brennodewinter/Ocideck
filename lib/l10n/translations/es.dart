@@ -673,6 +673,17 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'El salto "{doel}" apunta a una diapositiva que ya no existe; durante la presentación no ocurre nada. Elija otra diapositiva de destino.',
+  'In een cirkel': 'Círculo',
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Categoría',
+  'Categorie toevoegen': 'Añadir categoría',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Quitar categoría (los bloques se conservan)',
+  'Uitleg': 'Descripción',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Un menú de opciones: cada bloque salta a otra diapositiva al hacer clic. Escribe una etiqueta y una descripción para cada bloque, elige la diapositiva de destino y, opcionalmente, una imagen. Elige la disposición: cuadrícula, lista o círculo. Con las categorías cambias entre grupos de bloques durante la presentación. Un bloque sin destino es texto normal.',
   'Hoofdstukken op nieuwe pagina': 'Capítulos en página nueva',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Ahora cada capítulo empieza en una página nueva',
@@ -1024,8 +1035,6 @@ const _dutchSourceAddEs = {
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Aún no hay bloques. Añade un bloque de elección.',
   'Keuzemenu': 'Menú de opciones',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Un menú de opciones: cada bloque salta a otra diapositiva al hacer clic. Escribe una etiqueta para cada bloque, elige la diapositiva de destino y, opcionalmente, una imagen. Un bloque sin destino es texto normal.',
   'Hierna': 'Después',
   'Volgende dia': 'Diapositiva siguiente',
   'Sprong': 'Salto',

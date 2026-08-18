@@ -39,6 +39,9 @@ const _knownClassTokens = {
   // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
   'control-status',
   'gantt',
+  'menu-grid',
+  'menu-list',
+  'menu-circle',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',
@@ -47,6 +50,13 @@ const _knownClassTokens = {
   'no-logo',
   'no-footer',
   'table-editable',
+  // Deze twee schrijft de serialiser zelf (markdown_service.dart) en leest de
+  // parser terug, maar de structuurcontrole kende ze niet — dus klaagde OciDeck
+  // over een dia die OciDeck zelf had geschreven. `table-overdue` kwam bij de
+  // ISO-tabellen binnen, `image-title-above` bij #1407; allebei aan het licht
+  // gekomen toen de proef de schrijver de lijst liet opleveren.
+  'table-overdue',
+  'image-title-above',
 };
 
 const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};

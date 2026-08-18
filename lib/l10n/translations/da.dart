@@ -1650,6 +1650,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Springet "{doel}" peger på et dias, der ikke længere findes; under præsentationen sker der ingenting. Vælg et andet måldias.',
+  'In een cirkel': 'Cirkel',
+  'Onder elkaar': 'Liste',
+  'Categorie': 'Kategori',
+  'Categorie toevoegen': 'Tilføj kategori',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Ophæv kategori (blokkene bevares)',
+  'Uitleg': 'Beskrivelse',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'En valgmenu: hver blok springer til et andet dias, når man klikker på den. Skriv en etiket og en beskrivelse for hver blok, vælg måldiaset og eventuelt et billede. Vælg layoutet: gitter, liste eller cirkel. Med kategorier skifter du mellem grupper af blokke under præsentationen. En blok uden mål er almindelig tekst.',
   'Hoofdstukken op nieuwe pagina': 'Kapitler på ny side',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Hvert kapitel begynder nu på en ny side',
@@ -2000,8 +2011,6 @@ const _dutchSourceAddDa = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Ingen blokke endnu. Tilføj en valgblok.',
   'Keuzemenu': 'Valgmenu',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'En valgmenu: hver blok springer til et andet dias, når man klikker på den. Skriv en etiket for hver blok, vælg måldiaset og eventuelt et billede. En blok uden mål er almindelig tekst.',
   'Hierna': 'Derefter',
   'Volgende dia': 'Næste dias',
   'Sprong': 'Spring',

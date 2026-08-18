@@ -39,6 +39,7 @@ import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
+import '../../models/menu.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
@@ -104,6 +105,7 @@ part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
 part 'previews/menu_preview.dart';
+part 'previews/menu_preview_layouts.dart';
 part 'previews/bullets_image_preview.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
@@ -336,6 +338,15 @@ class SlidePreviewWidget extends StatelessWidget {
   /// = de blokken zijn niet aanklikbaar; de preview toont ze alleen.
   final void Function(String anchor)? onMenuBlockTap;
 
+  /// Keuze-menudia met categorieën (#1162): welke categorie open staat. Het
+  /// beamervenster krijgt hem van de presentator, zodat beide schermen dezelfde
+  /// knoppen tonen.
+  final int menuCategory;
+
+  /// Gezet = de categoriebalk van een menudia is aanklikbaar en meldt de wissel
+  /// terug. Null (slidestrook, beamervenster) = alleen tonen.
+  final ValueChanged<int>? onMenuCategoryChanged;
+
   /// Live tabelbewerking tijdens presenteren (toets E op een tabeldia).
   final bool tableEditMode;
   final int? tableEditRow;
@@ -453,6 +464,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.mermaidInteractive = true,
     this.onChecklistItemToggle,
     this.onMenuBlockTap,
+    this.menuCategory = 0,
+    this.onMenuCategoryChanged,
     this.tableEditMode = false,
     this.tableEditRow,
     this.tableEditCol,
@@ -534,6 +547,10 @@ class SlidePreviewWidget extends StatelessWidget {
                   mediaRedacted: slide.mediaRedacted,
                   decodeMaxEdge: decodeMaxEdge,
                   marpStyle: marpStyle,
+                  slideText: AppTheme.parseHexColor(themeProfile.textColor),
+                  slideBackground: AppTheme.parseHexColor(
+                    themeProfile.slideBackgroundColor,
+                  ),
                   onEnableOnlineMedia: onEnableOnlineMedia,
                   child: _buildSlide(slide.projectionWithViewLimit()),
                 ),
@@ -698,6 +715,8 @@ class SlidePreviewWidget extends StatelessWidget {
           font: fontFamily,
           profile: themeProfile,
           onBlockTap: onMenuBlockTap,
+          category: menuCategory,
+          onCategoryChanged: onMenuCategoryChanged,
         );
       case SlideType.title:
         return _TitlePreview(

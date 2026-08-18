@@ -49,6 +49,11 @@ enum SlideQualityIssueKind {
   questionAnswerCountHigh,
   questionNotAnswerable,
   emptySlide,
+  // Non-lineaire navigatie (#1162): een keuze-menublok of een sprong-uit wijst
+  // naar een anker dat geen enkele dia meer draagt. De presentator valt dan
+  // stil terug op de gewone volgorde — een knop die niets doet, en dat merk je
+  // pas op het podium.
+  danglingJump,
   findingUnknownSection,
 
   // ── Privacy (OCIWACHT §2.1) ─────────────────────────────────────────

@@ -847,6 +847,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'The jump "{doel}" points to a slide that no longer exists; nothing happens while presenting. Choose a different target slide.',
+  'In een cirkel': 'Circle',
+  'Onder elkaar': 'List',
+  'Categorie': 'Category',
+  'Categorie toevoegen': 'Add category',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Remove category (blocks are kept)',
+  'Uitleg': 'Description',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'A choice menu: each block jumps to another slide when clicked. Enter a label and a description for each block, choose the target slide and optionally an image. Choose the layout: grid, list or circle. With categories you switch between groups of blocks while presenting. A block without a target is plain text.',
   'Hoofdstukken op nieuwe pagina': 'Chapters on new page',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Every chapter now starts on a new page',
@@ -1193,8 +1204,6 @@ const _dutchSourceAddEn = {
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'No blocks yet. Add a choice block.',
   'Keuzemenu': 'Choice menu',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'A choice menu: each block jumps to another slide when clicked. Enter a label for each block, choose the target slide and optionally an image. A block without a target is plain text.',
   'Hierna': 'Then',
   'Volgende dia': 'Next slide',
   'Sprong': 'Jump',

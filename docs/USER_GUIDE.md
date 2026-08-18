@@ -674,8 +674,8 @@ six statistical types when the Procesverbetering module is on), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
-the previous report), **choice menu** (a grid of blocks that each jump to another
-slide, #1162), and
+the previous report), **choice menu** (blocks that each jump to another
+slide, as a grid, a list or a ring, #1162), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and **below the grid stands the explanation of whatever
 the mouse or the keyboard focus is pointing at** — so you choose on a sentence
@@ -825,27 +825,62 @@ slide (remote/URL images can't be cropped this way).
 
 A **choice menu** turns a slide into a set of *blocks* that each jump to another
 slide — the interactive counterpart of the [jump-out](#non-linear-order-jump-to-another-slide-1162).
-In the editor you build the blocks one by one: type a **label**, pick the target
-slide under **Springt naar** ("Jumps to") from a list of the deck's slides by
-heading, and optionally add an image. A block you leave without a target is just a
-text block. You never type or see an anchor — you pick a slide, and the app keeps
-the link stable even if you rename that slide's heading or reorder the deck.
+In the editor you build the blocks one by one: type a **label**, add a one-line
+**Uitleg** ("Description") under it if it helps, pick the target slide under
+**Springt naar** ("Jumps to") from a list of the deck's slides by heading, and
+optionally add an image. A block you leave without a target is just a text block.
+You never type or see an anchor — you pick a slide, and the app keeps the link
+stable even if you rename that slide's heading or reorder the deck.
 
-While presenting, the blocks show as a tidy grid in the theme's colours (blocks
-that jump carry a subtle accent border); **click or tap a block and the
-presentation jumps to that slide**. Because a jump uses the same route history as
+**The layout.** At the top of the editor, **Indeling** ("Layout") offers three
+shapes for the same blocks: **Raster** ("Grid" — cards in a grid, the default and
+the one that fits the most blocks on a slide), **Onder elkaar** ("List" — one wide
+block per row, calm and easy to read) and **In een cirkel** ("Circle" — the blocks
+on a ring around the middle, like a dial). It is a presentation choice, not content: switching it
+rearranges the blocks and changes nothing you typed. *(Added 2026-08-18.)*
+
+**Categories.** A long menu can be split into groups with the same **tussenkoppen**
+(group headings) the bullet slides use. **Categorie toevoegen** ("Add category")
+adds one; the first time you do, the blocks you already had are gathered under a
+category called *Algemeen* ("General"), so the bar never opens with a group nobody
+named. Each block then gets a **Categorie** ("Category") dropdown to move it. Dissolving a
+category (the folder button beside its name) keeps its blocks and moves them into
+the neighbouring category — removing a heading should not throw work away. While
+presenting, a bar of category pills above the blocks switches between the groups,
+and the beamer window follows the presenter's choice. A menu without any group
+heading shows no bar at all. *(Added 2026-08-18.)*
+
+While presenting, the blocks show in the theme's colours (blocks that jump carry a
+subtle accent border and an arrow); a block's image sits as a small square beside
+its label with the explanation under it. **Click or tap a block and the
+presentation jumps to that slide.** Because a jump uses the same route history as
 the jump-out, **back** returns you to the menu you came from. If the target slide
-is later deleted, the block simply stops jumping — no error.
+is later deleted, the block simply stops jumping — no error, but the quality check
+does tell you, so you do not find out on stage. Moving to another slide resets the
+menu to its first category.
+
+**More blocks than fit.** Every layout keeps its text readable. When no further
+block fits without the type becoming too small, the slide shows the ones that do fit
+and puts a **+n** tile after them for the rest. Read that as a sign the menu is too
+full for this shape: pick **Grid** (which holds the most blocks on one slide) or
+split it into **categories**. Nothing you typed is lost — the blocks stay in the
+file and reappear as soon as there is room. *(Added 2026-08-18: sixteen blocks used
+to be squeezed down to a four-pixel type size — intact, and unreadable.)*
 
 In the `.md` file the blocks are ordinary Markdown link-bullets — a `- [Label]`
 bullet whose link points at the target slide's anchor, optionally followed by
-`![](mem:…)` for the image — so a menu stays a readable list of links in any
-Markdown viewer; only the `<!-- _class: menu -->` token marks it as a menu for
-OciDeck.
+` — the description` and by `![](mem:…)` for the image — so a menu stays a
+readable list of links in any Markdown viewer; only the `<!-- _class: menu -->`
+token marks it as a menu for OciDeck, with `menu-list` or `menu-circle` beside it
+when you pick one of the other two layouts. A menu you made before the layouts
+existed keeps its file exactly as it was.
 
-The **HTML export** draws the same card grid, and there the blocks are real
-in-page links: click a block and the page scrolls to that slide. (The PDF export
-shows the grid too, printed rather than clickable.)
+The **HTML export** draws the same blocks in the same layout, and there they are
+real in-page links: click a block and the page scrolls to that slide. Categories
+become headings with their blocks under them rather than pills — an exported page
+has no presenter to press them. (The PDF export shows the same picture, printed
+rather than clickable; the LaTeX export writes the blocks as a list per category,
+without the block images.)
 
 ### Source-code slides
 
@@ -2954,8 +2989,10 @@ Export to:
   assets, Gantt, control status, improvement matrix) share a `tabular`
   converter; canvas and finding go through the Markdown-to-LaTeX converter;
   chart and cockpit show their data as a code listing; timeline uses a list
-  with markers; tree/flow/phase-gate use nested lists; video becomes a
-  hyperlink. *(Added 2026-08-07.)*
+  with markers; a choice menu becomes one list per category with the category
+  name in bold above it, keeping label, link and explanation and leaving the
+  block images out *(2026-08-18)*; tree/flow/phase-gate use nested lists; video
+  becomes a hyperlink. *(Added 2026-08-07.)*
 - **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
   mermaid), the CSS, the bundled EB Garamond font **and your images** inlined,
   and charts pre-rendered to inline SVG, so code highlighting, math, charts,

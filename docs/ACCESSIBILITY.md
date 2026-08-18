@@ -125,6 +125,16 @@ If the recipient needs an accessible document, the honest routes today are the
 **HTML export** (real text in a browser, though it was not built against WCAG
 either). PPTX speaker notes are real text and do travel.
 
+**The interactive parts of a choice-menu slide are pointer-only.** While
+presenting, a menu block that jumps and — since 2026-08-18 — the category bar
+above the blocks respond to a click or a tap and to nothing else: both are a
+`GestureDetector` on a drawn card, without a `Semantics` button role, without a
+focus node and without a keyboard route. A screen reader reads the labels as
+text, so the *content* of the menu is there, but there is no announcement that
+they can be activated and no way to activate them from the keyboard. The
+presenter's ordinary navigation (arrow keys, the slide grid, jump-to-slide) does
+reach every slide a menu points at, so a menu is never the only route to a slide.
+
 **The HTML export is not audited for accessibility.** It produces genuine text
 and headings, which is already a great deal more than the bitmap formats, but
 nobody has checked its colour contrast or focus order. Its landmark structure

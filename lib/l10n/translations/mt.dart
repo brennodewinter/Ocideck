@@ -1670,6 +1670,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Il-qabża "{doel}" tipponta lejn slide li m\'għadhiex teżisti; waqt il-preżentazzjoni ma jiġri xejn. Agħżel slide oħra bħala mira.',
+  'In een cirkel': 'Ċirku',
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Kategorija',
+  'Categorie toevoegen': 'Żid kategorija',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Neħħi l-kategorija (il-blokki jinżammu)',
+  'Uitleg': 'Deskrizzjoni',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Menu tal-għażla: kull blokk jaqbeż għal slide oħra meta tikklikkja fuqu. Ittajpja tikketta u deskrizzjoni għal kull blokk, agħżel is-slide fil-mira u fakultattivament stampa. Agħżel it-tqassim: grilja, lista jew ċirku. Bil-kategoriji taqleb bejn gruppi ta\' blokki waqt il-preżentazzjoni. Blokk mingħajr mira huwa test sempliċi.',
   'Hoofdstukken op nieuwe pagina': 'Kapitli f\'paġna ġdida',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Kull kapitlu issa jibda f\'paġna ġdida',
@@ -2022,8 +2033,6 @@ const _dutchSourceAddMt = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Għad ma hemm ebda blokk. Żid blokk ta\' għażla.',
   'Keuzemenu': 'Menu tal-għażla',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Menu tal-għażla: kull blokk jaqbeż għal slide oħra meta tikklikkja fuqu. Ittajpja tikketta għal kull blokk, agħżel is-slide fil-mira u fakultattivament stampa. Blokk mingħajr mira huwa test sempliċi.',
   'Hierna': 'Wara',
   'Volgende dia': 'Islajd li jmiss',
   'Sprong': 'Qabża',
