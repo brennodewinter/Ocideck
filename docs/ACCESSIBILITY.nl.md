@@ -138,6 +138,17 @@ vandaag de **Markdown** (die tekst is, zijn koppen behoudt en de alt-tekst draag
 of de **HTML-export** (echte tekst in een browser, al is die evenmin tegen WCAG
 gebouwd). PPTX-sprekernotities zijn echte tekst en reizen wél mee.
 
+**De interactieve onderdelen van een keuzemenu-slide werken alleen met de muis.**
+Tijdens het presenteren reageren een menublok dat springt en — sinds 2026-08-18 —
+de categoriebalk boven de blokken op een klik of een tik en verder op niets: het
+zijn allebei een `GestureDetector` over een getekende kaart, zonder `Semantics`-
+knoprol, zonder focusknoop en zonder toetsenbordroute. Een schermlezer leest de
+labels wel als tekst, dus de *inhoud* van het menu is er, maar er wordt niet
+gemeld dat ze te bedienen zijn en met het toetsenbord komt niemand erbij. De
+gewone navigatie van de presentator (pijltoetsen, het diaraster, springen naar
+een dia) bereikt elke slide waar een menu naar wijst, dus een menu is nooit de
+enige route naar een slide.
+
 **De HTML-export is niet op toegankelijkheid getoetst.** Hij levert echte tekst
 en koppen, wat al veel meer is dan de bitmapformaten, maar niemand heeft het
 kleurcontrast, de focusvolgorde of de landmarkstructuur gecontroleerd.

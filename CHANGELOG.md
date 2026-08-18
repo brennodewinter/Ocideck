@@ -90,6 +90,28 @@ in Dutch, and it keeps growing on `main` between releases.
   Eerder reageerde elk venster alleen op zijn eigen aanwijzer; nu volgt het
   publieksvenster de presentator zoals het al een groot mermaid-diagram volgde.
 
+- feat(keuzemenu): het keuzemenu-diatype krijgt drie indelingen, categorieën en
+  een uitleg per blok (#1162). **Indeling** staat bovenaan de menu-editor en
+  biedt dezelfde blokken in drie vormen: *Raster* (het bekende kaartenraster, en
+  nog steeds de standaard), *Onder elkaar* (één breed blok per regel) en *In een
+  cirkel* (de blokken in een ring om het midden). Het is een presentatiekeuze,
+  geen inhoud — omschakelen herschikt en verandert niets aan wat je typte. Met
+  **Categorie toevoegen** deel je een lang menu op in groepen; tijdens het
+  presenteren staat er dan een balk met categoriepillen boven de blokken en
+  volgt het beamervenster de keuze van de presentator. De eerste keer krijgen de
+  blokken die er al stonden de naam *Algemeen*, zodat de balk niet met een
+  naamloze groep begint, en een categorie opheffen behoudt de blokken — die gaan
+  naar de categorie ernaast. Per blok is er een veld **Uitleg** van één regel dat
+  onder het label komt te staan. Alles rijdt mee op wat het bestandsformaat al
+  had: de indeling als extra `_class`-token (`menu-list`/`menu-circle`; het
+  raster schrijft geen token, dus een bestaand menu verandert geen byte), de
+  uitleg achter een gedachtestreepje in dezelfde link-opsomming, en de
+  categorieën op de tussenkoppen die de opsommingsslides al gebruikten. De
+  HTML-export tekent dezelfde drie indelingen en zet categorieën als kopjes met
+  hun blokken eronder — geen tabbladen, want een geëxporteerde pagina heeft geen
+  presentator die erop drukt. De LaTeX-export schrijft per categorie een lijst
+  met een vetgedrukt kopje.
+
 - feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
   afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
   profiel. Profielkaarten tonen het logo wanneer dat is ingesteld. Alle
@@ -100,6 +122,16 @@ in Dutch, and it keeps growing on `main` between releases.
   tekst- en achtergrondkleur voor beide banden, logomaat, logopositie en
   paginanummering in voorbeeld, editor en HTML/print.
   De ruwe bron- en presentatiebewerker blijven sober.
+
+### Changed
+
+- keuzemenu: de afbeelding van een menublok staat nu klein náást de tekst
+  in plaats van als vullende achtergrond met het label eronder (#1162). Zo is er
+  op één kaart plaats voor het label, de uitleg en het plaatje tegelijk, en
+  blijft de tekst leesbaar op een blok dat door de indeling smaller is geworden.
+  Dat geldt op elk oppervlak: editor-voorvertoning, slidestrook, presentator,
+  beamer, PDF en de HTML-export. Aan het bestand verandert niets — het is
+  dezelfde `![](…)` in dezelfde opsomming.
 
 ### Fixed
 

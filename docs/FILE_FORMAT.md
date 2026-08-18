@@ -599,7 +599,7 @@ The first class determines (together with the content) the **slide type**:
 | Question | `question` | — |
 | Timeline | `timeline` | — |
 | Scorecard | `scorecard` | — |
-| Menu (#1162) | `menu` | — (blocks are link-bullets; without the token it reads back as ordinary `bullets`) |
+| Menu (#1162) | `menu` (+ optional `menu-list` / `menu-circle`) | — (blocks are link-bullets; without the token it reads back as ordinary `bullets`) |
 | Asset overview | `assets` | — |
 | Discoveries | `discoveries` | — |
 | Finding | `finding` | — |
@@ -1352,6 +1352,65 @@ heading is the title:
   as the decimal mark when unambiguous (one comma, no dot); thousands separators
   are refused rather than guessed at. A row that is entirely blank is dropped at
   both ends, so writing and reading agree.
+
+**Menu** (`menu`) — a choice menu (#1162): an optional `# title` plus an ordinary
+Markdown list, where every list item is one *block*. A block that jumps is a link
+to the target slide's anchor, a block without a link is a plain text block, and
+either may carry a one-line description and a small image:
+
+```markdown
+<!-- _class: menu menu-list -->
+# Waar wil je heen?
+
+- ␀Producten
+- [Prijzen](#prijzen) — Wat het kost, per maand ![](mem:9f2a1c)
+- [Demo](#demo) — Tien minuten meekijken
+- ␀Over ons
+- [Team](#team)
+- Alleen tekst, geen sprong
+```
+
+- The **link target** is the `ocideck_slide_anchor` of the target slide (§8),
+  never a heading id. Because the anchor is frozen on first assignment, renaming
+  or reordering the target slide leaves the block pointing at it; a target that no
+  longer exists simply stops jumping.
+- The **description** is whatever follows the label, separated by a spaced em
+  dash (` — `). That is what OciDeck writes. On read, a block **with** a link
+  takes everything inside the `[…]` as the label and the whole tail as the
+  description, so a plain `-`, an en dash or a `:` in front of that tail is
+  stripped just as well — that is what a hand types — and a dash inside the label
+  is harmless. A block **without** a link has no brackets to go by and is split on
+  the spaced em dash only; a label that contains one therefore falls apart into
+  the two fields. The text stays complete and writes back identically, so the
+  round trip is stable either way.
+- The **image** is a trailing `![](path)`, the same `mem:`/deck-relative path as
+  any other slide image. It is drawn as a small square beside the text *(the block
+  image moved from a full-bleed background to a thumbnail beside the label on
+  2026-08-18; the file format did not change)*.
+- **Categories** are the group headings of the bullets section above (`␀` is the
+  `U+E010` marker): a heading opens a category and the blocks after it belong to
+  it. Blocks before the first heading form a nameless first group. There is no
+  second list — the categories *are* those bullets, so reordering, deleting and
+  the round trip all run over one list. While presenting, a category bar switches
+  between them; in the HTML export they become headings with their blocks under
+  them, and in the LaTeX (Beamer) export a bold line above an `itemize`.
+
+The **layout** is a presentation option rather than content, so — exactly like the
+timeline above — it round-trips as an extra `_class` token beside the base `menu`
+token:
+
+- `menu-list` — one wide block per row, under each other.
+- `menu-circle` — the blocks on a ring around the middle of the slide.
+- absent, or `menu-grid` — the default grid of cards. OciDeck writes **no** token
+  for the grid, so a menu slide written before the layouts existed does not change
+  a byte; `menu-grid` is accepted on read so a hand-written deck may name the
+  default out loud. An unrecognised `menu-…` token — from a newer version, say —
+  still draws the grid instead of failing, though the structure check (§10) does
+  warn that it does not know the token.
+
+*(Added 2026-08-18: descriptions, categories and the two layout tokens. Before
+that a menu slide was a grid of link-bullets with an optional image and nothing
+else; such a file reads unchanged.)*
 
 **Asset overview** (`assets`) — the attack surface broken into the kinds of
 object it consists of. Stored as a normal Markdown table, like `scorecard`:
@@ -2902,7 +2961,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
+| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens, omitted ten the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt` and the four `timeline-…` options — and claimed one, `table-overdue`, that it does not.)* |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |
@@ -2915,6 +2974,11 @@ not model is not reported.
 | **`table` slide** | warning | No table rows. |
 | **`table` slide** | error | No separator row (`\| --- \|`) or second row is not a valid GFM separator. |
 | **HTML** | error | Unbalanced `<div>`/`</div>` inside a slide. |
+
+> `table-overdue` (§4) is a token OciDeck **writes** but the checker's vocabulary
+> does not carry, so the structure check warns about a slide the app itself
+> produced. Noted 2026-08-18; it is a gap in
+> `markdown_validator_vocabulary.dart`, not in the file format — the token works.
 
 Implementation: `lib/services/markdown_validator.dart`; tests:
 `test/markdown_validator_test.dart`. See also [`USER_GUIDE.md`](USER_GUIDE.md)

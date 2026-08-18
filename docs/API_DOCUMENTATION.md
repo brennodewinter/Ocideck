@@ -47,12 +47,14 @@ withholding is a policy consequence, so the UI has to be able to say which.
 ### Slide Model
 `lib/models/slide.dart` — `Slide` is an immutable value object (all fields
 `final`, `const` constructor). It is **not** a generic property bag: besides
-`id` and `SlideType type`, it carries close to sixty strongly-typed,
+`id` and `SlideType type`, it carries some seventy-odd strongly-typed,
 type-specific fields (`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`,
 `quote`, `findingId`, `tlp`, per-slide style overrides such as
 `titleTextColorOverride`, …). A field is only meaningful for the slide types that
-use it. *Corrected 2026-07-22: this said "~50"; the constructor takes 60
-parameters, `id` and `type` included.*
+use it. *Corrected 2026-07-22: this said "~50". Corrected again 2026-08-18: it
+said "close to sixty" and "60 parameters"; the constructor now takes 76, `id` and
+`type` included. Counting them by hand is what makes this drift — the number is
+here to say "many, and typed", not to be exact to the unit.*
 
 Two of those fields exist **only while rendering** and never reach a saved file:
 `mediaRedacted`, set by the privacy projection, and `renderPage` (added
@@ -117,6 +119,46 @@ missing an entry, and checks `backedByTable` against a real
 serialize-then-parse round trip so the flag cannot drift from behaviour. UI
 behaviour stays in the widget layer's registries (`slideEditorBuilders`,
 `slideTypeIcons`) — the model layer imports no Flutter.
+
+### Choice-menu Model
+`lib/models/menu.dart` and `lib/services/menu_blocks.dart` — the `menu` slide type
+(#1162). Unlike the question slide it carries **no** JSON block: everything lives
+in fields the file format already had, which is what keeps a menu readable as a
+plain list of links.
+
+`MenuLayout` (3 values): `grid, list, circle` — the shape the blocks are arranged
+in. It round-trips as an extra `_class` token beside `menu`
+(`menuClassTokens` / `menuLayoutFromTokens`), exactly like `TimelineLayout`:
+`grid` is the default and writes no token, so an older menu slide is byte-identical
+after a round trip, and an unknown token reads as `grid` rather than failing.
+`Slide.menuLayout` holds it; `menuOptionTokens` is what the parser filters out of
+`cssClass`. The structure checker accepts the same three tokens but lists them
+literally in `markdown_validator_vocabulary.dart` instead of reading this set, so
+a fourth layout means editing both.
+
+`MenuBlock` (`label`, `description`, `targetAnchor`, `imagePath`, all defaulting to
+empty) is one block, and `MenuCategory` (`label`, `blocks`) one group of them.
+Neither is stored as such: `parseMenuBlock`/`menuBlockToBullet` and
+`menuCategoriesFor`/`menuBulletsFrom` are the codec between them and
+`Slide.bullets`, where a block is a link-bullet and a category is the existing
+group-heading bullet (`kGroupHeadingMarker`). The read side is deliberately more
+permissive than the write side: `kMenuDescriptionSeparator` is written as ` — `,
+but behind a link the tail is taken whole and a leading `–`, `-` or `:` is
+stripped as well (a block *without* a link has no brackets to delimit the label,
+so it splits on the spaced em dash only). It never throws — markup it does not
+recognise becomes the label. `menuHasCategories` is the "show a category bar at
+all" predicate, `menuGridColumns` and `menuDiscFraction`/`menuRingRadius` are the
+grid and ring geometry shared with the HTML export, and `slidesWithMenuTarget`
+the pure list computation behind
+`DeckNotifier.setMenuBlockTarget` (freeze the target slide's anchor, point the
+block at it, leave the surrounding headings and blocks untouched).
+
+The open category, like a question's drawn round, is **session-only**: the
+presenter keeps it in `_menuCategory`, sends it to the audience window in the
+`update` message beside `richTextPage` and `timelineStep`, and resets it to 0 on
+every slide change. It never reaches the file.
+
+*(Added 2026-08-18; the slide type itself dates from #1162.)*
 
 ### ThemeProfile Model
 `lib/models/settings.dart` — visual styling: colors, fonts (`fontFamily`,

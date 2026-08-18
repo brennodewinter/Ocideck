@@ -716,8 +716,8 @@ zes statistische types wanneer de module Procesverbetering aanstaat), **cockpit*
 dashboard van vliegtuigachtige instrumentmeters),
 **vraag** (een interactieve quizslide, in zes soorten), **tijdlijn** (een geanimeerde tijdlijn van
 gedateerde gebeurtenissen), **scorekaart** (een paar kerncijfers, elk naast het cijfer uit
-het vorige rapport), **keuzemenu** (een raster van blokken die elk naar een andere slide
-springen, #1162), en
+het vorige rapport), **keuzemenu** (blokken die elk naar een andere slide
+springen, als raster, lijst of ring, #1162), en
 **vrije Markdown**. Elke kaart in de kiezer toont een miniatuur-
 draadmodel van de layout, en **onder het raster staat de uitleg van datgene waar
 de muis of de toetsenbordfocus naar wijst** — zodat je kiest op een zin
@@ -867,27 +867,54 @@ slide (afbeeldingen op afstand/via URL kunnen op deze manier niet worden bijgesn
 
 Een **keuzemenu** verandert een slide in een reeks *blokken* die elk naar een andere
 slide springen — de interactieve tegenhanger van de [uitsprong](#niet-lineaire-volgorde-springen-naar-een-andere-dia-1162).
-In de editor bouw je de blokken één voor één op: typ een **label**, kies de doel-
-slide onder **Springt naar** uit een lijst van de slides van het deck op
-kop, en voeg eventueel een afbeelding toe. Een blok dat je zonder doel laat is gewoon een
-tekstblok. Je typt of ziet nooit een anker — je kiest een slide, en de app houdt de
-link stabiel, zelfs als je de kop van die slide hernoemt of het deck herordent.
+In de editor bouw je de blokken één voor één op: typ een **label**, zet er zo nodig
+een **Uitleg** van één regel onder, kies de doelslide onder **Springt naar** uit een
+lijst van de slides van het deck op kop, en voeg eventueel een afbeelding toe. Een
+blok dat je zonder doel laat is gewoon een tekstblok. Je typt of ziet nooit een
+anker — je kiest een slide, en de app houdt de link stabiel, zelfs als je de kop van
+die slide hernoemt of het deck herordent.
 
-Tijdens het presenteren tonen de blokken zich als een net raster in de kleuren van het thema (blokken
-die springen dragen een subtiele accentrand); **klik of tik op een blok en de
-presentatie springt naar die slide**. Omdat een sprong dezelfde routegeschiedenis gebruikt als
-de uitsprong, brengt **terug** je terug naar het menu waar je vandaan kwam. Als de doelslide
-later wordt verwijderd, stopt het blok simpelweg met springen — geen fout.
+**De indeling.** Bovenaan de editor biedt **Indeling** drie vormen voor dezelfde
+blokken: **Raster** (een raster van kaarten, de standaard en de vorm waar de meeste
+blokken op één slide passen), **Onder elkaar** (één breed blok per regel, rustig en
+goed leesbaar) en **In een cirkel** (de blokken in een ring rond het midden, als een
+keuzewiel). Het is een presentatiekeuze en geen inhoud: omschakelen herschikt de
+blokken en verandert niets aan wat je hebt getypt. *(Toegevoegd 2026-08-18.)*
+
+**Categorieën.** Een lang menu kun je opdelen met dezelfde **tussenkoppen** die de
+opsommingsslides gebruiken. **Categorie toevoegen** maakt er een; doe je dat voor het
+eerst, dan komen de blokken die je al had onder een categorie *Algemeen* te staan,
+zodat de balk nooit begint met een groep die niemand een naam heeft gegeven. Elk blok
+krijgt dan een keuzelijst **Categorie** om het te verplaatsen. Een categorie opheffen
+(de mapknop naast de naam) behoudt de blokken en zet ze in de categorie ernaast —
+een kopje weghalen hoort geen werk weg te gooien. Tijdens het presenteren staat er
+een balk met categoriepillen boven de blokken, en het beamervenster volgt de keuze
+van de presentator. Een menu zonder tussenkop toont helemaal geen balk.
+*(Toegevoegd 2026-08-18.)*
+
+Tijdens het presenteren tonen de blokken zich in de kleuren van het thema (blokken
+die springen dragen een subtiele accentrand en een pijl); de afbeelding van een blok
+staat als klein vierkantje naast het label, met de uitleg eronder. **Klik of tik op
+een blok en de presentatie springt naar die slide.** Omdat een sprong dezelfde
+routegeschiedenis gebruikt als de uitsprong, brengt **terug** je terug naar het menu
+waar je vandaan kwam. Als de doelslide later wordt verwijderd, stopt het blok
+simpelweg met springen — geen fout. Ga je naar een andere slide, dan begint het menu
+weer bij zijn eerste categorie.
 
 In het `.md`-bestand zijn de blokken gewone Markdown-link-opsommingen — een `- [Label]`-
-opsomming waarvan de link naar het anker van de doelslide wijst, eventueel gevolgd door
-`![](mem:…)` voor de afbeelding — zodat een menu een leesbare lijst met links blijft in elke
-Markdown-viewer; alleen het `<!-- _class: menu -->`-token markeert het als een menu voor
-OciDeck.
+opsomming waarvan de link naar het anker van de doelslide wijst, eventueel gevolgd
+door ` — de uitleg` en door `![](mem:…)` voor de afbeelding — zodat een menu een
+leesbare lijst met links blijft in elke Markdown-viewer; alleen het
+`<!-- _class: menu -->`-token markeert het als een menu voor OciDeck, met daarnaast
+`menu-list` of `menu-circle` als je een van de twee andere indelingen kiest. Een menu
+dat je maakte vóór de indelingen bestonden houdt zijn bestand precies zoals het was.
 
-De **HTML-export** tekent hetzelfde kaartraster, en daar zijn de blokken echte
-in-pagina-links: klik op een blok en de pagina scrolt naar die slide. (De PDF-export
-toont het raster ook, geprint in plaats van klikbaar.)
+De **HTML-export** tekent dezelfde blokken in dezelfde indeling, en daar zijn het
+echte in-pagina-links: klik op een blok en de pagina scrolt naar die slide.
+Categorieën worden er kopjes met hun blokken eronder in plaats van pillen — een
+geëxporteerde pagina heeft geen presentator die erop drukt. (De PDF-export toont
+hetzelfde beeld, geprint in plaats van klikbaar; de LaTeX-export schrijft de blokken
+als een lijst per categorie, zonder de blokafbeeldingen.)
 
 ### Broncode-slides
 
@@ -3044,8 +3071,11 @@ Exporteer naar:
   bevindingensamenvatting, ontdekkingen, assets, gantt, beheersmaatregelstatus,
   verbetermatrix) delen één `tabular`-omzetter; canvas en bevinding gaan door de
   Markdown-naar-LaTeX-omzetter; grafiek en cockpit tonen hun gegevens als een
-  codelisting; de tijdlijn gebruikt een lijst met markeringen; boom/stroom/fasepoort
-  gebruiken geneste lijsten; video wordt een hyperlink. *(Toegevoegd 2026-08-07.)*
+  codelisting; de tijdlijn gebruikt een lijst met markeringen; een keuzemenu wordt
+  één lijst per categorie met de categorienaam vet erboven, waarbij label, link en
+  uitleg meegaan en de blokafbeeldingen wegblijven *(2026-08-18)*;
+  boom/stroom/fasepoort gebruiken geneste lijsten; video wordt een hyperlink.
+  *(Toegevoegd 2026-08-07.)*
 - **HTML** — één bestand, met de JavaScript (marked, highlight.js, MathJax,
   mermaid), de CSS, het gebundelde EB Garamond-lettertype **en je afbeeldingen** inline,
   en grafieken vooraf weergegeven als inline SVG, zodat codemarkering, wiskunde, grafieken,
