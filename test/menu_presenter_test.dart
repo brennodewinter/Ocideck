@@ -189,6 +189,62 @@ void main() {
       handle.dispose();
     });
 
+    testWidgets('de focusring is een omtrek en geen vlak over het blok', (
+      tester,
+    ) async {
+      // De eerste poging tekende de halo met een `BoxShadow` zonder vervaging.
+      // Dat is geen omtrek maar een gevulde vorm, en in de voorgrond zonder
+      // achtergrondkleur overschilderde hij het hele blok: label, uitleg en pijl
+      // weg, precies op het blok waar de presentator stond. De proeven eromheen
+      // toetsten alleen gedrag en zagen er niets van (#1162, beeldkeuring).
+      await tester.pumpWidget(
+        _host([
+          Slide.create(SlideType.menu).copyWith(
+            title: 'Hoofdmenu',
+            bullets: ['[Naar demo](#demo) — Kijk mee'],
+          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Demo', anchor: 'demo', bullets: ['y']),
+        ]),
+      );
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      final voorgrond = tester
+          .widgetList<DecoratedBox>(find.byType(DecoratedBox))
+          .where((d) => d.position == DecorationPosition.foreground)
+          .map((d) => d.decoration)
+          .whereType<BoxDecoration>()
+          .toList();
+
+      expect(
+        voorgrond.where((d) => d.border != null),
+        isNotEmpty,
+        reason: 'er hoort een ring om het blok met de focus te staan',
+      );
+      for (final decoration in voorgrond) {
+        expect(
+          decoration.color,
+          isNull,
+          reason: 'een voorgrondvlak dekt het blok af',
+        );
+        expect(decoration.gradient, isNull, reason: 'idem, als verloop');
+        expect(
+          decoration.boxShadow,
+          anyOf(isNull, isEmpty),
+          reason:
+              'een BoxShadow in de voorgrond tekent een gevulde vorm over het '
+              'blok heen, geen gloed eromheen',
+        );
+      }
+
+      // En het blok is nog te lezen.
+      expect(find.text('Naar demo'), findsOneWidget);
+      expect(find.text('Kijk mee'), findsOneWidget);
+    });
+
     testWidgets('de categoriepillen zijn ook met het toetsenbord te wisselen', (
       tester,
     ) async {

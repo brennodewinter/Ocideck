@@ -623,7 +623,10 @@ class _MenuDisc extends StatelessWidget {
       semanticLabel: _menuSemanticLabel(block),
       ring: accent,
       halo: text,
-      ringWidth: w * 0.005,
+      // Zwaarder dan bij een kaart: een springende schijf draagt zélf al een
+      // accentrand van w*0.005, dus met dezelfde dikte zou "gefocust" niet meer
+      // zijn dan een tintje verschil (#1162, beeldkeuring).
+      ringWidth: w * 0.008,
       shape: BoxShape.circle,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -737,6 +740,41 @@ class _MenuFocusableState extends State<_MenuFocusable> {
     _node.unfocus();
   }
 
+  /// Twee ringen om [child]: buitenom de accentkleur, daarbinnen een dunnere
+  /// lijn in de tekstkleur.
+  ///
+  /// Waarom twee en niet één met een gloed eromheen: dat was de eerste poging,
+  /// met een `BoxShadow` zonder vervaging als halo. Een `BoxShadow` tekent geen
+  /// omtrek maar een **gevulde** vorm; normaal verdwijnt die onder de
+  /// achtergrond van de decoratie, maar deze had er geen en stond in de
+  /// voorgrond. Gevolg: het blok met de focus werd volledig overschilderd —
+  /// label, uitleg en pijl weg, precies op het blok dat de presentator moest
+  /// kunnen lezen (#1162, beeldkeuring). Twee geneste randen tekenen wél
+  /// omtrekken, en het kleurverschil doet hetzelfde werk als de gloed: op welke
+  /// achtergrond de dia ook staat, één van de twee steekt af.
+  ///
+  /// De volgorde volgt uit hoe een voorgrond-decoratie schildert — eerst het
+  /// kind, dan de decoratie — dus de binnenste `DecoratedBox` komt als eerste
+  /// aan de beurt en de buitenste dekt daar de rand van af.
+  Widget _ringed(Widget child) {
+    BoxDecoration ring(Color color, double width) => BoxDecoration(
+      shape: widget.shape,
+      borderRadius: widget.shape == BoxShape.circle
+          ? null
+          : widget.borderRadius,
+      border: Border.all(color: color, width: width),
+    );
+    return DecoratedBox(
+      position: DecorationPosition.foreground,
+      decoration: ring(widget.ring, widget.ringWidth),
+      child: DecoratedBox(
+        position: DecorationPosition.foreground,
+        decoration: ring(widget.halo, widget.ringWidth * 1.9),
+        child: child,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final activate = widget.onActivate;
@@ -786,27 +824,7 @@ class _MenuFocusableState extends State<_MenuFocusable> {
           ),
         },
         mouseCursor: SystemMouseCursors.click,
-        child: DecoratedBox(
-          position: DecorationPosition.foreground,
-          decoration: _focused
-              ? BoxDecoration(
-                  shape: widget.shape,
-                  borderRadius: widget.borderRadius,
-                  border: Border.all(
-                    color: widget.ring,
-                    width: widget.ringWidth,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: widget.halo,
-                      blurRadius: 0,
-                      spreadRadius: widget.ringWidth * 0.6,
-                    ),
-                  ],
-                )
-              : const BoxDecoration(),
-          child: widget.child,
-        ),
+        child: _focused ? _ringed(widget.child) : widget.child,
       ),
     );
   }
