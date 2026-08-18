@@ -53,9 +53,16 @@ const referenceStandards = <ReferenceStandard>[
         'beta-nummering (tot 0119) naar de canonieke id\'s, zodat de '
         'MASTG-kruiskoppeling blijft kloppen.',
     licence: 'CC-BY-SA-4.0',
-    // Geen releases, geen tags — alleen een doorlopende branch.
+    // Geen releases, geen tags — alleen een doorlopende branch. Vandaar de
+    // commitdatum, en vandaar ook het pad: `weaknesses/` is precies de map waar
+    // tool/build_maswe_catalog.dart uit leest, en dus het enige dat onze bundel
+    // kan verouderen. Repobreed meten deed dat niet: op 17-08-2026 zette
+    // upstream een build-workflow neer die geen enkele zwakheid raakte, en de
+    // poort meldde VEROUDERD op een bundel die woordelijk gelijk was. Dat is
+    // dezelfde les als bij MIAUW hieronder — meet wat je meedraagt.
     probe: UpstreamProbe.githubCommitDate,
     probeTarget: 'OWASP/maswe',
+    probePath: 'weaknesses',
   ),
   ReferenceStandard(
     id: 'cwe',
