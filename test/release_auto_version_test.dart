@@ -734,6 +734,137 @@ void main() {
     expect(fromRel.head, 'main');
   }, skip: skipOnWindows);
 
+  // Gedragstoets in een wegwerp-repo, net als bij cleanup_branch hierboven: de
+  // vórm van dit blok zegt niets, wat het achterlaat wel.
+  //
+  // De regel die het bewaakt: een verschoven momentopname (upstream bewoog, de
+  // gegenereerde catalogus komt er woordelijk hetzelfde uit) is administratie en
+  // rijdt vanzelf mee; een verschoven INHOUD stopt de keten. En in beide
+  // faalgevallen blijft er niets ongecommit staan — zo'n rest reist met de
+  // checkout van cleanup_branch mee naar main, en precies zo kwam de
+  // v0.4.2-versiebump ooit op een vreemde branch terecht.
+  test('een verschoven momentopname rijdt mee, verschoven inhoud niet', () {
+    final snippet =
+        'refresh_catalog_snapshot() {\n'
+        '${functionBody('refresh_catalog_snapshot')}\n}\n';
+
+    ({String out, int code, int commits, bool dirty}) play({
+      required String stubBody,
+      required int stubExit,
+    }) {
+      final dir = Directory.systemTemp.createTempSync('ocideck-catalogs');
+      String git(List<String> args) {
+        final r = Process.runSync('git', args, workingDirectory: dir.path);
+        if (r.exitCode != 0) fail('git ${args.join(' ')}: ${r.stderr}');
+        return (r.stdout as String).trim();
+      }
+
+      git(['-c', 'init.defaultBranch=main', 'init', '-q', '.']);
+      git(['config', 'user.email', 'test@example.invalid']);
+      git(['config', 'user.name', 'test']);
+      git(['config', 'commit.gpgsign', 'false']);
+      Directory('${dir.path}/lib/services').createSync(recursive: true);
+      Directory('${dir.path}/docs').createSync(recursive: true);
+      Directory('${dir.path}/scripts').createSync(recursive: true);
+      File(
+        '${dir.path}/lib/services/maswe_catalog.dart',
+      ).writeAsStringSync("const masweSnapshotDate = '2026-08-04';\n");
+      File(
+        '${dir.path}/lib/services/maswe_catalog_data.dart',
+      ).writeAsStringSync('// gegenereerd\n');
+      File(
+        '${dir.path}/docs/LICENSE_COMPLIANCE.md',
+      ).writeAsStringSync('| snapshot **2026-08-04** |\n');
+      git(['add', '.']);
+      git(['commit', '-qm', 'basis']);
+
+      File('${dir.path}/scripts/refresh_catalogs.sh').writeAsStringSync(
+        '#!/usr/bin/env bash\nset -e\n$stubBody\nexit $stubExit\n',
+      );
+      Process.runSync('chmod', [
+        '+x',
+        '${dir.path}/scripts/refresh_catalogs.sh',
+      ]);
+
+      File('${dir.path}/run.sh').writeAsStringSync(
+        'set -Eeuo pipefail\n'
+        'STEP=""\nCATALOGS_STALE=maswe\n'
+        'section() { printf "== %s ==\\n" "\$1"; }\n'
+        'log() { printf "   %s\\n" "\$1"; }\n'
+        'die() { printf "release-auto: %s\\n" "\$1" >&2; exit 1; }\n'
+        // Geen netwerk in een test: de nacontrole krijgt een lege stand.
+        'stale_catalog_ids() { :; }\n'
+        'catalogs_probe_json() { printf "[]"; }\n'
+        '$snippet\nrefresh_catalog_snapshot\n',
+      );
+      final r = Process.runSync('bash', [
+        '${dir.path}/run.sh',
+      ], workingDirectory: dir.path);
+      final commits = int.parse(git(['rev-list', '--count', 'HEAD']));
+      // Alleen de bestanden die deze stap aangaat: run.sh en het stub-script
+      // staan als ongevolgde bestanden in dezelfde map en zeggen niets.
+      final dirty = git([
+        'status',
+        '--porcelain',
+        '--',
+        'lib',
+        'docs',
+      ]).isNotEmpty;
+      final out = '${r.stdout}${r.stderr}';
+      dir.deleteSync(recursive: true);
+      return (out: out, code: r.exitCode, commits: commits, dirty: dirty);
+    }
+
+    // Alleen boekhouding: de constante en de licentietabel schuiven op, het
+    // gegenereerde deel niet. Dat hoort door te lopen, als eigen commit.
+    final boekhouding = play(
+      stubBody:
+          "printf \"const masweSnapshotDate = '2026-09-01';\\n\" "
+          '> lib/services/maswe_catalog.dart\n'
+          'printf "| snapshot **2026-09-01** |\\n" > docs/LICENSE_COMPLIANCE.md',
+      stubExit: 0,
+    );
+    expect(boekhouding.code, 0, reason: boekhouding.out);
+    expect(boekhouding.commits, 2, reason: 'de verschuiving hoort vastgelegd');
+    expect(boekhouding.dirty, isFalse);
+    expect(boekhouding.out, contains('bundel zelf is niet veranderd'));
+
+    // Inhoud verschoven: hier stopt het, en de werkboom blijft schoon achter.
+    final inhoud = play(
+      stubBody:
+          "printf \"const masweSnapshotDate = '2026-09-01';\\n\" "
+          '> lib/services/maswe_catalog.dart\n'
+          'printf "// een zwakheid erbij\\n" >> '
+          'lib/services/maswe_catalog_data.dart',
+      stubExit: 0,
+    );
+    expect(inhoud.code, isNot(0));
+    expect(inhoud.out, contains('INHOUD'));
+    expect(inhoud.commits, 1, reason: 'niets vastgelegd');
+    expect(
+      inhoud.dirty,
+      isFalse,
+      reason: 'een rest zou met cleanup_branch meereizen naar main',
+    );
+
+    // De verversing zelf faalt halverwege: ook dan blijft er niets staan.
+    final kapot = play(
+      stubBody:
+          "printf \"const masweSnapshotDate = 'half';\\n\" "
+          '> lib/services/maswe_catalog.dart',
+      stubExit: 3,
+    );
+    expect(kapot.code, isNot(0));
+    expect(kapot.out, contains('faalde'));
+    expect(kapot.commits, 1);
+    expect(kapot.dirty, isFalse);
+
+    // Niets veranderd terwijl de poort wél drift meldt: dat is geen groen licht.
+    final stil = play(stubBody: ':', stubExit: 0);
+    expect(stil.code, isNot(0));
+    expect(stil.out, contains('geen enkele wijziging'));
+  }, skip: skipOnWindows);
+
   test('de wachtwoordprompt meldt zich als eigen stap', () {
     // Een STEP-label blijft staan tot het volgende. Zonder eigen label kreeg een
     // fout bij de prompt (bijvoorbeeld read op EOF, zonder tty) de naam van de
