@@ -21,6 +21,8 @@
 # De keten (alles na de twee prompts, onbewaakt), volgens #1161:
 #   FASE 1 (lokaal, alles móét groen vóór de tag)
 #     verouderingsgate (referentiedata) → scanner-pins bumpen (idempotent)
+#     → momentopname referentiedata bijwerken als upstream bewoog zónder dat de
+#       gegenereerde catalogus verandert (verschuift de INHOUD wél, dan stopt het)
 #     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → committen
 #     → make check-release → make build-release → make notarize-macos
 #     → zegel verifiëren → de nieuwe .app in /Applications zetten
@@ -453,57 +455,124 @@ generate_changelog_section() {
 }
 
 # ── De verouderingsgate (#1161: de MASWE-aanleiding) ────────────────────────────
-# Aan het begin, vóór het wachtwoord: staat er upstream iets nieuws of loopt een
-# CI-pin achter, dan STOPT het script met een melding — je werkt het eerst bij
-# (make refresh-catalogs / de pins) en draait opnieuw, i.p.v. het stil mee te
-# bumpen tijdens een release. `deps-outdated` (pub) blijft adviserend: een
-# dependency-bump is een aparte afweging, geen release-blokker.
-# De verouderingsgate is nu ALLEEN de referentiedata (WSTG/MASTG/MASWE/CWE …): die
-# hard stoppen is terecht, want `make refresh-catalogs` verandert waar een rapport
-# naar verwijst — een bewuste stap, geen automaat. De scanner-CI-pins
-# (gitleaks/trufflehog/semgrep) worden NIET meer hier hard gestopt: die werkt
-# fase 1 automatisch bij met `make bump-scanner-pins` (zie hieronder). Zo blokkeert
-# een advisory scanner-drift geen release; catalogus-drift wel.
+# Aan het begin, vóór het wachtwoord. Wat er daarna gebeurt hangt af van wát er
+# verouderd is, en dat onderscheid is de hele functie.
+#
+# Een gebundelde catalogus kan om twee heel verschillende redenen achterlopen:
+#   * de **momentopname** is opgeschoven — upstream heeft iets aan de bron gedaan,
+#     maar wat wij eruit genereren komt er woordelijk hetzelfde uit. Dan is de
+#     afwijking pure boekhouding: een datum in een constante en een regel in de
+#     licentietabel. Daar hoeft geen mens naar te kijken, en fase 1 werkt dat
+#     vanzelf bij (zie refresh_snapshot) — precies zoals ze de scanner-pins
+#     bijwerkt. Het wordt een eigen commit op de release-branch, dus het is
+#     achteraf gewoon te zien en terug te draaien.
+#   * de **inhoud** is verschoven — er zijn zwakheden of tests bij gekomen,
+#     hernoemd of vervallen. Dat verandert waar een rapport naar verwijst, kan
+#     vertaalde tekst raken en trekt de vastgepinde aantallen in de tests eronder
+#     vandaan. Dat is een beslissing, geen automatisme, en daar stopt de keten.
+#
+# Het verschil is pas te zien ná het verversen, en daarom valt die splitsing in
+# fase 1 en niet hier. Hier bepalen we alleen of verversen überhaupt kán helpen:
+# `scripts/refresh_catalogs.sh` kent WSTG, MASTG en MASWE. Loopt CWE of MIAUW
+# achter, dan is er niets automatisch aan en stopt het hier meteen — met de
+# route die bij díe bron hoort, in plaats van een algemeen advies dat voor deze
+# bron niet werkt.
+#
+# `deps-outdated` (pub) blijft adviserend: een dependency-bump is een aparte
+# afweging, geen release-blokker. Scanner-CI-pins idem — die werkt fase 1 bij.
+
+# De catalogi die fase 1 mag verversen. Buiten deze drie is er geen generator.
+REFRESHABLE_CATALOGS="wstg mastg maswe"
+# Wordt door outdated_gate gevuld met de id's die fase 1 moet verversen.
+CATALOGS_STALE=""
+
+# De id's van niet-adviserende bronnen die upstream hebben zien bewegen.
+stale_catalog_ids() { # stale_catalog_ids JSON
+  printf '%s' "$1" \
+    | jq -r '.[] | select(.status=="verouderd" and .adviserend==false) | .id' 2>/dev/null
+}
+
+# Per bron de route die er écht bij hoort. Een algemene regel ("draai
+# refresh-catalogs") is hier erger dan geen regel: voor CWE en MIAUW doet dat
+# commando niets, en dan stuur je iemand een middag het bos in.
+handmatige_route() { # handmatige_route ID
+  case "$1" in
+    cwe)
+      printf '     * CWE: regenereer met tool/build_cwe_catalog.dart (de bron is een zip van\n' >&2
+      printf '       tientallen MB achter een gedateerde URL) en zet cweBundledVersion in\n' >&2
+      printf '       lib/services/reference_standards.dart.\n' >&2 ;;
+    miauw)
+      printf '     * MIAUW: neem een nieuwe momentopname van het werkboek over en zet\n' >&2
+      printf '       miauwBundledVersion op de commitdatum van de BRON, niet op de dag\n' >&2
+      printf '       waarop je het overnam.\n' >&2 ;;
+    cvss)
+      printf '     * CVSS: er bestaat een opvolger van de specificatie. Dat is een\n' >&2
+      printf '       implementatiebeslissing (lib/services/cvss/), geen verversing.\n' >&2 ;;
+    orphanet)
+      printf '     * Orphanet: make refresh-lexicon, en weeg de termdiff tegen de\n' >&2
+      printf '       vals-positievencorpus — bij een lexicon vuurt elke term.\n' >&2 ;;
+    *)
+      printf '     * %s: hiervoor is geen generator; werk de bundel met de hand bij en zet\n' "$1" >&2
+      printf '       de versie in lib/services/reference_standards.dart.\n' >&2 ;;
+  esac
+}
+
 outdated_gate() {
   STEP="verouderingsgate"
   section "Verouderingsgate (referentiedata)"
-  local co rc=0
-  co="$(make catalogs-outdated 2>&1)" || rc=$?
-  # Drie uitkomsten, en ze vragen alle drie iets anders van je. Ze worden op de
-  # tekst onderscheiden en niet op de afloopcode: make meldt élke gefaalde
-  # recept-regel als 2, dus die code zegt niets over de reden.
-  #
-  # "Niet kunnen kijken" is het geval dat hier eerder als veroudering las, en dat
-  # stuurde je naar een verversing die niets kón vinden — je was immers offline.
-  if printf '%s' "$co" | grep -q "geen enkele bron bereikbaar"; then
-    printf '%s\n' "$co" | sed 's/^/   /'
+  # De machineleesbare stand eerst: daar valt uit af te lezen wélke bron beweegt,
+  # en dat bepaalt of dit een automatische of een handmatige zaak is. Op de groene
+  # weg is dit de enige ronde langs de bronnen.
+  local json rc=0
+  json="$(dart run tool/check_reference_data.dart --json 2>/dev/null)" || rc=$?
+  if [ "$rc" -eq 2 ]; then
     die "de referentiebronnen waren niet bereikbaar (netwerk?) — niet gekeken is niet hetzelfde als actueel. Probeer opnieuw zodra je online bent."
   fi
-  # De controle zelf brak: geen oordeel over de bundel, dus ook geen advies over
-  # verversen. Toon wat er misging.
-  if [ "$rc" -ne 0 ] && ! printf '%s' "$co" | grep -q "standaard(en) hebben een nieuwere"; then
-    printf '%s\n' "$co" | sed 's/^/   /'
-    die "de verouderingscontrole zelf faalde — zie hierboven; dit zegt niets over de bundel."
+  printf '%s' "$json" | jq -e 'type == "array"' >/dev/null 2>&1 \
+    || die "de verouderingscontrole gaf geen bruikbare uitkomst — draai 'make catalogs-outdated' met de hand; dit zegt niets over de bundel."
+
+  # Bronnen die niet te bereiken waren blijven hier niet stil. Ze blokkeren de
+  # release niet — dat zou elke hik van GitHub een release kosten — maar
+  # "ik heb niet kunnen kijken" hoort wel op het scherm te staan.
+  local onbekend
+  onbekend="$(printf '%s' "$json" | jq -r '.[] | select(.status=="onbekend") | .naam' | paste -sd', ' -)"
+  [ -z "$onbekend" ] || log "Niet kunnen kijken bij: $onbekend (blokkeert niet, maar is geen goedkeuring)."
+
+  local stale id
+  stale="$(stale_catalog_ids "$json" | tr '\n' ' ')"
+  stale="$(printf '%s' "$stale" | xargs || true)"
+  if [ -z "$stale" ]; then
+    log "Referentiedata actueel."
+    log "Scanner-pins worden in fase 1 automatisch bijgewerkt (bump-scanner-pins)."
+    log "Dependencies (adviserend):"
+    make deps-outdated 2>&1 | grep -iE "upgradable|outdated|newer|→" | head -8 | sed 's/^/     /' || true
+    return 0
   fi
-  if ! printf '%s' "$co" | grep -q "Reference data OK."; then
-    printf '%s\n' "$co" | sed 's/^/   /'
-    # De remedie stond hier vroeger fout, en dat is erger dan geen remedie: het
-    # advies luidde "make refresh-catalogs (+ de versies in
-    # reference_standards.dart)", terwijl die verversing de bron ophaalde op de
-    # versie die al vastlag én de versies niet bijschreef. Wie het opvolgde kwam
-    # terug op dezelfde melding. Sinds 18-08-2026 sluit scripts/refresh_catalogs.sh
-    # de lus: het haalt op wat upstream nú is en legt versie, aantal en
-    # licentietabel meteen vast. Deze regel noemt dus één commando dat werkt,
-    # en zegt erbij dat de diff van jou is — het is een inhoudelijke wijziging.
-    printf '\n   Zo werk je het bij (één commando, het legt de versies zelf vast):\n' >&2
-    printf '     make refresh-catalogs && git diff\n' >&2
-    printf '   Lees de diff, commit hem als eigen wijziging, en draai deze release opnieuw.\n' >&2
+
+  # Er is drift. Nu pas de leesbare tabel erbij — dat is een tweede ronde langs de
+  # bronnen, en die kost alleen op deze zeldzame weg iets.
+  make catalogs-outdated 2>&1 | sed 's/^/   /' || true
+
+  local handmatig=""
+  for id in $stale; do
+    case " $REFRESHABLE_CATALOGS " in
+      *" $id "*) ;;
+      *) handmatig="$handmatig $id" ;;
+    esac
+  done
+  handmatig="$(printf '%s' "$handmatig" | xargs || true)"
+  if [ -n "$handmatig" ]; then
+    printf '\n   Hiervoor bestaat geen automatische verversing:\n' >&2
+    for id in $handmatig; do handmatige_route "$id"; done
+    printf '   Werk dat bij, dien het als eigen wijziging in, en draai de release opnieuw.\n' >&2
     die "referentiedata niet actueel — de bundel gaat niet ongezien de deur uit."
   fi
-  log "Referentiedata actueel."
-  log "Scanner-pins worden in fase 1 automatisch bijgewerkt (bump-scanner-pins)."
-  log "Dependencies (adviserend):"
-  make deps-outdated 2>&1 | grep -iE "upgradable|outdated|newer|→" | head -8 | sed 's/^/     /' || true
+
+  CATALOGS_STALE="$stale"
+  log ""
+  log "Fase 1 ververst dit zelf ($CATALOGS_STALE) en legt het vast als eigen commit."
+  log "Blijkt de INHOUD verschoven — en niet alleen de momentopname — dan stopt de"
+  log "keten daar alsnog: dat verandert waar een rapport naar verwijst."
 }
 
 # ── Het plan tonen ──────────────────────────────────────────────────────────────
@@ -524,7 +593,8 @@ show_plan() {
   cat <<STEPS
 
   Keten (onbewaakt na het wachtwoord):
-    FASE 1  verouderingsgate → scanner-pins bumpen → bump → make sbom → committen
+    FASE 1  verouderingsgate → scanner-pins bumpen → [momentopname referentiedata]
+            → bump → make sbom → committen
             → make check-release → build + notarize → zegel → /Applications
     FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
             → tag $TAG → push origin+mirror → CI volgen
@@ -1073,6 +1143,62 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
   log "Scanner-pins gebumpt en gecommit; nieuw scans-image volgt in fase 2."
 else
   log "Scanner-pins waren al actueel."
+fi
+
+# ── Referentiedata: de momentopname mag mee, de inhoud niet ────────────────────
+# outdated_gate heeft al vastgesteld dát er iets bewoog en dat er een generator
+# voor is. Hier blijkt pas wát er bewoog, en dat bepaalt of de release doorloopt.
+#
+# De verversing schrijft twee soorten dingen: de gegenereerde catalogusdelen
+# (`*_data.dart`, `*_android.dart`, `*_ios.dart`) en de boekhouding eromheen (de
+# constante in de catalogus, de rij in de licentietabel). Blijven de eerste
+# ongemoeid, dan is de bundel woordelijk gelijk gebleven en is er alleen een datum
+# opgeschoven — administratie, en die rijdt gewoon mee als eigen commit.
+#
+# Raakt de verversing wél een gegenereerd deel, dan stopt het hier. Zo'n wijziging
+# verandert waar een rapport naar verwijst, kan de `bundled`-omschrijving (en
+# daarmee 31 vertalingen) raken, en trekt de vastgepinde aantallen in
+# wstg/mastg/maswe_catalog_test eronder vandaan. Dat hoort iemand te zien.
+#
+# In beide faalgevallen wordt de werkboom eerst teruggezet. Niet uit netheid: een
+# niet-gecommitte wijziging reist met de `git checkout` van cleanup_branch mee
+# naar main, en precies zo kwam de v0.4.2-versiebump ooit op een vreemde branch
+# terecht. Wat hier blijft staan, staat in een commit of het staat er niet.
+STEP="referentiedata verversen"
+if [ -n "$CATALOGS_STALE" ]; then
+  section "Fase 1 — momentopname referentiedata bijwerken ($CATALOGS_STALE)"
+  if ! scripts/refresh_catalogs.sh; then
+    git checkout --quiet -- lib/services docs/LICENSE_COMPLIANCE.md 2>/dev/null || true
+    die "de verversing van $CATALOGS_STALE faalde — zie hierboven. Niets gemuteerd."
+  fi
+  if git diff --quiet; then
+    die "de poort meldt $CATALOGS_STALE als verouderd, maar verversen levert geen enkele wijziging op — de generator produceert niet waar de probe naar kijkt. Ga daar eerst achteraan; de release stopt hier."
+  fi
+  if git diff --name-only | grep -qE '_data\.dart|_android\.dart|_ios\.dart'; then
+    git diff --stat | sed 's/^/     /'
+    git checkout --quiet -- lib/services docs/LICENSE_COMPLIANCE.md 2>/dev/null || true
+    die "de INHOUD van een catalogus is verschoven, niet alleen de momentopname. Dat verandert waar een rapport naar verwijst en hoort langs een mens: draai 'make refresh-catalogs', lees de diff (let op de aantallen in de catalogus-tests en op vertaalde tekst) en dien hem als eigen wijziging in. Daarna is deze release een gewone run."
+  fi
+  git add lib/services docs/LICENSE_COMPLIANCE.md
+  CATALOG_MOVES="$(git diff --cached -U0 -- lib/services | grep -E "^[+-]const " | sed 's/^/  /')"
+  git commit --quiet -m "chore(referentiedata): momentopname bijwerken ($CATALOGS_STALE)
+
+Upstream bewoog, de gegenereerde catalogus kwam er woordelijk hetzelfde uit. Dan
+is dit administratie: de genoteerde momentopname en de regel in de licentietabel.
+Automatisch meegenomen door scripts/release_auto.sh; de keten stopt wél zodra een
+gegenereerd deel verandert.
+
+$CATALOG_MOVES
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+  log "Momentopname bijgewerkt en vastgelegd; de bundel zelf is niet veranderd."
+  # Fail fast: is de poort hiermee echt schoon? Zo niet, dan valt make
+  # check-release er straks alsnog over, tien minuten verderop en met een melding
+  # die naar de verkeerde stap wijst.
+  CATALOGS_LEFT="$(stale_catalog_ids "$(dart run tool/check_reference_data.dart --json 2>/dev/null)" | tr '\n' ' ')"
+  CATALOGS_LEFT="$(printf '%s' "$CATALOGS_LEFT" | xargs || true)"
+  [ -z "$CATALOGS_LEFT" ] \
+    || die "na de verversing meldt de poort nog steeds: $CATALOGS_LEFT. De verversing haalt kennelijk iets anders op dan de probe meet."
 fi
 
 python3 - "$NEW_VERSION" "$NEW_BUILD" <<'PY'
