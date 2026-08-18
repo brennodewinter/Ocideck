@@ -82,30 +82,47 @@ class FootnoteRefSyntax extends md.InlineSyntax {
   }
 }
 
-/// Herkent een definitieregel `[^label]: de noot`.
+/// Herkent een definitieregel `[^label]: de noot`, inclusief de ingesprongen
+/// vervolgregels die erbij horen.
 ///
-/// Eén regel, en geen ingesprongen vervolgregels: die zouden hier als losse
-/// alinea's terugkomen. Een noot die in de bron over twee regels stond, komt na
-/// een bewerking in de visuele editor dus als één regel terug — de tekst blijft
-/// gelijk, alleen de regelval verandert. Dat is de enige plek waar deze route
-/// de bytes aanraakt, en hij doet het zichtbaar in plaats van stiekem.
+/// Die vervolgregels moeten mee: een ingesprongen regel is voor de
+/// markdown-parser anders een codeblok, en dan kwam `    en de rest.` er als
+/// ```-fence weer uit — echte tekst van de gebruiker, veranderd in code. Ze
+/// worden aan de noot geplakt met een spatie ertussen, precies zoals de
+/// weergave ze ook leest.
+///
+/// Wat daarmee verandert is de regelval in de bron: een noot die over twee
+/// regels stond, komt na een bewerking in de visuele editor als één regel terug.
+/// De tekst is dan identiek; alleen de regelovergang is weg. Dat is de enige
+/// plek waar deze route de bytes aanraakt, en FILE_FORMAT.md §14.9 zegt het
+/// hardop in plaats van het stil te laten gebeuren.
 class FootnoteDefSyntax extends md.BlockSyntax {
   const FootnoteDefSyntax();
 
   @override
   RegExp get pattern => RegExp(r'^ {0,3}\[\^([^\]\s]+)\]:[ \t]*(.*)$');
 
+  /// Een vervolgregel: ingesprongen met vier spaties of een tab, en niet leeg.
+  /// Dezelfde regel als Pandoc, en de enige die een gewone alinea eronder niet
+  /// per ongeluk opslokt.
+  static final _continuation = RegExp(r'^(?: {4}|\t)\s*\S');
+
   @override
   md.Node? parse(md.BlockParser parser) {
     final match = pattern.firstMatch(parser.current.content)!;
     parser.advance();
+    final parts = [match.group(2)!.trim()];
+    while (!parser.isDone && _continuation.hasMatch(parser.current.content)) {
+      parts.add(parser.current.content.trim());
+      parser.advance();
+    }
     // In een alinea gewikkeld, om dezelfde reden als de inhoudsopgave-marker:
     // een kale embed erft de blokopmaak van de regel erna, en een definitie
     // vlak vóór een `##` werd dan zelf een kop.
     return md.Element('p', [
       md.Element.empty(EmbeddableFootnoteDef.footnoteDefType)
         ..attributes['label'] = match.group(1)!
-        ..attributes['text'] = match.group(2)!.trim(),
+        ..attributes['text'] = parts.where((p) => p.isNotEmpty).join(' '),
     ]);
   }
 }

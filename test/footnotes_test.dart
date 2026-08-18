@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/footnotes.dart';
+import 'package:ocideck/utils/markdown_quill_codec.dart';
 
 /// Voetnoten in een document: `[^1]` in de tekst, `[^1]: …` als definitie.
 /// De ontleding is gedeeld door de weergave, de vellen en beide exports — dus
@@ -89,6 +90,36 @@ Zin [^1].
 
     test('een definitie telt niet als verwijzing', () {
       expect(footnoteReferencesIn('[^x]: de noot'), isEmpty);
+    });
+  });
+  group('door de rijke-tekstlaag heen en weer', () {
+    // De visuele editor draagt een voetnoot als twee embeds. Wat erin gaat moet
+    // er byte-voor-byte weer uitkomen — anders herschrijft het openen van een
+    // ándere weergave het bestand van de gebruiker.
+    String roundTrip(String markdown) =>
+        MarkdownQuillCodec.markdownFromDocument(
+          MarkdownQuillCodec.documentFromMarkdown(markdown),
+        );
+
+    test('verwijzing en definitie komen er onveranderd uit', () {
+      const md = 'Een zin [^1] met een noot.\n\n[^1]: De noot zelf.\n\nSlot.';
+      expect(roundTrip(md), md.trimRight());
+    });
+
+    test('een zelfgekozen label blijft dat label', () {
+      const md = 'Zie [^bron].\n\n[^bron]: Het boek.';
+      expect(roundTrip(md), md);
+    });
+
+    test('een ingesprongen vervolgregel wordt geen codeblok', () {
+      // Voor de markdown-parser is een ingesprongen regel een codeblok; zonder
+      // dat de definitie hem opslokt kwam de tekst van de gebruiker er als
+      // ```-fence weer uit. Nu wordt het één regel — de tekst blijft heel,
+      // alleen de regelovergang in de bron verdwijnt (FILE_FORMAT.md §14.9).
+      const md = 'Zin [^1].\n\n[^1]: Eerste regel\n    en de rest.\n\nSlot.';
+      final back = roundTrip(md);
+      expect(back, isNot(contains('```')));
+      expect(back, contains('[^1]: Eerste regel en de rest.'));
     });
   });
 }
