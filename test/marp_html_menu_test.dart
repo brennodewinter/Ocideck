@@ -187,16 +187,13 @@ void main() {
       expect(html, isNot(contains('menu-label">\u{E010}')));
     });
 
-    test(
-      'the "onder elkaar" layout renders as a single-column stack',
-      () async {
-        final service = MarpHtmlService(loadAsset: _diskLoader);
-        final html = await service.build(categorisedDeck(MenuLayout.list));
-        expect(html, contains('<div class="menu-grid menu-stack">'));
-        // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
+    test('the "onder elkaar" layout renders as a single-column stack', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.list));
+      expect(html, contains('<div class="menu-grid menu-stack">'));
+      // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
       expect(html, isNot(contains('class="menu-ring"')));
-      },
-    );
+    });
 
     test('the circle layout places each disc without script', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);

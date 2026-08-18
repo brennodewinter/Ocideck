@@ -15,7 +15,12 @@ void main() {
   final longLabel = List.filled(10, 'Heel lang label').join(' ');
   final longText = List.filled(8, 'en een uitleg die maar doorgaat').join(' ');
 
-  Future<void> pump(WidgetTester tester, Slide slide, double w, double h) async {
+  Future<void> pump(
+    WidgetTester tester,
+    Slide slide,
+    double w,
+    double h,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
