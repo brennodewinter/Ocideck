@@ -547,6 +547,10 @@ class SlidePreviewWidget extends StatelessWidget {
                   mediaRedacted: slide.mediaRedacted,
                   decodeMaxEdge: decodeMaxEdge,
                   marpStyle: marpStyle,
+                  slideText: AppTheme.parseHexColor(themeProfile.textColor),
+                  slideBackground: AppTheme.parseHexColor(
+                    themeProfile.slideBackgroundColor,
+                  ),
                   onEnableOnlineMedia: onEnableOnlineMedia,
                   child: _buildSlide(slide.projectionWithViewLimit()),
                 ),

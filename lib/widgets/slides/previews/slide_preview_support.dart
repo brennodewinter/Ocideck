@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 import '../../../models/marp_style.dart';
+import '../../../theme/app_theme.dart';
 import '../../../utils/marp_style_values.dart';
 
 class MarpFilteredImage extends StatelessWidget {
@@ -202,6 +203,18 @@ class SlideLinkScope extends InheritedWidget {
   final int? decodeMaxEdge;
   final MarpStyle marpStyle;
 
+  /// De tekst- en achtergrondkleur van deze dia, zoals het [ThemeProfile] (met
+  /// eventuele Marp-overschrijvingen) ze oplevert.
+  ///
+  /// Rijden mee in de scope om dezelfde reden als [mediaRedacted] hierboven: de
+  /// plaatshouders voor een ontbrekende afbeelding staan diep in de renderers,
+  /// achter negen aanroepplekken, en tekenden daarom een vast lichtgrijs vlak met
+  /// vaste grijze tekst. Op een donkere dia is dat een fel blok midden in het
+  /// beeld — de zesde ontsnappingsroute langs de themaregel (#1162,
+  /// beeldkeuring). Als parameter zou de tiende aanroepplek hem vergeten.
+  final Color slideText;
+  final Color slideBackground;
+
   /// Wat er gebeurt als de gebruiker vanaf een geblokkeerde-online-media-
   /// placeholder online media wil aanzetten: een sprong naar de instelling.
   /// Alleen de editor-preview zet dit; in de presenter, thumbnails, export en de
@@ -217,6 +230,8 @@ class SlideLinkScope extends InheritedWidget {
     this.mediaRedacted = false,
     this.decodeMaxEdge,
     this.marpStyle = const MarpStyle(),
+    this.slideText = AppTheme.darkInk,
+    this.slideBackground = Colors.white,
     this.onEnableOnlineMedia,
     required super.child,
   });
@@ -250,6 +265,16 @@ class SlideLinkScope extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<SlideLinkScope>()?.marpStyle ??
       const MarpStyle();
 
+  static Color slideTextOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<SlideLinkScope>()?.slideText ??
+      AppTheme.darkInk;
+
+  static Color slideBackgroundOf(BuildContext context) =>
+      context
+          .dependOnInheritedWidgetOfExactType<SlideLinkScope>()
+          ?.slideBackground ??
+      Colors.white;
+
   static VoidCallback? onEnableOnlineMediaOf(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<SlideLinkScope>()
       ?.onEnableOnlineMedia;
@@ -262,5 +287,7 @@ class SlideLinkScope extends InheritedWidget {
       oldWidget.mediaRedacted != mediaRedacted ||
       oldWidget.decodeMaxEdge != decodeMaxEdge ||
       oldWidget.marpStyle != marpStyle ||
+      oldWidget.slideText != slideText ||
+      oldWidget.slideBackground != slideBackground ||
       oldWidget.onEnableOnlineMedia != onEnableOnlineMedia;
 }

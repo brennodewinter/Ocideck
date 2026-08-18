@@ -178,7 +178,9 @@ const Map<String, int> fileSizeBaseline = {
   // +15 (#1162): de menucategorie en zijn terugroep (velden + doc + constructor
   // + doorgifte), plus de import en het `part` van menu_preview_layouts.dart.
   // De indelingen zelf staan in dat part-bestand, niet hier.
-  'lib/widgets/slides/slide_preview.dart': 1038,
+  // +4 (#1162): de tekst- en achtergrondkleur van de dia meegeven aan de
+  // link-scope, zodat de plaatshouders het thema volgen.
+  'lib/widgets/slides/slide_preview.dart': 1042,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1073,
