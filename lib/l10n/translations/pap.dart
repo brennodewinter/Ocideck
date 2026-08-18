@@ -674,6 +674,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Kategoria',
+  'Categorie toevoegen': 'Agregá kategoria',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Kita kategoria (blòkinan ta keda)',
+  'Uitleg': 'Splikashon',
+  'Eén regel, staat onder het label': 'Un liña, ta bai bou di e label',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Un menú di skoho: kada blòki ta bula pa un otro slide ora bo klik riba dje. Skirbi un label i un splikashon pa kada blòki, skohe e slide di destino i opshonalmente un imagen. Skohe e areglo: kuadrikula, lista òf sirkel. Ku kategorianan bo ta kambia entre gruponan di blòki durante e presentashon. Un blòki sin destino ta teksto normal.',
   'Hoofdstukken op nieuwe pagina': 'Kapítulo riba página nobo',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Awor kada kapítulo ta kuminsá riba un página nobo',
@@ -1024,8 +1033,6 @@ const _dutchSourceAddPap = {
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Ainda no tin blòk. Agregá un blòk di skohe.',
   'Keuzemenu': 'Menú di skoho',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Un menú di skoho: kada blòki ta bula pa un otro slide ora bo klik riba dje. Skirbi un label pa kada blòki, skohe e slide di destino i opshonalmente un imagen. Un blòki sin destino ta teksto normal.',
   'Hierna': 'Despues',
   'Volgende dia': 'Siguiente slide',
   'Sprong': 'Salto',

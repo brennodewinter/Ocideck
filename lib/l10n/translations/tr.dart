@@ -2567,6 +2567,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Onder elkaar': 'Liste',
+  'Categorie': 'Kategori',
+  'Categorie toevoegen': 'Kategori ekle',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Kategoriyi kaldır (bloklar korunur)',
+  'Uitleg': 'Açıklama',
+  'Eén regel, staat onder het label': 'Tek satır, etiketin altında görünür',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Bir seçim menüsü: her blok tıklandığında başka bir slayda atlar. Her blok için bir etiket ve bir açıklama girin, hedef slaydı ve isteğe bağlı olarak bir resim seçin. Düzeni seçin: ızgara, liste veya daire. Kategorilerle sunum sırasında blok grupları arasında geçiş yaparsınız. Hedefi olmayan bir blok düz metindir.',
   'Hoofdstukken op nieuwe pagina': 'Bölümler yeni sayfada',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Artık her bölüm yeni bir sayfada başlıyor',
@@ -2912,8 +2921,6 @@ const _dutchSourceAddTr = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Henüz blok yok. Bir seçim bloğu ekleyin.',
   'Keuzemenu': 'Seçim menüsü',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Bir seçim menüsü: her blok tıklandığında başka bir slayda atlar. Her blok için bir etiket girin, hedef slaydı ve isteğe bağlı olarak bir resim seçin. Hedefi olmayan bir blok düz metindir.',
   'Hierna': 'Sonra',
   'Volgende dia': 'Sonraki slayt',
   'Sprong': 'Atla',

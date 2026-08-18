@@ -1649,6 +1649,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Kategori',
+  'Categorie toevoegen': 'Lägg till kategori',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Ta bort kategori (blocken behålls)',
+  'Uitleg': 'Beskrivning',
+  'Eén regel, staat onder het label': 'En rad, visas under etiketten',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'En valmeny: varje block hoppar till en annan diabild när man klickar på det. Skriv en etikett och en beskrivning för varje block, välj måldiabilden och eventuellt en bild. Välj layout: rutnät, lista eller cirkel. Med kategorier växlar du mellan grupper av block under presentationen. Ett block utan mål är vanlig text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel på ny sida',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Varje kapitel börjar nu på en ny sida',
@@ -1998,8 +2007,6 @@ const _dutchSourceAddSv = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Inga block ännu. Lägg till ett valblock.',
   'Keuzemenu': 'Valmeny',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'En valmeny: varje block hoppar till en annan diabild när man klickar på det. Skriv en etikett för varje block, välj måldiabilden och eventuellt en bild. Ett block utan mål är vanlig text.',
   'Hierna': 'Därefter',
   'Volgende dia': 'Nästa bild',
   'Sprong': 'Hopp',

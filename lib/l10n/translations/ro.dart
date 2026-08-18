@@ -1667,6 +1667,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Onder elkaar': 'Listă',
+  'Categorie': 'Categorie',
+  'Categorie toevoegen': 'Adaugă categorie',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Elimină categoria (blocurile sunt păstrate)',
+  'Uitleg': 'Descriere',
+  'Eén regel, staat onder het label': 'Un rând, apare sub etichetă',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă și o descriere pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Alegeți aranjarea: grilă, listă sau cerc. Cu ajutorul categoriilor comutați între grupuri de blocuri în timpul prezentării. Un bloc fără țintă este text obișnuit.',
   'Hoofdstukken op nieuwe pagina': 'Capitole pe pagină nouă',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Fiecare capitol începe acum pe o pagină nouă',
@@ -2016,8 +2025,6 @@ const _dutchSourceAddRo = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Încă nu există blocuri. Adaugă un bloc de alegere.',
   'Keuzemenu': 'Meniu de opțiuni',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Un bloc fără țintă este text obișnuit.',
   'Hierna': 'Apoi',
   'Volgende dia': 'Diapozitivul următor',
   'Sprong': 'Salt',

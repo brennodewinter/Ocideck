@@ -1652,6 +1652,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Onder elkaar': 'Lista',
+  'Categorie': 'Kategória',
+  'Categorie toevoegen': 'Kategória hozzáadása',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Kategória megszüntetése (a blokkok megmaradnak)',
+  'Uitleg': 'Leírás',
+  'Eén regel, staat onder het label': 'Egy sor, a címke alatt jelenik meg',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Választómenü: minden blokk kattintásra egy másik diára ugrik. Adjon meg minden blokkhoz egy címkét és egy leírást, válassza ki a céldiát és tetszés szerint egy képet. Válassza ki az elrendezést: rács, lista vagy kör. A kategóriákkal bemutatás közben válthat a blokkcsoportok között. A cél nélküli blokk egyszerű szöveg.',
   'Hoofdstukken op nieuwe pagina': 'Fejezetek új oldalon',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Minden fejezet mostantól új oldalon kezdődik',
@@ -2003,8 +2012,6 @@ const _dutchSourceAddHu = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Még nincsenek blokkok. Adjon hozzá egy választóblokkot.',
   'Keuzemenu': 'Választómenü',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Választómenü: minden blokk kattintásra egy másik diára ugrik. Adjon meg minden blokkhoz egy címkét, válassza ki a céldiát és tetszés szerint egy képet. A cél nélküli blokk egyszerű szöveg.',
   'Hierna': 'Ezután',
   'Volgende dia': 'Következő dia',
   'Sprong': 'Ugrás',

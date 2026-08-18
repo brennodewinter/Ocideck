@@ -1652,6 +1652,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Onder elkaar': 'Seznam',
+  'Categorie': 'Kategorie',
+  'Categorie toevoegen': 'Přidat kategorii',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Zrušit kategorii (bloky zůstanou zachovány)',
+  'Uitleg': 'Vysvětlení',
+  'Eén regel, staat onder het label': 'Jeden řádek, zobrazí se pod popiskem',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Nabídka voleb: každý blok po kliknutí přejde na jiný snímek. Pro každý blok zadejte popisek a vysvětlení, vyberte cílový snímek a případně obrázek. Zvolte rozvržení: mřížka, seznam nebo kruh. Pomocí kategorií během prezentace přepínáte mezi skupinami bloků. Blok bez cíle je běžný text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitoly na nové stránce',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Každá kapitola nyní začíná na nové stránce',
@@ -2001,8 +2010,6 @@ const _dutchSourceAddCs = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Zatím žádné bloky. Přidejte blok výběru.',
   'Keuzemenu': 'Nabídka voleb',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Nabídka voleb: každý blok po kliknutí přejde na jiný snímek. Pro každý blok zadejte popisek, vyberte cílový snímek a případně obrázek. Blok bez cíle je běžný text.',
   'Hierna': 'Poté',
   'Volgende dia': 'Další snímek',
   'Sprong': 'Skok',

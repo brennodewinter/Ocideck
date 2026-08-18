@@ -1652,6 +1652,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Onder elkaar': 'Lischte',
+  'Categorie': 'Kategorie',
+  'Categorie toevoegen': 'Kategorie zuefüege',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Kategorie ufhebe (d Blöck blibed erhalte)',
+  'Uitleg': 'Erklärig',
+  'Eén regel, staat onder het label': 'Ei Zile, staht under de Beschriftig',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Es Uswahlmenü: jede Block springt bim Aaklicke uf e anderi Folie. Gib pro Block e Beschriftig und e Erklärig ii, wähl d Zielfolie und optional es Bild. Wähl d Ufteilig: Raschter, Lischte oder Chreis. Mit Kategorie wechslisch während em Presentiere zwüschet Gruppe vo Blöck. E Block ohni Ziel isch eifache Text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel uf ere neue Site',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Jedes Kapitel faht jetz uf ere neue Site aa',
@@ -1999,8 +2008,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'No kei Blöck. Füeg en Uswahlblock zue.',
   'Keuzemenu': 'Uswahlmenü',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Es Uswahlmenü: jede Block springt bim Aaklicke uf e anderi Folie. Gib pro Block e Beschriftig ii, wähl d Zielfolie und optional es Bild. E Block ohni Ziel isch eifache Text.',
   'Hierna': 'Denn',
   'Volgende dia': 'Nächschti Folie',
   'Sprong': 'Sprung',

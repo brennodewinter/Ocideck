@@ -675,6 +675,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Onder elkaar': 'Liste',
+  'Categorie': 'Catégorie',
+  'Categorie toevoegen': 'Ajouter une catégorie',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Supprimer la catégorie (les blocs sont conservés)',
+  'Uitleg': 'Description',
+  'Eén regel, staat onder het label': 'Une ligne, affichée sous l\'étiquette',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Un menu de choix : chaque bloc passe à une autre diapositive lorsqu\'on clique dessus. Saisissez une étiquette et une description par bloc, choisissez la diapositive cible et éventuellement une image. Choisissez la disposition : grille, liste ou cercle. Les catégories permettent de passer d\'un groupe de blocs à l\'autre pendant la présentation. Un bloc sans cible est du texte ordinaire.',
   'Hoofdstukken op nieuwe pagina': 'Chapitres sur nouvelle page',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Chaque chapitre commence maintenant sur une nouvelle page',
@@ -1030,8 +1039,6 @@ const _dutchSourceAddFr = {
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Aucun bloc pour l\'instant. Ajoutez un bloc de choix.',
   'Keuzemenu': 'Menu de choix',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Un menu de choix : chaque bloc passe à une autre diapositive lorsqu\'on clique dessus. Saisissez une étiquette par bloc, choisissez la diapositive cible et éventuellement une image. Un bloc sans cible est du texte ordinaire.',
   'Hierna': 'Ensuite',
   'Volgende dia': 'Diapositive suivante',
   'Sprong': 'Saut',

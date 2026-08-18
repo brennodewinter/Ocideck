@@ -1650,6 +1650,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Onder elkaar': 'Luettelo',
+  'Categorie': 'Luokka',
+  'Categorie toevoegen': 'Lisää luokka',
+  'Categorie opheffen (blokken blijven behouden)':
+      'Poista luokka (lohkot säilyvät)',
+  'Uitleg': 'Kuvaus',
+  'Eén regel, staat onder het label': 'Yksi rivi, näkyy nimikkeen alla',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
+      'Valintavalikko: jokainen lohko siirtyy toiseen diaan, kun sitä napsautetaan. Kirjoita jokaiselle lohkolle nimike ja kuvaus, valitse kohdedia ja halutessasi kuva. Valitse asettelu: ruudukko, luettelo tai ympyrä. Luokkien avulla vaihdat esityksen aikana lohkoryhmien välillä. Lohko ilman kohdetta on tavallista tekstiä.',
   'Hoofdstukken op nieuwe pagina': 'Luvut uudelle sivulle',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Jokainen luku alkaa nyt uudelta sivulta',
@@ -1997,8 +2006,6 @@ const _dutchSourceAddFi = <String, String>{
   'Nog geen blokken. Voeg een keuzeblok toe.':
       'Ei vielä lohkoja. Lisää valintalohko.',
   'Keuzemenu': 'Valintavalikko',
-  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
-      'Valintavalikko: jokainen lohko siirtyy toiseen diaan, kun sitä napsautetaan. Kirjoita jokaiselle lohkolle nimike, valitse kohdedia ja halutessasi kuva. Lohko ilman kohdetta on tavallista tekstiä.',
   'Hierna': 'Sitten',
   'Volgende dia': 'Seuraava dia',
   'Sprong': 'Hyppy',
