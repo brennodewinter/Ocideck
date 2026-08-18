@@ -118,6 +118,10 @@ need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
 # ── Fail-safe: waar zijn we, en is de tag al onherroepelijk de deur uit? ─────────
 STEP="init"
 TAG_PUSHED=0
+# Staat de release-branch al op origin, dan is een verse run geen optie meer —
+# die weigert er terecht bovenop te bouwen. De juiste route is dan --resume, en
+# dat hoort de foutmelding te zeggen in plaats van "draai opnieuw".
+BRANCH_PUSHED=0
 BRANCH=""
 # De branch waar de release vandaan vertrok; cleanup_branch keert hierheen terug.
 START_BRANCH="$(git branch --show-current 2>/dev/null || true)"
@@ -170,6 +174,13 @@ on_err() {
     printf '  DEZELFDE tag af zodra dat hersteld is:  scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
     printf '  Alleen als een uitgebracht artefact zelf fout is, snijd je de VOLGENDE patch-tag;\n' >&2
     printf '  verplaats deze tag nooit (dat breekt de mirror-Windows-release).\n' >&2
+  elif [ "$BRANCH_PUSHED" -eq 1 ]; then
+    printf '  Er is niets onherroepelijks gebeurd: de tag staat er niet.\n' >&2
+    printf '  Maar de release-branch %s staat wél op origin, dus een verse run\n' "$BRANCH" >&2
+    printf '  weigert er straks bovenop te bouwen. Herstel de oorzaak en hervat:\n' >&2
+    printf '      scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
+    printf '  (of gooi de branch en de PR weg als je liever helemaal opnieuw begint).\n' >&2
+    cleanup_branch
   else
     printf '  Er is nog niets naar buiten gegaan; repareer het en draai het script opnieuw.\n' >&2
     # cleanup_branch meldt zélf wat het deed. Beweer hier dus niets vooraf: de
@@ -948,6 +959,9 @@ follow_ci() {
 # overgedaan — die zit al in de gepushte branch/PR als we hier iets vinden.
 resume_release() {
   section "Hervatten — $TAG"
+  # Wat we hervatten staat al op origin; een fout onderweg hoort dus ook hier
+  # naar --resume te wijzen en niet naar een verse run.
+  BRANCH_PUSHED=1
   if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
     TAG_PUSHED=1
     log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
@@ -1157,6 +1171,7 @@ section "Fase 2 — PR openen en laten landen"
 # De versiebump is in fase 1 al gecommit (vóór de poort, voor een schone abort); hier
 # resteert alleen de push van de release-branch (scanner-pins-commit + versiebump).
 git push --quiet -u origin "$BRANCH"
+BRANCH_PUSHED=1
 HEAD_SHA="$(git rev-parse HEAD)"
 
 # Scanner-pins gebumpt → eerst het nieuwe scans-image publiceren, anders vindt de
