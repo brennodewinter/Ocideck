@@ -1220,3 +1220,87 @@ writes into the user's own file, which is the one place OciDeck has promised to
 touch only when asked (§3, §12.2). A control that lives where the information
 already is, and that asks once, is the shape that fits a byte-faithful format:
 nobody discovers afterwards that their `.md` grew two lines.
+
+---
+
+## 16. Writing comfort — width, zoom, orphaned headings and footnotes (added 2026-08-18)
+
+Four complaints from real use, and what each one turned out to be.
+
+### 16.1 The width setting that was quietly overruled
+
+`AppSettings.documentEditorMaxWidth` had a "full width" option that appeared to
+do nothing. It did nothing: the visual layout used the page's text width
+*whenever the page-break lines were on*, and those are on by default. One switch
+therefore controlled two unrelated things, and the one the user could see was the
+wrong one.
+
+They are now separate. `DocumentEditorWidth` — `page`, `column`, `full` — is a
+choice in the toolbar, because it is a choice you make *while writing*: the whole
+screen for a wide table, back to the sheet afterwards. The page-break lines are
+drawn only in `page`; outside it the button is disabled and says why, instead of
+falling silent. A line that claims to show where the sheet breaks must be
+measured on the width the sheet actually has, or it is decoration.
+
+### 16.2 Zoom that stays honest
+
+A zoom that scales only the text would move every page break: the column stays
+the same, the lines wrap differently, and the break lands somewhere else than on
+paper. So the zoom multiplies three things by the same factor — the text scale,
+the column width, and the page height the break arithmetic uses. Relative layout
+is then identical at any zoom, and a break falls at the same place in the text at
+50% as at 250%.
+
+In the **Pagina's** view the zoom is geometric instead: the sheet is drawn larger
+or smaller (`PagedDocumentView.scale`, a parameter that existed but was never
+passed) and the layout on it is untouched. That is the right meaning there — you
+zoom to see better, not to make it break elsewhere. A second, horizontal scroll
+catches a sheet that no longer fits the window.
+
+### 16.3 A heading is not the last thing on a page
+
+`documentPageOffsets` knew only block *heights*, so a heading could be the last
+thing that fitted on a sheet with its text on the next one. The rule added is
+"keep with next, and with enough of it": below a heading at least two lines of
+body text must fit on the same sheet, counted over as many following blocks as
+it takes. Two lines and not one, because a heading with a single orphaned line
+under it reads no better than a heading alone — which is exactly how the
+complaint was phrased.
+
+Two headings in a row travel as a group, and an oversized block (a table taller
+than the text area) takes the heading above it along instead of demanding a fresh
+sheet and leaving it behind. LaTeX does all of this itself; the browser is told
+with `break-after: avoid` plus `orphans`/`widows`, so screen and print say the
+same thing.
+
+### 16.4 Footnotes: two embeds, one optional key
+
+The format side is `FILE_FORMAT.md` §14.9. Three decisions are worth recording
+here.
+
+**Why two embeds and not one.** The obvious rich-text shape is a single inline
+embed carrying both the marker and the note text. It was rejected: the definition
+would then be stored at the position of the *reference*, and the first edit in
+the visual editor would move it there in the file. A document mode whose promise
+is byte-faithfulness (§3) cannot rearrange an author's file as a side effect of
+opening a different view. So the reference is an inline embed and the definition
+a block embed on its own line, and the bytes come out where they went in.
+
+**Why the number is not the label.** The label is the author's handle and stays
+in the file; the number is the reader's, and is assigned by reading order
+everywhere — screen, LaTeX, HTML. This is Pandoc's behaviour and it is the reason
+inserting a note between two others costs nothing.
+
+**Why the space for a note hangs on the block, not on the page.** A note at the
+foot of a sheet takes room away from that sheet, which changes what fits, which
+can move the reference to the next sheet — the classic loop that layout engines
+solve by iterating until it settles. It does not need to be a loop here.
+`documentPageOffsets` takes a `reservedRoom` per block: the room a block's own
+footnotes claim at the bottom of whatever sheet the block lands on. Move the
+block and the claim moves with it; the room on the old sheet is free again by
+construction. One pass, no iteration, and no risk of a layout that oscillates.
+
+The only surface that cannot keep the promise is the HTML export: an HTML page
+has no pages. It puts every note at the back with a link there and back, and
+`KNOWN_LIMITATIONS.md` says so rather than letting the export quietly differ from
+the screen.

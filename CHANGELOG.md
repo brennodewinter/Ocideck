@@ -1534,6 +1534,36 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **schrijfcomfort in de documentmodus: breedte, zoom, koppen en voetnoten.**
+  Vier dingen die opvielen tijdens het werken in een document, en wat ze bleken
+  te zijn. *De volle breedte gebruiken kon niet* omdat de schakelaar voor de
+  pagina-einden de schrijfbreedte naar die van het vel trok, en die einden staan
+  standaard aan — één knop stuurde twee dingen, en de zichtbare was de
+  verkeerde. Breedte (paginabreedte / leeskolom / volledig) staat nu in de
+  werkbalk, met een zoom ernaast (Cmd/Ctrl +, −, 0). Die zoom schaalt de tekst,
+  de kolom én de paginahoogte waarmee de einden worden gerekend, alledrie met
+  dezelfde factor, zodat een pagina-einde op elke zoomstand op dezelfde plek in
+  de tekst valt; in de Pagina's-stand schaalt hij het vel zelf. Buiten
+  paginabreedte worden de einden niet meer getekend — ze zouden iets aanwijzen
+  wat niet gebeurt. *Een kop onderaan een blad* met zijn tekst op de volgende
+  bladzijde: de paginaverdeling kende alleen blokhoogtes. Nu moet er onder een
+  kop minstens twee regels tekst op hetzelfde vel passen, anders schuift hij
+  mee — twee koppen op elkaar als groep, en een te hoge tabel neemt de kop
+  erboven mee. LaTeX deed dit al; de browser krijgt `break-after: avoid` met
+  weduwen en wezen. *Voetnoten* zijn er nu, in de schrijfwijze van Pandoc, met
+  de plaatsing per document in `reference-location:` — een sleutel die Pandoc en
+  Quarto zelf uitvoeren, en waarvan de standaard (onderaan de bladzijde) niets
+  in je bestand schrijft. In de Pagina's-stand staan ze echt onderaan het blad;
+  de ruimte ervoor hangt aan het blok dat de noot aanhaalt, niet aan de pagina,
+  zodat noot en verwijzing samen doorschuiven zonder dat de opmaak heen en weer
+  hoeft te rekenen. In de visuele editor reizen ze als twee embeds mee (de
+  verwijzing inline, de definitie als blok op zijn eigen plek), waarmee de
+  laatste reden verdwijnt waarom één voetnoot je terugwierp in de brontekst.
+  *En de pijltjes in een tabelcel* deden niets herkenbaars: ze verplaatsten de
+  cursor binnen de cel en liepen daarna dood. Nu doen ze wat een rekenblad doet,
+  in de documenttabel én in de diabouwer, want twee tabellen die anders op een
+  pijltje reageren is precies wat een mens niet begrijpt.
+
 - **het poortslot krijgt een rem, en een correctie.** Bij #1541 schreef ik dat
   een worktree-wissel de CMake-cache "opnieuw stempelt — traag maar correct".
   Dat was onjuist: CMake weigert hard, en door het serialiseren gebeurde dat

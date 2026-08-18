@@ -17,6 +17,10 @@
 | `Ctrl/Cmd + F` | Find (visual mode: the find & replace dialog; markdown mode: the in-editor bar — see below) |
 | `Ctrl/Cmd + H` | Find & replace (visual mode: dialog; markdown mode: in-editor bar — see below) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
+| `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (document mode) | Zoom the writing surface in · out |
+| `Ctrl/Cmd + 0` (document mode) | Back to actual size |
+| `←` `→` (in a table cell) | Move the cursor through the cell text; at its edge, jump to the neighbouring cell |
+| `↑` `↓` (in a table cell) | One row up · down, once the cursor is on the cell's first · last line |
 | `Tab` to the panel divider, then `←` / `→` | Resize the slide panel |
 | `←` `↑` `Page Up` · `→` `↓` `Page Down` (click the preview first) | Previous · next slide, stepping through the pages of a long rich-text slide or an overflowing finding before moving on |
 

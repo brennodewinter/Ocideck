@@ -55,6 +55,19 @@ recipient needs to *read* rather than *look*. No WCAG conformance is claimed,
 and nothing has been tested with a real screen reader. →
 [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
+## Footnotes in the HTML export sit at the back, never at the foot of a page
+
+A document can ask for its footnotes at the foot of the page the reference falls
+on, and the **Pagina's** view and the **LaTeX** export do exactly that. The
+single-file **HTML** export cannot: an HTML page is one continuous flow with no
+pages in it, and the only standard that could place a note on a printed sheet —
+`float: footnote` from CSS Paged Media — is implemented by no browser. The HTML
+export therefore always puts the notes at the end of the document, numbered, with
+a link to each note and back again. The numbers are the same ones as on screen,
+so nothing is lost or renumbered; only the position differs. Printing that HTML
+to PDF keeps them at the back. If you need notes truly at the foot of the sheet
+in a PDF, use the LaTeX (`.tex`) export. *(Added 2026-08-18.)*
+
 ## The web (HTML) export leaves off the on-slide overlays
 
 The app draws a layer of chrome *over* each slide: the footer (its text,
