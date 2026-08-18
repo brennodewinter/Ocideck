@@ -29,6 +29,8 @@ List<List<String>>? parseClipboardTable(String text) {
   final markdown = _parseMarkdownTable(normalized);
   if (markdown != null) return markdown;
 
+  if (_looksLikeList(normalized)) return null;
+
   if (normalized.contains('\t')) {
     return _trim(parseCsvRows(normalized, delimiter: '\t'));
   }
@@ -49,6 +51,27 @@ List<List<String>>? parseClipboardTable(String text) {
     if (best == null || cols > best.first.length) best = rows;
   }
   return best;
+}
+
+final _reListItem = RegExp(
+  r'^[ \t\u2009]*([-*+\u2022\u25E6\u25AA\u25AB]|\d+[.)])\s',
+);
+
+/// Ziet de inhoud eruit als een opsomming in plaats van een tabel?
+///
+/// De scheidingsherkenning hieronder is blind voor betekenis: een tab is altijd
+/// een kolomscheiding ("no one types tabs into a cell"), en komma's en
+/// puntkomma's tellen zodra elke regel evenveel velden geeft. Een ingesprongen
+/// opsomming voldoet aan allebei — met tabs als inspringing, of met toevallig
+/// één komma per regel — en werd dan een tabel in plaats van een lijst (#1557).
+///
+/// Begint élke niet-lege regel met een opsommingsteken of een genummerd item,
+/// dan is het een lijst. Een echte tabel doet dat niet, en een lijst met één
+/// item is te weinig om iets over te beweren.
+bool _looksLikeList(String text) {
+  final lines = text.split('\n').where((l) => l.trim().isNotEmpty).toList();
+  if (lines.length < 2) return false;
+  return lines.every(_reListItem.hasMatch);
 }
 
 /// Rastermodel dat uit een geplakte tabel komt: labels, reeksnamen en cellen.
