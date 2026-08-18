@@ -86,8 +86,16 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// De gemeten hoogte van elke voetnoot, in dezelfde volgorde als [_notes].
   List<double>? _noteHeights;
 
-  /// De voetnoten van dit document, genummerd in leesvolgorde.
-  List<Footnote> get _notes => documentFootnotes(widget.markdown);
+  /// De voetnoten van dit document, genummerd in leesvolgorde — één keer
+  /// ontleed per tekst, niet per opbouw. Het ontleden loopt het hele document
+  /// door, en dat drie keer per frame doen is werk dat niets oplevert.
+  late List<Footnote> _notes = documentFootnotes(widget.markdown);
+
+  /// De zoektekst van elk blok, in dezelfde volgorde als de blokken. Om dezelfde
+  /// reden bewaard: hij komt uit een volledige ontleding.
+  late List<String> _blockTexts = DocumentMarkdownView.blockTexts(
+    widget.markdown,
+  );
 
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
@@ -108,7 +116,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     final indexOfLabel = {
       for (var i = 0; i < notes.length; i++) notes[i].label: i,
     };
-    final texts = DocumentMarkdownView.blockTexts(widget.markdown);
+    final texts = _blockTexts;
     final room = List<double>.filled(blockCount, 0);
     final placed = <String>{};
     for (var block = 0; block < texts.length && block < blockCount; block++) {
@@ -139,7 +147,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     if (!_notesOnPage) return pages;
     final notes = _notes;
     final byLabel = {for (final note in notes) note.label: note};
-    final texts = DocumentMarkdownView.blockTexts(widget.markdown);
+    final texts = _blockTexts;
     final placed = <String>{};
     var top = 0.0;
     for (var block = 0; block < heights.length; block++) {
@@ -182,6 +190,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         widget.footnotePlacement != old.footnotePlacement) {
       _blockHeights = null;
       _measuring.clear();
+      _notes = documentFootnotes(widget.markdown);
+      _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
     }
   }
 
@@ -306,7 +316,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// `Offstage`: die meet zijn kind niet gegarandeerd uit, en zonder meting
   /// komt er nooit een pagina.
   Widget _measure() {
-    final blockCount = DocumentMarkdownView.blockTexts(widget.markdown).length;
+    final blockCount = _blockTexts.length;
     // De noten meten in dezelfde ronde mee, elk apart: alleen zo weet de
     // paginaverdeling hoeveel ruimte er onder een blad weg moet. Ze krijgen
     // indexen áchter de blokken, zodat één teller volstaat.
