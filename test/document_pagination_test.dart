@@ -168,6 +168,64 @@ void main() {
     });
   });
 
+  group('ruimte voor de voetnoten onderaan het vel', () {
+    // De noot staat onderaan de bladzijde, maar de ruimte hoort bij het blok
+    // dat hem aanhaalt: schuift dat blok door, dan schuift de noot mee.
+    test('een blok met een noot heeft minder ruimte op het vel', () {
+      // 40 + 40 past normaal (test hierboven), maar met 30 aan noot onder het
+      // eerste blok is er nog 30 over en schuift het tweede door.
+      expect(
+        documentPageOffsets(
+          blockHeights: [40, 40],
+          pageHeight: pageHeight,
+          reservedRoom: [30, 0],
+        ),
+        [0, 40],
+      );
+    });
+
+    test('op het volgende vel is de ruimte weer vrij', () {
+      // De noot hangt aan blok 0 en dus aan vel 1. Op vel 2 passen blok 1 en 2
+      // gewoon samen — was de reservering aan de pagina blijven plakken, dan
+      // had blok 2 een derde vel geopend.
+      expect(
+        documentPageOffsets(
+          blockHeights: [40, 40, 40],
+          pageHeight: pageHeight,
+          reservedRoom: [30, 0, 0],
+        ),
+        [0, 40],
+      );
+    });
+
+    test('zonder noten verandert er niets', () {
+      expect(
+        documentPageOffsets(
+          blockHeights: [40, 40, 40],
+          pageHeight: pageHeight,
+          reservedRoom: const [],
+        ),
+        documentPageOffsets(blockHeights: [40, 40, 40], pageHeight: pageHeight),
+      );
+    });
+
+    test('een kop telt de noten van de tekst eronder mee', () {
+      // 60 vol, kop van 15, tekst van 10 met een noot van 30: samen past dat
+      // niet meer, dus de kop schuift mee in plaats van alleen achter te
+      // blijven.
+      expect(
+        documentPageOffsets(
+          blockHeights: [60, 15, 10],
+          pageHeight: pageHeight,
+          keepWithNext: {1},
+          minKeepHeight: 8,
+          reservedRoom: [0, 0, 30],
+        ),
+        [0, 60],
+      );
+    });
+  });
+
   test('het aantal pagina\'s telt de vensters', () {
     expect(
       documentPageCount(blockHeights: [40, 40, 40], pageHeight: pageHeight),

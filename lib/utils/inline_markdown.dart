@@ -16,6 +16,12 @@ import 'markdown_paste_cleanup.dart';
 /// [math] is de uitzondering: dan is [text] geen opgemaakte tekst maar de kale
 /// TeX tussen `$…$`, die de widgetlaag als inline-formule tekent. De opmaakvlaggen
 /// gelden er niet voor.
+///
+/// [footnote] is de tweede uitzondering, en werkt net zo: [text] is dan het
+/// lábel van de voetnoot (`1`, of `bron`), niet iets wat de lezer te zien
+/// krijgt. De widgetlaag zoekt het volgnummer erbij en tekent dat als
+/// superscript. Alleen de documentmodus vraagt erom (zie [parseInlineRuns]);
+/// een dia laat `[^1]` gewoon `[^1]`.
 class InlineRun {
   final String text;
   final bool bold;
@@ -23,6 +29,7 @@ class InlineRun {
   final bool code;
   final bool strike;
   final bool math;
+  final bool footnote;
   final String? link;
 
   const InlineRun(
@@ -32,6 +39,7 @@ class InlineRun {
     this.code = false,
     this.strike = false,
     this.math = false,
+    this.footnote = false,
     this.link,
   });
 
@@ -41,6 +49,7 @@ class InlineRun {
     bool? code,
     bool? strike,
     bool? math,
+    bool? footnote,
     String? link,
   }) {
     return InlineRun(
@@ -49,6 +58,7 @@ class InlineRun {
       italic: italic ?? this.italic,
       code: code ?? this.code,
       strike: strike ?? this.strike,
+      footnote: footnote ?? this.footnote,
       math: math ?? this.math,
       link: link ?? this.link,
     );
@@ -62,9 +72,15 @@ bool _isEscapedPunctuation(String c) =>
 
 /// Parse [text] naar opeenvolgende [InlineRun]s. Onafgesloten of ongeldige
 /// opmaaktekens blijven gewoon letterlijke tekst.
-List<InlineRun> parseInlineRuns(String text) {
+///
+/// Met [footnotes] wordt `[^label]` een eigen run in plaats van letterlijke
+/// tekst. Standaard uit, en met opzet: op een dia betekent `[^1]` niets, en in
+/// een technische tekst is `[^abc]` vaak een tekenklasse uit een reguliere
+/// expressie. Alleen de documentmodus, die weet wélke labels een noot hébben,
+/// zet hem aan.
+List<InlineRun> parseInlineRuns(String text, {bool footnotes = false}) {
   final out = <InlineRun>[];
-  _parseInto(text, const InlineRun(''), out);
+  _parseInto(text, const InlineRun(''), out, footnotes: footnotes);
   // Voeg aangrenzende identieke runs samen (netter en sneller om te renderen).
   final merged = <InlineRun>[];
   for (final r in out) {
@@ -72,6 +88,8 @@ List<InlineRun> parseInlineRuns(String text) {
     if (merged.isNotEmpty &&
         !merged.last.math &&
         !r.math &&
+        !merged.last.footnote &&
+        !r.footnote &&
         merged.last.bold == r.bold &&
         merged.last.italic == r.italic &&
         merged.last.code == r.code &&
@@ -137,7 +155,12 @@ String decodeNamedHtmlEntities(String text) {
       .replaceAll('&amp;', '&');
 }
 
-void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
+void _parseInto(
+  String s,
+  InlineRun ctx,
+  List<InlineRun> out, {
+  bool footnotes = false,
+}) {
   final buf = StringBuffer();
   void flush() {
     if (buf.isNotEmpty) {
@@ -174,6 +197,26 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       }
     }
 
+    // [^label] — een voetnootverwijzing. Vóór de link-tak: die kijkt of er een
+    // `(` achter het haakje staat en zou hier niets mee doen, maar de volgorde
+    // maakt de bedoeling zichtbaar.
+    if (footnotes && c == '[' && i + 1 < s.length && s[i + 1] == '^') {
+      final close = s.indexOf(']', i + 2);
+      final label = close > i + 2 ? s.substring(i + 2, close) : '';
+      if (close != -1 &&
+          label.isNotEmpty &&
+          !label.contains(' ') &&
+          // `[^1]:` is de definitie, geen verwijzing. Die hoort hier nooit te
+          // komen (de weergave haalt ze eruit), maar als het toch gebeurt, is
+          // hem als tekst tonen beter dan hem als merkteken te tekenen.
+          (close + 1 >= s.length || s[close + 1] != ':')) {
+        flush();
+        out.add(ctx._with(footnote: true)._copyText(label));
+        i = close + 1;
+        continue;
+      }
+    }
+
     // [tekst](url)
     if (c == '[') {
       final close = _matchClosingBracket(s, i);
@@ -183,7 +226,7 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
           flush();
           final inner = s.substring(i + 1, close);
           final url = s.substring(close + 2, paren).trim();
-          _parseInto(inner, ctx._with(link: url), out);
+          _parseInto(inner, ctx._with(link: url), out, footnotes: footnotes);
           i = paren + 1;
           continue;
         }
@@ -195,7 +238,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '**');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(bold: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -207,7 +255,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '__');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(bold: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -218,7 +271,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '~~');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(strike: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(strike: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -229,7 +287,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 1, c);
       if (end != -1 && end > i + 1) {
         flush();
-        _parseInto(s.substring(i + 1, end), ctx._with(italic: true), out);
+        _parseInto(
+          s.substring(i + 1, end),
+          ctx._with(italic: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 1;
         continue;
       }
@@ -321,6 +384,7 @@ extension on InlineRun {
     code: code,
     strike: strike,
     math: math,
+    footnote: footnote,
     link: link,
   );
 }

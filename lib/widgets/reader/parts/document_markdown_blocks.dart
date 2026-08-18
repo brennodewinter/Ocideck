@@ -145,6 +145,90 @@ double documentKeepWithNextHeight(TextScaler scaler) =>
     kDocumentBodyLineHeight *
     kDocumentKeepWithNextLines;
 
+/// De voetnoten als genummerde lijst, met een scheiding erboven.
+///
+/// Eén tekenaar voor twee plekken: achterin een doorlopende weergave, en
+/// onderaan het vel in de Pagina's-stand. Zou elk van die twee zijn eigen
+/// noten tekenen, dan zouden ze uiteenlopen in maat en marge — en juist bij een
+/// noot valt dat op, want hij staat naast de tekst waar hij bij hoort.
+Widget _footnoteList(
+  BuildContext context,
+  _Theme t,
+  List<Footnote> notes, {
+  Key? key,
+}) {
+  final style = t.body.copyWith(
+    // Kleiner dan de bodytekst: een noot is een terzijde, en op papier is dat
+    // al eeuwen hoe je dat laat zien.
+    fontSize: kDocumentBodyFontSize * 0.82,
+    height: 1.35,
+  );
+  return Padding(
+    key: key,
+    padding: const EdgeInsets.only(top: 14),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Geen volle streep over de breedte: dat is de klassieke voetnootlijn,
+        // en een streep van rand tot rand leest als een scheiding in de tekst.
+        SizedBox(
+          width: 140,
+          child: Divider(height: 1, thickness: 1, color: t.border),
+        ),
+        const SizedBox(height: 6),
+        for (final note in notes)
+          Padding(
+            padding: const EdgeInsets.only(top: 3),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 22,
+                  child: Text(
+                    '${note.number}',
+                    style: style.copyWith(
+                      color: t.marker,
+                      fontFeatures: const [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InlineMarkdownText(
+                    note.text,
+                    style: style,
+                    linkColor: t.link,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
+/// De voetnoten van een document als los tekenbaar blok, in dezelfde maat en
+/// stijl als waarin ze achterin een doorlopende weergave staan.
+///
+/// Bestaat voor de vellenweergave: die zet de noten onderaan het blad waar de
+/// verwijzing staat, en moet ze dus zelf kunnen uitmeten en tekenen. Zonder dit
+/// venster zou zij haar eigen notenlijst bouwen — en dan ziet dezelfde noot op
+/// papier er anders uit dan op het scherm.
+class DocumentFootnotesView extends StatelessWidget {
+  const DocumentFootnotesView({
+    super.key,
+    required this.notes,
+    this.themeProfile,
+  });
+
+  final List<Footnote> notes;
+  final ThemeProfile? themeProfile;
+
+  @override
+  Widget build(BuildContext context) =>
+      _footnoteList(context, _Theme(Theme.of(context), themeProfile), notes);
+}
+
 /// De lettergrootte van een kop op niveau [level].
 double documentHeadingSize(int level) => switch (level) {
   1 => 27.0,
@@ -155,111 +239,121 @@ double documentHeadingSize(int level) => switch (level) {
 };
 
 class _Theme {
-  _Theme(ThemeData theme, ThemeProfile? profile)
-    : dark = theme.brightness == Brightness.dark,
-      paper = _profileColor(
-        profile?.slideBackgroundColor,
-        theme.colorScheme.surface,
-      ),
-      body = TextStyle(
-        fontFamily: profile?.fontFamily,
-        fontSize: kDocumentBodyFontSize,
-        height: kDocumentBodyLineHeight,
-        color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
-      ),
-      heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),
-      subheading = _profileColor(
-        profile?.accentColor,
-        theme.colorScheme.onSurface,
-      ),
-      marker = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      checkboxEmpty = _profileColor(
-        profile?.checklistUncheckedColor,
-        theme.colorScheme.onSurfaceVariant,
-      ),
-      checkboxChecked = _profileColor(
-        profile?.checklistCheckedColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      link = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      border = profile == null
-          ? theme.colorScheme.outlineVariant
-          : _profileColor(
-              profile.textColor,
-              theme.colorScheme.onSurface,
-            ).withValues(alpha: 0.22),
-      quoteBg = profile == null
-          ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
-          : _profileColor(
-              profile.accentColor,
-              AppPalette.of(theme).accentInk,
-            ).withValues(alpha: 0.10),
-      quoteBar = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      quoteText = _profileColor(
-        profile?.textColor,
-        theme.colorScheme.onSurfaceVariant,
-      ),
-      codeBg = _profileColor(
-        profile?.codeBackgroundColor,
-        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-      ),
-      chartCardHex = _hexRgb(
-        Color.alphaBlend(
-          _profileColor(
-            profile?.codeBackgroundColor,
-            theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-          ),
-          _profileColor(
-            profile?.slideBackgroundColor,
-            theme.colorScheme.surface,
-          ),
-        ),
-      ),
-      codeText = _profileColor(
-        profile?.codeTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      tableHeaderBg = _profileColor(
-        profile?.tableHeaderBackgroundColor,
-        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
-      ),
-      tableHeaderText = _profileColor(
-        profile?.tableHeaderTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      tableText = _profileColor(
-        profile?.tableTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      tableZebraStriped = profile?.tableZebraStriped ?? false,
-      tableZebraBg = _profileColor(
-        profile?.tableZebraColor,
-        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.35),
-      ),
-      tableBorderStyle = profile?.tableBorderStyle ?? TableBorderStyle.boxed,
-      tableBorder = _profileColor(
-        profile?.tableBorderColor,
-        theme.colorScheme.outlineVariant,
-      ),
-      tableCellPad = profile?.tableCellPaddingPx ?? 8.0,
-      tableAccentHeaderBorder = profile?.tableAccentHeaderBorder ?? false,
-      tableAccent = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      findMatch = AppTheme.findHighlight,
-      findActive = AppTheme.findHighlightActive;
+  _Theme(
+    ThemeData theme,
+    ThemeProfile? profile, {
+    this.footnoteNumbers = const {},
+  }) : dark = theme.brightness == Brightness.dark,
+       paper = _profileColor(
+         profile?.slideBackgroundColor,
+         theme.colorScheme.surface,
+       ),
+       body = TextStyle(
+         fontFamily: profile?.fontFamily,
+         fontSize: kDocumentBodyFontSize,
+         height: kDocumentBodyLineHeight,
+         color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
+       ),
+       heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),
+       subheading = _profileColor(
+         profile?.accentColor,
+         theme.colorScheme.onSurface,
+       ),
+       marker = _profileColor(
+         profile?.accentColor,
+         AppPalette.of(theme).accentInk,
+       ),
+       checkboxEmpty = _profileColor(
+         profile?.checklistUncheckedColor,
+         theme.colorScheme.onSurfaceVariant,
+       ),
+       checkboxChecked = _profileColor(
+         profile?.checklistCheckedColor,
+         AppPalette.of(theme).accentInk,
+       ),
+       link = _profileColor(
+         profile?.accentColor,
+         AppPalette.of(theme).accentInk,
+       ),
+       border = profile == null
+           ? theme.colorScheme.outlineVariant
+           : _profileColor(
+               profile.textColor,
+               theme.colorScheme.onSurface,
+             ).withValues(alpha: 0.22),
+       quoteBg = profile == null
+           ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
+           : _profileColor(
+               profile.accentColor,
+               AppPalette.of(theme).accentInk,
+             ).withValues(alpha: 0.10),
+       quoteBar = _profileColor(
+         profile?.accentColor,
+         AppPalette.of(theme).accentInk,
+       ),
+       quoteText = _profileColor(
+         profile?.textColor,
+         theme.colorScheme.onSurfaceVariant,
+       ),
+       codeBg = _profileColor(
+         profile?.codeBackgroundColor,
+         theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+       ),
+       chartCardHex = _hexRgb(
+         Color.alphaBlend(
+           _profileColor(
+             profile?.codeBackgroundColor,
+             theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+           ),
+           _profileColor(
+             profile?.slideBackgroundColor,
+             theme.colorScheme.surface,
+           ),
+         ),
+       ),
+       codeText = _profileColor(
+         profile?.codeTextColor,
+         theme.colorScheme.onSurface,
+       ),
+       tableHeaderBg = _profileColor(
+         profile?.tableHeaderBackgroundColor,
+         theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
+       ),
+       tableHeaderText = _profileColor(
+         profile?.tableHeaderTextColor,
+         theme.colorScheme.onSurface,
+       ),
+       tableText = _profileColor(
+         profile?.tableTextColor,
+         theme.colorScheme.onSurface,
+       ),
+       tableZebraStriped = profile?.tableZebraStriped ?? false,
+       tableZebraBg = _profileColor(
+         profile?.tableZebraColor,
+         theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.35),
+       ),
+       tableBorderStyle = profile?.tableBorderStyle ?? TableBorderStyle.boxed,
+       tableBorder = _profileColor(
+         profile?.tableBorderColor,
+         theme.colorScheme.outlineVariant,
+       ),
+       tableCellPad = profile?.tableCellPaddingPx ?? 8.0,
+       tableAccentHeaderBorder = profile?.tableAccentHeaderBorder ?? false,
+       tableAccent = _profileColor(
+         profile?.accentColor,
+         AppPalette.of(theme).accentInk,
+       ),
+       findMatch = AppTheme.findHighlight,
+       findActive = AppTheme.findHighlightActive;
 
   final bool dark;
+
+  /// Label → volgnummer van de voetnoten van dit document; leeg wanneer er geen
+  /// zijn. Hoort hier omdat dit het enige object is dat per opbouw één keer
+  /// wordt gemaakt en overal langskomt — de noten opnieuw ontleden bij elke
+  /// alinea zou het document per blok nog eens doorlopen.
+  final Map<String, int> footnoteNumbers;
+
   final Color paper;
   final TextStyle body;
   final Color heading;
