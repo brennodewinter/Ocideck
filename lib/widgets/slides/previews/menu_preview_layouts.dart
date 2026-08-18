@@ -299,13 +299,8 @@ class _MenuCircle extends StatelessWidget {
     builder: (context, box) {
       final side = math.min(box.maxWidth, box.maxHeight);
       final n = blocks.length;
-      // De schijf mag niet groter zijn dan de ring aan omtrek te verdelen heeft,
-      // anders raken de schijven elkaar zodra er meer dan een handvol staan.
-      final disc = math.min(
-        side * 0.34,
-        side * 0.86 * math.pi / math.max(n, 3) * 0.86,
-      );
-      final radius = (side - disc) / 2;
+      final disc = side * menuDiscFraction(n);
+      final radius = side * menuRingRadius(n);
       return Center(
         child: SizedBox(
           width: side,

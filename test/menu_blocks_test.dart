@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/menu.dart';
@@ -130,6 +132,35 @@ void main() {
       expect(out[0].bullets.where(isGroupHeading), hasLength(2));
       expect(menuBlocksFor(out[0].bullets)[2].targetAnchor, out[1].anchor);
       expect(out[1].anchor, isNotEmpty);
+    });
+  });
+
+  group('cirkelindeling', () {
+    // De maat van een schijf volgt uit de meetkunde van de ring; deze proef
+    // bewaakt dat twee buren elkaar bij geen enkel aantal blokken raken.
+    test('schijven raken elkaar niet, van twee tot dertig blokken', () {
+      for (var n = 2; n <= 30; n++) {
+        final disc = menuDiscFraction(n);
+        final chord = 2 * menuRingRadius(n) * math.sin(math.pi / n);
+        expect(
+          disc,
+          lessThan(chord),
+          reason: 'bij $n blokken past een schijf van $disc niet in $chord',
+        );
+      }
+    });
+
+    test('de ring past binnen het vlak', () {
+      for (var n = 1; n <= 30; n++) {
+        expect(
+          2 * menuRingRadius(n) + menuDiscFraction(n),
+          lessThanOrEqualTo(1),
+        );
+      }
+    });
+
+    test('één blok staat in het midden', () {
+      expect(menuRingRadius(1), 0);
     });
   });
 

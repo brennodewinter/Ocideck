@@ -16,6 +16,8 @@
 // zonder Flutter, zodat editor, preview, presentator en beamer dezelfde
 // interpretatie delen en het los te toetsen valt.
 
+import 'dart:math' as math;
+
 import '../models/slide.dart';
 import 'slide_anchors.dart';
 
@@ -188,6 +190,35 @@ int menuGridColumns(int n) => n <= 1
     : n <= 9
     ? 3
     : 4;
+
+/// Hoe groot één schijf van de cirkelindeling is, als fractie van de zijde van
+/// het vierkante vlak waarin de ring staat.
+///
+/// Volgt uit de meetkunde en niet uit een geraden trapje: twee buren op een ring
+/// van straal `r` staan een koorde `2·r·sin(π/n)` uit elkaar, dus met
+/// `r = (1 − d)/2` en wat lucht ertussen is `d = s/(1+s)` met `s = k·sin(π/n)`
+/// de grootste schijf die nog niet tegen zijn buurman aan komt. Zonder die
+/// afleiding raakten de schijven elkaar vanaf een stuk of acht. Boven de
+/// [_menuDiscCap] blijft hij staan: bij twee of drie blokken zou een schijf
+/// anders de halve dia vullen.
+///
+/// Gedeeld met de HTML-export, die dezelfde ring in percentages tekent.
+double menuDiscFraction(int n) {
+  if (n <= 1) return 0.42;
+  final spread = _menuDiscSpacing * math.sin(math.pi / n);
+  return math.min(_menuDiscCap, spread / (1 + spread));
+}
+
+/// De straal van de ring waarop de schijven staan, als fractie van dezelfde
+/// zijde. Eén blok staat in het midden — een ring van één is geen ring.
+double menuRingRadius(int n) => n <= 1 ? 0 : (1 - menuDiscFraction(n)) / 2;
+
+/// Hoeveel van de koorde tussen twee buren een schijf mag beslaan; de rest is
+/// lucht.
+const double _menuDiscSpacing = 0.85;
+
+/// Bovengrens aan de schijfmaat, als fractie van de zijde.
+const double _menuDiscCap = 0.34;
 
 /// Of dit menu een categoriekiezer verdient: pas vanaf twee categorieën, of bij
 /// één categorie die een naam draagt.

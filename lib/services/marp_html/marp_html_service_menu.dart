@@ -176,8 +176,8 @@ String _menuDiscHtml(
   required String accent,
   required String ink,
 }) {
-  final disc = math.min(34.0, 86 * math.pi / math.max(n, 3) * 0.86);
-  final radius = (100 - disc) / 2;
+  final disc = 100 * menuDiscFraction(n);
+  final radius = 100 * menuRingRadius(n);
   final angle = -math.pi / 2 + i * 2 * math.pi / n;
   final left = 50 + radius * math.cos(angle) - disc / 2;
   final top = 50 + radius * math.sin(angle) - disc / 2;
