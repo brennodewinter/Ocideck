@@ -12,6 +12,50 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.5] — 2026-08-18
+
+### Added
+
+- feat(release): een verschoven momentopname rijdt vanzelf mee
+- feat(toegankelijkheid): keuzemenu-blokken met het toetsenbord bedienbaar (#1550)
+- feat(keuzemenu): drie indelingen, categorieen en een uitleg per blok (#1549)
+- feat(documentmodus): zet elk hoofdstuk op een nieuwe pagina (#1545)
+- feat(export): laat de paginaopmaak meereizen in de geprojecteerde .md (#1544)
+- feat(l10n): een poort die Nederlandse doorvoer als vertaling betrapt (#1531)
+- feat(export): snijtekens in de LaTeX/PDF-export, alleen waar ze echt gezet worden (#1530)
+- feat(l10n): vergelijk de taaltabellen onderling in plaats van alleen tegen het gebruik (#1529)
+- feat(documentmodus): paginaopmaak kan met het document meereizen (#1525)
+- feat(l10n): een poort die vertaalsleutels aanwijst die niemand meer opvraagt (#1516)
+- feat(documentmodus): pagina-einden in de schrijfstand (#1506)
+- feat(documentmodus): werken op echte paginas, alle ISO-maten en een drukkersafloop (#1505)
+- feat(documentmodus): tabellen invullen in de tabel zelf (#1504)
+- feat(documentmodus): passende tabellen, schrijfbreedte, paginamaat, inhoudsopgave en tabelstijl
+
+### Changed
+
+- docs(nl): breng de Nederlandse gidsen weer gelijk met de Engelse bron (#1543)
+- chore(l10n): korte Engelse restanten vertaald, en het gat in de parsers gedicht (#1539)
+- chore(l10n): de Nederlandse doorvoer vertaald, basislijn naar nul (#1533)
+- chore(l10n): de 181 ongebruikte vertaalsleutels opgeruimd (#1522)
+- chore(ratchets): zet de gekrompen plafonds vast (#1521)
+- refactor(documentmodus): de drie weergavestanden in een eigen part (#1515)
+
+### Fixed
+
+- fix(release): de verouderingsgate loopt niet meer dood, en de keten repeteert
+- fix(poort): ruim de vreemde CMake-stempel op en zet een rem op de bouw (#1547)
+- fix(l10n): ontknoop HaSta, dat in het Klingon vier begrippen tegelijk droeg (#1546)
+- fix(poort): serialiseer poortruns die één native-assets-cache delen (#1542)
+- fix(documentmodus): vier bevindingen uit de beeldkeuring (#1540)
+- fix(l10n): het Klingon ontwart dia en presentatie in een keer (#1532)
+- fix(l10n): het Klingon houdt pagina, document en dia uit elkaar (#1528)
+- fix(documentmodus): de pagina-weergave honoreert de geforceerde pagina-einden (#1518)
+- fix(l10n): het Klingon gebruikt een woord voor pagina (#1517)
+- fix(documentweergave): een afgebroken opsommingsregel blijft bij zijn item (#1513)
+- fix(tabel): kolomverdeling houdt woorden heel (#1503)
+- fix(documentmodus): invoegen in de visuele modus landt op de cursor (#1502)
+- fix(documentmodus): inhoudsopgave gooit de visuele modus niet meer in brontekst (#1501)
+
 ## [0.4.4] — 2026-08-15
 
 ### Added
