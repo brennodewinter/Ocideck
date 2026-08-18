@@ -597,7 +597,9 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
       ),
     ),
     const SizedBox(height: 12),
-    // Feature 2: instelbare schrijfbreedte van de visuele editor.
+    // Feature 2: instelbare schrijfbreedte van de visuele editor. Dit is de
+    // maat van de stand "Leeskolom"; welke stand geldt, kiest de gebruiker in
+    // de werkbalk van de documenteditor.
     Text(
       l10n.d('Schrijfbreedte editor'),
       style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
@@ -605,7 +607,7 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
     const SizedBox(height: 4),
     Text(
       l10n.d(
-        'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.',
+        'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.',
       ),
       style: const TextStyle(fontSize: 11),
     ),
@@ -626,7 +628,6 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
           child: Text(l10n.d('Standaard (1100 px)')),
         ),
         DropdownMenuItem(value: 1400, child: Text(l10n.d('Breed (1400 px)'))),
-        DropdownMenuItem(value: null, child: Text(l10n.d('Volledige breedte'))),
       ],
       onChanged: (v) =>
           ref.read(settingsProvider.notifier).setDocumentEditorMaxWidth(v),

@@ -270,6 +270,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentChapterPageBreak: document.chapterPageBreak,
       documentCropMarks: document.cropMarks,
       documentEditorMaxWidth: document.editorMaxWidth,
+      documentEditorWidth: document.editorWidth,
+      documentEditorZoom: document.editorZoom,
       documentPageSize: document.pageSize,
       documentPageMargins: document.pageMargins,
       cockpitColorSchemes: cockpit.schemes,
@@ -552,6 +554,18 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> setDocumentEditorMaxWidth(double? width) =>
       _applyDocumentEditorMaxWidth(this, width);
+
+  Future<void> setDocumentEditorWidth(DocumentEditorWidth width) =>
+      _applyDocumentEditorWidth(this, width);
+
+  /// Ondergrens, bovengrens en stapgrootte van de documenteditor-zoom; gedeeld
+  /// met de knoppen in de werkbalk zodat clampen en stappen consistent zijn.
+  static const double documentEditorZoomMin = 0.5;
+  static const double documentEditorZoomMax = 2.5;
+  static const double documentEditorZoomStep = 0.1;
+
+  Future<void> setDocumentEditorZoom(double zoom) =>
+      _applyDocumentEditorZoom(this, zoom);
 
   Future<void> setDocumentPageSize(PageSizeSpec spec) =>
       _applyDocumentPageSize(this, spec);

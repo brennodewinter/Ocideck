@@ -17,6 +17,17 @@ class _DocEditorToolbar extends StatelessWidget {
   /// aan te meten, en de Pagina's-stand ís al pagina's.
   final bool showPageBreaks;
   final ValueChanged<bool> onShowPageBreaksChanged;
+
+  /// Op welke breedte je schrijft, en de keuze ervoor. Alleen in de visuele
+  /// stand: de bron heeft geen schrijfvlak met een maat, en een vel heeft er
+  /// zelf al een.
+  final DocumentEditorWidth width;
+  final ValueChanged<DocumentEditorWidth> onWidthChanged;
+
+  /// De zoomfactor van het schrijfvlak (visueel) of het vel (Pagina's), en de
+  /// knoppen ervoor. 1,0 is ware grootte.
+  final double zoom;
+  final ValueChanged<double> onZoomChanged;
   final VoidCallback onInsertChart;
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
@@ -60,6 +71,10 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onModeChanged,
     required this.showPageBreaks,
     required this.onShowPageBreaksChanged,
+    required this.width,
+    required this.onWidthChanged,
+    required this.zoom,
+    required this.onZoomChanged,
     required this.onInsertChart,
     required this.onInsertTable,
     required this.onInsertMermaid,
@@ -133,20 +148,35 @@ class _DocEditorToolbar extends StatelessWidget {
                       ),
                       if (mode == _DocViewMode.visual) ...[
                         const SizedBox(width: 8),
+                        _widthMenu(l10n),
                         IconButton(
-                          tooltip: showPageBreaks
-                              ? l10n.d('Pagina-einden verbergen')
-                              : l10n.d('Pagina-einden tonen'),
-                          onPressed: () =>
-                              onShowPageBreaksChanged(!showPageBreaks),
+                          tooltip: width == DocumentEditorWidth.page
+                              ? (showPageBreaks
+                                    ? l10n.d('Pagina-einden verbergen')
+                                    : l10n.d('Pagina-einden tonen'))
+                              // Op een andere breedte breekt het vel ergens
+                              // anders dan de lijn zou aanwijzen; hem dan tonen
+                              // zou een onwaarheid tekenen.
+                              : l10n.d(
+                                  'Pagina-einden gelden alleen op paginabreedte.',
+                                ),
+                          onPressed: width == DocumentEditorWidth.page
+                              ? () => onShowPageBreaksChanged(!showPageBreaks)
+                              : null,
                           icon: Icon(
-                            showPageBreaks
+                            showPageBreaks && width == DocumentEditorWidth.page
                                 ? Icons.horizontal_split
                                 : Icons.horizontal_split_outlined,
                             size: 18,
                           ),
-                          isSelected: showPageBreaks,
+                          isSelected:
+                              showPageBreaks &&
+                              width == DocumentEditorWidth.page,
                         ),
+                      ],
+                      if (mode != _DocViewMode.source) ...[
+                        const SizedBox(width: 8),
+                        ..._zoomControls(l10n),
                       ],
                       const SizedBox(width: 8),
                       IconButton(
@@ -196,6 +226,96 @@ class _DocEditorToolbar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// De breedtekiezer: op de breedte van het vel, op een rustige leeskolom, of
+  /// het hele venster.
+  ///
+  /// Hoort in de werkbalk en niet (alleen) in de instellingen, omdat het een
+  /// keuze is die je tijdens het schrijven maakt: even het hele scherm voor een
+  /// brede tabel, en daarna terug naar het vel. In de instellingen stond hij
+  /// bovendien stil te wezen — de pagina-einden overschreven hem.
+  Widget _widthMenu(AppLocalizations l10n) {
+    String label(DocumentEditorWidth value) => switch (value) {
+      DocumentEditorWidth.page => l10n.d('Paginabreedte'),
+      DocumentEditorWidth.column => l10n.d('Leeskolom'),
+      DocumentEditorWidth.full => l10n.d('Volledige breedte'),
+    };
+    IconData icon(DocumentEditorWidth value) => switch (value) {
+      DocumentEditorWidth.page => Icons.description_outlined,
+      DocumentEditorWidth.column => Icons.view_agenda_outlined,
+      DocumentEditorWidth.full => Icons.width_normal,
+    };
+    return PopupMenuButton<DocumentEditorWidth>(
+      tooltip: l10n.d('Schrijfbreedte'),
+      position: PopupMenuPosition.under,
+      onSelected: onWidthChanged,
+      itemBuilder: (context) => [
+        for (final value in DocumentEditorWidth.values)
+          PopupMenuItem<DocumentEditorWidth>(
+            value: value,
+            child: Row(
+              children: [
+                Icon(value == width ? Icons.check : icon(value), size: 17),
+                const SizedBox(width: 10),
+                Expanded(child: Text(label(value))),
+              ],
+            ),
+          ),
+      ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        child: Icon(icon(width), size: 18),
+      ),
+    );
+  }
+
+  /// Kleiner, groter, en — alleen wanneer je niet op ware grootte staat — het
+  /// huidige percentage als knop terug naar 100%.
+  ///
+  /// Het percentage is zelf die knop: een aparte terugzetknop ernaast zou drie
+  /// knoppen maken van iets wat er twee waardevol heeft, en het getal is de
+  /// plek waar je kijkt als je je afvraagt hoe ver je bent afgedwaald. Op 100%
+  /// staat er niets: er valt dan niets terug te zetten, en de werkbalk heeft
+  /// die breedte hard nodig — hij schuift al op een smal venster.
+  List<Widget> _zoomControls(AppLocalizations l10n) {
+    const step = SettingsNotifier.documentEditorZoomStep;
+    return [
+      IconButton(
+        tooltip: l10n.d('Uitzoomen'),
+        onPressed: zoom > SettingsNotifier.documentEditorZoomMin + 1e-6
+            ? () => onZoomChanged(zoom - step)
+            : null,
+        icon: const Icon(Icons.zoom_out, size: 18),
+        visualDensity: VisualDensity.compact,
+      ),
+      if (zoom != 1)
+        Tooltip(
+          message: l10n.d('Ware grootte'),
+          child: TextButton(
+            onPressed: () => onZoomChanged(1),
+            style: TextButton.styleFrom(
+              minimumSize: const Size(48, 32),
+              padding: EdgeInsets.zero,
+            ),
+            child: Text(
+              '${(zoom * 100).round()}%',
+              style: const TextStyle(
+                fontSize: 12,
+                fontFeatures: [FontFeature.tabularFigures()],
+              ),
+            ),
+          ),
+        ),
+      IconButton(
+        tooltip: l10n.d('Inzoomen'),
+        onPressed: zoom < SettingsNotifier.documentEditorZoomMax - 1e-6
+            ? () => onZoomChanged(zoom + step)
+            : null,
+        icon: const Icon(Icons.zoom_in, size: 18),
+        visualDensity: VisualDensity.compact,
+      ),
+    ];
   }
 
   /// Het invoeg-palet: één menu dat een rijk blok op de cursorpositie invoegt.

@@ -153,6 +153,116 @@ void main() {
     },
   );
 
+  testWidgets('de breedtekiezer en de zoom staan in de werkbalk', (
+    tester,
+  ) async {
+    // #1: de volle breedte gebruiken en in- of uitzoomen moet tijdens het
+    // werken kunnen, niet alleen via een dialoog in de instellingen — waar de
+    // breedte-instelling bovendien stil werd overruled door de pagina-einden.
+    await tester.binding.setSurfaceSize(const Size(1400, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Op ware grootte valt er niets terug te zetten, dus staat er geen
+    // percentage in de weg.
+    expect(find.text('100%'), findsNothing);
+    await tester.tap(find.byTooltip('Inzoomen'));
+    await tester.pumpAndSettle();
+    expect(find.text('110%'), findsOneWidget);
+
+    // Het percentage is zelf de weg terug naar ware grootte.
+    await tester.tap(find.text('110%'));
+    await tester.pumpAndSettle();
+    expect(find.text('110%'), findsNothing);
+
+    // De breedtekiezer biedt de drie standen.
+    await tester.tap(find.byTooltip('Schrijfbreedte'));
+    await tester.pumpAndSettle();
+    expect(find.text('Paginabreedte'), findsOneWidget);
+    expect(find.text('Leeskolom'), findsOneWidget);
+    expect(find.text('Volledige breedte'), findsOneWidget);
+  });
+
+  testWidgets('Cmd+= zoomt in en Cmd+0 zet terug op ware grootte', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1400, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('Tekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // De binding zelf aanroepen, zoals de Cmd+S-toets hierboven: een
+    // toetsaanslag komt in een test niet bij `CallbackShortcuts` zonder focus
+    // in de boom, en wat hier bewezen moet worden is de bedrading.
+    void invoke(LogicalKeyboardKey key) {
+      for (final widget in tester.widgetList<CallbackShortcuts>(
+        find.byType(CallbackShortcuts),
+      )) {
+        for (final entry in widget.bindings.entries) {
+          final activator = entry.key;
+          if (activator is SingleActivator &&
+              activator.trigger == key &&
+              activator.meta) {
+            entry.value();
+            return;
+          }
+        }
+      }
+      fail('geen sneltoets gebonden aan Cmd+${key.keyLabel}');
+    }
+
+    // `equal` en niet `add`: op de meeste indelingen zit + op shift-=, en dan
+    // is dat de toets die het toetsenbord meldt.
+    invoke(LogicalKeyboardKey.equal);
+    await tester.pumpAndSettle();
+    expect(find.text('110%'), findsOneWidget);
+
+    invoke(LogicalKeyboardKey.digit0);
+    await tester.pumpAndSettle();
+    expect(find.text('110%'), findsNothing);
+  });
+
+  testWidgets('op volledige breedte tekent de editor geen pagina-einden', (
+    tester,
+  ) async {
+    // Buiten paginabreedte breekt het vel ergens anders dan de lijn aanwijst;
+    // hem dan tonen zou een onwaarheid tekenen. De knop zegt dat ook.
+    await tester.binding.setSurfaceSize(const Size(1400, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    expect(find.byTooltip('Pagina-einden verbergen'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Schrijfbreedte'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Volledige breedte'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byTooltip('Pagina-einden gelden alleen op paginabreedte.'),
+      findsOneWidget,
+    );
+    final editor = tester.widget<MarkdownNotesEditor>(
+      find.byType(MarkdownNotesEditor),
+    );
+    expect(
+      editor.documentMaxWidth,
+      isNull,
+      reason: 'volledige breedte betekent geen kolomgrens',
+    );
+  });
+
   testWidgets('Bron toont rauwe bron én live weergave', (tester) async {
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
@@ -298,6 +408,8 @@ void main() {
   testWidgets('het invoeg-palet schrijft een mermaid-blok in de bron', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('Tekst.'));
     await tester.pumpWidget(harness(n));
@@ -316,6 +428,8 @@ void main() {
   testWidgets('het invoeg-palet schrijft een pagina-einde (---) in de bron', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
     await tester.pumpWidget(harness(n));
     await tester.pump();
@@ -340,6 +454,8 @@ void main() {
   testWidgets('het invoeg-palet biedt elk item precies één keer', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     // Pagina-einde stond er twee keer in — geen zichtbare fout in een test die
     // op tekst zoekt, maar wél een dubbel item in het menu en een `tap()` die
     // niet meer weet welke hij moet hebben.
@@ -365,6 +481,8 @@ void main() {
   testWidgets('het invoeg-palet schrijft een inhoudsopgave-marker', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
     await tester.pumpWidget(harness(n));
     await tester.pump();

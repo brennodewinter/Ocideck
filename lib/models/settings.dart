@@ -47,6 +47,16 @@ const int kThemeMaxAnimationDurationMs = 30000;
 int clampThemeAnimationDuration(int ms) =>
     ms.clamp(kThemeMinAnimationDurationMs, kThemeMaxAnimationDurationMs);
 
+/// Op welke breedte je in de visuele documentmodus schrijft.
+///
+/// Drie standen, omdat er drie verschillende dingen zijn die je aan het doen
+/// bent. [page] is de tekstbreedte van het vel: dan valt een pagina-einde op
+/// het scherm waar het op papier valt, en alleen in deze stand betekenen de
+/// streepjeslijnen iets. [column] is een rustige leesbreedte uit de
+/// instellingen, voor wie schrijft zonder aan de bladzijde te denken. [full]
+/// gebruikt het hele venster, voor een brede tabel of een tweede scherm.
+enum DocumentEditorWidth { page, column, full }
+
 /// De randstijl van een tabel in een document of presentatie. Huisstijl die
 /// voor álle tabellen geldt — zie `ThemeProfile.tableBorderStyle`.
 enum TableBorderStyle {

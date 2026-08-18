@@ -82,8 +82,56 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         profile: _styleProfile,
         projectPath: _projectPath,
         chapterPageBreak: settings.documentChapterPageBreak,
+        // Hier is de zoom meetkundig: het vel wordt groter of kleiner getekend,
+        // de indeling erop blijft die van het papier. Precies waarom je in deze
+        // stand inzoomt — om beter te zien wat er staat, niet om iets anders te
+        // laten breken.
+        scale: settings.documentEditorZoom,
       ),
     );
+  }
+
+  /// Zet de zoom van de documenteditor, geklemd op de grenzen van de
+  /// instelling. Top-level via de notifier zodat de knoppen in de werkbalk en
+  /// de sneltoetsen door hetzelfde gat gaan.
+  void _setZoom(double zoom) => unawaited(
+    ref.read(settingsProvider.notifier).setDocumentEditorZoom(zoom),
+  );
+
+  /// Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
+  ///
+  /// Twee plustoetsen en twee mintoetsen: op de meeste indelingen zit + op
+  /// shift-=, en dan levert het toetsenbord `equal` in plaats van `add`. Alleen
+  /// `add` binden werkt op een cijferblok en nergens anders.
+  Map<ShortcutActivator, VoidCallback> _zoomShortcuts() {
+    final zoom = ref.read(settingsProvider).documentEditorZoom;
+    const step = SettingsNotifier.documentEditorZoomStep;
+    void bigger() => _setZoom(zoom + step);
+    void smaller() => _setZoom(zoom - step);
+    return {
+      for (final key in const [
+        LogicalKeyboardKey.equal,
+        LogicalKeyboardKey.add,
+        LogicalKeyboardKey.numpadAdd,
+      ]) ...{
+        SingleActivator(key, meta: true): bigger,
+        SingleActivator(key, control: true): bigger,
+      },
+      for (final key in const [
+        LogicalKeyboardKey.minus,
+        LogicalKeyboardKey.numpadSubtract,
+      ]) ...{
+        SingleActivator(key, meta: true): smaller,
+        SingleActivator(key, control: true): smaller,
+      },
+      for (final key in const [
+        LogicalKeyboardKey.digit0,
+        LogicalKeyboardKey.numpad0,
+      ]) ...{
+        SingleActivator(key, meta: true): () => _setZoom(1),
+        SingleActivator(key, control: true): () => _setZoom(1),
+      },
+    };
   }
 
   /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
@@ -111,8 +159,14 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final pageSize = setup.size!;
     final margins = setup.margins!;
     final (_, pageHeightMm) = pageSize.dimensions;
+    final zoom = settings.documentEditorZoom;
+    // De zoom gaat óók in de paginahoogte. De tekst wordt namelijk met dezelfde
+    // factor groter én de kolom met dezelfde factor breder, dus elk blok wordt
+    // precies `zoom` keer zo hoog en de regelval blijft identiek. Zonder deze
+    // vermenigvuldiging zou een pagina-einde bij 150% een derde te vroeg vallen
+    // en de lijn dus iets aanwijzen wat op papier niet gebeurt.
     final pageContentHeight =
-        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm;
+        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm * zoom;
     return Row(
       children: [
         if (showRail) ...[
@@ -122,13 +176,27 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         Expanded(
           child: Stack(
             children: [
-              WritingPageBreakOverlay(
-                editorKey: _visualEditorKey,
-                pageContentHeight: pageContentHeight,
-                enabled: _showPageBreaks,
-                child: _styledDocumentSurface(
-                  _styleProfile,
-                  _wysiwygEditor(theme),
+              MediaQuery(
+                // De zoom vermenigvuldigt wat het toestel en de app-brede
+                // interfaceschaal al vragen, zoals de documentatielezer het ook
+                // doet — één begrip van "groter", niet twee.
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.linear(
+                    MediaQuery.textScalerOf(context).scale(1) * zoom,
+                  ),
+                ),
+                child: WritingPageBreakOverlay(
+                  editorKey: _visualEditorKey,
+                  pageContentHeight: pageContentHeight,
+                  // De einden gelden alleen op paginabreedte: op een andere
+                  // maat breekt het vel ergens anders dan de lijn zegt.
+                  enabled:
+                      _showPageBreaks &&
+                      settings.documentEditorWidth == DocumentEditorWidth.page,
+                  child: _styledDocumentSurface(
+                    _styleProfile,
+                    _wysiwygEditor(theme),
+                  ),
                 ),
               ),
               _documentPageIndicator(
@@ -169,13 +237,12 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    // Met pagina-einden aan schrijf je op de tekstbreedte van de pagina: een
-    // einde dat op een bredere kolom is uitgerekend zou ergens anders vallen
-    // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
-    // dan geldt de ingestelde schrijfbreedte.
-    documentMaxWidth: _showPageBreaks
-        ? _documentPageTextWidthPx(ref)
-        : ref.watch(settingsProvider).documentEditorMaxWidth,
+    // Op welke breedte je schrijft is een keuze, geen bijverschijnsel van de
+    // pagina-einden. Dat was het wél: de einden trokken de breedte naar die van
+    // het vel, en omdat ze standaard aanstaan deed de instelling "volledige
+    // breedte" niets. Nu kiest de gebruiker de stand en volgen de einden hem —
+    // op paginabreedte kloppen ze, daarbuiten worden ze niet getekend.
+    documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
     bordered: false,
     insertSignal: _insertSignal,
@@ -250,6 +317,26 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
           ),
         ),
       );
+}
+
+/// De breedte waarop het schrijfvlak staat: de tekstbreedte van het vel, de
+/// ingestelde leeskolom, of niets (het hele venster) — allemaal maal de zoom.
+///
+/// De zoom zit erin omdat hij anders liegt: schaalt alleen de tekst mee en niet
+/// de kolom, dan valt de regelval anders dan op papier en klopt geen enkel
+/// pagina-einde meer. Tekst en kolom groeien met dezelfde factor, dus wat er op
+/// een regel past blijft precies gelijk.
+double? _documentWriteWidth(WidgetRef ref) {
+  final settings = ref.watch(settingsProvider);
+  final zoom = settings.documentEditorZoom;
+  return switch (settings.documentEditorWidth) {
+    DocumentEditorWidth.page => _documentPageTextWidthPx(ref) * zoom,
+    DocumentEditorWidth.column => switch (settings.documentEditorMaxWidth) {
+      null => null,
+      final width => width * zoom,
+    },
+    DocumentEditorWidth.full => null,
+  };
 }
 
 /// De tekstbreedte van de pagina die nu geldt: die van het document zelf als

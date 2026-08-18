@@ -103,6 +103,43 @@ double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
       final width => width,
     };
 
+/// Documentmodus: op welke breedte de visuele editor schrijft.
+///
+/// Puur een kijkvoorkeur — er gaat geen byte naar het `.md`. Los van de
+/// schakelaar voor de pagina-einden: die twee zaten aan elkaar vast, en
+/// daardoor deed de breedte-instelling niets zolang de einden aanstonden.
+Future<void> _applyDocumentEditorWidth(
+  SettingsNotifier notifier,
+  DocumentEditorWidth width,
+) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentEditorWidth: width,
+  );
+  return notifier._persist(
+    'documentEditorWidth',
+    (prefs) => prefs.setString('documentEditorWidth', width.name),
+  );
+}
+
+/// Documentmodus: de zoomfactor van het schrijfvlak en de vellen.
+Future<void> _applyDocumentEditorZoom(SettingsNotifier notifier, double zoom) {
+  final clamped = zoom
+      .clamp(
+        SettingsNotifier.documentEditorZoomMin,
+        SettingsNotifier.documentEditorZoomMax,
+      )
+      .toDouble();
+  if (clamped == notifier.currentState.documentEditorZoom)
+    return Future.value();
+  notifier.currentState = notifier.currentState.copyWith(
+    documentEditorZoom: clamped,
+  );
+  return notifier._persist(
+    'documentEditorZoom',
+    (prefs) => prefs.setDouble('documentEditorZoom', clamped),
+  );
+}
+
 /// Alle documentmodus-instellingen zoals ze op schijf staan, in één keer.
 ///
 /// Het lezen hoort in dezelfde `part` als het schrijven: ze delen de sleutels
@@ -114,6 +151,8 @@ double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
   bool chapterPageBreak,
   bool cropMarks,
   double? editorMaxWidth,
+  DocumentEditorWidth editorWidth,
+  double editorZoom,
   PageSizeSpec pageSize,
   PageMargins pageMargins,
 })
@@ -123,6 +162,16 @@ _readDocumentSettings(SharedPreferences prefs) => (
   chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? false,
   cropMarks: prefs.getBool('documentCropMarks') ?? false,
   editorMaxWidth: _readDocumentEditorMaxWidth(prefs),
+  editorWidth: DocumentEditorWidth.values.firstWhere(
+    (value) => value.name == prefs.getString('documentEditorWidth'),
+    // Niets gekozen → de breedte van het vel: dat is de stand waarin de
+    // pagina-einden kloppen, en dus de stand waarin de editor het meeste zegt.
+    orElse: () => DocumentEditorWidth.page,
+  ),
+  editorZoom: (prefs.getDouble('documentEditorZoom') ?? 1.0).clamp(
+    SettingsNotifier.documentEditorZoomMin,
+    SettingsNotifier.documentEditorZoomMax,
+  ),
   pageSize:
       PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
       PageSizeSpec.a4,

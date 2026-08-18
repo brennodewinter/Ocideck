@@ -154,30 +154,42 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
         return SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 16),
-                for (var i = 0; i < offsets.length; i++) ...[
-                  _sheet(
-                    context,
-                    document,
-                    offsets[i],
-                    // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                    // een volle paginahoogte verder. Een blok dat niet meer paste
-                    // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                    // te blijven in plaats van de eerste regels van dat blok
-                    // doormidden te tonen.
-                    i + 1 < offsets.length
-                        ? offsets[i + 1] - offsets[i]
-                        : _contentHeightPx,
-                    i + 1,
-                    offsets.length,
-                    fit,
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ],
+          // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
+          // horizontale rol zou de rechterhelft niet alleen onbereikbaar zijn
+          // maar ook een overloopfout geven — de vellen staan in een verticale
+          // kolom, en die knijpt niets af.
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              // Minstens zo breed als het venster, zodat een vel dat er wél in
+              // past gewoon gecentreerd blijft staan.
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    for (var i = 0; i < offsets.length; i++) ...[
+                      _sheet(
+                        context,
+                        document,
+                        offsets[i],
+                        // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                        // een volle paginahoogte verder. Een blok dat niet meer paste
+                        // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                        // te blijven in plaats van de eerste regels van dat blok
+                        // doormidden te tonen.
+                        i + 1 < offsets.length
+                            ? offsets[i + 1] - offsets[i]
+                            : _contentHeightPx,
+                        i + 1,
+                        offsets.length,
+                        fit,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ],
+                ),
+              ),
             ),
           ),
         );

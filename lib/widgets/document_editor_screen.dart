@@ -33,7 +33,8 @@ import '../platform/platform_features.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
-import '../state/settings_provider.dart' show settingsProvider;
+import '../state/settings_provider.dart'
+    show SettingsNotifier, settingsProvider;
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
@@ -502,6 +503,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
             shift: true,
           ): _redo,
           const SingleActivator(LogicalKeyboardKey.keyY, control: true): _redo,
+          // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware
+          // grootte. Beide plustoetsen, want op de meeste indelingen zit + op
+          // shift-= en levert het toetsenbord `equal` in plaats van `add`.
+          ..._zoomShortcuts(),
         },
         child: Scaffold(
           body: Column(
@@ -542,6 +547,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 showPageBreaks: _showPageBreaks,
                 onShowPageBreaksChanged: (v) =>
                     setState(() => _showPageBreaks = v),
+                width: settings.documentEditorWidth,
+                onWidthChanged: (v) => unawaited(
+                  ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
+                ),
+                zoom: settings.documentEditorZoom,
+                onZoomChanged: _setZoom,
               ),
               Divider(
                 height: 1,
