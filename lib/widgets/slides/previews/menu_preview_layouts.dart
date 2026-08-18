@@ -44,16 +44,6 @@ Widget _menuBlockArea(
   };
 }
 
-/// Zoveel kolommen als bij het aantal blokken past. Gedeeld met de HTML-export
-/// (`_menuColumns` daar), zodat het raster overal hetzelfde oogt.
-int menuGridColumns(int n) => n <= 1
-    ? 1
-    : n <= 4
-    ? 2
-    : n <= 9
-    ? 3
-    : 4;
-
 /// Het raster: rijen die de hoogte verdelen, kolommen naar het aantal blokken.
 Widget _menuGrid(
   List<MenuBlock> blocks,

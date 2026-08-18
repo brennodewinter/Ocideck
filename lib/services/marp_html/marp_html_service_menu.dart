@@ -9,17 +9,6 @@ part of '../marp_html_service.dart';
 final _menuClassComment = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _menuHeading = RegExp(r'^#\s+(.*)$');
 
-/// Zoveel kolommen als bij het aantal blokken past — hetzelfde trapje als de
-/// preview (`menuGridColumns`), zodat de raster-indeling over alle oppervlakken
-/// gelijk oogt.
-int _menuColumns(int n) => n <= 1
-    ? 1
-    : n <= 4
-    ? 2
-    : n <= 9
-    ? 3
-    : 4;
-
 /// Rendert een keuze-menudia naar zijn blokken, of laat een dia die geen menu is
 /// onaangeroerd.
 ///
@@ -111,7 +100,7 @@ String _menuBlocksHtml(
     case MenuLayout.grid:
       out
         ..write('<div class="menu-grid" style="grid-template-columns:')
-        ..write('repeat(${_menuColumns(blocks.length)},1fr)">');
+        ..write('repeat(${menuGridColumns(blocks.length)},1fr)">');
     case MenuLayout.list:
       out.write('<div class="menu-grid menu-stack">');
     case MenuLayout.circle:

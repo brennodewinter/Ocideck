@@ -178,17 +178,28 @@ List<MenuCategory> menuCategoriesFor(List<String> bullets) {
   return out;
 }
 
+/// Hoeveel kolommen het raster krijgt bij [n] blokken. Hier en niet in de
+/// preview, omdat de HTML-export dezelfde trap moet lopen: stonden ze los, dan
+/// week de geëxporteerde dia stilletjes af van wat de auteur zag.
+int menuGridColumns(int n) => n <= 1
+    ? 1
+    : n <= 4
+    ? 2
+    : n <= 9
+    ? 3
+    : 4;
+
 /// Of dit menu een categoriekiezer verdient: pas vanaf twee categorieën, of bij
 /// één categorie die een naam draagt.
 bool menuHasCategories(List<MenuCategory> categories) =>
-    categories.length > 1 || (categories.length == 1 && categories.first.isNamed);
+    categories.length > 1 ||
+    (categories.length == 1 && categories.first.isNamed);
 
 /// Schrijf categorieën terug als bullets — de tegenhanger van
 /// [menuCategoriesFor]. Een naamloze eerste categorie schrijft geen tussenkop.
 List<String> menuBulletsFrom(List<MenuCategory> categories) => [
   for (var i = 0; i < categories.length; i++) ...[
-    if (i > 0 || categories[i].isNamed)
-      groupHeadingBullet(categories[i].label),
+    if (i > 0 || categories[i].isNamed) groupHeadingBullet(categories[i].label),
     for (final block in categories[i].blocks) menuBlockToBullet(block),
   ],
 ];

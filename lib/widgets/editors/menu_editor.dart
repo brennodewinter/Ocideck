@@ -73,8 +73,7 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
   }
 
   List<MenuBlock> get _blocks => menuBlocksFor(widget.slide.bullets);
-  List<MenuCategory> get _categories =>
-      menuCategoriesFor(widget.slide.bullets);
+  List<MenuCategory> get _categories => menuCategoriesFor(widget.slide.bullets);
 
   /// De doorlopende blokindex van blok [i] in categorie [cat] — de index waarop
   /// [_labels], [_descriptions] en de deck-notifier rekenen.
@@ -176,10 +175,7 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
 
   void _renameCategory(int cat, String name) {
     final categories = _categories;
-    categories[cat] = MenuCategory(
-      label: name,
-      blocks: categories[cat].blocks,
-    );
+    categories[cat] = MenuCategory(label: name, blocks: categories[cat].blocks);
     _writeCategories(categories);
   }
 
@@ -259,9 +255,8 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
         Align(
           alignment: Alignment.centerLeft,
           child: TextButton.icon(
-            onPressed: () => _addCategory(
-              '${l10n.d('Categorie')} ${categories.length + 1}',
-            ),
+            onPressed: () =>
+                _addCategory('${l10n.d('Categorie')} ${categories.length + 1}'),
             icon: const Icon(Icons.folder_outlined, size: 16),
             label: Text(l10n.d('Categorie toevoegen')),
           ),
@@ -294,7 +289,9 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
     final options = <(MenuLayout, String, IconData)>[
       (MenuLayout.grid, l10n.d('Raster'), Icons.grid_view_outlined),
       (MenuLayout.list, l10n.d('Onder elkaar'), Icons.view_list_outlined),
-      (MenuLayout.circle, l10n.d('Cirkel'), Icons.donut_large_outlined),
+      // Bewust niet `Cirkel`: die bronstring is elders het cirkel*diagram*, en
+      // vertaalt in het Engels naar "Pie" — een menu-indeling heet geen taart.
+      (MenuLayout.circle, l10n.d('In een cirkel'), Icons.donut_large_outlined),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
