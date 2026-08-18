@@ -635,16 +635,24 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
           );
         }
 
+        // Pictogram + tekst vragen samen zo'n 50 tot 60 pixels. Net boven de
+        // drempel hierboven is dat meer dan er is — een `Flexible` laat het
+        // bijschrift dan inbinden in plaats van de kolom te laten overlopen
+        // (gezien bij de kleine blokafbeelding van een keuzemenu, #1162).
         return Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(icon, color: AppTheme.slideInkSoft, size: 24),
               const SizedBox(height: 4),
-              Text(
-                label,
-                style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
-                textAlign: TextAlign.center,
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(color: AppTheme.slideInkMuted, fontSize: 10),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

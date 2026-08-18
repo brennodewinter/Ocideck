@@ -6,6 +6,7 @@ import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
 import '../models/marp_style.dart';
+import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/display_window_spec.dart';
@@ -278,6 +279,9 @@ class MarkdownService {
       // from marpClass above).
       if (slide.type == SlideType.timeline)
         ...timelineClassTokens(slide.timelineLayout, slide.timelineReveal),
+      // Keuze-menu-indeling (#1162) rijdt op dezelfde manier mee; `grid` is de
+      // standaard en schrijft niets, zodat bestaande menudia's niet wijzigen.
+      if (slide.type == SlideType.menu) ...menuClassTokens(slide.menuLayout),
     ];
 
     _writeSlideDirectives(buf, slide, classes, forExport);

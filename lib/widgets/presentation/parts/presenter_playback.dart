@@ -119,6 +119,8 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     _rebuild(() {
       _index = target;
       _richTextPage = 0;
+      // Een andere dia begint weer bij de eerste menucategorie (#1162).
+      _menuCategory = 0;
       _timelineStep = 0;
     });
     _loadUserNoteIntoController();

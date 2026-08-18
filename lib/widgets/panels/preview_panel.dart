@@ -45,6 +45,15 @@ class PreviewPanel extends ConsumerStatefulWidget {
 }
 
 class _PreviewPanelState extends ConsumerState<PreviewPanel> {
+  /// Welke categorie de auteur open heeft op een keuze-menudia (#1162). Alleen
+  /// een kijkstand van deze voorvertoning: hij hoort bij niemand anders en gaat
+  /// dus niet het deck in.
+  int _menuCategory = 0;
+
+  /// De dia waar [_menuCategory] bij hoort; wisselt de auteur van dia, dan
+  /// begint de keuze weer bij de eerste categorie.
+  String _menuCategorySlideId = '';
+
   final TransformationController _transform = TransformationController();
   final FocusNode _focusNode = FocusNode(debugLabel: 'PreviewPanel');
   double _zoom = 1.0;
@@ -457,6 +466,13 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     deck.themeProfile.fontFamily,
                   ),
                   splitRunPosition: splitRunPositionFor(deck.slides, idx),
+                  menuCategory: slide.id == _menuCategorySlideId
+                      ? _menuCategory
+                      : 0,
+                  onMenuCategoryChanged: (i) => setState(() {
+                    _menuCategory = i;
+                    _menuCategorySlideId = slide.id;
+                  }),
                   richTextPage: richTextPage,
                   showRichTextPageControls: hasRichTextPages,
                   onRichTextPageChanged: hasRichTextPages

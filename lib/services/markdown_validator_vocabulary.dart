@@ -39,6 +39,9 @@ const _knownClassTokens = {
   // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
   'control-status',
   'gantt',
+  'menu-grid',
+  'menu-list',
+  'menu-circle',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',

@@ -64,7 +64,7 @@ void main() {
           html,
           contains(
             '<a class="menu-card" href="#prijzen" '
-            'style="border-color:#0033998c;background:#0033991a">',
+            'style="border-color:#0033998c;background:#0033991f">',
           ),
         );
         expect(html, contains('<div class="menu-label">Prijzen</div>'));
@@ -116,7 +116,7 @@ void main() {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(_menuDeckMarkdown());
       expect(html, contains('.slide .menu-card'));
-      expect(html, contains('grid-auto-rows:200px'));
+      expect(html, contains('grid-auto-rows:180px'));
     });
 
     test('a block label is HTML-escaped, never injected as markup', () async {

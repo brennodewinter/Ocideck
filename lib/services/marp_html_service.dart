@@ -18,6 +18,7 @@ import '../models/question.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
 import '../models/marp_style.dart';
+import '../models/menu.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/scorecard_spec.dart';
 import '../models/settings.dart';

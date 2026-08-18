@@ -472,7 +472,8 @@ extension _MarkdownParse on MarkdownService {
               c != 'no-footer' &&
               c != 'image-title-above' &&
               c != 'table-editable' &&
-              !isTimelineOptionToken(c),
+              !isTimelineOptionToken(c) &&
+              !isMenuOptionToken(c),
         )
         .join(' ');
 
@@ -549,6 +550,9 @@ extension _MarkdownParse on MarkdownService {
       tableMarkOverdue:
           type == SlideType.table && classTokens.contains('table-overdue'),
       viewLimit: d.viewLimit,
+      menuLayout: type == SlideType.menu
+          ? menuLayoutFromTokens(classTokens)
+          : MenuLayout.grid,
       timelineLayout: type == SlideType.timeline
           ? timelineLayoutFromTokens(classTokens)
           : TimelineLayout.auto,
