@@ -1682,8 +1682,6 @@ const _dutchSourceAddEl = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Κατάργηση κατηγορίας (τα μπλοκ διατηρούνται)',
   'Uitleg': 'Επεξήγηση',
-  'Eén regel, staat onder het label':
-      'Μία γραμμή, εμφανίζεται κάτω από την ετικέτα',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ένα μενού επιλογών: κάθε μπλοκ μεταβαίνει σε άλλη διαφάνεια όταν το πατήσετε. Πληκτρολογήστε μια ετικέτα και μια επεξήγηση για κάθε μπλοκ, επιλέξτε τη διαφάνεια προορισμού και προαιρετικά μια εικόνα. Επιλέξτε τη διάταξη: πλέγμα, λίστα ή κύκλος. Με τις κατηγορίες εναλλάσσεστε μεταξύ ομάδων μπλοκ κατά την παρουσίαση. Ένα μπλοκ χωρίς προορισμό είναι απλό κείμενο.',
   'Hoofdstukken op nieuwe pagina': 'Κεφάλαια σε νέα σελίδα',

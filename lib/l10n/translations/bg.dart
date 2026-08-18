@@ -1677,7 +1677,6 @@ const _dutchSourceAddBg = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Премахване на категорията (блоковете се запазват)',
   'Uitleg': 'Описание',
-  'Eén regel, staat onder het label': 'Един ред, показва се под етикета',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Меню за избор: всеки блок при щракване преминава към друг слайд. Въведете етикет и описание за всеки блок, изберете целевия слайд и по желание изображение. Изберете оформлението: мрежа, списък или кръг. С категориите превключвате между групи блокове по време на презентацията. Блок без цел е обикновен текст.',
   'Hoofdstukken op nieuwe pagina': 'Глави на нова страница',

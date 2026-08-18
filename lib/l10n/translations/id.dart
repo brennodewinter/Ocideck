@@ -1656,7 +1656,6 @@ const _dutchSourceAddId = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Hapus kategori (blok tetap ada)',
   'Uitleg': 'Penjelasan',
-  'Eén regel, staat onder het label': 'Satu baris, tampil di bawah label',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu pilihan: setiap blok melompat ke slide lain saat diklik. Ketik label dan penjelasan untuk setiap blok, pilih slide tujuan dan gambar jika diperlukan. Pilih tata letak: kisi, daftar, atau lingkaran. Dengan kategori Anda beralih antar kelompok blok saat presentasi. Blok tanpa tujuan adalah teks biasa.',
   'Hoofdstukken op nieuwe pagina': 'Bab di halaman baru',

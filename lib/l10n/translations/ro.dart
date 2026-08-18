@@ -1674,7 +1674,6 @@ const _dutchSourceAddRo = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Elimină categoria (blocurile sunt păstrate)',
   'Uitleg': 'Descriere',
-  'Eén regel, staat onder het label': 'Un rând, apare sub etichetă',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă și o descriere pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Alegeți aranjarea: grilă, listă sau cerc. Cu ajutorul categoriilor comutați între grupuri de blocuri în timpul prezentării. Un bloc fără țintă este text obișnuit.',
   'Hoofdstukken op nieuwe pagina': 'Capitole pe pagină nouă',

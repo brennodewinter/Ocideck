@@ -682,8 +682,6 @@ const _dutchSourceAddDe = {
   'Categorie opheffen (blokken blijven behouden)':
       'Kategorie auflösen (Blöcke bleiben erhalten)',
   'Uitleg': 'Beschreibung',
-  'Eén regel, staat onder het label':
-      'Eine Zeile, steht unter der Beschriftung',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ein Auswahlmenü: Jeder Block springt beim Anklicken zu einer anderen Folie. Gib pro Block eine Beschriftung und eine Beschreibung ein, wähle die Zielfolie und optional ein Bild. Wähle die Anordnung: Raster, Liste oder Kreis. Mit Kategorien wechselst du beim Präsentieren zwischen Gruppen von Blöcken. Ein Block ohne Ziel ist einfacher Text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel auf neuer Seite',

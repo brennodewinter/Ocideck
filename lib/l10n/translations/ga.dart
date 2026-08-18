@@ -1688,7 +1688,6 @@ const _dutchSourceAddGa = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Bain an chatagóir (coinnítear na bloic)',
   'Uitleg': 'Cur síos',
-  'Eén regel, staat onder het label': 'Líne amháin, taispeántar faoin lipéad',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Roghchlár roghanna: léimeann gach bloc go sleamhnán eile nuair a chliceáiltear air. Cuir lipéad agus cur síos isteach do gach bloc, roghnaigh an sleamhnán sprice agus íomhá más mian leat. Roghnaigh an leagan amach: greille, liosta nó ciorcal. Le catagóirí athraíonn tú idir grúpaí bloc le linn an chur i láthair. Is gnáththéacs é bloc gan sprioc.',
   'Hoofdstukken op nieuwe pagina': 'Caibidlí ar leathanach nua',

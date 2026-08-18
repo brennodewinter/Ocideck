@@ -680,8 +680,6 @@ const _dutchSourceAddEs = {
   'Categorie opheffen (blokken blijven behouden)':
       'Quitar categoría (los bloques se conservan)',
   'Uitleg': 'Descripción',
-  'Eén regel, staat onder het label':
-      'Una línea, se muestra debajo de la etiqueta',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Un menú de opciones: cada bloque salta a otra diapositiva al hacer clic. Escribe una etiqueta y una descripción para cada bloque, elige la diapositiva de destino y, opcionalmente, una imagen. Elige la disposición: cuadrícula, lista o círculo. Con las categorías cambias entre grupos de bloques durante la presentación. Un bloque sin destino es texto normal.',
   'Hoofdstukken op nieuwe pagina': 'Capítulos en página nueva',

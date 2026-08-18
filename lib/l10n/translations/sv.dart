@@ -1656,7 +1656,6 @@ const _dutchSourceAddSv = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Ta bort kategori (blocken behålls)',
   'Uitleg': 'Beskrivning',
-  'Eén regel, staat onder het label': 'En rad, visas under etiketten',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'En valmeny: varje block hoppar till en annan diabild när man klickar på det. Skriv en etikett och en beskrivning för varje block, välj måldiabilden och eventuellt en bild. Välj layout: rutnät, lista eller cirkel. Med kategorier växlar du mellan grupper av block under presentationen. Ett block utan mål är vanlig text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel på ny sida',

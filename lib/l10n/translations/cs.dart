@@ -1659,7 +1659,6 @@ const _dutchSourceAddCs = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Zrušit kategorii (bloky zůstanou zachovány)',
   'Uitleg': 'Vysvětlení',
-  'Eén regel, staat onder het label': 'Jeden řádek, zobrazí se pod popiskem',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Nabídka voleb: každý blok po kliknutí přejde na jiný snímek. Pro každý blok zadejte popisek a vysvětlení, vyberte cílový snímek a případně obrázek. Zvolte rozvržení: mřížka, seznam nebo kruh. Pomocí kategorií během prezentace přepínáte mezi skupinami bloků. Blok bez cíle je běžný text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitoly na nové stránce',

@@ -1658,7 +1658,6 @@ const _dutchSourceAddSl = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Odstrani kategorijo (bloki ostanejo)',
   'Uitleg': 'Opis',
-  'Eén regel, staat onder het label': 'Ena vrstica, prikaže se pod oznako',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Izbirni meni: vsak blok ob kliku preskoči na drug diapozitiv. Za vsak blok vnesite oznako in opis, izberite ciljni diapozitiv in po želji sliko. Izberite postavitev: mreža, seznam ali krog. S kategorijami med predstavitvijo preklapljate med skupinami blokov. Blok brez cilja je navadno besedilo.',
   'Hoofdstukken op nieuwe pagina': 'Poglavja na novi strani',

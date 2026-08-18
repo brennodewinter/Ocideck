@@ -1677,7 +1677,6 @@ const _dutchSourceAddMt = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Neħħi l-kategorija (il-blokki jinżammu)',
   'Uitleg': 'Deskrizzjoni',
-  'Eén regel, staat onder het label': 'Linja waħda, tidher taħt it-tikketta',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu tal-għażla: kull blokk jaqbeż għal slide oħra meta tikklikkja fuqu. Ittajpja tikketta u deskrizzjoni għal kull blokk, agħżel is-slide fil-mira u fakultattivament stampa. Agħżel it-tqassim: grilja, lista jew ċirku. Bil-kategoriji taqleb bejn gruppi ta\' blokki waqt il-preżentazzjoni. Blokk mingħajr mira huwa test sempliċi.',
   'Hoofdstukken op nieuwe pagina': 'Kapitli f\'paġna ġdida',

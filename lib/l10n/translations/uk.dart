@@ -1673,7 +1673,6 @@ const _dutchSourceAddUk = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Прибрати категорію (блоки залишаються)',
   'Uitleg': 'Опис',
-  'Eén regel, staat onder het label': 'Один рядок, показується під підписом',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Меню вибору: кожен блок під час натискання переходить до іншого слайда. Введіть підпис і опис для кожного блоку, виберіть цільовий слайд і за потреби зображення. Виберіть компонування: сітка, список або коло. За допомогою категорій під час презентації ви перемикаєтеся між групами блоків. Блок без цілі — це звичайний текст.',
   'Hoofdstukken op nieuwe pagina': 'Розділи з нової сторінки',

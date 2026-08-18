@@ -1657,7 +1657,6 @@ const _dutchSourceAddDa = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Ophæv kategori (blokkene bevares)',
   'Uitleg': 'Beskrivelse',
-  'Eén regel, staat onder het label': 'Én linje, vises under etiketten',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'En valgmenu: hver blok springer til et andet dias, når man klikker på den. Skriv en etiket og en beskrivelse for hver blok, vælg måldiaset og eventuelt et billede. Vælg layoutet: gitter, liste eller cirkel. Med kategorier skifter du mellem grupper af blokke under præsentationen. En blok uden mål er almindelig tekst.',
   'Hoofdstukken op nieuwe pagina': 'Kapitler på ny side',

@@ -1650,7 +1650,6 @@ const _dutchSourceAddEt = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Eemalda kategooria (plokid säilivad)',
   'Uitleg': 'Kirjeldus',
-  'Eén regel, staat onder het label': 'Üks rida, kuvatakse sildi all',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Valikumenüü: iga plokk hüppab klõpsamisel teisele slaidile. Sisesta igale plokile silt ja kirjeldus, vali sihtslaid ja soovi korral pilt. Vali paigutus: ruudustik, loend või ring. Kategooriatega vahetad esitluse ajal plokirühmi. Ilma sihita plokk on tavaline tekst.',
   'Hoofdstukken op nieuwe pagina': 'Peatükid uuele lehele',

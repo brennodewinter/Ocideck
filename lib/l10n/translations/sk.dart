@@ -1663,7 +1663,6 @@ const _dutchSourceAddSk = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Zrušiť kategóriu (bloky zostanú zachované)',
   'Uitleg': 'Vysvetlenie',
-  'Eén regel, staat onder het label': 'Jeden riadok, zobrazí sa pod označením',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie a vysvetlenie, vyberte cieľový snímok a prípadne obrázok. Zvoľte rozloženie: mriežka, zoznam alebo kruh. Pomocou kategórií počas prezentácie prepínate medzi skupinami blokov. Blok bez cieľa je bežný text.',
   'Hoofdstukken op nieuwe pagina': 'Kapitoly na novej strane',

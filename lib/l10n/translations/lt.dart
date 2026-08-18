@@ -1664,7 +1664,6 @@ const _dutchSourceAddLt = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Pašalinti kategoriją (blokai išliks)',
   'Uitleg': 'Aprašymas',
-  'Eén regel, staat onder het label': 'Viena eilutė, rodoma po etikete',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Pasirinkimo meniu: kiekvienas blokas spustelėjus perkelia į kitą skaidrę. Kiekvienam blokui įveskite etiketę ir aprašymą, pasirinkite paskirties skaidrę ir, jei norite, paveikslėlį. Pasirinkite išdėstymą: tinklelis, sąrašas arba apskritimas. Naudodami kategorijas pristatymo metu perjungiate blokų grupes. Blokas be paskirties yra paprastas tekstas.',
   'Hoofdstukken op nieuwe pagina': 'Skyriai naujame puslapyje',

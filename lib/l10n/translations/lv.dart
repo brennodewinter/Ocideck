@@ -1656,7 +1656,6 @@ const _dutchSourceAddLv = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Noņemt kategoriju (bloki tiek saglabāti)',
   'Uitleg': 'Apraksts',
-  'Eén regel, staat onder het label': 'Viena rinda, redzama zem uzraksta',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Izvēles izvēlne: katrs bloks, uz tā noklikšķinot, pāriet uz citu slaidu. Katram blokam ievadiet uzrakstu un aprakstu, izvēlieties mērķa slaidu un pēc izvēles attēlu. Izvēlieties izkārtojumu: režģis, saraksts vai aplis. Ar kategorijām prezentācijas laikā pārslēdzaties starp bloku grupām. Bloks bez mērķa ir vienkāršs teksts.',
   'Hoofdstukken op nieuwe pagina': 'Nodaļas jaunā lappusē',

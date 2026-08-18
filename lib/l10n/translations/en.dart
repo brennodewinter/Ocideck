@@ -854,7 +854,6 @@ const _dutchSourceAddEn = {
   'Categorie opheffen (blokken blijven behouden)':
       'Remove category (blocks are kept)',
   'Uitleg': 'Description',
-  'Eén regel, staat onder het label': 'One line, shown below the label',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'A choice menu: each block jumps to another slide when clicked. Enter a label and a description for each block, choose the target slide and optionally an image. Choose the layout: grid, list or circle. With categories you switch between groups of blocks while presenting. A block without a target is plain text.',
   'Hoofdstukken op nieuwe pagina': 'Chapters on new page',

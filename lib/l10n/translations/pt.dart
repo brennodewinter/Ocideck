@@ -1685,7 +1685,6 @@ const _dutchSourceAddPt = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Remover categoria (os blocos são mantidos)',
   'Uitleg': 'Descrição',
-  'Eén regel, staat onder het label': 'Uma linha, aparece por baixo do rótulo',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Um menu de opções: cada bloco salta para outro slide quando é clicado. Digite um rótulo e uma descrição para cada bloco, escolha o slide de destino e, opcionalmente, uma imagem. Escolha a disposição: grelha, lista ou círculo. Com as categorias alterna entre grupos de blocos durante a apresentação. Um bloco sem destino é texto simples.',
   'Hoofdstukken op nieuwe pagina': 'Capítulos em nova página',

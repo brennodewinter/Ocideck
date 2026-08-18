@@ -1669,7 +1669,6 @@ const _dutchSourceAddPl = <String, String>{
   'Categorie opheffen (blokken blijven behouden)':
       'Usuń kategorię (bloki zostaną zachowane)',
   'Uitleg': 'Opis',
-  'Eén regel, staat onder het label': 'Jeden wiersz, wyświetlany pod etykietą',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu wyboru: każdy blok po kliknięciu przechodzi do innego slajdu. Wpisz etykietę i opis dla każdego bloku, wybierz slajd docelowy i opcjonalnie obraz. Wybierz układ: siatka, lista lub okrąg. Dzięki kategoriom podczas prezentacji przełączasz się między grupami bloków. Blok bez celu jest zwykłym tekstem.',
   'Hoofdstukken op nieuwe pagina': 'Rozdziały na nowej stronie',
