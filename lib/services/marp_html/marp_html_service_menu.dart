@@ -120,40 +120,45 @@ String _menuBlocksHtml(
   // geëxporteerde dia is 1280×720 en de kijker scrollt door dia's, dus de
   // vensterhoogte zegt hier niets. De categorieën delen het budget.
   final budget = (_menuBodyHeight / categoryCount).clamp(140, _menuBodyHeight);
+  final columns = layout == MenuLayout.grid
+      ? menuGridColumns(blocks.length)
+      : 1;
+  final shown = _menuExportBlocks(blocks, layout, budget, columns);
   final out = StringBuffer();
   switch (layout) {
     case MenuLayout.grid:
-      final columns = menuGridColumns(blocks.length);
-      final rows = (blocks.length / columns).ceil();
       out
         ..write('<div class="menu-grid${dense ? ' menu-dense' : ''}" ')
         ..write('style="grid-template-columns:repeat($columns,1fr);')
-        ..write('grid-auto-rows:${_menuRowPx(budget, rows, 22)}px">');
+        ..write(
+          'grid-auto-rows:'
+          '${_menuRowPx(budget, (shown.length / columns).ceil(), 22)}px">',
+        );
     case MenuLayout.list:
       out
         ..write(
           '<div class="menu-grid menu-stack${dense ? ' menu-dense' : ''}"',
         )
         ..write(' style="grid-auto-rows:')
-        ..write('${_menuRowPx(budget, blocks.length, 16)}px">');
+        ..write('${_menuRowPx(budget, shown.length, 16)}px">');
     case MenuLayout.circle:
       // De ring is vierkant; met meer categorieën onder elkaar moet hij kleiner.
       out.write(
         '<div class="menu-ring" style="max-width:${budget.round()}px">',
       );
   }
-  for (var i = 0; i < blocks.length; i++) {
+  for (var i = 0; i < shown.length; i++) {
     out.write(
       layout == MenuLayout.circle
           ? _menuDiscHtml(
-              blocks[i],
+              shown[i],
               i,
-              blocks.length,
+              shown.length,
               accent: accent,
               ink: ink,
               ringPx: budget.toDouble(),
             )
-          : _menuCardHtml(blocks[i], accent: accent, ink: ink),
+          : _menuCardHtml(shown[i], accent: accent, ink: ink),
     );
   }
   out.write('</div>');
@@ -167,7 +172,45 @@ const double _menuBodyHeight = 560;
 /// De rijhoogte die [rows] rijen met [gap] ertussen samen binnen [budget] houdt,
 /// begrensd op wat nog leesbaar respectievelijk niet potsierlijk is.
 int _menuRowPx(num budget, int rows, double gap) =>
-    ((budget - gap * (rows - 1)) / rows).clamp(56, 180).round();
+    ((budget - gap * (rows - 1)) / rows).clamp(_menuMinRowPx, 180).round();
+
+/// De kleinste rijhoogte waarop een kaart in de export nog leesbaar is, en de
+/// kleinste schijflabel op de ring.
+const double _menuMinRowPx = 56;
+const double _menuMinDiscLabelPx = 11;
+
+/// Dezelfde leesbaarheidsvloer als in de app, maar dan met de maten van de
+/// export: wat binnen [budget] niet leesbaar past, maakt plaats voor een
+/// telblok.
+///
+/// Zonder deze grens won de ondergrens van [_menuRowPx] het van het budget —
+/// zestien regels van 56 px zijn 1100 px in een vak van 560 — en werd één dia
+/// twee schermen hoog (#1162, beeldkeuring). Een minimum dat het budget negeert,
+/// is een minimum dat overloopt.
+List<MenuBlock> _menuExportBlocks(
+  List<MenuBlock> blocks,
+  MenuLayout layout,
+  num budget,
+  int columns,
+) {
+  int fits;
+  if (layout == MenuLayout.circle) {
+    var n = blocks.length;
+    while (n > 1 &&
+        budget * menuDiscFraction(n) * kMenuDiscLabelFraction <
+            _menuMinDiscLabelPx) {
+      n--;
+    }
+    fits = n;
+  } else {
+    final gap = layout == MenuLayout.grid ? 22.0 : 16.0;
+    final rows = math.max(1, (budget + gap) ~/ (_menuMinRowPx + gap));
+    fits = rows * columns;
+  }
+  final room = menuVisibleBlocks(blocks.length, fits);
+  if (room.hidden == 0) return blocks;
+  return [...blocks.take(room.shown), MenuBlock(label: '+${room.hidden}')];
+}
 
 /// De rand- en vulkleur van een blok. Een doelblok krijgt de accentrand; een
 /// tekstblok een rustige rand uit de tekstkleur. De alfa-achtervoegsels volgen de

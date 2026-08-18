@@ -201,6 +201,37 @@ void main() {
       expect(html, isNot(contains('class="menu-ring"')));
     });
 
+    test(
+      'a slide fuller than fits counts the rest instead of shrinking',
+      () async {
+        // Zestien blokken onder elkaar pasten niet in het hoogtebudget; de
+        // ondergrens per rij won het van het budget en de dia werd twee schermen
+        // hoog. Nu staat er wat past, plus een telblok (#1162, beeldkeuring).
+        final md = MarkdownService();
+        final html = await MarpHtmlService(loadAsset: _diskLoader).build(
+          md.generateDeck(
+            Deck(
+              title: 'Demo',
+              slides: [
+                Slide.create(SlideType.menu).copyWith(
+                  title: 'Kies',
+                  menuLayout: MenuLayout.list,
+                  bullets: [for (var i = 0; i < 16; i++) '[Blok $i](#doel$i)'],
+                ),
+              ],
+            ),
+            forExport: true,
+          ),
+        );
+
+        expect(html, contains('>Blok 0<'));
+        expect(html, isNot(contains('>Blok 15<')));
+        // Acht rijen van 56 px plus zeven tussenruimtes past in het budget van
+        // 560; zeven blokken en een telblok voor de resterende negen.
+        expect(html, contains('>+9<'));
+      },
+    );
+
     test('the circle layout places each disc without script', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(categorisedDeck(MenuLayout.circle));

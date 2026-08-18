@@ -44,36 +44,71 @@ Widget _menuBlockArea(
   };
 }
 
+/// Het telblok dat de plaats inneemt van wat niet meer leesbaar past. Een gewoon
+/// blok zonder doel, met alleen het aantal erop — kort genoeg om in elke
+/// indeling te passen, en zonder woorden dus in elke taal gelijk.
+MenuBlock _menuMoreBlock(int hidden) => MenuBlock(label: '+$hidden');
+
+/// De blokken die getoond worden, met het telblok er zo nodig achteraan.
+List<MenuBlock> _menuWithCounter(List<MenuBlock> blocks, int fits) {
+  final room = menuVisibleBlocks(blocks.length, fits);
+  if (room.hidden == 0) return blocks;
+  return [...blocks.take(room.shown), _menuMoreBlock(room.hidden)];
+}
+
 /// Het raster: rijen die de hoogte verdelen, kolommen naar het aantal blokken.
 Widget _menuGrid(
   List<MenuBlock> blocks,
   double w,
   Widget Function(MenuBlock, {bool wide}) card,
 ) {
-  final n = blocks.length;
-  final cols = menuGridColumns(n);
-  final rows = (n / cols).ceil();
+  final cols = menuGridColumns(blocks.length);
   final gap = w * 0.018;
-  return Column(
-    children: [
-      for (var r = 0; r < rows; r++) ...[
-        if (r > 0) SizedBox(height: gap),
-        Expanded(
-          child: Row(
-            children: [
-              for (var c = 0; c < cols; c++) ...[
-                if (c > 0) SizedBox(width: gap),
-                Expanded(
-                  child: (r * cols + c) < n
-                      ? card(blocks[r * cols + c])
-                      : const SizedBox.shrink(),
+  return LayoutBuilder(
+    builder: (context, box) {
+      // Zoveel rijen als er leesbaar passen; de rest wordt geteld. Zelfde
+      // aftelling als bij de lijst, en om dezelfde reden.
+      var fitRows = (blocks.length / cols).ceil();
+      while (fitRows > 1 &&
+          menuRowLabelSize(
+                rowHeight: _menuRowHeight(
+                  box.maxHeight,
+                  gap,
+                  fitRows,
+                  w,
+                  cap: false,
                 ),
-              ],
-            ],
-          ),
-        ),
-      ],
-    ],
+                w: w,
+                hasDescription: false,
+              ) <
+              w * kMenuMinLabelFraction) {
+        fitRows--;
+      }
+      final shown = _menuWithCounter(blocks, fitRows * cols);
+      final n = shown.length;
+      final rows = (n / cols).ceil();
+      return Column(
+        children: [
+          for (var r = 0; r < rows; r++) ...[
+            if (r > 0) SizedBox(height: gap),
+            Expanded(
+              child: Row(
+                children: [
+                  for (var c = 0; c < cols; c++) ...[
+                    if (c > 0) SizedBox(width: gap),
+                    Expanded(
+                      child: (r * cols + c) < n
+                          ? card(shown[r * cols + c])
+                          : const SizedBox.shrink(),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ],
+      );
+    },
   );
 }
 
@@ -83,6 +118,19 @@ Widget _menuGrid(
 /// te vallen.
 const double _menuRowHeightFactor = 0.09;
 const double _menuRowGapFactor = 0.012;
+
+/// De hoogte van één regel als [n] regels met [gap] ertussen de hoogte [box]
+/// verdelen — nooit hoger dan de prettige leeshoogte.
+double _menuRowHeight(
+  double box,
+  double gap,
+  int n,
+  double w, {
+  bool cap = true,
+}) {
+  final even = (box - gap * (n - 1)) / n;
+  return cap ? math.min(even, w * _menuRowHeightFactor) : even;
+}
 
 /// Onder elkaar: brede kaarten, één per regel, gecentreerd in de ruimte die er
 /// is. De regels verdelen de hoogte die er is; ze groeien nooit voorbij de
@@ -95,16 +143,36 @@ Widget _menuList(
   final gap = w * _menuRowGapFactor;
   return LayoutBuilder(
     builder: (context, box) {
-      final n = blocks.length;
-      final even = (box.maxHeight - gap * (n - 1)) / n;
-      final height = math.min(even, w * _menuRowHeightFactor);
+      // Zoveel regels als er op leeshoogte passen; wat overblijft wordt geteld.
+      // Zonder deze grens werden zestien regels elk 11 px hoog met een letter
+      // van 3,7 px — heel, en volstrekt onleesbaar (#1162, beeldkeuring).
+      //
+      // Aftellen en niet uitrekenen: de rijhoogte die bij een aantal hoort is
+      // eenvoudig, maar de labelmaat die daar weer uit volgt loopt via marge,
+      // rand en het regelbudget. Die som naschatten is precies hoe een
+      // heuristiek stil uit de pas gaat lopen met wat er getekend wordt; dus
+      // vragen we het de rekensom zelf, met dezelfde functie die de kaart
+      // gebruikt.
+      var fits = blocks.length;
+      while (fits > 1 &&
+          menuRowLabelSize(
+                rowHeight: _menuRowHeight(box.maxHeight, gap, fits, w),
+                w: w,
+                hasDescription: false,
+              ) <
+              w * kMenuMinLabelFraction) {
+        fits--;
+      }
+      final shown = _menuWithCounter(blocks, fits);
+      final n = shown.length;
+      final height = _menuRowHeight(box.maxHeight, gap, n, w);
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           for (var i = 0; i < n; i++) ...[
             if (i > 0) SizedBox(height: gap),
-            SizedBox(height: height, child: card(blocks[i], wide: true)),
+            SizedBox(height: height, child: card(shown[i], wide: true)),
           ],
         ],
       );
@@ -161,7 +229,7 @@ class _MenuBlockCard extends StatelessWidget {
           color: actionable
               ? accent.withValues(alpha: 0.55)
               : text.withValues(alpha: 0.18),
-          width: w * 0.0026,
+          width: w * kMenuCardBorderFraction,
         ),
         borderRadius: BorderRadius.circular(w * 0.016),
       ),
@@ -183,8 +251,13 @@ class _MenuBlockCard extends StatelessWidget {
     // De marge krimpt mee met een lage kaart: bij zestien blokken in een lijst
     // is een vaste marge al hoger dan de kaart zelf, en dan blijft er niets voor
     // de tekst over.
-    final pad = math.min(w * 0.014, box.maxHeight * 0.12);
-    final inner = math.max(0.0, box.maxHeight - pad * 2);
+    //
+    // De rand hoeft hier — anders dan bij de schijf — niet apart te worden
+    // afgetrokken: een `Container` met een `border` springt zijn kind al in met
+    // de randdikte, dus `box.maxHeight` is hier de netto binnenmaat. De schijf
+    // rekent vanaf zijn brúto doorsnede en trekt hem daarom wél zelf af.
+    final pad = menuCardPadding(box.maxHeight, w);
+    final inner = menuCardTextHeight(box.maxHeight, w);
     final thumb = math.min(inner, math.min(box.maxWidth * 0.3, w * 0.1));
 
     // Lettergrootte en regelbudget volgen uit de ruimte, niet uit een vast
@@ -192,7 +265,7 @@ class _MenuBlockCard extends StatelessWidget {
     // afbreken met een ellips en onzichtbaar weggeknipt worden.
     final fit = menuTextFit(
       available: inner,
-      maxLabelSize: w * 0.026,
+      maxLabelSize: w * kMenuCardLabelFraction,
       hasDescription: block.hasDescription,
     );
     final showArrow = block.hasTarget && box.maxWidth > w * 0.16;
@@ -313,7 +386,26 @@ class _MenuCircle extends StatelessWidget {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, box) {
       final side = math.min(box.maxWidth, box.maxHeight);
-      final n = blocks.length;
+      // Hoeveel schijven er leesbaar op de ring passen: de schijf krimpt met het
+      // aantal, en het label is een vaste fractie van de schijf. Bij zestien
+      // stond er nog 3,4 px letter op (#1162, beeldkeuring); wat er niet bij
+      // past wordt geteld.
+      // Draagt één blok een afbeelding, dan telt dat voor de hele ring: de
+      // schijven zijn even groot, dus de krapste bepaalt wat er past.
+      final anyImage = blocks.any((b) => b.hasImage);
+      var fits = blocks.length;
+      while (fits > 1 &&
+          menuDiscLabelSize(
+                diameter: side * menuDiscFraction(fits),
+                borderWidth: w * _menuDiscTargetBorder,
+                hasImage: anyImage,
+                hasDescription: false,
+              ) <
+              w * kMenuMinLabelFraction) {
+        fits--;
+      }
+      final shown = _menuWithCounter(blocks, fits);
+      final n = shown.length;
       final disc = side * menuDiscFraction(n);
       final radius = side * menuRingRadius(n);
       return Center(
@@ -328,7 +420,7 @@ class _MenuCircle extends StatelessWidget {
               // hun labels — hij las als een doorhaling (#1162, beeldkeuring).
               // De ring is als vorm al af zonder hulplijn.
               for (var i = 0; i < n; i++)
-                _positioned(context, i, n, side, disc, radius),
+                _positioned(context, shown[i], i, n, side, disc, radius),
             ],
           ),
         ),
@@ -340,6 +432,7 @@ class _MenuCircle extends StatelessWidget {
   /// dat leest als een wijzerplaat, dus als een volgorde.
   Widget _positioned(
     BuildContext context,
+    MenuBlock block,
     int i,
     int n,
     double side,
@@ -353,7 +446,7 @@ class _MenuCircle extends StatelessWidget {
       width: disc,
       height: disc,
       child: _MenuDisc(
-        block: blocks[i],
+        block: block,
         w: w,
         diameter: disc,
         text: text,
@@ -365,6 +458,12 @@ class _MenuCircle extends StatelessWidget {
     );
   }
 }
+
+/// De randdikte van een springende schijf, als fractie van de diabreedte — de
+/// zwaarste van de twee, en dus de krapste inhoud. Een tekstblok heeft
+/// [_menuDiscPlainBorder].
+const double _menuDiscTargetBorder = 0.005;
+const double _menuDiscPlainBorder = 0.0026;
 
 /// Eén blok als ronde schijf: de afbeelding klein bovenin, het label eronder,
 /// alles binnen de cirkel. De uitleg past hier alleen zonder afbeelding.
@@ -392,7 +491,7 @@ class _MenuDisc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final actionable = block.hasTarget;
-    final thumb = diameter * 0.34;
+    final thumb = diameter * kMenuDiscThumbFraction;
     // Net als bij de kaart volgt het regelbudget uit de hoogte die er is; de
     // ruimte binnen een cirkel is de padding eraf, min wat het beeld en de
     // tussenruimte innemen. Géén extra voorwaarde op de schijfmaat: die stond
@@ -400,18 +499,19 @@ class _MenuDisc extends StatelessWidget {
     // hoogstens 0,16·w — dus viel de uitleg naast een afbeelding altijd weg,
     // precies wat de voorwaarde moest voorkomen (#1162, beeldkeuring). Of het
     // past, weet [menuTextFit] al.
-    final gap = diameter * 0.04;
+    final gap = diameter * kMenuDiscGapFraction;
     // De rand zit binnen de schijf, dus hij gaat van de inhoud af. Vergeten
     // betekende een overloop van een paar pixels bij de zwaarste rand — precies
     // die van een springend blok.
-    final borderWidth = w * (actionable ? 0.005 : 0.0026);
+    final borderWidth =
+        w * (actionable ? _menuDiscTargetBorder : _menuDiscPlainBorder);
     final fit = menuTextFit(
-      available:
-          diameter * 0.68 -
-          borderWidth * 2 -
-          (block.hasImage ? thumb + diameter * 0.05 : 0) -
-          gap,
-      maxLabelSize: diameter * 0.15,
+      available: menuDiscTextHeight(
+        diameter: diameter,
+        borderWidth: borderWidth,
+        hasImage: block.hasImage,
+      ),
+      maxLabelSize: diameter * kMenuDiscLabelFraction,
       hasDescription: block.hasDescription,
       maxLabelLines: 2,
     );
@@ -439,7 +539,7 @@ class _MenuDisc extends StatelessWidget {
       child: Padding(
         // De tekst binnen een cirkel houden vraagt een ruimere marge dan bij een
         // rechthoek: in de hoeken is er geen vlak.
-        padding: EdgeInsets.all(diameter * 0.16),
+        padding: EdgeInsets.all(diameter * kMenuDiscPadFraction),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

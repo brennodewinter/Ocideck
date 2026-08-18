@@ -189,7 +189,7 @@ void main() {
         // Op deze hoogte zou de uitleg tot een grijze veeg krimpen. Dan valt hij
         // weg — en gaat de ruimte die vrijkomt naar het label, niet verloren.
         final krap = menuTextFit(
-          available: 26,
+          available: 18,
           maxLabelSize: 25,
           hasDescription: true,
         );
@@ -197,7 +197,7 @@ void main() {
         expect(
           krap.labelLines,
           menuTextFit(
-            available: 26,
+            available: 18,
             maxLabelSize: 25,
             hasDescription: false,
           ).labelLines,

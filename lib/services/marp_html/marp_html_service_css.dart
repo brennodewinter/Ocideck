@@ -221,8 +221,8 @@ const _menuCss = r'''
 .slide .menu-ring{position:relative;width:100%;aspect-ratio:1;margin:.5em auto}
 .slide .menu-disc{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;overflow:hidden;border:2px solid;border-radius:50%;text-align:center;text-decoration:none;color:inherit}
 .slide .menu-disc .menu-disc-thumb{width:38%;aspect-ratio:1;border-radius:50%;object-fit:cover}
-.slide .menu-disc .menu-label{font-size:20px;font-weight:600;line-height:1.15;overflow:hidden}
-.slide .menu-disc .menu-desc{font-size:15px;line-height:1.15;opacity:.8;overflow:hidden}
+.slide .menu-disc .menu-label{font-size:20px;font-weight:600;line-height:1.15;overflow:hidden;overflow-wrap:anywhere}
+.slide .menu-disc .menu-desc{font-size:15px;line-height:1.15;opacity:.8;overflow:hidden;overflow-wrap:anywhere}
 ''';
 
 /// De opmaak van de zes rapportagedia's. Ook thema-onafhankelijk: kleuren die

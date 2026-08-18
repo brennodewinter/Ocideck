@@ -328,7 +328,113 @@ const double _menuDescriptionShare = 0.73;
 
 /// Onder deze fractie van de volle labelgrootte valt de uitleg weg in plaats van
 /// mee te krimpen.
-const double _menuDescriptionFloor = 0.35;
+///
+/// 0,25 en niet 0,35: op een dia van 1280 px is de volle labelmaat 33 px, dus
+/// 0,35 zette de uitleg al uit bij 11,6 px — een maat die prima leesbaar is. Het
+/// gevolg was een klifrand die niemand kon verklaren: bij vijf blokken onder
+/// elkaar stond de uitleg er, bij zes was hij weg, met een verschil van een halve
+/// procent (#1162, beeldkeuring). Met 0,25 ligt de grens rond 8 px, en dáár is
+/// het werkelijk een grijze veeg.
+const double _menuDescriptionFloor = 0.25;
+
+/// De kleinste lettergrootte waarop een bloklabel nog iets zegt, als fractie van
+/// de diabreedte — op een dia van 1280 px is dat ruim 12 px.
+///
+/// Zonder zo'n vloer bleef een vol menu keurig binnen zijn vak, maar met een
+/// letter van 3,7 px: geen overloop, geen enkele test die klaagt, en toch een
+/// rij streepjes in plaats van een menu (#1162, beeldkeuring). Een dia die
+/// onleesbaar is, is niet minder stuk dan een dia die overloopt.
+const double kMenuMinLabelFraction = 0.0095;
+
+/// De maten van een blokkaart, als fractie van de diabreedte: de rand, de marge
+/// binnen de rand, en het plafond dat die marge bij een lage kaart terugbrengt.
+///
+/// Ze staan hier en niet in de widget omdat de indelingen ermee móéten rekenen:
+/// die bepalen hoeveel blokken er leesbaar passen, en dat kan alleen als ze
+/// precies weten hoeveel hoogte een kaart aan zichzelf houdt. Stonden de getallen
+/// in de widget, dan zou de indeling ze naschatten — en een schatting die de
+/// echte maat voorspelt, rot stil weg.
+const double kMenuCardBorderFraction = 0.0026;
+const double kMenuCardPadFraction = 0.014;
+const double kMenuCardPadCap = 0.12;
+
+/// De marge binnen een kaart van [boxHeight] hoog (de maat binnen de rand).
+double menuCardPadding(double boxHeight, double w) =>
+    math.min(w * kMenuCardPadFraction, boxHeight * kMenuCardPadCap);
+
+/// De hoogte die er in een kaart van [boxHeight] overblijft voor tekst.
+double menuCardTextHeight(double boxHeight, double w) =>
+    math.max(0, boxHeight - menuCardPadding(boxHeight, w) * 2);
+
+/// De labelmaat die een blokrij van [rowHeight] (buitenmaat, rand inbegrepen)
+/// oplevert. Hiermee kan een indeling narekenen of een rij nog leesbaar is,
+/// zonder de rekensom van de kaart over te schrijven.
+double menuRowLabelSize({
+  required double rowHeight,
+  required double w,
+  required bool hasDescription,
+}) => menuTextFit(
+  available: menuCardTextHeight(
+    math.max(0, rowHeight - w * kMenuCardBorderFraction * 2),
+    w,
+  ),
+  maxLabelSize: w * kMenuCardLabelFraction,
+  hasDescription: hasDescription,
+).labelSize;
+
+/// De volle labelmaat op een blokkaart, als fractie van de diabreedte.
+const double kMenuCardLabelFraction = 0.026;
+
+/// De maten van een schijf in de cirkelindeling, als fractie van de doorsnede:
+/// het label, de binnenmarge (in een cirkel is er in de hoeken geen vlak), de
+/// afbeelding en de ruimte eromheen. Zelfde reden als bij de kaart: de ring moet
+/// ermee kunnen narekenen hoeveel schijven er leesbaar op passen.
+const double kMenuDiscLabelFraction = 0.15;
+const double kMenuDiscPadFraction = 0.16;
+const double kMenuDiscThumbFraction = 0.34;
+const double kMenuDiscGapFraction = 0.04;
+
+/// De hoogte die er binnen een schijf van [diameter] overblijft voor tekst.
+double menuDiscTextHeight({
+  required double diameter,
+  required double borderWidth,
+  required bool hasImage,
+}) =>
+    diameter * (1 - kMenuDiscPadFraction * 2) -
+    borderWidth * 2 -
+    (hasImage ? diameter * (kMenuDiscThumbFraction + 0.05) : 0) -
+    diameter * kMenuDiscGapFraction;
+
+/// De labelmaat die een schijf van [diameter] oplevert — de tegenhanger van
+/// [menuRowLabelSize] voor de cirkelindeling.
+double menuDiscLabelSize({
+  required double diameter,
+  required double borderWidth,
+  required bool hasImage,
+  required bool hasDescription,
+}) => menuTextFit(
+  available: menuDiscTextHeight(
+    diameter: diameter,
+    borderWidth: borderWidth,
+    hasImage: hasImage,
+  ),
+  maxLabelSize: diameter * kMenuDiscLabelFraction,
+  hasDescription: hasDescription,
+  maxLabelLines: 2,
+).labelSize;
+
+/// Hoeveel blokken er van [count] getoond worden als er maar [fits] plekken
+/// leesbaar zijn, plus hoeveel er dan buiten beeld blijven.
+///
+/// Past niet alles, dan gaat de láátste plek naar een telblok — anders zou het
+/// verschil tussen "dit is het hele menu" en "hier staat de helft van" nergens
+/// te zien zijn. Liever een zichtbaar tekort dan een stilzwijgend tekort.
+({int shown, int hidden}) menuVisibleBlocks(int count, int fits) {
+  final room = fits < 1 ? 1 : fits;
+  if (count <= room) return (shown: count, hidden: 0);
+  final shown = room - 1;
+  return (shown: shown, hidden: count - shown);
+}
 
 /// Of dit menu een categoriekiezer verdient: pas vanaf twee categorieën, of bij
 /// één categorie die een naam draagt.
