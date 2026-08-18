@@ -341,6 +341,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       cropMarks: settings.documentCropMarks,
       pageSize: exportSetup.size!,
       pageMargins: exportSetup.margins!,
+      // Waar de noten komen staat in het document zelf; de kop erboven komt uit
+      // de interfacetaal, want de converter kent geen vertalingen.
+      footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
+      footnotesTitle: l10n.d('Noten'),
       outputPath: outputPath,
     );
   }

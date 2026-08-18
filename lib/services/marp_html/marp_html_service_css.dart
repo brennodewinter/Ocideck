@@ -63,6 +63,14 @@ html,body{margin:0;padding:0}
 .document pre.mermaid{background:transparent;border:0;text-align:center}
 .document table{border-collapse:collapse;width:100%}
 .document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
+/* Voetnoten: kleiner dan de tekst en met een korte lijn erboven — een noot is
+   een terzijde, en zo laat papier dat al eeuwen zien. Achteraan, want een
+   HTML-pagina heeft geen bladzijden (KNOWN_LIMITATIONS.md). */
+.document .ocideck-footnotes{margin-top:2.4em;font-size:.85em;line-height:1.5}
+.document .ocideck-footnotes::before{content:"";display:block;width:140px;border-top:1px solid rgba(100,116,139,.35);margin-bottom:.8em}
+.document .ocideck-footnotes h2{font-size:1.1em;margin:0 0 .4em}
+.document .ocideck-fnref{font-size:.75em;line-height:0}
+.document .ocideck-fnback{text-decoration:none}
 /* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
    laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
    als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat

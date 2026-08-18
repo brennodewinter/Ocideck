@@ -7,7 +7,9 @@ import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
 import 'document_chart_hydration.dart';
 import 'document_deck_bridge.dart';
+import 'document_footnote_setup.dart';
 import 'document_page_setup.dart';
+import 'footnotes_html.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
 import 'latex/latex_preamble.dart';
@@ -111,6 +113,8 @@ Future<String?> writeDocumentExport(
   bool cropMarks = false,
   PageSizeSpec? pageSize,
   PageMargins? pageMargins,
+  FootnotePlacement footnotePlacement = FootnotePlacement.page,
+  String footnotesTitle = 'Noten',
   required String outputPath,
 }) async {
   switch (format) {
@@ -155,8 +159,12 @@ Future<String?> writeDocumentExport(
       final htmlBodyWithToc = hasTocMarker(htmlBody)
           ? replaceTocMarker(htmlBody, toc)
           : htmlBody;
+      // `marked` kent geen voetnoten, dus die worden hier al omgezet: merkteken
+      // met een sprong, en de noten achteraan. Achteraan ook wanneer het
+      // document om onderaan-de-bladzijde vraagt — een HTML-pagina heeft geen
+      // bladzijden (KNOWN_LIMITATIONS.md).
       final out = await html.build(
-        htmlBodyWithToc,
+        documentWithHtmlFootnotes(htmlBodyWithToc, title: footnotesTitle),
         continuous: true,
         chapterPageBreak: chapterPageBreak,
         theme: theme,
@@ -173,6 +181,8 @@ Future<String?> writeDocumentExport(
         projectedDocumentBody(bundle),
         chapterPageBreak: chapterPageBreak,
         tableBorderStyle: theme?.tableBorderStyle ?? TableBorderStyle.lined,
+        footnotePlacement: footnotePlacement,
+        endnotesTitle: footnotesTitle,
       );
       final tex =
           '${articlePreamble(meta, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
