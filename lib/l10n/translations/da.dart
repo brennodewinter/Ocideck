@@ -1734,8 +1734,6 @@ const _dutchSourceAddDa = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indholdsfortegnelse — tilføj overskrifter for at fylde den.',
   'Schrijfbreedte editor': 'Skrivebredde i editoren',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Hvor bredt skriveområdet er i visuel tilstand. Smalt læses roligt, bredt bruger mere af skærmen.',
   'Pagina-instellingen export': 'Sideindstillinger til eksport',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sidestørrelse (ISO 216) og margener til HTML-udskrift, LaTeX og PDF-eksport.',

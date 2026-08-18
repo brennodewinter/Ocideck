@@ -1735,8 +1735,6 @@ const _dutchSourceAddSl = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Kazalo — dodajte naslove, da ga zapolnite.',
   'Schrijfbreedte editor': 'Širina pisanja v urejevalniku',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kako široko je območje pisanja v vizualnem načinu. Ozko se bere umirjeno, široko uporabi več zaslona.',
   'Pagina-instellingen export': 'Nastavitve strani za izvoz',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Velikost strani (ISO 216) in robovi za tiskanje HTML, LaTeX in izvoz PDF.',

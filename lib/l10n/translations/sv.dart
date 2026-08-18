@@ -1733,8 +1733,6 @@ const _dutchSourceAddSv = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Innehållsförteckning — lägg till rubriker för att fylla den.',
   'Schrijfbreedte editor': 'Skrivbredd i redigeraren',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Hur bred skrivytan är i visuellt läge. Smal läses lugnt, bred använder mer av skärmen.',
   'Pagina-instellingen export': 'Sidinställningar för export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sidstorlek (ISO 216) och marginaler för HTML-utskrift, LaTeX och PDF-export.',

@@ -1733,8 +1733,6 @@ const _dutchSourceAddLv = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Satura rādītājs — pievienojiet virsrakstus, lai to aizpildītu.',
   'Schrijfbreedte editor': 'Redaktora rakstīšanas platums',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Cik plata ir rakstīšanas zona vizuālajā režīmā. Šaura lasās mierīgi, plata izmanto vairāk ekrāna.',
   'Pagina-instellingen export': 'Lapas iestatījumi eksportam',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Lapas izmērs (ISO 216) un malas HTML drukai, LaTeX un PDF eksportam.',

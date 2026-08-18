@@ -1754,8 +1754,6 @@ const _dutchSourceAddBg = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Съдържание — добавете заглавия, за да го попълните.',
   'Schrijfbreedte editor': 'Ширина на писане в редактора',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Колко широка е областта за писане във визуален режим. Тясната се чете спокойно, широката използва повече от екрана.',
   'Pagina-instellingen export': 'Настройки на страницата за експорт',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Размер на страницата (ISO 216) и полета за HTML печат, LaTeX и PDF експорт.',

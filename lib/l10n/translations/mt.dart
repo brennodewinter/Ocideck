@@ -1754,8 +1754,6 @@ const _dutchSourceAddMt = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indiċi — żid intestaturi biex timlih.',
   'Schrijfbreedte editor': 'Wisa’ tal-kitba fl-editur',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kemm hi wiesgħa ż-żona tal-kitba fil-modalità viżwali. Dejqa taqra bil-kalma, wiesgħa tuża aktar mill-iskrin.',
   'Pagina-instellingen export': 'Issettjar tal-paġna għall-esportazzjoni',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Daqs tal-paġna (ISO 216) u marġini għall-istampar HTML, LaTeX u esportazzjoni PDF.',

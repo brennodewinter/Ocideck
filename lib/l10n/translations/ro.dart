@@ -1751,8 +1751,6 @@ const _dutchSourceAddRo = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Cuprins — adaugă titluri pentru a-l completa.',
   'Schrijfbreedte editor': 'Lățimea de scriere a editorului',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Cât de lată este zona de scriere în modul vizual. Îngustă se citește liniștit, lată folosește mai mult ecran.',
   'Pagina-instellingen export': 'Setări de pagină pentru export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Dimensiunea paginii (ISO 216) și marginile pentru tipărire HTML, LaTeX și export PDF.',

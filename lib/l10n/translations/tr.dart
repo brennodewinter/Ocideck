@@ -2650,8 +2650,6 @@ const _dutchSourceAddTr = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'İçindekiler — doldurmak için başlık ekleyin.',
   'Schrijfbreedte editor': 'Düzenleyici yazma genişliği',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Görsel modda yazma alanının genişliği. Dar sakin okunur, geniş ekranın daha fazlasını kullanır.',
   'Pagina-instellingen export': 'Dışa aktarma için sayfa ayarları',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sayfa boyutu (ISO 216) ve HTML yazdırma, LaTeX ve PDF dışa aktarma için kenar boşlukları.',

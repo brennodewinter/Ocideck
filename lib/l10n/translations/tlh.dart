@@ -1709,8 +1709,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'meyQ — nav tlhIHmey chel \'e\' yIchel.',
   'Schrijfbreedte editor': 'ghItlhwI\' \'aD',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'nuq \'aD ghItlhmeH Daq visual mode. \'ob tam ja\'chuq, \'aD law\' jIH lo\'.',
   'Pagina-instellingen export': 'nav choH ngeH',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'nav \'aD (ISO 216) je HeH ngeH HTML, LaTeX je PDF.',

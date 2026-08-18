@@ -758,8 +758,6 @@ const _dutchSourceAddPap = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indeks — agregá kabesnan pa yen’é.',
   'Schrijfbreedte editor': 'Hanchura di skirbi den editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kon hanchu e área di skirbi ta den modo visual. Estrecho ta lesa trankil, hanchu ta usa mas di e pantaya.',
   'Pagina-instellingen export': 'Konfigurashon di página pa eksportá',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Tamaño di página (ISO 216) i marge pa imprimí HTML, LaTeX i eksportá PDF.',

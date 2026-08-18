@@ -931,8 +931,6 @@ const _dutchSourceAddEn = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Table of contents — add headings to fill it.',
   'Schrijfbreedte editor': 'Editor writing width',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'How wide the writing area is in visual mode. Narrow reads calmly, wide uses more of the screen.',
   'Pagina-instellingen export': 'Page settings for export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Page size (ISO 216) and margins for HTML print, LaTeX and PDF export.',

@@ -1736,8 +1736,6 @@ const _dutchSourceAddCs = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Obsah — přidejte nadpisy, aby se naplnil.',
   'Schrijfbreedte editor': 'Šířka psaní v editoru',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Jak široká je psací plocha ve vizuálním režimu. Úzká se čte klidně, široká využije více obrazovky.',
   'Pagina-instellingen export': 'Nastavení stránky pro export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Velikost stránky (ISO 216) a okraje pro tisk HTML, LaTeX a export PDF.',

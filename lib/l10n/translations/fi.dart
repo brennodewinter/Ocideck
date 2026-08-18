@@ -1734,8 +1734,6 @@ const _dutchSourceAddFi = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Sisällysluettelo — lisää otsikoita täyttääksesi sen.',
   'Schrijfbreedte editor': 'Editorin kirjoitusleveys',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kuinka leveä kirjoitusalue on visuaalisessa tilassa. Kapea luetaan rauhassa, leveä käyttää enemmän näyttöä.',
   'Pagina-instellingen export': 'Sivuasetukset vientiä varten',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sivukoko (ISO 216) ja marginaalit HTML-tulostukseen, LaTeXiin ja PDF-vientiin.',

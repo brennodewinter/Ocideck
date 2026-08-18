@@ -1741,8 +1741,6 @@ const _dutchSourceAddLt = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Turinys — pridėkite antraščių, kad jį užpildytumėte.',
   'Schrijfbreedte editor': 'Rašymo plotis redaktoriuje',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Koks platus rašymo laukas vaizdiniu režimu. Siauras skaitomas ramiai, platus naudoja daugiau ekrano.',
   'Pagina-instellingen export': 'Puslapio nustatymai eksportui',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Puslapio dydis (ISO 216) ir paraštės HTML spausdinimui, LaTeX ir PDF eksportui.',

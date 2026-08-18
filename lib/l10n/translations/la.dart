@@ -1749,8 +1749,6 @@ const _dutchSourceAddLa = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Index — adde titulos ut impleatur.',
   'Schrijfbreedte editor': 'Latitudo scribendi editoris',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Quam lata sit area scribendi in modo visuali. Angusta placide legitur, lata plus monitorii adhibet.',
   'Pagina-instellingen export': 'Optiones paginae ad exportandum',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Magnitudo paginae (ISO 216) et margines ad HTML imprimendum, LaTeX et PDF exportandum.',

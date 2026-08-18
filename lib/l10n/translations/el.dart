@@ -1759,8 +1759,6 @@ const _dutchSourceAddEl = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Πίνακας περιεχομένων — προσθέστε επικεφαλίδες για να τον γεμίσετε.',
   'Schrijfbreedte editor': 'Πλάτος γραφής του επεξεργαστή',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Πόσο πλατιά είναι η περιοχή γραφής στην οπτική λειτουργία. Η στενή διαβάζεται ήρεμα, η πλατιά χρησιμοποιεί περισσότερη οθόνη.',
   'Pagina-instellingen export': 'Ρυθμίσεις σελίδας για εξαγωγή',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Μέγεθος σελίδας (ISO 216) και περιθώρια για εκτύπωση HTML, LaTeX και εξαγωγή PDF.',

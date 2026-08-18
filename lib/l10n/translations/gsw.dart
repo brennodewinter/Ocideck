@@ -1736,8 +1736,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Inhaltsverzeichnis — füeg Überschrifte zue zum s fülle.',
   'Schrijfbreedte editor': 'Schriibbreiti vom Editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Wie breit s Schriibfäld im visuelle Modus isch. Schmal liest sich ruhig, breit bruucht meh vom Bildschirm.',
   'Pagina-instellingen export': 'Siteiistellige für dr Export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sitegrössi (ISO 216) und Ränder für HTML-Druck, LaTeX und PDF-Export.',

@@ -756,8 +756,6 @@ const _dutchSourceAddIt = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indice — aggiungi titoli per riempirlo.',
   'Schrijfbreedte editor': 'Larghezza di scrittura dell’editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Quanto è larga l’area di scrittura in modalità visiva. Stretta si legge con calma, larga usa più schermo.',
   'Pagina-instellingen export': 'Impostazioni di pagina per l’esportazione',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Formato pagina (ISO 216) e margini per stampa HTML, LaTeX ed esportazione PDF.',

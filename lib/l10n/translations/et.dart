@@ -1727,8 +1727,6 @@ const _dutchSourceAddEt = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Sisukord — lisa pealkirju, et see täita.',
   'Schrijfbreedte editor': 'Redaktori kirjutuslaius',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kui lai on kirjutusala visuaalses režiimis. Kitsas loeb rahulikult, lai kasutab rohkem ekraani.',
   'Pagina-instellingen export': 'Lehe seaded ekspordiks',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Lehe suurus (ISO 216) ja veerised HTML-i printimiseks, LaTeXi ja PDF-ekspordiks.',

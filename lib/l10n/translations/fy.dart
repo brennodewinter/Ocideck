@@ -759,8 +759,6 @@ const _dutchSourceAddFy = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Ynhâldsopjefte — foegje kopkes ta om it te foljen.',
   'Schrijfbreedte editor': 'Skriuwbreedte editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Hoe breed it skriuwflak yn de fisuele modus is. Smel lêst rêstich, breed brûkt mear fan it skerm.',
   'Pagina-instellingen export': 'Side-ynstellings eksport',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sidegrutte (ISO 216) en marzjes foar HTML-print, LaTeX en PDF-eksport.',

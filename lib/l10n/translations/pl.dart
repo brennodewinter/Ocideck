@@ -1746,8 +1746,6 @@ const _dutchSourceAddPl = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Spis treści — dodaj nagłówki, aby go wypełnić.',
   'Schrijfbreedte editor': 'Szerokość pisania w edytorze',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Jak szeroki jest obszar pisania w trybie wizualnym. Wąski czyta się spokojnie, szeroki wykorzystuje więcej ekranu.',
   'Pagina-instellingen export': 'Ustawienia strony dla eksportu',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Rozmiar strony (ISO 216) i marginesy dla wydruku HTML, LaTeX-a i eksportu PDF.',

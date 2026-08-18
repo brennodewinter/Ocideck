@@ -1736,8 +1736,6 @@ const _dutchSourceAddHu = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Tartalomjegyzék — adj hozzá címsorokat a kitöltéséhez.',
   'Schrijfbreedte editor': 'Szerkesztő írásszélessége',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Milyen széles az írófelület vizuális módban. A keskeny nyugodtan olvasható, a széles több képernyőt használ.',
   'Pagina-instellingen export': 'Oldalbeállítások exportáláshoz',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Oldalméret (ISO 216) és margók HTML-nyomtatáshoz, LaTeX- és PDF-exportáláshoz.',

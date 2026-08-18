@@ -1765,8 +1765,6 @@ const _dutchSourceAddGa = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Clár ábhair — cuir ceannteidil leis chun é a líonadh.',
   'Schrijfbreedte editor': 'Leithead scríofa an eagarthóra',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Cé chomh leathan is atá an spás scríofa sa mhód amhairc. Léitear an ceann cúng go socair, úsáideann an ceann leathan níos mó den scáileán.',
   'Pagina-instellingen export': 'Socruithe leathanaigh don easpórtáil',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Méid an leathanaigh (ISO 216) agus imill do phriontáil HTML, LaTeX agus easpórtáil PDF.',

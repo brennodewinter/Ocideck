@@ -1750,8 +1750,6 @@ const _dutchSourceAddUk = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Зміст — додайте заголовки, щоб його заповнити.',
   'Schrijfbreedte editor': 'Ширина письма в редакторі',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Наскільки широка область письма у візуальному режимі. Вузька читається спокійно, широка використовує більше екрана.',
   'Pagina-instellingen export': 'Параметри сторінки для експорту',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Розмір сторінки (ISO 216) і поля для друку HTML, LaTeX і експорту PDF.',
