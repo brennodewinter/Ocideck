@@ -246,7 +246,7 @@ class _MenuBlockCard extends StatelessWidget {
       ring: accent,
       halo: text,
       ringWidth: w * 0.005,
-      borderRadius: BorderRadius.circular(w * 0.016),
+      cornerRadius: w * 0.016,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => onTap!(block.targetAnchor),
@@ -637,6 +637,9 @@ class _MenuDisc extends StatelessWidget {
   }
 }
 
+/// De focusring van een keuzeblok, zodat een proef hem kan aanwijzen.
+const Key menuFocusRingKey = ValueKey('menuFocusRing');
+
 /// Wat een schermlezer van een keuzeblok voorleest: het label, en de uitleg
 /// erachter omdat die op de dia ook onder het label staat. De vorm — kaart of
 /// schijf — doet er voor het oor niet toe; dat het een knop is, zegt
@@ -676,9 +679,11 @@ class _MenuFocusable extends StatefulWidget {
   final String semanticLabel;
 
   /// De omtrek van de focusring: rond voor een schijf, afgerond voor een kaart
-  /// of een pil.
+  /// of een pil. [cornerRadius] is de hoekstraal van het blok zelf; de ring
+  /// eromheen krijgt die straal plus zijn eigen dikte, zodat hij evenwijdig
+  /// loopt in plaats van de hoeken af te snijden.
   final BoxShape shape;
-  final BorderRadius? borderRadius;
+  final double? cornerRadius;
 
   /// De ringkleuren. [ring] is de accentkleur van het thema; [halo] ligt er
   /// buiten en zorgt dat de ring ook zichtbaar is op een dia waarvan de
@@ -695,7 +700,7 @@ class _MenuFocusable extends StatefulWidget {
     required this.halo,
     required this.ringWidth,
     this.shape = BoxShape.rectangle,
-    this.borderRadius,
+    this.cornerRadius,
   });
 
   @override
@@ -740,38 +745,65 @@ class _MenuFocusableState extends State<_MenuFocusable> {
     _node.unfocus();
   }
 
-  /// Twee ringen om [child]: buitenom de accentkleur, daarbinnen een dunnere
-  /// lijn in de tekstkleur.
+  /// Twee ringen **om** [child] heen: buitenom de accentkleur, daarbinnen een
+  /// dunnere lijn in de tekstkleur.
   ///
-  /// Waarom twee en niet één met een gloed eromheen: dat was de eerste poging,
-  /// met een `BoxShadow` zonder vervaging als halo. Een `BoxShadow` tekent geen
-  /// omtrek maar een **gevulde** vorm; normaal verdwijnt die onder de
-  /// achtergrond van de decoratie, maar deze had er geen en stond in de
-  /// voorgrond. Gevolg: het blok met de focus werd volledig overschilderd —
-  /// label, uitleg en pijl weg, precies op het blok dat de presentator moest
-  /// kunnen lezen (#1162, beeldkeuring). Twee geneste randen tekenen wél
-  /// omtrekken, en het kleurverschil doet hetzelfde werk als de gloed: op welke
-  /// achtergrond de dia ook staat, één van de twee steekt af.
+  /// Waarom twee kleuren en geen gloed: de eerste poging gebruikte een
+  /// `BoxShadow` zonder vervaging als halo. Een `BoxShadow` tekent geen omtrek
+  /// maar een **gevulde** vorm; normaal verdwijnt die onder de achtergrond van
+  /// de decoratie, maar deze had er geen en stond in de voorgrond. Het blok met
+  /// de focus werd dus volledig overschilderd — label, uitleg en pijl weg,
+  /// precies op het blok dat de presentator moest kunnen lezen (#1162,
+  /// beeldkeuring). Twee randen tekenen wél omtrekken, en het kleurverschil doet
+  /// hetzelfde werk als de gloed: op welke achtergrond de dia ook staat, één van
+  /// de twee steekt af.
   ///
-  /// De volgorde volgt uit hoe een voorgrond-decoratie schildert — eerst het
-  /// kind, dan de decoratie — dus de binnenste `DecoratedBox` komt als eerste
-  /// aan de beurt en de buitenste dekt daar de rand van af.
+  /// Waarom eromhéén en niet erin: `Border.all` tekent binnen de doosgrenzen, en
+  /// die ruimte is nergens gereserveerd. De ring is een fractie van de
+  /// diabréédte, het blok krimpt met het aantal blokken — dus bij het
+  /// gedocumenteerde maximum at een ring van 19 px een schijf van 84 px op en
+  /// werd het label aangesneden (tweede beeldkeuring). Een `Stack` met
+  /// `Clip.none` legt de ring buiten de doos zonder de layout te raken: het blok
+  /// blijft even groot en de tekst staat waar hij stond, met of zonder focus.
+  /// De ruimte ernaast is er: de tussenruimte in het raster en op de ring is
+  /// ruimer dan de ring dik is.
   Widget _ringed(Widget child) {
-    BoxDecoration ring(Color color, double width) => BoxDecoration(
-      shape: widget.shape,
-      borderRadius: widget.shape == BoxShape.circle
-          ? null
-          : widget.borderRadius,
-      border: Border.all(color: color, width: width),
-    );
-    return DecoratedBox(
-      position: DecorationPosition.foreground,
-      decoration: ring(widget.ring, widget.ringWidth),
-      child: DecoratedBox(
-        position: DecorationPosition.foreground,
-        decoration: ring(widget.halo, widget.ringWidth * 1.9),
-        child: child,
-      ),
+    final total = widget.ringWidth * 1.9;
+    final circle = widget.shape == BoxShape.circle;
+    BoxDecoration ring(Color color, double width, double grown) =>
+        BoxDecoration(
+          shape: widget.shape,
+          borderRadius: circle ? null : BorderRadius.circular(grown),
+          border: Border.all(color: color, width: width),
+        );
+    final radius = widget.cornerRadius ?? 0;
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        child,
+        // De ring hangt buiten het blok en mag geen tikken opvangen: die horen
+        // bij het blok eronder.
+        Positioned(
+          left: -total,
+          top: -total,
+          right: -total,
+          bottom: -total,
+          child: IgnorePointer(
+            // Gesleuteld zodat een proef de ring kan aanwijzen zonder hem te
+            // verwarren met de decoratie van de kaart eronder.
+            key: menuFocusRingKey,
+            child: DecoratedBox(
+              // Buitenste ring: het accent, op de buitenrand van de overlay.
+              decoration: ring(widget.ring, widget.ringWidth, radius + total),
+              child: DecoratedBox(
+                // Daarbinnen de contrastlijn; de buitenste dekt haar eerste
+                // `ringWidth` af, dus wat overblijft ligt er netjes tegenaan.
+                decoration: ring(widget.halo, total, radius + total),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

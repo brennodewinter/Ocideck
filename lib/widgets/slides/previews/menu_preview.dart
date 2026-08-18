@@ -232,7 +232,7 @@ class _MenuCategoryBar extends StatelessWidget {
       ring: accent,
       halo: text,
       ringWidth: w * 0.004,
-      borderRadius: BorderRadius.circular(w * 0.03),
+      cornerRadius: w * 0.03,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => onSelect!(index),

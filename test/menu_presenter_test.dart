@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/menu.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
@@ -212,37 +214,85 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      final voorgrond = tester
-          .widgetList<DecoratedBox>(find.byType(DecoratedBox))
-          .where((d) => d.position == DecorationPosition.foreground)
-          .map((d) => d.decoration)
-          .whereType<BoxDecoration>()
-          .toList();
-
+      // De ring hangt in een IgnorePointer-overlay om het blok heen.
+      final ringen = find.descendant(
+        of: find.byKey(menuFocusRingKey),
+        matching: find.byType(DecoratedBox),
+      );
       expect(
-        voorgrond.where((d) => d.border != null),
-        isNotEmpty,
+        ringen,
+        findsWidgets,
         reason: 'er hoort een ring om het blok met de focus te staan',
       );
-      for (final decoration in voorgrond) {
+
+      for (final box in tester.widgetList<DecoratedBox>(ringen)) {
+        final decoration = box.decoration as BoxDecoration;
+        expect(
+          decoration.border,
+          isNotNull,
+          reason: 'de ring hoort een omtrek te zijn',
+        );
+        // Dit is waar het de vorige keer op misging: een vulling, een verloop of
+        // een BoxShadow tekent een dicht vlak in plaats van een omtrek, en dekt
+        // het blok af.
         expect(
           decoration.color,
           isNull,
-          reason: 'een voorgrondvlak dekt het blok af',
+          reason: 'een vulling dekt het blok af',
         );
         expect(decoration.gradient, isNull, reason: 'idem, als verloop');
         expect(
           decoration.boxShadow,
           anyOf(isNull, isEmpty),
           reason:
-              'een BoxShadow in de voorgrond tekent een gevulde vorm over het '
-              'blok heen, geen gloed eromheen',
+              'een BoxShadow zonder vervaging is een gevulde vorm, geen gloed',
         );
       }
 
-      // En het blok is nog te lezen.
-      expect(find.text('Naar demo'), findsOneWidget);
+      // En de ring ligt buiten het blok, niet erin: hij omsluit het label ruim,
+      // in plaats van er een hap uit te nemen. Dat was de tweede fout — de ring
+      // at bij zestien blokken de helft van een schijf op en sneed het label af.
+      final labelVlak = tester.getRect(find.text('Naar demo'));
+      final ringVlak = tester.getRect(ringen.first);
+      expect(
+        ringVlak.contains(labelVlak.topLeft) &&
+            ringVlak.contains(labelVlak.bottomRight),
+        isTrue,
+        reason: 'de ring ($ringVlak) omsluit het label ($labelVlak) niet',
+      );
       expect(find.text('Kijk mee'), findsOneWidget);
+    });
+
+    testWidgets('de focus verschuift niets op de dia', (tester) async {
+      // De ring mag geen ruimte van het blok afnemen: doet hij dat wel, dan
+      // springt de tekst zodra je erheen tabt — en bij een vol menu wordt hij
+      // afgesneden.
+      Future<Rect> labelVlak({required bool metFocus}) async {
+        await tester.pumpWidget(
+          _host([
+            Slide.create(SlideType.menu).copyWith(
+              title: 'Hoofdmenu',
+              menuLayout: MenuLayout.circle,
+              bullets: [
+                for (var i = 0; i < 16; i++) '[Blok $i](#doel$i) — uitleg',
+              ],
+            ),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Doel', anchor: 'doel0', bullets: ['y']),
+          ]),
+        );
+        await tester.pumpAndSettle();
+        if (metFocus) {
+          await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+          await tester.pumpAndSettle();
+        }
+        return tester.getRect(find.text('Blok 0'));
+      }
+
+      final zonder = await labelVlak(metFocus: false);
+      final met = await labelVlak(metFocus: true);
+      expect(met, zonder, reason: 'het label verschoof door de focus');
     });
 
     testWidgets('de categoriepillen zijn ook met het toetsenbord te wisselen', (
