@@ -124,9 +124,17 @@ class _MenuPreviewState extends State<_MenuPreview> {
           SizedBox(height: w * 0.018),
         ],
         if (blocks.isNotEmpty)
-          SizedBox(
-            width: w,
-            height: blocksHeight,
+          // Raster en cirkel verdelen de ruimte die er is; de lijst houdt zijn
+          // regelhoogte en mag dóórgroeien — dan schaalt de stellage de dia.
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: w,
+              maxWidth: w,
+              minHeight: blocksHeight,
+              maxHeight: widget.slide.menuLayout == MenuLayout.list
+                  ? double.infinity
+                  : blocksHeight,
+            ),
             child: _menuBlockArea(
               context,
               blocks: blocks,
@@ -190,7 +198,9 @@ class _MenuCategoryBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: on ? accent.withValues(alpha: 0.16) : Colors.transparent,
         border: Border.all(
-          color: on ? accent.withValues(alpha: 0.7) : text.withValues(alpha: 0.2),
+          color: on
+              ? accent.withValues(alpha: 0.7)
+              : text.withValues(alpha: 0.2),
           width: w * 0.0022,
         ),
         borderRadius: BorderRadius.circular(w * 0.03),

@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/menu_blocks.dart';
@@ -101,5 +102,98 @@ void main() {
     );
     final block = menuBlocksFor(deck.slides[0].bullets).first;
     expect(block.targetAnchor, deck.slides[1].anchor);
+  });
+
+  testWidgets('de indeling kiezen zet hem op de dia', (tester) async {
+    final b = boot();
+    addTearDown(b.container.dispose);
+    await tester.pumpWidget(_host(b.container, b.notifier));
+
+    expect(
+      b.container.read(deckProvider).deck!.slides[0].menuLayout,
+      MenuLayout.grid,
+      reason: 'raster is de standaard',
+    );
+    await tester.tap(find.text('Cirkel'));
+    await tester.pumpAndSettle();
+    expect(
+      b.container.read(deckProvider).deck!.slides[0].menuLayout,
+      MenuLayout.circle,
+    );
+  });
+
+  testWidgets('een uitleg typen komt naast het label te staan', (tester) async {
+    final b = boot();
+    addTearDown(b.container.dispose);
+    await tester.pumpWidget(_host(b.container, b.notifier));
+
+    await tester.tap(find.text('Blok toevoegen'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(1), 'Wat het kost');
+    await tester.pumpAndSettle();
+
+    final block = menuBlocksFor(
+      b.container.read(deckProvider).deck!.slides[0].bullets,
+    ).first;
+    expect(block.label, 'Prijzen');
+    expect(block.description, 'Wat het kost');
+  });
+
+  testWidgets('een categorie toevoegen benoemt ook de bestaande groep', (
+    tester,
+  ) async {
+    final b = boot();
+    addTearDown(b.container.dispose);
+    await tester.pumpWidget(_host(b.container, b.notifier));
+
+    await tester.tap(find.text('Blok toevoegen'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Categorie toevoegen'));
+    await tester.pumpAndSettle();
+
+    final categories = menuCategoriesFor(
+      b.container.read(deckProvider).deck!.slides[0].bullets,
+    );
+    expect(categories, hasLength(2));
+    expect(
+      categories.first.isNamed,
+      isTrue,
+      reason: 'de groep die er al was krijgt ook een naam',
+    );
+    expect(categories.first.blocks.single.label, 'Prijzen');
+    expect(categories.last.blocks, isEmpty);
+  });
+
+  testWidgets('een categorie opheffen behoudt de blokken', (tester) async {
+    final b = boot();
+    addTearDown(b.container.dispose);
+    await tester.pumpWidget(_host(b.container, b.notifier));
+
+    await tester.tap(find.text('Blok toevoegen'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(0), 'Prijzen');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Categorie toevoegen'));
+    await tester.pumpAndSettle();
+
+    // Het tweede kopje weghalen; het blok in het eerste blijft staan.
+    await tester.tap(find.byIcon(Icons.folder_off_outlined).last);
+    await tester.pumpAndSettle();
+
+    final categories = menuCategoriesFor(
+      b.container.read(deckProvider).deck!.slides[0].bullets,
+    );
+    expect(categories, hasLength(1));
+    expect(
+      menuBlocksFor(
+        b.container.read(deckProvider).deck!.slides[0].bullets,
+      ).single.label,
+      'Prijzen',
+    );
   });
 }

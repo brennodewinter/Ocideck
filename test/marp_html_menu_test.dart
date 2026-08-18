@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -141,6 +142,69 @@ void main() {
         ),
       );
       expect(html, isNot(contains('<img src=x onerror')));
+    });
+
+    /// Een menu met twee categorieën en een uitleg per blok, in [layout].
+    String categorisedDeck(MenuLayout layout) {
+      final md = MarkdownService();
+      return md.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.menu).copyWith(
+              title: 'Kies',
+              menuLayout: layout,
+              bullets: [
+                groupHeadingBullet('Producten'),
+                '[Prijzen](#prijzen) — Wat het kost',
+                groupHeadingBullet('Over ons'),
+                '[Team](#team)',
+              ],
+            ),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Prijzen', anchor: 'prijzen', bullets: ['x']),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Team', anchor: 'team', bullets: ['y']),
+          ],
+        ),
+        forExport: true,
+      );
+    }
+
+    test('categories become headings with their own blocks beneath', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.grid));
+
+      // Beide categorieën staan er — een export heeft geen presentator die
+      // tabbladen indrukt, dus alles is zichtbaar.
+      expect(html, contains('class="menu-category"'));
+      expect(html, contains('>Producten</div>'));
+      expect(html, contains('>Over ons</div>'));
+      expect(html, contains('<div class="menu-desc">Wat het kost</div>'));
+      // De kop zelf mag nooit als blok meeliften.
+      expect(html, isNot(contains('menu-label">\u{E010}')));
+    });
+
+    test(
+      'the "onder elkaar" layout renders as a single-column stack',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final html = await service.build(categorisedDeck(MenuLayout.list));
+        expect(html, contains('<div class="menu-grid menu-stack">'));
+        // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
+      expect(html, isNot(contains('<div class="menu-ring">')));
+      },
+    );
+
+    test('the circle layout places each disc without script', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(categorisedDeck(MenuLayout.circle));
+      expect(html, contains('<div class="menu-ring">'));
+      // Elke schijf draagt zijn eigen plek als percentage.
+      expect(html, contains('class="menu-disc" href="#prijzen" style="left:'));
+      expect(html, contains('.slide .menu-ring{position:relative'));
     });
   });
 }

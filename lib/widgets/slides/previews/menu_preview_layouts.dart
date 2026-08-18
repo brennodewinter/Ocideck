@@ -87,33 +87,34 @@ Widget _menuGrid(
   );
 }
 
-/// Onder elkaar: brede kaarten, één per regel. Een kaart wordt niet hoger dan
-/// nodig — bij twee blokken zou een gelijke verdeling twee halve dia's hoge
-/// vlakken opleveren; die staan gecentreerd en op leeshoogte.
+/// Hoogte van één regel in de indeling "onder elkaar", en de ruimte ertussen.
+/// Vast, niet verdeeld over de dia: een regel houdt zo dezelfde leeshoogte of er
+/// nu drie of dertig blokken staan. Passen ze samen niet meer op de dia, dan
+/// schaalt de `FittedBox` van de stellage het geheel omlaag — hetzelfde gedrag
+/// als bij te veel tekst op een gewone dia, in plaats van regels die tot een
+/// streepje worden geperst.
+const double _menuRowHeightFactor = 0.075;
+const double _menuRowGapFactor = 0.012;
+
+/// Onder elkaar: brede kaarten, één per regel, gecentreerd in de ruimte die er
+/// is.
 Widget _menuList(
   List<MenuBlock> blocks,
   double w,
   Widget Function(MenuBlock, {bool wide}) card,
-) {
-  final gap = w * 0.014;
-  final maxCard = w * 0.105;
-  return LayoutBuilder(
-    builder: (context, box) {
-      final n = blocks.length;
-      final even = (box.maxHeight - gap * (n - 1)) / n;
-      final height = math.max(w * 0.05, math.min(even, maxCard));
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (var i = 0; i < n; i++) ...[
-            if (i > 0) SizedBox(height: gap),
-            SizedBox(height: height, child: card(blocks[i], wide: true)),
-          ],
-        ],
-      );
-    },
-  );
-}
+) => Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    for (var i = 0; i < blocks.length; i++) ...[
+      if (i > 0) SizedBox(height: w * _menuRowGapFactor),
+      SizedBox(
+        height: w * _menuRowHeightFactor,
+        child: card(blocks[i], wide: true),
+      ),
+    ],
+  ],
+);
 
 /// Eén keuzeblok als kaart: een kleine afbeelding links, label en uitleg
 /// ernaast, en een pijl rechts als het blok ergens heen springt. De randkleur
