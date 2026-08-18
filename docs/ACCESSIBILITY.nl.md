@@ -138,16 +138,27 @@ vandaag de **Markdown** (die tekst is, zijn koppen behoudt en de alt-tekst draag
 of de **HTML-export** (echte tekst in een browser, al is die evenmin tegen WCAG
 gebouwd). PPTX-sprekernotities zijn echte tekst en reizen wél mee.
 
-**De interactieve onderdelen van een keuzemenu-slide werken alleen met de muis.**
-Tijdens het presenteren reageren een menublok dat springt en — sinds 2026-08-18 —
-de categoriebalk boven de blokken op een klik of een tik en verder op niets: het
-zijn allebei een `GestureDetector` over een getekende kaart, zonder `Semantics`-
-knoprol, zonder focusknoop en zonder toetsenbordroute. Een schermlezer leest de
-labels wel als tekst, dus de *inhoud* van het menu is er, maar er wordt niet
-gemeld dat ze te bedienen zijn en met het toetsenbord komt niemand erbij. De
-gewone navigatie van de presentator (pijltoetsen, het diaraster, springen naar
-een dia) bereikt elke slide waar een menu naar wijst, dus een menu is nooit de
-enige route naar een slide.
+**De interactieve onderdelen van een keuzemenu-slide zijn met het toetsenbord te
+bedienen.** *(Opgelost 2026-08-18; stond hiervoor als bekend gat.)* Tijdens het
+presenteren zijn een menublok dat springt en de categoriebalk erboven allebei een
+knop: `Tab` en `Shift + Tab` lopen erlangs — eerst de categorieën, dan de blokken
+in leesvolgorde — `Enter` of de spatiebalk volgt de sprong of wisselt van
+categorie, en `Escape` geeft de toetsen terug aan de dia, zodat je meteen weer
+kunt bladeren. Het onderdeel met de focus krijgt een accentring met een halo
+eromheen, ruim genoeg om vanaf de achterste rij te zien. Een schermlezer meldt ze
+als knop, met de uitleg achter het label (`Prijzen. Wat het kost`), en de tekst
+ín de kaart wordt uitgesloten zodat er niets dubbel wordt voorgelezen.
+
+Enter en de spatiebalk betekenen in de presentator óók "volgende dia". Dat botst
+niet: een toetsaanslag gaat eerst naar het onderdeel met de focus en pas daarna
+naar de presentator. Staat de focus nergens, dan bladert de spatiebalk gewoon
+door. De pijltjestoetsen blijven altijd van de presentatie — die onderscheppen
+zou betekenen dat je met de focus op een blok niet verder kunt.
+
+De focusring is van de presentator en reist niet mee naar het beamervenster: daar
+zijn de blokken niet aanklikbaar, dus ook niet focusbaar. Los daarvan bereikt de
+gewone navigatie (pijltoetsen, het diaraster, springen naar een dia) elke slide
+waar een menu naar wijst, dus een menu is nooit de enige route naar een slide.
 
 **De HTML-export is niet op toegankelijkheid getoetst.** Hij levert echte tekst
 en koppen, wat al veel meer is dan de bitmapformaten, maar niemand heeft het

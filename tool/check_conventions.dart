@@ -180,7 +180,10 @@ const Map<String, int> fileSizeBaseline = {
   // De indelingen zelf staan in dat part-bestand, niet hier.
   // +4 (#1162): de tekst- en achtergrondkleur van de dia meegeven aan de
   // link-scope, zodat de plaatshouders het thema volgen.
-  'lib/widgets/slides/slide_preview.dart': 1042,
+  // +1 (#1162): de import van `services.dart` voor de toetsen van een
+  // toetsenbord-bedienbaar menublok. De afhandeling zelf staat in het
+  // part-bestand menu_preview_layouts.dart.
+  'lib/widgets/slides/slide_preview.dart': 1043,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1073,

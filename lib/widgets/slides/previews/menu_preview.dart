@@ -226,10 +226,18 @@ class _MenuCategoryBar extends StatelessWidget {
       ),
     );
     if (onSelect == null) return pill;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => onSelect!(index),
-      child: MouseRegion(cursor: SystemMouseCursors.click, child: pill),
+    return _MenuFocusable(
+      onActivate: () => onSelect!(index),
+      semanticLabel: label,
+      ring: accent,
+      halo: text,
+      ringWidth: w * 0.004,
+      borderRadius: BorderRadius.circular(w * 0.03),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onSelect!(index),
+        child: pill,
+      ),
     );
   }
 }

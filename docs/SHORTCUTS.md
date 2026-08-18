@@ -91,6 +91,9 @@ Navigation:
 | `Backspace` | Erase the last digit of a typed slide number |
 | `Home` · `End` | First · last slide |
 | `G` | Slide-grid overview (arrows + `Enter` to jump) |
+| `Tab` · `⇧Tab` | On a choice-menu slide: walk the categories and blocks |
+| `Enter` · `Space` (with a block focused) | Follow that block's jump, or switch category |
+| `Escape` (with a block focused) | Hand the keys back to the slide |
 
 *Next* and *previous* first move **within** a slide that has more to show: the
 pages of a rich-text body too long for one slide (the control bar then reads
