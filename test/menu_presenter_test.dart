@@ -5,6 +5,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/menu.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -340,6 +341,61 @@ void main() {
         reason: 'de ring is eenkleurig geworden: $kleuren',
       );
     });
+
+    test('de tweede ringkleur zet inkt op elk meegeleverd profiel', () {
+      // De eerste regel koos "de verste van tekst en achtergrond, op
+      // luminantie". Die is systematisch scheef richting de achtergrond, en een
+      // band in de diakleur is een gat: drie van de vier meegeleverde profielen
+      // verloren zo hun tweede band (#1162, vierde beeldkeuring). Een proef die
+      // alleen eist dat de twee kleuren verschíllen ziet dat niet, want de
+      // achtergrond telt daar als een kleur.
+      for (final profile in ThemeProfile.builtIns) {
+        final accent = AppTheme.parseHexColor(profile.accentColor);
+        final text = AppTheme.parseHexColor(profile.textColor);
+        final background = AppTheme.parseHexColor(profile.slideBackgroundColor);
+        final halo = menuFocusHalo(
+          accent: accent,
+          text: text,
+          background: background,
+        );
+
+        expect(
+          halo,
+          isNot(accent),
+          reason: '${profile.name}: de ring valt samen tot één kleur',
+        );
+        // De achtergrond mag alleen de terugval zijn wanneer de tekstkleur
+        // werkelijk tegen het accent aan ligt — anders is de tweede band een
+        // gat waar een zichtbare lijn had kunnen staan.
+        if (halo == background && background != text) {
+          expect(
+            text,
+            accent,
+            reason:
+                '${profile.name}: de tweede band is de diakleur terwijl de '
+                'tekstkleur (${profile.textColor}) bruikbaar was',
+          );
+        }
+      }
+    });
+
+    test(
+      'rood naast teal telt als twee kleuren, ook al zijn ze even licht',
+      () {
+        // Luminantie is de verkeerde maatstaf: deze twee hebben bijna dezelfde
+        // helderheid en zijn toch onmiskenbaar twee banden.
+        const rood = Color(0xFFC0392B);
+        const teal = Color(0xFF16A085);
+        expect(
+          menuFocusHalo(
+            accent: rood,
+            text: teal,
+            background: const Color(0xFF101820),
+          ),
+          teal,
+        );
+      },
+    );
 
     testWidgets('de focus verschuift niets op de dia', (tester) async {
       // De ring mag geen ruimte van het blok afnemen: doet hij dat wel, dan

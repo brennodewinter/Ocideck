@@ -684,30 +684,42 @@ class _MenuDisc extends StatelessWidget {
   }
 }
 
-/// De tweede kleur van de focusring: die van tekst- of achtergrondkleur die het
-/// verst van het accent af ligt.
+/// De tweede kleur van de focusring: de tekstkleur, tenzij die zó dicht bij het
+/// accent ligt dat er geen tweede band meer te zien is — dan de achtergrond.
 ///
-/// De ring dankt zijn zichtbaarheid aan het verschil tussen zijn twee banden —
-/// op welke achtergrond de dia ook staat, één ervan steekt af. Dat vangnet
-/// verdwijnt zodra beide banden dezelfde kleur krijgen, en dat is geen
-/// theoretisch geval: in het meegeleverde LibreKAT-profiel zijn `textColor` en
-/// `accentColor` allebei `#003399`, en dat profiel staat standaard geselecteerd.
-/// De ring viel daar terug op één blauwe band (#1162, vierde beeldkeuring).
+/// De ring dankt zijn zichtbaarheid aan het verschil tussen zijn twee banden. Dat
+/// vangnet verdwijnt zodra ze dezelfde kleur krijgen, en dat is geen theoretisch
+/// geval: in het meegeleverde LibreKAT-profiel zijn `textColor` en `accentColor`
+/// allebei `#003399`, en dát profiel staat standaard geselecteerd.
 ///
-/// Vandaar niet blind de tekstkleur, maar de verste van de twee die de dia toch
-/// al draagt. Een derde kleur verzinnen zou de themaregel breken; kiezen tussen
-/// wat er is niet.
+/// De eerste poging koos "de verste van de twee", op luminantieafstand. Dat is
+/// systematisch scheef: in een deugdelijk thema ligt de achtergrond per definitie
+/// aan het uiterste van het luminantiebereik — dat is wat de tekst erop leesbaar
+/// maakt — en het accent ergens ertussen. De achtergrond wint dan bijna altijd,
+/// en dat is nu juist de kandidaat die géén inkt zet: een band in de diakleur is
+/// een gat. Drie van de vier meegeleverde profielen verloren zo hun tweede band
+/// (#1162, vierde beeldkeuring).
+///
+/// Dus andersom: de tekstkleur is de eerste keus, en de achtergrond is de
+/// terugval voor het ene geval waarvoor hij bedoeld is. En de maatstaf is niet
+/// luminantie maar het grootste kanaalverschil, want twee kleuren met dezelfde
+/// helderheid kunnen prima uit elkaar te houden zijn — rood naast teal is een
+/// duidelijke tweede band, terwijl hun luminantie bijna gelijk is.
 Color menuFocusHalo({
   required Color accent,
   required Color text,
   required Color background,
-}) {
-  final target = accent.computeLuminance();
-  return (text.computeLuminance() - target).abs() >=
-          (background.computeLuminance() - target).abs()
-      ? text
-      : background;
-}
+}) => _colorGap(text, accent) >= _menuHaloMinGap ? text : background;
+
+/// Het grootste verschil tussen twee kleuren over de drie kanalen, op 0..1.
+double _colorGap(Color a, Color b) =>
+    math.max((a.r - b.r).abs(), math.max((a.g - b.g).abs(), (a.b - b.b).abs()));
+
+/// Onder dit kanaalverschil doet de tekstkleur naast het accent geen werk meer
+/// als tweede band. Ruim 15% van het bereik: genoeg om een echte botsing (zoals
+/// LibreKAT, waar het verschil nul is) te vangen zonder een bruikbaar
+/// kleurverschil af te wijzen.
+const double _menuHaloMinGap = 0.15;
 
 /// De focusring van een keuzeblok, zodat een proef hem kan aanwijzen.
 const Key menuFocusRingKey = ValueKey('menuFocusRing');
