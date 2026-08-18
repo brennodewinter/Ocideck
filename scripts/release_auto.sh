@@ -833,7 +833,8 @@ wait_gate() { # wait_gate SHA PR_NUMBER
     esac
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
       printf '%s' "$resp" \
-        | jq -r '.statuses[]? | select(.state!="success") | "     wacht op \(.context): \(.description // .state)"' \
+        | jq -r '.statuses[]? | (.status // .state) as $s | select($s != "success")
+                  | "     wacht op \(.context): \(.description // $s)"' \
         2>/dev/null | sort -u || true
       log "… $(( (i - 1) / 2 )) min verstreken"
     fi
