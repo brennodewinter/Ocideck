@@ -133,7 +133,9 @@ const Map<String, int> fileSizeBaseline = {
   // handler die in initState (dus in dit bestand) leeft. Het zendhulpje
   // (`_sendChartHover`) en de ontvang-afhandeling (`_applyBeamerChartHover`)
   // staan al in het part-bestand presenter_beamer_payload.dart.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1033,
+  // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
+  // de drie regels die hem in de beamer-sync meenemen.
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1042,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -147,7 +149,9 @@ const Map<String, int> fileSizeBaseline = {
   // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +4 (#1407): imageTitleAbove-veld + constructor/copyFrom/copyWith-doorvoer.
   // +8: imageZoom-veld + doc + constructor/duplicate/copyWith-doorvoer.
-  'lib/models/slide.dart': 1071,
+  // +9 (#1162): menuLayout-veld + doc + constructor/copyFrom/copyWith-doorvoer
+  // en de import van models/menu.dart.
+  'lib/models/slide.dart': 1080,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
@@ -171,7 +175,10 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#1282): `fitScaleOverride` doorgeven aan `_FindingPreview`, zodat de
   // inhoud-bewuste header-fit te overschrijven is (o.a. voor de kostentoets).
   // Verlaagd van 1027 naar 1023: het bestand meet 1023.
-  'lib/widgets/slides/slide_preview.dart': 1023,
+  // +15 (#1162): de menucategorie en zijn terugroep (velden + doc + constructor
+  // + doorgifte), plus de import en het `part` van menu_preview_layouts.dart.
+  // De indelingen zelf staan in dat part-bestand, niet hier.
+  'lib/widgets/slides/slide_preview.dart': 1038,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1073,
@@ -250,8 +257,11 @@ const Map<String, int> classSizeBaseline = {
   // presenter_beamer_payload.dart, maar leden van deze State) en het wissen van
   // de hover bij diawissel in `_syncAudience`. Het pure zendhulpje
   // `_sendChartHover` is top-level en telt niet mee.
+  // +26 (#1162): de menucategorie — veld, `_setMenuCategory` (in het part-bestand
+  // presenter_content.dart, maar lid van deze State), de beamer-sync en het
+  // terugzetten bij een diawissel.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3398,
+      3424,
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen
@@ -299,7 +309,11 @@ const Map<String, int> classSizeBaseline = {
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   // +4 (#1407): image-title-above class-token in de classes-lijst.
   // +12: ocideck_image_zoom directive schrijven + lezen.
-  'lib/services/markdown_service.dart#MarkdownService': 2409,
+  // +8 (#1162): het menu-indelingstoken schrijven en teruglezen, plus het
+  // filteren ervan uit `effectiveClass`. De body-regelverwerking verhuisde
+  // hierbij naar markdown_parse/markdown_service_parse_body.dart — dat maakt de
+  // bestanden kleiner, maar de klasse niet.
+  'lib/services/markdown_service.dart#MarkdownService': 2417,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie

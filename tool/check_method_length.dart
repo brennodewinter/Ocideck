@@ -49,7 +49,9 @@ const Map<String, int> methodLengthBaseline = {
   // +19 (#1405): titel-kolommodus afleiding uit sawBgLeft/sawBgRight.
   // +4 (#1407): imageTitleAbove-afleiding + class-token-stripping + constructor-doorvoer.
   // +1: imageZoom-doorvoer in Slide-constructor.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 204,
+  // +4 (#1162): menuLayout uit de klassetokens lezen, plus het filteren van de
+  // menu-optietokens uit `effectiveClass`. Pure doorvoer van een nieuw veld.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 208,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -64,20 +66,22 @@ const Map<String, int> methodLengthBaseline = {
   // nieuw veld, geen gedrag om uit te tillen.
   // +8 (#1162): de `menu`-case (de _MenuPreview-aanroep). Pure dispatch: één case
   // valt niet zinvol uit een type→widget-switch te tillen. +1: de
-  // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
+  // onMenuBlockTap-doorgifte voor de klik-om-te-springen. +2: de categorie en
+  // zijn terugroep, voor het wisselen tussen groepen blokken.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      158,
+      160,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.
   // +4 (#1405): titleColumnLayout/titleColumnWidth in copyWith.
   // +2 (#1407): imageTitleAbove-parameter + doorvoer in copyWith.
   // +2: imageZoom-parameter + doorvoer in copyWith.
-  'lib/models/slide.dart::Slide.copyWith': 164,
+  // +2 (#1162): menuLayout-parameter + doorvoer in copyWith.
+  'lib/models/slide.dart::Slide.copyWith': 166,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
-  // Verlaagd van 188 naar 186: de methode meet 183.
+  // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
-      186,
+      183,
   // +2: reportLanguage-parameter + getalnotatie in cell().
   'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 152,
   // +8: tabel-split actie bij tableDensityMinimum-warning.
