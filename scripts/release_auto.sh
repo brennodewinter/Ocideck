@@ -498,6 +498,9 @@ outdated_gate() {
 # ── Het plan tonen ──────────────────────────────────────────────────────────────
 show_plan() {
   section "Plan"
+  # Bij een repetitie hoort dit plan te lezen als "wat er zóu gebeuren". Zonder
+  # deze regel leest een versienummer in beeld als een release die al loopt.
+  [ "$PREFLIGHT_ONLY" -eq 1 ] && log "REPETITIE (--preflight): hieronder staat wat een release zou doen; er wordt niets gemaakt."
   log "Versie   : $CUR_VERSION+$CUR_BUILD → $NEW_VERSION+$NEW_BUILD  ($LEVEL)"
   log "Tag      : $TAG  (op de merge-commit van de release-PR)"
   log "Basis    : origin/main"
