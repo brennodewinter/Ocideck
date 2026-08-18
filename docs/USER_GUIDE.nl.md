@@ -898,8 +898,18 @@ staat als klein vierkantje naast het label, met de uitleg eronder. **Klik of tik
 een blok en de presentatie springt naar die slide.** Omdat een sprong dezelfde
 routegeschiedenis gebruikt als de uitsprong, brengt **terug** je terug naar het menu
 waar je vandaan kwam. Als de doelslide later wordt verwijderd, stopt het blok
-simpelweg met springen — geen fout. Ga je naar een andere slide, dan begint het menu
+simpelweg met springen — geen fout, maar de kwaliteitscontrole zegt het je wél, zodat
+je het niet pas op het podium merkt. Ga je naar een andere slide, dan begint het menu
 weer bij zijn eerste categorie.
+
+**Meer blokken dan er passen.** Elke indeling houdt zijn tekst leesbaar. Passen er
+niet meer blokken bij zonder dat de letter te klein wordt, dan toont de slide er
+zoveel als er wél passen en zet er een blokje **+n** achter voor de rest. Dat is een
+teken dat het menu te vol is voor deze vorm: kies **Raster** (daar passen de meeste
+blokken op één slide) of deel het op in **categorieën**. Je typt niets kwijt — de
+blokken staan gewoon in het bestand en verschijnen zodra er ruimte voor is.
+*(Toegevoegd 2026-08-18: eerder werd bij zestien blokken alles geperst tot een letter
+van vier pixels — heel, en onleesbaar.)*
 
 In het `.md`-bestand zijn de blokken gewone Markdown-link-opsommingen — een `- [Label]`-
 opsomming waarvan de link naar het anker van de doelslide wijst, eventueel gevolgd

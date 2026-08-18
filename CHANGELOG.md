@@ -112,6 +112,30 @@ in Dutch, and it keeps growing on `main` between releases.
   presentator die erop drukt. De LaTeX-export schrijft per categorie een lijst
   met een vetgedrukt kopje.
 
+- feat(keuzemenu): een menu dat voller is dan er leesbaar past, toont wat er past
+  en telt de rest in een blokje **+n** (#1162). Elke indeling houdt daarmee een
+  leesbare lettergrootte; eerder werden zestien blokken onder elkaar geperst tot
+  een letter van vier pixels — de dia liep niet over en geen enkele test klaagde,
+  maar er stond een rij streepjes in plaats van een menu. Het telblok is meteen
+  het teken dat het menu te vol is voor deze vorm: het raster kan er de meeste
+  kwijt, en categorieën delen een lang menu op. In het bestand verandert er
+  niets. De HTML-export doet hetzelfde in plaats van de dia twee schermen hoog te
+  maken.
+
+- feat(kwaliteit): meld een sprong die nergens meer uitkomt (#1162). Wijst een
+  keuzemenublok — of de sprong-uit van een dia — naar een anker dat geen enkele
+  dia meer draagt, dan valt de presentator stil terug op de gewone volgorde: de
+  knop doet niets, en dat merkte je pas op het podium. De kwaliteitscontrole
+  noemt nu het label van het blok en vraagt om een andere doeldia.
+
+- fix(thema): de plaatshouder voor een ontbrekende of geblokkeerde afbeelding
+  volgt het thema van de dia (#1162, beeldkeuring). Alle drie de plaatshouders in
+  de renderer stonden op vaste lichtgrijze kleuren — keurig gewogen tegen een
+  witte dia, maar op een donker thema een fel blok midden in het beeld. Ze mengen
+  hun vlak, tekst en pictogram nu uit de tekst- en achtergrondkleur van de dia,
+  met dezelfde contrastverhoudingen als voorheen. Dit raakt elk diatype met een
+  afbeelding, niet alleen het keuzemenu.
+
 - fix(bestandsformaat): een tabeldia met "verlopen datums markeren" verloor zijn
   typetoken bij het opslaan (#1162, onderweg gevonden). `table-overdue` stond
   niet in de woordenlijst van de structuurcontrole, dus waarschuwde OciDeck over

@@ -855,8 +855,17 @@ subtle accent border and an arrow); a block's image sits as a small square besid
 its label with the explanation under it. **Click or tap a block and the
 presentation jumps to that slide.** Because a jump uses the same route history as
 the jump-out, **back** returns you to the menu you came from. If the target slide
-is later deleted, the block simply stops jumping — no error. Moving to another
-slide resets the menu to its first category.
+is later deleted, the block simply stops jumping — no error, but the quality check
+does tell you, so you do not find out on stage. Moving to another slide resets the
+menu to its first category.
+
+**More blocks than fit.** Every layout keeps its text readable. When no further
+block fits without the type becoming too small, the slide shows the ones that do fit
+and puts a **+n** tile after them for the rest. Read that as a sign the menu is too
+full for this shape: pick **Grid** (which holds the most blocks on one slide) or
+split it into **categories**. Nothing you typed is lost — the blocks stay in the
+file and reappear as soon as there is room. *(Added 2026-08-18: sixteen blocks used
+to be squeezed down to a four-pixel type size — intact, and unreadable.)*
 
 In the `.md` file the blocks are ordinary Markdown link-bullets — a `- [Label]`
 bullet whose link points at the target slide's anchor, optionally followed by
