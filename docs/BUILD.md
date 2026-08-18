@@ -594,11 +594,18 @@ anything or writing a release log. Run it before you set an evening aside for a
 release; the expensive failures in this chain have all been knowable up front.
 
 The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
-gate* over the bundled reference data (`make catalogs-outdated` — a newer upstream
-catalog stops the release with a message, because refreshing it changes what a
-report points at, a deliberate step; `make refresh-catalogs` then fetches it and
-records the new version in the catalogue *and* in `LICENSE_COMPLIANCE.md`, so one
-command clears the gate); then it always runs `make bump-scanner-pins`
+gate* over the bundled reference data, which now splits by *what* moved. If
+upstream moved but the generated catalogue comes out word-for-word identical, the
+drift is bookkeeping — a snapshot date in a constant and a row in
+`LICENSE_COMPLIANCE.md` — and Phase 1 refreshes it itself, as its own commit on
+the release branch, exactly like the scanner pins. If the refresh touches a
+*generated* part (`*_data.dart`, `*_android.dart`, `*_ios.dart`) the chain stops:
+that changes what a report cites, can touch translated text, and pulls the pinned
+counts out from under the catalogue tests. Sources without a generator (CWE,
+MIAUW) stop it right away, with the route that belongs to that source rather than
+a generic "run refresh-catalogs" that would do nothing there. Either way
+`make refresh-catalogs` is the one command that fetches and records the new
+version. Then it always runs `make bump-scanner-pins`
 (idempotent) so the CI scanners (gitleaks/trufflehog/semgrep) ride to their latest
 upstream automatically instead of blocking a release — a bump, if any, becomes its
 own commit on the release branch; then the four-place version bump, `make sbom`,

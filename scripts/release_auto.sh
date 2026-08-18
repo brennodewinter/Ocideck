@@ -486,6 +486,11 @@ REFRESHABLE_CATALOGS="wstg mastg maswe"
 # Wordt door outdated_gate gevuld met de id's die fase 1 moet verversen.
 CATALOGS_STALE=""
 
+# De machineleesbare stand van de bronnen. Eén plek, zodat de gate en de
+# nacontrole in fase 1 niet los van elkaar kunnen gaan afwijken — en zodat een
+# test hem kan vervangen zonder het netwerk op te gaan.
+catalogs_probe_json() { dart run tool/check_reference_data.dart --json 2>/dev/null; }
+
 # De id's van niet-adviserende bronnen die upstream hebben zien bewegen.
 stale_catalog_ids() { # stale_catalog_ids JSON
   printf '%s' "$1" \
@@ -524,7 +529,7 @@ outdated_gate() {
   # en dat bepaalt of dit een automatische of een handmatige zaak is. Op de groene
   # weg is dit de enige ronde langs de bronnen.
   local json rc=0
-  json="$(dart run tool/check_reference_data.dart --json 2>/dev/null)" || rc=$?
+  json="$(catalogs_probe_json)" || rc=$?
   if [ "$rc" -eq 2 ]; then
     die "de referentiebronnen waren niet bereikbaar (netwerk?) — niet gekeken is niet hetzelfde als actueel. Probeer opnieuw zodra je online bent."
   fi
@@ -1164,8 +1169,9 @@ fi
 # niet-gecommitte wijziging reist met de `git checkout` van cleanup_branch mee
 # naar main, en precies zo kwam de v0.4.2-versiebump ooit op een vreemde branch
 # terecht. Wat hier blijft staan, staat in een commit of het staat er niet.
-STEP="referentiedata verversen"
-if [ -n "$CATALOGS_STALE" ]; then
+refresh_catalog_snapshot() {
+  STEP="referentiedata verversen"
+  [ -n "$CATALOGS_STALE" ] || return 0
   section "Fase 1 — momentopname referentiedata bijwerken ($CATALOGS_STALE)"
   if ! scripts/refresh_catalogs.sh; then
     git checkout --quiet -- lib/services docs/LICENSE_COMPLIANCE.md 2>/dev/null || true
@@ -1195,11 +1201,13 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
   # Fail fast: is de poort hiermee echt schoon? Zo niet, dan valt make
   # check-release er straks alsnog over, tien minuten verderop en met een melding
   # die naar de verkeerde stap wijst.
-  CATALOGS_LEFT="$(stale_catalog_ids "$(dart run tool/check_reference_data.dart --json 2>/dev/null)" | tr '\n' ' ')"
+  CATALOGS_LEFT="$(stale_catalog_ids "$(catalogs_probe_json)" | tr '\n' ' ')"
   CATALOGS_LEFT="$(printf '%s' "$CATALOGS_LEFT" | xargs || true)"
   [ -z "$CATALOGS_LEFT" ] \
     || die "na de verversing meldt de poort nog steeds: $CATALOGS_LEFT. De verversing haalt kennelijk iets anders op dan de probe meet."
-fi
+}
+
+refresh_catalog_snapshot
 
 python3 - "$NEW_VERSION" "$NEW_BUILD" <<'PY'
 import re, sys

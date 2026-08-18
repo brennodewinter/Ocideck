@@ -1082,6 +1082,11 @@ also declares them, but see the [CI note](#continuous-integration).)
   versie en liet het bijschrijven aan jou, waardoor "werk bij met
   `make refresh-catalogs`" een advies was dat de melding niet kón wegnemen.
   `make refresh-lexicon` doet hetzelfde voor het gezondheidslexicon uit Orphanet.
+- **In een release rijdt een verschoven momentopname vanzelf mee.**
+  `scripts/release_auto.sh` ververst in fase 1 zelf wanneer upstream bewoog zónder
+  dat de gegenereerde catalogus verandert — dan is het administratie, en het wordt
+  een eigen commit op de release-branch. Raakt de verversing wél een gegenereerd
+  deel, dan stopt de keten: dat verandert waar een rapport naar verwijst.
 - **Meet wat je meedraagt.** Een bron met een commitdatum-probe krijgt een
   `probePath`: het pad waar onze generator uit leest. Zonder dat pad telt elke
   commit in andermans repository als veroudering — MASWE stond zo een release in
