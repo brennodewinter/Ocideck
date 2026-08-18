@@ -289,11 +289,11 @@ class _DocEditorToolbar extends StatelessWidget {
   /// staat er niets: er valt dan niets terug te zetten, en de werkbalk heeft
   /// die breedte hard nodig — hij schuift al op een smal venster.
   List<Widget> _zoomControls(AppLocalizations l10n) {
-    const step = SettingsNotifier.documentEditorZoomStep;
+    const step = kDocumentEditorZoomStep;
     return [
       IconButton(
         tooltip: l10n.d('Uitzoomen'),
-        onPressed: zoom > SettingsNotifier.documentEditorZoomMin + 1e-6
+        onPressed: zoom > kDocumentEditorZoomMin + 1e-6
             ? () => onZoomChanged(zoom - step)
             : null,
         icon: const Icon(Icons.zoom_out, size: 18),
@@ -319,7 +319,7 @@ class _DocEditorToolbar extends StatelessWidget {
         ),
       IconButton(
         tooltip: l10n.d('Inzoomen'),
-        onPressed: zoom < SettingsNotifier.documentEditorZoomMax - 1e-6
+        onPressed: zoom < kDocumentEditorZoomMax - 1e-6
             ? () => onZoomChanged(zoom + step)
             : null,
         icon: const Icon(Icons.zoom_in, size: 18),

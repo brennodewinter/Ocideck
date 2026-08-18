@@ -121,16 +121,47 @@ Future<void> _applyDocumentEditorWidth(
   );
 }
 
+/// Ondergrens, bovengrens en stapgrootte voor de documentatielezer-schaal;
+/// gedeeld met de knoppen in de lezer zodat clampen en stappen consistent zijn.
+/// Top-level om dezelfde reden als de zoomgrenzen hieronder.
+const double kDocReaderTextScaleMin = 0.8;
+const double kDocReaderTextScaleMax = 1.8;
+const double kDocReaderTextScaleStep = 0.1;
+
+/// Ondergrens, bovengrens en stapgrootte van de documenteditor-zoom.
+///
+/// Top-level en niet op [SettingsNotifier]: die klasse zit op haar plafond, en
+/// een grens is geen gedrag. De knoppen in de werkbalk lezen ze hier, zodat
+/// clampen en stappen aan één kant vastliggen.
+const double kDocumentEditorZoomMin = 0.5;
+const double kDocumentEditorZoomMax = 2.5;
+const double kDocumentEditorZoomStep = 0.1;
+
+/// De tekstschaal van de documentatielezer, geklemd op zijn grenzen.
+Future<void> _applyDocReaderTextScale(SettingsNotifier notifier, double scale) {
+  final clamped = scale
+      .clamp(kDocReaderTextScaleMin, kDocReaderTextScaleMax)
+      .toDouble();
+  if (clamped == notifier.currentState.docReaderTextScale) {
+    return Future.value();
+  }
+  notifier.currentState = notifier.currentState.copyWith(
+    docReaderTextScale: clamped,
+  );
+  return notifier._persist(
+    'setDocReaderTextScale',
+    (prefs) => prefs.setDouble('docReaderTextScale', clamped),
+  );
+}
+
 /// Documentmodus: de zoomfactor van het schrijfvlak en de vellen.
 Future<void> _applyDocumentEditorZoom(SettingsNotifier notifier, double zoom) {
   final clamped = zoom
-      .clamp(
-        SettingsNotifier.documentEditorZoomMin,
-        SettingsNotifier.documentEditorZoomMax,
-      )
+      .clamp(kDocumentEditorZoomMin, kDocumentEditorZoomMax)
       .toDouble();
-  if (clamped == notifier.currentState.documentEditorZoom)
+  if (clamped == notifier.currentState.documentEditorZoom) {
     return Future.value();
+  }
   notifier.currentState = notifier.currentState.copyWith(
     documentEditorZoom: clamped,
   );
@@ -169,8 +200,8 @@ _readDocumentSettings(SharedPreferences prefs) => (
     orElse: () => DocumentEditorWidth.page,
   ),
   editorZoom: (prefs.getDouble('documentEditorZoom') ?? 1.0).clamp(
-    SettingsNotifier.documentEditorZoomMin,
-    SettingsNotifier.documentEditorZoomMax,
+    kDocumentEditorZoomMin,
+    kDocumentEditorZoomMax,
   ),
   pageSize:
       PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??

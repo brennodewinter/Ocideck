@@ -231,13 +231,13 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       pageHeight: _contentHeightPx,
       // Een `---` en (naar keuze) elk hoofdstuk beginnen een nieuw vel, net als
       // in de export. Zonder dit zei het scherm iets anders dan de druk.
-      forcedBreakBefore: DocumentMarkdownView.forcedPageBreaks(
+      forcedBreakBefore: documentForcedPageBreaks(
         widget.markdown,
         chapterBreak: widget.chapterPageBreak,
       ),
       // Een kop blijft niet alleen (of met één losse regel) onderaan een vel
       // achter, maar schuift mee naar de tekst waar hij bij hoort.
-      keepWithNext: DocumentMarkdownView.headingBlocks(widget.markdown),
+      keepWithNext: documentHeadingBlocks(widget.markdown),
       minKeepHeight: documentKeepWithNextHeight(
         MediaQuery.textScalerOf(context),
       ),

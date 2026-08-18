@@ -145,6 +145,49 @@ double documentKeepWithNextHeight(TextScaler scaler) =>
     kDocumentBodyLineHeight *
     kDocumentKeepWithNextLines;
 
+/// De blokken die op een verse pagina horen te beginnen, als index in
+/// dezelfde lijst als [DocumentMarkdownView.blockTexts].
+///
+/// Twee soorten, allebei uit het formaat en allebei gehonoreerd door de HTML-
+/// en LaTeX-export (FILE_FORMAT.md §14.6): een `---` in de body ís een
+/// pagina-einde, en met [chapterBreak] begint elk hoofdstuk (`H1`) op een
+/// nieuw vel. Het eerste blok telt nooit mee — een breuk vóór de eerste regel
+/// zou een leeg vel opleveren.
+Set<int> documentForcedPageBreaks(
+  String markdown, {
+  bool chapterBreak = false,
+}) {
+  final blocks = DocumentMarkdownView._parse(markdown);
+  final breaks = <int>{};
+  // Wat er sinds de vorige breuk aan échte inhoud staat. Een `---` telt niet
+  // mee: in een paginaweergave ís hij het einde zelf, geen inhoud.
+  var contentSinceBreak = 0;
+  for (var i = 0; i < blocks.length; i++) {
+    final rule = blocks[i].kind == _Kind.rule;
+    final chapter =
+        chapterBreak && blocks[i].kind == _Kind.heading && blocks[i].level == 1;
+    if ((rule || chapter) && contentSinceBreak > 0) {
+      breaks.add(i);
+      contentSinceBreak = 0;
+    }
+    if (!rule) contentSinceBreak++;
+  }
+  return breaks;
+}
+
+/// De blokken die een kop zijn, als index in dezelfde lijst als
+/// [DocumentMarkdownView.blockTexts].
+///
+/// De paginaverdeling houdt ze vast aan de tekst eronder: een kop hoort niet
+/// alleen onderaan een vel achter te blijven (zie `documentPageOffsets`).
+Set<int> documentHeadingBlocks(String markdown) {
+  final blocks = DocumentMarkdownView._parse(markdown);
+  return {
+    for (var i = 0; i < blocks.length; i++)
+      if (blocks[i].kind == _Kind.heading) i,
+  };
+}
+
 /// De voetnoten als genummerde lijst, met een scheiding erboven.
 ///
 /// Eén tekenaar voor twee plekken: achterin een doorlopende weergave, en

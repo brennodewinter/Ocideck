@@ -141,3 +141,76 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     _insertBlock('![$alt]($reference)');
   }
 }
+
+/// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
+/// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
+/// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
+/// zijn plek in de bron; de weergave hertekent mee. DOCUMENT_MODE.md §4.2.
+Future<void> _editDocumentChart(
+  BuildContext context,
+  WidgetRef ref,
+  int chartOrdinal,
+  String block,
+) async {
+  var edited = block;
+  final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
+  final apply = await showEmbedEditorDialog(
+    context,
+    ChartEditor(
+      slide: slide,
+      themeAnimationDurationMs: 0,
+      nestedInScrollView: true,
+      onUpdate: (s) => edited = s.customMarkdown,
+    ),
+  );
+  if (apply != true || !context.mounted) return;
+  final body = ref.read(documentProvider).document?.body ?? '';
+  final next = replaceNthChartBlock(body, chartOrdinal, edited);
+  if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
+}
+
+/// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
+/// dialoog. Kop + scheidingsrij + body worden via [decodeMarkdownTableWithAlignment]
+/// ontleed tot een celraster mét per-kolomuitlijning en in een wegwerp-[Slide]
+/// gezet; 'Toepassen' serialiseert raster én uitlijning terug naar een
+/// GFM-tabel en vervangt precies dat tabelblok in de bron. DOCUMENT_MODE.md §4.2.
+Future<void> _editDocumentTable(
+  BuildContext context,
+  WidgetRef ref,
+  int tableOrdinal,
+  List<String> rawRows,
+) async {
+  final body = ref.read(documentProvider).document?.body ?? '';
+  // rawRows draagt de scheidingsrij niet; die haalt de uitlijning. Lees daarom
+  // het volledige tabelblok (kop + scheiding + body) uit de body.
+  final range = DocumentMarkdownView.nthTableBlockRange(body, tableOrdinal);
+  final tableLines = range == null
+      ? rawRows
+      : body.split('\n').sublist(range[0], range[1]);
+  final decoded = decodeMarkdownTableWithAlignment(tableLines);
+  var editedRows = decoded.rows;
+  var editedAligns = decoded.alignments;
+  final slide = Slide.create(SlideType.table).copyWith(
+    tableRows: decoded.rows,
+    tableColumnAlignments: decoded.alignments,
+  );
+  final apply = await showEmbedEditorDialog(
+    context,
+    TableEditor(
+      slide: slide,
+      nestedInScrollView: true,
+      documentContext: true,
+      onUpdate: (s) {
+        editedRows = s.tableRows;
+        editedAligns = s.tableColumnAlignments;
+      },
+    ),
+  );
+  if (apply != true || !context.mounted) return;
+  final next = replaceNthTableBlock(
+    body,
+    tableOrdinal,
+    encodeMarkdownTable(editedRows, alignments: editedAligns),
+  );
+  if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
+}

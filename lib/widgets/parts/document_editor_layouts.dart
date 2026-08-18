@@ -63,80 +63,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     return path == null ? null : p.dirname(path);
   }
 
-  /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges
-  /// en een eventuele drukkersafloop uit de instellingen. Hier zie je wat er op
-  /// welke bladzijde belandt — de vraag die een tekstverwerker beantwoordt en
-  /// een doorlopende rol niet. Lezen en nakijken, niet typen: bewerken doe je
-  /// in de visuele of de bron-stand.
-  Widget _pagesLayout(ThemeData theme, String source) {
-    final settings = ref.watch(settingsProvider);
-    // Draagt het document zelf een paginaopmaak, dan wint die van de instelling
-    // — zie [effectiveDocumentPageSetup].
-    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
-    return Container(
-      color: theme.colorScheme.surfaceContainerHighest,
-      child: PagedDocumentView(
-        markdown: source,
-        pageSize: setup.size!,
-        margins: setup.margins!,
-        profile: _styleProfile,
-        projectPath: _projectPath,
-        chapterPageBreak: settings.documentChapterPageBreak,
-        // Waar de noten komen staat in het document zelf; zie
-        // [documentFootnotePlacement].
-        footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
-        // Hier is de zoom meetkundig: het vel wordt groter of kleiner getekend,
-        // de indeling erop blijft die van het papier. Precies waarom je in deze
-        // stand inzoomt — om beter te zien wat er staat, niet om iets anders te
-        // laten breken.
-        scale: settings.documentEditorZoom,
-      ),
-    );
-  }
-
-  /// Zet de zoom van de documenteditor, geklemd op de grenzen van de
-  /// instelling. Top-level via de notifier zodat de knoppen in de werkbalk en
-  /// de sneltoetsen door hetzelfde gat gaan.
-  void _setZoom(double zoom) => unawaited(
-    ref.read(settingsProvider.notifier).setDocumentEditorZoom(zoom),
-  );
-
-  /// Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
-  ///
-  /// Twee plustoetsen en twee mintoetsen: op de meeste indelingen zit + op
-  /// shift-=, en dan levert het toetsenbord `equal` in plaats van `add`. Alleen
-  /// `add` binden werkt op een cijferblok en nergens anders.
-  Map<ShortcutActivator, VoidCallback> _zoomShortcuts() {
-    final zoom = ref.read(settingsProvider).documentEditorZoom;
-    const step = SettingsNotifier.documentEditorZoomStep;
-    void bigger() => _setZoom(zoom + step);
-    void smaller() => _setZoom(zoom - step);
-    return {
-      for (final key in const [
-        LogicalKeyboardKey.equal,
-        LogicalKeyboardKey.add,
-        LogicalKeyboardKey.numpadAdd,
-      ]) ...{
-        SingleActivator(key, meta: true): bigger,
-        SingleActivator(key, control: true): bigger,
-      },
-      for (final key in const [
-        LogicalKeyboardKey.minus,
-        LogicalKeyboardKey.numpadSubtract,
-      ]) ...{
-        SingleActivator(key, meta: true): smaller,
-        SingleActivator(key, control: true): smaller,
-      },
-      for (final key in const [
-        LogicalKeyboardKey.digit0,
-        LogicalKeyboardKey.numpad0,
-      ]) ...{
-        SingleActivator(key, meta: true): () => _setZoom(1),
-        SingleActivator(key, control: true): () => _setZoom(1),
-      },
-    };
-  }
-
   /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
   /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
   /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
@@ -260,68 +186,59 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     onInsertImage: () => unawaited(_insertImage()),
   );
 
-  Widget _editor(ThemeData theme) => Shortcuts(
-    shortcuts: const {
-      SingleActivator(LogicalKeyboardKey.keyV, control: true):
-          _DocSmartPasteIntent(),
-      SingleActivator(LogicalKeyboardKey.keyV, meta: true):
-          _DocSmartPasteIntent(),
-    },
-    child: Actions(
-      actions: {
-        _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
-          onInvoke: (_) {
-            unawaited(_smartPaste());
-            return null;
-          },
-        ),
-      },
-      child: TextField(
-        controller: _controller,
-        focusNode: _editorFocus,
-        maxLines: null,
-        expands: true,
-        textAlignVertical: TextAlignVertical.top,
-        cursorColor: theme.colorScheme.primary,
-        keyboardType: TextInputType.multiline,
-        style: TextStyle(
-          fontFamily: 'monospace',
-          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-          fontSize: 14,
-          height: 1.5,
-          color: theme.colorScheme.onSurface,
-        ),
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.all(16),
-        ),
-      ),
-    ),
+  Widget _editor(ThemeData theme) => _documentSourceField(
+    theme,
+    controller: _controller,
+    focusNode: _editorFocus,
+    onSmartPaste: _smartPaste,
   );
 
-  Widget _preview(ThemeData theme, String source, {bool centered = false}) =>
-      Container(
-        color: theme.colorScheme.surface,
-        alignment: centered ? Alignment.topCenter : Alignment.topLeft,
-        child: SingleChildScrollView(
-          controller: _previewScroll,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: _styledDocumentBody(
-            _styleProfile,
-            DocumentMarkdownView(
-              source,
-              maxTextWidth: 720,
-              themeProfile: _styleProfile,
-              chartTheme: _styleProfile,
-              anchorBlockIndex: _anchorBlockIndex,
-              anchorKey: _anchorKey,
-              onEditChart: _editChart,
-              onEditTable: _editTable,
-            ),
-          ),
-        ),
-      );
+  Widget _preview(ThemeData theme, String source) => _documentLivePreview(
+    theme,
+    source,
+    scrollController: _previewScroll,
+    style: _styleProfile,
+    anchorBlockIndex: _anchorBlockIndex,
+    anchorKey: _anchorKey,
+    onEditChart: _editChart,
+    onEditTable: _editTable,
+  );
 }
+
+/// De live weergave naast de bron: hetzelfde document als de lezer tekent, in
+/// de documentstijl, met de anker- en bewerk-haken van de editor eraan.
+///
+/// Top-level en niet op de staat: het is een zuivere tekenfunctie van wat het
+/// meekrijgt, en het bewerkscherm zit op zijn klasseplafond.
+Widget _documentLivePreview(
+  ThemeData theme,
+  String source, {
+  required ScrollController scrollController,
+  required ThemeProfile? style,
+  required int anchorBlockIndex,
+  required GlobalKey? anchorKey,
+  required void Function(int, String) onEditChart,
+  required void Function(int, List<String>) onEditTable,
+}) => Container(
+  color: theme.colorScheme.surface,
+  child: SingleChildScrollView(
+    controller: scrollController,
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+    child: _styledDocumentBody(
+      style,
+      DocumentMarkdownView(
+        source,
+        maxTextWidth: 720,
+        themeProfile: style,
+        chartTheme: style,
+        anchorBlockIndex: anchorBlockIndex,
+        anchorKey: anchorKey,
+        onEditChart: onEditChart,
+        onEditTable: onEditTable,
+      ),
+    ),
+  ),
+);
 
 /// De breedte waarop het schrijfvlak staat: de tekstbreedte van het vel, de
 /// ingestelde leeskolom, of niets (het hele venster) — allemaal maal de zoom.
@@ -340,6 +257,135 @@ double? _documentWriteWidth(WidgetRef ref) {
       final width => width * zoom,
     },
     DocumentEditorWidth.full => null,
+  };
+}
+
+/// Het rauwe schrijfvlak van de Bron-stand: één monospace tekstveld met het
+/// slimme plakken eraan geknoopt.
+///
+/// Top-level en niet op de staat: het heeft niets nodig behalve de controller,
+/// de focus en de plak-afhandeling, en het bewerkscherm zit op zijn
+/// klasseplafond.
+Widget _documentSourceField(
+  ThemeData theme, {
+  required TextEditingController controller,
+  required FocusNode focusNode,
+  required Future<bool> Function() onSmartPaste,
+}) => Shortcuts(
+  shortcuts: const {
+    SingleActivator(LogicalKeyboardKey.keyV, control: true):
+        _DocSmartPasteIntent(),
+    SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+        _DocSmartPasteIntent(),
+  },
+  child: Actions(
+    actions: {
+      _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
+        onInvoke: (_) {
+          unawaited(onSmartPaste());
+          return null;
+        },
+      ),
+    },
+    child: TextField(
+      controller: controller,
+      focusNode: focusNode,
+      maxLines: null,
+      expands: true,
+      textAlignVertical: TextAlignVertical.top,
+      cursorColor: theme.colorScheme.primary,
+      keyboardType: TextInputType.multiline,
+      style: TextStyle(
+        fontFamily: 'monospace',
+        fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+        fontSize: 14,
+        height: 1.5,
+        color: theme.colorScheme.onSurface,
+      ),
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.all(16),
+      ),
+    ),
+  ),
+);
+
+/// Pagina-modus: het document op echte vellen, met de paginamaat, de marges en
+/// een eventuele drukkersafloop. Hier zie je wat er op welke bladzijde belandt
+/// — de vraag die een tekstverwerker beantwoordt en een doorlopende rol niet.
+/// Lezen en nakijken, niet typen: bewerken doe je in de visuele of de bron-stand.
+///
+/// Top-level en niet op de staat: hij heeft alleen de instellingen, de tekst en
+/// de stijl nodig, en het bewerkscherm zit op zijn klasseplafond.
+Widget _documentPagesLayout(
+  WidgetRef ref,
+  ThemeData theme,
+  String source, {
+  required ThemeProfile? style,
+  required String? projectPath,
+}) {
+  final settings = ref.watch(settingsProvider);
+  // Draagt het document zelf een paginaopmaak, dan wint die van de instelling —
+  // zie [effectiveDocumentPageSetup].
+  final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
+  return Container(
+    color: theme.colorScheme.surfaceContainerHighest,
+    child: PagedDocumentView(
+      markdown: source,
+      pageSize: setup.size!,
+      margins: setup.margins!,
+      profile: style,
+      projectPath: projectPath,
+      chapterPageBreak: settings.documentChapterPageBreak,
+      // Waar de noten komen staat in het document zelf; zie
+      // [documentFootnotePlacement].
+      footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
+      // Hier is de zoom meetkundig: het vel wordt groter of kleiner getekend, de
+      // indeling erop blijft die van het papier. Precies waarom je in deze stand
+      // inzoomt — om beter te zien wat er staat, niet om iets anders te laten
+      // breken.
+      scale: settings.documentEditorZoom,
+    ),
+  );
+}
+
+/// Zet de zoom van de documenteditor; de notifier klemt hem op zijn grenzen.
+void _setDocumentZoom(WidgetRef ref, double zoom) =>
+    unawaited(ref.read(settingsProvider.notifier).setDocumentEditorZoom(zoom));
+
+/// Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
+///
+/// Twee plustoetsen en twee mintoetsen: op de meeste indelingen zit + op
+/// shift-=, en dan levert het toetsenbord `equal` in plaats van `add`. Alleen
+/// `add` binden werkt op een cijferblok en nergens anders.
+Map<ShortcutActivator, VoidCallback> _documentZoomShortcuts(WidgetRef ref) {
+  final zoom = ref.read(settingsProvider).documentEditorZoom;
+  const step = kDocumentEditorZoomStep;
+  void bigger() => _setDocumentZoom(ref, zoom + step);
+  void smaller() => _setDocumentZoom(ref, zoom - step);
+  return {
+    for (final key in const [
+      LogicalKeyboardKey.equal,
+      LogicalKeyboardKey.add,
+      LogicalKeyboardKey.numpadAdd,
+    ]) ...{
+      SingleActivator(key, meta: true): bigger,
+      SingleActivator(key, control: true): bigger,
+    },
+    for (final key in const [
+      LogicalKeyboardKey.minus,
+      LogicalKeyboardKey.numpadSubtract,
+    ]) ...{
+      SingleActivator(key, meta: true): smaller,
+      SingleActivator(key, control: true): smaller,
+    },
+    for (final key in const [
+      LogicalKeyboardKey.digit0,
+      LogicalKeyboardKey.numpad0,
+    ]) ...{
+      SingleActivator(key, meta: true): () => _setDocumentZoom(ref, 1),
+      SingleActivator(key, control: true): () => _setDocumentZoom(ref, 1),
+    },
   };
 }
 

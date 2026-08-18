@@ -175,50 +175,6 @@ class DocumentMarkdownView extends StatelessWidget {
   static List<String> blockTexts(String markdown) =>
       _parse(markdown).map((b) => b.searchText).toList(growable: false);
 
-  /// De blokken die op een verse pagina horen te beginnen, als index in
-  /// dezelfde lijst als [blockTexts].
-  ///
-  /// Twee soorten, allebei uit het formaat en allebei gehonoreerd door de HTML-
-  /// en LaTeX-export (FILE_FORMAT.md §14.6): een `---` in de body ís een
-  /// pagina-einde, en met [chapterBreak] begint elk hoofdstuk (`H1`) op een
-  /// nieuw vel. Het eerste blok telt nooit mee — een breuk vóór de eerste regel
-  /// zou een leeg vel opleveren.
-  static Set<int> forcedPageBreaks(
-    String markdown, {
-    bool chapterBreak = false,
-  }) {
-    final blocks = _parse(markdown);
-    final breaks = <int>{};
-    // Wat er sinds de vorige breuk aan échte inhoud staat. Een `---` telt niet
-    // mee: in een paginaweergave ís hij het einde zelf, geen inhoud.
-    var contentSinceBreak = 0;
-    for (var i = 0; i < blocks.length; i++) {
-      final rule = blocks[i].kind == _Kind.rule;
-      final chapter =
-          chapterBreak &&
-          blocks[i].kind == _Kind.heading &&
-          blocks[i].level == 1;
-      if ((rule || chapter) && contentSinceBreak > 0) {
-        breaks.add(i);
-        contentSinceBreak = 0;
-      }
-      if (!rule) contentSinceBreak++;
-    }
-    return breaks;
-  }
-
-  /// De blokken die een kop zijn, als index in dezelfde lijst als [blockTexts].
-  ///
-  /// De paginaverdeling houdt ze vast aan de tekst eronder: een kop hoort niet
-  /// alleen onderaan een vel achter te blijven (zie `documentPageOffsets`).
-  static Set<int> headingBlocks(String markdown) {
-    final blocks = _parse(markdown);
-    return {
-      for (var i = 0; i < blocks.length; i++)
-        if (blocks[i].kind == _Kind.heading) i,
-    };
-  }
-
   /// De regelnummers (vanaf 0) van elke hoofdstukkop (`H1`) in [source], geteld
   /// met exact dezelfde grammatica als de weergave: een `#` binnen een fenced
   /// blok is code en telt niet mee, en een kop heeft een spatie na de hekjes.
