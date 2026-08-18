@@ -1649,6 +1649,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Pāreja "{doel}" norāda uz slaidu, kura vairs nav; prezentācijas laikā nekas nenotiek. Izvēlieties citu mērķa slaidu.',
   'In een cirkel': 'Aplis',
   'Onder elkaar': 'Saraksts',
   'Categorie': 'Kategorija',

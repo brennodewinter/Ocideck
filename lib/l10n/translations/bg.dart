@@ -1670,6 +1670,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Скокът „{doel}“ сочи към слайд, който вече не съществува; по време на презентацията не се случва нищо. Изберете друг целеви слайд.',
   'In een cirkel': 'Кръг',
   'Onder elkaar': 'Списък',
   'Categorie': 'Категория',

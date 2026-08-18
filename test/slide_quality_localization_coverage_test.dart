@@ -199,6 +199,7 @@ void main() {
       },
       SlideQualityIssueKind.questionNotAnswerable: {},
       SlideQualityIssueKind.emptySlide: {},
+      SlideQualityIssueKind.danglingJump: {'label': 'Naar prijzen'},
       SlideQualityIssueKind.findingUnknownSection: {'section': 'Notes'},
       SlideQualityIssueKind.privacyImage: {'rule': 'image.face', 'sample': '2'},
       SlideQualityIssueKind.privacyImageUnreadable: {'rule': 'image.face'},

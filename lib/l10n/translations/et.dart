@@ -1643,6 +1643,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Hüpe "{doel}" osutab slaidile, mida enam ei ole; esitluse ajal ei juhtu midagi. Valige teine sihtslaid.',
   'In een cirkel': 'Ring',
   'Onder elkaar': 'Loend',
   'Categorie': 'Kategooria',

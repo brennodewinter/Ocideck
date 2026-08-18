@@ -1,0 +1,38 @@
+{
+  "additions": {
+    "De sprong \"{doel}\" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.": {
+      "en": "The jump \"{doel}\" points to a slide that no longer exists; nothing happens while presenting. Choose a different target slide.",
+      "it": "Il salto \"{doel}\" punta a una diapositiva che non esiste più; durante la presentazione non succede nulla. Scegli un'altra diapositiva di destinazione.",
+      "de": "Der Sprung „{doel}“ verweist auf eine Folie, die es nicht mehr gibt; beim Präsentieren passiert nichts. Wählen Sie eine andere Zielfolie.",
+      "fr": "Le saut « {doel} » pointe vers une diapositive qui n'existe plus ; rien ne se passe pendant la présentation. Choisissez une autre diapositive cible.",
+      "es": "El salto \"{doel}\" apunta a una diapositiva que ya no existe; durante la presentación no ocurre nada. Elija otra diapositiva de destino.",
+      "fy": "De sprong \"{doel}\" wiist nei in dia dy't net mear bestiet; ûnder it presintearjen bart der neat. Kies in oare doeldia.",
+      "pap": "E salto \"{doel}\" ta apuntá na un slide ku no ta eksistí mas; durante e presentashon no ta pasa nada. Skohe un otro slide di destino.",
+      "la": "Saltus \"{doel}\" ad paginam quae iam non exstat spectat; dum praesentas nihil accidit. Aliam paginam destinatam elige.",
+      "id": "Lompatan \"{doel}\" mengarah ke slide yang sudah tidak ada; saat presentasi tidak terjadi apa-apa. Pilih slide tujuan lain.",
+      "pl": "Skok „{doel}“ wskazuje slajd, który już nie istnieje; podczas prezentacji nic się nie dzieje. Wybierz inny slajd docelowy.",
+      "uk": "Перехід «{doel}» указує на слайд, якого більше немає; під час презентації нічого не відбувається. Виберіть інший цільовий слайд.",
+      "gsw": "De Sprung «{doel}» zeigt uf e Folie, wo's nüme git; bim Presentiere passiert nüt. Wähl e anderi Zielfolie.",
+      "el": "Το άλμα «{doel}» οδηγεί σε διαφάνεια που δεν υπάρχει πλέον· κατά την παρουσίαση δεν συμβαίνει τίποτα. Επιλέξτε άλλη διαφάνεια προορισμού.",
+      "da": "Springet \"{doel}\" peger på et dias, der ikke længere findes; under præsentationen sker der ingenting. Vælg et andet måldias.",
+      "sv": "Hoppet \"{doel}\" pekar på en slide som inte längre finns; under presentationen händer ingenting. Välj en annan slide som mål.",
+      "hr": "Skok \"{doel}\" upućuje na slajd koji više ne postoji; tijekom izlaganja ništa se ne događa. Odaberite drugi odredišni slajd.",
+      "cs": "Skok „{doel}“ odkazuje na snímek, který už neexistuje; během prezentace se nic nestane. Vyberte jiný cílový snímek.",
+      "fi": "Hyppy \"{doel}\" osoittaa diaan, jota ei enää ole; esityksen aikana ei tapahdu mitään. Valitse toinen kohdedia.",
+      "bg": "Скокът „{doel}“ сочи към слайд, който вече не съществува; по време на презентацията не се случва нищо. Изберете друг целеви слайд.",
+      "lv": "Pāreja \"{doel}\" norāda uz slaidu, kura vairs nav; prezentācijas laikā nekas nenotiek. Izvēlieties citu mērķa slaidu.",
+      "lt": "Šuolis „{doel}“ nurodo į skaidrę, kurios nebėra; pristatymo metu nieko neįvyksta. Pasirinkite kitą paskirties skaidrę.",
+      "mt": "Il-qabża \"{doel}\" tipponta lejn slide li m'għadhiex teżisti; waqt il-preżentazzjoni ma jiġri xejn. Agħżel slide oħra bħala mira.",
+      "et": "Hüpe \"{doel}\" osutab slaidile, mida enam ei ole; esitluse ajal ei juhtu midagi. Valige teine sihtslaid.",
+      "hu": "A(z) \"{doel}\" ugrás olyan diára mutat, amely már nem létezik; bemutatás közben semmi sem történik. Válasszon másik céldiát.",
+      "ga": "Tagraíonn an léim \"{doel}\" do sleamhnán nach ann dó a thuilleadh; ní tharlaíonn aon rud le linn an chur i láthair. Roghnaigh sprioc-sleamhnán eile.",
+      "pt": "O salto \"{doel}\" aponta para um slide que já não existe; durante a apresentação não acontece nada. Escolha outro slide de destino.",
+      "ro": "Saltul „{doel}“ trimite către un diapozitiv care nu mai există; în timpul prezentării nu se întâmplă nimic. Alegeți alt diapozitiv țintă.",
+      "sl": "Skok »{doel}« kaže na diapozitiv, ki ne obstaja več; med predstavitvijo se ne zgodi nič. Izberite drug ciljni diapozitiv.",
+      "sk": "Skok „{doel}“ odkazuje na snímku, ktorá už neexistuje; počas prezentácie sa nič nestane. Vyberte inú cieľovú snímku.",
+      "tlh": "«{doel}» Sup HemtIq 'echletHom tu'lu'be'; cha'taHvIS pagh qaS. latlh HemtIq 'echletHom yIwIv.",
+      "tr": "\"{doel}\" atlaması artık var olmayan bir slayda işaret ediyor; sunum sırasında hiçbir şey olmuyor. Başka bir hedef slayt seçin."
+    }
+  },
+  "unchanged": []
+}

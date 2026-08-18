@@ -1665,6 +1665,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Saltus "{doel}" ad paginam quae iam non exstat spectat; dum praesentas nihil accidit. Aliam paginam destinatam elige.',
   'In een cirkel': 'Circulus',
   'Onder elkaar': 'Index',
   'Categorie': 'Categoria',

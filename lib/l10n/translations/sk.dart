@@ -1656,6 +1656,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok „{doel}“ odkazuje na snímku, ktorá už neexistuje; počas prezentácie sa nič nestane. Vyberte inú cieľovú snímku.',
   'In een cirkel': 'Kruh',
   'Onder elkaar': 'Zoznam',
   'Categorie': 'Kategória',

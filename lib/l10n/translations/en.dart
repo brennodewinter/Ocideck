@@ -847,6 +847,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'The jump "{doel}" points to a slide that no longer exists; nothing happens while presenting. Choose a different target slide.',
   'In een cirkel': 'Circle',
   'Onder elkaar': 'List',
   'Categorie': 'Category',

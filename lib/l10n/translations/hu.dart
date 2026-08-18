@@ -1652,6 +1652,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'A(z) "{doel}" ugrás olyan diára mutat, amely már nem létezik; bemutatás közben semmi sem történik. Válasszon másik céldiát.',
   'In een cirkel': 'Kör',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategória',

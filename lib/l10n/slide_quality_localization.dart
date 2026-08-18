@@ -310,6 +310,43 @@ String slideQualityCategoryLabel(
   };
 }
 
+/// De meldingen waar een stuk tekst van de auteur in staat — een pad, een
+/// bloklabel, een sectienaam. Die vullen we rechtstreeks in en nooit via
+/// `l10n.d()`: het is geen bronstring maar inhoud van de gebruiker.
+///
+/// Samen in één helper omdat ze dezelfde vorm delen, en omdat de switch in
+/// [formatSlideQualityIssue] anders over de methodegrens loopt.
+String _formatWithAuthorText(
+  AppLocalizations l10n,
+  SlideQualityIssue issue,
+) => switch (issue.kind) {
+  // Deckbreed: het logo wijst naar niets. Het pad staat erbij omdat de
+  // gebruiker juist dan wil weten waar de app zocht — zonder blijft "logo
+  // ontbreekt" een raadsel bovenop een lege hoek (#1298).
+  SlideQualityIssueKind.themeLogoMissing =>
+    l10n
+        .d(
+          'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.',
+        )
+        .replaceAll('{pad}', issue.args['path'] ?? ''),
+  // Non-lineaire navigatie (#1162): het label van het blok dat nergens meer
+  // uitkomt.
+  SlideQualityIssueKind.danglingJump =>
+    l10n
+        .d(
+          'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.',
+        )
+        .replaceAll('{doel}', issue.args['label'] ?? ''),
+  // De vier standaardkoppen blijven onvertaald — het zijn de
+  // taalonafhankelijke ankers die in de `.md` staan.
+  _ =>
+    l10n
+        .d(
+          'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.',
+        )
+        .replaceAll('{sectie}', issue.args['section'] ?? ''),
+};
+
 String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
   String label(String key) => l10n.d(issue.args[key] ?? key);
 
@@ -402,30 +439,18 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
       '${label('label')}${l10n.d(': ligt buiten de presentatie en gaat niet mee (')}'
           '${issue.args['path'] ?? ''}). '
           '${l10n.d('Sla de presentatie op om een kopie te maken.')}',
-    // Deckbreed: het logo wijst naar niets. Het pad staat erbij omdat de
-    // gebruiker juist dan wil weten waar de app zocht — zonder blijft "logo
-    // ontbreekt" een raadsel bovenop een lege hoek (#1298).
-    SlideQualityIssueKind.themeLogoMissing =>
-      l10n
-          .d(
-            'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.',
-          )
-          .replaceAll('{pad}', issue.args['path'] ?? ''),
+    SlideQualityIssueKind.themeLogoMissing ||
+    SlideQualityIssueKind.danglingJump ||
+    SlideQualityIssueKind.findingUnknownSection => _formatWithAuthorText(
+      l10n,
+      issue,
+    ),
     SlideQualityIssueKind.questionNotAnswerable => l10n.d(
       'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
     ),
     SlideQualityIssueKind.emptySlide => l10n.d(
       'Deze dia is leeg: hij toont niets op het scherm en in de export.',
     ),
-    // De sectienaam is tekst van de auteur: rechtstreeks invullen, nooit door
-    // l10n.d(). De vier standaardkoppen blijven onvertaald — het zijn de
-    // taalonafhankelijke ankers die in de `.md` staan.
-    SlideQualityIssueKind.findingUnknownSection =>
-      l10n
-          .d(
-            'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.',
-          )
-          .replaceAll('{sectie}', issue.args['section'] ?? ''),
     SlideQualityIssueKind.privacyIdentifier ||
     SlideQualityIssueKind.privacyFinancial ||
     SlideQualityIssueKind.privacyContact ||

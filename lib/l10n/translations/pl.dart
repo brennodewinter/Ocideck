@@ -1662,6 +1662,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok „{doel}“ wskazuje slajd, który już nie istnieje; podczas prezentacji nic się nie dzieje. Wybierz inny slajd docelowy.',
   'In een cirkel': 'Okrąg',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategoria',

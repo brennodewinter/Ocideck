@@ -1670,6 +1670,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Il-qabża "{doel}" tipponta lejn slide li m\'għadhiex teżisti; waqt il-preżentazzjoni ma jiġri xejn. Agħżel slide oħra bħala mira.',
   'In een cirkel': 'Ċirku',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategorija',

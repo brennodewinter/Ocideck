@@ -675,6 +675,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'De sprong "{doel}" wiist nei in dia dy\'t net mear bestiet; ûnder it presintearjen bart der neat. Kies in oare doeldia.',
   'In een cirkel': 'Sirkel',
   'Onder elkaar': 'Ûnder inoar',
   'Categorie': 'Kategory',

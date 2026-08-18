@@ -1667,6 +1667,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Saltul „{doel}“ trimite către un diapozitiv care nu mai există; în timpul prezentării nu se întâmplă nimic. Alegeți alt diapozitiv țintă.',
   'In een cirkel': 'Cerc',
   'Onder elkaar': 'Listă',
   'Categorie': 'Categorie',

@@ -1651,6 +1651,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok »{doel}« kaže na diapozitiv, ki ne obstaja več; med predstavitvijo se ne zgodi nič. Izberite drug ciljni diapozitiv.',
   'In een cirkel': 'Krog',
   'Onder elkaar': 'Seznam',
   'Categorie': 'Kategorija',

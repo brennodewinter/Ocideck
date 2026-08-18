@@ -675,6 +675,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Der Sprung „{doel}“ verweist auf eine Folie, die es nicht mehr gibt; beim Präsentieren passiert nichts. Wählen Sie eine andere Zielfolie.',
   'In een cirkel': 'Kreis',
   'Onder elkaar': 'Liste',
   'Categorie': 'Kategorie',

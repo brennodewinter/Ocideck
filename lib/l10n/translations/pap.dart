@@ -674,6 +674,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'E salto "{doel}" ta apuntá na un slide ku no ta eksistí mas; durante e presentashon no ta pasa nada. Skohe un otro slide di destino.',
   'In een cirkel': 'Sirkel',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategoria',

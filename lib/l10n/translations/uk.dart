@@ -1666,6 +1666,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Перехід «{doel}» указує на слайд, якого більше немає; під час презентації нічого не відбувається. Виберіть інший цільовий слайд.',
   'In een cirkel': 'Коло',
   'Onder elkaar': 'Список',
   'Categorie': 'Категорія',

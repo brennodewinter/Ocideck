@@ -1681,6 +1681,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Tagraíonn an léim "{doel}" do sleamhnán nach ann dó a thuilleadh; ní tharlaíonn aon rud le linn an chur i láthair. Roghnaigh sprioc-sleamhnán eile.',
   'In een cirkel': 'Ciorcal',
   'Onder elkaar': 'Liosta',
   'Categorie': 'Catagóir',

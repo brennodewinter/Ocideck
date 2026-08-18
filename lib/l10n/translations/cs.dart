@@ -1652,6 +1652,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok „{doel}“ odkazuje na snímek, který už neexistuje; během prezentace se nic nestane. Vyberte jiný cílový snímek.',
   'In een cirkel': 'Kruh',
   'Onder elkaar': 'Seznam',
   'Categorie': 'Kategorie',

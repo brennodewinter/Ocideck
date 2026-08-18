@@ -1652,6 +1652,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'De Sprung «{doel}» zeigt uf e Folie, wo\'s nüme git; bim Presentiere passiert nüt. Wähl e anderi Zielfolie.',
   'In een cirkel': 'Chreis',
   'Onder elkaar': 'Lischte',
   'Categorie': 'Kategorie',

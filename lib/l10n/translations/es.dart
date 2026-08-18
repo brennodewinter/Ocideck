@@ -673,6 +673,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'El salto "{doel}" apunta a una diapositiva que ya no existe; durante la presentación no ocurre nada. Elija otra diapositiva de destino.',
   'In een cirkel': 'Círculo',
   'Onder elkaar': 'Lista',
   'Categorie': 'Categoría',

@@ -1655,6 +1655,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Skok "{doel}" upućuje na slajd koji više ne postoji; tijekom izlaganja ništa se ne događa. Odaberite drugi odredišni slajd.',
   'In een cirkel': 'Krug',
   'Onder elkaar': 'Popis',
   'Categorie': 'Kategorija',

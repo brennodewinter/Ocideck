@@ -1650,6 +1650,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Hyppy "{doel}" osoittaa diaan, jota ei enää ole; esityksen aikana ei tapahdu mitään. Valitse toinen kohdedia.',
   'In een cirkel': 'Ympyrä',
   'Onder elkaar': 'Luettelo',
   'Categorie': 'Luokka',

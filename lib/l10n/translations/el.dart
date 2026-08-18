@@ -1675,6 +1675,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Το άλμα «{doel}» οδηγεί σε διαφάνεια που δεν υπάρχει πλέον· κατά την παρουσίαση δεν συμβαίνει τίποτα. Επιλέξτε άλλη διαφάνεια προορισμού.',
   'In een cirkel': 'Κύκλος',
   'Onder elkaar': 'Λίστα',
   'Categorie': 'Κατηγορία',

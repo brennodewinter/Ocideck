@@ -1649,6 +1649,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Lompatan "{doel}" mengarah ke slide yang sudah tidak ada; saat presentasi tidak terjadi apa-apa. Pilih slide tujuan lain.',
   'In een cirkel': 'Lingkaran',
   'Onder elkaar': 'Daftar',
   'Categorie': 'Kategori',

@@ -1649,6 +1649,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Hoppet "{doel}" pekar på en slide som inte längre finns; under presentationen händer ingenting. Välj en annan slide som mål.',
   'In een cirkel': 'Cirkel',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategori',

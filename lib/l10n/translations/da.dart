@@ -1650,6 +1650,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Springet "{doel}" peger på et dias, der ikke længere findes; under præsentationen sker der ingenting. Vælg et andet måldias.',
   'In een cirkel': 'Cirkel',
   'Onder elkaar': 'Liste',
   'Categorie': 'Kategori',

@@ -2567,6 +2567,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      '"{doel}" atlaması artık var olmayan bir slayda işaret ediyor; sunum sırasında hiçbir şey olmuyor. Başka bir hedef slayt seçin.',
   'In een cirkel': 'Daire',
   'Onder elkaar': 'Liste',
   'Categorie': 'Kategori',

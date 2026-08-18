@@ -1657,6 +1657,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'Šuolis „{doel}“ nurodo į skaidrę, kurios nebėra; pristatymo metu nieko neįvyksta. Pasirinkite kitą paskirties skaidrę.',
   'In een cirkel': 'Apskritimas',
   'Onder elkaar': 'Sąrašas',
   'Categorie': 'Kategorija',

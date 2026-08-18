@@ -1627,6 +1627,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      '«{doel}» Sup HemtIq \'echletHom tu\'lu\'be\'; cha\'taHvIS pagh qaS. latlh HemtIq \'echletHom yIwIv.',
   'In een cirkel': '\'ID',
   'Onder elkaar': 'tetlh',
   'Categorie': 'Segh',

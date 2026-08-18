@@ -1678,6 +1678,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
+      'O salto "{doel}" aponta para um slide que já não existe; durante a apresentação não acontece nada. Escolha outro slide de destino.',
   'In een cirkel': 'Círculo',
   'Onder elkaar': 'Lista',
   'Categorie': 'Categoria',
