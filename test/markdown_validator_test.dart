@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/models/menu.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/markdown_validator.dart';
@@ -10,6 +12,75 @@ import 'package:ocideck/services/markdown_validator.dart';
 void main() {
   final service = MarkdownService();
   final validator = MarkdownValidator();
+
+  // Wat de serialiser schrijft, moet de structuurcontrole kennen. Anders klaagt
+  // OciDeck over een dia die OciDeck zelf net heeft weggeschreven — precies wat
+  // er met `table-overdue` gebeurde: de schrijver zette het token, de lezer
+  // begreep het, en alleen de woordenlijst wist van niets. Eén losse proef per
+  // token vangt dat pas als iemand eraan denkt; deze proef laat de schrijver
+  // zélf de lijst opleveren, dus een optietoken bij een nieuw diatype kan niet
+  // meer stil buiten de woordenlijst blijven.
+  test(
+    'elk klassetoken dat de serialiser schrijft is bekend bij de controle',
+    () {
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            // Tabelopties: bewerkbaar én verlopen-datums markeren.
+            Slide.create(SlideType.table).copyWith(
+              title: 'Tabel',
+              tableEditable: true,
+              tableMarkOverdue: true,
+              tableRows: const [
+                ['Kop', 'Datum'],
+                ['Rij', '2020-01-01'],
+              ],
+            ),
+            // Elke tijdlijn-indeling en elke animatiestand.
+            for (final layout in TimelineLayout.values)
+              for (final reveal in TimelineReveal.values)
+                Slide.create(SlideType.timeline).copyWith(
+                  title: 'Tijdlijn',
+                  timelineLayout: layout,
+                  timelineReveal: reveal,
+                  bullets: const ['2020|Begin'],
+                ),
+            // Elke menu-indeling.
+            for (final layout in MenuLayout.values)
+              Slide.create(SlideType.menu).copyWith(
+                title: 'Menu',
+                menuLayout: layout,
+                bullets: const ['[Ergens heen](#doel)'],
+              ),
+            // De losse vlaggen die ook als klassetoken reizen.
+            Slide.create(SlideType.image).copyWith(
+              title: 'Beeld',
+              imagePath: 'mem:1',
+              imageTitleAbove: true,
+            ),
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Zonder chrome',
+              bullets: const ['x'],
+              showLogo: false,
+              showFooter: false,
+            ),
+            // En één van elk diatype, voor het basistoken uit `slideTypeMeta`.
+            for (final type in SlideType.values)
+              Slide.create(type).copyWith(title: type.name),
+          ],
+        ),
+      );
+
+      final onbekend = validator
+          .validate(markdown)
+          .issues
+          .where((i) => i.message.contains('onbekende class'))
+          .map((i) => i.message)
+          .toList();
+      expect(onbekend, isEmpty);
+    },
+  );
 
   test('valid generated deck has no errors', () {
     final markdown = service.generateDeck(
