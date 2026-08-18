@@ -228,6 +228,21 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(editor): een inspringniveau dat dieper is dan de knop kan, wordt niet
+  meer stil afgeknipt (#1558). De opsommingseditors klemden het niveau al bij
+  het *lezen* op hun maximum en schreven dat geklemde niveau weer terug. Eén
+  letter typen in het eerste item liet daarmee een dieper item zakken — een
+  regel die de gebruiker niet had aangeraakt. Dat trof geïmporteerde en
+  geplakte lijsten: de parser rekent twee spaties per niveau, terwijl markdown
+  doorgaans met vier wordt geschreven, dus vier zichtbare niveaus staan intern
+  op 0-2-4-6. Lezen gebeurt nu ongeklemd; alleen de inspringknop stopt bij het
+  maximum, dat als één gedeelde constante naast `bulletLevel` staat met de
+  aantekening dat het formaat zélf geen maximum kent. De boomeditor hield
+  daarbij een eigen maximum van 6 aan waar de opsommingseditors 4 deden, zonder
+  dat dat ergens besloten was; die lopen nu gelijk. En uitspringen vanaf een
+  dieper niveau ging daar met één klik terug naar het maximum in plaats van één
+  stap omhoog — ook dat is recht.
+
 - fix(plakken): een geneste opsomming houdt zijn inspringing (#1556, #1557,
   #1560, #1561). Bij het plakken in de broneditor van documentmodus kon een
   lijst op drie manieren plat of scheef binnenkomen. Eén: de schoonmaak wiste
