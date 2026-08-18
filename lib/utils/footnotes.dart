@@ -182,3 +182,51 @@ int _endOfDefinition(List<String> lines, int start) {
   }
   return end;
 }
+
+/// Het eerstvolgende vrije getal als label voor een nieuwe voetnoot in
+/// [markdown].
+///
+/// Een getal en geen woord: `[^1]` is wat iedereen schrijft, en het label is
+/// toch niet wat de lezer ziet — de weergave nummert door op leesvolgorde. Wie
+/// een sprekend label wil (`[^bron]`) typt dat met de hand; dat blijft staan.
+String nextFootnoteLabel(String markdown) {
+  final used = <String>{
+    ...footnoteReferencesIn(markdown),
+    for (final match in _definitionStart.allMatches(markdown)) match.group(1)!,
+  };
+  var next = 1;
+  while (used.contains('$next')) {
+    next++;
+  }
+  return '$next';
+}
+
+/// [source] met een voetnoot met [label] erin: het merkteken op de cursor (of
+/// in plaats van de selectie tussen [start] en [end]), de lege definitie
+/// onderaan.
+///
+/// Levert de nieuwe tekst plus de plek waar de cursor hoort te komen: áchter de
+/// dubbele punt van de definitie, want dat is waar je nu gaat typen. De
+/// bronstand kent geen twee cursors, en de noot invullen is het echte werk —
+/// het merkteken staat er al.
+(String, int) insertFootnoteIntoSource(
+  String source,
+  int start,
+  int end,
+  String label,
+) {
+  final from = start.clamp(0, source.length);
+  final to = end.clamp(from, source.length);
+  final marker = '[^$label]';
+  final withMarker = source.replaceRange(from, to, marker);
+  final definition = '[^$label]: ';
+  // Precies één witregel tussen de tekst en de definitie; een bestand dat al op
+  // een regeleinde eindigde krijgt er niet nog eens twee bij.
+  final separator = withMarker.trimRight().isEmpty
+      ? ''
+      : (withMarker.endsWith('\n\n')
+            ? ''
+            : (withMarker.endsWith('\n') ? '\n' : '\n\n'));
+  final next = '$withMarker$separator$definition';
+  return (next, next.length);
+}

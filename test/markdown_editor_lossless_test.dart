@@ -65,7 +65,6 @@ void main() {
   // bronstand met de beschermende hint. Wie alleen kíjkt, houdt zijn tekst.
   for (final geval in const [
     ('backslash-ontsnappingen', r'Prijs is 5 \* 3, pad C:\\temp'),
-    ('een voetnoot', 'Zie hier[^1]\n\n[^1]: de noot'),
   ]) {
     testWidgets('kijken in de visuele stand laat ${geval.$1} intact', (
       tester,
@@ -104,6 +103,28 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(controller.text, table);
+  });
+
+  // Een voetnoot valt sinds #1554 evenmin terug: de verwijzing wordt een
+  // inline-embed en de definitie een blok-embed. Dat is precies de functie
+  // waarvoor de visuele stand het hardst nodig is — je schrijft een noot
+  // terwijl je in de tekst zit.
+  testWidgets('kijken in de visuele stand laat een voetnoot intact (embed)', (
+    tester,
+  ) async {
+    const note = 'Zie hier[^1]\n\n[^1]: de noot';
+    final controller = TextEditingController(text: note);
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(_testApp(_Host(controller: controller)));
+    await tester.tap(find.text('wissel'));
+    await tester.pumpAndSettle();
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsNothing);
+    await tester.tap(find.text('wissel'));
+    await tester.pumpAndSettle();
+
+    expect(controller.text, note);
   });
 
   testWidgets('een echte wijziging in de visuele stand komt wél terug', (

@@ -4,7 +4,6 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
-import 'divider_embed_builder.dart';
 import '../reader/document_markdown_view.dart'
     show
         documentHeadingSize,
@@ -13,6 +12,8 @@ import '../reader/document_markdown_view.dart'
         kDocumentListRowGap,
         kDocumentParagraphGap,
         kDocumentSubheadingGapTop;
+import 'divider_embed_builder.dart';
+import 'footnote_embed_builder.dart';
 import 'markdown_editor_theme.dart';
 import 'table_embed_builder.dart';
 import 'toc_embed_builder.dart';
@@ -240,10 +241,15 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // builder tekent Quill er een RenderErrorBox voor. De
                 // `<!-- toc -->`-marker komt als `x-embed-toc`-embed binnen en
                 // wordt de inhoudsopgave-voorbeeldweergave.
+                // De voetnoot komt in twee delen binnen: de verwijzing als
+                // inline-embed (het merkteken) en de definitie als blok-embed
+                // (de invulbare notenregel).
                 embedBuilders: const [
                   TableEmbedBuilder(),
                   DividerEmbedBuilder(),
                   TocEmbedBuilder(),
+                  FootnoteRefEmbedBuilder(),
+                  FootnoteDefEmbedBuilder(),
                 ],
                 autoFocus: false,
               ),

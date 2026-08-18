@@ -82,6 +82,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         profile: _styleProfile,
         projectPath: _projectPath,
         chapterPageBreak: settings.documentChapterPageBreak,
+        // Waar de noten komen staat in het document zelf; zie
+        // [documentFootnotePlacement].
+        footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
         // Hier is de zoom meetkundig: het vel wordt groter of kleiner getekend,
         // de indeling erop blijft die van het papier. Precies waarom je in deze
         // stand inzoomt — om beter te zien wat er staat, niet om iets anders te
@@ -247,6 +250,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
+    insertFootnoteLabel: _pendingFootnoteLabel,
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
     revealTitle: _revealTitle,
@@ -348,6 +352,24 @@ double _documentPageTextWidthPx(WidgetRef ref) {
     ref.read(documentProvider).document?.source ?? '',
   );
   return pageTextWidthPx(setup.size!, setup.margins!);
+}
+
+/// Zet de voetnoten van dít document achterin (`reference-location: document`)
+/// of weer onderaan de bladzijde.
+///
+/// Schrijft in de front matter van het bestand van de gebruiker — maar alleen
+/// de afwijking: "onderaan de bladzijde" is wat elke lezer zonder aanwijzing al
+/// doet, dus die keuze haalt de sleutel juist weg. Een document dat er niets
+/// over zegt, blijft een `.md` zonder front matter.
+void _setFootnotePlacement(WidgetRef ref, bool atEnd) {
+  final doc = ref.read(documentProvider).document;
+  if (doc == null) return;
+  final next = withDocumentFootnotePlacement(
+    doc.source,
+    atEnd ? FootnotePlacement.document : FootnotePlacement.page,
+  );
+  if (next == doc.source) return;
+  ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
 }
 
 /// Laat kiezen of de huidige paginaopmaak in dít document komt te staan of uit

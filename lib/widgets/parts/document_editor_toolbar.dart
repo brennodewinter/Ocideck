@@ -34,6 +34,13 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertImage;
   final VoidCallback onInsertPageBreak;
   final VoidCallback onInsertToc;
+  final VoidCallback onInsertFootnote;
+
+  /// Staan de voetnoten van dít document achterin in plaats van onderaan de
+  /// bladzijde, en de omschakeling ervoor. De keuze landt in de front matter
+  /// van het document zelf.
+  final bool footnotesAtEnd;
+  final ValueChanged<bool> onFootnotesAtEndChanged;
 
   /// Zet in één keer een `---` vóór elk hoofdstuk (`H1`) behalve het eerste.
   /// Geen invoeging op de cursor maar een bewerking van het hele document —
@@ -81,6 +88,9 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertImage,
     required this.onInsertPageBreak,
     required this.onInsertToc,
+    required this.onInsertFootnote,
+    required this.footnotesAtEnd,
+    required this.onFootnotesAtEndChanged,
     required this.onApplyChapterBreaks,
     required this.onPaste,
     required this.onUndo,
@@ -334,6 +344,7 @@ class _DocEditorToolbar extends StatelessWidget {
         5 => onInsertPageBreak(),
         6 => onInsertToc(),
         7 => onApplyChapterBreaks(),
+        8 => onInsertFootnote(),
         _ => onPaste(),
       },
       itemBuilder: (context) => [
@@ -347,6 +358,7 @@ class _DocEditorToolbar extends StatelessWidget {
           l10n.d('Pagina-einde'),
         ),
         _insertItem(6, Icons.list_outlined, l10n.d('Inhoudsopgave')),
+        _insertItem(8, Icons.superscript, l10n.d('Voetnoot')),
         const PopupMenuDivider(),
         _insertItem(
           7,
@@ -451,9 +463,34 @@ class _DocEditorToolbar extends StatelessWidget {
             onOpenSettings();
           case 1:
             onConvertToPresentation();
+          case 2:
+            onFootnotesAtEndChanged(!footnotesAtEnd);
         }
       },
       itemBuilder: (context) => [
+        // De plaatsing van de voetnoten is een eigenschap van dít document en
+        // landt in zijn front matter; daarom hier en niet bij de instellingen.
+        PopupMenuItem<int>(
+          value: 2,
+          child: Row(
+            children: [
+              Icon(
+                footnotesAtEnd
+                    ? Icons.check_box
+                    : Icons.check_box_outline_blank,
+                size: 17,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Voetnoten achterin het document'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const PopupMenuDivider(),
         PopupMenuItem<int>(
           value: 0,
           child: Row(

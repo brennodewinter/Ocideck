@@ -20,6 +20,7 @@ import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
+import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
 import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
@@ -41,6 +42,7 @@ import '../utils/doc_link.dart' show headingSlug;
 import '../utils/error_snackbar.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
+import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import '../utils/markdown_visual_compatibility.dart'
@@ -66,6 +68,7 @@ import 'shell/document_save_actions.dart';
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_editor_layouts.dart';
 part 'parts/document_source_rewrites.dart';
+part 'parts/document_editor_inserts.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -134,6 +137,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Zie [_insertBlock] voor waarom de invoeging daar niet via de bron loopt.
   int _insertSignal = 0;
   String? _pendingInsertBlock;
+
+  /// Het label van de voetnoot die op hetzelfde [_insertSignal] moet worden
+  /// ingevoegd, of `null` wanneer de invoeging een gewoon blok is.
+  String? _pendingFootnoteLabel;
 
   /// Waar tussen het aanvragen van zo'n invoeging en de controllerwijziging die
   /// eruit volgt: die ene wijziging is een eigen bewerking, geen voortzetting
@@ -517,6 +524,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onInsertChart: _insertChart,
                 onInsertPageBreak: _insertPageBreak,
                 onInsertToc: _insertToc,
+                onInsertFootnote: _insertFootnote,
+                footnotesAtEnd:
+                    documentFootnotePlacement(_pageSetupSource(ref)) ==
+                    FootnotePlacement.document,
+                onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
                 onApplyChapterBreaks: () =>
                     applyChapterBreaksToDocument(context, ref),
                 onInsertTable: _insertTable,
@@ -659,11 +671,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // de editor het zelf, op zijn eigen cursor.
     if (_viewMode == _DocViewMode.visual &&
         markdownRoundTripsVisually(_controller.text)) {
-      _expectVisualInsert = true;
-      setState(() {
-        _pendingInsertBlock = block;
-        _insertSignal++;
-      });
+      _requestVisualInsert(block: block);
       return;
     }
     final sel = _controller.selection;
@@ -683,6 +691,20 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
     _applyingExternal = false;
     _commitDocumentBody(ref, next, coalesceKey: null);
+  }
+
+  /// Vraagt de visuele editor om een invoeging op zíjn cursor: een blok, of een
+  /// voetnoot (merkteken op de cursor, notenregel onderaan).
+  ///
+  /// Staat in de klasse en niet bij de andere invoegingen, omdat alleen een
+  /// `State` zijn eigen [setState] mag aanroepen — een extensie ernaast niet.
+  void _requestVisualInsert({String? block, String? footnoteLabel}) {
+    _expectVisualInsert = true;
+    setState(() {
+      _pendingInsertBlock = block;
+      _pendingFootnoteLabel = footnoteLabel;
+      _insertSignal++;
+    });
   }
 
   /// Slim plakken: herkent afbeelding → `![](…)`, spreadsheet/tabel → GFM-
@@ -746,106 +768,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   void _undo() => ref.read(documentProvider.notifier).undo();
   void _redo() => ref.read(documentProvider.notifier).redo();
-
-  /// Voeg een verse grafiek in: dezelfde [ChartEditor] als een dia (met een
-  /// wegwerp-[Slide]), en bij 'Toepassen' een ```chart-blok op de cursorpositie.
-  /// Identiek aan het dia-mechanisme — geen tweede grafiekweg (DOCUMENT_MODE.md
-  /// §4.2). Zonder ingevulde data blijft het een geldig, later invulbaar blok.
-  Future<void> _insertChart() async {
-    final slide = Slide.create(SlideType.chart);
-    var spec = ChartSpec.parse(slide.customMarkdown).toBlock();
-    final apply = await showEmbedEditorDialog(
-      context,
-      ChartEditor(
-        slide: slide,
-        themeAnimationDurationMs: 0,
-        nestedInScrollView: true,
-        onUpdate: (s) => spec = s.customMarkdown,
-      ),
-    );
-    if (apply != true || !mounted) return;
-    _insertBlock('```chart\n$spec\n```');
-  }
-
-  /// Voeg een verse tabel in: de [TableEditor] met een leeg 2×2-raster, en bij
-  /// 'Toepassen' een GFM-pijptabel op de cursorpositie.
-  Future<void> _insertTable() async {
-    final slide = Slide.create(SlideType.table);
-    var rows = slide.tableRows;
-    final apply = await showEmbedEditorDialog(
-      context,
-      TableEditor(
-        slide: slide,
-        nestedInScrollView: true,
-        documentContext: true,
-        onUpdate: (s) => rows = s.tableRows,
-      ),
-    );
-    if (apply != true || !mounted) return;
-    _insertBlock(encodeMarkdownTable(rows));
-  }
-
-  /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal
-  /// startdiagram (knoop-id's, geen tekst om te vertalen). Bewerken gaat via de
-  /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).
-  void _insertMermaid() =>
-      _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
-
-  /// Voeg een pagina-einde in: een `---`-scheiding (een gewone Markdown-thematische
-  /// breuk). Een document blijft doorlopend op het scherm; de export (HTML/PDF/
-  /// LaTeX) maakt er een echt nieuw blad van. Draagbaar: elke Markdown-lezer toont
-  /// `---` als scheidingslijn.
-  void _insertPageBreak() => _insertBlock('---');
-
-  /// Feature 4: voeg een inhoudsopgave-marker in op de cursorpositie. De
-  /// marker `<!-- toc -->` is een HTML-commentaar dat elke vreemde
-  /// Markdown-lezer negeert; OciDeck regenereert de TOC op deze plek bij
-  /// export. De gegenereerde inhoud wordt niet in de `.md` opgeslagen.
-  void _insertToc() => _insertBlock('<!-- toc -->');
-
-  /// Voeg een afbeelding in via de carrousel (bibliotheken + open presentaties
-  /// + Bladeren…). De gekozen file gaat door [ImageService.importIntoDeck]
-  /// (grootte-cap, magic-bytes, kopie naar `images/` of staging) en landt als
-  /// `![…](…)` op de cursorpositie — geen aparte assetweg naast de dia-import.
-  Future<void> _insertImage() async {
-    final state = ref.read(documentProvider);
-    final settings = ref.read(settingsProvider);
-    final projectPath = state.filePath == null
-        ? null
-        : p.dirname(state.filePath!);
-    final tabs = ref.read(tabsProvider).tabs;
-    // Zelfde afbeeldingspool als presentatiemodus: open decks + bibliotheek.
-    // Recente presentaties leveren hun images/logos (niet de hele map).
-    final searchPaths = documentImageSearchPaths(
-      projectPath,
-      settings.libraryPaths,
-      openDeckProjectPaths: [
-        for (final tab in tabs)
-          ?tab.deckNotifierOrNull?.currentState.deck?.projectPath,
-      ],
-      recentPresentationDirectories: [
-        for (final recent in settings.recentFiles)
-          if (recent.kind.isPresentation) p.dirname(recent.path),
-      ],
-    );
-    final picked = await ImageCarouselPicker.show(
-      context,
-      searchPaths: searchPaths,
-      captionService: ref.read(captionServiceProvider),
-      descriptionService: ref.read(descriptionServiceProvider),
-      // Alleen deck-tabs: documenttabs hebben geen deckNotifier (gooit anders).
-      openDeckFiles: [
-        for (final tab in tabs) ?tab.deckNotifierOrNull?.currentState.filePath,
-      ],
-    );
-    if (picked == null || !mounted) return;
-    final reference = await ref
-        .read(imageServiceProvider)
-        .importIntoDeck(picked.path, projectPath: projectPath);
-    if (!mounted) return;
-    final alt = markdownImageAlt(picked.caption);
-    _insertBlock('![$alt]($reference)');
-  }
 
   /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
   /// ([_documentOutlineRail]); het scherm levert alleen de stand en wat er bij

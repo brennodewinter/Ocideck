@@ -451,6 +451,65 @@ void main() {
     expect(n.currentState.document!.styleName, isNull);
   });
 
+  testWidgets('het invoeg-palet schrijft een voetnoot in de bron', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('Tekst.'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Voetnoot'));
+    await tester.pumpAndSettle();
+
+    // Het merkteken op de cursor, de lege notenregel eronder om te vullen.
+    expect(n.currentState.document!.body, contains('[^1]'));
+    expect(n.currentState.document!.body, contains('[^1]: '));
+  });
+
+  testWidgets('een tweede voetnoot krijgt het volgende vrije label', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('Tekst [^1].\n\n[^1]: Eerste.\n'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Voetnoot'));
+    await tester.pumpAndSettle();
+
+    expect(n.currentState.document!.body, contains('[^2]: '));
+  });
+
+  testWidgets('Visueel: een voetnoot gooit je niet terug in de brontekst', (
+    tester,
+  ) async {
+    // Precies de functie waarvoor de visuele stand het hardst nodig is: je
+    // schrijft een noot terwijl je in de tekst zit.
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('Een zin [^1].\n\n[^1]: De noot.\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsNothing);
+  });
+
   testWidgets('het invoeg-palet biedt elk item precies één keer', (
     tester,
   ) async {

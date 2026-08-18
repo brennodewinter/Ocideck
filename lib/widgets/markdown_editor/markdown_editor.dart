@@ -6,6 +6,7 @@ import '../../theme/app_theme.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
+import '../../utils/footnote_embed_syntax.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_visual_compatibility.dart';
@@ -83,6 +84,14 @@ class MarkdownNotesEditor extends StatefulWidget {
   final int insertSignal;
   final String? insertMarkdownBlock;
 
+  /// Bij hetzelfde [insertSignal]: voeg een voetnoot met dit label in — het
+  /// merkteken op de cursor en de (lege) notenregel onderaan het document.
+  ///
+  /// Niet via [insertMarkdownBlock], want een voetnoot is geen blok: het
+  /// merkteken hoort middenin de zin waar je staat, en de definitie hoort
+  /// ergens anders. Twee plekken in één handeling, dus een eigen weg.
+  final String? insertFootnoteLabel;
+
   /// Optioneel: vang plakken af (afbeelding/tabel) vóór de standaard tekstplak.
   final Future<bool> Function()? tryConsumePaste;
 
@@ -118,6 +127,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.onVisualCaret,
     this.insertSignal = 0,
     this.insertMarkdownBlock,
+    this.insertFootnoteLabel,
     this.tryConsumePaste,
     this.onInsertImage,
   });
@@ -256,10 +266,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       // Na het build-frame: een documentwijziging tijdens didUpdateWidget mag
       // niet (zelfde reden als bij het springen hieronder).
       final block = widget.insertMarkdownBlock;
+      final footnote = widget.insertFootnoteLabel;
       final signal = widget.insertSignal;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || widget.insertSignal != signal || block == null) return;
-        _insertMarkdownBlockAtCaret(block);
+        if (!mounted || widget.insertSignal != signal) return;
+        if (footnote != null) {
+          _insertFootnoteAtCaret(footnote);
+        } else if (block != null) {
+          _insertMarkdownBlockAtCaret(block);
+        }
       });
     }
     if (widget.revealSignal != oldWidget.revealSignal) {
@@ -292,6 +307,35 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       TextSelection.collapsed(
         offset: at + (ownLine ? 1 : 0) + blockDelta.length,
       ),
+      ChangeSource.local,
+    );
+  }
+
+  /// Voeg een voetnoot met [label] in: het merkteken op de cursor, de lege
+  /// notenregel onderaan het document.
+  ///
+  /// Twee invoegingen, in deze volgorde: het merkteken eerst, want dat verschuift
+  /// het einde van het document met één positie. Andersom zou de notenregel op
+  /// de oude lengte landen en dus één teken te vroeg.
+  void _insertFootnoteAtCaret(String label) {
+    final quill = _quillController;
+    if (quill == null) return;
+    final caret = quill.selection.isValid
+        ? quill.selection.baseOffset.clamp(0, quill.document.length - 1)
+        : quill.document.length - 1;
+    quill.replaceText(
+      caret,
+      0,
+      EmbeddableFootnoteRef(label),
+      TextSelection.collapsed(offset: caret + 1),
+    );
+    final end = quill.document.length - 1;
+    quill.compose(
+      Delta()
+        ..retain(end)
+        ..insert('\n')
+        ..insert(EmbeddableFootnoteDef(label, '').toJson()),
+      TextSelection.collapsed(offset: caret + 1),
       ChangeSource.local,
     );
   }
