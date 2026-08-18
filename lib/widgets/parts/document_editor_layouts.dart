@@ -221,6 +221,9 @@ Widget _documentLivePreview(
   required void Function(int, List<String>) onEditTable,
 }) => Container(
   color: theme.colorScheme.surface,
+  // Boven-links, niet gecentreerd: de weergave vult het paneel en de tekst
+  // begint waar hij op het vel ook zou beginnen.
+  alignment: Alignment.topLeft,
   child: SingleChildScrollView(
     controller: scrollController,
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
