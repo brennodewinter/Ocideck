@@ -131,25 +131,43 @@ class TableEditController extends ChangeNotifier {
     return pending;
   }
 
-  void focusCell(int r, int c) {
+  void focusCell(int r, int c, {TableCaret caret = TableCaret.selectAll}) {
     if (r < 0 || r >= _nodes.length || c < 0 || c >= _nodes[r].length) return;
     _nodes[r][c].requestFocus();
     final text = _cells[r][c].text;
     // Hele celinhoud selecteren bij het binnenkomen, zoals een rekenblad doet:
-    // doortypen vervangt, een pijltje zet de cursor.
-    _cells[r][c].selection = TextSelection(
-      baseOffset: 0,
-      extentOffset: text.length,
-    );
+    // doortypen vervangt, een pijltje zet de cursor. Kom je met ← of → binnen,
+    // dan is het juist tekst die doorloopt en hoort de cursor aan de kant te
+    // staan waar je vandaan komt — daar zou selecteren je vorige woord wissen
+    // zodra je verder typt.
+    _cells[r][c].selection = switch (caret) {
+      TableCaret.selectAll => TextSelection(
+        baseOffset: 0,
+        extentOffset: text.length,
+      ),
+      TableCaret.start => const TextSelection.collapsed(offset: 0),
+      TableCaret.end => TextSelection.collapsed(offset: text.length),
+    };
   }
 
   /// Toetsafhandeling op cel ([r], [c]). Tab loopt door de cellen en maakt op de
   /// laatste cel een rij bij; Enter springt naar dezelfde kolom een rij lager;
-  /// plakken vult vanaf deze cel een heel raster.
+  /// de pijltjes lopen als in een rekenblad door de tabel (zie
+  /// [tableArrowTarget]); plakken vult vanaf deze cel een heel raster.
   KeyEventResult handleCellKey(int r, int c, KeyEvent event) {
-    if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final keys = HardwareKeyboard.instance;
     final meta = keys.isControlPressed || keys.isMetaPressed;
+    final arrow = _arrowOf(event.logicalKey);
+    // De pijltjes luisteren ook naar een ingehouden toets: een rij doorlopen
+    // hoort niet per cel een nieuwe aanslag te kosten. De rest niet — een Tab
+    // die rijen blijft bijmaken zolang je hem vasthoudt is geen dienst.
+    if (arrow != null && (event is KeyDownEvent || event is KeyRepeatEvent)) {
+      // Shift = selecteren, Ctrl/Cmd = per woord of naar het uiteinde: allebei
+      // bewegingen bínnen de cel, die het tekstveld zelf hoort af te handelen.
+      if (keys.isShiftPressed || meta) return KeyEventResult.ignored;
+      return _moveByArrow(r, c, arrow);
+    }
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
 
     if (event.logicalKey == LogicalKeyboardKey.keyV && meta) {
       Clipboard.getData(Clipboard.kTextPlain).then((data) {
@@ -198,6 +216,43 @@ class TableEditController extends ChangeNotifier {
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
+  }
+
+  static TableArrow? _arrowOf(LogicalKeyboardKey key) => switch (key) {
+    LogicalKeyboardKey.arrowLeft => TableArrow.left,
+    LogicalKeyboardKey.arrowRight => TableArrow.right,
+    LogicalKeyboardKey.arrowUp => TableArrow.up,
+    LogicalKeyboardKey.arrowDown => TableArrow.down,
+    _ => null,
+  };
+
+  /// Springt naar de buurcel wanneer de cursor aan de rand van de celinhoud
+  /// staat, en laat de toets anders door naar het tekstveld.
+  KeyEventResult _moveByArrow(int r, int c, TableArrow arrow) {
+    final controller = _cells[r][c];
+    final text = controller.text;
+    final selection = controller.selection;
+    // Zonder geldige selectie weet niemand waar de cursor staat; dan is
+    // doorlaten het veilige antwoord.
+    if (!selection.isValid) return KeyEventResult.ignored;
+    final offset = selection.baseOffset.clamp(0, text.length);
+    // Staat er iets geselecteerd, dan collabeert het pijltje die selectie —
+    // dat is een beweging binnen de cel, niet eruit.
+    final collapsed = selection.isCollapsed;
+    final target = tableArrowTarget(
+      arrow: arrow,
+      row: r,
+      col: c,
+      rowCount: rowCount,
+      colCount: colCount,
+      atTextStart: collapsed && offset <= 0,
+      atTextEnd: collapsed && offset >= text.length,
+      onFirstLine: collapsed && !text.substring(0, offset).contains('\n'),
+      onLastLine: collapsed && !text.substring(offset).contains('\n'),
+    );
+    if (target == null) return KeyEventResult.ignored;
+    focusCell(target.row, target.col, caret: target.caret);
+    return KeyEventResult.handled;
   }
 
   /// Plakt [text] vanaf cel ([r], [c]). Herkent de tekst zich als tabel (een

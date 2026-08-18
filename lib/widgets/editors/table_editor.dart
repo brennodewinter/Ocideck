@@ -231,8 +231,19 @@ class _TableEditorState extends State<TableEditor> {
   /// loopt door de cellen — op de laatste cel wordt een rij bijgemaakt — zodat
   /// de bouwer dezelfde cel-navigatie heeft als de presentatiemodus.
   KeyEventResult _onCellKey(int r, int c, KeyEvent event) {
-    if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final keys = HardwareKeyboard.instance;
+    final arrow = _arrowOf(event.logicalKey);
+    // Dezelfde rekenblad-navigatie als de tabel in de documentmodus: eerst door
+    // de tekst, en aan de rand van de celinhoud naar de buurcel. De regel staat
+    // in `tableArrowTarget`, gedeeld met die tabel — twee tabellen die anders
+    // op een pijltje reageren is precies wat een mens niet begrijpt.
+    if (arrow != null && (event is KeyDownEvent || event is KeyRepeatEvent)) {
+      if (keys.isShiftPressed || keys.isControlPressed || keys.isMetaPressed) {
+        return KeyEventResult.ignored;
+      }
+      return _moveByArrow(r, c, arrow);
+    }
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final pasteCombo =
         (event.logicalKey == LogicalKeyboardKey.keyV &&
             (keys.isControlPressed || keys.isMetaPressed)) ||
@@ -367,13 +378,59 @@ class _TableEditorState extends State<TableEditor> {
 
   /// Focust cel (r, c) direct als de node al bestaat (Tab naar een bestaande
   /// cel); de [build] hoeft dan niet opnieuw te draaien.
-  void _moveFocusTo(int r, int c) {
+  void _moveFocusTo(int r, int c, {TableCaret? caret}) {
     if (r >= 0 &&
         r < _focusNodes.length &&
         c >= 0 &&
         c < _focusNodes[r].length) {
       _focusNodes[r][c].requestFocus();
+      if (caret == null) return;
+      final text = _cells[r][c].text;
+      // Kom je met een pijltje binnen, dan loopt de tekst door en hoort de
+      // cursor aan de kant te staan waar je vandaan komt; met ↑/↓ is het een
+      // celsprong en staat de hele inhoud klaar om vervangen te worden.
+      _cells[r][c].selection = switch (caret) {
+        TableCaret.selectAll => TextSelection(
+          baseOffset: 0,
+          extentOffset: text.length,
+        ),
+        TableCaret.start => const TextSelection.collapsed(offset: 0),
+        TableCaret.end => TextSelection.collapsed(offset: text.length),
+      };
     }
+  }
+
+  static TableArrow? _arrowOf(LogicalKeyboardKey key) => switch (key) {
+    LogicalKeyboardKey.arrowLeft => TableArrow.left,
+    LogicalKeyboardKey.arrowRight => TableArrow.right,
+    LogicalKeyboardKey.arrowUp => TableArrow.up,
+    LogicalKeyboardKey.arrowDown => TableArrow.down,
+    _ => null,
+  };
+
+  /// Springt naar de buurcel wanneer de cursor aan de rand van de celinhoud
+  /// staat, en laat de toets anders door naar het tekstveld.
+  KeyEventResult _moveByArrow(int r, int c, TableArrow arrow) {
+    final controller = _cells[r][c];
+    final text = controller.text;
+    final selection = controller.selection;
+    if (!selection.isValid) return KeyEventResult.ignored;
+    final offset = selection.baseOffset.clamp(0, text.length);
+    final collapsed = selection.isCollapsed;
+    final target = tableArrowTarget(
+      arrow: arrow,
+      row: r,
+      col: c,
+      rowCount: _cells.length,
+      colCount: _colCount,
+      atTextStart: collapsed && offset <= 0,
+      atTextEnd: collapsed && offset >= text.length,
+      onFirstLine: collapsed && !text.substring(0, offset).contains('\n'),
+      onLastLine: collapsed && !text.substring(offset).contains('\n'),
+    );
+    if (target == null) return KeyEventResult.ignored;
+    _moveFocusTo(target.row, target.col, caret: target.caret);
+    return KeyEventResult.handled;
   }
 
   /// Markeert cel (r, c) als de focus-doel ná de eerstvolgende rebuild —
