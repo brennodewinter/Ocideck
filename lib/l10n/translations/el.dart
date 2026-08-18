@@ -1675,6 +1675,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voetnoot': 'Υποσημείωση',
+  'Noten': 'Σημειώσεις',
+  'Voetnoten achterin het document': 'Υποσημειώσεις στο τέλος του εγγράφου',
+  'De tekst van de voetnoot': 'Το κείμενο της υποσημείωσης',
+  'Schrijfbreedte': 'Πλάτος γραφής',
+  'Paginabreedte': 'Πλάτος σελίδας',
+  'Leeskolom': 'Στήλη ανάγνωσης',
+  'Ware grootte': 'Πραγματικό μέγεθος',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Οι αλλαγές σελίδας ισχύουν μόνο σε πλάτος σελίδας.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Πόσο πλατιά είναι η στήλη ανάγνωσης στην οπτική λειτουργία. Στενή διαβάζεται ήρεμα, πλατιά αξιοποιεί περισσότερη οθόνη. Αν γράφετε σε αυτήν τη στήλη, σε πλάτος σελίδας ή σε όλο το παράθυρο, το επιλέγετε στη γραμμή εργαλείων.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Το άλμα «{doel}» οδηγεί σε διαφάνεια που δεν υπάρχει πλέον· κατά την παρουσίαση δεν συμβαίνει τίποτα. Επιλέξτε άλλη διαφάνεια προορισμού.',
   'In een cirkel': 'Κύκλος',

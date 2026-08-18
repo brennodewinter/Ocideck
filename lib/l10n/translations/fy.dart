@@ -675,6 +675,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voetnoot': 'Fuotnoat',
+  'Noten': 'Noaten',
+  'Voetnoten achterin het document': 'Fuotnoaten efteryn it dokumint',
+  'De tekst van de voetnoot': 'De tekst fan de fuotnoat',
+  'Schrijfbreedte': 'Skriuwbreedte',
+  'Paginabreedte': 'Sidebreedte',
+  'Leeskolom': 'Lêskolom',
+  'Ware grootte': 'Wiere grutte',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Sidebrekken jilde allinnich op sidebreedte.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Hoe breed de lêskolom yn de fisuele modus is. Smel lêst rêstich, breed brûkt mear fan it skerm. Oft jo op dy kolom, op sidebreedte of op it hiele finster skriuwe, kieze jo yn de arkbalke.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'De sprong "{doel}" wiist nei in dia dy\'t net mear bestiet; ûnder it presintearjen bart der neat. Kies in oare doeldia.',
   'In een cirkel': 'Sirkel',

@@ -1657,6 +1657,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voetnoot': 'Išnaša',
+  'Noten': 'Pastabos',
+  'Voetnoten achterin het document': 'Išnašos dokumento pabaigoje',
+  'De tekst van de voetnoot': 'Išnašos tekstas',
+  'Schrijfbreedte': 'Rašymo plotis',
+  'Paginabreedte': 'Puslapio plotis',
+  'Leeskolom': 'Skaitymo skiltis',
+  'Ware grootte': 'Tikrasis dydis',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Puslapių lūžiai galioja tik esant puslapio pločiui.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Kokio pločio yra skaitymo skiltis vaizdiniame režime. Siaura skaitosi ramiai, plati naudoja daugiau ekrano. Ar rašote toje skiltyje, puslapio pločiu, ar visame lange, pasirenkate įrankių juostoje.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Šuolis „{doel}“ nurodo į skaidrę, kurios nebėra; pristatymo metu nieko neįvyksta. Pasirinkite kitą paskirties skaidrę.',
   'In een cirkel': 'Apskritimas',

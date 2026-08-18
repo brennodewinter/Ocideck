@@ -1643,6 +1643,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Voetnoot': 'Allmärkus',
+  'Noten': 'Märkused',
+  'Voetnoten achterin het document': 'Märkused dokumendi lõpus',
+  'De tekst van de voetnoot': 'Allmärkuse tekst',
+  'Schrijfbreedte': 'Kirjutuslaius',
+  'Paginabreedte': 'Lehekülje laius',
+  'Leeskolom': 'Lugemisveerg',
+  'Ware grootte': 'Tegelik suurus',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Leheküljepiirid kehtivad ainult lehekülje laiuses.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Kui lai on lugemisveerg visuaalses režiimis. Kitsas loeb rahulikult, lai kasutab rohkem ekraani. Kas kirjutate sellel veerul, lehekülje laiuses või kogu aknas, valite tööriistaribal.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Hüpe "{doel}" osutab slaidile, mida enam ei ole; esitluse ajal ei juhtu midagi. Valige teine sihtslaid.',
   'In een cirkel': 'Ring',

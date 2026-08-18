@@ -1681,6 +1681,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voetnoot': 'Fonóta',
+  'Noten': 'Nótaí',
+  'Voetnoten achterin het document': 'Fonótaí ag deireadh na cáipéise',
+  'De tekst van de voetnoot': 'Téacs an fhonóta',
+  'Schrijfbreedte': 'Leithead scríofa',
+  'Paginabreedte': 'Leithead leathanaigh',
+  'Leeskolom': 'Colún léitheoireachta',
+  'Ware grootte': 'Fíormhéid',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Ní bhaineann briseadh leathanaigh ach le leithead leathanaigh.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Cé chomh leathan is atá an colún léitheoireachta sa mhód amhairc. Léitear colún caol go socair, úsáideann colún leathan níos mó den scáileán. Roghnaítear sa bharra uirlisí an scríobhann tú ar an gcolún sin, ar leithead leathanaigh nó ar an bhfuinneog iomlán.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Tagraíonn an léim "{doel}" do sleamhnán nach ann dó a thuilleadh; ní tharlaíonn aon rud le linn an chur i láthair. Roghnaigh sprioc-sleamhnán eile.',
   'In een cirkel': 'Ciorcal',

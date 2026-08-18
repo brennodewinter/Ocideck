@@ -1627,6 +1627,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voetnoot': 'bopwI\'',
+  'Noten': 'bopwI\'mey',
+  'Voetnoten achterin het document': 'nav Dorlu\'DI\' bopwI\'mey',
+  'De tekst van de voetnoot': 'bopwI\' mu\'mey',
+  'Schrijfbreedte': 'ghItlhmeH \'ab',
+  'Paginabreedte': 'nav \'ab',
+  'Leeskolom': 'laDmeH tlhoy\'',
+  'Ware grootte': '\'ab teH',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'nav \'ab neH lujeS nav pe\'meH.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'laDmeH tlhoy\' \'ab \'oH visual mode. tlhoy\' machbogh laDlu\'chugh jotchoH, tlhoy\' tInbogh law\' jIH lo\'. tlhoy\'Daq, nav \'abDaq, ghap Qorwaghmey naQDaq bIghItlh\'a\', jonta\' SeHlaw DaHar.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       '«{doel}» Sup HemtIq \'echletHom tu\'lu\'be\'; cha\'taHvIS pagh qaS. latlh HemtIq \'echletHom yIwIv.',
   'In een cirkel': '\'ID',

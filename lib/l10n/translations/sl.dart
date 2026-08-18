@@ -1651,6 +1651,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Voetnoot': 'Opomba pod črto',
+  'Noten': 'Opombe',
+  'Voetnoten achterin het document': 'Opombe na koncu dokumenta',
+  'De tekst van de voetnoot': 'Besedilo opombe',
+  'Schrijfbreedte': 'Širina pisanja',
+  'Paginabreedte': 'Širina strani',
+  'Leeskolom': 'Bralni stolpec',
+  'Ware grootte': 'Dejanska velikost',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Prelomi strani veljajo samo pri širini strani.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Kako širok je bralni stolpec v vizualnem načinu. Ozek se bere umirjeno, širok uporabi več zaslona. Ali pišete v tem stolpcu, v širini strani ali čez celotno okno, izberete v orodni vrstici.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Skok »{doel}« kaže na diapozitiv, ki ne obstaja več; med predstavitvijo se ne zgodi nič. Izberite drug ciljni diapozitiv.',
   'In een cirkel': 'Krog',

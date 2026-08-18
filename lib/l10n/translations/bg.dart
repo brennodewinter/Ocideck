@@ -1670,6 +1670,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Voetnoot': 'Бележка под линия',
+  'Noten': 'Бележки',
+  'Voetnoten achterin het document': 'Бележки в края на документа',
+  'De tekst van de voetnoot': 'Текстът на бележката',
+  'Schrijfbreedte': 'Ширина на писане',
+  'Paginabreedte': 'Ширина на страницата',
+  'Leeskolom': 'Колона за четене',
+  'Ware grootte': 'Действителен размер',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Разделянето на страници важи само при ширина на страницата.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Колко широка е колоната за четене във визуалния режим. Тясната се чете спокойно, широката използва повече от екрана. Дали пишете в тази колона, в ширина на страницата или в целия прозорец, избирате от лентата с инструменти.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Скокът „{doel}“ сочи към слайд, който вече не съществува; по време на презентацията не се случва нищо. Изберете друг целеви слайд.',
   'In een cirkel': 'Кръг',

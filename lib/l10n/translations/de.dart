@@ -675,6 +675,18 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Voetnoot': 'Fußnote',
+  'Noten': 'Anmerkungen',
+  'Voetnoten achterin het document': 'Fußnoten am Ende des Dokuments',
+  'De tekst van de voetnoot': 'Der Text der Fußnote',
+  'Schrijfbreedte': 'Schreibbreite',
+  'Paginabreedte': 'Seitenbreite',
+  'Leeskolom': 'Lesespalte',
+  'Ware grootte': 'Originalgröße',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Seitenumbrüche gelten nur bei Seitenbreite.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Wie breit die Lesespalte im visuellen Modus ist. Schmal liest sich ruhig, breit nutzt mehr vom Bildschirm. Ob Sie auf dieser Spalte, in Seitenbreite oder über das ganze Fenster schreiben, wählen Sie in der Werkzeugleiste.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Der Sprung „{doel}“ verweist auf eine Folie, die es nicht mehr gibt; beim Präsentieren passiert nichts. Wählen Sie eine andere Zielfolie.',
   'In een cirkel': 'Kreis',

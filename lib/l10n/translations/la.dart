@@ -1665,6 +1665,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voetnoot': 'Adnotatio',
+  'Noten': 'Adnotationes',
+  'Voetnoten achterin het document': 'Adnotationes in fine documenti',
+  'De tekst van de voetnoot': 'Textus adnotationis',
+  'Schrijfbreedte': 'Latitudo scribendi',
+  'Paginabreedte': 'Latitudo paginae',
+  'Leeskolom': 'Columna legendi',
+  'Ware grootte': 'Magnitudo vera',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Divisiones paginarum solum in latitudine paginae valent.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Quam lata sit columna legendi in modo visuali. Angusta placide legitur, lata plus schermatis occupat. Utrum in illa columna, in latitudine paginae an per totam fenestram scribas, in instrumentorum tabula eligitur.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Saltus "{doel}" ad paginam quae iam non exstat spectat; dum praesentas nihil accidit. Aliam paginam destinatam elige.',
   'In een cirkel': 'Circulus',
