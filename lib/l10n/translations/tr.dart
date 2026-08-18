@@ -2590,6 +2590,7 @@ const _dutchSourceAddTr = <String, String>{
   'Uitleg': 'Açıklama',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Bir seçim menüsü: her blok tıklandığında başka bir slayda atlar. Her blok için bir etiket ve bir açıklama girin, hedef slaydı ve isteğe bağlı olarak bir resim seçin. Düzeni seçin: ızgara, liste veya daire. Kategorilerle sunum sırasında blok grupları arasında geçiş yaparsınız. Hedefi olmayan bir blok düz metindir.',
+  'Alleen een lege dia.': 'Yalnızca boş bir slayt.',
   'Hoofdstukken op nieuwe pagina': 'Bölümler yeni sayfada',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Artık her bölüm yeni bir sayfada başlıyor',
@@ -4156,7 +4157,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sunum bozuk ya da yalnızca yarısı kaydedilmiş.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Bu dosya okunabilir bir metin değil. OciDeck Markdown açar.',
-  'Alleen een titelpagina.': 'Yalnızca bir başlık sayfası.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Bu slayt boş: ekranda da dışa aktarmada da hiçbir şey göstermiyor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1672,6 +1672,7 @@ const _dutchSourceAddLv = <String, String>{
   'Uitleg': 'Apraksts',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Izvēles izvēlne: katrs bloks, uz tā noklikšķinot, pāriet uz citu slaidu. Katram blokam ievadiet uzrakstu un aprakstu, izvēlieties mērķa slaidu un pēc izvēles attēlu. Izvēlieties izkārtojumu: režģis, saraksts vai aplis. Ar kategorijām prezentācijas laikā pārslēdzaties starp bloku grupām. Bloks bez mērķa ir vienkāršs teksts.',
+  'Alleen een lege dia.': 'Tikai tukšs slaids.',
   'Hoofdstukken op nieuwe pagina': 'Nodaļas jaunā lappusē',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Katra nodaļa tagad sākas jaunā lappusē',
@@ -3248,7 +3249,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šī prezentācija ir bojāta vai saglabāta tikai daļēji.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Šis fails nav lasāms teksts. OciDeck atver Markdown.',
-  'Alleen een titelpagina.': 'Tikai titullapa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Šis slaids ir tukšs: tas neko nerāda ne ekrānā, ne eksportā.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

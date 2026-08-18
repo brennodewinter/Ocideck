@@ -1701,6 +1701,7 @@ const _dutchSourceAddPt = <String, String>{
   'Uitleg': 'Descrição',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Um menu de opções: cada bloco salta para outro slide quando é clicado. Digite um rótulo e uma descrição para cada bloco, escolha o slide de destino e, opcionalmente, uma imagem. Escolha a disposição: grelha, lista ou círculo. Com as categorias alterna entre grupos de blocos durante a apresentação. Um bloco sem destino é texto simples.',
+  'Alleen een lege dia.': 'Apenas um slide vazio.',
   'Hoofdstukken op nieuwe pagina': 'Capítulos em nova página',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Cada capítulo começa agora numa nova página',
@@ -3292,7 +3293,6 @@ const _dutchSourceAddPt = <String, String>{
       'Esta apresentação está danificada ou foi guardada apenas em parte.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Este ficheiro não é texto legível. O OciDeck abre Markdown.',
-  'Alleen een titelpagina.': 'Apenas uma página de título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Este slide está vazio: não mostra nada no ecrã nem na exportação.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

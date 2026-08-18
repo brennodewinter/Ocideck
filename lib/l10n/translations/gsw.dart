@@ -1675,6 +1675,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Uitleg': 'Erklärig',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Es Uswahlmenü: jede Block springt bim Aaklicke uf e anderi Folie. Gib pro Block e Beschriftig und e Erklärig ii, wähl d Zielfolie und optional es Bild. Wähl d Ufteilig: Raschter, Lischte oder Chreis. Mit Kategorie wechslisch während em Presentiere zwüschet Gruppe vo Blöck. E Block ohni Ziel isch eifache Text.',
+  'Alleen een lege dia.': 'Nur e leeri Slide.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel uf ere neue Site',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Jedes Kapitel faht jetz uf ere neue Site aa',
@@ -3253,7 +3254,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Präsentation isch kaputt oder nur halb gspicheret.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Die Datei isch kein läsbare Text. OciDeck öffnet Markdown.',
-  'Alleen een titelpagina.': 'Nur e Titelsiite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Die Slide isch läär: si zeigt nüt uf em Bildschirm und nüt im Export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1632,6 +1632,22 @@ that before deciding whether this alpha fits what you are doing.
   cursor binnen de cel en liepen daarna dood. Nu doen ze wat een rekenblad doet,
   in de documenttabel én in de diabouwer, want twee tabellen die anders op een
   pijltje reageren is precies wat een mens niet begrijpt.
+- **twee gele knoppen, en leeg is nu echt leeg.** Het startscherm zette een
+  gele knop *Kiezen* onder de kop *Nieuwe presentatie*, met daaronder een witte
+  *Nieuw document*. Dat las als één weg met een aanhangsel: de kop noemde de
+  soort, de knop zei alleen "kiezen", en de witte knop ernaast leek de mindere
+  van de twee. Het zijn twee gelijkwaardige manieren om te beginnen, dus staan
+  ze er nu ook zo bij — kop *Nieuw*, daaronder **Nieuwe presentatie** en
+  **Nieuw document**, allebei in de accentkleur, allebei met een label dat zelf
+  zegt wat het maakt. De sjabloonregel ("87 sjablonen om mee te beginnen, of
+  leeg") is meeverhuisd naar onder de presentatieknop, want hij gold nooit voor
+  een document. Tegelijk het lege sjabloon: dat leverde een titelpagina met de
+  ingetypte titel er al op, en dat is geen leeg vel. *Leeg deck* geeft nu één
+  lege dia; de titel blijft de deck-titel (front matter, tabblad, bestandsnaam)
+  en spreekt zich nergens op een dia uit. Daarmee is het lege deck ook het enige
+  sjabloon zonder document in `assets/templates/` — leeg is de afwezigheid van
+  een document, geen document dat toevallig één dia telt, dus de 31 lege
+  documenten zijn weg en de sjabloonpoorten slaan het lege deck over.
 
 - **het poortslot krijgt een rem, en een correctie.** Bij #1541 schreef ik dat
   een worktree-wissel de CMake-cache "opnieuw stempelt — traag maar correct".

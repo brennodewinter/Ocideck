@@ -1673,6 +1673,7 @@ const _dutchSourceAddFi = <String, String>{
   'Uitleg': 'Kuvaus',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Valintavalikko: jokainen lohko siirtyy toiseen diaan, kun sitä napsautetaan. Kirjoita jokaiselle lohkolle nimike ja kuvaus, valitse kohdedia ja halutessasi kuva. Valitse asettelu: ruudukko, luettelo tai ympyrä. Luokkien avulla vaihdat esityksen aikana lohkoryhmien välillä. Lohko ilman kohdetta on tavallista tekstiä.',
+  'Alleen een lege dia.': 'Vain tyhjä dia.',
   'Hoofdstukken op nieuwe pagina': 'Luvut uudelle sivulle',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Jokainen luku alkaa nyt uudelta sivulta',
@@ -3249,7 +3250,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä esitys on vaurioitunut tai tallentui vain osittain.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Tämä tiedosto ei ole luettavaa tekstiä. OciDeck avaa Markdownia.',
-  'Alleen een titelpagina.': 'Vain otsikkosivu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tämä dia on tyhjä: se ei näytä mitään näytöllä eikä viennissä.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

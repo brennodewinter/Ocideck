@@ -55,6 +55,13 @@ final contentLanguages = AppLocalizations.supportedLocales
     .where((languageCode) => languageCode != 'tlh')
     .toList(growable: false);
 
+/// De sjablonen die een document meebrengen. Het lege deck hoort er niet bij:
+/// leeg is de afwezigheid van een document. `TemplateContentService` maakt daar
+/// één lege dia van, en die wordt getoetst in `template_content_service_test`.
+final documentTemplates = deckTemplates
+    .where((template) => template.id != emptyDeckTemplateId)
+    .toList(growable: false);
+
 final _deckCache = <String, Deck>{};
 
 /// The parsed template document for [id] in [language], read straight from
@@ -143,7 +150,7 @@ void main() {
 
   group('template documents', () {
     test('every template ships a document in every content language', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           final file = File('assets/templates/${template.id}.$language.md');
           expect(file.existsSync(), isTrue, reason: file.path);
@@ -166,7 +173,7 @@ void main() {
     });
 
     test('every document parses, starts with a title slide, unique ids', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           final slides = slidesOf(template.id, language: language);
           final label = '${template.id}.$language';
@@ -181,7 +188,7 @@ void main() {
     });
 
     test('table slides have a header row and consistent column counts', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           for (final slide in slidesOf(template.id, language: language)) {
             if (slide.tableRows.isEmpty) continue;
@@ -196,7 +203,7 @@ void main() {
     });
 
     test('timeline slides carry parseable, non-empty events', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           for (final slide in slidesOf(template.id, language: language)) {
             if (slide.type != SlideType.timeline) continue;
@@ -208,7 +215,7 @@ void main() {
     });
 
     test('question slides are presentable as authored', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           for (final slide in slidesOf(template.id, language: language)) {
             if (slide.type != SlideType.question) continue;
@@ -224,7 +231,7 @@ void main() {
     // De Engelse variant is een vertaling van het Nederlandse document, geen
     // eigen sjabloon: zelfde slidetypes, zelfde invulbaarheid, zelfde maten.
     test('both languages carry the same structure per template', () {
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         final nl = slidesOf(template.id);
         final en = slidesOf(template.id, language: 'en');
         final label = template.id;
@@ -261,23 +268,28 @@ void main() {
     List<SlideType> typesOf(String id) =>
         slidesOf(id).map((s) => s.type).toList();
 
-    test('empty deck is a title page and nothing else', () {
-      // Het was een titeldia plús een agenda met Nederlandse voorbeeldregels.
-      // Voor een sjabloon is dat verdedigbaar — de dialoog waarschuwt ervoor —
-      // maar dit is het lege deck: de standaardkeuze, niet als sjabloon
-      // gepresenteerd, en dus onontkoombaar voor wie de app in het Engels
-      // draait (#622).
+    test('het lege deck draagt geen document', () {
+      // Leeg is de afwezigheid van inhoud, niet een document dat toevallig één
+      // dia telt. Het was eerst een titeldia plús een agenda met Nederlandse
+      // voorbeeldregels (#622), daarna een titeldia met de ingetypte titel
+      // erop — en ook dat sprak al iets uit. Wat de gebruiker nu krijgt (één
+      // lege dia) toetst `template_content_service_test`; hier bewaken we
+      // alleen dat er geen document meer in de bundel achterblijft.
       for (final language in contentLanguages) {
-        expect(slidesOf('empty', language: language).map((s) => s.type), [
-          SlideType.title,
-        ]);
+        expect(
+          File(
+            'assets/templates/$emptyDeckTemplateId.$language.md',
+          ).existsSync(),
+          isFalse,
+          reason: language,
+        );
       }
     });
 
     test('geen enkel sjabloon draagt de oude agenda-voorbeeldregels', () {
       // Een regressie hier is stil: het deck opent gewoon, alleen staat er
       // Nederlands in een Engelse app.
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         for (final language in contentLanguages) {
           for (final slide in slidesOf(template.id, language: language)) {
             expect(
@@ -1170,7 +1182,7 @@ void main() {
     test('document title slides match the l10n picker title per language', () {
       // Wat de kiezer belooft is wat het document opent: de titeldia van
       // <id>.en.md draagt dezelfde titel als de Engelse l10n van de kiezer.
-      for (final template in deckTemplates) {
+      for (final template in documentTemplates) {
         expect(slidesOf(template.id).first.title, template.title);
         expect(
           slidesOf(template.id, language: 'en').first.title,
@@ -1186,7 +1198,7 @@ void main() {
       'every template document survives serialize + parse with its types',
       () {
         final md = MarkdownService();
-        for (final template in deckTemplates) {
+        for (final template in documentTemplates) {
           for (final language in contentLanguages) {
             final deck = deckOf(template.id, language: language);
             final parsed = md.parseDeck(md.generateDeck(deck));

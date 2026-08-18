@@ -1649,6 +1649,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Uitleg': 'QIjmeH mu\'mey',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'wIvmeH menu: \'uylu\'DI\' latlh \'echletHom Sup Hoch \'ay\'. Hoch \'ay\'vaD per QIjmeH mu\'mey je yIghItlh, HemtIq \'echletHom yIwIv, DaneHchugh mIllogh je. lol-lam yIwIv: beQ\'och, tetlh, \'ID ghap. cha\'taHvIS \'ay\' ghommey choHmeH Seghmey yIlo\'. HemtIq Hutlhbogh \'ay\' ghItlh nap \'oH.',
+  'Alleen een lege dia.': '\'echletHom chIm neH.',
   'Hoofdstukken op nieuwe pagina': 'nav chu\'Daq Hoch \'ay\'',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'DaH nav chu\'Daq tagh Hoch \'ay\'',
@@ -3215,7 +3216,6 @@ const _dutchSourceAddTlh = <String, String>{
       'cha\'navvam Qaw\'lu\'pu\' pagh naQbe\'taHvIS pollu\'pu\'.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'laDlaHbogh ghItlh \'oHbe\' De\'vam\'e\'. Markdown poSmoH OciDeck.',
-  'Alleen een titelpagina.': 'pong nav neH.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       '\'echletHom vam chIm: jIHDaq ngeHDaq je vay\' \'angbe\'lu\'.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

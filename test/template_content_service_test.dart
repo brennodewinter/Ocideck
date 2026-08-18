@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/template_content_service.dart';
@@ -59,6 +60,26 @@ void main() {
       final first = await ids();
       final second = await ids();
       expect(first.intersection(second), isEmpty);
+    });
+
+    test('het lege deck levert één lege dia, geen titelpagina', () async {
+      // 'Leeg' hoort leeg te zijn: geen titeldia die de ingetypte titel al
+      // uitspreekt. De titel blijft de deck-titel (front matter, tabblad,
+      // bestandsnaam) en staat dus nergens op een dia. Er wordt ook niets uit
+      // de bundel gelezen — daarom een lader die zou ontploffen als het toch
+      // gebeurde.
+      final service = TemplateContentService(
+        loadAsset: (key) async => throw StateError('leeg leest geen $key'),
+      );
+      final slides = await service.loadSlides(
+        emptyDeckTemplateId,
+        languageCode: 'nl',
+        deckTitle: 'Mijn presentatie',
+      );
+      expect(slides, hasLength(1));
+      expect(slides.single.type, SlideType.bullets);
+      expect(slides.single.title, isEmpty);
+      expect(slides.single.bullets, ['']);
     });
 
     test('a missing document falls back to a bare title slide', () async {
@@ -225,9 +246,9 @@ ocideck_improvement_framework: dmaic
       // Bewaakt de pubspec-registratie van assets/templates/: rootBundle moet
       // de documenten echt kunnen leveren, niet alleen het bestandssysteem.
       final markdown = await rootBundle.loadString(
-        'assets/templates/empty.nl.md',
+        'assets/templates/briefing.nl.md',
       );
-      expect(markdown, contains('# Leeg deck'));
+      expect(markdown, contains('# Korte briefing'));
     });
   });
 }
