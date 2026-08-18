@@ -1678,6 +1678,18 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Voetnoot': 'Nota de rodapé',
+  'Noten': 'Notas',
+  'Voetnoten achterin het document': 'Notas no fim do documento',
+  'De tekst van de voetnoot': 'O texto da nota',
+  'Schrijfbreedte': 'Largura de escrita',
+  'Paginabreedte': 'Largura da página',
+  'Leeskolom': 'Coluna de leitura',
+  'Ware grootte': 'Tamanho real',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'As quebras de página só valem na largura da página.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Qual a largura da coluna de leitura no modo visual. Estreita lê-se com calma, larga usa mais ecrã. Escrever nessa coluna, na largura da página ou em toda a janela escolhe-se na barra de ferramentas.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'O salto "{doel}" aponta para um slide que já não existe; durante a apresentação não acontece nada. Escolha outro slide de destino.',
   'In een cirkel': 'Círculo',
@@ -1750,8 +1762,6 @@ const _dutchSourceAddPt = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Índice — adicione títulos para o preencher.',
   'Schrijfbreedte editor': 'Largura de escrita do editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Que largura tem a área de escrita no modo visual. Estreita lê-se com calma, larga usa mais ecrã.',
   'Pagina-instellingen export': 'Definições de página para exportação',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Tamanho da página (ISO 216) e margens para impressão HTML, LaTeX e exportação PDF.',

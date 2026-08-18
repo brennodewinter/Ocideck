@@ -847,6 +847,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Voetnoot': 'Footnote',
+  'Noten': 'Notes',
+  'Voetnoten achterin het document': 'Footnotes at the end of the document',
+  'De tekst van de voetnoot': 'The text of the footnote',
+  'Schrijfbreedte': 'Writing width',
+  'Paginabreedte': 'Page width',
+  'Leeskolom': 'Reading column',
+  'Ware grootte': 'Actual size',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Page breaks only apply at page width.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'How wide the reading column is in visual mode. Narrow reads calmly, wide uses more of the screen. Whether you write on that column, at page width or across the whole window is a choice in the toolbar.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'The jump "{doel}" points to a slide that no longer exists; nothing happens while presenting. Choose a different target slide.',
   'In een cirkel': 'Circle',
@@ -919,8 +931,6 @@ const _dutchSourceAddEn = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Table of contents — add headings to fill it.',
   'Schrijfbreedte editor': 'Editor writing width',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'How wide the writing area is in visual mode. Narrow reads calmly, wide uses more of the screen.',
   'Pagina-instellingen export': 'Page settings for export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Page size (ISO 216) and margins for HTML print, LaTeX and PDF export.',

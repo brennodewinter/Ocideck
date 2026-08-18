@@ -7,6 +7,8 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor_theme.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
+import 'package:ocideck/widgets/reader/document_markdown_view.dart'
+    show documentKeepWithNextHeight;
 import 'package:ocideck/widgets/reader/writing_page_breaks.dart';
 
 /// Pagina-einden in de schrijfstand: de lijn hoort te vallen waar het vel vol
@@ -200,6 +202,42 @@ void main() {
           reason: 'einde op $b valt niet op een blokgrens ($boundaries)',
         );
       }
+    });
+
+    // #2: een kop hoort niet alleen onderaan een vel achter te blijven. De
+    // schrijfstand moet daarvoor weten wélk blok een kop is; zonder die kennis
+    // valt de streepjeslijn hier anders dan het vel in de Pagina's-stand.
+    testWidgets('de koppen in de schrijfstand worden herkend', (tester) async {
+      await pump(tester, 'Alinea een.\n\n## Een kop\n\nAlinea twee.');
+
+      final editor = editorKey.currentState!.renderEditor;
+      expect(writingHeadingBlocks(editor), {1});
+      expect(writingBlockHeights(editor), hasLength(3));
+    });
+
+    testWidgets('een kop onderaan schuift de lijn naar boven de kop', (
+      tester,
+    ) async {
+      await pump(tester, 'Alinea een.\n\n## Een kop\n\nAlinea twee.');
+
+      final editor = editorKey.currentState!.renderEditor;
+      final heights = writingBlockHeights(editor);
+      // Een vel dat precies de eerste alinea plus de kop kan dragen: zonder de
+      // regel valt het einde ná de kop, met de regel ervóór.
+      final pageHeight = heights[0] + heights[1] + 1;
+      expect(
+        writingPageBreaks(blockHeights: heights, pageContentHeight: pageHeight),
+        [closeTo(heights[0] + heights[1], 0.01)],
+      );
+      expect(
+        writingPageBreaks(
+          blockHeights: heights,
+          pageContentHeight: pageHeight,
+          headingBlocks: writingHeadingBlocks(editor),
+          minKeepHeight: documentKeepWithNextHeight(TextScaler.noScaling),
+        ),
+        [closeTo(heights[0], 0.01)],
+      );
     });
   });
 }

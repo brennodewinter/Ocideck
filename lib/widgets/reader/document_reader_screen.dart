@@ -479,9 +479,9 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
         .read(settingsProvider.notifier)
         .setDocReaderTextScale(scale + delta);
 
-    const step = SettingsNotifier.docReaderTextScaleStep;
-    final canShrink = scale > SettingsNotifier.docReaderTextScaleMin + 1e-6;
-    final canGrow = scale < SettingsNotifier.docReaderTextScaleMax - 1e-6;
+    const step = kDocReaderTextScaleStep;
+    final canShrink = scale > kDocReaderTextScaleMin + 1e-6;
+    final canGrow = scale < kDocReaderTextScaleMax - 1e-6;
     return [
       IconButton(
         icon: const Icon(Icons.text_decrease),

@@ -1652,6 +1652,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Voetnoot': 'Lábjegyzet',
+  'Noten': 'Jegyzetek',
+  'Voetnoten achterin het document': 'Jegyzetek a dokumentum végén',
+  'De tekst van de voetnoot': 'A lábjegyzet szövege',
+  'Schrijfbreedte': 'Írásszélesség',
+  'Paginabreedte': 'Oldalszélesség',
+  'Leeskolom': 'Olvasási hasáb',
+  'Ware grootte': 'Valódi méret',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Az oldaltörések csak oldalszélességben érvényesek.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Milyen széles az olvasási hasáb a vizuális módban. A keskeny nyugodtan olvasható, a széles több képernyőt használ. Hogy azon a hasábon, oldalszélességben vagy a teljes ablakban ír-e, az eszköztárban választja ki.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'A(z) "{doel}" ugrás olyan diára mutat, amely már nem létezik; bemutatás közben semmi sem történik. Válasszon másik céldiát.',
   'In een cirkel': 'Kör',
@@ -1724,8 +1736,6 @@ const _dutchSourceAddHu = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Tartalomjegyzék — adj hozzá címsorokat a kitöltéséhez.',
   'Schrijfbreedte editor': 'Szerkesztő írásszélessége',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Milyen széles az írófelület vizuális módban. A keskeny nyugodtan olvasható, a széles több képernyőt használ.',
   'Pagina-instellingen export': 'Oldalbeállítások exportáláshoz',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Oldalméret (ISO 216) és margók HTML-nyomtatáshoz, LaTeX- és PDF-exportáláshoz.',

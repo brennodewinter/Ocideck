@@ -2,6 +2,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
+import 'footnote_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
 import 'toc_embed_syntax.dart';
 
@@ -17,6 +18,11 @@ import 'toc_embed_syntax.dart';
 /// [EmbeddableToc] (`x-embed-toc`) — om dezelfde reden: hij is HTML, en zonder
 /// deze embed viel de hele visuele modus terug op brontekst zodra iemand een
 /// inhoudsopgave invoegde.
+///
+/// Voetnoten idem, in twee delen: de verwijzing `[^1]` als inline-embed
+/// ([EmbeddableFootnoteRef]) en de definitie `[^1]: …` als blok-embed
+/// ([EmbeddableFootnoteDef]). Ook hier was één voetnoot genoeg om de hele
+/// visuele modus op brontekst terug te werpen.
 class MarkdownQuillCodec {
   MarkdownQuillCodec._();
 
@@ -27,7 +33,14 @@ class MarkdownQuillCodec {
     // en levert een `x-embed-table`-element met de rauwe tabel-markdown erin.
     // De TOC-marker staat vóór de HTML-blokregel, anders slokt die hem als
     // rauwe HTML op en valt hij als losse tekst uiteen.
-    blockSyntaxes: const [TocMarkerSyntax(), EmbeddableTableSyntax()],
+    blockSyntaxes: const [
+      TocMarkerSyntax(),
+      FootnoteDefSyntax(),
+      EmbeddableTableSyntax(),
+    ],
+    // Vóór de standaard-inline-syntaxen: `[^1]` begint met een `[`, en de
+    // link-regel zou er anders overheen lopen.
+    inlineSyntaxes: [FootnoteRefSyntax()],
   );
 
   static final _mdToDelta = MarkdownToDelta(
@@ -35,12 +48,16 @@ class MarkdownQuillCodec {
     customElementToEmbeddable: {
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
+      EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
+      EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
     },
   );
   static final _deltaToMd = DeltaToMarkdown(
     customEmbedHandlers: {
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
+      EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
+      EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
     },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(

@@ -4277,7 +4277,7 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   editable blocks. On a wide enough window an **outline rail** of the document's
   headings appears beside it; clicking a heading scrolls to it. If the file
   contains a construct the visual bridge cannot round-trip losslessly (raw HTML,
-  footnotes, escaped punctuation), Visual does **not** lock you out: it keeps you
+  escaped punctuation), Visual does **not** lock you out: it keeps you
   editing the source text directly, with the same formatting toolbar, and shows a
   short note that this part is edited as source. The rich possibilities stay
   within reach — OciDeck offers them and warns, rather than deciding the document
@@ -4298,7 +4298,11 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   where the text really ends. A block that still fits is never cut in half; it
   moves on whole to the next sheet. Only a block that fits on no sheet at all (a
   table or image taller than the text area) is cut, across as many sheets as it
-  needs, and the block after it starts fresh again. *(Added 2026-08-16.)*
+  needs, and the block after it starts fresh again. A **heading** is never left
+  alone at the foot of a sheet: if at least two lines of text do not fit below it
+  on the same page, it moves along with them — two headings in a row as a group,
+  and an oversized table takes the heading above it with it. *(Added 2026-08-16;
+  the heading rule 2026-08-18.)*
 
   **What it is not:** an exact preview of the export. Three different engines
   break the pages — OciDeck's own on-screen renderer here, your browser when you
@@ -4312,10 +4316,50 @@ rich-text toolbar in Visual, the Markdown one over the source in Source and in
 the Visual source fallback. An **insert palette** adds the richer blocks as
 portable Markdown: a **chart** (a ` ```chart ` fence with its data in
 `data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, an
-**image** (copied into `images/`), or a **page break** (a `---` thematic break).
-Each stays plain, parseable text so the file keeps opening elsewhere. *(Page
-break added 2026-08-08 — see [Inserting a page break](#inserting-a-page-break)
-below.)*
+**image** (copied into `images/`), a **page break** (a `---` thematic break), or a
+**footnote**. Each stays plain, parseable text so the file keeps opening
+elsewhere. *(Page break added 2026-08-08 — see
+[Inserting a page break](#inserting-a-page-break) below; footnote 2026-08-18 —
+see [Footnotes](#footnotes).)*
+
+### Footnotes
+
+*(Added 2026-08-18.)* **Invoegen → Voetnoot** puts a marker at the cursor and an
+empty note line at the end of the document, with the cursor already in it. On
+disk that is plain Pandoc footnote syntax, which GitHub and Obsidian read too:
+
+```
+A sentence with a note [^1] in it.
+
+[^1]: The text of the note.
+```
+
+What you see is a small sequence number in the text; what is in the file is the
+label. The two need not match: write `[^source]` yourself and it stays
+`[^source]`, while the number simply follows reading order. Insert one between
+two others and nothing needs renumbering. A `[^1]` with no matching `[^1]:` line
+stays literal text — a character class in a technical document does not silently
+become a marker.
+
+**Where the notes land is a per-document choice** under the ⋮ menu: *Voetnoten
+achterin het document* (footnotes at the end of the document). Off — the default
+— means at the foot of the page the reference falls on, and writes nothing into
+your file, because that is what every reader does without being told. On writes a
+single front-matter line (`reference-location: document`), a key Pandoc and
+Quarto execute themselves, so the file carries its own choice outside OciDeck.
+
+What each surface can do:
+
+| Where | At the foot of the page | At the end |
+|---|---|---|
+| **Pages** view | yes, really on the sheet | yes, at the end |
+| **Visual** and **Source** | continuous, so at the end | at the end |
+| **LaTeX** (`.tex`) | yes (`\footnote`) | numbered list under its own heading |
+| **HTML** (and the PDF you print from it) | at the end, with a link there and back | same |
+
+That last row is a real limitation, not an oversight: an HTML page has no pages,
+and the CSS that could do it is implemented by no browser. If you want notes
+truly at the foot of the sheet in a PDF, take the LaTeX output.
 
 ### Inserting a page break
 
@@ -4510,9 +4554,31 @@ happening quietly, a non-zero bleed is shown beside the page size in the
 bottom-right corner of the visual editor. *(Added 2026-08-16.)*
 
 The **writing width** beside it (*Schrijfbreedte editor*: narrow 860 px, standard
-1100 px, wide 1400 px, or full width) is not about the export but about your own
-screen — how wide the visual writing surface is. Narrow reads more calmly, wide
-uses a large screen. It is a display choice only and never reaches your file.
+1100 px, wide 1400 px) is not about the export but about your own screen — how
+wide the reading column in Visual is. Narrow reads more calmly, wide uses a large
+screen. It is a display choice only and never reaches your file.
+
+#### Width and zoom while you write *(added 2026-08-18)*
+
+*Which* width applies is a choice in the document editor's toolbar rather than in
+the settings — it is a choice you make while working, not once up front:
+
+- **Paginabreedte** (page width) — the sheet's text width. Only here do the
+  dashed page-break lines mean anything, because only here does a line wrap on
+  screen where it wraps on paper.
+- **Leeskolom** (reading column) — the width from the setting above, for writing
+  without thinking about the sheet.
+- **Volledige breedte** (full width) — the whole window, for a wide table or a
+  second screen.
+
+Outside *Paginabreedte* the page-break lines are not drawn: they would point at
+something that does not happen. The button says so rather than falling silent.
+
+Beside it sits the **zoom** (− / +, with the percentage itself as the button back
+to actual size) and **Cmd/Ctrl +**, **−** and **0** as shortcuts. In Visual it
+scales the text *and* the column, so the line wrap — and therefore every page
+break — stays exactly as it is on paper. In the Pages view it scales the sheet
+itself; the layout on it does not change.
 
 #### Letting the page setup travel with the document
 

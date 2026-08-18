@@ -28,8 +28,15 @@ const _fence = '---';
 ///
 /// Elke sleutel hier is er een die andere gereedschappen al kennen en
 /// uitvoeren: `theme:` (Pandoc, Obsidian, GitHub), `papersize:` en `geometry:`
-/// (Pandoc). OciDeck voegt geen eigen dialect toe — zie FILE_FORMAT.md §14.1.
-const Set<String> kDocumentOwnedKeys = {'theme', 'papersize', 'geometry'};
+/// (Pandoc), `reference-location:` (Pandoc/Quarto — waar de voetnoten
+/// terechtkomen). OciDeck voegt geen eigen dialect toe — zie FILE_FORMAT.md
+/// §14.1.
+const Set<String> kDocumentOwnedKeys = {
+  'theme',
+  'papersize',
+  'geometry',
+  'reference-location',
+};
 
 /// Sleutels die het documentpad ooit schreef en niet meer schrijft.
 ///

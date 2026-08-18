@@ -63,29 +63,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     return path == null ? null : p.dirname(path);
   }
 
-  /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges
-  /// en een eventuele drukkersafloop uit de instellingen. Hier zie je wat er op
-  /// welke bladzijde belandt — de vraag die een tekstverwerker beantwoordt en
-  /// een doorlopende rol niet. Lezen en nakijken, niet typen: bewerken doe je
-  /// in de visuele of de bron-stand.
-  Widget _pagesLayout(ThemeData theme, String source) {
-    final settings = ref.watch(settingsProvider);
-    // Draagt het document zelf een paginaopmaak, dan wint die van de instelling
-    // — zie [effectiveDocumentPageSetup].
-    final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
-    return Container(
-      color: theme.colorScheme.surfaceContainerHighest,
-      child: PagedDocumentView(
-        markdown: source,
-        pageSize: setup.size!,
-        margins: setup.margins!,
-        profile: _styleProfile,
-        projectPath: _projectPath,
-        chapterPageBreak: settings.documentChapterPageBreak,
-      ),
-    );
-  }
-
   /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
   /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
   /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
@@ -111,8 +88,14 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final pageSize = setup.size!;
     final margins = setup.margins!;
     final (_, pageHeightMm) = pageSize.dimensions;
+    final zoom = settings.documentEditorZoom;
+    // De zoom gaat óók in de paginahoogte. De tekst wordt namelijk met dezelfde
+    // factor groter én de kolom met dezelfde factor breder, dus elk blok wordt
+    // precies `zoom` keer zo hoog en de regelval blijft identiek. Zonder deze
+    // vermenigvuldiging zou een pagina-einde bij 150% een derde te vroeg vallen
+    // en de lijn dus iets aanwijzen wat op papier niet gebeurt.
     final pageContentHeight =
-        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm;
+        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm * zoom;
     return Row(
       children: [
         if (showRail) ...[
@@ -122,13 +105,27 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         Expanded(
           child: Stack(
             children: [
-              WritingPageBreakOverlay(
-                editorKey: _visualEditorKey,
-                pageContentHeight: pageContentHeight,
-                enabled: _showPageBreaks,
-                child: _styledDocumentSurface(
-                  _styleProfile,
-                  _wysiwygEditor(theme),
+              MediaQuery(
+                // De zoom vermenigvuldigt wat het toestel en de app-brede
+                // interfaceschaal al vragen, zoals de documentatielezer het ook
+                // doet — één begrip van "groter", niet twee.
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.linear(
+                    MediaQuery.textScalerOf(context).scale(1) * zoom,
+                  ),
+                ),
+                child: WritingPageBreakOverlay(
+                  editorKey: _visualEditorKey,
+                  pageContentHeight: pageContentHeight,
+                  // De einden gelden alleen op paginabreedte: op een andere
+                  // maat breekt het vel ergens anders dan de lijn zegt.
+                  enabled:
+                      _showPageBreaks &&
+                      settings.documentEditorWidth == DocumentEditorWidth.page,
+                  child: _styledDocumentSurface(
+                    _styleProfile,
+                    _wysiwygEditor(theme),
+                  ),
                 ),
               ),
               _documentPageIndicator(
@@ -169,17 +166,17 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    // Met pagina-einden aan schrijf je op de tekstbreedte van de pagina: een
-    // einde dat op een bredere kolom is uitgerekend zou ergens anders vallen
-    // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
-    // dan geldt de ingestelde schrijfbreedte.
-    documentMaxWidth: _showPageBreaks
-        ? _documentPageTextWidthPx(ref)
-        : ref.watch(settingsProvider).documentEditorMaxWidth,
+    // Op welke breedte je schrijft is een keuze, geen bijverschijnsel van de
+    // pagina-einden. Dat was het wél: de einden trokken de breedte naar die van
+    // het vel, en omdat ze standaard aanstaan deed de instelling "volledige
+    // breedte" niets. Nu kiest de gebruiker de stand en volgen de einden hem —
+    // op paginabreedte kloppen ze, daarbuiten worden ze niet getekend.
+    documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
+    insertFootnoteLabel: _pendingFootnoteLabel,
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
     revealTitle: _revealTitle,
@@ -189,67 +186,262 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     onInsertImage: () => unawaited(_insertImage()),
   );
 
-  Widget _editor(ThemeData theme) => Shortcuts(
-    shortcuts: const {
-      SingleActivator(LogicalKeyboardKey.keyV, control: true):
-          _DocSmartPasteIntent(),
-      SingleActivator(LogicalKeyboardKey.keyV, meta: true):
-          _DocSmartPasteIntent(),
-    },
-    child: Actions(
-      actions: {
-        _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
-          onInvoke: (_) {
-            unawaited(_smartPaste());
-            return null;
-          },
-        ),
-      },
-      child: TextField(
-        controller: _controller,
-        focusNode: _editorFocus,
-        maxLines: null,
-        expands: true,
-        textAlignVertical: TextAlignVertical.top,
-        cursorColor: theme.colorScheme.primary,
-        keyboardType: TextInputType.multiline,
-        style: TextStyle(
-          fontFamily: 'monospace',
-          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-          fontSize: 14,
-          height: 1.5,
-          color: theme.colorScheme.onSurface,
-        ),
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.all(16),
-        ),
-      ),
-    ),
+  Widget _editor(ThemeData theme) => _documentSourceField(
+    theme,
+    controller: _controller,
+    focusNode: _editorFocus,
+    onSmartPaste: _smartPaste,
   );
 
-  Widget _preview(ThemeData theme, String source, {bool centered = false}) =>
-      Container(
-        color: theme.colorScheme.surface,
-        alignment: centered ? Alignment.topCenter : Alignment.topLeft,
-        child: SingleChildScrollView(
-          controller: _previewScroll,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: _styledDocumentBody(
-            _styleProfile,
-            DocumentMarkdownView(
-              source,
-              maxTextWidth: 720,
-              themeProfile: _styleProfile,
-              chartTheme: _styleProfile,
-              anchorBlockIndex: _anchorBlockIndex,
-              anchorKey: _anchorKey,
-              onEditChart: _editChart,
-              onEditTable: _editTable,
-            ),
-          ),
-        ),
-      );
+  Widget _preview(ThemeData theme, String source) => _documentLivePreview(
+    theme,
+    source,
+    scrollController: _previewScroll,
+    style: _styleProfile,
+    anchorBlockIndex: _anchorBlockIndex,
+    anchorKey: _anchorKey,
+    onEditChart: _editChart,
+    onEditTable: _editTable,
+  );
+}
+
+/// De live weergave naast de bron: hetzelfde document als de lezer tekent, in
+/// de documentstijl, met de anker- en bewerk-haken van de editor eraan.
+///
+/// Top-level en niet op de staat: het is een zuivere tekenfunctie van wat het
+/// meekrijgt, en het bewerkscherm zit op zijn klasseplafond.
+Widget _documentLivePreview(
+  ThemeData theme,
+  String source, {
+  required ScrollController scrollController,
+  required ThemeProfile? style,
+  required int anchorBlockIndex,
+  required GlobalKey? anchorKey,
+  required void Function(int, String) onEditChart,
+  required void Function(int, List<String>) onEditTable,
+}) => Container(
+  color: theme.colorScheme.surface,
+  // Boven-links, niet gecentreerd: de weergave vult het paneel en de tekst
+  // begint waar hij op het vel ook zou beginnen.
+  alignment: Alignment.topLeft,
+  child: SingleChildScrollView(
+    controller: scrollController,
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+    child: _styledDocumentBody(
+      style,
+      DocumentMarkdownView(
+        source,
+        maxTextWidth: 720,
+        themeProfile: style,
+        chartTheme: style,
+        anchorBlockIndex: anchorBlockIndex,
+        anchorKey: anchorKey,
+        onEditChart: onEditChart,
+        onEditTable: onEditTable,
+      ),
+    ),
+  ),
+);
+
+/// De sneltoetsen van de documentbewerker om [child] heen: opslaan, ongedaan
+/// maken, opnieuw, en de zoom.
+///
+/// [Actions] én [CallbackShortcuts]: de eerste vangt de intenties die Flutter
+/// zelf uitstuurt (het bewerkmenu van macOS stuurt `UndoTextIntent`), de tweede
+/// de toetsen die niemand anders bindt. Top-level omdat het bewerkscherm op zijn
+/// klasseplafond zit en dit een omhulsel is, geen gedrag van het scherm.
+Widget _withDocumentShortcuts(
+  WidgetRef ref, {
+  required VoidCallback onUndo,
+  required VoidCallback onRedo,
+  required VoidCallback onSave,
+  required Widget child,
+}) => Actions(
+  actions: {
+    UndoTextIntent: CallbackAction<UndoTextIntent>(
+      onInvoke: (_) {
+        onUndo();
+        return null;
+      },
+    ),
+    RedoTextIntent: CallbackAction<RedoTextIntent>(
+      onInvoke: (_) {
+        onRedo();
+        return null;
+      },
+    ),
+  },
+  child: CallbackShortcuts(
+    bindings: {
+      // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
+      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): onSave,
+      const SingleActivator(LogicalKeyboardKey.keyS, control: true): onSave,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): onUndo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true): onUndo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true, shift: true):
+          onRedo,
+      const SingleActivator(
+        LogicalKeyboardKey.keyZ,
+        control: true,
+        shift: true,
+      ): onRedo,
+      const SingleActivator(LogicalKeyboardKey.keyY, control: true): onRedo,
+      // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
+      // Beide plustoetsen, want op de meeste indelingen zit + op shift-= en
+      // levert het toetsenbord `equal` in plaats van `add`.
+      ..._documentZoomShortcuts(ref),
+    },
+    child: child,
+  ),
+);
+
+/// De breedte waarop het schrijfvlak staat: de tekstbreedte van het vel, de
+/// ingestelde leeskolom, of niets (het hele venster) — allemaal maal de zoom.
+///
+/// De zoom zit erin omdat hij anders liegt: schaalt alleen de tekst mee en niet
+/// de kolom, dan valt de regelval anders dan op papier en klopt geen enkel
+/// pagina-einde meer. Tekst en kolom groeien met dezelfde factor, dus wat er op
+/// een regel past blijft precies gelijk.
+double? _documentWriteWidth(WidgetRef ref) {
+  final settings = ref.watch(settingsProvider);
+  final zoom = settings.documentEditorZoom;
+  return switch (settings.documentEditorWidth) {
+    DocumentEditorWidth.page => _documentPageTextWidthPx(ref) * zoom,
+    DocumentEditorWidth.column => switch (settings.documentEditorMaxWidth) {
+      null => null,
+      final width => width * zoom,
+    },
+    DocumentEditorWidth.full => null,
+  };
+}
+
+/// Het rauwe schrijfvlak van de Bron-stand: één monospace tekstveld met het
+/// slimme plakken eraan geknoopt.
+///
+/// Top-level en niet op de staat: het heeft niets nodig behalve de controller,
+/// de focus en de plak-afhandeling, en het bewerkscherm zit op zijn
+/// klasseplafond.
+Widget _documentSourceField(
+  ThemeData theme, {
+  required TextEditingController controller,
+  required FocusNode focusNode,
+  required Future<bool> Function() onSmartPaste,
+}) => Shortcuts(
+  shortcuts: const {
+    SingleActivator(LogicalKeyboardKey.keyV, control: true):
+        _DocSmartPasteIntent(),
+    SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+        _DocSmartPasteIntent(),
+  },
+  child: Actions(
+    actions: {
+      _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
+        onInvoke: (_) {
+          unawaited(onSmartPaste());
+          return null;
+        },
+      ),
+    },
+    child: TextField(
+      controller: controller,
+      focusNode: focusNode,
+      maxLines: null,
+      expands: true,
+      textAlignVertical: TextAlignVertical.top,
+      cursorColor: theme.colorScheme.primary,
+      keyboardType: TextInputType.multiline,
+      style: TextStyle(
+        fontFamily: 'monospace',
+        fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+        fontSize: 14,
+        height: 1.5,
+        color: theme.colorScheme.onSurface,
+      ),
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.all(16),
+      ),
+    ),
+  ),
+);
+
+/// Pagina-modus: het document op echte vellen, met de paginamaat, de marges en
+/// een eventuele drukkersafloop. Hier zie je wat er op welke bladzijde belandt
+/// — de vraag die een tekstverwerker beantwoordt en een doorlopende rol niet.
+/// Lezen en nakijken, niet typen: bewerken doe je in de visuele of de bron-stand.
+///
+/// Top-level en niet op de staat: hij heeft alleen de instellingen, de tekst en
+/// de stijl nodig, en het bewerkscherm zit op zijn klasseplafond.
+Widget _documentPagesLayout(
+  WidgetRef ref,
+  ThemeData theme,
+  String source, {
+  required ThemeProfile? style,
+  required String? projectPath,
+}) {
+  final settings = ref.watch(settingsProvider);
+  // Draagt het document zelf een paginaopmaak, dan wint die van de instelling —
+  // zie [effectiveDocumentPageSetup].
+  final setup = effectiveDocumentPageSetup(settings, _pageSetupSource(ref));
+  return Container(
+    color: theme.colorScheme.surfaceContainerHighest,
+    child: PagedDocumentView(
+      markdown: source,
+      pageSize: setup.size!,
+      margins: setup.margins!,
+      profile: style,
+      projectPath: projectPath,
+      chapterPageBreak: settings.documentChapterPageBreak,
+      // Waar de noten komen staat in het document zelf; zie
+      // [documentFootnotePlacement].
+      footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
+      // Hier is de zoom meetkundig: het vel wordt groter of kleiner getekend, de
+      // indeling erop blijft die van het papier. Precies waarom je in deze stand
+      // inzoomt — om beter te zien wat er staat, niet om iets anders te laten
+      // breken.
+      scale: settings.documentEditorZoom,
+    ),
+  );
+}
+
+/// Zet de zoom van de documenteditor; de notifier klemt hem op zijn grenzen.
+void _setDocumentZoom(WidgetRef ref, double zoom) =>
+    unawaited(ref.read(settingsProvider.notifier).setDocumentEditorZoom(zoom));
+
+/// Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
+///
+/// Twee plustoetsen en twee mintoetsen: op de meeste indelingen zit + op
+/// shift-=, en dan levert het toetsenbord `equal` in plaats van `add`. Alleen
+/// `add` binden werkt op een cijferblok en nergens anders.
+Map<ShortcutActivator, VoidCallback> _documentZoomShortcuts(WidgetRef ref) {
+  final zoom = ref.read(settingsProvider).documentEditorZoom;
+  const step = kDocumentEditorZoomStep;
+  void bigger() => _setDocumentZoom(ref, zoom + step);
+  void smaller() => _setDocumentZoom(ref, zoom - step);
+  return {
+    for (final key in const [
+      LogicalKeyboardKey.equal,
+      LogicalKeyboardKey.add,
+      LogicalKeyboardKey.numpadAdd,
+    ]) ...{
+      SingleActivator(key, meta: true): bigger,
+      SingleActivator(key, control: true): bigger,
+    },
+    for (final key in const [
+      LogicalKeyboardKey.minus,
+      LogicalKeyboardKey.numpadSubtract,
+    ]) ...{
+      SingleActivator(key, meta: true): smaller,
+      SingleActivator(key, control: true): smaller,
+    },
+    for (final key in const [
+      LogicalKeyboardKey.digit0,
+      LogicalKeyboardKey.numpad0,
+    ]) ...{
+      SingleActivator(key, meta: true): () => _setDocumentZoom(ref, 1),
+      SingleActivator(key, control: true): () => _setDocumentZoom(ref, 1),
+    },
+  };
 }
 
 /// De tekstbreedte van de pagina die nu geldt: die van het document zelf als
@@ -261,6 +453,24 @@ double _documentPageTextWidthPx(WidgetRef ref) {
     ref.read(documentProvider).document?.source ?? '',
   );
   return pageTextWidthPx(setup.size!, setup.margins!);
+}
+
+/// Zet de voetnoten van dít document achterin (`reference-location: document`)
+/// of weer onderaan de bladzijde.
+///
+/// Schrijft in de front matter van het bestand van de gebruiker — maar alleen
+/// de afwijking: "onderaan de bladzijde" is wat elke lezer zonder aanwijzing al
+/// doet, dus die keuze haalt de sleutel juist weg. Een document dat er niets
+/// over zegt, blijft een `.md` zonder front matter.
+void _setFootnotePlacement(WidgetRef ref, bool atEnd) {
+  final doc = ref.read(documentProvider).document;
+  if (doc == null) return;
+  final next = withDocumentFootnotePlacement(
+    doc.source,
+    atEnd ? FootnotePlacement.document : FootnotePlacement.page,
+  );
+  if (next == doc.source) return;
+  ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
 }
 
 /// Laat kiezen of de huidige paginaopmaak in dít document komt te staan of uit

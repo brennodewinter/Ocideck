@@ -82,6 +82,18 @@ void main() {
       expect(off, isNot(contains('.document h1{page-break-before:always')));
     });
 
+    test('een kop blijft bij het afdrukken niet alleen onderaan', () async {
+      // #2: dezelfde regel als de Pagina's-weergave in de app hanteert. De
+      // browser kent hem als `break-after: avoid` plus weduwen/wezen; zonder
+      // deze regels zei het scherm iets anders dan de druk.
+      final html = await MarpHtmlService(
+        loadAsset: _diskLoader,
+      ).build(_md, continuous: true);
+      expect(html, contains('page-break-after:avoid'));
+      expect(html, contains('break-after:avoid'));
+      expect(html, contains('orphans:2;widows:2'));
+    });
+
     test('de renderroute-selector dekt de documentsectie', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(_md, continuous: true);

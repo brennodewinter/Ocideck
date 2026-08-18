@@ -17,6 +17,8 @@
 import 'package:markdown/markdown.dart' as md;
 
 import '../../models/settings.dart' show TableBorderStyle;
+import '../../utils/footnotes.dart';
+import '../document_footnote_setup.dart';
 
 /// Zet [markdown] (GFM) om in een LaTeX-fragment.
 ///
@@ -28,12 +30,30 @@ import '../../models/settings.dart' show TableBorderStyle;
 /// [TableBorderStyle.lined] → booktabs (`\toprule`/`\midrule`/`\bottomrule`,
 /// de standaard), [TableBorderStyle.boxed] → volledig omkaderd
 /// (`|l|l|…|` + `\hline`), [TableBorderStyle.none] → geen regels.
+/// [footnotePlacement] bepaalt waar de voetnoten landen: onderaan de bladzijde
+/// (`\footnote`, wat LaTeX zelf al doet) of achterin als genummerde lijst onder
+/// [endnotesTitle]. Die titel komt van de aanroeper omdat deze converter geen
+/// vertalingen kent — hij is zuiver tekst-in, tekst-uit.
 String markdownToLatex(
   String markdown, {
   bool chapterPageBreak = false,
   TableBorderStyle tableBorderStyle = TableBorderStyle.lined,
+  FootnotePlacement footnotePlacement = FootnotePlacement.page,
+  String endnotesTitle = 'Noten',
 }) {
   if (markdown.trim().isEmpty) return '';
+  // Voetnoten vóór de parse eruit halen en door een sentinel vervangen, om
+  // dezelfde reden als de inhoudsopgave hieronder: `\footnote{…}` als tekst door
+  // de parser sturen levert `\textbackslash{}footnote` op — letterlijk die
+  // tekens in het document.
+  final notes = documentFootnotes(markdown);
+  var source = stripFootnoteDefinitions(markdown);
+  for (final note in notes) {
+    source = source.replaceAll(
+      '[^${note.label}]',
+      _footnoteSentinel(note.number),
+    );
+  }
   // Feature 4: `<!-- toc -->` → `\tableofcontents` (LaTeX genereert zelf de
   // inhoudsopgave bij compilatie). De marker wordt vóór de parse vervangen,
   // zodat de markdown-package het commentaar niet als tekst stript — maar niet
@@ -43,7 +63,7 @@ String markdownToLatex(
   // sentinel zonder escape-gevoelige tekens doorheen, die na de conversie het
   // commando wordt.
   const tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
-  final withToc = markdown.replaceAll(
+  final withToc = source.replaceAll(
     RegExp(r'^<!-- toc -->\s*$', multiLine: true),
     tocSentinel,
   );
@@ -61,10 +81,45 @@ String markdownToLatex(
   for (final node in nodes) {
     node.accept(visitor);
   }
-  return visitor.output
-      .toString()
-      .replaceAll(tocSentinel, '\\tableofcontents')
-      .trimRight();
+  var out = visitor.output.toString().replaceAll(
+    tocSentinel,
+    '\\tableofcontents',
+  );
+  for (final note in notes) {
+    out = out.replaceAll(
+      _footnoteSentinel(note.number),
+      footnotePlacement == FootnotePlacement.page
+          // LaTeX zet hem zelf onderaan het blad en nummert zelf door; het
+          // nummer dat wij berekenden komt op hetzelfde uit.
+          ? '\\footnote{${markdownInlineToLatex(note.text)}}'
+          : '\\textsuperscript{${note.number}}',
+    );
+  }
+  if (notes.isNotEmpty && footnotePlacement == FootnotePlacement.document) {
+    out = '$out\n\n${_endnotesSection(notes, endnotesTitle)}';
+  }
+  return out.trimRight();
+}
+
+/// Het merkteken dat een voetnootverwijzing tijdens de conversie vervangt.
+/// Alleen letters en cijfers, zodat geen enkele escape-regel eraan komt, en met
+/// een sluitwoord zodat noot 1 niet in noot 11 zit.
+String _footnoteSentinel(int number) => 'OCIDECKFOOTNOTE${number}END';
+
+/// De noten achterin, als genummerde lijst onder een eigen kop.
+///
+/// Een gewone `enumerate` volstaat: de noten zijn per constructie 1…n in
+/// leesvolgorde (zie [documentFootnotes]), dus wat LaTeX telt is precies wat er
+/// als merkteken in de tekst staat. Geen extra pakket in de preamble nodig.
+String _endnotesSection(List<Footnote> notes, String title) {
+  final buf = StringBuffer()
+    ..writeln('\\section*{${_escapeText(title)}}')
+    ..writeln('\\begin{enumerate}');
+  for (final note in notes) {
+    buf.writeln('  \\item ${markdownInlineToLatex(note.text)}');
+  }
+  buf.write('\\end{enumerate}');
+  return buf.toString();
 }
 
 /// Zet een inline-fragment [markdown] om in LaTeX (geen blok-elementen).

@@ -20,6 +20,7 @@ import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
+import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
 import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
@@ -33,13 +34,19 @@ import '../platform/platform_features.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
-import '../state/settings_provider.dart' show settingsProvider;
+import '../state/settings_provider.dart'
+    show
+        kDocumentEditorZoomMax,
+        kDocumentEditorZoomMin,
+        kDocumentEditorZoomStep,
+        settingsProvider;
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
 import '../utils/error_snackbar.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
+import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import '../utils/markdown_visual_compatibility.dart'
@@ -65,6 +72,7 @@ import 'shell/document_save_actions.dart';
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_editor_layouts.dart';
 part 'parts/document_source_rewrites.dart';
+part 'parts/document_editor_inserts.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
@@ -133,6 +141,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Zie [_insertBlock] voor waarom de invoeging daar niet via de bron loopt.
   int _insertSignal = 0;
   String? _pendingInsertBlock;
+
+  /// Het label van de voetnoot die op hetzelfde [_insertSignal] moet worden
+  /// ingevoegd, of `null` wanneer de invoeging een gewoon blok is.
+  String? _pendingFootnoteLabel;
 
   /// Waar tussen het aanvragen van zo'n invoeging en de controllerwijziging die
   /// eruit volgt: die ene wijziging is een eigen bewerking, geen voortzetting
@@ -333,6 +345,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       cropMarks: settings.documentCropMarks,
       pageSize: exportSetup.size!,
       pageMargins: exportSetup.margins!,
+      // Waar de noten komen staat in het document zelf; de kop erboven komt uit
+      // de interfacetaal, want de converter kent geen vertalingen.
+      footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
+      footnotesTitle: l10n.d('Noten'),
       outputPath: outputPath,
     );
   }
@@ -467,173 +483,106 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final styleProfile = resolveDocumentStyleProfile(settings, docStyleName);
     _styleProfile = styleProfile;
     final theme = Theme.of(context);
-    return Actions(
-      actions: {
-        UndoTextIntent: CallbackAction<UndoTextIntent>(
-          onInvoke: (_) {
-            _undo();
-            return null;
-          },
-        ),
-        RedoTextIntent: CallbackAction<RedoTextIntent>(
-          onInvoke: (_) {
-            _redo();
-            return null;
-          },
-        ),
-      },
-      child: CallbackShortcuts(
-        bindings: {
-          // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
-          const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
-              unawaited(_save()),
-          const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
-              unawaited(_save()),
-          const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): _undo,
-          const SingleActivator(LogicalKeyboardKey.keyZ, control: true): _undo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            meta: true,
-            shift: true,
-          ): _redo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            control: true,
-            shift: true,
-          ): _redo,
-          const SingleActivator(LogicalKeyboardKey.keyY, control: true): _redo,
-        },
-        child: Scaffold(
-          body: Column(
-            children: [
-              _DocEditorToolbar(
-                mode: _viewMode,
-                onModeChanged: (m) => setState(() => _viewMode = m),
-                onInsertChart: _insertChart,
-                onInsertPageBreak: _insertPageBreak,
-                onInsertToc: _insertToc,
-                onApplyChapterBreaks: () =>
-                    applyChapterBreaksToDocument(context, ref),
-                onInsertTable: _insertTable,
-                onInsertMermaid: _insertMermaid,
-                onInsertImage: _insertImage,
-                onPaste: () => unawaited(_smartPaste()),
-                onUndo: canUndo ? _undo : null,
-                onRedo: canRedo ? _redo : null,
-                onExport: _export,
-                onOpenSettings: () => SettingsDialog.show(
-                  context,
-                  initialSection: SettingsSection.presentation,
-                ),
-                onConvertToPresentation: _convertToPresentation,
-                controller: _controller,
-                editorFocus: _editorFocus,
-                docTheme: _docSurfaceTheme(theme, _styleProfile),
-                styleNames: [for (final p in settings.themeProfiles) p.name],
-                currentStyleName: effectiveDocumentStyleName(
-                  settings,
-                  docStyleName,
-                ),
-                styleEnforced: settings.documentStyleEnforced,
-                enforcedStyleName: settings.documentStyleEnforced
-                    ? settings.documentDefaultStyle
-                    : null,
-                onStyleChanged: (name) => _setDocumentStyle(ref, name),
-                showPageBreaks: _showPageBreaks,
-                onShowPageBreaksChanged: (v) =>
-                    setState(() => _showPageBreaks = v),
+    return _withDocumentShortcuts(
+      ref,
+      onUndo: _undo,
+      onRedo: _redo,
+      onSave: () => unawaited(_save()),
+      child: Scaffold(
+        body: Column(
+          children: [
+            _DocEditorToolbar(
+              mode: _viewMode,
+              onModeChanged: (m) => setState(() => _viewMode = m),
+              onInsertChart: _insertChart,
+              onInsertPageBreak: _insertPageBreak,
+              onInsertToc: _insertToc,
+              onInsertFootnote: _insertFootnote,
+              footnotesAtEnd:
+                  documentFootnotePlacement(_pageSetupSource(ref)) ==
+                  FootnotePlacement.document,
+              onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
+              onApplyChapterBreaks: () =>
+                  applyChapterBreaksToDocument(context, ref),
+              onInsertTable: _insertTable,
+              onInsertMermaid: _insertMermaid,
+              onInsertImage: _insertImage,
+              onPaste: () => unawaited(_smartPaste()),
+              onUndo: canUndo ? _undo : null,
+              onRedo: canRedo ? _redo : null,
+              onExport: _export,
+              onOpenSettings: () => SettingsDialog.show(
+                context,
+                initialSection: SettingsSection.presentation,
               ),
-              Divider(
-                height: 1,
-                thickness: 1,
-                color: theme.colorScheme.outlineVariant,
+              onConvertToPresentation: _convertToPresentation,
+              controller: _controller,
+              editorFocus: _editorFocus,
+              docTheme: _docSurfaceTheme(theme, _styleProfile),
+              styleNames: [for (final p in settings.themeProfiles) p.name],
+              currentStyleName: effectiveDocumentStyleName(
+                settings,
+                docStyleName,
               ),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) => switch (_viewMode) {
-                    _DocViewMode.visual => _visualLayout(
-                      theme,
-                      source,
-                      constraints,
-                    ),
-                    _DocViewMode.source => _sourceLayout(
-                      theme,
-                      source,
-                      constraints,
-                    ),
-                    _DocViewMode.pages => _pagesLayout(theme, source),
-                  },
-                ),
+              styleEnforced: settings.documentStyleEnforced,
+              enforcedStyleName: settings.documentStyleEnforced
+                  ? settings.documentDefaultStyle
+                  : null,
+              onStyleChanged: (name) => _setDocumentStyle(ref, name),
+              showPageBreaks: _showPageBreaks,
+              onShowPageBreaksChanged: (v) =>
+                  setState(() => _showPageBreaks = v),
+              width: settings.documentEditorWidth,
+              onWidthChanged: (v) => unawaited(
+                ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
               ),
-            ],
-          ),
+              zoom: settings.documentEditorZoom,
+              onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
+            ),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: theme.colorScheme.outlineVariant,
+            ),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) => switch (_viewMode) {
+                  _DocViewMode.visual => _visualLayout(
+                    theme,
+                    source,
+                    constraints,
+                  ),
+                  _DocViewMode.source => _sourceLayout(
+                    theme,
+                    source,
+                    constraints,
+                  ),
+                  _DocViewMode.pages => _documentPagesLayout(
+                    ref,
+                    theme,
+                    source,
+                    style: _styleProfile,
+                    projectPath: _projectPath,
+                  ),
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
-  /// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
-  /// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
-  /// zijn plek in de bron; de weergave hertekent mee. DOCUMENT_MODE.md §4.2.
-  Future<void> _editChart(int chartOrdinal, String block) async {
-    var edited = block;
-    final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
-    final apply = await showEmbedEditorDialog(
-      context,
-      ChartEditor(
-        slide: slide,
-        themeAnimationDurationMs: 0,
-        nestedInScrollView: true,
-        onUpdate: (s) => edited = s.customMarkdown,
-      ),
-    );
-    if (apply != true || !mounted) return;
-    final body = ref.read(documentProvider).document?.body ?? '';
-    final next = replaceNthChartBlock(body, chartOrdinal, edited);
-    if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
-  }
+  /// dialoog. Zie [_editDocumentChart]; hier alleen de doorgeefluik-methode,
+  /// zodat de weergave hem als callback kan meegeven.
+  Future<void> _editChart(int chartOrdinal, String block) =>
+      _editDocumentChart(context, ref, chartOrdinal, block);
 
   /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
-  /// dialoog. Kop + scheidingsrij + body worden via [decodeMarkdownTableWithAlignment]
-  /// ontleed tot een celraster mét per-kolomuitlijning en in een wegwerp-[Slide]
-  /// gezet; 'Toepassen' serialiseert raster én uitlijning terug naar een
-  /// GFM-tabel en vervangt precies dat tabelblok in de bron. DOCUMENT_MODE.md §4.2.
-  Future<void> _editTable(int tableOrdinal, List<String> rawRows) async {
-    final body = ref.read(documentProvider).document?.body ?? '';
-    // rawRows draagt de scheidingsrij niet; die haalt de uitlijning. Lees daarom
-    // het volledige tabelblok (kop + scheiding + body) uit de body.
-    final range = DocumentMarkdownView.nthTableBlockRange(body, tableOrdinal);
-    final tableLines = range == null
-        ? rawRows
-        : body.split('\n').sublist(range[0], range[1]);
-    final decoded = decodeMarkdownTableWithAlignment(tableLines);
-    var editedRows = decoded.rows;
-    var editedAligns = decoded.alignments;
-    final slide = Slide.create(SlideType.table).copyWith(
-      tableRows: decoded.rows,
-      tableColumnAlignments: decoded.alignments,
-    );
-    final apply = await showEmbedEditorDialog(
-      context,
-      TableEditor(
-        slide: slide,
-        nestedInScrollView: true,
-        documentContext: true,
-        onUpdate: (s) {
-          editedRows = s.tableRows;
-          editedAligns = s.tableColumnAlignments;
-        },
-      ),
-    );
-    if (apply != true || !mounted) return;
-    final next = replaceNthTableBlock(
-      body,
-      tableOrdinal,
-      encodeMarkdownTable(editedRows, alignments: editedAligns),
-    );
-    if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
-  }
+  /// dialoog. Zie [_editDocumentTable]; hier alleen de doorgeefluik-methode.
+  Future<void> _editTable(int tableOrdinal, List<String> rawRows) =>
+      _editDocumentTable(context, ref, tableOrdinal, rawRows);
 
   /// Voeg [block] als een verse alinea in op de cursorpositie (of achteraan als
   /// er geen selectie is). De pure [insertBlockIntoSource] regelt de lege regels
@@ -648,11 +597,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // de editor het zelf, op zijn eigen cursor.
     if (_viewMode == _DocViewMode.visual &&
         markdownRoundTripsVisually(_controller.text)) {
-      _expectVisualInsert = true;
-      setState(() {
-        _pendingInsertBlock = block;
-        _insertSignal++;
-      });
+      _requestVisualInsert(block: block);
       return;
     }
     final sel = _controller.selection;
@@ -672,6 +617,20 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
     _applyingExternal = false;
     _commitDocumentBody(ref, next, coalesceKey: null);
+  }
+
+  /// Vraagt de visuele editor om een invoeging op zíjn cursor: een blok, of een
+  /// voetnoot (merkteken op de cursor, notenregel onderaan).
+  ///
+  /// Staat in de klasse en niet bij de andere invoegingen, omdat alleen een
+  /// `State` zijn eigen [setState] mag aanroepen — een extensie ernaast niet.
+  void _requestVisualInsert({String? block, String? footnoteLabel}) {
+    _expectVisualInsert = true;
+    setState(() {
+      _pendingInsertBlock = block;
+      _pendingFootnoteLabel = footnoteLabel;
+      _insertSignal++;
+    });
   }
 
   /// Slim plakken: herkent afbeelding → `![](…)`, spreadsheet/tabel → GFM-
@@ -735,106 +694,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   void _undo() => ref.read(documentProvider.notifier).undo();
   void _redo() => ref.read(documentProvider.notifier).redo();
-
-  /// Voeg een verse grafiek in: dezelfde [ChartEditor] als een dia (met een
-  /// wegwerp-[Slide]), en bij 'Toepassen' een ```chart-blok op de cursorpositie.
-  /// Identiek aan het dia-mechanisme — geen tweede grafiekweg (DOCUMENT_MODE.md
-  /// §4.2). Zonder ingevulde data blijft het een geldig, later invulbaar blok.
-  Future<void> _insertChart() async {
-    final slide = Slide.create(SlideType.chart);
-    var spec = ChartSpec.parse(slide.customMarkdown).toBlock();
-    final apply = await showEmbedEditorDialog(
-      context,
-      ChartEditor(
-        slide: slide,
-        themeAnimationDurationMs: 0,
-        nestedInScrollView: true,
-        onUpdate: (s) => spec = s.customMarkdown,
-      ),
-    );
-    if (apply != true || !mounted) return;
-    _insertBlock('```chart\n$spec\n```');
-  }
-
-  /// Voeg een verse tabel in: de [TableEditor] met een leeg 2×2-raster, en bij
-  /// 'Toepassen' een GFM-pijptabel op de cursorpositie.
-  Future<void> _insertTable() async {
-    final slide = Slide.create(SlideType.table);
-    var rows = slide.tableRows;
-    final apply = await showEmbedEditorDialog(
-      context,
-      TableEditor(
-        slide: slide,
-        nestedInScrollView: true,
-        documentContext: true,
-        onUpdate: (s) => rows = s.tableRows,
-      ),
-    );
-    if (apply != true || !mounted) return;
-    _insertBlock(encodeMarkdownTable(rows));
-  }
-
-  /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal
-  /// startdiagram (knoop-id's, geen tekst om te vertalen). Bewerken gaat via de
-  /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).
-  void _insertMermaid() =>
-      _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
-
-  /// Voeg een pagina-einde in: een `---`-scheiding (een gewone Markdown-thematische
-  /// breuk). Een document blijft doorlopend op het scherm; de export (HTML/PDF/
-  /// LaTeX) maakt er een echt nieuw blad van. Draagbaar: elke Markdown-lezer toont
-  /// `---` als scheidingslijn.
-  void _insertPageBreak() => _insertBlock('---');
-
-  /// Feature 4: voeg een inhoudsopgave-marker in op de cursorpositie. De
-  /// marker `<!-- toc -->` is een HTML-commentaar dat elke vreemde
-  /// Markdown-lezer negeert; OciDeck regenereert de TOC op deze plek bij
-  /// export. De gegenereerde inhoud wordt niet in de `.md` opgeslagen.
-  void _insertToc() => _insertBlock('<!-- toc -->');
-
-  /// Voeg een afbeelding in via de carrousel (bibliotheken + open presentaties
-  /// + Bladeren…). De gekozen file gaat door [ImageService.importIntoDeck]
-  /// (grootte-cap, magic-bytes, kopie naar `images/` of staging) en landt als
-  /// `![…](…)` op de cursorpositie — geen aparte assetweg naast de dia-import.
-  Future<void> _insertImage() async {
-    final state = ref.read(documentProvider);
-    final settings = ref.read(settingsProvider);
-    final projectPath = state.filePath == null
-        ? null
-        : p.dirname(state.filePath!);
-    final tabs = ref.read(tabsProvider).tabs;
-    // Zelfde afbeeldingspool als presentatiemodus: open decks + bibliotheek.
-    // Recente presentaties leveren hun images/logos (niet de hele map).
-    final searchPaths = documentImageSearchPaths(
-      projectPath,
-      settings.libraryPaths,
-      openDeckProjectPaths: [
-        for (final tab in tabs)
-          ?tab.deckNotifierOrNull?.currentState.deck?.projectPath,
-      ],
-      recentPresentationDirectories: [
-        for (final recent in settings.recentFiles)
-          if (recent.kind.isPresentation) p.dirname(recent.path),
-      ],
-    );
-    final picked = await ImageCarouselPicker.show(
-      context,
-      searchPaths: searchPaths,
-      captionService: ref.read(captionServiceProvider),
-      descriptionService: ref.read(descriptionServiceProvider),
-      // Alleen deck-tabs: documenttabs hebben geen deckNotifier (gooit anders).
-      openDeckFiles: [
-        for (final tab in tabs) ?tab.deckNotifierOrNull?.currentState.filePath,
-      ],
-    );
-    if (picked == null || !mounted) return;
-    final reference = await ref
-        .read(imageServiceProvider)
-        .importIntoDeck(picked.path, projectPath: projectPath);
-    if (!mounted) return;
-    final alt = markdownImageAlt(picked.caption);
-    _insertBlock('![$alt]($reference)');
-  }
 
   /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
   /// ([_documentOutlineRail]); het scherm levert alleen de stand en wat er bij

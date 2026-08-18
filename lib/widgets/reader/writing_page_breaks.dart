@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart' show BoxParentData;
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../services/document_pagination.dart';
+import 'document_markdown_view.dart' show documentKeepWithNextHeight;
 
 /// De hoogtes van de blokken in de schrijfstand, in de volgorde waarin ze
 /// staan — inclusief de witruimte die er ónder elk blok zit.
@@ -39,6 +40,39 @@ List<double> writingBlockHeights(RenderEditor? editor) {
   ];
 }
 
+/// De blokken die een kop zijn, als index in dezelfde lijst als
+/// [writingBlockHeights].
+///
+/// Dezelfde volgorde en dezelfde wandeling: een kop moet aan de tekst eronder
+/// vastzitten, en die twee lijsten op verschillende manieren opbouwen zou
+/// precies de fout opleveren die niemand ziet — de goede regel op het
+/// verkeerde blok.
+///
+/// Een kop is in de rijke-tekstlaag een regel met het `header`-kenmerk. Een
+/// blok-embed (tabel, inhoudsopgave) is er per definitie geen.
+Set<int> writingHeadingBlocks(RenderEditor? editor) {
+  if (editor == null || !editor.hasSize) return const {};
+  final headings = <int>{};
+  var index = 0;
+  // Langs `firstChild`/`childAfter` in plaats van `visitChildren`: die geven de
+  // kinderen als het bloktype van de editor terug, en alleen dat type kent de
+  // knoop waar het blok bij hoort. De klasse zelf is niet geëxporteerd, dus ze
+  // wordt afgeleid en nergens genoemd.
+  var child = editor.firstChild;
+  while (child != null) {
+    if (child.hasSize) {
+      final node = child.container;
+      if (node is Line &&
+          node.style.attributes.containsKey(Attribute.header.key)) {
+        headings.add(index);
+      }
+      index++;
+    }
+    child = editor.childAfter(child);
+  }
+  return headings;
+}
+
 /// De bovenkant van het eerste blok binnen de editor.
 ///
 /// De inhoud begint niet op nul: de editor heeft een eigen binnenmarge. Reken
@@ -62,11 +96,17 @@ double writingContentTop(RenderEditor? editor) {
 List<double> writingPageBreaks({
   required List<double> blockHeights,
   required double pageContentHeight,
+  Set<int> headingBlocks = const {},
+  double minKeepHeight = 0,
 }) {
   if (blockHeights.isEmpty || pageContentHeight <= 0) return const [];
   return documentPageOffsets(
     blockHeights: blockHeights,
     pageHeight: pageContentHeight,
+    // Dezelfde kopregel als in de Pagina's-stand: de lijn hoort te vallen waar
+    // het vel breekt, en die twee mogen niet elk hun eigen opmaakregels hebben.
+    keepWithNext: headingBlocks,
+    minKeepHeight: minKeepHeight,
   ).skip(1).toList();
 }
 
@@ -151,11 +191,14 @@ class _WritingPageBreakOverlayState extends State<WritingPageBreakOverlay> {
   /// paginamaat verandert.
   void _remeasure() {
     if (!mounted || !widget.enabled) return;
+    final editor = widget.editorKey.currentState?.renderEditor;
     _breaks = writingPageBreaks(
-      blockHeights: writingBlockHeights(
-        widget.editorKey.currentState?.renderEditor,
-      ),
+      blockHeights: writingBlockHeights(editor),
       pageContentHeight: widget.pageContentHeight,
+      headingBlocks: writingHeadingBlocks(editor),
+      minKeepHeight: documentKeepWithNextHeight(
+        MediaQuery.textScalerOf(context),
+      ),
     );
     _recompute();
   }

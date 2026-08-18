@@ -1652,6 +1652,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Voetnoot': 'Fuessnote',
+  'Noten': 'Aamerkige',
+  'Voetnoten achterin het document': 'Fuessnote am Änd vom Dokumänt',
+  'De tekst van de voetnoot': 'De Täxt vo de Fuessnote',
+  'Schrijfbreedte': 'Schriibbreiti',
+  'Paginabreedte': 'Siitebreiti',
+  'Leeskolom': 'Läsespalte',
+  'Ware grootte': 'Wahri Grössi',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Siiteumbrüch gälte nur bi Siitebreiti.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Wie breit d Läsespalte im visuelle Modus isch. Schmal liest sich ruhig, breit bruucht meh vom Bildschirm. Öb Sie uf däre Spalte, i Siitebreiti oder übers ganze Fänschter schriibe, wähle Sie i de Wärchzügliiste.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'De Sprung «{doel}» zeigt uf e Folie, wo\'s nüme git; bim Presentiere passiert nüt. Wähl e anderi Zielfolie.',
   'In een cirkel': 'Chreis',
@@ -1724,8 +1736,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Inhaltsverzeichnis — füeg Überschrifte zue zum s fülle.',
   'Schrijfbreedte editor': 'Schriibbreiti vom Editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Wie breit s Schriibfäld im visuelle Modus isch. Schmal liest sich ruhig, breit bruucht meh vom Bildschirm.',
   'Pagina-instellingen export': 'Siteiistellige für dr Export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sitegrössi (ISO 216) und Ränder für HTML-Druck, LaTeX und PDF-Export.',

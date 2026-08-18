@@ -1670,6 +1670,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voetnoot': 'Nota f\'qiegħ il-paġna',
+  'Noten': 'Noti',
+  'Voetnoten achterin het document': 'Noti fl-aħħar tad-dokument',
+  'De tekst van de voetnoot': 'It-test tan-nota',
+  'Schrijfbreedte': 'Wisa\' tal-kitba',
+  'Paginabreedte': 'Wisa\' tal-paġna',
+  'Leeskolom': 'Kolonna tal-qari',
+  'Ware grootte': 'Daqs reali',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Il-qasmiet tal-paġni japplikaw biss fil-wisa\' tal-paġna.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Kemm hi wiesgħa l-kolonna tal-qari fil-modalità viżwali. Dejqa tinqara bil-kalma, wiesgħa tuża aktar mill-iskrin. Jekk tiktebx f\'dik il-kolonna, fil-wisa\' tal-paġna jew fuq it-tieqa kollha, tagħżel fil-brix tal-għodda.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Il-qabża "{doel}" tipponta lejn slide li m\'għadhiex teżisti; waqt il-preżentazzjoni ma jiġri xejn. Agħżel slide oħra bħala mira.',
   'In een cirkel': 'Ċirku',
@@ -1742,8 +1754,6 @@ const _dutchSourceAddMt = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indiċi — żid intestaturi biex timlih.',
   'Schrijfbreedte editor': 'Wisa’ tal-kitba fl-editur',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kemm hi wiesgħa ż-żona tal-kitba fil-modalità viżwali. Dejqa taqra bil-kalma, wiesgħa tuża aktar mill-iskrin.',
   'Pagina-instellingen export': 'Issettjar tal-paġna għall-esportazzjoni',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Daqs tal-paġna (ISO 216) u marġini għall-istampar HTML, LaTeX u esportazzjoni PDF.',

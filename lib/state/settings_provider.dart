@@ -270,6 +270,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentChapterPageBreak: document.chapterPageBreak,
       documentCropMarks: document.cropMarks,
       documentEditorMaxWidth: document.editorMaxWidth,
+      documentEditorWidth: document.editorWidth,
+      documentEditorZoom: document.editorZoom,
       documentPageSize: document.pageSize,
       documentPageMargins: document.pageMargins,
       cockpitColorSchemes: cockpit.schemes,
@@ -553,6 +555,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   Future<void> setDocumentEditorMaxWidth(double? width) =>
       _applyDocumentEditorMaxWidth(this, width);
 
+  Future<void> setDocumentEditorWidth(DocumentEditorWidth width) =>
+      _applyDocumentEditorWidth(this, width);
+
+  Future<void> setDocumentEditorZoom(double zoom) =>
+      _applyDocumentEditorZoom(this, zoom);
+
   Future<void> setDocumentPageSize(PageSizeSpec spec) =>
       _applyDocumentPageSize(this, spec);
 
@@ -571,23 +579,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     );
   }
 
-  /// Ondergrens, bovengrens en stapgrootte voor de documentatielezer-schaal;
-  /// gedeeld met de knoppen in de lezer zodat clampen en stappen consistent zijn.
-  static const double docReaderTextScaleMin = 0.8;
-  static const double docReaderTextScaleMax = 1.8;
-  static const double docReaderTextScaleStep = 0.1;
-
-  Future<void> setDocReaderTextScale(double scale) async {
-    final clamped = scale
-        .clamp(docReaderTextScaleMin, docReaderTextScaleMax)
-        .toDouble();
-    if (clamped == state.docReaderTextScale) return;
-    state = state.copyWith(docReaderTextScale: clamped);
-    await _persist(
-      'setDocReaderTextScale',
-      (prefs) => prefs.setDouble('docReaderTextScale', clamped),
-    );
-  }
+  Future<void> setDocReaderTextScale(double scale) =>
+      _applyDocReaderTextScale(this, scale);
 
   Future<void> setQualityWarningsOnExport(bool enabled) async {
     state = state.copyWith(qualityWarningsOnExport: enabled);

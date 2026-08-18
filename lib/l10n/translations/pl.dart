@@ -1662,6 +1662,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Voetnoot': 'Przypis',
+  'Noten': 'Przypisy',
+  'Voetnoten achterin het document': 'Przypisy na końcu dokumentu',
+  'De tekst van de voetnoot': 'Tekst przypisu',
+  'Schrijfbreedte': 'Szerokość pisania',
+  'Paginabreedte': 'Szerokość strony',
+  'Leeskolom': 'Kolumna czytania',
+  'Ware grootte': 'Rozmiar rzeczywisty',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Podziały stron obowiązują tylko przy szerokości strony.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Jak szeroka jest kolumna czytania w trybie wizualnym. Wąska czyta się spokojnie, szeroka wykorzystuje więcej ekranu. To, czy piszesz na tej kolumnie, na szerokości strony czy na całym oknie, wybierasz na pasku narzędzi.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Skok „{doel}“ wskazuje slajd, który już nie istnieje; podczas prezentacji nic się nie dzieje. Wybierz inny slajd docelowy.',
   'In een cirkel': 'Okrąg',
@@ -1734,8 +1746,6 @@ const _dutchSourceAddPl = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Spis treści — dodaj nagłówki, aby go wypełnić.',
   'Schrijfbreedte editor': 'Szerokość pisania w edytorze',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Jak szeroki jest obszar pisania w trybie wizualnym. Wąski czyta się spokojnie, szeroki wykorzystuje więcej ekranu.',
   'Pagina-instellingen export': 'Ustawienia strony dla eksportu',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Rozmiar strony (ISO 216) i marginesy dla wydruku HTML, LaTeX-a i eksportu PDF.',

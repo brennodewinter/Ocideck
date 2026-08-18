@@ -1650,6 +1650,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Voetnoot': 'Fodnote',
+  'Noten': 'Noter',
+  'Voetnoten achterin het document': 'Fodnoter sidst i dokumentet',
+  'De tekst van de voetnoot': 'Fodnotens tekst',
+  'Schrijfbreedte': 'Skrivebredde',
+  'Paginabreedte': 'Sidebredde',
+  'Leeskolom': 'Læsespalte',
+  'Ware grootte': 'Faktisk størrelse',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Sideskift gælder kun ved sidebredde.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Hvor bred læsespalten er i visuel tilstand. Smal læses roligt, bred bruger mere af skærmen. Om du skriver på den spalte, i sidebredde eller i hele vinduet, vælger du på værktøjslinjen.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Springet "{doel}" peger på et dias, der ikke længere findes; under præsentationen sker der ingenting. Vælg et andet måldias.',
   'In een cirkel': 'Cirkel',
@@ -1722,8 +1734,6 @@ const _dutchSourceAddDa = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indholdsfortegnelse — tilføj overskrifter for at fylde den.',
   'Schrijfbreedte editor': 'Skrivebredde i editoren',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Hvor bredt skriveområdet er i visuel tilstand. Smalt læses roligt, bredt bruger mere af skærmen.',
   'Pagina-instellingen export': 'Sideindstillinger til eksport',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sidestørrelse (ISO 216) og margener til HTML-udskrift, LaTeX og PDF-eksport.',

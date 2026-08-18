@@ -49,7 +49,7 @@ part of '../document_editor_screen.dart';
 ///
 /// De eerste kop krijgt er nooit een: een breuk vóór de eerste regel zou een
 /// leeg eerste vel opleveren — dezelfde regel die
-/// [DocumentMarkdownView.forcedPageBreaks] bij de weergave hanteert.
+/// [documentForcedPageBreaks] bij de weergave hanteert.
 ///
 /// Idempotent: staat er al een thematische breuk vóór de kop (met hoogstens lege
 /// regels ertussen), dan blijft die body byte-getrouw. Twee keer toepassen geeft

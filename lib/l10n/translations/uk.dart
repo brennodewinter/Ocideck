@@ -1666,6 +1666,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voetnoot': 'Виноска',
+  'Noten': 'Примітки',
+  'Voetnoten achterin het document': 'Виноски в кінці документа',
+  'De tekst van de voetnoot': 'Текст виноски',
+  'Schrijfbreedte': 'Ширина письма',
+  'Paginabreedte': 'Ширина сторінки',
+  'Leeskolom': 'Колонка читання',
+  'Ware grootte': 'Справжній розмір',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Розриви сторінок діють лише за ширини сторінки.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Наскільки широка колонка читання у візуальному режимі. Вузька читається спокійно, широка використовує більше екрана. Чи писати на цій колонці, на ширині сторінки чи на все вікно, ви обираєте на панелі інструментів.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Перехід «{doel}» указує на слайд, якого більше немає; під час презентації нічого не відбувається. Виберіть інший цільовий слайд.',
   'In een cirkel': 'Коло',
@@ -1738,8 +1750,6 @@ const _dutchSourceAddUk = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Зміст — додайте заголовки, щоб його заповнити.',
   'Schrijfbreedte editor': 'Ширина письма в редакторі',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Наскільки широка область письма у візуальному режимі. Вузька читається спокійно, широка використовує більше екрана.',
   'Pagina-instellingen export': 'Параметри сторінки для експорту',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Розмір сторінки (ISO 216) і поля для друку HTML, LaTeX і експорту PDF.',

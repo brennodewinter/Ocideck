@@ -1649,6 +1649,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Voetnoot': 'Fotnot',
+  'Noten': 'Noter',
+  'Voetnoten achterin het document': 'Fotnoter sist i dokumentet',
+  'De tekst van de voetnoot': 'Fotnotens text',
+  'Schrijfbreedte': 'Skrivbredd',
+  'Paginabreedte': 'Sidbredd',
+  'Leeskolom': 'Läskolumn',
+  'Ware grootte': 'Verklig storlek',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Sidbrytningar gäller bara vid sidbredd.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Hur bred läskolumnen är i visuellt läge. Smal läses lugnt, bred använder mer av skärmen. Om du skriver på den kolumnen, i sidbredd eller över hela fönstret väljer du i verktygsfältet.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Hoppet "{doel}" pekar på en slide som inte längre finns; under presentationen händer ingenting. Välj en annan slide som mål.',
   'In een cirkel': 'Cirkel',
@@ -1721,8 +1733,6 @@ const _dutchSourceAddSv = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Innehållsförteckning — lägg till rubriker för att fylla den.',
   'Schrijfbreedte editor': 'Skrivbredd i redigeraren',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Hur bred skrivytan är i visuellt läge. Smal läses lugnt, bred använder mer av skärmen.',
   'Pagina-instellingen export': 'Sidinställningar för export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sidstorlek (ISO 216) och marginaler för HTML-utskrift, LaTeX och PDF-export.',

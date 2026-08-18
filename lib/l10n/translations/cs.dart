@@ -1652,6 +1652,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Voetnoot': 'Poznámka pod čarou',
+  'Noten': 'Poznámky',
+  'Voetnoten achterin het document': 'Poznámky na konci dokumentu',
+  'De tekst van de voetnoot': 'Text poznámky',
+  'Schrijfbreedte': 'Šířka psaní',
+  'Paginabreedte': 'Šířka stránky',
+  'Leeskolom': 'Sloupec pro čtení',
+  'Ware grootte': 'Skutečná velikost',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Zalomení stránek platí jen při šířce stránky.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Jak široký je sloupec pro čtení ve vizuálním režimu. Úzký se čte klidně, široký využije více obrazovky. Zda píšete v tomto sloupci, v šířce stránky nebo přes celé okno, vyberete na panelu nástrojů.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Skok „{doel}“ odkazuje na snímek, který už neexistuje; během prezentace se nic nestane. Vyberte jiný cílový snímek.',
   'In een cirkel': 'Kruh',
@@ -1724,8 +1736,6 @@ const _dutchSourceAddCs = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Obsah — přidejte nadpisy, aby se naplnil.',
   'Schrijfbreedte editor': 'Šířka psaní v editoru',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Jak široká je psací plocha ve vizuálním režimu. Úzká se čte klidně, široká využije více obrazovky.',
   'Pagina-instellingen export': 'Nastavení stránky pro export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Velikost stránky (ISO 216) a okraje pro tisk HTML, LaTeX a export PDF.',

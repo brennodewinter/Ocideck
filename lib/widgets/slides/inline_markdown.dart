@@ -24,6 +24,17 @@ class InlineMarkdownText extends StatefulWidget {
   /// naast het blok te zweven. Gebruikt voor de "(2/3)"-titelteller (#1164).
   final InlineSpan? trailing;
 
+  /// Label → volgnummer van de voetnoten van dit document, of `null` wanneer er
+  /// geen voetnoten in het spel zijn.
+  ///
+  /// Alleen met deze kaart wordt `[^label]` een merkteken; zonder blijft het
+  /// letterlijke tekst. Dat is precies de bedoeling: een dia kent geen
+  /// voetnoten, en `[^abc]` in een technische tekst is meestal een tekenklasse.
+  final Map<String, int>? footnoteNumbers;
+
+  /// Tik op een merkteken — de weergave springt dan naar de noot.
+  final void Function(String label)? onTapFootnote;
+
   const InlineMarkdownText(
     this.text, {
     super.key,
@@ -35,6 +46,8 @@ class InlineMarkdownText extends StatefulWidget {
     this.overflow = TextOverflow.clip,
     this.softWrap = true,
     this.trailing,
+    this.footnoteNumbers,
+    this.onTapFootnote,
   });
 
   @override
@@ -62,9 +75,15 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
   /// alleen deze State weet wanneer ze weg mogen.
   List<InlineSpan> _spans() {
     final onTapLink = widget.onTapLink;
+    final numbers = widget.footnoteNumbers;
     return [
-      for (final run in parseInlineRuns(widget.text))
-        if (run.math)
+      for (final run in parseInlineRuns(
+        widget.text,
+        footnotes: numbers != null,
+      ))
+        if (run.footnote)
+          _footnoteSpan(run.text, numbers)
+        else if (run.math)
           // Inline `$…$` als echte formule; op de tekstbaseline zodat hij mee
           // op de regel staat. Faalt de TeX, dan valt hij terug op de kale bron
           // tussen dollartekens — zichtbaar fout is beter dan stilweg leeg.
@@ -90,6 +109,44 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
                 : null,
           ),
     ];
+  }
+
+  /// Het merkteken van een voetnoot: het volgnummer als superscript, aanklikbaar
+  /// om naar de noot te springen.
+  ///
+  /// Een label zonder nummer heeft geen noot; dan komt de bron er weer uit zoals
+  /// hij erin ging. Zo blijft `[^1]` zonder definitie gewoon `[^1]` — en gaat er
+  /// nooit tekst verloren aan een merkteken dat nergens naar wijst.
+  InlineSpan _footnoteSpan(String label, Map<String, int>? numbers) {
+    final number = numbers?[label];
+    if (number == null) return TextSpan(text: '[^$label]', style: widget.style);
+    final size = (widget.style.fontSize ?? 14) * 0.72;
+    final onTap = widget.onTapFootnote;
+    final marker = Text(
+      '$number',
+      style: widget.style.copyWith(
+        fontSize: size,
+        height: 1,
+        color: onTap == null ? widget.style.color : widget.linkColor,
+        fontFeatures: const [FontFeature.tabularFigures()],
+      ),
+    );
+    return WidgetSpan(
+      // Bovenaan de regel uitgelijnd: dát is wat een superscript is. Een
+      // basislijn-uitlijning met een kleinere letter zou het nummer op de regel
+      // zetten, en dan leest het als een getal in de tekst.
+      alignment: PlaceholderAlignment.top,
+      child: onTap == null
+          ? marker
+          : GestureDetector(
+              onTap: () => onTap(label),
+              behavior: HitTestBehavior.opaque,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: marker,
+              ),
+            ),
+    );
   }
 
   GestureRecognizer _recognizerFor(String url, void Function(String) onTap) {

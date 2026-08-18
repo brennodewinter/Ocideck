@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/services/document_footnote_setup.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
 import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
@@ -15,6 +16,7 @@ void main() {
     String markdown, {
     PageSizeSpec size = PageSizeSpec.a4,
     PageMargins margins = const PageMargins(),
+    FootnotePlacement footnotes = FootnotePlacement.page,
   }) async {
     await tester.binding.setSurfaceSize(const Size(1200, 1400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -25,6 +27,7 @@ void main() {
             markdown: markdown,
             pageSize: size,
             margins: margins,
+            footnotePlacement: footnotes,
           ),
         ),
       ),
@@ -293,5 +296,33 @@ void main() {
     final size = sheetSizes(tester).single;
     expect(size.width, closeTo(216 * kPxPerMm, 1));
     expect(size.height, closeTo(303 * kPxPerMm, 1));
+  });
+  group('voetnoten op het vel', () {
+    const withNote = '''
+# Kop
+
+Een zin met een noot [^1] erin.
+
+[^1]: De noot hoort onderaan dit blad.
+''';
+
+    testWidgets('de noot staat op het vel, de definitie niet in de tekst', (
+      tester,
+    ) async {
+      await pumpDoc(tester, withNote);
+
+      expect(find.textContaining('De noot hoort onderaan'), findsOneWidget);
+      expect(find.textContaining('[^1]:'), findsNothing);
+    });
+
+    testWidgets('achterin het document loopt de noot in de tekststroom mee', (
+      tester,
+    ) async {
+      await pumpDoc(tester, withNote, footnotes: FootnotePlacement.document);
+
+      // Ook dan staat hij er — maar dan als laatste blok van het document, niet
+      // als los blok tegen de ondermarge.
+      expect(find.textContaining('De noot hoort onderaan'), findsOneWidget);
+    });
   });
 }

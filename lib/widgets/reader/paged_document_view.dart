@@ -4,7 +4,9 @@ import 'package:flutter/rendering.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart' show ThemeProfile;
+import '../../services/document_footnote_setup.dart';
 import '../../services/document_pagination.dart';
+import '../../utils/footnotes.dart';
 import '../../theme/app_theme.dart';
 import '../document_page_chrome.dart';
 import 'document_markdown_view.dart';
@@ -46,6 +48,7 @@ class PagedDocumentView extends StatefulWidget {
     this.projectPath,
     this.scale = 1.0,
     this.chapterPageBreak = false,
+    this.footnotePlacement = FootnotePlacement.page,
   });
 
   final String markdown;
@@ -61,6 +64,11 @@ class PagedDocumentView extends StatefulWidget {
   /// "Nieuw hoofdstuk op een nieuwe pagina", die de export ook honoreert.
   final bool chapterPageBreak;
 
+  /// Waar de voetnoten komen: onderaan het blad waar de verwijzing staat, of
+  /// achterin het document. Komt uit de front matter van het document zelf
+  /// (`reference-location:`); zie [documentFootnotePlacement].
+  final FootnotePlacement footnotePlacement;
+
   @override
   State<PagedDocumentView> createState() => _PagedDocumentViewState();
 }
@@ -71,8 +79,103 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// weergave.
   List<double>? _blockHeights;
 
-  /// De hoogtes die tijdens de meetronde binnenkomen, op blokvolgorde.
+  /// De hoogtes die tijdens de meetronde binnenkomen, op blokvolgorde. De
+  /// voetnoten meten mee, achter de blokken aan.
   final Map<int, double> _measuring = {};
+
+  /// De gemeten hoogte van elke voetnoot, in dezelfde volgorde als [_notes].
+  List<double>? _noteHeights;
+
+  /// De voetnoten van dit document, genummerd in leesvolgorde — één keer
+  /// ontleed per tekst, niet per opbouw. Het ontleden loopt het hele document
+  /// door, en dat drie keer per frame doen is werk dat niets oplevert.
+  late List<Footnote> _notes = documentFootnotes(widget.markdown);
+
+  /// De zoektekst van elk blok, in dezelfde volgorde als de blokken. Om dezelfde
+  /// reden bewaard: hij komt uit een volledige ontleding.
+  late List<String> _blockTexts = DocumentMarkdownView.blockTexts(
+    widget.markdown,
+  );
+
+  /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
+  /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
+  /// en worden ze net als al het andere over de vellen verdeeld.
+  bool get _notesOnPage =>
+      widget.footnotePlacement == FootnotePlacement.page && _notes.isNotEmpty;
+
+  /// De ruimte die elk blok bovenop zijn eigen hoogte op het vel opeist: de
+  /// noten die er voor het eerst vanuit worden aangehaald.
+  ///
+  /// Bij het blok en niet bij de pagina, omdat de noot met zijn verwijzing
+  /// meereist: schuift het blok naar het volgende vel, dan schuift de noot mee
+  /// en komt de ruimte hier vanzelf weer vrij. Zie [documentPageOffsets].
+  List<double> _reservedRoom(int blockCount) {
+    final heights = _noteHeights;
+    if (!_notesOnPage || heights == null) return const [];
+    final notes = _notes;
+    final indexOfLabel = {
+      for (var i = 0; i < notes.length; i++) notes[i].label: i,
+    };
+    final texts = _blockTexts;
+    final room = List<double>.filled(blockCount, 0);
+    final placed = <String>{};
+    for (var block = 0; block < texts.length && block < blockCount; block++) {
+      for (final label in footnoteReferencesIn(texts[block])) {
+        final note = indexOfLabel[label];
+        if (note == null || !placed.add(label)) continue;
+        room[block] += heights[note] + _noteGapPx;
+      }
+    }
+    return room;
+  }
+
+  /// Lucht tussen twee noten, en tussen de tekst en de scheidingslijn. Ruim
+  /// genomen: de scheiding hoort ook ergens, en een noot die net niet past is
+  /// erger dan een vel met een centimeter wit onderaan.
+  static const double _noteGapPx = 10;
+
+  /// Welke noten er onderaan welk vel horen te staan.
+  ///
+  /// Een noot hoort bij het vel waarop zijn éérste verwijzing valt. Twee keer
+  /// dezelfde noot op twee bladzijden zou de lezer laten denken dat het er twee
+  /// zijn, en het nummer spreekt dat tegen.
+  List<List<Footnote>> _notesPerPage(
+    List<double> offsets,
+    List<double> heights,
+  ) {
+    final pages = [for (var i = 0; i < offsets.length; i++) <Footnote>[]];
+    if (!_notesOnPage) return pages;
+    final notes = _notes;
+    final byLabel = {for (final note in notes) note.label: note};
+    final texts = _blockTexts;
+    final placed = <String>{};
+    var top = 0.0;
+    for (var block = 0; block < heights.length; block++) {
+      if (block < texts.length) {
+        for (final label in footnoteReferencesIn(texts[block])) {
+          final note = byLabel[label];
+          if (note == null || !placed.add(label)) continue;
+          pages[_pageOf(top, offsets)].add(note);
+        }
+      }
+      top += heights[block];
+    }
+    for (final page in pages) {
+      page.sort((a, b) => a.number.compareTo(b.number));
+    }
+    return pages;
+  }
+
+  /// Het vel waarop hoogte [y] van het doorlopende document valt.
+  static int _pageOf(double y, List<double> offsets) {
+    var page = 0;
+    for (var i = 1; i < offsets.length; i++) {
+      // Een halve punt speling: de posities komen uit een optelling van gemeten
+      // hoogtes en die eindigt zelden precies op de grens.
+      if (offsets[i] <= y + 0.5) page = i;
+    }
+    return page;
+  }
 
   @override
   void didUpdateWidget(PagedDocumentView old) {
@@ -83,9 +186,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         widget.pageSize != old.pageSize ||
         widget.margins != old.margins ||
         widget.profile != old.profile ||
-        widget.chapterPageBreak != old.chapterPageBreak) {
+        widget.chapterPageBreak != old.chapterPageBreak ||
+        widget.footnotePlacement != old.footnotePlacement) {
       _blockHeights = null;
       _measuring.clear();
+      _notes = documentFootnotes(widget.markdown);
+      _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
     }
   }
 
@@ -125,6 +231,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       // Een `---` is hier het pagina-einde zelf; hem ook tekenen zou elk vers
       // vel met een streep laten openen.
       hideRules: true,
+      // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
+      // gewoon als laatste blokken in de stroom mee.
+      footnotesAtEnd: !_notesOnPage,
     );
     if (heights == null) return _measure();
     final offsets = documentPageOffsets(
@@ -132,11 +241,21 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       pageHeight: _contentHeightPx,
       // Een `---` en (naar keuze) elk hoofdstuk beginnen een nieuw vel, net als
       // in de export. Zonder dit zei het scherm iets anders dan de druk.
-      forcedBreakBefore: DocumentMarkdownView.forcedPageBreaks(
+      forcedBreakBefore: documentForcedPageBreaks(
         widget.markdown,
         chapterBreak: widget.chapterPageBreak,
       ),
+      // Een kop blijft niet alleen (of met één losse regel) onderaan een vel
+      // achter, maar schuift mee naar de tekst waar hij bij hoort.
+      keepWithNext: documentHeadingBlocks(widget.markdown),
+      minKeepHeight: documentKeepWithNextHeight(
+        MediaQuery.textScalerOf(context),
+      ),
+      // De noten van een blok staan onderaan hetzelfde vel als dat blok, dus
+      // eisen ze daar ruimte op.
+      reservedRoom: _reservedRoom(heights.length),
     );
+    final notesPerPage = _notesPerPage(offsets, heights);
     return LayoutBuilder(
       builder: (context, constraints) {
         // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
@@ -148,30 +267,43 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         final room = constraints.maxWidth - 32;
         final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
         return SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 16),
-                for (var i = 0; i < offsets.length; i++) ...[
-                  _sheet(
-                    context,
-                    document,
-                    offsets[i],
-                    // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                    // een volle paginahoogte verder. Een blok dat niet meer paste
-                    // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                    // te blijven in plaats van de eerste regels van dat blok
-                    // doormidden te tonen.
-                    i + 1 < offsets.length
-                        ? offsets[i + 1] - offsets[i]
-                        : _contentHeightPx,
-                    i + 1,
-                    offsets.length,
-                    fit,
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ],
+          // Ingezoomd wordt het vel breder dan het venster. Zonder deze tweede,
+          // horizontale rol zou de rechterhelft niet alleen onbereikbaar zijn
+          // maar ook een overloopfout geven — de vellen staan in een verticale
+          // kolom, en die knijpt niets af.
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              // Minstens zo breed als het venster, zodat een vel dat er wél in
+              // past gewoon gecentreerd blijft staan.
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    for (var i = 0; i < offsets.length; i++) ...[
+                      _sheet(
+                        context,
+                        document,
+                        offsets[i],
+                        // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                        // een volle paginahoogte verder. Een blok dat niet meer paste
+                        // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                        // te blijven in plaats van de eerste regels van dat blok
+                        // doormidden te tonen.
+                        i + 1 < offsets.length
+                            ? offsets[i + 1] - offsets[i]
+                            : _contentHeightPx,
+                        i + 1,
+                        offsets.length,
+                        fit,
+                        notesPerPage[i],
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ],
+                ),
+              ),
             ),
           ),
         );
@@ -184,7 +316,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// `Offstage`: die meet zijn kind niet gegarandeerd uit, en zonder meting
   /// komt er nooit een pagina.
   Widget _measure() {
-    final blockCount = DocumentMarkdownView.blockTexts(widget.markdown).length;
+    final blockCount = _blockTexts.length;
+    // De noten meten in dezelfde ronde mee, elk apart: alleen zo weet de
+    // paginaverdeling hoeveel ruimte er onder een blad weg moet. Ze krijgen
+    // indexen áchter de blokken, zodat één teller volstaat.
+    final notes = _notesOnPage ? _notes : const <Footnote>[];
+    final total = blockCount + notes.length;
     return ClipRect(
       child: Stack(
         children: [
@@ -194,17 +331,37 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
             top: 0,
             width: _contentWidthPx,
             child: IgnorePointer(
-              child: DocumentMarkdownView(
-                widget.markdown,
-                maxTextWidth: null,
-                themeProfile: widget.profile,
-                chartTheme: widget.profile,
-                hideRules: true,
-                blockWrapper: (index, block) => _MeasuredBlock(
-                  index: index,
-                  onMeasured: (i, height) => _onMeasured(i, height, blockCount),
-                  child: block,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DocumentMarkdownView(
+                    widget.markdown,
+                    maxTextWidth: null,
+                    themeProfile: widget.profile,
+                    chartTheme: widget.profile,
+                    hideRules: true,
+                    footnotesAtEnd: !_notesOnPage,
+                    blockWrapper: (index, block) => _MeasuredBlock(
+                      index: index,
+                      onMeasured: (i, height) =>
+                          _onMeasured(i, height, blockCount, total),
+                      child: block,
+                    ),
+                  ),
+                  for (var n = 0; n < notes.length; n++)
+                    _MeasuredBlock(
+                      index: blockCount + n,
+                      onMeasured: (i, height) =>
+                          _onMeasured(i, height, blockCount, total),
+                      // Eén noot per meting: de scheidingslijn en de tussenruimte
+                      // horen bij het vel, niet bij de noot, en die zitten in
+                      // [_noteGapPx].
+                      child: DocumentFootnotesView(
+                        notes: [notes[n]],
+                        themeProfile: widget.profile,
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
@@ -213,12 +370,15 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     );
   }
 
-  void _onMeasured(int index, double height, int blockCount) {
+  void _onMeasured(int index, double height, int blockCount, int total) {
     if (!mounted || _blockHeights != null) return;
     _measuring[index] = height;
-    if (_measuring.length < blockCount) return;
+    if (_measuring.length < total) return;
     setState(() {
       _blockHeights = [for (var i = 0; i < blockCount; i++) _measuring[i] ?? 0];
+      _noteHeights = [
+        for (var i = blockCount; i < total; i++) _measuring[i] ?? 0,
+      ];
     });
   }
 
@@ -260,6 +420,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     int pageNumber,
     int pageCount,
     double fit,
+    List<Footnote> notes,
   ) {
     final (sheetW, sheetH) = _sheetPx;
     final bleedPx = widget.margins.bleedMm * kPxPerMm;
@@ -317,6 +478,20 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               ),
             ),
           ),
+          // De noten staan onderaan het tekstvlak, tegen de ondermarge: dat is
+          // wat een voetnoot ís. De ruimte ervoor is bij de opmaak al van dit
+          // vel afgehaald (zie [_reservedRoom]), dus ze botsen nooit met de
+          // tekst erboven.
+          if (notes.isNotEmpty)
+            Positioned(
+              left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
+              right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
+              bottom: (widget.margins.bottomMm * kPxPerMm) + bleedPx,
+              child: DocumentFootnotesView(
+                notes: notes,
+                themeProfile: widget.profile,
+              ),
+            ),
           if (widget.margins.hasBleed)
             Positioned.fill(
               child: IgnorePointer(

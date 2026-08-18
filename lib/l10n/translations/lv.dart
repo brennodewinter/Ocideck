@@ -1649,6 +1649,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voetnoot': 'Vēre',
+  'Noten': 'Piezīmes',
+  'Voetnoten achterin het document': 'Vēres dokumenta beigās',
+  'De tekst van de voetnoot': 'Vēres teksts',
+  'Schrijfbreedte': 'Rakstīšanas platums',
+  'Paginabreedte': 'Lappuses platums',
+  'Leeskolom': 'Lasīšanas sleja',
+  'Ware grootte': 'Patiesais izmērs',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Lappušu pārtraukumi darbojas tikai lappuses platumā.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Cik plata ir lasīšanas sleja vizuālajā režīmā. Šaura lasās mierīgi, plata izmanto vairāk ekrāna. Vai rakstāt šajā slejā, lappuses platumā vai visā logā, izvēlaties rīkjoslā.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Pāreja "{doel}" norāda uz slaidu, kura vairs nav; prezentācijas laikā nekas nenotiek. Izvēlieties citu mērķa slaidu.',
   'In een cirkel': 'Aplis',
@@ -1721,8 +1733,6 @@ const _dutchSourceAddLv = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Satura rādītājs — pievienojiet virsrakstus, lai to aizpildītu.',
   'Schrijfbreedte editor': 'Redaktora rakstīšanas platums',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Cik plata ir rakstīšanas zona vizuālajā režīmā. Šaura lasās mierīgi, plata izmanto vairāk ekrāna.',
   'Pagina-instellingen export': 'Lapas iestatījumi eksportam',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Lapas izmērs (ISO 216) un malas HTML drukai, LaTeX un PDF eksportam.',

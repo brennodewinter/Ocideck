@@ -1667,6 +1667,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voetnoot': 'Notă de subsol',
+  'Noten': 'Note',
+  'Voetnoten achterin het document': 'Note la sfârșitul documentului',
+  'De tekst van de voetnoot': 'Textul notei',
+  'Schrijfbreedte': 'Lățime de scriere',
+  'Paginabreedte': 'Lățimea paginii',
+  'Leeskolom': 'Coloană de lectură',
+  'Ware grootte': 'Dimensiune reală',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Întreruperile de pagină se aplică doar la lățimea paginii.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Cât de lată este coloana de lectură în modul vizual. Îngustă se citește liniștit, lată folosește mai mult din ecran. Dacă scrieți pe acea coloană, pe lățimea paginii sau pe toată fereastra alegeți din bara de instrumente.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Saltul „{doel}“ trimite către un diapozitiv care nu mai există; în timpul prezentării nu se întâmplă nimic. Alegeți alt diapozitiv țintă.',
   'In een cirkel': 'Cerc',
@@ -1739,8 +1751,6 @@ const _dutchSourceAddRo = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Cuprins — adaugă titluri pentru a-l completa.',
   'Schrijfbreedte editor': 'Lățimea de scriere a editorului',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Cât de lată este zona de scriere în modul vizual. Îngustă se citește liniștit, lată folosește mai mult ecran.',
   'Pagina-instellingen export': 'Setări de pagină pentru export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Dimensiunea paginii (ISO 216) și marginile pentru tipărire HTML, LaTeX și export PDF.',

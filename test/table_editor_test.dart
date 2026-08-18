@@ -134,6 +134,47 @@ void main() {
     expect(updated.tableRows.length, 3);
   });
 
+  // #4: een pijltje aan de rand van de celinhoud gaat naar de buurcel, precies
+  // zoals in de tabel van de documentmodus. Zonder dit liep het pijltje dood en
+  // moest je Tab of de muis pakken — wat een mens niet begrijpt.
+  testWidgets('een pijltje aan de rand van de cel gaat naar de buurcel', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+        ),
+      ),
+    );
+
+    // Eerste tabelcel (veld 0 is de titel); leeg, dus de cursor staat meteen
+    // aan het begin én aan het eind van de inhoud.
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pump();
+    final second = find.byType(TextField).at(2);
+    expect(Focus.of(tester.element(second)).hasFocus, isTrue);
+
+    // En terug naar links.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
+    await tester.pump();
+    expect(
+      Focus.of(tester.element(find.byType(TextField).at(1))).hasFocus,
+      isTrue,
+    );
+
+    // Omlaag naar de rij eronder, dezelfde kolom.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.pump();
+    expect(
+      Focus.of(tester.element(find.byType(TextField).at(3))).hasFocus,
+      isTrue,
+    );
+  });
+
   // Shift+Tab loopt terug en stopt bij de eerste cel — geen wrapping voorbij
   // het begin.
   testWidgets('Shift+Tab moves focus back and stops at the first cell', (

@@ -1649,6 +1649,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voetnoot': 'Catatan kaki',
+  'Noten': 'Catatan',
+  'Voetnoten achterin het document': 'Catatan kaki di akhir dokumen',
+  'De tekst van de voetnoot': 'Teks catatan kaki',
+  'Schrijfbreedte': 'Lebar tulis',
+  'Paginabreedte': 'Lebar halaman',
+  'Leeskolom': 'Kolom baca',
+  'Ware grootte': 'Ukuran asli',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Pemisah halaman hanya berlaku pada lebar halaman.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Seberapa lebar kolom baca dalam mode visual. Sempit terbaca tenang, lebar memakai lebih banyak layar. Apakah Anda menulis pada kolom itu, pada lebar halaman atau di seluruh jendela, dipilih di bilah alat.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Lompatan "{doel}" mengarah ke slide yang sudah tidak ada; saat presentasi tidak terjadi apa-apa. Pilih slide tujuan lain.',
   'In een cirkel': 'Lingkaran',
@@ -1721,8 +1733,6 @@ const _dutchSourceAddId = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Daftar isi — tambahkan judul untuk mengisinya.',
   'Schrijfbreedte editor': 'Lebar penulisan editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Seberapa lebar area menulis dalam mode visual. Sempit terbaca tenang, lebar memakai lebih banyak layar.',
   'Pagina-instellingen export': 'Pengaturan halaman untuk ekspor',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Ukuran halaman (ISO 216) dan margin untuk cetak HTML, LaTeX, dan ekspor PDF.',

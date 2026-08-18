@@ -1650,6 +1650,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voetnoot': 'Alaviite',
+  'Noten': 'Viitteet',
+  'Voetnoten achterin het document': 'Alaviitteet asiakirjan lopussa',
+  'De tekst van de voetnoot': 'Alaviitteen teksti',
+  'Schrijfbreedte': 'Kirjoitusleveys',
+  'Paginabreedte': 'Sivun leveys',
+  'Leeskolom': 'Lukupalsta',
+  'Ware grootte': 'Todellinen koko',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Sivunvaihdot pätevät vain sivun leveydellä.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Kuinka leveä lukupalsta on visuaalisessa tilassa. Kapea lukeutuu rauhallisesti, leveä käyttää enemmän näyttöä. Kirjoitatko tuolla palstalla, sivun leveydellä vai koko ikkunassa, valitaan työkalupalkista.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Hyppy "{doel}" osoittaa diaan, jota ei enää ole; esityksen aikana ei tapahdu mitään. Valitse toinen kohdedia.',
   'In een cirkel': 'Ympyrä',
@@ -1722,8 +1734,6 @@ const _dutchSourceAddFi = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Sisällysluettelo — lisää otsikoita täyttääksesi sen.',
   'Schrijfbreedte editor': 'Editorin kirjoitusleveys',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kuinka leveä kirjoitusalue on visuaalisessa tilassa. Kapea luetaan rauhassa, leveä käyttää enemmän näyttöä.',
   'Pagina-instellingen export': 'Sivuasetukset vientiä varten',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sivukoko (ISO 216) ja marginaalit HTML-tulostukseen, LaTeXiin ja PDF-vientiin.',

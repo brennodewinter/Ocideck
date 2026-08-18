@@ -673,6 +673,18 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Voetnoot': 'Nota al pie',
+  'Noten': 'Notas',
+  'Voetnoten achterin het document': 'Notas al final del documento',
+  'De tekst van de voetnoot': 'El texto de la nota',
+  'Schrijfbreedte': 'Ancho de escritura',
+  'Paginabreedte': 'Ancho de página',
+  'Leeskolom': 'Columna de lectura',
+  'Ware grootte': 'Tamaño real',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Los saltos de página solo valen con el ancho de página.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Qué ancho tiene la columna de lectura en el modo visual. Estrecha se lee con calma, ancha aprovecha más pantalla. Si escribes en esa columna, con el ancho de página o en toda la ventana se elige en la barra de herramientas.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'El salto "{doel}" apunta a una diapositiva que ya no existe; durante la presentación no ocurre nada. Elija otra diapositiva de destino.',
   'In een cirkel': 'Círculo',
@@ -745,8 +757,6 @@ const _dutchSourceAddEs = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Índice — añade encabezados para rellenarlo.',
   'Schrijfbreedte editor': 'Ancho de escritura del editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Qué anchura tiene el área de escritura en modo visual. Estrecha se lee con calma, ancha usa más pantalla.',
   'Pagina-instellingen export': 'Ajustes de página para exportar',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Tamaño de página (ISO 216) y márgenes para impresión HTML, LaTeX y exportación PDF.',

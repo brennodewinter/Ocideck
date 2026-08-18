@@ -2567,6 +2567,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Voetnoot': 'Dipnot',
+  'Noten': 'Notlar',
+  'Voetnoten achterin het document': 'Dipnotlar belgenin sonunda',
+  'De tekst van de voetnoot': 'Dipnot metni',
+  'Schrijfbreedte': 'Yazma genişliği',
+  'Paginabreedte': 'Sayfa genişliği',
+  'Leeskolom': 'Okuma sütunu',
+  'Ware grootte': 'Gerçek boyut',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Sayfa sonları yalnızca sayfa genişliğinde geçerlidir.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Görsel kipte okuma sütununun genişliği. Dar sütun sakin okunur, geniş sütun ekranın daha fazlasını kullanır. O sütunda mı, sayfa genişliğinde mi, yoksa tüm pencerede mi yazacağınızı araç çubuğundan seçersiniz.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       '"{doel}" atlaması artık var olmayan bir slayda işaret ediyor; sunum sırasında hiçbir şey olmuyor. Başka bir hedef slayt seçin.',
   'In een cirkel': 'Daire',
@@ -2638,8 +2650,6 @@ const _dutchSourceAddTr = <String, String>{
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'İçindekiler — doldurmak için başlık ekleyin.',
   'Schrijfbreedte editor': 'Düzenleyici yazma genişliği',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Görsel modda yazma alanının genişliği. Dar sakin okunur, geniş ekranın daha fazlasını kullanır.',
   'Pagina-instellingen export': 'Dışa aktarma için sayfa ayarları',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Sayfa boyutu (ISO 216) ve HTML yazdırma, LaTeX ve PDF dışa aktarma için kenar boşlukları.',

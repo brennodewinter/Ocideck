@@ -12,7 +12,13 @@ import '../services/table_of_contents.dart';
 /// hij reist als `x-embed-toc`-blok mee (zie `MarkdownQuillCodec` /
 /// `TocEmbedBuilder`). Zonder die uitzondering wierp één ingevoegde
 /// inhoudsopgave het hele document terug in de brontekst.
-enum MarkdownVisualLimitation { rawHtml, escapedPunctuation, footnote }
+///
+/// En om dezelfde reden staat de **voetnoot** hier niet meer: `[^1]` reist als
+/// inline-embed en `[^1]: …` als blok-embed (`FootnoteRefSyntax` /
+/// `FootnoteDefSyntax`). Tot die embeds er waren, was één voetnoot genoeg om de
+/// hele visuele modus op brontekst terug te werpen — precies bij de functie
+/// waarvoor je hem het hardst nodig hebt.
+enum MarkdownVisualLimitation { rawHtml, escapedPunctuation }
 
 Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
   final limitations = <MarkdownVisualLimitation>{};
@@ -31,9 +37,6 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
     }
     if (RegExp(r'\\[\\`*{}\[\]()#+.!_>-]').hasMatch(line)) {
       limitations.add(MarkdownVisualLimitation.escapedPunctuation);
-    }
-    if (RegExp(r'^\s*\[\^[^\]]+\]:|\[\^[^\]]+\]').hasMatch(line)) {
-      limitations.add(MarkdownVisualLimitation.footnote);
     }
   }
   return limitations;

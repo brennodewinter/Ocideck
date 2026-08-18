@@ -116,6 +116,22 @@ class AppSettings {
   /// hem smaller of breder zetten, of op "volledige breedte" (`null`).
   final double? documentEditorMaxWidth;
 
+  /// Documentmodus: op welke breedte de visuele editor schrijft.
+  ///
+  /// Standaard [DocumentEditorWidth.page] — dezelfde breedte als het vel, want
+  /// dat is wat de pagina-einden waar maakt. Zat vroeger vastgeklonken aan de
+  /// schakelaar voor die einden, waardoor de instelling hieronder stilzwijgend
+  /// werd overruled en "volledige breedte" niets leek te doen.
+  final DocumentEditorWidth documentEditorWidth;
+
+  /// Documentmodus: de zoomfactor van de visuele editor en de Pagina's-stand.
+  ///
+  /// 1,0 is ware grootte. De zoom schaalt de tekst én de kolombreedte én de
+  /// paginahoogte waarmee de einden worden uitgerekend, alledrie met dezelfde
+  /// factor — anders zou een einde op een andere plek in de tekst vallen zodra
+  /// je inzoomt, en dan wijst de lijn nergens naar.
+  final double documentEditorZoom;
+
   /// Documentmodus: paginamaat voor export (ISO-216). Feature 3. Opgeslagen
   /// als id-string (bijv. `"A4"`); `null` = geen `@page`-regel (browser-
   /// default). Standaard A4 portret.
@@ -328,6 +344,8 @@ class AppSettings {
     this.documentChapterPageBreak = false,
     this.documentCropMarks = false,
     this.documentEditorMaxWidth = 1100,
+    this.documentEditorWidth = DocumentEditorWidth.page,
+    this.documentEditorZoom = 1,
     this.documentPageSize = PageSizeSpec.a4,
     this.documentPageMargins = const PageMargins(),
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
@@ -423,6 +441,8 @@ class AppSettings {
     bool? documentChapterPageBreak,
     bool? documentCropMarks,
     double? documentEditorMaxWidth,
+    DocumentEditorWidth? documentEditorWidth,
+    double? documentEditorZoom,
     PageSizeSpec? documentPageSize,
     PageMargins? documentPageMargins,
     List<CockpitColorScheme>? cockpitColorSchemes,
@@ -498,6 +518,8 @@ class AppSettings {
       documentEditorMaxWidth: clearDocumentEditorMaxWidth
           ? null
           : (documentEditorMaxWidth ?? this.documentEditorMaxWidth),
+      documentEditorWidth: documentEditorWidth ?? this.documentEditorWidth,
+      documentEditorZoom: documentEditorZoom ?? this.documentEditorZoom,
       documentPageSize: documentPageSize ?? this.documentPageSize,
       documentPageMargins: documentPageMargins ?? this.documentPageMargins,
       cockpitColorSchemes: cockpitColorSchemes ?? this.cockpitColorSchemes,

@@ -3528,3 +3528,63 @@ are tracked; neither changes what the file says.
 The design — why Pandoc's vocabulary instead of an owned prefix, and why the
 bleed goes as explicit millimetres — is in
 [`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §15.
+
+### 14.9 Footnotes — `[^1]` and `reference-location:` *(added 2026-08-18)*
+
+A document may carry footnotes. On disk they are Pandoc's footnote syntax, which
+GitHub, Obsidian and most other readers also understand:
+
+```
+Een zin met een noot [^1] erin.
+
+[^1]: De tekst van de noot.
+```
+
+Nothing here is owned by OciDeck (§14.1): the marker and the definition are the
+same bytes any Markdown tool reads, and a reader that does not know footnotes
+still shows both as plain text rather than losing them.
+
+Facts that matter on disk:
+
+- **The definition stays where the author put it.** OciDeck lifts it out of the
+  running text for display, never out of the file. Even the visual editor keeps
+  the position: the marker travels as an inline embed and the definition as a
+  block embed, so a round trip through the rich-text layer returns the same bytes
+  (§14.3). The one thing that does change there is a definition wrapped over
+  several indented lines: it comes back as one line. The text is identical; only
+  the line breaks in the source are not.
+- **The label is the author's, the number is the reader's.** `[^1]` and
+  `[^bron]` are equally valid and both stay verbatim in the file. What is shown
+  — on screen and in every export — is the position in reading order: 1, 2, 3.
+  That is what Pandoc does too, and it means inserting a note between two others
+  renumbers nothing by hand.
+- **A reference without a definition is text.** `[^abc]` with no `[^abc]:` line
+  is left exactly as written, so a character class in a technical document does
+  not silently become a marker. A definition nothing refers to keeps its place in
+  the file but is not rendered: a note with a number and no marker is a riddle.
+- **Where they land is one optional key.** `reference-location: document` in the
+  front matter puts the notes at the end of the document; without it they sit at
+  the foot of the page the reference falls on. The default therefore writes
+  **nothing** — a document that wants nothing unusual stays a `.md` with no front
+  matter at all. The key is Pandoc's and Quarto's, and they execute it; OciDeck
+  also reads their `section` and `block` values as "at the end", since both are
+  nearer to that than to the foot of a page. It is written byte-surgically like
+  `theme:` and the page setup, and it lives in the same register (§14.5).
+
+```
+---
+reference-location: document
+---
+
+Een zin met een noot [^1] erin.
+
+[^1]: De tekst van de noot.
+```
+
+- **What each surface can do with it.** The **Pagina's** view and the LaTeX
+  export honour the choice literally — a real note at the foot of the sheet the
+  reference falls on (`\footnote`), or a numbered list at the back. The HTML
+  export always puts them at the back with a link there and back, because an
+  HTML page has no pages and the CSS that could do it (`float: footnote`) is
+  implemented by no browser; see `KNOWN_LIMITATIONS.md`. The continuous editor
+  views have no sheets either and show them at the end for the same reason.

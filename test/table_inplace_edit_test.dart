@@ -245,6 +245,103 @@ void main() {
       expect(editor.takePendingFocus(), (row: 3, col: 1));
     });
 
+    group('pijltjes', () {
+      KeyEventResult press(
+        int r,
+        int c,
+        LogicalKeyboardKey key, {
+        bool repeat = false,
+      }) => editor.handleCellKey(
+        r,
+        c,
+        repeat
+            ? KeyRepeatEvent(
+                physicalKey: PhysicalKeyboardKey.arrowRight,
+                logicalKey: key,
+                timeStamp: Duration.zero,
+              )
+            : KeyDownEvent(
+                physicalKey: PhysicalKeyboardKey.arrowRight,
+                logicalKey: key,
+                timeStamp: Duration.zero,
+              ),
+      );
+
+      void caretAt(int r, int c, int offset) {
+        editor.cellController(r, c).selection = TextSelection.collapsed(
+          offset: offset,
+        );
+      }
+
+      test('midden in de tekst laat het pijltje de cel met rust', () {
+        caretAt(1, 0, 1); // 'Aap', cursor na de A
+        expect(
+          press(1, 0, LogicalKeyboardKey.arrowRight),
+          KeyEventResult.ignored,
+        );
+        expect(
+          press(1, 0, LogicalKeyboardKey.arrowLeft),
+          KeyEventResult.ignored,
+        );
+      });
+
+      test('aan het eind van de tekst gaat rechts naar de volgende cel', () {
+        caretAt(1, 0, 3); // achter 'Aap'
+        expect(
+          press(1, 0, LogicalKeyboardKey.arrowRight),
+          KeyEventResult.handled,
+        );
+        expect(editor.cellController(1, 1).selection.baseOffset, 0);
+      });
+
+      test('links vanaf het begin gaat terug, cursor achteraan', () {
+        caretAt(1, 1, 0);
+        expect(
+          press(1, 1, LogicalKeyboardKey.arrowLeft),
+          KeyEventResult.handled,
+        );
+        final back = editor.cellController(1, 0);
+        expect(back.selection.baseOffset, back.text.length);
+        expect(back.selection.isCollapsed, isTrue);
+      });
+
+      test('omhoog en omlaag lopen door de rijen', () {
+        caretAt(1, 1, 0);
+        expect(
+          press(1, 1, LogicalKeyboardKey.arrowDown),
+          KeyEventResult.handled,
+        );
+        // De cel waar je binnenkomt staat geselecteerd, zoals bij Tab en Enter.
+        expect(editor.cellController(2, 1).selection.isCollapsed, isFalse);
+      });
+
+      test('een ingehouden pijltje loopt door', () {
+        caretAt(1, 0, 3);
+        expect(
+          press(1, 0, LogicalKeyboardKey.arrowRight, repeat: true),
+          KeyEventResult.handled,
+        );
+      });
+
+      test('aan de rand van de tabel gebeurt er niets', () {
+        caretAt(0, 0, 0);
+        expect(
+          press(0, 0, LogicalKeyboardKey.arrowLeft),
+          KeyEventResult.ignored,
+        );
+        expect(press(0, 0, LogicalKeyboardKey.arrowUp), KeyEventResult.ignored);
+        caretAt(2, 1, editor.cellController(2, 1).text.length);
+        expect(
+          press(2, 1, LogicalKeyboardKey.arrowRight),
+          KeyEventResult.ignored,
+        );
+        expect(
+          press(2, 1, LogicalKeyboardKey.arrowDown),
+          KeyEventResult.ignored,
+        );
+      });
+    });
+
     test(
       'een geplakte rekenbladselectie vult het raster en laat het groeien',
       () {

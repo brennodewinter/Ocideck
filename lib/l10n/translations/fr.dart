@@ -675,6 +675,18 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Voetnoot': 'Note de bas de page',
+  'Noten': 'Notes',
+  'Voetnoten achterin het document': 'Notes à la fin du document',
+  'De tekst van de voetnoot': 'Le texte de la note',
+  'Schrijfbreedte': 'Largeur d\'écriture',
+  'Paginabreedte': 'Largeur de page',
+  'Leeskolom': 'Colonne de lecture',
+  'Ware grootte': 'Taille réelle',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Les sauts de page ne s\'appliquent qu\'à la largeur de page.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Largeur de la colonne de lecture en mode visuel. Étroite, elle se lit calmement ; large, elle occupe davantage l\'écran. Écrire sur cette colonne, en largeur de page ou sur toute la fenêtre se choisit dans la barre d\'outils.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Le saut « {doel} » pointe vers une diapositive qui n\'existe plus ; rien ne se passe pendant la présentation. Choisissez une autre diapositive cible.',
   'In een cirkel': 'Cercle',
@@ -747,8 +759,6 @@ const _dutchSourceAddFr = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Table des matières — ajoutez des titres pour la remplir.',
   'Schrijfbreedte editor': 'Largeur d’écriture de l’éditeur',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Largeur de la zone d’écriture en mode visuel. Étroite se lit calmement, large utilise plus d’écran.',
   'Pagina-instellingen export': 'Paramètres de page pour l’export',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Format de page (ISO 216) et marges pour l’impression HTML, LaTeX et l’export PDF.',

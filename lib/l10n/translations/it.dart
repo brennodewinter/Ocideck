@@ -672,6 +672,18 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Voetnoot': 'Nota a piè di pagina',
+  'Noten': 'Note',
+  'Voetnoten achterin het document': 'Note alla fine del documento',
+  'De tekst van de voetnoot': 'Il testo della nota',
+  'Schrijfbreedte': 'Larghezza di scrittura',
+  'Paginabreedte': 'Larghezza pagina',
+  'Leeskolom': 'Colonna di lettura',
+  'Ware grootte': 'Dimensione reale',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'Le interruzioni di pagina valgono solo alla larghezza della pagina.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Quanto è larga la colonna di lettura nella modalità visiva. Stretta si legge con calma, larga usa più schermo. Se scrivere su quella colonna, alla larghezza della pagina o su tutta la finestra lo scegli nella barra degli strumenti.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'Il salto "{doel}" punta a una diapositiva che non esiste più; durante la presentazione non succede nulla. Scegli un\'altra diapositiva di destinazione.',
   'In een cirkel': 'Cerchio',
@@ -744,8 +756,6 @@ const _dutchSourceAddIt = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indice — aggiungi titoli per riempirlo.',
   'Schrijfbreedte editor': 'Larghezza di scrittura dell’editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Quanto è larga l’area di scrittura in modalità visiva. Stretta si legge con calma, larga usa più schermo.',
   'Pagina-instellingen export': 'Impostazioni di pagina per l’esportazione',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Formato pagina (ISO 216) e margini per stampa HTML, LaTeX ed esportazione PDF.',

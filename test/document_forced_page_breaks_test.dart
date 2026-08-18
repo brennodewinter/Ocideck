@@ -11,13 +11,13 @@ void main() {
   group('welke blokken een vers vel beginnen', () {
     test('een --- in de body is er een', () {
       const markdown = 'Eerste alinea.\n\n---\n\nTweede alinea.';
-      expect(DocumentMarkdownView.forcedPageBreaks(markdown), contains(1));
+      expect(documentForcedPageBreaks(markdown), contains(1));
     });
 
     test('een hoofdstuk alleen als de instelling aanstaat', () {
       const markdown = '# Een\n\nTekst.\n\n# Twee\n\nTekst.';
-      expect(DocumentMarkdownView.forcedPageBreaks(markdown), isEmpty);
-      final withSetting = DocumentMarkdownView.forcedPageBreaks(
+      expect(documentForcedPageBreaks(markdown), isEmpty);
+      final withSetting = documentForcedPageBreaks(
         markdown,
         chapterBreak: true,
       );
@@ -27,18 +27,12 @@ void main() {
     test('het eerste blok telt nooit mee', () {
       // Anders opent het document met een leeg vel.
       const markdown = '# Een hoofdstuk\n\nTekst.';
-      expect(
-        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
-        isEmpty,
-      );
+      expect(documentForcedPageBreaks(markdown, chapterBreak: true), isEmpty);
     });
 
     test('een tussenkop is geen hoofdstuk', () {
       const markdown = '# Een\n\nTekst.\n\n## Tussenkop\n\nTekst.';
-      expect(
-        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
-        isEmpty,
-      );
+      expect(documentForcedPageBreaks(markdown, chapterBreak: true), isEmpty);
     });
   });
 
@@ -49,7 +43,7 @@ void main() {
     test('een --- aan het begin levert geen leeg eerste vel op', () {
       const markdown = '---\n\n# Hoofdstuk\n\nTekst.\n';
       expect(
-        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
+        documentForcedPageBreaks(markdown, chapterBreak: true),
         isEmpty,
         reason: 'er staat vóór die kop niets dat een vel vult',
       );
@@ -58,7 +52,7 @@ void main() {
     test('twee streepjes achter elkaar leveren één einde op', () {
       const markdown = 'Tekst.\n\n---\n\n---\n\nMeer tekst.\n';
       expect(
-        DocumentMarkdownView.forcedPageBreaks(markdown),
+        documentForcedPageBreaks(markdown),
         hasLength(1),
         reason: 'de tweede streep breekt een vel af dat nog leeg is',
       );
@@ -67,7 +61,7 @@ void main() {
     test('een --- vlak vóór een hoofdstuk breekt maar één keer', () {
       const markdown = 'Tekst.\n\n---\n\n# Hoofdstuk\n\nMeer.\n';
       expect(
-        DocumentMarkdownView.forcedPageBreaks(markdown, chapterBreak: true),
+        documentForcedPageBreaks(markdown, chapterBreak: true),
         hasLength(1),
       );
     });

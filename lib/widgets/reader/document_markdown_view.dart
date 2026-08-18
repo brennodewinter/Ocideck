@@ -11,6 +11,7 @@ import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/footnotes.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
@@ -69,6 +70,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.anchorKey,
     this.tocSource,
     this.blockWrapper,
+    this.footnotesAtEnd = true,
   });
 
   final String markdown;
@@ -87,6 +89,14 @@ class DocumentMarkdownView extends StatelessWidget {
   /// van een gewone lezer.
   final Widget Function(int index, Widget block)? blockWrapper;
   final void Function(String url)? onTapLink;
+
+  /// Of de voetnoten onderaan deze weergave meekomen.
+  ///
+  /// Standaard aan: een doorlopende weergave heeft geen bladzijden, dus is
+  /// achterin de enige plek waar een noot kan staan. De vellenweergave zet ze
+  /// zelf onderaan het blad waar de verwijzing staat en zet dit dus uit — daar
+  /// zouden ze anders twee keer verschijnen.
+  final bool footnotesAtEnd;
 
   /// Absolute block index the reader wants to scroll an `#anchor` link to (from
   /// [headingBlockIndex]), or `-1` for none. That block carries [anchorKey] so
@@ -164,38 +174,6 @@ class DocumentMarkdownView extends StatelessWidget {
   /// [build] keeps the indices aligned.
   static List<String> blockTexts(String markdown) =>
       _parse(markdown).map((b) => b.searchText).toList(growable: false);
-
-  /// De blokken die op een verse pagina horen te beginnen, als index in
-  /// dezelfde lijst als [blockTexts].
-  ///
-  /// Twee soorten, allebei uit het formaat en allebei gehonoreerd door de HTML-
-  /// en LaTeX-export (FILE_FORMAT.md §14.6): een `---` in de body ís een
-  /// pagina-einde, en met [chapterBreak] begint elk hoofdstuk (`H1`) op een
-  /// nieuw vel. Het eerste blok telt nooit mee — een breuk vóór de eerste regel
-  /// zou een leeg vel opleveren.
-  static Set<int> forcedPageBreaks(
-    String markdown, {
-    bool chapterBreak = false,
-  }) {
-    final blocks = _parse(markdown);
-    final breaks = <int>{};
-    // Wat er sinds de vorige breuk aan échte inhoud staat. Een `---` telt niet
-    // mee: in een paginaweergave ís hij het einde zelf, geen inhoud.
-    var contentSinceBreak = 0;
-    for (var i = 0; i < blocks.length; i++) {
-      final rule = blocks[i].kind == _Kind.rule;
-      final chapter =
-          chapterBreak &&
-          blocks[i].kind == _Kind.heading &&
-          blocks[i].level == 1;
-      if ((rule || chapter) && contentSinceBreak > 0) {
-        breaks.add(i);
-        contentSinceBreak = 0;
-      }
-      if (!rule) contentSinceBreak++;
-    }
-    return breaks;
-  }
 
   /// De regelnummers (vanaf 0) van elke hoofdstukkop (`H1`) in [source], geteld
   /// met exact dezelfde grammatica als de weergave: een `#` binnen een fenced
@@ -283,7 +261,12 @@ class DocumentMarkdownView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = _Theme(Theme.of(context), themeProfile);
+    final notes = documentFootnotes(markdown);
+    final t = _Theme(
+      Theme.of(context),
+      themeProfile,
+      footnoteNumbers: {for (final note in notes) note.label: note.number},
+    );
     final blocks = _parse(markdown);
     final term = (searchTerm ?? '').trim().toLowerCase();
     return ColoredBox(
@@ -309,6 +292,8 @@ class DocumentMarkdownView extends StatelessWidget {
                 },
               ),
             ),
+          if (footnotesAtEnd && notes.isNotEmpty)
+            _footnoteList(context, t, notes),
         ],
       ),
     );
@@ -469,7 +454,13 @@ class DocumentMarkdownView extends StatelessWidget {
   /// any BuildContext, so [build] (widgets) and [blockTexts] (search text) share
   /// one classification and can never drift apart.
   static List<_Block> _parse(String markdown) {
-    final lines = markdown.replaceAll('\r\n', '\n').split('\n');
+    // De definities van de voetnoten zijn geen alinea's: ze staan waar de
+    // auteur ze parkeerde, en de noot hoort onderaan het vel of achterin.
+    // Hier eruit, zodat élke ingang (weergave, zoektekst, pagina-einden,
+    // koppen) dezelfde blokken ziet en de indices nooit uiteenlopen.
+    final lines = stripFootnoteDefinitions(
+      markdown,
+    ).replaceAll('\r\n', '\n').split('\n');
     final blocks = <_Block>[];
 
     var i = 0;
@@ -799,5 +790,8 @@ class DocumentMarkdownView extends StatelessWidget {
     linkColor: t.link,
     onTapLink: onTapLink,
     textAlign: textAlign,
+    // Zonder noten `null`, en dan blijft `[^1]` gewoon `[^1]` — precies wat een
+    // technische tekst met een tekenklasse erin nodig heeft.
+    footnoteNumbers: t.footnoteNumbers.isEmpty ? null : t.footnoteNumbers,
   );
 }

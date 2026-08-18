@@ -674,6 +674,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voetnoot': 'Nota na pia di página',
+  'Noten': 'Notanan',
+  'Voetnoten achterin het document': 'Notanan na fin di e dokumento',
+  'De tekst van de voetnoot': 'E teksto di e nota',
+  'Schrijfbreedte': 'Ancho di skirbi',
+  'Paginabreedte': 'Ancho di página',
+  'Leeskolom': 'Kolom di lesa',
+  'Ware grootte': 'Tamaño real',
+  'Pagina-einden gelden alleen op paginabreedte.':
+      'E kortamentonan di página ta konta solamente na ancho di página.',
+  'Hoe breed de leeskolom in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm. Of je op die kolom, op paginabreedte of op het hele venster schrijft, kies je in de werkbalk.':
+      'Ki ancho e kolom di lesa ta den e modo visual. Smal ta lesa trankil, hanchu ta usa mas di e pantaya. Si bo ta skirbi riba e kolom ei, na ancho di página òf riba henter e bentana, bo ta skohe den e bara di hèrmènt.',
   'De sprong "{doel}" wijst naar een dia die niet meer bestaat; tijdens het presenteren gebeurt er niets. Kies een andere doeldia.':
       'E salto "{doel}" ta apuntá na un slide ku no ta eksistí mas; durante e presentashon no ta pasa nada. Skohe un otro slide di destino.',
   'In een cirkel': 'Sirkel',
@@ -746,8 +758,6 @@ const _dutchSourceAddPap = {
   'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
       'Indeks — agregá kabesnan pa yen’é.',
   'Schrijfbreedte editor': 'Hanchura di skirbi den editor',
-  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
-      'Kon hanchu e área di skirbi ta den modo visual. Estrecho ta lesa trankil, hanchu ta usa mas di e pantaya.',
   'Pagina-instellingen export': 'Konfigurashon di página pa eksportá',
   'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
       'Tamaño di página (ISO 216) i marge pa imprimí HTML, LaTeX i eksportá PDF.',

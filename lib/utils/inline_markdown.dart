@@ -16,6 +16,12 @@ import 'markdown_paste_cleanup.dart';
 /// [math] is de uitzondering: dan is [text] geen opgemaakte tekst maar de kale
 /// TeX tussen `$…$`, die de widgetlaag als inline-formule tekent. De opmaakvlaggen
 /// gelden er niet voor.
+///
+/// [footnote] is de tweede uitzondering, en werkt net zo: [text] is dan het
+/// lábel van de voetnoot (`1`, of `bron`), niet iets wat de lezer te zien
+/// krijgt. De widgetlaag zoekt het volgnummer erbij en tekent dat als
+/// superscript. Alleen de documentmodus vraagt erom (zie [parseInlineRuns]);
+/// een dia laat `[^1]` gewoon `[^1]`.
 class InlineRun {
   final String text;
   final bool bold;
@@ -23,6 +29,7 @@ class InlineRun {
   final bool code;
   final bool strike;
   final bool math;
+  final bool footnote;
   final String? link;
 
   const InlineRun(
@@ -32,6 +39,7 @@ class InlineRun {
     this.code = false,
     this.strike = false,
     this.math = false,
+    this.footnote = false,
     this.link,
   });
 
@@ -41,6 +49,7 @@ class InlineRun {
     bool? code,
     bool? strike,
     bool? math,
+    bool? footnote,
     String? link,
   }) {
     return InlineRun(
@@ -49,6 +58,7 @@ class InlineRun {
       italic: italic ?? this.italic,
       code: code ?? this.code,
       strike: strike ?? this.strike,
+      footnote: footnote ?? this.footnote,
       math: math ?? this.math,
       link: link ?? this.link,
     );
@@ -62,9 +72,15 @@ bool _isEscapedPunctuation(String c) =>
 
 /// Parse [text] naar opeenvolgende [InlineRun]s. Onafgesloten of ongeldige
 /// opmaaktekens blijven gewoon letterlijke tekst.
-List<InlineRun> parseInlineRuns(String text) {
+///
+/// Met [footnotes] wordt `[^label]` een eigen run in plaats van letterlijke
+/// tekst. Standaard uit, en met opzet: op een dia betekent `[^1]` niets, en in
+/// een technische tekst is `[^abc]` vaak een tekenklasse uit een reguliere
+/// expressie. Alleen de documentmodus, die weet wélke labels een noot hébben,
+/// zet hem aan.
+List<InlineRun> parseInlineRuns(String text, {bool footnotes = false}) {
   final out = <InlineRun>[];
-  _parseInto(text, const InlineRun(''), out);
+  _parseInto(text, const InlineRun(''), out, footnotes: footnotes);
   // Voeg aangrenzende identieke runs samen (netter en sneller om te renderen).
   final merged = <InlineRun>[];
   for (final r in out) {
@@ -72,6 +88,8 @@ List<InlineRun> parseInlineRuns(String text) {
     if (merged.isNotEmpty &&
         !merged.last.math &&
         !r.math &&
+        !merged.last.footnote &&
+        !r.footnote &&
         merged.last.bold == r.bold &&
         merged.last.italic == r.italic &&
         merged.last.code == r.code &&
@@ -137,7 +155,41 @@ String decodeNamedHtmlEntities(String text) {
       .replaceAll('&amp;', '&');
 }
 
-void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
+/// Het label van de voetnootverwijzing die op [start] begint, of `null` als daar
+/// geen verwijzing staat.
+///
+/// `[^1]:` telt niet: dat is de definitie. Die hoort hier nooit te komen (de
+/// weergave haalt ze eruit), maar als het toch gebeurt is hem als tekst tonen
+/// beter dan hem als merkteken te tekenen.
+String? _footnoteLabelAt(String s, int start) {
+  if (start + 1 >= s.length || s[start + 1] != '^') return null;
+  final close = s.indexOf(']', start + 2);
+  if (close <= start + 2) return null;
+  if (close + 1 < s.length && s[close + 1] == ':') return null;
+  final label = s.substring(start + 2, close);
+  return label.contains(' ') ? null : label;
+}
+
+/// De TeX van de inline-formule die op [start] begint, of `null` wanneer daar
+/// geen formule staat.
+///
+/// Een `$$` opent geen inline-formule (dat is een blok), en losse dollartekens
+/// blijven tekst: alleen inhoud die er als een LaTeX-commando uitziet telt, want
+/// anders wordt `$5 tot $9` een formule.
+String? _inlineMathAt(String s, int start) {
+  if (start + 1 < s.length && s[start + 1] == r'$') return null;
+  final end = _findInlineMathClose(s, start + 1);
+  if (end == -1) return null;
+  final tex = s.substring(start + 1, end);
+  return _looksLikeMath(tex) ? tex : null;
+}
+
+void _parseInto(
+  String s,
+  InlineRun ctx,
+  List<InlineRun> out, {
+  bool footnotes = false,
+}) {
   final buf = StringBuffer();
   void flush() {
     if (buf.isNotEmpty) {
@@ -174,6 +226,16 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       }
     }
 
+    // [^label] — een voetnootverwijzing, vóór de link-tak: die kijkt óók naar
+    // een `[` en zou hem als gewone tekst laten liggen.
+    final note = footnotes && c == '[' ? _footnoteLabelAt(s, i) : null;
+    if (note != null) {
+      flush();
+      out.add(ctx._with(footnote: true)._copyText(note));
+      i += note.length + 3;
+      continue;
+    }
+
     // [tekst](url)
     if (c == '[') {
       final close = _matchClosingBracket(s, i);
@@ -183,7 +245,7 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
           flush();
           final inner = s.substring(i + 1, close);
           final url = s.substring(close + 2, paren).trim();
-          _parseInto(inner, ctx._with(link: url), out);
+          _parseInto(inner, ctx._with(link: url), out, footnotes: footnotes);
           i = paren + 1;
           continue;
         }
@@ -195,7 +257,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '**');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(bold: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -207,7 +274,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '__');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(bold: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -218,7 +290,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 2, '~~');
       if (end != -1) {
         flush();
-        _parseInto(s.substring(i + 2, end), ctx._with(strike: true), out);
+        _parseInto(
+          s.substring(i + 2, end),
+          ctx._with(strike: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 2;
         continue;
       }
@@ -229,7 +306,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       final end = _findDelimiter(s, i + 1, c);
       if (end != -1 && end > i + 1) {
         flush();
-        _parseInto(s.substring(i + 1, end), ctx._with(italic: true), out);
+        _parseInto(
+          s.substring(i + 1, end),
+          ctx._with(italic: true),
+          out,
+          footnotes: footnotes,
+        );
         i = end + 1;
         continue;
       }
@@ -238,17 +320,12 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
     // $inline-formule$ — alleen als de inhoud een LaTeX-commando bevat, zodat
     // gewone valuta (`$5`) en losse dollartekens tekst blijven. De inhoud gaat
     // ongeparsed als TeX door; de opmaakcontext (`ctx`) geldt er niet voor.
-    if (c == r'$' && (i + 1 >= s.length || s[i + 1] != r'$')) {
-      final end = _findInlineMathClose(s, i + 1);
-      if (end != -1) {
-        final tex = s.substring(i + 1, end);
-        if (_looksLikeMath(tex)) {
-          flush();
-          out.add(const InlineRun('', math: true)._copyText(tex));
-          i = end + 1;
-          continue;
-        }
-      }
+    final tex = c == r'$' ? _inlineMathAt(s, i) : null;
+    if (tex != null) {
+      flush();
+      out.add(const InlineRun('', math: true)._copyText(tex));
+      i += tex.length + 2;
+      continue;
     }
 
     buf.write(c);
@@ -321,6 +398,7 @@ extension on InlineRun {
     code: code,
     strike: strike,
     math: math,
+    footnote: footnote,
     link: link,
   );
 }
