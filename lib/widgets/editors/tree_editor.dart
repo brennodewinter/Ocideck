@@ -38,7 +38,7 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
   late List<int> _levels;
   late Set<String> _aiFields;
 
-  static const _maxLevel = 6;
+  static const _maxLevel = kMaxIndentButtonLevel;
 
   @override
   void initState() {
@@ -113,7 +113,7 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
       _bullets.add(
         TextEditingController(text: bulletText(item))..addListener(_emit),
       );
-      _levels.add(bulletLevel(item).clamp(0, _maxLevel));
+      _levels.add(bulletLevel(item));
     }
   }
 
@@ -188,8 +188,14 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
   }
 
   void _indent(int index, int delta) {
-    final next = (_levels[index] + delta).clamp(0, _maxLevel);
-    if (next == _levels[index]) return;
+    final current = _levels[index];
+    // Uitspringen mag altijd, ook vanaf een niveau dat dieper is dan de knop
+    // kan maken — anders sprong een geïmporteerd niveau 6 met één klik naar 4
+    // in plaats van naar 5. Inspringen stopt wel bij [kMaxIndentButtonLevel].
+    final next = delta < 0
+        ? (current - 1).clamp(0, current)
+        : (current < _maxLevel ? current + 1 : current);
+    if (next == current) return;
     setState(() => _levels[index] = next);
     _emit();
   }

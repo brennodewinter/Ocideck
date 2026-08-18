@@ -61,7 +61,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late bool _continuesSplit;
   late final TextEditingController _richText;
 
-  static const _maxLevel = 4;
+  static const _maxLevel = kMaxIndentButtonLevel;
 
   @override
   void initState() {
@@ -79,7 +79,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _richText.addListener(_emit);
     final list = widget.slide.bullets.isEmpty ? [''] : widget.slide.bullets;
     _isHeading = list.map(isGroupHeading).toList();
-    _levels = list.map((b) => isGroupHeading(b) ? 0 : _levelOf(b)).toList();
+    _levels = list.map((b) => isGroupHeading(b) ? 0 : bulletLevel(b)).toList();
     _checked = list
         .map((b) => isGroupHeading(b) ? false : checklistItemChecked(b))
         .toList();
@@ -91,14 +91,6 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         )
         .toList();
     _focusNodes = List.generate(_bullets.length, (_) => FocusNode());
-  }
-
-  static int _levelOf(String b) {
-    int l = 0;
-    while (l < b.length && b[l] == '\t' && l < _maxLevel) {
-      l++;
-    }
-    return l;
   }
 
   TextEditingController _makeCtrl(String text) {

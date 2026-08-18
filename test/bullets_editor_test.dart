@@ -609,6 +609,44 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
     // An unchanged round-trip through the editor keeps the heading intact.
     expect(updated.bullets.first, groupHeadingBullet('Ochtend'));
   });
+
+  testWidgets(
+    'een niveau dieper dan de knop kan, blijft staan als je iets anders typt',
+    (tester) async {
+      // #1558: _levelOf klemde bij het lezen op _maxLevel en _emit schreef dat
+      // geklemde niveau terug. Eén letter in het eerste item liet daarmee het
+      // vierde item zakken — een regel die de gebruiker niet had aangeraakt.
+      // Zulke diepe niveaus komen echt voor: de parser rekent twee spaties per
+      // niveau, dus een geïmporteerde lijst van vier zichtbare niveaus staat
+      // intern op 0-2-4-6.
+      var updated = Slide.create(SlideType.bullets).copyWith(
+        title: 'Titel',
+        bullets: const [
+          'Eerste niveau',
+          '\t\tTweede niveau',
+          '\t\t\t\tDerde niveau',
+          '\t\t\t\t\t\tVierde niveau',
+        ],
+      );
+
+      await tester.pumpScoped(
+        _testApp(
+          BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextField).at(2), 'Eerste niveau!');
+      await tester.pumpAndSettle();
+
+      expect(updated.bullets.map(bulletLevel).toList(), [
+        0,
+        2,
+        4,
+        6,
+      ], reason: 'het vierde item stond op 6 en is niet aangeraakt');
+    },
+  );
 }
 
 /// De editors lezen de editorstate (om naar een gemelde bullet te springen), en
