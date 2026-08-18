@@ -213,10 +213,16 @@ const _menuCss = r'''
 .slide .menu-card .menu-arrow{flex:0 0 auto;font-size:28px;line-height:1}
 .slide a.menu-card,.slide a.menu-disc{transition:filter .12s ease}
 .slide a.menu-card:hover,.slide a.menu-disc:hover{filter:brightness(1.06)}
-.slide .menu-ring{position:relative;width:min(100%,62vh);aspect-ratio:1;margin:.5em auto}
+.slide .menu-dense{grid-auto-rows:110px;gap:14px}
+.slide .menu-dense .menu-card{gap:12px;padding:10px 14px}
+.slide .menu-dense .menu-card .menu-thumb{width:60px;height:60px}
+.slide .menu-dense .menu-card .menu-label{font-size:20px}
+.slide .menu-dense .menu-card .menu-desc{font-size:15px}
+.slide .menu-ring{position:relative;width:100%;aspect-ratio:1;margin:.5em auto}
 .slide .menu-disc{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;overflow:hidden;border:2px solid;border-radius:50%;text-align:center;text-decoration:none;color:inherit}
 .slide .menu-disc .menu-disc-thumb{width:38%;aspect-ratio:1;border-radius:50%;object-fit:cover}
 .slide .menu-disc .menu-label{font-size:20px;font-weight:600;line-height:1.15;overflow:hidden}
+.slide .menu-disc .menu-desc{font-size:15px;line-height:1.15;opacity:.8;overflow:hidden}
 ''';
 
 /// De opmaak van de zes rapportagedia's. Ook thema-onafhankelijk: kleuren die

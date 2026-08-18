@@ -114,7 +114,7 @@ void main() {
       MenuLayout.grid,
       reason: 'raster is de standaard',
     );
-    await tester.tap(find.text('Cirkel'));
+    await tester.tap(find.text('In een cirkel'));
     await tester.pumpAndSettle();
     expect(
       b.container.read(deckProvider).deck!.slides[0].menuLayout,

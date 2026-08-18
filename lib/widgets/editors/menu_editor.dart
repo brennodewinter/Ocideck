@@ -333,7 +333,10 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
         if (named) _categoryHeader(l10n, cat, categories),
         for (var i = 0; i < blocks.length; i++)
           Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            // Inspringen onder een categoriekop: zonder dat staan de kop en de
+            // blokken eronder even ver naar links en is de indeling visueel plat
+            // (#1162, beeldkeuring).
+            padding: EdgeInsets.only(bottom: 8, left: named ? 12 : 0),
             child: _MenuBlockRow(
               block: blocks[i],
               label: _labels[_flatIndex(categories, cat, i)],
@@ -366,12 +369,15 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
               onRemove: () => _removeBlock(cat, i),
             ),
           ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton.icon(
-            onPressed: () => _addBlock(cat),
-            icon: const Icon(Icons.add, size: 16),
-            label: Text(l10n.d('Blok toevoegen')),
+        Padding(
+          padding: EdgeInsets.only(left: named ? 12 : 0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => _addBlock(cat),
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Blok toevoegen')),
+            ),
           ),
         ),
         const SizedBox(height: 8),

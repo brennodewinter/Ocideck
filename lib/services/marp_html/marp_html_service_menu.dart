@@ -69,6 +69,10 @@ String renderMenuSlide(String slideMarkdown, {ThemeProfile? theme}) {
   final accent = theme?.accentColor ?? '#003399';
   final ink = theme?.textColor ?? '#1a1a1a';
   final layout = menuLayoutFromTokens(tokens);
+  // Alle categorieën staan onder elkaar op één dia, dus ze delen de hoogte.
+  // Zonder die deling kreeg elke ring de volle maat en groeide een menu met drie
+  // categorieën uit tot vijf schermen hoog (#1162, beeldkeuring).
+  final filled = categories.where((c) => c.blocks.isNotEmpty).length;
   final body = StringBuffer();
   for (final category in categories) {
     if (category.blocks.isEmpty) continue;
@@ -79,7 +83,13 @@ String renderMenuSlide(String slideMarkdown, {ThemeProfile? theme}) {
         ..write('</div>');
     }
     body.write(
-      _menuBlocksHtml(category.blocks, layout, accent: accent, ink: ink),
+      _menuBlocksHtml(
+        category.blocks,
+        layout,
+        accent: accent,
+        ink: ink,
+        categoryCount: filled,
+      ),
     );
   }
   return (head
@@ -94,17 +104,26 @@ String _menuBlocksHtml(
   MenuLayout layout, {
   required String accent,
   required String ink,
+  required int categoryCount,
 }) {
+  // Veel blokken op één dia betekent kleinere kaarten — anders loopt het label
+  // de kaart uit, precies zoals in de app (#1162, beeldkeuring).
+  final dense = blocks.length > 9;
   final out = StringBuffer();
   switch (layout) {
     case MenuLayout.grid:
       out
-        ..write('<div class="menu-grid" style="grid-template-columns:')
+        ..write('<div class="menu-grid${dense ? ' menu-dense' : ''}" ')
+        ..write('style="grid-template-columns:')
         ..write('repeat(${menuGridColumns(blocks.length)},1fr)">');
     case MenuLayout.list:
-      out.write('<div class="menu-grid menu-stack">');
+      out.write(
+        '<div class="menu-grid menu-stack${dense ? ' menu-dense' : ''}">',
+      );
     case MenuLayout.circle:
-      out.write('<div class="menu-ring">');
+      // De ring is vierkant; met meer categorieën onder elkaar moet hij kleiner.
+      final size = (620 / categoryCount).clamp(180, 620).round();
+      out.write('<div class="menu-ring" style="max-width:${size}px">');
   }
   for (var i = 0; i < blocks.length; i++) {
     out.write(
@@ -195,6 +214,14 @@ String _menuDiscHtml(
     ..write('<span class="menu-label">')
     ..write(_esc(block.label))
     ..write('</span>');
+  // Ook hier de uitleg tonen zolang er geen beeld in de weg staat, zodat de
+  // export niet minder laat zien dan de app.
+  if (block.hasDescription && !block.hasImage) {
+    inner
+      ..write('<span class="menu-desc">')
+      ..write(_esc(block.description))
+      ..write('</span>');
+  }
   final style = '$place;${_menuBlockStyle(block, accent, ink)}';
   if (block.hasTarget) {
     final href = MarpHtmlService._htmlAttr('#${block.targetAnchor}');

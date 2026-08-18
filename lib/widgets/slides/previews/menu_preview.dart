@@ -86,6 +86,12 @@ class _MenuPreviewState extends State<_MenuPreview> {
       w * 0.4725 - (hasTitle ? w * 0.086 : 0) - (showTabs ? w * 0.062 : 0),
     );
 
+    // De stellage houdt links en rechts een marge aan, dus het blokkenvlak is
+    // smaller dan de dia. Stond hier `w`, dan hing het vlak een halve marge uit
+    // het midden — zichtbaar als een scheve ring met een lege band ernaast
+    // (#1162, beeldkeuring).
+    final contentWidth = w - 2 * (w * 0.05);
+
     return _PreviewScaffold(
       width: w,
       slide: widget.slide,
@@ -128,8 +134,8 @@ class _MenuPreviewState extends State<_MenuPreview> {
           // regelhoogte en mag dóórgroeien — dan schaalt de stellage de dia.
           ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: w,
-              maxWidth: w,
+              minWidth: contentWidth,
+              maxWidth: contentWidth,
               minHeight: blocksHeight,
               maxHeight: widget.slide.menuLayout == MenuLayout.list
                   ? double.infinity

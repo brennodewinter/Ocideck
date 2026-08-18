@@ -220,6 +220,109 @@ const double _menuDiscSpacing = 0.85;
 /// Bovengrens aan de schijfmaat, als fractie van de zijde.
 const double _menuDiscCap = 0.34;
 
+/// Hoe de tekst van één menublok in de hoogte past die de kaart of de schijf
+/// hem geeft: een lettergrootte en een regelbudget voor het label en voor de
+/// uitleg.
+class MenuTextFit {
+  final double labelSize;
+  final int labelLines;
+  final double descriptionSize;
+  final int descriptionLines;
+
+  const MenuTextFit({
+    required this.labelSize,
+    required this.labelLines,
+    required this.descriptionSize,
+    required this.descriptionLines,
+  });
+
+  bool get showsDescription => descriptionLines > 0;
+
+  double get labelLineHeight => labelSize * _menuLabelLineFactor;
+  double get descriptionLineHeight =>
+      descriptionSize * _menuDescriptionLineFactor;
+
+  /// De hoogte die deze verdeling werkelijk opeist.
+  double get height =>
+      labelLines * labelLineHeight + descriptionLines * descriptionLineHeight;
+}
+
+const double _menuLabelLineFactor = 1.15;
+const double _menuDescriptionLineFactor = 1.2;
+
+/// Verdeel [available] hoogte over label en uitleg van een menublok.
+///
+/// Waarom een eigen regel en niet gewoon een vast aantal regels: `maxLines`
+/// begrenst het aantal regels, maar zegt niets over de hoogte die er ís. In een
+/// lage kaart — de indeling "onder elkaar", of een raster van zestien — liep de
+/// tekst daardoor buiten zijn vak en werd hij weggeknipt: de bovenste helft van
+/// elk label verdween, zonder ellips, dus zonder enig teken dat er meer stond
+/// (#1162, beeldkeuring). Er viel geen enkele test over, want wegknippen is geen
+/// overloop.
+///
+/// Daarom volgt hier alles uit de ruimte: eerst krimpt de letter mee met het
+/// vak, dan wordt geteld hoeveel regels er echt in passen. Er blijft altijd één
+/// labelregel over — een blok zonder zichtbaar label is geen keuze meer.
+MenuTextFit menuTextFit({
+  required double available,
+  required double maxLabelSize,
+  required bool hasDescription,
+  int maxLabelLines = 3,
+}) {
+  final labelSize = math.max(
+    0.0,
+    math.min(maxLabelSize, available * _menuLabelShare),
+  );
+  final labelLine = labelSize * _menuLabelLineFactor;
+  final descriptionSize = labelSize * _menuDescriptionShare;
+  final descriptionLine = descriptionSize * _menuDescriptionLineFactor;
+  if (labelLine <= 0) {
+    return MenuTextFit(
+      labelSize: labelSize,
+      labelLines: 1,
+      descriptionSize: descriptionSize,
+      descriptionLines: 0,
+    );
+  }
+  // Onder deze maat is de uitleg geen tekst meer maar een grijze veeg. Dan is
+  // hem laten vallen eerlijker dan hem onleesbaar meeschalen: het label krijgt
+  // de ruimte, en de uitleg staat nog gewoon in de editor en in de export.
+  final descriptionReadable =
+      descriptionSize >= maxLabelSize * _menuDescriptionFloor;
+  var labelLines = math.max(1, math.min(maxLabelLines, available ~/ labelLine));
+  var descriptionLines = 0;
+  if (hasDescription &&
+      descriptionReadable &&
+      available >= labelLine + descriptionLine) {
+    descriptionLines = math.min(2, (available - labelLine) ~/ descriptionLine);
+    // De uitleg mag het label niet verdringen: het label houdt voorrang, maar
+    // krijgt naast een uitleg hoogstens twee regels zodat er wat te lezen valt.
+    labelLines = math.min(
+      2,
+      math.max(
+        1,
+        (available - descriptionLines * descriptionLine) ~/ labelLine,
+      ),
+    );
+  }
+  return MenuTextFit(
+    labelSize: labelSize,
+    labelLines: labelLines,
+    descriptionSize: descriptionSize,
+    descriptionLines: descriptionLines,
+  );
+}
+
+/// Hoeveel van de beschikbare hoogte één labelregel hoogstens mag beslaan.
+const double _menuLabelShare = 0.42;
+
+/// De uitleg staat op deze fractie van de labelgrootte.
+const double _menuDescriptionShare = 0.73;
+
+/// Onder deze fractie van de volle labelgrootte valt de uitleg weg in plaats van
+/// mee te krimpen.
+const double _menuDescriptionFloor = 0.35;
+
 /// Of dit menu een categoriekiezer verdient: pas vanaf twee categorieën, of bij
 /// één categorie die een naam draagt.
 bool menuHasCategories(List<MenuCategory> categories) =>

@@ -83,7 +83,10 @@ class _MenuBlockRow extends StatelessWidget {
             decoration: InputDecoration(
               isDense: true,
               labelText: l10n.d('Uitleg'),
-              hintText: l10n.d('Eén regel, staat onder het label'),
+              // Bewust géén `hintText`: met allebei ziet een leeg veld er anders
+              // uit dan een gevuld — grotere letter, geen zwevend opschrift — en
+              // dan lijken het twee soorten besturingselement (#1162,
+              // beeldkeuring). De uitleg staat in de hulptekst bij het diatype.
               border: const OutlineInputBorder(),
             ),
           ),

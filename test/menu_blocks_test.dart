@@ -135,6 +135,98 @@ void main() {
     });
   });
 
+  group('tekst past in de hoogte die er is', () {
+    // De regressie uit de beeldkeuring: bij de indeling "onder elkaar" liep de
+    // tekst buiten zijn vak en werd hij weggeknipt — de bovenste helft van elk
+    // label was er gewoon af, zonder ellips. Wegknippen is geen overloop, dus
+    // geen enkele test viel erover. Deze wel: wat [menuTextFit] toewijst, moet
+    // in de opgegeven hoogte passen.
+    test('het toegewezen budget past altijd in de ruimte', () {
+      for (var available = 2.0; available <= 400; available += 1) {
+        for (final hasDescription in [true, false]) {
+          final fit = menuTextFit(
+            available: available,
+            maxLabelSize: 25,
+            hasDescription: hasDescription,
+          );
+          expect(
+            fit.height,
+            lessThanOrEqualTo(available + 0.001),
+            reason:
+                'bij $available px (uitleg: $hasDescription) vraagt de tekst '
+                '${fit.height} px',
+          );
+        }
+      }
+    });
+
+    test('er blijft altijd minstens één labelregel over', () {
+      for (var available = 0.0; available <= 40; available += 0.5) {
+        expect(
+          menuTextFit(
+            available: available,
+            maxLabelSize: 25,
+            hasDescription: true,
+          ).labelLines,
+          greaterThanOrEqualTo(1),
+        );
+      }
+    });
+
+    test('een ruime kaart houdt de volle lettergrootte', () {
+      final fit = menuTextFit(
+        available: 200,
+        maxLabelSize: 25,
+        hasDescription: true,
+      );
+      expect(fit.labelSize, 25);
+      expect(fit.showsDescription, isTrue);
+    });
+
+    test(
+      'een lage kaart laat de uitleg vallen en geeft het label de ruimte',
+      () {
+        // Op deze hoogte zou de uitleg tot een grijze veeg krimpen. Dan valt hij
+        // weg — en gaat de ruimte die vrijkomt naar het label, niet verloren.
+        final krap = menuTextFit(
+          available: 26,
+          maxLabelSize: 25,
+          hasDescription: true,
+        );
+        expect(krap.showsDescription, isFalse);
+        expect(
+          krap.labelLines,
+          menuTextFit(
+            available: 26,
+            maxLabelSize: 25,
+            hasDescription: false,
+          ).labelLines,
+          reason: 'zonder leesbare uitleg telt het label alsof er geen was',
+        );
+
+        // En op een ruime kaart blijft de uitleg gewoon staan.
+        expect(
+          menuTextFit(
+            available: 80,
+            maxLabelSize: 25,
+            hasDescription: true,
+          ).showsDescription,
+          isTrue,
+        );
+      },
+    );
+
+    test('zonder uitleg krijgt het label de regels die overblijven', () {
+      final fit = menuTextFit(
+        available: 100,
+        maxLabelSize: 25,
+        hasDescription: false,
+      );
+      expect(fit.labelLines, greaterThan(1));
+      expect(fit.descriptionLines, 0);
+    });
+  });
+
   group('cirkelindeling', () {
     // De maat van een schijf volgt uit de meetkunde van de ring; deze proef
     // bewaakt dat twee buren elkaar bij geen enkel aantal blokken raken.

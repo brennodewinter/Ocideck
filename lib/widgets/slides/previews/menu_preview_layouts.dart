@@ -77,34 +77,40 @@ Widget _menuGrid(
   );
 }
 
-/// Hoogte van één regel in de indeling "onder elkaar", en de ruimte ertussen.
-/// Vast, niet verdeeld over de dia: een regel houdt zo dezelfde leeshoogte of er
-/// nu drie of dertig blokken staan. Passen ze samen niet meer op de dia, dan
-/// schaalt de `FittedBox` van de stellage het geheel omlaag — hetzelfde gedrag
-/// als bij te veel tekst op een gewone dia, in plaats van regels die tot een
-/// streepje worden geperst.
-const double _menuRowHeightFactor = 0.075;
+/// De prettigste hoogte van één regel in de indeling "onder elkaar", en de
+/// ruimte ertussen. Passen zoveel regels niet op de dia, dan worden ze lager —
+/// en krimpt de tekst mee ([_MenuBlockCard._content]) in plaats van eronder weg
+/// te vallen.
+const double _menuRowHeightFactor = 0.09;
 const double _menuRowGapFactor = 0.012;
 
 /// Onder elkaar: brede kaarten, één per regel, gecentreerd in de ruimte die er
-/// is.
+/// is. De regels verdelen de hoogte die er is; ze groeien nooit voorbij de
+/// leeshoogte hierboven, want twee blokken horen geen halve dia hoog te zijn.
 Widget _menuList(
   List<MenuBlock> blocks,
   double w,
   Widget Function(MenuBlock, {bool wide}) card,
-) => Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  mainAxisSize: MainAxisSize.min,
-  children: [
-    for (var i = 0; i < blocks.length; i++) ...[
-      if (i > 0) SizedBox(height: w * _menuRowGapFactor),
-      SizedBox(
-        height: w * _menuRowHeightFactor,
-        child: card(blocks[i], wide: true),
-      ),
-    ],
-  ],
-);
+) {
+  final gap = w * _menuRowGapFactor;
+  return LayoutBuilder(
+    builder: (context, box) {
+      final n = blocks.length;
+      final even = (box.maxHeight - gap * (n - 1)) / n;
+      final height = math.min(even, w * _menuRowHeightFactor);
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (var i = 0; i < n; i++) ...[
+            if (i > 0) SizedBox(height: gap),
+            SizedBox(height: height, child: card(blocks[i], wide: true)),
+          ],
+        ],
+      );
+    },
+  );
+}
 
 /// Eén keuzeblok als kaart: een kleine afbeelding links, label en uitleg
 /// ernaast, en een pijl rechts als het blok ergens heen springt. De randkleur
@@ -174,15 +180,22 @@ class _MenuBlockCard extends StatelessWidget {
   }
 
   Widget _content(BuildContext context, BoxConstraints box) {
-    final pad = w * 0.014;
-    final inner = box.maxHeight - pad * 2;
+    // De marge krimpt mee met een lage kaart: bij zestien blokken in een lijst
+    // is een vaste marge al hoger dan de kaart zelf, en dan blijft er niets voor
+    // de tekst over.
+    final pad = math.min(w * 0.014, box.maxHeight * 0.12);
+    final inner = math.max(0.0, box.maxHeight - pad * 2);
     final thumb = math.min(inner, math.min(box.maxWidth * 0.3, w * 0.1));
-    // Wat er nog bij past, in volgorde van belang: eerst het label, dan de
-    // uitleg, dan de pijl. Onder de drempels zou het toch niet leesbaar zijn.
-    final roomForDescription =
-        block.hasDescription && box.maxHeight > w * 0.055;
+
+    // Lettergrootte en regelbudget volgen uit de ruimte, niet uit een vast
+    // getal; zie [menuTextFit] voor waarom dat het verschil maakt tussen
+    // afbreken met een ellips en onzichtbaar weggeknipt worden.
+    final fit = menuTextFit(
+      available: inner,
+      maxLabelSize: w * 0.026,
+      hasDescription: block.hasDescription,
+    );
     final showArrow = block.hasTarget && box.maxWidth > w * 0.16;
-    final centred = !wide && !block.hasImage && !roomForDescription;
 
     return Padding(
       padding: EdgeInsets.all(pad),
@@ -207,9 +220,9 @@ class _MenuBlockCard extends StatelessWidget {
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: centred
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.start,
+              // Altijd links: één kaart in een rij die zijn label centreerde
+              // terwijl de buren links uitlijnden, maakte de rij rafelig.
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Flexible: bij een kleine kaart moet de tekst inbinden in
                 // plaats van de kaart uit te lopen — `maxLines` alleen kapt op
@@ -222,18 +235,17 @@ class _MenuBlockCard extends StatelessWidget {
                       font,
                       TextStyle(
                         color: text,
-                        fontSize: w * 0.026,
+                        fontSize: fit.labelSize,
                         fontWeight: FontWeight.w700,
                         height: 1.15,
                       ),
                     ),
                     linkColor: accent,
-                    maxLines: roomForDescription ? 2 : 3,
+                    maxLines: fit.labelLines,
                     overflow: TextOverflow.ellipsis,
-                    textAlign: centred ? TextAlign.center : TextAlign.start,
                   ),
                 ),
-                if (roomForDescription) ...[
+                if (fit.showsDescription) ...[
                   SizedBox(height: w * 0.005),
                   Flexible(
                     child: _md(
@@ -242,15 +254,18 @@ class _MenuBlockCard extends StatelessWidget {
                       _applyFont(
                         font,
                         TextStyle(
-                          color: text.withValues(alpha: 0.7),
-                          fontSize: w * 0.019,
+                          // 0.85 en niet 0.7: op een lichte kaart met een
+                          // accenttint eronder haalde 0.7 de contrastvloer van
+                          // 4,5:1 niet (#1162, beeldkeuring). Kleiner en lichter
+                          // van gewicht maakt de uitleg al ondergeschikt genoeg.
+                          color: text.withValues(alpha: 0.85),
+                          fontSize: fit.descriptionSize,
                           height: 1.2,
                         ),
                       ),
                       linkColor: accent,
-                      maxLines: 2,
+                      maxLines: fit.descriptionLines,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: centred ? TextAlign.center : TextAlign.start,
                     ),
                   ),
                 ],
@@ -261,7 +276,7 @@ class _MenuBlockCard extends StatelessWidget {
             SizedBox(width: pad * 0.5),
             Icon(
               Icons.arrow_forward_rounded,
-              size: w * 0.024,
+              size: math.min(w * 0.024, inner),
               color: accent.withValues(alpha: 0.8),
             ),
           ],
@@ -308,18 +323,10 @@ class _MenuCircle extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // De ringlijn zelf: hij bindt de schijven visueel samen.
-              Container(
-                width: radius * 2,
-                height: radius * 2,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: accent.withValues(alpha: 0.18),
-                    width: w * 0.0022,
-                  ),
-                ),
-              ),
+              // Bewust géén ringlijn tussen de schijven. Hij stond er, maar de
+              // schijven zijn doorschijnend, dus hij liep zichtbaar dwars door
+              // hun labels — hij las als een doorhaling (#1162, beeldkeuring).
+              // De ring is als vorm al af zonder hulplijn.
               for (var i = 0; i < n; i++)
                 _positioned(context, i, n, side, disc, radius),
             ],
@@ -386,7 +393,21 @@ class _MenuDisc extends StatelessWidget {
   Widget build(BuildContext context) {
     final actionable = block.hasTarget;
     final thumb = diameter * 0.34;
-    final showDescription = block.hasDescription && !block.hasImage;
+    // De uitleg viel weg zodra er een afbeelding bij zat — stilzwijgend, dus je
+    // zag niet dat er iets ontbrak (#1162, beeldkeuring). Nu is de vraag alleen
+    // of er plek voor is: op een ruime schijf passen beeld én uitleg.
+    final showDescription =
+        block.hasDescription && (!block.hasImage || diameter > w * 0.22);
+    // Net als bij de kaart volgt het regelbudget uit de hoogte die er is; de
+    // ruimte binnen een cirkel is de padding eraf, min wat het beeld inneemt.
+    final fit = menuTextFit(
+      available:
+          diameter * 0.68 - (block.hasImage ? thumb + diameter * 0.05 : 0),
+      maxLabelSize: diameter * 0.15,
+      hasDescription: showDescription,
+      maxLabelLines: 2,
+    );
+
     final disc = Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -395,11 +416,15 @@ class _MenuDisc extends StatelessWidget {
               ? [accent.withValues(alpha: 0.22), accent.withValues(alpha: 0.08)]
               : [text.withValues(alpha: 0.08), text.withValues(alpha: 0.03)],
         ),
+        // In een schijf is geen plek voor de pijl die een kaart draagt, dus doet
+        // de rand het werk: een springend blok krijgt er een die twee keer zo
+        // zwaar is. Zonder dat verschil was een doelblok in de ring alleen aan
+        // een tintje te herkennen (#1162, beeldkeuring).
         border: Border.all(
           color: actionable
-              ? accent.withValues(alpha: 0.6)
+              ? accent.withValues(alpha: 0.75)
               : text.withValues(alpha: 0.2),
-          width: w * 0.0026,
+          width: w * (actionable ? 0.005 : 0.0026),
         ),
       ),
       clipBehavior: Clip.antiAlias,
@@ -433,18 +458,18 @@ class _MenuDisc extends StatelessWidget {
                   font,
                   TextStyle(
                     color: text,
-                    fontSize: diameter * 0.15,
+                    fontSize: fit.labelSize,
                     fontWeight: FontWeight.w700,
                     height: 1.1,
                   ),
                 ),
                 linkColor: accent,
-                maxLines: block.hasImage ? 2 : 3,
+                maxLines: fit.labelLines,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
               ),
             ),
-            if (showDescription)
+            if (fit.showsDescription)
               Flexible(
                 child: _md(
                   context,
@@ -452,8 +477,8 @@ class _MenuDisc extends StatelessWidget {
                   _applyFont(
                     font,
                     TextStyle(
-                      color: text.withValues(alpha: 0.7),
-                      fontSize: diameter * 0.11,
+                      color: text.withValues(alpha: 0.85),
+                      fontSize: fit.descriptionSize,
                       height: 1.15,
                     ),
                   ),

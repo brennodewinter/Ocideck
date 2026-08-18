@@ -194,14 +194,15 @@ void main() {
         final html = await service.build(categorisedDeck(MenuLayout.list));
         expect(html, contains('<div class="menu-grid menu-stack">'));
         // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
-      expect(html, isNot(contains('<div class="menu-ring">')));
+      expect(html, isNot(contains('class="menu-ring"')));
       },
     );
 
     test('the circle layout places each disc without script', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(categorisedDeck(MenuLayout.circle));
-      expect(html, contains('<div class="menu-ring">'));
+      // Twee categorieën delen de hoogte, dus elke ring krijgt de halve maat.
+      expect(html, contains('<div class="menu-ring" style="max-width:310px">'));
       // Elke schijf draagt zijn eigen plek als percentage.
       expect(html, contains('class="menu-disc" href="#prijzen" style="left:'));
       expect(html, contains('.slide .menu-ring{position:relative'));
