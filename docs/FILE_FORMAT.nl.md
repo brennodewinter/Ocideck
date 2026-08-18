@@ -1389,8 +1389,13 @@ beide mogen een uitleg van één regel en een kleine afbeelding dragen:
   net zo goed — dat is wat een mens typt — en een streepje ín het label kan geen
   kwaad. Een blok **zonder** link heeft geen haken om op af te gaan en splitst
   alleen op het gedachtestreepje met spaties; een label waar er zelf een in staat
-  valt daardoor in de twee velden uiteen. De tekst blijft in beide gevallen
-  volledig en schrijft identiek terug, dus de rondgang is stabiel.
+  valt daardoor in de twee velden uiteen. Er gaat nooit tekst verloren, en de
+  tweede opslag is gelijk aan de eerste, dus de rondgang komt in beide gevallen
+  tot rust — maar hij geeft niet altijd terug wat je typte. Een blok *met* een
+  link normaliseert zijn staart: `[Prijzen](#prijzen): wat het kost` en
+  `[Prijzen](#prijzen) (nieuw)` komen terug als `[Prijzen](#prijzen) — wat het
+  kost` en `[Prijzen](#prijzen) — (nieuw)`. Alleen een blok *zonder* link schrijft
+  byte voor byte hetzelfde terug.
 - De **afbeelding** is een afsluitende `![](pad)`, hetzelfde `mem:`- of
   deck-relatieve pad als bij elke andere slide-afbeelding. Hij wordt als klein
   vierkantje naast de tekst getekend *(de blokafbeelding ging op 2026-08-18 van
@@ -1413,7 +1418,8 @@ de tijdlijn hierboven — mee als extra `_class`-token naast het basistoken `men
 - afwezig, of `menu-grid` — het standaardraster van kaarten. OciDeck schrijft
   **geen** token voor het raster, zodat een menuslide van vóór de indelingen geen
   byte verandert; `menu-grid` wordt bij het lezen wél geaccepteerd, zodat een
-  handgeschreven deck de standaard hardop mag noemen. Een onbekend `menu-…`-token —
+  handgeschreven deck de standaard hardop mag noemen — al haalt OciDeck hem er
+  bij de eerstvolgende opslag weer uit, want het raster schrijft geen token. Een onbekend `menu-…`-token —
   uit een nieuwere versie bijvoorbeeld — tekent gewoon het raster in plaats van te
   stranden, al waarschuwt de structuurcontrole (§10) wel dat ze het token niet kent.
 
@@ -2983,7 +2989,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:` of `advance:`. |
 | **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet gesloten). |
 | **`_class`** | fout | Misvormde `<!-- _class: ... -->`. |
-| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens, liet er tien weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt` en de vier `timeline-…`-opties — en claimde er één, `table-overdue`, die hij niet kent.)* |
+| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder.)* |
 | **Slide-metadata** | fout | Onbekende `<!-- tlp: ... -->`, niet-numerieke `<!-- advance: ... -->`, of ongeldige `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Twee kolommen** | fout | Ongeldige base64/JSON in een verouderd `ocideck_two_bullets_*`-commentaar (vervallen; §5). |
 | **Beelden** | fout | `![...](...` zonder afsluitende `)`. |

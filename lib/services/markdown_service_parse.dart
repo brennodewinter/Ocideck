@@ -467,13 +467,7 @@ extension _MarkdownParse on MarkdownService {
           (c) =>
               c.isNotEmpty &&
               c != type.marpClass &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer' &&
-              c != 'image-title-above' &&
-              c != 'table-editable' &&
-              !isTimelineOptionToken(c) &&
-              !isMenuOptionToken(c),
+              !isOcideckWrittenClassToken(c),
         )
         .join(' ');
 

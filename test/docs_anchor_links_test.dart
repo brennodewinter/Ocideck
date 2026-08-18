@@ -122,6 +122,22 @@ void main() {
     return uit.toString();
   }
 
+  /// Dezelfde redenering als voor codeblokken, maar dan voor `code-spans` in
+  /// een lopende zin: `[Prijzen](#prijzen)` tússen backticks is een voorbeeld
+  /// van syntaxis, en Markdown maakt er zelf ook geen link van. De span wordt
+  /// door blanco's vervangen zodat regel- en kolomnummers niet verschuiven.
+  /// `dotAll`, want een span mag over een regeleinde heen lopen — in deze
+  /// documenten is dat eerder regel dan uitzondering, omdat de tekst op tachtig
+  /// tekens wordt afgebroken.
+  final codeSpan = RegExp(r'(`+)(?:(?!\1).)*?\1', dotAll: true);
+  final nietRegeleinde = RegExp(r'[^\n]');
+
+  String zonderCodeSpans(String tekst) => tekst.replaceAllMapped(
+    codeSpan,
+    // Regeleinden blijven staan zodat regelnummers niet verschuiven.
+    (m) => m.group(0)!.replaceAll(nietRegeleinde, ' '),
+  );
+
   test('elke link naar een kop komt uit bij een bestaande kop', () {
     // `](pad.md#anker)` en `](#anker)`. Absolute URL's blijven buiten schot:
     // die wijzen naar iets waar deze repo niets over kan zeggen.
@@ -129,7 +145,9 @@ void main() {
     final klachten = <String>[];
 
     for (final bestand in bestanden) {
-      final tekst = zonderCodeblokken(bestand.readAsStringSync());
+      final tekst = zonderCodeSpans(
+        zonderCodeblokken(bestand.readAsStringSync()),
+      );
       final hier = p.relative(bestand.path, from: wortel.path);
 
       for (final m in patroon.allMatches(tekst)) {

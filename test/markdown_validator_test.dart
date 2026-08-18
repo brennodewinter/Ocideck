@@ -82,6 +82,70 @@ void main() {
     },
   );
 
+  // De vorige proef vraagt of de controle het token ként. Dat is niet genoeg:
+  // `table-overdue` stond wél in de woordenlijst en groeide tóch elke keer aan,
+  // omdat de lezer hem niet uit `cssClass` filterde en `cssClass` het typetoken
+  // vervangt bij het schrijven. Één opslagronde later stond er
+  // `table-overdue table-overdue` en was `table` weg — de dia las niet meer
+  // terug als tabel. Alleen een échte rondgang ziet dat, en pas over meerdere
+  // generaties is te zien dat het aangroeit in plaats van eenmalig verschuift.
+  test('de klasseregel blijft gelijk over meerdere opslagrondes', () {
+    var deck = Deck(
+      title: 'Demo',
+      slides: [
+        Slide.create(SlideType.table).copyWith(
+          title: 'Tabel',
+          tableEditable: true,
+          tableMarkOverdue: true,
+          tableRows: const [
+            ['Kop', 'Datum'],
+            ['Rij', '2020-01-01'],
+          ],
+        ),
+        for (final layout in TimelineLayout.values)
+          for (final reveal in TimelineReveal.values)
+            Slide.create(SlideType.timeline).copyWith(
+              title: 'Tijdlijn',
+              timelineLayout: layout,
+              timelineReveal: reveal,
+              bullets: const ['2020|Begin'],
+            ),
+        for (final layout in MenuLayout.values)
+          Slide.create(SlideType.menu).copyWith(
+            title: 'Menu',
+            menuLayout: layout,
+            bullets: const ['[Ergens heen](#doel)'],
+          ),
+        Slide.create(
+          SlideType.image,
+        ).copyWith(title: 'Beeld', imagePath: 'mem:1', imageTitleAbove: true),
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Zonder chrome',
+          bullets: const ['x'],
+          showLogo: false,
+          showFooter: false,
+        ),
+        for (final type in SlideType.values)
+          Slide.create(type).copyWith(title: type.name),
+      ],
+    );
+
+    List<String> classLines(String markdown) => [
+      for (final line in markdown.split('\n'))
+        if (line.contains('_class:')) line.trim(),
+    ];
+
+    final first = classLines(service.generateDeck(deck));
+    for (var round = 1; round <= 3; round++) {
+      deck = service.parseDeck(service.generateDeck(deck))!;
+      expect(
+        classLines(service.generateDeck(deck)),
+        first,
+        reason: 'de klasseregels veranderden in opslagronde $round',
+      );
+    }
+  });
+
   test('valid generated deck has no errors', () {
     final markdown = service.generateDeck(
       Deck(

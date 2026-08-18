@@ -112,6 +112,19 @@ in Dutch, and it keeps growing on `main` between releases.
   presentator die erop drukt. De LaTeX-export schrijft per categorie een lijst
   met een vetgedrukt kopje.
 
+- fix(bestandsformaat): een tabeldia met "verlopen datums markeren" verloor zijn
+  typetoken bij het opslaan (#1162, onderweg gevonden). `table-overdue` stond
+  niet in de woordenlijst van de structuurcontrole, dus waarschuwde OciDeck over
+  een dia die het zelf had geschreven — en achter die waarschuwing zat een
+  ernstiger fout: de lezer filterde het token ook niet weg, waardoor het in de
+  vrije klasse van de dia belandde. Die vervangt het typetoken bij het schrijven,
+  dus `table table-overdue` werd na één keer opslaan `table-overdue
+  table-overdue`, groeide daarna elke keer met één token, en `table` verdween: de
+  dia las niet meer terug als tabel. Lezer en schrijver delen nu één lijst, en
+  een proef slaat drie keer achter elkaar op en eist dat elke `_class`-regel
+  identiek terugkomt. `image-title-above` ontbrak op dezelfde manier in de
+  woordenlijst en is meegenomen.
+
 - feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
   afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
   profiel. Profielkaarten tonen het logo wanneer dat is ingesteld. Alle

@@ -1381,8 +1381,12 @@ either may carry a one-line description and a small image:
   stripped just as well — that is what a hand types — and a dash inside the label
   is harmless. A block **without** a link has no brackets to go by and is split on
   the spaced em dash only; a label that contains one therefore falls apart into
-  the two fields. The text stays complete and writes back identically, so the
-  round trip is stable either way.
+  the two fields. No text is ever lost, and the second save equals the first, so
+  the round trip settles either way — but it does not always give back what you
+  typed. A block *with* a link normalises its tail: `[Prijzen](#prijzen): what it
+  costs` and `[Prijzen](#prijzen) (new)` come back as `[Prijzen](#prijzen) — what
+  it costs` and `[Prijzen](#prijzen) — (new)`. A block *without* a link is the
+  only one that writes back byte-for-byte.
 - The **image** is a trailing `![](path)`, the same `mem:`/deck-relative path as
   any other slide image. It is drawn as a small square beside the text *(the block
   image moved from a full-bleed background to a thumbnail beside the label on
@@ -1404,7 +1408,8 @@ token:
 - absent, or `menu-grid` — the default grid of cards. OciDeck writes **no** token
   for the grid, so a menu slide written before the layouts existed does not change
   a byte; `menu-grid` is accepted on read so a hand-written deck may name the
-  default out loud. An unrecognised `menu-…` token — from a newer version, say —
+  default out loud — though OciDeck drops it again on the next save, since the
+  grid writes no token. An unrecognised `menu-…` token — from a newer version, say —
   still draws the grid instead of failing, though the structure check (§10) does
   warn that it does not know the token.
 
@@ -2961,7 +2966,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens, omitted ten the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt` and the four `timeline-…` options — and claimed one, `table-overdue`, that it does not.)* |
+| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below.)* |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |
@@ -2975,10 +2980,17 @@ not model is not reported.
 | **`table` slide** | error | No separator row (`\| --- \|`) or second row is not a valid GFM separator. |
 | **HTML** | error | Unbalanced `<div>`/`</div>` inside a slide. |
 
-> `table-overdue` (§4) is a token OciDeck **writes** but the checker's vocabulary
-> does not carry, so the structure check warns about a slide the app itself
-> produced. Noted 2026-08-18; it is a gap in
-> `markdown_validator_vocabulary.dart`, not in the file format — the token works.
+> **Fixed 2026-08-18.** `table-overdue` and `image-title-above` (§4) are tokens
+> OciDeck *writes* but the checker's vocabulary did not carry, so the structure
+> check warned about slides the app itself produced. Adding them to the
+> vocabulary exposed a second, worse fault behind the first: the reader did not
+> strip `table-overdue` either, so it landed in the slide's free-form class —
+> which *replaces* the type token on write. `table table-overdue` became
+> `table-overdue table-overdue` after one save and grew by one token every save
+> after that, losing `table` entirely, so the slide no longer read back as a
+> table. Reader and writer now share one list
+> (`isOcideckWrittenClassToken`), and a test saves three times over and requires
+> every `_class` line to come back identical.
 
 Implementation: `lib/services/markdown_validator.dart`; tests:
 `test/markdown_validator_test.dart`. See also [`USER_GUIDE.md`](USER_GUIDE.md)
