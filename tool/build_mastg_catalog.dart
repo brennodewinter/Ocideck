@@ -78,9 +78,9 @@ void main(List<String> args) {
   }
   stdout.writeln(
     'Totaal ${tests.length} tests uit MASTG v$version.\n'
-    'Zet de versie in lib/services/mastg_catalog.dart én in '
-    'lib/services/reference_standards.dart, en controleer '
-    'docs/LICENSE_COMPLIANCE.md.',
+    'Draai je dit gereedschap los, leg de versie dan zelf vast: '
+    'dart run tool/record_catalog_version.dart mastg $version '
+    '(scripts/refresh_catalogs.sh doet dat al voor je).',
   );
 }
 

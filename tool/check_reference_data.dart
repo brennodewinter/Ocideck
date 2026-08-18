@@ -48,6 +48,12 @@
 //              1 = ten minste één standaard is verouderd
 //              2 = de controle kon niet draaien (geen netwerk)
 //
+// Met `--json` komt dezelfde ronde machineleesbaar naar buiten (id, naam,
+// gebundelde versie, laatste versie, status) en eindigt hij op 0 tenzij er
+// niets bereikbaar was. Daar leest scripts/refresh_catalogs.sh uit wélke versie
+// het moet ophalen, zodat de verversing en de poort niet over verschillende
+// versies kunnen praten.
+//
 // Bij een verouderdmelding: werk de catalogus bij, zet de nieuwe versie in
 // lib/services/reference_standards.dart én in docs/LICENSE_COMPLIANCE.md, en
 // controleer of de licentievoorwaarden van de bron zijn veranderd.
@@ -200,6 +206,19 @@ void main(List<String> args) async {
   }
 
   final outcome = await evaluate(standards, probeUpstream);
+
+  // --json: dezelfde ronde, machineleesbaar. Bestaat zodat scripts/refresh_catalogs.sh
+  // niet zijn eigen probes hoeft te schrijven — twee implementaties van "wat is
+  // upstream de laatste?" lopen uiteen, en dan haalt de verversing iets anders
+  // op dan de poort verwacht. Precies die scheefstand hield de MASWE-datum in
+  // de Makefile (2026-08-03) los van die in de catalogus (2026-08-04).
+  //
+  // Eindigt op 0 ook als er iets verouderd is: de aanroeper wil juist dán de
+  // gegevens hebben. Alleen "ik heb niet kunnen kijken" (2) blijft een fout.
+  if (args.contains('--json')) {
+    stdout.writeln(jsonEncode(_asJson(standards, outcome)));
+    exit(outcome.exitCode(advisory: true));
+  }
 
   _printTable(outcome.rows);
 
@@ -362,6 +381,32 @@ class ProbeResult {
 /// de herbouw van 1.x naar 2.0.
 bool deviates(String bundled, String? latest) =>
     latest != null && bundled.isNotEmpty && latest != bundled;
+
+/// De uitkomst als JSON: per standaard id, naam, gebundelde versie, wat upstream
+/// meldt en de status. De volgorde van [GateOutcome.rows] loopt één-op-één met
+/// [standards] — [evaluate] voegt per standaard precies één rij toe — dus de
+/// twee zijn hier te ritsen zonder een tweede ronde probes.
+List<Map<String, Object?>> _asJson(
+  List<Standard> standards,
+  GateOutcome outcome,
+) => [
+  for (var i = 0; i < standards.length; i++)
+    {
+      'id': standards[i].id,
+      'naam': standards[i].name,
+      'gebundeld': standards[i].version,
+      // De probe kon niets ophalen → geen laatste versie, en dat is iets anders
+      // dan "gelijk aan wat wij hebben". Null zegt dat eerlijk; een script dat
+      // hierop verversten wil, hoort dan niets te doen.
+      'laatste': outcome.rows[i][2] == '?' ? null : outcome.rows[i][2],
+      'status': switch (outcome.rows[i][3]) {
+        'actueel' => 'actueel',
+        'VEROUDERD' || 'nieuwer beschikbaar' => 'verouderd',
+        _ => 'onbekend',
+      },
+      'adviserend': standards[i].advisory,
+    },
+];
 
 /// De echte, netwerkgebonden probe. Zie [Prober] voor waarom dit een los
 /// aanwijsbare functie is en geen vaste tak in [evaluate].

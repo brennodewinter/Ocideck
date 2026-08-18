@@ -596,14 +596,9 @@ deps-check:
 	dart run tool/check_reference_data.dart
 
 
-# Regenerate the bundled reference catalogues from their upstream sources.
-# Downloads into a scratch dir, runs each generator, and leaves the diff for a
-# human to read — this is deliberately NOT part of `make check`: updating a
-# standard changes what a report cites, so it is a decision, not a build step.
-#
-# Afterwards: bump the version in lib/services/reference_standards.dart (and in
-# the catalogue's own const), update docs/LICENSE_COMPLIANCE.md, and re-run
-# `make deps-check` so the staleness gate agrees.
+# Regenerate the bundled lexicons. Like refresh-catalogs this is deliberately
+# NOT part of `make check`: a new edition changes what the privacy check fires
+# on, so it is a decision, not a build step.
 refresh-lexicon:
 	@echo "== OciDeck: gebundelde lexicons opnieuw genereren =="
 	@echo "Bronnen: Orphanet (CC BY 4.0) en EuroVoc (Besluit 2011/833/EU)."
@@ -647,14 +642,17 @@ catalogs-outdated:
 
 refresh-catalogs:
 	@echo "== OciDeck: refresh bundled reference catalogues =="
-	@echo "Sources: OWASP WSTG + MASTG + MASWE, MITRE CWE."
-	@echo "This rewrites generated files under lib/services/ — read the diff."
-	@set -e; 	tmp=$$(mktemp -d); 	echo "-- WSTG"; 	curl -sfL "https://raw.githubusercontent.com/OWASP/wstg/v$(WSTG_VERSION)/checklist/checklist.json" -o $$tmp/wstg.json; 	dart run tool/build_wstg_catalog.dart $$tmp/wstg.json $(WSTG_VERSION); 	echo "-- MASTG"; 	curl -sfL "https://github.com/OWASP/mastg/archive/refs/tags/v$(MASTG_VERSION).tar.gz" | tar xz -C $$tmp; 	dart run tool/build_mastg_catalog.dart $$tmp/mastg-$(MASTG_VERSION) $(MASTG_VERSION); 	echo "-- MASWE"; 	curl -sfL "https://github.com/OWASP/maswe/archive/refs/heads/main.tar.gz" | tar xz -C $$tmp; 	dart run tool/build_maswe_catalog.dart $$tmp/maswe-main $(MASWE_DATE); 	rm -rf $$tmp
+	@echo "Sources: OWASP WSTG + MASTG + MASWE (CWE is manual, see below)."
+	@echo "This rewrites the generated files under lib/services/ AND the version"
+	@echo "        each one records — in the catalogue itself and in"
+	@echo "        docs/LICENSE_COMPLIANCE.md. Read the diff before committing."
+	@echo "Which version: whatever upstream says is the latest, asked through the"
+	@echo "        same probes the staleness gate uses. Pin one by hand with"
+	@echo "        'make refresh-catalogs WSTG_VERSION=5.0' if you need to."
+	scripts/refresh_catalogs.sh
 	@echo ""
 	@echo "CWE is not refreshed here: its source is a ~30 MB zip behind a dated"
 	@echo "URL. Run tool/build_cwe_catalog.dart by hand (see its header)."
-	@dart format lib/ >/dev/null
-	@echo "Done. Read 'git diff', bump the versions, update LICENSE_COMPLIANCE.md."
 
 # Machine-translate the bundled user docs into every app language (#1181). The
 # app resolves docs/NAME.<lang>.md automatically; this writes those variants.
@@ -676,12 +674,6 @@ translate-docs-check:
 	@echo "== OciDeck: are all doc translations present + registered? =="
 	@echo "Command: dart run tool/translate_docs.dart --check"
 	dart run tool/translate_docs.dart --check
-
-# The upstream versions the generators pull. Bump these, run refresh-catalogs,
-# then mirror them into lib/services/reference_standards.dart.
-WSTG_VERSION ?= 4.2
-MASTG_VERSION ?= 2.0.0
-MASWE_DATE ?= 2026-08-03
 
 # Open-source licence compliance check for all resolved dependencies.
 licenses:

@@ -122,9 +122,9 @@ void main(List<String> args) {
     }
   }
   stdout.writeln(
-    'Zet de datum ${args[1]} in lib/services/maswe_catalog.dart én in '
-    'lib/services/reference_standards.dart, en controleer '
-    'docs/LICENSE_COMPLIANCE.md.',
+    'Draai je dit gereedschap los, leg de datum dan zelf vast: '
+    'dart run tool/record_catalog_version.dart maswe ${args[1]} '
+    '(scripts/refresh_catalogs.sh doet dat al voor je).',
   );
 }
 
