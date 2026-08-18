@@ -12,6 +12,18 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.6] — 2026-08-18
+
+### Added
+
+- feat(documentmodus): voetnoten, breedte en zoom, een kop die niet alleen blijft, en pijltjes in een tabel (#1554)
+
+### Fixed
+
+- fix(editor): een dieper inspringniveau wordt niet meer stil afgeknipt (#1563)
+- fix(plakken): een geplakte opsomming houdt zijn inspringing (#1562)
+- fix(editor): de syntaxbalk blijft staan, dus de broneditor verspringt niet meer (#1559)
+
 ## [0.4.5] — 2026-08-18
 
 ### Added
