@@ -228,6 +228,19 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(plakken): een geneste opsomming houdt zijn inspringing (#1556, #1557,
+  #1560, #1561). Bij het plakken in de broneditor van documentmodus kon een
+  lijst op drie manieren plat of scheef binnenkomen. Eén: de schoonmaak wiste
+  een dunne spatie (U+2009) overal, ook waar die de inspringing wás — van de
+  acht spatiesoorten was dat de enige die sneuvelde, en het gevolg was elke
+  bullet op het hoofdniveau. Twee: de regelscheiders U+2028 en U+2029 werden
+  gewist in plaats van als regeleinde gelezen, waardoor alle regels aan elkaar
+  plakten. Drie: `trim()` nam ook de inspringing van de eerste geplakte regel
+  mee, dus een selectie die midden in een lijst begon kwam scheef binnen.
+  Daarnaast werd een opsomming aangezien voor een tabel zodra ze met tabs was
+  ingesprongen of toevallig één komma of puntkomma per regel bevatte — de
+  scheidingsherkenning kijkt nu eerst of het een lijst is.
+
 - fix(editor): de syntaxbalk in de broneditor sprong bij elke toetsaanslag weg
   (#1555). De balk werd tijdens de controle niet leeggemaakt maar uit de
   `Column` gehaald, waardoor de editor eronder 28 px omhoog schoof en 350 ms

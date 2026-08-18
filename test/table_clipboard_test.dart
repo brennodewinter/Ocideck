@@ -3,6 +3,43 @@ import 'package:ocideck/utils/table_clipboard.dart';
 
 void main() {
   group('parseClipboardTable', () {
+    // #1557: de scheidingsherkenning is blind voor betekenis — een tab is
+    // altijd een kolomscheiding, en komma's tellen zodra elke regel evenveel
+    // velden geeft. Een ingesprongen opsomming voldoet aan allebei.
+    test('an indented bullet list is not a table', () {
+      expect(
+        parseClipboardTable('- een\n\t- twee\n\t\t- drie'),
+        isNull,
+        reason: 'tab-inspringing',
+      );
+      expect(
+        parseClipboardTable(
+          '- Primary level, with a detail.\n'
+          '    - Secondary level, with a detail.\n'
+          '    - Another secondary, with a detail.',
+        ),
+        isNull,
+        reason: 'een komma per regel',
+      );
+      expect(
+        parseClipboardTable('- een; a\n    - twee; b\n    - drie; c'),
+        isNull,
+        reason: 'een puntkomma per regel',
+      );
+      expect(
+        parseClipboardTable('1. een\n2. twee\n\t3. drie'),
+        isNull,
+        reason: 'genummerde lijst',
+      );
+    });
+
+    test('a real TSV table is still recognised next to that guard', () {
+      expect(parseClipboardTable('a\tb\nc\td'), [
+        ['a', 'b'],
+        ['c', 'd'],
+      ]);
+    });
+
     test('parses a spreadsheet (TSV) selection', () {
       expect(parseClipboardTable('Naam\tScore\nJan\t8\nPiet\t9'), [
         ['Naam', 'Score'],
