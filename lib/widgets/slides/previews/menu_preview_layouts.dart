@@ -416,19 +416,41 @@ class _MenuCircle extends StatelessWidget {
       final n = shown.length;
       final disc = side * menuDiscFraction(n);
       final radius = side * menuRingRadius(n);
+      // De focusring hangt buiten de schijf en eet dus van de lucht tussen twee
+      // buren; bij een volle ring is die lucht krap.
+      final ringWidth = menuDiscRingWidth(
+        side: side,
+        n: n,
+        maxWidth: w * _menuDiscRingFactor,
+      );
       return Center(
         child: SizedBox(
           width: side,
           height: side,
           child: Stack(
             alignment: Alignment.center,
+            // De focusring van een schijf steekt buiten de schijf uit, en bij
+            // de bovenste schijf ook buiten dit vierkant. Zonder dit knipte de
+            // stapel hem vlak af — en alleen bij bepaalde maten, want of een
+            // schijf de rand raakt hangt van de rendermaat af (#1162, derde
+            // beeldkeuring).
+            clipBehavior: Clip.none,
             children: [
               // Bewust géén ringlijn tussen de schijven. Hij stond er, maar de
               // schijven zijn doorschijnend, dus hij liep zichtbaar dwars door
               // hun labels — hij las als een doorhaling (#1162, beeldkeuring).
               // De ring is als vorm al af zonder hulplijn.
               for (var i = 0; i < n; i++)
-                _positioned(context, shown[i], i, n, side, disc, radius),
+                _positioned(
+                  context,
+                  shown[i],
+                  i,
+                  n,
+                  side,
+                  disc,
+                  radius,
+                  ringWidth,
+                ),
             ],
           ),
         ),
@@ -446,6 +468,7 @@ class _MenuCircle extends StatelessWidget {
     double side,
     double disc,
     double radius,
+    double ringWidth,
   ) {
     final angle = -math.pi / 2 + i * 2 * math.pi / n;
     return Positioned(
@@ -462,6 +485,7 @@ class _MenuCircle extends StatelessWidget {
         projectPath: projectPath,
         font: font,
         onTap: onTap,
+        ringWidth: ringWidth,
       ),
     );
   }
@@ -471,6 +495,11 @@ class _MenuCircle extends StatelessWidget {
 /// zwaarste van de twee, en dus de krapste inhoud. Een tekstblok heeft
 /// [_menuDiscPlainBorder].
 const double _menuDiscTargetBorder = 0.005;
+
+/// De gewenste dikte van de focusring om een schijf, als fractie van de
+/// diabreedte. Zwaarder dan bij een kaart, omdat een springende schijf zelf al
+/// een accentrand draagt; [menuDiscRingWidth] kort hem in als de ring vol staat.
+const double _menuDiscRingFactor = 0.008;
 const double _menuDiscPlainBorder = 0.0026;
 
 /// Eén blok als ronde schijf: de afbeelding klein bovenin, het label eronder,
@@ -485,6 +514,11 @@ class _MenuDisc extends StatelessWidget {
   final String font;
   final void Function(String anchor)? onTap;
 
+  /// De dikte van de focusring, uitgerekend door de ring eromheen: hij hangt
+  /// buiten de schijf, dus hoe dik hij mag zijn hangt af van de lucht tussen
+  /// twee buren. Zie [menuDiscRingWidth].
+  final double ringWidth;
+
   const _MenuDisc({
     required this.block,
     required this.w,
@@ -494,6 +528,7 @@ class _MenuDisc extends StatelessWidget {
     this.projectPath,
     required this.font,
     this.onTap,
+    required this.ringWidth,
   });
 
   @override
@@ -623,10 +658,10 @@ class _MenuDisc extends StatelessWidget {
       semanticLabel: _menuSemanticLabel(block),
       ring: accent,
       halo: text,
-      // Zwaarder dan bij een kaart: een springende schijf draagt zélf al een
-      // accentrand van w*0.005, dus met dezelfde dikte zou "gefocust" niet meer
-      // zijn dan een tintje verschil (#1162, beeldkeuring).
-      ringWidth: w * 0.008,
+      // Zwaarder dan bij een kaart — een springende schijf draagt zélf al een
+      // accentrand — maar begrensd door de lucht tussen twee buren, anders ligt
+      // de ring over de buurschijf heen (#1162, beeldkeuring).
+      ringWidth: ringWidth,
       shape: BoxShape.circle,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -793,12 +828,17 @@ class _MenuFocusableState extends State<_MenuFocusable> {
             // verwarren met de decoratie van de kaart eronder.
             key: menuFocusRingKey,
             child: DecoratedBox(
-              // Buitenste ring: het accent, op de buitenrand van de overlay.
-              decoration: ring(widget.ring, widget.ringWidth, radius + total),
+              // Let op de volgorde: een achtergrond-decoratie schildert vóór
+              // haar kind, dus de buitenste doos komt als eerste aan de beurt en
+              // het kind schildert eroverheen. De brede contrastlijn hoort dus
+              // buitenaan te staan en de smalle accentband erbinnen — dan dekt
+              // het accent de buitenste `ringWidth` af en blijft de contrastlijn
+              // daarbinnen zichtbaar. Andersom (zoals het even stond) verdwijnt
+              // het accent volledig onder de contrastlijn en houd je een
+              // eenkleurige donut over (#1162, derde beeldkeuring).
+              decoration: ring(widget.halo, total, radius + total),
               child: DecoratedBox(
-                // Daarbinnen de contrastlijn; de buitenste dekt haar eerste
-                // `ringWidth` af, dus wat overblijft ligt er netjes tegenaan.
-                decoration: ring(widget.halo, total, radius + total),
+                decoration: ring(widget.ring, widget.ringWidth, radius + total),
               ),
             ),
           ),

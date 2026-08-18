@@ -436,6 +436,36 @@ double menuDiscLabelSize({
   return (shown: shown, hidden: count - shown);
 }
 
+/// Hoe dik de focusring om een schijf mag zijn, gegeven de ruimte tussen twee
+/// buren op de ring. [maxWidth] is de gewenste dikte; de uitkomst is die dikte,
+/// of dunner als hij anders over de buurschijf heen zou lopen.
+///
+/// De ring hangt búiten de schijf, dus hij eet van de lucht tussen twee buren.
+/// Bij het gedocumenteerde maximum is die lucht krap: twaalf schijven op een dia
+/// van 1280 staan 98 px uit elkaar met een doorsnede van 84, dus er is 15 px
+/// over — en een ring van 19 px lag daar dwars overheen (#1162, derde
+/// beeldkeuring). Er is er altijd maar één tegelijk gefocust, dus de ring moet
+/// in die lucht passen, niet in de helft ervan; [_menuRingAir] houdt er nog wat
+/// van vrij zodat ring en buurrand elkaar niet raken.
+double menuDiscRingWidth({
+  required double side,
+  required int n,
+  required double maxWidth,
+}) {
+  if (n < 2) return maxWidth;
+  final diameter = side * menuDiscFraction(n);
+  final chord = 2 * side * menuRingRadius(n) * math.sin(math.pi / n);
+  final air = math.max(0.0, chord - diameter) * _menuRingAir;
+  return math.min(maxWidth, air / _menuRingSpread);
+}
+
+/// Hoeveel van de lucht tussen twee schijven de focusring hoogstens mag vullen.
+const double _menuRingAir = 0.85;
+
+/// Hoeveel keer de ringdikte de hele ringband beslaat: de accentband plus de
+/// contrastlijn erbinnen. Zie `_MenuFocusable`.
+const double _menuRingSpread = 1.9;
+
 /// Of dit menu een categoriekiezer verdient: pas vanaf twee categorieën, of bij
 /// één categorie die een naam draagt.
 bool menuHasCategories(List<MenuCategory> categories) =>

@@ -249,6 +249,35 @@ void main() {
         );
       }
 
+      // Beide kleuren moeten er zijn, en het accent moet de smalste zijn: dat
+      // is de band die bovenop komt te liggen. Bij het herschrijven raakte de
+      // tekenvolgorde omgedraaid, waarna de contrastlijn het accent volledig
+      // afdekte en er een eenkleurige donut overbleef — de proef zag dat niet,
+      // want er stónd een rand (#1162, derde beeldkeuring).
+      final randen = tester
+          .widgetList<DecoratedBox>(ringen)
+          .map((b) => (b.decoration as BoxDecoration).border!.top)
+          .toList();
+      expect(randen, hasLength(2));
+      final accent = randen.reduce((a, b) => a.width < b.width ? a : b);
+      final contrast = randen.reduce((a, b) => a.width > b.width ? a : b);
+      expect(
+        accent.color,
+        isNot(contrast.color),
+        reason: 'de ring is eenkleurig; het accent is niet te zien',
+      );
+      // De smalste (het accent) hoort als laatste geschilderd te worden, dus
+      // het diepst in de boom te staan.
+      expect(
+        (tester.widgetList<DecoratedBox>(ringen).last.decoration
+                as BoxDecoration)
+            .border!
+            .top
+            .width,
+        accent.width,
+        reason: 'de contrastlijn ligt over het accent heen',
+      );
+
       // En de ring ligt buiten het blok, niet erin: hij omsluit het label ruim,
       // in plaats van er een hap uit te nemen. Dat was de tweede fout — de ring
       // at bij zestien blokken de helft van een schijf op en sneed het label af.
