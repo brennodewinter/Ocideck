@@ -18,12 +18,14 @@ Widget _menuBlockArea(
   required String? projectPath,
   required String font,
   required void Function(String anchor)? onBlockTap,
+  required Color focusHalo,
 }) {
   Widget card(MenuBlock block, {bool wide = false}) => _MenuBlockCard(
     block: block,
     w: w,
     text: text,
     accent: accent,
+    focusHalo: focusHalo,
     projectPath: projectPath,
     font: font,
     onTap: onBlockTap,
@@ -37,6 +39,7 @@ Widget _menuBlockArea(
       w: w,
       text: text,
       accent: accent,
+      focusHalo: focusHalo,
       projectPath: projectPath,
       font: font,
       onTap: onBlockTap,
@@ -192,6 +195,9 @@ class _MenuBlockCard extends StatelessWidget {
   final double w;
   final Color text;
   final Color accent;
+
+  /// De tweede kleur van de focusring; zie [menuFocusHalo].
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
@@ -205,6 +211,7 @@ class _MenuBlockCard extends StatelessWidget {
     required this.w,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
@@ -244,7 +251,7 @@ class _MenuBlockCard extends StatelessWidget {
       onActivate: () => onTap!(block.targetAnchor),
       semanticLabel: _menuSemanticLabel(block),
       ring: accent,
-      halo: text,
+      halo: focusHalo,
       ringWidth: w * 0.005,
       cornerRadius: w * 0.016,
       child: GestureDetector(
@@ -376,6 +383,7 @@ class _MenuCircle extends StatelessWidget {
   final double w;
   final Color text;
   final Color accent;
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
@@ -385,6 +393,7 @@ class _MenuCircle extends StatelessWidget {
     required this.w,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
@@ -478,6 +487,7 @@ class _MenuCircle extends StatelessWidget {
       height: disc,
       child: _MenuDisc(
         block: block,
+        focusHalo: focusHalo,
         w: w,
         diameter: disc,
         text: text,
@@ -510,6 +520,7 @@ class _MenuDisc extends StatelessWidget {
   final double diameter;
   final Color text;
   final Color accent;
+  final Color focusHalo;
   final String? projectPath;
   final String font;
   final void Function(String anchor)? onTap;
@@ -525,6 +536,7 @@ class _MenuDisc extends StatelessWidget {
     required this.diameter,
     required this.text,
     required this.accent,
+    required this.focusHalo,
     this.projectPath,
     required this.font,
     this.onTap,
@@ -657,7 +669,7 @@ class _MenuDisc extends StatelessWidget {
       onActivate: () => onTap!(block.targetAnchor),
       semanticLabel: _menuSemanticLabel(block),
       ring: accent,
-      halo: text,
+      halo: focusHalo,
       // Zwaarder dan bij een kaart — een springende schijf draagt zélf al een
       // accentrand — maar begrensd door de lucht tussen twee buren, anders ligt
       // de ring over de buurschijf heen (#1162, beeldkeuring).
@@ -670,6 +682,31 @@ class _MenuDisc extends StatelessWidget {
       ),
     );
   }
+}
+
+/// De tweede kleur van de focusring: die van tekst- of achtergrondkleur die het
+/// verst van het accent af ligt.
+///
+/// De ring dankt zijn zichtbaarheid aan het verschil tussen zijn twee banden —
+/// op welke achtergrond de dia ook staat, één ervan steekt af. Dat vangnet
+/// verdwijnt zodra beide banden dezelfde kleur krijgen, en dat is geen
+/// theoretisch geval: in het meegeleverde LibreKAT-profiel zijn `textColor` en
+/// `accentColor` allebei `#003399`, en dat profiel staat standaard geselecteerd.
+/// De ring viel daar terug op één blauwe band (#1162, vierde beeldkeuring).
+///
+/// Vandaar niet blind de tekstkleur, maar de verste van de twee die de dia toch
+/// al draagt. Een derde kleur verzinnen zou de themaregel breken; kiezen tussen
+/// wat er is niet.
+Color menuFocusHalo({
+  required Color accent,
+  required Color text,
+  required Color background,
+}) {
+  final target = accent.computeLuminance();
+  return (text.computeLuminance() - target).abs() >=
+          (background.computeLuminance() - target).abs()
+      ? text
+      : background;
 }
 
 /// De focusring van een keuzeblok, zodat een proef hem kan aanwijzen.

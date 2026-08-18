@@ -11,7 +11,10 @@ import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
 // Fase 3 van #1162: een keuze-menublok aantikken tijdens presenteren springt naar
 // de doeldia, via dezelfde navigatiestack als de sprong-uit.
-Widget _host(List<Slide> slides) => MaterialApp(
+Widget _host(
+  List<Slide> slides, {
+  ThemeProfile profile = const ThemeProfile(),
+}) => MaterialApp(
   localizationsDelegates: const [
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -21,7 +24,7 @@ Widget _host(List<Slide> slides) => MaterialApp(
   home: FullscreenPresenter(
     slides: slides,
     projectPath: null,
-    themeProfile: const ThemeProfile(),
+    themeProfile: profile,
     initialIndex: 0,
   ),
 );
@@ -290,6 +293,52 @@ void main() {
         reason: 'de ring ($ringVlak) omsluit het label ($labelVlak) niet',
       );
       expect(find.text('Kijk mee'), findsOneWidget);
+    });
+
+    testWidgets('de ring blijft tweekleurig als accent en tekst gelijk zijn', (
+      tester,
+    ) async {
+      // Geen bedacht randgeval: in het meegeleverde LibreKAT-profiel zijn
+      // `textColor` en `accentColor` allebei #003399, en dat profiel staat
+      // standaard geselecteerd. De ring viel daar terug op één blauwe band, dus
+      // precies het vangnet waarvoor de tweede kleur bestaat was weg — en de
+      // proef hierboven zag het niet, want die draait op een profiel waar de
+      // twee wél verschillen (#1162, vierde beeldkeuring).
+      await tester.pumpWidget(
+        _host(
+          [
+            Slide.create(
+              SlideType.menu,
+            ).copyWith(title: 'Hoofdmenu', bullets: ['[Naar demo](#demo)']),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Demo', anchor: 'demo', bullets: ['y']),
+          ],
+          profile: const ThemeProfile(
+            accentColor: '#003399',
+            textColor: '#003399',
+            slideBackgroundColor: '#FFFFFF',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      final kleuren = tester
+          .widgetList<DecoratedBox>(
+            find.descendant(
+              of: find.byKey(menuFocusRingKey),
+              matching: find.byType(DecoratedBox),
+            ),
+          )
+          .map((b) => (b.decoration as BoxDecoration).border!.top.color)
+          .toSet();
+      expect(
+        kleuren,
+        hasLength(2),
+        reason: 'de ring is eenkleurig geworden: $kleuren',
+      );
     });
 
     testWidgets('de focus verschuift niets op de dia', (tester) async {
