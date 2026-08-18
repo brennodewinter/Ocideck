@@ -228,6 +228,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(editor): de syntaxbalk in de broneditor sprong bij elke toetsaanslag weg
+  (#1555). De balk werd tijdens de controle niet leeggemaakt maar uit de
+  `Column` gehaald, waardoor de editor eronder 28 px omhoog schoof en 350 ms
+  later weer terug — gemeten: bovenrand van 141 naar 113 en terug. Wie langzaam
+  typt zit langer in die wachtstand en zag de regel onder zijn cursor dus
+  voortdurend bewegen. De balk blijft nu staan en toont tijdens het controleren
+  `Controleren…` op dezelfde plek; het oordeel eronder wisselt, de hoogte niet.
+  De markeringen ín de code lopen wél leeg bij het typen, want die staan na een
+  paar aanslagen op verschoven regelnummers. De regressietest meet de bovenrand
+  van het tekstveld en niet de melding: het gaat om wat er beweegt.
+
 - fix(dast): de ZAP-basisscan opende elke release-run met een rode regel,
   `Unable to copy yaml file to /zap/wrk/zap.yaml [Errno 13] Permission denied`.
   Oorzaak: `/zap/wrk` bestaat niet in het image, dus door de configuratie eróp te

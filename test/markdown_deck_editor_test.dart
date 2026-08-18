@@ -128,4 +128,34 @@ void main() {
     await tester.pump();
     expect(find.byWidgetPredicate(isHighlightLayer), findsNothing);
   });
+
+  testWidgets(
+    'de syntaxbalk blijft staan tijdens het typen, dus de editor verspringt niet',
+    (tester) async {
+      // #1555: de balk werd bij elke aanslag uit de Column gehaald zolang de
+      // controle liep. De editor eronder sprong dan omhoog en 350 ms later weer
+      // terug — 28 px per toetsaanslag. Meet de bovenrand, niet de melding: het
+      // gaat om wat er beweegt onder de cursor van wie zit te typen.
+      await tester.pumpWidget(
+        _host(content: '# Titel\n\n- een\n', onApply: (_) {}),
+      );
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+
+      final field = find.byType(TextField).last;
+      final atRest = tester.getTopLeft(field).dy;
+      expect(find.text('Geen syntaxproblemen gevonden'), findsOneWidget);
+
+      await tester.enterText(field, '# Titel\n\n- een\n- twe');
+      await tester.pump(const Duration(milliseconds: 50));
+
+      // Eerst de meting, dan pas het label: het gebrek is dat er iets beweegt.
+      // Struikelt de test over de tekst, dan wijst hij de verkeerde kant op.
+      expect(tester.getTopLeft(field).dy, atRest);
+      expect(find.text('Controleren…'), findsOneWidget);
+
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+      expect(find.text('Geen syntaxproblemen gevonden'), findsOneWidget);
+      expect(tester.getTopLeft(field).dy, atRest);
+    },
+  );
 }
