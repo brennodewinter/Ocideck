@@ -155,6 +155,35 @@ String decodeNamedHtmlEntities(String text) {
       .replaceAll('&amp;', '&');
 }
 
+/// Het label van de voetnootverwijzing die op [start] begint, of `null` als daar
+/// geen verwijzing staat.
+///
+/// `[^1]:` telt niet: dat is de definitie. Die hoort hier nooit te komen (de
+/// weergave haalt ze eruit), maar als het toch gebeurt is hem als tekst tonen
+/// beter dan hem als merkteken te tekenen.
+String? _footnoteLabelAt(String s, int start) {
+  if (start + 1 >= s.length || s[start + 1] != '^') return null;
+  final close = s.indexOf(']', start + 2);
+  if (close <= start + 2) return null;
+  if (close + 1 < s.length && s[close + 1] == ':') return null;
+  final label = s.substring(start + 2, close);
+  return label.contains(' ') ? null : label;
+}
+
+/// De TeX van de inline-formule die op [start] begint, of `null` wanneer daar
+/// geen formule staat.
+///
+/// Een `$$` opent geen inline-formule (dat is een blok), en losse dollartekens
+/// blijven tekst: alleen inhoud die er als een LaTeX-commando uitziet telt, want
+/// anders wordt `$5 tot $9` een formule.
+String? _inlineMathAt(String s, int start) {
+  if (start + 1 < s.length && s[start + 1] == r'$') return null;
+  final end = _findInlineMathClose(s, start + 1);
+  if (end == -1) return null;
+  final tex = s.substring(start + 1, end);
+  return _looksLikeMath(tex) ? tex : null;
+}
+
 void _parseInto(
   String s,
   InlineRun ctx,
@@ -197,24 +226,14 @@ void _parseInto(
       }
     }
 
-    // [^label] — een voetnootverwijzing. Vóór de link-tak: die kijkt of er een
-    // `(` achter het haakje staat en zou hier niets mee doen, maar de volgorde
-    // maakt de bedoeling zichtbaar.
-    if (footnotes && c == '[' && i + 1 < s.length && s[i + 1] == '^') {
-      final close = s.indexOf(']', i + 2);
-      final label = close > i + 2 ? s.substring(i + 2, close) : '';
-      if (close != -1 &&
-          label.isNotEmpty &&
-          !label.contains(' ') &&
-          // `[^1]:` is de definitie, geen verwijzing. Die hoort hier nooit te
-          // komen (de weergave haalt ze eruit), maar als het toch gebeurt, is
-          // hem als tekst tonen beter dan hem als merkteken te tekenen.
-          (close + 1 >= s.length || s[close + 1] != ':')) {
-        flush();
-        out.add(ctx._with(footnote: true)._copyText(label));
-        i = close + 1;
-        continue;
-      }
+    // [^label] — een voetnootverwijzing, vóór de link-tak: die kijkt óók naar
+    // een `[` en zou hem als gewone tekst laten liggen.
+    final note = footnotes && c == '[' ? _footnoteLabelAt(s, i) : null;
+    if (note != null) {
+      flush();
+      out.add(ctx._with(footnote: true)._copyText(note));
+      i += note.length + 3;
+      continue;
     }
 
     // [tekst](url)
@@ -301,17 +320,12 @@ void _parseInto(
     // $inline-formule$ — alleen als de inhoud een LaTeX-commando bevat, zodat
     // gewone valuta (`$5`) en losse dollartekens tekst blijven. De inhoud gaat
     // ongeparsed als TeX door; de opmaakcontext (`ctx`) geldt er niet voor.
-    if (c == r'$' && (i + 1 >= s.length || s[i + 1] != r'$')) {
-      final end = _findInlineMathClose(s, i + 1);
-      if (end != -1) {
-        final tex = s.substring(i + 1, end);
-        if (_looksLikeMath(tex)) {
-          flush();
-          out.add(const InlineRun('', math: true)._copyText(tex));
-          i = end + 1;
-          continue;
-        }
-      }
+    final tex = c == r'$' ? _inlineMathAt(s, i) : null;
+    if (tex != null) {
+      flush();
+      out.add(const InlineRun('', math: true)._copyText(tex));
+      i += tex.length + 2;
+      continue;
     }
 
     buf.write(c);

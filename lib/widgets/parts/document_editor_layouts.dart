@@ -240,6 +240,58 @@ Widget _documentLivePreview(
   ),
 );
 
+/// De sneltoetsen van de documentbewerker om [child] heen: opslaan, ongedaan
+/// maken, opnieuw, en de zoom.
+///
+/// [Actions] én [CallbackShortcuts]: de eerste vangt de intenties die Flutter
+/// zelf uitstuurt (het bewerkmenu van macOS stuurt `UndoTextIntent`), de tweede
+/// de toetsen die niemand anders bindt. Top-level omdat het bewerkscherm op zijn
+/// klasseplafond zit en dit een omhulsel is, geen gedrag van het scherm.
+Widget _withDocumentShortcuts(
+  WidgetRef ref, {
+  required VoidCallback onUndo,
+  required VoidCallback onRedo,
+  required VoidCallback onSave,
+  required Widget child,
+}) => Actions(
+  actions: {
+    UndoTextIntent: CallbackAction<UndoTextIntent>(
+      onInvoke: (_) {
+        onUndo();
+        return null;
+      },
+    ),
+    RedoTextIntent: CallbackAction<RedoTextIntent>(
+      onInvoke: (_) {
+        onRedo();
+        return null;
+      },
+    ),
+  },
+  child: CallbackShortcuts(
+    bindings: {
+      // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
+      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): onSave,
+      const SingleActivator(LogicalKeyboardKey.keyS, control: true): onSave,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): onUndo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true): onUndo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true, shift: true):
+          onRedo,
+      const SingleActivator(
+        LogicalKeyboardKey.keyZ,
+        control: true,
+        shift: true,
+      ): onRedo,
+      const SingleActivator(LogicalKeyboardKey.keyY, control: true): onRedo,
+      // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
+      // Beide plustoetsen, want op de meeste indelingen zit + op shift-= en
+      // levert het toetsenbord `equal` in plaats van `add`.
+      ..._documentZoomShortcuts(ref),
+    },
+    child: child,
+  ),
+);
+
 /// De breedte waarop het schrijfvlak staat: de tekstbreedte van het vel, de
 /// ingestelde leeskolom, of niets (het hele venster) — allemaal maal de zoom.
 ///

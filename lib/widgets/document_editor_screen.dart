@@ -483,127 +483,91 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final styleProfile = resolveDocumentStyleProfile(settings, docStyleName);
     _styleProfile = styleProfile;
     final theme = Theme.of(context);
-    return Actions(
-      actions: {
-        UndoTextIntent: CallbackAction<UndoTextIntent>(
-          onInvoke: (_) {
-            _undo();
-            return null;
-          },
-        ),
-        RedoTextIntent: CallbackAction<RedoTextIntent>(
-          onInvoke: (_) {
-            _redo();
-            return null;
-          },
-        ),
-      },
-      child: CallbackShortcuts(
-        bindings: {
-          // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
-          const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
-              unawaited(_save()),
-          const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
-              unawaited(_save()),
-          const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): _undo,
-          const SingleActivator(LogicalKeyboardKey.keyZ, control: true): _undo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            meta: true,
-            shift: true,
-          ): _redo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            control: true,
-            shift: true,
-          ): _redo,
-          const SingleActivator(LogicalKeyboardKey.keyY, control: true): _redo,
-          // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware
-          // grootte. Beide plustoetsen, want op de meeste indelingen zit + op
-          // shift-= en levert het toetsenbord `equal` in plaats van `add`.
-          ..._documentZoomShortcuts(ref),
-        },
-        child: Scaffold(
-          body: Column(
-            children: [
-              _DocEditorToolbar(
-                mode: _viewMode,
-                onModeChanged: (m) => setState(() => _viewMode = m),
-                onInsertChart: _insertChart,
-                onInsertPageBreak: _insertPageBreak,
-                onInsertToc: _insertToc,
-                onInsertFootnote: _insertFootnote,
-                footnotesAtEnd:
-                    documentFootnotePlacement(_pageSetupSource(ref)) ==
-                    FootnotePlacement.document,
-                onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
-                onApplyChapterBreaks: () =>
-                    applyChapterBreaksToDocument(context, ref),
-                onInsertTable: _insertTable,
-                onInsertMermaid: _insertMermaid,
-                onInsertImage: _insertImage,
-                onPaste: () => unawaited(_smartPaste()),
-                onUndo: canUndo ? _undo : null,
-                onRedo: canRedo ? _redo : null,
-                onExport: _export,
-                onOpenSettings: () => SettingsDialog.show(
-                  context,
-                  initialSection: SettingsSection.presentation,
-                ),
-                onConvertToPresentation: _convertToPresentation,
-                controller: _controller,
-                editorFocus: _editorFocus,
-                docTheme: _docSurfaceTheme(theme, _styleProfile),
-                styleNames: [for (final p in settings.themeProfiles) p.name],
-                currentStyleName: effectiveDocumentStyleName(
-                  settings,
-                  docStyleName,
-                ),
-                styleEnforced: settings.documentStyleEnforced,
-                enforcedStyleName: settings.documentStyleEnforced
-                    ? settings.documentDefaultStyle
-                    : null,
-                onStyleChanged: (name) => _setDocumentStyle(ref, name),
-                showPageBreaks: _showPageBreaks,
-                onShowPageBreaksChanged: (v) =>
-                    setState(() => _showPageBreaks = v),
-                width: settings.documentEditorWidth,
-                onWidthChanged: (v) => unawaited(
-                  ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
-                ),
-                zoom: settings.documentEditorZoom,
-                onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
+    return _withDocumentShortcuts(
+      ref,
+      onUndo: _undo,
+      onRedo: _redo,
+      onSave: () => unawaited(_save()),
+      child: Scaffold(
+        body: Column(
+          children: [
+            _DocEditorToolbar(
+              mode: _viewMode,
+              onModeChanged: (m) => setState(() => _viewMode = m),
+              onInsertChart: _insertChart,
+              onInsertPageBreak: _insertPageBreak,
+              onInsertToc: _insertToc,
+              onInsertFootnote: _insertFootnote,
+              footnotesAtEnd:
+                  documentFootnotePlacement(_pageSetupSource(ref)) ==
+                  FootnotePlacement.document,
+              onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
+              onApplyChapterBreaks: () =>
+                  applyChapterBreaksToDocument(context, ref),
+              onInsertTable: _insertTable,
+              onInsertMermaid: _insertMermaid,
+              onInsertImage: _insertImage,
+              onPaste: () => unawaited(_smartPaste()),
+              onUndo: canUndo ? _undo : null,
+              onRedo: canRedo ? _redo : null,
+              onExport: _export,
+              onOpenSettings: () => SettingsDialog.show(
+                context,
+                initialSection: SettingsSection.presentation,
               ),
-              Divider(
-                height: 1,
-                thickness: 1,
-                color: theme.colorScheme.outlineVariant,
+              onConvertToPresentation: _convertToPresentation,
+              controller: _controller,
+              editorFocus: _editorFocus,
+              docTheme: _docSurfaceTheme(theme, _styleProfile),
+              styleNames: [for (final p in settings.themeProfiles) p.name],
+              currentStyleName: effectiveDocumentStyleName(
+                settings,
+                docStyleName,
               ),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) => switch (_viewMode) {
-                    _DocViewMode.visual => _visualLayout(
-                      theme,
-                      source,
-                      constraints,
-                    ),
-                    _DocViewMode.source => _sourceLayout(
-                      theme,
-                      source,
-                      constraints,
-                    ),
-                    _DocViewMode.pages => _documentPagesLayout(
-                      ref,
-                      theme,
-                      source,
-                      style: _styleProfile,
-                      projectPath: _projectPath,
-                    ),
-                  },
-                ),
+              styleEnforced: settings.documentStyleEnforced,
+              enforcedStyleName: settings.documentStyleEnforced
+                  ? settings.documentDefaultStyle
+                  : null,
+              onStyleChanged: (name) => _setDocumentStyle(ref, name),
+              showPageBreaks: _showPageBreaks,
+              onShowPageBreaksChanged: (v) =>
+                  setState(() => _showPageBreaks = v),
+              width: settings.documentEditorWidth,
+              onWidthChanged: (v) => unawaited(
+                ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
               ),
-            ],
-          ),
+              zoom: settings.documentEditorZoom,
+              onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
+            ),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: theme.colorScheme.outlineVariant,
+            ),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) => switch (_viewMode) {
+                  _DocViewMode.visual => _visualLayout(
+                    theme,
+                    source,
+                    constraints,
+                  ),
+                  _DocViewMode.source => _sourceLayout(
+                    theme,
+                    source,
+                    constraints,
+                  ),
+                  _DocViewMode.pages => _documentPagesLayout(
+                    ref,
+                    theme,
+                    source,
+                    style: _styleProfile,
+                    projectPath: _projectPath,
+                  ),
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
