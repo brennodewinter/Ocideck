@@ -104,6 +104,28 @@ void main() {
       }
     });
 
+    test('en omgekeerd: een commitdatum-probe meet nooit een hele repo', () {
+      // De andere richting, en die is duurder uitgevallen. MASWE stond op de
+      // repo als geheel, en op 17-08-2026 zette upstream er een build-workflow
+      // in die geen enkele zwakheid raakte. De poort meldde VEROUDERD over een
+      // bundel die woordelijk gelijk was, de release liep vast, en verversen
+      // veranderde niets — er wás niets veranderd.
+      //
+      // Een datum over een hele repo meet dus niet de bundel maar de drukte in
+      // andermans repository. Wie hier een bron bijzet, wijst het pad aan waar
+      // onze generator uit leest.
+      for (final s in referenceStandards) {
+        if (s.probe != UpstreamProbe.githubCommitDate) continue;
+        expect(
+          s.probePath,
+          isNotEmpty,
+          reason:
+              '${s.id}: zonder probePath telt elke commit in ${s.probeTarget} '
+              'als veroudering, ook een die onze bundel niet raakt',
+        );
+      }
+    });
+
     test('LICENSE_COMPLIANCE.md noemt dezelfde versies', () {
       // De licentietabel was tot nu toe de enige plek waar sommige versies
       // stonden. Nu is het register de bron; deze test houdt het doc eraan

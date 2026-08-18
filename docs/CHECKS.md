@@ -1073,8 +1073,20 @@ also declares them, but see the [CI note](#continuous-integration).)
   minuten compileruitvoer verdwijnt.
 - **Exit 2 (geen netwerk) breekt de release niet**, maar zegt wel dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
-- **Daarna:** `make refresh-catalogs` haalt de nieuwe versies op, en
-  `make refresh-lexicon` het gezondheidslexicon uit Orphanet.
+- **Daarna:** `make refresh-catalogs` (→ `scripts/refresh_catalogs.sh`) haalt op
+  wat upstream nú heeft — de doelversie komt uit dezelfde probes als deze
+  controle, dus verversing en poort praten nooit over verschillende versies — en
+  legt die versie meteen vast in de catalogus én in `docs/LICENSE_COMPLIANCE.md`
+  (`tool/record_catalog_version.dart`). Eén commando maakt de melding dus weg.
+  Dat was niet altijd zo: de Makefile haalde de bron op met een vastgezette
+  versie en liet het bijschrijven aan jou, waardoor "werk bij met
+  `make refresh-catalogs`" een advies was dat de melding niet kón wegnemen.
+  `make refresh-lexicon` doet hetzelfde voor het gezondheidslexicon uit Orphanet.
+- **Meet wat je meedraagt.** Een bron met een commitdatum-probe krijgt een
+  `probePath`: het pad waar onze generator uit leest. Zonder dat pad telt elke
+  commit in andermans repository als veroudering — MASWE stond zo een release in
+  de weg om een build-workflow die geen enkele zwakheid raakte.
+  `reference_standards_test` dwingt het pad nu in beide richtingen af.
 - **Twee soorten bron, twee soorten melding.** Een standaard die verouderd is,
   laat de poort in `deps-check` vallen. Een bron met `advisory: true` in
   `lib/services/reference_standards.dart` meldt zich wél maar blokkeert nooit —

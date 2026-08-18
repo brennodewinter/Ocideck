@@ -59,10 +59,21 @@
 # --dry-run doet alle read-only stappen (versie bepalen, verouderingsgate,
 # CHANGELOG-preview, plan tonen) en STOPT vóór elke mutatie.
 #
+# --preflight gaat een stap verder en is de generale repetitie: het vraagt het
+# wachtwoord, toetst álles wat de keten onderweg nodig heeft — referentiedata,
+# schone én vrije werkboom, forge-token, mirror, deploy-host, minisign-sleutel en
+# de macOS-ondertekening/notarisatie — en stopt dan, zonder iets te muteren.
+# Bedoeld voor vlak vóór een release: de dure fouten in deze keten waren telkens
+# vooraf kenbaar (een notary-profiel dat na een sessieherstart weg was, een
+# deploy-host die niet antwoordde, een catalogus die achterliep), maar bleken pas
+# tien minuten of een tag verderop.
+#
 # Gebruik:
 #   scripts/release_auto.sh                      # menu kiest het niveau
 #   scripts/release_auto.sh patch|minor|major    # niveau meegeven, sla het menu over
 #   scripts/release_auto.sh --dry-run [niveau]   # toon het plan, muteer niets
+#   scripts/release_auto.sh --preflight          # generale repetitie: toets élke
+#                                                # voorwaarde, muteer niets
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
 #   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
@@ -89,6 +100,7 @@ GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-75}"
 DRY_RUN=0
 SKIP_INSTALL=0
 PRINT_VERSION=0
+PREFLIGHT_ONLY=0
 LEVEL=""
 RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
 
@@ -106,6 +118,10 @@ need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
 # ── Fail-safe: waar zijn we, en is de tag al onherroepelijk de deur uit? ─────────
 STEP="init"
 TAG_PUSHED=0
+# Staat de release-branch al op origin, dan is een verse run geen optie meer —
+# die weigert er terecht bovenop te bouwen. De juiste route is dan --resume, en
+# dat hoort de foutmelding te zeggen in plaats van "draai opnieuw".
+BRANCH_PUSHED=0
 BRANCH=""
 # De branch waar de release vandaan vertrok; cleanup_branch keert hierheen terug.
 START_BRANCH="$(git branch --show-current 2>/dev/null || true)"
@@ -158,6 +174,13 @@ on_err() {
     printf '  DEZELFDE tag af zodra dat hersteld is:  scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
     printf '  Alleen als een uitgebracht artefact zelf fout is, snijd je de VOLGENDE patch-tag;\n' >&2
     printf '  verplaats deze tag nooit (dat breekt de mirror-Windows-release).\n' >&2
+  elif [ "$BRANCH_PUSHED" -eq 1 ]; then
+    printf '  Er is niets onherroepelijks gebeurd: de tag staat er niet.\n' >&2
+    printf '  Maar de release-branch %s staat wél op origin, dus een verse run\n' "$BRANCH" >&2
+    printf '  weigert er straks bovenop te bouwen. Herstel de oorzaak en hervat:\n' >&2
+    printf '      scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
+    printf '  (of gooi de branch en de PR weg als je liever helemaal opnieuw begint).\n' >&2
+    cleanup_branch
   else
     printf '  Er is nog niets naar buiten gegaan; repareer het en draai het script opnieuw.\n' >&2
     # cleanup_branch meldt zélf wat het deed. Beweer hier dus niets vooraf: de
@@ -173,6 +196,7 @@ STATUS=0
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
+    --preflight) PREFLIGHT_ONLY=1 ;;
     --skip-install) SKIP_INSTALL=1 ;;
     --print-version) PRINT_VERSION=1 ;;
     --resume) RESUME=1 ;;
@@ -180,9 +204,13 @@ for arg in "$@"; do
     patch|minor|major) LEVEL="$arg" ;;
     v[0-9]*.[0-9]*.[0-9]*) RESUME_TAG="$arg" ;;
     -h|--help)
-      sed -n '2,66p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+      # Alles wat na de shebang aan commentaar staat, tot de eerste code-regel.
+      # Stond hier een geteld bereik ('2,66p'), en dat klopte niet meer zodra de
+      # kop groeide — dan kreeg je de handleiding half.
+      awk 'NR>1 && /^#/ { sub(/^# ?/, ""); print; next } NR>1 { exit }' \
+        "${BASH_SOURCE[0]}"
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
 
@@ -327,6 +355,9 @@ MAJOR_V="$((MAJ + 1)).0.0"
 
 choose_level() {
   [ -n "$LEVEL" ] && return 0
+  # --preflight maakt niets aan; het niveau bepaalt daar alleen de naam in de
+  # uitvoer. Een menu zou daar een vraag stellen die geen gevolg heeft.
+  if [ "$PREFLIGHT_ONLY" -eq 1 ]; then LEVEL="patch"; return 0; fi
   cat <<MENU
 
   OciDeck staat op $CUR_VERSION+$CUR_BUILD. Welke release?
@@ -436,11 +467,38 @@ generate_changelog_section() {
 outdated_gate() {
   STEP="verouderingsgate"
   section "Verouderingsgate (referentiedata)"
-  local co
-  co="$(make catalogs-outdated 2>&1 || true)"
+  local co rc=0
+  co="$(make catalogs-outdated 2>&1)" || rc=$?
+  # Drie uitkomsten, en ze vragen alle drie iets anders van je. Ze worden op de
+  # tekst onderscheiden en niet op de afloopcode: make meldt élke gefaalde
+  # recept-regel als 2, dus die code zegt niets over de reden.
+  #
+  # "Niet kunnen kijken" is het geval dat hier eerder als veroudering las, en dat
+  # stuurde je naar een verversing die niets kón vinden — je was immers offline.
+  if printf '%s' "$co" | grep -q "geen enkele bron bereikbaar"; then
+    printf '%s\n' "$co" | sed 's/^/   /'
+    die "de referentiebronnen waren niet bereikbaar (netwerk?) — niet gekeken is niet hetzelfde als actueel. Probeer opnieuw zodra je online bent."
+  fi
+  # De controle zelf brak: geen oordeel over de bundel, dus ook geen advies over
+  # verversen. Toon wat er misging.
+  if [ "$rc" -ne 0 ] && ! printf '%s' "$co" | grep -q "standaard(en) hebben een nieuwere"; then
+    printf '%s\n' "$co" | sed 's/^/   /'
+    die "de verouderingscontrole zelf faalde — zie hierboven; dit zegt niets over de bundel."
+  fi
   if ! printf '%s' "$co" | grep -q "Reference data OK."; then
     printf '%s\n' "$co" | sed 's/^/   /'
-    die "referentiedata niet actueel — werk bij met 'make refresh-catalogs' (+ de versies in lib/services/reference_standards.dart) en draai opnieuw."
+    # De remedie stond hier vroeger fout, en dat is erger dan geen remedie: het
+    # advies luidde "make refresh-catalogs (+ de versies in
+    # reference_standards.dart)", terwijl die verversing de bron ophaalde op de
+    # versie die al vastlag én de versies niet bijschreef. Wie het opvolgde kwam
+    # terug op dezelfde melding. Sinds 18-08-2026 sluit scripts/refresh_catalogs.sh
+    # de lus: het haalt op wat upstream nú is en legt versie, aantal en
+    # licentietabel meteen vast. Deze regel noemt dus één commando dat werkt,
+    # en zegt erbij dat de diff van jou is — het is een inhoudelijke wijziging.
+    printf '\n   Zo werk je het bij (één commando, het legt de versies zelf vast):\n' >&2
+    printf '     make refresh-catalogs && git diff\n' >&2
+    printf '   Lees de diff, commit hem als eigen wijziging, en draai deze release opnieuw.\n' >&2
+    die "referentiedata niet actueel — de bundel gaat niet ongezien de deur uit."
   fi
   log "Referentiedata actueel."
   log "Scanner-pins worden in fase 1 automatisch bijgewerkt (bump-scanner-pins)."
@@ -451,6 +509,9 @@ outdated_gate() {
 # ── Het plan tonen ──────────────────────────────────────────────────────────────
 show_plan() {
   section "Plan"
+  # Bij een repetitie hoort dit plan te lezen als "wat er zóu gebeuren". Zonder
+  # deze regel leest een versienummer in beeld als een release die al loopt.
+  [ "$PREFLIGHT_ONLY" -eq 1 ] && log "REPETITIE (--preflight): hieronder staat wat een release zou doen; er wordt niets gemaakt."
   log "Versie   : $CUR_VERSION+$CUR_BUILD → $NEW_VERSION+$NEW_BUILD  ($LEVEL)"
   log "Tag      : $TAG  (op de merge-commit van de release-PR)"
   log "Basis    : origin/main"
@@ -500,10 +561,14 @@ fi
 # Spiegel alle uitvoer naar een tijdgestempeld logbestand onder build/ (git-genegeerd),
 # zodat een afgebroken release achteraf na te lezen is. Het wachtwoord komt via
 # 'read -s' binnen en staat dus niet in het log.
-LOGFILE="build/release-logs/release-${TAG}-$(date +%Y%m%d-%H%M%S).log"
-mkdir -p "$(dirname "$LOGFILE")"
-exec > >(tee -a "$LOGFILE") 2>&1
-log "Loguitvoer wordt bijgehouden in $LOGFILE"
+# --preflight is een repetitie en schrijft dus geen release-logboek: dat logboek
+# hoort bij een run die iets doet.
+if [ "$PREFLIGHT_ONLY" -eq 0 ]; then
+  LOGFILE="build/release-logs/release-${TAG}-$(date +%Y%m%d-%H%M%S).log"
+  mkdir -p "$(dirname "$LOGFILE")"
+  exec > >(tee -a "$LOGFILE") 2>&1
+  log "Loguitvoer wordt bijgehouden in $LOGFILE"
+fi
 
 STEP="voorwaarden"
 if ! git diff --quiet || ! git diff --cached --quiet; then
@@ -768,7 +833,8 @@ wait_gate() { # wait_gate SHA PR_NUMBER
     esac
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
       printf '%s' "$resp" \
-        | jq -r '.statuses[]? | select(.state!="success") | "     wacht op \(.context): \(.description // .state)"' \
+        | jq -r '.statuses[]? | (.status // .state) as $s | select($s != "success")
+                  | "     wacht op \(.context): \(.description // $s)"' \
         2>/dev/null | sort -u || true
       log "… $(( (i - 1) / 2 )) min verstreken"
     fi
@@ -894,6 +960,9 @@ follow_ci() {
 # overgedaan — die zit al in de gepushte branch/PR als we hier iets vinden.
 resume_release() {
   section "Hervatten — $TAG"
+  # Wat we hervatten staat al op origin; een fout onderweg hoort dus ook hier
+  # naar --resume te wijzen en niet naar een verse run.
+  BRANCH_PUSHED=1
   if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
     TAG_PUSHED=1
     log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
@@ -956,6 +1025,20 @@ echo
 
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
 preflight
+
+# --preflight: hier houdt de repetitie op. Alles wat een release onderweg nodig
+# heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom,
+# forge-token, mirror, deploy-host, minisign-sleutel én de macOS-ondertekening —
+# en er is niets gemuteerd. Dit bestaat omdat de dure fouten in deze keten
+# telkens vooraf kenbaar waren: een notary-profiel dat na een sessieherstart weg
+# was, een deploy-host die niet antwoordde, een catalogus die achterliep. Die
+# kosten nu een halve minuut in plaats van een halve release.
+if [ "$PREFLIGHT_ONLY" -eq 1 ]; then
+  section "Pre-flight klaar"
+  log "Alles wat deze release onderweg nodig heeft, is er. Niets gemuteerd."
+  log "Draai de release met:  scripts/release_auto.sh patch|minor|major"
+  exit 0
+fi
 
 # #9: --resume hervat een onderbroken release vanaf het punt waar het bleef
 # (tag? gemergede PR? open PR? branch?), zonder fase 1 (bouwen) over te doen.
@@ -1089,6 +1172,7 @@ section "Fase 2 — PR openen en laten landen"
 # De versiebump is in fase 1 al gecommit (vóór de poort, voor een schone abort); hier
 # resteert alleen de push van de release-branch (scanner-pins-commit + versiebump).
 git push --quiet -u origin "$BRANCH"
+BRANCH_PUSHED=1
 HEAD_SHA="$(git rev-parse HEAD)"
 
 # Scanner-pins gebumpt → eerst het nieuwe scans-image publiceren, anders vindt de

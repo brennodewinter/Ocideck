@@ -582,14 +582,23 @@ that script by hand.
 
 Right after the password, a **pre-flight** checks everything the later,
 irreversible steps will need — the forge token, the `mirror` remote, the deploy
-host over ssh, and a throwaway `minisign` signature — so a wrong password or an
-unreachable host fails in seconds, before the long build and the tag, instead of
-after (which is exactly how a real release once stranded at the very end).
+host over ssh, a throwaway `minisign` signature, and the macOS signing identity
+plus notary profile — so a wrong password or an unreachable host fails in
+seconds, before the long build and the tag, instead of after (which is exactly
+how a real release once stranded at the very end).
+
+`scripts/release_auto.sh --preflight` runs that rehearsal on its own: the
+staleness gate, a clean and idle worktree, the token, the mirror, the deploy
+host, the signing key and the notary profile — then stops without mutating
+anything or writing a release log. Run it before you set an evening aside for a
+release; the expensive failures in this chain have all been knowable up front.
 
 The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
 gate* over the bundled reference data (`make catalogs-outdated` — a newer upstream
 catalog stops the release with a message, because refreshing it changes what a
-report points at, a deliberate step); then it always runs `make bump-scanner-pins`
+report points at, a deliberate step; `make refresh-catalogs` then fetches it and
+records the new version in the catalogue *and* in `LICENSE_COMPLIANCE.md`, so one
+command clears the gate); then it always runs `make bump-scanner-pins`
 (idempotent) so the CI scanners (gitleaks/trufflehog/semgrep) ride to their latest
 upstream automatically instead of blocking a release — a bump, if any, becomes its
 own commit on the release branch; then the four-place version bump, `make sbom`,
@@ -640,7 +649,8 @@ plan and the outdatedness gate without mutating anything; `--print-version LEVEL
 prints just the computed tag (the hermetic guard-arithmetic that
 `test/release_auto_version_test.dart` pins against the canonical rule). A fresh run
 bases the next version on `origin/main`, so re-running from a leftover release
-branch cannot miscompute the bump. This is the fully-unattended increment the
+branch cannot miscompute the bump; `--preflight` rehearses every precondition.
+This is the fully-unattended increment the
 guided `make release` deliberately left to a proven follow-up.
 
 ### The tag-driven chain
