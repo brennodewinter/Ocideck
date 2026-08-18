@@ -247,8 +247,15 @@ class MenuTextFit {
       labelLines * labelLineHeight + descriptionLines * descriptionLineHeight;
 }
 
-const double _menuLabelLineFactor = 1.15;
-const double _menuDescriptionLineFactor = 1.2;
+/// De regelhoogtes waarmee [menuTextFit] rekent. Openbaar, want de widget moet
+/// exact dezelfde waarden in zijn `TextStyle` zetten: rekende de een met 1,15
+/// terwijl de ander 1,2 tekende, dan klopt het toegewezen budget niet met wat er
+/// werkelijk op de dia staat.
+const double kMenuLabelLineHeight = 1.15;
+const double kMenuDescriptionLineHeight = 1.2;
+
+const double _menuLabelLineFactor = kMenuLabelLineHeight;
+const double _menuDescriptionLineFactor = kMenuDescriptionLineHeight;
 
 /// Verdeel [available] hoogte over label en uitleg van een menublok.
 ///

@@ -41,6 +41,11 @@ class MenuEditor extends ConsumerStatefulWidget {
   ConsumerState<MenuEditor> createState() => _MenuEditorState();
 }
 
+/// Hoe ver de blokken onder een categoriekop inspringen: de breedte van het
+/// mappictogram in die kop plus de ruimte erachter, zodat een blokkaart precies
+/// onder het naamveld begint.
+const double _menuCategoryInset = 22;
+
 class _MenuEditorState extends ConsumerState<MenuEditor> {
   /// Tekstvelden per blok, in dezelfde volgorde als [_blocks] — dus dwars door
   /// de categorieën heen doorgeteld. Bij invoegen, verwijderen en verplaatsen
@@ -335,8 +340,14 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
           Padding(
             // Inspringen onder een categoriekop: zonder dat staan de kop en de
             // blokken eronder even ver naar links en is de indeling visueel plat
-            // (#1162, beeldkeuring).
-            padding: EdgeInsets.only(bottom: 8, left: named ? 12 : 0),
+            // (#1162, beeldkeuring). De maat is niet vrij gekozen — de kop begint
+            // met een pictogram van 16 met 6 ernaast, dus op [_menuCategoryInset]
+            // staat de blokkaart precies onder het naamveld in plaats van er
+            // links van uit te steken.
+            padding: EdgeInsets.only(
+              bottom: 8,
+              left: named ? _menuCategoryInset : 0,
+            ),
             child: _MenuBlockRow(
               block: blocks[i],
               label: _labels[_flatIndex(categories, cat, i)],
@@ -370,7 +381,7 @@ class _MenuEditorState extends ConsumerState<MenuEditor> {
             ),
           ),
         Padding(
-          padding: EdgeInsets.only(left: named ? 12 : 0),
+          padding: EdgeInsets.only(left: named ? _menuCategoryInset : 0),
           child: Align(
             alignment: Alignment.centerLeft,
             child: TextButton.icon(

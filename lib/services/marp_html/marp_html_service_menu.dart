@@ -73,6 +73,11 @@ String renderMenuSlide(String slideMarkdown, {ThemeProfile? theme}) {
   // Zonder die deling kreeg elke ring de volle maat en groeide een menu met drie
   // categorieën uit tot vijf schermen hoog (#1162, beeldkeuring).
   final filled = categories.where((c) => c.blocks.isNotEmpty).length;
+  // Dichtheid en rijhoogte horen bij de dia, niet bij één categorie: twee
+  // categorieën van acht zijn samen zestien blokken en moeten dus even klein
+  // gezet worden als één categorie van zestien. Per categorie beslissen liet ze
+  // allebei ontsnappen, en de dia werd twee schermen hoog (#1162, beeldkeuring).
+  final total = categories.fold<int>(0, (n, c) => n + c.blocks.length);
   final body = StringBuffer();
   for (final category in categories) {
     if (category.blocks.isEmpty) continue;
@@ -89,6 +94,7 @@ String renderMenuSlide(String slideMarkdown, {ThemeProfile? theme}) {
         accent: accent,
         ink: ink,
         categoryCount: filled,
+        slideBlockCount: total,
       ),
     );
   }
@@ -105,36 +111,63 @@ String _menuBlocksHtml(
   required String accent,
   required String ink,
   required int categoryCount,
+  required int slideBlockCount,
 }) {
   // Veel blokken op één dia betekent kleinere kaarten — anders loopt het label
   // de kaart uit, precies zoals in de app (#1162, beeldkeuring).
-  final dense = blocks.length > 9;
+  final dense = slideBlockCount > 9;
+  // De hoogte die dit blokkenvlak mag beslaan. Vaste pixels en geen `vh`: een
+  // geëxporteerde dia is 1280×720 en de kijker scrollt door dia's, dus de
+  // vensterhoogte zegt hier niets. De categorieën delen het budget.
+  final budget = (_menuBodyHeight / categoryCount).clamp(140, _menuBodyHeight);
   final out = StringBuffer();
   switch (layout) {
     case MenuLayout.grid:
+      final columns = menuGridColumns(blocks.length);
+      final rows = (blocks.length / columns).ceil();
       out
         ..write('<div class="menu-grid${dense ? ' menu-dense' : ''}" ')
-        ..write('style="grid-template-columns:')
-        ..write('repeat(${menuGridColumns(blocks.length)},1fr)">');
+        ..write('style="grid-template-columns:repeat($columns,1fr);')
+        ..write('grid-auto-rows:${_menuRowPx(budget, rows, 22)}px">');
     case MenuLayout.list:
-      out.write(
-        '<div class="menu-grid menu-stack${dense ? ' menu-dense' : ''}">',
-      );
+      out
+        ..write(
+          '<div class="menu-grid menu-stack${dense ? ' menu-dense' : ''}"',
+        )
+        ..write(' style="grid-auto-rows:')
+        ..write('${_menuRowPx(budget, blocks.length, 16)}px">');
     case MenuLayout.circle:
       // De ring is vierkant; met meer categorieën onder elkaar moet hij kleiner.
-      final size = (620 / categoryCount).clamp(180, 620).round();
-      out.write('<div class="menu-ring" style="max-width:${size}px">');
+      out.write(
+        '<div class="menu-ring" style="max-width:${budget.round()}px">',
+      );
   }
   for (var i = 0; i < blocks.length; i++) {
     out.write(
       layout == MenuLayout.circle
-          ? _menuDiscHtml(blocks[i], i, blocks.length, accent: accent, ink: ink)
+          ? _menuDiscHtml(
+              blocks[i],
+              i,
+              blocks.length,
+              accent: accent,
+              ink: ink,
+              ringPx: budget.toDouble(),
+            )
           : _menuCardHtml(blocks[i], accent: accent, ink: ink),
     );
   }
   out.write('</div>');
   return out.toString();
 }
+
+/// De hoogte die de blokken van één dia samen mogen beslaan in de HTML-export,
+/// in pixels op de 1280×720-dia — de titel en wat marge eraf.
+const double _menuBodyHeight = 560;
+
+/// De rijhoogte die [rows] rijen met [gap] ertussen samen binnen [budget] houdt,
+/// begrensd op wat nog leesbaar respectievelijk niet potsierlijk is.
+int _menuRowPx(num budget, int rows, double gap) =>
+    ((budget - gap * (rows - 1)) / rows).clamp(56, 180).round();
 
 /// De rand- en vulkleur van een blok. Een doelblok krijgt de accentrand; een
 /// tekstblok een rustige rand uit de tekstkleur. De alfa-achtervoegsels volgen de
@@ -144,6 +177,14 @@ String _menuBlockStyle(MenuBlock block, String accent, String ink) =>
     block.hasTarget
     ? 'border-color:${accent}8c;background:${accent}1f'
     : 'border-color:${ink}2e;background:${ink}0d';
+
+/// Dezelfde stijl voor een schijf, plus het sprongteken dat de app er ook op
+/// zet: een dubbel zo zware rand, omdat er in een cirkel geen plek is voor de
+/// pijl die een kaart draagt. Zonder dit gaf de export een sprong anders aan dan
+/// de app (#1162, beeldkeuring).
+String _menuDiscStyle(MenuBlock block, String accent, String ink) =>
+    '${_menuBlockStyle(block, accent, ink)};'
+    'border-width:${block.hasTarget ? 4 : 2}px';
 
 /// Eén keuzeblok als kaart: kleine afbeelding links, label en uitleg ernaast,
 /// een pijl rechts als het blok ergens heen springt. Attribuutwaarden (anker,
@@ -194,6 +235,7 @@ String _menuDiscHtml(
   int n, {
   required String accent,
   required String ink,
+  required double ringPx,
 }) {
   final disc = 100 * menuDiscFraction(n);
   final radius = 100 * menuRingRadius(n);
@@ -203,6 +245,13 @@ String _menuDiscHtml(
   final place =
       'left:${left.toStringAsFixed(2)}%;top:${top.toStringAsFixed(2)}%;'
       'width:${disc.toStringAsFixed(2)}%;height:${disc.toStringAsFixed(2)}%';
+  // De schijf is een percentage van de ring, maar de letter stond op een vaste
+  // 20 px: bij zestien blokken was de schijf 84 px breed en werd elk label links
+  // én rechts weggesneden, zonder ellips (#1162, beeldkeuring). De lettermaat
+  // volgt nu dezelfde verhouding als in de app (0,15 · doorsnede).
+  final discPx = ringPx * menuDiscFraction(n);
+  final labelPx = (discPx * 0.15).clamp(9, 22).toStringAsFixed(1);
+  final descPx = (discPx * 0.11).clamp(8, 17).toStringAsFixed(1);
   final inner = StringBuffer();
   if (block.hasImage) {
     inner
@@ -211,18 +260,18 @@ String _menuDiscHtml(
       ..write('">');
   }
   inner
-    ..write('<span class="menu-label">')
+    ..write('<span class="menu-label" style="font-size:${labelPx}px">')
     ..write(_esc(block.label))
     ..write('</span>');
   // Ook hier de uitleg tonen zolang er geen beeld in de weg staat, zodat de
   // export niet minder laat zien dan de app.
   if (block.hasDescription && !block.hasImage) {
     inner
-      ..write('<span class="menu-desc">')
+      ..write('<span class="menu-desc" style="font-size:${descPx}px">')
       ..write(_esc(block.description))
       ..write('</span>');
   }
-  final style = '$place;${_menuBlockStyle(block, accent, ink)}';
+  final style = '$place;${_menuDiscStyle(block, accent, ink)}';
   if (block.hasTarget) {
     final href = MarpHtmlService._htmlAttr('#${block.targetAnchor}');
     return '<a class="menu-disc" href="$href" style="$style">$inner</a>';

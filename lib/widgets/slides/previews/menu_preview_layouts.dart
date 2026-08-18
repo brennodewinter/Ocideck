@@ -237,7 +237,7 @@ class _MenuBlockCard extends StatelessWidget {
                         color: text,
                         fontSize: fit.labelSize,
                         fontWeight: FontWeight.w700,
-                        height: 1.15,
+                        height: kMenuLabelLineHeight,
                       ),
                     ),
                     linkColor: accent,
@@ -260,7 +260,7 @@ class _MenuBlockCard extends StatelessWidget {
                           // van gewicht maakt de uitleg al ondergeschikt genoeg.
                           color: text.withValues(alpha: 0.85),
                           fontSize: fit.descriptionSize,
-                          height: 1.2,
+                          height: kMenuDescriptionLineHeight,
                         ),
                       ),
                       linkColor: accent,
@@ -393,18 +393,26 @@ class _MenuDisc extends StatelessWidget {
   Widget build(BuildContext context) {
     final actionable = block.hasTarget;
     final thumb = diameter * 0.34;
-    // De uitleg viel weg zodra er een afbeelding bij zat — stilzwijgend, dus je
-    // zag niet dat er iets ontbrak (#1162, beeldkeuring). Nu is de vraag alleen
-    // of er plek voor is: op een ruime schijf passen beeld én uitleg.
-    final showDescription =
-        block.hasDescription && (!block.hasImage || diameter > w * 0.22);
     // Net als bij de kaart volgt het regelbudget uit de hoogte die er is; de
-    // ruimte binnen een cirkel is de padding eraf, min wat het beeld inneemt.
+    // ruimte binnen een cirkel is de padding eraf, min wat het beeld en de
+    // tussenruimte innemen. Géén extra voorwaarde op de schijfmaat: die stond
+    // er (`diameter > w * 0.22`) maar kon nooit waar worden — een schijf haalt
+    // hoogstens 0,16·w — dus viel de uitleg naast een afbeelding altijd weg,
+    // precies wat de voorwaarde moest voorkomen (#1162, beeldkeuring). Of het
+    // past, weet [menuTextFit] al.
+    final gap = diameter * 0.04;
+    // De rand zit binnen de schijf, dus hij gaat van de inhoud af. Vergeten
+    // betekende een overloop van een paar pixels bij de zwaarste rand — precies
+    // die van een springend blok.
+    final borderWidth = w * (actionable ? 0.005 : 0.0026);
     final fit = menuTextFit(
       available:
-          diameter * 0.68 - (block.hasImage ? thumb + diameter * 0.05 : 0),
+          diameter * 0.68 -
+          borderWidth * 2 -
+          (block.hasImage ? thumb + diameter * 0.05 : 0) -
+          gap,
       maxLabelSize: diameter * 0.15,
-      hasDescription: showDescription,
+      hasDescription: block.hasDescription,
       maxLabelLines: 2,
     );
 
@@ -424,7 +432,7 @@ class _MenuDisc extends StatelessWidget {
           color: actionable
               ? accent.withValues(alpha: 0.75)
               : text.withValues(alpha: 0.2),
-          width: w * (actionable ? 0.005 : 0.0026),
+          width: borderWidth,
         ),
       ),
       clipBehavior: Clip.antiAlias,
@@ -450,7 +458,13 @@ class _MenuDisc extends StatelessWidget {
               ),
               SizedBox(height: diameter * 0.05),
             ],
-            Flexible(
+            // Elk stuk tekst krijgt precies de hoogte die [menuTextFit] eraan
+            // toewees. Stonden ze allebei in een gewone `Flexible`, dan deelde
+            // de kolom de ruimte gelijk en negeerde ze het budget dat er net
+            // was uitgerekend — label en uitleg liepen dan over elkaar heen
+            // (#1162, beeldkeuring).
+            SizedBox(
+              height: fit.labelLines * fit.labelLineHeight,
               child: _md(
                 context,
                 block.label,
@@ -460,7 +474,7 @@ class _MenuDisc extends StatelessWidget {
                     color: text,
                     fontSize: fit.labelSize,
                     fontWeight: FontWeight.w700,
-                    height: 1.1,
+                    height: kMenuLabelLineHeight,
                   ),
                 ),
                 linkColor: accent,
@@ -469,8 +483,10 @@ class _MenuDisc extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            if (fit.showsDescription)
-              Flexible(
+            if (fit.showsDescription) ...[
+              SizedBox(height: gap),
+              SizedBox(
+                height: fit.descriptionLines * fit.descriptionLineHeight,
                 child: _md(
                   context,
                   block.description,
@@ -479,15 +495,16 @@ class _MenuDisc extends StatelessWidget {
                     TextStyle(
                       color: text.withValues(alpha: 0.85),
                       fontSize: fit.descriptionSize,
-                      height: 1.15,
+                      height: kMenuDescriptionLineHeight,
                     ),
                   ),
                   linkColor: accent,
-                  maxLines: 2,
+                  maxLines: fit.descriptionLines,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
               ),
+            ],
           ],
         ),
       ),

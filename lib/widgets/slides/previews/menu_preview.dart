@@ -130,17 +130,16 @@ class _MenuPreviewState extends State<_MenuPreview> {
           SizedBox(height: w * 0.018),
         ],
         if (blocks.isNotEmpty)
-          // Raster en cirkel verdelen de ruimte die er is; de lijst houdt zijn
-          // regelhoogte en mag dóórgroeien — dan schaalt de stellage de dia.
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: contentWidth,
-              maxWidth: contentWidth,
-              minHeight: blocksHeight,
-              maxHeight: widget.slide.menuLayout == MenuLayout.list
-                  ? double.infinity
-                  : blocksHeight,
-            ),
+          // Alle drie de indelingen verdelen de ruimte die er is. De lijst kreeg
+          // hier even `maxHeight: infinity` om te mogen doorgroeien, maar dan
+          // ziet zijn eigen `LayoutBuilder` een oneindige hoogte, verdeelt hij
+          // niets, en krimpt de `FittedBox` van de stellage de hele dia tot een
+          // postzegel in de linkerbovenhoek (#1162, beeldkeuring). Nu de tekst
+          // meekrimpt met de regelhoogte is verdelen ook gewoon het juiste
+          // antwoord.
+          SizedBox(
+            width: contentWidth,
+            height: blocksHeight,
             child: _menuBlockArea(
               context,
               blocks: blocks,

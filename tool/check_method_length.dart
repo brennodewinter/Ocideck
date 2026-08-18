@@ -51,7 +51,9 @@ const Map<String, int> methodLengthBaseline = {
   // +1: imageZoom-doorvoer in Slide-constructor.
   // +4 (#1162): menuLayout uit de klassetokens lezen, plus het filteren van de
   // menu-optietokens uit `effectiveClass`. Pure doorvoer van een nieuw veld.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 208,
+  // Verlaagd van 208 naar 202: de rij losse tokenvergelijkingen in
+  // `effectiveClass` werd één aanroep van `isOcideckWrittenClassToken`.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 202,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,

@@ -108,4 +108,79 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  // Twee gebreken die de proeven hierboven niet zágen, omdat ze geen overloop
+  // zijn: een dia die door de `FittedBox` tot een postzegel krimpt, en tekst die
+  // over andere tekst valt. Allebei door de beeldkeuring gevonden nadat de suite
+  // groen stond (#1162).
+  testWidgets('onder elkaar krimpt de dia niet tot een postzegel', (
+    tester,
+  ) async {
+    await pump(
+      tester,
+      Slide.create(SlideType.menu).copyWith(
+        title: 'Menu',
+        menuLayout: MenuLayout.list,
+        bullets: [for (var i = 0; i < 16; i++) '[Blok $i](#doel$i) — uitleg'],
+      ),
+      1280,
+      720,
+    );
+    expect(tester.takeException(), isNull);
+
+    final veel = tester.getRect(find.text('Menu')).height;
+
+    // De titel van hetzelfde menu met drie blokken is de maatstaf: de dia mag
+    // niet als geheel kleiner worden omdát er meer blokken op staan. Meten tegen
+    // een uitgerekende waarde zou de lettermetriek van de proeflettertype
+    // vastpinnen; deze vergelijking niet.
+    await pump(
+      tester,
+      Slide.create(SlideType.menu).copyWith(
+        title: 'Menu',
+        menuLayout: MenuLayout.list,
+        bullets: [for (var i = 0; i < 3; i++) '[Blok $i](#doel$i) — uitleg'],
+      ),
+      1280,
+      720,
+    );
+    final weinig = tester.getRect(find.text('Menu')).height;
+
+    expect(
+      veel,
+      closeTo(weinig, 1),
+      reason:
+          'met zestien blokken staat de titel op ${veel}px en met drie op '
+          '$weinig — de dia is als geheel teruggeschaald',
+    );
+  });
+
+  testWidgets('in de ring valt de uitleg niet over het label', (tester) async {
+    await pump(
+      tester,
+      Slide.create(SlideType.menu).copyWith(
+        title: 'Menu',
+        menuLayout: MenuLayout.circle,
+        bullets: [
+          for (var i = 0; i < 6; i++)
+            '[Sneltoetsen $i](#doel$i) — De handigste van allemaal',
+        ],
+      ),
+      1280,
+      720,
+    );
+    expect(tester.takeException(), isNull);
+
+    for (var i = 0; i < 6; i++) {
+      final label = find.text('Sneltoetsen $i');
+      if (label.evaluate().isEmpty) continue;
+      final uitleg = find.text('De handigste van allemaal');
+      if (uitleg.evaluate().length <= i) continue;
+      expect(
+        tester.getRect(label).overlaps(tester.getRect(uitleg.at(i))),
+        isFalse,
+        reason: 'label en uitleg van schijf $i overlappen elkaar',
+      );
+    }
+  });
 }

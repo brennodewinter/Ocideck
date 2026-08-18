@@ -48,7 +48,8 @@ void main() {
       expect(
         html,
         contains(
-          '<div class="menu-grid" style="grid-template-columns:repeat(2,1fr)">',
+          '<div class="menu-grid" style="grid-template-columns:repeat(2,1fr);'
+          'grid-auto-rows:180px">',
         ),
       );
       // The blocks are no longer emitted as raw `- [..](#..)` bullet markdown.
@@ -190,7 +191,12 @@ void main() {
     test('the "onder elkaar" layout renders as a single-column stack', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(categorisedDeck(MenuLayout.list));
-      expect(html, contains('<div class="menu-grid menu-stack">'));
+      // De rijhoogte komt uit het hoogtebudget van de dia, gedeeld door de
+      // categorieën: twee categorieën, dus 280 px per vlak.
+      expect(
+        html,
+        contains('<div class="menu-grid menu-stack" style="grid-auto-rows:'),
+      );
       // De ringvorm zit wél in het stijlblad, maar mag hier niet gebruikt zijn.
       expect(html, isNot(contains('class="menu-ring"')));
     });
@@ -199,7 +205,7 @@ void main() {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(categorisedDeck(MenuLayout.circle));
       // Twee categorieën delen de hoogte, dus elke ring krijgt de halve maat.
-      expect(html, contains('<div class="menu-ring" style="max-width:310px">'));
+      expect(html, contains('<div class="menu-ring" style="max-width:280px">'));
       // Elke schijf draagt zijn eigen plek als percentage.
       expect(html, contains('class="menu-disc" href="#prijzen" style="left:'));
       expect(html, contains('.slide .menu-ring{position:relative'));
