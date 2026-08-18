@@ -394,8 +394,18 @@ class _ApplyChoiceResult {
   const _ApplyChoiceResult(this.choice, [this.focusLine]);
 }
 
+/// De uitkomst van de syntaxcontrole, als een balk die blijft staan.
+///
+/// [result] is bewust het *vorige* oordeel zolang [pending] waar is. De balk
+/// leegmaken tijdens het typen haalde hem uit de [Column], waardoor de editor
+/// eronder 28 px omhoog sprong en na 350 ms weer terug — bij elke aanslag
+/// (#1555). Door het oordeel te laten staan en alleen icoon en tekst te
+/// wisselen, verandert de hoogte alleen als het oordeel zelf verandert.
 class _ValidationSummaryBar extends StatelessWidget {
   final MarkdownValidationResult result;
+
+  /// Er loopt een nieuwe controle; [result] is het vorige oordeel.
+  final bool pending;
   final bool expanded;
   final VoidCallback onToggle;
   final ValueChanged<int> onJumpToLine;
@@ -403,6 +413,7 @@ class _ValidationSummaryBar extends StatelessWidget {
 
   const _ValidationSummaryBar({
     required this.result,
+    required this.pending,
     required this.expanded,
     required this.onToggle,
     required this.onJumpToLine,
@@ -430,7 +441,9 @@ class _ValidationSummaryBar extends StatelessWidget {
     final l10n = context.l10n;
     final color = result.isValid ? AppTheme.warningBg : AppTheme.dangerBg;
     final iconColor = result.isValid ? AppTheme.warningFg : AppTheme.dangerFg;
-    final summary = result.hasIssues
+    final summary = pending
+        ? l10n.d('Controleren…')
+        : result.hasIssues
         ? '${result.errorCount} ${l10n.d('fout(en),')} '
               '${result.warningCount} ${l10n.d('waarschuwing(en)')}'
         : l10n.d('Geen syntaxproblemen gevonden');
@@ -447,7 +460,9 @@ class _ValidationSummaryBar extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    result.hasIssues
+                    pending
+                        ? Icons.sync
+                        : result.hasIssues
                         ? Icons.warning_amber_outlined
                         : Icons.check_circle_outline,
                     size: 14,

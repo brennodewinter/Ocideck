@@ -87,6 +87,14 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   Timer? _validationTimer;
   late String _baselineContent;
   MarkdownValidationResult? _validation;
+
+  /// Het laatst afgeronde oordeel, ook terwijl er een nieuwe controle loopt.
+  ///
+  /// Apart van [_validation], dat tijdens het typen leegloopt zodat de
+  /// markeringen in de code niet op verschoven regelnummers blijven staan. De
+  /// balk mag juist niet leeglopen: die verdween dan uit de [Column] en trok de
+  /// bovenrand van de editor 28 px mee (#1555).
+  MarkdownValidationResult? _lastValidation;
   bool _validationPending = false;
   bool _syncingExternalContent = false;
   int? _lastReportedSlide;
@@ -112,6 +120,11 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _scrollController = ScrollController();
     _editorFocusNode = FocusNode();
     _undoController = UndoHistoryController()..addListener(_onUndoChanged);
+    // Meteen een oordeel voor de balk in plaats van de debounce af te wachten:
+    // stond hij er de eerste 350 ms niet, dan schoof de editor bij het openen
+    // alsnog een keer omhoog en weer terug (#1555). De markeringen in de code
+    // wachten wel op de gewone ronde, zoals altijd.
+    _lastValidation = _validator.validate(widget.initialContent);
     _scheduleValidation();
   }
 
@@ -145,6 +158,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       _syncingExternalContent = false;
       setState(() {
         _validation = null;
+        _lastValidation = _validator.validate(widget.initialContent);
         _showIssues = false;
         _matches = const [];
         _matchIndex = -1;
@@ -235,6 +249,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       final result = _validator.validate(_ctrl.text);
       setState(() {
         _validation = result;
+        _lastValidation = result;
         _validationPending = false;
       });
     });
@@ -333,6 +348,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     final result = _validator.validate(_ctrl.text);
     setState(() {
       _validation = result;
+      _lastValidation = result;
       _validationPending = false;
       _showIssues = result.hasIssues;
     });
@@ -724,9 +740,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
           children: [
             _modeBanner(l10n),
             _formattingBar(this),
-            if (_validation != null)
+            if (_lastValidation != null)
               _ValidationSummaryBar(
-                result: _validation!,
+                result: _lastValidation!,
+                pending: _validationPending,
                 expanded: _showIssues,
                 onToggle: () => setState(() => _showIssues = !_showIssues),
                 onJumpToLine: _jumpToLine,
