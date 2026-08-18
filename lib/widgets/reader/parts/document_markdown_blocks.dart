@@ -125,6 +125,26 @@ const double kDocumentSubheadingGapTop = 18;
 const double kDocumentHeadingGapBottom = 8;
 const double kDocumentListRowGap = 4;
 
+/// Hoeveel regels bodytekst er onder een kop op hetzelfde vel moeten passen
+/// voordat de kop daar mag blijven staan.
+///
+/// Twee, en niet één: een kop met één losse regel eronder en de rest op het
+/// volgende vel leest net zo verkeerd als een kop die helemaal alleen staat.
+/// Zelfde getal als de `widows`/`orphans` in de print-CSS van de HTML-export,
+/// zodat scherm en druk hetzelfde zeggen.
+const int kDocumentKeepWithNextLines = 2;
+
+/// De hoogte die [kDocumentKeepWithNextLines] regels bodytekst innemen onder
+/// [scaler] — de tekstschaal van het toestel, met de zoom van de editor erin.
+///
+/// Via de schaler en niet via een kale factor: een niet-lineaire schaal (de
+/// toegankelijkheidsinstelling van het toestel) rekent per lettergrootte, en
+/// dan is de factor bij maat 1 niet die bij maat 15,5.
+double documentKeepWithNextHeight(TextScaler scaler) =>
+    scaler.scale(kDocumentBodyFontSize) *
+    kDocumentBodyLineHeight *
+    kDocumentKeepWithNextLines;
+
 /// De lettergrootte van een kop op niveau [level].
 double documentHeadingSize(int level) => switch (level) {
   1 => 27.0,

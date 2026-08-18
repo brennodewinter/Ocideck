@@ -63,7 +63,11 @@ html,body{margin:0;padding:0}
 .document pre.mermaid{background:transparent;border:0;text-align:center}
 .document table{border-collapse:collapse;width:100%}
 .document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0}.document hr{page-break-after:always;border:0;height:0;margin:0}}
+/* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
+   laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
+   als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat
+   scherm en druk hetzelfde zeggen. */
+@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0;orphans:2;widows:2}.document h1,.document h2,.document h3,.document h4,.document h5,.document h6{page-break-after:avoid;break-after:avoid}.document hr{page-break-after:always;border:0;height:0;margin:0}}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de

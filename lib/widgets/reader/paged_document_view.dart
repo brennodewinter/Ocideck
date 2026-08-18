@@ -136,6 +136,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         widget.markdown,
         chapterBreak: widget.chapterPageBreak,
       ),
+      // Een kop blijft niet alleen (of met één losse regel) onderaan een vel
+      // achter, maar schuift mee naar de tekst waar hij bij hoort.
+      keepWithNext: DocumentMarkdownView.headingBlocks(widget.markdown),
+      minKeepHeight: documentKeepWithNextHeight(
+        MediaQuery.textScalerOf(context),
+      ),
     );
     return LayoutBuilder(
       builder: (context, constraints) {

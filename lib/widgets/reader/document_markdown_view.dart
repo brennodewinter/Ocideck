@@ -197,6 +197,18 @@ class DocumentMarkdownView extends StatelessWidget {
     return breaks;
   }
 
+  /// De blokken die een kop zijn, als index in dezelfde lijst als [blockTexts].
+  ///
+  /// De paginaverdeling houdt ze vast aan de tekst eronder: een kop hoort niet
+  /// alleen onderaan een vel achter te blijven (zie `documentPageOffsets`).
+  static Set<int> headingBlocks(String markdown) {
+    final blocks = _parse(markdown);
+    return {
+      for (var i = 0; i < blocks.length; i++)
+        if (blocks[i].kind == _Kind.heading) i,
+    };
+  }
+
   /// De regelnummers (vanaf 0) van elke hoofdstukkop (`H1`) in [source], geteld
   /// met exact dezelfde grammatica als de weergave: een `#` binnen een fenced
   /// blok is code en telt niet mee, en een kop heeft een spatie na de hekjes.
