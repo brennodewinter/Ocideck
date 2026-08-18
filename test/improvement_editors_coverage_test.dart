@@ -235,6 +235,42 @@ void main() {
   });
 
   group('TreeEditor', () {
+    testWidgets('een dieper niveau blijft staan en springt met één stap uit', (
+      tester,
+    ) async {
+      // #1558: tree_editor klemde bij het lezen op zijn eigen maximum (6, waar
+      // de opsommingseditors 4 aanhielden — een verschil dat niemand had
+      // besloten). Nu geldt overal kMaxIndentButtonLevel, en het klemmen zit
+      // alleen op de knop.
+      await _tall(tester);
+      Slide latest = Slide.create(
+        SlideType.tree,
+      ).copyWith(bullets: const ['Wortel', '\t\t\t\t\t\tDiep punt']);
+      await tester.pumpWidget(
+        appHost(
+          overrides: _noAi,
+          child: TreeEditor(slide: latest, onUpdate: (s) => latest = s),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.enterText(fieldByLabel('Titel'), 'Waarom-boom');
+      await tester.pump();
+      expect(
+        bulletLevel(latest.bullets.last),
+        6,
+        reason: 'niveau 6 mag niet afgeknipt worden door alleen te openen',
+      );
+
+      await tester.tap(find.byIcon(Icons.format_indent_decrease).last);
+      await tester.pump();
+      expect(
+        bulletLevel(latest.bullets.last),
+        5,
+        reason: 'uitspringen gaat één stap, niet terug naar het knopmaximum',
+      );
+    });
+
     testWidgets('title, indent, add/remove, layout and template', (
       tester,
     ) async {

@@ -5,6 +5,24 @@
 // site.
 part of 'slide.dart';
 
+/// Hoe diep de inspringknoppen van de editors mogen komen.
+///
+/// Dit is een grens van de *bediening*, niet van het formaat. Het formaat, de
+/// parser, de dia-render en de HTML-export kennen geen maximum: een niveau is
+/// gewoon een tab, en de inspringing schaalt lineair mee. Wat hier staat, is
+/// hoe ver je met de knop of met Tab komt.
+///
+/// De editors klemden dit getal ook bij het *lezen*, en schreven het geklemde
+/// niveau weer terug. Eén letter typen in het eerste item liet daarmee het
+/// vierde item een niveau zakken — een regel die de gebruiker niet had
+/// aangeraakt (#1558). Lezen gebeurt nu ongeklemd; alleen de knop stopt hier.
+/// Wat je zelf niet hebt gemaakt, maakt de editor ook niet stuk.
+///
+/// Let op de dubbeltelling die hier onder ligt: de markdown-parser rekent twee
+/// spaties per niveau, terwijl markdown doorgaans met vier wordt geschreven.
+/// Een geïmporteerde lijst van drie zichtbare niveaus staat intern dus op 0-2-4.
+const kMaxIndentButtonLevel = 4;
+
 int bulletLevel(String value) {
   var level = 0;
   while (level < value.length && value[level] == '\t') {
