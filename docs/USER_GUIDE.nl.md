@@ -3336,6 +3336,15 @@ probleem om naar die dia te springen en het relevante editorveld te focussen; kl
 (hele presentatie)**-probleem om *Instellingen → Presentatiestijl → Kleuren* te openen met het bijbehorende
 kleurveld in beeld gescrold en gemarkeerd.
 
+Eén waarschuwing houdt aan het begin haar mond: *deze dia is leeg*. Op een deck
+dat je nog niet hebt aangeraakt — net aangemaakt, nog nooit opgeslagen, niets om
+ongedaan te maken — is een lege dia precies wat *Leeg deck* beloofde, en er dan
+naar wijzen is je corrigeren voor wat je zelf net vroeg. Zodra je iets doet (één
+toetsaanslag is een ongedaan-maken-stap) of het bestand opslaat, telt de melding
+weer mee — en dat is precies het moment waarop een lege dia iets is om te weten
+vóór je exporteert. Elke andere melding staat er vanaf de eerste seconde: die
+gaan over wat er wél is, nooit over wat je nog moet doen.
+
 Veel bevindingen dragen een **oplossing-met-één-klik** ernaast. Op een overvolle opsommingsdia
 is dat altijd eerst **Dia splitsen** — de opsommingen over pagina's spreiden houdt
 elk woord op het scherm. **Uitleg naar notities** (de tekst achter een

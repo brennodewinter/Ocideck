@@ -1647,7 +1647,14 @@ that before deciding whether this alpha fits what you are doing.
   en spreekt zich nergens op een dia uit. Daarmee is het lege deck ook het enige
   sjabloon zonder document in `assets/templates/` — leeg is de afwezigheid van
   een document, geen document dat toevallig één dia telt, dus de 31 lege
-  documenten zijn weg en de sjabloonpoorten slaan het lege deck over.
+  documenten zijn weg en de sjabloonpoorten slaan het lege deck over. En omdat
+  een lege dia wél een kwaliteitsmelding oplevert, begroette een vers deck de
+  gebruiker meteen met "deze dia is leeg" — een verwijt over precies wat hij net
+  zelf had gevraagd. Die ene melding zwijgt nu zolang het deck nog niet is
+  aangeraakt: geen ongedaan-maken-stap, geen bestand, geen download. Eén
+  toetsaanslag zet hem weer aan, en dat is precies het moment waarop een lege dia
+  wél iets is om te weten vóór de export. De andere meldingen blijven staan; die
+  gaan over wat er wél is.
 
 - **het poortslot krijgt een rem, en een correctie.** Bij #1541 schreef ik dat
   een worktree-wissel de CMake-cache "opnieuw stempelt — traag maar correct".

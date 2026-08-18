@@ -3235,7 +3235,16 @@ the editor half of it.
 ### Slide quality
 
 The **Slide quality** bar sits below the editor preview. It summarises open
-issues and can be expanded to browse them. Filter chips let you show **All
+issues and can be expanded to browse them.
+
+One warning holds its tongue at the start: *this slide is empty*. On a deck you
+have not touched yet — freshly created, never saved, nothing to undo — an empty
+slide is exactly what *Empty deck* promised, and pointing at it would be
+correcting you for what you just asked for. The moment you do anything (a single
+keystroke is an undo step) or save the file, the warning counts again — which is
+the point at which an empty slide is worth knowing about before you export.
+Every other finding shows from the first second: those are about what *is*
+there, never about what you have yet to do. Filter chips let you show **All
 issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
