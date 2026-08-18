@@ -672,6 +672,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'In een cirkel': 'Cerchio',
   'Onder elkaar': 'Elenco',
   'Categorie': 'Categoria',
   'Categorie toevoegen': 'Aggiungi categoria',

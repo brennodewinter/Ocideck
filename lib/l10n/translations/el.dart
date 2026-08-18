@@ -1675,6 +1675,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'In een cirkel': 'Κύκλος',
   'Onder elkaar': 'Λίστα',
   'Categorie': 'Κατηγορία',
   'Categorie toevoegen': 'Προσθήκη κατηγορίας',

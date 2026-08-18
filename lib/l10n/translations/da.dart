@@ -1650,6 +1650,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'In een cirkel': 'Cirkel',
   'Onder elkaar': 'Liste',
   'Categorie': 'Kategori',
   'Categorie toevoegen': 'Tilføj kategori',

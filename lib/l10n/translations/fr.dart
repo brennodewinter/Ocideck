@@ -675,6 +675,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'In een cirkel': 'Cercle',
   'Onder elkaar': 'Liste',
   'Categorie': 'Catégorie',
   'Categorie toevoegen': 'Ajouter une catégorie',

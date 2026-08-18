@@ -675,6 +675,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'In een cirkel': 'Sirkel',
   'Onder elkaar': 'Ûnder inoar',
   'Categorie': 'Kategory',
   'Categorie toevoegen': 'Kategory tafoegje',

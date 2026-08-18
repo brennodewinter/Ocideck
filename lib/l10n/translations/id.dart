@@ -1649,6 +1649,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'In een cirkel': 'Lingkaran',
   'Onder elkaar': 'Daftar',
   'Categorie': 'Kategori',
   'Categorie toevoegen': 'Tambah kategori',

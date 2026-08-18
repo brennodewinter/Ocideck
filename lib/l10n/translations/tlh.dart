@@ -1627,6 +1627,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'In een cirkel': '\'ID',
   'Onder elkaar': 'tetlh',
   'Categorie': 'Segh',
   'Categorie toevoegen': 'Segh yIchel',

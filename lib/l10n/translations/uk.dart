@@ -1666,6 +1666,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'In een cirkel': 'Коло',
   'Onder elkaar': 'Список',
   'Categorie': 'Категорія',
   'Categorie toevoegen': 'Додати категорію',

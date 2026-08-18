@@ -1652,6 +1652,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'In een cirkel': 'Chreis',
   'Onder elkaar': 'Lischte',
   'Categorie': 'Kategorie',
   'Categorie toevoegen': 'Kategorie zuefüege',

@@ -1657,6 +1657,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'In een cirkel': 'Apskritimas',
   'Onder elkaar': 'Sąrašas',
   'Categorie': 'Kategorija',
   'Categorie toevoegen': 'Pridėti kategoriją',

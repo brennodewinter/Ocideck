@@ -1652,6 +1652,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'In een cirkel': 'Kruh',
   'Onder elkaar': 'Seznam',
   'Categorie': 'Kategorie',
   'Categorie toevoegen': 'Přidat kategorii',

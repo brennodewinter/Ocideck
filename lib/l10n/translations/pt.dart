@@ -1678,6 +1678,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'In een cirkel': 'Círculo',
   'Onder elkaar': 'Lista',
   'Categorie': 'Categoria',
   'Categorie toevoegen': 'Adicionar categoria',

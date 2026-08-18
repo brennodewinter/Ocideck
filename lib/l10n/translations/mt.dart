@@ -1670,6 +1670,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'In een cirkel': 'Ċirku',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategorija',
   'Categorie toevoegen': 'Żid kategorija',

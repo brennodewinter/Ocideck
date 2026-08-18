@@ -1652,6 +1652,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'In een cirkel': 'Kör',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategória',
   'Categorie toevoegen': 'Kategória hozzáadása',

@@ -1670,6 +1670,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'In een cirkel': 'Кръг',
   'Onder elkaar': 'Списък',
   'Categorie': 'Категория',
   'Categorie toevoegen': 'Добавяне на категория',

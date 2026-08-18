@@ -2567,6 +2567,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'In een cirkel': 'Daire',
   'Onder elkaar': 'Liste',
   'Categorie': 'Kategori',
   'Categorie toevoegen': 'Kategori ekle',

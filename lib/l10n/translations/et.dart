@@ -1643,6 +1643,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'In een cirkel': 'Ring',
   'Onder elkaar': 'Loend',
   'Categorie': 'Kategooria',
   'Categorie toevoegen': 'Lisa kategooria',

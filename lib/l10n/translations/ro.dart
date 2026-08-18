@@ -1667,6 +1667,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'In een cirkel': 'Cerc',
   'Onder elkaar': 'Listă',
   'Categorie': 'Categorie',
   'Categorie toevoegen': 'Adaugă categorie',

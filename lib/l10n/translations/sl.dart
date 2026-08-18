@@ -1651,6 +1651,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'In een cirkel': 'Krog',
   'Onder elkaar': 'Seznam',
   'Categorie': 'Kategorija',
   'Categorie toevoegen': 'Dodaj kategorijo',

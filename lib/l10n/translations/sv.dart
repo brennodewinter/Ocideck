@@ -1649,6 +1649,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'In een cirkel': 'Cirkel',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategori',
   'Categorie toevoegen': 'Lägg till kategori',

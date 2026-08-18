@@ -673,6 +673,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'In een cirkel': 'Círculo',
   'Onder elkaar': 'Lista',
   'Categorie': 'Categoría',
   'Categorie toevoegen': 'Añadir categoría',

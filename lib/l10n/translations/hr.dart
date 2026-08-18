@@ -1655,6 +1655,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'In een cirkel': 'Krug',
   'Onder elkaar': 'Popis',
   'Categorie': 'Kategorija',
   'Categorie toevoegen': 'Dodaj kategoriju',

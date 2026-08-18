@@ -674,6 +674,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'In een cirkel': 'Sirkel',
   'Onder elkaar': 'Lista',
   'Categorie': 'Kategoria',
   'Categorie toevoegen': 'Agregá kategoria',

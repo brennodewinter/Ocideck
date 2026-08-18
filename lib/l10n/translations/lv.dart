@@ -1649,6 +1649,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'In een cirkel': 'Aplis',
   'Onder elkaar': 'Saraksts',
   'Categorie': 'Kategorija',
   'Categorie toevoegen': 'Pievienot kategoriju',

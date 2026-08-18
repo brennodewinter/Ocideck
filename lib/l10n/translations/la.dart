@@ -1665,6 +1665,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'In een cirkel': 'Circulus',
   'Onder elkaar': 'Index',
   'Categorie': 'Categoria',
   'Categorie toevoegen': 'Categoriam addere',

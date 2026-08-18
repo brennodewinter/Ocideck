@@ -1650,6 +1650,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'In een cirkel': 'Ympyrä',
   'Onder elkaar': 'Luettelo',
   'Categorie': 'Luokka',
   'Categorie toevoegen': 'Lisää luokka',

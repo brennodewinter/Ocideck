@@ -1681,6 +1681,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'In een cirkel': 'Ciorcal',
   'Onder elkaar': 'Liosta',
   'Categorie': 'Catagóir',
   'Categorie toevoegen': 'Cuir catagóir leis',

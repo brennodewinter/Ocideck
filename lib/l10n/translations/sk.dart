@@ -1656,6 +1656,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'In een cirkel': 'Kruh',
   'Onder elkaar': 'Zoznam',
   'Categorie': 'Kategória',
   'Categorie toevoegen': 'Pridať kategóriu',
