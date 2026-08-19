@@ -493,6 +493,16 @@ second Windows artifact. Until then the installer is built by hand. The packager
 is a bash script and does not go through `make`, precisely because `make` is not
 reliably present on that runner.
 
+**A condition on publishing it.** An installer asks for elevation, and an
+unsigned one that asks for elevation teaches a worse habit than an unsigned app
+you unzip yourself — people are trained to click through installer prompts. So
+whenever the installer *is* published, it must be listed in `SHA256SUMS` and
+therefore covered by the minisign signature over that manifest, with the same
+"verify your download" instruction the zip carries. That signature is what stands
+in for the Authenticode certificate this project has weighed and declined; a
+published installer that is neither signed nor in the manifest has no provenance
+at all, which is a step backwards from the zip rather than a convenience.
+
 #### Signing it (optional)
 
 Signing is off by default and the script says so loudly when it produced an
