@@ -15,7 +15,12 @@
 /// preserved verbatim.
 library;
 
+import 'dart:collection';
+
 const _fence = '---';
+
+const int kMaxDocumentFields = 100;
+const int kMaxDocumentFieldValueLength = 4096;
 
 /// De front-matter-sleutels die het documentpad zelf schrijft.
 ///
@@ -33,6 +38,7 @@ const _fence = '---';
 /// §14.1.
 const Set<String> kDocumentOwnedKeys = {
   'theme',
+  'tlp',
   'papersize',
   'geometry',
   'reference-location',
@@ -44,6 +50,63 @@ const Set<String> kDocumentOwnedKeys = {
 /// ingetrokken sleutel vanzelf uit bestaande bestanden verdwijnt in plaats van
 /// er voor altijd in te blijven staan. Leeg zolang er niets is ingetrokken.
 const Set<String> kDocumentRetiredKeys = {};
+
+final _documentFieldKey = RegExp(r'^[a-z][a-z0-9_-]*$');
+final _doubleQuotedDocumentScalar = RegExp(
+  r'^("(?:\\.|[^"\\])*")((?:\s+#.*)?\s*)$',
+);
+final _singleQuotedDocumentScalar = RegExp(
+  r"^('(?:''|[^'])*')((?:\s+#.*)?\s*)$",
+);
+
+/// Een eenmaal gelezen frontmatter-snapshot. [MarkdownDocument] bewaart deze
+/// zolang alleen de body verandert, zodat typen niet telkens YAML scant.
+class DocumentFrontMatterMetadata {
+  DocumentFrontMatterMetadata._(this.frontMatter, this.fields, this._values);
+
+  final String frontMatter;
+  final DocumentFields fields;
+  final Map<String, List<String>> _values;
+
+  List<String> valuesFor(String key) => _values[key] ?? const [];
+}
+
+/// Vrije velden met behoud van informatie over dubbele bronregels.
+class DocumentFields extends MapBase<String, String> {
+  DocumentFields._(Map<String, String> values, this.duplicateValues)
+    : _values = Map<String, String>.unmodifiable(values);
+
+  final Map<String, String> _values;
+  final Map<String, List<String>> duplicateValues;
+
+  Set<String> get duplicateKeys => duplicateValues.keys.toSet();
+
+  @override
+  String? operator [](Object? key) => _values[key];
+
+  @override
+  void operator []=(String key, String value) =>
+      throw UnsupportedError('documentvelden zijn onveranderlijk');
+
+  @override
+  void clear() => throw UnsupportedError('documentvelden zijn onveranderlijk');
+
+  @override
+  Iterable<String> get keys => _values.keys;
+
+  @override
+  String? remove(Object? key) =>
+      throw UnsupportedError('documentvelden zijn onveranderlijk');
+}
+
+/// Of [key] de eenvoudige, uitwisselbare sleutelvorm voor documentvelden heeft.
+bool isValidDocumentFieldKey(String key) => _documentFieldKey.hasMatch(key);
+
+/// Of [key] door de documentstructuur of door OciDeck zelf wordt beheerd.
+bool isReservedDocumentFieldKey(String key) =>
+    kDocumentOwnedKeys.contains(key) ||
+    kDocumentRetiredKeys.contains(key) ||
+    key.startsWith('ocideck_');
 
 /// A document split into its leading front-matter [block] (verbatim, including
 /// the blank line(s) that separate it from the body — `''` when there is none)
@@ -130,14 +193,152 @@ String withDocumentStyleName(String source, String? name) {
 /// De waarde van [key] uit de frontmatter van [source], of `null` wanneer de
 /// sleutel er niet staat. Alleen voor sleutels die OciDeck zelf schrijft.
 String? documentFrontMatterValue(String source, String key) {
-  final block = splitDocumentFrontMatter(source).block;
-  if (block.isEmpty) return null;
-  final matcher = _keyLine(key);
-  for (final raw in block.split('\n')) {
-    final m = matcher.firstMatch(_stripCr(raw));
-    if (m != null) return _unquote(m.group(1)!.trim());
+  final values = documentFrontMatterMetadata(source).valuesFor(key);
+  return values.isEmpty ? null : values.first;
+}
+
+DocumentFrontMatterMetadata documentFrontMatterMetadata(String source) {
+  final frontMatter = splitDocumentFrontMatter(source).block;
+  final values = <String, List<String>>{};
+  final fields = <String, String>{};
+  final duplicates = <String, List<String>>{};
+  if (frontMatter.isNotEmpty) {
+    for (final raw in frontMatter.split('\n')) {
+      final entry = _topLevelScalarLine(_stripCr(raw));
+      if (entry == null) continue;
+      values.putIfAbsent(entry.key, () => []).add(entry.value);
+      if (!isValidDocumentFieldKey(entry.key) ||
+          isReservedDocumentFieldKey(entry.key)) {
+        continue;
+      }
+      final previous = fields[entry.key];
+      if (previous == null) {
+        fields[entry.key] = entry.value;
+      } else {
+        duplicates.putIfAbsent(entry.key, () => [previous]).add(entry.value);
+      }
+    }
   }
-  return null;
+  return DocumentFrontMatterMetadata._(
+    frontMatter,
+    DocumentFields._(
+      fields,
+      Map.unmodifiable({
+        for (final entry in duplicates.entries)
+          entry.key: List<String>.unmodifiable(entry.value),
+      }),
+    ),
+    Map<String, List<String>>.unmodifiable({
+      for (final entry in values.entries)
+        entry.key: List<String>.unmodifiable(entry.value),
+    }),
+  );
+}
+
+/// Alle vrije, platte scalaire documentvelden in volgorde van voorkomen.
+///
+/// Bij een dubbele sleutel wint de eerste waarde. De dubbeling blijft apart
+/// zichtbaar via [documentFieldDuplicateKeys], zodat een aanroeper haar niet
+/// stil hoeft te verbergen.
+Map<String, String> documentFields(String source) =>
+    documentFrontMatterMetadata(source).fields;
+
+/// Vrije scalaire documentveldsleutels die meer dan één keer voorkomen.
+Set<String> documentFieldDuplicateKeys(String source) {
+  return documentFrontMatterMetadata(source).fields.duplicateKeys;
+}
+
+/// Vervangt de volledige verzameling vrije documentvelden byte-chirurgisch.
+///
+/// Bestaande velden behouden hun plek en spelling wanneer hun waarde niet
+/// verandert. Ontbrekende velden worden verwijderd en nieuwe velden komen in
+/// de volgorde van [fields] vlak voor de sluitende fence. Structurele,
+/// gereserveerde, samengestelde en onbekende regels blijven verbatim staan.
+String withDocumentFields(String source, Map<String, String> fields) {
+  if (fields.length > kMaxDocumentFields) {
+    throw ArgumentError.value(
+      fields.length,
+      'fields',
+      'te veel documentvelden',
+    );
+  }
+  for (final entry in fields.entries) {
+    if (!isValidDocumentFieldKey(entry.key) ||
+        isReservedDocumentFieldKey(entry.key)) {
+      throw ArgumentError.value(entry.key, 'fields', 'ongeldige veldsleutel');
+    }
+    if (entry.value.contains('\n') || entry.value.contains('\r')) {
+      throw ArgumentError.value(
+        entry.value,
+        entry.key,
+        'een documentveld moet één regel blijven',
+      );
+    }
+    if (entry.value.length > kMaxDocumentFieldValueLength) {
+      throw ArgumentError.value(
+        entry.value.length,
+        entry.key,
+        'documentveld is te lang',
+      );
+    }
+  }
+
+  final split = splitDocumentFrontMatter(source);
+  final eol = _detectEol(source);
+  if (split.block.isEmpty) {
+    if (fields.isEmpty) return source;
+    final lines = [
+      _fence,
+      for (final entry in fields.entries)
+        '${entry.key}: ${_yamlScalar(entry.value)}',
+      _fence,
+      '',
+      '',
+    ];
+    return lines.join(eol) + split.body;
+  }
+
+  final remaining = Map<String, String>.of(fields);
+  final written = <String>{};
+  final lines = split.block.split('\n');
+  final nextLines = <String>[];
+  for (final line in lines) {
+    final parsed = _documentFieldLine(_stripCr(line));
+    if (parsed == null) {
+      nextLines.add(line);
+      continue;
+    }
+    final desired = remaining[parsed.key];
+    if (desired == null || written.contains(parsed.key)) {
+      continue;
+    }
+    written.add(parsed.key);
+    remaining.remove(parsed.key);
+    nextLines.add(
+      parsed.value == desired
+          ? line
+          : '${parsed.key}: ${_yamlScalar(desired)}${parsed.commentSuffix}'
+                '${_trailingCr(line)}',
+    );
+  }
+
+  if (remaining.isNotEmpty) {
+    final closing = nextLines.lastIndexWhere(
+      (line) => _stripCr(line) == _fence,
+    );
+    final cr = closing >= 0 ? _trailingCr(nextLines[closing]) : '';
+    nextLines.insertAll(closing, [
+      for (final entry in fields.entries)
+        if (remaining.containsKey(entry.key))
+          '${entry.key}: ${_yamlScalar(entry.value)}$cr',
+    ]);
+  }
+
+  final hasContent = nextLines.any((line) {
+    final value = _stripCr(line).trim();
+    return value.isNotEmpty && value != _fence;
+  });
+  return hasContent ? nextLines.join('\n') + split.body : split.body;
 }
 
 /// Zet [key] op [value], of haalt hem weg bij `null`/leeg.
@@ -186,11 +387,20 @@ String withDocumentFrontMatterKey(String source, String key, String? value) {
 String _setKeyInBlock(String block, String key, String value) {
   final lines = block.split('\n');
   final matcher = _keyLine(key);
+  var first = -1;
   for (var i = 0; i < lines.length; i++) {
     if (matcher.hasMatch(_stripCr(lines[i]))) {
-      lines[i] = '$key: $value${_trailingCr(lines[i])}';
-      return lines.join('\n');
+      if (first < 0) {
+        first = i;
+        lines[i] = '$key: $value${_trailingCr(lines[i])}';
+      }
     }
+  }
+  if (first >= 0) {
+    for (var i = lines.length - 1; i > first; i--) {
+      if (matcher.hasMatch(_stripCr(lines[i]))) lines.removeAt(i);
+    }
+    return lines.join('\n');
   }
   // Nog geen sleutel: invoegen vóór de sluitende fence (de laatste `---`).
   for (var i = lines.length - 1; i >= 0; i--) {
@@ -219,7 +429,7 @@ String? _removeKeysFromBlock(String block, Set<String> keys) {
 // --- small helpers -----------------------------------------------------------
 
 /// Een regel die [key] zet, met de waarde als groep 1.
-RegExp _keyLine(String key) => RegExp('^\\s*$key\\s*:\\s*(.*)\$');
+RegExp _keyLine(String key) => RegExp('^${RegExp.escape(key)}\\s*:\\s*(.*)\$');
 
 /// A YAML mapping key: a name starting with a letter or underscore, then a colon.
 /// Deliberately excludes a leading digit (so a stray `12:30` line is not read as
@@ -263,7 +473,11 @@ String _yamlScalar(String s) {
       // top=25mm,bottom=25mm,…` onnodig een string-met-quotes, en dat leest
       // slechter in een bestand dat mensen openslaan.
       RegExp('''[:#\\n"'\\[\\]{}&*!|>%@`]''').hasMatch(s) ||
-      RegExp(r'^[-?]').hasMatch(s);
+      RegExp(r'^[-?]').hasMatch(s) ||
+      RegExp(
+        r'^(?:~|null|true|false|yes|no|on|off|[-+]?(?:0o[0-7_]+|0x[0-9a-f_]+|(?:\d[\d_]*(?:\.[\d_]*)?|\.[\d_]+)(?:e[-+]?\d+)?|\.inf|\.nan)|\d{4}-\d{1,2}-\d{1,2})$',
+        caseSensitive: false,
+      ).hasMatch(s);
   if (!needsQuote) return s;
   return '"${s.replaceAll('\\', r'\\').replaceAll('"', r'\"')}"';
 }
@@ -279,4 +493,70 @@ String _unquote(String v) {
     return v.substring(1, v.length - 1).replaceAll("''", "'");
   }
   return v;
+}
+
+typedef _DocumentFieldEntry = ({
+  String key,
+  String value,
+  String commentSuffix,
+});
+
+typedef _DocumentScalar = ({String value, String commentSuffix});
+
+_DocumentFieldEntry? _documentFieldLine(String line) {
+  final entry = _topLevelScalarLine(line);
+  if (entry == null ||
+      !isValidDocumentFieldKey(entry.key) ||
+      isReservedDocumentFieldKey(entry.key)) {
+    return null;
+  }
+  return entry;
+}
+
+_DocumentFieldEntry? _topLevelScalarLine(String line) {
+  if (line.isEmpty || line.startsWith(' ') || line.startsWith('\t')) {
+    return null;
+  }
+  final separator = line.indexOf(':');
+  if (separator <= 0) return null;
+  final key = line.substring(0, separator);
+  final scalar = _plainScalarValue(line.substring(separator + 1));
+  return scalar == null
+      ? null
+      : (key: key, value: scalar.value, commentSuffix: scalar.commentSuffix);
+}
+
+_DocumentScalar? _plainScalarValue(String raw) {
+  final value = raw.trimLeft();
+  if (value.isEmpty ||
+      value.startsWith('#') ||
+      value.startsWith('|') ||
+      value.startsWith('>') ||
+      value.startsWith('[') ||
+      value.startsWith('{') ||
+      value.startsWith('&') ||
+      value.startsWith('*') ||
+      value.startsWith('!')) {
+    return null;
+  }
+  if (value.startsWith('"') || value.startsWith("'")) {
+    final match =
+        (value.startsWith('"')
+                ? _doubleQuotedDocumentScalar
+                : _singleQuotedDocumentScalar)
+            .firstMatch(value);
+    if (match == null) return null;
+    final suffix = match.group(2)!;
+    return (
+      value: _unquote(match.group(1)!),
+      commentSuffix: suffix.trim().isEmpty ? '' : suffix,
+    );
+  }
+  final comment = RegExp(r'\s+#').firstMatch(value);
+  return (
+    value: _unquote(
+      (comment == null ? value : value.substring(0, comment.start)).trim(),
+    ),
+    commentSuffix: comment == null ? '' : value.substring(comment.start),
+  );
 }

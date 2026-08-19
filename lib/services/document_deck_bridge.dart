@@ -37,6 +37,8 @@ class DocumentDeckBridge {
     String body, {
     String? projectPath,
     String title = '',
+    TlpLevel tlp = TlpLevel.none,
+    Map<String, String> fields = const {},
   }) {
     final lines = body.split('\n');
     final rawLines = _ExactLineRanges(body);
@@ -173,7 +175,13 @@ class DocumentDeckBridge {
     if (slides.isEmpty) {
       slides.add(Slide.create(SlideType.freeMarkdown));
     }
-    return Deck(title: title, slides: slides, projectPath: projectPath);
+    return _documentDeck(
+      slides,
+      title: title,
+      projectPath: projectPath,
+      tlp: tlp,
+      fields: fields,
+    );
   }
 
   /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
@@ -195,6 +203,22 @@ class DocumentDeckBridge {
     return '${parts.join('\n\n')}\n';
   }
 }
+
+Deck _documentDeck(
+  List<Slide> slides, {
+  required String title,
+  required String? projectPath,
+  required TlpLevel tlp,
+  required Map<String, String> fields,
+}) => Deck(
+  title: fields['title'] ?? title,
+  author: fields['author'] ?? '',
+  description: fields['subtitle'] ?? '',
+  documentFields: fields,
+  slides: slides,
+  projectPath: projectPath,
+  tlp: tlp,
+);
 
 /// Levert exacte bronregels inclusief hun interne LF/CRLF-scheidingen.
 ///

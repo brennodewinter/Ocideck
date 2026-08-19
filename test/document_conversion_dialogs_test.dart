@@ -94,8 +94,9 @@ void main() {
       expect(find.textContaining('rapport-geredigeerd.html'), findsOneWidget);
     });
 
-    testWidgets('biedt pakket (.ocideck) als formaat', (tester) async {
-      DocumentExportFormat? gotFormat;
+    testWidgets('biedt geen presentatiepakket als documentformaat', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _app(
           Builder(
@@ -103,10 +104,7 @@ void main() {
               onPressed: () => DocumentExportDialog.show(
                 context,
                 privacyChecksEnabled: true,
-                onExport: (profile, format) async {
-                  gotFormat = format;
-                  return '/tmp/doc.ocideck';
-                },
+                onExport: (profile, format) async => '/tmp/doc.md',
               ),
               child: const Text('open'),
             ),
@@ -115,12 +113,7 @@ void main() {
       );
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Pakket (.ocideck)'));
-      await tester.pumpAndSettle();
-      expect(find.textContaining('optioneel versleuteld'), findsOneWidget);
-      await tester.tap(find.text('Exporteren…'));
-      await tester.pumpAndSettle();
-      expect(gotFormat, DocumentExportFormat.ocideck);
+      expect(find.text('Pakket (.ocideck)'), findsNothing);
     });
   });
 

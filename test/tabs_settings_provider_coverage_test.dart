@@ -141,6 +141,22 @@ void main() {
       );
     });
 
+    test('newDeckInNewTab bewaart de meegegeven documentclassificatie', () {
+      final (container, tabs) = build();
+      tabs.newDeckInNewTab('Geclassificeerd', tlp: TlpLevel.amber);
+
+      expect(
+        container
+            .read(tabsProvider)
+            .current!
+            .deckNotifier
+            .currentState
+            .deck!
+            .tlp,
+        TlpLevel.amber,
+      );
+    });
+
     test('newDeckInNewTab with pre-built slides opens those slides', () {
       final (container, tabs) = build();
       final templateSlides = MarkdownService()
