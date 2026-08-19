@@ -75,10 +75,16 @@ find_iscc() {
     return 1
   fi
   command -v iscc 2>/dev/null && return 0
-  local candidate
-  for candidate in "/c/Program Files (x86)/Inno Setup 6/ISCC.exe" \
-                   "/c/Program Files/Inno Setup 6/ISCC.exe"; do
-    [ -x "$candidate" ] && { echo "$candidate"; return 0; }
+  # Newest major first. Inno Setup 7 installs alongside 6 rather than replacing
+  # it, and the 64-bit edition lands under Program Files while the 32-bit one
+  # lands under Program Files (x86) — so a single hardcoded path is wrong on
+  # most machines. Prefer the newest because that is what the release job pins.
+  local major root candidate
+  for major in 7 6; do
+    for root in "/c/Program Files" "/c/Program Files (x86)"; do
+      candidate="$root/Inno Setup $major/ISCC.exe"
+      [ -x "$candidate" ] && { echo "$candidate"; return 0; }
+    done
   done
   return 1
 }
@@ -97,7 +103,8 @@ find_signtool() {
 }
 
 ISCC="$(find_iscc)" || {
-  echo "Inno Setup 6 (ISCC.exe) not found." >&2
+  echo "Inno Setup (ISCC.exe) not found — looked for 7 and 6 under both" >&2
+  echo "Program Files roots." >&2
   echo "Install it from https://jrsoftware.org/isdl.php, or set OCIDECK_ISCC." >&2
   exit 1
 }

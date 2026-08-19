@@ -160,11 +160,11 @@ in Dutch, and it keeps growing on `main` between releases.
   bewuste afweging (#1013); de ondertekening zit al wel als schakelaar in de
   bouwstap, zodat er alleen nog een certificaat aan hoeft.
 
-  Let op waar hij vandaan komt: voorlopig wordt de installer met de hand op
-  Windows gemaakt (`make build-windows` gevolgd door `make build-windows-installer`)
-  en levert een release nog steeds alleen de zip. Of hij voortaan meekomt uit de
-  Windows-bouwlijn op de spiegel — die bij elke tag al de zip maakt — is een open
-  besluit.
+  De installer komt gewoon met de release mee (#1583): de Windows-bouwlijn maakt
+  hem bij elke tag, en hij hangt naast de zip aan de release, met zijn
+  controlegetal in `SHA256SUMS` en dus onder de handtekening daarover. Je kunt dus
+  kiezen: de installer, of de zip die je uitpakt zonder dat er iets aan je machine
+  verandert. Allebei dezelfde bouw.
 
 - feat(grafiek): grafiek-hover spiegelt tussen presentatie- en publieksvenster.
   Zweef je bij een presentatie met twee schermen over een staaf, lijnpunt of

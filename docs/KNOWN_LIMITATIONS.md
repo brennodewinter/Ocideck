@@ -19,8 +19,11 @@ formats and a `SHA256SUMS` list. That list is itself signed with minisign
 checksum chain has a verifiable anchor — one signature over the list covers every
 artifact it names (#1014). The macOS build is signed with a Developer ID
 and notarised by Apple, so it opens normally; the **Windows and Linux builds are
-unsigned**, so Windows warns on first launch. The release notes explain how to
-open each one. Building from source remains the route where you do not have
+unsigned**, so Windows warns on first launch. Windows ships two ways in — a
+portable zip and an installer (#1208/#1583) — and *both* are unsigned, so the
+installer additionally asks for elevation as "Unknown publisher"; neither
+contacts a server or updates itself. The release notes explain how to open each
+one. Building from source remains the route where you do not have
 to trust our build machine — the toolchain is pinned, and `make check-web`
 asserts on your bundle what we assert on ours. → [BUILD.md](BUILD.md),
 [FAQ.md](FAQ.md#is-ocideck-free-to-use)
@@ -32,7 +35,9 @@ reputation is earned only through download volume, so signing would not remove
 the warning up front. And every paid route costs either a hardware token the
 maintainer must hold or a signing secret living in the release runner, which the
 project's least-privilege stance rules out. The minisign-signed `SHA256SUMS`
-plus building from source stay the provenance guarantee. If download volume ever turns the
+plus building from source stay the provenance guarantee — and that covers the
+installer as much as the zip: it is fetched into the release before the manifest
+is computed, so it is one of the files that signature names. If download volume ever turns the
 SmartScreen warning into a real barrier, the fallback is an OV certificate signed
 by hand on a local machine — the same manual model as the macOS notarisation —
 never a secret in CI. Linux artifact signing is handled a level up — by the

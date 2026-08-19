@@ -68,9 +68,60 @@ jobs:
           flutter config --enable-windows-desktop
           flutter build windows --release
 
-      # De bestandsnaam is een afspraak, geen smaak: de release-workflow op de
-      # forge haalt exact dit bestand op. Verander je hem hier, verander hem dan
-      # ook in .forgejo/workflows/release.yml (job `windows-ophalen`).
+      # Inno Setup is NIET voorgeïnstalleerd op windows-latest sinds dat label
+      # naar Server 2025 wees (Server 2022 droeg het nog). Dus zelf ophalen —
+      # rechtstreeks bij de uitgever, niet via Chocolatey: dat zou een extra
+      # partij in het releasepad zetten voor een bestand dat upstream gewoon als
+      # release-asset publiceert.
+      #
+      # De pin is tweeledig en dat is met opzet. De URL draagt de versie
+      # (INNOSETUP_VERSION, óók in .github/pinned-ci-versions.json, anders valt
+      # test/pinned_versions_manifest_test.dart), en de bytes worden tegen een
+      # sha256 gelegd. De versie alleen zou volstaan zolang niemand een
+      # release-asset vervangt; de hash dekt dat af en faalt lúid in plaats van
+      # stil iets anders te draaien — dezelfde redenering als de appimagetool-pin
+      # in de Linux-job (zie packaging/README.md).
+      - name: Inno Setup installeren (gepind)
+        shell: bash
+        env:
+          INNOSETUP_VERSION: 7.1.0
+          INNOSETUP_SHA256: 0362a383ed217d4c4239b5933866dd96d3eb2102737da92f80f6057a4b40df2f
+        run: |
+          set -eu
+          BESTAND="innosetup-$INNOSETUP_VERSION-x64.exe"
+          URL="https://github.com/jrsoftware/issrc/releases/download/is-${INNOSETUP_VERSION//./_}/$BESTAND"
+          curl -fsSLo "$BESTAND" "$URL"
+          echo "$INNOSETUP_SHA256  $BESTAND" | sha256sum -c -
+          # /VERYSILENT installeert zonder vensters; /SUPPRESSMSGBOXES zorgt dat
+          # een vraag de job niet laat hangen tot de timeout.
+          ./"$BESTAND" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+          # Waar ISCC.exe landt verschilt per editie en per major (6 en 7 staan
+          # naast elkaar), dus dat pad staat hier niet nóg een keer: het script
+          # zoekt het zelf en meldt duidelijk als het er niet is. Eén plek die
+          # weet waar ISCC woont, niet twee die uiteen kunnen lopen.
+          echo "Inno Setup $INNOSETUP_VERSION geïnstalleerd."
+
+      # Vóór het zippen, niet erna: het script tekent de .exe en de dll's ter
+      # plekke als er ooit een certificaat wordt ingesteld (OCIDECK_WIN_SIGN_SHA1).
+      # Bouw je de zip eerst, dan draagt die de óngetekende binaries en de
+      # installer de getekende — twee downloads die niet hetzelfde zijn.
+      # Hier staat geen certificaat, dus dit levert een ongetekende installer met
+      # een luide waarschuwing in het log; zie scripts/build_windows_installer.sh.
+      #
+      # VERSION komt uit de tag en niet uit pubspec.yaml: de zip hiernaast wordt
+      # ook naar de tag genoemd, en de forge haalt beide bestanden op onder een
+      # naam die uit de tag is afgeleid. Zou het script hier zelf pubspec lezen,
+      # dan levert een tag die (nog) niet gelijk is aan de pubspec-versie een
+      # bestand op dat de forge niet kan vinden — een release die vastloopt op
+      # een naamsverschil is precies het soort hoofdpijn dat hier niet hoort.
+      - name: Installer bouwen
+        shell: bash
+        run: VERSION="${GITHUB_REF_NAME#v}" bash scripts/build_windows_installer.sh
+
+      # De bestandsnamen zijn een afspraak, geen smaak: de release-workflow op de
+      # forge haalt exact deze bestanden op. Verander je ze hier, verander ze dan
+      # ook in .forgejo/workflows/release.yml (job `windows-ophalen`) — en
+      # test/windows_packaging_test.dart legt de twee kanten naast elkaar.
       - name: Package
         shell: bash
         run: |
@@ -85,6 +136,9 @@ jobs:
           mkdir "$STAGE"
           cp -r build/windows/x64/runner/Release/* "$STAGE/"
           7z a -tzip "$GITHUB_WORKSPACE/ocideck-windows-x64-$VERSIE.zip" "$STAGE"
+          # De installer legde zichzelf in dist/; naar de workspace-root zodat de
+          # publicatiestap hieronder één plek hoeft te kennen.
+          mv "dist/ocideck-windows-x64-setup-$VERSIE.exe" "$GITHUB_WORKSPACE/"
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
       - name: Publish to the mirror's release
@@ -93,10 +147,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          BESTAND="ocideck-windows-x64-$VERSIE.zip"
+          # Twee bestanden sinds #1583: de zip (uitpakken, niets aan je machine
+          # veranderd) en de installer (snelkoppeling, associaties, nette
+          # de-installatie). De zip blijft canoniek; de installer is een tweede
+          # deur naar hetzelfde huis. Beide moeten er staan — een release met maar
+          # één van de twee is een halve release, dus geen `|| true` hier.
+          BESTANDEN=(
+            "ocideck-windows-x64-$VERSIE.zip"
+            "ocideck-windows-x64-setup-$VERSIE.exe"
+          )
+          for f in "${BESTANDEN[@]}"; do
+            [ -f "$f" ] || { echo "Verwacht bestand ontbreekt: $f" >&2; exit 1; }
+          done
           # Mét releasetekst en niet stilzwijgend: wie hier via een zoekmachine
           # binnenkomt moet meteen zien dat dit één platform is en waar de rest
-          # staat. Bestaat de release al (hertrigger), dan het bestand alleen
+          # staat. Bestaat de release al (hertrigger), dan de bestanden alleen
           # vervangen.
           NOTES=$(cat <<EOF
           Windows build lane for OciDeck $GITHUB_REF_NAME.
@@ -108,7 +173,12 @@ jobs:
           SBOM and \`SHA256SUMS\` — is published there:
           <https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/$GITHUB_REF_NAME>
 
-          The binary is unsigned, so SmartScreen will warn: choose **More info**
+          Two files: \`ocideck-windows-x64-$VERSIE.zip\` (unpack and run, nothing
+          is installed) and \`ocideck-windows-x64-setup-$VERSIE.exe\` (an
+          installer with a Start menu shortcut, file associations and a clean
+          uninstall). Neither updates itself.
+
+          Both are unsigned, so SmartScreen will warn: choose **More info**
           → **Run anyway**. Verify your download against \`SHA256SUMS\` in the
           release linked above.
           EOF
@@ -121,9 +191,9 @@ jobs:
             *)   VOORLOPER=() ;;
           esac
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" "$BESTAND" --clobber
+            gh release upload "$GITHUB_REF_NAME" "${BESTANDEN[@]}" --clobber
           else
-            gh release create "$GITHUB_REF_NAME" "$BESTAND" \
+            gh release create "$GITHUB_REF_NAME" "${BESTANDEN[@]}" \
               --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
               --notes "$NOTES" "${VOORLOPER[@]}"
           fi

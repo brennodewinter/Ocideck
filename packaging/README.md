@@ -91,14 +91,15 @@ icon, check the real value with `xprop WM_CLASS` and adjust this one line.
 
 ## How the Windows installer is built
 
-By hand, for now. The forge has no Windows machine, but the github.com mirror
-does — `.github/workflows/release.yml` builds the Windows zip there on every `v*`
-tag and the forge fetches it back. The installer is **not wired into that lane
-yet**: doing so needs Inno Setup installed and pinned on the runner
-(`windows-latest` no longer ships it) and a decision about publishing a second
-Windows artifact. So until that call is made, this is a manual step on a Windows
-machine, in the same bash `make build-windows` runs in, with Inno Setup 6.3
-or newer installed:
+By the release, on every `v*` tag (#1583). The forge has no Windows machine, but
+the github.com mirror does: `.github/workflows/release.yml` installs Inno Setup
+(pinned by version *and* sha256 — `windows-latest` stopped shipping it when that
+label moved to Server 2025), builds the installer **before** it zips the bundle,
+and publishes both as release assets. The forge's `windows-ophalen` job fetches
+both — and refuses to finish with only one — so they reach `SHA256SUMS` together.
+
+To build one by hand on a Windows machine, in the same bash `make build-windows`
+runs in, with Inno Setup 6.3 or newer installed:
 
 ```
 make build-windows            # -> build/windows/x64/runner/Release/
@@ -106,9 +107,9 @@ make build-windows-installer  # -> scripts/build_windows_installer.sh
 ```
 
 which produces `dist/ocideck-windows-x64-setup-<version>.exe`. The packager is a
-bash script rather than a `make` target under the hood, so it can move into that
-CI lane unchanged — `make` is not reliably present on the mirror's Windows
-runner, which is why the existing job calls Flutter directly. Authenticode
+bash script rather than a `make` target under the hood, which is why the CI lane
+can call it unchanged — `make` is not reliably present on the mirror's Windows
+runner, so that job calls Flutter and this script directly. Authenticode
 signing is an optional step in that script, off by default and loud about it; see
 [Building the Windows installer](../docs/BUILD.md#building-the-windows-installer)
 for the environment variables and why no key file or password is accepted.

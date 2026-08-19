@@ -451,8 +451,10 @@ Unpacking a folder and making your own shortcut is a poor way to install
 anything, so the Windows bundle can be wrapped in an ordinary installer (#1208):
 Start menu shortcut, the file associations, and a clean uninstall through
 *Programs and Features*. Needs [Inno Setup 6.3 or
-newer](https://jrsoftware.org/isdl.php) on the machine, and runs **on Windows
-only**, in the same bash `make build-windows` runs in (Git Bash or MSYS2).
+newer](https://jrsoftware.org/isdl.php) on the machine — the release job pins
+7.1.0, and the packager finds either major under either Program Files root — and
+runs **on Windows only**, in the same bash `make build-windows` runs in (Git Bash
+or MSYS2).
 
 ```sh
 make build-windows            # -> build/windows/x64/runner/Release/
@@ -482,26 +484,38 @@ than a hand-picked file list, and the absence of any downloader or `[Code]`
 section. Whether the installer *actually installs* is still a manual check on a
 Windows machine — nothing verifies that automatically.
 
-**It is not built by the release yet.** The forge has no Windows machine, but the
-mirror does: `.github/workflows/release.yml` on github.com builds the Windows zip
-on every `v*` tag, and the forge release job pulls that file back with `curl` (see
-[Signing status of the published artifacts](#signing-status-of-the-published-artifacts)
-and the header of that workflow). Adding the installer to that lane is therefore
-possible rather than blocked — it needs Inno Setup installed and *pinned* on the
-runner (`windows-latest` no longer ships it), and a decision about publishing a
-second Windows artifact. Until then the installer is built by hand. The packager
-is a bash script and does not go through `make`, precisely because `make` is not
-reliably present on that runner.
+**The release builds it too** (#1583). The forge has no Windows machine, but the
+mirror does: `.github/workflows/release.yml` on github.com builds the Windows
+artifacts on every `v*` tag and publishes them as release assets, and the forge's
+`windows-ophalen` job pulls both back with `curl` before anything is hashed. So a
+tag now produces the installer alongside the zip, without a hand step. Locally the
+two commands above remain the way to build and inspect one.
 
-**A condition on publishing it.** An installer asks for elevation, and an
+That lane runs `bash scripts/build_windows_installer.sh` directly rather than the
+`make` target, because `make` is not reliably present on that runner — which is
+why the packager is a script and the `make` target only wraps it. Inno Setup is
+not preinstalled on `windows-latest` either (Server 2022 shipped it, Server 2025
+does not), so the job downloads it from the publisher's own GitHub release,
+pinned twice: by version (`INNOSETUP_VERSION`, mirrored in
+`.github/pinned-ci-versions.json` so `make check-pins` notices it ageing) and by
+sha256, so replaced bytes fail loudly instead of building quietly.
+
+**Why the installer is built before the zip.** The packager signs `ocideck.exe`
+and the DLLs *in place* when a certificate is configured. Zip first and you ship a
+zip of unsigned binaries next to a signed installer — two downloads that are not
+the same build. `test/windows_packaging_test.dart` pins that order.
+
+**Provenance, with no certificate.** An installer asks for elevation, and an
 unsigned one that asks for elevation teaches a worse habit than an unsigned app
-you unzip yourself — people are trained to click through installer prompts. So
-whenever the installer *is* published, it must be listed in `SHA256SUMS` and
-therefore covered by the minisign signature over that manifest, with the same
-"verify your download" instruction the zip carries. That signature is what stands
-in for the Authenticode certificate this project has weighed and declined; a
-published installer that is neither signed nor in the manifest has no provenance
-at all, which is a step backwards from the zip rather than a convenience.
+you unzip yourself — people are trained to click through installer prompts. The
+answer is not to withhold the installer but to anchor it: it lands in `dist/`
+before the `Checksums` step, so it is listed in `SHA256SUMS` and therefore covered
+by the minisign signature over that manifest, and the release notes carry the same
+"verify your download" instruction the zip has. That signature is what stands in
+for the Authenticode certificate this project has weighed and declined. A
+published installer that was neither signed nor in the manifest would have no
+provenance at all — a step backwards from the zip rather than a convenience, which
+is why the fetch job refuses to finish unless *both* Windows files are there.
 
 #### Signing it (optional)
 

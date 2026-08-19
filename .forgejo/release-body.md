@@ -9,7 +9,8 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | Platform | File |
 | --- | --- |
 | macOS (Apple Silicon + Intel) | `ocideck-macos-@VERSIE@.zip` |
-| Windows (x64) | `ocideck-windows-x64-@VERSIE@.zip` |
+| Windows — installer | `ocideck-windows-x64-setup-@VERSIE@.exe` |
+| Windows — portable zip | `ocideck-windows-x64-@VERSIE@.zip` |
 | Linux — AppImage (most distributions) | `ocideck-linux-x86_64-@VERSIE@.AppImage` |
 | Linux — Debian / Ubuntu / Mint | `ocideck-linux-amd64-@VERSIE@.deb` |
 | Linux — Fedora / openSUSE | `ocideck-linux-x86_64-@VERSIE@.rpm` |
@@ -31,8 +32,23 @@ Verify the download below, then:
 normal double-click, no workaround needed. (Check with `spctl -a -t exec
 OciDeck.app`: it reports `source=Notarized Developer ID`.)
 
-**Windows.** SmartScreen shows "Windows protected your PC". Choose **More
-info**, then **Run anyway**.
+**Windows.** Two ways in, both the same build — pick one.
+
+- **Installer** (`ocideck-windows-x64-setup-@VERSIE@.exe`) — installs to Program
+  Files with a Start menu shortcut, registers `.ocideck` (and adds OciDeck to
+  *Open with…* for `.md`), and uninstalls through *Apps & features*. Without
+  administrator rights, choose the per-user install when it asks.
+- **Portable zip** (`ocideck-windows-x64-@VERSIE@.zip`) — unpack and run
+  `ocideck.exe`. Nothing is written outside the folder, and no rights are needed.
+
+Neither checks for updates or contacts a server; a new version reaches you the
+way every other change does — from the repository.
+
+Both are unsigned, so SmartScreen shows "Windows protected your PC": choose
+**More info**, then **Run anyway**. The installer additionally asks for
+elevation as *Unknown publisher*. Check the download against `SHA256SUMS` (and
+`SHA256SUMS.minisig`) before you run either — that signature, not a certificate,
+is what attests where these files came from.
 
 **Linux.** Four packagings of the same build — pick what fits your distribution.
 None is sandboxed or store-signed; each wraps the same bundle listed above.

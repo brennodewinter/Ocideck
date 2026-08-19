@@ -404,12 +404,26 @@ jobs:
           set -u
           TAG="${GITHUB_REF_NAME}"
           VERSIE="${TAG#v}"
-          BESTAND="ocideck-windows-x64-$VERSIE.zip"
+          # Twee bestanden sinds #1583: de zip én de installer. Ze komen uit
+          # dezelfde spiegel-run, dus ze verschijnen samen — maar de controle
+          # eist ze allebei. Zou hij op de zip alleen tevreden zijn, dan
+          # verlaat een oude, halve spiegel-release (of een run die tussen de
+          # twee uploads faalde) deze job groen zónder installer, en publiceert
+          # de forge een release waarin er stilzwijgend één ontbreekt.
+          BESTANDEN=(
+            "ocideck-windows-x64-$VERSIE.zip"
+            "ocideck-windows-x64-setup-$VERSIE.exe"
+          )
           REPO="brennodewinter/Ocideck"
-          URL="https://github.com/$REPO/releases/download/$TAG/$BESTAND"
           API="https://api.github.com/repos/$REPO"
 
-          have_asset() { curl -fsSLo "$BESTAND" "$URL" 2>/dev/null; }
+          have_asset() {
+            local f
+            for f in "${BESTANDEN[@]}"; do
+              curl -fsSLo "$f" \
+                "https://github.com/$REPO/releases/download/$TAG/$f" 2>/dev/null || return 1
+            done
+          }
           gh_api() { curl -fsS -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
             -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
@@ -422,7 +436,7 @@ jobs:
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
           # eerdere run), dan zijn we meteen klaar.
           if have_asset; then
-            echo "Asset stond er al: $(du -h "$BESTAND" | cut -f1)"; exit 0
+            echo "Assets stonden er al: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
           fi
 
           if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
@@ -444,7 +458,7 @@ jobs:
           LAST_URL=""
           for POGING in $(seq 1 45); do
             if have_asset; then
-              echo "Opgehaald na $POGING minuut/minuten: $(du -h "$BESTAND" | cut -f1)"; exit 0
+              echo "Opgehaald na $POGING minuut/minuten: $(du -ch "${BESTANDEN[@]}" | tail -1 | cut -f1)"; exit 0
             fi
             if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
               info="$(run_status || true)"
@@ -463,15 +477,19 @@ jobs:
             fi
             sleep 60
           done
-          echo "Na 45 minuten stond $URL er nog niet (laatste run: ${LAST_URL:-onbekend})." >&2
+          echo "Na 45 minuten stonden ${BESTANDEN[*]} er nog niet op $TAG (laatste run: ${LAST_URL:-onbekend})." >&2
           echo "Hertrigger deze release-workflow zodra de Windows-build groen is." >&2
           exit 1
 
+      # Eén glob die beide draagt: `ocideck-windows-x64-<versie>.zip` en
+      # `ocideck-windows-x64-setup-<versie>.exe`. Valt er ooit een derde bij, dan
+      # vangt test/windows_packaging_test.dart het verschil tussen wat de
+      # spiegel maakt en wat hier meekomt.
       - name: Artifact bewaren
         uses: actions/upload-artifact@v3
         with:
           name: ocideck-windows
-          path: ocideck-windows-x64-*.zip
+          path: ocideck-windows-x64-*
 
   publiceren:
     name: Release publiceren
