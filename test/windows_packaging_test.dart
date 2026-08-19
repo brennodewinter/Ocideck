@@ -285,10 +285,24 @@ void main() {
             'Inno Setup is fetched without a sha256, so a replaced release '
             'asset would build silently instead of failing loudly.',
       );
+      // Not pinned to one shell's spelling — the step moved from bash to
+      // PowerShell to escape MSYS path conversion, and this check is about the
+      // property, not the tool: the pin is computed and a mismatch stops the
+      // build rather than being printed and ignored.
       expect(
-        mirrorYaml.contains(r'sha256sum -c -'),
+        RegExp(r'Get-FileHash|sha256sum').hasMatch(mirrorYaml),
         isTrue,
-        reason: 'The pinned sha256 is never actually verified.',
+        reason:
+            'The pinned sha256 of the Inno Setup download is never computed.',
+      );
+      expect(
+        RegExp(
+          r'-ne \$env:INNOSETUP_SHA256[\s\S]{0,200}?throw|sha256sum -c',
+        ).hasMatch(mirrorYaml),
+        isTrue,
+        reason:
+            'The computed hash is never compared against the pin, or a mismatch '
+            'does not fail the step — a pin nobody acts on is decoration.',
       );
     });
 
@@ -386,6 +400,61 @@ void main() {
             'the installer is dropped between windows-ophalen and publiceren.',
       );
     });
+
+    // v0.4.7-rc1 hing 1u52m op deze klasse fout: MSYS vertaalde `/VERYSILENT`
+    // naar een pad, Inno Setup opende zijn venster, en niemand kon klikken. Wat
+    // hem verraderlijk maakt is dat hij op macOS niet bestáát — de rooktoets met
+    // een nagemaakte ISCC en signtool draaide vrolijk groen. Alleen een gate op
+    // de vorm vangt dit vóór de volgende tag.
+    test('the packager shields Windows-style flags from MSYS path conversion', () {
+      expect(
+        scriptCode.contains('msys_safe()'),
+        isTrue,
+        reason:
+            'The packager no longer defines msys_safe, so `/DAppVersion=…` and '
+            'the signtool flags get rewritten into Windows paths under Git Bash.',
+      );
+      for (final call in ['msys_safe "\$ISCC"', 'msys_safe "\$SIGNTOOL"']) {
+        expect(
+          scriptCode.contains(call),
+          isTrue,
+          reason:
+              '`$call` is invoked without the MSYS guard. Its /-prefixed flags '
+              'will arrive as C:/Program Files/Git/... and be silently ignored.',
+        );
+      }
+    });
+
+    test(
+      'the mirror installs Inno Setup without Git Bash, and waits for it',
+      () {
+        final stap = RegExp(
+          r'- name: Inno Setup installeren.*?(?=\n      - name:)',
+          dotAll: true,
+        ).firstMatch(mirrorYaml);
+        expect(
+          stap,
+          isNotNull,
+          reason: 'The Inno Setup step no longer parses.',
+        );
+        expect(
+          stap!.group(0),
+          contains('shell: pwsh'),
+          reason:
+              'The Inno Setup step runs under bash again. MSYS rewrites '
+              '/VERYSILENT into a path, the installer opens its window, and the '
+              'job hangs until the timeout (v0.4.7-rc1).',
+        );
+        expect(
+          stap.group(0),
+          contains('-Wait'),
+          reason:
+              "Start-Process without -Wait returns as soon as Inno's setup.exe "
+              'hands off to its .tmp child, so ISCC can be called before the '
+              'install has finished.',
+        );
+      },
+    );
 
     test('the release notes offer it and say it does not update itself', () {
       // In the downloads table specifically, not merely somewhere in the

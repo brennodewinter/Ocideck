@@ -40,6 +40,21 @@
 #   OCIDECK_ISCC                    path to ISCC.exe, if it is not found.
 set -euo pipefail
 
+# Zowel ISCC als signtool worden aangestuurd met argumenten in Windows-stijl
+# (`/DAppVersion=…`, `/sha1`, `/fd`, `/tr`). De MSYS-laag onder Git Bash vertaalt
+# élk argument dat met `/` begint naar een Windows-pad voordat een natief
+# programma het ziet — `/VERYSILENT` werd `C:/Program Files/Git/VERYSILENT`, en zo
+# hing de release-CI van v0.4.7-rc1 bijna twee uur op een installatievenster dat
+# niemand kon wegklikken. Dezelfde vertaling sloopt `/DAppVersion=…` en elke
+# signtool-vlag.
+#
+# Daarom gaan die twee aanroepen door `msys_safe`, dat de vertaling per aanroep
+# uitzet. Per aanroep en niet globaal, zodat écht bedoelde paden gewoon vertaald
+# blijven worden. Let op de keerzijde: binnen zo'n aanroep wordt een absoluut
+# POSIX-pad (`/d/a/…`) niet meer omgezet — houd BUNDLE_DIR en OUT dus relatief,
+# zoals hun standaardwaarden zijn. Op macOS/Linux doen de variabelen niets.
+msys_safe() { MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' "$@"; }
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$REPO_ROOT"
@@ -126,7 +141,7 @@ sign() {
   # fails to sign must fail the build. A half-signed installer is worse than an
   # honestly unsigned one, because it looks trustworthy in the places people check.
   [ -n "$SIGN_SHA1" ] || return 0
-  "$SIGNTOOL" sign /sha1 "$SIGN_SHA1" /fd SHA256 \
+  msys_safe "$SIGNTOOL" sign /sha1 "$SIGN_SHA1" /fd SHA256 \
     /tr "$TIMESTAMP_URL" /td SHA256 /q "$1"
 }
 
@@ -144,7 +159,7 @@ fi
 
 mkdir -p "$OUT"
 echo "Building the installer with $ISCC (version $VERSION)."
-"$ISCC" "/DAppVersion=$VERSION" "$ISS"
+msys_safe "$ISCC" "/DAppVersion=$VERSION" "$ISS"
 
 INSTALLER="$OUT/ocideck-windows-x64-setup-$VERSION.exe"
 if [ ! -f "$INSTALLER" ]; then
