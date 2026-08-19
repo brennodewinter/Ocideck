@@ -1689,6 +1689,7 @@ const _dutchSourceAddEt = <String, String>{
   'Uitleg': 'Kirjeldus',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Valikumenüü: iga plokk hüppab klõpsamisel teisele slaidile. Sisesta igale plokile silt ja kirjeldus, vali sihtslaid ja soovi korral pilt. Vali paigutus: ruudustik, loend või ring. Kategooriatega vahetad esitluse ajal plokirühmi. Ilma sihita plokk on tavaline tekst.',
+  'Alleen een lege dia.': 'Ainult tühi slaid.',
   'Hoofdstukken op nieuwe pagina': 'Peatükid uuele lehele',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Iga peatükk algab nüüd uuelt lehelt',
@@ -3262,7 +3263,6 @@ const _dutchSourceAddEt = <String, String>{
       'See esitlus on kahjustatud või salvestus jäi pooleli.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'See fail ei ole loetav tekst. OciDeck avab Markdowni.',
-  'Alleen een titelpagina.': 'Ainult tiitelleht.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'See slaid on tühi: see ei näita midagi ekraanil ega ekspordis.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1696,6 +1696,7 @@ const _dutchSourceAddId = <String, String>{
   'Uitleg': 'Penjelasan',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu pilihan: setiap blok melompat ke slide lain saat diklik. Ketik label dan penjelasan untuk setiap blok, pilih slide tujuan dan gambar jika diperlukan. Pilih tata letak: kisi, daftar, atau lingkaran. Dengan kategori Anda beralih antar kelompok blok saat presentasi. Blok tanpa tujuan adalah teks biasa.',
+  'Alleen een lege dia.': 'Hanya satu slide kosong.',
   'Hoofdstukken op nieuwe pagina': 'Bab di halaman baru',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Setiap bab kini dimulai pada halaman baru',
@@ -3282,7 +3283,6 @@ const _dutchSourceAddId = <String, String>{
       'Presentasi ini rusak atau hanya tersimpan sebagian.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Berkas ini bukan teks yang terbaca. OciDeck membuka Markdown.',
-  'Alleen een titelpagina.': 'Hanya halaman judul.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Slide ini kosong: tidak menampilkan apa pun di layar maupun dalam ekspor.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

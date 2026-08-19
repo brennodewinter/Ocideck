@@ -1716,6 +1716,7 @@ const _dutchSourceAddMt = <String, String>{
   'Uitleg': 'Deskrizzjoni',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu tal-għażla: kull blokk jaqbeż għal slide oħra meta tikklikkja fuqu. Ittajpja tikketta u deskrizzjoni għal kull blokk, agħżel is-slide fil-mira u fakultattivament stampa. Agħżel it-tqassim: grilja, lista jew ċirku. Bil-kategoriji taqleb bejn gruppi ta\' blokki waqt il-preżentazzjoni. Blokk mingħajr mira huwa test sempliċi.',
+  'Alleen een lege dia.': 'Slide vojta biss.',
   'Hoofdstukken op nieuwe pagina': 'Kapitli f\'paġna ġdida',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Kull kapitlu issa jibda f\'paġna ġdida',
@@ -3314,7 +3315,6 @@ const _dutchSourceAddMt = <String, String>{
       'Din il-preżentazzjoni bil-ħsara jew inħażnet biss parzjalment.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Dan il-fajl mhuwiex test li jinqara. OciDeck jiftaħ Markdown.',
-  'Alleen een titelpagina.': 'Paġna tat-titlu biss.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Din is-slide hija vojta: ma turi xejn fuq l-iskrin u lanqas fl-esportazzjoni.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

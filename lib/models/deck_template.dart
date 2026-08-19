@@ -42,13 +42,18 @@ class DeckTemplate {
   });
 }
 
+/// The id of the empty deck — the default choice, and the only entry without a
+/// template document: an empty deck is the absence of one. `TemplateContentService`
+/// turns it into a single blank slide.
+const emptyDeckTemplateId = 'empty';
+
 /// All templates offered by the new-presentation wizard, in picker order. The
 /// first entry (the empty deck) is the default choice.
 final List<DeckTemplate> deckTemplates = [
   DeckTemplate(
-    id: 'empty',
+    id: emptyDeckTemplateId,
     title: 'Leeg deck',
-    description: 'Alleen een titelpagina.',
+    description: 'Alleen een lege dia.',
     icon: 'empty',
   ),
   DeckTemplate(

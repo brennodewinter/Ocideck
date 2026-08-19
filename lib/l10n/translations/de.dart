@@ -721,6 +721,7 @@ const _dutchSourceAddDe = {
   'Uitleg': 'Beschreibung',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ein Auswahlmenü: Jeder Block springt beim Anklicken zu einer anderen Folie. Gib pro Block eine Beschriftung und eine Beschreibung ein, wähle die Zielfolie und optional ein Bild. Wähle die Anordnung: Raster, Liste oder Kreis. Mit Kategorien wechselst du beim Präsentieren zwischen Gruppen von Blöcken. Ein Block ohne Ziel ist einfacher Text.',
+  'Alleen een lege dia.': 'Nur eine leere Folie.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel auf neuer Seite',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Jedes Kapitel beginnt jetzt auf einer neuen Seite',
@@ -2312,7 +2313,6 @@ const _dutchSourceAddDe = {
       'Diese Präsentation ist beschädigt oder nur halb gespeichert.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Diese Datei ist kein lesbarer Text. OciDeck öffnet Markdown.',
-  'Alleen een titelpagina.': 'Nur eine Titelseite.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Diese Folie ist leer: Sie zeigt weder auf dem Bildschirm noch im Export etwas.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

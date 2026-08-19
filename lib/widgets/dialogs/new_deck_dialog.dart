@@ -36,8 +36,10 @@ List<DeckTemplate> sortTemplatesForDisplay(
 ) {
   final list = items.toList();
   list.sort((a, b) {
-    if (a.id == 'empty') return b.id == 'empty' ? 0 : -1;
-    if (b.id == 'empty') return 1;
+    if (a.id == emptyDeckTemplateId) {
+      return b.id == emptyDeckTemplateId ? 0 : -1;
+    }
+    if (b.id == emptyDeckTemplateId) return 1;
     return AppLocalizations.sortKey(
       displayTitle(a),
     ).compareTo(AppLocalizations.sortKey(displayTitle(b)));
@@ -67,7 +69,7 @@ class NewDeckDialog extends ConsumerStatefulWidget {
 /// the model layer stays Flutter-free, mirroring the slide-type registry.
 /// Public zodat een guardtest kan afdwingen dat elk sjabloon een icoon heeft.
 const Map<String, IconData> templatePickerIcons = {
-  'empty': Icons.crop_landscape_outlined,
+  emptyDeckTemplateId: Icons.crop_landscape_outlined,
   'briefing': Icons.summarize_outlined,
   'securityGuardBriefing': Icons.security,
   'policeBriefing': Icons.local_police_outlined,

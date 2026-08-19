@@ -1695,6 +1695,7 @@ const _dutchSourceAddSv = <String, String>{
   'Uitleg': 'Beskrivning',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'En valmeny: varje block hoppar till en annan diabild när man klickar på det. Skriv en etikett och en beskrivning för varje block, välj måldiabilden och eventuellt en bild. Välj layout: rutnät, lista eller cirkel. Med kategorier växlar du mellan grupper av block under presentationen. Ett block utan mål är vanlig text.',
+  'Alleen een lege dia.': 'Endast en tom bild.',
   'Hoofdstukken op nieuwe pagina': 'Kapitel på ny sida',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Varje kapitel börjar nu på en ny sida',
@@ -3270,7 +3271,6 @@ const _dutchSourceAddSv = <String, String>{
       'Den här presentationen är skadad eller bara till hälften sparad.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Den här filen är inte läsbar text. OciDeck öppnar Markdown.',
-  'Alleen een titelpagina.': 'Endast en titelsida.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Den här bilden är tom: den visar ingenting på skärmen eller i exporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

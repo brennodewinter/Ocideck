@@ -46,8 +46,29 @@ final deckQualityProvider = Provider<SlideQualityResult>(computeDeckQuality);
 SlideQualityResult computeDeckQualityRaw(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return const SlideQualityResult([]);
-  return ref.watch(slideQualityAnalyzerProvider).analyze(deck);
+  final result = ref.watch(slideQualityAnalyzerProvider).analyze(deck);
+  if (!ref.watch(deckProvider.select(isUntouchedDeck))) return result;
+  return SlideQualityResult([
+    for (final issue in result.issues)
+      if (issue.kind != SlideQualityIssueKind.emptySlide) issue,
+  ]);
 }
+
+/// Heeft de gebruiker dit deck nog met geen vinger aangeraakt?
+///
+/// Waar dan ook: net aangemaakt (geen ongedaan-maken-stap in de geschiedenis),
+/// nog nooit naar een bestand geschreven, en op web ook niet gedownload.
+///
+/// Voor zo'n deck zwijgt de lege-dia-melding. 'Leeg deck' geeft precies wat de
+/// kiezer belooft — één lege dia — en die dan meteen als probleem aanwijzen is
+/// de gebruiker corrigeren voor wat hij zelf net vroeg. Eén toetsaanslag zet
+/// een ongedaan-maken-stap, dus zodra hij ook maar iets doet telt de melding
+/// weer mee; en dat is precies het moment waarop een lege dia wél iets is om
+/// te weten vóór de export. De andere meldingen blijven staan: die gaan over
+/// wat er wél is (contrast, dichtheid, een onbeantwoordbare vraag) en zijn dus
+/// nooit een verwijt over iets wat de gebruiker nog moet doen.
+bool isUntouchedDeck(DeckState state) =>
+    !state.canUndo && state.filePath == null && state.downloadName == null;
 
 SlideQualityResult computeDeckQuality(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));

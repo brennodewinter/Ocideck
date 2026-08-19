@@ -66,16 +66,23 @@ flowchart LR
   does the same.
 - **The welcome screen** answers the question you have before you have any of the
   others. Under the logo, one line says what OciDeck makes (presentations that
-  stay ordinary Markdown files); under *New presentation*, how many templates are
-  waiting behind that button — counted from the catalogue itself, so it cannot
-  drift, and leaving out the security-module template until that module is
-  enabled. A **User guide** button beside *Settings* opens this document in the
+  stay ordinary Markdown files). Under *New* sit the two ways to start, side by
+  side and in the same accent colour: **New presentation** and **New document**.
+  Each button says what it makes, so neither reads as the lesser of the two;
+  under the presentation button one line says how many templates are waiting
+  behind it — counted from the catalogue itself, so it cannot drift, and leaving
+  out the security-module template until that module is enabled. That line sits
+  under the presentation button and not above both, because a document has no
+  templates. A **User guide** button beside *Settings* opens this document in the
   built-in reader. It used to live three clicks deep under *Settings →
   Documentation*, which is exactly where someone who knows nothing yet does not
   look.
 - **Start from a template**: the new-presentation dialog offers a searchable
-  catalogue of starting points — from an empty deck to shift briefings, security
-  and privacy work decks, crisis and flight-prep sessions, **decision and
+  catalogue of starting points. *Empty deck* is the default and is exactly that:
+  a single blank slide. The title you type stays the deck title (front matter,
+  tab label, file name) and is not written onto a slide, so nothing on screen
+  says anything until you type it yourself. The rest runs from shift briefings,
+  security and privacy work decks, crisis and flight-prep sessions, **decision and
   budget** decks, **role-specific handover and safety** templates, **sector**
   templates for the public sector, education and associations, and
   **conversation-preparation** templates. The decision-and-budget set carries
@@ -3228,7 +3235,16 @@ the editor half of it.
 ### Slide quality
 
 The **Slide quality** bar sits below the editor preview. It summarises open
-issues and can be expanded to browse them. Filter chips let you show **All
+issues and can be expanded to browse them.
+
+One warning holds its tongue at the start: *this slide is empty*. On a deck you
+have not touched yet — freshly created, never saved, nothing to undo — an empty
+slide is exactly what *Empty deck* promised, and pointing at it would be
+correcting you for what you just asked for. The moment you do anything (a single
+keystroke is an undo step) or save the file, the warning counts again — which is
+the point at which an empty slide is worth knowing about before you export.
+Every other finding shows from the first second: those are about what *is*
+there, never about what you have yet to do. Filter chips let you show **All
 issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching

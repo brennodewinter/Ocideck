@@ -1722,6 +1722,7 @@ const _dutchSourceAddEl = <String, String>{
   'Uitleg': 'Επεξήγηση',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ένα μενού επιλογών: κάθε μπλοκ μεταβαίνει σε άλλη διαφάνεια όταν το πατήσετε. Πληκτρολογήστε μια ετικέτα και μια επεξήγηση για κάθε μπλοκ, επιλέξτε τη διαφάνεια προορισμού και προαιρετικά μια εικόνα. Επιλέξτε τη διάταξη: πλέγμα, λίστα ή κύκλος. Με τις κατηγορίες εναλλάσσεστε μεταξύ ομάδων μπλοκ κατά την παρουσίαση. Ένα μπλοκ χωρίς προορισμό είναι απλό κείμενο.',
+  'Alleen een lege dia.': 'Μόνο μια κενή διαφάνεια.',
   'Hoofdstukken op nieuwe pagina': 'Κεφάλαια σε νέα σελίδα',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Κάθε κεφάλαιο ξεκινά τώρα σε νέα σελίδα',
@@ -3322,7 +3323,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτή η παρουσίαση είναι κατεστραμμένη ή αποθηκεύτηκε μόνο εν μέρει.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Αυτό το αρχείο δεν είναι αναγνώσιμο κείμενο. Το OciDeck ανοίγει Markdown.',
-  'Alleen een titelpagina.': 'Μόνο μια σελίδα τίτλου.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Αυτή η διαφάνεια είναι κενή: δεν εμφανίζει τίποτα στην οθόνη ούτε στην εξαγωγή.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

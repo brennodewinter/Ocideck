@@ -722,6 +722,7 @@ const _dutchSourceAddFr = {
   'Uitleg': 'Description',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Un menu de choix : chaque bloc passe à une autre diapositive lorsqu\'on clique dessus. Saisissez une étiquette et une description par bloc, choisissez la diapositive cible et éventuellement une image. Choisissez la disposition : grille, liste ou cercle. Les catégories permettent de passer d\'un groupe de blocs à l\'autre pendant la présentation. Un bloc sans cible est du texte ordinaire.',
+  'Alleen een lege dia.': 'Uniquement une diapositive vide.',
   'Hoofdstukken op nieuwe pagina': 'Chapitres sur nouvelle page',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Chaque chapitre commence maintenant sur une nouvelle page',
@@ -2325,7 +2326,6 @@ const _dutchSourceAddFr = {
       'Cette présentation est endommagée ou n’a été enregistrée qu’à moitié.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Ce fichier n’est pas du texte lisible. OciDeck ouvre du Markdown.',
-  'Alleen een titelpagina.': 'Uniquement une page de titre.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Cette diapositive est vide : elle n\'affiche rien à l\'écran ni dans l\'export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

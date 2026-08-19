@@ -1711,6 +1711,7 @@ const _dutchSourceAddLa = <String, String>{
   'Uitleg': 'Explicatio',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu optionum: quisque quadrus, cum premitur, ad aliam paginam salit. Singulis quadris titulum et explicationem inscribe, paginam destinatam et, si vis, imaginem elige. Dispositionem elige: craticulam, indicem aut circulum. Categoriis, dum praesentas, inter greges quadrorum transire potes. Quadrus sine destinatione textus simplex est.',
+  'Alleen een lege dia.': 'Solum diapositiva vacua.',
   'Hoofdstukken op nieuwe pagina': 'Capita in nova pagina',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Omne caput nunc in nova pagina incipit',
@@ -3291,7 +3292,6 @@ const _dutchSourceAddLa = <String, String>{
       'Haec praesentatio corrupta est aut ex parte tantum servata.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Hic fasciculus textus legibilis non est. OciDeck Markdown aperit.',
-  'Alleen een titelpagina.': 'Solum pagina tituli.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Hoc folium vacuum est: nihil ostendit nec in tabula nec in exportatione.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -1728,6 +1728,7 @@ const _dutchSourceAddGa = <String, String>{
   'Uitleg': 'Cur síos',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Roghchlár roghanna: léimeann gach bloc go sleamhnán eile nuair a chliceáiltear air. Cuir lipéad agus cur síos isteach do gach bloc, roghnaigh an sleamhnán sprice agus íomhá más mian leat. Roghnaigh an leagan amach: greille, liosta nó ciorcal. Le catagóirí athraíonn tú idir grúpaí bloc le linn an chur i láthair. Is gnáththéacs é bloc gan sprioc.',
+  'Alleen een lege dia.': 'Sleamhnán folamh amháin.',
   'Hoofdstukken op nieuwe pagina': 'Caibidlí ar leathanach nua',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Tosaíonn gach caibidil ar leathanach nua anois',
@@ -3327,7 +3328,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá an láithreoireacht seo damáiste nó níor sábháladh í ach go páirteach.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Ní téacs inléite é an comhad seo. Osclaíonn OciDeck Markdown.',
-  'Alleen een titelpagina.': 'Leathanach teidil amháin.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Tá an sleamhnán seo folamh: ní thaispeánann sé aon rud ar an scáileán ná san easpórtáil.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

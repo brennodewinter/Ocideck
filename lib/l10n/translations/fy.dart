@@ -721,6 +721,7 @@ const _dutchSourceAddFy = {
   'Uitleg': 'Útlis',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'In karmenu: elk blok springt by it oanklikken nei in oare dia. Typ per blok in label en in útlis, kies de doeldia en eventueel in ôfbylding. Kies de yndieling: raster, ûnder inoar of yn in sirkel. Mei kategoryen wikselje jo ûnder it presintearjen tusken groepen blokken. In blok sûnder doel is gewoane tekst.',
+  'Alleen een lege dia.': 'Allinnich in lege slide.',
   'Hoofdstukken op nieuwe pagina': 'Haadstikken op nije side',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Elk haadstik begjint no op in nije side',
@@ -2302,7 +2303,6 @@ const _dutchSourceAddFy = {
       'Dizze presintaasje is skansearre of mar heal bewarre.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Dit bestân is gjin lêsbere tekst. OciDeck iepenet Markdown.',
-  'Alleen een titelpagina.': 'Allinnich in titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Dizze slide is leech: hy lit neat sjen op it skerm en yn de eksport.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -177,6 +177,7 @@ part 'shell/menu_commands.dart';
 part 'shell/module_prompts.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
+part 'shell/welcome_screen_chrome.dart';
 part 'shell/play_only_screen.dart';
 part 'shell/status_bar.dart';
 part 'shell/shell_overlays.dart';

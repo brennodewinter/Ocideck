@@ -71,15 +71,23 @@ flowchart LR
   hetzelfde.
 - **Het welkomstscherm** beantwoordt de vraag die je hebt vóór je een van de
   andere hebt. Onder het logo zegt één regel wat OciDeck maakt (presentaties die
-  gewone Markdown-bestanden blijven); onder *Nieuwe presentatie* staat hoeveel
-  sjablonen er achter die knop klaarstaan — geteld vanuit de catalogus zelf, zodat
-  het niet kan afwijken, en met weglating van het beveiligingsmodulesjabloon
-  totdat die module is ingeschakeld. Een knop **Gebruikershandleiding** naast
-  *Instellingen* opent dit document in de ingebouwde lezer. Het zat vroeger drie
+  gewone Markdown-bestanden blijven). Onder *Nieuw* staan de twee manieren om te
+  beginnen naast elkaar, in dezelfde accentkleur: **Nieuwe presentatie** en
+  **Nieuw document**. Elke knop zegt zelf wat hij maakt, zodat geen van beide
+  leest als de mindere van de twee; onder de presentatieknop staat hoeveel
+  sjablonen er achter klaarstaan — geteld vanuit de catalogus zelf, zodat het
+  niet kan afwijken, en met weglating van het beveiligingsmodulesjabloon totdat
+  die module is ingeschakeld. Die regel staat onder de presentatieknop en niet
+  boven allebei, want een document kent geen sjablonen. Een knop
+  **Gebruikershandleiding** naast *Instellingen* opent dit document in de
+  ingebouwde lezer. Het zat vroeger drie
   klikken diep onder *Instellingen → Documentatie*, precies waar iemand die nog
   niets weet niet kijkt.
 - **Beginnen vanuit een sjabloon**: het nieuwe-presentatiedialoogvenster biedt een
-  doorzoekbare catalogus met vertrekpunten — van een leeg deck tot
+  doorzoekbare catalogus met vertrekpunten. *Leeg deck* is de standaardkeuze en
+  is precies dat: één lege dia. De titel die je intypt blijft de deck-titel
+  (front matter, tabbladlabel, bestandsnaam) en wordt niet op een dia gezet, dus
+  er staat niets op het scherm totdat je het zelf typt. De rest loopt van
   ploegbriefings, beveiligings- en privacywerkdecks, crisis- en
   vluchtvoorbereidingssessies, **besluit- en budget**-decks, **rolspecifieke
   overdracht- en veiligheidssjablonen**, **sector**-sjablonen voor de publieke
@@ -3327,6 +3335,15 @@ problemen** tonen of alleen **Fouten**, **Waarschuwingen** of **Tips**. Klik op 
 probleem om naar die dia te springen en het relevante editorveld te focussen; klik op een **thema
 (hele presentatie)**-probleem om *Instellingen → Presentatiestijl → Kleuren* te openen met het bijbehorende
 kleurveld in beeld gescrold en gemarkeerd.
+
+Eén waarschuwing houdt aan het begin haar mond: *deze dia is leeg*. Op een deck
+dat je nog niet hebt aangeraakt — net aangemaakt, nog nooit opgeslagen, niets om
+ongedaan te maken — is een lege dia precies wat *Leeg deck* beloofde, en er dan
+naar wijzen is je corrigeren voor wat je zelf net vroeg. Zodra je iets doet (één
+toetsaanslag is een ongedaan-maken-stap) of het bestand opslaat, telt de melding
+weer mee — en dat is precies het moment waarop een lege dia iets is om te weten
+vóór je exporteert. Elke andere melding staat er vanaf de eerste seconde: die
+gaan over wat er wél is, nooit over wat je nog moet doen.
 
 Veel bevindingen dragen een **oplossing-met-één-klik** ernaast. Op een overvolle opsommingsdia
 is dat altijd eerst **Dia splitsen** — de opsommingen over pagina's spreiden houdt

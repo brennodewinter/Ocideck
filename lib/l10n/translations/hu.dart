@@ -1699,6 +1699,7 @@ const _dutchSourceAddHu = <String, String>{
   'Uitleg': 'Leírás',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Választómenü: minden blokk kattintásra egy másik diára ugrik. Adjon meg minden blokkhoz egy címkét és egy leírást, válassza ki a céldiát és tetszés szerint egy képet. Válassza ki az elrendezést: rács, lista vagy kör. A kategóriákkal bemutatás közben válthat a blokkcsoportok között. A cél nélküli blokk egyszerű szöveg.',
+  'Alleen een lege dia.': 'Csak egy üres dia.',
   'Hoofdstukken op nieuwe pagina': 'Fejezetek új oldalon',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Minden fejezet mostantól új oldalon kezdődik',
@@ -3281,7 +3282,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez a prezentáció sérült, vagy csak félig mentődött el.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Ez a fájl nem olvasható szöveg. Az OciDeck Markdownt nyit meg.',
-  'Alleen een titelpagina.': 'Csak egy címoldal.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ez a dia üres: sem a képernyőn, sem az exportban nem jelenít meg semmit.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
