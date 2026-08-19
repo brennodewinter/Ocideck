@@ -1716,8 +1716,6 @@ const _dutchSourceAddGa = <String, String>{
       'Níl aon luachanna sa cholún seo is féidir a shórtáil ar an mbealach seo.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ní féidir an tábla seo a thaispeáint mar amlíne go fóill agus níl aon athrú air.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Ní aithnítear cuid de na luachanna. Fanann na sraitheanna sin le chéile ag an mbun; ní athraíonn a n-ábhar.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Oibríonn amlíne le dhá nó trí cholún. Níl aon athrú ar an tábla seo.',
   'Gebeurtenis': 'Imeacht',
@@ -1729,7 +1727,6 @@ const _dutchSourceAddGa = <String, String>{
   'Sorteren met aandachtspunten?': 'Sórtáil de réir pointí spéise?',
   'Tijd': 'Am',
   'Tijdlijn bekijken': 'Féach ar an amlíne',
-  'Toch sorteren': 'Fós ag sórtáil',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Cuir imeacht amháin ar a laghad leis ar dtús. Níl aon athrú ar an tábla seo.',
   'Voetnoot': 'Fonóta',

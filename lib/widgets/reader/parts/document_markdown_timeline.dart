@@ -1,8 +1,9 @@
 // Part of the document-markdown-view library — see ../document_markdown_view.dart.
 //
 // Een documenttijdlijn is een gestileerde projectie van een gewone GFM-tabel.
-// Iedere gebeurtenis is één blok, zodat de pagina-indeler uitsluitend tussen
-// kaarten breekt en nooit een halve kaart onderaan een vel achterlaat.
+// Iedere gebeurtenis is één blok, zodat de pagina-indeler een passende kaart
+// heel doorschuift. Alleen een kaart die zelf hoger is dan het tekstvlak moet
+// intern doorlopen; ieder vervolgvel wordt dan expliciet gemarkeerd.
 part of '../document_markdown_view.dart';
 
 class _TimelineEventView extends StatelessWidget {

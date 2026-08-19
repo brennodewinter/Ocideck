@@ -2602,8 +2602,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sütun henüz bu şekilde sıralanabilecek herhangi bir değer içermiyor.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Bu tablo henüz zaman çizelgesi olarak görüntülenemiyor ve değişmeden kalıyor.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Bazı değerler tanınmıyor. Bu sıralar altta bir arada kalıyor; içerikleri değişmez.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Zaman çizelgesi iki veya üç sütunla çalışır. Bu tablo değişmeden kalır.',
   'Gebeurtenis': 'Etkinlik',
@@ -2614,7 +2612,6 @@ const _dutchSourceAddTr = <String, String>{
   'Sorteren met aandachtspunten?': 'İlgi çekici noktalara göre sıralansın mı?',
   'Tijd': 'Zaman',
   'Tijdlijn bekijken': 'Zaman çizelgesini görüntüle',
-  'Toch sorteren': 'Hala sıralama yapılıyor',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Öncelikle en az bir etkinlik ekleyin. Bu tablo değişmeden kalır.',
   'Voetnoot': 'Dipnot',

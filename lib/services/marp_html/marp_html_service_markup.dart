@@ -280,7 +280,7 @@ String _renderSections(
         '^${RegExp.escape(documentTimelineMarker)}[ \\t]*\$',
         multiLine: true,
       ),
-      '<div class="ocideck-timeline-marker" aria-hidden="true"></div>',
+      '<div class="ocideck-timeline-marker" aria-hidden="true"></div>\n',
     );
     final rendered = _renderBodyBlocks(
       documentSource,

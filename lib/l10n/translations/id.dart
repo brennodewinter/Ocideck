@@ -1684,8 +1684,6 @@ const _dutchSourceAddId = <String, String>{
       'Kolom ini belum berisi nilai apa pun yang dapat diurutkan dengan cara ini.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Tabel ini belum dapat ditampilkan sebagai garis waktu dan tetap tidak berubah.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Beberapa nilai tidak diakui. Baris-baris itu tetap menyatu di bagian bawah; isinya tidak berubah.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Garis waktu berfungsi dengan dua atau tiga kolom. Tabel ini tetap tidak berubah.',
   'Gebeurtenis': 'Peristiwa',
@@ -1697,7 +1695,6 @@ const _dutchSourceAddId = <String, String>{
   'Sorteren met aandachtspunten?': 'Urutkan berdasarkan tempat menarik?',
   'Tijd': 'Waktu',
   'Tijdlijn bekijken': 'Lihat garis waktu',
-  'Toch sorteren': 'Masih memilah',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Pertama, tambahkan setidaknya satu acara. Tabel ini tetap tidak berubah.',
   'Voetnoot': 'Catatan kaki',

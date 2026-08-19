@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +20,8 @@ void main() {
   Future<QuillController> pumpEditor(
     WidgetTester tester, {
     String markdown = source,
+    double width = 900,
+    TextScaler textScaler = TextScaler.noScaling,
   }) async {
     final controller = QuillController(
       document: MarkdownQuillCodec.documentFromMarkdown(markdown),
@@ -32,6 +35,10 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaler: textScaler),
+          child: child!,
+        ),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -41,7 +48,7 @@ void main() {
         supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: SizedBox(
-            width: 900,
+            width: width,
             height: 700,
             child: WysiwygNotesField(
               controller: controller,
@@ -201,6 +208,20 @@ void main() {
     },
   );
 
+  testWidgets('een vierkolomstabel biedt geen onmogelijke tijdlijnactie', (
+    tester,
+  ) async {
+    const table = '''
+| A | B | C | D |
+| --- | --- | --- | --- |
+| een | twee | drie | vier |
+''';
+    await pumpEditor(tester, markdown: table);
+
+    expect(find.text('Als tijdlijn weergeven'), findsNothing);
+    expect(find.widgetWithText(TextField, 'twee'), findsOneWidget);
+  });
+
   testWidgets('aandachtspunten kunnen vóór sorteren per rij worden bekeken', (
     tester,
   ) async {
@@ -242,7 +263,7 @@ void main() {
 | 10 | Tien |
 | 2 | Twee |
 ''';
-    await pumpEditor(tester, markdown: table);
+    final controller = await pumpEditor(tester, markdown: table);
     await tester.showKeyboard(find.widgetWithText(TextField, 'Fase'));
     await tester.pump(const Duration(milliseconds: 350));
     await tester.tap(find.byTooltip('Sorteren als…'));
@@ -255,7 +276,65 @@ void main() {
     expect(find.text('Tijd'), findsWidgets);
     expect(find.text('Oplopend'), findsOneWidget);
     expect(find.text('Aflopend'), findsOneWidget);
-    await tester.tap(find.text('Annuleren'));
+    await tester.tap(find.text('Getal'));
+    await tester.tap(find.text('Oplopend'));
     await tester.pumpAndSettle();
+
+    var markdown = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(markdown.indexOf('| 2 |'), lessThan(markdown.indexOf('| 10 |')));
+
+    await tester.showKeyboard(find.widgetWithText(TextField, 'Fase'));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.tap(find.byTooltip('Sorteren als…'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Getal'));
+    await tester.tap(find.text('Aflopend'));
+    await tester.pumpAndSettle();
+
+    markdown = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(markdown.indexOf('| 10 |'), lessThan(markdown.indexOf('| 2 |')));
+  });
+
+  testWidgets('de actieve kolom is volledig met het toetsenbord te sorteren', (
+    tester,
+  ) async {
+    const table = '''
+| Fase | Feit |
+| --- | --- |
+| 10 | Tien |
+| 2 | Twee |
+''';
+    final controller = await pumpEditor(tester, markdown: table);
+    await tester.showKeyboard(find.widgetWithText(TextField, 'Fase'));
+    await tester.pump(const Duration(milliseconds: 350));
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.altLeft);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.altLeft);
+    await tester.pumpAndSettle();
+
+    final markdown = MarkdownQuillCodec.markdownFromDocument(
+      controller.document,
+    );
+    expect(markdown.indexOf('| 2 |'), lessThan(markdown.indexOf('| 10 |')));
+  });
+
+  testWidgets('tijdlijnacties blijven binnen een smal vlak bij 200% tekst', (
+    tester,
+  ) async {
+    await pumpEditor(
+      tester,
+      width: 320,
+      textScaler: const TextScaler.linear(2),
+    );
+
+    final action = find.text('Gebeurtenissen bewerken');
+    expect(action, findsOneWidget);
+    final rect = tester.getRect(action);
+    expect(rect.left, greaterThanOrEqualTo(0));
+    expect(rect.right, lessThanOrEqualTo(320));
+    expect(tester.takeException(), isNull);
   });
 }

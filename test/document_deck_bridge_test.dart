@@ -183,5 +183,31 @@ void main() {
         expect(out.contains('| :--- | :---: | ---: |'), isTrue);
       },
     );
+
+    test('een nog onbruikbare tijdlijn blijft atomair en bytegetrouw', () {
+      const marked =
+          '<!-- timeline -->\n'
+          '| Tijd | Feit | Bron | Noot |\n'
+          '| :--- | ---: | :---: | --- |\n'
+          r'| 12:02 | x \| y |  bron  | <br> |';
+      final deck = DocumentDeckBridge.documentToDeck(marked);
+
+      expect(deck.slides, hasLength(1));
+      expect(deck.slides.single.type, SlideType.freeMarkdown);
+      expect(deck.slides.single.customMarkdown, marked);
+      expect(DocumentDeckBridge.deckToDocumentMarkdown(deck), '$marked\n');
+    });
+
+    test('een tijdlijn bewaart interne CRLF-regelscheidingen', () {
+      const marked =
+          '<!-- timeline -->\r\n'
+          '| Tijd | Feit | Bron |\r\n'
+          '| --- | --- | --- |\r\n'
+          '| 12:02 | gemeld | loket |';
+      final deck = DocumentDeckBridge.documentToDeck(marked);
+
+      expect(deck.slides.single.customMarkdown, marked);
+      expect(DocumentDeckBridge.deckToDocumentMarkdown(deck), '$marked\n');
+    });
   });
 }

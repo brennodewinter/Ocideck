@@ -1685,8 +1685,6 @@ const _dutchSourceAddDa = <String, String>{
       'Denne kolonne indeholder endnu ingen værdier, der kan sorteres på denne måde.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Denne tabel kan endnu ikke vises som en tidslinje og forbliver uændret.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Nogle af værdierne genkendes ikke. Disse rækker forbliver sammen i bunden; deres indhold ændres ikke.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'En tidslinje fungerer med to eller tre kolonner. Denne tabel forbliver uændret.',
   'Gebeurtenis': 'Tilfælde',
@@ -1697,7 +1695,6 @@ const _dutchSourceAddDa = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortere efter interessepunkter?',
   'Tijd': 'Tid',
   'Tijdlijn bekijken': 'Se tidslinjen',
-  'Toch sorteren': 'Sorterer stadig',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Tilføj først mindst én begivenhed. Denne tabel forbliver uændret.',
   'Voetnoot': 'Fodnote',

@@ -1710,8 +1710,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτή η στήλη δεν περιέχει ακόμη τιμές που μπορούν να ταξινομηθούν με αυτόν τον τρόπο.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Αυτός ο πίνακας δεν μπορεί ακόμη να εμφανιστεί ως χρονοδιάγραμμα και παραμένει αμετάβλητος.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Ορισμένες από τις τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν μαζί στο κάτω μέρος. το περιεχόμενό τους δεν αλλάζει.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Μια γραμμή χρόνου λειτουργεί με δύο ή τρεις στήλες. Αυτός ο πίνακας παραμένει αμετάβλητος.',
   'Gebeurtenis': 'Συμβάν',
@@ -1723,7 +1721,6 @@ const _dutchSourceAddEl = <String, String>{
   'Sorteren met aandachtspunten?': 'Ταξινόμηση κατά σημεία ενδιαφέροντος;',
   'Tijd': 'Φορά',
   'Tijdlijn bekijken': 'Προβολή χρονολογίου',
-  'Toch sorteren': 'Ακόμα διαλογή',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Προσθέστε πρώτα τουλάχιστον ένα συμβάν. Αυτός ο πίνακας παραμένει αμετάβλητος.',
   'Voetnoot': 'Υποσημείωση',

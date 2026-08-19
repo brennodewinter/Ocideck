@@ -1705,8 +1705,6 @@ const _dutchSourceAddMt = <String, String>{
       'Din il-kolonna għadha ma fiha l-ebda valuri li jistgħu jiġu magħżula b\'dan il-mod.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Din it-tabella għadha ma tistax tintwera bħala skeda tal-ħin u tibqa\' l-istess.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Xi wħud mill-valuri mhumiex rikonoxxuti. Dawk ir-ringieli jibqgħu flimkien fil-qiegħ; il-kontenut tagħhom ma jinbidilx.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Kronoloġija taħdem b\'żewġ jew tliet kolonni. Din it-tabella tibqa\' l-istess.',
   'Gebeurtenis': 'Avveniment',
@@ -1717,7 +1715,6 @@ const _dutchSourceAddMt = <String, String>{
   'Sorteren met aandachtspunten?': 'Issortja skond il-punti ta\' interess?',
   'Tijd': 'Ħin',
   'Tijdlijn bekijken': 'Ara l-kronoloġija',
-  'Toch sorteren': 'Għadhom issortjar',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'L-ewwel żid mill-inqas avveniment wieħed. Din it-tabella tibqa\' l-istess.',
   'Voetnoot': 'Nota f\'qiegħ il-paġna',

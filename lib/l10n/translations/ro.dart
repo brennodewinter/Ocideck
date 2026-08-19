@@ -1702,8 +1702,6 @@ const _dutchSourceAddRo = <String, String>{
       'Această coloană nu conține încă valori care să poată fi sortate în acest fel.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Acest tabel nu poate fi încă afișat ca cronologie și rămâne neschimbat.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Unele dintre valori nu sunt recunoscute. Rândurile respective rămân împreună în partea de jos; continutul lor nu se schimba.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'O cronologie funcționează cu două sau trei coloane. Acest tabel rămâne neschimbat.',
   'Gebeurtenis': 'Eveniment',
@@ -1714,7 +1712,6 @@ const _dutchSourceAddRo = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortați după puncte de interes?',
   'Tijd': 'Timp',
   'Tijdlijn bekijken': 'Vedeți cronologia',
-  'Toch sorteren': 'Încă se sortează',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Mai întâi adăugați cel puțin un eveniment. Acest tabel rămâne neschimbat.',
   'Voetnoot': 'Notă de subsol',

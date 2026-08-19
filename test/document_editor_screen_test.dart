@@ -11,6 +11,7 @@ import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
+import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
@@ -185,6 +186,26 @@ void main() {
     expect(find.text('Paginabreedte'), findsOneWidget);
     expect(find.text('Leeskolom'), findsOneWidget);
     expect(find.text('Volledige breedte'), findsOneWidget);
+  });
+
+  testWidgets('Exporteren blijft bereikbaar bij 200% tekst', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(800, 800));
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(() {
+      tester.binding.setSurfaceSize(null);
+      tester.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Rapport\n\nTekst.'));
+
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    final export = find.byTooltip('Exporteren…');
+    expect(export, findsOneWidget);
+    final rect = tester.getRect(export);
+    expect(rect.left, greaterThanOrEqualTo(0));
+    expect(rect.right, lessThanOrEqualTo(800));
   });
 
   testWidgets('Cmd+= zoomt in en Cmd+0 zet terug op ware grootte', (
@@ -556,6 +577,22 @@ void main() {
     expect(find.widgetWithText(TextField, 'Tijd'), findsOneWidget);
     expect(n.currentState.document!.source, 'Voor.');
 
+    await tester.tap(find.text('Toepassen'));
+    await tester.pumpAndSettle();
+    expect(n.currentState.document!.source, 'Voor.');
+    expect(
+      find.text(
+        'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.',
+      ),
+      findsOneWidget,
+    );
+
+    expect(find.byType(TableEditor), findsOneWidget);
+    final timelineFields = find.descendant(
+      of: find.byType(TableEditor),
+      matching: find.byType(TextField),
+    );
+    await tester.enterText(timelineFields.at(4), 'Eerste feit');
     await tester.tap(find.text('Toepassen'));
     await tester.pumpAndSettle();
     expect(

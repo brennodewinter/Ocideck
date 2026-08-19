@@ -710,8 +710,6 @@ const _dutchSourceAddFy = {
       'Dizze kolom befettet noch gjin wearden dy\'t op dizze manier kinne wurde sorteare.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Dizze tabel kin noch net werjûn wurde as in tiidline en bliuwt net feroare.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Guon fan \'e wearden wurde net erkend. Dy rigen bliuwe ûnderoan byinoar; harren ynhâld net feroarje.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'In tiidline wurket mei twa of trije kolommen. Dizze tabel bliuwt net feroare.',
   'Gebeurtenis': 'Barren',
@@ -722,7 +720,6 @@ const _dutchSourceAddFy = {
   'Sorteren met aandachtspunten?': 'Sortearje op punten fan belang?',
   'Tijd': 'Tiid',
   'Tijdlijn bekijken': 'Besjoch de tiidline',
-  'Toch sorteren': 'Noch sortearjen',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Foegje earst op syn minst ien evenemint ta. Dizze tabel bliuwt net feroare.',
   'Voetnoot': 'Fuotnoat',

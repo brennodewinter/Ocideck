@@ -58,20 +58,34 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
       [l10n.d('Tijd'), l10n.d('Gebeurtenis'), l10n.d('Status')],
       ['', '', ''],
     ];
-    final slide = Slide.create(
-      SlideType.table,
-    ).copyWith(tableRows: initialRows);
+    final slide = Slide.create(SlideType.table);
     var rows = initialRows;
-    final apply = await showEmbedEditorDialog(
-      context,
-      TableEditor(
-        slide: slide,
-        nestedInScrollView: true,
-        documentContext: true,
-        onUpdate: (s) => rows = s.tableRows,
-      ),
-    );
-    if (apply != true || !mounted) return;
+    while (mounted) {
+      final apply = await showEmbedEditorDialog(
+        context,
+        TableEditor(
+          slide: slide.copyWith(tableRows: rows),
+          nestedInScrollView: true,
+          documentContext: true,
+          onUpdate: (s) => rows = s.tableRows,
+        ),
+      );
+      if (apply != true || !mounted) return;
+      final hasEvent = rows
+          .skip(1)
+          .any((row) => row.length > 1 && row[1].trim().isNotEmpty);
+      if (hasEvent) break;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d(
+              'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.',
+            ),
+          ),
+        ),
+      );
+    }
+    if (!mounted) return;
     _insertBlock(markTableAsTimeline(encodeMarkdownTable(rows)));
   }
 

@@ -1705,8 +1705,6 @@ const _dutchSourceAddBg = <String, String>{
       'Тази колона все още не съдържа никакви стойности, които могат да бъдат сортирани по този начин.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Тази таблица все още не може да бъде показана като времева линия и остава непроменена.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Някои от стойностите не се разпознават. Тези редове остават заедно в долната част; тяхното съдържание не се променя.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Времевата линия работи с две или три колони. Тази таблица остава непроменена.',
   'Gebeurtenis': 'Събитие',
@@ -1717,7 +1715,6 @@ const _dutchSourceAddBg = <String, String>{
   'Sorteren met aandachtspunten?': 'Сортиране по точки на интерес?',
   'Tijd': 'време',
   'Tijdlijn bekijken': 'Преглед на времевата линия',
-  'Toch sorteren': 'Все още сортирам',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Първо добавете поне едно събитие. Тази таблица остава непроменена.',
   'Voetnoot': 'Бележка под линия',

@@ -1687,8 +1687,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez az oszlop még nem tartalmaz ilyen módon rendezhető értékeket.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ez a táblázat még nem jeleníthető meg idővonalként, és változatlan marad.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Egyes értékeket nem ismerünk fel. Ezek a sorok együtt maradnak alul; tartalmuk nem változik.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Az idővonal két vagy három oszloppal működik. Ez a táblázat változatlan marad.',
   'Gebeurtenis': 'Esemény',
@@ -1700,7 +1698,6 @@ const _dutchSourceAddHu = <String, String>{
   'Sorteren met aandachtspunten?': 'Rendezés érdekességek szerint?',
   'Tijd': 'Idő',
   'Tijdlijn bekijken': 'Idővonal megtekintése',
-  'Toch sorteren': 'Még mindig válogat',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Először adjon hozzá legalább egy eseményt. Ez a táblázat változatlan marad.',
   'Voetnoot': 'Lábjegyzet',

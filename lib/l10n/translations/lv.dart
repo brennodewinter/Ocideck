@@ -1684,8 +1684,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šajā kolonnā vēl nav ietvertas vērtības, kuras varētu kārtot šādā veidā.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Šo tabulu vēl nevar parādīt kā laika skalu, un tā paliek nemainīga.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Dažas vērtības netiek atpazītas. Šīs rindas paliek kopā apakšā; to saturs nemainās.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Laika skala darbojas ar divām vai trim kolonnām. Šī tabula paliek nemainīga.',
   'Gebeurtenis': 'Pasākums',
@@ -1696,7 +1694,6 @@ const _dutchSourceAddLv = <String, String>{
   'Sorteren met aandachtspunten?': 'Kārtot pēc interešu punktiem?',
   'Tijd': 'Laiks',
   'Tijdlijn bekijken': 'Skatīt laika skalu',
-  'Toch sorteren': 'Joprojām šķiro',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Vispirms pievienojiet vismaz vienu notikumu. Šī tabula paliek nemainīga.',
   'Voetnoot': 'Vēre',

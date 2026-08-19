@@ -1686,8 +1686,6 @@ const _dutchSourceAddSl = <String, String>{
       'Ta stolpec še ne vsebuje nobenih vrednosti, ki bi jih bilo mogoče razvrstiti na ta način.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Te tabele še ni mogoče prikazati kot časovnico in ostaja nespremenjena.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Nekatere vrednosti niso prepoznane. Te vrstice ostanejo skupaj na dnu; njihova vsebina se ne spremeni.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Časovnica deluje z dvema ali tremi stolpci. Ta tabela ostane nespremenjena.',
   'Gebeurtenis': 'Dogodek',
@@ -1698,7 +1696,6 @@ const _dutchSourceAddSl = <String, String>{
   'Sorteren met aandachtspunten?': 'Razvrsti po zanimivostih?',
   'Tijd': 'Čas',
   'Tijdlijn bekijken': 'Oglejte si časovnico',
-  'Toch sorteren': 'Še vedno razvrščam',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najprej dodajte vsaj en dogodek. Ta tabela ostane nespremenjena.',
   'Voetnoot': 'Opomba pod črto',

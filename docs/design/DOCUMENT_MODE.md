@@ -1474,8 +1474,11 @@ a later format decision.
 
 **Invoegen → Tijdlijn** opens the ordinary table editor with a three-column
 starter table (`Tijd`, `Gebeurtenis`, `Status`). Only **Toepassen** inserts the
-portable marker plus table; **Annuleren** changes nothing. An existing editable
-two- or three-column table gains **Als tijdlijn weergeven**. Activation runs the
+portable marker plus table; **Annuleren** changes nothing. A new timeline is not
+inserted while all event cells are empty; the document stays unchanged and the
+same editor reopens with the entered values plus a concrete prompt to add an
+event. An existing editable two- or
+three-column table gains **Als tijdlijn weergeven**. Activation runs the
 local suitability check and then previews the positional roles and found event
 count; it never scans the whole document for tables to convert automatically.
 
@@ -1502,9 +1505,12 @@ reading order and page breaking on portrait paper.
 
 All rows render. There is no presentation timeline's twelve-event ceiling and
 no hover-only detail. Each event is a separately measurable page unit; a page
-may break between events but not through a card. In **Pagina's**, a sheet that
-starts with a later event restarts the rail at its top and shows the localised
-**Tijdlijn · vervolg** label in its top margin. Pagina's,
+breaks between events whenever the card fits on a sheet. Only a single card
+that is itself taller than the available page area is cut, because scaling or
+hiding its text would harm readability and completeness. In **Pagina's**, every
+sheet that continues a timeline — at a later event or inside such an oversized
+card — restarts the rail at its top and shows the localised **Tijdlijn · vervolg**
+label in its top margin. Pagina's,
 continuous HTML, print/PDF and LaTeX must preserve the same event order and
 complete text.
 
@@ -1571,7 +1577,8 @@ The feature is not complete until tests and visual checks prove at least:
 - malformed marked tables fail back to a visible, editable table;
 - a 19-event, multi-source incident fixture renders without omission in Visual,
   Pagina's, continuous HTML, PDF/print and LaTeX;
-- page breaks occur only between event cards and continuation is apparent;
+- page breaks occur between event cards whenever a card fits; every unavoidable
+  continuation of one oversized card is apparent;
 - search, selection, keyboard operation, screen-reader order, 200% text and
   reduced motion remain usable;
 - document→presentation→document keeps the marker immediately followed by the

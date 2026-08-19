@@ -1692,8 +1692,6 @@ const _dutchSourceAddLt = <String, String>{
       'Šiame stulpelyje dar nėra reikšmių, kurias būtų galima rūšiuoti tokiu būdu.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Šios lentelės dar negalima rodyti kaip laiko juostos ir ji lieka nepakitusi.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Kai kurios vertybės nėra atpažįstamos. Tos eilutės lieka kartu apačioje; jų turinys nesikeičia.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Laiko juosta veikia su dviem arba trimis stulpeliais. Ši lentelė lieka nepakitusi.',
   'Gebeurtenis': 'Renginys',
@@ -1704,7 +1702,6 @@ const _dutchSourceAddLt = <String, String>{
   'Sorteren met aandachtspunten?': 'Rūšiuoti pagal lankytinas vietas?',
   'Tijd': 'Laikas',
   'Tijdlijn bekijken': 'Peržiūrėti laiko juostą',
-  'Toch sorteren': 'Vis dar rūšiuoja',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Pirmiausia pridėkite bent vieną įvykį. Ši lentelė lieka nepakitusi.',
   'Voetnoot': 'Išnaša',

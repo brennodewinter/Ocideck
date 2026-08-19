@@ -5,13 +5,14 @@ import 'package:markdown_quill/markdown_quill.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../models/slide.dart';
 import '../../services/markdown_table_codec.dart';
-import '../../services/table_sort.dart';
 import '../../services/document_timeline.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
+import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
+import 'table_sort_actions.dart';
 
 /// Tekent een `x-embed-table`-blok in de visuele (Quill) editor als een échte,
 /// gerenderde tabel — dezelfde weergave als de documentlezer — en laat je er
@@ -87,6 +88,10 @@ class _EditableTableEmbed extends StatefulWidget {
 
 class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   late TableEditController _editor;
+
+  bool get _canBecomeTimeline =>
+      _editor.rows.isNotEmpty &&
+      (_editor.rows.first.length == 2 || _editor.rows.first.length == 3);
 
   @override
   void initState() {
@@ -251,151 +256,28 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Align(
-        alignment: Alignment.centerRight,
-        child: TextButton.icon(
-          onPressed: () => _asTimeline(),
-          icon: const Icon(Icons.timeline_outlined),
-          label: Text(context.l10n.d('Als tijdlijn weergeven')),
+      if (_canBecomeTimeline)
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton.icon(
+            onPressed: () => _asTimeline(),
+            icon: const Icon(Icons.timeline_outlined),
+            label: Text(context.l10n.d('Als tijdlijn weergeven')),
+          ),
         ),
-      ),
       DocumentMarkdownView(
         widget.gfm,
         maxTextWidth: null,
         themeProfile: widget.profile,
         chartTheme: widget.profile,
         tableEditController: _editor,
-        onSortTableColumn: (column, ascending) =>
-            ascending == null ? _sortAs(column) : _sort(column, ascending),
+        onSortTableColumn: (column, intent) => switch (intent) {
+          TableSortIntent.ascending => _sort(column, true),
+          TableSortIntent.descending => _sort(column, false),
+          TableSortIntent.choose => _sortAs(column),
+        },
       ),
     ],
-  );
-}
-
-/// Vraagt alleen om hulp wanneer lokale analyse geen eenduidige of volledig
-/// leesbare kolom vindt. Zo blijft de standaardhandeling snel, maar worden
-/// onbekende waarden nooit stilzwijgend anders geïnterpreteerd.
-Future<String?> smartSortTable(
-  BuildContext context,
-  String gfm, {
-  required int column,
-  required bool ascending,
-  TableSortKind kind = TableSortKind.automatic,
-}) async {
-  const sorter = TableSortService();
-  final lines = gfm.replaceAll('\r\n', '\n').replaceAll('\r', '\n').split('\n');
-  var analysis = sorter.analyze(lines, columnIndex: column);
-  if (kind != TableSortKind.automatic) {
-    analysis = sorter.analyze(lines, columnIndex: column, kind: kind);
-  } else if (!analysis.canSort) {
-    final chosen = await showDialog<TableSortKind>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(context.l10n.d('Hoe wil je deze kolom sorteren?')),
-        content: Text(
-          context.l10n.d(
-            'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.',
-          ),
-        ),
-        actions: [
-          for (final option in const [
-            (TableSortKind.text, 'Tekst'),
-            (TableSortKind.number, 'Getal'),
-            (TableSortKind.date, 'Datum'),
-            (TableSortKind.time, 'Tijd'),
-          ])
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, option.$1),
-              child: Text(context.l10n.d(option.$2)),
-            ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(context.l10n.d('Annuleren')),
-          ),
-        ],
-      ),
-    );
-    if (!context.mounted || chosen == null) return null;
-    kind = chosen;
-    analysis = sorter.analyze(lines, columnIndex: column, kind: kind);
-  }
-  if (!analysis.canSort) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.',
-          ),
-        ),
-      ),
-    );
-    return null;
-  }
-  if (analysis.suitability ==
-      TableAnalysisSuitability.suitableWithAttentionPoints) {
-    final choice = await _reviewSortAttention(context, lines, analysis, column);
-    if (!context.mounted || choice != _SortAttentionChoice.apply) return null;
-  }
-  final result = sorter.sortSource(
-    gfm,
-    columnIndex: column,
-    kind: kind,
-    direction: ascending
-        ? TableSortDirection.ascending
-        : TableSortDirection.descending,
-  );
-  return result.changed ? result.source : null;
-}
-
-typedef ExplicitSortChoice = ({TableSortKind kind, bool ascending});
-
-Future<ExplicitSortChoice?> chooseExplicitSort(BuildContext context) {
-  var selected = TableSortKind.automatic;
-  return showDialog<ExplicitSortChoice>(
-    context: context,
-    builder: (dialogContext) => StatefulBuilder(
-      builder: (context, setDialogState) => AlertDialog(
-        title: Text(context.l10n.d('Sorteren als…')),
-        content: RadioGroup<TableSortKind>(
-          groupValue: selected,
-          onChanged: (value) => setDialogState(() => selected = value!),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final option in const [
-                (TableSortKind.automatic, 'Automatisch'),
-                (TableSortKind.text, 'Tekst'),
-                (TableSortKind.number, 'Getal'),
-                (TableSortKind.date, 'Datum'),
-                (TableSortKind.time, 'Tijd'),
-              ])
-                RadioListTile<TableSortKind>(
-                  value: option.$1,
-                  title: Text(context.l10n.d(option.$2)),
-                ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(context.l10n.d('Annuleren')),
-          ),
-          TextButton(
-            onPressed: () =>
-                Navigator.pop(dialogContext, (kind: selected, ascending: true)),
-            child: Text(context.l10n.d('Oplopend')),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(dialogContext, (
-              kind: selected,
-              ascending: false,
-            )),
-            child: Text(context.l10n.d('Aflopend')),
-          ),
-        ],
-      ),
-    ),
   );
 }
 
@@ -416,7 +298,8 @@ Future<_TimelineActivationChoice?> _confirmTimelineActivation(
   final roles = <String>[
     '${l10n.d('Volgorde')}: ${timeline.headers[0]}',
     '${l10n.d('Gebeurtenis')}: ${timeline.headers[1]}',
-    if (timeline.headers.length == 3) '3: ${timeline.headers[2]}',
+    if (timeline.headers.length == 3)
+      '${l10n.d('Toelichting')}: ${timeline.headers[2]}',
   ];
   final notes = <String>[
     '${timeline.events.length} ${l10n.d('gebeurtenissen gevonden.')}',
@@ -457,71 +340,4 @@ Future<_TimelineActivationChoice?> _confirmTimelineActivation(
       ],
     ),
   );
-}
-
-enum _SortAttentionChoice { review, apply }
-
-Future<_SortAttentionChoice?> _reviewSortAttention(
-  BuildContext context,
-  List<String> lines,
-  TableSortAnalysis analysis,
-  int column,
-) async {
-  while (true) {
-    if (!context.mounted) return null;
-    final l10n = context.l10n;
-    final profile = analysis.profile;
-    final choice = await showDialog<_SortAttentionChoice>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.d('Sorteren met aandachtspunten?')),
-        content: Text(
-          '${profile.parsedRowIndices.length} ${l10n.d('waarden herkend.')}\n'
-          '${profile.unparsedRowIndices.length} ${l10n.d('waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.')}',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(l10n.d('Annuleren')),
-          ),
-          TextButton(
-            onPressed: () =>
-                Navigator.pop(dialogContext, _SortAttentionChoice.review),
-            child: Text(l10n.d('Waarden bekijken')),
-          ),
-          FilledButton(
-            onPressed: () =>
-                Navigator.pop(dialogContext, _SortAttentionChoice.apply),
-            child: Text(l10n.d('Sorteren toepassen')),
-          ),
-        ],
-      ),
-    );
-    if (!context.mounted || choice != _SortAttentionChoice.review) {
-      return choice;
-    }
-    final rows = decodeMarkdownTableRows(lines).skip(1).toList();
-    await showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.d('Niet-herkende waarden')),
-        content: SingleChildScrollView(
-          child: SelectableText(
-            profile.unparsedRowIndices
-                .map(
-                  (index) =>
-                      '${l10n.d('Rij')} ${index + 1}: ${index < rows.length && column < rows[index].length ? rows[index][column] : ''}',
-                )
-                .join('\n'),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(l10n.d('Sluiten')),
-          ),
-        ],
-      ),
-    );
-  }
 }

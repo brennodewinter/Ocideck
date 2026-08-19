@@ -1687,8 +1687,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Spalte hät no kei Wärt, wo mer so sortiere cha.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Die Tabälle cha no nöd als Ziitachse aazeigt werde und bliibt unveränderet.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'En Teil vo de Wärt wird nöd erkännt. Die Zeile blibed unte zäme; ihr Inhalt wird nöd verändert.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'E Ziitachse bruucht zwei oder drei Spalte. Die Tabälle bliibt unveränderet.',
   'Gebeurtenis': 'Ereignis',
@@ -1699,7 +1697,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortiere mit Hiwiis?',
   'Tijd': 'Ziit',
   'Tijdlijn bekijken': 'Ziitachse aaluege',
-  'Toch sorteren': 'Trotzdem sortiere',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Füeg zersch mindestens eis Ereignis dezue. Die Tabälle bliibt unveränderet.',
   'Voetnoot': 'Fuessnote',

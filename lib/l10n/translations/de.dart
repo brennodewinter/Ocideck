@@ -710,8 +710,6 @@ const _dutchSourceAddDe = {
       'Diese Spalte enthält noch keine Werte, die auf diese Weise sortiert werden können.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Diese Tabelle kann noch nicht als Zeitleiste angezeigt werden und bleibt unverändert.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Einige der Werte werden nicht erkannt. Diese Reihen bleiben unten zusammen; Ihr Inhalt ändert sich nicht.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Eine Zeitleiste funktioniert mit zwei oder drei Spalten. Diese Tabelle bleibt unverändert.',
   'Gebeurtenis': 'Ereignis',
@@ -722,7 +720,6 @@ const _dutchSourceAddDe = {
   'Sorteren met aandachtspunten?': 'Nach Sehenswürdigkeiten sortieren?',
   'Tijd': 'Zeit',
   'Tijdlijn bekijken': 'Zeitleiste anzeigen',
-  'Toch sorteren': 'Bin immer noch am Sortieren',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Fügen Sie zunächst mindestens ein Ereignis hinzu. Diese Tabelle bleibt unverändert.',
   'Voetnoot': 'Fußnote',

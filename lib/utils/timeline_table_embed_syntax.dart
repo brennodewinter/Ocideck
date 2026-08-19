@@ -1,6 +1,7 @@
 import 'package:flutter_quill/flutter_quill.dart' hide Node;
 import 'package:markdown/markdown.dart';
 
+import '../services/document_timeline.dart';
 import '../services/markdown_table_codec.dart';
 
 /// Houdt een gemarkeerde tijdlijntabel als één atomair Quill-blok bijeen.
@@ -19,11 +20,11 @@ class TimelineTableSyntax extends BlockSyntax {
   bool canParse(BlockParser parser) {
     final header = parser.peek(1)?.content;
     final delimiter = parser.peek(2)?.content;
-    return pattern.hasMatch(parser.current.content) &&
-        header != null &&
-        delimiter != null &&
-        isMarkdownTableLine(header) &&
-        isMarkdownTableDelimiterRow(delimiter);
+    return isDocumentTimelineEnvelope(
+      parser.current.content,
+      header,
+      delimiter,
+    );
   }
 
   @override

@@ -1684,8 +1684,6 @@ const _dutchSourceAddSv = <String, String>{
       'Denna kolumn innehåller ännu inga värden som kan sorteras på detta sätt.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Denna tabell kan ännu inte visas som en tidslinje och förblir oförändrad.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Vissa av värdena känns inte igen. Dessa rader förblir tillsammans längst ner; deras innehåll ändras inte.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'En tidslinje fungerar med två eller tre kolumner. Denna tabell förblir oförändrad.',
   'Gebeurtenis': 'Händelse',
@@ -1696,7 +1694,6 @@ const _dutchSourceAddSv = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortera efter intressanta platser?',
   'Tijd': 'Tid',
   'Tijdlijn bekijken': 'Visa tidslinjen',
-  'Toch sorteren': 'Sorterar fortfarande',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Lägg först till minst en händelse. Denna tabell förblir oförändrad.',
   'Voetnoot': 'Fotnot',

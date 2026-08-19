@@ -710,8 +710,6 @@ const _dutchSourceAddFr = {
       'Cette colonne ne contient pas encore de valeurs pouvant être triées de cette manière.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ce tableau ne peut pas encore être affiché sous forme de chronologie et reste inchangé.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Certaines valeurs ne sont pas reconnues. Ces lignes restent ensemble en bas ; leur contenu ne change pas.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Une chronologie fonctionne avec deux ou trois colonnes. Ce tableau reste inchangé.',
   'Gebeurtenis': 'Événement',
@@ -723,7 +721,6 @@ const _dutchSourceAddFr = {
   'Sorteren met aandachtspunten?': 'Trier par points d\'intérêt ?',
   'Tijd': 'Temps',
   'Tijdlijn bekijken': 'Afficher la chronologie',
-  'Toch sorteren': 'Toujours en train de trier',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Ajoutez d’abord au moins un événement. Ce tableau reste inchangé.',
   'Voetnoot': 'Note de bas de page',

@@ -1690,8 +1690,6 @@ const _dutchSourceAddHr = <String, String>{
       'Ovaj stupac još ne sadrži vrijednosti koje se mogu sortirati na ovaj način.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ova se tablica još ne može prikazati kao vremenska traka i ostaje nepromijenjena.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Neke od vrijednosti nisu prepoznate. Ti redovi ostaju zajedno na dnu; njihov se sadržaj ne mijenja.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Vremenska traka radi s dva ili tri stupca. Ova tablica ostaje nepromijenjena.',
   'Gebeurtenis': 'Događaj',
@@ -1702,7 +1700,6 @@ const _dutchSourceAddHr = <String, String>{
   'Sorteren met aandachtspunten?': 'Poredati po zanimljivostima?',
   'Tijd': 'Vrijeme',
   'Tijdlijn bekijken': 'Pregledajte vremensku traku',
-  'Toch sorteren': 'Još uvijek sortiram',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Prvo dodajte barem jedan događaj. Ova tablica ostaje nepromijenjena.',
   'Voetnoot': 'Fusnota',

@@ -1,6 +1,5 @@
 import '../services/table_of_contents.dart';
 import '../services/document_timeline.dart';
-import '../services/markdown_table_codec.dart';
 
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
@@ -40,11 +39,7 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
       // Ook een gemarkeerde tabel die nog niet geschikt is blijft één visueel
       // embed. Zo kan de gebruiker hem in de gewone tabeleditor herstellen;
       // terugvallen naar bronmodus zou juist de vriendelijke foutweg wegnemen.
-      supportedTimeline =
-          header != null &&
-          delimiter != null &&
-          isMarkdownTableLine(header) &&
-          isMarkdownTableDelimiterRow(delimiter);
+      supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
     }
     if (!tocMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&

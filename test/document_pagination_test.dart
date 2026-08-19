@@ -59,6 +59,20 @@ void main() {
     expect(offsets([30, 250]), [0, 30, 130, 230]);
   });
 
+  test('vervolgvellen midden in één hoge tijdlijnkaart zijn herkenbaar', () {
+    final pageOffsets = offsets([30, 250]);
+
+    expect(
+      documentContinuationPages(
+        blockHeights: const [30, 250],
+        pageOffsets: pageOffsets,
+        continuationBlocks: const {},
+        continuableBlocks: const {1},
+      ),
+      {2, 3},
+    );
+  });
+
   test('na een te hoog blok begint het volgende blok op een verse pagina', () {
     final result = offsets([30, 250, 20]);
     expect(result, [0, 30, 130, 230, 280]);

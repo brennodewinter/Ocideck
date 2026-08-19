@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/document_deck_bridge.dart';
 import 'package:ocideck/services/latex/markdown_to_latex.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:path/path.dart' as p;
 
@@ -52,6 +55,10 @@ void main() {
         loadAsset: _diskLoader,
       ).build(source, continuous: true);
       expect(html, contains('ocideck-timeline-marker'));
+      expect(
+        html,
+        contains('ocideck-timeline-marker" aria-hidden="true"></div>\n\n|'),
+      );
       expect(html, contains("list.className='ocideck-timeline'"));
       expect(html, contains('break-inside:avoid'));
       expect(html, contains('13:41'));
@@ -142,5 +149,55 @@ void main() {
         );
       },
     );
+
+    test('een onbruikbare tijdlijn behoudt exacte kolomkopcontext', () {
+      const bsn = '728398242';
+      const source =
+          '<!-- timeline -->\n'
+          '| Tijd | Feit | Bron | BSN |\n'
+          '| --- | --- | --- | --- |\n'
+          '| 12:02 | melding | loket | $bsn |';
+      final deck = DocumentDeckBridge.documentToDeck(source);
+      final findings = const PrivacyScanner()
+          .scan(deck)
+          .findings
+          .where((finding) => finding.ruleId == 'nl.bsn')
+          .toList();
+
+      expect(findings, hasLength(1));
+      expect(findings.single.field, 'customMarkdown');
+      expect(findings.single.confidence, PrivacyConfidence.certain);
+      final projected = PrivacyProjection.forAudience(
+        deck,
+        profile: PrivacyExportProfile.redacted,
+      );
+      expect(
+        DocumentDeckBridge.deckToDocumentMarkdown(projected.deck),
+        isNot(contains(bsn)),
+      );
+    });
+
+    test('een lange tijdlijncel indexeert kolomcontext één keer', () {
+      const repetitions = 5000;
+      const bsn = '728398242';
+      final repeated = List.filled(repetitions, bsn).join(' ');
+      final source =
+          '<!-- timeline -->\n'
+          '| Tijd | BSN | Bron |\n'
+          '| --- | --- | --- |\n'
+          '| 12:02 | $repeated | logboek |';
+      final findings = const PrivacyScanner()
+          .scan(DocumentDeckBridge.documentToDeck(source))
+          .findings
+          .where((finding) => finding.ruleId == 'nl.bsn');
+
+      expect(findings, hasLength(repetitions));
+      expect(
+        findings.every(
+          (finding) => finding.confidence == PrivacyConfidence.certain,
+        ),
+        isTrue,
+      );
+    });
   });
 }

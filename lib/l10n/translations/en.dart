@@ -882,8 +882,6 @@ const _dutchSourceAddEn = {
       'This column does not yet contain any values ​​that can be sorted in this way.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'This table cannot yet be displayed as a timeline and remains unchanged.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Some of the values ​​are not recognized. Those rows remain together at the bottom; their content does not change.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'A timeline works with two or three columns. This table remains unchanged.',
   'Gebeurtenis': 'Event',
@@ -894,7 +892,6 @@ const _dutchSourceAddEn = {
   'Sorteren met aandachtspunten?': 'Sort by points of interest?',
   'Tijd': 'Time',
   'Tijdlijn bekijken': 'View timeline',
-  'Toch sorteren': 'Still sorting',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'First add at least one event. This table remains unchanged.',
   'Voetnoot': 'Footnote',

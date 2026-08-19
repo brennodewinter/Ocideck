@@ -708,8 +708,6 @@ const _dutchSourceAddEs = {
       'Esta columna aún no contiene ningún valor que pueda ordenarse de esta manera.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Esta tabla aún no se puede mostrar como una línea de tiempo y permanece sin cambios.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Algunos de los valores no son reconocidos. Esas filas permanecen juntas en la parte inferior; su contenido no cambia.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Una línea de tiempo funciona con dos o tres columnas. Esta tabla permanece sin cambios.',
   'Gebeurtenis': 'Evento',
@@ -720,7 +718,6 @@ const _dutchSourceAddEs = {
   'Sorteren met aandachtspunten?': '¿Ordenar por puntos de interés?',
   'Tijd': 'Tiempo',
   'Tijdlijn bekijken': 'Ver línea de tiempo',
-  'Toch sorteren': 'Todavía clasificando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Primero agregue al menos un evento. Esta tabla permanece sin cambios.',
   'Voetnoot': 'Nota al pie',

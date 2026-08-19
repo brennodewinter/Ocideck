@@ -10,8 +10,9 @@ import '../../services/markdown_table_codec.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
+import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
-import 'table_embed_builder.dart' show chooseExplicitSort, smartSortTable;
+import 'table_sort_actions.dart';
 
 /// Tekent marker en tabel als één verliesvrij tijdlijnblok in de visuele editor.
 class TimelineTableEmbedBuilder extends EmbedBuilder {
@@ -181,29 +182,31 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
               ),
             ),
           ),
-        Wrap(
-          spacing: 8,
-          runSpacing: 6,
-          alignment: WrapAlignment.end,
-          children: [
-            TextButton.icon(
-              onPressed: usable
-                  ? () => setState(() => _editing = !_editing)
-                  : null,
-              icon: Icon(_editing ? Icons.timeline : Icons.edit_outlined),
-              label: Text(
-                _editing
+        LayoutBuilder(
+          builder: (context, constraints) => Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            alignment: WrapAlignment.end,
+            children: [
+              _timelineActionButton(
+                maxWidth: constraints.maxWidth,
+                onPressed: usable
+                    ? () => setState(() => _editing = !_editing)
+                    : null,
+                icon: _editing ? Icons.timeline : Icons.edit_outlined,
+                label: _editing
                     ? l10n.d('Tijdlijn bekijken')
                     : l10n.d('Gebeurtenissen bewerken'),
               ),
-            ),
-            TextButton.icon(
-              onPressed: () =>
-                  _replace(_tableSource, asTable: true, discrete: true),
-              icon: const Icon(Icons.table_chart_outlined),
-              label: Text(l10n.d('Als tabel weergeven')),
-            ),
-          ],
+              _timelineActionButton(
+                maxWidth: constraints.maxWidth,
+                onPressed: () =>
+                    _replace(_tableSource, asTable: true, discrete: true),
+                icon: Icons.table_chart_outlined,
+                label: l10n.d('Als tabel weergeven'),
+              ),
+            ],
+          ),
         ),
         if (_editing)
           DocumentMarkdownView(
@@ -212,8 +215,11 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
             themeProfile: widget.profile,
             chartTheme: widget.profile,
             tableEditController: _editor,
-            onSortTableColumn: (column, ascending) =>
-                ascending == null ? _sortAs(column) : _sort(column, ascending),
+            onSortTableColumn: (column, intent) => switch (intent) {
+              TableSortIntent.ascending => _sort(column, true),
+              TableSortIntent.descending => _sort(column, false),
+              TableSortIntent.choose => _sortAs(column),
+            },
           )
         else
           GestureDetector(
@@ -243,4 +249,24 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
       'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.',
     ),
   };
+
+  Widget _timelineActionButton({
+    required double maxWidth,
+    required VoidCallback? onPressed,
+    required IconData icon,
+    required String label,
+  }) => ConstrainedBox(
+    constraints: BoxConstraints(maxWidth: maxWidth),
+    child: TextButton(
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon),
+          const SizedBox(width: 8),
+          Flexible(child: Text(label)),
+        ],
+      ),
+    ),
+  );
 }

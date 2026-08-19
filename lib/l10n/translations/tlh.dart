@@ -1630,30 +1630,30 @@ const _dutchSourceAddTlh = <String, String>{
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'ghItlhpu\'vaD poH cherlu\'bogh ghajbe\'. leghlu\' \'ej ratlh.',
   'Tijdlijn · vervolg': 'poH tlhegh · \'op',
-  'Aflopend': 'tlh: Descending',
+  'Aflopend': 'ghIrjup',
   'De waarden in de volgordekolom staan niet oplopend.':
-      'tlh: The values ​​in the order column are not ascending.',
+      'ngoqvamDaq mI\'mey Dungjupbe\'.',
   'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
-      'tlh: This timeline is not yet complete. Adjust the table or show it as a normal table.',
+      'poH tlheghvam rInbe\'taH. romuS yIchoH pagh romuS motlh yI\'ang.',
   'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
-      'tlh: A timeline works with two or three columns. Adjust the table or show it as a normal table.',
-  'Huidige volgorde behouden': 'tlh: Keep current order',
+      'poH tlhegh lo\'lu\'meH cha\' pagh wej ngoqmey lo\'nIS. romuS yIchoH pagh romuS motlh yI\'ang.',
+  'Huidige volgorde behouden': 'pat DaH yIpol',
   'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
-      'tlh: Empty events remain visible. Check row:',
-  'Niet-herkende waarden': 'tlh: Unrecognized values',
-  'Oplopend': 'tlh: Ascending',
-  'Sorteren als…': 'tlh: Sort as…',
-  'Sorteren en tijdlijn maken': 'tlh: Sort and create timeline',
-  'Sorteren toepassen': 'tlh: Apply sorting',
-  'Tijdlijn maken': 'tlh: Create timeline',
-  'Tijdlijn maken?': 'tlh: Create a timeline?',
+      'wanI\'mey chIm luleghlu\'taH. row yInuD:',
+  'Niet-herkende waarden': 'De\' ngoQlu\'bogh',
+  'Oplopend': 'Dungjup',
+  'Sorteren als…': 'nuDmeH Segh…',
+  'Sorteren en tijdlijn maken': 'yInuD \'ej poH tlhegh yIchenmoH',
+  'Sorteren toepassen': 'nuD yIlo\'',
+  'Tijdlijn maken': 'poH tlhegh yIchenmoH',
+  'Tijdlijn maken?': 'poH tlhegh DachennIS\'a\'?',
   'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
-      'tlh: Add at least one event or show it as a regular table.',
-  'Waarden bekijken': 'tlh: View values',
-  'gebeurtenissen gevonden.': 'tlh: events found.',
-  'waarden herkend.': 'tlh: values ​​recognized.',
+      'wa\' wanI\' law\' yIchel pagh romuS motlh yI\'ang.',
+  'Waarden bekijken': 'De\' yIlegh',
+  'gebeurtenissen gevonden.': 'wanImey tu\'lu\'.',
+  'waarden herkend.': 'De\' luqellu\'.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
-      'tlh: values ​​not recognized. Those rows remain at the bottom in their current order.',
+      'De\' \'op ngoQlu\'. rowmey bIngDaq pat DaH luntaH.',
   'Als tabel weergeven': 'romuS \'ang',
   'Als tijdlijn weergeven': 'poH tlhegh \'ang',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1662,8 +1662,6 @@ const _dutchSourceAddTlh = <String, String>{
       'ngoqvamDaq De\' tu\'lu\'be\' \'e\' Dungjup ghap ghIrjup ghap yInuDmeH.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'romuSvam poH tlhegh mojlaHbe\' \'ej choHbe\'.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'De\' \'op ngoQlu\'. pat bIngDaq rowmey tlhejtaH; ngoQlu\'be\' tlhIngan Hol.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'poH tlhegh chenmeH cha\' pagh wej ngoqmey lo\'. romuSvam choHbe\'.',
   'Gebeurtenis': 'wanI\'',
@@ -1675,7 +1673,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Sorteren met aandachtspunten?': 'QubmeH ghajbogh yInuD\'a\'?',
   'Tijd': 'poH',
   'Tijdlijn bekijken': 'poH tlhegh legh',
-  'Toch sorteren': 'yInuDqa\'',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'wa\' wanI\' law\' yIchel. romuSvam choHbe\'.',
   'Voetnoot': 'bopwI\'',

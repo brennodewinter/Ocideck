@@ -1713,8 +1713,6 @@ const _dutchSourceAddPt = <String, String>{
       'Esta coluna ainda não contém nenhum valor que possa ser classificado desta forma.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Esta tabela ainda não pode ser exibida como uma linha do tempo e permanece inalterada.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Alguns dos valores não são reconhecidos. Essas linhas permanecem juntas na parte inferior; seu conteúdo não muda.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Uma linha do tempo funciona com duas ou três colunas. Esta tabela permanece inalterada.',
   'Gebeurtenis': 'Evento',
@@ -1726,7 +1724,6 @@ const _dutchSourceAddPt = <String, String>{
   'Sorteren met aandachtspunten?': 'Classificar por pontos de interesse?',
   'Tijd': 'Tempo',
   'Tijdlijn bekijken': 'Ver linha do tempo',
-  'Toch sorteren': 'Ainda classificando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Primeiro adicione pelo menos um evento. Esta tabela permanece inalterada.',
   'Voetnoot': 'Nota de rodapé',

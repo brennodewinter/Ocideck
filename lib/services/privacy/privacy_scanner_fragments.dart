@@ -1,15 +1,7 @@
 part of 'privacy_scanner.dart';
 
-/// Welke tekst de scanner langsloopt.
-///
-/// Apart bestand omdat `privacy_scanner.dart` tegen de regelratchet aan zit. De
-/// lijst is het antwoord op de belangrijkste vraag van dit onderdeel: wat níét
-/// gescand wordt, wordt ook niet geredigeerd — de projectie herschrijft immers
-/// alleen velden die een bevinding dragen. Ongescand is dus hetzelfde als
-/// ongelakt, en dat gaat mee de export in.
+/// Alle velden die de scanner en daarmee de redactie langsloopt.
 extension PrivacyScannerFragments on PrivacyScanner {
-  // ── Welke velden gescand worden ───────────────────────────────────────────
-
   /// De deckvelden die in de documentmetadata belanden (en dus meereizen in
   /// PDF-properties en PPTX-docProps, leesbaar, ook al staat er op geen enkele
   /// slide iets van te zien).
@@ -72,6 +64,7 @@ extension PrivacyScannerFragments on PrivacyScanner {
   /// preview, maar gaan als platte tekst mee in de PPTX-notitiepagina's. Het is
   /// in de praktijk het vuilste veld van allemaal.
   Iterable<_Fragment> _slideFragments(Slide slide) sync* {
+    final timelineContext = _timelineContextFor(slide);
     yield (field: 'title', index: 0, text: slide.title, context: '');
     yield (field: 'subtitle', index: 0, text: slide.subtitle, context: '');
     yield (
@@ -121,7 +114,7 @@ extension PrivacyScannerFragments on PrivacyScanner {
       field: 'customMarkdown',
       index: 0,
       text: slide.customMarkdown,
-      context: '',
+      context: timelineContext ?? '',
     );
     yield (field: 'notes', index: 0, text: slide.notes, context: '');
     yield* slideMarpPrivacyFragments(slide);
@@ -155,13 +148,13 @@ extension PrivacyScannerFragments on PrivacyScanner {
     for (var i = 0; i < slide.bullets2.length; i++) {
       yield (field: 'bullets2', index: i, text: slide.bullets2[i], context: '');
     }
-    // Tabelcellen krijgen een doorlopende index (rij * kolommen + kolom), zodat
-    // één int volstaat om de cel terug te vinden.
+    // Tabelcellen krijgen een doorlopende index (rij * kolommen + kolom).
     // Eén vaste staplengte over álle rijen. Met `row.length` per rij was de
     // afbeelding geen bijectie zodra een tabel ongelijke rijen had — een legale
     // markdown-tabel — en botsten twee cellen op dezelfde sleutel: de ene
     // redactie landde dan op de andere cel, of viel buiten zijn tekst en gooide
     // een RangeError bij het presenteren of exporteren.
+    if (timelineContext != null) return;
     final stride = slide.tableRows.fold<int>(
       0,
       (m, r) => r.length > m ? r.length : m,
@@ -183,3 +176,8 @@ extension PrivacyScannerFragments on PrivacyScanner {
     }
   }
 }
+
+_TimelineContextIndex? _timelineContextFor(Slide slide) =>
+    startsWithDocumentTimelineEnvelope(slide.customMarkdown)
+    ? _TimelineContextIndex.parse(slide.customMarkdown)
+    : null;

@@ -102,6 +102,10 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   late Set<int> _timelineContinuationBlocks =
       documentTimelineContinuationBlocks(widget.markdown);
 
+  /// Alle tijdlijnkaarten, inclusief de eerste. Nodig voor de uitzonderlijke
+  /// kaart die zelf hoger is dan één tekstvlak en dus intern moet doorlopen.
+  late Set<int> _timelineBlocks = documentTimelineBlocks(widget.markdown);
+
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
   /// en worden ze net als al het andere over de vellen verdeeld.
@@ -200,6 +204,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       _timelineContinuationBlocks = documentTimelineContinuationBlocks(
         widget.markdown,
       );
+      _timelineBlocks = documentTimelineBlocks(widget.markdown);
     }
   }
 
@@ -268,6 +273,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       blockHeights: heights,
       pageOffsets: offsets,
       continuationBlocks: _timelineContinuationBlocks,
+      continuableBlocks: _timelineBlocks,
     );
     return LayoutBuilder(
       builder: (context, constraints) {

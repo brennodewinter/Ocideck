@@ -1700,8 +1700,6 @@ const _dutchSourceAddLa = <String, String>{
       'Haec columna nondum continet aliquos valores qui hoc modo disponi possunt.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Haec mensa nondum pro tempore exponi potest et immutata permanet.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Aliqua bona non cognoscuntur. Ii ordines simul in imo manent; eorum contentus non mutat.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Tempus horarium duabus vel tribus columnis laborat. Haec mensa non mutatur.',
   'Gebeurtenis': 'Eventus',
@@ -1712,7 +1710,6 @@ const _dutchSourceAddLa = <String, String>{
   'Sorteren met aandachtspunten?': 'Digerere puncta interest?',
   'Tijd': 'Tempus',
   'Tijdlijn bekijken': 'Visum timeline',
-  'Toch sorteren': 'adhuc genus',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Prius adde unum saltem eventum. Haec mensa non mutatur.',
   'Voetnoot': 'Adnotatio',

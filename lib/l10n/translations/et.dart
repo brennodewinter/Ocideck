@@ -1678,8 +1678,6 @@ const _dutchSourceAddEt = <String, String>{
       'See veerg ei sisalda veel väärtusi, mida saaks sel viisil sorteerida.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Seda tabelit ei saa veel ajaskaalana kuvada ja see jääb muutumatuks.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Mõnda väärtust ei tunta ära. Need read jäävad allosas kokku; nende sisu ei muutu.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Ajaskaala töötab kahe või kolme veeruga. See tabel jääb muutumatuks.',
   'Gebeurtenis': 'Sündmus',
@@ -1690,7 +1688,6 @@ const _dutchSourceAddEt = <String, String>{
   'Sorteren met aandachtspunten?': 'Kas sortida huvipunktide järgi?',
   'Tijd': 'Aeg',
   'Tijdlijn bekijken': 'Kuva ajaskaala',
-  'Toch sorteren': 'Ikka sorteerimine',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Esmalt lisage vähemalt üks sündmus. See tabel jääb muutumatuks.',
   'Voetnoot': 'Allmärkus',

@@ -148,7 +148,7 @@ class DocumentMarkdownView extends StatelessWidget {
   /// in hetzelfde document blijven gewoon gerenderd.
   final TableEditController? tableEditController;
   final int tableEditOrdinal;
-  final void Function(int column, bool? ascending)? onSortTableColumn;
+  final void Function(int column, TableSortIntent intent)? onSortTableColumn;
 
   /// Tekent een `---` niet als streep.
   ///
@@ -809,6 +809,17 @@ Set<int> documentTimelineContinuationBlocks(String markdown) {
   return {
     for (var i = 0; i < blocks.length; i++)
       if (blocks[i].kind == _Kind.timeline && !blocks[i].timelineFirst) i,
+  };
+}
+
+/// Alle tijdlijngebeurtenissen, met dezelfde blokindexen als
+/// [DocumentMarkdownView.blockTexts]. Hiermee kan Pagina's ook een enkele kaart
+/// herkennen die door haar eigen hoogte onvermijdelijk over meer vellen loopt.
+Set<int> documentTimelineBlocks(String markdown) {
+  final blocks = DocumentMarkdownView._parse(markdown);
+  return {
+    for (var i = 0; i < blocks.length; i++)
+      if (blocks[i].kind == _Kind.timeline) i,
   };
 }
 

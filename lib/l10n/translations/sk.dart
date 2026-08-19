@@ -1691,8 +1691,6 @@ const _dutchSourceAddSk = <String, String>{
       'Tento stĺpec zatiaľ neobsahuje žiadne hodnoty, ktoré je možné týmto spôsobom zoradiť.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Táto tabuľka sa zatiaľ nedá zobraziť ako časová os a zostáva nezmenená.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Niektoré hodnoty nie sú rozpoznané. Tieto riadky zostávajú spolu v spodnej časti; ich obsah sa nemení.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Časová os pracuje s dvoma alebo tromi stĺpcami. Táto tabuľka zostáva nezmenená.',
   'Gebeurtenis': 'Udalosť',
@@ -1703,7 +1701,6 @@ const _dutchSourceAddSk = <String, String>{
   'Sorteren met aandachtspunten?': 'Zoradiť podľa bodov záujmu?',
   'Tijd': 'Čas',
   'Tijdlijn bekijken': 'Zobraziť časovú os',
-  'Toch sorteren': 'Stále triedim',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najprv pridajte aspoň jednu udalosť. Táto tabuľka zostáva nezmenená.',
   'Voetnoot': 'Poznámka pod čiarou',

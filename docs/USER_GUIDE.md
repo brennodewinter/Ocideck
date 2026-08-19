@@ -4349,10 +4349,15 @@ chosen reading leaves values unrecognised, it first explains that those rows
 stay together at the bottom in their original order. Select **Waarden bekijken**
 to see their row numbers and literal values, **Sorteren toepassen** to continue,
 or **Annuleren** to leave the table alone. Sorting moves whole source rows and
-does not rewrite their cell contents.
+does not rewrite their cell contents. With the caret in a cell, keyboard users
+can sort the active column with `Alt+Shift+↑` or `Alt+Shift+↓`, and open
+**Sorteren als…** with `Alt+Shift+S`.
 
 **Invoegen → Tijdlijn** opens the normal table editor with `Tijd`,
 `Gebeurtenis` and `Status`; nothing is inserted until you choose **Toepassen**.
+If every event cell is still empty, OciDeck leaves the document unchanged and
+returns to the same editor with the entered marker/status values intact, asking
+for at least one event instead of inserting an empty card.
 A table with two or three columns also offers **Als tijdlijn weergeven**. This
 is an explicit choice: a table is never promoted because its headers happen to
 say “time” or “event”. Before creating it, OciDeck previews the first column as
@@ -4367,7 +4372,10 @@ stays visually editable and explains the issue. **Als tabel weergeven** removes
 the marker and keeps the table contents. In **Pagina's**, a new sheet that
 starts with a following timeline event restarts its rail and marks the
 continuation in the top margin as **Tijdlijn · vervolg** (translated with the
-interface).
+interface). A card normally moves in full to the next sheet. Only a card that
+is itself taller than the available page area is continued over more sheets;
+each of those sheets gets the same continuation label so no content is hidden
+or made artificially smaller.
 
 On disk the timeline is still an ordinary GFM table with one HTML comment
 directly above it. Remove that comment and every Markdown reader simply sees the

@@ -1697,8 +1697,6 @@ const _dutchSourceAddPl = <String, String>{
       'Ta kolumna nie zawiera jeszcze żadnych wartości, które można w ten sposób posortować.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ta tabela nie może być jeszcze wyświetlana jako oś czasu i pozostaje niezmieniona.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Niektóre wartości nie są rozpoznawane. Te rzędy pozostają razem na dole; ich treść się nie zmienia.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Oś czasu działa z dwiema lub trzema kolumnami. Tabela ta pozostaje niezmieniona.',
   'Gebeurtenis': 'Wydarzenie',
@@ -1709,7 +1707,6 @@ const _dutchSourceAddPl = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortować według punktów szczególnych?',
   'Tijd': 'Czas',
   'Tijdlijn bekijken': 'Zobacz oś czasu',
-  'Toch sorteren': 'Nadal sortuję',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najpierw dodaj co najmniej jedno wydarzenie. Tabela ta pozostaje niezmieniona.',
   'Voetnoot': 'Przypis',

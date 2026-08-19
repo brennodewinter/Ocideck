@@ -709,8 +709,6 @@ const _dutchSourceAddPap = {
       'E kolumna aki no ta kontené ningun balor ainda ku por wòrdu ordená di e manera aki.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'E tabel aki no por wòrdu mustra ainda komo un liña di tempu i ta keda meskos.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Algun di e balornan no ta wòrdu rekonosé. E filanan ei ta keda huntu na parti abou; nan kontenido no ta kambia.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Un liña di tempu ta traha ku dos òf tres kolumna. E tabel aki ta keda meskos.',
   'Gebeurtenis': 'Evento',
@@ -721,7 +719,6 @@ const _dutchSourceAddPap = {
   'Sorteren met aandachtspunten?': 'Sorteá pa puntonan di interes?',
   'Tijd': 'Ora',
   'Tijdlijn bekijken': 'Wak e liña di tempu',
-  'Toch sorteren': 'Ainda ta sorteando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Promé agregá por lo ménos un evento. E tabel aki ta keda meskos.',
   'Voetnoot': 'Nota na pia di página',

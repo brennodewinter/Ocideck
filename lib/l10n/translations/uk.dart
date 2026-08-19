@@ -1701,8 +1701,6 @@ const _dutchSourceAddUk = <String, String>{
       'Цей стовпець ще не містить жодних значень, які можна відсортувати таким чином.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Цю таблицю ще не можна відобразити як часову шкалу, і вона залишається незмінною.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Деякі значення не розпізнаються. Ці ряди залишаються разом внизу; їх зміст не змінюється.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Шкала часу працює з двома або трьома стовпцями. Ця таблиця залишається без змін.',
   'Gebeurtenis': 'Подія',
@@ -1713,7 +1711,6 @@ const _dutchSourceAddUk = <String, String>{
   'Sorteren met aandachtspunten?': 'Сортувати за цікавими місцями?',
   'Tijd': 'час',
   'Tijdlijn bekijken': 'Переглянути часову шкалу',
-  'Toch sorteren': 'Ще сортую',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Спочатку додайте хоча б одну подію. Ця таблиця залишається без змін.',
   'Voetnoot': 'Виноска',

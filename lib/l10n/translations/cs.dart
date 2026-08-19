@@ -1687,8 +1687,6 @@ const _dutchSourceAddCs = <String, String>{
       'Tento sloupec zatím neobsahuje žádné hodnoty, které lze tímto způsobem seřadit.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Tuto tabulku zatím nelze zobrazit jako časovou osu a zůstává nezměněna.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Některé hodnoty nejsou rozpoznány. Tyto řádky zůstávají dole pohromadě; jejich obsah se nemění.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Časová osa pracuje se dvěma nebo třemi sloupci. Tato tabulka zůstává nezměněna.',
   'Gebeurtenis': 'Událost',
@@ -1699,7 +1697,6 @@ const _dutchSourceAddCs = <String, String>{
   'Sorteren met aandachtspunten?': 'Seřadit podle bodů zájmu?',
   'Tijd': 'Čas',
   'Tijdlijn bekijken': 'Zobrazit časovou osu',
-  'Toch sorteren': 'Pořád se třídí',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Nejprve přidejte alespoň jednu událost. Tato tabulka zůstává nezměněna.',
   'Voetnoot': 'Poznámka pod čarou',
