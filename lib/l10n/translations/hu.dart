@@ -5,7 +5,7 @@ const _stringsHu = {
   'newPresentation': 'Új bemutató',
   'open': 'Megnyitás...',
   'openEllipsis': 'Megnyitás…',
-  'recentPresentations': 'Legutóbbi bemutatók',
+  'recentFiles': 'Legutóbbi fájlok',
   'newTab': 'Új lap',
   'imageLibrary': 'Képtár',
   'presentFullscreen': 'Bemutatás (teljes képernyő) · P az előadói nézethez',

@@ -5,7 +5,7 @@ const _stringsHr = {
   'newPresentation': 'Nova prezentacija',
   'open': 'Otvori...',
   'openEllipsis': 'Otvori…',
-  'recentPresentations': 'Nedavne prezentacije',
+  'recentFiles': 'Nedavne datoteke',
   'newTab': 'Nova kartica',
   'imageLibrary': 'Biblioteka slika',
   'presentFullscreen': 'Prezentiraj (cijeli zaslon) · P za prikaz voditelja',

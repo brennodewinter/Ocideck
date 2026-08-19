@@ -5,7 +5,7 @@ const _stringsGsw = {
   'newPresentation': 'Nöi Präsentation',
   'open': 'Öffne...',
   'openEllipsis': 'Öffne…',
-  'recentPresentations': 'Letschti Präsentatione',
+  'recentFiles': 'Letschti Dateie',
   'newTab': 'Nöie Tab',
   'imageLibrary': 'Bildbibliothek',
   'presentFullscreen': 'Presentiere (Vollbild) · P für d Presenter-Ansicht',

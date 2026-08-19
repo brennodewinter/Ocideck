@@ -5,7 +5,7 @@ const _stringsBg = {
   'newPresentation': 'Нова презентация',
   'open': 'Отваряне...',
   'openEllipsis': 'Отваряне…',
-  'recentPresentations': 'Скорошни презентации',
+  'recentFiles': 'Скорошни файлове',
   'newTab': 'Нов раздел',
   'imageLibrary': 'Библиотека с изображения',
   'presentFullscreen': 'Презентиране (цял екран) · P за изглед на водещия',

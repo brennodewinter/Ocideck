@@ -5,7 +5,7 @@ const _stringsUk = {
   'newPresentation': 'Нова презентація',
   'open': 'Відкрити...',
   'openEllipsis': 'Відкрити…',
-  'recentPresentations': 'Нещодавні презентації',
+  'recentFiles': 'Останні файли',
   'newTab': 'Нова вкладка',
   'imageLibrary': 'Бібліотека зображень',
   'presentFullscreen':

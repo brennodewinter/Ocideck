@@ -5,7 +5,7 @@ const _stringsPap = {
   'newPresentation': 'Presentashon nobo',
   'open': 'Habri...',
   'openEllipsis': 'Habri…',
-  'recentPresentations': 'Presentashonnan resien',
+  'recentFiles': 'Archivonan resien',
   'newTab': 'Tab nobo',
   'imageLibrary': 'Biblioteka di imágen',
   'presentFullscreen': 'Presentá na pantalla kompletu · P pa presenter view',

@@ -5,7 +5,7 @@ const _stringsTlh = {
   'newPresentation': 'cha\'nav chu\'',
   'open': 'poSmoH...',
   'openEllipsis': 'poSmoH…',
-  'recentPresentations': 'cha\'navmey ramwI\'',
+  'recentFiles': 'ghItlhmey chu\'',
   'newTab': 'per chu\'',
   'imageLibrary': 'mIllogh pa\'',
   'presentFullscreen': '\'ang (jIH naQ) · presenter view \'oH P',

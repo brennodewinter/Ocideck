@@ -5,7 +5,7 @@ const _stringsPt = {
   'newPresentation': 'Nova apresentação',
   'open': 'Abrir...',
   'openEllipsis': 'Abrir…',
-  'recentPresentations': 'Apresentações recentes',
+  'recentFiles': 'Ficheiros recentes',
   'newTab': 'Novo separador',
   'imageLibrary': 'Biblioteca de imagens',
   'presentFullscreen':

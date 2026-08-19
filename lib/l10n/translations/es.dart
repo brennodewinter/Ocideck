@@ -5,7 +5,7 @@ const _stringsEs = {
   'newPresentation': 'Nueva presentación',
   'open': 'Abrir...',
   'openEllipsis': 'Abrir…',
-  'recentPresentations': 'Presentaciones recientes',
+  'recentFiles': 'Archivos recientes',
   'newTab': 'Nueva pestaña',
   'imageLibrary': 'Biblioteca de imágenes',
   'presentFullscreen':

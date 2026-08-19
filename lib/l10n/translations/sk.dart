@@ -5,7 +5,7 @@ const _stringsSk = {
   'newPresentation': 'Nová prezentácia',
   'open': 'Otvoriť...',
   'openEllipsis': 'Otvoriť…',
-  'recentPresentations': 'Nedávne prezentácie',
+  'recentFiles': 'Nedávne súbory',
   'newTab': 'Nová karta',
   'imageLibrary': 'Knižnica obrázkov',
   'presentFullscreen':

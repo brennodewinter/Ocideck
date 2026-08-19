@@ -5,7 +5,7 @@ const _stringsGa = {
   'newPresentation': 'Láithreoireacht nua',
   'open': 'Oscail...',
   'openEllipsis': 'Oscail…',
-  'recentPresentations': 'Láithreoireachtaí le déanaí',
+  'recentFiles': 'Comhaid le déanaí',
   'newTab': 'Cluaisín nua',
   'imageLibrary': 'Leabharlann íomhánna',
   'presentFullscreen': 'Cuir i láthair (lánscáileán) · P don amharc láithreora',

@@ -5,7 +5,7 @@ const _stringsLv = {
   'newPresentation': 'Jauna prezentācija',
   'open': 'Atvērt...',
   'openEllipsis': 'Atvērt…',
-  'recentPresentations': 'Nesenās prezentācijas',
+  'recentFiles': 'Nesenie faili',
   'newTab': 'Jauna cilne',
   'imageLibrary': 'Attēlu bibliotēka',
   'presentFullscreen': 'Rādīt (pilnekrāns) · P prezentētāja skatam',

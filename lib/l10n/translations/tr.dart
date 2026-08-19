@@ -5,7 +5,7 @@ const _stringsTr = {
   'newPresentation': 'Yeni sunum',
   'open': 'Aç...',
   'openEllipsis': 'Aç…',
-  'recentPresentations': 'Son sunumlar',
+  'recentFiles': 'Son dosyalar',
   'newTab': 'Yeni sekme',
   'imageLibrary': 'Görsel kitaplığı',
   'presentFullscreen': 'Sunum yap (tam ekran) · sunucu görünümü için P',

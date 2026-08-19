@@ -5,7 +5,7 @@ const _stringsRo = {
   'newPresentation': 'Prezentare nouă',
   'open': 'Deschide...',
   'openEllipsis': 'Deschide…',
-  'recentPresentations': 'Prezentări recente',
+  'recentFiles': 'Fișiere recente',
   'newTab': 'Filă nouă',
   'imageLibrary': 'Bibliotecă de imagini',
   'presentFullscreen':

@@ -124,6 +124,28 @@ void main() {
     expect(find.text('Documenten (1)'), findsOneWidget);
   });
 
+  testWidgets('a list of one kind carries no kind labels', (tester) async {
+    // Alleen presentaties: dan zegt "Presentatie" achter élke regel niets meer,
+    // en de telling boven de lijst zegt het al.
+    File('${dir.path}/verslag.md').deleteSync();
+    final service = _fileService(dir.path);
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: service,
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+        ),
+      ),
+    );
+
+    await _openAndScan(tester);
+
+    expect(find.text('Demo'), findsOneWidget);
+    expect(find.text('Presentatie'), findsNothing);
+    expect(find.text('Documenten (0)'), findsOneWidget);
+  });
+
   testWidgets('the kind filter narrows the list to one sort', (tester) async {
     final service = _fileService(dir.path);
     await tester.pumpWidget(

@@ -329,7 +329,14 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
             const SizedBox(height: 8),
             Expanded(
               child: _withPreview(
-                (previewShown) => _body(visible, previewShown),
+                // Het soortlabel per rij alleen wanneer er écht twee soorten
+                // gevonden zijn: in een lijst waarin alles een presentatie is,
+                // zegt "Presentatie" bij elke regel niets meer.
+                (previewShown) => _body(
+                  visible,
+                  previewShown,
+                  documents > 0 && documents < found.length,
+                ),
               ),
             ),
             Align(alignment: Alignment.centerRight, child: handle),
@@ -412,6 +419,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   Widget _body(
     List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible,
     bool previewShown,
+    bool showKind,
   ) {
     final l10n = context.l10n;
     if (_loading) {
@@ -450,6 +458,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           // Toon de bibliotheeknaam alleen als er meerdere in beeld zijn.
           rootName: _roots.length > 1 ? (root?.name ?? '') : '',
           hits: hits,
+          showKind: showKind,
           showPreview: previewShown,
           onPreview: (path) => setState(() => _previewPath = path),
           onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
@@ -499,6 +508,9 @@ class _FileRow extends StatelessWidget {
   /// één wortel in beeld is (dan voegt de naam niets toe).
   final String rootName;
   final List<_Hit> hits;
+
+  /// Of het soortlabel achter de titel staat; zie de aanroeper.
+  final bool showKind;
   final bool showPreview;
   final ValueChanged<String> onPreview;
   final ValueChanged<String> onOpen;
@@ -509,6 +521,7 @@ class _FileRow extends StatelessWidget {
     required this.scanRoot,
     required this.rootName,
     required this.hits,
+    required this.showKind,
     required this.showPreview,
     required this.onPreview,
     required this.onOpen,
@@ -582,8 +595,10 @@ class _FileRow extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            const SizedBox(width: 6),
-            MarkdownKindBadge(kind: file.kind),
+            if (showKind) ...[
+              const SizedBox(width: 6),
+              MarkdownKindBadge(kind: file.kind),
+            ],
             if (info.hasIdenticalCopies) ...[
               const SizedBox(width: 6),
               IdenticalCopiesChip(

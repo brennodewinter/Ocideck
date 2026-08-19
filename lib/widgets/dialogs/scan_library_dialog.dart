@@ -175,7 +175,13 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
             const SizedBox(height: 8),
             Expanded(
               child: _withPreview(
-                (previewShown) => _body(visible, previewShown),
+                // Zie [OpenPresentationDialog]: het soortlabel hoort bij een
+                // gemengde lijst, niet bij een lijst met één soort erin.
+                (previewShown) => _body(
+                  visible,
+                  previewShown,
+                  documents > 0 && documents < found.length,
+                ),
               ),
             ),
             Align(alignment: Alignment.centerRight, child: handle),
@@ -244,7 +250,11 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     );
   }
 
-  Widget _body(List<DuplicateInfo<ScanHit>> visible, bool previewShown) {
+  Widget _body(
+    List<DuplicateInfo<ScanHit>> visible,
+    bool previewShown,
+    bool showKind,
+  ) {
     final l10n = context.l10n;
     if (_scanning && _hits.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -269,6 +279,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       itemBuilder: (_, i) => _HitRow(
         info: visible[i],
         homeDir: widget.homeDir,
+        showKind: showKind,
         showPreview: previewShown,
         onPreview: (path) => setState(() => _previewPath = path),
         onOpen: (path) => Navigator.pop(context, path),
@@ -325,6 +336,9 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
 class _HitRow extends StatelessWidget {
   final DuplicateInfo<ScanHit> info;
   final String? homeDir;
+
+  /// Of het soortlabel achter de titel staat; zie de aanroeper.
+  final bool showKind;
   final bool showPreview;
   final ValueChanged<String> onPreview;
   final ValueChanged<String> onOpen;
@@ -332,6 +346,7 @@ class _HitRow extends StatelessWidget {
   const _HitRow({
     required this.info,
     required this.homeDir,
+    required this.showKind,
     required this.showPreview,
     required this.onPreview,
     required this.onOpen,
@@ -368,8 +383,10 @@ class _HitRow extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      MarkdownKindBadge(kind: hit.kind),
+                      if (showKind) ...[
+                        const SizedBox(width: 8),
+                        MarkdownKindBadge(kind: hit.kind),
+                      ],
                       // Het thema is een Marp-eigenschap; bij een document zou
                       // "Geen thema" een gemis suggereren dat er niet is.
                       if (hit.kind.isPresentation) ...[

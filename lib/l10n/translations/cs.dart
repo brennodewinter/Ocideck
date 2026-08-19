@@ -5,7 +5,7 @@ const _stringsCs = {
   'newPresentation': 'Nová prezentace',
   'open': 'Otevřít...',
   'openEllipsis': 'Otevřít…',
-  'recentPresentations': 'Nedávné prezentace',
+  'recentFiles': 'Nedávné soubory',
   'newTab': 'Nová karta',
   'imageLibrary': 'Knihovna obrázků',
   'presentFullscreen':

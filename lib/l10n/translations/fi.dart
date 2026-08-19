@@ -5,7 +5,7 @@ const _stringsFi = {
   'newPresentation': 'Uusi esitys',
   'open': 'Avaa...',
   'openEllipsis': 'Avaa…',
-  'recentPresentations': 'Viimeisimmät esitykset',
+  'recentFiles': 'Viimeisimmät tiedostot',
   'newTab': 'Uusi välilehti',
   'imageLibrary': 'Kuvakirjasto',
   'presentFullscreen': 'Esitä koko näytöllä · P avaa esittäjänäkymän',

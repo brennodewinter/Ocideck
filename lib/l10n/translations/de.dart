@@ -5,7 +5,7 @@ const _stringsDe = {
   'newPresentation': 'Neue Präsentation',
   'open': 'Öffnen...',
   'openEllipsis': 'Öffnen…',
-  'recentPresentations': 'Zuletzt verwendete Präsentationen',
+  'recentFiles': 'Zuletzt geöffnete Dateien',
   'newTab': 'Neuer Tab',
   'imageLibrary': 'Bildbibliothek',
   'presentFullscreen': 'Vollbild präsentieren · P für Presenter-Ansicht',

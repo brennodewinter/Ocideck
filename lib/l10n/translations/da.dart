@@ -5,7 +5,7 @@ const _stringsDa = {
   'newPresentation': 'Ny præsentation',
   'open': 'Åbn...',
   'openEllipsis': 'Åbn…',
-  'recentPresentations': 'Seneste præsentationer',
+  'recentFiles': 'Seneste filer',
   'newTab': 'Ny fane',
   'imageLibrary': 'Billedbibliotek',
   'presentFullscreen': 'Præsentér (fuld skærm) · P for præsentervisning',

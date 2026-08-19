@@ -1636,7 +1636,10 @@ that before deciding whether this alpha fits what you are doing.
   documenten zijn. Een document zonder titel heet naar zijn eerste kop, want
   `verslag-def-2.md` zegt niets. Ook de recente-lijst op het welkomstscherm toont
   nu de soort; die kende hem allang (`RecentFile.kind`) maar tekende alles als
-  presentatie. Een document komt alléén in de lijst als het door dezelfde
+  presentatie — en heet nu "Recente bestanden", want daar stonden allang
+  documenten tussen. Het soortlabel verschijnt alleen in een lijst waarin
+  werkelijk twee soorten staan: is alles een presentatie, dan zegt "Presentatie"
+  achter elke regel niets meer. Een document komt alléén in de lijst als het door dezelfde
   fail-closed poort komt als het openen: "geen presentatie" is een document,
   maar uitvoerbare inhoud, kapot of onleesbaar blijft een weigering — wat je niet
   mag openen, hoor je ook niet aangeboden te krijgen. Daarnaast is er de

@@ -5,7 +5,7 @@ const _stringsEl = {
   'newPresentation': 'Νέα παρουσίαση',
   'open': 'Άνοιγμα...',
   'openEllipsis': 'Άνοιγμα…',
-  'recentPresentations': 'Πρόσφατες παρουσιάσεις',
+  'recentFiles': 'Πρόσφατα αρχεία',
   'newTab': 'Νέα καρτέλα',
   'imageLibrary': 'Βιβλιοθήκη εικόνων',
   'presentFullscreen': 'Παρουσίαση (πλήρης οθόνη) · P για προβολή παρουσιαστή',

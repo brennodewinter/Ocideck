@@ -5,7 +5,7 @@ const _stringsSv = {
   'newPresentation': 'Ny presentation',
   'open': 'Öppna...',
   'openEllipsis': 'Öppna…',
-  'recentPresentations': 'Senaste presentationer',
+  'recentFiles': 'Senaste filer',
   'newTab': 'Ny flik',
   'imageLibrary': 'Bildbibliotek',
   'presentFullscreen': 'Presentera (helskärm) · P för presentatörsvy',

@@ -5,7 +5,7 @@ const _stringsFy = {
   'newPresentation': 'Nije presintaasje',
   'open': 'Iepenje...',
   'openEllipsis': 'Iepenje…',
-  'recentPresentations': 'Resinte presintaasjes',
+  'recentFiles': 'Resinte bestannen',
   'newTab': 'Nij ljepblêd',
   'imageLibrary': 'Ofbyldingsbibleteek',
   'presentFullscreen': 'Presintearje folslein skerm · P foar presenter view',

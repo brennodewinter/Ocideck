@@ -5,7 +5,7 @@ const _stringsFr = {
   'newPresentation': 'Nouvelle présentation',
   'open': 'Ouvrir...',
   'openEllipsis': 'Ouvrir…',
-  'recentPresentations': 'Présentations récentes',
+  'recentFiles': 'Fichiers récents',
   'newTab': 'Nouvel onglet',
   'imageLibrary': 'Bibliothèque d’images',
   'presentFullscreen': 'Présenter en plein écran · P pour la vue présentateur',

@@ -5,7 +5,7 @@ const _stringsSl = {
   'newPresentation': 'Nova predstavitev',
   'open': 'Odpri ...',
   'openEllipsis': 'Odpri …',
-  'recentPresentations': 'Nedavne predstavitve',
+  'recentFiles': 'Nedavne datoteke',
   'newTab': 'Nov zavihek',
   'imageLibrary': 'Knjižnica slik',
   'presentFullscreen': 'Predstavi (celozaslonsko) · P za predstavitveni pogled',

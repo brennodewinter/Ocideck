@@ -5,7 +5,7 @@ const _stringsIt = {
   'newPresentation': 'Nuova presentazione',
   'open': 'Apri...',
   'openEllipsis': 'Apri…',
-  'recentPresentations': 'Presentazioni recenti',
+  'recentFiles': 'File recenti',
   'newTab': 'Nuova scheda',
   'imageLibrary': 'Libreria immagini',
   'presentFullscreen': 'Presenta a schermo intero · P per vista relatore',

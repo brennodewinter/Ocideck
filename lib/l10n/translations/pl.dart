@@ -5,7 +5,7 @@ const _stringsPl = {
   'newPresentation': 'Nowa prezentacja',
   'open': 'Otwórz...',
   'openEllipsis': 'Otwórz…',
-  'recentPresentations': 'Ostatnie prezentacje',
+  'recentFiles': 'Ostatnie pliki',
   'newTab': 'Nowa karta',
   'imageLibrary': 'Biblioteka obrazów',
   'presentFullscreen': 'Prezentuj na pełnym ekranie · P dla widoku prezentera',

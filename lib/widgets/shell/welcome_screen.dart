@@ -467,7 +467,7 @@ class _WelcomeScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
             child: Text(
-              l10n.t('recentPresentations'),
+              l10n.t('recentFiles'),
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,

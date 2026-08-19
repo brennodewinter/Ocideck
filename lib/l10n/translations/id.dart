@@ -5,7 +5,7 @@ const _stringsId = {
   'newPresentation': 'Presentasi baru',
   'open': 'Buka...',
   'openEllipsis': 'Buka…',
-  'recentPresentations': 'Presentasi terkini',
+  'recentFiles': 'Berkas terbaru',
   'newTab': 'Tab baru',
   'imageLibrary': 'Pustaka gambar',
   'presentFullscreen': 'Presentasikan (layar penuh) · P untuk tampilan penyaji',

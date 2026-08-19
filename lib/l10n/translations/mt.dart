@@ -5,7 +5,7 @@ const _stringsMt = {
   'newPresentation': 'Preżentazzjoni ġdida',
   'open': 'Iftaħ...',
   'openEllipsis': 'Iftaħ…',
-  'recentPresentations': 'Preżentazzjonijiet reċenti',
+  'recentFiles': 'Fajls reċenti',
   'newTab': 'Tab ġdida',
   'imageLibrary': 'Librerija tal-immaġni',
   'presentFullscreen':

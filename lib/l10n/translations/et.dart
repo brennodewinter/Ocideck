@@ -5,7 +5,7 @@ const _stringsEt = {
   'newPresentation': 'Uus esitlus',
   'open': 'Ava...',
   'openEllipsis': 'Ava…',
-  'recentPresentations': 'Hiljutised esitlused',
+  'recentFiles': 'Hiljutised failid',
   'newTab': 'Uus vahekaart',
   'imageLibrary': 'Pildikogu',
   'presentFullscreen': 'Esitle (täisekraan) · P esitlejavaate jaoks',

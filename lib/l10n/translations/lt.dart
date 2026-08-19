@@ -5,7 +5,7 @@ const _stringsLt = {
   'newPresentation': 'Nauja prezentacija',
   'open': 'Atverti...',
   'openEllipsis': 'Atverti…',
-  'recentPresentations': 'Naujausios prezentacijos',
+  'recentFiles': 'Paskutiniai failai',
   'newTab': 'Naujas skirtukas',
   'imageLibrary': 'Paveikslėlių biblioteka',
   'presentFullscreen': 'Pristatyti (visas ekranas) · P – pranešėjo rodinys',

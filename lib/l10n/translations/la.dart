@@ -5,7 +5,7 @@ const _stringsLa = {
   'newPresentation': 'Nova praesentatio',
   'open': 'Aperire...',
   'openEllipsis': 'Aperire…',
-  'recentPresentations': 'Praesentationes recentes',
+  'recentFiles': 'Fasciculi recentes',
   'newTab': 'Nova scida',
   'imageLibrary': 'Bibliotheca imaginum',
   'presentFullscreen':
