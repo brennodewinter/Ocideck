@@ -6,6 +6,7 @@ import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_readiness.dart';
+import 'package:ocideck/utils/document_front_matter.dart';
 
 /// De documentatie schrijft een paar tellingen en opsommingen uit die nergens
 /// uit de code worden afgeleid. Die verrotten stil: het actie-slidetype werd
@@ -168,6 +169,55 @@ void main() {
         doc,
         contains('`${type.name}`'),
         reason: 'grafiektype ${type.name} staat niet in FILE_FORMAT.md',
+      );
+    }
+  });
+
+  /// §3.2 belooft de velden van het stijlprofiel uit te schrijven, en §3.3 zegt
+  /// dat een `.ocideckstyle` "exactly the §3.2 field set" draagt. Tien velden
+  /// (de drie `checklist…`- en zeven `table…`-velden) stonden er jarenlang niet
+  /// in: ze kwamen met een functie mee en niemand liep de tabel na. Een lezer
+  /// die de tabel als volledig leest, mist dan precies wat er nieuw is.
+  ///
+  /// Dart kent geen reflectie, dus de velden komen uit de bron van het model.
+  test('FILE_FORMAT noemt elk veld van het stijlprofiel', () {
+    final source = read('lib/models/settings.dart');
+    final start = source.indexOf('class ThemeProfile {');
+    expect(start, greaterThan(-1), reason: 'ThemeProfile niet gevonden');
+    final end = source.indexOf('const ThemeProfile(', start);
+    expect(end, greaterThan(start), reason: 'constructor niet gevonden');
+    final fields = RegExp(
+      r'^\s*final\s+[\w<>?,\s]+?\s+(\w+);\s*$',
+      multiLine: true,
+    ).allMatches(source.substring(start, end)).map((m) => m.group(1)!).toList();
+    expect(
+      fields.length,
+      greaterThan(30),
+      reason: 'de velden zijn niet gelezen',
+    );
+
+    final doc = read('docs/FILE_FORMAT.md');
+    for (final field in fields) {
+      expect(
+        doc,
+        contains('`$field`'),
+        reason: 'stijlprofiel-veld $field staat niet in FILE_FORMAT.md §3.2',
+      );
+    }
+  });
+
+  /// Het register van front-matter-sleutels die het documentpad zelf schrijft
+  /// (§14.1 belooft: geen eigen dialect, elke sleutel voert een ander
+  /// gereedschap uit). Een sleutel erbij zonder een woord in het
+  /// bestandsformaat is precies hoe `reference-location:` er ongemerkt in
+  /// kwam terwijl §14.5 nog "exactly three keys" beloofde.
+  test('FILE_FORMAT noemt elke sleutel die het documentpad schrijft', () {
+    final doc = read('docs/FILE_FORMAT.md');
+    for (final key in kDocumentOwnedKeys) {
+      expect(
+        doc,
+        contains('`$key'),
+        reason: 'front-matter-sleutel $key staat niet in FILE_FORMAT.md §14',
       );
     }
   });
