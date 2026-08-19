@@ -186,7 +186,10 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart': 1043,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
-  'lib/state/settings_provider.dart': 1073,
+  // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
+  // openen". Eén zetter met zijn dartdoc; er valt niets uit te halen dat hem
+  // kleiner maakt.
+  'lib/state/settings_provider.dart': 1076,
   // +31 (#1240): LibrePlan-connector — form-velden, init, dispose, save, import-
   // dialoog-import in de settings_dialog library-head.
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
@@ -237,7 +240,12 @@ const Map<String, int> classSizeBaseline = {
       // `_checklistTableColorSettings`: met de zes stijlvelden erbij liep dat
       // ene blok over de methodelengte-grens, dus staan de tabelkleuren nu in
       // een eigen `_tableColorSettings` — twee onderwerpen, twee methodes.
-      6201,
+      // +29: de sectie "Openen" op het Opslag-tabblad met de schakelaar
+      // "Voorbeeld tonen bij openen" (`_openPreviewSection`). Hij hoort bij de
+      // andere secties van dat tabblad en leest als zij; hem als enige buiten de
+      // klasse zetten zou de sectie-opbouw daar inconsistent maken voor drie
+      // regels winst.
+      6230,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -271,7 +279,11 @@ const Map<String, int> classSizeBaseline = {
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen
   // — onherleidbaar aan dit chokepoint-bestand.
-  'lib/services/file_service.dart#FileService': 2742,
+  // −12: de mapwandeling van `scanMarkdownFiles` ging naar de top-level
+  // `walkMarkdownFiles` in de part `file/file_service_scan.dart` — hij raakt
+  // geen veld van deze klasse aan. Netto krimpt de klasse ondanks dat diezelfde
+  // scan er de documentkant bij kreeg.
+  'lib/services/file_service.dart#FileService': 2730,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
@@ -337,7 +349,10 @@ const Map<String, int> classSizeBaseline = {
   'lib/state/settings_provider.dart#SettingsNotifier':
       // +13 (#1500): setDocumentEditorMaxWidth, setDocumentPageSize en
       // setDocumentPageMargins — drie zetters voor de documentmodus-instellingen.
-      1398,
+      // +3: `setShowOpenPreview`, de zetter van "Voorbeeld tonen bij openen".
+      // Een zetter móét de state van deze notifier aanraken, dus top-level
+      // halen zou hem alleen omslachtiger maken, niet kleiner.
+      1401,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen

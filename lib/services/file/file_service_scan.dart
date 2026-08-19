@@ -18,6 +18,88 @@ class _ScanFileOutcome {
   final bool stop;
 }
 
+/// De mapwandeling achter [FileService.scanMarkdownFiles]: loopt [directory]
+/// recursief af en leest elk bewerkbaar tekstbestand in.
+///
+/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
+/// aan (alles loopt via [service]), en de klasse zit tegen haar plafond.
+Future<List<ScannedMarkdown>> walkMarkdownFiles(
+  FileService service,
+  String directory, {
+  String? excludePath,
+  bool includeDocuments = true,
+  int maxDepth = 32,
+  int maxFilesVisited = 5000,
+  int maxScanBytes = 256 * 1024 * 1024,
+}) async {
+  final root = Directory(directory);
+  if (!await root.exists()) return [];
+
+  final results = <ScannedMarkdown>[];
+  var visited = 0;
+  var scannedBytes = 0;
+  var capped = false;
+  Future<void> walk(Directory dir, int depth) async {
+    if (capped) return;
+    List<FileSystemEntity> entries;
+    try {
+      entries = await dir.list(followLinks: false).toList();
+    } catch (e) {
+      logWarning('FileService.scanMarkdownFiles: directory listing failed', e);
+      return;
+    }
+    for (final entity in entries) {
+      if (capped) return;
+      if (entity is File) {
+        if (!isEditableMarkdownFile(entity.path)) continue;
+        if (excludePath != null && p.equals(entity.path, excludePath)) {
+          continue;
+        }
+        if (++visited > maxFilesVisited) {
+          capped = true;
+          logWarning(
+            'FileService.scanMarkdownFiles: visited cap reached '
+            '($maxFilesVisited files) — results truncated',
+          );
+          return;
+        }
+        final outcome = await _scanOneFile(
+          service,
+          entity,
+          scannedBytes,
+          maxScanBytes,
+          includeDocuments: includeDocuments,
+        );
+        if (outcome.stop) {
+          capped = true;
+          return;
+        }
+        final found = outcome.found;
+        if (found != null) {
+          scannedBytes += outcome.bytes;
+          results.add(found);
+        }
+      } else if (entity is Directory && depth < maxDepth) {
+        final name = p.basename(entity.path);
+        if (FileService._ignoredDirs.contains(name) || name.startsWith('.')) {
+          continue;
+        }
+        await walk(entity, depth + 1);
+      }
+    }
+  }
+
+  await walk(root, 0);
+  // Sorteren op een vooraf berekende sleutel: `displayTitle` van een document
+  // leest zijn eerste kop uit de bron, en een vergelijkingsfunctie roept dat
+  // voor elk item vele malen aan.
+  final keyed = [
+    for (final found in results)
+      (key: found.displayTitle.toLowerCase(), file: found),
+  ]..sort((a, b) => a.key.compareTo(b.key));
+  return [for (final entry in keyed) entry.file];
+}
+
 /// Stats, size-gates, reads and parses one candidate file. The two size guards
 /// keep a pathological tree from exhausting memory: a file over
 /// [FileService.maxDeckMarkdownBytes] is skipped on its stat alone (never read),

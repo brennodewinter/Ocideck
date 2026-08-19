@@ -160,12 +160,16 @@ class _OpenPreviewPaneState extends State<OpenPreviewPane> {
         ),
       );
     }
-    final kind = _deck == null
-        ? MarkdownKind.document
-        : MarkdownKind.presentation;
+    // Zolang er niets gelezen is — of het lezen geweigerd werd — is de soort
+    // onbekend; dan liegt een document- of presentatiepictogram erover.
+    final icon = _loading || _refused
+        ? Icons.insert_drive_file_outlined
+        : markdownKindIcon(
+            _deck == null ? MarkdownKind.document : MarkdownKind.presentation,
+          );
     return Row(
       children: [
-        Icon(markdownKindIcon(kind), size: 14, color: AppTheme.slate500),
+        Icon(icon, size: 14, color: AppTheme.slate500),
         const SizedBox(width: 6),
         Expanded(
           child: Text(

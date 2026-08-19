@@ -390,72 +390,15 @@ class FileService {
     int maxDepth = 32,
     int maxFilesVisited = 5000,
     int maxScanBytes = 256 * 1024 * 1024,
-  }) async {
-    final root = Directory(directory);
-    if (!await root.exists()) return [];
-
-    final results = <ScannedMarkdown>[];
-    var visited = 0;
-    var scannedBytes = 0;
-    var capped = false;
-    Future<void> walk(Directory dir, int depth) async {
-      if (capped) return;
-      List<FileSystemEntity> entries;
-      try {
-        entries = await dir.list(followLinks: false).toList();
-      } catch (e) {
-        logWarning(
-          'FileService.scanMarkdownFiles: directory listing failed',
-          e,
-        );
-        return;
-      }
-      for (final entity in entries) {
-        if (capped) return;
-        if (entity is File) {
-          if (!isEditableMarkdownFile(entity.path)) continue;
-          if (excludePath != null && p.equals(entity.path, excludePath)) {
-            continue;
-          }
-          if (++visited > maxFilesVisited) {
-            capped = true;
-            logWarning(
-              'FileService.scanMarkdownFiles: visited cap reached '
-              '($maxFilesVisited files) — results truncated',
-            );
-            return;
-          }
-          final outcome = await _scanOneFile(
-            this,
-            entity,
-            scannedBytes,
-            maxScanBytes,
-            includeDocuments: includeDocuments,
-          );
-          if (outcome.stop) {
-            capped = true;
-            return;
-          }
-          final found = outcome.found;
-          if (found != null) {
-            scannedBytes += outcome.bytes;
-            results.add(found);
-          }
-        } else if (entity is Directory && depth < maxDepth) {
-          final name = p.basename(entity.path);
-          if (_ignoredDirs.contains(name) || name.startsWith('.')) continue;
-          await walk(entity, depth + 1);
-        }
-      }
-    }
-
-    await walk(root, 0);
-    results.sort(
-      (a, b) =>
-          a.displayTitle.toLowerCase().compareTo(b.displayTitle.toLowerCase()),
-    );
-    return results;
-  }
+  }) => walkMarkdownFiles(
+    this,
+    directory,
+    excludePath: excludePath,
+    includeDocuments: includeDocuments,
+    maxDepth: maxDepth,
+    maxFilesVisited: maxFilesVisited,
+    maxScanBytes: maxScanBytes,
+  );
 
   /// Alleen de presentaties uit [scanMarkdownFiles] — voor de aanroepers die
   /// dia's nodig hebben en dus niets aan een plat document hebben.

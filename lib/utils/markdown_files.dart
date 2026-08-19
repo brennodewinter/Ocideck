@@ -38,7 +38,10 @@ String? firstMarkdownHeading(String source, {int scanChars = 4096}) {
   final head = source.length <= scanChars
       ? source
       : source.substring(0, scanChars);
-  final lines = head.replaceAll('\r\n', '\n').replaceAll('\r', '\n').split('\n');
+  final lines = head
+      .replaceAll('\r\n', '\n')
+      .replaceAll('\r', '\n')
+      .split('\n');
   var inFrontMatter = lines.isNotEmpty && lines.first.trim() == '---';
   var inFence = false;
   for (var i = 0; i < lines.length; i++) {
@@ -46,7 +49,9 @@ String? firstMarkdownHeading(String source, {int scanChars = 4096}) {
     final trimmed = line.trim();
     if (inFrontMatter) {
       // De sluitende `---` van de front matter; de openende is regel 0 zelf.
-      if (i > 0 && (trimmed == '---' || trimmed == '...')) inFrontMatter = false;
+      if (i > 0 && (trimmed == '---' || trimmed == '...')) {
+        inFrontMatter = false;
+      }
       continue;
     }
     if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
@@ -57,10 +62,7 @@ String? firstMarkdownHeading(String source, {int scanChars = 4096}) {
     final match = RegExp(r'^ {0,3}(#{1,6})\s+(.*)$').firstMatch(line);
     if (match == null) continue;
     // Een sluitende hekjes-reeks ("## Titel ##") hoort niet in de naam.
-    final text = match
-        .group(2)!
-        .replaceFirst(RegExp(r'\s*#+\s*$'), '')
-        .trim();
+    final text = match.group(2)!.replaceFirst(RegExp(r'\s*#+\s*$'), '').trim();
     if (text.isNotEmpty) return text;
   }
   return null;

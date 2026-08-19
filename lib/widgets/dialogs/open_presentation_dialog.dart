@@ -237,6 +237,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
 
     for (final info in groups) {
       final file = info.primary;
+      // Eén keer verlagen per bestand: de bron kan megabytes zijn en dit loopt
+      // bij élke aanslag opnieuw.
+      final contentLower = file.content.toLowerCase();
       // A file qualifies on its name/title or anywhere in the raw markdown
       // (front matter, comments, image paths, …) — maximal reach. Paden van
       // samengevouwen identieke kopieën zoeken mee.
@@ -244,9 +247,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           '${file.fileName.toLowerCase()} '
           '${file.displayTitle.toLowerCase()} '
           '${info.identical.map((c) => c.path.toLowerCase()).join(' ')} '
-          '${file.content.toLowerCase()}';
+          '$contentLower';
       final fileMatch = matchesAll(fileHay);
-      final hits = _hitsIn(file, terms, first, matchesAll);
+      final hits = _hitsIn(file, first, matchesAll, contentLower);
       if (fileMatch || hits.isNotEmpty) out.add((info, hits));
     }
     return out;
@@ -257,9 +260,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// is de treffer een leesbaar fragment zonder sprongdoel.
   List<_Hit> _hitsIn(
     ScannedMarkdown file,
-    List<String> terms,
     String first,
     bool Function(String) matchesAll,
+    String contentLower,
   ) {
     final hits = <_Hit>[];
     final deck = file.deck;
@@ -272,6 +275,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       }
       return hits;
     }
+    // Staat de term niet in het bestand, dan hoeft het er ook niet regel voor
+    // regel doorheen — dat scheelt bij elke aanslag een wandeling per bestand.
+    if (!contentLower.contains(first)) return const [];
     for (final line in file.content.split('\n')) {
       final text = line.trim();
       if (text.isEmpty) continue;
@@ -293,9 +299,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       for (final entry in found)
         if (_kind.accepts(entry.$1.primary.kind)) entry,
     ];
-    final documents = found
-        .where((e) => e.$1.primary.kind.isDocument)
-        .length;
+    final documents = found.where((e) => e.$1.primary.kind.isDocument).length;
 
     return AlertDialog(
       title: Row(
@@ -303,10 +307,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           const Icon(Icons.folder_open_outlined, size: 20),
           const SizedBox(width: 8),
           Flexible(
-            child: Text(
-              l10n.d('Openen'),
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: Text(l10n.d('Openen'), overflow: TextOverflow.ellipsis),
           ),
         ],
       ),
@@ -551,10 +552,7 @@ class _FileRow extends StatelessWidget {
     if (!showPreview) return row;
     // Aanwijzen met de muis laat het voorbeeld meelopen; de knop hierboven doet
     // hetzelfde voor wie met het toetsenbord of op een aanraakscherm werkt.
-    return MouseRegion(
-      onEnter: (_) => onPreview(file.path),
-      child: row,
-    );
+    return MouseRegion(onEnter: (_) => onPreview(file.path), child: row);
   }
 
   Widget _titleAndPlace(AppLocalizations l10n) {

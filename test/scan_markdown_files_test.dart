@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
