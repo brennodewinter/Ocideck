@@ -230,6 +230,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- docs(bestandsformaat): FILE_FORMAT loopt weer gelijk met de documentkant van de
+  code. De inhoudsopgave-marker `<!-- toc -->` stond nergens in het
+  bestandsformaat, terwijl dat naast `---` de enige constructie is die OciDeck
+  zelf in de body van een document schrijft — hij staat nu in §14.10, met het
+  dialect dat elke uitvoer eraan geeft. Vier beweringen die door de code waren
+  ingehaald zijn rechtgezet: er zijn vier uitvoervormen en geen twee (§14.4),
+  snijtekens wórden gezet — door de LaTeX-export, en alleen bij een afloop
+  (§14.7), het sleutelregister telt er vier sinds `reference-location:` en de
+  terugtrekroute is gebouwd in plaats van alleen verklaard (§14.5), en het
+  "bekende gat" rond een vastgelegde liggende maat of afloop is gedicht (§14.8).
+  §14.6 beschrijft nu ook de bewerking die de hoofdstukeinden écht in het bestand
+  zet (#1545), §14.3 en §14.1 noemen de voetnootsleutel, en §3.2 somt de tien
+  profielvelden op (checklist- en tabelhuisstijl) die er bij het landen nooit in
+  kwamen. De Nederlandse variant liep drie secties achter en is bijgewerkt. Twee
+  nieuwe poorten in `docs_enum_counts_test.dart` houden het voortaan bij: elk veld
+  van `ThemeProfile` en elke sleutel uit `kDocumentOwnedKeys` moet in FILE_FORMAT
+  genoemd staan.
+
 - keuzemenu: de afbeelding van een menublok staat nu klein náást de tekst
   in plaats van als vullende achtergrond met het label eronder (#1162). Zo is er
   op één kaart plaats voor het label, de uitleg en het plaatje tegelijk, en
