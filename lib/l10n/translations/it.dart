@@ -672,6 +672,33 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'I marcatori non hanno un valore di ordinamento riconoscibile. Rimangono visibili.',
+  'Tijdlijn · vervolg': 'Cronologia · seguito',
+  'Aflopend': 'Discendente',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'I valori nella colonna dell\'ordine non sono ascendenti.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Questa cronologia non è ancora completa. Modifica la tabella o mostrala come una tabella normale.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Una sequenza temporale funziona con due o tre colonne. Modifica la tabella o mostrala come una tabella normale.',
+  'Huidige volgorde behouden': 'Mantieni l\'ordine attuale',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Gli eventi vuoti rimangono visibili. Controlla la riga:',
+  'Niet-herkende waarden': 'Valori non riconosciuti',
+  'Oplopend': 'Ascendente',
+  'Sorteren als…': 'Ordina come...',
+  'Sorteren en tijdlijn maken': 'Ordina e crea una sequenza temporale',
+  'Sorteren toepassen': 'Applicare l\'ordinamento',
+  'Tijdlijn maken': 'Crea sequenza temporale',
+  'Tijdlijn maken?': 'Creare una sequenza temporale?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Aggiungi almeno un evento o mostralo come una tabella normale.',
+  'Waarden bekijken': 'Visualizza i valori',
+  'gebeurtenissen gevonden.': 'eventi trovati.',
+  'waarden herkend.': 'valori riconosciuti.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'valori non riconosciuti. Tali righe rimangono in fondo nell\'ordine corrente.',
   'Als tabel weergeven': 'Visualizza come tabella',
   'Als tijdlijn weergeven': 'Mostra come sequenza temporale',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

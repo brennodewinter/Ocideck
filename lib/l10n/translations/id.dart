@@ -1649,6 +1649,33 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Penanda tidak memiliki nilai urutan yang dapat dikenali. Penanda tetap terlihat.',
+  'Tijdlijn · vervolg': 'Linimasa · lanjutan',
+  'Aflopend': 'Menurun',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Nilai pada kolom pesanan tidak menaik.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Garis waktu ini belum selesai. Sesuaikan tabel atau tampilkan sebagai tabel biasa.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Garis waktu berfungsi dengan dua atau tiga kolom. Sesuaikan tabel atau tampilkan sebagai tabel biasa.',
+  'Huidige volgorde behouden': 'Pertahankan pesanan saat ini',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Peristiwa kosong tetap terlihat. Periksa baris:',
+  'Niet-herkende waarden': 'Nilai-nilai yang tidak diakui',
+  'Oplopend': 'Naik',
+  'Sorteren als…': 'Urutkan sebagai…',
+  'Sorteren en tijdlijn maken': 'Urutkan dan buat garis waktu',
+  'Sorteren toepassen': 'Terapkan penyortiran',
+  'Tijdlijn maken': 'Buat garis waktu',
+  'Tijdlijn maken?': 'Buat garis waktu?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Tambahkan setidaknya satu acara atau tampilkan sebagai tabel biasa.',
+  'Waarden bekijken': 'Lihat nilai',
+  'gebeurtenissen gevonden.': 'peristiwa yang ditemukan.',
+  'waarden herkend.': 'nilai-nilai yang diakui.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'nilai-nilai tidak diakui. Baris-baris tersebut tetap berada di bawah dalam urutannya saat ini.',
   'Als tabel weergeven': 'Tampilkan sebagai tabel',
   'Als tijdlijn weergeven': 'Tampilkan sebagai garis waktu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

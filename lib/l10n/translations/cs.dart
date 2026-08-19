@@ -1652,6 +1652,33 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Značky nemají rozpoznatelnou hodnotu pořadí. Zůstávají viditelné.',
+  'Tijdlijn · vervolg': 'Časová osa · pokračování',
+  'Aflopend': 'Klesající',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Hodnoty ve sloupci objednávky nejsou vzestupné.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Tato časová osa ještě není kompletní. Upravte tabulku nebo ji zobrazte jako normální tabulku.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Časová osa pracuje se dvěma nebo třemi sloupci. Upravte tabulku nebo ji zobrazte jako normální tabulku.',
+  'Huidige volgorde behouden': 'Udržujte aktuální pořadí',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Prázdné události zůstanou viditelné. Kontrolní řádek:',
+  'Niet-herkende waarden': 'Nerozpoznané hodnoty',
+  'Oplopend': 'Vzestupně',
+  'Sorteren als…': 'Řadit jako…',
+  'Sorteren en tijdlijn maken': 'Třídit a vytvořit časovou osu',
+  'Sorteren toepassen': 'Použít třídění',
+  'Tijdlijn maken': 'Vytvořte časovou osu',
+  'Tijdlijn maken?': 'Vytvořit časovou osu?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Přidejte alespoň jednu událost nebo ji zobrazte jako běžnou tabulku.',
+  'Waarden bekijken': 'Zobrazit hodnoty',
+  'gebeurtenissen gevonden.': 'nalezené události.',
+  'waarden herkend.': 'uznávané hodnoty.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'hodnoty nejsou rozpoznány. Tyto řádky zůstanou ve svém aktuálním pořadí dole.',
   'Als tabel weergeven': 'Zobrazit jako tabulku',
   'Als tijdlijn weergeven': 'Zobrazit jako časovou osu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

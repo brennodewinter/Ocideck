@@ -1655,6 +1655,33 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Oznake nemaju prepoznatljivu vrijednost redoslijeda. Ostaju vidljive.',
+  'Tijdlijn · vervolg': 'Vremenska crta · nastavak',
+  'Aflopend': 'Silazni',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Vrijednosti u stupcu narudžbe nisu rastuće.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ova vremenska linija još nije dovršena. Prilagodite tablicu ili je prikažite kao normalnu tablicu.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Vremenska traka radi s dva ili tri stupca. Prilagodite tablicu ili je prikažite kao normalnu tablicu.',
+  'Huidige volgorde behouden': 'Zadrži trenutni poredak',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Prazni događaji ostaju vidljivi. Provjerite redak:',
+  'Niet-herkende waarden': 'Nepriznate vrijednosti',
+  'Oplopend': 'Uzlazno',
+  'Sorteren als…': 'Poredaj kao…',
+  'Sorteren en tijdlijn maken': 'Razvrstaj i stvori vremensku traku',
+  'Sorteren toepassen': 'Primijeni sortiranje',
+  'Tijdlijn maken': 'Stvorite vremensku traku',
+  'Tijdlijn maken?': 'Napraviti vremensku traku?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Dodajte barem jedan događaj ili ga prikažite kao običnu tablicu.',
+  'Waarden bekijken': 'Prikaz vrijednosti',
+  'gebeurtenissen gevonden.': 'pronađenih događaja.',
+  'waarden herkend.': 'prepoznate vrijednosti.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'vrijednosti koje nisu prepoznate. Ti redovi ostaju na dnu u svom trenutnom redoslijedu.',
   'Als tabel weergeven': 'Prikaz kao tablica',
   'Als tijdlijn weergeven': 'Prikaži kao vremensku traku',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -1666,6 +1666,33 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Позначки не мають розпізнаваного значення порядку. Вони залишаються видимими.',
+  'Tijdlijn · vervolg': 'Часова шкала · продовження',
+  'Aflopend': 'Спускається',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Значення в стовпці порядку не зростають.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ця шкала часу ще не завершена. Налаштуйте таблицю або покажіть її як звичайну таблицю.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Шкала часу працює з двома або трьома стовпцями. Налаштуйте таблицю або покажіть її як звичайну таблицю.',
+  'Huidige volgorde behouden': 'Зберігайте поточний порядок',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Порожні події залишаються видимими. Перевірити рядок:',
+  'Niet-herkende waarden': 'Нерозпізнані значення',
+  'Oplopend': 'Висхідний',
+  'Sorteren als…': 'Сортувати як…',
+  'Sorteren en tijdlijn maken': 'Сортування та створення шкали часу',
+  'Sorteren toepassen': 'Застосувати сортування',
+  'Tijdlijn maken': 'Створення хронології',
+  'Tijdlijn maken?': 'Створити часову шкалу?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Додайте хоча б одну подію або відобразіть її як звичайну таблицю.',
+  'Waarden bekijken': 'Переглянути значення',
+  'gebeurtenissen gevonden.': 'знайдено подій.',
+  'waarden herkend.': 'визнані цінності.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'значення не розпізнаються. Ці рядки залишаються внизу в поточному порядку.',
   'Als tabel weergeven': 'Відобразити як таблицю',
   'Als tijdlijn weergeven': 'Показати як часову шкалу',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

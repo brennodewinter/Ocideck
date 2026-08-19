@@ -1656,6 +1656,33 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Značky nemajú rozpoznateľnú hodnotu poradia. Zostávajú viditeľné.',
+  'Tijdlijn · vervolg': 'Časová os · pokračovanie',
+  'Aflopend': 'Zostupne',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Hodnoty v stĺpci objednávky nie sú vzostupné.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Táto časová os ešte nie je úplná. Upravte tabuľku alebo ju zobrazte ako normálnu tabuľku.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Časová os pracuje s dvoma alebo tromi stĺpcami. Upravte tabuľku alebo ju zobrazte ako normálnu tabuľku.',
+  'Huidige volgorde behouden': 'Udržujte aktuálne poradie',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Prázdne udalosti zostávajú viditeľné. Kontrolný riadok:',
+  'Niet-herkende waarden': 'Nerozpoznané hodnoty',
+  'Oplopend': 'Vzostupne',
+  'Sorteren als…': 'Zoradiť ako…',
+  'Sorteren en tijdlijn maken': 'Zoraďte a vytvorte časovú os',
+  'Sorteren toepassen': 'Použiť triedenie',
+  'Tijdlijn maken': 'Vytvorte časovú os',
+  'Tijdlijn maken?': 'Vytvoriť časovú os?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Pridajte aspoň jednu udalosť alebo ju zobrazte ako bežnú tabuľku.',
+  'Waarden bekijken': 'Zobraziť hodnoty',
+  'gebeurtenissen gevonden.': 'nájdené udalosti.',
+  'waarden herkend.': 'uznávané hodnoty.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'hodnoty nie sú uznané. Tieto riadky zostanú naspodku v aktuálnom poradí.',
   'Als tabel weergeven': 'Zobraziť ako tabuľku',
   'Als tijdlijn weergeven': 'Zobraziť ako časovú os',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

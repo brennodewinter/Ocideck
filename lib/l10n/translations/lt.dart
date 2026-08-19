@@ -1657,6 +1657,33 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Žymekliai neturi atpažįstamos rikiavimo reikšmės. Jie lieka matomi.',
+  'Tijdlijn · vervolg': 'Laiko juosta · tęsinys',
+  'Aflopend': 'Mažėjantis',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Užsakymo stulpelio reikšmės nėra didėjančios.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ši laiko juosta dar nebaigta. Sureguliuokite lentelę arba parodykite ją kaip įprastą lentelę.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Laiko juosta veikia su dviem arba trimis stulpeliais. Sureguliuokite lentelę arba parodykite ją kaip įprastą lentelę.',
+  'Huidige volgorde behouden': 'Išlaikyti esamą tvarką',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Tušti įvykiai lieka matomi. Patikrinkite eilutę:',
+  'Niet-herkende waarden': 'Neatpažintos vertybės',
+  'Oplopend': 'Kylantis',
+  'Sorteren als…': 'Rūšiuoti kaip…',
+  'Sorteren en tijdlijn maken': 'Rūšiuoti ir sukurti laiko juostą',
+  'Sorteren toepassen': 'Taikyti rūšiavimą',
+  'Tijdlijn maken': 'Sukurkite laiko juostą',
+  'Tijdlijn maken?': 'Sukurti laiko juostą?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Pridėkite bent vieną įvykį arba parodykite jį kaip įprastą lentelę.',
+  'Waarden bekijken': 'Peržiūrėkite vertes',
+  'gebeurtenissen gevonden.': 'rasta įvykių.',
+  'waarden herkend.': 'pripažintos vertybės.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'vertybės neatpažįstamos. Šios eilutės lieka apačioje dabartine tvarka.',
   'Als tabel weergeven': 'Rodyti kaip lentelę',
   'Als tijdlijn weergeven': 'Rodyti kaip laiko juostą',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

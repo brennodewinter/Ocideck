@@ -1675,6 +1675,33 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Οι δείκτες δεν έχουν αναγνωρίσιμη τιμή σειράς. Παραμένουν ορατοί.',
+  'Tijdlijn · vervolg': 'Χρονογραμμή · συνέχεια',
+  'Aflopend': 'Φθίνων',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Οι τιμές στη στήλη παραγγελίας δεν είναι αύξουσες.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Αυτό το χρονοδιάγραμμα δεν έχει ακόμη ολοκληρωθεί. Προσαρμόστε τον πίνακα ή εμφανίστε τον ως κανονικό πίνακα.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Μια γραμμή χρόνου λειτουργεί με δύο ή τρεις στήλες. Προσαρμόστε τον πίνακα ή εμφανίστε τον ως κανονικό πίνακα.',
+  'Huidige volgorde behouden': 'Διατήρηση της τρέχουσας παραγγελίας',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Τα κενά συμβάντα παραμένουν ορατά. Έλεγχος σειράς:',
+  'Niet-herkende waarden': 'Μη αναγνωρισμένες αξίες',
+  'Oplopend': 'Αύξουσα',
+  'Sorteren als…': 'Ταξινόμηση ως…',
+  'Sorteren en tijdlijn maken': 'Ταξινόμηση και δημιουργία χρονολογίου',
+  'Sorteren toepassen': 'Εφαρμογή ταξινόμησης',
+  'Tijdlijn maken': 'Δημιουργήστε χρονοδιάγραμμα',
+  'Tijdlijn maken?': 'Δημιουργία χρονοδιαγράμματος;',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Προσθέστε τουλάχιστον ένα συμβάν ή εμφανίστε το ως κανονικό πίνακα.',
+  'Waarden bekijken': 'Προβολή τιμών',
+  'gebeurtenissen gevonden.': 'γεγονότα που βρέθηκαν.',
+  'waarden herkend.': 'αξίες που αναγνωρίζονται.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν στο κάτω μέρος με την τρέχουσα σειρά τους.',
   'Als tabel weergeven': 'Εμφάνιση ως πίνακα',
   'Als tijdlijn weergeven': 'Εμφάνιση ως χρονοδιάγραμμα',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

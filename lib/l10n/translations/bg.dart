@@ -1670,6 +1670,33 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Маркерите нямат разпознаваема стойност за подреждане. Остават видими.',
+  'Tijdlijn · vervolg': 'Времева линия · продължение',
+  'Aflopend': 'Спускане',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Стойностите в колоната за поръчка не са възходящи.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Тази времева линия все още не е завършена. Коригирайте таблицата или я покажете като нормална таблица.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Времевата линия работи с две или три колони. Коригирайте таблицата или я покажете като нормална таблица.',
+  'Huidige volgorde behouden': 'Запазване на текущия ред',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Празните събития остават видими. Проверете ред:',
+  'Niet-herkende waarden': 'Неразпознати стойности',
+  'Oplopend': 'Възходящо',
+  'Sorteren als…': 'Сортирай като...',
+  'Sorteren en tijdlijn maken': 'Сортирайте и създайте времева линия',
+  'Sorteren toepassen': 'Прилагане на сортиране',
+  'Tijdlijn maken': 'Създайте времева линия',
+  'Tijdlijn maken?': 'Създаване на времева линия?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Добавете поне едно събитие или го покажете като обикновена таблица.',
+  'Waarden bekijken': 'Преглед на стойности',
+  'gebeurtenissen gevonden.': 'намерени събития.',
+  'waarden herkend.': 'признати ценности.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'неразпознати стойности. Тези редове остават най-отдолу в текущия си ред.',
   'Als tabel weergeven': 'Показване като таблица',
   'Als tijdlijn weergeven': 'Показване като времева линия',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

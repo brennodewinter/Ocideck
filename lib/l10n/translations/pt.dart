@@ -1678,6 +1678,33 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Os marcadores não têm um valor de ordenação reconhecível. Permanecem visíveis.',
+  'Tijdlijn · vervolg': 'Linha do tempo · continuação',
+  'Aflopend': 'Descendente',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Os valores na coluna de ordem não são crescentes.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Esta linha do tempo ainda não está completa. Ajuste a mesa ou mostre-a como uma mesa normal.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Uma linha do tempo funciona com duas ou três colunas. Ajuste a mesa ou mostre-a como uma mesa normal.',
+  'Huidige volgorde behouden': 'Manter o pedido atual',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Os eventos vazios permanecem visíveis. Verifique a linha:',
+  'Niet-herkende waarden': 'Valores não reconhecidos',
+  'Oplopend': 'Ascendente',
+  'Sorteren als…': 'Classificar como…',
+  'Sorteren en tijdlijn maken': 'Classifique e crie uma linha do tempo',
+  'Sorteren toepassen': 'Aplicar classificação',
+  'Tijdlijn maken': 'Criar linha do tempo',
+  'Tijdlijn maken?': 'Criar uma linha do tempo?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Adicione pelo menos um evento ou mostre-o como uma mesa normal.',
+  'Waarden bekijken': 'Ver valores',
+  'gebeurtenissen gevonden.': 'eventos encontrados.',
+  'waarden herkend.': 'valores reconhecidos.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'valores não reconhecidos. Essas linhas permanecem na parte inferior na ordem atual.',
   'Als tabel weergeven': 'Exibir como tabela',
   'Als tijdlijn weergeven': 'Mostrar como linha do tempo',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

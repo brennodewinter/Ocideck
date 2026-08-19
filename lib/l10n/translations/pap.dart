@@ -674,6 +674,33 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markashonnan no tin un balor di orden ku por ser rekonosí. Nan ta keda visibel.',
+  'Tijdlijn · vervolg': 'Línea di tempu · continuación',
+  'Aflopend': 'Descendente',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Los valores de la columna de orden no son ascendentes.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Este cronograma aún no está completo. Ajusta la mesa o muéstrala como una mesa normal.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Una línea de tiempo funciona con dos o tres columnas. Ajusta la mesa o muéstrala como una mesa normal.',
+  'Huidige volgorde behouden': 'Mantener el orden actual',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Los eventos vacíos siguen siendo visibles. Verificar fila:',
+  'Niet-herkende waarden': 'Valores no reconocidos',
+  'Oplopend': 'Ascendente',
+  'Sorteren als…': 'Ordenar como…',
+  'Sorteren en tijdlijn maken': 'Ordenar y crear línea de tiempo',
+  'Sorteren toepassen': 'Aplicar clasificación',
+  'Tijdlijn maken': 'Crear línea de tiempo',
+  'Tijdlijn maken?': '¿Crear una línea de tiempo?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Agregue al menos un evento o muéstrelo como una tabla normal.',
+  'Waarden bekijken': 'Ver valores',
+  'gebeurtenissen gevonden.': 'Eventos encontrados.',
+  'waarden herkend.': 'valores reconocidos.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'Valores no reconocidos. Esas filas permanecen en la parte inferior en su orden actual.',
   'Als tabel weergeven': 'Mustra komo mesa',
   'Als tijdlijn weergeven': 'Mustra komo liña di tempu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -675,6 +675,33 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markearrings hawwe gjin werkenbere folchoardwearde. Se bliuwe sichtber.',
+  'Tijdlijn · vervolg': 'Tiidline · ferfolch',
+  'Aflopend': 'Descending',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'De wearden yn \'e folchoarderkolom binne net oprinnend.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Dizze tiidline is noch net kompleet. Pas de tabel oan of lit it sjen as in normale tabel.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'In tiidline wurket mei twa of trije kolommen. Pas de tabel oan of lit it sjen as in normale tabel.',
+  'Huidige volgorde behouden': 'Hâld aktuele oarder',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Lege eveneminten bliuwe sichtber. Kontrolearje rige:',
+  'Niet-herkende waarden': 'Net erkende wearden',
+  'Oplopend': 'Ascending',
+  'Sorteren als…': 'Sortearje as...',
+  'Sorteren en tijdlijn maken': 'Sortearje en meitsje tiidline',
+  'Sorteren toepassen': 'Sortearje tapasse',
+  'Tijdlijn maken': 'Meitsje tiidline',
+  'Tijdlijn maken?': 'In tiidline oanmeitsje?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Foegje op syn minst ien evenemint ta of lit it sjen as in gewoane tafel.',
+  'Waarden bekijken': 'Besjoch wearden',
+  'gebeurtenissen gevonden.': 'eveneminten fûn.',
+  'waarden herkend.': 'wearden erkend.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'wearden net erkend. Dy rigen bliuwe ûnderoan yn harren hjoeddeistige folchoarder.',
   'Als tabel weergeven': 'Lit sjen as tabel',
   'Als tijdlijn weergeven': 'Lit sjen as tiidline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

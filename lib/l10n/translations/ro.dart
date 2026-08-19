@@ -1667,6 +1667,33 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Marcajele nu au o valoare de ordonare recognoscibilă. Rămân vizibile.',
+  'Tijdlijn · vervolg': 'Cronologie · continuare',
+  'Aflopend': 'Descendent',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Valorile din coloana de ordine nu sunt crescătoare.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Această cronologie nu este încă completă. Ajustați tabelul sau afișați-l ca un tabel normal.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'O cronologie funcționează cu două sau trei coloane. Ajustați tabelul sau afișați-l ca un tabel normal.',
+  'Huidige volgorde behouden': 'Păstrați ordinea curentă',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Evenimentele goale rămân vizibile. Verificați rândul:',
+  'Niet-herkende waarden': 'Valori nerecunoscute',
+  'Oplopend': 'Ascendent',
+  'Sorteren als…': 'Sortați ca...',
+  'Sorteren en tijdlijn maken': 'Sortați și creați cronologie',
+  'Sorteren toepassen': 'Aplicați sortarea',
+  'Tijdlijn maken': 'Creați cronologie',
+  'Tijdlijn maken?': 'Creați o cronologie?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Adăugați cel puțin un eveniment sau afișați-l ca o masă obișnuită.',
+  'Waarden bekijken': 'Vedeți valorile',
+  'gebeurtenissen gevonden.': 'evenimentele găsite.',
+  'waarden herkend.': 'valori recunoscute.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'valori nerecunoscute. Aceste rânduri rămân în partea de jos în ordinea lor curentă.',
   'Als tabel weergeven': 'Afișați ca tabel',
   'Als tijdlijn weergeven': 'Afișați ca cronologie',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -1651,6 +1651,33 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Oznake nimajo prepoznavne vrednosti vrstnega reda. Ostanejo vidne.',
+  'Tijdlijn · vervolg': 'Časovnica · nadaljevanje',
+  'Aflopend': 'Sestopanje',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Vrednosti v stolpcu za naročilo niso naraščajoče.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ta časovnica še ni končana. Prilagodite tabelo ali jo prikažite kot običajno tabelo.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Časovnica deluje z dvema ali tremi stolpci. Prilagodite tabelo ali jo prikažite kot običajno tabelo.',
+  'Huidige volgorde behouden': 'Ohranite trenutni vrstni red',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Prazni dogodki ostanejo vidni. Preverite vrstico:',
+  'Niet-herkende waarden': 'Nepriznane vrednosti',
+  'Oplopend': 'Naraščajoče',
+  'Sorteren als…': 'Razvrsti kot ...',
+  'Sorteren en tijdlijn maken': 'Razvrsti in ustvari časovnico',
+  'Sorteren toepassen': 'Uporabite razvrščanje',
+  'Tijdlijn maken': 'Ustvari časovnico',
+  'Tijdlijn maken?': 'Ustvariti časovnico?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Dodajte vsaj en dogodek ali ga prikažite kot običajno tabelo.',
+  'Waarden bekijken': 'Ogled vrednosti',
+  'gebeurtenissen gevonden.': 'najdenih dogodkov.',
+  'waarden herkend.': 'vrednote priznane.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'vrednote niso prepoznane. Te vrstice ostanejo na dnu v trenutnem vrstnem redu.',
   'Als tabel weergeven': 'Prikaz kot tabela',
   'Als tijdlijn weergeven': 'Prikaži kot časovnico',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

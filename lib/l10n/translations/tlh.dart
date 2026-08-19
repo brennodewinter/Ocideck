@@ -1627,6 +1627,33 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'ghItlhpu\'vaD poH cherlu\'bogh ghajbe\'. leghlu\' \'ej ratlh.',
+  'Tijdlijn · vervolg': 'poH tlhegh · \'op',
+  'Aflopend': 'tlh: Descending',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'tlh: The values ​​in the order column are not ascending.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'tlh: This timeline is not yet complete. Adjust the table or show it as a normal table.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'tlh: A timeline works with two or three columns. Adjust the table or show it as a normal table.',
+  'Huidige volgorde behouden': 'tlh: Keep current order',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'tlh: Empty events remain visible. Check row:',
+  'Niet-herkende waarden': 'tlh: Unrecognized values',
+  'Oplopend': 'tlh: Ascending',
+  'Sorteren als…': 'tlh: Sort as…',
+  'Sorteren en tijdlijn maken': 'tlh: Sort and create timeline',
+  'Sorteren toepassen': 'tlh: Apply sorting',
+  'Tijdlijn maken': 'tlh: Create timeline',
+  'Tijdlijn maken?': 'tlh: Create a timeline?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'tlh: Add at least one event or show it as a regular table.',
+  'Waarden bekijken': 'tlh: View values',
+  'gebeurtenissen gevonden.': 'tlh: events found.',
+  'waarden herkend.': 'tlh: values ​​recognized.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'tlh: values ​​not recognized. Those rows remain at the bottom in their current order.',
   'Als tabel weergeven': 'romuS \'ang',
   'Als tijdlijn weergeven': 'poH tlhegh \'ang',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

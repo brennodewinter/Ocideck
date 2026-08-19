@@ -1643,6 +1643,33 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markeritel pole äratuntavat järjestusväärtust. Need jäävad nähtavaks.',
+  'Tijdlijn · vervolg': 'Ajajoon · järg',
+  'Aflopend': 'Langevad',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Järjestuse veerus olevad väärtused ei ole kasvavas järjekorras.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'See ajaskaala ei ole veel valmis. Kohandage tabelit või näidake seda tavalise tabelina.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ajaskaala töötab kahe või kolme veeruga. Kohandage tabelit või näidake seda tavalise tabelina.',
+  'Huidige volgorde behouden': 'Säilitage praegune järjekord',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Tühjad sündmused jäävad nähtavaks. Kontrolli rida:',
+  'Niet-herkende waarden': 'Tundmatud väärtused',
+  'Oplopend': 'Kasvav',
+  'Sorteren als…': 'Sorteeri…',
+  'Sorteren en tijdlijn maken': 'Sorteeri ja loo ajaskaala',
+  'Sorteren toepassen': 'Rakenda sorteerimine',
+  'Tijdlijn maken': 'Loo ajaskaala',
+  'Tijdlijn maken?': 'Kas luua ajaskaala?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Lisage vähemalt üks sündmus või kuvage seda tavalise tabelina.',
+  'Waarden bekijken': 'Vaadake väärtusi',
+  'gebeurtenissen gevonden.': 'leitud sündmused.',
+  'waarden herkend.': 'tunnustatud väärtused.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'väärtusi ei tuvastata. Need read jäävad praeguses järjekorras alumisse ossa.',
   'Als tabel weergeven': 'Kuva tabelina',
   'Als tijdlijn weergeven': 'Kuva ajaskaalana',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
