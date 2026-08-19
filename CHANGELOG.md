@@ -231,20 +231,25 @@ in Dutch, and it keeps growing on `main` between releases.
 ### Changed
 
 - feat(poort): `translate-docs-check` toetst nu ook of een vertaalde gids bíj is,
-  niet alleen of hij bestaat. Twee keer in twee dagen kwam er een sectie bij in
-  de Engelse bron zonder Nederlandse tegenhanger — §14.9 van FILE_FORMAT (#1568)
-  en §14.11 die met de tijdlijnfunctie meekwam (#1571, hersteld in #1573) — en
-  beide keren stond alles groen, omdat de poort alleen vroeg *of* de variant
-  bestond. Hij vergelijkt nu de structuur: evenveel koppen per niveau als de
-  bron, en elke genummerde sectie (`14.11`, `6.3.1`) onder hetzelfde nummer.
-  Koppen binnen codeblokken tellen niet mee, want in FILE_FORMAT is `# Rapport`
-  meestal de inhoud van een voorbeeld. Documenten die vandaag al achterlopen
-  staan met hun exacte achterstand in `headingDriftBaseline`: `KNOWN_LIMITATIONS`
-  mist twee eerlijkheden (voetnoten in de HTML-export, en de overlays die de
-  web-export weglaat) en `USER_GUIDE` drie secties over de documentmodus. Die
-  lijst mag krimpen en niet groeien — hij staat er om weggewerkt te worden, niet
-  om ruimte te maken. Onderweg kreeg `#### 6.3.1` in de Nederlandse FILE_FORMAT
-  zijn sectienummer terug; dat was bij het vertalen weggevallen.
+  niet alleen of hij bestaat — en de Nederlandse gidsen zijn in dezelfde beweging
+  bijgetrokken. Twee keer in twee dagen kwam er een sectie bij in de Engelse bron
+  zonder Nederlandse tegenhanger — §14.9 van FILE_FORMAT (#1568) en §14.11 die met
+  de tijdlijnfunctie meekwam (#1571, hersteld in #1573) — en beide keren stond
+  alles groen, omdat de poort alleen vroeg *of* de variant bestond. Hij vergelijkt
+  nu de structuur: evenveel koppen per niveau als de bron, en elke genummerde
+  sectie (`14.11`, `6.3.1`) onder hetzelfde nummer. Koppen binnen codeblokken
+  tellen niet mee, want in FILE_FORMAT is `# Rapport` meestal de inhoud van een
+  voorbeeld. Er is geen basislijn en geen uitzondering, want de vijf secties die
+  achterliepen zijn vertaald: `USER_GUIDE.nl` kreeg *Tabellen, sorteren en
+  tijdlijnen*, *Voetnoten* (inclusief de tabel met wat elk oppervlak met een noot
+  kan) en *Breedte en zoom tijdens het schrijven*; `KNOWN_LIMITATIONS.nl` kreeg de
+  twee beperkingen die alleen de Engelse lezer las — dat voetnoten in de
+  HTML-export achteraan belanden, en dat de web-export de voettekst, het
+  paginanummer, het watermerk en de TLP-badges weglaat. Dat laatste is er precies
+  een om níet alleen in het Engels te hebben: wie een `.html` naar een klant
+  stuurt, hoort te weten dat zijn voettekst er niet in zit. Onderweg kreeg
+  `#### 6.3.1` in de Nederlandse FILE_FORMAT zijn sectienummer terug, dat bij het
+  vertalen was weggevallen.
 
 - docs(bestandsformaat): §14.11 (de tijdlijnmarker) is aangevuld en vertaald.
   De sectie kwam met de functie mee (#1571) maar alleen in het Engels, en zonder

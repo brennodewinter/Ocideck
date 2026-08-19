@@ -216,23 +216,6 @@ List<String> _variantLangsOnDisk(String baseDoc) {
   ];
 }
 
-/// Documents whose Dutch variant is known to be behind the English source, and
-/// by how many headings. A ratchet, in the style of `check_conventions.dart`:
-/// the number may shrink, never grow, and a document that is not listed here
-/// may not drift at all.
-///
-/// This is deliberately visible rather than silent. The drift below is real
-/// content a Dutch reader does not get: `KNOWN_LIMITATIONS` is missing two
-/// admissions (footnotes in the HTML export, and the on-slide overlays the web
-/// export leaves off) and `USER_GUIDE` three sections about document mode
-/// (exporting a document, page setup and writing width, width and zoom). The
-/// entries exist to be removed by translating those sections — not to make
-/// room for more.
-const Map<String, int> headingDriftBaseline = {
-  'docs/KNOWN_LIMITATIONS.md': 2,
-  'docs/USER_GUIDE.md': 3,
-};
-
 /// One heading of a Markdown document: its level (`## ` is 2) and its text.
 typedef MarkdownHeading = ({int level, String text});
 
@@ -392,13 +375,11 @@ List<String> docVariantProblems() {
         sourceHeadings,
         markdownHeadings(variantText),
       );
-      final allowed = headingDriftBaseline[doc] ?? 0;
-      if (missing > allowed) {
+      if (missing > 0) {
         problems.add(
           '${variantPath(doc, lang)} is missing $missing heading(s) that '
-          '$doc has (allowed by the baseline: $allowed). Translate the new '
-          'section into the variant in the same change; see '
-          'headingDriftBaseline.',
+          '$doc has. Translate the new section into the variant in the same '
+          'change — there is deliberately no baseline to raise.',
         );
       }
       final missingNumbers = (sourceNumbers.difference(

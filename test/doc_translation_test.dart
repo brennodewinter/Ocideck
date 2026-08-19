@@ -177,18 +177,5 @@ flutter:
       // tegen de sectie die haar verdringt.
       expect(missingHeadingCount(bron, verschoven), 1);
     });
-
-    test('de basislijn noemt alleen documenten die echt achterlopen', () {
-      // Groeit deze lijst, dan is er een sectie niet meevertaald. Krimpt hij,
-      // verlaag het getal — dat is waar de ratchet voor bestaat.
-      expect(headingDriftBaseline.keys, [
-        'docs/KNOWN_LIMITATIONS.md',
-        'docs/USER_GUIDE.md',
-      ]);
-      for (final entry in headingDriftBaseline.entries) {
-        expect(translatableDocs, contains(entry.key));
-        expect(entry.value, greaterThan(0));
-      }
-    });
   });
 }

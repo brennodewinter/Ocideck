@@ -414,7 +414,7 @@ now the only passing state.
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
-| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source (`headingDriftBaseline` ratchet); no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
@@ -870,9 +870,10 @@ also declares them, but see the [CI note](#continuous-integration).)
   (`PRIVACY.md`, `SECURITY_DESIGN.md`) was translated. Since 2026-08-19 it also
   checks that a shipped variant is *current*: it must carry the same number of
   headings per level as its English source, and every numbered section
-  (`14.11`, `6.3.1`) must be present under the same number. Documents that are
-  known to be behind sit in `headingDriftBaseline` with their exact shortfall —
-  a ratchet that may shrink and never grow.
+  (`14.11`, `6.3.1`) must be present under the same number. There is no
+  baseline and no allowance: the Dutch variants were brought level with their
+  sources in the same change that added this rule, so any drift the gate reports
+  is drift introduced today.
 - **Why it exists:** the docs are *content*, and OciDeck ships content in Dutch +
   English while translating only the interface into every language. The generator
   (`tool/translate_docs.dart`) can machine-translate the manuals into any interface
@@ -897,8 +898,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   excluded document, remove the translation. For structure drift — a variant
   missing a heading, or a section number the variant does not carry — translate
   the new section into the variant *in the same change*; that is the whole point
-  of the rule. Raising a `headingDriftBaseline` number to get past it is not a
-  fix and will be read as one in six months.
+  of the rule, and there is deliberately no number to raise to get past it.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
