@@ -1652,6 +1652,30 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Als tabel weergeven': 'Megjelenítés táblázatként',
+  'Als tijdlijn weergeven': 'Megjelenítés idővonalként',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Úgy tűnik, hogy az értékek nem azonosak. Válassza ki, hogy az OciDeck hogyan olvassa ezeket; a fel nem ismert értékek alul maradnak eredeti sorrendjükben.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Ez az oszlop még nem tartalmaz ilyen módon rendezhető értékeket.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Ez a táblázat még nem jeleníthető meg idővonalként, és változatlan marad.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Egyes értékeket nem ismerünk fel. Ezek a sorok együtt maradnak alul; tartalmuk nem változik.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Az idővonal két vagy három oszloppal működik. Ez a táblázat változatlan marad.',
+  'Gebeurtenis': 'Esemény',
+  'Gebeurtenissen bewerken': 'Események szerkesztése',
+  'Hoe wil je deze kolom sorteren?':
+      'Hogyan szeretné rendezni ezt az oszlopot?',
+  'Kolom aflopend sorteren': 'Oszlopok rendezése csökkenő sorrendben',
+  'Kolom oplopend sorteren': 'Oszlopok rendezése növekvő sorrendben',
+  'Sorteren met aandachtspunten?': 'Rendezés érdekességek szerint?',
+  'Tijd': 'Idő',
+  'Tijdlijn bekijken': 'Idővonal megtekintése',
+  'Toch sorteren': 'Még mindig válogat',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Először adjon hozzá legalább egy eseményt. Ez a táblázat változatlan marad.',
   'Voetnoot': 'Lábjegyzet',
   'Noten': 'Jegyzetek',
   'Voetnoten achterin het document': 'Jegyzetek a dokumentum végén',

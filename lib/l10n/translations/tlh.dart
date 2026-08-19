@@ -1627,6 +1627,30 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Als tabel weergeven': 'romuS \'ang',
+  'Als tijdlijn weergeven': 'poH tlhegh \'ang',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'ngoq rapbe\'law\' Hoch De\'. OciDeck chay\' laD \'e\' wIv; De\' ngoQlu\'bogh bIngDaq bIghHa\'be\' \'ej motlhwI\' patDaq luntaH.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'ngoqvamDaq De\' tu\'lu\'be\' \'e\' Dungjup ghap ghIrjup ghap yInuDmeH.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'romuSvam poH tlhegh mojlaHbe\' \'ej choHbe\'.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'De\' \'op ngoQlu\'. pat bIngDaq rowmey tlhejtaH; ngoQlu\'be\' tlhIngan Hol.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'poH tlhegh chenmeH cha\' pagh wej ngoqmey lo\'. romuSvam choHbe\'.',
+  'Gebeurtenis': 'wanI\'',
+  'Gebeurtenissen bewerken': 'wanImey choH',
+  'Hoe wil je deze kolom sorteren?':
+      'ngoqvam chay\' Dungjup ghap ghIrjup ghap yInuD?',
+  'Kolom aflopend sorteren': 'ngoq ghIrjup yInuD',
+  'Kolom oplopend sorteren': 'ngoq Dungjup yInuD',
+  'Sorteren met aandachtspunten?': 'QubmeH ghajbogh yInuD\'a\'?',
+  'Tijd': 'poH',
+  'Tijdlijn bekijken': 'poH tlhegh legh',
+  'Toch sorteren': 'yInuDqa\'',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'wa\' wanI\' law\' yIchel. romuSvam choHbe\'.',
   'Voetnoot': 'bopwI\'',
   'Noten': 'bopwI\'mey',
   'Voetnoten achterin het document': 'nav Dorlu\'DI\' bopwI\'mey',

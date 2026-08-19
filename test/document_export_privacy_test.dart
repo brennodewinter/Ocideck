@@ -57,6 +57,30 @@ void main() {
   });
 
   test(
+    'tijdlijn blijft atomair en lekt geen geredigeerde tabelwaarde',
+    () async {
+      const timeline =
+          '<!-- timeline -->\n'
+          '| Tijd | Gebeurtenis | Status |\n'
+          '| --- | --- | --- |\n'
+          '| 13:41 | BSN $bsn bevestigd | Vastgesteld |\n';
+      final bundle = await buildDocumentExportBundle(
+        timeline,
+        projectPath: null,
+        profile: PrivacyExportProfile.redacted,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final out = projectedDocumentBody(bundle);
+
+      expect(out, isNot(contains(bsn)));
+      expect(out, contains('<!-- timeline -->\n| Tijd |'));
+    },
+  );
+
+  test(
     'het volledige profiel laat het BSN staan — zo meet de test de redactie echt',
     () async {
       // De tegentest: zonder deze zou de redactie-assertie ook slagen als de body

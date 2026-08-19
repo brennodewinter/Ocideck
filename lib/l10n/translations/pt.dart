@@ -1678,6 +1678,30 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Als tabel weergeven': 'Exibir como tabela',
+  'Als tijdlijn weergeven': 'Mostrar como linha do tempo',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Os valores nem todos parecem ser do mesmo tipo. Escolha como o OciDeck deve lê-los; os valores não reconhecidos permanecem na parte inferior em sua ordem original.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Esta coluna ainda não contém nenhum valor que possa ser classificado desta forma.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Esta tabela ainda não pode ser exibida como uma linha do tempo e permanece inalterada.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Alguns dos valores não são reconhecidos. Essas linhas permanecem juntas na parte inferior; seu conteúdo não muda.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Uma linha do tempo funciona com duas ou três colunas. Esta tabela permanece inalterada.',
+  'Gebeurtenis': 'Evento',
+  'Gebeurtenissen bewerken': 'Editar eventos',
+  'Hoe wil je deze kolom sorteren?':
+      'Como você deseja classificar esta coluna?',
+  'Kolom aflopend sorteren': 'Classificar coluna em ordem decrescente',
+  'Kolom oplopend sorteren': 'Classificar coluna em ordem crescente',
+  'Sorteren met aandachtspunten?': 'Classificar por pontos de interesse?',
+  'Tijd': 'Tempo',
+  'Tijdlijn bekijken': 'Ver linha do tempo',
+  'Toch sorteren': 'Ainda classificando',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Primeiro adicione pelo menos um evento. Esta tabela permanece inalterada.',
   'Voetnoot': 'Nota de rodapé',
   'Noten': 'Notas',
   'Voetnoten achterin het document': 'Notas no fim do documento',

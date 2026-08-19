@@ -17,6 +17,8 @@ class TableEditScaffold extends StatelessWidget {
     super.key,
     required this.editor,
     required this.builder,
+    this.onSortAscending,
+    this.onSortDescending,
   });
 
   final TableEditController editor;
@@ -26,6 +28,8 @@ class TableEditScaffold extends StatelessWidget {
   /// een tabel die niet hertekent zou tijdens het typen op de oude maten
   /// blijven staan.
   final WidgetBuilder builder;
+  final void Function(int column)? onSortAscending;
+  final void Function(int column)? onSortDescending;
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +112,20 @@ class TableEditScaffold extends StatelessWidget {
               at.row == 0 || at.row >= editor.rowCount - 1
                   ? null
                   : () => editor.moveRow(at.row, 1),
+            ),
+            _divider(theme),
+            _button(
+              context,
+              Icons.sort_by_alpha,
+              l10n.d('Kolom oplopend sorteren'),
+              onSortAscending == null ? null : () => onSortAscending!(at.col),
+            ),
+            _button(
+              context,
+              Icons.sort_by_alpha,
+              l10n.d('Kolom aflopend sorteren'),
+              onSortDescending == null ? null : () => onSortDescending!(at.col),
+              descending: true,
             ),
             _divider(theme),
             _button(
@@ -202,9 +220,10 @@ class TableEditScaffold extends StatelessWidget {
     String tooltip,
     VoidCallback? onPressed, {
     bool selected = false,
+    bool descending = false,
   }) => IconButton(
     onPressed: onPressed,
-    icon: Icon(icon, size: 16),
+    icon: Transform.flip(flipY: descending, child: Icon(icon, size: 16)),
     tooltip: tooltip,
     visualDensity: VisualDensity.compact,
     padding: const EdgeInsets.all(4),

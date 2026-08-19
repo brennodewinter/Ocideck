@@ -1649,6 +1649,30 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Als tabel weergeven': 'Tampilkan sebagai tabel',
+  'Als tijdlijn weergeven': 'Tampilkan sebagai garis waktu',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Nilai-nilainya tidak semuanya tampak bertipe sama. Pilih bagaimana OciDeck membacanya; nilai yang tidak dikenali tetap berada di bawah dalam urutan aslinya.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Kolom ini belum berisi nilai apa pun yang dapat diurutkan dengan cara ini.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Tabel ini belum dapat ditampilkan sebagai garis waktu dan tetap tidak berubah.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Beberapa nilai tidak diakui. Baris-baris itu tetap menyatu di bagian bawah; isinya tidak berubah.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Garis waktu berfungsi dengan dua atau tiga kolom. Tabel ini tetap tidak berubah.',
+  'Gebeurtenis': 'Peristiwa',
+  'Gebeurtenissen bewerken': 'Sunting acara',
+  'Hoe wil je deze kolom sorteren?':
+      'Bagaimana Anda ingin mengurutkan kolom ini?',
+  'Kolom aflopend sorteren': 'Urutkan kolom secara menurun',
+  'Kolom oplopend sorteren': 'Urutkan kolom secara menaik',
+  'Sorteren met aandachtspunten?': 'Urutkan berdasarkan tempat menarik?',
+  'Tijd': 'Waktu',
+  'Tijdlijn bekijken': 'Lihat garis waktu',
+  'Toch sorteren': 'Masih memilah',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Pertama, tambahkan setidaknya satu acara. Tabel ini tetap tidak berubah.',
   'Voetnoot': 'Catatan kaki',
   'Noten': 'Catatan',
   'Voetnoten achterin het document': 'Catatan kaki di akhir dokumen',

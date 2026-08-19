@@ -674,6 +674,29 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Als tabel weergeven': 'Mustra komo mesa',
+  'Als tijdlijn weergeven': 'Mustra komo liña di tempu',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'E balornan no ta parse di ta di e mesun tipo. Skohe kon OciDeck mester lesa nan; balornan no rekonosé ta keda na parti abou den nan òrdu original.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'E kolumna aki no ta kontené ningun balor ainda ku por wòrdu ordená di e manera aki.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'E tabel aki no por wòrdu mustra ainda komo un liña di tempu i ta keda meskos.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Algun di e balornan no ta wòrdu rekonosé. E filanan ei ta keda huntu na parti abou; nan kontenido no ta kambia.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Un liña di tempu ta traha ku dos òf tres kolumna. E tabel aki ta keda meskos.',
+  'Gebeurtenis': 'Evento',
+  'Gebeurtenissen bewerken': 'Editá eventonan',
+  'Hoe wil je deze kolom sorteren?': 'Kon bo ke ordená e kolumna aki?',
+  'Kolom aflopend sorteren': 'Ordená kolumna bahando',
+  'Kolom oplopend sorteren': 'Ordená kolumna subiendo',
+  'Sorteren met aandachtspunten?': 'Sorteá pa puntonan di interes?',
+  'Tijd': 'Ora',
+  'Tijdlijn bekijken': 'Wak e liña di tempu',
+  'Toch sorteren': 'Ainda ta sorteando',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Promé agregá por lo ménos un evento. E tabel aki ta keda meskos.',
   'Voetnoot': 'Nota na pia di página',
   'Noten': 'Notanan',
   'Voetnoten achterin het document': 'Notanan na fin di e dokumento',

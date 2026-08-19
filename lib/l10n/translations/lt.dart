@@ -1657,6 +1657,29 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Als tabel weergeven': 'Rodyti kaip lentelę',
+  'Als tijdlijn weergeven': 'Rodyti kaip laiko juostą',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Atrodo, kad ne visos vertės yra to paties tipo. Pasirinkite, kaip OciDeck turėtų juos skaityti; neatpažintos vertybės lieka apačioje pradine tvarka.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Šiame stulpelyje dar nėra reikšmių, kurias būtų galima rūšiuoti tokiu būdu.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Šios lentelės dar negalima rodyti kaip laiko juostos ir ji lieka nepakitusi.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Kai kurios vertybės nėra atpažįstamos. Tos eilutės lieka kartu apačioje; jų turinys nesikeičia.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Laiko juosta veikia su dviem arba trimis stulpeliais. Ši lentelė lieka nepakitusi.',
+  'Gebeurtenis': 'Renginys',
+  'Gebeurtenissen bewerken': 'Redaguoti įvykius',
+  'Hoe wil je deze kolom sorteren?': 'Kaip norite rūšiuoti šį stulpelį?',
+  'Kolom aflopend sorteren': 'Rūšiuoti stulpelį mažėjimo tvarka',
+  'Kolom oplopend sorteren': 'Rūšiuoti stulpelį didėjančia tvarka',
+  'Sorteren met aandachtspunten?': 'Rūšiuoti pagal lankytinas vietas?',
+  'Tijd': 'Laikas',
+  'Tijdlijn bekijken': 'Peržiūrėti laiko juostą',
+  'Toch sorteren': 'Vis dar rūšiuoja',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Pirmiausia pridėkite bent vieną įvykį. Ši lentelė lieka nepakitusi.',
   'Voetnoot': 'Išnaša',
   'Noten': 'Pastabos',
   'Voetnoten achterin het document': 'Išnašos dokumento pabaigoje',

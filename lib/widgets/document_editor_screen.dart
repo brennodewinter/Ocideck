@@ -28,6 +28,7 @@ import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
 import '../services/image_service.dart' show ImageImportFailure, ImageService;
 import '../services/markdown_table_codec.dart';
+import '../services/document_timeline.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
 import '../platform/platform_features.dart';
@@ -505,6 +506,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               onApplyChapterBreaks: () =>
                   applyChapterBreaksToDocument(context, ref),
               onInsertTable: _insertTable,
+              onInsertTimeline: _insertTimeline,
               onInsertMermaid: _insertMermaid,
               onInsertImage: _insertImage,
               onPaste: () => unawaited(_smartPaste()),

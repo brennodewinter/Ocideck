@@ -18,6 +18,7 @@ enum _Kind {
   mermaid,
   chart,
   table,
+  timeline,
   rule,
   toc,
 }
@@ -33,6 +34,13 @@ class _Block {
     this.items = const [],
     this.rows = const [],
     this.aligns = const [],
+    this.timelineMarker = '',
+    this.timelineMarkerHeader = '',
+    this.timelineEventHeader = '',
+    this.timelineMetadata,
+    this.timelineMetadataHeader,
+    this.timelineFirst = false,
+    this.timelineLast = false,
   });
 
   final _Kind kind;
@@ -55,10 +63,19 @@ class _Block {
   /// than the column count means the rest default to left (the GFM default).
   final List<TableAlign> aligns;
 
+  final String timelineMarker;
+  final String timelineMarkerHeader;
+  final String timelineEventHeader;
+  final String? timelineMetadata;
+  final String? timelineMetadataHeader;
+  final bool timelineFirst;
+  final bool timelineLast;
+
   /// The plain text a find-in-page query matches against. Rules never match;
   /// tables and lists flatten their cells/items into one searchable string.
   String get searchText => switch (kind) {
     _Kind.table => rows.join(' '),
+    _Kind.timeline => [timelineMarker, text, ?timelineMetadata].join(' '),
     _Kind.list => items.map((e) => e.text).join(' '),
     _Kind.rule => '',
     _Kind.toc => 'inhoudsopgave table of contents',

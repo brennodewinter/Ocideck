@@ -1650,6 +1650,29 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Als tabel weergeven': 'Näytä taulukkona',
+  'Als tijdlijn weergeven': 'Näytä aikajanana',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Kaikki arvot eivät näytä olevan samaa tyyppiä. Valitse, miten OciDeck lukee ne; tunnistamattomat arvot pysyvät alareunassa alkuperäisessä järjestyksessä.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Tämä sarake ei vielä sisällä arvoja, jotka voitaisiin lajitella tällä tavalla.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Tätä taulukkoa ei voi vielä näyttää aikajanana, ja se pysyy muuttumattomana.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Joitakin arvoja ei tunnisteta. Nämä rivit pysyvät yhdessä alareunassa; niiden sisältö ei muutu.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Aikajana toimii kahdella tai kolmella sarakkeella. Tämä taulukko pysyy ennallaan.',
+  'Gebeurtenis': 'Tapahtuma',
+  'Gebeurtenissen bewerken': 'Muokkaa tapahtumia',
+  'Hoe wil je deze kolom sorteren?': 'Miten haluat lajitella tämän sarakkeen?',
+  'Kolom aflopend sorteren': 'Lajittele sarake laskevaan järjestykseen',
+  'Kolom oplopend sorteren': 'Lajittele sarake nousevasti',
+  'Sorteren met aandachtspunten?': 'Lajittele kiinnostavien kohteiden mukaan?',
+  'Tijd': 'Aika',
+  'Tijdlijn bekijken': 'Näytä aikajana',
+  'Toch sorteren': 'Lajittelu edelleen',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Lisää ensin vähintään yksi tapahtuma. Tämä taulukko pysyy ennallaan.',
   'Voetnoot': 'Alaviite',
   'Noten': 'Viitteet',
   'Voetnoten achterin het document': 'Alaviitteet asiakirjan lopussa',

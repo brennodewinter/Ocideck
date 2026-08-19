@@ -5,6 +5,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 import 'footnote_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
 import 'toc_embed_syntax.dart';
+import 'timeline_table_embed_syntax.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
 ///
@@ -34,6 +35,7 @@ class MarkdownQuillCodec {
     // De TOC-marker staat vóór de HTML-blokregel, anders slokt die hem als
     // rauwe HTML op en valt hij als losse tekst uiteen.
     blockSyntaxes: const [
+      TimelineTableSyntax(),
       TocMarkerSyntax(),
       FootnoteDefSyntax(),
       EmbeddableTableSyntax(),
@@ -46,6 +48,8 @@ class MarkdownQuillCodec {
   static final _mdToDelta = MarkdownToDelta(
     markdownDocument: _mdDocument,
     customElementToEmbeddable: {
+      EmbeddableTimelineTable.timelineType:
+          EmbeddableTimelineTable.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
@@ -54,6 +58,7 @@ class MarkdownQuillCodec {
   );
   static final _deltaToMd = DeltaToMarkdown(
     customEmbedHandlers: {
+      EmbeddableTimelineTable.timelineType: EmbeddableTimelineTable.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
@@ -84,7 +89,7 @@ class MarkdownQuillCodec {
 
   static String markdownFromDocument(Document document) {
     final raw = _deltaToMd.convert(document.toDelta()).trimRight();
-    return normalizeRichTextMarkdown(raw).replaceAll(_writtenOutRule, '---');
+    return _normalizeQuillOutput(raw).replaceAll(_writtenOutRule, '---');
   }
 
   /// `DeltaToMarkdown` schrijft een scheiding als `- - -`. Betekenis-identiek,
@@ -92,6 +97,23 @@ class MarkdownQuillCodec {
   /// documentmodus), en zonder deze omzetting herschreef één visuele bewerking
   /// stilzwijgend elke scheiding in het bestand van de gebruiker.
   static final _writtenOutRule = RegExp(r'^- - -$', multiLine: true);
+}
+
+/// Quill schrijft in gewone proza enkele leestekens defensief escaped; die
+/// bestaande normalisatie blijft gewenst. In een GFM-tabel is `\|` daarentegen
+/// structuur: de backslash verwijderen splitst één cel in twee. Tabelregels
+/// reizen daarom via de opslagnormalisatie, alle andere regels via de bestaande
+/// schermnormalisatie.
+String _normalizeQuillOutput(String raw) {
+  final stored = normalizeRichTextMarkdownForStorage(raw);
+  return stored
+      .split('\n')
+      .map(
+        (line) => line.trimLeft().startsWith('|')
+            ? line
+            : unescapeMarkdownEscapes(line),
+      )
+      .join('\n');
 }
 
 bool _nodeHasAttr(Node? node, String attributeKey) {

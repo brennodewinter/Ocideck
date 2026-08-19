@@ -675,6 +675,29 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Als tabel weergeven': 'Als Tabelle anzeigen',
+  'Als tijdlijn weergeven': 'Als Zeitleiste anzeigen',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Die Werte scheinen nicht alle vom gleichen Typ zu sein. Wählen Sie, wie OciDeck sie lesen soll; Nicht erkannte Werte bleiben in ihrer ursprünglichen Reihenfolge unten.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Diese Spalte enthält noch keine Werte, die auf diese Weise sortiert werden können.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Diese Tabelle kann noch nicht als Zeitleiste angezeigt werden und bleibt unverändert.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Einige der Werte werden nicht erkannt. Diese Reihen bleiben unten zusammen; Ihr Inhalt ändert sich nicht.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Eine Zeitleiste funktioniert mit zwei oder drei Spalten. Diese Tabelle bleibt unverändert.',
+  'Gebeurtenis': 'Ereignis',
+  'Gebeurtenissen bewerken': 'Bearbeiten Sie Ereignisse',
+  'Hoe wil je deze kolom sorteren?': 'Wie möchten Sie diese Spalte sortieren?',
+  'Kolom aflopend sorteren': 'Spalte absteigend sortieren',
+  'Kolom oplopend sorteren': 'Spalte aufsteigend sortieren',
+  'Sorteren met aandachtspunten?': 'Nach Sehenswürdigkeiten sortieren?',
+  'Tijd': 'Zeit',
+  'Tijdlijn bekijken': 'Zeitleiste anzeigen',
+  'Toch sorteren': 'Bin immer noch am Sortieren',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Fügen Sie zunächst mindestens ein Ereignis hinzu. Diese Tabelle bleibt unverändert.',
   'Voetnoot': 'Fußnote',
   'Noten': 'Anmerkungen',
   'Voetnoten achterin het document': 'Fußnoten am Ende des Dokuments',

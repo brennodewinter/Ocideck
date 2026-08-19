@@ -1649,6 +1649,29 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Als tabel weergeven': 'Visa som tabell',
+  'Als tijdlijn weergeven': 'Visa som tidslinje',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Värdena verkar inte alla vara av samma typ. Välj hur OciDeck ska läsa dem; okända värden förblir längst ner i sin ursprungliga ordning.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Denna kolumn innehåller ännu inga värden som kan sorteras på detta sätt.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Denna tabell kan ännu inte visas som en tidslinje och förblir oförändrad.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Vissa av värdena känns inte igen. Dessa rader förblir tillsammans längst ner; deras innehåll ändras inte.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'En tidslinje fungerar med två eller tre kolumner. Denna tabell förblir oförändrad.',
+  'Gebeurtenis': 'Händelse',
+  'Gebeurtenissen bewerken': 'Redigera händelser',
+  'Hoe wil je deze kolom sorteren?': 'Hur vill du sortera den här kolumnen?',
+  'Kolom aflopend sorteren': 'Sortera kolumn fallande',
+  'Kolom oplopend sorteren': 'Sortera kolumn stigande',
+  'Sorteren met aandachtspunten?': 'Sortera efter intressanta platser?',
+  'Tijd': 'Tid',
+  'Tijdlijn bekijken': 'Visa tidslinjen',
+  'Toch sorteren': 'Sorterar fortfarande',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Lägg först till minst en händelse. Denna tabell förblir oförändrad.',
   'Voetnoot': 'Fotnot',
   'Noten': 'Noter',
   'Voetnoten achterin het document': 'Fotnoter sist i dokumentet',

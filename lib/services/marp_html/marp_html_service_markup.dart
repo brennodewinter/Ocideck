@@ -275,8 +275,15 @@ String _renderSections(
 }) {
   final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
   if (continuous) {
+    final documentSource = _stripFrontMatter(markdown).trim().replaceAll(
+      RegExp(
+        '^${RegExp.escape(documentTimelineMarker)}[ \\t]*\$',
+        multiLine: true,
+      ),
+      '<div class="ocideck-timeline-marker" aria-hidden="true"></div>',
+    );
     final rendered = _renderBodyBlocks(
-      _stripFrontMatter(markdown).trim(),
+      documentSource,
       theme: theme,
       cockpitColorScheme: cockpitColorScheme,
       signature: signature,

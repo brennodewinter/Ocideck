@@ -1652,6 +1652,29 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Als tabel weergeven': 'Zobrazit jako tabulku',
+  'Als tijdlijn weergeven': 'Zobrazit jako časovou osu',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Všechny hodnoty se nezdají být stejného typu. Vyberte, jak je má OciDeck číst; nerozpoznané hodnoty zůstanou dole v původním pořadí.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Tento sloupec zatím neobsahuje žádné hodnoty, které lze tímto způsobem seřadit.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Tuto tabulku zatím nelze zobrazit jako časovou osu a zůstává nezměněna.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Některé hodnoty nejsou rozpoznány. Tyto řádky zůstávají dole pohromadě; jejich obsah se nemění.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Časová osa pracuje se dvěma nebo třemi sloupci. Tato tabulka zůstává nezměněna.',
+  'Gebeurtenis': 'Událost',
+  'Gebeurtenissen bewerken': 'Upravit události',
+  'Hoe wil je deze kolom sorteren?': 'Jak chcete tento sloupec seřadit?',
+  'Kolom aflopend sorteren': 'Seřadit sloupec sestupně',
+  'Kolom oplopend sorteren': 'Seřadit sloupec vzestupně',
+  'Sorteren met aandachtspunten?': 'Seřadit podle bodů zájmu?',
+  'Tijd': 'Čas',
+  'Tijdlijn bekijken': 'Zobrazit časovou osu',
+  'Toch sorteren': 'Pořád se třídí',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Nejprve přidejte alespoň jednu událost. Tato tabulka zůstává nezměněna.',
   'Voetnoot': 'Poznámka pod čarou',
   'Noten': 'Poznámky',
   'Voetnoten achterin het document': 'Poznámky na konci dokumentu',

@@ -30,6 +30,7 @@ class _DocEditorToolbar extends StatelessWidget {
   final ValueChanged<double> onZoomChanged;
   final VoidCallback onInsertChart;
   final VoidCallback onInsertTable;
+  final VoidCallback onInsertTimeline;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
   final VoidCallback onInsertPageBreak;
@@ -84,6 +85,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onZoomChanged,
     required this.onInsertChart,
     required this.onInsertTable,
+    required this.onInsertTimeline,
     required this.onInsertMermaid,
     required this.onInsertImage,
     required this.onInsertPageBreak,
@@ -339,6 +341,7 @@ class _DocEditorToolbar extends StatelessWidget {
       onSelected: (value) => switch (value) {
         0 => onInsertChart(),
         1 => onInsertTable(),
+        9 => onInsertTimeline(),
         2 => onInsertMermaid(),
         3 => onInsertImage(),
         5 => onInsertPageBreak(),
@@ -350,6 +353,7 @@ class _DocEditorToolbar extends StatelessWidget {
       itemBuilder: (context) => [
         _insertItem(0, Icons.bar_chart, l10n.d('Grafiek')),
         _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
+        _insertItem(9, Icons.timeline_outlined, l10n.d('Tijdlijn')),
         _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
         _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
         _insertItem(

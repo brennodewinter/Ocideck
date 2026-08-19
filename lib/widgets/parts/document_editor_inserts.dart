@@ -49,6 +49,17 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     _insertBlock(encodeMarkdownTable(rows));
   }
 
+  /// Voeg een tijdlijn in als marker plus gewone tabel. De startinhoud blijft
+  /// bruikbaar wanneer een andere Markdown-lezer de marker negeert.
+  void _insertTimeline() {
+    final l10n = context.l10n;
+    final table = encodeMarkdownTable([
+      [l10n.d('Tijd'), l10n.d('Gebeurtenis'), l10n.d('Status')],
+      ['', '', ''],
+    ]);
+    _insertBlock(markTableAsTimeline(table));
+  }
+
   /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal
   /// startdiagram (knoop-id's, geen tekst om te vertalen). Bewerken gaat via de
   /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).

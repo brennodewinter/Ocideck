@@ -7,6 +7,7 @@ import '../../models/settings.dart' show ThemeProfile, TableBorderStyle;
 import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
+import '../../services/document_timeline.dart';
 import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
 import '../../theme/app_theme.dart';
@@ -21,6 +22,7 @@ import 'table_editable_cell.dart';
 
 part 'parts/document_markdown_blocks.dart';
 part 'parts/document_markdown_table.dart';
+part 'parts/document_markdown_timeline.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
 /// and numbered lists, GFM task lists, block quotes, fenced code, ```mermaid
@@ -62,6 +64,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.onEditTable,
     this.tableEditController,
     this.tableEditOrdinal = 0,
+    this.onSortTableColumn,
     this.hideRules = false,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
@@ -145,6 +148,8 @@ class DocumentMarkdownView extends StatelessWidget {
   /// in hetzelfde document blijven gewoon gerenderd.
   final TableEditController? tableEditController;
   final int tableEditOrdinal;
+
+  final void Function(int column, bool ascending)? onSortTableColumn;
 
   /// Tekent een `---` niet als streep.
   ///
@@ -349,6 +354,11 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
     _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
+    _Kind.timeline => _TimelineEventView(
+      theme: t,
+      event: b,
+      onTapLink: onTapLink,
+    ),
     _Kind.rule => hideRules ? const SizedBox.shrink() : _bounded(_rule(t)),
     _Kind.toc => _bounded(_tocPreview(context, t)),
   };
@@ -496,24 +506,21 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // GFM pipe table: a header row followed by a |---|:--:| delimiter row.
+      if (trimmed == documentTimelineMarker && i + 2 < lines.length) {
+        final parsed = _parseTimelineAt(lines, i);
+        if (parsed != null) {
+          blocks.addAll(parsed.blocks);
+          i = parsed.end;
+          continue;
+        }
+      }
+
       if (isMarkdownTableLine(line) &&
           i + 1 < lines.length &&
           isMarkdownTableDelimiterRow(lines[i + 1])) {
-        final rows = <String>[line];
-        // De per-kolomuitlijning zit in de scheidingsrij (`:--`, `--:`, `:-:`);
-        // die halen we eruit voordat we hem overslaan.
-        final aligns = decodeMarkdownTableWithAlignment([
-          line,
-          lines[i + 1],
-        ]).alignments;
-        var j = i + 2;
-        while (j < lines.length && isMarkdownTableLine(lines[j])) {
-          rows.add(lines[j]);
-          j++;
-        }
-        blocks.add(_Block(_Kind.table, rows: rows, aligns: aligns));
-        i = j;
+        final parsed = _parseTableAt(lines, i);
+        blocks.add(parsed.block);
+        i = parsed.end;
         continue;
       }
 
@@ -793,5 +800,52 @@ class DocumentMarkdownView extends StatelessWidget {
     // Zonder noten `null`, en dan blijft `[^1]` gewoon `[^1]` — precies wat een
     // technische tekst met een tekenklasse erin nodig heeft.
     footnoteNumbers: t.footnoteNumbers.isEmpty ? null : t.footnoteNumbers,
+  );
+}
+
+({_Block block, int end}) _parseTableAt(List<String> lines, int start) {
+  final rows = <String>[lines[start]];
+  final aligns = decodeMarkdownTableWithAlignment([
+    lines[start],
+    lines[start + 1],
+  ]).alignments;
+  var end = start + 2;
+  while (end < lines.length && isMarkdownTableLine(lines[end])) {
+    rows.add(lines[end]);
+    end++;
+  }
+  return (block: _Block(_Kind.table, rows: rows, aligns: aligns), end: end);
+}
+
+({List<_Block> blocks, int end})? _parseTimelineAt(
+  List<String> lines,
+  int start,
+) {
+  var end = start + 1;
+  while (end < lines.length && isMarkdownTableLine(lines[end])) {
+    end++;
+  }
+  final timeline = analyzeMarkedTimeline(
+    lines.sublist(start, end).join('\n'),
+  ).timeline;
+  if (timeline == null) return null;
+  return (
+    blocks: [
+      for (var index = 0; index < timeline.events.length; index++)
+        _Block(
+          _Kind.timeline,
+          text: timeline.events[index].event,
+          timelineMarker: timeline.events[index].marker,
+          timelineMarkerHeader: timeline.headers[0],
+          timelineEventHeader: timeline.headers[1],
+          timelineMetadata: timeline.events[index].metadata,
+          timelineMetadataHeader: timeline.headers.length == 3
+              ? timeline.headers[2]
+              : null,
+          timelineFirst: index == 0,
+          timelineLast: index == timeline.events.length - 1,
+        ),
+    ],
+    end: end,
   );
 }

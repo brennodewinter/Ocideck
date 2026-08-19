@@ -1670,6 +1670,29 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Als tabel weergeven': 'Wiri bħala tabella',
+  'Als tijdlijn weergeven': 'Uri bħala timeline',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Il-valuri mhux kollha jidhru li huma tal-istess tip. Agħżel kif OciDeck għandu jaqrahom; valuri mhux rikonoxxuti jibqgħu fil-qiegħ fl-ordni oriġinali tagħhom.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Din il-kolonna għadha ma fiha l-ebda valuri li jistgħu jiġu magħżula b\'dan il-mod.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Din it-tabella għadha ma tistax tintwera bħala skeda tal-ħin u tibqa\' l-istess.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Xi wħud mill-valuri mhumiex rikonoxxuti. Dawk ir-ringieli jibqgħu flimkien fil-qiegħ; il-kontenut tagħhom ma jinbidilx.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Kronoloġija taħdem b\'żewġ jew tliet kolonni. Din it-tabella tibqa\' l-istess.',
+  'Gebeurtenis': 'Avveniment',
+  'Gebeurtenissen bewerken': 'Editja l-avvenimenti',
+  'Hoe wil je deze kolom sorteren?': 'Kif trid issolvi din il-kolonna?',
+  'Kolom aflopend sorteren': 'Issortja kolonna dixxendenti',
+  'Kolom oplopend sorteren': 'Issortja kolonna axxendenti',
+  'Sorteren met aandachtspunten?': 'Issortja skond il-punti ta\' interess?',
+  'Tijd': 'Ħin',
+  'Tijdlijn bekijken': 'Ara l-kronoloġija',
+  'Toch sorteren': 'Għadhom issortjar',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'L-ewwel żid mill-inqas avveniment wieħed. Din it-tabella tibqa\' l-istess.',
   'Voetnoot': 'Nota f\'qiegħ il-paġna',
   'Noten': 'Noti',
   'Voetnoten achterin het document': 'Noti fl-aħħar tad-dokument',

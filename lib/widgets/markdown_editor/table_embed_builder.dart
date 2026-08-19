@@ -5,6 +5,10 @@ import 'package:markdown_quill/markdown_quill.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../models/slide.dart';
 import '../../services/markdown_table_codec.dart';
+import '../../services/table_sort.dart';
+import '../../services/document_timeline.dart';
+import '../../l10n/app_localizations.dart';
+import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
 import 'markdown_editor_theme.dart';
@@ -145,6 +149,61 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     );
   }
 
+  Future<void> _sort(int column, bool ascending) async {
+    final current = _pending ?? widget.gfm;
+    final sorted = await smartSortTable(
+      context,
+      current,
+      column: column,
+      ascending: ascending,
+    );
+    if (mounted && sorted != null) {
+      _pending = null;
+      _replaceRaw(sorted);
+    }
+  }
+
+  void _replaceRaw(String gfm) {
+    final node = widget.embedContext.node;
+    if (node.parent == null || gfm == widget.gfm) return;
+    widget.embedContext.controller.replaceText(
+      node.documentOffset,
+      1,
+      EmbeddableTable(gfm),
+      null,
+    );
+  }
+
+  void _asTimeline() {
+    final current = _pending ?? widget.gfm;
+    final analysis = analyzeTimelineTable(current);
+    if (!analysis.isUsable) {
+      final message = switch (analysis.issue) {
+        TimelineTableIssue.wrongColumnCount => context.l10n.d(
+          'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.',
+        ),
+        TimelineTableIssue.noEvents => context.l10n.d(
+          'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.',
+        ),
+        _ => context.l10n.d(
+          'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.',
+        ),
+      };
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
+      return;
+    }
+    final node = widget.embedContext.node;
+    if (node.parent == null) return;
+    widget.embedContext.controller.replaceText(
+      node.documentOffset,
+      1,
+      EmbeddableTimelineTable(markTableAsTimeline(current)),
+      null,
+    );
+  }
+
   @override
   void dispose() {
     _editor.dispose();
@@ -152,11 +211,118 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   }
 
   @override
-  Widget build(BuildContext context) => DocumentMarkdownView(
-    widget.gfm,
-    maxTextWidth: null,
-    themeProfile: widget.profile,
-    chartTheme: widget.profile,
-    tableEditController: _editor,
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Align(
+        alignment: Alignment.centerRight,
+        child: TextButton.icon(
+          onPressed: _asTimeline,
+          icon: const Icon(Icons.timeline_outlined),
+          label: Text(context.l10n.d('Als tijdlijn weergeven')),
+        ),
+      ),
+      DocumentMarkdownView(
+        widget.gfm,
+        maxTextWidth: null,
+        themeProfile: widget.profile,
+        chartTheme: widget.profile,
+        tableEditController: _editor,
+        onSortTableColumn: _sort,
+      ),
+    ],
   );
+}
+
+/// Vraagt alleen om hulp wanneer lokale analyse geen eenduidige of volledig
+/// leesbare kolom vindt. Zo blijft de standaardhandeling snel, maar worden
+/// onbekende waarden nooit stilzwijgend anders geïnterpreteerd.
+Future<String?> smartSortTable(
+  BuildContext context,
+  String gfm, {
+  required int column,
+  required bool ascending,
+}) async {
+  const sorter = TableSortService();
+  final lines = gfm.replaceAll('\r\n', '\n').replaceAll('\r', '\n').split('\n');
+  var kind = TableSortKind.automatic;
+  var analysis = sorter.analyze(lines, columnIndex: column);
+  if (!analysis.canSort) {
+    final chosen = await showDialog<TableSortKind>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.l10n.d('Hoe wil je deze kolom sorteren?')),
+        content: Text(
+          context.l10n.d(
+            'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.',
+          ),
+        ),
+        actions: [
+          for (final option in const [
+            (TableSortKind.text, 'Tekst'),
+            (TableSortKind.number, 'Getal'),
+            (TableSortKind.date, 'Datum'),
+            (TableSortKind.time, 'Tijd'),
+          ])
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, option.$1),
+              child: Text(context.l10n.d(option.$2)),
+            ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(context.l10n.d('Annuleren')),
+          ),
+        ],
+      ),
+    );
+    if (!context.mounted || chosen == null) return null;
+    kind = chosen;
+    analysis = sorter.analyze(lines, columnIndex: column, kind: kind);
+  }
+  if (!analysis.canSort) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.',
+          ),
+        ),
+      ),
+    );
+    return null;
+  }
+  if (analysis.suitability ==
+      TableAnalysisSuitability.suitableWithAttentionPoints) {
+    final proceed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.l10n.d('Sorteren met aandachtspunten?')),
+        content: Text(
+          context.l10n.d(
+            'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(context.l10n.d('Annuleren')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(context.l10n.d('Toch sorteren')),
+          ),
+        ],
+      ),
+    );
+    if (!context.mounted || proceed != true) return null;
+  }
+  final result = sorter.sortSource(
+    gfm,
+    columnIndex: column,
+    kind: kind,
+    direction: ascending
+        ? TableSortDirection.ascending
+        : TableSortDirection.descending,
+  );
+  return result.changed ? result.source : null;
 }

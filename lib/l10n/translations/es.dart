@@ -673,6 +673,29 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Als tabel weergeven': 'Mostrar como tabla',
+  'Als tijdlijn weergeven': 'Mostrar como línea de tiempo',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'No todos los valores parecen ser del mismo tipo. Elija cómo OciDeck debe leerlos; Los valores no reconocidos permanecen en la parte inferior en su orden original.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Esta columna aún no contiene ningún valor que pueda ordenarse de esta manera.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Esta tabla aún no se puede mostrar como una línea de tiempo y permanece sin cambios.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Algunos de los valores no son reconocidos. Esas filas permanecen juntas en la parte inferior; su contenido no cambia.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Una línea de tiempo funciona con dos o tres columnas. Esta tabla permanece sin cambios.',
+  'Gebeurtenis': 'Evento',
+  'Gebeurtenissen bewerken': 'Editar eventos',
+  'Hoe wil je deze kolom sorteren?': '¿Cómo desea ordenar esta columna?',
+  'Kolom aflopend sorteren': 'Ordenar columna descendente',
+  'Kolom oplopend sorteren': 'Ordenar columna ascendente',
+  'Sorteren met aandachtspunten?': '¿Ordenar por puntos de interés?',
+  'Tijd': 'Tiempo',
+  'Tijdlijn bekijken': 'Ver línea de tiempo',
+  'Toch sorteren': 'Todavía clasificando',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Primero agregue al menos un evento. Esta tabla permanece sin cambios.',
   'Voetnoot': 'Nota al pie',
   'Noten': 'Notas',
   'Voetnoten achterin het document': 'Notas al final del documento',
