@@ -7,6 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/footnote_embed_syntax.dart';
+import '../../utils/markdown_caret_map.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_visual_compatibility.dart';
@@ -400,16 +401,46 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   void _openVisualEditor() {
     if (_quillController != null) return;
     _scrollController = ScrollController();
+    final document = MarkdownQuillCodec.documentFromMarkdown(
+      normalizeRichTextMarkdown(widget.controller.text),
+    );
     _quillController = QuillController(
-      document: MarkdownQuillCodec.documentFromMarkdown(
-        normalizeRichTextMarkdown(widget.controller.text),
+      document: document,
+      // Waar de cursor in de bron stond, staat hij ook hier. Zonder die
+      // vertaling begon je na elke wissel weer bovenaan het document (#1566).
+      selection: TextSelection.collapsed(
+        offset: _visualCaretFromSource(document),
       ),
-      selection: const TextSelection.collapsed(offset: 0),
     );
     _markdownSnapshot = widget.controller.text;
     _lastQuillDelta = _quillController!.document.toDelta();
     _visualEdited = false;
     _quillController!.addListener(_onQuillChanged);
+  }
+
+  /// De cursorpositie in het verse Quill-document die hoort bij de cursor van
+  /// de bron. Buiten bereik of zonder geldige selectie: het begin.
+  int _visualCaretFromSource(Document document) {
+    final selection = widget.controller.selection;
+    if (!selection.isValid) return 0;
+    final offset = MarkdownCaretMap.of(
+      widget.controller.text,
+    ).visualOffsetOf(selection.baseOffset);
+    // Het document sluit af met een regelafsluiter; de cursor mag daar niet
+    // achter staan.
+    return offset.clamp(0, document.length - 1);
+  }
+
+  /// Zet de cursor van de bron op de plek die hoort bij [visualOffset] in de
+  /// platte tekst van de visuele stand.
+  void _placeSourceCaret(int visualOffset) {
+    final text = widget.controller.text;
+    final offset = MarkdownCaretMap.of(
+      text,
+    ).sourceOffsetOf(visualOffset).clamp(0, text.length);
+    _syncingMarkdown = true;
+    widget.controller.selection = TextSelection.collapsed(offset: offset);
+    _syncingMarkdown = false;
   }
 
   void _closeVisualEditor({required bool flush}) {
@@ -495,7 +526,13 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }) {
     if (from == to) return;
     if (from == NotesEditorMode.visual) {
+      // De plek waar je stond, vóór het opruimen: hij moet de bron in.
+      final quill = _quillController;
+      final caret = quill != null && quill.selection.isValid
+          ? quill.selection.baseOffset
+          : null;
       _closeVisualEditor(flush: true);
+      if (caret != null) _placeSourceCaret(caret);
     }
     if (to == NotesEditorMode.visual) {
       _openVisualEditor();

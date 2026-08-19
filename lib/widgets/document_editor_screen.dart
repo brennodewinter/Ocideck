@@ -49,6 +49,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
+import '../utils/markdown_caret_map.dart';
 import '../utils/markdown_paste_cleanup.dart';
 import '../utils/markdown_visual_compatibility.dart'
     show markdownRoundTripsVisually;
@@ -111,6 +112,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   int _revealSignal = 0;
   int? _revealMarkdownOffset;
   String? _revealTitle;
+
+  /// Waar de cursor het laatst stond in de platte tekst van de visuele stand.
+  /// Bij het wisselen naar de bron wordt hij hiermee teruggerekend naar een
+  /// plek in de Markdown (#1566).
+  int _visualCaret = 0;
 
   /// De actieve weergavemodus. [_DocViewMode.visual] is de standaard: de
   /// gedeelde Markdown-editor (WYSIWYG via Quill, of rauw bij constructies die
@@ -216,6 +222,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
   void _syncOutlineToVisualCaret(String plain, int plainOffset) {
+    _visualCaret = plainOffset;
     _setActiveOutlineIndex(
       activeOutlineIndexInPlainText(
         buildMarkdownOutline(_controller.text),
@@ -494,7 +501,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           children: [
             _DocEditorToolbar(
               mode: _viewMode,
-              onModeChanged: (m) => setState(() => _viewMode = m),
+              onModeChanged: _changeViewMode,
               onInsertChart: _insertChart,
               onInsertPageBreak: _insertPageBreak,
               onInsertToc: _insertToc,
@@ -573,6 +580,36 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         ),
       ),
     );
+  }
+
+  /// Wissel van weergave — en neem je plek in de tekst mee.
+  ///
+  /// Wisselen doe je omdat je op één plek iets in de bron wilt zien of zetten.
+  /// Kwam je bovenaan uit, dan moest je je plek in een lang document opnieuw
+  /// zoeken en werd de bronstand iets om te vermijden (#1566). De andere kant
+  /// op regelt de visuele editor zelf: die leest bij het openen de cursor van
+  /// de bron-controller.
+  void _changeViewMode(_DocViewMode mode) {
+    if (mode == _viewMode) return;
+    if (_viewMode == _DocViewMode.visual) {
+      final text = _controller.text;
+      final offset = MarkdownCaretMap.of(
+        text,
+      ).sourceOffsetOf(_visualCaret).clamp(0, text.length);
+      // Alleen de cursor verzet, geen bewerking: de luisteraar mag hier niets
+      // naar de notifier schrijven.
+      _applyingExternal = true;
+      _controller.selection = TextSelection.collapsed(offset: offset);
+      _applyingExternal = false;
+    }
+    setState(() => _viewMode = mode);
+    if (mode == _DocViewMode.source) {
+      // De bron-editor bestaat pas ná deze opbouw; focussen kan dus niet eerder,
+      // en zonder focus schuift het veld de cursor niet in beeld.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _editorFocus.requestFocus();
+      });
+    }
   }
 
   /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
