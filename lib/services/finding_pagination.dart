@@ -176,6 +176,11 @@ FindingSpec _page(
     confirmation: sec(_Section.confirmation, spec.confirmation),
     impact: sec(_Section.impact, spec.impact),
     recommendation: sec(_Section.recommendation, spec.recommendation),
+    // Het kopniveau hoort bij élke pagina, niet alleen de eerste: een
+    // vervolgpagina die op `#` terugvalt terwijl de bron `###` zei, verschuift
+    // de blokgrens en slokt de rest van het hoofdstuk op. Zelfde les als de
+    // vier velden hierboven, en de compiler noemt hem net zo min.
+    level: spec.level,
   );
 }
 

@@ -15,47 +15,13 @@ library;
 
 import '../models/slide.dart';
 
-/// Een pijp die geen celinhoud is, dus niet voorafgegaan door een backslash.
-final _unescapedPipe = RegExp(r'(?<!\\)\|');
+/// De regelherkenning en het celsplitsen wonen in een Flutter-vrij bestand,
+/// zodat een zuivere parser ze kan gebruiken zonder deze module (en daarmee
+/// `models/slide.dart` en het hele Flutter-materiaal) binnen te halen. Hier
+/// doorgeëxporteerd, zodat elke bestaande aanroeper één oppervlak ziet.
+export 'markdown_table_lines.dart';
 
-/// De scheidingsrij van een GFM-tabel (`---`, `:---`, `---:`, `:---:`).
-final _separatorCell = RegExp(r'^:?-+:?$');
-
-/// Splitst één tabelregel in cellen en draait de ontsnappingen terug.
-List<String> splitMarkdownTableRow(String line) {
-  var s = line.trim();
-  if (s.startsWith('|')) s = s.substring(1);
-  if (s.endsWith('|')) s = s.substring(0, s.length - 1);
-  return s
-      .split(_unescapedPipe)
-      .map((c) => unescapeMarkdownTableCell(c.trim()))
-      .toList();
-}
-
-/// Draait de celontsnappingen van [encodeMarkdownTableCell] terug.
-String unescapeMarkdownTableCell(String s) {
-  final out = StringBuffer();
-  for (var i = 0; i < s.length; i++) {
-    if (s[i] == r'\'[0] && i + 1 < s.length) {
-      final n = s[i + 1];
-      // `\|`, `\\` and `\<` unescape to the literal char; a `\<` keeps a
-      // following `br>` as literal text rather than an author newline.
-      if (n == '|' || n == r'\'[0] || n == '<') {
-        out.write(n);
-        i++;
-        continue;
-      }
-    }
-    // An unescaped `<br>` is an author-inserted line break.
-    if (s.startsWith('<br>', i)) {
-      out.write('\n');
-      i += 3; // skip 'br>'; the loop's i++ steps past the '<'
-      continue;
-    }
-    out.write(s[i]);
-  }
-  return out.toString();
-}
+import 'markdown_table_lines.dart';
 
 /// Codeert één celwaarde voor een Markdown-tabel.
 String encodeMarkdownTableCell(String value) => value
@@ -87,9 +53,10 @@ decodeMarkdownTableWithAlignment(List<String> tableLines) {
   final alignments = <TableAlign>[];
   for (final line in tableLines) {
     final cells = splitMarkdownTableRow(line);
-    if (rows.length == 1 &&
-        cells.isNotEmpty &&
-        cells.every((c) => _separatorCell.hasMatch(c.trim()))) {
+    // Dezelfde vraag als [isMarkdownTableDelimiterRow], en sinds die met de
+    // regelherkenning is meeverhuisd stellen we hem daar in plaats van met een
+    // eigen kopie van het scheidingscel-patroon.
+    if (rows.length == 1 && isMarkdownTableDelimiterRow(line)) {
       for (final c in cells) {
         final t = c.trim();
         final left = t.startsWith(':');
@@ -107,12 +74,6 @@ decodeMarkdownTableWithAlignment(List<String> tableLines) {
     rows.add(cells);
   }
   return (rows: rows, alignments: alignments);
-}
-
-/// Of [line] eruitziet als een regel van een Markdown-tabel.
-bool isMarkdownTableLine(String line) {
-  final t = line.trim();
-  return t.startsWith('|') && t.length > 1;
 }
 
 /// Bouwt de GFM-scheidingsrij met per-kolomuitlijning: `:---` voor links,
@@ -135,17 +96,6 @@ String markdownTableSeparatorRow(int colCount, [List<TableAlign>? alignments]) {
     });
   }
   return '| ${cells.join(' | ')} |';
-}
-
-/// Of [line] de GFM-scheidingsrij ónder een tabelkop is (`| --- | :--: |`): een
-/// tabelregel waarvan élke cel `:?-+:?` is. Voor een parser die een tabel-*start*
-/// moet herkennen (koprij gevolgd door deze rij) zonder de hele tabel te
-/// decoderen — zie de documentmodus-weergave en `DocumentDeckBridge`.
-bool isMarkdownTableDelimiterRow(String line) {
-  if (!isMarkdownTableLine(line)) return false;
-  final cells = splitMarkdownTableRow(line);
-  return cells.isNotEmpty &&
-      cells.every((c) => _separatorCell.hasMatch(c.trim()));
 }
 
 /// Serialiseer een celraster (eerste rij = koppen) naar een volledige
