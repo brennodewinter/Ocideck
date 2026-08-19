@@ -69,7 +69,11 @@ class FindingSpec {
     this.retestNote = '',
     this.testId = '',
     this.unknownSectionTitles = const [],
-  });
+    this.level = 1,
+  }) : assert(
+         level >= 1 && level <= 5,
+         'sectieankers staan op level + 1; niveau 6 heeft er geen',
+       );
 
   /// The `# ` heading text, e.g. `F-03 · SQL injection in the login form`. The
   /// `F-03` prefix is authored/maintained by auto-numbering (§10.1,
@@ -138,6 +142,18 @@ class FindingSpec {
   /// not carried through edits.
   final List<String> unknownSectionTitles;
 
+  /// Het ATX-kopniveau waarop dit blok in de bron staat (1–5).
+  ///
+  /// Een **gemeten** eigenschap van de bron, nergens opgeslagen: het aantal
+  /// hekjes ís de opslag (PENTEST_DOCUMENT.md §5.3, D6). In een deck staat een
+  /// bevinding altijd op `#`, dus de standaard 1 laat het hele deckpad
+  /// byte-identiek. In een document staat ze onder haar hoofdstuk, vaak op
+  /// `###`.
+  ///
+  /// Maximaal 5: de secties liggen er één niveau onder en `#######` bestaat
+  /// niet.
+  final int level;
+
   /// The parsed CVSS vector, or null when [cvssVector] is empty/invalid.
   Cvss4? get cvss =>
       cvssVector.isEmpty ? null : Cvss4.tryParseVector(cvssVector);
@@ -170,9 +186,11 @@ class FindingSpec {
   /// The canonical NVD URL for a CVE id.
   static String cveUrl(String cve) => 'https://nvd.nist.gov/vuln/detail/$cve';
 
-  static final _reHeading = RegExp(r'^#\s+(.*)$');
+  /// Een ATX-kop met zijn diepte. Vervangt de twee vaste niveaus: welke kop de
+  /// bevindingtitel is en welke een sectieanker, hangt af van het niveau
+  /// waarop het blok in de bron staat (PENTEST_DOCUMENT.md §5.3).
+  static final _reAtxHeading = RegExp(r'^(#{1,6})\s+(.*)$');
   static final _reField = RegExp(r'^\*\*([^*]+):\*\*\s*(.*)$');
-  static final _reSection = RegExp(r'^##\s+(.*)$');
 
   /// Een code-span met een willekeurig lange rij backticks als scheiding, zodat
   /// een waarde die er zelf één bevat niet halverwege afkapt. `\1` eist dezelfde
@@ -182,7 +200,7 @@ class FindingSpec {
 
   /// Een regel in een sectietekst die als markdown-kop leest — zie
   /// [FindingSpec.escapeSectionBody].
-  static final _reBodyHeading = RegExp(r'^(\s*)#{1,6}\s');
+  static final _reBodyHeading = RegExp(r'^(\s*)(#{1,6})\s');
   static final _reEscapedBodyHeading = RegExp(r'^(\s*)\\#{1,6}\s');
   static final _reMaswe = RegExp(r'MASWE-\d+');
   static final _reCweName = RegExp(r'—\s*(.*?)\s*\]\(');
@@ -237,7 +255,8 @@ class FindingSpec {
   /// canonical layout still yield whatever fields are recognisable, and the
   /// unrecognised remainder is dropped only from the structured *view* — the raw
   /// Markdown remains the source of truth on disk.
-  factory FindingSpec.parse(String markdown) {
+  factory FindingSpec.parse(String markdown, {int level = 1}) {
+    final lv = level.clamp(1, 5);
     var heading = '';
     var scopeObject = '';
     var cvssVector = '';
@@ -253,9 +272,13 @@ class FindingSpec {
 
     for (final raw in markdown.split('\n')) {
       final line = raw.trimRight();
-      final section = _reSection.firstMatch(line);
-      if (section != null) {
-        current = section.group(1)!.trim();
+      final atx = _reAtxHeading.firstMatch(line);
+      // Een sectiekop ligt op **precies** één niveau onder de bevindingkop.
+      // Niet "dieper dan": op niveau 1 leest `### Foo` vandaag als sectietekst
+      // (na `##` volgt een `#`, geen spatie), en dat moet zo blijven — anders
+      // verandert het deckpad stil van betekenis.
+      if (atx != null && atx.group(1)!.length == lv + 1) {
+        current = atx.group(2)!.trim();
         sections.putIfAbsent(current, () => StringBuffer());
         continue;
       }
@@ -265,12 +288,13 @@ class FindingSpec {
         buf.write(raw);
         continue;
       }
-      if (heading.isEmpty) {
-        final h = _reHeading.firstMatch(line);
-        if (h != null) {
-          heading = h.group(1)!.trim();
-          continue;
-        }
+      // De grensregel ("een kop op level of ondieper beëindigt het blok") staat
+      // hier bewust NIET: zodra een sectie loopt slikt elke regel mee, en een
+      // afbreking zou tekst weggooien die vandaag bewaard blijft. De grens
+      // woont in `pentest_blocks.dart` — §6.1, één plek.
+      if (heading.isEmpty && atx != null && atx.group(1)!.length == lv) {
+        heading = atx.group(2)!.trim();
+        continue;
       }
       final field = _reField.firstMatch(line);
       if (field == null) continue;
@@ -347,6 +371,7 @@ class FindingSpec {
       impact: body(sectionImpact),
       recommendation: body(sectionRecommendation),
       unknownSectionTitles: unknownSections,
+      level: lv,
     );
   }
 
@@ -365,7 +390,7 @@ class FindingSpec {
   String toMarkdown({bool omitEmptySections = false}) {
     final buf = StringBuffer();
     if (heading.isNotEmpty) {
-      buf.writeln('# $heading');
+      buf.writeln('${'#' * level} $heading');
       buf.writeln();
     }
     final metaLines = <String>[];
@@ -480,10 +505,10 @@ class FindingSpec {
     bool omitEmpty,
   ) {
     if (omitEmpty && text.trim().isEmpty) return;
-    buf.writeln('## $title');
+    buf.writeln('${'#' * (level + 1)} $title');
     if (text.trim().isNotEmpty) {
       buf.writeln();
-      buf.writeln(escapeSectionBody(text.trim()));
+      buf.writeln(escapeSectionBody(text.trim(), level: level));
     }
     buf.writeln();
   }
@@ -498,11 +523,20 @@ class FindingSpec {
   ///
   /// `\##` is de CommonMark-ontsnapping: het rendert als letterlijke tekst en
   /// leest bij het inlezen niet meer als anker.
-  static String escapeSectionBody(String text) => text
+  static String escapeSectionBody(String text, {int level = 1}) => text
       .split('\n')
       .map((line) {
         final m = _reBodyHeading.firstMatch(line);
         if (m == null) return line;
+        // Escape ⟺ herken. Een regel wordt precies dan ontsnapt wanneer [parse]
+        // hem op ditzelfde niveau als sectiekop zou lezen: een kop op exact
+        // `level + 1`. Ondieper en dieper is gewone inhoud — een `##### Detail`
+        // in de beschrijving van een bevinding op `###` is proza, geen anker.
+        //
+        // Smaller escapen dan je leest zou stil tekstverlies opleveren: de
+        // leeskant maakt élke kop op ankerniveau een sectie, ook een onbekende,
+        // en die tekst verhuist dan naar een ander veld.
+        if (m.group(2)!.length != level + 1) return line;
         final indent = m.group(1)!;
         return '$indent\\${line.substring(indent.length)}';
       })
@@ -535,6 +569,7 @@ class FindingSpec {
     String? retestNote,
     String? testId,
     List<String>? unknownSectionTitles,
+    int? level,
   }) {
     return FindingSpec(
       heading: heading ?? this.heading,
@@ -556,6 +591,12 @@ class FindingSpec {
       retestNote: retestNote ?? this.retestNote,
       testId: testId ?? this.testId,
       unknownSectionTitles: unknownSectionTitles ?? this.unknownSectionTitles,
+      // Vergeten = stil wissen, dezelfde les als bij masweId hierboven. En
+      // erger: `renumberFindings` schrijft het resultaat terug naar de `.md`,
+      // dus een verloren niveau zet een `###`-bevinding op `#` — en dan
+      // verschuift de blokgrens uit §5.2 en slokt de bevinding de rest van het
+      // hoofdstuk op.
+      level: level ?? this.level,
     );
   }
 }
