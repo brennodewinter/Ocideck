@@ -3320,15 +3320,20 @@ per key is whether it still means anything there.
   LaTeX export turns it into `\tableofcontents`. The list is generated *after*
   the projection, from the projected body, so a contents page can never name a
   heading the recipient is not allowed to see.
-- **The footnote placement does not travel.** The notes themselves do — they are
-  ordinary text in the body (§14.9) — but `reference-location:` is not written
-  into the projected `.md`, because the export starts from the projected *body*
-  and not from the source's front matter. A recipient therefore gets the notes
-  with their own reader's placement. Unlike `theme:` that is not a considered
-  choice but an open end: the key is a Pandoc instruction, so by the reasoning
-  below it is a measure and could travel. It is recorded here rather than glossed
-  over, and tracked as issue #1569; nothing in the code depends on it staying this
-  way.
+- **The footnote placement travels** *(since 2026-08-19, #1569)*. The notes
+  themselves are ordinary text in the body (§14.9); where they land is
+  `reference-location:`, and the projected `.md` carries that key again — the
+  export starts from the projected *body*, which no longer has the source's front
+  matter, so the choice has to be set once more, exactly as the page setup is.
+  The reasoning below decides it: this key is a Pandoc and Quarto instruction
+  that means the same on any machine, so it is a measure and not a reference.
+  **The default still writes nothing.** Notes at the foot of the page is what
+  every reader does without being told, so a document that wants nothing unusual
+  is exported without front matter — the promise §14.9 makes about the source
+  holds for the copy as well.
+
+  *(This bullet said the opposite until 2026-08-19, and called it an open end
+  rather than a decision. It was tracked as #1569 and is now closed.)*
 
 The difference is not that one key is more important than the other: it is that a
 paper size is a **measure**, complete on its own in millimetres any toolchain
@@ -3671,7 +3676,9 @@ Facts that matter on disk:
   matter at all. The key is Pandoc's and Quarto's, and they execute it; OciDeck
   also reads their `section` and `block` values as "at the end", since both are
   nearer to that than to the foot of a page. It is written byte-surgically like
-  `theme:` and the page setup, and it lives in the same register (§14.5).
+  `theme:` and the page setup, and it lives in the same register (§14.5). It also
+  travels: the projected `.md` export writes the key again when it is set, so the
+  recipient gets the notes where the author put them (§14.4).
 
 ```
 ---

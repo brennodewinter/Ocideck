@@ -3353,15 +3353,21 @@ vraag per sleutel is of hij daar nog iets betekent.
   navigatie, en de LaTeX-export maakt er `\tableofcontents` van. De lijst wordt
   *na* de projectie gemaakt, uit de geprojecteerde body, zodat een inhoudsopgave
   nooit een kop kan noemen die de ontvanger niet mag zien.
-- **De plaatsing van de voetnoten reist niet mee.** De noten zelf wel — dat is
-  gewone tekst in de body (§14.9) — maar `reference-location:` wordt niet in het
-  geprojecteerde `.md` geschreven, omdat de export van de geprojecteerde *body*
-  uitgaat en niet van de front matter van de bron. De ontvanger krijgt de noten
-  dus op de plek die zijn eigen lezer kiest. Anders dan bij `theme:` is dat geen
-  overwogen keuze maar een open eind: de sleutel is een Pandoc-instructie, dus
-  volgens de redenering hieronder is het een maat en zou hij mee kunnen reizen.
-  Dat staat hier opgeschreven in plaats van gladgestreken, en staat als issue
-  #1569 op de tracker; niets in de code hangt ervan af dat het zo blijft.
+- **De plaatsing van de voetnoten reist mee** *(sinds 2026-08-19, #1569)*. De
+  noten zelf zijn gewone tekst in de body (§14.9); waar ze belanden staat in
+  `reference-location:`, en het geprojecteerde `.md` draagt die sleutel opnieuw —
+  de export gaat uit van de geprojecteerde *body*, die de front matter van de
+  bron niet meer heeft, dus moet de keuze net als de paginaopmaak nog een keer
+  gezet worden. De redenering hieronder beslist het: deze sleutel is een
+  instructie van Pandoc en Quarto die op elke machine hetzelfde betekent, dus een
+  maat en geen verwijzing. **De standaard schrijft nog steeds niets.** Noten
+  onderaan de bladzijde is wat elke lezer uit zichzelf al doet, dus een document
+  dat niets bijzonders wil wordt zonder front matter geëxporteerd — de belofte
+  die §14.9 over de bron doet, geldt ook voor de kopie.
+
+  *(Hier stond tot 2026-08-19 het tegenovergestelde, met de kanttekening dat het
+  een open eind was en geen besluit. Dat stond als #1569 op de tracker en is nu
+  gesloten.)*
 
 Het verschil is niet dat de ene sleutel belangrijker is dan de andere: het is dat
 een papiermaat een **maat** is, op zichzelf compleet in millimeters die elke
@@ -3722,7 +3728,9 @@ Wat er op schijf toe doet:
   uit; OciDeck leest hun waarden `section` en `block` ook als "achterin", omdat
   beide daar dichter bij liggen dan bij de voet van een bladzijde. Hij wordt
   byte-chirurgisch geschreven, net als `theme:` en de paginaopmaak, en staat in
-  hetzelfde register (§14.5).
+  hetzelfde register (§14.5). Hij reist ook mee: de geprojecteerde `.md`-export
+  schrijft de sleutel opnieuw wanneer hij gezet is, zodat de ontvanger de noten
+  krijgt waar de auteur ze zette (§14.4).
 
 ```
 ---
