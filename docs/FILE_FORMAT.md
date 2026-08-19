@@ -3744,7 +3744,7 @@ The author-facing description is in the
 ### 14.11 Timeline view of a GFM table *(added 2026-08-19)*
 
 A document timeline is not a new data format. It is a two- or three-column GFM
-table immediately preceded by this exact marker:
+table immediately preceded by one marker on a line of its own:
 
 ```markdown
 <!-- timeline -->
@@ -3766,3 +3766,30 @@ the visual editor, document/deck projection and export. Table sorting is a
 separate generic visual-table operation: it reorders complete raw body rows,
 stably, while preserving the header, delimiter, cell bytes and positional line
 endings.
+
+**Recognition, stated as precisely as the code reads it.** The marker must be
+the only thing on its line, but leading and trailing whitespace around it is
+tolerated (`^\s*<!-- timeline -->\s*$`), so an indented marker inside a list
+still counts. The spelling *inside* the comment is not forgiving: `<!--timeline-->`
+or `<!-- Timeline -->` is an ordinary HTML comment and the table below it stays
+an ordinary table. That is deliberate — the strictness is what keeps a stray
+comment from silently reshaping someone's table.
+
+**What each surface does with it** — the same rundown §14.9 and §14.10 give,
+because what a reader of the file format wants to know is what happens to these
+bytes on the way out:
+
+- The **projected `.md`** keeps both the marker and the table, byte for byte
+  (minus whatever the OciWacht projection redacts inside the cells). The
+  recipient therefore has the same file: a plain GFM table in any reader, a
+  timeline in OciDeck. Nothing has to be understood to read it.
+- The **HTML export** renders the rows as a timeline list rather than a table,
+  and each entry carries `break-inside: avoid`, so printing the page does not
+  cut an event in half at a sheet boundary.
+- The **LaTeX export** writes a `description` list, not a `tabular`. A third
+  column is written after the event as `Header: value`, which is why the header
+  name matters for the reader and not for OciDeck.
+- The **editor and the Pagina's view** show the timeline. In the visual mode the
+  marker and its table travel as one embed, so inserting or deleting a timeline
+  is a single document action and cannot leave a marker behind without its
+  table — the failure the atomicity above exists to prevent.
