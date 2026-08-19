@@ -1701,6 +1701,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De versiepoort ziet een proeftag niet meer voor een release aan.** Er worden
+  tags als `v0.4.7-rc1` gesneden om één bouwlijn te toetsen zonder iets uit te
+  brengen. `check-version-bump` las zo'n tag als een uitgebrachte 0.4.7 en
+  verklaarde de pubspec-versie 0.4.6 daarmee tot verboden stap terug — waarna
+  `make check` omviel op élke tak van de machine die de tag had, ook op takken
+  die de versie niet hadden aangeraakt. De tag hoeft daarvoor op geen enkele
+  remote te staan: `git describe` leest wat de lokale kloon heeft. De basislijn
+  slaat pre-release-tags nu over, zoals SemVer voorschrijft: een pre-release
+  staat lager dan de release die hij voorafgaat.
+
 - **Een documentexport herhaalde een lange sectie.** Tekst die op het scherm
   over meerdere pagina's liep, kwam in de geëxporteerde `.md`, HTML en LaTeX
   net zo vaak volledig terug. De oorzaak zat vóór de privacygrens: de

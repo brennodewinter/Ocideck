@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import '../tool/check_version_bump.dart';
@@ -91,5 +93,68 @@ void main() {
     // written-down, conscious exception — visible here and in the diff.
     expect(sanctionedTransitions, contains('1.2.1->0.3.0'));
     expect(isLegalTransition(const SemVer(1, 2, 1), '0.3.0'), isFalse);
+  });
+
+  /// De basislijn mag geen proeftag zijn. Deze repo snijdt tags als
+  /// `v0.4.7-rc1` om één bouwlijn op de spiegel te toetsen zonder iets uit te
+  /// brengen — de tag zegt het zelf: "Geen echte release". De poort las hem als
+  /// een uitgebrachte 0.4.7 en verklaarde daarmee de pubspec-versie 0.4.6 tot
+  /// verboden stap terug. Elke tak stond rood op een versie die niemand had
+  /// aangeraakt.
+  ///
+  /// De uitsluiting zit in een argumentenlijst voor `git describe`, dus alleen
+  /// een echte repo met echte tags bewijst dat hij werkt.
+  group('lastReleasedVersion negeert een pre-release-tag', () {
+    late Directory repo;
+
+    void git(List<String> args) {
+      final r = Process.runSync('git', args, workingDirectory: repo.path);
+      if (r.exitCode != 0) {
+        fail('git ${args.join(' ')} faalde: ${r.stderr}');
+      }
+    }
+
+    setUp(() {
+      repo = Directory.systemTemp.createTempSync('ocideck_versietag_');
+      git(['init', '--initial-branch=main']);
+      git(['config', 'user.email', 'test@example.invalid']);
+      git(['config', 'user.name', 'Test']);
+      File('${repo.path}/leeg.txt').writeAsStringSync('x\n');
+      git(['add', '.']);
+      git(['commit', '-m', 'eerste']);
+    });
+
+    tearDown(() => repo.deleteSync(recursive: true));
+
+    test('een release-tag is de basislijn', () {
+      git(['tag', 'v0.4.6']);
+
+      expect(lastReleasedVersion(workingDirectory: repo.path), '0.4.6');
+    });
+
+    test('een latere proeftag verdringt de release-tag niet', () {
+      git(['tag', 'v0.4.6']);
+      File('${repo.path}/leeg.txt').writeAsStringSync('y\n');
+      git(['commit', '-am', 'tweede']);
+      git(['tag', 'v0.4.7-rc1']);
+
+      // Zonder de uitsluiting levert `git describe` hier v0.4.7-rc1 en wordt de
+      // basislijn 0.4.7 — waarna pubspec 0.4.6 een "illegale stap terug" heet.
+      expect(lastReleasedVersion(workingDirectory: repo.path), '0.4.6');
+      expect(
+        isLegalTransition(SemVer.tryParse('0.4.6')!, '0.4.6'),
+        isTrue,
+        reason: 'geen bump in uitvoering: de poort hoort een no-op te zijn',
+      );
+    });
+
+    test('alleen proeftags: geen basislijn, dus geen oordeel', () {
+      git(['tag', 'v0.5.0-rc1']);
+
+      // Liever niets zeggen dan iets verzinnen: zonder uitgebrachte versie kan
+      // de poort geen stap beoordelen, en dat is het gedocumenteerde
+      // overslaan-pad (een ondiepe kloon zonder tags).
+      expect(lastReleasedVersion(workingDirectory: repo.path), isNull);
+    });
   });
 }
