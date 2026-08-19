@@ -138,8 +138,15 @@ class MarkdownEditorTheme {
           ? scheme.outlineVariant
           : text.withValues(alpha: 0.22),
       // Met documenttypografie gelden de maten van de documentweergave, zodat
-      // schrijven en drukken dezelfde hoogte opleveren.
-      fontSize: documentTypography ? kDocumentBodyFontSize : fontSize,
+      // schrijven en drukken dezelfde hoogte opleveren — inclusief de
+      // basislettergrootte van de gekozen documentstijl. Zonder die laatste
+      // schreef je in de standaardmaat en drukte je in een andere, en dan valt
+      // de pagina-eindlijn op de verkeerde regel.
+      fontSize: documentTypography
+          ? clampDocumentBodyFontSize(
+              profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
+            )
+          : fontSize,
       lineHeight: documentTypography ? kDocumentBodyLineHeight : 1.5,
       // Het lettertype van de gekozen documentstijl; `null` = het app-lettertype
       // (dan leest een plat document precies als voorheen).

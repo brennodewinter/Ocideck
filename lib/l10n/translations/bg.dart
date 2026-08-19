@@ -1686,6 +1686,10 @@ const _dutchSourceAddBg = <String, String>{
   'waarden herkend.': 'признати ценности.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'неразпознати стойности. Тези редове остават най-отдолу в текущия си ред.',
+  'Basislettergrootte: {px} px': 'Основен размер на шрифта: {px} px',
+  'Basislettergrootte': 'Основен размер на шрифта',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Заглавията, бележките под линия и картите на хронологията се мащабират с този размер.',
   'Footer': 'Долен колонтитул',
   'Geldt voor documenten en presentaties': 'Важи за документи и презентации',
   'Alleen voor documenten': 'Само за документи',

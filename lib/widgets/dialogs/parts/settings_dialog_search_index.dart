@@ -204,6 +204,18 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
+    label: 'Basislettergrootte',
+    section: 'Tekst',
+    keywords: [
+      'lettergrootte',
+      'tekstgrootte',
+      'punten',
+      'document',
+      'typografie',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
     label: 'Koptekst',
     section: 'Koptekst',
     keywords: ['header', 'koptekst', 'document'],

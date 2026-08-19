@@ -3,7 +3,8 @@ import 'package:flutter/rendering.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/page_size.dart';
-import '../../models/settings.dart' show ThemeProfile;
+import '../../models/settings.dart'
+    show ThemeProfile, kDocumentDefaultBodyFontSize;
 import '../../services/document_footnote_setup.dart';
 import '../../services/document_pagination.dart';
 import '../../utils/footnotes.dart';
@@ -263,6 +264,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       keepWithNext: documentHeadingBlocks(widget.markdown),
       minKeepHeight: documentKeepWithNextHeight(
         MediaQuery.textScalerOf(context),
+        bodyFontSize:
+            widget.profile?.documentBodyFontSize ??
+            kDocumentDefaultBodyFontSize,
       ),
       // De noten van een blok staan onderaan hetzelfde vel als dat blok, dus
       // eisen ze daar ruimte op.

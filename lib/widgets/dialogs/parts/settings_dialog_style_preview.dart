@@ -12,45 +12,6 @@
 part of '../settings_dialog.dart';
 
 extension _StylePreviews on _DocumentStyleBuilder {
-  /// De grijze kaart om elke voorvertoning: dezelfde rand, dezelfde kop en
-  /// dezelfde ruimte, welk vlak er ook in staat. Wisselen van vlak verspringt
-  /// dan niets behalve de inhoud zelf.
-  Widget _previewFrame(
-    AppLocalizations l10n, {
-    required Widget child,
-    Widget? trailing,
-  }) {
-    final title = Text(
-      l10n.d('Voorvertoning'),
-      style: TextStyle(color: AppTheme.slate700, fontWeight: FontWeight.w700),
-    );
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppTheme.slate200,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppTheme.slate300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (trailing == null)
-            title
-          else
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 12,
-              runSpacing: 8,
-              children: [title, trailing],
-            ),
-          const SizedBox(height: 12),
-          child,
-        ],
-      ),
-    );
-  }
-
   /// Eén stuk markdown, getekend met de kleuren en het lettertype van het
   /// profiel dat nu bewerkt wordt. Gedeeld door het algemene en het
   /// documentvlak, zodat dezelfde tekst er in beide even zo uitziet.
@@ -344,4 +305,43 @@ ${l10n.d('De snelle bruine vos springt over de luie hond.')}
       ],
     );
   }
+}
+
+/// De grijze kaart om elke voorvertoning: dezelfde rand, dezelfde kop en
+/// dezelfde ruimte, welk vlak er ook in staat. Wisselen van vlak verspringt
+/// dan niets behalve de inhoud zelf.
+Widget _previewFrame(
+  AppLocalizations l10n, {
+  required Widget child,
+  Widget? trailing,
+}) {
+  final title = Text(
+    l10n.d('Voorvertoning'),
+    style: TextStyle(color: AppTheme.slate700, fontWeight: FontWeight.w700),
+  );
+  return Container(
+    padding: const EdgeInsets.all(14),
+    decoration: BoxDecoration(
+      color: AppTheme.slate200,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: AppTheme.slate300),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (trailing == null)
+          title
+        else
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 12,
+            runSpacing: 8,
+            children: [title, trailing],
+          ),
+        const SizedBox(height: 12),
+        child,
+      ],
+    ),
+  );
 }

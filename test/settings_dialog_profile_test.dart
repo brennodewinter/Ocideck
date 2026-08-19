@@ -214,9 +214,11 @@ void main() {
     expect(find.textContaining('Titelachtergrond'), findsNothing);
     expect(find.text('Activatieduur'), findsNothing);
     expect(find.byKey(const Key('document-logo-shared')), findsNothing);
+    expect(find.byKey(const Key('document-body-font-size')), findsNothing);
 
     await openSurface(tester, 'document');
     expect(find.byKey(const Key('document-logo-shared')), findsOneWidget);
+    expect(find.byKey(const Key('document-body-font-size')), findsOneWidget);
     expect(find.text('Opsommingsteken'), findsNothing);
     expect(find.textContaining('Titelachtergrond'), findsNothing);
     expect(find.text('Activatieduur'), findsNothing);
@@ -313,6 +315,34 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('document-logo-preview')), findsOneWidget);
+  });
+
+  // Een blad heeft een vaste lettermaat en een dia niet, dus de schuif hoort
+  // op het documentvlak — en hij moet het profiel werkelijk verzetten, niet
+  // alleen bewegen.
+  testWidgets('de basislettergrootte staat op het documentvlak en werkt', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    await openSurface(tester, 'document');
+    final slider = find.byKey(const Key('document-body-font-size'));
+    expect(tester.widget<Slider>(slider).value, kDocumentDefaultBodyFontSize);
+
+    // Rechts op de baan tikken: de waarde springt naar die plek. Slepen werkt
+    // hier niet — de schuif zit in een scrollbaar paneel en de sleep belandt
+    // bij de rol in plaats van bij de knop.
+    await tester.ensureVisible(slider);
+    await tester.pumpAndSettle();
+    final track = tester.getRect(slider);
+    await tester.tapAt(Offset(track.right - 12, track.center.dy));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<Slider>(slider).value,
+      greaterThan(kDocumentDefaultBodyFontSize),
+    );
+    expect(find.textContaining('Basislettergrootte:'), findsOneWidget);
   });
 
   testWidgets('document biedt koptekst, voettekst en paginanummers aan', (

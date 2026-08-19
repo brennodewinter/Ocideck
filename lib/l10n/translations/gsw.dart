@@ -1669,6 +1669,10 @@ const _dutchSourceAddGsw = <String, String>{
   'waarden herkend.': 'Werte anerkannt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Werte nicht erkannt. Diese Zeilen bleiben in ihrer aktuellen Reihenfolge unten.',
+  'Basislettergrootte: {px} px': 'Basis-Schriftgrössi: {px} px',
+  'Basislettergrootte': 'Basis-Schriftgrössi',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Titel, Fuessnote und Ziitstrahl-Charte skaliere mit däre Grössi mit.',
   'Footer': 'Fuesszile',
   'Geldt voor documenten en presentaties':
       'Gilt für Dokumänt und Präsentatione',

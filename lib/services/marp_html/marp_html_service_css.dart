@@ -172,10 +172,15 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
         ? logoHeight + 36
         : 0,
   );
+  // De basislettergrootte van de documentstijl, in px. De koppen, noten en
+  // tijdlijnkaartjes van `.document` staan in `em`, dus ze schalen vanzelf mee —
+  // net als in de app, waar dezelfde maat de kopmaten schaalt.
+  final bodyFontSize = clampDocumentBodyFontSize(t.documentBodyFontSize);
   return '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
       'background:${t.slideBackgroundColor};color:${t.textColor};'
       '--ocideck-accent:${t.accentColor};'
-      'font-family:$family;line-height:1.65;border-radius:4px;'
+      'font-family:$family;font-size:${bodyFontSize.toStringAsFixed(1)}px;'
+      'line-height:1.65;border-radius:4px;'
       'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
       '.document h1{color:var(--ocideck-title-color,${t.textColor})}'
       '.document h2{color:${t.accentColor}}'

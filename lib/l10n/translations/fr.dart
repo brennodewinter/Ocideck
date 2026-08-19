@@ -701,6 +701,10 @@ const _dutchSourceAddFr = {
   'waarden herkend.': 'valeurs reconnues.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valeurs non reconnues. Ces lignes restent en bas dans leur ordre actuel.',
+  'Basislettergrootte: {px} px': 'Taille de police de base : {px} px',
+  'Basislettergrootte': 'Taille de police de base',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Les titres, les notes de bas de page et les fiches de chronologie suivent cette taille.',
   'Footer': 'Pied de page',
   'Geldt voor documenten en presentaties':
       'S\'applique aux documents et aux présentations',

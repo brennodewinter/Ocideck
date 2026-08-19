@@ -700,6 +700,10 @@ const _dutchSourceAddPap = {
   'waarden herkend.': 'valores reconocidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Valores no reconocidos. Esas filas permanecen en la parte inferior en su orden actual.',
+  'Basislettergrootte: {px} px': 'Tamaño di lèter básiko: {px} px',
+  'Basislettergrootte': 'Tamaño di lèter básiko',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Kabesnan, notanan na pia i kartanan di línea di tempu ta skala huntu ku e tamaño aki.',
   'Footer': 'Pia di página',
   'Geldt voor documenten en presentaties':
       'Ta konta pa dokumentonan i presentashonnan',

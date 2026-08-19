@@ -1678,6 +1678,10 @@ const _dutchSourceAddPl = <String, String>{
   'waarden herkend.': 'uznane wartości.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'wartości nierozpoznane. Te wiersze pozostają na dole w bieżącej kolejności.',
+  'Basislettergrootte: {px} px': 'Podstawowy rozmiar czcionki: {px} px',
+  'Basislettergrootte': 'Podstawowy rozmiar czcionki',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Nagłówki, przypisy i karty osi czasu skalują się wraz z tym rozmiarem.',
   'Footer': 'Stopka',
   'Geldt voor documenten en presentaties': 'Dotyczy dokumentów i prezentacji',
   'Alleen voor documenten': 'Tylko dla dokumentów',

@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Basislettergrootte: {px} px": {
+      "en": "Base font size: {px} px",
+      "it": "Dimensione base del carattere: {px} px",
+      "de": "Basisschriftgröße: {px} px",
+      "fr": "Taille de police de base : {px} px",
+      "es": "Tamaño de fuente base: {px} px",
+      "fy": "Basisletterjitte: {px} px",
+      "pap": "Tamaño di lèter básiko: {px} px",
+      "la": "Magnitudo litterarum basalis: {px} px",
+      "id": "Ukuran huruf dasar: {px} px",
+      "pl": "Podstawowy rozmiar czcionki: {px} px",
+      "uk": "Базовий розмір шрифту: {px} px",
+      "gsw": "Basis-Schriftgrössi: {px} px",
+      "el": "Βασικό μέγεθος γραμματοσειράς: {px} px",
+      "da": "Basisskriftstørrelse: {px} px",
+      "sv": "Grundstorlek på text: {px} px",
+      "hr": "Osnovna veličina fonta: {px} px",
+      "cs": "Základní velikost písma: {px} px",
+      "fi": "Perusfonttikoko: {px} px",
+      "bg": "Основен размер на шрифта: {px} px",
+      "lv": "Pamata fonta lielums: {px} px",
+      "lt": "Bazinis šrifto dydis: {px} px",
+      "mt": "Daqs bażiku tat-tipa: {px} px",
+      "et": "Kirja põhisuurus: {px} px",
+      "hu": "Alap betűméret: {px} px",
+      "ga": "Bunmhéid an chló: {px} px",
+      "pt": "Tamanho base da fonte: {px} px",
+      "ro": "Dimensiunea de bază a fontului: {px} px",
+      "sl": "Osnovna velikost pisave: {px} px",
+      "sk": "Základná veľkosť písma: {px} px",
+      "tlh": "ngutlh tIn motlh: {px} px",
+      "tr": "Temel yazı tipi boyutu: {px} px"
+    }
+  }
+}

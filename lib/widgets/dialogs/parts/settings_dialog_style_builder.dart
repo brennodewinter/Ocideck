@@ -79,7 +79,11 @@ class _DocumentStyleBuilder {
       l10n.d('Broncode'),
       l10n.d('Severity (bevindingen)'),
     ],
-    _StyleSurface.document: [l10n.d('Logo'), l10n.d('Koptekst')],
+    _StyleSurface.document: [
+      l10n.d('Tekst'),
+      l10n.d('Logo'),
+      l10n.d('Koptekst'),
+    ],
     _StyleSurface.presentation: [
       l10n.d('Footer'),
       l10n.d('Laatste slide'),
@@ -306,7 +310,6 @@ class _DocumentStyleBuilder {
           _fontSection(),
           _presentationStyleDivider(l10n.d('Kleuren')),
           ..._generalColorChildren(),
-          _profileContrastSummary(),
         ],
       ),
     ),
@@ -327,8 +330,14 @@ class _DocumentStyleBuilder {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _sectionTitle(l10n.d('Logo')),
+          // Niet "Lettertype": dat is de sectie van het algemene vlak, waar het
+          // lettertype zelf staat. Twee secties met dezelfde kop zouden ook
+          // hetzelfde zoekanker dragen, en dan landt een treffer op het
+          // verkeerde vlak.
+          _sectionTitle(l10n.d('Tekst')),
           const SizedBox(height: 8),
+          ..._documentFontSizeSettings(l10n),
+          _presentationStyleDivider(l10n.d('Logo')),
           ..._documentLogoSettings(l10n),
           _presentationStyleDivider(l10n.d('Koptekst')),
           ..._documentChromeSettings(l10n),
@@ -336,6 +345,50 @@ class _DocumentStyleBuilder {
       ),
     ),
   );
+
+  /// De basislettergrootte van een document.
+  ///
+  /// Alleen hier, want alleen een blad heeft een vaste lettermaat: een dia
+  /// schaalt haar tekst naar het 16:9-kader. De koppen, de noten en de
+  /// tijdlijnkaartjes verhouden zich tot deze maat, dus één schuif verzet de
+  /// hele typografie van het document — in de weergave, in het schrijfvlak, in
+  /// de paginaverdeling en in de export.
+  List<Widget> _documentFontSizeSettings(AppLocalizations l10n) {
+    final size = clampDocumentBodyFontSize(_themeProfile.documentBodyFontSize);
+    return [
+      Text(
+        // Placeholder, geen interpolatie in de bronsleutel: een string mét
+        // ingebakken waarde is per definitie onvertaalbaar, en dezelfde vorm
+        // draagt de celopvulling hierboven al.
+        l10n
+            .d('Basislettergrootte: {px} px')
+            .replaceAll('{px}', size.toStringAsFixed(1)),
+        style: const TextStyle(fontSize: 13),
+      ),
+      Slider(
+        key: const Key('document-body-font-size'),
+        value: size,
+        min: kDocumentMinBodyFontSize,
+        max: kDocumentMaxBodyFontSize,
+        divisions: ((kDocumentMaxBodyFontSize - kDocumentMinBodyFontSize) * 2)
+            .round(),
+        label: size.toStringAsFixed(1),
+        onChanged: (value) => _rebuild(() {
+          _themeProfile = _themeProfile.copyWith(
+            documentBodyFontSize: clampDocumentBodyFontSize(value),
+          );
+          _profileTouched = true;
+        }),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        l10n.d(
+          'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      ),
+    ];
+  }
 
   List<Widget> _documentLogoSettings(AppLocalizations l10n) {
     final shared = _themeProfile.documentLogoPath == null;
@@ -573,15 +626,6 @@ class _DocumentStyleBuilder {
       ),
     ),
   );
-
-  Widget _profileContrastSummary() {
-    final issues = owner._themeContrastByField().values;
-    if (issues.isEmpty) return const SizedBox.shrink();
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
-      child: owner._contrastWarning(issues.first),
-    );
-  }
 
   Widget _styleColorField(
     String label,

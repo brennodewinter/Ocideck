@@ -494,12 +494,13 @@ these fields (with defaults):
 | `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |
 | `documentLogoPosition` | `top-right` | Position of the effective document logo in its header/footer band. |
 | `documentLogoSize` | `null` | Document-logo width in px (`32`–`480`). `null` follows `logoSize`. |
+| `documentBodyFontSize` | `15.5` | Base body-text size of a document, in px (`9`–`28`). Headings, footnotes and timeline cards are proportions of it, in the reader, the visual editor, the page-break calculation and the HTML export alike. A slide is unaffected: it scales its text to the 16:9 frame. |
 | `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
 | `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
 | `documentBandTextColor` | `null` | Header/footer text colour. `null` follows `textColor`. |
 | `documentBandBackgroundColor` | `null` | Header/footer background colour. `null` follows `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |
-| `fontFamily` | `Arial` | Presentation font family. |
+| `fontFamily` | `Arial` | Font family for documents and presentations alike. |
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Show "page / total" at the bottom right. |
 | `footerPosition` | `right` | `left`/`center`/`right`. |

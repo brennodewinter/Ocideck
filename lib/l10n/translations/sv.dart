@@ -1665,6 +1665,10 @@ const _dutchSourceAddSv = <String, String>{
   'waarden herkend.': 'värden erkända.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'värden som inte känns igen. Dessa rader ligger kvar längst ner i deras nuvarande ordning.',
+  'Basislettergrootte: {px} px': 'Grundstorlek på text: {px} px',
+  'Basislettergrootte': 'Grundstorlek på text',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Rubriker, fotnoter och tidslinjekort skalar med den här storleken.',
   'Footer': 'Sidfot',
   'Geldt voor documenten en presentaties':
       'Gäller för dokument och presentationer',

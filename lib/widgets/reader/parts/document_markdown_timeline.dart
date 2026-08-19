@@ -68,7 +68,7 @@ class _TimelineEventView extends StatelessWidget {
                           : '${event.timelineMarkerHeader} · ${event.timelineMarker}',
                       textAlign: TextAlign.end,
                       style: t.body.copyWith(
-                        fontSize: 12.5,
+                        fontSize: t.bodyFontSize * 0.81,
                         height: 1.25,
                         fontWeight: FontWeight.w700,
                         color: t.subheading,
@@ -106,7 +106,7 @@ class _TimelineEventView extends StatelessWidget {
                       Text(
                         event.timelineEventHeader.toUpperCase(),
                         style: t.body.copyWith(
-                          fontSize: 9.5,
+                          fontSize: t.bodyFontSize * 0.61,
                           height: 1.1,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.8,
@@ -127,35 +127,7 @@ class _TimelineEventView extends StatelessWidget {
                     if ((event.timelineMetadataHeader ?? '').isNotEmpty ||
                         (event.timelineMetadata ?? '').isNotEmpty) ...[
                       const SizedBox(height: 9),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 9,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: t.quoteBg,
-                          borderRadius: BorderRadius.circular(999),
-                          border: Border.all(color: t.border),
-                        ),
-                        child: Text.rich(
-                          TextSpan(
-                            style: t.body.copyWith(fontSize: 11.5, height: 1.2),
-                            children: [
-                              if ((event.timelineMetadataHeader ?? '')
-                                  .isNotEmpty)
-                                TextSpan(
-                                  text: (event.timelineMetadata ?? '').isEmpty
-                                      ? event.timelineMetadataHeader
-                                      : '${event.timelineMetadataHeader}: ',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              TextSpan(text: event.timelineMetadata),
-                            ],
-                          ),
-                        ),
-                      ),
+                      _metadataPill(t),
                     ],
                   ],
                 ),
@@ -166,4 +138,31 @@ class _TimelineEventView extends StatelessWidget {
       ),
     );
   }
+
+  /// Het pilletje onder een gebeurtenis met de metadata erin — de kop vet, de
+  /// waarde erachter. Eigen methode omdat [build] anders over de
+  /// methodelengte-grens loopt, en omdat het één afgerond ding is.
+  Widget _metadataPill(_Theme t) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+    decoration: BoxDecoration(
+      color: t.quoteBg,
+      borderRadius: BorderRadius.circular(999),
+      border: Border.all(color: t.border),
+    ),
+    child: Text.rich(
+      TextSpan(
+        style: t.body.copyWith(fontSize: t.bodyFontSize * 0.74, height: 1.2),
+        children: [
+          if ((event.timelineMetadataHeader ?? '').isNotEmpty)
+            TextSpan(
+              text: (event.timelineMetadata ?? '').isEmpty
+                  ? event.timelineMetadataHeader
+                  : '${event.timelineMetadataHeader}: ',
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+          TextSpan(text: event.timelineMetadata),
+        ],
+      ),
+    ),
+  );
 }

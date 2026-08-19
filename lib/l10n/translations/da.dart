@@ -1666,6 +1666,10 @@ const _dutchSourceAddDa = <String, String>{
   'waarden herkend.': 'værdier anerkendt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'værdier ikke anerkendt. Disse rækker forbliver nederst i deres nuværende rækkefølge.',
+  'Basislettergrootte: {px} px': 'Basisskriftstørrelse: {px} px',
+  'Basislettergrootte': 'Basisskriftstørrelse',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Overskrifter, fodnoter og tidslinjekort skalerer med denne størrelse.',
   'Footer': 'Sidefod',
   'Geldt voor documenten en presentaties':
       'Gælder for dokumenter og præsentationer',

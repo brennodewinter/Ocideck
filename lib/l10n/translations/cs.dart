@@ -1668,6 +1668,10 @@ const _dutchSourceAddCs = <String, String>{
   'waarden herkend.': 'uznávané hodnoty.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'hodnoty nejsou rozpoznány. Tyto řádky zůstanou ve svém aktuálním pořadí dole.',
+  'Basislettergrootte: {px} px': 'Základní velikost písma: {px} px',
+  'Basislettergrootte': 'Základní velikost písma',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Nadpisy, poznámky pod čarou a karty časové osy se s touto velikostí mění.',
   'Footer': 'Zápatí',
   'Geldt voor documenten en presentaties': 'Platí pro dokumenty i prezentace',
   'Alleen voor documenten': 'Pouze pro dokumenty',

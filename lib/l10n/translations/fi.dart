@@ -1667,6 +1667,10 @@ const _dutchSourceAddFi = <String, String>{
   'waarden herkend.': 'arvot tunnustettu.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'arvoja ei tunnisteta. Nämä rivit pysyvät alareunassa nykyisessä järjestyksessä.',
+  'Basislettergrootte: {px} px': 'Perusfonttikoko: {px} px',
+  'Basislettergrootte': 'Perusfonttikoko',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Otsikot, alaviitteet ja aikajanakortit skaalautuvat tämän koon mukaan.',
   'Footer': 'Alatunniste',
   'Geldt voor documenten en presentaties': 'Koskee asiakirjoja ja esityksiä',
   'Alleen voor documenten': 'Vain asiakirjoille',

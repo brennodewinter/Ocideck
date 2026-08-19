@@ -698,6 +698,10 @@ const _dutchSourceAddEs = {
   'waarden herkend.': 'valores reconocidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Valores no reconocidos. Esas filas permanecen en la parte inferior en su orden actual.',
+  'Basislettergrootte: {px} px': 'Tamaño de fuente base: {px} px',
+  'Basislettergrootte': 'Tamaño de fuente base',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Los títulos, las notas al pie y las tarjetas de la línea de tiempo se ajustan a este tamaño.',
   'Footer': 'Pie de página',
   'Geldt voor documenten en presentaties':
       'Se aplica a documentos y presentaciones',

@@ -2584,6 +2584,10 @@ const _dutchSourceAddTr = <String, String>{
   'waarden herkend.': 'tanınan değerler.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'değerler tanınmadı. Bu satırlar mevcut sıralarında en altta kalır.',
+  'Basislettergrootte: {px} px': 'Temel yazı tipi boyutu: {px} px',
+  'Basislettergrootte': 'Temel yazı tipi boyutu',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Başlıklar, dipnotlar ve zaman çizelgesi kartları bu boyutla birlikte ölçeklenir.',
   'Footer': 'Altbilgi',
   'Geldt voor documenten en presentaties':
       'Belgeler ve sunumlar için geçerlidir',

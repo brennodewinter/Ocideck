@@ -1635,6 +1635,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **een documentstijl kon niet zeggen hoe groot de letter was.** Een blad heeft
+  een vaste lettermaat — een dia niet, die schaalt haar tekst naar het
+  16:9-kader — maar er was nergens te zetten welke. *Stijlprofiel → Document*
+  heeft nu een **basislettergrootte** (9 tot 28 px, standaard 15,5: de maat
+  waarin documenten altijd al stonden). Koppen, voetnoten en tijdlijnkaarten
+  zijn verhoudingen van die maat, dus één schuif verzet de hele typografie —
+  en overal even ver: in de lezer, in het visuele schrijfvlak, in de drempel
+  waarmee de paginaverdeling rekent en in de HTML/PDF-export. De maat reist mee
+  in het profiel, zodat scherm en druk hetzelfde blijven zeggen.
+
 - **het stijlprofiel liep door elkaar heen.** Een stijlprofiel draagt drie
   soorten instellingen — wat een document en een presentatie delen, wat alleen
   een blad heeft, en wat alleen een dia heeft — maar de instellingen toonden er

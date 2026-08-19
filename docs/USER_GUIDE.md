@@ -4979,12 +4979,21 @@ find it.
     background, text and accent colours, the bullet marker, the checklist
     colours, the whole table style, the source-code block and the severity
     colours for findings. Change something here and both surfaces follow.
-  - **Document** — what only exists on a page: the document logo (shared with
-    the presentation logo by default, or set separately), the header and footer
-    text with their band colours, and page numbering.
+  - **Document** — what only exists on a page: the **base font size**, the
+    document logo (shared with the presentation logo by default, or set
+    separately), the header and footer text with their band colours, and page
+    numbering.
   - **Presentation** — what only exists on a slide: the title and section
     backgrounds, the slide logo, the slide footer, the optional closing slide
     and the animation duration.
+
+  The **base font size** is the size ordinary body text is set in, from 9 to
+  28 px (15.5 px by default — the size documents were always rendered at).
+  Headings, footnotes and timeline cards are proportions of it, so one slider
+  resets a document's whole typography. It is a document setting because only a
+  page has a fixed type size: a slide scales its text to the 16:9 frame. The
+  size travels with the profile, so it holds in the reader, in the visual
+  editor, in where the page breaks fall, and in the HTML/PDF export.
 
   Every field lives on exactly one surface, so the setting you are looking at
   always tells you where it lands. The line under the switch repeats it in

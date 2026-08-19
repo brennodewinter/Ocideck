@@ -195,7 +195,7 @@ const Map<String, int> fileSizeBaseline = {
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
-  'lib/widgets/dialogs/settings_dialog.dart': 1033,
+  'lib/widgets/dialogs/settings_dialog.dart': 1030,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle

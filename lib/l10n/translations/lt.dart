@@ -1673,6 +1673,10 @@ const _dutchSourceAddLt = <String, String>{
   'waarden herkend.': 'pripažintos vertybės.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vertybės neatpažįstamos. Šios eilutės lieka apačioje dabartine tvarka.',
+  'Basislettergrootte: {px} px': 'Bazinis šrifto dydis: {px} px',
+  'Basislettergrootte': 'Bazinis šrifto dydis',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Antraštės, išnašos ir laiko juostos kortelės keičiasi kartu su šiuo dydžiu.',
   'Footer': 'Poraštė',
   'Geldt voor documenten en presentaties':
       'Taikoma dokumentams ir pristatymams',

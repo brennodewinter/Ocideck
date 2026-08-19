@@ -134,7 +134,7 @@ Color _profileColor(String? value, Color fallback) => value == null
 /// pagina-indeling van de schrijfstand uiteen met die van de druk — en dat is
 /// niet zichtbaar aan de code, alleen aan een lijn die op de verkeerde plek
 /// staat.
-const double kDocumentBodyFontSize = 15.5;
+const double kDocumentBodyFontSize = kDocumentDefaultBodyFontSize;
 const double kDocumentBodyLineHeight = 1.55;
 const double kDocumentParagraphGap = 12;
 const double kDocumentHeadingGapTop = 26;
@@ -157,8 +157,11 @@ const int kDocumentKeepWithNextLines = 2;
 /// Via de schaler en niet via een kale factor: een niet-lineaire schaal (de
 /// toegankelijkheidsinstelling van het toestel) rekent per lettergrootte, en
 /// dan is de factor bij maat 1 niet die bij maat 15,5.
-double documentKeepWithNextHeight(TextScaler scaler) =>
-    scaler.scale(kDocumentBodyFontSize) *
+double documentKeepWithNextHeight(
+  TextScaler scaler, {
+  double bodyFontSize = kDocumentBodyFontSize,
+}) =>
+    scaler.scale(bodyFontSize) *
     kDocumentBodyLineHeight *
     kDocumentKeepWithNextLines;
 
@@ -220,7 +223,7 @@ Widget _footnoteList(
   final style = t.body.copyWith(
     // Kleiner dan de bodytekst: een noot is een terzijde, en op papier is dat
     // al eeuwen hoe je dat laat zien.
-    fontSize: kDocumentBodyFontSize * 0.82,
+    fontSize: t.bodyFontSize * 0.82,
     height: 1.35,
   );
   return Padding(
@@ -289,14 +292,26 @@ class DocumentFootnotesView extends StatelessWidget {
       _footnoteList(context, _Theme(Theme.of(context), themeProfile), notes);
 }
 
-/// De lettergrootte van een kop op niveau [level].
-double documentHeadingSize(int level) => switch (level) {
-  1 => 27.0,
-  2 => 22.0,
-  3 => 18.5,
-  4 => 16.0,
-  _ => 14.5,
-};
+/// De lettergrootte van een kop op niveau [level], bij een bodytekst van
+/// [bodyFontSize] beeldpunten.
+///
+/// De vijf maten hieronder gelden bij de standaardmaat; een documentstijl die
+/// een andere bodytekst kiest schaalt ze mee met dezelfde verhouding. Zouden de
+/// koppen vaste maten houden, dan zou een grotere bodytekst zijn eigen kop
+/// inhalen.
+double documentHeadingSize(
+  int level, {
+  double bodyFontSize = kDocumentBodyFontSize,
+}) {
+  final base = switch (level) {
+    1 => 27.0,
+    2 => 22.0,
+    3 => 18.5,
+    4 => 16.0,
+    _ => 14.5,
+  };
+  return base * (bodyFontSize / kDocumentBodyFontSize);
+}
 
 class _Theme {
   _Theme(
@@ -304,13 +319,18 @@ class _Theme {
     ThemeProfile? profile, {
     this.footnoteNumbers = const {},
   }) : dark = theme.brightness == Brightness.dark,
+       bodyFontSize = clampDocumentBodyFontSize(
+         profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
+       ),
        paper = _profileColor(
          profile?.slideBackgroundColor,
          theme.colorScheme.surface,
        ),
        body = TextStyle(
          fontFamily: profile?.fontFamily,
-         fontSize: kDocumentBodyFontSize,
+         fontSize: clampDocumentBodyFontSize(
+           profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
+         ),
          height: kDocumentBodyLineHeight,
          color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
        ),
@@ -407,6 +427,11 @@ class _Theme {
        findActive = AppTheme.findHighlightActive;
 
   final bool dark;
+
+  /// De basislettergrootte van dit document. Alles wat zich naar de bodytekst
+  /// verhoudt — koppen, noten, de tijdstempel van een tijdlijn — rekent hiermee
+  /// in plaats van met de vaste standaardmaat.
+  final double bodyFontSize;
 
   /// Label → volgnummer van de voetnoten van dit document; leeg wanneer er geen
   /// zijn. Hoort hier omdat dit het enige object is dat per opbouw één keer

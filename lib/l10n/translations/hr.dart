@@ -1670,6 +1670,10 @@ const _dutchSourceAddHr = <String, String>{
   'waarden herkend.': 'prepoznate vrijednosti.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vrijednosti koje nisu prepoznate. Ti redovi ostaju na dnu u svom trenutnom redoslijedu.',
+  'Basislettergrootte: {px} px': 'Osnovna veličina fonta: {px} px',
+  'Basislettergrootte': 'Osnovna veličina fonta',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Naslovi, fusnote i kartice vremenske crte skaliraju se s ovom veličinom.',
   'Footer': 'Podnožje',
   'Geldt voor documenten en presentaties':
       'Vrijedi za dokumente i prezentacije',

@@ -1691,6 +1691,10 @@ const _dutchSourceAddEl = <String, String>{
   'waarden herkend.': 'αξίες που αναγνωρίζονται.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν στο κάτω μέρος με την τρέχουσα σειρά τους.',
+  'Basislettergrootte: {px} px': 'Βασικό μέγεθος γραμματοσειράς: {px} px',
+  'Basislettergrootte': 'Βασικό μέγεθος γραμματοσειράς',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Οι επικεφαλίδες, οι υποσημειώσεις και οι κάρτες χρονολογίου προσαρμόζονται σε αυτό το μέγεθος.',
   'Footer': 'Υποσέλιδο',
   'Geldt voor documenten en presentaties':
       'Ισχύει για έγγραφα και παρουσιάσεις',

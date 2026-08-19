@@ -1666,6 +1666,10 @@ const _dutchSourceAddId = <String, String>{
   'waarden herkend.': 'nilai-nilai yang diakui.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'nilai-nilai tidak diakui. Baris-baris tersebut tetap berada di bawah dalam urutannya saat ini.',
+  'Basislettergrootte: {px} px': 'Ukuran huruf dasar: {px} px',
+  'Basislettergrootte': 'Ukuran huruf dasar',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Judul, catatan kaki, dan kartu lini masa ikut menyesuaikan ukuran ini.',
   'Footer': 'Footer',
   'Geldt voor documenten en presentaties':
       'Berlaku untuk dokumen dan presentasi',
