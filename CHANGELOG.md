@@ -1712,6 +1712,18 @@ that before deciding whether this alpha fits what you are doing.
   een geredigeerd rapport verwijzingen kreeg naar pagina's die in het bestand
   niet bestaan. De regel dat een render-lijst nooit wordt weggeschreven staat nu
   ook in de documentbrug zelf, zodat hij geldt voor elke route erheen. (#1589)
+- **Een presentatie naar document omzetten gooide tabellen weg.** Elk dia-type
+  dat zijn inhoud in een tabel draagt — checklist, scopematrix,
+  bevindingenoverzicht, scorecard, assetoverzicht, ontdekkingen, matrix,
+  beheersmaatregelstatus en gantt — kwam in het document terug als alleen zijn
+  titel. Zonder waarschuwing, terwijl de omzetting "geen tekstverlies" belooft.
+  Voor een pentestrapport verdween daarmee elke checklist en de scope; voor een
+  ISO-deck de beheersmaatregelstatus. De omzetting leest nu de tabel van élk
+  tabelgedragen type in plaats van alleen van het gewone tabeltype, zodat een
+  nieuw type dat er ooit bijkomt meteen goed gaat. De kop van de dia reist
+  voortaan mee — die ging ook bij een gewone tabel verloren — en een tabel
+  zonder kop levert geen lege kopregel op, zodat een document dat door de
+  omzetting heen en weer gaat byte-getrouw blijft. (#1588)
 
 - **Documentkoppen en -voeten kunnen nu documentgegevens tonen.** Via
   *Document · Eigenschappen* krijgt elk document vaste velden voor titel,

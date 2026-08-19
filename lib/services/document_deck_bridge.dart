@@ -262,12 +262,28 @@ class _ExactLineRanges {
 
 /// Het lichaam van één dia als platte Markdown voor [DocumentDeckBridge.deckToDocumentMarkdown].
 String _slideBody(Slide slide) {
+  // Elk tabelgedragen type, niet `table` bij naam (#1588). Negen andere types
+  // dragen hun inhoud óók in `tableRows` — hun `customMarkdown` blijft per
+  // ontwerp leeg — en vielen daardoor door naar de terugval "titel + bullets",
+  // waarmee de hele tabel stil uit het document verdween. Op `backedByTable`
+  // toetsen in plaats van op één type is dezelfde les die
+  // `SlideType.usesScaffoldMarkdownBody` opschrijft: een nieuw tabelgedragen
+  // moduletype is dan meteen goed ingedeeld in plaats van stil verkeerd.
+  //
+  // De kop reist mee. Een dia draagt hem naast zijn tabel, een document leest
+  // op koppen, en zonder deze regel verloor ook een gewone `table`-dia zijn
+  // titel. Een tabel zonder titel — wat `documentToDeck` maakt — levert geen
+  // lege kopregel op, zodat de rondgang document → deck → document
+  // byte-getrouw blijft.
+  if (slide.type.backedByTable && slide.tableRows.isNotEmpty) {
+    final table = encodeMarkdownTable(
+      slide.tableRows,
+      alignments: slide.tableColumnAlignments,
+    );
+    final title = slide.title.trim();
+    return title.isEmpty ? table : '## $title\n\n$table';
+  }
   switch (slide.type) {
-    case SlideType.table:
-      return encodeMarkdownTable(
-        slide.tableRows,
-        alignments: slide.tableColumnAlignments,
-      );
     case SlideType.chart:
       return '```chart\n${slide.customMarkdown}\n```';
     default:
