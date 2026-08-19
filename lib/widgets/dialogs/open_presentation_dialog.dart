@@ -327,7 +327,11 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
               documentCount: documents,
             ),
             const SizedBox(height: 8),
-            Expanded(child: _withPreview(_body(visible))),
+            Expanded(
+              child: _withPreview(
+                (previewShown) => _body(visible, previewShown),
+              ),
+            ),
             Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
@@ -349,22 +353,24 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat.
-  Widget _withPreview(Widget list) {
-    if (!widget.showPreview) return list;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(child: list),
-        const SizedBox(width: 12),
-        SizedBox(
-          width: 300,
-          child: OpenPreviewPane(
+  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat én er
+  /// ruimte voor is. Of het past, gaat de lijst in: staat het voorbeeld er niet,
+  /// dan hoort een rij ook geen voorbeeldknop te dragen die nergens toe leidt.
+  Widget _withPreview(Widget Function(bool previewShown) body) {
+    if (!widget.showPreview) return body(false);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (!OpenPreviewSplit.fitsBeside(constraints.maxWidth)) {
+          return body(false);
+        }
+        return OpenPreviewSplit(
+          list: body(true),
+          pane: OpenPreviewPane(
             fileService: widget.fileService,
             path: _previewPath,
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -403,7 +409,10 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  Widget _body(List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible) {
+  Widget _body(
+    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible,
+    bool previewShown,
+  ) {
     final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
@@ -441,7 +450,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           // Toon de bibliotheeknaam alleen als er meerdere in beeld zijn.
           rootName: _roots.length > 1 ? (root?.name ?? '') : '',
           hits: hits,
-          showPreview: widget.showPreview,
+          showPreview: previewShown,
           onPreview: (path) => setState(() => _previewPath = path),
           onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
           onOpenAt: (index) => Navigator.pop(

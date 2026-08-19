@@ -61,9 +61,18 @@ Widget _bare(Widget child) {
   );
 }
 
+/// Een ruim venster: deze dialogen zijn breed, en het voorbeeld ernaast stapt
+/// opzij zodra er te weinig ruimte is (zie [OpenPreviewSplit]). Via `tester.view`
+/// en niet `setSurfaceSize`: alleen het eerste bereikt `MediaQuery.sizeOf`, en
+/// dáár leest de dialoogbreedte zijn bovengrens.
+void _wideWindow(WidgetTester tester) {
+  tester.view.physicalSize = const Size(1800, 1200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+}
+
 Future<void> _openAndScan(WidgetTester tester) async {
-  await tester.binding.setSurfaceSize(const Size(1800, 1200));
-  addTearDown(() => tester.binding.setSurfaceSize(null));
+  _wideWindow(tester);
   await tester.tap(find.text('open'));
   await tester.pump();
   await pumpUntil(
@@ -156,6 +165,92 @@ void main() {
     expect(find.text('Document'), findsOneWidget);
   });
 
+  testWidgets('with the setting on, the open dialog previews a row', (
+    tester,
+  ) async {
+    final service = _fileService(dir.path);
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: service,
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+          showPreview: true,
+        ),
+      ),
+    );
+
+    await _openAndScan(tester);
+    expect(find.byType(OpenPreviewPane), findsOneWidget);
+    // Nog niets aangewezen: het voorbeeld zegt wat het van je verwacht.
+    expect(find.textContaining('Wijs een bestand aan'), findsOneWidget);
+
+    // De knop naast de rij is de weg voor toetsenbord en aanraakscherm; de
+    // muisaanwijzer doet hetzelfde.
+    await tester.tap(find.byIcon(Icons.visibility_outlined).first);
+    await tester.pump(OpenPreviewPane.settleDelay);
+    await pumpUntil(
+      tester,
+      () => find.byType(SlidePreviewWidget).evaluate().isNotEmpty,
+      reason: 'het voorbeeld van de eerste rij kwam niet',
+    );
+
+    expect(find.byType(SlidePreviewWidget), findsOneWidget);
+  });
+
+  testWidgets('on a narrow window the preview and its button both step aside', (
+    tester,
+  ) async {
+    // Een klein venster: de dialoog klemt op de schermbreedte, en dan past het
+    // voorbeeld er niet meer naast.
+    tester.view.physicalSize = const Size(800, 700);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final service = _fileService(dir.path);
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: service,
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
+          showPreview: true,
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pump();
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de mapscan bleef laden',
+    );
+
+    expect(find.byType(OpenPreviewPane), findsNothing);
+    // Een knop die niets zichtbaars doet, hoort er dan ook niet te staan.
+    expect(find.byIcon(Icons.visibility_outlined), findsNothing);
+    expect(find.text('Demo'), findsOneWidget);
+  });
+
+  testWidgets('with the setting on, the broad scan shows the preview pane', (
+    tester,
+  ) async {
+    final service = _fileService(dir.path);
+    await tester.pumpWidget(
+      _host(
+        (context) => ScanLibraryDialog.show(
+          context,
+          fileService: service,
+          recentFiles: <String>['${dir.path}/demo.md'],
+          showPreview: true,
+        ),
+      ),
+    );
+
+    await _openAndScan(tester);
+
+    expect(find.byType(OpenPreviewPane), findsOneWidget);
+  });
+
   testWidgets('the preview renders a document before it is opened', (
     tester,
   ) async {
@@ -168,12 +263,14 @@ void main() {
     await tester.pump(OpenPreviewPane.settleDelay);
     await pumpUntil(
       tester,
-      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
-      reason: 'het voorbeeld bleef laden',
+      () => find
+          .textContaining('De cijfers van dit kwartaal.')
+          .evaluate()
+          .isNotEmpty,
+      reason: 'de documenttekst werd niet getekend',
     );
 
     expect(find.text('verslag.md'), findsOneWidget);
-    expect(find.textContaining('De cijfers van dit kwartaal.'), findsWidgets);
   });
 
   testWidgets('the preview shows the first slide of a presentation', (
@@ -186,11 +283,10 @@ void main() {
     await tester.pump(OpenPreviewPane.settleDelay);
     await pumpUntil(
       tester,
-      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
-      reason: 'het voorbeeld bleef laden',
+      () => find.byType(SlidePreviewWidget).evaluate().isNotEmpty,
+      reason: 'de eerste dia werd niet getekend',
     );
 
-    expect(find.byType(SlidePreviewWidget), findsOneWidget);
     expect(find.text('demo.md'), findsOneWidget);
   });
 
@@ -209,8 +305,9 @@ void main() {
     await tester.pump(OpenPreviewPane.settleDelay);
     await pumpUntil(
       tester,
-      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
-      reason: 'het voorbeeld bleef laden',
+      () =>
+          find.textContaining('kan niet worden getoond').evaluate().isNotEmpty,
+      reason: 'de weigering werd niet gemeld',
     );
 
     expect(find.textContaining('kan niet worden getoond'), findsOneWidget);
@@ -229,6 +326,45 @@ void main() {
 
     expect(find.text('Voorbeeld'), findsOneWidget);
     expect(find.textContaining('Wijs een bestand aan'), findsOneWidget);
+  });
+
+  group('OpenPreviewSplit', () {
+    Future<void> pumpSplit(WidgetTester tester, double width) async {
+      tester.view.physicalSize = Size(width + 100, 600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      AppLocalizations.setActiveLanguageCode('nl');
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: width,
+              height: 400,
+              child: const OpenPreviewSplit(
+                list: Text('lijst'),
+                pane: Text('voorbeeld'),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    testWidgets('shows the preview beside the list when there is room', (
+      tester,
+    ) async {
+      await pumpSplit(tester, 900);
+      expect(find.text('lijst'), findsOneWidget);
+      expect(find.text('voorbeeld'), findsOneWidget);
+    });
+
+    testWidgets('steps aside on a narrow window instead of squeezing', (
+      tester,
+    ) async {
+      await pumpSplit(tester, 600);
+      expect(find.text('lijst'), findsOneWidget);
+      expect(find.text('voorbeeld'), findsNothing);
+    });
   });
 
   group('OpenKindFilter', () {

@@ -286,3 +286,63 @@ class _OpenPreviewPaneState extends State<OpenPreviewPane> {
     ),
   );
 }
+
+/// De resultatenlijst met het voorbeeld ernaast — of alleen de lijst, wanneer
+/// het venster te smal is om beide te dragen.
+///
+/// Een dialoog krimpt mee met een klein scherm ([ResizableDialogBox] klemt op de
+/// vensterbreedte). Zonder deze grens zou het voorbeeld op een smal scherm de
+/// lijst platdrukken tot een kolom waarin geen bestandsnaam meer past, en dan
+/// kost het meer dan het oplevert.
+class OpenPreviewSplit extends StatelessWidget {
+  const OpenPreviewSplit({
+    super.key,
+    required this.list,
+    required this.pane,
+    this.paneWidth = defaultPaneWidth,
+    this.minListWidth = defaultMinListWidth,
+  });
+
+  final Widget list;
+  final Widget pane;
+  final double paneWidth;
+
+  /// Wat de lijst zelf minstens nodig heeft voordat het voorbeeld ernaast past.
+  final double minListWidth;
+
+  /// Of het voorbeeld naast een lijst van [width] breed past. De aanroeper
+  /// vraagt het vooraf, zodat hij zijn rijen geen voorbeeldknop geeft die op een
+  /// smal scherm nergens toe leidt.
+  static bool fitsBeside(
+    double width, {
+    double paneWidth = defaultPaneWidth,
+    double minListWidth = defaultMinListWidth,
+  }) => width >= minListWidth + paneWidth + _gap;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (!fitsBeside(
+          constraints.maxWidth,
+          paneWidth: paneWidth,
+          minListWidth: minListWidth,
+        )) {
+          return list;
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: list),
+            const SizedBox(width: _gap),
+            SizedBox(width: paneWidth, child: pane),
+          ],
+        );
+      },
+    );
+  }
+
+  static const defaultPaneWidth = 300.0;
+  static const defaultMinListWidth = 420.0;
+  static const _gap = 12.0;
+}

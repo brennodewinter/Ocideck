@@ -173,7 +173,11 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
             const SizedBox(height: 8),
             _status(l10n),
             const SizedBox(height: 8),
-            Expanded(child: _withPreview(_body(visible))),
+            Expanded(
+              child: _withPreview(
+                (previewShown) => _body(visible, previewShown),
+              ),
+            ),
             Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
@@ -219,26 +223,28 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     );
   }
 
-  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat.
-  Widget _withPreview(Widget list) {
-    if (!widget.showPreview) return list;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(child: list),
-        const SizedBox(width: 12),
-        SizedBox(
-          width: 300,
-          child: OpenPreviewPane(
+  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat én er
+  /// ruimte voor is. Zie [OpenPresentationDialog]: past het voorbeeld niet, dan
+  /// dragen de rijen ook geen voorbeeldknop.
+  Widget _withPreview(Widget Function(bool previewShown) body) {
+    if (!widget.showPreview) return body(false);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (!OpenPreviewSplit.fitsBeside(constraints.maxWidth)) {
+          return body(false);
+        }
+        return OpenPreviewSplit(
+          list: body(true),
+          pane: OpenPreviewPane(
             fileService: widget.fileService,
             path: _previewPath,
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
-  Widget _body(List<DuplicateInfo<ScanHit>> visible) {
+  Widget _body(List<DuplicateInfo<ScanHit>> visible, bool previewShown) {
     final l10n = context.l10n;
     if (_scanning && _hits.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -263,7 +269,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       itemBuilder: (_, i) => _HitRow(
         info: visible[i],
         homeDir: widget.homeDir,
-        showPreview: widget.showPreview,
+        showPreview: previewShown,
         onPreview: (path) => setState(() => _previewPath = path),
         onOpen: (path) => Navigator.pop(context, path),
       ),
