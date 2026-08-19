@@ -603,9 +603,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       _applyingExternal = false;
     }
     setState(() => _viewMode = mode);
-    if (mode == _DocViewMode.source) {
-      // De bron-editor bestaat pas ná deze opbouw; focussen kan dus niet eerder,
-      // en zonder focus schuift het veld de cursor niet in beeld.
+    if (mode != _DocViewMode.pages) {
+      // Het schrijfvlak bestaat pas ná deze opbouw; focussen kan dus niet
+      // eerder, en zonder focus schuift het de cursor niet in beeld — dan zou
+      // de cursor wel goed staan maar buiten het venster.
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _editorFocus.requestFocus();
       });

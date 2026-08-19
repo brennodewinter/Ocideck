@@ -54,7 +54,7 @@ class MarkdownCaretMap {
         rows.add(_Row.hidden(start, line.length, visualAt));
         continue;
       }
-      if (_rulePattern.hasMatch(line)) {
+      if (_rulePattern.hasMatch(line) || _loneImagePattern.hasMatch(line)) {
         rows.add(_Row.object(start, line.length, visualAt));
         visualAt += 2; // het objectteken plus zijn regeleinde
         continue;
@@ -73,10 +73,10 @@ class MarkdownCaretMap {
       }
 
       final skip = _blockMarkerLength(line);
-      final body = line.substring(skip);
-      final visible = stripInlineMarkdown(body);
-      rows.add(_Row.text(start, line.length, skip, body, visualAt));
-      visualAt += visible.length + 1;
+      rows.add(
+        _Row.text(start, line.length, skip, line.substring(skip), visualAt),
+      );
+      visualAt += rows.last.visualLength + 1;
     }
     return MarkdownCaretMap._(rows, visualAt);
   }
@@ -108,13 +108,13 @@ class MarkdownCaretMap {
   /// regel erna; van die twee wint de regel die er echt tekst zet.
   _Row _rowForVisual(int offset) {
     var best = _rows.first;
-    var gevonden = false;
+    var foundText = false;
     for (final row in _rows) {
       if (row.visualStart > offset) break;
       if (row.visualLength > 0) {
         best = row;
-        gevonden = true;
-      } else if (!gevonden) {
+        foundText = true;
+      } else if (!foundText) {
         best = row;
       }
     }
@@ -124,6 +124,10 @@ class MarkdownCaretMap {
   static final _fencePattern = RegExp(r'^\s*```');
   static final _rulePattern = RegExp(r'^\s*(-{3,}|\*{3,}|_{3,})\s*$');
   static final _tableRowPattern = RegExp(r'^\s*\|');
+
+  /// Een regel die alleen een afbeelding is; die wordt aan de visuele kant één
+  /// objectteken, net als een tabel.
+  static final _loneImagePattern = RegExp(r'^\s*!\[[^\]]*\]\([^)]*\)\s*$');
 
   /// De lengte van het blokteken vooraan [line] — hekjes, aanhaalteken,
   /// opsommingsstreepje of nummer. Dat teken staat niet in de platte tekst.

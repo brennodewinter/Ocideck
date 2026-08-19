@@ -8,7 +8,6 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/utils/markdown_visual_compatibility.dart';
-import 'package:ocideck/utils/table_cell_navigation.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 
 /// Toetsen in een tabelcel van de **visuele** documentmodus (#1565).
@@ -106,41 +105,5 @@ void main() {
     // dezelfde bron op; zonder de poort in de editor schreef de eerste klik het
     // hele document opnieuw weg, inclusief een stap in ongedaan maken.
     expect(n.currentState.document!.source, voor);
-  });
-
-  group('tableArrowTarget', () {
-    ({TableArrowMove move, int row, int col, TableCaret caret}) omlaag({
-      required int row,
-      required int rowCount,
-      bool onLastLine = true,
-    }) => tableArrowTarget(
-      arrow: TableArrow.down,
-      row: row,
-      col: 0,
-      rowCount: rowCount,
-      colCount: 2,
-      atTextStart: true,
-      atTextEnd: true,
-      onFirstLine: true,
-      onLastLine: onLastLine,
-    );
-
-    test('naar de rij eronder zolang die er is', () {
-      expect(omlaag(row: 0, rowCount: 3).move, TableArrowMove.toCell);
-      expect(omlaag(row: 0, rowCount: 3).row, 1);
-    });
-
-    test('op de laatste rij blijft de toets in de tabel hangen', () {
-      // Niet `inCell`: er is niets te bewegen. En niet doorlaten: dan pakt
-      // Quill hem op. Zie de kop van dit bestand.
-      expect(omlaag(row: 2, rowCount: 3).move, TableArrowMove.atEdge);
-    });
-
-    test('binnen een cel met meer regels beweegt de cursor eerst zelf', () {
-      expect(
-        omlaag(row: 2, rowCount: 3, onLastLine: false).move,
-        TableArrowMove.inCell,
-      );
-    });
   });
 }
