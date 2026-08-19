@@ -3433,7 +3433,6 @@ const _dutchSourceAddLt = <String, String>{
       'Asmens duomenų, specialių kategorijų duomenų ir paslapčių nebuvo ieškoma: privatumo patikra išjungta skiltyje Saugumas.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Pristatymai, kurie lieka paprasti Markdown failai: skaitomi, juose galima ieškoti ir atveriami bet kuria rengykle.',
-  'sjablonen om mee te beginnen, of leeg': 'šablonų pradžiai arba tuščia',
   'Mijn tekst': 'Mano tekstas',
   'Wat zij zien': 'Ką jie mato',
   'Presentatiegegevens': 'Pristatymo duomenys',

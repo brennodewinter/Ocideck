@@ -2463,7 +2463,6 @@ const _dutchSourceAddPap = {
       'No a buska datos personal, datos spesial i sekretonan: e kontròl di privasidat ta pagá bou di Seguridat.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentashonnan ku ta keda simpel archivo Markdown: legibel, buskabel i bo por habri nan ku kualke editor.',
-  'sjablonen om mee te beginnen, of leeg': 'plantia pa kuminsá kuné, òf bashí',
   'Mijn tekst': 'Mi teksto',
   'Wat zij zien': 'Loke nan ta mira',
   'Presentatiegegevens': 'Datos di e presentashon',

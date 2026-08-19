@@ -258,6 +258,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- openscherm: het aantal beschikbare sjablonen staat er niet meer bij. Onder de
+  knop *Nieuwe presentatie* stond hoeveel sjablonen er klaarstonden; dat getal
+  staat op de plek waar één handeling hoort en vraagt om lezen en rekenen
+  voordat je mag klikken, terwijl wélke sjablonen het zijn nu juist is wat de
+  kiezer zelf laat zien — één klik verderop. De melding dat de voorbeelddia's
+  van een sjabloon Engels zijn (buiten Nederlands en Engels) hing aan die regel
+  en is meeverhuisd naar de knop, waar hij hetzelfde zegt.
+
 - fix(export): de plaatsing van de voetnoten reist mee in het geprojecteerde
   `.md` (#1569). Koos je *Voetnoten achterin het document*, dan stond die keuze
   wel in je eigen bestand maar niet in de kopie die de deur uit ging: de export

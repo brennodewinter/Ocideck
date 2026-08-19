@@ -20,7 +20,6 @@ import '../utils/safe_filename.dart';
 import '../utils/shortcut_label.dart';
 import '../models/asset_origin.dart';
 import '../models/deck.dart';
-import '../models/deck_template.dart';
 import '../models/improvement_y01.dart';
 import '../models/privacy_disposition.dart';
 import '../models/recent_file.dart';

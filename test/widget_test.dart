@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -48,23 +47,21 @@ void main() {
     expect(find.text('Gebruikershandleiding'), findsOneWidget);
   });
 
-  testWidgets('het openscherm noemt hoeveel sjablonen er klaarstaan', (
+  testWidgets('het openscherm telt geen sjablonen meer voor je', (
     tester,
   ) async {
-    // De sjablonen zijn het beste dat een nieuwkomer kan overkomen en zaten
-    // ongenoemd achter "Nieuwe presentatie". Het getal komt uit de catalogus,
-    // niet uit een hardgecodeerde tekst die veroudert.
+    // Het openscherm meldde hoeveel sjablonen er klaarstonden. Dat getal helpt
+    // niemand aan een presentatie: het staat op de plek waar één handeling
+    // hoort en vraagt om lezen en rekenen voordat je mag klikken. Wélke
+    // sjablonen er zijn, laat de kiezer zelf zien — en die staat één klik weg.
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
-    // Zonder module staan MIAUW en DMAIC niet in de kiezer — zelfde filter
-    // als welcome_screen._visibleTemplateCount.
-    final expected = deckTemplates
-        .where((t) => !t.requiresInfoSafety && !t.requiresProcesverbetering)
-        .length;
-    expect(
-      find.textContaining('$expected sjablonen om mee te beginnen'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('sjablonen om mee te beginnen'), findsNothing);
+    // De twee maakknoppen staan er nog wél, elk met het icoon van hun soort.
+    expect(find.text('Nieuwe presentatie'), findsOneWidget);
+    expect(find.text('Nieuw document'), findsOneWidget);
+    expect(find.byIcon(Icons.slideshow_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.description_outlined), findsOneWidget);
   });
 
   testWidgets(

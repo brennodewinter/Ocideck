@@ -3459,7 +3459,6 @@ const _dutchSourceAddMt = <String, String>{
       'Ma sarx kontroll għal data personali, data ta\' kategoriji speċjali u sigrieti: il-kontroll tal-privatezza huwa mitfi taħt Sigurtà.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Preżentazzjonijiet li jibqgħu fajls Markdown sempliċi: jinqraw, jitfittxew u jinfetħu bi kwalunkwe editur.',
-  'sjablonen om mee te beginnen, of leeg': 'mudelli biex tibda, jew vojta',
   'Mijn tekst': 'It-test tiegħi',
   'Wat zij zien': 'Dak li jaraw',
   'Presentatiegegevens': 'Data tal-preżentazzjoni',

@@ -2615,7 +2615,6 @@ const _dutchSourceAddEn = {
       'No check was made for personal data, special category data and secrets: the privacy check is switched off under Security.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentations that stay plain Markdown files: readable, searchable and openable with any editor.',
-  'sjablonen om mee te beginnen, of leeg': 'templates to start with, or blank',
   'Mijn tekst': 'My text',
   'Wat zij zien': 'What they see',
   'Presentatiegegevens': 'Presentation details',

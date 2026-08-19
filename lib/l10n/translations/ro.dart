@@ -3450,7 +3450,6 @@ const _dutchSourceAddRo = <String, String>{
       'Nu s-au căutat date personale, date din categorii speciale și secrete: verificarea de confidențialitate este dezactivată la Securitate.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentări care rămân simple fișiere Markdown: lizibile, în care se poate căuta și care se deschid cu orice editor.',
-  'sjablonen om mee te beginnen, of leeg': 'șabloane pentru a începe sau goală',
   'Mijn tekst': 'Textul meu',
   'Wat zij zien': 'Ce văd ei',
   'Presentatiegegevens': 'Datele prezentării',

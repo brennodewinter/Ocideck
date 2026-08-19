@@ -3470,7 +3470,6 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν έγινε έλεγχος για προσωπικά δεδομένα, ειδικές κατηγορίες δεδομένων και μυστικά: ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Παρουσιάσεις που παραμένουν απλά αρχεία Markdown: αναγνώσιμες, με δυνατότητα αναζήτησης και ανοίγουν με οποιονδήποτε επεξεργαστή.',
-  'sjablonen om mee te beginnen, of leeg': 'πρότυπα για να ξεκινήσετε, ή κενή',
   'Mijn tekst': 'Το κείμενό μου',
   'Wat zij zien': 'Τι βλέπουν',
   'Presentatiegegevens': 'Στοιχεία παρουσίασης',

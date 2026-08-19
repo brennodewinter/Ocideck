@@ -3416,7 +3416,6 @@ const _dutchSourceAddSv = <String, String>{
       'Ingen sökning har gjorts efter personuppgifter, känsliga uppgifter och hemligheter: integritetskontrollen är avstängd under Säkerhet.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentationer som förblir vanliga Markdown-filer: läsbara, sökbara och går att öppna med vilken editor som helst.',
-  'sjablonen om mee te beginnen, of leeg': 'mallar att börja med, eller tom',
   'Mijn tekst': 'Min text',
   'Wat zij zien': 'Vad de ser',
   'Presentatiegegevens': 'Presentationsuppgifter',

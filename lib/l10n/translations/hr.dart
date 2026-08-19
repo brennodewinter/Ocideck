@@ -3421,7 +3421,6 @@ const _dutchSourceAddHr = <String, String>{
       'Nisu se tražili osobni podaci, posebne kategorije podataka ni tajne: provjera privatnosti isključena je u odjeljku Sigurnost.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentacije koje ostaju obične Markdown datoteke: čitljive, pretražive i otvorive bilo kojim uređivačem.',
-  'sjablonen om mee te beginnen, of leeg': 'predložaka za početak ili prazna',
   'Mijn tekst': 'Moj tekst',
   'Wat zij zien': 'Što oni vide',
   'Presentatiegegevens': 'Podaci prezentacije',

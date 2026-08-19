@@ -3435,7 +3435,6 @@ const _dutchSourceAddUk = <String, String>{
       'Персональні дані, особливі категорії даних і секрети не перевірялися: перевірку приватності вимкнено в розділі Безпека.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентації, що лишаються звичайними файлами Markdown: читабельні, придатні для пошуку й такі, що відкриваються будь-яким редактором.',
-  'sjablonen om mee te beginnen, of leeg': 'шаблонів для початку або порожня',
   'Mijn tekst': 'Мій текст',
   'Wat zij zien': 'Що бачать вони',
   'Presentatiegegevens': 'Дані презентації',

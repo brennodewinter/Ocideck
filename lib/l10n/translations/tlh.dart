@@ -3381,7 +3381,6 @@ const _dutchSourceAddTlh = <String, String>{
       'nuv De\', De\' pIn\'a\', pegh je nejlu\'be\'. Hubqu\'Daq pegh ninSar chu\'Ha\'lu\'pu\'.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Markdown ghItlhmey neH rurtaH cha\'navmey: laDlaH, nejlaH, \'ej Hoch choHwI\' lo\'laH.',
-  'sjablonen om mee te beginnen, of leeg': 'taghmeH ghItlh\'a\'mey, pagh chIm',
   'Mijn tekst': 'mu\'wIj',
   'Wat zij zien': 'bejwI\' legh',
   'Presentatiegegevens': 'cha\'nav De\'',

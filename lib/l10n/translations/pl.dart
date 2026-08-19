@@ -3442,7 +3442,6 @@ const _dutchSourceAddPl = <String, String>{
       'Nie sprawdzono danych osobowych, danych szczególnych kategorii ani sekretów: kontrola prywatności jest wyłączona w sekcji Bezpieczeństwo.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentacje, które pozostają zwykłymi plikami Markdown: czytelne, przeszukiwalne i możliwe do otwarcia w dowolnym edytorze.',
-  'sjablonen om mee te beginnen, of leeg': 'szablonów na początek albo pusta',
   'Mijn tekst': 'Mój tekst',
   'Wat zij zien': 'Co widzą',
   'Presentatiegegevens': 'Dane prezentacji',

@@ -4323,7 +4323,6 @@ const _dutchSourceAddTr = <String, String>{
       'Kişisel veriler, özel nitelikli veriler ve sırlar için denetim yapılmadı: gizlilik denetimi Güvenlik altında kapalı.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Düz Markdown dosyası olarak kalan sunumlar: okunabilir, aranabilir ve her düzenleyiciyle açılabilir.',
-  'sjablonen om mee te beginnen, of leeg': 'şablonla başlayın ya da boş',
   'Mijn tekst': 'Kendi metnim',
   'Wat zij zien': 'Onların gördüğü',
   'Presentatiegegevens': 'Sunum bilgileri',

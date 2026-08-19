@@ -3413,7 +3413,6 @@ const _dutchSourceAddCs = <String, String>{
       'Osobní údaje, zvláštní kategorie údajů ani tajemství nebyly prověřeny: kontrola soukromí je vypnutá v části Zabezpečení.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentace, které zůstávají obyčejnými soubory Markdown: čitelné, prohledatelné a otevřitelné v jakémkoli editoru.',
-  'sjablonen om mee te beginnen, of leeg': 'šablon pro začátek, nebo prázdná',
   'Mijn tekst': 'Můj text',
   'Wat zij zien': 'Co vidí oni',
   'Presentatiegegevens': 'Údaje prezentace',

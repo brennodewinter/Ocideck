@@ -49,7 +49,7 @@ class _WelcomeScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(width: 340, child: _brandPanel(context, theme, l10n)),
-              Expanded(child: _actionsPanel(context, ref, l10n, palette)),
+              Expanded(child: _actionsPanel(context, ref, l10n)),
               if (recentFiles.isNotEmpty)
                 SizedBox(
                   width: 300,
@@ -68,10 +68,7 @@ class _WelcomeScreen extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: 400, child: _brandPanel(context, theme, l10n)),
-              SizedBox(
-                height: 520,
-                child: _actionsPanel(context, ref, l10n, palette),
-              ),
+              SizedBox(height: 520, child: _actionsPanel(context, ref, l10n)),
               if (recentFiles.isNotEmpty)
                 SizedBox(
                   height: 360,
@@ -235,7 +232,6 @@ class _WelcomeScreen extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
-    AppPalette palette,
   ) {
     // Alleen de knoppenkolom; de links en de Vigilis-credit zijn naar de
     // doorlopende voettekstband onder de hele hub verhuisd ([_welcomeFooter]).
@@ -249,7 +245,7 @@ class _WelcomeScreen extends ConsumerWidget {
             constraints: const BoxConstraints(maxWidth: 640),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: _startColumn(context, ref, l10n, palette),
+              children: _startColumn(context, ref, l10n),
             ),
           ),
         ),
@@ -264,7 +260,6 @@ class _WelcomeScreen extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
-    AppPalette palette,
   ) {
     // Eén gedeelde knopvorm en -uitlijning voor de hele startkolom. De inhoud
     // (icoon + label) staat links uitgelijnd, op dezelfde linkerlijn als de kop
@@ -288,27 +283,22 @@ class _WelcomeScreen extends ConsumerWidget {
         ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 22),
-      _widePrimaryButton(
-        style: primaryStyle,
-        icon: Icons.slideshow_outlined,
-        label: Text(l10n.t('newPresentation')),
-        onPressed: () => _newDeck(context, ref),
-      ),
-      // De sjabloonregel staat onder de presentatieknop en niet meer onder de
-      // kop: hij geldt alleen voor die weg. Boven de groep las hij als een
-      // belofte over allebei, en een document kent geen sjablonen. De ruimte
-      // eronder is ruimer dan die erboven, anders zweeft hij tussen twee
-      // gelijkvormige knoppen in en is niet te zien bij welke hij hoort.
-      const SizedBox(height: 6),
+      // Onder deze knop stond hoeveel sjablonen er klaarstonden. Een getal dat
+      // niemand nodig heeft om te beginnen: het staat op de plek waar één
+      // handeling hoort en vraagt om lezen en rekenen voordat je mag klikken,
+      // en wélke sjablonen het zijn laat de kiezer zelf zien. De melding dat de
+      // voorbeelddia's Engels zijn hing eraan en verhuist naar de knop — die
+      // geldt alleen voor deze weg, want een document kent geen sjablonen.
       _withTemplateLanguageTooltip(
         l10n,
-        Text(
-          '${_visibleTemplateCount(ref)} '
-          '${l10n.d('sjablonen om mee te beginnen, of leeg')}',
-          style: TextStyle(color: palette.mutedText),
+        _widePrimaryButton(
+          style: primaryStyle,
+          icon: Icons.slideshow_outlined,
+          label: Text(l10n.t('newPresentation')),
+          onPressed: () => _newDeck(context, ref),
         ),
       ),
-      const SizedBox(height: 20),
+      const SizedBox(height: 10),
       ..._newDocumentButton(context, ref, l10n),
       const SizedBox(height: 24),
       Divider(color: scheme.outlineVariant),
@@ -500,23 +490,6 @@ class _WelcomeScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  /// Hoeveel sjablonen deze gebruiker straks te kiezen krijgt. Dezelfde
-  /// zichtbaarheidsregel als de kiezer zelf: de module-sjablonen tellen pas mee
-  /// als hun uitbreiding aan staat, anders belooft het openscherm er te veel.
-  int _visibleTemplateCount(WidgetRef ref) {
-    final secRevealed = ref.watch(infoSafetyRevealProvider);
-    final impRevealed = ref.watch(procesverbeteringRevealProvider);
-    return deckTemplates
-        .where(
-          (template) => deckTemplateVisible(
-            template,
-            infoSafetyRevealed: secRevealed,
-            procesverbeteringRevealed: impRevealed,
-          ),
-        )
-        .length;
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) =>

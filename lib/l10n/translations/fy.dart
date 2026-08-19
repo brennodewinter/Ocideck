@@ -2457,8 +2457,6 @@ const _dutchSourceAddFy = {
       'Der is net socht nei persoansgegevens, bysûndere gegevens en geheimen: de privacykontrôle stiet út by Befeiliging.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presintaasjes dy\'t gewoane Markdown-bestannen bliuwe: lêsber, trochsykber en te iepenjen mei elke editor.',
-  'sjablonen om mee te beginnen, of leeg':
-      'sjabloanen om mei te begjinnen, of leech',
   'Mijn tekst': 'Myn tekst',
   'Wat zij zien': 'Wat sy sjogge',
   'Presentatiegegevens': 'Presintaasjegegevens',

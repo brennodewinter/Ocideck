@@ -3411,7 +3411,6 @@ const _dutchSourceAddEt = <String, String>{
       'Isikuandmeid, eriliiki andmeid ja saladusi ei kontrollitud: privaatsuse kontroll on jaotises Turvalisus välja lülitatud.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitlused, mis jäävad tavalisteks Markdown-failideks: loetavad, otsitavad ja avatavad mis tahes redaktoriga.',
-  'sjablonen om mee te beginnen, of leeg': 'malli alustamiseks või tühi',
   'Mijn tekst': 'Minu tekst',
   'Wat zij zien': 'Mida nemad näevad',
   'Presentatiegegevens': 'Esitluse andmed',

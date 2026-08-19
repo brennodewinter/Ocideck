@@ -3464,7 +3464,6 @@ const _dutchSourceAddPt = <String, String>{
       'Não se procuraram dados pessoais, dados de categorias especiais nem segredos: a verificação de privacidade está desligada em Segurança.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Apresentações que continuam a ser simples ficheiros Markdown: legíveis, pesquisáveis e abertos com qualquer editor.',
-  'sjablonen om mee te beginnen, of leeg': 'modelos para começar, ou em branco',
   'Mijn tekst': 'O meu texto',
   'Wat zij zien': 'O que eles veem',
   'Presentatiegegevens': 'Dados da apresentação',

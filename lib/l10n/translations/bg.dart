@@ -3452,7 +3452,6 @@ const _dutchSourceAddBg = <String, String>{
       'Не са търсени лични данни, специални категории данни и тайни: проверката на поверителността е изключена в Сигурност.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Презентации, които остават обикновени файлове Markdown: четими, с възможност за търсене и отваряеми с всеки редактор.',
-  'sjablonen om mee te beginnen, of leeg': 'шаблона за начало или празна',
   'Mijn tekst': 'Моят текст',
   'Wat zij zien': 'Какво виждат те',
   'Presentatiegegevens': 'Данни за презентацията',

@@ -3437,7 +3437,6 @@ const _dutchSourceAddLa = <String, String>{
       'Data personalia, data specialia et arcana quaesita non sunt: examen privati apud Securitatem exstinctum est.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Praesentationes quae simplices fasciculi Markdown manent: legibiles, investigabiles et quovis editore aperiendae.',
-  'sjablonen om mee te beginnen, of leeg': 'exempla ad incipiendum, vel vacuum',
   'Mijn tekst': 'Textus meus',
   'Wat zij zien': 'Quod vident',
   'Presentatiegegevens': 'Data praesentationis',

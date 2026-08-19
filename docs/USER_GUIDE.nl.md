@@ -74,11 +74,10 @@ flowchart LR
   gewone Markdown-bestanden blijven). Onder *Nieuw* staan de twee manieren om te
   beginnen naast elkaar, in dezelfde accentkleur: **Nieuwe presentatie** en
   **Nieuw document**. Elke knop zegt zelf wat hij maakt, zodat geen van beide
-  leest als de mindere van de twee; onder de presentatieknop staat hoeveel
-  sjablonen er achter klaarstaan — geteld vanuit de catalogus zelf, zodat het
-  niet kan afwijken, en met weglating van het beveiligingsmodulesjabloon totdat
-  die module is ingeschakeld. Die regel staat onder de presentatieknop en niet
-  boven allebei, want een document kent geen sjablonen. Een knop
+  leest als de mindere van de twee. *(Gecorrigeerd 19-08-2026: onder de
+  presentatieknop stond hoeveel sjablonen er klaarstonden. Een getal is niet wat
+  iemand nodig heeft op de plek waar één handeling hoort — en wélke sjablonen het
+  zijn, laat de kiezer zien, één klik verderop.)* Een knop
   **Gebruikershandleiding** naast *Instellingen* opent dit document in de
   ingebouwde lezer. Het zat vroeger drie
   klikken diep onder *Instellingen → Documentatie*, precies waar iemand die nog
@@ -132,8 +131,8 @@ flowchart LR
   De inhoud van een sjabloon is een meegeleverd Markdown-document per taal, gelezen
   door dezelfde parser die elk deck opent: met een Nederlandstalige interface krijg
   je het Nederlandse document, met elke andere interfacetaal het Engelse. Wanneer
-  je interfacetaal geen van beide is, zeggen de kiezer en het welkomstscherm dat
-  boven de lijst: de voorbeeldslides zijn Engels, terwijl de naam en beschrijving
+  je interfacetaal geen van beide is, zegt de kiezer dat boven de lijst — en op
+  het welkomstscherm zegt de zweeftekst op *Nieuwe presentatie* hetzelfde: de voorbeeldslides zijn Engels, terwijl de naam en beschrijving
   van het sjabloon nog steeds je eigen taal volgen. Dat de slide-inhoud bij twee
   talen stopt is een keuze, geen omissie: sjablooninhoud wordt *jouw* inhoud op het
   moment dat het deck wordt gemaakt, dus het bestaat als een document per taal of

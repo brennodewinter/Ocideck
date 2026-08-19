@@ -3418,7 +3418,6 @@ const _dutchSourceAddSl = <String, String>{
       'Osebnih podatkov, posebnih vrst podatkov in skrivnosti nismo preverili: preverjanje zasebnosti je izklopljeno pod Varnost.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Predstavitve, ki ostanejo navadne datoteke Markdown: berljive, po njih je mogoče iskati in odpreti jih je mogoče s katerim koli urejevalnikom.',
-  'sjablonen om mee te beginnen, of leeg': 'predlog za začetek ali prazna',
   'Mijn tekst': 'Moje besedilo',
   'Wat zij zien': 'Kar vidijo oni',
   'Presentatiegegevens': 'Podatki predstavitve',

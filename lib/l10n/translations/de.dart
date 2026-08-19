@@ -2468,7 +2468,6 @@ const _dutchSourceAddDe = {
       'Es wurde nicht nach personenbezogenen Daten, besonderen Datenkategorien und Geheimnissen gesucht: die Datenschutzprüfung ist unter Sicherheit ausgeschaltet.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Präsentationen, die einfache Markdown-Dateien bleiben: lesbar, durchsuchbar und mit jedem Editor zu öffnen.',
-  'sjablonen om mee te beginnen, of leeg': 'Vorlagen zum Starten, oder leer',
   'Mijn tekst': 'Mein Text',
   'Wat zij zien': 'Was sie sehen',
   'Presentatiegegevens': 'Präsentationsdaten',

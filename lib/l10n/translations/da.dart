@@ -3419,8 +3419,6 @@ const _dutchSourceAddDa = <String, String>{
       'Der er ikke søgt efter personoplysninger, særlige kategorier af oplysninger og hemmeligheder: privatlivstjekket er slået fra under Sikkerhed.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Præsentationer, der forbliver almindelige Markdown-filer: læsbare, søgbare og kan åbnes med enhver editor.',
-  'sjablonen om mee te beginnen, of leeg':
-      'skabeloner at starte med, eller tom',
   'Mijn tekst': 'Min tekst',
   'Wat zij zien': 'Hvad de ser',
   'Presentatiegegevens': 'Præsentationsoplysninger',

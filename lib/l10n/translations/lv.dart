@@ -3416,7 +3416,6 @@ const _dutchSourceAddLv = <String, String>{
       'Personas dati, īpašu kategoriju dati un noslēpumi nav pārbaudīti: privātuma pārbaude ir izslēgta sadaļā Drošība.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentācijas, kas paliek parasti Markdown faili: lasāmi, meklējami un atverami jebkurā redaktorā.',
-  'sjablonen om mee te beginnen, of leeg': 'veidnes, ar ko sākt, vai tukša',
   'Mijn tekst': 'Mans teksts',
   'Wat zij zien': 'Ko redz viņi',
   'Presentatiegegevens': 'Prezentācijas dati',

@@ -3474,7 +3474,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ní dhearnadh seiceáil ar shonraí pearsanta, ar shonraí catagóire speisialta ná ar rúin: tá an tseiceáil príobháideachais múchta faoi Slándáil.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Láithreoireachtaí a fhanann ina ngnáthchomhaid Markdown: inléite, inchuardaithe agus infhoscailte le heagarthóir ar bith.',
-  'sjablonen om mee te beginnen, of leeg': 'teimpléad le tosú leo, nó folamh',
   'Mijn tekst': 'Mo théacs',
   'Wat zij zien': 'A bhfeiceann siad',
   'Presentatiegegevens': 'Sonraí na láithreoireachta',

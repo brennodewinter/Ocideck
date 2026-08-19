@@ -3422,7 +3422,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Es isch nid nach persönliche Date, bsundere Date und Gheimnis gsuecht worde: d Dateschutzprüefig isch under Sicherheit usgschalte.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentatione, wo eifachi Markdown-Dateie bliibed: läsbar, durchsuechbar und mit jedem Editor z öffne.',
-  'sjablonen om mee te beginnen, of leeg': 'Vorlage zum Aafange, oder leer',
   'Mijn tekst': 'Min Täxt',
   'Wat zij zien': 'Was si gsehnd',
   'Presentatiegegevens': 'Presentationsdate',

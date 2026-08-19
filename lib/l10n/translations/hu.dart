@@ -3429,7 +3429,6 @@ const _dutchSourceAddHu = <String, String>{
       'Nem történt ellenőrzés személyes adatokra, különleges adatokra és titkokra: az adatvédelmi ellenőrzés ki van kapcsolva a Biztonság alatt.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentációk, amelyek egyszerű Markdown-fájlok maradnak: olvashatók, kereshetők és bármilyen szerkesztővel megnyithatók.',
-  'sjablonen om mee te beginnen, of leeg': 'sablon a kezdéshez, vagy üres',
   'Mijn tekst': 'Saját szöveg',
   'Wat zij zien': 'Amit ők látnak',
   'Presentatiegegevens': 'Prezentációs adatok',

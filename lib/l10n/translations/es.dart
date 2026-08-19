@@ -2472,8 +2472,6 @@ const _dutchSourceAddEs = {
       'No se han buscado datos personales, datos de categorías especiales ni secretos: la comprobación de privacidad está desactivada en Seguridad.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentaciones que siguen siendo simples archivos Markdown: legibles, consultables y abribles con cualquier editor.',
-  'sjablonen om mee te beginnen, of leeg':
-      'plantillas para empezar, o en blanco',
   'Mijn tekst': 'Mi texto',
   'Wat zij zien': 'Lo que ven',
   'Presentatiegegevens': 'Datos de la presentación',

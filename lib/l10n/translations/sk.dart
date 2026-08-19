@@ -3421,7 +3421,6 @@ const _dutchSourceAddSk = <String, String>{
       'Osobné údaje, osobitné kategórie údajov ani tajomstvá sa nekontrolovali: kontrola súkromia je vypnutá v časti Zabezpečenie.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Prezentácie, ktoré zostávajú obyčajnými súbormi Markdown: čitateľné, prehľadávateľné a otvoriteľné v ľubovoľnom editore.',
-  'sjablonen om mee te beginnen, of leeg': 'šablón na začiatok alebo prázdna',
   'Mijn tekst': 'Môj text',
   'Wat zij zien': 'Čo vidia oni',
   'Presentatiegegevens': 'Údaje prezentácie',

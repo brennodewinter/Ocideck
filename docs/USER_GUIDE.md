@@ -68,12 +68,12 @@ flowchart LR
   others. Under the logo, one line says what OciDeck makes (presentations that
   stay ordinary Markdown files). Under *New* sit the two ways to start, side by
   side and in the same accent colour: **New presentation** and **New document**.
-  Each button says what it makes, so neither reads as the lesser of the two;
-  under the presentation button one line says how many templates are waiting
-  behind it — counted from the catalogue itself, so it cannot drift, and leaving
-  out the security-module template until that module is enabled. That line sits
-  under the presentation button and not above both, because a document has no
-  templates. A **User guide** button beside *Settings* opens this document in the
+  Each button says what it makes, so neither reads as the lesser of the two.
+  *(Corrected 2026-08-19: a line under the presentation button used to report how
+  many templates were waiting behind it. A count is not what anyone needs at the
+  one place where there is a single thing to do — and which templates they are is
+  what the picker shows, one click away.)* A **User guide** button beside
+  *Settings* opens this document in the
   built-in reader. It used to live three clicks deep under *Settings →
   Documentation*, which is exactly where someone who knows nothing yet does not
   look.
@@ -124,9 +124,10 @@ flowchart LR
   content is a bundled Markdown document per language, read by the same parser
   that opens any deck: with a Dutch interface you get the Dutch document, with
   any other interface language the English one. When your interface language is
-  neither, the picker and the welcome screen say so above the list: the example
-  slides will be English, while the template's name and description still follow
-  your own language. That the slide content stops at two languages is a
+  neither, the picker says so above the list — and on the welcome screen the
+  tooltip on *New presentation* says the same: the example slides will be
+  English, while the template's name and description still follow your own
+  language. That the slide content stops at two languages is a
   decision, not an oversight: template content becomes *your* content the moment
   the deck is created, so it exists as a document per language or not at all —
   running it through the interface-translation layer would make what a document

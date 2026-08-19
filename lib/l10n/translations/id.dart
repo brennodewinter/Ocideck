@@ -3428,7 +3428,6 @@ const _dutchSourceAddId = <String, String>{
       'Tidak ada pemeriksaan untuk data pribadi, data khusus, dan rahasia: pemeriksaan privasi dimatikan di Keamanan.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Presentasi yang tetap berupa berkas Markdown biasa: dapat dibaca, dicari, dan dibuka dengan editor apa pun.',
-  'sjablonen om mee te beginnen, of leeg': 'templat untuk memulai, atau kosong',
   'Mijn tekst': 'Teks saya',
   'Wat zij zien': 'Yang mereka lihat',
   'Presentatiegegevens': 'Data presentasi',

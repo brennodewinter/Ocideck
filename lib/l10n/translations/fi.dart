@@ -3418,7 +3418,6 @@ const _dutchSourceAddFi = <String, String>{
       'Henkilötietoja, erityisiä tietoryhmiä ja salaisuuksia ei ole tarkistettu: yksityisyystarkistus on pois päältä kohdassa Turvallisuus.',
   'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.':
       'Esitykset, jotka pysyvät tavallisina Markdown-tiedostoina: luettavia, haettavia ja avattavissa millä tahansa editorilla.',
-  'sjablonen om mee te beginnen, of leeg': 'mallia aloittamiseen, tai tyhjä',
   'Mijn tekst': 'Oma teksti',
   'Wat zij zien': 'Mitä he näkevät',
   'Presentatiegegevens': 'Esityksen tiedot',
