@@ -1671,6 +1671,30 @@ that before deciding whether this alpha fits what you are doing.
   achterdeur zijn om geweigerde inhoud alsnog te renderen, en het wacht een
   kwart seconde voordat het leest, zodat met de muis langs de lijst glijden geen
   twintig bestanden inleest.
+- **de visuele documentmodus: een pijl in een tabel, de plek bij het wisselen,
+  en opmaak die opmaak blijft.** Drie klachten uit één sessie schrijven, en ze
+  bleken elkaars buren. *Naar beneden gaan in een tabel gooide je stil naar de
+  brontekst.* Een invulbare cel is een tekstveld binnen een Quill-embed, en een
+  `EditableText` laat zijn tekstbewerkingsacties bewust overschrijven door een
+  `Actions` hoger in de boom — waar Quill die van hem zet. Elke pijltjestoets in
+  een cel liet Quill dus de cursor van het *document* verzetten en dat resultaat
+  ín de cel schrijven: de hele documenttekst belandde met `<br>`-tekens in één
+  cel, en omdat rauwe HTML de visuele stand op brontekst terugwerpt, viel de
+  editor om. Zonder dat er iets van te zien was, want de standknop zei nog
+  "Visueel" en de melding was een grijze regel van 10,5 punt. `EmbeddedFieldActions`
+  zet die acties nu dichter bij het veld en laat ze de eigen standaardactie van
+  het veld aanroepen; de melding is een balk geworden. Meteen ook de
+  ontdekking dat één klik in het schrijfvlak het hele document opnieuw wegschreef:
+  de heen-en-terugweg naar Markdown is niet byte-getrouw, en de editor vergeleek
+  bij élke melding — óók bij een cursorbeweging (#1565). *Wisselen tussen Visueel
+  en Bron bracht je bij het begin*, terwijl je juist wisselt om op één plek in de
+  bron te kijken; `MarkdownCaretMap` rekent de cursor nu om, per regel en binnen
+  een regel met een deelrij-vergelijking, en de toets legt dat naast de échte
+  platte tekst van de omzetting in plaats van naast zelfbedachte getallen
+  (#1566). *En de sterretjes bleven in tabelcellen staan* omdat de cel een kaal
+  tekstveld was; de cel waar je niet in staat toont nu de opgemaakte lezing over
+  het veld heen, en `code` kreeg in de documentweergave hetzelfde vlakje als in
+  het schrijfvlak (#1567).
 
 - **schrijfcomfort in de documentmodus: breedte, zoom, koppen en voetnoten.**
   Vier dingen die opvielen tijdens het werken in een document, en wat ze bleken

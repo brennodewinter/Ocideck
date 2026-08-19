@@ -4310,12 +4310,23 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   editing the source text directly, with the same formatting toolbar, and shows a
   short note that this part is edited as source. The rich possibilities stay
   within reach — OciDeck offers them and warns, rather than deciding the document
-  is read-only for you. *(Changed 2026-08-08.)*
+  is read-only for you. The note is a clear bar above the writing surface: you
+  should know you are in the source, otherwise you cannot know how to get back.
+  Inside a **table** every cell reads the way it prints — `**bold**` is bold and
+  `` `code` `` sits on a code chip. Only the cell the caret is in shows its
+  Markdown, because that is what you are editing at that moment.
+  *(Changed 2026-08-08, extended 2026-08-19.)*
 - **Source** puts the raw Markdown next to a live rendered preview (stacked when
   the window is too narrow for two readable columns), with double-click editing of
   charts and tables in the preview. Every keystroke flows straight through — there
   is no separate "Apply" step, unlike the deck-oriented
   [Markdown mode](#markdown-mode) below.
+- **Switching leaves you where you were.** Going from Visual to Source or back
+  puts the caret at the matching place in the other view, not at the top of the
+  document — switching is exactly what you do when you want to see or set
+  something in the source *at one spot*. Character-exact precision is not always
+  possible; if you sit inside a formatting marker the caret lands at its start.
+  *(Added 2026-08-19.)*
 - **Pagina's** ("Pages") lays the document out on real sheets: the
   [page size and margins](#page-size-margins-bleed-and-writing-width) you chose,
   and — when the document carries a style — that style's repeating header and

@@ -4397,12 +4397,23 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   opmaak-knoppenbalk, en een korte melding zegt dat dit deel als bron wordt bewerkt.
   De rijke mogelijkheden blijven binnen bereik — OciDeck biedt ze aan en
   waarschuwt, in plaats van voor jou te besluiten dat het document alleen-lezen is.
-  *(Gewijzigd 2026-08-08.)*
+  De melding is een duidelijke balk boven het schrijfvlak: je hoort te weten dat
+  je in de bron staat, anders weet je ook niet hoe je terugkomt.
+  In een **tabel** leest elke cel zoals hij gedrukt wordt — `**vet**` is vet en
+  `` `code` `` staat op een codevlakje. Alleen de cel waar de cursor in staat
+  toont zijn Markdown, want dat is wat je op dat moment bewerkt.
+  *(Gewijzigd 2026-08-08, aangevuld 2026-08-19.)*
 - **Bron** zet de ruwe Markdown naast een live gerenderde weergave (gestapeld
   wanneer het venster te smal is voor twee leesbare kolommen), waarbij je grafieken
   en tabellen in de weergave met een dubbelklik bewerkt. Elke toetsaanslag
   loopt meteen door — er is geen aparte "Toepassen"-stap, anders dan de
   deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
+- **Wisselen laat je staan waar je stond.** Ga je van Visueel naar Bron of
+  terug, dan komt de cursor op de overeenkomstige plek in de andere weergave —
+  niet bovenaan het document. Wisselen doe je immers omdat je op één plek iets
+  in de bron wilt zien of zetten. Precisie tot op het teken is niet altijd
+  haalbaar; sta je middenin een opmaakteken, dan landt de cursor aan het begin
+  daarvan. *(Toegevoegd 2026-08-19.)*
 - **Pagina's** legt het document op echte vellen: de
   [paginamaat en de marges](#paginamaat-marges-afloop-en-schrijfbreedte) die je
   hebt gekozen, en — als het document een stijl draagt — de herhalende kop- en

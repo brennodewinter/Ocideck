@@ -323,23 +323,34 @@ void main() {
         );
       });
 
-      test('aan de rand van de tabel gebeurt er niets', () {
-        caretAt(0, 0, 0);
-        expect(
-          press(0, 0, LogicalKeyboardKey.arrowLeft),
-          KeyEventResult.ignored,
-        );
-        expect(press(0, 0, LogicalKeyboardKey.arrowUp), KeyEventResult.ignored);
-        caretAt(2, 1, editor.cellController(2, 1).text.length);
-        expect(
-          press(2, 1, LogicalKeyboardKey.arrowRight),
-          KeyEventResult.ignored,
-        );
-        expect(
-          press(2, 1, LogicalKeyboardKey.arrowDown),
-          KeyEventResult.ignored,
-        );
-      });
+      test(
+        'aan de rand van de tabel gebeurt er niets — en niets loopt door',
+        () {
+          // De toets wordt opgegeten in plaats van doorgelaten: in de visuele
+          // documentmodus staat de cel in een Quill-embed, en een doorgelaten
+          // pijltje liet Quill de cursor van het *document* verzetten en dat
+          // resultaat in de cel schrijven (#1565).
+          caretAt(0, 0, 0);
+          expect(
+            press(0, 0, LogicalKeyboardKey.arrowLeft),
+            KeyEventResult.handled,
+          );
+          expect(
+            press(0, 0, LogicalKeyboardKey.arrowUp),
+            KeyEventResult.handled,
+          );
+          expect(editor.activeCell, isNull);
+          caretAt(2, 1, editor.cellController(2, 1).text.length);
+          expect(
+            press(2, 1, LogicalKeyboardKey.arrowRight),
+            KeyEventResult.handled,
+          );
+          expect(
+            press(2, 1, LogicalKeyboardKey.arrowDown),
+            KeyEventResult.handled,
+          );
+        },
+      );
     });
 
     test(

@@ -41,7 +41,12 @@ void main() {
     // #4: een pijltje in een tabelcel deed niets herkenbaars — het bewoog de
     // cursor binnen de cel en liep daarna dood. Een mens verwacht een
     // rekenblad: eerst door de tekst, dan naar de buurcel.
-    ({int row, int col, TableCaret caret})? move(
+    //
+    // #1565: en aan de rand van de tabel is "niets te doen" niet hetzelfde als
+    // "binnen de cel". In de visuele documentmodus staat de cel in een
+    // Quill-embed; een doorgelaten toets belandt daar bij de omliggende editor,
+    // die er de cursor van het document mee verzet. Vandaar drie uitkomsten.
+    ({TableArrowMove move, int row, int col, TableCaret caret}) move(
       TableArrow arrow, {
       int row = 1,
       int col = 1,
@@ -62,17 +67,19 @@ void main() {
     );
 
     test('midden in de tekst blijft de cursor in de cel', () {
-      expect(move(TableArrow.left), isNull);
-      expect(move(TableArrow.right), isNull);
+      expect(move(TableArrow.left).move, TableArrowMove.inCell);
+      expect(move(TableArrow.right).move, TableArrowMove.inCell);
     });
 
     test('aan de rand van de tekst springt hij naar de buurcel', () {
       expect(move(TableArrow.left, atStart: true), (
+        move: TableArrowMove.toCell,
         row: 1,
         col: 0,
         caret: TableCaret.end,
       ));
       expect(move(TableArrow.right, atEnd: true), (
+        move: TableArrowMove.toCell,
         row: 1,
         col: 2,
         caret: TableCaret.start,
@@ -81,11 +88,13 @@ void main() {
 
     test('op en neer gaan een rij, met de cel geselecteerd', () {
       expect(move(TableArrow.up), (
+        move: TableArrowMove.toCell,
         row: 0,
         col: 1,
         caret: TableCaret.selectAll,
       ));
       expect(move(TableArrow.down), (
+        move: TableArrowMove.toCell,
         row: 2,
         col: 1,
         caret: TableCaret.selectAll,
@@ -93,15 +102,25 @@ void main() {
     });
 
     test('een meerregelige cel laat je er eerst doorheen lopen', () {
-      expect(move(TableArrow.up, firstLine: false), isNull);
-      expect(move(TableArrow.down, lastLine: false), isNull);
+      expect(move(TableArrow.up, firstLine: false).move, TableArrowMove.inCell);
+      expect(
+        move(TableArrow.down, lastLine: false).move,
+        TableArrowMove.inCell,
+      );
     });
 
-    test('geen doorloop voorbij de rand van de tabel', () {
-      expect(move(TableArrow.left, col: 0, atStart: true), isNull);
-      expect(move(TableArrow.right, col: 2, atEnd: true), isNull);
-      expect(move(TableArrow.up, row: 0), isNull);
-      expect(move(TableArrow.down, row: 2), isNull);
-    });
+    test(
+      'aan de rand van de tabel houdt de toets op — hij loopt niet door',
+      () {
+        for (final target in [
+          move(TableArrow.left, col: 0, atStart: true),
+          move(TableArrow.right, col: 2, atEnd: true),
+          move(TableArrow.up, row: 0),
+          move(TableArrow.down, row: 2),
+        ]) {
+          expect(target.move, TableArrowMove.atEdge);
+        }
+      },
+    );
   });
 }

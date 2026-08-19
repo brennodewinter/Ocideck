@@ -35,6 +35,10 @@ class InlineMarkdownText extends StatefulWidget {
   /// Tik op een merkteken — de weergave springt dan naar de noot.
   final void Function(String label)? onTapFootnote;
 
+  /// Het vlakje achter `code`, of `null` voor kale monospace. De documentmodus
+  /// zet hem; een dia laat hem weg (zie [inlineRunStyle]).
+  final Color? codeBackground;
+
   const InlineMarkdownText(
     this.text, {
     super.key,
@@ -48,6 +52,7 @@ class InlineMarkdownText extends StatefulWidget {
     this.trailing,
     this.footnoteNumbers,
     this.onTapFootnote,
+    this.codeBackground,
   });
 
   @override
@@ -103,7 +108,12 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
         else
           TextSpan(
             text: run.text,
-            style: inlineRunStyle(run, widget.style, widget.linkColor),
+            style: inlineRunStyle(
+              run,
+              widget.style,
+              widget.linkColor,
+              codeBackground: widget.codeBackground,
+            ),
             recognizer: (run.link != null && onTapLink != null)
                 ? _recognizerFor(run.link!, onTapLink)
                 : null,
