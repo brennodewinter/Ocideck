@@ -732,7 +732,7 @@ class _RecentFileTile extends StatelessWidget {
     final theme = Theme.of(context);
     final palette = theme.extension<AppPalette>()!;
     final material = MaterialLocalizations.of(context);
-    final name = p.basename(file.path).replaceAll('.md', '');
+    final name = p.basenameWithoutExtension(file.path);
 
     final tooltip = StringBuffer(file.path);
     if (file.lastExportFormat != null) {
@@ -761,10 +761,15 @@ class _RecentFileTile extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 2),
-                child: Icon(
-                  Icons.slideshow_outlined,
-                  size: 16,
-                  color: theme.colorScheme.onSurfaceVariant,
+                // Presentatie of document: hetzelfde onderscheid als in de
+                // openschermen, zodat je vóór het klikken weet wat je opent.
+                child: Tooltip(
+                  message: markdownKindLabel(l10n, file.kind),
+                  child: Icon(
+                    markdownKindIcon(file.kind),
+                    size: 16,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ),
               const SizedBox(width: 10),

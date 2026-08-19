@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import '../../models/library_folder.dart';
+import '../../models/markdown_kind.dart';
 import '../../models/slide.dart';
 import '../../platform/platform_features.dart';
 import '../../services/duplicate_service.dart';
@@ -11,6 +12,8 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../duplicate_badges.dart';
 import '../resizable_dialog_box.dart';
+import 'open_kind_chrome.dart';
+import 'open_preview_pane.dart';
 
 /// What the open dialog returns: a presentation path and, optionally, the
 /// index of a slide to jump to (when the user picked a search hit).
@@ -33,34 +36,46 @@ class OpenSearchResult {
       browseRequested = true;
 }
 
-/// Dialog that scans the configured libraries for Marp presentations and lets
-/// the user full-text search across the `.md` files (file name, title and slide
-/// text) before opening one. Every library is walked deeply (subfolders
+/// Dialog that scans the configured libraries for editable Markdown files and
+/// lets the user full-text search across them (file name, title and the text
+/// inside) before opening one. Every library is walked deeply (subfolders
 /// included) and results are merged, each row showing which library it came
 /// from. The folder button narrows the search to one browsed folder;
 /// "Bladeren…" falls back to the native file picker.
+///
+/// Presentaties én documenten staan in dezelfde lijst. De documentkant bewerkt
+/// gewone `.md`-bestanden, dus een zoeklijst die alleen decks toont, verstopt
+/// de helft van wat je met dit programma kunt openen; het filter bovenin haalt
+/// de andere soort weg wanneer je wél gericht zoekt.
 class OpenPresentationDialog extends StatefulWidget {
   final FileService fileService;
 
   /// The libraries to scan. Empty shows an inviting empty state.
   final List<LibraryFolder> libraries;
 
+  /// Of er een gerenderd voorbeeld naast de lijst staat (instelling
+  /// `showOpenPreview`, standaard uit).
+  final bool showPreview;
+
   const OpenPresentationDialog({
     super.key,
     required this.fileService,
     required this.libraries,
+    this.showPreview = false,
   });
 
   static Future<OpenSearchResult?> show(
     BuildContext context, {
     required FileService fileService,
     required List<LibraryFolder> libraries,
+    bool showPreview = false,
   }) {
     return showDialog<OpenSearchResult>(
       context: context,
       builder: (_) => OpenPresentationDialog(
         fileService: fileService,
         libraries: libraries,
+        showPreview: showPreview,
       ),
     );
   }
@@ -74,16 +89,21 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// mapkeuze-knop kan tijdelijk naar één specifieke map versmallen.
   late List<LibraryFolder> _roots;
   bool _loading = false;
-  List<ScannedPresentation> _presentations = const [];
+  List<ScannedMarkdown> _files = const [];
 
-  /// Gevonden presentaties gebundeld op identieke inhoud (de markdown is bij
+  /// Gevonden bestanden gebundeld op identieke inhoud (de markdown is bij
   /// het scannen al ingelezen, dus dit is puur rekenwerk).
-  List<DuplicateInfo<ScannedPresentation>> _groups = const [];
+  List<DuplicateInfo<ScannedMarkdown>> _groups = const [];
 
-  /// Genormaliseerd presentatiepad → de bibliotheek waaronder het valt, voor
-  /// de vindplaats-weergave per rij (naam + map relatief aan die wortel).
+  /// Genormaliseerd pad → de bibliotheek waaronder het valt, voor de
+  /// vindplaats-weergave per rij (naam + map relatief aan die wortel).
   final Map<String, LibraryFolder> _rootOf = {};
   String _query = '';
+  OpenKindFilter _kind = OpenKindFilter.all;
+
+  /// Het bestand waarvan het voorbeeld getoond wordt; null zolang er niets is
+  /// aangewezen. Alleen in gebruik als [OpenPresentationDialog.showPreview].
+  String? _previewPath;
 
   @override
   void initState() {
@@ -98,11 +118,11 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   Future<void> _scan() async {
     if (_roots.isEmpty) return;
     setState(() => _loading = true);
-    final all = <ScannedPresentation>[];
+    final all = <ScannedMarkdown>[];
     final rootOf = <String, LibraryFolder>{};
     final seen = <String>{};
     for (final root in _roots) {
-      final results = await widget.fileService.scanPresentations(root.path);
+      final results = await widget.fileService.scanMarkdownFiles(root.path);
       for (final r in results) {
         final norm = p.normalize(r.path);
         // Overlappende bibliotheken: elk bestand één keer, onder de eerste
@@ -118,7 +138,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
     if (!mounted) return;
     setState(() {
-      _presentations = all;
+      _files = all;
       _rootOf
         ..clear()
         ..addAll(rootOf);
@@ -193,13 +213,18 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     return '$prefix${text.substring(start, end).trim()}$suffix';
   }
 
-  /// Per visible presentation: the matching slide hits for the current query
-  /// (empty when the match was on the file name / title, or no query).
-  List<(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)> _visible() {
+  /// Per gevonden bestand: de treffers binnenin voor de huidige zoekterm (leeg
+  /// wanneer de match op de bestandsnaam/titel viel, of zonder zoekterm).
+  ///
+  /// Het soortfilter zit hier bewust niet in: het scherm heeft zowel de
+  /// gefilterde lijst als de aantallen per soort nodig, en dat zijn twee kijken
+  /// op één zoekactie — geen twee zoekacties.
+  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _matching() {
     final q = _query.trim().toLowerCase();
-    final out = <(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)>[];
+    final out = <(DuplicateInfo<ScannedMarkdown>, List<_Hit>)>[];
+    final groups = _groups;
     if (q.isEmpty) {
-      for (final info in _groups) {
+      for (final info in groups) {
         out.add((info, const []));
       }
       return out;
@@ -210,33 +235,67 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     final first = terms.first;
     bool matchesAll(String hay) => terms.every(hay.contains);
 
-    for (final info in _groups) {
-      final pres = info.primary;
+    for (final info in groups) {
+      final file = info.primary;
       // A file qualifies on its name/title or anywhere in the raw markdown
       // (front matter, comments, image paths, …) — maximal reach. Paden van
       // samengevouwen identieke kopieën zoeken mee.
       final fileHay =
-          '${pres.fileName.toLowerCase()} '
-          '${pres.deck.title.toLowerCase()} '
+          '${file.fileName.toLowerCase()} '
+          '${file.displayTitle.toLowerCase()} '
           '${info.identical.map((c) => c.path.toLowerCase()).join(' ')} '
-          '${pres.content.toLowerCase()}';
+          '${file.content.toLowerCase()}';
       final fileMatch = matchesAll(fileHay);
-      final hits = <_SlideHit>[];
-      for (var i = 0; i < pres.deck.slides.length; i++) {
-        final text = _slideText(pres.deck.slides[i]);
-        if (matchesAll(text.toLowerCase())) {
-          hits.add(_SlideHit(i, _snippet(text, first)));
-        }
-      }
+      final hits = _hitsIn(file, terms, first, matchesAll);
       if (fileMatch || hits.isNotEmpty) out.add((info, hits));
     }
     return out;
   }
 
+  /// De treffers binnen één bestand: per dia bij een presentatie, per regel bij
+  /// een document. Een document kent geen dia om naartoe te springen, dus daar
+  /// is de treffer een leesbaar fragment zonder sprongdoel.
+  List<_Hit> _hitsIn(
+    ScannedMarkdown file,
+    List<String> terms,
+    String first,
+    bool Function(String) matchesAll,
+  ) {
+    final hits = <_Hit>[];
+    final deck = file.deck;
+    if (deck != null) {
+      for (var i = 0; i < deck.slides.length; i++) {
+        final text = _slideText(deck.slides[i]);
+        if (matchesAll(text.toLowerCase())) {
+          hits.add(_Hit(_snippet(text, first), slideIndex: i));
+        }
+      }
+      return hits;
+    }
+    for (final line in file.content.split('\n')) {
+      final text = line.trim();
+      if (text.isEmpty) continue;
+      // Eén term is genoeg per regel: de AND geldt over het hele bestand, dat
+      // hierboven al is vastgesteld.
+      if (text.toLowerCase().contains(first)) {
+        hits.add(_Hit(_snippet(text, first)));
+      }
+      if (hits.length >= 8) break;
+    }
+    return hits;
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final visible = _visible();
+    final found = _matching();
+    final visible = [
+      for (final entry in found)
+        if (_kind.accepts(entry.$1.primary.kind)) entry,
+    ];
+    final documents = found
+        .where((e) => e.$1.primary.kind.isDocument)
+        .length;
 
     return AlertDialog(
       title: Row(
@@ -245,7 +304,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           const SizedBox(width: 8),
           Flexible(
             child: Text(
-              l10n.d('Presentatie openen'),
+              l10n.d('Openen'),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -253,14 +312,21 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
       content: ResizableDialogBox(
-        initialWidth: 760,
+        initialWidth: widget.showPreview ? 1020 : 760,
         height: 560,
         builder: (context, handle) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _toolbar(),
-            const SizedBox(height: 12),
-            Expanded(child: _body(visible)),
+            const SizedBox(height: 8),
+            OpenKindFilterBar(
+              value: _kind,
+              onChanged: (v) => setState(() => _kind = v),
+              presentationCount: found.length - documents,
+              documentCount: documents,
+            ),
+            const SizedBox(height: 8),
+            Expanded(child: _withPreview(_body(visible))),
             Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
@@ -282,6 +348,25 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
+  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat.
+  Widget _withPreview(Widget list) {
+    if (!widget.showPreview) return list;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(child: list),
+        const SizedBox(width: 12),
+        SizedBox(
+          width: 300,
+          child: OpenPreviewPane(
+            fileService: widget.fileService,
+            path: _previewPath,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _toolbar() {
     final l10n = context.l10n;
     return Row(
@@ -293,7 +378,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
               isDense: true,
               prefixIcon: const Icon(Icons.search, size: 18),
               hintText: l10n.d(
-                'Zoek op bestandsnaam, titel of tekst in de slides…',
+                'Zoek op bestandsnaam, titel of tekst in het bestand…',
               ),
             ),
             onChanged: (v) => setState(() => _query = v),
@@ -317,9 +402,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  Widget _body(
-    List<(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)> visible,
-  ) {
+  Widget _body(List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible) {
     final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
@@ -332,16 +415,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         ),
       );
     }
-    if (_presentations.isEmpty) {
+    if (_files.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        l10n.d('Geen presentaties (.md) gevonden.'),
+        l10n.d('Geen presentaties of documenten gevonden.'),
       );
     }
     if (visible.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        '${l10n.d('Geen presentaties gevonden voor')} "$_query".',
+        '${l10n.d('Geen resultaten voor')} "$_query".',
       );
     }
 
@@ -351,12 +434,14 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       itemBuilder: (_, i) {
         final (info, hits) = visible[i];
         final root = _rootOf[p.normalize(info.primary.path)];
-        return _PresentationRow(
+        return _FileRow(
           info: info,
           scanRoot: root?.path,
           // Toon de bibliotheeknaam alleen als er meerdere in beeld zijn.
           rootName: _roots.length > 1 ? (root?.name ?? '') : '',
           hits: hits,
+          showPreview: widget.showPreview,
+          onPreview: (path) => setState(() => _previewPath = path),
           onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
           onOpenAt: (index) => Navigator.pop(
             context,
@@ -385,14 +470,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 }
 
-class _SlideHit {
-  final int index;
+/// Eén treffer binnen een bestand: het fragment, en — alleen bij een
+/// presentatie — de dia waar het staat.
+class _Hit {
+  final int? slideIndex;
   final String snippet;
-  const _SlideHit(this.index, this.snippet);
+  const _Hit(this.snippet, {this.slideIndex});
 }
 
-class _PresentationRow extends StatelessWidget {
-  final DuplicateInfo<ScannedPresentation> info;
+class _FileRow extends StatelessWidget {
+  final DuplicateInfo<ScannedMarkdown> info;
 
   /// De gescande map; de rij toont de vindplaats relatief hieraan zodat in
   /// een boom met submappen zichtbaar is wáár elk bestand staat.
@@ -401,162 +488,182 @@ class _PresentationRow extends StatelessWidget {
   /// Naam van de bibliotheek waaronder dit bestand valt; leeg wanneer er maar
   /// één wortel in beeld is (dan voegt de naam niets toe).
   final String rootName;
-  final List<_SlideHit> hits;
+  final List<_Hit> hits;
+  final bool showPreview;
+  final ValueChanged<String> onPreview;
   final ValueChanged<String> onOpen;
   final ValueChanged<int> onOpenAt;
 
-  const _PresentationRow({
+  const _FileRow({
     required this.info,
     required this.scanRoot,
     required this.rootName,
     required this.hits,
+    required this.showPreview,
+    required this.onPreview,
     required this.onOpen,
     required this.onOpenAt,
   });
 
-  ScannedPresentation get presentation => info.primary;
+  ScannedMarkdown get file => info.primary;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final deck = presentation.deck;
-    final title = deck.title.isEmpty ? presentation.fileName : deck.title;
-
-    return Padding(
+    final row = Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () => onOpen(presentation.path),
+            onTap: () => onOpen(file.path),
             borderRadius: BorderRadius.circular(6),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               child: Row(
                 children: [
                   Icon(
-                    Icons.slideshow_outlined,
+                    markdownKindIcon(file.kind),
                     size: 18,
                     color: AppTheme.brandFg,
                   ),
                   const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                title,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppTheme.slate800,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            if (info.hasIdenticalCopies) ...[
-                              const SizedBox(width: 6),
-                              IdenticalCopiesChip(
-                                otherPaths: [
-                                  for (final copy in info.identical) copy.path,
-                                ],
-                                homeDir: scanRoot,
-                                onOpen: onOpen,
-                              ),
-                            ],
-                          ],
-                        ),
-                        // Vindplaats relatief aan de gescande map, zodat bij
-                        // submappen zichtbaar is wáár het bestand staat; het
-                        // volledige pad zit in de tooltip.
-                        Tooltip(
-                          message: presentation.path,
-                          waitDuration: const Duration(milliseconds: 400),
-                          child: Text(
-                            '${rootName.isEmpty ? '' : '$rootName  ·  '}'
-                            '${displayFolder(presentation.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
-                            '  ·  ${presentation.fileName}'
-                            '  ·  ${deck.slides.length} ${l10n.t('slides')}',
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: AppTheme.slate400,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        if (info.hasTitleConflict) ...[
-                          const SizedBox(height: 2),
-                          TitleConflictMarker(modified: presentation.modified),
-                        ],
-                      ],
+                  Expanded(child: _titleAndPlace(l10n)),
+                  if (showPreview) ...[
+                    const SizedBox(width: 4),
+                    IconButton(
+                      icon: const Icon(Icons.visibility_outlined, size: 16),
+                      tooltip: l10n.d('Voorbeeld tonen'),
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () => onPreview(file.path),
                     ),
-                  ),
+                  ],
                   const SizedBox(width: 8),
                   Icon(Icons.north_east, size: 16, color: AppTheme.slate500),
                 ],
               ),
             ),
           ),
-          if (hits.isNotEmpty)
+          if (hits.isNotEmpty) _hitList(l10n),
+        ],
+      ),
+    );
+    if (!showPreview) return row;
+    // Aanwijzen met de muis laat het voorbeeld meelopen; de knop hierboven doet
+    // hetzelfde voor wie met het toetsenbord of op een aanraakscherm werkt.
+    return MouseRegion(
+      onEnter: (_) => onPreview(file.path),
+      child: row,
+    );
+  }
+
+  Widget _titleAndPlace(AppLocalizations l10n) {
+    final deck = file.deck;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Flexible(
+              child: Text(
+                file.displayTitle,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.slate800,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 6),
+            MarkdownKindBadge(kind: file.kind),
+            if (info.hasIdenticalCopies) ...[
+              const SizedBox(width: 6),
+              IdenticalCopiesChip(
+                otherPaths: [for (final copy in info.identical) copy.path],
+                homeDir: scanRoot,
+                onOpen: onOpen,
+              ),
+            ],
+          ],
+        ),
+        // Vindplaats relatief aan de gescande map, zodat bij submappen
+        // zichtbaar is wáár het bestand staat; het volledige pad zit in de
+        // tooltip.
+        Tooltip(
+          message: file.path,
+          waitDuration: const Duration(milliseconds: 400),
+          child: Text(
+            '${rootName.isEmpty ? '' : '$rootName  ·  '}'
+            '${displayFolder(file.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
+            '  ·  ${file.fileName}'
+            '${deck == null ? '' : '  ·  ${deck.slides.length} ${l10n.t('slides')}'}',
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        if (info.hasTitleConflict) ...[
+          const SizedBox(height: 2),
+          TitleConflictMarker(modified: file.modified),
+        ],
+      ],
+    );
+  }
+
+  Widget _hitList(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 34, top: 2, bottom: 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final hit in hits.take(4)) _hitRow(l10n, hit),
+          if (hits.length > 4)
             Padding(
-              padding: const EdgeInsets.only(left: 34, top: 2, bottom: 2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (final hit in hits.take(4))
-                    InkWell(
-                      onTap: () => onOpenAt(hit.index),
-                      borderRadius: BorderRadius.circular(4),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 3,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${l10n.d('Slide')} ${hit.index + 1}',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: AppTheme.accentFg,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                hit.snippet,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: AppTheme.slate600,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  if (hits.length > 4)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4, top: 2),
-                      child: Text(
-                        '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: AppTheme.slate400,
-                        ),
-                      ),
-                    ),
-                ],
+              padding: const EdgeInsets.only(left: 4, top: 2),
+              child: Text(
+                '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
+                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  /// Eén trefferregel. Bij een presentatie springt hij naar de dia; bij een
+  /// document opent hij het bestand — daar is geen dia om naartoe te gaan, en
+  /// een label dat een sprong belooft die niet bestaat, is erger dan geen label.
+  Widget _hitRow(AppLocalizations l10n, _Hit hit) {
+    final index = hit.slideIndex;
+    return InkWell(
+      onTap: () => index == null ? onOpen(file.path) : onOpenAt(index),
+      borderRadius: BorderRadius.circular(4),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (index != null) ...[
+              Text(
+                '${l10n.d('Slide')} ${index + 1}',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.accentFg,
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
+            Expanded(
+              child: Text(
+                hit.snippet,
+                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

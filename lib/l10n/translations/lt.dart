@@ -188,7 +188,6 @@ const _dutchSourceLt = {
   'Andere map…': 'Kitas aplankas…',
   'Bibliotheken': 'Bibliotekos',
   'Geen bibliotheek': 'Nėra bibliotekos',
-  'Geen presentaties (.md) gevonden.': 'Prezentacijų (.md) nerasta.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Aplanką ir pavadinimą pasirinksi kitame lange. Vaizdai keliauja į poaplankį images/, o medija į media/, šalia prezentacijos failo.',
   'Kies bestandsnaam…': 'Pasirinkti failo pavadinimą…',
@@ -528,13 +527,10 @@ const _dutchSourceLt = {
   'Kies een video': 'Pasirinkite vaizdo įrašą',
   'Kies een audiobestand': 'Pasirinkite garso failą',
   'Bladeren…': 'Naršyti…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Ieškoti pagal failo pavadinimą, pavadinimą ar tekstą skaidrėse…',
   'Geen map gekozen': 'Aplankas nepasirinktas',
   'Map kiezen': 'Pasirinkti aplanką',
   'Kies een map met presentaties om te beginnen.':
       'Norėdami pradėti pasirinkite aplanką su pateiktimis.',
-  'Geen presentaties gevonden voor': 'Nerasta pateikčių pagal',
   'meer treffer(s)': 'dar atitikmenų',
   'Slide zoeken': 'Rasti skaidrę',
   'Slides importeren': 'Importuoti skaidres',
@@ -898,14 +894,9 @@ const _dutchSourceLt = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Įspėjimas virš {b1} punktų (1 stulpelis), {bcl} (kontrolinis sąrašas) ar {b2} (2 stulpeliai); kritinis virš {bc1} ar {bc2}. Žodžiai virš {w1}/{w2}, vidutiniškai virš {avg} viename punkte. Citata virš {q} simbolių, antraštė virš {t} simbolių. Įdėtis gilesnė nei {lvl} lygis. Tekstas, kuris turi susitraukti žemiau {warn}%, įspėja, žemiau {crit}% — kritinis.',
   'Zoek op deze computer': 'Ieškoti šiame kompiuteryje',
-  'Presentaties zoeken op deze computer':
-      'Rasti pristatymus šiame kompiuteryje',
   'Zoek op titel, pad of thema…': 'Ieškoti pagal pavadinimą, kelią ar temą…',
   'Bekende mappen worden doorzocht…': 'Ieškoma žinomuose aplankuose…',
   'gevonden': 'rasta',
-  'presentatie(s) gevonden': 'pristatymas (-ai) rastas (-i)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Žinomuose aplankuose Marp pristatymų nerasta.',
   'Geen thema': 'Nėra temos',
   'Kopieer syntaxproblemen': 'Kopijuoti sintaksės problemas',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1680,6 +1671,31 @@ const _dutchSourceAddLt = <String, String>{
   'Toch sorteren': 'Vis dar rūšiuoja',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Pirmiausia pridėkite bent vieną įvykį. Ši lentelė lieka nepakitusi.',
+  'Alles': 'Viskas',
+  'Presentaties': 'Pristatymai',
+  'Documenten': 'Dokumentai',
+  'Voorbeeld': 'Peržiūra',
+  'Voorbeeld tonen': 'Rodyti peržiūrą',
+  'Voorbeeld tonen bij openen': 'Rodyti peržiūrą atveriant',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Nurodykite failą, kad čia matytumėte peržiūrą.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Šio failo parodyti negalima. Atvėrimas jį taip pat atmeta — turinys nesaugus, sugadintas arba neįskaitomas.',
+  'Dit document is leeg.': 'Šis dokumentas tuščias.',
+  'Deze presentatie heeft nog geen dia.': 'Ši pateiktis dar neturi skaidrių.',
+  'Alleen het begin van het document wordt getoond.':
+      'Rodoma tik dokumento pradžia.',
+  'Bestanden zoeken op deze computer': 'Rasti failus šiame kompiuteryje',
+  'Dubbele bestanden opruimen': 'Sutvarkyti pasikartojančius failus',
+  'bestand(en) gevonden': 'failas (-ai) rastas (-i)',
+  'Geen presentaties of documenten gevonden.':
+      'Pristatymų ar dokumentų nerasta.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Žinomuose aplankuose pristatymų ar dokumentų nerasta.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Ieškoti pagal failo pavadinimą, antraštę ar tekstą faile…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Atvėrimo lange rodo peržiūrą failo, į kurį nurodote, kad matytumėte turinį prieš jį atverdami.',
   'Voetnoot': 'Išnaša',
   'Noten': 'Pastabos',
   'Voetnoten achterin het document': 'Išnašos dokumento pabaigoje',

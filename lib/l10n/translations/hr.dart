@@ -189,8 +189,6 @@ const _dutchSourceHr = {
   'Andere map…': 'Druga mapa…',
   'Bibliotheken': 'Biblioteke',
   'Geen bibliotheek': 'Nema biblioteke',
-  'Geen presentaties (.md) gevonden.':
-      'Nije pronađena nijedna prezentacija (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Mapu i naziv biraš u sljedećem prozoru. Slike idu u podmapu images/, a mediji u media/, uz datoteku prezentacije.',
   'Kies bestandsnaam…': 'Odaberi naziv datoteke…',
@@ -526,13 +524,10 @@ const _dutchSourceHr = {
   'Kies een video': 'Odaberi videozapis',
   'Kies een audiobestand': 'Odaberi zvučnu datoteku',
   'Bladeren…': 'Pregledaj…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Pretraži po nazivu datoteke, naslovu ili tekstu u slajdovima…',
   'Geen map gekozen': 'Nije odabrana mapa',
   'Map kiezen': 'Odaberi mapu',
   'Kies een map met presentaties om te beginnen.':
       'Odaberite mapu s prezentacijama za početak.',
-  'Geen presentaties gevonden voor': 'Nisu pronađene prezentacije za',
   'meer treffer(s)': 'još podudaranja',
   'Slide zoeken': 'Pronađi slajd',
   'Slides importeren': 'Uvezi slajdove',
@@ -898,14 +893,9 @@ const _dutchSourceHr = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Upozorenje iznad {b1} natuknica (1 stupac), {bcl} (kontrolni popis) ili {b2} (2 stupca); kritično iznad {bc1} ili {bc2}. Riječi iznad {w1}/{w2}, u prosjeku iznad {avg} po natuknici. Citat iznad {q} znakova, naslov iznad {t} znakova. Ugniježđivanje dublje od razine {lvl}. Tekst koji se mora smanjiti ispod {warn}% upozorava, ispod {crit}% je kritičan.',
   'Zoek op deze computer': 'Pretraži ovo računalo',
-  'Presentaties zoeken op deze computer':
-      'Pronađi prezentacije na ovom računalu',
   'Zoek op titel, pad of thema…': 'Pretraži po naslovu, putanji ili temi…',
   'Bekende mappen worden doorzocht…': 'Pretraživanje poznatih mapa…',
   'gevonden': 'pronađeno',
-  'presentatie(s) gevonden': 'prezentacija pronađeno',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nema Marp prezentacija u poznatim mapama.',
   'Geen thema': 'Bez teme',
   'Kopieer syntaxproblemen': 'Kopiraj probleme sintakse',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1678,6 +1668,31 @@ const _dutchSourceAddHr = <String, String>{
   'Toch sorteren': 'Još uvijek sortiram',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Prvo dodajte barem jedan događaj. Ova tablica ostaje nepromijenjena.',
+  'Alles': 'Sve',
+  'Presentaties': 'Prezentacije',
+  'Documenten': 'Dokumenti',
+  'Voorbeeld': 'Pretpregled',
+  'Voorbeeld tonen': 'Prikaži pretpregled',
+  'Voorbeeld tonen bij openen': 'Prikaži pretpregled pri otvaranju',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Pokažite na datoteku da biste ovdje vidjeli pretpregled.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Ova se datoteka ne može prikazati. I otvaranje je odbija — sadržaj je nesiguran, oštećen ili nečitljiv.',
+  'Dit document is leeg.': 'Ovaj je dokument prazan.',
+  'Deze presentatie heeft nog geen dia.': 'Ova prezentacija još nema slajdova.',
+  'Alleen het begin van het document wordt getoond.':
+      'Prikazuje se samo početak dokumenta.',
+  'Bestanden zoeken op deze computer': 'Pronađi datoteke na ovom računalu',
+  'Dubbele bestanden opruimen': 'Počisti duplicirane datoteke',
+  'bestand(en) gevonden': 'datoteka pronađeno',
+  'Geen presentaties of documenten gevonden.':
+      'Nisu pronađene prezentacije ni dokumenti.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'U poznatim mapama nisu pronađene prezentacije ni dokumenti.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Pretraži po nazivu datoteke, naslovu ili tekstu u datoteci…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'U prozoru za otvaranje prikazuje pretpregled datoteke na koju pokazujete, da vidite sadržaj prije otvaranja.',
   'Voetnoot': 'Fusnota',
   'Noten': 'Bilješke',
   'Voetnoten achterin het document': 'Fusnote na kraju dokumenta',

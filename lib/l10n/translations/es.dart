@@ -193,8 +193,6 @@ const _dutchSourceEs = {
   'Andere map…': 'Otra carpeta…',
   'Bibliotheken': 'Bibliotecas',
   'Geen bibliotheek': 'Sin biblioteca',
-  'Geen presentaties (.md) gevonden.':
-      'No se encontraron presentaciones (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Eliges la carpeta y el nombre en la siguiente ventana. Las imágenes van en una subcarpeta images/ y los medios en media/, junto al archivo de la presentación.',
   'Kies bestandsnaam…': 'Elegir nombre de archivo…',
@@ -696,6 +694,32 @@ const _dutchSourceAddEs = {
   'Toch sorteren': 'Todavía clasificando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Primero agregue al menos un evento. Esta tabla permanece sin cambios.',
+  'Alles': 'Todo',
+  'Presentaties': 'Presentaciones',
+  'Documenten': 'Documentos',
+  'Voorbeeld': 'Vista previa',
+  'Voorbeeld tonen': 'Mostrar vista previa',
+  'Voorbeeld tonen bij openen': 'Mostrar vista previa al abrir',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Señala un archivo para ver aquí una vista previa.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Este archivo no se puede mostrar. Abrirlo también se rechaza: el contenido es inseguro, está dañado o es ilegible.',
+  'Dit document is leeg.': 'Este documento está vacío.',
+  'Deze presentatie heeft nog geen dia.':
+      'Esta presentación aún no tiene diapositivas.',
+  'Alleen het begin van het document wordt getoond.':
+      'Solo se muestra el comienzo del documento.',
+  'Bestanden zoeken op deze computer': 'Buscar archivos en este equipo',
+  'Dubbele bestanden opruimen': 'Limpiar archivos duplicados',
+  'bestand(en) gevonden': 'archivo(s) encontrado(s)',
+  'Geen presentaties of documenten gevonden.':
+      'No se encontraron presentaciones ni documentos.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'No se encontraron presentaciones ni documentos en las carpetas conocidas.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Buscar por nombre de archivo, título o texto en el archivo…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Muestra en la ventana de apertura una vista previa renderizada del archivo que señalas, para que veas su contenido antes de abrirlo.',
   'Voetnoot': 'Nota al pie',
   'Noten': 'Notas',
   'Voetnoten achterin het document': 'Notas al final del documento',
@@ -3604,14 +3628,9 @@ const _dutchSourceAddEs = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Advertencia por encima de {b1} viñetas (1 columna), {bcl} (lista de tareas) o {b2} (2 columnas); crítico por encima de {bc1} o {bc2}. Palabras por encima de {w1}/{w2}, en promedio por encima de {avg} por viñeta. Cita por encima de {q} caracteres, título por encima de {t} caracteres. Anidación más profunda que el nivel {lvl}. El texto que debe reducirse por debajo del {warn}% advierte, por debajo del {crit}% es crítico.',
   'Zoek op deze computer': 'Buscar en este equipo',
-  'Presentaties zoeken op deze computer':
-      'Buscar presentaciones en este equipo',
   'Zoek op titel, pad of thema…': 'Buscar por título, ruta o tema…',
   'Bekende mappen worden doorzocht…': 'Buscando en las carpetas conocidas…',
   'gevonden': 'encontradas',
-  'presentatie(s) gevonden': 'presentación(es) encontrada(s)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'No se encontraron presentaciones Marp en las carpetas conocidas.',
   'Geen thema': 'Sin tema',
   // Markdown-syntaxcontrole: foutmeldingen kopiëren.
   'Kopieer syntaxproblemen': 'Copiar problemas de sintaxis',
@@ -3958,7 +3977,6 @@ const _dutchSourceAddEs = {
   'Notities voor de ontvanger tijdens een cursus':
       'Notas para el destinatario durante un curso',
   'Mijn notities aan/uit': 'Activar/desactivar mis notas',
-  'Geen presentaties gevonden voor': 'No se encontraron presentaciones para',
   'Geen resultaten': 'Sin resultados',
   'Geen resultaten voor': 'Sin resultados para',
   'Geen slides gevonden voor': 'No se encontraron diapositivas para',
@@ -4062,8 +4080,6 @@ const _dutchSourceAddEs = {
   'Wordt automatisch toegevoegd bij presenteren en exporteren.':
       'Se añade automáticamente al presentar y exportar.',
   'Zoek in slides…': 'Buscar en diapositivas…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Buscar por nombre de archivo, título o texto en las diapositivas…',
   'Zoek op naam of beschrijving…': 'Buscar por nombre o descripción…',
   'Zoek op presentatie, titel of tekst…':
       'Buscar por presentación, título o texto…',

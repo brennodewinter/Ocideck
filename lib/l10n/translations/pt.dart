@@ -192,7 +192,6 @@ const _dutchSourcePt = {
   'Andere map…': 'Outra pasta…',
   'Bibliotheken': 'Bibliotecas',
   'Geen bibliotheek': 'Sem biblioteca',
-  'Geen presentaties (.md) gevonden.': 'Nenhuma apresentação (.md) encontrada.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Você escolhe a pasta e o nome na próxima janela. As imagens vão para uma subpasta images/ e a mídia para media/, ao lado do arquivo da apresentação.',
   'Kies bestandsnaam…': 'Escolher nome do arquivo…',
@@ -534,13 +533,10 @@ const _dutchSourcePt = {
   'Kies een video': 'Escolher um vídeo',
   'Kies een audiobestand': 'Escolher um ficheiro de áudio',
   'Bladeren…': 'Procurar…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Pesquisar por nome de ficheiro, título ou texto nos slides…',
   'Geen map gekozen': 'Nenhuma pasta selecionada',
   'Map kiezen': 'Escolher pasta',
   'Kies een map met presentaties om te beginnen.':
       'Escolha uma pasta com apresentações para começar.',
-  'Geen presentaties gevonden voor': 'Nenhuma apresentação encontrada para',
   'meer treffer(s)': 'resultado(s) a mais',
   'Slide zoeken': 'Localizar slide',
   'Slides importeren': 'Importar slides',
@@ -910,14 +906,9 @@ const _dutchSourcePt = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Aviso acima de {b1} marcadores (1 coluna), {bcl} (checklist) ou {b2} (2 colunas); crítico acima de {bc1} ou {bc2}. Palavras acima de {w1}/{w2}, em média acima de {avg} por marcador. Citação acima de {q} caracteres, título acima de {t} caracteres. Aninhamento mais profundo do que o nível {lvl}. Texto que tem de encolher abaixo de {warn}% avisa, abaixo de {crit}% é crítico.',
   'Zoek op deze computer': 'Procurar neste computador',
-  'Presentaties zoeken op deze computer':
-      'Encontrar apresentações neste computador',
   'Zoek op titel, pad of thema…': 'Procurar por título, caminho ou tema…',
   'Bekende mappen worden doorzocht…': 'A pesquisar nas pastas conhecidas…',
   'gevonden': 'encontrada(s)',
-  'presentatie(s) gevonden': 'apresentação(ões) encontrada(s)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nenhuma apresentação Marp encontrada nas pastas conhecidas.',
   'Geen thema': 'Sem tema',
   'Kopieer syntaxproblemen': 'Copiar problemas de sintaxe',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1702,6 +1693,32 @@ const _dutchSourceAddPt = <String, String>{
   'Toch sorteren': 'Ainda classificando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Primeiro adicione pelo menos um evento. Esta tabela permanece inalterada.',
+  'Alles': 'Tudo',
+  'Presentaties': 'Apresentações',
+  'Documenten': 'Documentos',
+  'Voorbeeld': 'Pré-visualização',
+  'Voorbeeld tonen': 'Mostrar pré-visualização',
+  'Voorbeeld tonen bij openen': 'Mostrar pré-visualização ao abrir',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Aponte para um ficheiro para ver aqui uma pré-visualização.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Este ficheiro não pode ser mostrado. A abertura também o recusa — o conteúdo é inseguro, está danificado ou é ilegível.',
+  'Dit document is leeg.': 'Este documento está vazio.',
+  'Deze presentatie heeft nog geen dia.':
+      'Esta apresentação ainda não tem slides.',
+  'Alleen het begin van het document wordt getoond.':
+      'Apenas o início do documento é mostrado.',
+  'Bestanden zoeken op deze computer': 'Encontrar ficheiros neste computador',
+  'Dubbele bestanden opruimen': 'Limpar ficheiros duplicados',
+  'bestand(en) gevonden': 'ficheiro(s) encontrado(s)',
+  'Geen presentaties of documenten gevonden.':
+      'Nenhuma apresentação ou documento encontrado.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nenhuma apresentação ou documento encontrado nas pastas conhecidas.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Pesquisar por nome de ficheiro, título ou texto no ficheiro…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Mostra na janela de abertura uma pré-visualização do ficheiro que aponta, para ver o conteúdo antes de o abrir.',
   'Voetnoot': 'Nota de rodapé',
   'Noten': 'Notas',
   'Voetnoten achterin het document': 'Notas no fim do documento',

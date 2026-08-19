@@ -190,7 +190,6 @@ const _dutchSourceBg = {
   'Andere map…': 'Друга папка…',
   'Bibliotheken': 'Библиотеки',
   'Geen bibliotheek': 'Няма библиотека',
-  'Geen presentaties (.md) gevonden.': 'Не са намерени презентации (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Избирате папката и името в следващия прозорец. Изображенията отиват в подпапка images/, а медията в media/, до файла на презентацията.',
   'Kies bestandsnaam…': 'Избери име на файл…',
@@ -530,13 +529,10 @@ const _dutchSourceBg = {
   'Kies een video': 'Изберете видео',
   'Kies een audiobestand': 'Изберете аудиофайл',
   'Bladeren…': 'Преглед…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Търсене по име на файл, заглавие или текст в слайдовете…',
   'Geen map gekozen': 'Няма избрана папка',
   'Map kiezen': 'Избор на папка',
   'Kies een map met presentaties om te beginnen.':
       'Изберете папка с презентации, за да започнете.',
-  'Geen presentaties gevonden voor': 'Не са намерени презентации за',
   'meer treffer(s)': 'още съвпадение(я)',
   'Slide zoeken': 'Намиране на слайд',
   'Slides importeren': 'Импортиране на слайдове',
@@ -906,14 +902,9 @@ const _dutchSourceBg = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Предупреждение над {b1} водещи символа (1 колона), {bcl} (чеклист) или {b2} (2 колони); критично над {bc1} или {bc2}. Думи над {w1}/{w2}, средно над {avg} на водещ символ. Цитат над {q} знака, заглавие над {t} знака. Влагане по-дълбоко от ниво {lvl}. Текст, който трябва да се свие под {warn}%, предупреждава, под {crit}% е критично.',
   'Zoek op deze computer': 'Търсене на този компютър',
-  'Presentaties zoeken op deze computer':
-      'Намиране на презентации на този компютър',
   'Zoek op titel, pad of thema…': 'Търсене по заглавие, път или тема…',
   'Bekende mappen worden doorzocht…': 'Известните папки се претърсват…',
   'gevonden': 'намерени',
-  'presentatie(s) gevonden': 'презентация(и) намерени',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Не са намерени Marp презентации в известните папки.',
   'Geen thema': 'Без тема',
   'Kopieer syntaxproblemen': 'Копиране на синтактичните проблеми',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1693,6 +1684,31 @@ const _dutchSourceAddBg = <String, String>{
   'Toch sorteren': 'Все още сортирам',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Първо добавете поне едно събитие. Тази таблица остава непроменена.',
+  'Alles': 'Всички',
+  'Presentaties': 'Презентации',
+  'Documenten': 'Документи',
+  'Voorbeeld': 'Преглед',
+  'Voorbeeld tonen': 'Показване на преглед',
+  'Voorbeeld tonen bij openen': 'Показване на преглед при отваряне',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Посочете файл, за да видите преглед тук.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Този файл не може да бъде показан. Отварянето също го отказва — съдържанието е опасно, повредено или нечетимо.',
+  'Dit document is leeg.': 'Този документ е празен.',
+  'Deze presentatie heeft nog geen dia.': 'Тази презентация още няма слайдове.',
+  'Alleen het begin van het document wordt getoond.':
+      'Показва се само началото на документа.',
+  'Bestanden zoeken op deze computer': 'Намиране на файлове на този компютър',
+  'Dubbele bestanden opruimen': 'Разчистване на дублирани файлове',
+  'bestand(en) gevonden': 'файл(ове) намерени',
+  'Geen presentaties of documenten gevonden.':
+      'Не са намерени презентации или документи.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Не са намерени презентации или документи в известните папки.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Търсене по име на файл, заглавие или текст във файла…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Показва в прозореца за отваряне визуализация на файла, който посочвате, за да видите съдържанието преди да го отворите.',
   'Voetnoot': 'Бележка под линия',
   'Noten': 'Бележки',
   'Voetnoten achterin het document': 'Бележки в края на документа',

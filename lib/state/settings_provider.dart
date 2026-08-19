@@ -326,6 +326,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         1.0,
         7.0,
       ),
+      showOpenPreview: prefs.getBool('showOpenPreview') ?? false,
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
       allowCveLookup: prefs.getBool('allowCveLookup') ?? false,
       cveApiBaseUrl:
@@ -604,6 +605,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setContrastMinRatio',
       (prefs) => prefs.setDouble('contrastMinRatio', clamped),
+    );
+  }
+
+  /// Zet het gerenderde voorbeeld in het openscherm aan of uit.
+  Future<void> setShowOpenPreview(bool enabled) async {
+    state = state.copyWith(showOpenPreview: enabled);
+    await _persist(
+      'setShowOpenPreview',
+      (prefs) => prefs.setBool('showOpenPreview', enabled),
     );
   }
 

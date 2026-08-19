@@ -190,8 +190,6 @@ const _dutchSourceCs = {
   'Andere map…': 'Jiná složka…',
   'Bibliotheken': 'Knihovny',
   'Geen bibliotheek': 'Žádná knihovna',
-  'Geen presentaties (.md) gevonden.':
-      'Nebyly nalezeny žádné prezentace (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Složku a název zvolíš v dalším okně. Obrázky se uloží do podsložky images/ a média do media/, vedle souboru prezentace.',
   'Kies bestandsnaam…': 'Zvolit název souboru…',
@@ -527,13 +525,10 @@ const _dutchSourceCs = {
   'Kies een video': 'Zvolte video',
   'Kies een audiobestand': 'Zvolte zvukový soubor',
   'Bladeren…': 'Procházet…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Hledat podle názvu souboru, titulku nebo textu snímků…',
   'Geen map gekozen': 'Není vybrána žádná složka',
   'Map kiezen': 'Zvolit složku',
   'Kies een map met presentaties om te beginnen.':
       'Pro začátek zvolte složku s prezentacemi.',
-  'Geen presentaties gevonden voor': 'Nebyly nalezeny žádné prezentace pro',
   'meer treffer(s)': 'dalších shod',
   'Slide zoeken': 'Najít snímek',
   'Slides importeren': 'Importovat snímky',
@@ -897,13 +892,9 @@ const _dutchSourceCs = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Varování nad {b1} odrážek (1 sloupec), {bcl} (kontrolní seznam) nebo {b2} (2 sloupce); kritické nad {bc1} nebo {bc2}. Slova nad {w1}/{w2}, v průměru nad {avg} na odrážku. Citace nad {q} znaků, titulek nad {t} znaků. Vnoření hlubší než úroveň {lvl}. Text, který se musí zmenšit pod {warn} %, varuje, pod {crit} % je kritický.',
   'Zoek op deze computer': 'Hledat v tomto počítači',
-  'Presentaties zoeken op deze computer': 'Najít prezentace v tomto počítači',
   'Zoek op titel, pad of thema…': 'Hledat podle názvu, cesty nebo motivu…',
   'Bekende mappen worden doorzocht…': 'Prohledávání známých složek…',
   'gevonden': 'nalezeno',
-  'presentatie(s) gevonden': 'prezentací nalezeno',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Ve známých složkách nebyly nalezeny žádné prezentace Marp.',
   'Geen thema': 'Žádný motiv',
   'Kopieer syntaxproblemen': 'Zkopírovat problémy se syntaxí',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1675,6 +1666,32 @@ const _dutchSourceAddCs = <String, String>{
   'Toch sorteren': 'Pořád se třídí',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Nejprve přidejte alespoň jednu událost. Tato tabulka zůstává nezměněna.',
+  'Alles': 'Vše',
+  'Presentaties': 'Prezentace',
+  'Documenten': 'Dokumenty',
+  'Voorbeeld': 'Náhled',
+  'Voorbeeld tonen': 'Zobrazit náhled',
+  'Voorbeeld tonen bij openen': 'Zobrazit náhled při otevírání',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Ukažte na soubor, abyste zde viděli náhled.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Tento soubor nelze zobrazit. Otevření jej také odmítá — obsah je nebezpečný, poškozený nebo nečitelný.',
+  'Dit document is leeg.': 'Tento dokument je prázdný.',
+  'Deze presentatie heeft nog geen dia.':
+      'Tato prezentace zatím nemá žádný snímek.',
+  'Alleen het begin van het document wordt getoond.':
+      'Zobrazuje se pouze začátek dokumentu.',
+  'Bestanden zoeken op deze computer': 'Najít soubory v tomto počítači',
+  'Dubbele bestanden opruimen': 'Uklidit duplicitní soubory',
+  'bestand(en) gevonden': 'souborů nalezeno',
+  'Geen presentaties of documenten gevonden.':
+      'Nebyly nalezeny žádné prezentace ani dokumenty.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Ve známých složkách nebyly nalezeny žádné prezentace ani dokumenty.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Hledat podle názvu souboru, titulku nebo textu v souboru…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'V okně otevírání zobrazí vykreslený náhled souboru, na který ukazujete, abyste viděli obsah dříve, než jej otevřete.',
   'Voetnoot': 'Poznámka pod čarou',
   'Noten': 'Poznámky',
   'Voetnoten achterin het document': 'Poznámky na konci dokumentu',

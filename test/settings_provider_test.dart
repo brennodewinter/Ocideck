@@ -547,6 +547,17 @@ void main() {
       expect(n.state.languageCode, 'fy');
     });
 
+    test('showOpenPreview is off until it is switched on', () async {
+      final n = await _loadedNotifier();
+      // Standaard uit: het voorbeeld leest een bestand dat je nog niet hebt
+      // gekozen, dus dat hoort een bewuste keuze te zijn.
+      expect(n.state.showOpenPreview, isFalse);
+      await n.setShowOpenPreview(true);
+      expect(n.state.showOpenPreview, isTrue);
+      await n.setShowOpenPreview(false);
+      expect(n.state.showOpenPreview, isFalse);
+    });
+
     test(
       'addRecentFile de-duplicates, keeps newest first, caps at 10',
       () async {

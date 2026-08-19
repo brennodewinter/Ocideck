@@ -189,7 +189,6 @@ const _dutchSourceTr = {
   'Andere map…': 'Başka klasör…',
   'Bibliotheken': 'Kitaplıklar',
   'Geen bibliotheek': 'Kitaplık yok',
-  'Geen presentaties (.md) gevonden.': 'Sunum (.md) bulunamadı.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Klasörü ve adı bir sonraki pencerede seçersiniz. Görseller images/ alt klasörüne, medya ise media/ klasörüne, sunum dosyasının yanına gelir.',
   'Kies bestandsnaam…': 'Dosya adı seçin…',
@@ -521,13 +520,10 @@ const _dutchSourceTr = {
   'Kies een video': 'Bir video seçin',
   'Kies een audiobestand': 'Bir ses dosyası seçin',
   'Bladeren…': 'Gözat…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Dosya adına, başlığa veya slaytlardaki metne göre ara…',
   'Geen map gekozen': 'Klasör seçilmedi',
   'Map kiezen': 'Klasör seç',
   'Kies een map met presentaties om te beginnen.':
       'Başlamak için sunumların bulunduğu bir klasör seçin.',
-  'Geen presentaties gevonden voor': 'Şunun için sunum bulunamadı',
   'meer treffer(s)': 'eşleşme daha',
   'Slide zoeken': 'Slayt ara',
   'Slides importeren': 'Slaytları içe aktar',
@@ -1864,13 +1860,9 @@ const _dutchSourceTr = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       '{b1} maddenin (1 sütun), {bcl} maddenin (kontrol listesi) veya {b2} maddenin (2 sütun) üzerinde uyarı; {bc1} veya {bc2} üzerinde kritik. Kelimeler {w1}/{w2} üzerinde, madde başına ortalama {avg} üzerinde. Alıntı {q} karakterin, başlık {t} karakterin üzerinde. {lvl} düzeyinden daha derin iç içe geçme. {warn}% altına küçülmesi gereken metin uyarı verir, {crit}% altında kritiktir.',
   'Zoek op deze computer': 'Bu bilgisayarda ara',
-  'Presentaties zoeken op deze computer': 'Bu bilgisayarda sunum ara',
   'Zoek op titel, pad of thema…': 'Başlığa, yola veya temaya göre ara…',
   'Bekende mappen worden doorzocht…': 'Bilinen klasörler taranıyor…',
   'gevonden': 'bulundu',
-  'presentatie(s) gevonden': 'sunum bulundu',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Bilinen klasörlerde Marp sunumu bulunamadı.',
   'Geen thema': 'Tema yok',
   'Kopieer syntaxproblemen': 'Sözdizimi sorunlarını kopyala',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -2590,6 +2582,30 @@ const _dutchSourceAddTr = <String, String>{
   'Toch sorteren': 'Hala sıralama yapılıyor',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Öncelikle en az bir etkinlik ekleyin. Bu tablo değişmeden kalır.',
+  'Alles': 'Tümü',
+  'Presentaties': 'Sunumlar',
+  'Documenten': 'Belgeler',
+  'Voorbeeld': 'Önizleme',
+  'Voorbeeld tonen': 'Önizlemeyi göster',
+  'Voorbeeld tonen bij openen': 'Açarken önizleme göster',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Burada önizlemesini görmek için bir dosyayı işaret et.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Bu dosya gösterilemiyor. Açma da reddediyor — içerik güvensiz, bozuk veya okunamıyor.',
+  'Dit document is leeg.': 'Bu belge boş.',
+  'Deze presentatie heeft nog geen dia.': 'Bu sunumda henüz slayt yok.',
+  'Alleen het begin van het document wordt getoond.':
+      'Yalnızca belgenin başı gösteriliyor.',
+  'Bestanden zoeken op deze computer': 'Bu bilgisayarda dosya ara',
+  'Dubbele bestanden opruimen': 'Yinelenen dosyaları temizle',
+  'bestand(en) gevonden': 'dosya bulundu',
+  'Geen presentaties of documenten gevonden.': 'Sunum veya belge bulunamadı.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Bilinen klasörlerde sunum veya belge bulunamadı.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Dosya adına, başlığa veya dosyadaki metne göre ara…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Açma penceresinde işaret ettiğin dosyanın işlenmiş bir önizlemesini gösterir; böylece açmadan önce içinde ne olduğunu görürsün.',
   'Voetnoot': 'Dipnot',
   'Noten': 'Notlar',
   'Voetnoten achterin het document': 'Dipnotlar belgenin sonunda',
