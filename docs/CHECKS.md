@@ -14,8 +14,8 @@ worth roughly 13 minutes off a 46-minute gate on that runner. Since #1118 the
 **static gates** — `$(STATIC_GATES)`, seconds each — run on **every pull
 request** (`.forgejo/workflows/static-gate.yml`, [`make check-static`](#make-check-static)),
 and since #1123 that same per-PR job also runs `make check-registrations` — the
-fast registration/invariant tests (`SOURCE_MAP`, docs, SBOM, l10n) that are
-*tests* and so escaped the static subset. **Since #1123 that `static-gate` check
+fast registration/invariant tests (`SOURCE_MAP`, docs, SBOM, l10n, and the
+Windows installer) that are *tests* and so escaped the static subset. **Since #1123 that `static-gate` check
 is a required status check** (branch protection on `main`): a PR does not merge
 until it passes, via the web UI or the REST/`tea` merge API. That is the
 prevention layer — drift is stopped at the PR instead of landing. Two things it
@@ -1739,10 +1739,12 @@ that reaches beyond `build/test_cache`.
 - **Why `check-registrations` too (#1123).** `check-static` catches the *static*
   drift (file/class/method size, formatting, hardcoded text) but the
   registration gates — new lib file in `SOURCE_MAP`, new docs registered, SBOM
-  fresh vs `pubspec`, new `l10n.d` string translated — **are tests**, so they ran
-  nowhere before the merge and that class (e.g. `source_map_coverage_test`) could
-  still land red. These four are plain tests (no widget render), seconds each, in
-  the same job — so the required-check context stays `static-gate / static-gate`.
+  fresh vs `pubspec`, new `l10n.d` string translated, and (since #1208) the
+  Windows installer still packaging what it claims to — **are tests**, so they
+  ran nowhere before the merge and that class (e.g. `source_map_coverage_test`)
+  could still land red. These five are plain tests (no widget render), seconds
+  each, in the same job — so the required-check context stays
+  `static-gate / static-gate`.
   The list in `REGISTRATION_TESTS` is hand-maintained: a new invariant *test*
   must be added there or it is a silent gap again. The full suite and the
   coverage floors still stay in `make check`.

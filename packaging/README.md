@@ -1,19 +1,23 @@
 # Packaging
 
-Linux install formats for OciDeck — Phase 1 of the broad-distro route
-([issue #1227](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1227),
-design in [`../docs/design/LINUX_PACKAGING.md`](../docs/design/LINUX_PACKAGING.md)).
+Install formats for OciDeck: the Linux packages (Phase 1 of the broad-distro
+route, [issue #1227](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1227),
+design in [`../docs/design/LINUX_PACKAGING.md`](../docs/design/LINUX_PACKAGING.md))
+and the Windows installer
+([issue #1208](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1208)).
 
-Every format here wraps the **same** `flutter build linux` bundle the release
-already ships as a tarball. None of them is a store, a gatekeeper or a sandbox:
-the direct download from the forge stays canonical, and these are extra doors to
-the same house. The confined formats (Flatpak, Snap) are a separate, later track
-— they need the capability feature-flag first; see the design doc.
+Every format here wraps the **same** bundle `flutter build` produces and the
+release already ships as an archive. None of them is a store, a gatekeeper, a
+sandbox or an update channel: the direct download from the forge stays canonical,
+and these are extra doors to the same house. The confined Linux formats (Flatpak,
+Snap) are a separate, later track — they need the capability feature-flag first;
+see the design doc.
 
 ## What is here
 
 | Path | What it is |
 | --- | --- |
+| `windows/ocideck.iss` | Inno Setup 6.3+ script for the Windows installer: Start menu shortcut, the file associations from `../windows/file-associations.reg`, and an uninstall entry. Offline by design — no update check, no network. |
 | `linux/com.dewinter.ocideck.desktop` | Desktop entry, shared by the .deb, .rpm and AppImage. Keyed on the application id `com.dewinter.ocideck` — the same id the GTK runner sets as its default icon name (`linux/runner/my_application.cc`). |
 | `linux/AppRun` | AppImage entrypoint: execs `ocideck` from the AppDir root. |
 | `aur/PKGBUILD` | AUR `ocideck-bin`: installs the release tarball on Arch/Manjaro. |
@@ -85,6 +89,30 @@ window's app-id (`com.dewinter.ocideck`) to the desktop-file basename instead, s
 that path needs no hint. If a running window ever fails to group under its launcher
 icon, check the real value with `xprop WM_CLASS` and adjust this one line.
 
+## How the Windows installer is built
+
+By hand, for now. The forge has no Windows machine, but the github.com mirror
+does — `.github/workflows/release.yml` builds the Windows zip there on every `v*`
+tag and the forge fetches it back. The installer is **not wired into that lane
+yet**: doing so needs Inno Setup installed and pinned on the runner
+(`windows-latest` no longer ships it) and a decision about publishing a second
+Windows artifact. So until that call is made, this is a manual step on a Windows
+machine, in the same bash `make build-windows` runs in, with Inno Setup 6.3
+or newer installed:
+
+```
+make build-windows            # -> build/windows/x64/runner/Release/
+make build-windows-installer  # -> scripts/build_windows_installer.sh
+```
+
+which produces `dist/ocideck-windows-x64-setup-<version>.exe`. The packager is a
+bash script rather than a `make` target under the hood, so it can move into that
+CI lane unchanged — `make` is not reliably present on the mirror's Windows
+runner, which is why the existing job calls Flutter directly. Authenticode
+signing is an optional step in that script, off by default and loud about it; see
+[Building the Windows installer](../docs/BUILD.md#building-the-windows-installer)
+for the environment variables and why no key file or password is accepted.
+
 ## Testing
 
 The packages themselves are only built on a Linux tag, so no `flutter test`
@@ -94,3 +122,10 @@ exact artifacts and declares the right runtime libraries, appimagetool is
 checksum-verified, and the metadata is well formed. Validate the actual packages
 with a prerelease tag (`v<next>-rc1`, which builds and publishes as a prerelease
 without touching the live web demo or the website) before the real release.
+
+`test/windows_packaging_test.dart` does the same for the installer, which no
+`flutter test` can produce either: the `.iss` and `windows/file-associations.reg`
+declare the same associations, the installer wraps the whole build output rather
+than a hand-picked file list, it carries no downloader and no `[Code]` section,
+and the signing step stays optional-but-loud. Whether the installer actually
+installs, associates and uninstalls is a manual check on Windows.

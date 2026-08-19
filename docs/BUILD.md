@@ -430,8 +430,9 @@ in `build/` without rebuilding.
 
 ### Windows / Linux notes
 
-- Windows: distribute the contents of `build/windows/x64/runner/Release/` (or
-  package with MSIX/an installer).
+- Windows: distribute the contents of `build/windows/x64/runner/Release/`, or
+  wrap that same bundle in the installer — see [Building the Windows
+  installer](#building-the-windows-installer) below.
 - **Windows-bestandsassociaties**: importeer
   [`windows/file-associations.reg`](../windows/file-associations.reg) (paden
   aanpassen) of neem de sleutels op in de installer. `.ocideck` opent dan
@@ -443,6 +444,88 @@ in `build/` without rebuilding.
   build an AppImage, a `.deb` and an `.rpm` from it with `make package-linux` —
   see [Linux packaging](#linux-packaging). Flatpak/Snap are a separate, later
   track (#1227).
+
+### Building the Windows installer
+
+Unpacking a folder and making your own shortcut is a poor way to install
+anything, so the Windows bundle can be wrapped in an ordinary installer (#1208):
+Start menu shortcut, the file associations, and a clean uninstall through
+*Programs and Features*. Needs [Inno Setup 6.3 or
+newer](https://jrsoftware.org/isdl.php) on the machine, and runs **on Windows
+only**, in the same bash `make build-windows` runs in (Git Bash or MSYS2).
+
+```sh
+make build-windows            # -> build/windows/x64/runner/Release/
+make build-windows-installer  # -> dist/ocideck-windows-x64-setup-<version>.exe
+```
+
+The second target deliberately does **not** depend on the first, for the same
+reason `package-linux` does not depend on `build-linux`: it should package
+exactly the bundle you just built and looked at, never quietly make a new one.
+The version comes from `pubspec.yaml`, so the installer is not a second place to
+bump a version number.
+
+The script is `scripts/build_windows_installer.sh`; the installer itself is
+declared in [`packaging/windows/ocideck.iss`](../packaging/windows/ocideck.iss).
+It installs machine-wide by default (Program Files, associations for every user)
+and offers a per-user install to anyone without admin rights — the registry keys
+use Inno's `HKA` root, so one key list serves both. Those keys are the same set as
+[`windows/file-associations.reg`](../windows/file-associations.reg), which stays
+the hand-import route for people running the raw bundle.
+
+**It is a dumb, offline installer, and that is a boundary rather than a gap.** No
+auto-update, no version check, no release feed, no network access at all — see
+[SECURITY.md](../SECURITY.md#how-a-fix-reaches-you).
+`test/windows_packaging_test.dart` holds every property in this section: the two
+association routes agreeing, the installer sourcing the build output whole rather
+than a hand-picked file list, and the absence of any downloader or `[Code]`
+section. Whether the installer *actually installs* is still a manual check on a
+Windows machine — nothing verifies that automatically.
+
+**It is not built by the release yet.** The forge has no Windows machine, but the
+mirror does: `.github/workflows/release.yml` on github.com builds the Windows zip
+on every `v*` tag, and the forge release job pulls that file back with `curl` (see
+[Signing status of the published artifacts](#signing-status-of-the-published-artifacts)
+and the header of that workflow). Adding the installer to that lane is therefore
+possible rather than blocked — it needs Inno Setup installed and *pinned* on the
+runner (`windows-latest` no longer ships it), and a decision about publishing a
+second Windows artifact. Until then the installer is built by hand. The packager
+is a bash script and does not go through `make`, precisely because `make` is not
+reliably present on that runner.
+
+#### Signing it (optional)
+
+Signing is off by default and the script says so loudly when it produced an
+unsigned installer, so nobody ships one believing otherwise. Windows signing
+remains the weighed decision recorded under [Signing status of the published
+artifacts](#signing-status-of-the-published-artifacts) — the hook exists so that
+a certificate is the only thing still missing, not a rewrite.
+
+With a certificate present, set its thumbprint from the Windows certificate store
+and the script signs `ocideck.exe`, the DLLs beside it, and the finished
+installer, in that order:
+
+```sh
+OCIDECK_WIN_SIGN_SHA1=<certificate-thumbprint> make build-windows-installer
+```
+
+| Variable | Meaning |
+| --- | --- |
+| `OCIDECK_WIN_SIGN_SHA1` | Certificate thumbprint in the Windows certificate store. Unset = unsigned build with a warning. |
+| `OCIDECK_WIN_SIGN_TIMESTAMP_URL` | RFC 3161 timestamp server. Defaults to DigiCert's. |
+| `OCIDECK_SIGNTOOL` / `OCIDECK_ISCC` | Paths to `signtool.exe` / `ISCC.exe`, if they are not found automatically. |
+
+There is deliberately **no** way to hand the script a `.pfx` and a password.
+Since June 2023 every publicly trusted code-signing key must live on a hardware
+token or an HSM, which prompts for its own PIN, so the signing material never
+becomes an environment variable, a file in the tree, or a runner secret — the
+same line `scripts/notarize_macos.sh` holds on macOS. Timestamping is not
+optional either: without it a signature dies with the certificate, and since
+March 2026 a code-signing certificate lasts at most 460 days.
+
+Signing is all-or-nothing. Once a thumbprint is configured, a file that fails to
+sign fails the build, because a half-signed installer looks trustworthy in
+exactly the places people check.
 
 ### App icons
 

@@ -138,6 +138,34 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(windows): een installatieprogramma voor Windows (#1208). Wie OciDeck op
+  Windows gebruikt hoefde tot nu toe een map met bestanden uit te pakken en zelf
+  een snelkoppeling te maken. Er is nu een gewone installer: hij zet OciDeck in
+  *Program Files*, maakt een snelkoppeling in het startmenu (en desgewenst op het
+  bureaublad), registreert de bestandstypen — `.ocideck` opent voortaan direct met
+  OciDeck, en `.md` verschijnt onder *Openen met…* zonder de standaard over te
+  nemen — en laat zich netjes verwijderen via *Apps en onderdelen*. Heb je geen
+  beheerdersrechten, dan mag je in het venster kiezen voor een installatie voor
+  alleen jezelf.
+
+  Wat er uitdrukkelijk **niet** in zit: bijwerken. De installer controleert niet
+  op nieuwe versies, kent geen release-kanaal en gaat op geen enkel moment het
+  netwerk op. De belofte uit `SECURITY.md` blijft dus onaangetast — OciDeck belt
+  niet naar huis, en een verbetering bereikt je door de standaardtak op te halen
+  en opnieuw te bouwen. Dit is gemak bij het installeren, geen updatekanaal, en
+  een poort (`test/windows_packaging_test.dart`) houdt dat zo.
+
+  De installer is nog **niet ondertekend**: Windows toont daarom nog steeds de
+  SmartScreen-melding en "Onbekende uitgever", net als bij de zip. Dat blijft een
+  bewuste afweging (#1013); de ondertekening zit al wel als schakelaar in de
+  bouwstap, zodat er alleen nog een certificaat aan hoeft.
+
+  Let op waar hij vandaan komt: voorlopig wordt de installer met de hand op
+  Windows gemaakt (`make build-windows` gevolgd door `make build-windows-installer`)
+  en levert een release nog steeds alleen de zip. Of hij voortaan meekomt uit de
+  Windows-bouwlijn op de spiegel — die bij elke tag al de zip maakt — is een open
+  besluit.
+
 - feat(grafiek): grafiek-hover spiegelt tussen presentatie- en publieksvenster.
   Zweef je bij een presentatie met twee schermen over een staaf, lijnpunt of
   taartpunt (of over een legenda-item), dan licht de beamer dezelfde reeks/punt
