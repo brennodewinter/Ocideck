@@ -4,7 +4,7 @@
 
 # OciDeck — Bestandsformaat
 
-> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-08-10 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-08-19 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -474,9 +474,19 @@ deze velden (met standaardwaarden):
 | `slideBackgroundColor` | `#FFFFFF` | Achtergrond voor normale slides. |
 | `textColor` | `#222222` | Tekstkleur. |
 | `accentColor` | `#2E7D64` | Accent (opsommingsmarkering, tabelranden/-koptekst). |
+| `checklistCheckedColor` | `#2E7D64` | Vinkkleur van een afgevinkt checklist-item. |
+| `checklistUncheckedColor` | `#CBD5E1` | Vakkleur van een niet-afgevinkt checklist-item. |
+| `checklistStrikeThrough` | `true` | Zet de tekst van een afgevinkt item door. |
 | `bulletMarker` | `dot` | Standaardmarkering voor opsommingslijsten: `dot` of `paw` (een kattenpoot getekend in de accentkleur). Een slide kan die overschrijven (zie §8). |
 | `tableTextColor` | = `textColor` | Tekstkleur in tabellen. |
 | `tableHeaderTextColor` | `#FFFFFF` | Tekstkleur van tabelkoptekst. |
+| `tableHeaderBackgroundColor` | = `accentColor` | Achtergrond van de koprij. |
+| `tableBorderStyle` | `boxed` | **Documenten.** Randvorm: `lined` (alleen horizontale lijnen, booktabs-achtig), `boxed` (elke cel omkaderd) of `none` (witruimte en kopvulling dragen de tabel). |
+| `tableBorderColor` | `#CBD5E1` | **Documenten.** Randkleur voor de stijlen die een rand tekenen. |
+| `tableZebraStriped` | `false` | **Documenten.** Om en om een achtergrondkleur per rij. |
+| `tableZebraColor` | `#F1F5F9` | **Documenten.** De afwisselende rijkleur, gebruikt als `tableZebraStriped` aanstaat. |
+| `tableCellPaddingPx` | `8.0` | **Documenten.** Celopvulling in px. |
+| `tableAccentHeaderBorder` | `false` | **Documenten.** Trek een extra lijn in de accentkleur onder de koprij. |
 | `titleBackgroundColor` | `#1C2B47` | Achtergrond van titelslide. |
 | `titleTextColor` | `#FFFFFF` | Tekst op titel-/sectieslides. |
 | `sectionBackgroundColor` | `#2E7D64` | Achtergrond van sectieslide. |
@@ -508,6 +518,13 @@ deze velden (met standaardwaarden):
 | `severityNoneColor` | `#475569` | Bevindings-/CVSS-kleur voor de band Informatief. |
 
 Onbekende of ontbrekende velden vallen terug op standaardwaarden, zodat oudere bestanden schoon migreren.
+
+*(Toegevoegd 2026-08-19: de drie `checklist…`-velden en de zes tabelhuisstijlvelden
+voor documenten zaten in het profiel — en dus ook in een `.ocideckstyle` (§3.3) —
+maar stonden hier nooit vermeld. De velden met **Documenten** worden alleen door de
+documentoppervlakken gelezen: de weergave *Pagina's*, de doorlopende HTML-export en
+de LaTeX-export (§14). Een tabeldia van een deck tekent zijn eigen randen en neemt
+alleen de kleuren hierboven over.)*
 
 > **Cockpituiterlijk en statuskleuren maken geen deel uit van het stijlprofiel of
 > het bestand.** De authentieke/klassieke look en het benoemde *cockpitkleurenschema*
@@ -3233,8 +3250,9 @@ Jekyll, Hugo of Obsidian).
 **OciDeck verzint geen eigen front-matter-vocabulaire.** Het schrijft wel een
 kleine, gesloten verzameling sleutels als je erom vraagt (§14.5), maar elke sleutel
 daarvan is er een die andere gereedschappen al lezen en waar ze naar handelen:
-`theme:` (Pandoc, Obsidian, GitHub Pages) en, sinds 2026-08-17, `papersize:` en
-`geometry:` (Pandoc, dat ze doorgeeft aan het LaTeX-pakket `geometry`). Datzelfde
+`theme:` (Pandoc, Obsidian, GitHub Pages), sinds 2026-08-17 `papersize:` en
+`geometry:` (Pandoc, dat ze doorgeeft aan het LaTeX-pakket `geometry`), en sinds
+2026-08-18 `reference-location:` (Pandoc en Quarto, §14.9). Datzelfde
 bestand door je eigen Pandoc halen levert je de pagina op die die sleutels
 beschrijven, zonder OciDeck ertussen. Wat ontbreekt — en ontbreken blijft — is een
 sleutel die alleen *binnen* OciDeck iets betekent: er is geen `kind:`, geen
@@ -3263,25 +3281,81 @@ back-upt en uiteindelijk opschoont — dezelfde rol die §9 beschrijft voor de
 Markdown van een deck, gehouden aan een strengere regel van geen normalisatie.
 
 Wat het documentpad wél in de front matter kan schrijven is een korte, gesloten
-verzameling sleutels — de **stijl** van het document (`theme:`) en de
-**paginaopmaak** (`papersize:`, `geometry:`) — en elk daarvan alleen als je er
-bewust om vraagt. Elke schrijfactie is opt-in, byte-chirurgisch en laat de rest van
-het bestand met rust (§14.5, §14.8). Een document dat je nooit een stijl geeft en
-waarin je nooit een paginaopmaak vastlegt draagt helemaal geen front matter, dus de
-byte-identiteit hierboven blijft onveranderd gelden.
+verzameling sleutels — de **stijl** van het document (`theme:`), de
+**paginaopmaak** (`papersize:`, `geometry:`) en de **plaatsing van de voetnoten**
+(`reference-location:`) — en elk daarvan alleen als je er bewust om vraagt. Elke
+schrijfactie is opt-in, byte-chirurgisch en laat de rest van het bestand met rust
+(§14.5, §14.8, §14.9). Een document dat je nooit een stijl geeft, waarin je nooit
+een paginaopmaak vastlegt en waarvan je de noten nooit verplaatst draagt helemaal
+geen front matter, dus de byte-identiteit hierboven blijft onveranderd gelden.
 
 ### 14.4 Export is een afgeleid, geprojecteerd artefact — op een nieuw bestand
 
 Een document exporteren is **niet** het opslaan ervan. Export schrijft een
 **afgeleide, geredigeerde kopie voor een ontvanger** naar een **nieuw** bestand en
 raakt het origineel nooit aan, en valt dus **buiten** de byte-getrouwe garantie van
-§14.3. Er bestaan twee uitvoervormen: een geprojecteerd `.md` (een geredigeerde
-kopie van de platte tekst) en één **doorlopend** zelfstandig HTML-document. Beide
-dragen de privacygeprojecteerde (OciWacht) inhoud in plaats van de ruwe bron, langs
-dezelfde publieksgrens als een deckexport; het gekozen privacyprofiel wordt in de
-bestandsnaam van de export geschreven. Er is geen ingebouwde PDF-schrijver voor een
-document — een PDF maak je door de geëxporteerde HTML vanuit de browser af te
-drukken (zie de [Gebruikershandleiding](USER_GUIDE.md#documents)).
+§14.3. Er bestaan **vier** uitvoervormen (`DocumentExportFormat` in
+[`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
+een geprojecteerd `.md` (een geredigeerde kopie van de platte tekst), één
+**doorlopend** zelfstandig HTML-document, een LaTeX-`article` (`.tex`) en het
+draagbare pakket (`.ocideck`, §7 — geschreven door `FileService.exportPackage`,
+niet door de tekstschrijver). Alle vier dragen de privacygeprojecteerde
+(OciWacht) inhoud in plaats van de ruwe bron, langs dezelfde publieksgrens als een
+deckexport; het gekozen privacyprofiel wordt in de bestandsnaam van de export
+geschreven. Een ingebouwde PDF-*schrijver* is er nog steeds niet: een PDF komt
+ofwel uit het afdrukken van de geëxporteerde HTML vanuit de browser, ofwel uit het
+compileren van de `.tex` — en alleen die tweede route kan een afloop met
+snijtekens dragen (§14.7). Zie de
+[Gebruikershandleiding](USER_GUIDE.md#documents).
+
+*(Gecorrigeerd 2026-08-19: hier stond dat er twee uitvoervormen waren en helemaal
+geen PDF-route. De LaTeX- en pakketexport landden op 2026-08-07 en deze alinea is
+nooit meegegaan.)*
+
+**Wat er in het geprojecteerde `.md` meereist en wat niet** *(vastgesteld
+2026-08-17)*. De export is een kopie voor de machine van iemand anders, dus de
+vraag per sleutel is of hij daar nog iets betekent.
+
+- **De paginaopmaak reist mee.** Het geprojecteerde `.md` opent met de
+  paginaopmaak die op het moment van exporteren gold, in
+  `papersize:`/`geometry:` (§14.8) — dezelfde rekensom, inclusief de expliciete
+  millimeters als er een afloop is. Hij wordt ook geschreven wanneer de opmaak uit
+  de *instellingen* kwam en niet uit het bestand: de ontvanger heeft die
+  instellingen niet, en zonder de sleutels zou het document worden opgemaakt op
+  het vel waar hun machine toevallig op staat. De voorrang wordt hier niet opnieuw
+  bepaald; de export schrijft de uitkomst van `effectiveDocumentPageSetup`
+  ([`lib/services/document_style.dart`](../lib/services/document_style.dart)),
+  dezelfde waarde die de bewerker toont.
+- **De stijl reist niet mee.** `theme:` noemt een *stijlprofiel*, en een profiel
+  wordt op naam opgezocht tussen de profielen op de machine die het bestand opent.
+  Bij de ontvanger zou de naam nergens naar wijzen, of — erger — naar een ander
+  profiel met dezelfde naam. Daarom wordt de stijl vóór de export opgelost en in
+  de uitvoer zelf gerenderd (§14.5).
+- **De inhoudsopgave reist mee, de marker niet.** Een `<!-- toc -->`-marker
+  (§14.10) wordt op de weg naar buiten opgelost, en elk formaat krijgt zijn eigen
+  dialect: het geprojecteerde `.md` laat de marker weg en zet de gegenereerde
+  lijst op die plek, de HTML-export houdt de marker en rendert de lijst als
+  navigatie, en de LaTeX-export maakt er `\tableofcontents` van. De lijst wordt
+  *na* de projectie gemaakt, uit de geprojecteerde body, zodat een inhoudsopgave
+  nooit een kop kan noemen die de ontvanger niet mag zien.
+- **De plaatsing van de voetnoten reist niet mee.** De noten zelf wel — dat is
+  gewone tekst in de body (§14.9) — maar `reference-location:` wordt niet in het
+  geprojecteerde `.md` geschreven, omdat de export van de geprojecteerde *body*
+  uitgaat en niet van de front matter van de bron. De ontvanger krijgt de noten
+  dus op de plek die zijn eigen lezer kiest. Anders dan bij `theme:` is dat geen
+  overwogen keuze maar een open eind: de sleutel is een Pandoc-instructie, dus
+  volgens de redenering hieronder is het een maat en zou hij mee kunnen reizen.
+  Dat staat hier opgeschreven in plaats van gladgestreken, en staat als issue
+  #1569 op de tracker; niets in de code hangt ervan af dat het zo blijft.
+
+Het verschil is niet dat de ene sleutel belangrijker is dan de andere: het is dat
+een papiermaat een **maat** is, op zichzelf compleet in millimeters die elke
+gereedschapsketen leest, terwijl een stijlnaam een **verwijzing** is naar een
+plaatselijk register. Een maat laat zich kopiëren, een verwijzing niet. Dat is ook
+waarom de paginaopmaak inhoud van de export is en geen voorkeur van de lezer — een
+afloop hoort bij *deze* drukopdracht (§14.7). De bron blijft hoe dan ook
+onaangeroerd: dit is een vers bestand, en de byte-getrouwheid van §14.3 voor het
+origineel blijft gelden.
 
 ### 14.5 Documentstijl — de front-matter-sleutel `theme:` *(toegevoegd 2026-08-08)*
 
@@ -3309,14 +3383,22 @@ bestand meereizen (§14.8), dus het is een verzameling, geen enkele sleutel.)* D
 verzameling is een register in de code en geen gewoonte verspreid over de
 aanroepplekken: `kDocumentOwnedKeys` in
 [`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
-somt precies `theme`, `papersize` en `geometry` op, en de generieke schrijver
-asserteert daartegen, zodat er niet stilletjes een vierde sleutel bij kan glippen.
-Ernaast staat `kDocumentRetiredKeys`, de plek waar een sleutel die OciDeck *niet
-langer* schrijft moet worden vastgelegd — de bedoelde uitgang, zodat een
-teruggetrokken sleutel uit bestaande bestanden kan worden opgeruimd in plaats van er
-voor altijd in te blijven staan. Hij is vandaag leeg, en geen enkel schrijfpad leest
-hem nog; de route is verklaard, nog niet gebouwd. Er is tot nu toe niets
-teruggetrokken, dus er hangt niets van af.
+somt precies `theme`, `papersize`, `geometry` en — sinds 2026-08-18 —
+`reference-location` (§14.9) op, en de generieke schrijver asserteert daartegen,
+zodat er niet stilletjes een vijfde sleutel bij kan glippen. Ernaast staat
+`kDocumentRetiredKeys`, de plek waar een sleutel die OciDeck *niet langer* schrijft
+moet worden vastgelegd — de uitgang, zodat een teruggetrokken sleutel uit bestaande
+bestanden kan worden opgeruimd in plaats van er voor altijd in te blijven staan.
+Die route is gebouwd en niet alleen verklaard: elke bewuste schrijfactie haalt de
+teruggetrokken sleutels ook uit het blok dat hij aanraakt, zodat zo'n sleutel bij de
+eerstvolgende stijl- of paginaopmaakwijziging uit het bestand verdwijnt. De
+verzameling is vandaag leeg — er is niets teruggetrokken — dus er hangt nog niets
+van af.
+
+*(Gecorrigeerd 2026-08-19: hier stonden drie sleutels en de mededeling dat de
+uitgang "verklaard, nog niet gebouwd" was. Beide zijn ingehaald — door de
+voetnootsleutel en door `withDocumentFrontMatterKey`, dat de teruggetrokken
+sleutels opruimt sinds het de generieke schrijver werd.)*
 
 Feiten die op schijf tellen:
 
@@ -3381,6 +3463,29 @@ export niet met een blanco vel opent) en zet de LaTeX-export een `\newpage` vó�
 §13.5), en de beschrijving voor de auteur staat in de
 [Gebruikershandleiding](USER_GUIDE.md#inserting-a-page-break).
 
+**Dezelfde bedoeling, maar dan in het bestand geschreven** *(toegevoegd
+2026-08-17, #1545)*. Naast die instelling staat een eenmalige bewerking —
+*Invoegen → Hoofdstukken op nieuwe pagina* — die geen voorkeur zet maar **de bron
+herschrijft**: hij zet een `---` vóór elk `H1` behalve het eerste. Dat is de
+draagbare vorm van dezelfde wens. Een instelling bestaat alleen in deze app; een
+`---` wordt door elke lezer gehonoreerd — OciDeck, Pandoc en de printer van de
+ontvanger. Wat er op schijf gebeurt:
+
+- **De eerste kop krijgt er nooit een**, want een einde vóór de eerste regel zou
+  een leeg openingsvel opleveren — dezelfde regel die de paginaweergave hanteert.
+- **Er komt een lege regel vóór de `---` als de regel ervoor tekst draagt.** Een
+  `---` direct onder een tekstregel is in Markdown geen thematische scheiding maar
+  een setext-`H2` van die regel, en dat zou stilletjes een alinea in een kop
+  veranderen.
+- **De bewerking is idempotent.** Een kop met al een thematische scheiding erboven
+  (lege regels ertussen mogen) blijft byte-getrouw staan, dus twee keer uitvoeren
+  verdubbelt de einden niet.
+- **Koppen binnen een fenced blok tellen niet mee** — de telling komt uit dezelfde
+  grammatica die de weergave gebruikt (`DocumentMarkdownView.chapterHeadingLines`).
+
+Omdat de uitkomst een gewone `---` is, geldt alles in deze paragraaf er
+onveranderd voor; er staat niets nieuws op schijf om te herkennen.
+
 ### 14.7 Paginamaat, marges en afloop — de instellingenkant *(toegevoegd 2026-08-16, reikwijdte versmald 2026-08-17)*
 
 > **Koerswijziging, 2026-08-17.** Deze sectie heette eerder *"instellingen, geen
@@ -3436,10 +3541,21 @@ de tekstspiegel zijn plek ten opzichte van de snijlijn houdt) en, met een afloop
 een `bleed`-declaratie voor een engine die CSS Paged Media implementeert. De
 LaTeX-export zet dezelfde cijfers in `geometry` (`paperwidth`/`paperheight` als er
 een afloop is, anders de papiernaam uit `\documentclass`, plus de marges).
-**Snijtekens worden door geen enkel uitvoerpad geschreven**, en OciDeck biedt er
-geen instelling voor: de gedocumenteerde PDF-route is de geëxporteerde HTML
-afdrukken, en geen enkele browser implementeert de CSS-eigenschap `marks`. Een
-ontvanger die een vel met afloop krijgt, hoort het snijformaat buiten het bestand om.
+**Snijtekens worden door de LaTeX-export geschreven, en alleen daar** *(sinds
+2026-08-17)*. Ze staan standaard uit (`AppSettings.documentCropMarks`, onder
+dezelfde pagina-instellingen) en worden alleen getekend als er ook een afloop is om
+naar te wijzen — zonder afloop staat de schakelaar uit het grijs in plaats van dat
+hij een knop aanbiedt die niets doet, en schrijft `articlePreamble`
+([`lib/services/latex/latex_preamble.dart`](../lib/services/latex/latex_preamble.dart))
+niets. De HTML-route kan het niet: die afdrukken vanuit de browser zou de
+CSS-eigenschap `marks` vergen, en geen enkele browser implementeert die. Een
+ontvanger die langs die route een vel met afloop krijgt, hoort het snijformaat nog
+steeds buiten het bestand om.
+
+*(Gecorrigeerd 2026-08-19: hier stond dat snijtekens door geen enkel uitvoerpad
+werden geschreven en dat OciDeck er geen instelling voor bood. Beide klopten toen
+ze werden opgeschreven en werden de dag erna ingehaald door de snijtekens in de
+LaTeX-export.)*
 
 Op het scherm legt de weergave **Pagina's** van de documentbewerker het document op
 deze vellen op, gemeten tegen zijn eigen render. Het is een weergave, geen belofte
@@ -3512,6 +3628,10 @@ Feiten die op schijf tellen:
   standaard voor die kant (25/25/20/20 mm), niet op jouw instelling, omdat de
   waarde die er wél staat wordt opgevat als de beschrijving van de pagina door de
   auteur.
+- **Het reist mee bij export.** De geprojecteerde `.md`-export (§14.4) schrijft
+  deze twee sleutels, met de opmaak die op dat moment geldt — ook wanneer die
+  opmaak uit de instellingen kwam en het bestand zelf niets zei. Een ontvanger
+  krijgt dus het vel dat de auteur zag, niet zijn eigen standaard.
 - **Maat en marges gelden onafhankelijk van elkaar.** Een document dat alleen
   `papersize:` draagt houdt de marges uit de instellingen, en een dat alleen
   `geometry:` draagt houdt de maat uit de instellingen. De voorrang is, per veld,
@@ -3526,18 +3646,150 @@ Feiten die op schijf tellen:
   effectieve vel, en dat is op zichzelf compleet. Een vel dat met geen enkel
   ISO-formaat overeenkomt is eenvoudig een vrije maat zonder afloop.
 
-**Een bekend gat, uitgesproken in plaats van gladgestreken.** OciDeck leidt het
-*formaat* alleen af uit `papersize:`. Het leest geen formaat terug uit een
-expliciete `paperwidth`/`paperheight`, dus een document dat liggend of met een
-afloop is vastgelegd reproduceert overal zijn marges (en zijn afloop), maar neemt
-zijn **formaat** over uit de instelling van de ontvangende machine. Open een
-document van A4-plus-3 mm op een machine die op A5 staat en je krijgt A5 plus 3 mm.
-Pandoc, dat de expliciete millimeters leest, heeft er geen last van — dit is het
-eigen leespad van OciDeck. Om dezelfde reden hangt de toestand "deze paginaopmaak
-zit in dit document" van de indicator aan `papersize:`, zodat een liggend document
-of een document met afloop niet als vastgelegd wordt gemarkeerd terwijl het dat wel
-is. Beide zijn geregistreerd; geen van beide verandert wat het bestand zegt.
+**Een gat dat inmiddels gedicht is** *(2026-08-17)*. Hier stond dat OciDeck het
+*formaat* alleen uit `papersize:` afleidde — waardoor een document dat liggend of
+met een afloop was vastgelegd overal zijn marges reproduceerde maar zijn formaat
+uit de instelling van de ontvangende machine nam, en de indicator zo'n document
+niet als vastgelegd markeerde. Beide zijn hersteld, en de herstelling is wat de
+opsomming hierboven al beschrijft: het leespad leidt het formaat ook af uit een
+expliciete `paperwidth`/`paperheight`, door het vel te leggen naast elk ISO
+216-formaat in beide richtingen (`_inferPaper` in
+[`lib/services/document_page_setup.dart`](../lib/services/document_page_setup.dart)),
+en de toestand "deze paginaopmaak zit in dit document" hangt aan **beide** sleutels
+(`documentCarriesPageSetup`) in plaats van aan de papiernaam alleen. Een document
+van A4-plus-3 mm opent dus als A4 plus 3 mm op een machine die op A5 staat. Wat
+niet veranderd is, is wat er in het bestand staat: het effectieve vel in
+millimeters, op zichzelf compleet.
 
 Het ontwerp — waarom Pandocs vocabulaire in plaats van een eigen voorvoegsel, en
 waarom de afloop als expliciete millimeters gaat — staat in
 [`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §15.
+
+### 14.9 Voetnoten — `[^1]` en `reference-location:` *(toegevoegd 2026-08-18)*
+
+Een document mag voetnoten dragen. Op schijf is dat de voetnootsyntaxis van
+Pandoc, die GitHub, Obsidian en de meeste andere lezers ook begrijpen:
+
+```
+Een zin met een noot [^1] erin.
+
+[^1]: De tekst van de noot.
+```
+
+Niets hiervan is eigendom van OciDeck (§14.1): het merkteken en de definitie zijn
+dezelfde bytes die elk Markdown-gereedschap leest, en een lezer die geen
+voetnoten kent toont ze allebei als gewone tekst in plaats van ze kwijt te raken.
+
+Wat er op schijf toe doet:
+
+- **De definitie blijft staan waar de auteur hem zette.** OciDeck tilt hem voor de
+  weergave uit de lopende tekst, nooit uit het bestand. Zelfs de visuele bewerker
+  houdt de plaats aan: het merkteken reist als inline-embed en de definitie als
+  blok-embed, zodat een rondgang door de rijke-tekstlaag dezelfde bytes teruggeeft
+  (§14.3). Het enige dat daar wél verandert is een definitie die over meerdere
+  ingesprongen regels loopt: die komt terug als één regel. De tekst is gelijk;
+  alleen de regelovergangen in de bron zijn dat niet.
+- **Het label is van de auteur, het nummer van de lezer.** `[^1]` en `[^bron]` zijn
+  allebei geldig en blijven allebei letterlijk in het bestand staan. Wat wordt
+  getoond — op het scherm en in elke export — is de plaats in de leesvolgorde: 1,
+  2, 3. Dat doet Pandoc ook, en het betekent dat een noot tussenvoegen niets met de
+  hand hoeft te worden hernummerd.
+- **Een verwijzing zonder definitie is tekst.** `[^abc]` zonder een regel `[^abc]:`
+  blijft precies staan zoals het geschreven is, zodat een tekenklasse in een
+  technisch document niet stilletjes een merkteken wordt. Een definitie waar niets
+  naar verwijst houdt zijn plek in het bestand maar wordt niet gerenderd: een noot
+  met een nummer en zonder merkteken is een raadsel.
+- **Waar ze belanden is één optionele sleutel.** `reference-location: document` in
+  de front matter zet de noten achterin het document; zonder die sleutel staan ze
+  onderaan de bladzijde waar de verwijzing op valt. De standaard schrijft dus
+  **niets** — een document dat niets bijzonders wil blijft een `.md` zonder ook
+  maar enige front matter. De sleutel is van Pandoc en Quarto, en die voeren hem
+  uit; OciDeck leest hun waarden `section` en `block` ook als "achterin", omdat
+  beide daar dichter bij liggen dan bij de voet van een bladzijde. Hij wordt
+  byte-chirurgisch geschreven, net als `theme:` en de paginaopmaak, en staat in
+  hetzelfde register (§14.5).
+
+```
+---
+reference-location: document
+---
+
+Een zin met een noot [^1] erin.
+
+[^1]: De tekst van de noot.
+```
+
+- **Wat elk oppervlak ermee kan.** De weergave **Pagina's** en de LaTeX-export
+  honoreren de keuze letterlijk — een echte noot onderaan het vel waar de
+  verwijzing op valt (`\footnote`), of een genummerde lijst achterin. De
+  HTML-export zet ze altijd achterin, met een sprong heen en terug, omdat een
+  HTML-pagina geen bladzijden heeft en de CSS die het zou kunnen (`float:
+  footnote`) door geen enkele browser is geïmplementeerd; zie
+  `KNOWN_LIMITATIONS.md`. De doorlopende weergaven in de bewerker hebben evenmin
+  vellen en tonen ze om dezelfde reden achterin.
+
+### 14.10 Inhoudsopgave — de marker `<!-- toc -->` *(opgeschreven 2026-08-19; in de app sinds 2026-08-16)*
+
+Een document mag een inhoudsopgave dragen. Op schijf is dat **één HTML-commentaar
+op een eigen regel**, en verder niets:
+
+```
+# Rapport
+
+<!-- toc -->
+
+## Eerste hoofdstuk
+…
+```
+
+De knop *Invoegen → Inhoudsopgave* schrijft precies die regel op de cursorpositie.
+
+**Hoe dit zich verhoudt tot §14.1**, scherp gezegd in plaats van weggewuifd: de
+*syntaxis* is niet van OciDeck — een HTML-commentaar is een constructie die elke
+Markdown-lezer kent en overslaat — maar de *betekenis* wel. Dat is een zwakkere
+bewering dan "OciDeck voegt geen vocabulaire toe", en de zwakkere is de ware. Wat
+§14.1 verbiedt blijft overeind: geen sleutel draagt de naam van OciDeck, aan geen
+enkele lezer wordt gevraagd iets te begrijpen, en een gereedschap dat de marker
+niet kent toont precies wat het zou tonen als de regel er niet stond. Wat een
+auteur bij vertrek uit OciDeck kwijtraakt is de *gegenereerde* lijst — en die
+maakt elk inhoudsopgavegereedschap opnieuw uit de koppen, of de auteur zelf. De
+betekenis woont in de app; het bestand houdt één regel over die een vreemde lezer
+niets kost.
+
+Wat er op schijf toe doet:
+
+- **Het bestand bewaart de marker, nooit de gegenereerde lijst.** Dat is de hele
+  bedoeling van de marker: een inhoudsopgave die in het bestand blijft staan is
+  verouderd zodra een kop wordt hernoemd, en dan klopt het bestand niet meer met
+  zichzelf. De lijst wordt opnieuw gemaakt waar hij nodig is, uit de koppen die er
+  op dat moment zijn — `H1` tot en met `H3` (`generateTocMarkdown`, `maxDepth: 3`),
+  als een GFM-lijst met ankerverwijzingen naar de slugs van de koppen.
+- **Bij export wordt hij ná de privacyprojectie gemaakt.** De lijst komt uit de
+  *geprojecteerde* body, nooit uit de bron, zodat een inhoudsopgave geen kop kan
+  noemen die de ontvanger niet mag zien
+  ([`lib/services/table_of_contents.dart`](../lib/services/table_of_contents.dart)).
+- **Elke uitvoer krijgt zijn eigen dialect** (§14.4). Het geprojecteerde `.md` laat
+  de marker weg en zet de lijst op die plek — een HTML-commentaar betekent niets
+  voor een gewone Markdown-ontvanger, en een achtergebleven commentaar is rommel.
+  De HTML-export houdt de marker en rendert de lijst eronder als klikbare
+  navigatie. De LaTeX-export vervangt hem door `\tableofcontents` en laat TeX het
+  werk doen.
+- **Een lijst die al onder de marker staat wordt vervangen, niet verdubbeld.** Het
+  blok dat opnieuw wordt gemaakt is de marker plus de GFM-lijstregels die er direct
+  onder staan (inspringing toegestaan), zodat een bestand dat al eens door een
+  export ging bij een volgende export geen inhoudsopgaven op elkaar stapelt.
+- **Herkenning gaat per regel.** De marker telt wanneer hij het enige op zijn regel
+  is; het exportpad eist hem aan het begin van de regel, terwijl de poort van de
+  visuele modus en de embed in de bewerker ook voorloopwitruimte toestaan.
+- **In de bewerker is hij levend, en hij dwingt geen brontekstmodus af.** De lezer
+  en de weergave *Pagina's* renderen de marker als de lijst uit de eigen koppen van
+  het document, zodat de auteur ziet wat de export zal opleveren in plaats van een
+  HTML-commentaar. In de visuele modus reist hij als blok-embed (`x-embed-toc`) en
+  niet als rauwe HTML — zonder dat zou een inhoudsopgave invoegen het hele document
+  terugwerpen in de beschermde brontekstmodus. De byte-getrouwe rondgang van §14.3
+  blijft hoe dan ook gelden: wat eruit komt is dezelfde ene regel.
+
+De beschrijving voor de auteur staat in de
+[Gebruikershandleiding](USER_GUIDE.md#documents); de plek in de code staat in
+[`SOURCE_MAP.md`](SOURCE_MAP.md) onder `table_of_contents.dart` en
+`toc_embed_syntax.dart`.

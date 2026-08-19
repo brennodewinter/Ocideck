@@ -1,6 +1,6 @@
 # OciDeck — File Format
 
-> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-08-10 · **Published by:** Stichting LibreKAT
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-08-19 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -469,8 +469,18 @@ these fields (with defaults):
 | `textColor` | `#222222` | Text color. |
 | `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
 | `bulletMarker` | `dot` | Default bullet-list marker: `dot` or `paw` (a cat-paw drawn in the accent colour). A slide may override it (see §8). |
+| `checklistCheckedColor` | `#2E7D64` | Tick colour of a checked checklist item. |
+| `checklistUncheckedColor` | `#CBD5E1` | Box colour of an unchecked checklist item. |
+| `checklistStrikeThrough` | `true` | Strike through the text of a checked item. |
 | `tableTextColor` | = `textColor` | Text color in tables. |
 | `tableHeaderTextColor` | `#FFFFFF` | Table header text color. |
+| `tableHeaderBackgroundColor` | = `accentColor` | Table header background. |
+| `tableBorderStyle` | `boxed` | **Documents.** Border form: `lined` (horizontal rules only, booktabs-like), `boxed` (every cell framed) or `none` (white space and header fill carry the table). |
+| `tableBorderColor` | `#CBD5E1` | **Documents.** Border colour for the styles that draw one. |
+| `tableZebraStriped` | `false` | **Documents.** Alternating row background. |
+| `tableZebraColor` | `#F1F5F9` | **Documents.** The alternating row colour, used when `tableZebraStriped` is on. |
+| `tableCellPaddingPx` | `8.0` | **Documents.** Cell padding in px. |
+| `tableAccentHeaderBorder` | `false` | **Documents.** Draw an extra accent-coloured rule under the header row. |
 | `titleBackgroundColor` | `#1C2B47` | Title-slide background. |
 | `titleTextColor` | `#FFFFFF` | Text on title/section slides. |
 | `sectionBackgroundColor` | `#2E7D64` | Section-slide background. |
@@ -502,6 +512,13 @@ these fields (with defaults):
 | `severityNoneColor` | `#475569` | Finding/CVSS colour for the Informational band. |
 
 Unknown or missing fields fall back to defaults, so older files migrate cleanly.
+
+*(Added 2026-08-19: the three `checklist…` fields and the six document
+table-style fields were in the profile — and therefore in a `.ocideckstyle`
+(§3.3) — but had never been listed here. The fields marked **Documents** are read
+by the document surfaces only: the *Pagina's* view, the continuous HTML export
+and the LaTeX export (§14). A deck's table slide draws its own borders and takes
+only the colours above.)*
 
 > **Cockpit appearance and status colours are not part of the style profile or
 > the file.** The authentic/classic look and the named *cockpit colour scheme*
@@ -3204,9 +3221,10 @@ matter its author wrote (for example Jekyll, Hugo or Obsidian keys).
 
 **OciDeck invents no front-matter vocabulary of its own.** It does write a small,
 closed set of keys when you ask it to (§14.5), but every one of them is a key
-other tools already read and act on: `theme:` (Pandoc, Obsidian, GitHub Pages)
-and, since 2026-08-17, `papersize:` and `geometry:` (Pandoc, which passes them to
-the LaTeX `geometry` package). Running the same file through your own Pandoc
+other tools already read and act on: `theme:` (Pandoc, Obsidian, GitHub Pages),
+since 2026-08-17 `papersize:` and `geometry:` (Pandoc, which passes them to the
+LaTeX `geometry` package), and since 2026-08-18 `reference-location:` (Pandoc and
+Quarto, §14.9). Running the same file through your own Pandoc
 gives you the page those keys describe, without OciDeck in the loop. What is
 absent — and stays absent — is a key that only means something *inside* OciDeck:
 there is no `kind:`, no `ocideck:` block and no `ocideck_`-prefixed key anywhere
@@ -3233,23 +3251,33 @@ master you keep, back up and eventually clean — the same role §9 describes fo
 deck's Markdown, held to a stricter no-normalisation rule.
 
 What the document path can write into the front matter is a short, closed set of
-keys — the document **style** (`theme:`) and the **page setup** (`papersize:`,
-`geometry:`) — and each only when you deliberately ask for it. Every write is
-opt-in, byte-surgical, and leaves the rest of the file alone (§14.5, §14.8). A
-document you never style and never pin a page setup on carries no front matter at
-all, so the byte-identity above holds unchanged.
+keys — the document **style** (`theme:`), the **page setup** (`papersize:`,
+`geometry:`) and the **footnote placement** (`reference-location:`) — and each
+only when you deliberately ask for it. Every write is opt-in, byte-surgical, and
+leaves the rest of the file alone (§14.5, §14.8, §14.9). A document you never
+style, never pin a page setup on and never move the notes of carries no front
+matter at all, so the byte-identity above holds unchanged.
 
 ### 14.4 Export is a derived, projected artefact — on a new file
 
 Exporting a document is **not** saving it. Export writes a **derived, redacted
 copy for a recipient** onto a **new** file and never touches the source, so it
-falls **outside** the byte-faithful guarantee of §14.3. Two output forms exist:
-a projected `.md` (a redacted copy of the plain text) and one **continuous**
-self-contained HTML document. Both carry the privacy-projected (OciWacht) content
-rather than the raw source, along the same audience boundary as a deck export;
-the chosen privacy profile is written into the export's filename. There is no
-built-in PDF writer for a document — a PDF is made by printing the exported HTML
-from the browser (see the [User Guide](USER_GUIDE.md#documents)).
+falls **outside** the byte-faithful guarantee of §14.3. **Four** output forms
+exist (`DocumentExportFormat` in
+[`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
+a projected `.md` (a redacted copy of the plain text), one **continuous**
+self-contained HTML document, a LaTeX `article` (`.tex`), and the portable
+package (`.ocideck`, §7 — written by `FileService.exportPackage`, not by the text
+writer). All of them carry the privacy-projected (OciWacht) content rather than
+the raw source, along the same audience boundary as a deck export; the chosen
+privacy profile is written into the export's filename. There is still no built-in
+PDF *writer*: a PDF comes either from printing the exported HTML from the
+browser, or from compiling the `.tex` — and only that second route can carry a
+bleed with crop marks (§14.7). See the [User Guide](USER_GUIDE.md#documents).
+
+*(Corrected 2026-08-19: this said there were two output forms and no PDF route at
+all. The LaTeX and package exports landed on 2026-08-07 and this paragraph was
+never brought along.)*
 
 **What travels into the projected `.md`, and what does not** *(settled
 2026-08-17)*. The export is a copy for someone else's machine, so the question
@@ -3270,6 +3298,22 @@ per key is whether it still means anything there.
   the recipient the name would point at nothing, or — worse — at a different
   profile with the same name. So the style is resolved before export and rendered
   into the output itself (§14.5).
+- **The contents list travels, its marker does not.** A `<!-- toc -->` marker
+  (§14.10) is resolved on the way out, and each format gets its own dialect: the
+  projected `.md` drops the marker and leaves the generated list in its place,
+  the HTML export keeps the marker and renders the list as navigation, and the
+  LaTeX export turns it into `\tableofcontents`. The list is generated *after*
+  the projection, from the projected body, so a contents page can never name a
+  heading the recipient is not allowed to see.
+- **The footnote placement does not travel.** The notes themselves do — they are
+  ordinary text in the body (§14.9) — but `reference-location:` is not written
+  into the projected `.md`, because the export starts from the projected *body*
+  and not from the source's front matter. A recipient therefore gets the notes
+  with their own reader's placement. Unlike `theme:` that is not a considered
+  choice but an open end: the key is a Pandoc instruction, so by the reasoning
+  below it is a measure and could travel. It is recorded here rather than glossed
+  over, and tracked as issue #1569; nothing in the code depends on it staying this
+  way.
 
 The difference is not that one key is more important than the other: it is that a
 paper size is a **measure**, complete on its own in millimetres any toolchain
@@ -3304,13 +3348,20 @@ well (§14.8), so it is a set, not a single key.)* The set is a register in the
 code rather than a habit spread over the call sites:
 `kDocumentOwnedKeys` in
 [`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
-lists exactly `theme`, `papersize` and `geometry`, and the generic writer asserts
-against it, so a fourth key cannot slip in on the side. Beside it sits
-`kDocumentRetiredKeys`, the place where a key OciDeck *stops* writing is to be
-recorded — the intended exit route, so a withdrawn key can be cleaned out of
-existing files instead of sitting in them forever. It is empty today, and no
-write path reads it yet; the route is declared, not yet built. Nothing has been
-withdrawn so far, so nothing depends on it.
+lists exactly `theme`, `papersize`, `geometry` and — since 2026-08-18 —
+`reference-location` (§14.9), and the generic writer asserts against it, so a
+fifth key cannot slip in on the side. Beside it sits `kDocumentRetiredKeys`, the
+place where a key OciDeck *stops* writing is to be recorded — the exit route, so
+a withdrawn key can be cleaned out of existing files instead of sitting in them
+forever. That route is built rather than merely declared: every deliberate write
+also strips the retired keys from the block it touches, so a withdrawn key
+disappears from a file at its next styling or page-setup change. The set is empty
+today — nothing has been withdrawn — so nothing depends on it yet.
+
+*(Corrected 2026-08-19: this named three keys and said the retirement route was
+"declared, not yet built". Both were overtaken — by the footnote key and by
+`withDocumentFrontMatterKey`, which has swept the retired keys since it became
+the generic writer.)*
 
 Facts that matter on disk:
 
@@ -3370,6 +3421,29 @@ puts a `\newpage` before every `\section` but the first. The design is in
 §13.5), and the author-facing description is in the
 [User Guide](USER_GUIDE.md#inserting-a-page-break).
 
+**The same intent, but written into the file** *(added 2026-08-17, #1545)*.
+Beside that setting sits a one-off action — *Invoegen → Hoofdstukken op nieuwe
+pagina* ("Insert → Chapters on new pages") — which does not set a preference but
+**rewrites the source**: it puts a
+`---` before every `H1` except the first. That is the portable form of the same
+wish. A setting exists only in this app; a `---` is honoured by every reader —
+OciDeck, Pandoc, and the recipient's printer. Facts on disk:
+
+- **The first chapter never gets one**, because a break before the first line
+  would produce an empty opening sheet — the same rule the page view applies.
+- **A blank line is inserted before the `---` when the preceding line carries
+  text.** A `---` directly under a text line is not a thematic break in Markdown
+  but a setext `H2` of that line, which would silently turn a paragraph into a
+  heading.
+- **It is idempotent.** A heading that already has a thematic break above it
+  (blank lines in between allowed) is left alone byte-for-byte, so running the
+  action twice does not double the breaks.
+- **Headings inside a fenced block do not count** — the count comes from the same
+  grammar the renderer uses (`DocumentMarkdownView.chapterHeadingLines`).
+
+Because the result is an ordinary `---`, everything in this section applies to it
+unchanged; there is nothing new on disk to recognise.
+
 ### 14.7 Page size, margins and bleed — the settings side *(added 2026-08-16, scope narrowed 2026-08-17)*
 
 > **Course change, 2026-08-17.** This section used to be titled *"settings, not
@@ -3424,10 +3498,19 @@ keeps its place relative to the trim line) and, with a bleed, a `bleed`
 declaration for an engine that implements CSS Paged Media. The LaTeX export puts
 the same figures into `geometry` (`paperwidth`/`paperheight` when there is a
 bleed, otherwise the paper name from `\documentclass`, plus the margins).
-**Crop marks are not emitted by any output path**, and OciDeck offers no setting
-for them: the documented PDF route is printing the exported HTML, and no browser
-implements the CSS `marks` property. A recipient who receives a bleed sheet is
-told the trim size out of band.
+**Crop marks are emitted by the LaTeX export, and only there** *(since
+2026-08-17)*. They are off by default (`AppSettings.documentCropMarks`, under the
+same page settings) and are drawn only when there is also a bleed to point at —
+without one the switch is greyed out rather than offered as a control that does
+nothing, and `articlePreamble`
+([`lib/services/latex/latex_preamble.dart`](../lib/services/latex/latex_preamble.dart))
+writes nothing. The HTML route cannot do it: printing it from the browser would
+need the CSS `marks` property, which no browser implements. A recipient who gets
+a bleed sheet along that route is still told the trim size out of band.
+
+*(Corrected 2026-08-19: this section said crop marks were emitted by no output
+path and that OciDeck offered no setting for them. Both were true when written
+and were overtaken the next day by the LaTeX crop-mark support.)*
 
 On screen, the document editor's **Pagina's** view lays the document out on these
 sheets, measured against its own render. It is a view, not a promise about the
@@ -3514,16 +3597,20 @@ Facts that matter on disk:
   sheet, and it is complete on its own. A sheet that matches no ISO format is
   simply a free size with no bleed.
 
-**A known gap, stated rather than glossed over.** OciDeck derives the *format*
-only from `papersize:`. It does not read a format back out of an explicit
-`paperwidth`/`paperheight`, so a document pinned in landscape or with a bleed
-reproduces its margins (and its bleed) everywhere, but takes its **format** from
-the receiving machine's setting. Open an A4-plus-3 mm document on a machine set
-to A5 and you get A5 plus 3 mm. Pandoc, which reads the explicit millimetres, is
-not affected — this is OciDeck's own read path. For the same reason the
-indicator's "this page setup is in this document" state keys on `papersize:`,
-so a landscape or bleed document is not marked as pinned even though it is. Both
-are tracked; neither changes what the file says.
+**A gap that has since been closed** *(2026-08-17)*. This section used to record
+that OciDeck derived the *format* only from `papersize:` — so a document pinned in
+landscape or with a bleed reproduced its margins everywhere but took its format
+from the receiving machine's setting, and the indicator did not mark such a
+document as pinned. Both are fixed, and the fix is what the bullets above already
+describe: the read path infers the format from an explicit
+`paperwidth`/`paperheight` as well, matching the sheet against every ISO 216
+format in both orientations (`_inferPaper` in
+[`lib/services/document_page_setup.dart`](../lib/services/document_page_setup.dart)),
+and the "this page setup is in this document" state keys on **both** keys
+(`documentCarriesPageSetup`) instead of on the paper name alone. An A4-plus-3 mm
+document therefore opens as A4 plus 3 mm on a machine set to A5. What has not
+changed is what stands in the file: the effective sheet in millimetres, complete
+on its own.
 
 The design — why Pandoc's vocabulary instead of an owned prefix, and why the
 bleed goes as explicit millimetres — is in
@@ -3589,7 +3676,72 @@ Een zin met een noot [^1] erin.
   implemented by no browser; see `KNOWN_LIMITATIONS.md`. The continuous editor
   views have no sheets either and show them at the end for the same reason.
 
-### 14.10 Timeline view of a GFM table *(added 2026-08-19)*
+### 14.10 Table of contents — the `<!-- toc -->` marker *(written up 2026-08-19; in the app since 2026-08-16)*
+
+A document may carry a contents page. On disk that is **one HTML comment on a
+line of its own**, and nothing else:
+
+```
+# Report
+
+<!-- toc -->
+
+## First chapter
+…
+```
+
+The *Invoegen → Inhoudsopgave* ("Insert → Contents") button writes exactly that
+line at the cursor.
+
+**How this sits against §14.1**, stated precisely rather than waved away: the
+*syntax* is not OciDeck's — an HTML comment is a construct every Markdown reader
+knows and skips — but the *meaning* is. That is a weaker claim than "OciDeck adds
+no vocabulary", and the weaker claim is the true one. What §14.1 forbids is still
+respected: no key carries OciDeck's name, no reader is asked to understand
+anything, and a tool that does not know the marker shows exactly what it would
+show if the line were absent. What an author can lose by leaving OciDeck is the
+*generated* list — and that is regenerable from the headings by any contents
+tool, or by hand. The semantics live in the app; the file keeps one line that
+costs a foreign reader nothing.
+
+Facts that matter on disk:
+
+- **The file stores the marker, never the generated list.** That is the whole
+  point of the marker: a contents page kept in the file goes stale the moment a
+  heading is renamed, and then the file no longer agrees with itself. The list is
+  built afresh wherever it is needed, from the headings present at that moment —
+  `H1` through `H3` (`generateTocMarkdown`, `maxDepth: 3`), as a GFM list with
+  anchor links to the headings' slugs.
+- **On export it is generated after the privacy projection.** The list is built
+  from the *projected* body, never from the source, so a contents page cannot
+  name a heading the recipient is not allowed to see
+  ([`lib/services/table_of_contents.dart`](../lib/services/table_of_contents.dart)).
+- **Each output takes it in its own dialect** (§14.4). The projected `.md` drops
+  the marker and leaves the list in its place — an HTML comment means nothing to
+  a plain Markdown recipient, and a stray one is litter. The HTML export keeps the
+  marker and renders the list under it as clickable navigation. The LaTeX export
+  replaces it with `\tableofcontents` and lets TeX do the work.
+- **A list already under the marker is replaced, not doubled.** The block that is
+  regenerated is the marker plus any GFM list items directly beneath it
+  (indentation allowed), so re-exporting a file that already went through an
+  export does not stack contents pages on top of each other.
+- **Recognition is per line.** The marker counts when it is the only thing on its
+  line; the export path requires it at the start of the line, while the
+  visual-mode gate and the editor embed also tolerate leading whitespace.
+- **In the editor it is live, and it does not force source mode.** The reader and
+  the *Pagina's* view render the marker as the list generated from the document's
+  own headings, so the author sees what the export will produce instead of an HTML
+  comment. In the visual mode it travels as a block embed (`x-embed-toc`) rather
+  than as raw HTML — without that, inserting a contents page would throw the whole
+  document back into protected source mode. The byte-faithful round trip of §14.3
+  holds either way: what comes back out is the same one line.
+
+The author-facing description is in the
+[User Guide](USER_GUIDE.md#documents); the code map is in
+[`SOURCE_MAP.md`](SOURCE_MAP.md) under `table_of_contents.dart` and
+`toc_embed_syntax.dart`.
+
+### 14.11 Timeline view of a GFM table *(added 2026-08-19)*
 
 A document timeline is not a new data format. It is a two- or three-column GFM
 table immediately preceded by this exact marker:
