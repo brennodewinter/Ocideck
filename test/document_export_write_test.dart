@@ -10,6 +10,7 @@ import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/document_footnote_setup.dart';
 import 'package:ocideck/services/document_style.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -234,6 +235,68 @@ void main() {
       // De body reist door de inerte markdown-poort.
       expect(html.contains('<script type="text/markdown">'), isTrue);
       expect(html.contains('# Rapport'), isTrue);
+    });
+  });
+
+  // #1569: de plaatsing van de voetnoten reist mee, om dezelfde reden als het
+  // vel — `reference-location:` is een instructie die Pandoc en Quarto zelf
+  // uitvoeren, geen verwijzing naar iets dat alleen hier bestaat (§14.4). De
+  // body komt uit de projectie en draagt geen front matter meer, dus de keuze
+  // moet bij het schrijven opnieuw worden gezet.
+  test('md-export draagt de keuze noten-achterin mee', () async {
+    await withBundle((bundle) async {
+      final out = p.join(temp.path, 'rapport.md');
+      await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        footnotePlacement: FootnotePlacement.document,
+        outputPath: out,
+      );
+      final content = await File(out).readAsString();
+      expect(content.startsWith('---\n'), isTrue);
+      expect(content.contains('reference-location: document'), isTrue);
+      // En hij is ook echt terug te lezen, niet alleen tekstueel aanwezig.
+      expect(documentFootnotePlacement(content), FootnotePlacement.document);
+      expect(content.contains('UNIEKPROZA'), isTrue);
+    });
+  });
+
+  test('md-export met de standaardplaatsing schrijft geen sleutel', () async {
+    await withBundle((bundle) async {
+      final out = p.join(temp.path, 'rapport.md');
+      await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        outputPath: out,
+      );
+      final content = await File(out).readAsString();
+      // Onderaan de bladzijde is wat elke lezer zonder aanwijzing al doet, dus
+      // een document dat niets bijzonders wil houdt een kale export (§14.9).
+      expect(content.contains('reference-location'), isFalse);
+      expect(content.startsWith('# Rapport'), isTrue);
+    });
+  });
+
+  test('noten-achterin en de paginaopmaak staan samen in één blok', () async {
+    await withBundle((bundle) async {
+      final out = p.join(temp.path, 'rapport.md');
+      await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        pageSize: PageSizeSpec.fromId('A5')!,
+        pageMargins: const PageMargins(),
+        footnotePlacement: FootnotePlacement.document,
+        outputPath: out,
+      );
+      final content = await File(out).readAsString();
+      // Eén front-matterblok, geen twee: de schrijvers zijn byte-chirurgisch
+      // en voegen toe aan het blok dat er al staat.
+      expect('---\n'.allMatches(content).length, 2);
+      expect(content.contains('papersize: a5'), isTrue);
+      expect(content.contains('reference-location: document'), isTrue);
     });
   });
 }

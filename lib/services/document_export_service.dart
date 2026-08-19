@@ -149,7 +149,21 @@ Future<String?> writeDocumentExport(
         size: pageSize,
         margins: pageMargins,
       );
-      await writeStringAtomic(File(outputPath), mdWithPageSetup);
+      // Om dezelfde reden als de paginaopmaak reist de plaatsing van de noten
+      // mee (#1569): `reference-location:` is geen verwijzing naar iets dat
+      // alleen hier bestaat maar een instructie die Pandoc en Quarto zelf
+      // uitvoeren — een maat, geen verwijzing (§14.4). De body komt uit de
+      // projectie en draagt dus geen front matter meer, dus wat de auteur koos
+      // moet hier opnieuw worden gezet, net als het vel.
+      //
+      // `page` schrijft niets, en dat is geen vergeetachtigheid: onderaan de
+      // bladzijde is wat elke lezer zonder aanwijzing al doet, dus een document
+      // dat niets bijzonders wil houdt een export zonder front matter (§14.9).
+      final mdOutFinal = withDocumentFootnotePlacement(
+        mdWithPageSetup,
+        footnotePlacement,
+      );
+      await writeStringAtomic(File(outputPath), mdOutFinal);
       return outputPath;
     case DocumentExportFormat.html:
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.

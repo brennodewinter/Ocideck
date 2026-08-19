@@ -230,6 +230,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- fix(export): de plaatsing van de voetnoten reist mee in het geprojecteerde
+  `.md` (#1569). Koos je *Voetnoten achterin het document*, dan stond die keuze
+  wel in je eigen bestand maar niet in de kopie die de deur uit ging: de export
+  vertrekt vanuit de geprojecteerde body en die draagt geen front matter meer,
+  dus de sleutel moest — net als de paginaopmaak — opnieuw gezet worden. Dat
+  gebeurt nu, en om dezelfde reden: `reference-location:` is geen verwijzing naar
+  iets dat alleen op jouw machine bestaat maar een instructie die Pandoc en
+  Quarto zelf uitvoeren, en dus een maat die zich laat kopiëren. De standaard
+  schrijft nog steeds niets — noten onderaan de bladzijde is wat elke lezer uit
+  zichzelf al doet, dus een document dat niets bijzonders wil, wordt nog altijd
+  zonder front matter geëxporteerd.
+
 - docs(bestandsformaat): §8 is eindelijk het overzicht dat het beloofde te zijn.
   Elf HTML-commentaren die OciDeck zelf in een `.md` schrijft, stonden nergens in
   het bestandsformaat: `ocideck_list_style`, `ocideck_checklist_progress`,
