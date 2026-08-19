@@ -201,6 +201,11 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   bool _syncingMarkdown = false;
   String _markdownSnapshot = '';
 
+  /// Het Quill-document zoals het er bij de laatste *inhoudelijke* melding
+  /// uitzag. Zie [_onQuillChanged]: een melding waarbij dit gelijk blijft is
+  /// een cursorbeweging, geen bewerking.
+  Delta? _lastQuillDelta;
+
   /// Of de gebruiker in de visuele stand echt iets heeft gewijzigd.
   ///
   /// De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij: een
@@ -402,6 +407,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       selection: const TextSelection.collapsed(offset: 0),
     );
     _markdownSnapshot = widget.controller.text;
+    _lastQuillDelta = _quillController!.document.toDelta();
     _visualEdited = false;
     _quillController!.addListener(_onQuillChanged);
   }
@@ -427,6 +433,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdown(_markdownSnapshot),
     );
+    _lastQuillDelta = quill.document.toDelta();
     _visualEdited = false;
     _syncingMarkdown = false;
   }
@@ -464,6 +471,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final plain = quill.document.toPlainText();
     final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
     widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
+    // Quill meldt óók wanneer alleen de cursor verschoof. De heen-en-terugweg
+    // naar Markdown levert niet byte-getrouw dezelfde bron op (witregels rond
+    // koppen en blokken schuiven), dus zonder deze poort schreef de éérste klik
+    // in het schrijfvlak het hele document opnieuw weg — een bewerking die de
+    // gebruiker niet had gemaakt, mét een stap in ongedaan maken. Alleen een
+    // echte wijziging van het document telt als bewerking.
+    final delta = quill.document.toDelta();
+    if (delta == _lastQuillDelta) return;
+    _lastQuillDelta = delta;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;
     _visualEdited = true;
@@ -767,23 +783,37 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 }
 
-/// The gentle "source mode protects formatting the visual editor can't yet
-/// round-trip" note, shown when raw markdown is required.
+/// De melding dat je nu de *brontekst* bewerkt omdat de visuele stand deze
+/// opmaak nog niet verliesvrij aankan.
+///
+/// Bewust een zichtbare balk en geen fluistering. Hij stond er als grijze regel
+/// van 10,5 punt onder de knoppenbalk, en dat was precies de klacht uit #1565:
+/// de tekst valt uiteen in tekens, de standknop zegt nog "Visueel", en niets
+/// wijst je erop dat je in de bron staat. Wie niet weet waar hij is, weet ook
+/// niet hoe hij terugkomt.
 Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Icon(Icons.shield_outlined, size: 14, color: theme.toolbarIcon),
-      const SizedBox(width: 5),
-      Expanded(
-        child: Text(
-          context.l10n.d(
-            'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    decoration: BoxDecoration(
+      color: theme.codeBackground,
+      borderRadius: BorderRadius.circular(6),
+      border: Border.all(color: theme.border),
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(Icons.code, size: 18, color: theme.accent),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            context.l10n.d(
+              'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
+            ),
+            style: theme.bodyStyle.copyWith(fontSize: theme.fontSize - 1),
           ),
-          style: theme.hintStyle.copyWith(fontSize: 10.5),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }
 

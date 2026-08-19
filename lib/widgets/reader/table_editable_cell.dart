@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../markdown_editor/embedded_field_actions.dart';
 import 'table_edit_controller.dart';
 
 /// Eén invulbare cel binnen de gerenderde tabel.
@@ -32,30 +33,35 @@ class TableEditableCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final focus = editor.focusNode(row, column);
-    return Focus(
-      // De toetsen die een cel tot cel maken (Tab, Enter, plakken van een heel
-      // raster) worden hier afgevangen vóór het tekstveld ze ziet.
-      onKeyEvent: (_, event) => editor.handleCellKey(row, column, event),
-      onFocusChange: (has) => editor.setActiveCell(row, column, focused: has),
-      child: TextField(
-        controller: editor.cellController(row, column),
-        focusNode: focus,
-        style: style,
-        textAlign: textAlign,
-        cursorColor: caretColor,
-        maxLines: null,
-        // Enter navigeert (zie de controller); een regeleinde binnen de cel
-        // maak je met Shift+Enter.
-        keyboardType: TextInputType.multiline,
-        decoration: InputDecoration(
-          isDense: true,
-          border: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          filled: false,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: pad + 4,
-            vertical: pad * 0.6,
+    // De cel staat in de visuele editor binnen een Quill-embed; zonder deze
+    // wikkel voert Quill de tekstbewerking van deze cel uit, met de inhoud van
+    // het hele document. Zie [EmbeddedFieldActions] (#1565).
+    return EmbeddedFieldActions(
+      child: Focus(
+        // De toetsen die een cel tot cel maken (Tab, Enter, plakken van een heel
+        // raster) worden hier afgevangen vóór het tekstveld ze ziet.
+        onKeyEvent: (_, event) => editor.handleCellKey(row, column, event),
+        onFocusChange: (has) => editor.setActiveCell(row, column, focused: has),
+        child: TextField(
+          controller: editor.cellController(row, column),
+          focusNode: focus,
+          style: style,
+          textAlign: textAlign,
+          cursorColor: caretColor,
+          maxLines: null,
+          // Enter navigeert (zie de controller); een regeleinde binnen de cel
+          // maak je met Shift+Enter.
+          keyboardType: TextInputType.multiline,
+          decoration: InputDecoration(
+            isDense: true,
+            border: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            filled: false,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: pad + 4,
+              vertical: pad * 0.6,
+            ),
           ),
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/footnote_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
+import 'embedded_field_actions.dart';
 
 /// De volgnummers van de voetnoten in [document], op leesvolgorde.
 ///
@@ -253,20 +254,24 @@ class _EditableFootnoteDefState extends State<_EditableFootnoteDef> {
     return _FootnoteRow(
       number: widget.number,
       label: widget.label,
-      child: TextField(
-        controller: _controller,
-        focusNode: _focus,
-        style: style,
-        maxLines: null,
-        decoration: InputDecoration(
-          isDense: true,
-          border: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          contentPadding: EdgeInsets.zero,
-          hintText: context.l10n.d('De tekst van de voetnoot'),
-          hintStyle: style.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
+      // Zonder deze wikkel voert Quill de tekstbewerking van dit veld uit, met
+      // de inhoud van het hele document — zie [EmbeddedFieldActions] (#1565).
+      child: EmbeddedFieldActions(
+        child: TextField(
+          controller: _controller,
+          focusNode: _focus,
+          style: style,
+          maxLines: null,
+          decoration: InputDecoration(
+            isDense: true,
+            border: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            contentPadding: EdgeInsets.zero,
+            hintText: context.l10n.d('De tekst van de voetnoot'),
+            hintStyle: style.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
       ),

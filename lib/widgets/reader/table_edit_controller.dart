@@ -250,9 +250,18 @@ class TableEditController extends ChangeNotifier {
       onFirstLine: collapsed && !text.substring(0, offset).contains('\n'),
       onLastLine: collapsed && !text.substring(offset).contains('\n'),
     );
-    if (target == null) return KeyEventResult.ignored;
-    focusCell(target.row, target.col, caret: target.caret);
-    return KeyEventResult.handled;
+    return switch (target.move) {
+      // Binnen de cel: het tekstveld zet de cursor zelf.
+      TableArrowMove.inCell => KeyEventResult.ignored,
+      TableArrowMove.toCell => () {
+        focusCell(target.row, target.col, caret: target.caret);
+        return KeyEventResult.handled;
+      }(),
+      // Aan de rand van de tabel gebeurt er niets — en dat "niets" moet hier
+      // eindigen. Doorlaten betekende: door naar Quill, dat de cursor van het
+      // document verzette terwijl de tekstinvoer aan deze cel hing (#1565).
+      TableArrowMove.atEdge => KeyEventResult.handled,
+    };
   }
 
   /// Plakt [text] vanaf cel ([r], [c]). Herkent de tekst zich als tabel (een
