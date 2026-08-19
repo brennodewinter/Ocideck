@@ -17,8 +17,7 @@ class TableEditScaffold extends StatelessWidget {
     super.key,
     required this.editor,
     required this.builder,
-    this.onSortAscending,
-    this.onSortDescending,
+    this.onSort,
   });
 
   final TableEditController editor;
@@ -28,8 +27,7 @@ class TableEditScaffold extends StatelessWidget {
   /// een tabel die niet hertekent zou tijdens het typen op de oude maten
   /// blijven staan.
   final WidgetBuilder builder;
-  final void Function(int column)? onSortAscending;
-  final void Function(int column)? onSortDescending;
+  final void Function(int column, bool? ascending)? onSort;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +71,9 @@ class TableEditScaffold extends StatelessWidget {
       // De werkbalk mag de focus niet uit de cel trekken: anders verdwijnt hij
       // onder je handen vandaan op het moment dat je hem aanklikt.
       child: ExcludeFocus(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
+          spacing: 0,
+          runSpacing: 2,
           children: [
             _button(
               context,
@@ -118,14 +117,20 @@ class TableEditScaffold extends StatelessWidget {
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom oplopend sorteren'),
-              onSortAscending == null ? null : () => onSortAscending!(at.col),
+              onSort == null ? null : () => onSort!(at.col, true),
             ),
             _button(
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom aflopend sorteren'),
-              onSortDescending == null ? null : () => onSortDescending!(at.col),
+              onSort == null ? null : () => onSort!(at.col, false),
               descending: true,
+            ),
+            _button(
+              context,
+              Icons.tune,
+              l10n.d('Sorteren als…'),
+              onSort == null ? null : () => onSort!(at.col, null),
             ),
             _divider(theme),
             _button(

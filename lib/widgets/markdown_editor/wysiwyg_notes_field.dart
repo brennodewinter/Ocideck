@@ -158,6 +158,10 @@ class WysiwygNotesField extends StatefulWidget {
   /// want dat einde hoort te vallen waar het geschreven blok werkelijk eindigt.
   final GlobalKey<EditorState>? editorKey;
 
+  /// Markeer een structurele embedhandeling als eigen undo-stap bij de eigenaar
+  /// van het document. Gewoon typen blijft bewust samenvoegbaar.
+  final VoidCallback? onDiscreteVisualEdit;
+
   const WysiwygNotesField({
     super.key,
     required this.controller,
@@ -170,6 +174,7 @@ class WysiwygNotesField extends StatefulWidget {
     this.bordered = true,
     this.tryConsumePaste,
     this.editorKey,
+    this.onDiscreteVisualEdit,
   });
 
   @override
@@ -245,13 +250,17 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // De voetnoot komt in twee delen binnen: de verwijzing als
                 // inline-embed (het merkteken) en de definitie als blok-embed
                 // (de invulbare notenregel).
-                embedBuilders: const [
-                  TimelineTableEmbedBuilder(),
-                  TableEmbedBuilder(),
-                  DividerEmbedBuilder(),
-                  TocEmbedBuilder(),
-                  FootnoteRefEmbedBuilder(),
-                  FootnoteDefEmbedBuilder(),
+                embedBuilders: [
+                  TimelineTableEmbedBuilder(
+                    onDiscreteEdit: widget.onDiscreteVisualEdit,
+                  ),
+                  TableEmbedBuilder(
+                    onDiscreteEdit: widget.onDiscreteVisualEdit,
+                  ),
+                  const DividerEmbedBuilder(),
+                  const TocEmbedBuilder(),
+                  const FootnoteRefEmbedBuilder(),
+                  const FootnoteDefEmbedBuilder(),
                 ],
                 autoFocus: false,
               ),

@@ -527,6 +527,7 @@ void main() {
     for (final label in [
       'Grafiek',
       'Tabel',
+      'Tijdlijn',
       'Mermaid',
       'Afbeelding',
       'Pagina-einde',
@@ -535,6 +536,32 @@ void main() {
     ]) {
       expect(find.text(label), findsOneWidget, reason: '$label in het palet');
     }
+  });
+
+  testWidgets('Invoegen → Tijdlijn opent eerst de gewone tabeleditor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tijdlijn'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Tabel'), findsOneWidget);
+    expect(find.widgetWithText(TextField, 'Tijd'), findsOneWidget);
+    expect(n.currentState.document!.source, 'Voor.');
+
+    await tester.tap(find.text('Toepassen'));
+    await tester.pumpAndSettle();
+    expect(
+      n.currentState.document!.source,
+      contains('<!-- timeline -->\n| Tijd | Gebeurtenis | Status |'),
+    );
   });
 
   testWidgets('het invoeg-palet schrijft een inhoudsopgave-marker', (

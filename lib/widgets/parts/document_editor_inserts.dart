@@ -49,15 +49,30 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     _insertBlock(encodeMarkdownTable(rows));
   }
 
-  /// Voeg een tijdlijn in als marker plus gewone tabel. De startinhoud blijft
-  /// bruikbaar wanneer een andere Markdown-lezer de marker negeert.
-  void _insertTimeline() {
+  /// Voeg een tijdlijn in via dezelfde tabeleditor als iedere andere tabel.
+  /// Pas na Toepassen komt de draagbare marker erbij; annuleren verandert het
+  /// document dus niet en de gebruiker hoeft nooit eerst een leeg blok te zoeken.
+  Future<void> _insertTimeline() async {
     final l10n = context.l10n;
-    final table = encodeMarkdownTable([
+    final initialRows = [
       [l10n.d('Tijd'), l10n.d('Gebeurtenis'), l10n.d('Status')],
       ['', '', ''],
-    ]);
-    _insertBlock(markTableAsTimeline(table));
+    ];
+    final slide = Slide.create(
+      SlideType.table,
+    ).copyWith(tableRows: initialRows);
+    var rows = initialRows;
+    final apply = await showEmbedEditorDialog(
+      context,
+      TableEditor(
+        slide: slide,
+        nestedInScrollView: true,
+        documentContext: true,
+        onUpdate: (s) => rows = s.tableRows,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    _insertBlock(markTableAsTimeline(encodeMarkdownTable(rows)));
   }
 
   /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal

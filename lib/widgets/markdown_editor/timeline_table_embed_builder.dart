@@ -11,11 +11,13 @@ import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
 import 'markdown_editor_theme.dart';
-import 'table_embed_builder.dart' show smartSortTable;
+import 'table_embed_builder.dart' show chooseExplicitSort, smartSortTable;
 
 /// Tekent marker en tabel als één verliesvrij tijdlijnblok in de visuele editor.
 class TimelineTableEmbedBuilder extends EmbedBuilder {
-  const TimelineTableEmbedBuilder();
+  const TimelineTableEmbedBuilder({this.onDiscreteEdit});
+
+  final VoidCallback? onDiscreteEdit;
 
   @override
   String get key => EmbeddableTimelineTable.timelineType;
@@ -39,6 +41,7 @@ class TimelineTableEmbedBuilder extends EmbedBuilder {
       source: source,
       profile: profile,
       embedContext: embedContext,
+      onDiscreteEdit: onDiscreteEdit,
     );
   }
 }
@@ -48,11 +51,13 @@ class _EditableTimelineEmbed extends StatefulWidget {
     required this.source,
     required this.profile,
     required this.embedContext,
+    required this.onDiscreteEdit,
   });
 
   final String source;
   final ThemeProfile? profile;
   final EmbedContext embedContext;
+  final VoidCallback? onDiscreteEdit;
 
   @override
   State<_EditableTimelineEmbed> createState() => _EditableTimelineEmbedState();
@@ -71,6 +76,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   void initState() {
     super.initState();
     _editor = _makeController();
+    _editing = !analyzeMarkedTimeline(widget.source).isUsable;
   }
 
   @override
@@ -104,9 +110,10 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
     });
   }
 
-  void _replace(String source, {bool asTable = false}) {
+  void _replace(String source, {bool asTable = false, bool discrete = false}) {
     final node = widget.embedContext.node;
     if (node.parent == null || source == widget.source) return;
+    if (discrete) widget.onDiscreteEdit?.call();
     widget.embedContext.controller.replaceText(
       node.documentOffset,
       1,
@@ -124,7 +131,23 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
     );
     if (mounted && sorted != null) {
       _pending = null;
-      _replace(markTableAsTimeline(sorted));
+      _replace(markTableAsTimeline(sorted), discrete: true);
+    }
+  }
+
+  Future<void> _sortAs(int column) async {
+    final choice = await chooseExplicitSort(context);
+    if (!mounted || choice == null) return;
+    final sorted = await smartSortTable(
+      context,
+      _tableSource,
+      column: column,
+      ascending: choice.ascending,
+      kind: choice.kind,
+    );
+    if (mounted && sorted != null) {
+      _pending = null;
+      _replace(markTableAsTimeline(sorted), discrete: true);
     }
   }
 
@@ -137,16 +160,36 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final analysis = analyzeMarkedTimeline(_currentSource);
+    final usable = analysis.isUsable;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (!usable)
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.info_outline),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(_timelineIssueMessage(context, analysis)),
+                  ),
+                ],
+              ),
+            ),
+          ),
         Wrap(
           spacing: 8,
           runSpacing: 6,
           alignment: WrapAlignment.end,
           children: [
             TextButton.icon(
-              onPressed: () => setState(() => _editing = !_editing),
+              onPressed: usable
+                  ? () => setState(() => _editing = !_editing)
+                  : null,
               icon: Icon(_editing ? Icons.timeline : Icons.edit_outlined),
               label: Text(
                 _editing
@@ -155,7 +198,8 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
               ),
             ),
             TextButton.icon(
-              onPressed: () => _replace(_tableSource, asTable: true),
+              onPressed: () =>
+                  _replace(_tableSource, asTable: true, discrete: true),
               icon: const Icon(Icons.table_chart_outlined),
               label: Text(l10n.d('Als tabel weergeven')),
             ),
@@ -168,7 +212,8 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
             themeProfile: widget.profile,
             chartTheme: widget.profile,
             tableEditController: _editor,
-            onSortTableColumn: _sort,
+            onSortTableColumn: (column, ascending) =>
+                ascending == null ? _sortAs(column) : _sort(column, ascending),
           )
         else
           GestureDetector(
@@ -183,4 +228,19 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
       ],
     );
   }
+
+  String _timelineIssueMessage(
+    BuildContext context,
+    TimelineTableAnalysis analysis,
+  ) => switch (analysis.issue) {
+    TimelineTableIssue.wrongColumnCount => context.l10n.d(
+      'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.',
+    ),
+    TimelineTableIssue.noEvents => context.l10n.d(
+      'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.',
+    ),
+    _ => context.l10n.d(
+      'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.',
+    ),
+  };
 }

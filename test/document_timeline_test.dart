@@ -93,4 +93,51 @@ $rows''';
     }
     expect(DocumentMarkdownView.blockTexts(source), hasLength(19));
   });
+
+  testWidgets('tijdlijn blijft leesbaar en in bronvolgorde bij 200% tekst', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await tester.binding.setSurfaceSize(const Size(600, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    const source = '''$documentTimelineMarker
+| Tijd | Gebeurtenis | Bron |
+| --- | --- | --- |
+| 08:00 | Eerste melding met extra tekst die op tweehonderd procent moet omlopen | Servicedesk |
+| 08:30 | Onderzoek gestart met behoud van de volledige leesvolgorde | SOC |
+| onbekend | Hersteld en gecontroleerd door een derde bron | Beheer |''';
+
+    await tester.pumpWidget(
+      MaterialApp(
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: const TextScaler.linear(2)),
+          child: child!,
+        ),
+        home: const Scaffold(
+          body: SingleChildScrollView(child: DocumentMarkdownView(source)),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    final events = [
+      'Eerste melding met extra tekst die op tweehonderd procent moet omlopen',
+      'Onderzoek gestart met behoud van de volledige leesvolgorde',
+      'Hersteld en gecontroleerd door een derde bron',
+    ];
+    for (final event in events) {
+      expect(find.semantics.byLabel(event), findsOneWidget);
+    }
+    expect(
+      events.map((event) => tester.getTopLeft(find.text(event)).dy),
+      orderedEquals(
+        events.map((event) => tester.getTopLeft(find.text(event)).dy).toList()
+          ..sort(),
+      ),
+    );
+    semantics.dispose();
+  });
 }

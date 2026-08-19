@@ -62,6 +62,7 @@ class MarkdownNotesEditor extends StatefulWidget {
   /// Doorgegeven aan de Quill-editor in de visuele stand; zie
   /// [WysiwygNotesField.editorKey].
   final GlobalKey<EditorState>? editorKey;
+  final VoidCallback? onDiscreteVisualEdit;
 
   /// Verhoog om de editor naar [revealMarkdownOffset] / [revealTitle] te laten
   /// springen (Overzicht-rail). Quill zoekt op titel in platte tekst; markdown-
@@ -121,6 +122,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.surfaceStyle = NotesSurfaceStyle.panel,
     this.documentMaxWidth,
     this.editorKey,
+    this.onDiscreteVisualEdit,
     this.revealSignal = 0,
     this.revealMarkdownOffset,
     this.revealTitle,
@@ -619,6 +621,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       bordered: _fieldBordered,
       tryConsumePaste: widget.tryConsumePaste,
       editorKey: widget.editorKey,
+      onDiscreteVisualEdit: widget.onDiscreteVisualEdit,
     );
   }
 
