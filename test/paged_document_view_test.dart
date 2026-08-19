@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/services/document_footnote_setup.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
@@ -18,6 +19,9 @@ void main() {
     PageMargins margins = const PageMargins(),
     FootnotePlacement footnotes = FootnotePlacement.page,
     double textScale = 1,
+    ThemeProfile? profile,
+    TlpLevel tlp = TlpLevel.none,
+    Map<String, String> fields = const {},
   }) async {
     await tester.binding.setSurfaceSize(const Size(1200, 1400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -30,6 +34,9 @@ void main() {
               markdown: markdown,
               pageSize: size,
               margins: margins,
+              profile: profile,
+              tlp: tlp,
+              fields: fields,
               footnotePlacement: footnotes,
             ),
           ),
@@ -119,12 +126,9 @@ void main() {
         '| --- | --- |\n'
         '$events',
         size: const PageSizeSpec(series: PaperSeries.a, number: 6),
-        margins: const PageMargins(
-          topMm: 10,
-          rightMm: 10,
-          bottomMm: 10,
-          leftMm: 10,
-        ),
+        margins: const PageMargins.uniform(0),
+        profile: const ThemeProfile(documentHeaderText: 'Kop'),
+        tlp: TlpLevel.red,
       );
 
       final pages = find.byKey(const Key('document-page-window'));
@@ -133,6 +137,29 @@ void main() {
       );
       expect(pages.evaluate().length, greaterThan(1));
       expect(continuations, findsWidgets);
+      for (var i = 0; i < continuations.evaluate().length; i++) {
+        final continuation = continuations.at(i);
+        final sheet = find.ancestor(
+          of: continuation,
+          matching: find.byKey(const Key('document-sheet')),
+        );
+        final header = find.descendant(
+          of: sheet,
+          matching: find.byKey(const Key('document-header-band')),
+        );
+        final window = find.descendant(
+          of: sheet,
+          matching: find.byKey(const Key('document-page-window')),
+        );
+        expect(
+          tester.getTopLeft(continuation).dy,
+          greaterThanOrEqualTo(tester.getBottomLeft(header).dy),
+        );
+        expect(
+          tester.getBottomLeft(continuation).dy,
+          lessThanOrEqualTo(tester.getTopLeft(window).dy),
+        );
+      }
       for (var i = 0; i < 19; i++) {
         final event = find.textContaining('Gebeurtenis $i');
         expect(event, findsWidgets);
@@ -341,6 +368,120 @@ void main() {
       find.byKey(const Key('document-page-window')).first,
     );
     expect(window.height, closeTo((297 - 25 - 25) * kPxPerMm, 1));
+  });
+
+  testWidgets('één TLP geldt in kop en voet op ieder vel', (tester) async {
+    final long = List.generate(
+      60,
+      (i) => 'Alinea $i met genoeg tekst om meerdere vellen te vullen.',
+    ).join('\n\n');
+
+    await pumpDoc(tester, long);
+    final pagesWithoutTlp = sheetSizes(tester).length;
+    final heightsWithoutTlp = [
+      for (final element
+          in find.byKey(const Key('document-page-window')).evaluate())
+        (element.renderObject! as RenderBox).size.height,
+    ];
+    expect(find.byKey(const Key('document-header-tlp')), findsNothing);
+    expect(find.byKey(const Key('document-footer-tlp')), findsNothing);
+
+    await pumpDoc(tester, long, tlp: TlpLevel.red);
+    final pagesWithTlp = sheetSizes(tester).length;
+    final heightsWithTlp = [
+      for (final element
+          in find.byKey(const Key('document-page-window')).evaluate())
+        (element.renderObject! as RenderBox).size.height,
+    ];
+
+    expect(pagesWithTlp, pagesWithoutTlp);
+    expect(pagesWithTlp, greaterThan(1));
+    expect(heightsWithTlp, heightsWithoutTlp);
+    expect(
+      find.byKey(const Key('document-header-tlp')),
+      findsNWidgets(pagesWithTlp),
+    );
+    expect(
+      find.byKey(const Key('document-footer-tlp')),
+      findsNWidgets(pagesWithTlp),
+    );
+    expect(find.text('TLP:RED'), findsNWidgets(pagesWithTlp * 2));
+  });
+
+  testWidgets('TLP blijft zichtbaar bij nulmarges', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: PagedDocumentView(
+            markdown: 'Tekst.',
+            pageSize: PageSizeSpec.a4,
+            margins: PageMargins(topMm: 0, bottomMm: 0, leftMm: 0, rightMm: 0),
+            profile: ThemeProfile.vigilis,
+            tlp: TlpLevel.red,
+            fields: {'title': 'Rapport', 'author': 'Ada Lovelace'},
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('document-header-tlp')), findsOneWidget);
+    expect(find.byKey(const Key('document-footer-tlp')), findsOneWidget);
+    expect(
+      tester.getSize(find.byKey(const Key('document-header-band'))).height,
+      greaterThan(0),
+    );
+    final headerBottom = tester
+        .getBottomLeft(find.byKey(const Key('document-header-band')))
+        .dy;
+    final textTop = tester
+        .getTopLeft(find.byKey(const Key('document-page-window')))
+        .dy;
+    final footerTop = tester
+        .getTopLeft(find.byKey(const Key('document-footer-band')))
+        .dy;
+    final textBottom = tester
+        .getBottomLeft(find.byKey(const Key('document-page-window')))
+        .dy;
+    expect(textTop, greaterThanOrEqualTo(headerBottom));
+    expect(textBottom, lessThanOrEqualTo(footerTop));
+    expect(
+      tester.getSize(find.byKey(const Key('document-footer-band'))).height,
+      greaterThan(0),
+    );
+  });
+
+  testWidgets('opgeloste kop en voet worden op ieder vel herhaald', (
+    tester,
+  ) async {
+    final long = List.generate(
+      60,
+      (i) => 'Alinea $i met genoeg tekst om meerdere vellen te vullen.',
+    ).join('\n\n');
+    const profile = ThemeProfile(
+      documentHeaderText: '{title} · {project-id}',
+      documentFooterText: '{author}',
+    );
+
+    await pumpDoc(
+      tester,
+      long,
+      profile: profile,
+      fields: const {
+        'title': 'Kwartaalaudit',
+        'project-id': 'P42',
+        'author': 'Ada Lovelace',
+      },
+    );
+
+    final pages = sheetSizes(tester).length;
+    expect(pages, greaterThan(1));
+    expect(find.byKey(const Key('document-header-text')), findsNWidgets(pages));
+    expect(find.byKey(const Key('document-footer-text')), findsNWidgets(pages));
+    expect(find.text('Kwartaalaudit · P42'), findsNWidgets(pages));
+    expect(find.text('Ada Lovelace'), findsNWidgets(pages));
+    expect(find.textContaining('{title}'), findsNothing);
+    expect(find.textContaining('{author}'), findsNothing);
   });
 
   // Zonder stijlprofiel draagt geen enkel vel een kop- of voetband, en dus ook

@@ -674,6 +674,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bijvoorbeeld project-id': 'Bygelyks project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'In dokumint kin maksimaal 100 frije fjilden befetsje.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'In fjildwearde mei maksimaal 4096 tekens befetsje.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Brûk {naam} yn de kop- of fuottekst.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'De namme is ûnjildich, reservearre of net unyk.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markearrings hawwe gjin werkenbere folchoardwearde. Se bliuwe sichtber.',
   'Tijdlijn · vervolg': 'Tiidline · ferfolch',
@@ -947,8 +956,6 @@ const _dutchSourceAddFy = {
   'Tabel geplakt': 'Tabel plakt',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Foegje in map ta of brûk "Blêdzje" foar ien bestân.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Selfstannich pakket mei markdown en ôfbyldingen — opsjoneel fersifere (AES-256), te iepenjen yn OciDeck.',
   'dia\'s uit dit document.': 'dia\'s út dit dokumint.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'It logo fan dizze stylprofyl is net fûn en wurdt net toand (paad: {pad}). Kies in logo yn de presintaasjeynstellings.',

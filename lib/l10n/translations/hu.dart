@@ -1641,6 +1641,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bijvoorbeeld project-id': 'Például project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Egy dokumentum legfeljebb 100 egyéni mezőt tartalmazhat.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Egy mezőérték legfeljebb 4096 karaktert tartalmazhat.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Használja a(z) {naam} mezőt a fejlécben vagy a láblécben.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'A név érvénytelen, fenntartott vagy nem egyedi.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'A jelölőknek nincs felismerhető rendezési értékük. Láthatók maradnak.',
   'Tijdlijn · vervolg': 'Idővonal · folytatás',
@@ -1915,8 +1924,6 @@ const _dutchSourceAddHu = <String, String>{
   'Tabel geplakt': 'Táblázat beillesztve',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Adjon hozzá mappát, vagy használja a "Tallózás" lehetőséget egy fájlhoz.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Önálló csomag markdownnal és képekkel — opcionálisan titkosítva (AES-256), OciDeckben nyílik meg.',
   'dia\'s uit dit document.': 'dia ebből a dokumentumból.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ezen stílusrprofil logója nem található és nem jelenik meg (útvonal: {pad}). Válasszon egy logót a bemutató beállításaiban.',

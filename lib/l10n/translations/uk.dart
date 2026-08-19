@@ -1655,6 +1655,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bijvoorbeeld project-id': 'Наприклад, project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Документ може містити щонайбільше 100 власних полів.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Значення поля може містити щонайбільше 4096 символів.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Використовуйте {naam} у верхньому або нижньому колонтитулі.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Назва недійсна, зарезервована або неунікальна.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Позначки не мають розпізнаваного значення порядку. Вони залишаються видимими.',
   'Tijdlijn · vervolg': 'Часова шкала · продовження',
@@ -1926,8 +1935,6 @@ const _dutchSourceAddUk = <String, String>{
   'Tabel geplakt': 'Таблицю вставлено',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Додайте теку або скористайтеся "Огляд" для одного файлу.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Автономний пакет з markdown і зображеннями — за бажанням зашифрований (AES-256), відкривається в OciDeck.',
   'dia\'s uit dit document.': 'слайдів із цього документа.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логотип цього профілю стилю не знайдено й не показано (шлях: {pad}). Виберіть логотип у налаштуваннях презентації.',

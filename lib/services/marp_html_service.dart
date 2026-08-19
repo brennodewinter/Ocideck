@@ -35,6 +35,7 @@ import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
 import 'cvss/cvss4.dart';
 import 'export_metadata.dart';
+import 'document_chrome_template.dart';
 import 'improvement/matrix_layout.dart';
 import 'improvement/matrix_slide.dart';
 import 'improvement/matrix_spec.dart';
@@ -152,6 +153,7 @@ class MarpHtmlService {
     ThemeProfile? theme,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     ExportDocumentMetadata? metadata,
+    Map<String, String> documentFields = const {},
     String fallbackTitle = 'Presentatie',
     HtmlImageResolver? embedImage,
     int maxEmbedBytes = kMaxHtmlEmbedTotalBytes,
@@ -186,19 +188,21 @@ class MarpHtmlService {
     // executed) and intentionally carry no nonce.
     final nonce = _htmlNonce();
 
+    final docMeta = metadata ?? const ExportDocumentMetadata();
     final embedded = await _embedHtmlImages(
       deckMarkdown,
       embedImage,
       maxEmbedBytes,
       continuous,
       theme,
+      docMeta.tlp,
+      documentFields,
       this,
     );
     // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
     // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
     // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
     // terugvalpad, niet de hoofdroute.
-    final docMeta = metadata ?? const ExportDocumentMetadata();
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
         : signatureFields(embedded.markdown);
@@ -235,11 +239,17 @@ class MarpHtmlService {
     // _htmlText, niet _htmlAttr: dit is tekstinhoud van <h1>, geen attribuut.
     final h1Title = _htmlText(meta.displayTitle(fallbackTitle));
     final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
+    final classificationBanner = (!continuous && meta.htmlClassification != null
+        ? '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>'
+        : '');
+    final reserveDocumentChrome = _hasPrintableDocumentChrome(
+      continuous,
+      theme,
+      docMeta,
+    );
     final banner =
-        (meta.htmlClassification == null
-            ? ''
-            : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>') +
-        _aiBanner(meta);
+        classificationBanner +
+        _aiBanner(meta, classificationBanner: classificationBanner.isNotEmpty);
 
     // Het presentatielogo op elke logo-dia, zoals de app, de beamer en de
     // PDF/PPTX het tonen. Alleen in de dia-modus: de doorlopende documentmodus
@@ -256,7 +266,7 @@ class MarpHtmlService {
         '$headMeta'
         '<style>${exportBaseCss()}\n$css\n$hljsCss'
         '${chapterPageBreak ? _chapterPageBreakCss : ''}'
-        '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss</style>'
+        '${_pageAtRuleCss(pageSize, pageMargins, reserveDocumentChrome: reserveDocumentChrome, theme: theme, tlp: docMeta.tlp)}$logoCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'
@@ -932,32 +942,6 @@ class MarpHtmlService {
         .replaceAll('&', '&amp;')
         .replaceAll('"', '&quot;')
         .replaceAll('<', '&lt;');
-  }
-
-  /// De zichtbare AI-melding boven aan de HTML-export, of leeg wanneer er niets
-  /// te melden valt.
-  ///
-  /// Dit is de enige uitvoer waarin de melding te *zien* is in plaats van
-  /// alleen in de documenteigenschappen te staan, en dat is geen toeval: HTML
-  /// wordt op een scherm gelezen, waar een balk bovenaan de bestaande manier is
-  /// om de lezer iets over het hele document te vertellen (de TLP-balk zit er
-  /// al). Op een geprint vel zou dezelfde balk de dia's verdringen.
-  ///
-  /// De balk staat onder de TLP-balk wanneer die er is: welk stuk je voor je
-  /// hebt gaat vóór hoe zeker het is.
-  static String _aiBanner(ExportDocumentMetadata meta) {
-    if (!meta.hasUnreviewedAi) return '';
-    const l10n = AppLocalizations(Locale('nl'));
-    // Eén zin, geen telling: het aantal dia's staat in de meta-tag, waar een
-    // gereedschap het uitleest. Voor de lezer verandert er niets aan de
-    // strekking of het er één of zeven zijn — en een telling in de zin kost in
-    // 31 talen een meervoudsregeling die niets toevoegt.
-    final text = l10n.d(
-      'Concept: hier staat AI-tekst die nog niemand heeft nagekeken',
-    );
-    final top = meta.htmlClassification == null ? '0' : '2.4em';
-    return '<div class="ai-export-banner" style="top:$top">'
-        '${_htmlText(text)}</div>';
   }
 
   static String _htmlHeadMeta(

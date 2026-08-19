@@ -31,9 +31,11 @@
 import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
+import '../../models/settings.dart' show ThemeProfile;
 import '../../models/slide.dart';
 import '../../models/used_tool.dart';
 import '../miauw_codec.dart';
+import '../document_chrome_template.dart';
 import '../slide_image_refs.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
@@ -248,6 +250,7 @@ class PrivacyProjection {
         footer: deckField('marpFooter', deck.marpStyle.footer),
       );
     }
+    final projectedDocumentFields = _projectDocumentFields(deck, deckField);
     final projected = deck.copyWith(
       slides: projectedSlides.slides,
       title: deckField('deckTitle', deck.title),
@@ -261,6 +264,12 @@ class PrivacyProjection {
       // gebruiker met "redigeren" niet kón oplossen.
       version: deckField('version', deck.version),
       date: deckField('date', deck.date),
+      themeProfile: _projectDocumentTheme(
+        deck,
+        deckField,
+        projectedDocumentFields.renamedKeys,
+      ),
+      documentFields: projectedDocumentFields.fields,
       marpStyle: projectedDeckMarpStyle,
       standardsUsed: [
         for (var i = 0; i < deck.standardsUsed.length; i++)
@@ -603,4 +612,84 @@ _ProjectedSlides _projectSlides(
     slides.add(projected.slide.copyWith(privacy: disposition));
   }
   return (slides: slides, count: count, shielded: shielded);
+}
+
+typedef _DeckFieldProjector =
+    String Function(String field, String text, [int index]);
+
+({Map<String, String> fields, Map<String, String> renamedKeys})
+_projectDocumentFields(Deck deck, _DeckFieldProjector project) {
+  var customIndex = 0;
+  var redactedKeyIndex = 1;
+  final usedKeys = deck.documentFields.keys.toSet();
+  final result = <String, String>{};
+  final renamedKeys = <String, String>{};
+  for (final entry in deck.documentFields.entries) {
+    final value = switch (entry.key) {
+      'title' => project('deckTitle', deck.title),
+      'subtitle' => project('description', deck.description),
+      'author' => project('author', deck.author),
+      _ => project('documentFields', entry.value, customIndex),
+    };
+    var key = entry.key;
+    if (!const {'title', 'subtitle', 'author'}.contains(entry.key)) {
+      final projectedKey = project('documentFieldKeys', entry.key, customIndex);
+      customIndex++;
+      if (projectedKey != entry.key) {
+        do {
+          key = 'redacted-field-${redactedKeyIndex++}';
+        } while (usedKeys.contains(key) || result.containsKey(key));
+        renamedKeys[entry.key] = key;
+      }
+    }
+    result[key] = value;
+  }
+  return (fields: result, renamedKeys: renamedKeys);
+}
+
+ThemeProfile _projectDocumentTheme(
+  Deck deck,
+  _DeckFieldProjector project,
+  Map<String, String> renamedKeys,
+) => deck.themeProfile.copyWith(
+  documentHeaderText: _projectDocumentChrome(
+    deck,
+    'documentHeader',
+    deck.themeProfile.documentHeaderText,
+    project,
+    renamedKeys,
+  ),
+  documentFooterText: _projectDocumentChrome(
+    deck,
+    'documentFooter',
+    deck.themeProfile.documentFooterText,
+    project,
+    renamedKeys,
+  ),
+);
+
+String _projectDocumentChrome(
+  Deck deck,
+  String field,
+  String template,
+  _DeckFieldProjector project,
+  Map<String, String> renamedKeys,
+) {
+  final fields = {
+    ...deck.documentFields,
+    'title': deck.title,
+    'subtitle': deck.description,
+    'author': deck.author,
+  };
+  final raw = resolveDocumentChromeTemplate(
+    template,
+    fields,
+    escapeMarkdownValues: false,
+  );
+  final projected = project(field, raw);
+  if (projected != raw) return kRedactionToken;
+  return template.replaceAllMapped(
+    RegExp(r'\{([a-z][a-z0-9_-]*)\}'),
+    (match) => '{${renamedKeys[match.group(1)] ?? match.group(1)!}}',
+  );
 }

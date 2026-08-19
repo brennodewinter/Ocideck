@@ -9,20 +9,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
+import '../l10n/export_block_localization.dart';
 import '../l10n/page_size_localization.dart';
 import '../models/chart.dart';
+import '../models/deck.dart';
 import '../models/markdown_outline.dart';
 import '../models/page_size.dart';
 import '../models/privacy_disposition.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/caption_service.dart';
+import '../services/classification_enforcement_policy.dart';
 import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
 import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
-import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
@@ -31,7 +33,6 @@ import '../services/markdown_table_codec.dart';
 import '../services/document_timeline.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
-import '../platform/platform_features.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
@@ -44,9 +45,9 @@ import '../state/settings_provider.dart'
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import '../utils/document_front_matter.dart';
 import '../utils/error_snackbar.dart';
 import '../utils/image_search_paths.dart';
-import '../utils/log.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
@@ -54,11 +55,9 @@ import '../utils/markdown_paste_cleanup.dart';
 import '../utils/markdown_visual_compatibility.dart'
     show markdownRoundTripsVisually;
 import '../utils/table_clipboard.dart';
-import '../utils/user_facing_error.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
-import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'document_page_chrome.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
@@ -72,6 +71,7 @@ import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
+part 'parts/document_fields_dialog.dart';
 part 'parts/document_editor_layouts.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
@@ -282,24 +282,23 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     DocumentExportFormat format,
   ) async {
     final state = ref.read(documentProvider);
+    final document = state.document;
+    if (document == null) return null;
     // Exporteer de *body* (zonder het stijl-frontmatter-blok): de `theme:`-regel
     // is een OciDeck-aanwijzing, geen inhoud, en de stijl reist als het gekozen
     // profiel mee via `theme:` hieronder — niet als tekst in de uitvoer.
-    final body = state.document?.body ?? '';
+    final body = document.body;
     final filePath = state.filePath;
     final projectPath = filePath == null ? null : p.dirname(filePath);
     final settings = ref.read(settingsProvider);
-    final exportSetup = effectiveDocumentPageSetup(
-      settings,
-      state.document?.source ?? '',
-    );
+    final exportSetup = effectiveDocumentPageSetup(settings, document.source);
     final fileService = ref.read(fileServiceProvider);
     final imageService = ref.read(imageServiceProvider);
     final markdownService = ref.read(markdownServiceProvider);
     final l10n = context.l10n;
-    final title = _documentTitle(body, filePath);
+    final title = document.fields['title'] ?? _documentTitle(body, filePath);
     final effectiveTheme =
-        resolveDocumentStyleProfile(settings, state.document?.styleName) ??
+        resolveDocumentStyleProfile(settings, document.styleName) ??
         fileService.activeProfileFor(projectPath: projectPath);
 
     // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
@@ -314,17 +313,29 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       markdownService: markdownService,
       title: title,
       theme: effectiveTheme,
+      tlp: document.tlp,
+      fields: document.fields,
     );
 
-    if (format == DocumentExportFormat.ocideck) {
-      return _writePackageExport(bundle);
+    final classificationDecision =
+        ClassificationEnforcementPolicy.fromAppSettings(
+          settings,
+        ).evaluate(bundle.audience.deck.tlp);
+    if (!classificationDecision.allowed) {
+      if (!mounted) return null;
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        exportBlockMessage(l10n, classificationDecision) ?? '',
+      );
+      return null;
     }
 
     final outputPath = await _pickDocumentExportPath(
       l10n,
       format: format,
       profile: profile,
-      title: title,
+      title: bundle.audience.deck.title,
       projectPath: projectPath,
     );
     if (outputPath == null) return null;
@@ -333,14 +344,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       bundle,
       format,
       html: MarpHtmlService(),
-      // De documentstijl stuurt de export: het opgeloste profiel (afdwingen →
-      // per-document `theme:` → standaard), en anders het projectprofiel zoals
-      // voorheen — zo verandert een plat document zonder stijl niets.
-      theme: bundle.audience.deck.themeProfile,
-      metadata: ExportDocumentMetadata(
-        title: title,
-        language: l10n.languageCode,
+      enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
+        settings,
       ),
+      metadata: ExportDocumentMetadata(language: l10n.languageCode),
       embedImage: (src) => _embedDocumentExportImage(
         src,
         imageService: imageService,
@@ -361,36 +368,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Exporteer het geprojecteerde document als `.ocideck`-pakket (markdown +
-  /// assets), met dezelfde versleutelingsdialoog als bij een presentatie.
-  Future<String?> _writePackageExport(ExportBundle bundle) async {
-    if (!mounted) return null;
-    final choice = await PackageEncryptDialog.show(context);
-    if (choice == null || !mounted) return null;
-    final password = choice.encrypt ? choice.password : null;
-    final fileService = ref.read(fileServiceProvider);
-    final l10n = context.l10n;
-    final deck = bundle.audience.deck;
-    try {
-      if (isWebPlatform) {
-        return await fileService.downloadPackage(deck, password: password);
-      }
-      final picked = await fileService.pickPackageDestination(deck);
-      if (picked == null) return null;
-      await fileService.exportPackage(deck, picked, password: password);
-      return picked;
-    } catch (e) {
-      logError('DocumentEditor: pakketexport mislukt', e);
-      if (!mounted) return null;
-      showErrorSnackBar(
-        ScaffoldMessenger.of(context),
-        l10n,
-        '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
-      );
-      return null;
-    }
-  }
-
   /// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
   /// (DOCUMENT_MODE.md §11.3). Een expliciete kopie: dit document blijft
   /// ongemoeid. De dialoog toont het voorgestelde aantal dia's en de drop-lijst
@@ -406,14 +383,22 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // voorgestelde aantal dia's én voor het nieuwe deck. Bewust niet
     // generateDeck→parseDeck: dat zou een kop-geleide sectie via `_inferSlideType`
     // weer stil kunnen laten vallen (§11.3, §11.5). De nieuwe presentatie is een
-    // kopie; er reist geen zegel mee.
-    final deck = DocumentDeckBridge.documentToDeck(body, title: title);
+    // kopie. De documentclassificatie blijft gelden voor alle ontstane dia's;
+    // alleen documentvelden en documentstijl zijn geen presentatiegegevens.
+    final documentTlp = state.document?.tlp ?? TlpLevel.none;
+    final deck = DocumentDeckBridge.documentToDeck(
+      body,
+      title: title,
+      tlp: documentTlp,
+    );
     final confirmed = await ConvertToPresentationDialog.show(
       context,
       slideCount: deck.slides.length,
     );
     if (confirmed != true || !mounted) return;
-    ref.read(tabsProvider.notifier).newDeckInNewTab(title, slides: deck.slides);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInNewTab(title, tlp: deck.tlp, slides: deck.slides);
   }
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
@@ -488,6 +473,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final docStyleName = ref.watch(
       documentProvider.select((s) => s.document?.styleName),
     );
+    final documentTlp = _documentTlp(ref);
+    final fields = ref.watch(
+      documentProvider.select((state) => state.document?.fields ?? const {}),
+    );
     final styleProfile = resolveDocumentStyleProfile(settings, docStyleName);
     _styleProfile = styleProfile;
     final theme = Theme.of(context);
@@ -524,6 +513,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 context,
                 initialSection: SettingsSection.presentation,
               ),
+              onEditFields: () => unawaited(_editDocumentFields(context, ref)),
               onConvertToPresentation: _convertToPresentation,
               controller: _controller,
               editorFocus: _editorFocus,
@@ -538,6 +528,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                   ? settings.documentDefaultStyle
                   : null,
               onStyleChanged: (name) => _setDocumentStyle(ref, name),
+              tlp: documentTlp,
+              onTlpChanged: (level) => _setDocumentTlp(ref, level),
               showPageBreaks: _showPageBreaks,
               onShowPageBreaksChanged: (v) =>
                   setState(() => _showPageBreaks = v),
@@ -560,18 +552,24 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                     theme,
                     source,
                     constraints,
+                    tlp: documentTlp,
+                    fields: fields,
                   ),
                   _DocViewMode.source => _sourceLayout(
                     theme,
                     source,
                     constraints,
+                    tlp: documentTlp,
+                    fields: fields,
                   ),
                   _DocViewMode.pages => _documentPagesLayout(
                     ref,
                     theme,
                     source,
                     style: _styleProfile,
-                    projectPath: _projectPath,
+                    projectPath: _documentProjectPath(ref),
+                    tlp: documentTlp,
+                    fields: fields,
                   ),
                 },
               ),
@@ -760,19 +758,18 @@ Future<String?> _pickDocumentExportPath(
   required String title,
   required String? projectPath,
 }) async {
-  final ext = switch (format) {
-    DocumentExportFormat.md => 'md',
-    DocumentExportFormat.html => 'html',
-    DocumentExportFormat.latex => 'tex',
-    DocumentExportFormat.ocideck => 'ocideck',
-  };
-  final tag = profile == PrivacyExportProfile.redacted
-      ? l10n.d('geredigeerd')
-      : l10n.d('volledig');
-  final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
+  final fileName = suggestedDocumentExportFileName(
+    title: title,
+    format: format,
+    profile: profile,
+    redactedLabel: l10n.d('geredigeerd'),
+    fullLabel: l10n.d('volledig'),
+    fallbackLabel: l10n.d('document'),
+  );
+  final ext = fileName.split('.').last;
   final dest = await pickDocumentExportDestination(
     dialogTitle: l10n.t('export'),
-    fileName: '$base-$tag.$ext',
+    fileName: fileName,
     initialDirectory: projectPath,
   );
   if (dest == null) return null;
@@ -797,37 +794,70 @@ Future<String?> _embedDocumentExportImage(
   return encoded == null ? null : htmlImageDataUri(encoded);
 }
 
-Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
-  if (profile == null || !_hasDocumentChrome(profile)) return editor;
+Widget _styledDocumentSurface(
+  ThemeProfile? profile,
+  Widget editor, {
+  required TlpLevel tlp,
+  required Map<String, String> fields,
+}) {
+  final chromeProfile = profile ?? const ThemeProfile();
+  if (!_hasDocumentChrome(chromeProfile, tlp)) return editor;
   return ColoredBox(
-    color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+    color: AppTheme.parseHexColor(chromeProfile.slideBackgroundColor),
     child: Column(
       children: [
-        DocumentChromeBand(profile: profile, header: true),
+        DocumentChromeBand(
+          profile: chromeProfile,
+          header: true,
+          tlp: tlp,
+          fields: fields,
+        ),
         Expanded(child: editor),
-        DocumentChromeBand(profile: profile, header: false),
+        DocumentChromeBand(
+          profile: chromeProfile,
+          header: false,
+          tlp: tlp,
+          fields: fields,
+        ),
       ],
     ),
   );
 }
 
-Widget _styledDocumentBody(ThemeProfile? profile, Widget body) {
-  if (profile == null || !_hasDocumentChrome(profile)) return body;
+Widget _styledDocumentBody(
+  ThemeProfile? profile,
+  Widget body, {
+  required TlpLevel tlp,
+  required Map<String, String> fields,
+}) {
+  final chromeProfile = profile ?? const ThemeProfile();
+  if (!_hasDocumentChrome(chromeProfile, tlp)) return body;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      DocumentChromeBand(profile: profile, header: true),
+      DocumentChromeBand(
+        profile: chromeProfile,
+        header: true,
+        tlp: tlp,
+        fields: fields,
+      ),
       body,
-      DocumentChromeBand(profile: profile, header: false),
+      DocumentChromeBand(
+        profile: chromeProfile,
+        header: false,
+        tlp: tlp,
+        fields: fields,
+      ),
     ],
   );
 }
 
-bool _hasDocumentChrome(ThemeProfile profile) =>
+bool _hasDocumentChrome(ThemeProfile profile, TlpLevel tlp) =>
     profile.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
     profile.documentHeaderText.trim().isNotEmpty ||
     profile.documentFooterText.trim().isNotEmpty ||
-    profile.documentShowPageNumbers;
+    profile.documentShowPageNumbers ||
+    tlp != TlpLevel.none;
 
 /// De documenttitel voor export en conversie: de eerste `# `-kop, anders de
 /// bestandsnaam zonder extensie, anders leeg. Top-level zodat het bewerkscherm
@@ -854,6 +884,16 @@ MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, ThemeProfile? profile) =>
       documentTypography: true,
     );
 
+Future<void> _editDocumentFields(BuildContext context, WidgetRef ref) async {
+  final document = ref.read(documentProvider).document;
+  if (document == null) return;
+  final fields = await _showDocumentFieldsDialog(context, document.fields);
+  if (fields == null || !context.mounted) return;
+  ref
+      .read(documentProvider.notifier)
+      .edit(document.withFields(fields).source, coalesceKey: null);
+}
+
 /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De
 /// editor bewerkt alleen de body; elke terugschrijf zet de frontmatter er weer
 /// vóór zodat `document.source` byte-getrouw blijft.
@@ -873,6 +913,20 @@ void _setDocumentStyle(WidgetRef ref, String? name) {
   ref
       .read(documentProvider.notifier)
       .edit(doc.withStyleName(name).source, coalesceKey: null);
+}
+
+TlpLevel _documentTlp(WidgetRef ref) => ref.watch(
+  documentProvider.select((state) => state.document?.tlp ?? TlpLevel.none),
+);
+
+/// Eén bewuste classificatiekeuze is één ongedaan-stap. De broneditor krijgt
+/// alleen de body en hoeft dus niet te verspringen wanneer de front matter wijzigt.
+void _setDocumentTlp(WidgetRef ref, TlpLevel level) {
+  final doc = ref.read(documentProvider).document;
+  if (doc == null || doc.tlp == level) return;
+  ref
+      .read(documentProvider.notifier)
+      .edit(doc.withTlp(level).source, coalesceKey: null);
 }
 
 /// De weergavemodus van de documenteditor. Manieren om naar hetzelfde document

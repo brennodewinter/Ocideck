@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/deck.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart'
     show ThemeProfile, kDocumentDefaultBodyFontSize;
@@ -16,6 +17,7 @@ import 'document_markdown_view.dart';
 /// dus dit is dezelfde maat als waarin de HTML-export haar pagina uitmeet — een
 /// A4 wordt hier net zo breed als daar.
 const double kPxPerMm = 96 / 25.4;
+const double _documentChromeMinHeightPx = 56;
 
 /// De tekstbreedte van één pagina in beeldpunten: de paginabreedte min de
 /// zijmarges. Puur, en hier thuis omdat dit dezelfde paginameetkunde is als
@@ -50,6 +52,8 @@ class PagedDocumentView extends StatefulWidget {
     this.scale = 1.0,
     this.chapterPageBreak = false,
     this.footnotePlacement = FootnotePlacement.page,
+    this.tlp = TlpLevel.none,
+    this.fields = const {},
   });
 
   final String markdown;
@@ -69,6 +73,10 @@ class PagedDocumentView extends StatefulWidget {
   /// achterin het document. Komt uit de front matter van het document zelf
   /// (`reference-location:`); zie [documentFootnotePlacement].
   final FootnotePlacement footnotePlacement;
+
+  /// De ene classificatie van het hele document, zichtbaar op elk vel.
+  final TlpLevel tlp;
+  final Map<String, String> fields;
 
   @override
   State<PagedDocumentView> createState() => _PagedDocumentViewState();
@@ -225,7 +233,46 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
 
   double get _contentHeightPx {
     final (_, h) = widget.pageSize.dimensions;
-    return (h - widget.margins.topMm - widget.margins.bottomMm) * kPxPerMm;
+    final pageHeight = h * kPxPerMm;
+    return pageHeight - _contentTopPx - _contentBottomPx;
+  }
+
+  bool get _hasPageChrome =>
+      widget.profile != null || widget.tlp != TlpLevel.none;
+
+  double get _chromeTopInsetPx =>
+      _contentInsetPx(widget.margins.topMm, header: true);
+
+  double get _timelineContinuationRoomPx =>
+      _hasPageChrome && _timelinePagination.blocks.isNotEmpty ? 28 : 0;
+
+  double get _contentTopPx => _chromeTopInsetPx + _timelineContinuationRoomPx;
+
+  double get _contentBottomPx =>
+      _contentInsetPx(widget.margins.bottomMm, header: false);
+
+  double _contentInsetPx(double marginMm, {required bool header}) {
+    final margin = marginMm * kPxPerMm;
+    final minimum = _chromeMinimumPx(header);
+    return _hasPageChrome && margin < minimum ? minimum : margin;
+  }
+
+  double _chromeMinimumPx(bool header) {
+    final profile = widget.profile;
+    if (profile == null) return _documentChromeMinHeightPx;
+    final path = profile.effectiveDocumentLogoPath?.trim() ?? '';
+    final logoInBand =
+        path.isNotEmpty &&
+        profile.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
+    if (!logoInBand) return _documentChromeMinHeightPx;
+    final logoWidth = (profile.effectiveDocumentLogoSize * 0.45).clamp(
+      36.0,
+      144.0,
+    );
+    final logoHeight = (logoWidth * 0.5).clamp(22.0, 72.0) + 13;
+    return logoHeight > _documentChromeMinHeightPx
+        ? logoHeight
+        : _documentChromeMinHeightPx;
   }
 
   @override
@@ -418,19 +465,29 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
     top: header ? bleedPx : null,
     bottom: header ? null : bleedPx,
-    height:
-        (header ? widget.margins.topMm : widget.margins.bottomMm) * kPxPerMm,
+    height: _chromeBandHeight(
+      header ? widget.margins.topMm : widget.margins.bottomMm,
+      header: header,
+    ),
     child: Align(
       alignment: header ? Alignment.bottomCenter : Alignment.topCenter,
       child: DocumentChromeBand(
         profile: profile,
         header: header,
+        tlp: widget.tlp,
+        fields: widget.fields,
         pageLabel: '$pageNumber',
         projectPath: widget.projectPath,
         compact: true,
       ),
     ),
   );
+
+  double _chromeBandHeight(double marginMm, {required bool header}) {
+    final marginHeight = marginMm * kPxPerMm;
+    final minimum = _chromeMinimumPx(header);
+    return marginHeight < minimum ? minimum : marginHeight;
+  }
 
   /// Eén vel: papier, afloopmarkering, kop- en voetband en het venster op het
   /// doorlopende document dat op deze pagina hoort.
@@ -449,6 +506,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     final bleedPx = widget.margins.bleedMm * kPxPerMm;
     final theme = Theme.of(context);
     final profile = widget.profile;
+    final chrome = profile ?? const ThemeProfile();
     final page = Container(
       width: sheetW,
       height: sheetH,
@@ -475,13 +533,13 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           // dan aten ze hoogte op waar de paginaverdeling al over had beschikt,
           // en verdween er onderaan elk vel een stuk tekst dat nergens meer
           // terugkwam.
-          if (profile != null) ...[
-            _chromeBand(profile, bleedPx, pageNumber, header: true),
-            _chromeBand(profile, bleedPx, pageNumber, header: false),
+          if (profile != null || widget.tlp != TlpLevel.none) ...[
+            _chromeBand(chrome, bleedPx, pageNumber, header: true),
+            _chromeBand(chrome, bleedPx, pageNumber, header: false),
           ],
           Positioned(
             left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
-            top: (widget.margins.topMm * kPxPerMm) + bleedPx,
+            top: _contentTopPx + bleedPx,
             width: _contentWidthPx,
             // Precies het stuk document dat op dit vel hoort: niet een volle
             // paginahoogte, maar tot waar het volgende vel begint.
@@ -515,7 +573,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
             Positioned(
               left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
               right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
-              bottom: (widget.margins.bottomMm * kPxPerMm) + bleedPx,
+              bottom: _contentBottomPx + bleedPx,
               child: DocumentFootnotesView(
                 notes: notes,
                 themeProfile: widget.profile,
@@ -588,7 +646,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     key: const Key('document-timeline-continuation'),
     left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
     right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
-    top: bleedPx + 4,
+    top: _chromeTopInsetPx + bleedPx + 4,
     child: Text(
       marker.isEmpty
           ? context.l10n.d('Tijdlijn · vervolg')

@@ -6,16 +6,20 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/document_footnote_setup.dart';
+import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_style.dart';
 import 'package:ocideck/services/export_bundle.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:ocideck/utils/document_front_matter.dart';
 import 'package:path/path.dart' as p;
@@ -35,7 +39,10 @@ void main() {
 
   const body = '# Rapport\n\nEen alinea met UNIEKPROZA.\n';
 
-  Future<void> withBundle(Future<void> Function(ExportBundle bundle) fn) async {
+  Future<void> withBundle(
+    Future<void> Function(ExportBundle bundle) fn, {
+    TlpLevel tlp = TlpLevel.none,
+  }) async {
     final bundle = await buildDocumentExportBundle(
       body,
       projectPath: null,
@@ -45,6 +52,7 @@ void main() {
       disabledRules: const {},
       markdownService: MarkdownService(),
       title: 'Rapport',
+      tlp: tlp,
     );
     await fn(bundle);
   }
@@ -56,6 +64,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
       expect(written, out);
@@ -65,6 +74,40 @@ void main() {
       expect(content.contains('marp: true'), isFalse);
     });
   });
+
+  test(
+    'document-TLP blijft deckbreed en reist één keer mee in Markdown',
+    () async {
+      await withBundle((bundle) async {
+        expect(bundle.audience.deck.tlp, TlpLevel.amber);
+        expect(
+          bundle.audience.deck.slides.every(
+            (slide) => slide.tlp == TlpLevel.none,
+          ),
+          isTrue,
+          reason:
+              'documentsecties zijn geen afzonderlijk geclassificeerde slides',
+        );
+
+        final out = p.join(temp.path, 'rapport.md');
+        await writeDocumentExport(
+          bundle,
+          DocumentExportFormat.md,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+          outputPath: out,
+        );
+        final content = await File(out).readAsString();
+
+        expect(content, startsWith('---\ntlp: amber\n---\n\n# Rapport'));
+        expect(
+          RegExp(r'^tlp:', multiLine: true).allMatches(content),
+          hasLength(1),
+        );
+        expect(content, isNot(contains('<!-- tlp:')));
+      }, tlp: TlpLevel.amber);
+    },
+  );
 
   test('exportbundel bewaart de opgeloste documentstijl', () async {
     final bundle = await buildDocumentExportBundle(
@@ -93,6 +136,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         pageSize: PageSizeSpec.fromId('A5')!,
         pageMargins: const PageMargins(
           topMm: 18,
@@ -121,6 +165,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
       final content = await File(out).readAsString();
@@ -139,6 +184,7 @@ void main() {
           bundle,
           DocumentExportFormat.md,
           html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
           pageSize: PageSizeSpec.a4,
           pageMargins: const PageMargins(bleedMm: 3),
           outputPath: out,
@@ -177,6 +223,7 @@ void main() {
       bundle,
       DocumentExportFormat.md,
       html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
       pageSize: PageSizeSpec.a4,
       pageMargins: const PageMargins(),
       outputPath: p.join(temp.path, 'export.md'),
@@ -203,6 +250,7 @@ void main() {
           bundle,
           DocumentExportFormat.md,
           html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
           pageSize: setup.size,
           pageMargins: setup.margins,
           outputPath: out,
@@ -226,6 +274,7 @@ void main() {
         bundle,
         DocumentExportFormat.html,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
       expect(written, out);
@@ -250,6 +299,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         footnotePlacement: FootnotePlacement.document,
         outputPath: out,
       );
@@ -269,6 +319,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         outputPath: out,
       );
       final content = await File(out).readAsString();
@@ -286,6 +337,7 @@ void main() {
         bundle,
         DocumentExportFormat.md,
         html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
         pageSize: PageSizeSpec.fromId('A5')!,
         pageMargins: const PageMargins(),
         footnotePlacement: FootnotePlacement.document,
@@ -298,5 +350,224 @@ void main() {
       expect(content.contains('papersize: a5'), isTrue);
       expect(content.contains('reference-location: document'), isTrue);
     });
+  });
+
+  test(
+    'HTML-export neemt de bundel-TLP over in documentkop en -voet',
+    () async {
+      await withBundle((bundle) async {
+        final out = p.join(temp.path, 'rapport-tlp.html');
+        await writeDocumentExport(
+          bundle,
+          DocumentExportFormat.html,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+          // Een aanroeper mag de classificatie uit de bundel niet per ongeluk
+          // wissen met een onvolledig metadata-object.
+          metadata: const ExportDocumentMetadata(
+            title: 'Rapport',
+            tlp: TlpLevel.none,
+          ),
+          outputPath: out,
+        );
+        final html = await File(out).readAsString();
+
+        expect(html, contains('name="classification" content="TLP:RED"'));
+        expect(html, contains('class="document-header"'));
+        expect(html, contains('class="document-footer"'));
+        expect('<span class="document-tlp"'.allMatches(html), hasLength(2));
+        expect(html, isNot(contains('<div class="tlp-export-banner"')));
+      }, tlp: TlpLevel.red);
+    },
+  );
+
+  test('Markdown-export schrijft bekende en vrije documentvelden', () async {
+    final bundle = await buildDocumentExportBundle(
+      body,
+      projectPath: null,
+      profile: PrivacyExportProfile.full,
+      ownIdentity: OwnIdentity.empty,
+      regions: defaultPrivacyRegions,
+      disabledRules: const {},
+      markdownService: MarkdownService(),
+      title: 'Terugvaltitel',
+      fields: const {
+        'title': 'Kwartaalaudit',
+        'subtitle': 'Bestuurlijke samenvatting',
+        'author': 'Ada Lovelace',
+        'project-id': 'P-42',
+      },
+    );
+    final out = p.join(temp.path, 'velden.md');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.md,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final content = await File(out).readAsString();
+
+    expect(documentFields(content), {
+      'title': 'Kwartaalaudit',
+      'subtitle': 'Bestuurlijke samenvatting',
+      'author': 'Ada Lovelace',
+      'project-id': 'P-42',
+    });
+    for (final key in ['title', 'subtitle', 'author', 'project-id']) {
+      expect(
+        RegExp('^$key:', multiLine: true).allMatches(content),
+        hasLength(1),
+        reason: key,
+      );
+    }
+    expect(documentBody(content), contains('UNIEKPROZA'));
+    expect(content, isNot(contains('theme:')));
+  });
+
+  test('HTML-export vult documentvelden in kop en voet in', () async {
+    const theme = ThemeProfile(
+      documentHeaderText: '{title} · {project-id}',
+      documentFooterText: '{author} — {subtitle}',
+    );
+    final bundle = await buildDocumentExportBundle(
+      body,
+      projectPath: null,
+      profile: PrivacyExportProfile.full,
+      ownIdentity: OwnIdentity.empty,
+      regions: defaultPrivacyRegions,
+      disabledRules: const {},
+      markdownService: MarkdownService(),
+      theme: theme,
+      fields: const {
+        'title': 'Kwartaalaudit',
+        'subtitle': 'Bestuurlijk',
+        'author': 'Ada Lovelace',
+        'project-id': 'P-42',
+      },
+    );
+    final out = p.join(temp.path, 'velden.html');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.html,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final html = await File(out).readAsString();
+
+    expect(html, contains('Kwartaalaudit · P-42'));
+    expect(html, contains('Ada Lovelace — Bestuurlijk'));
+    expect(html, isNot(contains('{title}')));
+    expect(html, isNot(contains('{project-id}')));
+  });
+
+  test(
+    'geredigeerde documentexport lekt geen rauwe metadata, velden of templates',
+    () async {
+      const rawTitle = 'titel.geheim@andersbureau.nl';
+      const rawCustom = 'klant.geheim@andersbureau.nl';
+      const rawTemplate = 'sjabloon.geheim@andersbureau.nl';
+      const theme = ThemeProfile(
+        documentHeaderText: '$rawTemplate · {title}',
+        documentFooterText: '{client}',
+      );
+      final bundle = await buildDocumentExportBundle(
+        body,
+        projectPath: null,
+        profile: PrivacyExportProfile.redacted,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+        theme: theme,
+        fields: const {'title': rawTitle, 'client': rawCustom},
+      );
+
+      final projected = bundle.audience.deck;
+      expect(projected.title, kRedactionToken);
+      expect(projected.documentFields['client'], kRedactionToken);
+      expect(
+        projected.themeProfile.documentHeaderText,
+        contains(kRedactionToken),
+      );
+      expect(projected.themeProfile.documentFooterText, kRedactionToken);
+
+      for (final format in [
+        DocumentExportFormat.md,
+        DocumentExportFormat.html,
+        DocumentExportFormat.latex,
+      ]) {
+        final out = p.join(temp.path, 'geredigeerd.${format.name}');
+        await writeDocumentExport(
+          bundle,
+          format,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+          // De schrijver mag deze ongeprojecteerde metadata niet vertrouwen.
+          metadata: const ExportDocumentMetadata(title: rawTitle),
+          outputPath: out,
+        );
+        final content = await File(out).readAsString();
+        for (final secret in [rawTitle, rawCustom, rawTemplate]) {
+          expect(
+            content,
+            isNot(contains(secret)),
+            reason: '$secret lekt in ${format.name}',
+          );
+        }
+        expect(content, contains(kRedactionToken), reason: format.name);
+      }
+    },
+  );
+
+  test(
+    'de schrijver weigert ieder formaat vóór een bestand ontstaat',
+    () async {
+      await withBundle((bundle) async {
+        const policy = ClassificationEnforcementPolicy(
+          requireClassification: true,
+        );
+        for (final format in DocumentExportFormat.values) {
+          final out = p.join(temp.path, 'geblokkeerd.${format.name}');
+          final written = await writeDocumentExport(
+            bundle,
+            format,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            enforcementPolicy: policy,
+            outputPath: out,
+          );
+          expect(written, isNull, reason: format.name);
+          expect(await File(out).exists(), isFalse, reason: format.name);
+        }
+      });
+    },
+  );
+
+  test('geredigeerde bestandsnaam bevat nooit de rauwe titel', () async {
+    const rawTitle = 'Dossier 728398242';
+    final bundle = await buildDocumentExportBundle(
+      body,
+      projectPath: null,
+      profile: PrivacyExportProfile.redacted,
+      ownIdentity: OwnIdentity.empty,
+      regions: defaultPrivacyRegions,
+      disabledRules: const {},
+      markdownService: MarkdownService(),
+      title: rawTitle,
+    );
+    final fileName = suggestedDocumentExportFileName(
+      title: bundle.audience.deck.title,
+      format: DocumentExportFormat.md,
+      profile: PrivacyExportProfile.redacted,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+
+    expect(fileName, isNot(contains('728398242')));
+    expect(fileName, endsWith('-geredigeerd.md'));
   });
 }

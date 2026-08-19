@@ -164,6 +164,35 @@ class ExportDocumentMetadata {
         ).length,
       );
 
+  /// Houd alle documentmetadata gelijk en vervang alleen de classificatie.
+  /// Documentexport dwingt hiermee de TLP uit de geprojecteerde bundel af,
+  /// zodat een handmatig opgebouwd metadata-object de markering niet kan wissen.
+  ExportDocumentMetadata withTlp(TlpLevel value) => ExportDocumentMetadata(
+    title: title,
+    author: author,
+    organization: organization,
+    description: description,
+    keywords: keywords,
+    tlp: value,
+    language: language,
+    signature: signature,
+    sealedAt: sealedAt,
+    unreviewedAiSlideCount: unreviewedAiSlideCount,
+  );
+
+  ExportDocumentMetadata withLanguage(String value) => ExportDocumentMetadata(
+    title: title,
+    author: author,
+    organization: organization,
+    description: description,
+    keywords: keywords,
+    tlp: tlp,
+    language: value,
+    signature: signature,
+    sealedAt: sealedAt,
+    unreviewedAiSlideCount: unreviewedAiSlideCount,
+  );
+
   /// Fallback title when [title] is empty.
   String displayTitle(String fallback) =>
       title.trim().isNotEmpty ? title.trim() : fallback;

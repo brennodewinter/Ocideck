@@ -345,6 +345,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   void newDeckInCurrentTab(
     String title, {
+    TlpLevel tlp = TlpLevel.none,
     List<Slide>? slides,
     String improvementFramework = '',
     String improvementY01 = '',
@@ -354,6 +355,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (tab == null) return;
     tab.deckNotifier.newDeck(
       title,
+      tlp: tlp,
       slides: slides,
       improvementFramework: improvementFramework,
       improvementY01: improvementY01,
@@ -366,6 +368,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   void newDeckInNewTab(
     String title, {
+    TlpLevel tlp = TlpLevel.none,
     List<Slide>? slides,
     String improvementFramework = '',
     String improvementY01 = '',
@@ -374,6 +377,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final tab = _createTab();
     tab.deckNotifier.newDeck(
       title,
+      tlp: tlp,
       slides: slides,
       improvementFramework: improvementFramework,
       improvementY01: improvementY01,

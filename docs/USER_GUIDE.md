@@ -4298,6 +4298,45 @@ not, and why conversion is deliberately lossy — is written up in
   insert before the first save lives in memory until you save, then materialises
   into `images/` — the same "you will lose this image" warning applies as for a
   deck.
+- A document can carry one **TLP classification** for the whole file. Choose it
+  from the **TLP** control in the document toolbar. Unlike a presentation there
+  is no separate level per page or section. With a level selected, its official
+  label appears in both the header and footer in Visual, Source and Pages, and
+  travels into Markdown, continuous HTML and LaTeX exports. Choose **Geen** to
+  remove the `tlp:` line again; an otherwise plain document becomes plain
+  Markdown again byte for byte.
+
+### Document properties in the header and footer
+
+Open **Document · Properties** from the document toolbar to set the values that
+belong to this document. **Title**, **Subtitle** and **Author** are always ready;
+use **Add** for another field such as `case-id` or `version`. A custom name starts
+with a lowercase letter and then uses only lowercase letters, digits, `_` or
+`-`. Names used for page setup, style and TLP — and names beginning with
+`ocideck_` — are reserved. Values stay on one line, with at most 100 fields and
+4096 characters per value. Leaving a value empty removes that field when you
+save the window. If a hand-written file contains the same name twice, both
+values appear as rows and the window asks you to remove or rename the duplicate
+before saving.
+
+In *Settings → Presentation → Style profile → Document*, put `{title}`,
+`{subtitle}`, `{author}` or a custom `{case-id}` in the **Header** or **Footer
+text**. The style is the reusable template; each document supplies its own
+values. If a placeholder has no matching field, OciDeck leaves `{name}` visible
+so a missing property cannot pass unnoticed. A value is treated as literal text,
+not as Markdown of its own, so text entered as a value cannot add a link or
+formatting to the template.
+
+The same result appears in Visual, the live Source preview and Pages. On export,
+Markdown keeps the one-line fields in front matter; continuous HTML and LaTeX
+put their resolved values in the header and footer. OciWacht checks these values
+along with the document body and applies the chosen privacy projection before
+any of the three outputs is made.
+
+The document export deliberately does not offer `.ocideck`: that package is a
+presentation format and would change a document into slides. Use **Save** for
+the byte-faithful document master, and Markdown, HTML or LaTeX for a projected
+recipient copy.
 
 ### The editor: Visual, Source and Pages
 
@@ -4334,7 +4373,9 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   [page size and margins](#page-size-margins-bleed-and-writing-width) you chose,
   and — when the document carries a style — that style's repeating header and
   footer band, with the page number in the footer if the style shows page
-  numbers. A document without a style shows a bare sheet. This is a reading and
+  numbers. A set TLP level also creates those two bands when the document has no
+  style, because the classification may not disappear with the decoration. An
+  unclassified document without a style shows a bare sheet. This is a reading and
   checking view, not a third writing surface: you type in Visual or Source. The
   page breaks are **measured**, not estimated — the document is rendered once
   and the height of every block is taken from that render, so a break falls
@@ -4568,9 +4609,8 @@ nothing into any file; only the per-document Style button in the editor does tha
 Enforcing is available once a default style is set.
 
 For an HTML export, OciDeck passes the resolved effective style (enforced style,
-document choice, then default) to the renderer. An `.ocideck` package export likewise
-contains the derived export deck with that effective profile. A Markdown export remains
-Markdown content rather than a style carrier.
+document choice, then default) to the renderer. A Markdown export remains Markdown
+content rather than a style carrier.
 
 ### Exporting a document
 

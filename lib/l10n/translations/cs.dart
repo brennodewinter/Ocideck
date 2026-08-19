@@ -1641,6 +1641,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bijvoorbeeld project-id': 'Například project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokument může obsahovat nejvýše 100 vlastních polí.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Hodnota pole může obsahovat nejvýše 4096 znaků.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Použijte {naam} v záhlaví nebo zápatí.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Název je neplatný, rezervovaný nebo není jedinečný.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Značky nemají rozpoznatelnou hodnotu pořadí. Zůstávají viditelné.',
   'Tijdlijn · vervolg': 'Časová osa · pokračování',
@@ -1912,8 +1921,6 @@ const _dutchSourceAddCs = <String, String>{
   'Tabel geplakt': 'Tabulka vložena',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Přidejte složku nebo použijte "Procházet" pro jeden soubor.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Samostatný balíček s markdownem a obrázky — volitelně šifrovaný (AES-256), otevře se v OciDeck.',
   'dia\'s uit dit document.': 'snímků z tohoto dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tohoto profilu stylu nebylo nalezeno a nezobrazuje se (cesta: {pad}). Vyberte logo v nastavení prezentace.',

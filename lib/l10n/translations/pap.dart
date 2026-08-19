@@ -673,6 +673,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bijvoorbeeld project-id': 'Por ehèmpel project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Un dokumento por tin máksimo 100 kampo personalisá.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Un balor di kampo por tin máksimo 4096 karakter.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Usa {naam} den e teksto di kabesera òf pia di página.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'E nòmber ta inválido, reservá òf no ta úniko.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markashonnan no tin un balor di orden ku por ser rekonosí. Nan ta keda visibel.',
   'Tijdlijn · vervolg': 'Línea di tempu · continuación',
@@ -946,8 +955,6 @@ const _dutchSourceAddPap = {
   'Tabel geplakt': 'Tabla pegá',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Agregá un karpeta of usa "Navegá" pa un solo archivo.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Pakete independiente ku markdown i imágenen — opcionalmente enkriptá (AES-256), ta habri den OciDeck.',
   'dia\'s uit dit document.': 'slide di e dokumento aki.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'E logo di e perfil di estilo aki no a wòrdu hañá i no ta mustra (kaminda: {pad}). Skohe un logo den e settingnan di presentashon.',

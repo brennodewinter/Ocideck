@@ -1,11 +1,28 @@
 part of 'privacy_scanner.dart';
 
+// Publieke privacynamen blijven beschikbaar voor callers/tests; de waarden
+// komen uit het ene documentveldcontract in document_front_matter.dart.
+const int kMaxPrivacyDocumentFields = kMaxDocumentFields;
+const int kMaxPrivacyDocumentFieldChars = kMaxDocumentFieldValueLength;
+
+/// De scanner weigert documentmetadata die buiten de gedeelde invoergrenzen
+/// valt. Stil afkappen zou juist het niet-gescande achterstuk laten uitlekken.
+final class PrivacyDocumentLimitExceeded implements Exception {
+  const PrivacyDocumentLimitExceeded(this.message);
+
+  final String message;
+
+  @override
+  String toString() => 'PrivacyDocumentLimitExceeded: $message';
+}
+
 /// Alle velden die de scanner en daarmee de redactie langsloopt.
 extension PrivacyScannerFragments on PrivacyScanner {
   /// De deckvelden die in de documentmetadata belanden (en dus meereizen in
   /// PDF-properties en PPTX-docProps, leesbaar, ook al staat er op geen enkele
   /// slide iets van te zien).
   Iterable<_Fragment> _deckFragments(Deck deck) sync* {
+    yield* _validatedDocumentPrivacyFragments(deck);
     yield (field: 'deckTitle', index: 0, text: deck.title, context: '');
     yield (field: 'author', index: 0, text: deck.author, context: '');
     yield (
@@ -175,6 +192,82 @@ extension PrivacyScannerFragments on PrivacyScanner {
       }
     }
   }
+}
+
+void _checkPrimaryMetadataPrivacyLengths(Deck deck) {
+  _checkDocumentPrivacyLength('titel', deck.title);
+  _checkDocumentPrivacyLength('auteur', deck.author);
+  _checkDocumentPrivacyLength('ondertitel', deck.description);
+}
+
+Iterable<_Fragment> _validatedDocumentPrivacyFragments(Deck deck) sync* {
+  _checkPrimaryMetadataPrivacyLengths(deck);
+  yield* _documentPrivacyFragments(deck);
+}
+
+Iterable<_Fragment> _documentPrivacyFragments(Deck deck) sync* {
+  final fields = deck.documentFields;
+  if (fields.length > kMaxDocumentFields) {
+    throw PrivacyDocumentLimitExceeded(
+      'document bevat ${fields.length} velden; maximaal '
+      '$kMaxDocumentFields',
+    );
+  }
+  for (final entry in fields.entries) {
+    _checkDocumentPrivacyLength('veldsleutel ${entry.key}', entry.key);
+    _checkDocumentPrivacyLength('documentveld ${entry.key}', entry.value);
+  }
+  final header = _resolvedDocumentChrome(
+    deck,
+    deck.themeProfile.documentHeaderText,
+  );
+  final footer = _resolvedDocumentChrome(
+    deck,
+    deck.themeProfile.documentFooterText,
+  );
+  _checkDocumentPrivacyLength('samengestelde documentkop', header);
+  _checkDocumentPrivacyLength('samengestelde documentvoet', footer);
+  yield (field: 'documentHeader', index: 0, text: header, context: '');
+  yield (field: 'documentFooter', index: 0, text: footer, context: '');
+  var index = 0;
+  for (final entry in deck.documentFields.entries) {
+    if (const {'title', 'subtitle', 'author'}.contains(entry.key)) continue;
+    yield (
+      field: 'documentFieldKeys',
+      index: index,
+      text: entry.key,
+      context: '',
+    );
+    yield (
+      field: 'documentFields',
+      index: index,
+      text: entry.value,
+      context: entry.key,
+    );
+    index++;
+  }
+}
+
+String _resolvedDocumentChrome(Deck deck, String template) =>
+    resolveDocumentChromeTemplate(
+      template,
+      _documentChromeFields(deck),
+      escapeMarkdownValues: false,
+    );
+
+Map<String, String> _documentChromeFields(Deck deck) => {
+  ...deck.documentFields,
+  'title': deck.title,
+  'subtitle': deck.description,
+  'author': deck.author,
+};
+
+void _checkDocumentPrivacyLength(String label, String value) {
+  if (value.length <= kMaxDocumentFieldValueLength) return;
+  throw PrivacyDocumentLimitExceeded(
+    '$label bevat ${value.length} tekens; maximaal '
+    '$kMaxDocumentFieldValueLength',
+  );
 }
 
 _TimelineContextIndex? _timelineContextFor(Slide slide) =>

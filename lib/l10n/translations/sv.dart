@@ -1638,6 +1638,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bijvoorbeeld project-id': 'Till exempel project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Ett dokument kan innehålla högst 100 anpassade fält.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Ett fältvärde får innehålla högst 4096 tecken.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Använd {naam} i sidhuvudet eller sidfoten.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Namnet är ogiltigt, reserverat eller inte unikt.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markörer har inget igenkännbart ordningsvärde. De förblir synliga.',
   'Tijdlijn · vervolg': 'Tidslinje · fortsättning',
@@ -1910,8 +1919,6 @@ const _dutchSourceAddSv = <String, String>{
   'Tabel geplakt': 'Tabell klistrad',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Lägg till en mapp eller använd "Bläddra" för en enskild fil.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Fristående paket med markdown och bilder — valfritt krypterat (AES-256), öppnas i OciDeck.',
   'dia\'s uit dit document.': 'bilder från detta dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotypen för denna stilprofil hittades inte och visas inte (sökväg: {pad}). Välj en logotyp i presentationsinställningarna.',

@@ -2557,6 +2557,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bijvoorbeeld project-id': 'Örneğin project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Bir belge en fazla 100 özel alan içerebilir.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Bir alan değeri en fazla 4096 karakter içerebilir.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Üstbilgi veya altbilgide {naam} kullanın.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Ad geçersiz, ayrılmış veya benzersiz değil.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'İşaretlerin tanınabilir bir sıralama değeri yoktur. Görünür kalırlar.',
   'Tijdlijn · vervolg': 'Zaman çizelgesi · devamı',
@@ -2826,8 +2835,6 @@ const _dutchSourceAddTr = <String, String>{
   'Tabel geplakt': 'Tablo yapıştırıldı',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Bir klasör ekleyin veya tek bir dosya için "Gözat"ı kullanın.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Markdown ve görseller içeren bağımsız paket — isteğe bağlı şifreli (AES-256), OciDeck\'te açılır.',
   'dia\'s uit dit document.': 'bu belgeden slayt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Bu stil profilinin logosu bulunamadı ve gösterilmiyor (yol: {pad}). Sunum ayarlarında bir logo seçin.',

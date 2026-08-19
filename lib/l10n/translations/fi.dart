@@ -1640,6 +1640,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bijvoorbeeld project-id': 'Esimerkiksi project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Asiakirjassa voi olla enintään 100 mukautettua kenttää.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Kentän arvo voi sisältää enintään 4096 merkkiä.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Käytä tunnistetta {naam} ylä- tai alatunnisteessa.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nimi on virheellinen, varattu tai ei yksilöllinen.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Merkinnöillä ei ole tunnistettavaa järjestysarvoa. Ne pysyvät näkyvissä.',
   'Tijdlijn · vervolg': 'Aikajana · jatko',
@@ -1911,8 +1920,6 @@ const _dutchSourceAddFi = <String, String>{
   'Tabel geplakt': 'Taulukko liitetty',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Lisää kansio tai käytä "Selaa" yhtä tiedostoa varten.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Erillinen paketti markdownilla ja kuvilla — valinnaisesti salattu (AES-256), avautuu OciDeckissä.',
   'dia\'s uit dit document.': 'diaa tästä asiakirjasta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Tämän tyyliprofiilin logoa ei löytynyt eikä sitä näytetä (polku: {pad}). Valitse logo esityksen asetuksissa.',

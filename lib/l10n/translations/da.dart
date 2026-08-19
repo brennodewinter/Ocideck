@@ -1639,6 +1639,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bijvoorbeeld project-id': 'For eksempel project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Et dokument kan højst indeholde 100 brugerdefinerede felter.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'En feltværdi må højst indeholde 4096 tegn.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Brug {naam} i sidehovedet eller sidefoden.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Navnet er ugyldigt, reserveret eller ikke entydigt.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markører har ingen genkendelig sorteringsværdi. De forbliver synlige.',
   'Tijdlijn · vervolg': 'Tidslinje · fortsættelse',
@@ -1911,8 +1920,6 @@ const _dutchSourceAddDa = <String, String>{
   'Tabel geplakt': 'Tabel indsat',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Tilføj en mappe, eller brug "Gennemse" til én fil.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Selvstændig pakke med markdown og billeder — valgfrit krypteret (AES-256), åbnes i OciDeck.',
   'dia\'s uit dit document.': 'dias fra dette dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logoet for denne stilprofil blev ikke fundet og vises ikke (sti: {pad}). Vælg et logo i præsentationsindstillingerne.',

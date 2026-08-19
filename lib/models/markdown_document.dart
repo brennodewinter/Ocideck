@@ -1,4 +1,5 @@
 import '../utils/document_front_matter.dart';
+import 'deck.dart';
 import 'markdown_kind.dart';
 import 'markdown_outline.dart';
 import 'markdown_source_document.dart';
@@ -14,15 +15,18 @@ import 'markdown_source_document.dart';
 /// structurele bereiken en een koppenoverzicht uit afleidt (voor navigatie en
 /// blok-bewerkingen) zonder ook maar één byte te wijzigen.
 class MarkdownDocument {
-  const MarkdownDocument._(this._source);
+  MarkdownDocument._(this._source, this._frontMatterMetadata);
 
   final MarkdownSourceDocument _source;
+  final DocumentFrontMatterMetadata _frontMatterMetadata;
 
   /// Leest een document uit de ruwe bytes van een `.md`. Normaliseert niets:
   /// regeleindes, onzichtbare tekens en een ontbrekende slot-newline blijven
   /// exact staan.
-  factory MarkdownDocument.parse(String source) =>
-      MarkdownDocument._(MarkdownSourceDocument.parse(source));
+  factory MarkdownDocument.parse(String source) => MarkdownDocument._(
+    MarkdownSourceDocument.parse(source),
+    documentFrontMatterMetadata(source),
+  );
 
   /// De soort is per definitie [MarkdownKind.document]; een presentatie loopt
   /// via `Deck`. Bedoeld voor plekken die generiek over een geopend bestand
@@ -35,25 +39,58 @@ class MarkdownDocument {
   /// De inhoud zonder het leidende YAML-frontmatter-blok. De editor bewerkt en
   /// toont dít — de frontmatter draagt alleen de stijl en wordt niet als tekst
   /// getoond. Altijd geldt `frontMatter + body == source`.
-  String get body => documentBody(source);
+  String get body => source.substring(_frontMatterMetadata.frontMatter.length);
 
   /// Het verbatim frontmatter-blok (of `''`) dat de stijl draagt.
-  String get frontMatter => splitDocumentFrontMatter(source).block;
+  String get frontMatter => _frontMatterMetadata.frontMatter;
 
   /// De gekozen documentstijl: de naam van een stijlprofiel uit de `theme:`-
   /// sleutel in de frontmatter, of `null` bij een platte `.md` zonder stijl.
-  String? get styleName => documentStyleName(source);
+  String? get styleName {
+    final values = _frontMatterMetadata.valuesFor('theme');
+    return values.isEmpty || values.first.isEmpty ? null : values.first;
+  }
+
+  /// De ene TLP-classificatie van het hele document. Documenten hebben geen
+  /// pagina- of sectieniveau: de markering geldt overal of nergens.
+  TlpLevel get tlp => _frontMatterMetadata
+      .valuesFor('tlp')
+      .fold(
+        TlpLevel.none,
+        (strictest, value) => effectiveTlp(
+          deckTlp: strictest,
+          slideTlp: TlpLevelX.fromKey(value),
+        ),
+      );
+
+  /// Vrije scalaire velden voor documentkop en -voet, in bronvolgorde.
+  Map<String, String> get fields => _frontMatterMetadata.fields;
 
   /// Een nieuw document met dezelfde frontmatter maar een vervangen body. De
   /// stijl blijft staan; alleen de inhoud verandert.
-  MarkdownDocument withBody(String nextBody) =>
-      withSource(frontMatter + nextBody);
+  MarkdownDocument withBody(String nextBody) => MarkdownDocument._(
+    _source.reparse(frontMatter + nextBody),
+    _frontMatterMetadata,
+  );
 
   /// Een nieuw document met de stijl gezet op [name] (of verwijderd bij `null`).
   /// Byte-chirurgisch: een platte `.md` zonder stijl blijft byte-identiek als je
   /// stijl zet en weer wist (zie [withDocumentStyleName]).
   MarkdownDocument withStyleName(String? name) =>
       withSource(withDocumentStyleName(source, name));
+
+  /// Zet de documentbrede classificatie byte-chirurgisch in de front matter.
+  MarkdownDocument withTlp(TlpLevel level) => withSource(
+    withDocumentFrontMatterKey(
+      source,
+      'tlp',
+      level == TlpLevel.none ? null : level.key,
+    ),
+  );
+
+  /// Vervangt alle vrije scalaire documentvelden byte-chirurgisch.
+  MarkdownDocument withFields(Map<String, String> fields) =>
+      withSource(withDocumentFields(source, fields));
 
   /// Wat naar schijf gaat: exact de bron. Nooit her-serialiseren — dat is de
   /// rode lijn die een plat document plat en maximaal uitwisselbaar houdt.
@@ -71,6 +108,15 @@ class MarkdownDocument {
   /// Vervangt de hele inhoud — bijvoorbeeld na een bewerking in de editor — en
   /// levert een nieuw document op. De identiteit van ongewijzigde blokken blijft
   /// behouden, zodat cursor- en selectiestand niet nodeloos verspringen.
-  MarkdownDocument withSource(String next) =>
-      MarkdownDocument._(_source.reparse(next));
+  MarkdownDocument withSource(String next) {
+    final keepsFrontMatter = frontMatter.isEmpty
+        ? !next.startsWith('---\n') && !next.startsWith('---\r\n')
+        : next.startsWith(frontMatter);
+    return MarkdownDocument._(
+      _source.reparse(next),
+      keepsFrontMatter
+          ? _frontMatterMetadata
+          : documentFrontMatterMetadata(next),
+    );
+  }
 }

@@ -10,15 +10,20 @@ Future<({String markdown, List<String> dataUris})> _embedHtmlImages(
   int maxEmbedBytes,
   bool continuous,
   ThemeProfile? theme,
+  TlpLevel tlp,
+  Map<String, String> documentFields,
   MarpHtmlService service,
 ) async {
   final embedded = await _embedImages(markdown, embedImage, maxEmbedBytes);
-  if (!continuous || theme == null || !_hasDocumentChrome(theme)) {
+  final chromeTheme = theme ?? const ThemeProfile();
+  if (!continuous || !_hasDocumentChrome(chromeTheme, tlp)) {
     return embedded;
   }
   return _withDocumentChrome(
     embedded,
-    theme,
+    chromeTheme,
+    tlp,
+    documentFields,
     embedImage,
     service.loadBytes,
     maxEmbedBytes,
@@ -134,15 +139,18 @@ String? _safeDocumentChromeLink(String? raw) {
   return null;
 }
 
-bool _hasDocumentChrome(ThemeProfile theme) =>
+bool _hasDocumentChrome(ThemeProfile theme, TlpLevel tlp) =>
     theme.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
     theme.documentHeaderText.trim().isNotEmpty ||
     theme.documentFooterText.trim().isNotEmpty ||
-    theme.documentShowPageNumbers;
+    theme.documentShowPageNumbers ||
+    tlp != TlpLevel.none;
 
 Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
   ({String markdown, List<String> dataUris}) embedded,
   ThemeProfile theme,
+  TlpLevel tlp,
+  Map<String, String> documentFields,
   HtmlImageResolver? embedImage,
   Future<Uint8List> Function(String asset) loadBytes,
   int maxEmbedBytes,
@@ -182,20 +190,29 @@ Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
     final page = showPage
         ? '<span class="document-page-number" aria-label="Pagina"></span>'
         : '';
+    final marking = tlp == TlpLevel.none
+        ? ''
+        : '<span class="document-tlp" style="color:#${(tlp.foreground & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}">${MarpHtmlService._htmlText(tlp.label)}</span>';
     return '<div class="document-$kind">'
         '${inBand && !logoAtRight ? logoHtml : ''}'
         '<span class="document-$kind-text">${_documentChromeMarkdownHtml(text)}</span>'
-        '$page${inBand && logoAtRight ? logoHtml : ''}</div>';
+        '$page$marking${inBand && logoAtRight ? logoHtml : ''}</div>';
   }
 
   final header = band(
     'header',
-    theme.documentHeaderText.trim(),
+    resolveDocumentChromeTemplate(
+      theme.documentHeaderText.trim(),
+      documentFields,
+    ),
     showPage: false,
   );
   final footer = band(
     'footer',
-    theme.documentFooterText.trim(),
+    resolveDocumentChromeTemplate(
+      theme.documentFooterText.trim(),
+      documentFields,
+    ),
     showPage: theme.documentShowPageNumbers,
   );
   return (

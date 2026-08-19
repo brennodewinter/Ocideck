@@ -342,6 +342,18 @@ back during presenting/exporting (`slideVisibleAtTlp`). The **export enforcement
 (ceiling, minimum, mandatory classification) only looks at the deck-wide `tlp`
 field in front matter, not at per-slide levels.
 
+**Documents.** A flowing document uses the same `tlp` key, but has exactly one
+level for the entire document: there is no page- or section-level TLP. When set,
+OciDeck repeats the official label in both the header and footer on screen and
+in continuous HTML/print output; LaTeX output does the same. A projected
+Markdown export carries the single `tlp:` key and never writes per-slide
+`<!-- tlp: … -->` directives. Only a top-level key counts; an indented `tlp:`
+belongs to its surrounding YAML value. If a hand-written file contains more
+than one top-level `tlp:`, OciDeck displays the strictest recognised level and a
+deliberate TLP change canonises the block to one line. Inline YAML comments do
+not become part of the value. The same ceiling, minimum and mandatory-
+classification export policy as for presentations applies to document export.
+
 ### 3.1b Privacy disposition — `privacy:` / `<!-- ocideck_privacy: … -->`
 
 What happens to privacy findings. Four stable values: `warn` (the default, never
@@ -3234,17 +3246,20 @@ interchangeable and means a document is a file any Markdown tool reads without
 knowing anything about OciDeck. A document may legitimately carry the front
 matter its author wrote (for example Jekyll, Hugo or Obsidian keys).
 
-**OciDeck invents no front-matter vocabulary of its own.** It does write a small,
-closed set of keys when you ask it to (§14.5), but every one of them is a key
-other tools already read and act on: `theme:` (Pandoc, Obsidian, GitHub Pages),
+**OciDeck invents no `ocideck:`-prefixed front-matter vocabulary of its own.**
+It writes a small, closed set of structural keys when you ask it to (§14.5):
+`theme:` (Pandoc, Obsidian, GitHub Pages), `tlp:` with the standard FIRST
+Traffic Light Protocol 2.0 values (§3.1),
 since 2026-08-17 `papersize:` and `geometry:` (Pandoc, which passes them to the
 LaTeX `geometry` package), and since 2026-08-18 `reference-location:` (Pandoc and
-Quarto, §14.9). Running the same file through your own Pandoc
-gives you the page those keys describe, without OciDeck in the loop. What is
-absent — and stays absent — is a key that only means something *inside* OciDeck:
-there is no `kind:`, no `ocideck:` block and no `ocideck_`-prefixed key anywhere
-in the format. That is the line: OciDeck may join a vocabulary, it may not
-create a private one and call it interchangeable.
+Quarto, §14.9). A document may additionally carry author-chosen, one-line
+string fields such as `title:`, `subtitle:` and `author:` (§14.12). Those are
+ordinary YAML data, not an OciDeck namespace. Running the same file through your
+own Pandoc still gives you the page and metadata those keys describe, without
+OciDeck in the loop. What is absent — and stays absent — is a key that only
+means something *inside* OciDeck: there is no `kind:`, no `ocideck:` block and
+no `ocideck_`-prefixed key anywhere in the format. That is the line: OciDeck may
+join a vocabulary, it may not create a private one and call it interchangeable.
 
 ### 14.2 Working directory
 
@@ -3266,24 +3281,28 @@ master you keep, back up and eventually clean — the same role §9 describes fo
 deck's Markdown, held to a stricter no-normalisation rule.
 
 What the document path can write into the front matter is a short, closed set of
-keys — the document **style** (`theme:`), the **page setup** (`papersize:`,
-`geometry:`) and the **footnote placement** (`reference-location:`) — and each
-only when you deliberately ask for it. Every write is opt-in, byte-surgical, and
-leaves the rest of the file alone (§14.5, §14.8, §14.9). A document you never
-style, never pin a page setup on and never move the notes of carries no front
-matter at all, so the byte-identity above holds unchanged.
+structural keys — the document **style** (`theme:`), the **page setup** (`papersize:`,
+`geometry:`), the one document-wide **TLP classification** (`tlp:`, §3.1) and
+the **footnote placement** (`reference-location:`) — plus the open set of
+one-line document fields its author creates (§14.12). Each is written only when
+you deliberately ask for it. Every write is opt-in, byte-surgical, and leaves
+unrelated front matter and the body alone (§14.5, §14.8, §14.9, §14.12). A
+document you never style, classify, give properties, pin a page setup on or move
+the notes of carries no front matter at all, so the byte-identity above holds
+unchanged.
 
 ### 14.4 Export is a derived, projected artefact — on a new file
 
 Exporting a document is **not** saving it. Export writes a **derived, redacted
 copy for a recipient** onto a **new** file and never touches the source, so it
-falls **outside** the byte-faithful guarantee of §14.3. **Four** output forms
+falls **outside** the byte-faithful guarantee of §14.3. **Three** output forms
 exist (`DocumentExportFormat` in
 [`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
 a projected `.md` (a redacted copy of the plain text), one **continuous**
-self-contained HTML document, a LaTeX `article` (`.tex`), and the portable
-package (`.ocideck`, §7 — written by `FileService.exportPackage`, not by the text
-writer). All of them carry the privacy-projected (OciWacht) content rather than
+self-contained HTML document, and a LaTeX `article` (`.tex`). A portable
+`.ocideck` is deliberately not offered here: that package stores a presentation
+deck and would silently change the document mode and its free fields. All three
+forms carry the privacy-projected (OciWacht) content rather than
 the raw source, along the same audience boundary as a deck export; the chosen
 privacy profile is written into the export's filename. There is still no built-in
 PDF *writer*: a PDF comes either from printing the exported HTML from the
@@ -3291,8 +3310,8 @@ browser, or from compiling the `.tex` — and only that second route can carry a
 bleed with crop marks (§14.7). See the [User Guide](USER_GUIDE.md#documents).
 
 *(Corrected 2026-08-19: this said there were two output forms and no PDF route at
-all. The LaTeX and package exports landed on 2026-08-07 and this paragraph was
-never brought along.)*
+all. The LaTeX export had landed on 2026-08-07; a presentation package was
+briefly and incorrectly shown as a document format and is no longer offered.)*
 
 **What travels into the projected `.md`, and what does not** *(settled
 2026-08-17)*. The export is a copy for someone else's machine, so the question
@@ -3320,6 +3339,12 @@ per key is whether it still means anything there.
   LaTeX export turns it into `\tableofcontents`. The list is generated *after*
   the projection, from the projected body, so a contents page can never name a
   heading the recipient is not allowed to see.
+- **Document fields travel after privacy projection.** The projected `.md`
+  carries the same one-line fields as front matter. Continuous HTML and LaTeX
+  resolve those projected values into the document style's header and footer
+  templates. OciWacht scans and, where required, redacts the values before any
+  of those three forms is built, so a field cannot be safe in one export and raw
+  in another (§14.12).
 - **The footnote placement travels** *(since 2026-08-19, #1569)*. The notes
   themselves are ordinary text in the body (§14.9); where they land is
   `reference-location:`, and the projected `.md` carries that key again — the
@@ -3368,9 +3393,9 @@ well (§14.8), so it is a set, not a single key.)* The set is a register in the
 code rather than a habit spread over the call sites:
 `kDocumentOwnedKeys` in
 [`lib/utils/document_front_matter.dart`](../lib/utils/document_front_matter.dart)
-lists exactly `theme`, `papersize`, `geometry` and — since 2026-08-18 —
+lists exactly `theme`, `tlp`, `papersize`, `geometry` and
 `reference-location` (§14.9), and the generic writer asserts against it, so a
-fifth key cannot slip in on the side. Beside it sits `kDocumentRetiredKeys`, the
+sixth key cannot slip in on the side. Beside it sits `kDocumentRetiredKeys`, the
 place where a key OciDeck *stops* writing is to be recorded — the exit route, so
 a withdrawn key can be cleaned out of existing files instead of sitting in them
 forever. That route is built rather than merely declared: every deliberate write
@@ -3815,3 +3840,58 @@ bytes on the way out:
   marker and its table travel as one embed, so inserting or deleting a timeline
   is a single document action and cannot leave a marker behind without its
   table — the failure the atomicity above exists to prevent.
+
+### 14.12 Document fields and chrome templates *(added 2026-08-19)*
+
+A document can carry an open set of one-line string fields in its leading YAML
+front matter. `title`, `subtitle` and `author` have fixed controls in the
+document-properties window; an author may add further fields. They use the same
+plain form:
+
+```yaml
+---
+title: Incident report
+subtitle: Public summary
+author: Jane Example
+case-id: IR-2026-08
+---
+```
+
+A field key must match `[a-z][a-z0-9_-]*`. The structural keys `theme`, `tlp`,
+`papersize`, `geometry` and `reference-location` are reserved, as is every key
+beginning with `ocideck_`; they cannot be repurposed as a user field. A value is
+one YAML string scalar on the same line. Multi-line (`|`/`>`), nested, sequence
+and mapping values are not document fields and OciDeck preserves their bytes as
+foreign front matter. It likewise preserves comments and unknown syntax. A
+document can define at most 100 fields and each value can contain at most 4096
+characters; OciDeck refuses a larger edit or export instead of risking an
+unbounded preview or a partly scanned value. Existing larger source remains
+readable and byte-faithful until the author deliberately edits its fields. Field
+edits touch only field lines, keep LF or CRLF, and remove the front-matter fences
+when the removed field was the entire block. If a hand-written file repeats a
+field key, the first scalar value is read and the duplicate is reported; the
+properties window shows repeated values as separate rows and refuses to save
+until the author removes or renames the duplicates; the successful write then
+leaves one field line.
+
+A document style's header and footer text may contain `{key}` placeholders:
+
+```text
+{title} — {author}
+Case {case-id}
+```
+
+Known placeholders are replaced with the document's value in the editor,
+continuous HTML and LaTeX. An unknown placeholder stays literally visible — a
+renamed or missing field must be noticeable, not turn into unexplained blank
+space. Values are inserted as literal text: they cannot introduce Markdown
+formatting, a link or HTML through a field value. The template belongs to the
+style profile; the values belong to the document. Consequently the projected
+Markdown export carries the fields but not a machine-local style reference,
+while HTML and LaTeX render the resolved header and footer.
+
+All field values cross the same OciWacht audience boundary as the body. The
+standard three fields use the title/description/author privacy paths and custom
+fields use the document-field path. The projected field map — never the source
+map — then feeds projected Markdown, HTML and LaTeX, which keeps privacy and
+export behaviour equal across all three outputs.

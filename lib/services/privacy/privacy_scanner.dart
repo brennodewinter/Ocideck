@@ -40,6 +40,9 @@ import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
+import '../../utils/document_front_matter.dart'
+    show kMaxDocumentFields, kMaxDocumentFieldValueLength;
+import '../document_chrome_template.dart';
 import '../document_timeline.dart';
 import '../markdown_table_codec.dart';
 import 'dismissal_codec.dart';

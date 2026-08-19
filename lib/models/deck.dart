@@ -23,7 +23,7 @@ String withoutOpenKatGeneratedOrigin(String notes) => notes
     )
     .join('\n');
 
-/// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
+/// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een bestand.
 ///
 /// De volgorde loopt van minst naar meest beperkend; [TlpLevel.index] is dus
 /// bruikbaar om niveaus te vergelijken.
@@ -184,6 +184,10 @@ class Deck {
   final String description;
   final String keywords;
 
+  /// Vrije, vlakke documentvelden voor kop- en voetteksttemplates. Alleen het
+  /// documentpad vult deze map; presentaties laten hem leeg.
+  final Map<String, String> documentFields;
+
   /// The language the report is written in, as a language code (e.g. `nl`,
   /// `en`), or empty when not recorded. This is the **report's** language, not
   /// the interface language: a Dutch tester writing for an international client
@@ -219,7 +223,7 @@ class Deck {
   /// zelf dat hij er staat.
   final List<UsedTool> toolsUsed;
 
-  /// Traffic Light Protocol-classificatie van deze presentatie.
+  /// Traffic Light Protocol-classificatie van dit document of deze presentatie.
   final TlpLevel tlp;
 
   /// Wat er met privacybevindingen gebeurt in dit deck. Slides kunnen dit per
@@ -404,6 +408,7 @@ class Deck {
     this.date = '',
     this.description = '',
     this.keywords = '',
+    this.documentFields = const {},
     this.language = '',
     this.standardsUsed = const [],
     this.toolsUsed = const [],
@@ -447,6 +452,7 @@ class Deck {
     String? date,
     String? description,
     String? keywords,
+    Map<String, String>? documentFields,
     String? language,
     List<String>? standardsUsed,
     List<UsedTool>? toolsUsed,
@@ -491,6 +497,7 @@ class Deck {
       date: date ?? this.date,
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
+      documentFields: documentFields ?? this.documentFields,
       language: language ?? this.language,
       standardsUsed: standardsUsed ?? this.standardsUsed,
       toolsUsed: toolsUsed ?? this.toolsUsed,

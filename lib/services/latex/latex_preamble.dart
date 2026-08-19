@@ -6,7 +6,10 @@
 // `xelatex` zonder extra packages te installeren.
 
 import '../export_metadata.dart';
+import '../../models/deck.dart';
 import '../../models/page_size.dart';
+import '../../models/settings.dart';
+import '../document_chrome_template.dart';
 
 /// Bouwt de preamble voor een LaTeX `article`-document.
 ///
@@ -23,11 +26,14 @@ import '../../models/page_size.dart';
 /// twee standaarden die uiteenlopen leveren stil twee verschillende PDF's op.
 String articlePreamble(
   ExportDocumentMetadata meta, {
+  ThemeProfile? theme,
+  Map<String, String> documentFields = const {},
   PageSizeSpec pageSize = PageSizeSpec.a4,
   PageMargins pageMargins = const PageMargins(),
   bool cropMarks = false,
 }) {
   final buf = StringBuffer();
+  final chrome = _articleChrome(meta, theme, documentFields);
   buf.write('\\documentclass[11pt,${pageSize.latexName}]{article}\n');
   // Encoding en lettertype
   buf.write(
@@ -66,6 +72,12 @@ String articlePreamble(
     r'\usepackage{xcolor}'
     '\n',
   );
+  if (chrome.enabled) {
+    buf.write(
+      r'\usepackage{fancyhdr}'
+      '\n',
+    );
+  }
   // Hyperlinks
   buf.write(
     r'\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}'
@@ -89,6 +101,7 @@ String articlePreamble(
       ? pageMargins.latexMargin
       : '$paper,${pageMargins.latexMargin}';
   buf.write('\\usepackage[$geometry]{geometry}\n');
+  _writeArticleChrome(buf, meta, chrome);
   // Snijtekens: alleen wanneer erom gevraagd is én er afloop is, want zonder
   // afloop wijzen ze nergens naar. `crop` tekent ze rond het snijformaat op het
   // grotere vel — precies wat een drukker nodig heeft om te weten waar hij
@@ -142,8 +155,91 @@ String articlePreamble(
       r'\maketitle'
       '\n',
     );
+    // `article` zet de titelpagina zelf op `plain`. Zet daarna de reeds
+    // opgebouwde documentchrome terug, anders mist juist pagina één de
+    // classificatie en de ingestelde kop- en voettekst.
+    if (chrome.enabled) {
+      buf.write(
+        r'\thispagestyle{fancy}'
+        '\n',
+      );
+    }
   }
   return buf.toString();
+}
+
+typedef _ArticleChrome = ({
+  String header,
+  String footer,
+  bool enabled,
+  bool pageNumbers,
+});
+
+_ArticleChrome _articleChrome(
+  ExportDocumentMetadata meta,
+  ThemeProfile? theme,
+  Map<String, String> fields,
+) {
+  final header = _latexDocumentChrome(theme?.documentHeaderText ?? '', fields);
+  final footer = _latexDocumentChrome(theme?.documentFooterText ?? '', fields);
+  return (
+    header: header,
+    footer: footer,
+    pageNumbers:
+        theme?.documentShowPageNumbers == true || meta.tlp != TlpLevel.none,
+    enabled:
+        header.isNotEmpty ||
+        footer.isNotEmpty ||
+        theme?.documentShowPageNumbers == true ||
+        meta.tlp != TlpLevel.none,
+  );
+}
+
+void _writeArticleChrome(
+  StringBuffer buf,
+  ExportDocumentMetadata meta,
+  _ArticleChrome chrome,
+) {
+  if (!chrome.enabled) return;
+  buf.write('\\pagestyle{fancy}\n');
+  buf.write('\\fancyhf{}\n');
+  if (chrome.header.isNotEmpty) {
+    buf.write('\\fancyhead[L]{${chrome.header}}\n');
+  }
+  if (chrome.footer.isNotEmpty) {
+    buf.write('\\fancyfoot[L]{${chrome.footer}}\n');
+  }
+  if (meta.tlp != TlpLevel.none) {
+    final color = (meta.tlp.foreground & 0xFFFFFF)
+        .toRadixString(16)
+        .padLeft(6, '0')
+        .toUpperCase();
+    final badge =
+        '\\colorbox{black}{\\textcolor[HTML]{$color}{\\texttt{\\textbf{${meta.tlp.label}}}}}';
+    buf.write('\\fancyhead[${chrome.header.isEmpty ? 'C' : 'R'}]{$badge}\n');
+    buf.write('\\fancyfoot[C]{$badge}\n');
+  }
+  if (chrome.pageNumbers) buf.write('\\fancyfoot[R]{\\thepage}\n');
+}
+
+String _latexDocumentChrome(String template, Map<String, String> fields) {
+  final plainTemplate = template
+      .trim()
+      .replaceAllMapped(
+        RegExp(r'\[([^\]]+)\]\([^\)]+\)'),
+        (match) => match.group(1)!,
+      )
+      // Een underscore kan deel zijn van een geldige `{veld_sleutel}`. LaTeX-
+      // escaping handelt hem na substitutie veilig af; hem hier verwijderen
+      // veranderde de sleutel en liet de placeholder letterlijk staan.
+      .replaceAll(RegExp(r'[*`]'), '');
+  final resolved = resolveDocumentChromeTemplate(
+    plainTemplate,
+    fields,
+    escapeMarkdownValues: false,
+  );
+  if (resolved.isEmpty) return '';
+  return _escapeLatex(resolved);
 }
 
 /// Sluit een article-document af.

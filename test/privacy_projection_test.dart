@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
@@ -139,6 +140,50 @@ void main() {
       expect(out.description.contains('Jansen'), isFalse);
       expect(out.keywords.contains('Jansen'), isFalse);
       expect(out.keywords, '$kRedactionToken, fraude');
+    });
+
+    test('redigeert samengestelde documentchrome vóór export', () {
+      final deck = Deck(
+        title: 'D',
+        slides: [bulletSlide()],
+        privacy: PrivacyDisposition.redact,
+        documentFields: const {
+          'local': 'jan.jansen',
+          'domain': 'andersbureau.nl',
+        },
+        themeProfile: const ThemeProfile(
+          documentHeaderText: '{local}@{domain}',
+        ),
+      );
+
+      final out = PrivacyProjection.forAudience(deck).deck;
+
+      expect(out.themeProfile.documentHeaderText, kRedactionToken);
+      expect(
+        out.themeProfile.documentHeaderText,
+        isNot(contains('jan.jansen')),
+      );
+    });
+
+    test('projecteert onveilige documentveldsleutel en contextwaarde', () {
+      const bsn = '728398242';
+      final deck = Deck(
+        title: 'D',
+        slides: [bulletSlide()],
+        privacy: PrivacyDisposition.redact,
+        documentFields: const {
+          'redacted-field-1': 'bezet',
+          'jan.jansen@andersbureau.nl': 'veilig',
+          'bsn': bsn,
+        },
+      );
+
+      final out = PrivacyProjection.forAudience(deck).deck.documentFields;
+
+      expect(out['redacted-field-1'], 'bezet');
+      expect(out['redacted-field-2'], 'veilig');
+      expect(out, isNot(contains('jan.jansen@andersbureau.nl')));
+      expect(out['bsn'], kRedactionToken);
     });
 
     test('laat de gebruikersnotities met rust — die zijn van de ontvanger', () {

@@ -261,13 +261,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _lastCoalesceKey = null;
   }
 
-  /// Start a fresh deck. With [slides] the deck opens with those pre-built
-  /// slides (template content resolved by TemplateContentService, the first
-  /// always a title slide carrying [title]); without them it is the classic
-  /// single title slide.
+  /// Start a fresh deck. [slides] may provide pre-built template content;
+  /// otherwise this creates the classic single title slide.
   void newDeck(
     String title, {
     String theme = 'ocideck',
+    TlpLevel tlp = TlpLevel.none,
     List<Slide>? slides,
     String improvementFramework = '',
     String improvementY01 = '',
@@ -281,6 +280,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final deck = Deck(
       title: title,
       theme: theme,
+      tlp: tlp,
       themeProfile: _file.currentThemeProfile,
       improvementFramework: improvementFramework,
       improvementY01Metric: y01,
