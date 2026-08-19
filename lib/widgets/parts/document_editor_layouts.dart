@@ -20,6 +20,13 @@ part of '../document_editor_screen.dart';
 String _pageSetupSource(WidgetRef ref) =>
     ref.watch(documentProvider).document?.source ?? '';
 
+/// De map waarin het document staat, voor het oplossen van een logo in de
+/// kop- of voetband. `null` als het nog nergens is opgeslagen.
+String? _documentProjectPath(WidgetRef ref) {
+  final path = ref.read(documentProvider).filePath;
+  return path == null ? null : p.dirname(path);
+}
+
 /// De weergavestanden van [_DocumentEditorScreenState]. Een extensie op de
 /// staat zelf (zelfde library), zodat de methoden ongewijzigd blijven werken —
 /// hetzelfde patroon als de tabel-part van de documentweergave.
@@ -27,10 +34,16 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
   /// venster, onder elkaar wanneer het te smal wordt voor twee leesbare kolommen.
   /// De Overzicht-rail komt erbij zodra er breedte genoeg is.
-  Widget _sourceLayout(ThemeData theme, String source, BoxConstraints c) {
+  Widget _sourceLayout(
+    ThemeData theme,
+    String source,
+    BoxConstraints c, {
+    required TlpLevel tlp,
+    required Map<String, String> fields,
+  }) {
     final divider = theme.colorScheme.outlineVariant;
     final editor = _editor(theme);
-    final preview = _preview(theme, source);
+    final preview = _preview(theme, source, tlp, fields);
     if (c.maxWidth < 760) {
       return Column(
         children: [
@@ -56,13 +69,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
   }
 
-  /// De map waarin het document staat, voor het oplossen van een logo in de
-  /// kop- of voetband. `null` als het nog nergens is opgeslagen.
-  String? get _projectPath {
-    final path = ref.read(documentProvider).filePath;
-    return path == null ? null : p.dirname(path);
-  }
-
   /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
   /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
   /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
@@ -76,7 +82,13 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// het invoeg-palet in [_DocEditorToolbar]) blijven altijd binnen bereik; alleen
   /// de waarschuwing komt erbij. Wie liever de gerenderde weergave ernaast heeft,
   /// schakelt naar Bron (broneditor + live weergave, grafiek/tabel met dubbelklik).
-  Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
+  Widget _visualLayout(
+    ThemeData theme,
+    String source,
+    BoxConstraints c, {
+    required TlpLevel tlp,
+    required Map<String, String> fields,
+  }) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
     // De paginamaat-indicator in de hoek toont op welk formaat en met welke
@@ -103,50 +115,55 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
         Expanded(
-          child: Stack(
-            children: [
-              MediaQuery(
-                // De zoom vermenigvuldigt wat het toestel en de app-brede
-                // interfaceschaal al vragen, zoals de documentatielezer het ook
-                // doet — één begrip van "groter", niet twee.
-                data: MediaQuery.of(context).copyWith(
-                  textScaler: TextScaler.linear(
-                    MediaQuery.textScalerOf(context).scale(1) * zoom,
+          child: _styledDocumentSurface(
+            _styleProfile,
+            Stack(
+              children: [
+                MediaQuery(
+                  // De zoom vermenigvuldigt wat het toestel en de app-brede
+                  // interfaceschaal al vragen, zoals de documentatielezer het ook
+                  // doet — één begrip van "groter", niet twee.
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: TextScaler.linear(
+                      MediaQuery.textScalerOf(context).scale(1) * zoom,
+                    ),
+                  ),
+                  child: WritingPageBreakOverlay(
+                    editorKey: _visualEditorKey,
+                    pageContentHeight: pageContentHeight,
+                    bodyFontSize:
+                        _styleProfile?.documentBodyFontSize ??
+                        kDocumentDefaultBodyFontSize,
+                    // De einden gelden alleen op paginabreedte: op een andere
+                    // maat breekt het vel ergens anders dan de lijn zegt.
+                    enabled:
+                        _showPageBreaks &&
+                        settings.documentEditorWidth ==
+                            DocumentEditorWidth.page,
+                    child: _wysiwygEditor(theme),
                   ),
                 ),
-                child: WritingPageBreakOverlay(
-                  editorKey: _visualEditorKey,
-                  pageContentHeight: pageContentHeight,
-                  bodyFontSize:
-                      _styleProfile?.documentBodyFontSize ??
-                      kDocumentDefaultBodyFontSize,
-                  // De einden gelden alleen op paginabreedte: op een andere
-                  // maat breekt het vel ergens anders dan de lijn zegt.
-                  enabled:
-                      _showPageBreaks &&
-                      settings.documentEditorWidth == DocumentEditorWidth.page,
-                  child: _styledDocumentSurface(
-                    _styleProfile,
-                    _wysiwygEditor(theme),
+                // Binnen het tekstvlak, niet over de vaste voetband. Zo blijft
+                // zowel de paginamatenknop als een TLP- of stijlvoet leesbaar.
+                _documentPageIndicator(
+                  context,
+                  theme,
+                  pageSize: pageSize,
+                  margins: margins,
+                  fromDocument: documentCarriesPageSetup(_pageSetupSource(ref)),
+                  onTap: () => unawaited(
+                    _choosePageSetupScope(
+                      context,
+                      ref,
+                      pageSize: pageSize,
+                      margins: margins,
+                    ),
                   ),
                 ),
-              ),
-              _documentPageIndicator(
-                context,
-                theme,
-                pageSize: pageSize,
-                margins: margins,
-                fromDocument: documentCarriesPageSetup(_pageSetupSource(ref)),
-                onTap: () => unawaited(
-                  _choosePageSetupScope(
-                    context,
-                    ref,
-                    pageSize: pageSize,
-                    margins: margins,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
+            tlp: tlp,
+            fields: fields,
           ),
         ),
       ],
@@ -197,11 +214,18 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     onSmartPaste: _smartPaste,
   );
 
-  Widget _preview(ThemeData theme, String source) => _documentLivePreview(
+  Widget _preview(
+    ThemeData theme,
+    String source,
+    TlpLevel tlp,
+    Map<String, String> fields,
+  ) => _documentLivePreview(
     theme,
     source,
     scrollController: _previewScroll,
     style: _styleProfile,
+    tlp: tlp,
+    fields: fields,
     anchorBlockIndex: _anchorBlockIndex,
     anchorKey: _anchorKey,
     onEditChart: _editChart,
@@ -219,6 +243,8 @@ Widget _documentLivePreview(
   String source, {
   required ScrollController scrollController,
   required ThemeProfile? style,
+  required TlpLevel tlp,
+  required Map<String, String> fields,
   required int anchorBlockIndex,
   required GlobalKey? anchorKey,
   required void Function(int, String) onEditChart,
@@ -243,6 +269,8 @@ Widget _documentLivePreview(
         onEditChart: onEditChart,
         onEditTable: onEditTable,
       ),
+      tlp: tlp,
+      fields: fields,
     ),
   ),
 );
@@ -382,6 +410,8 @@ Widget _documentPagesLayout(
   String source, {
   required ThemeProfile? style,
   required String? projectPath,
+  required TlpLevel tlp,
+  required Map<String, String> fields,
 }) {
   final settings = ref.watch(settingsProvider);
   // Draagt het document zelf een paginaopmaak, dan wint die van de instelling —
@@ -394,6 +424,8 @@ Widget _documentPagesLayout(
       pageSize: setup.size!,
       margins: setup.margins!,
       profile: style,
+      tlp: tlp,
+      fields: fields,
       projectPath: projectPath,
       chapterPageBreak: settings.documentChapterPageBreak,
       // Waar de noten komen staat in het document zelf; zie

@@ -1633,6 +1633,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bijvoorbeeld project-id': 'Näiteks project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokumendis võib olla kuni 100 kohandatud välja.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Välja väärtus võib sisaldada kuni 4096 märki.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Kasutage {naam} päises või jaluses.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nimi on vigane, reserveeritud või pole kordumatu.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markeritel pole äratuntavat järjestusväärtust. Need jäävad nähtavaks.',
   'Tijdlijn · vervolg': 'Ajajoon · järg',
@@ -1905,8 +1914,6 @@ const _dutchSourceAddEt = <String, String>{
   'Tabel geplakt': 'Tabel kleebitud',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Lisa kaust või kasuta ühe faili jaoks "Sirvi".',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Iseseisev pakett markdowni ja piltidega — valikuliselt krüpteeritud (AES-256), avaneb OciDeckis.',
   'dia\'s uit dit document.': 'slaidi sellest dokumendist.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',

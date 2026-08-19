@@ -674,6 +674,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bijvoorbeeld project-id': 'Zum Beispiel project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Ein Dokument kann höchstens 100 benutzerdefinierte Felder enthalten.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Ein Feldwert darf höchstens 4096 Zeichen enthalten.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Verwenden Sie {naam} in der Kopf- oder Fußzeile.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Der Name ist ungültig, reserviert oder nicht eindeutig.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markierungen haben keinen erkennbaren Sortierwert. Sie bleiben sichtbar.',
   'Tijdlijn · vervolg': 'Zeitleiste · Fortsetzung',
@@ -947,8 +956,6 @@ const _dutchSourceAddDe = {
   'Tabel geplakt': 'Tabelle eingefügt',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Ordner hinzufügen oder "Durchsuchen" für eine einzelne Datei verwenden.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Eigenständiges Paket mit Markdown und Bildern — optional verschlüsselt (AES-256), öffnet in OciDeck.',
   'dia\'s uit dit document.': 'Folien aus diesem Dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Das Logo dieses Stilprofils wurde nicht gefunden und wird nicht angezeigt (Pfad: {pad}). Wählen Sie ein Logo in den Präsentationseinstellungen.',

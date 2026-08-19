@@ -40,6 +40,20 @@ final Map<String, Deck Function(Deck)> _deckVelden = {
   'keywords': (d) => d.copyWith(keywords: _waarde),
   'version': (d) => d.copyWith(version: _waarde),
   'date': (d) => d.copyWith(date: _waarde),
+  'documentHeader': (d) => d.copyWith(
+    themeProfile: d.themeProfile.copyWith(documentHeaderText: _waarde),
+  ),
+  'documentFooter': (d) => d.copyWith(
+    themeProfile: d.themeProfile.copyWith(documentFooterText: _waarde),
+  ),
+  'documentFieldKeys': (d) => d.copyWith(
+    documentFields: {
+      ...d.documentFields,
+      'jan.jansen@andersbureau.nl': 'gewone waarde',
+    },
+  ),
+  'documentFields': (d) =>
+      d.copyWith(documentFields: {...d.documentFields, 'klant': _waarde}),
   'marpHeader': (d) =>
       d.copyWith(marpStyle: d.marpStyle.copyWith(header: _waarde)),
   'marpFooter': (d) =>

@@ -18,6 +18,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/redaction_manifest.dart';
 import '../../models/slide.dart';
 import '../../utils/secure_compare.dart';
+import '../document_chrome_template.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
 import 'privacy_scanner.dart';
@@ -207,6 +208,16 @@ class RedactionManifestService {
       'keywords' => deck.keywords,
       'version' => deck.version,
       'date' => deck.date,
+      'documentHeader' => _resolvedDocumentChrome(
+        deck,
+        deck.themeProfile.documentHeaderText,
+      ),
+      'documentFooter' => _resolvedDocumentChrome(
+        deck,
+        deck.themeProfile.documentFooterText,
+      ),
+      'documentFieldKeys' => _documentFieldAt(deck, i)?.key,
+      'documentFields' => _documentFieldAt(deck, i)?.value,
       'marpHeader' => deck.marpStyle.header,
       'marpFooter' => deck.marpStyle.footer,
       'standardsUsed' => _at(deck.standardsUsed, i),
@@ -216,6 +227,23 @@ class RedactionManifestService {
       _ => null,
     };
     return _span(text, finding);
+  }
+
+  String _resolvedDocumentChrome(Deck deck, String template) =>
+      resolveDocumentChromeTemplate(template, {
+        ...deck.documentFields,
+        'title': deck.title,
+        'subtitle': deck.description,
+        'author': deck.author,
+      }, escapeMarkdownValues: false);
+
+  MapEntry<String, String>? _documentFieldAt(Deck deck, int index) {
+    final custom = deck.documentFields.entries
+        .where(
+          (entry) => !const {'title', 'subtitle', 'author'}.contains(entry.key),
+        )
+        .toList();
+    return index >= 0 && index < custom.length ? custom[index] : null;
   }
 
   String _newSalt() {

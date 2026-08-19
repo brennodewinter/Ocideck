@@ -525,6 +525,7 @@ class _DocumentStyleBuilder {
       maxLines: 4,
       decoration: InputDecoration(
         labelText: '${l10n.d('Koptekst')} · ${l10n.t('markdownMode')}',
+        helperText: l10n.d('Gebruik {naam} in de kop- of voettekst.'),
         isDense: true,
       ),
       onChanged: (value) => _rebuild(() {
@@ -540,6 +541,7 @@ class _DocumentStyleBuilder {
       maxLines: 4,
       decoration: InputDecoration(
         labelText: '${l10n.d('Footertekst')} · ${l10n.t('markdownMode')}',
+        helperText: l10n.d('Gebruik {naam} in de kop- of voettekst.'),
         isDense: true,
       ),
       onChanged: (value) => _rebuild(() {

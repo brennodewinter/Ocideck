@@ -240,11 +240,6 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
               label: Text(l10n.d('LaTeX (.tex)')),
               icon: const Icon(Icons.science_outlined, size: 15),
             ),
-            ButtonSegment(
-              value: DocumentExportFormat.ocideck,
-              label: Text(l10n.d('Pakket (.ocideck)')),
-              icon: const Icon(Icons.inventory_2_outlined, size: 15),
-            ),
           ],
           selected: {_format},
           showSelectedIcon: false,
@@ -261,9 +256,6 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           ),
           DocumentExportFormat.latex => l10n.d(
             'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.',
-          ),
-          DocumentExportFormat.ocideck => l10n.d(
-            'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.',
           ),
         }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
       ],

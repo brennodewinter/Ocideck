@@ -1638,6 +1638,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bijvoorbeeld project-id': 'Piemēram, project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokumentā var būt ne vairāk kā 100 pielāgotu lauku.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Lauka vērtībā var būt ne vairāk kā 4096 rakstzīmes.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Izmantojiet {naam} galvenē vai kājenē.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nosaukums nav derīgs, ir rezervēts vai nav unikāls.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Marķieriem nav atpazīstamas kārtošanas vērtības. Tie paliek redzami.',
   'Tijdlijn · vervolg': 'Laika skala · turpinājums',
@@ -1909,8 +1918,6 @@ const _dutchSourceAddLv = <String, String>{
   'Tabel geplakt': 'Tabula ielīmēta',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Pievienojiet mapi vai izmantojiet "Pārlūkot" vienam failam.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Patstāvīga pakotne ar markdown un attēliem — pēc izvēles šifrēta (AES-256), atveras OciDeck.',
   'dia\'s uit dit document.': 'slaidi no šī dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šī stila profila logotips nav atrasts un netiek rādīts (ceļš: {pad}). Izvēlieties logotipu prezentācijas iestatījumos.',

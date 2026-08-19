@@ -1651,6 +1651,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bijvoorbeeld project-id': 'Na przykład project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokument może zawierać maksymalnie 100 pól niestandardowych.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Wartość pola może zawierać maksymalnie 4096 znaków.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Użyj {naam} w nagłówku lub stopce.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nazwa jest nieprawidłowa, zastrzeżona lub nieunikalna.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Znaczniki nie mają rozpoznawalnej wartości kolejności. Pozostają widoczne.',
   'Tijdlijn · vervolg': 'Oś czasu · ciąg dalszy',
@@ -1922,8 +1931,6 @@ const _dutchSourceAddPl = <String, String>{
   'Tabel geplakt': 'Tabela wklejona',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Dodaj folder lub użyj "Przeglądaj" dla pojedynczego pliku.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Samodzielny pakiet z markdown i obrazami — opcjonalnie szyfrowany (AES-256), otwiera się w OciDeck.',
   'dia\'s uit dit document.': 'slajdów z tego dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tego profilu stylu nie zostało znalezione i nie jest wyświetlane (ścieżka: {pad}). Wybierz logo w ustawieniach prezentacji.',

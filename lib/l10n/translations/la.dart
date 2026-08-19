@@ -1654,6 +1654,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bijvoorbeeld project-id': 'Exempli gratia project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Documentum summum 100 campos proprios continere potest.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Valor campi summum 4096 notas continere potest.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Utere {naam} in capite aut pede paginae.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nomen invalidum, reservatum aut non unicum est.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Signa nullum valorem ordinis cognoscibilem habent. Visibilia manent.',
   'Tijdlijn · vervolg': 'Temporum linea · continuatio',
@@ -1927,8 +1936,6 @@ const _dutchSourceAddLa = <String, String>{
   'Tabel geplakt': 'Tabula infixa',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Plicam adde aut "Explorare" pro uno fasciculo utere.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Fasciculus independens cum markdown et imaginibus — optionaliter cryptatus (AES-256), in OciDeck aperitur.',
   'dia\'s uit dit document.': 'scidae ex hoc documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Huius stiliprofili insigne non inventum est et non ostenditur (via: {pad}). Elige insigne in praesentationis optionibus.',

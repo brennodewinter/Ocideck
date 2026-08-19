@@ -1617,6 +1617,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bijvoorbeeld project-id': 'project-id \'oH ghantoH',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      '100 Deghmey le\' neH ngaSlaH Degh.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      '4096 Deghmey neH ngaSlaH Degh lo\'laHghach.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'nachDaq pagh bIngDaq {naam} yIlo\'.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'pong lughbe\', pollu\' pagh rapbe\'be\'.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'ghItlhpu\'vaD poH cherlu\'bogh ghajbe\'. leghlu\' \'ej ratlh.',
   'Tijdlijn · vervolg': 'poH tlhegh · \'op',
@@ -1886,8 +1895,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Tabel geplakt': 'taH bej ghop',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Daq yIchel pagh wa\' De\' vIneH yISam.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Hom tam je markdown \'ej nagh — vaj \'e\' rIn (AES-256), OciDeckDaq yIghaj.',
   'dia\'s uit dit document.': '\'echletHommey ghItlhvamvo\'.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). cha\'nav SeHlawDaq Degh yIwIv.',

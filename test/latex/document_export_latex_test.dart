@@ -5,8 +5,11 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -28,7 +31,12 @@ void main() {
     if (await temp.exists()) await temp.delete(recursive: true);
   });
 
-  Future<ExportBundle> buildBundle(String body) => buildDocumentExportBundle(
+  Future<ExportBundle> buildBundle(
+    String body, {
+    TlpLevel tlp = TlpLevel.none,
+    ThemeProfile? theme,
+    Map<String, String> fields = const {},
+  }) => buildDocumentExportBundle(
     body,
     projectPath: null,
     profile: PrivacyExportProfile.full,
@@ -37,6 +45,9 @@ void main() {
     disabledRules: const {},
     markdownService: MarkdownService(),
     title: 'Rapport',
+    tlp: tlp,
+    theme: theme,
+    fields: fields,
   );
 
   test('latex-export schrijft een compleet article-document', () async {
@@ -47,6 +58,7 @@ void main() {
       bundle,
       DocumentExportFormat.latex,
       html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
       metadata: const ExportDocumentMetadata(title: 'Rapport', language: 'nl'),
       outputPath: out,
     );
@@ -76,12 +88,94 @@ void main() {
       bundle,
       DocumentExportFormat.latex,
       html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
       outputPath: out,
     );
     final tex = await File(out).readAsString();
     // Geen Marp-front-matter in een LaTeX-export
     expect(tex.contains('marp: true'), isFalse);
     expect(tex.contains('---\nmarp'), isFalse);
+  });
+
+  test('document-TLP staat zichtbaar in LaTeX-kop en -voet', () async {
+    const body = '# Rapport\n\nTekst.\n';
+    final bundle = await buildBundle(body, tlp: TlpLevel.amberStrict);
+    final out = p.join(temp.path, 'rapport-tlp.tex');
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.latex,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      // De bundel blijft de bron van de classificatie, ook als deze metadata
+      // door een aanroeper onvolledig is samengesteld.
+      metadata: const ExportDocumentMetadata(
+        title: 'Rapport',
+        tlp: TlpLevel.none,
+      ),
+      outputPath: out,
+    );
+    final tex = await File(out).readAsString();
+
+    expect(tex, contains(r'\fancyhead[C]'));
+    expect(tex, contains(r'\fancyfoot[C]'));
+    expect('TLP:AMBER+STRICT'.allMatches(tex), hasLength(2));
+    expect(tex, contains(r'\fancyfoot[R]{\thepage}'));
+  });
+
+  test('LaTeX-export vult en escapt documentvelden in kop en voet', () async {
+    const body = '# Rapport\n\nTekst.\n';
+    const theme = ThemeProfile(
+      documentHeaderText: '**{title}** · {project-id} · {project_id}',
+      documentFooterText: '{author} — {subtitle}',
+    );
+    final bundle = await buildBundle(
+      body,
+      theme: theme,
+      fields: const {
+        'title': 'Audit_2026',
+        'subtitle': 'R&D 100%',
+        'author': 'Ada & Bob',
+        'project-id': 'P-42',
+        'project_id': 'P_43',
+      },
+    );
+    final out = p.join(temp.path, 'rapport-velden.tex');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.latex,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final tex = await File(out).readAsString();
+
+    expect(tex, contains(r'\fancyhead[L]{Audit\_2026 · P-42 · P\_43}'));
+    expect(tex, contains(r'\fancyfoot[L]{Ada \& Bob — R\&D 100\%}'));
+    expect(tex, isNot(contains('{project-id}')));
+    expect(tex, isNot(contains('{project_id}')));
+    expect(tex, isNot(contains('{subtitle}')));
+  });
+
+  test('titelpagina houdt documentchrome en TLP', () async {
+    final bundle = await buildBundle(
+      '# Titel\n\nTekst.\n',
+      theme: const ThemeProfile(documentHeaderText: 'Kop'),
+      tlp: TlpLevel.amber,
+      fields: const {'title': 'Rapport'},
+    );
+    final out = p.join(temp.path, 'titelpagina.tex');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.latex,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final tex = await File(out).readAsString();
+
+    expect(tex, contains('\\maketitle\n\\thispagestyle{fancy}\n'));
   });
 
   test('wiskunde gaat rechtstreeks door in latex-export', () async {
@@ -98,6 +192,7 @@ $$\int_0^1 x\,dx = \frac{1}{2}$$
       bundle,
       DocumentExportFormat.latex,
       html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
       outputPath: out,
     );
     final tex = await File(out).readAsString();
@@ -110,12 +205,16 @@ $$\int_0^1 x\,dx = \frac{1}{2}$$
 
   test('tabel wordt tabular met booktabs in latex-export', () async {
     const body = '| Naam | Waarde |\n| --- | --- |\n| Jan | 30 |\n';
-    final bundle = await buildBundle(body);
+    final bundle = await buildBundle(
+      body,
+      theme: const ThemeProfile(tableBorderStyle: TableBorderStyle.lined),
+    );
     final out = p.join(temp.path, 'tabel.tex');
     await writeDocumentExport(
       bundle,
       DocumentExportFormat.latex,
       html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
       outputPath: out,
     );
     final tex = await File(out).readAsString();

@@ -1658,6 +1658,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bijvoorbeeld project-id': 'Pereżempju project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokument jista’ jkun fih mhux aktar minn 100 qasam personalizzat.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Valur ta’ qasam jista’ jkun fih mhux aktar minn 4096 karattru.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Uża {naam} fl-intestatura jew fil-qiegħ il-paġna.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'L-isem mhuwiex validu, huwa riżervat jew mhuwiex uniku.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Il-markaturi m’għandhom l-ebda valur ta’ ordni rikonoxxibbli. Huma jibqgħu viżibbli.',
   'Tijdlijn · vervolg': 'Kronoloġija · kontinwazzjoni',
@@ -1932,8 +1941,6 @@ const _dutchSourceAddMt = <String, String>{
   'Tabel geplakt': 'Tabella waħħla',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Żid kartella jew uża "Fittex" għal fajl wieħed.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Pakkett indipendenti b\'markdown u stampi — opzonalment kriptat (AES-256), jinfetaħ f\'OciDeck.',
   'dia\'s uit dit document.': 'slajds minn dan id-dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Il-logo ta\' dan il-profil tal-istil ma nstabx u mhux jintwera (triq: {pad}). Agħżel logo fl-issettjar tal-preżentazzjoni.',

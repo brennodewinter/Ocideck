@@ -12,11 +12,13 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
+import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
 void main() {
   // Een geldig BSN (elfproef-conform) mét het contextwoord "BSN" ernaast, precies
@@ -79,6 +81,108 @@ void main() {
       expect(out, contains('<!-- timeline -->\n| Tijd |'));
     },
   );
+
+  test('samengestelde chrome wordt vóór de projectie gescand', () async {
+    final bundle = await buildDocumentExportBundle(
+      '# Rapport\n',
+      projectPath: null,
+      profile: PrivacyExportProfile.redacted,
+      ownIdentity: OwnIdentity.empty,
+      regions: defaultPrivacyRegions,
+      disabledRules: const {},
+      markdownService: MarkdownService(),
+      fields: const {'local': 'jan.jansen', 'domain': 'andersbureau.nl'},
+      theme: const ThemeProfile(documentHeaderText: '{local}@{domain}'),
+    );
+
+    expect(
+      bundle.audience.deck.themeProfile.documentHeaderText,
+      kRedactionToken,
+    );
+  });
+
+  test(
+    'oversize documentvelden stoppen de privacybundel fail-closed',
+    () async {
+      await expectLater(
+        buildDocumentExportBundle(
+          '# Rapport\n',
+          projectPath: null,
+          profile: PrivacyExportProfile.redacted,
+          ownIdentity: OwnIdentity.empty,
+          regions: defaultPrivacyRegions,
+          disabledRules: const {},
+          markdownService: MarkdownService(),
+          fields: {'klant': 'x' * (kMaxPrivacyDocumentFieldChars + 1)},
+        ),
+        throwsA(
+          isA<PrivacyDocumentLimitExceeded>().having(
+            (error) => error.message,
+            'message',
+            contains('maximaal 4096'),
+          ),
+        ),
+      );
+    },
+  );
+
+  for (final field in ['title', 'subtitle', 'author']) {
+    test('$field wordt begrensd vóór de privacyscanner begint', () async {
+      await expectLater(
+        buildDocumentExportBundle(
+          '# Rapport\n',
+          projectPath: null,
+          profile: PrivacyExportProfile.redacted,
+          ownIdentity: OwnIdentity.empty,
+          regions: defaultPrivacyRegions,
+          disabledRules: const {},
+          markdownService: MarkdownService(),
+          fields: {field: 'x' * (kMaxPrivacyDocumentFieldChars + 1)},
+        ),
+        throwsA(isA<PrivacyDocumentLimitExceeded>()),
+      );
+    });
+  }
+
+  test('een afgeleide H1-titel wordt vóór de detectoren begrensd', () async {
+    await expectLater(
+      buildDocumentExportBundle(
+        '# Rapport\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.redacted,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+        title: 'x' * (kMaxPrivacyDocumentFieldChars + 1),
+      ),
+      throwsA(isA<PrivacyDocumentLimitExceeded>()),
+    );
+  });
+
+  test('te veel documentvelden stoppen de privacybundel fail-closed', () async {
+    await expectLater(
+      buildDocumentExportBundle(
+        '# Rapport\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.redacted,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+        fields: {
+          for (var i = 0; i <= kMaxPrivacyDocumentFields; i++) 'veld-$i': 'x',
+        },
+      ),
+      throwsA(
+        isA<PrivacyDocumentLimitExceeded>().having(
+          (error) => error.message,
+          'message',
+          contains('maximaal 100'),
+        ),
+      ),
+    );
+  });
 
   test(
     'het volledige profiel laat het BSN staan — zo meet de test de redactie echt',

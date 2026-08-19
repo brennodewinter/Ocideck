@@ -1642,6 +1642,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bijvoorbeeld project-id': 'Zum Biispil project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Es Dokumänt cha höchschtens 100 eigeti Fälder enthalte.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'En Fäldwärt dörf höchschtens 4096 Zeiche enthalte.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Verwänd {naam} i de Chopf- oder Fuessziile.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'De Name isch ungültig, reserviert oder nöd eindeutig.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Markierige händ kei erkennbare Ordnigswärt. Si blibed sichtbar.',
   'Tijdlijn · vervolg': 'Zytlinie · Fortsetzig',
@@ -1913,8 +1922,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Tabel geplakt': 'Tabelle iifüegt',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Ordner zuefüege oder "Durchsuueche" für ei einzelni Datei bruche.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Sälbschtändigs Paket mit Markdown und Bilder — optional verschlüsslet (AES-256), goht in OciDeck uf.',
   'dia\'s uit dit document.': 'Folie us dem Dokumänt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'S Logo vo däm Stiilprofil isch nöd gfunde worde und wird nöd aazeigt (Pfad: {pad}). Wähl e Logo i de Präsentationsistellige.',

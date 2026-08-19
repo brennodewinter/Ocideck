@@ -6,6 +6,36 @@
 // omdat die het profiel nodig heeft.
 part of '../marp_html_service.dart';
 
+bool _hasPrintableDocumentChrome(
+  bool continuous,
+  ThemeProfile? theme,
+  ExportDocumentMetadata metadata,
+) =>
+    continuous &&
+    (metadata.tlp != TlpLevel.none ||
+        (theme != null &&
+            (theme.documentHeaderText.trim().isNotEmpty ||
+                theme.documentFooterText.trim().isNotEmpty ||
+                theme.documentShowPageNumbers ||
+                (theme.effectiveDocumentLogoPath?.trim().isNotEmpty ??
+                    false))));
+
+/// Zichtbare AI-melding voor HTML. Zij staat onder de TLP-balk wanneer die er
+/// is; in doorlopende documentmodus zit TLP in kop en voet en begint zij boven.
+String _aiBanner(
+  ExportDocumentMetadata metadata, {
+  bool classificationBanner = true,
+}) {
+  if (!metadata.hasUnreviewedAi) return '';
+  const l10n = AppLocalizations(Locale('nl'));
+  final text = l10n.d(
+    'Concept: hier staat AI-tekst die nog niemand heeft nagekeken',
+  );
+  final top = classificationBanner ? '2.4em' : '0';
+  return '<div class="ai-export-banner" style="top:$top">'
+      '${MarpHtmlService._htmlText(text)}</div>';
+}
+
 /// De opmaak die van geen enkel thema afhangt: de dia-doos, de tijdlijn, de
 /// ondertekening, het media-redactievlak, de classificatiebanner en de
 /// printregels. Deze gaat **altijd** mee, vóór [_defaultThemeCss] of
@@ -102,6 +132,12 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .document code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
 .document blockquote{border-left:4px solid #ccc;margin:.6em 0;padding-left:16px;color:#555}
 .document th,.document td{border:1px solid #ccc;padding:6px 12px}
+.document-header,.document-footer{display:flex;align-items:center;gap:14px;min-height:42px;font-size:12px}
+.document-header{border-bottom:1px solid rgba(100,116,139,.55);margin-bottom:24px}
+.document-footer{border-top:1px solid rgba(100,116,139,.55);margin-top:24px}
+.document-header-text,.document-footer-text{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.document-tlp{display:inline-block;flex:0 0 auto;padding:3px 7px;border-radius:4px;background:#000;font:700 10px/1.2 monospace;letter-spacing:.025em;white-space:nowrap}
+@media print{.document{padding-top:76px;padding-bottom:68px}.document-header,.document-footer{position:fixed;left:40px;right:40px;z-index:2;background:#fff}.document-header{top:0}.document-footer{bottom:0}}
 
 /* De melding dat er ongecontroleerde AI-tekst in dit document staat.
    Kwam van de juridische tak; deze CSS verhuisde intussen hierheen. */
@@ -203,7 +239,9 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       'min-height:42px;color:$bandText;background:$bandBackground;font-size:12px}'
       '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
       '.document-footer{border-top:1px solid ${t.accentColor}8c;margin-top:24px}'
-      '.document-header-text,.document-footer-text{flex:1;min-width:0}'
+      '.document-header-text,.document-footer-text{flex:1;min-width:0;'
+      'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;'
+      'overflow:hidden}'
       '.document-page-number{white-space:nowrap;font-variant-numeric:tabular-nums}'
       '.document-page-number::after{content:"1"}'
       '.document-logo{display:inline-flex;align-items:center;flex:0 0 auto}'
@@ -305,25 +343,76 @@ const _reportingCss = r'''
 /// Feature 3: de `@page`-regel voor paginamaat en marges. Top-level CSS
 /// (buiten `@media print` — `@page` is zelf al een print-regel). Leeg wanneer
 /// geen van beide is gezet, zodat de browser-default geldt.
-String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
+String _pageAtRuleCss(
+  PageSizeSpec? size,
+  PageMargins? margins, {
+  bool reserveDocumentChrome = false,
+  ThemeProfile? theme,
+  TlpLevel tlp = TlpLevel.none,
+}) {
   if (size == null && margins == null) return '';
+  final headerBandMm = _printDocumentBandMm(theme, tlp, header: true);
+  final footerBandMm = _printDocumentBandMm(theme, tlp, header: false);
+  final requiredTopMm = headerBandMm + 3;
+  final requiredBottomMm = footerBandMm + 3;
+  final effectiveMargins = margins == null || !reserveDocumentChrome
+      ? margins
+      : margins.copyWith(
+          topMm: margins.topMm < requiredTopMm ? requiredTopMm : margins.topMm,
+          bottomMm: margins.bottomMm < requiredBottomMm
+              ? requiredBottomMm
+              : margins.bottomMm,
+        );
   final parts = <String>[];
   if (size != null) {
     parts.add(
-      'size:${margins == null ? size.cssName : size.cssSizeWith(margins)}',
+      'size:${effectiveMargins == null ? size.cssName : size.cssSizeWith(effectiveMargins)}',
     );
   }
-  if (margins != null) {
-    parts.add('margin:${margins.cssMargin}');
+  if (effectiveMargins != null) {
+    parts.add('margin:${effectiveMargins.cssMargin}');
     // De afloopdoos hoort bij CSS Paged Media. De vergrote `size` hierboven
     // doet het werk dat élke afdrukmotor honoreert; dit is de aanvulling voor
     // een motor die de standaard kent. Snijtekens (`marks`) staan er bewust
     // niet bij — zie [PageMargins].
-    if (margins.hasBleed) {
-      parts.add('bleed:${_fmtBleedMm(margins.bleedMm)}mm');
+    if (effectiveMargins.hasBleed) {
+      parts.add('bleed:${_fmtBleedMm(effectiveMargins.bleedMm)}mm');
     }
   }
-  return '@page{${parts.join(';')}}';
+  final page = '@page{${parts.join(';')}}';
+  if (!reserveDocumentChrome || effectiveMargins == null) return page;
+  return '$page@media print{.document-header{top:-${_fmtBleedMm(headerBandMm)}mm}'
+      '.document-footer{bottom:-${_fmtBleedMm(footerBandMm)}mm}}';
+}
+
+double _printDocumentBandMm(
+  ThemeProfile? theme,
+  TlpLevel tlp, {
+  required bool header,
+}) {
+  var heightPx = 42.0;
+  if (theme != null) {
+    final text = header
+        ? theme.documentHeaderText.trim()
+        : theme.documentFooterText.trim();
+    // Vier zichtbare regels bij 12 px en document-line-height 1,65, plus de
+    // scheidingsrand. De CSS kapt na vier regels af; deze maat is dus ook het
+    // werkelijke maximum wanneer één lange regel in de afdruk omslaat.
+    if (text.isNotEmpty) heightPx = 81;
+    final path = theme.effectiveDocumentLogoPath?.trim() ?? '';
+    final logoInBand =
+        path.isNotEmpty &&
+        theme.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
+    if (logoInBand) {
+      final logoHeight = (theme.effectiveDocumentLogoSize * 0.5).clamp(
+        32.0,
+        240.0,
+      );
+      if (logoHeight > heightPx) heightPx = logoHeight;
+    }
+  }
+  if (theme == null && tlp == TlpLevel.none) return 0;
+  return (heightPx * 25.4 / 96).ceilToDouble();
 }
 
 /// Millimeters zonder overbodige nullen — `3` in plaats van `3.0`.

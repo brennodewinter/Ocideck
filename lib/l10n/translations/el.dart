@@ -1664,6 +1664,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bijvoorbeeld project-id': 'Για παράδειγμα project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Ένα έγγραφο μπορεί να περιέχει έως 100 προσαρμοσμένα πεδία.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Μια τιμή πεδίου μπορεί να περιέχει έως 4096 χαρακτήρες.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Χρησιμοποιήστε το {naam} στην κεφαλίδα ή το υποσέλιδο.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Το όνομα δεν είναι έγκυρο, είναι δεσμευμένο ή δεν είναι μοναδικό.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Οι δείκτες δεν έχουν αναγνωρίσιμη τιμή σειράς. Παραμένουν ορατοί.',
   'Tijdlijn · vervolg': 'Χρονογραμμή · συνέχεια',
@@ -1939,8 +1948,6 @@ const _dutchSourceAddEl = <String, String>{
   'Tabel geplakt': 'Ο πίνακας επικολλήθηκε',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Προσθέστε φάκελο ή χρησιμοποιήστε "Περιήγηση" για ένα αρχείο.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Αυτόνομο πακέτο με markdown και εικόνες — προαιρετικά κρυπτογραφημένο (AES-256), ανοίγει στο OciDeck.',
   'dia\'s uit dit document.': 'διαφάνειες από αυτό το έγγραφο.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Το λογότυπο αυτού του προφίλ στυλ δεν βρέθηκε και δεν εμφανίζεται (διαδρομή: {pad}). Επιλέξτε ένα λογότυπο στις ρυθμίσεις παρουσίασης.',

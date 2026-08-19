@@ -1646,6 +1646,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bijvoorbeeld project-id': 'Pavyzdžiui, project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokumente gali būti ne daugiau kaip 100 pasirinktinių laukų.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Lauko reikšmę gali sudaryti ne daugiau kaip 4096 ženklai.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Naudokite {naam} antraštėje arba poraštėje.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Pavadinimas netinkamas, rezervuotas arba neunikalus.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Žymekliai neturi atpažįstamos rikiavimo reikšmės. Jie lieka matomi.',
   'Tijdlijn · vervolg': 'Laiko juosta · tęsinys',
@@ -1918,8 +1927,6 @@ const _dutchSourceAddLt = <String, String>{
   'Tabel geplakt': 'Lentelė įklijuota',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Pridėkite aplanką arba naudokite "Naršyti" vienam failui.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Atskiriamas paketas su markdown ir vaizdais — pasirinktinai šifruojamas (AES-256), atidaromas OciDeck.',
   'dia\'s uit dit document.': 'skaidrių iš šio dokumento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šio stiliaus profilio logotipas nerastas ir nerodomas (kelias: {pad}). Pasirinkite logotipą pateikties nustatymuose.',

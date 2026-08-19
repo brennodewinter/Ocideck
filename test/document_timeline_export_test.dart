@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_deck_bridge.dart';
 import 'package:ocideck/services/latex/markdown_to_latex.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -119,6 +120,7 @@ void main() {
             bundle,
             format,
             html: service,
+            enforcementPolicy: const ClassificationEnforcementPolicy(),
             outputPath: path,
           );
           outputs[format] = await File(path).readAsString();

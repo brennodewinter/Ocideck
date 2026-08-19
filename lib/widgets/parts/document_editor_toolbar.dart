@@ -28,6 +28,8 @@ class _DocEditorToolbar extends StatelessWidget {
   /// knoppen ervoor. 1,0 is ware grootte.
   final double zoom;
   final ValueChanged<double> onZoomChanged;
+  final TlpLevel tlp;
+  final ValueChanged<TlpLevel> onTlpChanged;
   final VoidCallback onInsertChart;
   final VoidCallback onInsertTable;
   final VoidCallback onInsertTimeline;
@@ -52,6 +54,7 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback? onRedo;
   final VoidCallback onExport;
   final VoidCallback onOpenSettings;
+  final VoidCallback onEditFields;
   final VoidCallback onConvertToPresentation;
   final TextEditingController controller;
   final FocusNode editorFocus;
@@ -83,6 +86,8 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onWidthChanged,
     required this.zoom,
     required this.onZoomChanged,
+    required this.tlp,
+    required this.onTlpChanged,
     required this.onInsertChart,
     required this.onInsertTable,
     required this.onInsertTimeline,
@@ -99,6 +104,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onRedo,
     required this.onExport,
     required this.onOpenSettings,
+    required this.onEditFields,
     required this.onConvertToPresentation,
     required this.controller,
     required this.editorFocus,
@@ -209,6 +215,8 @@ class _DocEditorToolbar extends StatelessWidget {
                       _insertMenu(l10n),
                       const SizedBox(width: 4),
                       _styleMenu(l10n),
+                      const SizedBox(width: 4),
+                      _tlpMenu(l10n, scheme),
                       const SizedBox(width: 4),
                       if (!compactForLargeText)
                         TextButton.icon(
@@ -467,6 +475,75 @@ class _DocEditorToolbar extends StatelessWidget {
     );
   }
 
+  /// De ene classificatie van het hele document. Anders dan een presentatie
+  /// biedt een document bewust geen niveau per pagina of sectie.
+  Widget _tlpMenu(AppLocalizations l10n, ColorScheme scheme) {
+    final isSet = tlp != TlpLevel.none;
+    final marking = isSet ? Color(tlp.foreground) : scheme.onSurface;
+    return PopupMenuButton<TlpLevel>(
+      key: const Key('document-tlp-menu'),
+      tooltip: l10n.d('TLP-classificatie (Traffic Light Protocol)'),
+      position: PopupMenuPosition.under,
+      onSelected: onTlpChanged,
+      itemBuilder: (context) => [
+        for (final level in TlpLevel.values)
+          PopupMenuItem<TlpLevel>(
+            value: level,
+            child: Row(
+              children: [
+                Container(
+                  width: 14,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: level == TlpLevel.none
+                        ? Colors.transparent
+                        : Color(level.foreground),
+                    border: Border.all(color: scheme.outline),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(level == TlpLevel.none ? l10n.d('Geen') : level.label),
+                if (level == tlp) ...[
+                  const Spacer(),
+                  Icon(Icons.check, size: 16, color: scheme.onSurfaceVariant),
+                ],
+              ],
+            ),
+          ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        decoration: BoxDecoration(
+          color: isSet ? Colors.black : Colors.transparent,
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: marking.withValues(alpha: 0.7)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (!isSet) ...[
+              Icon(Icons.shield_outlined, size: 14, color: marking),
+              const SizedBox(width: 5),
+            ],
+            Text(
+              isSet ? tlp.label : l10n.d('TLP'),
+              style: TextStyle(
+                color: marking,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'monospace',
+                fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+                letterSpacing: 0.3,
+              ),
+            ),
+            Icon(Icons.arrow_drop_down, size: 16, color: marking),
+          ],
+        ),
+      ),
+    );
+  }
+
   /// Het overloopmenu rechts: Instellingen (anders alleen via macOS-menubalk
   /// bereikbaar in documentmodus) en conversie naar presentatie.
   Widget _moreMenu(AppLocalizations l10n) {
@@ -482,9 +559,26 @@ class _DocEditorToolbar extends StatelessWidget {
             onConvertToPresentation();
           case 2:
             onFootnotesAtEndChanged(!footnotesAtEnd);
+          case 3:
+            onEditFields();
         }
       },
       itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          value: 3,
+          child: Row(
+            children: [
+              const Icon(Icons.description_outlined, size: 17),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  '${l10n.d('Document')} · ${l10n.d('Eigenschappen')}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
         // De plaatsing van de voetnoten is een eigenschap van dít document en
         // landt in zijn front matter; daarom hier en niet bij de instellingen.
         PopupMenuItem<int>(
@@ -631,6 +725,7 @@ Widget _documentPageIndicator(
           ? l10n.d('Deze paginaopmaak staat in dit document')
           : l10n.d('Deze paginaopmaak komt uit je instellingen'),
       child: TextButton(
+        key: const Key('document-page-indicator'),
         onPressed: onTap,
         style: TextButton.styleFrom(
           minimumSize: Size.zero,

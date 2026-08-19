@@ -1643,6 +1643,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bijvoorbeeld project-id': 'Na primjer project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokument može sadržavati najviše 100 prilagođenih polja.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Vrijednost polja može sadržavati najviše 4096 znakova.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Upotrijebite {naam} u zaglavlju ili podnožju.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Naziv nije valjan, rezerviran je ili nije jedinstven.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Oznake nemaju prepoznatljivu vrijednost redoslijeda. Ostaju vidljive.',
   'Tijdlijn · vervolg': 'Vremenska crta · nastavak',
@@ -1914,8 +1923,6 @@ const _dutchSourceAddHr = <String, String>{
   'Tabel geplakt': 'Tablica zalijepljena',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Dodajte mapu ili upotrijebite "Pregledaj" za jednu datoteku.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Samostalni paket s markdownom i slikama — po želji šifriran (AES-256), otvara se u OciDecku.',
   'dia\'s uit dit document.': 'slajdova iz ovog dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip ovog profila stila nije pronađen i ne prikazuje se (putanja: {pad}). Odaberite logotip u postavkama prezentacije.',

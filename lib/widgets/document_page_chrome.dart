@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/deck.dart';
 import '../models/settings.dart';
+import '../services/document_chrome_template.dart';
 import '../theme/app_theme.dart';
 import 'slides/inline_markdown.dart';
 import 'theme_profile_logo.dart';
@@ -17,6 +19,8 @@ class DocumentChromeBand extends StatelessWidget {
     this.pageLabel = '1',
     this.projectPath,
     this.compact = false,
+    this.tlp = TlpLevel.none,
+    this.fields = const {},
   });
 
   final ThemeProfile profile;
@@ -24,6 +28,8 @@ class DocumentChromeBand extends StatelessWidget {
   final String pageLabel;
   final String? projectPath;
   final bool compact;
+  final TlpLevel tlp;
+  final Map<String, String> fields;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +37,13 @@ class DocumentChromeBand extends StatelessWidget {
     final logoInBand =
         path.isNotEmpty &&
         profile.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
-    final text = header
+    final template = header
         ? profile.documentHeaderText.trim()
         : profile.documentFooterText.trim();
+    final text = resolveDocumentChromeTemplate(template, fields);
     final showPage = !header && profile.documentShowPageNumbers;
-    if (!logoInBand && text.isEmpty && !showPage) {
+    final showTlp = tlp != TlpLevel.none;
+    if (!logoInBand && text.isEmpty && !showPage && !showTlp) {
       return const SizedBox.shrink();
     }
 
@@ -85,6 +93,10 @@ class DocumentChromeBand extends StatelessWidget {
             ),
           ),
         ],
+        if (showTlp) ...[
+          SizedBox(width: compact ? 8 : 12),
+          _tlpMarking(header),
+        ],
         if (logoInBand && rightLogo) ...[
           SizedBox(width: compact ? 10 : 16),
           _logo(path, logoWidth, Alignment.centerRight),
@@ -123,4 +135,34 @@ class DocumentChromeBand extends StatelessWidget {
             : (width * 0.5).clamp(32.0, 240.0),
         alignment: alignment,
       );
+
+  Widget _tlpMarking(bool header) => Semantics(
+    label: tlp.label,
+    child: Container(
+      key: Key(header ? 'document-header-tlp' : 'document-footer-tlp'),
+      padding: EdgeInsets.symmetric(
+        horizontal: compact ? 5 : 7,
+        vertical: compact ? 2 : 3,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: Color(tlp.foreground).withValues(alpha: 0.75),
+        ),
+      ),
+      child: Text(
+        tlp.label,
+        maxLines: 1,
+        style: TextStyle(
+          color: Color(tlp.foreground),
+          fontSize: compact ? 8 : 10,
+          fontWeight: FontWeight.w700,
+          fontFamily: 'monospace',
+          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+          letterSpacing: 0.25,
+        ),
+      ),
+    ),
+  );
 }

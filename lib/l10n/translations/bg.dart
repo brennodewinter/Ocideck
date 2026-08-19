@@ -1659,6 +1659,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bijvoorbeeld project-id': 'Например project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Един документ може да съдържа най-много 100 потребителски полета.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Стойността на поле може да съдържа най-много 4096 знака.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Използвайте {naam} в горния или долния колонтитул.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Името е невалидно, запазено или не е уникално.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Маркерите нямат разпознаваема стойност за подреждане. Остават видими.',
   'Tijdlijn · vervolg': 'Времева линия · продължение',
@@ -1930,8 +1939,6 @@ const _dutchSourceAddBg = <String, String>{
   'Tabel geplakt': 'Таблицата е поставена',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Добавете папка или използвайте "Преглед" за един файл.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Самостоятелен пакет с markdown и изображения — по избор криптиран (AES-256), отваря се в OciDeck.',
   'dia\'s uit dit document.': 'слайда от този документ.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логото на този профил за стил не е намерено и не се показва (път: {pad}). Изберете логото в настройките за презентация.',

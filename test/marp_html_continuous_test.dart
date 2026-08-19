@@ -2,8 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
@@ -159,6 +161,40 @@ void main() {
       },
     );
 
+    test(
+      'TLP staat in documentkop en -voet, niet in een losse banner',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final classified = await service.build(
+          _md,
+          continuous: true,
+          metadata: const ExportDocumentMetadata(
+            tlp: TlpLevel.amber,
+            unreviewedAiSlideCount: 1,
+          ),
+        );
+
+        // Ook zonder stijlprofiel ontstaat documentchrome: de classificatie is
+        // van het document, niet van de huisstijl.
+        expect(classified, contains('class="document-header"'));
+        expect(classified, contains('class="document-footer"'));
+        expect(
+          '<span class="document-tlp"'.allMatches(classified),
+          hasLength(2),
+        );
+        expect('>TLP:AMBER</span>'.allMatches(classified), hasLength(2));
+        expect(classified, isNot(contains('<div class="tlp-export-banner"')));
+        // De AI-melding blijft bovenaan staan; er is geen vaste TLP-banner meer
+        // waarvoor zij een lege regel ruimte hoeft te laten.
+        expect(classified, contains('class="ai-export-banner" style="top:0"'));
+
+        final unclassified = await service.build(_md, continuous: true);
+        expect(unclassified, isNot(contains('<span class="document-tlp"')));
+        expect(unclassified, isNot(contains('class="document-header"')));
+        expect(unclassified, isNot(contains('class="document-footer"')));
+      },
+    );
+
     test('documentchrome laat onveilige Markdown-links niet door', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(
@@ -256,6 +292,48 @@ void main() {
         html,
         contains('@page{size:A4 landscape;margin:30mm 15mm 30mm 15mm}'),
       );
+    });
+
+    test(
+      'printchrome reserveert ruimte wanneer documentmarges nul zijn',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final html = await service.build(
+          _md,
+          continuous: true,
+          theme: const ThemeProfile(
+            documentHeaderText: 'Regel 1\nRegel 2\nRegel 3\nRegel 4',
+          ),
+          pageSize: PageSizeSpec.a4,
+          pageMargins: const PageMargins.uniform(0),
+        );
+
+        expect(html, contains('@page{size:A4;margin:25mm 0mm 15mm 0mm}'));
+        expect(html, contains('.document-header{top:-22mm}'));
+        expect(html, contains('.document-footer{bottom:-12mm}'));
+      },
+    );
+
+    test('printchrome reserveert ook de maximale logoband volledig', () async {
+      final service = MarpHtmlService(
+        loadAsset: _diskLoader,
+        loadBytes: (_) async => Uint8List.fromList([1, 2, 3, 4]),
+      );
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(
+          documentLogoPath: 'logo.png',
+          documentLogoSize: 480,
+          documentLogoPosition: 'top-right',
+        ),
+        pageSize: PageSizeSpec.a4,
+        pageMargins: const PageMargins.uniform(0),
+      );
+
+      expect(html, contains('@page{size:A4;margin:67mm 0mm 15mm 0mm}'));
+      expect(html, contains('.document-header{top:-64mm}'));
+      expect(html, contains('.document-footer{bottom:-12mm}'));
     });
 
     test('de tabelstijl van het profiel staat in de document-CSS', () async {

@@ -1639,6 +1639,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bijvoorbeeld project-id': 'Misalnya project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Dokumen dapat memuat paling banyak 100 bidang khusus.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Nilai bidang dapat memuat paling banyak 4096 karakter.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Gunakan {naam} di header atau footer.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Nama tidak valid, sudah dicadangkan, atau tidak unik.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Penanda tidak memiliki nilai urutan yang dapat dikenali. Penanda tetap terlihat.',
   'Tijdlijn · vervolg': 'Linimasa · lanjutan',
@@ -1912,8 +1921,6 @@ const _dutchSourceAddId = <String, String>{
   'Tabel geplakt': 'Tabel ditempel',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Tambahkan folder atau gunakan "Telusuri" untuk satu berkas.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Paket mandiri berisi markdown dan gambar — opsional dienkripsi (AES-256), dibuka di OciDeck.',
   'dia\'s uit dit document.': 'slide dari dokumen ini.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo profil gaya ini tidak ditemukan dan tidak ditampilkan (jalur: {pad}). Pilih logo di pengaturan presentasi.',

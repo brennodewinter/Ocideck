@@ -208,6 +208,34 @@ void main() {
     expect(rect.right, lessThanOrEqualTo(800));
   });
 
+  testWidgets('documentexport respecteert verplichte classificatie', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'requireClassificationOnExport': true,
+    });
+    await tester.binding.setSurfaceSize(const Size(800, 800));
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(() {
+      tester.binding.setSurfaceSize(null);
+      tester.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+    final notifier = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Rapport\n\nTekst.'));
+
+    await tester.pumpWidget(harness(notifier));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Exporteren…'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Exporteren…').last);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.textContaining('Export geblokkeerd door classificatiebeleid'),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('Cmd+= zoomt in en Cmd+0 zet terug op ware grootte', (
     tester,
   ) async {

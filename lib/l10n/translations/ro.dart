@@ -1656,6 +1656,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bijvoorbeeld project-id': 'De exemplu project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Un document poate conține cel mult 100 de câmpuri personalizate.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Valoarea unui câmp poate conține cel mult 4096 de caractere.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Folosiți {naam} în antet sau subsol.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Numele nu este valid, este rezervat sau nu este unic.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Marcajele nu au o valoare de ordonare recognoscibilă. Rămân vizibile.',
   'Tijdlijn · vervolg': 'Cronologie · continuare',
@@ -1928,8 +1937,6 @@ const _dutchSourceAddRo = <String, String>{
   'Tabel geplakt': 'Tabel lipit',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Adaugă un folder sau folosește "Răsfoiește" pentru un singur fișier.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Pachet independent cu markdown și imagini — opțional criptat (AES-256), se deschide în OciDeck.',
   'dia\'s uit dit document.': 'diapozitive din acest document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',

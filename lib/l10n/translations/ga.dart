@@ -1669,6 +1669,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bijvoorbeeld project-id': 'Mar shampla project-id',
+  'Een document kan maximaal 100 vrije velden bevatten.':
+      'Ní féidir níos mó ná 100 réimse saincheaptha a bheith i ndoiciméad.',
+  'Een veldwaarde mag maximaal 4096 tekens bevatten.':
+      'Ní féidir níos mó ná 4096 carachtar a bheith i luach réimse.',
+  'Gebruik {naam} in de kop- of voettekst.':
+      'Úsáid {naam} sa cheanntásc nó sa bhuntásc.',
+  'Naam is ongeldig, gereserveerd of niet uniek.':
+      'Tá an t-ainm neamhbhailí, curtha in áirithe nó níl sé uathúil.',
   'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
       'Níl luach oird inaitheanta ag na marcóirí. Fanann siad infheicthe.',
   'Tijdlijn · vervolg': 'Amlíne · leanúint',
@@ -1943,8 +1952,6 @@ const _dutchSourceAddGa = <String, String>{
   'Tabel geplakt': 'Tábla ghreamaithe',
   'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
       'Cuir fillteán leis nó úsáid "Brabhsáil" le haghaidh comhaid amháin.',
-  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
-      'Pacáiste neamhspleách le markdown agus íomhánna — criptithe de rogha (AES-256), osclaítear in OciDeck.',
   'dia\'s uit dit document.': 'sleamhnán ón doiciméad seo.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ní bhfuarthas lógó an phróifíle stíle seo agus ní thaispeántar é (cosán: {pad}). Roghnaigh lógó i socruithe na láithreoide.',

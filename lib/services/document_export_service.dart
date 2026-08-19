@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import '../models/privacy_disposition.dart';
-import '../models/settings.dart' show ThemeProfile, TableBorderStyle;
+import '../models/deck.dart';
+import '../models/settings.dart' show ThemeProfile;
 import '../models/page_size.dart';
 import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
 import 'document_chart_hydration.dart';
+import 'classification_enforcement_policy.dart';
 import 'document_deck_bridge.dart';
 import 'document_footnote_setup.dart';
 import 'document_page_setup.dart';
@@ -17,12 +19,42 @@ import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
 import 'privacy/privacy_own_identity.dart';
+import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
-/// LaTeX `article`, of een OciDeck-pakket. Alle vier dragen de geredigeerde
+/// LaTeX `article`. Alle drie dragen de geredigeerde
 /// body — nooit de rauwe bron.
-enum DocumentExportFormat { md, html, latex, ocideck }
+enum DocumentExportFormat { md, html, latex }
+
+/// De veilige voorgestelde bestandsnaam voor een documentexport.
+///
+/// De aanroeper geeft hier de titel uit het geprojecteerde deck door; daardoor
+/// kan een geredigeerde titel niet via de bestandskiezer alsnog uitlekken.
+String suggestedDocumentExportFileName({
+  required String title,
+  required DocumentExportFormat format,
+  required PrivacyExportProfile profile,
+  required String redactedLabel,
+  required String fullLabel,
+  required String fallbackLabel,
+}) {
+  final ext = switch (format) {
+    DocumentExportFormat.md => 'md',
+    DocumentExportFormat.html => 'html',
+    DocumentExportFormat.latex => 'tex',
+  };
+  final tag = profile == PrivacyExportProfile.redacted
+      ? redactedLabel
+      : fullLabel;
+  final source = title.isEmpty ? fallbackLabel : title;
+  final cleaned = source
+      .replaceAll(RegExp(r'[^\w\- ]+'), '')
+      .trim()
+      .replaceAll(RegExp(r'[\s]+'), '-');
+  final base = cleaned.isEmpty ? fallbackLabel : cleaned;
+  return '$base-$tag.$ext';
+}
 
 /// Bouwt de exportbundel voor een plat-Markdown-**document**, langs exact
 /// dezelfde privacygrens als het deck-exportpad.
@@ -47,6 +79,8 @@ Future<ExportBundle> buildDocumentExportBundle(
   required MarkdownService markdownService,
   String title = '',
   ThemeProfile? theme,
+  TlpLevel tlp = TlpLevel.none,
+  Map<String, String> fields = const {},
 }) async {
   final hydrated = await hydrateDocumentChartData(
     body,
@@ -56,6 +90,8 @@ Future<ExportBundle> buildDocumentExportBundle(
     hydrated,
     projectPath: projectPath,
     title: title,
+    tlp: tlp,
+    fields: fields,
   );
   final deck = theme == null
       ? baseDeck
@@ -106,7 +142,7 @@ Future<String?> writeDocumentExport(
   ExportBundle bundle,
   DocumentExportFormat format, {
   required MarpHtmlService html,
-  ThemeProfile? theme,
+  required ClassificationEnforcementPolicy enforcementPolicy,
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
   bool chapterPageBreak = false,
@@ -117,6 +153,16 @@ Future<String?> writeDocumentExport(
   String footnotesTitle = 'Noten',
   required String outputPath,
 }) async {
+  if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
+    return null;
+  }
+  final theme = bundle.audience.deck.themeProfile;
+  final projectedMetadata = ExportDocumentMetadata.fromDeck(bundle.audience);
+  final exportMetadata = metadata == null
+      ? projectedMetadata
+      : projectedMetadata.withLanguage(metadata.language);
+  final documentFields = bundle.audience.deck.documentFields;
+  final chromeFields = _documentChromeFields(bundle.audience.deck);
   switch (format) {
     case DocumentExportFormat.md:
       // Feature 4: vervang de `<!-- toc -->`-marker door de gegenereerde
@@ -159,11 +205,21 @@ Future<String?> writeDocumentExport(
       // `page` schrijft niets, en dat is geen vergeetachtigheid: onderaan de
       // bladzijde is wat elke lezer zonder aanwijzing al doet, dus een document
       // dat niets bijzonders wil houdt een export zonder front matter (§14.9).
-      final mdOutFinal = withDocumentFootnotePlacement(
+      final mdWithFootnotePlacement = withDocumentFootnotePlacement(
         mdWithPageSetup,
         footnotePlacement,
       );
-      await writeStringAtomic(File(outputPath), mdOutFinal);
+      final mdWithTlp = withDocumentFrontMatterKey(
+        mdWithFootnotePlacement,
+        'tlp',
+        bundle.audience.deck.tlp == TlpLevel.none
+            ? null
+            : bundle.audience.deck.tlp.key,
+      );
+      await writeStringAtomic(
+        File(outputPath),
+        withDocumentFields(mdWithTlp, documentFields),
+      );
       return outputPath;
     case DocumentExportFormat.html:
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
@@ -182,7 +238,8 @@ Future<String?> writeDocumentExport(
         continuous: true,
         chapterPageBreak: chapterPageBreak,
         theme: theme,
-        metadata: metadata,
+        metadata: exportMetadata,
+        documentFields: chromeFields,
         embedImage: embedImage,
         pageSize: pageSize,
         pageMargins: pageMargins,
@@ -190,23 +247,24 @@ Future<String?> writeDocumentExport(
       await writeStringAtomic(File(outputPath), out);
       return outputPath;
     case DocumentExportFormat.latex:
-      final meta = metadata ?? const ExportDocumentMetadata();
+      final meta = exportMetadata;
       final body = markdownToLatex(
         projectedDocumentBody(bundle),
         chapterPageBreak: chapterPageBreak,
-        tableBorderStyle: theme?.tableBorderStyle ?? TableBorderStyle.lined,
+        tableBorderStyle: theme.tableBorderStyle,
         footnotePlacement: footnotePlacement,
         endnotesTitle: footnotesTitle,
       );
       final tex =
-          '${articlePreamble(meta, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
+          '${articlePreamble(meta, theme: theme, documentFields: chromeFields, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
       await writeStringAtomic(File(outputPath), tex);
       return outputPath;
-    case DocumentExportFormat.ocideck:
-      // Pakketexport loopt via FileService.exportPackage (versleuteling,
-      // assets) — niet via deze tekstschrijver.
-      throw UnsupportedError(
-        'DocumentExportFormat.ocideck hoort bij exportPackage, niet writeDocumentExport',
-      );
   }
 }
+
+Map<String, String> _documentChromeFields(Deck deck) => {
+  ...deck.documentFields,
+  'title': deck.title,
+  'subtitle': deck.description,
+  'author': deck.author,
+};

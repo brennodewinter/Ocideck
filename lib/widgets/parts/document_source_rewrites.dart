@@ -116,17 +116,6 @@ bool _hasThematicBreakBefore(List<String> lines, int line) {
   return false;
 }
 
-/// Een bestandsnaam-veilige vorm van [title] voor de voorgestelde exportnaam:
-/// alles wat geen letter/cijfer/koppelteken is wordt een koppelteken, samengedrukt
-/// en getrimd. Top-level en puur, los toetsbaar van het editor-scherm.
-String _safeExportName(String title) {
-  final cleaned = title
-      .replaceAll(RegExp(r'[^\w\- ]+'), '')
-      .trim()
-      .replaceAll(RegExp(r'[\s]+'), '-');
-  return cleaned.isEmpty ? 'document' : cleaned;
-}
-
 /// Vervang de inhoud van het `chartOrdinal`-de ```chart-blok (vanaf 0) in
 /// [source] door [newContent] (de kale spec-tekst, zonder fence). Andere blokken
 /// — en alle tekst eromheen — blijven byte-getrouw staan; een `chartOrdinal`
