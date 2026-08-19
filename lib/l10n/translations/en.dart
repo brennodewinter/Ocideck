@@ -5,7 +5,7 @@ const _stringsEn = {
   'newPresentation': 'New presentation',
   'open': 'Open...',
   'openEllipsis': 'Open…',
-  'recentPresentations': 'Recent presentations',
+  'recentFiles': 'Recent files',
   'newTab': 'New tab',
   'imageLibrary': 'Image library',
   'presentFullscreen': 'Present fullscreen · P for presenter view',
@@ -189,7 +189,6 @@ const _dutchSourceEn = {
   'Andere map…': 'Other folder…',
   'Bibliotheken': 'Libraries',
   'Geen bibliotheek': 'No library',
-  'Geen presentaties (.md) gevonden.': 'No presentations (.md) found.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'You choose the folder and the name in the next window. The images go into an images/ subfolder and media into media/, next to the presentation file.',
   'Kies bestandsnaam…': 'Choose file name…',
@@ -523,13 +522,10 @@ const _dutchSourceEn = {
   'Kies een video': 'Choose a video',
   'Kies een audiobestand': 'Choose an audio file',
   'Bladeren…': 'Browse…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Search by file name, title or slide text…',
   'Geen map gekozen': 'No folder selected',
   'Map kiezen': 'Choose folder',
   'Kies een map met presentaties om te beginnen.':
       'Choose a folder with presentations to begin.',
-  'Geen presentaties gevonden voor': 'No presentations found for',
   'meer treffer(s)': 'more match(es)',
   'Slide zoeken': 'Find slide',
   'Slides importeren': 'Import slides',
@@ -870,6 +866,32 @@ const _dutchSourceAddEn = {
   'Toch sorteren': 'Still sorting',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'First add at least one event. This table remains unchanged.',
+  'Alles': 'All',
+  'Presentaties': 'Presentations',
+  'Documenten': 'Documents',
+  'Voorbeeld': 'Preview',
+  'Voorbeeld tonen': 'Show preview',
+  'Voorbeeld tonen bij openen': 'Show a preview when opening',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Point at a file to see a preview of it here.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'This file cannot be shown. Opening refuses it too — the content is unsafe, damaged or unreadable.',
+  'Dit document is leeg.': 'This document is empty.',
+  'Deze presentatie heeft nog geen dia.':
+      'This presentation has no slides yet.',
+  'Alleen het begin van het document wordt getoond.':
+      'Only the beginning of the document is shown.',
+  'Bestanden zoeken op deze computer': 'Find files on this computer',
+  'Dubbele bestanden opruimen': 'Clean up duplicate files',
+  'bestand(en) gevonden': 'file(s) found',
+  'Geen presentaties of documenten gevonden.':
+      'No presentations or documents found.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'No presentations or documents found in the known folders.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Search by file name, title or text inside the file…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Shows a rendered preview of the file you point at in the open dialog, so you can see what is inside before you open it.',
   'Voetnoot': 'Footnote',
   'Noten': 'Notes',
   'Voetnoten achterin het document': 'Footnotes at the end of the document',
@@ -3724,13 +3746,9 @@ const _dutchSourceAddEn = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Warning above {b1} bullets (1 column), {bcl} (checklist) or {b2} (2 columns); critical above {bc1} or {bc2}. Words above {w1}/{w2}, on average above {avg} per bullet. Quote above {q} characters, title above {t} characters. Nesting deeper than level {lvl}. Text that must shrink below {warn}% warns, below {crit}% is critical.',
   'Zoek op deze computer': 'Search this computer',
-  'Presentaties zoeken op deze computer': 'Find presentations on this computer',
   'Zoek op titel, pad of thema…': 'Search by title, path or theme…',
   'Bekende mappen worden doorzocht…': 'Searching known folders…',
   'gevonden': 'found',
-  'presentatie(s) gevonden': 'presentation(s) found',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'No Marp presentations found in the known folders.',
   'Geen thema': 'No theme',
   // Markdown-syntaxcontrole: foutmeldingen kopiëren.
   'Kopieer syntaxproblemen': 'Copy syntax issues',

@@ -5,7 +5,7 @@ const _stringsRo = {
   'newPresentation': 'Prezentare nouă',
   'open': 'Deschide...',
   'openEllipsis': 'Deschide…',
-  'recentPresentations': 'Prezentări recente',
+  'recentFiles': 'Fișiere recente',
   'newTab': 'Filă nouă',
   'imageLibrary': 'Bibliotecă de imagini',
   'presentFullscreen':
@@ -191,7 +191,6 @@ const _dutchSourceRo = {
   'Andere map…': 'Alt folder…',
   'Bibliotheken': 'Biblioteci',
   'Geen bibliotheek': 'Nicio bibliotecă',
-  'Geen presentaties (.md) gevonden.': 'Nu s-au găsit prezentări (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Alegi folderul și numele în fereastra următoare. Imaginile ajung într-un subfolder images/, iar media în media/, lângă fișierul prezentării.',
   'Kies bestandsnaam…': 'Alege numele fișierului…',
@@ -527,13 +526,10 @@ const _dutchSourceRo = {
   'Kies een video': 'Alege un video',
   'Kies een audiobestand': 'Alege un fișier audio',
   'Bladeren…': 'Răsfoiește…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Caută după numele fișierului, titlu sau text din slide-uri…',
   'Geen map gekozen': 'Niciun folder selectat',
   'Map kiezen': 'Alege folder',
   'Kies een map met presentaties om te beginnen.':
       'Alege un folder cu prezentări pentru a începe.',
-  'Geen presentaties gevonden voor': 'Nu s-au găsit prezentări pentru',
   'meer treffer(s)': 'potrivire/potriviri în plus',
   'Slide zoeken': 'Găsește slide',
   'Slides importeren': 'Importă slide-uri',
@@ -902,14 +898,9 @@ const _dutchSourceRo = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Avertisment peste {b1} puncte (1 coloană), {bcl} (listă de verificare) sau {b2} (2 coloane); critic peste {bc1} sau {bc2}. Cuvinte peste {w1}/{w2}, în medie peste {avg} pe punct. Citat peste {q} caractere, titlu peste {t} caractere. Imbricare mai adâncă de nivelul {lvl}. Textul care trebuie micșorat sub {warn}% avertizează, sub {crit}% este critic.',
   'Zoek op deze computer': 'Caută pe acest computer',
-  'Presentaties zoeken op deze computer':
-      'Găsește prezentări pe acest computer',
   'Zoek op titel, pad of thema…': 'Caută după titlu, cale sau temă…',
   'Bekende mappen worden doorzocht…': 'Se caută în folderele cunoscute…',
   'gevonden': 'găsit',
-  'presentatie(s) gevonden': 'prezentare(-ări) găsit(e)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nicio prezentare Marp găsită în folderele cunoscute.',
   'Geen thema': 'Fără temă',
   'Kopieer syntaxproblemen': 'Copiază problemele de sintaxă',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1690,6 +1681,32 @@ const _dutchSourceAddRo = <String, String>{
   'Toch sorteren': 'Încă se sortează',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Mai întâi adăugați cel puțin un eveniment. Acest tabel rămâne neschimbat.',
+  'Alles': 'Toate',
+  'Presentaties': 'Prezentări',
+  'Documenten': 'Documente',
+  'Voorbeeld': 'Previzualizare',
+  'Voorbeeld tonen': 'Arată previzualizarea',
+  'Voorbeeld tonen bij openen': 'Arată previzualizarea la deschidere',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Indică un fișier pentru a vedea aici o previzualizare.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Acest fișier nu poate fi afișat. Și deschiderea îl refuză — conținutul este nesigur, deteriorat sau ilizibil.',
+  'Dit document is leeg.': 'Acest document este gol.',
+  'Deze presentatie heeft nog geen dia.':
+      'Această prezentare nu are încă niciun slide.',
+  'Alleen het begin van het document wordt getoond.':
+      'Se afișează doar începutul documentului.',
+  'Bestanden zoeken op deze computer': 'Găsește fișiere pe acest computer',
+  'Dubbele bestanden opruimen': 'Curăță fișierele duplicate',
+  'bestand(en) gevonden': 'fișier(e) găsit(e)',
+  'Geen presentaties of documenten gevonden.':
+      'Nu s-au găsit prezentări sau documente.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nicio prezentare sau document găsit în folderele cunoscute.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Caută după numele fișierului, titlu sau text din fișier…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Afișează în fereastra de deschidere o previzualizare a fișierului indicat, ca să vezi conținutul înainte de a-l deschide.',
   'Voetnoot': 'Notă de subsol',
   'Noten': 'Note',
   'Voetnoten achterin het document': 'Note la sfârșitul documentului',

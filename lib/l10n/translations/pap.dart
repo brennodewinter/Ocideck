@@ -5,7 +5,7 @@ const _stringsPap = {
   'newPresentation': 'Presentashon nobo',
   'open': 'Habri...',
   'openEllipsis': 'Habri…',
-  'recentPresentations': 'Presentashonnan resien',
+  'recentFiles': 'Archivonan resien',
   'newTab': 'Tab nobo',
   'imageLibrary': 'Biblioteka di imágen',
   'presentFullscreen': 'Presentá na pantalla kompletu · P pa presenter view',
@@ -189,7 +189,6 @@ const _dutchSourcePap = {
   'Andere map…': 'Otro karpeta…',
   'Bibliotheken': 'Bibliotekanan',
   'Geen bibliotheek': 'Sin biblioteka',
-  'Geen presentaties (.md) gevonden.': 'No a haña presentashon (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Bo ta skohe e karpeta i e nòmber den e siguiente bentana. E imágennan ta bai den un subkarpeta images/ i media den media/, banda di e archivo di presentashon.',
   'Kies bestandsnaam…': 'Skohe nòmber di archivo…',
@@ -697,6 +696,32 @@ const _dutchSourceAddPap = {
   'Toch sorteren': 'Ainda ta sorteando',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Promé agregá por lo ménos un evento. E tabel aki ta keda meskos.',
+  'Alles': 'Tur',
+  'Presentaties': 'Presentashonnan',
+  'Documenten': 'Dokumentonan',
+  'Voorbeeld': 'Vista previu',
+  'Voorbeeld tonen': 'Mustra vista previu',
+  'Voorbeeld tonen bij openen': 'Mustra vista previu ora di habri',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Señalá un archivo pa mira un vista previu akinan.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'E archivo aki no por wòrdu mustrá. Habri tampoko no ta posibel — e kontenido ta insigur, dañá òf ilegibel.',
+  'Dit document is leeg.': 'E dokumento aki ta bashí.',
+  'Deze presentatie heeft nog geen dia.':
+      'E presentashon aki no tin lámina ainda.',
+  'Alleen het begin van het document wordt getoond.':
+      'Solamente e kuminsamentu di e dokumento ta wòrdu mustrá.',
+  'Bestanden zoeken op deze computer': 'Haña archivo riba e computer aki',
+  'Dubbele bestanden opruimen': 'Limpia archivonan duplá',
+  'bestand(en) gevonden': 'archivo(nan) hañá',
+  'Geen presentaties of documenten gevonden.':
+      'No a haña presentashon ni dokumento.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'No a haña presentashon ni dokumento den e mapnan konosí.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Buska pa nòmber di archivo, título òf teksto den e archivo…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Ta mustra den e bentana di habri un vista previu di e archivo ku bo ta señalá, pa bo mira kiko tin aden promé ku bo habri\'é.',
   'Voetnoot': 'Nota na pia di página',
   'Noten': 'Notanan',
   'Voetnoten achterin het document': 'Notanan na fin di e dokumento',
@@ -3593,14 +3618,9 @@ const _dutchSourceAddPap = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Avertensia ariba {b1} bullet (1 kolom), {bcl} (checklist) of {b2} (2 kolom); krítiko ariba {bc1} of {bc2}. Palabra ariba {w1}/{w2}, na promedio ariba {avg} pa bullet. Sita ariba {q} karakter, título ariba {t} karakter. Nesting mas profundo ku nivel {lvl}. Teksto ku mester redusí bou di {warn}% ta avertí, bou di {crit}% ta krítiko.',
   'Zoek op deze computer': 'Busca den e computer aki',
-  'Presentaties zoeken op deze computer':
-      'Haña presentashon riba e computer aki',
   'Zoek op titel, pad of thema…': 'Busca pa título, kaminda of tema…',
   'Bekende mappen worden doorzocht…': 'Ta buscando den e mapnan konosí…',
   'gevonden': 'hañá',
-  'presentatie(s) gevonden': 'presentashon(nan) hañá',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'No a haña presentashon Marp den e mapnan konosí.',
   'Geen thema': 'Sin tema',
   // Markdown-syntaxcontrole: foutmeldingen kopiëren.
   'Kopieer syntaxproblemen': 'Kopia problemanan di sintaksis',
@@ -3934,7 +3954,6 @@ const _dutchSourceAddPap = {
       'No tin otro deck habrí. Habri promé un otro tab.',
   'Geen andere presentaties (.md) in deze map gevonden.':
       'No a haña otro presentashon (.md) den e karpeta aki.',
-  'Geen presentaties gevonden voor': 'No a haña presentashon pa',
   'Geen resultaten': 'No tin resultado',
   'Geen resultaten voor': 'No tin resultado pa',
   'Geen slides gevonden voor': 'No a haña lámina pa',
@@ -4039,8 +4058,6 @@ const _dutchSourceAddPap = {
   'Wordt automatisch toegevoegd bij presenteren en exporteren.':
       'Ta wordu agregá automáticamente ora di presentá i eksportá.',
   'Zoek in slides…': 'Buska den lámina…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Buska pa nòmber di archivo, título òf teksto den e lámina…',
   'Zoek op naam of beschrijving…': 'Buska pa nòmber òf deskripshon…',
   'Zoek op presentatie, titel of tekst…':
       'Buska pa presentashon, título òf teksto…',

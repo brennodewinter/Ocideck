@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/markdown_kind.dart';
 import '../../platform/platform_features.dart';
 import '../../services/duplicate_service.dart';
 import '../../services/file_service.dart';
@@ -9,10 +10,14 @@ import '../../utils/display_path.dart';
 import '../duplicate_badges.dart';
 import '../resizable_dialog_box.dart';
 import 'duplicate_cleanup_dialog.dart';
+import 'open_kind_chrome.dart';
+import 'open_preview_pane.dart';
 
 /// Dialog that scans a fixed set of well-known locations (recent-file folders
-/// plus the user's Documents/Desktop/Downloads/iCloud) for Marp presentations
-/// and lets the user pick one to open. OciDeck-themed decks are listed first.
+/// plus the user's Documents/Desktop/Downloads/iCloud) for editable Markdown
+/// files and lets the user pick one to open. Presentaties staan vooraan
+/// (OciDeck-thema eerst), daarna de platte documenten; het filter bovenin toont
+/// één soort.
 ///
 /// Returns the chosen file path, or null when dismissed.
 class ScanLibraryDialog extends StatefulWidget {
@@ -23,11 +28,16 @@ class ScanLibraryDialog extends StatefulWidget {
   /// worden er compact tegen afgezet in plaats van als volledig pad.
   final String? homeDir;
 
+  /// Of er een gerenderd voorbeeld naast de lijst staat (instelling
+  /// `showOpenPreview`, standaard uit).
+  final bool showPreview;
+
   const ScanLibraryDialog({
     super.key,
     required this.fileService,
     required this.recentFiles,
     this.homeDir,
+    this.showPreview = false,
   });
 
   static Future<String?> show(
@@ -35,6 +45,7 @@ class ScanLibraryDialog extends StatefulWidget {
     required FileService fileService,
     required List<String> recentFiles,
     String? homeDir,
+    bool showPreview = false,
   }) {
     return showDialog<String>(
       context: context,
@@ -42,6 +53,7 @@ class ScanLibraryDialog extends StatefulWidget {
         fileService: fileService,
         recentFiles: recentFiles,
         homeDir: homeDir,
+        showPreview: showPreview,
       ),
     );
   }
@@ -60,6 +72,11 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
   List<DuplicateInfo<ScanHit>> _groups = const [];
   String _phase = '';
   String _query = '';
+  OpenKindFilter _kind = OpenKindFilter.all;
+
+  /// Het bestand waarvan het voorbeeld getoond wordt; null zolang er niets is
+  /// aangewezen. Alleen in gebruik als [ScanLibraryDialog.showPreview].
+  String? _previewPath;
 
   @override
   void initState() {
@@ -92,7 +109,9 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     });
   }
 
-  List<DuplicateInfo<ScanHit>> _visible() {
+  /// De groepen die aan de zoekterm voldoen — nog zonder het soortfilter, zodat
+  /// de aantallen op de filterknoppen bij dezelfde zoekactie horen als de lijst.
+  List<DuplicateInfo<ScanHit>> _matching() {
     final q = _query.trim().toLowerCase();
     if (q.isEmpty) return _groups;
     final terms = q.split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
@@ -113,19 +132,24 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final visible = _visible();
+    final found = _matching();
+    final visible = [
+      for (final info in found)
+        if (_kind.accepts(info.primary.kind)) info,
+    ];
+    final documents = found.where((i) => i.primary.kind.isDocument).length;
 
     return AlertDialog(
       title: Row(
         children: [
           const Icon(Icons.travel_explore, size: 20),
           const SizedBox(width: 8),
-          Expanded(child: Text(l10n.d('Presentaties zoeken op deze computer'))),
+          Expanded(child: Text(l10n.d('Bestanden zoeken op deze computer'))),
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
       content: ResizableDialogBox(
-        initialWidth: 760,
+        initialWidth: widget.showPreview ? 1020 : 760,
         height: 560,
         builder: (context, handle) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -140,9 +164,26 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
               onChanged: (v) => setState(() => _query = v),
             ),
             const SizedBox(height: 8),
+            OpenKindFilterBar(
+              value: _kind,
+              onChanged: (v) => setState(() => _kind = v),
+              presentationCount: found.length - documents,
+              documentCount: documents,
+            ),
+            const SizedBox(height: 8),
             _status(l10n),
             const SizedBox(height: 8),
-            Expanded(child: _body(visible)),
+            Expanded(
+              child: _withPreview(
+                // Zie [OpenPresentationDialog]: het soortlabel hoort bij een
+                // gemengde lijst, niet bij een lijst met één soort erin.
+                (previewShown) => _body(
+                  visible,
+                  previewShown,
+                  documents > 0 && documents < found.length,
+                ),
+              ),
+            ),
             Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
@@ -154,7 +195,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
           OutlinedButton.icon(
             onPressed: _openCleanup,
             icon: const Icon(Icons.cleaning_services_outlined, size: 16),
-            label: Text(l10n.d('Dubbele presentaties opruimen')),
+            label: Text(l10n.d('Dubbele bestanden opruimen')),
           ),
         TextButton(
           onPressed: () => Navigator.pop(context),
@@ -183,12 +224,37 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       );
     }
     return Text(
-      '${_hits.length} ${l10n.d('presentatie(s) gevonden')}',
+      '${_hits.length} ${l10n.d('bestand(en) gevonden')}',
       style: TextStyle(fontSize: 11, color: AppTheme.slate500),
     );
   }
 
-  Widget _body(List<DuplicateInfo<ScanHit>> visible) {
+  /// De lijst, met het voorbeeld ernaast wanneer de instelling aan staat én er
+  /// ruimte voor is. Zie [OpenPresentationDialog]: past het voorbeeld niet, dan
+  /// dragen de rijen ook geen voorbeeldknop.
+  Widget _withPreview(Widget Function(bool previewShown) body) {
+    if (!widget.showPreview) return body(false);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (!OpenPreviewSplit.fitsBeside(constraints.maxWidth)) {
+          return body(false);
+        }
+        return OpenPreviewSplit(
+          list: body(true),
+          pane: OpenPreviewPane(
+            fileService: widget.fileService,
+            path: _previewPath,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _body(
+    List<DuplicateInfo<ScanHit>> visible,
+    bool previewShown,
+    bool showKind,
+  ) {
     final l10n = context.l10n;
     if (_scanning && _hits.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -196,7 +262,9 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     if (!_scanning && _hits.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        l10n.d('Geen Marp-presentaties gevonden in de bekende mappen.'),
+        l10n.d(
+          'Geen presentaties of documenten gevonden in de bekende mappen.',
+        ),
       );
     }
     if (visible.isEmpty) {
@@ -211,6 +279,9 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       itemBuilder: (_, i) => _HitRow(
         info: visible[i],
         homeDir: widget.homeDir,
+        showKind: showKind,
+        showPreview: previewShown,
+        onPreview: (path) => setState(() => _previewPath = path),
         onOpen: (path) => Navigator.pop(context, path),
       ),
     );
@@ -265,11 +336,19 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
 class _HitRow extends StatelessWidget {
   final DuplicateInfo<ScanHit> info;
   final String? homeDir;
+
+  /// Of het soortlabel achter de titel staat; zie de aanroeper.
+  final bool showKind;
+  final bool showPreview;
+  final ValueChanged<String> onPreview;
   final ValueChanged<String> onOpen;
 
   const _HitRow({
     required this.info,
     required this.homeDir,
+    required this.showKind,
+    required this.showPreview,
+    required this.onPreview,
     required this.onOpen,
   });
 
@@ -278,14 +357,14 @@ class _HitRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return InkWell(
+    final row = InkWell(
       onTap: () => onOpen(hit.path),
       borderRadius: BorderRadius.circular(6),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
         child: Row(
           children: [
-            Icon(Icons.slideshow_outlined, size: 18, color: AppTheme.brandFg),
+            Icon(markdownKindIcon(hit.kind), size: 18, color: AppTheme.brandFg),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -304,8 +383,16 @@ class _HitRow extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      _ThemeBadge(hit: hit, l10n: l10n),
+                      if (showKind) ...[
+                        const SizedBox(width: 8),
+                        MarkdownKindBadge(kind: hit.kind),
+                      ],
+                      // Het thema is een Marp-eigenschap; bij een document zou
+                      // "Geen thema" een gemis suggereren dat er niet is.
+                      if (hit.kind.isPresentation) ...[
+                        const SizedBox(width: 6),
+                        _ThemeBadge(hit: hit, l10n: l10n),
+                      ],
                       if (info.hasIdenticalCopies) ...[
                         const SizedBox(width: 6),
                         IdenticalCopiesChip(
@@ -338,12 +425,25 @@ class _HitRow extends StatelessWidget {
                 ],
               ),
             ),
+            if (showPreview) ...[
+              const SizedBox(width: 4),
+              IconButton(
+                icon: const Icon(Icons.visibility_outlined, size: 16),
+                tooltip: l10n.d('Voorbeeld tonen'),
+                visualDensity: VisualDensity.compact,
+                onPressed: () => onPreview(hit.path),
+              ),
+            ],
             const SizedBox(width: 8),
             Icon(Icons.north_east, size: 16, color: AppTheme.slate500),
           ],
         ),
       ),
     );
+    if (!showPreview) return row;
+    // Aanwijzen met de muis laat het voorbeeld meelopen; de knop hierboven doet
+    // hetzelfde voor wie met het toetsenbord of op een aanraakscherm werkt.
+    return MouseRegion(onEnter: (_) => onPreview(hit.path), child: row);
   }
 }
 

@@ -75,7 +75,7 @@ void main() {
       if (await temp.exists()) await temp.delete(recursive: true);
     });
 
-    test('returns only marp decks, ocideck theme first', () async {
+    test('marp decks first (ocideck theme leading), documents after', () async {
       final oci = await writeMd(
         'decks/a.md',
         '---\nmarp: true\ntheme: ocideck\ntitle: Zeta\n---\n# A\n',
@@ -84,10 +84,14 @@ void main() {
         'decks/b.md',
         '---\nmarp: true\ntheme: gaia\ntitle: Alpha\n---\n# B\n',
       );
-      // Not Marp → excluded.
-      await writeMd('decks/c.md', '# plain markdown\n');
-      // marp:false → excluded.
-      await writeMd('decks/d.md', '---\nmarp: false\n---\n# D\n');
+      // Niet-Marp: een gewoon document, en dat hoort de zoeklijst óók te tonen —
+      // de documentkant bewerkt precies zulke bestanden.
+      final plain = await writeMd('decks/c.md', '# Plat verslag\n');
+      // marp:false telt net zo goed als een document.
+      final notMarp = await writeMd(
+        'decks/d.md',
+        '---\nmarp: false\n---\n# D\n',
+      );
 
       final hits = await service.scanKnownLocations(
         recentFiles: [p.join(temp.path, 'decks', 'a.md')],
@@ -96,11 +100,52 @@ void main() {
       expect(hits.map((h) => p.normalize(h.path)), [
         p.normalize(oci.path),
         p.normalize(other.path),
+        p.normalize(notMarp.path),
+        p.normalize(plain.path),
       ]);
       expect(hits.first.isOcideckTheme, isTrue);
       expect(hits.first.theme, 'ocideck');
+      expect(hits.first.kind, MarkdownKind.presentation);
       expect(hits[1].isOcideckTheme, isFalse);
       expect(hits[1].theme, 'gaia');
+      expect(hits[2].kind, MarkdownKind.document);
+      // Een document draagt geen Marp-thema; dat veld hoort leeg te blijven.
+      expect(hits[3].kind, MarkdownKind.document);
+      expect(hits[3].theme, isNull);
+      // De eerste kop is de naam die een gebruiker van zijn document herkent.
+      expect(hits[3].displayTitle, 'Plat verslag');
+    });
+
+    test('includeDocuments: false keeps the old decks-only list', () async {
+      final deck = await writeMd(
+        'decks/a.md',
+        '---\nmarp: true\ntheme: ocideck\n---\n# A\n',
+      );
+      await writeMd('decks/c.md', '# gewoon document\n');
+
+      final hits = await service.scanKnownLocations(
+        recentFiles: [p.join(temp.path, 'decks', 'a.md')],
+        includeDocuments: false,
+      );
+
+      expect(hits.map((h) => p.normalize(h.path)), [p.normalize(deck.path)]);
+    });
+
+    test('plain text and .markdown files are found as documents', () async {
+      final text = await writeMd('notes/aantekening.txt', 'losse tekst\n');
+      final md = await writeMd('notes/bericht.markdown', '# Bericht\n');
+      // Een bestand dat OciDeck niet bewerkt, hoort er niet in te staan.
+      await writeMd('notes/data.json', '{}\n');
+
+      final hits = await service.scanKnownLocations(
+        recentFiles: [p.join(temp.path, 'notes', 'aantekening.txt')],
+      );
+
+      expect(hits.map((h) => p.normalize(h.path)).toSet(), {
+        p.normalize(text.path),
+        p.normalize(md.path),
+      });
+      expect(hits.every((h) => h.kind == MarkdownKind.document), isTrue);
     });
 
     test('ignored and denylisted directories are skipped', () async {

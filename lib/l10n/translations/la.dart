@@ -5,7 +5,7 @@ const _stringsLa = {
   'newPresentation': 'Nova praesentatio',
   'open': 'Aperire...',
   'openEllipsis': 'Aperire…',
-  'recentPresentations': 'Praesentationes recentes',
+  'recentFiles': 'Fasciculi recentes',
   'newTab': 'Nova scida',
   'imageLibrary': 'Bibliotheca imaginum',
   'presentFullscreen':
@@ -191,7 +191,6 @@ const _dutchSourceLa = {
   'Andere map…': 'Alia plica…',
   'Bibliotheken': 'Bibliothecae',
   'Geen bibliotheek': 'Nulla bibliotheca',
-  'Geen presentaties (.md) gevonden.': 'Nullae praesentationes (.md) inventae.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Plicam et nomen in fenestra sequenti eliges. Imagines in subplica images/ et instrumenta in media/ iuxta tabellam praesentationis ponentur.',
   'Kies bestandsnaam…': 'Nomen tabellae eligere…',
@@ -527,13 +526,10 @@ const _dutchSourceLa = {
   'Kies een video': 'Elige video',
   'Kies een audiobestand': 'Elige plicam audio',
   'Bladeren…': 'Explorare…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Quaere per nomen plicae, titulum vel textum paginarum…',
   'Geen map gekozen': 'Nullum plicarium selectum',
   'Map kiezen': 'Plicarium eligere',
   'Kies een map met presentaties om te beginnen.':
       'Elige plicarium cum praesentationibus ut incipias.',
-  'Geen presentaties gevonden voor': 'Nullae praesentationes inventae pro',
   'meer treffer(s)': 'plures congruentiae',
   'Slide zoeken': 'Paginam quaerere',
   'Slides importeren': 'Paginas importare',
@@ -901,14 +897,9 @@ const _dutchSourceLa = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Admonitio supra {b1} puncta (1 columna), {bcl} (index) vel {b2} (2 columnae); criticum supra {bc1} vel {bc2}. Verba supra {w1}/{w2}, in medio supra {avg} per punctum. Citatio supra {q} characteres, titulus supra {t} characteres. Nidificatio profundior quam gradus {lvl}. Textus qui infra {warn}% contrahi debet admonet, infra {crit}% criticum est.',
   'Zoek op deze computer': 'Quaere in hoc computatro',
-  'Presentaties zoeken op deze computer':
-      'Praesentationes in hoc computatro invenire',
   'Zoek op titel, pad of thema…': 'Quaere per titulum, semitam vel thema…',
   'Bekende mappen worden doorzocht…': 'Plicae notae perscrutantur…',
   'gevonden': 'inventa',
-  'presentatie(s) gevonden': 'praesentationes inventae',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nullae praesentationes Marp in plicis notis inventae.',
   'Geen thema': 'Nullum thema',
   'Kopieer syntaxproblemen': 'Problemata syntaxis describere',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1688,6 +1679,32 @@ const _dutchSourceAddLa = <String, String>{
   'Toch sorteren': 'adhuc genus',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Prius adde unum saltem eventum. Haec mensa non mutatur.',
+  'Alles': 'Omnia',
+  'Presentaties': 'Praesentationes',
+  'Documenten': 'Documenta',
+  'Voorbeeld': 'Praevisio',
+  'Voorbeeld tonen': 'Praevisionem monstrare',
+  'Voorbeeld tonen bij openen': 'Praevisionem in aperiendo monstrare',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Fasciculum monstra ut hic praevisio appareat.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Hic fasciculus monstrari non potest. Etiam apertio eum recusat — contentum periculosum, corruptum vel illegibile est.',
+  'Dit document is leeg.': 'Hoc documentum vacuum est.',
+  'Deze presentatie heeft nog geen dia.':
+      'Haec praesentatio nullam adhuc paginam habet.',
+  'Alleen het begin van het document wordt getoond.':
+      'Solum initium documenti monstratur.',
+  'Bestanden zoeken op deze computer': 'Fasciculos in hoc computatro invenire',
+  'Dubbele bestanden opruimen': 'Fasciculos duplicatos purgare',
+  'bestand(en) gevonden': 'fasciculi inventi',
+  'Geen presentaties of documenten gevonden.':
+      'Nullae praesentationes vel documenta inventa.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nullae praesentationes vel documenta in plicis notis inventa.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Quaere per nomen plicae, titulum vel textum in fasciculo…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'In fenestra aperiendi praevisionem redditam fasciculi quem monstras ostendit, ut videas quid contineat antequam eum aperias.',
   'Voetnoot': 'Adnotatio',
   'Noten': 'Adnotationes',
   'Voetnoten achterin het document': 'Adnotationes in fine documenti',

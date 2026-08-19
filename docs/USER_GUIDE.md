@@ -4259,6 +4259,19 @@ not, and why conversion is deliberately lossy — is written up in
   screen or `Ctrl/Cmd + O`) opens as a document rather than a deck; OciDeck tells
   the two apart by the absence of `marp: true`, so nothing on disk marks a file
   as "OciDeck's".
+- **Finding them again**: the open dialog (`Ctrl/Cmd + O`) and *Search this
+  computer* list documents alongside presentations, in one list. Every row says
+  with an icon and a label which of the two it is, and the *All · Presentations ·
+  Documents* buttons — counts included — narrow the list to one kind. Besides
+  `.md`, both `.markdown` and `.txt` count. To see what is inside before you
+  open it, switch on *Settings → Storage → Open → Show a preview when
+  opening*: a rendered preview of the file you point at appears next to the list
+  — the first slide of a presentation, the opening text of a document. That
+  setting is off by default, because the preview reads a file you have not chosen
+  yet. It also reads through exactly the same gate as opening itself, so a file
+  OciDeck refuses to open is not drawn here either. *(Added 2026-08-19: the
+  search lists showed Marp presentations only, so your own documents could not be
+  found there.)*
 - **Save** (`Ctrl/Cmd + S`) writes your **byte-faithful master**: opening a
   document and saving it again without editing yields a byte-identical file.
   OciDeck injects no front matter, forces no slide separators, and applies no

@@ -5,7 +5,7 @@ const _stringsGa = {
   'newPresentation': 'Láithreoireacht nua',
   'open': 'Oscail...',
   'openEllipsis': 'Oscail…',
-  'recentPresentations': 'Láithreoireachtaí le déanaí',
+  'recentFiles': 'Comhaid le déanaí',
   'newTab': 'Cluaisín nua',
   'imageLibrary': 'Leabharlann íomhánna',
   'presentFullscreen': 'Cuir i láthair (lánscáileán) · P don amharc láithreora',
@@ -192,8 +192,6 @@ const _dutchSourceGa = {
   'Andere map…': 'Fillteán eile…',
   'Bibliotheken': 'Leabharlanna',
   'Geen bibliotheek': 'Gan leabharlann',
-  'Geen presentaties (.md) gevonden.':
-      'Níor aimsíodh aon láithreoireacht (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Roghnaíonn tú an fillteán agus an t-ainm sa chéad fhuinneog eile. Téann na híomhánna i bhfofhillteán images/ agus na meáin i media/, in aice le comhad na láithreoireachta.',
   'Kies bestandsnaam…': 'Roghnaigh ainm comhaid…',
@@ -535,13 +533,10 @@ const _dutchSourceGa = {
   'Kies een video': 'Roghnaigh físeán',
   'Kies een audiobestand': 'Roghnaigh comhad fuaime',
   'Bladeren…': 'Brabhsáil…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Cuardaigh de réir ainm comhaid, teideal nó téacs sna sleamhnáin…',
   'Geen map gekozen': 'Níor roghnaíodh aon fhillteán',
   'Map kiezen': 'Roghnaigh fillteán',
   'Kies een map met presentaties om te beginnen.':
       'Roghnaigh fillteán le cuir i láthair chun tosú.',
-  'Geen presentaties gevonden voor': 'Níor aimsíodh aon chur i láthair do',
   'meer treffer(s)': 'tuilleadh torthaí',
   'Slide zoeken': 'Aimsigh sleamhnán',
   'Slides importeren': 'Iompórtáil sleamhnáin',
@@ -913,14 +908,9 @@ const _dutchSourceGa = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Rabhadh os cionn {b1} urchar (1 cholún), {bcl} (seicliosta) nó {b2} (2 cholún); criticiúil os cionn {bc1} nó {bc2}. Focail os cionn {w1}/{w2}, ar an meán os cionn {avg} in aghaidh an urchair. Athfhriotal os cionn {q} carachtar, teideal os cionn {t} carachtar. Neadú níos doimhne ná leibhéal {lvl}. Tugann téacs a chaithfidh crapadh faoi bhun {warn}% rabhadh, faoi bhun {crit}% tá sé criticiúil.',
   'Zoek op deze computer': 'Cuardaigh ar an ríomhaire seo',
-  'Presentaties zoeken op deze computer':
-      'Aimsigh láithreoireachtaí ar an ríomhaire seo',
   'Zoek op titel, pad of thema…': 'Cuardaigh de réir teidil, conaire nó téama…',
   'Bekende mappen worden doorzocht…': 'Fillteáin aitheanta á gcuardach…',
   'gevonden': 'aimsithe',
-  'presentatie(s) gevonden': 'láithreoireacht(aí) aimsithe',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Níor aimsíodh aon láithreoireacht Marp sna fillteáin aitheanta.',
   'Geen thema': 'Gan téama',
   'Kopieer syntaxproblemen': 'Cóipeáil fadhbanna comhréire',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1705,6 +1695,32 @@ const _dutchSourceAddGa = <String, String>{
   'Toch sorteren': 'Fós ag sórtáil',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Cuir imeacht amháin ar a laghad leis ar dtús. Níl aon athrú ar an tábla seo.',
+  'Alles': 'Uile',
+  'Presentaties': 'Láithreoireachtaí',
+  'Documenten': 'Cáipéisí',
+  'Voorbeeld': 'Réamhamharc',
+  'Voorbeeld tonen': 'Taispeáin réamhamharc',
+  'Voorbeeld tonen bij openen': 'Taispeáin réamhamharc agus tú ag oscailt',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Dírigh ar chomhad chun réamhamharc a fheiceáil anseo.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Ní féidir an comhad seo a thaispeáint. Diúltaíonn an oscailt dó freisin — tá an t-ábhar neamhshábháilte, damáistithe nó doléite.',
+  'Dit document is leeg.': 'Tá an cháipéis seo folamh.',
+  'Deze presentatie heeft nog geen dia.':
+      'Níl aon sleamhnán sa láithreoireacht seo fós.',
+  'Alleen het begin van het document wordt getoond.':
+      'Ní thaispeántar ach tús na cáipéise.',
+  'Bestanden zoeken op deze computer': 'Aimsigh comhaid ar an ríomhaire seo',
+  'Dubbele bestanden opruimen': 'Glan suas comhaid dhúbailte',
+  'bestand(en) gevonden': 'comhad(comhaid) aimsithe',
+  'Geen presentaties of documenten gevonden.':
+      'Níor aimsíodh aon láithreoireacht ná cáipéis.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Níor aimsíodh aon láithreoireacht ná cáipéis sna fillteáin aitheanta.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Cuardaigh de réir ainm comhaid, teideal nó téacs sa chomhad…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Taispeánann sé réamhamharc rindreáilte den chomhad a ndíríonn tú air san fhuinneog oscailte, ionas go bhfeicfidh tú a bhfuil ann sula n-osclaíonn tú é.',
   'Voetnoot': 'Fonóta',
   'Noten': 'Nótaí',
   'Voetnoten achterin het document': 'Fonótaí ag deireadh na cáipéise',

@@ -4344,6 +4344,19 @@ overleeft, en waarom conversie bewust verliesgevend is — staat beschreven in
   **Opent** (het welkomstscherm of `Ctrl/Cmd + O`) opent als een document en niet
   als een deck; OciDeck houdt de twee uit elkaar aan de afwezigheid van
   `marp: true`, dus niets op schijf merkt een bestand als "van OciDeck".
+- **Terugvinden**: het openscherm (`Ctrl/Cmd + O`) en *Zoek op deze computer*
+  tonen documenten naast presentaties, in dezelfde lijst. Elke rij zegt met een
+  pictogram en een label welke van de twee het is, en de knoppen *Alles ·
+  Presentaties · Documenten* — met de aantallen erbij — zetten er één soort in
+  beeld. Naast `.md` telt ook `.markdown` en `.txt` mee. Wil je vóór het openen
+  zien wat erin staat, zet dan *Instellingen → Opslag → Openen → Voorbeeld tonen
+  bij openen* aan: naast de lijst verschijnt dan een gerenderd voorbeeld van het
+  bestand dat je aanwijst — de eerste dia van een presentatie, de begintekst van
+  een document. Die instelling staat standaard uit, want het voorbeeld leest een
+  bestand dat je nog niet gekozen hebt. Het leest bovendien langs precies dezelfde
+  controle als het openen zelf, dus een bestand dat OciDeck weigert te openen
+  wordt hier ook niet getekend. *(Toegevoegd 2026-08-19: de zoeklijsten toonden
+  alleen Marp-presentaties, dus je eigen documenten waren er onvindbaar.)*
 - **Opslaan** (`Ctrl/Cmd + S`) schrijft je **byte-getrouwe origineel**: een
   document openen en zonder bewerking opnieuw opslaan levert een byte-identiek
   bestand op. OciDeck voegt geen front-matter toe, dwingt geen dia-scheidingen af

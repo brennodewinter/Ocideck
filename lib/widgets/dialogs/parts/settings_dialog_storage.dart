@@ -69,6 +69,13 @@ extension _SettingsStorageTab on _SettingsDialogState {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ..._connectionsSection(l10n),
+        // Het openscherm doorzoekt diezelfde verbindingen; de voorbeeldweergave
+        // hoort daarom hier en niet bij "Weergave" — je zoekt hem waar je het
+        // zoeken zelf instelt.
+        if (supportsLocalProjectFolders) ...[
+          const SizedBox(height: 20),
+          ..._openPreviewSection(l10n),
+        ],
         // De exportmap stuurt het bestandssysteem aan. Op web bestaat dat niet
         // (export = browser-download), dus dan is de mapkeuze zinloos.
         if (supportsLocalProjectFolders) ...[
@@ -105,6 +112,28 @@ extension _SettingsStorageTab on _SettingsDialogState {
       _addConnectionButton(l10n),
     ];
   }
+
+  /// Het gerenderde voorbeeld in de openschermen: standaard uit, want het leest
+  /// en tekent een bestand dat je nog niet gekozen hebt.
+  List<Widget> _openPreviewSection(AppLocalizations l10n) => [
+    _sectionTitle(l10n.d('Openen')),
+    SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        l10n.d('Voorbeeld tonen bij openen'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      subtitle: Text(
+        l10n.d(
+          'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      ),
+      value: ref.watch(settingsProvider.select((s) => s.showOpenPreview)),
+      onChanged: (value) =>
+          ref.read(settingsProvider.notifier).setShowOpenPreview(value),
+    ),
+  ];
 
   /// De sleepbare lijst zelf.
   ///

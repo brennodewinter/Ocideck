@@ -5,7 +5,7 @@ const _stringsDa = {
   'newPresentation': 'Ny præsentation',
   'open': 'Åbn...',
   'openEllipsis': 'Åbn…',
-  'recentPresentations': 'Seneste præsentationer',
+  'recentFiles': 'Seneste filer',
   'newTab': 'Ny fane',
   'imageLibrary': 'Billedbibliotek',
   'presentFullscreen': 'Præsentér (fuld skærm) · P for præsentervisning',
@@ -189,7 +189,6 @@ const _dutchSourceDa = {
   'Andere map…': 'Anden mappe…',
   'Bibliotheken': 'Biblioteker',
   'Geen bibliotheek': 'Intet bibliotek',
-  'Geen presentaties (.md) gevonden.': 'Ingen præsentationer (.md) fundet.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Du vælger mappen og navnet i det næste vindue. Billederne kommer i en undermappe images/ og medier i media/, ved siden af præsentationsfilen.',
   'Kies bestandsnaam…': 'Vælg filnavn…',
@@ -527,13 +526,10 @@ const _dutchSourceDa = {
   'Kies een video': 'Vælg en video',
   'Kies een audiobestand': 'Vælg en lydfil',
   'Bladeren…': 'Gennemse …',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Søg efter filnavn, titel eller slidetekst …',
   'Geen map gekozen': 'Ingen mappe valgt',
   'Map kiezen': 'Vælg mappe',
   'Kies een map met presentaties om te beginnen.':
       'Vælg en mappe med præsentationer for at begynde.',
-  'Geen presentaties gevonden voor': 'Ingen præsentationer fundet for',
   'meer treffer(s)': 'flere match',
   'Slide zoeken': 'Søg slide',
   'Slides importeren': 'Importer slides',
@@ -895,14 +891,9 @@ const _dutchSourceDa = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Advarsel over {b1} bullets (1 kolonne), {bcl} (tjekliste) eller {b2} (2 kolonner); kritisk over {bc1} eller {bc2}. Ord over {w1}/{w2}, i gennemsnit over {avg} pr. bullet. Citat over {q} tegn, titel over {t} tegn. Indlejring dybere end niveau {lvl}. Tekst, der skal krympe under {warn}%, advarer; under {crit}% er kritisk.',
   'Zoek op deze computer': 'Søg på denne computer',
-  'Presentaties zoeken op deze computer':
-      'Find præsentationer på denne computer',
   'Zoek op titel, pad of thema…': 'Søg efter titel, sti eller tema…',
   'Bekende mappen worden doorzocht…': 'Søger i kendte mapper…',
   'gevonden': 'fundet',
-  'presentatie(s) gevonden': 'præsentation(er) fundet',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Ingen Marp-præsentationer fundet i de kendte mapper.',
   'Geen thema': 'Intet tema',
   'Kopieer syntaxproblemen': 'Kopiér syntaksproblemer',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1673,6 +1664,32 @@ const _dutchSourceAddDa = <String, String>{
   'Toch sorteren': 'Sorterer stadig',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Tilføj først mindst én begivenhed. Denne tabel forbliver uændret.',
+  'Alles': 'Alle',
+  'Presentaties': 'Præsentationer',
+  'Documenten': 'Dokumenter',
+  'Voorbeeld': 'Forhåndsvisning',
+  'Voorbeeld tonen': 'Vis forhåndsvisning',
+  'Voorbeeld tonen bij openen': 'Vis forhåndsvisning ved åbning',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Peg på en fil for at se en forhåndsvisning her.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Denne fil kan ikke vises. Åbning afviser den også — indholdet er usikkert, beskadiget eller ulæseligt.',
+  'Dit document is leeg.': 'Dette dokument er tomt.',
+  'Deze presentatie heeft nog geen dia.':
+      'Denne præsentation har endnu ingen slides.',
+  'Alleen het begin van het document wordt getoond.':
+      'Kun begyndelsen af dokumentet vises.',
+  'Bestanden zoeken op deze computer': 'Find filer på denne computer',
+  'Dubbele bestanden opruimen': 'Ryd op i dublerede filer',
+  'bestand(en) gevonden': 'fil(er) fundet',
+  'Geen presentaties of documenten gevonden.':
+      'Ingen præsentationer eller dokumenter fundet.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Ingen præsentationer eller dokumenter fundet i de kendte mapper.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Søg efter filnavn, titel eller tekst i filen…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Viser i åbn-vinduet en gengivet forhåndsvisning af den fil, du peger på, så du kan se indholdet, før du åbner den.',
   'Voetnoot': 'Fodnote',
   'Noten': 'Noter',
   'Voetnoten achterin het document': 'Fodnoter sidst i dokumentet',

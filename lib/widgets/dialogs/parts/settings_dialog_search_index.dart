@@ -36,6 +36,20 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,
+    label: 'Voorbeeld tonen bij openen',
+    section: 'Openen',
+    keywords: [
+      'voorbeeld',
+      'preview',
+      'openen',
+      'zoeken',
+      'weergave',
+      'document',
+      'presentatie',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.storage,
     labelKey: 'choose',
     sectionKey: 'exportFolderSetting',
     keywords: ['export', 'exportmap', 'opslaan', 'uitvoer', 'pdf'],

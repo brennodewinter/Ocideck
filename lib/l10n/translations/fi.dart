@@ -5,7 +5,7 @@ const _stringsFi = {
   'newPresentation': 'Uusi esitys',
   'open': 'Avaa...',
   'openEllipsis': 'Avaa…',
-  'recentPresentations': 'Viimeisimmät esitykset',
+  'recentFiles': 'Viimeisimmät tiedostot',
   'newTab': 'Uusi välilehti',
   'imageLibrary': 'Kuvakirjasto',
   'presentFullscreen': 'Esitä koko näytöllä · P avaa esittäjänäkymän',
@@ -189,7 +189,6 @@ const _dutchSourceFi = {
   'Andere map…': 'Toinen kansio…',
   'Bibliotheken': 'Kirjastot',
   'Geen bibliotheek': 'Ei kirjastoa',
-  'Geen presentaties (.md) gevonden.': 'Esityksiä (.md) ei löytynyt.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Valitset kansion ja nimen seuraavassa ikkunassa. Kuvat menevät images/-alikansioon ja media media/-kansioon esitystiedoston viereen.',
   'Kies bestandsnaam…': 'Valitse tiedostonimi…',
@@ -524,13 +523,10 @@ const _dutchSourceFi = {
   'Kies een video': 'Valitse video',
   'Kies een audiobestand': 'Valitse äänitiedosto',
   'Bladeren…': 'Selaa…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Hae tiedostonimen, otsikon tai dian tekstin perusteella…',
   'Geen map gekozen': 'Kansiota ei valittu',
   'Map kiezen': 'Valitse kansio',
   'Kies een map met presentaties om te beginnen.':
       'Aloita valitsemalla esityksiä sisältävä kansio.',
-  'Geen presentaties gevonden voor': 'Esityksiä ei löytynyt haulle',
   'meer treffer(s)': 'osumaa lisää',
   'Slide zoeken': 'Etsi dia',
   'Slides importeren': 'Tuo dioja',
@@ -894,13 +890,9 @@ const _dutchSourceFi = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Varoitus yli {b1} luettelomerkin (1 sarake), {bcl} (tarkistuslista) tai {b2} (2 saraketta); kriittinen yli {bc1} tai {bc2}. Sanat yli {w1}/{w2}, keskimäärin yli {avg} luettelomerkkiä kohden. Lainaus yli {q} merkkiä, otsikko yli {t} merkkiä. Sisennys syvemmällä kuin taso {lvl}. Teksti, jonka on kutistuttava alle {warn}%, varoittaa, alle {crit}% on kriittinen.',
   'Zoek op deze computer': 'Etsi tältä tietokoneelta',
-  'Presentaties zoeken op deze computer': 'Etsi esityksiä tältä tietokoneelta',
   'Zoek op titel, pad of thema…': 'Etsi otsikon, polun tai teeman mukaan…',
   'Bekende mappen worden doorzocht…': 'Etsitään tunnetuista kansioista…',
   'gevonden': 'löydetty',
-  'presentatie(s) gevonden': 'esitys(tä) löydetty',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Tunnetuista kansioista ei löytynyt Marp-esityksiä.',
   'Geen thema': 'Ei teemaa',
   'Kopieer syntaxproblemen': 'Kopioi syntaksiongelmat',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1673,6 +1665,32 @@ const _dutchSourceAddFi = <String, String>{
   'Toch sorteren': 'Lajittelu edelleen',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Lisää ensin vähintään yksi tapahtuma. Tämä taulukko pysyy ennallaan.',
+  'Alles': 'Kaikki',
+  'Presentaties': 'Esitykset',
+  'Documenten': 'Asiakirjat',
+  'Voorbeeld': 'Esikatselu',
+  'Voorbeeld tonen': 'Näytä esikatselu',
+  'Voorbeeld tonen bij openen': 'Näytä esikatselu avattaessa',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Osoita tiedostoa nähdäksesi esikatselun tässä.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Tätä tiedostoa ei voi näyttää. Myös avaaminen hylkää sen — sisältö on turvaton, vioittunut tai lukukelvoton.',
+  'Dit document is leeg.': 'Tämä asiakirja on tyhjä.',
+  'Deze presentatie heeft nog geen dia.':
+      'Tässä esityksessä ei ole vielä dioja.',
+  'Alleen het begin van het document wordt getoond.':
+      'Vain asiakirjan alku näytetään.',
+  'Bestanden zoeken op deze computer': 'Etsi tiedostoja tältä tietokoneelta',
+  'Dubbele bestanden opruimen': 'Siivoa päällekkäiset tiedostot',
+  'bestand(en) gevonden': 'tiedosto(a) löydetty',
+  'Geen presentaties of documenten gevonden.':
+      'Esityksiä tai asiakirjoja ei löytynyt.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Tunnetuista kansioista ei löytynyt esityksiä eikä asiakirjoja.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Hae tiedostonimen, otsikon tai tiedoston tekstin perusteella…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Näyttää avausikkunassa esikatselun tiedostosta, jota osoitat, jotta näet sisällön ennen avaamista.',
   'Voetnoot': 'Alaviite',
   'Noten': 'Viitteet',
   'Voetnoten achterin het document': 'Alaviitteet asiakirjan lopussa',
