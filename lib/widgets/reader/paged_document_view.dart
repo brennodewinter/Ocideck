@@ -97,6 +97,11 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     widget.markdown,
   );
 
+  /// Tijdlijnkaarten die een eerdere kaart in dezelfde reeks vervolgen, met
+  /// exact dezelfde blokindexen als [_blockTexts] en de gemeten hoogtes.
+  late Set<int> _timelineContinuationBlocks =
+      documentTimelineContinuationBlocks(widget.markdown);
+
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
   /// en worden ze net als al het andere over de vellen verdeeld.
@@ -192,6 +197,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       _measuring.clear();
       _notes = documentFootnotes(widget.markdown);
       _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
+      _timelineContinuationBlocks = documentTimelineContinuationBlocks(
+        widget.markdown,
+      );
     }
   }
 
@@ -256,6 +264,11 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       reservedRoom: _reservedRoom(heights.length),
     );
     final notesPerPage = _notesPerPage(offsets, heights);
+    final timelineContinuationPages = documentContinuationPages(
+      blockHeights: heights,
+      pageOffsets: offsets,
+      continuationBlocks: _timelineContinuationBlocks,
+    );
     return LayoutBuilder(
       builder: (context, constraints) {
         // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
@@ -298,6 +311,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                         offsets.length,
                         fit,
                         notesPerPage[i],
+                        timelineContinuationPages.contains(i),
                       ),
                       const SizedBox(height: 16),
                     ],
@@ -421,6 +435,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     int pageCount,
     double fit,
     List<Footnote> notes,
+    bool timelineContinuation,
   ) {
     final (sheetW, sheetH) = _sheetPx;
     final bleedPx = widget.margins.bleedMm * kPxPerMm;
@@ -478,6 +493,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               ),
             ),
           ),
+          if (timelineContinuation) _timelineContinuationLabel(theme, bleedPx),
           // De noten staan onderaan het tekstvlak, tegen de ondermarge: dat is
           // wat een voetnoot ís. De ruimte ervoor is bij de opmaak al van dit
           // vel afgehaald (zie [_reservedRoom]), dus ze botsen nooit met de
@@ -548,6 +564,23 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       ),
     );
   }
+
+  /// Staat in de bovenmarge en verandert daardoor de gemeten documentstroom
+  /// niet; de eerste kaart op het vel tekent de rail zelf opnieuw.
+  Widget _timelineContinuationLabel(ThemeData theme, double bleedPx) =>
+      Positioned(
+        key: const Key('document-timeline-continuation'),
+        left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
+        top: bleedPx + 4,
+        child: Text(
+          context.l10n.d('Tijdlijn · vervolg'),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: theme.colorScheme.outline,
+            fontWeight: FontWeight.w700,
+            height: 1,
+          ),
+        ),
+      );
 }
 
 /// Meet de hoogte van één documentblok en meldt hem terug.

@@ -134,6 +134,35 @@ List<double> documentPageOffsets({
   return offsets;
 }
 
+/// De pagina-indexen (vanaf nul) die precies bij een vervolgblok beginnen.
+///
+/// [continuationBlocks] beschrijft blokken die inhoudelijk voortbouwen op hun
+/// voorganger, bijvoorbeeld alle tijdlijngebeurtenissen behalve de eerste. Een
+/// vervolgblok midden op een vel krijgt geen markering; alleen een vel dat
+/// ermee opent moet duidelijk maken dat de reeks van het vorige vel doorloopt.
+Set<int> documentContinuationPages({
+  required List<double> blockHeights,
+  required List<double> pageOffsets,
+  required Set<int> continuationBlocks,
+}) {
+  final pages = <int>{};
+  var page = 1;
+  var top = 0.0;
+  for (var block = 0; block < blockHeights.length; block++) {
+    while (page < pageOffsets.length && pageOffsets[page] < top - 0.5) {
+      page++;
+    }
+    if (page < pageOffsets.length &&
+        (pageOffsets[page] - top).abs() <= 0.5 &&
+        continuationBlocks.contains(block)) {
+      pages.add(page);
+      page++;
+    }
+    top += blockHeights[block];
+  }
+  return pages;
+}
+
 /// Hoeveel inhoud er onder de kop op [index] nog op ditzelfde vel terechtkomt,
 /// afgekapt op [limit] — meer hoeft de aanroeper niet te weten.
 ///

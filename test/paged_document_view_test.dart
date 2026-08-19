@@ -76,6 +76,50 @@ void main() {
     );
   });
 
+  testWidgets(
+    'een tijdlijnvervolg tekent de rail opnieuw en benoemt het vervolg',
+    (tester) async {
+      final events = List.generate(
+        19,
+        (i) =>
+            '| 2026-0${i + 1} | Gebeurtenis $i met een uitvoerige toelichting '
+            'die de kaart voldoende hoogte geeft om de tijdlijn over meerdere '
+            'bladzijden te verdelen. |',
+      ).join('\n');
+      await pumpDoc(
+        tester,
+        '<!-- timeline -->\n'
+        '| Tijd | Gebeurtenis |\n'
+        '| --- | --- |\n'
+        '$events',
+        size: const PageSizeSpec(series: PaperSeries.a, number: 6),
+        margins: const PageMargins(
+          topMm: 10,
+          rightMm: 10,
+          bottomMm: 10,
+          leftMm: 10,
+        ),
+      );
+
+      final pages = find.byKey(const Key('document-page-window'));
+      final continuations = find.byKey(
+        const Key('document-timeline-continuation'),
+      );
+      expect(pages.evaluate().length, greaterThan(1));
+      expect(continuations, findsWidgets);
+      for (var i = 0; i < 19; i++) {
+        expect(find.textContaining('Gebeurtenis $i'), findsWidgets);
+      }
+      expect(
+        find.descendant(
+          of: continuations.first,
+          matching: find.text('Tijdlijn · vervolg'),
+        ),
+        findsOneWidget,
+      );
+    },
+  );
+
   testWidgets('de paginamaat volgt de instelling', (tester) async {
     await pumpDoc(
       tester,

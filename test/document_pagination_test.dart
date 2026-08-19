@@ -24,6 +24,36 @@ void main() {
     expect(offsets([50, 50, 10]), [0, 100]);
   });
 
+  test(
+    'alleen een pagina die bij een vervolgblok begint krijgt een markering',
+    () {
+      final heights = [30.0, 40.0, 40.0, 20.0];
+      final pageOffsets = documentPageOffsets(
+        blockHeights: heights,
+        pageHeight: pageHeight,
+      );
+
+      expect(pageOffsets, [0, 70]);
+      expect(
+        documentContinuationPages(
+          blockHeights: heights,
+          pageOffsets: pageOffsets,
+          continuationBlocks: {2},
+        ),
+        {1},
+      );
+      expect(
+        documentContinuationPages(
+          blockHeights: heights,
+          pageOffsets: pageOffsets,
+          continuationBlocks: {1, 3},
+        ),
+        isEmpty,
+        reason: 'een vervolgblok midden op een vel opent geen vervolgpagina',
+      );
+    },
+  );
+
   test('een blok hoger dan de pagina begint vers en loopt door', () {
     // 250 hoog vanaf 30: pagina's op 30, 130 en 230.
     expect(offsets([30, 250]), [0, 30, 130, 230]);
