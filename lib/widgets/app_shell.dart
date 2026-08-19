@@ -37,6 +37,7 @@ import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/finding_context_score.dart';
 import '../services/finding_pagination.dart';
+import '../services/markdown_service.dart';
 import '../services/evidence_hash_service.dart';
 import '../services/management_summary.dart';
 import '../services/scope_coverage.dart';

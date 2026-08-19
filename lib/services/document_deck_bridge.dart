@@ -194,6 +194,15 @@ class DocumentDeckBridge {
   static String deckToDocumentMarkdown(Deck deck) {
     final parts = <String>[];
     for (final slide in deck.slides) {
+      // Een render-kopie heeft geen gedaante in het bestandsformaat: hij draagt
+      // de héle body en verschilt alleen in [Slide.renderPage]. Dezelfde regel
+      // die `MarkdownService` al opschrijft — `expandRichTextForRender` levert
+      // een lijst om te *tekenen*, nooit om weg te schrijven — en dit is de
+      // tweede schrijver. Het exportpad klapt sinds #1589 al niet meer uit
+      // (`expandPages: false`); deze regel houdt de belofte overeind voor elke
+      // andere aanroeper, zoals "omzetten naar document" op een deck dat wél
+      // uitgeklapt is aangeleverd.
+      if (slide.renderPage != 0) continue;
       final body = _slideBody(slide);
       if (body.trim().isNotEmpty) {
         final atomicTimeline = startsWithDocumentTimelineEnvelope(body);

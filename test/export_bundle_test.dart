@@ -29,11 +29,13 @@ void main() {
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
     bool includeDetail = true,
+    bool expandPages = true,
   }) => buildExportBundle(
     deck,
     deck.slides,
     profile: profile,
     includeDetail: includeDetail,
+    expandPages: expandPages,
     disabledRules: const {},
     ownIdentity: OwnIdentity.empty,
     regions: defaultPrivacyRegions,

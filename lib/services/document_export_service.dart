@@ -101,6 +101,10 @@ Future<ExportBundle> buildDocumentExportBundle(
     deck.slides,
     profile: profile,
     includeDetail: true,
+    // Een document is één stroom en kent geen dia-pagina's; geen enkel
+    // documentuitvoerpad rasteriseert (md/html/latex). Uitklappen zou hier N
+    // kopieën van dezelfde body over de projectiegrens duwen (#1589).
+    expandPages: false,
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
     regions: regions,
