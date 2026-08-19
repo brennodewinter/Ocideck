@@ -12,6 +12,16 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.7] — 2026-08-19
+
+### Changed
+
+- Een tabelgedragen dia raakt ook zijn opsomming niet kwijt (#1594)
+- Een proeftag telt niet als laatste release (#1593)
+- De tabel van een tabelgedragen dia overleeft het omzetten naar document (#1592)
+- Een document klapt zijn dia-paginering niet meer uit bij export (#1591)
+- Ontwerp: de MIAUW-pentestrapportage wordt een document (Fase 0) (#1590)
+
 ## [0.4.6] — 2026-08-18
 
 ### Added
