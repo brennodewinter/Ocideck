@@ -1,6 +1,7 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
 import 'markdown_table_codec.dart';
+import 'pentest_blocks.dart';
 import 'document_timeline.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
@@ -42,6 +43,9 @@ class DocumentDeckBridge {
   }) {
     final lines = body.split('\n');
     final rawLines = _ExactLineRanges(body);
+    // Eén pas voor het hele document; de grensregel woont in `pentest_blocks`
+    // en niet hier (PENTEST_DOCUMENT.md §6.1).
+    final pentest = scanPentestBlocks(body);
 
     final slides = <Slide>[];
     final flow = <String>[];
@@ -85,20 +89,19 @@ class DocumentDeckBridge {
         while (j < lines.length && isMarkdownTableLine(lines[j])) {
           j++;
         }
-        final markedSource = rawLines.slice(i, j);
-        // Ook een nog onbruikbare tijdlijn blijft één bronblok. De visuele
-        // editor laat de gebruiker zo'n tabel herstellen; de bridge mag vóór
-        // dat herstel de marker niet losmaken of de tabel normaliseren.
-        slides.add(
-          Slide.create(SlideType.freeMarkdown).copyWith(
-            customMarkdown: markedSource,
-            // Schaduwstructuur voor OciWacht: de uitvoer blijft de rauwe
-            // customMarkdown, maar kolomkopcontext en bulkregels moeten ook
-            // voor een nog onbruikbare tijdlijn beschikbaar blijven.
-            tableRows: decodeMarkdownTableRows(lines.sublist(i + 1, j)),
-          ),
-        );
+        slides.add(_markedTableSlide(rawLines, lines, i, j));
         i = j;
+        continue;
+      }
+
+      // Een pentest-envelop is één atomair blok. Deze tak staat vóór de
+      // kop-tak; zie [_pentestEnvelopeSlide] voor waarom die volgorde het punt
+      // is.
+      final block = pentest.blockAt(i);
+      if (block != null && block.start == i) {
+        flushFlow();
+        slides.add(_pentestEnvelopeSlide(block, rawLines, lines));
+        i = block.end;
         continue;
       }
 
@@ -146,22 +149,11 @@ class DocumentDeckBridge {
           i + 1 < lines.length &&
           isMarkdownTableDelimiterRow(lines[i + 1].trim())) {
         flushFlow();
-        // Koprij + scheidingsrij + body: de codec leest de per-kolomuitlijning
-        // uit de scheidingsrij (en laat die daarna weg), zodat een office-tabel
-        // zijn uitlijning door de deconstructie én de round-trip behoudt.
-        final tableLines = <String>[line, lines[i + 1]];
         var j = i + 2;
         while (j < lines.length && isMarkdownTableLine(lines[j].trim())) {
-          tableLines.add(lines[j]);
           j++;
         }
-        final decoded = decodeMarkdownTableWithAlignment(tableLines);
-        slides.add(
-          Slide.create(SlideType.table).copyWith(
-            tableRows: decoded.rows,
-            tableColumnAlignments: decoded.alignments,
-          ),
-        );
+        slides.add(_plainTableSlide(lines.sublist(i, j)));
         i = j;
         continue;
       }
@@ -259,6 +251,71 @@ class _ExactLineRanges {
     return result;
   }
 }
+
+/// Eén `table`-dia uit een kale GFM-tabel.
+///
+/// Koprij + scheidingsrij + body: de codec leest de per-kolomuitlijning uit de
+/// scheidingsrij (en laat die daarna weg), zodat een office-tabel zijn
+/// uitlijning door de deconstructie én de rondgang behoudt.
+///
+/// Top-level en geen methode: hij raakt geen enkel veld van
+/// [DocumentDeckBridge], en `documentToDeck` zit tegen zijn lengteplafond.
+Slide _plainTableSlide(List<String> tableLines) {
+  final decoded = decodeMarkdownTableWithAlignment(tableLines);
+  return Slide.create(SlideType.table).copyWith(
+    tableRows: decoded.rows,
+    tableColumnAlignments: decoded.alignments,
+  );
+}
+
+/// Eén atomaire dia voor een gemarkeerde tabel: de rauwe bron met haar marker,
+/// plus de rijen als schaduwstructuur.
+///
+/// De marker mag niet losgemaakt worden en de tabel niet genormaliseerd — ook
+/// niet wanneer de tabel nog onbruikbaar is. De visuele editor laat de gebruiker
+/// zo'n tabel herstellen; de brug hoort daar niet op vooruit te lopen. De
+/// `tableRows` zijn er voor OciWacht: de uitvoer blijft de rauwe
+/// `customMarkdown`, maar kolomkopcontext en bulkregels moeten beschikbaar
+/// blijven.
+///
+/// Top-level en geen methode: hij raakt geen enkel veld van [DocumentDeckBridge],
+/// en `documentToDeck` zit tegen zijn lengteplafond.
+Slide _markedTableSlide(
+  _ExactLineRanges rawLines,
+  List<String> lines,
+  int start,
+  int end,
+) => Slide.create(SlideType.freeMarkdown).copyWith(
+  customMarkdown: rawLines.slice(start, end),
+  tableRows: decodeMarkdownTableRows(lines.sublist(start + 1, end)),
+);
+
+/// Eén atomaire dia voor een pentest-envelop (PENTEST_DOCUMENT.md §6).
+///
+/// **Waarom de envelop-tak vóór de kopsplitsing staat.** Zonder hem knipt die
+/// splitsing een bevinding op elke `#### Description` in stukken, en dan
+/// verliest de scanner de samenhang tussen de kop van de bevinding — waar het
+/// scope-object en de CVSS staan — en de tekst eronder.
+///
+/// **Waarom het een `freeMarkdown`-dia blijft en nog geen `SlideType.finding`.**
+/// `_slideBody` schrijft voor een tabelgedragen type zowel de `customMarkdown`
+/// als de her-gecodeerde tabel weg. Een getypeerd blok dat óók zijn rauwe bron
+/// houdt, zou zijn tabel dus dubbel in het document zetten — dezelfde klasse
+/// fout als #1589. Typeren hoort bij de fase die `_slideBody` de enveloppen
+/// leert kennen; tot die tijd is de rauwe bron de waarheid, precies zoals bij
+/// de tijdlijn.
+///
+/// De markerregel hoort bij het bereik: hij is bronbezit (D9).
+Slide _pentestEnvelopeSlide(
+  PentestBlock block,
+  _ExactLineRanges rawLines,
+  List<String> lines,
+) => Slide.create(SlideType.freeMarkdown).copyWith(
+  customMarkdown: rawLines.slice(block.start, block.end),
+  tableRows: block.kind.headingBounded
+      ? const []
+      : decodeMarkdownTableRows(lines.sublist(block.start + 1, block.end)),
+);
 
 /// Het lichaam van één dia als platte Markdown voor [DocumentDeckBridge.deckToDocumentMarkdown].
 String _slideBody(Slide slide) {
