@@ -36,7 +36,8 @@ download's provenance is verifiable (see
 tagged (latest `0.1.1`, 2026-07-27) and carry the app for all four platforms; the
 macOS build is additionally signed and notarised and opens normally, while the
 **Windows and Linux binaries are not code-signed** — Windows warns on first
-launch. You can download a release build or build from source; either way, see
+launch. Windows offers both an installer (shortcut, file associations, clean
+uninstall) and a portable zip you can just unpack; neither updates itself. You can download a release build or build from source; either way, see
 [BUILD.md](BUILD.md) and the *Getting started* section of the
 [README](../README.md). *Corrected 2026-07-28: this said "nothing to download
 yet" and "no version has been tagged" — stale since `0.1.0` on 2026-07-25.

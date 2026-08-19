@@ -48,12 +48,32 @@ class _Pin {
     required this.version,
     required this.source,
     required this.api,
+    this.tagRegex,
   });
 
   final String label;
   final String version;
   final String source;
   final String api;
+
+  /// Optional pattern that lifts a plain version out of an upstream tag whose
+  /// shape is not `1.2.3` or `v1.2.3`. Inno Setup tags its releases `is-6_7_3`,
+  /// which would otherwise be unparseable and so permanently reported as
+  /// "behind" — a monitor that cries wolf every run is a monitor nobody reads.
+  /// Group 1 is the version; underscores in it are read as dots.
+  final String? tagRegex;
+
+  /// [tag] reduced to a comparable version string.
+  String normalise(String tag) {
+    final pattern = tagRegex;
+    if (pattern == null) return tag;
+    final match = RegExp(pattern).firstMatch(tag);
+    // No match means upstream changed its tag shape. Hand back the raw tag
+    // rather than guessing: `_isBehind` treats an unparseable version as
+    // "differs → behind", which surfaces the change instead of hiding it.
+    if (match == null || match.groupCount < 1) return tag;
+    return (match.group(1) ?? tag).replaceAll('_', '.');
+  }
 }
 
 Future<void> main(List<String> args) async {
@@ -93,7 +113,8 @@ Future<void> main(List<String> args) async {
     if (offline) {
       status = 'skipped (--offline)';
     } else {
-      final latest = await _latestVersion(pin.source, pin.api);
+      final rawLatest = await _latestVersion(pin.source, pin.api);
+      final latest = rawLatest == null ? null : pin.normalise(rawLatest);
       if (latest == null) {
         status = 'UPSTREAM UNREACHABLE';
         networkFailed = true;
@@ -178,6 +199,7 @@ List<_Pin> _readPins(Map<String, dynamic> manifest) {
         version: field(entry, 'version', 'tools'),
         source: field(entry, 'source', 'tools'),
         api: field(entry, 'api', 'tools'),
+        tagRegex: entry['tag_regex'] as String?,
       ),
     );
   }

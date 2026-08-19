@@ -12,6 +12,19 @@
   ],
   "tools": [
     {
+      "name": "innosetup",
+      "env": "INNOSETUP_VERSION",
+      "version": "7.1.0",
+      "workflows": [
+        ".github/workflows/release.yml"
+      ],
+      "purpose": "Builds the Windows installer in the mirror's release job (#1208/#1583); the .exe is also sha256-pinned there.",
+      "source": "github_release",
+      "api": "https://api.github.com/repos/jrsoftware/issrc/releases/latest",
+      "tag_regex": "^is-(.+)$",
+      "_comment": "Upstream tags releases `is-7_1_0`, not `7.1.0`, so `tag_regex` names the capture and the underscores are read as dots. Without it every run would report this pin as behind, and an advisory that cries wolf is one nobody reads. The x64 edition is the one downloaded; 7.x keeps backward compatibility with 6.x scripts and the documented breaks are all in Pascal Script and preprocessor functions, which packaging/windows/ocideck.iss deliberately has none of (test/windows_packaging_test.dart forbids a [Code] section outright)."
+    },
+    {
       "name": "gitleaks",
       "env": "GITLEAKS_VERSION",
       "version": "8.30.1",

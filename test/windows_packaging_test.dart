@@ -34,6 +34,12 @@ void main() {
       .where((line) => !line.trimLeft().startsWith('#'))
       .join('\n');
   final makefile = File('Makefile').readAsStringSync();
+  final mirrorYaml = File('.github/workflows/release.yml').readAsStringSync();
+  final forgeYaml = File('.forgejo/workflows/release.yml').readAsStringSync();
+  final releaseBody = File('.forgejo/release-body.md').readAsStringSync();
+  final pinManifest = File(
+    '.github/pinned-ci-versions.json',
+  ).readAsStringSync();
 
   group('the installer and the .reg file declare the same associations', () {
     test('both use the OciDeck.Package ProgID', () {
@@ -254,6 +260,161 @@ void main() {
         scriptCode.contains('/tr "\$TIMESTAMP_URL" /td SHA256'),
         isTrue,
         reason: 'signtool is invoked without RFC 3161 timestamping.',
+      );
+    });
+  });
+
+  // The installer only reaches a user if four places agree on one filename and
+  // one ordering: the mirror builds and uploads it, the forge fetches it before
+  // it hashes anything, and the release notes offer it. #1583 wired that up; the
+  // failure mode it guards is a release that quietly ships one fewer file than
+  // it promises — which is exactly what nobody notices until a user asks.
+  group('the release chain carries the installer end to end', () {
+    const installer = r'ocideck-windows-x64-setup-$VERSIE.exe';
+
+    test("the mirror installs Inno Setup pinned by version and sha256", () {
+      expect(
+        RegExp(r'INNOSETUP_VERSION:\s*(\d+\.\d+\.\d+)').firstMatch(mirrorYaml),
+        isNotNull,
+        reason: 'The Windows job no longer pins an Inno Setup version (#1583).',
+      );
+      expect(
+        RegExp(r'INNOSETUP_SHA256:\s*[0-9a-f]{64}').hasMatch(mirrorYaml),
+        isTrue,
+        reason:
+            'Inno Setup is fetched without a sha256, so a replaced release '
+            'asset would build silently instead of failing loudly.',
+      );
+      expect(
+        mirrorYaml.contains(r'sha256sum -c -'),
+        isTrue,
+        reason: 'The pinned sha256 is never actually verified.',
+      );
+    });
+
+    test('that pin is listed in the manifest, at the same version', () {
+      final version = RegExp(
+        r'INNOSETUP_VERSION:\s*(\d+\.\d+\.\d+)',
+      ).firstMatch(mirrorYaml)!.group(1);
+      expect(
+        pinManifest.contains('"INNOSETUP_VERSION"'),
+        isTrue,
+        reason:
+            'The Inno Setup pin is missing from .github/pinned-ci-versions.json, '
+            'so `make check-pins` will never notice it going stale.',
+      );
+      expect(
+        pinManifest.contains('"version": "$version"'),
+        isTrue,
+        reason:
+            'The manifest and the workflow disagree on the Inno Setup version '
+            '($version in the workflow).',
+      );
+    });
+
+    test('the mirror builds the installer before it zips the bundle', () {
+      final buildAt = mirrorYaml.indexOf('build_windows_installer.sh');
+      final zipAt = mirrorYaml.indexOf('7z a -tzip');
+      expect(buildAt, greaterThan(-1), reason: 'The mirror never builds it.');
+      expect(
+        buildAt,
+        lessThan(zipAt),
+        reason:
+            'The zip is built before the installer. The packager signs the exe '
+            'and DLLs in place when a certificate is configured, so this order '
+            'would ship a zip of unsigned binaries next to a signed installer — '
+            'two downloads that are not the same build.',
+      );
+    });
+
+    test('the installer is built with the version from the tag', () {
+      // Not from pubspec.yaml: the forge fetches by a name derived from the tag,
+      // so a tag that is momentarily ahead of pubspec would produce a file the
+      // forge cannot find.
+      expect(
+        mirrorYaml.contains(
+          r'VERSION="${GITHUB_REF_NAME#v}" bash scripts/build_windows_installer.sh',
+        ),
+        isTrue,
+        reason:
+            'The mirror lets the packager read pubspec.yaml instead of using '
+            'the tag, so the filename can drift from what the forge fetches.',
+      );
+    });
+
+    test('the mirror uploads it and the forge fetches it, under one name', () {
+      expect(
+        mirrorYaml.contains(installer),
+        isTrue,
+        reason: 'The mirror builds the installer but never publishes it.',
+      );
+      expect(
+        forgeYaml.contains(installer),
+        isTrue,
+        reason:
+            'windows-ophalen does not fetch the installer, so it never reaches '
+            'the forge release — and never reaches SHA256SUMS.',
+      );
+    });
+
+    test('the forge waits for BOTH files before it calls the job done', () {
+      // A check satisfied by the zip alone would let a half-uploaded mirror run
+      // pass, publishing a release with the installer silently missing.
+      final have = RegExp(
+        r'have_asset\(\)\s*\{(.*?)\n          \}',
+        dotAll: true,
+      ).firstMatch(forgeYaml);
+      expect(have, isNotNull, reason: 'have_asset() no longer parses.');
+      expect(
+        have!.group(1),
+        contains(r'${BESTANDEN[@]}'),
+        reason:
+            'have_asset checks a single file. It must require every expected '
+            'Windows artifact, or a missing installer reads as success.',
+      );
+    });
+
+    test('the artifact hand-off is not narrowed to the zip', () {
+      expect(
+        RegExp(
+          r'path:\s*ocideck-windows-x64-\*\s*$',
+          multiLine: true,
+        ).hasMatch(forgeYaml),
+        isTrue,
+        reason:
+            'The upload-artifact glob no longer carries both Windows files, so '
+            'the installer is dropped between windows-ophalen and publiceren.',
+      );
+    });
+
+    test('the release notes offer it and say it does not update itself', () {
+      // In the downloads table specifically, not merely somewhere in the
+      // prose: the table is the part a reader actually scans for a file to
+      // click. A mention further down does not put it in front of anyone.
+      expect(
+        RegExp(
+          r'^\|[^|]*Windows[^|]*\|\s*`ocideck-windows-x64-setup-@VERSIE@\.exe`\s*\|',
+          multiLine: true,
+        ).hasMatch(releaseBody),
+        isTrue,
+        reason:
+            'The installer has no row in the downloads table of '
+            '.forgejo/release-body.md, so a release publishes a file nobody is '
+            'told about.',
+      );
+      expect(
+        releaseBody.contains('Neither checks for updates'),
+        isTrue,
+        reason:
+            'The release notes offer an installer without saying it has no '
+            'update channel — the one thing a reader will assume it has.',
+      );
+      expect(
+        releaseBody.contains('SHA256SUMS'),
+        isTrue,
+        reason:
+            'The notes must point at the manifest: with no code-signing '
+            'certificate, that signature is the installer only provenance.',
       );
     });
   });
