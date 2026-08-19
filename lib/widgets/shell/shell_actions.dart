@@ -149,6 +149,7 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
     context,
     fileService: ref.read(fileServiceProvider),
     libraries: settings.libraries,
+    showPreview: settings.showOpenPreview,
   );
   if (result == null || !context.mounted) return;
   // Bladeren… sluit het dialoog eerst; daarna pas de native kiezer — anders
@@ -249,6 +250,7 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
       for (final f in ref.read(settingsProvider).recentFiles) f.path,
     ],
     homeDir: ref.read(settingsProvider).homeDirectory,
+    showPreview: ref.read(settingsProvider).showOpenPreview,
   );
   if (path == null) return;
   await ref.read(tabsProvider.notifier).openFileByPath(path);

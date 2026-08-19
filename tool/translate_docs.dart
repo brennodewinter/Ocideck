@@ -216,6 +216,75 @@ List<String> _variantLangsOnDisk(String baseDoc) {
   ];
 }
 
+/// One heading of a Markdown document: its level (`## ` is 2) and its text.
+typedef MarkdownHeading = ({int level, String text});
+
+/// The headings of [markdown], skipping fenced code blocks.
+///
+/// The fence walk is not decoration. FILE_FORMAT and the guides are full of
+/// examples in which `# Title` is the *content* of a block and not a heading of
+/// the document; counting those would make the structure check compare noise
+/// with noise. A fence opens on three or more backticks/tildes at the start of a
+/// line (up to three spaces of indent) and closes only on at least as many of
+/// the same character with nothing behind them, so a ```` ``` ```` shown inside
+/// a longer fence does not close the real one.
+List<MarkdownHeading> markdownHeadings(String markdown) {
+  final headings = <MarkdownHeading>[];
+  final fenceLine = RegExp(r'^ {0,3}(`{3,}|~{3,})\s*(.*)$');
+  final headingLine = RegExp(r'^ {0,3}(#{1,6})\s+(\S.*?)\s*#*\s*$');
+  String? fenceChar;
+  var fenceLength = 0;
+  for (final line in const LineSplitter().convert(markdown)) {
+    if (fenceLine.firstMatch(line) case final fence?) {
+      final token = fence.group(1)!;
+      if (fenceChar == null) {
+        fenceChar = token[0];
+        fenceLength = token.length;
+      } else if (token[0] == fenceChar &&
+          token.length >= fenceLength &&
+          fence.group(2)!.trim().isEmpty) {
+        fenceChar = null;
+      }
+      continue;
+    }
+    if (fenceChar != null) continue;
+    if (headingLine.firstMatch(line) case final heading?) {
+      headings.add((level: heading.group(1)!.length, text: heading.group(2)!));
+    }
+  }
+  return headings;
+}
+
+/// The numbered section ids a document declares (`14.11`, `6.3.1`, `3.1b`).
+///
+/// Numbers survive translation where words do not, which is what makes them
+/// usable as the identity of a section across languages. FILE_FORMAT is the
+/// document that numbers its sections; for the others this is simply empty.
+Set<String> markdownSectionNumbers(String markdown) {
+  final numbered = RegExp(r'^([0-9]+(?:\.[0-9]+[a-z]?)*)[.)]?\s');
+  return {
+    for (final heading in markdownHeadings(markdown))
+      if (numbered.firstMatch(heading.text) case final m?) m.group(1)!,
+  };
+}
+
+/// How many headings [variant] is missing compared with [source], counted per
+/// level so a translated document that merely *renames* a heading does not
+/// register as drift — only a heading that is not there at all does.
+int missingHeadingCount(
+  List<MarkdownHeading> source,
+  List<MarkdownHeading> variant,
+) {
+  final counts = <int, int>{};
+  for (final heading in source) {
+    counts[heading.level] = (counts[heading.level] ?? 0) + 1;
+  }
+  for (final heading in variant) {
+    counts[heading.level] = (counts[heading.level] ?? 0) - 1;
+  }
+  return counts.values.where((n) => n > 0).fold(0, (a, b) => a + b);
+}
+
 /// Consistency problems with the shipped documentation variants (empty = OK).
 ///
 /// The gate no longer demands a variant in every interface language — OciDeck
@@ -283,6 +352,46 @@ List<String> docVariantProblems() {
       problems.add(
         'excluded document was translated (remove): ${variantPath(doc, lang)}',
       );
+    }
+  }
+
+  // (5) a shipped variant must carry the same structure as its source. This is
+  // the freshness half of the gate: rules (1)-(4) only ask whether a variant
+  // exists, which is how §14.9 of FILE_FORMAT could be absent from the Dutch
+  // file for a day with every gate green (#1568). Headings are compared per
+  // level and section numbers by identity, because both survive translation
+  // while the words do not.
+  for (final doc in translatableDocs) {
+    final source = File(doc);
+    if (!source.existsSync()) continue;
+    final sourceText = source.readAsStringSync();
+    final sourceHeadings = markdownHeadings(sourceText);
+    final sourceNumbers = markdownSectionNumbers(sourceText);
+    for (final lang in shipped) {
+      final variant = File(variantPath(doc, lang));
+      if (!variant.existsSync()) continue; // already reported by rule (1).
+      final variantText = variant.readAsStringSync();
+      final missing = missingHeadingCount(
+        sourceHeadings,
+        markdownHeadings(variantText),
+      );
+      if (missing > 0) {
+        problems.add(
+          '${variantPath(doc, lang)} is missing $missing heading(s) that '
+          '$doc has. Translate the new section into the variant in the same '
+          'change — there is deliberately no baseline to raise.',
+        );
+      }
+      final missingNumbers = (sourceNumbers.difference(
+        markdownSectionNumbers(variantText),
+      )).toList()..sort();
+      if (missingNumbers.isNotEmpty) {
+        problems.add(
+          '${variantPath(doc, lang)} does not carry section number(s) '
+          '${missingNumbers.join(', ')} from $doc. A section keeps its number '
+          'in every language.',
+        );
+      }
     }
   }
 

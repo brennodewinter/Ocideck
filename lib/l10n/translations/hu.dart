@@ -5,7 +5,7 @@ const _stringsHu = {
   'newPresentation': 'Új bemutató',
   'open': 'Megnyitás...',
   'openEllipsis': 'Megnyitás…',
-  'recentPresentations': 'Legutóbbi bemutatók',
+  'recentFiles': 'Legutóbbi fájlok',
   'newTab': 'Új lap',
   'imageLibrary': 'Képtár',
   'presentFullscreen': 'Bemutatás (teljes képernyő) · P az előadói nézethez',
@@ -189,7 +189,6 @@ const _dutchSourceHu = {
   'Andere map…': 'Másik mappa…',
   'Bibliotheken': 'Könyvtárak',
   'Geen bibliotheek': 'Nincs könyvtár',
-  'Geen presentaties (.md) gevonden.': 'Nem található prezentáció (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'A mappát és a nevet a következő ablakban választod ki. A képek egy images/ almappába kerülnek, a média pedig a media/ mappába, a prezentációfájl mellé.',
   'Kies bestandsnaam…': 'Fájlnév kiválasztása…',
@@ -526,13 +525,10 @@ const _dutchSourceHu = {
   'Kies een video': 'Válasszon egy videót',
   'Kies een audiobestand': 'Válasszon egy hangfájlt',
   'Bladeren…': 'Tallózás…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Keresés fájlnév, cím vagy diaszöveg alapján…',
   'Geen map gekozen': 'Nincs kiválasztott mappa',
   'Map kiezen': 'Mappa kiválasztása',
   'Kies een map met presentaties om te beginnen.':
       'Válasszon egy prezentációkat tartalmazó mappát a kezdéshez.',
-  'Geen presentaties gevonden voor': 'Nem található prezentáció ehhez:',
   'meer treffer(s)': 'további találat',
   'Slide zoeken': 'Dia keresése',
   'Slides importeren': 'Diák importálása',
@@ -893,14 +889,9 @@ const _dutchSourceHu = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Figyelmeztetés {b1} felsoroláspont (1 oszlop), {bcl} (ellenőrzőlista) vagy {b2} (2 oszlop) felett; kritikus {bc1} vagy {bc2} felett. Szavak {w1}/{w2} felett, átlagosan {avg} felett felsoroláspontonként. Idézet {q} karakter felett, cím {t} karakter felett. Beágyazottság a(z) {lvl}. szintnél mélyebben. A {warn}% alá zsugorodó szöveg figyelmeztet, {crit}% alatt kritikus.',
   'Zoek op deze computer': 'Keresés ezen a számítógépen',
-  'Presentaties zoeken op deze computer':
-      'Prezentációk keresése ezen a számítógépen',
   'Zoek op titel, pad of thema…': 'Keresés cím, útvonal vagy téma szerint…',
   'Bekende mappen worden doorzocht…': 'Ismert mappák átvizsgálása…',
   'gevonden': 'találat',
-  'presentatie(s) gevonden': 'prezentáció található',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nem található Marp-prezentáció az ismert mappákban.',
   'Geen thema': 'Nincs téma',
   'Kopieer syntaxproblemen': 'Szintaxisproblémák másolása',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1700,6 +1691,32 @@ const _dutchSourceAddHu = <String, String>{
   'Tijdlijn bekijken': 'Idővonal megtekintése',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Először adjon hozzá legalább egy eseményt. Ez a táblázat változatlan marad.',
+  'Alles': 'Mind',
+  'Presentaties': 'Prezentációk',
+  'Documenten': 'Dokumentumok',
+  'Voorbeeld': 'Előnézet',
+  'Voorbeeld tonen': 'Előnézet megjelenítése',
+  'Voorbeeld tonen bij openen': 'Előnézet megjelenítése megnyitáskor',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Mutass rá egy fájlra, hogy itt lásd az előnézetét.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Ez a fájl nem jeleníthető meg. A megnyitás is elutasítja — a tartalom nem biztonságos, sérült vagy olvashatatlan.',
+  'Dit document is leeg.': 'Ez a dokumentum üres.',
+  'Deze presentatie heeft nog geen dia.':
+      'Ennek a prezentációnak még nincs diája.',
+  'Alleen het begin van het document wordt getoond.':
+      'Csak a dokumentum eleje látszik.',
+  'Bestanden zoeken op deze computer': 'Fájlok keresése ezen a számítógépen',
+  'Dubbele bestanden opruimen': 'Duplikált fájlok rendbetétele',
+  'bestand(en) gevonden': 'fájl található',
+  'Geen presentaties of documenten gevonden.':
+      'Nem található prezentáció vagy dokumentum.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nem található prezentáció vagy dokumentum az ismert mappákban.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Keresés fájlnév, cím vagy a fájlban lévő szöveg alapján…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'A megnyitó ablakban megjeleníti a kijelölt fájl renderelt előnézetét, hogy a megnyitás előtt lásd a tartalmát.',
   'Voetnoot': 'Lábjegyzet',
   'Noten': 'Jegyzetek',
   'Voetnoten achterin het document': 'Jegyzetek a dokumentum végén',

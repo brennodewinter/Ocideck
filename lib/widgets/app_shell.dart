@@ -124,6 +124,7 @@ import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/improvement_project_setup_dialog.dart';
+import 'dialogs/open_kind_chrome.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/matrix_collab_dialogs.dart';
 import 'dialogs/package_encrypt_dialog.dart';

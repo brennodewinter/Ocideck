@@ -98,9 +98,14 @@ class TableEditScaffold extends StatelessWidget {
       // De werkbalk mag de focus niet uit de cel trekken: anders verdwijnt hij
       // onder je handen vandaan op het moment dat je hem aanklikt.
       child: ExcludeFocus(
+        // Wrap en geen Row: de werkbalk hoort bij de tabel waar hij boven
+        // staat, en een smalle tabel liet de knoppen over de rand lopen
+        // (14px, zichtbaar als de rood-gele streep). Nu vouwt hij naar een
+        // tweede regel en houdt hij zich aan de breedte die er is.
         child: Wrap(
           spacing: 0,
           runSpacing: 2,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             _button(
               context,

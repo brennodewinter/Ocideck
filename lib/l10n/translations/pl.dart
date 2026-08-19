@@ -5,7 +5,7 @@ const _stringsPl = {
   'newPresentation': 'Nowa prezentacja',
   'open': 'Otwórz...',
   'openEllipsis': 'Otwórz…',
-  'recentPresentations': 'Ostatnie prezentacje',
+  'recentFiles': 'Ostatnie pliki',
   'newTab': 'Nowa karta',
   'imageLibrary': 'Biblioteka obrazów',
   'presentFullscreen': 'Prezentuj na pełnym ekranie · P dla widoku prezentera',
@@ -193,7 +193,6 @@ const _dutchSourcePl = {
   'Andere map…': 'Inny folder…',
   'Bibliotheken': 'Biblioteki',
   'Geen bibliotheek': 'Brak biblioteki',
-  'Geen presentaties (.md) gevonden.': 'Nie znaleziono prezentacji (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Folder i nazwę wybierzesz w następnym oknie. Obrazy trafią do podfolderu images/, a multimedia do media/, obok pliku prezentacji.',
   'Kies bestandsnaam…': 'Wybierz nazwę pliku…',
@@ -530,13 +529,10 @@ const _dutchSourcePl = {
   'Kies een video': 'Wybierz wideo',
   'Kies een audiobestand': 'Wybierz plik dźwiękowy',
   'Bladeren…': 'Przeglądaj…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Szukaj według nazwy pliku, tytułu lub tekstu slajdów…',
   'Geen map gekozen': 'Nie wybrano folderu',
   'Map kiezen': 'Wybierz folder',
   'Kies een map met presentaties om te beginnen.':
       'Wybierz folder z prezentacjami, aby rozpocząć.',
-  'Geen presentaties gevonden voor': 'Nie znaleziono prezentacji dla',
   'meer treffer(s)': 'więcej trafień',
   'Slide zoeken': 'Znajdź slajd',
   'Slides importeren': 'Importuj slajdy',
@@ -900,14 +896,9 @@ const _dutchSourcePl = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Ostrzeżenie powyżej {b1} punktorów (1 kolumna), {bcl} (lista kontrolna) lub {b2} (2 kolumny); krytyczne powyżej {bc1} lub {bc2}. Słowa powyżej {w1}/{w2}, średnio powyżej {avg} na punktor. Cytat powyżej {q} znaków, tytuł powyżej {t} znaków. Zagnieżdżenie głębsze niż poziom {lvl}. Tekst, który musi zmniejszyć się poniżej {warn}%, generuje ostrzeżenie, poniżej {crit}% jest krytyczny.',
   'Zoek op deze computer': 'Szukaj na tym komputerze',
-  'Presentaties zoeken op deze computer':
-      'Znajdź prezentacje na tym komputerze',
   'Zoek op titel, pad of thema…': 'Szukaj według tytułu, ścieżki lub motywu…',
   'Bekende mappen worden doorzocht…': 'Przeszukiwanie znanych folderów…',
   'gevonden': 'znaleziono',
-  'presentatie(s) gevonden': 'znaleziono prezentację(e)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nie znaleziono prezentacji Marp w znanych folderach.',
   'Geen thema': 'Brak motywu',
   'Kopieer syntaxproblemen': 'Kopiuj problemy składni',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1709,6 +1700,32 @@ const _dutchSourceAddPl = <String, String>{
   'Tijdlijn bekijken': 'Zobacz oś czasu',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najpierw dodaj co najmniej jedno wydarzenie. Tabela ta pozostaje niezmieniona.',
+  'Alles': 'Wszystko',
+  'Presentaties': 'Prezentacje',
+  'Documenten': 'Dokumenty',
+  'Voorbeeld': 'Podgląd',
+  'Voorbeeld tonen': 'Pokaż podgląd',
+  'Voorbeeld tonen bij openen': 'Pokaż podgląd przy otwieraniu',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Wskaż plik, aby zobaczyć tutaj jego podgląd.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Tego pliku nie można pokazać. Otwarcie również go odrzuca — treść jest niebezpieczna, uszkodzona lub nieczytelna.',
+  'Dit document is leeg.': 'Ten dokument jest pusty.',
+  'Deze presentatie heeft nog geen dia.':
+      'Ta prezentacja nie ma jeszcze slajdów.',
+  'Alleen het begin van het document wordt getoond.':
+      'Pokazywany jest tylko początek dokumentu.',
+  'Bestanden zoeken op deze computer': 'Znajdź pliki na tym komputerze',
+  'Dubbele bestanden opruimen': 'Uporządkuj zduplikowane pliki',
+  'bestand(en) gevonden': 'znaleziono plik(i)',
+  'Geen presentaties of documenten gevonden.':
+      'Nie znaleziono prezentacji ani dokumentów.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nie znaleziono prezentacji ani dokumentów w znanych folderach.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Szukaj według nazwy pliku, tytułu lub tekstu w pliku…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Pokazuje w oknie otwierania wyrenderowany podgląd wskazanego pliku, żebyś zobaczył jego treść, zanim go otworzysz.',
   'Voetnoot': 'Przypis',
   'Noten': 'Przypisy',
   'Voetnoten achterin het document': 'Przypisy na końcu dokumentu',

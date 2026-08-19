@@ -5,7 +5,7 @@ const _stringsNl = {
   'newPresentation': 'Nieuwe presentatie',
   'open': 'Openen...',
   'openEllipsis': 'Openen…',
-  'recentPresentations': 'Recente presentaties',
+  'recentFiles': 'Recente bestanden',
   'newTab': 'Nieuw tabblad',
   'imageLibrary': 'Afbeeldingenbibliotheek',
   'presentFullscreen': 'Presenteren (volledig scherm) · P voor presenter view',

@@ -4259,6 +4259,19 @@ not, and why conversion is deliberately lossy — is written up in
   screen or `Ctrl/Cmd + O`) opens as a document rather than a deck; OciDeck tells
   the two apart by the absence of `marp: true`, so nothing on disk marks a file
   as "OciDeck's".
+- **Finding them again**: the open dialog (`Ctrl/Cmd + O`) and *Search this
+  computer* list documents alongside presentations, in one list. Every row says
+  with an icon and a label which of the two it is, and the *All · Presentations ·
+  Documents* buttons — counts included — narrow the list to one kind. Besides
+  `.md`, both `.markdown` and `.txt` count. To see what is inside before you
+  open it, switch on *Settings → Storage → Open → Show a preview when
+  opening*: a rendered preview of the file you point at appears next to the list
+  — the first slide of a presentation, the opening text of a document. That
+  setting is off by default, because the preview reads a file you have not chosen
+  yet. It also reads through exactly the same gate as opening itself, so a file
+  OciDeck refuses to open is not drawn here either. *(Added 2026-08-19: the
+  search lists showed Marp presentations only, so your own documents could not be
+  found there.)*
 - **Save** (`Ctrl/Cmd + S`) writes your **byte-faithful master**: opening a
   document and saving it again without editing yields a byte-identical file.
   OciDeck injects no front matter, forces no slide separators, and applies no
@@ -4297,12 +4310,23 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   editing the source text directly, with the same formatting toolbar, and shows a
   short note that this part is edited as source. The rich possibilities stay
   within reach — OciDeck offers them and warns, rather than deciding the document
-  is read-only for you. *(Changed 2026-08-08.)*
+  is read-only for you. The note is a clear bar above the writing surface: you
+  should know you are in the source, otherwise you cannot know how to get back.
+  Inside a **table** every cell reads the way it prints — `**bold**` is bold and
+  `` `code` `` sits on a code chip. Only the cell the caret is in shows its
+  Markdown, because that is what you are editing at that moment.
+  *(Changed 2026-08-08, extended 2026-08-19.)*
 - **Source** puts the raw Markdown next to a live rendered preview (stacked when
   the window is too narrow for two readable columns), with double-click editing of
   charts and tables in the preview. Every keystroke flows straight through — there
   is no separate "Apply" step, unlike the deck-oriented
   [Markdown mode](#markdown-mode) below.
+- **Switching leaves you where you were.** Going from Visual to Source or back
+  puts the caret at the matching place in the other view, not at the top of the
+  document — switching is exactly what you do when you want to see or set
+  something in the source *at one spot*. Character-exact precision is not always
+  possible; if you sit inside a formatting marker the caret lands at its start.
+  *(Added 2026-08-19.)*
 - **Pagina's** ("Pages") lays the document out on real sheets: the
   [page size and margins](#page-size-margins-bleed-and-writing-width) you chose,
   and — when the document carries a style — that style's repeating header and

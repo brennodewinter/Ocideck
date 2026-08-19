@@ -230,6 +230,38 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- feat(poort): `translate-docs-check` toetst nu ook of een vertaalde gids bíj is,
+  niet alleen of hij bestaat — en de Nederlandse gidsen zijn in dezelfde beweging
+  bijgetrokken. Twee keer in twee dagen kwam er een sectie bij in de Engelse bron
+  zonder Nederlandse tegenhanger — §14.9 van FILE_FORMAT (#1568) en §14.11 die met
+  de tijdlijnfunctie meekwam (#1571, hersteld in #1573) — en beide keren stond
+  alles groen, omdat de poort alleen vroeg *of* de variant bestond. Hij vergelijkt
+  nu de structuur: evenveel koppen per niveau als de bron, en elke genummerde
+  sectie (`14.11`, `6.3.1`) onder hetzelfde nummer. Koppen binnen codeblokken
+  tellen niet mee, want in FILE_FORMAT is `# Rapport` meestal de inhoud van een
+  voorbeeld. Er is geen basislijn en geen uitzondering, want de vijf secties die
+  achterliepen zijn vertaald: `USER_GUIDE.nl` kreeg *Tabellen, sorteren en
+  tijdlijnen*, *Voetnoten* (inclusief de tabel met wat elk oppervlak met een noot
+  kan) en *Breedte en zoom tijdens het schrijven*; `KNOWN_LIMITATIONS.nl` kreeg de
+  twee beperkingen die alleen de Engelse lezer las — dat voetnoten in de
+  HTML-export achteraan belanden, en dat de web-export de voettekst, het
+  paginanummer, het watermerk en de TLP-badges weglaat. Dat laatste is er precies
+  een om níet alleen in het Engels te hebben: wie een `.html` naar een klant
+  stuurt, hoort te weten dat zijn voettekst er niet in zit. Onderweg kreeg
+  `#### 6.3.1` in de Nederlandse FILE_FORMAT zijn sectienummer terug, dat bij het
+  vertalen was weggevallen.
+
+- docs(bestandsformaat): §14.11 (de tijdlijnmarker) is aangevuld en vertaald.
+  De sectie kwam met de functie mee (#1571) maar alleen in het Engels, en zonder
+  het rijtje dat §14.9 en §14.10 wél hebben: wat elk oppervlak met de bytes doet.
+  Dat staat er nu — het geprojecteerde `.md` houdt marker en tabel byte voor byte,
+  de HTML-export maakt er een tijdlijnlijst van die bij het afdrukken niet
+  doormidden breekt, de LaTeX-export een `description`-lijst met een derde kolom
+  als `Kop: waarde`, en in de visuele modus reizen marker en tabel als één embed.
+  Ook de herkenning staat er nu zo precies als de code hem leest: witruimte om de
+  marker heen mag, de schrijfwijze erbinnen niet. En `FILE_FORMAT.nl.md` — de
+  versie die in de app wordt getoond — heeft de sectie eindelijk ook.
+
 - docs(bestandsformaat): FILE_FORMAT loopt weer gelijk met de documentkant van de
   code. De inhoudsopgave-marker `<!-- toc -->` stond nergens in het
   bestandsformaat, terwijl dat naast `---` de enige constructie is die OciDeck
@@ -1613,6 +1645,56 @@ that before deciding whether this alpha fits what you are doing.
   tot een uitlegbare keuze en worden nooit stil weggegooid. De sortering is
   stabiel en verplaatst de oorspronkelijke Markdown-rijen zonder celbytes of
   regeleindes te normaliseren.
+- **documenten waren onvindbaar, en je zag pas na het openen wat je opende.**
+  Vier klachten, één oorzaak: beide zoekpaden lieten alleen Marp-decks door. De
+  mapscan achter het openscherm parseerde elk `.md` tot deck en liet vallen wat
+  dat niet was; de brede schijfscan gaf niets terug zonder `marp: true`. De
+  documentkant bewerkt juist gewone `.md`-bestanden, dus precies wat OciDeck als
+  document opent, kon je er niet mee terugvinden. Nu levert één wandeling beide
+  soorten op — `.md`, `.markdown` en `.txt` — en zegt elke rij met een pictogram
+  en een label welke van de twee het is; de knoppen *Alles · Presentaties ·
+  Documenten* dragen de aantallen, zodat je zonder te klikken ziet dát er
+  documenten zijn. Een document zonder titel heet naar zijn eerste kop, want
+  `verslag-def-2.md` zegt niets. Ook de recente-lijst op het welkomstscherm toont
+  nu de soort; die kende hem allang (`RecentFile.kind`) maar tekende alles als
+  presentatie — en heet nu "Recente bestanden", want daar stonden allang
+  documenten tussen. Het soortlabel verschijnt alleen in een lijst waarin
+  werkelijk twee soorten staan: is alles een presentatie, dan zegt "Presentatie"
+  achter elke regel niets meer. Een document komt alléén in de lijst als het door dezelfde
+  fail-closed poort komt als het openen: "geen presentatie" is een document,
+  maar uitvoerbare inhoud, kapot of onleesbaar blijft een weigering — wat je niet
+  mag openen, hoor je ook niet aangeboden te krijgen. Daarnaast is er de
+  optionele *Voorbeeld tonen bij openen* (Instellingen → Opslag → Openen,
+  standaard uit): naast de lijst verschijnt een gerenderd voorbeeld van het
+  bestand dat je aanwijst — de eerste dia van een presentatie, de begintekst van
+  een document. Het voorbeeld leest langs diezelfde poort, dus het kan geen
+  achterdeur zijn om geweigerde inhoud alsnog te renderen, en het wacht een
+  kwart seconde voordat het leest, zodat met de muis langs de lijst glijden geen
+  twintig bestanden inleest.
+- **de visuele documentmodus: een pijl in een tabel, de plek bij het wisselen,
+  en opmaak die opmaak blijft.** Drie klachten uit één sessie schrijven, en ze
+  bleken elkaars buren. *Naar beneden gaan in een tabel gooide je stil naar de
+  brontekst.* Een invulbare cel is een tekstveld binnen een Quill-embed, en een
+  `EditableText` laat zijn tekstbewerkingsacties bewust overschrijven door een
+  `Actions` hoger in de boom — waar Quill die van hem zet. Elke pijltjestoets in
+  een cel liet Quill dus de cursor van het *document* verzetten en dat resultaat
+  ín de cel schrijven: de hele documenttekst belandde met `<br>`-tekens in één
+  cel, en omdat rauwe HTML de visuele stand op brontekst terugwerpt, viel de
+  editor om. Zonder dat er iets van te zien was, want de standknop zei nog
+  "Visueel" en de melding was een grijze regel van 10,5 punt. `EmbeddedFieldActions`
+  zet die acties nu dichter bij het veld en laat ze de eigen standaardactie van
+  het veld aanroepen; de melding is een balk geworden. Meteen ook de
+  ontdekking dat één klik in het schrijfvlak het hele document opnieuw wegschreef:
+  de heen-en-terugweg naar Markdown is niet byte-getrouw, en de editor vergeleek
+  bij élke melding — óók bij een cursorbeweging (#1565). *Wisselen tussen Visueel
+  en Bron bracht je bij het begin*, terwijl je juist wisselt om op één plek in de
+  bron te kijken; `MarkdownCaretMap` rekent de cursor nu om, per regel en binnen
+  een regel met een deelrij-vergelijking, en de toets legt dat naast de échte
+  platte tekst van de omzetting in plaats van naast zelfbedachte getallen
+  (#1566). *En de sterretjes bleven in tabelcellen staan* omdat de cel een kaal
+  tekstveld was; de cel waar je niet in staat toont nu de opgemaakte lezing over
+  het veld heen, en `code` kreeg in de documentweergave hetzelfde vlakje als in
+  het schrijfvlak (#1567).
 
 - **schrijfcomfort in de documentmodus: breedte, zoom, koppen en voetnoten.**
   Vier dingen die opvielen tijdens het werken in een document, en wat ze bleken

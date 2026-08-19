@@ -5,7 +5,7 @@ const _stringsTlh = {
   'newPresentation': 'cha\'nav chu\'',
   'open': 'poSmoH...',
   'openEllipsis': 'poSmoH…',
-  'recentPresentations': 'cha\'navmey ramwI\'',
+  'recentFiles': 'ghItlhmey chu\'',
   'newTab': 'per chu\'',
   'imageLibrary': 'mIllogh pa\'',
   'presentFullscreen': '\'ang (jIH naQ) · presenter view \'oH P',
@@ -184,7 +184,6 @@ const _dutchSourceTlh = {
   'Andere map…': 'latlh Daq…',
   'Bibliotheken': 'qol\'ommey',
   'Geen bibliotheek': 'qol\'om Suqbe\'',
-  'Geen presentaties (.md) gevonden.': 'cha\'nav (.md) tu\'be\'.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Daq pong je DaghItlh veb Qorwagh. mIlloghmey images/ DaqvaD, media media/ DaqvaD, cha\'nav De\' retlh.',
   'Kies bestandsnaam…': 'De\' pong yIwIv…',
@@ -516,13 +515,10 @@ const _dutchSourceTlh = {
   'Kies een video': 'HaSta yIwIv',
   'Kies een audiobestand': 'QoQ teywI\' yIwIv',
   'Bladeren…': 'yISam…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'teywI\' pong, per, pagh \'echletHom mu\' yISam…',
   'Geen map gekozen': 'Daq wIvlu\'be\'',
   'Map kiezen': 'Daq yIwIv',
   'Kies een map met presentaties om te beginnen.':
       'taghmeH cha\'navmey ghajbogh Daq yIwIv.',
-  'Geen presentaties gevonden voor': 'cha\'nav tu\'lu\'be\'',
   'meer treffer(s)': 'latlh SamwI\'',
   'Slide zoeken': '\'echletHom yISam',
   'Slides importeren': '\'echletHommey yIkII\'',
@@ -880,13 +876,9 @@ const _dutchSourceTlh = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'ghuHmoH {b1} \'elpu\'ghachmey Dung (1 tlhoy\'), {bcl} (noHmey) pagh {b2} (2 tlhoy\'mey); Qob {bc1} pagh {bc2} Dung. mu\'mey {w1}/{w2} Dung, motlh {avg} Dung \'elpu\'ghachvaD. mu\'mey {q} DeghmeymeyDaq Dung, ghItlh {t} DeghmeymeyDaq Dung. \'elqutlu\' {lvl} pat bIngDaq. ghItlh {warn}% bIngDaq machHa\'nISbogh ghuHmoH, {crit}% bIngDaq Qob.',
   'Zoek op deze computer': 'De\'wI\' vamDaq yISam',
-  'Presentaties zoeken op deze computer': 'De\'wI\' vamDaq cha\'navmey yISam',
   'Zoek op titel, pad of thema…': 'per, Daq pagh segh yISam…',
   'Bekende mappen worden doorzocht…': 'Sovlu\' ghommey Sammeh…',
   'gevonden': 'tu\'lu\'',
-  'presentatie(s) gevonden': 'cha\'nav(mey) tu\'lu\'',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Sovlu\' ghommeyDaq Marp cha\'navmey tu\'be\'lu\'.',
   'Geen thema': 'segh pagh',
   'Kopieer syntaxproblemen': 'chov Qaghmey boS',
   'Syntaxproblemen gekopieerd naar klembord.': 'chov Qaghmey velDaq boS.',
@@ -1675,6 +1667,31 @@ const _dutchSourceAddTlh = <String, String>{
   'Tijdlijn bekijken': 'poH tlhegh legh',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'wa\' wanI\' law\' yIchel. romuSvam choHbe\'.',
+  'Alles': 'Hoch',
+  'Presentaties': 'cha\'navmey',
+  'Documenten': 'ghItlhmey',
+  'Voorbeeld': 'nughantlh',
+  'Voorbeeld tonen': 'nughantlh yI\'agh',
+  'Voorbeeld tonen bij openen': 'poSDI\' nughantlh yI\'agh',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'teywI\' yI\'agh; naDev nughantlh yIlegh.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'teywI\' vam \'anglu\'laHbe\'. poSlu\'laHbe\' je — nab QobHa\'be\', \'oy\'moHlu\', pagh laDlu\'laHbe\'.',
+  'Dit document is leeg.': 'ghItlh vam chIm.',
+  'Deze presentatie heeft nog geen dia.': 'cha\'nav vam \'echletHom ghajbe\'.',
+  'Alleen het begin van het document wordt getoond.':
+      'ghItlh tagh neH \'anglu\'.',
+  'Bestanden zoeken op deze computer': 'De\'wI\' vamDaq ghItlhmey yISam',
+  'Dubbele bestanden opruimen': 'ghItlhmey nIb Say\'moH',
+  'bestand(en) gevonden': 'ghItlh(mey) tu\'lu\'',
+  'Geen presentaties of documenten gevonden.':
+      'cha\'navmey ghItlhmey je tu\'be\'lu\'.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Sovlu\' ghommeyDaq cha\'navmey ghItlhmey je tu\'be\'lu\'.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'teywI\' pong, per, pagh teywI\' mu\' yISam…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'poS Qub\'a\'Daq teywI\' Da\'oghbogh nughantlh \'ang; poSpa\' nab yIlegh.',
   'Voetnoot': 'bopwI\'',
   'Noten': 'bopwI\'mey',
   'Voetnoten achterin het document': 'nav Dorlu\'DI\' bopwI\'mey',

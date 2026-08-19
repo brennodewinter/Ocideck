@@ -794,6 +794,9 @@ class DocumentMarkdownView extends StatelessWidget {
     text,
     style: style,
     linkColor: t.link,
+    // Hetzelfde vlakje achter `code` als in het schrijfvlak van de visuele
+    // stand; zonder deze kleur zagen de twee weergaven er anders uit (#1567).
+    codeBackground: t.codeBg,
     onTapLink: onTapLink,
     textAlign: textAlign,
     // Zonder noten `null`, en dan blijft `[^1]` gewoon `[^1]` — precies wat een

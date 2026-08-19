@@ -5,7 +5,7 @@ const _stringsSk = {
   'newPresentation': 'Nová prezentácia',
   'open': 'Otvoriť...',
   'openEllipsis': 'Otvoriť…',
-  'recentPresentations': 'Nedávne prezentácie',
+  'recentFiles': 'Nedávne súbory',
   'newTab': 'Nová karta',
   'imageLibrary': 'Knižnica obrázkov',
   'presentFullscreen':
@@ -190,7 +190,6 @@ const _dutchSourceSk = {
   'Andere map…': 'Iný priečinok…',
   'Bibliotheken': 'Knižnice',
   'Geen bibliotheek': 'Žiadna knižnica',
-  'Geen presentaties (.md) gevonden.': 'Nenašli sa žiadne prezentácie (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Priečinok a názov zvolíš v ďalšom okne. Obrázky sa uložia do podpriečinka images/ a médiá do media/, vedľa súboru prezentácie.',
   'Kies bestandsnaam…': 'Zvoliť názov súboru…',
@@ -526,13 +525,10 @@ const _dutchSourceSk = {
   'Kies een video': 'Zvoľte video',
   'Kies een audiobestand': 'Zvoľte zvukový súbor',
   'Bladeren…': 'Prehľadávať…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Hľadať podľa názvu súboru, nadpisu alebo textu v snímkach…',
   'Geen map gekozen': 'Nezvolený žiadny priečinok',
   'Map kiezen': 'Zvoliť priečinok',
   'Kies een map met presentaties om te beginnen.':
       'Ak chcete začať, zvoľte priečinok s prezentáciami.',
-  'Geen presentaties gevonden voor': 'Nenašli sa žiadne prezentácie pre',
   'meer treffer(s)': 'ďalších zhôd',
   'Slide zoeken': 'Nájsť snímku',
   'Slides importeren': 'Importovať snímky',
@@ -900,13 +896,9 @@ const _dutchSourceSk = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Upozornenie nad {b1} odrážok (1 stĺpec), {bcl} (kontrolný zoznam) alebo {b2} (2 stĺpce); kritické nad {bc1} alebo {bc2}. Slová nad {w1}/{w2}, priemerne nad {avg} na odrážku. Citát nad {q} znakov, titulok nad {t} znakov. Vnorenie hlbšie ako úroveň {lvl}. Text, ktorý sa musí zmenšiť pod {warn} %, upozorňuje, pod {crit} % je kritický.',
   'Zoek op deze computer': 'Hľadať v tomto počítači',
-  'Presentaties zoeken op deze computer': 'Nájsť prezentácie v tomto počítači',
   'Zoek op titel, pad of thema…': 'Hľadať podľa názvu, cesty alebo témy…',
   'Bekende mappen worden doorzocht…': 'Prehľadávajú sa známe priečinky…',
   'gevonden': 'nájdené',
-  'presentatie(s) gevonden': 'prezentácia(e) nájdená(é)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'V známych priečinkoch sa nenašli žiadne prezentácie Marp.',
   'Geen thema': 'Žiadna téma',
   'Kopieer syntaxproblemen': 'Kopírovať problémy so syntaxou',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1703,6 +1695,32 @@ const _dutchSourceAddSk = <String, String>{
   'Tijdlijn bekijken': 'Zobraziť časovú os',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najprv pridajte aspoň jednu udalosť. Táto tabuľka zostáva nezmenená.',
+  'Alles': 'Všetko',
+  'Presentaties': 'Prezentácie',
+  'Documenten': 'Dokumenty',
+  'Voorbeeld': 'Náhľad',
+  'Voorbeeld tonen': 'Zobraziť náhľad',
+  'Voorbeeld tonen bij openen': 'Zobraziť náhľad pri otváraní',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Ukážte na súbor, aby ste tu videli náhľad.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Tento súbor nemožno zobraziť. Otvorenie ho tiež odmieta — obsah je nebezpečný, poškodený alebo nečitateľný.',
+  'Dit document is leeg.': 'Tento dokument je prázdny.',
+  'Deze presentatie heeft nog geen dia.':
+      'Táto prezentácia zatiaľ nemá žiadnu snímku.',
+  'Alleen het begin van het document wordt getoond.':
+      'Zobrazuje sa iba začiatok dokumentu.',
+  'Bestanden zoeken op deze computer': 'Nájsť súbory v tomto počítači',
+  'Dubbele bestanden opruimen': 'Upratať duplicitné súbory',
+  'bestand(en) gevonden': 'súbor(y) nájdený(é)',
+  'Geen presentaties of documenten gevonden.':
+      'Nenašli sa žiadne prezentácie ani dokumenty.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'V známych priečinkoch sa nenašli žiadne prezentácie ani dokumenty.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Hľadať podľa názvu súboru, nadpisu alebo textu v súbore…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'V okne otvárania zobrazí vykreslený náhľad súboru, na ktorý ukazujete, aby ste videli obsah pred otvorením.',
   'Voetnoot': 'Poznámka pod čiarou',
   'Noten': 'Poznámky',
   'Voetnoten achterin het document': 'Poznámky na konci dokumentu',

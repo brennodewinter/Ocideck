@@ -5,7 +5,7 @@ const _stringsLv = {
   'newPresentation': 'Jauna prezentācija',
   'open': 'Atvērt...',
   'openEllipsis': 'Atvērt…',
-  'recentPresentations': 'Nesenās prezentācijas',
+  'recentFiles': 'Nesenie faili',
   'newTab': 'Jauna cilne',
   'imageLibrary': 'Attēlu bibliotēka',
   'presentFullscreen': 'Rādīt (pilnekrāns) · P prezentētāja skatam',
@@ -188,8 +188,6 @@ const _dutchSourceLv = {
   'Andere map…': 'Cita mape…',
   'Bibliotheken': 'Bibliotēkas',
   'Geen bibliotheek': 'Nav bibliotēkas',
-  'Geen presentaties (.md) gevonden.':
-      'Nav atrasta neviena prezentācija (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Mapi un nosaukumu izvēlēsies nākamajā logā. Attēli nonāk apakšmapē images/, bet multivide media/, blakus prezentācijas failam.',
   'Kies bestandsnaam…': 'Izvēlēties faila nosaukumu…',
@@ -525,13 +523,10 @@ const _dutchSourceLv = {
   'Kies een video': 'Izvēlieties video',
   'Kies een audiobestand': 'Izvēlieties audio failu',
   'Bladeren…': 'Pārlūkot…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Meklēt pēc faila nosaukuma, virsraksta vai teksta slaidos…',
   'Geen map gekozen': 'Mape nav izvēlēta',
   'Map kiezen': 'Izvēlēties mapi',
   'Kies een map met presentaties om te beginnen.':
       'Izvēlieties mapi ar prezentācijām, lai sāktu.',
-  'Geen presentaties gevonden voor': 'Nav atrasta neviena prezentācija',
   'meer treffer(s)': 'vēl atbilstība(-as)',
   'Slide zoeken': 'Atrast slaidu',
   'Slides importeren': 'Importēt slaidus',
@@ -894,13 +889,9 @@ const _dutchSourceLv = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Brīdinājums virs {b1} aizzīmēm (1 kolonna), {bcl} (kontrolsaraksts) vai {b2} (2 kolonnas); kritiski virs {bc1} vai {bc2}. Vārdi virs {w1}/{w2}, vidēji virs {avg} uz aizzīmi. Citāts virs {q} rakstzīmēm, virsraksts virs {t} rakstzīmēm. Ligzdošana dziļāka par līmeni {lvl}. Teksts, kam jāsarūk zem {warn}%, brīdina, zem {crit}% ir kritiski.',
   'Zoek op deze computer': 'Meklēt šajā datorā',
-  'Presentaties zoeken op deze computer': 'Atrast prezentācijas šajā datorā',
   'Zoek op titel, pad of thema…': 'Meklēt pēc nosaukuma, ceļa vai tēmas…',
   'Bekende mappen worden doorzocht…': 'Meklē zināmajās mapēs…',
   'gevonden': 'atrasts',
-  'presentatie(s) gevonden': 'prezentācija(-s) atrasta(-s)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Zināmajās mapēs nav atrastas Marp prezentācijas.',
   'Geen thema': 'Nav tēmas',
   'Kopieer syntaxproblemen': 'Kopēt sintakses problēmas',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1696,6 +1687,31 @@ const _dutchSourceAddLv = <String, String>{
   'Tijdlijn bekijken': 'Skatīt laika skalu',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Vispirms pievienojiet vismaz vienu notikumu. Šī tabula paliek nemainīga.',
+  'Alles': 'Visi',
+  'Presentaties': 'Prezentācijas',
+  'Documenten': 'Dokumenti',
+  'Voorbeeld': 'Priekšskatījums',
+  'Voorbeeld tonen': 'Rādīt priekšskatījumu',
+  'Voorbeeld tonen bij openen': 'Rādīt priekšskatījumu, atverot',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Norādiet uz failu, lai šeit redzētu priekšskatījumu.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Šo failu nevar parādīt. Arī atvēršana to atsaka — saturs ir nedrošs, bojāts vai nesalasāms.',
+  'Dit document is leeg.': 'Šis dokuments ir tukšs.',
+  'Deze presentatie heeft nog geen dia.': 'Šai prezentācijai vēl nav slaidu.',
+  'Alleen het begin van het document wordt getoond.':
+      'Tiek rādīts tikai dokumenta sākums.',
+  'Bestanden zoeken op deze computer': 'Atrast failus šajā datorā',
+  'Dubbele bestanden opruimen': 'Sakārtot dublētos failus',
+  'bestand(en) gevonden': 'fails(-i) atrasts(-i)',
+  'Geen presentaties of documenten gevonden.':
+      'Nav atrastas prezentācijas vai dokumenti.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Zināmajās mapēs nav atrastas prezentācijas vai dokumenti.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Meklēt pēc faila nosaukuma, virsraksta vai teksta failā…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Atvēršanas logā rāda norādītā faila attēlotu priekšskatījumu, lai jūs redzētu saturu pirms atvēršanas.',
   'Voetnoot': 'Vēre',
   'Noten': 'Piezīmes',
   'Voetnoten achterin het document': 'Vēres dokumenta beigās',

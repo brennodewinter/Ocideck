@@ -5,7 +5,7 @@ const _stringsId = {
   'newPresentation': 'Presentasi baru',
   'open': 'Buka...',
   'openEllipsis': 'Buka…',
-  'recentPresentations': 'Presentasi terkini',
+  'recentFiles': 'Berkas terbaru',
   'newTab': 'Tab baru',
   'imageLibrary': 'Pustaka gambar',
   'presentFullscreen': 'Presentasikan (layar penuh) · P untuk tampilan penyaji',
@@ -188,7 +188,6 @@ const _dutchSourceId = {
   'Andere map…': 'Folder lain…',
   'Bibliotheken': 'Pustaka',
   'Geen bibliotheek': 'Tidak ada pustaka',
-  'Geen presentaties (.md) gevonden.': 'Tidak ada presentasi (.md) ditemukan.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Kamu memilih folder dan namanya di jendela berikutnya. Gambar masuk ke subfolder images/ dan media ke media/, di samping berkas presentasi.',
   'Kies bestandsnaam…': 'Pilih nama berkas…',
@@ -524,13 +523,10 @@ const _dutchSourceId = {
   'Kies een video': 'Pilih video',
   'Kies een audiobestand': 'Pilih berkas audio',
   'Bladeren…': 'Telusuri…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Cari berdasarkan nama berkas, judul, atau teks slide…',
   'Geen map gekozen': 'Tidak ada folder dipilih',
   'Map kiezen': 'Pilih folder',
   'Kies een map met presentaties om te beginnen.':
       'Pilih folder berisi presentasi untuk memulai.',
-  'Geen presentaties gevonden voor': 'Tidak ada presentasi ditemukan untuk',
   'meer treffer(s)': 'kecocokan lagi',
   'Slide zoeken': 'Cari slide',
   'Slides importeren': 'Impor slide',
@@ -894,13 +890,9 @@ const _dutchSourceId = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Peringatan di atas {b1} bullet (1 kolom), {bcl} (checklist) atau {b2} (2 kolom); kritis di atas {bc1} atau {bc2}. Kata di atas {w1}/{w2}, rata-rata di atas {avg} per bullet. Kutipan di atas {q} karakter, judul di atas {t} karakter. Penyusunan bertingkat lebih dalam dari level {lvl}. Teks yang harus menyusut di bawah {warn}% memberi peringatan, di bawah {crit}% adalah kritis.',
   'Zoek op deze computer': 'Cari di komputer ini',
-  'Presentaties zoeken op deze computer': 'Temukan presentasi di komputer ini',
   'Zoek op titel, pad of thema…': 'Cari berdasarkan judul, jalur, atau tema…',
   'Bekende mappen worden doorzocht…': 'Mencari folder yang dikenal…',
   'gevonden': 'ditemukan',
-  'presentatie(s) gevonden': 'presentasi ditemukan',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Tidak ada presentasi Marp yang ditemukan di folder yang dikenal.',
   'Geen thema': 'Tanpa tema',
   'Kopieer syntaxproblemen': 'Salin masalah sintaks',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1697,6 +1689,32 @@ const _dutchSourceAddId = <String, String>{
   'Tijdlijn bekijken': 'Lihat garis waktu',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Pertama, tambahkan setidaknya satu acara. Tabel ini tetap tidak berubah.',
+  'Alles': 'Semua',
+  'Presentaties': 'Presentasi',
+  'Documenten': 'Dokumen',
+  'Voorbeeld': 'Pratinjau',
+  'Voorbeeld tonen': 'Tampilkan pratinjau',
+  'Voorbeeld tonen bij openen': 'Tampilkan pratinjau saat membuka',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Tunjuk berkas untuk melihat pratinjaunya di sini.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Berkas ini tidak dapat ditampilkan. Membukanya juga ditolak — isinya tidak aman, rusak, atau tidak terbaca.',
+  'Dit document is leeg.': 'Dokumen ini kosong.',
+  'Deze presentatie heeft nog geen dia.':
+      'Presentasi ini belum memiliki slide.',
+  'Alleen het begin van het document wordt getoond.':
+      'Hanya awal dokumen yang ditampilkan.',
+  'Bestanden zoeken op deze computer': 'Temukan berkas di komputer ini',
+  'Dubbele bestanden opruimen': 'Bersihkan berkas duplikat',
+  'bestand(en) gevonden': 'berkas ditemukan',
+  'Geen presentaties of documenten gevonden.':
+      'Tidak ada presentasi atau dokumen yang ditemukan.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Tidak ada presentasi atau dokumen yang ditemukan di folder yang dikenal.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Cari berdasarkan nama berkas, judul, atau teks di dalam berkas…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Menampilkan pratinjau berkas yang kamu tunjuk di jendela buka, sehingga kamu tahu isinya sebelum membukanya.',
   'Voetnoot': 'Catatan kaki',
   'Noten': 'Catatan',
   'Voetnoten achterin het document': 'Catatan kaki di akhir dokumen',

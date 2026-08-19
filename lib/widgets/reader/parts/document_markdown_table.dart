@@ -208,6 +208,8 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
                       editor: editor,
                       row: r,
                       column: c,
+                      linkColor: t.link,
+                      codeBackground: t.codeBg,
                       style: _cellStyle(
                         t,
                         header: r == 0,
@@ -233,20 +235,6 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     );
   }
 
-  /// De tekststijl van een cel — gedeeld door de gelezen cel en de invulbare,
-  /// zodat typen er precies zo uitziet als lezen.
-  TextStyle _cellStyle(
-    _Theme t, {
-    required bool header,
-    required double cellSize,
-  }) => header
-      ? t.body.copyWith(
-          fontSize: cellSize,
-          fontWeight: FontWeight.w700,
-          color: t.tableHeaderText,
-        )
-      : t.body.copyWith(fontSize: cellSize, color: t.tableText);
-
   Widget _tableCell(
     _Theme t,
     String text, {
@@ -264,3 +252,20 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     ),
   );
 }
+
+/// De tekststijl van een cel — gedeeld door de gelezen cel en de invulbare,
+/// zodat typen er precies zo uitziet als lezen.
+///
+/// Top-level en niet in de weergave-extensie: hij gebruikt geen enkel veld van
+/// [DocumentMarkdownView], en de klasse staat op zijn plafond.
+TextStyle _cellStyle(
+  _Theme t, {
+  required bool header,
+  required double cellSize,
+}) => header
+    ? t.body.copyWith(
+        fontSize: cellSize,
+        fontWeight: FontWeight.w700,
+        color: t.tableHeaderText,
+      )
+    : t.body.copyWith(fontSize: cellSize, color: t.tableText);

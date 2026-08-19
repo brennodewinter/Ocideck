@@ -5,7 +5,7 @@ const _stringsSv = {
   'newPresentation': 'Ny presentation',
   'open': 'Öppna...',
   'openEllipsis': 'Öppna…',
-  'recentPresentations': 'Senaste presentationer',
+  'recentFiles': 'Senaste filer',
   'newTab': 'Ny flik',
   'imageLibrary': 'Bildbibliotek',
   'presentFullscreen': 'Presentera (helskärm) · P för presentatörsvy',
@@ -188,7 +188,6 @@ const _dutchSourceSv = {
   'Andere map…': 'Annan mapp…',
   'Bibliotheken': 'Bibliotek',
   'Geen bibliotheek': 'Inget bibliotek',
-  'Geen presentaties (.md) gevonden.': 'Inga presentationer (.md) hittades.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Du väljer mappen och namnet i nästa fönster. Bilderna hamnar i en undermapp images/ och media i media/, bredvid presentationsfilen.',
   'Kies bestandsnaam…': 'Välj filnamn…',
@@ -524,13 +523,10 @@ const _dutchSourceSv = {
   'Kies een video': 'Välj en video',
   'Kies een audiobestand': 'Välj en ljudfil',
   'Bladeren…': 'Bläddra…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Sök efter filnamn, titel eller bildtext…',
   'Geen map gekozen': 'Ingen mapp vald',
   'Map kiezen': 'Välj mapp',
   'Kies een map met presentaties om te beginnen.':
       'Välj en mapp med presentationer för att börja.',
-  'Geen presentaties gevonden voor': 'Inga presentationer hittades för',
   'meer treffer(s)': 'fler träff(ar)',
   'Slide zoeken': 'Hitta bild',
   'Slides importeren': 'Importera bilder',
@@ -893,14 +889,9 @@ const _dutchSourceSv = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Varning över {b1} punkter (1 kolumn), {bcl} (checklista) eller {b2} (2 kolumner); kritiskt över {bc1} eller {bc2}. Ord över {w1}/{w2}, i genomsnitt över {avg} per punkt. Citat över {q} tecken, titel över {t} tecken. Nästling djupare än nivå {lvl}. Text som måste krympa under {warn}% varnar, under {crit}% är kritiskt.',
   'Zoek op deze computer': 'Sök på den här datorn',
-  'Presentaties zoeken op deze computer':
-      'Hitta presentationer på den här datorn',
   'Zoek op titel, pad of thema…': 'Sök på titel, sökväg eller tema…',
   'Bekende mappen worden doorzocht…': 'Söker i kända mappar…',
   'gevonden': 'hittade',
-  'presentatie(s) gevonden': 'presentation(er) hittade',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Inga Marp-presentationer hittades i de kända mapparna.',
   'Geen thema': 'Inget tema',
   'Kopieer syntaxproblemen': 'Kopiera syntaxproblem',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1696,6 +1687,32 @@ const _dutchSourceAddSv = <String, String>{
   'Tijdlijn bekijken': 'Visa tidslinjen',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Lägg först till minst en händelse. Denna tabell förblir oförändrad.',
+  'Alles': 'Alla',
+  'Presentaties': 'Presentationer',
+  'Documenten': 'Dokument',
+  'Voorbeeld': 'Förhandsgranskning',
+  'Voorbeeld tonen': 'Visa förhandsgranskning',
+  'Voorbeeld tonen bij openen': 'Visa förhandsgranskning vid öppning',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Peka på en fil för att se en förhandsgranskning här.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Den här filen kan inte visas. Öppning avvisar den också — innehållet är osäkert, skadat eller oläsbart.',
+  'Dit document is leeg.': 'Det här dokumentet är tomt.',
+  'Deze presentatie heeft nog geen dia.':
+      'Den här presentationen har inga bilder än.',
+  'Alleen het begin van het document wordt getoond.':
+      'Endast början av dokumentet visas.',
+  'Bestanden zoeken op deze computer': 'Hitta filer på den här datorn',
+  'Dubbele bestanden opruimen': 'Rensa dubblerade filer',
+  'bestand(en) gevonden': 'fil(er) hittade',
+  'Geen presentaties of documenten gevonden.':
+      'Inga presentationer eller dokument hittades.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Inga presentationer eller dokument hittades i de kända mapparna.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Sök efter filnamn, titel eller text i filen…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Visar i öppna-fönstret en renderad förhandsgranskning av filen du pekar på, så att du ser innehållet innan du öppnar den.',
   'Voetnoot': 'Fotnot',
   'Noten': 'Noter',
   'Voetnoten achterin het document': 'Fotnoter sist i dokumentet',

@@ -106,4 +106,76 @@ flutter:
       expect(RegExp('docs/USER_GUIDE.de.md').allMatches(twice).length, 1);
     });
   });
+
+  group('translate_docs — structuurdrift tussen bron en variant', () {
+    // De poort die #1571 gevangen zou hebben: de tijdlijnsectie kwam er in het
+    // Engels bij en niet in het Nederlands, terwijl alles groen stond. Deze
+    // toetsen pinnen de drie stukken waar dat op rust.
+
+    test('koppen binnen een codeblok tellen niet mee', () {
+      // Precies de val waar FILE_FORMAT vol mee staat: `# Rapport` is dáár de
+      // inhoud van een voorbeeld en geen kop van het document. Zonder deze
+      // regel vergelijkt de poort ruis met ruis.
+      const markdown =
+          '# Titel\n\n'
+          '```markdown\n'
+          '# Dit is inhoud\n'
+          '## En dit ook\n'
+          '```\n\n'
+          '## Echte kop\n';
+      expect(markdownHeadings(markdown).map((h) => h.text), [
+        'Titel',
+        'Echte kop',
+      ]);
+    });
+
+    test('een langere fence wordt niet gesloten door een kortere erin', () {
+      const markdown =
+          '````markdown\n'
+          '```\n'
+          '## Geen kop\n'
+          '```\n'
+          '````\n\n'
+          '## Wel een kop\n';
+      expect(markdownHeadings(markdown).map((h) => h.text), ['Wel een kop']);
+    });
+
+    test('leest het niveau van elke kop', () {
+      expect(
+        markdownHeadings('# Een\n### Drie\n#### Vier\n').map((h) => h.level),
+        [1, 3, 4],
+      );
+    });
+
+    test('sectienummers overleven de vertaling, woorden niet', () {
+      const nederlands =
+          '### 14.11 Tijdlijnweergave\n'
+          '#### 6.3.1 In een git-repo\n'
+          '### 3.1b Privacydispositie\n'
+          '## Zonder nummer\n';
+      expect(markdownSectionNumbers(nederlands), {'14.11', '6.3.1', '3.1b'});
+    });
+
+    test('een getal midden in een kop is geen sectienummer', () {
+      expect(markdownSectionNumbers('## Marp 2 en verder\n'), isEmpty);
+    });
+
+    test('een hernoemde kop is geen drift, een ontbrekende wel', () {
+      final bron = markdownHeadings('## Een\n## Twee\n### Drie\n');
+      final hernoemd = markdownHeadings('## Één\n## Twee\n### Drie\n');
+      expect(missingHeadingCount(bron, hernoemd), 0);
+
+      final zonderDrie = markdownHeadings('## Een\n## Twee\n');
+      expect(missingHeadingCount(bron, zonderDrie), 1);
+    });
+
+    test('telt per niveau, zodat een verschoven kop opvalt', () {
+      final bron = markdownHeadings('## Een\n### Twee\n');
+      final verschoven = markdownHeadings('## Een\n## Twee\n');
+      // Niveau 3 mist er één; dat niveau 2 er één te veel heeft verrekent niet
+      // — anders zou een sectie die stilletjes een niveau opschuift wegvallen
+      // tegen de sectie die haar verdringt.
+      expect(missingHeadingCount(bron, verschoven), 1);
+    });
+  });
 }

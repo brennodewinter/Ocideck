@@ -52,8 +52,20 @@ enum TableCaret {
   end,
 }
 
-/// Waar een pijltjestoets vanuit cel ([row], [col]) landt, of `null` wanneer de
-/// cursor binnen de cel hoort te bewegen in plaats van eruit te springen.
+/// Wat een pijltjestoets in een cel te betekenen heeft.
+enum TableArrowMove {
+  /// De cursor beweegt bínnen de cel; het tekstveld handelt de toets zelf af.
+  inCell,
+
+  /// De cursor springt naar een buurcel.
+  toCell,
+
+  /// De tabel houdt hier op: de toets doet niets, en mag ook nergens anders
+  /// heen. Zie [tableArrowTarget] voor waarom dat verschil telt.
+  atEdge,
+}
+
+/// Wat een pijltjestoets vanuit cel ([row], [col]) doet.
 ///
 /// De regel is die van een rekenblad, en hij komt voort uit wat een mens
 /// verwacht: ←/→ verplaatsen eerst de cursor door de tekst, en pas wanneer die
@@ -66,7 +78,15 @@ enum TableCaret {
 /// staan waar hij staat. Wie een rij verder wil, gebruikt Tab (die groeit de
 /// tabel ook), en wie eruit wil, klikt of tabt eruit. Zonder die grens zou een
 /// pijltje je ongemerkt uit de tabel de lopende tekst in schieten.
-({int row, int col, TableCaret caret})? tableArrowTarget({
+///
+/// Dat [TableArrowMove.atEdge] een eigen uitkomst is en niet "niets te doen",
+/// is geen finesse maar de kern van #1565: de cel staat in de visuele editor
+/// binnen een Quill-embed. Een toets die de cel niet opeet, loopt door naar
+/// Quill, dat er de cursor van het *document* mee verzet terwijl de tekstinvoer
+/// nog aan de cel hangt — waarna de hele documenttekst in de cel belandde en de
+/// visuele stand op brontekst terugviel. Aan de rand van de tabel moet de toets
+/// dus opgegeten worden, niet doorgelaten.
+({TableArrowMove move, int row, int col, TableCaret caret}) tableArrowTarget({
   required TableArrow arrow,
   required int row,
   required int col,
@@ -76,26 +96,36 @@ enum TableCaret {
   required bool atTextEnd,
   required bool onFirstLine,
   required bool onLastLine,
-}) => switch (arrow) {
-  TableArrow.left when atTextStart && col > 0 => (
+}) {
+  ({TableArrowMove move, int row, int col, TableCaret caret}) inCell() => (
+    move: TableArrowMove.inCell,
     row: row,
-    col: col - 1,
-    caret: TableCaret.end,
-  ),
-  TableArrow.right when atTextEnd && col + 1 < colCount => (
-    row: row,
-    col: col + 1,
-    caret: TableCaret.start,
-  ),
-  TableArrow.up when onFirstLine && row > 0 => (
-    row: row - 1,
     col: col,
     caret: TableCaret.selectAll,
-  ),
-  TableArrow.down when onLastLine && row + 1 < rowCount => (
-    row: row + 1,
+  );
+  ({TableArrowMove move, int row, int col, TableCaret caret}) atEdge() => (
+    move: TableArrowMove.atEdge,
+    row: row,
     col: col,
     caret: TableCaret.selectAll,
-  ),
-  _ => null,
-};
+  );
+  ({TableArrowMove move, int row, int col, TableCaret caret}) to(
+    int r,
+    int c,
+    TableCaret caret,
+  ) => (move: TableArrowMove.toCell, row: r, col: c, caret: caret);
+
+  return switch (arrow) {
+    TableArrow.left when !atTextStart => inCell(),
+    TableArrow.left => col > 0 ? to(row, col - 1, TableCaret.end) : atEdge(),
+    TableArrow.right when !atTextEnd => inCell(),
+    TableArrow.right =>
+      col + 1 < colCount ? to(row, col + 1, TableCaret.start) : atEdge(),
+    TableArrow.up when !onFirstLine => inCell(),
+    TableArrow.up =>
+      row > 0 ? to(row - 1, col, TableCaret.selectAll) : atEdge(),
+    TableArrow.down when !onLastLine => inCell(),
+    TableArrow.down =>
+      row + 1 < rowCount ? to(row + 1, col, TableCaret.selectAll) : atEdge(),
+  };
+}

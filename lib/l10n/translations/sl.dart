@@ -5,7 +5,7 @@ const _stringsSl = {
   'newPresentation': 'Nova predstavitev',
   'open': 'Odpri ...',
   'openEllipsis': 'Odpri …',
-  'recentPresentations': 'Nedavne predstavitve',
+  'recentFiles': 'Nedavne datoteke',
   'newTab': 'Nov zavihek',
   'imageLibrary': 'Knjižnica slik',
   'presentFullscreen': 'Predstavi (celozaslonsko) · P za predstavitveni pogled',
@@ -189,7 +189,6 @@ const _dutchSourceSl = {
   'Andere map…': 'Druga mapa…',
   'Bibliotheken': 'Knjižnice',
   'Geen bibliotheek': 'Ni knjižnice',
-  'Geen presentaties (.md) gevonden.': 'Ni najdenih predstavitev (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Mapo in ime izbereš v naslednjem oknu. Slike gredo v podmapo images/, mediji pa v media/, poleg datoteke predstavitve.',
   'Kies bestandsnaam…': 'Izberi ime datoteke…',
@@ -525,13 +524,10 @@ const _dutchSourceSl = {
   'Kies een video': 'Izberi video',
   'Kies een audiobestand': 'Izberi zvočno datoteko',
   'Bladeren…': 'Prebrskaj …',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Iščite po imenu datoteke, naslovu ali besedilu v diapozitivih …',
   'Geen map gekozen': 'Mapa ni izbrana',
   'Map kiezen': 'Izberi mapo',
   'Kies een map met presentaties om te beginnen.':
       'Za začetek izberite mapo s predstavitvami.',
-  'Geen presentaties gevonden voor': 'Ni najdenih predstavitev za',
   'meer treffer(s)': 'več zadetkov',
   'Slide zoeken': 'Poišči diapozitiv',
   'Slides importeren': 'Uvozi diapozitive',
@@ -893,14 +889,9 @@ const _dutchSourceSl = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Opozorilo nad {b1} alinejami (1 stolpec), {bcl} (kontrolni seznam) ali {b2} (2 stolpca); kritično nad {bc1} ali {bc2}. Besede nad {w1}/{w2}, povprečno nad {avg} na alinejo. Citat nad {q} znaki, naslov nad {t} znaki. Gnezdenje globlje od ravni {lvl}. Besedilo, ki se mora skrčiti pod {warn}%, opozarja, pod {crit}% je kritično.',
   'Zoek op deze computer': 'Išči na tem računalniku',
-  'Presentaties zoeken op deze computer':
-      'Poišči predstavitve na tem računalniku',
   'Zoek op titel, pad of thema…': 'Išči po naslovu, poti ali temi ...',
   'Bekende mappen worden doorzocht…': 'Preiskovanje znanih map ...',
   'gevonden': 'najdeno',
-  'presentatie(s) gevonden': 'predstavitev najdenih',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'V znanih mapah ni bilo najdenih predstavitev Marp.',
   'Geen thema': 'Brez teme',
   'Kopieer syntaxproblemen': 'Kopiraj težave s sintakso',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1698,6 +1689,32 @@ const _dutchSourceAddSl = <String, String>{
   'Tijdlijn bekijken': 'Oglejte si časovnico',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najprej dodajte vsaj en dogodek. Ta tabela ostane nespremenjena.',
+  'Alles': 'Vse',
+  'Presentaties': 'Predstavitve',
+  'Documenten': 'Dokumenti',
+  'Voorbeeld': 'Predogled',
+  'Voorbeeld tonen': 'Pokaži predogled',
+  'Voorbeeld tonen bij openen': 'Pokaži predogled pri odpiranju',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Pokažite na datoteko, da tukaj vidite predogled.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Te datoteke ni mogoče prikazati. Tudi odpiranje jo zavrne — vsebina je nevarna, poškodovana ali neberljiva.',
+  'Dit document is leeg.': 'Ta dokument je prazen.',
+  'Deze presentatie heeft nog geen dia.':
+      'Ta predstavitev še nima diapozitivov.',
+  'Alleen het begin van het document wordt getoond.':
+      'Prikazan je samo začetek dokumenta.',
+  'Bestanden zoeken op deze computer': 'Poišči datoteke na tem računalniku',
+  'Dubbele bestanden opruimen': 'Počisti podvojene datoteke',
+  'bestand(en) gevonden': 'datotek najdenih',
+  'Geen presentaties of documenten gevonden.':
+      'Ni najdenih predstavitev ali dokumentov.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'V znanih mapah ni bilo najdenih predstavitev ali dokumentov.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Iščite po imenu datoteke, naslovu ali besedilu v datoteki…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'V oknu za odpiranje pokaže izrisan predogled datoteke, na katero pokažete, da vidite vsebino, preden jo odprete.',
   'Voetnoot': 'Opomba pod črto',
   'Noten': 'Opombe',
   'Voetnoten achterin het document': 'Opombe na koncu dokumenta',

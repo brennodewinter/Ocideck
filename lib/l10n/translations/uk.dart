@@ -5,7 +5,7 @@ const _stringsUk = {
   'newPresentation': 'Нова презентація',
   'open': 'Відкрити...',
   'openEllipsis': 'Відкрити…',
-  'recentPresentations': 'Нещодавні презентації',
+  'recentFiles': 'Останні файли',
   'newTab': 'Нова вкладка',
   'imageLibrary': 'Бібліотека зображень',
   'presentFullscreen':
@@ -191,7 +191,6 @@ const _dutchSourceUk = {
   'Andere map…': 'Інша тека…',
   'Bibliotheken': 'Бібліотеки',
   'Geen bibliotheek': 'Немає бібліотеки',
-  'Geen presentaties (.md) gevonden.': 'Презентацій (.md) не знайдено.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Теку й назву ви оберете в наступному вікні. Зображення потраплять до підтеки images/, а медіа — до media/, поруч із файлом презентації.',
   'Kies bestandsnaam…': 'Обрати назву файлу…',
@@ -531,13 +530,10 @@ const _dutchSourceUk = {
   'Kies een video': 'Виберіть відео',
   'Kies een audiobestand': 'Виберіть аудіофайл',
   'Bladeren…': 'Огляд…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Пошук за назвою файлу, заголовком або текстом слайдів…',
   'Geen map gekozen': 'Теку не вибрано',
   'Map kiezen': 'Вибрати теку',
   'Kies een map met presentaties om te beginnen.':
       'Виберіть теку з презентаціями, щоб почати.',
-  'Geen presentaties gevonden voor': 'Не знайдено презентацій для',
   'meer treffer(s)': 'більше збігів',
   'Slide zoeken': 'Знайти слайд',
   'Slides importeren': 'Імпортувати слайди',
@@ -903,14 +899,9 @@ const _dutchSourceUk = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Попередження понад {b1} пунктів (1 стовпець), {bcl} (чек-лист) або {b2} (2 стовпці); критично понад {bc1} або {bc2}. Слів понад {w1}/{w2}, у середньому понад {avg} на пункт. Цитата понад {q} символів, заголовок понад {t} символів. Вкладеність глибша за рівень {lvl}. Текст, який має зменшитися нижче {warn}%, попереджає, нижче {crit}% — критично.',
   'Zoek op deze computer': 'Пошук на цьому комп’ютері',
-  'Presentaties zoeken op deze computer':
-      'Знайти презентації на цьому комп’ютері',
   'Zoek op titel, pad of thema…': 'Пошук за назвою, шляхом або темою…',
   'Bekende mappen worden doorzocht…': 'Пошук у відомих теках…',
   'gevonden': 'знайдено',
-  'presentatie(s) gevonden': 'презентацію(ій) знайдено',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'У відомих теках не знайдено презентацій Marp.',
   'Geen thema': 'Без теми',
   'Kopieer syntaxproblemen': 'Копіювати проблеми синтаксису',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1713,6 +1704,31 @@ const _dutchSourceAddUk = <String, String>{
   'Tijdlijn bekijken': 'Переглянути часову шкалу',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Спочатку додайте хоча б одну подію. Ця таблиця залишається без змін.',
+  'Alles': 'Усе',
+  'Presentaties': 'Презентації',
+  'Documenten': 'Документи',
+  'Voorbeeld': 'Перегляд',
+  'Voorbeeld tonen': 'Показати перегляд',
+  'Voorbeeld tonen bij openen': 'Показувати перегляд під час відкриття',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Наведіть на файл, щоб побачити тут його перегляд.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Цей файл не можна показати. Відкриття теж його відхиляє — вміст небезпечний, пошкоджений або нечитний.',
+  'Dit document is leeg.': 'Цей документ порожній.',
+  'Deze presentatie heeft nog geen dia.': 'Ця презентація ще не має слайдів.',
+  'Alleen het begin van het document wordt getoond.':
+      'Показано лише початок документа.',
+  'Bestanden zoeken op deze computer': 'Знайти файли на цьому комп’ютері',
+  'Dubbele bestanden opruimen': 'Прибрати дубльовані файли',
+  'bestand(en) gevonden': 'файл(и) знайдено',
+  'Geen presentaties of documenten gevonden.':
+      'Презентацій чи документів не знайдено.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'У відомих теках не знайдено презентацій чи документів.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Пошук за назвою файлу, заголовком або текстом у файлі…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Показує у вікні відкриття відрендерений перегляд файлу, на який ви наводите, щоб побачити вміст ще до відкриття.',
   'Voetnoot': 'Виноска',
   'Noten': 'Примітки',
   'Voetnoten achterin het document': 'Виноски в кінці документа',

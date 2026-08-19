@@ -5,7 +5,7 @@ const _stringsFy = {
   'newPresentation': 'Nije presintaasje',
   'open': 'Iepenje...',
   'openEllipsis': 'Iepenje…',
-  'recentPresentations': 'Resinte presintaasjes',
+  'recentFiles': 'Resinte bestannen',
   'newTab': 'Nij ljepblêd',
   'imageLibrary': 'Ofbyldingsbibleteek',
   'presentFullscreen': 'Presintearje folslein skerm · P foar presenter view',
@@ -188,7 +188,6 @@ const _dutchSourceFy = {
   'Andere map…': 'Oare map…',
   'Bibliotheken': 'Biblioteken',
   'Geen bibliotheek': 'Gjin bibleteek',
-  'Geen presentaties (.md) gevonden.': 'Gjin presintaasjes (.md) fûn.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Do kiest de map en de namme yn it folgjende finster. De ôfbyldings komme yn in submap images/ en media yn media/, njonken it presintaasjebestân.',
   'Kies bestandsnaam…': 'Kies bestânsnamme…',
@@ -722,6 +721,32 @@ const _dutchSourceAddFy = {
   'Tijdlijn bekijken': 'Besjoch de tiidline',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Foegje earst op syn minst ien evenemint ta. Dizze tabel bliuwt net feroare.',
+  'Alles': 'Alles',
+  'Presentaties': 'Presintaasjes',
+  'Documenten': 'Dokuminten',
+  'Voorbeeld': 'Foarbyld',
+  'Voorbeeld tonen': 'Foarbyld toane',
+  'Voorbeeld tonen bij openen': 'Foarbyld toane by it iepenjen',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Wiis in bestân oan om hjir in foarbyld te sjen.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Dit bestân kin net toand wurde. Iepenjen wegeret it ek — de ynhâld is ûnfeilich, skansearre of ûnlêsber.',
+  'Dit document is leeg.': 'Dit dokumint is leech.',
+  'Deze presentatie heeft nog geen dia.':
+      'Dizze presintaasje hat noch gjin dia.',
+  'Alleen het begin van het document wordt getoond.':
+      'Allinnich it begjin fan it dokumint wurdt toand.',
+  'Bestanden zoeken op deze computer': 'Bestannen op dizze kompjûter sykje',
+  'Dubbele bestanden opruimen': 'Dûbele bestannen opromje',
+  'bestand(en) gevonden': 'bestân(nen) fûn',
+  'Geen presentaties of documenten gevonden.':
+      'Gjin presintaasjes of dokuminten fûn.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Gjin presintaasjes of dokuminten fûn yn de bekende mappen.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Sykje op bestânsnamme, titel of tekst yn it bestân…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Lit yn it iepenskerm in rendere foarbyld sjen fan it bestân dat do oanwiist, sadat do sjochst wat deryn stiet foardat do it iepenst.',
   'Voetnoot': 'Fuotnoat',
   'Noten': 'Noaten',
   'Voetnoten achterin het document': 'Fuotnoaten efteryn it dokumint',
@@ -3603,14 +3628,9 @@ const _dutchSourceAddFy = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Warskôging boppe {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); krityk boppe {bc1} of {bc2}. Wurden boppe {w1}/{w2}, gemiddeld boppe {avg} de bullet. Sitaat boppe {q} tekens, titel boppe {t} tekens. Nesting djipper as nivo {lvl}. Tekst dy’t ûnder {warn}% krimpe moat warskôget, ûnder {crit}% is krityk.',
   'Zoek op deze computer': 'Sykje op dizze kompjûter',
-  'Presentaties zoeken op deze computer':
-      'Presintaasjes op dizze kompjûter sykje',
   'Zoek op titel, pad of thema…': 'Sykje op titel, paad of tema…',
   'Bekende mappen worden doorzocht…': 'Bekende mappen wurde trochsocht…',
   'gevonden': 'fûn',
-  'presentatie(s) gevonden': 'presintaasje(s) fûn',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Gjin Marp-presintaasjes fûn yn de bekende mappen.',
   'Geen thema': 'Gjin tema',
   // Markdown-syntaxcontrole: foutmeldingen kopiëren.
   'Kopieer syntaxproblemen': 'Syntaksisproblemen kopiearje',
@@ -3942,7 +3962,6 @@ const _dutchSourceAddFy = {
       'Gjin oar deck iepen. Iepenje earst in oar ljepblêd.',
   'Geen andere presentaties (.md) in deze map gevonden.':
       'Gjin oare presintaasjes (.md) yn dizze map fûn.',
-  'Geen presentaties gevonden voor': 'Gjin presintaasjes fûn foar',
   'Geen resultaten': 'Gjin resultaten',
   'Geen resultaten voor': 'Gjin resultaten foar',
   'Geen slides gevonden voor': 'Gjin dia\'s fûn foar',
@@ -4047,8 +4066,6 @@ const _dutchSourceAddFy = {
   'Wordt automatisch toegevoegd bij presenteren en exporteren.':
       'Wurdt automatysk tafoege by presintearjen en eksportearjen.',
   'Zoek in slides…': 'Sykje yn dia\'s…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Sykje op bestânsnamme, titel of tekst yn de dia\'s…',
   'Zoek op naam of beschrijving…': 'Sykje op namme of beskriuwing…',
   'Zoek op presentatie, titel of tekst…':
       'Sykje op presintaasje, titel of tekst…',

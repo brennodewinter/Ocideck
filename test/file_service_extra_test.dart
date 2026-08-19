@@ -224,7 +224,8 @@ void main() {
     File(
       p.join(docs.path, 'plain.md'),
     ).writeAsStringSync('---\nmarp: true\ntheme: default\n---\n\n# Plain\n');
-    // Not a Marp file: probe must skip it.
+    // Geen Marp-bestand: dat is een document, en dat hoort de scan óók te
+    // vinden — met de eerste kop als naam.
     File(
       p.join(docs.path, 'ignore.md'),
     ).writeAsStringSync('# no frontmatter here\n');
@@ -234,7 +235,10 @@ void main() {
 
     final byName = <String, ScanHit>{for (final h in hits) h.fileName: h};
     expect(byName.keys, containsAll(<String>['themed.md', 'plain.md']));
-    expect(byName.containsKey('ignore.md'), isFalse);
+    final document = byName['ignore.md']!;
+    expect(document.kind, MarkdownKind.document);
+    expect(document.displayTitle, 'no frontmatter here');
+    expect(document.theme, isNull);
 
     final themed = byName['themed.md']!;
     expect(themed.title, 'Themed Deck');

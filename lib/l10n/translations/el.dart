@@ -5,7 +5,7 @@ const _stringsEl = {
   'newPresentation': 'Νέα παρουσίαση',
   'open': 'Άνοιγμα...',
   'openEllipsis': 'Άνοιγμα…',
-  'recentPresentations': 'Πρόσφατες παρουσιάσεις',
+  'recentFiles': 'Πρόσφατα αρχεία',
   'newTab': 'Νέα καρτέλα',
   'imageLibrary': 'Βιβλιοθήκη εικόνων',
   'presentFullscreen': 'Παρουσίαση (πλήρης οθόνη) · P για προβολή παρουσιαστή',
@@ -191,7 +191,6 @@ const _dutchSourceEl = {
   'Andere map…': 'Άλλος φάκελος…',
   'Bibliotheken': 'Βιβλιοθήκες',
   'Geen bibliotheek': 'Καμία βιβλιοθήκη',
-  'Geen presentaties (.md) gevonden.': 'Δεν βρέθηκαν παρουσιάσεις (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Επιλέγετε τον φάκελο και το όνομα στο επόμενο παράθυρο. Οι εικόνες πηγαίνουν σε έναν υποφάκελο images/ και τα πολυμέσα σε media/, δίπλα στο αρχείο της παρουσίασης.',
   'Kies bestandsnaam…': 'Επιλογή ονόματος αρχείου…',
@@ -533,13 +532,10 @@ const _dutchSourceEl = {
   'Kies een video': 'Επιλέξτε ένα βίντεο',
   'Kies een audiobestand': 'Επιλέξτε ένα αρχείο ήχου',
   'Bladeren…': 'Περιήγηση…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Αναζήτηση κατά όνομα αρχείου, τίτλο ή κείμενο διαφάνειας…',
   'Geen map gekozen': 'Δεν επιλέχθηκε φάκελος',
   'Map kiezen': 'Επιλογή φακέλου',
   'Kies een map met presentaties om te beginnen.':
       'Επιλέξτε έναν φάκελο με παρουσιάσεις για να ξεκινήσετε.',
-  'Geen presentaties gevonden voor': 'Δεν βρέθηκαν παρουσιάσεις για',
   'meer treffer(s)': 'περισσότερα αποτελέσματα',
   'Slide zoeken': 'Εύρεση διαφάνειας',
   'Slides importeren': 'Εισαγωγή διαφανειών',
@@ -907,14 +903,9 @@ const _dutchSourceEl = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Προειδοποίηση πάνω από {b1} bullets (1 στήλη), {bcl} (λίστα ελέγχου) ή {b2} (2 στήλες)· κρίσιμο πάνω από {bc1} ή {bc2}. Λέξεις πάνω από {w1}/{w2}, κατά μέσο όρο πάνω από {avg} ανά bullet. Παράθεση πάνω από {q} χαρακτήρες, τίτλος πάνω από {t} χαρακτήρες. Ένθεση βαθύτερη από το επίπεδο {lvl}. Κείμενο που πρέπει να συρρικνωθεί κάτω από {warn}% προειδοποιεί, κάτω από {crit}% είναι κρίσιμο.',
   'Zoek op deze computer': 'Αναζήτηση σε αυτόν τον υπολογιστή',
-  'Presentaties zoeken op deze computer':
-      'Εύρεση παρουσιάσεων σε αυτόν τον υπολογιστή',
   'Zoek op titel, pad of thema…': 'Αναζήτηση κατά τίτλο, διαδρομή ή θέμα…',
   'Bekende mappen worden doorzocht…': 'Αναζήτηση στους γνωστούς φακέλους…',
   'gevonden': 'βρέθηκαν',
-  'presentatie(s) gevonden': 'παρουσίαση(εις) βρέθηκαν',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Δεν βρέθηκαν παρουσιάσεις Marp στους γνωστούς φακέλους.',
   'Geen thema': 'Χωρίς θέμα',
   'Kopieer syntaxproblemen': 'Αντιγραφή προβλημάτων σύνταξης',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1723,6 +1714,32 @@ const _dutchSourceAddEl = <String, String>{
   'Tijdlijn bekijken': 'Προβολή χρονολογίου',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Προσθέστε πρώτα τουλάχιστον ένα συμβάν. Αυτός ο πίνακας παραμένει αμετάβλητος.',
+  'Alles': 'Όλα',
+  'Presentaties': 'Παρουσιάσεις',
+  'Documenten': 'Έγγραφα',
+  'Voorbeeld': 'Προεπισκόπηση',
+  'Voorbeeld tonen': 'Εμφάνιση προεπισκόπησης',
+  'Voorbeeld tonen bij openen': 'Εμφάνιση προεπισκόπησης κατά το άνοιγμα',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Δείξε ένα αρχείο για να δεις εδώ την προεπισκόπησή του.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Αυτό το αρχείο δεν μπορεί να εμφανιστεί. Και το άνοιγμα το αρνείται — το περιεχόμενο είναι μη ασφαλές, κατεστραμμένο ή μη αναγνώσιμο.',
+  'Dit document is leeg.': 'Αυτό το έγγραφο είναι κενό.',
+  'Deze presentatie heeft nog geen dia.':
+      'Αυτή η παρουσίαση δεν έχει ακόμη διαφάνειες.',
+  'Alleen het begin van het document wordt getoond.':
+      'Εμφανίζεται μόνο η αρχή του εγγράφου.',
+  'Bestanden zoeken op deze computer': 'Εύρεση αρχείων σε αυτόν τον υπολογιστή',
+  'Dubbele bestanden opruimen': 'Εκκαθάριση διπλότυπων αρχείων',
+  'bestand(en) gevonden': 'αρχείο(α) βρέθηκαν',
+  'Geen presentaties of documenten gevonden.':
+      'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα στους γνωστούς φακέλους.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Αναζήτηση κατά όνομα αρχείου, τίτλο ή κείμενο μέσα στο αρχείο…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Εμφανίζει στο παράθυρο ανοίγματος μια προεπισκόπηση του αρχείου που δείχνεις, ώστε να δεις το περιεχόμενο πριν το ανοίξεις.',
   'Voetnoot': 'Υποσημείωση',
   'Noten': 'Σημειώσεις',
   'Voetnoten achterin het document': 'Υποσημειώσεις στο τέλος του εγγράφου',

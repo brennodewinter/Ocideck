@@ -5,7 +5,7 @@ const _stringsIt = {
   'newPresentation': 'Nuova presentazione',
   'open': 'Apri...',
   'openEllipsis': 'Apri…',
-  'recentPresentations': 'Presentazioni recenti',
+  'recentFiles': 'File recenti',
   'newTab': 'Nuova scheda',
   'imageLibrary': 'Libreria immagini',
   'presentFullscreen': 'Presenta a schermo intero · P per vista relatore',
@@ -190,7 +190,6 @@ const _dutchSourceIt = {
   'Andere map…': 'Altra cartella…',
   'Bibliotheken': 'Librerie',
   'Geen bibliotheek': 'Nessuna libreria',
-  'Geen presentaties (.md) gevonden.': 'Nessuna presentazione (.md) trovata.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Scegli la cartella e il nome nella finestra successiva. Le immagini vanno in una sottocartella images/ e i media in media/, accanto al file della presentazione.',
   'Kies bestandsnaam…': 'Scegli il nome del file…',
@@ -719,6 +718,32 @@ const _dutchSourceAddIt = {
   'Tijdlijn bekijken': 'Visualizza la sequenza temporale',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Per prima cosa aggiungi almeno un evento. Questa tabella rimane invariata.',
+  'Alles': 'Tutto',
+  'Presentaties': 'Presentazioni',
+  'Documenten': 'Documenti',
+  'Voorbeeld': 'Anteprima',
+  'Voorbeeld tonen': 'Mostra anteprima',
+  'Voorbeeld tonen bij openen': 'Mostra un\'anteprima all\'apertura',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Indica un file per vederne qui un\'anteprima.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Questo file non può essere mostrato. Anche l\'apertura lo rifiuta: il contenuto non è sicuro, è danneggiato o illeggibile.',
+  'Dit document is leeg.': 'Questo documento è vuoto.',
+  'Deze presentatie heeft nog geen dia.':
+      'Questa presentazione non ha ancora diapositive.',
+  'Alleen het begin van het document wordt getoond.':
+      'Viene mostrato solo l\'inizio del documento.',
+  'Bestanden zoeken op deze computer': 'Trova file su questo computer',
+  'Dubbele bestanden opruimen': 'Ripulisci file duplicati',
+  'bestand(en) gevonden': 'file trovati',
+  'Geen presentaties of documenten gevonden.':
+      'Nessuna presentazione o documento trovato.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Nessuna presentazione o documento trovato nelle cartelle note.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Cerca per nome file, titolo o testo nel file…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Mostra nella finestra di apertura un\'anteprima renderizzata del file che indichi, così vedi cosa contiene prima di aprirlo.',
   'Voetnoot': 'Nota a piè di pagina',
   'Noten': 'Note',
   'Voetnoten achterin het document': 'Note alla fine del documento',
@@ -3638,14 +3663,9 @@ const _dutchSourceAddIt = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Avviso oltre {b1} elenchi puntati (1 colonna), {bcl} (checklist) o {b2} (2 colonne); critico oltre {bc1} o {bc2}. Parole oltre {w1}/{w2}, in media oltre {avg} per punto. Citazione oltre {q} caratteri, titolo oltre {t} caratteri. Annidamento più profondo del livello {lvl}. Il testo che deve ridursi sotto il {warn}% avvisa, sotto il {crit}% è critico.',
   'Zoek op deze computer': 'Cerca in questo computer',
-  'Presentaties zoeken op deze computer':
-      'Trova presentazioni su questo computer',
   'Zoek op titel, pad of thema…': 'Cerca per titolo, percorso o tema…',
   'Bekende mappen worden doorzocht…': 'Ricerca nelle cartelle note…',
   'gevonden': 'trovate',
-  'presentatie(s) gevonden': 'presentazione/i trovata/e',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Nessuna presentazione Marp trovata nelle cartelle note.',
   'Geen thema': 'Nessun tema',
   // Markdown-syntaxcontrole: foutmeldingen kopiëren.
   'Kopieer syntaxproblemen': 'Copia i problemi di sintassi',
@@ -3990,7 +4010,6 @@ const _dutchSourceAddIt = {
   'Notities voor de ontvanger tijdens een cursus':
       'Note per il destinatario durante un corso',
   'Mijn notities aan/uit': 'Attiva/disattiva le mie note',
-  'Geen presentaties gevonden voor': 'Nessuna presentazione trovata per',
   'Geen resultaten': 'Nessun risultato',
   'Geen resultaten voor': 'Nessun risultato per',
   'Geen slides gevonden voor': 'Nessuna diapositiva trovata per',
@@ -4096,8 +4115,6 @@ const _dutchSourceAddIt = {
   'Wordt automatisch toegevoegd bij presenteren en exporteren.':
       'Aggiunta automaticamente durante la presentazione e l’esportazione.',
   'Zoek in slides…': 'Cerca nelle diapositive…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Cerca per nome file, titolo o testo nelle diapositive…',
   'Zoek op naam of beschrijving…': 'Cerca per nome o descrizione…',
   'Zoek op presentatie, titel of tekst…':
       'Cerca per presentazione, titolo o testo…',

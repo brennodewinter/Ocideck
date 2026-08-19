@@ -5,7 +5,7 @@ const _stringsEt = {
   'newPresentation': 'Uus esitlus',
   'open': 'Ava...',
   'openEllipsis': 'Ava…',
-  'recentPresentations': 'Hiljutised esitlused',
+  'recentFiles': 'Hiljutised failid',
   'newTab': 'Uus vahekaart',
   'imageLibrary': 'Pildikogu',
   'presentFullscreen': 'Esitle (täisekraan) · P esitlejavaate jaoks',
@@ -188,7 +188,6 @@ const _dutchSourceEt = {
   'Andere map…': 'Muu kaust…',
   'Bibliotheken': 'Teegid',
   'Geen bibliotheek': 'Teek puudub',
-  'Geen presentaties (.md) gevonden.': 'Esitlusi (.md) ei leitud.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Kausta ja nime valid järgmises aknas. Pildid lähevad alamkausta images/ ja meedia media/, esitlusfaili kõrvale.',
   'Kies bestandsnaam…': 'Vali failinimi…',
@@ -525,13 +524,10 @@ const _dutchSourceEt = {
   'Kies een video': 'Vali video',
   'Kies een audiobestand': 'Vali helifail',
   'Bladeren…': 'Sirvi…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Otsi failinime, pealkirja või slaidide teksti järgi…',
   'Geen map gekozen': 'Kausta pole valitud',
   'Map kiezen': 'Vali kaust',
   'Kies een map met presentaties om te beginnen.':
       'Alustamiseks vali esitlustega kaust.',
-  'Geen presentaties gevonden voor': 'Esitlusi ei leitud otsingule',
   'meer treffer(s)': 'veel vaste(id)',
   'Slide zoeken': 'Otsi slaidi',
   'Slides importeren': 'Impordi slaidid',
@@ -893,13 +889,9 @@ const _dutchSourceEt = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Hoiatus üle {b1} täpi (1 veerg), {bcl} (kontrollnimekiri) või {b2} (2 veergu); kriitiline üle {bc1} või {bc2}. Sõnu üle {w1}/{w2}, keskmiselt üle {avg} täpi kohta. Tsitaat üle {q} märgi, pealkiri üle {t} märgi. Pesastamine sügavamal kui tase {lvl}. Tekst, mis peab kahanema alla {warn}%, hoiatab, alla {crit}% on kriitiline.',
   'Zoek op deze computer': 'Otsi sellest arvutist',
-  'Presentaties zoeken op deze computer': 'Leia esitlused sellest arvutist',
   'Zoek op titel, pad of thema…': 'Otsi pealkirja, tee või teema järgi…',
   'Bekende mappen worden doorzocht…': 'Tuntud kaustu otsitakse…',
   'gevonden': 'leitud',
-  'presentatie(s) gevonden': 'esitlust leitud',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Tuntud kaustadest ei leitud ühtki Marp-esitlust.',
   'Geen thema': 'Teemata',
   'Kopieer syntaxproblemen': 'Kopeeri süntaksiprobleemid',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1690,6 +1682,32 @@ const _dutchSourceAddEt = <String, String>{
   'Tijdlijn bekijken': 'Kuva ajaskaala',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Esmalt lisage vähemalt üks sündmus. See tabel jääb muutumatuks.',
+  'Alles': 'Kõik',
+  'Presentaties': 'Esitlused',
+  'Documenten': 'Dokumendid',
+  'Voorbeeld': 'Eelvaade',
+  'Voorbeeld tonen': 'Näita eelvaadet',
+  'Voorbeeld tonen bij openen': 'Näita avamisel eelvaadet',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Osuta failile, et näha siin eelvaadet.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Seda faili ei saa kuvada. Ka avamine keeldub sellest — sisu on ebaturvaline, rikutud või loetamatu.',
+  'Dit document is leeg.': 'See dokument on tühi.',
+  'Deze presentatie heeft nog geen dia.':
+      'Sellel esitlusel pole veel ühtki slaidi.',
+  'Alleen het begin van het document wordt getoond.':
+      'Näidatakse ainult dokumendi algust.',
+  'Bestanden zoeken op deze computer': 'Leia failid sellest arvutist',
+  'Dubbele bestanden opruimen': 'Korista topeltfailid',
+  'bestand(en) gevonden': 'faili leitud',
+  'Geen presentaties of documenten gevonden.':
+      'Esitlusi ega dokumente ei leitud.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Tuntud kaustadest ei leitud esitlusi ega dokumente.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Otsi failinime, pealkirja või faili teksti järgi…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Kuvab avamisaknas osutatud faili renderdatud eelvaate, et näeksid sisu enne avamist.',
   'Voetnoot': 'Allmärkus',
   'Noten': 'Märkused',
   'Voetnoten achterin het document': 'Märkused dokumendi lõpus',

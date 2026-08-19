@@ -2028,7 +2028,7 @@ momentopname. Anders dan die worden ze **wél** meegedragen door een commit naar
 hieronder. *(Gecorrigeerd 2026-07-22: hier stond dat dat niet zo was, en dat de waarschuwing
 vóór de commit ze meetelde. Beide zijn met #541 opgehouden waar te zijn.)*
 
-#### In een git-repository
+#### 6.3.1 In een git-repository
 
 Een deck in een repository houdt zijn notities in **`<deckDir>/deck.user-notes.json`** —
 dezelfde bestandsnaam als op schijf, op een stabiel pad naast `deck.md`, bewust
@@ -3793,3 +3793,57 @@ De beschrijving voor de auteur staat in de
 [Gebruikershandleiding](USER_GUIDE.md#documents); de plek in de code staat in
 [`SOURCE_MAP.md`](SOURCE_MAP.md) onder `table_of_contents.dart` en
 `toc_embed_syntax.dart`.
+
+### 14.11 Tijdlijnweergave van een GFM-tabel *(toegevoegd 2026-08-19)*
+
+Een documenttijdlijn is geen nieuw gegevensformaat. Het is een GFM-tabel van
+twee of drie kolommen met daar direct boven één marker op een eigen regel:
+
+```markdown
+<!-- timeline -->
+| Tijd | Gebeurtenis | Status |
+| --- | --- | --- |
+| 12:02 | Eerste melding | Gemeld |
+```
+
+Het commentaar geldt alleen voor de tabel die er direct op volgt; een lege regel
+ertussen verbreekt de koppeling. Twee kolommen betekenen merkteken en
+gebeurtenis; een derde wordt als neutrale metadata onder zijn eigen kopnaam
+getoond. Kopnamen hebben geen voorgeschreven betekenis en waarden worden nooit
+omgezet in een stoplichtkleur. Een tabel met een ander aantal kolommen blijft een
+gewone tabel.
+
+Alleen de regel `<!-- timeline -->` weghalen is de volledige omkering: de
+tabelbytes en alle cellen blijven staan. Oudere of andere Markdown-lezers negeren
+het commentaar en tonen de tabel. OciDeck houdt marker en tabel atomair bijeen
+door de visuele bewerker, de document/deck-projectie en de export heen. Het
+sorteren van een tabel is een losse, algemene bewerking in de visuele modus: hij
+herschikt hele rauwe rijen, stabiel, en laat de koprij, de scheidingsregel, de
+celbytes en de regeleindes op hun plaats.
+
+**Herkenning, zo precies gezegd als de code hem leest.** De marker moet het enige
+op zijn regel zijn, maar witruimte ervoor en erna is toegestaan
+(`^\s*<!-- timeline -->\s*$`), dus een ingesprongen marker in een opsomming telt
+ook mee. De schrijfwijze *binnen* het commentaar is niet inschikkelijk:
+`<!--timeline-->` of `<!-- Timeline -->` is gewoon HTML-commentaar en de tabel
+eronder blijft een gewone tabel. Dat is met opzet — juist die strengheid houdt
+tegen dat een toevallig commentaar stilletjes iemands tabel omvormt.
+
+**Wat elk oppervlak ermee doet** — hetzelfde rijtje dat §14.9 en §14.10 geven,
+omdat een lezer van het bestandsformaat wil weten wat er met déze bytes gebeurt
+op de weg naar buiten:
+
+- Het **geprojecteerde `.md`** houdt de marker én de tabel, byte voor byte
+  (op na wat de OciWacht-projectie in de cellen redigeert). De ontvanger heeft dus
+  hetzelfde bestand: een gewone GFM-tabel in elke lezer, een tijdlijn in OciDeck.
+  Er hoeft niets begrepen te worden om het te lezen.
+- De **HTML-export** rendert de rijen als een tijdlijnlijst in plaats van een
+  tabel, en elk item draagt `break-inside: avoid`, zodat het afdrukken van de
+  pagina geen gebeurtenis doormidden knipt op een velgrens.
+- De **LaTeX-export** schrijft een `description`-lijst, geen `tabular`. Een derde
+  kolom komt achter de gebeurtenis te staan als `Kop: waarde` — en dáárom doet de
+  kopnaam ertoe voor de lezer, en niet voor OciDeck.
+- De **bewerker en de weergave Pagina's** tonen de tijdlijn. In de visuele modus
+  reizen de marker en zijn tabel als één embed, zodat een tijdlijn invoegen of
+  verwijderen één documenthandeling is en er nooit een marker zonder tabel kan
+  achterblijven — precies het gebrek waartegen de atomiciteit hierboven bestaat.

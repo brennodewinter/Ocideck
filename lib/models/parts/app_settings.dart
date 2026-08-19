@@ -268,6 +268,12 @@ class AppSettings {
   /// (bijv. 3.5 accepteert een 3.6:1-verhouding). Begrensd tot 1.0–7.0.
   final double contrastMinRatio;
 
+  /// Of het openscherm en de brede zoekactie een gerenderd voorbeeld van het
+  /// aangewezen bestand tonen. Standaard uit: het voorbeeld leest en tekent een
+  /// bestand dat je nog niet gekozen hebt, en dat hoort een bewuste keuze te
+  /// zijn — niet iets wat ongevraagd gebeurt terwijl je door een lijst loopt.
+  final bool showOpenPreview;
+
   /// Of online media (afbeeldingen/video's via URL en YouTube/Vimeo-embeds)
   /// live mag worden geladen. Standaard uit (fail-closed): een geopende deck
   /// van een ander kan dan niet ongevraagd naar buiten "bellen" of pixels van
@@ -369,6 +375,7 @@ class AppSettings {
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
     this.contrastMinRatio = 4.5,
+    this.showOpenPreview = false,
     this.allowRemoteMedia = false,
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
@@ -466,6 +473,7 @@ class AppSettings {
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
     double? contrastMinRatio,
+    bool? showOpenPreview,
     bool? allowRemoteMedia,
     bool? allowCveLookup,
     String? cveApiBaseUrl,
@@ -554,6 +562,7 @@ class AppSettings {
       qualityBlockExportOnErrors:
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
       contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
+      showOpenPreview: showOpenPreview ?? this.showOpenPreview,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,

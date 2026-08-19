@@ -5,7 +5,7 @@ const _stringsGsw = {
   'newPresentation': 'Nöi Präsentation',
   'open': 'Öffne...',
   'openEllipsis': 'Öffne…',
-  'recentPresentations': 'Letschti Präsentatione',
+  'recentFiles': 'Letschti Dateie',
   'newTab': 'Nöie Tab',
   'imageLibrary': 'Bildbibliothek',
   'presentFullscreen': 'Presentiere (Vollbild) · P für d Presenter-Ansicht',
@@ -189,7 +189,6 @@ const _dutchSourceGsw = {
   'Andere map…': 'Andere Ordner…',
   'Bibliotheken': 'Bibliotheke',
   'Geen bibliotheek': 'Kei Bibliothek',
-  'Geen presentaties (.md) gevonden.': 'Kei Präsentatione (.md) gfunde.',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'De Ordner und de Name wählsch im nächschte Fänschter. D Bilder chömed i en Underordner images/ und Medie i media/, näbem Präsentationsfile.',
   'Kies bestandsnaam…': 'Dateiname wähle…',
@@ -528,13 +527,10 @@ const _dutchSourceGsw = {
   'Kies een video': 'Es Video wähle',
   'Kies een audiobestand': 'Es Audio-File wähle',
   'Bladeren…': 'Durchsuueche…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Suech nach Dateiname, Titel oder Täxt i de Slides…',
   'Geen map gekozen': 'Kes Ordner uusgwählt',
   'Map kiezen': 'Ordner wähle',
   'Kies een map met presentaties om te beginnen.':
       'Wähl e Ordner mit Presentatione zum aafah.',
-  'Geen presentaties gevonden voor': 'Kei Presentatione gfunde für',
   'meer treffer(s)': 'meh Träffer',
   'Slide zoeken': 'Slide sueche',
   'Slides importeren': 'Slides importiere',
@@ -898,13 +894,9 @@ const _dutchSourceGsw = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Warnig über {b1} Bullets (1 Spalte), {bcl} (Checkliste) oder {b2} (2 Spalte); kritisch über {bc1} oder {bc2}. Wörter über {w1}/{w2}, im Schnitt über {avg} pro Bullet. Zitat über {q} Zeiche, Titel über {t} Zeiche. Verschachtelig tüüfer als Niveau {lvl}. Text, wo under {warn}% mues schrumpfe, warnt, under {crit}% isch kritisch.',
   'Zoek op deze computer': 'Uf däm Computer sueche',
-  'Presentaties zoeken op deze computer': 'Präsentatione uf däm Computer finde',
   'Zoek op titel, pad of thema…': 'Nach Titel, Pfad oder Thema sueche…',
   'Bekende mappen worden doorzocht…': 'Bekannti Ordner wärded durchsuecht…',
   'gevonden': 'gfunde',
-  'presentatie(s) gevonden': 'Präsentation(e) gfunde',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'Kei Marp-Präsentatione in de bekannte Ordner gfunde.',
   'Geen thema': 'Kei Thema',
   'Kopieer syntaxproblemen': 'Syntaxproblem kopiere',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1699,6 +1691,31 @@ const _dutchSourceAddGsw = <String, String>{
   'Tijdlijn bekijken': 'Ziitachse aaluege',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Füeg zersch mindestens eis Ereignis dezue. Die Tabälle bliibt unveränderet.',
+  'Alles': 'Alli',
+  'Presentaties': 'Präsentatione',
+  'Documenten': 'Dokumänt',
+  'Voorbeeld': 'Vorschau',
+  'Voorbeeld tonen': 'Vorschau zeige',
+  'Voorbeeld tonen bij openen': 'Bim Uufmache e Vorschau zeige',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Zeig uf e Datei, zum do e Vorschau z gseh.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Die Datei cha nid zeigt wärde. Uufmache lehnt sie au ab — de Inhalt isch unsicher, kaputt oder unläsbar.',
+  'Dit document is leeg.': 'Das Dokumänt isch läär.',
+  'Deze presentatie heeft nog geen dia.': 'Die Präsentation het no kei Folie.',
+  'Alleen het begin van het document wordt getoond.':
+      'Es wird nume de Aafang vom Dokumänt zeigt.',
+  'Bestanden zoeken op deze computer': 'Dateie uf däm Computer finde',
+  'Dubbele bestanden opruimen': 'Doppleti Dateie uufruume',
+  'bestand(en) gevonden': 'Datei(e) gfunde',
+  'Geen presentaties of documenten gevonden.':
+      'Kei Präsentatione oder Dokumänt gfunde.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Kei Präsentatione oder Dokumänt in de bekannte Ordner gfunde.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Suech nach Dateiname, Titel oder Täxt i de Datei…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Zeigt im Uufmache-Fänschter e grenderti Vorschau vo de Datei, uf die wo du zeigsch — so gsehsch de Inhalt, bevor du sie uufmachsch.',
   'Voetnoot': 'Fuessnote',
   'Noten': 'Aamerkige',
   'Voetnoten achterin het document': 'Fuessnote am Änd vom Dokumänt',

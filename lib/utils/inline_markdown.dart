@@ -407,7 +407,12 @@ extension on InlineRun {
 /// onderstreping — ook zonder tikafhandelaar, want de lezer moet ze herkennen.
 /// Zonder [linkColor] houdt een link de kleur van [base]: wie alleen meet heeft
 /// geen kleur nodig, want kleur verandert geen enkele afmeting.
-TextStyle inlineRunStyle(InlineRun run, TextStyle base, Color? linkColor) {
+TextStyle inlineRunStyle(
+  InlineRun run,
+  TextStyle base,
+  Color? linkColor, {
+  Color? codeBackground,
+}) {
   var style = base;
   if (run.bold) style = style.copyWith(fontWeight: FontWeight.bold);
   if (run.italic) style = style.copyWith(fontStyle: FontStyle.italic);
@@ -415,6 +420,11 @@ TextStyle inlineRunStyle(InlineRun run, TextStyle base, Color? linkColor) {
     style = style.copyWith(
       fontFamily: 'monospace',
       fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+      // Zonder achtergrond viel `code` in de documentweergave alleen op aan
+      // zijn letter, terwijl het schrijfvlak van de visuele editor hem wél op
+      // een vlakje zet. Twee weergaven van dezelfde tekst die er anders
+      // uitzagen (#1567); dit is dezelfde kleur als die van het codeblok.
+      backgroundColor: codeBackground,
     );
   }
   if (run.strike) {
@@ -443,12 +453,18 @@ List<InlineSpan> buildInlineSpans(
   String text, {
   required TextStyle baseStyle,
   Color? linkColor,
+  Color? codeBackground,
 }) {
   return [
     for (final run in parseInlineRuns(text))
       TextSpan(
         text: run.text,
-        style: inlineRunStyle(run, baseStyle, linkColor),
+        style: inlineRunStyle(
+          run,
+          baseStyle,
+          linkColor,
+          codeBackground: codeBackground,
+        ),
       ),
   ];
 }

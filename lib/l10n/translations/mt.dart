@@ -5,7 +5,7 @@ const _stringsMt = {
   'newPresentation': 'Preżentazzjoni ġdida',
   'open': 'Iftaħ...',
   'openEllipsis': 'Iftaħ…',
-  'recentPresentations': 'Preżentazzjonijiet reċenti',
+  'recentFiles': 'Fajls reċenti',
   'newTab': 'Tab ġdida',
   'imageLibrary': 'Librerija tal-immaġni',
   'presentFullscreen':
@@ -190,8 +190,6 @@ const _dutchSourceMt = {
   'Andere map…': 'Kartella oħra…',
   'Bibliotheken': 'Libreriji',
   'Geen bibliotheek': 'L-ebda librerija',
-  'Geen presentaties (.md) gevonden.':
-      'Ma nstabet l-ebda preżentazzjoni (.md).',
   'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
       'Tagħżel il-kartella u l-isem fit-tieqa li jmiss. L-immaġni jmorru f\'sottokartella images/ u l-media f\'media/, ħdejn il-fajl tal-preżentazzjoni.',
   'Kies bestandsnaam…': 'Agħżel isem tal-fajl…',
@@ -530,13 +528,10 @@ const _dutchSourceMt = {
   'Kies een video': 'Agħżel vidjow',
   'Kies een audiobestand': 'Agħżel fajl awdjo',
   'Bladeren…': 'Fittex…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…':
-      'Fittex bl-isem tal-fajl, titlu jew test fis-slides…',
   'Geen map gekozen': 'L-ebda folder magħżul',
   'Map kiezen': 'Agħżel folder',
   'Kies een map met presentaties om te beginnen.':
       'Agħżel folder bil-preżentazzjonijiet biex tibda.',
-  'Geen presentaties gevonden voor': 'Ma nstabet l-ebda preżentazzjoni għal',
   'meer treffer(s)': 'riżultat(i) oħra',
   'Slide zoeken': 'Sib slide',
   'Slides importeren': 'Importa slides',
@@ -904,14 +899,9 @@ const _dutchSourceMt = {
   'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
       'Twissija \'il fuq minn {b1} bullets (kolonna 1), {bcl} (checklist) jew {b2} (2 kolonni); kritiku \'il fuq minn {bc1} jew {bc2}. Kliem \'il fuq minn {w1}/{w2}, bħala medja \'il fuq minn {avg} kull bullet. Kwotazzjoni \'il fuq minn {q} karattri, titlu \'il fuq minn {t} karattri. Nesting aktar fond mil-livell {lvl}. Test li jrid jiċċekken taħt {warn}% iwissi, taħt {crit}% huwa kritiku.',
   'Zoek op deze computer': 'Fittex fuq dan il-kompjuter',
-  'Presentaties zoeken op deze computer':
-      'Sib preżentazzjonijiet fuq dan il-kompjuter',
   'Zoek op titel, pad of thema…': 'Fittex skont titlu, path jew tema…',
   'Bekende mappen worden doorzocht…': 'Qed jiġu mfittxija l-folders magħrufa…',
   'gevonden': 'instabu',
-  'presentatie(s) gevonden': 'preżentazzjoni(jiet) instabu',
-  'Geen Marp-presentaties gevonden in de bekende mappen.':
-      'L-ebda preżentazzjoni Marp ma nstabet fil-folders magħrufa.',
   'Geen thema': 'L-ebda tema',
   'Kopieer syntaxproblemen': 'Ikkupja l-problemi tas-sintassi',
   'Syntaxproblemen gekopieerd naar klembord.':
@@ -1717,6 +1707,32 @@ const _dutchSourceAddMt = <String, String>{
   'Tijdlijn bekijken': 'Ara l-kronoloġija',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'L-ewwel żid mill-inqas avveniment wieħed. Din it-tabella tibqa\' l-istess.',
+  'Alles': 'Kollha',
+  'Presentaties': 'Preżentazzjonijiet',
+  'Documenten': 'Dokumenti',
+  'Voorbeeld': 'Previżjoni',
+  'Voorbeeld tonen': 'Uri l-previżjoni',
+  'Voorbeeld tonen bij openen': 'Uri previżjoni meta tiftaħ',
+  'Wijs een bestand aan om er hier een voorbeeld van te zien.':
+      'Ipponta lejn fajl biex tara previżjoni hawn.',
+  'Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.':
+      'Dan il-fajl ma jistax jintwera. Anke l-ftuħ jirrifjutah — il-kontenut mhux sigur, bil-ħsara jew ma jinqarax.',
+  'Dit document is leeg.': 'Dan id-dokument huwa vojt.',
+  'Deze presentatie heeft nog geen dia.':
+      'Din il-preżentazzjoni għad m\'għandhiex slides.',
+  'Alleen het begin van het document wordt getoond.':
+      'Jintwera biss il-bidu tad-dokument.',
+  'Bestanden zoeken op deze computer': 'Sib fajls fuq dan il-kompjuter',
+  'Dubbele bestanden opruimen': 'Naddaf il-fajls duplikati',
+  'bestand(en) gevonden': 'fajl(s) instabu',
+  'Geen presentaties of documenten gevonden.':
+      'Ma nstabet l-ebda preżentazzjoni jew dokument.',
+  'Geen presentaties of documenten gevonden in de bekende mappen.':
+      'Ma nstabet l-ebda preżentazzjoni jew dokument fil-folders magħrufa.',
+  'Zoek op bestandsnaam, titel of tekst in het bestand…':
+      'Fittex bl-isem tal-fajl, titlu jew test fil-fajl…',
+  'Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.':
+      'Fit-tieqa tal-ftuħ juri previżjoni tal-fajl li tipponta lejh, biex tara x\'fih qabel ma tiftħu.',
   'Voetnoot': 'Nota f\'qiegħ il-paġna',
   'Noten': 'Noti',
   'Voetnoten achterin het document': 'Noti fl-aħħar tad-dokument',
