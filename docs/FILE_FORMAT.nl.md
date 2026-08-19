@@ -2871,7 +2871,10 @@ gewone zip zoals hierboven.
 ## 8. Bijzondere per-slide-commentaren (overzicht)
 
 Naast `_class` gebruikt OciDeck deze HTML-commentaren (allemaal genegeerd door
-Marp, behalve de sprekersnotities):
+Marp, behalve de sprekersnotities). *(Aangevuld 2026-08-19: elf markers die de
+schrijver wél zet, ontbraken in deze tabel — de paragraaf beloofde een overzicht
+te zijn en was er geen. Ze staan hieronder in dezelfde volgorde waarin de
+serializer ze schrijft.)*
 
 | Commentaar | Betekenis |
 | --- | --- |
@@ -2893,6 +2896,18 @@ Marp, behalve de sprekersnotities):
 | `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Slide overslaan bij zowel presenteren als exporteren. |
 | `<!-- tlp: <key> -->` | Per-slide TLP-niveau (zie §3.1). De slide wordt achtergehouden als de TLP van de presentatie lager is. Alleen geschreven wanneer niet `none`. |
+| `<!-- ocideck_list_style: numbered\|checklist\|richText -->` | Lijststijl van een bullets-/bullets+beeld-/twee-bullets-slide (§5). Afwezig = gewone bullets. |
+| `<!-- ocideck_checklist_progress: true -->` | Checklist-slide: toon de voortgangsbalk ("3 van 7 gedaan") boven de lijst. Alleen geschreven wanneer hij aanstaat. |
+| `<!-- ocideck_continue_numbering: true -->` | Een genummerde lijst die doortelt waar de vorige slide ophield (1–6, dan 7–9) in plaats van opnieuw bij 1 te beginnen. Alleen zinvol als de vorige slide ook genummerd is. |
+| `<!-- ocideck_continue_split: true -->` | Merkt een slide als vervolghelft van een **splitsrun**: het origineel en zijn vervolgen renderen op één gedeelde tekstschaal, zodat de lezer dezelfde lijst niet van grootte ziet veranderen tussen pagina's. Op elke helft na de eerste geschreven, en los van `ocideck_continue_numbering` (grootte tegenover nummering). |
+| `<!-- ocideck_image_zoom: N -->` | Zoom van het *paneel*beeld op een bullets+beeld- of twee-beelden-slide: `0` = cover (vult het vak, snijdt bij), `100` = het hele plaatje in beeld (contain), `>100` = inzoomen. Vullende vakken (beeld/titel/sectie) gebruiken hiervoor `imageSize` (§5). |
+| `<!-- ocideck_title_image_overlay: false -->` | Titel-/sectieslide met een achtergrondbeeld: zet de verdonkerende overlay **uit** die de kop leesbaar houdt. Alleen geschreven wanneer hij uit staat — de overlay is de standaard. |
+| `<!-- ocideck_table_num_cols: 1,3 -->` | Tabelslide: welke kolommen bij het renderen als getal worden opgemaakt, taalbewust (`1234.5` wordt `1.234,5` in een Nederlands deck). De ruwe celtekst blijft in de `.md` staan; de opmaak is puur visueel, dus het bestand leest hetzelfde zonder OciDeck. |
+| `<!-- ocideck_gantt_scale: auto\|day\|week\|month -->` | Gantt-slide: de granulariteit van de tijdas. |
+| `<!-- ocideck_gantt_sections: true -->` | Gantt-slide: een rij waarvan de *Taak*-cel met `## ` begint, klapt uit als een Mermaid-`section`-kop in plaats van een taak. Alleen geschreven wanneer het aanstaat. |
+| `<!-- ocideck_ms_review -->` | Onzichtbare bewaker op de eerste slide van een toegevoegd ISO 9.3-**directiebeoordelingssjabloon**, zodat de actie opnieuw uitvoeren nooit een tweede exemplaar over de antwoorden van de auteur heen zet. Draagt geen gegevens; hij reist mee als deel van de vrije Markdown van de slide. |
+| `<!-- ocideck_page:N -->` | **Binnen het sprekersnotitieblok**, niet ernaast: scheidt de notities per rijke-tekst*pagina* van één slide, genummerd vanaf 1. Alleen geschreven wanneer een slide op meer dan één pagina notities draagt. Omdat het notitieblok zelf één groot `<!--  -->` is, wordt de eigen afsluiting van de marker op schijf geëscapet tot `--\>`, net als elke andere `-->` in een notitie; bij het lezen wordt dat eerst weer ongedaan gemaakt. |
+| `<!-- ocideck_media_redacted -->` | **Alleen in een export, nooit in een bewaard bestand.** Merkt een slide waarvan het beeld door de privacyprojectie is verwijderd, zodat de HTML-renderer er een redactievlak kan tekenen in plaats van stilzwijgend een gat te tonen. Bestaat alleen in een geprojecteerd artefact (§11), en de schrijver hangt niet alleen aan de vlag maar ook aan het exportpad. |
 | `<!-- ... (vrije tekst) ... -->` | **Sprekersnotities** (elk ander commentaar dat niet met `_` begint). |
 
 ---
