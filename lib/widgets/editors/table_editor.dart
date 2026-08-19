@@ -428,9 +428,17 @@ class _TableEditorState extends State<TableEditor> {
       onFirstLine: collapsed && !text.substring(0, offset).contains('\n'),
       onLastLine: collapsed && !text.substring(offset).contains('\n'),
     );
-    if (target == null) return KeyEventResult.ignored;
-    _moveFocusTo(target.row, target.col, caret: target.caret);
-    return KeyEventResult.handled;
+    return switch (target.move) {
+      // Binnen de cel: het tekstveld zet de cursor zelf.
+      TableArrowMove.inCell => KeyEventResult.ignored,
+      TableArrowMove.toCell => () {
+        _moveFocusTo(target.row, target.col, caret: target.caret);
+        return KeyEventResult.handled;
+      }(),
+      // Aan de rand van de tabel is er niets te bewegen — en doorlaten zou de
+      // toets bij de omliggende editor laten belanden.
+      TableArrowMove.atEdge => KeyEventResult.handled,
+    };
   }
 
   /// Markeert cel (r, c) als de focus-doel ná de eerstvolgende rebuild —

@@ -213,6 +213,8 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
                       editor: editor,
                       row: r,
                       column: c,
+                      linkColor: t.link,
+                      codeBackground: t.codeBg,
                       style: _cellStyle(
                         t,
                         header: r == 0,
