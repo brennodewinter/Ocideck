@@ -1642,6 +1642,33 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Merkinnöillä ei ole tunnistettavaa järjestysarvoa. Ne pysyvät näkyvissä.',
+  'Tijdlijn · vervolg': 'Aikajana · jatko',
+  'Aflopend': 'Laskeva',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Tilaussarakkeen arvot eivät ole nousevia.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Tämä aikajana ei ole vielä valmis. Säädä taulukkoa tai näytä se tavallisena pöytänä.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Aikajana toimii kahdella tai kolmella sarakkeella. Säädä taulukkoa tai näytä se tavallisena pöytänä.',
+  'Huidige volgorde behouden': 'Säilytä nykyinen järjestys',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Tyhjät tapahtumat jäävät näkyviin. Tarkista rivi:',
+  'Niet-herkende waarden': 'Tuntemattomia arvoja',
+  'Oplopend': 'Nouseva',
+  'Sorteren als…': 'Lajittele…',
+  'Sorteren en tijdlijn maken': 'Lajittele ja luo aikajana',
+  'Sorteren toepassen': 'Käytä lajittelua',
+  'Tijdlijn maken': 'Luo aikajana',
+  'Tijdlijn maken?': 'Luodaanko aikajana?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Lisää vähintään yksi tapahtuma tai näytä se tavallisena taulukkona.',
+  'Waarden bekijken': 'Näytä arvot',
+  'gebeurtenissen gevonden.': 'tapahtumia löydetty.',
+  'waarden herkend.': 'arvot tunnustettu.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'arvoja ei tunnisteta. Nämä rivit pysyvät alareunassa nykyisessä järjestyksessä.',
   'Als tabel weergeven': 'Näytä taulukkona',
   'Als tijdlijn weergeven': 'Näytä aikajanana',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1650,8 +1677,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä sarake ei vielä sisällä arvoja, jotka voitaisiin lajitella tällä tavalla.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Tätä taulukkoa ei voi vielä näyttää aikajanana, ja se pysyy muuttumattomana.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Joitakin arvoja ei tunnisteta. Nämä rivit pysyvät yhdessä alareunassa; niiden sisältö ei muutu.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Aikajana toimii kahdella tai kolmella sarakkeella. Tämä taulukko pysyy ennallaan.',
   'Gebeurtenis': 'Tapahtuma',
@@ -1662,7 +1687,6 @@ const _dutchSourceAddFi = <String, String>{
   'Sorteren met aandachtspunten?': 'Lajittele kiinnostavien kohteiden mukaan?',
   'Tijd': 'Aika',
   'Tijdlijn bekijken': 'Näytä aikajana',
-  'Toch sorteren': 'Lajittelu edelleen',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Lisää ensin vähintään yksi tapahtuma. Tämä taulukko pysyy ennallaan.',
   'Alles': 'Kaikki',

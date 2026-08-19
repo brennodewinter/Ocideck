@@ -2559,6 +2559,33 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'İşaretlerin tanınabilir bir sıralama değeri yoktur. Görünür kalırlar.',
+  'Tijdlijn · vervolg': 'Zaman çizelgesi · devamı',
+  'Aflopend': 'Azalan',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Sıra sütunundaki değerler artan değildir.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Bu zaman çizelgesi henüz tamamlanmadı. Tabloyu ayarlayın veya normal tablo olarak gösterin.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Zaman çizelgesi iki veya üç sütunla çalışır. Tabloyu ayarlayın veya normal tablo olarak gösterin.',
+  'Huidige volgorde behouden': 'Mevcut düzeni koru',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Boş etkinlikler görünür durumda kalır. Satırı kontrol et:',
+  'Niet-herkende waarden': 'Tanınmayan değerler',
+  'Oplopend': 'Artan',
+  'Sorteren als…': 'Şu şekilde sırala:',
+  'Sorteren en tijdlijn maken': 'Zaman çizelgesini sıralayın ve oluşturun',
+  'Sorteren toepassen': 'Sıralamayı uygula',
+  'Tijdlijn maken': 'Zaman çizelgesi oluştur',
+  'Tijdlijn maken?': 'Bir zaman çizelgesi oluşturulsun mu?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'En az bir etkinlik ekleyin veya bunu normal bir tablo olarak gösterin.',
+  'Waarden bekijken': 'Değerleri görüntüle',
+  'gebeurtenissen gevonden.': 'bulunan olaylar.',
+  'waarden herkend.': 'tanınan değerler.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'değerler tanınmadı. Bu satırlar mevcut sıralarında en altta kalır.',
   'Als tabel weergeven': 'Tablo olarak görüntüle',
   'Als tijdlijn weergeven': 'Zaman çizelgesi olarak göster',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -2567,8 +2594,6 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sütun henüz bu şekilde sıralanabilecek herhangi bir değer içermiyor.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Bu tablo henüz zaman çizelgesi olarak görüntülenemiyor ve değişmeden kalıyor.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Bazı değerler tanınmıyor. Bu sıralar altta bir arada kalıyor; içerikleri değişmez.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Zaman çizelgesi iki veya üç sütunla çalışır. Bu tablo değişmeden kalır.',
   'Gebeurtenis': 'Etkinlik',
@@ -2579,7 +2604,6 @@ const _dutchSourceAddTr = <String, String>{
   'Sorteren met aandachtspunten?': 'İlgi çekici noktalara göre sıralansın mı?',
   'Tijd': 'Zaman',
   'Tijdlijn bekijken': 'Zaman çizelgesini görüntüle',
-  'Toch sorteren': 'Hala sıralama yapılıyor',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Öncelikle en az bir etkinlik ekleyin. Bu tablo değişmeden kalır.',
   'Alles': 'Tümü',

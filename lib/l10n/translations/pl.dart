@@ -1653,6 +1653,33 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Znaczniki nie mają rozpoznawalnej wartości kolejności. Pozostają widoczne.',
+  'Tijdlijn · vervolg': 'Oś czasu · ciąg dalszy',
+  'Aflopend': 'Malejąco',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Wartości w kolumnie zamówienia nie są rosnące.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Harmonogram ten nie jest jeszcze kompletny. Dostosuj tabelę lub pokaż ją jako normalny stół.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Oś czasu działa z dwiema lub trzema kolumnami. Dostosuj tabelę lub pokaż ją jako normalny stół.',
+  'Huidige volgorde behouden': 'Zachowaj aktualną kolejność',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Puste zdarzenia pozostają widoczne. Sprawdź wiersz:',
+  'Niet-herkende waarden': 'Nierozpoznane wartości',
+  'Oplopend': 'Rosnąco',
+  'Sorteren als…': 'Sortuj jako…',
+  'Sorteren en tijdlijn maken': 'Sortuj i twórz oś czasu',
+  'Sorteren toepassen': 'Zastosuj sortowanie',
+  'Tijdlijn maken': 'Utwórz oś czasu',
+  'Tijdlijn maken?': 'Utworzyć oś czasu?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Dodaj przynajmniej jedno wydarzenie lub pokaż je jako zwykłą tabelę.',
+  'Waarden bekijken': 'Zobacz wartości',
+  'gebeurtenissen gevonden.': 'znalezione wydarzenia.',
+  'waarden herkend.': 'uznane wartości.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'wartości nierozpoznane. Te wiersze pozostają na dole w bieżącej kolejności.',
   'Als tabel weergeven': 'Wyświetl jako tabelę',
   'Als tijdlijn weergeven': 'Pokaż jako oś czasu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1661,8 +1688,6 @@ const _dutchSourceAddPl = <String, String>{
       'Ta kolumna nie zawiera jeszcze żadnych wartości, które można w ten sposób posortować.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ta tabela nie może być jeszcze wyświetlana jako oś czasu i pozostaje niezmieniona.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Niektóre wartości nie są rozpoznawane. Te rzędy pozostają razem na dole; ich treść się nie zmienia.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Oś czasu działa z dwiema lub trzema kolumnami. Tabela ta pozostaje niezmieniona.',
   'Gebeurtenis': 'Wydarzenie',
@@ -1673,7 +1698,6 @@ const _dutchSourceAddPl = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortować według punktów szczególnych?',
   'Tijd': 'Czas',
   'Tijdlijn bekijken': 'Zobacz oś czasu',
-  'Toch sorteren': 'Nadal sortuję',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Najpierw dodaj co najmniej jedno wydarzenie. Tabela ta pozostaje niezmieniona.',
   'Alles': 'Wszystko',

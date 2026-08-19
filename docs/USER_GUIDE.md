@@ -4355,7 +4355,8 @@ A **formatting toolbar** for the common inline marks is always in reach — the
 rich-text toolbar in Visual, the Markdown one over the source in Source and in
 the Visual source fallback. An **insert palette** adds the richer blocks as
 portable Markdown: a **chart** (a ` ```chart ` fence with its data in
-`data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, an
+`data/*.json`), a **table** (a GFM pipe table), a **timeline** (a marked GFM
+table, edited first in the ordinary table editor), a **Mermaid** diagram, an
 **image** (copied into `images/`), a **page break** (a `---` thematic break), or a
 **footnote**. Each stays plain, parseable text so the file keeps opening
 elsewhere. *(Page break added 2026-08-08 — see
@@ -4365,19 +4366,40 @@ see [Footnotes](#footnotes).)*
 ### Tables, sorting and timelines
 
 In **Visual**, click a table cell to expose the table controls. The two sort
-buttons order the active column ascending or descending. OciDeck recognises
-text, numbers, ISO dates and times locally. If values are mixed, it asks how to
-read them; values it cannot recognise stay together at the bottom in their
-original order. Sorting moves whole source rows and does not rewrite their cell
-contents.
+buttons order the active column ascending or descending. **Sorteren als…** lets
+you select **Automatisch**, **Tekst**, **Getal**, **Datum** or **Tijd**, and then
+choose **Oplopend** or **Aflopend**. OciDeck recognises values locally. If a
+chosen reading leaves values unrecognised, it first explains that those rows
+stay together at the bottom in their original order. Select **Waarden bekijken**
+to see their row numbers and literal values, **Sorteren toepassen** to continue,
+or **Annuleren** to leave the table alone. Sorting moves whole source rows and
+does not rewrite their cell contents. With the caret in a cell, keyboard users
+can sort the active column with `Alt+Shift+↑` or `Alt+Shift+↓`, and open
+**Sorteren als…** with `Alt+Shift+S`.
 
+**Invoegen → Tijdlijn** opens the normal table editor with `Tijd`,
+`Gebeurtenis` and `Status`; nothing is inserted until you choose **Toepassen**.
+If every event cell is still empty, OciDeck leaves the document unchanged and
+returns to the same editor with the entered marker/status values intact, asking
+for at least one event instead of inserting an empty card.
 A table with two or three columns also offers **Als tijdlijn weergeven**. This
 is an explicit choice: a table is never promoted because its headers happen to
-say “time” or “event”. The first column becomes the marker, the second the event
-card and the optional third a neutral metadata chip. All rows remain visible,
-without a presentation-style item limit or status colours. **Als tabel
-weergeven** reverses the view without losing a cell. **Invoegen → Tijdlijn**
-inserts the same portable structure directly.
+say “time” or “event”. Before creating it, OciDeck previews the first column as
+the marker, the second as the event card, the optional third as neutral metadata,
+and the number of events found. If marker values are not ascending, choose
+**Huidige volgorde behouden** or **Sorteren en tijdlijn maken**. The first keeps
+your source order; the second sorts that marker column before marking the table.
+
+All rows remain visible, without a presentation-style item limit or status
+colours. A marked table that is unsuitable (for example, with four columns)
+stays visually editable and explains the issue. **Als tabel weergeven** removes
+the marker and keeps the table contents. In **Pagina's**, a new sheet that
+starts with a following timeline event restarts its rail and marks the
+continuation in the top margin as **Tijdlijn · vervolg** (translated with the
+interface). A card normally moves in full to the next sheet. Only a card that
+is itself taller than the available page area is continued over more sheets;
+each of those sheets gets the same continuation label so no content is hidden
+or made artificially smaller.
 
 On disk the timeline is still an ordinary GFM table with one HTML comment
 directly above it. Remove that comment and every Markdown reader simply sees the

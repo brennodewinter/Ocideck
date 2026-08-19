@@ -5,13 +5,14 @@ import 'package:markdown_quill/markdown_quill.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../models/slide.dart';
 import '../../services/markdown_table_codec.dart';
-import '../../services/table_sort.dart';
 import '../../services/document_timeline.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
+import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
+import 'table_sort_actions.dart';
 
 /// Tekent een `x-embed-table`-blok in de visuele (Quill) editor als een échte,
 /// gerenderde tabel — dezelfde weergave als de documentlezer — en laat je er
@@ -31,7 +32,9 @@ import 'markdown_editor_theme.dart';
 /// platte rijke-tekstlaag een tabel tot losse woorden maalde, blijft hij nu één
 /// blok.
 class TableEmbedBuilder extends EmbedBuilder {
-  const TableEmbedBuilder();
+  const TableEmbedBuilder({this.onDiscreteEdit});
+
+  final VoidCallback? onDiscreteEdit;
 
   @override
   String get key => EmbeddableTable.tableType;
@@ -58,6 +61,7 @@ class TableEmbedBuilder extends EmbedBuilder {
       gfm: gfm,
       profile: profile,
       embedContext: embedContext,
+      onDiscreteEdit: onDiscreteEdit,
     );
   }
 }
@@ -70,11 +74,13 @@ class _EditableTableEmbed extends StatefulWidget {
     required this.gfm,
     required this.profile,
     required this.embedContext,
+    required this.onDiscreteEdit,
   });
 
   final String gfm;
   final ThemeProfile? profile;
   final EmbedContext embedContext;
+  final VoidCallback? onDiscreteEdit;
 
   @override
   State<_EditableTableEmbed> createState() => _EditableTableEmbedState();
@@ -82,6 +88,10 @@ class _EditableTableEmbed extends StatefulWidget {
 
 class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   late TableEditController _editor;
+
+  bool get _canBecomeTimeline =>
+      _editor.rows.isNotEmpty &&
+      (_editor.rows.first.length == 2 || _editor.rows.first.length == 3);
 
   @override
   void initState() {
@@ -163,9 +173,26 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     }
   }
 
+  Future<void> _sortAs(int column) async {
+    final choice = await chooseExplicitSort(context);
+    if (!mounted || choice == null) return;
+    final sorted = await smartSortTable(
+      context,
+      _pending ?? widget.gfm,
+      column: column,
+      ascending: choice.ascending,
+      kind: choice.kind,
+    );
+    if (mounted && sorted != null) {
+      _pending = null;
+      _replaceRaw(sorted);
+    }
+  }
+
   void _replaceRaw(String gfm) {
     final node = widget.embedContext.node;
     if (node.parent == null || gfm == widget.gfm) return;
+    widget.onDiscreteEdit?.call();
     widget.embedContext.controller.replaceText(
       node.documentOffset,
       1,
@@ -174,7 +201,7 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     );
   }
 
-  void _asTimeline() {
+  Future<void> _asTimeline() async {
     final current = _pending ?? widget.gfm;
     final analysis = analyzeTimelineTable(current);
     if (!analysis.isUsable) {
@@ -194,12 +221,27 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       ).showSnackBar(SnackBar(content: Text(message)));
       return;
     }
+    final timeline = analysis.timeline!;
+    final choice = await _confirmTimelineActivation(context, timeline);
+    if (!mounted || choice == null) return;
+    var table = current;
+    if (choice == _TimelineActivationChoice.sort) {
+      final sorted = await smartSortTable(
+        context,
+        current,
+        column: 0,
+        ascending: true,
+      );
+      if (!mounted || sorted == null) return;
+      table = sorted;
+    }
     final node = widget.embedContext.node;
     if (node.parent == null) return;
+    widget.onDiscreteEdit?.call();
     widget.embedContext.controller.replaceText(
       node.documentOffset,
       1,
-      EmbeddableTimelineTable(markTableAsTimeline(current)),
+      EmbeddableTimelineTable(markTableAsTimeline(table)),
       null,
     );
   }
@@ -214,115 +256,88 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Align(
-        alignment: Alignment.centerRight,
-        child: TextButton.icon(
-          onPressed: _asTimeline,
-          icon: const Icon(Icons.timeline_outlined),
-          label: Text(context.l10n.d('Als tijdlijn weergeven')),
+      if (_canBecomeTimeline)
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton.icon(
+            onPressed: () => _asTimeline(),
+            icon: const Icon(Icons.timeline_outlined),
+            label: Text(context.l10n.d('Als tijdlijn weergeven')),
+          ),
         ),
-      ),
       DocumentMarkdownView(
         widget.gfm,
         maxTextWidth: null,
         themeProfile: widget.profile,
         chartTheme: widget.profile,
         tableEditController: _editor,
-        onSortTableColumn: _sort,
+        onSortTableColumn: (column, intent) => switch (intent) {
+          TableSortIntent.ascending => _sort(column, true),
+          TableSortIntent.descending => _sort(column, false),
+          TableSortIntent.choose => _sortAs(column),
+        },
       ),
     ],
   );
 }
 
-/// Vraagt alleen om hulp wanneer lokale analyse geen eenduidige of volledig
-/// leesbare kolom vindt. Zo blijft de standaardhandeling snel, maar worden
-/// onbekende waarden nooit stilzwijgend anders geïnterpreteerd.
-Future<String?> smartSortTable(
+enum _TimelineActivationChoice { keepOrder, sort }
+
+Future<_TimelineActivationChoice?> _confirmTimelineActivation(
   BuildContext context,
-  String gfm, {
-  required int column,
-  required bool ascending,
-}) async {
-  const sorter = TableSortService();
-  final lines = gfm.replaceAll('\r\n', '\n').replaceAll('\r', '\n').split('\n');
-  var kind = TableSortKind.automatic;
-  var analysis = sorter.analyze(lines, columnIndex: column);
-  if (!analysis.canSort) {
-    final chosen = await showDialog<TableSortKind>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(context.l10n.d('Hoe wil je deze kolom sorteren?')),
-        content: Text(
-          context.l10n.d(
-            'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.',
-          ),
-        ),
-        actions: [
-          for (final option in const [
-            (TableSortKind.text, 'Tekst'),
-            (TableSortKind.number, 'Getal'),
-            (TableSortKind.date, 'Datum'),
-            (TableSortKind.time, 'Tijd'),
-          ])
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, option.$1),
-              child: Text(context.l10n.d(option.$2)),
-            ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(context.l10n.d('Annuleren')),
-          ),
-        ],
+  DocumentTimeline timeline,
+) {
+  final l10n = context.l10n;
+  final outOfOrder =
+      timeline.markerAnalysis.canSort &&
+      !timeline.markerAnalysis.profile.alreadyMonotonic;
+  final emptyEvents = <int>[
+    for (var i = 0; i < timeline.events.length; i++)
+      if (timeline.events[i].event.trim().isEmpty) i + 1,
+  ];
+  final roles = <String>[
+    '${l10n.d('Volgorde')}: ${timeline.headers[0]}',
+    '${l10n.d('Gebeurtenis')}: ${timeline.headers[1]}',
+    if (timeline.headers.length == 3)
+      '${l10n.d('Toelichting')}: ${timeline.headers[2]}',
+  ];
+  final notes = <String>[
+    '${timeline.events.length} ${l10n.d('gebeurtenissen gevonden.')}',
+    if (timeline.markerAnalysis.profile.unparsedRowIndices.isNotEmpty)
+      '${timeline.markerAnalysis.profile.unparsedRowIndices.length} ${l10n.d('markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.')}',
+    if (outOfOrder)
+      l10n.d('De waarden in de volgordekolom staan niet oplopend.'),
+    if (emptyEvents.isNotEmpty)
+      '${l10n.d('Lege gebeurtenissen blijven zichtbaar. Controleer rij:')} ${emptyEvents.join(', ')}',
+  ];
+  return showDialog<_TimelineActivationChoice>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(l10n.d('Tijdlijn maken?')),
+      content: SingleChildScrollView(
+        child: SelectableText('${roles.join('\n')}\n\n${notes.join('\n')}'),
       ),
-    );
-    if (!context.mounted || chosen == null) return null;
-    kind = chosen;
-    analysis = sorter.analyze(lines, columnIndex: column, kind: kind);
-  }
-  if (!analysis.canSort) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.',
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        TextButton(
+          onPressed: () =>
+              Navigator.pop(dialogContext, _TimelineActivationChoice.keepOrder),
+          child: Text(
+            outOfOrder
+                ? l10n.d('Huidige volgorde behouden')
+                : l10n.d('Tijdlijn maken'),
           ),
         ),
-      ),
-    );
-    return null;
-  }
-  if (analysis.suitability ==
-      TableAnalysisSuitability.suitableWithAttentionPoints) {
-    final proceed = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(context.l10n.d('Sorteren met aandachtspunten?')),
-        content: Text(
-          context.l10n.d(
-            'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: Text(context.l10n.d('Annuleren')),
-          ),
+        if (outOfOrder)
           FilledButton(
-            onPressed: () => Navigator.pop(dialogContext, true),
-            child: Text(context.l10n.d('Toch sorteren')),
+            onPressed: () =>
+                Navigator.pop(dialogContext, _TimelineActivationChoice.sort),
+            child: Text(l10n.d('Sorteren en tijdlijn maken')),
           ),
-        ],
-      ),
-    );
-    if (!context.mounted || proceed != true) return null;
-  }
-  final result = sorter.sortSource(
-    gfm,
-    columnIndex: column,
-    kind: kind,
-    direction: ascending
-        ? TableSortDirection.ascending
-        : TableSortDirection.descending,
+      ],
+    ),
   );
-  return result.changed ? result.source : null;
 }

@@ -1671,6 +1671,33 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Níl luach oird inaitheanta ag na marcóirí. Fanann siad infheicthe.',
+  'Tijdlijn · vervolg': 'Amlíne · leanúint',
+  'Aflopend': 'íslitheach',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Níl na luachanna sa cholún ordaithe ag dul suas.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Níl an amlíne seo críochnaithe go fóill. Coigeartaigh an tábla nó taispeáin é mar ghnáththábla.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Oibríonn amlíne le dhá nó trí cholún. Coigeartaigh an tábla nó taispeáin é mar ghnáththábla.',
+  'Huidige volgorde behouden': 'Coinnigh an t-ordú reatha',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Tá imeachtaí folamh fós le feiceáil. Seiceáil ró:',
+  'Niet-herkende waarden': 'Luachanna neamhaitheanta',
+  'Oplopend': 'Ag dul suas',
+  'Sorteren als…': 'Sórtáil mar…',
+  'Sorteren en tijdlijn maken': 'Sórtáil agus cruthaigh amlíne',
+  'Sorteren toepassen': 'Cuir sórtáil i bhfeidhm',
+  'Tijdlijn maken': 'Cruthaigh amlíne',
+  'Tijdlijn maken?': 'Cruthaigh amlíne?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Cuir imeacht amháin ar a laghad leis nó taispeáin mar tábla rialta é.',
+  'Waarden bekijken': 'Féach ar luachanna',
+  'gebeurtenissen gevonden.': 'imeachtaí aimsithe.',
+  'waarden herkend.': 'luachanna aitheanta.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'luachanna nach n-aithnítear. Fanann na sraitheanna sin ag bun an ord reatha.',
   'Als tabel weergeven': 'Taispeáin mar tábla',
   'Als tijdlijn weergeven': 'Taispeáin mar amlíne',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1679,8 +1706,6 @@ const _dutchSourceAddGa = <String, String>{
       'Níl aon luachanna sa cholún seo is féidir a shórtáil ar an mbealach seo.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ní féidir an tábla seo a thaispeáint mar amlíne go fóill agus níl aon athrú air.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Ní aithnítear cuid de na luachanna. Fanann na sraitheanna sin le chéile ag an mbun; ní athraíonn a n-ábhar.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Oibríonn amlíne le dhá nó trí cholún. Níl aon athrú ar an tábla seo.',
   'Gebeurtenis': 'Imeacht',
@@ -1692,7 +1717,6 @@ const _dutchSourceAddGa = <String, String>{
   'Sorteren met aandachtspunten?': 'Sórtáil de réir pointí spéise?',
   'Tijd': 'Am',
   'Tijdlijn bekijken': 'Féach ar an amlíne',
-  'Toch sorteren': 'Fós ag sórtáil',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Cuir imeacht amháin ar a laghad leis ar dtús. Níl aon athrú ar an tábla seo.',
   'Alles': 'Uile',

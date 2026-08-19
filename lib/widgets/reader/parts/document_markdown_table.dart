@@ -39,12 +39,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
       // opnieuw opgebouwd, zodat de kolombreedtes meebewegen met wat je typt.
       return TableEditScaffold(
         editor: editor,
-        onSortAscending: onSortTableColumn == null
-            ? null
-            : (column) => onSortTableColumn!(column, true),
-        onSortDescending: onSortTableColumn == null
-            ? null
-            : (column) => onSortTableColumn!(column, false),
+        onSort: onSortTableColumn,
         builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),
       );
     }

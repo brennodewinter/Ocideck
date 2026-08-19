@@ -1660,6 +1660,33 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Il-markaturi m’għandhom l-ebda valur ta’ ordni rikonoxxibbli. Huma jibqgħu viżibbli.',
+  'Tijdlijn · vervolg': 'Kronoloġija · kontinwazzjoni',
+  'Aflopend': 'Dixxendenti',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Il-valuri fil-kolonna tal-ordni mhumiex axxendenti.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Din il-kalendarju għadu mhux komplut. Aġġusta t-tabella jew uriha bħala tabella normali.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Kronoloġija taħdem b\'żewġ jew tliet kolonni. Aġġusta t-tabella jew uriha bħala tabella normali.',
+  'Huidige volgorde behouden': 'Żomm l-ordni kurrenti',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'L-avvenimenti vojta jibqgħu viżibbli. Iċċekkja ringiela:',
+  'Niet-herkende waarden': 'Valuri mhux rikonoxxuti',
+  'Oplopend': 'Jogħla',
+  'Sorteren als…': 'Issortja bħala...',
+  'Sorteren en tijdlijn maken': 'Issortja u oħloq timeline',
+  'Sorteren toepassen': 'Applika issortjar',
+  'Tijdlijn maken': 'Oħloq timeline',
+  'Tijdlijn maken?': 'Oħloq skeda tal-ħin?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Żid mill-inqas avveniment wieħed jew uriha bħala tabella regolari.',
+  'Waarden bekijken': 'Ara l-valuri',
+  'gebeurtenissen gevonden.': 'avvenimenti misjuba.',
+  'waarden herkend.': 'valuri rikonoxxuti.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'valuri mhux rikonoxxuti. Dawk ir-ringieli jibqgħu fil-qiegħ fl-ordni attwali tagħhom.',
   'Als tabel weergeven': 'Wiri bħala tabella',
   'Als tijdlijn weergeven': 'Uri bħala timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1668,8 +1695,6 @@ const _dutchSourceAddMt = <String, String>{
       'Din il-kolonna għadha ma fiha l-ebda valuri li jistgħu jiġu magħżula b\'dan il-mod.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Din it-tabella għadha ma tistax tintwera bħala skeda tal-ħin u tibqa\' l-istess.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Xi wħud mill-valuri mhumiex rikonoxxuti. Dawk ir-ringieli jibqgħu flimkien fil-qiegħ; il-kontenut tagħhom ma jinbidilx.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Kronoloġija taħdem b\'żewġ jew tliet kolonni. Din it-tabella tibqa\' l-istess.',
   'Gebeurtenis': 'Avveniment',
@@ -1680,7 +1705,6 @@ const _dutchSourceAddMt = <String, String>{
   'Sorteren met aandachtspunten?': 'Issortja skond il-punti ta\' interess?',
   'Tijd': 'Ħin',
   'Tijdlijn bekijken': 'Ara l-kronoloġija',
-  'Toch sorteren': 'Għadhom issortjar',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'L-ewwel żid mill-inqas avveniment wieħed. Din it-tabella tibqa\' l-istess.',
   'Alles': 'Kollha',

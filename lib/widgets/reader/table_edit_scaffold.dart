@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart' show TableAlign;
 import 'table_edit_controller.dart';
+
+enum TableSortIntent { ascending, descending, choose }
 
 /// Zet de invulbare tabel in zijn omhulsel: hij tekent opnieuw wanneer de
 /// structuur wijzigt, en toont een werkbalk zodra de cursor in een cel staat.
@@ -17,8 +20,7 @@ class TableEditScaffold extends StatelessWidget {
     super.key,
     required this.editor,
     required this.builder,
-    this.onSortAscending,
-    this.onSortDescending,
+    this.onSort,
   });
 
   final TableEditController editor;
@@ -28,8 +30,7 @@ class TableEditScaffold extends StatelessWidget {
   /// een tabel die niet hertekent zou tijdens het typen op de oude maten
   /// blijven staan.
   final WidgetBuilder builder;
-  final void Function(int column)? onSortAscending;
-  final void Function(int column)? onSortDescending;
+  final void Function(int column, TableSortIntent intent)? onSort;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +39,36 @@ class TableEditScaffold extends StatelessWidget {
       builder: (context, _) {
         final active = editor.activeCell;
         _restorePendingFocus();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (active != null) _toolbar(context, active),
-            builder(context),
-          ],
+        return CallbackShortcuts(
+          bindings: active == null || onSort == null
+              ? const {}
+              : {
+                  SingleActivator(
+                    LogicalKeyboardKey.arrowUp,
+                    alt: true,
+                    shift: true,
+                  ): () =>
+                      onSort!(active.col, TableSortIntent.ascending),
+                  SingleActivator(
+                    LogicalKeyboardKey.arrowDown,
+                    alt: true,
+                    shift: true,
+                  ): () =>
+                      onSort!(active.col, TableSortIntent.descending),
+                  SingleActivator(
+                    LogicalKeyboardKey.keyS,
+                    alt: true,
+                    shift: true,
+                  ): () =>
+                      onSort!(active.col, TableSortIntent.choose),
+                },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (active != null) _toolbar(context, active),
+              builder(context),
+            ],
+          ),
         );
       },
     );
@@ -78,6 +103,8 @@ class TableEditScaffold extends StatelessWidget {
         // (14px, zichtbaar als de rood-gele streep). Nu vouwt hij naar een
         // tweede regel en houdt hij zich aan de breedte die er is.
         child: Wrap(
+          spacing: 0,
+          runSpacing: 2,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             _button(
@@ -122,14 +149,26 @@ class TableEditScaffold extends StatelessWidget {
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom oplopend sorteren'),
-              onSortAscending == null ? null : () => onSortAscending!(at.col),
+              onSort == null
+                  ? null
+                  : () => onSort!(at.col, TableSortIntent.ascending),
             ),
             _button(
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom aflopend sorteren'),
-              onSortDescending == null ? null : () => onSortDescending!(at.col),
+              onSort == null
+                  ? null
+                  : () => onSort!(at.col, TableSortIntent.descending),
               descending: true,
+            ),
+            _button(
+              context,
+              Icons.tune,
+              l10n.d('Sorteren als…'),
+              onSort == null
+                  ? null
+                  : () => onSort!(at.col, TableSortIntent.choose),
             ),
             _divider(theme),
             _button(

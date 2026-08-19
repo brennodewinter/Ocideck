@@ -42,6 +42,28 @@ void main() {
       .map((e) => (e.renderObject! as RenderBox).size)
       .toList();
 
+  bool hasVisibleInstance(WidgetTester tester, Finder finder) {
+    for (final element in finder.evaluate()) {
+      final render = element.renderObject;
+      if (render is! RenderBox || !render.hasSize) continue;
+      Element? page;
+      element.visitAncestorElements((ancestor) {
+        if (ancestor.widget.key == const Key('document-page-window')) {
+          page = ancestor;
+          return false;
+        }
+        return true;
+      });
+      final pageRender = page?.renderObject;
+      if (pageRender is! RenderBox || !pageRender.hasSize) continue;
+      final itemRect = render.localToGlobal(Offset.zero) & render.size;
+      final pageRect = pageRender.localToGlobal(Offset.zero) & pageRender.size;
+      final visible = itemRect.intersect(pageRect);
+      if (visible.width > 1 && visible.height > 1) return true;
+    }
+    return false;
+  }
+
   testWidgets('een korte tekst wordt één vel op de gekozen maat', (
     tester,
   ) async {
@@ -74,6 +96,82 @@ void main() {
       greaterThan(1),
       reason: 'zestig alinea\'s passen niet op een enkele A4',
     );
+  });
+
+  testWidgets(
+    'een tijdlijnvervolg tekent de rail opnieuw en benoemt het vervolg',
+    (tester) async {
+      final events = List.generate(
+        19,
+        (i) =>
+            '| 2026-0${i + 1} | Gebeurtenis $i met een uitvoerige toelichting '
+            'die de kaart voldoende hoogte geeft om de tijdlijn over meerdere '
+            'bladzijden te verdelen. |',
+      ).join('\n');
+      await pumpDoc(
+        tester,
+        '<!-- timeline -->\n'
+        '| Tijd | Gebeurtenis |\n'
+        '| --- | --- |\n'
+        '$events',
+        size: const PageSizeSpec(series: PaperSeries.a, number: 6),
+        margins: const PageMargins(
+          topMm: 10,
+          rightMm: 10,
+          bottomMm: 10,
+          leftMm: 10,
+        ),
+      );
+
+      final pages = find.byKey(const Key('document-page-window'));
+      final continuations = find.byKey(
+        const Key('document-timeline-continuation'),
+      );
+      expect(pages.evaluate().length, greaterThan(1));
+      expect(continuations, findsWidgets);
+      for (var i = 0; i < 19; i++) {
+        final event = find.textContaining('Gebeurtenis $i');
+        expect(event, findsWidgets);
+        expect(
+          hasVisibleInstance(tester, event),
+          isTrue,
+          reason: 'Gebeurtenis $i moet in minstens één paginavenster staan',
+        );
+      }
+      expect(
+        find.descendant(
+          of: continuations.first,
+          matching: find.text('Tijdlijn · vervolg'),
+        ),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('ook een uitzonderlijk hoge kaart benoemt ieder vervolgvel', (
+    tester,
+  ) async {
+    final detail = List.generate(80, (i) => 'bewijsregel $i').join('<br>');
+    await pumpDoc(
+      tester,
+      '<!-- timeline -->\n'
+      '| Tijd | Gebeurtenis |\n'
+      '| --- | --- |\n'
+      '| 12:02 | $detail |',
+      size: const PageSizeSpec(series: PaperSeries.a, number: 6),
+      margins: const PageMargins(
+        topMm: 10,
+        rightMm: 10,
+        bottomMm: 10,
+        leftMm: 10,
+      ),
+    );
+
+    expect(
+      find.byKey(const Key('document-timeline-continuation')),
+      findsAtLeastNWidgets(2),
+    );
+    expect(find.textContaining('bewijsregel 79'), findsWidgets);
   });
 
   testWidgets('de paginamaat volgt de instelling', (tester) async {

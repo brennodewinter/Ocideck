@@ -39,6 +39,8 @@ class DocumentDeckBridge {
     String title = '',
   }) {
     final lines = body.split('\n');
+    final rawLines = _ExactLineRanges(body);
+
     final slides = <Slide>[];
     final flow = <String>[];
 
@@ -71,28 +73,31 @@ class DocumentDeckBridge {
       // `tableRows` houdt dezelfde inhoud beschikbaar voor tabelweergave en
       // OciWacht-kolomcontext. De marker los in flow zetten zou bij terugkeer
       // een lege regel invoegen en daarmee zijn betekenis verliezen.
-      if (trimmed == documentTimelineMarker &&
-          i + 2 < lines.length &&
-          isMarkdownTableLine(lines[i + 1]) &&
-          isMarkdownTableDelimiterRow(lines[i + 2])) {
+      if (isDocumentTimelineEnvelope(
+        line,
+        i + 1 < lines.length ? lines[i + 1] : null,
+        i + 2 < lines.length ? lines[i + 2] : null,
+      )) {
         flushFlow();
-        final tableLines = <String>[lines[i + 1], lines[i + 2]];
         var j = i + 3;
         while (j < lines.length && isMarkdownTableLine(lines[j])) {
-          tableLines.add(lines[j]);
           j++;
         }
-        final markedSource = [line, ...tableLines].join('\n');
-        final analysis = analyzeMarkedTimeline(markedSource);
-        if (analysis.isUsable) {
-          slides.add(
-            Slide.create(
-              SlideType.freeMarkdown,
-            ).copyWith(customMarkdown: markedSource),
-          );
-          i = j;
-          continue;
-        }
+        final markedSource = rawLines.slice(i, j);
+        // Ook een nog onbruikbare tijdlijn blijft één bronblok. De visuele
+        // editor laat de gebruiker zo'n tabel herstellen; de bridge mag vóór
+        // dat herstel de marker niet losmaken of de tabel normaliseren.
+        slides.add(
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            customMarkdown: markedSource,
+            // Schaduwstructuur voor OciWacht: de uitvoer blijft de rauwe
+            // customMarkdown, maar kolomkopcontext en bulkregels moeten ook
+            // voor een nog onbruikbare tijdlijn beschikbaar blijven.
+            tableRows: decodeMarkdownTableRows(lines.sublist(i + 1, j)),
+          ),
+        );
+        i = j;
+        continue;
       }
 
       // Kop: nieuwe sectie. De kopregel blijft verbatim in het dia-lichaam, dus
@@ -183,10 +188,42 @@ class DocumentDeckBridge {
     for (final slide in deck.slides) {
       final body = _slideBody(slide);
       if (body.trim().isNotEmpty) {
-        parts.add(analyzeMarkedTimeline(body).isUsable ? body : body.trim());
+        final atomicTimeline = startsWithDocumentTimelineEnvelope(body);
+        parts.add(atomicTimeline ? body : body.trim());
       }
     }
     return '${parts.join('\n\n')}\n';
+  }
+}
+
+/// Levert exacte bronregels inclusief hun interne LF/CRLF-scheidingen.
+///
+/// De offsetindex ontstaat lui: gewone documenten zonder tijdlijn betalen niet
+/// voor een tweede lijst naast de reeds gesplitste parserregels.
+class _ExactLineRanges {
+  _ExactLineRanges(this.source);
+
+  final String source;
+  List<int>? _starts;
+
+  String slice(int start, int end) {
+    final starts = _starts ??= _index();
+    var endOffset = end < starts.length ? starts[end] - 1 : source.length;
+    // Bij CRLF hoort de CR bij dezelfde regelscheiding als de LF. Interne
+    // scheidingen blijven staan; alleen die ná de laatste rij hoort niet bij
+    // het atomaire blok.
+    if (endOffset > starts[start] && source.codeUnitAt(endOffset - 1) == 13) {
+      endOffset--;
+    }
+    return source.substring(starts[start], endOffset);
+  }
+
+  List<int> _index() {
+    final result = <int>[0];
+    for (var offset = 0; offset < source.length; offset++) {
+      if (source.codeUnitAt(offset) == 10) result.add(offset + 1);
+    }
+    return result;
   }
 }
 

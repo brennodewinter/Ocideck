@@ -1644,6 +1644,33 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markierige händ kei erkennbare Ordnigswärt. Si blibed sichtbar.',
+  'Tijdlijn · vervolg': 'Zytlinie · Fortsetzig',
+  'Aflopend': 'Absteigend',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Die Werte in der Bestellspalte sind nicht aufsteigend.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Diese Zeitleiste ist noch nicht vollständig. Passen Sie die Tabelle an oder zeigen Sie sie als normale Tabelle an.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Eine Zeitleiste funktioniert mit zwei oder drei Spalten. Passen Sie die Tabelle an oder zeigen Sie sie als normale Tabelle an.',
+  'Huidige volgorde behouden': 'Behalten Sie die aktuelle Reihenfolge bei',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Leere Ereignisse bleiben sichtbar. Zeile prüfen:',
+  'Niet-herkende waarden': 'Nicht erkannte Werte',
+  'Oplopend': 'Aufsteigend',
+  'Sorteren als…': 'Sortieren als…',
+  'Sorteren en tijdlijn maken': 'Sortieren und erstellen Sie eine Zeitleiste',
+  'Sorteren toepassen': 'Sortierung anwenden',
+  'Tijdlijn maken': 'Zeitleiste erstellen',
+  'Tijdlijn maken?': 'Eine Zeitleiste erstellen?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Fügen Sie mindestens ein Ereignis hinzu oder zeigen Sie es als reguläre Tabelle an.',
+  'Waarden bekijken': 'Werte ansehen',
+  'gebeurtenissen gevonden.': 'Ereignisse gefunden.',
+  'waarden herkend.': 'Werte anerkannt.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'Werte nicht erkannt. Diese Zeilen bleiben in ihrer aktuellen Reihenfolge unten.',
   'Als tabel weergeven': 'Als Tabälle aazeige',
   'Als tijdlijn weergeven': 'Als Ziitachse aazeige',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1652,8 +1679,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Spalte hät no kei Wärt, wo mer so sortiere cha.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Die Tabälle cha no nöd als Ziitachse aazeigt werde und bliibt unveränderet.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'En Teil vo de Wärt wird nöd erkännt. Die Zeile blibed unte zäme; ihr Inhalt wird nöd verändert.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'E Ziitachse bruucht zwei oder drei Spalte. Die Tabälle bliibt unveränderet.',
   'Gebeurtenis': 'Ereignis',
@@ -1664,7 +1689,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortiere mit Hiwiis?',
   'Tijd': 'Ziit',
   'Tijdlijn bekijken': 'Ziitachse aaluege',
-  'Toch sorteren': 'Trotzdem sortiere',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Füeg zersch mindestens eis Ereignis dezue. Die Tabälle bliibt unveränderet.',
   'Alles': 'Alli',

@@ -1666,6 +1666,33 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Οι δείκτες δεν έχουν αναγνωρίσιμη τιμή σειράς. Παραμένουν ορατοί.',
+  'Tijdlijn · vervolg': 'Χρονογραμμή · συνέχεια',
+  'Aflopend': 'Φθίνων',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Οι τιμές στη στήλη παραγγελίας δεν είναι αύξουσες.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Αυτό το χρονοδιάγραμμα δεν έχει ακόμη ολοκληρωθεί. Προσαρμόστε τον πίνακα ή εμφανίστε τον ως κανονικό πίνακα.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Μια γραμμή χρόνου λειτουργεί με δύο ή τρεις στήλες. Προσαρμόστε τον πίνακα ή εμφανίστε τον ως κανονικό πίνακα.',
+  'Huidige volgorde behouden': 'Διατήρηση της τρέχουσας παραγγελίας',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Τα κενά συμβάντα παραμένουν ορατά. Έλεγχος σειράς:',
+  'Niet-herkende waarden': 'Μη αναγνωρισμένες αξίες',
+  'Oplopend': 'Αύξουσα',
+  'Sorteren als…': 'Ταξινόμηση ως…',
+  'Sorteren en tijdlijn maken': 'Ταξινόμηση και δημιουργία χρονολογίου',
+  'Sorteren toepassen': 'Εφαρμογή ταξινόμησης',
+  'Tijdlijn maken': 'Δημιουργήστε χρονοδιάγραμμα',
+  'Tijdlijn maken?': 'Δημιουργία χρονοδιαγράμματος;',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Προσθέστε τουλάχιστον ένα συμβάν ή εμφανίστε το ως κανονικό πίνακα.',
+  'Waarden bekijken': 'Προβολή τιμών',
+  'gebeurtenissen gevonden.': 'γεγονότα που βρέθηκαν.',
+  'waarden herkend.': 'αξίες που αναγνωρίζονται.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν στο κάτω μέρος με την τρέχουσα σειρά τους.',
   'Als tabel weergeven': 'Εμφάνιση ως πίνακα',
   'Als tijdlijn weergeven': 'Εμφάνιση ως χρονοδιάγραμμα',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1674,8 +1701,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτή η στήλη δεν περιέχει ακόμη τιμές που μπορούν να ταξινομηθούν με αυτόν τον τρόπο.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Αυτός ο πίνακας δεν μπορεί ακόμη να εμφανιστεί ως χρονοδιάγραμμα και παραμένει αμετάβλητος.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Ορισμένες από τις τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν μαζί στο κάτω μέρος. το περιεχόμενό τους δεν αλλάζει.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Μια γραμμή χρόνου λειτουργεί με δύο ή τρεις στήλες. Αυτός ο πίνακας παραμένει αμετάβλητος.',
   'Gebeurtenis': 'Συμβάν',
@@ -1687,7 +1712,6 @@ const _dutchSourceAddEl = <String, String>{
   'Sorteren met aandachtspunten?': 'Ταξινόμηση κατά σημεία ενδιαφέροντος;',
   'Tijd': 'Φορά',
   'Tijdlijn bekijken': 'Προβολή χρονολογίου',
-  'Toch sorteren': 'Ακόμα διαλογή',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Προσθέστε πρώτα τουλάχιστον ένα συμβάν. Αυτός ο πίνακας παραμένει αμετάβλητος.',
   'Alles': 'Όλα',

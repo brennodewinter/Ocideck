@@ -173,6 +173,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     // op paginabreedte kloppen ze, daarbuiten worden ze niet getekend.
     documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
+    onDiscreteVisualEdit: () => _expectVisualInsert = true,
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,

@@ -40,6 +40,8 @@ import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
+import '../document_timeline.dart';
+import '../markdown_table_codec.dart';
 import 'dismissal_codec.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
@@ -67,6 +69,7 @@ import 'privacy_secret_rules.dart';
 part 'privacy_scanner_detectors.dart';
 part 'privacy_scanner_fragments.dart';
 part 'privacy_scanner_dismissals.dart';
+part 'privacy_timeline_context.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
 /// Eén doorzoekbaar tekstveld.
@@ -77,7 +80,20 @@ part 'privacy_scanner_dismissals.dart';
 /// eronder is de gebruikelijkste manier om ze in een deck te zetten — en de
 /// poort keek alleen binnen het fragment zelf, dus die kolomkop kon per
 /// definitie nooit meetellen.
-typedef _Fragment = ({String field, int index, String text, String context});
+typedef _Fragment = ({String field, int index, String text, Object context});
+
+/// Kolomkopcontext voor een treffer in een atomair tijdlijnblok.
+///
+/// De scanner moet het volledige `customMarkdown`-veld scannen, omdat alleen
+/// dan de gevonden bereiken rechtstreeks in datzelfde uitvoerveld kunnen
+/// worden geredigeerd. Deze helper herleidt de positie tegelijk naar de juiste
+/// GFM-kolom; een losse `tableRows`-scan zou wel context geven maar de redactie
+/// in een schaduwveld laten landen.
+String _fragmentContextAt(_Fragment fragment, int matchStart) {
+  final context = fragment.context;
+  if (context is String) return context;
+  return context is _TimelineContextIndex ? context.at(matchStart) : '';
+}
 
 /// Leest een deck na op privacygevoelige gegevens.
 class PrivacyScanner {
@@ -540,7 +556,7 @@ class PrivacyScanner {
               fragment.text,
               match.start,
               rule.contextWords,
-              context: fragment.context,
+              context: _fragmentContextAt(fragment, match.start),
             )) {
           continue;
         }
@@ -586,7 +602,7 @@ class PrivacyScanner {
               fragment.text,
               match.start,
               rule.contextWords,
-              context: fragment.context,
+              context: _fragmentContextAt(fragment, match.start),
             )) {
           continue;
         }
@@ -805,7 +821,7 @@ class PrivacyScanner {
         fragment.text,
         match.start,
         bsnContextWords,
-        context: fragment.context,
+        context: _fragmentContextAt(fragment, match.start),
       );
       _emit(
         out,

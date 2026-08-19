@@ -34,13 +34,12 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
     if (fenced) continue;
     var supportedTimeline = false;
     if (line.trim() == documentTimelineMarker) {
-      var end = index + 1;
-      while (end < lines.length && lines[end].trimLeft().startsWith('|')) {
-        end++;
-      }
-      supportedTimeline = analyzeMarkedTimeline(
-        lines.sublist(index, end).join('\n'),
-      ).isUsable;
+      final header = index + 1 < lines.length ? lines[index + 1] : null;
+      final delimiter = index + 2 < lines.length ? lines[index + 2] : null;
+      // Ook een gemarkeerde tabel die nog niet geschikt is blijft één visueel
+      // embed. Zo kan de gebruiker hem in de gewone tabeleditor herstellen;
+      // terugvallen naar bronmodus zou juist de vriendelijke foutweg wegnemen.
+      supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
     }
     if (!tocMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&

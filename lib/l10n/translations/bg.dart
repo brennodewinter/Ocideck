@@ -1661,6 +1661,33 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Маркерите нямат разпознаваема стойност за подреждане. Остават видими.',
+  'Tijdlijn · vervolg': 'Времева линия · продължение',
+  'Aflopend': 'Спускане',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Стойностите в колоната за поръчка не са възходящи.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Тази времева линия все още не е завършена. Коригирайте таблицата или я покажете като нормална таблица.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Времевата линия работи с две или три колони. Коригирайте таблицата или я покажете като нормална таблица.',
+  'Huidige volgorde behouden': 'Запазване на текущия ред',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Празните събития остават видими. Проверете ред:',
+  'Niet-herkende waarden': 'Неразпознати стойности',
+  'Oplopend': 'Възходящо',
+  'Sorteren als…': 'Сортирай като...',
+  'Sorteren en tijdlijn maken': 'Сортирайте и създайте времева линия',
+  'Sorteren toepassen': 'Прилагане на сортиране',
+  'Tijdlijn maken': 'Създайте времева линия',
+  'Tijdlijn maken?': 'Създаване на времева линия?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Добавете поне едно събитие или го покажете като обикновена таблица.',
+  'Waarden bekijken': 'Преглед на стойности',
+  'gebeurtenissen gevonden.': 'намерени събития.',
+  'waarden herkend.': 'признати ценности.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'неразпознати стойности. Тези редове остават най-отдолу в текущия си ред.',
   'Als tabel weergeven': 'Показване като таблица',
   'Als tijdlijn weergeven': 'Показване като времева линия',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1669,8 +1696,6 @@ const _dutchSourceAddBg = <String, String>{
       'Тази колона все още не съдържа никакви стойности, които могат да бъдат сортирани по този начин.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Тази таблица все още не може да бъде показана като времева линия и остава непроменена.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Някои от стойностите не се разпознават. Тези редове остават заедно в долната част; тяхното съдържание не се променя.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Времевата линия работи с две или три колони. Тази таблица остава непроменена.',
   'Gebeurtenis': 'Събитие',
@@ -1681,7 +1706,6 @@ const _dutchSourceAddBg = <String, String>{
   'Sorteren met aandachtspunten?': 'Сортиране по точки на интерес?',
   'Tijd': 'време',
   'Tijdlijn bekijken': 'Преглед на времевата линия',
-  'Toch sorteren': 'Все още сортирам',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Първо добавете поне едно събитие. Тази таблица остава непроменена.',
   'Alles': 'Всички',

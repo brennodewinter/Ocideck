@@ -674,6 +674,33 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Les marqueurs n’ont pas de valeur d’ordre reconnaissable. Ils restent visibles.',
+  'Tijdlijn · vervolg': 'Chronologie · suite',
+  'Aflopend': 'Descendant',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Les valeurs dans la colonne d\'ordre ne sont pas croissantes.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Cette chronologie n\'est pas encore terminée. Ajustez le tableau ou affichez-le comme un tableau normal.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Une chronologie fonctionne avec deux ou trois colonnes. Ajustez le tableau ou affichez-le comme un tableau normal.',
+  'Huidige volgorde behouden': 'Conserver la commande en cours',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Les événements vides restent visibles. Vérifiez la ligne :',
+  'Niet-herkende waarden': 'Valeurs méconnues',
+  'Oplopend': 'Ascendant',
+  'Sorteren als…': 'Trier comme…',
+  'Sorteren en tijdlijn maken': 'Trier et créer une chronologie',
+  'Sorteren toepassen': 'Appliquer le tri',
+  'Tijdlijn maken': 'Créer une chronologie',
+  'Tijdlijn maken?': 'Créer une chronologie ?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Ajoutez au moins un événement ou affichez-le sous forme de tableau standard.',
+  'Waarden bekijken': 'Afficher les valeurs',
+  'gebeurtenissen gevonden.': 'événements trouvés.',
+  'waarden herkend.': 'valeurs reconnues.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'valeurs non reconnues. Ces lignes restent en bas dans leur ordre actuel.',
   'Als tabel weergeven': 'Afficher sous forme de tableau',
   'Als tijdlijn weergeven': 'Afficher sous forme de chronologie',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -682,8 +709,6 @@ const _dutchSourceAddFr = {
       'Cette colonne ne contient pas encore de valeurs pouvant être triées de cette manière.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ce tableau ne peut pas encore être affiché sous forme de chronologie et reste inchangé.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Certaines valeurs ne sont pas reconnues. Ces lignes restent ensemble en bas ; leur contenu ne change pas.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Une chronologie fonctionne avec deux ou trois colonnes. Ce tableau reste inchangé.',
   'Gebeurtenis': 'Événement',
@@ -695,7 +720,6 @@ const _dutchSourceAddFr = {
   'Sorteren met aandachtspunten?': 'Trier par points d\'intérêt ?',
   'Tijd': 'Temps',
   'Tijdlijn bekijken': 'Afficher la chronologie',
-  'Toch sorteren': 'Toujours en train de trier',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Ajoutez d’abord au moins un événement. Ce tableau reste inchangé.',
   'Alles': 'Tout',

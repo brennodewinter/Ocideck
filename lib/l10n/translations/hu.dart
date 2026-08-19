@@ -1643,6 +1643,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'A jelölőknek nincs felismerhető rendezési értékük. Láthatók maradnak.',
+  'Tijdlijn · vervolg': 'Idővonal · folytatás',
+  'Aflopend': 'Csökkenő',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'A sorrend oszlopban szereplő értékek nem növekvőek.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Ez az idővonal még nem teljes. Állítsa be a táblázatot, vagy mutassa meg normál táblázatként.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Az idővonal két vagy három oszloppal működik. Állítsa be a táblázatot, vagy mutassa meg normál táblázatként.',
+  'Huidige volgorde behouden': 'Tartsa meg a jelenlegi sorrendet',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Az üres események láthatók maradnak. Ellenőrző sor:',
+  'Niet-herkende waarden': 'Fel nem ismert értékek',
+  'Oplopend': 'Emelkedő',
+  'Sorteren als…': 'Rendezés mint…',
+  'Sorteren en tijdlijn maken': 'Rendezés és idővonal létrehozása',
+  'Sorteren toepassen': 'Rendezés alkalmazása',
+  'Tijdlijn maken': 'Idővonal létrehozása',
+  'Tijdlijn maken?': 'Idővonalat hoz létre?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Adjon hozzá legalább egy eseményt, vagy jelenítse meg normál táblázatként.',
+  'Waarden bekijken': 'Értékek megtekintése',
+  'gebeurtenissen gevonden.': 'talált események.',
+  'waarden herkend.': 'elismert értékek.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'az értékeket nem ismerik fel. Ezek a sorok a jelenlegi sorrendben alul maradnak.',
   'Als tabel weergeven': 'Megjelenítés táblázatként',
   'Als tijdlijn weergeven': 'Megjelenítés idővonalként',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1651,8 +1678,6 @@ const _dutchSourceAddHu = <String, String>{
       'Ez az oszlop még nem tartalmaz ilyen módon rendezhető értékeket.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Ez a táblázat még nem jeleníthető meg idővonalként, és változatlan marad.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Egyes értékeket nem ismerünk fel. Ezek a sorok együtt maradnak alul; tartalmuk nem változik.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Az idővonal két vagy három oszloppal működik. Ez a táblázat változatlan marad.',
   'Gebeurtenis': 'Esemény',
@@ -1664,7 +1689,6 @@ const _dutchSourceAddHu = <String, String>{
   'Sorteren met aandachtspunten?': 'Rendezés érdekességek szerint?',
   'Tijd': 'Idő',
   'Tijdlijn bekijken': 'Idővonal megtekintése',
-  'Toch sorteren': 'Még mindig válogat',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Először adjon hozzá legalább egy eseményt. Ez a táblázat változatlan marad.',
   'Alles': 'Mind',

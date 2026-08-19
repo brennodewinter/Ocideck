@@ -114,6 +114,8 @@ class _DocEditorToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final scheme = Theme.of(context).colorScheme;
+    final compactForLargeText =
+        MediaQuery.textScalerOf(context).scale(14) >= 21;
     return Container(
       color: scheme.surface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -208,15 +210,26 @@ class _DocEditorToolbar extends StatelessWidget {
                       const SizedBox(width: 4),
                       _styleMenu(l10n),
                       const SizedBox(width: 4),
-                      TextButton.icon(
-                        onPressed: onExport,
-                        icon: const Icon(Icons.ios_share, size: 16),
-                        label: Text(l10n.d('Exporteren…')),
-                      ),
+                      if (!compactForLargeText)
+                        TextButton.icon(
+                          onPressed: onExport,
+                          icon: const Icon(Icons.ios_share, size: 16),
+                          label: Text(l10n.d('Exporteren…')),
+                        ),
                     ],
                   ),
                 ),
               ),
+              // Bij grote systeemtekst blijft de essentiële uitvoeractie als
+              // compact pictogram buiten de horizontaal schuivende rij. Een
+              // uitgeschoven tekstknop verdween daar rechts zonder zichtbare
+              // scrollaanwijzing; de tooltip en semantics houden het label.
+              if (compactForLargeText)
+                IconButton(
+                  tooltip: l10n.d('Exporteren…'),
+                  onPressed: onExport,
+                  icon: const Icon(Icons.ios_share, size: 18),
+                ),
               // Het overloopmenu staat buiten de schuivende rij: het is de
               // enige route naar Instellingen in documentmodus, en meeschuiven
               // maakte hem onbereikbaar zodra er een knop bij kwam en de rij

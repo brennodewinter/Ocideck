@@ -674,6 +674,33 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markearrings hawwe gjin werkenbere folchoardwearde. Se bliuwe sichtber.',
+  'Tijdlijn · vervolg': 'Tiidline · ferfolch',
+  'Aflopend': 'Descending',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'De wearden yn \'e folchoarderkolom binne net oprinnend.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Dizze tiidline is noch net kompleet. Pas de tabel oan of lit it sjen as in normale tabel.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'In tiidline wurket mei twa of trije kolommen. Pas de tabel oan of lit it sjen as in normale tabel.',
+  'Huidige volgorde behouden': 'Hâld aktuele oarder',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Lege eveneminten bliuwe sichtber. Kontrolearje rige:',
+  'Niet-herkende waarden': 'Net erkende wearden',
+  'Oplopend': 'Ascending',
+  'Sorteren als…': 'Sortearje as...',
+  'Sorteren en tijdlijn maken': 'Sortearje en meitsje tiidline',
+  'Sorteren toepassen': 'Sortearje tapasse',
+  'Tijdlijn maken': 'Meitsje tiidline',
+  'Tijdlijn maken?': 'In tiidline oanmeitsje?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Foegje op syn minst ien evenemint ta of lit it sjen as in gewoane tafel.',
+  'Waarden bekijken': 'Besjoch wearden',
+  'gebeurtenissen gevonden.': 'eveneminten fûn.',
+  'waarden herkend.': 'wearden erkend.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'wearden net erkend. Dy rigen bliuwe ûnderoan yn harren hjoeddeistige folchoarder.',
   'Als tabel weergeven': 'Lit sjen as tabel',
   'Als tijdlijn weergeven': 'Lit sjen as tiidline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -682,8 +709,6 @@ const _dutchSourceAddFy = {
       'Dizze kolom befettet noch gjin wearden dy\'t op dizze manier kinne wurde sorteare.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Dizze tabel kin noch net werjûn wurde as in tiidline en bliuwt net feroare.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Guon fan \'e wearden wurde net erkend. Dy rigen bliuwe ûnderoan byinoar; harren ynhâld net feroarje.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'In tiidline wurket mei twa of trije kolommen. Dizze tabel bliuwt net feroare.',
   'Gebeurtenis': 'Barren',
@@ -694,7 +719,6 @@ const _dutchSourceAddFy = {
   'Sorteren met aandachtspunten?': 'Sortearje op punten fan belang?',
   'Tijd': 'Tiid',
   'Tijdlijn bekijken': 'Besjoch de tiidline',
-  'Toch sorteren': 'Noch sortearjen',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Foegje earst op syn minst ien evenemint ta. Dizze tabel bliuwt net feroare.',
   'Alles': 'Alles',

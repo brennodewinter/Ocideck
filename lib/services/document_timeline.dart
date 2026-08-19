@@ -9,6 +9,40 @@ export '../models/document_timeline.dart';
 /// gewone tabel in iedere Markdown-lezer.
 const documentTimelineMarker = '<!-- timeline -->';
 
+/// Of drie opeenvolgende regels de draagbare tijdlijn-envelop openen.
+///
+/// Dit zegt alleen dat marker en GFM-tabel atomair bij elkaar horen. Of de
+/// tabel ook twee of drie kolommen en gebeurtenissen heeft, is een afzonderlijk
+/// geschiktheidsoordeel van [analyzeMarkedTimeline].
+bool isDocumentTimelineEnvelope(
+  String markerLine,
+  String? headerLine,
+  String? delimiterLine,
+) =>
+    markerLine.trim() == documentTimelineMarker &&
+    headerLine != null &&
+    delimiterLine != null &&
+    isMarkdownTableLine(headerLine) &&
+    isMarkdownTableDelimiterRow(delimiterLine);
+
+/// Of [source] daadwerkelijk met marker, kop en scheidingsrij opent.
+///
+/// Eén gedeelde broncontrole voor bridge en privacylaag voorkomt zowel
+/// grammaticadrift als herhaald scannen van lange, gewone Markdownvelden.
+bool startsWithDocumentTimelineEnvelope(String source) {
+  final markerEnd = source.indexOf('\n');
+  if (markerEnd < 0) return false;
+  final headerEnd = source.indexOf('\n', markerEnd + 1);
+  if (headerEnd < 0) return false;
+  final delimiterEnd = source.indexOf('\n', headerEnd + 1);
+  if (delimiterEnd < 0) return false;
+  return isDocumentTimelineEnvelope(
+    source.substring(0, markerEnd),
+    source.substring(markerEnd + 1, headerEnd),
+    source.substring(headerEnd + 1, delimiterEnd),
+  );
+}
+
 /// Analyseert een kale GFM-tabel voor de tijdlijnweergave.
 ///
 /// Twee kolommen betekenen marker + gebeurtenis; een derde blijft als neutrale

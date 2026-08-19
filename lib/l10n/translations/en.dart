@@ -843,6 +843,33 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markers have no recognizable ordering value. They remain visible.',
+  'Tijdlijn · vervolg': 'Timeline · continuation',
+  'Aflopend': 'Descending',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'The values ​​in the order column are not ascending.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'This timeline is not yet complete. Adjust the table or show it as a normal table.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'A timeline works with two or three columns. Adjust the table or show it as a normal table.',
+  'Huidige volgorde behouden': 'Keep current order',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Empty events remain visible. Check row:',
+  'Niet-herkende waarden': 'Unrecognized values',
+  'Oplopend': 'Ascending',
+  'Sorteren als…': 'Sort as…',
+  'Sorteren en tijdlijn maken': 'Sort and create timeline',
+  'Sorteren toepassen': 'Apply sorting',
+  'Tijdlijn maken': 'Create timeline',
+  'Tijdlijn maken?': 'Create a timeline?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Add at least one event or show it as a regular table.',
+  'Waarden bekijken': 'View values',
+  'gebeurtenissen gevonden.': 'events found.',
+  'waarden herkend.': 'values ​​recognized.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'values ​​not recognized. Those rows remain at the bottom in their current order.',
   'Als tabel weergeven': 'Display as table',
   'Als tijdlijn weergeven': 'Show as timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -851,8 +878,6 @@ const _dutchSourceAddEn = {
       'This column does not yet contain any values ​​that can be sorted in this way.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'This table cannot yet be displayed as a timeline and remains unchanged.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Some of the values ​​are not recognized. Those rows remain together at the bottom; their content does not change.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'A timeline works with two or three columns. This table remains unchanged.',
   'Gebeurtenis': 'Event',
@@ -863,7 +888,6 @@ const _dutchSourceAddEn = {
   'Sorteren met aandachtspunten?': 'Sort by points of interest?',
   'Tijd': 'Time',
   'Tijdlijn bekijken': 'View timeline',
-  'Toch sorteren': 'Still sorting',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'First add at least one event. This table remains unchanged.',
   'Alles': 'All',

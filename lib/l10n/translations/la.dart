@@ -1656,6 +1656,33 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Signa nullum valorem ordinis cognoscibilem habent. Visibilia manent.',
+  'Tijdlijn · vervolg': 'Temporum linea · continuatio',
+  'Aflopend': 'Descendens',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Valores in columna ordine non ascendunt.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Hoc timeline nondum completum est. Mensam accommodes, vel eam ut normalem mensam ostende.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'Tempus horarium duabus vel tribus columnis laborat. Mensam accommodes, vel eam ut normalem mensam ostende.',
+  'Huidige volgorde behouden': 'Serva current ordinem',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Res vanae visibiles manent. Reprehendo row:',
+  'Niet-herkende waarden': 'Valores latuit',
+  'Oplopend': 'Ascendens',
+  'Sorteren als…': 'Sort as...',
+  'Sorteren en tijdlijn maken': 'Sort et crea timeline',
+  'Sorteren toepassen': 'Applicare Sorting',
+  'Tijdlijn maken': 'Temporum lineam creare',
+  'Tijdlijn maken?': 'Creare timeline?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Unum saltem eventum addere vel mensam regularem monstrare.',
+  'Waarden bekijken': 'Valores videre',
+  'gebeurtenissen gevonden.': 'rcrum inventa.',
+  'waarden herkend.': 'bona cognoscuntur.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'values ​​​​novit. Illi ordines in fundo manent in currenti ordine.',
   'Als tabel weergeven': 'Propono in mensa',
   'Als tijdlijn weergeven': 'Ostende ut timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1664,8 +1691,6 @@ const _dutchSourceAddLa = <String, String>{
       'Haec columna nondum continet aliquos valores qui hoc modo disponi possunt.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Haec mensa nondum pro tempore exponi potest et immutata permanet.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Aliqua bona non cognoscuntur. Ii ordines simul in imo manent; eorum contentus non mutat.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'Tempus horarium duabus vel tribus columnis laborat. Haec mensa non mutatur.',
   'Gebeurtenis': 'Eventus',
@@ -1676,7 +1701,6 @@ const _dutchSourceAddLa = <String, String>{
   'Sorteren met aandachtspunten?': 'Digerere puncta interest?',
   'Tijd': 'Tempus',
   'Tijdlijn bekijken': 'Visum timeline',
-  'Toch sorteren': 'adhuc genus',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Prius adde unum saltem eventum. Haec mensa non mutatur.',
   'Alles': 'Omnia',

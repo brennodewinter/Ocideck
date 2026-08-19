@@ -1641,6 +1641,33 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'markeringen hebben geen herkenbare volgordewaarde. Ze blijven zichtbaar.':
+      'Markører har ingen genkendelig sorteringsværdi. De forbliver synlige.',
+  'Tijdlijn · vervolg': 'Tidslinje · fortsættelse',
+  'Aflopend': 'Faldende',
+  'De waarden in de volgordekolom staan niet oplopend.':
+      'Værdierne i rækkefølgekolonnen er ikke stigende.',
+  'Deze tijdlijn is nog niet compleet. Pas de tabel aan of toon hem als gewone tabel.':
+      'Denne tidslinje er endnu ikke færdig. Juster tabellen eller vis den som en normal tabel.',
+  'Een tijdlijn werkt met twee of drie kolommen. Pas de tabel aan of toon hem als gewone tabel.':
+      'En tidslinje fungerer med to eller tre kolonner. Juster tabellen eller vis den som en normal tabel.',
+  'Huidige volgorde behouden': 'Behold den nuværende rækkefølge',
+  'Lege gebeurtenissen blijven zichtbaar. Controleer rij:':
+      'Tomme begivenheder forbliver synlige. Tjek række:',
+  'Niet-herkende waarden': 'Ikke-genkendte værdier',
+  'Oplopend': 'Stigende',
+  'Sorteren als…': 'Sorter som...',
+  'Sorteren en tijdlijn maken': 'Sorter og opret tidslinje',
+  'Sorteren toepassen': 'Anvend sortering',
+  'Tijdlijn maken': 'Opret tidslinje',
+  'Tijdlijn maken?': 'Oprette en tidslinje?',
+  'Voeg minstens één gebeurtenis toe of toon dit als gewone tabel.':
+      'Tilføj mindst én begivenhed, eller vis den som en almindelig tabel.',
+  'Waarden bekijken': 'Se værdier',
+  'gebeurtenissen gevonden.': 'fundet begivenheder.',
+  'waarden herkend.': 'værdier anerkendt.',
+  'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
+      'værdier ikke anerkendt. Disse rækker forbliver nederst i deres nuværende rækkefølge.',
   'Als tabel weergeven': 'Vises som tabel',
   'Als tijdlijn weergeven': 'Vis som tidslinje',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -1649,8 +1676,6 @@ const _dutchSourceAddDa = <String, String>{
       'Denne kolonne indeholder endnu ingen værdier, der kan sorteres på denne måde.',
   'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
       'Denne tabel kan endnu ikke vises som en tidslinje og forbliver uændret.',
-  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
-      'Nogle af værdierne genkendes ikke. Disse rækker forbliver sammen i bunden; deres indhold ændres ikke.',
   'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
       'En tidslinje fungerer med to eller tre kolonner. Denne tabel forbliver uændret.',
   'Gebeurtenis': 'Tilfælde',
@@ -1661,7 +1686,6 @@ const _dutchSourceAddDa = <String, String>{
   'Sorteren met aandachtspunten?': 'Sortere efter interessepunkter?',
   'Tijd': 'Tid',
   'Tijdlijn bekijken': 'Se tidslinjen',
-  'Toch sorteren': 'Sorterer stadig',
   'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
       'Tilføj først mindst én begivenhed. Denne tabel forbliver uændret.',
   'Alles': 'Alle',
