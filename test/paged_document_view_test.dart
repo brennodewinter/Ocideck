@@ -17,17 +17,21 @@ void main() {
     PageSizeSpec size = PageSizeSpec.a4,
     PageMargins margins = const PageMargins(),
     FootnotePlacement footnotes = FootnotePlacement.page,
+    double textScale = 1,
   }) async {
     await tester.binding.setSurfaceSize(const Size(1200, 1400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          body: PagedDocumentView(
-            markdown: markdown,
-            pageSize: size,
-            margins: margins,
-            footnotePlacement: footnotes,
+        home: MediaQuery(
+          data: MediaQueryData(textScaler: TextScaler.linear(textScale)),
+          child: Scaffold(
+            body: PagedDocumentView(
+              markdown: markdown,
+              pageSize: size,
+              margins: margins,
+              footnotePlacement: footnotes,
+            ),
           ),
         ),
       ),
@@ -141,7 +145,7 @@ void main() {
       expect(
         find.descendant(
           of: continuations.first,
-          matching: find.text('Tijdlijn · vervolg'),
+          matching: find.textContaining('Tijdlijn · vervolg — Tijd ·'),
         ),
         findsOneWidget,
       );
@@ -171,7 +175,50 @@ void main() {
       find.byKey(const Key('document-timeline-continuation')),
       findsAtLeastNWidgets(2),
     );
+    expect(
+      find.text('Tijdlijn · vervolg — Tijd · 12:02'),
+      findsAtLeastNWidgets(2),
+    );
     expect(find.textContaining('bewijsregel 79'), findsWidgets);
+  });
+
+  testWidgets('een lange vervolgmarkering blijft op tekstschaal bij 200%', (
+    tester,
+  ) async {
+    final events = List.generate(
+      8,
+      (i) =>
+          '| Een uitzonderlijk lange fasebenaming nummer $i die niet klein mag worden | Gebeurtenis $i met voldoende toelichting voor een vervolgpagina |',
+    ).join('\n');
+    await pumpDoc(
+      tester,
+      '<!-- timeline -->\n'
+      '| Fase | Gebeurtenis |\n'
+      '| --- | --- |\n'
+      '$events',
+      size: const PageSizeSpec(series: PaperSeries.a, number: 6),
+      margins: const PageMargins(
+        topMm: 10,
+        rightMm: 10,
+        bottomMm: 10,
+        leftMm: 10,
+      ),
+      textScale: 2,
+    );
+
+    final continuation = find
+        .byKey(const Key('document-timeline-continuation'))
+        .first;
+    expect(
+      find.descendant(of: continuation, matching: find.byType(FittedBox)),
+      findsNothing,
+    );
+    final label = tester.widget<Text>(
+      find.descendant(of: continuation, matching: find.byType(Text)),
+    );
+    expect(label.maxLines, 2);
+    expect(label.overflow, TextOverflow.ellipsis);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('de paginamaat volgt de instelling', (tester) async {

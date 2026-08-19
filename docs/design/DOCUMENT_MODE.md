@@ -1510,7 +1510,9 @@ that is itself taller than the available page area is cut, because scaling or
 hiding its text would harm readability and completeness. In **Pagina's**, every
 sheet that continues a timeline — at a later event or inside such an oversized
 card — restarts the rail at its top and shows the localised **Tijdlijn · vervolg**
-label in its top margin. Pagina's,
+label plus that card's first-column marker (date, time, phase, or another
+author-chosen marker) in its top margin. An empty marker stays empty; the view
+does not infer one. Pagina's,
 continuous HTML, print/PDF and LaTeX must preserve the same event order and
 complete text.
 
