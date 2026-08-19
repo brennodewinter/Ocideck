@@ -275,13 +275,23 @@ String _slideBody(Slide slide) {
   // titel. Een tabel zonder titel — wat `documentToDeck` maakt — levert geen
   // lege kopregel op, zodat de rondgang document → deck → document
   // byte-getrouw blijft.
+  //
+  // En de tabel is niet het enige dat zo'n dia draagt. De ontleder zet
+  // `bullets` voor élk type, en `_parsedCustomMarkdown` levert een lichaam voor
+  // elke richText-dia ongeacht type: een handgeschreven `_class: checklist` met
+  // een opsomming én een tabel komt dus mét beide binnen. Alleen kop + tabel
+  // teruggeven gooide die opsomming stil weg — dezelfde fout als hierboven, één
+  // veld verderop. Alles wat de dia aan tekst draagt gaat mee.
   if (slide.type.backedByTable && slide.tableRows.isNotEmpty) {
     final table = encodeMarkdownTable(
       slide.tableRows,
       alignments: slide.tableColumnAlignments,
     );
-    final title = slide.title.trim();
-    return title.isEmpty ? table : '## $title\n\n$table';
+    return [
+      _titleAndBullets(slide),
+      slide.customMarkdown.trim(),
+      table,
+    ].where((part) => part.isNotEmpty).join('\n\n');
   }
   switch (slide.type) {
     case SlideType.chart:
@@ -293,16 +303,19 @@ String _slideBody(Slide slide) {
       // Leeg lichaam op een niet-freeMarkdown type: val terug op titel + bullets
       // zodat er geen inhoud verloren gaat.
       if (slide.type != SlideType.freeMarkdown) {
-        final fallback = <String>[
-          if (slide.title.trim().isNotEmpty) '## ${slide.title}',
-          for (final b in slide.bullets)
-            if (b.trim().isNotEmpty) '- $b',
-        ];
-        return fallback.join('\n');
+        return _titleAndBullets(slide);
       }
       return slide.customMarkdown;
   }
 }
+
+/// De titel als `##`-kop met de bullets eronder — de twee tekstdragers die elk
+/// dia-type gemeen heeft, in de vorm waarin een document ze leest.
+String _titleAndBullets(Slide slide) => [
+  if (slide.title.trim().isNotEmpty) '## ${slide.title}',
+  for (final b in slide.bullets)
+    if (b.trim().isNotEmpty) '- $b',
+].join('\n');
 
 /// Een regel die na trimmen met 1–6 `#` en een spatie begint.
 bool _isHeading(String trimmed) => RegExp(r'^#{1,6} ').hasMatch(trimmed);

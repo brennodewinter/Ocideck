@@ -1733,7 +1733,10 @@ that before deciding whether this alpha fits what you are doing.
   nieuw type dat er ooit bijkomt meteen goed gaat. De kop van de dia reist
   voortaan mee — die ging ook bij een gewone tabel verloren — en een tabel
   zonder kop levert geen lege kopregel op, zodat een document dat door de
-  omzetting heen en weer gaat byte-getrouw blijft. (#1588)
+  omzetting heen en weer gaat byte-getrouw blijft. Ook een opsomming of een
+  rich-text-lichaam náást de tabel gaat mee: een handgeschreven deckbron levert
+  die combinatie, en anders zou het verlies één veld verderop terugkomen.
+  (#1588)
 
 - **Documentkoppen en -voeten kunnen nu documentgegevens tonen.** Via
   *Document · Eigenschappen* krijgt elk document vaste velden voor titel,

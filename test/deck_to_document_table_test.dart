@@ -18,6 +18,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_deck_bridge.dart';
+import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
   const rows = [
@@ -77,5 +78,64 @@ void main() {
 
     expect(out.trimLeft(), startsWith('|'));
     expect(out, isNot(contains('#')));
+  });
+
+  // Een tabelgedragen dia draagt méér dan zijn tabel, en dat is geen bedacht
+  // geval: de ontleder zet `bullets` voor élk type, en `_parsedCustomMarkdown`
+  // levert een lichaam voor elke richText-dia ongeacht type. Een handgeschreven
+  // deckbron — de broneditor is een volwaardig oppervlak in OciDeck — levert die
+  // dia dus mét opsomming én tabel. Alleen kop + tabel wegschrijven verloor de
+  // opsomming stil: dezelfde fout als hierboven, één veld verderop.
+  group('een tabelgedragen dia draagt meer dan zijn tabel', () {
+    test('een opsomming naast de tabel overleeft het omzetten', () {
+      const bron =
+          '---\nmarp: true\n---\n\n'
+          '<!-- _class: checklist -->\n'
+          '# Uitvoering WSTG\n'
+          '\n'
+          '- Alleen de webtoepassing, niet de API\n'
+          '- Aftekening door de opdrachtgever op 3 juni\n'
+          '\n'
+          '| ID | Test | Status |\n'
+          '| --- | --- | --- |\n'
+          '| WSTG-01 | Informatievergaring | uitgevoerd |\n';
+      final deck = MarkdownService().parseDeck(bron)!;
+      final slide = deck.slides.single;
+
+      // Eerst de aanname zelf: zonder deze twee is de test hieronder leeg.
+      expect(slide.type, SlideType.checklist);
+      expect(slide.bullets, hasLength(2));
+      expect(slide.tableRows, isNotEmpty);
+
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+
+      expect(out, contains('Alleen de webtoepassing, niet de API'));
+      expect(out, contains('Aftekening door de opdrachtgever op 3 juni'));
+      expect(out, contains('| WSTG-01 | Informatievergaring | uitgevoerd |'));
+      // Volgorde: kop, dan de opsomming, dan de tabel — zoals de dia leest.
+      expect(
+        out.indexOf('Alleen de webtoepassing'),
+        lessThan(out.indexOf('| WSTG-01')),
+      );
+    });
+
+    test('een richText-lichaam naast de tabel overleeft het omzetten', () {
+      // `listStyle: richText` vult `customMarkdown` ongeacht het dia-type.
+      final deck = Deck(
+        title: 'T',
+        slides: [
+          Slide.create(SlideType.findingsSummary).copyWith(
+            title: 'Bevindingen',
+            customMarkdown: 'Twee bevindingen zijn tijdens de test hersteld.',
+            tableRows: const [...rows],
+          ),
+        ],
+      );
+
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+
+      expect(out, contains('Twee bevindingen zijn tijdens de test hersteld.'));
+      expect(out, contains('waarde een'));
+    });
   });
 }

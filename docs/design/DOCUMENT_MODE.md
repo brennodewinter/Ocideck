@@ -644,8 +644,17 @@ projection contracts):
   reappears in a typed, scanned field* (`customMarkdown` or `tableRows`) — zero
   loss is a privacy requirement, not a tidiness wish, enforced by a
   deconstruction-invariant test/gate. The reverse, `deckToDocumentMarkdown`,
-  emits each slide's body (freeMarkdown → its `customMarkdown`; table → a GFM
-  table; chart → a ` ```chart ` fence) joined with blank lines. **Warn** that a
+  emits each slide's body (freeMarkdown → its `customMarkdown`; **every
+  table-backed type** — recognised by `SlideType.backedByTable`, never by name —
+  → *everything the slide carries*: its title as an `##` heading, its bullets,
+  its rich-text `customMarkdown`, then the GFM table; chart → a ` ```chart `
+  fence) joined with blank lines. Matching on the property rather than on
+  `SlideType.table` keeps the nine module types (`checklist`, `scopeMatrix`,
+  `findingsSummary`, `matrix`, `controlStatus`, `gantt`, …) from falling through
+  to a title-plus-bullets stub that drops their whole table; emitting *all* the
+  text carriers keeps the reverse loss from happening one field over, because
+  the parser fills `bullets` for every type and `customMarkdown` for every
+  rich-text slide regardless of type. **Warn** that a
   thematic `---` becomes a slide boundary (loss of intent).
 
 Rules (from §7, now binding):
