@@ -606,6 +606,15 @@ exists. There is no release feed to subscribe to, no signed installer that
 updates itself, and no notification of any kind. A fix reaches you when you
 fetch the default branch and rebuild — and not before.
 
+Windows does have an **installer** (#1208), and it changes nothing above. It is a
+deliberately dumb, offline one: it copies the files, adds a shortcut and the file
+associations, and uninstalls cleanly. It has no update channel, no version check
+and no network access at any point — not during installation and not afterwards.
+That boundary is not left to good intentions; `test/windows_packaging_test.dart`
+fails the build if the installer script ever grows a downloader or a `[Code]`
+section to hide one in. Convenience at install time is worth having; an update
+mechanism would cost the promise above, and is therefore refused.
+
 So the notification channel is the repository itself. Three places carry it, in
 increasing detail:
 
@@ -718,6 +727,14 @@ asymmetric:
   signature over `SHA256SUMS` gives Windows and Linux downloads a verifiable
   anchor without a per-binary certificate; building from source remains the route
   that needs no signature at all.
+
+The Windows **installer** (#1208) sits under the same decision and is shipped
+unsigned for the same reasons, so it shows SmartScreen and an "Unknown publisher"
+elevation prompt exactly as the zip does. Its build step
+(`scripts/build_windows_installer.sh`) already carries the signing hook, off by
+default and loud about it, so a certificate is the only thing still missing —
+and it deliberately accepts only a certificate-store thumbprint, never a key file
+or a password, so signing material cannot become an environment variable.
 
 If the SmartScreen warning ever becomes a real barrier, the fallback is an OV
 certificate signed by hand on a local machine — never a secret in CI. The full
