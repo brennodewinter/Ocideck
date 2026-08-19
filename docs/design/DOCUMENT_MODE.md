@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). Since 2026-08-17 that page setup may also **travel in the document itself**, in the Pandoc keys `papersize:` and `geometry:`, written only on request — which reverses the "settings, not file content" position of §14.5 (§15, including the open point in §15.4). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-17 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). Since 2026-08-17 that page setup may also **travel in the document itself**, in the Pandoc keys `papersize:` and `geometry:`, written only on request — which reverses the "settings, not file content" position of §14.5 (§15, including the open point in §15.4). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-19 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -19,7 +19,9 @@ that any Markdown reader opens.*
 > Sibling design docs: [`GANTT_SLIDETYPE.md`](GANTT_SLIDETYPE.md) and
 > [`PROCESS_IMPROVEMENT.md`](PROCESS_IMPROVEMENT.md) (rich content this mode
 > re-uses), [`OCIWACHT.md`](OCIWACHT.md) (the privacy projection every export
-> must pass through).
+> must pass through). A proposed **generic visual-table sort** and an optional
+> **timeline view for two- or three-column GFM tables** are specified in §17;
+> that section is a future design, not shipping behaviour.
 
 ---
 
@@ -1304,3 +1306,275 @@ The only surface that cannot keep the promise is the HTML export: an HTML page
 has no pages. It puts every note at the back with a link there and back, and
 `KNOWN_LIMITATIONS.md` says so rather than letting the export quietly differ from
 the screen.
+
+---
+
+## 17. Visual table sorting and a timeline view (proposed 2026-08-19)
+
+> **Status: owner-approved design, not implemented.** This section records the
+> product and format decision so implementation does not rediscover it while
+> building. Shipping it still requires the normal code, accessibility, export,
+> localisation and round-trip gates.
+
+The motivating case was an incident report assembled from several sources. Its
+facts were correctly preserved in a three-column `Tijd | Gebeurtenis | Status`
+table, but source order was not guaranteed to be chronological and the decisive
+turn in the response was hard to see. Two capabilities follow from that case,
+and they must remain separate:
+
+1. **sorting by a column is a standard table operation in Visual mode**; and
+2. **a timeline is an optional visual representation of a suitable table**.
+
+The timeline may offer the standard sort action when events appear out of
+order. It does not own a second sorting mechanism.
+
+### 17.1 Product boundary
+
+Every visually editable GFM table gets sorting in its column-header menu. This
+is useful without a timeline: findings can be sorted by severity, measures by
+deadline, inventory by owner and figures by amount. Sorting therefore belongs
+to the generic table model, editor and source rewrite path.
+
+A timeline is narrower. It turns an explicitly marked two- or three-column
+table into a static, vertical sequence in Visual and Pagina's mode and in
+document exports. It is not a new document type, a general card designer, a
+process-modelling surface or an automatically inferred replacement for any
+table that happens to contain a date.
+
+The user always decides to activate the timeline view. OciDeck may analyse a
+table and propose a helpful next action, but it never changes representation or
+row order merely because a document was opened.
+
+### 17.2 Generic table sorting in Visual mode
+
+The column-header affordance offers at least:
+
+- **Sort ascending**;
+- **Sort descending**; and
+- **Sort as** automatic, text, number, date or time when automatic detection is
+  ambiguous or the author wants to override it.
+
+Sorting is a real edit, not transient presentation state. When applied it
+rewrites the body-row order in the ordinary GFM table, so source mode, a foreign
+Markdown reader and every export see the same order. No sort key or current
+sort direction is stored as OciDeck metadata.
+
+The operation has these invariants:
+
+- the header and delimiter row never move;
+- complete rows move as units; no cell crosses into another row;
+- cell bytes and inline Markdown are not normalised, corrected or rewritten;
+- alignment, escaped pipes, `<br>` line breaks and extra cell content survive;
+- the sort is **stable**: equal keys retain their original relative order;
+- unknown, empty or unparseable values go last by default and retain their
+  relative order there;
+- one applied sort is one undo/redo transaction; and
+- a failed or cancelled sort leaves the source byte-identical.
+
+A high-confidence text or numeric sort can apply directly and expose Undo. An
+ambiguous sort shows a compact plan before mutation. For example:
+
+> 16 rows can be sorted as times. Three values have no exact time and will stay
+> together at the end in their current order.
+
+The actions are **Apply sorting**, **Review values** and **Cancel**. A warning
+must explain the consequence and the remedy; `Invalid value` is not acceptable
+interface copy.
+
+Time-like parsing is deliberately conservative and local. It may derive an
+ephemeral key from exact times, dates, years, numeric phases, ranges (start
+value), and qualified values such as `circa 13:10`. The displayed source stays
+unchanged. A label such as `After the incident; time not recorded` remains an
+unknown value, not a guessed timestamp. Crossing midnight or combining several
+days requires an explicit date column or date-bearing cells; OciDeck never
+invents the day.
+
+### 17.3 One shared, explainable table analysis
+
+Sorting and timeline suitability use one Flutter-free analyser over decoded GFM
+rows. It profiles each column without network access or a language model and
+returns evidence, not a verdict hidden in a boolean. A `TableColumnProfile`
+needs at least:
+
+- non-empty and empty counts;
+- the dominant parse kind (text, number, date, time or mixed);
+- successfully and unsuccessfully parsed row indices;
+- whether values are already monotonic in source order; and
+- a confidence plus human-readable reasons.
+
+The analysis result distinguishes:
+
+- **suitable** — the requested operation has a clear interpretation;
+- **suitable with attention points** — it can proceed without data loss, but
+  specific rows deserve review; and
+- **not yet suitable** — OciDeck cannot choose safely and offers a concrete
+  correction or the ordinary table view.
+
+Examples of acceptable messages:
+
+> This table appears suitable as a timeline. 19 events found.
+
+> Three events have no exact time. They remain visible and keep their current
+> relative order.
+
+> I cannot yet determine which column defines the sequence. Choose the first
+> timeline column or keep this as a table.
+
+The analyser never assigns meaning to words such as `reported`, `confirmed`,
+`critical` or `complete`. Such cells remain author-owned text.
+
+### 17.4 Timeline disk contract
+
+The source of a document timeline is still a real GFM table. A single portable
+view hint immediately above it marks the table:
+
+```markdown
+<!-- timeline -->
+| Time | Event | Status |
+| --- | --- | --- |
+| 13:24 | All users signed out | Reported |
+```
+
+The comment applies only to the immediately following GFM table. It carries no
+layout, colour, animation, inferred type or sort state. Removing it returns the
+ordinary table view without changing a cell. A foreign Markdown reader ignores
+the comment and renders a normal table; an older OciDeck must preserve both the
+unknown comment and table through its byte-faithful document path.
+
+The marker and table form one atomic `TimelineTableBlock` in every visual-edit,
+move, replace, undo, conversion and export path. Treating the marker as raw HTML
+and the table as an unrelated block would make Visual mode fall back to source
+or could orphan the marker when the table is edited. The implementation must
+therefore add an explicit supported embed rather than rely on generic raw-HTML
+handling.
+
+Version one accepts exactly:
+
+- two columns: **marker** and **event**; or
+- three columns: **marker**, **event** and **metadata**.
+
+The column roles are positional, while the original column headers remain
+visible as their labels. `Year | Milestone`, `Phase | Decision` and
+`Time | Event | Source` are therefore as valid as an incident table. The third
+column is displayed with its own header — for example `Status · Reported` — so
+OciDeck does not silently turn a source, owner or conclusion into a status.
+
+When analysis suggests that suitable columns are in another order, the dialog
+may offer **Reorder columns and create timeline** as an explicit, undoable table
+edit. Role mappings are not hidden in the marker. Tables with four or more
+columns remain ordinary tables in the first version; widening this contract is
+a later format decision.
+
+### 17.5 Timeline activation and friendly failure
+
+**Insert → Timeline** creates a normal two- or three-column table and opens the
+same table-editing machinery as any other table. An existing table gains **Show
+as timeline**. Activation runs the shared analysis and previews the proposed
+roles; it never scans the whole document for tables to convert automatically.
+
+If recognised sort keys are out of order, the timeline dialog says so and
+offers **Sort table by _column_**. That button invokes the same generic table
+sort operation from §17.2. **Keep current order** is always available because
+source or narrative order can be intentional. Timeline rendering itself never
+sorts a private copy.
+
+Rows that lack an exact marker remain events. They receive an open or otherwise
+non-deceptive node and their literal marker text. Empty event cells are an
+attention point with a row number and an edit action; they are not silently
+dropped. A table that cannot be rendered safely remains a fully editable table
+and gets a message that says what must change.
+
+### 17.6 Document rendering and pagination
+
+The document renderer is static and vertical. It uses one unambiguous spine,
+marker labels on the left and all event cards on the right in source order.
+Cards never alternate across the spine: that presentation flourish weakens
+reading order and page breaking on portrait paper.
+
+All rows render. There is no presentation timeline's twelve-event ceiling, no
+ellipsis and no hover-only detail. Each event is a separately measurable page
+unit; a page may break between events but not through a card. A continuation
+page redraws the spine and identifies that the sequence continues. Pagina's,
+continuous HTML, print/PDF and LaTeX must preserve the same event order and
+complete text.
+
+The text remains real, selectable, searchable and exposed to assistive
+technology. Status/source/metadata styling is neutral. OciDeck does not infer
+red, amber or green from cell contents. Screen-only line drawing may be subtle,
+must honour reduced motion and is neither stored nor used in export.
+
+### 17.7 Architecture seams
+
+Implementation should add one headless table-analysis and stable-sort service.
+The existing `markdown_table_codec` may decode cells for analysis and display,
+but it **must not rewrite a sorted table**: decoding trims cells and encoding
+normalises the table, which contradicts the byte-preservation invariant in
+§17.2. Applying a sort instead permutes the original raw body-row lines as
+opaque slices. Only their order changes; spacing, escapes, `<br>` elements and
+delimiter variants remain byte-for-byte intact. The visual table, timeline
+activation dialog and tests consume that one service; none implements its own
+value parser or comparator.
+
+The timeline path consists of:
+
+- a Flutter-free `TimelineTableBlock`/entry model that preserves original
+  headers, rows, alignment and optional third-column metadata;
+- one document-timeline codec that recognises and writes the atomic marker plus
+  table block;
+- a `DocumentTimelineView` that owns flowing layout and pagination; and
+- a visual-editor embed that edits through the existing table controller and
+  writes marker plus table back together.
+
+`DocumentDeckBridge` and the OciWacht document-projection/export path are
+explicit seams to change. The current bridge can classify an HTML comment as a
+free-Markdown block and the following GFM table separately, then insert blank
+lines or re-encode the table on the way back. For a timeline that is data loss:
+the marker no longer immediately precedes the table and therefore no longer
+marks it. Conversion and projection must recognise `TimelineTableBlock` before
+generic comment/table handling and carry the marker plus original table as one
+unit.
+
+Presentation and document timelines may share contrast rules, typography and
+small card primitives. The document must not import the private 16:9 slide
+renderer: that renderer takes a `Slide`, owns reveal state and caps events for a
+bounded canvas. Likewise, the timeline table is not converted to the current
+presentation `TimelineEvent(marker, title, description)` if that would fold the
+third column into a description or lose its header. Until a genuinely lossless
+shared superset exists, document⇄presentation conversion keeps the complete
+marked table as portable Markdown or a table representation rather than
+pretending it round-tripped as a typed presentation timeline.
+
+Every export still passes through the OciWacht audience projection (§11.2).
+Timeline recognition must happen on projected table cells, never on a parallel
+raw-source path.
+
+### 17.8 Acceptance evidence for later implementation
+
+The feature is not complete until tests and visual checks prove at least:
+
+- stable ascending and descending sorts for text, numbers, dates and times;
+- equal keys, empty cells, mixed formats, qualified times, ranges and unknown
+  markers preserve the documented order;
+- sorting moves complete rows, changes no cell bytes and is one undoable edit;
+- a raw-row fixture containing unusual spacing, escaped pipes, `<br>` content,
+  leading/trailing cell spaces and delimiter variants survives sorting exactly;
+- cancelled and failed sorting are byte-identical no-ops;
+- a marked two-column and three-column table round-trip losslessly;
+- removing only `<!-- timeline -->` restores the ordinary table;
+- malformed marked tables fail back to a visible, editable table;
+- a 19-event, multi-source incident fixture renders without omission in Visual,
+  Pagina's, continuous HTML, PDF/print and LaTeX;
+- page breaks occur only between event cards and continuation is apparent;
+- search, selection, keyboard operation, screen-reader order, 200% text and
+  reduced motion remain usable;
+- document→presentation→document keeps the marker immediately followed by the
+  same table and never loses the third column or any raw table bytes;
+- projected Markdown, HTML and LaTeX recognise that same atomic marker+table
+  block after OciWacht rather than separating or re-encoding it;
+- OciWacht projects every cell before every export; and
+- the behaviour works in light/dark themes and all supported interface
+  languages without relying on translated column names.
+
+The format and product decision is deliberately small: one ignored comment, a
+real table, a standard table sort and a derived view. If OciDeck disappeared,
+the user's ordered facts would still be a useful Markdown table.
