@@ -342,9 +342,11 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
-  // Verlaagd van 1449 naar 1447: de klasse meet 1447.
-  'lib/widgets/app_shell.dart#_MainLayoutState':
-      1447, // +1 (video-calls F1): callRail spread
+  // Verlaagd van 1449 naar 1447, en van 1447 naar 1439: de exportfabriek is
+  // naar een top-level functie in hetzelfde part-bestand gegaan (#1589). Hij
+  // raakte geen enkel veld van de State, dus hij hoorde er ook niet in te
+  // tellen.
+  'lib/widgets/app_shell.dart#_MainLayoutState': 1439,
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de

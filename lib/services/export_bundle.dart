@@ -51,6 +51,11 @@ class ExportBundle {
 /// Wat de export daadwerkelijk opsomt: dezelfde slides, maar met alles wat op
 /// het scherm één slide is en op papier meerdere pagina's, uitgeklapt.
 ///
+/// Alleen voor oppervlakken die dia's **rasteriseren of opsommen**. Een
+/// doorlopend document kent geen dia-pagina's: daar levert deze uitklap N
+/// kopieën die elk de héle body dragen, en die worden dan achter elkaar
+/// weggeschreven (#1589). Vandaar [buildExportBundle]'s `expandPages`.
+///
 /// Een overlopende bevinding wordt zo geëxporteerd als een paar dia's op ware
 /// grootte in plaats van één ineengekrompen dia. Voor een lange vrije-
 /// tekstslide gold hetzelfde probleem omgekeerd: de editor en de presentator
@@ -74,6 +79,13 @@ ExportBundle buildExportBundle(
   List<Slide> slides, {
   required PrivacyExportProfile profile,
   required bool includeDetail,
+
+  /// Of de dia-paginering wordt uitgeklapt vóór de projectie. `true` voor elk
+  /// oppervlak dat dia's toont; `false` voor een doorlopend document.
+  ///
+  /// Bewust zonder standaardwaarde: de derde aanroeper die hier ooit bij komt
+  /// moet de vraag beantwoorden in plaats van hem te erven.
+  required bool expandPages,
   required Set<String> disabledRules,
   required OwnIdentity ownIdentity,
   required Set<String> regions,
@@ -89,7 +101,9 @@ ExportBundle buildExportBundle(
   // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog aan:
   // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
   // documentmetadata worden allemaal uit dit ene object afgeleid.
-  final source = deck.copyWith(slides: _expandForExport(chosen, deck));
+  final source = deck.copyWith(
+    slides: expandPages ? _expandForExport(chosen, deck) : chosen,
+  );
 
   // Eén scan voor de hele bundel; het waren er drie, één per afnemer hieronder,
   // alle drie over hetzelfde deck (#613).

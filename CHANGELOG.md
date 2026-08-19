@@ -1701,6 +1701,18 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een documentexport herhaalde een lange sectie.** Tekst die op het scherm
+  over meerdere pagina's liep, kwam in de geëxporteerde `.md`, HTML en LaTeX
+  net zo vaak volledig terug. De oorzaak zat vóór de privacygrens: de
+  exportbundel klapte de dia-paginering onvoorwaardelijk uit, en elke kopie
+  draagt de héle tekst. Voor een presentatie klopt dat — daar wordt elke pagina
+  echt getekend — maar een document is één stroom en kent geen dia-pagina's, dus
+  het documentpad klapt niet meer uit. Dat scheelt niet alleen dubbele tekst:
+  de privacyscan en het redactiemanifest liepen ook over al die kopieën, waardoor
+  een geredigeerd rapport verwijzingen kreeg naar pagina's die in het bestand
+  niet bestaan. De regel dat een render-lijst nooit wordt weggeschreven staat nu
+  ook in de documentbrug zelf, zodat hij geldt voor elke route erheen. (#1589)
+
 - **Documentkoppen en -voeten kunnen nu documentgegevens tonen.** Via
   *Document · Eigenschappen* krijgt elk document vaste velden voor titel,
   ondertitel en auteur, plus zelf benoemde velden. Zet bijvoorbeeld `{author}`

@@ -686,17 +686,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
     final markdownService = ref.read(markdownServiceProvider);
 
-    // De fabriek. Het exportdialoog kiest het doelgroepprofiel, maar mág de bron
-    // niet hebben — dat is de projectiegrens. Deze closure sluit hier om de bron
-    // heen en levert per profiel alleen AudienceDecks op.
-    ExportBundle bundleFor(
-      PrivacyExportProfile profile, {
-      bool includeDetail = true,
-    }) => buildExportBundle(
-      deck,
-      slides,
-      profile: profile,
-      includeDetail: includeDetail,
+    final bundleFor = _exportBundleFactory(
+      deck: deck,
+      slides: slides,
       disabledRules: disabledRules,
       ownIdentity: ownIdentity,
       regions: regions,
@@ -966,3 +958,33 @@ Future<void> _createDeckFromDialog(
     );
   }
 }
+
+/// De exportfabriek: sluit om de bron heen en levert per doelgroepprofiel
+/// alleen een [ExportBundle] op. Het exportdialoog kiest het profiel maar mág
+/// de bron niet hebben — dat is de projectiegrens.
+///
+/// Top-level en geen methode: hij raakt geen enkel veld van de state, en
+/// `_MainLayoutState` zit tegen zijn plafond (`classSizeBaseline`).
+ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
+_exportBundleFactory({
+  required Deck deck,
+  required List<Slide> slides,
+  required Set<String> disabledRules,
+  required OwnIdentity ownIdentity,
+  required Set<String> regions,
+  required MarkdownService markdownService,
+}) =>
+    (PrivacyExportProfile profile, {bool includeDetail = true}) =>
+        buildExportBundle(
+          deck,
+          slides,
+          profile: profile,
+          includeDetail: includeDetail,
+          // Een presentatie-export rasteriseert en somt dia's op, dus hier
+          // wordt de dia-paginering wél uitgeklapt (#1589).
+          expandPages: true,
+          disabledRules: disabledRules,
+          ownIdentity: ownIdentity,
+          regions: regions,
+          markdownService: markdownService,
+        );
