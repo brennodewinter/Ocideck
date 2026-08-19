@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -99,6 +99,7 @@ help:
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
 	@echo "  make build-windows   Build the Windows app (Windows only)."
+	@echo "  make build-windows-installer  Wrap that build in an installer (Windows only)."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
 	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
@@ -1104,6 +1105,20 @@ build-windows: sbom-verify
 	flutter build windows --release
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/windows
+
+# Wrap the built Windows bundle in an Inno Setup installer (#1208): Start menu
+# shortcut, the file associations from windows/file-associations.reg, and an
+# uninstall entry in Programs and Features. Windows only, and deliberately NOT a
+# prerequisite of build-windows — like package-linux, this packages exactly the
+# bundle you just built and inspected rather than quietly making a new one.
+#
+# Signing is optional and off by default; the script says loudly when it
+# produced an unsigned installer. See scripts/build_windows_installer.sh.
+build-windows-installer:
+	@echo "== OciDeck package: Windows installer (.exe) =="
+	@echo "Command: scripts/build_windows_installer.sh"
+	@echo "Output: dist/ocideck-windows-x64-setup-<version>.exe"
+	scripts/build_windows_installer.sh
 
 build-linux: sbom-verify
 	@echo "== OciDeck build: Linux bundle =="
