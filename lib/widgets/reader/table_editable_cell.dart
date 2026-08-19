@@ -64,25 +64,27 @@ class TableEditableCell extends StatelessWidget {
         // verspringt er niets op het moment dat je erin klikt, en blijft
         // klikken, tabben en pijltjes werken zoals ze deden.
         child: Stack(
-          clipBehavior: Clip.hardEdge,
+          // Beide lagen krijgen dezelfde breedte als de cel, en de cel wordt zo
+          // hoog als de hoogste van de twee. Zonder dat laatste sneed de rij de
+          // staarten van de letters af zodra de opgemaakte lezing een haar
+          // hoger uitkwam dan het tekstveld.
+          fit: StackFit.passthrough,
           children: [
             _field(focus, hideText: !editing),
             if (!editing)
-              Positioned.fill(
-                // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
-                // cursor van krijgt. En onhoorbaar voor de schermlezer, want
-                // het veld zegt dit al.
-                child: IgnorePointer(
-                  child: ExcludeSemantics(
-                    child: Padding(
-                      padding: _padding,
-                      child: InlineMarkdownText(
-                        editor.cellController(row, column).text,
-                        style: style,
-                        linkColor: linkColor,
-                        codeBackground: codeBackground,
-                        textAlign: textAlign,
-                      ),
+              // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
+              // cursor van krijgt. En onhoorbaar voor de schermlezer, want het
+              // veld zegt dit al.
+              IgnorePointer(
+                child: ExcludeSemantics(
+                  child: Padding(
+                    padding: _padding,
+                    child: InlineMarkdownText(
+                      editor.cellController(row, column).text,
+                      style: style,
+                      linkColor: linkColor,
+                      codeBackground: codeBackground,
+                      textAlign: textAlign,
                     ),
                   ),
                 ),
