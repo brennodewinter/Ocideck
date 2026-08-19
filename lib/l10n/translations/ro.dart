@@ -615,7 +615,6 @@ const _dutchSourceRo = {
   'Profiel verwijderen': 'Șterge profilul',
   'Lettertype': 'Font',
   'Kleuren': 'Culori',
-  'Achtergrond slides': 'Fundal slide',
   'Tekst': 'Text',
   'Accent / bullets': 'Accent / bullets',
   'Tabeltekst': 'Text tabel',
@@ -1080,7 +1079,6 @@ const _dutchSourceRo = {
   'Cockpit': 'Panou cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Timpul-țintă pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
-  'Logo en footer': 'Logo și subsol',
   'Pagina': 'Pagină',
   'Presentatiestijl': 'Stil de prezentare',
   'Tekst...': 'Text...',
@@ -1685,6 +1683,11 @@ const _dutchSourceAddRo = <String, String>{
   'waarden herkend.': 'valori recunoscute.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valori nerecunoscute. Aceste rânduri rămân în partea de jos în ordinea lor curentă.',
+  'Footer': 'Subsol',
+  'Geldt voor documenten en presentaties':
+      'Se aplică documentelor și prezentărilor',
+  'Alleen voor documenten': 'Doar pentru documente',
+  'Alleen voor presentaties': 'Doar pentru prezentări',
   'Als tabel weergeven': 'Afișați ca tabel',
   'Als tijdlijn weergeven': 'Afișați ca cronologie',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

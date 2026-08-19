@@ -619,7 +619,6 @@ const _dutchSourceUk = {
   'Profiel verwijderen': 'Видалити профіль',
   'Lettertype': 'Шрифт',
   'Kleuren': 'Кольори',
-  'Achtergrond slides': 'Тло слайда',
   'Tekst': 'Текст',
   'Accent / bullets': 'Акцент / маркери',
   'Tabeltekst': 'Текст таблиці',
@@ -1080,7 +1079,6 @@ const _dutchSourceUk = {
   'Cockpit': 'Панель кабіни',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Цільовий час для зворотного відліку в презентері. Під час презентації точно налаштовується клавішею K.',
-  'Logo en footer': 'Логотип і нижній колонтитул',
   'Pagina': 'Сторінка',
   'Presentatiestijl': 'Стиль презентації',
   'Tekst...': 'Текст...',
@@ -1684,6 +1682,11 @@ const _dutchSourceAddUk = <String, String>{
   'waarden herkend.': 'визнані цінності.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'значення не розпізнаються. Ці рядки залишаються внизу в поточному порядку.',
+  'Footer': 'Нижній колонтитул',
+  'Geldt voor documenten en presentaties':
+      'Стосується документів і презентацій',
+  'Alleen voor documenten': 'Лише для документів',
+  'Alleen voor presentaties': 'Лише для презентацій',
   'Als tabel weergeven': 'Відобразити як таблицю',
   'Als tijdlijn weergeven': 'Показати як часову шкалу',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

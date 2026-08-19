@@ -701,6 +701,11 @@ const _dutchSourceAddFr = {
   'waarden herkend.': 'valeurs reconnues.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valeurs non reconnues. Ces lignes restent en bas dans leur ordre actuel.',
+  'Footer': 'Pied de page',
+  'Geldt voor documenten en presentaties':
+      'S\'applique aux documents et aux présentations',
+  'Alleen voor documenten': 'Documents uniquement',
+  'Alleen voor presentaties': 'Présentations uniquement',
   'Als tabel weergeven': 'Afficher sous forme de tableau',
   'Als tijdlijn weergeven': 'Afficher sous forme de chronologie',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3857,7 +3862,6 @@ const _dutchSourceAddFr = {
   'Cockpit': 'Tableau de bord cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Durée cible du compte à rebours du présentateur. Ajustez-la pendant la présentation avec la touche K.',
-  'Logo en footer': 'Logo et pied de page',
   'Notities voor tijdens het presenteren': 'Notes pour la présentation',
   'Notities weggooien': 'Supprimer les notes',
   'Pagina': 'Page',
@@ -3966,7 +3970,6 @@ const _dutchSourceAddFr = {
   '1 slide kopiëren naar…': 'Copier 1 diapositive vers…',
   '1 slide overgeslagen': '1 diapositive ignorée',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Arrière-plan des diapositives',
   'Afbeelding': 'Image',
   'Afbeelding gekopieerd naar klembord.':
       'Image copiée dans le presse-papiers.',

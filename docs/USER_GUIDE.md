@@ -3247,8 +3247,10 @@ Every other finding shows from the first second: those are about what *is*
 there, never about what you have yet to do. Filter chips let you show **All
 issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
-(entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
-colour field scrolled into view and highlighted.
+(entire presentation)** issue to open *Settings → Style profile* with the matching
+colour field scrolled into view and highlighted — on the surface that colour
+lives on (General for a shared colour, Presentation for a title or section
+colour).
 
 Many findings carry a **one-click fix** beside them. On an overfull bullet slide
 that is always **Split slide** first — spreading the bullets over pages keeps
@@ -4970,6 +4972,26 @@ find it.
   analyser and contrast threshold), amber for a warning and red for a hard error,
   with the exact contrast ratio shown inline and the full details on hover. The
   bundled Marp theme is `assets/themes/ocideck.css`.
+- **One profile, three surfaces.** A style profile carries settings of three
+  kinds, and *Settings → Style profile* keeps them strictly apart with a
+  three-way switch above the editor:
+  - **General** — everything a document and a presentation share: the font,
+    background, text and accent colours, the bullet marker, the checklist
+    colours, the whole table style, the source-code block and the severity
+    colours for findings. Change something here and both surfaces follow.
+  - **Document** — what only exists on a page: the document logo (shared with
+    the presentation logo by default, or set separately), the header and footer
+    text with their band colours, and page numbering.
+  - **Presentation** — what only exists on a slide: the title and section
+    backgrounds, the slide logo, the slide footer, the optional closing slide
+    and the animation duration.
+
+  Every field lives on exactly one surface, so the setting you are looking at
+  always tells you where it lands. The line under the switch repeats it in
+  words, and the preview beside the editor shows that surface and no other — the
+  shared preview is a page *without* header and footer bands, because those
+  belong to the document surface. Jumping in from the settings search or from a
+  contrast warning in the quality panel opens the surface that setting lives on.
 - **Sharing a style profile.** Next to the profile name sit an **export** and an
   **import** button. Export writes the profile you are editing to a
   `.ocideckstyle` file (on the web build it downloads) — so a house style can be

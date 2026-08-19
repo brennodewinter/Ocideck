@@ -612,7 +612,6 @@ const _dutchSourceId = {
   'Profiel verwijderen': 'Hapus profil',
   'Lettertype': 'Font',
   'Kleuren': 'Warna',
-  'Achtergrond slides': 'Latar belakang slide',
   'Tekst': 'Teks',
   'Accent / bullets': 'Aksen / bullet',
   'Tabeltekst': 'Teks tabel',
@@ -1070,7 +1069,6 @@ const _dutchSourceId = {
   'Cockpit': 'Dasbor cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Waktu target untuk hitung mundur presenter. Sesuaikan secara halus saat mempresentasikan dengan tombol K.',
-  'Logo en footer': 'Logo dan footer',
   'Pagina': 'Halaman',
   'Presentatiestijl': 'Gaya presentasi',
   'Tekst...': 'Teks...',
@@ -1668,6 +1666,11 @@ const _dutchSourceAddId = <String, String>{
   'waarden herkend.': 'nilai-nilai yang diakui.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'nilai-nilai tidak diakui. Baris-baris tersebut tetap berada di bawah dalam urutannya saat ini.',
+  'Footer': 'Footer',
+  'Geldt voor documenten en presentaties':
+      'Berlaku untuk dokumen dan presentasi',
+  'Alleen voor documenten': 'Hanya untuk dokumen',
+  'Alleen voor presentaties': 'Hanya untuk presentasi',
   'Als tabel weergeven': 'Tampilkan sebagai tabel',
   'Als tijdlijn weergeven': 'Tampilkan sebagai garis waktu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

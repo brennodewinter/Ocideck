@@ -138,7 +138,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
-    label: 'Achtergrond slides',
+    label: 'Achtergrond',
     sectionKey: 'settingsColors',
     keywords: ['kleur', 'achtergrond', 'slide'],
   ),
@@ -187,8 +187,14 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
     label: 'Logo positie',
-    section: 'Logo en footer',
+    section: 'Logo',
     keywords: ['logo', 'positie', 'merk'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
+    label: 'Zebrastrepen (om en om)',
+    section: 'Tabel',
+    keywords: ['tabel', 'zebra', 'strepen', 'randstijl', 'celopvulling'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,

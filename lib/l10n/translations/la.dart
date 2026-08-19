@@ -615,7 +615,6 @@ const _dutchSourceLa = {
   'Profiel verwijderen': 'Prosopographiam delere',
   'Lettertype': 'Litterarum forma',
   'Kleuren': 'Colores',
-  'Achtergrond slides': 'Fundus laminae',
   'Tekst': 'Textus',
   'Accent / bullets': 'Accentus / bullae',
   'Tabeltekst': 'Textus tabulae',
@@ -1075,7 +1074,6 @@ const _dutchSourceLa = {
   'Cockpit': 'Tabula cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tempus metae pro numeratione retrograda in praesentante. Dum praesentas, subtiliter ordina tasto K.',
-  'Logo en footer': 'Insigne et pes',
   'Pagina': 'Pagina',
   'Presentatiestijl': 'Stilus praesentationis',
   'Tekst...': 'Textus...',
@@ -1683,6 +1681,11 @@ const _dutchSourceAddLa = <String, String>{
   'waarden herkend.': 'bona cognoscuntur.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'values ​​​​novit. Illi ordines in fundo manent in currenti ordine.',
+  'Footer': 'Pes paginae',
+  'Geldt voor documenten en presentaties':
+      'Valet pro documentis et praesentationibus',
+  'Alleen voor documenten': 'Tantum pro documentis',
+  'Alleen voor presentaties': 'Tantum pro praesentationibus',
   'Als tabel weergeven': 'Propono in mensa',
   'Als tijdlijn weergeven': 'Ostende ut timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

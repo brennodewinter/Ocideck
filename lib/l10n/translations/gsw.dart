@@ -617,7 +617,6 @@ const _dutchSourceGsw = {
   'Profiel verwijderen': 'Profil lösche',
   'Lettertype': 'Schrift',
   'Kleuren': 'Farbe',
-  'Achtergrond slides': 'Slide-Hintergrund',
   'Tekst': 'Täxt',
   'Accent / bullets': 'Aakzänt / Bullets',
   'Tabeltekst': 'Tabälle-Täxt',
@@ -1074,7 +1073,6 @@ const _dutchSourceGsw = {
   'Cockpit': 'Cockpit-Dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Zielziit für de Abläser im Presenter. Während em Presentiere fein iistellbar mit de Taschte K.',
-  'Logo en footer': 'Logo und Footer',
   'Pagina': 'Siite',
   'Presentatiestijl': 'Presentationsstil',
   'Tekst...': 'Text...',
@@ -1671,6 +1669,11 @@ const _dutchSourceAddGsw = <String, String>{
   'waarden herkend.': 'Werte anerkannt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Werte nicht erkannt. Diese Zeilen bleiben in ihrer aktuellen Reihenfolge unten.',
+  'Footer': 'Fuesszile',
+  'Geldt voor documenten en presentaties':
+      'Gilt für Dokumänt und Präsentatione',
+  'Alleen voor documenten': 'Nur für Dokumänt',
+  'Alleen voor presentaties': 'Nur für Präsentatione',
   'Als tabel weergeven': 'Als Tabälle aazeige',
   'Als tijdlijn weergeven': 'Als Ziitachse aazeige',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

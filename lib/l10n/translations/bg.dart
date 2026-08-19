@@ -618,7 +618,6 @@ const _dutchSourceBg = {
   'Profiel verwijderen': 'Изтриване на профил',
   'Lettertype': 'Шрифт',
   'Kleuren': 'Цветове',
-  'Achtergrond slides': 'Фон на слайдове',
   'Tekst': 'Текст',
   'Accent / bullets': 'Акцент / водещи символи',
   'Tabeltekst': 'Текст в таблица',
@@ -1082,7 +1081,6 @@ const _dutchSourceBg = {
   'Cockpit': 'Табло на кокпита',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
-  'Logo en footer': 'Лого и долен колонтитул',
   'Pagina': 'Страница',
   'Presentatiestijl': 'Стил на презентация',
   'Tekst...': 'Текст...',
@@ -1688,6 +1686,10 @@ const _dutchSourceAddBg = <String, String>{
   'waarden herkend.': 'признати ценности.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'неразпознати стойности. Тези редове остават най-отдолу в текущия си ред.',
+  'Footer': 'Долен колонтитул',
+  'Geldt voor documenten en presentaties': 'Важи за документи и презентации',
+  'Alleen voor documenten': 'Само за документи',
+  'Alleen voor presentaties': 'Само за презентации',
   'Als tabel weergeven': 'Показване като таблица',
   'Als tijdlijn weergeven': 'Показване като времева линия',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Footer": {
+      "en": "Footer",
+      "it": "Footer",
+      "de": "Fußzeile",
+      "fr": "Pied de page",
+      "es": "Pie de página",
+      "fy": "Fuottekst",
+      "pap": "Pia di página",
+      "la": "Pes paginae",
+      "id": "Footer",
+      "pl": "Stopka",
+      "uk": "Нижній колонтитул",
+      "gsw": "Fuesszile",
+      "el": "Υποσέλιδο",
+      "da": "Sidefod",
+      "sv": "Sidfot",
+      "hr": "Podnožje",
+      "cs": "Zápatí",
+      "fi": "Alatunniste",
+      "bg": "Долен колонтитул",
+      "lv": "Kājene",
+      "lt": "Poraštė",
+      "mt": "Qiegħ tal-paġna",
+      "et": "Jalus",
+      "hu": "Élőláb",
+      "ga": "Buntásc",
+      "pt": "Rodapé",
+      "ro": "Subsol",
+      "sl": "Noga",
+      "sk": "Päta",
+      "tlh": "bIng mu'mey",
+      "tr": "Altbilgi"
+    }
+  }
+}

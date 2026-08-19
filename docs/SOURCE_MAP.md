@@ -1252,12 +1252,23 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
   a `.ocideckstyle` file is `parts/settings_dialog_profile.dart`; it mutates via
   `_adoptProfile` on the state class, since `setState` is protected and out of
   reach from an extension.
-  `parts/settings_dialog_presentation.dart` composes the shared style tab:
-  logo-aware profile cards plus a Document/Presentation surface selector beside its live
-  preview. `parts/settings_dialog_style_builder.dart` supplies those cards, the
-  compact document controls (shared/overridden logo, header/footer colours and page
-  numbers) and A4 title/content preview, and the complete
-  presentation controls beside the real 16:9 slide renderer.
+  `parts/settings_dialog_presentation.dart` composes the style tab and owns
+  `_StyleSurface` — the three-way split of a style profile into **Algemeen**
+  (what a document and a presentation share), **Document** and **Presentatie**
+  (what only exists there). A field belongs to exactly one surface; that is the
+  whole rule, and the tab shows it. `_activeSurface` overrides the user's choice
+  when a jump (settings search, or the quality panel's `highlightThemeField`)
+  points at an anchor that hangs in another surface's tree — landing on the
+  wrong surface would show nothing at all.
+  `parts/settings_dialog_style_builder.dart` supplies the profile cards, the
+  surface selector and hint, and the three editor panels; the colour blocks
+  themselves come from `parts/settings_dialog_colors.dart`
+  (`_generalColorChildren` for the shared ones, `_slideColorChildren` for the
+  title/section colours a document does not have).
+  `parts/settings_dialog_style_preview.dart` holds one preview per surface —
+  a chrome-less sheet for the shared settings, the A4 title/content sheet with
+  header and footer bands for a document, and the real 16:9 slide renderer for a
+  presentation. Each shows what you can set on that surface and nothing more.
   Anchors are free: every section heading is a `SettingsSectionTitle`
   (`settings/settings_section_title.dart`), which registers a `GlobalKey` under
   its own text, so a hit can scroll its section into view without any of the tab

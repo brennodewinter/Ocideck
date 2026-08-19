@@ -52,6 +52,13 @@ void main() {
     return ProviderScope.containerOf(tester.element(find.byType(MaterialApp)));
   }
 
+  /// De stijlbouwer opent op het algemene vlak — daar staat wat beide vlakken
+  /// delen. Wie het documentvlak wil toetsen, moet er dus eerst heen.
+  Future<void> openSurface(WidgetTester tester, String surface) async {
+    await tester.tap(find.byKey(Key('style-surface-$surface')));
+    await tester.pumpAndSettle();
+  }
+
   testWidgets('het profiel-menu toont de beschikbare profielen', (
     tester,
   ) async {
@@ -125,7 +132,7 @@ void main() {
     addTearDown(container.dispose);
 
     await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
-    await tester.pump();
+    await openSurface(tester, 'document');
 
     final rule = tester.widget<Container>(
       find.byKey(const Key('document-style-accent-rule')),
@@ -170,23 +177,105 @@ void main() {
     );
   });
 
-  testWidgets('document en presentatie hebben elk een echte preview', (
-    tester,
-  ) async {
+  testWidgets('elk vlak heeft zijn eigen voorvertoning', (tester) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
 
-    expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
-    expect(find.byKey(const Key('presentation-style-preview')), findsNothing);
-
-    await tester.tap(find.byKey(const Key('style-surface-presentation')));
-    await tester.pumpAndSettle();
-
+    // Het algemene vlak staat voorop: dat is wat beide vlakken delen.
+    expect(find.byKey(const Key('general-style-preview')), findsOneWidget);
     expect(find.byKey(const Key('document-style-preview')), findsNothing);
+    expect(find.byKey(const Key('presentation-style-preview')), findsNothing);
+    expect(find.text('Geldt voor documenten en presentaties'), findsOneWidget);
+
+    await openSurface(tester, 'document');
+    expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
+    expect(find.byKey(const Key('general-style-preview')), findsNothing);
+    expect(find.text('Alleen voor documenten'), findsOneWidget);
+
+    await openSurface(tester, 'presentation');
     expect(find.byKey(const Key('presentation-style-preview')), findsOneWidget);
+    expect(find.byKey(const Key('document-style-preview')), findsNothing);
+    expect(find.text('Alleen voor presentaties'), findsOneWidget);
+  });
+
+  // De scheiding zelf: geen veld staat op twee vlakken, en geen vlak draagt een
+  // veld van een ander. Dit is de test die terugvalt op het oude gedrag betrapt
+  // — daar stonden de basiskleuren én in het document- én in het
+  // presentatievlak, met een schakelaar die moest uitleggen wat waar gold.
+  testWidgets('elk stijlveld staat op precies één vlak', (tester) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    // Algemeen: lettertype, basiskleuren, checklist, tabel, broncode, severity.
     expect(find.text('Opsommingsteken'), findsOneWidget);
+    expect(find.text('Tabelstijl'), findsOneWidget);
+    expect(find.text('Syntaxkleuring'), findsOneWidget);
+    // …en niets dat maar op één vlak bestaat.
+    expect(find.textContaining('Titelachtergrond'), findsNothing);
+    expect(find.text('Activatieduur'), findsNothing);
+    expect(find.byKey(const Key('document-logo-shared')), findsNothing);
+
+    await openSurface(tester, 'document');
+    expect(find.byKey(const Key('document-logo-shared')), findsOneWidget);
+    expect(find.text('Opsommingsteken'), findsNothing);
+    expect(find.textContaining('Titelachtergrond'), findsNothing);
+    expect(find.text('Activatieduur'), findsNothing);
+
+    await openSurface(tester, 'presentation');
+    expect(find.textContaining('Titelachtergrond'), findsOneWidget);
     expect(find.text('Activatieduur'), findsOneWidget);
-    expect(find.text('Logo positie'), findsOneWidget);
+    expect(find.text('Opsommingsteken'), findsNothing);
+    expect(find.byKey(const Key('document-logo-shared')), findsNothing);
+  });
+
+  // Een sprong vanuit het kwaliteitspaneel wijst een kleurveld aan, en dat
+  // anker hangt in de boom van één vlak. Landt de sprong op het verkeerde vlak,
+  // dan staat de instelling er niet en gebeurt er zichtbaar niets — precies de
+  // stille fout die de driedeling kan introduceren.
+  //
+  // Twee losse tests en niet twee sprongen in één: een tweede `pumpWidget`
+  // ruimt het openstaande dialoog niet op, en dan toetst de tweede sprong het
+  // venster van de eerste.
+  Future<void> openWithField(WidgetTester tester, String field) async {
+    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.presentation,
+                  highlightThemeField: field,
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('een sprong naar een diakleur opent het presentatievlak', (
+    tester,
+  ) async {
+    await openWithField(tester, 'titleTextColor');
+    expect(find.byKey(const Key('presentation-style-editor')), findsOneWidget);
+    // De oplichting dooft na drie seconden; laat die timer aflopen.
+    await tester.pump(const Duration(seconds: 4));
+  });
+
+  testWidgets('een sprong naar een gedeelde kleur opent het algemene vlak', (
+    tester,
+  ) async {
+    await openWithField(tester, 'textColor');
+    expect(find.byKey(const Key('general-style-editor')), findsOneWidget);
+    await tester.pump(const Duration(seconds: 4));
   });
 
   testWidgets('het gekozen logo staat naast de logokiezer', (tester) async {
@@ -194,8 +283,7 @@ void main() {
     addTearDown(container.dispose);
 
     await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
-    await tester.tap(find.byKey(const Key('style-surface-presentation')));
-    await tester.pumpAndSettle();
+    await openSurface(tester, 'presentation');
 
     expect(find.byKey(const Key('style-logo-preview')), findsOneWidget);
   });
@@ -207,7 +295,7 @@ void main() {
     addTearDown(container.dispose);
 
     await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
-    await tester.pumpAndSettle();
+    await openSurface(tester, 'document');
 
     final shared = tester.widget<SwitchListTile>(
       find.byKey(const Key('document-logo-shared')),
@@ -232,6 +320,8 @@ void main() {
   ) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);
+
+    await openSurface(tester, 'document');
 
     expect(find.byKey(const Key('document-header-LibreKAT')), findsOneWidget);
     expect(find.byKey(const Key('document-footer-LibreKAT')), findsOneWidget);
@@ -268,6 +358,8 @@ void main() {
     (tester) async {
       final container = await openAppearanceTab(tester);
       addTearDown(container.dispose);
+
+      await openSurface(tester, 'document');
 
       final header = find.byKey(const Key('document-header-LibreKAT'));
       await tester.enterText(header, '**Vertrouwelijk**\nTweede regel');
@@ -340,20 +432,20 @@ void main() {
     addTearDown(container.dispose);
 
     final wideEditor = tester.getTopLeft(
-      find.byKey(const Key('document-style-editor')),
+      find.byKey(const Key('general-style-editor')),
     );
     final widePreview = tester.getTopLeft(
-      find.byKey(const Key('document-style-preview')),
+      find.byKey(const Key('general-style-preview')),
     );
     expect(widePreview.dx, greaterThan(wideEditor.dx));
 
     await tester.binding.setSurfaceSize(const Size(700, 1000));
     await tester.pumpAndSettle();
     final narrowEditor = tester.getTopLeft(
-      find.byKey(const Key('document-style-editor')),
+      find.byKey(const Key('general-style-editor')),
     );
     final narrowPreview = tester.getTopLeft(
-      find.byKey(const Key('document-style-preview')),
+      find.byKey(const Key('general-style-preview')),
     );
     expect(narrowPreview.dy, greaterThan(narrowEditor.dy));
   });

@@ -621,7 +621,6 @@ const _dutchSourceEl = {
   'Profiel verwijderen': 'Διαγραφή προφίλ',
   'Lettertype': 'Γραμματοσειρά',
   'Kleuren': 'Χρώματα',
-  'Achtergrond slides': 'Φόντο διαφάνειας',
   'Tekst': 'Κείμενο',
   'Accent / bullets': 'Τόνος / κουκκίδες',
   'Tabeltekst': 'Κείμενο πίνακα',
@@ -1085,7 +1084,6 @@ const _dutchSourceEl = {
   'Cockpit': 'Πίνακας cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Χρόνος-στόχος για την αντίστροφη μέτρηση στον presenter. Ρυθμίστε τον με ακρίβεια κατά την παρουσίαση με το πλήκτρο K.',
-  'Logo en footer': 'Λογότυπο και υποσέλιδο',
   'Pagina': 'Σελίδα',
   'Presentatiestijl': 'Στυλ παρουσίασης',
   'Tekst...': 'Κείμενο...',
@@ -1693,6 +1691,11 @@ const _dutchSourceAddEl = <String, String>{
   'waarden herkend.': 'αξίες που αναγνωρίζονται.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'τιμές δεν αναγνωρίζονται. Αυτές οι σειρές παραμένουν στο κάτω μέρος με την τρέχουσα σειρά τους.',
+  'Footer': 'Υποσέλιδο',
+  'Geldt voor documenten en presentaties':
+      'Ισχύει για έγγραφα και παρουσιάσεις',
+  'Alleen voor documenten': 'Μόνο για έγγραφα',
+  'Alleen voor presentaties': 'Μόνο για παρουσιάσεις',
   'Als tabel weergeven': 'Εμφάνιση ως πίνακα',
   'Als tijdlijn weergeven': 'Εμφάνιση ως χρονοδιάγραμμα',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

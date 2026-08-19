@@ -603,7 +603,6 @@ const _dutchSourceTlh = {
   'Profiel verwijderen': 'nab yIQaw\'',
   'Lettertype': 'ghItlh Segh',
   'Kleuren': 'rItlhmey',
-  'Achtergrond slides': '\'echletHom \'em',
   'Tekst': 'mu\'',
   'Accent / bullets': 'wewmoHwI\' / ghItlhmey',
   'Tabeltekst': 'romuS mu\'',
@@ -1053,7 +1052,6 @@ const _dutchSourceTlh = {
   'Cockpit': 'cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'presenter tera\' ngeD mI\'. bItamlI\'taHvIS K DaghajlaHqu\' vaj DapoQ.',
-  'Logo en footer': 'logo \'ej bIng',
   'Pagina': 'nav',
   'Presentatiestijl': 'cha\'nav Segh',
   'Tekst...': 'mu\'ghom...',
@@ -1646,6 +1644,10 @@ const _dutchSourceAddTlh = <String, String>{
   'waarden herkend.': 'De\' luqellu\'.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'De\' \'op ngoQlu\'. rowmey bIngDaq pat DaH luntaH.',
+  'Footer': 'bIng mu\'mey',
+  'Geldt voor documenten en presentaties': 'ghItlhmey cha\'navmey je',
+  'Alleen voor documenten': 'ghItlhmey neH',
+  'Alleen voor presentaties': 'cha\'navmey neH',
   'Als tabel weergeven': 'romuS \'ang',
   'Als tijdlijn weergeven': 'poH tlhegh \'ang',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

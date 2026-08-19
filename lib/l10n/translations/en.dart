@@ -611,7 +611,6 @@ const _dutchSourceEn = {
   'Profiel verwijderen': 'Delete profile',
   'Lettertype': 'Font',
   'Kleuren': 'Colors',
-  'Achtergrond slides': 'Slide background',
   'Tekst': 'Text',
   'Accent / bullets': 'Accent / bullets',
   'Tabeltekst': 'Table text',
@@ -870,6 +869,11 @@ const _dutchSourceAddEn = {
   'waarden herkend.': 'values ​​recognized.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'values ​​not recognized. Those rows remain at the bottom in their current order.',
+  'Footer': 'Footer',
+  'Geldt voor documenten en presentaties':
+      'Applies to documents and presentations',
+  'Alleen voor documenten': 'Documents only',
+  'Alleen voor presentaties': 'Presentations only',
   'Als tabel weergeven': 'Display as table',
   'Als tijdlijn weergeven': 'Show as timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3954,7 +3958,6 @@ const _dutchSourceAddEn = {
   'Cockpit': 'Cockpit dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Target time for the presenter countdown. Fine-tune it while presenting with the K key.',
-  'Logo en footer': 'Logo and footer',
   'Notities voor tijdens het presenteren': 'Notes for while presenting',
   'Notities weggooien': 'Discard notes',
   'Pagina': 'Page',

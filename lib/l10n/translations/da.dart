@@ -615,7 +615,6 @@ const _dutchSourceDa = {
   'Profiel verwijderen': 'Slet profil',
   'Lettertype': 'Skrifttype',
   'Kleuren': 'Farver',
-  'Achtergrond slides': 'Slidebaggrund',
   'Tekst': 'Tekst',
   'Accent / bullets': 'Accent / bullets',
   'Tabeltekst': 'Tabeltekst',
@@ -1070,7 +1069,6 @@ const _dutchSourceDa = {
   'Cockpit': 'Cockpit-dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Måltid for nedtællingen i præsentatoren. Finjustér den under præsentationen med tasten K.',
-  'Logo en footer': 'Logo og sidefod',
   'Pagina': 'Side',
   'Presentatiestijl': 'Præsentationsstil',
   'Tekst...': 'Tekst...',
@@ -1668,6 +1666,11 @@ const _dutchSourceAddDa = <String, String>{
   'waarden herkend.': 'værdier anerkendt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'værdier ikke anerkendt. Disse rækker forbliver nederst i deres nuværende rækkefølge.',
+  'Footer': 'Sidefod',
+  'Geldt voor documenten en presentaties':
+      'Gælder for dokumenter og præsentationer',
+  'Alleen voor documenten': 'Kun for dokumenter',
+  'Alleen voor presentaties': 'Kun for præsentationer',
   'Als tabel weergeven': 'Vises som tabel',
   'Als tijdlijn weergeven': 'Vis som tidslinje',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -425,3 +425,9 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
     );
   }
 }
+
+/// De lettertypekeuze toont elk lettertype in zijn eigen letter. Top-level en
+/// hier, bij de enige aanroeper — in de bibliotheekkop stond hij ver van het
+/// scherm dat hem gebruikt.
+TextStyle _fontStyle(String font, TextStyle base) =>
+    base.copyWith(fontFamily: font);

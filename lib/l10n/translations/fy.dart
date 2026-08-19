@@ -701,6 +701,11 @@ const _dutchSourceAddFy = {
   'waarden herkend.': 'wearden erkend.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'wearden net erkend. Dy rigen bliuwe ûnderoan yn harren hjoeddeistige folchoarder.',
+  'Footer': 'Fuottekst',
+  'Geldt voor documenten en presentaties':
+      'Jildt foar dokuminten en presintaasjes',
+  'Alleen voor documenten': 'Allinnich foar dokuminten',
+  'Alleen voor presentaties': 'Allinnich foar presintaasjes',
   'Als tabel weergeven': 'Lit sjen as tabel',
   'Als tijdlijn weergeven': 'Lit sjen as tiidline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3812,7 +3817,6 @@ const _dutchSourceAddFy = {
   'Cockpit': 'Cockpit-dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Doeltiid foar de ôftelling yn de presenter. By it presintearjen fyn ôf te stellen mei de toets K.',
-  'Logo en footer': 'Logo en fuottekst',
   'Notities voor tijdens het presenteren': 'Notysjes foar by it presintearjen',
   'Notities weggooien': 'Notysjes fuortsmite',
   'Pagina': 'Side',
@@ -3919,7 +3923,6 @@ const _dutchSourceAddFy = {
   '1 slide kopiëren naar…': '1 dia kopiearje nei…',
   '1 slide overgeslagen': '1 dia oerslein',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Eftergrûn dia\'s',
   'Afbeelding': 'Ofbylding',
   'Afbeelding gekopieerd naar klembord.': 'Ôfbylding kopiearre nei klamboerd.',
   'Afbeelding plakken': 'Ôfbylding plakke',

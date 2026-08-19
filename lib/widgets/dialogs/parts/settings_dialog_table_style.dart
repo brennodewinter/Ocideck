@@ -19,6 +19,9 @@ extension _SettingsTableStyle on _SettingsDialogState {
         const SizedBox(height: 8),
         // Randstijl: lined / boxed / none
         DropdownButtonFormField<TableBorderStyle>(
+          // Uitgeklapt, want "Omrand (volledig)" past niet naast het pijltje
+          // wanneer het paneel smal staat — dan liep de regel over de rand.
+          isExpanded: true,
           initialValue: _themeProfile.tableBorderStyle,
           decoration: InputDecoration(
             labelText: l10n.d('Randstijl'),

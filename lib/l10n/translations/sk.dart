@@ -614,7 +614,6 @@ const _dutchSourceSk = {
   'Profiel verwijderen': 'Odstrániť profil',
   'Lettertype': 'Písmo',
   'Kleuren': 'Farby',
-  'Achtergrond slides': 'Pozadie snímky',
   'Tekst': 'Text',
   'Accent / bullets': 'Akcent / odrážky',
   'Tabeltekst': 'Text tabuľky',
@@ -1076,7 +1075,6 @@ const _dutchSourceSk = {
   'Cockpit': 'Kokpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Cieľový čas pre odpočet v prezentéri. Počas prezentovania sa dá doladiť klávesom K.',
-  'Logo en footer': 'Logo a päta',
   'Pagina': 'Strana',
   'Presentatiestijl': 'Štýl prezentácie',
   'Tekst...': 'Text...',
@@ -1675,6 +1673,10 @@ const _dutchSourceAddSk = <String, String>{
   'waarden herkend.': 'uznávané hodnoty.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'hodnoty nie sú uznané. Tieto riadky zostanú naspodku v aktuálnom poradí.',
+  'Footer': 'Päta',
+  'Geldt voor documenten en presentaties': 'Platí pre dokumenty aj prezentácie',
+  'Alleen voor documenten': 'Len pre dokumenty',
+  'Alleen voor presentaties': 'Len pre prezentácie',
   'Als tabel weergeven': 'Zobraziť ako tabuľku',
   'Als tijdlijn weergeven': 'Zobraziť ako časovú os',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

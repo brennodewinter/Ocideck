@@ -245,7 +245,12 @@ const Map<String, int> classSizeBaseline = {
       // andere secties van dat tabblad en leest als zij; hem als enige buiten de
       // klasse zetten zou de sectie-opbouw daar inconsistent maken voor drie
       // regels winst.
-      6230,
+      // −53: het kleurvlakje van een kleurkiezer (`_colorSwatchButton`) en de
+      // lettertype-stijlhulp (`_fontStyle`) staan nu top-level. Geen van beide
+      // leest een veld van dit scherm, dus ze hoorden er ook niet in — de
+      // driedeling van de stijlbouwer (algemeen/document/presentatie) betaalde
+      // zichzelf zo terug.
+      6177,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —

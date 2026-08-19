@@ -618,7 +618,6 @@ const _dutchSourceMt = {
   'Profiel verwijderen': 'Ħassar il-profil',
   'Lettertype': 'Font',
   'Kleuren': 'Kuluri',
-  'Achtergrond slides': 'Sfond tas-slide',
   'Tekst': 'Test',
   'Accent / bullets': 'Aċċent / bullets',
   'Tabeltekst': 'Test tat-tabella',
@@ -1081,7 +1080,6 @@ const _dutchSourceMt = {
   'Cockpit': 'Dashboard tal-cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Ħin fil-mira għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
-  'Logo en footer': 'Logo u footer',
   'Pagina': 'Paġna',
   'Presentatiestijl': 'Stil ta\' preżentazzjoni',
   'Tekst...': 'Test...',
@@ -1687,6 +1685,11 @@ const _dutchSourceAddMt = <String, String>{
   'waarden herkend.': 'valuri rikonoxxuti.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valuri mhux rikonoxxuti. Dawk ir-ringieli jibqgħu fil-qiegħ fl-ordni attwali tagħhom.',
+  'Footer': 'Qiegħ tal-paġna',
+  'Geldt voor documenten en presentaties':
+      'Japplika għal dokumenti u preżentazzjonijiet',
+  'Alleen voor documenten': 'Għal dokumenti biss',
+  'Alleen voor presentaties': 'Għal preżentazzjonijiet biss',
   'Als tabel weergeven': 'Wiri bħala tabella',
   'Als tijdlijn weergeven': 'Uri bħala timeline',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

@@ -613,7 +613,6 @@ const _dutchSourceSl = {
   'Profiel verwijderen': 'Izbriši profil',
   'Lettertype': 'Pisava',
   'Kleuren': 'Barve',
-  'Achtergrond slides': 'Ozadje diapozitivov',
   'Tekst': 'Besedilo',
   'Accent / bullets': 'Poudarek / alineje',
   'Tabeltekst': 'Besedilo tabele',
@@ -1069,7 +1068,6 @@ const _dutchSourceSl = {
   'Cockpit': 'Kokpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
-  'Logo en footer': 'Logotip in noga',
   'Pagina': 'Stran',
   'Presentatiestijl': 'Slog predstavitve',
   'Tekst...': 'Besedilo ...',
@@ -1669,6 +1667,10 @@ const _dutchSourceAddSl = <String, String>{
   'waarden herkend.': 'vrednote priznane.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vrednote niso prepoznane. Te vrstice ostanejo na dnu v trenutnem vrstnem redu.',
+  'Footer': 'Noga',
+  'Geldt voor documenten en presentaties': 'Velja za dokumente in predstavitve',
+  'Alleen voor documenten': 'Samo za dokumente',
+  'Alleen voor presentaties': 'Samo za predstavitve',
   'Als tabel weergeven': 'Prikaz kot tabela',
   'Als tijdlijn weergeven': 'Prikaži kot časovnico',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

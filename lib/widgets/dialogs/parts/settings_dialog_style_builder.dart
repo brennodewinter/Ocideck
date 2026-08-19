@@ -42,10 +42,9 @@ class _DocumentStyleBuilder {
   bool get _stylePreviewShowsContent => owner._stylePreviewShowsContent;
   set _stylePreviewShowsContent(bool value) =>
       owner._stylePreviewShowsContent = value;
-  bool get _stylePreviewShowsPresentation =>
-      owner._stylePreviewShowsPresentation;
-  set _stylePreviewShowsPresentation(bool value) =>
-      owner._stylePreviewShowsPresentation = value;
+  _StyleSurface get _styleSurface => owner._styleSurface;
+  set _styleSurface(_StyleSurface value) => owner._styleSurface = value;
+  String? get _highlightedThemeField => owner._highlightedThemeField;
   set _profileTouched(bool value) => owner._profileTouched = value;
   String? get _highlightedSection => owner._highlightedSection;
   bool get mounted => owner.mounted;
@@ -58,40 +57,110 @@ class _DocumentStyleBuilder {
   Widget _fontSection() => owner._fontSection();
   Widget _presentationStyleDivider(String title) =>
       owner._presentationStyleDivider(title);
-  List<Widget> _colorsSectionChildren() => owner._colorsSectionChildren();
+  List<Widget> _generalColorChildren() => owner._generalColorChildren();
+  List<Widget> _slideColorChildren() => owner._slideColorChildren();
   List<Widget> _animationSettings() => owner._animationSettings();
-  List<Widget> _logoSectionChildren() => owner._logoSectionChildren();
+  List<Widget> _slideLogoChildren() => owner._slideLogoChildren();
+  List<Widget> _footerSettings() => owner._footerSettings();
+  List<Widget> _closingSlideSettings() => owner._closingSlideSettings();
 
-  bool _showsPresentation(AppLocalizations l10n) =>
-      _stylePreviewShowsPresentation ||
-      (_highlightedSection != null &&
-          _highlightedSection!.isNotEmpty &&
-          _highlightedSection != l10n.t('styleProfile'));
+  /// De sectiekoppen per vlak, in de taal waarin ze op het scherm staan.
+  ///
+  /// Bestaat voor de sprong vanuit het zoekveld en vanuit het kwaliteitspaneel:
+  /// die wijzen een sectie of een kleurveld aan, en dat anker hangt in de boom
+  /// van één vlak. Landde de sprong op het verkeerde vlak, dan stond de
+  /// instelling er niet en gebeurde er zichtbaar niets.
+  Map<_StyleSurface, List<String>> _surfaceSections(AppLocalizations l10n) => {
+    _StyleSurface.general: [
+      l10n.d('Lettertype'),
+      l10n.d('Kleuren'),
+      l10n.d('Checklist'),
+      l10n.d('Tabel'),
+      l10n.d('Broncode'),
+      l10n.d('Severity (bevindingen)'),
+    ],
+    _StyleSurface.document: [l10n.d('Logo'), l10n.d('Koptekst')],
+    _StyleSurface.presentation: [
+      l10n.d('Footer'),
+      l10n.d('Laatste slide'),
+      l10n.d('Animatie'),
+    ],
+  };
 
-  Widget _surfaceSelector(AppLocalizations l10n) => SegmentedButton<bool>(
-    segments: [
-      ButtonSegment(
-        value: false,
-        label: Text(
-          l10n.d('Document'),
-          key: const Key('style-surface-document'),
+  /// De kleurvelden die alléén op een dia bestaan. Alle andere ankers zitten in
+  /// het algemene vlak; een lijst van de uitzonderingen blijft klein en is dus
+  /// de kant die je bijhoudt.
+  static const _slideOnlyThemeFields = {
+    'titleBackgroundColor',
+    'titleTextColor',
+    'sectionBackgroundColor',
+    'logoPath',
+  };
+
+  /// Het vlak dat nu getekend wordt: de keuze van de gebruiker, tenzij een
+  /// sprong een anker aanwijst dat op een ander vlak hangt.
+  _StyleSurface _activeSurface(AppLocalizations l10n) {
+    final field = _highlightedThemeField;
+    if (field != null) {
+      return _slideOnlyThemeFields.contains(field)
+          ? _StyleSurface.presentation
+          : _StyleSurface.general;
+    }
+    final section = _highlightedSection;
+    if (section != null && section.isNotEmpty) {
+      for (final entry in _surfaceSections(l10n).entries) {
+        if (entry.value.contains(section)) return entry.key;
+      }
+    }
+    return _styleSurface;
+  }
+
+  Widget _surfaceSelector(AppLocalizations l10n, _StyleSurface surface) =>
+      SegmentedButton<_StyleSurface>(
+        segments: [
+          for (final value in _StyleSurface.values)
+            ButtonSegment(
+              value: value,
+              label: Text(
+                value.label(l10n),
+                key: Key('style-surface-${value.name}'),
+              ),
+              icon: Icon(value.icon, size: 17),
+            ),
+        ],
+        selected: {surface},
+        showSelectedIcon: false,
+        onSelectionChanged: (value) =>
+            _rebuild(() => _styleSurface = value.first),
+      );
+
+  Widget _surfaceHint(AppLocalizations l10n, _StyleSurface surface) => Row(
+    children: [
+      Icon(Icons.info_outline, size: 15, color: AppTheme.slate500),
+      const SizedBox(width: 7),
+      Flexible(
+        child: Text(
+          surface.hint(l10n),
+          key: const Key('style-surface-hint'),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
-        icon: const Icon(Icons.description_outlined, size: 17),
-      ),
-      ButtonSegment(
-        value: true,
-        label: Text(
-          l10n.d('Presentatie'),
-          key: const Key('style-surface-presentation'),
-        ),
-        icon: const Icon(Icons.slideshow_outlined, size: 17),
       ),
     ],
-    selected: {_showsPresentation(l10n)},
-    showSelectedIcon: false,
-    onSelectionChanged: (value) =>
-        _rebuild(() => _stylePreviewShowsPresentation = value.first),
   );
+
+  Widget _surfaceEditor(AppLocalizations l10n, _StyleSurface surface) =>
+      switch (surface) {
+        _StyleSurface.general => _generalStyleSettings(l10n),
+        _StyleSurface.document => _documentStyleSettings(l10n),
+        _StyleSurface.presentation => _presentationStyleSettings(l10n),
+      };
+
+  Widget _surfacePreview(AppLocalizations l10n, _StyleSurface surface) =>
+      switch (surface) {
+        _StyleSurface.general => _generalStylePreview(l10n),
+        _StyleSurface.document => _documentStylePreview(l10n),
+        _StyleSurface.presentation => _presentationStylePreview(l10n),
+      };
   Widget _styleProfileCards(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
     return Column(
@@ -218,83 +287,55 @@ class _DocumentStyleBuilder {
     );
   }
 
-  Widget _documentStyleSettings(AppLocalizations l10n) {
-    return Material(
-      key: const Key('document-style-editor'),
-      color: AppTheme.paper,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
-        side: BorderSide(color: AppTheme.slate300),
-      ),
-      clipBehavior: Clip.antiAlias,
+  /// Het algemene vlak: alles wat een document én een presentatie draagt.
+  Widget _generalStyleSettings(AppLocalizations l10n) => Material(
+    key: const Key('general-style-editor'),
+    color: AppTheme.paper,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(6),
+      side: BorderSide(color: AppTheme.slate300),
+    ),
+    clipBehavior: Clip.antiAlias,
+    child: Padding(
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              l10n.d('Basis'),
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: AppTheme.slate800,
-              ),
-            ),
-          ),
-          _styleColorField(
-            l10n.d('Achtergrond'),
-            _themeProfile.slideBackgroundColor,
-            (value) => _themeProfile = _themeProfile.copyWith(
-              slideBackgroundColor: value,
-            ),
-          ),
-          _styleColorField(
-            l10n.d('Tekst'),
-            _themeProfile.textColor,
-            (value) => _themeProfile = _themeProfile.copyWith(textColor: value),
-          ),
-          _styleColorField(
-            l10n.d('Accent / bullets'),
-            _themeProfile.accentColor,
-            (value) =>
-                _themeProfile = _themeProfile.copyWith(accentColor: value),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(14, 8, 14, 14),
-            child: DropdownButtonFormField<String>(
-              isExpanded: true,
-              initialValue:
-                  AppSettings.availableFonts.contains(_themeProfile.fontFamily)
-                  ? _themeProfile.fontFamily
-                  : AppSettings.availableFonts.first,
-              decoration: InputDecoration(
-                labelText: l10n.d('Lettertype'),
-                isDense: true,
-              ),
-              items: [
-                for (final font in AppSettings.availableFonts)
-                  DropdownMenuItem(
-                    value: font,
-                    child: Text(font, style: TextStyle(fontFamily: font)),
-                  ),
-              ],
-              onChanged: (font) {
-                if (font == null) return;
-                _rebuild(() {
-                  _themeProfile = _themeProfile.copyWith(fontFamily: font);
-                  _profileTouched = true;
-                });
-              },
-            ),
-          ),
+          _sectionTitle(l10n.d('Lettertype')),
+          const SizedBox(height: 8),
+          _fontSection(),
+          _presentationStyleDivider(l10n.d('Kleuren')),
+          ..._generalColorChildren(),
           _profileContrastSummary(),
-          _presentationStyleDivider(l10n.d('Logo')),
+        ],
+      ),
+    ),
+  );
+
+  /// Het documentvlak: wat alleen op een blad bestaat — een eigen logo, een
+  /// kop- en voetregel en de paginanummering.
+  Widget _documentStyleSettings(AppLocalizations l10n) => Material(
+    key: const Key('document-style-editor'),
+    color: AppTheme.paper,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(6),
+      side: BorderSide(color: AppTheme.slate300),
+    ),
+    clipBehavior: Clip.antiAlias,
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _sectionTitle(l10n.d('Logo')),
+          const SizedBox(height: 8),
           ..._documentLogoSettings(l10n),
           _presentationStyleDivider(l10n.d('Koptekst')),
           ..._documentChromeSettings(l10n),
         ],
       ),
-    );
-  }
+    ),
+  );
 
   List<Widget> _documentLogoSettings(AppLocalizations l10n) {
     final shared = _themeProfile.documentLogoPath == null;
@@ -502,6 +543,8 @@ class _DocumentStyleBuilder {
     });
   }
 
+  /// Het presentatievlak: wat alleen een dia heeft — de titel- en sectiebalk,
+  /// het dialogo, de footer, de slotdia en de animatieduur.
   Widget _presentationStyleSettings(AppLocalizations l10n) => Material(
     key: const Key('presentation-style-editor'),
     color: AppTheme.paper,
@@ -515,15 +558,17 @@ class _DocumentStyleBuilder {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _sectionTitle(l10n.d('Lettertype')),
+          _sectionTitle(l10n.d('Kleuren')),
           const SizedBox(height: 8),
-          _fontSection(),
-          _presentationStyleDivider(l10n.d('Kleuren')),
-          ..._colorsSectionChildren(),
+          ..._slideColorChildren(),
+          _presentationStyleDivider(l10n.d('Logo')),
+          ..._slideLogoChildren(),
+          _presentationStyleDivider(l10n.d('Footer')),
+          ..._footerSettings(),
+          _presentationStyleDivider(l10n.d('Laatste slide')),
+          ..._closingSlideSettings(),
           _presentationStyleDivider(l10n.d('Animatie')),
           ..._animationSettings(),
-          _presentationStyleDivider(l10n.d('Logo en footer')),
-          ..._logoSectionChildren(),
         ],
       ),
     ),
@@ -583,252 +628,6 @@ class _DocumentStyleBuilder {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _documentStylePreview(AppLocalizations l10n) {
-    final paper = AppTheme.parseHexColor(_themeProfile.slideBackgroundColor);
-    final ink = AppTheme.parseHexColor(_themeProfile.textColor);
-    final accent = AppTheme.parseHexColor(_themeProfile.accentColor);
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppTheme.slate200,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppTheme.slate300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 12,
-            runSpacing: 8,
-            children: [
-              Text(
-                l10n.d('Voorvertoning'),
-                style: TextStyle(
-                  color: AppTheme.slate700,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              SegmentedButton<bool>(
-                segments: [
-                  ButtonSegment(value: false, label: Text(l10n.d('Titel'))),
-                  ButtonSegment(value: true, label: Text(l10n.d('Inhoud'))),
-                ],
-                selected: {_stylePreviewShowsContent},
-                showSelectedIcon: false,
-                style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                onSelectionChanged: (value) =>
-                    _rebuild(() => _stylePreviewShowsContent = value.first),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Center(
-            child: AspectRatio(
-              aspectRatio: 1 / 1.414,
-              child: Container(
-                key: const Key('document-style-preview'),
-                constraints: const BoxConstraints(maxWidth: 520),
-                padding: const EdgeInsets.fromLTRB(34, 28, 34, 24),
-                decoration: BoxDecoration(
-                  color: paper,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: AppTheme.shadow20,
-                      blurRadius: 12,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                    color: ink,
-                    fontFamily: _themeProfile.fontFamily,
-                  ),
-                  child: _stylePreviewShowsContent
-                      ? _documentPreviewContent(l10n, paper, ink, accent)
-                      : _documentPreviewTitle(l10n, ink, accent),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _presentationStylePreview(AppLocalizations l10n) {
-    final profile = owner._editedProfile();
-    final slide = Slide.create(SlideType.bullets).copyWith(
-      title: l10n.d('Voorvertoning'),
-      bullets: [
-        l10n.d('De snelle bruine vos springt over de luie hond.'),
-        l10n.d('Besluit gevraagd'),
-        l10n.d('Voorbeeldtekst'),
-      ],
-    );
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppTheme.slate200,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppTheme.slate300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            l10n.d('Voorvertoning'),
-            style: TextStyle(
-              color: AppTheme.slate700,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Container(
-            key: const Key('presentation-style-preview'),
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: AppTheme.shadow20,
-                  blurRadius: 12,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            child: SlidePreviewWidget(
-              slide: slide,
-              themeProfile: profile,
-              slideNumber: 2,
-              slideCount: 8,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _documentPreviewTitle(AppLocalizations l10n, Color ink, Color accent) {
-    final profile = owner._editedProfile();
-    return Column(
-      children: [
-        DocumentChromeBand(profile: profile, header: true, compact: true),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Spacer(),
-              Text(
-                l10n.d('Documentstijl'),
-                style: TextStyle(
-                  color: accent,
-                  fontSize: 12,
-                  letterSpacing: 1.1,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                _themeProfile.name,
-                style: TextStyle(
-                  color: ink,
-                  fontSize: 30,
-                  height: 1.05,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                l10n.d('De snelle bruine vos springt over de luie hond.'),
-                style: TextStyle(
-                  color: ink.withValues(alpha: 0.72),
-                  height: 1.45,
-                ),
-              ),
-              const Spacer(flex: 2),
-            ],
-          ),
-        ),
-        DocumentChromeBand(
-          profile: profile,
-          header: false,
-          pageLabel: '1 / 8',
-          compact: true,
-        ),
-      ],
-    );
-  }
-
-  Widget _documentPreviewContent(
-    AppLocalizations l10n,
-    Color paper,
-    Color ink,
-    Color accent,
-  ) {
-    final scheme =
-        ColorScheme.fromSeed(
-          seedColor: accent,
-          brightness: paper.computeLuminance() < 0.45
-              ? Brightness.dark
-              : Brightness.light,
-          surface: paper,
-        ).copyWith(
-          primary: accent,
-          onSurface: ink,
-          onSurfaceVariant: ink.withValues(alpha: 0.72),
-          outlineVariant: ink.withValues(alpha: 0.25),
-          surfaceContainerHighest: accent.withValues(alpha: 0.12),
-        );
-    final markdown =
-        '''
-# ${l10n.d('Voorvertoning')}
-
-${l10n.d('De snelle bruine vos springt over de luie hond.')}
-
-## ${l10n.d('Besluit gevraagd')}
-
-- ${l10n.d('Voorbeeldtekst')}
-- ${l10n.d('Inhoud')}
-''';
-    final profile = owner._editedProfile();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        DocumentChromeBand(profile: profile, header: true, compact: true),
-        const SizedBox(height: 22),
-        Expanded(
-          child: SingleChildScrollView(
-            primary: false,
-            child: Theme(
-              data: ThemeData(
-                colorScheme: scheme,
-                fontFamily: _themeProfile.fontFamily,
-                textTheme: ThemeData.light().textTheme.apply(
-                  fontFamily: _themeProfile.fontFamily,
-                  bodyColor: ink,
-                  displayColor: ink,
-                ),
-              ),
-              child: DocumentMarkdownView(
-                markdown,
-                maxTextWidth: null,
-                themeProfile: _themeProfile,
-                chartTheme: _themeProfile,
-              ),
-            ),
-          ),
-        ),
-        DocumentChromeBand(
-          profile: profile,
-          header: false,
-          pageLabel: '3 / 8',
-          compact: true,
-        ),
-      ],
     );
   }
 }
