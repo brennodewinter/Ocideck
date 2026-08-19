@@ -32,6 +32,11 @@ const unchangedInEnglish = {
   // vertalen het wél (Grieks Συνομιλία, Hongaars Csevegés, Sloveens Klepet, …),
   // dus alleen op de Engelse witte lijst — niet op unchangedInAllLanguages.
   'Chat',
+  // De sectiekop van de dia-footer in de stijlbouwer. Engels en Italiaans
+  // houden het leenwoord 'Footer'; de meeste andere talen vertalen het wél
+  // (Duits Fußzeile, Frans Pied de page, Zweeds Sidfot, …), dus alleen op de
+  // Engelse witte lijst.
+  'Footer',
   // De media-preflighttegel: het Engels houdt 'Media (WebRTC)' identiek aan het
   // Nederlands, maar andere talen vertalen 'Media' wél (Duits Medien, Frans
   // Médias, Grieks Πολυμέσα, …), dus alleen op de Engelse witte lijst — niet op

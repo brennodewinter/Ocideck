@@ -612,7 +612,6 @@ const _dutchSourceSv = {
   'Profiel verwijderen': 'Ta bort profil',
   'Lettertype': 'Teckensnitt',
   'Kleuren': 'Färger',
-  'Achtergrond slides': 'Bildbakgrund',
   'Tekst': 'Text',
   'Accent / bullets': 'Accent / punkter',
   'Tabeltekst': 'Tabelltext',
@@ -1069,7 +1068,6 @@ const _dutchSourceSv = {
   'Cockpit': 'Cockpit-instrumentpanel',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Måltid för presentatörens nedräkning. Finjustera den under presentationen med tangenten K.',
-  'Logo en footer': 'Logotyp och sidfot',
   'Pagina': 'Sida',
   'Presentatiestijl': 'Presentationsstil',
   'Tekst...': 'Text...',
@@ -1667,6 +1665,15 @@ const _dutchSourceAddSv = <String, String>{
   'waarden herkend.': 'värden erkända.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'värden som inte känns igen. Dessa rader ligger kvar längst ner i deras nuvarande ordning.',
+  'Basislettergrootte: {px} px': 'Grundstorlek på text: {px} px',
+  'Basislettergrootte': 'Grundstorlek på text',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Rubriker, fotnoter och tidslinjekort skalar med den här storleken.',
+  'Footer': 'Sidfot',
+  'Geldt voor documenten en presentaties':
+      'Gäller för dokument och presentationer',
+  'Alleen voor documenten': 'Endast för dokument',
+  'Alleen voor presentaties': 'Endast för presentationer',
   'Als tabel weergeven': 'Visa som tabell',
   'Als tijdlijn weergeven': 'Visa som tidslinje',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

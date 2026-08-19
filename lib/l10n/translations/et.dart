@@ -613,7 +613,6 @@ const _dutchSourceEt = {
   'Profiel verwijderen': 'Kustuta profiil',
   'Lettertype': 'Font',
   'Kleuren': 'Värvid',
-  'Achtergrond slides': 'Slaidi taust',
   'Tekst': 'Tekst',
   'Accent / bullets': 'Aktsent / täpid',
   'Tabeltekst': 'Tabeli tekst',
@@ -1067,7 +1066,6 @@ const _dutchSourceEt = {
   'Cockpit': 'Kokpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
-  'Logo en footer': 'Logo ja jalus',
   'Pagina': 'Lehekülg',
   'Presentatiestijl': 'Esitlusstiil',
   'Tekst...': 'Tekst...',
@@ -1662,6 +1660,15 @@ const _dutchSourceAddEt = <String, String>{
   'waarden herkend.': 'tunnustatud väärtused.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'väärtusi ei tuvastata. Need read jäävad praeguses järjekorras alumisse ossa.',
+  'Basislettergrootte: {px} px': 'Kirja põhisuurus: {px} px',
+  'Basislettergrootte': 'Kirja põhisuurus',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Pealkirjad, joonealused märkused ja ajatelje kaardid skaleeruvad selle suurusega.',
+  'Footer': 'Jalus',
+  'Geldt voor documenten en presentaties':
+      'Kehtib dokumentide ja esitluste kohta',
+  'Alleen voor documenten': 'Ainult dokumentidele',
+  'Alleen voor presentaties': 'Ainult esitlustele',
   'Als tabel weergeven': 'Kuva tabelina',
   'Als tijdlijn weergeven': 'Kuva ajaskaalana',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

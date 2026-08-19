@@ -698,6 +698,14 @@ const _dutchSourceAddIt = {
   'waarden herkend.': 'valori riconosciuti.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valori non riconosciuti. Tali righe rimangono in fondo nell\'ordine corrente.',
+  'Basislettergrootte: {px} px': 'Dimensione base del carattere: {px} px',
+  'Basislettergrootte': 'Dimensione base del carattere',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Titoli, note a piè di pagina e schede della timeline si adattano a questa dimensione.',
+  'Footer': 'Footer',
+  'Geldt voor documenten en presentaties': 'Vale per documenti e presentazioni',
+  'Alleen voor documenten': 'Solo per i documenti',
+  'Alleen voor presentaties': 'Solo per le presentazioni',
   'Als tabel weergeven': 'Visualizza come tabella',
   'Als tijdlijn weergeven': 'Mostra come sequenza temporale',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3849,7 +3857,6 @@ const _dutchSourceAddIt = {
   'Cockpit': 'Cruscotto cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tempo obiettivo per il conto alla rovescia del presenter. Regolalo durante la presentazione con il tasto K.',
-  'Logo en footer': 'Logo e piè di pagina',
   'Notities voor tijdens het presenteren': 'Note per la presentazione',
   'Notities weggooien': 'Elimina note',
   'Pagina': 'Pagina',
@@ -3959,7 +3966,6 @@ const _dutchSourceAddIt = {
   '1 slide kopiëren naar…': 'Copia 1 diapositiva in…',
   '1 slide overgeslagen': '1 diapositiva saltata',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Sfondo diapositive',
   'Afbeelding': 'Immagine',
   'Afbeelding gekopieerd naar klembord.': 'Immagine copiata negli appunti.',
   'Afbeelding plakken': 'Incolla immagine',

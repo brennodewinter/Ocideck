@@ -618,7 +618,6 @@ const _dutchSourcePl = {
   'Profiel verwijderen': 'Usuń profil',
   'Lettertype': 'Czcionka',
   'Kleuren': 'Kolory',
-  'Achtergrond slides': 'Tło slajdu',
   'Tekst': 'Tekst',
   'Accent / bullets': 'Akcent / punktory',
   'Tabeltekst': 'Tekst tabeli',
@@ -1076,7 +1075,6 @@ const _dutchSourcePl = {
   'Cockpit': 'Pulpit kokpitu',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Czas docelowy odliczania w prezenterze. Podczas prezentacji można go precyzyjnie dostroić klawiszem K.',
-  'Logo en footer': 'Logo i stopka',
   'Pagina': 'Strona',
   'Presentatiestijl': 'Styl prezentacji',
   'Tekst...': 'Tekst...',
@@ -1680,6 +1678,14 @@ const _dutchSourceAddPl = <String, String>{
   'waarden herkend.': 'uznane wartości.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'wartości nierozpoznane. Te wiersze pozostają na dole w bieżącej kolejności.',
+  'Basislettergrootte: {px} px': 'Podstawowy rozmiar czcionki: {px} px',
+  'Basislettergrootte': 'Podstawowy rozmiar czcionki',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Nagłówki, przypisy i karty osi czasu skalują się wraz z tym rozmiarem.',
+  'Footer': 'Stopka',
+  'Geldt voor documenten en presentaties': 'Dotyczy dokumentów i prezentacji',
+  'Alleen voor documenten': 'Tylko dla dokumentów',
+  'Alleen voor presentaties': 'Tylko dla prezentacji',
   'Als tabel weergeven': 'Wyświetl jako tabelę',
   'Als tijdlijn weergeven': 'Pokaż jako oś czasu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

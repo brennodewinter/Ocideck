@@ -622,7 +622,6 @@ const _dutchSourcePt = {
   'Profiel verwijderen': 'Eliminar perfil',
   'Lettertype': 'Tipo de letra',
   'Kleuren': 'Cores',
-  'Achtergrond slides': 'Fundo do slide',
   'Tekst': 'Texto',
   'Accent / bullets': 'Destaque / marcadores',
   'Tabeltekst': 'Texto da tabela',
@@ -1087,7 +1086,6 @@ const _dutchSourcePt = {
   'Cockpit': 'Painel do cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tempo-alvo para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
-  'Logo en footer': 'Logótipo e rodapé',
   'Pagina': 'Página',
   'Presentatiestijl': 'Estilo de apresentação',
   'Tekst...': 'Texto...',
@@ -1696,6 +1694,15 @@ const _dutchSourceAddPt = <String, String>{
   'waarden herkend.': 'valores reconhecidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valores não reconhecidos. Essas linhas permanecem na parte inferior na ordem atual.',
+  'Basislettergrootte: {px} px': 'Tamanho base da fonte: {px} px',
+  'Basislettergrootte': 'Tamanho base da fonte',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Os títulos, as notas de rodapé e os cartões da linha do tempo acompanham este tamanho.',
+  'Footer': 'Rodapé',
+  'Geldt voor documenten en presentaties':
+      'Aplica-se a documentos e apresentações',
+  'Alleen voor documenten': 'Apenas para documentos',
+  'Alleen voor presentaties': 'Apenas para apresentações',
   'Als tabel weergeven': 'Exibir como tabela',
   'Als tijdlijn weergeven': 'Mostrar como linha do tempo',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

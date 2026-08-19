@@ -623,7 +623,6 @@ const _dutchSourceGa = {
   'Profiel verwijderen': 'Scrios an phróifíl',
   'Lettertype': 'Cló',
   'Kleuren': 'Dathanna',
-  'Achtergrond slides': 'Cúlra na sleamhnán',
   'Tekst': 'Téacs',
   'Accent / bullets': 'Aiceann / urchair',
   'Tabeltekst': 'Téacs an tábla',
@@ -1088,7 +1087,6 @@ const _dutchSourceGa = {
   'Cockpit': 'Painéal comhraic',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Sprioc-am le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
-  'Logo en footer': 'Lógó agus buntásc',
   'Pagina': 'Leathanach',
   'Presentatiestijl': 'Stíl láithrithe',
   'Tekst...': 'Téacs...',
@@ -1698,6 +1696,15 @@ const _dutchSourceAddGa = <String, String>{
   'waarden herkend.': 'luachanna aitheanta.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'luachanna nach n-aithnítear. Fanann na sraitheanna sin ag bun an ord reatha.',
+  'Basislettergrootte: {px} px': 'Bunmhéid an chló: {px} px',
+  'Basislettergrootte': 'Bunmhéid an chló',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Athraíonn ceannteidil, fonótaí agus cártaí amlíne de réir an mhéid seo.',
+  'Footer': 'Buntásc',
+  'Geldt voor documenten en presentaties':
+      'Baineann le cáipéisí agus le láithreoireachtaí',
+  'Alleen voor documenten': 'Cáipéisí amháin',
+  'Alleen voor presentaties': 'Láithreoireachtaí amháin',
   'Als tabel weergeven': 'Taispeáin mar tábla',
   'Als tijdlijn weergeven': 'Taispeáin mar amlíne',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

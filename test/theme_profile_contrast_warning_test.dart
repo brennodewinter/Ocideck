@@ -12,9 +12,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// `SlideQualityAnalyzer`, so any low-contrast combination (title, body, accent,
 /// table, code, checklist, section) surfaces inline. This guards the case that
 /// started it all: a "De Winter Information Solutions" profile whose title text
-/// and title background were both white, hiding the title-slide heading. The
-/// warning lives in the presentation tab, an offstage child of the dialog's
-/// IndexedStack, so we match with `skipOffstage: false`.
+/// and title background were both white, hiding the title-slide heading.
+///
+/// Since the style tab splits into three surfaces, a colour only renders on the
+/// surface it belongs to: the title pair on **Presentatie**, the accent on
+/// **Algemeen**. So each test opens the style tab and picks that surface — a
+/// warning that only fires on a surface nobody opens is no warning at all.
 const _warning = 'Te weinig contrast met de achtergrond — mogelijk onleesbaar.';
 
 /// A fully-specified, legible profile. Individual colours are overridden per
@@ -53,8 +56,9 @@ Map<String, Object?> _profile({
 
 Future<void> _openWith(
   WidgetTester tester,
-  Map<String, Object?> profile,
-) async {
+  Map<String, Object?> profile, {
+  String surface = 'general',
+}) async {
   SharedPreferences.setMockInitialValues({'themeProfile': jsonEncode(profile)});
   await tester.binding.setSurfaceSize(const Size(1500, 1100));
   addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -64,7 +68,10 @@ Future<void> _openWith(
         home: Scaffold(
           body: Builder(
             builder: (context) => ElevatedButton(
-              onPressed: () => SettingsDialog.show(context),
+              onPressed: () => SettingsDialog.show(
+                context,
+                initialSection: SettingsSection.presentation,
+              ),
               child: const Text('open'),
             ),
           ),
@@ -84,6 +91,9 @@ Future<void> _openWith(
 
   await tester.tap(find.text('open'));
   await tester.pumpAndSettle();
+
+  await tester.tap(find.byKey(Key('style-surface-$surface')));
+  await tester.pumpAndSettle();
 }
 
 /// Unmount the tree so the ProviderScope disposes its container and cancels the
@@ -100,6 +110,7 @@ void main() {
     await _openWith(
       tester,
       _profile(titleBackground: '#FFFFFF', titleText: '#FFFFFF'),
+      surface: 'presentation',
     );
 
     expect(find.text(_warning, skipOffstage: false), findsOneWidget);

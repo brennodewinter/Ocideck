@@ -616,7 +616,6 @@ const _dutchSourceLt = {
   'Profiel verwijderen': 'Ištrinti profilį',
   'Lettertype': 'Šriftas',
   'Kleuren': 'Spalvos',
-  'Achtergrond slides': 'Skaidrės fonas',
   'Tekst': 'Tekstas',
   'Accent / bullets': 'Akcentas / ženklai',
   'Tabeltekst': 'Lentelės tekstas',
@@ -1074,7 +1073,6 @@ const _dutchSourceLt = {
   'Cockpit': 'Kabinos skydelis',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
-  'Logo en footer': 'Logotipas ir poraštė',
   'Pagina': 'Puslapis',
   'Presentatiestijl': 'Prezentacijos stilius',
   'Tekst...': 'Tekstas...',
@@ -1675,6 +1673,15 @@ const _dutchSourceAddLt = <String, String>{
   'waarden herkend.': 'pripažintos vertybės.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vertybės neatpažįstamos. Šios eilutės lieka apačioje dabartine tvarka.',
+  'Basislettergrootte: {px} px': 'Bazinis šrifto dydis: {px} px',
+  'Basislettergrootte': 'Bazinis šrifto dydis',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Antraštės, išnašos ir laiko juostos kortelės keičiasi kartu su šiuo dydžiu.',
+  'Footer': 'Poraštė',
+  'Geldt voor documenten en presentaties':
+      'Taikoma dokumentams ir pristatymams',
+  'Alleen voor documenten': 'Tik dokumentams',
+  'Alleen voor presentaties': 'Tik pristatymams',
   'Als tabel weergeven': 'Rodyti kaip lentelę',
   'Als tijdlijn weergeven': 'Rodyti kaip laiko juostą',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

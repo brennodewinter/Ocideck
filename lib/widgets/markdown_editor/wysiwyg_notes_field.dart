@@ -60,7 +60,10 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
   );
 
   DefaultTextBlockStyle heading(int level) {
-    final size = documentHeadingSize(level);
+    // De kopmaten volgen de basislettergrootte van het schrijfvlak, zodat een
+    // documentstijl met een grotere letter ook grotere koppen krijgt — en de
+    // hoogte in de schrijfstand gelijk blijft aan die in de druk.
+    final size = documentHeadingSize(level, bodyFontSize: theme.fontSize);
     return DefaultTextBlockStyle(
       body.copyWith(
         fontSize: doc

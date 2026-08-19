@@ -1635,6 +1635,31 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **een documentstijl kon niet zeggen hoe groot de letter was.** Een blad heeft
+  een vaste lettermaat — een dia niet, die schaalt haar tekst naar het
+  16:9-kader — maar er was nergens te zetten welke. *Stijlprofiel → Document*
+  heeft nu een **basislettergrootte** (9 tot 28 px, standaard 15,5: de maat
+  waarin documenten altijd al stonden). Koppen, voetnoten en tijdlijnkaarten
+  zijn verhoudingen van die maat, dus één schuif verzet de hele typografie —
+  en overal even ver: in de lezer, in het visuele schrijfvlak, in de drempel
+  waarmee de paginaverdeling rekent en in de HTML/PDF-export. De maat reist mee
+  in het profiel, zodat scherm en druk hetzelfde blijven zeggen.
+
+- **het stijlprofiel liep door elkaar heen.** Een stijlprofiel draagt drie
+  soorten instellingen — wat een document en een presentatie delen, wat alleen
+  een blad heeft, en wat alleen een dia heeft — maar de instellingen toonden er
+  twee, en dan door elkaar. Wie de documentkant openzette kreeg tóch de
+  dia-kleuren, met een schakelaar ("Logo: presentatie + document") die per veld
+  moest uitleggen wat waar gold. *Stijlprofiel* kent nu drie vlakken:
+  **Algemeen** (lettertype, basiskleuren, opsommingsteken, checklist, tabel,
+  broncode, severity), **Document** (documentlogo, kop- en voettekst met hun
+  bandkleuren, paginanummers) en **Presentatie** (titel- en sectiekleuren,
+  dialogo, footer, slotdia, animatieduur). Elk veld staat op precies één vlak,
+  een regel onder de keuzeknoppen zegt waar je zit, en de voorvertoning toont
+  dát vlak en niet meer — de gedeelde voorvertoning is dus een blad zónder kop-
+  en voetband. Een sprong vanuit het zoekveld of vanuit een contrastwaarschuwing
+  opent het vlak waar die instelling werkelijk staat.
+
 - **documenttijdlijnen en robuuste tabelsortering.** Een gewone GFM-tabel met
   twee of drie kolommen kan in de documentmodus expliciet als verticale
   tijdlijn worden getoond. De bron blijft een tabel onder een omkeerbare

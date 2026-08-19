@@ -612,7 +612,6 @@ const _dutchSourceLv = {
   'Profiel verwijderen': 'Dzēst profilu',
   'Lettertype': 'Fonts',
   'Kleuren': 'Krāsas',
-  'Achtergrond slides': 'Slaidu fons',
   'Tekst': 'Teksts',
   'Accent / bullets': 'Akcents / aizzīmes',
   'Tabeltekst': 'Tabulas teksts',
@@ -1070,7 +1069,6 @@ const _dutchSourceLv = {
   'Cockpit': 'Kabīne',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
-  'Logo en footer': 'Logotips un kājene',
   'Pagina': 'Lapa',
   'Presentatiestijl': 'Prezentācijas stils',
   'Tekst...': 'Teksts...',
@@ -1667,6 +1665,15 @@ const _dutchSourceAddLv = <String, String>{
   'waarden herkend.': 'atzītas vērtības.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vērtības nav atpazītas. Šīs rindas paliek apakšā to pašreizējā secībā.',
+  'Basislettergrootte: {px} px': 'Pamata fonta lielums: {px} px',
+  'Basislettergrootte': 'Pamata fonta lielums',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Virsraksti, vēres un laika joslas kartītes mērogojas līdzi šim izmēram.',
+  'Footer': 'Kājene',
+  'Geldt voor documenten en presentaties':
+      'Attiecas uz dokumentiem un prezentācijām',
+  'Alleen voor documenten': 'Tikai dokumentiem',
+  'Alleen voor presentaties': 'Tikai prezentācijām',
   'Als tabel weergeven': 'Parādīt kā tabulu',
   'Als tijdlijn weergeven': 'Rādīt kā laika skalu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

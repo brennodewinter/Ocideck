@@ -609,7 +609,6 @@ const _dutchSourceTr = {
   'Profiel verwijderen': 'Profili sil',
   'Lettertype': 'Yazı tipi',
   'Kleuren': 'Renkler',
-  'Achtergrond slides': 'Slayt arka planı',
   'Tekst': 'Metin',
   'Accent / bullets': 'Vurgu / maddeler',
   'Tabeltekst': 'Tablo metni',
@@ -2039,7 +2038,6 @@ const _dutchSourceTr = {
   'Cockpit': 'Kokpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Sunucu görünümündeki geri sayım için hedef süre. Sunum sırasında K tuşuyla ince ayar yapabilirsiniz.',
-  'Logo en footer': 'Logo ve altbilgi',
   'Notities voor tijdens het presenteren':
       'Sunum sırasında kullanılacak notlar',
   'Notities weggooien': 'Notları at',
@@ -2586,6 +2584,15 @@ const _dutchSourceAddTr = <String, String>{
   'waarden herkend.': 'tanınan değerler.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'değerler tanınmadı. Bu satırlar mevcut sıralarında en altta kalır.',
+  'Basislettergrootte: {px} px': 'Temel yazı tipi boyutu: {px} px',
+  'Basislettergrootte': 'Temel yazı tipi boyutu',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Başlıklar, dipnotlar ve zaman çizelgesi kartları bu boyutla birlikte ölçeklenir.',
+  'Footer': 'Altbilgi',
+  'Geldt voor documenten en presentaties':
+      'Belgeler ve sunumlar için geçerlidir',
+  'Alleen voor documenten': 'Yalnızca belgeler için',
+  'Alleen voor presentaties': 'Yalnızca sunumlar için',
   'Als tabel weergeven': 'Tablo olarak görüntüle',
   'Als tijdlijn weergeven': 'Zaman çizelgesi olarak göster',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

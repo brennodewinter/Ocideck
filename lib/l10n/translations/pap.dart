@@ -700,6 +700,15 @@ const _dutchSourceAddPap = {
   'waarden herkend.': 'valores reconocidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Valores no reconocidos. Esas filas permanecen en la parte inferior en su orden actual.',
+  'Basislettergrootte: {px} px': 'Tamaño di lèter básiko: {px} px',
+  'Basislettergrootte': 'Tamaño di lèter básiko',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Kabesnan, notanan na pia i kartanan di línea di tempu ta skala huntu ku e tamaño aki.',
+  'Footer': 'Pia di página',
+  'Geldt voor documenten en presentaties':
+      'Ta konta pa dokumentonan i presentashonnan',
+  'Alleen voor documenten': 'Solamente pa dokumentonan',
+  'Alleen voor presentaties': 'Solamente pa presentashonnan',
   'Als tabel weergeven': 'Mustra komo mesa',
   'Als tijdlijn weergeven': 'Mustra komo liña di tempu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3826,7 +3835,6 @@ const _dutchSourceAddPap = {
   'Cockpit': 'Dashboard di cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tempo meta pa e kontamentu bèk den presenter. Ajustá durante presentashon ku e tekla K.',
-  'Logo en footer': 'Logo i footer',
   'Notities voor tijdens het presenteren': 'Nota pa durante presentashon',
   'Notities weggooien': 'Tira nota afo',
   'Pagina': 'Página',
@@ -3935,7 +3943,6 @@ const _dutchSourceAddPap = {
   '1 slide kopiëren naar…': 'Kopia 1 lámina pa…',
   '1 slide overgeslagen': '1 lámina pasá over',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Fondo di lámina',
   'Afbeelding': 'Imágen',
   'Afbeelding gekopieerd naar klembord.': 'Imágen kopiá pa klembord.',
   'Afbeelding plakken': 'Pega imágen',

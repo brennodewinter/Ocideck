@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
-import '../../models/settings.dart' show ThemeProfile, TableBorderStyle;
+import '../../models/settings.dart'
+    show
+        ThemeProfile,
+        TableBorderStyle,
+        clampDocumentBodyFontSize,
+        kDocumentDefaultBodyFontSize;
 import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
@@ -610,7 +615,7 @@ class DocumentMarkdownView extends StatelessWidget {
   // ── Block builders ────────────────────────────────────────────────────────
 
   Widget _heading(_Theme t, int level, String text) {
-    final size = documentHeadingSize(level);
+    final size = documentHeadingSize(level, bodyFontSize: t.bodyFontSize);
     return Padding(
       padding: EdgeInsets.only(
         top: level <= 2 ? kDocumentHeadingGapTop : kDocumentSubheadingGapTop,

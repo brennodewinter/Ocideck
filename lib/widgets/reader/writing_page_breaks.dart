@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart' show BoxParentData;
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../services/document_pagination.dart';
+import '../../models/settings.dart' show kDocumentDefaultBodyFontSize;
 import 'document_markdown_view.dart' show documentKeepWithNextHeight;
 
 /// De hoogtes van de blokken in de schrijfstand, in de volgorde waarin ze
@@ -128,6 +129,7 @@ class WritingPageBreakOverlay extends StatefulWidget {
     required this.editorKey,
     required this.pageContentHeight,
     required this.child,
+    this.bodyFontSize = kDocumentDefaultBodyFontSize,
     this.enabled = true,
   });
 
@@ -136,6 +138,12 @@ class WritingPageBreakOverlay extends StatefulWidget {
   /// De hoogte van het tekstvlak van één pagina, in dezelfde eenheid als de
   /// editor tekent (beeldpunten).
   final double pageContentHeight;
+
+  /// De basislettergrootte waarin dit vel geschreven wordt — uit de
+  /// documentstijl. Bepaalt hoeveel tekst er onder een kop moet passen voordat
+  /// die kop op dit vel mag blijven staan; met de standaardmaat gerekend zou
+  /// die drempel bij een grotere letter een regel te laag liggen.
+  final double bodyFontSize;
 
   final bool enabled;
   final Widget child;
@@ -198,6 +206,7 @@ class _WritingPageBreakOverlayState extends State<WritingPageBreakOverlay> {
       headingBlocks: writingHeadingBlocks(editor),
       minKeepHeight: documentKeepWithNextHeight(
         MediaQuery.textScalerOf(context),
+        bodyFontSize: widget.bodyFontSize,
       ),
     );
     _recompute();

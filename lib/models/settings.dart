@@ -47,6 +47,25 @@ const int kThemeMaxAnimationDurationMs = 30000;
 int clampThemeAnimationDuration(int ms) =>
     ms.clamp(kThemeMinAnimationDurationMs, kThemeMaxAnimationDurationMs);
 
+/// De basislettergrootte van een document, in beeldpunten — de maat waarin de
+/// gewone tekst staat, en waar de koppen, de noten en de tijdlijnkaartjes zich
+/// naar verhouden.
+///
+/// Alleen voor documenten. Een dia schaalt haar tekst naar het 16:9-kader en
+/// heeft dus geen vaste maat; een blad heeft er wel een, en dat is precies wat
+/// hier ontbrak: je kon een documentstijl kiezen zonder te kunnen zeggen hoe
+/// groot de letter erin was.
+///
+/// De ondergrens is de kleinste maat die op papier nog leest, de bovengrens de
+/// grootste waarbij een A4 nog een alinea draagt in plaats van een zin.
+const double kDocumentDefaultBodyFontSize = 15.5;
+const double kDocumentMinBodyFontSize = 9.0;
+const double kDocumentMaxBodyFontSize = 28.0;
+
+/// Klem een opgeslagen of bewerkte documentlettergrootte binnen het bereik.
+double clampDocumentBodyFontSize(double px) =>
+    px.clamp(kDocumentMinBodyFontSize, kDocumentMaxBodyFontSize);
+
 /// Op welke breedte je in de visuele documentmodus schrijft.
 ///
 /// Drie standen, omdat er drie verschillende dingen zijn die je aan het doen
@@ -121,6 +140,7 @@ class ThemeProfile {
   final String? documentLogoPath;
   final String documentLogoPosition;
   final int? documentLogoSize;
+  final double documentBodyFontSize;
   final String documentHeaderText;
   final String documentFooterText;
   final String? documentBandTextColor;
@@ -180,6 +200,7 @@ class ThemeProfile {
     this.documentLogoPath,
     this.documentLogoPosition = 'top-right',
     this.documentLogoSize,
+    this.documentBodyFontSize = kDocumentDefaultBodyFontSize,
     this.documentHeaderText = '',
     this.documentFooterText = '',
     this.documentBandTextColor,
@@ -338,6 +359,7 @@ class ThemeProfile {
     String? documentLogoPath,
     String? documentLogoPosition,
     int? documentLogoSize,
+    double? documentBodyFontSize,
     String? documentHeaderText,
     String? documentFooterText,
     String? documentBandTextColor,
@@ -397,6 +419,7 @@ class ThemeProfile {
           : (documentLogoPath ?? this.documentLogoPath),
       documentLogoPosition: documentLogoPosition ?? this.documentLogoPosition,
       documentLogoSize: documentLogoSize ?? this.documentLogoSize,
+      documentBodyFontSize: documentBodyFontSize ?? this.documentBodyFontSize,
       documentHeaderText: documentHeaderText ?? this.documentHeaderText,
       documentFooterText: documentFooterText ?? this.documentFooterText,
       documentBandTextColor:
@@ -454,6 +477,7 @@ class ThemeProfile {
       'documentLogoPath': documentLogoPath,
       'documentLogoPosition': documentLogoPosition,
       'documentLogoSize': documentLogoSize,
+      'documentBodyFontSize': documentBodyFontSize,
       'documentHeaderText': documentHeaderText,
       'documentFooterText': documentFooterText,
       'documentBandTextColor': documentBandTextColor,
@@ -543,6 +567,10 @@ class ThemeProfile {
         32,
         480,
       ),
+      documentBodyFontSize: clampDocumentBodyFontSize(
+        (json['documentBodyFontSize'] as num?)?.toDouble() ??
+            kDocumentDefaultBodyFontSize,
+      ),
       documentHeaderText: json['documentHeaderText'] as String? ?? '',
       documentFooterText: json['documentFooterText'] as String? ?? '',
       documentBandTextColor: json['documentBandTextColor'] == null
@@ -579,6 +607,17 @@ class ThemeProfile {
   String? get effectiveDocumentLogoPath => documentLogoPath ?? logoPath;
   int get effectiveDocumentLogoSize =>
       (documentLogoSize ?? logoSize).clamp(32, 480);
+
+  /// Hoeveel groter of kleiner de documenttekst staat dan de standaardmaat.
+  ///
+  /// Eén verhouding, want alles op een blad hangt aan dezelfde maat: een kop is
+  /// een veelvoud van de bodytekst, een noot een breukdeel ervan. Zouden ze elk
+  /// hun eigen maat krijgen, dan liep de verhouding scheef zodra iemand de
+  /// bodytekst verzette — en dat zie je pas op papier.
+  double get documentFontScale =>
+      clampDocumentBodyFontSize(documentBodyFontSize) /
+      kDocumentDefaultBodyFontSize;
+
   String get effectiveDocumentBandTextColor =>
       documentBandTextColor ?? textColor;
   String get effectiveDocumentBandBackgroundColor =>

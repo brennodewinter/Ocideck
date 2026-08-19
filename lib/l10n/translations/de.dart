@@ -701,6 +701,15 @@ const _dutchSourceAddDe = {
   'waarden herkend.': 'Werte anerkannt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Werte nicht erkannt. Diese Zeilen bleiben in ihrer aktuellen Reihenfolge unten.',
+  'Basislettergrootte: {px} px': 'Basisschriftgröße: {px} px',
+  'Basislettergrootte': 'Basisschriftgröße',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Überschriften, Fußnoten und Zeitstrahlkarten skalieren mit dieser Größe.',
+  'Footer': 'Fußzeile',
+  'Geldt voor documenten en presentaties':
+      'Gilt für Dokumente und Präsentationen',
+  'Alleen voor documenten': 'Nur für Dokumente',
+  'Alleen voor presentaties': 'Nur für Präsentationen',
   'Als tabel weergeven': 'Als Tabelle anzeigen',
   'Als tijdlijn weergeven': 'Als Zeitleiste anzeigen',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3835,7 +3844,6 @@ const _dutchSourceAddDe = {
   'Cockpit': 'Cockpit-Dashboard',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Zielzeit für den Countdown im Presenter. Während der Präsentation mit der Taste K fein einstellbar.',
-  'Logo en footer': 'Logo und Fußzeile',
   'Notities voor tijdens het presenteren': 'Notizen für die Präsentation',
   'Notities weggooien': 'Notizen verwerfen',
   'Pagina': 'Seite',
@@ -3943,7 +3951,6 @@ const _dutchSourceAddDe = {
   '1 slide kopiëren naar…': '1 Folie kopieren nach…',
   '1 slide overgeslagen': '1 Folie übersprungen',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Folienhintergrund',
   'Afbeelding': 'Bild',
   'Afbeelding gekopieerd naar klembord.': 'Bild in die Zwischenablage kopiert.',
   'Afbeelding plakken': 'Bild einfügen',

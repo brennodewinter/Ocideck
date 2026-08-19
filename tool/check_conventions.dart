@@ -195,7 +195,7 @@ const Map<String, int> fileSizeBaseline = {
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
-  'lib/widgets/dialogs/settings_dialog.dart': 1033,
+  'lib/widgets/dialogs/settings_dialog.dart': 1030,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -245,7 +245,12 @@ const Map<String, int> classSizeBaseline = {
       // andere secties van dat tabblad en leest als zij; hem als enige buiten de
       // klasse zetten zou de sectie-opbouw daar inconsistent maken voor drie
       // regels winst.
-      6230,
+      // −53: het kleurvlakje van een kleurkiezer (`_colorSwatchButton`) en de
+      // lettertype-stijlhulp (`_fontStyle`) staan nu top-level. Geen van beide
+      // leest een veld van dit scherm, dus ze hoorden er ook niet in — de
+      // driedeling van de stijlbouwer (algemeen/document/presentatie) betaalde
+      // zichzelf zo terug.
+      6177,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —

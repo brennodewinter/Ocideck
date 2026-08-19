@@ -612,7 +612,6 @@ const _dutchSourceFi = {
   'Profiel verwijderen': 'Poista profiili',
   'Lettertype': 'Fontti',
   'Kleuren': 'Värit',
-  'Achtergrond slides': 'Dian tausta',
   'Tekst': 'Teksti',
   'Accent / bullets': 'Korostus / luettelomerkit',
   'Tabeltekst': 'Taulukon teksti',
@@ -1071,7 +1070,6 @@ const _dutchSourceFi = {
   'Cockpit': 'Ohjaamonäkymä',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tavoiteaika esittäjän lähtölaskennalle. Hienosäädä sitä esityksen aikana K-näppäimellä.',
-  'Logo en footer': 'Logo ja alatunniste',
   'Pagina': 'Sivu',
   'Presentatiestijl': 'Esitystyyli',
   'Tekst...': 'Teksti...',
@@ -1669,6 +1667,14 @@ const _dutchSourceAddFi = <String, String>{
   'waarden herkend.': 'arvot tunnustettu.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'arvoja ei tunnisteta. Nämä rivit pysyvät alareunassa nykyisessä järjestyksessä.',
+  'Basislettergrootte: {px} px': 'Perusfonttikoko: {px} px',
+  'Basislettergrootte': 'Perusfonttikoko',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Otsikot, alaviitteet ja aikajanakortit skaalautuvat tämän koon mukaan.',
+  'Footer': 'Alatunniste',
+  'Geldt voor documenten en presentaties': 'Koskee asiakirjoja ja esityksiä',
+  'Alleen voor documenten': 'Vain asiakirjoille',
+  'Alleen voor presentaties': 'Vain esityksille',
   'Als tabel weergeven': 'Näytä taulukkona',
   'Als tijdlijn weergeven': 'Näytä aikajanana',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

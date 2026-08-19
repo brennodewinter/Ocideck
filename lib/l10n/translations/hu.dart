@@ -614,7 +614,6 @@ const _dutchSourceHu = {
   'Profiel verwijderen': 'Profil törlése',
   'Lettertype': 'Betűtípus',
   'Kleuren': 'Színek',
-  'Achtergrond slides': 'Dia háttere',
   'Tekst': 'Szöveg',
   'Accent / bullets': 'Kiemelés / felsorolás',
   'Tabeltekst': 'Táblázat szövege',
@@ -1069,7 +1068,6 @@ const _dutchSourceHu = {
   'Cockpit': 'Pilótafülke',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'A visszaszámlálás céldeje a prezentálóban. Prezentálás közben a K billentyűvel finomhangolható.',
-  'Logo en footer': 'Logó és lábléc',
   'Pagina': 'Oldal',
   'Presentatiestijl': 'Prezentációs stílus',
   'Tekst...': 'Szöveg...',
@@ -1670,6 +1668,15 @@ const _dutchSourceAddHu = <String, String>{
   'waarden herkend.': 'elismert értékek.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'az értékeket nem ismerik fel. Ezek a sorok a jelenlegi sorrendben alul maradnak.',
+  'Basislettergrootte: {px} px': 'Alap betűméret: {px} px',
+  'Basislettergrootte': 'Alap betűméret',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'A címsorok, a lábjegyzetek és az idővonalkártyák ezzel a mérettel együtt méreteződnek.',
+  'Footer': 'Élőláb',
+  'Geldt voor documenten en presentaties':
+      'Dokumentumokra és bemutatókra is vonatkozik',
+  'Alleen voor documenten': 'Csak dokumentumokhoz',
+  'Alleen voor presentaties': 'Csak bemutatókhoz',
   'Als tabel weergeven': 'Megjelenítés táblázatként',
   'Als tijdlijn weergeven': 'Megjelenítés idővonalként',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

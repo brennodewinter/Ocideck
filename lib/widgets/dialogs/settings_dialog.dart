@@ -95,6 +95,7 @@ part 'parts/settings_dialog_storage.dart';
 part 'parts/settings_dialog_collaboration.dart';
 part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_style_builder.dart';
+part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_table_style.dart';
@@ -111,10 +112,6 @@ part 'parts/settings_dialog_standards.dart';
 part 'parts/settings_dialog_search.dart';
 part 'parts/settings_dialog_search_index.dart';
 part 'parts/settings_dialog_cve_local.dart';
-
-TextStyle _fontStyle(String font, TextStyle base) {
-  return base.copyWith(fontFamily: font);
-}
 
 class SettingsDialog extends ConsumerStatefulWidget {
   /// Het tabblad dat bij openen actief is.
@@ -228,7 +225,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   bool _profileTouched = false;
 
   bool _stylePreviewShowsContent = true;
-  bool _stylePreviewShowsPresentation = false;
+  _StyleSurface _styleSurface = _StyleSurface.general;
 
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};

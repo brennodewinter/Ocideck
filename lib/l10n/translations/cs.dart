@@ -614,7 +614,6 @@ const _dutchSourceCs = {
   'Profiel verwijderen': 'Smazat profil',
   'Lettertype': 'Písmo',
   'Kleuren': 'Barvy',
-  'Achtergrond slides': 'Pozadí snímků',
   'Tekst': 'Text',
   'Accent / bullets': 'Akcent / odrážky',
   'Tabeltekst': 'Text tabulky',
@@ -1072,7 +1071,6 @@ const _dutchSourceCs = {
   'Cockpit': 'Kokpitový panel',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Cílový čas pro odpočet v prezentačním režimu. Během prezentace jej dolaďte klávesou K.',
-  'Logo en footer': 'Logo a zápatí',
   'Pagina': 'Stránka',
   'Presentatiestijl': 'Styl prezentace',
   'Tekst...': 'Text...',
@@ -1670,6 +1668,14 @@ const _dutchSourceAddCs = <String, String>{
   'waarden herkend.': 'uznávané hodnoty.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'hodnoty nejsou rozpoznány. Tyto řádky zůstanou ve svém aktuálním pořadí dole.',
+  'Basislettergrootte: {px} px': 'Základní velikost písma: {px} px',
+  'Basislettergrootte': 'Základní velikost písma',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Nadpisy, poznámky pod čarou a karty časové osy se s touto velikostí mění.',
+  'Footer': 'Zápatí',
+  'Geldt voor documenten en presentaties': 'Platí pro dokumenty i prezentace',
+  'Alleen voor documenten': 'Pouze pro dokumenty',
+  'Alleen voor presentaties': 'Pouze pro prezentace',
   'Als tabel weergeven': 'Zobrazit jako tabulku',
   'Als tijdlijn weergeven': 'Zobrazit jako časovou osu',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':

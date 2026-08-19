@@ -5,14 +5,22 @@
 part of '../settings_dialog.dart';
 
 extension _SettingsColors on _SettingsDialogState {
-  List<Widget> _colorsSectionChildren() {
+  /// De kleuren die zowel een document als een presentatie dragen: het papier,
+  /// de tekst, het accent en alles wat in beide vlakken voorkomt — checklists,
+  /// tabellen, broncode en de severity-banden.
+  ///
+  /// Wat híer staat geldt overal. De dia-eigen kleuren (titelbalk,
+  /// sectieachtergrond) staan bewust apart in [_slideColorChildren]: stonden ze
+  /// in één lijst, dan is aan niets te zien welke kleur een document raakt en
+  /// welke alleen een dia.
+  List<Widget> _generalColorChildren() {
     final l10n = context.l10n;
     final contrast = _themeContrastByField();
     return [
       _themeColorAnchor(
         'slideBackgroundColor',
         _colorSetting(
-          l10n.d('Achtergrond slides'),
+          l10n.d('Achtergrond'),
           _themeProfile.slideBackgroundColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
@@ -75,9 +83,55 @@ extension _SettingsColors on _SettingsDialogState {
           }),
         ),
       ),
-      ..._checklistTableColorSettings(contrast),
+      ..._checklistColorSettings(contrast),
+      ..._tableColorSettings(contrast),
       ..._codeColorSettings(contrast),
       ..._severityColorSettings(),
+    ];
+  }
+
+  /// De kleuren die alléén een dia raakt: de titelbalk en de sectieachtergrond.
+  /// Een document kent geen titeldia, dus deze drie velden hebben daar niets te
+  /// zoeken.
+  List<Widget> _slideColorChildren() {
+    final l10n = context.l10n;
+    final contrast = _themeContrastByField();
+    return [
+      _themeColorAnchor(
+        'titleBackgroundColor',
+        _colorSetting(
+          l10n.d('Titelachtergrond'),
+          _themeProfile.titleBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'titleTextColor',
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Titeltekst'),
+            _themeProfile.titleTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+          ),
+          // The analyser checks the title colour against both the title band and
+          // (via a section probe slide) the section background; either failing
+          // surfaces here.
+          'titleTextColor',
+          contrast,
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'sectionBackgroundColor',
+        _colorSetting(
+          l10n.d('Sectieachtergrond'),
+          _themeProfile.sectionBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
+        ),
+      ),
     ];
   }
 
@@ -189,7 +243,7 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
-  List<Widget> _checklistTableColorSettings(
+  List<Widget> _checklistColorSettings(
     Map<String, SlideQualityIssue> contrast,
   ) {
     final l10n = context.l10n;
@@ -244,43 +298,6 @@ extension _SettingsColors on _SettingsDialogState {
         contentPadding: EdgeInsets.zero,
         dense: true,
       ),
-      ..._tableColorSettings(contrast),
-      const SizedBox(height: 12),
-      _themeColorAnchor(
-        'titleBackgroundColor',
-        _colorSetting(
-          l10n.d('Titelachtergrond'),
-          _themeProfile.titleBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
-        ),
-      ),
-      const SizedBox(height: 12),
-      _themeColorAnchor(
-        'titleTextColor',
-        _colorWithContrastWarning(
-          _colorSetting(
-            l10n.d('Titeltekst'),
-            _themeProfile.titleTextColor,
-            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
-          ),
-          // The analyser checks the title colour against both the title band and
-          // (via a section probe slide) the section background; either failing
-          // surfaces here.
-          'titleTextColor',
-          contrast,
-        ),
-      ),
-      const SizedBox(height: 12),
-      _themeColorAnchor(
-        'sectionBackgroundColor',
-        _colorSetting(
-          l10n.d('Sectieachtergrond'),
-          _themeProfile.sectionBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
-        ),
-      ),
     ];
   }
 
@@ -290,7 +307,8 @@ extension _SettingsColors on _SettingsDialogState {
   List<Widget> _tableColorSettings(Map<String, SlideQualityIssue> contrast) {
     final l10n = context.l10n;
     return [
-      const SizedBox(height: 12),
+      const SizedBox(height: 24),
+      _sectionTitle(l10n.d('Tabel')),
       _themeColorAnchor(
         'tableTextColor',
         _colorWithContrastWarning(
@@ -432,7 +450,9 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
-  List<Widget> _logoSectionChildren() {
+  /// Het logo op een *dia*. Het documentlogo staat los (het mag afwijken) en
+  /// wordt in het documentvlak van de stijlbouwer gezet.
+  List<Widget> _slideLogoChildren() {
     final l10n = context.l10n;
     return [
       // Een logo wordt als pad in het themaprofiel bewaard, en zo'n pad bestaat
@@ -538,16 +558,12 @@ extension _SettingsColors on _SettingsDialogState {
           ),
         ),
       ],
-      ..._footerSettings(),
-      ..._closingSlideSettings(),
     ];
   }
 
   List<Widget> _footerSettings() {
     final l10n = context.l10n;
     return [
-      const SizedBox(height: 24),
-      _sectionTitle('Footer'),
       TextField(
         controller: _footerText,
         decoration: InputDecoration(
@@ -608,8 +624,6 @@ extension _SettingsColors on _SettingsDialogState {
   List<Widget> _closingSlideSettings() {
     final l10n = context.l10n;
     return [
-      const SizedBox(height: 24),
-      _sectionTitle(l10n.d('Laatste slide')),
       SwitchListTile(
         value: _themeProfile.closingSlideEnabled,
         onChanged: (v) => _rebuild(() {
@@ -784,7 +798,8 @@ extension _SettingsColors on _SettingsDialogState {
           runSpacing: 6,
           children: [
             for (final color in _SettingsDialogState._colorPresets)
-              _colorSwatch(
+              _colorSwatchButton(
+                context,
                 color,
                 selected: value.toUpperCase() == color,
                 onTap: () => _rebuild(() {
@@ -797,7 +812,8 @@ extension _SettingsColors on _SettingsDialogState {
             if (!_SettingsDialogState._colorPresets.contains(
               value.toUpperCase(),
             ))
-              _colorSwatch(
+              _colorSwatchButton(
+                context,
                 value,
                 selected: true,
                 onTap: () => _editCustomColor(value, onChanged),
@@ -842,74 +858,78 @@ extension _SettingsColors on _SettingsDialogState {
 
   Future<String?> _pickHexColor(String initial) =>
       HexColorDialog.show(context, initial);
+}
 
-  Widget _colorSwatch(
-    String color, {
-    required bool selected,
-    required VoidCallback onTap,
-  }) {
-    final parsed = AppTheme.parseHexColor(color);
-    final checkColor = parsed.computeLuminance() > 0.55
-        ? AppTheme.ink
-        : Colors.white;
-    return Tooltip(
-      message: selected ? '${context.l10n.d('Geselecteerd')}: $color' : color,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 120),
-          width: 34,
-          height: 34,
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: selected
-                ? AppTheme.accent.withValues(alpha: 0.12)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: selected ? AppTheme.accentFg : AppTheme.slate300,
-              width: selected ? 2 : 1,
-            ),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: parsed,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 2),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: AppTheme.inkOverlay,
-                      blurRadius: 2,
-                      offset: Offset(0, 1),
-                    ),
-                  ],
-                ),
-              ),
-              if (selected)
-                Icon(
-                  Icons.check,
-                  size: 16,
-                  color: checkColor,
-                  shadows: [
-                    Shadow(
-                      color: checkColor == Colors.white
-                          ? Colors.black54
-                          : Colors.white70,
-                      blurRadius: 2,
-                    ),
-                  ],
-                ),
-            ],
+/// Eén kleurvlakje in een kleurkiezer.
+///
+/// Top-level en niet in `_SettingsDialogState`: het leest geen enkel veld van
+/// dat scherm — alleen de kleur, of hij gekozen is en wat er bij een tik moet
+/// gebeuren. In de klasse duwde het haar tegen het plafond van de
+/// omvangs-ratchet aan, zonder er iets voor terug te geven.
+Widget _colorSwatchButton(
+  BuildContext context,
+  String color, {
+  required bool selected,
+  required VoidCallback onTap,
+}) {
+  final parsed = AppTheme.parseHexColor(color);
+  final checkColor = parsed.computeLuminance() > 0.55
+      ? AppTheme.ink
+      : Colors.white;
+  return Tooltip(
+    message: selected ? '${context.l10n.d('Geselecteerd')}: $color' : color,
+    child: InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 120),
+        width: 34,
+        height: 34,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: selected
+              ? AppTheme.accent.withValues(alpha: 0.12)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: selected ? AppTheme.accentFg : AppTheme.slate300,
+            width: selected ? 2 : 1,
           ),
         ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: parsed,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 2),
+                boxShadow: const [
+                  BoxShadow(
+                    color: AppTheme.inkOverlay,
+                    blurRadius: 2,
+                    offset: Offset(0, 1),
+                  ),
+                ],
+              ),
+            ),
+            if (selected)
+              Icon(
+                Icons.check,
+                size: 16,
+                color: checkColor,
+                shadows: [
+                  Shadow(
+                    color: checkColor == Colors.white
+                        ? Colors.black54
+                        : Colors.white70,
+                    blurRadius: 2,
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
-    );
-  }
-
-  /// Feature 5: de niet-kleur tabelstijl-controls — randstijl (dropdown),
-  /// zebrastrepen (toggle), accentkoprand (toggle) en celopvulling (slider).
+    ),
+  );
 }

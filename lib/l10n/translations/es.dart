@@ -698,6 +698,15 @@ const _dutchSourceAddEs = {
   'waarden herkend.': 'valores reconocidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Valores no reconocidos. Esas filas permanecen en la parte inferior en su orden actual.',
+  'Basislettergrootte: {px} px': 'Tamaño de fuente base: {px} px',
+  'Basislettergrootte': 'Tamaño de fuente base',
+  'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
+      'Los títulos, las notas al pie y las tarjetas de la línea de tiempo se ajustan a este tamaño.',
+  'Footer': 'Pie de página',
+  'Geldt voor documenten en presentaties':
+      'Se aplica a documentos y presentaciones',
+  'Alleen voor documenten': 'Solo para documentos',
+  'Alleen voor presentaties': 'Solo para presentaciones',
   'Als tabel weergeven': 'Mostrar como tabla',
   'Als tijdlijn weergeven': 'Mostrar como línea de tiempo',
   'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
@@ -3840,7 +3849,6 @@ const _dutchSourceAddEs = {
   'Cockpit': 'Panel de cockpit',
   'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
       'Tiempo objetivo para la cuenta atrás del presentador. Ajústalo durante la presentación con la tecla K.',
-  'Logo en footer': 'Logo y pie de página',
   'Notities voor tijdens het presenteren': 'Notas para la presentación',
   'Notities weggooien': 'Descartar notas',
   'Pagina': 'Página',
@@ -3950,7 +3958,6 @@ const _dutchSourceAddEs = {
   '1 slide kopiëren naar…': 'Copiar 1 diapositiva a…',
   '1 slide overgeslagen': '1 diapositiva omitida',
   'Accent / bullets': 'Accent / bullets',
-  'Achtergrond slides': 'Fondo de diapositivas',
   'Afbeelding': 'Imagen',
   'Afbeelding gekopieerd naar klembord.': 'Imagen copiada al portapapeles.',
   'Afbeelding plakken': 'Pegar imagen',
