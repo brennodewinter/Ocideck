@@ -22,6 +22,19 @@
 // no-op — normal development and feature branches never trip it; it fires only
 // on the commit that actually changes the version.
 //
+// **A pre-release tag is not a release**, and the baseline skips it. The repo
+// cuts test tags like `v0.4.7-rc1` to exercise one build lane without
+// releasing anything — that tag says so in its own message ("Geen echte
+// release"). Reading it as a released 0.4.7 made the gate fail on every branch
+// on the machine that held it: pubspec still said 0.4.6, which from an
+// imagined 0.4.7 looks like an illegal downgrade. A tag like that need not be
+// on a remote to do this; `git describe` reads whatever the local clone has,
+// so one release rehearsal poisons every branch on that machine until someone
+// deletes the tag. That is a false alarm on the very gate whose job is to make
+// a real one credible, and it fires on branches that never touched the version
+// at all. SemVer agrees: a pre-release ranks *below* the release it precedes,
+// so `v0.4.7-rc1` can never be the last released version.
+//
 // A deliberate, human-authored exception (say, a one-time correction that goes
 // back down past a bad release) goes in [sanctionedTransitions]. That is the
 // whole point: an accidental bump has no entry there and fails; a conscious one
@@ -102,7 +115,16 @@ String readPubspecVersion(String path) {
 
 /// The last released version reachable from HEAD, or null when git has no
 /// matching tag (or is unavailable). Strips the leading `v`.
-String? lastReleasedVersion() {
+///
+/// `--exclude '*-*'` drops every pre-release tag (`v0.4.7-rc1`, `v1.0.0-beta`):
+/// a hyphen after the version core is exactly SemVer's pre-release marker, and
+/// a pre-release is not a release. Without it a test tag becomes the baseline
+/// and the gate fails on a tree whose version nobody touched — see the header.
+///
+/// [workingDirectory] exists for the regression test, which builds a throwaway
+/// repository with both a release and a pre-release tag. The glob lives in an
+/// argument list, so nothing short of a real `git describe` can prove it works.
+String? lastReleasedVersion({String? workingDirectory}) {
   try {
     final r = Process.runSync('git', [
       'describe',
@@ -110,7 +132,9 @@ String? lastReleasedVersion() {
       '--abbrev=0',
       '--match',
       'v*',
-    ]);
+      '--exclude',
+      '*-*',
+    ], workingDirectory: workingDirectory);
     if (r.exitCode != 0) return null;
     final tag = (r.stdout as String).trim();
     if (!tag.startsWith('v')) return null;
