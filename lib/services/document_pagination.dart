@@ -148,9 +148,26 @@ Set<int> documentContinuationPages({
   required List<double> pageOffsets,
   required Set<int> continuationBlocks,
   Set<int> continuableBlocks = const {},
+}) => documentContinuationPageBlocks(
+  blockHeights: blockHeights,
+  pageOffsets: pageOffsets,
+  continuationBlocks: continuationBlocks,
+  continuableBlocks: continuableBlocks,
+).keys.toSet();
+
+/// Het inhoudsblok waarmee ieder vervolgvel opent.
+///
+/// De sleutel is de pagina-index, de waarde de blokindex. Naast de eenvoudige
+/// verzameling uit [documentContinuationPages] kan de paginaweergave hiermee
+/// ook de markering van het doorlopende tijdlijnitem herhalen.
+Map<int, int> documentContinuationPageBlocks({
+  required List<double> blockHeights,
+  required List<double> pageOffsets,
+  required Set<int> continuationBlocks,
+  Set<int> continuableBlocks = const {},
 }) {
   if (continuationBlocks.isEmpty && continuableBlocks.isEmpty) return const {};
-  final pages = <int>{};
+  final pages = <int, int>{};
   var block = 0;
   var top = 0.0;
   for (var page = 1; page < pageOffsets.length; page++) {
@@ -162,11 +179,11 @@ Set<int> documentContinuationPages({
     }
     if (block >= blockHeights.length) break;
     if ((pageTop - top).abs() <= 0.5 && continuationBlocks.contains(block)) {
-      pages.add(page);
+      pages[page] = block;
     } else if (pageTop > top + 0.5 &&
         pageTop < top + blockHeights[block] - 0.5 &&
         continuableBlocks.contains(block)) {
-      pages.add(page);
+      pages[page] = block;
     }
   }
   return pages;

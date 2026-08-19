@@ -43,6 +43,14 @@ void main() {
         {1},
       );
       expect(
+        documentContinuationPageBlocks(
+          blockHeights: heights,
+          pageOffsets: pageOffsets,
+          continuationBlocks: {2},
+        ),
+        {1: 2},
+      );
+      expect(
         documentContinuationPages(
           blockHeights: heights,
           pageOffsets: pageOffsets,
@@ -70,6 +78,15 @@ void main() {
         continuableBlocks: const {1},
       ),
       {2, 3},
+    );
+    expect(
+      documentContinuationPageBlocks(
+        blockHeights: const [30, 250],
+        pageOffsets: pageOffsets,
+        continuationBlocks: const {},
+        continuableBlocks: const {1},
+      ),
+      {2: 1, 3: 1},
     );
   });
 

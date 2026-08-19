@@ -805,25 +805,31 @@ class DocumentMarkdownView extends StatelessWidget {
   );
 }
 
-/// Tijdlijngebeurtenissen die een eerdere kaart in dezelfde reeks vervolgen,
-/// met dezelfde blokindexen als [DocumentMarkdownView.blockTexts].
-Set<int> documentTimelineContinuationBlocks(String markdown) {
+/// Paginagegevens van tijdlijngebeurtenissen, met dezelfde blokindexen als
+/// [DocumentMarkdownView.blockTexts]. De markering is de eerste kolom: datum,
+/// tijd, fase of wat de schrijver voor deze tijdlijn passend vond.
+({Set<int> blocks, Set<int> continuationBlocks, Map<int, String> markerLabels})
+documentTimelinePaginationData(String markdown) {
   final blocks = DocumentMarkdownView._parse(markdown);
-  return {
-    for (var i = 0; i < blocks.length; i++)
-      if (blocks[i].kind == _Kind.timeline && !blocks[i].timelineFirst) i,
-  };
-}
-
-/// Alle tijdlijngebeurtenissen, met dezelfde blokindexen als
-/// [DocumentMarkdownView.blockTexts]. Hiermee kan Pagina's ook een enkele kaart
-/// herkennen die door haar eigen hoogte onvermijdelijk over meer vellen loopt.
-Set<int> documentTimelineBlocks(String markdown) {
-  final blocks = DocumentMarkdownView._parse(markdown);
-  return {
-    for (var i = 0; i < blocks.length; i++)
-      if (blocks[i].kind == _Kind.timeline) i,
-  };
+  final timelineBlocks = <int>{};
+  final continuationBlocks = <int>{};
+  final markerLabels = <int, String>{};
+  for (var i = 0; i < blocks.length; i++) {
+    final block = blocks[i];
+    if (block.kind != _Kind.timeline) continue;
+    timelineBlocks.add(i);
+    if (!block.timelineFirst) continuationBlocks.add(i);
+    markerLabels[i] = block.timelineMarker.isEmpty
+        ? ''
+        : block.timelineMarkerHeader.isEmpty
+        ? block.timelineMarker
+        : '${block.timelineMarkerHeader} · ${block.timelineMarker}';
+  }
+  return (
+    blocks: timelineBlocks,
+    continuationBlocks: continuationBlocks,
+    markerLabels: markerLabels,
+  );
 }
 
 ({_Block block, int end}) _parseTableAt(List<String> lines, int start) {

@@ -4463,6 +4463,13 @@ statuskleuren van een presentatietijdlijn. **Als tabel weergeven** draait de
 weergave terug zonder één cel kwijt te raken. **Invoegen → Tijdlijn** zet dezelfde
 draagbare structuur er direct in.
 
+Begint een nieuwe pagina met het vervolg van een tijdlijn, dan herhaalt de
+bovenmarge naast **Tijdlijn · vervolg** ook het merkteken van de eerste zichtbare
+gebeurtenis, bijvoorbeeld `Tijd · 13:41` of `Fase · Herstel`. Loopt één
+uitzonderlijk hoge kaart over meerdere pagina's door, dan blijft hetzelfde
+merkteken op iedere vervolgpagina staan. Zonder ingevuld merkteken wordt niets
+afgeleid of verzonnen.
+
 Op schijf blijft de tijdlijn een gewone GFM-tabel met één HTML-commentaar er
 direct boven. Haal dat commentaar weg en elke Markdown-lezer ziet weer gewoon de
 tabel:

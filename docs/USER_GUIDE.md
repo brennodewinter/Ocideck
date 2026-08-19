@@ -4395,10 +4395,12 @@ colours. A marked table that is unsuitable (for example, with four columns)
 stays visually editable and explains the issue. **Als tabel weergeven** removes
 the marker and keeps the table contents. In **Pagina's**, a new sheet that
 starts with a following timeline event restarts its rail and marks the
-continuation in the top margin as **Tijdlijn · vervolg** (translated with the
-interface). A card normally moves in full to the next sheet. Only a card that
+continuation in the top margin as **Tijdlijn · vervolg**, followed by that
+event's first-column marker (for example `Tijd · 13:41` or `Fase · Herstel`).
+When the marker is empty, only the translated continuation label is shown. A
+card normally moves in full to the next sheet. Only a card that
 is itself taller than the available page area is continued over more sheets;
-each of those sheets gets the same continuation label so no content is hidden
+each of those sheets repeats the same marker so no content is hidden
 or made artificially smaller.
 
 On disk the timeline is still an ordinary GFM table with one HTML comment
