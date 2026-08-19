@@ -63,6 +63,42 @@ wanneer de ontvanger moet kunnen *lezen* in plaats van *kijken*. Er wordt geen
 WCAG-conformiteit geclaimd, en er is niets getest met een echte schermlezer. →
 [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
+## Voetnoten in de HTML-export staan achteraan, nooit onderaan de bladzijde
+
+Een document kan zijn voetnoten onderaan de bladzijde vragen waar de verwijzing op
+valt, en de weergave **Pagina's** en de **LaTeX**-export doen dat ook echt. De
+**HTML**-export in één bestand kan het niet: een HTML-pagina is één doorlopende
+stroom zonder bladzijden erin, en de enige standaard die een noot op een gedrukt
+vel zou kunnen plaatsen — `float: footnote` uit CSS Paged Media — is door geen
+enkele browser geïmplementeerd. De HTML-export zet de noten daarom altijd achterin
+het document, genummerd, met een sprong naar elke noot en weer terug. De nummers
+zijn dezelfde als op het scherm, dus er gaat niets verloren en er wordt niets
+hernummerd; alleen de plaats verschilt. Die HTML naar PDF afdrukken houdt ze
+achterin. Heb je de noten in een PDF écht onderaan het vel nodig, gebruik dan de
+LaTeX-export (`.tex`). *(Toegevoegd 2026-08-18.)*
+
+## De web-export (HTML) laat de overlays op de dia weg
+
+De app tekent een laag chroom *over* elke dia heen: de voettekst (de tekst, de
+positie en het paginanummer `N / totaal`), het logo, het diagonale
+classificatiewatermerk, de TLP-badge per dia en de badge voor persoonsgegevens
+(PrivacyKat). De voorvertoning in de bewerker, de presentatormodus en de
+**PDF/PPTX**-exports tekenen die laag allemaal, omdat ze door de eigen
+dia-renderer van OciDeck gaan. De **HTML**-export in één bestand geeft daarvan
+alleen het logo terug: dat wordt op elke dia die het toont als ingesloten
+afbeelding gelegd, in dezelfde hoek en maat als in de app. De rest laat hij weg —
+hij sluit de Markdown van elke dia in voor een renderer in de browser, samen met
+de kleuren en het lettertype van het thema, en draagt de classificatie van het
+deck als eigen banner boven het document in plaats van als badge per dia. Een
+voettekst als `www.chateau-it.nl`, het paginanummer, het watermerk en de
+TLP-/PrivacyKat-badges ontbreken dus simpelweg in de `.html` — die overlaylaag is
+een eigenschap van hoe OciDeck rendert, niet van de deck-Markdown, en in het
+geëxporteerde bestand staat niets om haar uit te reproduceren. Heeft de ontvanger
+de voettekst of de paginanummers nodig in een gedeeld bestand, geef dan de
+**PDF**- (of **PPTX**-)export, die ze wél behoudt. *(Toegevoegd 2026-08-07 — de
+classificatie reist mee als banner bovenaan; het logo reist sinds 2026-08-13 ook
+op elke dia mee; #1330.)*
+
 ## Een presentatie importeren is een conversie, geen kopie
 
 Een PowerPoint-, Keynote- of Impress-bestand kan worden geïmporteerd, maar het

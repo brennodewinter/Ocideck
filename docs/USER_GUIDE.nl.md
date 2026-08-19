@@ -4434,6 +4434,75 @@ scheiding `---`). Elk blijft platte, parseerbare tekst zodat het bestand elders 
 openen. *(Pagina-einde toegevoegd 2026-08-08 — zie
 [Een pagina-einde invoegen](#een-pagina-einde-invoegen) hieronder.)*
 
+### Tabellen, sorteren en tijdlijnen
+
+Klik in **Visueel** op een tabelcel om de tabelknoppen tevoorschijn te halen. De
+twee sorteerknoppen zetten de actieve kolom oplopend of aflopend. OciDeck herkent
+tekst, getallen, ISO-datums en tijden lokaal. Zijn de waarden gemengd, dan vraagt
+hij hoe hij ze moet lezen; waarden die hij niet herkent blijven bij elkaar
+onderaan staan, in hun oorspronkelijke volgorde. Sorteren verplaatst hele
+bronregels en herschrijft de inhoud van de cellen niet.
+
+Een tabel met twee of drie kolommen biedt daarnaast **Als tijdlijn weergeven**.
+Dat is een uitgesproken keuze: een tabel wordt nooit vanzelf bevorderd omdat er
+toevallig "tijd" of "gebeurtenis" boven een kolom staat. De eerste kolom wordt het
+merkteken, de tweede de gebeurteniskaart en de eventuele derde een neutrale
+metadata-chip. Alle rijen blijven zichtbaar, zonder de itemlimiet of de
+statuskleuren van een presentatietijdlijn. **Als tabel weergeven** draait de
+weergave terug zonder één cel kwijt te raken. **Invoegen → Tijdlijn** zet dezelfde
+draagbare structuur er direct in.
+
+Op schijf blijft de tijdlijn een gewone GFM-tabel met één HTML-commentaar er
+direct boven. Haal dat commentaar weg en elke Markdown-lezer ziet weer gewoon de
+tabel:
+
+```markdown
+<!-- timeline -->
+| Tijd | Gebeurtenis | Status |
+| --- | --- | --- |
+| 13:41 | Herstelclaim weerlegd | Vastgesteld |
+```
+
+### Voetnoten
+
+*(Toegevoegd 2026-08-18.)* **Invoegen → Voetnoot** zet een merkteken op de cursor
+en een lege nootregel onderaan het document, met de cursor er al in. Op schijf is
+dat gewone Pandoc-voetnootsyntaxis, die GitHub en Obsidian ook lezen:
+
+```
+Een zin met een noot [^1] erin.
+
+[^1]: De tekst van de noot.
+```
+
+Wat je ziet is een klein volgnummer in de tekst; wat er in het bestand staat is
+het label. Die twee hoeven niet gelijk te zijn: schrijf zelf `[^bron]` en dat
+blijft `[^bron]`, terwijl het nummer eenvoudig de leesvolgorde volgt. Voeg er een
+tussen twee andere in en er hoeft niets te worden hernummerd. Een `[^1]` zonder
+bijbehorende regel `[^1]:` blijft letterlijke tekst — een tekenklasse in een
+technisch document wordt niet stilletjes een merkteken.
+
+**Waar de noten belanden is een keuze per document**, onder het ⋮-menu:
+*Voetnoten achterin het document*. Uit — de standaard — betekent onderaan de
+bladzijde waar de verwijzing op valt, en schrijft niets in je bestand, want dat is
+wat elke lezer uit zichzelf al doet. Aan schrijft één regel front matter
+(`reference-location: document`), een sleutel die Pandoc en Quarto zelf uitvoeren,
+zodat het bestand zijn eigen keuze buiten OciDeck om meedraagt.
+
+Wat elk oppervlak kan:
+
+| Waar | Onderaan de bladzijde | Achterin |
+|---|---|---|
+| Weergave **Pagina's** | ja, echt op het vel | ja, achterin |
+| **Visueel** en **Bron** | doorlopend, dus achterin | achterin |
+| **LaTeX** (`.tex`) | ja (`\footnote`) | genummerde lijst onder een eigen kop |
+| **HTML** (en de PDF die je eruit afdrukt) | achterin, met een sprong heen en terug | idem |
+
+Die laatste regel is een echte beperking en geen slordigheid: een HTML-pagina
+heeft geen bladzijden, en de CSS die het zou kunnen is door geen enkele browser
+geïmplementeerd. Wil je de noten in een PDF écht onderaan het vel, neem dan de
+LaTeX-uitvoer.
+
 ### Een pagina-einde invoegen
 
 *(Toegevoegd 2026-08-08.)* Het invoeg-palet heeft een item **Pagina-einde** dat een
@@ -4614,6 +4683,29 @@ De **schrijfbreedte** ernaast (*Schrijfbreedte editor*: smal 860 px, standaard
 je eigen scherm: hoe breed het visuele schrijfoppervlak is. Smal leest rustiger,
 breed benut een groot scherm. Het is enkel een weergavekeuze en bereikt je bestand
 nooit.
+
+#### Breedte en zoom tijdens het schrijven *(toegevoegd 2026-08-18)*
+
+*Welke* breedte geldt, kies je in de werkbalk van de documentbewerker en niet in
+de instellingen — het is een keuze die je al werkend maakt, niet één keer vooraf:
+
+- **Paginabreedte** — de tekstbreedte van het vel. Alleen hier betekenen de
+  gestippelde pagina-eindelijnen iets, want alleen hier breekt een regel op het
+  scherm waar hij op papier breekt.
+- **Leeskolom** — de breedte uit de instelling hierboven, om te schrijven zonder
+  aan het vel te denken.
+- **Volledige breedte** — het hele venster, voor een brede tabel of een tweede
+  scherm.
+
+Buiten *Paginabreedte* worden de pagina-eindelijnen niet getekend: ze zouden
+wijzen op iets dat daar niet gebeurt. De knop zegt dat ook, in plaats van te
+verstommen.
+
+Ernaast staat de **zoom** (− / +, met het percentage zelf als knop terug naar ware
+grootte) en **Cmd/Ctrl +**, **−** en **0** als sneltoetsen. In Visueel schaalt hij
+de tekst *én* de kolom, zodat de regelval — en daarmee elk pagina-einde — precies
+blijft zoals hij op papier is. In de weergave Pagina's schaalt hij het vel zelf;
+de opmaak daarop verandert niet.
 
 #### De paginaopmaak met het document laten meereizen
 
