@@ -1624,6 +1624,29 @@ that before deciding whether this alpha fits what you are doing.
   tot een uitlegbare keuze en worden nooit stil weggegooid. De sortering is
   stabiel en verplaatst de oorspronkelijke Markdown-rijen zonder celbytes of
   regeleindes te normaliseren.
+- **documenten waren onvindbaar, en je zag pas na het openen wat je opende.**
+  Vier klachten, één oorzaak: beide zoekpaden lieten alleen Marp-decks door. De
+  mapscan achter het openscherm parseerde elk `.md` tot deck en liet vallen wat
+  dat niet was; de brede schijfscan gaf niets terug zonder `marp: true`. De
+  documentkant bewerkt juist gewone `.md`-bestanden, dus precies wat OciDeck als
+  document opent, kon je er niet mee terugvinden. Nu levert één wandeling beide
+  soorten op — `.md`, `.markdown` en `.txt` — en zegt elke rij met een pictogram
+  en een label welke van de twee het is; de knoppen *Alles · Presentaties ·
+  Documenten* dragen de aantallen, zodat je zonder te klikken ziet dát er
+  documenten zijn. Een document zonder titel heet naar zijn eerste kop, want
+  `verslag-def-2.md` zegt niets. Ook de recente-lijst op het welkomstscherm toont
+  nu de soort; die kende hem allang (`RecentFile.kind`) maar tekende alles als
+  presentatie. Een document komt alléén in de lijst als het door dezelfde
+  fail-closed poort komt als het openen: "geen presentatie" is een document,
+  maar uitvoerbare inhoud, kapot of onleesbaar blijft een weigering — wat je niet
+  mag openen, hoor je ook niet aangeboden te krijgen. Daarnaast is er de
+  optionele *Voorbeeld tonen bij openen* (Instellingen → Opslag → Openen,
+  standaard uit): naast de lijst verschijnt een gerenderd voorbeeld van het
+  bestand dat je aanwijst — de eerste dia van een presentatie, de begintekst van
+  een document. Het voorbeeld leest langs diezelfde poort, dus het kan geen
+  achterdeur zijn om geweigerde inhoud alsnog te renderen, en het wacht een
+  kwart seconde voordat het leest, zodat met de muis langs de lijst glijden geen
+  twintig bestanden inleest.
 
 - **schrijfcomfort in de documentmodus: breedte, zoom, koppen en voetnoten.**
   Vier dingen die opvielen tijdens het werken in een document, en wat ze bleken
