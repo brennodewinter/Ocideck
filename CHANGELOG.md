@@ -333,7 +333,7 @@ in Dutch, and it keeps growing on `main` between releases.
   bestandsformaat, terwijl dat naast `---` de enige constructie is die OciDeck
   zelf in de body van een document schrijft — hij staat nu in §14.10, met het
   dialect dat elke uitvoer eraan geeft. Vier beweringen die door de code waren
-  ingehaald zijn rechtgezet: er zijn vier uitvoervormen en geen twee (§14.4),
+  ingehaald zijn rechtgezet: er zijn drie documentuitvoervormen (§14.4),
   snijtekens wórden gezet — door de LaTeX-export, en alleen bij een afloop
   (§14.7), het sleutelregister telt er vier sinds `reference-location:` en de
   terugtrekroute is gebouwd in plaats van alleen verklaard (§14.5), en het
@@ -1700,6 +1700,24 @@ that before deciding whether this alpha fits what you are doing.
 ---
 
 ## Development log
+
+- **Documentkoppen en -voeten kunnen nu documentgegevens tonen.** Via
+  *Document · Eigenschappen* krijgt elk document vaste velden voor titel,
+  ondertitel en auteur, plus zelf benoemde velden. Zet bijvoorbeeld `{author}`
+  in de kop- of voettekst van een documentstijl en elk document vult daar zijn
+  eigen waarde in; een onbekende plaatsaanduiding blijft zichtbaar in plaats
+  van stil te verdwijnen. De waarden blijven gewone, eenregelige YAML-velden in
+  de `.md`, gaan vóór export door OciWacht en werken hetzelfde in Markdown,
+  doorlopende HTML en LaTeX. Het oppervlak is begrensd op 100 velden en 4096
+  tekens per waarde; dubbele handgeschreven sleutels worden zichtbaar opgelost.
+  Het presentatiepakket `.ocideck` staat niet langer ten onrechte tussen de
+  documentformaten, omdat dat documentmodus en vrije velden zou verliezen.
+
+- **TLP geldt nu ook voor documenten.** Een document heeft precies één
+  classificatie voor de hele inhoud, te kiezen in de documentwerkbalk. Staat ze
+  aan, dan staat dezelfde officiële TLP-markering in de kop én de voet van elk
+  documentoppervlak en reist ze mee naar Markdown, doorlopende HTML en LaTeX.
+  Er is bewust geen TLP per pagina of sectie: één bestand, één deelregel.
 
 - **een documentstijl kon niet zeggen hoe groot de letter was.** Een blad heeft
   een vaste lettermaat — een dia niet, die schaalt haar tekst naar het

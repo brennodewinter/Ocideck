@@ -3265,11 +3265,14 @@ Jekyll, Hugo of Obsidian).
 **OciDeck verzint geen eigen front-matter-vocabulaire.** Het schrijft wel een
 kleine, gesloten verzameling sleutels als je erom vraagt (§14.5), maar elke sleutel
 daarvan is er een die andere gereedschappen al lezen en waar ze naar handelen:
-`theme:` (Pandoc, Obsidian, GitHub Pages), sinds 2026-08-17 `papersize:` en
+`theme:` (Pandoc, Obsidian, GitHub Pages), `tlp:` met de standaardwaarden van
+FIRST Traffic Light Protocol 2.0 (§3.1), sinds 2026-08-17 `papersize:` en
 `geometry:` (Pandoc, dat ze doorgeeft aan het LaTeX-pakket `geometry`), en sinds
 2026-08-18 `reference-location:` (Pandoc en Quarto, §14.9). Datzelfde
 bestand door je eigen Pandoc halen levert je de pagina op die die sleutels
-beschrijven, zonder OciDeck ertussen. Wat ontbreekt — en ontbreken blijft — is een
+beschrijven, zonder OciDeck ertussen. Een document mag daarnaast gewone,
+eenregelige stringvelden zoals `title:`, `subtitle:` en `author:` dragen
+(§14.12). Wat ontbreekt — en ontbreken blijft — is een
 sleutel die alleen *binnen* OciDeck iets betekent: er is geen `kind:`, geen
 `ocideck:`-blok en nergens in het formaat een sleutel met het voorvoegsel
 `ocideck_`. Dat is de grens: OciDeck mag zich bij een vocabulaire aansluiten, het
@@ -3297,7 +3300,9 @@ Markdown van een deck, gehouden aan een strengere regel van geen normalisatie.
 
 Wat het documentpad wél in de front matter kan schrijven is een korte, gesloten
 verzameling sleutels — de **stijl** van het document (`theme:`), de
-**paginaopmaak** (`papersize:`, `geometry:`) en de **plaatsing van de voetnoten**
+**paginaopmaak** (`papersize:`, `geometry:`), de ene documentbrede
+**TLP-classificatie** (`tlp:`, §3.1), de **documentvelden** (§14.12) en de
+**plaatsing van de voetnoten**
 (`reference-location:`) — en elk daarvan alleen als je er bewust om vraagt. Elke
 schrijfactie is opt-in, byte-chirurgisch en laat de rest van het bestand met rust
 (§14.5, §14.8, §14.9). Een document dat je nooit een stijl geeft, waarin je nooit
@@ -3309,12 +3314,12 @@ geen front matter, dus de byte-identiteit hierboven blijft onveranderd gelden.
 Een document exporteren is **niet** het opslaan ervan. Export schrijft een
 **afgeleide, geredigeerde kopie voor een ontvanger** naar een **nieuw** bestand en
 raakt het origineel nooit aan, en valt dus **buiten** de byte-getrouwe garantie van
-§14.3. Er bestaan **vier** uitvoervormen (`DocumentExportFormat` in
+§14.3. Er bestaan **drie** uitvoervormen (`DocumentExportFormat` in
 [`lib/services/document_export_service.dart`](../lib/services/document_export_service.dart)):
 een geprojecteerd `.md` (een geredigeerde kopie van de platte tekst), één
-**doorlopend** zelfstandig HTML-document, een LaTeX-`article` (`.tex`) en het
-draagbare pakket (`.ocideck`, §7 — geschreven door `FileService.exportPackage`,
-niet door de tekstschrijver). Alle vier dragen de privacygeprojecteerde
+**doorlopend** zelfstandig HTML-document en een LaTeX-`article` (`.tex`). Een
+`.ocideck` wordt bewust niet aangeboden: dat pakket bewaart een presentatie en
+zou documentmodus en vrije velden verliezen. Alle drie dragen de privacygeprojecteerde
 (OciWacht) inhoud in plaats van de ruwe bron, langs dezelfde publieksgrens als een
 deckexport; het gekozen privacyprofiel wordt in de bestandsnaam van de export
 geschreven. Een ingebouwde PDF-*schrijver* is er nog steeds niet: een PDF komt
@@ -3353,6 +3358,12 @@ vraag per sleutel is of hij daar nog iets betekent.
   navigatie, en de LaTeX-export maakt er `\tableofcontents` van. De lijst wordt
   *na* de projectie gemaakt, uit de geprojecteerde body, zodat een inhoudsopgave
   nooit een kop kan noemen die de ontvanger niet mag zien.
+- **Documentvelden reizen mee na de privacyprojectie.** Het geprojecteerde `.md`
+  draagt dezelfde eenregelige velden als front matter. Doorlopende HTML en LaTeX
+  vullen die geprojecteerde waarden in de kop- en voetsjablonen van de
+  documentstijl in. OciWacht scant en redigeert waar nodig de waarden voordat
+  een van die drie vormen wordt gebouwd, zodat een veld niet veilig kan zijn in
+  de ene export en rauw in een andere (§14.12).
 - **De plaatsing van de voetnoten reist mee** *(sinds 2026-08-19, #1569)*. De
   noten zelf zijn gewone tekst in de body (§14.9); waar ze belanden staat in
   `reference-location:`, en het geprojecteerde `.md` draagt die sleutel opnieuw —
@@ -3870,3 +3881,58 @@ op de weg naar buiten:
   reizen de marker en zijn tabel als één embed, zodat een tijdlijn invoegen of
   verwijderen één documenthandeling is en er nooit een marker zonder tabel kan
   achterblijven — precies het gebrek waartegen de atomiciteit hierboven bestaat.
+
+### 14.12 Documentvelden en sjablonen voor kop en voet *(toegevoegd 2026-08-19)*
+
+Een document kan in zijn leidende YAML-front-matter een open verzameling
+eenregelige stringvelden dragen. `title`, `subtitle` en `author` hebben vaste
+invoervelden in het venster met documenteigenschappen; een auteur kan zelf
+velden toevoegen. Ze gebruiken dezelfde platte vorm:
+
+```yaml
+---
+title: Incidentrapport
+subtitle: Openbare samenvatting
+author: Jane Example
+case-id: IR-2026-08
+---
+```
+
+Een veldnaam moet passen op `[a-z][a-z0-9_-]*`. De structurele sleutels `theme`,
+`tlp`, `papersize`, `geometry` en `reference-location` zijn gereserveerd, net als
+elke sleutel die met `ocideck_` begint. Een waarde is één YAML-stringscalar op
+dezelfde regel. Meerregelige (`|`/`>`), geneste, reeks- en mappingwaarden zijn
+geen documentvelden; OciDeck bewaart zulke vreemde front matter bytegetrouw. Dat
+geldt ook voor commentaar en onbekende syntaxis. Een document kan maximaal 100
+velden hebben en elke waarde maximaal 4096 tekens. Een grotere bewuste bewerking
+of export wordt geweigerd; een bestaand groter bronbestand blijft wel leesbaar
+en bytegetrouw totdat de auteur de velden bewerkt.
+
+Veldbewerkingen raken alleen de veldregels, behouden LF of CRLF en verwijderen
+de front-matter-hekken wanneer het gewiste veld de hele kop vormde. Herhaalt een
+handgeschreven bestand een veldnaam, dan wordt de eerste scalaire waarde gelezen
+en worden alle waarden als afzonderlijke rijen getoond. Het eigenschappenvenster
+weigert op te slaan totdat de auteur de dubbeling verwijdert of hernoemt.
+
+De kop- en voettekst van een documentstijl mag `{key}`-plaatsaanduidingen bevatten:
+
+```text
+{title} — {author}
+Zaak {case-id}
+```
+
+Bekende plaatsaanduidingen worden in de bewerker, doorlopende HTML en LaTeX
+vervangen door de documentwaarde. Een onbekende plaatsaanduiding blijft letterlijk
+zichtbaar, zodat een hernoemd of ontbrekend veld niet in een onverklaarde leegte
+verandert. Waarden worden als letterlijke tekst ingevoegd: ze kunnen via een
+veldwaarde geen Markdown-opmaak, koppeling of HTML introduceren. Het sjabloon
+hoort bij het stijlprofiel; de waarden horen bij het document. Daarom draagt de
+geprojecteerde Markdown-export wel de velden maar geen verwijzing naar een lokaal
+stijlprofiel, terwijl HTML en LaTeX de opgeloste kop en voet renderen.
+
+Alle veldwaarden, veldnamen en de uiteindelijke samengestelde kop en voet passeren
+dezelfde OciWacht-publieksgrens als de body. De drie standaardvelden gebruiken de
+bestaande titel-/beschrijving-/auteurpaden; eigen velden gebruiken het
+documentveldpad. Alleen de geprojecteerde veldmap voedt daarna Markdown, HTML en
+LaTeX. Een te groot veld wordt niet gedeeltelijk gescand maar laat de export
+gesloten mislukken.

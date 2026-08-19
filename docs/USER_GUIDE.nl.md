@@ -4568,6 +4568,43 @@ gewone `.md` zonder front matter; een stijl maakt er nooit een presentatie van. 
 een genoemde profielnaam niet meer, dan valt OciDeck terug op de standaard in plaats
 van het document niet meer te openen.
 
+Een document kan ook één **TLP-classificatie** voor het hele bestand dragen. Kies
+die met de knop **TLP** in de documentwerkbalk. Anders dan bij een presentatie is
+er geen apart niveau per pagina of sectie. Met een niveau gekozen staat het
+officiële label in zowel kop als voet in Visueel, Bron en Pagina's, en reist het
+mee naar Markdown, doorlopende HTML en LaTeX. Kies **Geen** om de `tlp:`-regel
+weer te verwijderen; een verder plat document wordt dan byte voor byte weer
+gewone Markdown.
+
+### Documenteigenschappen in kop en voet
+
+Open **Document · Eigenschappen** vanuit de documentwerkbalk om waarden in te
+stellen die bij dit document horen. **Titel**, **Ondertitel** en **Auteur** staan
+altijd klaar; met **Toevoegen** maak je een veld zoals `zaak-id` of `versie`. Een
+eigen naam begint met een kleine letter en gebruikt daarna alleen kleine letters,
+cijfers, `_` of `-`. Namen voor paginaopmaak, stijl en TLP — en namen die met
+`ocideck_` beginnen — zijn gereserveerd. Waarden blijven op één regel. Er zijn
+maximaal 100 velden toegestaan en elke waarde mag hoogstens 4096 tekens bevatten.
+Een lege waarde verwijdert het veld bij opslaan. Bevat een handgeschreven bestand
+dezelfde naam twee keer, dan toont het venster beide waarden als rijen en moet je
+de dubbeling verwijderen of hernoemen voordat je kunt opslaan.
+
+Zet onder *Instellingen → Presentatie → Stijlprofiel → Document* bijvoorbeeld
+`{title}`, `{subtitle}`, `{author}` of een eigen `{zaak-id}` in de **Koptekst** of
+**Footertekst**. De stijl is het herbruikbare sjabloon; elk document levert zijn
+eigen waarden. Zonder passend veld blijft `{naam}` zichtbaar, zodat een ontbrekende
+eigenschap niet ongemerkt leeg wordt. Een waarde geldt als letterlijke tekst en
+kan dus niet zelf een Markdown-koppeling of opmaak in het sjabloon invoegen.
+
+Hetzelfde resultaat staat in Visueel, de live Bron-weergave en Pagina's. Bij
+export houdt Markdown de eenregelige velden in de front matter; doorlopende HTML
+en LaTeX zetten de opgeloste waarden in kop en voet. OciWacht controleert zowel de
+waarden als de uiteindelijke samengestelde kop en voet voordat een van deze drie
+uitvoervormen wordt gemaakt. `.ocideck` wordt hier bewust niet aangeboden: dat is
+een presentatiepakket en zou een document stil in dia's veranderen. Gebruik
+**Opslaan** voor het byte-getrouwe document en Markdown, HTML of LaTeX voor een
+geprojecteerde kopie voor een ontvanger.
+
 ### Een documentstijl maken
 
 Onder *Instellingen → Presentatie* beheer je de profielen voor documenten én
@@ -4613,8 +4650,7 @@ weergave- en exportkeuzes; alleen de knop **Stijl** in het document schrijft `th
 naar het bestand.
 
 Bij HTML-export geeft OciDeck de effectieve stijl door aan de renderer (afgedwongen
-stijl, documentkeuze, daarna standaard). Een `.ocideck`-pakketexport bevat eveneens
-het afgeleide exportdeck met dat effectieve profiel. Een Markdown-export blijft alleen
+stijl, documentkeuze, daarna standaard). Een Markdown-export blijft alleen
 Markdown-inhoud en is geen stijldrager.
 
 ### Een document exporteren
