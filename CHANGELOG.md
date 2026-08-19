@@ -230,6 +230,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- docs(bestandsformaat): §14.11 (de tijdlijnmarker) is aangevuld en vertaald.
+  De sectie kwam met de functie mee (#1571) maar alleen in het Engels, en zonder
+  het rijtje dat §14.9 en §14.10 wél hebben: wat elk oppervlak met de bytes doet.
+  Dat staat er nu — het geprojecteerde `.md` houdt marker en tabel byte voor byte,
+  de HTML-export maakt er een tijdlijnlijst van die bij het afdrukken niet
+  doormidden breekt, de LaTeX-export een `description`-lijst met een derde kolom
+  als `Kop: waarde`, en in de visuele modus reizen marker en tabel als één embed.
+  Ook de herkenning staat er nu zo precies als de code hem leest: witruimte om de
+  marker heen mag, de schrijfwijze erbinnen niet. En `FILE_FORMAT.nl.md` — de
+  versie die in de app wordt getoond — heeft de sectie eindelijk ook.
+
 - docs(bestandsformaat): FILE_FORMAT loopt weer gelijk met de documentkant van de
   code. De inhoudsopgave-marker `<!-- toc -->` stond nergens in het
   bestandsformaat, terwijl dat naast `---` de enige constructie is die OciDeck
