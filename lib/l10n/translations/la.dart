@@ -1665,6 +1665,29 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Als tabel weergeven': 'Propono in mensa',
+  'Als tijdlijn weergeven': 'Ostende ut timeline',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Valores non omnes eiusdem speciei videntur esse. Elige quomodo OciDeck legas; valores ignoti maneant in fundo suo in ordine originali.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Haec columna nondum continet aliquos valores qui hoc modo disponi possunt.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Haec mensa nondum pro tempore exponi potest et immutata permanet.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Aliqua bona non cognoscuntur. Ii ordines simul in imo manent; eorum contentus non mutat.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Tempus horarium duabus vel tribus columnis laborat. Haec mensa non mutatur.',
+  'Gebeurtenis': 'Eventus',
+  'Gebeurtenissen bewerken': 'Certe recensere',
+  'Hoe wil je deze kolom sorteren?': 'Quomodo vis columnam hanc quale sit?',
+  'Kolom aflopend sorteren': 'Sort columna descendens',
+  'Kolom oplopend sorteren': 'Sort columnae ascendentis',
+  'Sorteren met aandachtspunten?': 'Digerere puncta interest?',
+  'Tijd': 'Tempus',
+  'Tijdlijn bekijken': 'Visum timeline',
+  'Toch sorteren': 'adhuc genus',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Prius adde unum saltem eventum. Haec mensa non mutatur.',
   'Voetnoot': 'Adnotatio',
   'Noten': 'Adnotationes',
   'Voetnoten achterin het document': 'Adnotationes in fine documenti',

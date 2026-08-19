@@ -1603,6 +1603,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **documenttijdlijnen en robuuste tabelsortering.** Een gewone GFM-tabel met
+  twee of drie kolommen kan in de documentmodus expliciet als verticale
+  tijdlijn worden getoond. De bron blijft een tabel onder een omkeerbare
+  `<!-- timeline -->`-marker; alle gebeurtenissen, headers en metadata blijven
+  selecteerbaar en reizen mee door documentexport en OciWacht. Iedere visueel
+  bewerkbare tabel kan daarnaast op de actieve kolom sorteren. Tekst, getallen,
+  datums en tijden worden lokaal herkend; gemengde of onbekende waarden leiden
+  tot een uitlegbare keuze en worden nooit stil weggegooid. De sortering is
+  stabiel en verplaatst de oorspronkelijke Markdown-rijen zonder celbytes of
+  regeleindes te normaliseren.
+
 - **schrijfcomfort in de documentmodus: breedte, zoom, koppen en voetnoten.**
   Vier dingen die opvielen tijdens het werken in een document, en wat ze bleken
   te zijn. *De volle breedte gebruiken kon niet* omdat de schakelaar voor de

@@ -1681,6 +1681,30 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Als tabel weergeven': 'Taispeáin mar tábla',
+  'Als tijdlijn weergeven': 'Taispeáin mar amlíne',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Ní cosúil go bhfuil na luachanna ar fad den chineál céanna. Roghnaigh conas ba cheart do OciDeck iad a léamh; fanann luachanna neamhaitheanta ag an mbun ina n-ord bunaidh.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Níl aon luachanna sa cholún seo is féidir a shórtáil ar an mbealach seo.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Ní féidir an tábla seo a thaispeáint mar amlíne go fóill agus níl aon athrú air.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Ní aithnítear cuid de na luachanna. Fanann na sraitheanna sin le chéile ag an mbun; ní athraíonn a n-ábhar.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Oibríonn amlíne le dhá nó trí cholún. Níl aon athrú ar an tábla seo.',
+  'Gebeurtenis': 'Imeacht',
+  'Gebeurtenissen bewerken': 'Cuir imeachtaí in eagar',
+  'Hoe wil je deze kolom sorteren?':
+      'Conas is mian leat an colún seo a shórtáil?',
+  'Kolom aflopend sorteren': 'Sórtáil colún íslitheach',
+  'Kolom oplopend sorteren': 'Sórtáil colún ardaitheach',
+  'Sorteren met aandachtspunten?': 'Sórtáil de réir pointí spéise?',
+  'Tijd': 'Am',
+  'Tijdlijn bekijken': 'Féach ar an amlíne',
+  'Toch sorteren': 'Fós ag sórtáil',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Cuir imeacht amháin ar a laghad leis ar dtús. Níl aon athrú ar an tábla seo.',
   'Voetnoot': 'Fonóta',
   'Noten': 'Nótaí',
   'Voetnoten achterin het document': 'Fonótaí ag deireadh na cáipéise',

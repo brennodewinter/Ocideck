@@ -1655,6 +1655,29 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Als tabel weergeven': 'Prikaz kao tablica',
+  'Als tijdlijn weergeven': 'Prikaži kao vremensku traku',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Ne čini se da su sve vrijednosti iste vrste. Odaberite kako ih OciDeck treba čitati; neprepoznate vrijednosti ostaju na dnu u izvornom redoslijedu.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Ovaj stupac još ne sadrži vrijednosti koje se mogu sortirati na ovaj način.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Ova se tablica još ne može prikazati kao vremenska traka i ostaje nepromijenjena.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Neke od vrijednosti nisu prepoznate. Ti redovi ostaju zajedno na dnu; njihov se sadržaj ne mijenja.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Vremenska traka radi s dva ili tri stupca. Ova tablica ostaje nepromijenjena.',
+  'Gebeurtenis': 'Događaj',
+  'Gebeurtenissen bewerken': 'Uredi događaje',
+  'Hoe wil je deze kolom sorteren?': 'Kako želite poredati ovaj stupac?',
+  'Kolom aflopend sorteren': 'Poredaj stupac silaznim redom',
+  'Kolom oplopend sorteren': 'Poredaj stupac uzlazno',
+  'Sorteren met aandachtspunten?': 'Poredati po zanimljivostima?',
+  'Tijd': 'Vrijeme',
+  'Tijdlijn bekijken': 'Pregledajte vremensku traku',
+  'Toch sorteren': 'Još uvijek sortiram',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Prvo dodajte barem jedan događaj. Ova tablica ostaje nepromijenjena.',
   'Voetnoot': 'Fusnota',
   'Noten': 'Bilješke',
   'Voetnoten achterin het document': 'Fusnote na kraju dokumenta',

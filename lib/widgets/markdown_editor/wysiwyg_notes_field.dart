@@ -17,6 +17,7 @@ import 'footnote_embed_builder.dart';
 import 'markdown_editor_theme.dart';
 import 'table_embed_builder.dart';
 import 'toc_embed_builder.dart';
+import 'timeline_table_embed_builder.dart';
 
 /// The Quill [DefaultStyles] for the document/notes WYSIWYG surface, derived
 /// entirely from [theme] so every block honours the app theme.
@@ -245,6 +246,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // inline-embed (het merkteken) en de definitie als blok-embed
                 // (de invulbare notenregel).
                 embedBuilders: const [
+                  TimelineTableEmbedBuilder(),
                   TableEmbedBuilder(),
                   DividerEmbedBuilder(),
                   TocEmbedBuilder(),

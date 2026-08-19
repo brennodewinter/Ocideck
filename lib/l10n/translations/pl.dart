@@ -1662,6 +1662,29 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Als tabel weergeven': 'Wyświetl jako tabelę',
+  'Als tijdlijn weergeven': 'Pokaż jako oś czasu',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Nie wszystkie wartości wydają się być tego samego typu. Wybierz sposób, w jaki OciDeck ma je czytać; nierozpoznane wartości pozostają na dole w pierwotnej kolejności.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Ta kolumna nie zawiera jeszcze żadnych wartości, które można w ten sposób posortować.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Ta tabela nie może być jeszcze wyświetlana jako oś czasu i pozostaje niezmieniona.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Niektóre wartości nie są rozpoznawane. Te rzędy pozostają razem na dole; ich treść się nie zmienia.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Oś czasu działa z dwiema lub trzema kolumnami. Tabela ta pozostaje niezmieniona.',
+  'Gebeurtenis': 'Wydarzenie',
+  'Gebeurtenissen bewerken': 'Edytuj wydarzenia',
+  'Hoe wil je deze kolom sorteren?': 'Jak chcesz posortować tę kolumnę?',
+  'Kolom aflopend sorteren': 'Sortuj kolumnę malejąco',
+  'Kolom oplopend sorteren': 'Sortuj kolumnę rosnąco',
+  'Sorteren met aandachtspunten?': 'Sortować według punktów szczególnych?',
+  'Tijd': 'Czas',
+  'Tijdlijn bekijken': 'Zobacz oś czasu',
+  'Toch sorteren': 'Nadal sortuję',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Najpierw dodaj co najmniej jedno wydarzenie. Tabela ta pozostaje niezmieniona.',
   'Voetnoot': 'Przypis',
   'Noten': 'Przypisy',
   'Voetnoten achterin het document': 'Przypisy na końcu dokumentu',

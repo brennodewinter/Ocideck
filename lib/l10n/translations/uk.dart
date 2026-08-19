@@ -1666,6 +1666,29 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Als tabel weergeven': 'Відобразити як таблицю',
+  'Als tijdlijn weergeven': 'Показати як часову шкалу',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Не всі значення мають однаковий тип. Виберіть, як OciDeck має їх читати; нерозпізнані значення залишаються внизу в початковому порядку.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Цей стовпець ще не містить жодних значень, які можна відсортувати таким чином.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Цю таблицю ще не можна відобразити як часову шкалу, і вона залишається незмінною.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Деякі значення не розпізнаються. Ці ряди залишаються разом внизу; їх зміст не змінюється.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Шкала часу працює з двома або трьома стовпцями. Ця таблиця залишається без змін.',
+  'Gebeurtenis': 'Подія',
+  'Gebeurtenissen bewerken': 'Редагувати події',
+  'Hoe wil je deze kolom sorteren?': 'Як ви хочете відсортувати цей стовпець?',
+  'Kolom aflopend sorteren': 'Сортувати стовпець за спаданням',
+  'Kolom oplopend sorteren': 'Сортувати стовпець за зростанням',
+  'Sorteren met aandachtspunten?': 'Сортувати за цікавими місцями?',
+  'Tijd': 'час',
+  'Tijdlijn bekijken': 'Переглянути часову шкалу',
+  'Toch sorteren': 'Ще сортую',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Спочатку додайте хоча б одну подію. Ця таблиця залишається без змін.',
   'Voetnoot': 'Виноска',
   'Noten': 'Примітки',
   'Voetnoten achterin het document': 'Виноски в кінці документа',

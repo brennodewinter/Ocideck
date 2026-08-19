@@ -672,6 +672,29 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Als tabel weergeven': 'Visualizza come tabella',
+  'Als tijdlijn weergeven': 'Mostra come sequenza temporale',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'I valori non sembrano essere tutti dello stesso tipo. Scegli come OciDeck deve leggerli; i valori non riconosciuti rimangono in fondo nel loro ordine originale.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Questa colonna non contiene ancora valori che possano essere ordinati in questo modo.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Questa tabella non può ancora essere visualizzata come sequenza temporale e rimane invariata.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Alcuni valori non vengono riconosciuti. Quelle righe rimangono insieme in basso; il loro contenuto non cambia.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Una sequenza temporale funziona con due o tre colonne. Questa tabella rimane invariata.',
+  'Gebeurtenis': 'Evento',
+  'Gebeurtenissen bewerken': 'Modifica eventi',
+  'Hoe wil je deze kolom sorteren?': 'Come vuoi ordinare questa colonna?',
+  'Kolom aflopend sorteren': 'Ordina la colonna in modo discendente',
+  'Kolom oplopend sorteren': 'Ordina la colonna in modo crescente',
+  'Sorteren met aandachtspunten?': 'Ordinare per punti di interesse?',
+  'Tijd': 'Tempo',
+  'Tijdlijn bekijken': 'Visualizza la sequenza temporale',
+  'Toch sorteren': 'Sto ancora ordinando',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Per prima cosa aggiungi almeno un evento. Questa tabella rimane invariata.',
   'Voetnoot': 'Nota a piè di pagina',
   'Noten': 'Note',
   'Voetnoten achterin het document': 'Note alla fine del documento',

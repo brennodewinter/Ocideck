@@ -1,4 +1,5 @@
 import '../services/table_of_contents.dart';
+import '../services/document_timeline.dart';
 
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
@@ -31,7 +32,18 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
       continue;
     }
     if (fenced) continue;
+    var supportedTimeline = false;
+    if (line.trim() == documentTimelineMarker) {
+      var end = index + 1;
+      while (end < lines.length && lines[end].trimLeft().startsWith('|')) {
+        end++;
+      }
+      supportedTimeline = analyzeMarkedTimeline(
+        lines.sublist(index, end).join('\n'),
+      ).isUsable;
+    }
     if (!tocMarkerLinePattern.hasMatch(line) &&
+        !supportedTimeline &&
         RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
       limitations.add(MarkdownVisualLimitation.rawHtml);
     }

@@ -1,6 +1,7 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
 import 'markdown_table_codec.dart';
+import 'document_timeline.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -64,6 +65,35 @@ class DocumentDeckBridge {
     while (i < lines.length) {
       final line = lines[i];
       final trimmed = line.trim();
+
+      // De tijdlijnmarker en zijn direct volgende GFM-tabel zijn één atomair
+      // blok. `customMarkdown` bewaart de rauwe bron voor de documentrondgang;
+      // `tableRows` houdt dezelfde inhoud beschikbaar voor tabelweergave en
+      // OciWacht-kolomcontext. De marker los in flow zetten zou bij terugkeer
+      // een lege regel invoegen en daarmee zijn betekenis verliezen.
+      if (trimmed == documentTimelineMarker &&
+          i + 2 < lines.length &&
+          isMarkdownTableLine(lines[i + 1]) &&
+          isMarkdownTableDelimiterRow(lines[i + 2])) {
+        flushFlow();
+        final tableLines = <String>[lines[i + 1], lines[i + 2]];
+        var j = i + 3;
+        while (j < lines.length && isMarkdownTableLine(lines[j])) {
+          tableLines.add(lines[j]);
+          j++;
+        }
+        final markedSource = [line, ...tableLines].join('\n');
+        final analysis = analyzeMarkedTimeline(markedSource);
+        if (analysis.isUsable) {
+          slides.add(
+            Slide.create(
+              SlideType.freeMarkdown,
+            ).copyWith(customMarkdown: markedSource),
+          );
+          i = j;
+          continue;
+        }
+      }
 
       // Kop: nieuwe sectie. De kopregel blijft verbatim in het dia-lichaam, dus
       // hij wordt gescand en het niveau overleeft een rondgang.
@@ -153,7 +183,7 @@ class DocumentDeckBridge {
     for (final slide in deck.slides) {
       final body = _slideBody(slide);
       if (body.trim().isNotEmpty) {
-        parts.add(body.trim());
+        parts.add(analyzeMarkedTimeline(body).isUsable ? body : body.trim());
       }
     }
     return '${parts.join('\n\n')}\n';

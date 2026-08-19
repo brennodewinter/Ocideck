@@ -1667,6 +1667,29 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Als tabel weergeven': 'Afișați ca tabel',
+  'Als tijdlijn weergeven': 'Afișați ca cronologie',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Valorile nu par a fi toate de același tip. Alegeți cum ar trebui să le citească OciDeck; valorile nerecunoscute rămân în partea de jos în ordinea lor inițială.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Această coloană nu conține încă valori care să poată fi sortate în acest fel.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Acest tabel nu poate fi încă afișat ca cronologie și rămâne neschimbat.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Unele dintre valori nu sunt recunoscute. Rândurile respective rămân împreună în partea de jos; continutul lor nu se schimba.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'O cronologie funcționează cu două sau trei coloane. Acest tabel rămâne neschimbat.',
+  'Gebeurtenis': 'Eveniment',
+  'Gebeurtenissen bewerken': 'Editați evenimente',
+  'Hoe wil je deze kolom sorteren?': 'Cum doriți să sortați această coloană?',
+  'Kolom aflopend sorteren': 'Sortați coloana descendent',
+  'Kolom oplopend sorteren': 'Sortați coloana crescător',
+  'Sorteren met aandachtspunten?': 'Sortați după puncte de interes?',
+  'Tijd': 'Timp',
+  'Tijdlijn bekijken': 'Vedeți cronologia',
+  'Toch sorteren': 'Încă se sortează',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Mai întâi adăugați cel puțin un eveniment. Acest tabel rămâne neschimbat.',
   'Voetnoot': 'Notă de subsol',
   'Noten': 'Note',
   'Voetnoten achterin het document': 'Note la sfârșitul documentului',

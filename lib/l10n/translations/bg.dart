@@ -1670,6 +1670,29 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Als tabel weergeven': 'Показване като таблица',
+  'Als tijdlijn weergeven': 'Показване като времева линия',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Стойностите не изглеждат всички от един и същи тип. Изберете как OciDeck да ги чете; неразпознатите стойности остават най-отдолу в първоначалния си ред.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Тази колона все още не съдържа никакви стойности, които могат да бъдат сортирани по този начин.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Тази таблица все още не може да бъде показана като времева линия и остава непроменена.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Някои от стойностите не се разпознават. Тези редове остават заедно в долната част; тяхното съдържание не се променя.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Времевата линия работи с две или три колони. Тази таблица остава непроменена.',
+  'Gebeurtenis': 'Събитие',
+  'Gebeurtenissen bewerken': 'Редактиране на събития',
+  'Hoe wil je deze kolom sorteren?': 'Как искате да сортирате тази колона?',
+  'Kolom aflopend sorteren': 'Сортиране на колоната в низходящ ред',
+  'Kolom oplopend sorteren': 'Сортиране на колоната във възходящ ред',
+  'Sorteren met aandachtspunten?': 'Сортиране по точки на интерес?',
+  'Tijd': 'време',
+  'Tijdlijn bekijken': 'Преглед на времевата линия',
+  'Toch sorteren': 'Все още сортирам',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Първо добавете поне едно събитие. Тази таблица остава непроменена.',
   'Voetnoot': 'Бележка под линия',
   'Noten': 'Бележки',
   'Voetnoten achterin het document': 'Бележки в края на документа',

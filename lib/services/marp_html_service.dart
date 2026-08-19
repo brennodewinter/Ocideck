@@ -47,6 +47,7 @@ import 'improvement/flow_layout.dart';
 import 'improvement/flow_slide.dart';
 import 'improvement/flow_spec.dart';
 import 'markdown_table_codec.dart';
+import 'document_timeline.dart';
 import 'menu_blocks.dart';
 import 'rich_text_layout.dart';
 import 'scene/scene.dart';

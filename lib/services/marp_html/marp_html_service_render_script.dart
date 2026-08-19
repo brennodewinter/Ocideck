@@ -64,6 +64,30 @@ document.querySelectorAll('section.slide,section.document').forEach(function(sec
   if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
   sec.innerHTML='';sec.appendChild(div);
 });
+// Een tijdlijn blijft in de bron een gewone tabel. Pas na de veilige Markdown-
+// render wordt alleen een expliciet gemarkeerde tabel naar semantische HTML
+// geprojecteerd; alle celinhoud is dan al door DOMPurify gegaan.
+document.querySelectorAll('.document .ocideck-timeline-marker').forEach(function(marker){
+  var table=marker.nextElementSibling;
+  if(!table||table.tagName!=='TABLE')return;
+  var headers=Array.from(table.querySelectorAll('thead th'));
+  if(headers.length<2||headers.length>3)return;
+  var list=document.createElement('ol');list.className='ocideck-timeline';
+  table.querySelectorAll('tbody tr').forEach(function(row){
+    var cells=row.querySelectorAll('td');if(cells.length<2)return;
+    var item=document.createElement('li');
+    var time=document.createElement('div');time.className='ocideck-timeline-time';time.innerHTML=cells[0].innerHTML;
+    var card=document.createElement('article');card.className='ocideck-timeline-card';
+    var event=document.createElement('div');event.className='ocideck-timeline-event';event.innerHTML=cells[1].innerHTML;card.appendChild(event);
+    if(cells.length>2&&cells[2].textContent.trim()){
+      var meta=document.createElement('div');meta.className='ocideck-timeline-meta';
+      var label=document.createElement('strong');label.textContent=(headers[2].textContent||'')+': ';meta.appendChild(label);
+      var value=document.createElement('span');value.innerHTML=cells[2].innerHTML;meta.appendChild(value);card.appendChild(meta);
+    }
+    item.appendChild(time);item.appendChild(card);list.appendChild(item);
+  });
+  marker.replaceWith(list);table.remove();
+});
 // De ingesloten afbeeldingen terugzetten. Ze staan één keer in OCIDECK_IMG en
 // de dia's dragen alleen een verwijzing, zodat dezelfde achtergrond op veertig
 // dia's het bestand niet veertig keer zo groot maakt. Alleen een echte

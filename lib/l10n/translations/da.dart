@@ -1650,6 +1650,29 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Als tabel weergeven': 'Vises som tabel',
+  'Als tijdlijn weergeven': 'Vis som tidslinje',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Værdierne ser ikke alle ud til at være af samme type. Vælg, hvordan OciDeck skal læse dem; ikke-genkendte værdier forbliver nederst i deres oprindelige rækkefølge.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'Denne kolonne indeholder endnu ingen værdier, der kan sorteres på denne måde.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Denne tabel kan endnu ikke vises som en tidslinje og forbliver uændret.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Nogle af værdierne genkendes ikke. Disse rækker forbliver sammen i bunden; deres indhold ændres ikke.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'En tidslinje fungerer med to eller tre kolonner. Denne tabel forbliver uændret.',
+  'Gebeurtenis': 'Tilfælde',
+  'Gebeurtenissen bewerken': 'Rediger begivenheder',
+  'Hoe wil je deze kolom sorteren?': 'Hvordan vil du sortere denne kolonne?',
+  'Kolom aflopend sorteren': 'Sorter kolonne faldende',
+  'Kolom oplopend sorteren': 'Sorter kolonne stigende',
+  'Sorteren met aandachtspunten?': 'Sortere efter interessepunkter?',
+  'Tijd': 'Tid',
+  'Tijdlijn bekijken': 'Se tidslinjen',
+  'Toch sorteren': 'Sorterer stadig',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Tilføj først mindst én begivenhed. Denne tabel forbliver uændret.',
   'Voetnoot': 'Fodnote',
   'Noten': 'Noter',
   'Voetnoten achterin het document': 'Fodnoter sidst i dokumentet',

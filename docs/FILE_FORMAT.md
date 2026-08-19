@@ -3740,3 +3740,29 @@ The author-facing description is in the
 [User Guide](USER_GUIDE.md#documents); the code map is in
 [`SOURCE_MAP.md`](SOURCE_MAP.md) under `table_of_contents.dart` and
 `toc_embed_syntax.dart`.
+
+### 14.11 Timeline view of a GFM table *(added 2026-08-19)*
+
+A document timeline is not a new data format. It is a two- or three-column GFM
+table immediately preceded by this exact marker:
+
+```markdown
+<!-- timeline -->
+| Tijd | Gebeurtenis | Status |
+| --- | --- | --- |
+| 12:02 | Eerste melding | Gemeld |
+```
+
+The comment applies only to the directly following table. A blank line breaks
+the association. Two columns mean marker and event; a third is displayed as
+neutral metadata under its original header. Header names have no prescribed
+meaning and values are never converted into red/amber/green status. Tables with
+another column count remain ordinary tables.
+
+Removing only `<!-- timeline -->` is the complete inverse operation: the table
+bytes and all cells stay in place. Older or different Markdown readers ignore
+the comment and show the table. OciDeck keeps marker plus table atomic through
+the visual editor, document/deck projection and export. Table sorting is a
+separate generic visual-table operation: it reorders complete raw body rows,
+stably, while preserving the header, delimiter, cell bytes and positional line
+endings.

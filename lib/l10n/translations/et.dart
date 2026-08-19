@@ -1643,6 +1643,29 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Als tabel weergeven': 'Kuva tabelina',
+  'Als tijdlijn weergeven': 'Kuva ajaskaalana',
+  'De waarden lijken niet allemaal van hetzelfde type. Kies hoe OciDeck ze moet lezen; niet-herkende waarden blijven onderaan in hun oorspronkelijke volgorde staan.':
+      'Kõik väärtused ei tundu olevat sama tüüpi. Valige, kuidas OciDeck peaks neid lugema; tundmatud väärtused jäävad algses järjekorras alumisse ossa.',
+  'Deze kolom bevat nog geen waarden die op deze manier gesorteerd kunnen worden.':
+      'See veerg ei sisalda veel väärtusi, mida saaks sel viisil sorteerida.',
+  'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.':
+      'Seda tabelit ei saa veel ajaskaalana kuvada ja see jääb muutumatuks.',
+  'Een deel van de waarden wordt niet herkend. Die rijen blijven bij elkaar onderaan staan; hun inhoud verandert niet.':
+      'Mõnda väärtust ei tunta ära. Need read jäävad allosas kokku; nende sisu ei muutu.',
+  'Een tijdlijn werkt met twee of drie kolommen. Deze tabel blijft ongewijzigd.':
+      'Ajaskaala töötab kahe või kolme veeruga. See tabel jääb muutumatuks.',
+  'Gebeurtenis': 'Sündmus',
+  'Gebeurtenissen bewerken': 'Muuda sündmusi',
+  'Hoe wil je deze kolom sorteren?': 'Kuidas soovite seda veergu sortida?',
+  'Kolom aflopend sorteren': 'Sorteeri veerg kahanevalt',
+  'Kolom oplopend sorteren': 'Sorteeri veerud kasvavalt',
+  'Sorteren met aandachtspunten?': 'Kas sortida huvipunktide järgi?',
+  'Tijd': 'Aeg',
+  'Tijdlijn bekijken': 'Kuva ajaskaala',
+  'Toch sorteren': 'Ikka sorteerimine',
+  'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.':
+      'Esmalt lisage vähemalt üks sündmus. See tabel jääb muutumatuks.',
   'Voetnoot': 'Allmärkus',
   'Noten': 'Märkused',
   'Voetnoten achterin het document': 'Märkused dokumendi lõpus',

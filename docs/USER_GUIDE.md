@@ -4338,6 +4338,34 @@ elsewhere. *(Page break added 2026-08-08 — see
 [Inserting a page break](#inserting-a-page-break) below; footnote 2026-08-18 —
 see [Footnotes](#footnotes).)*
 
+### Tables, sorting and timelines
+
+In **Visual**, click a table cell to expose the table controls. The two sort
+buttons order the active column ascending or descending. OciDeck recognises
+text, numbers, ISO dates and times locally. If values are mixed, it asks how to
+read them; values it cannot recognise stay together at the bottom in their
+original order. Sorting moves whole source rows and does not rewrite their cell
+contents.
+
+A table with two or three columns also offers **Als tijdlijn weergeven**. This
+is an explicit choice: a table is never promoted because its headers happen to
+say “time” or “event”. The first column becomes the marker, the second the event
+card and the optional third a neutral metadata chip. All rows remain visible,
+without a presentation-style item limit or status colours. **Als tabel
+weergeven** reverses the view without losing a cell. **Invoegen → Tijdlijn**
+inserts the same portable structure directly.
+
+On disk the timeline is still an ordinary GFM table with one HTML comment
+directly above it. Remove that comment and every Markdown reader simply sees the
+table again:
+
+```markdown
+<!-- timeline -->
+| Tijd | Gebeurtenis | Status |
+| --- | --- | --- |
+| 13:41 | Herstelclaim weerlegd | Vastgesteld |
+```
+
 ### Footnotes
 
 *(Added 2026-08-18.)* **Invoegen → Voetnoot** puts a marker at the cursor and an
