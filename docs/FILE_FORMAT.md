@@ -2857,7 +2857,9 @@ When exporting a package you may protect it with a password. Encryption is
 ## 8. Special Per-Slide Comments (Overview)
 
 Besides `_class`, OciDeck uses these HTML comments (all ignored by Marp, except
-for presenter notes):
+for presenter notes). *(Completed 2026-08-19: eleven markers the writer emits were
+missing from this table — the section promised an overview and was not one. They
+are listed below in the same order the serializer writes them.)*
 
 | Comment | Meaning |
 | --- | --- |
@@ -2879,6 +2881,18 @@ for presenter notes):
 | `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
 | `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |
+| `<!-- ocideck_list_style: numbered\|checklist\|richText -->` | List style of a bullets/bulletsImage/twoBullets slide (§5). Absent = plain bullets. |
+| `<!-- ocideck_checklist_progress: true -->` | Checklist slide: show the progress bar ("3 of 7 done") above the list. Written only when on. |
+| `<!-- ocideck_continue_numbering: true -->` | A numbered list that keeps counting where the previous slide left off (1–6, then 7–9) instead of restarting at 1. Only meaningful when the previous slide is numbered too. |
+| `<!-- ocideck_continue_split: true -->` | Marks a slide as a continuation half of a **split run**: the original plus its continuations render at one shared font scale, so the reader does not see the same list change size across pages. Written on every half after the first, and independent of `ocideck_continue_numbering` (sizing vs numbering). |
+| `<!-- ocideck_image_zoom: N -->` | Zoom of the *panel* image on a bullets+image or two-images slide: `0` = cover (fills the slot, crops), `100` = the whole picture in view (contain), `>100` = zoom in. Full-bleed slots (image/title/section) use `imageSize` for this instead (§5). |
+| `<!-- ocideck_title_image_overlay: false -->` | Title/section slide with a background image: turn **off** the darkening overlay that keeps the heading readable. Written only when off — the overlay is the default. |
+| `<!-- ocideck_table_num_cols: 1,3 -->` | Table slide: which columns are formatted as numbers when rendered, language-aware (`1234.5` shows as `1.234,5` in a Dutch deck). The raw cell text stays in the `.md`; the formatting is purely visual, so the file reads the same without OciDeck. |
+| `<!-- ocideck_gantt_scale: auto\|day\|week\|month -->` | Gantt slide: granularity of the time axis. |
+| `<!-- ocideck_gantt_sections: true -->` | Gantt slide: a row whose *Task* cell starts with `## ` unfolds as a Mermaid `section` heading instead of a task. Written only when on. |
+| `<!-- ocideck_ms_review -->` | Invisible guard on the first slide of an appended ISO 9.3 **management-review** template, so running the action again never appends a second copy over the author's answers. Carries no data; it round-trips as part of the slide's free Markdown. |
+| `<!-- ocideck_page:N -->` | **Inside the presenter-note block**, not beside it: separates the notes per rich-text *page* of one slide, numbered from 1. Written only when a slide carries notes on more than one page. Because the note block is itself one big `<!--  -->`, the marker's own closing is escaped to `--\>` on disk, exactly like any other `-->` a note contains; reading undoes that before the pages are split. |
+| `<!-- ocideck_media_redacted -->` | **Export only, never in a saved file.** Marks a slide whose image was removed by the privacy projection, so the HTML renderer can draw a redaction block where the picture was instead of silently showing a gap. It exists only in a projected artefact (§11), and the writer is gated on the export path as well as on the flag. |
 | `<!-- ... (free text) ... -->` | **Presenter notes** (any other comment that does not start with `_`). |
 
 ---

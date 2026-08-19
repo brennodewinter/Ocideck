@@ -221,4 +221,35 @@ void main() {
       );
     }
   });
+
+  /// §8 belooft een *overzicht* van de HTML-commentaren die OciDeck schrijft.
+  /// Dat was het niet: elf markers stonden er niet in, waaronder
+  /// `ocideck_media_redacted` en `ocideck_ms_review`. Ze verdwenen niet met een
+  /// knal — ze kwamen met een functie mee en niemand liep de tabel na.
+  ///
+  /// De scan zoekt naar de letterlijke commentaarvorm in `lib/`, niet naar de
+  /// naam: `ocideck_staging` en `ocideck_git_sandbox` zijn mapnamen en horen
+  /// hier niet bij.
+  test('FILE_FORMAT noemt elke ocideck_-marker die in een .md belandt', () {
+    final marker = RegExp(r'<!--\\?s?\*?\s*(ocideck_[a-z_]+)');
+    final found = <String>{};
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      for (final m in marker.allMatches(entity.readAsStringSync())) {
+        found.add(m.group(1)!);
+      }
+    }
+    expect(found.length, greaterThan(20), reason: 'de scan vond bijna niets');
+
+    final doc = read('docs/FILE_FORMAT.md');
+    for (final name in found) {
+      expect(
+        doc,
+        contains(name),
+        reason:
+            'de marker $name wordt in een .md geschreven maar staat nergens in '
+            'FILE_FORMAT.md (§8 is het overzicht)',
+      );
+    }
+  });
 }

@@ -230,6 +230,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- docs(bestandsformaat): §8 is eindelijk het overzicht dat het beloofde te zijn.
+  Elf HTML-commentaren die OciDeck zelf in een `.md` schrijft, stonden nergens in
+  het bestandsformaat: `ocideck_list_style`, `ocideck_checklist_progress`,
+  `ocideck_continue_numbering`, `ocideck_continue_split`, `ocideck_image_zoom`,
+  `ocideck_title_image_overlay`, `ocideck_table_num_cols`, `ocideck_gantt_scale`,
+  `ocideck_gantt_sections`, `ocideck_ms_review`, `ocideck_page` en
+  `ocideck_media_redacted`. Ze verdwenen niet met een knal — ze kwamen met een
+  functie mee en niemand liep de tabel na, precies zoals bij de
+  inhoudsopgavemarker (#1568). Twee ervan verdienen een eigen zin, want ze zijn
+  contra-intuïtief: `ocideck_page` staat *binnen* het sprekersnotitieblok en zijn
+  eigen afsluiting is daar geëscapet tot `--\>`, omdat een notitie zelf al één
+  groot commentaar is; en `ocideck_media_redacted` staat nooit in een bewaard
+  bestand maar alleen in een export, waar het de HTML-renderer een vlak geeft om
+  te tekenen op de plek van een weggeredigeerd beeld. Nederlands is meevertaald.
+  Een nieuwe toets in `docs_enum_counts_test.dart` scant `lib/` op de
+  commentaarvorm en eist dat elke gevonden marker in FILE_FORMAT staat, zodat de
+  volgende die erbij komt niet opnieuw twee jaar ongenoemd blijft.
+
 - feat(poort): `translate-docs-check` toetst nu ook of een vertaalde gids bíj is,
   niet alleen of hij bestaat — en de Nederlandse gidsen zijn in dezelfde beweging
   bijgetrokken. Twee keer in twee dagen kwam er een sectie bij in de Engelse bron
