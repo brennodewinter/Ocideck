@@ -1678,6 +1678,7 @@ const _dutchSourceAddHr = <String, String>{
   'Uitleg': 'Opis',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Izbornik odabira: svaki blok klikom prelazi na drugi slajd. Za svaki blok upišite oznaku i opis, odaberite odredišni slajd i po želji sliku. Odaberite raspored: mreža, popis ili krug. Kategorijama tijekom izlaganja prebacujete između skupina blokova. Blok bez odredišta je obični tekst.',
+  'Alleen een lege dia.': 'Samo prazan slajd.',
   'Hoofdstukken op nieuwe pagina': 'Poglavlja na novoj stranici',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Svako poglavlje sada počinje na novoj stranici',
@@ -3253,7 +3254,6 @@ const _dutchSourceAddHr = <String, String>{
       'Ova prezentacija oštećena je ili je spremljena samo djelomično.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Ova datoteka nije čitljiv tekst. OciDeck otvara Markdown.',
-  'Alleen een titelpagina.': 'Samo naslovna stranica.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ovaj slajd je prazan: ne prikazuje ništa na zaslonu ni u izvozu.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

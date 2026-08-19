@@ -1679,6 +1679,7 @@ const _dutchSourceAddSk = <String, String>{
   'Uitleg': 'Vysvetlenie',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie a vysvetlenie, vyberte cieľový snímok a prípadne obrázok. Zvoľte rozloženie: mriežka, zoznam alebo kruh. Pomocou kategórií počas prezentácie prepínate medzi skupinami blokov. Blok bez cieľa je bežný text.',
+  'Alleen een lege dia.': 'Iba prázdna snímka.',
   'Hoofdstukken op nieuwe pagina': 'Kapitoly na novej strane',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Každá kapitola sa teraz začína na novej strane',
@@ -3252,7 +3253,6 @@ const _dutchSourceAddSk = <String, String>{
       'Táto prezentácia je poškodená alebo uložená len sčasti.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Tento súbor nie je čitateľný text. OciDeck otvára Markdown.',
-  'Alleen een titelpagina.': 'Iba titulná strana.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Táto snímka je prázdna: nezobrazuje nič na obrazovke ani v exporte.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

@@ -870,6 +870,7 @@ const _dutchSourceAddEn = {
   'Uitleg': 'Description',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'A choice menu: each block jumps to another slide when clicked. Enter a label and a description for each block, choose the target slide and optionally an image. Choose the layout: grid, list or circle. With categories you switch between groups of blocks while presenting. A block without a target is plain text.',
+  'Alleen een lege dia.': 'Just a blank slide.',
   'Hoofdstukken op nieuwe pagina': 'Chapters on new page',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Every chapter now starts on a new page',
@@ -2441,7 +2442,6 @@ const _dutchSourceAddEn = {
       'This presentation is damaged or only partly saved.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'This file is not readable text. OciDeck opens Markdown.',
-  'Alleen een titelpagina.': 'Just a title page.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'This slide is empty: it shows nothing on screen or in the export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

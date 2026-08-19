@@ -697,6 +697,7 @@ const _dutchSourceAddPap = {
   'Uitleg': 'Splikashon',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Un menú di skoho: kada blòki ta bula pa un otro slide ora bo klik riba dje. Skirbi un label i un splikashon pa kada blòki, skohe e slide di destino i opshonalmente un imagen. Skohe e areglo: kuadrikula, lista òf sirkel. Ku kategorianan bo ta kambia entre gruponan di blòki durante e presentashon. Un blòki sin destino ta teksto normal.',
+  'Alleen een lege dia.': 'Solamente un slide bashí.',
   'Hoofdstukken op nieuwe pagina': 'Kapítulo riba página nobo',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Awor kada kapítulo ta kuminsá riba un página nobo',
@@ -2284,7 +2285,6 @@ const _dutchSourceAddPap = {
       'E presentashon aki ta daña òf guardá pa mitar.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'E archivo aki no ta teksto legibel. OciDeck ta habri Markdown.',
-  'Alleen een titelpagina.': 'Solamente un página di título.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'E slide aki ta bashí: e no ta mustra nada riba pantaya ni den e eksport.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

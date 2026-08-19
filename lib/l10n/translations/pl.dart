@@ -1685,6 +1685,7 @@ const _dutchSourceAddPl = <String, String>{
   'Uitleg': 'Opis',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Menu wyboru: każdy blok po kliknięciu przechodzi do innego slajdu. Wpisz etykietę i opis dla każdego bloku, wybierz slajd docelowy i opcjonalnie obraz. Wybierz układ: siatka, lista lub okrąg. Dzięki kategoriom podczas prezentacji przełączasz się między grupami bloków. Blok bez celu jest zwykłym tekstem.',
+  'Alleen een lege dia.': 'Tylko pusty slajd.',
   'Hoofdstukken op nieuwe pagina': 'Rozdziały na nowej stronie',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Każdy rozdział zaczyna się teraz od nowej strony',
@@ -3272,7 +3273,6 @@ const _dutchSourceAddPl = <String, String>{
       'Ta prezentacja jest uszkodzona lub zapisana tylko częściowo.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Ten plik nie jest czytelnym tekstem. OciDeck otwiera Markdown.',
-  'Alleen een titelpagina.': 'Tylko strona tytułowa.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ten slajd jest pusty: nie pokazuje nic na ekranie ani w eksporcie.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

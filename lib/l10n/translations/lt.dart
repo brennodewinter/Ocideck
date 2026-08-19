@@ -1680,6 +1680,7 @@ const _dutchSourceAddLt = <String, String>{
   'Uitleg': 'Aprašymas',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Pasirinkimo meniu: kiekvienas blokas spustelėjus perkelia į kitą skaidrę. Kiekvienam blokui įveskite etiketę ir aprašymą, pasirinkite paskirties skaidrę ir, jei norite, paveikslėlį. Pasirinkite išdėstymą: tinklelis, sąrašas arba apskritimas. Naudodami kategorijas pristatymo metu perjungiate blokų grupes. Blokas be paskirties yra paprastas tekstas.',
+  'Alleen een lege dia.': 'Tik tuščia skaidrė.',
   'Hoofdstukken op nieuwe pagina': 'Skyriai naujame puslapyje',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Kiekvienas skyrius dabar prasideda naujame puslapyje',
@@ -3265,7 +3266,6 @@ const _dutchSourceAddLt = <String, String>{
       'Šis pristatymas sugadintas arba įrašytas tik iš dalies.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Šis failas nėra skaitomas tekstas. OciDeck atveria Markdown.',
-  'Alleen een titelpagina.': 'Tik titulinis puslapis.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Ši skaidrė tuščia: ji nieko nerodo nei ekrane, nei eksporte.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

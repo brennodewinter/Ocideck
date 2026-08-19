@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../models/deck_template.dart';
 import '../models/improvement_y01.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
@@ -14,6 +15,9 @@ import 'markdown_service.dart';
 /// any deck — a template is a document, not code. The requested language is
 /// loaded; when no file exists for it, English is the fallback. The picker'
 /// names and descriptions stay on the l10n route with all languages.
+///
+/// De enige uitzondering is [emptyDeckTemplateId]: dat sjabloon draagt geen
+/// document, want leeg is de afwezigheid van inhoud. Het levert één lege dia.
 class TemplateContentService {
   TemplateContentService({Future<String> Function(String key)? loadAsset})
     : _loadAsset = loadAsset ?? rootBundle.loadString;
@@ -40,6 +44,13 @@ class TemplateContentService {
     required String languageCode,
     required String deckTitle,
   }) async {
+    // Leeg is geen document maar de afwezigheid ervan. Wie 'Leeg deck' kiest
+    // krijgt één verse, lege dia om zelf te vullen — geen titelpagina die de
+    // ingetypte titel al uitspreekt. Die titel blijft de deck-titel (front
+    // matter, tabblad, bestandsnaam) en staat de gebruiker dus niet in de weg.
+    if (templateId == emptyDeckTemplateId) {
+      return [Slide.create(SlideType.bullets)];
+    }
     final Slide bareTitle = Slide.create(
       SlideType.title,
     ).copyWith(title: deckTitle);

@@ -1689,6 +1689,7 @@ const _dutchSourceAddUk = <String, String>{
   'Uitleg': 'Опис',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Меню вибору: кожен блок під час натискання переходить до іншого слайда. Введіть підпис і опис для кожного блоку, виберіть цільовий слайд і за потреби зображення. Виберіть компонування: сітка, список або коло. За допомогою категорій під час презентації ви перемикаєтеся між групами блоків. Блок без цілі — це звичайний текст.',
+  'Alleen een lege dia.': 'Лише порожній слайд.',
   'Hoofdstukken op nieuwe pagina': 'Розділи з нової сторінки',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Тепер кожен розділ починається з нової сторінки',
@@ -3267,7 +3268,6 @@ const _dutchSourceAddUk = <String, String>{
       'Ця презентація пошкоджена або збережена лише наполовину.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Цей файл не є читабельним текстом. OciDeck відкриває Markdown.',
-  'Alleen een titelpagina.': 'Лише титульна сторінка.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Цей слайд порожній: він нічого не показує ні на екрані, ні в експорті.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

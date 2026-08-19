@@ -276,13 +276,30 @@ class _WelcomeScreen extends ConsumerWidget {
     final primaryStyle = _primaryButtonStyle();
     final secondaryStyle = _secondaryButtonStyle(scheme);
     return [
+      // De kop noemt niet één van de twee soorten: er beginnen hier twee wegen,
+      // een presentatie en een document, en die staan naast elkaar. Het woord
+      // 'nieuw' staat daarom één keer boven de groep en één keer in elk
+      // knoplabel — de knop zegt zelf wat hij maakt, in plaats van 'Kiezen'
+      // onder een kop die de soort noemde.
       Text(
-        l10n.t('newPresentation'),
+        l10n.d('Nieuw'),
         style: Theme.of(
           context,
         ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
       ),
-      const SizedBox(height: 7),
+      const SizedBox(height: 22),
+      _widePrimaryButton(
+        style: primaryStyle,
+        icon: Icons.slideshow_outlined,
+        label: Text(l10n.t('newPresentation')),
+        onPressed: () => _newDeck(context, ref),
+      ),
+      // De sjabloonregel staat onder de presentatieknop en niet meer onder de
+      // kop: hij geldt alleen voor die weg. Boven de groep las hij als een
+      // belofte over allebei, en een document kent geen sjablonen. De ruimte
+      // eronder is ruimer dan die erboven, anders zweeft hij tussen twee
+      // gelijkvormige knoppen in en is niet te zien bij welke hij hoort.
+      const SizedBox(height: 6),
       _withTemplateLanguageTooltip(
         l10n,
         Text(
@@ -291,16 +308,7 @@ class _WelcomeScreen extends ConsumerWidget {
           style: TextStyle(color: palette.mutedText),
         ),
       ),
-      const SizedBox(height: 22),
-      SizedBox(
-        width: double.infinity,
-        child: ElevatedButton.icon(
-          style: primaryStyle,
-          onPressed: () => _newDeck(context, ref),
-          icon: const Icon(Icons.add, size: 18),
-          label: Text(l10n.d('Kiezen')),
-        ),
-      ),
+      const SizedBox(height: 20),
       ..._newDocumentButton(context, ref, l10n),
       const SizedBox(height: 24),
       Divider(color: scheme.outlineVariant),
@@ -514,18 +522,20 @@ class _WelcomeScreen extends ConsumerWidget {
   Future<void> _newDeck(BuildContext context, WidgetRef ref) =>
       _createDeckFromDialog(context, ref, inNewTab: false);
 
-  /// De knop 'Nieuw document' onder 'Kiezen': opent een leeg, doorlopend
-  /// tekstdocument in plaats van een presentatie (DOCUMENT_MODE.md) — dezelfde
-  /// platte-.md-basis, andere modus. Losse methode zodat [_startColumn] onder de
-  /// methodelengte-ratchet blijft.
+  /// De knop 'Nieuw document' naast 'Nieuwe presentatie': opent een leeg,
+  /// doorlopend tekstdocument in plaats van een presentatie (DOCUMENT_MODE.md) —
+  /// dezelfde platte-.md-basis, andere modus. Dezelfde primaire vorm als de
+  /// presentatieknop: het zijn twee gelijkwaardige manieren om te beginnen, en
+  /// een omlijnde knop naast een gevulde las als 'dit is de mindere van de
+  /// twee'. Losse methode zodat [_startColumn] onder de methodelengte-ratchet
+  /// blijft.
   List<Widget> _newDocumentButton(
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
   ) => [
-    const SizedBox(height: 10),
-    _wideSecondaryButton(
-      style: _secondaryButtonStyle(Theme.of(context).colorScheme),
+    _widePrimaryButton(
+      style: _primaryButtonStyle(),
       icon: Icons.description_outlined,
       label: Text(l10n.d('Nieuw document')),
       onPressed: () => ref.read(tabsProvider.notifier).newDocument(),
@@ -891,104 +901,4 @@ class _RecentBadge extends StatelessWidget {
       ),
     );
   }
-}
-
-/// De gedeelde knopvorm: een ruimere afronding dan de Material-standaard geeft
-/// de startkolom een zachter, verfijnder beeld. Top-level zodat zowel
-/// [_WelcomeScreen._startColumn] als de losse [_WelcomeScreen._imageLibraryButton]
-/// dezelfde vorm delen zonder de klasse te laten groeien.
-const _welcomeButtonShape = RoundedRectangleBorder(
-  borderRadius: BorderRadius.all(Radius.circular(10)),
-);
-
-/// De primaire actie ('Kiezen'): inhoud links uitgelijnd zodat het label op
-/// dezelfde linkerlijn valt als de kop en de knoplabels eronder.
-ButtonStyle _primaryButtonStyle() => ElevatedButton.styleFrom(
-  alignment: Alignment.centerLeft,
-  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-  shape: _welcomeButtonShape,
-);
-
-/// De secundaire acties (openen, importeren, zoeken…): dezelfde linkeruitlijning
-/// en vorm, met de zachtere [ColorScheme.outlineVariant] als rand in plaats van
-/// de standaard [ColorScheme.outline] — rustiger tegen het paneel.
-ButtonStyle _secondaryButtonStyle(ColorScheme scheme) =>
-    OutlinedButton.styleFrom(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      shape: _welcomeButtonShape,
-      side: BorderSide(color: scheme.outlineVariant),
-    );
-
-/// Een volle-breedte secundaire startknop met de gedeelde stijl. Losse helper
-/// zodat de startkolom de `SizedBox` + `OutlinedButton.icon`-boilerplate niet
-/// voor elke knop herhaalt (en onder de methodelengte-ratchet blijft).
-Widget _wideSecondaryButton({
-  required ButtonStyle style,
-  required IconData icon,
-  required Widget label,
-  required VoidCallback onPressed,
-}) => SizedBox(
-  width: double.infinity,
-  child: OutlinedButton.icon(
-    style: style,
-    onPressed: onPressed,
-    icon: Icon(icon, size: 18),
-    label: label,
-  ),
-);
-
-/// De sponsorvermelding rechtsonder: 'Mogelijk gemaakt door' met het thema-
-/// bewuste Vigilis-merk. Klein en gedempt — het is een credit, geen actie.
-/// Begrensd op een bescheiden breedte zodat het label bij 200% tekst netjes
-/// wikkelt in plaats van de voettekstband te laten overlopen; het merk zelf
-/// schaalt niet mee met de tekst (het is een afbeelding), dus de bandhoogte
-/// wordt door de tekst bepaald en klemt het logo nooit af.
-Widget _madePossibleByVigilis(AppLocalizations l10n, TextStyle style) {
-  return ConstrainedBox(
-    constraints: const BoxConstraints(maxWidth: 220),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Flexible(
-          child: Text(
-            l10n.d('Mogelijk gemaakt door'),
-            style: style,
-            textAlign: TextAlign.right,
-          ),
-        ),
-        const SizedBox(width: 8),
-        // Het merk in een vaste breedte wikkelen, zodat een failed asset load
-        // (stale build, corrupte installatie) de broken-image placeholder niet
-        // in een onbegrensd `Row`-slot kan laten groeien voorbij de
-        // `ConstrainedBox(maxWidth: 220)` — dat gaf een RenderFlex-overflow op
-        // de voettekst zodra `AssetManifest.bin` ontbrak. `BoxFit.contain` in
-        // een beperkte doos schaalt het logo tot zijn natuurlijke 76px en de
-        // fout-placeholder blijft binnen de 80×18.
-        SizedBox(
-          width: 80,
-          height: 18,
-          child: Image.asset(
-            BrandLogo.vigilis.assetKey,
-            fit: BoxFit.contain,
-            filterQuality: FilterQuality.high,
-            semanticLabel: l10n.d('Vigilis'),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-/// Alleen buiten nl/en zit er een melding op de sjabloonbelofte; in die twee
-/// talen komt de tekst kaal terug, zodat er geen leeg zweefvenster ontstaat.
-Widget _withTemplateLanguageTooltip(AppLocalizations l10n, Widget child) {
-  if (l10n.languageCode == 'nl' || l10n.languageCode == 'en') return child;
-  return Tooltip(
-    message: l10n.d(
-      "De voorbeelddia's van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
-    ),
-    child: child,
-  );
 }

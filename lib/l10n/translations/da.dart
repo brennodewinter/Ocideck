@@ -1673,6 +1673,7 @@ const _dutchSourceAddDa = <String, String>{
   'Uitleg': 'Beskrivelse',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'En valgmenu: hver blok springer til et andet dias, når man klikker på den. Skriv en etiket og en beskrivelse for hver blok, vælg måldiaset og eventuelt et billede. Vælg layoutet: gitter, liste eller cirkel. Med kategorier skifter du mellem grupper af blokke under præsentationen. En blok uden mål er almindelig tekst.',
+  'Alleen een lege dia.': 'Kun et tomt slide.',
   'Hoofdstukken op nieuwe pagina': 'Kapitler på ny side',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Hvert kapitel begynder nu på en ny side',
@@ -3249,7 +3250,6 @@ const _dutchSourceAddDa = <String, String>{
       'Denne præsentation er beskadiget eller kun halvt gemt.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Denne fil er ikke læsbar tekst. OciDeck åbner Markdown.',
-  'Alleen een titelpagina.': 'Kun en titelside.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Denne slide er tom: den viser ingenting på skærmen eller i eksporten.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':

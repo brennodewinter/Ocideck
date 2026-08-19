@@ -1690,6 +1690,7 @@ const _dutchSourceAddRo = <String, String>{
   'Uitleg': 'Descriere',
   'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.':
       'Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă și o descriere pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Alegeți aranjarea: grilă, listă sau cerc. Cu ajutorul categoriilor comutați între grupuri de blocuri în timpul prezentării. Un bloc fără țintă este text obișnuit.',
+  'Alleen een lege dia.': 'Doar un diapozitiv gol.',
   'Hoofdstukken op nieuwe pagina': 'Capitole pe pagină nouă',
   'Elk hoofdstuk begint nu op een nieuwe pagina':
       'Fiecare capitol începe acum pe o pagină nouă',
@@ -3278,7 +3279,6 @@ const _dutchSourceAddRo = <String, String>{
       'Această prezentare este deteriorată sau a fost salvată doar parțial.',
   'Dit bestand is geen leesbare tekst. OciDeck opent Markdown.':
       'Acest fișier nu este text lizibil. OciDeck deschide Markdown.',
-  'Alleen een titelpagina.': 'Doar o pagină de titlu.',
   'Deze dia is leeg: hij toont niets op het scherm en in de export.':
       'Acest slide este gol: nu afișează nimic pe ecran și nici în export.',
   'Export geblokkeerd door classificatiebeleid: stel een TLP-niveau in voor deze presentatie.':
