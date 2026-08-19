@@ -4,6 +4,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 
 import 'footnote_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
+import 'pentest_block_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
 
@@ -36,6 +37,12 @@ class MarkdownQuillCodec {
     // rauwe HTML op en valt hij als losse tekst uiteen.
     blockSyntaxes: const [
       TimelineTableSyntax(),
+      // De twee pentest-syntaxen delen één patroon (de markerregel) en sluiten
+      // elkaar uit op `canParse`: de bevindingkop tegenover de vier enveloppen
+      // die in hun geheel atomair zijn. Ze staan vóór de HTML-blokregel, anders
+      // slokt die het commentaar op.
+      PentestFindingHeadSyntax(),
+      PentestWholeBlockSyntax(),
       TocMarkerSyntax(),
       FootnoteDefSyntax(),
       EmbeddableTableSyntax(),
@@ -50,6 +57,7 @@ class MarkdownQuillCodec {
     customElementToEmbeddable: {
       EmbeddableTimelineTable.timelineType:
           EmbeddableTimelineTable.fromMdSyntax,
+      EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
@@ -59,6 +67,7 @@ class MarkdownQuillCodec {
   static final _deltaToMd = DeltaToMarkdown(
     customEmbedHandlers: {
       EmbeddableTimelineTable.timelineType: EmbeddableTimelineTable.toMdSyntax,
+      EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
