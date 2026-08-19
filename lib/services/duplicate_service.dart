@@ -75,13 +75,17 @@ class DuplicateService {
 
   /// Voor de openen-dialoog: de markdown is daar al volledig in het geheugen
   /// gelezen, dus groeperen is puur rekenwerk zonder extra I/O.
-  List<DuplicateInfo<ScannedPresentation>> groupScanned(
-    List<ScannedPresentation> presentations,
+  ///
+  /// Generiek over [ScannedMarkdown], zodat het openscherm (presentaties én
+  /// documenten door elkaar) en de dia-zoekers (alleen presentaties) dezelfde
+  /// groepering delen zonder hun eigen type kwijt te raken.
+  List<DuplicateInfo<T>> groupScanned<T extends ScannedMarkdown>(
+    List<T> found,
   ) {
     return _group(
-      presentations,
-      (pres) => contentHash(utf8.encode(pres.content)),
-      (pres) => pres.displayTitle,
+      found,
+      (item) => contentHash(utf8.encode(item.content)),
+      (item) => item.displayTitle,
     );
   }
 

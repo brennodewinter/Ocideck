@@ -25,6 +25,7 @@ import '../utils/safe_filename.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
 import '../utils/log.dart';
+import '../utils/markdown_files.dart';
 import '../utils/json_depth_guard.dart';
 import '../utils/net_guard.dart';
 import '../utils/pinned_http_client.dart';
@@ -56,11 +57,27 @@ part 'file/file_service_import_dirs.dart';
 part 'file/file_service_scan.dart';
 part 'file/file_service_style_profile.dart';
 
-/// A presentation found on disk while scanning a directory.
-class ScannedPresentation {
+/// Een bewerkbaar Markdown-bestand dat op schijf is gevonden: een presentatie
+/// ([deck] gevuld) of een plat document ([deck] null).
+///
+/// Beide soorten komen uit dezelfde mapwandeling, want dat is wat iemand zoekt
+/// die zijn werk terug wil vinden: "mijn bestanden", niet "mijn decks". Welke
+/// van de twee het is volgt uit de afwezigheid van `marp: true` (zie
+/// [MarkdownKind]); er komt geen tweede detectiemechanisme bij.
+class ScannedMarkdown {
+  const ScannedMarkdown({
+    required this.path,
+    required this.fileName,
+    this.deck,
+    this.content = '',
+    this.modified,
+  });
+
   final String path;
   final String fileName;
-  final Deck deck;
+
+  /// Het geparseerde deck, of null wanneer dit een plat document is.
+  final Deck? deck;
 
   /// The raw markdown source, kept for maximal full-text search.
   final String content;
@@ -70,26 +87,43 @@ class ScannedPresentation {
   /// recentste bewerking draagt.
   final DateTime? modified;
 
-  const ScannedPresentation({
-    required this.path,
-    required this.fileName,
-    required this.deck,
-    this.content = '',
-    this.modified,
-  });
+  /// Presentatie of document (zie [MarkdownKind]).
+  MarkdownKind get kind =>
+      deck == null ? MarkdownKind.document : MarkdownKind.presentation;
 
-  /// A display label: the deck title, falling back to the file name without
-  /// its extension. Mirrors [ScanHit.displayTitle].
+  /// A display label: the deck title, else the document's first heading, else
+  /// the file name without its extension. Mirrors [ScanHit.displayTitle].
   String get displayTitle {
-    final t = deck.title.trim();
+    final t = (deck?.title ?? firstMarkdownHeading(content) ?? '').trim();
     if (t.isNotEmpty) return t;
     return p.basenameWithoutExtension(fileName);
   }
 }
 
-/// A Marp presentation found by the disk-wide scan. Unlike [ScannedPresentation]
+/// A presentation found on disk while scanning a directory: een
+/// [ScannedMarkdown] waarvan vaststáát dat er een deck in zit, zodat de
+/// slide-zoekers (importeren, dia zoeken, netwerkbronnen) niet elk hun eigen
+/// null-controle hoeven te herhalen.
+class ScannedPresentation extends ScannedMarkdown {
+  const ScannedPresentation({
+    required super.path,
+    required super.fileName,
+    required Deck super.deck,
+    super.content,
+    super.modified,
+  });
+
+  @override
+  Deck get deck => super.deck!;
+}
+
+/// Een bestand dat de brede schijfscan vond. Unlike [ScannedPresentation]
 /// this is a lightweight record built from a frontmatter probe only — no full
 /// parse — so scanning large folder trees stays cheap.
+///
+/// De scan levert zowel Marp-presentaties als platte documenten op; [kind] zegt
+/// welke van de twee. Dat is geen extra detectie: het is dezelfde
+/// `marp: true`-sniff die het openen gebruikt (zie [MarkdownKind]).
 class ScanHit {
   final String path;
   final String fileName;
@@ -97,8 +131,13 @@ class ScanHit {
   /// Title from the frontmatter, or null when the deck omits one.
   final String? title;
 
-  /// The declared `theme:` value, or null when absent.
+  /// The declared `theme:` value, or null when absent. Een document draagt er
+  /// geen (die sleutel is Marp-eigen), dus daar is dit altijd null.
   final String? theme;
+
+  /// Presentatie of document. Standaard [MarkdownKind.presentation], zodat
+  /// bestaande aanroepers die alleen decks kennen ongewijzigd blijven werken.
+  final MarkdownKind kind;
 
   /// True when [theme] is the OciDeck theme (sorted/marked first in the UI).
   final bool isOcideckTheme;
@@ -119,6 +158,7 @@ class ScanHit {
     required this.title,
     required this.theme,
     required this.isOcideckTheme,
+    this.kind = MarkdownKind.presentation,
     this.size = 0,
     this.modified,
   });
@@ -329,18 +369,24 @@ class FileService {
     '.dart_tool',
   };
 
-  /// Recursively scan [directory] for Marp markdown presentations and parse them
-  /// into decks. [excludePath] (typically the currently open file) is skipped.
-  /// Directories such as images/ and themes/ are ignored. The walk descends the
-  /// full tree (up to [maxDepth], effectively unbounded for real folders) but is
-  /// capped at [maxFilesVisited] parsed decks so a pathological tree can't hang
-  /// the UI — each `.md` here is fully read and parsed, which is costlier than
-  /// the frontmatter probe used by [scanKnownLocations]. Two size guards
+  /// Recursively scan [directory] for editable Markdown files and read them:
+  /// Marp presentations are parsed into decks, plain Markdown documents are
+  /// kept as source. [excludePath] (typically the currently open file) is
+  /// skipped. Directories such as images/ and themes/ are ignored. The walk
+  /// descends the full tree (up to [maxDepth], effectively unbounded for real
+  /// folders) but is capped at [maxFilesVisited] read files so a pathological
+  /// tree can't hang the UI — each file here is fully read, which is costlier
+  /// than the frontmatter probe used by [scanKnownLocations]. Two size guards
   /// ([maxDeckMarkdownBytes] per file, [maxScanBytes] cumulative) keep a
   /// pathological tree from exhausting memory; see [_scanOneFile].
-  Future<List<ScannedPresentation>> scanPresentations(
+  ///
+  /// [includeDocuments] laat de platte documenten weg voor de aanroepers die
+  /// per se dia's nodig hebben (dia zoeken, slides importeren) — zie
+  /// [scanPresentations].
+  Future<List<ScannedMarkdown>> scanMarkdownFiles(
     String directory, {
     String? excludePath,
+    bool includeDocuments = true,
     int maxDepth = 32,
     int maxFilesVisited = 5000,
     int maxScanBytes = 256 * 1024 * 1024,
@@ -348,7 +394,7 @@ class FileService {
     final root = Directory(directory);
     if (!await root.exists()) return [];
 
-    final results = <ScannedPresentation>[];
+    final results = <ScannedMarkdown>[];
     var visited = 0;
     var scannedBytes = 0;
     var capped = false;
@@ -359,7 +405,7 @@ class FileService {
         entries = await dir.list(followLinks: false).toList();
       } catch (e) {
         logWarning(
-          'FileService.scanPresentations: directory listing failed',
+          'FileService.scanMarkdownFiles: directory listing failed',
           e,
         );
         return;
@@ -367,14 +413,14 @@ class FileService {
       for (final entity in entries) {
         if (capped) return;
         if (entity is File) {
-          if (!entity.path.toLowerCase().endsWith('.md')) continue;
+          if (!isEditableMarkdownFile(entity.path)) continue;
           if (excludePath != null && p.equals(entity.path, excludePath)) {
             continue;
           }
           if (++visited > maxFilesVisited) {
             capped = true;
             logWarning(
-              'FileService.scanPresentations: visited cap reached '
+              'FileService.scanMarkdownFiles: visited cap reached '
               '($maxFilesVisited files) — results truncated',
             );
             return;
@@ -384,15 +430,16 @@ class FileService {
             entity,
             scannedBytes,
             maxScanBytes,
+            includeDocuments: includeDocuments,
           );
           if (outcome.stop) {
             capped = true;
             return;
           }
-          final pres = outcome.presentation;
-          if (pres != null) {
+          final found = outcome.found;
+          if (found != null) {
             scannedBytes += outcome.bytes;
-            results.add(pres);
+            results.add(found);
           }
         } else if (entity is Directory && depth < maxDepth) {
           final name = p.basename(entity.path);
@@ -405,10 +452,27 @@ class FileService {
     await walk(root, 0);
     results.sort(
       (a, b) =>
-          a.deck.title.toLowerCase().compareTo(b.deck.title.toLowerCase()),
+          a.displayTitle.toLowerCase().compareTo(b.displayTitle.toLowerCase()),
     );
     return results;
   }
+
+  /// Alleen de presentaties uit [scanMarkdownFiles] — voor de aanroepers die
+  /// dia's nodig hebben en dus niets aan een plat document hebben.
+  Future<List<ScannedPresentation>> scanPresentations(
+    String directory, {
+    String? excludePath,
+    int maxDepth = 32,
+    int maxFilesVisited = 5000,
+    int maxScanBytes = 256 * 1024 * 1024,
+  }) async => (await scanMarkdownFiles(
+    directory,
+    excludePath: excludePath,
+    includeDocuments: false,
+    maxDepth: maxDepth,
+    maxFilesVisited: maxFilesVisited,
+    maxScanBytes: maxScanBytes,
+  )).whereType<ScannedPresentation>().toList();
 
   /// Directories the broad scan never descends into, on top of [_ignoredDirs]:
   /// large system trees that can't hold user presentations.
@@ -420,24 +484,27 @@ class FileService {
     'Caches',
   };
 
-  /// Only the first slice of each `.md` is read for the frontmatter probe; the
+  /// Only the first slice of each file is read for the frontmatter probe; the
   /// header always lives at the very top, so 64 KiB is plenty.
   static const _scanHeadBytes = 64 * 1024;
 
   /// Scan a fixed set of well-known locations (parent folders of [recentFiles],
   /// plus the user's Documents/Desktop/Downloads/iCloud and configured home
-  /// directory) for Marp markdown presentations, using a cheap frontmatter
-  /// probe rather than a full parse.
+  /// directory) for editable Markdown files, using a cheap frontmatter probe
+  /// rather than a full parse.
   ///
-  /// Only files declaring `marp: true` are returned; OciDeck-themed decks are
-  /// flagged via [ScanHit.isOcideckTheme] and sorted first. The walk is bounded
-  /// by [maxDepth], [maxFilesVisited] and [maxMatches] so a pathological tree
+  /// Zowel presentaties als platte documenten komen terug ([ScanHit.kind] zegt
+  /// welke); [includeDocuments] laat de documenten weg voor een aanroeper die
+  /// per se dia's nodig heeft. OciDeck-themed decks are flagged via
+  /// [ScanHit.isOcideckTheme] and sorted first. The walk is bounded by
+  /// [maxDepth], [maxFilesVisited] and [maxMatches] so a pathological tree
   /// can't hang the UI; [onProgress] reports the current folder and match count,
   /// and [isCancelled] lets the caller abort.
   Future<List<ScanHit>> scanKnownLocations({
     List<String> recentFiles = const [],
     void Function(String phase, int found)? onProgress,
     bool Function()? isCancelled,
+    bool includeDocuments = true,
     int maxDepth = 8,
     int maxFilesVisited = 20000,
     int maxMatches = 2000,
@@ -462,7 +529,7 @@ class FileService {
       for (final entity in entries) {
         if (cancelled() || hits.length >= maxMatches) return;
         if (entity is File) {
-          if (!entity.path.toLowerCase().endsWith('.md')) continue;
+          if (!isEditableMarkdownFile(entity.path)) continue;
           final normPath = p.normalize(entity.path);
           if (!seen.add(normPath)) continue;
           if (++visited > maxFilesVisited) {
@@ -473,7 +540,10 @@ class FileService {
             );
             return;
           }
-          final hit = await _probeMarkdown(entity);
+          final hit = await _probeMarkdown(
+            entity,
+            includeDocuments: includeDocuments,
+          );
           if (hit != null) hits.add(hit);
         } else if (entity is Directory && depth < maxDepth) {
           final name = p.basename(entity.path);
@@ -494,8 +564,12 @@ class FileService {
       await walk(dir, 0);
     }
 
-    // OciDeck-themed decks first, then by display title (case-insensitive).
+    // Presentaties eerst (OciDeck-thema vooraan), dan de documenten, elk op
+    // weergavetitel. Het is één lijst met twee soorten erin; op soort groeperen
+    // scheelt de gebruiker het uit elkaar houden van rijen die er anders om en
+    // om staan — en het filter in het scherm haalt de andere soort weg.
     hits.sort((a, b) {
+      if (a.kind != b.kind) return a.kind.isPresentation ? -1 : 1;
       if (a.isOcideckTheme != b.isOcideckTheme) {
         return a.isOcideckTheme ? -1 : 1;
       }
