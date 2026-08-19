@@ -2028,7 +2028,7 @@ momentopname. Anders dan die worden ze **wél** meegedragen door een commit naar
 hieronder. *(Gecorrigeerd 2026-07-22: hier stond dat dat niet zo was, en dat de waarschuwing
 vóór de commit ze meetelde. Beide zijn met #541 opgehouden waar te zijn.)*
 
-#### In een git-repository
+#### 6.3.1 In een git-repository
 
 Een deck in een repository houdt zijn notities in **`<deckDir>/deck.user-notes.json`** —
 dezelfde bestandsnaam als op schijf, op een stabiel pad naast `deck.md`, bewust

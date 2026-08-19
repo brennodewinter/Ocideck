@@ -230,6 +230,22 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- feat(poort): `translate-docs-check` toetst nu ook of een vertaalde gids bíj is,
+  niet alleen of hij bestaat. Twee keer in twee dagen kwam er een sectie bij in
+  de Engelse bron zonder Nederlandse tegenhanger — §14.9 van FILE_FORMAT (#1568)
+  en §14.11 die met de tijdlijnfunctie meekwam (#1571, hersteld in #1573) — en
+  beide keren stond alles groen, omdat de poort alleen vroeg *of* de variant
+  bestond. Hij vergelijkt nu de structuur: evenveel koppen per niveau als de
+  bron, en elke genummerde sectie (`14.11`, `6.3.1`) onder hetzelfde nummer.
+  Koppen binnen codeblokken tellen niet mee, want in FILE_FORMAT is `# Rapport`
+  meestal de inhoud van een voorbeeld. Documenten die vandaag al achterlopen
+  staan met hun exacte achterstand in `headingDriftBaseline`: `KNOWN_LIMITATIONS`
+  mist twee eerlijkheden (voetnoten in de HTML-export, en de overlays die de
+  web-export weglaat) en `USER_GUIDE` drie secties over de documentmodus. Die
+  lijst mag krimpen en niet groeien — hij staat er om weggewerkt te worden, niet
+  om ruimte te maken. Onderweg kreeg `#### 6.3.1` in de Nederlandse FILE_FORMAT
+  zijn sectienummer terug; dat was bij het vertalen weggevallen.
+
 - docs(bestandsformaat): §14.11 (de tijdlijnmarker) is aangevuld en vertaald.
   De sectie kwam met de functie mee (#1571) maar alleen in het Engels, en zonder
   het rijtje dat §14.9 en §14.10 wél hebben: wat elk oppervlak met de bytes doet.

@@ -414,7 +414,7 @@ now the only passing state.
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
-| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists and is registered, no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source (`headingDriftBaseline` ratchet); no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
@@ -867,7 +867,12 @@ also declares them, but see the [CI note](#continuous-integration).)
   `shippedDocLanguages` variant exists and is registered in `pubspec.yaml`, no
   variant file sits on disk for an unlisted language, no `pubspec.yaml`
   registration dangles after its file is gone, and no excluded document
-  (`PRIVACY.md`, `SECURITY_DESIGN.md`) was translated.
+  (`PRIVACY.md`, `SECURITY_DESIGN.md`) was translated. Since 2026-08-19 it also
+  checks that a shipped variant is *current*: it must carry the same number of
+  headings per level as its English source, and every numbered section
+  (`14.11`, `6.3.1`) must be present under the same number. Documents that are
+  known to be behind sit in `headingDriftBaseline` with their exact shortfall —
+  a ratchet that may shrink and never grow.
 - **Why it exists:** the docs are *content*, and OciDeck ships content in Dutch +
   English while translating only the interface into every language. The generator
   (`tool/translate_docs.dart`) can machine-translate the manuals into any interface
@@ -878,12 +883,22 @@ also declares them, but see the [CI note](#continuous-integration).)
   unbundled variant the app cannot load, a dangling registration, or a translated
   privacy/security promise. The check also used to exit 0 silently — `main`
   returned an `int` the Dart VM discards — until #1341 propagated it through
-  `exitCode` so the gate can actually fail.
+  `exitCode` so the gate can actually fail. The structure half was added after
+  the same hole showed twice in two days: §14.9 of FILE_FORMAT existed only in
+  English for a day (#1568), and §14.11 landed with its feature in English only
+  (#1571, repaired in #1573). Both times every gate was green, because
+  "the variant exists" was the whole question the gate asked. Dutch is what the
+  in-app reader shows, so a variant that exists but is a section behind is a
+  reader who is told less than the English reader.
 - **Failure means:** for a missing or unregistered shipped variant, run
   `make translate-docs` and commit the result; for a variant on disk in an unlisted
   language, either add that language to `shippedDocLanguages` or delete the file;
   for a dangling registration, drop the `pubspec.yaml` line; for a translated
-  excluded document, remove the translation.
+  excluded document, remove the translation. For structure drift — a variant
+  missing a heading, or a section number the variant does not carry — translate
+  the new section into the variant *in the same change*; that is the whole point
+  of the rule. Raising a `headingDriftBaseline` number to get past it is not a
+  fix and will be read as one in six months.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
