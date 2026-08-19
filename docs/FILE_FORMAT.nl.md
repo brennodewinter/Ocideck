@@ -3345,8 +3345,8 @@ vraag per sleutel is of hij daar nog iets betekent.
   dus op de plek die zijn eigen lezer kiest. Anders dan bij `theme:` is dat geen
   overwogen keuze maar een open eind: de sleutel is een Pandoc-instructie, dus
   volgens de redenering hieronder is het een maat en zou hij mee kunnen reizen.
-  Dat staat hier opgeschreven in plaats van gladgestreken; niets in de code hangt
-  ervan af dat het zo blijft.
+  Dat staat hier opgeschreven in plaats van gladgestreken, en staat als issue
+  #1569 op de tracker; niets in de code hangt ervan af dat het zo blijft.
 
 Het verschil is niet dat de ene sleutel belangrijker is dan de andere: het is dat
 een papiermaat een **maat** is, op zichzelf compleet in millimeters die elke

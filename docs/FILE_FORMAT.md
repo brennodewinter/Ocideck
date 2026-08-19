@@ -3312,7 +3312,8 @@ per key is whether it still means anything there.
   with their own reader's placement. Unlike `theme:` that is not a considered
   choice but an open end: the key is a Pandoc instruction, so by the reasoning
   below it is a measure and could travel. It is recorded here rather than glossed
-  over; nothing in the code depends on it staying this way.
+  over, and tracked as issue #1569; nothing in the code depends on it staying this
+  way.
 
 The difference is not that one key is more important than the other: it is that a
 paper size is a **measure**, complete on its own in millimetres any toolchain
