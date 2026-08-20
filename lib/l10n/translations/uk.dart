@@ -1655,11 +1655,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF зі справжнім текстом: його можна виділяти, шукати в ньому й читати вголос, а заголовки стають закладками. Формули, діаграми mermaid і графіки намальовано; примітки — у кінці.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Ці символи не вдалося набрати у PDF, і їх у ньому бракує:',
   'Diagram (bron)': 'Діаграма (джерело)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF зі справжнім текстом: його можна виділяти, шукати в ньому й читати вголос, а заголовки стають закладками. Формули, діаграми mermaid і графіки подано як вихідний код; примітки — у кінці.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Експортуйте у HTML або LaTeX, якщо вони мають бути в документі.',
   'Formule (bron)': 'Формула (джерело)',

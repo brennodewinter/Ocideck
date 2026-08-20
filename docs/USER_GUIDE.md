@@ -4683,17 +4683,25 @@ chapter when *New chapter on a new page* is on; the table of contents with page
 numbers and clickable entries; links you can click; images embedded in the file
 itself.
 
-**What it does not carry.** A PDF has no JavaScript, so what the HTML export
-draws with one cannot be drawn here: **formulas, Mermaid diagrams and charts
-appear as their source**, in a monospaced block with a line above saying what it
-is. That is a deliberate choice over an empty space — whoever needs the diagram
-at least sees what should be there. A formula on its own lines (`$$…$$`) becomes
-such a block; a formula inside a sentence (`$…$`) stays in that sentence, exactly
-as you wrote it. If you need them rendered, export to HTML
-(which draws all three) or to LaTeX (which typesets the maths natively).
-**Footnotes go at the back**, not at the foot of the sheet: which note lands on
-which page only becomes clear after the layout, and by then the sheet is set. The
-LaTeX export does put them at the foot.
+**Formulas, diagrams and charts are drawn** — as vector art, not as pictures, so
+they stay sharp at any zoom and the text inside them (a chart's title, its axis
+labels, its legend) stays real text. Charts are drawn by the same generator the
+HTML export and the on-screen document view use, so the three agree by
+construction. Mermaid diagrams and formulas are rendered once each while the
+export runs. *(Added 2026-08-20.)*
+
+When one of them cannot be drawn, the PDF prints its **source** in a monospaced
+block with a line above saying what it is, rather than leaving an empty space —
+whoever needs the diagram at least sees what should be there. That happens when a
+chart's numbers live in an external `data/*.json` that did not travel, when a
+diagram or formula fails to render, and always on the **web build**, which has no
+hidden renderer for them. A formula on its own lines (`$$…$$`) is drawn as a
+block; a formula inside a sentence (`$…$`) stays in that sentence, exactly as you
+wrote it.
+
+**What it does not carry.** **Footnotes go at the back**, not at the foot of the
+sheet: which note lands on which page only becomes clear after the layout, and by
+then the sheet is set. The LaTeX export does put them at the foot.
 
 **The typeface is not your document's typeface.** The PDF is set in a serif or a
 sans depending on which one your style profile uses, but not in the exact font —
@@ -4707,10 +4715,9 @@ has no shape available and would vanish from the text layer without complaint.
 It does not vanish quietly: the export says which characters could not be set and
 suggests HTML or LaTeX, both of which handle them.
 
-The HTML route to a PDF still works, and is still the one to take when you want
-the diagrams rendered: open the exported HTML and print it from your browser
-(*Save as PDF*). OciDeck makes no promise about the accessibility of a PDF
-produced that way — that is the browser's doing.
+The HTML route to a PDF still works: open the exported HTML and print it from
+your browser (*Save as PDF*). OciDeck makes no promise about the accessibility of
+a PDF produced that way — that is the browser's doing.
 
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.

@@ -1654,11 +1654,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF cum vero textu: eligi, quaeri et recitari potest, titulis pro indicibus. Formulae, diagrammata mermaid et descriptiones depinguntur; notae in fine sunt.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Hae notae in PDF exprimi non potuerunt et ibi desunt:',
   'Diagram (bron)': 'Diagramma (fons)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF cum vero textu: eligi, quaeri et recitari potest, titulis pro indicibus. Formulae, diagrammata mermaid et descriptiones ut fons apparent; notae in fine sunt.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'In HTML vel LaTeX exporta, si in documento esse debent.',
   'Formule (bron)': 'Formula (fons)',

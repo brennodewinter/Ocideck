@@ -14,7 +14,9 @@ import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/pdf/document_pdf_export.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
+import 'package:ocideck/services/pdf/document_pdf_svg.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
+import 'package:pdf/pdf.dart';
 
 import 'pdf_text_probe.dart';
 
@@ -158,6 +160,40 @@ void main() {
         },
       );
       expect(calls, 1);
+    });
+  });
+
+  group('de inkt van een tekening', () {
+    test('currentColor wordt een kleur die de lezer kent', () async {
+      // `toHex()` levert `#RRGGBBAA`; met de doorzichtigheid erin wordt het
+      // `#22222ff`, en dat tekent niets. Zichtbaar in de uitvoer van de lezer,
+      // onzichtbaar in een test die alleen kijkt of er bytes zijn.
+      final bundle = await buildDocumentExportBundle(
+        '# Rapport\n\n```mermaid\ngraph TD;\n```\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      String? doorgegeven;
+      await buildDocumentExportPdf(
+        bundle,
+        labels: _labels,
+        fallbackFont: fallbackFont(),
+        renderMermaid: (_) async =>
+            '<svg viewBox="0 0 10 10"><path fill="currentColor" d="M0 0"/></svg>',
+      );
+      // De voorbereide SVG is niet van buitenaf te lezen; toets daarom de regel
+      // die hem maakt op zijn eigen laag, met dezelfde vorm die daar langskomt.
+      doorgegeven = prepareSvgForPdf(
+        '<svg viewBox="0 0 10 10"><path fill="currentColor"/></svg>',
+        inkHex: const PdfColor.fromInt(0xFF222222).toHex().substring(0, 7),
+        fontSizePt: 11,
+      ).svg;
+      expect(doorgegeven, contains('#222222'));
+      expect(RegExp(r'#[0-9a-fA-F]{7,}').hasMatch(doorgegeven), isFalse);
     });
   });
 

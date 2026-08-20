@@ -925,6 +925,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   and fails loudly if the detector is unavailable, rather than skipping. That is the
   test that caught the broken `objdetect` build in #898.
 
+  In dezelfde geest draait `integration_test/document_pdf_graphics_test.dart` de échte renderers achter de tekeningen in een document-PDF: mermaid en MathJax wonen in een verborgen WebView, en die bestaat onder `flutter test` niet — daar valt alles stil terug op de bron, dus een groene suite zegt daar niets over de functie zelf. Draaien met `flutter test integration_test/document_pdf_graphics_test.dart -d macos`. Hij schrijft de PDF naar de tijdelijke map, zodat er ook met eigen ogen naar te kijken valt.
+
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
   then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.

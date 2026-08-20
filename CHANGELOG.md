@@ -1754,6 +1754,22 @@ that before deciding whether this alpha fits what you are doing.
   echte tekstwijzigingen. Alle dia-editors, de notitievelden van het
   presentatiescherm en de tabelbewerker in de weergave gaan nu langs die tweede
   ingang. Een cursor die verspringt is geen bewerking.
+- **Formules, mermaid-diagrammen en grafieken worden nu getekend in de PDF van
+  een document.** Ze stonden er als bron in, want een PDF kent geen JavaScript en
+  de HTML-export tekent die drie juist daarmee. Dat bleek maar half waar: alle
+  drie de renderers leveren SVG, en een PDF kan SVG plaatsen. Ze gaan er daarom
+  als vectortekening in en niet als plaatje — scherp op elke zoomstand, klein in
+  bytes, en de tekst in een grafiek blijft echte tekst. Grafieken komen van
+  dezelfde generator die de HTML-export en de documentweergave gebruiken, dus die
+  drie kunnen niet uit de pas lopen. Mermaid en de formules komen uit de
+  verborgen renderpagina die de voorvertoning al voedde; MathJax lag daar al
+  gebundeld voor de HTML-export, en draait er nu in dezelfde pagina naast
+  mermaid. Wat níet getekend kan worden — een grafiek zonder cijfers, een
+  renderer die niets oplevert, een tekening die de PDF niet kan ontleden, of de
+  webversie, die die renderers niet heeft — toont nog steeds zijn bron in een
+  kader. Die terugval is het dragende deel: één diagram dat tegenvalt mag nooit
+  het hele document kosten, en er staat een plafond op het wachten zodat een
+  export niet kan blijven hangen op een renderer die nooit antwoordt.
 
 - **Een documentstijl met een kop- of voetband liet de front matter als tekst in
   het document staan.** De band wordt vóór het strippen aan de body geplakt,

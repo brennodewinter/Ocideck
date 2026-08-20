@@ -68,15 +68,19 @@ exporteert naar een PDF die gezet wordt in plaats van gefotografeerd — echte
 tekst, te selecteren, te doorzoeken en voor te lezen, met de koppen als
 bladwijzerboom. Zijn eigen grenzen staan hieronder.)*
 
-## De PDF van een document toont formules, diagrammen en grafieken als bron
+## De PDF van een document valt terug op de bron als een tekening niet lukt
 
-Een PDF kent geen JavaScript, en de HTML-export tekent alle drie juist daarmee.
-In plaats van een leeg vlak achter te laten drukt de PDF de **bron** van het blok
-af, in een kader met vaste letterafstand en een regel erboven die zegt wat het
-is — wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan.
-Exporteer naar HTML voor alle drie gerenderd, of naar LaTeX voor gezette
-wiskunde. De tabellen, lijsten, afbeeldingen, links en paginaopmaak van hetzelfde
-bestand reizen wél volledig mee. *(Toegevoegd 2026-08-20.)*
+Formules, Mermaid-diagrammen en grafieken worden als vectortekening in de PDF
+**getekend**. Lukt dat niet, dan drukt de PDF de **bron** van het blok af in een
+kader met vaste letterafstand en een regel erboven die zegt wat het is — liever
+dat dan een leeg vlak, want wie het diagram nodig heeft ziet zo tenminste wát er
+hoort te staan. Dat gebeurt in vier gevallen: een grafiek waarvan de cijfers in
+een los `data/*.json` staan dat niet meekwam; een diagram of formule die de
+renderer niet kon maken; een tekening die de SVG-lezer van de PDF niet kan
+ontleden; en de **webversie**, die geen verborgen renderer voor mermaid of
+formules heeft. Exporteer naar HTML voor alle drie gerenderd in een browser, of
+naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog dezelfde dag
+ingeperkt van "toont altijd de bron" toen de tekeningen er waren.)*
 
 ## De PDF van een document staat in een standaardletter, niet in die van je document
 

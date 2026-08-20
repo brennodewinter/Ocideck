@@ -1656,11 +1656,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'Un PDF cu text adevărat: se poate selecta, căuta și citi cu voce tare, iar titlurile devin marcaje. Formulele, diagramele mermaid și graficele sunt desenate; notele sunt la sfârșit.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Aceste caractere nu au putut fi culese în PDF și lipsesc din el:',
   'Diagram (bron)': 'Diagramă (sursă)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'Un PDF cu text adevărat: se poate selecta, căuta și citi cu voce tare, iar titlurile devin marcaje. Formulele, diagramele mermaid și graficele apar ca sursă; notele sunt la sfârșit.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Exportați în HTML sau LaTeX dacă trebuie să apară în document.',
   'Formule (bron)': 'Formulă (sursă)',

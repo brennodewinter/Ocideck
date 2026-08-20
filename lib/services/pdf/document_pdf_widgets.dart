@@ -513,14 +513,23 @@ class DocumentPdfWidgets {
     final svg = graphic.svg;
     if (svg == null) return null;
     try {
+      // Nooit breder dan de bladspiegel, en nooit groter opgeblazen dan de
+      // tekening zelf bedoelt. Zonder dat tweede wordt een driehoekje van drie
+      // vakjes een poster van twintig centimeter, en dat is precies wat de
+      // eerste echte render liet zien.
+      final natural = graphic.naturalWidth;
+      final width = natural == null || natural > maxImageWidth
+          ? maxImageWidth
+          : natural;
+      final naturalHeight = graphic.naturalHeight;
       return pw.Center(
-        child: pw.ConstrainedBox(
-          constraints: pw.BoxConstraints(maxHeight: maxImageHeight),
-          child: pw.SvgImage(
-            svg: svg,
-            width: maxImageWidth,
-            fit: pw.BoxFit.contain,
-          ),
+        child: pw.SvgImage(
+          svg: svg,
+          width: width,
+          height: naturalHeight == null || naturalHeight > maxImageHeight
+              ? maxImageHeight
+              : naturalHeight,
+          fit: pw.BoxFit.contain,
         ),
       );
     } on Exception {

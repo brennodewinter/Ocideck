@@ -1641,11 +1641,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF se skutečným textem: lze jej označovat, prohledávat i předčítat, nadpisy slouží jako záložky. Vzorce, diagramy mermaid a grafy se vykreslují; poznámky jsou vzadu.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Tyto znaky se nepodařilo vysázet do PDF a chybějí v něm:',
   'Diagram (bron)': 'Diagram (zdroj)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF se skutečným textem: lze jej označovat, prohledávat i předčítat, nadpisy slouží jako záložky. Vzorce, diagramy mermaid a grafy jsou v něm jako zdroj; poznámky jsou vzadu.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Exportujte do HTML nebo LaTeXu, pokud do dokumentu patří.',
   'Formule (bron)': 'Vzorec (zdroj)',

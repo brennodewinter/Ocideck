@@ -1639,11 +1639,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'En PDF med rigtig tekst: kan markeres, søges i og læses højt, med overskrifterne som bogmærker. Formler, mermaid-diagrammer og grafer bliver tegnet; noterne står bagest.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Disse tegn kunne ikke sættes i PDF\'en og mangler i den:',
   'Diagram (bron)': 'Diagram (kilde)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'En PDF med rigtig tekst: kan markeres, søges i og læses højt, med overskrifterne som bogmærker. Formler, mermaid-diagrammer og grafer står som kildetekst; noterne står bagest.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Eksportér til HTML eller LaTeX, hvis de hører til i dokumentet.',
   'Formule (bron)': 'Formel (kilde)',

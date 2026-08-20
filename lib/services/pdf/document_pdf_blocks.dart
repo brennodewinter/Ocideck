@@ -260,15 +260,34 @@ enum PdfVerbatimKind { math, mermaid, chart }
 /// een diagram dat niet getekend kan worden mag de export nooit afbreken, en
 /// mag al helemaal geen leeg vlak achterlaten.
 class PdfRenderedGraphic {
-  const PdfRenderedGraphic.svg(String this.svg) : image = null;
+  const PdfRenderedGraphic.svg(
+    String this.svg, {
+    this.naturalWidth,
+    this.naturalHeight,
+  }) : image = null;
 
-  const PdfRenderedGraphic.image(Uint8List this.image) : svg = null;
+  const PdfRenderedGraphic.image(
+    Uint8List this.image, {
+    this.naturalWidth,
+    this.naturalHeight,
+  }) : svg = null;
 
   /// De vectorvorm, als die er is.
   final String? svg;
 
   /// De beeldvorm, als die er is.
   final Uint8List? image;
+
+  /// De maat die de tekening zelf bedoelt, in punten — of `null` als die niet
+  /// af te leiden viel.
+  ///
+  /// Zonder deze maat is er maar één redelijke keuze: de tekening zo breed
+  /// maken als de bladspiegel. Voor een grafiek klopt dat, want die is bedoeld
+  /// om de kolom te vullen. Voor een driehoekje van een stroomdiagram niet, en
+  /// voor een formule al helemaal niet — die hoort in de lopende tekst te passen
+  /// en niet als poster over het blad te liggen.
+  final double? naturalWidth;
+  final double? naturalHeight;
 
   @override
   String toString() => svg != null

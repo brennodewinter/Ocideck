@@ -1617,11 +1617,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF ghajbogh mu\'mey teH: DawIvlaH, DanejlaH, DalaDlaH je; per moHaqmey. mI\'mey, mermaid nabmey, HaSta je luqawmoH; ghItlhmey retlh luDab.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'PDF-Daq Deghvammey lumuchlaHbe\' \'ej pa\' luHutlh:',
   'Diagram (bron)': 'nab (mung)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF ghajbogh mu\'mey teH: DawIvlaH, DanejlaH, DalaDlaH je; per moHaqmey. mI\'mey, mermaid nabmey, HaSta je mung rur; ghItlhmey retlh luDab.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'HTML pagh LaTeX yIngeH, nugh ghItlhDaq luDabnISchugh.',
   'Formule (bron)': 'mI\'nagh (mung)',

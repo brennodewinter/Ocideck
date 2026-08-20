@@ -1646,11 +1646,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF su tikru tekstu: jį galima žymėti, jame ieškoti ir jį perskaityti balsu, o antraštės tampa žymelėmis. Formulės, mermaid diagramos ir grafikai yra nupiešiami; pastabos yra gale.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Šių ženklų nepavyko surinkti PDF faile ir jų jame trūksta:',
   'Diagram (bron)': 'Diagrama (šaltinis)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF su tikru tekstu: jį galima žymėti, jame ieškoti ir jį perskaityti balsu, o antraštės tampa žymelėmis. Formulės, mermaid diagramos ir grafikai jame pateikiami kaip pirminis tekstas; pastabos yra gale.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Eksportuokite į HTML arba LaTeX, jei jie turi būti dokumente.',
   'Formule (bron)': 'Formulė (šaltinis)',

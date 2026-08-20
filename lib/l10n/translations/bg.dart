@@ -1659,11 +1659,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF с истински текст: може да се маркира, търси и чете на глас, а заглавията са отметки. Формулите, mermaid диаграмите и графиките се изчертават; бележките са накрая.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Тези знаци не можаха да бъдат набрани в PDF и липсват в него:',
   'Diagram (bron)': 'Диаграма (източник)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF с истински текст: може да се маркира, търси и чете на глас, а заглавията са отметки. Формулите, mermaid диаграмите и графиките са в него като изходен код; бележките са накрая.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Експортирайте към HTML или LaTeX, ако трябва да са в документа.',
   'Formule (bron)': 'Формула (източник)',

@@ -26,6 +26,7 @@ import '../marp_html_service.dart' show HtmlImageResolver, MarpHtmlService;
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_renderer.dart';
+import 'document_pdf_svg.dart';
 import 'document_pdf_style.dart';
 import 'markdown_to_pdf_blocks.dart';
 
@@ -115,9 +116,11 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     fallbackFont: fallbackFont,
   );
   final images = await _resolveImages(blocks, embedImage);
+  final style = DocumentPdfStyle.fromTheme(theme);
   final graphics = await _resolveGraphics(
     blocks,
     theme,
+    style,
     renderMermaid: renderMermaid,
     renderMath: renderMath,
   );
@@ -131,7 +134,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   };
   final bytes = await buildDocumentPdf(
     blocks,
-    style: DocumentPdfStyle.fromTheme(theme),
+    style: style,
     fonts: fonts,
     verbatimLabel: labels.labelFor,
     images: images,
@@ -219,7 +222,8 @@ Future<Map<String, Uint8List>> _resolveImages(
 /// document wordt één keer gerenderd.
 Future<Map<String, PdfRenderedGraphic>> _resolveGraphics(
   List<PdfBlock> blocks,
-  ThemeProfile theme, {
+  ThemeProfile theme,
+  DocumentPdfStyle style, {
   MermaidSvgResolver? renderMermaid,
   MathSvgResolver? renderMath,
 }) async {
@@ -250,9 +254,23 @@ Future<Map<String, PdfRenderedGraphic>> _resolveGraphics(
       PdfVerbatimKind.mermaid => await renderMermaid?.call(entry.key),
       PdfVerbatimKind.math => await renderMath?.call(entry.key),
     };
-    if (svg != null && svg.trim().isNotEmpty) {
-      graphics[entry.key] = PdfRenderedGraphic.svg(svg);
-    }
+    if (svg == null || svg.trim().isEmpty) continue;
+    // Klaarmaken vóór het de renderer in gaat: de maat eraf en zelf uitgerekend,
+    // en `currentColor` vervangen. Zie `document_pdf_svg.dart` voor waarom een
+    // SVG die in een browser klopt hier anders scheef of onzichtbaar wordt.
+    final prepared = prepareSvgForPdf(
+      svg,
+      // `toHex()` levert `#RRGGBBAA`; de doorzichtigheid hoort niet in een
+      // SVG-kleur thuis en maakte er `#22222ff` van — een kleur die de lezer
+      // niet kent, en een onbekende kleur tekent niets.
+      inkHex: style.textColor.toHex().substring(0, 7),
+      fontSizePt: style.bodyFontSize,
+    );
+    graphics[entry.key] = PdfRenderedGraphic.svg(
+      prepared.svg,
+      naturalWidth: prepared.size?.width,
+      naturalHeight: prepared.size?.height,
+    );
   }
   return graphics;
 }

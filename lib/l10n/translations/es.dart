@@ -671,11 +671,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'Un PDF con texto real: seleccionable, consultable y legible en voz alta, con los títulos como marcadores. Las fórmulas, los diagramas mermaid y los gráficos se dibujan; las notas van al final.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Estos caracteres no se han podido componer en el PDF y faltan en él:',
   'Diagram (bron)': 'Diagrama (fuente)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'Un PDF con texto real: seleccionable, consultable y legible en voz alta, con los títulos como marcadores. Las fórmulas, los diagramas mermaid y los gráficos aparecen como código fuente; las notas van al final.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Exporta a HTML o LaTeX si deben aparecer en el documento.',
   'Formule (bron)': 'Fórmula (fuente)',
