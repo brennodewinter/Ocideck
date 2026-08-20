@@ -1635,6 +1635,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Thema accent op de documentband': 'Poudarek teme na glavi/nogi',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Najden je bil dokument z neshranjenimi spremembami iz prejšnje seje:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

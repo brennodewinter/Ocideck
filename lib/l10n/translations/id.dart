@@ -1634,6 +1634,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Thema accent op de documentband': 'Aksen tema pada header/footer dokumen',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Ditemukan dokumen dengan perubahan yang belum disimpan dari sesi sebelumnya:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

@@ -2552,6 +2552,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Thema accent op de documentband': 'Üstbilgi/altbilgide tema vurgusu',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Önceki oturumdan kaydedilmemiş değişiklikleri olan bir belge bulundu:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

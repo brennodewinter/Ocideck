@@ -1659,6 +1659,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Thema accent op de documentband': 'Τόνος θέματος στην κεφαλίδα/υποσέλιδο',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Βρέθηκε έγγραφο με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

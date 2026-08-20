@@ -7,9 +7,10 @@ import 'package:ocideck/services/slide_quality_analyzer.dart';
 import 'package:ocideck/utils/color_contrast.dart';
 
 /// Regressie: de thema-contrastreeks somde alleen kleuren op die op een *dia*
-/// voorkomen. De twee kleurparen die alléén op het documentvlak bestaan — de
-/// kopkleur van een document en de kop-/voetband om het blad — stonden er niet
-/// in. Daardoor kon een stijlprofiel een kop of een band onleesbaar zetten
+/// voorkomen. De drie kleurparen die alléén op het documentvlak bestaan — de
+/// kopkleur van een document, de tekst van de kop-/voetband om het blad, en het
+/// accent zoals het óp die band landt — stonden er niet in. Daardoor kon een
+/// stijlprofiel een kop, een band of een link in die band onleesbaar zetten
 /// zonder dat de kwaliteitspoort of de stijlinstelling iets zei, terwijl elke
 /// dia-kleur wél gecontroleerd werd.
 void main() {
@@ -134,6 +135,57 @@ void main() {
     });
   });
 
+  group('het accent op de bandachtergrond', () {
+    // Het echte geval: een donkere huisstijlband met witte tekst erop, en een
+    // link in de kop- of voettekst die het accent krijgt. Beide bestaande
+    // toetsen zwijgen hier terecht — accent op papier haalt 10,9:1, bandtekst
+    // op de band 16,0:1 — dus dit paar is aantoonbaar de enige beperking.
+    const houseAccent = '#003399';
+    const darkBand = '#14213D';
+
+    ThemeProfile bandTheme({String accent = houseAccent}) =>
+        const ThemeProfile().copyWith(
+          accentColor: accent,
+          documentBandTextColor: '#FFFFFF',
+          documentBandBackgroundColor: darkBand,
+        );
+
+    test(
+      'de opzet klopt: alleen het accent-op-de-band zakt door de drempel',
+      () {
+        expect(
+          hexContrastRatio(houseAccent, paper)!,
+          greaterThan(kWcagAaNormalText),
+        );
+        expect(
+          hexContrastRatio('#FFFFFF', darkBand)!,
+          greaterThan(kWcagAaNormalText),
+        );
+        expect(
+          hexContrastRatio(houseAccent, darkBand)!,
+          lessThan(kWcagAaLargeText),
+        );
+      },
+    );
+
+    test('een link in de band die wegvalt op zijn eigen band waarschuwt', () {
+      final issues = analyse(bandTheme());
+
+      expect(withLabel(issues, 'Thema accent'), isEmpty);
+      expect(withLabel(issues, 'Thema documentband'), isEmpty);
+
+      final band = withLabel(issues, 'Thema accent op de documentband');
+      expect(band, hasLength(1));
+      // De melding landt op de achtergrond en niet op het accent: het accent
+      // is een gedeelde kleur die overal elders wél deugt, dus wat aan dít paar
+      // te herstellen valt is de band eronder.
+      expect(band.single.field, 'documentBandBackgroundColor');
+      expect(band.single.args['ratio'], '1.5');
+      // Onder de harde ondergrens, en de band is gewone tekst: een fout.
+      expect(band.single.severity, MarkdownValidationSeverity.error);
+    });
+  });
+
   group('geërfde documentkleuren melden niets dubbel', () {
     test('een leesbaar standaardprofiel meldt geen documentprobleem', () {
       final issues = analyse(const ThemeProfile());
@@ -154,6 +206,18 @@ void main() {
       expect(withLabel(issues, 'Thema bodytekst'), hasLength(1));
       expect(withLabel(issues, 'Thema documentkop'), isEmpty);
       expect(withLabel(issues, 'Thema documentband'), isEmpty);
+    });
+
+    test('een onleesbaar accent meldt niet ook nog op de band', () {
+      // Zonder eigen bandachtergrond is de band het papier, en dan is het paar
+      // accent-op-de-band letterlijk het paar dat 'Thema accent' al meet — op
+      // dezelfde drempel.
+      final issues = analyse(
+        const ThemeProfile().copyWith(accentColor: belowLarge),
+      );
+
+      expect(withLabel(issues, 'Thema accent'), hasLength(1));
+      expect(withLabel(issues, 'Thema accent op de documentband'), isEmpty);
     });
   });
 }

@@ -1646,6 +1646,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Thema accent op de documentband': 'Akcent motywu na nagłówku/stopce',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Znaleziono dokument z niezapisanymi zmianami z poprzedniej sesji:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

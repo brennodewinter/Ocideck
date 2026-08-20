@@ -832,17 +832,17 @@ void _checkThemeContrast(
     largeText: false,
     field: 'accentColor',
   );
-  // Hieronder de twee paren die alléén op het documentvlak bestaan: de
-  // koppen van een document, en de kop- en voetband om het blad. Zonder deze
-  // toetsen kon een stijl ze onleesbaar zetten terwijl elke dia-kleur wél
-  // gemeten werd — en dan zwijgt zowel het kwaliteitspaneel als de
-  // stijlinstelling.
+  // Hieronder de drie paren die alléén op het documentvlak bestaan: de koppen
+  // van een document, de tekst van de kop- en voetband om het blad, en het
+  // accent zoals het óp die band landt. Zonder deze toetsen kon een stijl ze
+  // onleesbaar zetten terwijl elke dia-kleur wél gemeten werd — en dan zwijgt
+  // zowel het kwaliteitspaneel als de stijlinstelling.
   //
-  // Beide kijken alleen naar een kleur die de auteur zélf zette. Laat hij ze
-  // leeg, dan valt het documentvlak terug op `textColor`, `accentColor` en
+  // Alle drie kijken alleen naar een kleur die de auteur zélf zette. Laat hij
+  // ze leeg, dan valt het documentvlak terug op `textColor`, `accentColor` en
   // `slideBackgroundColor` — precies de paren die 'Thema bodytekst' en 'Thema
-  // accent' hierboven al meten, en op een stríktere drempel. Een tweede
-  // melding over datzelfde paar zou alleen ruis zijn in het paneel.
+  // accent' hierboven al meten, en op een even strenge of stríktere drempel.
+  // Een tweede melding over datzelfde paar zou alleen ruis zijn in het paneel.
   if (theme.documentHeadingColor != null) {
     addPairIssue(
       label: 'Thema documentkop',
@@ -870,6 +870,25 @@ void _checkThemeContrast(
       // tekstkleur — hetzelfde anker dat 'Thema bodytekst' kiest, en het veld
       // waar de auteur de leesbaarheid herstelt.
       field: 'documentBandTextColor',
+    );
+  }
+  if (theme.documentBandBackgroundColor != null) {
+    addPairIssue(
+      // Het accent landt óók op de band, en niet als versiering: een link in de
+      // kop- of voettekst krijgt hem als tekstkleur — in de app
+      // (`document_page_chrome.dart`) en in de HTML-export (`.document a`)
+      // allebei. Twee kleuren die op het papier prima staan kunnen op een
+      // eigen bandachtergrond samenvallen, en dan is juist de link onleesbaar.
+      label: 'Thema accent op de documentband',
+      foreground: theme.accentColor,
+      background: theme.effectiveDocumentBandBackgroundColor,
+      // Een link in de band is bandtekst: dezelfde twaalf beeldpunten, dus
+      // dezelfde volle drempel.
+      largeText: false,
+      // Anders dan de twee paren hierboven landt deze melding op de
+      // achtergrond. Het accent is een gedeelde kleur die overal elders wél
+      // deugt — wat aan dít paar te herstellen valt, is de band eronder.
+      field: 'documentBandBackgroundColor',
     );
   }
 }

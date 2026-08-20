@@ -1653,6 +1653,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Thema accent op de documentband': 'Aċċent tat-tema fuq l-intestatura/qiegħ',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Instab dokument b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

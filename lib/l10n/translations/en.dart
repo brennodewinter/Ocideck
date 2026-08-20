@@ -837,6 +837,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Thema accent op de documentband':
+      'Theme accent on the document header/footer',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A document with unsaved changes was found from a previous session:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

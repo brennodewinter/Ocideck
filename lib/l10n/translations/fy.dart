@@ -674,6 +674,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Thema accent op de documentband': 'Tema-aksint op de kop-/foettekstbalke',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Der is in dokumint mei net-opsleine wizigingen fûn fan in foarige sesje:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

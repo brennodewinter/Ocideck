@@ -1641,6 +1641,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Thema accent op de documentband': 'Temos akcentas antraštėje/poraštėje',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Rastas ankstesnės sesijos dokumentas su neišsaugotais pakeitimais:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

@@ -1612,6 +1612,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Thema accent op de documentband': 'meq DuD ghItlh nach bIng je Daq',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'wanI\' Hoch qaSpu\'bogh vo\' ghItlh polbe\'lu\'bogh Say\' Sammo\'lu\'pu\':',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

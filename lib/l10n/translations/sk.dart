@@ -1641,6 +1641,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Thema accent op de documentband': 'Akcent témy v hlavičke/päte',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Našiel sa dokument s neuloženými zmenami z predchádzajúcej relácie:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
