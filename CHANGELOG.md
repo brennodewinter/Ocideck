@@ -1723,6 +1723,12 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De Bron-stand van een document toont regelnummers.** Links van elke regel
+  in de ruwe Markdown staat het nummer van die regel in het bestand. De cijfers
+  zitten niet in de tekst: je kunt ze niet selecteren of overschrijven, en ze
+  komen niet in de `.md` terecht. Visueel en Pagina's blijven zonder nummers —
+  daar schrijf of lees je het gerenderde document, geen bronbestand.
+
 - **`code` midden in een zin is weer te lezen, en een tabelbewerking gooit je
   niet meer naar de bron.** Drie klachten uit één document. Een inline
   `code`-stuk kreeg het vlak van een codeblok — in elk ingebouwd profiel bijna

@@ -4404,9 +4404,11 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   *(Gewijzigd 2026-08-08, aangevuld 2026-08-19.)*
 - **Bron** zet de ruwe Markdown naast een live gerenderde weergave (gestapeld
   wanneer het venster te smal is voor twee leesbare kolommen), waarbij je grafieken
-  en tabellen in de weergave met een dubbelklik bewerkt. Elke toetsaanslag
-  loopt meteen door — er is geen aparte "Toepassen"-stap, anders dan de
-  deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
+  en tabellen in de weergave met een dubbelklik bewerkt. Links van elke regel
+  staat een **regelnummer**: het hoort bij de regel in het bestand, je kunt het
+  niet selecteren of overschrijven, en het reist niet mee in de `.md`. Elke
+  toetsaanslag loopt meteen door — er is geen aparte "Toepassen"-stap, anders
+  dan de deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
 - **Wisselen laat je staan waar je stond.** Ga je van Visueel naar Bron of
   terug, dan komt de cursor op de overeenkomstige plek in de andere weergave —
   niet bovenaan het document. Wisselen doe je immers omdat je op één plek iets
