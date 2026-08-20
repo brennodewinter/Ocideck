@@ -1640,6 +1640,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Näitä merkkejä ei voitu latoa PDF-tiedostoon, ja ne puuttuvat siitä:',
+  'Diagram (bron)': 'Kaavio (lähde)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF, jossa on oikeaa tekstiä: valittavissa, haettavissa ja ääneen luettavissa, ja otsikot toimivat kirjanmerkkeinä. Kaavat, mermaid-kaaviot ja diagrammit näkyvät lähdekoodina; viitteet ovat lopussa.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Vie HTML- tai LaTeX-muotoon, jos ne kuuluvat asiakirjaan.',
+  'Formule (bron)': 'Kaava (lähde)',
+  'Grafiek (bron)': 'Diagrammi (lähde)',
   'Bijvoorbeeld project-id': 'Esimerkiksi project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Asiakirjassa voi olla enintään 100 mukautettua kenttää.',

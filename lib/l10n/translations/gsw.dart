@@ -1642,6 +1642,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Die Zeiche hät me im PDF nöd chöne setze und si fähled drin:',
+  'Diagram (bron)': 'Diagramm (Quälle)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Es PDF mit echtem Text: markierbar, durchsuechbar und vorläsbar, mit de Überschrifte als Läsezeiche. Formle, Mermaid-Diagramm und Grafike stönd als Quälltext drin; d Aamerkige stönd hinde.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportier nach HTML oder LaTeX, wänn si is Dokumänt ghööred.',
+  'Formule (bron)': 'Formle (Quälle)',
+  'Grafiek (bron)': 'Grafik (Quälle)',
   'Bijvoorbeeld project-id': 'Zum Biispil project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Es Dokumänt cha höchschtens 100 eigeti Fälder enthalte.',

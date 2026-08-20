@@ -674,6 +674,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Diese Zeichen konnten im PDF nicht gesetzt werden und fehlen darin:',
+  'Diagram (bron)': 'Diagramm (Quelle)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Ein PDF mit echtem Text: markierbar, durchsuchbar und vorlesbar, mit den Überschriften als Lesezeichen. Formeln, Mermaid-Diagramme und Grafiken stehen darin als Quelltext; die Anmerkungen stehen hinten.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportieren Sie nach HTML oder LaTeX, wenn sie ins Dokument gehören.',
+  'Formule (bron)': 'Formel (Quelle)',
+  'Grafiek (bron)': 'Grafik (Quelle)',
   'Bijvoorbeeld project-id': 'Zum Beispiel project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Ein Dokument kann höchstens 100 benutzerdefinierte Felder enthalten.',

@@ -1639,6 +1639,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Karakter berikut tidak dapat disusun dalam PDF dan hilang di dalamnya:',
+  'Diagram (bron)': 'Diagram (sumber)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF dengan teks sungguhan: dapat dipilih, dicari, dan dibacakan, dengan judul sebagai penanda. Rumus, diagram mermaid, dan grafik muncul sebagai sumber; catatan ada di bagian belakang.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Ekspor ke HTML atau LaTeX jika karakter itu memang harus ada dalam dokumen.',
+  'Formule (bron)': 'Rumus (sumber)',
+  'Grafiek (bron)': 'Grafik (sumber)',
   'Bijvoorbeeld project-id': 'Misalnya project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokumen dapat memuat paling banyak 100 bidang khusus.',

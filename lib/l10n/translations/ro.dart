@@ -1656,6 +1656,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Aceste caractere nu au putut fi culese în PDF și lipsesc din el:',
+  'Diagram (bron)': 'Diagramă (sursă)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Un PDF cu text adevărat: se poate selecta, căuta și citi cu voce tare, iar titlurile devin marcaje. Formulele, diagramele mermaid și graficele apar ca sursă; notele sunt la sfârșit.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportați în HTML sau LaTeX dacă trebuie să apară în document.',
+  'Formule (bron)': 'Formulă (sursă)',
+  'Grafiek (bron)': 'Grafic (sursă)',
   'Bijvoorbeeld project-id': 'De exemplu project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Un document poate conține cel mult 100 de câmpuri personalizate.',

@@ -673,6 +673,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'E karakternan aki no por a wòrdu poní den e PDF i ta falta aden:',
+  'Diagram (bron)': 'Diagrama (fuente)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Un PDF ku teksto berdadero: por selekshoná, buska i lesa na bos haltu, ku e kabesnan komo marka di página. Fórmula, diagrama mermaid i gráfiko ta aparesé komo fuente; e notanan ta patras.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Eksportá pa HTML òf LaTeX si nan mester ta den e dokumento.',
+  'Formule (bron)': 'Fórmula (fuente)',
+  'Grafiek (bron)': 'Gráfiko (fuente)',
   'Bijvoorbeeld project-id': 'Por ehèmpel project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Un dokumento por tin máksimo 100 kampo personalisá.',

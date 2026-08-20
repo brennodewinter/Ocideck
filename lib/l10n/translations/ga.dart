@@ -1669,6 +1669,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Níorbh fhéidir na carachtair seo a chlóchur sa PDF agus tá siad in easnamh ann:',
+  'Diagram (bron)': 'Léaráid (foinse)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF le fíorthéacs: is féidir é a roghnú, a chuardach agus a léamh os ard, agus na ceannteidil ina leabharmharcanna. Bíonn foirmlí, léaráidí mermaid agus cairteacha ann mar fhoinse; tá na nótaí ar chúl.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Easpórtáil go HTML nó LaTeX má tá siad le bheith sa cháipéis.',
+  'Formule (bron)': 'Foirmle (foinse)',
+  'Grafiek (bron)': 'Cairt (foinse)',
   'Bijvoorbeeld project-id': 'Mar shampla project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Ní féidir níos mó ná 100 réimse saincheaptha a bheith i ndoiciméad.',

@@ -1633,6 +1633,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Neid märke ei õnnestunud PDF-i laduda ja need puuduvad sealt:',
+  'Diagram (bron)': 'Diagramm (lähtekood)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Päris tekstiga PDF: seda saab valida, sealt otsida ja ette lugeda, pealkirjad on järjehoidjad. Valemid, mermaid-diagrammid ja graafikud on selles lähtekoodina; märkused on lõpus.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Ekspordi HTML- või LaTeX-vormingusse, kui need peavad dokumendis olema.',
+  'Formule (bron)': 'Valem (lähtekood)',
+  'Grafiek (bron)': 'Graafik (lähtekood)',
   'Bijvoorbeeld project-id': 'Näiteks project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokumendis võib olla kuni 100 kohandatud välja.',

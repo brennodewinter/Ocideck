@@ -2557,6 +2557,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Bu karakterler PDF\'e dizilemedi ve içinde eksikler:',
+  'Diagram (bron)': 'Diyagram (kaynak)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Gerçek metin içeren bir PDF: seçilebilir, aranabilir ve sesli okunabilir; başlıklar yer imi olur. Formüller, mermaid diyagramları ve grafikler kaynak olarak yer alır; notlar arkadadır.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Belgeye ait olmaları gerekiyorsa HTML veya LaTeX olarak dışa aktarın.',
+  'Formule (bron)': 'Formül (kaynak)',
+  'Grafiek (bron)': 'Grafik (kaynak)',
   'Bijvoorbeeld project-id': 'Örneğin project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Bir belge en fazla 100 özel alan içerebilir.',

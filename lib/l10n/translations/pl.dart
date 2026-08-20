@@ -1651,6 +1651,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Tych znaków nie udało się złożyć w pliku PDF i brakuje ich w nim:',
+  'Diagram (bron)': 'Diagram (źródło)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF z prawdziwym tekstem: do zaznaczania, przeszukiwania i odczytania na głos, z nagłówkami jako zakładkami. Wzory, diagramy mermaid i wykresy są w nim jako źródło; przypisy są na końcu.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Wyeksportuj do HTML-a lub LaTeX-a, jeśli mają być w dokumencie.',
+  'Formule (bron)': 'Wzór (źródło)',
+  'Grafiek (bron)': 'Wykres (źródło)',
   'Bijvoorbeeld project-id': 'Na przykład project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokument może zawierać maksymalnie 100 pól niestandardowych.',
