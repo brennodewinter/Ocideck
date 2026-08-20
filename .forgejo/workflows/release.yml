@@ -778,6 +778,39 @@ jobs:
           git commit -m "OciDeck $GITHUB_REF_NAME: update Homebrew cask"
           git push origin "HEAD:$DEFAULT_BRANCH"
 
+      # De stap hierboven slikt een mislukte clone bewust in (exit 0), zodat een
+      # onbereikbare tap een afgeronde release niet rood maakt. Daardoor las een
+      # groene job óók als "tap bijgewerkt" terwijl er niets gepusht was: een
+      # ingetrokken HOMEBREW_TAP_TOKEN bleef onzichtbaar tot iemand een oude
+      # versie installeerde. Deze stap leest de cask terug uit de tap — over
+      # dezelfde publieke URL die Homebrew zelf gebruikt — en toetst de versie
+      # tegen de tag, zodat "gepusht" gemeten wordt in plaats van aangenomen.
+      #
+      # Rood betekent hier "de tap vraagt aandacht", niet "de release is
+      # mislukt": de artefacten staan op dat moment al compleet gepubliceerd en
+      # geen enkele job hangt van deze af.
+      - name: Staat de tap op deze release?
+        if: steps.check.outputs.tap == 'true'
+        run: |
+          set -euo pipefail
+
+          if bash scripts/verify_homebrew_cask.sh "$GITHUB_REF_NAME"; then
+            exit 0
+          fi
+
+          {
+            echo "### ❌ Homebrew-cask NIET bijgewerkt"
+            echo ""
+            echo "De release-artefacten zijn compleet, maar"
+            echo "\`${HOMEBREW_TAP_REPOSITORY}\` staat **niet** op"
+            echo "\`${GITHUB_REF_NAME}\`. De push is niet geland — meestal is"
+            echo "\`HOMEBREW_TAP_TOKEN\` verlopen of ingetrokken."
+            echo ""
+            echo "Werk de cask met de hand bij:"
+            echo "\`scripts/update_homebrew_cask.sh ${GITHUB_REF_NAME} <tap>/Casks/ocideck.rb\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
   website-downloads:
     name: Website-downloads bijwerken
     # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de website-repo
