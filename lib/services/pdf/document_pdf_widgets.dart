@@ -114,12 +114,28 @@ class DocumentPdfWidgets {
         widgets.add(pw.SizedBox(height: style.headingSpaceBefore(block.level)));
       }
       final next = index + 1 < blocks.length ? blocks[index + 1] : null;
-      if (block is PdfHeadingBlock && next != null && _bindsToHeading(next)) {
-        widgets.add(_headingBoundToNext(block, next, tight: tight));
-        index++;
-      } else {
-        widgets.add(_widget(block, tight: tight));
+      if (block is PdfHeadingBlock && next != null) {
+        // Bij een lijst reist alleen het eerste punt mee. Een hele lijst binden
+        // is óók een kop die niet alleen achterblijft, maar dan schuift er een
+        // half blad wit voor in de plaats; één punt is genoeg om te laten zien
+        // dat de lijst hier begint.
+        final split = next is PdfListBlock ? _splitFirstItem(next) : null;
+        final bound = split?.first ?? next;
+        if (_bindsToHeading(bound)) {
+          widgets.add(_headingBoundToNext(block, bound, tight: tight));
+          index++;
+          final rest = split?.rest;
+          if (rest != null) {
+            widgets.add(_widget(rest, tight: tight));
+          }
+          final spacingAfterPair = _spaceAfter(next, tight: tight);
+          if (spacingAfterPair > 0) {
+            widgets.add(pw.SizedBox(height: spacingAfterPair));
+          }
+          continue;
+        }
       }
+      widgets.add(_widget(block, tight: tight));
       final spacing = _spaceAfter(block, tight: tight);
       if (spacing > 0) widgets.add(pw.SizedBox(height: spacing));
     }
@@ -176,13 +192,42 @@ class DocumentPdfWidgets {
         _spanTextLength(spans) <= _keepTogetherChars,
       PdfCodeBlock(:final code) => code.length <= _keepTogetherChars,
       PdfVerbatimBlock(:final source) => source.length <= _keepTogetherChars,
-      PdfListBlock(:final items) =>
-        items.length <= 5 && _listTextLength(items) <= _keepTogetherChars,
+      PdfListBlock(:final items) => _listTextLength(items) <= _keepTogetherChars,
       _ => false,
     };
   }
 
-  static const _keepTogetherChars = 1000;
+  /// Splitst het eerste punt van een lijst af, zodat alleen dát met de kop mee
+  /// hoeft te verhuizen. Geeft `null` terug bij een lijst van één punt — dan
+  /// valt er niets te splitsen.
+  static ({PdfListBlock first, PdfListBlock? rest})? _splitFirstItem(
+    PdfListBlock list,
+  ) {
+    if (list.items.isEmpty) return null;
+    final first = PdfListBlock(
+      [list.items.first],
+      ordered: list.ordered,
+      startNumber: list.startNumber,
+    );
+    if (list.items.length == 1) return (first: first, rest: null);
+    return (
+      first: first,
+      rest: PdfListBlock(
+        list.items.sublist(1),
+        ordered: list.ordered,
+        // Doortellen vanaf waar het eerste punt ophield; anders begint de rest
+        // van een genummerde lijst weer bij één.
+        startNumber: list.startNumber + 1,
+      ),
+    );
+  }
+
+  /// De grens waarboven een blok niet meer aan zijn kop wordt gebonden.
+  ///
+  /// Ruwweg vijf regels op A4. Groter binden mag van `MultiPage` best, maar dan
+  /// schuift er een gat van diezelfde hoogte voor de kop in de plaats — en een
+  /// half leeg blad is zichtbaarder dan een verweesde kop.
+  static const _keepTogetherChars = 400;
 
   static int _spanTextLength(List<PdfSpan> spans) =>
       spans.fold<int>(0, (sum, span) => sum + span.text.length);
