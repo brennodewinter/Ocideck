@@ -1723,6 +1723,26 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **`code` midden in een zin is weer te lezen, en een tabelbewerking gooit je
+  niet meer naar de bron.** Drie klachten uit één document. Een inline
+  `code`-stuk kreeg het vlak van een codeblok — in elk ingebouwd profiel bijna
+  zwart — terwijl de letter de kleur van de alinea hield; in LibreKAT werd dat
+  donkerblauw op bijna zwart, 1,6:1, een blokje waarin het woord niet meer te
+  lezen was. Het vlakje is nu een lichte tint van de tekstkleur zelf, en die
+  ligt per definitie tussen papier en letter, dus het kan in geen enkel profiel
+  meer misgaan. Schrijfvlak, documentweergave en HTML-uitvoer rekenen met
+  dezelfde som. Verder wierp een bewerking in een tabel het hele document terug
+  in de brontekst: een regeleinde in een cel of een getypte backslash worden als
+  `<br>` en `\\` in de tabel bewaard, en de visuele poort las dat als rauwe
+  HTML. Een tabel reist juist als één blok, dus zijn regels kunnen daar
+  helemaal niet stukgaan — ze worden nu overgeslagen. Een tabelregel die *niet*
+  bij zo'n blok hoort valt voortaan wél zichtbaar terug, in plaats van
+  stilletjes tot één regel te worden vermalen. En een afbeelding in een document
+  liet het schrijfvlak omvallen met een foutscherm en gooide onderweg de
+  alt-tekst weg; die reist nu als eigen blok met haar hele Markdown erin, en
+  onder de tekenaars ligt een vangnet zodat een onbekend blok nooit meer het
+  hele document kan meenemen.
+
 - **Een pentestrapport blijft in de visuele editor bewerkbaar.** De vijf
   rapportblokken — bevinding, ondertekening, bevindingenoverzicht, checklist en
   scopematrix — reizen in de visuele stand voortaan als onaantastbare blokken

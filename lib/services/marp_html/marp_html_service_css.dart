@@ -129,7 +129,8 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .document{background:#fff}
 .document h1{color:var(--ocideck-title-color,inherit)}
 .document pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;font-size:16px}
-.document code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.document code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace;background:rgba(26,26,26,.12)}
+.document pre code{background:transparent}
 .document blockquote{border-left:4px solid #ccc;margin:.6em 0;padding-left:16px;color:#555}
 .document th,.document td{border:1px solid #ccc;padding:6px 12px}
 .document-header,.document-footer{display:flex;align-items:center;gap:14px;min-height:42px;font-size:12px}
@@ -225,7 +226,12 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'
       'font-family:$codeFamily}'
       '.document pre code{color:${t.codeTextColor};background:transparent}'
-      '.document code{font-family:$codeFamily}'
+      // Inline `code` krijgt een tint van de tekstkleur, niet het codeblok-vlak
+      // erboven — dezelfde som als `AppTheme.inlineCodeBackground` in de app,
+      // want wat je op het scherm ziet hoort te zijn wat je afdrukt. `1F` is
+      // 12% van 255. De regel hierboven is specifieker, dus code *in* een blok
+      // blijft doorzichtig.
+      '.document code{font-family:$codeFamily;background:${t.textColor}1F}'
       '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
       'padding-left:16px;opacity:.85}'
       '.document th{background:${t.tableHeaderBackgroundColor};'

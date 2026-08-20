@@ -209,7 +209,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
                       row: r,
                       column: c,
                       linkColor: t.link,
-                      codeBackground: t.codeBg,
+                      codeBackground: t.inlineCodeBg,
                       style: _cellStyle(
                         t,
                         header: r == 0,

@@ -831,18 +831,29 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
 /// de tekst valt uiteen in tekens, de standknop zegt nog "Visueel", en niets
 /// wijst je erop dat je in de bron staat. Wie niet weet waar hij is, weet ook
 /// niet hoe hij terugkomt.
+///
+/// En een zichtbare balk moet ook *leesbaar* zijn. Hij lag op
+/// `theme.codeBackground` — het paneel van een codeblok, in elk ingebouwd
+/// profiel bijna zwart — met de gewone alineakleur erop: in Vigilis dezelfde
+/// kleur als de achtergrond, in LibreKAT donkerblauw op bijna zwart. De enige
+/// melding die vertelt wáár je bent, was daarmee onleesbaar; de balk stond er
+/// wel en zei niets. Nu draagt hij dezelfde tint als een `code`-woord — een
+/// vlak dat per definitie tussen papier en letter ligt, dus de tekst houdt het
+/// contrast van de alinea. Zie [AppTheme.inlineCodeBackground].
 Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
     decoration: BoxDecoration(
-      color: theme.codeBackground,
+      color: theme.inlineCodeBackground,
       borderRadius: BorderRadius.circular(6),
       border: Border.all(color: theme.border),
     ),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(Icons.code, size: 18, color: theme.accent),
+        // De inkt van de alinea, niet het accent: een accent kán geel zijn
+        // (Vigilis), en dat haalt op een licht vlak de 3:1 voor een icoon niet.
+        Icon(Icons.code, size: 18, color: theme.text),
         const SizedBox(width: 8),
         Expanded(
           child: Text(

@@ -3,6 +3,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
 import 'footnote_embed_syntax.dart';
+import 'image_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
 import 'pentest_block_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
@@ -20,6 +21,11 @@ import 'timeline_table_embed_syntax.dart';
 /// [EmbeddableToc] (`x-embed-toc`) — om dezelfde reden: hij is HTML, en zonder
 /// deze embed viel de hele visuele modus terug op brontekst zodra iemand een
 /// inhoudsopgave invoegde.
+///
+/// De **afbeelding** reist als inline-embed met haar hele markdown erin
+/// ([EmbeddableMarkdownImage]). De standaardweg van `markdown_quill` maakt er
+/// een `image`-embed van die alleen de bron draagt: die liet het schrijfvlak
+/// omvallen (geen bouwer voor dat type) én gooide de alt-tekst weg.
 ///
 /// Voetnoten idem, in twee delen: de verwijzing `[^1]` als inline-embed
 /// ([EmbeddableFootnoteRef]) en de definitie `[^1]: …` als blok-embed
@@ -48,8 +54,10 @@ class MarkdownQuillCodec {
       EmbeddableTableSyntax(),
     ],
     // Vóór de standaard-inline-syntaxen: `[^1]` begint met een `[`, en de
-    // link-regel zou er anders overheen lopen.
-    inlineSyntaxes: [FootnoteRefSyntax()],
+    // link-regel zou er anders overheen lopen. `![alt](bron)` staat er om
+    // dezelfde reden: de standaardweg maakt er een `image`-embed van die alleen
+    // de bron draagt — geen alt-tekst meer, en geen bouwer om hem te tekenen.
+    inlineSyntaxes: [FootnoteRefSyntax(), MarkdownImageSyntax()],
   );
 
   static final _mdToDelta = MarkdownToDelta(
@@ -62,6 +70,7 @@ class MarkdownQuillCodec {
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
+      EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.fromMdSyntax,
     },
   );
   static final _deltaToMd = DeltaToMarkdown(
@@ -72,6 +81,7 @@ class MarkdownQuillCodec {
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
+      EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.toMdSyntax,
     },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(

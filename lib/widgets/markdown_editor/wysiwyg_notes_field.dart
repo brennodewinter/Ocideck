@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
+import 'image_embed_builder.dart';
 import '../reader/document_markdown_view.dart'
     show
         documentHeadingSize,
@@ -124,7 +125,7 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
         fontFamily: 'monospace',
         fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
       ),
-      backgroundColor: theme.codeBackground,
+      backgroundColor: theme.inlineCodeBackground,
       radius: const Radius.circular(3),
     ),
     link: body.copyWith(
@@ -255,6 +256,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // inline-embed (het merkteken) en de definitie als blok-embed
                 // (de invulbare notenregel).
                 embedBuilders: [
+                  const ImageEmbedBuilder(),
                   TimelineTableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,
                   ),
@@ -267,6 +269,12 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const FootnoteRefEmbedBuilder(),
                   const FootnoteDefEmbedBuilder(),
                 ],
+                // Het vangnet. Een embed-type zonder bouwer wierp een
+                // `UnimplementedError` tijdens het tekenen van de regel, en dan
+                // is niet één alinea stuk maar het hele schrijfvlak: er staat
+                // een foutscherm in plaats van het document. Een gat hoort een
+                // rafeltje te zijn, geen dichtgeslagen deur.
+                unknownEmbedBuilder: const FallbackEmbedBuilder(),
                 autoFocus: false,
               ),
             ),
