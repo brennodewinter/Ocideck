@@ -1985,8 +1985,6 @@ const _dutchSourceAddPt = <String, String>{
   'Naar document converteren?': 'Converter em documento?',
   'Naar presentatie converteren?': 'Converter em apresentação?',
   'Nog een export': 'Outra exportação',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Para PDF: abra o HTML e imprima através do navegador (Guardar como PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Para o círculo mais alargado: tudo o que a verificação encontra é removido. O ficheiro recebe "-ocultados" no nome.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

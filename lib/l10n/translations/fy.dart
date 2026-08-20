@@ -992,8 +992,6 @@ const _dutchSourceAddFy = {
   'Naar document converteren?': 'Nei dokumint konvertearje?',
   'Naar presentatie converteren?': 'Nei presintaasje konvertearje?',
   'Nog een export': 'Noch in eksport',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Foar PDF: iepenje de HTML en print fia jo browser (Bewarje as PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Foar de bredere rûnte: alles wat de kontrôle fynt giet derút. It bestân krijt "-redigearre" yn de namme.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

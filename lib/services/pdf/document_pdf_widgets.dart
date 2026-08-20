@@ -45,7 +45,9 @@ List<PdfHeadingEntry> headingEntriesOf(List<PdfBlock> blocks) {
   final entries = <PdfHeadingEntry>[];
   for (final block in blocks) {
     if (block is! PdfHeadingBlock) continue;
-    entries.add(PdfHeadingEntry(entries.length, block.level, block.outlineText));
+    entries.add(
+      PdfHeadingEntry(entries.length, block.level, block.outlineText),
+    );
   }
   return entries;
 }
@@ -56,7 +58,6 @@ class DocumentPdfWidgets {
     required this.style,
     required this.fonts,
     required this.headings,
-    required this.tocTitle,
     required this.verbatimLabel,
     required this.maxImageHeight,
     this.images = const {},
@@ -69,10 +70,6 @@ class DocumentPdfWidgets {
 
   /// Alle koppen in leesvolgorde, voor de inhoudsopgave en de ankers.
   final List<PdfHeadingEntry> headings;
-
-  /// De kop bóven de inhoudsopgave. Komt van de aanroeper; deze laag kent geen
-  /// vertalingen.
-  final String tocTitle;
 
   /// De aanduiding boven een blok dat letterlijk wordt weergegeven — ook een
   /// vertaalde tekst van de aanroeper.
@@ -146,7 +143,8 @@ class DocumentPdfWidgets {
   /// marge om het blok heen — zie de kop van dit bestand.
   double _spaceAfter(PdfBlock block, {required bool tight}) => switch (block) {
     PdfHeadingBlock() => style.headingSpaceAfter,
-    PdfParagraphBlock() => tight ? style.bodyFontSize * 0.15 : style.blockSpacing,
+    PdfParagraphBlock() =>
+      tight ? style.bodyFontSize * 0.15 : style.blockSpacing,
     PdfPageBreakBlock() => 0,
     _ => style.blockSpacing,
   };
@@ -192,7 +190,8 @@ class DocumentPdfWidgets {
         _spanTextLength(spans) <= _keepTogetherChars,
       PdfCodeBlock(:final code) => code.length <= _keepTogetherChars,
       PdfVerbatimBlock(:final source) => source.length <= _keepTogetherChars,
-      PdfListBlock(:final items) => _listTextLength(items) <= _keepTogetherChars,
+      PdfListBlock(:final items) =>
+        _listTextLength(items) <= _keepTogetherChars,
       _ => false,
     };
   }
@@ -553,9 +552,7 @@ class DocumentPdfWidgets {
 
   pw.Widget _toc() => pw.Column(
     crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-    children: [
-      for (final entry in headings) _tocEntry(entry),
-    ],
+    children: [for (final entry in headings) _tocEntry(entry)],
   );
 
   /// Eén regel van de inhoudsopgave: de kop links, het bladzijdenummer rechts.

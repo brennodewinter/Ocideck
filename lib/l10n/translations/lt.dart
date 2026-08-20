@@ -1963,8 +1963,6 @@ const _dutchSourceAddLt = <String, String>{
   'Naar document converteren?': 'Konvertuoti į dokumentą?',
   'Naar presentatie converteren?': 'Konvertuoti į pateiktį?',
   'Nog een export': 'Dar vienas eksportas',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF: atverkite HTML ir spausdinkite per naršyklę (Įrašyti kaip PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Platesniam ratui: viskas, ką randa patikra, pašalinama. Failo pavadinime atsiranda "-paslėpta".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

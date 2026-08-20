@@ -995,8 +995,6 @@ const _dutchSourceAddFr = {
   'Naar document converteren?': 'Convertir en document ?',
   'Naar presentatie converteren?': 'Convertir en présentation ?',
   'Nog een export': 'Un autre export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pour le PDF : ouvrez le HTML et imprimez via votre navigateur (Enregistrer au format PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pour le cercle élargi : tout ce que le contrôle détecte est retiré. Le fichier reçoit « -caviardés » dans son nom.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

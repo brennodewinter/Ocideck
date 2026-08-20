@@ -1988,8 +1988,6 @@ const _dutchSourceAddGa = <String, String>{
   'Naar document converteren?': 'Tiontaigh go doiciméad?',
   'Naar presentatie converteren?': 'Tiontaigh go láithreoireacht?',
   'Nog een export': 'Easpórtáil eile',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Le haghaidh PDF: oscail an HTML agus priontáil trí do bhrabhsálaí (Sábháil mar PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Don chiorcal níos leithne: baintear gach rud a aimsíonn an seiceáil. Faigheann an comhad "-folaithe" ina ainm.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

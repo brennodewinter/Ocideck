@@ -1958,8 +1958,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Naar document converteren?': 'In Dokumänt umwandle?',
   'Naar presentatie converteren?': 'In Präsentation umwandle?',
   'Nog een export': 'Nochli en Export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Für PDF: mach s HTML uf und druck über dis Browser (Als PDF speichere).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Für de wiiteri Chreis: alles, was d Prüefig findt, chunt use. D Datei überchunt "-gschwärzt" im Name.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

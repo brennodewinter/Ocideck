@@ -1954,8 +1954,6 @@ const _dutchSourceAddLv = <String, String>{
   'Naar document converteren?': 'Pārvērst par dokumentu?',
   'Naar presentatie converteren?': 'Pārvērst par prezentāciju?',
   'Nog een export': 'Vēl viens eksports',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF iegūšanai: atveriet HTML un drukājiet caur pārlūku (Saglabāt kā PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Plašākam lokam: viss, ko atrod pārbaude, tiek noņemts. Faila nosaukumam pievieno "-aizklāti".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

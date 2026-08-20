@@ -1956,8 +1956,6 @@ const _dutchSourceAddDa = <String, String>{
   'Naar document converteren?': 'Konvertér til dokument?',
   'Naar presentatie converteren?': 'Konvertér til præsentation?',
   'Nog een export': 'Endnu en eksport',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'For PDF: åbn HTML\'en og udskriv via din browser (Gem som PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'For den bredere kreds: alt, hvad kontrollen finder, fjernes. Filen får "-redigeret" i navnet.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

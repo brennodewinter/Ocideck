@@ -4687,7 +4687,9 @@ itself.
 draws with one cannot be drawn here: **formulas, Mermaid diagrams and charts
 appear as their source**, in a monospaced block with a line above saying what it
 is. That is a deliberate choice over an empty space — whoever needs the diagram
-at least sees what should be there. If you need them rendered, export to HTML
+at least sees what should be there. A formula on its own lines (`$$…$$`) becomes
+such a block; a formula inside a sentence (`$…$`) stays in that sentence, exactly
+as you wrote it. If you need them rendered, export to HTML
 (which draws all three) or to LaTeX (which typesets the maths natively).
 **Footnotes go at the back**, not at the foot of the sheet: which note lands on
 which page only becomes clear after the layout, and by then the sheet is set. The

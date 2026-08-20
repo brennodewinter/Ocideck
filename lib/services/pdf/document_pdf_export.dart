@@ -33,14 +33,12 @@ import 'markdown_to_pdf_blocks.dart';
 /// vertalingen — hetzelfde patroon als `endnotesTitle` bij de LaTeX-export.
 class DocumentPdfLabels {
   const DocumentPdfLabels({
-    required this.tocTitle,
     required this.footnotesTitle,
     required this.mathLabel,
     required this.mermaidLabel,
     required this.chartLabel,
   });
 
-  final String tocTitle;
   final String footnotesTitle;
 
   /// De aanduiding boven een blok dat de PDF niet kan tekenen en daarom
@@ -103,10 +101,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     fallbackFont: fallbackFont,
   );
   final images = await _resolveImages(blocks, embedImage);
-  final logo = await _resolveLogo(
-    theme.effectiveDocumentLogoPath,
-    embedImage,
-  );
+  final logo = await _resolveLogo(theme.effectiveDocumentLogoPath, embedImage);
 
   final fields = {
     ...deck.documentFields,
@@ -118,7 +113,6 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     blocks,
     style: DocumentPdfStyle.fromTheme(theme),
     fonts: fonts,
-    tocTitle: labels.tocTitle,
     verbatimLabel: labels.labelFor,
     images: images,
     chrome: DocumentPdfChrome(

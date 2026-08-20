@@ -1972,8 +1972,6 @@ const _dutchSourceAddLa = <String, String>{
   'Naar document converteren?': 'In documentum convertere?',
   'Naar presentatie converteren?': 'In praesentationem convertere?',
   'Nog een export': 'Alia exportatio',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pro PDF: HTML aperi et per navigatrum tuum imprime (Ut PDF serva).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pro ampliore circulo: omnia quae examen invenit auferuntur. Fasciculus "-obliterata" in nomine accipit.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

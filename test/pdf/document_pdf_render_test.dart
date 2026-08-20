@@ -13,7 +13,6 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart';
-import 'package:ocideck/services/pdf/document_pdf_blocks.dart';
 import 'package:ocideck/services/pdf/document_pdf_fonts.dart';
 import 'package:ocideck/services/pdf/document_pdf_renderer.dart';
 import 'package:ocideck/services/pdf/document_pdf_style.dart';
@@ -24,8 +23,9 @@ import 'pdf_text_probe.dart';
 void main() {
   /// Het gebundelde terugvalfont, rechtstreeks van schijf: `rootBundle` is
   /// schilwerk en deze laag is met opzet Flutter-vrij.
-  ByteData fallbackFont() =>
-      File('assets/fonts/Roboto-Variable.ttf').readAsBytesSync().buffer.asByteData();
+  ByteData fallbackFont() => File(
+    'assets/fonts/Roboto-Variable.ttf',
+  ).readAsBytesSync().buffer.asByteData();
 
   Future<Uint8List> render(
     String markdown, {
@@ -42,7 +42,6 @@ void main() {
       theme.fontFamily,
       fallbackFont: fallbackFont(),
     ),
-    tocTitle: 'Inhoud',
     verbatimLabel: (kind) => 'bron: ${kind.name}',
     chrome: chrome,
     pageSize: pageSize,
@@ -146,22 +145,21 @@ void main() {
 
   test('een tabel levert zijn cellen af', () async {
     final text = pdfVisibleText(
-      await render(
-        '| Maatregel | Score |\n| --- | ---: |\n| Logging | 61 |\n',
-      ),
+      await render('| Maatregel | Score |\n| --- | ---: |\n| Logging | 61 |\n'),
     );
     expect(text, contains('Maatregel'));
     expect(text, contains('Logging'));
     expect(text, contains('61'));
   });
 
-  test('een mermaid-blok komt als bron in het bestand, niet als niets', () async {
-    final text = pdfVisibleText(
-      await render('```mermaid\ngraph TD;\n```\n'),
-    );
-    expect(text, contains('bron: mermaid'));
-    expect(text, contains('graph TD;'));
-  });
+  test(
+    'een mermaid-blok komt als bron in het bestand, niet als niets',
+    () async {
+      final text = pdfVisibleText(await render('```mermaid\ngraph TD;\n```\n'));
+      expect(text, contains('bron: mermaid'));
+      expect(text, contains('graph TD;'));
+    },
+  );
 
   test('een onvindbare afbeelding laat zijn beschrijving achter', () async {
     // Een leeg gat laat de lezer denken dat er niets hoorde te staan.
@@ -185,15 +183,18 @@ void main() {
     // alinea geen lelijke opmaak maar een `PdfException` en een export die niets
     // oplevert.
 
-    test('een alinea van meer dan een blad loopt door op het volgende', () async {
-      final long = List.generate(
-        220,
-        (i) => 'zin nummer $i met voldoende woorden erin',
-      ).join(', ');
-      final bytes = await render('$long.\n');
-      expect(pdfPageCount(bytes), greaterThan(1));
-      expect(pdfVisibleText(bytes), contains('zin nummer 210'));
-    });
+    test(
+      'een alinea van meer dan een blad loopt door op het volgende',
+      () async {
+        final long = List.generate(
+          220,
+          (i) => 'zin nummer $i met voldoende woorden erin',
+        ).join(', ');
+        final bytes = await render('$long.\n');
+        expect(pdfPageCount(bytes), greaterThan(1));
+        expect(pdfVisibleText(bytes), contains('zin nummer 210'));
+      },
+    );
 
     test('een alinea zonder spaties breekt de export niet af', () async {
       // Niets om op af te breken: het ergste geval voor een tekstzetter.
@@ -210,9 +211,7 @@ void main() {
 
     test('een lange tabel loopt door en herhaalt zijn koprij', () async {
       final rows = List.generate(120, (i) => '| rij $i | $i |').join('\n');
-      final bytes = await render(
-        '| Naam | Nummer |\n| --- | --- |\n$rows\n',
-      );
+      final bytes = await render('| Naam | Nummer |\n| --- | --- |\n$rows\n');
       expect(pdfPageCount(bytes), greaterThan(1));
       final text = pdfVisibleText(bytes);
       expect(text, contains('rij 110'));
@@ -228,12 +227,15 @@ void main() {
       expect(pdfVisibleText(bytes), contains('punt 140'));
     });
 
-    test('een kop bindt niet aan een blok dat te groot is om te binden', () async {
-      // De binding houdt een kop bij zijn tekst, maar een gebonden paar kan niet
-      // breken. Een lange alinea hoort daarom níet gebonden te worden.
-      final long = List.generate(200, (i) => 'woord$i').join(' ');
-      final bytes = await render('## Kop\n\n$long\n');
-      expect(pdfVisibleText(bytes), contains('Kop'));
-    });
+    test(
+      'een kop bindt niet aan een blok dat te groot is om te binden',
+      () async {
+        // De binding houdt een kop bij zijn tekst, maar een gebonden paar kan niet
+        // breken. Een lange alinea hoort daarom níet gebonden te worden.
+        final long = List.generate(200, (i) => 'woord$i').join(' ');
+        final bytes = await render('## Kop\n\n$long\n');
+        expect(pdfVisibleText(bytes), contains('Kop'));
+      },
+    );
   });
 }

@@ -1957,8 +1957,6 @@ const _dutchSourceAddId = <String, String>{
   'Naar document converteren?': 'Konversi ke dokumen?',
   'Naar presentatie converteren?': 'Konversi ke presentasi?',
   'Nog een export': 'Ekspor lagi',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Untuk PDF: buka HTML lalu cetak lewat browser Anda (Simpan sebagai PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Untuk kalangan yang lebih luas: semua yang ditemukan pemeriksaan dihapus. Berkas mendapat "-diredaksi" pada namanya.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

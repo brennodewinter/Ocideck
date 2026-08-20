@@ -33,7 +33,6 @@ class DocumentPdfFonts {
     required this.italic,
     required this.boldItalic,
     required this.mono,
-    required this.monoBold,
     this.fallback = const [],
     this.fallbackCoverage = const {},
   });
@@ -43,7 +42,6 @@ class DocumentPdfFonts {
   final pw.Font italic;
   final pw.Font boldItalic;
   final pw.Font mono;
-  final pw.Font monoBold;
 
   /// De fonts waar een teken op terugvalt dat de standaardsnede niet kent.
   final List<pw.Font> fallback;
@@ -83,7 +81,6 @@ class DocumentPdfFonts {
           ? pw.Font.timesBoldItalic()
           : pw.Font.helveticaBoldOblique(),
       mono: pw.Font.courier(),
-      monoBold: pw.Font.courierBold(),
       fallback: fallbacks,
       fallbackCoverage: coverage,
     );

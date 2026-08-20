@@ -20,22 +20,32 @@ void main() {
 
   group('DocumentPdfFonts', () {
     test('een schreefletter in het thema levert een schreefletter op', () {
-      expect(DocumentPdfFonts.forFamily('EB Garamond').base.fontName,
-          startsWith('Times'));
-      expect(DocumentPdfFonts.forFamily('Lora').base.fontName,
-          startsWith('Times'));
+      expect(
+        DocumentPdfFonts.forFamily('EB Garamond').base.fontName,
+        startsWith('Times'),
+      );
+      expect(
+        DocumentPdfFonts.forFamily('Lora').base.fontName,
+        startsWith('Times'),
+      );
     });
 
     test('een schreefloze letter levert er ook een op', () {
-      expect(DocumentPdfFonts.forFamily('Arial').base.fontName,
-          startsWith('Helvetica'));
-      expect(DocumentPdfFonts.forFamily('Inter').base.fontName,
-          startsWith('Helvetica'));
+      expect(
+        DocumentPdfFonts.forFamily('Arial').base.fontName,
+        startsWith('Helvetica'),
+      );
+      expect(
+        DocumentPdfFonts.forFamily('Inter').base.fontName,
+        startsWith('Helvetica'),
+      );
     });
 
     test('de naam wordt zonder hoofdlettergevoeligheid gelezen', () {
-      expect(DocumentPdfFonts.forFamily('  eb garamond ').base.fontName,
-          startsWith('Times'));
+      expect(
+        DocumentPdfFonts.forFamily('  eb garamond ').base.fontName,
+        startsWith('Times'),
+      );
     });
 
     test('vet en cursief zijn echte sneden, geen nagebootste', () {

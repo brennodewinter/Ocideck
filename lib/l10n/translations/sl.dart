@@ -1956,8 +1956,6 @@ const _dutchSourceAddSl = <String, String>{
   'Naar document converteren?': 'Pretvoriti v dokument?',
   'Naar presentatie converteren?': 'Pretvoriti v predstavitev?',
   'Nog een export': 'Še en izvoz',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Za PDF: odprite HTML in natisnite prek brskalnika (Shrani kot PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Za širši krog: vse, kar preverjanje najde, se odstrani. Datoteka dobi "-prekrito" v imenu.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

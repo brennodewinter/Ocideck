@@ -58,7 +58,8 @@ class DocumentPdfChrome {
   final bool logoAtRight;
   final double logoHeight;
 
-  bool get hasHeader => headerText.trim().isNotEmpty || (logo != null && logoAtTop);
+  bool get hasHeader =>
+      headerText.trim().isNotEmpty || (logo != null && logoAtTop);
 
   bool get hasFooter =>
       footerText.trim().isNotEmpty ||
@@ -76,7 +77,6 @@ Future<Uint8List> buildDocumentPdf(
   List<PdfBlock> blocks, {
   required DocumentPdfStyle style,
   required DocumentPdfFonts fonts,
-  required String tocTitle,
   required String Function(PdfVerbatimKind kind) verbatimLabel,
   Map<String, Uint8List> images = const {},
   DocumentPdfChrome chrome = const DocumentPdfChrome(),
@@ -99,7 +99,6 @@ Future<Uint8List> buildDocumentPdf(
       style: style,
       fonts: fonts,
       headings: headings,
-      tocTitle: tocTitle,
       verbatimLabel: verbatimLabel,
       images: images,
       chrome: chrome,
@@ -116,7 +115,6 @@ Future<Uint8List> buildDocumentPdf(
     style: style,
     fonts: fonts,
     headings: headings,
-    tocTitle: tocTitle,
     verbatimLabel: verbatimLabel,
     images: images,
     chrome: chrome,
@@ -133,7 +131,6 @@ Future<Uint8List> _render(
   required DocumentPdfStyle style,
   required DocumentPdfFonts fonts,
   required List<PdfHeadingEntry> headings,
-  required String tocTitle,
   required String Function(PdfVerbatimKind kind) verbatimLabel,
   required Map<String, Uint8List> images,
   required DocumentPdfChrome chrome,
@@ -168,7 +165,6 @@ Future<Uint8List> _render(
     style: style,
     fonts: fonts,
     headings: headings,
-    tocTitle: tocTitle,
     verbatimLabel: verbatimLabel,
     // Ruim onder de bladspiegel: de banden boven en onder eten er nog van, en
     // een afbeelding die net niet past kan `MultiPage` nergens kwijt.
@@ -181,8 +177,12 @@ Future<Uint8List> _render(
   document.addPage(
     pw.MultiPage(
       pageTheme: pageTheme,
-      header: chrome.hasHeader ? (context) => _band(context, chrome, style, top: true) : null,
-      footer: chrome.hasFooter ? (context) => _band(context, chrome, style, top: false) : null,
+      header: chrome.hasHeader
+          ? (context) => _band(context, chrome, style, top: true)
+          : null,
+      footer: chrome.hasFooter
+          ? (context) => _band(context, chrome, style, top: false)
+          : null,
       build: (context) => builder.build(blocks),
     ),
   );

@@ -991,8 +991,6 @@ const _dutchSourceAddPap = {
   'Naar document converteren?': 'Konvertí na dokumento?',
   'Naar presentatie converteren?': 'Konvertí na presentashon?',
   'Nog een export': 'Un otro eksportashon',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pa PDF: habri e HTML i imprimí via bo browser (Warda komo PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pa e sírkulo mas hanchu: tur loke e chekeo haña ta bai afó. E dokumento ta haña "-redaktá" den su nòmber.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

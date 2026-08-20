@@ -992,8 +992,6 @@ const _dutchSourceAddDe = {
   'Naar document converteren?': 'In Dokument umwandeln?',
   'Naar presentatie converteren?': 'In Präsentation umwandeln?',
   'Nog een export': 'Weiterer Export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Für PDF: Öffne das HTML und drucke über deinen Browser (Als PDF speichern).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Für den weiteren Kreis: alles, was die Prüfung findet, wird entfernt. Die Datei erhält "-geschwärzt" im Namen.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

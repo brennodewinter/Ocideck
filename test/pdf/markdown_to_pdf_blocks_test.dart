@@ -155,6 +155,59 @@ void main() {
       expect(chart.kind, PdfVerbatimKind.chart);
     });
 
+    group('display-wiskunde', () {
+      test('een formule op eigen regels wordt een letterlijk blok', () {
+        final block =
+            markdownToPdfBlocks(
+                  'Tekst.\n\n\$\$E = mc^2\$\$\n\nMeer tekst.\n',
+                )[1]
+                as PdfVerbatimBlock;
+        expect(block.kind, PdfVerbatimKind.math);
+        expect(block.source, 'E = mc^2');
+      });
+
+      test('een formule over meerdere regels blijft heel', () {
+        final block =
+            markdownToPdfBlocks(
+                  '\$\$\n'
+                  '\\int_0^1 x\\,dx = \\frac{1}{2}\n'
+                  '\$\$\n',
+                ).single
+                as PdfVerbatimBlock;
+        expect(block.kind, PdfVerbatimKind.math);
+        // De backslashes staan er nog: de parser stript die vóór leestekens, en
+        // juist de bron is het enige wat de PDF van een formule kan tonen.
+        expect(block.source, contains(r'\int_0^1'));
+        expect(block.source, contains(r'x\,dx'));
+      });
+
+      test('wiskunde middenin een regel blijft gewone tekst', () {
+        // Alleen een formule die op eigen regels staat is een blok; \$…\$ in een
+        // zin hoort in die zin thuis.
+        final blocks = markdownToPdfBlocks('De massa is \$m\$ in de formule.');
+        expect(blocks.single, isA<PdfParagraphBlock>());
+      });
+
+      test('dollartekens in een codeblok blijven code', () {
+        final block =
+            markdownToPdfBlocks('```sh\n\$\$ is het proces-id\n```\n').single
+                as PdfCodeBlock;
+        expect(block.language, 'sh');
+        expect(block.code, contains(r'$$'));
+      });
+
+      test('een formule die nooit sluit wordt niet opgegeten', () {
+        // Stil verdwijnen is in een export het ergste wat er kan gebeuren.
+        final blocks = markdownToPdfBlocks('\$\$\nx = 1\n');
+        final text = blocks
+            .whereType<PdfParagraphBlock>()
+            .expand((b) => b.spans)
+            .map((s) => s.text)
+            .join();
+        expect(text, contains('x = 1'));
+      });
+    });
+
     test('de inhoudsopgave-marker wordt een eigen blok', () {
       final blocks = markdownToPdfBlocks('# Titel\n\n<!-- toc -->\n\nTekst.\n');
       expect(blocks[1], isA<PdfTocBlock>());

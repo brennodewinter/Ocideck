@@ -6,6 +6,8 @@
 // Flutter-vrij zijn (zie `lib/services/pdf/`): het laden van een asset en het
 // opzoeken van een vertaling zijn juist wél schilwerk, en horen dus hier.
 
+import 'package:flutter/material.dart'
+    show ScaffoldMessengerState, SnackBar, Text;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 import '../../l10n/app_localizations.dart';
@@ -30,7 +32,6 @@ Future<ByteData?> loadPdfFallbackFont() async {
 
 /// De teksten die de PDF-lagen zelf niet kennen, in de taal van de interface.
 DocumentPdfLabels documentPdfLabels(AppLocalizations l10n) => DocumentPdfLabels(
-  tocTitle: l10n.d('Inhoud'),
   footnotesTitle: l10n.d('Noten'),
   // Eerlijk benoemen wat er staat: niet het diagram maar de bron ervan. Een
   // PDF kent geen JavaScript, dus wat de HTML-export tekent kan hier alleen
@@ -53,3 +54,24 @@ String unsupportedCharactersMessage(AppLocalizations l10n, Set<int> runes) {
       '$shown$suffix. '
       '${l10n.d('Exporteer naar HTML of LaTeX als ze in het document horen.')}';
 }
+
+/// Meld dat de PDF is geschreven maar tekens mist.
+///
+/// Het bestand staat er wél — daarom een waarschuwing en geen fout. Wat níet mag
+/// gebeuren is dat de gebruiker het zelf moet ontdekken: een teken dat geen
+/// enkele snede kent verdwijnt uit de tekstlaag, en dus ook uit zoeken,
+/// kopiëren en de voorleessoftware.
+///
+/// Neemt de messenger en niet een `BuildContext`: de aanroeper pakt hem vóór het
+/// wachten op de export vast, want daarna is de context niet meer te vertrouwen
+/// en zou de waarschuwing stil wegvallen.
+void warnAboutUnsupportedCharacters(
+  ScaffoldMessengerState messenger,
+  AppLocalizations l10n,
+  Set<int> runes,
+) => messenger.showSnackBar(
+  SnackBar(
+    content: Text(unsupportedCharactersMessage(l10n, runes)),
+    duration: const Duration(seconds: 8),
+  ),
+);

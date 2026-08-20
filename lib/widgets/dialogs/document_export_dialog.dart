@@ -301,11 +301,7 @@ const _formatOptions = [
     Icons.description_outlined,
   ),
   _FormatOption(DocumentExportFormat.html, 'HTML', Icons.public_outlined),
-  _FormatOption(
-    DocumentExportFormat.pdf,
-    'PDF',
-    Icons.picture_as_pdf_outlined,
-  ),
+  _FormatOption(DocumentExportFormat.pdf, 'PDF', Icons.picture_as_pdf_outlined),
   _FormatOption(
     DocumentExportFormat.latex,
     'LaTeX (.tex)',

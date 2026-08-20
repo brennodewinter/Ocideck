@@ -1977,8 +1977,6 @@ const _dutchSourceAddMt = <String, String>{
   'Naar document converteren?': 'Tikkonverti f\'dokument?',
   'Naar presentatie converteren?': 'Tikkonverti f\'preżentazzjoni?',
   'Nog een export': 'Esportazzjoni oħra',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Għall-PDF: iftaħ l-HTML u ipprintja permezz tal-browser tiegħek (Issejvja bħala PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Għaċ-ċirku usa\': dak kollu li ssib il-verifika jitneħħa. Il-fajl jieħu "-irrediġuti" fl-isem.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

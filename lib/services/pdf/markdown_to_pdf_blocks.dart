@@ -40,6 +40,8 @@ List<PdfBlock> markdownToPdfBlocks(
   final notes = documentFootnotes(markdown);
   var source = stripFootnoteDefinitions(markdown);
   source = _stripTimelineMarkers(source);
+  final math = _protectDisplayMath(source);
+  source = math.source;
   for (final note in notes) {
     source = source.replaceAll(
       '[^${note.label}]',
@@ -66,7 +68,10 @@ List<PdfBlock> markdownToPdfBlocks(
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
   final nodes = document.parse(withToc);
-  final converter = _PdfBlockConverter(chapterPageBreak: chapterPageBreak);
+  final converter = _PdfBlockConverter(
+    chapterPageBreak: chapterPageBreak,
+    displayMath: math.blocks,
+  );
   final blocks = converter.blocks(nodes);
 
   if (notes.isEmpty) return blocks;
@@ -78,6 +83,81 @@ List<PdfBlock> markdownToPdfBlocks(
 const _tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
 
 String _footnoteSentinel(int number) => 'OCIDECKFOOTNOTE${number}END';
+
+String _mathSentinel(int index) => 'OCIDECKDISPLAYMATH${index}END';
+
+final _mathSentinelPattern = RegExp(r'^OCIDECKDISPLAYMATH(\d+)END$');
+
+/// Haalt de display-formules (`$$…$$`) uit de bron en zet er een merkteken voor
+/// in de plaats.
+///
+/// Waarom vóór de parse: de `markdown`-package kent `$` niet als opmaak, maar
+/// hij strípt wél de backslash vóór een leesteken (`\,` wordt `,`). Wat er dan
+/// uit komt is niet meer de formule die de auteur schreef, en juist de bron is
+/// hier het enige wat de PDF kan tonen — hij kan de formule zelf niet zetten.
+/// Dezelfde reden waarom `markdown_to_latex.dart` zijn `_MathProtector` heeft.
+///
+/// Blijft van codeblokken af: een ` ``` `-omheining met dollartekens erin is
+/// code, geen formule.
+({String source, List<String> blocks}) _protectDisplayMath(String source) {
+  final lines = source.replaceAll('\r\n', '\n').split('\n');
+  final output = <String>[];
+  final blocks = <String>[];
+  final buffer = <String>[];
+  var inFence = false;
+  var collecting = false;
+
+  void close(String tail) {
+    if (tail.trim().isNotEmpty) buffer.add(tail);
+    blocks.add(buffer.join('\n').trim());
+    output.add(_mathSentinel(blocks.length - 1));
+    buffer.clear();
+    collecting = false;
+  }
+
+  for (final line in lines) {
+    final trimmed = line.trim();
+    if (!collecting &&
+        (trimmed.startsWith('```') || trimmed.startsWith('~~~'))) {
+      inFence = !inFence;
+      output.add(line);
+      continue;
+    }
+    if (inFence) {
+      output.add(line);
+      continue;
+    }
+    if (collecting) {
+      if (trimmed.endsWith(r'$$')) {
+        close(trimmed.substring(0, trimmed.length - 2));
+      } else {
+        buffer.add(line);
+      }
+      continue;
+    }
+    if (trimmed.startsWith(r'$$')) {
+      final rest = trimmed.substring(2);
+      if (rest.trim().endsWith(r'$$') && rest.trim().length >= 2) {
+        // Alles op één regel.
+        buffer.add(rest.trim().substring(0, rest.trim().length - 2));
+        close('');
+      } else {
+        collecting = true;
+        if (rest.trim().isNotEmpty) buffer.add(rest);
+      }
+      continue;
+    }
+    output.add(line);
+  }
+  if (collecting) {
+    // Een formule die nooit gesloten werd is geen formule. Geef de regels terug
+    // zoals de auteur ze schreef in plaats van ze stil op te eten.
+    output
+      ..add(r'$$')
+      ..addAll(buffer);
+  }
+  return (source: output.join('\n'), blocks: blocks);
+}
 
 final _footnoteSentinelPattern = RegExp(r'OCIDECKFOOTNOTE(\d+)END');
 
@@ -95,7 +175,9 @@ String _stripTimelineMarkers(String source) => source.replaceAll(
 /// De notenlijst achterin: een kop, en per noot een alinea die met zijn nummer
 /// begint.
 List<PdfBlock> _endnoteBlocks(List<Footnote> notes, String title) {
-  final blocks = <PdfBlock>[PdfHeadingBlock(2, [PdfSpan(title)], title)];
+  final blocks = <PdfBlock>[
+    PdfHeadingBlock(2, [PdfSpan(title)], title),
+  ];
   for (final note in notes) {
     blocks.add(
       PdfParagraphBlock([
@@ -121,7 +203,13 @@ List<PdfSpan> _inlineOf(String markdown) {
 
 /// Loopt de Markdown-boom af en bouwt er blokken van.
 class _PdfBlockConverter {
-  _PdfBlockConverter({required this.chapterPageBreak});
+  _PdfBlockConverter({
+    required this.chapterPageBreak,
+    this.displayMath = const [],
+  });
+
+  /// De beschermde display-formules, op volgorde van hun merkteken.
+  final List<String> displayMath;
 
   /// Of elk hoofdstuk (een H1) op een nieuw blad begint — de instelling
   /// *Nieuw hoofdstuk op een nieuwe pagina*.
@@ -197,7 +285,9 @@ class _PdfBlockConverter {
     // Een alinea die alleen uit een afbeelding bestaat is in een document een
     // eigen blok, geen regel tekst met een plaatje erin.
     final children = node.children ?? const [];
-    final images = children.whereType<md.Element>().where((e) => e.tag == 'img');
+    final images = children.whereType<md.Element>().where(
+      (e) => e.tag == 'img',
+    );
     if (images.length == 1 && _isOnlyChild(children)) {
       out.add(_image(images.first));
       return;
@@ -206,6 +296,18 @@ class _PdfBlockConverter {
     if (spans.length == 1 && spans.first.text.trim() == _tocSentinel) {
       out.add(const PdfTocBlock());
       return;
+    }
+    if (spans.length == 1) {
+      final math = _mathSentinelPattern.firstMatch(spans.first.text.trim());
+      if (math != null) {
+        final index = int.parse(math.group(1)!);
+        if (index < displayMath.length) {
+          out.add(
+            PdfVerbatimBlock(displayMath[index], kind: PdfVerbatimKind.math),
+          );
+          return;
+        }
+      }
     }
     if (spans.every((s) => s.text.trim().isEmpty)) return;
     out.add(PdfParagraphBlock(spans));
@@ -385,7 +487,9 @@ class _PdfBlockConverter {
       switch (node.tag) {
         case 'strong':
         case 'b':
-          out.addAll(spans(node.children ?? const [], inherited.copyWith(bold: true)));
+          out.addAll(
+            spans(node.children ?? const [], inherited.copyWith(bold: true)),
+          );
         case 'em':
         case 'i':
           out.addAll(
@@ -433,8 +537,16 @@ class _PdfBlockConverter {
       if (match.start > index) {
         out.add(inherited.copyWith(text: text.substring(index, match.start)));
       }
+      // Bewust een vers stuk in plaats van `copyWith`: het merkteken mag de
+      // link en de vaste letterafstand van zijn omgeving niet erven, en
+      // `copyWith` kan een veld wel zetten maar niet wíssen.
       out.add(
-        inherited.copyWith(text: match.group(1)!, superscript: true, href: null),
+        PdfSpan(
+          match.group(1)!,
+          superscript: true,
+          bold: inherited.bold,
+          italic: inherited.italic,
+        ),
       );
       index = match.end;
     }

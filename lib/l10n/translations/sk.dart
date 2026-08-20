@@ -1962,8 +1962,6 @@ const _dutchSourceAddSk = <String, String>{
   'Naar document converteren?': 'Konvertovať na dokument?',
   'Naar presentatie converteren?': 'Konvertovať na prezentáciu?',
   'Nog een export': 'Ďalší export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pre PDF: otvorte HTML a vytlačte cez prehliadač (Uložiť ako PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pre širší okruh: všetko, čo kontrola nájde, sa odstráni. Súbor dostane "-začiernené" v názve.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

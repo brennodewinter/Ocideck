@@ -1971,8 +1971,6 @@ const _dutchSourceAddUk = <String, String>{
   'Naar document converteren?': 'Перетворити на документ?',
   'Naar presentatie converteren?': 'Перетворити на презентацію?',
   'Nog een export': 'Ще один експорт',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Для PDF: відкрийте HTML і надрукуйте через браузер (Зберегти як PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Для ширшого кола: усе, що знаходить перевірка, вилучається. Файл отримує "-відредаговано" в назві.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

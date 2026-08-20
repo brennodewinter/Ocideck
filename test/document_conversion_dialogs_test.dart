@@ -26,7 +26,9 @@ Widget _app(Widget home) => MaterialApp(
 
 void main() {
   group('DocumentExportDialog', () {
-    testWidgets('toont de eerlijke bewoording en biedt PDF aan', (tester) async {
+    testWidgets('toont de eerlijke bewoording en biedt PDF aan', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _app(
           Builder(

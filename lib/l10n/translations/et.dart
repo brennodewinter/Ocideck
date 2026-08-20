@@ -1950,8 +1950,6 @@ const _dutchSourceAddEt = <String, String>{
   'Naar document converteren?': 'Kas teisendada dokumendiks?',
   'Naar presentatie converteren?': 'Kas teisendada esitluseks?',
   'Nog een export': 'Veel üks eksport',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF-i jaoks: ava HTML ja prindi brauseri kaudu (Salvesta PDF-ina).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Laiemale ringile: kõik, mille kontroll leiab, eemaldatakse. Faili nimele lisatakse "-redigeeritud".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

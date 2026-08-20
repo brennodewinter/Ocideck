@@ -1957,8 +1957,6 @@ const _dutchSourceAddCs = <String, String>{
   'Naar document converteren?': 'Převést na dokument?',
   'Naar presentatie converteren?': 'Převést na prezentaci?',
   'Nog een export': 'Další export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pro PDF: otevřete HTML a vytiskněte přes prohlížeč (Uložit jako PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pro širší okruh: vše, co kontrola najde, se odstraní. Soubor dostane "-začerněno" v názvu.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

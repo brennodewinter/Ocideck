@@ -4730,7 +4730,9 @@ afbeeldingen ingesloten in het bestand zelf.
 daarmee tekent kan hier niet getekend worden: **formules, Mermaid-diagrammen en
 grafieken staan erin als hun bron**, in een blok met vaste letterafstand en een
 regel erboven die zegt wat het is. Dat is een bewuste keuze boven een leeg vlak —
-wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan. Wil je ze
+wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan. Een formule
+op eigen regels (`$$…$$`) wordt zo'n blok; een formule middenin een zin (`$…$`)
+blijft in die zin staan, precies zoals je hem schreef. Wil je ze
 wél gerenderd, exporteer dan naar HTML (dat tekent alle drie) of naar LaTeX (dat
 de wiskunde zelf zet). **Voetnoten staan achterin**, niet onderaan het blad:
 welke noot op welke bladzijde landt blijkt pas ná de opmaak, en dan staat het vel

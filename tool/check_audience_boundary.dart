@@ -99,6 +99,17 @@ const Map<String, Surface> _registry = {
     'Krijgt een fabriek die per doelgroepprofiel een bundel oplevert, zodat de '
     'bron er ook hier niet in komt.',
   ),
+  'lib/services/document_export_service.dart::_writeDocumentPdf': Surface(
+    SurfaceKind.audience,
+    'De PDF-tak van diezelfde documentexport, apart gezet omdat de schrijffunctie '
+    'anders over haar lengteplafond ging. Dezelfde kant van de grens en om '
+    'dezelfde reden: hij neemt een ExportBundle, en de inhoud die hij zet komt '
+    'uit bundle.audience.deck. Extra scherp hier, want een PDF ziet er dicht uit '
+    'terwijl hij dat niet is — de tekstlaag is met een gewone lezer uit te '
+    'pakken, dus een geredigeerd gegeven dat er tóch in belandt is even leesbaar '
+    'als in de .md. Dat is waarom de fail-closed test niet op de blokken meet '
+    'maar op de geleverde bytes (test/pdf/document_pdf_export_privacy_test.dart).',
+  ),
   'lib/services/document_export_service.dart::writeDocumentExport': Surface(
     SurfaceKind.audience,
     'De documentmodus-export (§11.2): schrijft het geprojecteerde `.md` of het '

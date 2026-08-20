@@ -37,7 +37,6 @@ void main() {
       '| Jan Jansen | $bsn |\n';
 
   const labels = DocumentPdfLabels(
-    tocTitle: 'Inhoud',
     footnotesTitle: 'Noten',
     mathLabel: 'formule',
     mermaidLabel: 'diagram',
@@ -70,38 +69,44 @@ void main() {
     expect(text, contains('Jan Jansen'));
   });
 
-  test('de melding over ontbrekende tekens blijft leeg bij gewone tekst', () async {
-    final bundle = await buildDocumentExportBundle(
-      '# Verslag\n\nGewone Nederlandse tekst met accenten: café, Zürich.\n',
-      projectPath: null,
-      profile: PrivacyExportProfile.full,
-      ownIdentity: OwnIdentity.empty,
-      regions: defaultPrivacyRegions,
-      disabledRules: const {},
-      markdownService: MarkdownService(),
-    );
-    final result = await buildDocumentExportPdf(bundle, labels: labels);
-    expect(result.isComplete, isTrue);
-    expect(result.unsupportedCharacters, isEmpty);
-  });
+  test(
+    'de melding over ontbrekende tekens blijft leeg bij gewone tekst',
+    () async {
+      final bundle = await buildDocumentExportBundle(
+        '# Verslag\n\nGewone Nederlandse tekst met accenten: café, Zürich.\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final result = await buildDocumentExportPdf(bundle, labels: labels);
+      expect(result.isComplete, isTrue);
+      expect(result.unsupportedCharacters, isEmpty);
+    },
+  );
 
-  test('tekens die nergens in staan worden geteld, niet stil verzwegen', () async {
-    // Zonder terugvalfont reikt de zetter tot Latin-1. Japans valt daarbuiten en
-    // verdwijnt uit de tekstlaag; dat hoort de schil te kunnen melden.
-    final bundle = await buildDocumentExportBundle(
-      '# Verslag\n\n日本語 in de tekst.\n',
-      projectPath: null,
-      profile: PrivacyExportProfile.full,
-      ownIdentity: OwnIdentity.empty,
-      regions: defaultPrivacyRegions,
-      disabledRules: const {},
-      markdownService: MarkdownService(),
-    );
-    final result = await buildDocumentExportPdf(bundle, labels: labels);
-    expect(result.isComplete, isFalse);
-    expect(
-      result.unsupportedCharacters.map(String.fromCharCode).join(),
-      contains('日'),
-    );
-  });
+  test(
+    'tekens die nergens in staan worden geteld, niet stil verzwegen',
+    () async {
+      // Zonder terugvalfont reikt de zetter tot Latin-1. Japans valt daarbuiten en
+      // verdwijnt uit de tekstlaag; dat hoort de schil te kunnen melden.
+      final bundle = await buildDocumentExportBundle(
+        '# Verslag\n\n日本語 in de tekst.\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final result = await buildDocumentExportPdf(bundle, labels: labels);
+      expect(result.isComplete, isFalse);
+      expect(
+        result.unsupportedCharacters.map(String.fromCharCode).join(),
+        contains('日'),
+      );
+    },
+  );
 }

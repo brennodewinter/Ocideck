@@ -1960,8 +1960,6 @@ const _dutchSourceAddHu = <String, String>{
   'Naar document converteren?': 'Átalakítás dokumentummá?',
   'Naar presentatie converteren?': 'Átalakítás bemutatóvá?',
   'Nog een export': 'Újabb exportálás',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF-hez: nyisd meg a HTML-t, és nyomtass a böngésződből (Mentés PDF-ként).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'A szélesebb körnek: minden eltűnik, amit az ellenőrzés talál. A fájl neve "-kitakarva" toldalékot kap.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

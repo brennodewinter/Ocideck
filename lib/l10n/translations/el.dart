@@ -1984,8 +1984,6 @@ const _dutchSourceAddEl = <String, String>{
   'Naar document converteren?': 'Μετατροπή σε έγγραφο;',
   'Naar presentatie converteren?': 'Μετατροπή σε παρουσίαση;',
   'Nog een export': 'Άλλη μια εξαγωγή',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Για PDF: ανοίξτε το HTML και εκτυπώστε μέσω του browser σας (Αποθήκευση ως PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Για τον ευρύτερο κύκλο: αφαιρείται ό,τι βρίσκει ο έλεγχος. Το αρχείο αποκτά "-αποκρυμμένα" στο όνομα.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

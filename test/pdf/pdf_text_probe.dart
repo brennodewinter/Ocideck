@@ -75,7 +75,5 @@ Iterable<String> _inflatedStreams(Uint8List bytes) sync* {
 }
 
 /// De ontsnappingen die een PDF-tekenreeks kent, terug naar gewone tekens.
-String _unescape(String value) => value
-    .replaceAll(r'\(', '(')
-    .replaceAll(r'\)', ')')
-    .replaceAll(r'\\', r'\');
+String _unescape(String value) =>
+    value.replaceAll(r'\(', '(').replaceAll(r'\)', ')').replaceAll(r'\\', r'\');

@@ -1956,8 +1956,6 @@ const _dutchSourceAddFi = <String, String>{
   'Naar document converteren?': 'Muunnetaanko asiakirjaksi?',
   'Naar presentatie converteren?': 'Muunnetaanko esitykseksi?',
   'Nog een export': 'Uusi vienti',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF:ää varten: avaa HTML ja tulosta selaimesi kautta (Tallenna PDF-muodossa).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Laajemmalle piirille: kaikki, mitä tarkistus löytää, poistetaan. Tiedosto saa nimeensä "-peitetty".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

@@ -1973,8 +1973,6 @@ const _dutchSourceAddRo = <String, String>{
   'Naar document converteren?': 'Conversie în document?',
   'Naar presentatie converteren?': 'Conversie în prezentare?',
   'Nog een export': 'Încă un export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pentru PDF: deschide HTML-ul și tipărește din browser (Salvează ca PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pentru cercul mai larg: tot ce găsește verificarea este eliminat. Fișierul primește "-redactate" în nume.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

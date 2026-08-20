@@ -989,8 +989,6 @@ const _dutchSourceAddEs = {
   'Naar document converteren?': '¿Convertir a documento?',
   'Naar presentatie converteren?': '¿Convertir a presentación?',
   'Nog een export': 'Otra exportación',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Para PDF: abre el HTML e imprime desde tu navegador (Guardar como PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Para el círculo más amplio: se elimina todo lo que encuentra la comprobación. El archivo recibe "-redactados" en el nombre.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

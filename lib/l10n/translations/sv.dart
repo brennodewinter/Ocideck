@@ -1955,8 +1955,6 @@ const _dutchSourceAddSv = <String, String>{
   'Naar document converteren?': 'Konvertera till dokument?',
   'Naar presentatie converteren?': 'Konvertera till presentation?',
   'Nog een export': 'Ännu en export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'För PDF: öppna HTML:en och skriv ut via din webbläsare (Spara som PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'För den bredare kretsen: allt som kontrollen hittar tas bort. Filen får "-maskade" i namnet.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
