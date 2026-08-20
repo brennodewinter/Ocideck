@@ -153,6 +153,61 @@ void main() {
   });
 
   test(
+    'een smalle kolom in een tabel met proza stapelt niet verticaal',
+    () async {
+      // Reproduceert de RWM-zorgplichttabel: een prozakolom die op één regel
+      // breder is dan het blad, met daarnaast een smalle oordeel-kolom. Onder
+      // de oude `IntrinsicColumnWidth`-standaard perste de prozakolom de
+      // smalle kolom samen tot één teken per regel, en kwam "Onvoldoende" als
+      // "O n v o l d e n d e" in het bestand te staan — niet als één woord.
+      const prose =
+          'Een zin van ruim tweehonderd tekens die de prozakolom op één regel '
+          'breder maakt dan de hele bladspiegel, zodat de smalle kolommen '
+          'onder de oude standaard werden samengeperst tot één teken per '
+          'regel en de tekst verticaal in de cel kwam te staan in plaats van '
+          'horizontaal, wat de tabel onleesbaar maakte voor de lezer.';
+      final text = pdfVisibleText(
+        await render(
+          '| Nr | Oordeel | Toelichting |\n'
+          '| --- | --- | --- |\n'
+          '| 1 | Onvoldoende | $prose |\n',
+        ),
+      );
+      // Het woord staat heel in de tekstlaag, niet opgebroken per teken.
+      expect(
+        text,
+        contains('Onvoldoende'),
+        reason:
+            'De smalle kolom is op haar inhoud gezet, niet samengeperst: '
+            '"$text"',
+      );
+      // En de prozakolom is niet verdwenen — ze flext en breekt netjes af.
+      expect(text, contains('onleesbaar'));
+    },
+  );
+
+  test('een logo in de band staat als afbeelding in het bestand', () async {
+    // Het logo mag niet op zijn natuurlijke pixelmaat (uitgerekt) neergezet
+    // worden, maar het moet wél in het bestand staan. Deze rooktest bewaakt
+    // de aanwezigheid; de maat volgt uit de width-driven plaatsing.
+    final logo = File('assets/images/vigilis-logo.png').readAsBytesSync();
+    final bytes = await render(
+      'Tekst op het blad.',
+      chrome: DocumentPdfChrome(
+        headerText: 'Vigilis',
+        logo: logo,
+        logoAtTop: true,
+        logoAtRight: false,
+        logoWidth: 56,
+      ),
+    );
+    expect(latin1.decode(bytes.sublist(0, 5)), '%PDF-');
+    // Een ingebedde afbeelding draagt een Image-XObject.
+    expect(latin1.decode(bytes), contains('/Subtype/Image'));
+    expect(pdfPageCount(bytes), 1);
+  });
+
+  test(
     'een mermaid-blok komt als bron in het bestand, niet als niets',
     () async {
       final text = pdfVisibleText(await render('```mermaid\ngraph TD;\n```\n'));

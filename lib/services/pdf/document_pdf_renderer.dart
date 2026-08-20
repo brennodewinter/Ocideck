@@ -41,7 +41,7 @@ class DocumentPdfChrome {
     this.logo,
     this.logoAtTop = false,
     this.logoAtRight = true,
-    this.logoHeight = 24,
+    this.logoWidth = 24,
   });
 
   final String headerText;
@@ -56,7 +56,13 @@ class DocumentPdfChrome {
   final Uint8List? logo;
   final bool logoAtTop;
   final bool logoAtRight;
-  final double logoHeight;
+
+  /// Hoe breed het logo op het blad staat, in punten. De hoogte volgt uit de
+  /// beeldverhouding (zie [_logo]); een breed logo wordt dus niet op zijn
+  /// natuurlijke pixelmaat neergezet, wat het vóór deze maat op de band deed —
+  /// uitgerekt en korrelig. Spiegelt de HTML-export, die de logo-grootte ook
+  /// als breedte gebruikt met een afgeleide hoogtegrens.
+  final double logoWidth;
 
   bool get hasHeader =>
       headerText.trim().isNotEmpty || (logo != null && logoAtTop);
@@ -297,7 +303,7 @@ pw.Widget _band(
   );
   final children = <pw.Widget>[
     if (showLogo && !chrome.logoAtRight)
-      _logo(logo, chrome.logoHeight)
+      _logo(logo, chrome.logoWidth)
     else
       pw.SizedBox(),
     pw.Expanded(child: pw.Text(text, style: textStyle)),
@@ -317,7 +323,7 @@ pw.Widget _band(
     if (showLogo && chrome.logoAtRight)
       pw.Padding(
         padding: const pw.EdgeInsets.only(left: 8),
-        child: _logo(logo, chrome.logoHeight),
+        child: _logo(logo, chrome.logoWidth),
       ),
   ];
   return pw.Container(
@@ -344,5 +350,15 @@ pw.Widget _band(
   );
 }
 
-pw.Widget _logo(Uint8List bytes, double height) =>
-    pw.Image(pw.MemoryImage(bytes), height: height, fit: pw.BoxFit.contain);
+pw.Widget _logo(Uint8List bytes, double width) => pw.Image(
+  pw.MemoryImage(bytes),
+  // Zowel breedte als hoogte begrensd, met `contain`: het logo schaalt binnen
+  // een `width` × `width`-kader naar zijn beeldverhouding. Een breed logo
+  // pakt de breedte als bindende maat (hoogte = width / verhouding), een
+  // vierkant logo de hoogte. Vóór deze begrenzing kreeg het logo in een
+  // `pw.Row` een onbegrensde breedte, viel het terug op zijn natuurlijke
+  // pixelmaat (250 × 59 pt, 72 ppi) en stond het uitgerekt over de band.
+  width: width,
+  height: width,
+  fit: pw.BoxFit.contain,
+);
