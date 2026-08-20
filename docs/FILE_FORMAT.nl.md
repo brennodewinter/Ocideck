@@ -502,6 +502,7 @@ deze velden (met standaardwaarden):
 | `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
 | `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
 | `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
+| `documentHeadingColor` | `null` | Kleur van de koppen van een document, alle niveaus. `null` houdt de verdeling die er altijd was: een hoofdstukkop volgt `textColor`, een subkop `accentColor`. |
 | `documentBandTextColor` | `null` | Tekstkleur van kop en footer. `null` volgt `textColor`. |
 | `documentBandBackgroundColor` | `null` | Achtergrondkleur van kop en footer. `null` volgt `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Toon het paginanummer rechtsonder op documentpagina's. |

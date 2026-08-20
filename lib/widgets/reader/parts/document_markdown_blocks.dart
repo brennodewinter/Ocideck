@@ -334,9 +334,12 @@ class _Theme {
          height: kDocumentBodyLineHeight,
          color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
        ),
-       heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),
+       heading = _profileColor(
+         profile?.effectiveDocumentHeadingColor,
+         theme.colorScheme.onSurface,
+       ),
        subheading = _profileColor(
-         profile?.accentColor,
+         profile?.effectiveDocumentSubheadingColor,
          theme.colorScheme.onSurface,
        ),
        marker = _profileColor(

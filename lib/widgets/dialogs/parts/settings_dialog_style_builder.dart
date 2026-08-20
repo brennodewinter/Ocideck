@@ -337,6 +337,14 @@ class _DocumentStyleBuilder {
           _sectionTitle(l10n.d('Tekst')),
           const SizedBox(height: 8),
           ..._documentFontSizeSettings(l10n),
+          _styleColorField(
+            l10n.d('Kop'),
+            _themeProfile.effectiveDocumentHeadingColor,
+            (value) => _themeProfile = _themeProfile.copyWith(
+              documentHeadingColor: value,
+            ),
+            key: const Key('document-heading-color'),
+          ),
           _presentationStyleDivider(l10n.d('Logo')),
           ..._documentLogoSettings(l10n),
           _presentationStyleDivider(l10n.d('Koptekst')),

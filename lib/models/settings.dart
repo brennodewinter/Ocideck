@@ -143,6 +143,13 @@ class ThemeProfile {
   final double documentBodyFontSize;
   final String documentHeaderText;
   final String documentFooterText;
+
+  /// De kleur van de koppen ván een document. `null` houdt de verdeling die er
+  /// altijd was: een hoofdstukkop volgt de tekstkleur, een subkop het accent.
+  /// Wie hem zet, krijgt één kopkleur voor alle niveaus — het geval waarvoor
+  /// hij bestaat is een rapport met rustige broodtekst en koppen in de
+  /// huisstijlkleur, en dat kon met de bestaande velden niet.
+  final String? documentHeadingColor;
   final String? documentBandTextColor;
   final String? documentBandBackgroundColor;
   final bool documentShowPageNumbers;
@@ -203,6 +210,7 @@ class ThemeProfile {
     this.documentBodyFontSize = kDocumentDefaultBodyFontSize,
     this.documentHeaderText = '',
     this.documentFooterText = '',
+    this.documentHeadingColor,
     this.documentBandTextColor,
     this.documentBandBackgroundColor,
     this.documentShowPageNumbers = false,
@@ -362,6 +370,7 @@ class ThemeProfile {
     double? documentBodyFontSize,
     String? documentHeaderText,
     String? documentFooterText,
+    String? documentHeadingColor,
     String? documentBandTextColor,
     String? documentBandBackgroundColor,
     bool? documentShowPageNumbers,
@@ -422,6 +431,7 @@ class ThemeProfile {
       documentBodyFontSize: documentBodyFontSize ?? this.documentBodyFontSize,
       documentHeaderText: documentHeaderText ?? this.documentHeaderText,
       documentFooterText: documentFooterText ?? this.documentFooterText,
+      documentHeadingColor: documentHeadingColor ?? this.documentHeadingColor,
       documentBandTextColor:
           documentBandTextColor ?? this.documentBandTextColor,
       documentBandBackgroundColor:
@@ -480,6 +490,7 @@ class ThemeProfile {
       'documentBodyFontSize': documentBodyFontSize,
       'documentHeaderText': documentHeaderText,
       'documentFooterText': documentFooterText,
+      'documentHeadingColor': documentHeadingColor,
       'documentBandTextColor': documentBandTextColor,
       'documentBandBackgroundColor': documentBandBackgroundColor,
       'documentShowPageNumbers': documentShowPageNumbers,
@@ -573,6 +584,9 @@ class ThemeProfile {
       ),
       documentHeaderText: json['documentHeaderText'] as String? ?? '',
       documentFooterText: json['documentFooterText'] as String? ?? '',
+      documentHeadingColor: json['documentHeadingColor'] == null
+          ? null
+          : _color(json['documentHeadingColor'], '#222222'),
       documentBandTextColor: json['documentBandTextColor'] == null
           ? null
           : _color(json['documentBandTextColor'], '#222222'),
@@ -617,6 +631,13 @@ class ThemeProfile {
   double get documentFontScale =>
       clampDocumentBodyFontSize(documentBodyFontSize) /
       kDocumentDefaultBodyFontSize;
+
+  /// De kopkleur van een document, met de oude verdeling als terugval: een
+  /// hoofdstukkop volgt de tekstkleur, een subkop het accent. Zo verandert er
+  /// niets aan een profiel dat de kleur niet zet.
+  String get effectiveDocumentHeadingColor => documentHeadingColor ?? textColor;
+  String get effectiveDocumentSubheadingColor =>
+      documentHeadingColor ?? accentColor;
 
   String get effectiveDocumentBandTextColor =>
       documentBandTextColor ?? textColor;

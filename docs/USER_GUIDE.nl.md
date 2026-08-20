@@ -4648,7 +4648,13 @@ staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
 presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
 en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
 ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
-de maat van het presentatielogo. Daarnaast stel je de positie, **koptekst**,
+de maat van het presentatielogo. Daar staat ook de **kopkleur** van een document.
+Zet je die niet, dan blijft het zoals het altijd was: een hoofdstukkop (`#`) volgt
+de tekstkleur en een subkop (`##` en dieper) het accent. Zet je hem wél, dan
+dragen álle kopniveaus die ene kleur — het geval waarvoor hij bestaat is een
+rapport met rustige, donkere broodtekst en koppen in de huisstijlkleur, en dat
+kon met alleen 'tekst' en 'accent' niet: wie de broodtekst temperde, kreeg een
+grijze `#` boven een gekleurde `##`. Daarnaast stel je de positie, **koptekst**,
 **footertekst** en **paginanummers** in. Kop en footer ondersteunen meerdere regels en
 inline Markdown (`**vet**`, `*cursief*`, `` `code` ``, `~~doorhalen~~` en links).
 Voor beide banden kies je samen een eigen tekst- en achtergrondkleur; zolang je die

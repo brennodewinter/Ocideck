@@ -46,6 +46,7 @@ void main() {
         documentLogoSize: 224,
         documentHeaderText: 'Bestuurlijk rapport',
         documentFooterText: 'Vigilis · Vertrouwelijk',
+        documentHeadingColor: '#003399',
         documentBandTextColor: '#F8FAFC',
         documentBandBackgroundColor: '#172033',
         documentShowPageNumbers: true,
@@ -59,6 +60,7 @@ void main() {
       expect(back.effectiveDocumentLogoSize, 224);
       expect(back.documentHeaderText, 'Bestuurlijk rapport');
       expect(back.documentFooterText, 'Vigilis · Vertrouwelijk');
+      expect(back.documentHeadingColor, '#003399');
       expect(back.documentBandTextColor, '#F8FAFC');
       expect(back.documentBandBackgroundColor, '#172033');
       expect(back.documentShowPageNumbers, isTrue);
@@ -84,6 +86,8 @@ void main() {
     expect(legacy.effectiveDocumentLogoSize, legacy.logoSize);
     expect(legacy.documentHeaderText, isEmpty);
     expect(legacy.documentFooterText, isEmpty);
+    expect(legacy.documentHeadingColor, isNull);
+    expect(legacy.effectiveDocumentHeadingColor, legacy.textColor);
     expect(legacy.documentBandTextColor, isNull);
     expect(legacy.documentBandBackgroundColor, isNull);
     expect(legacy.effectiveDocumentBandTextColor, legacy.textColor);
@@ -214,6 +218,7 @@ void main() {
       'sectionBackgroundColor',
       'codeBackgroundColor',
       'codeTextColor',
+      'documentHeadingColor',
       'documentBandTextColor',
       'documentBandBackgroundColor',
     ];

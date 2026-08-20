@@ -1723,6 +1723,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een document kan zijn koppen een eigen kleur geven.** Uit een echt
+  bestuurlijk rapport: de broodtekst stond in de huisstijlkleur — EU-blauw over
+  vijftien pagina's proza — en dat leest zwaar. Temperen kon niet: een
+  hoofdstukkop (`#`) volgde de tékstkleur en een subkop (`##`) het accent, dus
+  wie de broodtekst donkergrijs maakte kreeg een grijze `#` boven een blauwe
+  `##`, en dat leest als een vergissing. De documentstijl heeft nu een
+  **kopkleur**. Niet gezet verandert er niets — dan geldt de oude verdeling.
+  Gezet dragen álle kopniveaus die ene kleur, zodat een rapport rustige tekst
+  met koppen in de huisstijl kan hebben. De kleur reist in het stijlprofiel, dus
+  hij geldt in het schrijfvlak, de Pagina's-weergave én de HTML-export. Meteen
+  ook een verschil tussen scherm en druk weggewerkt: de app kleurde élke subkop
+  met het accent, de export alleen `h2` — een `###` viel in de export stil terug
+  op de bodykleur.
+
 - **Een documentstijl met een kop- of voetband liet de front matter als tekst in
   het document staan.** De band wordt vóór het strippen aan de body geplakt,
   dus stond `---` niet meer op teken 0 en zag de strip hem niet: `marp: true` en
