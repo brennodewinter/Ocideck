@@ -31,6 +31,15 @@ on:
 permissions:
   contents: write
 
+# De tag-push en de actieve dispatch vanaf de forge (windows-ophalen) kunnen
+# allebei een run starten. Zonder groep bouwen die twee tegelijk en uploaden ze
+# om beurten dezelfde twee assets. In de wachtrij zetten (géén cancel: een
+# geannuleerde run laat op de tag precies de conclusie achter die windows-ophalen
+# als vals doodvonnis kan lezen).
+concurrency:
+  group: windows-release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   windows:
     name: Build Windows
@@ -38,7 +47,21 @@ jobs:
     # van een voorgebouwd pack, dus de MSVC-compatibiliteit die de windows-2022
     # pin noodzakelijk maakte is niet meer van toepassing (#870).
     runs-on: windows-latest
+    # De rc1-les in één regel: een stap die op een venster wacht dat niemand kan
+    # wegklikken liep 1u52m door en had zonder ingrijpen de volle zes uur
+    # standaard opgemaakt. De bouw zelf duurt ~20-35 min; 90 is ruim.
+    timeout-minutes: 90
     steps:
+      # workflow_dispatch accepteert elke ref. Alles hieronder leidt zijn
+      # bestandsnamen af uit "${GITHUB_REF_NAME#v}"; op main gedraaid zou dat
+      # een neprelease "main" op de spiegel zetten. Dezelfde wacht staat aan de
+      # forgekant.
+      - name: Alleen op een tag
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          echo "Deze workflow hoort alleen op een v*-tag te draaien (nu: $GITHUB_REF)." >&2
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -111,8 +134,15 @@ jobs:
             throw "sha256 van $bestand klopt niet: $hash (verwacht $env:INNOSETUP_SHA256)"
           }
           Write-Host "sha256 geverifieerd: $bestand"
-          Start-Process -FilePath ".\$bestand" -Wait -NoNewWindow -ArgumentList `
+          $p = Start-Process -FilePath ".\$bestand" -Wait -NoNewWindow -PassThru -ArgumentList `
             '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-'
+          # Start-Process werpt zelf niets bij een niet-nul kind, en juist
+          # /SUPPRESSMSGBOXES onderdrukt de foutvensters — zonder deze controle
+          # leest een mislukte installatie als geslaagd en faalt pas ISCC,
+          # met "bestaat niet" als dwaalspoor.
+          if ($p.ExitCode -ne 0) {
+            throw "Inno Setup-installatie faalde met exitcode $($p.ExitCode)."
+          }
           # Waar ISCC.exe landt verschilt per editie en per major (6 en 7 staan
           # naast elkaar), dus dat pad staat hier niet nóg een keer: het script
           # zoekt het zelf en meldt duidelijk als het er niet is. Eén plek die
