@@ -73,10 +73,21 @@ a line above saying what it is — rather than leave an empty space, whoever nee
 the diagram at least sees what should be there. It happens in four cases: a
 chart whose numbers live in an external `data/*.json` that did not travel; a
 diagram or formula the renderer could not produce; a drawing the PDF's own SVG
-reader cannot parse; and the **web build**, which has no hidden renderer for
-Mermaid or formulas. Export to HTML for all three rendered in a browser, or to
-LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from "always
-shows source" once the drawings landed.)*
+reader cannot parse; and **Windows and Linux**, where the hidden renderer that
+draws Mermaid and formulas has no implementation. Charts are drawn in Dart and do
+travel on every platform. Export to HTML for all three rendered in a browser, or
+to LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from
+"always shows source" once the drawings landed, and corrected again once the
+platform limits were actually measured.)*
+
+## Exporting a document does not work on the web build
+
+Not the PDF and not the other three formats either. The browser file dialog
+cannot be asked for a save location the way the desktop one can — it wants the
+bytes up front — so the export reports that it did not succeed and leaves the
+document untouched. It used to hang on a spinner instead, saying nothing. Making
+it work would mean handing the finished bytes to the browser as a download; that
+is a separate change. *(Added 2026-08-20.)*
 
 ## A document's PDF is set in a standard face, not in your document's font
 

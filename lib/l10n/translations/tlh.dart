@@ -1617,6 +1617,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'QaptaHbe\' ngeH. ghItlhlIj choHlu\'be\'; yInIDqa\' pagh latlh Segh yIwIv.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF ghajbogh mu\'mey teH: DawIvlaH, DanejlaH, DalaDlaH je; per moHaqmey. mI\'mey, mermaid nabmey, HaSta je luqawmoH; ghItlhmey retlh luDab.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

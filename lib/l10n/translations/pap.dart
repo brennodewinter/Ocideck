@@ -673,6 +673,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'E eksportashon no a logra. Bo dokumento no a kambia; purba atrobe òf skohe un otro formato.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Un PDF ku teksto berdadero: por selekshoná, buska i lesa na bos haltu, ku e kabesnan komo marka di página. Fórmula, diagrama mermaid i gráfiko ta wòrdu dibuhá; e notanan ta patras.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

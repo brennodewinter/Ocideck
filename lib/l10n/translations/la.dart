@@ -1654,6 +1654,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Exportatio non successit. Documentum tuum immutatum est; rursus conare vel aliam formam elige.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF cum vero textu: eligi, quaeri et recitari potest, titulis pro indicibus. Formulae, diagrammata mermaid et descriptiones depinguntur; notae in fine sunt.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

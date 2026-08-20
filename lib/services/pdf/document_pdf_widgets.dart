@@ -20,6 +20,7 @@ import 'dart:typed_data';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../models/settings.dart' show TableBorderStyle;
+import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_style.dart';
@@ -495,6 +496,12 @@ class DocumentPdfWidgets {
   /// niet kent zou de héle export met een uitzondering afbreken — één diagram dat
   /// tegenvalt mag nooit het document kosten. Wat hier struikelt valt terug op de
   /// bron, precies zoals een diagram dat helemaal niet gerenderd kon worden.
+  ///
+  /// Breder dan `on Exception`, en met reden: een ontleder die op iets
+  /// onverwachts stuit werpt net zo goed een `Error` (een index buiten bereik,
+  /// een toestand die niet kan). Voor de uitkomst maakt dat niets uit — het
+  /// diagram is er niet — dus mag het onderscheid hier niet bepalen of de export
+  /// wel of niet stukloopt.
   pw.Widget? _graphic(PdfVerbatimBlock block) {
     final graphic = graphics[block.source.trim()];
     if (graphic == null) return null;
@@ -532,7 +539,8 @@ class DocumentPdfWidgets {
           fit: pw.BoxFit.contain,
         ),
       );
-    } on Exception {
+    } catch (error) {
+      logWarning('DocumentPdf: SVG kon niet geplaatst worden', error);
       return null;
     }
   }

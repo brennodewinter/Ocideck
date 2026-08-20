@@ -1639,6 +1639,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Eksporten lykkedes ikke. Dit dokument er uændret; prøv igen, eller vælg et andet format.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'En PDF med rigtig tekst: kan markeres, søges i og læses højt, med overskrifterne som bogmærker. Formler, mermaid-diagrammer og grafer bliver tegnet; noterne står bagest.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

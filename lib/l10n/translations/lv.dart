@@ -1638,6 +1638,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Eksportēšana neizdevās. Jūsu dokuments nav mainīts; mēģiniet vēlreiz vai izvēlieties citu formātu.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF ar īstu tekstu: to var iezīmēt, tajā var meklēt un to var nolasīt skaļi, bet virsraksti kļūst par grāmatzīmēm. Formulas, mermaid diagrammas un grafiki tiek uzzīmēti; piezīmes ir beigās.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

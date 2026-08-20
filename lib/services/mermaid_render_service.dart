@@ -65,6 +65,20 @@ class MermaidRenderService {
   int _renderSeq = 0;
   Completer<String?>? _renderCompleter;
 
+  /// Of er op dit platform überhaupt gerenderd kan worden.
+  ///
+  /// De verborgen WebView bestaat alleen waar `webview_flutter` een
+  /// implementatie heeft: Android, iOS en macOS. **Windows en Linux hebben er
+  /// geen** (zie `pubspec.lock`: android, wkwebview, web — meer niet), en dan is
+  /// `WebViewPlatform.instance` null. Zonder deze vraag zou een render daar de
+  /// host laten monteren, zou die een `WebViewController` bouwen, en zou dát
+  /// gooien — een documentexport die eerst gewoon lukte, sloopt dan op één
+  /// diagram.
+  ///
+  /// Op web is er een eigen weg (JS-interop in de app-pagina zelf), dus daar is
+  /// het antwoord ja zonder dat er een platform-instantie hoeft te zijn.
+  bool get isAvailable => kIsWeb || WebViewPlatform.instance != null;
+
   /// Ask the UI layer to mount the offstage WebView host.
   ///
   /// Ná het frame, niet erin. De aanroep komt uit `initState` van
@@ -242,6 +256,11 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
   }
 
   Future<String?> _enqueue(String source, _RenderKind kind) {
+    // Eerst de vraag of hier gerenderd kán worden: zo niet, dan meteen niets
+    // teruggeven in plaats van een host te laten monteren die niet bestaat.
+    // De aanroeper valt dan netjes terug — een diagram in zijn brontekst, geen
+    // stukgelopen export.
+    if (!isAvailable) return SynchronousFuture(null);
     // Op web is er geen WebView-host: het web-pad (JS-interop) draait mermaid
     // rechtstreeks in de app-pagina, dus `hostNeeded` blijft daar bewust uit.
     if (!kIsWeb) requestHost();

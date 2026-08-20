@@ -1646,6 +1646,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Eksportuoti nepavyko. Jūsų dokumentas nepakeistas; bandykite dar kartą arba pasirinkite kitą formatą.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF su tikru tekstu: jį galima žymėti, jame ieškoti ir jį perskaityti balsu, o antraštės tampa žymelėmis. Formulės, mermaid diagramos ir grafikai yra nupiešiami; pastabos yra gale.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
