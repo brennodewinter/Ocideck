@@ -117,6 +117,48 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
     h1: heading(1),
     h2: heading(2),
     h3: heading(3),
+    h4: heading(4),
+    h5: heading(5),
+    h6: heading(6),
+    // Blokcitaten: dezelfde gestileerde container als de lezer — een gekleurde
+    // balk links, een getinte achtergrond, en de citaattekst een tint lager.
+    // Quill's standaard is een grijze streep met vervaagde tekst; dat leest als
+    // een ander ontwerp, niet als dezelfde tekst in een andere stand.
+    quote: DefaultTextBlockStyle(
+      body.copyWith(color: theme.quoteText),
+      HorizontalSpacing(14, 12),
+      doc ? const VerticalSpacing(8, 20) : const VerticalSpacing(6, 0),
+      const VerticalSpacing(6, 2),
+      BoxDecoration(
+        color: theme.quoteBg,
+        border: Border(left: BorderSide(color: theme.quoteBar, width: 3)),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(6),
+          bottomRight: Radius.circular(6),
+        ),
+      ),
+    ),
+    // Codeblokken: hetzelfde omrande vlak als de lezer — achtergrond, rand,
+    // afgeronde hoeken, monospace op 13,5 pt. Quill's standaard is een licht-
+    // grijs vlak met blauwe tekst; dat is een andere kleur en een andere maat
+    // dan de weergave naast de bron.
+    code: DefaultTextBlockStyle(
+      body.copyWith(
+        fontFamily: 'monospace',
+        fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+        fontSize: 13.5,
+        height: 1.45,
+        color: theme.codeText,
+      ),
+      HorizontalSpacing(12, 12),
+      doc ? const VerticalSpacing(12, 24) : const VerticalSpacing(6, 0),
+      VerticalSpacing.zero,
+      BoxDecoration(
+        color: theme.codeBackground,
+        border: Border.all(color: theme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
     bold: body.copyWith(fontWeight: FontWeight.bold),
     italic: body.copyWith(fontStyle: FontStyle.italic),
     strikeThrough: body.copyWith(decoration: TextDecoration.lineThrough),
