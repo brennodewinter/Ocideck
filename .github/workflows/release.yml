@@ -143,11 +143,25 @@ jobs:
           if ($p.ExitCode -ne 0) {
             throw "Inno Setup-installatie faalde met exitcode $($p.ExitCode)."
           }
-          # Waar ISCC.exe landt verschilt per editie en per major (6 en 7 staan
-          # naast elkaar), dus dat pad staat hier niet nóg een keer: het script
-          # zoekt het zelf en meldt duidelijk als het er niet is. Eén plek die
-          # weet waar ISCC woont, niet twee die uiteen kunnen lopen.
-          Write-Host "Inno Setup $env:INNOSETUP_VERSION geïnstalleerd."
+          # Het pad van de ZOJUIST geïnstalleerde ISCC expliciet doorgeven aan
+          # de packager. Zonder dit koos diens find_iscc `command -v iscc`
+          # eerst — en rc2 bewees dat het runner-image een Chocolatey-shim
+          # draagt: we pinden en verifieerden 7.1.0, en compileerden toen met
+          # een ongepind 6.7.1 uit die shim. Een pin die niet gebruikt wordt is
+          # decoratie. Zoeken i.p.v. hardcoderen, want waar Inno zijn map zet
+          # verschilt per editie (x64 vs x86) en per major.
+          $iscc = Get-ChildItem -Path 'C:\Program Files\Inno Setup*\ISCC.exe',
+              'C:\Program Files (x86)\Inno Setup*\ISCC.exe' -ErrorAction SilentlyContinue |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $iscc) {
+            throw 'Geen ISCC.exe gevonden na de installatie.'
+          }
+          $versie = (Get-Item $iscc.FullName).VersionInfo.ProductVersion
+          if (-not $versie.StartsWith($env:INNOSETUP_VERSION)) {
+            throw "ISCC op $($iscc.FullName) meldt versie $versie, verwacht $env:INNOSETUP_VERSION."
+          }
+          "OCIDECK_ISCC=$($iscc.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          Write-Host "Inno Setup $versie geïnstalleerd: $($iscc.FullName)"
 
       # Vóór het zippen, niet erna: het script tekent de .exe en de dll's ter
       # plekke als er ooit een certificaat wordt ingesteld (OCIDECK_WIN_SIGN_SHA1).
