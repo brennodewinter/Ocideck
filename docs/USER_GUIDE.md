@@ -5093,9 +5093,9 @@ find it.
     colours, the whole table style, the source-code block and the severity
     colours for findings. Change something here and both surfaces follow.
   - **Document** — what only exists on a page: the **base font size**, the
-    document logo (shared with the presentation logo by default, or set
-    separately), the header and footer text with their band colours, and page
-    numbering.
+    **heading colour**, the document logo (shared with the presentation logo by
+    default, or set separately), the header and footer text with their band
+    colours, and page numbering.
   - **Presentation** — what only exists on a slide: the title and section
     backgrounds, the slide logo, the slide footer, the optional closing slide
     and the animation duration.
@@ -5107,6 +5107,14 @@ find it.
   page has a fixed type size: a slide scales its text to the 16:9 frame. The
   size travels with the profile, so it holds in the reader, in the visual
   editor, in where the page breaks fall, and in the HTML/PDF export.
+
+  The **heading colour** is the colour a document's headings are set in. Leave it
+  unset and it stays as it always was: a chapter heading (`#`) follows the text
+  colour and a subheading (`##` and deeper) the accent. Set it and every heading
+  level carries that one colour — the case it exists for is a report with quiet,
+  dark body text and headings in the house colour, which 'text' and 'accent'
+  alone could not express: turning the body text down left a grey `#` above a
+  coloured `##`.
 
   Every field lives on exactly one surface, so the setting you are looking at
   always tells you where it lands. The line under the switch repeats it in

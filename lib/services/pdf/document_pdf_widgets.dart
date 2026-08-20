@@ -271,6 +271,11 @@ class DocumentPdfWidgets {
           fontSize: size,
           fontWeight: pw.FontWeight.bold,
           lineSpacing: size * 0.2,
+          // Zelfde verdeling als op het scherm: een hoofdstukkop draagt de
+          // kopkleur, een subkop de subkopkleur. Zonder kopkleur in het profiel
+          // vallen die terug op de tekstkleur en het accent, en dan blijft dit
+          // wat het was.
+          color: block.level == 1 ? style.headingColor : style.subheadingColor,
         ),
         children: _spans(block.spans, size: size),
       ),

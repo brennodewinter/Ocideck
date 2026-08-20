@@ -221,8 +221,14 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       'font-family:$family;font-size:${bodyFontSize.toStringAsFixed(1)}px;'
       'line-height:1.65;border-radius:4px;'
       'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
-      '.document h1{color:var(--ocideck-title-color,${t.textColor})}'
-      '.document h2{color:${t.accentColor}}'
+      '.document h1{color:var(--ocideck-title-color,'
+      '${t.effectiveDocumentHeadingColor})}'
+      // h2 tot en met h6, niet alleen h2: de documentweergave in de app
+      // kleurt élke subkop met het accent, en tot hier deed de export dat
+      // alleen voor h2 — een `###` viel in de export stil terug op de
+      // bodykleur en zei op papier dus iets anders dan op het scherm.
+      '.document h2,.document h3,.document h4,.document h5,.document h6'
+      '{color:${t.effectiveDocumentSubheadingColor}}'
       '.document a{color:${t.accentColor}}'
       '.document pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
       'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'

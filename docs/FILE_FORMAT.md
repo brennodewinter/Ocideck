@@ -509,6 +509,7 @@ these fields (with defaults):
 | `documentBodyFontSize` | `15.5` | Base body-text size of a document, in px (`9`–`28`). Headings, footnotes and timeline cards are proportions of it, in the reader, the visual editor, the page-break calculation and the HTML export alike. A slide is unaffected: it scales its text to the 16:9 frame. |
 | `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
 | `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
+| `documentHeadingColor` | `null` | Colour of a document's headings, all levels. `null` keeps the split that was always there: a chapter heading follows `textColor` and a subheading `accentColor`. |
 | `documentBandTextColor` | `null` | Header/footer text colour. `null` follows `textColor`. |
 | `documentBandBackgroundColor` | `null` | Header/footer background colour. `null` follows `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |

@@ -22,6 +22,8 @@ class DocumentPdfStyle {
     required this.bodyFontSize,
     required this.textColor,
     required this.accentColor,
+    required this.headingColor,
+    required this.subheadingColor,
     required this.codeBackground,
     required this.codeText,
     required this.tableBorderStyle,
@@ -45,6 +47,11 @@ class DocumentPdfStyle {
       bodyFontSize: theme.documentBodyFontSize,
       textColor: text,
       accentColor: _color(theme.accentColor, PdfColors.teal700),
+      headingColor: _color(theme.effectiveDocumentHeadingColor, text),
+      subheadingColor: _color(
+        theme.effectiveDocumentSubheadingColor,
+        _color(theme.accentColor, PdfColors.teal700),
+      ),
       codeBackground: _color(theme.codeBackgroundColor, PdfColors.grey900),
       codeText: _color(theme.codeTextColor, PdfColors.grey300),
       tableBorderStyle: theme.tableBorderStyle,
@@ -75,6 +82,13 @@ class DocumentPdfStyle {
 
   final PdfColor textColor;
   final PdfColor accentColor;
+
+  /// De kleur van een hoofdstukkop en van een subkop. Zonder kopkleur in het
+  /// profiel is dat de tekstkleur en het accent — dezelfde verdeling als de
+  /// documentweergave in de app en de HTML-export, zodat de drie oppervlakken
+  /// hetzelfde blad tonen.
+  final PdfColor headingColor;
+  final PdfColor subheadingColor;
   final PdfColor codeBackground;
   final PdfColor codeText;
 
