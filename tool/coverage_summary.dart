@@ -209,6 +209,10 @@ const Set<String> uncoveredBaseline = {
   // De gevel én de io-helft worden wél uitgevoerd — zie
   // test/web_no_recovery_notice_test.dart.
   'lib/platform/unsaved_work_guard_web.dart',
+  // PLATFORM: de webhelft van klembord-HTML (#1595). `Pasteboard.html` via
+  // dart:js_interop; de VM-runner laadt deze helft niet. De gevel en de
+  // io-helft staan onder test in html_clipboard_markdown_test.dart.
+  'lib/platform/clipboard_html_web.dart',
   // NO EXECUTABLE LINES: const data table (345 lines, zero statements).
   'lib/services/cvss/cvss4_lookup.dart',
   // NO EXECUTABLE LINES: const data tables — the finding templates, one file

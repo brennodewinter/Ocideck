@@ -63,6 +63,9 @@ dependencies:
   # hierheen; server-URL/gebruikersnaam blijven in het prefs-domein.
   flutter_secure_storage: ^10.3.1
   http: ^1.6.0
+  # HTML-parser; zat al transief in de lockfile (o.a. via Quill). Directe dep
+  # omdat we klembord-HTML naar Markdown omzetten (#1595), nooit renderen.
+  html: ^0.15.6
   cryptography: ^2.9.0
   flutter_webrtc: ^1.5.2
 

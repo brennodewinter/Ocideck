@@ -4,7 +4,7 @@
 
 This is **ocideck 0.4.7+21** (licence EUPL-1.2) and every third-party component it ships (217 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **734 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **735 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -91,7 +91,7 @@ The JSON documents carry **734 dependency relations** between these components: 
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
 | highlight _(direct main)_ | 0.7.0 | MIT | pd4d10 | `pkg:pub/highlight@0.7.0` |
 | hooks _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@1.0.3` |
-| html _(transitive)_ | 0.15.6 | MIT | dart-lang | `pkg:pub/html@0.15.6` |
+| html _(direct main)_ | 0.15.6 | MIT | dart-lang | `pkg:pub/html@0.15.6` |
 | http _(direct main)_ | 1.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/http@1.6.0` |
 | http_multi_server _(transitive)_ | 3.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_multi_server@3.2.2` |
 | http_parser _(transitive)_ | 4.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_parser@4.1.2` |

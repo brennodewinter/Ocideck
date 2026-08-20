@@ -52,10 +52,10 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
-import '../utils/markdown_paste_cleanup.dart';
+import '../platform/clipboard_html.dart';
+import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_visual_compatibility.dart'
     show markdownRoundTripsVisually;
-import '../utils/table_clipboard.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
@@ -589,9 +589,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     });
   }
 
-  /// Slim plakken: herkent afbeelding → `![](…)`, spreadsheet/tabel → GFM-
-  /// tabel, anders opgeschoonde tekst. Geeft `true` als de plak is afgehandeld
-  /// (dan mag de editor niet nóg eens plakken).
+  /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
+  /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
+  /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
   Future<bool> _smartPaste() async {
     final state = ref.read(documentProvider);
     final projectPath = state.filePath == null
@@ -619,12 +619,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     }
 
     final data = await Clipboard.getData(Clipboard.kTextPlain);
-    final raw = data?.text;
-    if (raw == null || raw.isEmpty) return false;
+    final html = await readClipboardHtml();
+    final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
+    if (resolved == null) return false;
 
-    final table = parseClipboardTable(raw);
-    if (table != null && table.isNotEmpty) {
-      _insertBlock(encodeMarkdownTable(table));
+    if (resolved.kind == ClipboardMarkdownKind.table) {
+      _insertBlock(resolved.text);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(context.l10n.d('Tabel geplakt'))),
@@ -633,7 +633,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       return true;
     }
 
-    final text = sanitizeMarkdownPaste(raw);
+    _insertPastedMarkdown(resolved.text);
+    return true;
+  }
+
+  /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
+  void _insertPastedMarkdown(String text) {
     final sel = _controller.selection;
     final start = sel.isValid ? sel.start : _controller.text.length;
     final end = sel.isValid ? sel.end : start;
@@ -645,7 +650,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
     _applyingExternal = false;
     _commitDocumentBody(ref, next, coalesceKey: 'doc');
-    return true;
   }
 
   void _undo() => ref.read(documentProvider.notifier).undo();

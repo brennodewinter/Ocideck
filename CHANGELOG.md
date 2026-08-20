@@ -1739,6 +1739,13 @@ that before deciding whether this alpha fits what you are doing.
   Onderweg bleek dat PR #1605 drie alinea's uit de gebruikershandleiding had
   teruggedraaid die niets met die wijziging te maken hadden (de contrasttabel en
   twee alinea's over de stijlprofielen); die staan er weer.
+- **Plakken uit een webeditor houdt de structuur.** De platte-tekstvariant van
+  het klembord is bij Copilot Notebook en soortgenoten de *gerenderde* tekst:
+  zonder `#`, zonder inspringing. Die niveaus staan wél in de HTML-variant.
+  OciDeck leest die nu op macOS, Windows, Linux en web, zet hem om naar
+  Markdown (koppen, lijsten, nadruk, links, code, tabellen) en valt terug op
+  platte tekst als HTML ontbreekt of niets bruikbaars oplevert. De HTML zelf
+  komt niet bij een renderer. Spreadsheet-plakken blijft voorgaan.
 
 - **De tekeningen in een document-PDF houden zich aan de grenzen van het
   platform.** De vraag "werkt dit ook op web en Windows?" bleek twee keer nee.

@@ -101,6 +101,7 @@ same answer `make licenses` and the SBOM give.
 | `markdown` | Markdown parsing outside the Marp path | BSD-3-Clause |
 | `xml` | PPTX (OOXML) writing and SVG handling | MIT |
 | `http` | WebDAV/Nextcloud and Git-over-HTTPS transport (through NetGuard) | BSD-3-Clause |
+| `html` | Parses clipboard HTML into Markdown (never rendered) | MIT |
 | `webview_flutter`, `webview_flutter_web` | The HTML/Mermaid preview surface | BSD-3-Clause |
 | `web` | Browser interop in the web build | BSD-3-Clause |
 | `wakelock_plus` | Keeps the screen awake while presenting | BSD-3-Clause |
