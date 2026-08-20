@@ -379,6 +379,11 @@ class _Theme {
          profile?.codeBackgroundColor,
          theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
        ),
+       // Inline `code` krijgt géén codeblok-kleur, maar een tint van de
+       // tekstkleur — zie [AppTheme.inlineCodeBackground].
+       inlineCodeBg = AppTheme.inlineCodeBackground(
+         _profileColor(profile?.textColor, theme.colorScheme.onSurface),
+       ),
        chartCardHex = _hexRgb(
          Color.alphaBlend(
            _profileColor(
@@ -452,6 +457,11 @@ class _Theme {
   final Color quoteBar;
   final Color quoteText;
   final Color codeBg;
+
+  /// Het vlakje achter een inline `code`-stuk. Los van [codeBg]: dat is het
+  /// paneel van een codeblok, en dat is midden in een alinea onleesbaar.
+  final Color inlineCodeBg;
+
   final String chartCardHex;
   final Color codeText;
   final Color tableHeaderBg;

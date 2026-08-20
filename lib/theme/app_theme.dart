@@ -560,6 +560,26 @@ class AppTheme {
   static Color labelOn(Color fill) =>
       fill.computeLuminance() > 0.179 ? Colors.black : Colors.white;
 
+  /// Het vlakje achter **inline** `code`: [textColor] op [_inlineCodeTint].
+  ///
+  /// Bewust níet de `codeBackgroundColor` van het profiel. Dat is de kleur van
+  /// een codeblok — een eigen paneel, in elk ingebouwd profiel bijna zwart — en
+  /// midden in een alinea werd dat een zwart blokje met de alineakleur erin:
+  /// donkerblauw op `#111827` haalt 1,4:1, en het woord was niet meer te lezen.
+  /// De vergissing was de aanname dat "hetzelfde als het codeblok" hetzelfde is
+  /// als "één renderwereld"; wat gelijk moet lopen zijn de weergaven onderling
+  /// (schrijfvlak, documentweergave, export), niet blok en inline-run.
+  ///
+  /// Een tint van de tékstkleur kan die fout niet maken. Hij ligt per definitie
+  /// tussen het papier en de letter in, dus de letter houdt vrijwel het volle
+  /// contrast van de alinea — in elk profiel, in beide modi, en ook onder een
+  /// eigen kleurenschema dat niemand hier heeft voorzien.
+  static Color inlineCodeBackground(Color textColor) =>
+      textColor.withValues(alpha: _inlineCodeTint);
+
+  /// Genoeg om het vlakje te zien, weinig genoeg om de letter niet te raken.
+  static const double _inlineCodeTint = 0.12;
+
   static ThemeData fromProfile(AppAppearanceProfile profile) {
     final primary = parseHexColor(profile.primaryColor, fallback: navy);
     final accentColor = parseHexColor(profile.accentColor, fallback: accent);

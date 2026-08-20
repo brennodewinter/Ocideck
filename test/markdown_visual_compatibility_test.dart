@@ -10,7 +10,13 @@ Zie[^1]
 [^1]: noot
 ''');
 
-    expect(limitations, containsAll(MarkdownVisualLimitation.values));
+    expect(
+      limitations,
+      containsAll([
+        MarkdownVisualLimitation.rawHtml,
+        MarkdownVisualLimitation.escapedPunctuation,
+      ]),
+    );
   });
 
   test(
@@ -28,6 +34,92 @@ Zie[^1]
       expect(limitations, isEmpty);
     },
   );
+
+  group('de regels van een tabel reizen mee in het blok', () {
+    // De klacht: één bewerking in een cel wierp het hele document terug in de
+    // brontekst. De tabel gaat als één `x-embed-table` door de rijke-tekstlaag,
+    // dus zijn regels kunnen daar niet stukgaan — en `encodeMarkdownTableCell`
+    // schrijft nu eenmaal `<br>` voor een celregeleinde en `\\` voor een
+    // backslash. Die telden als rauwe HTML en als ontsnapping (#1565).
+    test('een regeleinde in een cel is geen rauwe HTML', () {
+      expect(
+        markdownVisualLimitations('''
+| Naam | Rol |
+| --- | --- |
+| Aap<br>Noot | Tester |
+'''),
+        isEmpty,
+      );
+    });
+
+    test('de ontsnappingen van de celcodering zijn geen beperking', () {
+      expect(
+        markdownVisualLimitations(r'''
+| Pad | Expressie |
+| --- | --- |
+| C:\\Data | a \| b |
+'''),
+        isEmpty,
+      );
+    });
+
+    test('tekst ná de tabel wordt weer gewoon gescand', () {
+      expect(
+        markdownVisualLimitations(r'''
+| A | B |
+| --- | --- |
+| 1 | 2 |
+
+Prijs \* letterlijk
+'''),
+        contains(MarkdownVisualLimitation.escapedPunctuation),
+      );
+    });
+  });
+
+  group('een tabelregel die géén blok vormt, valt zichtbaar terug', () {
+    // `_normalizeQuillOutput` laat de ontsnappingen van Quill op elke regel die
+    // met een pijp begint bewust staan — daar betekent `\|` structuur. Hoort
+    // die regel niet bij een tabel die als blok reist, dan blijven Quills eigen
+    // `\-` en `\.` er dus in staan en verandert de tekst van de gebruiker.
+    test('kop en scheidingsrij van ongelijke breedte', () {
+      // `EmbeddableTableSyntax` weigert deze tabel (kop 2, scheiding 3) en de
+      // round-trip maalt hem tot één regel escaped tekst. Zichtbaar terugvallen
+      // is het enige eerlijke antwoord.
+      expect(
+        markdownVisualLimitations('''
+| A | B |
+| --- | --- | --- |
+| 1 | 2 |
+'''),
+        contains(MarkdownVisualLimitation.looseTableLine),
+      );
+    });
+
+    test('een losse tabelregel zonder scheidingsrij', () {
+      expect(
+        markdownVisualLimitations('Tekst.\n\n| 1 | 2 |\n'),
+        contains(MarkdownVisualLimitation.looseTableLine),
+      );
+    });
+
+    test('een kopcel met een ontsnapte pijp telt niet mee als kolom', () {
+      // Zo telt de embed: hij splitst op élke pijp. Kop 3, scheiding 2 — dus
+      // geen blok, dus terugvallen in plaats van stilletjes slopen.
+      expect(
+        markdownVisualLimitations(r'''
+| a \| b | c |
+| --- | --- |
+| 1 | 2 |
+'''),
+        contains(MarkdownVisualLimitation.looseTableLine),
+      );
+    });
+
+    test('een tabel in een codeblok telt niet als losse tabelregel', () {
+      expect(markdownVisualLimitations('```\n| 1 | 2 |\n```\n'), isEmpty);
+    });
+  });
 
   test('ignores unsafe-looking content inside code fences', () {
     final limitations = markdownVisualLimitations('''

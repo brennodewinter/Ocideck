@@ -59,6 +59,15 @@ class MarkdownEditorTheme {
 
   TextStyle get hintStyle => bodyStyle.copyWith(color: hint);
 
+  /// Het vlakje achter **inline** `code` in het schrijfvlak.
+  ///
+  /// Los van [codeBackground] — dat is het paneel van een codeblok. Zie
+  /// [AppTheme.inlineCodeBackground] voor waarom die twee uit elkaar horen: in
+  /// een alinea werd het codeblok-vlak een zwart blokje met de alineakleur erin.
+  /// Dat de documentweergave dezelfde som doet, is het hele punt — de twee
+  /// weergaven van dezelfde tekst horen er gelijk uit te zien (#1567).
+  Color get inlineCodeBackground => AppTheme.inlineCodeBackground(text);
+
   TextStyle get markdownStyle => bodyStyle.copyWith(
     fontFamily: 'monospace',
     fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
