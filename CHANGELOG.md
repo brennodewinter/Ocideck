@@ -1723,6 +1723,26 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een dubbel ge-escapete regelovergang in een stijlprofiel kwam niet uit de
+  app.** In de prefs stond `closingSlideMarkdown` van élk profiel als
+  `# Bedankt\\n\\nVragen?` — twee letterlijke backslashes waar een regelovergang
+  hoorde — en `documentHeaderText`/`documentFooterText` net zo, zichtbaar als een
+  letterlijke `\n` op elke bladzijde van de PDF- en HTML-export. De keten is
+  nagelopen en bleek symmetrisch: `_saveProfiles`, `ThemeProfile.fromJson`, de
+  YAML-scalar-codec, het `.ocideckstyle`-bestand en de JSON-envelop naar het
+  publieksvenster ontsnappen allemaal precies één keer en herstellen dat ook. De
+  oorzaak lag ernaast: `defaults read` drukt een string in OpenStep-notatie af en
+  verdubbelt daarbij elke backslash, dus een script dat een prefs-waarde buiten de
+  app om leest, opnieuw als JSON codeert en terugschrijft, voegt per ronde een
+  backslash-niveau toe. Twee rondes, twee backslashes.
+
+  Geen migratie dus — de app heeft dit nooit geschreven, en een opschoning die
+  `\n` in profieltekst stil omzet zou ook iemand raken die die tekens bewust
+  typt. Wel een test die de vier schakels vastpint op één belofte: wat erin gaat
+  komt eruit, en in de opgeslagen tekst staat nooit een ontsnapte backslash. Een
+  echte dubbele escape staat daarmee meteen rood. Herkenningsteken voor de
+  volgende keer: de app schrijft JSON zónder spatie na de dubbele punt — staat er
+  `{"a": 1}` in de prefs, dan heeft iets anders die sleutel geschreven.
 - **Een link in de kop- of voetband van een document kon onzichtbaar zijn.** Het
   derde paar van het documentvlak, na de kopkleur en de bandtekst. De band tekent
   een link in de kop- of voettekst met de **accentkleur** — in de app en in de
