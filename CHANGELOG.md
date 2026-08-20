@@ -1739,6 +1739,21 @@ that before deciding whether this alpha fits what you are doing.
   blijft het document ongemoeid. De documentatie beweerde intussen dat de
   webversie de bron zou tonen; dat is rechtgezet.
 
+- **De kwaliteitspoort keek langs de twee kleuren van het documentvlak heen.**
+  De contrastreeks in de stijlinstelling somde op wat op een *dia* voorkomt:
+  tekst, titel, tabeltekst, tabelkop, broncode en accent. De twee paren die
+  alléén op een blad bestaan stonden er niet in — de **kopkleur** van een
+  document tegen het papier, en de tekst van de **kop- en voetband** tegen die
+  band. Wie zo'n kleur onleesbaar zette kreeg dus niets te horen, terwijl élke
+  dia-kleur wél een waarschuwing kreeg: geen melding in het kwaliteitspaneel, en
+  geen streepje onder het veld in de stijlinstelling. Beide paren worden nu
+  gemeten — de kop op de WCAG-drempel voor grote tekst (een `#` rendert op
+  displayformaat), de band op die voor gewone tekst (12 beeldpunten) — en de
+  waarschuwing landt bij het veld waar je het herstelt, op het documentvlak. Ze
+  tellen alleen wanneer je de kleur zélf zet: laat je hem leeg, dan valt het
+  documentvlak terug op de tekst-, accent- en achtergrondkleur, en díé paren
+  werden al gemeten, strenger bovendien — een tweede melding over hetzelfde paar
+  zou alleen ruis zijn.
 - **Een document kan zijn koppen een eigen kleur geven.** Uit een echt
   bestuurlijk rapport: de broodtekst stond in de huisstijlkleur — EU-blauw over
   vijftien pagina's proza — en dat leest zwaar. Temperen kon niet: een
