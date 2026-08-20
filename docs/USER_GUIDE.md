@@ -4371,6 +4371,14 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   something in the source *at one spot*. Character-exact precision is not always
   possible; if you sit inside a formatting marker the caret lands at its start.
   *(Added 2026-08-19.)*
+- **Paste keeps structure from a web editor.** Cmd/Ctrl+V in Visual and Source
+  still prefers an image, then a spreadsheet table. After that it reads the
+  **HTML** variant of the clipboard when a web page put one there (nested lists,
+  headings, links) and turns that into Markdown. The HTML itself is never kept
+  and never rendered. If there is no HTML, or the conversion yields nothing
+  useful, the plain-text clipboard is used, cleaned of the usual website noise.
+  Word styles, colours and classes do not come along — only the document
+  structure. *(Added 2026-08-20, #1595.)*
 - **Pagina's** ("Pages") lays the document out on real sheets: the
   [page size and margins](#page-size-margins-bleed-and-writing-width) you chose,
   and — when the document carries a style — that style's repeating header and

@@ -4415,6 +4415,14 @@ stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
   in de bron wilt zien of zetten. Precisie tot op het teken is niet altijd
   haalbaar; sta je middenin een opmaakteken, dan landt de cursor aan het begin
   daarvan. *(Toegevoegd 2026-08-19.)*
+- **Plakken houdt de structuur uit een webeditor.** Cmd/Ctrl+V in Visueel en Bron
+  kiest nog steeds eerst een afbeelding, dan een spreadsheet-tabel. Daarna leest
+  het de **HTML**-variant van het klembord wanneer een webpagina die heeft gezet
+  (geneste lijsten, koppen, links) en zet die om naar Markdown. De HTML zelf
+  wordt niet bewaard en niet gerenderd. Ontbreekt HTML, of levert de omzetting
+  niets bruikbaars, dan geldt de platte-tekstvariant, opgeschoond van de
+  gebruikelijke sitereis. Stijlen, kleuren en klassen uit Word gaan niet mee —
+  alleen de documentstructuur. *(Toegevoegd 2026-08-20, #1595.)*
 - **Pagina's** legt het document op echte vellen: de
   [paginamaat en de marges](#paginamaat-marges-afloop-en-schrijfbreedte) die je
   hebt gekozen, en — als het document een stijl draagt — de herhalende kop- en

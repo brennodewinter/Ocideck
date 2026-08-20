@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:d70906bb-2869-56bd-80c1-9287cb99ae5b",
+  "serialNumber": "urn:uuid:8aa1b14a-6240-51b4-8cac-5685e2a4a4bf",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-19T21:12:13.682214Z",
+    "timestamp": "2026-08-20T18:49:15.307689Z",
     "tools": {
       "components": [
         {
@@ -2902,7 +2902,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct main"
         }
       ]
     },
@@ -9076,6 +9076,7 @@
         "pkg:pub/flutter_svg@2.3.0",
         "pkg:pub/flutter_webrtc@1.6.0",
         "pkg:pub/highlight@0.7.0",
+        "pkg:pub/html@0.15.6",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.9.1",
         "pkg:pub/intl@0.20.3",

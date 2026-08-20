@@ -172,6 +172,42 @@ final class OpenFileHandler {
   }
 }
 
+/// Leest `NSPasteboardTypeHTML`. Het pasteboard-pakket levert die variant op
+/// macOS niet (alleen Windows/Android), terwijl webeditors hun neststructuur
+/// juist daar neerzetten (#1595).
+final class ClipboardHtmlHandler {
+  static let shared = ClipboardHtmlHandler()
+
+  private var channel: FlutterMethodChannel?
+
+  func register(messenger: FlutterBinaryMessenger) {
+    let channel = FlutterMethodChannel(
+      name: "ocideck/clipboard", binaryMessenger: messenger)
+    channel.setMethodCallHandler { call, result in
+      switch call.method {
+      case "html":
+        result(Self.htmlFromPasteboard())
+      default:
+        result(FlutterMethodNotImplemented)
+      }
+    }
+    self.channel = channel
+  }
+
+  private static func htmlFromPasteboard() -> String? {
+    let pasteboard = NSPasteboard.general
+    if let html = pasteboard.string(forType: .html), !html.isEmpty {
+      return html
+    }
+    if let html = pasteboard.string(forType: NSPasteboard.PasteboardType("public.html")),
+      !html.isEmpty
+    {
+      return html
+    }
+    return nil
+  }
+}
+
 @main
 class AppDelegate: FlutterAppDelegate {
   override func applicationDidFinishLaunching(_ notification: Notification) {

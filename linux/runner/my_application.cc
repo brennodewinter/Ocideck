@@ -60,6 +60,53 @@ static gboolean write_image_to_clipboard(const uint8_t* bytes, size_t length) {
   return pixbuf != nullptr;
 }
 
+// Zet klembordinhoud naar UTF-8. Chromium op Linux levert text/html soms
+// als UTF-16 (met of zonder BOM); de Dart-kant verwacht een gewone string.
+static gchar* selection_to_utf8(const guchar* data, gint length) {
+  if (data == nullptr || length <= 0) {
+    return nullptr;
+  }
+  if (length >= 2 && data[0] == 0xFF && data[1] == 0xFE) {
+    return g_utf16_to_utf8(reinterpret_cast<const gunichar2*>(data + 2),
+                           (length - 2) / 2, nullptr, nullptr, nullptr);
+  }
+  if (length >= 2 && data[0] == 0xFE && data[1] == 0xFF) {
+    const gint units = (length - 2) / 2;
+    g_autofree gunichar2* swapped = static_cast<gunichar2*>(
+        g_malloc(static_cast<gsize>(units) * sizeof(gunichar2)));
+    const guchar* src = data + 2;
+    for (gint i = 0; i < units; i++) {
+      swapped[i] = static_cast<gunichar2>((src[2 * i] << 8) | src[2 * i + 1]);
+    }
+    return g_utf16_to_utf8(swapped, units, nullptr, nullptr, nullptr);
+  }
+  return g_strndup(reinterpret_cast<const gchar*>(data),
+                   static_cast<gsize>(length));
+}
+
+// HTML-variant van het GTK-klembord. Het pasteboard-pakket leest die op
+// Linux niet; webeditors zetten de neststructuur hier neer (#1595).
+static gchar* read_html_from_clipboard() {
+  GtkClipboard* clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+  const char* atoms[] = {"text/html", "TEXT/HTML"};
+  for (gsize i = 0; i < G_N_ELEMENTS(atoms); i++) {
+    GdkAtom atom = gdk_atom_intern(atoms[i], FALSE);
+    GtkSelectionData* sel = gtk_clipboard_wait_for_contents(clipboard, atom);
+    if (sel == nullptr) {
+      continue;
+    }
+    const guchar* data = gtk_selection_data_get_data(sel);
+    const gint length = gtk_selection_data_get_length(sel);
+    gchar* out = selection_to_utf8(data, length);
+    gtk_selection_data_free(sel);
+    if (out != nullptr && out[0] != '\0') {
+      return out;
+    }
+    g_free(out);
+  }
+  return nullptr;
+}
+
 // Handles calls on the ocideck/clipboard channel (see ImageService in Dart).
 static void clipboard_method_call_cb(FlMethodChannel* channel,
                                      FlMethodCall* method_call,
@@ -76,6 +123,11 @@ static void clipboard_method_call_cb(FlMethodChannel* channel,
       response = FL_METHOD_RESPONSE(fl_method_error_response_new(
           "bad-args", "writeImage expects a byte list", nullptr));
     }
+  } else if (strcmp(fl_method_call_get_name(method_call), "html") == 0) {
+    g_autofree gchar* html = read_html_from_clipboard();
+    g_autoptr(FlValue) result =
+        html != nullptr ? fl_value_new_string(html) : fl_value_new_null();
+    response = FL_METHOD_RESPONSE(fl_method_success_response_new(result));
   } else {
     response = FL_METHOD_RESPONSE(fl_method_not_implemented_response_new());
   }
