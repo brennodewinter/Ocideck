@@ -26,11 +26,6 @@ class CustomWindow: NSWindow {
 
         self.isReleasedWhenClosed = false
     }
-
-    deinit {
-        debugPrint("Child window deinit")
-    }
-
 }
 
 class FlutterWindow: NSObject {

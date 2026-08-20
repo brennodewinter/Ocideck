@@ -83,13 +83,10 @@ final class OpenFileHandler {
     dialog.allowsMultipleSelection = false
     dialog.allowsOtherFileTypes = true
     dialog.canSelectHiddenExtension = true
-    // Lege allowedContentTypes = alle typen (Apple). allowedFileTypes=nil
-    // voor pre-UTI-paden. De EnableAllFilesDelegate forceert shouldEnable=true
-    // voor alles wat toch nog grijs zou staan.
-    if #available(macOS 11.0, *) {
-      dialog.allowedContentTypes = []
-    }
-    dialog.allowedFileTypes = nil
+    // Lege allowedContentTypes = alle typen (Apple). De
+    // EnableAllFilesDelegate forceert shouldEnable=true voor alles wat toch
+    // nog grijs zou staan.
+    dialog.allowedContentTypes = []
     let delegate = EnableAllFilesDelegate()
     pickDelegate = delegate
     dialog.delegate = delegate
@@ -129,12 +126,9 @@ final class OpenFileHandler {
     dialog.nameFieldStringValue = fileName ?? ""
     dialog.allowsOtherFileTypes = true
     dialog.canSelectHiddenExtension = true
-    // Lege allowedContentTypes = alle typen (Apple). allowedFileTypes=nil voor
-    // pre-UTI-paden. De EnableAllFilesDelegate forceert shouldEnable=true.
-    if #available(macOS 11.0, *) {
-      dialog.allowedContentTypes = []
-    }
-    dialog.allowedFileTypes = nil
+    // Lege allowedContentTypes = alle typen (Apple). De
+    // EnableAllFilesDelegate forceert shouldEnable=true.
+    dialog.allowedContentTypes = []
     let delegate = EnableAllFilesDelegate()
     saveDelegate = delegate
     dialog.delegate = delegate
