@@ -1723,6 +1723,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een documentstijl met een kop- of voetband liet de front matter als tekst in
+  het document staan.** De band wordt vóór het strippen aan de body geplakt,
+  dus stond `---` niet meer op teken 0 en zag de strip hem niet: `marp: true` en
+  `theme: …` verschenen als zichtbare tekst tussen twee streepjeslijnen, en met
+  "nieuw hoofdstuk op een nieuwe pagina" aan waren die twee lijnen ook nog twee
+  lege vellen vooraan de afdruk. Zelfde oorzaak, tweede slachtoffer: het
+  terugvalpad dat de handtekening uit de kop van een `.md` van vóór 0.1.0 leest
+  keek ook naar teken 0, dus dáár verdween de ondertekening stilzwijgend uit de
+  akkoordpagina. De band schuift nu ónder de front matter in plaats van
+  ervoor — die hoort vooraan te blijven staan, en beide lezers vinden hem weer.
+  Bereikbaar via `MarpHtmlService.build`; de app zelf gaf al een body zonder
+  front matter door, dus wie via het exportmenu werkte merkte er niets van.
+
 - **De Bron-stand van een document toont regelnummers.** Links van elke regel
   in de ruwe Markdown staat het nummer van die regel in het bestand. De cijfers
   zitten niet in de tekst: je kunt ze niet selecteren of overschrijven, en ze

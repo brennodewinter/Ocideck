@@ -215,8 +215,12 @@ Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
     ),
     showPage: theme.documentShowPageNumbers,
   );
+  // De front matter blijft bovenaan: zij hoort op teken 0 te beginnen, anders
+  // ziet noch de strip noch [MarpHtmlService.signatureFields] haar nog staan
+  // (zie [_splitFrontMatter]). De band schuift er dus ónder, niet ervoor.
+  final source = _splitFrontMatter(embedded.markdown);
   return (
-    markdown: '$header\n\n${embedded.markdown}\n\n$footer',
+    markdown: '${source.head}$header\n\n${source.body}\n\n$footer',
     dataUris: uris,
   );
 }
