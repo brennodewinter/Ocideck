@@ -4480,6 +4480,33 @@ tabel:
 | 13:41 | Herstelclaim weerlegd | Vastgesteld |
 ```
 
+#### Wanneer Visueel terugvalt op de bron *(toegevoegd 2026-08-20)*
+
+**Visueel** beschermt je Markdown: staat er iets in het document dat de
+rijke-tekstlaag niet kan terugvertalen zonder je tekst te veranderen, dan toont
+OciDeck de bron, met een balk die dat zegt. Twee dingen deden dat ten onrechte,
+en doen dat niet meer.
+
+Een **regeleinde in een tabelcel** (`Shift+Enter`) wordt als `<br>` bewaard, en
+een getypte backslash als `\\`. Dat is de eigen schrijfwijze van de tabel — die
+reist als één ondeelbaar blok door Visueel — en telt dus niet meer als rauwe
+HTML of als ontsnapping. Typen in een tabel houdt je in Visueel.
+
+Wat er **wél** nog toe leidt is een **regel die met een pijp begint maar geen
+deel is van een echte tabel**: een koprij en een streepjesrij van ongelijke
+breedte, of een losse `| … |`-regel. Zo'n regel reist niet als tabelblok, en hem
+omzetten zou losse backslashes in je tekst achterlaten — dus OciDeck toont de
+bron in plaats van de regel stilletjes te beschadigen. Geef de koprij en de
+streepjesrij evenveel kolommen en Visueel neemt hem weer.
+
+#### Afbeeldingen in een document *(toegevoegd 2026-08-20)*
+
+Een afbeelding schrijf je op de gewone Markdown-manier, `![omschrijving](pad)`.
+In **Visueel** verschijnt hij als een klein merkteken op zijn plek in de zin,
+met de omschrijving erin (of de bestandsnaam als die er niet is) — niet de
+afbeelding zelf. De **HTML**- en **PDF**-uitvoer tonen de afbeelding wél. Je
+`![…](…)`-tekst blijft staan zoals je hem tikte, inclusief de omschrijving.
+
 ### Voetnoten
 
 *(Toegevoegd 2026-08-18.)* **Invoegen → Voetnoot** zet een merkteken op de cursor
