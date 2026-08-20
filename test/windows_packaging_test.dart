@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../tool/generate_license_txt.dart';
+
 /// Guards the Windows installer (#1208): `packaging/windows/ocideck.iss`, built
 /// by `scripts/build_windows_installer.sh` behind `make build-windows-installer`.
 ///
@@ -138,6 +140,32 @@ void main() {
             'set by windows/CMakeLists.txt (BINARY_NAME).',
       );
     });
+
+    // #1600 punt 3: the .reg file says "per gebruiker, geen beheerdersrechten
+    // nodig" but used to hardcode C:\Program Files\OciDeck — a path that needs
+    // admin rights and contradicts the promise. The paths must be an obvious
+    // placeholder, not a real-looking default.
+    test(
+      'the .reg file uses a placeholder, not a hardcoded Program Files path',
+      () {
+        expect(
+          reg.contains(r'Program Files'),
+          isFalse,
+          reason:
+              'windows/file-associations.reg hardcodes a Program Files path, '
+              'which requires admin rights — contradicting the "per gebruiker, '
+              'geen beheerdersrechten nodig" promise. Use a placeholder.',
+        );
+        expect(
+          reg.contains('<JOUW-OCIDECK-MAP>'),
+          isTrue,
+          reason:
+              'The .reg file no longer has a placeholder for the install path. '
+              'A real-looking default path misleads users who run from the raw '
+              'bundle into thinking it works as-is.',
+        );
+      },
+    );
   });
 
   group('the installer wraps the build output and nothing else', () {
@@ -641,6 +669,74 @@ void main() {
             'The notes must point at the manifest: with no code-signing '
             'certificate, that signature is the installer only provenance.',
       );
+    });
+  });
+
+  // #1600 punt 2: LicenseFile wees naar een platte-tekst-versie, niet naar de
+  // Markdown-bron. Inno Setup toont de inhoud letterlijk — de HTML-commentaar,
+  // #/##/**/> markers en --- regels waren zichtbaar op het eerste scherm dat
+  // elke Windows-gebruiker ziet. De .txt wordt gegenereerd uit LICENSE.md door
+  // tool/generate_license_txt.dart; deze poort houdt hem vers.
+  group('the licence page shows plain text, not raw Markdown (#1600)', () {
+    final licenseTxt = File('packaging/windows/LICENSE.txt');
+
+    test('the .iss points at the generated .txt, not at LICENSE.md', () {
+      expect(
+        iss.contains('LicenseFile=LICENSE.txt'),
+        isTrue,
+        reason:
+            'The installer still points LicenseFile at LICENSE.md — the '
+            'licence page shows raw Markdown (HTML comments, #/**/> markers) '
+            'on the first screen every Windows user sees.',
+      );
+      expect(
+        licenseTxt.existsSync(),
+        isTrue,
+        reason:
+            'packaging/windows/LICENSE.txt does not exist — run '
+            '`dart run tool/generate_license_txt.dart` to generate it.',
+      );
+    });
+
+    test('the committed .txt matches a fresh generation from LICENSE.md', () {
+      // The gate that keeps the .txt fresh: if someone edits LICENSE.md without
+      // re-running the generator, this fails and names the fix.
+      expect(
+        licenseTxt.existsSync(),
+        isTrue,
+        reason: 'packaging/windows/LICENSE.txt is missing.',
+      );
+      final source = File('LICENSE.md').readAsStringSync();
+      final expected = markdownToPlainText(source);
+      final committed = licenseTxt.readAsStringSync();
+      expect(
+        committed,
+        expected,
+        reason:
+            'packaging/windows/LICENSE.txt is stale — it does not match a '
+            'fresh conversion of LICENSE.md. Run '
+            '`dart run tool/generate_license_txt.dart` and commit the result.',
+      );
+    });
+
+    test('the .txt contains no Markdown syntax', () {
+      // Belt-and-suspenders: even if the generator and the .iss drift, the
+      // licence page must never show raw Markdown to a user.
+      expect(
+        licenseTxt.existsSync(),
+        isTrue,
+        reason: 'packaging/windows/LICENSE.txt is missing.',
+      );
+      final txt = licenseTxt.readAsStringSync();
+      for (final marker in ['<!--', '**', '## ', '# ']) {
+        expect(
+          txt.contains(marker),
+          isFalse,
+          reason:
+              'The licence .txt still contains `$marker` — the installer '
+              'would show raw Markdown syntax on the licence page.',
+        );
+      }
     });
   });
 }
