@@ -52,7 +52,10 @@ class _FakeController extends PlatformWebViewController {
   @override
   Future<void> runJavaScript(String javaScript) async {
     scripts.add(javaScript);
-    if (!javaScript.startsWith('window.__renderMermaid(')) return;
+    if (!javaScript.startsWith('window.__renderMermaid(') &&
+        !javaScript.startsWith('window.__renderMath(')) {
+      return;
+    }
     // De echte pagina rendert async en stuurt het resultaat via MermaidChannel
     // terug (#882). Hier bootsen we dat na: haal de seq uit de aanroep en lever
     // het door de test klaargezette antwoord op datzelfde kanaal.
@@ -193,6 +196,71 @@ void main() {
       expect(controller.scripts.length, aantal);
     },
   );
+
+  group('formules', () {
+    // Dezelfde verborgen pagina draagt MathJax (`tex-svg`), zodat het monteren
+    // van de host, het wachten op de bootstrap en het serialiseren van de
+    // wachtrij maar één keer bestaan — dat zijn juist de delen die hier
+    // moeizaam goed zijn gekregen (#882).
+
+    test('de pagina draagt ook de formulerenderer', () async {
+      final html = geladenPagina;
+      expect(html, isNotNull, reason: 'er is geen pagina geladen');
+      expect(html, contains('window.__renderMath'));
+      // `tex-svg` en niet de gewone bundel: die haalt geen lettertypebestanden
+      // op, dus de uitkomst staat op zichzelf en is in een PDF te zetten.
+      expect(html, contains('tex2svgPromise'));
+      // Geen menu en geen pagina-scan: er stáát hier geen document om te
+      // scannen, we vragen per formule.
+      expect(html, contains('typeset: false'));
+    });
+
+    test(
+      'een formule gaat naar de formulerenderer, niet naar mermaid',
+      () async {
+        controller.answer = (_) => svgVoor('formule');
+        final voor = controller.scripts.length;
+        final svg = await MermaidRenderService.instance.renderMath('E = mc^2');
+        expect(svg, contains('id="formule"'));
+        final nieuw = controller.scripts.skip(voor).toList();
+        expect(nieuw.any((s) => s.startsWith('window.__renderMath(')), isTrue);
+        expect(
+          nieuw.any((s) => s.startsWith('window.__renderMermaid(')),
+          isFalse,
+        );
+      },
+    );
+
+    test('de TeX gaat als JSON de aanroep in', () async {
+      // Een backslash is in TeX eerder regel dan uitzondering; zonder JSON zou
+      // elke formule de aanroep in de eigen pagina openbreken.
+      controller.answer = (_) => svgVoor('vier');
+      final voor = controller.scripts.length;
+      await MermaidRenderService.instance.renderMath(r'\frac{1}{2} "x"');
+      final aanroep = controller.scripts
+          .skip(voor)
+          .firstWhere((s) => s.startsWith('window.__renderMath('));
+      expect(aanroep, contains(jsonEncode(r'\frac{1}{2} "x"')));
+    });
+
+    test('een formule en een diagram met dezelfde tekst botsen niet', () async {
+      // De cache sleutelt op soort én bron: anders zou het diagram het plaatje
+      // van de formule krijgen, of andersom.
+      const zelfde = 'A';
+      controller.answer = (_) => svgVoor('als-formule');
+      final formule = await MermaidRenderService.instance.renderMath(zelfde);
+      controller.answer = (_) => svgVoor('als-diagram');
+      final diagram = await MermaidRenderService.instance.render(zelfde);
+      expect(formule, contains('id="als-formule"'));
+      expect(diagram, contains('id="als-diagram"'));
+    });
+
+    test('een lege formule vraagt niets aan de pagina', () async {
+      final voor = controller.scripts.length;
+      expect(await MermaidRenderService.instance.renderMath('   '), isNull);
+      expect(controller.scripts.length, voor);
+    });
+  });
 
   test('de bron gaat als JSON de JS-aanroep in', () async {
     // Een aanhalingsteken of een backslash in de brontekst zou de aanroep
