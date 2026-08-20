@@ -135,7 +135,7 @@ const Map<String, int> fileSizeBaseline = {
   // staan al in het part-bestand presenter_beamer_payload.dart.
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1042,
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1038,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en

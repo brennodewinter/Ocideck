@@ -124,3 +124,14 @@ class _NavButton extends StatelessWidget {
     );
   }
 }
+
+/// Vervang de dia op [index] en gooi de gecachte splitsingsindeling weg.
+///
+/// Die tweede helft is het punt: een dia die tijdens het presenteren verandert
+/// (een aangevinkt vakje, een ingevulde tabelcel) kan anders blijven hangen in
+/// de lay-out die vóór de wijziging is uitgerekend. Woont hier en niet in de
+/// bibliotheekkop omdat alleen de onderdelen hem gebruiken.
+void _replaceSlide(List<Slide> slides, int index, Slide replacement) {
+  slides[index] = replacement;
+  invalidateSplitRunLayout(slides);
+}
