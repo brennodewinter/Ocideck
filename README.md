@@ -135,15 +135,25 @@ portable tarball — all the same build. The macOS build is signed and notarised
 and opens normally; the Windows and Linux binaries are unsigned, so they warn on
 first launch — the release notes explain how to open them on each platform.
 
-On macOS you can also install with [Homebrew](https://brew.sh/):
+On macOS you can also install with [Homebrew](https://brew.sh/), tapping our own
+forge — the canonical source for the cask as well as the app:
+
+```sh
+brew tap librekat/ocideck https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck.git
+brew install --cask librekat/ocideck/ocideck
+```
+
+If the forge is unreachable, the GitHub mirror is the backup. It needs no tap
+step, because Homebrew's shorthand resolves to GitHub by definition:
 
 ```sh
 brew install --cask brennodewinter/ocideck/ocideck
 ```
 
-Homebrew fetches the latest release from our own forge and verifies its checksum;
-update later with `brew upgrade --cask ocideck`. The cask is only a pointer to the
-same signed, notarised release — see [BUILD.md](docs/BUILD.md#homebrew-cask-macos).
+Either way Homebrew downloads the release from our forge and verifies its
+checksum; update later with `brew upgrade --cask ocideck`. The cask is only a
+pointer to the same signed, notarised release — see
+[BUILD.md](docs/BUILD.md#homebrew-cask-macos).
 
 Or build and run from source:
 
