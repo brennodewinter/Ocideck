@@ -55,13 +55,40 @@ ondertekenings- en notarisatiepunten blijven waar — de Windows- en
 Linux-binaries zijn niet ondertekend, macOS is genotariseerd — maar de bewering
 dat er geen binary bestaat is achterhaald.)*
 
-## De exports zijn plaatjes, geen documenten
+## De exports van een presentatie zijn plaatjes, geen documenten
 
-PDF en PPTX zijn één bitmap per dia: geen tekstlaag, geen alt-tekst, geen
-leesvolgorde, geen selecteerbare tekst. Geef de Markdown of de HTML-export door
-wanneer de ontvanger moet kunnen *lezen* in plaats van *kijken*. Er wordt geen
-WCAG-conformiteit geclaimd, en er is niets getest met een echte schermlezer. →
-[ACCESSIBILITY.md](ACCESSIBILITY.md)
+De PDF en PPTX van een **deck** zijn één bitmap per dia: geen tekstlaag, geen
+alt-tekst, geen leesvolgorde, geen selecteerbare tekst. Geef de Markdown of de
+HTML-export door wanneer de ontvanger moet kunnen *lezen* in plaats van *kijken*.
+Er wordt geen WCAG-conformiteit geclaimd, en er is niets getest met een echte
+schermlezer. → [ACCESSIBILITY.md](ACCESSIBILITY.md)
+
+*(Ingeperkt 2026-08-20: dit geldt voor een presentatie. Een **document**
+exporteert naar een PDF die gezet wordt in plaats van gefotografeerd — echte
+tekst, te selecteren, te doorzoeken en voor te lezen, met de koppen als
+bladwijzerboom. Zijn eigen grenzen staan hieronder.)*
+
+## De PDF van een document toont formules, diagrammen en grafieken als bron
+
+Een PDF kent geen JavaScript, en de HTML-export tekent alle drie juist daarmee.
+In plaats van een leeg vlak achter te laten drukt de PDF de **bron** van het blok
+af, in een kader met vaste letterafstand en een regel erboven die zegt wat het
+is — wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan.
+Exporteer naar HTML voor alle drie gerenderd, of naar LaTeX voor gezette
+wiskunde. De tabellen, lijsten, afbeeldingen, links en paginaopmaak van hetzelfde
+bestand reizen wél volledig mee. *(Toegevoegd 2026-08-20.)*
+
+## De PDF van een document staat in een standaardletter, niet in die van je document
+
+De PDF kiest een schreef- of schreefloze letter afhankelijk van welke het
+stijlprofiel gebruikt, maar niet het exacte lettertype — dezelfde lijn die de
+LaTeX-export trekt, die de letterkeuze aan de compiler laat. Wat meereist is de
+structuur en de paginaopmaak, niet de typografie van het scherm. Tekens buiten
+Latin-1 vallen terug op een meegeleverd lettertype dat Latijns uitgebreid, Grieks
+en Cyrillisch dekt; wat daarbuiten valt (CJK, Arabisch, Hebreeuws) heeft geen
+vorm beschikbaar. Stil gebeurt dat niet: de export noemt de tekens die hij niet
+kon zetten en wijst naar HTML of LaTeX, die er wél raad mee weten.
+*(Toegevoegd 2026-08-20.)*
 
 ## Voetnoten in de HTML-export staan achteraan, nooit onderaan de bladzijde
 
@@ -74,8 +101,10 @@ enkele browser geïmplementeerd. De HTML-export zet de noten daarom altijd achte
 het document, genummerd, met een sprong naar elke noot en weer terug. De nummers
 zijn dezelfde als op het scherm, dus er gaat niets verloren en er wordt niets
 hernummerd; alleen de plaats verschilt. Die HTML naar PDF afdrukken houdt ze
-achterin. Heb je de noten in een PDF écht onderaan het vel nodig, gebruik dan de
-LaTeX-export (`.tex`). *(Toegevoegd 2026-08-18.)*
+achterin, en de ingebouwde **PDF**-export doet dat ook: welke noot op welk vel
+landt blijkt pas ná de opmaak, en dan staat het vel er al. Heb je de noten écht
+onderaan het vel nodig, gebruik dan de LaTeX-export (`.tex`).
+*(Toegevoegd 2026-08-18; de ingebouwde PDF-export toegevoegd 2026-08-20.)*
 
 ## Een afgedrukt HTML-document heeft geen paginanummers
 

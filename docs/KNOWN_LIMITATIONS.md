@@ -52,13 +52,38 @@ four platforms since `0.1.0` on 2026-07-25. The signing and notarisation points
 remain true — the Windows and Linux binaries are unsigned, macOS is notarised —
 but the claim that no binary exists is stale.)*
 
-## The exports are pictures, not documents
+## A presentation's exports are pictures, not documents
 
-PDF and PPTX are one bitmap per slide: no text layer, no alt-text, no reading
-order, no selectable text. Hand over the Markdown or the HTML export when the
-recipient needs to *read* rather than *look*. No WCAG conformance is claimed,
-and nothing has been tested with a real screen reader. →
+A **deck's** PDF and PPTX are one bitmap per slide: no text layer, no alt-text,
+no reading order, no selectable text. Hand over the Markdown or the HTML export
+when the recipient needs to *read* rather than *look*. No WCAG conformance is
+claimed, and nothing has been tested with a real screen reader. →
 [ACCESSIBILITY.md](ACCESSIBILITY.md)
+
+*(Narrowed 2026-08-20: this holds for a presentation. A **document** exports to a
+PDF that is typeset rather than photographed — real text, selectable, searchable
+and readable aloud, with the headings as a bookmark tree. Its own limits are
+below.)*
+
+## A document's PDF shows formulas, diagrams and charts as source
+
+A PDF has no JavaScript, and the HTML export draws all three of these with one.
+Rather than leave an empty space, the PDF prints the block's **source** in a
+monospaced box with a line above saying what it is — whoever needs the diagram at
+least sees what should be there. Export to HTML for all three rendered, or to
+LaTeX for typeset maths. The same file's tables, lists, images, links and page
+setup do travel in full. *(Added 2026-08-20.)*
+
+## A document's PDF is set in a standard face, not in your document's font
+
+The PDF picks a serif or a sans depending on which one the style profile uses,
+but not the exact typeface — the same line the LaTeX export draws, which leaves
+the font to the compiler. What travels is the structure and the page setup, not
+the typography of the screen. Characters outside Latin-1 fall back to a bundled
+font that covers Latin Extended, Greek and Cyrillic; anything beyond that (CJK,
+Arabic, Hebrew) has no shape available. That is not silent: the export names the
+characters it could not set and points at HTML or LaTeX, which handle them.
+*(Added 2026-08-20.)*
 
 ## Footnotes in the HTML export sit at the back, never at the foot of a page
 
@@ -70,8 +95,10 @@ pages in it, and the only standard that could place a note on a printed sheet �
 export therefore always puts the notes at the end of the document, numbered, with
 a link to each note and back again. The numbers are the same ones as on screen,
 so nothing is lost or renumbered; only the position differs. Printing that HTML
-to PDF keeps them at the back. If you need notes truly at the foot of the sheet
-in a PDF, use the LaTeX (`.tex`) export. *(Added 2026-08-18.)*
+to PDF keeps them at the back, and so does the built-in **PDF** export: which
+note lands on which sheet only becomes clear after the layout, and by then the
+sheet is set. If you need notes truly at the foot of the sheet, use the LaTeX
+(`.tex`) export. *(Added 2026-08-18; the built-in PDF export added 2026-08-20.)*
 
 ## A printed HTML document has no page numbers
 

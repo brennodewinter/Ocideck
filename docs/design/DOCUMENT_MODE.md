@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). Since 2026-08-17 that page setup may also **travel in the document itself**, in the Pandoc keys `papersize:` and `geometry:`, written only on request — which reverses the "settings, not file content" position of §14.5 (§15, including the open point in §15.4). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-19 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). Since 2026-08-17 that page setup may also **travel in the document itself**, in the Pandoc keys `papersize:` and `geometry:`, written only on request — which reverses the "settings, not file content" position of §14.5 (§15, including the open point in §15.4). Since 2026-08-20 a document also exports to a **PDF that is set rather than photographed** — a real text layer, headings as a bookmark tree, the page setup and the header/footer band carried along — which revises the "no PDF engine" position of §6 for a typesetter in the tree while leaving the rejection of external converters intact (§6, §11.5). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-20 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -329,6 +329,23 @@ Small required changes:
 **Decision (owner): in-tree only — the `.md` itself + continuous HTML +
 print-to-PDF. No pandoc, no bundled converter, no `.docx`/`.odt` for now.**
 
+> **Revised 2026-08-20 — the PDF is now written in-tree.** The rejection below
+> stands word for word for a *converter*: no pandoc, no LibreOffice, no bundled
+> headless browser. What it does not cover is a **typesetter** in the tree
+> itself. `package:pdf` was already a dependency (the deck's image-per-page
+> export uses it) and it sets text as text: `lib/services/pdf/` turns the
+> projected document into a PDF with a real text layer, selectable and
+> searchable, with the headings as a bookmark tree. No subprocess, no external
+> binary, no network, no provisioning — so none of the three reasons below is
+> touched. It is the same "written in-tree, exactly as the PPTX writer
+> hand-builds OOXML" route this section already prescribes for a future
+> `.docx`/`.odt`, taken one format earlier.
+>
+> What that costs, and what the honest scope of §11.5 becomes, is written out
+> there. The print-to-PDF route via the HTML is **not** withdrawn: it stays the
+> way to get formulas, Mermaid and charts *rendered*, which a PDF without
+> JavaScript cannot do.
+
 **Pandoc / LibreOffice: rejected**, for three converging reasons:
 
 1. A native subprocess **escapes NetGuard interception** and can itself fetch
@@ -593,18 +610,39 @@ String projectedBody = DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience
   documented blind spot). The real guarantee is therefore a **mandatory
   fail-closed test** (see §11.5), not the compiler.
 
-**PDF — honest scope.** OciDeck produces the **projected, accessible continuous
-HTML**; a PDF is obtained by the user printing that HTML through their **own
-browser/OS** (Print → Save as PDF). OciDeck ships **no** HTML→PDF engine:
+**PDF — honest scope.** *(Rewritten 2026-08-20; the previous text, kept below,
+described the state before the in-tree typesetter.)* OciDeck now **sets** the
+document's PDF itself, in `lib/services/pdf/`. Two claims hold and are tested:
+the text in that file is **real text** (a test inflates the content streams and
+reads it back — `test/pdf/pdf_text_probe.dart`), and the body it carries is the
+**projected** one, proven fail-closed against a redacted BSN in the delivered
+bytes rather than in the layer before them
+(`test/pdf/document_pdf_export_privacy_test.dart`).
+
+Four things are deliberately *not* claimed. **WCAG conformance** — the file has a
+text layer and a bookmark tree, which is what "accessible" means here; it carries
+no tagged-PDF structure tree and nothing has been tried with a real screen
+reader. **Formulas, Mermaid and charts** are not drawn: those need a JavaScript
+layer a PDF does not have, so their source is printed in a monospaced box with a
+label, and the honest route to a rendered version is the HTML export or LaTeX.
+**Footnotes** land at the back, not at the foot of the sheet — the same wall the
+HTML route hits (KNOWN_LIMITATIONS.md), and for the same reason: the note's page
+is only known after the layout. **The typeface** is a standard PDF face, serif or
+sans after the style profile, exactly as the LaTeX export leaves the font to the
+compiler; characters beyond what the bundled fallback covers are counted and
+reported rather than dropped in silence.
+
+*Superseded text (pre-2026-08-20):* OciDeck produces the **projected, accessible
+continuous HTML**; a PDF is obtained by the user printing that HTML through their
+**own browser/OS** (Print → Save as PDF). OciDeck ships **no** HTML→PDF engine:
 `package:printing`'s `convertHtml` is unsupported on desktop, a bundled headless
 browser rebuilds the removed provisioning model and escapes NetGuard (the pandoc
 reasons, §6), and the image-per-page `pw.Document` path has **no** text layer
-(rejected for documents, §6). We do **not** promise the PDF keeps a text layer or
-accessibility tree — that depends on the user's browser/OS, which we do not
-control (guardian finding). The claim is bounded to what we produce: *"OciDeck
-gives you accessible HTML; whether the PDF preserves that is up to your
-browser."* The HTML that the user prints carries the **already-projected**
-(redacted) body, so nothing un-scanned leaves the machine.
+(rejected for documents, §6). That last sentence is still true and is precisely
+why the new path does not use it: the deck's `pw.Document` route pastes images,
+the document's route lays out `pw.MultiPage` widgets. The print-to-PDF route
+remains available and remains the one where OciDeck promises nothing about the
+result — that is the browser's doing.
 
 **Gantt in a document needs no special case.** A document has no per-slide
 `_class:gantt`; a gantt is authored as a ` ```mermaid ` gantt fence, which the

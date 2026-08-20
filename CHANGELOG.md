@@ -1780,6 +1780,23 @@ that before deciding whether this alpha fits what you are doing.
   alt-tekst weg; die reist nu als eigen blok met haar hele Markdown erin, en
   onder de tekenaars ligt een vangnet zodat een onbekend blok nooit meer het
   hele document kan meenemen.
+- **Een document exporteert naar PDF, en die PDF is gezet in plaats van
+  gefotografeerd.** De documentexport bood `.md`, HTML en LaTeX; wie een PDF
+  wilde moest de HTML zelf in zijn browser afdrukken. Dat was geen vergetelheid
+  maar een vastgelegde keuze: een HTML→PDF-motor vraagt óf een extern programma
+  óf een meegeleverde browser die aan de netwerkbewaking ontsnapt, en het
+  bestaande PDF-pad van een presentatie plakt één bitmap per bladzijde. Die
+  bezwaren gelden voor een converter, niet voor een zetter in de boom zelf. De
+  PDF die er nu uit komt draagt echte tekst: te selecteren, te doorzoeken en
+  voor te lezen, met de koppen als bladwijzerboom, de paginamaat en marges die
+  je koos, je pagina-einden als echte vellen, en een inhoudsopgave met
+  bladzijdenummers waarop je kunt klikken. Wat een PDF niet kan tekenen —
+  formules, mermaid-diagrammen en grafieken, die alle drie een JavaScript-laag
+  vragen — staat erin als bron met een aanduiding erboven, want een leeg vlak
+  laat de lezer denken dat er niets hoorde te staan. Voetnoten staan achterin:
+  welke noot op welk blad landt, blijkt pas ná de opmaak. En een teken waarvoor
+  geen enkele letter een vorm heeft verdwijnt in een PDF zonder klacht uit de
+  tekstlaag, dus die worden geteld en gemeld in plaats van stil weggelaten.
 
 - **Een pentestrapport blijft in de visuele editor bewerkbaar.** De vijf
   rapportblokken — bevinding, ondertekening, bevindingenoverzicht, checklist en

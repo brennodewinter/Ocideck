@@ -4702,19 +4702,56 @@ dingen:
   tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand,
   toegankelijk HTML-bestand dat in elke browser opent zonder internet, met zijn
   tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd;
+  **PDF** is een afgewerkt vel met een echte tekstlaag (zie hieronder);
   **LaTeX (`.tex`)** is een LaTeX-`article`-document — wiskunde (`$...$` /
   `$$...$$`) gaat er ongewijzigd doorheen, en afbeeldingen worden met een relatief
   pad aangehaald (houd ze naast de `.tex`). Compileer met `pdflatex` of `xelatex`
   op een gewone TeX Live-installatie. *(Toegevoegd 2026-08-07.)*
 
-Er is geen ingebouwde PDF-knop. Voor een **PDF** open je de geëxporteerde HTML en
-druk je die vanuit je browser af (*Opslaan als PDF*). OciDeck doet geen belofte
-over de toegankelijkheid van een zo gemaakte PDF — dat is het werk van de browser
-— maar de HTML die het exporteert is opgezet om toegankelijk te zijn. Een
-[pagina-einde](#een-pagina-einde-invoegen) `---` dat je hebt geplaatst wordt bij die
-drukstap een echt nieuw vel (en een `\newpage` in de LaTeX-export), terwijl de HTML
-op het scherm doorlopend blijft; hetzelfde geldt voor elke hoofdstukkop wanneer
-*Nieuw hoofdstuk op een nieuwe pagina* aanstaat.
+#### De PDF
+
+**De tekst blijft tekst.** Dit is niet dezelfde PDF als die van een
+*presentatie*. De PDF van een deck is één bitmap per dia: niets om te selecteren,
+niets om te doorzoeken, niets wat een voorleesprogramma kan lezen. De PDF van een
+document wordt **gezet** — de tekst is echte tekst, dus je kunt hem selecteren en
+kopiëren, erin zoeken en hem laten voorlezen, en de koppen worden de
+bladwijzerboom die de meeste lezers in een zijpaneel tonen.
+*(Toegevoegd 2026-08-20.)*
+
+**Wat er wél in zit.** De paginamaat, marges en afloop die je onder *Instellingen
+→ Algemeen → Pagina-instellingen export* koos; de kop- en voetband uit het
+stijlprofiel, met het bladzijdenummer en de classificatie-aanduiding; je
+[pagina-einden](#een-pagina-einde-invoegen) `---` als echte nieuwe vellen, en een
+nieuw vel per hoofdstuk wanneer *Nieuw hoofdstuk op een nieuwe pagina* aanstaat;
+de inhoudsopgave met bladzijdenummers en klikbare regels; klikbare links;
+afbeeldingen ingesloten in het bestand zelf.
+
+**Wat er niet in zit.** Een PDF kent geen JavaScript, dus wat de HTML-export
+daarmee tekent kan hier niet getekend worden: **formules, Mermaid-diagrammen en
+grafieken staan erin als hun bron**, in een blok met vaste letterafstand en een
+regel erboven die zegt wat het is. Dat is een bewuste keuze boven een leeg vlak —
+wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan. Wil je ze
+wél gerenderd, exporteer dan naar HTML (dat tekent alle drie) of naar LaTeX (dat
+de wiskunde zelf zet). **Voetnoten staan achterin**, niet onderaan het blad:
+welke noot op welke bladzijde landt blijkt pas ná de opmaak, en dan staat het vel
+er al. De LaTeX-export zet ze wél onderaan.
+
+**De letter is niet de letter van je document.** De PDF wordt gezet in een
+schreef- of schreefloze letter, afhankelijk van welke je stijlprofiel gebruikt,
+maar niet in het exacte lettertype — dezelfde lijn die de LaTeX-export trekt, die
+de letterkeuze ook aan de compiler laat. Wat meereist is de structuur en de
+paginaopmaak, niet de typografie van dít scherm.
+
+**Tekens buiten Latin-1.** Pools, Grieks en Cyrillisch worden gedekt door een
+meegeleverd lettertype. Wat daarbuiten valt — Chinees, Japans, Koreaans,
+Arabisch, Hebreeuws — heeft geen vorm beschikbaar en zou zonder klacht uit de
+tekstlaag verdwijnen. Stil gebeurt dat niet: de export zegt welke tekens niet
+gezet konden worden en wijst naar HTML of LaTeX, die er wél raad mee weten.
+
+De weg via HTML werkt nog steeds, en is nog steeds de juiste wanneer je de
+diagrammen gerenderd wilt hebben: open de geëxporteerde HTML en druk die vanuit
+je browser af (*Opslaan als PDF*). OciDeck doet geen belofte over de
+toegankelijkheid van een zo gemaakte PDF — dat is het werk van de browser.
 
 Elke export loopt door dezelfde privacyprojectie (OciWacht) als een deck-export,
 zodat wat de deur uit gaat de geredigeerde inhoud is, nooit de rauwe bron.
