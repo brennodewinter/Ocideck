@@ -85,7 +85,15 @@ fi
 
 find_iscc() {
   if [ -n "${OCIDECK_ISCC:-}" ]; then
-    [ -x "$OCIDECK_ISCC" ] && { echo "$OCIDECK_ISCC"; return 0; }
+    # The release job hands this over as a Windows path (C:\…). Git Bash
+    # mostly copes with backslashes, but "mostly" is not a foundation —
+    # normalise to a POSIX path where cygpath exists (on macOS smoke runs the
+    # value is already POSIX and cygpath is absent).
+    local iscc="$OCIDECK_ISCC"
+    if command -v cygpath >/dev/null 2>&1; then
+      iscc="$(cygpath -u "$iscc")"
+    fi
+    [ -x "$iscc" ] && { echo "$iscc"; return 0; }
     echo "ISCC.exe not found at '$OCIDECK_ISCC' (from the environment)." >&2
     return 1
   fi

@@ -514,6 +514,35 @@ void main() {
       },
     );
 
+    test('the packager is forced onto the ISCC that was just pinned', () {
+      // rc2 proved the runner image carries a Chocolatey iscc shim: the job
+      // pinned and sha256-verified 7.1.0, then compiled with an unpinned 6.7.1
+      // because find_iscc tries `command -v iscc` first. A pin that is not
+      // used is decoration — the install step must hand its ISCC over.
+      expect(
+        mirrorYaml.contains('OCIDECK_ISCC='),
+        isTrue,
+        reason:
+            'The install step no longer exports OCIDECK_ISCC, so the packager '
+            'falls back to whatever iscc shim happens to be on PATH.',
+      );
+      expect(
+        mirrorYaml.contains('GITHUB_ENV'),
+        isTrue,
+        reason: 'The OCIDECK_ISCC hand-off does not reach the next step.',
+      );
+      // The comparison itself — the throw message nearby also mentions the
+      // pin, so a disabled `if (\$false)` would still satisfy a looser match.
+      expect(
+        mirrorYaml.contains(r'StartsWith($env:INNOSETUP_VERSION)'),
+        isTrue,
+        reason:
+            'The discovered ISCC is never actually compared against the '
+            'pinned version, so the hand-off could still point at a stray '
+            'older install (the Chocolatey shim rc2 exposed).',
+      );
+    });
+
     test('the mirror job cannot hang forever or race itself', () {
       expect(
         RegExp(r'timeout-minutes:\s*\d+').hasMatch(mirrorYaml),
