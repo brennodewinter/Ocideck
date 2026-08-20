@@ -4612,7 +4612,10 @@ Their shared text and background colours can be set independently; until changed
 they follow the document text and paper colours.
 The A4 preview updates immediately; the visual editor and live
 preview show the same page furniture. HTML places it around the document and repeats it
-at the top and bottom when printing or saving as PDF. Markdown content stays unchanged:
+at the top and bottom of every sheet when printing or saving as PDF, with the text below
+it rather than hidden under it. The page number is the one part a printed HTML leaves
+out: a browser does not tell the content which page it is printing (see
+[KNOWN_LIMITATIONS](KNOWN_LIMITATIONS.md)). Markdown content stays unchanged:
 these values travel in the style profile, not in the document body. The presentation
 editor itself remains deliberately sober and presentation-focused.
 

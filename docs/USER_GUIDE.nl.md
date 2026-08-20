@@ -4655,7 +4655,10 @@ Voor beide banden kies je samen een eigen tekst- en achtergrondkleur; zolang je 
 niet wijzigt volgen ze de tekst- en papierkleur van het document. De A4-preview
 toont deze paginadelen meteen; dezelfde kop en footer staan rond het visuele
 schrijfoppervlak en de live preview. In HTML staan ze rond het document en bij
-afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownbron
+afdrukken/opslaan als PDF herhalen ze boven- en onderaan elk vel, met de tekst
+eronder in plaats van eronder verdwenen. Het paginanummer is het enige dat in een
+afgedrukte HTML wegblijft: een browser vertelt de inhoud niet welke pagina hij
+afdrukt (zie [KNOWN_LIMITATIONS](KNOWN_LIMITATIONS.nl.md)). De Markdownbron
 blijft onveranderd; deze gegevens reizen in het stijlprofiel, niet in de inhoud.
 De presentatiebewerker zelf blijft bewust sober en presentatiegericht.
 

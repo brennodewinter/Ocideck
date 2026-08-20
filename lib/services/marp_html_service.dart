@@ -242,11 +242,6 @@ class MarpHtmlService {
     final classificationBanner = (!continuous && meta.htmlClassification != null
         ? '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>'
         : '');
-    final reserveDocumentChrome = _hasPrintableDocumentChrome(
-      continuous,
-      theme,
-      docMeta,
-    );
     final banner =
         classificationBanner +
         _aiBanner(meta, classificationBanner: classificationBanner.isNotEmpty);
@@ -264,9 +259,9 @@ class MarpHtmlService {
         '${_cspMeta(nonce)}'
         '<title>$title</title>'
         '$headMeta'
-        '<style>${exportBaseCss()}\n$css\n$hljsCss'
+        '<style>${exportBaseCss()}\n$css\n$hljsCss\n$_printCss'
         '${chapterPageBreak ? _chapterPageBreakCss : ''}'
-        '${_pageAtRuleCss(pageSize, pageMargins, reserveDocumentChrome: reserveDocumentChrome, theme: theme, tlp: docMeta.tlp)}$logoCss</style>'
+        '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'
