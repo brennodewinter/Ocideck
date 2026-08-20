@@ -156,12 +156,20 @@ jobs:
           if (-not $iscc) {
             throw 'Geen ISCC.exe gevonden na de installatie.'
           }
-          $versie = (Get-Item $iscc.FullName).VersionInfo.ProductVersion
-          if (-not $versie.StartsWith($env:INNOSETUP_VERSION)) {
-            throw "ISCC op $($iscc.FullName) meldt versie $versie, verwacht $env:INNOSETUP_VERSION."
+          # ISCC.exe draagt geen bruikbare VersionInfo — rc3 velde de vorige
+          # toets met ProductVersion 0.0.0.0 op een correcte 7.1.0-installatie.
+          # De compiler noemt zijn versie wél zelf in zijn banner (rc2-log:
+          # "Compiler engine version: Inno Setup 6.7.1"), dus dáár toetsen we
+          # op. De niet-nul exitcode van een aanroep zonder argumenten is hier
+          # irrelevant: pwsh werpt niet op native exitcodes, en de banner komt
+          # er hoe dan ook uit. Faalt de match, dan staat de volledige uitvoer
+          # in de foutmelding — geen tweede rc om te raden wat er stond.
+          $banner = (& $iscc.FullName 2>&1) -join "`n"
+          if ($banner -notmatch [regex]::Escape("Inno Setup $env:INNOSETUP_VERSION")) {
+            throw "ISCC op $($iscc.FullName) meldt zich niet als Inno Setup $env:INNOSETUP_VERSION. Banner:`n$banner"
           }
           "OCIDECK_ISCC=$($iscc.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          Write-Host "Inno Setup $versie geïnstalleerd: $($iscc.FullName)"
+          Write-Host "Inno Setup $env:INNOSETUP_VERSION geïnstalleerd: $($iscc.FullName)"
 
       # Vóór het zippen, niet erna: het script tekent de .exe en de dll's ter
       # plekke als er ooit een certificaat wordt ingesteld (OCIDECK_WIN_SIGN_SHA1).

@@ -533,8 +533,12 @@ void main() {
       );
       // The comparison itself — the throw message nearby also mentions the
       // pin, so a disabled `if (\$false)` would still satisfy a looser match.
+      // Banner-based, not VersionInfo: ISCC.exe carries ProductVersion
+      // 0.0.0.0 (rc3 failed a correct 7.1.0 install on exactly that).
       expect(
-        mirrorYaml.contains(r'StartsWith($env:INNOSETUP_VERSION)'),
+        mirrorYaml.contains(
+          r'-notmatch [regex]::Escape("Inno Setup $env:INNOSETUP_VERSION")',
+        ),
         isTrue,
         reason:
             'The discovered ISCC is never actually compared against the '
