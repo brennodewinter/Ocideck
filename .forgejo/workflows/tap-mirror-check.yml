@@ -1,0 +1,54 @@
+name: Tap en spiegel toetsen
+
+# Waarom dit een eigen, periodieke werkstroom is en geen stap in de release:
+#
+# De canonieke tap staat op deze forge; `github.com/brennodewinter/homebrew-ocideck`
+# is er een push-spiegel van — een reservekopie, niet de bron. Maar de
+# `brew tap brennodewinter/ocideck`-shorthand van Homebrew lost per definitie op
+# naar GitHub, dus wie die vorm gebruikt haalt zijn cask uit de spiegel. Valt het
+# spiegelen stil, dan krijgen die gebruikers een oude versie terwijl de forge
+# keurig bij is, en geen enkele poort ziet het.
+#
+# In de releaseketen zou die controle wisselvallig zijn: spiegelen is asynchroon
+# en loopt vlak na een release normaal even achter. Vandaar hier, één keer per
+# dag, met een respijt van MIRROR_GRACE_HOURS (24 uur, de standaard in het
+# script). Dat maakt dit meteen ook een dagelijkse vangnetcontrole op de tap
+# zelf: staat die om welke reden dan ook niet op de laatste release, dan valt
+# deze job ook rood — niet pas bij de volgende release.
+on:
+  schedule:
+    # 05:17 UTC: buiten de spits, en niet op het hele uur waar al het andere
+    # cron-werk ter wereld op afgaat.
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  tap-spiegel:
+    name: Staat de tap — en zijn spiegel — op de laatste release?
+    runs-on: docker
+    # Het voorgebakken CI-image draagt node (voor actions/checkout) en curl al;
+    # een kale ubuntu zou daar eerst een apt-get voor moeten optuigen.
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.0
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tap en spiegel tegen de laatste release houden
+        run: |
+          set -euo pipefail
+
+          if bash scripts/verify_homebrew_cask.sh --mirror; then
+            exit 0
+          fi
+
+          {
+            echo "### ❌ Homebrew-tap of spiegel loopt achter"
+            echo ""
+            echo "De installatieroute van macOS-gebruikers wijst niet naar de"
+            echo "laatste release. Zie de staplog hierboven voor welke van de twee"
+            echo "achterloopt: de tap op deze forge, of de GitHub-spiegel."
+            echo ""
+            echo "Zelfde controle met de hand:"
+            echo "\`scripts/verify_homebrew_cask.sh --mirror\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
