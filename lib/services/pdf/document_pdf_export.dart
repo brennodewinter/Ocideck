@@ -156,7 +156,10 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
       logo: logo,
       logoAtTop: theme.documentLogoPosition.startsWith('top'),
       logoAtRight: theme.documentLogoPosition.endsWith('right'),
-      logoWidth: (theme.documentLogoSize ?? 32).toDouble() * 0.5,
+      logoWidth: ((theme.documentLogoSize ?? 32).toDouble() * 0.5).clamp(
+        24.0,
+        72.0,
+      ),
     ),
     pageSize: pageSize,
     pageMargins: pageMargins,
