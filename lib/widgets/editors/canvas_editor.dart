@@ -10,6 +10,7 @@ import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 import 'improvement_ai_suggest_field.dart';
 import 'markdown_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a Procesverbetering `canvas` slide (PROCESS_IMPROVEMENT §3.2).
 ///
@@ -33,7 +34,7 @@ class CanvasEditor extends ConsumerStatefulWidget {
 }
 
 class _CanvasEditorState extends ConsumerState<CanvasEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late String _templateId;
   late List<_RegionControllers> _regions;
   late Set<String> _aiFields;
@@ -41,8 +42,8 @@ class _CanvasEditorState extends ConsumerState<CanvasEditor> {
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title)
-      ..addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title)
+      ..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultCanvasTemplateId
         : widget.slide.improvementTemplateId;
@@ -83,7 +84,7 @@ class _CanvasEditorState extends ConsumerState<CanvasEditor> {
 
   void _onAiSuggested(
     String key,
-    TextEditingController controller,
+    EditorTextController controller,
     String draft,
   ) {
     setState(() => _aiFields.add(key));
@@ -222,11 +223,11 @@ class _RegionControllers {
     this.heading,
     String body,
     VoidCallback onChanged,
-  ) : body = TextEditingController(text: body)..addListener(onChanged);
+  ) : body = EditorTextController(text: body)..addTextListener(onChanged);
 
   final String key;
   final String heading;
-  final TextEditingController body;
+  final EditorTextController body;
 
   String headingLabel(String lang, String templateId) {
     final t = canvasTemplateById(templateId);

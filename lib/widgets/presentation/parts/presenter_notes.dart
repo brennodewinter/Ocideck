@@ -50,20 +50,20 @@ extension _PresenterNotes on _FullscreenPresenterState {
     final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
     final text = _userNoteTextFor(slide);
     if (_userNoteCtrl!.text == text) return;
-    _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
+    _userNoteCtrl!.removeTextListener(_onUserNoteTextChanged);
     _userNoteCtrl!.text = text;
-    _userNoteCtrl!.addListener(_onUserNoteTextChanged);
+    _userNoteCtrl!.addTextListener(_onUserNoteTextChanged);
   }
 
   void _openUserNotesMode() {
     _rebuild(() {
       _userNotesMode = true;
-      _userNoteCtrl ??= TextEditingController();
-      _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
+      _userNoteCtrl ??= EditorTextController();
+      _userNoteCtrl!.removeTextListener(_onUserNoteTextChanged);
       _userNoteCtrl!.text = _userNoteTextFor(
         widget.slides[_index.clamp(0, widget.slides.length - 1)],
       );
-      _userNoteCtrl!.addListener(_onUserNoteTextChanged);
+      _userNoteCtrl!.addTextListener(_onUserNoteTextChanged);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _userNotesFocusNode.requestFocus();
@@ -75,7 +75,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
     _persistUserNoteFromController();
     _rebuild(() {
       _userNotesMode = false;
-      _userNoteCtrl?.removeListener(_onUserNoteTextChanged);
+      _userNoteCtrl?.removeTextListener(_onUserNoteTextChanged);
       _userNoteCtrl?.dispose();
       _userNoteCtrl = null;
     });

@@ -53,6 +53,7 @@ import 'audience_controls_bar.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
+import '../editors/editor_text_controller.dart';
 
 part 'parts/presenter_beamer_payload.dart';
 part 'parts/presenter_questions.dart';
@@ -621,7 +622,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   bool _userNotesMode = false;
   NotesEditorMode _userNotesEditorMode = NotesEditorMode.markdown;
   late Map<String, String> _userNotes;
-  TextEditingController? _userNoteCtrl;
+  EditorTextController? _userNoteCtrl;
   late final FocusNode _userNotesFocusNode;
 
   /// Live tabelbewerking op een tabeldia (toets E).

@@ -5,6 +5,7 @@ import '../../models/asset_overview_spec.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for an `assets` slide: a title plus up to [assetOverviewMaxGroups]
 /// kinds of exposed object, each with how many there are, how many need work,
@@ -32,25 +33,25 @@ class AssetOverviewEditor extends StatefulWidget {
 
 class _GroupControllers {
   _GroupControllers(AssetGroup group, VoidCallback onChanged)
-    : name = TextEditingController(text: group.name)..addListener(onChanged),
-      total = TextEditingController(text: _count(group.total))
-        ..addListener(onChanged),
-      atRisk = TextEditingController(text: _count(group.atRisk))
-        ..addListener(onChanged),
-      newlyFound = TextEditingController(text: _count(group.newlyFound))
-        ..addListener(onChanged),
-      unowned = TextEditingController(text: _count(group.unowned))
-        ..addListener(onChanged);
+    : name = EditorTextController(text: group.name)..addTextListener(onChanged),
+      total = EditorTextController(text: _count(group.total))
+        ..addTextListener(onChanged),
+      atRisk = EditorTextController(text: _count(group.atRisk))
+        ..addTextListener(onChanged),
+      newlyFound = EditorTextController(text: _count(group.newlyFound))
+        ..addTextListener(onChanged),
+      unowned = EditorTextController(text: _count(group.unowned))
+        ..addTextListener(onChanged);
 
   /// A zero shows as an empty field: a fresh row should invite a figure, not
   /// present a nought the author has to select and overwrite.
   static String _count(int value) => value == 0 ? '' : '$value';
 
-  final TextEditingController name;
-  final TextEditingController total;
-  final TextEditingController atRisk;
-  final TextEditingController newlyFound;
-  final TextEditingController unowned;
+  final EditorTextController name;
+  final EditorTextController total;
+  final EditorTextController atRisk;
+  final EditorTextController newlyFound;
+  final EditorTextController unowned;
 
   AssetGroup toGroup() => AssetGroup(
     name: name.text.trim(),
@@ -70,7 +71,7 @@ class _GroupControllers {
 }
 
 class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_GroupControllers> _groups;
 
   @override
@@ -80,7 +81,8 @@ class _AssetOverviewEditorState extends State<AssetOverviewEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = TextEditingController(text: spec.title)..addListener(_onChanged);
+    _title = EditorTextController(text: spec.title)
+      ..addTextListener(_onChanged);
     _groups = spec.groups.map((g) => _GroupControllers(g, _onChanged)).toList();
     if (_groups.isEmpty) {
       _groups = [_GroupControllers(const AssetGroup(), _onChanged)];

@@ -9,6 +9,7 @@ import 'advanced_section.dart';
 import 'audio_attachment_editor.dart';
 import '../../theme/app_theme.dart';
 import '../../platform/platform_features.dart';
+import 'editor_text_controller.dart';
 
 class VideoSlideEditor extends StatefulWidget {
   final Slide slide;
@@ -36,19 +37,19 @@ class VideoSlideEditor extends StatefulWidget {
 }
 
 class _VideoSlideEditorState extends State<VideoSlideEditor> {
-  late final TextEditingController _title;
-  late final TextEditingController _source;
-  late final TextEditingController _start;
-  late final TextEditingController _end;
+  late final EditorTextController _title;
+  late final EditorTextController _source;
+  late final EditorTextController _start;
+  late final EditorTextController _end;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title)
-      ..addListener(_emitTitle);
-    _source = TextEditingController(text: widget.slide.videoPath);
-    _start = TextEditingController(text: _secText(widget.slide.videoStartMs));
-    _end = TextEditingController(text: _secText(widget.slide.videoEndMs));
+    _title = EditorTextController(text: widget.slide.title)
+      ..addTextListener(_emitTitle);
+    _source = EditorTextController(text: widget.slide.videoPath);
+    _start = EditorTextController(text: _secText(widget.slide.videoStartMs));
+    _end = EditorTextController(text: _secText(widget.slide.videoEndMs));
   }
 
   @override

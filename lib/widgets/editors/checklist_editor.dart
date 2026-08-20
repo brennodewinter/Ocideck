@@ -12,6 +12,7 @@ import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a `checklist` slide (PENTEST_MIAUW §3.2): a standard label plus a
 /// list of tests, each with an id, name, MIAUW **tri-state** status, an optional
@@ -45,17 +46,17 @@ class ChecklistEditor extends ConsumerStatefulWidget {
 /// The controllers + status for one editable checklist row.
 class _RowControllers {
   _RowControllers(ChecklistRow row, VoidCallback onChanged)
-    : id = TextEditingController(text: row.id)..addListener(onChanged),
-      test = TextEditingController(text: row.test)..addListener(onChanged),
-      finding = TextEditingController(text: row.findingId)
-        ..addListener(onChanged),
-      note = TextEditingController(text: row.note)..addListener(onChanged),
+    : id = EditorTextController(text: row.id)..addTextListener(onChanged),
+      test = EditorTextController(text: row.test)..addTextListener(onChanged),
+      finding = EditorTextController(text: row.findingId)
+        ..addTextListener(onChanged),
+      note = EditorTextController(text: row.note)..addTextListener(onChanged),
       status = row.status;
 
-  final TextEditingController id;
-  final TextEditingController test;
-  final TextEditingController finding;
-  final TextEditingController note;
+  final EditorTextController id;
+  final EditorTextController test;
+  final EditorTextController finding;
+  final EditorTextController note;
   ChecklistStatus status;
 
   ChecklistRow toRow() => ChecklistRow(
@@ -75,8 +76,8 @@ class _RowControllers {
 }
 
 class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
-  late final TextEditingController _standard;
-  late final TextEditingController _scope;
+  late final EditorTextController _standard;
+  late final EditorTextController _scope;
   late List<_RowControllers> _rows;
 
   @override
@@ -86,10 +87,10 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _standard = TextEditingController(text: spec.standardLabel)
-      ..addListener(_emit);
-    _scope = TextEditingController(text: widget.slide.checklistScope)
-      ..addListener(_emit);
+    _standard = EditorTextController(text: spec.standardLabel)
+      ..addTextListener(_emit);
+    _scope = EditorTextController(text: widget.slide.checklistScope)
+      ..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) _rows = [_RowControllers(const ChecklistRow(), _emit)];
   }

@@ -15,6 +15,7 @@ import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../dialogs/ai_image_outbound_dialog.dart';
+import 'editor_text_controller.dart';
 
 /// A per-usage alt-text field (WCAG 1.1.1). The value lives on the slide
 /// ([Slide.imageAltText]) and travels in the `.md` — no sidecar. When
@@ -53,13 +54,14 @@ class AltTextField extends ConsumerStatefulWidget {
 }
 
 class _AltTextFieldState extends ConsumerState<AltTextField> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
   bool _busy = false;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.altText)..addListener(_onEdited);
+    _ctrl = EditorTextController(text: widget.altText)
+      ..addTextListener(_onEdited);
   }
 
   // Only user keystrokes reach this: external changes resync with the listener
@@ -71,9 +73,9 @@ class _AltTextFieldState extends ConsumerState<AltTextField> {
   void didUpdateWidget(AltTextField old) {
     super.didUpdateWidget(old);
     if (widget.altText != _ctrl.text) {
-      _ctrl.removeListener(_onEdited);
+      _ctrl.removeTextListener(_onEdited);
       _ctrl.text = widget.altText;
-      _ctrl.addListener(_onEdited);
+      _ctrl.addTextListener(_onEdited);
     }
   }
 

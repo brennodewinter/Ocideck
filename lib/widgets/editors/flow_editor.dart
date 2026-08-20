@@ -8,6 +8,7 @@ import '../../services/improvement/flow_spec.dart';
 import '../../services/improvement_ai_service.dart';
 import '_editor_field.dart';
 import 'improvement_ai_suggest_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a Procesverbetering `flow` slide (PROCESS_IMPROVEMENT §3.4).
 ///
@@ -30,17 +31,17 @@ class FlowEditor extends ConsumerStatefulWidget {
 }
 
 class _FlowEditorState extends ConsumerState<FlowEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late String _templateId;
   late String _layoutToken;
-  late List<TextEditingController> _bullets;
+  late List<EditorTextController> _bullets;
   late Set<String> _aiFields;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title)
-      ..addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title)
+      ..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultFlowTemplateId
         : widget.slide.improvementTemplateId;
@@ -98,12 +99,12 @@ class _FlowEditorState extends ConsumerState<FlowEditor> {
   void _loadBullets(List<String> raw) {
     _disposeBullets();
     if (raw.isEmpty) {
-      _bullets = [TextEditingController()..addListener(_emit)];
+      _bullets = [EditorTextController()..addTextListener(_emit)];
       return;
     }
     _bullets = [
       for (final item in raw)
-        TextEditingController(text: bulletText(item))..addListener(_emit),
+        EditorTextController(text: bulletText(item))..addTextListener(_emit),
     ];
   }
 
@@ -157,7 +158,7 @@ class _FlowEditorState extends ConsumerState<FlowEditor> {
   void _addBullet({int after = -1}) {
     setState(() {
       final idx = after < 0 ? _bullets.length : after + 1;
-      _bullets.insert(idx, TextEditingController()..addListener(_emit));
+      _bullets.insert(idx, EditorTextController()..addTextListener(_emit));
     });
     _emit();
   }

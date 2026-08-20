@@ -3,6 +3,7 @@ import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 /// Editor voor een broncode-slide: een optionele titel, een keuzelijst voor de
 /// programmeertaal (voor syntaxkleuring) en een monospace tekstveld voor de code.
@@ -50,18 +51,18 @@ class CodeEditor extends StatefulWidget {
 }
 
 class _CodeEditorState extends State<CodeEditor> {
-  late final TextEditingController _title;
-  late final TextEditingController _code;
+  late final EditorTextController _title;
+  late final EditorTextController _code;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(
       () => widget.onUpdate(widget.slide.copyWith(title: _title.text)),
     );
-    _code = TextEditingController(text: widget.slide.customMarkdown);
-    _code.addListener(
+    _code = EditorTextController(text: widget.slide.customMarkdown);
+    _code.addTextListener(
       () => widget.onUpdate(widget.slide.copyWith(customMarkdown: _code.text)),
     );
   }

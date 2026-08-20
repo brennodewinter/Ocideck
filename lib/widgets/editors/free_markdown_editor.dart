@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 class FreeMarkdownEditor extends StatefulWidget {
   final Slide slide;
@@ -20,13 +21,13 @@ class FreeMarkdownEditor extends StatefulWidget {
 }
 
 class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.slide.customMarkdown);
-    _ctrl.addListener(_emit);
+    _ctrl = EditorTextController(text: widget.slide.customMarkdown);
+    _ctrl.addTextListener(_emit);
   }
 
   void _emit() {

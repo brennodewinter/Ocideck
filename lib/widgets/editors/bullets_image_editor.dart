@@ -12,6 +12,7 @@ import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 class BulletsImageEditor extends StatefulWidget {
   final Slide slide;
@@ -48,8 +49,8 @@ class BulletsImageEditor extends StatefulWidget {
 }
 
 class _BulletsImageEditorState extends State<BulletsImageEditor> {
-  late final TextEditingController _title;
-  late List<TextEditingController> _bullets;
+  late final EditorTextController _title;
+  late List<EditorTextController> _bullets;
   late List<int> _levels;
   late List<bool> _checked;
   late List<bool> _isHeading;
@@ -59,24 +60,24 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late bool _showChecklistProgress;
   late bool _continueNumbering;
   late bool _continuesSplit;
-  late final TextEditingController _richText;
+  late final EditorTextController _richText;
 
   static const _maxLevel = kMaxIndentButtonLevel;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(_emit);
     _listStyle = widget.slide.listStyle;
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _continueNumbering = widget.slide.continueNumbering;
     _continuesSplit = widget.slide.continuesSplit;
-    _richText = TextEditingController(
+    _richText = EditorTextController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
     );
-    _richText.addListener(_emit);
+    _richText.addTextListener(_emit);
     final list = widget.slide.bullets.isEmpty ? [''] : widget.slide.bullets;
     _isHeading = list.map(isGroupHeading).toList();
     _levels = list.map((b) => isGroupHeading(b) ? 0 : bulletLevel(b)).toList();
@@ -93,9 +94,9 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _focusNodes = List.generate(_bullets.length, (_) => FocusNode());
   }
 
-  TextEditingController _makeCtrl(String text) {
-    final c = TextEditingController(text: text);
-    c.addListener(_emit);
+  EditorTextController _makeCtrl(String text) {
+    final c = EditorTextController(text: text);
+    c.addTextListener(_emit);
     return c;
   }
 
@@ -189,9 +190,9 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   void _removeBulletAndFocus(int i) {
     if (_bullets.length == 1) {
       setState(() {
-        _bullets[i].removeListener(_emit);
+        _bullets[i].removeTextListener(_emit);
         _bullets[i].clear();
-        _bullets[i].addListener(_emit);
+        _bullets[i].addTextListener(_emit);
         _levels[i] = 0;
         _checked[i] = false;
         _isHeading[i] = false;
@@ -202,7 +203,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     }
     final target = (i - 1).clamp(0, _bullets.length - 2);
     setState(() {
-      _bullets[i].removeListener(_emit);
+      _bullets[i].removeTextListener(_emit);
       _bullets[i].dispose();
       _bullets.removeAt(i);
       _levels.removeAt(i);
@@ -238,7 +239,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       return;
     }
     setState(() {
-      _bullets[i].removeListener(_emit);
+      _bullets[i].removeTextListener(_emit);
       _bullets[i].dispose();
       _bullets[i] = _makeCtrl(lines[0]);
       _isHeading[i] = false;

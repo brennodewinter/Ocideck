@@ -6,6 +6,7 @@ import '../../models/timeline.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a timeline slide: a title, a reorderable list of events (each with
 /// a marker, title and optional description) and the layout/animation options.
@@ -32,9 +33,9 @@ class TimelineEditor extends StatefulWidget {
 }
 
 class _EventRow {
-  final TextEditingController marker;
-  final TextEditingController title;
-  final TextEditingController description;
+  final EditorTextController marker;
+  final EditorTextController title;
+  final EditorTextController description;
   final FocusNode titleFocus;
 
   /// Whether this event is the timeline's current point ("you are here").
@@ -42,9 +43,9 @@ class _EventRow {
   bool current = false;
 
   _EventRow(TimelineEvent e)
-    : marker = TextEditingController(text: e.marker),
-      title = TextEditingController(text: e.title),
-      description = TextEditingController(text: e.description),
+    : marker = EditorTextController(text: e.marker),
+      title = EditorTextController(text: e.title),
+      description = EditorTextController(text: e.description),
       titleFocus = FocusNode();
 
   TimelineEvent toEvent() => TimelineEvent(
@@ -62,7 +63,7 @@ class _EventRow {
 }
 
 class _TimelineEditorState extends State<TimelineEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_EventRow> _rows;
   late TimelineLayout _layout;
   late TimelineReveal _reveal;
@@ -77,8 +78,8 @@ class _TimelineEditorState extends State<TimelineEditor> {
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(_emit);
     _layout = widget.slide.timelineLayout;
     _reveal = widget.slide.timelineReveal;
     _animationOverrideMs = widget.slide.timelineAnimationMs;
@@ -97,9 +98,9 @@ class _TimelineEditorState extends State<TimelineEditor> {
 
   _EventRow _makeRow(TimelineEvent e) {
     final row = _EventRow(e);
-    row.marker.addListener(_emit);
-    row.title.addListener(_emit);
-    row.description.addListener(_emit);
+    row.marker.addTextListener(_emit);
+    row.title.addTextListener(_emit);
+    row.description.addTextListener(_emit);
     return row;
   }
 

@@ -9,6 +9,7 @@ import '../../services/management_system_catalog.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a `controlStatus` slide (ISO_MANAGEMENTSYSTEEM §4): a section
 /// heading plus a list of controls, each with an implementation status, an
@@ -38,23 +39,24 @@ class ControlStatusEditor extends ConsumerStatefulWidget {
 
 class _RowControllers {
   _RowControllers(ControlStatusRow row, VoidCallback onChanged)
-    : id = TextEditingController(text: row.id)..addListener(onChanged),
-      control = TextEditingController(text: row.control)
-        ..addListener(onChanged),
-      owner = TextEditingController(text: row.owner)..addListener(onChanged),
-      target = TextEditingController(text: row.target)..addListener(onChanged),
-      evidence = TextEditingController(text: row.evidence)
-        ..addListener(onChanged),
-      note = TextEditingController(text: row.note)..addListener(onChanged),
+    : id = EditorTextController(text: row.id)..addTextListener(onChanged),
+      control = EditorTextController(text: row.control)
+        ..addTextListener(onChanged),
+      owner = EditorTextController(text: row.owner)..addTextListener(onChanged),
+      target = EditorTextController(text: row.target)
+        ..addTextListener(onChanged),
+      evidence = EditorTextController(text: row.evidence)
+        ..addTextListener(onChanged),
+      note = EditorTextController(text: row.note)..addTextListener(onChanged),
       status = row.status,
       maturity = row.maturity;
 
-  final TextEditingController id;
-  final TextEditingController control;
-  final TextEditingController owner;
-  final TextEditingController target;
-  final TextEditingController evidence;
-  final TextEditingController note;
+  final EditorTextController id;
+  final EditorTextController control;
+  final EditorTextController owner;
+  final EditorTextController target;
+  final EditorTextController evidence;
+  final EditorTextController note;
   ControlStatus status;
   int maturity;
 
@@ -80,7 +82,7 @@ class _RowControllers {
 }
 
 class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_RowControllers> _rows;
 
   @override
@@ -90,7 +92,7 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = TextEditingController(text: spec.heading)..addListener(_emit);
+    _title = EditorTextController(text: spec.heading)..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) {
       _rows = [_RowControllers(const ControlStatusRow(), _emit)];

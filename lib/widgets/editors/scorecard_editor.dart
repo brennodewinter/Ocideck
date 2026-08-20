@@ -5,6 +5,7 @@ import '../../models/scorecard_spec.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a `scorecard` slide: a title plus up to [scorecardMaxEntries]
 /// headline figures, each with the figure from the previous report and a
@@ -38,22 +39,23 @@ class ScorecardEditor extends StatefulWidget {
 
 class _EntryControllers {
   _EntryControllers(ScorecardEntry entry, VoidCallback onChanged)
-    : label = TextEditingController(text: entry.label)..addListener(onChanged),
-      value = TextEditingController(
+    : label = EditorTextController(text: entry.label)
+        ..addTextListener(onChanged),
+      value = EditorTextController(
         text: entry.value == null ? '' : formatScorecardNumber(entry.value!),
-      )..addListener(onChanged),
-      previous = TextEditingController(
+      )..addTextListener(onChanged),
+      previous = EditorTextController(
         text: entry.previous == null
             ? ''
             : formatScorecardNumber(entry.previous!),
-      )..addListener(onChanged),
-      unit = TextEditingController(text: entry.unit)..addListener(onChanged),
+      )..addTextListener(onChanged),
+      unit = EditorTextController(text: entry.unit)..addTextListener(onChanged),
       polarity = entry.polarity;
 
-  final TextEditingController label;
-  final TextEditingController value;
-  final TextEditingController previous;
-  final TextEditingController unit;
+  final EditorTextController label;
+  final EditorTextController value;
+  final EditorTextController previous;
+  final EditorTextController unit;
   ScorecardPolarity polarity;
 
   ScorecardEntry toEntry() => ScorecardEntry(
@@ -73,7 +75,7 @@ class _EntryControllers {
 }
 
 class _ScorecardEditorState extends State<ScorecardEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_EntryControllers> _entries;
 
   @override
@@ -83,7 +85,7 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = TextEditingController(text: spec.title)..addListener(_emit);
+    _title = EditorTextController(text: spec.title)..addTextListener(_emit);
     _entries = spec.entries.map((e) => _EntryControllers(e, _emit)).toList();
     // A fresh slide carries only the header, because blank rows have no
     // business on disk. The editor hands out the first one to fill in.
@@ -343,7 +345,7 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
   /// it, which is what buys the compact two-row card (same shape as the cockpit
   /// meter fields).
   Widget _field({
-    required TextEditingController controller,
+    required EditorTextController controller,
     required String label,
     required String hint,
     bool numeric = false,
