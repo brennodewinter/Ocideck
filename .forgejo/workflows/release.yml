@@ -375,6 +375,10 @@ jobs:
   windows-ophalen:
     name: Windows ophalen van de spiegel
     runs-on: docker
+    # De poll-lus hieronder is op 45 minuten begrensd, maar één curl zonder
+    # tijdslimiet kan daar doorheen hangen (rc1-les: een hang loopt anders tot
+    # de zes-uur-standaard door). Dit is de harde buitenmuur.
+    timeout-minutes: 75
     # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: dit image draagt
     # al node/curl/ca-certificates/jq (zie .forgejo/ci-image/Dockerfile) en staat
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
@@ -417,21 +421,35 @@ jobs:
           REPO="brennodewinter/Ocideck"
           API="https://api.github.com/repos/$REPO"
 
+          # Elke curl draagt een tijdslimiet: een geblackholede route (DROP
+          # i.p.v. REJECT) laat een kale curl anders minutenlang per poging
+          # hangen, en de 45-minutenlus hieronder telt pogingen, geen tijd.
           have_asset() {
             local f
             for f in "${BESTANDEN[@]}"; do
-              curl -fsSLo "$f" \
+              curl -fsSLo "$f" --connect-timeout 15 --max-time 300 \
                 "https://github.com/$REPO/releases/download/$TAG/$f" 2>/dev/null || return 1
             done
           }
-          gh_api() { curl -fsS -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
+          gh_api() { curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
             -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
           dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
             -d "{\"ref\":\"$TAG\"}"; }
-          # Laatste run van de Windows-workflow op DEZE tag: "status conclusion url".
+          # Laatste run van de Windows-workflow op DEZE tag:
+          # "status conclusion url created_at". De created_at rijdt mee omdat
+          # de conclusie alleen iets zegt over DEZE poging als de run ook bij
+          # deze poging hoort — zie de T0-vergelijking in de lus.
           run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
             | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
-                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "")"'; }
+                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "") \(.created_at // "")"'; }
+
+          # Het anker voor "hoort die run bij deze poging". Ruim vóór de
+          # dispatch genomen, met vijf minuten marge omdat een run die de
+          # tag-push op de spiegel zélf triggerde seconden vóór deze job kan
+          # zijn aangemaakt — die run is van ons en telt mee.
+          T0="$(date -u -d '5 minutes ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null \
+            || date -u -v-5M +%Y-%m-%dT%H:%M:%SZ)"
 
           # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
           # eerdere run), dan zijn we meteen klaar.
@@ -465,14 +483,33 @@ jobs:
               st="$(printf '%s' "$info" | awk '{print $1}')"
               cc="$(printf '%s' "$info" | awk '{print $2}')"
               LAST_URL="$(printf '%s' "$info" | awk '{print $3}')"
-              echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-}"
+              created="$(printf '%s' "$info" | awk '{print $4}')"
+              echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-} ${created:-}"
               if [ "$POGING" -eq 5 ] && { [ -z "$st" ] || [ "$st" = "null" ]; }; then
                 echo "Nog geen run zichtbaar — opnieuw dispatchen."; dispatch || true
               fi
               if [ "${cc:-}" = "failure" ] || [ "${cc:-}" = "cancelled" ]; then
-                echo "De Windows-build faalde: ${LAST_URL:-zie GitHub Actions}." >&2
-                echo "Herstel dat en hertrigger deze release-workflow." >&2
-                exit 1
+                # Alleen fataal als de run bij DEZE poging hoort. Na het
+                # afbreken van v0.4.7-rc1 stond er een cancelled run op de tag;
+                # een hertrigger las die oude conclusie binnen ~11 s als "de
+                # build faalde" en doodde de release, met de URL van de vórige
+                # poging als dwaalspoor — terwijl de zojuist gedispatchte run
+                # gewoon aan het bouwen was (dispatch→zichtbaar is niet
+                # gegarandeerd binnen de sleep 10 hierboven). ISO-tijden
+                # vergelijken lexicografisch correct.
+                if [ -n "$created" ] && [ "$created" \< "$T0" ]; then
+                  if [ -z "${HERDISPATCHT:-}" ]; then
+                    echo "Verouderde $cc-run van vóór deze poging ($created) — eenmalig opnieuw dispatchen."
+                    dispatch || true
+                    HERDISPATCHT=1
+                  else
+                    echo "[$POGING] wachten tot een run van deze poging zichtbaar is (oude run: $cc)."
+                  fi
+                else
+                  echo "De Windows-build faalde: ${LAST_URL:-zie GitHub Actions}." >&2
+                  echo "Herstel dat en hertrigger deze release-workflow." >&2
+                  exit 1
+                fi
               fi
             fi
             sleep 60
