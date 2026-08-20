@@ -116,4 +116,90 @@ void main() {
       );
     }
   });
+
+  // De visuele stand hoort er gelijk uit te zien als de weergave naast de bron.
+  // Quill's standaard-citaat is een grijze streep met vervaagde tekst; Quill's
+  // standaard-codeblok is een licht vlak met blauwe tekst. Beide lezen als een
+  // ander ontwerp. Deze toets bewaakt dat de schrijfstand dezelfde gestileerde
+  // containers draagt als de lezer.
+  test(
+    'documentprofiel: citaat en codeblok dragen dezelfde styling als de lezer',
+    () {
+      const scheme = ColorScheme.light();
+      final theme = MarkdownEditorTheme.documentSurface(
+        scheme: scheme,
+        profile: ThemeProfile.vigilis,
+        fontFamily: ThemeProfile.vigilis.fontFamily,
+        documentTypography: true,
+      );
+      final styles = defaultStylesFor(theme);
+
+      // Citaat: gekleurde balk links, getinte achtergrond, citaattekst.
+      expect(styles.quote, isNotNull);
+      final quoteDeco = styles.quote!.decoration as BoxDecoration;
+      expect(
+        quoteDeco.color,
+        isNot(Colors.transparent),
+        reason: 'citaat heeft een achtergrondkleur',
+      );
+      final border = quoteDeco.border as Border;
+      final leftBorder = border.left;
+      expect(leftBorder.width, 3, reason: 'citaatbalk is 3px breed');
+      expect(
+        leftBorder.color,
+        theme.quoteBar,
+        reason: 'citaatbalk volgt het accent',
+      );
+
+      // Codeblok: omrand vlak met monospace, afgeronde hoeken.
+      expect(styles.code, isNotNull);
+      expect(styles.code!.style.fontFamily, 'monospace');
+      expect(styles.code!.style.fontSize, 13.5);
+      final codeDeco = styles.code!.decoration as BoxDecoration;
+      expect(
+        codeDeco.color,
+        isNot(Colors.transparent),
+        reason: 'codeblok heeft een achtergrondkleur',
+      );
+      expect(codeDeco.border, isNotNull, reason: 'codeblok heeft een rand');
+      expect(codeDeco.borderRadius, BorderRadius.circular(8));
+    },
+  );
+
+  // Een profiel met een eigen kopkleur moet die op élk kopniveau dragen —
+  // net als in de lezer en de export. Zonder deze fix gebruikte de visuele
+  // stand altijd tekstkleur voor h1 en accent voor h2+, ook wanneer het
+  // profiel één kleur voor alle koppen koos.
+  test('profiel met documentHeadingColor kleurt h1 en h2 hetzelfde', () {
+    const scheme = ColorScheme.light();
+    final profile = ThemeProfile.vigilis.copyWith(
+      documentHeadingColor: '#003399',
+    );
+    final theme = MarkdownEditorTheme.documentSurface(
+      scheme: scheme,
+      profile: profile,
+      fontFamily: profile.fontFamily,
+    );
+    final styles = defaultStylesFor(theme);
+
+    expect(styles.h1!.style.color, const Color(0xFF003399));
+    expect(
+      styles.h2!.style.color,
+      const Color(0xFF003399),
+      reason:
+          'h2 volgt effectiveDocumentSubheadingColor, die met een '
+          'gezamenlijke kopkleur gelijk is aan h1',
+    );
+  });
+
+  // Zonder profiel valt h1 terug op de tekstkleur en h2+ op het accent —
+  // dezelfde verdeling als de lezer.
+  test('zonder profiel: h1 op tekstkleur, h2 op accent', () {
+    const scheme = ColorScheme.light();
+    final theme = MarkdownEditorTheme.documentSurface(scheme: scheme);
+    final styles = defaultStylesFor(theme);
+
+    expect(styles.h1!.style.color, scheme.onSurface);
+    expect(styles.h2!.style.color, scheme.primary);
+  });
 }

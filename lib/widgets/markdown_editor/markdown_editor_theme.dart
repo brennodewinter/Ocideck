@@ -21,6 +21,22 @@ class MarkdownEditorTheme {
   final String? fontFamily;
   final ThemeProfile? profile;
 
+  /// Tekstkleur van een blokcitaat — los van [text], want een citaat staat
+  /// een tint lager dan de alinea. Alleen gezet door [documentSurface]; de
+  /// notitiepanelen hebben geen citaten en vallen terug op [text].
+  final Color quoteText;
+
+  /// Achtergrondkleur van een blokcitaat. Alleen gezet door [documentSurface].
+  final Color quoteBg;
+
+  /// De gekleurde balk links van een blokcitaat. Alleen gezet door
+  /// [documentSurface]; elders gelijk aan [accent].
+  final Color quoteBar;
+
+  /// Tekstkleur in een codeblok — los van [text], want een profiel kan een
+  /// eigen code-inkt kiezen. Alleen gezet door [documentSurface].
+  final Color codeText;
+
   const MarkdownEditorTheme({
     required this.surface,
     required this.text,
@@ -37,6 +53,10 @@ class MarkdownEditorTheme {
     this.fontFamily,
     this.profile,
     this.documentTypography = false,
+    this.quoteText = Colors.transparent,
+    this.quoteBg = Colors.transparent,
+    this.quoteBar = Colors.transparent,
+    this.codeText = Colors.transparent,
   });
 
   /// Schrijf je op een pagina, dan schrijf je in de lettermaten van die
@@ -131,15 +151,28 @@ class MarkdownEditorTheme {
     final accent = profile == null
         ? scheme.primary
         : AppTheme.parseHexColor(profile.accentColor);
+    // De kopkleuren volgen het profiel: een documentstijl die een eigen
+    // kopkleur kiest krijgt die op élk kopniveau, net als in de lezer en de
+    // export. Zonder profiel valt h1 terug op de tekstkleur en h2+ op het
+    // accent — dezelfde verdeling als [_Theme] in document_markdown_blocks.
+    final headingColor = profile == null
+        ? text
+        : AppTheme.parseHexColor(profile.effectiveDocumentHeadingColor);
+    final subheadingColor = profile == null
+        ? accent
+        : AppTheme.parseHexColor(profile.effectiveDocumentSubheadingColor);
     return MarkdownEditorTheme(
       surface: paper,
       text: text,
       hint: text.withValues(alpha: 0.62),
       link: accent,
-      heading: text,
-      subheading: accent,
+      heading: headingColor,
+      subheading: subheadingColor,
+      // Het codeblok-vlak matcht de lezer: surfaceContainerHighest op 60%
+      // zonder profiel, de profielkleur met. Eerder stond hier
+      // surfaceContainerHigh zonder alpha — een andere tint dan de weergave.
       codeBackground: profile == null
-          ? scheme.surfaceContainerHigh
+          ? scheme.surfaceContainerHighest.withValues(alpha: 0.6)
           : AppTheme.parseHexColor(profile.codeBackgroundColor),
       toolbarIcon: text.withValues(alpha: 0.72),
       accent: accent,
@@ -162,6 +195,18 @@ class MarkdownEditorTheme {
       fontFamily: fontFamily,
       profile: profile,
       documentTypography: documentTypography,
+      // Citaten: de balk en de achtergrond volgen het accent, de tekst staat
+      // een tint lager — dezelfde keuze als [_Theme] in de lezer.
+      quoteText: profile == null ? scheme.onSurfaceVariant : text,
+      quoteBg: profile == null
+          ? scheme.surfaceContainerHighest.withValues(alpha: 0.5)
+          : accent.withValues(alpha: 0.10),
+      quoteBar: accent,
+      // Code-inkt: een profiel kan een eigen kleur kiezen, anders de
+      // tekstkleur — net als in de lezer.
+      codeText: profile?.codeTextColor == null
+          ? scheme.onSurface
+          : AppTheme.parseHexColor(profile!.codeTextColor, fallback: text),
     );
   }
 
