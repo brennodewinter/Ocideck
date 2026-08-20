@@ -533,11 +533,20 @@ void main() {
       );
       // The comparison itself — the throw message nearby also mentions the
       // pin, so a disabled `if (\$false)` would still satisfy a looser match.
-      // Banner-based, not VersionInfo: ISCC.exe carries ProductVersion
-      // 0.0.0.0 (rc3 failed a correct 7.1.0 install on exactly that).
+      // Probed via --version: VersionInfo is 0.0.0.0 (rc3) and the no-args
+      // banner names only the major, never 7.1.0 (rc4).
+      // The invocation, not the word: the comment above the probe also says
+      // "--version", so the word alone survives removing the actual flag.
+      expect(
+        mirrorYaml.contains(r'& $iscc.FullName --version'),
+        isTrue,
+        reason:
+            'The version probe no longer calls ISCC --version — the only '
+            'output that carries the full engine version.',
+      );
       expect(
         mirrorYaml.contains(
-          r'-notmatch [regex]::Escape("Inno Setup $env:INNOSETUP_VERSION")',
+          r'-notmatch [regex]::Escape($env:INNOSETUP_VERSION)',
         ),
         isTrue,
         reason:
