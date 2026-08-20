@@ -4,6 +4,16 @@
 // staat alleen nog hoe een kop, een tabel of een citaat eruitziet. Dat is de
 // afspraak die de PDF-export toetsbaar houdt; zie de kop van
 // `document_pdf_blocks.dart`.
+//
+// **Eén regel beheerst dit hele bestand: wikkel niets in wat niet breken kan.**
+// `MultiPage` laat maar een handvol widgets over een bladovergang heen lopen
+// (`Flex`, `Table`, `Wrap`, `Column`, en een `RichText` die op `span` staat).
+// Wie zo'n widget in een `Container` zet om er marge of een achtergrond aan te
+// geven, neemt hem dat vermogen af — en dan is een alinea die hoger is dan een
+// bladzijde geen lelijke opmaak maar een harde fout die de hele export stukslaat.
+// Daarom komt de witruimte hier uit losse tussenstukken in plaats van uit marges,
+// en dragen een codeblok en een citaat hun achtergrond per regel in plaats van
+// als één kader eromheen.
 
 import 'dart:typed_data';
 
@@ -35,9 +45,7 @@ List<PdfHeadingEntry> headingEntriesOf(List<PdfBlock> blocks) {
   final entries = <PdfHeadingEntry>[];
   for (final block in blocks) {
     if (block is! PdfHeadingBlock) continue;
-    entries.add(
-      PdfHeadingEntry(entries.length, block.level, block.outlineText),
-    );
+    entries.add(PdfHeadingEntry(entries.length, block.level, block.outlineText));
   }
   return entries;
 }
@@ -50,6 +58,7 @@ class DocumentPdfWidgets {
     required this.headings,
     required this.tocTitle,
     required this.verbatimLabel,
+    required this.maxImageHeight,
     this.images = const {},
     this.headingPages = const {},
     this.onHeadingLaidOut,
@@ -68,6 +77,14 @@ class DocumentPdfWidgets {
   /// De aanduiding boven een blok dat letterlijk wordt weergegeven — ook een
   /// vertaalde tekst van de aanroeper.
   final String Function(PdfVerbatimKind kind) verbatimLabel;
+
+  /// Hoe hoog een afbeelding hoogstens mag worden.
+  ///
+  /// Een afbeelding kan niet over een bladovergang heen; is ze hoger dan de
+  /// bladspiegel, dan kan `MultiPage` haar nergens kwijt en breekt de export af.
+  /// De renderer rekent deze grens uit het werkelijke bladformaat — het is dus
+  /// geen schatting maar de maat zelf.
+  final double maxImageHeight;
 
   /// De bytes per afbeeldingsbron. Een PDF verwijst niet naar bestanden buiten
   /// zichzelf: wat er niet in zit, staat er niet in.
@@ -93,23 +110,46 @@ class DocumentPdfWidgets {
     final widgets = <pw.Widget>[];
     for (var index = 0; index < blocks.length; index++) {
       final block = blocks[index];
+      if (block is PdfHeadingBlock && widgets.isNotEmpty) {
+        widgets.add(pw.SizedBox(height: style.headingSpaceBefore(block.level)));
+      }
       final next = index + 1 < blocks.length ? blocks[index + 1] : null;
       if (block is PdfHeadingBlock && next != null && _bindsToHeading(next)) {
-        widgets.add(
-          pw.Inseparable(
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-              children: [_heading(block), _widget(next, tight: tight)],
-            ),
-          ),
-        );
+        widgets.add(_headingBoundToNext(block, next, tight: tight));
         index++;
-        continue;
+      } else {
+        widgets.add(_widget(block, tight: tight));
       }
-      widgets.add(_widget(block, tight: tight));
+      final spacing = _spaceAfter(block, tight: tight);
+      if (spacing > 0) widgets.add(pw.SizedBox(height: spacing));
     }
     return widgets;
   }
+
+  /// De witruimte ná een blok. Komt als los tussenstuk in de stroom en niet als
+  /// marge om het blok heen — zie de kop van dit bestand.
+  double _spaceAfter(PdfBlock block, {required bool tight}) => switch (block) {
+    PdfHeadingBlock() => style.headingSpaceAfter,
+    PdfParagraphBlock() => tight ? style.bodyFontSize * 0.15 : style.blockSpacing,
+    PdfPageBreakBlock() => 0,
+    _ => style.blockSpacing,
+  };
+
+  /// Een kop plus het blok erachter, als één geheel dat niet mag breken.
+  pw.Widget _headingBoundToNext(
+    PdfHeadingBlock heading,
+    PdfBlock next, {
+    required bool tight,
+  }) => pw.Inseparable(
+    child: pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+      children: [
+        _heading(heading),
+        pw.SizedBox(height: style.headingSpaceAfter),
+        _widget(next, tight: tight),
+      ],
+    ),
+  );
 
   /// Of het blok ná een kop met die kop mee de bladzijde over moet.
   ///
@@ -124,29 +164,34 @@ class DocumentPdfWidgets {
   /// export zou stukslaan op een lange alinea. De grens hieronder is daarom geen
   /// schatting van de hoogte maar een ruime afstand tot de afgrond — een A4 op
   /// 11 punt draagt ruwweg drieduizend tekens, en dit bindt tot een derde
-  /// daarvan. Wie de maat verkleint of het lettertype vergroot, blijft daarmee
-  /// nog steeds ver aan de goede kant.
-  bool _bindsToHeading(PdfBlock block) => switch (block) {
-    PdfParagraphBlock(:final spans) =>
-      spans.fold<int>(0, (sum, s) => sum + s.text.length) <= _keepTogetherChars,
-    PdfCodeBlock(:final code) => code.length <= _keepTogetherChars,
-    PdfVerbatimBlock(:final source) => source.length <= _keepTogetherChars,
-    PdfListBlock(:final items) =>
-      items.length <= 5 && _listTextLength(items) <= _keepTogetherChars,
-    _ => false,
-  };
+  /// daarvan.
+  ///
+  /// Op een klein vel (A6 en kleiner) is zelfs dat nog te veel; daar bindt deze
+  /// laag helemaal niet, want een verweesde kop is een schoonheidsfout en een
+  /// gebroken export niet.
+  bool _bindsToHeading(PdfBlock block) {
+    if (maxImageHeight < style.bodyFontSize * 20) return false;
+    return switch (block) {
+      PdfParagraphBlock(:final spans) =>
+        _spanTextLength(spans) <= _keepTogetherChars,
+      PdfCodeBlock(:final code) => code.length <= _keepTogetherChars,
+      PdfVerbatimBlock(:final source) => source.length <= _keepTogetherChars,
+      PdfListBlock(:final items) =>
+        items.length <= 5 && _listTextLength(items) <= _keepTogetherChars,
+      _ => false,
+    };
+  }
 
   static const _keepTogetherChars = 1000;
+
+  static int _spanTextLength(List<PdfSpan> spans) =>
+      spans.fold<int>(0, (sum, span) => sum + span.text.length);
 
   static int _listTextLength(List<PdfListItem> items) {
     var total = 0;
     for (final item in items) {
       for (final block in item.blocks) {
-        if (block is PdfParagraphBlock) {
-          for (final span in block.spans) {
-            total += span.text.length;
-          }
-        }
+        if (block is PdfParagraphBlock) total += _spanTextLength(block.spans);
       }
     }
     return total;
@@ -154,10 +199,10 @@ class DocumentPdfWidgets {
 
   pw.Widget _widget(PdfBlock block, {required bool tight}) => switch (block) {
     PdfHeadingBlock() => _heading(block),
-    PdfParagraphBlock() => _paragraph(block, tight: tight),
+    PdfParagraphBlock() => _paragraph(block),
     PdfListBlock() => _list(block),
     PdfQuoteBlock() => _quote(block),
-    PdfCodeBlock() => _code(block.code, language: block.language),
+    PdfCodeBlock() => _code(block.code),
     PdfVerbatimBlock() => _verbatim(block),
     PdfTableBlock() => _table(block),
     PdfImageBlock() => _image(block),
@@ -174,6 +219,9 @@ class DocumentPdfWidgets {
     _headingCursor++;
     final size = style.headingSize(block.level);
     final text = pw.RichText(
+      // Een kop die zelf langer is dan een blad hoort ook te kunnen breken; hij
+      // zit in geen enkel kader, dus dat mag gewoon.
+      overflow: pw.TextOverflow.span,
       text: pw.TextSpan(
         style: _baseStyle.copyWith(
           fontSize: size,
@@ -183,20 +231,11 @@ class DocumentPdfWidgets {
         children: _spans(block.spans, size: size),
       ),
     );
-    return pw.Container(
-      margin: pw.EdgeInsets.only(
-        top: style.headingSpaceBefore(block.level),
-        bottom: style.headingSpaceAfter,
-      ),
-      // Een kop hoort niet alleen onderaan een blad achter te blijven. Het
-      // `MultiPage`-model kent geen "houd bij het volgende", dus dit is het
-      // dichtste wat er is: de kop mag zelf niet breken.
-      child: pw.Outline(
-        name: entry.anchor,
-        title: entry.title,
-        level: (block.level - 1).clamp(0, 5),
-        child: _recordPage(entry.index, text),
-      ),
+    return pw.Outline(
+      name: entry.anchor,
+      title: entry.title,
+      level: (block.level - 1).clamp(0, 5),
+      child: _recordPage(entry.index, text),
     );
   }
 
@@ -216,29 +255,30 @@ class DocumentPdfWidgets {
 
   // ── Alinea's en citaten ──────────────────────────────────────────────────
 
-  pw.Widget _paragraph(PdfParagraphBlock block, {bool tight = false}) =>
-      pw.Container(
-    margin: pw.EdgeInsets.only(
-      bottom: tight ? style.bodyFontSize * 0.15 : style.blockSpacing,
-    ),
-    child: pw.RichText(
-      textAlign: pw.TextAlign.left,
-      text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
-    ),
+  pw.Widget _paragraph(PdfParagraphBlock block) => pw.RichText(
+    textAlign: pw.TextAlign.left,
+    overflow: pw.TextOverflow.span,
+    text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
   );
 
-  pw.Widget _quote(PdfQuoteBlock block) => pw.Container(
-    margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-    padding: pw.EdgeInsets.only(left: style.indent, top: 2, bottom: 2),
-    decoration: pw.BoxDecoration(
-      border: pw.Border(
-        left: pw.BorderSide(color: style.accentColor, width: 2),
-      ),
-    ),
-    child: pw.Column(
-      crossAxisAlignment: pw.CrossAxisAlignment.start,
-      children: build(block.blocks),
-    ),
+  /// Een citaat: een streep in de accentkleur langs de linkerkant.
+  ///
+  /// De streep zit per blok en niet om het citaat heen, zodat de kolom eromheen
+  /// een gewone [pw.Column] blijft die wél over een bladovergang mag lopen.
+  pw.Widget _quote(PdfQuoteBlock block) => pw.Column(
+    crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+    children: [
+      for (final child in build(block.blocks))
+        pw.Container(
+          padding: pw.EdgeInsets.only(left: style.indent),
+          decoration: pw.BoxDecoration(
+            border: pw.Border(
+              left: pw.BorderSide(color: style.accentColor, width: 2),
+            ),
+          ),
+          child: child,
+        ),
+    ],
   );
 
   // ── Lijsten ──────────────────────────────────────────────────────────────
@@ -248,31 +288,26 @@ class DocumentPdfWidgets {
     var number = block.startNumber;
     for (final item in block.items) {
       rows.add(_listItem(item, marker: block.ordered ? '$number.' : null));
+      rows.add(pw.SizedBox(height: style.bodyFontSize * 0.25));
       if (block.ordered) number++;
     }
-    return pw.Container(
-      margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-      child: pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: rows,
-      ),
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: rows,
     );
   }
 
-  pw.Widget _listItem(PdfListItem item, {String? marker}) => pw.Container(
-    margin: pw.EdgeInsets.only(bottom: style.bodyFontSize * 0.25),
-    child: pw.Row(
-      crossAxisAlignment: pw.CrossAxisAlignment.start,
-      children: [
-        pw.SizedBox(width: style.indent, child: _marker(item, marker)),
-        pw.Expanded(
-          child: pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: build(item.blocks, tight: true),
-          ),
+  pw.Widget _listItem(PdfListItem item, {String? marker}) => pw.Row(
+    crossAxisAlignment: pw.CrossAxisAlignment.start,
+    children: [
+      pw.SizedBox(width: style.indent, child: _marker(item, marker)),
+      pw.Expanded(
+        child: pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: build(item.blocks, tight: true),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 
   /// Het merkteken vóór een lijstpunt: een nummer, een vinkvakje of een bolletje.
@@ -326,30 +361,44 @@ class DocumentPdfWidgets {
 
   // ── Code en letterlijke blokken ──────────────────────────────────────────
 
-  pw.Widget _code(String code, {String? language}) => pw.Container(
-    width: double.infinity,
-    margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-    padding: pw.EdgeInsets.all(style.bodyFontSize * 0.6),
-    decoration: pw.BoxDecoration(
-      color: style.codeBackground,
-      borderRadius: pw.BorderRadius.circular(3),
-    ),
-    child: pw.Text(
-      code.trimRight(),
-      style: pw.TextStyle(
-        font: fonts.mono,
-        fontFallback: fonts.fallback,
-        fontSize: style.monoSize,
-        color: style.codeText,
-        lineSpacing: style.monoSize * 0.3,
-      ),
-    ),
-  );
+  /// Een codeblok: donkere achtergrond, vaste letterafstand.
+  ///
+  /// Per regel een eigen vlak, niet één kader om het geheel. Zo blijft de kolom
+  /// een [pw.Column] die over een bladovergang mag lopen — een codeblok van
+  /// honderd regels is geen zeldzaamheid, en als één kader zou het de export
+  /// afbreken in plaats van door te lopen op het volgende blad.
+  pw.Widget _code(String code) {
+    final lines = code.trimRight().split('\n');
+    final padding = style.bodyFontSize * 0.6;
+    final textStyle = pw.TextStyle(
+      font: fonts.mono,
+      fontFallback: fonts.fallback,
+      fontSize: style.monoSize,
+      color: style.codeText,
+      lineSpacing: style.monoSize * 0.3,
+    );
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+      children: [
+        for (var index = 0; index < lines.length; index++)
+          pw.Container(
+            color: style.codeBackground,
+            padding: pw.EdgeInsets.only(
+              left: padding,
+              right: padding,
+              top: index == 0 ? padding : 0,
+              bottom: index == lines.length - 1 ? padding : 0,
+            ),
+            child: pw.Text(lines[index], style: textStyle),
+          ),
+      ],
+    );
+  }
 
   /// Een blok dat de PDF niet zelf kan tekenen, met een eerlijke aanduiding
   /// erboven en de bron eronder. Zie [PdfVerbatimBlock] voor het waarom.
   pw.Widget _verbatim(PdfVerbatimBlock block) => pw.Column(
-    crossAxisAlignment: pw.CrossAxisAlignment.start,
+    crossAxisAlignment: pw.CrossAxisAlignment.stretch,
     children: [
       pw.Text(
         verbatimLabel(block.kind),
@@ -376,6 +425,7 @@ class DocumentPdfWidgets {
           decoration: pw.BoxDecoration(
             color: isHeader ? style.tableHeaderBackground : zebra,
           ),
+          repeat: isHeader,
           children: [
             for (var column = 0; column < block.rows[index].length; column++)
               _cell(block, row: index, column: column, header: isHeader),
@@ -383,10 +433,10 @@ class DocumentPdfWidgets {
         ),
       );
     }
-    return pw.Container(
-      margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-      child: pw.Table(border: _tableBorder(), children: rows),
-    );
+    // Kaal en niet in een kader: een tabel is een van de weinige widgets die
+    // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
+    // verliest hij zodra er iets omheen zit.
+    return pw.Table(border: _tableBorder(), children: rows);
   }
 
   pw.Widget _cell(
@@ -438,38 +488,29 @@ class DocumentPdfWidgets {
     if (bytes == null) {
       // Onvindbaar of onleesbaar: zeg dát, met de beschrijving die de auteur
       // gaf. Een leeg gat laat de lezer denken dat er niets hoorde te staan.
-      return pw.Container(
-        margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-        child: pw.Text(
-          block.alt.trim().isEmpty ? block.source : block.alt,
-          style: _baseStyle.copyWith(
-            fontStyle: pw.FontStyle.italic,
-            color: style.bandTextColor,
-          ),
+      return pw.Text(
+        block.alt.trim().isEmpty ? block.source : block.alt,
+        style: _baseStyle.copyWith(
+          fontStyle: pw.FontStyle.italic,
+          color: style.bandTextColor,
         ),
       );
     }
-    return pw.Container(
-      margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-      alignment: pw.Alignment.center,
-      child: pw.Image(pw.MemoryImage(bytes), fit: pw.BoxFit.contain),
+    return pw.Center(
+      child: pw.ConstrainedBox(
+        constraints: pw.BoxConstraints(maxHeight: maxImageHeight),
+        child: pw.Image(pw.MemoryImage(bytes), fit: pw.BoxFit.contain),
+      ),
     );
   }
 
   // ── Inhoudsopgave ────────────────────────────────────────────────────────
 
-  pw.Widget _toc() => pw.Container(
-    margin: pw.EdgeInsets.only(bottom: style.blockSpacing),
-    child: pw.Column(
-      // Uitrekken en niet links uitlijnen: bij `start` krijgt elke regel losse
-      // breedtebeperkingen en krimpt hij tot zijn eigen inhoud, waardoor de
-      // bladzijdenummers als een rafelrand onder elkaar komen te staan in plaats
-      // van in één kolom tegen de rechtermarge.
-      crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-      children: [
-        for (final entry in headings) _tocEntry(entry),
-      ],
-    ),
+  pw.Widget _toc() => pw.Column(
+    crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+    children: [
+      for (final entry in headings) _tocEntry(entry),
+    ],
   );
 
   /// Eén regel van de inhoudsopgave: de kop links, het bladzijdenummer rechts.
@@ -480,9 +521,8 @@ class DocumentPdfWidgets {
   /// uitvalt dan de bladspiegel en de nummers als een rafelrand onder elkaar
   /// komen te staan. Het alternatief (de titel niet-meerekkend maken) haalt die
   /// rafelrand weg maar zet er een ergere fout voor terug: een kop die langer is
-  /// dan de regel loopt dan buiten het blad, en dat ziet een test met
-  /// verwachtingswaarden niet. Een meerekkende titel die netjes afbreekt en een
-  /// nummer in een vaste kolom kan geen van beide.
+  /// dan de regel loopt dan buiten het blad. Een meerekkende titel die netjes
+  /// afbreekt en een nummer in een vaste kolom kan geen van beide.
   pw.Widget _tocEntry(PdfHeadingEntry entry) {
     final page = headingPages[entry.index];
     return pw.Link(

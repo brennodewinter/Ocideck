@@ -157,12 +157,22 @@ Future<Uint8List> _render(
     pageMode: headings.isEmpty ? PdfPageMode.none : PdfPageMode.outlines,
   );
 
+  final pageTheme = _pageTheme(
+    style: style,
+    fonts: fonts,
+    size: size,
+    margins: margins,
+    cropMarks: cropMarks,
+  );
   final builder = DocumentPdfWidgets(
     style: style,
     fonts: fonts,
     headings: headings,
     tocTitle: tocTitle,
     verbatimLabel: verbatimLabel,
+    // Ruim onder de bladspiegel: de banden boven en onder eten er nog van, en
+    // een afbeelding die net niet past kan `MultiPage` nergens kwijt.
+    maxImageHeight: pageTheme.pageFormat.availableHeight * 0.8,
     images: images,
     headingPages: headingPages,
     onHeadingLaidOut: onHeadingLaidOut,
@@ -170,13 +180,7 @@ Future<Uint8List> _render(
 
   document.addPage(
     pw.MultiPage(
-      pageTheme: _pageTheme(
-        style: style,
-        fonts: fonts,
-        size: size,
-        margins: margins,
-        cropMarks: cropMarks,
-      ),
+      pageTheme: pageTheme,
       header: chrome.hasHeader ? (context) => _band(context, chrome, style, top: true) : null,
       footer: chrome.hasFooter ? (context) => _band(context, chrome, style, top: false) : null,
       build: (context) => builder.build(blocks),
