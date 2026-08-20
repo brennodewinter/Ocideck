@@ -454,32 +454,35 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               color: theme.colorScheme.outlineVariant,
             ),
             Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) => switch (_viewMode) {
-                  _DocViewMode.visual => _visualLayout(
-                    theme,
-                    source,
-                    constraints,
-                    tlp: documentTlp,
-                    fields: fields,
-                  ),
-                  _DocViewMode.source => _sourceLayout(
-                    theme,
-                    source,
-                    constraints,
-                    tlp: documentTlp,
-                    fields: fields,
-                  ),
-                  _DocViewMode.pages => _documentPagesLayout(
-                    ref,
-                    theme,
-                    source,
-                    style: _styleProfile,
-                    projectPath: _documentProjectPath(ref),
-                    tlp: documentTlp,
-                    fields: fields,
-                  ),
-                },
+              child: DocumentImageScope(
+                projectPath: _documentProjectPath(ref),
+                child: LayoutBuilder(
+                  builder: (context, constraints) => switch (_viewMode) {
+                    _DocViewMode.visual => _visualLayout(
+                      theme,
+                      source,
+                      constraints,
+                      tlp: documentTlp,
+                      fields: fields,
+                    ),
+                    _DocViewMode.source => _sourceLayout(
+                      theme,
+                      source,
+                      constraints,
+                      tlp: documentTlp,
+                      fields: fields,
+                    ),
+                    _DocViewMode.pages => _documentPagesLayout(
+                      ref,
+                      theme,
+                      source,
+                      style: _styleProfile,
+                      projectPath: _documentProjectPath(ref),
+                      tlp: documentTlp,
+                      fields: fields,
+                    ),
+                  },
+                ),
               ),
             ),
           ],

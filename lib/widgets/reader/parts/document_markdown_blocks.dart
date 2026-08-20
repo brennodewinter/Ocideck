@@ -20,6 +20,7 @@ enum _Kind {
   table,
   timeline,
   rule,
+  image,
   toc,
 }
 
@@ -30,6 +31,7 @@ class _Block {
   const _Block(
     this.kind, {
     this.text = '',
+    this.source = '',
     this.level = 0,
     this.items = const [],
     this.rows = const [],
@@ -47,6 +49,10 @@ class _Block {
 
   /// heading / paragraph / quote / code / mermaid content.
   final String text;
+
+  /// De bron van een afbeelding `![alt](bron)` — het pad tussen de haakjes,
+  /// zonder titel (voor [_Kind.image]). [text] draagt de alt-tekst.
+  final String source;
 
   /// Heading level 1–6 (0 otherwise).
   final int level;
@@ -78,6 +84,7 @@ class _Block {
     _Kind.timeline => [timelineMarker, text, ?timelineMetadata].join(' '),
     _Kind.list => items.map((e) => e.text).join(' '),
     _Kind.rule => '',
+    _Kind.image => text,
     _Kind.toc => 'inhoudsopgave table of contents',
     _ => text,
   };
@@ -619,3 +626,22 @@ bool _isParagraphLine(String line) {
   if (isMarkdownTableLine(line)) return false;
   return true;
 }
+
+/// Herkent een regel die precies één markdown-afbeelding is: `![alt](bron)`,
+/// optioneel met een titel (`bron "titel"`). De alt mag leeg zijn; de bron moet
+/// er zijn. Dezelfde syntaxis als `MarkdownImageSyntax` (image_embed_syntax),
+/// zodat de lezer en het schrijfvlak dezelfde afbeelding herkennen.
+({String alt, String source})? _parseImageLine(String line) {
+  final match = _imageLinePattern.firstMatch(line);
+  if (match == null) return null;
+  final alt = match.group(1) ?? '';
+  final raw = (match.group(2) ?? '').trim();
+  if (raw.isEmpty) return null;
+  // `bron "titel"` → `bron`. De titel hoort bij de markdown, niet bij het pad.
+  final space = raw.indexOf(RegExp(r'\s'));
+  final source = space < 0 ? raw : raw.substring(0, space);
+  if (source.isEmpty) return null;
+  return (alt: alt, source: source);
+}
+
+final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\(([^)]*)\)$');

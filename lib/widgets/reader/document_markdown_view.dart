@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,9 +18,13 @@ import '../../services/markdown_table_codec.dart';
 import '../../services/document_timeline.dart';
 import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
+import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/bundled_asset.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../../utils/footnotes.dart';
+import '../../utils/image_limits.dart';
+import '../../utils/project_path.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
@@ -26,6 +33,7 @@ import 'table_edit_scaffold.dart';
 import 'table_editable_cell.dart';
 
 part 'parts/document_markdown_blocks.dart';
+part 'parts/document_markdown_image.dart';
 part 'parts/document_markdown_table.dart';
 part 'parts/document_markdown_timeline.dart';
 
@@ -364,6 +372,13 @@ class DocumentMarkdownView extends StatelessWidget {
       onTapLink: onTapLink,
     ),
     _Kind.rule => hideRules ? const SizedBox.shrink() : _bounded(_rule(t)),
+    _Kind.image => _bounded(
+      DocumentImage(
+        source: b.source,
+        alt: b.text,
+        projectPath: DocumentImageScope.maybeOf(context),
+      ),
+    ),
     _Kind.toc => _bounded(_tocPreview(context, t)),
   };
 
@@ -605,6 +620,16 @@ class DocumentMarkdownView extends StatelessWidget {
       while (i < lines.length && _isParagraphLine(lines[i])) {
         para.add(lines[i].trim());
         i++;
+      }
+      // Een regel die op zichzelf staat en precies één afbeelding is, tekent
+      // als afbeeldingsblok — zie [_parseImageLine]. Midden in een zin blijft
+      // hij een alinea (inline).
+      if (para.length == 1) {
+        final img = _parseImageLine(para.single);
+        if (img != null) {
+          blocks.add(_Block(_Kind.image, text: img.alt, source: img.source));
+          continue;
+        }
       }
       blocks.add(_Block(_Kind.paragraph, text: para.join(' ')));
     }
