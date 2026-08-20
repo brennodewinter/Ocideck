@@ -148,6 +148,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(release): een groene Homebrew-job betekent nu ook dat de tap is
+  bijgewerkt. De cask-stap slikt een mislukte clone bewust in, zodat een
+  onbereikbare tap een afgeronde release niet rood maakt — maar daardoor zag een
+  geslaagde push er van buiten precies hetzelfde uit als helemaal geen push. Een
+  verlopen of ingetrokken `HOMEBREW_TAP_TOKEN` bleef zo onzichtbaar tot iemand
+  via `brew` een oude versie installeerde. De keten leest de cask nu terug uit de
+  tap, over dezelfde publieke URL die Homebrew zelf gebruikt, en vergelijkt de
+  versie met de tag; loopt de tap achter, dan is de job rood met een melding op
+  de run-samenvatting. Dezelfde controle draait met de hand:
+  `scripts/verify_homebrew_cask.sh` toetst zonder argument de laatste release.
+
 - fix(release): de Windows-installer wordt nu ook echt gebouwd op de bouwlijn.
   De stap die Inno Setup installeert draaide onder Git Bash, en die vertaalt elk
   argument dat met een `/` begint naar een pad — `/VERYSILENT` kwam aan als

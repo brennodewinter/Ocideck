@@ -849,10 +849,25 @@ tracked separately (#1227).
   (same graceful-skip pattern as the web-deploy job). The release still publishes;
   only the cask is skipped.
 - **Fails soft on a missing tap.** Even with both secrets set, if the tap cannot
-  be cloned (it does not exist yet, or the token lacks push scope) the job logs a
-  `⚠️ tap onbereikbaar` note and exits green rather than turning the whole
-  release run red. A brand-new, still-empty tap repo is handled too: with no HEAD
-  branch yet the job falls back to `main`.
+  be cloned (it does not exist yet, or the token lacks push scope) the step logs a
+  `⚠️ tap onbereikbaar` note and exits 0 rather than aborting the run mid-release.
+  A brand-new, still-empty tap repo is handled too: with no HEAD branch yet the
+  job falls back to `main`.
+- **The tap is read back, not assumed.** Because of that soft failure, a green
+  job used to read as "tap updated" even when nothing had been pushed — a revoked
+  `HOMEBREW_TAP_TOKEN` stayed invisible until someone installed a stale version.
+  The last step therefore runs `scripts/verify_homebrew_cask.sh "$GITHUB_REF_NAME"`,
+  which re-reads `Casks/ocideck.rb` from the tap over the same public URL Homebrew
+  itself uses and compares its `version` to the tag. A mismatch — or a tap that
+  cannot be read at all — turns the job **red** with a `❌ Homebrew-cask NIET
+  bijgewerkt` note. Red here means "the tap needs attention", not "the release
+  failed": by then the artifacts are published and no job depends on this one.
+  Run the same check by hand at any time; without a tag it checks the newest
+  release:
+
+  ```bash
+  scripts/verify_homebrew_cask.sh          # or: scripts/verify_homebrew_cask.sh v<version>
+  ```
 - **Caveat.** The cask is only a *smooth* install once the macOS release is
   notarised. An unsigned release (see the signing section above) installs fine
   via `brew` but Gatekeeper still blocks it on first launch — the cask eases
