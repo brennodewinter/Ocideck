@@ -1,12 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../models/markdown_document.dart';
 import '../../models/markdown_kind.dart';
 import '../../services/file_service.dart';
 import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/document_provider.dart';
 import '../../state/settings_provider.dart'
     show settingsProvider, SettingsTraces;
+import '../../utils/markdown_paste_cleanup.dart';
+import '../../utils/markdown_quill_codec.dart';
+import '../../utils/source_patcher.dart';
 
 /// Saves the document held by [notifier], the single way every save route lands:
 /// the app-wide Ctrl/Cmd+S, the document editor's own shortcut, and save-on-quit.
@@ -22,6 +26,11 @@ import '../../state/settings_provider.dart'
 /// destination (keeping a copy of work that was never saved) and the file is
 /// remembered in the recent list. Returns `false` when nothing was written —
 /// the picker was cancelled or the write failed — so save-on-quit can hold.
+///
+/// When the document was edited in Visueel, the source in the notifier is the
+/// Quill → Markdown round-trip — not byte-faithful to what was on disk. In that
+/// case, we patch the user's actual edits onto the original source instead of
+/// overwriting it with the normalized round-trip (#1613).
 Future<bool> saveDocumentWithDestination(
   BuildContext context,
   WidgetRef ref,
@@ -31,11 +40,24 @@ Future<bool> saveDocumentWithDestination(
   final document = state.document;
   if (document == null) return false;
 
+  // Als de bewerking uit Visueel kwam, is document.source de genormaliseerde
+  // round-trip — niet byte-getrouw aan wat op schijf stond. We patchen de
+  // echte bewerkingen op de originele bron (savedSource) in plaats van de
+  // hele genormaliseerde bron weg te schrijven (#1613).
+  final documentToSave = state.visualEdited && state.savedSource != null
+      ? _patchVisualSave(state.savedSource!, document.source)
+      : document;
+
   final path = state.filePath;
   if (path != null) {
     // Nothing changed since the last save → already on disk, byte-identical.
     if (!state.isDirty) return true;
-    if (await saveDocument(document, path)) {
+    if (await saveDocument(documentToSave, path)) {
+      // Werk de notifier bij met de byte-getrouwe versie, zodat de editor
+      // en de notifier dezelfde bron zien — geen drift meer.
+      if (documentToSave != document) {
+        notifier.replaceSource(documentToSave.source);
+      }
       notifier.markSaved(filePath: path);
       return true;
     }
@@ -45,11 +67,39 @@ Future<bool> saveDocumentWithDestination(
 
   // No path yet (a new document) or the path-save failed: "Save as…" keeps the
   // work as a copy rather than losing it.
-  final saved = await ref.read(fileServiceProvider).saveDocumentAs(document);
+  final saved = await ref
+      .read(fileServiceProvider)
+      .saveDocumentAs(documentToSave);
   if (saved == null) return false;
+  if (documentToSave != document) {
+    notifier.replaceSource(documentToSave.source);
+  }
   notifier.markSaved(filePath: saved);
   await ref
       .read(settingsProvider.notifier)
       .addRecentFile(saved, kind: MarkdownKind.document);
   return true;
+}
+
+/// Patcht de bewerkingen uit de visuele editor op de originele bron.
+///
+/// [savedSource] is de bron zoals die op schijf stond. [currentSource] is de
+/// genormaliseerde round-trip mét gebruikersbewerkingen. We berekenen de
+/// baseline (round-trip zónder bewerkingen) via dezelfde weg als de visuele
+/// editor — `normalizeRichTextMarkdown` → `documentFromMarkdown` →
+/// `markdownFromDocument` — en diff'en die tegen currentSource om de echte
+/// bewerkingen te isoleren. Die diff toegepast op savedSource levert de
+/// byte-getrouwe versie op.
+MarkdownDocument _patchVisualSave(String savedSource, String currentSource) {
+  final baseline = MarkdownQuillCodec.markdownFromDocument(
+    MarkdownQuillCodec.documentFromMarkdown(
+      normalizeRichTextMarkdown(savedSource),
+    ),
+  );
+  final patched = patchVisualEdits(
+    original: savedSource,
+    baseline: baseline,
+    current: currentSource,
+  );
+  return MarkdownDocument.parse(patched);
 }

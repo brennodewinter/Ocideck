@@ -28,6 +28,20 @@ class DocumentState {
   /// editor binnenkomt (undo/redo). Het is geen documentversie.
   final int revision;
 
+  /// De bron zoals die op schijf stond bij het laden — vóór de visuele editor
+  /// er een round-trip overheen haalt. Bij opslaan vanuit Visueel gebruikt
+  /// `saveDocumentWithDestination` deze om alleen de echte bewerkingen terug
+  /// te schrijven, niet de normalisatiedrift (#1613).
+  final String? savedSource;
+
+  /// Of de huidige bron uit de visuele editor komt (Quill → Markdown). Als
+  /// `true`, dan is [document.source] niet byte-getrouw aan [savedSource] —
+  /// de round-trip heeft witregels, tabelscheidingsregels en lijstvolgorde
+  /// genormaliseerd. Bij opslaan patcht `saveDocumentWithDestination` de
+  /// echte bewerkingen op [savedSource] in plaats van de hele genormaliseerde
+  /// bron weg te schrijven (#1613).
+  final bool visualEdited;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -37,6 +51,8 @@ class DocumentState {
     this.canUndo = false,
     this.canRedo = false,
     this.revision = 0,
+    this.savedSource,
+    this.visualEdited = false,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -51,6 +67,8 @@ class DocumentState {
     bool? canUndo,
     bool? canRedo,
     int? revision,
+    String? savedSource,
+    bool? visualEdited,
     bool clearError = false,
     bool clearFilePath = false,
   }) {
@@ -63,6 +81,8 @@ class DocumentState {
       canUndo: canUndo ?? this.canUndo,
       canRedo: canRedo ?? this.canRedo,
       revision: revision ?? this.revision,
+      savedSource: savedSource ?? this.savedSource,
+      visualEdited: visualEdited ?? this.visualEdited,
     );
   }
 }
@@ -107,13 +127,21 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       document: document,
       filePath: filePath,
       isDirty: false,
+      savedSource: document.source,
+      visualEdited: false,
     );
   }
 
   /// Neem een bewerking uit de editor over. De bron *ís* de waarheid: er wordt
   /// niets genormaliseerd. Een bewerking die de bron niet verandert is een no-op
   /// (geen ongedaan-stap, geen 'gewijzigd'-vlag).
-  void edit(String nextSource, {String? coalesceKey}) {
+  ///
+  /// [visualEdit] markeert of de bewerking uit de visuele editor komt (Quill →
+  /// Markdown). In dat geval is [nextSource] niet byte-getrouw aan de originele
+  /// bron — de round-trip normaliseert. Bij opslaan gebruikt
+  /// `saveDocumentWithDestination` deze vlag om alleen de echte bewerkingen
+  /// terug te schrijven (#1613).
+  void edit(String nextSource, {String? coalesceKey, bool visualEdit = false}) {
     final current = state.document;
     if (current == null || current.source == nextSource) return;
     final now = DateTime.now();
@@ -135,6 +163,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       isDirty: true,
       canUndo: true,
       canRedo: false,
+      visualEdited: visualEdit,
     );
   }
 
@@ -183,16 +212,33 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   }
 
   /// Markeer het document als opgeslagen; onthoud waar het nu leeft.
+  /// [savedSource] wordt bijgewerkt naar de huidige bron, zodat een volgende
+  /// opslag vanuit Visueel weer tegen de juiste basis diff't (#1613).
   void markSaved({String? filePath}) {
     state = state.copyWith(
       isDirty: false,
       filePath: filePath ?? state.filePath,
       clearError: true,
+      savedSource: state.document?.source,
+      visualEdited: false,
     );
   }
 
   void setError(String message) => state = state.copyWith(error: message);
   void clearError() => state = state.copyWith(clearError: true);
+
+  /// Vervangt de bron door de byte-getrouwe versie na een visuele opslag
+  /// (#1613). De editor en de notifier zien dan dezelfde bron — geen drift
+  /// meer tussen wat op schijf staat en wat in het geheugen leeft. Dit is
+  /// géén bewerking: het voegt geen ongedaan-stap toe en markeert niet vuil.
+  void replaceSource(String nextSource) {
+    final current = state.document;
+    if (current == null || current.source == nextSource) return;
+    state = state.copyWith(
+      document: current.withSource(nextSource),
+      visualEdited: false,
+    );
+  }
 }
 
 /// De document-notifier van het actieve documenttabblad.

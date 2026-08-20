@@ -201,9 +201,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     if (doc == null || doc.body == body) return;
     final ownStep = _expectVisualInsert;
     _expectVisualInsert = false;
+    // In de visuele stand komt de body uit de Quill → Markdown round-trip, die
+    // niet byte-getrouw is. De notifier moet dat weten, zodat opslaan alleen
+    // de echte bewerkingen terug schrijft (#1613).
     ref
         .read(documentProvider.notifier)
-        .edit(doc.frontMatter + body, coalesceKey: ownStep ? null : 'doc');
+        .edit(
+          doc.frontMatter + body,
+          coalesceKey: ownStep ? null : 'doc',
+          visualEdit: _viewMode == _DocViewMode.visual,
+        );
   }
 
   void _setActiveOutlineIndex(int active) {
