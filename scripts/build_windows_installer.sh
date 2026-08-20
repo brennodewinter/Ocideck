@@ -111,10 +111,16 @@ find_signtool() {
     return 1
   fi
   command -v signtool 2>/dev/null && return 0
-  # The Windows SDK installs one signtool.exe per SDK version side by side;
-  # take the newest. `grep .` turns "no matches" into a non-zero exit.
-  find "/c/Program Files (x86)/Windows Kits/10/bin" -maxdepth 3 \
-       -path '*/x64/signtool.exe' 2>/dev/null | sort -Vr | head -n 1 | grep .
+  # The Windows SDK installs one signtool.exe per SDK version side by side, and
+  # pre-15063 SDKs left a versionless legacy copy directly under bin/x64/. A
+  # plain `sort -Vr` would rank that legacy path FIRST ("x64" sorts after
+  # "10.0.…", so it wins the reverse sort) — exactly the oldest tool on the
+  # machine. So: newest versioned copy first, legacy path only as fallback.
+  # `grep .` turns "no matches" into a non-zero exit.
+  local kits="/c/Program Files (x86)/Windows Kits/10/bin"
+  find "$kits" -maxdepth 3 -path '*/10.*/x64/signtool.exe' 2>/dev/null \
+      | sort -Vr | head -n 1 | grep . && return 0
+  find "$kits" -maxdepth 2 -path '*/x64/signtool.exe' 2>/dev/null | grep .
 }
 
 ISCC="$(find_iscc)" || {
@@ -140,26 +146,52 @@ sign() {
   # Signing is all-or-nothing: once a certificate is configured, a file that
   # fails to sign must fail the build. A half-signed installer is worse than an
   # honestly unsigned one, because it looks trustworthy in the places people check.
+  #
+  # All files go in ONE signtool invocation. That matters twice on signing day:
+  # a hardware token asks for its PIN per invocation (twenty prompts would be
+  # its own hang), and every invocation makes one RFC 3161 request — a burst of
+  # twenty gets throttled by the timestamp service. The retry below absorbs the
+  # transient timestamp failures that remain; three strikes is a real outage.
   [ -n "$SIGN_SHA1" ] || return 0
-  msys_safe "$SIGNTOOL" sign /sha1 "$SIGN_SHA1" /fd SHA256 \
-    /tr "$TIMESTAMP_URL" /td SHA256 /q "$1"
+  local poging
+  for poging in 1 2 3; do
+    if msys_safe "$SIGNTOOL" sign /sha1 "$SIGN_SHA1" /fd SHA256 \
+        /tr "$TIMESTAMP_URL" /td SHA256 /q "$@"; then
+      return 0
+    fi
+    echo "signtool attempt $poging failed — retrying in $((poging * 15))s (timestamp service hiccup?)." >&2
+    sleep $((poging * 15))
+  done
+  return 1
 }
 
 if [ -n "$SIGN_SHA1" ]; then
   echo "Signing the application (certificate $SIGN_SHA1, timestamp $TIMESTAMP_URL)."
   # The .exe is what SmartScreen and the UAC prompt read, but the redistributed
-  # DLLs beside it carry no upstream signature either, so they are signed too.
-  sign "$BUNDLE_DIR/ocideck.exe"
-  while IFS= read -r dll; do
-    sign "$dll"
-  done < <(find "$BUNDLE_DIR" -maxdepth 1 -name '*.dll' -print)
+  # DLLs beside it carry no upstream signature either, so they are signed too —
+  # including data/app.so (the AOT-compiled Dart code: a PE binary despite the
+  # extension) and any DLL a plugin drops with capitals in its name.
+  TE_TEKENEN=("$BUNDLE_DIR/ocideck.exe")
+  while IFS= read -r extra; do
+    TE_TEKENEN+=("$extra")
+  done < <(find "$BUNDLE_DIR" -maxdepth 2 \( -iname '*.dll' -o -name 'app.so' \) -print | sort)
+  sign "${TE_TEKENEN[@]}"
 fi
 
 # --- Build the installer ------------------------------------------------------
 
 mkdir -p "$OUT"
+# The .iss resolves its paths relative to ITSELF, and the guard above resolved
+# BUNDLE_DIR relative to the repo root — hand the compiler an absolute path so
+# an overridden BUNDLE_DIR changes what actually gets packed, not merely what
+# got checked. cygpath exists under Git Bash; elsewhere (the fake-ISCC smoke
+# tests) the POSIX path passes through unchanged.
+ABS_BUNDLE="$(cd "$BUNDLE_DIR" && pwd)"
+if command -v cygpath >/dev/null 2>&1; then
+  ABS_BUNDLE="$(cygpath -aw "$ABS_BUNDLE")"
+fi
 echo "Building the installer with $ISCC (version $VERSION)."
-msys_safe "$ISCC" "/DAppVersion=$VERSION" "$ISS"
+msys_safe "$ISCC" "/DAppVersion=$VERSION" "/DBundleDir=$ABS_BUNDLE" "$ISS"
 
 INSTALLER="$OUT/ocideck-windows-x64-setup-$VERSION.exe"
 if [ ! -f "$INSTALLER" ]; then
