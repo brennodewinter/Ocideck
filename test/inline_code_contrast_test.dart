@@ -61,6 +61,33 @@ void main() {
       );
     });
 
+    test('${profiel.name}: de bronmodus-melding is te lezen', () {
+      // Dezelfde vergissing, vierde plek: de balk die vertelt dát je in de bron
+      // staat lag op het codeblok-vlak met de alineakleur erop. In Vigilis waren
+      // dat twee keer `#111318` — de melding stond er, en zei niets.
+      final papier = AppTheme.parseHexColor(profiel.slideBackgroundColor);
+      final inkt = AppTheme.parseHexColor(profiel.textColor);
+      final thema = MarkdownEditorTheme.documentSurface(
+        scheme: const ColorScheme.light(),
+        profile: profiel,
+      );
+      final balk = Color.alphaBlend(thema.inlineCodeBackground, papier);
+      final tekst = contrastRatio(thema.text, balk);
+      expect(
+        tekst,
+        greaterThanOrEqualTo(kWcagAaNormalText),
+        reason:
+            'de meldingstekst haalt ${tekst.toStringAsFixed(2)}:1 in '
+            '${profiel.name}',
+      );
+      // Het icoon draagt betekenis en is een grafisch onderdeel: 3:1.
+      expect(
+        contrastRatio(inkt, balk),
+        greaterThanOrEqualTo(kWcagAaLargeText),
+        reason: 'het icoon in de balk moet te onderscheiden zijn',
+      );
+    });
+
     test('${profiel.name}: schrijfvlak en documentweergave rekenen gelijk', () {
       // De belofte van #1567 is dat de twee weergaven van dezelfde tekst er
       // hetzelfde uitzien. Ze rekenen daarom met dezelfde som, en die staat op

@@ -4458,6 +4458,33 @@ table again:
 | 13:41 | Herstelclaim weerlegd | Vastgesteld |
 ```
 
+#### When Visual falls back to Source *(added 2026-08-20)*
+
+**Visual** protects your Markdown: when a document contains something the
+rich-text bridge cannot convert back without changing your text, OciDeck shows
+the source instead, with a bar saying so. Two things used to trigger that
+wrongly, and no longer do.
+
+A **line break inside a table cell** (`Shift+Enter`) is stored as `<br>`, and a
+typed backslash is stored as `\\`. Those are the table's own spelling — a table
+travels through Visual as one indivisible block — so they no longer count as raw
+HTML or as an escape. Typing in a table keeps you in Visual.
+
+What *does* still fall back is a **line starting with a pipe that is not part of
+a real table**: a header row and a dash row of different widths, or a stray
+`| … |` line on its own. Such a line is not carried as a table block, and
+converting it would leave stray backslashes in your text — so OciDeck shows you
+the source rather than quietly damaging the line. Give the header and the dash
+row the same number of columns and Visual takes it again.
+
+#### Images in a document *(added 2026-08-20)*
+
+An image is written the ordinary Markdown way, `![description](path)`. In
+**Visual** it appears as a small marker on its spot in the sentence, showing the
+description (or the file name when there is none) — not the picture itself. The
+**HTML** and **PDF** output do show the picture. Your `![…](…)` text, including
+the description, is kept exactly as you typed it.
+
 ### Footnotes
 
 *(Added 2026-08-18.)* **Invoegen → Voetnoot** puts a marker at the cursor and an
