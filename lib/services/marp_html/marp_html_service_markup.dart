@@ -208,16 +208,24 @@ String _guardMarkdown(String s) => _guardScript(s).replaceAll('<!--', r'<\!--');
 /// continuous document mode can reuse it: a document renders this whole body as
 /// one flow, so a `---` in the body must survive as text (marked turns it into
 /// a real `<hr>`) instead of becoming a page break.
-String _stripFrontMatter(String markdown) {
-  var text = markdown.replaceAll('\r\n', '\n');
-  if (text.startsWith('---\n')) {
-    final close = text.indexOf('\n---', 4);
-    if (close != -1) {
-      final nl = text.indexOf('\n', close + 1);
-      text = nl == -1 ? '' : text.substring(nl + 1);
-    }
-  }
-  return text;
+String _stripFrontMatter(String markdown) => _splitFrontMatter(markdown).body;
+
+/// Dezelfde splitsing, maar met de kop erbij in plaats van weggegooid.
+///
+/// Wie iets vóór de body zet — de kop- en voetband van de documentmodus — moet
+/// dat ná de front matter doen. Anders staat die kop niet meer op teken 0, en
+/// dan ziet [_stripFrontMatter] hem niet meer en
+/// [MarpHtmlService.signatureFields] evenmin: de eerste laat `marp: true` als
+/// zichtbare tekst tussen twee streepjeslijnen in het document staan, de tweede
+/// verliest stilzwijgend de handtekening van een `.md` van vóór 0.1.0.
+({String head, String body}) _splitFrontMatter(String markdown) {
+  final text = markdown.replaceAll('\r\n', '\n');
+  if (!text.startsWith('---\n')) return (head: '', body: text);
+  final close = text.indexOf('\n---', 4);
+  if (close == -1) return (head: '', body: text);
+  final nl = text.indexOf('\n', close + 1);
+  if (nl == -1) return (head: '$text\n', body: '');
+  return (head: text.substring(0, nl + 1), body: text.substring(nl + 1));
 }
 
 /// Past de blok-transformaties op één body toe — een losse dia óf de hele

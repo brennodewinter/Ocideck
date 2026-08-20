@@ -69,6 +69,49 @@ void main() {
       expect(html, contains('.document hr{page-break-after:always'));
     });
 
+    test('de front matter blijft ook gestript mét kop- en voetband', () async {
+      // De band wordt vóór het strippen aan de body geplakt, dus stond de
+      // front matter niet meer op teken 0 en liet de strip hem staan: `marp:
+      // true / theme: …` werd zichtbare tekst tussen twee streepjeslijnen, en
+      // met hoofdstukeinden aan waren die twee lijnen ook nog twee lege vellen.
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(documentHeaderText: 'VERTROUWELIJK'),
+      );
+
+      expect(html, contains('<div class="document-header">'));
+      expect(html, isNot(contains('marp: true')));
+      expect(html, isNot(contains('theme: ocideck')));
+      // En de body zelf is er nog wél.
+      expect(html, contains('# TOKEN_HEADING'));
+    });
+
+    test('een oude handtekeningkop overleeft de kop- en voetband', () async {
+      // Zelfde oorzaak, tweede slachtoffer: [signatureFields] leest de kop
+      // alleen als hij op teken 0 begint. Met een band ervoor viel het
+      // terugvalpad voor een `.md` van vóór 0.1.0 stil weg — de akkoordpagina
+      // bleef leeg zonder dat iemand het merkte.
+      const deck =
+          '---\nmarp: true\n'
+          'ocideck_sig_name: "J. Tester"\n'
+          'ocideck_sig_role: "Pentester"\n'
+          'ocideck_sig_statement: "Naar waarheid opgesteld."\n'
+          'ocideck_seal_at: "2026-07-20 10:00"\n'
+          '---\n\n<!-- _class: sign-off -->\n\n# Akkoord\n';
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        deck,
+        continuous: true,
+        theme: const ThemeProfile(documentHeaderText: 'VERTROUWELIJK'),
+      );
+
+      expect(html, contains('Naar waarheid opgesteld.'));
+      expect(html, contains('J. Tester'));
+      expect(html, isNot(contains('ocideck_sig_name')));
+    });
+
     test('chapterPageBreak spuit de hoofdstuk-print-CSS in', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final on = await service.build(
