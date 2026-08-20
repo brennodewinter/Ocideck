@@ -20,13 +20,13 @@ class _NotesField extends StatefulWidget {
 }
 
 class _NotesFieldState extends State<_NotesField> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: _noteText());
-    _ctrl.addListener(_emit);
+    _ctrl = EditorTextController(text: _noteText());
+    _ctrl.addTextListener(_emit);
   }
 
   String _noteText() => speakerNoteForPage(
@@ -36,9 +36,9 @@ class _NotesFieldState extends State<_NotesField> {
   );
 
   void _reloadController() {
-    _ctrl.removeListener(_emit);
+    _ctrl.removeTextListener(_emit);
     _ctrl.text = _noteText();
-    _ctrl.addListener(_emit);
+    _ctrl.addTextListener(_emit);
   }
 
   @override
@@ -66,9 +66,9 @@ class _NotesFieldState extends State<_NotesField> {
 
   void _discardNotes() {
     if (_ctrl.text.trim().isEmpty) return;
-    _ctrl.removeListener(_emit);
+    _ctrl.removeTextListener(_emit);
     _ctrl.text = '';
-    _ctrl.addListener(_emit);
+    _ctrl.addTextListener(_emit);
     widget.onUpdate(
       widget.slide.copyWith(
         notes: updateSpeakerNoteForPage(
@@ -210,13 +210,13 @@ class _UserNotesField extends StatefulWidget {
 }
 
 class _UserNotesFieldState extends State<_UserNotesField> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.note);
-    _ctrl.addListener(_emit);
+    _ctrl = EditorTextController(text: widget.note);
+    _ctrl.addTextListener(_emit);
   }
 
   @override
@@ -225,9 +225,9 @@ class _UserNotesFieldState extends State<_UserNotesField> {
     if (old.slide.id != widget.slide.id ||
         old.note != widget.note ||
         old.richTextPage != widget.richTextPage) {
-      _ctrl.removeListener(_emit);
+      _ctrl.removeTextListener(_emit);
       _ctrl.text = widget.note;
-      _ctrl.addListener(_emit);
+      _ctrl.addTextListener(_emit);
     }
   }
 
@@ -235,9 +235,9 @@ class _UserNotesFieldState extends State<_UserNotesField> {
 
   void _discardNotes() {
     if (_ctrl.text.trim().isEmpty) return;
-    _ctrl.removeListener(_emit);
+    _ctrl.removeTextListener(_emit);
     _ctrl.text = '';
-    _ctrl.addListener(_emit);
+    _ctrl.addTextListener(_emit);
     widget.onChanged('');
   }
 

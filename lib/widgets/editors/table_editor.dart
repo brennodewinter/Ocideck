@@ -6,9 +6,10 @@ import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a table slide. Stores cells as a rectangular grid of
-/// [TextEditingController]s where the first row is the header.
+/// [EditorTextController]s where the first row is the header.
 ///
 /// Per-rij- en per-kolomacties (invoegen, verplaatsen, verwijderen) leven in
 /// één popup-menu per rij/kolom in plaats van vier knoppen naast elke cel —
@@ -52,8 +53,8 @@ class TableEditor extends StatefulWidget {
 class _TableEditorState extends State<TableEditor> {
   static const double _rowActionWidth = 40;
 
-  late final TextEditingController _title;
-  late List<List<TextEditingController>> _cells;
+  late final EditorTextController _title;
+  late List<List<EditorTextController>> _cells;
 
   /// Eén [FocusNode] per cel, parallel aan [_cells], zodat Tab/Shift+Tab een
   /// specifieke cel kan focussen in plaats van op de standaard-traversie te
@@ -68,8 +69,8 @@ class _TableEditorState extends State<TableEditor> {
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(_emit);
     _initCells(widget.slide.tableRows);
   }
 
@@ -83,16 +84,16 @@ class _TableEditorState extends State<TableEditor> {
         : raw.map((r) => List<String>.from(r)).toList();
     final colCount = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
     _cells = rows.map((row) {
-      return List<TextEditingController>.generate(
+      return List<EditorTextController>.generate(
         colCount,
         (c) => _makeCtrl(c < row.length ? row[c] : ''),
       );
     }).toList();
   }
 
-  TextEditingController _makeCtrl(String text) {
-    final c = TextEditingController(text: text);
-    c.addListener(_emit);
+  EditorTextController _makeCtrl(String text) {
+    final c = EditorTextController(text: text);
+    c.addTextListener(_emit);
     return c;
   }
 
@@ -110,7 +111,7 @@ class _TableEditorState extends State<TableEditor> {
   void _addRow() {
     setState(() {
       _cells.add(
-        List<TextEditingController>.generate(_colCount, (_) => _makeCtrl('')),
+        List<EditorTextController>.generate(_colCount, (_) => _makeCtrl('')),
       );
     });
     _emit();
@@ -120,7 +121,7 @@ class _TableEditorState extends State<TableEditor> {
     if (_cells.length <= 1) return;
     setState(() {
       for (final c in _cells[r]) {
-        c.removeListener(_emit);
+        c.removeTextListener(_emit);
         c.dispose();
       }
       _cells.removeAt(r);
@@ -142,7 +143,7 @@ class _TableEditorState extends State<TableEditor> {
     if (_colCount <= 1) return;
     setState(() {
       for (final row in _cells) {
-        row[c].removeListener(_emit);
+        row[c].removeTextListener(_emit);
         row[c].dispose();
         row.removeAt(c);
       }
@@ -157,7 +158,7 @@ class _TableEditorState extends State<TableEditor> {
     setState(() {
       _cells.insert(
         at.clamp(0, _cells.length),
-        List<TextEditingController>.generate(_colCount, (_) => _makeCtrl('')),
+        List<EditorTextController>.generate(_colCount, (_) => _makeCtrl('')),
       );
     });
     _emit();
@@ -319,16 +320,16 @@ class _TableEditorState extends State<TableEditor> {
       }
       while (_cells.length < neededRows) {
         _cells.add(
-          List<TextEditingController>.generate(_colCount, (_) => _makeCtrl('')),
+          List<EditorTextController>.generate(_colCount, (_) => _makeCtrl('')),
         );
       }
       for (var i = 0; i < table.length; i++) {
         for (var j = 0; j < table[i].length; j++) {
           final ctrl = _cells[r + i][c + j];
           // Rewrite without notifying per cell; one _emit follows below.
-          ctrl.removeListener(_emit);
+          ctrl.removeTextListener(_emit);
           ctrl.text = table[i][j];
-          ctrl.addListener(_emit);
+          ctrl.addTextListener(_emit);
         }
       }
     });

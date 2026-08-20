@@ -7,6 +7,7 @@ import '../../services/image_service.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 part 'question_editor_kinds.dart';
 
@@ -37,10 +38,10 @@ class QuestionEditor extends StatefulWidget {
 }
 
 class _QuestionEditorState extends State<QuestionEditor> {
-  late final TextEditingController _title;
-  late final TextEditingController _prompt;
-  late final TextEditingController _timeLimit;
-  late List<TextEditingController> _answers;
+  late final EditorTextController _title;
+  late final EditorTextController _prompt;
+  late final EditorTextController _timeLimit;
+  late List<EditorTextController> _answers;
   late List<bool> _correct;
 
   /// De afbeelding per antwoord (alleen bij een beeldparen-vraag). Loopt gelijk
@@ -64,15 +65,15 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _hasValidAnswerCount = spec.hasValidAnswerCount;
     _sourceAnswerCount = spec.sourceAnswerCount;
     _sourceAnswerLimit = spec.answerCountLimit;
-    _title = TextEditingController(text: widget.slide.title);
-    _prompt = TextEditingController(text: spec.prompt);
-    _timeLimit = TextEditingController(
+    _title = EditorTextController(text: widget.slide.title);
+    _prompt = EditorTextController(text: spec.prompt);
+    _timeLimit = EditorTextController(
       text: spec.timeLimitSeconds > 0 ? '${spec.timeLimitSeconds}' : '',
     );
     if (_hasValidAnswerCount) {
-      _title.addListener(_emit);
-      _prompt.addListener(_emit);
-      _timeLimit.addListener(_emit);
+      _title.addTextListener(_emit);
+      _prompt.addTextListener(_emit);
+      _timeLimit.addTextListener(_emit);
     }
     _optionCount = spec.optionCount;
     _onWrong = spec.onWrong;
@@ -94,9 +95,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
   /// gedrag is identiek.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  TextEditingController _makeCtrl(String text) {
-    final c = TextEditingController(text: text);
-    c.addListener(_emit);
+  EditorTextController _makeCtrl(String text) {
+    final c = EditorTextController(text: text);
+    c.addTextListener(_emit);
     return c;
   }
 
@@ -161,7 +162,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
   void _removeAnswer(int i) {
     if (_answers.length <= 1) return;
     setState(() {
-      _answers[i].removeListener(_emit);
+      _answers[i].removeTextListener(_emit);
       _answers[i].dispose();
       _answers.removeAt(i);
       _correct.removeAt(i);

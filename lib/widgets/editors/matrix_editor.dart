@@ -8,6 +8,7 @@ import '../../services/improvement/matrix_spec.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/table_clipboard.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a Procesverbetering `matrix` slide (PROCESS_IMPROVEMENT §3.1).
 ///
@@ -32,15 +33,15 @@ class MatrixEditor extends StatefulWidget {
 }
 
 class _MatrixEditorState extends State<MatrixEditor> {
-  late final TextEditingController _title;
-  late List<List<TextEditingController>> _cells;
+  late final EditorTextController _title;
+  late List<List<EditorTextController>> _cells;
   late String _templateId;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title)
-      ..addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title)
+      ..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultImprovementTemplateId
         : widget.slide.improvementTemplateId;
@@ -67,23 +68,23 @@ class _MatrixEditorState extends State<MatrixEditor> {
     final colCount = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
     _cells = [
       for (final row in rows)
-        List<TextEditingController>.generate(
+        List<EditorTextController>.generate(
           colCount,
           (c) => _makeCtrl(c < row.length ? row[c] : ''),
         ),
     ];
   }
 
-  TextEditingController _makeCtrl(String text) {
-    final c = TextEditingController(text: text);
-    c.addListener(_emit);
+  EditorTextController _makeCtrl(String text) {
+    final c = EditorTextController(text: text);
+    c.addTextListener(_emit);
     return c;
   }
 
   void _disposeCells() {
     for (final row in _cells) {
       for (final c in row) {
-        c.removeListener(_emit);
+        c.removeTextListener(_emit);
         c.dispose();
       }
     }
@@ -131,7 +132,7 @@ class _MatrixEditorState extends State<MatrixEditor> {
   void _addRow() {
     setState(() {
       _cells.add(
-        List<TextEditingController>.generate(_colCount, (_) => _makeCtrl('')),
+        List<EditorTextController>.generate(_colCount, (_) => _makeCtrl('')),
       );
     });
     _emit();
@@ -142,7 +143,7 @@ class _MatrixEditorState extends State<MatrixEditor> {
     if (r == 0 || _cells.length <= 2) return;
     setState(() {
       for (final c in _cells[r]) {
-        c.removeListener(_emit);
+        c.removeTextListener(_emit);
         c.dispose();
       }
       _cells.removeAt(r);

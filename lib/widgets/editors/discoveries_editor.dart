@@ -5,6 +5,7 @@ import '../../models/discoveries_spec.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a `discoveries` slide: a title plus up to [discoveriesMaxEntries]
 /// newly found objects, each with what kind of thing it is, how long it sat
@@ -37,22 +38,22 @@ class DiscoveriesEditor extends StatefulWidget {
 
 class _DiscoveryControllers {
   _DiscoveryControllers(Discovery discovery, VoidCallback onChanged)
-    : name = TextEditingController(text: discovery.name)
-        ..addListener(onChanged),
-      kind = TextEditingController(text: discovery.kind)
-        ..addListener(onChanged),
-      days = TextEditingController(
+    : name = EditorTextController(text: discovery.name)
+        ..addTextListener(onChanged),
+      kind = EditorTextController(text: discovery.kind)
+        ..addTextListener(onChanged),
+      days = EditorTextController(
         text: discovery.daysUnnoticed == null
             ? ''
             : '${discovery.daysUnnoticed}',
-      )..addListener(onChanged),
-      owner = TextEditingController(text: discovery.owner)
-        ..addListener(onChanged);
+      )..addTextListener(onChanged),
+      owner = EditorTextController(text: discovery.owner)
+        ..addTextListener(onChanged);
 
-  final TextEditingController name;
-  final TextEditingController kind;
-  final TextEditingController days;
-  final TextEditingController owner;
+  final EditorTextController name;
+  final EditorTextController kind;
+  final EditorTextController days;
+  final EditorTextController owner;
 
   Discovery toDiscovery() => Discovery(
     name: name.text.trim(),
@@ -70,7 +71,7 @@ class _DiscoveryControllers {
 }
 
 class _DiscoveriesEditorState extends State<DiscoveriesEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_DiscoveryControllers> _discoveries;
 
   @override
@@ -80,7 +81,8 @@ class _DiscoveriesEditorState extends State<DiscoveriesEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = TextEditingController(text: spec.title)..addListener(_onChanged);
+    _title = EditorTextController(text: spec.title)
+      ..addTextListener(_onChanged);
     _discoveries = spec.discoveries
         .map((d) => _DiscoveryControllers(d, _onChanged))
         .toList();

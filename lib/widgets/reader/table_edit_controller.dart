@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../models/slide.dart' show TableAlign;
 import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
+import '../editors/editor_text_controller.dart';
 
 /// De bewerkstaat van één tabel die *in de weergave zelf* wordt ingevuld —
 /// cel voor cel, op de plek waar de tabel straks ook staat, zoals in een
@@ -32,7 +33,7 @@ class TableEditController extends ChangeNotifier {
   final void Function(List<List<String>> rows, List<TableAlign> alignments)
   onChanged;
 
-  late List<List<TextEditingController>> _cells;
+  late List<List<EditorTextController>> _cells;
   late List<List<FocusNode>> _nodes;
   List<TableAlign> _alignments;
 
@@ -66,7 +67,7 @@ class TableEditController extends ChangeNotifier {
     for (final row in _cells) [for (final cell in row) cell.text],
   ];
 
-  TextEditingController cellController(int r, int c) => _cells[r][c];
+  EditorTextController cellController(int r, int c) => _cells[r][c];
   FocusNode focusNode(int r, int c) => _nodes[r][c];
 
   /// Neemt [raw] over als raster, rechthoekig gemaakt op de langste rij. Een
@@ -92,13 +93,14 @@ class TableEditController extends ChangeNotifier {
     ];
   }
 
-  TextEditingController _makeController(String text) =>
-      TextEditingController(text: text)..addListener(_emit);
+  EditorTextController _makeController(String text) =>
+      EditorTextController(text: text)..addTextListener(_emit);
 
   /// Wat er het laatst is doorgegeven, om een melding zonder wijziging te
-  /// kunnen overslaan. Een [TextEditingController] meldt namelijk óók bij een
-  /// verschuiving van de cursor of de selectie, en zo'n loze melding schreef
-  /// de tabel opnieuw weg — met de vorige inhoud, want er was niets getypt.
+  /// kunnen overslaan. De cursorruis die dit ooit tegenhield vangt
+  /// [EditorTextController] inmiddels zelf af; wat hier overblijft zijn de
+  /// rij- en kolombewerkingen, die na een verplaatsing op dezelfde inhoud
+  /// kunnen uitkomen.
   String? _lastEmitted;
 
   /// Meldt de wijziging én laat de tabel opnieuw tekenen. Dat tweede is geen
@@ -291,9 +293,9 @@ class TableEditController extends ChangeNotifier {
       for (var j = 0; j < table[i].length; j++) {
         final ctrl = _cells[r + i][c + j];
         // Zonder tussentijdse melding; één [_emitAndRebuild] sluit het af.
-        ctrl.removeListener(_emit);
+        ctrl.removeTextListener(_emit);
         ctrl.text = table[i][j];
-        ctrl.addListener(_emit);
+        ctrl.addTextListener(_emit);
       }
     }
     _emitAndRebuild();
@@ -314,7 +316,7 @@ class TableEditController extends ChangeNotifier {
     if (rowCount <= 2 || r <= 0 || r >= rowCount) return;
     for (final cell in _cells.removeAt(r)) {
       cell
-        ..removeListener(_emit)
+        ..removeTextListener(_emit)
         ..dispose();
     }
     for (final node in _nodes.removeAt(r)) {
@@ -338,7 +340,7 @@ class TableEditController extends ChangeNotifier {
     if (colCount <= 1 || c < 0 || c >= colCount) return;
     for (var r = 0; r < rowCount; r++) {
       _cells[r].removeAt(c)
-        ..removeListener(_emit)
+        ..removeTextListener(_emit)
         ..dispose();
       _nodes[r].removeAt(c).dispose();
     }
@@ -384,7 +386,7 @@ class TableEditController extends ChangeNotifier {
     for (final row in _cells) {
       for (final cell in row) {
         cell
-          ..removeListener(_emit)
+          ..removeTextListener(_emit)
           ..dispose();
       }
     }

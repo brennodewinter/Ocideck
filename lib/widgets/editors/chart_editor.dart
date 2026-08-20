@@ -26,6 +26,7 @@ import '../dialogs/improvement_msa_dialog.dart';
 import 'chart_doe_design_dialog.dart';
 import 'chart_histogram_limits.dart';
 import 'chart_type_toolbar.dart';
+import 'editor_text_controller.dart';
 
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
@@ -99,15 +100,15 @@ class ChartEditor extends StatefulWidget {
 }
 
 class _ChartEditorState extends State<ChartEditor> {
-  late final TextEditingController _title;
-  late final TextEditingController _targets;
-  late final TextEditingController _bands;
-  late final TextEditingController _minBound;
-  late final TextEditingController _maxBound;
-  late final TextEditingController _usl;
-  late final TextEditingController _lsl;
-  late final TextEditingController _processTarget;
-  late final TextEditingController _startAngle;
+  late final EditorTextController _title;
+  late final EditorTextController _targets;
+  late final EditorTextController _bands;
+  late final EditorTextController _minBound;
+  late final EditorTextController _maxBound;
+  late final EditorTextController _usl;
+  late final EditorTextController _lsl;
+  late final EditorTextController _processTarget;
+  late final EditorTextController _startAngle;
   late ChartType _type;
   String? _source;
   late bool _animateOnEnter;
@@ -139,27 +140,27 @@ class _ChartEditorState extends State<ChartEditor> {
     _animateOnEnter = spec.animateOnEnter;
     _animationOverrideMs = spec.animationDurationMs;
     _showSliceLabels = spec.showSliceLabels;
-    _title = TextEditingController(text: spec.title);
-    _title.addListener(_emit);
-    _targets = TextEditingController(text: _fmtList(spec.targets));
-    _bands = TextEditingController(text: _fmtList(spec.bands));
-    _minBound = TextEditingController(text: _fmtBound(spec.minBound));
-    _maxBound = TextEditingController(text: _fmtBound(spec.maxBound));
-    _usl = TextEditingController(text: _fmtBound(spec.usl));
-    _lsl = TextEditingController(text: _fmtBound(spec.lsl));
-    _processTarget = TextEditingController(text: _fmtBound(spec.processTarget));
+    _title = EditorTextController(text: spec.title);
+    _title.addTextListener(_emit);
+    _targets = EditorTextController(text: _fmtList(spec.targets));
+    _bands = EditorTextController(text: _fmtList(spec.bands));
+    _minBound = EditorTextController(text: _fmtBound(spec.minBound));
+    _maxBound = EditorTextController(text: _fmtBound(spec.maxBound));
+    _usl = EditorTextController(text: _fmtBound(spec.usl));
+    _lsl = EditorTextController(text: _fmtBound(spec.lsl));
+    _processTarget = EditorTextController(text: _fmtBound(spec.processTarget));
     _useDeckY01 = spec.yRef?.trim().toUpperCase() == 'Y-01';
-    _targets.addListener(_emit);
-    _bands.addListener(_emit);
-    _minBound.addListener(_emit);
-    _maxBound.addListener(_emit);
-    _usl.addListener(_emit);
-    _lsl.addListener(_emit);
-    _processTarget.addListener(_emit);
-    _startAngle = TextEditingController(
+    _targets.addTextListener(_emit);
+    _bands.addTextListener(_emit);
+    _minBound.addTextListener(_emit);
+    _maxBound.addTextListener(_emit);
+    _usl.addTextListener(_emit);
+    _lsl.addTextListener(_emit);
+    _processTarget.addTextListener(_emit);
+    _startAngle = EditorTextController(
       text: spec.startAngle == 0 ? '' : _fmt(spec.startAngle),
     );
-    _startAngle.addListener(_emit);
+    _startAngle.addTextListener(_emit);
     _loadFromSpec(spec);
   }
 

@@ -6,6 +6,7 @@ import '../../state/deck_provider.dart';
 import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 class TwoImagesEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -28,13 +29,13 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
 }
 
 class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emitTitle);
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(_emitTitle);
   }
 
   void _emitTitle() {

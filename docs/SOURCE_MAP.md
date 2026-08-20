@@ -1363,6 +1363,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `cockpit_editor.dart` — Edits a cockpit slide: title, up to six meter specs,
   presenter-entry animation and its optional per-slide duration.
 - `code_editor.dart` — Edits a code slide (syntax-highlighted monospace field).
+- `editor_text_controller.dart` — `EditorTextController`: een tekstveldcontroller die zijn bewerkingsluisteraars (`addTextListener`) alleen wekt bij een échte tekstwijziging. Een gewone `TextEditingController` meldt ook een cursorwissel, en een editor die dat als bewerking leest maakt de presentatie 'gewijzigd' van één klik — waarna de niet-opgeslagen-stip meteen ná het opslaan weer opkomt. `addListener` blijft ongefilterd, want het tekstveld zelf moet de cursor wél zien bewegen.
 - `finding_editor.dart` — Edits a finding header (scope, CVSS vector, CWE picker, CVE, sections; template + CWE pickers).
 - `findings_summary_editor.dart` — Edits the findings-summary counts (with "refresh from deck").
 - `free_markdown_editor.dart` — Edits a free-form custom-markdown slide.

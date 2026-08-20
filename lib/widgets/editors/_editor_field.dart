@@ -21,6 +21,7 @@ import '../../utils/user_facing_error.dart';
 import '../asset_origin_badge.dart';
 import '../dialogs/image_carousel_picker.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 /// Shared layout helpers for slide editors.
 
@@ -51,11 +52,11 @@ void applyQualitySpanSelection(
 /// één met beginwaarde en emit-listener, en dispose ruimt ze allemaal op —
 /// de init/emit/dispose-boilerplate die elke editor per veld herhaalde.
 mixin EditorTextControllers<T extends StatefulWidget> on State<T> {
-  final List<TextEditingController> _editorControllers = [];
+  final List<EditorTextController> _editorControllers = [];
 
-  TextEditingController newController(String text, VoidCallback onChanged) {
-    final controller = TextEditingController(text: text)
-      ..addListener(onChanged);
+  EditorTextController newController(String text, VoidCallback onChanged) {
+    final controller = EditorTextController(text: text)
+      ..addTextListener(onChanged);
     _editorControllers.add(controller);
     return controller;
   }
@@ -723,14 +724,14 @@ class _CaptionField extends ConsumerStatefulWidget {
 }
 
 class _CaptionFieldState extends ConsumerState<_CaptionField> {
-  late final TextEditingController _ctrl;
+  late final EditorTextController _ctrl;
   final _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.caption);
-    _ctrl.addListener(_onChanged);
+    _ctrl = EditorTextController(text: widget.caption);
+    _ctrl.addTextListener(_onChanged);
     _loadStoredCaption();
     WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
   }
@@ -739,9 +740,9 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
   void didUpdateWidget(_CaptionField old) {
     super.didUpdateWidget(old);
     if (old.imagePath != widget.imagePath) {
-      _ctrl.removeListener(_onChanged);
+      _ctrl.removeTextListener(_onChanged);
       _ctrl.text = widget.caption;
-      _ctrl.addListener(_onChanged);
+      _ctrl.addTextListener(_onChanged);
       _loadStoredCaption();
     }
     _applyQualityFocus();
@@ -778,9 +779,9 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
       basePath: widget.captionBasePath,
     );
     if (!mounted || stored == null || stored == _ctrl.text) return;
-    _ctrl.removeListener(_onChanged);
+    _ctrl.removeTextListener(_onChanged);
     _ctrl.text = stored;
-    _ctrl.addListener(_onChanged);
+    _ctrl.addTextListener(_onChanged);
     widget.onChanged(stored);
   }
 

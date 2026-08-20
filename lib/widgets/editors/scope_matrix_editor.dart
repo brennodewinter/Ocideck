@@ -10,6 +10,7 @@ import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a `scopeMatrix` slide (PENTEST_MIAUW §2.2 / §4.4): a title plus a
 /// list of scope objects, each with a type that fixes its test standard (§10.7,
@@ -37,14 +38,15 @@ class ScopeMatrixEditor extends ConsumerStatefulWidget {
 
 class _RowControllers {
   _RowControllers(ScopeRow row, VoidCallback onChanged)
-    : object = TextEditingController(text: row.object)..addListener(onChanged),
-      note = TextEditingController(text: row.note)..addListener(onChanged),
+    : object = EditorTextController(text: row.object)
+        ..addTextListener(onChanged),
+      note = EditorTextController(text: row.note)..addTextListener(onChanged),
       type = row.type,
       status = row.status,
       cia = row.cia;
 
-  final TextEditingController object;
-  final TextEditingController note;
+  final EditorTextController object;
+  final EditorTextController note;
   ScopeObjectType type;
   ScopeStatus status;
   CiaRating cia;
@@ -64,7 +66,7 @@ class _RowControllers {
 }
 
 class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late List<_RowControllers> _rows;
 
   @override
@@ -74,7 +76,7 @@ class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
       widget.slide.title,
       widget.slide.tableRows,
     );
-    _title = TextEditingController(text: spec.title)..addListener(_emit);
+    _title = EditorTextController(text: spec.title)..addTextListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) _rows = [_RowControllers(const ScopeRow(), _emit)];
   }

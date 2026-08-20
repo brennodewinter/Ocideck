@@ -8,6 +8,7 @@ import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
+import 'editor_text_controller.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
 
@@ -34,9 +35,9 @@ class TwoBulletsEditor extends StatefulWidget {
 }
 
 class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
-  late final TextEditingController _title;
-  late final TextEditingController _heading1;
-  late final TextEditingController _heading2;
+  late final EditorTextController _title;
+  late final EditorTextController _heading1;
+  late final EditorTextController _heading2;
   late _BulletSet _left;
   late _BulletSet _right;
   late ListStyle _listStyle;
@@ -47,12 +48,12 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
-    _heading1 = TextEditingController(text: widget.slide.columnTitle1);
-    _heading2 = TextEditingController(text: widget.slide.columnTitle2);
-    _heading1.addListener(_emit);
-    _heading2.addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title);
+    _title.addTextListener(_emit);
+    _heading1 = EditorTextController(text: widget.slide.columnTitle1);
+    _heading2 = EditorTextController(text: widget.slide.columnTitle2);
+    _heading1.addTextListener(_emit);
+    _heading2.addTextListener(_emit);
     _listStyle = widget.slide.listStyle == ListStyle.richText
         ? ListStyle.bullets
         : widget.slide.listStyle;
@@ -184,7 +185,7 @@ class _BulletSet {
   static const maxLevel = 4;
 
   final VoidCallback emit;
-  late List<TextEditingController> controllers;
+  late List<EditorTextController> controllers;
   late List<int> levels;
   late List<bool> checked;
   late List<bool> headings;
@@ -227,9 +228,9 @@ class _BulletSet {
     return l;
   }
 
-  TextEditingController _makeCtrl(String text) {
-    final c = TextEditingController(text: text);
-    c.addListener(emit);
+  EditorTextController _makeCtrl(String text) {
+    final c = EditorTextController(text: text);
+    c.addTextListener(emit);
     return c;
   }
 
@@ -263,9 +264,9 @@ class _BulletSet {
   void removeAndFocus(_Mutate mutate, int i) {
     if (controllers.length == 1) {
       mutate(() {
-        controllers[i].removeListener(emit);
+        controllers[i].removeTextListener(emit);
         controllers[i].clear();
-        controllers[i].addListener(emit);
+        controllers[i].addTextListener(emit);
         levels[i] = 0;
         checked[i] = false;
         headings[i] = false;
@@ -276,7 +277,7 @@ class _BulletSet {
     }
     final target = (i - 1).clamp(0, controllers.length - 2);
     mutate(() {
-      controllers[i].removeListener(emit);
+      controllers[i].removeTextListener(emit);
       controllers[i].dispose();
       controllers.removeAt(i);
       levels.removeAt(i);
@@ -314,7 +315,7 @@ class _BulletSet {
     }
 
     mutate(() {
-      controllers[i].removeListener(emit);
+      controllers[i].removeTextListener(emit);
       controllers[i].dispose();
       controllers[i] = _makeCtrl(lines[0]);
       headings[i] = false;
@@ -347,7 +348,7 @@ class _BulletColumn extends StatefulWidget {
   final String label;
   final _BulletSet set;
   final VoidCallback emit;
-  final TextEditingController headingController;
+  final EditorTextController headingController;
   final ListStyle listStyle;
 
   const _BulletColumn({

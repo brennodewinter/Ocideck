@@ -9,6 +9,7 @@ import '../../services/improvement_ai_service.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 import 'improvement_ai_suggest_field.dart';
+import 'editor_text_controller.dart';
 
 /// Editor for a Procesverbetering `tree` slide (PROCESS_IMPROVEMENT §3.3).
 ///
@@ -31,10 +32,10 @@ class TreeEditor extends ConsumerStatefulWidget {
 }
 
 class _TreeEditorState extends ConsumerState<TreeEditor> {
-  late final TextEditingController _title;
+  late final EditorTextController _title;
   late String _templateId;
   late String _layoutToken;
-  late List<TextEditingController> _bullets;
+  late List<EditorTextController> _bullets;
   late List<int> _levels;
   late Set<String> _aiFields;
 
@@ -43,8 +44,8 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title)
-      ..addListener(_emit);
+    _title = EditorTextController(text: widget.slide.title)
+      ..addTextListener(_emit);
     _templateId = widget.slide.improvementTemplateId.isEmpty
         ? kDefaultTreeTemplateId
         : widget.slide.improvementTemplateId;
@@ -103,7 +104,7 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
   void _loadBullets(List<String> raw) {
     _disposeBullets();
     if (raw.isEmpty) {
-      _bullets = [TextEditingController()..addListener(_emit)];
+      _bullets = [EditorTextController()..addTextListener(_emit)];
       _levels = [0];
       return;
     }
@@ -111,7 +112,7 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
     _levels = [];
     for (final item in raw) {
       _bullets.add(
-        TextEditingController(text: bulletText(item))..addListener(_emit),
+        EditorTextController(text: bulletText(item))..addTextListener(_emit),
       );
       _levels.add(bulletLevel(item));
     }
@@ -172,7 +173,7 @@ class _TreeEditorState extends ConsumerState<TreeEditor> {
     setState(() {
       final idx = after < 0 ? _bullets.length : after + 1;
       final level = after < 0 ? 0 : _levels[after];
-      _bullets.insert(idx, TextEditingController()..addListener(_emit));
+      _bullets.insert(idx, EditorTextController()..addTextListener(_emit));
       _levels.insert(idx, level);
     });
     _emit();

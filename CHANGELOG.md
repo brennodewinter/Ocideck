@@ -1736,6 +1736,24 @@ that before deciding whether this alpha fits what you are doing.
   ook een verschil tussen scherm en druk weggewerkt: de app kleurde élke subkop
   met het accent, de export alleen `h2` — een `###` viel in de export stil terug
   op de bodykleur.
+- **De niet-opgeslagen-stip bleef staan na het opslaan.** Een
+  `TextEditingController` meldt élke wijziging van zijn waarde, en de
+  cursorpositie zit in diezelfde waarde: één klik in een tekstveld is dus net zo
+  goed een melding als een aanslag. De dia-editors lazen dat als een bewerking
+  en schreven een *ongewijzigde* dia terug naar het deck. Gevolg: na het opslaan
+  maakte de eerstvolgende klik de presentatie meteen weer 'gewijzigd', kreeg
+  ongedaan-maken een stap die niets terugdraait, en bleef het herstelbestand op
+  schijf staan. Bij het opslaan van een nieuw deck ging het zelfs zónder
+  tussenklik mis: het bewaarvenster haalt de focus weg en geeft hem terug
+  terwijl er geschreven wordt, waarop `saveAs` aan de gegroeide ongedaan-stapel
+  zag dat er "tijdens het schrijven was doorgetypt" en het deck bewust vuil
+  liet — de stip verscheen dus meteen ná het schrijven weer, en verdween nooit.
+  Nieuw is [`EditorTextController`](../lib/widgets/editors/editor_text_controller.dart):
+  `addListener` blijft ongefilterd (het tekstveld moet van elke cursorwissel
+  weten, anders beweegt de cursor niet mee), maar `addTextListener` meldt alleen
+  echte tekstwijzigingen. Alle dia-editors, de notitievelden van het
+  presentatiescherm en de tabelbewerker in de weergave gaan nu langs die tweede
+  ingang. Een cursor die verspringt is geen bewerking.
 
 - **Een documentstijl met een kop- of voetband liet de front matter als tekst in
   het document staan.** De band wordt vóór het strippen aan de body geplakt,
