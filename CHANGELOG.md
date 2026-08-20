@@ -1723,6 +1723,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een pentestrapport blijft in de visuele editor bewerkbaar.** De vijf
+  rapportblokken — bevinding, ondertekening, bevindingenoverzicht, checklist en
+  scopematrix — reizen in de visuele stand voortaan als onaantastbare blokken
+  die tonen wat het document toont. Voorheen viel het hele document terug op de
+  brontekst zodra er één zo'n blok in stond, omdat de markering als rauwe HTML
+  telde; en de blokinhoud zelf kon door de rijke-tekstconversie stil beschadigd
+  raken. Alleen het beschermde deel is vrijgesteld van die controle: de
+  sectieteksten van een bevinding blijven gewone, gecontroleerde Markdown, en
+  een half gesloopte markering valt nog steeds zichtbaar terug op de bron —
+  kapot hoort zichtbaar te zijn, niet stil.
+
 - **De versiepoort ziet een proeftag niet meer voor een release aan.** Er worden
   tags als `v0.4.7-rc1` gesneden om één bouwlijn te toetsen zonder iets uit te
   brengen. `check-version-bump` las zo'n tag als een uitgebrachte 0.4.7 en

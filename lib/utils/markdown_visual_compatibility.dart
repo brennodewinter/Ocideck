@@ -1,5 +1,6 @@
 import '../services/table_of_contents.dart';
 import '../services/document_timeline.dart';
+import '../services/pentest_blocks.dart';
 
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
@@ -14,6 +15,18 @@ import '../services/document_timeline.dart';
 /// `TocEmbedBuilder`). Zonder die uitzondering wierp één ingevoegde
 /// inhoudsopgave het hele document terug in de brontekst.
 ///
+/// En sinds de pentestgrammatica geldt dezelfde uitzondering voor de bereiken
+/// die als één **atomaire embed** reizen (PENTEST_DOCUMENT.md §5.5). De regel is
+/// bewust "atomair gedragen" en niet "envelop herkend": overslaan zonder
+/// atomiciteit is stille corruptie. `DeltaToMarkdown` escapet elk leesteken en
+/// `_normalizeQuillOutput` haalt die escapes buiten tabelregels weer weg, dus
+/// een `\## Kop` uit een sectietekst komt er als échte sectiekop uit en de
+/// tekst eronder verhuist naar een ander veld. Wat niet atomair reist, wordt dus
+/// gewoon gescand — ook een **weesmarker**. Die valt terug op brontekst, en dat
+/// is precies goed: een half gesloopte envelop hoort zichtbaar kapot te zijn,
+/// niet stilletjes iets te verliezen. (Het contractvoorstel om élke markerregel
+/// onvoorwaardelijk vrij te stellen is daarom niet overgenomen.)
+///
 /// En om dezelfde reden staat de **voetnoot** hier niet meer: `[^1]` reist als
 /// inline-embed en `[^1]: …` als blok-embed (`FootnoteRefSyntax` /
 /// `FootnoteDefSyntax`). Tot die embeds er waren, was één voetnoot genoeg om de
@@ -24,9 +37,16 @@ enum MarkdownVisualLimitation { rawHtml, escapedPunctuation }
 Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
   final limitations = <MarkdownVisualLimitation>{};
   final lines = markdown.split('\n');
+  // Eén extra lineaire pas, dezelfde orde als de lus hieronder. Bewust geen
+  // echte Markdown-parse: deze functie draait per toetsaanslag over de hele
+  // documenttekst.
+  final pentest = scanPentestBlocks(markdown);
   var fenced = false;
   for (var index = 0; index < lines.length; index++) {
     final line = lines[index];
+    // Wat als één embed reist, gaat nooit door de rijke-tekstconversie en kan
+    // daar dus ook niet stukgaan.
+    if (pentest.isAtomicLine(index)) continue;
     if (RegExp(r'^\s*```').hasMatch(line)) {
       fenced = !fenced;
       continue;

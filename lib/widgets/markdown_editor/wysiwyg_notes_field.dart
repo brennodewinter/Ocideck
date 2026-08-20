@@ -15,6 +15,7 @@ import '../reader/document_markdown_view.dart'
 import 'divider_embed_builder.dart';
 import 'footnote_embed_builder.dart';
 import 'markdown_editor_theme.dart';
+import 'pentest_block_embed_builder.dart';
 import 'table_embed_builder.dart';
 import 'toc_embed_builder.dart';
 import 'timeline_table_embed_builder.dart';
@@ -262,6 +263,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   ),
                   const DividerEmbedBuilder(),
                   const TocEmbedBuilder(),
+                  const PentestBlockEmbedBuilder(),
                   const FootnoteRefEmbedBuilder(),
                   const FootnoteDefEmbedBuilder(),
                 ],
