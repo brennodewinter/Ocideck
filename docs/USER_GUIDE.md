@@ -4360,8 +4360,10 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   *(Changed 2026-08-08, extended 2026-08-19.)*
 - **Source** puts the raw Markdown next to a live rendered preview (stacked when
   the window is too narrow for two readable columns), with double-click editing of
-  charts and tables in the preview. Every keystroke flows straight through — there
-  is no separate "Apply" step, unlike the deck-oriented
+  charts and tables in the preview. Each line has a **line number** on the left:
+  it counts newlines in the file, you cannot select or type over it, and it does
+  not travel in the `.md`. Every keystroke flows straight through — there is no
+  separate "Apply" step, unlike the deck-oriented
   [Markdown mode](#markdown-mode) below.
 - **Switching leaves you where you were.** Going from Visual to Source or back
   puts the caret at the matching place in the other view, not at the top of the

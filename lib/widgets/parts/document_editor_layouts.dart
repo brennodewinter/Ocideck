@@ -347,8 +347,8 @@ double? _documentWriteWidth(WidgetRef ref) {
   };
 }
 
-/// Het rauwe schrijfvlak van de Bron-stand: één monospace tekstveld met het
-/// slimme plakken eraan geknoopt.
+/// Het rauwe schrijfvlak van de Bron-stand: monospace-bron met een
+/// niet-bewerkbare regelnummerkolom, en het slimme plakken eraan geknoopt.
 ///
 /// Top-level en niet op de staat: het heeft niets nodig behalve de controller,
 /// de focus en de plak-afhandeling, en het bewerkscherm zit op zijn
@@ -358,43 +358,11 @@ Widget _documentSourceField(
   required TextEditingController controller,
   required FocusNode focusNode,
   required Future<bool> Function() onSmartPaste,
-}) => Shortcuts(
-  shortcuts: const {
-    SingleActivator(LogicalKeyboardKey.keyV, control: true):
-        _DocSmartPasteIntent(),
-    SingleActivator(LogicalKeyboardKey.keyV, meta: true):
-        _DocSmartPasteIntent(),
-  },
-  child: Actions(
-    actions: {
-      _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
-        onInvoke: (_) {
-          unawaited(onSmartPaste());
-          return null;
-        },
-      ),
-    },
-    child: TextField(
-      controller: controller,
-      focusNode: focusNode,
-      maxLines: null,
-      expands: true,
-      textAlignVertical: TextAlignVertical.top,
-      cursorColor: theme.colorScheme.primary,
-      keyboardType: TextInputType.multiline,
-      style: TextStyle(
-        fontFamily: 'monospace',
-        fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-        fontSize: 14,
-        height: 1.5,
-        color: theme.colorScheme.onSurface,
-      ),
-      decoration: const InputDecoration(
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.all(16),
-      ),
-    ),
-  ),
+}) => _DocumentSourceField(
+  theme: theme,
+  controller: controller,
+  focusNode: focusNode,
+  onSmartPaste: onSmartPaste,
 );
 
 /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges en

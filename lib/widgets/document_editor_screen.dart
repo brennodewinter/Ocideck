@@ -73,6 +73,7 @@ import 'shell/document_save_actions.dart';
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_fields_dialog.dart';
 part 'parts/document_editor_layouts.dart';
+part 'parts/document_source_field.dart';
 part 'parts/document_source_rewrites.dart';
 part 'parts/document_editor_inserts.dart';
 
