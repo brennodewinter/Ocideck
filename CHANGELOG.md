@@ -146,6 +146,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## [Unreleased]
 
+### Fixed
+
+- fix(release): de Windows-installer wordt nu ook echt gebouwd op de bouwlijn.
+  De stap die Inno Setup installeert draaide onder Git Bash, en die vertaalt elk
+  argument dat met een `/` begint naar een pad — `/VERYSILENT` kwam aan als
+  `C:/Program Files/Git/VERYSILENT`. Inno Setup zag daardoor geen stille-modus en
+  opende zijn eigen venster, waarna de release-CI bijna twee uur stond te wachten
+  op een klik die op een bouwmachine nooit komt. Dezelfde vertaling sloopte de
+  aanroep van de installerbouwer en, ongezien, de hele ondertekenroute. Betrapt
+  door een proeftag; de installatie loopt nu via PowerShell en wacht netjes af,
+  en de twee andere aanroepen zijn afgeschermd.
+
 ### Added
 
 - feat(windows): een installatieprogramma voor Windows (#1208). Wie OciDeck op

@@ -31,6 +31,15 @@ on:
 permissions:
   contents: write
 
+# De tag-push en de actieve dispatch vanaf de forge (windows-ophalen) kunnen
+# allebei een run starten. Zonder groep bouwen die twee tegelijk en uploaden ze
+# om beurten dezelfde twee assets. In de wachtrij zetten (géén cancel: een
+# geannuleerde run laat op de tag precies de conclusie achter die windows-ophalen
+# als vals doodvonnis kan lezen).
+concurrency:
+  group: windows-release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   windows:
     name: Build Windows
@@ -38,7 +47,21 @@ jobs:
     # van een voorgebouwd pack, dus de MSVC-compatibiliteit die de windows-2022
     # pin noodzakelijk maakte is niet meer van toepassing (#870).
     runs-on: windows-latest
+    # De rc1-les in één regel: een stap die op een venster wacht dat niemand kan
+    # wegklikken liep 1u52m door en had zonder ingrijpen de volle zes uur
+    # standaard opgemaakt. De bouw zelf duurt ~20-35 min; 90 is ruim.
+    timeout-minutes: 90
     steps:
+      # workflow_dispatch accepteert elke ref. Alles hieronder leidt zijn
+      # bestandsnamen af uit "${GITHUB_REF_NAME#v}"; op main gedraaid zou dat
+      # een neprelease "main" op de spiegel zetten. Dezelfde wacht staat aan de
+      # forgekant.
+      - name: Alleen op een tag
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          echo "Deze workflow hoort alleen op een v*-tag te draaien (nu: $GITHUB_REF)." >&2
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -81,25 +104,50 @@ jobs:
       # release-asset vervangt; de hash dekt dat af en faalt lúid in plaats van
       # stil iets anders te draaien — dezelfde redenering als de appimagetool-pin
       # in de Linux-job (zie packaging/README.md).
+      #
+      # PowerShell en niet bash, en dat is geen smaak maar een reparatie (v0.4.7-rc1).
+      # In Git Bash vertaalt de MSYS-laag elk argument dat met `/` begint naar een
+      # Windows-pad: `/VERYSILENT` kwam bij Inno Setup aan als
+      # `C:/Program Files/Git/VERYSILENT`. Zonder herkende stille-modusvlag opende
+      # de installer zijn eigen venster en bleef de job staan wachten op een klik
+      # die op een runner nooit komt — 1 uur 52 minuten, tot handmatig afbreken.
+      # De wees-processen `innosetup-…exe` en `innosetup-…tmp` in het log waren
+      # het bewijs.
+      #
+      # `Start-Process -Wait` dekt meteen een tweede val: Inno's setup.exe pakt
+      # zichzelf uit naar een `.tmp` en keert terug zodra dat kind draait. Zonder
+      # -Wait kan de volgende stap ISCC aanroepen vóórdat de installatie klaar is —
+      # een race die zich als "ISCC bestaat niet" zou voordoen, en alleen soms.
       - name: Inno Setup installeren (gepind)
-        shell: bash
+        shell: pwsh
         env:
           INNOSETUP_VERSION: 7.1.0
           INNOSETUP_SHA256: 0362a383ed217d4c4239b5933866dd96d3eb2102737da92f80f6057a4b40df2f
         run: |
-          set -eu
-          BESTAND="innosetup-$INNOSETUP_VERSION-x64.exe"
-          URL="https://github.com/jrsoftware/issrc/releases/download/is-${INNOSETUP_VERSION//./_}/$BESTAND"
-          curl -fsSLo "$BESTAND" "$URL"
-          echo "$INNOSETUP_SHA256  $BESTAND" | sha256sum -c -
-          # /VERYSILENT installeert zonder vensters; /SUPPRESSMSGBOXES zorgt dat
-          # een vraag de job niet laat hangen tot de timeout.
-          ./"$BESTAND" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+          $ErrorActionPreference = 'Stop'
+          $bestand = "innosetup-$env:INNOSETUP_VERSION-x64.exe"
+          $tag = 'is-' + ($env:INNOSETUP_VERSION -replace '\.', '_')
+          $url = "https://github.com/jrsoftware/issrc/releases/download/$tag/$bestand"
+          Invoke-WebRequest -Uri $url -OutFile $bestand
+          $hash = (Get-FileHash $bestand -Algorithm SHA256).Hash.ToLower()
+          if ($hash -ne $env:INNOSETUP_SHA256) {
+            throw "sha256 van $bestand klopt niet: $hash (verwacht $env:INNOSETUP_SHA256)"
+          }
+          Write-Host "sha256 geverifieerd: $bestand"
+          $p = Start-Process -FilePath ".\$bestand" -Wait -NoNewWindow -PassThru -ArgumentList `
+            '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-'
+          # Start-Process werpt zelf niets bij een niet-nul kind, en juist
+          # /SUPPRESSMSGBOXES onderdrukt de foutvensters — zonder deze controle
+          # leest een mislukte installatie als geslaagd en faalt pas ISCC,
+          # met "bestaat niet" als dwaalspoor.
+          if ($p.ExitCode -ne 0) {
+            throw "Inno Setup-installatie faalde met exitcode $($p.ExitCode)."
+          }
           # Waar ISCC.exe landt verschilt per editie en per major (6 en 7 staan
           # naast elkaar), dus dat pad staat hier niet nóg een keer: het script
           # zoekt het zelf en meldt duidelijk als het er niet is. Eén plek die
           # weet waar ISCC woont, niet twee die uiteen kunnen lopen.
-          echo "Inno Setup $INNOSETUP_VERSION geïnstalleerd."
+          Write-Host "Inno Setup $env:INNOSETUP_VERSION geïnstalleerd."
 
       # Vóór het zippen, niet erna: het script tekent de .exe en de dll's ter
       # plekke als er ooit een certificaat wordt ingesteld (OCIDECK_WIN_SIGN_SHA1).

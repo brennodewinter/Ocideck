@@ -38,8 +38,13 @@
   #define AppVersion "0.0.0-unset"
 #endif
 
-; Where `make build-windows` puts the bundle, relative to this file.
-#define BundleDir "..\..\build\windows\x64\runner\Release"
+; Where `make build-windows` puts the bundle, relative to this file. The
+; packager may override it (/DBundleDir=…) so that the directory it guards and
+; signs is provably the directory that gets packed — two defaults that agree
+; today can drift apart silently the day someone overrides only one of them.
+#ifndef BundleDir
+  #define BundleDir "..\..\build\windows\x64\runner\Release"
+#endif
 
 [Setup]
 ; Never change AppId: Windows keys the installed-program identity and every
@@ -59,6 +64,10 @@ AppUpdatesURL={#AppUrl}/releases
 DefaultDirName={autopf}\{#AppName}
 DefaultGroupName={#AppName}
 UninstallDisplayIcon={app}\{#ExeName}
+; Without this, Setup registers the associations but never tells Explorer to
+; refresh them — .ocideck files keep their blank icon and old handler until the
+; user logs out. Uninstall gets the same refresh.
+ChangesAssociations=yes
 LicenseFile=..\..\LICENSE.md
 OutputDir=..\..\dist
 OutputBaseFilename=ocideck-windows-x64-setup-{#AppVersion}
@@ -101,7 +110,11 @@ Root: HKA; Subkey: "Software\Classes\{#ProgId}"; ValueType: string; ValueName: "
 Root: HKA; Subkey: "Software\Classes\{#ProgId}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#ExeName},0"
 Root: HKA; Subkey: "Software\Classes\{#ProgId}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#ExeName}"" ""%1"""
 Root: HKA; Subkey: "Software\Classes\.ocideck"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}"; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.md\OpenWithProgids"; ValueType: none; ValueName: "{#ProgId}"; Flags: uninsdeletevalue
+; ValueType none would create only the KEY and silently drop the value —
+; Explorer reads value NAMES under OpenWithProgids, so the "Open with…" entry
+; would simply never exist. An empty REG_SZ named after the ProgID is the
+; documented shape (the .reg file writes the REG_NONE equivalent).
+Root: HKA; Subkey: "Software\Classes\.md\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}"; ValueData: ""; Flags: uninsdeletevalue
 
 [Run]
 Filename: "{app}\{#ExeName}"; Description: "{cm:LaunchProgram,{#AppName}}"; Flags: nowait postinstall skipifsilent
