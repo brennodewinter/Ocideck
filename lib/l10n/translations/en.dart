@@ -411,11 +411,6 @@ const _dutchSourceEn = {
   'Niet-opgeslagen wijzigingen': 'Unsaved changes',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A presentation with unsaved changes was found from a previous session:',
-  'Er zijn': 'There are',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentations with unsaved changes from a previous session:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'There are presentations with unsaved changes. Save them before closing the app.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'This presentation has unsaved changes. Save it before closing the tab.',
   'Importeren via URL': 'Import from URL',
@@ -842,6 +837,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'A document with unsaved changes was found from a previous session:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'There are {n} files with unsaved changes from a previous session:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'There are files with unsaved changes. Save them before closing the app.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'This document has unsaved changes. Save it before closing the tab.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'The export did not succeed. Your document is unchanged; try again or choose another format.',
   'Thema documentkop': 'Theme document heading',

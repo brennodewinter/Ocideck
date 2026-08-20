@@ -416,11 +416,6 @@ const _dutchSourcePt = {
   'Niet-opgeslagen wijzigingen': 'Alterações não guardadas',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Foi encontrada uma apresentação com alterações não guardadas de uma sessão anterior:',
-  'Er zijn': 'Existem',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'apresentações com alterações não guardadas de uma sessão anterior:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Existem apresentações com alterações não guardadas. Guarde-as antes de fechar a aplicação.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Esta apresentação tem alterações não guardadas. Guarde-a antes de fechar o separador.',
   'Importeren via URL': 'Importar a partir de URL',
@@ -1667,6 +1662,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Foi encontrado um documento com alterações não guardadas de uma sessão anterior:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Existem {n} ficheiros com alterações não guardadas de uma sessão anterior:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Existem ficheiros com alterações não guardadas. Guarde-os antes de fechar a aplicação.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Este documento tem alterações não guardadas. Guarde-o antes de fechar o separador.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'A exportação não resultou. O seu documento não foi alterado; tente novamente ou escolha outro formato.',
   'Thema documentkop': 'Título de documento do tema',

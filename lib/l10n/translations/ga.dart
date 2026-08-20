@@ -415,11 +415,6 @@ const _dutchSourceGa = {
   'Niet-opgeslagen wijzigingen': 'Athruithe neamhshábháilte',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Aimsíodh cur i láthair le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
-  'Er zijn': 'Tá',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'cur i láthair le hathruithe neamhshábháilte aimsithe ó sheisiún roimhe seo:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Tá cuir i láthair le hathruithe neamhshábháilte ann. Sábháil iad sula ndúnann an aip.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Tá athruithe neamhshábháilte sa chur i láthair seo. Sábháil é sula ndúnann an cluaisín.',
   'Importeren via URL': 'Iompórtáil ó URL',
@@ -1669,6 +1664,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Aimsíodh cáipéis le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Tá {n} comhaid le hathruithe neamhshábháilte aimsithe ó sheisiún roimhe seo:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Tá comhaid le hathruithe neamhshábháilte ann. Sábháil iad sula ndúnann an aip.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Tá athruithe neamhshábháilte sa cháipéis seo. Sábháil í sula ndúnann an cluaisín.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Níor éirigh leis an easpórtáil. Tá do cháipéis gan athrú; bain triail eile as nó roghnaigh formáid eile.',
   'Thema documentkop': 'Ceannteideal cáipéise an téama',

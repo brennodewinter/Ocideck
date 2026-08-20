@@ -414,11 +414,6 @@ const _dutchSourcePl = {
   'Niet-opgeslagen wijzigingen': 'Niezapisane zmiany',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Znaleziono prezentację z niezapisanymi zmianami z poprzedniej sesji:',
-  'Er zijn': 'Istnieje',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'prezentacji z niezapisanymi zmianami z poprzedniej sesji:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Istnieją prezentacje z niezapisanymi zmianami. Zapisz je przed zamknięciem aplikacji.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ta prezentacja ma niezapisane zmiany. Zapisz ją przed zamknięciem karty.',
   'Importeren via URL': 'Importuj z adresu URL',
@@ -1651,6 +1646,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Znaleziono dokument z niezapisanymi zmianami z poprzedniej sesji:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Istnieje {n} plików z niezapisanymi zmianami z poprzedniej sesji:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Istnieją pliki z niezapisanymi zmianami. Zapisz je przed zamknięciem aplikacji.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Ten dokument ma niezapisane zmiany. Zapisz go przed zamknięciem karty.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksport się nie udał. Dokument pozostał bez zmian; spróbuj ponownie lub wybierz inny format.',
   'Thema documentkop': 'Nagłówek dokumentu motywu',

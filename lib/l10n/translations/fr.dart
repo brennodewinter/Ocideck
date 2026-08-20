@@ -674,6 +674,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Un document comportant des modifications non enregistrées a été trouvé depuis une session précédente :',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Il y a {n} fichiers comportant des modifications non enregistrées trouvés depuis une session précédente :',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Des fichiers comportent des modifications non enregistrées. Enregistrez-les avant de fermer l\'application.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Ce document comporte des modifications non enregistrées. Enregistrez-le avant de fermer l\'onglet.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'L\'exportation n\'a pas abouti. Votre document est inchangé ; réessayez ou choisissez un autre format.',
   'Thema documentkop': 'Titre de document du thème',
@@ -4024,9 +4032,6 @@ const _dutchSourceAddFr = {
   'Einde van de presentatie': 'Fin de la présentation',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Une présentation comportant des modifications non enregistrées a été trouvée depuis une session précédente :',
-  'Er zijn': 'Il y a',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Des présentations comportent des modifications non enregistrées. Enregistrez-les avant de fermer l\'application.',
   'Export mislukt:': 'Échec de l\'exportation :',
   'Geen afbeelding op het klembord gevonden.':
       'Aucune image trouvée dans le presse-papiers.',
@@ -4164,8 +4169,6 @@ const _dutchSourceAddFr = {
   'paginering aan': 'pagination activée',
   'pijltjes + Enter of klik om te springen':
       'flèches + Entrée ou clic pour aller à',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'présentations comportant des modifications non enregistrées trouvées depuis une session précédente :',
   'renderen…': 'rendu…',
   'resultaat': 'résultat',
   'resultaten': 'résultats',

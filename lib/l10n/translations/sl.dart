@@ -410,11 +410,6 @@ const _dutchSourceSl = {
   'Niet-opgeslagen wijzigingen': 'Neshranjene spremembe',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Najdena je bila predstavitev z neshranjenimi spremembami iz prejšnje seje:',
-  'Er zijn': 'Obstaja',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'predstavitev z neshranjenimi spremembami iz prejšnje seje:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Obstajajo predstavitve z neshranjenimi spremembami. Shranite jih pred zaprtjem aplikacije.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ta predstavitev ima neshranjene spremembe. Shranite jo pred zaprtjem zavihka.',
   'Importeren via URL': 'Uvoz iz URL-ja',
@@ -1640,6 +1635,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Najden je bil dokument z neshranjenimi spremembami iz prejšnje seje:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Obstaja {n} datotek z neshranjenimi spremembami iz prejšnje seje:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Obstajajo datoteke z neshranjenimi spremembami. Shranite jih pred zaprtjem aplikacije.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Ta dokument ima neshranjene spremembe. Shranite ga pred zaprtjem zavihka.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Izvoz ni uspel. Vaš dokument je nespremenjen; poskusite znova ali izberite drugo obliko.',
   'Thema documentkop': 'Naslov dokumenta teme',

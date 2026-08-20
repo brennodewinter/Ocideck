@@ -412,11 +412,6 @@ const _dutchSourceGsw = {
   'Niet-opgeslagen wijzigingen': 'Nöd gspicherti Ännderige',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Es isch e Presentation mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde worde:',
-  'Er zijn': 'Es git',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'Presentatione mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Es git Presentatione mit nöd gspicherte Ännderige. Spicher si, bevor d App zuegaht.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Die Presentation het nöd gspicherti Ännderige. Spicher si, bevor de Tab zuegaht.',
   'Importeren via URL': 'Vo ere URL importiere',
@@ -1642,6 +1637,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Es isch e Dokumänt mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde worde:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Es git {n} Dateie mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Es git Dateie mit nöd gspicherte Ännderige. Spicher si, bevor d App zuegaht.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Das Dokumänt het nöd gspicherti Ännderige. Spicher s, bevor de Tab zuegaht.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'De Export het nöd klappet. Dis Dokumänt isch unveränderet; probier\'s nomal oder nimm es anders Format.',
   'Thema documentkop': 'Thema-Dokumänt-Überschrift',

@@ -416,11 +416,6 @@ const _dutchSourceEl = {
   'Niet-opgeslagen wijzigingen': 'Μη αποθηκευμένες αλλαγές',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Βρέθηκε παρουσίαση με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
-  'Er zijn': 'Υπάρχουν',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'παρουσιάσεις με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Υπάρχουν παρουσιάσεις με μη αποθηκευμένες αλλαγές. Αποθηκεύστε τες πριν κλείσετε την εφαρμογή.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Αυτή η παρουσίαση έχει μη αποθηκευμένες αλλαγές. Αποθηκεύστε την πριν κλείσετε την καρτέλα.',
   'Importeren via URL': 'Εισαγωγή από URL',
@@ -1664,6 +1659,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Βρέθηκε έγγραφο με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Υπάρχουν {n} αρχεία με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Υπάρχουν αρχεία με μη αποθηκευμένες αλλαγές. Αποθηκεύστε τα πριν κλείσετε την εφαρμογή.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Αυτό το έγγραφο έχει μη αποθηκευμένες αλλαγές. Αποθηκεύστε το πριν κλείσετε την καρτέλα.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Η εξαγωγή δεν πέτυχε. Το έγγραφό σας δεν άλλαξε· δοκιμάστε ξανά ή επιλέξτε άλλη μορφή.',
   'Thema documentkop': 'Επικεφαλίδα εγγράφου θέματος',

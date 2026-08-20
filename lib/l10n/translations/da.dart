@@ -412,11 +412,6 @@ const _dutchSourceDa = {
   'Niet-opgeslagen wijzigingen': 'Ikke-gemte ændringer',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'En præsentation med ikke-gemte ændringer blev fundet fra en tidligere session:',
-  'Er zijn': 'Der er',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'præsentationer med ikke-gemte ændringer fra en tidligere session:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Der er præsentationer med ikke-gemte ændringer. Gem dem, før appen lukkes.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Denne præsentation har ikke-gemte ændringer. Gem den, før fanen lukkes.',
   'Importeren via URL': 'Importer fra URL',
@@ -1639,6 +1634,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Et dokument med ikke-gemte ændringer blev fundet fra en tidligere session:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Der er {n} filer med ikke-gemte ændringer fra en tidligere session:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Der er filer med ikke-gemte ændringer. Gem dem, før appen lukkes.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Dette dokument har ikke-gemte ændringer. Gem det, før fanen lukkes.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksporten lykkedes ikke. Dit dokument er uændret; prøv igen, eller vælg et andet format.',
   'Thema documentkop': 'Tema dokumentoverskrift',

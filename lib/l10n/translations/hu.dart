@@ -411,11 +411,6 @@ const _dutchSourceHu = {
   'Niet-opgeslagen wijzigingen': 'Nem mentett módosítások',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Egy előző munkamenetből nem mentett módosításokat tartalmazó prezentáció található:',
-  'Er zijn': 'Van',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'nem mentett módosításokat tartalmazó prezentáció egy előző munkamenetből:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Vannak nem mentett módosításokat tartalmazó prezentációk. Mentse őket, mielőtt bezárja az alkalmazást.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ez a prezentáció nem mentett módosításokat tartalmaz. Mentse, mielőtt bezárja a lapot.',
   'Importeren via URL': 'Importálás URL-ből',
@@ -1641,6 +1636,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Egy előző munkamenetből nem mentett módosításokat tartalmazó dokumentum található:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Van {n} nem mentett módosításokat tartalmazó fájl egy előző munkamenetből:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Vannak nem mentett módosításokat tartalmazó fájlok. Mentse őket, mielőtt bezárja az alkalmazást.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Ez a dokumentum nem mentett módosításokat tartalmaz. Mentse, mielőtt bezárja a lapot.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Az exportálás nem sikerült. A dokumentuma változatlan; próbálja újra, vagy válasszon másik formátumot.',
   'Thema documentkop': 'Téma dokumentumcíme',

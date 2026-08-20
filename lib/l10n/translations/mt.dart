@@ -413,11 +413,6 @@ const _dutchSourceMt = {
   'Niet-opgeslagen wijzigingen': 'Bidliet mhux maħżuna',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Instabet preżentazzjoni b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
-  'Er zijn': 'Hemm',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'preżentazzjonijiet b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Hemm preżentazzjonijiet b\'bidliet mhux maħżuna. Aħżinhom qabel ma tagħlaq l-app.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Din il-preżentazzjoni għandha bidliet mhux maħżuna. Aħżinha qabel ma tagħlaq it-tab.',
   'Importeren via URL': 'Importa minn URL',
@@ -1658,6 +1653,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Instab dokument b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Hemm {n} fajls b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Hemm fajls b\'bidliet mhux maħżuna. Aħżinhom qabel ma tagħlaq l-app.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Dan id-dokument għandu bidliet mhux maħżuna. Aħżinu qabel ma tagħlaq it-tab.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'L-esportazzjoni ma rnexxietx. Id-dokument tiegħek ma nbidilx; erġa\' pprova jew agħżel format ieħor.',
   'Thema documentkop': 'Titlu tad-dokument tat-tema',

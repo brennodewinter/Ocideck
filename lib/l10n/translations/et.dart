@@ -409,11 +409,6 @@ const _dutchSourceEt = {
   'Niet-opgeslagen wijzigingen': 'Salvestamata muudatused',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Eelmisest seansist leiti esitlus salvestamata muudatustega:',
-  'Er zijn': 'Leiti',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'esitlust salvestamata muudatustega eelmisest seansist:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'On esitlusi salvestamata muudatustega. Salvesta need enne rakenduse sulgemist.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Sellel esitlusel on salvestamata muudatused. Salvesta esitlus enne kaardi sulgemist.',
   'Importeren via URL': 'Impordi URL-ist',
@@ -1633,6 +1628,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Eelmisest seansist leiti dokument salvestamata muudatustega:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Leiti {n} faili salvestamata muudatustega eelmisest seansist:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'On faile salvestamata muudatustega. Salvesta need enne rakenduse sulgemist.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Sellel dokumendil on salvestamata muudatused. Salvesta dokument enne kaardi sulgemist.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksportimine ei õnnestunud. Sinu dokument on muutmata; proovi uuesti või vali muu vorming.',
   'Thema documentkop': 'Teema dokumendi pealkiri',

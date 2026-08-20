@@ -285,11 +285,24 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                // Enkelvoud noemt de soort (presentatie of document); meervoud
+                // is neutraal ("bestanden") omdat er beide soorten in kunnen
+                // zitten. Eén string met een plaatshouder, niet drie stukken
+                // met het getal ertussen — dat legde de Nederlandse woordvolgorde
+                // op aan 31 talen (#1614).
                 snapshots.length == 1
-                    ? l10n.d(
-                        'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:',
-                      )
-                    : '${l10n.d('Er zijn')} ${snapshots.length} ${l10n.d('presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:')}',
+                    ? (snapshots.single.kind.isDocument
+                          ? l10n.d(
+                              'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:',
+                            )
+                          : l10n.d(
+                              'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:',
+                            ))
+                    : l10n
+                          .d(
+                            'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:',
+                          )
+                          .replaceAll('{n}', snapshots.length.toString()),
                 style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 10),
@@ -305,12 +318,23 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                       for (final s in snapshots)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 3),
-                          child: Text(
-                            '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              color: AppTheme.slate600,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                markdownKindIcon(s.kind),
+                                size: 14,
+                                color: AppTheme.slate600,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                '${s.label}  ·  ${_formatWhen(s.savedAt)}',
+                                style: TextStyle(
+                                  fontSize: 12.5,
+                                  color: AppTheme.slate600,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                     ],
@@ -373,7 +397,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     if (ref.read(tabsProvider).anyDirty) {
       final choice = await _confirmSaveBeforeClose(
         context.l10n.d(
-          'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.',
+          'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.',
         ),
       );
       switch (choice) {

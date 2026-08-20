@@ -412,11 +412,6 @@ const _dutchSourceBg = {
   'Niet-opgeslagen wijzigingen': 'Незапазени промени',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Открита е презентация с незапазени промени от предишна сесия:',
-  'Er zijn': 'Има',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'презентации с незапазени промени от предишна сесия:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Има презентации с незапазени промени. Запазете ги, преди да затворите приложението.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Тази презентация има незапазени промени. Запазете я, преди да затворите раздела.',
   'Importeren via URL': 'Импортиране от URL',
@@ -1659,6 +1654,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Открит е документ с незапазени промени от предишна сесия:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Има {n} файла с незапазени промени от предишна сесия:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Има файлове с незапазени промени. Запазете ги, преди да затворите приложението.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Този документ има незапазени промени. Запазете го, преди да затворите раздела.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Експортирането не успя. Документът ви е непроменен; опитайте отново или изберете друг формат.',
   'Thema documentkop': 'Заглавие на документ на темата',

@@ -411,11 +411,6 @@ const _dutchSourceSk = {
   'Niet-opgeslagen wijzigingen': 'Neuložené zmeny',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Našla sa prezentácia s neuloženými zmenami z predchádzajúcej relácie:',
-  'Er zijn': 'Existuje',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'prezentácií s neuloženými zmenami z predchádzajúcej relácie:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Existujú prezentácie s neuloženými zmenami. Uložte ich pred zatvorením aplikácie.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Táto prezentácia má neuložené zmeny. Uložte ju pred zatvorením karty.',
   'Importeren via URL': 'Importovať z URL',
@@ -1646,6 +1641,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Našiel sa dokument s neuloženými zmenami z predchádzajúcej relácie:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Existuje {n} súborov s neuloženými zmenami z predchádzajúcej relácie:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Existujú súbory s neuloženými zmenami. Uložte ich pred zatvorením aplikácie.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Tento dokument má neuložené zmeny. Uložte ho pred zatvorením karty.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Export sa nepodaril. Váš dokument zostal nezmenený; skúste to znova alebo zvoľte iný formát.',
   'Thema documentkop': 'Nadpis dokumentu témy',

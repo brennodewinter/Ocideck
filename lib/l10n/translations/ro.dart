@@ -412,11 +412,6 @@ const _dutchSourceRo = {
   'Niet-opgeslagen wijzigingen': 'Modificări nesalvate',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A fost găsită o prezentare cu modificări nesalvate dintr-o sesiune anterioară:',
-  'Er zijn': 'Există',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'prezentări cu modificări nesalvate găsite dintr-o sesiune anterioară:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Există prezentări cu modificări nesalvate. Salvează-le înainte de a închide aplicația.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Această prezentare are modificări nesalvate. Salveaz-o înainte de a închide fila.',
   'Importeren via URL': 'Importă din URL',
@@ -1656,6 +1651,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'A fost găsit un document cu modificări nesalvate dintr-o sesiune anterioară:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Există {n} fișiere cu modificări nesalvate găsite dintr-o sesiune anterioară:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Există fișiere cu modificări nesalvate. Salvează-le înainte de a închide aplicația.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Acest document are modificări nesalvate. Salvează-l înainte de a închide fila.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Exportul nu a reușit. Documentul dumneavoastră este neschimbat; încercați din nou sau alegeți alt format.',
   'Thema documentkop': 'Titlu document temă',

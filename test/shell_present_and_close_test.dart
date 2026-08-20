@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,12 +9,14 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/finding_spec.dart';
+import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
+import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Twee gedeelde handelingen uit `lib/widgets/shell/shell_actions.dart` die
@@ -535,5 +538,99 @@ void main() {
 
     expect(find.text('Niet-opgeslagen wijzigingen'), findsNothing);
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
+  });
+
+  // ── Documenttabblad sluiten (#1614) ──────────────────────────────────────
+
+  /// Opent de shell en voegt een vuil documenttabblad toe met [path] als
+  /// bestandspad. Opslaan gaat rechtstreeks naar dat pad — de route die voor
+  /// #1614 een StateError gooide omdat requestCloseTab tab.deckNotifier
+  /// aanriep op een documenttabblad.
+  Future<TabInfo> pumpDirtyDocumentShell(
+    WidgetTester tester,
+    String path,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+
+    // Open een documenttabblad en laad een document met bestandspad erin.
+    container.read(tabsProvider.notifier).newDocument();
+    await tester.pumpAndSettle();
+    final tab = container.read(tabsProvider).current!;
+    tab.documentNotifier!.loadDocument(
+      MarkdownDocument.parse('# Oorspronkelijk\n'),
+      filePath: path,
+    );
+    // Maak vuil: een bewerking die de bron verandert.
+    tab.documentNotifier!.edit('# Gewijzigd\n');
+    await tester.pumpAndSettle();
+    return tab;
+  }
+
+  testWidgets(
+    'een vuil documenttabblad noemt "document", niet "presentatie" (#1614)',
+    (tester) async {
+      final temp = Directory.systemTemp.createTempSync('doc_label');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final path = p.join(temp.path, 'memo.md');
+      File(path).writeAsStringSync('# Oorspronkelijk\n');
+
+      final tab = await pumpDirtyDocumentShell(tester, path);
+      expect(tab.isDirty, isTrue, reason: 'het tabblad moet vuil zijn');
+
+      // Het documenttabblad is het tweede (na het welkomstscherm), dus het
+      // laatste sluitknopje in de tabbalk.
+      await tester.tap(tabClose().last);
+      await tester.pumpAndSettle();
+
+      // De sluitbevestiging-dialoog verschijnt.
+      expect(
+        find.text('Niet-opgeslagen wijzigingen'),
+        findsOneWidget,
+        reason: 'de sluitbevestiging-dialoog moet verschijnen',
+      );
+      // De melding noemt de soort: "document", niet "presentatie".
+      expect(
+        find.textContaining('Sla het document op voordat het tabblad sluit.'),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('Sla de presentatie op voordat het tabblad sluit.'),
+        findsNothing,
+      );
+    },
+  );
+
+  testWidgets('een vuil documenttabblad slaat op zonder StateError (#1614)', (
+    tester,
+  ) async {
+    final temp = Directory.systemTemp.createTempSync('doc_save');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final path = p.join(temp.path, 'memo.md');
+    File(path).writeAsStringSync('# Oorspronkelijk\n');
+
+    final tab = await pumpDirtyDocumentShell(tester, path);
+    expect(tab.kind, MarkdownKind.document);
+    expect(tab.documentNotifier, isNotNull);
+    expect(tab.isDirty, isTrue);
+
+    await tester.tap(tabClose().last);
+    await tester.pumpAndSettle();
+
+    // Kies "Opslaan en sluiten" — voor #1614 gooide dit een StateError
+    // omdat requestCloseTab tab.deckNotifier aanriep op een documenttabblad
+    // (tab.deckNotifier is null voor een document). Die exception is
+    // synchroon, dus hij is al gevangen vóór de async save-keten.
+    await tester.tap(find.text('Opslaan en sluiten'));
+    await tester.pumpAndSettle();
+
+    // Geen StateError: de fix routeert via saveTabWithDestination.
+    expect(tester.takeException(), isNull);
   });
 }

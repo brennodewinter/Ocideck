@@ -852,12 +852,19 @@ Future<void> requestCloseTab(
   if (index < 0 || index >= tabs.length) return;
   final tab = tabs[index];
   if (tab.isDirty) {
-    final choice = await _confirmSaveBeforeCloseDialog(
-      context,
-      context.l10n.d(
-        'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
-      ),
-    );
+    final l10n = context.l10n;
+    // De melding noemt de soort: een document is geen presentatie. Vroeger
+    // stond hier voor elk tabblad de presentatie-tekst, en voor een vuil
+    // documenttabblad ging het opslaan via `tab.deckNotifier` — dat gooit
+    // voor een document (StateError), dus het tabblad sloot nooit (#1614).
+    final message = tab.kind.isDocument
+        ? l10n.d(
+            'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.',
+          )
+        : l10n.d(
+            'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
+          );
+    final choice = await _confirmSaveBeforeCloseDialog(context, message);
     if (!context.mounted) return;
     switch (choice) {
       case _CloseChoice.cancel:
@@ -866,11 +873,10 @@ Future<void> requestCloseTab(
         // Wijzigingen verwerpen: closeTab() ruimt ook het herstelbestand op.
         break;
       case _CloseChoice.save:
-        final saved = await saveDeckWithDestination(
-          context,
-          ref,
-          tab.deckNotifier,
-        );
+        // saveTabWithDestination routeert op soort: een document byte-getrouw
+        // via zijn eigen pad, een presentatie via de deck-route. Vroeger ging
+        // dit via tab.deckNotifier, dat voor een documenttabblad gooit.
+        final saved = await saveTabWithDestination(context, ref, tab);
         if (!saved) return;
     }
   }

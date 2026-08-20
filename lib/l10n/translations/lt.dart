@@ -410,11 +410,6 @@ const _dutchSourceLt = {
   'Niet-opgeslagen wijzigingen': 'Neišsaugoti pakeitimai',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Rasta ankstesnės sesijos pateiktis su neišsaugotais pakeitimais:',
-  'Er zijn': 'Yra',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'pateiktys su neišsaugotais pakeitimais iš ankstesnės sesijos:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Yra pateikčių su neišsaugotais pakeitimais. Išsaugokite jas prieš uždarydami programą.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ši pateiktis turi neišsaugotų pakeitimų. Išsaugokite ją prieš uždarydami skirtuką.',
   'Importeren via URL': 'Importuoti iš URL',
@@ -1646,6 +1641,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Rastas ankstesnės sesijos dokumentas su neišsaugotais pakeitimais:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Yra {n} failų su neišsaugotais pakeitimais iš ankstesnės sesijos:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Yra failų su neišsaugotais pakeitimais. Išsaugokite juos prieš uždarydami programą.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Šis dokumentas turi neišsaugotų pakeitimų. Išsaugokite jį prieš uždarydami skirtuką.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksportuoti nepavyko. Jūsų dokumentas nepakeistas; bandykite dar kartą arba pasirinkite kitą formatą.',
   'Thema documentkop': 'Temos dokumento antraštė',
