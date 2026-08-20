@@ -789,17 +789,33 @@ phase3() {
   printf '%s\n' "$MINISIGN_PW" \
     | make sign-release SHA256SUMS="$TMP/SHA256SUMS" >/dev/null || true
   [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
-  local rid old_asset
+  local rid old_asset new_asset
   rid="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
-  # Idempotent: hing er al een SHA256SUMS.minisig (van een eerdere --resume-poging),
-  # verwijder die eerst — anders geeft de upload een 409 of een duplicaat.
+  # Upload-first-then-replace (#1600): upload de nieuwe handtekening onder een
+  # tijdelijke naam vóór de oude verwijderd wordt. De vorige volgorde (DELETE
+  # dan POST) liet bij een gefaalde POST de release zonder handtekening achter,
+  # en een stil gefaalde DELETE (|| true) leidde tot een 409 op de POST. Nu:
+  #   1. POST onder .new — faalt dit, dan staat de oude nog op de release.
+  #   2. DELETE de oude — faalt dit, dan staan er twee bijlagen (oude + .new);
+  #      de oude is handmatig te verwijderen, de inhoud is er in ieder geval.
+  #   3. PATCH hernoem .new naar de definitieve naam.
+  local tmp_name="SHA256SUMS.minisig.new"
+  new_asset="$(api POST "/releases/$rid/assets?name=$tmp_name" \
+    -F "attachment=@$TMP/SHA256SUMS.minisig" \
+    | jq -r '.id' 2>/dev/null)" \
+    || die "kon SHA256SUMS.minisig niet uploaden — de oude handtekening staat nog op de release."
+  [ -n "$new_asset" ] && [ "$new_asset" != "null" ] \
+    || die "upload van SHA256SUMS.minisig gaf geen asset-id — controleer de release-pagina."
   old_asset="$(api GET "/releases/$rid/assets" 2>/dev/null \
     | jq -r '.[] | select(.name=="SHA256SUMS.minisig") | .id' 2>/dev/null | head -1 || true)"
   if [ -n "$old_asset" ]; then
-    api DELETE "/releases/$rid/assets/$old_asset" -o /dev/null || true
+    api DELETE "/releases/$rid/assets/$old_asset" -o /dev/null \
+      || die "kon de oude SHA256SUMS.minisig niet verwijderen — verwijder handmatig en hernoem $tmp_name naar SHA256SUMS.minisig."
   fi
-  api POST "/releases/$rid/assets?name=SHA256SUMS.minisig" \
-    -F "attachment=@$TMP/SHA256SUMS.minisig" -o /dev/null
+  api PATCH "/releases/$rid/assets/$new_asset" \
+    -H 'Content-Type: application/json' \
+    -d '{"name":"SHA256SUMS.minisig"}' -o /dev/null \
+    || die "kon $tmp_name niet hernoemen naar SHA256SUMS.minisig — hernoem handmatig op de release-pagina."
   log "SHA256SUMS.minisig aangehangen aan release $TAG."
 
   STEP="website bewaken"

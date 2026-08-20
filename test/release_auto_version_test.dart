@@ -326,32 +326,65 @@ void main() {
     },
   );
 
-  // Resume-netheid: de handtekening-upload moet idempotent zijn — een tweede
-  // fase-3-poging (--resume) mag geen 409 of duplicaat geven.
+  // Resume-netheid + #1600: de handtekening-upload moet idempotent zijn — een
+  // tweede fase-3-poging (--resume) mag geen 409 of duplicaat geven. De veilige
+  // volgorde (sinds #1600) is upload-onder-tijdelijke-naam → verwijder-oude →
+  // hernoem, zodat een gefaalde POST de release niet zonder handtekening laat.
   test(
-    'de handtekening-upload verwijdert eerst een bestaande (idempotent)',
+    'de handtekening-upload uploadt eerst, verwijdert dan, en hernoemt (#1600)',
     () {
       final body = functionBody('phase3');
+      // De tijdelijke naam mag niet de definitieve zijn — anders botst de
+      // upload met de bestaande bijlage die pas later verwijderd wordt.
+      expect(
+        body.contains('tmp_name='),
+        isTrue,
+        reason: 'phase3 moet een tijdelijke naam definieren voor de upload.',
+      );
+      expect(
+        body.contains('SHA256SUMS.minisig.new'),
+        isTrue,
+        reason:
+            'de tijdelijke naam moet verschillen van de definitieve '
+            '(SHA256SUMS.minisig.new), anders is er geen verschil met de '
+            'oude delete-first volgorde.',
+      );
+      final postIdx = body.indexOf(RegExp(r'api\s+POST[^\n]*assets'));
       final delIdx = body.indexOf(RegExp(r'api\s+DELETE[^\n]*assets'));
-      final postIdx = body.indexOf(
-        RegExp(r'api\s+POST[^\n]*assets\?name=SHA256SUMS\.minisig'),
+      final patchIdx = body.indexOf(RegExp(r'api\s+PATCH[^\n]*assets'));
+      expect(
+        postIdx,
+        isNonNegative,
+        reason:
+            'phase3 moet de nieuwe handtekening uploaden (api POST …assets).',
       );
       expect(
         delIdx,
         isNonNegative,
         reason:
-            'phase3 moet een bestaande SHA256SUMS.minisig eerst verwijderen '
-            '(api DELETE …assets) zodat --resume geen 409/duplicaat geeft.',
+            'phase3 moet de oude SHA256SUMS.minisig verwijderen '
+            '(api DELETE …assets) zodat --resume geen duplicaat geeft.',
+      );
+      expect(
+        patchIdx,
+        isNonNegative,
+        reason:
+            'phase3 moet de tijdelijke upload hernoemen naar de '
+            'definitieve naam (api PATCH …assets).',
       );
       expect(
         postIdx,
-        isNonNegative,
-        reason: 'de asset-upload (POST) niet gevonden.',
+        lessThan(delIdx),
+        reason:
+            'de POST moet vóór de DELETE staan — anders laat een gefaalde '
+            'POST de release zonder handtekening (#1600).',
       );
       expect(
         delIdx,
-        lessThan(postIdx),
-        reason: 'de DELETE moet vóór de POST staan.',
+        lessThan(patchIdx),
+        reason:
+            'de DELETE moet vóór de PATCH staan — pas hernoemen als de '
+            'oude weg is, anders botst de naam.',
       );
     },
   );

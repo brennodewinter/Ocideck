@@ -68,7 +68,12 @@ UninstallDisplayIcon={app}\{#ExeName}
 ; refresh them — .ocideck files keep their blank icon and old handler until the
 ; user logs out. Uninstall gets the same refresh.
 ChangesAssociations=yes
-LicenseFile=..\..\LICENSE.md
+; Plain-text licence, generated from LICENSE.md by tool/generate_license_txt.dart
+; (#1600). Inno Setup shows LicenseFile content verbatim on the first page a
+; Windows user sees — feeding it the Markdown source rendered the HTML comment,
+; #/##/**/> markers and --- rules literally. The .txt is committed and pinned
+; fresh by test/windows_packaging_test.dart.
+LicenseFile=LICENSE.txt
 OutputDir=..\..\dist
 OutputBaseFilename=ocideck-windows-x64-setup-{#AppVersion}
 Compression=lzma2/max
