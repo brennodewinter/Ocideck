@@ -47,6 +47,9 @@ void main() {
     // test zou hij zonder de vraag eeuwig blijven wachten — de job komt de
     // wachtrij nooit uit zonder controller.
     final service = MermaidRenderService.instance;
+    // De service is een singleton; een eerdere test in de suite kan de vlag
+    // al gezet hebben (bijv. mermaid_render_pipeline_test).
+    service.hostNeeded.value = false;
     expect(WebViewPlatform.instance, isNull, reason: 'anders meet dit niets');
     expect(service.isAvailable, isFalse);
     expect(
