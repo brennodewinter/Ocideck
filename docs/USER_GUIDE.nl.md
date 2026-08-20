@@ -4732,15 +4732,24 @@ nieuw vel per hoofdstuk wanneer *Nieuw hoofdstuk op een nieuwe pagina* aanstaat;
 de inhoudsopgave met bladzijdenummers en klikbare regels; klikbare links;
 afbeeldingen ingesloten in het bestand zelf.
 
-**Wat er niet in zit.** Een PDF kent geen JavaScript, dus wat de HTML-export
-daarmee tekent kan hier niet getekend worden: **formules, Mermaid-diagrammen en
-grafieken staan erin als hun bron**, in een blok met vaste letterafstand en een
-regel erboven die zegt wat het is. Dat is een bewuste keuze boven een leeg vlak —
-wie het diagram nodig heeft ziet zo tenminste wát er hoort te staan. Een formule
-op eigen regels (`$$…$$`) wordt zo'n blok; een formule middenin een zin (`$…$`)
-blijft in die zin staan, precies zoals je hem schreef. Wil je ze
-wél gerenderd, exporteer dan naar HTML (dat tekent alle drie) of naar LaTeX (dat
-de wiskunde zelf zet). **Voetnoten staan achterin**, niet onderaan het blad:
+**Formules, diagrammen en grafieken worden getekend** — als vectortekening en
+niet als plaatje, dus scherp op elke zoomstand, en de tekst erin (de titel van
+een grafiek, de aslabels, de legenda) blijft echte tekst. Grafieken komen van
+dezelfde generator die de HTML-export en de documentweergave op het scherm
+gebruiken, dus die drie kunnen niet uit de pas lopen. Mermaid-diagrammen en
+formules worden tijdens het exporteren elk één keer gerenderd.
+*(Toegevoegd 2026-08-20.)*
+
+Kan er eentje níet getekend worden, dan drukt de PDF zijn **bron** af in een blok
+met vaste letterafstand en een regel erboven die zegt wat het is — liever dat dan
+een leeg vlak, want wie het diagram nodig heeft ziet zo tenminste wát er hoort te
+staan. Dat gebeurt wanneer de cijfers van een grafiek in een los `data/*.json`
+staan dat niet meekwam, wanneer een diagram of formule niet rendert, en altijd in
+de **webversie**, die daar geen verborgen renderer voor heeft. Een formule op
+eigen regels (`$$…$$`) wordt getekend als blok; een formule middenin een zin
+(`$…$`) blijft in die zin staan, precies zoals je hem schreef.
+
+**Wat er niet in zit.** **Voetnoten staan achterin**, niet onderaan het blad:
 welke noot op welke bladzijde landt blijkt pas ná de opmaak, en dan staat het vel
 er al. De LaTeX-export zet ze wél onderaan.
 
@@ -4756,8 +4765,7 @@ Arabisch, Hebreeuws — heeft geen vorm beschikbaar en zou zonder klacht uit de
 tekstlaag verdwijnen. Stil gebeurt dat niet: de export zegt welke tekens niet
 gezet konden worden en wijst naar HTML of LaTeX, die er wél raad mee weten.
 
-De weg via HTML werkt nog steeds, en is nog steeds de juiste wanneer je de
-diagrammen gerenderd wilt hebben: open de geëxporteerde HTML en druk die vanuit
+De weg via HTML werkt nog steeds: open de geëxporteerde HTML en druk die vanuit
 je browser af (*Opslaan als PDF*). OciDeck doet geen belofte over de
 toegankelijkheid van een zo gemaakte PDF — dat is het werk van de browser.
 

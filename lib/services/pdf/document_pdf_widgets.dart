@@ -59,8 +59,10 @@ class DocumentPdfWidgets {
     required this.fonts,
     required this.headings,
     required this.verbatimLabel,
+    required this.maxImageWidth,
     required this.maxImageHeight,
     this.images = const {},
+    this.graphics = const {},
     this.headingPages = const {},
     this.onHeadingLaidOut,
   });
@@ -75,6 +77,15 @@ class DocumentPdfWidgets {
   /// vertaalde tekst van de aanroeper.
   final String Function(PdfVerbatimKind kind) verbatimLabel;
 
+  /// Hoe breed een afbeelding of tekening hoogstens mag worden: de bladspiegel.
+  ///
+  /// Uitdrukkelijk meegeven en niet aan de opmaak overlaten. Een SVG die zijn
+  /// breedte als `100%` opgeeft — wat onze eigen grafiekgenerator doet, want in
+  /// HTML betekent dat "vul de kolom" — leest `package:pdf` als honderd punten,
+  /// en dan staat er een grafiek van drie centimeter op het blad. Een
+  /// meegegeven breedte overstemt die waarde.
+  final double maxImageWidth;
+
   /// Hoe hoog een afbeelding hoogstens mag worden.
   ///
   /// Een afbeelding kan niet over een bladovergang heen; is ze hoger dan de
@@ -86,6 +97,11 @@ class DocumentPdfWidgets {
   /// De bytes per afbeeldingsbron. Een PDF verwijst niet naar bestanden buiten
   /// zichzelf: wat er niet in zit, staat er niet in.
   final Map<String, Uint8List> images;
+
+  /// De getekende vorm per formule-, mermaid- of grafiekblok, op de bron
+  /// gesleuteld. Wat hier niet in staat valt terug op zijn bron in een kader —
+  /// zie [_verbatim].
+  final Map<String, PdfRenderedGraphic> graphics;
 
   /// Op welk blad elke kop landde. Leeg in de eerste opmaakronde — dan blijft
   /// de kolom met bladzijdenummers leeg maar even breed, zodat de tweede ronde
@@ -444,23 +460,82 @@ class DocumentPdfWidgets {
     );
   }
 
-  /// Een blok dat de PDF niet zelf kan tekenen, met een eerlijke aanduiding
-  /// erboven en de bron eronder. Zie [PdfVerbatimBlock] voor het waarom.
-  pw.Widget _verbatim(PdfVerbatimBlock block) => pw.Column(
-    crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-    children: [
-      pw.Text(
-        verbatimLabel(block.kind),
-        style: _baseStyle.copyWith(
-          fontSize: style.bandSize,
-          color: style.bandTextColor,
-          fontStyle: pw.FontStyle.italic,
+  /// Een formule, een mermaid-diagram of een grafiek.
+  ///
+  /// Is er een getekende vorm, dan komt die in het bestand — bij voorkeur als
+  /// vector, zodat het beeld scherp blijft en de tekst erin tekst blijft. Is die
+  /// er niet, dan volgt de bron in een kader met een aanduiding erboven: liever
+  /// leesbaar dan een leeg vlak, want wie het diagram nodig heeft weet dan
+  /// tenminste wát er hoort te staan.
+  pw.Widget _verbatim(PdfVerbatimBlock block) {
+    final drawn = _graphic(block);
+    if (drawn != null) return drawn;
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+      children: [
+        pw.Text(
+          verbatimLabel(block.kind),
+          style: _baseStyle.copyWith(
+            fontSize: style.bandSize,
+            color: style.bandTextColor,
+            fontStyle: pw.FontStyle.italic,
+          ),
         ),
-      ),
-      pw.SizedBox(height: style.bodyFontSize * 0.2),
-      _code(block.source),
-    ],
-  );
+        pw.SizedBox(height: style.bodyFontSize * 0.2),
+        _code(block.source),
+      ],
+    );
+  }
+
+  /// De getekende vorm van [block], of `null` als die er niet is of niet blijkt
+  /// te werken.
+  ///
+  /// De `try` is geen overdreven voorzichtigheid. `pw.SvgImage` ontleedt de SVG
+  /// al in zijn constructor, en een diagram met een constructie die de ontleder
+  /// niet kent zou de héle export met een uitzondering afbreken — één diagram dat
+  /// tegenvalt mag nooit het document kosten. Wat hier struikelt valt terug op de
+  /// bron, precies zoals een diagram dat helemaal niet gerenderd kon worden.
+  pw.Widget? _graphic(PdfVerbatimBlock block) {
+    final graphic = graphics[block.source.trim()];
+    if (graphic == null) return null;
+    final image = graphic.image;
+    if (image != null) {
+      return pw.Center(
+        child: pw.ConstrainedBox(
+          constraints: pw.BoxConstraints(
+            maxWidth: maxImageWidth,
+            maxHeight: maxImageHeight,
+          ),
+          child: pw.Image(pw.MemoryImage(image), fit: pw.BoxFit.contain),
+        ),
+      );
+    }
+    final svg = graphic.svg;
+    if (svg == null) return null;
+    try {
+      // Nooit breder dan de bladspiegel, en nooit groter opgeblazen dan de
+      // tekening zelf bedoelt. Zonder dat tweede wordt een driehoekje van drie
+      // vakjes een poster van twintig centimeter, en dat is precies wat de
+      // eerste echte render liet zien.
+      final natural = graphic.naturalWidth;
+      final width = natural == null || natural > maxImageWidth
+          ? maxImageWidth
+          : natural;
+      final naturalHeight = graphic.naturalHeight;
+      return pw.Center(
+        child: pw.SvgImage(
+          svg: svg,
+          width: width,
+          height: naturalHeight == null || naturalHeight > maxImageHeight
+              ? maxImageHeight
+              : naturalHeight,
+          fit: pw.BoxFit.contain,
+        ),
+      );
+    } on Exception {
+      return null;
+    }
+  }
 
   // ── Tabellen ─────────────────────────────────────────────────────────────
 
@@ -547,7 +622,10 @@ class DocumentPdfWidgets {
     }
     return pw.Center(
       child: pw.ConstrainedBox(
-        constraints: pw.BoxConstraints(maxHeight: maxImageHeight),
+        constraints: pw.BoxConstraints(
+          maxWidth: maxImageWidth,
+          maxHeight: maxImageHeight,
+        ),
         child: pw.Image(pw.MemoryImage(bytes), fit: pw.BoxFit.contain),
       ),
     );

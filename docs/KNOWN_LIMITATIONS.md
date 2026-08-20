@@ -65,14 +65,18 @@ PDF that is typeset rather than photographed — real text, selectable, searchab
 and readable aloud, with the headings as a bookmark tree. Its own limits are
 below.)*
 
-## A document's PDF shows formulas, diagrams and charts as source
+## A document's PDF falls back to source when a drawing cannot be made
 
-A PDF has no JavaScript, and the HTML export draws all three of these with one.
-Rather than leave an empty space, the PDF prints the block's **source** in a
-monospaced box with a line above saying what it is — whoever needs the diagram at
-least sees what should be there. Export to HTML for all three rendered, or to
-LaTeX for typeset maths. The same file's tables, lists, images, links and page
-setup do travel in full. *(Added 2026-08-20.)*
+Formulas, Mermaid diagrams and charts are **drawn** into the PDF as vector art.
+Where that fails, the PDF prints the block's **source** in a monospaced box with
+a line above saying what it is — rather than leave an empty space, whoever needs
+the diagram at least sees what should be there. It happens in four cases: a
+chart whose numbers live in an external `data/*.json` that did not travel; a
+diagram or formula the renderer could not produce; a drawing the PDF's own SVG
+reader cannot parse; and the **web build**, which has no hidden renderer for
+Mermaid or formulas. Export to HTML for all three rendered in a browser, or to
+LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from "always
+shows source" once the drawings landed.)*
 
 ## A document's PDF is set in a standard face, not in your document's font
 

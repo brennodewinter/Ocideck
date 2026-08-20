@@ -1643,11 +1643,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF sa stvarnim tekstom: može se označiti, pretraživati i čitati naglas, a naslovi postaju knjižne oznake. Formule, mermaid dijagrami i grafikoni se crtaju; bilješke su na kraju.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Ovi se znakovi nisu mogli složiti u PDF-u i u njemu nedostaju:',
   'Diagram (bron)': 'Dijagram (izvor)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF sa stvarnim tekstom: može se označiti, pretraživati i čitati naglas, a naslovi postaju knjižne oznake. Formule, mermaid dijagrami i grafikoni u njemu stoje kao izvor; bilješke su na kraju.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Izvezite u HTML ili LaTeX ako pripadaju dokumentu.',
   'Formule (bron)': 'Formula (izvor)',

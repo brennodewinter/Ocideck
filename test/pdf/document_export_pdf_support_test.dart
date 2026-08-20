@@ -1,6 +1,7 @@
 // Het schilwerk rond de PDF-export: de gebundelde terugvalsnede, de vertaalde
 // teksten, en de zin die de gebruiker leest als er iets niet gezet kon worden.
 
+import 'dart:async';
 import 'dart:ui' show Locale;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -44,5 +45,31 @@ void main() {
     expect(message, contains('…'));
     // Ruim onder wat er anders in zou staan: de boodschap is dan al aangekomen.
     expect(message.length, lessThan(300));
+  });
+
+  group('wachttijd voor een tekening', () {
+    test('een renderer die nooit antwoordt levert niets op', () async {
+      // Het geval dat er werkelijk toe doet: een verzoek dat de wachtrij nooit
+      // verlaat omdat de verborgen WebView niet gemonteerd is. Het plafond van
+      // de renderer zelf raakt dat nooit. Zonder dít plafond hangt de export op
+      // één diagram — en een export die blijft hangen is erger dan een diagram
+      // dat als bron in het bestand komt.
+      final nooit = Completer<String?>();
+      final uitkomst = await graphicWithinBudget(
+        nooit.future,
+        limit: const Duration(milliseconds: 20),
+      );
+      expect(uitkomst, isNull);
+    });
+
+    test('een renderer die op tijd antwoordt komt er gewoon door', () async {
+      expect(
+        await graphicWithinBudget(
+          Future.value('<svg/>'),
+          limit: const Duration(seconds: 5),
+        ),
+        '<svg/>',
+      );
+    });
   });
 }

@@ -1664,11 +1664,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'Ένα PDF με πραγματικό κείμενο: επιλέξιμο, αναζητήσιμο και αναγνώσιμο φωναχτά, με τους τίτλους ως σελιδοδείκτες. Οι τύποι, τα διαγράμματα mermaid και τα γραφήματα σχεδιάζονται· οι σημειώσεις βρίσκονται στο τέλος.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Αυτοί οι χαρακτήρες δεν μπόρεσαν να στοιχειοθετηθούν στο PDF και λείπουν από αυτό:',
   'Diagram (bron)': 'Διάγραμμα (πηγή)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'Ένα PDF με πραγματικό κείμενο: επιλέξιμο, αναζητήσιμο και αναγνώσιμο φωναχτά, με τους τίτλους ως σελιδοδείκτες. Οι τύποι, τα διαγράμματα mermaid και τα γραφήματα εμφανίζονται ως πηγαίος κώδικας· οι σημειώσεις βρίσκονται στο τέλος.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Εξαγάγετε σε HTML ή LaTeX αν πρέπει να υπάρχουν στο έγγραφο.',
   'Formule (bron)': 'Τύπος (πηγή)',

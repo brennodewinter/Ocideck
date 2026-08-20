@@ -11,6 +11,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 import '../../l10n/app_localizations.dart';
+import '../../services/mermaid_render_service.dart';
 import '../../services/pdf/document_pdf_export.dart';
 
 /// Het gebundelde lettertype waar tekens buiten Latin-1 op terugvallen.
@@ -75,3 +76,30 @@ void warnAboutUnsupportedCharacters(
     duration: const Duration(seconds: 8),
   ),
 );
+
+/// Hoe lang de export hoogstens op één tekening wacht.
+///
+/// Ruim genoeg voor een zwaar diagram op een trage machine, en kort genoeg dat
+/// een document met tien diagrammen niet een halve dag kan duren.
+const _graphicBudget = Duration(seconds: 20);
+
+/// Wacht hoogstens [limit] op een tekening, en levert anders niets.
+///
+/// De renderer heeft zelf al een plafond, maar dat helpt niet tegen het geval
+/// dat er hier werkelijk toe doet: een verzoek dat de wachtrij nooit verlaat
+/// omdat de verborgen WebView niet gemonteerd is. Zonder dít plafond hangt de
+/// export dan op één diagram — en een export die blijft hangen is erger dan een
+/// diagram dat als bron in het bestand komt.
+Future<String?> graphicWithinBudget(
+  Future<String?> render, {
+  Duration limit = _graphicBudget,
+}) => render.timeout(limit, onTimeout: () => null);
+
+/// Het mermaid-diagram voor de PDF, als SVG.
+Future<String?> renderMermaidForPdf(String source) =>
+    graphicWithinBudget(MermaidRenderService.instance.render(source));
+
+/// De formule voor de PDF, als SVG. Op web niet beschikbaar; dan valt de
+/// formule terug op haar bron.
+Future<String?> renderMathForPdf(String tex) =>
+    graphicWithinBudget(MermaidRenderService.instance.renderMath(tex));

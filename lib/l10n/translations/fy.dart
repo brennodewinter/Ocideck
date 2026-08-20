@@ -674,11 +674,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'In PDF mei echte tekst: te selektearjen, te trochsykjen en foar te lêzen, mei de kopkes as blêdwizers. Formules, mermaid-diagrammen en grafiken wurde tekene; de noaten steane efteryn.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Dizze tekens koenen net yn de PDF set wurde en ûntbrekke deryn:',
   'Diagram (bron)': 'Diagram (boarne)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'In PDF mei echte tekst: te selektearjen, te trochsykjen en foar te lêzen, mei de kopkes as blêdwizers. Formules, mermaid-diagrammen en grafiken steane deryn as boarne; de noaten steane efteryn.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Eksportearje nei HTML of LaTeX as se yn it dokumint hearre.',
   'Formule (bron)': 'Formule (boarne)',

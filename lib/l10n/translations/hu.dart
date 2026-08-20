@@ -1641,11 +1641,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF valódi szöveggel: kijelölhető, kereshető és felolvasható, a címsorok pedig könyvjelzők. A képletek, a mermaid-diagramok és a grafikonok ki vannak rajzolva; a jegyzetek hátul vannak.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Ezeket a karaktereket nem sikerült a PDF-be szedni, és hiányoznak belőle:',
   'Diagram (bron)': 'Diagram (forrás)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF valódi szöveggel: kijelölhető, kereshető és felolvasható, a címsorok pedig könyvjelzők. A képletek, a mermaid-diagramok és a grafikonok forrásként szerepelnek benne; a jegyzetek hátul vannak.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Exportáljon HTML-be vagy LaTeX-be, ha benne kell lenniük a dokumentumban.',
   'Formule (bron)': 'Képlet (forrás)',

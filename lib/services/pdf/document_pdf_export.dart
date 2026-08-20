@@ -14,18 +14,31 @@ import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
 
+import '../../models/chart.dart';
 import '../../models/deck.dart' show TlpLevel, TlpLevelX;
 import '../../models/page_size.dart';
+import '../../models/settings.dart' show ThemeProfile;
 import '../document_deck_bridge.dart';
 import '../document_chrome_template.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
-import '../marp_html_service.dart' show HtmlImageResolver;
+import '../marp_html_service.dart' show HtmlImageResolver, MarpHtmlService;
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_renderer.dart';
+import 'document_pdf_svg.dart';
 import 'document_pdf_style.dart';
 import 'markdown_to_pdf_blocks.dart';
+
+/// Zet een mermaid-bron om in SVG.
+///
+/// De renderer daarvoor draait op een verborgen WebView en woont dus in de
+/// schil; deze laag vraagt er alleen om. Levert `null` wanneer het diagram niet
+/// gerenderd kan worden — dan valt het blok terug op zijn bron.
+typedef MermaidSvgResolver = Future<String?> Function(String source);
+
+/// Zet een TeX-formule om in SVG. Zelfde afspraak als [MermaidSvgResolver].
+typedef MathSvgResolver = Future<String?> Function(String tex);
 
 /// De teksten die de PDF-lagen nodig hebben maar niet zelf kennen.
 ///
@@ -81,6 +94,8 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   required DocumentPdfLabels labels,
   ByteData? fallbackFont,
   HtmlImageResolver? embedImage,
+  MermaidSvgResolver? renderMermaid,
+  MathSvgResolver? renderMath,
   bool chapterPageBreak = false,
   bool cropMarks = false,
   PageSizeSpec? pageSize,
@@ -101,6 +116,14 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     fallbackFont: fallbackFont,
   );
   final images = await _resolveImages(blocks, embedImage);
+  final style = DocumentPdfStyle.fromTheme(theme);
+  final graphics = await _resolveGraphics(
+    blocks,
+    theme,
+    style,
+    renderMermaid: renderMermaid,
+    renderMath: renderMath,
+  );
   final logo = await _resolveLogo(theme.effectiveDocumentLogoPath, embedImage);
 
   final fields = {
@@ -111,10 +134,11 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   };
   final bytes = await buildDocumentPdf(
     blocks,
-    style: DocumentPdfStyle.fromTheme(theme),
+    style: style,
     fonts: fonts,
     verbatimLabel: labels.labelFor,
     images: images,
+    graphics: graphics,
     chrome: DocumentPdfChrome(
       headerText: resolveDocumentChromeTemplate(
         theme.documentHeaderText.trim(),
@@ -181,6 +205,88 @@ Future<Map<String, Uint8List>> _resolveImages(
     if (bytes != null) images[source] = bytes;
   }
   return images;
+}
+
+/// Tekent wat er te tekenen valt: grafieken, mermaid-diagrammen en formules.
+///
+/// **Grafieken gaan zuiver in Dart.** `MarpHtmlService.chartSpecSvg` is dezelfde
+/// generator die de HTML-export en de documentweergave gebruiken, dus er komt
+/// geen vierde renderwereld bij — de PDF toont wat het scherm toont, van
+/// dezelfde regels afgeleid.
+///
+/// **Mermaid en wiskunde komen van de aanroeper**, want hun renderers draaien op
+/// een verborgen WebView en dat is schilwerk. Levert zo'n renderer niets op, dan
+/// blijft het blok gewoon weg uit de kaart en valt het terug op zijn bron.
+///
+/// Op de *bron* gesleuteld, niet op volgorde: twee keer hetzelfde diagram in één
+/// document wordt één keer gerenderd.
+Future<Map<String, PdfRenderedGraphic>> _resolveGraphics(
+  List<PdfBlock> blocks,
+  ThemeProfile theme,
+  DocumentPdfStyle style, {
+  MermaidSvgResolver? renderMermaid,
+  MathSvgResolver? renderMath,
+}) async {
+  final wanted = <String, PdfVerbatimKind>{};
+  void walk(List<PdfBlock> list) {
+    for (final block in list) {
+      switch (block) {
+        case PdfVerbatimBlock(:final source, :final kind):
+          final key = source.trim();
+          if (key.isNotEmpty) wanted[key] = kind;
+        case PdfQuoteBlock(:final blocks):
+          walk(blocks);
+        case PdfListBlock(:final items):
+          for (final item in items) {
+            walk(item.blocks);
+          }
+        default:
+          break;
+      }
+    }
+  }
+
+  walk(blocks);
+  final graphics = <String, PdfRenderedGraphic>{};
+  for (final entry in wanted.entries) {
+    final svg = switch (entry.value) {
+      PdfVerbatimKind.chart => _chartSvg(entry.key, theme),
+      PdfVerbatimKind.mermaid => await renderMermaid?.call(entry.key),
+      PdfVerbatimKind.math => await renderMath?.call(entry.key),
+    };
+    if (svg == null || svg.trim().isEmpty) continue;
+    // Klaarmaken vóór het de renderer in gaat: de maat eraf en zelf uitgerekend,
+    // en `currentColor` vervangen. Zie `document_pdf_svg.dart` voor waarom een
+    // SVG die in een browser klopt hier anders scheef of onzichtbaar wordt.
+    final prepared = prepareSvgForPdf(
+      svg,
+      // `toHex()` levert `#RRGGBBAA`; de doorzichtigheid hoort niet in een
+      // SVG-kleur thuis en maakte er `#22222ff` van — een kleur die de lezer
+      // niet kent, en een onbekende kleur tekent niets.
+      inkHex: style.textColor.toHex().substring(0, 7),
+      fontSizePt: style.bodyFontSize,
+    );
+    graphics[entry.key] = PdfRenderedGraphic.svg(
+      prepared.svg,
+      naturalWidth: prepared.size?.width,
+      naturalHeight: prepared.size?.height,
+    );
+  }
+  return graphics;
+}
+
+/// De SVG van één grafiekblok, of `null` als er niets te tekenen valt.
+///
+/// De grond is het papier en niet de kaartkleur van het scherm: de generator
+/// kiest zijn inkt zo dat titel en legenda leesbaar blijven op de ondergrond die
+/// je hem noemt, en in een PDF is dat wit.
+String? _chartSvg(String source, ThemeProfile theme) {
+  final spec = ChartSpec.parse(source);
+  // Zonder inline cijfers geeft de generator een lege SVG terug — een leeg vlak
+  // op papier, waar de bron tenminste nog leesbaar is. Dat gebeurt wanneer de
+  // gegevens in een los `data/*.json` staan dat niet mee kon komen.
+  if (!spec.hasInlineData) return null;
+  return MarpHtmlService.chartSpecSvg(spec, theme, background: '#FFFFFF');
 }
 
 Future<Uint8List?> _resolveLogo(

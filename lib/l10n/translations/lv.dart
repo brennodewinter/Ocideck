@@ -1638,11 +1638,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF ar īstu tekstu: to var iezīmēt, tajā var meklēt un to var nolasīt skaļi, bet virsraksti kļūst par grāmatzīmēm. Formulas, mermaid diagrammas un grafiki tiek uzzīmēti; piezīmes ir beigās.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Šīs zīmes nevarēja iekļaut PDF failā, un tajā to trūkst:',
   'Diagram (bron)': 'Diagramma (avots)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF ar īstu tekstu: to var iezīmēt, tajā var meklēt un to var nolasīt skaļi, bet virsraksti kļūst par grāmatzīmēm. Formulas, mermaid diagrammas un grafiki tajā ir kā pirmkods; piezīmes ir beigās.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Eksportējiet uz HTML vai LaTeX, ja tām jābūt dokumentā.',
   'Formule (bron)': 'Formula (avots)',

@@ -622,9 +622,17 @@ bytes rather than in the layer before them
 Four things are deliberately *not* claimed. **WCAG conformance** — the file has a
 text layer and a bookmark tree, which is what "accessible" means here; it carries
 no tagged-PDF structure tree and nothing has been tried with a real screen
-reader. **Formulas, Mermaid and charts** are not drawn: those need a JavaScript
-layer a PDF does not have, so their source is printed in a monospaced box with a
-label, and the honest route to a rendered version is the HTML export or LaTeX.
+reader. **Formulas, Mermaid and charts** *(revised 2026-08-20 — they are now drawn; the
+sentence below described the day before)* are drawn as **vector** art. Charts come
+from `MarpHtmlService.chartSpecSvg`, the same pure-Dart generator the HTML export
+and the on-screen document view use, so no fourth render world appears. Mermaid
+and formulas come from the offstage WebView that already served the preview and
+the raster export — mermaid as before, formulas through the bundled MathJax
+`tex-svg`, in the same page. What cannot be drawn still prints its source in a
+labelled box, and that fallback is the load-bearing part: a drawing that fails
+must never cost the document. *(Superseded: "those need a JavaScript layer a PDF
+does not have, so their source is printed in a monospaced box with a label, and
+the honest route to a rendered version is the HTML export or LaTeX.")*
 **Footnotes** land at the back, not at the foot of the sheet — the same wall the
 HTML route hits (KNOWN_LIMITATIONS.md), and for the same reason: the note's page
 is only known after the layout. **The typeface** is a standard PDF face, serif or

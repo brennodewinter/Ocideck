@@ -1658,11 +1658,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'PDF b\'test veru: tista\' tagħżlu, tfittex fih u jinqara b\'leħen għoli, bit-titli bħala marki tal-paġni. Il-formuli, id-dijagrammi mermaid u l-graffs jitpinġew; in-noti jinsabu fl-aħħar.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Dawn il-karattri ma setgħux jitqiegħdu fil-PDF u huma nieqsa minnu:',
   'Diagram (bron)': 'Dijagramma (sors)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'PDF b\'test veru: tista\' tagħżlu, tfittex fih u jinqara b\'leħen għoli, bit-titli bħala marki tal-paġni. Il-formuli, id-dijagrammi mermaid u l-graffs jidhru bħala sors; in-noti jinsabu fl-aħħar.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Esporta f\'HTML jew LaTeX jekk suppost ikunu fid-dokument.',
   'Formule (bron)': 'Formula (sors)',

@@ -23,8 +23,19 @@ import 'mermaid_web_renderer_stub.dart'
     if (dart.library.js_interop) 'mermaid_web_renderer.dart'
     as web_renderer;
 
-/// Renders Mermaid diagram source to inline SVG for preview, presenter, and
-/// raster export (WYSIWYG). Results are cached by trimmed source text.
+/// Rendert de twee gebundelde JS-renderers naar inline SVG: Mermaid-diagrammen
+/// ([render]) en TeX-formules ([renderMath], via MathJax `tex-svg`). Voor de
+/// voorvertoning, de presentator, de raster-export (WYSIWYG) en — voor beide —
+/// de PDF van een document. Uitkomsten worden gesleuteld op de bijgesneden bron.
+///
+/// Eén verborgen pagina voor allebei, en niet twee: het monteren van de host,
+/// het wachten op de bootstrap en het serialiseren van de wachtrij zijn precies
+/// de delen die hier moeizaam goed zijn gekregen (#882). Die twee keer hebben is
+/// twee keer hetzelfde kunnen breken.
+///
+/// De naam is daarmee smaller geworden dan wat de klasse doet; hernoemen raakt
+/// eenendertig plekken en hoort in een eigen wijziging thuis, niet verstopt in
+/// deze.
 ///
 /// De verborgen WebView zelf is een widget en woont daarom in
 /// `lib/widgets/mermaid_render_host.dart`; die mount pas na het eerste
@@ -93,6 +104,10 @@ class MermaidRenderService {
     final inlinerJs = await rootBundle.loadString(
       'assets/web_export/svg_style_inline.js',
     );
+    // Dezelfde MathJax-bundel die de HTML-export inlijnt: `tex-svg`, dus zonder
+    // externe lettertypebestanden — de glyphs komen als paden mee. Daardoor is
+    // de uitkomst een op zichzelf staande SVG die ook in een PDF te zetten is.
+    final mathJs = await rootBundle.loadString('assets/web_export/tex-svg.js');
     // Geen `eval()` meer — zie het commentaar in de pagina hieronder voor hoe
     // de bundel er wél in komt. Daarmee kan `'unsafe-eval'` uit de CSP van deze
     // pagina en is de enige `eval()` in het product weg.
@@ -102,6 +117,7 @@ class MermaidRenderService {
     // string die op dat moment wordt samengesteld.
     final escapedJs = jsonEncode(mermaidJs);
     final escapedInlinerJs = jsonEncode(inlinerJs);
+    final escapedMathJs = jsonEncode(mathJs);
     // Kanaal waarlangs de pagina de klaar-gerenderde SVG terugstuurt (#882).
     // Vóór het laden geregistreerd, zodat `MermaidChannel` bestaat wanneer de
     // render later vuurt.
@@ -135,6 +151,13 @@ document.head.appendChild(mermaidBundle);
 var inlinerBundle = document.createElement('script');
 inlinerBundle.textContent = $escapedInlinerJs;
 document.head.appendChild(inlinerBundle);
+// MathJax, op dezelfde manier ingebracht. `startup.typeset: false` omdat we
+// zelf per formule `tex2svgPromise` aanroepen in plaats van de pagina te laten
+// scannen — er stáát hier geen document om te scannen.
+window.MathJax = {startup: {typeset: false}, options: {enableMenu: false}};
+var mathBundle = document.createElement('script');
+mathBundle.textContent = $escapedMathJs;
+document.head.appendChild(mathBundle);
 var mermaidType = typeof window.mermaid;
 // Dezelfde instellingen als de web-kant — zie kMermaidInitConfig
 // (mermaid_config.dart) voor het waarom van elke sleutel (o.a. htmlLabels uit
@@ -155,7 +178,27 @@ window.__renderMermaid = function(source, seq) {
     MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
   });
 };
-MermaidChannel.postMessage(JSON.stringify({diag: 'setup-ok', mermaid: mermaidType, render: typeof window.__renderMermaid, inliner: typeof window.__ocideckInlineSvgStyles}));
+// Formule → SVG. Dezelfde afspraak als __renderMermaid: het antwoord komt via
+// het channel, gekoppeld aan de seq.
+window.__renderMath = function(tex, seq) {
+  try {
+    MathJax.startup.promise.then(function() {
+      return MathJax.tex2svgPromise(tex, {display: true});
+    }).then(function(node) {
+      var svg = node.querySelector('svg');
+      MermaidChannel.postMessage(JSON.stringify({
+        seq: seq,
+        svg: svg ? svg.outerHTML : null,
+        error: svg ? null : 'geen svg'
+      }));
+    }).catch(function(e) {
+      MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
+    });
+  } catch (e) {
+    MermaidChannel.postMessage(JSON.stringify({seq: seq, error: String(e)}));
+  }
+};
+MermaidChannel.postMessage(JSON.stringify({diag: 'setup-ok', mermaid: mermaidType, render: typeof window.__renderMermaid, math: typeof window.__renderMath, inliner: typeof window.__ocideckInlineSvgStyles}));
 } catch (e) {
 MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e), mermaid: typeof window.mermaid}));
 }
@@ -184,17 +227,34 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
   }
 
   /// Returns SVG markup or `null` when rendering fails.
-  Future<String?> render(String source) {
+  Future<String?> render(String source) =>
+      _enqueue(source, _RenderKind.mermaid);
+
+  /// Zet een TeX-formule om in zelfstandige SVG, of `null` als dat niet lukt.
+  ///
+  /// Op web niet beschikbaar: daar draait de app als CanvasKit-pagina zonder de
+  /// verborgen WebView, en het web-pad van [render] kent alleen mermaid. Een
+  /// aanroeper hoort met `null` om te kunnen gaan — de documentexport valt dan
+  /// terug op de bron van de formule.
+  Future<String?> renderMath(String tex) {
+    if (kIsWeb) return SynchronousFuture(null);
+    return _enqueue(tex, _RenderKind.math);
+  }
+
+  Future<String?> _enqueue(String source, _RenderKind kind) {
     // Op web is er geen WebView-host: het web-pad (JS-interop) draait mermaid
     // rechtstreeks in de app-pagina, dus `hostNeeded` blijft daar bewust uit.
     if (!kIsWeb) requestHost();
-    final key = source.trim();
-    if (key.isEmpty) return SynchronousFuture(null);
+    final source0 = source.trim();
+    if (source0.isEmpty) return SynchronousFuture(null);
+    // De soort hoort in de sleutel: een formule en een diagram met toevallig
+    // dezelfde tekst zijn niet hetzelfde plaatje.
+    final key = '${kind.name}:$source0';
     final cached = _cache[key];
     if (cached != null) return SynchronousFuture(cached);
 
     final completer = Completer<String?>();
-    _queue.add(_PendingRender(key, completer));
+    _queue.add(_PendingRender(source0, kind, completer));
     _pumpQueue();
     return completer.future;
   }
@@ -225,7 +285,8 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
       final String? raw;
       if (kIsWeb) {
         // De JS-interop-renderer geeft de SVG rechtstreeks terug (geen
-        // JSON-omhulsel zoals de WebView).
+        // JSON-omhulsel zoals de WebView). Formules komen hier niet: die zijn
+        // op web al bij [renderMath] afgevangen.
         raw = await web_renderer.renderMermaid(job.source);
       } else {
         // Vuur de render en wacht op het antwoord via het MermaidChannel (#882):
@@ -234,20 +295,26 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
         final completer = Completer<String?>();
         _renderCompleter = completer;
         final encoded = jsonEncode(job.source);
-        await _controller!.runJavaScript(
-          'window.__renderMermaid($encoded, $seq)',
-        );
+        final entry = job.kind == _RenderKind.math
+            ? '__renderMath'
+            : '__renderMermaid';
+        await _controller!.runJavaScript('window.$entry($encoded, $seq)');
         raw = await completer.future.timeout(
           const Duration(seconds: 15),
           onTimeout: () {
-            logWarning('MermaidRender: WebView render timed out');
+            logWarning(
+              'MermaidRender: WebView ${job.kind.name} render timed out',
+            );
             return null;
           },
         );
       }
+      // Ook de MathJax-uitvoer gaat door de schoonmaak: het is uitvoer van een
+      // JS-renderer, en de whitelist laat juist door wat MathJax gebruikt
+      // (`defs`, `use`, `symbol`, `href`).
       final svg = sanitizeMermaidSvg(raw ?? '');
       if (svg != null && svg.contains('<svg')) {
-        _cache[job.source] = svg;
+        _cache['${job.kind.name}:${job.source}'] = svg;
         job.completer.complete(svg);
       } else {
         job.completer.complete(null);
@@ -308,11 +375,15 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
   }
 }
 
+/// Welke van de twee gebundelde renderers een wachtend verzoek nodig heeft.
+enum _RenderKind { mermaid, math }
+
 class _PendingRender {
   final String source;
+  final _RenderKind kind;
   final Completer<String?> completer;
 
-  _PendingRender(this.source, this.completer);
+  _PendingRender(this.source, this.kind, this.completer);
 }
 
 bool get isFlutterTest {

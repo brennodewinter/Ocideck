@@ -1638,11 +1638,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
+      'En PDF med riktig text: markerbar, sökbar och uppläsbar, med rubrikerna som bokmärken. Formler, mermaid-diagram och grafer ritas ut; noterna står sist.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
       'Dessa tecken kunde inte sättas i PDF:en och saknas i den:',
   'Diagram (bron)': 'Diagram (källa)',
-  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
-      'En PDF med riktig text: markerbar, sökbar och uppläsbar, med rubrikerna som bokmärken. Formler, mermaid-diagram och grafer står som källtext; noterna står sist.',
   'Exporteer naar HTML of LaTeX als ze in het document horen.':
       'Exportera till HTML eller LaTeX om de hör hemma i dokumentet.',
   'Formule (bron)': 'Formel (källa)',
