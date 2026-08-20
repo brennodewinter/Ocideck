@@ -409,11 +409,6 @@ const _dutchSourceLv = {
   'Niet-opgeslagen wijzigingen': 'Nesaglabātas izmaiņas',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'No iepriekšējās sesijas atrasta prezentācija ar nesaglabātām izmaiņām:',
-  'Er zijn': 'Ir',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'prezentācijas ar nesaglabātām izmaiņām atrastas no iepriekšējās sesijas:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Ir prezentācijas ar nesaglabātām izmaiņām. Saglabājiet tās pirms lietotnes aizvēršanas.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Šai prezentācijai ir nesaglabātas izmaiņas. Saglabājiet to pirms cilnes aizvēršanas.',
   'Importeren via URL': 'Importēt no URL',
@@ -1638,6 +1633,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'No iepriekšējās sesijas atrasts dokuments ar nesaglabātām izmaiņām:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Ir {n} faili ar nesaglabātām izmaiņām atrasti no iepriekšējās sesijas:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Ir faili ar nesaglabātām izmaiņām. Saglabājiet tās pirms lietotnes aizvēršanas.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Šim dokumentam ir nesaglabātas izmaiņas. Saglabājiet to pirms cilnes aizvēršanas.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksportēšana neizdevās. Jūsu dokuments nav mainīts; mēģiniet vēlreiz vai izvēlieties citu formātu.',
   'Thema documentkop': 'Tēmas dokumenta virsraksts',

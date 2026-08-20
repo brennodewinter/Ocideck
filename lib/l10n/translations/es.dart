@@ -671,6 +671,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Se encontró un documento con cambios sin guardar de una sesión anterior:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Hay {n} archivos con cambios sin guardar encontrados de una sesión anterior:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Hay archivos con cambios sin guardar. Guárdalos antes de cerrar la aplicación.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Este documento tiene cambios sin guardar. Guárdalo antes de cerrar la pestaña.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'La exportación no ha funcionado. Tu documento no ha cambiado; inténtalo de nuevo o elige otro formato.',
   'Thema documentkop': 'Título de documento del tema',
@@ -4006,9 +4014,6 @@ const _dutchSourceAddEs = {
   'Einde van de presentatie': 'Fin de la presentación',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Se encontró una presentación con cambios sin guardar de una sesión anterior:',
-  'Er zijn': 'Hay',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Hay presentaciones con cambios sin guardar. Guárdalas antes de cerrar la aplicación.',
   'Export mislukt:': 'Error al exportar:',
   'Geen afbeelding op het klembord gevonden.':
       'No se encontró ninguna imagen en el portapapeles.',
@@ -4140,8 +4145,6 @@ const _dutchSourceAddEs = {
   'paginering aan': 'paginación activada',
   'pijltjes + Enter of klik om te springen':
       'flechas + Enter o clic para saltar',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentaciones con cambios sin guardar encontradas de una sesión anterior:',
   'renderen…': 'renderizando…',
   'resultaat': 'resultado',
   'resultaten': 'resultados',

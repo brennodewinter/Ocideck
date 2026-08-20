@@ -674,6 +674,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Der is in dokumint mei net-opsleine wizigingen fûn fan in foarige sesje:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Der binne {n} bestannen mei net-opsleine wizigingen fûn fan in foarige sesje:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Der binne bestannen mei net-opsleine wizigingen. Bewarje se foardat de app slût.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Dit dokumint hat net-opsleine wizigingen. Bewarje it dokumint foardat it ljepblêd slût.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'De eksport is net slagge. Dyn dokumint is net feroare; besykje it nochris of kies in oar formaat.',
   'Thema documentkop': 'Tema-dokumintkop',
@@ -3975,9 +3983,6 @@ const _dutchSourceAddFy = {
   'Einde van de presentatie': 'Ein fan de presintaasje',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Der is in presintaasje mei net-opsleine wizigingen fûn fan in foarige sesje:',
-  'Er zijn': 'Der binne',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Der binne presintaasjes mei net-opsleine wizigingen. Bewarje se foardat de app slút.',
   'Export mislukt:': 'Eksport mislearre:',
   'Geen afbeelding op het klembord gevonden.':
       'Gjin ôfbylding op it klamboerd fûn.',
@@ -4102,8 +4107,6 @@ const _dutchSourceAddFy = {
   'paginering aan': 'sideringsnûmering oan',
   'pijltjes + Enter of klik om te springen':
       'pylkjes + Enter of klik om te springen',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presintaasjes mei net-opsleine wizigingen fûn fan in foarige sesje:',
   'renderen…': 'rendere…',
   'resultaat': 'resultaat',
   'resultaten': 'resultaten',

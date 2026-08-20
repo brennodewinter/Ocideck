@@ -671,6 +671,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'È stato trovato un documento con modifiche non salvate di una sessione precedente:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Ci sono {n} file con modifiche non salvate trovate da una sessione precedente:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Ci sono file con modifiche non salvate. Salvale prima di chiudere l\'app.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Questo documento ha modifiche non salvate. Salvalo prima di chiudere la scheda.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'L\'esportazione non è riuscita. Il documento non è stato modificato; riprova o scegli un altro formato.',
   'Thema documentkop': 'Titolo del documento del tema',
@@ -4015,9 +4023,6 @@ const _dutchSourceAddIt = {
   'Einde van de presentatie': 'Fine della presentazione',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'È stata trovata una presentazione con modifiche non salvate di una sessione precedente:',
-  'Er zijn': 'Ci sono',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Ci sono presentazioni con modifiche non salvate. Salvale prima di chiudere l\'app.',
   'Export mislukt:': 'Esportazione non riuscita:',
   'Geen afbeelding op het klembord gevonden.':
       'Nessuna immagine trovata negli appunti.',
@@ -4150,8 +4155,6 @@ const _dutchSourceAddIt = {
   'paginering aan': 'impaginazione attiva',
   'pijltjes + Enter of klik om te springen':
       'frecce + Invio o clic per saltare',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentazioni con modifiche non salvate trovate da una sessione precedente:',
   'renderen…': 'renderizzazione…',
   'resultaat': 'risultato',
   'resultaten': 'risultati',

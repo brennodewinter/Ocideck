@@ -410,11 +410,6 @@ const _dutchSourceSv = {
   'Niet-opgeslagen wijzigingen': 'Osparade ändringar',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'En presentation med osparade ändringar hittades från en tidigare session:',
-  'Er zijn': 'Det finns',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentationer med osparade ändringar från en tidigare session:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Det finns presentationer med osparade ändringar. Spara dem innan du stänger appen.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Den här presentationen har osparade ändringar. Spara den innan du stänger fliken.',
   'Importeren via URL': 'Importera från URL',
@@ -1638,6 +1633,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Ett dokument med osparade ändringar hittades från en tidigare session:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Det finns {n} filer med osparade ändringar från en tidigare session:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Det finns filer med osparade ändringar. Spara dem innan du stänger appen.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Det här dokumentet har osparade ändringar. Spara det innan du stänger fliken.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Exporten lyckades inte. Ditt dokument är oförändrat; försök igen eller välj ett annat format.',
   'Thema documentkop': 'Temats dokumentrubrik',

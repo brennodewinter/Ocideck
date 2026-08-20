@@ -410,11 +410,6 @@ const _dutchSourceFi = {
   'Niet-opgeslagen wijzigingen': 'Tallentamattomia muutoksia',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Edellisestä istunnosta löytyi esitys, jossa on tallentamattomia muutoksia:',
-  'Er zijn': 'Löytyi',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'esitystä, joissa on tallentamattomia muutoksia edellisestä istunnosta:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Esityksissä on tallentamattomia muutoksia. Tallenna ne ennen sovelluksen sulkemista.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Tässä esityksessä on tallentamattomia muutoksia. Tallenna esitys ennen välilehden sulkemista.',
   'Importeren via URL': 'Tuo URL-osoitteesta',
@@ -1640,6 +1635,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Edellisestä istunnosta löytyi asiakirja, jossa on tallentamattomia muutoksia:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Löytyi {n} tiedostoa, joissa on tallentamattomia muutoksia edellisestä istunnosta:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Tiedostoissa on tallentamattomia muutoksia. Tallenna ne ennen sovelluksen sulkemista.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Tässä asiakirjassa on tallentamattomia muutoksia. Tallenna asiakirja ennen välilehden sulkemista.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Vienti ei onnistunut. Asiakirjasi ei muuttunut; yritä uudelleen tai valitse toinen muoto.',
   'Thema documentkop': 'Teeman asiakirjan otsikko',

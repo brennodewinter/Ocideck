@@ -410,11 +410,6 @@ const _dutchSourceTr = {
   'Niet-opgeslagen wijzigingen': 'Kaydedilmemiş değişiklikler',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Önceki oturumdan kaydedilmemiş değişiklikleri olan bir sunum bulundu:',
-  'Er zijn': 'Toplam',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'adet sunumda önceki oturumdan kalan kaydedilmemiş değişiklikler bulundu:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Kaydedilmemiş değişiklikleri olan sunumlar var. Uygulama kapanmadan önce bunları kaydedin.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Bu sunumda kaydedilmemiş değişiklikler var. Sekme kapanmadan önce sunumu kaydedin.',
   'Importeren via URL': 'URL ile içe aktar',
@@ -2557,6 +2552,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Önceki oturumdan kaydedilmemiş değişiklikleri olan bir belge bulundu:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Toplam {n} adet dosyada önceki oturumdan kalan kaydedilmemiş değişiklikler bulundu:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Kaydedilmemiş değişiklikleri olan dosyalar var. Uygulama kapanmadan önce bunları kaydedin.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Bu belgede kaydedilmemiş değişiklikler var. Sekme kapanmadan önce belgeyi kaydedin.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Dışa aktarma başarılı olmadı. Belgeniz değişmedi; yeniden deneyin veya başka bir biçim seçin.',
   'Thema documentkop': 'Tema belge başlığı',

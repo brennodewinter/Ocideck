@@ -674,6 +674,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Es wurde ein Dokument mit nicht gespeicherten Änderungen aus einer früheren Sitzung gefunden:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Es gibt {n} Dateien mit nicht gespeicherten Änderungen aus einer früheren Sitzung gefunden:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Es gibt Dateien mit nicht gespeicherten Änderungen. Speichern Sie sie, bevor die App geschlossen wird.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Dieses Dokument hat nicht gespeicherte Änderungen. Speichern Sie es, bevor der Tab geschlossen wird.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Der Export ist nicht gelungen. Ihr Dokument ist unverändert; versuchen Sie es erneut oder wählen Sie ein anderes Format.',
   'Thema documentkop': 'Design-Dokumentüberschrift',
@@ -4000,9 +4008,6 @@ const _dutchSourceAddDe = {
   'Einde van de presentatie': 'Ende der Präsentation',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Es wurde eine Präsentation mit nicht gespeicherten Änderungen aus einer früheren Sitzung gefunden:',
-  'Er zijn': 'Es gibt',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Es gibt Präsentationen mit nicht gespeicherten Änderungen. Speichern Sie sie, bevor die App geschlossen wird.',
   'Export mislukt:': 'Export fehlgeschlagen:',
   'Geen afbeelding op het klembord gevonden.':
       'Kein Bild in der Zwischenablage gefunden.',
@@ -4138,8 +4143,6 @@ const _dutchSourceAddDe = {
   'paginering aan': 'Seitennummerierung an',
   'pijltjes + Enter of klik om te springen':
       'Pfeiltasten + Enter oder Klick zum Springen',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'Präsentationen mit nicht gespeicherten Änderungen aus einer früheren Sitzung gefunden:',
   'renderen…': 'rendern…',
   'resultaat': 'Ergebnis',
   'resultaten': 'Ergebnisse',

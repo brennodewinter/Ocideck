@@ -409,11 +409,6 @@ const _dutchSourceId = {
   'Niet-opgeslagen wijzigingen': 'Perubahan belum disimpan',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Ditemukan presentasi dengan perubahan yang belum disimpan dari sesi sebelumnya:',
-  'Er zijn': 'Ada',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentasi dengan perubahan yang belum disimpan dari sesi sebelumnya:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Ada presentasi dengan perubahan yang belum disimpan. Simpan sebelum menutup aplikasi.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Presentasi ini memiliki perubahan yang belum disimpan. Simpan sebelum menutup tab.',
   'Importeren via URL': 'Impor dari URL',
@@ -1639,6 +1634,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Ditemukan dokumen dengan perubahan yang belum disimpan dari sesi sebelumnya:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Ada {n} berkas dengan perubahan yang belum disimpan dari sesi sebelumnya:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Ada berkas dengan perubahan yang belum disimpan. Simpan sebelum menutup aplikasi.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Dokumen ini memiliki perubahan yang belum disimpan. Simpan sebelum menutup tab.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Ekspor tidak berhasil. Dokumen Anda tidak berubah; coba lagi atau pilih format lain.',
   'Thema documentkop': 'Judul dokumen tema',

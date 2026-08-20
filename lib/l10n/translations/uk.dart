@@ -414,11 +414,6 @@ const _dutchSourceUk = {
   'Niet-opgeslagen wijzigingen': 'Незбережені зміни',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Знайдено презентацію з незбереженими змінами з попередньої сесії:',
-  'Er zijn': 'Наявні',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'презентацій з незбереженими змінами з попередньої сесії:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Є презентації з незбереженими змінами. Збережіть їх, перш ніж закривати застосунок.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ця презентація має незбережені зміни. Збережіть її, перш ніж закривати вкладку.',
   'Importeren via URL': 'Імпорт за URL',
@@ -1655,6 +1650,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Знайдено документ з незбереженими змінами з попередньої сесії:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Наявні {n} файлів з незбереженими змінами з попередньої сесії:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Є файли з незбереженими змінами. Збережіть їх, перш ніж закривати застосунок.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Цей документ має незбережені зміни. Збережіть його, перш ніж закривати вкладку.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Експорт не вдався. Ваш документ не змінено; спробуйте ще раз або виберіть інший формат.',
   'Thema documentkop': 'Заголовок документа теми',

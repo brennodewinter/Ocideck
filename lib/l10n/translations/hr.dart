@@ -410,11 +410,6 @@ const _dutchSourceHr = {
   'Niet-opgeslagen wijzigingen': 'Nespremljene promjene',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Pronađena je prezentacija s nespremljenim promjenama iz prethodne sesije:',
-  'Er zijn': 'Postoji',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'prezentacija s nespremljenim promjenama iz prethodne sesije:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Postoje prezentacije s nespremljenim promjenama. Spremite ih prije zatvaranja aplikacije.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Ova prezentacija ima nespremljene promjene. Spremite je prije zatvaranja kartice.',
   'Importeren via URL': 'Uvezi iz URL-a',
@@ -1643,6 +1638,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Pronađen je dokument s nespremljenim promjenama iz prethodne sesije:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Postoji {n} datoteka s nespremljenim promjenama iz prethodne sesije:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Postoje datoteke s nespremljenim promjenama. Spremite ih prije zatvaranja aplikacije.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Ovaj dokument ima nespremljene promjene. Spremite ga prije zatvaranja kartice.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Izvoz nije uspio. Vaš dokument nije promijenjen; pokušajte ponovno ili odaberite drugi format.',
   'Thema documentkop': 'Naslov dokumenta teme',

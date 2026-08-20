@@ -411,11 +411,6 @@ const _dutchSourceLa = {
   'Niet-opgeslagen wijzigingen': 'Mutationes non servatae',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Praesentatio cum mutationibus non servatis ex sessione priore inventa est:',
-  'Er zijn': 'Sunt',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'praesentationes cum mutationibus non servatis ex sessione priore inventae:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Sunt praesentationes cum mutationibus non servatis. Serva eas antequam applicationem claudas.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'Haec praesentatio mutationes non servatas habet. Serva praesentationem antequam scidam claudas.',
   'Importeren via URL': 'Importare ex URL',
@@ -1654,6 +1649,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Documentum cum mutationibus non servatis ex sessione priore inventum est:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Sunt {n} fasciculi cum mutationibus non servatis ex sessione priore inventi:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Sunt fasciculi cum mutationibus non servatis. Serva eos antequam applicationem claudas.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'Hoc documentum mutationes non servatas habet. Serva documentum antequam scidam claudas.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Exportatio non successit. Documentum tuum immutatum est; rursus conare vel aliam formam elige.',
   'Thema documentkop': 'Caput documenti thematis',

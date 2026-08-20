@@ -401,11 +401,6 @@ const _dutchSourceTlh = {
   'Niet-opgeslagen wijzigingen': 'Qub polbe\'lu\'bogh',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'wanI\' Hoch qaSpu\'bogh vo\' cha\'nav polbe\'lu\'bogh Say\' Sammo\'lu\'pu\':',
-  'Er zijn': 'tu\'lu\'',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'cha\'nav polbe\'lu\'bogh Say\' wanI\' Hoch qaSpu\'bogh vo\' Sammo\'lu\'pu\':',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'cha\'nav polbe\'lu\'bogh Say\'moHlu\'be\'bogh tu\'lu\'. yISaH nap SoQpa\' De\'wI\'.',
   'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
       'cha\'nav polbe\'lu\'bogh Say\'moHlu\'be\'bogh ghajbogh cha\'nav. yISaH nap SoQpa\' \'echlet.',
   'Importeren via URL': 'URL lo\'taHvIS yIkII\'',
@@ -1617,6 +1612,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'wanI\' Hoch qaSpu\'bogh vo\' ghItlh polbe\'lu\'bogh Say\' Sammo\'lu\'pu\':',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'tu\'lu\' {n} ghItlhmey polbe\'lu\'bogh Say\' wanI\' Hoch qaSpu\'bogh vo\' Sammo\'lu\'pu\':',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'ghItlhmey polbe\'lu\'bogh Say\'moHlu\'be\'bogh tu\'lu\'. yISaH nap SoQpa\' De\'wI\'.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'ghItlh polbe\'lu\'bogh Say\'moHlu\'be\'bogh ghajbogh ghItlh. yISaH nap SoQpa\' \'echlet.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'QaptaHbe\' ngeH. ghItlhlIj choHlu\'be\'; yInIDqa\' pagh latlh Segh yIwIv.',
   'Thema documentkop': 'meq ghItlh nach',

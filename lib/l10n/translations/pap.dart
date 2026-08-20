@@ -673,6 +673,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'A haña un dokumento ku kambionan no guardá for di un seshon anterior:',
+  'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Tin {n} archivonan ku kambionan no guardá haña for di un seshon anterior:',
+  'Er zijn bestanden met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Tin archivonan ku kambionan no guardá. Guarda nan promé ku e app sera.',
+  'Dit document heeft niet-opgeslagen wijzigingen. Sla het document op voordat het tabblad sluit.':
+      'E dokumento aki tin kambionan no guardá. Guarda e dokumento promé ku e tab sera.',
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'E eksportashon no a logra. Bo dokumento no a kambia; purba atrobe òf skohe un otro formato.',
   'Thema documentkop': 'Kabes di dokumento di tema',
@@ -3992,9 +4000,6 @@ const _dutchSourceAddPap = {
   'Einde van de presentatie': 'Final di e presentashon',
   'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A haña un presentashon ku kambionan no guardá for di un seshon anterior:',
-  'Er zijn': 'Tin',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
-      'Tin presentashonnan ku kambionan no guardá. Guarda nan promé ku e app sera.',
   'Export mislukt:': 'Eksportashon a faya:',
   'Geen afbeelding op het klembord gevonden.':
       'No a haña ningun imágen riba klembord.',
@@ -4118,8 +4123,6 @@ const _dutchSourceAddPap = {
   'meer treffer(s)': 'mas resultado(nan)',
   'paginering aan': 'numerashon di página sendí',
   'pijltjes + Enter of klik om te springen': 'flecha + Enter òf klek pa bula',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
-      'presentashonnan ku kambionan no guardá haña for di un seshon anterior:',
   'renderen…': 'render…',
   'resultaat': 'resultado',
   'resultaten': 'resultadonan',
