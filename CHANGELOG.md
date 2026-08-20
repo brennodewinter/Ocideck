@@ -1728,6 +1728,25 @@ that before deciding whether this alpha fits what you are doing.
   zitten niet in de tekst: je kunt ze niet selecteren of overschrijven, en ze
   komen niet in de `.md` terecht. Visueel en Pagina's blijven zonder nummers —
   daar schrijf of lees je het gerenderde document, geen bronbestand.
+- **Een afgedrukt document draagt zijn kop en voet weer op elke pagina, en de
+  tekst verdwijnt er niet onder.** Uit een echte export van een toetsingsrapport:
+  op het scherm klopte het document, maar wie hem afdrukte of als PDF opsloeg
+  kreeg de koptekst met logo onderaan de pagina, de voettekst bovenaan, allebei
+  dwars door een tekstregel heen, met een lege bovenrand op het eerste vel en op
+  elk vel het paginanummer "0". De banden stonden met `position:fixed` in de
+  paginamarge getekend, met een negatieve offset. Dat leek de aangewezen weg en
+  doet twee dingen niet: een vaste band houdt geen ruimte vrij, en een negatieve
+  offset rekent Chrome modulo de pagina — vandaar de plek middenin de tekst. De
+  banden reizen nu als afdrukraam: kop in een `thead`, voet in een `tfoot`, de
+  hele body in één cel. Dat is de enige constructie die een afdrukmotor per
+  pagina herhaalt én ruimte voor vrijhoudt, en ze werkt met de hoofdstukeinden en
+  de kop-blijft-niet-alleen-regel samen. De paginamarges zijn weer die van de
+  auteur: ze werden opgehoogd om een strook voor de band vrij te houden, wat de
+  ruimte nu twee keer zou reserveren. Het paginanummer blijft in de afdruk weg in
+  plaats van "0" te schrijven — `counter(page)` werkt alleen in een
+  `@page`-margeblok, dat geen browser kent; op het scherm is er één pagina en
+  klopt de 1. Dat staat nu in KNOWN_LIMITATIONS en in de gids, met de
+  LaTeX-export als route naar genummerde pagina's.
 
 - **`code` midden in een zin is weer te lezen, en een tabelbewerking gooit je
   niet meer naar de bron.** Drie klachten uit één document. Een inline

@@ -64,6 +64,35 @@ document.querySelectorAll('section.slide,section.document').forEach(function(sec
   if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
   sec.innerHTML='';sec.appendChild(div);
 });
+// Het afdrukraam (zie .print-frame in de CSS). Een doorlopend document dat je
+// afdrukt hoort op ELKE pagina zijn kop- en voetband te dragen, en de tekst
+// hoort er niet onder te verdwijnen. Alleen een tabel met thead/tfoot doet
+// allebei: een afdrukmotor herhaalt die groepen per pagina én houdt er ruimte
+// voor vrij. De inhoud wordt hier alleen verplaatst — alles is dan al door
+// DOMPurify gegaan, er komt geen nieuwe HTML bij — en `role="presentation"`
+// houdt dit raam uit de voorleesvolgorde van een schermlezer.
+document.querySelectorAll('section.document > .content').forEach(function(content){
+  var header=content.querySelector('.document-header');
+  var footer=content.querySelector('.document-footer');
+  if(!header&&!footer)return;
+  var table=document.createElement('table');
+  table.className='print-frame';table.setAttribute('role','presentation');
+  function band(group,node){
+    var section=document.createElement(group);
+    var row=document.createElement('tr');
+    var cell=document.createElement('td');
+    cell.appendChild(node);row.appendChild(cell);section.appendChild(row);
+    table.appendChild(section);
+  }
+  if(header)band('thead',header);
+  if(footer)band('tfoot',footer);
+  var body=document.createElement('tbody');
+  var bodyRow=document.createElement('tr');
+  var bodyCell=document.createElement('td');
+  while(content.firstChild)bodyCell.appendChild(content.firstChild);
+  bodyRow.appendChild(bodyCell);body.appendChild(bodyRow);table.appendChild(body);
+  content.appendChild(table);
+});
 // Een tijdlijn blijft in de bron een gewone tabel. Pas na de veilige Markdown-
 // render wordt alleen een expliciet gemarkeerde tabel naar semantische HTML
 // geprojecteerd; alle celinhoud is dan al door DOMPurify gegaan.

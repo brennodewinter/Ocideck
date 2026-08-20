@@ -295,26 +295,51 @@ void main() {
     });
 
     test(
-      'printchrome reserveert ruimte wanneer documentmarges nul zijn',
+      'de kop- en voetband reizen als afdrukraam, niet als vaste balk',
       () async {
+        // De regressie van de RWM-export: met `position:fixed` reserveerde de
+        // band geen ruimte, en de negatieve offset die hem in de paginamarge
+        // moest leggen liet Chrome de plaats modulo de pagina rekenen — kop en
+        // voet landden middenin de tekst en dekten er een regel af. Het
+        // afdrukraam (thead/tfoot) is de constructie die een afdrukmotor wél
+        // per pagina herhaalt én ruimte voor vrijhoudt.
         final service = MarpHtmlService(loadAsset: _diskLoader);
         final html = await service.build(
           _md,
           continuous: true,
           theme: const ThemeProfile(
             documentHeaderText: 'Regel 1\nRegel 2\nRegel 3\nRegel 4',
+            documentShowPageNumbers: true,
           ),
           pageSize: PageSizeSpec.a4,
           pageMargins: const PageMargins.uniform(0),
         );
 
-        expect(html, contains('@page{size:A4;margin:25mm 0mm 15mm 0mm}'));
-        expect(html, contains('.document-header{top:-22mm}'));
-        expect(html, contains('.document-footer{bottom:-12mm}'));
+        // Geen enkele band staat nog vast, en geen enkele wordt de marge in
+        // getrokken.
+        expect(html, isNot(contains('.document-header{top:-')));
+        expect(html, isNot(contains('.document-footer{bottom:-')));
+        expect(
+          html,
+          isNot(contains(".document-header,.document-footer{position:fixed")),
+        );
+        // Het raam en de twee groepen die een afdrukmotor herhaalt.
+        expect(
+          html,
+          contains('.print-frame>thead{display:table-header-group}'),
+        );
+        expect(
+          html,
+          contains('.print-frame>tfoot{display:table-footer-group}'),
+        );
+        expect(html, contains("table.className='print-frame'"));
       },
     );
 
-    test('printchrome reserveert ook de maximale logoband volledig', () async {
+    test('de marges blijven die van de auteur, ook op nul', () async {
+      // Ze werden opgehoogd om een strook voor de band vrij te houden; het
+      // afdrukraam houdt die ruimte nu zelf vrij, dus ophogen zou hem twee keer
+      // reserveren — dat was de lege bovenrand op de eerste pagina.
       final service = MarpHtmlService(
         loadAsset: _diskLoader,
         loadBytes: (_) async => Uint8List.fromList([1, 2, 3, 4]),
@@ -331,9 +356,52 @@ void main() {
         pageMargins: const PageMargins.uniform(0),
       );
 
-      expect(html, contains('@page{size:A4;margin:67mm 0mm 15mm 0mm}'));
-      expect(html, contains('.document-header{top:-64mm}'));
-      expect(html, contains('.document-footer{bottom:-12mm}'));
+      expect(html, contains('@page{size:A4;margin:0mm 0mm 0mm 0mm}'));
+      expect(html, isNot(contains('.document{padding-top:')));
+    });
+
+    test('de printregels staan ná het thema in de cascade', () async {
+      // Een thema zet `.document` opnieuw op — inclusief `box-shadow` en de
+      // schermmarge. Stonden de printregels ervóór, dan won de themaregel en
+      // droeg de afdruk de slagschaduw mee: een zwarte balk over de kop van het
+      // eerste vel en een streep langs de rechterrand van elk vel.
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(name: 'Huisstijl'),
+      );
+
+      final thema = html.indexOf(
+        '.document{max-width:46rem;margin:24px auto;'
+        'padding:32px 40px;background:',
+      );
+      final print = html.indexOf('@media print{body{background:#fff}');
+      expect(thema, greaterThan(-1), reason: 'themablok hoort er te staan');
+      expect(print, greaterThan(-1), reason: 'printblok hoort er te staan');
+      expect(print, greaterThan(thema));
+    });
+
+    test('het paginanummer liegt niet in de afdruk', () async {
+      // `counter(page)` werkt alleen in een `@page`-margeblok; in gewone inhoud
+      // drukte het op élke pagina "0" af. Op het scherm is er één pagina.
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(documentShowPageNumbers: true),
+        pageSize: PageSizeSpec.a4,
+        pageMargins: const PageMargins.uniform(20),
+      );
+
+      // De regel zelf, niet het woord: de CSS-toelichting in de export noemt
+      // `counter(page)` juist om uit te leggen waarom hij er niet meer staat.
+      expect(html, isNot(contains('content:counter(page)')));
+      expect(
+        html,
+        contains('@media print{.document-page-number{display:none}}'),
+      );
+      expect(html, contains('.document-page-number::after{content:"1"}'));
     });
 
     test('de tabelstijl van het profiel staat in de document-CSS', () async {

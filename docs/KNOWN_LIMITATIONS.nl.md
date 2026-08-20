@@ -77,6 +77,19 @@ hernummerd; alleen de plaats verschilt. Die HTML naar PDF afdrukken houdt ze
 achterin. Heb je de noten in een PDF écht onderaan het vel nodig, gebruik dan de
 LaTeX-export (`.tex`). *(Toegevoegd 2026-08-18.)*
 
+## Een afgedrukt HTML-document heeft geen paginanummers
+
+Druk je de HTML-export van een document af — of kies je *Opslaan als PDF* — dan
+herhalen de kop- en voetband van de stijl zich op elk vel, mét de tekst eronder
+in plaats van eronder verdwenen. Het **paginanummer** in die voet is het enige
+dat achterblijft. Een browser vertelt de inhoud niet welke pagina hij afdrukt:
+`counter(page)` werkt alleen in een `@page`-margeblok, dat geen browser kent, en
+drukte hier op elk vel een letterlijke `0` af. Liever geen nummer dan een
+verkeerd nummer, dus de export drukt er geen. Op het scherm is het document één
+doorlopende pagina en staat er 1 — daar klopt dat. Heeft de ontvanger genummerde
+pagina's nodig, gebruik dan de **LaTeX-export (`.tex`)**: die motor telt zijn
+pagina's zelf. *(Toegevoegd 2026-08-20.)*
+
 ## De web-export (HTML) laat de overlays op de dia weg
 
 De app tekent een laag chroom *over* elke dia heen: de voettekst (de tekst, de

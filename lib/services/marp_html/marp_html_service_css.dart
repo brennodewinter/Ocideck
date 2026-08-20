@@ -6,20 +6,6 @@
 // omdat die het profiel nodig heeft.
 part of '../marp_html_service.dart';
 
-bool _hasPrintableDocumentChrome(
-  bool continuous,
-  ThemeProfile? theme,
-  ExportDocumentMetadata metadata,
-) =>
-    continuous &&
-    (metadata.tlp != TlpLevel.none ||
-        (theme != null &&
-            (theme.documentHeaderText.trim().isNotEmpty ||
-                theme.documentFooterText.trim().isNotEmpty ||
-                theme.documentShowPageNumbers ||
-                (theme.effectiveDocumentLogoPath?.trim().isNotEmpty ??
-                    false))));
-
 /// Zichtbare AI-melding voor HTML. Zij staat onder de TLP-balk wanneer die er
 /// is; in doorlopende documentmodus zit TLP in kop en voet en begint zij boven.
 String _aiBanner(
@@ -109,11 +95,19 @@ html,body{margin:0;padding:0}
 .document .ocideck-footnotes h2{font-size:1.1em;margin:0 0 .4em}
 .document .ocideck-fnref{font-size:.75em;line-height:0}
 .document .ocideck-fnback{text-decoration:none}
-/* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
-   laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
-   als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat
-   scherm en druk hetzelfde zeggen. */
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0;orphans:2;widows:2}.document h1,.document h2,.document h3,.document h4,.document h5,.document h6{page-break-after:avoid;break-after:avoid}.document hr{page-break-after:always;border:0;height:0;margin:0}}
+/* Het afdrukraam: de enige constructie die een browser bij het afdrukken op
+   ELKE pagina herhaalt én er ruimte voor vrijhoudt. `position:fixed` leek de
+   voor de hand liggende keuze en deed het allebei niet: een vaste band houdt
+   geen ruimte vrij (de regel eronder verdween), en met een negatieve offset —
+   bedoeld om de band in de paginamarge te leggen — rekent Chrome de plaats
+   modulo de pagina en zet hij kop en voet middenin de tekst. Vandaar een
+   tabel: kop in `thead`, voet in `tfoot`, de hele body in één cel. De cellen
+   zelf dragen géén opmaak; ze zijn alleen het raam. */
+.print-frame{width:100%;table-layout:fixed;border-collapse:collapse}
+.print-frame>thead{display:table-header-group}
+.print-frame>tfoot{display:table-footer-group}
+.document .print-frame>thead>tr,.document .print-frame>tfoot>tr,.document .print-frame>tbody>tr{background:none}
+.document .print-frame>thead>tr>td,.document .print-frame>tfoot>tr>td,.document .print-frame>tbody>tr>td{padding:0;border:0;background:none;color:inherit;text-align:left;vertical-align:top}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de
@@ -138,7 +132,6 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .document-footer{border-top:1px solid rgba(100,116,139,.55);margin-top:24px}
 .document-header-text,.document-footer-text{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
 .document-tlp{display:inline-block;flex:0 0 auto;padding:3px 7px;border-radius:4px;background:#000;font:700 10px/1.2 monospace;letter-spacing:.025em;white-space:nowrap}
-@media print{.document{padding-top:76px;padding-bottom:68px}.document-header,.document-footer{position:fixed;left:40px;right:40px;z-index:2;background:#fff}.document-header{top:0}.document-footer{bottom:0}}
 
 /* De melding dat er ongecontroleerde AI-tekst in dit document staat.
    Kwam van de juridische tak; deze CSS verhuisde intussen hierheen. */
@@ -151,6 +144,26 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 /// Een functie en geen vierde constante, zodat de aanroeper niet hoeft te weten
 /// uit hoeveel stukken dit bestaat.
 String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
+
+/// De printregels, als eigen blok omdat ze ná het thema moeten staan.
+///
+/// Een thema zet `.document` opnieuw op (`margin`, `max-width`, `box-shadow`)
+/// en dat blok komt later in de cascade. Stonden deze regels bij de structuur,
+/// dan won de themaregel en droeg de afdruk de slagschaduw en de schermmarge
+/// van het beeldscherm mee: een zwarte balk over de kop van het eerste vel en
+/// een streep langs de rechterrand van elk vel.
+const _printCss = r'''
+/* Een paginanummer kan een browser niet aan de inhoud doorgeven: `counter(page)`
+   werkt alleen in een `@page`-margeblok, dat geen browser kent, en drukte hier
+   op elke pagina "0" af. Op het scherm is er één pagina en klopt de 1; in de
+   afdruk zwijgt het nummer liever dan te liegen (KNOWN_LIMITATIONS.md). */
+@media print{.document-page-number{display:none}}
+/* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
+   laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
+   als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat
+   scherm en druk hetzelfde zeggen. */
+@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0;orphans:2;widows:2}.document h1,.document h2,.document h3,.document h4,.document h5,.document h6{page-break-after:avoid;break-after:avoid}.document hr{page-break-after:always;border:0;height:0;margin:0}}
+''';
 
 /// De rand-CSS voor een document-tabelcel, afgeleid uit de
 /// [ThemeProfile.tableBorderStyle] en [ThemeProfile.tableBorderColor].
@@ -198,17 +211,6 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
   final bandText = t.effectiveDocumentBandTextColor;
   final bandBackground = t.effectiveDocumentBandBackgroundColor;
   final logoHeight = (logoSize * 0.5).round().clamp(32, 240);
-  final hasLogo = t.effectiveDocumentLogoPath?.trim().isNotEmpty == true;
-  final headerPadding = math.max(
-    76,
-    hasLogo && t.documentLogoPosition.startsWith('top') ? logoHeight + 36 : 0,
-  );
-  final footerPadding = math.max(
-    68,
-    hasLogo && t.documentLogoPosition.startsWith('bottom')
-        ? logoHeight + 36
-        : 0,
-  );
   // De basislettergrootte van de documentstijl, in px. De koppen, noten en
   // tijdlijnkaartjes van `.document` staan in `em`, dus ze schalen vanzelf mee —
   // net als in de app, waar dezelfde maat de kopmaten schaalt.
@@ -252,13 +254,7 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       '.document-page-number::after{content:"1"}'
       '.document-logo{display:inline-flex;align-items:center;flex:0 0 auto}'
       '.document-logo img{display:block;width:${logoSize}px;max-width:70%;'
-      'max-height:${logoHeight}px;height:auto;object-fit:contain}'
-      '@media print{.document{padding-top:${headerPadding}px;'
-      'padding-bottom:${footerPadding}px}'
-      '.document-header,.document-footer{position:fixed;left:40px;right:40px;'
-      'z-index:2;background:$bandBackground}'
-      '.document-header{top:0}.document-footer{bottom:0}'
-      '.document-page-number::after{content:counter(page)}}';
+      'max-height:${logoHeight}px;height:auto;object-fit:contain}';
 }
 
 /// De vorm van de drie keuze-menu-indelingen (#1162). Thema-onafhankelijk, net
@@ -349,76 +345,29 @@ const _reportingCss = r'''
 /// Feature 3: de `@page`-regel voor paginamaat en marges. Top-level CSS
 /// (buiten `@media print` — `@page` is zelf al een print-regel). Leeg wanneer
 /// geen van beide is gezet, zodat de browser-default geldt.
-String _pageAtRuleCss(
-  PageSizeSpec? size,
-  PageMargins? margins, {
-  bool reserveDocumentChrome = false,
-  ThemeProfile? theme,
-  TlpLevel tlp = TlpLevel.none,
-}) {
+String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
   if (size == null && margins == null) return '';
-  final headerBandMm = _printDocumentBandMm(theme, tlp, header: true);
-  final footerBandMm = _printDocumentBandMm(theme, tlp, header: false);
-  final requiredTopMm = headerBandMm + 3;
-  final requiredBottomMm = footerBandMm + 3;
-  final effectiveMargins = margins == null || !reserveDocumentChrome
-      ? margins
-      : margins.copyWith(
-          topMm: margins.topMm < requiredTopMm ? requiredTopMm : margins.topMm,
-          bottomMm: margins.bottomMm < requiredBottomMm
-              ? requiredBottomMm
-              : margins.bottomMm,
-        );
+  // De marges zijn die van de auteur, onaangeroerd. Ze werden vroeger opgehoogd
+  // om een strook voor de kop- en voetband vrij te houden; die band staat sinds
+  // het afdrukraam (`.print-frame`) binnen de tekstspiegel en houdt zijn eigen
+  // ruimte vrij. Ophogen zou de ruimte dus twee keer reserveren.
   final parts = <String>[];
   if (size != null) {
     parts.add(
-      'size:${effectiveMargins == null ? size.cssName : size.cssSizeWith(effectiveMargins)}',
+      'size:${margins == null ? size.cssName : size.cssSizeWith(margins)}',
     );
   }
-  if (effectiveMargins != null) {
-    parts.add('margin:${effectiveMargins.cssMargin}');
+  if (margins != null) {
+    parts.add('margin:${margins.cssMargin}');
     // De afloopdoos hoort bij CSS Paged Media. De vergrote `size` hierboven
     // doet het werk dat élke afdrukmotor honoreert; dit is de aanvulling voor
     // een motor die de standaard kent. Snijtekens (`marks`) staan er bewust
     // niet bij — zie [PageMargins].
-    if (effectiveMargins.hasBleed) {
-      parts.add('bleed:${_fmtBleedMm(effectiveMargins.bleedMm)}mm');
+    if (margins.hasBleed) {
+      parts.add('bleed:${_fmtBleedMm(margins.bleedMm)}mm');
     }
   }
-  final page = '@page{${parts.join(';')}}';
-  if (!reserveDocumentChrome || effectiveMargins == null) return page;
-  return '$page@media print{.document-header{top:-${_fmtBleedMm(headerBandMm)}mm}'
-      '.document-footer{bottom:-${_fmtBleedMm(footerBandMm)}mm}}';
-}
-
-double _printDocumentBandMm(
-  ThemeProfile? theme,
-  TlpLevel tlp, {
-  required bool header,
-}) {
-  var heightPx = 42.0;
-  if (theme != null) {
-    final text = header
-        ? theme.documentHeaderText.trim()
-        : theme.documentFooterText.trim();
-    // Vier zichtbare regels bij 12 px en document-line-height 1,65, plus de
-    // scheidingsrand. De CSS kapt na vier regels af; deze maat is dus ook het
-    // werkelijke maximum wanneer één lange regel in de afdruk omslaat.
-    if (text.isNotEmpty) heightPx = 81;
-    final path = theme.effectiveDocumentLogoPath?.trim() ?? '';
-    final logoInBand =
-        path.isNotEmpty &&
-        theme.documentLogoPosition.startsWith(header ? 'top' : 'bottom');
-    if (logoInBand) {
-      final logoHeight = (theme.effectiveDocumentLogoSize * 0.5).clamp(
-        32.0,
-        240.0,
-      );
-      if (logoHeight > heightPx) heightPx = logoHeight;
-    }
-  }
-  if (theme == null && tlp == TlpLevel.none) return 0;
-  return (heightPx * 25.4 / 96).ceilToDouble();
+  return '@page{${parts.join(';')}}';
 }
 
 /// Millimeters zonder overbodige nullen — `3` in plaats van `3.0`.

@@ -73,6 +73,19 @@ so nothing is lost or renumbered; only the position differs. Printing that HTML
 to PDF keeps them at the back. If you need notes truly at the foot of the sheet
 in a PDF, use the LaTeX (`.tex`) export. *(Added 2026-08-18.)*
 
+## A printed HTML document has no page numbers
+
+Print the document-mode HTML export — or choose *Save as PDF* — and the style's
+header and footer band repeat on every sheet, with the text below them, not
+underneath them. The **page number** in that footer is the one part that stays
+behind. A browser will not tell the page it is printing to the content on it:
+`counter(page)` only resolves inside an `@page` margin box, which no browser
+implements, and used to print a literal `0` on every sheet. Rather than print a
+wrong number, the export prints none. On screen the document is one continuous
+page and the number reads 1, which is true there. When the recipient needs
+numbered pages, use the **LaTeX (`.tex`)** export, whose engine counts pages
+itself. *(Added 2026-08-20.)*
+
 ## The web (HTML) export leaves off the on-slide overlays
 
 The app draws a layer of chrome *over* each slide: the footer (its text,
