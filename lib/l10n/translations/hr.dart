@@ -1638,6 +1638,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Thema accent op de documentband': 'Naglasak teme na zaglavlju/podnožju',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Pronađen je dokument s nespremljenim promjenama iz prethodne sesije:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

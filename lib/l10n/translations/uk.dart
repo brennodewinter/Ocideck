@@ -1650,6 +1650,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Thema accent op de documentband': 'Акцент теми на колонтитулі',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Знайдено документ з незбереженими змінами з попередньої сесії:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

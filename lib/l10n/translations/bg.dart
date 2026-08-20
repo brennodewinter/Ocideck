@@ -1654,6 +1654,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Thema accent op de documentband': 'Акцент на темата върху колонтитула',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Открит е документ с незапазени промени от предишна сесия:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

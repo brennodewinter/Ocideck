@@ -1723,6 +1723,23 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een link in de kop- of voetband van een document kon onzichtbaar zijn.** Het
+  derde paar van het documentvlak, na de kopkleur en de bandtekst. De band tekent
+  een link in de kop- of voettekst met de **accentkleur** — in de app en in de
+  HTML-export allebei — en die kleur werd alleen tegen het papier gemeten. Een
+  donkere huisstijlband met witte tekst erop is dan volledig in orde volgens elke
+  poort, terwijl een link erin op 1,5:1 staat en dus niet te lezen is. Beide
+  kleuren op zichzelf deugen; het paar niet. Nu gemeten, en de waarschuwing landt
+  op de **bandachtergrond** en niet op het accent: dat accent is een gedeelde
+  kleur die overal elders wél deugt, dus wat aan dít paar te herstellen valt is de
+  band eronder. Net als de andere twee telt hij alleen wanneer je die
+  bandachtergrond zélf zet — laat je hem leeg, dan ís de band het papier en meet
+  'Thema accent' hem al.
+
+  Onderweg bleek dat PR #1605 drie alinea's uit de gebruikershandleiding had
+  teruggedraaid die niets met die wijziging te maken hadden (de contrasttabel en
+  twee alinea's over de stijlprofielen); die staan er weer.
+
 - **De tekeningen in een document-PDF houden zich aan de grenzen van het
   platform.** De vraag "werkt dit ook op web en Windows?" bleek twee keer nee.
   Op **Windows en Linux** zit geen WebView-implementatie in dit project, en het

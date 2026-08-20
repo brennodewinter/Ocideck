@@ -1637,6 +1637,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Thema accent op de documentband': 'Thema-Akzänt uf de Chopf-/Fuessziile',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Es isch e Dokumänt mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde worde:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

@@ -1635,6 +1635,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Thema accent op de documentband': 'Teeman korostus ylä-/alatunnisteessa',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Edellisestä istunnosta löytyi asiakirja, jossa on tallentamattomia muutoksia:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

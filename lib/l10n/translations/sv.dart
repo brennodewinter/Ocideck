@@ -1633,6 +1633,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Thema accent op de documentband': 'Temats accent på sidhuvud/sidfot',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Ett dokument med osparade ändringar hittades från en tidigare session:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

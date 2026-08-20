@@ -673,6 +673,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Thema accent op de documentband':
+      'Acento di tema riba kabesera/pia di página',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A haña un dokumento ku kambionan no guardá for di un seshon anterior:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

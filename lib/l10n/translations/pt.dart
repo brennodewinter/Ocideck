@@ -1662,6 +1662,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Thema accent op de documentband': 'Acento do tema no cabeçalho/rodapé',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Foi encontrado um documento com alterações não guardadas de uma sessão anterior:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

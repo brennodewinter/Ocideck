@@ -1634,6 +1634,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Thema accent op de documentband': 'Temaets fremhævning på side-/bundteksten',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Et dokument med ikke-gemte ændringer blev fundet fra en tidligere session:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

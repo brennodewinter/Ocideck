@@ -1649,6 +1649,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Thema accent op de documentband':
+      'Accentus thematis in capite et calce paginae',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Documentum cum mutationibus non servatis ex sessione priore inventum est:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

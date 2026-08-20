@@ -1633,6 +1633,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Thema accent op de documentband': 'Tēmas akcents galvenē/kājenē',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'No iepriekšējās sesijas atrasts dokuments ar nesaglabātām izmaiņām:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

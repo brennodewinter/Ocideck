@@ -1628,6 +1628,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Thema accent op de documentband': 'Teema rõhuvärv päises/jaluses',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Eelmisest seansist leiti dokument salvestamata muudatustega:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

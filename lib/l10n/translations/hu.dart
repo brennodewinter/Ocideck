@@ -1636,6 +1636,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Thema accent op de documentband': 'Téma kiemelése az élőfejen/élőlábon',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Egy előző munkamenetből nem mentett módosításokat tartalmazó dokumentum található:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

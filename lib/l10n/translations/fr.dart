@@ -674,6 +674,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Thema accent op de documentband':
+      'Accent du thème sur l\'en-tête/pied de page',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Un document comportant des modifications non enregistrées a été trouvé depuis une session précédente :',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

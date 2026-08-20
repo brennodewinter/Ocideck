@@ -1664,6 +1664,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Thema accent op de documentband':
+      'Aibhsiú an téama ar an gceanntásc/mbuntásc',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Aimsíodh cáipéis le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

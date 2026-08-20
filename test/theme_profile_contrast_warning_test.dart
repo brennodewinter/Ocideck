@@ -16,9 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 /// Since the style tab splits into three surfaces, a colour only renders on the
 /// surface it belongs to: the title pair on **Presentatie**, the accent on
-/// **Algemeen**, the heading and header/footer band on **Document**. So each
-/// test opens the style tab and picks that surface — a warning that only fires
-/// on a surface nobody opens is no warning at all.
+/// **Algemeen**, the heading, the header/footer band and the accent as it lands
+/// on that band on **Document**. So each test opens the style tab and picks that
+/// surface — a warning that only fires on a surface nobody opens is no warning
+/// at all.
 const _warning = 'Te weinig contrast met de achtergrond — mogelijk onleesbaar.';
 
 /// A fully-specified, legible profile. Individual colours are overridden per
@@ -149,10 +150,12 @@ void main() {
     await _teardown(tester);
   });
 
-  // De twee kleuren die alléén op het documentvlak bestaan. Ze stonden buiten de
-  // reeks van de analyzer, dus kon een stijl een kop of een band onleesbaar
-  // zetten zonder dat hier iets verscheen — terwijl elke dia-kleur wél een
-  // waarschuwing kreeg.
+  // De drie paren die alléén op het documentvlak bestaan. Ze stonden buiten de
+  // reeks van de analyzer, dus kon een stijl een kop, een band of een link in
+  // die band onleesbaar zetten zonder dat hier iets verscheen — terwijl elke
+  // dia-kleur wél een waarschuwing kreeg. Elke toets isoleert één paar: de
+  // andere twee halen hun drempel, dus de waarschuwing die verschijnt kan maar
+  // van één kant komen.
   testWidgets('een te bleke documentkop waarschuwt op het documentvlak', (
     tester,
   ) async {
@@ -173,13 +176,41 @@ void main() {
   testWidgets('een onleesbare kop-/voetband waarschuwt op het documentvlak', (
     tester,
   ) async {
+    // Een lichte band met te bleke tekst erop (2,5:1). Bewust licht en niet
+    // donker: op een donkere band zou het accent er óók op wegvallen, en dan
+    // zou de toets twee waarschuwingen tellen in plaats van dit ene paar te
+    // isoleren. Het accent haalt hier 9,5:1 en zwijgt dus.
     await _openWith(
       tester,
-      _profile(documentBandText: '#3A3A3A', documentBandBackground: '#222222'),
+      _profile(documentBandText: '#999999', documentBandBackground: '#F0F0F0'),
       surface: 'document',
     );
 
     expect(find.text(_warning, skipOffstage: false), findsOneWidget);
+    expect(find.text('2.5:1', skipOffstage: false), findsOneWidget);
+
+    await _teardown(tester);
+  });
+
+  testWidgets('een link die wegvalt op zijn eigen band waarschuwt', (
+    tester,
+  ) async {
+    // Het accent haalt 10,9:1 op het papier en de bandtekst 16,0:1 op de band —
+    // beide bestaande toetsen zwijgen dus terecht. Alleen het accent zoals het
+    // óp de band landt (een link in de kop- of voettekst) zakt eronderdoor,
+    // naar 1,5:1.
+    await _openWith(
+      tester,
+      _profile(
+        accent: '#003399',
+        documentBandText: '#FFFFFF',
+        documentBandBackground: '#14213D',
+      ),
+      surface: 'document',
+    );
+
+    expect(find.text(_warning, skipOffstage: false), findsOneWidget);
+    expect(find.text('1.5:1', skipOffstage: false), findsOneWidget);
 
     await _teardown(tester);
   });

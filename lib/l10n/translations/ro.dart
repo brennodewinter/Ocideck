@@ -1651,6 +1651,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Thema accent op de documentband': 'Accentul temei pe antet/subsol',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A fost găsit un document cu modificări nesalvate dintr-o sesiune anterioară:',
   'Er zijn {n} bestanden met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
