@@ -177,60 +177,15 @@ Future<String?> writeDocumentExport(
   final chromeFields = _documentChromeFields(bundle.audience.deck);
   switch (format) {
     case DocumentExportFormat.md:
-      // Feature 4: vervang de `<!-- toc -->`-marker door de gegenereerde
-      // GFM-lijst (zonder marker) — een platte `.md`-ontvanger krijgt een
-      // leesbare inhoudsopgave.
-      final mdBody = projectedDocumentBody(bundle);
-      final toc = generateTocMarkdown(mdBody);
-      // keepMarker: false laat de marker weg maar houdt de TOC op zijn plek.
-      // Eerder ging dat via een losse `replaceAll('<!-- toc -->\n\n', '')`, en
-      // die trof niets wanneer het document wél een marker draagt maar (nog)
-      // geen koppen: dan blijft de kale marker over, zónder de twee regeleindes,
-      // en lekte hij het geëxporteerde bestand in.
-      final mdOut = hasTocMarker(mdBody)
-          ? replaceTocMarker(mdBody, toc, keepMarker: false)
-          : mdBody;
-      // De paginaopmaak reist wél mee, de stijl niet — en dat is geen
-      // inconsistentie maar het verschil tussen een verwijzing en een maat.
-      // `theme:` noemt een stijlprofiel dat alleen op déze machine bestaat: bij
-      // de ontvanger zou de naam nergens naar wijzen, dus wordt de stijl vóór
-      // export opgelost en in de uitvoer zelf gerenderd (§14.5). `papersize:` en
-      // `geometry:` zijn geen verwijzing maar het vel zelf, in millimeters die
-      // overal hetzelfde betekenen, en ze horen bij hoe dít drukwerk eruit moet
-      // komen — een afloop is een eigenschap van de opdracht, niet van de lezer.
-      // Daarom schrijven we hier de opmaak die op dit moment geldt
-      // (`effectiveDocumentPageSetup`: document boven instelling), juist ook
-      // wanneer die alleen in de instellingen stond: de ontvanger heeft die
-      // instellingen niet. Zie FILE_FORMAT.md §14.4.
-      final mdWithPageSetup = withDocumentPageSetup(
-        mdOut,
-        size: pageSize,
-        margins: pageMargins,
-      );
-      // Om dezelfde reden als de paginaopmaak reist de plaatsing van de noten
-      // mee (#1569): `reference-location:` is geen verwijzing naar iets dat
-      // alleen hier bestaat maar een instructie die Pandoc en Quarto zelf
-      // uitvoeren — een maat, geen verwijzing (§14.4). De body komt uit de
-      // projectie en draagt dus geen front matter meer, dus wat de auteur koos
-      // moet hier opnieuw worden gezet, net als het vel.
-      //
-      // `page` schrijft niets, en dat is geen vergeetachtigheid: onderaan de
-      // bladzijde is wat elke lezer zonder aanwijzing al doet, dus een document
-      // dat niets bijzonders wil houdt een export zonder front matter (§14.9).
-      final mdWithFootnotePlacement = withDocumentFootnotePlacement(
-        mdWithPageSetup,
-        footnotePlacement,
-      );
-      final mdWithTlp = withDocumentFrontMatterKey(
-        mdWithFootnotePlacement,
-        'tlp',
-        bundle.audience.deck.tlp == TlpLevel.none
-            ? null
-            : bundle.audience.deck.tlp.key,
-      );
       await writeStringAtomic(
         File(outputPath),
-        withDocumentFields(mdWithTlp, documentFields),
+        _projectedMarkdown(
+          bundle,
+          pageSize: pageSize,
+          pageMargins: pageMargins,
+          footnotePlacement: footnotePlacement,
+          documentFields: documentFields,
+        ),
       );
       return outputPath;
     case DocumentExportFormat.html:
@@ -295,6 +250,58 @@ Future<String?> writeDocumentExport(
         outputPath: outputPath,
       );
   }
+}
+
+/// De geprojecteerde body plus alles wat als front matter meereist.
+///
+/// **De paginaopmaak reist wél mee, de stijl niet** — en dat is geen
+/// inconsistentie maar het verschil tussen een verwijzing en een maat. `theme:`
+/// noemt een stijlprofiel dat alleen op déze machine bestaat: bij de ontvanger
+/// zou de naam nergens naar wijzen, dus wordt de stijl vóór export opgelost en
+/// in de uitvoer zelf gerenderd (§14.5). `papersize:` en `geometry:` zijn geen
+/// verwijzing maar het vel zelf, in millimeters die overal hetzelfde betekenen,
+/// en ze horen bij hoe dít drukwerk eruit moet komen — een afloop is een
+/// eigenschap van de opdracht, niet van de lezer. Daarom staat hier de opmaak
+/// die op dit moment geldt, juist ook wanneer die alleen in de instellingen
+/// stond: de ontvanger heeft die instellingen niet. Zie FILE_FORMAT.md §14.4.
+///
+/// Om dezelfde reden reist de plaatsing van de noten mee (#1569):
+/// `reference-location:` is een instructie die Pandoc en Quarto zelf uitvoeren.
+/// `page` schrijft niets, en dat is geen vergeetachtigheid — onderaan de
+/// bladzijde is wat elke lezer zonder aanwijzing al doet, dus een document dat
+/// niets bijzonders wil houdt een export zonder front matter (§14.9).
+String _projectedMarkdown(
+  ExportBundle bundle, {
+  required PageSizeSpec? pageSize,
+  required PageMargins? pageMargins,
+  required FootnotePlacement footnotePlacement,
+  required Map<String, String> documentFields,
+}) {
+  // Feature 4: vervang de `<!-- toc -->`-marker door de gegenereerde GFM-lijst
+  // (zonder marker) — een platte `.md`-ontvanger krijgt een leesbare
+  // inhoudsopgave.
+  //
+  // `keepMarker: false` laat de marker weg maar houdt de TOC op zijn plek.
+  // Eerder ging dat via een losse `replaceAll('<!-- toc -->\n\n', '')`, en die
+  // trof niets wanneer het document wél een marker draagt maar (nog) geen
+  // koppen: dan blijft de kale marker over, zónder de twee regeleindes, en lekte
+  // hij het geëxporteerde bestand in.
+  final body = projectedDocumentBody(bundle);
+  final withToc = hasTocMarker(body)
+      ? replaceTocMarker(body, generateTocMarkdown(body), keepMarker: false)
+      : body;
+  final tlp = bundle.audience.deck.tlp;
+  return withDocumentFields(
+    withDocumentFrontMatterKey(
+      withDocumentFootnotePlacement(
+        withDocumentPageSetup(withToc, size: pageSize, margins: pageMargins),
+        footnotePlacement,
+      ),
+      'tlp',
+      tlp == TlpLevel.none ? null : tlp.key,
+    ),
+    documentFields,
+  );
 }
 
 /// Zet het document als PDF en schrijft het atomisch weg.
