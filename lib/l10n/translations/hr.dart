@@ -1643,6 +1643,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Izvoz nije uspio. Vaš dokument nije promijenjen; pokušajte ponovno ili odaberite drugi format.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF sa stvarnim tekstom: može se označiti, pretraživati i čitati naglas, a naslovi postaju knjižne oznake. Formule, mermaid dijagrami i grafikoni se crtaju; bilješke su na kraju.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

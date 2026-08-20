@@ -130,6 +130,40 @@ void main() {
       expect(find.textContaining('rapport-geredigeerd.html'), findsOneWidget);
     });
 
+    testWidgets('een mislukte export zegt dat, in plaats van te blijven draaien', (
+      tester,
+    ) async {
+      // Zo gaat het op web mis: de bestandskiezer daar kan geen pad kiezen
+      // zonder de bytes al te hebben en gooit een `ArgumentError` — een `Error`,
+      // geen `Exception`. Zonder vangst kwam `setState` nooit en bleef de knop
+      // eeuwig op zijn tolletje staan, zonder één woord uitleg.
+      await tester.pumpWidget(
+        _app(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () => DocumentExportDialog.show(
+                context,
+                privacyChecksEnabled: true,
+                onExport: (_, _) async =>
+                    throw ArgumentError('bytes zijn vereist'),
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Exporteren…'));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('De export is niet gelukt'), findsOneWidget);
+      // De reden staat erbij voor wie hem nodig heeft.
+      expect(find.textContaining('bytes zijn vereist'), findsOneWidget);
+      // En je kunt het opnieuw proberen: de knop draait niet meer.
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+    });
+
     testWidgets('biedt geen presentatiepakket als documentformaat', (
       tester,
     ) async {

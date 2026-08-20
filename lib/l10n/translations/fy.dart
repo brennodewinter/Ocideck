@@ -674,6 +674,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'De eksport is net slagge. Dyn dokumint is net feroare; besykje it nochris of kies in oar formaat.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'In PDF mei echte tekst: te selektearjen, te trochsykjen en foar te lêzen, mei de kopkes as blêdwizers. Formules, mermaid-diagrammen en grafiken wurde tekene; de noaten steane efteryn.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

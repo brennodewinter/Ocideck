@@ -1641,6 +1641,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Export se nezdařil. Váš dokument zůstal beze změny; zkuste to znovu nebo zvolte jiný formát.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF se skutečným textem: lze jej označovat, prohledávat i předčítat, nadpisy slouží jako záložky. Vzorce, diagramy mermaid a grafy se vykreslují; poznámky jsou vzadu.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

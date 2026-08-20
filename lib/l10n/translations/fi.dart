@@ -1640,6 +1640,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Vienti ei onnistunut. Asiakirjasi ei muuttunut; yritä uudelleen tai valitse toinen muoto.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF, jossa on oikeaa tekstiä: valittavissa, haettavissa ja ääneen luettavissa, ja otsikot toimivat kirjanmerkkeinä. Kaavat, mermaid-kaaviot ja diagrammit piirretään; viitteet ovat lopussa.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

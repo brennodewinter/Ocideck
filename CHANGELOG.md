@@ -1723,6 +1723,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De tekeningen in een document-PDF houden zich aan de grenzen van het
+  platform.** De vraag "werkt dit ook op web en Windows?" bleek twee keer nee.
+  Op **Windows en Linux** zit geen WebView-implementatie in dit project, en het
+  nieuwe exportpad vroeg daar toch om een diagramrender: dat liet de verborgen
+  host monteren, die bouwde een besturing op een platform zonder implementatie,
+  en dat sloopte een export die het daarvóór gewoon deed. De dienst vraagt nu
+  eerst of er hier überhaupt gerenderd kán worden en geeft anders meteen niets
+  terug — het diagram valt dan terug op zijn bron, zoals bedoeld. Grafieken
+  worden in Dart getekend en reizen wél op elk platform mee. In de **webversie**
+  bleek de documentexport helemaal niet te werken, en niet alleen de PDF: de
+  bestandskiezer daar wil de bytes vooraf en gooit anders een fout. Die werd
+  nergens gevangen, dus bleef de knop eeuwig op zijn tolletje staan zonder één
+  woord uitleg. Nu zegt de dialoog dat het niet gelukt is, met de reden erbij, en
+  blijft het document ongemoeid. De documentatie beweerde intussen dat de
+  webversie de bron zou tonen; dat is rechtgezet.
+
 - **Een document kan zijn koppen een eigen kleur geven.** Uit een echt
   bestuurlijk rapport: de broodtekst stond in de huisstijlkleur — EU-blauw over
   vijftien pagina's proza — en dat leest zwaar. Temperen kon niet: een

@@ -4694,10 +4694,18 @@ When one of them cannot be drawn, the PDF prints its **source** in a monospaced
 block with a line above saying what it is, rather than leaving an empty space —
 whoever needs the diagram at least sees what should be there. That happens when a
 chart's numbers live in an external `data/*.json` that did not travel, when a
-diagram or formula fails to render, and always on the **web build**, which has no
-hidden renderer for them. A formula on its own lines (`$$…$$`) is drawn as a
-block; a formula inside a sentence (`$…$`) stays in that sentence, exactly as you
-wrote it.
+diagram or formula fails to render, and on **Windows and Linux**, where the
+hidden renderer that draws Mermaid and formulas has no implementation — charts,
+which are drawn in Dart, do travel there. A formula on its own lines (`$$…$$`) is
+drawn as a block; a formula inside a sentence (`$…$`) stays in that sentence,
+exactly as you wrote it. *(Corrected 2026-08-20: this first said "and always on
+the web build". The web build cannot export a document at all — see below.)*
+
+**Not on the web build.** Exporting a document does not work in the browser
+version, in any of the four formats. The file dialog there cannot be asked for a
+location the way the desktop version asks; the export reports that it did not
+succeed and leaves your document untouched. Use the desktop version, or copy the
+Markdown out by hand.
 
 **What it does not carry.** **Footnotes go at the back**, not at the foot of the
 sheet: which note lands on which page only becomes clear after the layout, and by

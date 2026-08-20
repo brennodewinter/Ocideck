@@ -1638,6 +1638,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Exporten lyckades inte. Ditt dokument är oförändrat; försök igen eller välj ett annat format.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'En PDF med riktig text: markerbar, sökbar och uppläsbar, med rubrikerna som bokmärken. Formler, mermaid-diagram och grafer ritas ut; noterna står sist.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

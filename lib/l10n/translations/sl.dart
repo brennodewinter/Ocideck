@@ -1640,6 +1640,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Izvoz ni uspel. Vaš dokument je nespremenjen; poskusite znova ali izberite drugo obliko.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF s pravim besedilom: lahko ga označite, po njem iščete in ga preberete na glas, naslovi pa so zaznamki. Formule, diagrami mermaid in grafikoni so izrisani; opombe so zadaj.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

@@ -77,10 +77,21 @@ dat dan een leeg vlak, want wie het diagram nodig heeft ziet zo tenminste wát e
 hoort te staan. Dat gebeurt in vier gevallen: een grafiek waarvan de cijfers in
 een los `data/*.json` staan dat niet meekwam; een diagram of formule die de
 renderer niet kon maken; een tekening die de SVG-lezer van de PDF niet kan
-ontleden; en de **webversie**, die geen verborgen renderer voor mermaid of
-formules heeft. Exporteer naar HTML voor alle drie gerenderd in een browser, of
-naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog dezelfde dag
-ingeperkt van "toont altijd de bron" toen de tekeningen er waren.)*
+ontleden; en **Windows en Linux**, waar de verborgen renderer die mermaid en
+formules tekent geen implementatie heeft. Grafieken worden in Dart getekend en
+reizen op elk platform mee. Exporteer naar HTML voor alle drie gerenderd in een
+browser, of naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog
+dezelfde dag ingeperkt van "toont altijd de bron" toen de tekeningen er waren, en
+nogmaals gecorrigeerd toen de platformgrenzen werkelijk gemeten waren.)*
+
+## Een document exporteren werkt niet in de webversie
+
+Niet de PDF, en de andere drie formaten evenmin. De bestandskiezer in de browser
+laat zich niet om een opslagplek vragen zoals die op de desktop — hij wil de
+bytes vooraf — dus de export meldt dat het niet gelukt is en laat het document
+ongemoeid. Voorheen bleef hij zonder een woord op zijn tolletje staan. Het wél
+laten werken betekent de klaargemaakte bytes als download aan de browser geven;
+dat is een eigen wijziging. *(Toegevoegd 2026-08-20.)*
 
 ## De PDF van een document staat in een standaardletter, niet in die van je document
 

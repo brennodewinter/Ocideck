@@ -1651,6 +1651,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Eksport się nie udał. Dokument pozostał bez zmian; spróbuj ponownie lub wybierz inny format.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF z prawdziwym tekstem: do zaznaczania, przeszukiwania i odczytania na głos, z nagłówkami jako zakładkami. Wzory, diagramy mermaid i wykresy są rysowane; przypisy są na końcu.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

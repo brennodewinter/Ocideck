@@ -671,6 +671,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'L\'esportazione non è riuscita. Il documento non è stato modificato; riprova o scegli un altro formato.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Un PDF con testo vero: selezionabile, ricercabile e leggibile ad alta voce, con i titoli come segnalibri. Formule, diagrammi mermaid e grafici vengono disegnati; le note stanno in fondo.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

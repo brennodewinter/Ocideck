@@ -1641,6 +1641,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Az exportálás nem sikerült. A dokumentuma változatlan; próbálja újra, vagy válasszon másik formátumot.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF valódi szöveggel: kijelölhető, kereshető és felolvasható, a címsorok pedig könyvjelzők. A képletek, a mermaid-diagramok és a grafikonok ki vannak rajzolva; a jegyzetek hátul vannak.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

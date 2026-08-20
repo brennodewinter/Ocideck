@@ -1664,6 +1664,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
+      'Η εξαγωγή δεν πέτυχε. Το έγγραφό σας δεν άλλαξε· δοκιμάστε ξανά ή επιλέξτε άλλη μορφή.',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Ένα PDF με πραγματικό κείμενο: επιλέξιμο, αναζητήσιμο και αναγνώσιμο φωναχτά, με τους τίτλους ως σελιδοδείκτες. Οι τύποι, τα διαγράμματα mermaid και τα γραφήματα σχεδιάζονται· οι σημειώσεις βρίσκονται στο τέλος.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:ocideck/widgets/mermaid_render_host.dart';
+// ignore: depend_on_referenced_packages
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 /// Covers the parts of MermaidRenderService that DON'T need a live WebView / JS
 /// engine: the test-mode guards, the host-request notifier, the empty-source
@@ -24,6 +26,36 @@ void main() {
     // Empty and whitespace-only sources short-circuit before any host/JS use.
     expect(await service.render(''), isNull);
     expect(await service.render('   \n\t'), isNull);
+  });
+
+  test('zonder WebView-platform levert een render meteen niets op', () async {
+    // Windows en Linux hebben geen `webview_flutter`-implementatie (pubspec.lock
+    // kent android, wkwebview en web). Daar blijft `WebViewPlatform.instance`
+    // null — net als hier in een unit-test.
+    //
+    // Vóór de vraag `isAvailable` liep dit anders af: de dienst vroeg om de
+    // host, die bouwde een `WebViewController` op een platform zonder
+    // implementatie, en dát gooide. Een documentexport met één mermaid-diagram
+    // sloopte daarmee op Windows, terwijl hij het daarvóór gewoon deed. In deze
+    // test zou hij zonder de vraag eeuwig blijven wachten — de job komt de
+    // wachtrij nooit uit zonder controller.
+    final service = MermaidRenderService.instance;
+    expect(WebViewPlatform.instance, isNull, reason: 'anders meet dit niets');
+    expect(service.isAvailable, isFalse);
+    expect(
+      await service
+          .render('graph TD; A-->B;')
+          .timeout(const Duration(seconds: 5), onTimeout: () => 'BLEEF HANGEN'),
+      isNull,
+    );
+    expect(
+      await service
+          .renderMath('E = mc^2')
+          .timeout(const Duration(seconds: 5), onTimeout: () => 'BLEEF HANGEN'),
+      isNull,
+    );
+    // En de host is niet gevraagd: er valt niets te monteren.
+    expect(service.hostNeeded.value, isFalse);
   });
 
   testWidgets('requestHost zet de vlag ná het frame, niet erin', (

@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/privacy_disposition.dart';
 import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/log.dart';
 
 /// De compacte export-dialoog voor een plat-Markdown-**document**
 /// (DOCUMENT_MODE.md §11.2). Kiest het **profiel** (Volledig / Geredigeerd) en
@@ -61,14 +62,34 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
 
   bool _busy = false;
   String? _writtenPath;
+  String? _failure;
 
   Future<void> _run() async {
-    setState(() => _busy = true);
-    final path = await widget.onExport(_profile, _format);
+    setState(() {
+      _busy = true;
+      _failure = null;
+    });
+    String? path;
+    String? failure;
+    try {
+      path = await widget.onExport(_profile, _format);
+    } catch (error) {
+      // Benoemd en niet kaal, en breder dan `on Exception`: de bestandskiezer
+      // op web gooit een `ArgumentError`, en dat is een `Error` — een vangst op
+      // `Exception` had hem laten lopen en de knop alsnog laten draaien.
+      // Zónder deze vangst blijft de knop eeuwig draaien. Precies wat er op web
+      // gebeurt: de bestandskiezer daar kan geen pad kiezen zonder de bytes al
+      // te hebben en gooit een `ArgumentError`, en dan komt `setState` hieronder
+      // nooit. Een export die niet lukt hoort dat te zeggen, niet te blijven
+      // hangen.
+      failure = error.toString();
+      logError('DocumentExport: export mislukt', error);
+    }
     if (!mounted) return;
     setState(() {
       _busy = false;
       _writtenPath = path;
+      _failure = failure;
     });
   }
 
@@ -127,9 +148,41 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
         _profileSelector(l10n),
         const SizedBox(height: 12),
         _formatSelector(l10n),
+        if (_failure != null) ...[
+          const SizedBox(height: 12),
+          _failureNote(l10n, _failure!),
+        ],
       ],
     );
   }
+
+  /// Zegt dat het niet gelukt is, en wat de gebruiker nu kan doen.
+  ///
+  /// De technische reden staat erbij maar niet vooraan: die is voor wie hem
+  /// nodig heeft, en de eerste zin is voor wie gewoon verder wil.
+  Widget _failureNote(AppLocalizations l10n, String detail) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    decoration: BoxDecoration(
+      color: AppTheme.warningBg,
+      borderRadius: BorderRadius.circular(6),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d(
+            'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.',
+          ),
+          style: TextStyle(fontSize: 11.5, color: AppTheme.warningFg),
+        ),
+        const SizedBox(height: 4),
+        SelectableText(
+          detail,
+          style: TextStyle(fontSize: 10.5, color: AppTheme.slate500),
+        ),
+      ],
+    ),
+  );
 
   Widget _honestNote(AppLocalizations l10n) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
