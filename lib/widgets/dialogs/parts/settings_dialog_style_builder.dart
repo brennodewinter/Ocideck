@@ -29,6 +29,53 @@ double _settingsDialogWidth({
     )
     .toDouble();
 
+/// De sectiekoppen per vlak, in de taal waarin ze op het scherm staan.
+///
+/// Bestaat voor de sprong vanuit het zoekveld en vanuit het kwaliteitspaneel:
+/// die wijzen een sectie of een kleurveld aan, en dat anker hangt in de boom
+/// van één vlak. Landde de sprong op het verkeerde vlak, dan stond de
+/// instelling er niet en gebeurde er zichtbaar niets.
+///
+/// Top-level, net als de twee lijsten hieronder: het zijn afleidingen uit de
+/// taal en uit vaste veldnamen, niet uit de staat van het dialoog. Ze hoeven de
+/// klasse dus niet te belasten — die zit tegen haar plafond.
+Map<_StyleSurface, List<String>> _surfaceSections(AppLocalizations l10n) => {
+  _StyleSurface.general: [
+    l10n.d('Lettertype'),
+    l10n.d('Kleuren'),
+    l10n.d('Checklist'),
+    l10n.d('Tabel'),
+    l10n.d('Broncode'),
+    l10n.d('Severity (bevindingen)'),
+  ],
+  _StyleSurface.document: [l10n.d('Tekst'), l10n.d('Logo'), l10n.d('Koptekst')],
+  _StyleSurface.presentation: [
+    l10n.d('Footer'),
+    l10n.d('Laatste slide'),
+    l10n.d('Animatie'),
+  ],
+};
+
+/// De kleurvelden die alléén op een dia bestaan. Alle andere ankers zitten in
+/// het algemene vlak; een lijst van de uitzonderingen blijft klein en is dus de
+/// kant die je bijhoudt.
+const _slideOnlyThemeFields = {
+  'titleBackgroundColor',
+  'titleTextColor',
+  'sectionBackgroundColor',
+  'logoPath',
+};
+
+/// Dezelfde uitzonderingslijst, maar voor het documentvlak: de kopkleur van een
+/// document, en de tekst- en achtergrondkleur van de kop- en voetband. Zonder
+/// deze lijst landde een contrastsprong op het algemene vlak, waar het veld
+/// niet staat — en dan lijkt de melding nergens heen te wijzen.
+const _documentOnlyThemeFields = {
+  'documentHeadingColor',
+  'documentBandTextColor',
+  'documentBandBackgroundColor',
+};
+
 /// Zelfstandige bouwer: houdt de omvang van de instellingen-State begrensd.
 class _DocumentStyleBuilder {
   const _DocumentStyleBuilder(this.owner);
@@ -72,52 +119,6 @@ class _DocumentStyleBuilder {
   List<Widget> _slideLogoChildren() => owner._slideLogoChildren();
   List<Widget> _footerSettings() => owner._footerSettings();
   List<Widget> _closingSlideSettings() => owner._closingSlideSettings();
-
-  /// De sectiekoppen per vlak, in de taal waarin ze op het scherm staan.
-  ///
-  /// Bestaat voor de sprong vanuit het zoekveld en vanuit het kwaliteitspaneel:
-  /// die wijzen een sectie of een kleurveld aan, en dat anker hangt in de boom
-  /// van één vlak. Landde de sprong op het verkeerde vlak, dan stond de
-  /// instelling er niet en gebeurde er zichtbaar niets.
-  Map<_StyleSurface, List<String>> _surfaceSections(AppLocalizations l10n) => {
-    _StyleSurface.general: [
-      l10n.d('Lettertype'),
-      l10n.d('Kleuren'),
-      l10n.d('Checklist'),
-      l10n.d('Tabel'),
-      l10n.d('Broncode'),
-      l10n.d('Severity (bevindingen)'),
-    ],
-    _StyleSurface.document: [
-      l10n.d('Tekst'),
-      l10n.d('Logo'),
-      l10n.d('Koptekst'),
-    ],
-    _StyleSurface.presentation: [
-      l10n.d('Footer'),
-      l10n.d('Laatste slide'),
-      l10n.d('Animatie'),
-    ],
-  };
-
-  /// De kleurvelden die alléén op een dia bestaan. Alle andere ankers zitten in
-  /// het algemene vlak; een lijst van de uitzonderingen blijft klein en is dus
-  /// de kant die je bijhoudt.
-  static const _slideOnlyThemeFields = {
-    'titleBackgroundColor',
-    'titleTextColor',
-    'sectionBackgroundColor',
-    'logoPath',
-  };
-
-  /// Dezelfde uitzonderingslijst, maar voor het documentvlak: de kopkleur van
-  /// een document en de tekstkleur van de kop- en voetband. Zonder deze lijst
-  /// landde een contrastsprong op het algemene vlak, waar het veld niet staat —
-  /// en dan lijkt de melding nergens heen te wijzen.
-  static const _documentOnlyThemeFields = {
-    'documentHeadingColor',
-    'documentBandTextColor',
-  };
 
   /// Het vlak dat nu getekend wordt: de keuze van de gebruiker, tenzij een
   /// sprong een anker aanwijst dat op een ander vlak hangt.
@@ -611,13 +612,20 @@ class _DocumentStyleBuilder {
         contrast,
       ),
     ),
-    _styleColorField(
-      l10n.d('Achtergrond'),
-      _themeProfile.effectiveDocumentBandBackgroundColor,
-      (value) => _themeProfile = _themeProfile.copyWith(
-        documentBandBackgroundColor: value,
+    _themeColorAnchor(
+      'documentBandBackgroundColor',
+      _colorWithContrastWarning(
+        _styleColorField(
+          l10n.d('Achtergrond'),
+          _themeProfile.effectiveDocumentBandBackgroundColor,
+          (value) => _themeProfile = _themeProfile.copyWith(
+            documentBandBackgroundColor: value,
+          ),
+          key: const Key('document-band-background-color'),
+        ),
+        'documentBandBackgroundColor',
+        contrast,
       ),
-      key: const Key('document-band-background-color'),
     ),
     CheckboxListTile(
       key: const Key('document-page-numbers'),
