@@ -97,6 +97,30 @@ void main() {
       },
     );
 
+    test('the .md entry writes an actual value, and Explorer hears it', () {
+      // ValueType none creates only the KEY and silently drops ValueName —
+      // Explorer reads value NAMES under OpenWithProgids, so the promised
+      // "Open with…" entry never existed. Shipped broken once; never again.
+      expect(
+        RegExp(
+          r'OpenWithProgids";\s*ValueType:\s*string;\s*'
+          r'ValueName:\s*"\{#ProgId\}"',
+        ).hasMatch(iss),
+        isTrue,
+        reason:
+            'The .md OpenWithProgids line no longer writes a named value — '
+            'ValueType none is documented to ignore ValueName/ValueData, so '
+            'the "Open with…" entry silently never appears.',
+      );
+      expect(
+        iss.contains('ChangesAssociations=yes'),
+        isTrue,
+        reason:
+            'Without ChangesAssociations=yes Explorer is never told to '
+            'refresh, so .ocideck keeps a blank icon until re-login.',
+      );
+    });
+
     test('both open the file that was double-clicked, via the same exe', () {
       expect(reg.contains(r'ocideck.exe\" \"%1\"'), isTrue);
       expect(
@@ -327,7 +351,12 @@ void main() {
     });
 
     test('the mirror builds the installer before it zips the bundle', () {
-      final buildAt = mirrorYaml.indexOf('build_windows_installer.sh');
+      // Anchored on the run line, not the first occurrence: the filename also
+      // appears in comments above the step, and an index into a comment lets
+      // someone reorder the real steps without tripping this test.
+      final buildAt = mirrorYaml.indexOf(
+        'bash scripts/build_windows_installer.sh',
+      );
       final zipAt = mirrorYaml.indexOf('7z a -tzip');
       expect(buildAt, greaterThan(-1), reason: 'The mirror never builds it.');
       expect(
@@ -453,8 +482,93 @@ void main() {
               'hands off to its .tmp child, so ISCC can be called before the '
               'install has finished.',
         );
+        // The shell fix is worthless if the flags themselves go missing: rc1
+        // hung precisely because Inno Setup received no recognised silent-mode
+        // flag. /SUPPRESSMSGBOXES keeps an error from raising a dialog.
+        for (final vlag in ["'/VERYSILENT'", "'/SUPPRESSMSGBOXES'"]) {
+          expect(
+            stap.group(0),
+            contains(vlag),
+            reason:
+                '\$vlag is gone from the ArgumentList — the installer opens a '
+                'window on the runner and the job hangs until its timeout.',
+          );
+        }
+        expect(
+          stap.group(0),
+          contains('-PassThru'),
+          reason:
+              'Start-Process never throws on a non-zero child, and '
+              '/SUPPRESSMSGBOXES suppresses exactly the error dialogs — '
+              'without -PassThru plus an ExitCode check, a failed install '
+              'reads as success and only ISCC fails later, pointing the '
+              'wrong way.',
+        );
+        // The comparison itself, not merely the word: the throw message also
+        // says "ExitCode", so a disabled `if (\$false)` would still contain it.
+        expect(
+          stap.group(0),
+          contains('ExitCode -ne 0'),
+          reason: 'The -PassThru result is never actually compared.',
+        );
       },
     );
+
+    test('the mirror job cannot hang forever or race itself', () {
+      expect(
+        RegExp(r'timeout-minutes:\s*\d+').hasMatch(mirrorYaml),
+        isTrue,
+        reason:
+            'The Windows job has no timeout-minutes: rc1 proved a hang runs '
+            'into the six-hour default, blocking every retrigger meanwhile.',
+      );
+      expect(
+        mirrorYaml.contains('concurrency:'),
+        isTrue,
+        reason:
+            'No concurrency group: the tag push and the forge dispatch can '
+            'start two runs that race to upload the same two release assets.',
+      );
+      expect(
+        mirrorYaml.contains('cancel-in-progress: false'),
+        isTrue,
+        reason:
+            'Duplicate runs must QUEUE, not cancel: a cancelled run leaves on '
+            'the tag exactly the conclusion windows-ophalen once misread as a '
+            'failed build.',
+      );
+      expect(
+        mirrorYaml.contains('Alleen op een tag'),
+        isTrue,
+        reason:
+            'workflow_dispatch accepts any ref; without the tag guard a '
+            'manual run on main publishes a fake "main" release on the mirror.',
+      );
+    });
+
+    test('the forge judges a run only if it belongs to this attempt', () {
+      expect(
+        forgeYaml.contains('created_at'),
+        isTrue,
+        reason:
+            'run_status no longer reads created_at, so the conclusion of an '
+            'OLDER run on the same tag can kill a fresh retrigger — the exact '
+            'rc1-recovery trap: a cancelled run sat on the tag, and the '
+            'retrigger read it as "the build failed" within seconds.',
+      );
+      expect(
+        forgeYaml.contains('T0='),
+        isTrue,
+        reason: 'The attempt anchor (T0) is gone from windows-ophalen.',
+      );
+      expect(
+        RegExp(r'--max-time \d+').hasMatch(forgeYaml),
+        isTrue,
+        reason:
+            'The polling curls run without --max-time: one blackholed '
+            'connection hangs the 45-minute loop for hours.',
+      );
+    });
 
     test('the release notes offer it and say it does not update itself', () {
       // In the downloads table specifically, not merely somewhere in the
