@@ -15,6 +15,8 @@
 // OciWacht — zie `writeDocumentExport` in `document_export_service.dart`, dat
 // als `SurfaceKind.audience` geregistreerd staat.
 
+import 'dart:typed_data';
+
 /// Eén stuk tekst met zijn opmaak, binnen een alinea, kop of tabelcel.
 ///
 /// Bewust plat en niet genest: Markdown staat `**vet _en cursief_**` toe, en een
@@ -245,3 +247,31 @@ class PdfVerbatimBlock extends PdfBlock {
 /// aanduiding bij; de tekst daarvan komt van de aanroeper, want deze laag kent
 /// geen vertalingen.
 enum PdfVerbatimKind { math, mermaid, chart }
+
+/// Een blok dat OciDeck wél kon tekenen, klaar om in de PDF te zetten.
+///
+/// Twee vormen, en de keuze is niet willekeurig. Een **SVG** gaat als vector het
+/// bestand in: scherp op elke zoomstand, klein, en de tekst erin blijft tekst —
+/// wat er in een document dat zijn tekstlaag als belofte draagt nogal toe doet.
+/// Een **afbeelding** is de terugval voor wat alleen als pixels bestaat.
+///
+/// Wat geen van beide vormen kan opleveren, valt terug op de bron
+/// ([PdfVerbatimBlock]). Die terugval is geen nette bijkomstigheid maar de kern:
+/// een diagram dat niet getekend kan worden mag de export nooit afbreken, en
+/// mag al helemaal geen leeg vlak achterlaten.
+class PdfRenderedGraphic {
+  const PdfRenderedGraphic.svg(String this.svg) : image = null;
+
+  const PdfRenderedGraphic.image(Uint8List this.image) : svg = null;
+
+  /// De vectorvorm, als die er is.
+  final String? svg;
+
+  /// De beeldvorm, als die er is.
+  final Uint8List? image;
+
+  @override
+  String toString() => svg != null
+      ? 'PdfRenderedGraphic.svg(${svg!.length} tekens)'
+      : 'PdfRenderedGraphic.image(${image!.length} bytes)';
+}

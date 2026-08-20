@@ -79,6 +79,7 @@ Future<Uint8List> buildDocumentPdf(
   required DocumentPdfFonts fonts,
   required String Function(PdfVerbatimKind kind) verbatimLabel,
   Map<String, Uint8List> images = const {},
+  Map<String, PdfRenderedGraphic> graphics = const {},
   DocumentPdfChrome chrome = const DocumentPdfChrome(),
   PageSizeSpec? pageSize,
   PageMargins? pageMargins,
@@ -101,6 +102,7 @@ Future<Uint8List> buildDocumentPdf(
       headings: headings,
       verbatimLabel: verbatimLabel,
       images: images,
+      graphics: graphics,
       chrome: chrome,
       size: size,
       margins: margins,
@@ -117,6 +119,7 @@ Future<Uint8List> buildDocumentPdf(
     headings: headings,
     verbatimLabel: verbatimLabel,
     images: images,
+    graphics: graphics,
     chrome: chrome,
     size: size,
     margins: margins,
@@ -133,6 +136,7 @@ Future<Uint8List> _render(
   required List<PdfHeadingEntry> headings,
   required String Function(PdfVerbatimKind kind) verbatimLabel,
   required Map<String, Uint8List> images,
+  required Map<String, PdfRenderedGraphic> graphics,
   required DocumentPdfChrome chrome,
   required PageSizeSpec size,
   required PageMargins margins,
@@ -168,8 +172,10 @@ Future<Uint8List> _render(
     verbatimLabel: verbatimLabel,
     // Ruim onder de bladspiegel: de banden boven en onder eten er nog van, en
     // een afbeelding die net niet past kan `MultiPage` nergens kwijt.
+    maxImageWidth: pageTheme.pageFormat.availableWidth,
     maxImageHeight: pageTheme.pageFormat.availableHeight * 0.8,
     images: images,
+    graphics: graphics,
     headingPages: headingPages,
     onHeadingLaidOut: onHeadingLaidOut,
   );
