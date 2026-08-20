@@ -23,6 +23,7 @@ import '../services/classification_enforcement_policy.dart';
 import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
+import 'parts/document_export_pdf_support.dart';
 import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
 import '../services/export_metadata.dart';
@@ -365,7 +366,34 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       // de interfacetaal, want de converter kent geen vertalingen.
       footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
       footnotesTitle: l10n.d('Noten'),
+      // Alleen de PDF-tak gebruikt deze drie; de andere formaten laten ze
+      // ongemoeid liggen.
+      pdfLabels: documentPdfLabels(l10n),
+      pdfFallbackFont: format == DocumentExportFormat.pdf
+          ? await loadPdfFallbackFont()
+          : null,
+      onPdfUnsupportedCharacters: (runes) =>
+          _warnAboutUnsupportedCharacters(runes, l10n),
       outputPath: outputPath,
+    );
+  }
+
+  /// Meld dat de PDF is geschreven maar tekens mist.
+  ///
+  /// Het bestand staat er wél — daarom een waarschuwing en geen fout. Wat níet
+  /// mag gebeuren is dat de gebruiker het zelf moet ontdekken: een teken dat
+  /// geen enkele snede kent verdwijnt uit de tekstlaag, en dus ook uit zoeken,
+  /// kopiëren en de voorleessoftware.
+  void _warnAboutUnsupportedCharacters(
+    Set<int> runes,
+    AppLocalizations l10n,
+  ) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(unsupportedCharactersMessage(l10n, runes)),
+        duration: const Duration(seconds: 8),
+      ),
     );
   }
 

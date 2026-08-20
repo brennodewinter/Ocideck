@@ -127,15 +127,6 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
         _profileSelector(l10n),
         const SizedBox(height: 12),
         _formatSelector(l10n),
-        const SizedBox(height: 12),
-        // Geen ingebouwde PDF-knop (§11.2/§11.5): OciDeck levert toegankelijke
-        // HTML; de gebruiker maakt er zelf een PDF van via zijn browser.
-        Text(
-          l10n.d(
-            'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).',
-          ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
       ],
     );
   }
@@ -223,28 +214,23 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 6),
-        SegmentedButton<DocumentExportFormat>(
-          segments: [
-            ButtonSegment(
-              value: DocumentExportFormat.md,
-              label: Text(l10n.d('Markdown (.md)')),
-              icon: const Icon(Icons.description_outlined, size: 15),
-            ),
-            ButtonSegment(
-              value: DocumentExportFormat.html,
-              label: Text(l10n.d('HTML')),
-              icon: const Icon(Icons.public_outlined, size: 15),
-            ),
-            ButtonSegment(
-              value: DocumentExportFormat.latex,
-              label: Text(l10n.d('LaTeX (.tex)')),
-              icon: const Icon(Icons.science_outlined, size: 15),
-            ),
+        // Bewust een Wrap met keuzechips en geen SegmentedButton: vier keuzes
+        // passen daar niet meer naast elkaar in de 460 punten van deze dialoog,
+        // en al helemaal niet in een taal met langere woorden of bij 200%
+        // tekstgrootte. Een Wrap breekt dan gewoon af naar de volgende regel.
+        Wrap(
+          spacing: 8,
+          runSpacing: 4,
+          children: [
+            for (final option in _formatOptions)
+              ChoiceChip(
+                label: Text(l10n.d(option.label)),
+                avatar: Icon(option.icon, size: 15),
+                selected: _format == option.format,
+                visualDensity: VisualDensity.compact,
+                onSelected: (_) => setState(() => _format = option.format),
+              ),
           ],
-          selected: {_format},
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-          onSelectionChanged: (s) => setState(() => _format = s.first),
         ),
         const SizedBox(height: 4),
         Text(switch (_format) {
@@ -253,6 +239,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           ),
           DocumentExportFormat.html => l10n.d(
             'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.',
+          ),
+          DocumentExportFormat.pdf => l10n.d(
+            'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.',
           ),
           DocumentExportFormat.latex => l10n.d(
             'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.',
@@ -287,3 +276,39 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
     ],
   );
 }
+
+/// Eén keuze in de formaatkiezer.
+///
+/// Als lijst en niet als reeks `ChoiceChip`-regels, zodat de volgorde en de
+/// bewoording op één plek staan — de dialoog leest hem gewoon af.
+class _FormatOption {
+  const _FormatOption(this.format, this.label, this.icon);
+
+  final DocumentExportFormat format;
+
+  /// De Nederlandse brontekst; de dialoog haalt er de vertaling bij.
+  final String label;
+  final IconData icon;
+}
+
+/// De formaten in de volgorde waarin ze worden aangeboden: eerst de platte
+/// tekst waar het hele product op staat, dan wat een ontvanger leest, dan de
+/// zetweg voor wie zelf verder wil.
+const _formatOptions = [
+  _FormatOption(
+    DocumentExportFormat.md,
+    'Markdown (.md)',
+    Icons.description_outlined,
+  ),
+  _FormatOption(DocumentExportFormat.html, 'HTML', Icons.public_outlined),
+  _FormatOption(
+    DocumentExportFormat.pdf,
+    'PDF',
+    Icons.picture_as_pdf_outlined,
+  ),
+  _FormatOption(
+    DocumentExportFormat.latex,
+    'LaTeX (.tex)',
+    Icons.science_outlined,
+  ),
+];
