@@ -1635,6 +1635,8 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Eksportimine ei õnnestunud. Sinu dokument on muutmata; proovi uuesti või vali muu vorming.',
+  'Thema documentkop': 'Teema dokumendi pealkiri',
+  'Thema documentband': 'Teema päis/jalus',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Päris tekstiga PDF: seda saab valida, sealt otsida ja ette lugeda, pealkirjad on järjehoidjad. Valemid, mermaid-diagrammid ja graafikud joonistatakse välja; märkused on lõpus.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

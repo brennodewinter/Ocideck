@@ -188,7 +188,7 @@ class SlideQualityAnalyzer {
     String? projectPath,
   }) {
     final issues = <SlideQualityIssue>[];
-    _checkThemeContrast(theme, issues);
+    _checkThemeContrast(theme, issues, minContrastRatio: minContrastRatio);
     _checkFooterContrast(theme, issues);
     _checkChecklistContrast(theme, slides, issues);
     for (var i = 0; i < slides.length; i++) {
@@ -254,90 +254,6 @@ class SlideQualityAnalyzer {
       issues: issues,
     );
     return issues;
-  }
-
-  void _checkThemeContrast(ThemeProfile theme, List<SlideQualityIssue> issues) {
-    void addPairIssue({
-      required String label,
-      required String foreground,
-      required String background,
-      required bool largeText,
-      String? field,
-    }) {
-      final ratio = hexContrastRatio(foreground, background);
-      if (ratio == null) return;
-      final aaThreshold = largeText
-          ? math.min(kWcagAaLargeText, minContrastRatio)
-          : minContrastRatio;
-      if (ratio >= aaThreshold) return;
-
-      final severity = !largeText && ratio < kWcagCriticalBodyText
-          ? MarkdownValidationSeverity.error
-          : MarkdownValidationSeverity.warning;
-
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: kDeckWideSlideIndex,
-          kind: SlideQualityIssueKind.themeContrast,
-          category: SlideQualityCategory.contrast,
-          severity: severity,
-          field: field,
-          args: {
-            'label': label,
-            'ratio': ratio.toStringAsFixed(1),
-            'threshold': aaThreshold.toStringAsFixed(1),
-            'largeText': largeText.toString(),
-          },
-        ),
-      );
-    }
-
-    addPairIssue(
-      label: 'Thema bodytekst',
-      foreground: theme.textColor,
-      background: theme.slideBackgroundColor,
-      largeText: false,
-      field: 'textColor',
-    );
-    addPairIssue(
-      label: 'Thema titel',
-      foreground: theme.titleTextColor,
-      background: theme.titleBackgroundColor,
-      largeText: true,
-      field: 'titleTextColor',
-    );
-    addPairIssue(
-      label: 'Thema tabeltekst',
-      foreground: theme.tableTextColor,
-      background: theme.slideBackgroundColor,
-      largeText: false,
-      field: 'tableTextColor',
-    );
-    addPairIssue(
-      label: 'Thema tabelkop',
-      foreground: theme.tableHeaderTextColor,
-      background: theme.tableHeaderBackgroundColor,
-      largeText: true,
-      field: 'tableHeaderTextColor',
-    );
-    addPairIssue(
-      label: 'Thema code',
-      foreground: theme.codeTextColor,
-      background: theme.codeBackgroundColor,
-      // Code op een slide staat op displayformaat (grote tekst), net als de
-      // titel en de tabelkop hierboven: dus de WCAG-drempel voor grote tekst
-      // (3.0). Code die zó dicht is dat het klein zou renderen, wordt al apart
-      // gevangen door de density-check (kind codeDensityHigh).
-      largeText: true,
-      field: 'codeTextColor',
-    );
-    addPairIssue(
-      label: 'Thema accent',
-      foreground: theme.accentColor,
-      background: theme.slideBackgroundColor,
-      largeText: false,
-      field: 'accentColor',
-    );
   }
 
   void _checkFooterContrast(
@@ -824,6 +740,138 @@ class _SlideIssuesMemo {
         index: newIndex,
         issues: reindexed,
       );
+}
+
+/// Toetst elk voor-/achtergrondpaar dat een *thema* vastlegt, los van de
+/// dia's die het deck draagt: een profiel met onleesbare kleuren is onleesbaar
+/// nog voor er iets op staat. Top-level zodat de reeks niet tegen het
+/// klasseplafond van [SlideQualityAnalyzer] telt — zie [_addSlidePairIssue].
+void _checkThemeContrast(
+  ThemeProfile theme,
+  List<SlideQualityIssue> issues, {
+  required double minContrastRatio,
+}) {
+  void addPairIssue({
+    required String label,
+    required String foreground,
+    required String background,
+    required bool largeText,
+    String? field,
+  }) {
+    final ratio = hexContrastRatio(foreground, background);
+    if (ratio == null) return;
+    final aaThreshold = largeText
+        ? math.min(kWcagAaLargeText, minContrastRatio)
+        : minContrastRatio;
+    if (ratio >= aaThreshold) return;
+
+    final severity = !largeText && ratio < kWcagCriticalBodyText
+        ? MarkdownValidationSeverity.error
+        : MarkdownValidationSeverity.warning;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: kDeckWideSlideIndex,
+        kind: SlideQualityIssueKind.themeContrast,
+        category: SlideQualityCategory.contrast,
+        severity: severity,
+        field: field,
+        args: {
+          'label': label,
+          'ratio': ratio.toStringAsFixed(1),
+          'threshold': aaThreshold.toStringAsFixed(1),
+          'largeText': largeText.toString(),
+        },
+      ),
+    );
+  }
+
+  addPairIssue(
+    label: 'Thema bodytekst',
+    foreground: theme.textColor,
+    background: theme.slideBackgroundColor,
+    largeText: false,
+    field: 'textColor',
+  );
+  addPairIssue(
+    label: 'Thema titel',
+    foreground: theme.titleTextColor,
+    background: theme.titleBackgroundColor,
+    largeText: true,
+    field: 'titleTextColor',
+  );
+  addPairIssue(
+    label: 'Thema tabeltekst',
+    foreground: theme.tableTextColor,
+    background: theme.slideBackgroundColor,
+    largeText: false,
+    field: 'tableTextColor',
+  );
+  addPairIssue(
+    label: 'Thema tabelkop',
+    foreground: theme.tableHeaderTextColor,
+    background: theme.tableHeaderBackgroundColor,
+    largeText: true,
+    field: 'tableHeaderTextColor',
+  );
+  addPairIssue(
+    label: 'Thema code',
+    foreground: theme.codeTextColor,
+    background: theme.codeBackgroundColor,
+    // Code op een slide staat op displayformaat (grote tekst), net als de
+    // titel en de tabelkop hierboven: dus de WCAG-drempel voor grote tekst
+    // (3.0). Code die zó dicht is dat het klein zou renderen, wordt al apart
+    // gevangen door de density-check (kind codeDensityHigh).
+    largeText: true,
+    field: 'codeTextColor',
+  );
+  addPairIssue(
+    label: 'Thema accent',
+    foreground: theme.accentColor,
+    background: theme.slideBackgroundColor,
+    largeText: false,
+    field: 'accentColor',
+  );
+  // Hieronder de twee paren die alléén op het documentvlak bestaan: de
+  // koppen van een document, en de kop- en voetband om het blad. Zonder deze
+  // toetsen kon een stijl ze onleesbaar zetten terwijl elke dia-kleur wél
+  // gemeten werd — en dan zwijgt zowel het kwaliteitspaneel als de
+  // stijlinstelling.
+  //
+  // Beide kijken alleen naar een kleur die de auteur zélf zette. Laat hij ze
+  // leeg, dan valt het documentvlak terug op `textColor`, `accentColor` en
+  // `slideBackgroundColor` — precies de paren die 'Thema bodytekst' en 'Thema
+  // accent' hierboven al meten, en op een stríktere drempel. Een tweede
+  // melding over datzelfde paar zou alleen ruis zijn in het paneel.
+  if (theme.documentHeadingColor != null) {
+    addPairIssue(
+      label: 'Thema documentkop',
+      foreground: theme.effectiveDocumentHeadingColor,
+      background: theme.slideBackgroundColor,
+      // Een documentkop staat op displayformaat: een h1 rendert op 27
+      // beeldpunten, ruim boven de WCAG-grens voor grote tekst. Diepere
+      // niveaus zakken naar de body-maat, maar dit ene veld is de kleur die
+      // álle niveaus delen — een strengere drempel zou een leesbare h1
+      // afkeuren om een h5 die je zelden ziet.
+      largeText: true,
+      field: 'documentHeadingColor',
+    );
+  }
+  if (theme.documentBandTextColor != null ||
+      theme.documentBandBackgroundColor != null) {
+    addPairIssue(
+      label: 'Thema documentband',
+      foreground: theme.effectiveDocumentBandTextColor,
+      background: theme.effectiveDocumentBandBackgroundColor,
+      // De band zet kop-, voettekst en paginanummer op 12 beeldpunten (9 in
+      // de compacte weergave): gewone tekst, dus de volle drempel.
+      largeText: false,
+      // Ook wanneer alleen de achtergrond is gezet landt de melding op de
+      // tekstkleur — hetzelfde anker dat 'Thema bodytekst' kiest, en het veld
+      // waar de auteur de leesbaarheid herstelt.
+      field: 'documentBandTextColor',
+    );
+  }
 }
 
 /// Toetst een voorgrond/achtergrond-paar op contrast en meldt het als het onder

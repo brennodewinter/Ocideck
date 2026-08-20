@@ -1671,6 +1671,8 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Níor éirigh leis an easpórtáil. Tá do cháipéis gan athrú; bain triail eile as nó roghnaigh formáid eile.',
+  'Thema documentkop': 'Ceannteideal cáipéise an téama',
+  'Thema documentband': 'Ceanntásc/buntásc an téama',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF le fíorthéacs: is féidir é a roghnú, a chuardach agus a léamh os ard, agus na ceannteidil ina leabharmharcanna. Tarraingítear foirmlí, léaráidí mermaid agus cairteacha; tá na nótaí ar chúl.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

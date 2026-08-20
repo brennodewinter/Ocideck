@@ -1658,6 +1658,8 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Exportul nu a reușit. Documentul dumneavoastră este neschimbat; încercați din nou sau alegeți alt format.',
+  'Thema documentkop': 'Titlu document temă',
+  'Thema documentband': 'Antet/subsol temă',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Un PDF cu text adevărat: se poate selecta, căuta și citi cu voce tare, iar titlurile devin marcaje. Formulele, diagramele mermaid și graficele sunt desenate; notele sunt la sfârșit.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

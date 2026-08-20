@@ -280,6 +280,22 @@ void main() {
     await tester.pump(const Duration(seconds: 4));
   });
 
+  testWidgets('een sprong naar de documentkop opent het documentvlak', (
+    tester,
+  ) async {
+    await openWithField(tester, 'documentHeadingColor');
+    expect(find.byKey(const Key('document-style-editor')), findsOneWidget);
+    await tester.pump(const Duration(seconds: 4));
+  });
+
+  testWidgets('een sprong naar de bandtekst opent het documentvlak', (
+    tester,
+  ) async {
+    await openWithField(tester, 'documentBandTextColor');
+    expect(find.byKey(const Key('document-style-editor')), findsOneWidget);
+    await tester.pump(const Duration(seconds: 4));
+  });
+
   testWidgets('het gekozen logo staat naast de logokiezer', (tester) async {
     final container = await openAppearanceTab(tester);
     addTearDown(container.dispose);

@@ -16,8 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 /// Since the style tab splits into three surfaces, a colour only renders on the
 /// surface it belongs to: the title pair on **Presentatie**, the accent on
-/// **Algemeen**. So each test opens the style tab and picks that surface — a
-/// warning that only fires on a surface nobody opens is no warning at all.
+/// **Algemeen**, the heading and header/footer band on **Document**. So each
+/// test opens the style tab and picks that surface — a warning that only fires
+/// on a surface nobody opens is no warning at all.
 const _warning = 'Te weinig contrast met de achtergrond — mogelijk onleesbaar.';
 
 /// A fully-specified, legible profile. Individual colours are overridden per
@@ -37,8 +38,14 @@ Map<String, Object?> _profile({
   String sectionBackground = '#14213D',
   String codeBackground = '#14213D',
   String codeText = '#FFFFFF',
+  String? documentHeading,
+  String? documentBandText,
+  String? documentBandBackground,
 }) => {
   'name': 'Test',
+  'documentHeadingColor': ?documentHeading,
+  'documentBandTextColor': ?documentBandText,
+  'documentBandBackgroundColor': ?documentBandBackground,
   'slideBackgroundColor': slideBackground,
   'textColor': text,
   'accentColor': accent,
@@ -138,6 +145,59 @@ void main() {
     await _openWith(tester, _profile(accent: '#F5F5F5'));
 
     expect(find.text(_warning, skipOffstage: false), findsOneWidget);
+
+    await _teardown(tester);
+  });
+
+  // De twee kleuren die alléén op het documentvlak bestaan. Ze stonden buiten de
+  // reeks van de analyzer, dus kon een stijl een kop of een band onleesbaar
+  // zetten zonder dat hier iets verscheen — terwijl elke dia-kleur wél een
+  // waarschuwing kreeg.
+  testWidgets('een te bleke documentkop waarschuwt op het documentvlak', (
+    tester,
+  ) async {
+    // 2,85:1 op wit: onder de drempel voor grote tekst, waar een documentkop op
+    // staat.
+    await _openWith(
+      tester,
+      _profile(documentHeading: '#999999'),
+      surface: 'document',
+    );
+
+    expect(find.text(_warning, skipOffstage: false), findsOneWidget);
+    expect(find.text('2.8:1', skipOffstage: false), findsOneWidget);
+
+    await _teardown(tester);
+  });
+
+  testWidgets('een onleesbare kop-/voetband waarschuwt op het documentvlak', (
+    tester,
+  ) async {
+    await _openWith(
+      tester,
+      _profile(documentBandText: '#3A3A3A', documentBandBackground: '#222222'),
+      surface: 'document',
+    );
+
+    expect(find.text(_warning, skipOffstage: false), findsOneWidget);
+
+    await _teardown(tester);
+  });
+
+  testWidgets('een leesbaar documentvlak toont geen waarschuwing', (
+    tester,
+  ) async {
+    await _openWith(
+      tester,
+      _profile(
+        documentHeading: '#003399',
+        documentBandText: '#222222',
+        documentBandBackground: '#FFFFFF',
+      ),
+      surface: 'document',
+    );
+
+    expect(find.text(_warning, skipOffstage: false), findsNothing);
 
     await _teardown(tester);
   });

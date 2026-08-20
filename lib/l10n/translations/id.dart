@@ -1641,6 +1641,8 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Ekspor tidak berhasil. Dokumen Anda tidak berubah; coba lagi atau pilih format lain.',
+  'Thema documentkop': 'Judul dokumen tema',
+  'Thema documentband': 'Header/footer dokumen tema',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF dengan teks sungguhan: dapat dipilih, dicari, dan dibacakan, dengan judul sebagai penanda. Rumus, diagram mermaid, dan grafik digambar; catatan ada di bagian belakang.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

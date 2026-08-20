@@ -1644,6 +1644,8 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'De Export het nöd klappet. Dis Dokumänt isch unveränderet; probier\'s nomal oder nimm es anders Format.',
+  'Thema documentkop': 'Thema-Dokumänt-Überschrift',
+  'Thema documentband': 'Thema-Chopf-/Fuessziile',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Es PDF mit echtem Text: markierbar, durchsuechbar und vorläsbar, mit de Überschrifte als Läsezeiche. Formle, Mermaid-Diagramm und Grafike wärded zeichnet; d Aamerkige stönd hinde.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

@@ -1661,6 +1661,8 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Експортирането не успя. Документът ви е непроменен; опитайте отново или изберете друг формат.',
+  'Thema documentkop': 'Заглавие на документ на темата',
+  'Thema documentband': 'Колонтитул на темата',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF с истински текст: може да се маркира, търси и чете на глас, а заглавията са отметки. Формулите, mermaid диаграмите и графиките се изчертават; бележките са накрая.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
