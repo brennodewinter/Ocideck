@@ -4659,20 +4659,58 @@ your source. The export dialog asks two things:
 - **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
   that opens in any Markdown reader; **HTML** is one self-contained, accessible
   HTML file that opens in any browser without internet, with its tables, maths,
-  Mermaid diagrams and charts rendered in place; **LaTeX (`.tex`)** is a LaTeX
+  Mermaid diagrams and charts rendered in place; **PDF** is a finished sheet with
+  a real text layer (see below); **LaTeX (`.tex`)** is a LaTeX
   `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
   images are referenced by relative path (keep them next to the `.tex`). Compile
   with `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
   2026-08-07.)*
 
-There is no built-in PDF button. For a **PDF**, open the exported HTML and print
-it from your browser (*Save as PDF*). OciDeck makes no promise about the
-accessibility of a PDF produced that way — that is the browser's doing — but the
-HTML it exports is built to be accessible. A `---`
-[page break](#inserting-a-page-break) you placed becomes a real new sheet at this
-print step (and a `\newpage` in the LaTeX export), while the on-screen HTML stays
-continuous; the same holds for each chapter heading when *New chapter on a new
-page* is on.
+#### The PDF
+
+**The text stays text.** This is not the same PDF a *presentation* exports. A
+deck's PDF is one bitmap per slide: nothing to select, nothing to search, nothing
+a screen reader can read. A document's PDF is **typeset** — the text is real
+text, so you can select and copy it, search it, and have it read aloud, and the
+headings become the bookmark tree that most readers show in a side panel.
+*(Added 2026-08-20.)*
+
+**What it carries.** The page size, margins and bleed you set under *Settings →
+General → Export page setup*; the header and footer band from the style profile,
+including the page number and the classification marking; your `---`
+[page breaks](#inserting-a-page-break) as real new sheets, and a new sheet per
+chapter when *New chapter on a new page* is on; the table of contents with page
+numbers and clickable entries; links you can click; images embedded in the file
+itself.
+
+**What it does not carry.** A PDF has no JavaScript, so what the HTML export
+draws with one cannot be drawn here: **formulas, Mermaid diagrams and charts
+appear as their source**, in a monospaced block with a line above saying what it
+is. That is a deliberate choice over an empty space — whoever needs the diagram
+at least sees what should be there. A formula on its own lines (`$$…$$`) becomes
+such a block; a formula inside a sentence (`$…$`) stays in that sentence, exactly
+as you wrote it. If you need them rendered, export to HTML
+(which draws all three) or to LaTeX (which typesets the maths natively).
+**Footnotes go at the back**, not at the foot of the sheet: which note lands on
+which page only becomes clear after the layout, and by then the sheet is set. The
+LaTeX export does put them at the foot.
+
+**The typeface is not your document's typeface.** The PDF is set in a serif or a
+sans depending on which one your style profile uses, but not in the exact font —
+the same line the LaTeX export draws, which also leaves the typeface to the
+compiler. What travels is the structure and the page setup, not the typography of
+this screen.
+
+**Characters outside Latin-1.** Polish, Greek and Cyrillic are covered by a
+bundled font. Anything beyond that — Chinese, Japanese, Korean, Arabic, Hebrew —
+has no shape available and would vanish from the text layer without complaint.
+It does not vanish quietly: the export says which characters could not be set and
+suggests HTML or LaTeX, both of which handle them.
+
+The HTML route to a PDF still works, and is still the one to take when you want
+the diagrams rendered: open the exported HTML and print it from your browser
+(*Save as PDF*). OciDeck makes no promise about the accessibility of a PDF
+produced that way — that is the browser's doing.
 
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.

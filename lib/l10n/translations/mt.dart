@@ -1658,6 +1658,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Dawn il-karattri ma setgħux jitqiegħdu fil-PDF u huma nieqsa minnu:',
+  'Diagram (bron)': 'Dijagramma (sors)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF b\'test veru: tista\' tagħżlu, tfittex fih u jinqara b\'leħen għoli, bit-titli bħala marki tal-paġni. Il-formuli, id-dijagrammi mermaid u l-graffs jidhru bħala sors; in-noti jinsabu fl-aħħar.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Esporta f\'HTML jew LaTeX jekk suppost ikunu fid-dokument.',
+  'Formule (bron)': 'Formula (sors)',
+  'Grafiek (bron)': 'Graff (sors)',
   'Bijvoorbeeld project-id': 'Pereżempju project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokument jista’ jkun fih mhux aktar minn 100 qasam personalizzat.',
@@ -1968,8 +1977,6 @@ const _dutchSourceAddMt = <String, String>{
   'Naar document converteren?': 'Tikkonverti f\'dokument?',
   'Naar presentatie converteren?': 'Tikkonverti f\'preżentazzjoni?',
   'Nog een export': 'Esportazzjoni oħra',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Għall-PDF: iftaħ l-HTML u ipprintja permezz tal-browser tiegħek (Issejvja bħala PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Għaċ-ċirku usa\': dak kollu li ssib il-verifika jitneħħa. Il-fajl jieħu "-irrediġuti" fl-isem.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

@@ -1617,6 +1617,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'PDF-Daq Deghvammey lumuchlaHbe\' \'ej pa\' luHutlh:',
+  'Diagram (bron)': 'nab (mung)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF ghajbogh mu\'mey teH: DawIvlaH, DanejlaH, DalaDlaH je; per moHaqmey. mI\'mey, mermaid nabmey, HaSta je mung rur; ghItlhmey retlh luDab.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'HTML pagh LaTeX yIngeH, nugh ghItlhDaq luDabnISchugh.',
+  'Formule (bron)': 'mI\'nagh (mung)',
+  'Grafiek (bron)': 'HaSta (mung)',
   'Bijvoorbeeld project-id': 'project-id \'oH ghantoH',
   'Een document kan maximaal 100 vrije velden bevatten.':
       '100 Deghmey le\' neH ngaSlaH Degh.',
@@ -1922,8 +1931,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Naar document converteren?': 'ghItlhDaq choH\'a\'?',
   'Naar presentatie converteren?': 'cha\'navDaq choH\'a\'?',
   'Nog een export': 'latlh ngeH',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDFvaD: HTML poSmoH \'ej browserlIj lo\'taHvIS ta\'moH (PDF choqmeH).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'qutlhmey law\' teqlu\': Hoch SammeH ghItlh teq. pong "-So\'lu\'" Hev ghItlh.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

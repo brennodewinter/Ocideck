@@ -1640,6 +1640,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Teh znakov ni bilo mogoče staviti v PDF in v njem manjkajo:',
+  'Diagram (bron)': 'Diagram (vir)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF s pravim besedilom: lahko ga označite, po njem iščete in ga preberete na glas, naslovi pa so zaznamki. Formule, diagrami mermaid in grafikoni so v njem kot izvorna koda; opombe so zadaj.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Izvozite v HTML ali LaTeX, če sodijo v dokument.',
+  'Formule (bron)': 'Formula (vir)',
+  'Grafiek (bron)': 'Grafikon (vir)',
   'Bijvoorbeeld project-id': 'Na primer project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokument lahko vsebuje največ 100 polj po meri.',
@@ -1947,8 +1956,6 @@ const _dutchSourceAddSl = <String, String>{
   'Naar document converteren?': 'Pretvoriti v dokument?',
   'Naar presentatie converteren?': 'Pretvoriti v predstavitev?',
   'Nog een export': 'Še en izvoz',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Za PDF: odprite HTML in natisnite prek brskalnika (Shrani kot PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Za širši krog: vse, kar preverjanje najde, se odstrani. Datoteka dobi "-prekrito" v imenu.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

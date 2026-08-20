@@ -1654,6 +1654,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Hae notae in PDF exprimi non potuerunt et ibi desunt:',
+  'Diagram (bron)': 'Diagramma (fons)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF cum vero textu: eligi, quaeri et recitari potest, titulis pro indicibus. Formulae, diagrammata mermaid et descriptiones ut fons apparent; notae in fine sunt.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'In HTML vel LaTeX exporta, si in documento esse debent.',
+  'Formule (bron)': 'Formula (fons)',
+  'Grafiek (bron)': 'Descriptio (fons)',
   'Bijvoorbeeld project-id': 'Exempli gratia project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Documentum summum 100 campos proprios continere potest.',
@@ -1963,8 +1972,6 @@ const _dutchSourceAddLa = <String, String>{
   'Naar document converteren?': 'In documentum convertere?',
   'Naar presentatie converteren?': 'In praesentationem convertere?',
   'Nog een export': 'Alia exportatio',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pro PDF: HTML aperi et per navigatrum tuum imprime (Ut PDF serva).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pro ampliore circulo: omnia quae examen invenit auferuntur. Fasciculus "-obliterata" in nomine accipit.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

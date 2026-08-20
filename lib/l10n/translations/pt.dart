@@ -1667,6 +1667,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Estes caracteres não puderam ser compostos no PDF e faltam nele:',
+  'Diagram (bron)': 'Diagrama (origem)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Um PDF com texto verdadeiro: selecionável, pesquisável e legível em voz alta, com os títulos como marcadores. As fórmulas, os diagramas mermaid e os gráficos surgem como código-fonte; as notas ficam no fim.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exporte para HTML ou LaTeX se devem constar do documento.',
+  'Formule (bron)': 'Fórmula (origem)',
+  'Grafiek (bron)': 'Gráfico (origem)',
   'Bijvoorbeeld project-id': 'Por exemplo project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Um documento pode conter no máximo 100 campos personalizados.',
@@ -1976,8 +1985,6 @@ const _dutchSourceAddPt = <String, String>{
   'Naar document converteren?': 'Converter em documento?',
   'Naar presentatie converteren?': 'Converter em apresentação?',
   'Nog een export': 'Outra exportação',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Para PDF: abra o HTML e imprima através do navegador (Guardar como PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Para o círculo mais alargado: tudo o que a verificação encontra é removido. O ficheiro recebe "-ocultados" no nome.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

@@ -1659,6 +1659,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Тези знаци не можаха да бъдат набрани в PDF и липсват в него:',
+  'Diagram (bron)': 'Диаграма (източник)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF с истински текст: може да се маркира, търси и чете на глас, а заглавията са отметки. Формулите, mermaid диаграмите и графиките са в него като изходен код; бележките са накрая.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Експортирайте към HTML или LaTeX, ако трябва да са в документа.',
+  'Formule (bron)': 'Формула (източник)',
+  'Grafiek (bron)': 'Графика (източник)',
   'Bijvoorbeeld project-id': 'Например project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Един документ може да съдържа най-много 100 потребителски полета.',
@@ -1966,8 +1975,6 @@ const _dutchSourceAddBg = <String, String>{
   'Naar document converteren?': 'Преобразуване в документ?',
   'Naar presentatie converteren?': 'Преобразуване в презентация?',
   'Nog een export': 'Още един експорт',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'За PDF: отворете HTML и отпечатайте през браузъра си (Запази като PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'За по-широкия кръг: всичко, което проверката открие, се премахва. Файлът получава "-заличени" в името.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

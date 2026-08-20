@@ -1646,6 +1646,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Šių ženklų nepavyko surinkti PDF faile ir jų jame trūksta:',
+  'Diagram (bron)': 'Diagrama (šaltinis)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF su tikru tekstu: jį galima žymėti, jame ieškoti ir jį perskaityti balsu, o antraštės tampa žymelėmis. Formulės, mermaid diagramos ir grafikai jame pateikiami kaip pirminis tekstas; pastabos yra gale.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Eksportuokite į HTML arba LaTeX, jei jie turi būti dokumente.',
+  'Formule (bron)': 'Formulė (šaltinis)',
+  'Grafiek (bron)': 'Grafikas (šaltinis)',
   'Bijvoorbeeld project-id': 'Pavyzdžiui, project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokumente gali būti ne daugiau kaip 100 pasirinktinių laukų.',
@@ -1954,8 +1963,6 @@ const _dutchSourceAddLt = <String, String>{
   'Naar document converteren?': 'Konvertuoti į dokumentą?',
   'Naar presentatie converteren?': 'Konvertuoti į pateiktį?',
   'Nog een export': 'Dar vienas eksportas',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF: atverkite HTML ir spausdinkite per naršyklę (Įrašyti kaip PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Platesniam ratui: viskas, ką randa patikra, pašalinama. Failo pavadinime atsiranda "-paslėpta".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

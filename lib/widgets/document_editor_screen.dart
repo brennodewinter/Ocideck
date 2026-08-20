@@ -23,6 +23,7 @@ import '../services/classification_enforcement_policy.dart';
 import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
+import 'parts/document_export_pdf_support.dart';
 import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
 import '../services/export_metadata.dart';
@@ -270,102 +271,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     await DocumentExportDialog.show(
       context,
       privacyChecksEnabled: settings.privacyChecksEnabled,
-      onExport: (profile, format) => _writeExport(profile, format),
-    );
-  }
-
-  /// Bouwt de exportbundel voor het gekozen [profile], laat een pad kiezen met
-  /// de juiste extensie, en schrijft de export weg. Geeft het geschreven pad
-  /// terug, of `null` als de gebruiker de bestandskiezer wegklikte of het
-  /// schrijven mislukte.
-  Future<String?> _writeExport(
-    PrivacyExportProfile profile,
-    DocumentExportFormat format,
-  ) async {
-    final state = ref.read(documentProvider);
-    final document = state.document;
-    if (document == null) return null;
-    // Exporteer de *body* (zonder het stijl-frontmatter-blok): de `theme:`-regel
-    // is een OciDeck-aanwijzing, geen inhoud, en de stijl reist als het gekozen
-    // profiel mee via `theme:` hieronder — niet als tekst in de uitvoer.
-    final body = document.body;
-    final filePath = state.filePath;
-    final projectPath = filePath == null ? null : p.dirname(filePath);
-    final settings = ref.read(settingsProvider);
-    final exportSetup = effectiveDocumentPageSetup(settings, document.source);
-    final fileService = ref.read(fileServiceProvider);
-    final imageService = ref.read(imageServiceProvider);
-    final markdownService = ref.read(markdownServiceProvider);
-    final l10n = context.l10n;
-    final title = document.fields['title'] ?? _documentTitle(body, filePath);
-    final effectiveTheme =
-        resolveDocumentStyleProfile(settings, document.styleName) ??
-        fileService.activeProfileFor(projectPath: projectPath);
-
-    // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
-    // uitvoerpad de rauwe bron nog aan.
-    final bundle = await buildDocumentExportBundle(
-      body,
-      projectPath: projectPath,
-      profile: profile,
-      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
-      regions: settings.privacyRegions,
-      disabledRules: settings.privacyDisabledRules,
-      markdownService: markdownService,
-      title: title,
-      theme: effectiveTheme,
-      tlp: document.tlp,
-      fields: document.fields,
-    );
-
-    final classificationDecision =
-        ClassificationEnforcementPolicy.fromAppSettings(
-          settings,
-        ).evaluate(bundle.audience.deck.tlp);
-    if (!classificationDecision.allowed) {
-      if (!mounted) return null;
-      showErrorSnackBar(
-        ScaffoldMessenger.of(context),
-        l10n,
-        exportBlockMessage(l10n, classificationDecision) ?? '',
-      );
-      return null;
-    }
-
-    final outputPath = await _pickDocumentExportPath(
-      l10n,
-      format: format,
-      profile: profile,
-      title: bundle.audience.deck.title,
-      projectPath: projectPath,
-    );
-    if (outputPath == null) return null;
-
-    return writeDocumentExport(
-      bundle,
-      format,
-      html: MarpHtmlService(),
-      enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
-        settings,
-      ),
-      metadata: ExportDocumentMetadata(language: l10n.languageCode),
-      embedImage: (src) => _embedDocumentExportImage(
-        src,
-        imageService: imageService,
-        logoPath: effectiveTheme.logoPath,
-        projectPath: projectPath,
-      ),
-      chapterPageBreak: settings.documentChapterPageBreak,
-      // De export volgt dezelfde volgorde als het scherm: draagt het document
-      // zelf een paginaopmaak, dan geldt die.
-      cropMarks: settings.documentCropMarks,
-      pageSize: exportSetup.size!,
-      pageMargins: exportSetup.margins!,
-      // Waar de noten komen staat in het document zelf; de kop erboven komt uit
-      // de interfacetaal, want de converter kent geen vertalingen.
-      footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
-      footnotesTitle: l10n.d('Noten'),
-      outputPath: outputPath,
+      onExport: (profile, format) =>
+          _writeDocumentExport(ref, context, profile, format),
     );
   }
 
@@ -745,6 +652,112 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     activeIndex: _activeOutlineIndex,
     onCollapsedChanged: (v) => setState(() => _outlineCollapsed = v),
     onSelect: _scrollToHeading,
+  );
+}
+
+/// Bouwt de exportbundel voor het gekozen [profile], laat een pad kiezen met
+/// de juiste extensie, en schrijft de export weg. Geeft het geschreven pad
+/// terug, of `null` als de gebruiker de bestandskiezer wegklikte of het
+/// schrijven mislukte.
+Future<String?> _writeDocumentExport(
+  WidgetRef ref,
+  BuildContext context,
+  PrivacyExportProfile profile,
+  DocumentExportFormat format,
+) async {
+  final state = ref.read(documentProvider);
+  final document = state.document;
+  if (document == null) return null;
+  // Exporteer de *body* (zonder het stijl-frontmatter-blok): de `theme:`-regel
+  // is een OciDeck-aanwijzing, geen inhoud, en de stijl reist als het gekozen
+  // profiel mee via `theme:` hieronder — niet als tekst in de uitvoer.
+  final body = document.body;
+  final filePath = state.filePath;
+  final projectPath = filePath == null ? null : p.dirname(filePath);
+  final settings = ref.read(settingsProvider);
+  final exportSetup = effectiveDocumentPageSetup(settings, document.source);
+  final fileService = ref.read(fileServiceProvider);
+  final imageService = ref.read(imageServiceProvider);
+  final markdownService = ref.read(markdownServiceProvider);
+  final l10n = context.l10n;
+  final messenger = ScaffoldMessenger.of(context);
+  final title = document.fields['title'] ?? _documentTitle(body, filePath);
+  final effectiveTheme =
+      resolveDocumentStyleProfile(settings, document.styleName) ??
+      fileService.activeProfileFor(projectPath: projectPath);
+
+  // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
+  // uitvoerpad de rauwe bron nog aan.
+  final bundle = await buildDocumentExportBundle(
+    body,
+    projectPath: projectPath,
+    profile: profile,
+    ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+    regions: settings.privacyRegions,
+    disabledRules: settings.privacyDisabledRules,
+    markdownService: markdownService,
+    title: title,
+    theme: effectiveTheme,
+    tlp: document.tlp,
+    fields: document.fields,
+  );
+
+  final classificationDecision =
+      ClassificationEnforcementPolicy.fromAppSettings(
+        settings,
+      ).evaluate(bundle.audience.deck.tlp);
+  if (!classificationDecision.allowed) {
+    if (!context.mounted) return null;
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      l10n,
+      exportBlockMessage(l10n, classificationDecision) ?? '',
+    );
+    return null;
+  }
+
+  final outputPath = await _pickDocumentExportPath(
+    l10n,
+    format: format,
+    profile: profile,
+    title: bundle.audience.deck.title,
+    projectPath: projectPath,
+  );
+  if (outputPath == null) return null;
+
+  return writeDocumentExport(
+    bundle,
+    format,
+    html: MarpHtmlService(),
+    enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
+      settings,
+    ),
+    metadata: ExportDocumentMetadata(language: l10n.languageCode),
+    embedImage: (src) => _embedDocumentExportImage(
+      src,
+      imageService: imageService,
+      logoPath: effectiveTheme.logoPath,
+      projectPath: projectPath,
+    ),
+    chapterPageBreak: settings.documentChapterPageBreak,
+    // De export volgt dezelfde volgorde als het scherm: draagt het document
+    // zelf een paginaopmaak, dan geldt die.
+    cropMarks: settings.documentCropMarks,
+    pageSize: exportSetup.size!,
+    pageMargins: exportSetup.margins!,
+    // Waar de noten komen staat in het document zelf; de kop erboven komt uit
+    // de interfacetaal, want de converter kent geen vertalingen.
+    footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
+    footnotesTitle: l10n.d('Noten'),
+    // Alleen de PDF-tak gebruikt deze drie; de andere formaten laten ze
+    // ongemoeid liggen.
+    pdfLabels: documentPdfLabels(l10n),
+    pdfFallbackFont: format == DocumentExportFormat.pdf
+        ? await loadPdfFallbackFont()
+        : null,
+    onPdfUnsupportedCharacters: (runes) =>
+        warnAboutUnsupportedCharacters(messenger, l10n, runes),
+    outputPath: outputPath,
   );
 }
 

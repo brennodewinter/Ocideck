@@ -671,6 +671,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Estos caracteres no se han podido componer en el PDF y faltan en él:',
+  'Diagram (bron)': 'Diagrama (fuente)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Un PDF con texto real: seleccionable, consultable y legible en voz alta, con los títulos como marcadores. Las fórmulas, los diagramas mermaid y los gráficos aparecen como código fuente; las notas van al final.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exporta a HTML o LaTeX si deben aparecer en el documento.',
+  'Formule (bron)': 'Fórmula (fuente)',
+  'Grafiek (bron)': 'Gráfico (fuente)',
   'Bijvoorbeeld project-id': 'Por ejemplo project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Un documento puede contener como máximo 100 campos personalizados.',
@@ -980,8 +989,6 @@ const _dutchSourceAddEs = {
   'Naar document converteren?': '¿Convertir a documento?',
   'Naar presentatie converteren?': '¿Convertir a presentación?',
   'Nog een export': 'Otra exportación',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Para PDF: abre el HTML e imprime desde tu navegador (Guardar como PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Para el círculo más amplio: se elimina todo lo que encuentra la comprobación. El archivo recibe "-redactados" en el nombre.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

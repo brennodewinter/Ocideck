@@ -1638,6 +1638,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Šīs zīmes nevarēja iekļaut PDF failā, un tajā to trūkst:',
+  'Diagram (bron)': 'Diagramma (avots)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF ar īstu tekstu: to var iezīmēt, tajā var meklēt un to var nolasīt skaļi, bet virsraksti kļūst par grāmatzīmēm. Formulas, mermaid diagrammas un grafiki tajā ir kā pirmkods; piezīmes ir beigās.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Eksportējiet uz HTML vai LaTeX, ja tām jābūt dokumentā.',
+  'Formule (bron)': 'Formula (avots)',
+  'Grafiek (bron)': 'Grafiks (avots)',
   'Bijvoorbeeld project-id': 'Piemēram, project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokumentā var būt ne vairāk kā 100 pielāgotu lauku.',
@@ -1945,8 +1954,6 @@ const _dutchSourceAddLv = <String, String>{
   'Naar document converteren?': 'Pārvērst par dokumentu?',
   'Naar presentatie converteren?': 'Pārvērst par prezentāciju?',
   'Nog een export': 'Vēl viens eksports',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF iegūšanai: atveriet HTML un drukājiet caur pārlūku (Saglabāt kā PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Plašākam lokam: viss, ko atrod pārbaude, tiek noņemts. Faila nosaukumam pievieno "-aizklāti".',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

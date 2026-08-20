@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import '../models/privacy_disposition.dart';
 import '../models/deck.dart';
@@ -18,14 +19,15 @@ import 'latex/latex_preamble.dart';
 import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
+import 'pdf/document_pdf_export.dart';
 import 'privacy/privacy_own_identity.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
-/// LaTeX `article`. Alle drie dragen de geredigeerde
-/// body — nooit de rauwe bron.
-enum DocumentExportFormat { md, html, latex }
+/// LaTeX `article`, en een PDF met een echte tekstlaag. Alle vier dragen de
+/// geredigeerde body — nooit de rauwe bron.
+enum DocumentExportFormat { md, html, latex, pdf }
 
 /// De veilige voorgestelde bestandsnaam voor een documentexport.
 ///
@@ -43,6 +45,7 @@ String suggestedDocumentExportFileName({
     DocumentExportFormat.md => 'md',
     DocumentExportFormat.html => 'html',
     DocumentExportFormat.latex => 'tex',
+    DocumentExportFormat.pdf => 'pdf',
   };
   final tag = profile == PrivacyExportProfile.redacted
       ? redactedLabel
@@ -155,6 +158,9 @@ Future<String?> writeDocumentExport(
   PageMargins? pageMargins,
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
   String footnotesTitle = 'Noten',
+  DocumentPdfLabels? pdfLabels,
+  ByteData? pdfFallbackFont,
+  void Function(Set<int> runes)? onPdfUnsupportedCharacters,
   required String outputPath,
 }) async {
   if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
@@ -263,7 +269,72 @@ Future<String?> writeDocumentExport(
           '${articlePreamble(meta, theme: theme, documentFields: chromeFields, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
       await writeStringAtomic(File(outputPath), tex);
       return outputPath;
+    case DocumentExportFormat.pdf:
+      return _writeDocumentPdf(
+        bundle,
+        labels:
+            pdfLabels ??
+            DocumentPdfLabels(
+              footnotesTitle: footnotesTitle,
+              mathLabel: 'math',
+              mermaidLabel: 'mermaid',
+              chartLabel: 'chart',
+            ),
+        fallbackFont: pdfFallbackFont,
+        embedImage: embedImage,
+        chapterPageBreak: chapterPageBreak,
+        cropMarks: cropMarks,
+        pageSize: pageSize,
+        pageMargins: pageMargins,
+        metadata: exportMetadata,
+        onUnsupportedCharacters: onPdfUnsupportedCharacters,
+        outputPath: outputPath,
+      );
   }
+}
+
+/// Zet het document als PDF en schrijft het atomisch weg.
+///
+/// Anders dan de PDF van een deck — één bitmap per dia, zonder tekstlaag — wordt
+/// deze *gezet*: de tekst is te selecteren, te doorzoeken en voor te lezen, en de
+/// koppen staan in de bladwijzerboom. Zie `lib/services/pdf/` en
+/// DOCUMENT_MODE.md §6.
+///
+/// Een **audience**-oppervlak, net als [writeDocumentExport] zelf: het neemt een
+/// [ExportBundle] en geen `Deck`, zodat wat de deur uit gaat de geprojecteerde
+/// (geredigeerde) body is. Het staat als zodanig geregistreerd in
+/// `tool/check_audience_boundary.dart`.
+Future<String?> _writeDocumentPdf(
+  ExportBundle bundle, {
+  required DocumentPdfLabels labels,
+  required String outputPath,
+  ByteData? fallbackFont,
+  HtmlImageResolver? embedImage,
+  bool chapterPageBreak = false,
+  bool cropMarks = false,
+  PageSizeSpec? pageSize,
+  PageMargins? pageMargins,
+  ExportDocumentMetadata? metadata,
+  void Function(Set<int> runes)? onUnsupportedCharacters,
+}) async {
+  final result = await buildDocumentExportPdf(
+    bundle,
+    labels: labels,
+    fallbackFont: fallbackFont,
+    embedImage: embedImage,
+    chapterPageBreak: chapterPageBreak,
+    cropMarks: cropMarks,
+    pageSize: pageSize,
+    pageMargins: pageMargins,
+    metadata: metadata,
+  );
+  await writeBytesAtomic(File(outputPath), result.bytes);
+  // Een teken dat geen enkele snede kent verdwijnt uit de tekstlaag zonder dat
+  // het bestand ergens klaagt. De schil hoort dat te kunnen melden.
+  if (!result.isComplete) {
+    onUnsupportedCharacters?.call(result.unsupportedCharacters);
+  }
+  return outputPath;
 }
 
 Map<String, String> _documentChromeFields(Deck deck) => {

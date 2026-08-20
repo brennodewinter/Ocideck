@@ -1639,6 +1639,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Karakter berikut tidak dapat disusun dalam PDF dan hilang di dalamnya:',
+  'Diagram (bron)': 'Diagram (sumber)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF dengan teks sungguhan: dapat dipilih, dicari, dan dibacakan, dengan judul sebagai penanda. Rumus, diagram mermaid, dan grafik muncul sebagai sumber; catatan ada di bagian belakang.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Ekspor ke HTML atau LaTeX jika karakter itu memang harus ada dalam dokumen.',
+  'Formule (bron)': 'Rumus (sumber)',
+  'Grafiek (bron)': 'Grafik (sumber)',
   'Bijvoorbeeld project-id': 'Misalnya project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokumen dapat memuat paling banyak 100 bidang khusus.',
@@ -1948,8 +1957,6 @@ const _dutchSourceAddId = <String, String>{
   'Naar document converteren?': 'Konversi ke dokumen?',
   'Naar presentatie converteren?': 'Konversi ke presentasi?',
   'Nog een export': 'Ekspor lagi',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Untuk PDF: buka HTML lalu cetak lewat browser Anda (Simpan sebagai PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Untuk kalangan yang lebih luas: semua yang ditemukan pemeriksaan dihapus. Berkas mendapat "-diredaksi" pada namanya.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

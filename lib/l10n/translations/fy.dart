@@ -674,6 +674,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Dizze tekens koenen net yn de PDF set wurde en ûntbrekke deryn:',
+  'Diagram (bron)': 'Diagram (boarne)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'In PDF mei echte tekst: te selektearjen, te trochsykjen en foar te lêzen, mei de kopkes as blêdwizers. Formules, mermaid-diagrammen en grafiken steane deryn as boarne; de noaten steane efteryn.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Eksportearje nei HTML of LaTeX as se yn it dokumint hearre.',
+  'Formule (bron)': 'Formule (boarne)',
+  'Grafiek (bron)': 'Grafyk (boarne)',
   'Bijvoorbeeld project-id': 'Bygelyks project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'In dokumint kin maksimaal 100 frije fjilden befetsje.',
@@ -983,8 +992,6 @@ const _dutchSourceAddFy = {
   'Naar document converteren?': 'Nei dokumint konvertearje?',
   'Naar presentatie converteren?': 'Nei presintaasje konvertearje?',
   'Nog een export': 'Noch in eksport',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Foar PDF: iepenje de HTML en print fia jo browser (Bewarje as PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Foar de bredere rûnte: alles wat de kontrôle fynt giet derút. It bestân krijt "-redigearre" yn de namme.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

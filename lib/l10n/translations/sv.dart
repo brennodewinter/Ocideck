@@ -1638,6 +1638,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Dessa tecken kunde inte sättas i PDF:en och saknas i den:',
+  'Diagram (bron)': 'Diagram (källa)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'En PDF med riktig text: markerbar, sökbar och uppläsbar, med rubrikerna som bokmärken. Formler, mermaid-diagram och grafer står som källtext; noterna står sist.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportera till HTML eller LaTeX om de hör hemma i dokumentet.',
+  'Formule (bron)': 'Formel (källa)',
+  'Grafiek (bron)': 'Graf (källa)',
   'Bijvoorbeeld project-id': 'Till exempel project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Ett dokument kan innehålla högst 100 anpassade fält.',
@@ -1946,8 +1955,6 @@ const _dutchSourceAddSv = <String, String>{
   'Naar document converteren?': 'Konvertera till dokument?',
   'Naar presentatie converteren?': 'Konvertera till presentation?',
   'Nog een export': 'Ännu en export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'För PDF: öppna HTML:en och skriv ut via din webbläsare (Spara som PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'För den bredare kretsen: allt som kontrollen hittar tas bort. Filen får "-maskade" i namnet.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

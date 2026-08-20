@@ -26,7 +26,9 @@ Widget _app(Widget home) => MaterialApp(
 
 void main() {
   group('DocumentExportDialog', () {
-    testWidgets('toont de eerlijke bewoording en de PDF-regel', (tester) async {
+    testWidgets('toont de eerlijke bewoording en biedt PDF aan', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _app(
           Builder(
@@ -48,10 +50,44 @@ void main() {
         find.textContaining('Je byte-getrouwe origineel bewaar je met Opslaan'),
         findsOneWidget,
       );
+      // PDF is een eigen formaat geworden, geen verwijzing naar de browser meer.
+      expect(find.text('PDF'), findsOneWidget);
       expect(
-        find.textContaining('Voor PDF: open de HTML en print via je browser'),
-        findsOneWidget,
+        find.textContaining('open de HTML en print via je browser'),
+        findsNothing,
       );
+    });
+
+    testWidgets('geeft PDF door als gekozen formaat', (tester) async {
+      DocumentExportFormat? gotFormat;
+      await tester.pumpWidget(
+        _app(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () => DocumentExportDialog.show(
+                context,
+                privacyChecksEnabled: true,
+                onExport: (_, format) async {
+                  gotFormat = format;
+                  return '/tmp/rapport-volledig.pdf';
+                },
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('PDF'));
+      await tester.pumpAndSettle();
+      // De toelichting hoort eerlijk te zeggen wat de PDF wél en niet draagt.
+      expect(find.textContaining('Een PDF met echte tekst'), findsOneWidget);
+      await tester.tap(find.text('Exporteren…'));
+      await tester.pumpAndSettle();
+
+      expect(gotFormat, DocumentExportFormat.pdf);
+      expect(find.textContaining('rapport-volledig.pdf'), findsOneWidget);
     });
 
     testWidgets('geeft het gekozen profiel en formaat door bij bevestigen', (

@@ -1641,6 +1641,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Tyto znaky se nepodařilo vysázet do PDF a chybějí v něm:',
+  'Diagram (bron)': 'Diagram (zdroj)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF se skutečným textem: lze jej označovat, prohledávat i předčítat, nadpisy slouží jako záložky. Vzorce, diagramy mermaid a grafy jsou v něm jako zdroj; poznámky jsou vzadu.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportujte do HTML nebo LaTeXu, pokud do dokumentu patří.',
+  'Formule (bron)': 'Vzorec (zdroj)',
+  'Grafiek (bron)': 'Graf (zdroj)',
   'Bijvoorbeeld project-id': 'Například project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Dokument může obsahovat nejvýše 100 vlastních polí.',
@@ -1948,8 +1957,6 @@ const _dutchSourceAddCs = <String, String>{
   'Naar document converteren?': 'Převést na dokument?',
   'Naar presentatie converteren?': 'Převést na prezentaci?',
   'Nog een export': 'Další export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pro PDF: otevřete HTML a vytiskněte přes prohlížeč (Uložit jako PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pro širší okruh: vše, co kontrola najde, se odstraní. Soubor dostane "-začerněno" v názvu.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

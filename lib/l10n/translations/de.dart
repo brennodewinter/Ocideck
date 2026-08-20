@@ -674,6 +674,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Diese Zeichen konnten im PDF nicht gesetzt werden und fehlen darin:',
+  'Diagram (bron)': 'Diagramm (Quelle)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Ein PDF mit echtem Text: markierbar, durchsuchbar und vorlesbar, mit den Überschriften als Lesezeichen. Formeln, Mermaid-Diagramme und Grafiken stehen darin als Quelltext; die Anmerkungen stehen hinten.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportieren Sie nach HTML oder LaTeX, wenn sie ins Dokument gehören.',
+  'Formule (bron)': 'Formel (Quelle)',
+  'Grafiek (bron)': 'Grafik (Quelle)',
   'Bijvoorbeeld project-id': 'Zum Beispiel project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Ein Dokument kann höchstens 100 benutzerdefinierte Felder enthalten.',
@@ -983,8 +992,6 @@ const _dutchSourceAddDe = {
   'Naar document converteren?': 'In Dokument umwandeln?',
   'Naar presentatie converteren?': 'In Präsentation umwandeln?',
   'Nog een export': 'Weiterer Export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Für PDF: Öffne das HTML und drucke über deinen Browser (Als PDF speichern).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Für den weiteren Kreis: alles, was die Prüfung findet, wird entfernt. Die Datei erhält "-geschwärzt" im Namen.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

@@ -1641,6 +1641,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Ezeket a karaktereket nem sikerült a PDF-be szedni, és hiányoznak belőle:',
+  'Diagram (bron)': 'Diagram (forrás)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'PDF valódi szöveggel: kijelölhető, kereshető és felolvasható, a címsorok pedig könyvjelzők. A képletek, a mermaid-diagramok és a grafikonok forrásként szerepelnek benne; a jegyzetek hátul vannak.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportáljon HTML-be vagy LaTeX-be, ha benne kell lenniük a dokumentumban.',
+  'Formule (bron)': 'Képlet (forrás)',
+  'Grafiek (bron)': 'Grafikon (forrás)',
   'Bijvoorbeeld project-id': 'Például project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Egy dokumentum legfeljebb 100 egyéni mezőt tartalmazhat.',
@@ -1951,8 +1960,6 @@ const _dutchSourceAddHu = <String, String>{
   'Naar document converteren?': 'Átalakítás dokumentummá?',
   'Naar presentatie converteren?': 'Átalakítás bemutatóvá?',
   'Nog een export': 'Újabb exportálás',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'PDF-hez: nyisd meg a HTML-t, és nyomtass a böngésződből (Mentés PDF-ként).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'A szélesebb körnek: minden eltűnik, amit az ellenőrzés talál. A fájl neve "-kitakarva" toldalékot kap.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

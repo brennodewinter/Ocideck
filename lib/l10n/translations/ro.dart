@@ -1656,6 +1656,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Aceste caractere nu au putut fi culese în PDF și lipsesc din el:',
+  'Diagram (bron)': 'Diagramă (sursă)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Un PDF cu text adevărat: se poate selecta, căuta și citi cu voce tare, iar titlurile devin marcaje. Formulele, diagramele mermaid și graficele apar ca sursă; notele sunt la sfârșit.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportați în HTML sau LaTeX dacă trebuie să apară în document.',
+  'Formule (bron)': 'Formulă (sursă)',
+  'Grafiek (bron)': 'Grafic (sursă)',
   'Bijvoorbeeld project-id': 'De exemplu project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Un document poate conține cel mult 100 de câmpuri personalizate.',
@@ -1964,8 +1973,6 @@ const _dutchSourceAddRo = <String, String>{
   'Naar document converteren?': 'Conversie în document?',
   'Naar presentatie converteren?': 'Conversie în prezentare?',
   'Nog een export': 'Încă un export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pentru PDF: deschide HTML-ul și tipărește din browser (Salvează ca PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pentru cercul mai larg: tot ce găsește verificarea este eliminat. Fișierul primește "-redactate" în nume.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

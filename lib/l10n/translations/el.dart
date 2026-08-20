@@ -1664,6 +1664,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Αυτοί οι χαρακτήρες δεν μπόρεσαν να στοιχειοθετηθούν στο PDF και λείπουν από αυτό:',
+  'Diagram (bron)': 'Διάγραμμα (πηγή)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Ένα PDF με πραγματικό κείμενο: επιλέξιμο, αναζητήσιμο και αναγνώσιμο φωναχτά, με τους τίτλους ως σελιδοδείκτες. Οι τύποι, τα διαγράμματα mermaid και τα γραφήματα εμφανίζονται ως πηγαίος κώδικας· οι σημειώσεις βρίσκονται στο τέλος.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Εξαγάγετε σε HTML ή LaTeX αν πρέπει να υπάρχουν στο έγγραφο.',
+  'Formule (bron)': 'Τύπος (πηγή)',
+  'Grafiek (bron)': 'Γράφημα (πηγή)',
   'Bijvoorbeeld project-id': 'Για παράδειγμα project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Ένα έγγραφο μπορεί να περιέχει έως 100 προσαρμοσμένα πεδία.',
@@ -1975,8 +1984,6 @@ const _dutchSourceAddEl = <String, String>{
   'Naar document converteren?': 'Μετατροπή σε έγγραφο;',
   'Naar presentatie converteren?': 'Μετατροπή σε παρουσίαση;',
   'Nog een export': 'Άλλη μια εξαγωγή',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Για PDF: ανοίξτε το HTML και εκτυπώστε μέσω του browser σας (Αποθήκευση ως PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Για τον ευρύτερο κύκλο: αφαιρείται ό,τι βρίσκει ο έλεγχος. Το αρχείο αποκτά "-αποκρυμμένα" στο όνομα.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':

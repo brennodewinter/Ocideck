@@ -674,6 +674,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
+      'Ces caractères n\'ont pas pu être composés dans le PDF et y manquent :',
+  'Diagram (bron)': 'Diagramme (source)',
+  'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken staan erin als bron; noten staan achterin.':
+      'Un PDF avec du vrai texte : sélectionnable, consultable et lisible à voix haute, avec les titres comme signets. Les formules, les diagrammes mermaid et les graphiques y figurent sous forme de source ; les notes sont à la fin.',
+  'Exporteer naar HTML of LaTeX als ze in het document horen.':
+      'Exportez en HTML ou LaTeX s\'ils doivent figurer dans le document.',
+  'Formule (bron)': 'Formule (source)',
+  'Grafiek (bron)': 'Graphique (source)',
   'Bijvoorbeeld project-id': 'Par exemple project-id',
   'Een document kan maximaal 100 vrije velden bevatten.':
       'Un document peut contenir au maximum 100 champs personnalisés.',
@@ -986,8 +995,6 @@ const _dutchSourceAddFr = {
   'Naar document converteren?': 'Convertir en document ?',
   'Naar presentatie converteren?': 'Convertir en présentation ?',
   'Nog een export': 'Un autre export',
-  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
-      'Pour le PDF : ouvrez le HTML et imprimez via votre navigateur (Enregistrer au format PDF).',
   'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
       'Pour le cercle élargi : tout ce que le contrôle détecte est retiré. Le fichier reçoit « -caviardés » dans son nom.',
   'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
