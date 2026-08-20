@@ -229,6 +229,13 @@ const int maxClassLines = 1000;
 /// Een nieuwe regel hier is een bewuste beslissing en hoort een reden te hebben;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
+  // +8 (#1605): het afbeeldingsblok in _buildWidget (één _Kind.image-tak) en
+  // de herkenning van een afbeelding op eigen regel in _parse. Beide horen bij
+  // de blokverwerking van deze klasse — net als de tabel-, tijdlijn- en
+  // mermaid-takken die er al zaten. De resolver en de widget staan buiten de
+  // klasse (parts/document_markdown_image.dart), maar de blokselectie zelf
+  // kan niet zonder de interne _Kind-enum en de _parse-lus.
+  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1008,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':

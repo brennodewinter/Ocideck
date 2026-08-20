@@ -4501,13 +4501,24 @@ omzetten zou losse backslashes in je tekst achterlaten — dus OciDeck toont de
 bron in plaats van de regel stilletjes te beschadigen. Geef de koprij en de
 streepjesrij evenveel kolommen en Visueel neemt hem weer.
 
-#### Afbeeldingen in een document *(toegevoegd 2026-08-20)*
+#### Afbeeldingen in een document *(toegevoegd 2026-08-20, gewijzigd 2026-08-20)*
 
 Een afbeelding schrijf je op de gewone Markdown-manier, `![omschrijving](pad)`.
-In **Visueel** verschijnt hij als een klein merkteken op zijn plek in de zin,
-met de omschrijving erin (of de bestandsnaam als die er niet is) — niet de
-afbeelding zelf. De **HTML**- en **PDF**-uitvoer tonen de afbeelding wél. Je
-`![…](…)`-tekst blijft staan zoals je hem tikte, inclusief de omschrijving.
+In **Visueel**, in de **Bron**-weergave en in **Pagina's** tekent OciDeck de
+afbeelding zelf — dezelfde als in de **HTML**- en **PDF**-uitvoer. Je ziet dus
+wat je krijgt, ook waar de paginering de hoogte van het plaatje moet meerekenen.
+Je `![…](…)`-tekst blijft staan zoals je hem tikte, inclusief de omschrijving.
+
+Lost het pad niet op — het bestand ontbreekt, of het wijst buiten de documentmap
+— dan staat er een merkteken met de omschrijving (of de bestandsnaam) op de
+plek van de afbeelding. Een ontbrekend bestand hoort zichtbaar te zijn, niet
+leeg.
+
+Op de **webversie** lost OciDeck alleen een `mem:`-pad op (een afbeelding die in
+deze sessie is ingevoegd en in het geheugen staat) en een gebundeld `asset:`-pad.
+Een relatief pad naar een bestand naast het document kan daar niet renderen: de
+browser heeft geen bestandssysteem. In de HTML-uitvoer staat de afbeelding wél,
+want die loopt via een andere weg.
 
 ### Voetnoten
 
@@ -4744,19 +4755,10 @@ Kan er eentje níet getekend worden, dan drukt de PDF zijn **bron** af in een bl
 met vaste letterafstand en een regel erboven die zegt wat het is — liever dat dan
 een leeg vlak, want wie het diagram nodig heeft ziet zo tenminste wát er hoort te
 staan. Dat gebeurt wanneer de cijfers van een grafiek in een los `data/*.json`
-staan dat niet meekwam, wanneer een diagram of formule niet rendert, en op
-**Windows en Linux**, waar de verborgen renderer die mermaid en formules tekent
-geen implementatie heeft — grafieken, die in Dart getekend worden, reizen daar
-wél mee. Een formule op eigen regels (`$$…$$`) wordt getekend als blok; een
-formule middenin een zin (`$…$`) blijft in die zin staan, precies zoals je hem
-schreef. *(Gecorrigeerd 20-08-2026: hier stond "en altijd in de webversie". Die
-kan een document helemaal niet exporteren — zie hieronder.)*
-
-**Niet in de webversie.** Een document exporteren werkt niet in de browserversie,
-in geen van de vier formaten. De bestandskiezer daar laat zich niet om een plek
-vragen zoals de desktopversie dat doet; de export meldt dat het niet gelukt is en
-laat je document ongemoeid. Gebruik de desktopversie, of kopieer de Markdown met
-de hand.
+staan dat niet meekwam, wanneer een diagram of formule niet rendert, en altijd in
+de **webversie**, die daar geen verborgen renderer voor heeft. Een formule op
+eigen regels (`$$…$$`) wordt getekend als blok; een formule middenin een zin
+(`$…$`) blijft in die zin staan, precies zoals je hem schreef.
 
 **Wat er niet in zit.** **Voetnoten staan achterin**, niet onderaan het blad:
 welke noot op welke bladzijde landt blijkt pas ná de opmaak, en dan staat het vel

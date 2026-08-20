@@ -112,6 +112,13 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     widget.markdown,
   );
 
+  /// Of het document afbeeldingsblokken bevat. Alleen dan blijft de meetboom
+  /// gemonteerd na de eerste ronde — een afbeelding decodeert asynchroon, dus
+  /// zijn hoogte komt pas later binnen. Een document zonder afbeeldingen heeft
+  /// alleen synchrone blokken (tekst, tabellen, code), en voor die volstaat een
+  /// eenmalige meting: de boom hoeft niet te blijven staan.
+  late final bool _hasImages = _containsImageBlock(widget.markdown);
+
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
   /// en worden ze net als al het andere over de vellen verdeeld.
@@ -278,6 +285,27 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   @override
   Widget build(BuildContext context) {
     final heights = _blockHeights;
+    // Bevat het document afbeeldingen, dan blijft de meetboom buiten beeld
+    // staan — een afbeelding decodeert asynchroon, dus haar hoogte komt pas na
+    // de eerste ronde binnen. Stond de boom dan al af, dan bleef de paginering
+    // op de placeholder-hoogte staan en rotte stil: de einden wezen naar een
+    // regel tekst waar inmiddels een afbeelding van een paar centimeter staat.
+    // Nu hermeet de boom zodra een blokhoogte verandert (zie [_onMeasured]), en
+    // de vellen erboven volgen. Zonder afbeeldingen zijn alle blokken synchroon
+    // en volstaat een eenmalige meting: de boom hoeft niet te blijven staan.
+    if (!_hasImages) {
+      if (heights == null) return _measure();
+      return _pages(heights);
+    }
+    return Stack(
+      fit: StackFit.expand,
+      children: [_measure(), if (heights != null) _pages(heights)],
+    );
+  }
+
+  /// De vellen, opgebouwd uit de gemeten hoogtes. Bestaat als aparte methode
+  /// omdat [build] de meetboom er altijd onder laat staan.
+  Widget _pages(List<double> heights) {
     final document = DocumentMarkdownView(
       widget.markdown,
       maxTextWidth: null,
@@ -290,7 +318,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       // gewoon als laatste blokken in de stroom mee.
       footnotesAtEnd: !_notesOnPage,
     );
-    if (heights == null) return _measure();
     final offsets = documentPageOffsets(
       blockHeights: heights,
       pageHeight: _contentHeightPx,
@@ -440,15 +467,38 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   }
 
   void _onMeasured(int index, double height, int blockCount, int total) {
-    if (!mounted || _blockHeights != null) return;
+    if (!mounted) return;
+    // Geen slot: een afbeelding die na de eerste ronde decodeert, verandert de
+    // hoogte van zijn blok, en dan hoort de paginering dat te zien. Alleen een
+    // waarde die echt anders is loopt door — een gelijke hoogte stopt hier, dus
+    // een stabiele boom bouwt niet eindeloos om.
+    if (_measuring[index] == height) return;
     _measuring[index] = height;
     if (_measuring.length < total) return;
+    final heights = [for (var i = 0; i < blockCount; i++) _measuring[i] ?? 0];
+    final noteHeights = [
+      for (var i = blockCount; i < total; i++) _measuring[i] ?? 0,
+    ];
+    final prev = _blockHeights;
+    final prevNotes = _noteHeights;
+    if (prev != null &&
+        _listEq(prev, heights) &&
+        prevNotes != null &&
+        _listEq(prevNotes, noteHeights)) {
+      return;
+    }
     setState(() {
-      _blockHeights = [for (var i = 0; i < blockCount; i++) _measuring[i] ?? 0];
-      _noteHeights = [
-        for (var i = blockCount; i < total; i++) _measuring[i] ?? 0,
-      ];
+      _blockHeights = heights;
+      _noteHeights = noteHeights;
     });
+  }
+
+  static bool _listEq(List<double> a, List<double> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if ((a[i] - b[i]).abs() > 0.5) return false;
+    }
+    return true;
   }
 
   /// De kop- of voetband van één vel, in de marge geplaatst.
@@ -706,3 +756,16 @@ class _RenderMeasuredBlock extends RenderProxyBox {
     );
   }
 }
+
+/// Of de markdown een regel bevat die precies één afbeelding is — dezelfde
+/// herkenning als `document_markdown_blocks._parseImageLine`. Alleen dan heeft
+/// de paginaweergave de meetboom nodig om te blijven staan: een afbeelding
+/// decodeert asynchroon, en pas als haar hoogte binnenkomt klopt het pagina-einde.
+bool _containsImageBlock(String markdown) {
+  for (final line in markdown.split('\n')) {
+    if (_imageLinePattern.hasMatch(line.trim())) return true;
+  }
+  return false;
+}
+
+final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\(([^)]*)\)$');

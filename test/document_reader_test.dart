@@ -148,6 +148,42 @@ void main() {
       expect(find.textContaining('plain code line'), findsOneWidget);
     });
 
+    testWidgets(
+      'een afbeelding op eigen regel toont het merkteken als het pad niet oplost',
+      (tester) async {
+        // Zonder DocumentImageScope (geen projectPath) lost een relatief pad niet
+        // op, en de afbeelding tekent het merkteken met de alt-tekst — niet leeg.
+        await pump(
+          tester,
+          const DocumentMarkdownView(
+            '![Een omschrijving](beelden/plaatje.png)\n',
+          ),
+        );
+        expect(tester.takeException(), isNull);
+        expect(find.text('Een omschrijving'), findsOneWidget);
+        expect(find.byIcon(Icons.image_outlined), findsOneWidget);
+      },
+    );
+
+    testWidgets('een afbeelding midden in een zin blijft een alinea', (
+      tester,
+    ) async {
+      // Een afbeelding die niet op eigen regel staat, is inline — geen
+      // afbeeldingsblok. De lezer tekent hem als alinea met de omliggende tekst,
+      // niet als een afbeeldingsblok op eigen regel.
+      await pump(
+        tester,
+        const DocumentMarkdownView('Zin met ![omschrijving](x.png) erin.\n'),
+      );
+      expect(tester.takeException(), isNull);
+      // De omliggende tekst staat er, als één alinea — niet als afbeeldingsblok.
+      expect(find.textContaining('Zin met'), findsOneWidget);
+      expect(find.textContaining('erin'), findsOneWidget);
+      // Een afbeeldingsblok zou het merkteken op eigen regel tonen; hier staat
+      // de tekst op één regel, dus het icoon verschijnt niet als los blok.
+      expect(find.byIcon(Icons.image_outlined), findsNothing);
+    });
+
     testWidgets('invokes onTapLink with the href when a link is tapped', (
       tester,
     ) async {

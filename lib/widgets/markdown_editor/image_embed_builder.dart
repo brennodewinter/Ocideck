@@ -3,20 +3,22 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../theme/app_theme.dart';
 import '../../utils/image_embed_syntax.dart';
+import '../reader/document_markdown_view.dart'
+    show DocumentImage, DocumentImageScope;
 
-/// Tekent een `x-embed-image` in de visuele (Quill) editor: een merkteken op de
-/// plek van de afbeelding, met de alt-tekst erin.
+/// Tekent een `x-embed-image` in de visuele (Quill) editor: de afbeelding zelf
+/// op zijn plek, of het merkteken met de alt-tekst als het pad niet oplost.
 ///
-/// **Niet de afbeelding zelf, en dat is een bewuste grens.** Een pad in een
-/// document kan `mem:`, `asset:` of relatief-aan-het-deck zijn, en het uitzoeken
-/// daarvan hoort bij `ImageService` met de map van het deck erbij — die staat
-/// het schrijfvlak niet ter beschikking. De documentlezer tekent afbeeldingen
-/// vandaag óók niet; wél de HTML- en PDF-uitvoer. Zolang die twee uit elkaar
-/// lopen, is het eerlijker om te tonen *dát* er een afbeelding staat en welke,
-/// dan om er in één van de twee weergaven een te verzinnen.
+/// De map van het document komt via [DocumentImageScope] — dezelfde scope die de
+/// documentlezer gebruikt — zodat het schrijfvlak en de weergave dezelfde
+/// afbeelding tonen (één renderwereld, net als bij tabellen en de tijdlijn).
+/// Lost het pad niet op (ontbrekend bestand, web met een lokaal pad), dan valt
+/// de bouwer terug op het merkteken: een ontbrekend bestand hoort zichtbaar te
+/// zijn, niet leeg.
 ///
-/// Wat deze bouwer wél oplost is de reden dat hij bestaat: zonder bouwer voor
-/// dit type wierp Quill `UnimplementedError` en viel het hele schrijfvlak om.
+/// Wat deze bouwer wél altijd al oploste is de reden dat hij bestaat: zonder
+/// bouwer voor dit type wierp Quill `UnimplementedError` en viel het hele
+/// schrijfvlak om.
 class ImageEmbedBuilder extends EmbedBuilder {
   const ImageEmbedBuilder();
 
@@ -30,38 +32,17 @@ class ImageEmbedBuilder extends EmbedBuilder {
   @override
   Widget build(BuildContext context, EmbedContext embedContext) {
     final image = EmbeddableMarkdownImage.parse(embedContext.node.value);
-    final style = DefaultTextStyle.of(context).style;
-    final ink = style.color ?? AppTheme.ink;
-    // De alt-tekst is waar hij voor bedoeld is: de omschrijving. Ontbreekt hij,
-    // dan is de bestandsnaam het eerlijkste alternatief — en géén verzonnen
-    // woord, want dan zou hier vertaalde interfacetekst in de lopende zin van
-    // de gebruiker staan.
     final label = image.alt.trim().isNotEmpty
         ? image.alt.trim()
         : _fileName(image.source);
     return Semantics(
       image: true,
       label: label,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-        decoration: BoxDecoration(
-          color: AppTheme.inlineCodeBackground(ink),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.image_outlined,
-              size: (style.fontSize ?? 15) + 1,
-              color: ink,
-            ),
-            if (label.isNotEmpty) ...[
-              const SizedBox(width: 5),
-              Text(label, style: style),
-            ],
-          ],
-        ),
+      child: DocumentImage(
+        source: image.source,
+        alt: image.alt,
+        projectPath: DocumentImageScope.maybeOf(context),
+        block: false,
       ),
     );
   }

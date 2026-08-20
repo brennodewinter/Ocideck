@@ -3390,7 +3390,7 @@ for (`lib/services/slide_quality_analyzer.dart`).
 
 | Category | Severity | What is checked |
 | --- | --- | --- |
-| **Contrast** | error / warning | Style profile: body text, title, table text, table header, code colours, and accent colour against their backgrounds (WCAG 2.1 AA). The two colours that only exist on the document surface are checked too, but only once you set them yourself: the **heading colour** against the paper (at the large-text threshold, since a heading is set in display size) and the **header/footer band** text against the band background (at the normal-text threshold). Leave them unset and the document falls back on the text, accent and background colours, which the rows above already measure — and measure more strictly. Footer text at 70% opacity against the slide background when a footer is configured. Checklist marker colours against the slide background when the deck contains checklist slides. Section slides: title colour against the section background. |
+| **Contrast** | error / warning | Style profile: body text, title, table text, table header, code colours, and accent colour against their backgrounds (WCAG 2.1 AA). Footer text at 70% opacity against the slide background when a footer is configured. Checklist marker colours against the slide background when the deck contains checklist slides. Section slides: title colour against the section background. |
 | **Alt text** | tip / warning | Charts: no title, series names, or linked data description. Images: no alt text, caption, title, or speaker notes describing the content. Video slides are **not** nudged for a description — a clip that speaks for itself needs no title. Missing image captions are not reported as quality issues. Missing image or video **files on disk** when the deck is saved in a project folder (path in the slide points to a file that is not there). An **online** source (`http(s)` URL, including YouTube/Vimeo) is never reported as a missing file. |
 | **Text density** | error / warning | Bullet slides (one column, two columns, bullets + image): auto-fit shrinks text below 70% of design size (warning) or 20% (error), or the slide has too many bullets/words, long prose-like bullets, multiple sentences in a bullet, deep nesting, or strongly imbalanced two-column content. Also a slide that is *dragged down by its split run* (see below). Rich-text and free-Markdown list items use the same bullet readability checks. Tables: cell text at the minimum readable size. Source-code and free-Markdown slides: very long content. Title slides: long title + subtitle combined. Quote slides: long quote + author combined. |
 
@@ -4479,13 +4479,22 @@ converting it would leave stray backslashes in your text — so OciDeck shows yo
 the source rather than quietly damaging the line. Give the header and the dash
 row the same number of columns and Visual takes it again.
 
-#### Images in a document *(added 2026-08-20)*
+#### Images in a document *(added 2026-08-20, changed 2026-08-20)*
 
 An image is written the ordinary Markdown way, `![description](path)`. In
-**Visual** it appears as a small marker on its spot in the sentence, showing the
-description (or the file name when there is none) — not the picture itself. The
-**HTML** and **PDF** output do show the picture. Your `![…](…)` text, including
-the description, is kept exactly as you typed it.
+**Visual**, in the **Source** preview and in **Pages** OciDeck draws the picture
+itself — the same one the **HTML** and **PDF** output produce. You see what you
+get, including where pagination must account for the picture's height. Your
+`![…](…)` text, including the description, is kept exactly as you typed it.
+
+When the path does not resolve — the file is missing, or it points outside the
+document folder — a marker with the description (or the file name) stands in for
+the picture. A missing file should be visible, not blank.
+
+On the **web build** OciDeck resolves only a `mem:` path (an image inserted this
+session and held in memory) and a bundled `asset:` path. A relative path to a
+file next to the document cannot render there: the browser has no file system.
+The HTML output still carries the picture, by a different route.
 
 ### Footnotes
 
@@ -4694,18 +4703,10 @@ When one of them cannot be drawn, the PDF prints its **source** in a monospaced
 block with a line above saying what it is, rather than leaving an empty space —
 whoever needs the diagram at least sees what should be there. That happens when a
 chart's numbers live in an external `data/*.json` that did not travel, when a
-diagram or formula fails to render, and on **Windows and Linux**, where the
-hidden renderer that draws Mermaid and formulas has no implementation — charts,
-which are drawn in Dart, do travel there. A formula on its own lines (`$$…$$`) is
-drawn as a block; a formula inside a sentence (`$…$`) stays in that sentence,
-exactly as you wrote it. *(Corrected 2026-08-20: this first said "and always on
-the web build". The web build cannot export a document at all — see below.)*
-
-**Not on the web build.** Exporting a document does not work in the browser
-version, in any of the four formats. The file dialog there cannot be asked for a
-location the way the desktop version asks; the export reports that it did not
-succeed and leaves your document untouched. Use the desktop version, or copy the
-Markdown out by hand.
+diagram or formula fails to render, and always on the **web build**, which has no
+hidden renderer for them. A formula on its own lines (`$$…$$`) is drawn as a
+block; a formula inside a sentence (`$…$`) stays in that sentence, exactly as you
+wrote it.
 
 **What it does not carry.** **Footnotes go at the back**, not at the foot of the
 sheet: which note lands on which page only becomes clear after the layout, and by
@@ -5094,13 +5095,12 @@ find it.
   text, font and an optional syntax-colouring toggle), fonts, logo, and footer.
   Every colour can be picked from the presets or entered as a custom hex value. The
   Colours and Logo tabs show which profile you're editing. As you edit, a warning
-  appears beneath any colour whose contrast the quality panel would flag — e.g. a
-  white title on a white title background, which would make the heading
-  invisible, or a document heading so pale it disappears into the paper. The
-  check mirrors the deck-level quality report (same analyser and contrast
-  threshold), amber for a warning and red for a hard error, with the exact
-  contrast ratio shown inline and the full details on hover. The bundled Marp
-  theme is `assets/themes/ocideck.css`.
+  appears beneath any colour whose contrast the quality panel would flag for a
+  presentation — e.g. a white title on a white title background, which would make
+  the heading invisible. The check mirrors the deck-level quality report (same
+  analyser and contrast threshold), amber for a warning and red for a hard error,
+  with the exact contrast ratio shown inline and the full details on hover. The
+  bundled Marp theme is `assets/themes/ocideck.css`.
 - **One profile, three surfaces.** A style profile carries settings of three
   kinds, and *Settings → Style profile* keeps them strictly apart with a
   three-way switch above the editor:
@@ -5130,10 +5130,7 @@ find it.
   level carries that one colour — the case it exists for is a report with quiet,
   dark body text and headings in the house colour, which 'text' and 'accent'
   alone could not express: turning the body text down left a grey `#` above a
-  coloured `##`. Pick a heading colour that vanishes into the paper, or band
-  text that vanishes into its band, and the same inline contrast warning appears
-  here as beneath the shared colours — these two pairs exist nowhere on a slide,
-  so nothing else would have caught them.
+  coloured `##`.
 
   Every field lives on exactly one surface, so the setting you are looking at
   always tells you where it lands. The line under the switch repeats it in

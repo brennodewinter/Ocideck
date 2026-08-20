@@ -30,6 +30,11 @@ const int maxMethodLines = 150;
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
 const Map<String, int> methodLengthBaseline = {
+  // +6 (#1605): herkenning van een afbeelding op eigen regel in de paragraaf-
+  // tak. De methode stond al op de limiet; de afbeeldingsherkenning zelf staat
+  // in de top-level _parseImageLine-helper.
+  'lib/widgets/reader/document_markdown_view.dart::DocumentMarkdownView._parse':
+      154,
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
