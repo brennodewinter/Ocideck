@@ -59,6 +59,15 @@ class _DocumentStyleBuilder {
       owner._presentationStyleDivider(title);
   List<Widget> _generalColorChildren() => owner._generalColorChildren();
   List<Widget> _slideColorChildren() => owner._slideColorChildren();
+  Widget _themeColorAnchor(String field, Widget child) =>
+      owner._themeColorAnchor(field, child);
+  Map<String, SlideQualityIssue> _themeContrastByField() =>
+      owner._themeContrastByField();
+  Widget _colorWithContrastWarning(
+    Widget colorSetting,
+    String field,
+    Map<String, SlideQualityIssue> contrast,
+  ) => owner._colorWithContrastWarning(colorSetting, field, contrast);
   List<Widget> _animationSettings() => owner._animationSettings();
   List<Widget> _slideLogoChildren() => owner._slideLogoChildren();
   List<Widget> _footerSettings() => owner._footerSettings();
@@ -101,13 +110,25 @@ class _DocumentStyleBuilder {
     'logoPath',
   };
 
+  /// Dezelfde uitzonderingslijst, maar voor het documentvlak: de kopkleur van
+  /// een document en de tekstkleur van de kop- en voetband. Zonder deze lijst
+  /// landde een contrastsprong op het algemene vlak, waar het veld niet staat —
+  /// en dan lijkt de melding nergens heen te wijzen.
+  static const _documentOnlyThemeFields = {
+    'documentHeadingColor',
+    'documentBandTextColor',
+  };
+
   /// Het vlak dat nu getekend wordt: de keuze van de gebruiker, tenzij een
   /// sprong een anker aanwijst dat op een ander vlak hangt.
   _StyleSurface _activeSurface(AppLocalizations l10n) {
     final field = _highlightedThemeField;
     if (field != null) {
-      return _slideOnlyThemeFields.contains(field)
-          ? _StyleSurface.presentation
+      if (_slideOnlyThemeFields.contains(field)) {
+        return _StyleSurface.presentation;
+      }
+      return _documentOnlyThemeFields.contains(field)
+          ? _StyleSurface.document
           : _StyleSurface.general;
     }
     final section = _highlightedSection;
@@ -317,42 +338,57 @@ class _DocumentStyleBuilder {
 
   /// Het documentvlak: wat alleen op een blad bestaat — een eigen logo, een
   /// kop- en voetregel en de paginanummering.
-  Widget _documentStyleSettings(AppLocalizations l10n) => Material(
-    key: const Key('document-style-editor'),
-    color: AppTheme.paper,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(6),
-      side: BorderSide(color: AppTheme.slate300),
-    ),
-    clipBehavior: Clip.antiAlias,
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Niet "Lettertype": dat is de sectie van het algemene vlak, waar het
-          // lettertype zelf staat. Twee secties met dezelfde kop zouden ook
-          // hetzelfde zoekanker dragen, en dan landt een treffer op het
-          // verkeerde vlak.
-          _sectionTitle(l10n.d('Tekst')),
-          const SizedBox(height: 8),
-          ..._documentFontSizeSettings(l10n),
-          _styleColorField(
-            l10n.d('Kop'),
-            _themeProfile.effectiveDocumentHeadingColor,
-            (value) => _themeProfile = _themeProfile.copyWith(
-              documentHeadingColor: value,
-            ),
-            key: const Key('document-heading-color'),
-          ),
-          _presentationStyleDivider(l10n.d('Logo')),
-          ..._documentLogoSettings(l10n),
-          _presentationStyleDivider(l10n.d('Koptekst')),
-          ..._documentChromeSettings(l10n),
-        ],
+  ///
+  /// De contrastmeldingen komen uit één analyse voor het hele vlak. Zowel de
+  /// kopkleur als de bandtekst vraagt ernaar, en dit vlak tekent ze allebei;
+  /// zou elk veld zijn eigen analyse starten, dan draaide die bij élke
+  /// kleurbewerking dubbel.
+  Widget _documentStyleSettings(AppLocalizations l10n) {
+    final contrast = _themeContrastByField();
+    return Material(
+      key: const Key('document-style-editor'),
+      color: AppTheme.paper,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6),
+        side: BorderSide(color: AppTheme.slate300),
       ),
-    ),
-  );
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Niet "Lettertype": dat is de sectie van het algemene vlak, waar het
+            // lettertype zelf staat. Twee secties met dezelfde kop zouden ook
+            // hetzelfde zoekanker dragen, en dan landt een treffer op het
+            // verkeerde vlak.
+            _sectionTitle(l10n.d('Tekst')),
+            const SizedBox(height: 8),
+            ..._documentFontSizeSettings(l10n),
+            _themeColorAnchor(
+              'documentHeadingColor',
+              _colorWithContrastWarning(
+                _styleColorField(
+                  l10n.d('Kop'),
+                  _themeProfile.effectiveDocumentHeadingColor,
+                  (value) => _themeProfile = _themeProfile.copyWith(
+                    documentHeadingColor: value,
+                  ),
+                  key: const Key('document-heading-color'),
+                ),
+                'documentHeadingColor',
+                contrast,
+              ),
+            ),
+            _presentationStyleDivider(l10n.d('Logo')),
+            ..._documentLogoSettings(l10n),
+            _presentationStyleDivider(l10n.d('Koptekst')),
+            ..._documentChromeSettings(l10n, contrast),
+          ],
+        ),
+      ),
+    );
+  }
 
   /// De basislettergrootte van een document.
   ///
@@ -525,7 +561,10 @@ class _DocumentStyleBuilder {
     ];
   }
 
-  List<Widget> _documentChromeSettings(AppLocalizations l10n) => [
+  List<Widget> _documentChromeSettings(
+    AppLocalizations l10n,
+    Map<String, SlideQualityIssue> contrast,
+  ) => [
     TextFormField(
       key: Key('document-header-${_themeProfile.name}'),
       initialValue: _themeProfile.documentHeaderText,
@@ -557,12 +596,20 @@ class _DocumentStyleBuilder {
         _profileTouched = true;
       }),
     ),
-    _styleColorField(
-      l10n.d('Tekst'),
-      _themeProfile.effectiveDocumentBandTextColor,
-      (value) =>
-          _themeProfile = _themeProfile.copyWith(documentBandTextColor: value),
-      key: const Key('document-band-text-color'),
+    _themeColorAnchor(
+      'documentBandTextColor',
+      _colorWithContrastWarning(
+        _styleColorField(
+          l10n.d('Tekst'),
+          _themeProfile.effectiveDocumentBandTextColor,
+          (value) => _themeProfile = _themeProfile.copyWith(
+            documentBandTextColor: value,
+          ),
+          key: const Key('document-band-text-color'),
+        ),
+        'documentBandTextColor',
+        contrast,
+      ),
     ),
     _styleColorField(
       l10n.d('Achtergrond'),
