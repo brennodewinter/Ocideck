@@ -389,7 +389,11 @@ const Map<String, int> classSizeBaseline = {
   // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in
   // [Slide.imagePath], dus de generieke controles slaan er (vooralsnog) niet op.
   // Verlaagd van 1130 naar 1125: de klasse meet 1118.
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1125,
+  // Verlaagd van 1125 naar 1040: de thema-contrastreeks staat sinds de
+  // document-kleurparen als top-level `_checkThemeContrast` naast
+  // [_addSlidePairIssue] — zij hangt aan het thema, niet aan de analyzer-staat.
+  // De klasse meet 1037.
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1040,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd

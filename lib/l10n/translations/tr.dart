@@ -2559,6 +2559,8 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Dışa aktarma başarılı olmadı. Belgeniz değişmedi; yeniden deneyin veya başka bir biçim seçin.',
+  'Thema documentkop': 'Tema belge başlığı',
+  'Thema documentband': 'Tema üstbilgi/altbilgi',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'Gerçek metin içeren bir PDF: seçilebilir, aranabilir ve sesli okunabilir; başlıklar yer imi olur. Formüller, mermaid diyagramları ve grafikler çizilir; notlar arkadadır.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

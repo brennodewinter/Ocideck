@@ -1648,6 +1648,8 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'Export sa nepodaril. Váš dokument zostal nezmenený; skúste to znova alebo zvoľte iný formát.',
+  'Thema documentkop': 'Nadpis dokumentu témy',
+  'Thema documentband': 'Hlavička/päta témy',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF so skutočným textom: dá sa označovať, prehľadávať aj predčítať, nadpisy slúžia ako záložky. Vzorce, diagramy mermaid a grafy sa vykresľujú; poznámky sú vzadu.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':

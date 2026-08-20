@@ -1660,6 +1660,8 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'De export is niet gelukt. Je document is niet gewijzigd; probeer het opnieuw of kies een ander formaat.':
       'L-esportazzjoni ma rnexxietx. Id-dokument tiegħek ma nbidilx; erġa\' pprova jew agħżel format ieħor.',
+  'Thema documentkop': 'Titlu tad-dokument tat-tema',
+  'Thema documentband': 'Intestatura/qiegħ tat-tema',
   'Een PDF met echte tekst: te selecteren, te doorzoeken en voor te lezen, met de koppen als bladwijzers. Formules, mermaid-diagrammen en grafieken worden getekend; noten staan achterin.':
       'PDF b\'test veru: tista\' tagħżlu, tfittex fih u jinqara b\'leħen għoli, bit-titli bħala marki tal-paġni. Il-formuli, id-dijagrammi mermaid u l-graffs jitpinġew; in-noti jinsabu fl-aħħar.',
   'Deze tekens konden niet in de PDF worden gezet en ontbreken erin:':
