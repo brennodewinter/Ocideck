@@ -17,6 +17,13 @@ import 'package:webview_flutter_platform_interface/webview_flutter_platform_inte
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  // De dienst is een singleton en `hostNeeded` overleeft dus de test die hem
+  // zette. De suite draait met `--test-randomize-ordering-seed random`, dus de
+  // volgorde binnen dit bestand ligt niet vast: liep de requestHost-test eerst,
+  // dan zag de test hieronder een gevraagde host en viel om (seeds 7 en 42).
+  // Elke test begint daarom op dezelfde stand.
+  setUp(() => MermaidRenderService.instance.hostNeeded.value = false);
+
   test('isFlutterTest reports true under the flutter test runner', () {
     expect(isFlutterTest, isTrue);
   });
@@ -62,9 +69,6 @@ void main() {
     tester,
   ) async {
     final service = MermaidRenderService.instance;
-    // De service is een singleton; een eerdere test in dit bestand heeft de
-    // vlag mogelijk al gezet.
-    service.hostNeeded.value = false;
     // De aanroep komt in het echt uit initState van MermaidDiagram, dus midden
     // in de buildfase. Meteen omzetten markeerde de ValueListenableBuilder die
     // de verborgen WebView draagt als vuil terwijl die al gebouwd was —
