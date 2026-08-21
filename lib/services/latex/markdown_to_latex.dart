@@ -9,14 +9,15 @@
 // AST-parser — hetzelfde patroon als `lib/utils/markdown_quill_codec.dart`.
 // Geen nieuwe dependency.
 //
-// Wiskunde pass-through: `$...$` (inline) en `$$...$$` (display) zijn native
-// LaTeX. De `markdown`-package parseert `$` niet als markdown, dus de ruwe
-// tekst komt als `Text`-node door; de converter detecteert de math-delimiters
-// en laat de inhoud ongewijzigd staan, zodat LaTeX het zelf rendert.
+// Wiskunde-pass-through: `$...$` (inline) en `$$...$$` (display) zijn native
+// LaTeX. De converter beschermt de bron tegen de markdown-parser en laat alleen
+// bekende wiskundecommando's ongewijzigd terug; onbekende TeX-primitieven
+// worden zichtbare, geëscapete tekst.
 
 import 'package:markdown/markdown.dart' as md;
 
 import '../../models/settings.dart' show TableBorderStyle;
+import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
@@ -245,20 +246,28 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   @override
   void visitText(md.Text text) {
     if (_suppressEscape) {
-      _buf.write(_restoreMath(text.text));
+      _buf.write(_restoreMath(text.text, escapeUnsafe: false));
       return;
     }
-    _buf.write(_escapeText(_restoreMath(text.text)));
+    _buf.write(_escapeProtectedText(text.text));
   }
 
-  /// Vervang math-placeholders door de originele inhoud. Buiten code-blokken
-  /// wordt de herstelde tekst daarna door [_escapeText] gehaald, maar
-  /// `_escapeText` herkent `$...$` en `$$...$$` als math en laat ze staan.
-  String _restoreMath(String s) {
+  String _escapeProtectedText(String text) =>
+      _restoreMath(_escapeText(text), escapeUnsafe: true);
+
+  /// Vervang math-placeholders door gevalideerde native wiskunde. Een formule
+  /// met onbekende TeX-primitieven wordt zichtbare, geëscapete tekst.
+  String _restoreMath(String s, {required bool escapeUnsafe}) {
     if (_mathBlocks.isEmpty) return s;
     var result = s;
     for (final entry in _mathBlocks.entries) {
-      result = result.replaceAll(entry.key, entry.value);
+      final math = entry.value;
+      result = result.replaceAll(
+        entry.key,
+        !escapeUnsafe || _isSafeMath(math)
+            ? math
+            : '\\texttt{${_escapePlainText(math)}}',
+      );
     }
     return result;
   }
@@ -338,9 +347,13 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 
       // ── Links en afbeeldingen ──
       case 'a':
-        final href = element.attributes['href'] ?? '';
-        _buf.write('\\href{${_escapeUrl(href)}}{');
-        _stack.add(_Ctx.link);
+        final href = safeExportLink(element.attributes['href']);
+        if (href == null) {
+          _stack.add(_Ctx.passThrough);
+        } else {
+          _buf.write('\\href{${_escapeUrl(href)}}{');
+          _stack.add(_Ctx.link);
+        }
       case 'img':
         _visitImage(element);
         return false;
@@ -407,14 +420,19 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   void _visitImage(md.Element element) {
     final src = element.attributes['src'] ?? '';
     final alt = element.attributes['alt'] ?? '';
+    final safePath = _safeImagePath(src);
+    if (safePath == null) {
+      if (alt.trim().isNotEmpty) _buf.write(_escapeProtectedText(alt));
+      return;
+    }
     // Relatief pad — LaTeX kent geen data-URI-inlining. ponytail: ceiling
     // is single-file; upgrade path is een zip-bundel met .tex + images.
     _buf.write(
       r'\includegraphics[width=0.8\textwidth]{'
-      '${_escapeImagePath(src)}}',
+      '${_escapeImagePath(safePath)}}',
     );
     if (alt.trim().isNotEmpty) {
-      _buf.write('\\\\\\small{${_escapeText(alt)}}');
+      _buf.write('\\\\\\small{${_escapeProtectedText(alt)}}');
     }
   }
 
@@ -565,37 +583,176 @@ enum _Ctx {
   tableCell,
 }
 
-/// Escape LaTeX-speciale tekens in platte tekst (buiten code en math).
-///
-/// Beschermt bestaande math-delimiters: laat `$...$` en `$$...$$` ongewijzigd
-/// staan, zodat LaTeX de wiskunde zelf rendert. De rest van de tekens wordt
-/// geëscaped.
-String _escapeText(String s) {
+/// Escape LaTeX-speciale tekens in platte tekst. Native math komt uitsluitend
+/// via een vooraf beschermde placeholder terug nadat [_isSafeMath] hem heeft
+/// gevalideerd; generieke tekst mag dollartekens nooit zelf uitvoerbaar maken.
+String _escapeText(String s) => _escapePlainText(s);
+
+String _escapePlainText(String s) {
   final result = StringBuffer();
-  var i = 0;
-  while (i < s.length) {
-    // Display-math $$...$$
-    if (i + 1 < s.length && s[i] == r'$' && s[i + 1] == r'$') {
-      final end = s.indexOf(r'$$', i + 2);
-      if (end != -1) {
-        result.write(s.substring(i, end + 2));
-        i = end + 2;
-        continue;
-      }
-    }
-    // Inline-math $...$
-    if (s[i] == r'$') {
-      final end = s.indexOf(r'$', i + 1);
-      if (end != -1 && end > i + 1) {
-        result.write(s.substring(i, end + 1));
-        i = end + 1;
-        continue;
-      }
-    }
-    result.write(_escapeChar(s[i]));
-    i++;
+  for (final char in s.split('')) {
+    result.write(char == r'$' ? r'\$' : _escapeChar(char));
   }
   return result.toString();
+}
+
+const _safeMathCommands = <String>{
+  'alpha',
+  'beta',
+  'gamma',
+  'delta',
+  'epsilon',
+  'varepsilon',
+  'zeta',
+  'eta',
+  'theta',
+  'vartheta',
+  'iota',
+  'kappa',
+  'lambda',
+  'mu',
+  'nu',
+  'xi',
+  'pi',
+  'varpi',
+  'rho',
+  'varrho',
+  'sigma',
+  'varsigma',
+  'tau',
+  'upsilon',
+  'phi',
+  'varphi',
+  'chi',
+  'psi',
+  'omega',
+  'Gamma',
+  'Delta',
+  'Theta',
+  'Lambda',
+  'Xi',
+  'Pi',
+  'Sigma',
+  'Upsilon',
+  'Phi',
+  'Psi',
+  'Omega',
+  'frac',
+  'sqrt',
+  'sum',
+  'prod',
+  'int',
+  'iint',
+  'iiint',
+  'oint',
+  'lim',
+  'log',
+  'ln',
+  'exp',
+  'sin',
+  'cos',
+  'tan',
+  'min',
+  'max',
+  'sup',
+  'inf',
+  'det',
+  'gcd',
+  'left',
+  'right',
+  'big',
+  'Big',
+  'bigg',
+  'Bigg',
+  'overline',
+  'underline',
+  'vec',
+  'hat',
+  'bar',
+  'dot',
+  'ddot',
+  'mathbf',
+  'mathrm',
+  'mathit',
+  'mathsf',
+  'mathtt',
+  'mathcal',
+  'mathbb',
+  'mathfrak',
+  'operatorname',
+  'text',
+  'pm',
+  'mp',
+  'times',
+  'div',
+  'cdot',
+  'ast',
+  'star',
+  'circ',
+  'bullet',
+  'oplus',
+  'otimes',
+  'le',
+  'leq',
+  'ge',
+  'geq',
+  'ne',
+  'neq',
+  'approx',
+  'sim',
+  'simeq',
+  'equiv',
+  'propto',
+  'in',
+  'notin',
+  'subset',
+  'subseteq',
+  'supset',
+  'supseteq',
+  'cup',
+  'cap',
+  'emptyset',
+  'infty',
+  'partial',
+  'nabla',
+  'forall',
+  'exists',
+  'neg',
+  'land',
+  'lor',
+  'to',
+  'rightarrow',
+  'leftarrow',
+  'leftrightarrow',
+  'Rightarrow',
+  'Leftarrow',
+  'Leftrightarrow',
+  'mapsto',
+  'ldots',
+  'cdots',
+  'vdots',
+  'ddots',
+  'quad',
+  'qquad',
+  'colon',
+};
+
+final _mathCommand = RegExp(r'\\([A-Za-z]+|.)');
+
+bool _isSafeMath(String math) {
+  final body = math.startsWith(r'$$')
+      ? math.substring(2, math.length - 2)
+      : math.substring(1, math.length - 1);
+  if (body.contains(RegExp(r'[#$%&]')) || body.contains('^^')) return false;
+  for (final match in _mathCommand.allMatches(body)) {
+    final command = match.group(1)!;
+    if (command.length == 1) {
+      if (!r',;:! {}_|'.contains(command)) return false;
+    } else if (!_safeMathCommands.contains(command)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 String _escapeChar(String c) {
@@ -627,7 +784,12 @@ String _escapeChar(String c) {
 /// hyperref-argumenten.
 String _escapeUrl(String url) {
   if (url.isEmpty) return '';
-  return url.replaceAll('%', r'\%').replaceAll('#', r'\#');
+  return url
+      .replaceAll(r'\', r'\textbackslash{}')
+      .replaceAll('{', r'\{')
+      .replaceAll('}', r'\}')
+      .replaceAll('%', r'\%')
+      .replaceAll('#', r'\#');
 }
 
 /// Normaliseer een afbeeldingspad voor `\includegraphics`. LaTeX gebruikt
@@ -636,6 +798,19 @@ String _escapeUrl(String url) {
 String _escapeImagePath(String src) {
   if (src.isEmpty) return '';
   return src.replaceAll(r'\', '/');
+}
+
+String? _safeImagePath(String src) {
+  final normalized = src.trim().replaceAll(r'\', '/');
+  if (normalized.isEmpty ||
+      normalized.startsWith('/') ||
+      RegExp(r'^[A-Za-z][A-Za-z0-9+.-]*:').hasMatch(normalized) ||
+      normalized.split('/').contains('..') ||
+      normalized.runes.any((rune) => rune < 0x20 || rune == 0x7f) ||
+      RegExp(r'[{}%#$&~^]').hasMatch(normalized)) {
+    return null;
+  }
+  return normalized;
 }
 
 /// Beschermt LaTeX-math (`$$...$$` en `$...$`) tegen de markdown-parser, die

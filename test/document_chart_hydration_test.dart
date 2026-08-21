@@ -64,6 +64,30 @@ void main() {
     expect(out.contains('4242'), isFalse);
   });
 
+  test('een source-symlink buiten het project wordt geweigerd', () async {
+    final outsideDir = await Directory.systemTemp.createTemp(
+      'ocideck_dochydrate_outside_',
+    );
+    final outside = File(p.join(outsideDir.path, 'outside-chart.json'));
+    await outside.writeAsString(
+      '{"x": ["geheim"], "series": [{"name": "S", "data": [8675309]}]}',
+    );
+    addTearDown(() async {
+      if (await outsideDir.exists()) await outsideDir.delete(recursive: true);
+    });
+    final dataDir = Directory(p.join(temp.path, 'data'));
+    await dataDir.create();
+    await Link(p.join(dataDir.path, 'x.json')).create(outside.path);
+
+    final out = await hydrateDocumentChartData(
+      chartBody,
+      projectPath: temp.path,
+    );
+
+    expect(out, equals(chartBody));
+    expect(out, isNot(contains('8675309')));
+  });
+
   test('een ontbrekend databestand laat het blok ongemoeid', () async {
     final out = await hydrateDocumentChartData(
       chartBody,

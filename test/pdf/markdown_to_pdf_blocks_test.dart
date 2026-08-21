@@ -56,6 +56,32 @@ void main() {
       );
     });
 
+    test('onveilige links blijven platte tekst', () {
+      for (final href in [
+        'file:///etc/passwd',
+        'javascript:alert(1)',
+        'data:text/html,evil',
+        'relative/path',
+      ]) {
+        final blocks = markdownToPdfBlocks('[doel]($href)');
+        final spans = (blocks.single as PdfParagraphBlock).spans;
+        expect(spans.single.text, 'doel');
+        expect(spans.single.href, isNull, reason: href);
+      }
+    });
+
+    test('web-, mail- en ankerlinks blijven interactief', () {
+      for (final href in [
+        'https://example.test',
+        'mailto:a@example.test',
+        '#kop',
+      ]) {
+        final blocks = markdownToPdfBlocks('[doel]($href)');
+        final spans = (blocks.single as PdfParagraphBlock).spans;
+        expect(spans.single.href, href);
+      }
+    });
+
     test('een thematische breuk is een pagina-einde, geen streep', () {
       // DOCUMENT_MODE.md §13: in een document is `---` een nieuw blad. Dezelfde
       // afspraak als de `\newpage` van de LaTeX-export.
