@@ -117,7 +117,7 @@ Future<String?> _writeDocumentToPicked(
   String? dest,
 ) async {
   if (dest == null) return null;
-  final path = dest.endsWith('.md') ? dest : '$dest.md';
+  final path = withExtension(dest, '.md');
   return await saveDocument(document, path) ? path : null;
 }
 

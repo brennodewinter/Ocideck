@@ -625,17 +625,36 @@ bool _isParagraphLine(String line) {
 /// optioneel met een titel (`bron "titel"`). De alt mag leeg zijn; de bron moet
 /// er zijn. Dezelfde syntaxis als `MarkdownImageSyntax` (image_embed_syntax),
 /// zodat de lezer en het schrijfvlak dezelfde afbeelding herkennen.
+///
+/// Ondersteunt angle-bracket-bestemmingen `<path met spaties>` en ontsnapte
+/// haakjes `path\(1\).png`, zodat bestandsnamen met haakjes of spaties niet
+/// op de eerste `)` of whitespace afkappen.
 ({String alt, String source})? _parseImageLine(String line) {
   final match = _imageLinePattern.firstMatch(line);
   if (match == null) return null;
   final alt = match.group(1) ?? '';
   final raw = (match.group(2) ?? '').trim();
   if (raw.isEmpty) return null;
-  // `bron "titel"` → `bron`. De titel hoort bij de markdown, niet bij het pad.
-  final space = raw.indexOf(RegExp(r'\s'));
-  final source = space < 0 ? raw : raw.substring(0, space);
+  final source = _extractImageSource(raw);
   if (source.isEmpty) return null;
   return (alt: alt, source: source);
 }
 
-final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\(([^)]*)\)$');
+/// Haalt de bron uit de inhoud van `](…)`: angle-bracket, ontsnapte haakjes
+/// en een optionele `"titel"` achteraan.
+String _extractImageSource(String raw) {
+  // Angle-bracket: `<…>` — alles tussen de haken is de bron.
+  if (raw.startsWith('<')) {
+    final close = raw.indexOf('>');
+    if (close < 0) return raw.substring(1);
+    return raw.substring(1, close);
+  }
+  // Titels staan tussen aanhalingstekens achteraan: `bron "titel"`.
+  final titleMatch = RegExp(r'\s+"[^"]*"\s*$').firstMatch(raw);
+  final withoutTitle =
+      titleMatch != null ? raw.substring(0, titleMatch.start).trim() : raw;
+  // Ontsnapte haakjes tellen mee, niet als afsluiting.
+  return withoutTitle.replaceAll(r'\(', '(').replaceAll(r'\)', ')');
+}
+
+final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');

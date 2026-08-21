@@ -49,6 +49,7 @@ import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
 import '../utils/document_front_matter.dart';
 import '../utils/error_snackbar.dart';
+import '../utils/file_extension.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
@@ -237,13 +238,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _expectVisualInsert = false;
     // In de visuele stand komt de body uit de Quill → Markdown round-trip, die
     // niet byte-getrouw is. De notifier moet dat weten, zodat opslaan alleen
-    // de echte bewerkingen terug schrijft (#1613).
+    // de echte bewerkingen terug schrijft (#1613). Maar valt de visuele stand
+    // terug op de platte broneditor (niet-rondreisbare Markdown), dan zijn
+    // bewerkingen gewoon bronbewerkingen — niet door de Quill-baseline heen
+    // sturen (#1649).
+    final isVisualEdit = _viewMode == _DocViewMode.visual &&
+        markdownRoundTripsVisually(body);
     ref
         .read(documentProvider.notifier)
         .edit(
           doc.frontMatter + body,
           coalesceKey: ownStep ? null : 'doc',
-          visualEdit: _viewMode == _DocViewMode.visual,
+          visualEdit: isVisualEdit,
         );
     // Houd de matchteller bij terwijl je typt — zonder te springen, net als de
     // presentatie-broneditor. De teller loopt mee via de provider-herbouw.
@@ -1042,7 +1048,7 @@ Future<String?> _pickDocumentExportPath(
     initialDirectory: projectPath,
   );
   if (dest == null) return null;
-  return dest.endsWith('.$ext') ? dest : '$dest.$ext';
+  return withExtension(dest, '.$ext');
 }
 
 /// Afbeeldingen ingesloten als data:-URI, begrensd binnen de projectmap —
@@ -1128,11 +1134,18 @@ bool _hasDocumentChrome(ThemeProfile profile, TlpLevel tlp) =>
     profile.documentShowPageNumbers ||
     tlp != TlpLevel.none;
 
-/// De documenttitel voor export en conversie: de eerste `# `-kop, anders de
-/// bestandsnaam zonder extensie, anders leeg. Top-level zodat het bewerkscherm
-/// zelf onder zijn regelplafond blijft.
+/// De documenttitel voor export en conversie: de eerste `# `-kop buiten een
+/// fenced codeblock, anders de bestandsnaam zonder extensie, anders leeg.
+/// Top-level zodat het bewerkscherm zelf onder zijn regelplafond blijft.
 String _documentTitle(String source, String? filePath) {
+  final fence = RegExp(r'^\s*(```|~~~)');
+  var fenced = false;
   for (final line in source.split('\n')) {
+    if (fence.hasMatch(line)) {
+      fenced = !fenced;
+      continue;
+    }
+    if (fenced) continue;
     final m = RegExp(r'^#\s+(.+)$').firstMatch(line.trim());
     if (m != null) return m.group(1)!.trim();
   }

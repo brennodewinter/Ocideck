@@ -29,6 +29,7 @@ import '../utils/markdown_files.dart';
 import '../utils/json_depth_guard.dart';
 import '../utils/net_guard.dart';
 import '../utils/pinned_http_client.dart';
+import '../utils/file_extension.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'net/transport_failure.dart';
@@ -683,7 +684,7 @@ class FileService {
     String? initialDirectory,
   }) async {
     final safeName = deck.title
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
+        .replaceAll(RegExp(r'[^\p{L}\p{N}\s-]', unicode: true), '')
         .replaceAll(' ', '_');
     final result = await _saveDestinationGated(
       picker: _saveDestination,
@@ -692,7 +693,7 @@ class FileService {
       initialDirectory: initialDirectory,
     );
     if (result == null) return (path: null, chartWarnings: const <String>[]);
-    final path = result.endsWith('.md') ? result : '$result.md';
+    final path = withExtension(result, '.md');
     final written = await _writeProject(deck, path);
     return (path: path, chartWarnings: written.chartWarnings);
   }

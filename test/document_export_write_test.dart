@@ -597,6 +597,40 @@ void main() {
     expect(first, endsWith('-geredigeerd.pdf'));
   });
 
+  test('exportnaam behoudt accenten en niet-Latijnse schriften', () {
+    final withAccents = suggestedDocumentExportFileName(
+      title: 'Résumé',
+      format: DocumentExportFormat.md,
+      profile: PrivacyExportProfile.full,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+    expect(withAccents, contains('Résumé'));
+    expect(withAccents, endsWith('-volledig.md'));
+
+    final chinese = suggestedDocumentExportFileName(
+      title: '中文标题',
+      format: DocumentExportFormat.pdf,
+      profile: PrivacyExportProfile.full,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+    expect(chinese, contains('中文标题'));
+    expect(chinese, endsWith('-volledig.pdf'));
+
+    final arabic = suggestedDocumentExportFileName(
+      title: 'العربية',
+      format: DocumentExportFormat.html,
+      profile: PrivacyExportProfile.redacted,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+    expect(arabic, contains('العربية'));
+  });
+
   test('export weigert het geopende brondocument te overschrijven', () async {
     await withBundle((bundle) async {
       final source = File(p.join(temp.path, 'bron.md'));

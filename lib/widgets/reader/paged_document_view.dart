@@ -779,4 +779,6 @@ bool _containsImageBlock(String markdown) {
   return false;
 }
 
-final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\(([^)]*)\)$');
+///zelfde patroon als `document_markdown_blocks._imageLinePattern` — zie daar
+/// voor de ondersteuning van angle-bracket en ontsnapte haakjes.
+final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');

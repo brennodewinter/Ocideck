@@ -58,7 +58,7 @@ String suggestedDocumentExportFileName({
       : fullLabel;
   final source = title.isEmpty ? fallbackLabel : title;
   final cleaned = source
-      .replaceAll(RegExp(r'[^\w\- ]+'), '')
+      .replaceAll(RegExp(r'[^\p{L}\p{N}\- ]+', unicode: true), '')
       .trim()
       .replaceAll(RegExp(r'[\s]+'), '-');
   final base = cleaned.isEmpty ? fallbackLabel : cleaned;

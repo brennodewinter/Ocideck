@@ -24,6 +24,10 @@ import 'dart:math' as math;
 ///
 /// Werkt op regelniveau (met `\n` als scheider), want de normalisatie
 /// verplaatst hele regels, niet tekens binnen een regel.
+///
+/// CRLF-documenten: de originele bron kan `\r\n`-regeleinden hebben, terwijl
+/// Quill naar `\n` normaliseert. De vergelijking stroopt `\r` af; de uitvoer
+/// gebruikt het oorspronkelijke scheidingsteken (#1648).
 String patchVisualEdits({
   required String original,
   required String baseline,
@@ -31,7 +35,12 @@ String patchVisualEdits({
 }) {
   if (baseline == current) return original;
 
-  final origLines = original.split('\n');
+  // CRLF-bewaring: onthoud het originele scheidingsteken (#1648).
+  final isCrlf = original.contains('\r\n');
+  final sep = isCrlf ? '\r\n' : '\n';
+
+  // Stroop \r van regeleinden voor vergelijking — Quill normaliseert naar LF.
+  final origLines = original.split('\n').map(_stripCr).toList();
   final baseLines = baseline.split('\n');
   final currLines = current.split('\n');
 
@@ -43,13 +52,80 @@ String patchVisualEdits({
 
   // Stap 3: bouw het resultaat op basis van original, met bewerkingen
   // toegepast op de overeenkomende posities.
-  return _applyEdits(origLines, baseLines, currLines, align, hunks);
+  return _applyEdits(origLines, baseLines, currLines, align, hunks)
+      .join(sep);
+}
+
+/// Verwijdert een achterblijvende `\r` van een regel na `split('\n')`.
+String _stripCr(String line) =>
+    line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
+
+/// Maximumdimensie van de LCS-kern. Boven deze grens valt de matcher terug
+/// op positie-afhankelijke matching — geen volledige matrix.
+/// ponytail: ceiling 2000×2000 = 16 MiB int-matrix; boven deze grens is
+/// positie-match voldoende omdat visuele bewerkingen lokaal zijn.
+const _lcsMaxDim = 2000;
+
+/// Trimt de gemeenschappelijke prefix en suffix van twee lijsten. Retourneert
+/// (aStart, aEnd, bStart, bEnd) voor het differing middenstuk.
+({int aStart, int aEnd, int bStart, int bEnd}) _trimCommon(
+  List<String> a,
+  List<String> b,
+) {
+  var start = 0;
+  while (start < a.length && start < b.length && a[start] == b[start]) {
+    start++;
+  }
+  var aEnd = a.length;
+  var bEnd = b.length;
+  while (aEnd > start && bEnd > start && a[aEnd - 1] == b[bEnd - 1]) {
+    aEnd--;
+    bEnd--;
+  }
+  return (aStart: start, aEnd: aEnd, bStart: start, bEnd: bEnd);
 }
 
 /// Mapt elke regel in [b] naar de overeenkomende regel in [a] via LCS.
 /// Retourneert een lijst waar index i de index in [a] geeft voor b[i],
 /// of -1 als er geen overeenkomst is.
+///
+/// Trimt eerst gemeenschappelijke prefix/suffix, zodat de LCS-matrix alleen
+/// het differing middenstuk dekt — bij een kleine bewerking in een lang
+/// document is dat middenstuk klein, en schaalt de matcher lineair in plaats
+/// van kwadratisch (#1651).
 List<int> _alignLines(List<String> a, List<String> b) {
+  final align = List<int>.filled(b.length, -1);
+
+  // Prefix: identieke regels aan het begin matchen 1-op-1.
+  final core = _trimCommon(a, b);
+  for (var i = 0; i < core.aStart; i++) {
+    align[i] = i;
+  }
+  // Suffix: identieke regels aan het eind matchen verschoven.
+  for (var i = 0; i < a.length - core.aEnd; i++) {
+    align[core.bEnd + i] = core.aEnd + i;
+  }
+
+  // Kern: LCS op het middenstuk, tenzij het te groot is.
+  final aCore = a.sublist(core.aStart, core.aEnd);
+  final bCore = b.sublist(core.bStart, core.bEnd);
+  if (aCore.isEmpty || bCore.isEmpty) return align;
+  if (aCore.length > _lcsMaxDim || bCore.length > _lcsMaxDim) {
+    _positionalMatch(aCore, bCore, core.aStart, core.bStart, align);
+    return align;
+  }
+
+  final coreAlign = _lcsAlign(aCore, bCore);
+  for (var j = 0; j < bCore.length; j++) {
+    if (coreAlign[j] >= 0) {
+      align[core.bStart + j] = core.aStart + coreAlign[j];
+    }
+  }
+  return align;
+}
+
+/// Volledige LCS-uitlijning op twee lijsten.
+List<int> _lcsAlign(List<String> a, List<String> b) {
   final m = a.length, n = b.length;
   final dp = List<List<int>>.generate(m + 1, (_) => List<int>.filled(n + 1, 0));
   for (var i = m - 1; i >= 0; i--) {
@@ -76,6 +152,24 @@ List<int> _alignLines(List<String> a, List<String> b) {
   return align;
 }
 
+/// Terugval voor te grote lijsten: match regels op positie wanneer ze gelijk
+/// zijn, anders geen match. Voldoende voor lokale bewerkingen in lange
+/// documenten — de prefix/suffix-trimming heeft het gemeenschappelijke deel
+/// al afgedekt.
+void _positionalMatch(
+  List<String> a,
+  List<String> b,
+  int aOffset,
+  int bOffset,
+  List<int> align,
+) {
+  for (var j = 0; j < b.length; j++) {
+    if (j < a.length && a[j] == b[j]) {
+      align[bOffset + j] = aOffset + j;
+    }
+  }
+}
+
 /// Een reeks opeenvolgende regels die gelijk zijn of verschillen.
 class _Hunk {
   final bool equal;
@@ -94,7 +188,68 @@ class _Hunk {
 }
 
 /// LCS-gebaseerde diff. Geeft hunks terug die baseline in current omzetten.
+///
+/// Trimt eerst gemeenschappelijke prefix/suffix (#1651): bij een kleine
+/// bewerking is alleen het middenstuk verschillend, en de LCS-matrix dekt
+/// alleen dat stuk.
 List<_Hunk> _lcsDiff(List<String> a, List<String> b) {
+  final core = _trimCommon(a, b);
+  final hunks = <_Hunk>[];
+
+  // Prefix als equal-hunk.
+  if (core.aStart > 0) {
+    hunks.add(_Hunk(
+      equal: true,
+      baselineStart: 0,
+      baselineEnd: core.aStart,
+      currentStart: 0,
+      currentEnd: core.bStart,
+    ));
+  }
+
+  // Kern: LCS op het middenstuk.
+  final aCore = a.sublist(core.aStart, core.aEnd);
+  final bCore = b.sublist(core.bStart, core.bEnd);
+  if (aCore.isNotEmpty || bCore.isNotEmpty) {
+    if (aCore.length > _lcsMaxDim || bCore.length > _lcsMaxDim) {
+      // Te groot voor volledige LCS: behandel als één grote change-hunk.
+      hunks.add(_Hunk(
+        equal: false,
+        baselineStart: core.aStart,
+        baselineEnd: core.aEnd,
+        currentStart: core.bStart,
+        currentEnd: core.bEnd,
+      ));
+    } else {
+      final coreHunks = _lcsHunks(aCore, bCore);
+      for (final h in coreHunks) {
+        hunks.add(_Hunk(
+          equal: h.equal,
+          baselineStart: h.baselineStart + core.aStart,
+          baselineEnd: h.baselineEnd + core.aStart,
+          currentStart: h.currentStart + core.bStart,
+          currentEnd: h.currentEnd + core.bStart,
+        ));
+      }
+    }
+  }
+
+  // Suffix als equal-hunk.
+  if (core.aEnd < a.length) {
+    hunks.add(_Hunk(
+      equal: true,
+      baselineStart: core.aEnd,
+      baselineEnd: a.length,
+      currentStart: core.bEnd,
+      currentEnd: b.length,
+    ));
+  }
+
+  return hunks;
+}
+
+/// Volledige LCS-hunks op twee lijsten.
+List<_Hunk> _lcsHunks(List<String> a, List<String> b) {
   final m = a.length, n = b.length;
   final dp = List<List<int>>.generate(m + 1, (_) => List<int>.filled(n + 1, 0));
   for (var i = m - 1; i >= 0; i--) {
@@ -165,7 +320,7 @@ List<_Hunk> _lcsDiff(List<String> a, List<String> b) {
 /// baseline-regels die de LCS niet kon mappen (verplaatst door de round-trip)
 /// zoeken we op inhoud in original — de round-trip verandert regelposities
 /// maar niet de tekst van ongewijzigde regels.
-String _applyEdits(
+List<String> _applyEdits(
   List<String> origLines,
   List<String> baseLines,
   List<String> currLines,
@@ -251,7 +406,7 @@ String _applyEdits(
     }
     if (insertion.containsKey(oi)) result.addAll(insertion[oi]!);
   }
-  return result.join('\n');
+  return result;
 }
 
 /// Zoekt een ongebruikte positie in original met de gegeven regeltekst.

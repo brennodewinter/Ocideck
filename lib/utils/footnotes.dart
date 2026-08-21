@@ -51,7 +51,10 @@ class Footnote {
 }
 
 /// Een definitieregel: `[^label]: tekst`, hooguit drie spaties ingesprongen.
-final _definitionStart = RegExp(r'^ {0,3}\[\^([^\]\s]+)\]:[ \t]*(.*)$');
+/// `multiLine` zodat `^` op élke regel matcht, niet alleen de eerste —
+/// anders mist `nextFootnoteLabel` een definitie die niet op regel 0 staat.
+final _definitionStart =
+    RegExp(r'^ {0,3}\[\^([^\]\s]+)\]:[ \t]*(.*)$', multiLine: true);
 
 /// Een verwijzing in de lopende tekst: `[^label]`, niet gevolgd door een
 /// dubbele punt (dat is een definitie).
