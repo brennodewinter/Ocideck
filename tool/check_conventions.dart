@@ -121,7 +121,7 @@ const Map<String, int> fileSizeBaseline = {
   // beveiligingsalarm via _ref/importSecurityAlarmProvider) en verhuizen naar
   // een part-file vereist zes params door een helper — fragmentatie zonder
   // winst. Zie de classSizeBaseline-verhoging voor dezelfde motivatie.
-  'lib/state/tabs_provider.dart': 1007,
+  'lib/state/tabs_provider.dart': 1017,
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
