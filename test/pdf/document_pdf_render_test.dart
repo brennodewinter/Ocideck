@@ -275,6 +275,23 @@ void main() {
       expect('Naam'.allMatches(text).length, greaterThan(1));
     });
 
+    test(
+      'een tabel die meer dan twintig bladzijden beslaat slaat de export niet stuk',
+      () async {
+        // De standaard `maxPages: 20` uit `package:pdf` is een
+        // oneindige-lus-wachter, geen documentlengtelimiet. Een tabel van
+        // tweeduizend rijen loopt ver over twintig bladzijden en mag de export
+        // niet afbreken met `PdfTooBigPageException`.
+        final rows = List.generate(
+          2000,
+          (i) => '| rij $i met wat tekst | $i |',
+        ).join('\n');
+        final bytes = await render('| Naam | Nummer |\n| --- | --- |\n$rows\n');
+        expect(pdfPageCount(bytes), greaterThan(20));
+        expect(pdfVisibleText(bytes), contains('rij 1990'));
+      },
+    );
+
     test('een lange lijst loopt door', () async {
       final items = List.generate(150, (i) => '- punt $i').join('\n');
       final bytes = await render('$items\n');

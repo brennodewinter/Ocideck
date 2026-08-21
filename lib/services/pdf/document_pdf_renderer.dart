@@ -200,6 +200,15 @@ Future<Uint8List> _render(
   document.addPage(
     pw.MultiPage(
       pageTheme: pageTheme,
+      // De veiligheidsgrens uit `package:pdf` is twintig bladzijden per
+      // enkele widget — bedoeld om een oneindige opmaaklus te vangen, niet om
+      // de lengte van een document te beperken. Een lange tabel, een alinea
+      // met `TextOverflow.span` of een inhoudsopgave met honderden koppen
+      // kan legitiem meer dan twintig bladzijden beslaan; de standaardwaarde
+      // slaat dan de hele export stuks (zie `PdfTooBigPageException`).
+      // Duizend is ruim voldoende voor elk realistisch document en vangt een
+      // echte lus nog steeds af.
+      maxPages: 1000,
       header: chrome.hasHeader
           ? (context) => _band(
               context,
