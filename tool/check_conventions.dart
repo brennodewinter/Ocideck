@@ -130,6 +130,13 @@ const Map<String, int> fileSizeBaseline = {
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
   'lib/services/export_service.dart': 1023,
+  // +182 (#1686): zoeken en zoeken-en-vervangen — de find/replace-staat
+  // (velden + methoden) en de MarkdownFindBar in de build. De logica hergebruikt
+  // text_search + MarkdownSourceController uit de presentatie-broneditor; er
+  // valt geen gedrag uit te tillen naar een part zonder een extension met
+  // private-veldtoegang te maken. Het scherm heeft al zes part-bestanden; de
+  // find/replace-methoden zijn cohesive met de State-levenscyclus.
+  'lib/widgets/document_editor_screen.dart': 1200,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -242,6 +249,12 @@ const Map<String, int> classSizeBaseline = {
   // klasse (parts/document_markdown_image.dart), maar de blokselectie zelf
   // kan niet zonder de interne _Kind-enum en de _parse-lus.
   'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1008,
+  // +185 (#1686): zoeken en zoeken-en-vervangen — find/replace-staat (velden +
+  // methoden) en de MarkdownFindBar in de build. Hergebruikt text_search +
+  // MarkdownSourceController uit de presentatie-broneditor; de methoden zijn
+  // cohesive met de State-levenscyclus (lezen/zetten _controller, _viewMode,
+  // setState) en kunnen niet zonder private-veldtoegang naar een losse klasse.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1200,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
