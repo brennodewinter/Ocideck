@@ -292,6 +292,29 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // Een document *ís* zijn bron: geen deck-parse, geen sidecars. Byte-getrouw
       // terug in een documenttabblad, gemarkeerd als (nog) niet opgeslagen.
       if (snap.kind == MarkdownKind.document) {
+        // Fail-closed: een herstelbestand is dezelfde klasse invoer als een
+        // bestand — bytes die later HTML/PDF/LaTeX worden. Een gewijzigd of
+        // vervangen herstelbestand (crash, gedeelde machine, malware in de
+        // gebruikersmap) mag de poort niet omzeilen die `openDocumentDetailed`
+        // wél opzet. Zie #1643.
+        final findings = MarkdownSafetyScanner.scan(snap.markdown);
+        if (findings.isNotEmpty) {
+          logWarning(
+            'restoreRecovered: documentmomentopname geweigerd — uitvoerbare '
+            'inhoud (${findings.length} bevinding(en))',
+            snap.filePath,
+          );
+          if (mounted) {
+            _ref
+                .read(importSecurityAlarmProvider.notifier)
+                .state = ImportSecurityAlarm(
+              path: snap.filePath ?? snap.label,
+              findings: findings,
+            );
+          }
+          unreadable++;
+          continue;
+        }
         final tab = _createDocumentTab(
           MarkdownDocument.parse(snap.markdown),
           filePath: snap.filePath,
