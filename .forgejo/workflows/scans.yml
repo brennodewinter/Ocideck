@@ -85,7 +85,7 @@ jobs:
     # valt de registry toch weg, dan start de job niet — dezelfde beschikbaarheids-
     # grens als de runner zelf.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-scans:gl8.30.1-th3.97.0-sg1.173.0
+      image: pawprint.vigilis.online/librekat/ocideck-scans:gl8.30.1-th3.97.0-sg1.174.0
     env:
       # De enige plek náást `.github/pinned-ci-versions.json` waar deze drie
       # versies staan; `pinned_versions_manifest_test` houdt ze gelijk. Ze zijn
@@ -93,7 +93,7 @@ jobs:
       # maar de verwachte waarde waartegen de hercontrole hieronder toetst.
       GITLEAKS_VERSION: 8.30.1
       TRUFFLEHOG_VERSION: 3.97.0
-      SEMGREP_VERSION: 1.173.0
+      SEMGREP_VERSION: 1.174.0
     steps:
       # De hercontrole die scanners-in-een-image pas verdedigbaar maakt: toets dat
       # het ingebakken image exact de gepinde versies draagt. Dit is het equivalent
