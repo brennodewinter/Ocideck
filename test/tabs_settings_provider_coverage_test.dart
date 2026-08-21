@@ -343,6 +343,61 @@ void main() {
       expect(container.read(tabsProvider).tabs, hasLength(1));
     });
 
+    // #1643: een herstelbestand is dezelfde klasse invoer als een bestand —
+    // bytes die later HTML/PDF/LaTeX worden. Een gewijzigd of vervangen
+    // herstelbestand mag de veiligheidsscan niet omzeilen die
+    // `openDocumentDetailed` wél opzet. Fail-closed: weigeren, tellen als
+    // onleesbaar, alarm tonen, en níet als tabblad terugzetten.
+    test('restoreRecovered weigert een documentmomentopname met <script>', () {
+      final (container, tabs) = build();
+      final unreadable = tabs.restoreRecovered([
+        RecoverySnapshot(
+          id: 'snap-evil',
+          savedAt: DateTime.now(),
+          filePath: '/herstel/memo.md',
+          label: 'Memo',
+          kind: MarkdownKind.document,
+          markdown: '# Memo\n\n<script>alert(1)</script>\n',
+        ),
+      ]);
+
+      expect(
+        unreadable,
+        1,
+        reason: 'onveilige momentopname telt als onleesbaar',
+      );
+      // Geen tabblad teruggezet: de starter staat er nog, ongeopend.
+      expect(container.read(tabsProvider).tabs, hasLength(1));
+      expect(container.read(tabsProvider).current!.isOpen, isFalse);
+      // Het alarm is geactiveerd met de bevinding, net als bij openen.
+      final alarm = container.read(importSecurityAlarmProvider);
+      expect(alarm, isNotNull);
+      expect(alarm!.path, '/herstel/memo.md');
+      expect(alarm.findings, isNotEmpty);
+    });
+
+    test(
+      'restoreRecovered weigert een documentmomentopname met javascript:-link',
+      () {
+        final (container, tabs) = build();
+        final unreadable = tabs.restoreRecovered([
+          RecoverySnapshot(
+            id: 'snap-js',
+            savedAt: DateTime.now(),
+            filePath: null,
+            label: 'Notitie',
+            kind: MarkdownKind.document,
+            markdown: '[klik](javascript:doei())',
+          ),
+        ]);
+
+        expect(unreadable, 1);
+        expect(container.read(tabsProvider).tabs, hasLength(1));
+        // filePath ontbreekt (nooit opgeslagen document) → label als naam.
+        expect(container.read(importSecurityAlarmProvider)!.path, 'Notitie');
+      },
+    );
+
     test(
       'openDeckFromBytes opens a second tab beside an already-open one',
       () async {

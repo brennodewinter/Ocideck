@@ -116,6 +116,12 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
+  // +23 (#1643): fail-closed MarkdownSafetyScanner.scan in restoreRecovered.
+  // De scan is cohesief met de herstel-lus (leest snap-velden, zet het
+  // beveiligingsalarm via _ref/importSecurityAlarmProvider) en verhuizen naar
+  // een part-file vereist zes params door een helper — fragmentatie zonder
+  // winst. Zie de classSizeBaseline-verhoging voor dezelfde motivatie.
+  'lib/state/tabs_provider.dart': 1007,
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
@@ -323,7 +329,12 @@ const Map<String, int> classSizeBaseline = {
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   // Verlaagd van 2235 naar 2232: de klasse meet 2227.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2232,
+  // +22 (#1643): fail-closed MarkdownSafetyScanner.scan in restoreRecovered —
+  // documentherstel is dezelfde invoerklasse als een bestand en mag de poort
+  // niet omzeilen. De scan is cohesief met de herstel-lus (leest snap-velden,
+  // zet het beveiligingsalarm) en verhuizen naar een part-file vereist zes
+  // params door een helper — fragmentatie zonder winst.
+  'lib/state/tabs_provider.dart#TabsNotifier': 2254,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`
