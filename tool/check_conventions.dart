@@ -243,6 +243,12 @@ const Map<String, int> classSizeBaseline = {
   // klasse (parts/document_markdown_image.dart), maar de blokselectie zelf
   // kan niet zonder de interne _Kind-enum en de _parse-lus.
   'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1008,
+  // +185 (#1686): zoeken en zoeken-en-vervangen — find/replace-staat (velden +
+  // methoden) en de MarkdownFindBar in de build. Hergebruikt text_search +
+  // MarkdownSourceController uit de presentatie-broneditor; de methoden zijn
+  // cohesive met de State-levenscyclus (lezen/zetten _controller, _viewMode,
+  // setState) en kunnen niet zonder private-veldtoegang naar een losse klasse.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1200,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
