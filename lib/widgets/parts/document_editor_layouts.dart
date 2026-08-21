@@ -31,6 +31,69 @@ String? _documentProjectPath(WidgetRef ref) {
 /// staat zelf (zelfde library), zodat de methoden ongewijzigd blijven werken —
 /// hetzelfde patroon als de tabel-part van de documentweergave.
 extension _DocumentEditorLayouts on _DocumentEditorScreenState {
+  /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
+  /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
+  /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
+  Future<bool> _smartPaste() async {
+    final state = ref.read(documentProvider);
+    final projectPath = state.filePath == null
+        ? null
+        : p.dirname(state.filePath!);
+    final imageService = ref.read(imageServiceProvider);
+    final outcome = await imageService.pasteImageDetailed(
+      projectPath: projectPath,
+    );
+    if (outcome.path != null) {
+      _insertBlock('![](${outcome.path})');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.d('Afbeelding geplakt'))),
+        );
+      }
+      return true;
+    }
+    // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
+    if (outcome.failure != null &&
+        outcome.failure != ImageImportFailure.noClipboardImage &&
+        mounted) {
+      reportImageImportFailure(context, outcome.failure);
+      return true;
+    }
+
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final html = await readClipboardHtml();
+    final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
+    if (resolved == null) return false;
+
+    if (resolved.kind == ClipboardMarkdownKind.table) {
+      _insertBlock(resolved.text);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.d('Tabel geplakt'))),
+        );
+      }
+      return true;
+    }
+
+    _insertPastedMarkdown(resolved.text);
+    return true;
+  }
+
+  /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
+  void _insertPastedMarkdown(String text) {
+    final sel = _controller.selection;
+    final start = sel.isValid ? sel.start : _controller.text.length;
+    final end = sel.isValid ? sel.end : start;
+    final next = _controller.text.replaceRange(start, end, text);
+    _applyingExternal = true;
+    _controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(offset: start + text.length),
+    );
+    _applyingExternal = false;
+    _commitDocumentBody(ref, next, coalesceKey: 'doc');
+  }
+
   /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
   /// venster, onder elkaar wanneer het te smal wordt voor twee leesbare kolommen.
   /// De Overzicht-rail komt erbij zodra er breedte genoeg is.

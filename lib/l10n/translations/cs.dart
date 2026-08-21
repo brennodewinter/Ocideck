@@ -1636,6 +1636,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Řádek {n} obsahuje HTML komentáře nebo HTML značky. Vizuální editor to nemůže zobrazit — Režim zdroje aktivován.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Řádek {n} obsahuje escapovanou interpunkci (např. \\*). Vizuální editor to nemůže zobrazit bez ztrát — Režim zdroje aktivován.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Řádek {n} je volný řádek tabulky mimo blok tabulky. Vizuální editor ho nemůže zobrazit — Režim zdroje aktivován.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Režim zdroje chrání značky, které vizuální editor nepodporuje bez ztrát. Přepněte na Zdroj pro tyto konstrukce.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo se vytiskne zrnitě: soubor má {breed}×{hoog} px, což při této velikosti dává {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2193,8 +2201,6 @@ const _dutchSourceAddCs = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Otázku nelze hrát: {aantal} odpovědí, zatímco tento typ otázky povoluje nejvýše {maximum}.',
   'Actueel': 'Aktuální',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Zdrojový režim bezztrátově chrání formátování, které vizuální editor zatím nepodporuje.',
   'Codeblok': 'Blok kódu',
   'Controleren…': 'Zkontrolujte…',
   'Documentoverzicht': 'Přehled dokumentů',

@@ -1612,6 +1612,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'tatlh {n} HTML QaghHom tlhIH ghap HTML tlhagh ngaS. mIw leghbe\' — teS qaSpu\'DoH.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'tatlh {n} tlhagh tlhIH ngaS (rur \\*). mIw leghbe\' chIl — teS qaSpu\'DoH.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'tatlh {n} naDev cha\' tlhIH \'ej ngeb. mIw leghbe\' — teS qaSpu\'DoH.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'teS qaSpu\'DoH markup QaH mIw leghbe\' chIl. teS mev construction.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Degh SoQ \'oH vI\'Iqmey: De\' {breed}×{hoog} px \'oH, \'ej lo\'laHghach vam {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2159,8 +2167,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Qu\' Qapbe\': {aantal} jangmey, \'ach Qu\' botlhvamvaD {maximum} jangmey neH chaw\'lu\'.',
   'Actueel': 'DaH Qap',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Hal Segh pat vIlo\'taHvIS, ghItlh Segh\'e\' polmeH mIw Qan.',
   'Codeblok': 'ngoq \'ay\'',
   'Controleren…': 'DaqIn…',
   'Documentoverzicht': 'ghItlh naQ legh',

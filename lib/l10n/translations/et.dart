@@ -1628,6 +1628,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rida {n} sisaldab HTML-kommentaare või HTML-tage. Visuaalne redaktor ei saa seda kuvada — Lähterežiim on aktiveeritud.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Rida {n} sisaldab paomärke (nt \\*). Visuaalne redaktor ei saa seda kuvada ilma kadudeta — Lähterežiim on aktiveeritud.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rida {n} on lahtine tabelirida väljaspool tabeliplokki. Visuaalne redaktor ei saa seda kuvada — Lähterežiim on aktiveeritud.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Lähteerežiim kaitseb märgistust, mida visuaalne redaktor ei toeta ilma kadudeta. Lülituge lähtele nende konstruktsioonide jaoks.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo trükitakse teraline: fail on {breed}×{hoog} px, mis selles suuruses annab {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2185,8 +2193,6 @@ const _dutchSourceAddEt = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Küsimust ei saa mängida: {aantal} vastust, samas kui seda tüüpi küsimus lubab kuni {maximum}.',
   'Actueel': 'Praegune',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Allikarežiim kaitseb kadudeta vormindamist, mida visuaalne redaktor veel ei toeta.',
   'Codeblok': 'Koodiplokk',
   'Controleren…': 'Kontrolli…',
   'Documentoverzicht': 'Dokumendi ülevaade',

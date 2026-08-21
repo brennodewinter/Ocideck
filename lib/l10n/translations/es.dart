@@ -671,6 +671,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'La línea {n} contiene comentarios HTML o etiquetas HTML. El editor visual no puede mostrarlo — Modo fuente activado.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'La línea {n} contiene puntuación escapada (como \\*). El editor visual no puede mostrarlo sin pérdida — Modo fuente activado.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'La línea {n} es una fila de tabla suelta fuera de un bloque de tabla. El editor visual no puede mostrarla — Modo fuente activado.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'El modo fuente protege el marcado que el editor visual no admite sin pérdida. Cambie a Fuente para estas construcciones.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'El logotipo saldrá granulado en la impresión: el archivo es de {breed}×{hoog} px, lo que da {dpi} ppp a este tamaño.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -1233,8 +1241,6 @@ const _dutchSourceAddEs = {
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'La pregunta no se puede jugar: {aantal} respuestas, mientras que este tipo de pregunta permite un máximo de {maximum}.',
   'Actueel': 'Actual',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'El modo fuente protege el formato que el editor visual aún no admite sin pérdidas.',
   'Codeblok': 'bloque de código',
   'Controleren…': 'Comprobar…',
   'Documentoverzicht': 'Resumen del documento',

@@ -55,7 +55,10 @@ import '../utils/markdown_caret_map.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_visual_compatibility.dart'
-    show markdownRoundTripsVisually;
+    show
+        firstVisualLimitation,
+        MarkdownVisualLimitation,
+        markdownRoundTripsVisually;
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
@@ -171,13 +174,19 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // blok. De stijl (`theme:`) leeft in de frontmatter en wordt beheerd door de
     // Stijl-kiezer, niet als tekst getypt. Elke terugschrijf zet de frontmatter
     // er weer vóór, zodat `document.source` byte-getrouw blijft.
-    _controller = TextEditingController(
-      text: ref.read(documentProvider).document?.body ?? '',
-    );
+    final initialBody = ref.read(documentProvider).document?.body ?? '';
+    _controller = TextEditingController(text: initialBody);
     // Eén luisteraar vangt élke body-wijziging in de controller — typen én de
     // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
     // onChanged afvuurt). Zo stroomt alles langs dezelfde weg naar de notifier.
     _controller.addListener(_onControllerChanged);
+    // Bevat de body al bij het openen een constructie die de visuele editor niet
+    // verliesvrij aankan, dan start direct in de Bron-modus. De gebruiker hoeft
+    // niet eerst de visuele modus te zien falen om te begrijpen dat hij in de
+    // bron hoort te werken.
+    if (!markdownRoundTripsVisually(initialBody)) {
+      _viewMode = _DocViewMode.source;
+    }
   }
 
   @override
@@ -375,6 +384,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         );
         _applyingExternal = false;
       }
+      // Externe body-wijziging (ongedaan maken/opnieuw, of een ander tabblad
+      // dat hetzelfde document bewerkt) die de visuele modus niet aankan:
+      // wissel automatisch naar Bron en wijs de probleemregel aan. Bij gewoon
+      // typen in de visuele stand is de body altijd verliesvrij (de editor
+      // produceert alleen ronde-trip-Markdown), dus dit triggert niet per
+      // toetsaanslag.
+      if (_viewMode == _DocViewMode.visual &&
+          !markdownRoundTripsVisually(body)) {
+        _autoFallbackToSource(body);
+      }
     });
     final source = ref.watch(
       documentProvider.select((s) => s.document?.body ?? ''),
@@ -507,6 +526,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// de bron-controller.
   void _changeViewMode(_DocViewMode mode) {
     if (mode == _viewMode) return;
+    // De gebruiker kiest Visueel, maar de bron bevat een constructie die de
+    // rijke-tekstlaag niet verliesvrij aankan. In plaats van de visuele modus
+    // te openen en daarin stilletjes terug te vallen op brontekst, blijven we
+    // in de Bron-modus en wijzen we de probleemregel aan — dat is waar de
+    // gebruiker iets aan kan doen.
+    if (mode == _DocViewMode.visual) {
+      final body = _controller.text;
+      if (!markdownRoundTripsVisually(body)) {
+        _autoFallbackToSource(body);
+        return;
+      }
+    }
     if (_viewMode == _DocViewMode.visual) {
       final text = _controller.text;
       final offset = MarkdownCaretMap.of(
@@ -527,6 +558,57 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         if (mounted) _editorFocus.requestFocus();
       });
     }
+  }
+
+  /// Wissel automatisch naar de Bron-modus en plaats de cursor op de eerste
+  /// regel die de visuele editor niet aankan. Toont een snackbar die zegt
+  /// *wat* er mis is en op welke regel, zodat de gebruiker niet hoeft te
+  /// raden waarom de visuele modus niet opent.
+  void _autoFallbackToSource(String body) {
+    final hit = firstVisualLimitation(body);
+    // Zet de modus direct, zonder door [_changeViewMode] te gaan — die zou
+    // proberen de visuele caret mee te nemen, en we zijn al aan het verlaten.
+    setState(() => _viewMode = _DocViewMode.source);
+    if (hit == null) return;
+    // Plaats de cursor op het begin van de probleemregel in de bron-controller.
+    final lines = body.split('\n');
+    final offset = lines
+        .take(hit.lineIndex)
+        .fold<int>(0, (sum, line) => sum + line.length + 1);
+    _applyingExternal = true;
+    _controller.selection = TextSelection.collapsed(
+      offset: offset.clamp(0, body.length),
+    );
+    _applyingExternal = false;
+    final l10n = context.l10n;
+    final lineNo = hit.lineIndex + 1;
+    final message = switch (hit.limitation) {
+      MarkdownVisualLimitation.rawHtml =>
+        l10n
+            .d(
+              'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
+            )
+            .replaceAll('{n}', '$lineNo'),
+      MarkdownVisualLimitation.escapedPunctuation =>
+        l10n
+            .d(
+              'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.',
+            )
+            .replaceAll('{n}', '$lineNo'),
+      MarkdownVisualLimitation.looseTableLine =>
+        l10n
+            .d(
+              'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.',
+            )
+            .replaceAll('{n}', '$lineNo'),
+    };
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _editorFocus.requestFocus();
+      ScaffoldMessenger.maybeOf(
+        context,
+      )?.showSnackBar(SnackBar(content: Text(message)));
+    });
   }
 
   /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
@@ -587,69 +669,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       _pendingFootnoteLabel = footnoteLabel;
       _insertSignal++;
     });
-  }
-
-  /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
-  /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
-  /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
-  Future<bool> _smartPaste() async {
-    final state = ref.read(documentProvider);
-    final projectPath = state.filePath == null
-        ? null
-        : p.dirname(state.filePath!);
-    final imageService = ref.read(imageServiceProvider);
-    final outcome = await imageService.pasteImageDetailed(
-      projectPath: projectPath,
-    );
-    if (outcome.path != null) {
-      _insertBlock('![](${outcome.path})');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.d('Afbeelding geplakt'))),
-        );
-      }
-      return true;
-    }
-    // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
-    if (outcome.failure != null &&
-        outcome.failure != ImageImportFailure.noClipboardImage &&
-        mounted) {
-      reportImageImportFailure(context, outcome.failure);
-      return true;
-    }
-
-    final data = await Clipboard.getData(Clipboard.kTextPlain);
-    final html = await readClipboardHtml();
-    final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
-    if (resolved == null) return false;
-
-    if (resolved.kind == ClipboardMarkdownKind.table) {
-      _insertBlock(resolved.text);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.d('Tabel geplakt'))),
-        );
-      }
-      return true;
-    }
-
-    _insertPastedMarkdown(resolved.text);
-    return true;
-  }
-
-  /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
-  void _insertPastedMarkdown(String text) {
-    final sel = _controller.selection;
-    final start = sel.isValid ? sel.start : _controller.text.length;
-    final end = sel.isValid ? sel.end : start;
-    final next = _controller.text.replaceRange(start, end, text);
-    _applyingExternal = true;
-    _controller.value = TextEditingValue(
-      text: next,
-      selection: TextSelection.collapsed(offset: start + text.length),
-    );
-    _applyingExternal = false;
-    _commitDocumentBody(ref, next, coalesceKey: 'doc');
   }
 
   void _undo() => ref.read(documentProvider.notifier).undo();

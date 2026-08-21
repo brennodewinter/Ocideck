@@ -858,7 +858,7 @@ Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
         Expanded(
           child: Text(
             context.l10n.d(
-              'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
+              'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.',
             ),
             style: theme.bodyStyle.copyWith(fontSize: theme.fontSize - 1),
           ),

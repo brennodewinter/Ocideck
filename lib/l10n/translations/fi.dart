@@ -1635,6 +1635,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rivi {n} sisältää HTML-kommentteja tai HTML-tageja. Visuaalinen editori ei voi näyttää tätä — Lähdetila aktivoitu.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Rivi {n} sisältää escapeutua välimerkkejä (kuten \\*). Visuaalinen editori ei voi näyttää tätä häviöttömästi — Lähdetila aktivoitu.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rivi {n} on irrallinen taulurivi taululohkon ulkopuolella. Visuaalinen editori ei voi näyttää tätä — Lähdetila aktivoitu.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Lähdetila suojaa merkintöjä, joita visuaalinen editori ei tue häviöttömästi. Vaihda Lähteeseen näille rakenteille.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo tulostuu rakeisena: tiedosto on {breed}×{hoog} px, mikä tässä koossa vastaa {dpi} dpi:tä.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2189,8 +2197,6 @@ const _dutchSourceAddFi = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Kysymystä ei voi pelata: {aantal} vastausta, kun taas tämä kysymystyyppi sallii enintään {maximum}.',
   'Actueel': 'Nykyinen',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Lähdetila suojaa häviöttömästi muotoiluja, joita visuaalinen editori ei vielä tue.',
   'Codeblok': 'Koodilohko',
   'Controleren…': 'Tarkista…',
   'Documentoverzicht': 'Asiakirjan yleiskatsaus',

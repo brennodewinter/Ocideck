@@ -1634,6 +1634,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Baris {n} berisi komentar HTML atau tag HTML. Editor visual tidak dapat menampilkannya — Mode sumber telah diaktifkan.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Baris {n} berisi tanda baca yang di-escape (seperti \\*). Editor visual tidak dapat menampilkannya tanpa kehilangan — Mode sumber telah diaktifkan.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Baris {n} adalah baris tabel lepas di luar blok tabel. Editor visual tidak dapat menampilkannya — Mode sumber telah diaktifkan.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Mode sumber melindungi markup yang tidak didukung editor visual tanpa kehilangan. Beralih ke Sumber untuk konstruksi ini.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo akan tercetak berbintik: berkasnya {breed}×{hoog} px, yang pada ukuran ini menjadi {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2192,8 +2200,6 @@ const _dutchSourceAddId = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Pertanyaan tidak dapat dimainkan: {aantal} jawaban, sedangkan jenis pertanyaan ini mengizinkan maksimal {maximum}.',
   'Actueel': 'Saat ini',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Mode sumber melindungi pemformatan yang belum didukung oleh editor visual tanpa kehilangan.',
   'Codeblok': 'Blok kode',
   'Controleren…': 'Periksa…',
   'Documentoverzicht': 'Ikhtisar dokumen',

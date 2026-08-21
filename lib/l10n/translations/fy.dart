@@ -674,6 +674,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rigel {n} befettet HTML-kommintaren of HTML-tags. De fisuele editor kin dit net sjen litte — Boarnemodus is aktivearre.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Rigel {n} befettet ûntsnapte lêzestekens (lykas \\*). De fisuele editor kin dit net ferliesfrij sjen litte — Boarnemodus is aktivearre.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rigel {n} is in losse tabelrigel bûten in tabelblok. De fisuele editor kin dit net sjen litte — Boarnemodus is aktivearre.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Boarnemodus beskermet opmaak dy\'t de fisuele editor net ferliesfrij stippet. Skeakelje nei Boarne foar dizze konstruksjes.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'It logo komt kerrelich út de printer: it bestân is {breed}×{hoog} px en komt op dizze maat út op {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -1233,8 +1241,6 @@ const _dutchSourceAddFy = {
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'De fraach is net spielber: {aantal} antwurden, wylst dit soarte fraach maksimaal {maximum} tastiet.',
   'Actueel': 'Aktueel',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Boarne modus beskermet opmaak dat de fisuele bewurker noch net losslessly stipet.',
   'Codeblok': 'Koade blok',
   'Controleren…': 'Kontrolearje…',
   'Documentoverzicht': 'Dokumint oersjoch',

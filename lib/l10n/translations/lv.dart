@@ -1633,6 +1633,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rinda {n} satur HTML komentārus vai HTML tagus. Vizuālais redaktors nevar tos parādīt — Avota režīms aktivizēts.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Rinda {n} satur escape\'tu interpunkciju (kā \\*). Vizuālais redaktors nevar to parādīt bez zudumiem — Avota režīms aktivizēts.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rinda {n} ir brīva tabulas rinda ārpus tabulas bloka. Vizuālais redaktors nevar to parādīt — Avota režīms aktivizēts.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Avota režīms aizsargā iezīmējumu, kuru vizuālais redaktors neatbalsta bez zudumiem. Pārslēdzieties uz Avotu šīm konstrukcijām.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotips tiks izdrukāts graudains: datne ir {breed}×{hoog} px, kas šajā izmērā dod {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2189,8 +2197,6 @@ const _dutchSourceAddLv = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Jautājumu nevar spēlēt: {aantal} atbildes, kamēr šis jautājuma veids atļauj ne vairāk kā {maximum}.',
   'Actueel': 'Pašreizējais',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Avota režīms bez zudumiem aizsargā formatējumu, ko vizuālais redaktors vēl neatbalsta.',
   'Codeblok': 'Koda bloks',
   'Controleren…': 'Pārbaudiet…',
   'Documentoverzicht': 'Dokumentu pārskats',

@@ -1633,6 +1633,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rad {n} innehåller HTML-kommentarer eller HTML-taggar. Den visuella editorn kan inte visa detta — Källläge aktiverat.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Rad {n} innehåller escaped skiljetecken (som \\*). Den visuella editorn kan inte visa detta förlustfritt — Källläge aktiverat.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Rad {n} är en löst tabellrad utanför ett tabellblock. Den visuella editorn kan inte visa detta — Källläge aktiverat.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Källläge skyddar markup som den visuella editorn inte stöder förlustfritt. Växla till Källa för dessa konstruktioner.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotypen blir kornig i tryck: filen är {breed}×{hoog} px, vilket ger {dpi} dpi i den här storleken.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2191,8 +2199,6 @@ const _dutchSourceAddSv = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Frågan kan inte spelas: {aantal} svar, medan denna frågetyp tillåter högst {maximum}.',
   'Actueel': 'Aktuell',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Källläge skyddar formatering som den visuella redigeraren ännu inte stöder förlustfritt.',
   'Codeblok': 'Kodblock',
   'Controleren…': 'Kontrollera...',
   'Documentoverzicht': 'Dokumentöversikt',

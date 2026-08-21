@@ -1636,6 +1636,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'A(z) {n}. sor HTML-megjegyzéseket vagy HTML-címkéket tartalmaz. A vizuális szerkesztő nem tudja megjeleníteni — Forrásmód aktiválva.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'A(z) {n}. sor escape-elt írásjeleket tartalmaz (pl. \\*). A vizuális szerkesztő nem tudja veszteségmentesen megjeleníteni — Forrásmód aktiválva.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'A(z) {n}. sor egy laza táblázatsor egy táblázatblokkon kívül. A vizuális szerkesztő nem tudja megjeleníteni — Forrásmód aktiválva.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'A forrásmód védi a jelöléseket, amelyeket a vizuális szerkesztő nem támogat veszteségmentesen. Váltson Forrásra ezeknél a konstrukcióknál.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'A logó szemcsésen nyomtatódik ki: a fájl {breed}×{hoog} px, ami ekkora méretben {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2198,8 +2206,6 @@ const _dutchSourceAddHu = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'A kérdés nem játszható le: {aantal} válasz, miközben ez a kérdéstípus legfeljebb {maximum} választ engedélyez.',
   'Actueel': 'Aktuális',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'A Forrás mód veszteségmentesen védi azokat a formázásokat, amelyeket a vizuális szerkesztő még nem támogat.',
   'Codeblok': 'Kódblokk',
   'Controleren…': 'Ellenőrizze…',
   'Documentoverzicht': 'Dokumentum áttekintése',

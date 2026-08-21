@@ -673,6 +673,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Liña {n} ta konteni komentario HTML of tag HTML. E editor visual no por mostra esaki — Modo di fuente a keda aktivá.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Liña {n} ta konteni puntuacion ku escape ( manera \\*). E editor visual no por mostra esaki sin pèrdida — Modo di fuente a keda aktivá.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Liña {n} ta un liña di tabla sueltu pa fóra di un blok di tabla. E editor visual no por mostra esaki — Modo di fuente a keda aktivá.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Modo di fuente ta proteha markup ku e editor visual no ta sosténi sin pèrdida. Kambia pa Fuente pa e konstrukshonnan aki.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'E logo lo sali granular for di prènter: e archivo ta {breed}×{hoog} px i na e tamaño aki ta sali na {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -1232,8 +1240,6 @@ const _dutchSourceAddPap = {
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'E pregunta no por wordu hunga: {aantal} kontesta, miéntras ku e tipo di pregunta aki ta permití un máximo di {maximum}.',
   'Actueel': 'Aktual',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Modo di fuente ta protehá formato ku e editor visual no por konvertí ainda sin pèrdida.',
   'Codeblok': 'Blòki di kódigo',
   'Controleren…': 'Kontrolando…',
   'Documentoverzicht': 'Resúmen di dokumento',
