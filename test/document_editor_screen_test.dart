@@ -11,6 +11,7 @@ import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
+import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
@@ -939,5 +940,249 @@ void main() {
       find.text('Elk hoofdstuk begon al op een nieuwe pagina'),
       findsOneWidget,
     );
+  });
+
+  /// Roekt een sneltoets aan via de [CallbackShortcuts]-binding, zoals de
+  /// zoom-test hierboven: een toetsaanslag komt in een test niet bij
+  /// `CallbackShortcuts` zonder focus in de boom.
+  void invokeShortcut(WidgetTester tester, LogicalKeyboardKey key,
+      {bool meta = false, bool control = false}) {
+    for (final widget in tester.widgetList<CallbackShortcuts>(
+      find.byType(CallbackShortcuts),
+    )) {
+      for (final entry in widget.bindings.entries) {
+        final activator = entry.key;
+        if (activator is SingleActivator &&
+            activator.trigger == key &&
+            activator.meta == meta &&
+            activator.control == control) {
+          entry.value();
+          return;
+        }
+      }
+    }
+    fail('geen sneltoets gebonden aan ${key.keyLabel}');
+  }
+
+  testWidgets('Bron: zoeken telt matches en Volgende springt', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('alpha beta alpha gamma'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.byTooltip('Zoeken'));
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+
+    final queryField = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .first;
+    await tester.enterText(queryField, 'alpha');
+    await tester.pumpAndSettle();
+
+    // Twee treffers, de eerste geselecteerd: "1 / 2".
+    expect(find.text('1 / 2'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Volgende'));
+    await tester.pumpAndSettle();
+    expect(find.text('2 / 2'), findsOneWidget);
+
+    // Terug naar de eerste.
+    await tester.tap(find.byTooltip('Vorige'));
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 2'), findsOneWidget);
+  });
+
+  testWidgets('Bron: Ctrl+F opent de zoekbalk', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('een twee drie'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    expect(find.byType(MarkdownFindBar), findsNothing);
+    invokeShortcut(tester, LogicalKeyboardKey.keyF, control: true);
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+  });
+
+  testWidgets('Bron: Ctrl+H opent zoeken-en-vervangen', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('een twee drie'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+    // De vervangrij is open: de "Vervang alles"-knop staat er.
+    expect(find.text('Vervang alles'), findsOneWidget);
+  });
+
+  testWidgets('Bron: Vervang alles vervangt elke treffer in de bron', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('kat hond kat muis kat'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
+    await tester.pumpAndSettle();
+
+    final fields = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    await tester.enterText(fields.first, 'kat');
+    await tester.pumpAndSettle();
+    await tester.enterText(fields.at(1), 'vogel');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Vervang alles'));
+    await tester.pumpAndSettle();
+
+    expect(n.currentState.document!.source, 'vogel hond vogel muis vogel');
+  });
+
+  testWidgets('Bron: Vervang vervangt alleen de huidige treffer', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('kat hond kat muis kat'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
+    await tester.pumpAndSettle();
+
+    final fields = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    await tester.enterText(fields.first, 'kat');
+    await tester.pumpAndSettle();
+    await tester.enterText(fields.at(1), 'vogel');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Vervang'));
+    await tester.pumpAndSettle();
+
+    // Alleen de eerste treffer is vervangen; de andere twee staan er nog.
+    expect(n.currentState.document!.source, 'vogel hond kat muis kat');
+  });
+
+  testWidgets('Bron: Hoofdlettergevoelig onderscheidt KAT van kat', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('kat KAT kat'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.byTooltip('Zoeken'));
+    await tester.pumpAndSettle();
+
+    final queryField = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .first;
+    await tester.enterText(queryField, 'kat');
+    await tester.pumpAndSettle();
+    // Hoofdletterongevoelig: drie treffers.
+    expect(find.text('1 / 3'), findsOneWidget);
+
+    // Aan zetten: alleen de twee kleine-lettervarianten.
+    await tester.tap(
+      find.descendant(
+        of: find.byType(MarkdownFindBar),
+        matching: find.byType(Checkbox),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 2'), findsOneWidget);
+  });
+
+  testWidgets('Visueel: zoeken telt matches op de bron', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('alpha beta alpha gamma'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Standaard Visueel: de zoekbalk werkt daar ook.
+    await tester.tap(find.byTooltip('Zoeken'));
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+
+    final queryField = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .first;
+    await tester.enterText(queryField, 'alpha');
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 2'), findsOneWidget);
+
+    // Volgende springt de Quill-cursor naar de tweede treffer zonder crash.
+    await tester.tap(find.byTooltip('Volgende'));
+    await tester.pumpAndSettle();
+    expect(find.text('2 / 2'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Visueel: Vervang alles schrijft door naar de notifier', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('kat hond kat'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
+    await tester.pumpAndSettle();
+
+    final fields = find
+        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    await tester.enterText(fields.first, 'kat');
+    await tester.pumpAndSettle();
+    await tester.enterText(fields.at(1), 'vogel');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Vervang alles'));
+    await tester.pumpAndSettle();
+
+    expect(n.currentState.document!.source, contains('vogel'));
+    expect(n.currentState.document!.source, isNot(contains('kat')));
+  });
+
+  testWidgets('Escape sluit de zoekbalk', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('alpha beta'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.byTooltip('Zoeken'));
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+
+    // De zoekbalk vangt Escape zelf (de query-field heeft focus).
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+    expect(find.byType(MarkdownFindBar), findsNothing);
   });
 }
