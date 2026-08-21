@@ -161,8 +161,10 @@ De installatie-uitleg op de site (librekat.nl, `nl` als brontaal, vertaald via
 1. **Linux volwaardig opnemen.** Nu leunt de uitleg op de tarball; er komen
    AppImage/`.deb`(/`.rpm`) bij, elk met "download en start/installeer"-tekst per
    distributiegroep. Nieuwe of gewijzigde tekst → opnieuw vertalen.
-2. **macOS-tekst bijwerken.** Naast de directe download komt
-   `brew install --cask brennodewinter/ocideck/ocideck` (zodra de tap live is, #1227);
+2. **macOS-tekst bijwerken.** Naast de directe download komt de Homebrew-route:
+   eerst `brew tap librekat/ocideck <forge-URL>`, dan
+   `brew install --cask librekat/ocideck/ocideck` (de GitHub-shorthand
+   `brew install --cask brennodewinter/ocideck/ocideck` als terugvaloptie);
    de "ongetekend, zo open je hem"-tekst blijft gelden zolang releases niet
    genotariseerd zijn. Ook deze wijziging → opnieuw vertalen.
 3. **Flatpak makkelijk maken** hangt aan de Flatpak-beslissing hierboven: bij

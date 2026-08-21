@@ -824,7 +824,8 @@ the `v0.2.1-rc1` rehearsal (#1170, #1172).
 ### Homebrew cask (macOS)
 
 Each non-prerelease tag also updates a Homebrew **cask**, so macOS users can
-`brew install --cask brennodewinter/ocideck/ocideck`. The cask is only a pointer: it
+`brew install --cask librekat/ocideck/ocideck` after tapping our forge. The cask
+is only a pointer: it
 carries the release's download URL and the SHA-256 read straight from the
 published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
@@ -835,10 +836,22 @@ tracked separately (#1227).
   writes the cask. `scripts/update_homebrew_cask.sh` fills
   `homebrew/ocideck.rb.tmpl` and commits `Casks/ocideck.rb` to the tap. The
   GitHub `release.yml` deliberately has **no** such job — it would double-push.
-- **Tap topology.** The tap lives on our own forge as the canonical repo,
-  **mirrored to GitHub** (a Forgejo push-mirror on the tap repo) so the
-  `brew tap brennodewinter/ocideck` shorthand — which resolves to
-  `github.com/brennodewinter/homebrew-ocideck` — keeps working.
+- **Tap topology: the forge is the source, GitHub is the backup.** The tap lives
+  on our own forge as the canonical repo, **mirrored to GitHub** (a Forgejo
+  push-mirror on the tap repo). Homebrew's one-argument shorthand
+  (`brew tap brennodewinter/ocideck`) resolves to `github.com/...` *by
+  definition*, so that form always installs from the mirror. The two-argument
+  form taps any git URL, and that is the documented route in the README and the
+  FAQ:
+
+  ```sh
+  brew tap librekat/ocideck https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck.git
+  brew install --cask librekat/ocideck/ocideck
+  ```
+
+  The GitHub shorthand stays documented as the fallback for when the forge is
+  unreachable — a backup, not the source. (Both routes download the *app* from
+  the forge either way; what differs is where the cask recipe comes from.)
 - **One-time setup.** Create the tap repo `homebrew-ocideck` on the forge with a
   top-level `Casks/` directory; add a GitHub push-mirror to
   `brennodewinter/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
@@ -849,10 +862,34 @@ tracked separately (#1227).
   (same graceful-skip pattern as the web-deploy job). The release still publishes;
   only the cask is skipped.
 - **Fails soft on a missing tap.** Even with both secrets set, if the tap cannot
-  be cloned (it does not exist yet, or the token lacks push scope) the job logs a
-  `⚠️ tap onbereikbaar` note and exits green rather than turning the whole
-  release run red. A brand-new, still-empty tap repo is handled too: with no HEAD
-  branch yet the job falls back to `main`.
+  be cloned (it does not exist yet, or the token lacks push scope) the step logs a
+  `⚠️ tap onbereikbaar` note and exits 0 rather than aborting the run mid-release.
+  A brand-new, still-empty tap repo is handled too: with no HEAD branch yet the
+  job falls back to `main`.
+- **The tap is read back, not assumed.** Because of that soft failure, a green
+  job used to read as "tap updated" even when nothing had been pushed — a revoked
+  `HOMEBREW_TAP_TOKEN` stayed invisible until someone installed a stale version.
+  The last step therefore runs `scripts/verify_homebrew_cask.sh "$GITHUB_REF_NAME"`,
+  which re-reads `Casks/ocideck.rb` from the tap over the same public URL Homebrew
+  itself uses and compares its `version` to the tag. A mismatch — or a tap that
+  cannot be read at all — turns the job **red** with a `❌ Homebrew-cask NIET
+  bijgewerkt` note. Red here means "the tap needs attention", not "the release
+  failed": by then the artifacts are published and no job depends on this one.
+  Run the same check by hand at any time; without a tag it checks the newest
+  release:
+
+  ```bash
+  scripts/verify_homebrew_cask.sh          # or: scripts/verify_homebrew_cask.sh v<version>
+  ```
+- **The mirror is checked daily, not at release time.** A stalled push-mirror is
+  the same failure class one hop down: the forge tap is current, but everyone on
+  the GitHub shorthand gets a stale cask. Push-mirroring is asynchronous, so
+  checking it during the release run would go red on lag that is perfectly
+  normal. `.forgejo/workflows/tap-mirror-check.yml` therefore runs
+  `scripts/verify_homebrew_cask.sh --mirror` on a daily cron (and on
+  `workflow_dispatch`), which tolerates a lag of `MIRROR_GRACE_HOURS` (24) after
+  the release before it turns red. It re-checks the forge tap too, so a tap that
+  somehow went stale is caught the next day rather than at the next release.
 - **Caveat.** The cask is only a *smooth* install once the macOS release is
   notarised. An unsigned release (see the signing section above) installs fine
   via `brew` but Gatekeeper still blocks it on first launch — the cask eases

@@ -185,15 +185,24 @@ Desktopversie:
 - Schijfruimte: Het minimum benodigd voor applicatie + projecten
 
 ### Hoe installeer ik OciDeck op macOS met Homebrew?
-Gebruik je [Homebrew](https://brew.sh/), dan installeer je OciDeck op macOS met
-één commando:
+Gebruik je [Homebrew](https://brew.sh/), tap dan onze eigen forge en installeer
+daaruit:
+
+```sh
+brew tap librekat/ocideck https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck.git
+brew install --cask librekat/ocideck/ocideck
+```
+
+Dat is de canonieke route: zowel de cask als de app die hij ophaalt komt van onze
+forge. De GitHub-spiegel is de reservekopie, en die gaat in één commando omdat de
+shorthand van Homebrew per definitie naar GitHub wijst:
 
 ```sh
 brew install --cask brennodewinter/ocideck/ocideck
 ```
 
-Homebrew haalt de nieuwste release rechtstreeks uit onze eigen forge en
-controleert de checksum automatisch. De macOS-build is getekend met een Apple
+Hoe dan ook haalt Homebrew de release zelf rechtstreeks uit onze eigen forge en
+controleert hij de checksum automatisch. De macOS-build is getekend met een Apple
 Developer ID en genotariseerd, dus hij opent met een gewone dubbelklik. Later
 bijwerken doe je met `brew upgrade --cask ocideck`.
 

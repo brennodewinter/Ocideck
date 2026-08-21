@@ -138,10 +138,14 @@ directe download**, en veel dichterbij dan een app-store.
 Twee dingen bewaken we daarbij, zodat het een nevenkanaal blijft en geen slot:
 
 - **De tap is van ons.** De cask-formule leeft in een eigen tap-repo op de
-  **eigen forge** (canoniek), met een GitHub-spiegel voor de
-  `brew tap brennodewinter/ocideck`-shorthand. Zo is de bron inspecteerbaar en van ons;
-  de officiële `homebrew-cask` (met eigen reviewers en notability-criteria)
-  wordt bewust niet gebruikt.
+  **eigen forge** (canoniek), met een GitHub-spiegel als reservekopie. De
+  gedocumenteerde installatieroute tapt de forge rechtstreeks
+  (`brew tap librekat/ocideck https://pawprint.vigilis.online/LibreKAT/homebrew-ocideck.git`),
+  zodat zowel de formule als het artefact van ons komt; de shorthand
+  `brew install --cask brennodewinter/ocideck/ocideck` blijft staan als
+  terugvaloptie, want die lost per definitie naar GitHub op. Zo is de bron
+  inspecteerbaar en van ons; de officiële `homebrew-cask` (met eigen reviewers
+  en notability-criteria) wordt bewust niet gebruikt.
 - **Homebrew Cask is macOS-only.** Er bestaan geen Linux-casks. Linux krijgt dus
   een *eigen* installatieroute die op zo veel mogelijk distributies werkt
   (AppImage/Flatpak-spoor, #1227) — nooit een uitgeklede cask die alleen op
