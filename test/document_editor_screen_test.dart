@@ -945,8 +945,12 @@ void main() {
   /// Roekt een sneltoets aan via de [CallbackShortcuts]-binding, zoals de
   /// zoom-test hierboven: een toetsaanslag komt in een test niet bij
   /// `CallbackShortcuts` zonder focus in de boom.
-  void invokeShortcut(WidgetTester tester, LogicalKeyboardKey key,
-      {bool meta = false, bool control = false}) {
+  void invokeShortcut(
+    WidgetTester tester,
+    LogicalKeyboardKey key, {
+    bool meta = false,
+    bool control = false,
+  }) {
     for (final widget in tester.widgetList<CallbackShortcuts>(
       find.byType(CallbackShortcuts),
     )) {
@@ -978,7 +982,10 @@ void main() {
     expect(find.byType(MarkdownFindBar), findsOneWidget);
 
     final queryField = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .descendant(
+          of: find.byType(MarkdownFindBar),
+          matching: find.byType(TextField),
+        )
         .first;
     await tester.enterText(queryField, 'alpha');
     await tester.pumpAndSettle();
@@ -1041,8 +1048,10 @@ void main() {
     invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
     await tester.pumpAndSettle();
 
-    final fields = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    final fields = find.descendant(
+      of: find.byType(MarkdownFindBar),
+      matching: find.byType(TextField),
+    );
     await tester.enterText(fields.first, 'kat');
     await tester.pumpAndSettle();
     await tester.enterText(fields.at(1), 'vogel');
@@ -1054,7 +1063,9 @@ void main() {
     expect(n.currentState.document!.source, 'vogel hond vogel muis vogel');
   });
 
-  testWidgets('Bron: Vervang vervangt alleen de huidige treffer', (tester) async {
+  testWidgets('Bron: Vervang vervangt alleen de huidige treffer', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -1066,8 +1077,10 @@ void main() {
     invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
     await tester.pumpAndSettle();
 
-    final fields = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    final fields = find.descendant(
+      of: find.byType(MarkdownFindBar),
+      matching: find.byType(TextField),
+    );
     await tester.enterText(fields.first, 'kat');
     await tester.pumpAndSettle();
     await tester.enterText(fields.at(1), 'vogel');
@@ -1080,7 +1093,9 @@ void main() {
     expect(n.currentState.document!.source, 'vogel hond kat muis kat');
   });
 
-  testWidgets('Bron: Hoofdlettergevoelig onderscheidt KAT van kat', (tester) async {
+  testWidgets('Bron: Hoofdlettergevoelig onderscheidt KAT van kat', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -1093,7 +1108,10 @@ void main() {
     await tester.pumpAndSettle();
 
     final queryField = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .descendant(
+          of: find.byType(MarkdownFindBar),
+          matching: find.byType(TextField),
+        )
         .first;
     await tester.enterText(queryField, 'kat');
     await tester.pumpAndSettle();
@@ -1126,7 +1144,10 @@ void main() {
     expect(find.byType(MarkdownFindBar), findsOneWidget);
 
     final queryField = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField))
+        .descendant(
+          of: find.byType(MarkdownFindBar),
+          matching: find.byType(TextField),
+        )
         .first;
     await tester.enterText(queryField, 'alpha');
     await tester.pumpAndSettle();
@@ -1153,8 +1174,10 @@ void main() {
     invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
     await tester.pumpAndSettle();
 
-    final fields = find
-        .descendant(of: find.byType(MarkdownFindBar), matching: find.byType(TextField));
+    final fields = find.descendant(
+      of: find.byType(MarkdownFindBar),
+      matching: find.byType(TextField),
+    );
     await tester.enterText(fields.first, 'kat');
     await tester.pumpAndSettle();
     await tester.enterText(fields.at(1), 'vogel');
