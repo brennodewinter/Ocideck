@@ -58,38 +58,41 @@ class TableEditableCell extends StatelessWidget {
         // raster) worden hier afgevangen vóór het tekstveld ze ziet.
         onKeyEvent: (_, event) => editor.handleCellKey(row, column, event),
         onFocusChange: (has) => editor.setActiveCell(row, column, focused: has),
-        // Het tekstveld staat er altíjd — het draagt de focus, de cursor en de
-        // maat van de rij. Alleen zijn tekst wordt onzichtbaar gemaakt zolang je
-        // er niet in staat, en dan ligt de opgemaakte lezing eroverheen. Zo
-        // verspringt er niets op het moment dat je erin klikt, en blijft
-        // klikken, tabben en pijltjes werken zoals ze deden.
-        child: Stack(
-          // Beide lagen krijgen dezelfde breedte als de cel, en de cel wordt zo
-          // hoog als de hoogste van de twee. Zonder dat laatste sneed de rij de
-          // staarten van de letters af zodra de opgemaakte lezing een haar
-          // hoger uitkwam dan het tekstveld.
-          fit: StackFit.passthrough,
-          children: [
-            _field(focus, hideText: !editing),
-            if (!editing)
-              // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
-              // cursor van krijgt. En onhoorbaar voor de schermlezer, want het
-              // veld zegt dit al.
-              IgnorePointer(
-                child: ExcludeSemantics(
-                  child: Padding(
-                    padding: _padding,
-                    child: InlineMarkdownText(
-                      editor.cellController(row, column).text,
-                      style: style,
-                      linkColor: linkColor,
-                      codeBackground: codeBackground,
-                      textAlign: textAlign,
+        // Spreadsheet-stijl celmarkering: de actieve cel krijgt een lichte
+        // achtergrondkleur, zodat je ziet wélke cel je bewerkt — niet alleen
+        // de knipperende cursor, maar de hele cel als aangegeven gebied.
+        child: ColoredBox(
+          color: editing
+              ? caretColor.withValues(alpha: 0.12)
+              : Colors.transparent,
+          child: Stack(
+            // Beide lagen krijgen dezelfde breedte als de cel, en de cel wordt zo
+            // hoog als de hoogste van de twee. Zonder dat laatste sneed de rij de
+            // staarten van de letters af zodra de opgemaakte lezing een haar
+            // hoger uitkwam dan het tekstveld.
+            fit: StackFit.passthrough,
+            children: [
+              _field(focus, hideText: !editing),
+              if (!editing)
+                // Doorklikbaar: de tik hoort bij het veld eronder, dat er de
+                // cursor van krijgt. En onhoorbaar voor de schermlezer, want het
+                // veld zegt dit al.
+                IgnorePointer(
+                  child: ExcludeSemantics(
+                    child: Padding(
+                      padding: _padding,
+                      child: InlineMarkdownText(
+                        editor.cellController(row, column).text,
+                        style: style,
+                        linkColor: linkColor,
+                        codeBackground: codeBackground,
+                        textAlign: textAlign,
+                      ),
                     ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
