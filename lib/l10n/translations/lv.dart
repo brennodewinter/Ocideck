@@ -1633,6 +1633,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Izvēlieties kolonnas laika līnijai',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Laika līnija izmanto divas vai trīs kolonnas. Izvēlieties, kuras kolonnas no šīs tabulas kļūst par laika līniju. Pārējās kolonnas pazūd no tabulas.',
+  'Volgorde (marker)': 'Kārtība (marķieris)',
+  'Toelichting (optioneel)': 'Apraksts (pēc izvēles)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Rinda {n} satur HTML komentārus vai HTML tagus. Vizuālais redaktors nevar tos parādīt — Avota režīms aktivizēts.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

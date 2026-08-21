@@ -1635,6 +1635,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Izberite stolpce za časovni trak',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Časovni trak uporablja dva ali tri stolpce. Izberite, kateri stolpci te tabele postanejo časovni trak. Preostali stolpci izginejo iz tabele.',
+  'Volgorde (marker)': 'Vrstni red (oznaka)',
+  'Toelichting (optioneel)': 'Opis (neobvezno)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Vrstica {n} vsebuje komentarje HTML ali oznake HTML. Vizualni urejevalnik tega ne more prikazati — Virni način aktiviran.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

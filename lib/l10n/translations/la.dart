@@ -1649,6 +1649,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Columnas pro chronologia elige',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Chronologia duas aut tres columnas utitur. Elige quae columnae huius tabulae chronologia fiant. Reliquae columnae e tabula disparabunt.',
+  'Volgorde (marker)': 'Ordo (notula)',
+  'Toelichting (optioneel)': 'Descriptio (facultativus)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Linea {n} commentarios HTML aut notulas HTML continet. Editor visualis hoc ostendere non potest — Modus fontis activatus est.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

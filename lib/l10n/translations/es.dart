@@ -671,6 +671,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Kies kolommen voor de tijdlijn': 'Elegir columnas para la cronología',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Una cronología usa dos o tres columnas. Elige qué columnas de esta tabla forman la cronología. Las columnas restantes desaparecen de la tabla.',
+  'Volgorde (marker)': 'Orden (marcador)',
+  'Toelichting (optioneel)': 'Descripción (opcional)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'La línea {n} contiene comentarios HTML o etiquetas HTML. El editor visual no puede mostrarlo — Modo fuente activado.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

@@ -1636,6 +1636,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Oszlopok kiválasztása az idővonalhoz',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Egy idővonal két vagy három oszlopot használ. Válassza ki, mely oszlopok lesznek az idővonal. A többi oszlop eltűnik a táblázatból.',
+  'Volgorde (marker)': 'Sorrend (jelölő)',
+  'Toelichting (optioneel)': 'Leírás (opcionális)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'A(z) {n}. sor HTML-megjegyzéseket vagy HTML-címkéket tartalmaz. A vizuális szerkesztő nem tudja megjeleníteni — Forrásmód aktiválva.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

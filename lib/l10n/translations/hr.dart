@@ -1638,6 +1638,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Odaberite stupce za vremensku crtu',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Vremenska crta koristi dva ili tri stupca. Odaberite koji stupci ove tablice postaju vremenska crta. Ostali stupci nestaju iz tablice.',
+  'Volgorde (marker)': 'Redoslijed (oznaka)',
+  'Toelichting (optioneel)': 'Opis (neobavezno)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Redak {n} sadrži HTML komentare ili HTML oznake. Vizualni editor ne može to prikazati — Način izvora aktiviran.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

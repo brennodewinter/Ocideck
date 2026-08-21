@@ -673,6 +673,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kies kolommen voor de tijdlijn': 'Skoge kolomnan pa e timeline',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Un timeline ta usa dos of tres kolom. Skoge kua kolom di e tabla aki ta bira e timeline. E kolom restante ta keda fora di e tabla.',
+  'Volgorde (marker)': 'Orden (marka)',
+  'Toelichting (optioneel)': 'Deskripshon (opsional)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Liña {n} ta konteni komentario HTML of tag HTML. E editor visual no por mostra esaki — Modo di fuente a keda aktivá.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

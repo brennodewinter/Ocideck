@@ -1634,6 +1634,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Vælg kolonner til tidslinjen',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'En tidslinje bruger to eller tre kolonner. Vælg hvilke kolonner fra denne tabel der bliver tidslinjen. De resterende kolonner forsvinder fra tabellen.',
+  'Volgorde (marker)': 'Rækkefølge (markør)',
+  'Toelichting (optioneel)': 'Beskrivelse (valgfri)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Linje {n} indeholder HTML-kommentarer eller HTML-tags. Den visuelle editor kan ikke vise dette — Kildetilstand aktiveret.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

@@ -1654,6 +1654,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Изберете колони за времевата линия',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Времевата линия използва две или три колони. Изберете кои колони от тази таблица стават времева линия. Останалите колони изчезват от таблицата.',
+  'Volgorde (marker)': 'Ред (маркер)',
+  'Toelichting (optioneel)': 'Описание (по избор)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Ред {n} съдържа HTML коментари или HTML тагове. Визуалният редактор не може да ги покаже — Активиран е режимът на източника.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

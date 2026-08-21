@@ -1628,6 +1628,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Valige veerud ajajoone jaoks',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Ajajoon kasutab kaht või kolm veergu. Valige, millised veerud sellest tabelist saavad ajajooneks. Ülejäänud veerud kaovad tabelist.',
+  'Volgorde (marker)': 'Järjekord (marker)',
+  'Toelichting (optioneel)': 'Kirjeldus (valikuline)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Rida {n} sisaldab HTML-kommentaare või HTML-tage. Visuaalne redaktor ei saa seda kuvada — Lähterežiim on aktiveeritud.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

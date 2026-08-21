@@ -1633,6 +1633,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Välj kolumner för tidslinjen',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'En tidslinje använder två eller tre kolumner. Välj vilka kolumner från denna tabell som blir tidslinjen. De återstående kolumnerna försvinner från tabellen.',
+  'Volgorde (marker)': 'Ordning (markör)',
+  'Toelichting (optioneel)': 'Beskrivning (valfri)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Rad {n} innehåller HTML-kommentarer eller HTML-taggar. Den visuella editorn kan inte visa detta — Källläge aktiverat.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

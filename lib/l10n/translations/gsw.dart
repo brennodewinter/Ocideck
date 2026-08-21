@@ -1637,6 +1637,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Spalte für d Zyleteis wähle',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'E Zyleteis bruucht zwei oder drei Spalte. Wähl, weli Spalte vo dere Tabälle d Zyleteis wärde. Di reschtliche Spalte verschwinde us dr Tabälle.',
+  'Volgorde (marker)': 'Reiefolg (Markierig)',
+  'Toelichting (optioneel)': 'Beschribig (optional)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Zyle {n} het HTML-Kommentar oder HTML-Tags. Dr visuell Editor cha das nit aazeige — Quällmodus aktiviert.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

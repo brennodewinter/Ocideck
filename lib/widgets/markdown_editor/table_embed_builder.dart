@@ -90,8 +90,7 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   late TableEditController _editor;
 
   bool get _canBecomeTimeline =>
-      _editor.rows.isNotEmpty &&
-      (_editor.rows.first.length == 2 || _editor.rows.first.length == 3);
+      _editor.rows.isNotEmpty && _editor.rows.first.length >= 2;
 
   @override
   void initState() {
@@ -203,7 +202,45 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
 
   Future<void> _asTimeline() async {
     final current = _pending ?? widget.gfm;
-    final analysis = analyzeTimelineTable(current);
+    final lines = current.trimRight().split('\n');
+    final decoded = decodeMarkdownTableRows(lines);
+    if (decoded.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Deze tabel kan nog niet als tijdlijn worden weergegeven en blijft ongewijzigd.',
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+    final colCount = decoded.first.length;
+    // Bij 4+ kolommen kiest de gebruiker welke 2-3 kolommen de tijdlijn worden.
+    // De overige kolommen verdwijnen uit de tabel — de tijdlijn is een projectie,
+    // geen extra weergave, en de marker draagt geen kolommetadata.
+    String table = current;
+    if (colCount > 3) {
+      final selection = await _pickTimelineColumns(context, decoded);
+      if (!mounted || selection == null) return;
+      final subRows = [
+        [
+          decoded.first[selection.marker],
+          decoded.first[selection.event],
+          if (selection.metadata != null) decoded.first[selection.metadata!],
+        ],
+        for (final row in decoded.skip(1))
+          [
+            row.length > selection.marker ? row[selection.marker] : '',
+            row.length > selection.event ? row[selection.event] : '',
+            if (selection.metadata != null)
+              row.length > selection.metadata! ? row[selection.metadata!] : '',
+          ],
+      ];
+      table = encodeMarkdownTable(subRows);
+    }
+    final analysis = analyzeTimelineTable(table);
     if (!analysis.isUsable) {
       final message = switch (analysis.issue) {
         TimelineTableIssue.wrongColumnCount => context.l10n.d(
@@ -224,11 +261,10 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     final timeline = analysis.timeline!;
     final choice = await _confirmTimelineActivation(context, timeline);
     if (!mounted || choice == null) return;
-    var table = current;
     if (choice == _TimelineActivationChoice.sort) {
       final sorted = await smartSortTable(
         context,
-        current,
+        table,
         column: 0,
         ascending: true,
       );
@@ -339,5 +375,154 @@ Future<_TimelineActivationChoice?> _confirmTimelineActivation(
           ),
       ],
     ),
+  );
+}
+
+/// De kolommen die de gebruiker voor de tijdlijn heeft gekozen.
+class _TimelineColumnSelection {
+  const _TimelineColumnSelection({
+    required this.marker,
+    required this.event,
+    this.metadata,
+  });
+
+  final int marker;
+  final int event;
+  final int? metadata;
+}
+
+/// Toont een dialoog waarin de gebruiker kiest welke 2-3 kolommen van een brede
+/// tabel de tijdlijn worden (volgorde, gebeurtenis, optioneel toelichting).
+/// De overige kolommen verdwijnen uit de tabel.
+Future<_TimelineColumnSelection?> _pickTimelineColumns(
+  BuildContext context,
+  List<List<String>> rows,
+) {
+  final l10n = context.l10n;
+  final headers = rows.first;
+  final colCount = headers.length;
+  int marker = 0;
+  int event = 1;
+  int? metadata = colCount > 2 ? 2 : null;
+  final bodyCount = rows.length - 1;
+  final state = showDialog<_TimelineColumnSelection>(
+    context: context,
+    builder: (dialogContext) => StatefulBuilder(
+      builder: (ctx, setState) => AlertDialog(
+        title: Text(l10n.d('Kies kolommen voor de tijdlijn')),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.',
+                ),
+                style: Theme.of(ctx).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 16),
+              _ColumnDropdown(
+                label: l10n.d('Volgorde (marker)'),
+                headers: headers,
+                value: marker,
+                exclude: {event, metadata},
+                onChanged: (v) => setState(() => marker = v ?? 0),
+              ),
+              const SizedBox(height: 12),
+              _ColumnDropdown(
+                label: l10n.d('Gebeurtenis'),
+                headers: headers,
+                value: event,
+                exclude: {marker, metadata},
+                onChanged: (v) => setState(() => event = v ?? 1),
+              ),
+              const SizedBox(height: 12),
+              _ColumnDropdown(
+                label: l10n.d('Toelichting (optioneel)'),
+                headers: headers,
+                value: metadata,
+                exclude: {marker, event},
+                allowNone: true,
+                onChanged: (v) => setState(() => metadata = v),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '${l10n.d('Gebeurtenissen')}: $bodyCount',
+                style: Theme.of(ctx).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(l10n.d('Annuleren')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(
+              ctx,
+              _TimelineColumnSelection(
+                marker: marker,
+                event: event,
+                metadata: metadata,
+              ),
+            ),
+            child: Text(l10n.d('Tijdlijn maken')),
+          ),
+        ],
+      ),
+    ),
+  );
+  return state;
+}
+
+class _ColumnDropdown extends StatelessWidget {
+  const _ColumnDropdown({
+    required this.label,
+    required this.headers,
+    required this.value,
+    required this.exclude,
+    required this.onChanged,
+    this.allowNone = false,
+  });
+
+  final String label;
+  final List<String> headers;
+  final int? value;
+  final Set<int?> exclude;
+  final ValueChanged<int?> onChanged;
+  final bool allowNone;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(flex: 2, child: Text(label)),
+      Expanded(
+        flex: 3,
+        child: DropdownButton<int?>(
+          isExpanded: true,
+          value: value,
+          items: [
+            if (allowNone)
+              DropdownMenuItem<int?>(
+                value: null,
+                child: Text(context.l10n.d('Geen')),
+              ),
+            for (var i = 0; i < headers.length; i++)
+              if (!exclude.contains(i))
+                DropdownMenuItem<int?>(
+                  value: i,
+                  child: Text(
+                    headers[i].isEmpty
+                        ? '${context.l10n.d('Kolom')} ${i + 1}'
+                        : headers[i],
+                  ),
+                ),
+          ],
+          onChanged: onChanged,
+        ),
+      ),
+    ],
   );
 }

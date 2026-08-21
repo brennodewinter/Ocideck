@@ -1641,6 +1641,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Vyberte stĺpce pre časovú os',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Časová os používa dva alebo tri stĺpce. Vyberte, ktoré stĺpce z tejto tabuľky sa stanú časovou osou. Zvyšné stĺpce zmiznú z tabuľky.',
+  'Volgorde (marker)': 'Poradie (značka)',
+  'Toelichting (optioneel)': 'Popis (voliteľné)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Riadok {n} obsahuje HTML komentáre alebo HTML značky. Vizuálny editor ich nemôže zobraziť — Režim zdroja aktivovaný.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

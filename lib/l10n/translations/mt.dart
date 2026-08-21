@@ -1653,6 +1653,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Agħżel kolonni għat-tieqa ta\' ħin',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Tieqa ta\' ħin tuża tnejn jew tliet kolonni. Agħżel liema kolonni minn din it-tabella jsiru t-tieqa ta\' ħin. Il-kolonni l-oħra jisparixxu mit-tabella.',
+  'Volgorde (marker)': 'Ordni (marka)',
+  'Toelichting (optioneel)': 'Deskrizzjoni (opzjonali)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Linja {n} fiha kumenti HTML jew tags HTML. L-editur viżwali ma jistax juri dan — Modu tas-sors attivat.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

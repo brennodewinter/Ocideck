@@ -208,7 +208,7 @@ void main() {
     },
   );
 
-  testWidgets('een vierkolomstabel biedt geen onmogelijke tijdlijnactie', (
+  testWidgets('een vierkolomstabel biedt een kolomkiezer voor de tijdlijn', (
     tester,
   ) async {
     const table = '''
@@ -218,8 +218,19 @@ void main() {
 ''';
     await pumpEditor(tester, markdown: table);
 
-    expect(find.text('Als tijdlijn weergeven'), findsNothing);
+    // De knop is er nu — bij 4+ kolommen opent hij een kolomkiezer in plaats
+    // van de conversie stilletjes te weigeren.
+    expect(find.text('Als tijdlijn weergeven'), findsOneWidget);
     expect(find.widgetWithText(TextField, 'twee'), findsOneWidget);
+
+    await tester.tap(find.text('Als tijdlijn weergeven'));
+    await tester.pumpAndSettle();
+
+    // De kolomkiezer-dialoog toont de kolomkoppen als keuzes.
+    expect(find.text('Kies kolommen voor de tijdlijn'), findsOneWidget);
+    expect(find.textContaining('Volgorde'), findsOneWidget);
+    expect(find.text('Gebeurtenis'), findsOneWidget);
+    expect(find.textContaining('Toelichting'), findsOneWidget);
   });
 
   testWidgets('aandachtspunten kunnen vóór sorteren per rij worden bekeken', (

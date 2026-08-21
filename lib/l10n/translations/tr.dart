@@ -2552,6 +2552,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Zaman çizelgesi için sütunları seçin',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Bir zaman çizelgesi iki veya üç sütun kullanır. Bu tablodan hangi sütunların zaman çizelgesi olacağını seçin. Kalan sütunlar tablodan kaybolur.',
+  'Volgorde (marker)': 'Sıra (işaretleyici)',
+  'Toelichting (optioneel)': 'Açıklama (isteğe bağlı)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Satır {n} HTML yorumları veya HTML etiketleri içeriyor. Görsel editör bunu görüntüleyemiyor — Kaynak modu etkinleştirildi.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
