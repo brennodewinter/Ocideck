@@ -1640,6 +1640,9 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Postavke stranice u ovom dokumentu sadrže nevažeće vrijednosti i zanemarene su. Koriste se vaše postavke.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Datoteku je izmijenio drugi program.',
+  'Herladen': 'Učitaj ponovno',
   'Kies kolommen voor de tijdlijn': 'Odaberite stupce za vremensku crtu',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Vremenska crta koristi dva ili tri stupca. Odaberite koji stupci ove tablice postaju vremenska crta. Ostali stupci nestaju iz tablice.',

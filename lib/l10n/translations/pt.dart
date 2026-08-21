@@ -1664,6 +1664,9 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'A configuração de página neste documento contém valores inválidos e foi ignorada. As suas definições são usadas.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'O arquivo foi modificado por outro programa.',
+  'Herladen': 'Recarregar',
   'Kies kolommen voor de tijdlijn': 'Escolher colunas para a linha do tempo',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Uma linha do tempo usa duas ou três colunas. Escolha quais colunas desta tabela formam a linha do tempo. As colunas restantes desaparecem da tabela.',

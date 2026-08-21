@@ -2554,6 +2554,9 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Bu belgedeki sayfa düzeni geçersiz değerler içeriyor ve yoksayıldı. Ayarlarınız kullanılıyor.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Dosya başka bir program tarafından değiştirildi.',
+  'Herladen': 'Yeniden yükle',
   'Kies kolommen voor de tijdlijn': 'Zaman çizelgesi için sütunları seçin',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Bir zaman çizelgesi iki veya üç sütun kullanır. Bu tablodan hangi sütunların zaman çizelgesi olacağını seçin. Kalan sütunlar tablodan kaybolur.',

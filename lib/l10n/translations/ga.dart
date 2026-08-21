@@ -1666,6 +1666,9 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Tá luachanna neamhbhailí i socrú an leathanaigh sa cháipéis seo agus rinneadh neamhshuim de. Úsáidtear do shocruithe.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Athraigh clár eile an comhad.',
+  'Herladen': 'Athlódáil',
   'Kies kolommen voor de tijdlijn': 'Roghnaigh colúin don amlíne',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Úsáideann amlíne dhá nó trí cholún. Roghnaigh cé na colúin ón tábla seo a éireoidh in amlíne. Imeoidh na colúin eile den tábla.',

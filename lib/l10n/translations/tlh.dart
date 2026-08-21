@@ -1614,6 +1614,9 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'The page setup in this document contains invalid values and was ignored. Your settings are used instead.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'The file has been modified by another program.',
+  'Herladen': 'Reload',
   'Kies kolommen voor de tijdlijn': 'timelinevam ngerIq tlhIH wIv',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'timelinevam cha\' wej tlhIH lo\'. tablevam tlhIH wIv timelinevam ghaH. tlhIH remaining tablevo\' ngeH.',

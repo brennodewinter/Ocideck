@@ -1652,6 +1652,9 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Параметри сторінки в цьому документі містять недійсні значення та були проігноровані. Використовуються ваші налаштування.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Файл було змінено іншою програмою.',
+  'Herladen': 'Перезавантажити',
   'Kies kolommen voor de tijdlijn': 'Оберіть стовпці для часової лінії',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Часова лінія використовує два або три стовпці. Оберіть, які стовпці цієї таблиці стануть часовою лінією. Решта стовпців зникне з таблиці.',

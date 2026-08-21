@@ -676,6 +676,9 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'La mise en page de ce document contient des valeurs non valides et a été ignorée. Vos paramètres sont utilisés.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Le fichier a été modifié par un autre programme.',
+  'Herladen': 'Recharger',
   'Kies kolommen voor de tijdlijn': 'Choisir les colonnes pour la chronologie',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Une chronologie utilise deux ou trois colonnes. Choisissez quelles colonnes de ce tableau deviennent la chronologie. Les colonnes restantes disparaissent du tableau.',

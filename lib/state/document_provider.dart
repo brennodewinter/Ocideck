@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../models/markdown_document.dart';
+import '../services/document_integrity.dart';
 
 /// De bewerkbare toestand van één documenttabblad: het [MarkdownDocument] zelf,
 /// plus of het gewijzigd is, waar het op schijf vandaan komt, en of
@@ -42,6 +43,12 @@ class DocumentState {
   /// bron weg te schrijven (#1613).
   final bool visualEdited;
 
+  /// De SHA-512-hash van het bestand op schijf bij het laden of de laatste
+  /// opslag. Bij opslaan vergelijkt `saveDocumentWithDestination` deze met
+  /// de huidige bestandsinhoud — wijkt hij af, dan is het bestand buiten
+  /// OciDeck gewijzigd en vraagt een dialoog wat te doen (#1699, #1683).
+  final String? savedFileHash;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -53,6 +60,7 @@ class DocumentState {
     this.revision = 0,
     this.savedSource,
     this.visualEdited = false,
+    this.savedFileHash,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -69,6 +77,7 @@ class DocumentState {
     int? revision,
     String? savedSource,
     bool? visualEdited,
+    String? savedFileHash,
     bool clearError = false,
     bool clearFilePath = false,
   }) {
@@ -83,6 +92,7 @@ class DocumentState {
       revision: revision ?? this.revision,
       savedSource: savedSource ?? this.savedSource,
       visualEdited: visualEdited ?? this.visualEdited,
+      savedFileHash: savedFileHash ?? this.savedFileHash,
     );
   }
 }
@@ -137,6 +147,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       isDirty: false,
       savedSource: document.source,
       visualEdited: false,
+      savedFileHash: DocumentIntegrity.hashMarkdown(document.source),
     );
   }
 
@@ -222,13 +233,18 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   /// Markeer het document als opgeslagen; onthoud waar het nu leeft.
   /// [savedSource] wordt bijgewerkt naar de huidige bron, zodat een volgende
   /// opslag vanuit Visueel weer tegen de juiste basis diff't (#1613).
-  void markSaved({String? filePath}) {
+  /// [savedFileHash] wordt bijgewerkt naar de hash van de weggeschreven bytes
+  /// (#1699).
+  void markSaved({String? filePath, String? savedFileHash}) {
     state = state.copyWith(
       isDirty: false,
       filePath: filePath ?? state.filePath,
       clearError: true,
       savedSource: state.document?.source,
       visualEdited: false,
+      savedFileHash: savedFileHash ?? DocumentIntegrity.hashMarkdown(
+        state.document?.source ?? '',
+      ),
     );
   }
 

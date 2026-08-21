@@ -120,7 +120,11 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   /// zijn hoogte komt pas later binnen. Een document zonder afbeeldingen heeft
   /// alleen synchrone blokken (tekst, tabellen, code), en voor die volstaat een
   /// eenmalige meting: de boom hoeft niet te blijven staan.
-  late final bool _hasImages = _containsImageBlock(widget.markdown);
+  ///
+  /// Niet `late final`: na het invoegen van de eerste afbeelding of een
+  /// gewijzigd projectPath (waardoor een relatief beeld al of niet resolveert)
+  /// moet opnieuw bepaald worden of de meetboom moet blijven staan (#1652).
+  late bool _hasImages = _containsImageBlock(widget.markdown);
 
   /// Of de noten onderaan het blad komen te staan. Achterin is geen aparte
   /// tekenroute: dan lopen ze gewoon als laatste blokken in de tekststroom mee
@@ -205,19 +209,23 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
   @override
   void didUpdateWidget(PagedDocumentView old) {
     super.didUpdateWidget(old);
-    // Andere tekst of een ander vel betekent opnieuw meten; de oude einden
-    // slaan dan nergens meer op.
+    // Andere tekst, vel, of projectpad betekent opnieuw meten; de oude einden
+    // slaan dan nergens meer op. Het projectpad meeswegen: een relatief beeld
+    // resolveert al of niet afhankelijk van de basis, en dan verandert de
+    // afbeeldingshoogte (#1652).
     if (widget.markdown != old.markdown ||
         widget.pageSize != old.pageSize ||
         widget.margins != old.margins ||
         widget.profile != old.profile ||
         widget.chapterPageBreak != old.chapterPageBreak ||
-        widget.footnotePlacement != old.footnotePlacement) {
+        widget.footnotePlacement != old.footnotePlacement ||
+        widget.projectPath != old.projectPath) {
       _blockHeights = null;
       _measuring.clear();
       _notes = documentFootnotes(widget.markdown);
       _blockTexts = DocumentMarkdownView.blockTexts(widget.markdown);
       _timelinePagination = documentTimelinePaginationData(widget.markdown);
+      _hasImages = _containsImageBlock(widget.markdown);
     }
   }
 
@@ -428,7 +436,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     // paginaverdeling hoeveel ruimte er onder een blad weg moet. Ze krijgen
     // indexen áchter de blokken, zodat één teller volstaat.
     final notes = _notesOnPage ? _notes : const <Footnote>[];
-    final total = blockCount + notes.length;
+    // Eindnoten (achterin het document) meten als één extra blok: de
+    // DocumentMarkdownView tekent ze buiten de blockWrapper, dus de gewone
+    // blokmeting ziet ze niet. Zonder deze extra meting vallen lange eindnoten
+    // voorbij de laatste berekende pagina en worden ze afgeknipt (#1653).
+    final endnotes = !_notesOnPage && _notes.isNotEmpty ? _notes : const <Footnote>[];
+    final total = blockCount + notes.length + (endnotes.isNotEmpty ? 1 : 0);
     return ClipRect(
       child: Stack(
         children: [
@@ -468,6 +481,16 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                         themeProfile: widget.profile,
                       ),
                     ),
+                  if (endnotes.isNotEmpty)
+                    _MeasuredBlock(
+                      index: blockCount + notes.length,
+                      onMeasured: (i, height) =>
+                          _onMeasured(i, height, blockCount, total),
+                      child: DocumentFootnotesView(
+                        notes: endnotes,
+                        themeProfile: widget.profile,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -486,9 +509,17 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     if (_measuring[index] == height) return;
     _measuring[index] = height;
     if (_measuring.length < total) return;
-    final heights = [for (var i = 0; i < blockCount; i++) _measuring[i] ?? 0];
+    // Pagina-noten staan op indexen blockCount..blockCount+pageFootnoteCount-1.
+    // Eindnoten (één blok) staan daarna op index blockCount+pageFootnoteCount.
+    final pageFootnoteCount = _notesOnPage ? _notes.length : 0;
+    final hasEndnotesBlock = !_notesOnPage && _notes.isNotEmpty;
+    final heights = [
+      for (var i = 0; i < blockCount; i++) _measuring[i] ?? 0,
+      if (hasEndnotesBlock) _measuring[blockCount + pageFootnoteCount] ?? 0,
+    ];
     final noteHeights = [
-      for (var i = blockCount; i < total; i++) _measuring[i] ?? 0,
+      for (var i = blockCount; i < blockCount + pageFootnoteCount; i++)
+        _measuring[i] ?? 0,
     ];
     final prev = _blockHeights;
     final prevNotes = _noteHeights;
@@ -613,9 +644,20 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               child: OverflowBox(
                 alignment: Alignment.topLeft,
                 maxHeight: double.infinity,
-                child: Transform.translate(
-                  offset: Offset(0, -offset),
-                  child: SizedBox(width: _contentWidthPx, child: document),
+                // ponytail: ceiling — elk vel bouwt het volledige document
+                // op in de widgetboom (N × volledige layout). RepaintBoundary
+                // laat de compositor het gerasteriseerde vel cachen, zodat
+                // tenminste de paint-kost na de eerste frame meevalt. Een
+                // volledige oplossing (elk blok één keer renderen, per vel
+                // gesegmenteerd) vereist een andere paginaverdelingsarchitectuur.
+                child: RepaintBoundary(
+                  child: Transform.translate(
+                    offset: Offset(0, -offset),
+                    child: SizedBox(
+                      width: _contentWidthPx,
+                      child: document,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -635,9 +677,20 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
               left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
               right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
               bottom: _contentBottomPx + bleedPx,
-              child: DocumentFootnotesView(
-                notes: notes,
-                themeProfile: widget.profile,
+              // ponytail: ceiling — een enkele noot die langer is dan de
+              // paginahoogte kan niet over vellen worden verdeeld; we clippen
+              // hem binnen het tekstvlak zodat hij niet overlapt met de
+              // hoofdtekst. Een volledige oplossing vereist het splitsen van
+              // de noot over pagina's, wat een grotere herontwerp van de
+              // paginaverdeling vraagt.
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: _contentHeightPx),
+                child: ClipRect(
+                  child: DocumentFootnotesView(
+                    notes: notes,
+                    themeProfile: widget.profile,
+                  ),
+                ),
               ),
             ),
           if (widget.margins.hasBleed)
