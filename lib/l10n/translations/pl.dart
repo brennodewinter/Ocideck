@@ -1646,6 +1646,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Ustawienia strony w tym dokumencie zawierają nieprawidłowe wartości i zostały zignorowane. Używane są Twoje ustawienia.',
   'Kies kolommen voor de tijdlijn': 'Wybierz kolumny dla osi czasu',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Oś czasu używa dwóch lub trzech kolumn. Wybierz, które kolumny z tej tabeli staną się osią czasu. Pozostałe kolumny znikną z tabeli.',

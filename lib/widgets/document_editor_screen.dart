@@ -495,6 +495,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                       fields: fields,
                     ),
                     _DocViewMode.pages => _documentPagesLayout(
+                      context,
                       ref,
                       theme,
                       source,

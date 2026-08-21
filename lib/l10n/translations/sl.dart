@@ -1635,6 +1635,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Nastavitev strani v tem dokumentu vsebuje neveljavne vrednosti in je bila prezrta. Uporabljajo se vaše nastavitve.',
   'Kies kolommen voor de tijdlijn': 'Izberite stolpce za časovni trak',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Časovni trak uporablja dva ali tri stolpce. Izberite, kateri stolpci te tabele postanejo časovni trak. Preostali stolpci izginejo iz tabele.',

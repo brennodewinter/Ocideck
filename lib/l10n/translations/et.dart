@@ -1628,6 +1628,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Selle dokumendi lehekülje seadistus sisaldab vigaseid väärtusi ja need eirati. Kasutatakse teie sätteid.',
   'Kies kolommen voor de tijdlijn': 'Valige veerud ajajoone jaoks',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Ajajoon kasutab kaht või kolm veergu. Valige, millised veerud sellest tabelist saavad ajajooneks. Ülejäänud veerud kaovad tabelist.',

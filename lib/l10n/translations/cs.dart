@@ -1636,6 +1636,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Nastavení stránky v tomto dokumentu obsahuje neplatné hodnoty a bylo ignorováno. Používají se vaše nastavení.',
   'Kies kolommen voor de tijdlijn': 'Vyberte sloupce pro časovou osu',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Časová osa používá dva nebo tři sloupce. Vyberte, které sloupce z této tabulky se stanou časovou osou. Zbývající sloupce z tabulky zmizí.',

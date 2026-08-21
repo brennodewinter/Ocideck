@@ -673,6 +673,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'E paginasetting den e dokumento aki tin balor inválido i a ignor\'e. Bo settingnan ta wòrdu usá.',
   'Kies kolommen voor de tijdlijn': 'Skoge kolomnan pa e timeline',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Un timeline ta usa dos of tres kolom. Skoge kua kolom di e tabla aki ta bira e timeline. E kolom restante ta keda fora di e tabla.',

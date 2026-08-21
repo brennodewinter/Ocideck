@@ -1634,6 +1634,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Tata letak halaman dokumen ini berisi nilai tidak valid dan diabaikan. Setelan Anda digunakan.',
   'Kies kolommen voor de tijdlijn': 'Pilih kolom untuk lini masa',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Sebuah lini masa menggunakan dua atau tiga kolom. Pilih kolom mana dari tabel ini yang menjadi lini masa. Kolom sisanya hilang dari tabel.',
