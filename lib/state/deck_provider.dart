@@ -271,6 +271,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String improvementFramework = '',
     String improvementY01 = '',
     ImprovementY01Metric? improvementY01Metric,
+    String? projectPath,
   }) {
     final y01 =
         improvementY01Metric ??
@@ -285,6 +286,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       improvementFramework: improvementFramework,
       improvementY01Metric: y01,
       slides: slides ?? [Slide.create(SlideType.title).copyWith(title: title)],
+      projectPath: projectPath,
     );
     _clearHistory();
     state = DeckState(deck: deck, isDirty: true);

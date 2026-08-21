@@ -21,6 +21,7 @@ import '../models/slide.dart';
 import '../services/caption_service.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/description_service.dart';
+import '../services/document_chart_hydration.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
 import 'parts/document_export_pdf_support.dart';
@@ -347,8 +348,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // kopie. De documentclassificatie blijft gelden voor alle ontstane dia's;
     // alleen documentvelden en documentstijl zijn geen presentatiegegevens.
     final documentTlp = state.document?.tlp ?? TlpLevel.none;
-    final deck = DocumentDeckBridge.documentToDeck(
+    // Grafiekdata inline vouwen vóór de brug, gelijk aan het exportpad
+    // (buildDocumentExportBundle). Zonder dit staat een `source: data/….json`
+    // chart-dia leeg in het nieuwe tabblad — de cijfers reizen niet mee (#1639).
+    final projectPath = _documentProjectPath(ref);
+    final hydrated = await hydrateDocumentChartData(
       body,
+      projectPath: projectPath,
+    );
+    if (!mounted) return;
+    final deck = DocumentDeckBridge.documentToDeck(
+      hydrated,
+      projectPath: projectPath,
       title: title,
       tlp: documentTlp,
     );
@@ -359,7 +370,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     if (confirmed != true || !mounted) return;
     ref
         .read(tabsProvider.notifier)
-        .newDeckInNewTab(title, tlp: deck.tlp, slides: deck.slides);
+        .newDeckInNewTab(
+          title,
+          tlp: deck.tlp,
+          slides: deck.slides,
+          projectPath: projectPath,
+        );
   }
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.

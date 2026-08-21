@@ -121,7 +121,7 @@ const Map<String, int> fileSizeBaseline = {
   // beveiligingsalarm via _ref/importSecurityAlarmProvider) en verhuizen naar
   // een part-file vereist zes params door een helper — fragmentatie zonder
   // winst. Zie de classSizeBaseline-verhoging voor dezelfde motivatie.
-  'lib/state/tabs_provider.dart': 1017,
+  'lib/state/tabs_provider.dart': 1019,
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
@@ -136,7 +136,7 @@ const Map<String, int> fileSizeBaseline = {
   // valt geen gedrag uit te tillen naar een part zonder een extension met
   // private-veldtoegang te maken. Het scherm heeft al zes part-bestanden; de
   // find/replace-methoden zijn cohesive met de State-levenscyclus.
-  'lib/widgets/document_editor_screen.dart': 1200,
+  'lib/widgets/document_editor_screen.dart': 1209,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -254,7 +254,7 @@ const Map<String, int> classSizeBaseline = {
   // MarkdownSourceController uit de presentatie-broneditor; de methoden zijn
   // cohesive met de State-levenscyclus (lezen/zetten _controller, _viewMode,
   // setState) en kunnen niet zonder private-veldtoegang naar een losse klasse.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1200,
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1211,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
@@ -347,7 +347,7 @@ const Map<String, int> classSizeBaseline = {
   // niet omzeilen. De scan is cohesief met de herstel-lus (leest snap-velden,
   // zet het beveiligingsalarm) en verhuizen naar een part-file vereist zes
   // params door een helper — fragmentatie zonder winst.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2254,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2256,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`
@@ -399,7 +399,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1374, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1376, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
