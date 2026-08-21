@@ -124,6 +124,13 @@ const Map<String, int> fileSizeBaseline = {
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
   'lib/services/export_service.dart': 1023,
+  // +182 (#1686): zoeken en zoeken-en-vervangen — de find/replace-staat
+  // (velden + methoden) en de MarkdownFindBar in de build. De logica hergebruikt
+  // text_search + MarkdownSourceController uit de presentatie-broneditor; er
+  // valt geen gedrag uit te tillen naar een part zonder een extension met
+  // private-veldtoegang te maken. Het scherm heeft al zes part-bestanden; de
+  // find/replace-methoden zijn cohesive met de State-levenscyclus.
+  'lib/widgets/document_editor_screen.dart': 1200,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
