@@ -18,6 +18,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../models/page_size.dart';
+import '../../utils/log.dart';
 import '../export_metadata.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
@@ -194,7 +195,7 @@ Future<Uint8List> _render(
   // vijfentwintig identieke plaatjes.
   final headerSpans = markdownToPdfSpans(chrome.headerText);
   final footerSpans = markdownToPdfSpans(chrome.footerText);
-  final logo = chrome.logo == null ? null : pw.MemoryImage(chrome.logo!);
+  final logo = _logoImage(chrome.logo);
 
   document.addPage(
     pw.MultiPage(
@@ -375,6 +376,22 @@ pw.Widget _band(
       children: children,
     ),
   );
+}
+
+/// Het logo als afbeelding, of `null` wanneer de bytes er geen dragen.
+///
+/// Een `.svg` komt hier wél binnen — de afbeeldingsresolver laat dat formaat
+/// door — maar de rasterlezer maakt er niets van en gooit. Zonder deze `try`
+/// kost één ongelukkig gekozen logobestand de hele export; nu blijft het
+/// document staan en ontbreekt alleen het beeldmerk.
+pw.ImageProvider? _logoImage(Uint8List? bytes) {
+  if (bytes == null || bytes.isEmpty) return null;
+  try {
+    return pw.MemoryImage(bytes);
+  } on Exception catch (error) {
+    logWarning('DocumentPdf: logo kon niet gelezen worden', error);
+    return null;
+  }
 }
 
 pw.Widget _logo(pw.ImageProvider image, double width) => pw.Image(

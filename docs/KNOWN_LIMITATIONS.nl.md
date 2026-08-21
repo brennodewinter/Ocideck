@@ -112,8 +112,10 @@ Een kleine PNG die tot die maat wordt opgeblazen laat op papier zijn eigen pixel
 zien, en dat kan geen export repareren — het bestand hééft niet meer beeld. Wat de
 export wél doet is het na afloop zeggen, met de beeldmaat van het bestand erbij,
 de fijnheid waar het op uitkomt, en de breedte die wél schoon zou afdrukken (150
-dpi op de plek waar het logo terechtkomt). Een vectorlogo zou dit helemaal
-omzeilen; OciDeck leest nog op geen enkel oppervlak SVG-logo's.
+dpi op de plek waar het logo terechtkomt). Een vectorlogo zou dit helemaal omzeilen, maar
+alleen de HTML-export tekent er een: de documentweergave op het scherm en de PDF
+lezen allebei uitsluitend rasterbeeld, en een SVG-logo blijft uit de PDF weg in
+plaats van de export te breken.
 *(Toegevoegd 2026-08-21.)*
 
 ## Voetnoten in de HTML-export staan achteraan, nooit onderaan de bladzijde
