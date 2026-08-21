@@ -78,6 +78,27 @@ List<PdfBlock> markdownToPdfBlocks(
   return [...blocks, ..._endnoteBlocks(notes, footnotesTitle)];
 }
 
+/// Zet één regel Markdown om in stukken tekst met hun opmaak.
+///
+/// Voor de kop- en voetband van het document. Die band dráágt Markdown — het
+/// instelvenster noemt het veld zo, de documentweergave in de app zet hem met
+/// [InlineMarkdownText] en de HTML-export haalt er HTML uit — maar hij is geen
+/// blok: geen alinea's, geen lijsten, geen tabellen. Wat hier uit komt zijn
+/// dezelfde [PdfSpan]s als in de lopende tekst, zodat de band met dezelfde
+/// renderer wordt gezet en `**VERTROUWELIJK**` in de PDF net zo vet staat als op
+/// het scherm in plaats van als vier sterretjes.
+List<PdfSpan> markdownToPdfSpans(String markdown) {
+  final trimmed = markdown.trim();
+  if (trimmed.isEmpty) return const [];
+  final document = md.Document(
+    encodeHtml: false,
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+  );
+  return _PdfBlockConverter(
+    chapterPageBreak: false,
+  ).spans(document.parseInline(trimmed), const PdfSpan(''));
+}
+
 /// De marker die `<!-- toc -->` vervangt tijdens de parse. Geen leestekens die
 /// Markdown zelf betekenis geeft, zodat er onderweg niets aan verandert.
 const _tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';

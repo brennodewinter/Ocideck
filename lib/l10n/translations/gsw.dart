@@ -1637,6 +1637,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'S Logo chunt chörnig us em Drucker: d Datei isch {breed}×{hoog} px und git bi dere Grössi {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Wähl es Logo vo mindestens {px} px Breiti, oder mach d Logogrössi chliner.',
   'Thema accent op de documentband': 'Thema-Akzänt uf de Chopf-/Fuessziile',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Es isch e Dokumänt mit nöd gspicherte Ännderige us ere früenere Sitzig gfunde worde:',

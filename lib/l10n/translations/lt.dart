@@ -1641,6 +1641,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logotipas bus išspausdintas grūdėtas: failas yra {breed}×{hoog} px, o šiuo dydžiu tai duoda {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Pasirinkite bent {px} px pločio logotipą arba sumažinkite logotipo dydį.',
   'Thema accent op de documentband': 'Temos akcentas antraštėje/poraštėje',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Rastas ankstesnės sesijos dokumentas su neišsaugotais pakeitimais:',

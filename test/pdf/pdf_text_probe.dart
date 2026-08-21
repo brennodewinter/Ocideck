@@ -46,7 +46,45 @@ List<String> pdfOutlineTitles(Uint8List bytes) => [
     _unescape(match.group(1)!),
 ];
 
+/// De sneden die het bestand werkelijk aanroept, op naam.
+///
+/// Waarom dit bestaat: "staat de kop vet" is met de tekst alleen niet te
+/// beantwoorden — die is in beide gevallen dezelfde letters. De vraag is wélke
+/// snede het bestand ervoor aanroept, en dat staat als `/BaseFont` gewoon in het
+/// fontobject. De veertien standaardsneden worden niet ingebed, dus dit is
+/// tevens de enige plek waar het antwoord te vinden is.
+Set<String> pdfBaseFonts(Uint8List bytes) => {
+  for (final match in _baseFont.allMatches(latin1.decode(bytes)))
+    match.group(1)!,
+};
+
+/// Het aantal afbeeldingen in het bestand.
+///
+/// Eén logo op vijfentwintig bladzijden hoort één afbeelding te zijn (plus
+/// hoogstens zijn doorzichtigheidsmasker), niet vijfentwintig.
+int pdfImageCount(Uint8List bytes) =>
+    RegExp(r'/Subtype\s*/Image').allMatches(latin1.decode(bytes)).length;
+
+/// De vulkleuren die het bestand zet, als (rood, groen, blauw) van 0 tot 1.
+///
+/// De `rg`-opdracht in de inhoudsstroom is het enige spoor van een vlak achter
+/// tekst: een achtergrond staat nergens als eigenschap in het bestand, alleen
+/// als een rechthoek die met die kleur gevuld wordt.
+List<List<double>> pdfFillColors(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    for (final match in _fillColor.allMatches(stream))
+      [
+        double.parse(match.group(1)!),
+        double.parse(match.group(2)!),
+        double.parse(match.group(3)!),
+      ],
+];
+
 final _literalString = RegExp(r'\(((?:[^()\\]|\\.)*)\)');
+final _baseFont = RegExp(r'/BaseFont\s*/([A-Za-z0-9-]+)');
+final _fillColor = RegExp(
+  r'([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+rg(?![A-Za-z])',
+);
 final _outlineTitle = RegExp(r'/Title\s*\(((?:[^()\\]|\\.)*)\)');
 
 /// Alle uitgepakte inhoudsstromen. Een stroom die niet met zlib is samengeperst

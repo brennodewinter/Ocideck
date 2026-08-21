@@ -77,6 +77,43 @@ void warnAboutUnsupportedCharacters(
   ),
 );
 
+/// De melding bij een logo dat te grof is voor drukwerk.
+///
+/// Noemt de maten, want zonder die twee getallen is "te grof" een oordeel waar
+/// niemand iets mee kan. Mét die getallen weet de gebruiker precies wat er van
+/// het bronbestand wordt gevraagd.
+String coarseLogoMessage(AppLocalizations l10n, LogoResolution logo) {
+  final measured = l10n
+      .d(
+        'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.',
+      )
+      .replaceAll('{breed}', '${logo.pixelWidth}')
+      .replaceAll('{hoog}', '${logo.pixelHeight}')
+      .replaceAll('{dpi}', '${logo.dpi.round()}');
+  final advice = l10n
+      .d(
+        'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.',
+      )
+      .replaceAll('{px}', '${logo.advisedPixelWidth}');
+  return '$measured $advice';
+}
+
+/// Meld dat de PDF is geschreven met een logo dat te grof is voor drukwerk.
+///
+/// Een waarschuwing en geen fout: het bestand staat er, en op het scherm valt
+/// het meestal niet op. Op papier wel — en dat merkt de gebruiker anders pas na
+/// het drukken.
+void warnAboutCoarseLogo(
+  ScaffoldMessengerState messenger,
+  AppLocalizations l10n,
+  LogoResolution logo,
+) => messenger.showSnackBar(
+  SnackBar(
+    content: Text(coarseLogoMessage(l10n, logo)),
+    duration: const Duration(seconds: 8),
+  ),
+);
+
 /// Hoe lang de export hoogstens op één tekening wacht.
 ///
 /// Ruim genoeg voor een zwaar diagram op een trage machine, en kort genoeg dat

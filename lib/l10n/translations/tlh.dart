@@ -1612,6 +1612,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Degh SoQ \'oH vI\'Iqmey: De\' {breed}×{hoog} px \'oH, \'ej lo\'laHghach vam {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Degh {px} px \'ar juch yIwIv, pagh Degh lo\'laHghach yImach\'moH.',
   'Thema accent op de documentband': 'meq DuD ghItlh nach bIng je Daq',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'wanI\' Hoch qaSpu\'bogh vo\' ghItlh polbe\'lu\'bogh Say\' Sammo\'lu\'pu\':',

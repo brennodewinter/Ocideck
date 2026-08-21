@@ -1646,6 +1646,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo wydrukuje się ziarniście: plik ma {breed}×{hoog} px, co przy tym rozmiarze daje {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Wybierz logo o szerokości co najmniej {px} px lub zmniejsz rozmiar logo.',
   'Thema accent op de documentband': 'Akcent motywu na nagłówku/stopce',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Znaleziono dokument z niezapisanymi zmianami z poprzedniej sesji:',

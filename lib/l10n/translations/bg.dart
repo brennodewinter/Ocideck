@@ -1654,6 +1654,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Логото ще се отпечата зърнесто: файлът е {breed}×{hoog} px, което при този размер дава {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Изберете лого с широчина поне {px} px или намалете размера на логото.',
   'Thema accent op de documentband': 'Акцент на темата върху колонтитула',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Открит е документ с незапазени промени от предишна сесия:',

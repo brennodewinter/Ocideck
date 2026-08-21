@@ -2552,6 +2552,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo baskıda taneli çıkacak: dosya {breed}×{hoog} px ve bu boyutta {dpi} dpi ediyor.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'En az {px} px genişliğinde bir logo seçin veya logo boyutunu küçültün.',
   'Thema accent op de documentband': 'Üstbilgi/altbilgide tema vurgusu',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Önceki oturumdan kaydedilmemiş değişiklikleri olan bir belge bulundu:',

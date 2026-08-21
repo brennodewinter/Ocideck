@@ -1641,6 +1641,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo sa vytlačí zrnito: súbor má {breed}×{hoog} px, čo pri tejto veľkosti dáva {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Vyberte logo široké aspoň {px} px alebo zmenšite veľkosť loga.',
   'Thema accent op de documentband': 'Akcent témy v hlavičke/päte',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Našiel sa dokument s neuloženými zmenami z predchádzajúcej relácie:',

@@ -1634,6 +1634,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo akan tercetak berbintik: berkasnya {breed}×{hoog} px, yang pada ukuran ini menjadi {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Pilih logo dengan lebar minimal {px} px, atau perkecil ukuran logo.',
   'Thema accent op de documentband': 'Aksen tema pada header/footer dokumen',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Ditemukan dokumen dengan perubahan yang belum disimpan dari sesi sebelumnya:',

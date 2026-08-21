@@ -100,6 +100,17 @@ Arabic, Hebrew) has no shape available. That is not silent: the export names the
 characters it could not set and points at HTML or LaTeX, which handle them.
 *(Added 2026-08-20.)*
 
+## A raster logo can print grainy, and the PDF says so rather than fixing it
+
+The style profile's logo goes into the PDF at the size the profile asks for. A
+small PNG blown up to that size shows its own pixels on paper, and no export can
+repair that — the file does not hold more image. What the export does instead is
+say so after writing, naming the file's pixel size, the resolution it works out
+to, and the width that would suffice (150 dpi where the logo lands). A vector
+logo would sidestep this entirely, but only the HTML export renders one: the
+document view on screen and the PDF both read raster images only, and an SVG
+logo is left out of the PDF rather than breaking the export. *(Added 2026-08-21.)*
+
 ## Footnotes in the HTML export sit at the back, never at the foot of a page
 
 A document can ask for its footnotes at the foot of the page the reference falls

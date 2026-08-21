@@ -1649,6 +1649,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Insigne granosum imprimetur: fasciculus {breed}×{hoog} px est, quod hac magnitudine {dpi} dpi efficit.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Elige insigne saltem {px} px latum, aut magnitudinem insignis minue.',
   'Thema accent op de documentband':
       'Accentus thematis in capite et calce paginae',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

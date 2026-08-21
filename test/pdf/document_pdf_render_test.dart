@@ -293,4 +293,66 @@ void main() {
       },
     );
   });
+
+  group('de opmaak die de bron voorschrijft', () {
+    test('een kop staat vet', () async {
+      // Geen enkel sterretje in de bron: het vet komt van de kop zelf. Stond de
+      // vette snede er niet in, dan had elke span hem één laag lager weer
+      // uitgezet.
+      final bytes = await render('# Titel\n');
+      expect(pdfBaseFonts(bytes), contains('Helvetica-Bold'));
+    });
+
+    test('de band boven het blad draagt Markdown', () async {
+      final bytes = await render(
+        'Tekst.\n',
+        chrome: const DocumentPdfChrome(headerText: '**VERTROUWELIJK**'),
+      );
+      final text = pdfVisibleText(bytes);
+      expect(text, contains('VERTROUWELIJK'));
+      expect(text, isNot(contains('*')));
+      expect(pdfBaseFonts(bytes), contains('Helvetica-Bold'));
+    });
+
+    test('een citaat krijgt hetzelfde vlak als op het scherm', () async {
+      // De documentweergave zet een citaat op een tint van het accent met een
+      // streep ervoor. De export tekende alleen de streep, en dan is het citaat
+      // op papier iets anders dan in de editor.
+      final bytes = await render(
+        '> Een citaat.\n',
+        theme: const ThemeProfile(accentColor: '#003399'),
+      );
+      // Het accent (0 / 0,2 / 0,6) op een tiende over wit papier.
+      expect(
+        pdfFillColors(bytes),
+        contains(
+          isA<List<double>>()
+              .having((c) => c[0], 'rood', closeTo(0.9, 0.01))
+              .having((c) => c[1], 'groen', closeTo(0.92, 0.01))
+              .having((c) => c[2], 'blauw', closeTo(0.96, 0.01)),
+        ),
+      );
+    });
+
+    test('het logo staat één keer in het bestand', () async {
+      final long = List.generate(400, (i) => 'woord$i').join(' ');
+      final bytes = await render(
+        '$long\n\n$long\n',
+        chrome: DocumentPdfChrome(logo: _onePixelPng, logoAtTop: true),
+      );
+      expect(pdfPageCount(bytes), greaterThan(1));
+      // Eén afbeelding, hoeveel bladzijden de band ook draagt. Hooguit twee
+      // objecten: een doorzichtig plaatje draagt zijn masker apart.
+      expect(pdfImageCount(bytes), lessThanOrEqualTo(2));
+    });
+  });
 }
+
+/// Een geldige PNG van één beeldpunt — genoeg om te toetsen hoe váák hij in het
+/// bestand belandt, zonder er een bestand voor nodig te hebben.
+final _onePixelPng = Uint8List.fromList(
+  base64Decode(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmM'
+    'IQAAAABJRU5ErkJggg==',
+  ),
+);

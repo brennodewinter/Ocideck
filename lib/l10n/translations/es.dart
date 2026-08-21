@@ -671,6 +671,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'El logotipo saldrá granulado en la impresión: el archivo es de {breed}×{hoog} px, lo que da {dpi} ppp a este tamaño.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Elija un logotipo de al menos {px} px de ancho, o reduzca el tamaño del logotipo.',
   'Thema accent op de documentband':
       'Acento del tema en el encabezado/pie de página',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

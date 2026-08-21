@@ -163,6 +163,7 @@ Future<String?> writeDocumentExport(
   MermaidSvgResolver? renderMermaid,
   MathSvgResolver? renderMath,
   void Function(Set<int> runes)? onPdfUnsupportedCharacters,
+  void Function(LogoResolution logo)? onPdfCoarseLogo,
   required String outputPath,
 }) async {
   if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
@@ -247,6 +248,7 @@ Future<String?> writeDocumentExport(
         pageMargins: pageMargins,
         metadata: exportMetadata,
         onUnsupportedCharacters: onPdfUnsupportedCharacters,
+        onCoarseLogo: onPdfCoarseLogo,
         outputPath: outputPath,
       );
   }
@@ -329,6 +331,7 @@ Future<String?> _writeDocumentPdf(
   PageMargins? pageMargins,
   ExportDocumentMetadata? metadata,
   void Function(Set<int> runes)? onUnsupportedCharacters,
+  void Function(LogoResolution logo)? onCoarseLogo,
 }) async {
   final result = await buildDocumentExportPdf(
     bundle,
@@ -349,6 +352,10 @@ Future<String?> _writeDocumentPdf(
   if (!result.isComplete) {
     onUnsupportedCharacters?.call(result.unsupportedCharacters);
   }
+  // Een logo dat te grof is voor drukwerk is geen fout in de export maar in het
+  // bronbestand; zeggen is het enige wat er nog aan te doen valt.
+  final coarse = result.coarseLogo;
+  if (coarse != null) onCoarseLogo?.call(coarse);
   return outputPath;
 }
 

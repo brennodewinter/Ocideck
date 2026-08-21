@@ -1634,6 +1634,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logoet bliver kornet i print: filen er {breed}×{hoog} px, hvilket giver {dpi} dpi i denne størrelse.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Vælg et logo på mindst {px} px i bredden, eller gør logostørrelsen mindre.',
   'Thema accent op de documentband': 'Temaets fremhævning på side-/bundteksten',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Et dokument med ikke-gemte ændringer blev fundet fra en tidligere session:',

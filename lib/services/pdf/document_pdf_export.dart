@@ -13,6 +13,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 import '../../models/chart.dart';
 import '../../models/deck.dart' show TlpLevel, TlpLevelX;
@@ -67,11 +68,59 @@ class DocumentPdfLabels {
   };
 }
 
+/// Hoe fijn het logo op het blad terechtkomt, en waar dat vandaan komt.
+///
+/// Een PDF is een drukbestand. Een beeldmerk dat op het scherm scherp oogt komt
+/// er op papier uit met zijn eigen pixels erin, en dat is niets wat de export
+/// kan repareren — het bestand hééft niet meer beeld. Wat de export wél kan is
+/// het zeggen, met de maten erbij, zodat de gebruiker weet dat het aan het
+/// bronbestand ligt en niet aan de export.
+class LogoResolution {
+  const LogoResolution({
+    required this.pixelWidth,
+    required this.pixelHeight,
+    required this.dpi,
+  });
+
+  final int pixelWidth;
+  final int pixelHeight;
+
+  /// Beeldpunten per duim op de plek waar het logo komt te staan.
+  final double dpi;
+
+  /// Onder deze fijnheid ziet een lezer de pixels in drukwerk terug.
+  ///
+  /// Honderdvijftig is de gebruikelijke ondergrens voor drukwerk waar niemand
+  /// van dichtbij naar kijkt; driehonderd is wat een drukker vraagt. De grens
+  /// ligt hier op de ondergrens en niet op de wens: een waarschuwing die bij elk
+  /// tweede document afgaat leest niemand meer.
+  static const printFloor = 150.0;
+
+  bool get isCoarse => dpi < printFloor;
+
+  /// De maat waarop dit logo wél fijn genoeg zou zijn, in beeldpunten breed.
+  int get advisedPixelWidth => (pixelWidth * printFloor / dpi).ceil();
+}
+
 /// Wat de export opleverde: de bytes, plus wat er niet in kon.
 class DocumentPdfResult {
-  const DocumentPdfResult(this.bytes, {this.unsupportedCharacters = const {}});
+  const DocumentPdfResult(
+    this.bytes, {
+    this.unsupportedCharacters = const {},
+    this.logo,
+  });
 
   final Uint8List bytes;
+
+  /// De fijnheid van het geplaatste logo, of `null` als er geen logo is.
+  final LogoResolution? logo;
+
+  /// Het logo dat te grof is voor drukwerk, of `null` wanneer er niets aan de
+  /// hand is.
+  LogoResolution? get coarseLogo {
+    final resolution = logo;
+    return resolution != null && resolution.isCoarse ? resolution : null;
+  }
 
   /// De tekens waarvoor geen enkele beschikbare snede een vorm had.
   ///
@@ -125,6 +174,10 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     renderMath: renderMath,
   );
   final logo = await _resolveLogo(theme.effectiveDocumentLogoPath, embedImage);
+  final logoWidth = ((theme.documentLogoSize ?? 32).toDouble() * 0.5).clamp(
+    24.0,
+    72.0,
+  );
 
   final fields = {
     ...deck.documentFields,
@@ -156,10 +209,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
       logo: logo,
       logoAtTop: theme.documentLogoPosition.startsWith('top'),
       logoAtRight: theme.documentLogoPosition.endsWith('right'),
-      logoWidth: ((theme.documentLogoSize ?? 32).toDouble() * 0.5).clamp(
-        24.0,
-        72.0,
-      ),
+      logoWidth: logoWidth,
     ),
     pageSize: pageSize,
     pageMargins: pageMargins,
@@ -170,6 +220,37 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   return DocumentPdfResult(
     bytes,
     unsupportedCharacters: fonts.unsupportedRunes(_textOf(blocks)),
+    logo: logoResolutionOf(logo, boxSide: logoWidth),
+  );
+}
+
+/// Hoe fijn een rasterlogo op het blad terechtkomt.
+///
+/// [boxSide] is de zijde van het vierkante kader waarin de band het logo met
+/// `BoxFit.contain` plaatst (zie `_logo` in `document_pdf_renderer.dart`): een
+/// breed logo raakt daarin de breedte, een hoog logo de hoogte. `null` wanneer
+/// er geen logo is of de maat er niet uit te lezen viel.
+LogoResolution? logoResolutionOf(Uint8List? bytes, {required double boxSide}) {
+  if (bytes == null || bytes.isEmpty || boxSide <= 0) return null;
+  final int pixelWidth;
+  final int pixelHeight;
+  try {
+    final image = pw.MemoryImage(bytes);
+    pixelWidth = image.width ?? 0;
+    pixelHeight = image.height ?? 0;
+  } on Exception {
+    return null;
+  }
+  if (pixelWidth <= 0 || pixelHeight <= 0) return null;
+  // `contain` in een vierkant kader: de langste zijde van het beeld bepaalt de
+  // schaal, want die raakt het kader het eerst.
+  final longest = pixelWidth > pixelHeight ? pixelWidth : pixelHeight;
+  final placedWidth = pixelWidth * (boxSide / longest);
+  if (placedWidth <= 0) return null;
+  return LogoResolution(
+    pixelWidth: pixelWidth,
+    pixelHeight: pixelHeight,
+    dpi: pixelWidth / (placedWidth / 72),
   );
 }
 

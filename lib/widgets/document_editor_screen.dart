@@ -771,6 +771,7 @@ Future<String?> _writeDocumentExport(
         : null,
     onPdfUnsupportedCharacters: (runes) =>
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
+    onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),
     outputPath: outputPath,
   );
 }

@@ -1636,6 +1636,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'A logó szemcsésen nyomtatódik ki: a fájl {breed}×{hoog} px, ami ekkora méretben {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Válasszon legalább {px} px széles logót, vagy csökkentse a logó méretét.',
   'Thema accent op de documentband': 'Téma kiemelése az élőfejen/élőlábon',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Egy előző munkamenetből nem mentett módosításokat tartalmazó dokumentum található:',
