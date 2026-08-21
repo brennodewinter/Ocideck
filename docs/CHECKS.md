@@ -1953,6 +1953,50 @@ without them that job fails and the release still publishes.
 Publishing needs no secret: Forgejo injects a per-run token that may create
 releases. A `RELEASE_TOKEN` secret overrides it if that ever changes.
 
+### `.forgejo/workflows/tap-mirror-check.yml` — the Homebrew tap, daily (`17 5 * * *`) + `workflow_dispatch`
+Runs `scripts/verify_homebrew_cask.sh --mirror`: it reads `Casks/ocideck.rb` back
+out of the tap over the same public URL Homebrew itself uses and compares its
+`version` to the newest release. Red means "the tap needs attention", never "the
+release failed".
+
+- **Why this is a check and not a release step.** Since v0.4.8 the release chain
+  does **not** write the cask. The tap updates *itself*:
+  `.forgejo/workflows/update-cask.yml` in `LibreKAT/homebrew-ocideck` runs every
+  30 minutes, reads the newest non-prerelease from this repo's public API, fetches
+  `scripts/update_homebrew_cask.sh` and `homebrew/ocideck.rb.tmpl` **at that tag**,
+  regenerates the cask and pushes with the per-run Actions token Forgejo mints for
+  that repository. So there is no moment during a release at which the cask is
+  known to be current, and nothing here to verify inline — but there *is* something
+  to watch, daily.
+- **What it protects against.** The old push-based route hung on a personal token
+  in `HOMEBREW_TAP_TOKEN`. That token stopped being accepted (HTTP 401) after a
+  Forgejo upgrade and the tap sat three releases behind before anyone noticed —
+  the job swallowed a failed clone by design, and because the tap is *public* that
+  clone succeeded even with a dead token, so only the push ever failed. Turning the
+  route around removed the credential; this check is what makes a silent stall
+  loud regardless of cause.
+- **The mirror is the second hop.** `github.com/brennodewinter/homebrew-ocideck` is
+  a push-mirror of the tap — a backup, not the source — but Homebrew's
+  one-argument shorthand resolves there *by definition*, so a stalled mirror serves
+  stale casks while the forge is perfectly current. Mirroring is asynchronous, so
+  that only counts as a fault once the release is older than `MIRROR_GRACE_HOURS`
+  (24). The forge tap itself is compared without grace.
+- **Same check by hand**, and without a tag it takes the newest release:
+
+  ```bash
+  scripts/verify_homebrew_cask.sh --mirror
+  ```
+
+  Beware of the CDN: `raw.githubusercontent.com` caches for a few minutes, so
+  straight after a tap update the mirror can still read as stale here while the
+  GitHub API already returns the new version. Confirm against the API before
+  concluding that mirroring has stopped.
+- **The cross-repo coupling is silent.** The tap fetches those two paths **by
+  name**, from another repository, so renaming or moving either leaves the tap
+  quietly serving the previous release with nothing here turning red.
+  `test/homebrew_cask_verify_test.dart` pins both paths for exactly that reason;
+  if you move them, change the tap's workflow in the same breath.
+
 ### `.github/workflows/release.yml` — the Windows lane, on a version tag (`v*`)
 The only file on the mirror that executes. Builds `flutter build windows
 --release` on `windows-2022` (the newest image's MSVC is incompatible with

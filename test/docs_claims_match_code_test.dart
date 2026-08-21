@@ -145,6 +145,39 @@ void main() {
     });
   });
 
+  group('CHECKS.md beschrijft élke werkstroom', () {
+    // CHECKS.md draagt per werkstroom een sectie `### `<pad>` — <wanneer>`. Dat
+    // hield gelijke tred zolang iemand eraan dacht, en precies daar ging het
+    // mis: `tap-mirror-check.yml` draaide maandenlang als enige bewaking op de
+    // Homebrew-tap zonder dat hij ergens beschreven stond. Geen enkele poort zag
+    // dat, want een ontbrekende sectie is geen fout in code — alleen in kennis.
+    test('geen enkele werkstroom ontbreekt in de opsomming', () {
+      final doc = lees('docs/CHECKS.md');
+
+      final ontbreekt = <String>[];
+      for (final map in const ['.forgejo/workflows', '.github/workflows']) {
+        final dir = Directory(map);
+        if (!dir.existsSync()) continue;
+        for (final f in dir.listSync().whereType<File>()) {
+          if (!f.path.endsWith('.yml')) continue;
+          final pad = f.path.replaceAll(r'\\', '/');
+          if (!doc.contains('### `$pad`')) ontbreekt.add(pad);
+        }
+      }
+
+      expect(
+        ontbreekt,
+        isEmpty,
+        reason:
+            'deze werkstromen draaien wel maar staan in geen enkele sectie van '
+            'CHECKS.md:\n  ${ontbreekt.join('\n  ')}\n'
+            'Voeg per werkstroom een sectie toe met de kop '
+            '"### `<pad>` — <wanneer hij draait>", zodat wie de poorten naleest '
+            'ziet dat hij bestaat.',
+      );
+    });
+  });
+
   group('de dekkingsvloeren in proza', () {
     test('elk percentage naast het woord "floor" is een echte vloer', () {
       final doc = lees('docs/CHECKS.md');

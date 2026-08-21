@@ -1793,6 +1793,26 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De dagelijkse tap-controle stond in geen enkele poortbeschrijving.**
+  `CHECKS.md` draagt per werkstroom een sectie, en dat klopte voor alle tien —
+  behalve `tap-mirror-check.yml`. Juist die is sinds het omkeren van de
+  cask-route de énige geautomatiseerde bewaking op de Homebrew-tap: hij leest
+  dagelijks terug wat er écht in de tap en de spiegel staat. Wie de poorten
+  naliep zag hem niet, want een ontbrekende sectie is geen fout in code, alleen
+  in kennis.
+
+  Hij staat er nu, met wat hij bewaakt en waaróm hij een periodieke controle is
+  en geen release-stap: de tap werkt zichzelf bij op een halfuurcadans, dus er is
+  geen moment tijdens een release waarop de cask bijgewerkt hóórt te zijn. Ook
+  vastgelegd: de spiegel als tweede hop met zijn respijt van 24 uur, de
+  CDN-cache op `raw.githubusercontent.com` die een verse spiegel even oud laat
+  lijken, en de stille koppeling over de repo-grens.
+
+  En de poort die dit had moeten vangen is er alsnog: een test loopt beide
+  workflow-mappen langs en eist per bestand een sectie in `CHECKS.md`. Rood
+  geproefd door de nieuwe kop weg te halen — hij noemt dan precies welke
+  werkstroom ontbreekt.
+
 - **De Homebrew-cask wordt niet meer door de release geduwd — de tap haalt hem
   zelf op.** Bij v0.4.8 viel de job `homebrew-cask` rood: de forge weigerde
   `HOMEBREW_TAP_TOKEN` met HTTP 401, vlak na een herstart op Forgejo 16.0.1. De
