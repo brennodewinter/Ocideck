@@ -108,11 +108,18 @@ class _DocumentImageState extends State<DocumentImage> {
   bool _failed = false;
   ImageStream? _stream;
   ImageStreamListener? _listener;
+  bool _resolved = false;
 
   @override
-  void initState() {
-    super.initState();
-    _resolve();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // _resolve gebruikt createLocalImageConfiguration(context), wat MediaQuery
+    // nodig heeft — dat is in initState nog niet beschikbaar. didChangeDependencies
+    // is de eerste plek waar context veilig is.
+    if (!_resolved) {
+      _resolved = true;
+      _resolve();
+    }
   }
 
   @override
