@@ -206,9 +206,9 @@ Future<Uint8List> _render(
       // met `TextOverflow.span` of een inhoudsopgave met honderden koppen
       // kan legitiem meer dan twintig bladzijden beslaan; de standaardwaarde
       // slaat dan de hele export stuks (zie `PdfTooBigPageException`).
-      // Duizend is ruim voldoende voor elk realistisch document en vangt een
-      // echte lus nog steeds af.
-      maxPages: 1000,
+      // Geen praktisch maximum: een miljoen bladzijden voor één widget is
+      // onbereikbaar voor elk echt document, maar vangt een echte lus af.
+      maxPages: 1000000,
       header: chrome.hasHeader
           ? (context) => _band(
               context,
