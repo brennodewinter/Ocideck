@@ -68,16 +68,27 @@ theme: ocideck
   );
 
   test(
-    'markdown zonder marp-frontmatter wordt geweigerd als niet-presentatie',
+    'platte markdown zonder marp-frontmatter opent als documenttabblad (#1637)',
     () async {
-      final (_, tabs) = build();
+      final (container, tabs) = build();
 
       final result = await tabs.openDeckFromBytes(
         bytes('# Gewoon een README\n\nTekst.\n'),
         'README.md',
       );
 
-      expect(result, OpenResult.notAPresentation);
+      expect(result, OpenResult.opened);
+      final tab = container.read(tabsProvider).current!;
+      expect(tab.isOpen, isTrue);
+      // Documenttabblad, geen presentatie.
+      expect(tab.documentNotifier, isNotNull);
+      expect(tab.deckNotifierOrNull, isNull);
+      // Geen pad: opslaan van dit tabblad moet het downloadpad kiezen.
+      expect(tab.documentNotifier!.currentState.filePath, isNull);
+      expect(
+        tab.documentNotifier!.currentState.document!.source,
+        '# Gewoon een README\n\nTekst.\n',
+      );
     },
   );
 

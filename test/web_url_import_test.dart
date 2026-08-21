@@ -381,23 +381,28 @@ void main() {
       expect(container.read(tabsProvider).current!.isOpen, isFalse);
     });
 
-    test('reports non-presentation and non-UTF8 content as such', () async {
-      final container = _container();
-      final tabs = container.read(tabsProvider.notifier);
-      expect(
-        await tabs.openDeckFromBytes(
-          utf8.encode('# Gewoon een README'),
-          'https://example.org/readme.md',
-        ),
-        OpenResult.notAPresentation,
-      );
-      expect(
-        await tabs.openDeckFromBytes(
-          Uint8List.fromList([0xFF, 0xFE, 0x00, 0x88]),
-          'https://example.org/binair.bin',
-        ),
-        OpenResult.unreadable,
-      );
-    });
+    test(
+      'platte markdown opent als document; niet-UTF8 is onleesbaar (#1637)',
+      () async {
+        final container = _container();
+        final tabs = container.read(tabsProvider.notifier);
+        expect(
+          await tabs.openDeckFromBytes(
+            utf8.encode('# Gewoon een README'),
+            'https://example.org/readme.md',
+          ),
+          OpenResult.opened,
+        );
+        final tab = container.read(tabsProvider).current!;
+        expect(tab.documentNotifier, isNotNull);
+        expect(
+          await tabs.openDeckFromBytes(
+            Uint8List.fromList([0xFF, 0xFE, 0x00, 0x88]),
+            'https://example.org/binair.bin',
+          ),
+          OpenResult.unreadable,
+        );
+      },
+    );
   });
 }
