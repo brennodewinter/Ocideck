@@ -24,6 +24,7 @@ import '../../utils/bundled_asset.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../../utils/footnotes.dart';
 import '../../utils/image_limits.dart';
+import '../../utils/markdown_blocks.dart';
 import '../../utils/project_path.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
@@ -203,10 +204,10 @@ class DocumentMarkdownView extends StatelessWidget {
     var i = 0;
     while (i < lines.length) {
       final trimmed = lines[i].trim();
-      final marker = _fenceMarker(trimmed);
-      if (marker != null) {
+      final fence = markdownFenceOpen(trimmed);
+      if (fence != null) {
         var end = i + 1;
-        while (end < lines.length && lines[end].trim() != marker) {
+        while (end < lines.length && !fence.closes(lines[end].trim())) {
           end++;
         }
         i = end < lines.length ? end + 1 : end;
@@ -250,10 +251,10 @@ class DocumentMarkdownView extends StatelessWidget {
     var seen = 0;
     var i = 0;
     while (i < lines.length) {
-      final marker = _fenceMarker(lines[i].trim());
-      if (marker != null) {
+      final fence = markdownFenceOpen(lines[i].trim());
+      if (fence != null) {
         var end = i + 1;
-        while (end < lines.length && lines[end].trim() != marker) {
+        while (end < lines.length && !fence.closes(lines[end].trim())) {
           end++;
         }
         i = end < lines.length ? end + 1 : end;
@@ -505,12 +506,12 @@ class DocumentMarkdownView extends StatelessWidget {
       // Fenced block: ``` … ``` (or ~~~). The info string after the opening
       // fence selects the renderer: `mermaid` is drawn as a diagram, everything
       // else is a monospace code block.
-      final fence = _fenceMarker(trimmed);
+      final fence = markdownFenceOpen(trimmed);
       if (fence != null) {
-        final lang = trimmed.substring(fence.length).trim().toLowerCase();
+        final lang = fence.language;
         final start = i + 1;
         var end = start;
-        while (end < lines.length && lines[end].trim() != fence) {
+        while (end < lines.length && !fence.closes(lines[end].trim())) {
           end++;
         }
         final code = lines.sublist(start, end).join('\n');

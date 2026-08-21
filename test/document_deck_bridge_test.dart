@@ -104,6 +104,20 @@ void main() {
       expect(deck.slides.single.customMarkdown.contains('A-->B'), isTrue);
     });
 
+    test('alleen het eerste info-woord bepaalt een chart-fence', () {
+      final deck = DocumentDeckBridge.documentToDeck(
+        '```chart extra\nUNIEKCHART\n```\n',
+      );
+      expect(deck.slides.single.type, SlideType.chart);
+      expect(deck.slides.single.customMarkdown, 'UNIEKCHART');
+    });
+
+    test('een langere fence sluit pas met minstens dezelfde lengte', () {
+      const source = '````text\n```\ncode\n````\nNA_DE_FENCE\n';
+      final deck = DocumentDeckBridge.documentToDeck(source);
+      expect(deck.slides.single.customMarkdown, contains('NA_DE_FENCE'));
+    });
+
     test('een leeg document geeft één lege freeMarkdown-dia', () {
       final deck = DocumentDeckBridge.documentToDeck('');
       expect(deck.slides, hasLength(1));
