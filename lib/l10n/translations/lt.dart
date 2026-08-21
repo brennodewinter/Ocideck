@@ -1641,6 +1641,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Puslapio sąranka šiame dokumente turi netinkamas reikšmes ir buvo ignoruota. Naudojami jūsų nustatymai.',
   'Kies kolommen voor de tijdlijn': 'Pasirinkite stulpelius laiko juostai',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Laiko juosta naudoja du ar tris stulpelius. Pasirinkite, kurie šios lentelės stulpeliai tampa laiko juosta. Likę stulpeliai dingsta iš lentelės.',

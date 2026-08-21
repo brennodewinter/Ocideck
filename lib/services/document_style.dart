@@ -1,4 +1,5 @@
 import 'document_page_setup.dart';
+import '../models/page_size.dart';
 import '../models/settings.dart';
 
 /// Resolves the effective style [ThemeProfile] for a document, or `null` when a
@@ -58,8 +59,27 @@ DocumentPageSetup effectiveDocumentPageSetup(
   String source,
 ) {
   final own = documentPageSetup(source);
-  return (
-    size: own.size ?? settings.documentPageSize,
-    margins: own.margins ?? settings.documentPageMargins,
-  );
+  final size = own.size ?? settings.documentPageSize;
+  // Eigen marges van het document winnen, tenzij ze niet in het vel passen —
+  // dan valt de tekstspiegel negatief en crasht de layout. In dat geval
+  // gelden de instellingen, en passen die ook niet, dan de standaardmarge,
+  // en past die zelfs niet (een extreem klein vel), dan een marge die wél
+  // past met een veilige minimum-textspiegel van 10 mm.
+  PageMargins margins;
+  if (own.margins != null && marginsFitPaper(size, own.margins!)) {
+    margins = own.margins!;
+  } else if (marginsFitPaper(size, settings.documentPageMargins)) {
+    margins = settings.documentPageMargins;
+  } else if (marginsFitPaper(size, const PageMargins())) {
+    margins = const PageMargins();
+  } else {
+    final (w, h) = size.dimensions;
+    margins = PageMargins(
+      topMm: ((h - 10) / 2).clamp(0, 25),
+      bottomMm: ((h - 10) / 2).clamp(0, 25),
+      leftMm: ((w - 10) / 2).clamp(0, 20),
+      rightMm: ((w - 10) / 2).clamp(0, 20),
+    );
+  }
+  return (size: size, margins: margins);
 }

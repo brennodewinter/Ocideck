@@ -1633,6 +1633,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Sidinställningarna i detta dokument innehåller ogiltiga värden och ignorerades. Dina inställningar används.',
   'Kies kolommen voor de tijdlijn': 'Välj kolumner för tidslinjen',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'En tidslinje använder två eller tre kolumner. Välj vilka kolumner från denna tabell som blir tidslinjen. De återstående kolumnerna försvinner från tabellen.',

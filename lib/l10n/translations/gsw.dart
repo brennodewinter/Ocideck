@@ -1637,6 +1637,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'D Syte-Ystellig i däm Dokumänt hät ungültigi Wärt und isch ignoriert worde. Dini Ystellige wärded verwändet.',
   'Kies kolommen voor de tijdlijn': 'Spalte für d Zyleteis wähle',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'E Zyleteis bruucht zwei oder drei Spalte. Wähl, weli Spalte vo dere Tabälle d Zyleteis wärde. Di reschtliche Spalte verschwinde us dr Tabälle.',

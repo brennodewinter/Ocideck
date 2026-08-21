@@ -671,6 +671,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'L\'impostazione pagina in questo documento contiene valori non validi ed è stata ignorata. Vengono usate le impostazioni.',
   'Kies kolommen voor de tijdlijn': 'Scegli le colonne per la timeline',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Una timeline usa due o tre colonne. Scegli quali colonne di questa tabella diventano la timeline. Le colonne restanti scompariranno dalla tabella.',

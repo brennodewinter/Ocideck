@@ -1633,6 +1633,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Lapas iestatījumi šajā dokumentā satur nederīgas vērtības un tika ignorēti. Tiek izmantoti jūsu iestatījumi.',
   'Kies kolommen voor de tijdlijn': 'Izvēlieties kolonnas laika līnijai',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Laika līnija izmanto divas vai trīs kolonnas. Izvēlieties, kuras kolonnas no šīs tabulas kļūst par laika līniju. Pārējās kolonnas pazūd no tabulas.',

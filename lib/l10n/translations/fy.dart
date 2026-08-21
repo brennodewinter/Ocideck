@@ -674,6 +674,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'De side-opset yn dit dokumint befettet ûnjildige wearden en is negearre. Jo ynstellingen wurde brûkt.',
   'Kies kolommen voor de tijdlijn': 'Kies kolommen foar de tiidline',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'In tiidline brûkt twa of trije kolommen. Kiz hokker kolommen út dizze tabel de tiidline wurde. De oare kolommen ferdwine út de tabel.',

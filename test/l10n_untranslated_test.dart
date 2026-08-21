@@ -57,6 +57,12 @@ void main() {
     ('id', 'The quick brown fox jumps over the lazy dog.'),
     // Vakterm uit de CVSS-standaard, die geen Klingon-vorm heeft.
     ('tlh', 'CVSS 4.0 vector'),
+    // Klingon heeft geen vakwoord voor paginaopmaak of marges; de melding
+    // over ongeldige geometry (#1681) staat er in het Engels.
+    (
+      'tlh',
+      'The page setup in this document contains invalid values and was ignored. Your settings are used instead.',
+    ),
     // Deense interfaceterm die letterlijk zo geleend is.
     ('da', 'Look and feel'),
 

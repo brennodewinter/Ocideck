@@ -37,6 +37,41 @@ bool documentCarriesPageSetup(String source) {
   return setup.size != null || setup.margins != null;
 }
 
+/// Of de `geometry:`-frontmatter in [source] ongeldig is: waarden die niet
+/// eindig of negatief zijn, of marges die samen breder/hoger zijn dan het vel.
+/// Geeft `null` wanneer de frontmatter geldig is of ontbreekt — alleen een
+/// écht ongeldige opmaak die genegeerd is levert een reden, zodat de
+/// aanroeper een begrijpelijke melding kan tonen.
+String? documentPageSetupInvalidReason(String source) {
+  final value = documentFrontMatterValue(source, 'geometry');
+  final v = value?.trim();
+  if (v == null || v.isEmpty) return null;
+  // Een geometry met alleen rommel (geen parseerbare key=value) is geen
+  // ongeldige opmaak maar een lege, en die hoort geen melding.
+  final hasNumericField = v.split(',').any((part) {
+    final kv = part.split('=');
+    if (kv.length != 2) return false;
+    return double.tryParse(kv[1].trim().replaceAll('mm', '').trim()) != null;
+  });
+  if (!hasNumericField) return null;
+  final setup = _parseGeometry(value);
+  if (setup == kNoDocumentPageSetup) return 'invalid-geometry';
+  if (setup.margins != null && !setup.margins!.isValid) {
+    return 'invalid-geometry';
+  }
+  // De marges kunnen individueel geldig zijn maar samen breder/hoger dan
+  // het vel — dat levert een negatieve tekstspiegel op.
+  final size =
+      _parsePaperSize(documentFrontMatterValue(source, 'papersize')) ??
+      setup.size;
+  if (size != null &&
+      setup.margins != null &&
+      !marginsFitPaper(size, setup.margins!)) {
+    return 'margins-exceed-paper';
+  }
+  return null;
+}
+
 /// De paginaopmaak die [source] draagt. Beide velden zijn `null` wanneer het
 /// document er niets over zegt; ze kunnen ook los voorkomen (alleen een maat,
 /// alleen marges).
@@ -121,24 +156,34 @@ DocumentPageSetup _parseGeometry(String? value) {
     final kv = part.split('=');
     if (kv.length != 2) continue;
     final mm = double.tryParse(kv[1].trim().replaceAll('mm', '').trim());
-    if (mm != null) fields[kv[0].trim().toLowerCase()] = mm;
+    if (mm == null) continue;
+    // double.tryParse aanvaardt 'NaN' en 'Infinity' als geldige doubles.
+    // Die bereiken de layout als negatieve of oneindige maten en crashen
+    // de paginering. Een ongeldig getal legt het hele geometry-blok plat
+    // (terugval op defaults met een melding), in plaats van stíl één veld
+    // te vervangen — de gebruiker hoort te weten dat zijn frontmatter
+    // genegeerd is, niet dat de helft ervan stiekum vervangen is.
+    if (!mm.isFinite || mm < 0) return kNoDocumentPageSetup;
+    fields[kv[0].trim().toLowerCase()] = mm;
   }
   if (fields.isEmpty) return kNoDocumentPageSetup;
   final paper = _inferPaper(fields);
   final bleed = paper?.bleedMm ?? 0;
-  return (
-    size: paper?.size,
-    margins: PageMargins(
-      // De marges in het bestand zijn gemeten vanaf de rand van het vél; de
-      // afloop hoort er weer af, want intern rekent OciDeck vanaf het
-      // snijformaat.
-      topMm: (fields['top'] ?? 25) - bleed,
-      bottomMm: (fields['bottom'] ?? 25) - bleed,
-      leftMm: (fields['left'] ?? 20) - bleed,
-      rightMm: (fields['right'] ?? 20) - bleed,
-      bleedMm: bleed,
-    ),
+  final margins = PageMargins(
+    // De marges in het bestand zijn gemeten vanaf de rand van het vél; de
+    // afloop hoort er weer af, want intern rekent OciDeck vanaf het
+    // snijformaat.
+    topMm: (fields['top'] ?? 25) - bleed,
+    bottomMm: (fields['bottom'] ?? 25) - bleed,
+    leftMm: (fields['left'] ?? 20) - bleed,
+    rightMm: (fields['right'] ?? 20) - bleed,
+    bleedMm: bleed,
   );
+  // De afloop kan groter zijn dan een marge (bijv. top=20mm met 30mm afloop
+  // geeft topMm=-10), of een NaN glipt erdoor via een edge-case. Een
+  // ongeldig resultaat valt terug op defaults, net als een afwezige geometry.
+  if (!margins.isValid) return kNoDocumentPageSetup;
+  return (size: paper?.size, margins: margins);
 }
 
 /// Het vel dat uit een expliciete papiermaat volgt: welke ISO-maat het is, en

@@ -1654,6 +1654,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Настройките на страницата в този документ съдържат невалидни стойности и бяха игнорирани. Използват се вашите настройки.',
   'Kies kolommen voor de tijdlijn': 'Изберете колони за времевата линия',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Времевата линия използва две или три колони. Изберете кои колони от тази таблица стават времева линия. Останалите колони изчезват от таблицата.',

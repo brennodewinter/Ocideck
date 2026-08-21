@@ -1649,6 +1649,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Dispositio paginarum huius documenti valores invalidos continet et neglecta est. Institutiones tuae adoptantur.',
   'Kies kolommen voor de tijdlijn': 'Columnas pro chronologia elige',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Chronologia duas aut tres columnas utitur. Elige quae columnae huius tabulae chronologia fiant. Reliquae columnae e tabula disparabunt.',

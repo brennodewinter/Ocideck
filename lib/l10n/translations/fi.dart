@@ -1635,6 +1635,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
+      'Sivun asetukset tässä asiakirjassa sisältävät virheellisiä arvoja ja ne jätettiin huomioimatta. Käytetään asetuksiasi.',
   'Kies kolommen voor de tijdlijn': 'Valitse sarakkeet aikajanalle',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Aikajana käyttää kahta tai kolmea saraketta. Valitse, mitkä sarakkeet tästä taulukosta tulevat aikajanaksi. Jäljellä olevat sarakkeet katoavat taulukosta.',
