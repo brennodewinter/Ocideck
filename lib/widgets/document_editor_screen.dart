@@ -461,58 +461,13 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            _DocEditorToolbar(
-              mode: _viewMode,
-              onModeChanged: _changeViewMode,
-              onInsertChart: _insertChart,
-              onInsertPageBreak: _insertPageBreak,
-              onInsertToc: _insertToc,
-              onInsertFootnote: _insertFootnote,
-              footnotesAtEnd:
-                  documentFootnotePlacement(_pageSetupSource(ref)) ==
-                  FootnotePlacement.document,
-              onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
-              onApplyChapterBreaks: () =>
-                  applyChapterBreaksToDocument(context, ref),
-              onInsertTable: _insertTable,
-              onInsertTimeline: _insertTimeline,
-              onInsertMermaid: _insertMermaid,
-              onInsertImage: _insertImage,
-              onPaste: () => unawaited(_smartPaste()),
-              onUndo: canUndo ? _undo : null,
-              onRedo: canRedo ? _redo : null,
-              onFind: () => _openFind(showReplace: false),
-              onExport: _export,
-              onOpenSettings: () => SettingsDialog.show(
-                context,
-                initialSection: SettingsSection.presentation,
-              ),
-              onEditFields: () => unawaited(_editDocumentFields(context, ref)),
-              onConvertToPresentation: _convertToPresentation,
-              controller: _controller,
-              editorFocus: _editorFocus,
-              docTheme: _docSurfaceTheme(theme, _styleProfile),
-              styleNames: [for (final p in settings.themeProfiles) p.name],
-              currentStyleName: effectiveDocumentStyleName(
-                settings,
-                docStyleName,
-              ),
-              styleEnforced: settings.documentStyleEnforced,
-              enforcedStyleName: settings.documentStyleEnforced
-                  ? settings.documentDefaultStyle
-                  : null,
-              onStyleChanged: (name) => _setDocumentStyle(ref, name),
-              tlp: documentTlp,
-              onTlpChanged: (level) => _setDocumentTlp(ref, level),
-              showPageBreaks: _showPageBreaks,
-              onShowPageBreaksChanged: (v) =>
-                  setState(() => _showPageBreaks = v),
-              width: settings.documentEditorWidth,
-              onWidthChanged: (v) => unawaited(
-                ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
-              ),
-              zoom: settings.documentEditorZoom,
-              onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
+            _docToolbar(
+              theme,
+              settings,
+              canUndo,
+              canRedo,
+              documentTlp,
+              docStyleName,
             ),
             Divider(
               height: 1,
@@ -716,6 +671,62 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   void _redo() => ref.read(documentProvider.notifier).redo();
 
   // --- Zoeken en vervangen -----------------------------------------------
+
+  Widget _docToolbar(
+    ThemeData theme,
+    AppSettings settings,
+    bool canUndo,
+    bool canRedo,
+    TlpLevel documentTlp,
+    String? docStyleName,
+  ) => _DocEditorToolbar(
+    mode: _viewMode,
+    onModeChanged: _changeViewMode,
+    onInsertChart: _insertChart,
+    onInsertPageBreak: _insertPageBreak,
+    onInsertToc: _insertToc,
+    onInsertFootnote: _insertFootnote,
+    footnotesAtEnd:
+        documentFootnotePlacement(_pageSetupSource(ref)) ==
+        FootnotePlacement.document,
+    onFootnotesAtEndChanged: (v) => _setFootnotePlacement(ref, v),
+    onApplyChapterBreaks: () => applyChapterBreaksToDocument(context, ref),
+    onInsertTable: _insertTable,
+    onInsertTimeline: _insertTimeline,
+    onInsertMermaid: _insertMermaid,
+    onInsertImage: _insertImage,
+    onPaste: () => unawaited(_smartPaste()),
+    onUndo: canUndo ? _undo : null,
+    onRedo: canRedo ? _redo : null,
+    onFind: () => _openFind(showReplace: false),
+    onExport: _export,
+    onOpenSettings: () => SettingsDialog.show(
+      context,
+      initialSection: SettingsSection.presentation,
+    ),
+    onEditFields: () => unawaited(_editDocumentFields(context, ref)),
+    onConvertToPresentation: _convertToPresentation,
+    controller: _controller,
+    editorFocus: _editorFocus,
+    docTheme: _docSurfaceTheme(theme, _styleProfile),
+    styleNames: [for (final p in settings.themeProfiles) p.name],
+    currentStyleName: effectiveDocumentStyleName(settings, docStyleName),
+    styleEnforced: settings.documentStyleEnforced,
+    enforcedStyleName: settings.documentStyleEnforced
+        ? settings.documentDefaultStyle
+        : null,
+    onStyleChanged: (name) => _setDocumentStyle(ref, name),
+    tlp: documentTlp,
+    onTlpChanged: (level) => _setDocumentTlp(ref, level),
+    showPageBreaks: _showPageBreaks,
+    onShowPageBreaksChanged: (v) => setState(() => _showPageBreaks = v),
+    width: settings.documentEditorWidth,
+    onWidthChanged: (v) => unawaited(
+      ref.read(settingsProvider.notifier).setDocumentEditorWidth(v),
+    ),
+    zoom: settings.documentEditorZoom,
+    onZoomChanged: (zoom) => _setDocumentZoom(ref, zoom),
+  );
 
   Widget _findBar() => MarkdownFindBar(
     key: ValueKey('doc-find-$_showReplace'),
