@@ -519,31 +519,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               thickness: 1,
               color: theme.colorScheme.outlineVariant,
             ),
-            if (_findVisible)
-              MarkdownFindBar(
-                key: ValueKey('doc-find-$_showReplace'),
-                query: _findQuery,
-                replace: _replaceText,
-                caseSensitive: _caseSensitive,
-                showReplace: _showReplace,
-                matchCount: _matches.length,
-                matchIndex: _matchIndex,
-                onQueryChanged: (value) {
-                  _findQuery = value;
-                  _recountMatches(selectFirst: true);
-                },
-                onReplaceChanged: (value) =>
-                    setState(() => _replaceText = value),
-                onCaseSensitiveChanged: (value) {
-                  _caseSensitive = value;
-                  _recountMatches(selectFirst: false);
-                },
-                onNext: _goToNextMatch,
-                onPrevious: _goToPreviousMatch,
-                onReplaceCurrent: _replaceCurrentMatch,
-                onReplaceAll: _replaceAllMatches,
-                onClose: _closeFind,
-              ),
+            if (_findVisible) _findBar(),
             Expanded(
               child: DocumentImageScope(
                 projectPath: _documentProjectPath(ref),
@@ -740,6 +716,30 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   void _redo() => ref.read(documentProvider.notifier).redo();
 
   // --- Zoeken en vervangen -----------------------------------------------
+
+  Widget _findBar() => MarkdownFindBar(
+    key: ValueKey('doc-find-$_showReplace'),
+    query: _findQuery,
+    replace: _replaceText,
+    caseSensitive: _caseSensitive,
+    showReplace: _showReplace,
+    matchCount: _matches.length,
+    matchIndex: _matchIndex,
+    onQueryChanged: (value) {
+      _findQuery = value;
+      _recountMatches(selectFirst: true);
+    },
+    onReplaceChanged: (value) => setState(() => _replaceText = value),
+    onCaseSensitiveChanged: (value) {
+      _caseSensitive = value;
+      _recountMatches(selectFirst: false);
+    },
+    onNext: _goToNextMatch,
+    onPrevious: _goToPreviousMatch,
+    onReplaceCurrent: _replaceCurrentMatch,
+    onReplaceAll: _replaceAllMatches,
+    onClose: _closeFind,
+  );
 
   void _openFind({required bool showReplace}) {
     // Pagina's is alleen-lezen: zoeken heeft daar geen schrijfvlak. Ga naar
