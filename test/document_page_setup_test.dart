@@ -195,4 +195,92 @@ void main() {
       expect(back.margins?.bleedMm, 5);
     });
   });
+
+  // ── #1681: ongeldige geometry-frontmatter valt terug op defaults ──────
+  //
+  // double.tryParse aanvaardt 'NaN' en 'Infinity' als geldige doubles, en
+  // negatieve marges bereiken de layout als negatieve maten. De parse-lagen
+  // horen die af te vangen en op defaults terug te vallen — met een melding
+  // die de gebruiker vertelt dat zijn frontmatter genegeerd is.
+  group('ongeldige geometry (#1681)', () {
+    test('NaN in een marge valt terug op defaults', () {
+      const source =
+          '---\ngeometry: top=NaNmm,bottom=25mm,left=20mm,right=20mm\n---\n\n# Kop\n';
+      expect(documentPageSetup(source), kNoDocumentPageSetup);
+    });
+
+    test('Infinity in een marge valt terug op defaults', () {
+      const source =
+          '---\ngeometry: top=25mm,bottom=25mm,left=Infinitymm,right=20mm\n---\n\n# Kop\n';
+      expect(documentPageSetup(source), kNoDocumentPageSetup);
+    });
+
+    test('negatieve marge valt terug op defaults', () {
+      const source =
+          '---\ngeometry: top=-5mm,bottom=25mm,left=20mm,right=20mm\n---\n\n# Kop\n';
+      expect(documentPageSetup(source), kNoDocumentPageSetup);
+    });
+
+    test('negatieve papiermaat valt terug op defaults', () {
+      const source =
+          '---\ngeometry: paperwidth=-210mm,paperheight=297mm,top=25mm\n---\n\n# Kop\n';
+      expect(documentPageSetup(source), kNoDocumentPageSetup);
+    });
+
+    test('afloop groter dan de marge (negatief resultaat) valt terug', () {
+      // A4 is 210×297; 220×307 is dat plus 10mm rondom = 5mm afloop
+      // (dw/2=5 ≤ 20, dus _inferPaper herkent de afloop).
+      // top=3mm - 5mm afloop = -2mm → ongeldig.
+      const source =
+          '---\ngeometry: paperwidth=220mm,paperheight=307mm,top=3mm,bottom=3mm\n---\n\n# Kop\n';
+      expect(documentPageSetup(source), kNoDocumentPageSetup);
+    });
+
+    test('geldige geometry blijft doorkomen', () {
+      const source =
+          '---\ngeometry: top=30mm,bottom=30mm,left=15mm,right=15mm\n---\n\n# Kop\n';
+      final setup = documentPageSetup(source);
+      expect(setup.margins?.topMm, 30);
+      expect(setup.margins?.leftMm, 15);
+    });
+
+    test('documentCarriesPageSetup is false voor ongeldige geometry', () {
+      const source = '---\ngeometry: top=-5mm,bottom=25mm\n---\n\n# Kop\n';
+      expect(documentCarriesPageSetup(source), isFalse);
+    });
+  });
+
+  group('documentPageSetupInvalidReason (#1681)', () {
+    test('geen geometry → null', () {
+      expect(documentPageSetupInvalidReason(plain), isNull);
+    });
+
+    test('geldige geometry → null', () {
+      const source =
+          '---\ngeometry: top=30mm,bottom=30mm,left=15mm,right=15mm\n---\n\n# Kop\n';
+      expect(documentPageSetupInvalidReason(source), isNull);
+    });
+
+    test('NaN in geometry → reden', () {
+      const source = '---\ngeometry: top=NaNmm,bottom=25mm\n---\n\n# Kop\n';
+      expect(documentPageSetupInvalidReason(source), isNotNull);
+    });
+
+    test('negatieve marge → reden', () {
+      const source = '---\ngeometry: top=-5mm,bottom=25mm\n---\n\n# Kop\n';
+      expect(documentPageSetupInvalidReason(source), isNotNull);
+    });
+
+    test('marges breder dan het vel → reden', () {
+      // A4 is 210mm breed; left=200 + right=200 = 400 > 210.
+      const source =
+          '---\npapersize: a4\ngeometry: top=25mm,bottom=25mm,left=200mm,right=200mm\n---\n\n# Kop\n';
+      expect(documentPageSetupInvalidReason(source), isNotNull);
+    });
+
+    test('geometry met alleen rommel → null (geen melding)', () {
+      const source = '---\ngeometry: flauwekul\n---\n\n# Kop\n';
+      expect(documentPageSetupInvalidReason(source), isNull);
+    });
+  });
 }

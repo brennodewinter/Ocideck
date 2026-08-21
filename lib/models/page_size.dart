@@ -165,6 +165,18 @@ class PageMargins {
   /// Of er een drukkersafloop is gevraagd.
   bool get hasBleed => bleedMm > 0;
 
+  /// Of deze marges semantisch geldig zijn: elk veld eindig en niet-negatief.
+  /// `double.tryParse` aanvaardt `'NaN'` en `'Infinity'` als geldige doubles,
+  /// dus zonder deze check bereiken oneindige en NaN-waarden de layout.
+  bool get isValid =>
+      _isFiniteNonNegative(topMm) &&
+      _isFiniteNonNegative(bottomMm) &&
+      _isFiniteNonNegative(leftMm) &&
+      _isFiniteNonNegative(rightMm) &&
+      _isFiniteNonNegative(bleedMm);
+
+  static bool _isFiniteNonNegative(double v) => v.isFinite && v >= 0;
+
   /// CSS `@page margin`-waarde, bijv. `"25mm 20mm 25mm 20mm"`.
   ///
   /// Met afloop telt die aan elke zijde bij de marge op: het vel is dan
@@ -217,13 +229,17 @@ class PageMargins {
     if (parts.length < 4 || parts.length > 6) return null;
     final vals = parts.map((p) => double.tryParse(p)).toList();
     if (vals.any((v) => v == null)) return null;
-    return PageMargins(
+    final m = PageMargins(
       topMm: vals[0]!,
       bottomMm: vals[1]!,
       leftMm: vals[2]!,
       rightMm: vals[3]!,
       bleedMm: vals.length > 4 ? vals[4]! : 0,
     );
+    // Negatieve, NaN- of oneindige waarden horen niet in opgeslagen marges:
+    // ze bereiken de layout als negatieve of oneindige maten en crashen de
+    // paginering. Val terug op de standaardmarge in plaats van ze te erven.
+    return m.isValid ? m : null;
   }
 
   @override
@@ -296,3 +312,19 @@ class PageMargins {
 /// Format een mm-waarde zonder onnodige `.0` — `25.0` → `"25"`, `25.5` → `"25.5"`.
 String _fmtMm(double mm) =>
     mm == mm.roundToDouble() ? mm.round().toString() : mm.toString();
+
+/// Of [margins] binnen het vel [size] passen met een veilige minimum-
+/// tekstspiegel van [minContentMm] mm. Marges die samen breder of hoger
+/// zijn dan het papier leveren een negatieve content-maat op, die
+/// Flutter-layoutconstraints en pagineringsberekeningen laat crashen of
+/// vastlopen. De drempel van 10 mm is royaal — een vel waar minder dan
+/// een centimeter tekst op past is onbruikbaar, hoe dan ook.
+bool marginsFitPaper(
+  PageSizeSpec size,
+  PageMargins margins, {
+  double minContentMm = 10,
+}) {
+  final (w, h) = size.dimensions;
+  return margins.leftMm + margins.rightMm <= w - minContentMm &&
+      margins.topMm + margins.bottomMm <= h - minContentMm;
+}

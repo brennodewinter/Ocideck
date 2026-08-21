@@ -26,7 +26,10 @@ const double _documentChromeMinHeightPx = 56;
 /// als op papier.
 double pageTextWidthPx(PageSizeSpec size, PageMargins margins) {
   final (widthMm, _) = size.dimensions;
-  return (widthMm - margins.leftMm - margins.rightMm) * kPxPerMm;
+  return ((widthMm - margins.leftMm - margins.rightMm) * kPxPerMm).clamp(
+    kPxPerMm,
+    double.infinity,
+  );
 }
 
 /// Toont een document als échte pagina's: op maat, met de gekozen marges, een
@@ -235,13 +238,21 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
 
   double get _contentWidthPx {
     final (w, _) = widget.pageSize.dimensions;
-    return (w - widget.margins.leftMm - widget.margins.rightMm) * kPxPerMm;
+    // Verdediging in de diepte: de parse-lagen hierboven zouden ongeldige
+    // marges allang moeten afvangen, maar een negatieve tekstspiegel die
+    // hier toch doorheen glipt crasht de layout. Knel af op 1 mm — te smal
+    // om te lezen, maar eindig en positief, dus de boom overleeft.
+    return ((w - widget.margins.leftMm - widget.margins.rightMm) * kPxPerMm)
+        .clamp(kPxPerMm, double.infinity);
   }
 
   double get _contentHeightPx {
     final (_, h) = widget.pageSize.dimensions;
     final pageHeight = h * kPxPerMm;
-    return pageHeight - _contentTopPx - _contentBottomPx;
+    return (pageHeight - _contentTopPx - _contentBottomPx).clamp(
+      kPxPerMm,
+      double.infinity,
+    );
   }
 
   bool get _hasPageChrome =>

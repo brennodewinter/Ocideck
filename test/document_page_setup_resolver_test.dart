@@ -39,4 +39,37 @@ void main() {
     expect(setup.size, const PageSizeSpec(series: PaperSeries.a, number: 5));
     expect(setup.margins?.topMm, 40);
   });
+
+  // ── #1681: marges die niet binnen het vel passen vallen terug ──────
+  group('content-area fallback (#1681)', () {
+    test('marges breder dan het vel vallen terug op de instellingen', () {
+      // A5 is 148×210mm; left=200 + right=200 = 400 > 148.
+      const source =
+          '---\ngeometry: top=25mm,bottom=25mm,left=200mm,right=200mm\n---\n\n# Kop\n';
+      final setup = effectiveDocumentPageSetup(settings, source);
+      expect(
+        setup.margins?.leftMm,
+        20,
+        reason:
+            'de instellingen-marges gelden, niet de ongeldige document-marges',
+      );
+    });
+
+    test('marges hoger dan het vel vallen terug op de instellingen', () {
+      const source =
+          '---\ngeometry: top=200mm,bottom=200mm,left=20mm,right=20mm\n---\n\n# Kop\n';
+      final setup = effectiveDocumentPageSetup(settings, source);
+      expect(
+        setup.margins?.topMm,
+        10,
+        reason: 'de instellingen-marges gelden (topMm=10)',
+      );
+    });
+
+    test('geldige marges blijven doorkomen', () {
+      const source = '---\ngeometry: top=40mm,bottom=40mm\n---\n\n# Kop\n';
+      final setup = effectiveDocumentPageSetup(settings, source);
+      expect(setup.margins?.topMm, 40);
+    });
+  });
 }

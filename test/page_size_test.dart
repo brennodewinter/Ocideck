@@ -131,6 +131,79 @@ void main() {
     });
   });
 
+  group('PageMargins — validatie (#1681)', () {
+    test('isValid: standaardmarges zijn geldig', () {
+      expect(const PageMargins().isValid, isTrue);
+    });
+
+    test('isValid: negatieve waarden zijn ongeldig', () {
+      expect(const PageMargins(topMm: -1).isValid, isFalse);
+      expect(const PageMargins(leftMm: -0.1).isValid, isFalse);
+    });
+
+    test('isValid: NaN en Infinity zijn ongeldig', () {
+      expect(const PageMargins(topMm: double.nan).isValid, isFalse);
+      expect(const PageMargins(rightMm: double.infinity).isValid, isFalse);
+      expect(const PageMargins(bleedMm: double.nan).isValid, isFalse);
+    });
+
+    test('fromId: negatieve waarden vallen terug op null', () {
+      expect(PageMargins.fromId('-1,25,20,20'), isNull);
+    });
+
+    test('fromId: NaN valt terug op null', () {
+      expect(PageMargins.fromId('NaN,25,20,20'), isNull);
+    });
+
+    test('fromId: Infinity valt terug op null', () {
+      expect(PageMargins.fromId('25,Infinity,20,20'), isNull);
+    });
+
+    test('fromId: geldige waarden blijven doorkomen', () {
+      expect(
+        PageMargins.fromId('30,25,15,20'),
+        const PageMargins(topMm: 30, bottomMm: 25, leftMm: 15, rightMm: 20),
+      );
+    });
+  });
+
+  group('marginsFitPaper (#1681)', () {
+    test('marges die binnen het vel passen', () {
+      expect(marginsFitPaper(PageSizeSpec.a4, const PageMargins()), isTrue);
+    });
+
+    test('marges die samen breder zijn dan het vel', () {
+      expect(
+        marginsFitPaper(
+          PageSizeSpec.a4,
+          const PageMargins(leftMm: 200, rightMm: 200),
+        ),
+        isFalse,
+      );
+    });
+
+    test('marges die samen hoger zijn dan het vel', () {
+      expect(
+        marginsFitPaper(
+          PageSizeSpec.a4,
+          const PageMargins(topMm: 200, bottomMm: 200),
+        ),
+        isFalse,
+      );
+    });
+
+    test('marges die precies tot de minimum-textspiegel vullen', () {
+      // A4 is 210×297; 10mm minimum → max 200mm horizontaal, 287mm verticaal.
+      expect(
+        marginsFitPaper(
+          PageSizeSpec.a4,
+          const PageMargins(leftMm: 100, rightMm: 100),
+        ),
+        isTrue,
+      );
+    });
+  });
+
   group('PageSizeSpec — equality', () {
     test('zelfde reeks/nummer/landscape zijn gelijk', () {
       expect(PageSizeSpec.a4, PageSizeSpec.a4);
