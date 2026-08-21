@@ -339,6 +339,7 @@ void main() {
         'geometry',
         'reference-location',
         'ocideck_secret',
+        'marp',
       ]) {
         expect(
           () => withDocumentFields(body, {key: 'waarde'}),
@@ -439,5 +440,22 @@ void main() {
         });
       },
     );
+
+    // Regression voor #1638: de vrije sleutel `marp` laat sniffFrontmatter
+    // het bestand na heropenen als presentatie lezen, wat de documentbron
+    // stil in dia's deconstrueert. `marp` is dus een gereserveerde
+    // documentsleutel — hij mag niet via de velden worden geschreven.
+    test('marp is een gereserveerde sleutel en wordt niet weggeschreven', () {
+      expect(isReservedDocumentFieldKey('marp'), isTrue);
+      expect(
+        () => withDocumentFields(body, const {'marp': 'true'}),
+        throwsArgumentError,
+      );
+      // Een handgeschreven `marp: true` wordt niet als vrij veld blootgesteld,
+      // zodat de veldendialoog hem niet kan round-trippen als documentveld.
+      const source = '---\nmarp: true\ntitle: Audit\n---\n\n$body';
+      expect(documentFields(source), isNot(contains('marp')));
+      expect(documentFields(source), {'title': 'Audit'});
+    });
   });
 }

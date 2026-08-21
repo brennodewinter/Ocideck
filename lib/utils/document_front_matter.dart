@@ -51,6 +51,17 @@ const Set<String> kDocumentOwnedKeys = {
 /// er voor altijd in te blijven staan. Leeg zolang er niets is ingetrokken.
 const Set<String> kDocumentRetiredKeys = {};
 
+/// Front-matter-sleutels die de identiteit van het bestand bepalen: hun
+/// aanwezigheid laat `MarkdownService.sniffFrontmatter` het bestand als een
+/// **deck** lezen in plaats van als een document. Een document is zijn bron
+/// verbatim, en zijn soort volgt uit de *afwezigheid* van `marp: true` (zie
+/// [MarkdownKind]). Sta een gebruiker toe zo'n sleutel als vrij documentveld
+/// te zetten, dan wisselt het bestand na opslaan en heropenen stil van soort
+/// — doorlopende tekst wordt in dia's geknipt zonder waarschuwing. Dat is
+/// dataverlies op de documentbelofte, dus deze sleutels zijn net zo
+/// gereserveerd als de eigen sleutels hierboven.
+const Set<String> kDeckIdentityKeys = {'marp'};
+
 final _documentFieldKey = RegExp(r'^[a-z][a-z0-9_-]*$');
 final _doubleQuotedDocumentScalar = RegExp(
   r'^("(?:\\.|[^"\\])*")((?:\s+#.*)?\s*)$',
@@ -102,10 +113,12 @@ class DocumentFields extends MapBase<String, String> {
 /// Of [key] de eenvoudige, uitwisselbare sleutelvorm voor documentvelden heeft.
 bool isValidDocumentFieldKey(String key) => _documentFieldKey.hasMatch(key);
 
-/// Of [key] door de documentstructuur of door OciDeck zelf wordt beheerd.
+/// Of [key] door de documentstructuur, door OciDeck zelf, of door de
+/// deck-identiteit wordt beheerd — en dus geen vrij documentveld mag zijn.
 bool isReservedDocumentFieldKey(String key) =>
     kDocumentOwnedKeys.contains(key) ||
     kDocumentRetiredKeys.contains(key) ||
+    kDeckIdentityKeys.contains(key) ||
     key.startsWith('ocideck_');
 
 /// A document split into its leading front-matter [block] (verbatim, including
