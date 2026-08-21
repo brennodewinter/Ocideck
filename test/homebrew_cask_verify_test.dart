@@ -12,11 +12,15 @@ import 'package:yaml/yaml.dart';
 /// De terugleescontrole op de Homebrew-tap
 /// (`scripts/verify_homebrew_cask.sh`).
 ///
-/// De cask-stap in `.forgejo/workflows/release.yml` slikt een mislukte clone
-/// bewust in (`exit 0`), zodat een onbereikbare tap een afgeronde release niet
-/// rood maakt. Daardoor las een groene job óók als "tap bijgewerkt" terwijl er
-/// niets gepusht was: een ingetrokken `HOMEBREW_TAP_TOKEN` bleef onzichtbaar
-/// tot iemand via `brew` een oude versie installeerde.
+/// De releaseketen duwde de cask vroeger zelf naar de tap, met een persoonlijk
+/// toegangstoken in `HOMEBREW_TAP_TOKEN`. Dat token weigerde de forge bij
+/// v0.4.8 (HTTP 401) en de tap stond drie releases achter voordat iemand het
+/// merkte. Sindsdien is het omgedraaid: de tap houdt zichzelf bij met een eigen
+/// werkstroom en het per-run Actions-token van Forgejo, en deze repository
+/// levert alleen nog de bouwstenen. Er is dus geen secret meer dat kan
+/// verlopen — maar wél een koppeling over repo-grenzen heen, en die is stil:
+/// hernoem je het script of de sjabloon, dan breekt de tap zonder dat hier
+/// iets rood wordt. Vandaar dat die twee paden hieronder gepind staan.
 ///
 /// Eén hop verderop zit dezelfde faalklasse: de GitHub-spiegel van de tap. Die
 /// is een reservekopie, maar Homebrews `brew tap`-shorthand lost er wél naar
@@ -157,41 +161,44 @@ void main() {
   });
 
   group('de bedrading', () {
-    test('de releaseketen draait de controle na het pushen', () {
-      final file = File('.forgejo/workflows/release.yml');
-      expect(file.existsSync(), isTrue, reason: 'release.yml niet gevonden');
+    test('de releaseketen duwt de cask niet meer naar de tap', () {
+      final doc =
+          loadYaml(File('.forgejo/workflows/release.yml').readAsStringSync())
+              as YamlMap;
 
-      final doc = loadYaml(file.readAsStringSync()) as YamlMap;
-      final job = (doc['jobs'] as YamlMap)['homebrew-cask'] as YamlMap;
-      final steps = (job['steps'] as YamlList).toList();
-
-      final duwt = steps.indexWhere(
-        (s) =>
-            ((s as YamlMap)['run'] as String?)?.contains('git push') ?? false,
-      );
-      final toetst = steps.indexWhere(
-        (s) =>
-            ((s as YamlMap)['run'] as String?)?.contains(
-              'verify_homebrew_cask.sh',
-            ) ??
-            false,
-      );
-
-      expect(duwt, isNot(-1), reason: 'geen push-stap in de cask-job');
       expect(
-        toetst,
-        isNot(-1),
+        (doc['jobs'] as YamlMap).keys,
+        isNot(contains('homebrew-cask')),
         reason:
-            'de cask-job draait verify_homebrew_cask.sh niet; een groene job '
-            'zegt dan opnieuw niets over wat er in de tap staat',
+            'de cask-job is terug in de releaseketen; die route hing aan '
+            'HOMEBREW_TAP_TOKEN en viel stil om. De tap werkt zichzelf bij.',
       );
       expect(
-        toetst,
-        greaterThan(duwt),
+        File('.forgejo/workflows/release.yml').readAsStringSync(),
+        isNot(contains('HOMEBREW_TAP_TOKEN')),
         reason:
-            'de controle moet ná het pushen lezen, anders toetst hij de '
-            'vorige release',
+            'de releaseketen leunt weer op een tap-token; dat is precies het '
+            'onderdeel dat we kwijt wilden',
       );
+    });
+
+    test('de bouwstenen liggen op de paden die de tap ophaalt', () {
+      // De werkstroom in LibreKAT/homebrew-ocideck haalt deze twee bestanden
+      // per run op via `raw/<pad>?ref=<tag>`. Die koppeling staat in een andere
+      // repository en kan hier dus niet meelopen in een refactor: verplaats je
+      // ze, dan blijft de tap stil op de oude release staan.
+      for (final pad in const [
+        'scripts/update_homebrew_cask.sh',
+        'homebrew/ocideck.rb.tmpl',
+      ]) {
+        expect(
+          File(pad).existsSync(),
+          isTrue,
+          reason:
+              '$pad ontbreekt; de werkstroom van de tap haalt precies dit pad '
+              'op en breekt zonder melding in deze repository',
+        );
+      }
     });
 
     test('de spiegelcontrole draait periodiek, niet in de release', () {

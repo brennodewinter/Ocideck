@@ -1793,6 +1793,36 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De Homebrew-cask wordt niet meer door de release geduwd — de tap haalt hem
+  zelf op.** Bij v0.4.8 viel de job `homebrew-cask` rood: de forge weigerde
+  `HOMEBREW_TAP_TOKEN` met HTTP 401, vlak na een herstart op Forgejo 16.0.1. De
+  cask was al gegenereerd en gecommit; alleen de push kwam er niet doorheen. Het
+  token was niet ingetrokken en had de juiste scope, dus "verlopen" verklaarde
+  het niet — maar het bleef een los onderdeel dat stil kan sneuvelen, en dat had
+  het al eerder gedaan: de tap stond drie releases achter (op 0.4.6) voordat
+  iemand het merkte, omdat v0.4.7 nooit gepubliceerd werd én v0.4.8 hierop
+  strandde.
+
+  Dat de fout zo laat opviel, zat in de vorm. De job slikt een mislukte clone
+  bewust in zodat een onbereikbare tap een afgeronde release niet rood maakt —
+  maar de tap is publiek, dus die clone slaagt óók met een dood token. Een
+  groene clone bewees niets; pas de push viel om.
+
+  Nu andersom: `.forgejo/workflows/update-cask.yml` in
+  `LibreKAT/homebrew-ocideck` leest elk half uur de nieuwste stabiele release
+  publiek uit, haalt `scripts/update_homebrew_cask.sh` en
+  `homebrew/ocideck.rb.tmpl` op bij díe tag, en pusht met het per-run
+  Actions-token dat Forgejo voor die repository zelf aanmaakt. Geen secret meer,
+  niets dat verloopt. De cask loopt daardoor maximaal een half uur achter op een
+  release in plaats van direct bij te trekken; voor een tap is dat verschil
+  betekenisloos, want `brew update` draait op de klok van de gebruiker.
+
+  De cask-job is uit `release.yml` verdwenen. Wat blijft is de terugleescontrole
+  in `tap-mirror-check.yml`: die leest dagelijks wat er écht in de tap en zijn
+  spiegel staat. Nieuw in de test is dat de twee paden die de tap per run
+  ophaalt hier gepind staan — die koppeling loopt over een repo-grens en zou
+  anders stil breken bij een hernoeming.
+
 - **De PDF van een document zette de opmaak één laag lager weer uit.** Drie
   dingen, allemaal zichtbaar in dezelfde export, en geen ervan aan de tabellen
   (die zijn met #1626 al rechtgezet).

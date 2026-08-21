@@ -831,11 +831,27 @@ published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It i
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
 tracked separately (#1227).
 
-- **Where it runs.** Only the canonical forge chain
-  (`.forgejo/workflows/release.yml`, job `homebrew-cask`, after `publiceren`)
-  writes the cask. `scripts/update_homebrew_cask.sh` fills
-  `homebrew/ocideck.rb.tmpl` and commits `Casks/ocideck.rb` to the tap. The
-  GitHub `release.yml` deliberately has **no** such job — it would double-push.
+- **Where it runs: in the tap, not here.** The tap updates *itself*.
+  `.forgejo/workflows/update-cask.yml` in `LibreKAT/homebrew-ocideck` runs every
+  30 minutes (and on `workflow_dispatch`), reads the newest non-prerelease from
+  this repo's public API, fetches `scripts/update_homebrew_cask.sh` and
+  `homebrew/ocideck.rb.tmpl` **at that tag** over `raw/<path>?ref=<tag>`,
+  regenerates `Casks/ocideck.rb` and pushes — with the per-run Actions token
+  Forgejo mints for that repository. Nothing is committed when the cask is
+  already current, so the half-hourly schedule does not produce noise.
+
+  Neither `release.yml` writes the cask any more. Until v0.4.8 the forge chain
+  pushed it across with a personal token in `HOMEBREW_TAP_TOKEN`; the forge
+  refused that token after an upgrade (HTTP 401) and the tap sat three releases
+  behind before anyone noticed. Turning it around removed the secret entirely.
+  The cost is that the cask trails a release by up to 30 minutes instead of
+  updating within the run — irrelevant for a tap, since `brew update` is on the
+  user's own clock, and worth it to be rid of a credential that expires.
+- **This repo only supplies the building blocks**, and that coupling is silent:
+  the tap fetches those two paths **by name**, from another repository. Rename or
+  move either and the tap quietly keeps serving the previous release. There is no
+  gate here that can see it, so `test/homebrew_cask_verify_test.dart` pins both
+  paths; if you move them, update the workflow in the tap in the same change.
 - **Tap topology: the forge is the source, GitHub is the backup.** The tap lives
   on our own forge as the canonical repo, **mirrored to GitHub** (a Forgejo
   push-mirror on the tap repo). Homebrew's one-argument shorthand
@@ -853,30 +869,15 @@ tracked separately (#1227).
   unreachable — a backup, not the source. (Both routes download the *app* from
   the forge either way; what differs is where the cask recipe comes from.)
 - **One-time setup.** Create the tap repo `homebrew-ocideck` on the forge with a
-  top-level `Casks/` directory; add a GitHub push-mirror to
-  `brennodewinter/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
-  `HOMEBREW_TAP_REPOSITORY` (`LibreKAT/homebrew-ocideck`) and `HOMEBREW_TAP_TOKEN`
-  (a forge token with `write:repository` on the tap). Absent either, the job
-  checks that up front and skips everything — no tooling or checkout is set up —
-  ending green with a `⏭️ Homebrew-cask NIET bijgewerkt` note on the run summary
-  (same graceful-skip pattern as the web-deploy job). The release still publishes;
-  only the cask is skipped.
-- **Fails soft on a missing tap.** Even with both secrets set, if the tap cannot
-  be cloned (it does not exist yet, or the token lacks push scope) the step logs a
-  `⚠️ tap onbereikbaar` note and exits 0 rather than aborting the run mid-release.
-  A brand-new, still-empty tap repo is handled too: with no HEAD branch yet the
-  job falls back to `main`.
-- **The tap is read back, not assumed.** Because of that soft failure, a green
-  job used to read as "tap updated" even when nothing had been pushed — a revoked
-  `HOMEBREW_TAP_TOKEN` stayed invisible until someone installed a stale version.
-  The last step therefore runs `scripts/verify_homebrew_cask.sh "$GITHUB_REF_NAME"`,
-  which re-reads `Casks/ocideck.rb` from the tap over the same public URL Homebrew
-  itself uses and compares its `version` to the tag. A mismatch — or a tap that
-  cannot be read at all — turns the job **red** with a `❌ Homebrew-cask NIET
-  bijgewerkt` note. Red here means "the tap needs attention", not "the release
-  failed": by then the artifacts are published and no job depends on this one.
-  Run the same check by hand at any time; without a tag it checks the newest
-  release:
+  top-level `Casks/` directory, enable Actions on it, add `update-cask.yml`, and
+  add a GitHub push-mirror to `brennodewinter/homebrew-ocideck`. **No secrets** —
+  not on the tap and not on this repo. The old `HOMEBREW_TAP_REPOSITORY` and
+  `HOMEBREW_TAP_TOKEN` secrets are unused; delete them and revoke the token.
+- **The tap is read back, not assumed.** A workflow that runs green still says
+  nothing about what is actually in the tap, so `scripts/verify_homebrew_cask.sh`
+  re-reads `Casks/ocideck.rb` over the same public URL Homebrew itself uses and
+  compares its `version` to the release. That check is the daily one below; run it
+  by hand at any time, and without a tag it checks the newest release:
 
   ```bash
   scripts/verify_homebrew_cask.sh          # or: scripts/verify_homebrew_cask.sh v<version>
