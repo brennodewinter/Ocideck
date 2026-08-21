@@ -143,16 +143,43 @@ Future<bool> saveDocument(MarkdownDocument document, String filePath) async {
 }
 
 /// True when [content] handed to [FileService.openDeckDetailed] is over the
-/// markdown cap. A UTF-16 code unit is always ≥ 1 UTF-8 byte, so a code-unit
-/// count over the cap guarantees the byte size is over it too — a cheap, O(1)
-/// conservative guard that never has to encode the whole string to reject.
+/// markdown cap. Counts UTF-8 bytes without allocating a second, potentially
+/// much larger byte buffer. Dart's UTF-8 encoder replaces an unpaired surrogate
+/// with U+FFFD, which occupies three bytes; this counter mirrors that behaviour.
 bool _providedContentOverCap(String content) {
-  if (content.length <= FileService.maxDeckMarkdownBytes) return false;
-  logWarning(
-    'FileService.openDeck: provided content exceeds '
-    '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
-  );
-  return true;
+  if (content.length > FileService.maxDeckMarkdownBytes) {
+    logWarning(
+      'FileService.openDeck: provided content exceeds '
+      '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+    );
+    return true;
+  }
+  var bytes = 0;
+  for (var i = 0; i < content.length; i++) {
+    final unit = content.codeUnitAt(i);
+    if (unit <= 0x7f) {
+      bytes++;
+    } else if (unit <= 0x7ff) {
+      bytes += 2;
+    } else if (unit >= 0xd800 && unit <= 0xdbff) {
+      final hasLowSurrogate =
+          i + 1 < content.length &&
+          content.codeUnitAt(i + 1) >= 0xdc00 &&
+          content.codeUnitAt(i + 1) <= 0xdfff;
+      bytes += hasLowSurrogate ? 4 : 3;
+      if (hasLowSurrogate) i++;
+    } else {
+      bytes += 3;
+    }
+    if (bytes > FileService.maxDeckMarkdownBytes) {
+      logWarning(
+        'FileService.openDeck: provided content exceeds '
+        '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+      );
+      return true;
+    }
+  }
+  return false;
 }
 
 /// Leest de bytes van een `.md` in en scant ze fail-closed op uitvoerbare

@@ -113,6 +113,22 @@ void main() {
       );
     });
 
+    test('refuses a project symlink to a file outside the project', () async {
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      final images = Directory(p.join(project.path, 'images'))..createSync();
+      final outside = File(p.join(tmp.path, 'outside.png'))
+        ..writeAsBytesSync(_pngBytes);
+      Link(p.join(images.path, 'escape.png')).createSync(outside.path);
+
+      expect(
+        await service.readSlideImageBytes(
+          'images/escape.png',
+          projectPath: project.path,
+        ),
+        isNull,
+      );
+    });
+
     test('returns null when the resolved file is missing', () async {
       expect(
         await service.readSlideImageBytes(

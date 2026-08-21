@@ -90,5 +90,15 @@ void main() {
       // Missing path is not a symlink escape — the normal load path handles it.
       expect(isRenderPathContained(missing, projectDir.path), isTrue);
     });
+
+    test('rechecks a path after it changes into an escaping symlink', () {
+      resetRenderContainedCache();
+      final mutable = p.join(projectDir.path, 'images', 'mutable.png');
+
+      expect(isRenderPathContained(mutable, projectDir.path), isTrue);
+      Link(mutable).createSync(outsideSecret.path);
+
+      expect(isRenderPathContained(mutable, projectDir.path), isFalse);
+    });
   });
 }
