@@ -674,6 +674,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kies kolommen voor de tijdlijn': 'Kies kolommen foar de tiidline',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'In tiidline brûkt twa of trije kolommen. Kiz hokker kolommen út dizze tabel de tiidline wurde. De oare kolommen ferdwine út de tabel.',
+  'Volgorde (marker)': 'Folchoarder (markearring)',
+  'Toelichting (optioneel)': 'Taljochting (opsjoneel)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Rigel {n} befettet HTML-kommintaren of HTML-tags. De fisuele editor kin dit net sjen litte — Boarnemodus is aktivearre.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

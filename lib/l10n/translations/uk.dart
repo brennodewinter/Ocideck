@@ -1650,6 +1650,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Оберіть стовпці для часової лінії',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Часова лінія використовує два або три стовпці. Оберіть, які стовпці цієї таблиці стануть часовою лінією. Решта стовпців зникне з таблиці.',
+  'Volgorde (marker)': 'Порядок (маркер)',
+  'Toelichting (optioneel)': 'Опис (необов\'язково)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Рядок {n} містить HTML-коментарі або HTML-теги. Візуальний редактор не може це відобразити — Активовано режим джерела.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

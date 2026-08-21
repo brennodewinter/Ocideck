@@ -1635,6 +1635,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Valitse sarakkeet aikajanalle',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Aikajana käyttää kahta tai kolmea saraketta. Valitse, mitkä sarakkeet tästä taulukosta tulevat aikajanaksi. Jäljellä olevat sarakkeet katoavat taulukosta.',
+  'Volgorde (marker)': 'Järjestys (merkki)',
+  'Toelichting (optioneel)': 'Kuvaus (valinnainen)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Rivi {n} sisältää HTML-kommentteja tai HTML-tageja. Visuaalinen editori ei voi näyttää tätä — Lähdetila aktivoitu.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

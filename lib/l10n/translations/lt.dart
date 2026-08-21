@@ -1641,6 +1641,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Pasirinkite stulpelius laiko juostai',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Laiko juosta naudoja du ar tris stulpelius. Pasirinkite, kurie šios lentelės stulpeliai tampa laiko juosta. Likę stulpeliai dingsta iš lentelės.',
+  'Volgorde (marker)': 'Eilė (žymeklis)',
+  'Toelichting (optioneel)': 'Aprašymas (neprivaloma)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Eilutė {n} turi HTML komentarus ar HTML žymes. Vaizdinis redaktoris negali to rodyti — Šaltinio režimas aktyvuotas.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

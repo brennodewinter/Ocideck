@@ -1646,6 +1646,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Wybierz kolumny dla osi czasu',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Oś czasu używa dwóch lub trzech kolumn. Wybierz, które kolumny z tej tabeli staną się osią czasu. Pozostałe kolumny znikną z tabeli.',
+  'Volgorde (marker)': 'Kolejność (znacznik)',
+  'Toelichting (optioneel)': 'Opis (opcjonalny)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Wiersz {n} zawiera komentarze HTML lub znaczniki HTML. Edytor wizualny nie może tego wyświetlić — Tryb źródła został aktywowany.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

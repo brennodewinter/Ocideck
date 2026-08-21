@@ -1612,6 +1612,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'timelinevam ngerIq tlhIH wIv',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'timelinevam cha\' wej tlhIH lo\'. tablevam tlhIH wIv timelinevam ghaH. tlhIH remaining tablevo\' ngeH.',
+  'Volgorde (marker)': 'tlhIH (marker)',
+  'Toelichting (optioneel)': 'ghun (optional)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'tatlh {n} HTML QaghHom tlhIH ghap HTML tlhagh ngaS. mIw leghbe\' — teS qaSpu\'DoH.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

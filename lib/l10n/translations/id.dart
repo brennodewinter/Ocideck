@@ -1634,6 +1634,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Pilih kolom untuk lini masa',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Sebuah lini masa menggunakan dua atau tiga kolom. Pilih kolom mana dari tabel ini yang menjadi lini masa. Kolom sisanya hilang dari tabel.',
+  'Volgorde (marker)': 'Urutan (penanda)',
+  'Toelichting (optioneel)': 'Keterangan (opsional)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Baris {n} berisi komentar HTML atau tag HTML. Editor visual tidak dapat menampilkannya — Mode sumber telah diaktifkan.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

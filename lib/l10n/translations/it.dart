@@ -671,6 +671,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kies kolommen voor de tijdlijn': 'Scegli le colonne per la timeline',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Una timeline usa due o tre colonne. Scegli quali colonne di questa tabella diventano la timeline. Le colonne restanti scompariranno dalla tabella.',
+  'Volgorde (marker)': 'Ordine (marcatore)',
+  'Toelichting (optioneel)': 'Descrizione (opzionale)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Riga {n} contiene commenti HTML o tag HTML. L\'editor visuale non può visualizzarli — Modalità sorgente attivata.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

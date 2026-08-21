@@ -1664,6 +1664,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Roghnaigh colúin don amlíne',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Úsáideann amlíne dhá nó trí cholún. Roghnaigh cé na colúin ón tábla seo a éireoidh in amlíne. Imeoidh na colúin eile den tábla.',
+  'Volgorde (marker)': 'Ord (marcóir)',
+  'Toelichting (optioneel)': 'Cur síos (roghnach)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Tá nótaí HTML nó clibeanna HTML ar líne {n}. Ní féidir leis an eagarthóir amhairc é seo a thaispeáint — Gníomhachtaíodh mód foinse.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

@@ -1636,6 +1636,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Vyberte sloupce pro časovou osu',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Časová osa používá dva nebo tři sloupce. Vyberte, které sloupce z této tabulky se stanou časovou osou. Zbývající sloupce z tabulky zmizí.',
+  'Volgorde (marker)': 'Pořadí (značka)',
+  'Toelichting (optioneel)': 'Popis (volitelné)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Řádek {n} obsahuje HTML komentáře nebo HTML značky. Vizuální editor to nemůže zobrazit — Režim zdroje aktivován.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':

@@ -1659,6 +1659,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kies kolommen voor de tijdlijn': 'Επιλογή στηλών για το χρονοδιάγραμμα',
+  'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
+      'Ένα χρονοδιάγραμμα χρησιμοποιεί δύο ή τρεις στήλες. Επιλέξτε ποιες στήλες αυτού του πίνακα θα γίνουν το χρονοδιάγραμμα. Οι υπόλοιπες στήλες θα εξαφανιστούν από τον πίνακα.',
+  'Volgorde (marker)': 'Σειρά (δείκτης)',
+  'Toelichting (optioneel)': 'Περιγραφή (προαιρετικά)',
   'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
       'Η γραμμή {n} περιέχει σχόλια HTML ή ετικέτες HTML. Ο οπτικός επεξεργαστής δεν μπορεί να τα εμφανίσει — Ενεργοποιήθηκε η λειτουργία πηγής.',
   'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
