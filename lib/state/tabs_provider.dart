@@ -746,8 +746,18 @@ void _selectTab(TabsNotifier notifier, int index) {
 void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
   if (current.tabs.length == 1) {
-    notifier._recovery.discard(current.tabs.first.recoveryId);
-    current.tabs.first.deckNotifier.closeDeck();
+    final tab = current.tabs.first;
+    notifier._recovery.discard(tab.recoveryId);
+    // Het enige overblijvende tabblad wordt gereset (niet verwijderd), zodat de
+    // app altijd één tabblad houdt. Een presentatie reset via closeDeck(); een
+    // documenttabblad heeft geen deckNotifier en gooit daarop, dus routeer op
+    // soort (#1636).
+    switch (tab.content) {
+      case DeckTabContent(:final deckNotifier):
+        deckNotifier.closeDeck();
+      case DocumentTabContent(:final documentNotifier):
+        documentNotifier.closeDocument();
+    }
     notifier.refreshTabs();
     notifier.sweepWebAssets();
     return;

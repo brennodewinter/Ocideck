@@ -120,6 +120,14 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     _lastCoalesceKey = null;
   }
 
+  /// Sluit het document: geschiedenis wissen en terug naar de lege toestand.
+  /// Het documenttabblad zelf blijft staan (als enige tabblad), net als een
+  /// presentatie die `closeDeck()` aanroept — maar dan voor een document.
+  void closeDocument() {
+    _clearHistory();
+    state = const DocumentState();
+  }
+
   /// Laad een reeds ingelezen document (door de tabbeheerder), vers en schoon.
   void loadDocument(MarkdownDocument document, {String? filePath}) {
     _clearHistory();
