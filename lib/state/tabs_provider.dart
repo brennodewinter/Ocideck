@@ -645,15 +645,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
         ImprovementModulePrompt(tabId: tab.id);
   }
 
-  /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
-  /// file-picker, drag-drop én URL-import geen pad maar inhoud aanleveren.
-  /// Een `.ocideck`/zip-pakket wordt volledig in het geheugen uitgepakt
-  /// ([_openPackageFromBytes]); platte markdown gaat door dezelfde
+  /// Open een deck (of plat document) uit in-memory bytes — het open-pad voor
+  /// web, waar de file-picker, drag-drop én URL-import geen pad maar inhoud
+  /// aanleveren. Een `.ocideck`/zip-pakket wordt volledig in het geheugen
+  /// uitgepakt ([_openPackageFromBytes]); platte markdown gaat door dezelfde
   /// fail-closed security-gate als [openFileByPath]. Er is geen TOCTOU-gat,
-  /// want gescand en geparsed wordt exact dezelfde in-memory string. Het
-  /// tabblad krijgt geen [DeckState.filePath], dus opslaan wordt een
-  /// download. [name] labelt het importalarm en de logregels (bestandsnaam
-  /// of URL).
+  /// want gescand en geparsed wordt exact dezelfde in-memory string. Ontbreekt
+  /// `marp: true`, dan routeert deze methode — net als [openFileByPath] —
+  /// door naar [newDocumentFromMarkdown] i.p.v. het stil te weigeren (#1637).
+  /// Het tabblad krijgt geen bestandspad, dus opslaan wordt een download.
+  /// [name] labelt het importalarm en de logregels (bestandsnaam of URL).
   Future<OpenResult> openDeckFromBytes(
     Uint8List bytes,
     String name, {
@@ -680,7 +681,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     final gated = _gateAndParseContent(raw, sourceName: name);
     final deck = gated.deck;
-    if (deck == null) return gated.failure;
+    if (deck == null) {
+      // Geen Marp-deck? Router, geen muur — spiegelt [openFileByPath]: een
+      // plat `.md` zonder `marp: true` openen als document i.p.v. het stil te
+      // weigeren (#1637). De veiligheidsscan is al gepasseerd in
+      // [_gateAndParseContent] (anders was dit [OpenResult.blocked]).
+      if (gated.failure == OpenResult.notAPresentation) {
+        if (!mounted) return OpenResult.unreadable;
+        newDocumentFromMarkdown(raw);
+        return OpenResult.opened;
+      }
+      return gated.failure;
+    }
     if (!mounted) return OpenResult.unreadable;
     _warnUnfilledChartData(deck);
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
