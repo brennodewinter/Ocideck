@@ -674,6 +674,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Zeile {n} enthält HTML-Kommentare oder HTML-Tags. Der visuelle Editor kann dies nicht anzeigen — Quellmodus aktiviert.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Zeile {n} enthält escapte Interpunktion (wie \\*). Der visuelle Editor kann dies nicht verlustfrei anzeigen — Quellmodus aktiviert.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Zeile {n} ist eine lose Tabellenzeile außerhalb eines Tabellenblocks. Der visuelle Editor kann sie nicht anzeigen — Quellmodus aktiviert.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Der Quellmodus schützt Markup, das der visuelle Editor nicht verlustfrei unterstützt. Wechseln Sie für diese Konstrukte in die Quelle.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Das Logo wird körnig gedruckt: die Datei ist {breed}×{hoog} px und ergibt in dieser Größe {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -1237,8 +1245,6 @@ const _dutchSourceAddDe = {
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Die Frage kann nicht gespielt werden: {aantal} Antworten, während dieser Fragetyp höchstens {maximum} zulässt.',
   'Actueel': 'Aktuell',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',
   'Codeblok': 'Codeblock',
   'Controleren…': 'Überprüfen Sie…',
   'Documentoverzicht': 'Dokumentenübersicht',

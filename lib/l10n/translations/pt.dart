@@ -1662,6 +1662,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'A linha {n} contém comentários HTML ou tags HTML. O editor visual não pode exibir isso — Modo fonte ativado.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'A linha {n} contém pontuação escapada (como \\*). O editor visual não pode exibi-la sem perdas — Modo fonte ativado.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'A linha {n} é uma linha de tabela solta fora de um bloco de tabela. O editor visual não pode exibi-la — Modo fonte ativado.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'O modo fonte protege marcação que o editor visual não suporta sem perdas. Mude para Fonte para estas construções.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'O logótipo sairá granulado na impressão: o ficheiro tem {breed}×{hoog} px, o que dá {dpi} dpi neste tamanho.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2222,8 +2230,6 @@ const _dutchSourceAddPt = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Não é possível jogar a pergunta: {aantal} respostas, enquanto este tipo de pergunta permite no máximo {maximum}.',
   'Actueel': 'Atual',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'O modo de origem protege a formatação que o editor visual ainda não suporta sem perdas.',
   'Codeblok': 'Bloco de código',
   'Controleren…': 'Verifique…',
   'Documentoverzicht': 'Visão geral do documento',

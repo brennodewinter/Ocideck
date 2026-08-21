@@ -674,6 +674,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'La ligne {n} contient des commentaires HTML ou des balises HTML. L\'éditeur visuel ne peut pas l\'afficher — Mode source activé.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'La ligne {n} contient une ponctuation échappée (comme \\*). L\'éditeur visuel ne peut pas l\'afficher sans perte — Mode source activé.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'La ligne {n} est une ligne de tableau lâche en dehors d\'un bloc de tableau. L\'éditeur visuel ne peut pas l\'afficher — Mode source activé.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Le mode source protège le balisage que l\'éditeur visuel ne prend pas en charge sans perte. Passez à Source pour ces constructions.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Le logo sortira granuleux à l\'impression : le fichier fait {breed}×{hoog} px, soit {dpi} dpi à cette taille.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -1242,8 +1250,6 @@ const _dutchSourceAddFr = {
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'La question ne peut pas être jouée : {aantal} réponses, alors que ce type de question en autorise au maximum {maximum}.',
   'Actueel': 'Actuel',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Le mode source protège sans perte le formatage que l’éditeur visuel ne prend pas encore en charge.',
   'Codeblok': 'Bloc de code',
   'Controleren…': 'Vérifiez…',
   'Documentoverzicht': 'Aperçu des documents',

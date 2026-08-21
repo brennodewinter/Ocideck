@@ -1646,6 +1646,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Wiersz {n} zawiera komentarze HTML lub znaczniki HTML. Edytor wizualny nie może tego wyświetlić — Tryb źródła został aktywowany.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Wiersz {n} zawiera znaki interpunkcyjne ze znakiem ucieczki (np. \\*). Edytor wizualny nie może tego wyświetlić bez strat — Tryb źródła został aktywowany.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Wiersz {n} jest luźnym wierszem tabeli poza blokiem tabeli. Edytor wizualny nie może go wyświetlić — Tryb źródła został aktywowany.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Tryb źródła chroni znaczniki, których edytor wizualny nie obsługuje bez strat. Przejdź do Źródła dla tych konstrukcji.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo wydrukuje się ziarniście: plik ma {breed}×{hoog} px, co przy tym rozmiarze daje {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2206,8 +2214,6 @@ const _dutchSourceAddPl = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Pytania nie można rozegrać: {aantal} odpowiedzi, podczas gdy ten typ pytania dopuszcza maksymalnie {maximum}.',
   'Actueel': 'Aktualny',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Tryb źródłowy chroni formatowanie, którego edytor wizualny nie obsługuje jeszcze bezstratnie.',
   'Codeblok': 'Blok kodu',
   'Controleren…': 'Sprawdź…',
   'Documentoverzicht': 'Przegląd dokumentu',

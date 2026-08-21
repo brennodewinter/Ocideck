@@ -1641,6 +1641,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Eilutė {n} turi HTML komentarus ar HTML žymes. Vaizdinis redaktoris negali to rodyti — Šaltinio režimas aktyvuotas.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Eilutė {n} turi escape\'intą skyrybos ženklus (pvz. \\*). Vaizdinis redaktoris negali to rodyti be nuostolių — Šaltinio režimas aktyvuotas.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Eilutė {n} yra laisva lentelės eilutė už lentelės bloko. Vaizdinis redaktoris negali jos rodyti — Šaltinio režimas aktyvuotas.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Šaltinio režimas saugo žymėjimą, kurio vaizdinis redaktoris nepalaiko be nuostolių. Pereikite prie Šaltinio šioms konstrukcijoms.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logotipas bus išspausdintas grūdėtas: failas yra {breed}×{hoog} px, o šiuo dydžiu tai duoda {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2198,8 +2206,6 @@ const _dutchSourceAddLt = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Klausimo negalima žaisti: {aantal} atsakymų, nors šio tipo klausimas leidžia daugiausia {maximum}.',
   'Actueel': 'Dabartinė',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Šaltinio režimas be nuostolių apsaugo formatavimą, kurio vaizdo redaktorius dar nepalaiko.',
   'Codeblok': 'Kodo blokas',
   'Controleren…': 'Patikrinkite…',
   'Documentoverzicht': 'Dokumento apžvalga',

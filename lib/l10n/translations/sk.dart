@@ -1641,6 +1641,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Riadok {n} obsahuje HTML komentáre alebo HTML značky. Vizuálny editor ich nemôže zobraziť — Režim zdroja aktivovaný.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Riadok {n} obsahuje escapovanú interpunkciu (napr. \\*). Vizuálny editor ich nemôže zobraziť bez strát — Režim zdroja aktivovaný.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Riadok {n} je voľný riadok tabuľky mimo bloku tabuľky. Vizuálny editor ho nemôže zobraziť — Režim zdroja aktivovaný.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Režim zdroja chráni značky, ktoré vizuálny editor nepodporuje bez strát. Prepnite na Zdroj pre tieto konštrukcie.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Logo sa vytlačí zrnito: súbor má {breed}×{hoog} px, čo pri tejto veľkosti dáva {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2196,8 +2204,6 @@ const _dutchSourceAddSk = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Otázku nie je možné hrať: {aantal} odpovedí, zatiaľ čo tento typ otázky povoľuje najviac {maximum}.',
   'Actueel': 'Aktuálne',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Zdrojový režim bezstratovo chráni formátovanie, ktoré vizuálny editor zatiaľ nepodporuje.',
   'Codeblok': 'Blok kódu',
   'Controleren…': 'Skontrolujte…',
   'Documentoverzicht': 'Prehľad dokumentov',

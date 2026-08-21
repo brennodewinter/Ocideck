@@ -1659,6 +1659,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Η γραμμή {n} περιέχει σχόλια HTML ή ετικέτες HTML. Ο οπτικός επεξεργαστής δεν μπορεί να τα εμφανίσει — Ενεργοποιήθηκε η λειτουργία πηγής.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Η γραμμή {n} περιέχει χαρακτήρες διαφυγής (όπως \\*). Ο οπτικός επεξεργαστής δεν μπορεί να τους εμφανίσει χωρίς απώλεια — Ενεργοποιήθηκε η λειτουργία πηγής.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Η γραμμή {n} είναι μια χαλαρή γραμμή πίνακα εκτός μπλοκ πίνακα. Ο οπτικός επεξεργαστής δεν μπορεί να την εμφανίσει — Ενεργοποιήθηκε η λειτουργία πηγής.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Η λειτουργία πηγής προστατεύει σήμανση που ο οπτικός επεξεργαστής δεν υποστηρίζει χωρίς απώλεια. Μεταβείτε στην Πηγή για αυτές τις κατασκευές.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Το λογότυπο θα εκτυπωθεί κοκκώδες: το αρχείο είναι {breed}×{hoog} px, δηλαδή {dpi} dpi σε αυτό το μέγεθος.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2224,8 +2232,6 @@ const _dutchSourceAddEl = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Η ερώτηση δεν μπορεί να παιχτεί: {aantal} απαντήσεις, ενώ αυτός ο τύπος ερώτησης επιτρέπει έως {maximum}.',
   'Actueel': 'Τρέχον',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Η λειτουργία πηγής προστατεύει τη μορφοποίηση που το οπτικό πρόγραμμα επεξεργασίας δεν υποστηρίζει ακόμη χωρίς απώλειες.',
   'Codeblok': 'Μπλοκ κωδικών',
   'Controleren…': 'Ελέγξτε…',
   'Documentoverzicht': 'Επισκόπηση εγγράφου',

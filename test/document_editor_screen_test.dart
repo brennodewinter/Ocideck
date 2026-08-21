@@ -118,7 +118,7 @@ void main() {
   });
 
   testWidgets(
-    'Visueel: rauwe HTML blijft bewerkbaar met opmaakbalk en waarschuwing',
+    'Visueel: rauwe HTML schakelt automatisch naar Bron-modus met uitleg',
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -129,23 +129,24 @@ void main() {
         );
       await tester.pumpWidget(harness(n));
       await tester.pump();
-
-      // Een constructie die de brug niet verliesvrij aankan valt níet terug op
-      // een read-only leesweergave (OciDeck beslist niet vóór de gebruiker dat
-      // een document onbewerkbaar is): de gedeelde notes-editor blijft, nu op de
-      // bewerkbare brontekst — geen Quill-WYSIWYG, geen gerenderde leesweergave.
-      expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+      // De auto-fallback plant de snackbar ná de eerste frame; geef hem die.
+      await tester.pump();
+      // Een constructie die de brug niet verliesvrij aankan, valt nu expliciet
+      // terug op de Bron-modus (bron + live weergave) — niet stilletjes op
+      // brontekst in de visuele modus.
+      expect(find.byType(MarkdownNotesEditor), findsNothing);
       expect(find.byType(QuillEditor), findsNothing);
-      expect(find.byType(DocumentMarkdownView), findsNothing);
-      // De volledige opmaakknoppenbalk blijft binnen bereik...
+      // De Bron-modus toont de live weergave naast de bron.
+      expect(find.byType(DocumentMarkdownView), findsOneWidget);
+      // De bron is bewerkbaar.
+      expect(find.byType(TextField), findsWidgets);
+      // De opmaakbalk van de bron-modus blijft binnen bereik.
       expect(find.byTooltip('Vet'), findsOneWidget);
       expect(find.byTooltip('Kop'), findsOneWidget);
-      // ...met een begrijpelijke waarschuwing dat je hier de brontekst bewerkt.
-      expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
 
       // En het is écht bewerkbaar: typen stroomt live naar de notifier.
       await tester.enterText(
-        find.byType(TextField),
+        find.byType(TextField).first,
         '# Kop\n\n<div>rauwe html</div>\n\nGewijzigd.',
       );
       await tester.pump();

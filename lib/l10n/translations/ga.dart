@@ -1664,6 +1664,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Tá nótaí HTML nó clibeanna HTML ar líne {n}. Ní féidir leis an eagarthóir amhairc é seo a thaispeáint — Gníomhachtaíodh mód foinse.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Tá poncaíocht éalaithe ar líne {n} (mar \\*). Ní féidir leis an eagarthóir amhairc é seo a thaispeáint gan caillteanas — Gníomhachtaíodh mód foinse.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Is líne tábla scaoilte lasmuigh de bhloc tábla é líne {n}. Ní féidir leis an eagarthóir amhairc é seo a thaispeáint — Gníomhachtaíodh mód foinse.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Cosnaíonn mód foinse marcáil nach dtacaíonn an t-eagarthóir amhairc leo gan caillteanas. Athraigh go Foinse do na struchtúir seo.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Priontálfar an lógó gránach: is é {breed}×{hoog} px atá sa chomhad, rud a thugann {dpi} dpi ag an méid seo.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2229,8 +2237,6 @@ const _dutchSourceAddGa = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Ní féidir an cheist a imirt: {aantal} freagra, ach ceadaíonn an cineál ceiste seo {maximum} ar a mhéad.',
   'Actueel': 'Reatha',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Cosnaíonn mód foinse formáidiú nach dtacaíonn an t-eagarthóir amhairc go fóill gan chailliúint.',
   'Codeblok': 'Bloc cód',
   'Controleren…': 'Seiceáil…',
   'Documentoverzicht': 'Forbhreathnú doiciméad',

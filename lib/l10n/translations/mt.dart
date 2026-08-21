@@ -1653,6 +1653,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Linja {n} fiha kumenti HTML jew tags HTML. L-editur viżwali ma jistax juri dan — Modu tas-sors attivat.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Linja {n} fiha puntwazzjoni b\'escape (bhal \\*). L-editur viżwali ma jistax juriha mingħajr telf — Modu tas-sors attivat.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Linja {n} hija riga ta\' tabella mhux marbuta ma\' blokk ta\' tabella. L-editur viżwali ma jistax juriha — Modu tas-sors attivat.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Il-modu tas-sors jipproteġi markup li l-editur viżwali ma jappoġġax mingħajr telf. Aqleb għas-Sors għal dawn il-kostruzzjonijiet.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Il-logo se jistampa granulari: il-fajl huwa {breed}×{hoog} px, li f\'dan id-daqs jagħti {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2215,8 +2223,6 @@ const _dutchSourceAddMt = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Il-mistoqsija ma tistax tintlagħab: {aantal} tweġibiet, filwaqt li dan it-tip ta\' mistoqsija jippermetti massimu ta\' {maximum}.',
   'Actueel': 'Kurrenti',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Il-mod tas-sors jipproteġi l-ifformattjar li l-editur viżwali għadu ma jappoġġjax mingħajr telf.',
   'Codeblok': 'Blokk tal-kodiċi',
   'Controleren…': 'Iċċekkja...',
   'Documentoverzicht': 'Ħarsa ġenerali tad-dokument',

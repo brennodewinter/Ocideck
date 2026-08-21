@@ -153,4 +153,57 @@ Prijs \\* letterlijk
       contains(MarkdownVisualLimitation.rawHtml),
     );
   });
+
+  group('firstVisualLimitation', () {
+    test('vindt de eerste beperking met regelnummer — rawHtml', () {
+      final hit = firstVisualLimitation('# Kop\n\n<!-- timeline -->\n');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.rawHtml);
+      expect(hit.lineIndex, 2);
+    });
+
+    test('vindt de eerste beperking met regelnummer — escapedPunctuation', () {
+      final hit = firstVisualLimitation('# Kop\n\nPrijs \\* letterlijk\n');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.escapedPunctuation);
+      expect(hit.lineIndex, 2);
+    });
+
+    test('vindt de eerste beperking met regelnummer — looseTableLine', () {
+      final hit = firstVisualLimitation('Tekst.\n\n| 1 | 2 |\n');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.looseTableLine);
+      expect(hit.lineIndex, 2);
+    });
+
+    test('geen beperking → null', () {
+      expect(firstVisualLimitation('# Kop\n\nAlinea tekst.\n'), isNull);
+    });
+
+    test('een kop met HTML-commentaar erin is rawHtml', () {
+      // Het 31-juli incidentrapport: `# <!-- timeline -->` is een kop met
+      // HTML-commentaar erin. De `# ` maakt het een kop, en `<!--` triggert
+      // rawHtml — het hele document valt terug op brontekst.
+      final hit = firstVisualLimitation('# <!-- timeline -->\n');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.rawHtml);
+      expect(hit.lineIndex, 0);
+    });
+
+    test('geeft de eerste hit bij meerdere beperkingen', () {
+      final hit = firstVisualLimitation('<!-- html -->\n\nPrijs \\*\n');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.rawHtml);
+      expect(hit.lineIndex, 0);
+    });
+
+    test('slaat regels in een codeblok over', () {
+      final hit = firstVisualLimitation(
+        '```\n<!-- html -->\n```\n\nPrijs \\*\n',
+      );
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.escapedPunctuation);
+      expect(hit.lineIndex, 4);
+    });
+  });
 }

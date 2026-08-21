@@ -115,3 +115,76 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
 /// bron-controller) heeft aan die ja/nee genoeg.
 bool markdownRoundTripsVisually(String markdown) =>
     markdownVisualLimitations(markdown).isEmpty;
+
+/// De eerste regel die een visuele beperking veroorzaakt, met het soort
+/// beperking en het 0-gebaseerde regelnummer in de bron. `null` wanneer het
+/// document verliesvrij door de rijke-tekstlaag kan.
+///
+/// Dezelfde scanlogica en -volgorde als [markdownVisualLimitations], maar
+/// stopt bij de eerste hit. De documenteditor gebruikt dit om bij een
+/// fallback automatisch naar de Bron-modus te wisselen en de cursor op de
+/// probleemregel te zetten — zodat de gebruiker niet hoeft te raden wáár het
+/// misgaat.
+VisualLimitationHit? firstVisualLimitation(String markdown) {
+  final lines = markdown.split('\n');
+  final pentest = scanPentestBlocks(markdown);
+  var fenced = false;
+  var inTable = false;
+  for (var index = 0; index < lines.length; index++) {
+    final line = lines[index];
+    if (pentest.isAtomicLine(index)) continue;
+    if (RegExp(r'^\s*```').hasMatch(line)) {
+      fenced = !fenced;
+      inTable = false;
+      continue;
+    }
+    if (fenced) continue;
+    if (inTable) {
+      if (isMarkdownTableLine(line)) continue;
+      inTable = false;
+    }
+    if (opensAtomicMarkdownTable(
+      line,
+      index + 1 < lines.length ? lines[index + 1] : null,
+    )) {
+      inTable = true;
+      continue;
+    }
+    if (isMarkdownTableLine(line)) {
+      return VisualLimitationHit(
+        index,
+        MarkdownVisualLimitation.looseTableLine,
+      );
+    }
+    var supportedTimeline = false;
+    if (line.trim() == documentTimelineMarker) {
+      final header = index + 1 < lines.length ? lines[index + 1] : null;
+      final delimiter = index + 2 < lines.length ? lines[index + 2] : null;
+      supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
+    }
+    if (!tocMarkerLinePattern.hasMatch(line) &&
+        !supportedTimeline &&
+        RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
+      return VisualLimitationHit(index, MarkdownVisualLimitation.rawHtml);
+    }
+    if (RegExp(r'\\[\\`*{}\[\]()#+.!_>-]').hasMatch(line)) {
+      return VisualLimitationHit(
+        index,
+        MarkdownVisualLimitation.escapedPunctuation,
+      );
+    }
+  }
+  return null;
+}
+
+/// Eén gevonden beperking: het soort en de regel waarop het eerste probleem
+/// zit. Zie [firstVisualLimitation].
+class VisualLimitationHit {
+  const VisualLimitationHit(this.lineIndex, this.limitation);
+
+  /// 0-gebaseerd regelnummer in de bron (zoals `source.split('\n')` indexeert).
+  final int lineIndex;
+
+  /// Het soort beperking dat op [lineIndex] werd aangetroffen.
+  final MarkdownVisualLimitation limitation;
+}

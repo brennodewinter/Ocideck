@@ -1654,6 +1654,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Ред {n} съдържа HTML коментари или HTML тагове. Визуалният редактор не може да ги покаже — Активиран е режимът на източника.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Ред {n} съдържа екранирана пунктуация (като \\*). Визуалният редактор не може да я покаже без загуби — Активиран е режимът на източника.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Ред {n} е свободен ред на таблица извън блок таблица. Визуалният редактор не може да го покаже — Активиран е режимът на източника.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Режимът на източника защитава маркировка, която визуалният редактор не поддържа без загуби. Превключете към Източник за тези конструкции.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Логото ще се отпечата зърнесто: файлът е {breed}×{hoog} px, което при този размер дава {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2214,8 +2222,6 @@ const _dutchSourceAddBg = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Въпросът не може да се играе: {aantal} отговора, докато този тип въпрос допуска най-много {maximum}.',
   'Actueel': 'Текущ',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Режимът на източника защитава форматирането, което визуалният редактор все още не поддържа без загуби.',
   'Codeblok': 'Кодов блок',
   'Controleren…': 'Проверете...',
   'Documentoverzicht': 'Преглед на документа',

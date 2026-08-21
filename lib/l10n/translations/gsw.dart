@@ -1637,6 +1637,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Zyle {n} het HTML-Kommentar oder HTML-Tags. Dr visuell Editor cha das nit aazeige — Quällmodus aktiviert.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Zyle {n} het escapeti Interpunktion (wi \\*). Dr visuell Editor cha das nit verlustfrei aazeige — Quällmodus aktiviert.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Zyle {n} isch en lose Tabällezyyle usserhalb eme Tabälleblock. Dr visuell Editor cha sie nit aazeige — Quällmodus aktiviert.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Dr Quällmodus schütztzt Markup, wo dr visuell Editor nit verlustfrei understützt. Wächsel für die Konstrukte in d Quälle.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'S Logo chunt chörnig us em Drucker: d Datei isch {breed}×{hoog} px und git bi dere Grössi {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2194,8 +2202,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'D\'Froog cha nöd gspielt werde: {aantal} Antworte, während dä Froogtyp höchstens {maximum} zuelet.',
   'Actueel': 'Aktuell',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',
   'Codeblok': 'Codeblock',
   'Controleren…': 'Überprüfen Sie…',
   'Documentoverzicht': 'Dokumentenübersicht',

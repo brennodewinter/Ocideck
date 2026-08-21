@@ -1650,6 +1650,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Regel {n} bevat HTML-commentaar of HTML-tags. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Рядок {n} містить HTML-коментарі або HTML-теги. Візуальний редактор не може це відобразити — Активовано режим джерела.',
+  'Regel {n} bevat ontsnapte leestekens (zoals \\*). De visuele editor kan dit niet verliesvrij weergeven — Bron-modus is geactiveerd.':
+      'Рядок {n} містить екрановану пунктуацію (наприклад \\*). Візуальний редактор не може відобразити це без втрат — Активовано режим джерела.',
+  'Regel {n} is een losse tabelregel buiten een tabelblok. De visuele editor kan dit niet weergeven — Bron-modus is geactiveerd.':
+      'Рядок {n} є окремим рядком таблиці поза блоком таблиці. Візуальний редактор не може це відобразити — Активовано режим джерела.',
+  'Bronmodus beschermt opmaak die de visuele editor niet verliesvrij ondersteunt. Schakel naar Bron voor deze constructies.':
+      'Режим джерела захищає розмітку, яку візуальний редактор не підтримує без втрат. Перейдіть до Джерела для цих конструкцій.',
   'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
       'Логотип надрукується зернистим: файл має {breed}×{hoog} px, що за цього розміру дає {dpi} dpi.',
   'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
@@ -2210,8 +2218,6 @@ const _dutchSourceAddUk = <String, String>{
   'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
       'Запитання неможливо відтворити: {aantal} відповідей, тоді як цей тип запитань допускає щонайбільше {maximum}.',
   'Actueel': 'поточний',
-  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
-      'Режим вихідного коду захищає форматування, яке візуальний редактор ще не підтримує без втрат.',
   'Codeblok': 'Кодовий блок',
   'Controleren…': 'Перевірте…',
   'Documentoverzicht': 'Огляд документа',
