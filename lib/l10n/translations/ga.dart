@@ -1664,6 +1664,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Priontálfar an lógó gránach: is é {breed}×{hoog} px atá sa chomhad, rud a thugann {dpi} dpi ag an méid seo.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Roghnaigh lógó atá {px} px ar leithead ar a laghad, nó laghdaigh méid an lógó.',
   'Thema accent op de documentband':
       'Aibhsiú an téama ar an gceanntásc/mbuntásc',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

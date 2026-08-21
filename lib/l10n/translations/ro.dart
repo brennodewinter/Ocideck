@@ -1651,6 +1651,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo-ul va ieși granulat la tipărire: fișierul are {breed}×{hoog} px, ceea ce dă {dpi} dpi la această dimensiune.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Alegeți un logo de cel puțin {px} px lățime sau micșorați dimensiunea logo-ului.',
   'Thema accent op de documentband': 'Accentul temei pe antet/subsol',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'A fost găsit un document cu modificări nesalvate dintr-o sesiune anterioară:',

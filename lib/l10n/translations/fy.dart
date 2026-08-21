@@ -674,6 +674,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'It logo komt kerrelich út de printer: it bestân is {breed}×{hoog} px en komt op dizze maat út op {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Kies in logo fan op syn minst {px} px breed, of set de logomaat lytser.',
   'Thema accent op de documentband': 'Tema-aksint op de kop-/foettekstbalke',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Der is in dokumint mei net-opsleine wizigingen fûn fan in foarige sesje:',

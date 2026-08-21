@@ -1662,6 +1662,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'O logótipo sairá granulado na impressão: o ficheiro tem {breed}×{hoog} px, o que dá {dpi} dpi neste tamanho.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Escolha um logótipo com pelo menos {px} px de largura, ou reduza o tamanho do logótipo.',
   'Thema accent op de documentband': 'Acento do tema no cabeçalho/rodapé',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Foi encontrado um documento com alterações não guardadas de uma sessão anterior:',

@@ -671,6 +671,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Il logo verrà stampato sgranato: il file è {breed}×{hoog} px, che a questa dimensione corrisponde a {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Scegli un logo largo almeno {px} px, oppure riduci la dimensione del logo.',
   'Thema accent op de documentband':
       'Accento del tema sull\'intestazione/piè di pagina',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

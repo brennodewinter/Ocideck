@@ -837,6 +837,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'The logo will print grainy: the file is {breed}×{hoog} px, which works out to {dpi} dpi at this size.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Choose a logo at least {px} px wide, or reduce the logo size.',
   'Thema accent op de documentband':
       'Theme accent on the document header/footer',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

@@ -328,19 +328,30 @@ class DocumentPdfWidgets {
     text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
   );
 
-  /// Een citaat: een streep in de accentkleur langs de linkerkant.
+  /// Een citaat: een vlak in een tint van het accent, met een streep langs de
+  /// linkerkant. Dezelfde vorm als de documentweergave op het scherm.
   ///
-  /// De streep zit per blok en niet om het citaat heen, zodat de kolom eromheen
-  /// een gewone [pw.Column] blijft die wél over een bladovergang mag lopen.
+  /// De streep en het vlak zitten per blok en niet om het citaat heen, zodat de
+  /// kolom eromheen een gewone [pw.Column] blijft die wél over een bladovergang
+  /// mag lopen. Dat is ook waarom het vlak geen ruimte boven en onder krijgt:
+  /// die zou per blok terugkomen en het citaat aan de binnenkant uit elkaar
+  /// trekken. De lucht eromheen komt van de tussenstukken in [build].
   pw.Widget _quote(PdfQuoteBlock block) => pw.Column(
     crossAxisAlignment: pw.CrossAxisAlignment.stretch,
     children: [
       for (final child in build(block.blocks))
         pw.Container(
-          padding: pw.EdgeInsets.only(left: style.indent),
+          padding: pw.EdgeInsets.only(
+            left: style.quotePadding,
+            right: style.quotePadding,
+          ),
           decoration: pw.BoxDecoration(
+            color: style.quoteBackground,
             border: pw.Border(
-              left: pw.BorderSide(color: style.accentColor, width: 2),
+              left: pw.BorderSide(
+                color: style.accentColor,
+                width: style.quoteBarWidth,
+              ),
             ),
           ),
           child: child,
@@ -719,6 +730,22 @@ class DocumentPdfWidgets {
     lineSpacing: style.bodyFontSize * 0.35,
   );
 
+  /// De opgemaakte tekst van de band boven- of onderaan de bladzijde.
+  ///
+  /// Loopt met opzet langs dezelfde spanrenderer als de lopende tekst: de band
+  /// draagt Markdown, en die hoort in de PDF hetzelfde te doen als op het scherm
+  /// en in de HTML-export. Eén regel hoog — een band die uitdijt duwt de
+  /// tekstspiegel weg — en wat er niet in past valt er stil af.
+  pw.Widget bandText(List<PdfSpan> spans, {required pw.TextStyle style}) =>
+      pw.RichText(
+        maxLines: 1,
+        overflow: pw.TextOverflow.clip,
+        text: pw.TextSpan(
+          style: _baseStyle.merge(style),
+          children: _spans(spans, size: style.fontSize ?? this.style.bandSize),
+        ),
+      );
+
   List<pw.InlineSpan> _spans(List<PdfSpan> spans, {double? size}) => [
     for (final span in spans) _span(span, size ?? style.bodyFontSize),
   ];
@@ -732,12 +759,24 @@ class DocumentPdfWidgets {
           ? null
           : pw.AnnotationUrl(href.trim()),
       style: pw.TextStyle(
+        // Vaste-breedteletter in álle vier de sneden. Eén `font` is hier niet
+        // genoeg: staat de code in een kop, dan erft de span het vette gewicht
+        // van die kop, en `package:pdf` kiest de snede die bij het gewicht
+        // hoort — dat is dan de schreefletter en niet de code.
         font: span.code ? fonts.mono : null,
+        fontNormal: span.code ? fonts.mono : null,
+        fontBold: span.code ? fonts.mono : null,
+        fontItalic: span.code ? fonts.mono : null,
+        fontBoldItalic: span.code ? fonts.mono : null,
         fontSize: span.code
             ? style.monoSize
             : (span.superscript ? size * 0.7 : size),
-        fontWeight: span.bold ? pw.FontWeight.bold : pw.FontWeight.normal,
-        fontStyle: span.italic ? pw.FontStyle.italic : pw.FontStyle.normal,
+        // `null` en niet `normal` wanneer de span er zelf niets van vindt. Een
+        // kop staat al op vet, en een span die "gewoon" zégt overstemt dat —
+        // waardoor élke kop in de export in de gewone snede stond. De opmaak
+        // was er wel en werd één laag lager weer uitgezet.
+        fontWeight: span.bold ? pw.FontWeight.bold : null,
+        fontStyle: span.italic ? pw.FontStyle.italic : null,
         decoration: _decorationFor(span),
         color: href == null || href.isEmpty ? null : style.accentColor,
       ),

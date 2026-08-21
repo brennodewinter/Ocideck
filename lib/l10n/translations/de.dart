@@ -674,6 +674,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Das Logo wird körnig gedruckt: die Datei ist {breed}×{hoog} px und ergibt in dieser Größe {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Wählen Sie ein Logo von mindestens {px} px Breite, oder verkleinern Sie die Logogröße.',
   'Thema accent op de documentband': 'Design-Akzent auf der Kopf-/Fußzeile',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Es wurde ein Dokument mit nicht gespeicherten Änderungen aus einer früheren Sitzung gefunden:',

@@ -1635,6 +1635,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo tulostuu rakeisena: tiedosto on {breed}×{hoog} px, mikä tässä koossa vastaa {dpi} dpi:tä.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Valitse logo, joka on vähintään {px} px leveä, tai pienennä logon kokoa.',
   'Thema accent op de documentband': 'Teeman korostus ylä-/alatunnisteessa',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Edellisestä istunnosta löytyi asiakirja, jossa on tallentamattomia muutoksia:',

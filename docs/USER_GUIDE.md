@@ -4700,6 +4700,14 @@ chapter when *New chapter on a new page* is on; the table of contents with page
 numbers and clickable entries; links you can click; images embedded in the file
 itself.
 
+**The header and footer band carries its Markdown**, the same as on screen and in
+the HTML export: `**VERTROUWELIJK**` prints bold, not with the asterisks around
+it. Headings print bold, and a block quote gets the same tinted panel with an
+accent rule that the document view shows on screen. If the logo file is too small
+for the size it is placed at, the export says so after writing, naming the file's
+pixel size and the width that would print cleanly; it cannot add detail that is
+not in the file. *(Added 2026-08-21.)*
+
 **Formulas, diagrams and charts are drawn** — as vector art, not as pictures, so
 they stay sharp at any zoom and the text inside them (a chart's title, its axis
 labels, its legend) stays real text. Charts are drawn by the same generator the

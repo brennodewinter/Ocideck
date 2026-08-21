@@ -1635,6 +1635,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logotip se bo natisnil zrnato: datoteka meri {breed}×{hoog} px, kar pri tej velikosti pomeni {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Izberite logotip, širok vsaj {px} px, ali zmanjšajte velikost logotipa.',
   'Thema accent op de documentband': 'Poudarek teme na glavi/nogi',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Najden je bil dokument z neshranjenimi spremembami iz prejšnje seje:',

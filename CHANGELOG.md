@@ -1752,6 +1752,33 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De PDF van een document zette de opmaak één laag lager weer uit.** Drie
+  dingen, allemaal zichtbaar in dezelfde export, en geen ervan aan de tabellen
+  (die zijn met #1626 al rechtgezet).
+
+  *Koppen stonden niet vet.* De kop zette vet op de alinea, waarna elk stuk
+  tekst erin `normaal` zei omdat het zelf geen `**` droeg. De opmaak was er dus
+  wel en werd één laag lager weer uitgezet — élke kop in élke document-PDF stond
+  in de gewone snede. Een span zegt nu niets meer over gewicht of cursief als hij
+  er zelf niets van vindt.
+
+  *De band boven en onder het blad* draagt Markdown — zo heet het veld in de
+  instellingen, zo zet het scherm hem en zo zet de HTML-export hem. Alleen de
+  PDF zette hem als platte tekst, dus stond er `**VERTROUWELIJK**` met de
+  sterretjes erbij op elke bladzijde.
+
+  *Een citaat* staat op het scherm op een tint van het accent met een streep
+  ervoor. De PDF tekende alleen die streep en de HTML-export tekende een streep
+  plus `opacity:.85` — wat het citaat dempt in plaats van het aan te zetten.
+  Drie oppervlakken, drie vormen, terwijl het hetzelfde citaat uit hetzelfde
+  bestand is. Nu alle drie hetzelfde.
+
+  Onderweg bleek het logo per bladzijde opnieuw te worden ingelezen, en dus zo
+  vaak in het bestand te staan als er bladzijden waren — bij een notitie van
+  vijfentwintig bladzijden een kwart van de omvang aan identieke plaatjes. En
+  omdat een te klein logobestand op papier zijn eigen pixels laat zien zonder dat
+  de export daar iets aan kan repareren, zégt de export dat nu na afloop, met de
+  maten erbij en de breedte die wél schoon zou afdrukken.
 - **Een dubbel ge-escapete regelovergang in een stijlprofiel kwam niet uit de
   app.** In de prefs stond `closingSlideMarkdown` van élk profiel als
   `# Bedankt\\n\\nVragen?` — twee letterlijke backslashes waar een regelovergang

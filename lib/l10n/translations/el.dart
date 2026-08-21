@@ -1659,6 +1659,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Το λογότυπο θα εκτυπωθεί κοκκώδες: το αρχείο είναι {breed}×{hoog} px, δηλαδή {dpi} dpi σε αυτό το μέγεθος.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Επιλέξτε λογότυπο πλάτους τουλάχιστον {px} px, ή μειώστε το μέγεθος του λογοτύπου.',
   'Thema accent op de documentband': 'Τόνος θέματος στην κεφαλίδα/υποσέλιδο',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Βρέθηκε έγγραφο με μη αποθηκευμένες αλλαγές από προηγούμενη συνεδρία:',

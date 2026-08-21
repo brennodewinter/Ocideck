@@ -1636,6 +1636,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo se vytiskne zrnitě: soubor má {breed}×{hoog} px, což při této velikosti dává {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Vyberte logo široké alespoň {px} px, nebo zmenšete velikost loga.',
   'Thema accent op de documentband': 'Akcent motivu v záhlaví/zápatí',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Byl nalezen dokument s neuloženými změnami z předchozí relace:',

@@ -1650,6 +1650,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Логотип надрукується зернистим: файл має {breed}×{hoog} px, що за цього розміру дає {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Виберіть логотип завширшки щонайменше {px} px або зменште розмір логотипа.',
   'Thema accent op de documentband': 'Акцент теми на колонтитулі',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Знайдено документ з незбереженими змінами з попередньої сесії:',

@@ -23,6 +23,7 @@ import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_style.dart';
 import 'document_pdf_widgets.dart';
+import 'markdown_to_pdf_blocks.dart';
 
 /// De band boven en onder elke bladzijde: vrije tekst, bladzijdenummer, de
 /// classificatie-aanduiding en het logo.
@@ -186,14 +187,39 @@ Future<Uint8List> _render(
     onHeadingLaidOut: onHeadingLaidOut,
   );
 
+  // Eén keer ontleden en één keer inlezen, niet per bladzijde: de band wordt
+  // voor élk blad opnieuw gebouwd. Een logo dat daarbij telkens een nieuwe
+  // `MemoryImage` werd, kreeg per blad een eigen object in het bestand — bij een
+  // notitie van vijfentwintig bladzijden een kwart van de omvang aan
+  // vijfentwintig identieke plaatjes.
+  final headerSpans = markdownToPdfSpans(chrome.headerText);
+  final footerSpans = markdownToPdfSpans(chrome.footerText);
+  final logo = chrome.logo == null ? null : pw.MemoryImage(chrome.logo!);
+
   document.addPage(
     pw.MultiPage(
       pageTheme: pageTheme,
       header: chrome.hasHeader
-          ? (context) => _band(context, chrome, style, top: true)
+          ? (context) => _band(
+              context,
+              chrome,
+              style,
+              builder,
+              spans: headerSpans,
+              logo: logo,
+              top: true,
+            )
           : null,
       footer: chrome.hasFooter
-          ? (context) => _band(context, chrome, style, top: false)
+          ? (context) => _band(
+              context,
+              chrome,
+              style,
+              builder,
+              spans: footerSpans,
+              logo: logo,
+              top: false,
+            )
           : null,
       build: (context) => builder.build(blocks),
     ),
@@ -291,11 +317,12 @@ pw.Widget _cropMarks(PdfPageFormat format, double bleed) {
 pw.Widget _band(
   pw.Context context,
   DocumentPdfChrome chrome,
-  DocumentPdfStyle style, {
+  DocumentPdfStyle style,
+  DocumentPdfWidgets builder, {
+  required List<PdfSpan> spans,
+  required pw.ImageProvider? logo,
   required bool top,
 }) {
-  final text = top ? chrome.headerText.trim() : chrome.footerText.trim();
-  final logo = chrome.logo;
   final showLogo = logo != null && chrome.logoAtTop == top;
   final textStyle = pw.TextStyle(
     fontSize: style.bandSize,
@@ -306,7 +333,7 @@ pw.Widget _band(
       _logo(logo, chrome.logoWidth)
     else
       pw.SizedBox(),
-    pw.Expanded(child: pw.Text(text, style: textStyle)),
+    pw.Expanded(child: builder.bandText(spans, style: textStyle)),
     if (!top && chrome.showPageNumbers)
       pw.Text('${context.pageNumber}', style: textStyle),
     if (!top && chrome.tlpLabel.trim().isNotEmpty)
@@ -350,8 +377,8 @@ pw.Widget _band(
   );
 }
 
-pw.Widget _logo(Uint8List bytes, double width) => pw.Image(
-  pw.MemoryImage(bytes),
+pw.Widget _logo(pw.ImageProvider image, double width) => pw.Image(
+  image,
   // Zowel breedte als hoogte begrensd, met `contain`: het logo schaalt binnen
   // een `width` × `width`-kader naar zijn beeldverhouding. Een breed logo
   // pakt de breedte als bindende maat (hoogte = width / verhouding), een

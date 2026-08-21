@@ -1638,6 +1638,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logotip će biti zrnat na ispisu: datoteka je {breed}×{hoog} px, što pri ovoj veličini daje {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Odaberite logotip širine barem {px} px ili smanjite veličinu logotipa.',
   'Thema accent op de documentband': 'Naglasak teme na zaglavlju/podnožju',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Pronađen je dokument s nespremljenim promjenama iz prethodne sesije:',

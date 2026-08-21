@@ -1653,6 +1653,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Il-logo se jistampa granulari: il-fajl huwa {breed}×{hoog} px, li f\'dan id-daqs jagħti {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Agħżel logo wiesa\' mill-inqas {px} px, jew naqqas id-daqs tal-logo.',
   'Thema accent op de documentband': 'Aċċent tat-tema fuq l-intestatura/qiegħ',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Instab dokument b\'bidliet mhux maħżuna minn sessjoni preċedenti:',

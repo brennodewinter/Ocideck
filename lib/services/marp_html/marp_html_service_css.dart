@@ -240,8 +240,14 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       // 12% van 255. De regel hierboven is specifieker, dus code *in* een blok
       // blijft doorzichtig.
       '.document code{font-family:$codeFamily;background:${t.textColor}1F}'
-      '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
-      'padding-left:16px;opacity:.85}'
+      // Een vlak in een tint van het accent, met een streep ervoor — dezelfde
+      // vorm als de documentweergave in de app en als de PDF-export. Stond hier
+      // eerder als `opacity:.85`: dat dempt het citaat in plaats van het aan te
+      // zetten, en dan zegt het blad iets anders dan het scherm. `1A` is 10% van
+      // 255, dezelfde tint als `quoteBg`.
+      '.document blockquote{border-left:3px solid ${t.accentColor};'
+      'background:${t.accentColor}1A;margin:.6em 0;padding:8px 14px;'
+      'border-radius:0 6px 6px 0}'
       '.document th{background:${t.tableHeaderBackgroundColor};'
       'color:${t.tableHeaderTextColor};${_documentTableBorderCss(t)}'
       'padding:${_documentTableCellPadding(t)}}'

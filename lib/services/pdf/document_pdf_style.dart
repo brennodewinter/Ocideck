@@ -145,6 +145,28 @@ class DocumentPdfStyle {
   /// De maat van de tekst in de band boven- en onderaan de bladzijde.
   double get bandSize => bodyFontSize * 0.75;
 
+  /// Het vlak achter een citaat: het accent, voor een tiende, op wit papier.
+  ///
+  /// Dezelfde tint als de documentweergave op het scherm (`quoteBg` in
+  /// `document_markdown_blocks.dart`), maar hier alvast doorgerekend tot één
+  /// vaste kleur. Een PDF kán doorzichtigheid, maar alleen via een aparte
+  /// grafische toestand die elke lezer anders behandelt — en het papier is hier
+  /// toch wit, dus het resultaat is hetzelfde en het bestand eenvoudiger.
+  PdfColor get quoteBackground => _blendOnWhite(accentColor, 0.10);
+
+  /// De dikte van de streep langs een citaat, in punten. Gelijk aan de drie
+  /// beeldpunten van het scherm.
+  double get quoteBarWidth => 3;
+
+  /// De ruimte tussen die streep en de tekst van het citaat.
+  double get quotePadding => bodyFontSize * 0.75;
+
+  static PdfColor _blendOnWhite(PdfColor color, double alpha) => PdfColor(
+    color.red * alpha + (1 - alpha),
+    color.green * alpha + (1 - alpha),
+    color.blue * alpha + (1 - alpha),
+  );
+
   static PdfColor _color(String? hex, PdfColor fallback) {
     if (hex == null) return fallback;
     final cleaned = hex.trim().replaceFirst('#', '');

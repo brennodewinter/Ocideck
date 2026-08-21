@@ -673,6 +673,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'E logo lo sali granular for di prènter: e archivo ta {breed}×{hoog} px i na e tamaño aki ta sali na {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Skohe un logo di por lo ménos {px} px hanchu, of hasi e tamaño di logo mas chikitu.',
   'Thema accent op de documentband':
       'Acento di tema riba kabesera/pia di página',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':

@@ -1628,6 +1628,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logo trükitakse teraline: fail on {breed}×{hoog} px, mis selles suuruses annab {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Valige vähemalt {px} px laiune logo või vähendage logo suurust.',
   'Thema accent op de documentband': 'Teema rõhuvärv päises/jaluses',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Eelmisest seansist leiti dokument salvestamata muudatustega:',

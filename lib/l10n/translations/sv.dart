@@ -1633,6 +1633,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logotypen blir kornig i tryck: filen är {breed}×{hoog} px, vilket ger {dpi} dpi i den här storleken.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Välj en logotyp som är minst {px} px bred, eller minska logotypstorleken.',
   'Thema accent op de documentband': 'Temats accent på sidhuvud/sidfot',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'Ett dokument med osparade ändringar hittades från en tidigare session:',

@@ -1633,6 +1633,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het logo komt korrelig uit de printer: het bestand is {breed}×{hoog} px en komt op deze maat uit op {dpi} dpi.':
+      'Logotips tiks izdrukāts graudains: datne ir {breed}×{hoog} px, kas šajā izmērā dod {dpi} dpi.',
+  'Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.':
+      'Izvēlieties logotipu vismaz {px} px platumā vai samaziniet logotipa izmēru.',
   'Thema accent op de documentband': 'Tēmas akcents galvenē/kājenē',
   'Er is een document met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
       'No iepriekšējās sesijas atrasts dokuments ar nesaglabātām izmaiņām:',

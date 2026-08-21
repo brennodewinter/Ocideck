@@ -105,6 +105,17 @@ vorm beschikbaar. Stil gebeurt dat niet: de export noemt de tekens die hij niet
 kon zetten en wijst naar HTML of LaTeX, die er wél raad mee weten.
 *(Toegevoegd 2026-08-20.)*
 
+## Een rasterlogo kan korrelig afdrukken, en de PDF zegt dat in plaats van het te repareren
+
+Het logo van het stijlprofiel gaat de PDF in op de maat die het profiel vraagt.
+Een kleine PNG die tot die maat wordt opgeblazen laat op papier zijn eigen pixels
+zien, en dat kan geen export repareren — het bestand hééft niet meer beeld. Wat de
+export wél doet is het na afloop zeggen, met de beeldmaat van het bestand erbij,
+de fijnheid waar het op uitkomt, en de breedte die wél schoon zou afdrukken (150
+dpi op de plek waar het logo terechtkomt). Een vectorlogo zou dit helemaal
+omzeilen; OciDeck leest nog op geen enkel oppervlak SVG-logo's.
+*(Toegevoegd 2026-08-21.)*
+
 ## Voetnoten in de HTML-export staan achteraan, nooit onderaan de bladzijde
 
 Een document kan zijn voetnoten onderaan de bladzijde vragen waar de verwijzing op
