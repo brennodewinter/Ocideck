@@ -12,6 +12,7 @@ import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
@@ -864,6 +865,34 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Instellingen'), findsOneWidget);
   });
+
+  // Regressie (#1674): de Instellingen-knop in de documentwerkbalk opende het
+  // presentatie-stijlprofieltabblad in plaats van iets relevants voor een
+  // document. De fix opent op `appearance` (App-thema).
+  testWidgets(
+    'Instellingen vanuit documentwerkbalk opent op appearance, niet presentation',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('x'));
+      await tester.pumpWidget(harness(n));
+      await tester.pump();
+
+      await tester.tap(find.byTooltip('Meer'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Instellingen'));
+      // Geen pumpAndSettle: de dialoog heeft eigen timers die niet snel
+      // settelen. De widget staat wel in de boom na een pump.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
+
+      final dialog = tester.widget<SettingsDialog>(find.byType(SettingsDialog));
+      expect(dialog.initialSection, SettingsSection.appearance);
+
+      await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
 
   testWidgets(
     'de opmaak-knoppenbalk in bron muteert de bron en stroomt naar de notifier',

@@ -702,7 +702,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     onExport: _export,
     onOpenSettings: () => SettingsDialog.show(
       context,
-      initialSection: SettingsSection.presentation,
+      initialSection: SettingsSection.appearance,
     ),
     onEditFields: () => unawaited(_editDocumentFields(context, ref)),
     onConvertToPresentation: _convertToPresentation,
