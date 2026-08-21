@@ -264,6 +264,9 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
     revealTitle: _revealTitle,
+    findSelectionSignal: _findSelectionSignal,
+    findSelectionStart: _findSelectionStart,
+    findSelectionEnd: _findSelectionEnd,
     onVisualCaret: _syncOutlineToVisualCaret,
     tryConsumePaste: _smartPaste,
     // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
@@ -350,6 +353,8 @@ Widget _withDocumentShortcuts(
   required VoidCallback onUndo,
   required VoidCallback onRedo,
   required VoidCallback onSave,
+  required VoidCallback onFind,
+  required VoidCallback onReplace,
   required Widget child,
 }) => Actions(
   actions: {
@@ -381,6 +386,12 @@ Widget _withDocumentShortcuts(
         shift: true,
       ): onRedo,
       const SingleActivator(LogicalKeyboardKey.keyY, control: true): onRedo,
+      // Zoeken en zoeken-en-vervangen — dezelfde toetsen als de presentatie-
+      // broneditor, zodat er één gewoonte is.
+      const SingleActivator(LogicalKeyboardKey.keyF, meta: true): onFind,
+      const SingleActivator(LogicalKeyboardKey.keyF, control: true): onFind,
+      const SingleActivator(LogicalKeyboardKey.keyH, meta: true): onReplace,
+      const SingleActivator(LogicalKeyboardKey.keyH, control: true): onReplace,
       // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
       // Beide plustoetsen, want op de meeste indelingen zit + op shift-= en
       // levert het toetsenbord `equal` in plaats van `add`.

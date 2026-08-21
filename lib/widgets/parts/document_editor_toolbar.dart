@@ -52,6 +52,7 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onPaste;
   final VoidCallback? onUndo;
   final VoidCallback? onRedo;
+  final VoidCallback onFind;
   final VoidCallback onExport;
   final VoidCallback onOpenSettings;
   final VoidCallback onEditFields;
@@ -102,6 +103,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onPaste,
     required this.onUndo,
     required this.onRedo,
+    required this.onFind,
     required this.onExport,
     required this.onOpenSettings,
     required this.onEditFields,
@@ -209,6 +211,12 @@ class _DocEditorToolbar extends StatelessWidget {
                         tooltip: l10n.d('Opnieuw'),
                         onPressed: onRedo,
                         icon: const Icon(Icons.redo, size: 18),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      IconButton(
+                        tooltip: l10n.d('Zoeken'),
+                        onPressed: onFind,
+                        icon: const Icon(Icons.search, size: 18),
                         visualDensity: VisualDensity.compact,
                       ),
                       const SizedBox(width: 8),

@@ -72,6 +72,14 @@ class MarkdownNotesEditor extends StatefulWidget {
   final int? revealMarkdownOffset;
   final String? revealTitle;
 
+  /// Verhoog om de Quill-cursor op een zoekmatch te zetten. [findSelectionStart]
+  /// en [findSelectionEnd] zijn offsets in de Markdown-bron; in de visuele stand
+  /// vertaalt [MarkdownCaretMap] ze naar de platte tekst van Quill en selecteert
+  /// het bereik. In markdown-modus zet hij de controller-selectie direct.
+  final int findSelectionSignal;
+  final int? findSelectionStart;
+  final int? findSelectionEnd;
+
   /// Caret in Quill-modus (platte-tekst-offset + documenttekst), zodat de
   /// Overzicht-rail mee kan lopen. In markdown-modus luistert de ouder naar
   /// [controller].
@@ -127,6 +135,9 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.revealSignal = 0,
     this.revealMarkdownOffset,
     this.revealTitle,
+    this.findSelectionSignal = 0,
+    this.findSelectionStart,
+    this.findSelectionEnd,
     this.onVisualCaret,
     this.insertSignal = 0,
     this.insertMarkdownBlock,
@@ -294,6 +305,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         _revealFromOutline(widget.revealMarkdownOffset, widget.revealTitle);
       });
     }
+    if (widget.findSelectionSignal != oldWidget.findSelectionSignal) {
+      final signal = widget.findSelectionSignal;
+      final start = widget.findSelectionStart;
+      final end = widget.findSelectionEnd;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || widget.findSelectionSignal != signal) return;
+        _revealFindSelection(start, end);
+      });
+    }
   }
 
   /// Voeg [block] als eigen blok in op de Quill-cursor.
@@ -391,6 +411,37 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     );
     _focusNode.requestFocus();
     widget.onVisualCaret?.call(plain, index);
+  }
+
+  /// Zet de cursor op een zoekmatch. In markdown-modus direct op de controller;
+  /// in de visuele stand vertaalt [MarkdownCaretMap] de Markdown-offsets naar de
+  /// platte tekst van Quill en selecteert het bereik. De vertaling is per regel
+  /// exact voor gewone tekst — opmaaktekens binnen een woord kunnen de selectie
+  /// een teken verschuiven, maar het woord en de regel kloppen.
+  void _revealFindSelection(int? start, int? end) {
+    if (start == null) return;
+    final s = start.clamp(0, widget.controller.text.length);
+    final e = (end ?? s).clamp(s, widget.controller.text.length);
+    if (_effectiveMode == NotesEditorMode.markdown) {
+      widget.controller.selection = TextSelection(
+        baseOffset: s,
+        extentOffset: e,
+      );
+      _focusNode.requestFocus();
+      return;
+    }
+    final quill = _quillController;
+    if (quill == null) return;
+    final map = MarkdownCaretMap.of(widget.controller.text);
+    final plain = quill.document.toPlainText();
+    final vStart = map.visualOffsetOf(s).clamp(0, plain.length);
+    final vEnd = map.visualOffsetOf(e).clamp(vStart, plain.length);
+    quill.updateSelection(
+      TextSelection(baseOffset: vStart, extentOffset: vEnd),
+      ChangeSource.local,
+    );
+    _focusNode.requestFocus();
+    widget.onVisualCaret?.call(plain, vStart);
   }
 
   @override
