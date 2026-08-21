@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
@@ -191,4 +192,44 @@ void main() {
       expect(container.read(privacyQualityIssuesProvider), isEmpty);
     },
   );
+
+  // Regression voor #1636: closeTab(0) op een staat met alleen een
+  // documenttabblad gooide StateError omdat _closeTab het laatste tabblad als
+  // presentatie behandelde (current.tabs.first.deckNotifier.closeDeck()) en
+  // TabInfo.deckNotifier bewust gooit op een documenttabblad.
+  testWidgets('closeTab op het enige documenttabblad crasht niet (#1636)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    final tabs = container.read(tabsProvider.notifier);
+
+    // Open een documenttabblad (wordt de tweede tab, na het welkomstscherm).
+    tabs.newDocument();
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 2);
+
+    // Sluit het eerste (deck-)tabblad via het multi-tab-pad, zodat het
+    // documenttabblad als enige overblijft.
+    tabs.closeTab(0);
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 1);
+    expect(container.read(tabsProvider).current?.kind, MarkdownKind.document);
+
+    // Dit gooide voor de fix: StateError: deckNotifier opgevraagd op een
+    // documenttabblad.
+    tabs.closeTab(0);
+    await tester.pumpAndSettle();
+
+    // Het tabblad blijft staan (als enige), maar is gereset naar leeg.
+    expect(container.read(tabsProvider).tabs.length, 1);
+    expect(container.read(tabsProvider).current?.isOpen, isFalse);
+    expect(container.read(tabsProvider).current?.isDirty, isFalse);
+  });
 }
