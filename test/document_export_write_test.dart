@@ -570,4 +570,48 @@ void main() {
     expect(fileName, isNot(contains('728398242')));
     expect(fileName, endsWith('-geredigeerd.md'));
   });
+
+  test('een lange exportnaam blijft deterministisch binnen de bytegrens', () {
+    final first = suggestedDocumentExportFileName(
+      title: List.filled(400, 'A').join(),
+      format: DocumentExportFormat.pdf,
+      profile: PrivacyExportProfile.redacted,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+    final second = suggestedDocumentExportFileName(
+      title: List.filled(400, 'A').join(),
+      format: DocumentExportFormat.pdf,
+      profile: PrivacyExportProfile.redacted,
+      redactedLabel: 'geredigeerd',
+      fullLabel: 'volledig',
+      fallbackLabel: 'document',
+    );
+
+    expect(first, second);
+    expect(
+      first.codeUnits.length,
+      lessThanOrEqualTo(maxSuggestedDocumentExportFileNameBytes),
+    );
+    expect(first, endsWith('-geredigeerd.pdf'));
+  });
+
+  test('export weigert het geopende brondocument te overschrijven', () async {
+    await withBundle((bundle) async {
+      final source = File(p.join(temp.path, 'bron.md'));
+      await source.writeAsString('ORIGINELE BRON');
+      final written = await writeDocumentExport(
+        bundle,
+        DocumentExportFormat.md,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        enforcementPolicy: const ClassificationEnforcementPolicy(),
+        outputPath: source.path,
+        sourcePath: source.path,
+      );
+
+      expect(written, isNull);
+      expect(await source.readAsString(), 'ORIGINELE BRON');
+    });
+  });
 }

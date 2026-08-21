@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+
+import 'package:path/path.dart' as p;
 
 import '../models/privacy_disposition.dart';
 import '../models/deck.dart';
@@ -29,6 +32,9 @@ import '../utils/document_front_matter.dart';
 /// geredigeerde body — nooit de rauwe bron.
 enum DocumentExportFormat { md, html, latex, pdf }
 
+/// Ruim onder de gangbare limiet van 255 bytes per padcomponent.
+const maxSuggestedDocumentExportFileNameBytes = 240;
+
 /// De veilige voorgestelde bestandsnaam voor een documentexport.
 ///
 /// De aanroeper geeft hier de titel uit het geprojecteerde deck door; daardoor
@@ -56,7 +62,27 @@ String suggestedDocumentExportFileName({
       .trim()
       .replaceAll(RegExp(r'[\s]+'), '-');
   final base = cleaned.isEmpty ? fallbackLabel : cleaned;
-  return '$base-$tag.$ext';
+  final suffix = '-$tag.$ext';
+  final budget =
+      maxSuggestedDocumentExportFileNameBytes - utf8.encode(suffix).length;
+  final boundedBase = _truncateUtf8(
+    base,
+    budget,
+  ).replaceFirst(RegExp(r'-+$'), '');
+  return '${boundedBase.isEmpty ? 'd' : boundedBase}$suffix';
+}
+
+String _truncateUtf8(String value, int maxBytes) {
+  if (maxBytes <= 0) return '';
+  final out = StringBuffer();
+  var bytes = 0;
+  for (final rune in value.runes) {
+    final encoded = utf8.encode(String.fromCharCode(rune)).length;
+    if (bytes + encoded > maxBytes) break;
+    out.writeCharCode(rune);
+    bytes += encoded;
+  }
+  return out.toString();
 }
 
 /// Bouwt de exportbundel voor een plat-Markdown-**document**, langs exact
@@ -165,7 +191,9 @@ Future<String?> writeDocumentExport(
   void Function(Set<int> runes)? onPdfUnsupportedCharacters,
   void Function(LogoResolution logo)? onPdfCoarseLogo,
   required String outputPath,
+  String? sourcePath,
 }) async {
+  if (await _sameFile(sourcePath, outputPath)) return null;
   if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
     return null;
   }
@@ -251,6 +279,18 @@ Future<String?> writeDocumentExport(
         onCoarseLogo: onPdfCoarseLogo,
         outputPath: outputPath,
       );
+  }
+}
+
+Future<bool> _sameFile(String? sourcePath, String outputPath) async {
+  if (sourcePath == null) return false;
+  final source = p.normalize(p.absolute(sourcePath));
+  final output = p.normalize(p.absolute(outputPath));
+  if (p.equals(source, output)) return true;
+  try {
+    return await FileSystemEntity.identical(source, output);
+  } on FileSystemException {
+    return false;
   }
 }
 

@@ -1,5 +1,6 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
+import '../utils/markdown_blocks.dart';
 import 'markdown_table_codec.dart';
 import 'pentest_blocks.dart';
 import 'document_timeline.dart';
@@ -115,14 +116,14 @@ class DocumentDeckBridge {
       }
 
       // Fence: chart apart, elke andere taal verbatim mee in de flow.
-      final fence = _fenceOpen(trimmed);
+      final fence = markdownFenceOpen(trimmed);
       if (fence != null) {
         final block = <String>[line];
         var j = i + 1;
         var closed = false;
         while (j < lines.length) {
           block.add(lines[j]);
-          if (_isFenceClose(lines[j].trim(), fence.marker, fence.length)) {
+          if (fence.closes(lines[j].trim())) {
             closed = true;
             j++;
             break;
@@ -376,25 +377,3 @@ String _titleAndBullets(Slide slide) => [
 
 /// Een regel die na trimmen met 1–6 `#` en een spatie begint.
 bool _isHeading(String trimmed) => RegExp(r'^#{1,6} ').hasMatch(trimmed);
-
-/// Een geopende fence-regel, ontleed in het markeerteken, de lengte en de taal.
-class _FenceInfo {
-  final String marker; // '`' of '~'
-  final int length;
-  final String language;
-  const _FenceInfo(this.marker, this.length, this.language);
-}
-
-/// Ontleedt een geopende fence (` ``` ` of `~~~`, minstens drie) uit een
-/// getrimde regel, of null wanneer de regel geen fence opent.
-_FenceInfo? _fenceOpen(String trimmed) {
-  final m = RegExp(r'^(`{3,}|~{3,})[ \t]*(\S*)').firstMatch(trimmed);
-  if (m == null) return null;
-  final run = m.group(1)!;
-  return _FenceInfo(run[0], run.length, m.group(2)!.toLowerCase());
-}
-
-/// Of een getrimde regel de fence sluit: hetzelfde teken, minstens even lang, en
-/// zonder taal erachter.
-bool _isFenceClose(String trimmed, String marker, int length) =>
-    RegExp('^${RegExp.escape(marker)}{$length,}[ \\t]*\$').hasMatch(trimmed);

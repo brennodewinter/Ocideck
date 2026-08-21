@@ -49,4 +49,26 @@ void main() {
     // De bron blijft zichtbaar als codeblok in plaats van een leeg vlak.
     expect(find.textContaining('source'), findsWidgets);
   });
+
+  testWidgets('de eerste info-token selecteert ook met extra metadata chart', (
+    tester,
+  ) async {
+    final spec = ChartSpec(
+      type: ChartType.bar,
+      x: const ['A'],
+      series: const [
+        ChartSeries(name: 'S', data: [1.0]),
+      ],
+    );
+    await tester.pumpWidget(host('```chart extra\n${spec.toBlock()}\n```\n'));
+    await tester.pump();
+    expect(find.byType(SvgPicture), findsOneWidget);
+  });
+
+  test('een vier-teken-fence laat tekst na de afsluiting renderen', () {
+    final blocks = DocumentMarkdownView.blockTexts(
+      '````text\n```\ncode\n````\nNA_DE_FENCE\n',
+    );
+    expect(blocks, contains('NA_DE_FENCE'));
+  });
 }

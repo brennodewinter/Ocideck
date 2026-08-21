@@ -257,6 +257,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     documentMaxWidth: _documentWriteWidth(ref),
     editorKey: _visualEditorKey,
     onDiscreteVisualEdit: () => _expectVisualInsert = true,
+    onTapLink: _handleEditorLink,
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
@@ -296,6 +297,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     anchorKey: _anchorKey,
     onEditChart: _editChart,
     onEditTable: _editTable,
+    onTapLink: _handleEditorLink,
   );
 }
 
@@ -315,6 +317,7 @@ Widget _documentLivePreview(
   required GlobalKey? anchorKey,
   required void Function(int, String) onEditChart,
   required void Function(int, List<String>) onEditTable,
+  required ValueChanged<String> onTapLink,
 }) => Container(
   color: theme.colorScheme.surface,
   // Boven-links, niet gecentreerd: de weergave vult het paneel en de tekst
@@ -334,12 +337,40 @@ Widget _documentLivePreview(
         anchorKey: anchorKey,
         onEditChart: onEditChart,
         onEditTable: onEditTable,
+        onTapLink: onTapLink,
       ),
       tlp: tlp,
       fields: fields,
     ),
   ),
 );
+
+Future<void> _followEditorDocumentLink(
+  String href, {
+  required String source,
+  required ValueChanged<MarkdownOutlineEntry> onAnchor,
+}) async {
+  final target = href.trim();
+  if (target.isEmpty) return;
+  if (!target.startsWith('#')) return openExternalUrl(target);
+  String slug;
+  try {
+    slug = Uri.decodeComponent(target.substring(1));
+  } on FormatException {
+    return;
+  }
+  final outline = buildMarkdownOutline(source);
+  final index = outline.indexWhere((entry) => headingSlug(entry.title) == slug);
+  if (index >= 0) onAnchor(outline[index]);
+}
+
+extension on _DocumentEditorScreenState {
+  Future<void> _handleEditorLink(String href) => _followEditorDocumentLink(
+    href,
+    source: ref.read(documentProvider).document?.source ?? '',
+    onAnchor: _scrollToHeading,
+  );
+}
 
 /// De sneltoetsen van de documentbewerker om [child] heen: opslaan, ongedaan
 /// maken, opnieuw, en de zoom.

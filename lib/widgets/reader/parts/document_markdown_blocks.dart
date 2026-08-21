@@ -564,12 +564,6 @@ class _EditableEmbedState extends State<_EditableEmbed> {
 
 // ── Line classification helpers ───────────────────────────────────────────
 
-String? _fenceMarker(String trimmed) {
-  if (trimmed.startsWith('```')) return '```';
-  if (trimmed.startsWith('~~~')) return '~~~';
-  return null;
-}
-
 int _headingLevel(String trimmed) {
   var n = 0;
   while (n < trimmed.length && trimmed[n] == '#') {
@@ -619,7 +613,7 @@ bool _isParagraphLine(String line) {
   final trimmed = line.trim();
   if (trimmed.isEmpty) return false;
   if (_headingLevel(trimmed) > 0) return false;
-  if (_fenceMarker(trimmed) != null) return false;
+  if (markdownFenceOpen(trimmed) != null) return false;
   if (_isHorizontalRule(trimmed)) return false;
   if (trimmed.startsWith('>')) return false;
   if (_listItem(line) != null) return false;

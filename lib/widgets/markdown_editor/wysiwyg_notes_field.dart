@@ -208,6 +208,7 @@ class WysiwygNotesField extends StatefulWidget {
   /// Markeer een structurele embedhandeling als eigen undo-stap bij de eigenaar
   /// van het document. Gewoon typen blijft bewust samenvoegbaar.
   final VoidCallback? onDiscreteVisualEdit;
+  final ValueChanged<String>? onTapLink;
 
   const WysiwygNotesField({
     super.key,
@@ -222,6 +223,7 @@ class WysiwygNotesField extends StatefulWidget {
     this.tryConsumePaste,
     this.editorKey,
     this.onDiscreteVisualEdit,
+    this.onTapLink,
   });
 
   @override
@@ -282,6 +284,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               focusNode: widget.focusNode,
               scrollController: widget.scrollController,
               config: QuillEditorConfig(
+                onLaunchUrl: widget.onTapLink,
                 editorKey: widget.editorKey,
                 expands: widget.expand,
                 padding: widget.contentPadding,

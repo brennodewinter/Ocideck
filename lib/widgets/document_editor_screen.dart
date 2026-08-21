@@ -53,6 +53,7 @@ import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
 import '../utils/text_search.dart';
+import '../utils/url_launcher_util.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_visual_compatibility.dart'
@@ -994,6 +995,7 @@ Future<String?> _writeDocumentExport(
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
     onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),
     outputPath: outputPath,
+    sourcePath: filePath,
   );
 }
 
