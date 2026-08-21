@@ -10,9 +10,9 @@ import '../utils/project_path.dart';
 /// tekst de cijfers draagt vóór de OciWacht-scan (DOCUMENT_MODE.md §11.2 stap 1,
 /// §11.5 eis 2).
 ///
-/// Dezelfde insluitingsbewaking als de dia-hydratatie in
-/// `file_service_open.dart`: [resolveProjectRelative] weigert `../` en absolute
-/// paden, zodat een onvertrouwd document geen willekeurig bestand kan inlezen.
+/// Dezelfde insluitingsbewaking als andere byte-exportpaden:
+/// [resolveContainedRealPath] weigert naast `../` en absolute paden ook een
+/// projectinterne symlink die buiten het project eindigt.
 ///
 /// - `projectPath == null`, of een blok zonder `source`, of een blok dat de data
 ///   al inline draagt → ongewijzigd.
@@ -46,7 +46,7 @@ Future<String> _inlineBlock(String inner, String projectPath) async {
 
   // De data-verwijzing moet binnen het project blijven — geen absolute paden of
   // `../`-uitbraken. Geweigerd → blok ongemoeid laten.
-  final abs = resolveProjectRelative(projectPath, spec.source!);
+  final abs = resolveContainedRealPath(spec.source!, projectPath);
   if (abs == null) return inner;
 
   final file = File(abs);

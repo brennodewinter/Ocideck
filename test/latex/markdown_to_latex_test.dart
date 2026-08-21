@@ -140,6 +140,26 @@ void main() {
       expect(out, contains(r'$$\int_0^1 x\,dx = \frac{1}{2}$$'));
     });
 
+    test('onveilige TeX-commando’s in math worden zichtbare tekst', () {
+      for (final command in [
+        r'\input{/etc/passwd}',
+        r'\write18{touch /tmp/x}',
+      ]) {
+        final out = markdownToLatex('\$$command\$');
+        expect(out, isNot(contains('\$$command\$')), reason: command);
+        expect(out, contains(r'\texttt{'), reason: command);
+        expect(out, contains(r'\textbackslash{}'), reason: command);
+      }
+    });
+
+    test('math-injectie via alttekst blijft platte tekst', () {
+      const payload = r'$\input{/etc/passwd}$';
+      final out = markdownToLatex('![$payload](foto.png)');
+
+      expect(out, contains(r'\textbackslash{}input'));
+      expect(out, isNot(contains(r'$\input')));
+    });
+
     test('vet en cursief', () {
       final out = markdownToLatex('**vet** en *cursief*');
       expect(out, contains(r'\textbf{vet}'));
@@ -156,10 +176,35 @@ void main() {
       expect(out, contains(r'\href{https://ocideck.nl}{OciDeck}'));
     });
 
+    test('onveilige links worden geen href', () {
+      for (final href in [
+        'javascript:alert(1)',
+        'file:///etc/passwd',
+        'data:x',
+      ]) {
+        final out = markdownToLatex('[doel]($href)');
+        expect(out, contains('doel'));
+        expect(out, isNot(contains(r'\href{')), reason: href);
+      }
+    });
+
+    test('URL-argument kan niet met accolades uitbreken', () {
+      final out = markdownToLatex('[doel](https://example.test/a%7Db)');
+      expect(out, contains(r'https://example.test/a\%7Db'));
+      expect(out, contains(r'\href{'));
+    });
+
     test('afbeelding wordt includegraphics', () {
       final out = markdownToLatex('![Alt tekst](foto.png)');
       expect(out, contains(r'\includegraphics[width=0.8\textwidth]{foto.png}'));
       expect(out, contains('Alt tekst'));
+    });
+
+    test('onveilig afbeeldingspad wordt geen includegraphics', () {
+      final out = markdownToLatex(r'![zichtbaar](foo%7D%5Cinput%7Bsecret%7D)');
+      expect(out, contains('zichtbaar'));
+      expect(out, isNot(contains(r'\includegraphics')));
+      expect(out, isNot(contains(r'\input')));
     });
 
     test('LaTeX-speciale tekens worden geëscaped', () {

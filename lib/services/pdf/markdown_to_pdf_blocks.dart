@@ -12,6 +12,7 @@
 
 import 'package:markdown/markdown.dart' as md;
 
+import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
 import 'document_pdf_blocks.dart';
@@ -527,10 +528,11 @@ class _PdfBlockConverter {
         case 'code':
           out.add(inherited.copyWith(text: _rawText(node), code: true));
         case 'a':
+          final href = safeExportLink(node.attributes['href']);
           out.addAll(
             spans(
               node.children ?? const [],
-              inherited.copyWith(href: node.attributes['href'] ?? ''),
+              href == null ? inherited : inherited.copyWith(href: href),
             ),
           );
         case 'br':
