@@ -63,7 +63,7 @@ class MarkdownSafetyScanner {
     // An inline event handler attribute inside a tag: `<img … onerror=…>`.
     _Rule(
       MarkdownThreat.scriptExecution,
-      RegExp(r'<[a-z][^>\n]*\son[a-z]+\s*=', caseSensitive: false),
+      RegExp(r'<[a-z][^>\n]*[\s/]on[a-z]+\s*=', caseSensitive: false),
     ),
     // `javascript:` / `vbscript:` in a markdown link target or an attribute…
     _Rule(

@@ -202,6 +202,15 @@ void main() {
     expect(result, isNull);
   });
 
+  test('openDeck applies the byte cap to multibyte provided content', () async {
+    final service = makeService();
+    final oversizedUtf8 = '€' * (FileService.maxDeckMarkdownBytes ~/ 3 + 1);
+
+    final result = await service.openDeck('memory.md', content: oversizedUtf8);
+
+    expect(result, isNull);
+  });
+
   test('scanPresentations returns empty for a missing directory', () async {
     final service = makeService();
     final result = await service.scanPresentations(

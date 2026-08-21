@@ -40,6 +40,14 @@ title: Kwartaalcijfers
       );
     });
 
+    test('flags an inline event handler after a solidus', () {
+      final findings = MarkdownSafetyScanner.scan('<svg/onload=alert(1)>');
+      expect(
+        findings.any((f) => f.kind == MarkdownThreat.scriptExecution),
+        isTrue,
+      );
+    });
+
     test('flags a javascript: link target but not the word JavaScript', () {
       expect(
         MarkdownSafetyScanner.scan('[click](javascript:alert(1))'),

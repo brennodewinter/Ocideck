@@ -328,9 +328,9 @@ class ImageService {
 
   /// Read the encoded bytes of a slide image [path] resolved against
   /// [projectPath], for the AI vision call (AI_ASSIST §6.3). Honours project
-  /// containment (via [resolveSlideAssetPath]); on web only `mem:` paths resolve
-  /// (through [WebAssetStore]). Returns null for an out-of-project path, a `mem:`
-  /// miss, or a read error — never throws.
+  /// containment (including symlinks via [resolveContainedRealPath]); on web
+  /// only `mem:` paths resolve (through [WebAssetStore]). Returns null for an
+  /// out-of-project path, a `mem:` miss, or a read error — never throws.
   Future<Uint8List?> readSlideImageBytes(
     String path, {
     String? projectPath,
@@ -341,7 +341,10 @@ class ImageService {
           ? WebAssetStore.bytesFor(path)
           : null;
     }
-    final resolved = resolveSlideAssetPath(path, projectPath);
+    // This sink moves bytes out of the project (export, AI, repository
+    // sidecars). Lexical containment is not enough: a project-internal symlink
+    // may point at an arbitrary file outside the project.
+    final resolved = resolveContainedRealPath(path, projectPath);
     if (resolved == null) return null;
     try {
       return await File(resolved).readAsBytes();
