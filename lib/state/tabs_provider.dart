@@ -396,6 +396,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String improvementFramework = '',
     String improvementY01 = '',
     ImprovementY01Metric? improvementY01Metric,
+    String? projectPath,
   }) {
     final tab = _createTab();
     tab.deckNotifier.newDeck(
@@ -405,6 +406,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       improvementFramework: improvementFramework,
       improvementY01: improvementY01,
       improvementY01Metric: improvementY01Metric,
+      projectPath: projectPath,
     );
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];

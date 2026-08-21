@@ -80,6 +80,24 @@ void main() {
       expect(state.anyDirty, isTrue);
     });
 
+    test(
+      'newDeckInNewTab preserves projectPath for converted decks (#1639)',
+      () {
+        final container = _container();
+        final tabs = container.read(tabsProvider.notifier);
+
+        tabs.newDeckInNewTab('Rapport', projectPath: '/tmp/project');
+
+        final deck = container
+            .read(tabsProvider)
+            .current!
+            .deckNotifier
+            .currentState
+            .deck!;
+        expect(deck.projectPath, '/tmp/project');
+      },
+    );
+
     test('newDeckInCurrentTab fills the current empty tab in place', () {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);
