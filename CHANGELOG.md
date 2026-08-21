@@ -12,6 +12,47 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.8] — 2026-08-21
+
+### Added
+
+- feat(document): afbeeldingen renderen op het scherm, niet alleen in export (#1605)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- test(stijlprofiel): pin de opslagketen op regelovergangen die heel blijven (#1625)
+- Plakken houdt structuur uit webeditor-HTML (#1595)
+- Een link in de kop- of voetband van een document wordt op contrast getoetst (#1620)
+- De kop en de kop-/voetband van een document worden op contrast getoetst (#1616)
+- De tekeningen in een document-PDF houden zich aan de grenzen van het platform (#1615)
+- Formules, mermaid en grafieken worden getekend in de PDF van een document (#1612)
+- De niet-opgeslagen-stip verdwijnt weer als je opslaat (#1611)
+- Een document kan zijn koppen een eigen kleur geven (#1610)
+- Een document exporteert naar PDF met een echte tekstlaag (#1609)
+- Een kop- of voetband laat de front matter niet meer in het document staan (#1608)
+- Een afgedrukt document draagt zijn kop en voet weer op elke pagina (#1607)
+- Regelnummers in de Bron-stand van een document
+- Code in een alinea is weer te lezen, een tabelbewerking gooit je niet naar de bron, en een afbeelding laat het schrijfvlak niet omvallen (#1604)
+- Vraag ISCC zijn versie via --version, de enige bron die hem noemt (#1603)
+- De ISCC-versietoets leest de banner, niet een lege VersionInfo (#1602)
+- De packager compileert met de gepinde ISCC, niet met een toevallige shim (#1601)
+- De pentest-enveloppen reizen als atomaire embeds en de visuele poort wordt blokbewust (#1599)
+- Bescherm de Windows-keten tegen MSYS-padvertaling (#1598)
+- De grammatica van de pentest-enveloppen, en de brug die ze bij elkaar houdt (#1597)
+
+### Fixed
+
+- fix(pdf): de opmaak van het document niet één laag lager weer uitzetten (#1629)
+- fix(release): toets of de Homebrew-tap en zijn spiegel op de release staan (#1628)
+- fix(pdf): clamp logo-breedte op maximaal 72 pt (#1627)
+- fix(pdf): tabelkolommen en logo in de document-PDF (#1626)
+- fix(macos): verwijder gedeprecieerde allowedFileTypes en dode debugPrint (#1624)
+- fix(document): visuele weergave gelijk aan bronweergave (#1623)
+- fix(windows): licentie-pagina, bestandsassociaties en handtekening-upload (#1600)
+- fix(document): opslaan vanuit Visueel is byte-getrouw (#1613) (#1619)
+- fix(document): documenttabblad sluit en noemt de soort (#1614) (#1618)
+
 ## [0.4.7] — 2026-08-19
 
 ### Changed
