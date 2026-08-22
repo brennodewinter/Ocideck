@@ -213,6 +213,11 @@ void main() {
         findsOneWidget,
       );
       expect(find.textContaining('wordt een diagrens'), findsOneWidget);
+      // #1684: de dialoog noemt de echte verliezen, niet alleen de vage
+      // "geen perfecte spiegeling".
+      expect(find.textContaining('documentstijl'), findsOneWidget);
+      expect(find.textContaining('Documentvelden'), findsOneWidget);
+      expect(find.textContaining('Voetnoten'), findsOneWidget);
       await tester.tap(find.text('Converteren'));
       await tester.pumpAndSettle();
       expect(result, isTrue);

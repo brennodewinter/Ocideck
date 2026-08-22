@@ -4626,4 +4626,10 @@ const _dutchSourceAddEs = {
   'Rechts uitlijnen': 'Alinear a la derecha',
   'Rij onder invoegen': 'Insertar fila debajo',
   'Splits tabel': 'Dividir tabla',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'El estilo del documento (tema, tamaño de página, márgenes) no se incluye.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Los campos del documento (encabezado y pie de página) no se incluyen.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Las notas al pie se convierten en texto sin formato; una presentación no tiene notas.',
 };

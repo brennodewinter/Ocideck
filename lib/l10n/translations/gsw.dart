@@ -4568,4 +4568,10 @@ const _dutchSourceAddGsw = <String, String>{
   'Rechts uitlijnen': 'Rechts uusrichte',
   'Rij onder invoegen': 'Zile unten yfüege',
   'Splits tabel': 'Tabelle teile',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'De Dokumäntstil (Thema, Syteformat, Margine) wird nöd übernoh.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumäntfälder (Chopf- und Fuesszyyle) wärded nöd übernoh.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
 };

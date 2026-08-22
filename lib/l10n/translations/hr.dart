@@ -4564,4 +4564,10 @@ const _dutchSourceAddHr = <String, String>{
   'Rechts uitlijnen': 'Poravnaj desno',
   'Rij onder invoegen': 'Umetni redak ispod',
   'Splits tabel': 'Podijeli tablicu',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Stil dokumenta (tema, veličina stranice, margine) ne prati se.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Polja dokumenta (zaglavlje i podnožje) ne prate se.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Bilješke postaju običan tekst; prezentacija nema bilješke.',
 };

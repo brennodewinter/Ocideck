@@ -4631,4 +4631,10 @@ const _dutchSourceAddGa = <String, String>{
   'Rechts uitlijnen': 'Ailínigh ar dheis',
   'Rij onder invoegen': 'Ionsáigh ró faoi bhun',
   'Splits tabel': 'Roinn tábla',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Ní thagann stíl an doiciméid (téama, méid an leathanaigh, corrlaigh) leis.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Ní thagann réimsí an doiciméid (ceanntásc agus buntásc) leis.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
 };

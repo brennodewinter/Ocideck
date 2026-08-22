@@ -4605,4 +4605,10 @@ const _dutchSourceAddBg = <String, String>{
   'Rechts uitlijnen': 'Подравни надясно',
   'Rij onder invoegen': 'Вмъкни ред отдолу',
   'Splits tabel': 'Раздели таблица',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Стилът на документа (тема, размер на страницата, полета) не се запазва.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Полетата на документа (горен и долен колонтитул) не се запазват.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Бележките под линия стават обикновен текст; презентация няма бележки.',
 };

@@ -51,10 +51,10 @@ void main() {
     expect(migrated.first.tlp, TlpLevel.none);
   });
 
-  test('onbekende TLP-sleutel valt terug op none', () {
+  test('onbekende TLP-sleutel valt fail-closed terug op red (#1663)', () {
     expect(
       RecentFile.decodeList('[{"path":"/a.md","tlp":"paars"}]').single.tlp,
-      TlpLevel.none,
+      TlpLevel.red,
     );
   });
 

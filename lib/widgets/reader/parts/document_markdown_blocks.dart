@@ -580,6 +580,16 @@ bool _isHorizontalRule(String trimmed) {
   ).hasMatch(trimmed.replaceAll(' ', ''));
 }
 
+/// Of [line] een Setext-onderstreping is: `=`+ voor H1, `-`+ voor H2.
+/// De aanroeper garandeert dat de regel direct op een tekstregel volgt
+/// (geen lege regel ertussen) — dat onderscheidt een Setext-kop van een
+/// horizontale streep (#1647).
+bool _isSetextUnderline(String line) {
+  final trimmed = line.trim();
+  if (trimmed.isEmpty) return false;
+  return RegExp(r'^=+$').hasMatch(trimmed) || RegExp(r'^-+$').hasMatch(trimmed);
+}
+
 _ListLine? _listItem(String line) {
   final m = RegExp(r'^(\s*)([-*+]|\d+\.)\s+(.*)$').firstMatch(line);
   if (m == null) return null;

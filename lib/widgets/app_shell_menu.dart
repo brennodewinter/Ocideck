@@ -24,8 +24,12 @@ Future<void> convertDeckToDocument(BuildContext context, WidgetRef ref) async {
   if (confirmed != true || !context.mounted) return;
   // Zero-loss op tekst: de dia-lichamen worden aaneengeregen tot één vloeiend
   // document. Het zegel reist niet mee — een geconverteerd bestand is nieuw.
+  // De projectmap reist wél mee, zodat afbeeldingsverwijzingen blijven
+  // werken (#1646).
   final source = DocumentDeckBridge.deckToDocumentMarkdown(deck);
-  ref.read(tabsProvider.notifier).newDocumentFromMarkdown(source);
+  ref
+      .read(tabsProvider.notifier)
+      .newDocumentFromMarkdown(source, projectPath: deck.projectPath);
 }
 
 /// Open de volledige deck-preview. Top-level en niet op de State: leest alles

@@ -4566,4 +4566,10 @@ const _dutchSourceAddSk = <String, String>{
   'Rechts uitlijnen': 'Zarovnať vpravo',
   'Rij onder invoegen': 'Vložiť riadok pod',
   'Splits tabel': 'Rozdeliť tabuľku',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Štýl dokumentu (téma, veľkosť stránky, okraje) sa neprenáša.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Polia dokumentu (hlavička a päta) sa neprenášajú.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
 };

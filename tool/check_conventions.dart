@@ -150,7 +150,9 @@ const Map<String, int> fileSizeBaseline = {
   // +12 (#1637): notPresentation→document-router in openDeckFromBytes
   // (spiegelt openFileByPath). Eén guard + newDocumentFromMarkdown-aanroep,
   // cohesief met de bytes-open-lus.
-  'lib/state/tabs_provider.dart': 1031,
+  // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
+  // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
+  'lib/state/tabs_provider.dart': 1042,
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
@@ -171,6 +173,7 @@ const Map<String, int> fileSizeBaseline = {
   // exact op de toenmalige telling, en toen liep `main` vijf keer rood op één of
   // twee regels doordat twee sessies tegelijk in dit bestand werkten. Zie de kop
   // van [fileSizeBaseline].
+  // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   'lib/widgets/document_editor_screen.dart': 1150,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
@@ -283,12 +286,15 @@ const Map<String, int> classSizeBaseline = {
   // mermaid-takken die er al zaten. De resolver en de widget staan buiten de
   // klasse (parts/document_markdown_image.dart), maar de blokselectie zelf
   // kan niet zonder de interne _Kind-enum en de _parse-lus.
-  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1008,
+  // +23 (#1647): Setext-kopherkenning in _parse — _isSetextUnderline helper
+  // en de check in de paragraaf-fallback. Cohesief met de _parse-lus.
+  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1031,
   // −78 (#1707): find/replace-staat naar FindReplaceSession. Wat de klasse aan
   // die methoden hield was `_controller` (gaat mee als parameter), `_viewMode`
   // (blijft hier: alleen de gastheer weet of de cursor in de bron of in Quill
   // staat) en `setState` (een callback). Klasse staat op 1115 (was 1228); net
   // als bij het bestand met lucht erboven, om dezelfde reden.
+  // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1150,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
@@ -383,7 +389,9 @@ const Map<String, int> classSizeBaseline = {
   // zet het beveiligingsalarm) en verhuizen naar een part-file vereist zes
   // params door een helper — fragmentatie zonder winst.
   // +12 (#1637): notPresentation→document-router in openDeckFromBytes.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2268,
+  // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
+  // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
+  'lib/state/tabs_provider.dart#TabsNotifier': 2279,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`

@@ -15,6 +15,7 @@ import 'package:markdown/markdown.dart' as md;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
+import '../markdown_table_codec.dart';
 import 'document_pdf_blocks.dart';
 
 /// Zet [markdown] (GFM) om in de blokken waaruit de PDF wordt opgebouwd.
@@ -40,7 +41,8 @@ List<PdfBlock> markdownToPdfBlocks(
   // document, zonder verband met hun merkteken.
   final notes = documentFootnotes(markdown);
   var source = stripFootnoteDefinitions(markdown);
-  source = _stripTimelineMarkers(source);
+  final timelines = _protectTimelines(source);
+  source = timelines.source;
   final math = _protectDisplayMath(source);
   source = math.source;
   for (final note in notes) {
@@ -73,7 +75,15 @@ List<PdfBlock> markdownToPdfBlocks(
     chapterPageBreak: chapterPageBreak,
     displayMath: math.blocks,
   );
-  final blocks = converter.blocks(nodes);
+  var blocks = converter.blocks(nodes);
+
+  // Tijdlijn-sentinels vervangen door lijstblokken — dezelfde route als de
+  // LaTeX-converter, die de marker+ tabel als `\begin{description}` schrijft.
+  // Hier wordt het een genummerde lijst met vetgedrukte tijdaanduiding, de
+  // dichtstbijzijnde bestaande blokvorm (#1680).
+  if (timelines.blocks.isNotEmpty) {
+    blocks = _replaceTimelineSentinels(blocks, timelines.blocks);
+  }
 
   if (notes.isEmpty) return blocks;
   return [...blocks, ..._endnoteBlocks(notes, footnotesTitle)];
@@ -183,16 +193,90 @@ final _mathSentinelPattern = RegExp(r'^OCIDECKDISPLAYMATH(\d+)END$');
 
 final _footnoteSentinelPattern = RegExp(r'OCIDECKFOOTNOTE(\d+)END');
 
-/// Haalt de tijdlijn-markers weg en laat de tabel eronder staan.
+/// De sentinel die een tijdlijn vervangt tijdens de parse. Zonder leestekens
+/// die Markdown zelf betekenis geeft, zodat er onderweg niets aan verandert.
+String _timelineSentinel(int index) => 'OCIDECKTIMELINE${index}END';
+
+final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
+
+/// Haalt gemarkeerde tijdlijnen (marker + tabel) uit de bron en vervangt ze
+/// door een sentinel-alinea. Geeft de bron en de blokken terug die de sentinels
+/// later vervangen — hetzelfde patroon als `_protectDisplayMath` hierboven en
+/// `_protectDocumentTimelines` in de LaTeX-converter.
 ///
-/// Een tijdlijn ís in de bron een tabel met een markerregel erboven
-/// (`document_timeline.dart`). De PDF tekent hem als gewone tabel: alle inhoud
-/// blijft, alleen de tijdbalk-vorm van het scherm niet. Zonder het weghalen van
-/// de marker zou het HTML-commentaar als losse alinea in de PDF landen.
-String _stripTimelineMarkers(String source) => source.replaceAll(
-  RegExp('^${RegExp.escape(documentTimelineMarker)}\\s*\$', multiLine: true),
-  '',
-);
+/// Vóór deze functie stripte de PDF-code alleen de marker en liet de tabel als
+/// gewone tabel tekenen (#1680). Nu wordt de tijdlijn een genummerde lijst met
+/// vetgedrukte tijdaanduiding, dichter bij de semantiek die het scherm en de
+/// HTML-export wel geven.
+({String source, List<PdfBlock> blocks}) _protectTimelines(String source) {
+  final lines = source.replaceAll('\r\n', '\n').split('\n');
+  final output = <String>[];
+  final blocks = <PdfBlock>[];
+  var index = 0;
+  while (index < lines.length) {
+    if (lines[index].trim() != documentTimelineMarker ||
+        index + 2 >= lines.length ||
+        !isMarkdownTableLine(lines[index + 1]) ||
+        !isMarkdownTableDelimiterRow(lines[index + 2])) {
+      output.add(lines[index++]);
+      continue;
+    }
+    var end = index + 3;
+    while (end < lines.length && isMarkdownTableLine(lines[end])) {
+      end++;
+    }
+    final marked = lines.sublist(index, end).join('\n');
+    final timeline = analyzeMarkedTimeline(marked).timeline;
+    if (timeline == null) {
+      output.add(lines[index++]);
+      continue;
+    }
+    final items = <PdfListItem>[
+      for (final event in timeline.events)
+        PdfListItem([
+          PdfParagraphBlock([
+            PdfSpan('${event.marker}  ', bold: true),
+            ..._inlineOf(event.event),
+            if ((event.metadata ?? '').isNotEmpty) ...[
+              PdfSpan('  '),
+              PdfSpan('${timeline.headers[2]}: ', bold: true),
+              ..._inlineOf(event.metadata!),
+            ],
+          ]),
+        ]),
+    ];
+    blocks.add(PdfListBlock(items, ordered: true));
+    output.add(_timelineSentinel(blocks.length - 1));
+    index = end;
+  }
+  return (source: output.join('\n'), blocks: blocks);
+}
+
+/// Vervangt sentinel-alinea's in [blocks] door de bijbehorende tijdlijn-blokken
+/// uit [timelineBlocks]. De sentinel overleeft de parse als een alinea met
+/// precies de sentinel-tekst.
+List<PdfBlock> _replaceTimelineSentinels(
+  List<PdfBlock> blocks,
+  List<PdfBlock> timelineBlocks,
+) {
+  final result = <PdfBlock>[];
+  for (final block in blocks) {
+    if (block is PdfParagraphBlock &&
+        block.spans.length == 1 &&
+        _timelineSentinelPattern.hasMatch(block.spans.first.text)) {
+      final match = _timelineSentinelPattern.firstMatch(
+        block.spans.first.text,
+      )!;
+      final idx = int.parse(match.group(1)!);
+      if (idx < timelineBlocks.length) {
+        result.add(timelineBlocks[idx]);
+        continue;
+      }
+    }
+    result.add(block);
+  }
+  return result;
+}
 
 /// De notenlijst achterin: een kop, en per noot een alinea die met zijn nummer
 /// begint.

@@ -26,10 +26,18 @@ void main() {
       }
     });
 
-    test('fromKey is forgiving and defaults to none', () {
+    test('fromKey herkent TLP 2.0-spelling en fail-closed op onbekend', () {
       expect(TlpLevelX.fromKey('AMBER+STRICT'), TlpLevel.amberStrict);
       expect(TlpLevelX.fromKey('amberstrict'), TlpLevel.amberStrict);
-      expect(TlpLevelX.fromKey('onzin'), TlpLevel.none);
+      expect(TlpLevelX.fromKey('TLP-AMBER'), TlpLevel.amber);
+      expect(TlpLevelX.fromKey('TLP:RED'), TlpLevel.red);
+      expect(TlpLevelX.fromKey('TLP:AMBER+STRICT'), TlpLevel.amberStrict);
+      expect(TlpLevelX.fromKey('TLP-GREEN'), TlpLevel.green);
+      // Fail-closed op classificatie: een onbekende waarde is geen `none`
+      // (geen markering) maar een onleesbare — de strengste lezing (red)
+      // voorkomt dat een typo de exportblokkade stil omzeilt (#1663).
+      expect(TlpLevelX.fromKey('onzin'), TlpLevel.red);
+      // Lege waarde = geen markering → none.
       expect(TlpLevelX.fromKey(''), TlpLevel.none);
     });
   });

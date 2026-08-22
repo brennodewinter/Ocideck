@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import '../models/chart.dart';
+import '../services/file_service.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/project_path.dart';
@@ -26,12 +27,16 @@ Future<String> hydrateDocumentChartData(
   final matches = chartFencePattern.allMatches(body).toList();
   if (matches.isEmpty) return body;
 
+  // Behoud de oorspronkelijke regelscheiding: een CRLF-document blijft
+  // CRLF in de herschreven fences (#1666).
+  final nl = body.contains('\r\n') ? '\r\n' : '\n';
+
   final buf = StringBuffer();
   var last = 0;
   for (final m in matches) {
     buf.write(body.substring(last, m.start));
     final inlined = await _inlineBlock(m.group(1)!, projectPath);
-    buf.write('```chart\n$inlined\n```');
+    buf.write('```chart$nl$inlined$nl```');
     last = m.end;
   }
   buf.write(body.substring(last));
@@ -51,6 +56,16 @@ Future<String> _inlineBlock(String inner, String projectPath) async {
 
   final file = File(abs);
   if (!await file.exists()) return inner;
+  // Zelfde 8 MiB-plafond als het deck-openpad: een pathologisch databestand
+  // is een DoS op het exportpad (#1666).
+  if (await file.length() > FileService.maxChartDataBytes) {
+    logWarning(
+      'hydrateDocumentChartData: chart data exceeds '
+      '${FileService.maxChartDataBytes ~/ (1024 * 1024)} MiB cap',
+      abs,
+    );
+    return inner;
+  }
   try {
     final raw = await file.readAsString();
     // [ChartSpec.withData] kiest op de extensie (JSON/CSV) en laat de spec

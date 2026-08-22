@@ -4506,4 +4506,10 @@ const _dutchSourceAddTlh = <String, String>{
   'Rechts uitlijnen': 'nIH moH',
   'Rij onder invoegen': 'bing chel',
   'Splits tabel': 'wa\' DIch DIv\'',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Docuy tlhIj (tema, nID nav, margIn) DIloHbe\'.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Docuy mI\' (nav\' poSvo\' nIqvo\') DIloHbe\'.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
 };

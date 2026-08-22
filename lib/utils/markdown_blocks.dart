@@ -35,8 +35,13 @@ MarkdownFence? markdownFenceOpen(String trimmed) {
 /// De fence van één ` ```chart `-blok; de kale spec-tekst staat in groep 1.
 /// Dezelfde vorm die de editor vervangt, de export omzet en de hydratie invult —
 /// zodat ze naar exact dezelfde blokken wijzen.
+///
+/// `\r?\n` i.p.v. `\n` opent en sluit voor CRLF-documenten (#1666). De newline
+/// vóór het sluithek is optioneel (`(?:\r?\n)?`) zodat een compact blok waarvan
+/// de laatste specregel direct aan het sluithek grenst ook matcht (#1668) —
+/// dezelfde regel-voor-regel-herkenning die de bridge al had.
 final RegExp chartFencePattern = RegExp(
-  r'```chart[ \t]*\n([\s\S]*?)\n```',
+  r'```chart[ \t]*\r?\n([\s\S]*?)(?:\r?\n)?```',
   multiLine: true,
 );
 

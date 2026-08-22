@@ -4617,4 +4617,10 @@ const _dutchSourceAddPt = <String, String>{
   'Rechts uitlijnen': 'Alinhar à direita',
   'Rij onder invoegen': 'Inserir linha abaixo',
   'Splits tabel': 'Dividir tabela',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'O estilo do documento (tema, tamanho da página, margens) não é mantido.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Os campos do documento (cabeçalho e rodapé) não são mantidos.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
 };

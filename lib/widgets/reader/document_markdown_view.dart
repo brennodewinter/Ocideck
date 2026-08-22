@@ -242,10 +242,12 @@ class DocumentMarkdownView extends StatelessWidget {
 
   /// De regel-reikwijdte `[start, eind)` van het `ordinal`-de GFM-tabelblok
   /// (vanaf 0) in [source] — koprij + scheidingsrij + body — geteld met exact
-  /// dezelfde grammatica als de weergave (fenced blokken worden overgeslagen, en
-  /// een pipe-regel bereikt altijd de tabelherkenning). `null` als er geen
-  /// zoveelste tabel is. De editor gebruikt dit om precies dat blok in de bron te
-  /// vervangen zonder de omringende bytes aan te raken.
+  /// dezelfde grammatica als de weergave (fenced blokken worden overgeslagen,
+  /// een pipe-regel bereikt altijd de tabelherkenning, en een tabel onder
+  /// `<!-- timeline -->` telt niet mee — die is in de weergave een
+  /// `_Kind.timeline`, niet `_Kind.table`). `null` als er geen zoveelste tabel
+  /// is. De editor gebruikt dit om precies dat blok in de bron te vervangen
+  /// zonder de omringende bytes aan te raken.
   static List<int>? nthTableBlockRange(String source, int ordinal) {
     final lines = source.split('\n');
     var seen = 0;
@@ -258,6 +260,20 @@ class DocumentMarkdownView extends StatelessWidget {
           end++;
         }
         i = end < lines.length ? end + 1 : end;
+        continue;
+      }
+      // Een tijdlijnmarker + de tabel eronder is in de weergave een
+      // `_Kind.timeline`, geen `_Kind.table` — die hele blokgroep overslaan,
+      // anders loopt de ordinaal uit de pas met de weergave (#1662).
+      if (lines[i].trim() == documentTimelineMarker &&
+          i + 2 < lines.length &&
+          isMarkdownTableLine(lines[i + 1]) &&
+          isMarkdownTableDelimiterRow(lines[i + 2])) {
+        var end = i + 3;
+        while (end < lines.length && isMarkdownTableLine(lines[end])) {
+          end++;
+        }
+        i = end;
         continue;
       }
       if (isMarkdownTableLine(lines[i]) &&
@@ -618,6 +634,17 @@ class DocumentMarkdownView extends StatelessWidget {
       // falls back to a paragraph" only holds if the fallback always advances.
       final para = <String>[lines[i].trim()];
       i++;
+      // Setext-kop: een tekstregel direct gevolgd door `===` (H1) of `---`
+      // (H2). De export (markdown-package) herkent deze wel, de weergave niet
+      // — dus verscheen een kop in de uitvoer als alinea op het scherm (#1647).
+      // De `---` onderscheidt zich van een horizontale streep door context:
+      // direct na een tekstregel, zonder lege regel ertussen.
+      if (i < lines.length && _isSetextUnderline(lines[i])) {
+        final level = lines[i].trim().startsWith('=') ? 1 : 2;
+        blocks.add(_Block(_Kind.heading, level: level, text: para.single));
+        i++;
+        continue;
+      }
       while (i < lines.length && _isParagraphLine(lines[i])) {
         para.add(lines[i].trim());
         i++;

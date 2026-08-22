@@ -49,6 +49,13 @@ class DocumentState {
   /// OciDeck gewijzigd en vraagt een dialoog wat te doen (#1699, #1683).
   final String? savedFileHash;
 
+  /// De projectmap waarin het document leeft, ook wanneer het nog geen
+  /// bestandspad heeft — bijvoorbeeld na conversie presentatie → document.
+  /// Afbeeldingsverwijzingen lossen hier relatief op. Bij een bestand op schijf
+  /// is dit de map van [filePath]; bij een padloos document is dit de map van
+  /// het originele deck (#1646).
+  final String? projectPath;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -61,6 +68,7 @@ class DocumentState {
     this.savedSource,
     this.visualEdited = false,
     this.savedFileHash,
+    this.projectPath,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -78,6 +86,7 @@ class DocumentState {
     String? savedSource,
     bool? visualEdited,
     String? savedFileHash,
+    String? projectPath,
     bool clearError = false,
     bool clearFilePath = false,
   }) {
@@ -93,6 +102,7 @@ class DocumentState {
       savedSource: savedSource ?? this.savedSource,
       visualEdited: visualEdited ?? this.visualEdited,
       savedFileHash: savedFileHash ?? this.savedFileHash,
+      projectPath: projectPath ?? this.projectPath,
     );
   }
 }
@@ -110,9 +120,10 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   DocumentNotifier() : super(const DocumentState());
 
   /// Documenten zijn immutable (withSource maakt een nieuw exemplaar), dus dit
-  /// zijn goedkope referenties.
-  final List<MarkdownDocument> _undoStack = [];
-  final List<MarkdownDocument> _redoStack = [];
+  /// zijn goedkope referenties. De `visualEdited`-vlag reist mee in de stapel,
+  /// zodat undo/redo de vlag herstelt die bij dat document hoorde (#1672).
+  final List<(MarkdownDocument, bool)> _undoStack = [];
+  final List<(MarkdownDocument, bool)> _redoStack = [];
 
   static const _maxHistory = 200;
   static const _coalesceWindow = Duration(milliseconds: 700);
@@ -139,7 +150,11 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   }
 
   /// Laad een reeds ingelezen document (door de tabbeheerder), vers en schoon.
-  void loadDocument(MarkdownDocument document, {String? filePath}) {
+  void loadDocument(
+    MarkdownDocument document, {
+    String? filePath,
+    String? projectPath,
+  }) {
     _clearHistory();
     state = DocumentState(
       document: document,
@@ -148,6 +163,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       savedSource: document.source,
       visualEdited: false,
       savedFileHash: DocumentIntegrity.hashMarkdown(document.source),
+      projectPath: projectPath,
     );
   }
 
@@ -171,7 +187,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
         now.difference(_lastEditAt!) < _coalesceWindow &&
         _undoStack.isNotEmpty;
     if (!canCoalesce) {
-      _undoStack.add(current);
+      _undoStack.add((current, state.visualEdited));
       if (_undoStack.length > _maxHistory) _undoStack.removeAt(0);
     }
     _lastEditAt = now;
@@ -190,14 +206,18 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   void undo() {
     final current = state.document;
     if (current == null || _undoStack.isEmpty) return;
-    _redoStack.add(current);
-    final previous = _undoStack.removeLast();
+    _redoStack.add((current, state.visualEdited));
+    final (previous, prevVisualEdited) = _undoStack.removeLast();
     // Volgende bewerking begint een verse ongedaan-stap.
     _lastEditAt = null;
     _lastCoalesceKey = null;
+    // isDirty afleiden uit vergelijking met savedSource: is de bron na undo
+    // weer gelijk aan de opgeslagen bron, dan is de tab niet vuil (#1672).
+    final dirty = previous.source != state.savedSource;
     state = state.copyWith(
       document: previous,
-      isDirty: true,
+      isDirty: dirty,
+      visualEdited: prevVisualEdited,
       canUndo: _undoStack.isNotEmpty,
       canRedo: _redoStack.isNotEmpty,
       revision: state.revision + 1,
@@ -208,13 +228,15 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   void redo() {
     final current = state.document;
     if (current == null || _redoStack.isEmpty) return;
-    _undoStack.add(current);
-    final next = _redoStack.removeLast();
+    _undoStack.add((current, state.visualEdited));
+    final (next, nextVisualEdited) = _redoStack.removeLast();
     _lastEditAt = null;
     _lastCoalesceKey = null;
+    final dirty = next.source != state.savedSource;
     state = state.copyWith(
       document: next,
-      isDirty: true,
+      isDirty: dirty,
+      visualEdited: nextVisualEdited,
       canUndo: _undoStack.isNotEmpty,
       canRedo: _redoStack.isNotEmpty,
       revision: state.revision + 1,

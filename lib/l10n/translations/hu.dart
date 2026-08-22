@@ -4579,4 +4579,10 @@ const _dutchSourceAddHu = <String, String>{
   'Rechts uitlijnen': 'Jobbra igazítás',
   'Rij onder invoegen': 'Sor beszúrása alá',
   'Splits tabel': 'Táblázat felosztása',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'A dokumentum stílusa (téma, oldalméret, margók) nem kerül át.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'A dokumentum mezői (fejléc és lábléc) nem kerülnek át.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
 };

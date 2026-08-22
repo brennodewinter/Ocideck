@@ -17,6 +17,7 @@ import 'package:ocideck/utils/markdown_paste_cleanup.dart';
 import 'package:ocideck/utils/source_patcher.dart';
 import 'package:ocideck/widgets/shell/document_save_actions.dart';
 import 'package:path/path.dart' as p;
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Byte-getrouw opslaan vanuit de visuele editor (#1613). De visuele editor
 /// round-tript Markdown → Quill → Markdown, en die weg is niet byte-getrouw:
@@ -26,6 +27,9 @@ import 'package:path/path.dart' as p;
 void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
+    // saveDocumentWithDestination werkt de recente-bestanden-lijst bij
+    // (#1676); dat gebruikt SharedPreferences.
+    SharedPreferences.setMockInitialValues({});
   });
 
   /// Rond de round-trip na die de visuele editor doet: Markdown → Quill →

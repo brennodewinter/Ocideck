@@ -27,13 +27,15 @@ const String kFootnotePlacementKey = 'reference-location';
 /// Waar de voetnoten van [source] horen te komen.
 ///
 /// Alleen de waarde `document` betekent achterin. Pandoc kent daarnaast
-/// `section` en `block` (noten per hoofdstuk of per blok); die staan hier
-/// dichter bij "achterin" dan bij "onderaan de bladzijde", dus lezen we ze zo.
-/// Een onbekende waarde valt terug op de standaard in plaats van te klagen: het
-/// bestand is van de gebruiker, en die mag er van alles in zetten.
+/// `section` en `block` (noten per hoofdstuk of per blok), maar OciDeck voert
+/// die plaatsing niet uit — ze stil als `document` (alles achterin) lezen gaf
+/// een ander resultaat dan de ontvanger met Pandoc (#1678). Terugvallen op
+/// `page` (noten op de pagina) is veiliger: dat staat dichter bij per-sectie
+/// dan alles achterin, en het is wat elke lezer zonder aanwijzing al doet.
+/// Een onbekende waarde valt eveneens terug op `page`.
 FootnotePlacement documentFootnotePlacement(String source) =>
     switch (documentFrontMatterValue(source, kFootnotePlacementKey)?.trim()) {
-      'document' || 'section' || 'block' => FootnotePlacement.document,
+      'document' => FootnotePlacement.document,
       _ => FootnotePlacement.page,
     };
 

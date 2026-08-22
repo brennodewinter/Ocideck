@@ -4600,4 +4600,10 @@ const _dutchSourceAddPap = {
   'Rechts uitlijnen': 'Alinia pa drechi',
   'Rij onder invoegen': 'Inserta riba abou',
   'Splits tabel': 'Parti tabla',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'E estilo di dokumentu (tema, tamán di págin, margen) no ta keda.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'E fieldnan di dokumentu (header i footer) no ta keda.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Footnote ta bira texto sòbel; un presentashon no tin notanan.',
 };

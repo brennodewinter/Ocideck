@@ -4584,4 +4584,10 @@ const _dutchSourceAddUk = <String, String>{
   'Rechts uitlijnen': 'Вирівняти праворуч',
   'Rij onder invoegen': 'Вставити рядок знизу',
   'Splits tabel': 'Розділити таблицю',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Стиль документа (тема, розмір сторінки, поля) не переноситься.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Поля документа (верхній і нижній колонтитули) не переносяться.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Виноски стають звичайним текстом; презентація не має виносок.',
 };

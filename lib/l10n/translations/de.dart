@@ -4617,4 +4617,10 @@ const _dutchSourceAddDe = {
   'Rechts uitlijnen': 'Rechts ausrichten',
   'Rij onder invoegen': 'Zeile unten einfügen',
   'Splits tabel': 'Tabelle aufteilen',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Der Dokumentstil (Design, Seitenformat, Ränder) wird nicht übernommen.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumentfelder (Kopf- und Fußzeile) werden nicht übernommen.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Fußnoten werden zu Fließtext; eine Präsentation hat keine Noten.',
 };

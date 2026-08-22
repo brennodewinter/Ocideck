@@ -4587,4 +4587,10 @@ const _dutchSourceAddPl = <String, String>{
   'Rechts uitlijnen': 'Wyrównaj do prawej',
   'Rij onder invoegen': 'Wstaw wiersz poniżej',
   'Splits tabel': 'Podziel tabelę',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Styl dokumentu (motyw, rozmiar strony, marginesy) nie jest zachowany.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Pola dokumentu (nagłówek i stopka) nie są zachowane.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
 };

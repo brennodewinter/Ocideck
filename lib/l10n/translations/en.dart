@@ -4558,4 +4558,10 @@ const _dutchSourceAddEn = {
   'Rechts uitlijnen': 'Align right',
   'Rij onder invoegen': 'Insert row below',
   'Splits tabel': 'Split table',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'The document style (theme, page size, margins) is not carried over.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Document fields (header and footer) are not carried over.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Footnotes become plain text; a presentation has no notes.',
 };

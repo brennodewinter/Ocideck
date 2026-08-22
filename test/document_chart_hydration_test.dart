@@ -108,4 +108,56 @@ void main() {
     expect(out.contains('4242'), isFalse);
     expect(out.contains('7'), isTrue);
   });
+
+  test('een databestand boven 8 MiB wordt geweigerd (#1666)', () async {
+    final dataDir = Directory(p.join(temp.path, 'data'));
+    await dataDir.create(recursive: true);
+    final big = File(p.join(dataDir.path, 'x.json'));
+    // Schrijf een bestand groter dan 8 MiB met geldige JSON-structuur.
+    final padding = 'x' * (8 * 1024 * 1024 + 1024);
+    await big.writeAsString('{"x": ["$padding"], "series": []}');
+    final out = await hydrateDocumentChartData(
+      chartBody,
+      projectPath: temp.path,
+    );
+    // Het blok blijft staan; de data is niet ingelezen.
+    expect(out, equals(chartBody));
+  });
+
+  test('CRLF-document behoudt CRLF in de herschreven fence (#1666)', () async {
+    await writeDataFile();
+    // Zelfde chart-blok maar met CRLF-regelscheiding.
+    const crlfBody =
+        '```chart\r\n'
+        '{"type": "line", "title": "Omzet", "source": "data/x.json"}\r\n'
+        '```\r\n';
+    final out = await hydrateDocumentChartData(
+      crlfBody,
+      projectPath: temp.path,
+    );
+    expect(out.contains('4242'), isTrue);
+    // De fence gebruikt CRLF, niet LF.
+    expect(out.contains('```chart\r\n'), isTrue);
+    expect(out.contains('\r\n```\r\n'), isTrue);
+    // Geen kale LF in de herschreven fence.
+    expect(out.contains('```chart\n'), isFalse);
+  });
+
+  test(
+    'chart zonder newline vóór sluithek wordt gehydrateerd (#1668)',
+    () async {
+      await writeDataFile();
+      // De laatste specregel grenst direct aan het sluithek: geen \n voor ```.
+      // Dit is het compacte geval dat het oude patroon miste.
+      final compactBody = StringBuffer()
+        ..write('```chart\n')
+        ..write('{"type": "line", "source": "data/x.json"}')
+        ..write('```');
+      final out = await hydrateDocumentChartData(
+        compactBody.toString(),
+        projectPath: temp.path,
+      );
+      expect(out.contains('4242'), isTrue);
+    },
+  );
 }

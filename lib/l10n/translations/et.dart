@@ -4556,4 +4556,10 @@ const _dutchSourceAddEt = <String, String>{
   'Rechts uitlijnen': 'Joonda paremale',
   'Rij onder invoegen': 'Lisa rida allapoole',
   'Splits tabel': 'Jaga tabel',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Dokumendi stiil (teema, lehe suurus, veerised) ei kandu üle.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumendi väljad (päis ja jalus) ei kandu üle.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
 };

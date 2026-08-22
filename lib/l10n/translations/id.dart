@@ -4573,4 +4573,10 @@ const _dutchSourceAddId = <String, String>{
   'Rechts uitlijnen': 'Rata kanan',
   'Rij onder invoegen': 'Sisipkan baris di bawah',
   'Splits tabel': 'Bagi tabel',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Gaya dokumen (tema, ukuran halaman, margin) tidak ikut.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Field dokumen (header dan footer) tidak ikut.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Catatan kaki menjadi teks biasa; presentasi tidak memiliki catatan.',
 };

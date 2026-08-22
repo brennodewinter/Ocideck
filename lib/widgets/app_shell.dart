@@ -550,8 +550,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final projectPath = ref
         .read(tabsProvider)
         .current
-        ?.deckNotifier
-        .currentState
+        ?.deckNotifierOrNull
+        ?.currentState
         .deck
         ?.projectPath;
     return service.importIntoDeck(path, projectPath: projectPath);
@@ -559,7 +559,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
 
   void _addImagesToActiveDeck(List<String> paths) {
     final tab = ref.read(tabsProvider).current;
-    if (tab == null || !tab.isOpen) {
+    if (tab == null || !tab.isOpen || tab.deckNotifierOrNull == null) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

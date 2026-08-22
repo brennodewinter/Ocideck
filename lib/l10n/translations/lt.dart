@@ -4579,4 +4579,10 @@ const _dutchSourceAddLt = <String, String>{
   'Rechts uitlijnen': 'Lygiuoti dešinėje',
   'Rij onder invoegen': 'Įterpti eilutę žemiau',
   'Splits tabel': 'Padalinti lentelę',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Dokumento stilius (tema, puslapio dydis, paraštės) neperkeliamas.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumento laukai (antraštė ir poraštė) neperkeliami.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
 };

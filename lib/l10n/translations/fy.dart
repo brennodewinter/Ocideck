@@ -4578,4 +4578,10 @@ const _dutchSourceAddFy = {
   'Rechts uitlijnen': 'Rjochts utlijnje',
   'Rij onder invoegen': 'Rigel ûnder ynfoegje',
   'Splits tabel': 'Tabel splitsje',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'De dokuminstyl (tema, sideformaat, marzjes) giet net mei.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokuminfjilden (kop- en foettekst) gean net mei.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
 };

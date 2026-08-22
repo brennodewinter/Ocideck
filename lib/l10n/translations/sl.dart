@@ -4564,4 +4564,10 @@ const _dutchSourceAddSl = <String, String>{
   'Rechts uitlijnen': 'Poravnaj desno',
   'Rij onder invoegen': 'Vstavi vrstico spodaj',
   'Splits tabel': 'Razdeli tabelo',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Slog dokumenta (tema, velikost strani, robovi) se ne prenaša.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Polja dokumenta (glava in noga) se ne prenašajo.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
 };

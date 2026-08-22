@@ -250,4 +250,28 @@ void main() {
       expect(out.contains('```chart\n'), isTrue);
     });
   });
+
+  group('inspringing behouden (#1664)', () {
+    test('een freeMarkdown-dia met leidende inspringing behoudt die', () {
+      // Een ingesprongen codeblok zonder fence: leidende 4 spaties zijn
+      // betekenis in Markdown. body.trim() strippte die weg.
+      const source =
+          '# Titel\n\n'
+          '    indented code\n    more code\n';
+      final deck = DocumentDeckBridge.documentToDeck(source);
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+      expect(out, contains('    indented code'));
+      expect(out, contains('    more code'));
+    });
+
+    test('een geneste lijst behoudt inspringing', () {
+      const source =
+          '# Titel\n\n'
+          '- item\n'
+          '  - genest\n';
+      final deck = DocumentDeckBridge.documentToDeck(source);
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+      expect(out, contains('  - genest'));
+    });
+  });
 }
