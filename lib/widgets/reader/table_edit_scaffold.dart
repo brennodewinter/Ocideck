@@ -34,43 +34,59 @@ class TableEditScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: editor,
-      builder: (context, _) {
-        final active = editor.activeCell;
-        _restorePendingFocus();
-        return CallbackShortcuts(
-          bindings: active == null || onSort == null
-              ? const {}
-              : {
-                  SingleActivator(
-                    LogicalKeyboardKey.arrowUp,
-                    alt: true,
-                    shift: true,
-                  ): () =>
-                      onSort!(active.col, TableSortIntent.ascending),
-                  SingleActivator(
-                    LogicalKeyboardKey.arrowDown,
-                    alt: true,
-                    shift: true,
-                  ): () =>
-                      onSort!(active.col, TableSortIntent.descending),
-                  SingleActivator(
-                    LogicalKeyboardKey.keyS,
-                    alt: true,
-                    shift: true,
-                  ): () =>
-                      onSort!(active.col, TableSortIntent.choose),
-                },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (active != null) _toolbar(context, active),
-              builder(context),
-            ],
-          ),
-        );
-      },
+    // De tabelcellen leven binnen een Quill-embed, die ze in de focushiërarchie
+    // onder Quills eigen FocusNode plaatst. Quill gebruikt hasFocus (dat true
+    // is als een afstammeling de primaire focus heeft) om zijn cursor te tonen
+    // — dus blijft de cursor knipperen terwijl je in een cel typt: twee cursors
+    // tegelijk. Door deze scope te herouderen naar dezelfde scope waarin Quill
+    // leeft (in plaats van onder Quills FocusNode) wordt die afstammingsketen
+    // doorbroken. Quills hasFocus retourneert false en zijn cursor verbergt.
+    final quillFocus = Focus.maybeOf(
+      context,
+      scopeOk: true,
+      createDependency: false,
+    );
+    final outerScope = quillFocus?.enclosingScope;
+    return FocusScope(
+      parentNode: outerScope,
+      child: ListenableBuilder(
+        listenable: editor,
+        builder: (context, _) {
+          final active = editor.activeCell;
+          _restorePendingFocus();
+          return CallbackShortcuts(
+            bindings: active == null || onSort == null
+                ? const {}
+                : {
+                    SingleActivator(
+                      LogicalKeyboardKey.arrowUp,
+                      alt: true,
+                      shift: true,
+                    ): () =>
+                        onSort!(active.col, TableSortIntent.ascending),
+                    SingleActivator(
+                      LogicalKeyboardKey.arrowDown,
+                      alt: true,
+                      shift: true,
+                    ): () =>
+                        onSort!(active.col, TableSortIntent.descending),
+                    SingleActivator(
+                      LogicalKeyboardKey.keyS,
+                      alt: true,
+                      shift: true,
+                    ): () =>
+                        onSort!(active.col, TableSortIntent.choose),
+                  },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (active != null) _toolbar(context, active),
+                builder(context),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
