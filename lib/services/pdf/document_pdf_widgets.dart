@@ -24,7 +24,9 @@ import '../../models/settings.dart' show TableBorderStyle;
 import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
+import 'document_pdf_inline_math.dart';
 import 'document_pdf_style.dart';
+import 'document_pdf_timeline.dart';
 
 /// Eén kop zoals de inhoudsopgave en de bladwijzerboom hem kennen.
 class PdfHeadingEntry {
@@ -262,6 +264,7 @@ class DocumentPdfWidgets {
   pw.Widget _widget(PdfBlock block, {required bool tight}) => switch (block) {
     PdfHeadingBlock() => _heading(block),
     PdfParagraphBlock() => _paragraph(block),
+    PdfTimelineBlock() => _timeline(block),
     PdfListBlock() => _list(block),
     PdfQuoteBlock() => _quote(block),
     PdfCodeBlock() => _code(block.code),
@@ -271,8 +274,6 @@ class DocumentPdfWidgets {
     PdfPageBreakBlock() => pw.NewPage(),
     PdfTocBlock() => _toc(),
   };
-
-  // ── Koppen ───────────────────────────────────────────────────────────────
 
   pw.Widget _heading(PdfHeadingBlock block) {
     final entry = _headingCursor < headings.length
@@ -320,12 +321,23 @@ class DocumentPdfWidgets {
     );
   }
 
-  // ── Alinea's en citaten ──────────────────────────────────────────────────
-
   pw.Widget _paragraph(PdfParagraphBlock block) => pw.RichText(
     textAlign: pw.TextAlign.left,
     overflow: pw.TextOverflow.span,
     text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
+  );
+
+  pw.Widget _timeline(PdfTimelineBlock block) => buildDocumentPdfTimeline(
+    block,
+    style: style,
+    baseStyle: _baseStyle,
+    text: (spans, textStyle) => pw.RichText(
+      overflow: pw.TextOverflow.span,
+      text: pw.TextSpan(
+        style: textStyle,
+        children: _spans(spans, size: textStyle.fontSize),
+      ),
+    ),
   );
 
   /// Een citaat: een vlak in een tint van het accent, met een streep langs de
@@ -751,6 +763,15 @@ class DocumentPdfWidgets {
   ];
 
   pw.InlineSpan _span(PdfSpan span, double size) {
+    if (span.math) {
+      return buildDocumentPdfInlineMath(
+        span,
+        fontSize: size,
+        maxWidth: maxImageWidth,
+        graphics: graphics,
+        fallback: (source) => _span(PdfSpan(source), size),
+      );
+    }
     final href = span.href;
     return pw.TextSpan(
       text: span.text,

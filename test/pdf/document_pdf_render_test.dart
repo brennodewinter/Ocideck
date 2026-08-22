@@ -152,6 +152,23 @@ void main() {
     expect(text, contains('61'));
   });
 
+  test('een tijdlijn levert koppen, gebeurtenissen en metadata af', () async {
+    final text = pdfVisibleText(
+      await render(
+        '<!-- timeline -->\n'
+        '| Tijd | Gebeurtenis | Bron |\n'
+        '| --- | --- | --- |\n'
+        '| 09:00 | Start onderzoek | Logboek |\n'
+        '| 13:41 | Herstel bevestigd | Controle |\n',
+      ),
+    );
+    expect(text, contains('Tijd'));
+    expect(text, contains('GEBEURTENIS'));
+    expect(text, contains('09:00'));
+    expect(text, contains('Start onderzoek'));
+    expect(text, contains('Bron: Logboek'));
+  });
+
   test(
     'een smalle kolom in een tabel met proza stapelt niet verticaal',
     () async {
@@ -229,6 +246,24 @@ void main() {
     ).join('\n\n');
     expect(pdfPageCount(await render(long)), greaterThan(1));
   });
+
+  test(
+    'een lange tijdlijn loopt door en houdt haar laatste gebeurtenis',
+    () async {
+      final rows = List.generate(
+        45,
+        (index) => '| $index:00 | Gebeurtenis $index | Bron $index |',
+      ).join('\n');
+      final bytes = await render(
+        '<!-- timeline -->\n'
+        '| Tijd | Gebeurtenis | Bron |\n'
+        '| --- | --- | --- |\n'
+        '$rows\n',
+      );
+      expect(pdfPageCount(bytes), greaterThan(1));
+      expect(pdfVisibleText(bytes), contains('Gebeurtenis 44'));
+    },
+  );
 
   group('blokken die hoger zijn dan een bladzijde', () {
     // Deze groep bewaakt één ding: geen enkel blok mag de export kunnen

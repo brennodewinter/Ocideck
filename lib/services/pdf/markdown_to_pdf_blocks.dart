@@ -66,10 +66,7 @@ List<PdfBlock> markdownToPdfBlocks(
     '\n$_tocSentinel\n',
   );
 
-  final document = md.Document(
-    encodeHtml: false,
-    extensionSet: md.ExtensionSet.gitHubFlavored,
-  );
+  final document = _pdfMarkdownDocument();
   final nodes = document.parse(withToc);
   final converter = _PdfBlockConverter(
     chapterPageBreak: chapterPageBreak,
@@ -101,10 +98,7 @@ List<PdfBlock> markdownToPdfBlocks(
 List<PdfSpan> markdownToPdfSpans(String markdown) {
   final trimmed = markdown.trim();
   if (trimmed.isEmpty) return const [];
-  final document = md.Document(
-    encodeHtml: false,
-    extensionSet: md.ExtensionSet.gitHubFlavored,
-  );
+  final document = _pdfMarkdownDocument();
   return _PdfBlockConverter(
     chapterPageBreak: false,
   ).spans(document.parseInline(trimmed), const PdfSpan(''));
@@ -204,10 +198,9 @@ final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
 /// later vervangen — hetzelfde patroon als `_protectDisplayMath` hierboven en
 /// `_protectDocumentTimelines` in de LaTeX-converter.
 ///
-/// Vóór deze functie stripte de PDF-code alleen de marker en liet de tabel als
-/// gewone tabel tekenen (#1680). Nu wordt de tijdlijn een genummerde lijst met
-/// vetgedrukte tijdaanduiding, dichter bij de semantiek die het scherm en de
-/// HTML-export wel geven.
+/// Het eigen blok houdt de rail, kolomkoppen, gebeurtenissen en metadata uit
+/// elkaar. Daardoor hoeft de renderer die betekenis niet uit een gewone lijst
+/// terug te raden en kan hij dezelfde visuele taal spreken als het scherm.
 ({String source, List<PdfBlock> blocks}) _protectTimelines(String source) {
   final lines = source.replaceAll('\r\n', '\n').split('\n');
   final output = <String>[];
@@ -231,21 +224,15 @@ final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
       output.add(lines[index++]);
       continue;
     }
-    final items = <PdfListItem>[
+    final events = <PdfTimelineEvent>[
       for (final event in timeline.events)
-        PdfListItem([
-          PdfParagraphBlock([
-            PdfSpan('${event.marker}  ', bold: true),
-            ..._inlineOf(event.event),
-            if ((event.metadata ?? '').isNotEmpty) ...[
-              PdfSpan('  '),
-              PdfSpan('${timeline.headers[2]}: ', bold: true),
-              ..._inlineOf(event.metadata!),
-            ],
-          ]),
-        ]),
+        PdfTimelineEvent(
+          _inlineOf(event.marker),
+          _inlineOf(event.event),
+          metadata: event.metadata == null ? null : _inlineOf(event.metadata!),
+        ),
     ];
-    blocks.add(PdfListBlock(items, ordered: true));
+    blocks.add(PdfTimelineBlock(timeline.headers, events));
     output.add(_timelineSentinel(blocks.length - 1));
     index = end;
   }
@@ -298,14 +285,47 @@ List<PdfBlock> _endnoteBlocks(List<Footnote> notes, String title) {
 /// Zet een losse regel Markdown om in opgemaakte stukken tekst. Gebruikt voor
 /// de tekst van een voetnoot, die zelf weer cursief of een link kan bevatten.
 List<PdfSpan> _inlineOf(String markdown) {
-  final document = md.Document(
-    encodeHtml: false,
-    extensionSet: md.ExtensionSet.gitHubFlavored,
-  );
+  final document = _pdfMarkdownDocument();
   final nodes = document.parseInline(markdown);
   final converter = _PdfBlockConverter(chapterPageBreak: false);
   return converter.spans(nodes, const PdfSpan(''));
 }
+
+md.Document _pdfMarkdownDocument() => md.Document(
+  encodeHtml: false,
+  extensionSet: md.ExtensionSet.gitHubFlavored,
+  inlineSyntaxes: [_PdfInlineMathSyntax()],
+);
+
+/// Herkent dezelfde voorzichtige inline-TeX als de documentweergave.
+///
+/// Een LaTeX-commando of herkenbare rekenrelatie telt; daardoor wordt
+/// `$E = mc^2$` gezet terwijl `$5 tot $10` gewone tekst blijft. Code-spans
+/// worden door de Markdown-parser vóór hun inhoud afgehandeld en een dubbele
+/// dollar hoort bij de aparte blokroute.
+class _PdfInlineMathSyntax extends md.InlineSyntax {
+  _PdfInlineMathSyntax()
+    : super(r'\$(?!\$)((?:\\.|[^\\$\n])+?)\$(?!\$)', startCharacter: 0x24);
+
+  @override
+  bool tryMatch(md.InlineParser parser, [int? startMatchPos]) {
+    final start = startMatchPos ?? parser.pos;
+    final match = pattern.matchAsPrefix(parser.source, start);
+    if (match == null || !_looksLikeInlineMath(match.group(1)!)) return false;
+    return super.tryMatch(parser, start);
+  }
+
+  @override
+  bool onMatch(md.InlineParser parser, Match match) {
+    final tex = match.group(1)!;
+    parser.addNode(md.Element.text('ocideck-inline-math', tex));
+    return true;
+  }
+}
+
+bool _looksLikeInlineMath(String tex) =>
+    RegExp(r'\\[a-zA-Z]').hasMatch(tex) ||
+    RegExp(r'[a-zA-Z0-9]\s*[=^_<>+*/-]\s*[a-zA-Z0-9\\{]').hasMatch(tex);
 
 /// Loopt de Markdown-boom af en bouwt er blokken van.
 class _PdfBlockConverter {
@@ -611,6 +631,10 @@ class _PdfBlockConverter {
           );
         case 'code':
           out.add(inherited.copyWith(text: _rawText(node), code: true));
+        case 'ocideck-inline-math':
+          // Een formule erft geen vet, link of code van de omringende Markdown;
+          // de TeX-renderer bepaalt zijn eigen typografie.
+          out.add(PdfSpan(_rawText(node), math: true));
         case 'a':
           final href = safeExportLink(node.attributes['href']);
           out.addAll(

@@ -367,10 +367,9 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
       // (#882). Ook bij 'setup-error' vrijgeven — dan valt een render netjes
       // terug op de brontekst i.p.v. eeuwig te wachten.
       if (data['diag'] != 'setup-ok') {
-        logWarning(
-          'MermaidRender DIAG: ${data['diag']} '
-          'mermaid=${data['mermaid']} error=${data['error']}',
-        );
+        // De fouttekst komt uit een renderer van gebruikersinhoud en kan die
+        // inhoud letterlijk herhalen. Houd het log daarom op een vaste melding.
+        logWarning('MermaidRender: WebView setup mislukt');
       }
       _markBootstrapReady();
       return;
@@ -386,7 +385,9 @@ MermaidChannel.postMessage(JSON.stringify({diag: 'setup-error', error: String(e)
     _renderCompleter = null;
     final error = data['error'];
     if (error != null) {
-      logWarning('MermaidRender: WebView render error: $error');
+      // MathJax/Mermaid-fouten kunnen de ingevoerde bron herhalen. Die hoort
+      // niet in het log; de vaste melding is voldoende voor diagnostiek.
+      logWarning('MermaidRender: WebView render mislukt');
       completer.complete(null);
     } else {
       completer.complete(data['svg'] as String?);

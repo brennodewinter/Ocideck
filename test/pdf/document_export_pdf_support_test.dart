@@ -2,6 +2,7 @@
 // teksten, en de zin die de gebruiker leest als er iets niet gezet kon worden.
 
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui' show Locale;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +14,23 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final l10n = AppLocalizations(const Locale('nl'));
+
+  test('de echte documentexport sluit beide tekenrenderers aan', () {
+    // Een renderer in de PDF-bouwer helpt niet wanneer het bewerkscherm hem
+    // niet doorgeeft. Deze bronpoort bewaakt precies die productiekoppeling;
+    // de native bestandskiezer maakt de route niet betrouwbaar aanstuurbaar in
+    // een widgettest.
+    final source = File(
+      'lib/widgets/document_editor_screen.dart',
+    ).readAsStringSync();
+    final start = source.indexOf('return writeDocumentExport(');
+    final end = source.indexOf('\n  );', start);
+    expect(start, isNot(-1));
+    expect(end, isNot(-1));
+    final call = source.substring(start, end);
+    expect(call, contains('renderMermaid: renderMermaidForPdf'));
+    expect(call, contains('renderMath: renderMathForPdf'));
+  });
 
   test('het gebundelde terugvalfont is te laden', () async {
     // Zonder dit font blijft de PDF bij Latin-1 en verdwijnt elk Pools, Grieks

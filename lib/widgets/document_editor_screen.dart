@@ -907,7 +907,7 @@ Future<String?> _writeDocumentExport(
     // de interfacetaal, want de converter kent geen vertalingen.
     footnotePlacement: documentFootnotePlacement(_pageSetupSource(ref)),
     footnotesTitle: l10n.d('Noten'),
-    // Alleen de PDF-tak gebruikt deze drie; de andere formaten laten ze
+    // Alleen de PDF-tak gebruikt deze waarden; de andere formaten laten ze
     // ongemoeid liggen.
     pdfLabels: documentPdfLabels(l10n),
     pdfFallbackFont: format == DocumentExportFormat.pdf
@@ -916,6 +916,8 @@ Future<String?> _writeDocumentExport(
     onPdfUnsupportedCharacters: (runes) =>
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
     onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),
+    renderMermaid: renderMermaidForPdf,
+    renderMath: renderMathForPdf,
     outputPath: outputPath,
     sourcePath: filePath,
   );

@@ -4698,7 +4698,9 @@ including the page number and the classification marking; your `---`
 [page breaks](#inserting-a-page-break) as real new sheets, and a new sheet per
 chapter when *New chapter on a new page* is on; the table of contents with page
 numbers and clickable entries; links you can click; images embedded in the file
-itself.
+itself. A marked document timeline keeps its time rail, column labels, event
+cards and metadata in PDF and flowing HTML; it is not flattened into a numbered
+list or a plain table. *(Updated 2026-08-22.)*
 
 **The header and footer band carries its Markdown**, the same as on screen and in
 the HTML export: `**VERTROUWELIJK**` prints bold, not with the asterisks around
@@ -4721,8 +4723,10 @@ whoever needs the diagram at least sees what should be there. That happens when 
 chart's numbers live in an external `data/*.json` that did not travel, when a
 diagram or formula fails to render, and always on the **web build**, which has no
 hidden renderer for them. A formula on its own lines (`$$…$$`) is drawn as a
-block; a formula inside a sentence (`$…$`) stays in that sentence, exactly as you
-wrote it.
+block; a formula inside a sentence (`$…$`) is drawn as inline vector art and
+flows with the surrounding words. If that inline drawing fails, its `$…$` source
+stays readable in the sentence instead of becoming an empty gap. *(Updated
+2026-08-22.)*
 
 **What it does not carry.** **Footnotes go at the back**, not at the foot of the
 sheet: which note lands on which page only becomes clear after the layout, and by

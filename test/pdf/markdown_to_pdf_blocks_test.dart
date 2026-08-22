@@ -234,6 +234,43 @@ void main() {
       });
     });
 
+    group('inline-wiskunde (#1716)', () {
+      test('een formule blijft een eigen span tussen de tekst', () {
+        final paragraph =
+            markdownToPdfBlocks(
+                  r'Een kat spint rond $f \approx 25\,Hz$ in rust.',
+                ).single
+                as PdfParagraphBlock;
+        final math = paragraph.spans.where((span) => span.math).single;
+        expect(math.text, r'f \approx 25\,Hz');
+        expect(paragraph.spans.first.text, 'Een kat spint rond ');
+        expect(paragraph.spans.last.text, ' in rust.');
+      });
+
+      test('de gemelde formule zonder TeX-commando wordt ook herkend', () {
+        final spans =
+            (markdownToPdfBlocks(
+                      r'De massa-energierelatie is $E = mc^2$.',
+                    ).single
+                    as PdfParagraphBlock)
+                .spans;
+        expect(spans.where((span) => span.math).single.text, 'E = mc^2');
+      });
+
+      test('valuta, escapes, code en onafgesloten dollars blijven tekst', () {
+        for (final source in [
+          r'Van $5 tot $10.',
+          r'Een ontsnapte \$ en \alpha.',
+          r'Code: `$f \approx 25$`.',
+          r'Een losse $ met \alpha.',
+        ]) {
+          final spans =
+              (markdownToPdfBlocks(source).single as PdfParagraphBlock).spans;
+          expect(spans.where((span) => span.math), isEmpty, reason: source);
+        }
+      });
+    });
+
     test('de inhoudsopgave-marker wordt een eigen blok', () {
       final blocks = markdownToPdfBlocks('# Titel\n\n<!-- toc -->\n\nTekst.\n');
       expect(blocks[1], isA<PdfTocBlock>());
@@ -281,19 +318,20 @@ void main() {
       );
     });
 
-    test('een tijdlijn wordt een genummerde lijst, geen tabel (#1680)', () {
+    test('een tijdlijn houdt zijn visuele semantiek voor de PDF (#1712)', () {
       final blocks = markdownToPdfBlocks(
         '<!-- timeline -->\n'
         '| Tijd | Gebeurtenis |\n'
         '| --- | --- |\n'
         '| 13:41 | Bevestigd |\n',
       );
-      // Vroeger werd de marker gestript en de tabel als gewone tabel getekend.
-      // Nu is het een genummerde lijst met vetgedrukte tijdaanduiding.
       expect(blocks.whereType<PdfTableBlock>(), isEmpty);
-      final list = blocks.whereType<PdfListBlock>().single;
-      expect(list.ordered, isTrue);
-      expect(list.items, hasLength(1));
+      expect(blocks.whereType<PdfListBlock>(), isEmpty);
+      final timeline = blocks.whereType<PdfTimelineBlock>().single;
+      expect(timeline.headers, ['Tijd', 'Gebeurtenis']);
+      expect(timeline.events, hasLength(1));
+      expect(timeline.events.single.marker.single.text, '13:41');
+      expect(timeline.events.single.event.single.text, 'Bevestigd');
       // Het HTML-commentaar mag niet als alinea in de PDF landen.
       for (final block in blocks.whereType<PdfParagraphBlock>()) {
         expect(
@@ -326,7 +364,7 @@ void main() {
       expect(spans.map((s) => s.text).join(), contains('het schema'));
     });
 
-    test('tijdlijn wordt een genummerde lijst, geen tabel (#1680)', () {
+    test('tijdlijn bewaart gebeurtenissen en kolomkoppen (#1712)', () {
       const source =
           '<!-- timeline -->\n'
           '| Tijd | Gebeurtenis |\n'
@@ -334,18 +372,13 @@ void main() {
           '| 09:00 | Ontbijt |\n'
           '| 10:00 | Werken |\n';
       final blocks = markdownToPdfBlocks(source);
-      // Geen tabel-blok meer.
       expect(blocks.whereType<PdfTableBlock>(), isEmpty);
-      // Wel een genummerde lijst met twee punten.
-      final list = blocks.whereType<PdfListBlock>().single;
-      expect(list.ordered, isTrue);
-      expect(list.items, hasLength(2));
-      // Het eerste punt begint met de vetgedrukte tijdaanduiding.
-      final firstSpans =
-          (list.items.first.blocks.single as PdfParagraphBlock).spans;
-      expect(firstSpans.first.text, contains('09:00'));
-      expect(firstSpans.first.bold, isTrue);
-      expect(firstSpans.any((s) => s.text.contains('Ontbijt')), isTrue);
+      expect(blocks.whereType<PdfListBlock>(), isEmpty);
+      final timeline = blocks.whereType<PdfTimelineBlock>().single;
+      expect(timeline.headers, ['Tijd', 'Gebeurtenis']);
+      expect(timeline.events, hasLength(2));
+      expect(timeline.events.first.marker.single.text, '09:00');
+      expect(timeline.events.first.event.single.text, 'Ontbijt');
     });
 
     test('tijdlijn met metadata toont de derde kolom (#1680)', () {
@@ -355,12 +388,9 @@ void main() {
           '| --- | --- | --- |\n'
           '| 09:00 | Ontbijt | Logboek |\n';
       final blocks = markdownToPdfBlocks(source);
-      final list = blocks.whereType<PdfListBlock>().single;
-      final spans =
-          (list.items.single.blocks.single as PdfParagraphBlock).spans;
-      // De metadata-koplabel en -waarde staan in de tekst.
-      expect(spans.any((s) => s.text.contains('Bron')), isTrue);
-      expect(spans.any((s) => s.text.contains('Logboek')), isTrue);
+      final timeline = blocks.whereType<PdfTimelineBlock>().single;
+      expect(timeline.headers, ['Tijd', 'Gebeurtenis', 'Bron']);
+      expect(timeline.events.single.metadata!.single.text, 'Logboek');
     });
 
     test('een gewone tabel blijft een tabel (geen tijdlijn)', () {
