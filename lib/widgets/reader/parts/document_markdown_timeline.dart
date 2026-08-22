@@ -31,12 +31,27 @@ class _TimelineEventView extends StatelessWidget {
               width: railWidth,
               child: Stack(
                 alignment: Alignment.topRight,
+                clipBehavior: Clip.none,
                 children: [
+                  // De verticale rail: op het eerste blok begint hij onder de
+                  // bovenmarge, op het laatste blok stopt hij aan de onderkant
+                  // van het bolletje zodat de lijn niet doorloopt in het niets.
                   Positioned(
                     right: 18,
                     top: event.timelineFirst ? 23 : 0,
-                    bottom: event.timelineLast ? 0 : 0,
+                    bottom: event.timelineLast ? null : 0,
+                    height: event.timelineLast
+                        ? 33 - (event.timelineFirst ? 23 : 0)
+                        : null,
                     child: Container(width: 2, color: t.border),
+                  ),
+                  // Horizontale verbinding tussen bolletje en kaart, zodat de
+                  // link visueel hard is in plaats van alleen bij benadering.
+                  Positioned(
+                    right: -12,
+                    top: 24,
+                    width: 23,
+                    child: Container(height: 2, color: t.border),
                   ),
                   Positioned(
                     right: 11,
@@ -58,6 +73,15 @@ class _TimelineEventView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Eindmarkering: een horizontale dwarsstreep onder het laatste
+                  // bolletje (┷) die aangeeft dat de tijdlijn klaar is.
+                  if (event.timelineLast)
+                    Positioned(
+                      right: 13,
+                      top: 33,
+                      width: 12,
+                      child: Container(height: 2, color: t.border),
+                    ),
                   Positioned(
                     left: 0,
                     right: 38,
