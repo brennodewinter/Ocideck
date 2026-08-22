@@ -1793,6 +1793,15 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een documenttijdlijn blijft in PDF en doorlopende HTML dezelfde tijdlijn
+  die de gebruiker op het scherm ziet (#1712).** De PDF-tussenvorm droeg de
+  gebeurtenissen voorheen als een gewone genummerde lijst; een eigen
+  `PdfTimelineBlock` houdt nu de drie kolommen uit elkaar en tekent tijdlabel,
+  rail, bol, connector, eindmarkering, kaart en metadata. De HTML-projectie had
+  al een rail en kaarten, maar draagt nu ook beide zichtbare kolomkoppen en de
+  later aan het scherm toegevoegde connector en eindmarkering. Lange tijdlijnen
+  blijven over meerdere bladzijden lopen en hun tekstlaag blijft doorzoekbaar.
+
 - **De Linux-poort viel vijf keer om op één of twee regels — de oorzaak was
   niet de poort maar de manier waarop we plafonds verhogen.** Tussen 21-08-2026
   22:38 en 23:51 liep `gate-linux` vijf keer rood op `main`, telkens op

@@ -61,6 +61,15 @@ void main() {
         contains('ocideck-timeline-marker" aria-hidden="true"></div>\n\n|'),
       );
       expect(html, contains("list.className='ocideck-timeline'"));
+      expect(html, contains("timeLabel.className='ocideck-timeline-label'"));
+      expect(html, contains("eventLabel.className='ocideck-timeline-label'"));
+      expect(html, contains('ocideck-timeline-card::before'));
+      expect(
+        html,
+        contains(
+          'ocideck-timeline li:last-child .ocideck-timeline-time::after',
+        ),
+      );
       expect(html, contains('break-inside:avoid'));
       expect(html, contains('13:41'));
     },

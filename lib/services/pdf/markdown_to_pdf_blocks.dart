@@ -204,10 +204,9 @@ final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
 /// later vervangen — hetzelfde patroon als `_protectDisplayMath` hierboven en
 /// `_protectDocumentTimelines` in de LaTeX-converter.
 ///
-/// Vóór deze functie stripte de PDF-code alleen de marker en liet de tabel als
-/// gewone tabel tekenen (#1680). Nu wordt de tijdlijn een genummerde lijst met
-/// vetgedrukte tijdaanduiding, dichter bij de semantiek die het scherm en de
-/// HTML-export wel geven.
+/// Het eigen blok houdt de rail, kolomkoppen, gebeurtenissen en metadata uit
+/// elkaar. Daardoor hoeft de renderer die betekenis niet uit een gewone lijst
+/// terug te raden en kan hij dezelfde visuele taal spreken als het scherm.
 ({String source, List<PdfBlock> blocks}) _protectTimelines(String source) {
   final lines = source.replaceAll('\r\n', '\n').split('\n');
   final output = <String>[];
@@ -231,21 +230,15 @@ final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
       output.add(lines[index++]);
       continue;
     }
-    final items = <PdfListItem>[
+    final events = <PdfTimelineEvent>[
       for (final event in timeline.events)
-        PdfListItem([
-          PdfParagraphBlock([
-            PdfSpan('${event.marker}  ', bold: true),
-            ..._inlineOf(event.event),
-            if ((event.metadata ?? '').isNotEmpty) ...[
-              PdfSpan('  '),
-              PdfSpan('${timeline.headers[2]}: ', bold: true),
-              ..._inlineOf(event.metadata!),
-            ],
-          ]),
-        ]),
+        PdfTimelineEvent(
+          _inlineOf(event.marker),
+          _inlineOf(event.event),
+          metadata: event.metadata == null ? null : _inlineOf(event.metadata!),
+        ),
     ];
-    blocks.add(PdfListBlock(items, ordered: true));
+    blocks.add(PdfTimelineBlock(timeline.headers, events));
     output.add(_timelineSentinel(blocks.length - 1));
     index = end;
   }

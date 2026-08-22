@@ -4698,7 +4698,9 @@ including the page number and the classification marking; your `---`
 [page breaks](#inserting-a-page-break) as real new sheets, and a new sheet per
 chapter when *New chapter on a new page* is on; the table of contents with page
 numbers and clickable entries; links you can click; images embedded in the file
-itself.
+itself. A marked document timeline keeps its time rail, column labels, event
+cards and metadata in PDF and flowing HTML; it is not flattened into a numbered
+list or a plain table. *(Updated 2026-08-22.)*
 
 **The header and footer band carries its Markdown**, the same as on screen and in
 the HTML export: `**VERTROUWELIJK**` prints bold, not with the asterisks around

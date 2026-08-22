@@ -150,6 +150,29 @@ class PdfListBlock extends PdfBlock {
       'PdfListBlock(${ordered ? 'ol' : 'ul'}, ${items.length} punten)';
 }
 
+/// Een gemarkeerde documenttijdlijn, los van de tabel waaruit hij is afgeleid.
+///
+/// Een eigen blok voorkomt dat een export de visuele betekenis opnieuw moet
+/// raden uit een lijst of tabel. De bron zelf blijft ongewijzigd Markdown.
+class PdfTimelineBlock extends PdfBlock {
+  const PdfTimelineBlock(this.headers, this.events);
+
+  final List<String> headers;
+  final List<PdfTimelineEvent> events;
+
+  @override
+  String toString() => 'PdfTimelineBlock(${events.length} gebeurtenissen)';
+}
+
+/// Eén rij uit een [PdfTimelineBlock], met de inline-opmaak per cel behouden.
+class PdfTimelineEvent {
+  const PdfTimelineEvent(this.marker, this.event, {this.metadata});
+
+  final List<PdfSpan> marker;
+  final List<PdfSpan> event;
+  final List<PdfSpan>? metadata;
+}
+
 /// Een citaat (`>`), met alles wat erin staat.
 class PdfQuoteBlock extends PdfBlock {
   const PdfQuoteBlock(this.blocks);

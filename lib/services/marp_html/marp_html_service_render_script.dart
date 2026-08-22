@@ -105,8 +105,11 @@ document.querySelectorAll('.document .ocideck-timeline-marker').forEach(function
   table.querySelectorAll('tbody tr').forEach(function(row){
     var cells=row.querySelectorAll('td');if(cells.length<2)return;
     var item=document.createElement('li');
-    var time=document.createElement('div');time.className='ocideck-timeline-time';time.innerHTML=cells[0].innerHTML;
+    var time=document.createElement('div');time.className='ocideck-timeline-time';
+    var timeLabel=document.createElement('div');timeLabel.className='ocideck-timeline-label';timeLabel.textContent=headers[0].textContent||'';time.appendChild(timeLabel);
+    var timeValue=document.createElement('div');timeValue.innerHTML=cells[0].innerHTML;time.appendChild(timeValue);
     var card=document.createElement('article');card.className='ocideck-timeline-card';
+    var eventLabel=document.createElement('div');eventLabel.className='ocideck-timeline-label';eventLabel.textContent=headers[1].textContent||'';card.appendChild(eventLabel);
     var event=document.createElement('div');event.className='ocideck-timeline-event';event.innerHTML=cells[1].innerHTML;card.appendChild(event);
     if(cells.length>2&&cells[2].textContent.trim()){
       var meta=document.createElement('div');meta.className='ocideck-timeline-meta';

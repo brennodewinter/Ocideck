@@ -83,8 +83,11 @@ html,body{margin:0;padding:0}
 .document .ocideck-timeline li::before{content:"";position:absolute;left:6.55rem;top:1.05rem;bottom:-.2rem;width:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
 .document .ocideck-timeline li:last-child::before{bottom:calc(100% - 1.1rem)}
 .document .ocideck-timeline li::after{content:"";position:absolute;left:6.22rem;top:.75rem;width:.7rem;height:.7rem;border-radius:50%;background:#fff;border:3px solid var(--ocideck-accent,#2563eb);box-shadow:0 0 0 4px color-mix(in srgb,var(--ocideck-accent,#2563eb) 12%,transparent)}
-.document .ocideck-timeline-time{text-align:right;padding-right:1rem;font-size:.78em;font-weight:700;color:var(--ocideck-accent,#2563eb);font-variant-numeric:tabular-nums}
-.document .ocideck-timeline-card{border:1px solid rgba(100,116,139,.25);border-radius:.7rem;padding:.8rem 1rem;background:rgba(148,163,184,.045);box-shadow:0 4px 14px rgba(15,23,42,.05)}
+.document .ocideck-timeline-time{position:relative;text-align:right;padding-right:1rem;font-size:.78em;font-weight:700;color:var(--ocideck-accent,#2563eb);font-variant-numeric:tabular-nums}
+.document .ocideck-timeline li:last-child .ocideck-timeline-time::after{content:"";position:absolute;right:.3rem;top:1.65rem;width:.75rem;height:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
+.document .ocideck-timeline-label{font-size:.74em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ocideck-accent,#2563eb)}
+.document .ocideck-timeline-card{position:relative;border:1px solid rgba(100,116,139,.25);border-radius:.7rem;padding:.8rem 1rem;background:rgba(148,163,184,.045);box-shadow:0 4px 14px rgba(15,23,42,.05)}
+.document .ocideck-timeline-card::before{content:"";position:absolute;left:-1.8rem;top:1.05rem;width:1.8rem;height:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
 .document .ocideck-timeline-meta{display:inline-block;margin-top:.55rem;padding:.18rem .55rem;border:1px solid rgba(100,116,139,.22);border-radius:999px;font-size:.72em;background:rgba(148,163,184,.09)}
 .document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
 /* Voetnoten: kleiner dan de tekst en met een korte lijn erboven — een noot is

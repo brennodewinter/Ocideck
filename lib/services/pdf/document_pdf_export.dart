@@ -423,6 +423,17 @@ String _textOf(List<PdfBlock> blocks) {
               }
             }
           }
+        case PdfTimelineBlock(:final headers, :final events):
+          buffer.writeAll(headers);
+          for (final event in events) {
+            for (final span in [
+              ...event.marker,
+              ...event.event,
+              ...?event.metadata,
+            ]) {
+              buffer.write(span.text);
+            }
+          }
         case PdfQuoteBlock(:final blocks):
           walk(blocks);
         case PdfListBlock(:final items):

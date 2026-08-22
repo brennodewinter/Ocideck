@@ -4749,7 +4749,10 @@ stijlprofiel, met het bladzijdenummer en de classificatie-aanduiding; je
 [pagina-einden](#een-pagina-einde-invoegen) `---` als echte nieuwe vellen, en een
 nieuw vel per hoofdstuk wanneer *Nieuw hoofdstuk op een nieuwe pagina* aanstaat;
 de inhoudsopgave met bladzijdenummers en klikbare regels; klikbare links;
-afbeeldingen ingesloten in het bestand zelf.
+afbeeldingen ingesloten in het bestand zelf. Een gemarkeerde documenttijdlijn
+houdt in PDF en doorlopende HTML zijn tijdrail, kolomlabels,
+gebeurteniskaarten en metadata; hij wordt niet afgevlakt tot een genummerde
+lijst of gewone tabel. *(Bijgewerkt 2026-08-22.)*
 
 **Formules, diagrammen en grafieken worden getekend** — als vectortekening en
 niet als plaatje, dus scherp op elke zoomstand, en de tekst erin (de titel van

@@ -25,6 +25,7 @@ import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_style.dart';
+import 'document_pdf_timeline.dart';
 
 /// Eén kop zoals de inhoudsopgave en de bladwijzerboom hem kennen.
 class PdfHeadingEntry {
@@ -262,6 +263,7 @@ class DocumentPdfWidgets {
   pw.Widget _widget(PdfBlock block, {required bool tight}) => switch (block) {
     PdfHeadingBlock() => _heading(block),
     PdfParagraphBlock() => _paragraph(block),
+    PdfTimelineBlock() => _timeline(block),
     PdfListBlock() => _list(block),
     PdfQuoteBlock() => _quote(block),
     PdfCodeBlock() => _code(block.code),
@@ -326,6 +328,19 @@ class DocumentPdfWidgets {
     textAlign: pw.TextAlign.left,
     overflow: pw.TextOverflow.span,
     text: pw.TextSpan(style: _baseStyle, children: _spans(block.spans)),
+  );
+
+  pw.Widget _timeline(PdfTimelineBlock block) => buildDocumentPdfTimeline(
+    block,
+    style: style,
+    baseStyle: _baseStyle,
+    text: (spans, textStyle) => pw.RichText(
+      overflow: pw.TextOverflow.span,
+      text: pw.TextSpan(
+        style: textStyle,
+        children: _spans(spans, size: textStyle.fontSize),
+      ),
+    ),
   );
 
   /// Een citaat: een vlak in een tint van het accent, met een streep langs de
