@@ -223,5 +223,31 @@ void main() {
       expect(deck.slides.single.customMarkdown, marked);
       expect(DocumentDeckBridge.deckToDocumentMarkdown(deck), '$marked\n');
     });
+
+    // #1685: een chart met een regel die ``` bevat moet een langere fence
+    // krijgen, anders sluit die regel het blok voortijdig.
+    test('chart met backtick-run krijgt langere fence (#1685)', () {
+      const chartContent = 'data:\n```\ninner block\n```';
+      // Gebruik een 4-backtick fence als input, anders documentToDeck de
+      // inner ``` als sluiting ziet.
+      final deck = DocumentDeckBridge.documentToDeck(
+        '````chart\n$chartContent\n````\n',
+      );
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+      // De fence moet langer zijn dan 3 backticks (de langste run in de
+      // inhoud is 3, dus de fence moet minstens 4 zijn).
+      expect(out.contains('````chart'), isTrue);
+      // De sluit-fence moet ook 4 backticks zijn.
+      expect(out.contains('\n````\n'), isTrue);
+    });
+
+    test('chart zonder backticks behoudt standaard 3-backtick fence', () {
+      const chartContent = 'type: bar\ndata: [1, 2, 3]';
+      final deck = DocumentDeckBridge.documentToDeck(
+        '```chart\n$chartContent\n```\n',
+      );
+      final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+      expect(out.contains('```chart\n'), isTrue);
+    });
   });
 }

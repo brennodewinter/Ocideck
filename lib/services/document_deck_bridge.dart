@@ -387,7 +387,7 @@ String _serializeChartFence(String content) {
   final maxRun = _maxBacktickRun(content);
   final fenceLen = math.max(3, maxRun + 1);
   final fence = '`' * fenceLen;
-  return '$fence chart\n$content\n$fence';
+  return '$fence' + 'chart\n$content\n$fence';
 }
 
 /// De langste reeks achterelkaar staande backticks in [text].

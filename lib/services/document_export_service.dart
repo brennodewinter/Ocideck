@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 
 import '../models/privacy_disposition.dart';
@@ -302,6 +303,13 @@ Future<bool> _sameFile(String? sourcePath, String outputPath) async {
 /// Herbaset relatieve afbeeldingspaden in [markdown] van de bronmap naar de
 /// uitvoermap, zodat een .md- of .tex-export buiten de projectmap de beelden
 /// blijft vinden (#1673). Absolute paden, URL's en data-URI's blijven staan.
+@visibleForTesting
+String rebaseImagePathsForTesting(
+  String markdown,
+  String? sourcePath,
+  String outputPath,
+) => _rebaseImagePaths(markdown, sourcePath, outputPath);
+
 String _rebaseImagePaths(
   String markdown,
   String? sourcePath,

@@ -153,5 +153,50 @@ void main() {
       );
       expect(result, current);
     });
+
+    // #1648: CRLF-bewaring — de originele bron kan \r\n regeleinden hebben,
+    // terwijl Quill naar \n normaliseert. De uitvoer moet \r\n behouden.
+    test('CRLF-origineel behoudt \\r\\n in uitvoer (#1648)', () {
+      const original = '# Titel\r\n\r\nEen alinea.\r\n';
+      // Quill normaliseert naar \n.
+      const baseline = '# Titel\n\nEen alinea.\n';
+      const current = '# Nieuwe Titel\n\nEen alinea.\n';
+      final result = patchVisualEdits(
+        original: original,
+        baseline: baseline,
+        current: current,
+      );
+      expect(result, '# Nieuwe Titel\r\n\r\nEen alinea.\r\n');
+    });
+
+    test('LF-origineel blijft LF (geen CRLF-introductie)', () {
+      const original = '# Titel\n\nEen alinea.\n';
+      const baseline = '# Titel\n\nEen alinea.\n';
+      const current = '# Nieuw\n\nEen alinea.\n';
+      final result = patchVisualEdits(
+        original: original,
+        baseline: baseline,
+        current: current,
+      );
+      expect(result, '# Nieuw\n\nEen alinea.\n');
+      expect(result.contains('\r'), isFalse);
+    });
+
+    // #1651: lineaire schaling via prefix/suffix-trimming. Een kleine
+    // bewerking in een lang document moet niet de hele LCS-matrix opbouwen.
+    test('kleine bewerking in lang document → alleen gewijzigde regel', () {
+      final big = List.generate(5000, (i) => 'Regel $i').join('\n');
+      final baseline = big;
+      // Wijzig één regel in het midden.
+      final currLines = big.split('\n');
+      currLines[2500] = 'Gewijzigd 2500';
+      final current = currLines.join('\n');
+      final result = patchVisualEdits(
+        original: big,
+        baseline: baseline,
+        current: current,
+      );
+      expect(result, current);
+    });
   });
 }

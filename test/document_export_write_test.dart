@@ -648,4 +648,62 @@ void main() {
       expect(await source.readAsString(), 'ORIGINELE BRON');
     });
   });
+
+  group('rebaseImagePathsForTesting (#1673)', () {
+    test('relatief pad wordt gerebased naar uitvoermap', () {
+      const md = '![Alt](images/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        '/project/bron.md',
+        '/output/rapport.md',
+      );
+      expect(result, contains('![Alt](../project/images/foto.png)'));
+    });
+
+    test('zelfde map → geen rebasing', () {
+      const md = '![Alt](images/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        '/project/bron.md',
+        '/project/rapport.md',
+      );
+      expect(result, md);
+    });
+
+    test('URL blijft ongewijzigd', () {
+      const md = '![Alt](https://example.com/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        '/project/bron.md',
+        '/output/rapport.md',
+      );
+      expect(result, md);
+    });
+
+    test('data-URI blijft ongewijzigd', () {
+      const md = '![Alt](data:image/png;base64,abc123)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        '/project/bron.md',
+        '/output/rapport.md',
+      );
+      expect(result, md);
+    });
+
+    test('absoluut pad blijft ongewijzigd', () {
+      const md = '![Alt](/abs/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        '/project/bron.md',
+        '/output/rapport.md',
+      );
+      expect(result, md);
+    });
+
+    test('sourcePath null → geen rebasing', () {
+      const md = '![Alt](images/foto.png)\n';
+      final result = rebaseImagePathsForTesting(md, null, '/output/rapport.md');
+      expect(result, md);
+    });
+  });
 }
