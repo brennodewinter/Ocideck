@@ -35,8 +35,16 @@ class TimelineTableSyntax extends BlockSyntax {
       value.write('\n${parser.current.content}');
       parser.advance();
     }
-    return Element.empty(EmbeddableTimelineTable.timelineType)
-      ..attributes['data'] = value.toString();
+    // In een alinea gewikkeld, om dezelfde reden als de inhoudsopgave-marker
+    // en de voetnootdefinitie: `MarkdownToDelta` sluit een blok met een eigen
+    // regel af voor `hr`, voor de tabel-embed, en voor een alinea die alleen
+    // embeds bevat. Een kale embed erft anders de blokopmaak van de volgende
+    // regel — een tijdlijn vóór een `##`-kop werd dan zelf een kop, en
+    // `## <!-- timeline -->` is geen geldige tijdlijn meer (#1709).
+    return Element('p', [
+      Element.empty(EmbeddableTimelineTable.timelineType)
+        ..attributes['data'] = value.toString(),
+    ]);
   }
 }
 
