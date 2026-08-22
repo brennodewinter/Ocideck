@@ -117,6 +117,13 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       rows: decoded.rows,
       alignments: decoded.alignments,
       onChanged: _writeBack,
+      // Quill's _TransparentTapGestureRecognizer accepteert een tap altijd,
+      // ook als de cel's TextField de arena wint. Daardoor firet onSingleTapUp
+      // en roept requestKeyboard() aan, wat Quill's TextInputConnection
+      // heractiveert en de cel's input steelt (#1718). skipRequestKeyboard
+      // laat die ene aanroep overslaan — de cel houdt zijn eigen verbinding.
+      onCellFocused: () =>
+          widget.embedContext.controller.skipRequestKeyboard = true,
     );
   }
 

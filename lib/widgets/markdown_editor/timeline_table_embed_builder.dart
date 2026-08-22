@@ -95,6 +95,10 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
       rows: decoded.rows,
       alignments: decoded.alignments,
       onChanged: _writeBack,
+      // Zie table_embed_builder.dart: Quill's _TransparentTapGestureRecognizer
+      // kaapt de TextInputConnection terug na een tap op de cel (#1718).
+      onCellFocused: () =>
+          widget.embedContext.controller.skipRequestKeyboard = true,
     );
   }
 

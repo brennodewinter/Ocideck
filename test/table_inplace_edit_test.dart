@@ -370,4 +370,44 @@ void main() {
       expect(editor.rows[1][0], contains('losse tekst'));
     });
   });
+
+  group('onCellFocused', () {
+    testWidgets('wordt aangeroepen zodra een cel focus krijgt', (tester) async {
+      var focused = 0;
+      final cellEditor = TableEditController(
+        rows: const [
+          ['Naam', 'Rol'],
+          ['Aap', 'Tester'],
+        ],
+        alignments: const [TableAlign.left, TableAlign.left],
+        onChanged: (_, _) {},
+        onCellFocused: () => focused++,
+      );
+      addTearDown(() => cellEditor.dispose());
+
+      await tester.binding.setSurfaceSize(const Size(900, 600));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 900,
+              child: DocumentMarkdownView(
+                '| Naam | Rol |\n|------|-----|\n| Aap | Tester |',
+                tableEditController: cellEditor,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.byType(TextField).at(2));
+      await tester.pump();
+
+      expect(
+        focused,
+        1,
+        reason: 'onCellFocused hoort één keer te vuren bij focus',
+      );
+    });
+  });
 }

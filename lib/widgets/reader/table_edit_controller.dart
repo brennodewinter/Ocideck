@@ -24,6 +24,7 @@ class TableEditController extends ChangeNotifier {
     required List<List<String>> rows,
     required List<TableAlign> alignments,
     required this.onChanged,
+    this.onCellFocused,
   }) : _alignments = List<TableAlign>.from(alignments) {
     _adopt(rows);
   }
@@ -32,6 +33,12 @@ class TableEditController extends ChangeNotifier {
   /// met het volledige raster. De aanroeper serialiseert dat terug naar GFM.
   final void Function(List<List<String>> rows, List<TableAlign> alignments)
   onChanged;
+
+  /// Aangeroepen zodra een cel focus krijgt. De eigenaar (de embed-bouwer)
+  /// gebruikt dit om Quill's `requestKeyboard` eenmalig over te slaan, zodat de
+  /// cel zijn eigen `TextInputConnection` houdt in plaats van dat Quill's
+  /// `_TransparentTapGestureRecognizer` die na de tap weer terugkaapt (#1718).
+  final VoidCallback? onCellFocused;
 
   late List<List<EditorTextController>> _cells;
   late List<List<FocusNode>> _nodes;
@@ -50,6 +57,7 @@ class TableEditController extends ChangeNotifier {
   void setActiveCell(int r, int c, {required bool focused}) {
     if (focused) {
       _activeCell = (row: r, col: c);
+      onCellFocused?.call();
     } else if (_activeCell == (row: r, col: c)) {
       _activeCell = null;
     } else {
