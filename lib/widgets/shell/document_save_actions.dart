@@ -82,6 +82,11 @@ Future<bool> saveDocumentWithDestination(
         filePath: path,
         savedFileHash: DocumentIntegrity.hashMarkdown(documentToSave.source),
       );
+      // Werk de recente-bestanden-lijst bij, net als bij openen en
+      // Opslaan-als — een in-place save liet de lijst ongemoeid (#1676).
+      await ref
+          .read(settingsProvider.notifier)
+          .addRecentFile(path, kind: MarkdownKind.document);
       return true;
     }
     // Writing to the existing path failed (read-only, moved, no permission):
