@@ -90,11 +90,14 @@ class _DuplicateCleanupDialogState
   }
 
   /// Paden die nu in een tabblad openstaan: die kopieën blijven met rust.
+  ///
+  /// Gebruikt [TabInfo.openFilePath] (soort-agnostisch) in plaats van
+  /// `deckNotifier` — een documenttabblad ertussen gooide anders een
+  /// `StateError` (#1661).
   Set<String> _openPaths() {
     return {
       for (final tab in ref.read(tabsProvider).tabs)
-        if (tab.deckNotifier.currentState.filePath != null)
-          tab.deckNotifier.currentState.filePath!,
+        if (tab.openFilePath case final path?) path,
     };
   }
 
