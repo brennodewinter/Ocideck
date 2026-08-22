@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/mermaid_config.dart';
@@ -320,6 +321,19 @@ void main() {
       controller.answer = (_) => svgVoor('vijf');
       final daarna = await MermaidRenderService.instance.render(verseBron());
       expect(daarna, contains('id="vijf"'));
+    },
+  );
+
+  test(
+    'een foutlog neemt geen documentinhoud uit het WebView-antwoord over',
+    () {
+      // MathJax en Mermaid verwerken gebruikersinhoud. Hun foutmelding kan die
+      // bron letterlijk herhalen en mag daarom nooit in het lokale log belanden.
+      final source = File(
+        'lib/services/mermaid_render_service.dart',
+      ).readAsStringSync();
+      expect(source, isNot(contains(r"error=${data['error']}")));
+      expect(source, isNot(contains(r'WebView render error: $error')));
     },
   );
 
