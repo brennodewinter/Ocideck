@@ -82,4 +82,30 @@ void main() {
     n.clearError();
     expect(n.currentState.error, isNull);
   });
+
+  test('undo naar de opgeslagen bron maakt de tab niet vuil (#1672)', () {
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('a'), filePath: '/a.md');
+    n.edit('ab');
+    expect(n.currentState.isDirty, isTrue);
+    n.undo();
+    // Bron is weer 'a' == savedSource → niet vuil.
+    expect(n.currentState.document!.source, 'a');
+    expect(n.currentState.isDirty, isFalse);
+  });
+
+  test('undo herstelt visualEdited (#1672)', () {
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('a'));
+    // Eerst een bron-edit (visualEdited: false), dan een visuele edit.
+    n.edit('ab', coalesceKey: null);
+    n.edit('abc', coalesceKey: null, visualEdit: true);
+    expect(n.currentState.visualEdited, isTrue);
+    // Undo de visuele edit → visualEdited weer false (de bron-edit was niet
+    // visueel).
+    n.undo();
+    expect(n.currentState.visualEdited, isFalse);
+    // Redo de visuele edit → visualEdited weer true.
+    n.redo();
+    expect(n.currentState.visualEdited, isTrue);
+  });
 }

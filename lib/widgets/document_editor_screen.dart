@@ -434,9 +434,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ) {
       if (body != _controller.text) {
         _applyingExternal = true;
+        // Behoud de huidige cursorpositie, geklemd op de nieuwe lengte —
+        // spring niet naar het einde bij undo/redo (#1672).
+        final prevOffset = _controller.selection.baseOffset.clamp(
+          0,
+          body.length,
+        );
         _controller.value = TextEditingValue(
           text: body,
-          selection: TextSelection.collapsed(offset: body.length),
+          selection: TextSelection.collapsed(offset: prevOffset),
         );
         _applyingExternal = false;
       }
