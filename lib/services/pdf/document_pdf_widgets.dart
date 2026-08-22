@@ -24,6 +24,7 @@ import '../../models/settings.dart' show TableBorderStyle;
 import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
+import 'document_pdf_inline_math.dart';
 import 'document_pdf_style.dart';
 import 'document_pdf_timeline.dart';
 
@@ -274,8 +275,6 @@ class DocumentPdfWidgets {
     PdfTocBlock() => _toc(),
   };
 
-  // ── Koppen ───────────────────────────────────────────────────────────────
-
   pw.Widget _heading(PdfHeadingBlock block) {
     final entry = _headingCursor < headings.length
         ? headings[_headingCursor]
@@ -321,8 +320,6 @@ class DocumentPdfWidgets {
       },
     );
   }
-
-  // ── Alinea's en citaten ──────────────────────────────────────────────────
 
   pw.Widget _paragraph(PdfParagraphBlock block) => pw.RichText(
     textAlign: pw.TextAlign.left,
@@ -766,6 +763,15 @@ class DocumentPdfWidgets {
   ];
 
   pw.InlineSpan _span(PdfSpan span, double size) {
+    if (span.math) {
+      return buildDocumentPdfInlineMath(
+        span,
+        fontSize: size,
+        maxWidth: maxImageWidth,
+        graphics: graphics,
+        fallback: (source) => _span(PdfSpan(source), size),
+      );
+    }
     final href = span.href;
     return pw.TextSpan(
       text: span.text,

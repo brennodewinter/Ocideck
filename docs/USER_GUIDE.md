@@ -4723,8 +4723,10 @@ whoever needs the diagram at least sees what should be there. That happens when 
 chart's numbers live in an external `data/*.json` that did not travel, when a
 diagram or formula fails to render, and always on the **web build**, which has no
 hidden renderer for them. A formula on its own lines (`$$…$$`) is drawn as a
-block; a formula inside a sentence (`$…$`) stays in that sentence, exactly as you
-wrote it.
+block; a formula inside a sentence (`$…$`) is drawn as inline vector art and
+flows with the surrounding words. If that inline drawing fails, its `$…$` source
+stays readable in the sentence instead of becoming an empty gap. *(Updated
+2026-08-22.)*
 
 **What it does not carry.** **Footnotes go at the back**, not at the foot of the
 sheet: which note lands on which page only becomes clear after the layout, and by

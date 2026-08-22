@@ -1793,6 +1793,14 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Inline-wiskunde wordt in de document-PDF nu in de tekstregel gezet
+  (#1716).** De PDF herkent dezelfde voorzichtige `$…$`-vorm als het scherm,
+  laat valuta, code en losse dollartekens ongemoeid, rendert iedere unieke
+  formule één keer via de bestaande MathJax/SVG-route en plaatst het resultaat
+  als vector in de regel. Ontbreekt de renderer of is zijn SVG onbruikbaar, dan
+  blijft de letterlijke TeX zichtbaar; een formule kan de export dus niet
+  leegmaken of afbreken.
+
 - **Een documenttijdlijn blijft in PDF en doorlopende HTML dezelfde tijdlijn
   die de gebruiker op het scherm ziet (#1712).** De PDF-tussenvorm droeg de
   gebeurtenissen voorheen als een gewone genummerde lijst; een eigen

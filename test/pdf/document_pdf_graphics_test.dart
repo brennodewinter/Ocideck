@@ -219,5 +219,78 @@ void main() {
       expect(text, contains('Formule (bron)'));
       expect(text, contains('E = mc^2'));
     });
+
+    test('een inline-formule wordt tussen de lopende tekst getekend', () async {
+      String? asked;
+      final text = await exportText(
+        r'Voor $E = mc^2$ na.',
+        renderMath: (tex) async {
+          asked = tex;
+          return _svg;
+        },
+      );
+      expect(asked, 'E = mc^2');
+      expect(text, contains('Voor'));
+      expect(text, contains('GETEKEND'));
+      expect(text, contains('na.'));
+    });
+
+    test('dezelfde inline-formule wordt maar één keer gerenderd', () async {
+      var calls = 0;
+      await exportText(
+        r'$f \approx 25$ en nogmaals $f \approx 25$',
+        renderMath: (_) async {
+          calls++;
+          return _svg;
+        },
+      );
+      expect(calls, 1);
+    });
+
+    test('zonder renderer blijft inline-TeX letterlijk leesbaar', () async {
+      final text = await exportText(r'Voor $f \approx 25$ na.');
+      expect(text, contains(r'$f \approx 25$'));
+    });
+
+    test('onleesbare inline-SVG valt terug op de TeX in de zin', () async {
+      final text = await exportText(
+        r'Voor $f \approx 25$ na.',
+        renderMath: (_) async => '<svg><dit is geen xml',
+      );
+      expect(text, contains(r'$f \approx 25$'));
+      expect(text, contains('na.'));
+    });
+
+    test(
+      'een onbekend TeX-commando blijft data en valt veilig terug',
+      () async {
+        var calls = 0;
+        final text = await exportText(
+          r'Voor $\onbekend{waarde}$ na.',
+          renderMath: (tex) async {
+            calls++;
+            expect(tex, r'\onbekend{waarde}');
+            return null;
+          },
+        );
+        expect(calls, 1);
+        expect(text, contains(r'$\onbekend{waarde}$'));
+      },
+    );
+
+    test(
+      'inline-wiskunde in een tijdlijn gebruikt dezelfde renderer',
+      () async {
+        final text = await exportText(
+          '<!-- timeline -->\n'
+          '| Tijd | Gebeurtenis |\n'
+          '| --- | --- |\n'
+          r'| 09:00 | Meting $f \approx 25\,Hz$ |',
+          renderMath: (_) async => _svg,
+        );
+        expect(text, contains('Meting'));
+        expect(text, contains('GETEKEND'));
+      },
+    );
   });
 }

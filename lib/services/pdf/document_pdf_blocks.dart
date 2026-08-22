@@ -31,6 +31,7 @@ class PdfSpan {
     this.code = false,
     this.href,
     this.superscript = false,
+    this.math = false,
   });
 
   final String text;
@@ -47,6 +48,9 @@ class PdfSpan {
   /// Hoger geplaatst en kleiner — het merkteken van een voetnoot.
   final bool superscript;
 
+  /// Kale TeX uit een inline `$…$`; de renderer zet die als beeld in de regel.
+  final bool math;
+
   PdfSpan copyWith({
     String? text,
     bool? bold,
@@ -55,6 +59,7 @@ class PdfSpan {
     bool? code,
     String? href,
     bool? superscript,
+    bool? math,
   }) => PdfSpan(
     text ?? this.text,
     bold: bold ?? this.bold,
@@ -63,6 +68,7 @@ class PdfSpan {
     code: code ?? this.code,
     href: href ?? this.href,
     superscript: superscript ?? this.superscript,
+    math: math ?? this.math,
   );
 
   @override
@@ -73,6 +79,7 @@ class PdfSpan {
       if (strikeThrough) 's',
       if (code) 'c',
       if (superscript) 'sup',
+      if (math) 'math',
       if (href != null) 'href=$href',
     ].join(',');
     return marks.isEmpty ? 'PdfSpan($text)' : 'PdfSpan($text|$marks)';
@@ -87,11 +94,20 @@ class PdfSpan {
       other.strikeThrough == strikeThrough &&
       other.code == code &&
       other.href == href &&
-      other.superscript == superscript;
+      other.superscript == superscript &&
+      other.math == math;
 
   @override
-  int get hashCode =>
-      Object.hash(text, bold, italic, strikeThrough, code, href, superscript);
+  int get hashCode => Object.hash(
+    text,
+    bold,
+    italic,
+    strikeThrough,
+    code,
+    href,
+    superscript,
+    math,
+  );
 }
 
 /// Een blok op de bladzijde. De volgorde van de lijst is de leesvolgorde.

@@ -312,12 +312,34 @@ Future<Map<String, PdfRenderedGraphic>> _resolveGraphics(
   MathSvgResolver? renderMath,
 }) async {
   final wanted = <String, PdfVerbatimKind>{};
+  void wantSpans(Iterable<PdfSpan> spans) {
+    for (final span in spans) {
+      final key = span.text.trim();
+      if (span.math && key.isNotEmpty) wanted[key] = PdfVerbatimKind.math;
+    }
+  }
+
   void walk(List<PdfBlock> list) {
     for (final block in list) {
       switch (block) {
         case PdfVerbatimBlock(:final source, :final kind):
           final key = source.trim();
           if (key.isNotEmpty) wanted[key] = kind;
+        case PdfHeadingBlock(:final spans):
+        case PdfParagraphBlock(:final spans):
+          wantSpans(spans);
+        case PdfTableBlock(:final rows):
+          for (final row in rows) {
+            for (final cell in row) {
+              wantSpans(cell);
+            }
+          }
+        case PdfTimelineBlock(:final events):
+          for (final event in events) {
+            wantSpans(event.marker);
+            wantSpans(event.event);
+            wantSpans(event.metadata ?? const []);
+          }
         case PdfQuoteBlock(:final blocks):
           walk(blocks);
         case PdfListBlock(:final items):

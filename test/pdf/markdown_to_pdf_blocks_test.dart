@@ -234,6 +234,43 @@ void main() {
       });
     });
 
+    group('inline-wiskunde (#1716)', () {
+      test('een formule blijft een eigen span tussen de tekst', () {
+        final paragraph =
+            markdownToPdfBlocks(
+                  r'Een kat spint rond $f \approx 25\,Hz$ in rust.',
+                ).single
+                as PdfParagraphBlock;
+        final math = paragraph.spans.where((span) => span.math).single;
+        expect(math.text, r'f \approx 25\,Hz');
+        expect(paragraph.spans.first.text, 'Een kat spint rond ');
+        expect(paragraph.spans.last.text, ' in rust.');
+      });
+
+      test('de gemelde formule zonder TeX-commando wordt ook herkend', () {
+        final spans =
+            (markdownToPdfBlocks(
+                      r'De massa-energierelatie is $E = mc^2$.',
+                    ).single
+                    as PdfParagraphBlock)
+                .spans;
+        expect(spans.where((span) => span.math).single.text, 'E = mc^2');
+      });
+
+      test('valuta, escapes, code en onafgesloten dollars blijven tekst', () {
+        for (final source in [
+          r'Van $5 tot $10.',
+          r'Een ontsnapte \$ en \alpha.',
+          r'Code: `$f \approx 25$`.',
+          r'Een losse $ met \alpha.',
+        ]) {
+          final spans =
+              (markdownToPdfBlocks(source).single as PdfParagraphBlock).spans;
+          expect(spans.where((span) => span.math), isEmpty, reason: source);
+        }
+      });
+    });
+
     test('de inhoudsopgave-marker wordt een eigen blok', () {
       final blocks = markdownToPdfBlocks('# Titel\n\n<!-- toc -->\n\nTekst.\n');
       expect(blocks[1], isA<PdfTocBlock>());

@@ -4769,7 +4769,9 @@ staan. Dat gebeurt wanneer de cijfers van een grafiek in een los `data/*.json`
 staan dat niet meekwam, wanneer een diagram of formule niet rendert, en altijd in
 de **webversie**, die daar geen verborgen renderer voor heeft. Een formule op
 eigen regels (`$$…$$`) wordt getekend als blok; een formule middenin een zin
-(`$…$`) blijft in die zin staan, precies zoals je hem schreef.
+(`$…$`) wordt als vectortekening in de tekstregel gezet en loopt met de woorden
+mee. Mislukt die inline-tekening, dan blijft de `$…$`-bron leesbaar in de zin in
+plaats van een leeg gat te worden. *(Bijgewerkt 2026-08-22.)*
 
 **Wat er niet in zit.** **Voetnoten staan achterin**, niet onderaan het blad:
 welke noot op welke bladzijde landt blijkt pas ná de opmaak, en dan staat het vel
