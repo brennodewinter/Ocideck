@@ -149,7 +149,17 @@ extension TlpLevelX on TlpLevel {
   }
 
   static TlpLevel fromKey(String raw) {
-    switch (raw.trim().toLowerCase()) {
+    // Herken de officiële TLP 2.0-spelling (TLP:RED, TLP-AMBER) naast de
+    // korte sleutels die de UI schrijft. Strip een `tlp:`- of `tlp-`-prefix
+    // en normaliseer de scheidingstekens rond `+strict`.
+    final normalized = raw
+        .trim()
+        .toLowerCase()
+        .replaceFirst(RegExp(r'^tlp[-:]'), '')
+        .replaceAll(RegExp(r'[-_:\s]*\+[-_:\s]*strict'), '+strict')
+        .replaceAll('-', '');
+    if (normalized.isEmpty) return TlpLevel.none;
+    switch (normalized) {
       case 'clear':
         return TlpLevel.clear;
       case 'green':
@@ -161,8 +171,15 @@ extension TlpLevelX on TlpLevel {
         return TlpLevel.amberStrict;
       case 'red':
         return TlpLevel.red;
-      default:
+      case 'none':
         return TlpLevel.none;
+      // Fail-closed op classificatie: een onbekende waarde is geen
+      // `none` (geen markering), maar een waarde die OciDeck niet kan
+      // plaatsen. De strengste lezing (red) voorkomt dat een typo of een
+      // onbekende spelling de exportblokkade en het label stil omzeilt
+      // (#1663).
+      default:
+        return TlpLevel.red;
     }
   }
 }
