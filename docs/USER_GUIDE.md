@@ -4679,9 +4679,11 @@ your source. The export dialog asks two things:
   Mermaid diagrams and charts rendered in place; **PDF** is a finished sheet with
   a real text layer (see below); **LaTeX (`.tex`)** is a LaTeX
   `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
-  images are referenced by relative path (keep them next to the `.tex`). Compile
-  with `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
-  2026-08-07.)*
+  images are referenced by relative path (keep them next to the `.tex`). Task
+  lists keep checked and unchecked boxes distinct, and numbered lists keep their
+  chosen starting number, including in nested lists. Compile with `pdflatex` or
+  `xelatex` using a standard TeX Live installation. *(Added 2026-08-07; list
+  parity corrected 2026-08-22.)*
 
 #### The PDF
 

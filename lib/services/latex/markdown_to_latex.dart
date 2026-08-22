@@ -317,6 +317,13 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.unorderedList);
       case 'ol':
         output.write('\\begin{enumerate}\n');
+        final start = int.tryParse(element.attributes['start'] ?? '') ?? 1;
+        final depth = _stack.where((ctx) => ctx == _Ctx.orderedList).length;
+        if (start > 1 && depth < _enumerateCounters.length) {
+          output.write(
+            '\\setcounter{${_enumerateCounters[depth]}}{${start - 1}}\n',
+          );
+        }
         _stack.add(_Ctx.orderedList);
       case 'li':
         _visitListItem(element);
@@ -398,7 +405,16 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     // GFM task-list: <li class="task-list-item"> met een <input>-kind.
     final isTask =
         element.attributes['class']?.contains('task-list-item') ?? false;
-    output.write(isTask ? r'\item[$\square$] ' : r'\item ');
+    final checked = element.children?.whereType<md.Element>().any(
+      (child) => child.tag == 'input' && child.attributes['checked'] != null,
+    );
+    output.write(
+      !isTask
+          ? r'\item '
+          : checked == true
+          ? r'\item[$\boxtimes$] '
+          : r'\item[$\square$] ',
+    );
   }
 
   bool _visitCode(md.Element element) {
@@ -564,6 +580,8 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 }
 
 bool _isCell(md.Node n) => n is md.Element && (n.tag == 'th' || n.tag == 'td');
+
+const _enumerateCounters = ['enumi', 'enumii', 'enumiii', 'enumiv'];
 
 enum _Ctx {
   passThrough,
