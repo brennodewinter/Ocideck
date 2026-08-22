@@ -201,7 +201,10 @@ class DocumentDeckBridge {
       final body = _slideBody(slide);
       if (body.trim().isNotEmpty) {
         final atomicTimeline = startsWithDocumentTimelineEnvelope(body);
-        parts.add(atomicTimeline ? body : body.trim());
+        // trimRight, niet trim: leidende spaties/tabs zijn betekenis in
+        // Markdown (ingesprongen code, nestlijst). Alleen trailing whitespace
+        // aan het eind weghalen (#1664).
+        parts.add(atomicTimeline ? body : body.trimRight());
       }
     }
     return '${parts.join('\n\n')}\n';
