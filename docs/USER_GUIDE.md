@@ -4681,9 +4681,11 @@ your source. The export dialog asks two things:
   `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
   images are referenced by relative path (keep them next to the `.tex`). Task
   lists keep checked and unchecked boxes distinct, and numbered lists keep their
-  chosen starting number, including in nested lists. Compile with `pdflatex` or
-  `xelatex` using a standard TeX Live installation. *(Added 2026-08-07; list
-  parity corrected 2026-08-22.)*
+  chosen starting number, including in nested lists. GFM column alignment and
+  the document style's table colours, borders, zebra striping, cell padding and
+  header accent rule are written into the LaTeX source too. Compile with
+  `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
+  2026-08-07; list and table parity corrected 2026-08-22.)*
 
 #### The PDF
 

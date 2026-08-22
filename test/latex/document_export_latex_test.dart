@@ -224,4 +224,60 @@ $$\int_0^1 x\,dx = \frac{1}{2}$$
     expect(tex, contains(r'\bottomrule'));
     expect(tex, contains('Jan'));
   });
+
+  test('LaTeX-export voert de volledige documenttabelstijl uit', () async {
+    const body =
+        '| Links | Midden | Rechts |\n'
+        '| :--- | :---: | ---: |\n'
+        '| Een | Twee | Drie |\n'
+        '| Vier | Vijf | Zes |\n';
+    const theme = ThemeProfile(
+      accentColor: '#A1B2C3',
+      tableTextColor: '#112233',
+      tableHeaderTextColor: '#F1F2F3',
+      tableHeaderBackgroundColor: '#223344',
+      tableZebraStriped: true,
+      tableZebraColor: '#DDEEFF',
+      tableBorderStyle: TableBorderStyle.boxed,
+      tableBorderColor: '#445566',
+      tableCellPaddingPx: 12,
+      tableAccentHeaderBorder: true,
+    );
+    final bundle = await buildBundle(body, theme: theme);
+    final out = p.join(temp.path, 'tabelstijl.tex');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.latex,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final tex = await File(out).readAsString();
+
+    expect(tex, contains(r'\usepackage{array}'));
+    expect(tex, contains(r'\usepackage[table]{xcolor}'));
+    expect(tex, contains(r'\begin{tabular}{|l|c|r|}'));
+    expect(tex, contains(r'\definecolor{ocideckTableText}{HTML}{112233}'));
+    expect(
+      tex,
+      contains(r'\definecolor{ocideckTableHeaderText}{HTML}{F1F2F3}'),
+    );
+    expect(
+      tex,
+      contains(r'\definecolor{ocideckTableHeaderBackground}{HTML}{223344}'),
+    );
+    expect(tex, contains(r'\definecolor{ocideckTableZebra}{HTML}{DDEEFF}'));
+    expect(tex, contains(r'\definecolor{ocideckTableBorder}{HTML}{445566}'));
+    expect(tex, contains(r'\definecolor{ocideckTableAccent}{HTML}{A1B2C3}'));
+    expect(tex, contains(r'\arrayrulecolor{ocideckTableBorder}'));
+    expect(tex, contains(r'\rowcolors{3}{ocideckTableZebra}{}'));
+    expect(tex, contains(r'\setlength{\tabcolsep}{12pt}'));
+    expect(tex, contains(r'\setlength{\extrarowheight}{10.8pt}'));
+    expect(tex, contains(r'\cellcolor{ocideckTableHeaderBackground}'));
+    expect(tex, contains(r'\textcolor{ocideckTableHeaderText}'));
+    expect(tex, contains(r'\textcolor{ocideckTableText}'));
+    expect(tex, contains(r'\arrayrulecolor{ocideckTableAccent}'));
+    expect(tex, contains(r'\specialrule{1.5pt}{0pt}{0pt}'));
+  });
 }

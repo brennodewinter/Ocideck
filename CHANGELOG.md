@@ -1809,6 +1809,13 @@ that before deciding whether this alpha fits what you are doing.
   al een rail en kaarten, maar draagt nu ook beide zichtbare kolomkoppen en de
   later aan het scherm toegevoegde connector en eindmarkering. Lange tijdlijnen
   blijven over meerdere bladzijden lopen en hun tekstlaag blijft doorzoekbaar.
+- **De LaTeX-documentexport voert de bestaande tabelstijl nu werkelijk uit
+  (#1714).** De converter leest de GFM-uitlijning per kolom (`l`, `c`, `r`) en
+  krijgt voor documenten het volledige opgeloste stijlprofiel mee. Daardoor
+  landen tekst- en kopkleuren, randvorm en -kleur, zebra, celopvulling en de
+  accentlijn onder de kop in de `.tex`; de Beamer-route zonder documentstijl
+  houdt haar bestaande sobere tabelpad.
+
 - **De LaTeX-documentexport bewaart weer wat een lijst zegt (#1713).** Een
   afgevinkte GFM-taak kreeg hetzelfde lege vakje als een open taak, en iedere
   genummerde lijst begon na compilatie opnieuw bij 1. De converter leest nu de

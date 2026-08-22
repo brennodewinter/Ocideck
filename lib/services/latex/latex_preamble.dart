@@ -60,6 +60,10 @@ String articlePreamble(
     '\n',
   );
   buf.write(
+    r'\usepackage{array}'
+    '\n',
+  );
+  buf.write(
     r'\usepackage{longtable}'
     '\n',
   );
@@ -69,9 +73,19 @@ String articlePreamble(
     '\n',
   );
   buf.write(
-    r'\usepackage{xcolor}'
+    r'\usepackage[table]{xcolor}'
     '\n',
   );
+  if (theme != null) {
+    buf.write(
+      '\\definecolor{ocideckTableText}{HTML}{${_latexHexColor(theme.tableTextColor, '222222')}}\n'
+      '\\definecolor{ocideckTableHeaderText}{HTML}{${_latexHexColor(theme.tableHeaderTextColor, 'FFFFFF')}}\n'
+      '\\definecolor{ocideckTableHeaderBackground}{HTML}{${_latexHexColor(theme.tableHeaderBackgroundColor, '2E7D64')}}\n'
+      '\\definecolor{ocideckTableZebra}{HTML}{${_latexHexColor(theme.tableZebraColor, 'F1F5F9')}}\n'
+      '\\definecolor{ocideckTableBorder}{HTML}{${_latexHexColor(theme.tableBorderColor, 'CBD5E1')}}\n'
+      '\\definecolor{ocideckTableAccent}{HTML}{${_latexHexColor(theme.accentColor, '2E7D64')}}\n',
+    );
+  }
   if (chrome.enabled) {
     buf.write(
       r'\usepackage{fancyhdr}'
@@ -420,3 +434,8 @@ String _escapeLatex(String s) {
 /// Millimeters zonder overbodige nullen — `210` in plaats van `210.0`.
 String _mm(double mm) =>
     mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();
+
+String _latexHexColor(String value, String fallback) {
+  final hex = value.replaceFirst('#', '').toUpperCase();
+  return RegExp(r'^[0-9A-F]{6}$').hasMatch(hex) ? hex : fallback;
+}

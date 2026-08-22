@@ -42,6 +42,16 @@ void main() {
       expect(out, contains('30'));
     });
 
+    test('GFM-tabel houdt links, midden en rechts uitgelijnde kolommen', () {
+      final out = markdownToLatex(
+        '| Links | Midden | Rechts |\n'
+        '| :--- | :---: | ---: |\n'
+        '| A | B | C |\n',
+      );
+
+      expect(out, contains(r'\begin{tabular}{lcr}'));
+    });
+
     test('een rij houdt precies zoveel cellen als de kolomspec', () {
       // De rij eindigde op ' & ' (elke cel schrijft die scheiding áchter zich)
       // en het opruimpatroon ankerde op een `&` als láátste teken. Resultaat:
