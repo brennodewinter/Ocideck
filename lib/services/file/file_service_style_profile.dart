@@ -272,7 +272,7 @@ extension FileServiceStyleProfile on FileService {
         logoOmitted: built.logoOmitted,
       );
     }
-    final target = dest.endsWith('.$ext') ? dest : '$dest.$ext';
+    final target = withExtension(dest, '.$ext');
     await writeBytesAtomic(File(target), built.bytes);
     return StyleProfileExportOutcome(
       saved: true,

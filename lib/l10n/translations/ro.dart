@@ -1653,6 +1653,9 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Configurarea paginii din acest document conține valori nevalide și a fost ignorată. Se folosesc setările dvs.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Fișierul a fost modificat de alt program.',
+  'Herladen': 'Reîncarcă',
   'Kies kolommen voor de tijdlijn': 'Alegeți coloanele pentru cronologie',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'O cronologie folosește două sau trei coloane. Alegeți ce coloane din acest tabel devin cronologia. Coloanele rămase dispar din tabel.',

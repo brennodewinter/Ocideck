@@ -1661,6 +1661,9 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Η διαμόρφωση σελίδας σε αυτό το έγγραφο περιέχει μη έγκυρες τιμές και αγνοήθηκε. Χρησιμοποιούνται οι ρυθμίσεις σας.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Το αρχείο τροποποιήθηκε από άλλο πρόγραμμα.',
+  'Herladen': 'Επαναφόρτωση',
   'Kies kolommen voor de tijdlijn': 'Επιλογή στηλών για το χρονοδιάγραμμα',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Ένα χρονοδιάγραμμα χρησιμοποιεί δύο ή τρεις στήλες. Επιλέξτε ποιες στήλες αυτού του πίνακα θα γίνουν το χρονοδιάγραμμα. Οι υπόλοιπες στήλες θα εξαφανιστούν από τον πίνακα.',

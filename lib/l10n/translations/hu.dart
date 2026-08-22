@@ -1638,6 +1638,9 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Az oldalbeállítás ebben a dokumentumban érvénytelen értékeket tartalmaz és figyelmen kívül lett hagyva. A beállításait használjuk.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'A fájlt egy másik program módosította.',
+  'Herladen': 'Újratöltés',
   'Kies kolommen voor de tijdlijn': 'Oszlopok kiválasztása az idővonalhoz',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Egy idővonal két vagy három oszlopot használ. Válassza ki, mely oszlopok lesznek az idővonal. A többi oszlop eltűnik a táblázatból.',

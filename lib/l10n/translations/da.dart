@@ -1636,6 +1636,9 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Sideopsætningen i dette dokument indeholder ugyldige værdier og blev ignoreret. Dine indstillinger bruges.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Filen er blevet ændret af et andet program.',
+  'Herladen': 'Genindlæs',
   'Kies kolommen voor de tijdlijn': 'Vælg kolonner til tidslinjen',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'En tidslinje bruger to eller tre kolonner. Vælg hvilke kolonner fra denne tabel der bliver tidslinjen. De resterende kolonner forsvinder fra tabellen.',

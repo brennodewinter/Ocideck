@@ -673,6 +673,9 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'La configuración de página de este documento contiene valores no válidos y se ha ignorado. Se usa su configuración.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'El archivo ha sido modificado por otro programa.',
+  'Herladen': 'Recargar',
   'Kies kolommen voor de tijdlijn': 'Elegir columnas para la cronología',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Una cronología usa dos o tres columnas. Elige qué columnas de esta tabla forman la cronología. Las columnas restantes desaparecen de la tabla.',

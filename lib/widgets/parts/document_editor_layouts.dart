@@ -43,6 +43,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     final outcome = await imageService.pasteImageDetailed(
       projectPath: projectPath,
     );
+    if (!mounted) return false;
     if (outcome.path != null) {
       _insertBlock('![](${outcome.path})');
       if (mounted) {
@@ -62,6 +63,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
 
     final data = await Clipboard.getData(Clipboard.kTextPlain);
     final html = await readClipboardHtml();
+    if (!mounted) return false;
     final resolved = resolveClipboardMarkdown(plain: data?.text, html: html);
     if (resolved == null) return false;
 
@@ -80,7 +82,14 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   }
 
   /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
+  /// In de visuele stand gaat de invoeging via de Quill-cursor, net als
+  /// [_insertBlock] — de bron-controller staat daar stil op een oude positie.
   void _insertPastedMarkdown(String text) {
+    if (_viewMode == _DocViewMode.visual &&
+        markdownRoundTripsVisually(_controller.text)) {
+      _requestVisualInsert(block: text);
+      return;
+    }
     final sel = _controller.selection;
     final start = sel.isValid ? sel.start : _controller.text.length;
     final end = sel.isValid ? sel.end : start;

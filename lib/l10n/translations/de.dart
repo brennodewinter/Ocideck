@@ -676,6 +676,9 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Die Seiteneinrichtung in diesem Dokument enthält ungültige Werte und wurde ignoriert. Ihre Einstellungen werden verwendet.',
+  'Het bestand is gewijzigd door een ander programma.':
+      'Die Datei wurde von einem anderen Programm geändert.',
+  'Herladen': 'Neu laden',
   'Kies kolommen voor de tijdlijn': 'Spalten für die Zeitleiste wählen',
   'Een tijdlijn gebruikt twee of drie kolommen. Kies welke kolommen uit deze tabel de tijdlijn worden. De overige kolommen verdwijnen uit de tabel.':
       'Eine Zeitleiste verwendet zwei oder drei Spalten. Wählen Sie, welche Spalten dieser Tabelle die Zeitleiste werden. Die restlichen Spalten verschwinden aus der Tabelle.',

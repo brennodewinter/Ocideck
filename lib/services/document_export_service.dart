@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 
 import '../models/privacy_disposition.dart';
@@ -58,7 +59,7 @@ String suggestedDocumentExportFileName({
       : fullLabel;
   final source = title.isEmpty ? fallbackLabel : title;
   final cleaned = source
-      .replaceAll(RegExp(r'[^\w\- ]+'), '')
+      .replaceAll(RegExp(r'[^\p{L}\p{N}\- ]+', unicode: true), '')
       .trim()
       .replaceAll(RegExp(r'[\s]+'), '-');
   final base = cleaned.isEmpty ? fallbackLabel : cleaned;
@@ -206,15 +207,16 @@ Future<String?> writeDocumentExport(
   final chromeFields = _documentChromeFields(bundle.audience.deck);
   switch (format) {
     case DocumentExportFormat.md:
+      final md = _projectedMarkdown(
+        bundle,
+        pageSize: pageSize,
+        pageMargins: pageMargins,
+        footnotePlacement: footnotePlacement,
+        documentFields: documentFields,
+      );
       await writeStringAtomic(
         File(outputPath),
-        _projectedMarkdown(
-          bundle,
-          pageSize: pageSize,
-          pageMargins: pageMargins,
-          footnotePlacement: footnotePlacement,
-          documentFields: documentFields,
-        ),
+        _rebaseImagePaths(md, sourcePath, outputPath),
       );
       return outputPath;
     case DocumentExportFormat.html:
@@ -245,7 +247,11 @@ Future<String?> writeDocumentExport(
     case DocumentExportFormat.latex:
       final meta = exportMetadata;
       final body = markdownToLatex(
-        projectedDocumentBody(bundle),
+        _rebaseImagePaths(
+          projectedDocumentBody(bundle),
+          sourcePath,
+          outputPath,
+        ),
         chapterPageBreak: chapterPageBreak,
         tableBorderStyle: theme.tableBorderStyle,
         footnotePlacement: footnotePlacement,
@@ -292,6 +298,45 @@ Future<bool> _sameFile(String? sourcePath, String outputPath) async {
   } on FileSystemException {
     return false;
   }
+}
+
+/// Herbaset relatieve afbeeldingspaden in [markdown] van de bronmap naar de
+/// uitvoermap, zodat een .md- of .tex-export buiten de projectmap de beelden
+/// blijft vinden (#1673). Absolute paden, URL's en data-URI's blijven staan.
+@visibleForTesting
+String rebaseImagePathsForTesting(
+  String markdown,
+  String? sourcePath,
+  String outputPath,
+) => _rebaseImagePaths(markdown, sourcePath, outputPath);
+
+String _rebaseImagePaths(
+  String markdown,
+  String? sourcePath,
+  String outputPath,
+) {
+  if (sourcePath == null) return markdown;
+  final sourceDir = p.dirname(sourcePath);
+  final outputDir = p.dirname(outputPath);
+  if (p.equals(sourceDir, outputDir)) return markdown;
+  return markdown.replaceAllMapped(RegExp(r'!\[([^\]]*)\]\(([^)]+)\)'), (m) {
+    final alt = m.group(1)!;
+    final raw = m.group(2)!;
+    // Alleen relatieve paden zonder schema — URL's en data-URI's blijven.
+    if (raw.startsWith('http://') ||
+        raw.startsWith('https://') ||
+        raw.startsWith('data:') ||
+        p.isAbsolute(raw)) {
+      return m[0]!;
+    }
+    // Scheid bron en titel (`bron "titel"`).
+    final space = raw.indexOf(RegExp(r'\s'));
+    final src = space < 0 ? raw : raw.substring(0, space);
+    final title = space < 0 ? '' : raw.substring(space);
+    final abs = p.normalize(p.join(sourceDir, src));
+    final rebased = p.relative(abs, from: outputDir);
+    return '![$alt]($rebased$title)';
+  });
 }
 
 /// De geprojecteerde body plus alles wat als front matter meereist.

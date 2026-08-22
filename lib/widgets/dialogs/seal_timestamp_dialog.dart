@@ -11,6 +11,7 @@ import '../../services/rfc3161_timestamp.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/atomic_file.dart';
+import '../../utils/file_extension.dart';
 import '../../utils/log.dart';
 
 /// De RFC 3161-tijdstempelroute voor het documentzegel (PENTEST_MIAUW §8-A2).
@@ -205,7 +206,7 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
       );
       if (path == null && !kIsWeb) return;
       if (!kIsWeb) {
-        final target = path!.endsWith('.tsq') ? path : '$path.tsq';
+        final target = withExtension(path!, '.tsq');
         await writeBytesAtomic(File(target), tsq);
       }
       // Pas onthouden als het verzoek de deur uit is. Andersom zou een

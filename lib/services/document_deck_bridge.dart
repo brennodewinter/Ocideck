@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import '../models/deck.dart';
 import '../models/slide.dart';
 import '../utils/markdown_blocks.dart';
@@ -353,7 +355,7 @@ String _slideBody(Slide slide) {
   }
   switch (slide.type) {
     case SlideType.chart:
-      return '```chart\n${slide.customMarkdown}\n```';
+      return _serializeChartFence(slide.customMarkdown);
     default:
       if (slide.customMarkdown.trim().isNotEmpty) {
         return slide.customMarkdown;
@@ -377,3 +379,28 @@ String _titleAndBullets(Slide slide) => [
 
 /// Een regel die na trimmen met 1–6 `#` en een spatie begint.
 bool _isHeading(String trimmed) => RegExp(r'^#{1,6} ').hasMatch(trimmed);
+
+/// Serialiseer een chart-blok met een fence langer dan de langste backtick-run
+/// in de inhoud, zodat een regel met ``` binnen de spec het blok niet
+/// voortijdig sluit (#1685).
+String _serializeChartFence(String content) {
+  final maxRun = _maxBacktickRun(content);
+  final fenceLen = math.max(3, maxRun + 1);
+  final fence = '`' * fenceLen;
+  return '${fence}chart\n$content\n$fence';
+}
+
+/// De langste reeks achterelkaar staande backticks in [text].
+int _maxBacktickRun(String text) {
+  var max = 0;
+  var run = 0;
+  for (final c in text.codeUnits) {
+    if (c == 0x60) {
+      run++;
+      if (run > max) max = run;
+    } else {
+      run = 0;
+    }
+  }
+  return max;
+}

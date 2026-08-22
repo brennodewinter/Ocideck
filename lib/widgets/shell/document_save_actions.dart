@@ -1,8 +1,12 @@
-import 'package:flutter/widgets.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/markdown_document.dart';
 import '../../models/markdown_kind.dart';
+import '../../services/document_integrity.dart';
 import '../../services/file_service.dart';
 import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/document_provider.dart';
@@ -52,13 +56,32 @@ Future<bool> saveDocumentWithDestination(
   if (path != null) {
     // Nothing changed since the last save → already on disk, byte-identical.
     if (!state.isDirty) return true;
+    // Conflictcontrole: is het bestand buiten OciDeck gewijzigd? Vergelijk
+    // de hash van wat nu op schijf staat met de hash die we bij laden of
+    // opslaan onthielden (#1699, #1683).
+    final diskHash = await _readFileHash(path);
+    if (diskHash != null &&
+        state.savedFileHash != null &&
+        diskHash != state.savedFileHash) {
+      if (!context.mounted) return false;
+      final choice = await _showConflictDialog(context);
+      if (choice == _ConflictChoice.cancel) return false;
+      if (choice == _ConflictChoice.reload) {
+        await _reloadFromDisk(notifier, path);
+        return false;
+      }
+      // overwrite: ga door met opslaan.
+    }
     if (await saveDocument(documentToSave, path)) {
       // Werk de notifier bij met de byte-getrouwe versie, zodat de editor
       // en de notifier dezelfde bron zien — geen drift meer.
       if (documentToSave != document) {
         notifier.replaceSource(documentToSave.source);
       }
-      notifier.markSaved(filePath: path);
+      notifier.markSaved(
+        filePath: path,
+        savedFileHash: DocumentIntegrity.hashMarkdown(documentToSave.source),
+      );
       return true;
     }
     // Writing to the existing path failed (read-only, moved, no permission):
@@ -74,7 +97,10 @@ Future<bool> saveDocumentWithDestination(
   if (documentToSave != document) {
     notifier.replaceSource(documentToSave.source);
   }
-  notifier.markSaved(filePath: saved);
+  notifier.markSaved(
+    filePath: saved,
+    savedFileHash: DocumentIntegrity.hashMarkdown(documentToSave.source),
+  );
   await ref
       .read(settingsProvider.notifier)
       .addRecentFile(saved, kind: MarkdownKind.document);
@@ -102,4 +128,61 @@ MarkdownDocument _patchVisualSave(String savedSource, String currentSource) {
     current: currentSource,
   );
   return MarkdownDocument.parse(patched);
+}
+
+/// De keuzes uit de conflict-dialoog (#1699).
+enum _ConflictChoice { cancel, reload, overwrite }
+
+/// Leest het bestand op [path] en retourneert de SHA-512-hash van de bytes,
+/// of `null` als het bestand niet (meer) bestaat of niet leesbaar is.
+Future<String?> _readFileHash(String path) async {
+  try {
+    final bytes = await File(path).readAsBytes();
+    return DocumentIntegrity.hashBytes(bytes);
+  } on FileSystemException {
+    return null;
+  }
+}
+
+/// Toont de conflict-dialoog: het bestand is buiten OciDeck gewijzigd.
+/// De gebruiker kiest tussen Herladen (opnieuw inladen), Overschrijven
+/// (toch opslaan) of Annuleren.
+Future<_ConflictChoice> _showConflictDialog(BuildContext context) async {
+  final l10n = context.l10n;
+  final choice = await showDialog<_ConflictChoice>(
+    context: context,
+    barrierDismissible: false,
+    builder: (ctx) => AlertDialog(
+      content: Text(
+        l10n.d('Het bestand is gewijzigd door een ander programma.'),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _ConflictChoice.cancel),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _ConflictChoice.reload),
+          child: Text(l10n.d('Herladen')),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, _ConflictChoice.overwrite),
+          child: Text(l10n.d('Overschrijven')),
+        ),
+      ],
+    ),
+  );
+  return choice ?? _ConflictChoice.cancel;
+}
+
+/// Herlaadt het document van schijf en laadt het in de notifier.
+Future<void> _reloadFromDisk(DocumentNotifier notifier, String path) async {
+  try {
+    final bytes = await File(path).readAsBytes();
+    final source = String.fromCharCodes(bytes);
+    final doc = MarkdownDocument.parse(source);
+    notifier.loadDocument(doc, filePath: path);
+  } on FileSystemException {
+    // Bestand verdween — laat de notifier ongemoeid.
+  }
 }
