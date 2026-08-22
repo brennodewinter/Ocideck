@@ -53,6 +53,21 @@ class ConvertToPresentationDialog extends StatelessWidget {
             _drop(l10n.d('Een thematische regel (---) wordt een diagrens.')),
             _drop(
               l10n.d(
+                'De documentstijl (thema, paginaformaat, marges) gaat niet mee.',
+              ),
+            ),
+            _drop(
+              l10n.d(
+                'Documentvelden (kop- en voettekst) gaan niet mee.',
+              ),
+            ),
+            _drop(
+              l10n.d(
+                'Voetnoten worden platte tekst; een presentatie kent geen noten.',
+              ),
+            ),
+            _drop(
+              l10n.d(
                 'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.',
               ),
             ),
