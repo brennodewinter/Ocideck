@@ -261,6 +261,57 @@ void main() {
     expect(aligns.contains(TextAlign.end), isTrue);
   });
 
+  testWidgets(
+    'een cel met focus onttrekt Quills cursor — geen dubbele cursor (#1712)',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1300, 900));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '# Rapport\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n',
+          ),
+        );
+      await tester.pumpWidget(editorApp(n));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Visueel: de tabel is een bewerkbare Quill-embed.
+      final quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+      final quillFocus = quill.focusNode;
+
+      // Vooraf: Quill heeft geen focus.
+      expect(quillFocus.hasFocus, isFalse);
+
+      // Tik in een cel — de cel krijgt de primaire focus.
+      final cellField = find.descendant(
+        of: find.byType(Table),
+        matching: find.widgetWithText(TextField, 'Alfa'),
+      );
+      await tester.showKeyboard(cellField);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // De cel heeft de primaire focus.
+      final cell = tester.widget<TextField>(cellField);
+      expect(cell.focusNode!.hasPrimaryFocus, isTrue);
+
+      // Quills focusNode mag nu géén hasFocus rapporteren: de cel leeft
+      // buiten Quills focussubboom (herouderde FocusScope), dus Quill
+      // verbergt zijn cursor. Zonder die heroudering bleef Quills cursor
+      // knipperen naast de celcursor — twee cursors tegelijk.
+      expect(
+        quillFocus.hasFocus,
+        isFalse,
+        reason:
+            'Quills cursor mag niet tonen terwijl een tabelcel focus heeft. '
+            'De FocusScope van TableEditScaffold moet de cel buiten Quills '
+            'focussubboom plaatsen.',
+      );
+    },
+  );
+
   testWidgets('Toepassen behoudt de uitlijning (geen stille strip, F3)', (
     tester,
   ) async {
