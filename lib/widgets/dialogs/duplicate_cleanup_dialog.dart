@@ -95,10 +95,7 @@ class _DuplicateCleanupDialogState
   /// `deckNotifier` — een documenttabblad ertussen gooide anders een
   /// `StateError` (#1661).
   Set<String> _openPaths() {
-    return {
-      for (final tab in ref.read(tabsProvider).tabs)
-        if (tab.openFilePath case final path?) path,
-    };
+    return {for (final tab in ref.read(tabsProvider).tabs) ?tab.openFilePath};
   }
 
   Future<void> _moveToTrash(String path) async {
