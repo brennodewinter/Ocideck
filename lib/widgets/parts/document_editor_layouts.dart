@@ -21,9 +21,13 @@ String _pageSetupSource(WidgetRef ref) =>
     ref.watch(documentProvider).document?.source ?? '';
 
 /// De map waarin het document staat, voor het oplossen van een logo in de
-/// kop- of voetband. `null` als het nog nergens is opgeslagen.
+/// kop- of voetband. `null` als het nog nergens is opgeslagen. Een padloos
+/// conversie-document (presentatie → document) kan toch een projectPath hebben
+/// die de map van het originele deck draagt (#1646).
 String? _documentProjectPath(WidgetRef ref) {
-  final path = ref.read(documentProvider).filePath;
+  final state = ref.read(documentProvider);
+  if (state.projectPath != null) return state.projectPath;
+  final path = state.filePath;
   return path == null ? null : p.dirname(path);
 }
 

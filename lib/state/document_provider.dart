@@ -49,6 +49,13 @@ class DocumentState {
   /// OciDeck gewijzigd en vraagt een dialoog wat te doen (#1699, #1683).
   final String? savedFileHash;
 
+  /// De projectmap waarin het document leeft, ook wanneer het nog geen
+  /// bestandspad heeft — bijvoorbeeld na conversie presentatie → document.
+  /// Afbeeldingsverwijzingen lossen hier relatief op. Bij een bestand op schijf
+  /// is dit de map van [filePath]; bij een padloos document is dit de map van
+  /// het originele deck (#1646).
+  final String? projectPath;
+
   const DocumentState({
     this.document,
     this.isDirty = false,
@@ -61,6 +68,7 @@ class DocumentState {
     this.savedSource,
     this.visualEdited = false,
     this.savedFileHash,
+    this.projectPath,
   });
 
   bool get hasUnsavedChanges => isDirty;
@@ -78,6 +86,7 @@ class DocumentState {
     String? savedSource,
     bool? visualEdited,
     String? savedFileHash,
+    String? projectPath,
     bool clearError = false,
     bool clearFilePath = false,
   }) {
@@ -93,6 +102,7 @@ class DocumentState {
       savedSource: savedSource ?? this.savedSource,
       visualEdited: visualEdited ?? this.visualEdited,
       savedFileHash: savedFileHash ?? this.savedFileHash,
+      projectPath: projectPath ?? this.projectPath,
     );
   }
 }
@@ -140,7 +150,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   }
 
   /// Laad een reeds ingelezen document (door de tabbeheerder), vers en schoon.
-  void loadDocument(MarkdownDocument document, {String? filePath}) {
+  void loadDocument(MarkdownDocument document, {String? filePath, String? projectPath}) {
     _clearHistory();
     state = DocumentState(
       document: document,
@@ -149,6 +159,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       savedSource: document.source,
       visualEdited: false,
       savedFileHash: DocumentIntegrity.hashMarkdown(document.source),
+      projectPath: projectPath,
     );
   }
 
