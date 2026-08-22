@@ -71,6 +71,7 @@ import 'document_page_chrome.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
 import 'editors/embed_editor_dialog.dart';
+import 'editors/find_replace_session.dart';
 import 'editors/markdown_find_bar.dart';
 import 'editors/markdown_source_controller.dart';
 import 'editors/table_editor.dart';
@@ -173,17 +174,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Markdownbron en de presentatie-editor houden hun eigen sobere chrome.
   ThemeProfile? _styleProfile;
 
-  /// Zoek-/vervangbalk. Hergebruikt dezelfde [MarkdownFindBar] en
-  /// [text_search]-utils als de presentatie-broneditor. De matches leven op de
+  /// Zoek-/vervangbalk. Deelt de stand ([FindReplaceSession]) en de balk
+  /// ([MarkdownFindBar]) met de presentatie-broneditor. De treffers leven op de
   /// Markdown-bron ([_controller].text) — dat is in beide modi dezelfde tekst,
   /// dus de teller klopt ongeacht of je in Visueel of Bron zoekt.
-  bool _findVisible = false;
-  bool _showReplace = false;
-  String _findQuery = '';
-  String _replaceText = '';
-  bool _caseSensitive = false;
-  int _matchIndex = -1;
-  List<TextMatchRange> _matches = const [];
+  late final FindReplaceSession _find;
 
   /// Signaal + Markdown-bereik voor de visuele stand: zet de Quill-cursor op de
   /// match. In de Bron-stand zet [_jumpToMatch] de controller-selectie direct;
@@ -206,6 +201,13 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
     // onChanged afvuurt). Zo stroomt alles langs dezelfde weg naar de notifier.
     _controller.addListener(_onControllerChanged);
+    _find = FindReplaceSession(
+      controller: _controller,
+      onChanged: () {
+        if (mounted) setState(() {});
+      },
+      onReveal: _jumpToMatch,
+    );
     // Bevat de body al bij het openen een constructie die de visuele editor niet
     // verliesvrij aankan, dan start direct in de Bron-modus. De gebruiker hoeft
     // niet eerst de visuele modus te zien falen om te begrijpen dat hij in de
@@ -253,18 +255,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         );
     // Houd de matchteller bij terwijl je typt — zonder te springen, net als de
     // presentatie-broneditor. De teller loopt mee via de provider-herbouw.
-    if (_findVisible && _findQuery.isNotEmpty) {
-      final matches = findAllMatches(
-        body,
-        _findQuery,
-        caseSensitive: _caseSensitive,
-      );
-      _matches = matches;
-      _matchIndex = matches.isEmpty
-          ? -1
-          : _matchIndex.clamp(0, matches.length - 1);
-      _syncSearchHighlights();
-    }
+    _find.refreshWhileTyping();
   }
 
   void _setActiveOutlineIndex(int active) {
@@ -497,7 +488,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               thickness: 1,
               color: theme.colorScheme.outlineVariant,
             ),
-            if (_findVisible) _findBar(),
+            if (_find.visible) _findBar(),
             Expanded(
               child: DocumentImageScope(
                 projectPath: _documentProjectPath(ref),
@@ -753,27 +744,21 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   );
 
   Widget _findBar() => MarkdownFindBar(
-    key: ValueKey('doc-find-$_showReplace'),
-    query: _findQuery,
-    replace: _replaceText,
-    caseSensitive: _caseSensitive,
-    showReplace: _showReplace,
-    matchCount: _matches.length,
-    matchIndex: _matchIndex,
-    onQueryChanged: (value) {
-      _findQuery = value;
-      _recountMatches(selectFirst: true);
-    },
-    onReplaceChanged: (value) => setState(() => _replaceText = value),
-    onCaseSensitiveChanged: (value) {
-      _caseSensitive = value;
-      _recountMatches(selectFirst: false);
-    },
-    onNext: _goToNextMatch,
-    onPrevious: _goToPreviousMatch,
-    onReplaceCurrent: _replaceCurrentMatch,
-    onReplaceAll: _replaceAllMatches,
-    onClose: _closeFind,
+    key: ValueKey('doc-find-${_find.showReplace}'),
+    query: _find.query,
+    replace: _find.replacement,
+    caseSensitive: _find.caseSensitive,
+    showReplace: _find.showReplace,
+    matchCount: _find.matchCount,
+    matchIndex: _find.matchIndex,
+    onQueryChanged: _find.setQuery,
+    onReplaceChanged: _find.setReplacement,
+    onCaseSensitiveChanged: _find.setCaseSensitive,
+    onNext: _find.next,
+    onPrevious: _find.previous,
+    onReplaceCurrent: _find.replaceCurrent,
+    onReplaceAll: _find.replaceAll,
+    onClose: _find.close,
   );
 
   void _openFind({required bool showReplace}) {
@@ -782,71 +767,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     if (_viewMode == _DocViewMode.pages) {
       setState(() => _viewMode = _DocViewMode.source);
     }
-    setState(() {
-      _findVisible = true;
-      _showReplace = showReplace;
-    });
-    _recountMatches(selectFirst: true);
+    _find.open(showReplace: showReplace);
   }
 
-  void _closeFind() {
-    setState(() {
-      _findVisible = false;
-      _matchIndex = -1;
-      _matches = const [];
-    });
-    _syncSearchHighlights();
-  }
-
-  void _syncSearchHighlights() {
-    _controller.showSearchMatches(
-      _findVisible ? _matches : const [],
-      _matchIndex,
-    );
-  }
-
-  void _recountMatches({bool selectFirst = false}) {
-    final matches = findAllMatches(
-      _controller.text,
-      _findQuery,
-      caseSensitive: _caseSensitive,
-    );
-    int? jumpIndex;
-    setState(() {
-      _matches = matches;
-      if (matches.isEmpty) {
-        _matchIndex = -1;
-      } else if (selectFirst ||
-          _matchIndex < 0 ||
-          _matchIndex >= matches.length) {
-        _matchIndex = 0;
-        jumpIndex = 0;
-      } else {
-        jumpIndex = _matchIndex;
-      }
-    });
-    _syncSearchHighlights();
-    final ji = jumpIndex;
-    if (ji != null) _jumpToMatch(matches[ji]);
-  }
-
-  void _goToNextMatch() {
-    if (_matches.isEmpty) return;
-    final next = nextMatchIndex(_matchIndex, _matches.length);
-    setState(() => _matchIndex = next);
-    _syncSearchHighlights();
-    _jumpToMatch(_matches[next]);
-  }
-
-  void _goToPreviousMatch() {
-    if (_matches.isEmpty) return;
-    final prev = previousMatchIndex(_matchIndex, _matches.length);
-    setState(() => _matchIndex = prev);
-    _syncSearchHighlights();
-    _jumpToMatch(_matches[prev]);
-  }
-
-  /// Spring naar een match. In Bron staat de selectie direct op de controller
+  /// Spring naar een treffer. In Bron staat de selectie direct op de controller
   /// (met zoekmarkering eromheen); in Visueel leeft de cursor in Quill en
   /// vragen we [MarkdownNotesEditor] via een signaal om hem erheen te verplaatsen.
   void _jumpToMatch(TextMatchRange match) {
@@ -862,42 +786,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       _findSelectionEnd = match.end;
       _findSelectionSignal++;
     });
-  }
-
-  void _replaceCurrentMatch() {
-    if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
-    final match = _matches[_matchIndex];
-    final updated = replaceRange(_controller.text, match, _replaceText);
-    _applyFindReplace(updated);
-    _recountMatches(selectFirst: false);
-    if (_matches.isNotEmpty) {
-      final idx = _matchIndex.clamp(0, _matches.length - 1);
-      setState(() => _matchIndex = idx);
-      _jumpToMatch(_matches[idx]);
-    }
-  }
-
-  void _replaceAllMatches() {
-    if (_findQuery.isEmpty) return;
-    final result = replaceAllInText(
-      _controller.text,
-      _findQuery,
-      _replaceText,
-      caseSensitive: _caseSensitive,
-    );
-    _applyFindReplace(result.text);
-    setState(() {
-      _matches = const [];
-      _matchIndex = -1;
-    });
-    _syncSearchHighlights();
-  }
-
-  /// Schrijft de nieuwe body via de controller. De controller-luisteraar
-  /// stroomt het naar de [DocumentNotifier]; in Visueel herlaadt
-  /// [MarkdownNotesEditor] het Quill-document uit de nieuwe bron.
-  void _applyFindReplace(String body) {
-    _controller.text = body;
   }
 
   /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library

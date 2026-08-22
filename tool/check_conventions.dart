@@ -108,6 +108,23 @@ const int serviceUiImportBaseline = 4;
 const int modelUiImportBaseline = 0;
 
 /// A non-baselined `lib/` file may not exceed this many lines — split it first.
+/// Waarom een plafond niet exact op de huidige telling hoort te staan, in één
+/// regel — de tips onderaan de run halen hem op.
+const String _headroomWhy =
+    'two PRs touching the same file are each green against the main they saw, '
+    'and the merge lands over the ceiling';
+
+/// De lucht die een plafond hoort te houden boven de werkelijke telling, en
+/// tegelijk de drempel waarboven de run erover begint.
+///
+/// Zonder die drempel meldde de tip élke krimp, ook die van twee regels. Dat
+/// leest als een opdracht om het plafond strak op de telling te zetten, en
+/// precies dát maakte `main` breekbaar: twee sessies in hetzelfde bestand, elk
+/// groen, samen één regel over de rand. Nu zwijgt de run zolang de lucht binnen
+/// het dubbele van deze waarde blijft, en meldt hij pas wanneer er een echte
+/// winst te verzilveren valt — een splitsing, geen regel of twee.
+const int _baselineHeadroom = 25;
+
 const int maxFileLines = 1000;
 
 /// Files already above [maxFileLines] when the ratchet was introduced. Each
@@ -115,6 +132,15 @@ const int maxFileLines = 1000;
 /// number — the run prints a tip) but never grow. Add a new entry only with a
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
+///
+/// **Zet een plafond niet exact op de huidige regeltelling.** Dat leest als
+/// strak maar is het niet: twee PR's die tegelijk in hetzelfde bestand werken
+/// zijn allebei groen tegen de `main` die ze zagen, en de samenvoeging staat er
+/// dan één regel over. Op 21-08-2026 gebeurde dat vijf keer op rij — `main` rood
+/// op één of twee regels, telkens pas zichtbaar in de post-merge Linux-poort.
+/// Laat bij een verhoging of verlaging een handvol regels lucht (de reden mag in
+/// het commentaar erboven staan, net als de rest). De ratchet houdt zijn tanden:
+/// hij weigert nog steeds groei voorbij het plafond.
 const Map<String, int> fileSizeBaseline = {
   // +23 (#1643): fail-closed MarkdownSafetyScanner.scan in restoreRecovered.
   // De scan is cohesief met de herstel-lus (leest snap-velden, zet het
@@ -133,15 +159,19 @@ const Map<String, int> fileSizeBaseline = {
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
   'lib/services/export_service.dart': 1023,
-  // +182 (#1686): zoeken en zoeken-en-vervangen — de find/replace-staat
-  // (velden + methoden) en de MarkdownFindBar in de build. De logica hergebruikt
-  // text_search + MarkdownSourceController uit de presentatie-broneditor; er
-  // valt geen gedrag uit te tillen naar een part zonder een extension met
-  // private-veldtoegang te maken. Het scherm heeft al zes part-bestanden; de
-  // find/replace-methoden zijn cohesive met de State-levenscyclus.
-  // +15 (#1679, #1649): fence-state bijhouden in _documentTitle en visualEdit-
-  // logica in _onControllerChanged — cohesive met de State-levenscyclus.
-  'lib/widgets/document_editor_screen.dart': 1225,
+  // −75 (#1707): de find/replace-staat is naar FindReplaceSession gegaan, een
+  // gewone klasse die de documenteditor en de presentatie-broneditor nu delen.
+  // De regel hiervóór zei dat dat niet kon zonder private-veldtoegang; dat bleek
+  // mee te vallen — de sessie krijgt de controller mee, en waar de cursor heen
+  // moet blijft bij de gastheer (die weet van Visueel/Bron). Inclusief de
+  // fence-state uit #1679 en de visualEdit-logica uit #1649 staat het bestand
+  // op 1113 (was 1225).
+  //
+  // De lucht boven die telling is bewust: dit plafond stond drie keer op rij
+  // exact op de toenmalige telling, en toen liep `main` vijf keer rood op één of
+  // twee regels doordat twee sessies tegelijk in dit bestand werkten. Zie de kop
+  // van [fileSizeBaseline].
+  'lib/widgets/document_editor_screen.dart': 1150,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -254,13 +284,12 @@ const Map<String, int> classSizeBaseline = {
   // klasse (parts/document_markdown_image.dart), maar de blokselectie zelf
   // kan niet zonder de interne _Kind-enum en de _parse-lus.
   'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1008,
-  // +185 (#1686): zoeken en zoeken-en-vervangen — find/replace-staat (velden +
-  // methoden) en de MarkdownFindBar in de build. Hergebruikt text_search +
-  // MarkdownSourceController uit de presentatie-broneditor; de methoden zijn
-  // cohesive met de State-levenscyclus (lezen/zetten _controller, _viewMode,
-  // setState) en kunnen niet zonder private-veldtoegang naar een losse klasse.
-  // +16 (#1679, #1649): fence-state in _documentTitle en visualEdit-logica.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1228,
+  // −78 (#1707): find/replace-staat naar FindReplaceSession. Wat de klasse aan
+  // die methoden hield was `_controller` (gaat mee als parameter), `_viewMode`
+  // (blijft hier: alleen de gastheer weet of de cursor in de bron of in Quill
+  // staat) en `setState` (een callback). Klasse staat op 1115 (was 1228); net
+  // als bij het bestand met lucht erboven, om dezelfde reden.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1150,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
@@ -1000,7 +1029,7 @@ void main() {
       if (ceiling != null) {
         if (count > ceiling) {
           oversize.add('$path: $count lines (ceiling $ceiling)');
-        } else if (count < ceiling) {
+        } else if (ceiling - count > 2 * _baselineHeadroom) {
           shrunk.add('$path: $count (ceiling $ceiling)');
         }
       } else if (count > maxFileLines) {
@@ -1031,7 +1060,7 @@ void main() {
     if (ceiling != null) {
       if (count > ceiling) {
         fatClasses.add('$key: $count lines (ceiling $ceiling) — $where');
-      } else if (count < ceiling) {
+      } else if (ceiling - count > 2 * _baselineHeadroom) {
         shrunkClasses.add('$key: $count (ceiling $ceiling)');
       }
     } else if (count > maxClassLines) {
@@ -1263,13 +1292,17 @@ void main() {
     if (shrunk.isNotEmpty) {
       stdout.writeln(
         'Tip: ${shrunk.length} baselined file(s) shrank — lower their '
-        'fileSizeBaseline to lock in the win:\n    ${shrunk.join('\n    ')}',
+        'fileSizeBaseline to lock in the win — to about '
+        '$_baselineHeadroom lines above the new count, not exactly onto it '
+        '($_headroomWhy):\n'
+        '    ${shrunk.join('\n    ')}',
       );
     }
     if (shrunkClasses.isNotEmpty) {
       stdout.writeln(
         'Tip: ${shrunkClasses.length} baselined class(es) shrank — lower their '
-        'classSizeBaseline to lock in the win:\n'
+        'classSizeBaseline to lock in the win — same bit of air, about '
+        '$_baselineHeadroom lines ($_headroomWhy):\n'
         '    ${shrunkClasses.join('\n    ')}',
       );
     }
