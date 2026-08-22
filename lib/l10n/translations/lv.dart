@@ -4560,4 +4560,10 @@ const _dutchSourceAddLv = <String, String>{
   'Rechts uitlijnen': 'Līdzināt pa labi',
   'Rij onder invoegen': 'Ievietot rindu zemāk',
   'Splits tabel': 'Sadalīt tabulu',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Dokumenta stils (tēma, lapas izmērs, malas) netiek pārņemts.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumenta lauki (galvene un kājene) netiek pārņemti.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
 };

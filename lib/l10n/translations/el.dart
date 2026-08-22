@@ -4631,4 +4631,10 @@ const _dutchSourceAddEl = <String, String>{
   'Rechts uitlijnen': 'Στοίχιση δεξιά',
   'Rij onder invoegen': 'Εισαγωγή γραμμής κάτω',
   'Splits tabel': 'Διαίρεση πίνακα',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Το στυλ του εγγράφου (θέμα, μέγεθος σελίδας, περιθώρια) δεν διατηρείται.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Τα πεδία του εγγράφου (κεφαλίδα και υποσέλιδο) δεν διατηρούνται.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
 };

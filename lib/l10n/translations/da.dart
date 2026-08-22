@@ -4561,4 +4561,10 @@ const _dutchSourceAddDa = <String, String>{
   'Rechts uitlijnen': 'Højrejuster',
   'Rij onder invoegen': 'Indsæt række under',
   'Splits tabel': 'Opdel tabel',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Dokumentstilen (tema, sidestørrelse, margener) følger ikke med.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumentfelter (sidehoved og sidefod) følger ikke med.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
 };

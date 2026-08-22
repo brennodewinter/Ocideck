@@ -4551,4 +4551,10 @@ const _dutchSourceAddCs = <String, String>{
   'Rechts uitlijnen': 'Zarovnat vpravo',
   'Rij onder invoegen': 'Vložit řádek pod',
   'Splits tabel': 'Rozdělit tabulku',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Styl dokumentu (téma, velikost stránky, okraje) není zachován.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Pole dokumentu (hlavička a patička) nejsou zachována.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Poznámky pod čarou se stanou prostým textem; prezentace nemá poznámky.',
 };

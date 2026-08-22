@@ -4617,4 +4617,10 @@ const _dutchSourceAddMt = <String, String>{
   'Rechts uitlijnen': 'Allinea lemin',
   'Rij onder invoegen': 'Daħħal riga taħt',
   'Splits tabel': 'Qasam it-tabella',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'L-istil tad-dokument (tema, daqs tal-paġna, marġini) ma jiġiux mkaxkar.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'L-għalqa tad-dokument (header u footer) ma jiġuux mkaxkra.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
 };

@@ -4632,4 +4632,10 @@ const _dutchSourceAddIt = {
   'Rechts uitlijnen': 'Allinea a destra',
   'Rij onder invoegen': 'Inserisci riga sotto',
   'Splits tabel': 'Dividi tabella',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Lo stile del documento (tema, formato pagina, margini) non viene mantenuto.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'I campi del documento (intestazione e piè di pagina) non vengono mantenuti.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
 };

@@ -4569,4 +4569,10 @@ const _dutchSourceAddFi = <String, String>{
   'Rechts uitlijnen': 'Tasaa oikealle',
   'Rij onder invoegen': 'Lisää rivi alle',
   'Splits tabel': 'Jaa taulukko',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Asiakirjan tyyli (teema, sivukoko, marginaalit) ei siirry.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Asiakirjan kentät (ylä- ja alatunniste) eivät siirry.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
 };

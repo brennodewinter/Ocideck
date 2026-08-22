@@ -4579,4 +4579,10 @@ const _dutchSourceAddLa = <String, String>{
   'Rechts uitlijnen': 'Ad dextram ordinare',
   'Rij onder invoegen': 'Row subter inserere',
   'Splits tabel': 'Tabulam dividere',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Documenti stylus (themae, paginae magnitudo, margines) non fertur.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Documenti campi (caput et pes) non feruntur.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Notae subtus fiunt textus planus; praesentatio notas non habet.',
 };

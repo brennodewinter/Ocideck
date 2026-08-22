@@ -4607,4 +4607,10 @@ const _dutchSourceAddRo = <String, String>{
   'Rechts uitlijnen': 'Aliniază la dreapta',
   'Rij onder invoegen': 'Inserează rând dedesubt',
   'Splits tabel': 'Împarte tabelul',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Stilul documentului (temă, dimensiune pagină, margini) nu este păstrat.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Câmpurile documentului (antet și subsol) nu sunt păstrate.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Notele de subsol devin text simplu; o prezentare nu are note.',
 };

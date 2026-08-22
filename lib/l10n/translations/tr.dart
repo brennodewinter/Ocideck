@@ -4550,4 +4550,10 @@ const _dutchSourceAddTr = <String, String>{
   'Rechts uitlijnen': 'Sağa hizala',
   'Rij onder invoegen': 'Altına satır ekle',
   'Splits tabel': 'Tabloyu böl',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Belge stili (tema, sayfa boyutu, kenar boşlukları) taşınmaz.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Belge alanları (üstbilgi ve altbilgi) taşınmaz.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
 };

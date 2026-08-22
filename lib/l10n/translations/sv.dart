@@ -4559,4 +4559,10 @@ const _dutchSourceAddSv = <String, String>{
   'Rechts uitlijnen': 'Högerjustera',
   'Rij onder invoegen': 'Infoga rad under',
   'Splits tabel': 'Dela tabell',
+  'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
+      'Dokumentstilen (tema, sidstorlek, marginaler) följer inte med.',
+  'Documentvelden (kop- en voettekst) gaan niet mee.':
+      'Dokumentfält (sidhuvud och sidfot) följer inte med.',
+  'Voetnoten worden platte tekst; een presentatie kent geen noten.':
+      'Fotnoter blir till vanlig text; en presentation har inte noter.',
 };
