@@ -905,23 +905,26 @@ Map<int, pw.TableColumnWidth> pdfTableColumnWidths({
   }
 
   // De tabel past niet op één regel: maak de breedste kolommen één voor één
-  // flex, van breed naar smal, tot de overgebleven intrinsic kolommen samen
-  // ruim op het blad passen. De grens van 40 % laat genoeg ruimte voor de
-  // flex-kolommen — zet hem te hoog dan perst een bijna-intrinsic kolom de
-  // flex-buren plat, te laag dan worden ook kolommen flex die best op één
-  // regel passen.
+  // flex, van breed naar smal, tot de intrinsic kolommen samen ruim op het
+  // blad passen. De grens is niet een vaste fractie maar de som van de
+  // langste-woordenbreedtes van de flex-kolommen: zolang de intrinsic kolommen
+  // meer dan dat overblijft, krijgt elke flex-kolom minstens haar langste woord
+  // breedte (want de flex-ruimte wordt evenredig met de woordbreedte verdeeld).
+  // Zo breekt package:pdf geen woorden midden in af (#1727). Loopt de tabel over
+  // zelfs als alle kolommen flex zijn, dan is afbreken onvermijdelijk.
   final flex = List<bool>.filled(colCount, false);
   final order = List<int>.generate(colCount, (i) => i)
     ..sort((a, b) => est[b].compareTo(est[a]));
   var intrinsicSum = estSum;
+  var flexMinSum = 0.0;
   for (final c in order) {
-    if (intrinsicSum <= tableWidth * 0.4) break;
+    if (intrinsicSum <= tableWidth - flexMinSum) break;
     flex[c] = true;
     intrinsicSum -= est[c];
+    flexMinSum += wordWidth[c];
   }
-  // Omdat estSum > tableWidth en 0,4 * tableWidth < tableWidth, zet de lus
-  // altijd minstens één kolom op flex — precies wat de pro rato-samendrukking
-  // uitschakelt.
+  // Omdat estSum > tableWidth, zet de lus altijd minstens één kolom op flex —
+  // precies wat de pro rato-samendrukking uitschakelt.
 
   return {
     for (var c = 0; c < colCount; c++)

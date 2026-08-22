@@ -214,6 +214,7 @@ Future<Uint8List> _render(
               context,
               chrome,
               style,
+              fonts,
               builder,
               spans: headerSpans,
               logo: logo,
@@ -225,6 +226,7 @@ Future<Uint8List> _render(
               context,
               chrome,
               style,
+              fonts,
               builder,
               spans: footerSpans,
               logo: logo,
@@ -328,6 +330,7 @@ pw.Widget _band(
   pw.Context context,
   DocumentPdfChrome chrome,
   DocumentPdfStyle style,
+  DocumentPdfFonts fonts,
   DocumentPdfWidgets builder, {
   required List<PdfSpan> spans,
   required pw.ImageProvider? logo,
@@ -349,13 +352,7 @@ pw.Widget _band(
     if (!top && chrome.tlpLabel.trim().isNotEmpty)
       pw.Padding(
         padding: const pw.EdgeInsets.only(left: 8),
-        child: pw.Text(
-          chrome.tlpLabel,
-          style: textStyle.copyWith(
-            color: chrome.tlpColor ?? style.bandTextColor,
-            fontWeight: pw.FontWeight.bold,
-          ),
-        ),
+        child: _tlpBadge(chrome, style, fonts),
       ),
     if (showLogo && chrome.logoAtRight)
       pw.Padding(
@@ -386,6 +383,31 @@ pw.Widget _band(
     ),
   );
 }
+
+/// De TLP-markering als badge: zwarte achtergrond, monospace-letters in de
+/// officiële TLP-kleur. Spiegelt de schermweergave (_TlpOverlay in overlays.dart)
+/// en voldoet aan FIRST TLP 2.0, die de markering op zwart vereist (#1725).
+pw.Widget _tlpBadge(
+  DocumentPdfChrome chrome,
+  DocumentPdfStyle style,
+  DocumentPdfFonts fonts,
+) => pw.Container(
+  padding: const pw.EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+  decoration: pw.BoxDecoration(
+    color: PdfColors.black,
+    borderRadius: pw.BorderRadius.circular(2),
+  ),
+  child: pw.Text(
+    chrome.tlpLabel,
+    style: pw.TextStyle(
+      font: fonts.mono,
+      fontSize: style.bandSize * 0.92,
+      fontWeight: pw.FontWeight.bold,
+      color: chrome.tlpColor ?? PdfColors.white,
+      letterSpacing: 0.4,
+    ),
+  ),
+);
 
 /// Het logo als afbeelding, of `null` wanneer de bytes er geen dragen.
 ///
