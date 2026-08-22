@@ -193,7 +193,7 @@ void main() {
         'data:x',
       ]) {
         final out = markdownToLatex('[doel]($href)');
-        expect(out, contains('doel'));
+        expect(out, 'doel');
         expect(out, isNot(contains(r'\href{')), reason: href);
       }
     });

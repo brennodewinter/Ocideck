@@ -534,8 +534,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'i':
       case 'del':
       case 's':
-      case 'a':
         _buf.write('}');
+      case 'a':
+        if (ctx == _Ctx.link) _buf.write('}');
 
       case 'table':
         // Spuit de tabel uit met de juiste kolomspecificatie en randstijl.

@@ -150,8 +150,8 @@ void main() {
     );
     final tex = await File(out).readAsString();
 
-    expect(tex, contains(r'\fancyhead[L]{Audit\_2026 · P-42 · P\_43}'));
-    expect(tex, contains(r'\fancyfoot[L]{Ada \& Bob — R\&D 100\%}'));
+    expect(tex, contains(r'\textbf{Audit\_2026} · P-42 · P\_43'));
+    expect(tex, contains(r'Ada \& Bob — R\&D 100\%'));
     expect(tex, isNot(contains('{project-id}')));
     expect(tex, isNot(contains('{project_id}')));
     expect(tex, isNot(contains('{subtitle}')));
@@ -176,6 +176,66 @@ void main() {
     final tex = await File(out).readAsString();
 
     expect(tex, contains('\\maketitle\n\\thispagestyle{fancy}\n'));
+  });
+
+  test('LaTeX-kop en -voet houden veilige Markdown en bandkleuren', () async {
+    const theme = ThemeProfile(
+      documentHeaderText:
+          '**VERTROUWELIJK** · *cursief* · `code` · ~~oud~~ · '
+          '[veilig](https://example.invalid/dossier) · '
+          '[onveilig](javascript:alert(1)) · {case-id}',
+      documentFooterText: '[mail](mailto:test@example.invalid)',
+      documentBandTextColor: '#112233',
+      documentBandBackgroundColor: '#DDEEFF',
+    );
+    final bundle = await buildBundle(
+      '# Rapport\n\nTekst.\n',
+      theme: theme,
+      fields: const {
+        'case-id': '**letterlijk** [geen link](https://injectie.invalid)',
+      },
+    );
+    final out = p.join(temp.path, 'chrome.tex');
+
+    await writeDocumentExport(
+      bundle,
+      DocumentExportFormat.latex,
+      html: MarpHtmlService(loadAsset: _diskLoader),
+      enforcementPolicy: const ClassificationEnforcementPolicy(),
+      outputPath: out,
+    );
+    final tex = await File(out).readAsString();
+
+    expect(tex, contains(r'\textbf{VERTROUWELIJK}'));
+    expect(tex, contains(r'\textit{cursief}'));
+    expect(tex, contains(r'\texttt{code}'));
+    expect(tex, contains(r'\sout{oud}'));
+    expect(tex, contains(r'\href{https://example.invalid/dossier}{veilig}'));
+    expect(tex, contains(r'\href{mailto:test@example.invalid}{mail}'));
+    expect(tex, isNot(contains('javascript:')));
+    expect(tex, contains('onveilig'));
+    expect(
+      tex,
+      contains('**letterlijk** [geen link](https://injectie.invalid)'),
+    );
+    expect(tex, isNot(contains(r'\textbf{letterlijk}')));
+    expect(tex, isNot(contains(r'\href{https://injectie.invalid}')));
+    expect(
+      tex,
+      contains(r'\definecolor{ocideckDocumentBandText}{HTML}{112233}'),
+    );
+    expect(
+      tex,
+      contains(r'\definecolor{ocideckDocumentBandBackground}{HTML}{DDEEFF}'),
+    );
+    expect(
+      r'\colorbox{ocideckDocumentBandBackground}{\textcolor{ocideckDocumentBandText}{'
+          .allMatches(tex),
+      hasLength(2),
+    );
+    expect(r'\begin{document}'.allMatches(tex), hasLength(1));
+    expect(r'\end{document}'.allMatches(tex), hasLength(1));
+    expect('{'.allMatches(tex).length, '}'.allMatches(tex).length, reason: tex);
   });
 
   test('wiskunde gaat rechtstreeks door in latex-export', () async {

@@ -1809,6 +1809,14 @@ that before deciding whether this alpha fits what you are doing.
   al een rail en kaarten, maar draagt nu ook beide zichtbare kolomkoppen en de
   later aan het scherm toegevoegde connector en eindmarkering. Lange tijdlijnen
   blijven over meerdere bladzijden lopen en hun tekstlaag blijft doorzoekbaar.
+- **Kop en voet van een LaTeX-document verliezen hun opmaak en bandkleuren niet
+  meer (#1715).** De sjablonen gaan na veilige, letterlijke veldsubstitutie door
+  de bestaande inline-Markdownconverter: vet, cursief, code, doorhalen en veilige
+  links blijven uitvoerbaar; onveilige links blijven platte tekst. De article-
+  preamble zet daarnaast de gekozen bandtekst- en achtergrondkleur. Dezelfde
+  regressietest vond en sloot een losse `}` die een geweigerde link in LaTeX
+  achterliet en het document oncompileerbaar kon maken.
+
 - **De LaTeX-documentexport voert de bestaande tabelstijl nu werkelijk uit
   (#1714).** De converter leest de GFM-uitlijning per kolom (`l`, `c`, `r`) en
   krijgt voor documenten het volledige opgeloste stijlprofiel mee. Daardoor

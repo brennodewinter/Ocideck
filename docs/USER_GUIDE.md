@@ -4683,9 +4683,12 @@ your source. The export dialog asks two things:
   lists keep checked and unchecked boxes distinct, and numbered lists keep their
   chosen starting number, including in nested lists. GFM column alignment and
   the document style's table colours, borders, zebra striping, cell padding and
-  header accent rule are written into the LaTeX source too. Compile with
-  `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
-  2026-08-07; list and table parity corrected 2026-08-22.)*
+  header accent rule are written into the LaTeX source too. Header and footer
+  text keeps supported inline Markdown (bold, italic, code, strike-through and
+  safe links) and uses the band's text and background colours; inserted document
+  field values remain literal text. Compile with `pdflatex` or `xelatex` using a
+  standard TeX Live installation. *(Added 2026-08-07; list, table and document
+  band parity corrected 2026-08-22.)*
 
 #### The PDF
 
