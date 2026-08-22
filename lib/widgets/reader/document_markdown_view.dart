@@ -634,6 +634,17 @@ class DocumentMarkdownView extends StatelessWidget {
       // falls back to a paragraph" only holds if the fallback always advances.
       final para = <String>[lines[i].trim()];
       i++;
+      // Setext-kop: een tekstregel direct gevolgd door `===` (H1) of `---`
+      // (H2). De export (markdown-package) herkent deze wel, de weergave niet
+      // — dus verscheen een kop in de uitvoer als alinea op het scherm (#1647).
+      // De `---` onderscheidt zich van een horizontale streep door context:
+      // direct na een tekstregel, zonder lege regel ertussen.
+      if (i < lines.length && _isSetextUnderline(lines[i])) {
+        final level = lines[i].trim().startsWith('=') ? 1 : 2;
+        blocks.add(_Block(_Kind.heading, level: level, text: para.single));
+        i++;
+        continue;
+      }
       while (i < lines.length && _isParagraphLine(lines[i])) {
         para.add(lines[i].trim());
         i++;
