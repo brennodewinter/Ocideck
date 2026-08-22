@@ -1,7 +1,9 @@
 import '../services/document_page_setup.dart';
+
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' show EditorState;
@@ -874,14 +876,32 @@ Future<String?> _writeDocumentExport(
     return null;
   }
 
-  final outputPath = await _pickDocumentExportPath(
-    l10n,
-    format: format,
-    profile: profile,
-    title: bundle.audience.deck.title,
-    projectPath: projectPath,
-  );
-  if (outputPath == null) return null;
+  // Op web kan de bestandskiezer geen pad vragen zonder de bytes al te hebben
+  // — de browser wil de bytes up front als download. Op desktop kiezen we eerst
+  // een pad, dan schrijft writeDocumentExport daar atomisch naartoe.
+  final String? outputPath;
+  final String? webFileName;
+  if (kIsWeb) {
+    outputPath = null;
+    webFileName = suggestedDocumentExportFileName(
+      title: bundle.audience.deck.title,
+      format: format,
+      profile: profile,
+      redactedLabel: l10n.d('geredigeerd'),
+      fullLabel: l10n.d('volledig'),
+      fallbackLabel: l10n.d('document'),
+    );
+  } else {
+    outputPath = await _pickDocumentExportPath(
+      l10n,
+      format: format,
+      profile: profile,
+      title: bundle.audience.deck.title,
+      projectPath: projectPath,
+    );
+    if (outputPath == null) return null;
+    webFileName = null;
+  }
 
   return writeDocumentExport(
     bundle,
@@ -920,6 +940,7 @@ Future<String?> _writeDocumentExport(
     renderMath: renderMathForPdf,
     outputPath: outputPath,
     sourcePath: filePath,
+    webFileName: webFileName,
   );
 }
 

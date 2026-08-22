@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:path/path.dart' as p;
 
 import '../models/privacy_disposition.dart';
@@ -151,32 +152,24 @@ Future<ExportBundle> buildDocumentExportBundle(
 String projectedDocumentBody(ExportBundle bundle) =>
     DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience.deck);
 
-/// Schrijft een document-export naar [outputPath] in het gevraagde [format].
+/// Bouwt de bytes voor een document-export in [format]. Headless: geen IO.
+///
+/// Op desktop schrijft [writeDocumentExport] deze bytes atomisch weg; op web
+/// geeft de aanroeper ze aan `FilePicker.saveFile` als browser-download. De
+/// PDF-callbacks ([onPdfUnsupportedCharacters], [onPdfCoarseLogo]) vuren in
+/// beide paden — een teken dat de tekstlaag niet kent, of een te grof logo,
+/// is geen schrijffout maar een bronprobleem dat de auteur hoort te weten.
 ///
 /// Een **audience**-oppervlak: de inhoud die de deur uit gaat komt uit
 /// [projectedDocumentBody] — de geprojecteerde body via de bundel, nooit de
 /// rauwe bron. Daarom neemt deze functie een [ExportBundle] en geen `Deck` of
 /// `List<Slide>`; die vorm is precies wat de compile-time projectiegrens
-/// (`tool/check_audience_boundary.dart`) verlangt van een schrijver die
-/// `writeStringAtomic` raakt.
-///
-/// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg,
-///   met de geldende paginaopmaak ([pageSize]/[pageMargins]) in Pandoc-front
-///   matter ervoor — anders dan de stijl reist de maat wél mee (zie de
-///   toelichting in die tak, en FILE_FORMAT.md §14.4).
-/// - [DocumentExportFormat.html] rendert die body als één doorlopend HTML-
-///   document (`continuous: true`) en schrijft het resultaat atomisch weg.
-/// - [DocumentExportFormat.latex] zet de geprojecteerde body om naar een
-///   LaTeX `article`-document (preamble + body + postamble) en schrijft het
-///   resultaat atomisch weg. Afbeeldingen worden op relatief pad
-///   gereferentieerd — LaTeX kent geen data-URI-inlining.
-///
-/// Geeft het geschreven pad terug.
-Future<String?> writeDocumentExport(
+/// (`tool/check_audience_boundary.dart`) verlangt.
+@visibleForTesting
+Future<Uint8List> buildDocumentExportBytes(
   ExportBundle bundle,
   DocumentExportFormat format, {
   required MarpHtmlService html,
-  required ClassificationEnforcementPolicy enforcementPolicy,
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
   bool chapterPageBreak = false,
@@ -191,13 +184,9 @@ Future<String?> writeDocumentExport(
   MathSvgResolver? renderMath,
   void Function(Set<int> runes)? onPdfUnsupportedCharacters,
   void Function(LogoResolution logo)? onPdfCoarseLogo,
-  required String outputPath,
   String? sourcePath,
+  String? outputPath,
 }) async {
-  if (await _sameFile(sourcePath, outputPath)) return null;
-  if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
-    return null;
-  }
   final theme = bundle.audience.deck.themeProfile;
   final projectedMetadata = ExportDocumentMetadata.fromDeck(bundle.audience);
   final exportMetadata = metadata == null
@@ -214,11 +203,9 @@ Future<String?> writeDocumentExport(
         footnotePlacement: footnotePlacement,
         documentFields: documentFields,
       );
-      await writeStringAtomic(
-        File(outputPath),
-        _rebaseImagePaths(md, sourcePath, outputPath),
+      return Uint8List.fromList(
+        utf8.encode(_rebaseImagePaths(md, sourcePath, outputPath ?? '')),
       );
-      return outputPath;
     case DocumentExportFormat.html:
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
       // De marker blijft staan; marked rendert de GFM-lijst als klikbare nav.
@@ -242,15 +229,14 @@ Future<String?> writeDocumentExport(
         pageSize: pageSize,
         pageMargins: pageMargins,
       );
-      await writeStringAtomic(File(outputPath), out);
-      return outputPath;
+      return Uint8List.fromList(utf8.encode(out));
     case DocumentExportFormat.latex:
       final meta = exportMetadata;
       final body = markdownToLatex(
         _rebaseImagePaths(
           projectedDocumentBody(bundle),
           sourcePath,
-          outputPath,
+          outputPath ?? '',
         ),
         chapterPageBreak: chapterPageBreak,
         tableBorderStyle: theme.tableBorderStyle,
@@ -260,10 +246,9 @@ Future<String?> writeDocumentExport(
       );
       final tex =
           '${articlePreamble(meta, theme: theme, documentFields: chromeFields, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
-      await writeStringAtomic(File(outputPath), tex);
-      return outputPath;
+      return Uint8List.fromList(utf8.encode(tex));
     case DocumentExportFormat.pdf:
-      return _writeDocumentPdf(
+      final result = await buildDocumentExportPdf(
         bundle,
         labels:
             pdfLabels ??
@@ -282,11 +267,113 @@ Future<String?> writeDocumentExport(
         pageSize: pageSize,
         pageMargins: pageMargins,
         metadata: exportMetadata,
-        onUnsupportedCharacters: onPdfUnsupportedCharacters,
-        onCoarseLogo: onPdfCoarseLogo,
-        outputPath: outputPath,
       );
+      // Een teken dat geen enkele snede kent verdwijnt uit de tekstlaag zonder
+      // dat het bestand ergens klaagt. De schil hoort dat te kunnen melden.
+      if (!result.isComplete) {
+        onPdfUnsupportedCharacters?.call(result.unsupportedCharacters);
+      }
+      // Een logo dat te grof is voor drukwerk is geen fout in de export maar in
+      // het bronbestand; zeggen is het enige wat er nog aan te doen valt.
+      final coarse = result.coarseLogo;
+      if (coarse != null) onPdfCoarseLogo?.call(coarse);
+      return result.bytes;
   }
+}
+
+/// Schrijft een document-export naar [outputPath] (desktop) of als
+/// browser-download via [webFileName] (web), in het gevraegde [format].
+///
+/// Een **audience**-oppervlak: de inhoud die de deur uit gaat komt uit
+/// [projectedDocumentBody] — de geprojecteerde body via de bundel, nooit de
+/// rauwe bron. Daarom neemt deze functie een [ExportBundle] en geen `Deck` of
+/// `List<Slide>`; die vorm is precies wat de compile-time projectiegrens
+/// (`tool/check_audience_boundary.dart`) verlangt van een schrijver die
+/// `writeBytesAtomic` of `FilePicker.saveFile` raakt.
+///
+/// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg,
+///   met de geldende paginaopmaak ([pageSize]/[pageMargins]) in Pandoc-front
+///   matter ervoor — anders dan de stijl reist de maat wél mee (zie de
+///   toelichting in die tak, en FILE_FORMAT.md §14.4).
+/// - [DocumentExportFormat.html] rendert die body als één doorlopend HTML-
+///   document (`continuous: true`) en schrijft het resultaat atomisch weg.
+/// - [DocumentExportFormat.latex] zet de geprojecteerde body om naar een
+///   LaTeX `article`-document (preamble + body + postamble) en schrijft het
+///   resultaat atomisch weg. Afbeeldingen worden op relatief pad
+///   gereferentieerd — LaTeX kent geen data-URI-inlining.
+/// - [DocumentExportFormat.pdf] zet de geprojecteerde body als een PDF met een
+///   echte tekstlaag (te selecteren, te doorzoeken). De tekstlaag is met een
+///   gewone lezer uit te pakken, dus een geredigeerd gegeven dat er tóch in
+///   belandt is even leesbaar als in de `.md` — de fail-closed test meet dan
+///   ook op de geleverde bytes (test/pdf/document_pdf_export_privacy_test.dart).
+///
+/// Op web ([kIsWeb]) is er geen bestandssysteem: [webFileName] wordt dan de
+/// bestandsnaam van de browser-download, en [outputPath] wordt genegeerd. Op
+/// desktop is [outputPath] het pad dat atomisch wordt beschreven, en
+/// [webFileName] wordt genegeerd.
+///
+/// Geeft het geschreven pad (desktop) of de bestandsnaam (web) terug, of
+/// `null` bij een geblokkeerde classificatie of wanneer het doel gelijk is
+/// aan de bron.
+Future<String?> writeDocumentExport(
+  ExportBundle bundle,
+  DocumentExportFormat format, {
+  required MarpHtmlService html,
+  required ClassificationEnforcementPolicy enforcementPolicy,
+  ExportDocumentMetadata? metadata,
+  HtmlImageResolver? embedImage,
+  bool chapterPageBreak = false,
+  bool cropMarks = false,
+  PageSizeSpec? pageSize,
+  PageMargins? pageMargins,
+  FootnotePlacement footnotePlacement = FootnotePlacement.page,
+  String footnotesTitle = 'Noten',
+  DocumentPdfLabels? pdfLabels,
+  ByteData? pdfFallbackFont,
+  MermaidSvgResolver? renderMermaid,
+  MathSvgResolver? renderMath,
+  void Function(Set<int> runes)? onPdfUnsupportedCharacters,
+  void Function(LogoResolution logo)? onPdfCoarseLogo,
+  String? outputPath,
+  String? sourcePath,
+  String? webFileName,
+}) async {
+  if (!kIsWeb) {
+    if (outputPath == null) return null;
+    if (await _sameFile(sourcePath, outputPath)) return null;
+  }
+  if (!enforcementPolicy.evaluate(bundle.audience.deck.tlp).allowed) {
+    return null;
+  }
+  final bytes = await buildDocumentExportBytes(
+    bundle,
+    format,
+    html: html,
+    metadata: metadata,
+    embedImage: embedImage,
+    chapterPageBreak: chapterPageBreak,
+    cropMarks: cropMarks,
+    pageSize: pageSize,
+    pageMargins: pageMargins,
+    footnotePlacement: footnotePlacement,
+    footnotesTitle: footnotesTitle,
+    pdfLabels: pdfLabels,
+    pdfFallbackFont: pdfFallbackFont,
+    renderMermaid: renderMermaid,
+    renderMath: renderMath,
+    onPdfUnsupportedCharacters: onPdfUnsupportedCharacters,
+    onPdfCoarseLogo: onPdfCoarseLogo,
+    sourcePath: sourcePath,
+    outputPath: kIsWeb ? null : outputPath,
+  );
+  if (kIsWeb) {
+    // Web: geen bestandssysteem — file_picker maakt van de bytes een
+    // browser-download (Blob + anker). De bestandsnaam is het resultaat.
+    await FilePicker.saveFile(fileName: webFileName!, bytes: bytes);
+    return webFileName;
+  }
+  await writeBytesAtomic(File(outputPath!), bytes);
+  return outputPath;
 }
 
 Future<bool> _sameFile(String? sourcePath, String outputPath) async {
@@ -390,59 +477,6 @@ String _projectedMarkdown(
     ),
     documentFields,
   );
-}
-
-/// Zet het document als PDF en schrijft het atomisch weg.
-///
-/// Anders dan de PDF van een deck — één bitmap per dia, zonder tekstlaag — wordt
-/// deze *gezet*: de tekst is te selecteren, te doorzoeken en voor te lezen, en de
-/// koppen staan in de bladwijzerboom. Zie `lib/services/pdf/` en
-/// DOCUMENT_MODE.md §6.
-///
-/// Een **audience**-oppervlak, net als [writeDocumentExport] zelf: het neemt een
-/// [ExportBundle] en geen `Deck`, zodat wat de deur uit gaat de geprojecteerde
-/// (geredigeerde) body is. Het staat als zodanig geregistreerd in
-/// `tool/check_audience_boundary.dart`.
-Future<String?> _writeDocumentPdf(
-  ExportBundle bundle, {
-  required DocumentPdfLabels labels,
-  required String outputPath,
-  ByteData? fallbackFont,
-  HtmlImageResolver? embedImage,
-  MermaidSvgResolver? renderMermaid,
-  MathSvgResolver? renderMath,
-  bool chapterPageBreak = false,
-  bool cropMarks = false,
-  PageSizeSpec? pageSize,
-  PageMargins? pageMargins,
-  ExportDocumentMetadata? metadata,
-  void Function(Set<int> runes)? onUnsupportedCharacters,
-  void Function(LogoResolution logo)? onCoarseLogo,
-}) async {
-  final result = await buildDocumentExportPdf(
-    bundle,
-    labels: labels,
-    fallbackFont: fallbackFont,
-    embedImage: embedImage,
-    renderMermaid: renderMermaid,
-    renderMath: renderMath,
-    chapterPageBreak: chapterPageBreak,
-    cropMarks: cropMarks,
-    pageSize: pageSize,
-    pageMargins: pageMargins,
-    metadata: metadata,
-  );
-  await writeBytesAtomic(File(outputPath), result.bytes);
-  // Een teken dat geen enkele snede kent verdwijnt uit de tekstlaag zonder dat
-  // het bestand ergens klaagt. De schil hoort dat te kunnen melden.
-  if (!result.isComplete) {
-    onUnsupportedCharacters?.call(result.unsupportedCharacters);
-  }
-  // Een logo dat te grof is voor drukwerk is geen fout in de export maar in het
-  // bronbestand; zeggen is het enige wat er nog aan te doen valt.
-  final coarse = result.coarseLogo;
-  if (coarse != null) onCoarseLogo?.call(coarse);
-  return outputPath;
 }
 
 Map<String, String> _documentChromeFields(Deck deck) => {

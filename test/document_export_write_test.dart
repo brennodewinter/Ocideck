@@ -3,6 +3,7 @@
 // Deze test bewijst dat beide formaten een bestand op schijf zetten met de
 // geredigeerde inhoud, en dat de HTML-vorm de doorlopende (continuous) route
 // neemt.
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -17,6 +18,7 @@ import 'package:ocideck/services/document_style.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/pdf/document_pdf_export.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
@@ -704,6 +706,175 @@ void main() {
       const md = '![Alt](images/foto.png)\n';
       final result = rebaseImagePathsForTesting(md, null, '/output/rapport.md');
       expect(result, md);
+    });
+  });
+
+  // #1720: buildDocumentExportBytes is de headless byte-bouwer die op web
+  // rechtstreeks naar FilePicker.saveFile gaat en op desktop door
+  // writeDocumentExport atomisch wordt weggeschreven. De bytes moeten in beide
+  // paden identiek zijn — de split mag geen inhoudelijke wijziging zijn.
+  group('buildDocumentExportBytes (#1720)', () {
+    test(
+      'md-bytes komen overeen met wat writeDocumentExport schrijft',
+      () async {
+        await withBundle((bundle) async {
+          final out = p.join(temp.path, 'rapport.md');
+          await writeDocumentExport(
+            bundle,
+            DocumentExportFormat.md,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            enforcementPolicy: const ClassificationEnforcementPolicy(),
+            outputPath: out,
+          );
+          final onDisk = await File(out).readAsBytes();
+
+          final bytes = await buildDocumentExportBytes(
+            bundle,
+            DocumentExportFormat.md,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            outputPath: out,
+          );
+          expect(bytes, onDisk);
+        });
+      },
+    );
+
+    test(
+      'html-bytes bevatten dezelfde inhoud als wat writeDocumentExport schrijft',
+      () async {
+        await withBundle((bundle) async {
+          final out = p.join(temp.path, 'rapport.html');
+          await writeDocumentExport(
+            bundle,
+            DocumentExportFormat.html,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            enforcementPolicy: const ClassificationEnforcementPolicy(),
+            outputPath: out,
+          );
+          final onDisk = utf8.decode(await File(out).readAsBytes());
+
+          final bytes = await buildDocumentExportBytes(
+            bundle,
+            DocumentExportFormat.html,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            outputPath: out,
+          );
+          // HTML kan niet-deterministische elementen bevatten (bijv. een
+          // cache-buster in een asset-URL), dus vergelijken we de inhoud
+          // die door de projectie komt, niet de exacte bytes.
+          final decoded = utf8.decode(bytes);
+          expect(decoded, contains('<section class="document"'));
+          expect(decoded, contains('UNIEKPROZA'));
+          expect(onDisk, contains('UNIEKPROZA'));
+        });
+      },
+    );
+
+    test(
+      'latex-bytes komen overeen met wat writeDocumentExport schrijft',
+      () async {
+        await withBundle((bundle) async {
+          final out = p.join(temp.path, 'rapport.tex');
+          await writeDocumentExport(
+            bundle,
+            DocumentExportFormat.latex,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            enforcementPolicy: const ClassificationEnforcementPolicy(),
+            outputPath: out,
+          );
+          final onDisk = await File(out).readAsBytes();
+
+          final bytes = await buildDocumentExportBytes(
+            bundle,
+            DocumentExportFormat.latex,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            outputPath: out,
+          );
+          expect(bytes, onDisk);
+        });
+      },
+    );
+
+    test(
+      'pdf-bytes zijn een geldige PDF met de geprojecteerde inhoud',
+      () async {
+        await withBundle((bundle) async {
+          final out = p.join(temp.path, 'rapport.pdf');
+          await writeDocumentExport(
+            bundle,
+            DocumentExportFormat.pdf,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            enforcementPolicy: const ClassificationEnforcementPolicy(),
+            outputPath: out,
+          );
+          final onDisk = await File(out).readAsBytes();
+
+          final bytes = await buildDocumentExportBytes(
+            bundle,
+            DocumentExportFormat.pdf,
+            html: MarpHtmlService(loadAsset: _diskLoader),
+            outputPath: out,
+          );
+          // Een PDF kan niet-deterministische object-IDs en timestamps
+          // bevatten, dus vergelijken we structuur, niet exacte bytes.
+          expect(bytes, isNotEmpty);
+          expect(bytes.sublist(0, 5), [37, 80, 68, 70, 45]); // %PDF-
+          expect(onDisk.sublist(0, 5), [37, 80, 68, 70, 45]); // %PDF-
+          expect(bytes.length, closeTo(onDisk.length, onDisk.length * 0.1));
+        });
+      },
+    );
+
+    test('pdf-callbacks vuren vanuit buildDocumentExportBytes', () async {
+      await withBundle((bundle) async {
+        final unsupported = <Set<int>>[];
+        final coarse = <LogoResolution>[];
+        await buildDocumentExportBytes(
+          bundle,
+          DocumentExportFormat.pdf,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          onPdfUnsupportedCharacters: unsupported.add,
+          onPdfCoarseLogo: coarse.add,
+        );
+        // Gewone Nederlandse tekst zonder exotische tekens → geen melding.
+        expect(unsupported, isEmpty);
+        expect(coarse, isEmpty);
+      });
+    });
+
+    test('pdf-callbacks vuren bij niet-ondersteunde tekens', () async {
+      final bundle = await buildDocumentExportBundle(
+        '# Verslag\n\n日本語 in de tekst.\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final unsupported = <Set<int>>[];
+      await buildDocumentExportBytes(
+        bundle,
+        DocumentExportFormat.pdf,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        onPdfUnsupportedCharacters: unsupported.add,
+      );
+      expect(unsupported, hasLength(1));
+      expect(unsupported.single.map(String.fromCharCode).join(), contains('日'));
+    });
+
+    test('sourcePath null → geen rebasing in md-bytes', () async {
+      await withBundle((bundle) async {
+        final bytes = await buildDocumentExportBytes(
+          bundle,
+          DocumentExportFormat.md,
+          html: MarpHtmlService(loadAsset: _diskLoader),
+          sourcePath: null,
+          outputPath: null,
+        );
+        final content = utf8.decode(bytes);
+        expect(content, contains('UNIEKPROZA'));
+      });
     });
   });
 }
