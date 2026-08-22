@@ -68,10 +68,14 @@ class MarkdownDocument {
 
   /// Een nieuw document met dezelfde frontmatter maar een vervangen body. De
   /// stijl blijft staan; alleen de inhoud verandert.
-  MarkdownDocument withBody(String nextBody) => MarkdownDocument._(
-    _source.reparse(frontMatter + nextBody),
-    _frontMatterMetadata,
-  );
+  ///
+  /// Delegeert naar [withSource], dat al controleert of de frontmatter in de
+  /// nieuwe bron dezelfde is. Zonder die controle — wanneer het document geen
+  /// frontmatter heeft en de body opent met `---` — zou de oude (lege) metadata
+  /// worden hergebruikt terwijl de bron wel een frontmatter-blok heeft, en
+  /// zouden [body] en [frontMatter] niet meer kloppen (#1682).
+  MarkdownDocument withBody(String nextBody) =>
+      withSource(frontMatter + nextBody);
 
   /// Een nieuw document met de stijl gezet op [name] (of verwijderd bij `null`).
   /// Byte-chirurgisch: een platte `.md` zonder stijl blijft byte-identiek als je
