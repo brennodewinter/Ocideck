@@ -16,7 +16,7 @@
 
 import 'package:markdown/markdown.dart' as md;
 
-import '../../models/settings.dart' show TableBorderStyle;
+import '../../models/settings.dart' show TableBorderStyle, ThemeProfile;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
@@ -41,6 +41,7 @@ String markdownToLatex(
   String markdown, {
   bool chapterPageBreak = false,
   TableBorderStyle tableBorderStyle = TableBorderStyle.lined,
+  ThemeProfile? tableTheme,
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
   String endnotesTitle = 'Noten',
 }) {
@@ -82,6 +83,7 @@ String markdownToLatex(
     mathBlocks: protected.blocks,
     chapterPageBreak: chapterPageBreak,
     tableBorderStyle: tableBorderStyle,
+    tableTheme: tableTheme,
   );
   for (final node in nodes) {
     node.accept(visitor);
@@ -202,6 +204,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     this._mathBlocks = const {},
     this.chapterPageBreak = false,
     this.tableBorderStyle = TableBorderStyle.lined,
+    this.tableTheme,
   });
 
   final StringBuffer output = StringBuffer();
@@ -211,6 +214,13 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 
   /// De randstijl van tabellen (feature 5).
   final TableBorderStyle tableBorderStyle;
+
+  /// De volledige tabelstijl voor een Document-export. `null` houdt de kleine
+  /// gedeelde converter geschikt voor Beamer en losse fragmenttests.
+  final ThemeProfile? tableTheme;
+
+  TableBorderStyle get _tableBorderStyle =>
+      tableTheme?.tableBorderStyle ?? tableBorderStyle;
 
   /// Of we al een hoofdstuk zijn tegengekomen — het eerste krijgt geen `\newpage`.
   bool _seenChapter = false;
@@ -317,6 +327,13 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         _stack.add(_Ctx.unorderedList);
       case 'ol':
         output.write('\\begin{enumerate}\n');
+        final start = int.tryParse(element.attributes['start'] ?? '') ?? 1;
+        final depth = _stack.where((ctx) => ctx == _Ctx.orderedList).length;
+        if (start > 1 && depth < _enumerateCounters.length) {
+          output.write(
+            '\\setcounter{${_enumerateCounters[depth]}}{${start - 1}}\n',
+          );
+        }
         _stack.add(_Ctx.orderedList);
       case 'li':
         _visitListItem(element);
@@ -385,7 +402,16 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'th':
       case 'td':
         _stack.add(_Ctx.tableCell);
-        if (_inTableHead) _rowBuf.write('\\textbf{');
+        if (_inTableHead) {
+          _rowBuf.write(
+            tableTheme == null
+                ? '\\textbf{'
+                : '\\cellcolor{ocideckTableHeaderBackground}'
+                      '\\textcolor{ocideckTableHeaderText}{\\textbf{',
+          );
+        } else if (tableTheme != null) {
+          _rowBuf.write('\\textcolor{ocideckTableText}{');
+        }
         return true;
 
       default:
@@ -398,7 +424,16 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     // GFM task-list: <li class="task-list-item"> met een <input>-kind.
     final isTask =
         element.attributes['class']?.contains('task-list-item') ?? false;
-    output.write(isTask ? r'\item[$\square$] ' : r'\item ');
+    final checked = element.children?.whereType<md.Element>().any(
+      (child) => child.tag == 'input' && child.attributes['checked'] != null,
+    );
+    output.write(
+      !isTask
+          ? r'\item '
+          : checked == true
+          ? r'\item[$\boxtimes$] '
+          : r'\item[$\square$] ',
+    );
   }
 
   bool _visitCode(md.Element element) {
@@ -440,6 +475,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     _stack.add(_Ctx.table);
     _tableRows.clear();
     _tableColCount = 0;
+    _tableColumnAlignments.clear();
     _inTableHead = false;
   }
 
@@ -447,7 +483,13 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     _rowBuf.clear();
     _stack.add(_Ctx.tableRow);
     if (_tableColCount == 0) {
-      _tableColCount = element.children?.where(_isCell).length ?? 0;
+      final cells = element.children?.whereType<md.Element>().where(
+        (child) => _isCell(child),
+      );
+      _tableColumnAlignments.addAll(
+        cells?.map(_tableAlignment) ?? const <String>[],
+      );
+      _tableColCount = _tableColumnAlignments.length;
     }
   }
 
@@ -492,29 +534,33 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'i':
       case 'del':
       case 's':
-      case 'a':
         _buf.write('}');
+      case 'a':
+        if (ctx == _Ctx.link) _buf.write('}');
 
       case 'table':
         // Spuit de tabel uit met de juiste kolomspecificatie en randstijl.
-        final spec = switch (tableBorderStyle) {
-          TableBorderStyle.boxed => '|${'l|' * _tableColCount}',
-          _ => 'l' * _tableColCount,
+        final columns = _tableColumnAlignments.join();
+        final spec = switch (_tableBorderStyle) {
+          TableBorderStyle.boxed => '|${_tableColumnAlignments.join('|')}|',
+          _ => columns,
         };
+        if (tableTheme != null) _writeTableStyleStart();
         output.write('\\begin{tabular}{$spec}\n');
-        if (tableBorderStyle == TableBorderStyle.boxed) {
+        if (_tableBorderStyle == TableBorderStyle.boxed) {
           output.write('\\hline\n');
-        } else if (tableBorderStyle == TableBorderStyle.lined) {
+        } else if (_tableBorderStyle == TableBorderStyle.lined) {
           output.write('\\toprule\n');
         }
         output.write(_tableRows);
         // Bij `boxed` sluit elke rij zelf al met een `\hline` af (zie 'tr'),
         // dus de onderrand staat er dan al — nog een regel geeft een dubbele
         // lijn onder de tabel.
-        if (tableBorderStyle == TableBorderStyle.lined) {
+        if (_tableBorderStyle == TableBorderStyle.lined) {
           output.write('\\bottomrule\n');
         }
         output.write('\\end{tabular}\n');
+        if (tableTheme != null) output.write('}\n');
       case 'thead':
         // Niets — de header/body-scheiding (\midrule) wordt bij de eerste
         // tbody-rij geplaatst.
@@ -536,7 +582,7 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         // De koprij is de rij die binnen `<thead>` sluit — niet "de rij ná de
         // eerste". Op die aanname stond de `\midrule` een rij te laag: onder de
         // eerste gegevensrij in plaats van onder de kop.
-        final rule = switch ((tableBorderStyle, _inTableHead)) {
+        final rule = switch ((_tableBorderStyle, _inTableHead)) {
           // `boxed` betekent in CSS: elke cel een rand rondom. In LaTeX geven
           // de `|` in de kolomspec alleen de verticale randen; zonder een
           // `\hline` per rij kreeg de body geen enkele horizontale lijn.
@@ -544,10 +590,18 @@ class _LatexNodeVisitor implements md.NodeVisitor {
           (TableBorderStyle.lined, true) => '\\midrule\n',
           _ => '',
         };
-        _tableRows.write('$cleaned \\\\\n$rule');
+        final headerRule =
+            _inTableHead && tableTheme?.tableAccentHeaderBorder == true
+            ? '\\arrayrulecolor{ocideckTableAccent}\n'
+                  '\\specialrule{1.5pt}{0pt}{0pt}\n'
+                  '\\arrayrulecolor{ocideckTableBorder}\n'
+            : rule;
+        _tableRows.write('$cleaned \\\\\n$headerRule');
       case 'th':
       case 'td':
         if (_inTableHead) {
+          _rowBuf.write(tableTheme == null ? '}' : '}}');
+        } else if (tableTheme != null) {
           _rowBuf.write('}');
         }
         _rowBuf.write(' & ');
@@ -559,11 +613,41 @@ class _LatexNodeVisitor implements md.NodeVisitor {
 
   // ── Tabel-state ──
   final StringBuffer _tableRows = StringBuffer();
+  final List<String> _tableColumnAlignments = [];
   int _tableColCount = 0;
   bool _inTableHead = false;
+
+  void _writeTableStyleStart() {
+    final rawPadding = tableTheme!.tableCellPaddingPx;
+    final padding = (rawPadding.isFinite ? rawPadding : 8).clamp(0, 64);
+    output
+      ..write('{\n')
+      ..write(
+        '\\setlength{\\tabcolsep}{${_latexNumber((padding + 4) * .75)}pt}\n',
+      )
+      ..write(
+        '\\setlength{\\extrarowheight}{${_latexNumber(padding * .9)}pt}\n',
+      )
+      ..write('\\arrayrulecolor{ocideckTableBorder}\n');
+    if (tableTheme!.tableZebraStriped) {
+      output.write('\\rowcolors{3}{ocideckTableZebra}{}\n');
+    }
+  }
 }
 
 bool _isCell(md.Node n) => n is md.Element && (n.tag == 'th' || n.tag == 'td');
+
+String _tableAlignment(md.Element cell) => switch (cell.attributes['align']) {
+  'center' => 'c',
+  'right' => 'r',
+  _ => 'l',
+};
+
+String _latexNumber(num value) => value == value.roundToDouble()
+    ? value.toStringAsFixed(0)
+    : value.toStringAsFixed(2).replaceFirst(RegExp(r'0+$'), '');
+
+const _enumerateCounters = ['enumi', 'enumii', 'enumiii', 'enumiv'];
 
 enum _Ctx {
   passThrough,

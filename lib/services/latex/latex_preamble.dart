@@ -10,6 +10,7 @@ import '../../models/deck.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart';
 import '../document_chrome_template.dart';
+import 'markdown_to_latex.dart';
 
 /// Bouwt de preamble voor een LaTeX `article`-document.
 ///
@@ -60,6 +61,10 @@ String articlePreamble(
     '\n',
   );
   buf.write(
+    r'\usepackage{array}'
+    '\n',
+  );
+  buf.write(
     r'\usepackage{longtable}'
     '\n',
   );
@@ -69,9 +74,10 @@ String articlePreamble(
     '\n',
   );
   buf.write(
-    r'\usepackage{xcolor}'
+    r'\usepackage[table]{xcolor}'
     '\n',
   );
+  if (theme != null) _writeArticleColors(buf, theme);
   if (chrome.enabled) {
     buf.write(
       r'\usepackage{fancyhdr}'
@@ -175,6 +181,19 @@ typedef _ArticleChrome = ({
   bool pageNumbers,
 });
 
+void _writeArticleColors(StringBuffer buf, ThemeProfile theme) {
+  buf.write(
+    '\\definecolor{ocideckTableText}{HTML}{${_latexHexColor(theme.tableTextColor, '222222')}}\n'
+    '\\definecolor{ocideckTableHeaderText}{HTML}{${_latexHexColor(theme.tableHeaderTextColor, 'FFFFFF')}}\n'
+    '\\definecolor{ocideckTableHeaderBackground}{HTML}{${_latexHexColor(theme.tableHeaderBackgroundColor, '2E7D64')}}\n'
+    '\\definecolor{ocideckTableZebra}{HTML}{${_latexHexColor(theme.tableZebraColor, 'F1F5F9')}}\n'
+    '\\definecolor{ocideckTableBorder}{HTML}{${_latexHexColor(theme.tableBorderColor, 'CBD5E1')}}\n'
+    '\\definecolor{ocideckTableAccent}{HTML}{${_latexHexColor(theme.accentColor, '2E7D64')}}\n'
+    '\\definecolor{ocideckDocumentBandText}{HTML}{${_latexHexColor(theme.effectiveDocumentBandTextColor, '222222')}}\n'
+    '\\definecolor{ocideckDocumentBandBackground}{HTML}{${_latexHexColor(theme.effectiveDocumentBandBackgroundColor, 'FFFFFF')}}\n',
+  );
+}
+
 _ArticleChrome _articleChrome(
   ExportDocumentMetadata meta,
   ThemeProfile? theme,
@@ -204,10 +223,10 @@ void _writeArticleChrome(
   buf.write('\\pagestyle{fancy}\n');
   buf.write('\\fancyhf{}\n');
   if (chrome.header.isNotEmpty) {
-    buf.write('\\fancyhead[L]{${chrome.header}}\n');
+    buf.write('\\fancyhead[L]{${_latexDocumentBand(chrome.header)}}\n');
   }
   if (chrome.footer.isNotEmpty) {
-    buf.write('\\fancyfoot[L]{${chrome.footer}}\n');
+    buf.write('\\fancyfoot[L]{${_latexDocumentBand(chrome.footer)}}\n');
   }
   if (meta.tlp != TlpLevel.none) {
     final color = (meta.tlp.foreground & 0xFFFFFF)
@@ -223,24 +242,14 @@ void _writeArticleChrome(
 }
 
 String _latexDocumentChrome(String template, Map<String, String> fields) {
-  final plainTemplate = template
-      .trim()
-      .replaceAllMapped(
-        RegExp(r'\[([^\]]+)\]\([^\)]+\)'),
-        (match) => match.group(1)!,
-      )
-      // Een underscore kan deel zijn van een geldige `{veld_sleutel}`. LaTeX-
-      // escaping handelt hem na substitutie veilig af; hem hier verwijderen
-      // veranderde de sleutel en liet de placeholder letterlijk staan.
-      .replaceAll(RegExp(r'[*`]'), '');
-  final resolved = resolveDocumentChromeTemplate(
-    plainTemplate,
-    fields,
-    escapeMarkdownValues: false,
-  );
+  final resolved = resolveDocumentChromeTemplate(template.trim(), fields);
   if (resolved.isEmpty) return '';
-  return _escapeLatex(resolved);
+  return markdownInlineToLatex(resolved);
 }
+
+String _latexDocumentBand(String content) =>
+    '\\colorbox{ocideckDocumentBandBackground}{'
+    '\\textcolor{ocideckDocumentBandText}{$content}}';
 
 /// Sluit een article-document af.
 const articlePostamble = r'\end{document}';
@@ -420,3 +429,8 @@ String _escapeLatex(String s) {
 /// Millimeters zonder overbodige nullen — `210` in plaats van `210.0`.
 String _mm(double mm) =>
     mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();
+
+String _latexHexColor(String value, String fallback) {
+  final hex = value.replaceFirst('#', '').toUpperCase();
+  return RegExp(r'^[0-9A-F]{6}$').hasMatch(hex) ? hex : fallback;
+}

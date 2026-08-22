@@ -254,6 +254,7 @@ Future<String?> writeDocumentExport(
         ),
         chapterPageBreak: chapterPageBreak,
         tableBorderStyle: theme.tableBorderStyle,
+        tableTheme: theme,
         footnotePlacement: footnotePlacement,
         endnotesTitle: footnotesTitle,
       );

@@ -4730,8 +4730,15 @@ dingen:
   **PDF** is een afgewerkt vel met een echte tekstlaag (zie hieronder);
   **LaTeX (`.tex`)** is een LaTeX-`article`-document — wiskunde (`$...$` /
   `$$...$$`) gaat er ongewijzigd doorheen, en afbeeldingen worden met een relatief
-  pad aangehaald (houd ze naast de `.tex`). Compileer met `pdflatex` of `xelatex`
-  op een gewone TeX Live-installatie. *(Toegevoegd 2026-08-07.)*
+  pad aangehaald (houd ze naast de `.tex`). Takenlijsten houden aangevinkte en
+  open vakjes uit elkaar, en genummerde lijsten behouden ook genest hun gekozen
+  startnummer. De GFM-kolomuitlijning en de tabelkleuren, randen, zebra,
+  celopvulling en accentkoplijn uit de documentstijl reizen eveneens mee.
+  Kop- en voettekst behouden ondersteunde inline-Markdown (vet, cursief, code,
+  doorhalen en veilige links) en gebruiken de tekst- en achtergrondkleur van de
+  band; ingevoegde documentveldwaarden blijven letterlijke tekst. Compileer met
+  `pdflatex` of `xelatex` op een gewone TeX Live-installatie. *(Toegevoegd
+  2026-08-07; lijst-, tabel- en documentbandpariteit hersteld 2026-08-22.)*
 
 #### De PDF
 

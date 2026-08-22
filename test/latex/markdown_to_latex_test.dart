@@ -42,6 +42,16 @@ void main() {
       expect(out, contains('30'));
     });
 
+    test('GFM-tabel houdt links, midden en rechts uitgelijnde kolommen', () {
+      final out = markdownToLatex(
+        '| Links | Midden | Rechts |\n'
+        '| :--- | :---: | ---: |\n'
+        '| A | B | C |\n',
+      );
+
+      expect(out, contains(r'\begin{tabular}{lcr}'));
+    });
+
     test('een rij houdt precies zoveel cellen als de kolomspec', () {
       // De rij eindigde op ' & ' (elke cel schrijft die scheiding áchter zich)
       // en het opruimpatroon ankerde op een `&` als láátste teken. Resultaat:
@@ -183,7 +193,7 @@ void main() {
         'data:x',
       ]) {
         final out = markdownToLatex('[doel]($href)');
-        expect(out, contains('doel'));
+        expect(out, 'doel');
         expect(out, isNot(contains(r'\href{')), reason: href);
       }
     });
@@ -246,9 +256,23 @@ void main() {
       expect(markdownToLatex('---\n'), isNot(contains(r'\rule{\textwidth}')));
     });
 
-    test('task-list item krijgt checkbox-marker', () {
-      final out = markdownToLatex('- [x] Klaar\n- [ ] Nog doen\n');
-      expect(out, contains(r'\item[$\square$]'));
+    test('lijststart en taakstatus behouden hun betekenis', () {
+      const source = '''
+3. **Derde stap**
+   5. Geneste vijfde stap
+   6. Geneste zesde stap
+4. Vierde stap
+
+- [x] Controle **uitgevoerd**
+- [ ] Goedkeuring nog open
+''';
+      final out = markdownToLatex(source);
+
+      expect(out, contains(r'\setcounter{enumi}{2}'));
+      expect(out, contains(r'\setcounter{enumii}{4}'));
+      expect(out, contains(r'\item \textbf{Derde stap}'));
+      expect(out, contains(r'\item[$\boxtimes$] Controle \textbf{uitgevoerd}'));
+      expect(out, contains(r'\item[$\square$] Goedkeuring nog open'));
     });
   });
 
