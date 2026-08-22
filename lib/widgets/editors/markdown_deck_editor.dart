@@ -16,6 +16,7 @@ import '../../utils/text_search.dart';
 import '../markdown_editor/markdown_editor_actions.dart';
 import '../markdown_editor/markdown_editor_theme.dart';
 import '../markdown_editor/markdown_editor_toolbar.dart';
+import 'find_replace_session.dart';
 import 'markdown_find_bar.dart';
 import 'markdown_command_palette.dart';
 import 'markdown_smart_input_formatter.dart';
@@ -100,13 +101,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   int? _lastReportedSlide;
   bool _showIssues = false;
 
-  bool _findVisible = false;
-  bool _showReplace = false;
-  String _findQuery = '';
-  String _replaceText = '';
-  bool _caseSensitive = false;
-  int _matchIndex = -1;
-  List<TextMatchRange> _matches = const [];
+  /// Zoek-/vervangbalk. De stand zelf leeft in [FindReplaceSession], gedeeld
+  /// met de documenteditor; dit scherm levert alleen de controller en waar de
+  /// cursor naartoe springt.
+  late final FindReplaceSession _find;
 
   @override
   void initState() {
@@ -117,6 +115,13 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _observedText = widget.initialContent;
     _baselineContent = widget.baselineContent ?? widget.initialContent;
     _ctrl.addListener(_onDocumentChanged);
+    _find = FindReplaceSession(
+      controller: _ctrl,
+      onChanged: () {
+        if (mounted) setState(() {});
+      },
+      onReveal: _jumpToRange,
+    );
     _scrollController = ScrollController();
     _editorFocusNode = FocusNode();
     _undoController = UndoHistoryController()..addListener(_onUndoChanged);
@@ -160,9 +165,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         _validation = null;
         _lastValidation = _validator.validate(widget.initialContent);
         _showIssues = false;
-        _matches = const [];
-        _matchIndex = -1;
       });
+      // De balk blijft staan; alleen de gevonden plekken slaan nergens meer op.
+      _find.clearMatches();
     }
     if (widget.scope == MarkdownScope.deck &&
         widget.slideNumber != oldWidget.slideNumber) {
@@ -215,18 +220,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     _reportActiveSourceSlide();
     _validation = null;
     _scheduleValidation();
-    if (_findVisible && _findQuery.isNotEmpty) {
-      final matches = findAllMatches(
-        _ctrl.text,
-        _findQuery,
-        caseSensitive: _caseSensitive,
-      );
-      _matches = matches;
-      _matchIndex = matches.isEmpty
-          ? -1
-          : _matchIndex.clamp(0, matches.length - 1);
-      _syncSearchHighlights();
-    }
+    _find.refreshWhileTyping();
     if (mounted) setState(() {});
   }
 
@@ -255,93 +249,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     });
   }
 
-  void _openFind({required bool showReplace}) {
-    setState(() {
-      _findVisible = true;
-      _showReplace = showReplace;
-    });
-    _recountMatches(selectFirst: true);
-  }
-
-  void _closeFind() {
-    setState(() {
-      _findVisible = false;
-      _matchIndex = -1;
-      _matches = const [];
-    });
-    _syncSearchHighlights();
-  }
-
-  void _syncSearchHighlights() {
-    _ctrl.showSearchMatches(_findVisible ? _matches : const [], _matchIndex);
-  }
-
-  void _recountMatches({bool selectFirst = false}) {
-    final matches = findAllMatches(
-      _ctrl.text,
-      _findQuery,
-      caseSensitive: _caseSensitive,
-    );
-    setState(() {
-      _matches = matches;
-      if (matches.isEmpty) {
-        _matchIndex = -1;
-      } else if (selectFirst ||
-          _matchIndex < 0 ||
-          _matchIndex >= matches.length) {
-        _matchIndex = 0;
-        _jumpToRange(matches[0]);
-      } else {
-        _jumpToRange(matches[_matchIndex]);
-      }
-    });
-    _syncSearchHighlights();
-  }
-
-  void _goToNextMatch() {
-    if (_matches.isEmpty) return;
-    final next = nextMatchIndex(_matchIndex, _matches.length);
-    setState(() => _matchIndex = next);
-    _syncSearchHighlights();
-    _jumpToRange(_matches[next]);
-  }
-
-  void _goToPreviousMatch() {
-    if (_matches.isEmpty) return;
-    final prev = previousMatchIndex(_matchIndex, _matches.length);
-    setState(() => _matchIndex = prev);
-    _syncSearchHighlights();
-    _jumpToRange(_matches[prev]);
-  }
-
-  void _replaceCurrentMatch() {
-    if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
-    final match = _matches[_matchIndex];
-    final updated = replaceRange(_ctrl.text, match, _replaceText);
-    _ctrl.text = updated;
-    _recountMatches(selectFirst: false);
-    if (_matches.isNotEmpty) {
-      final idx = _matchIndex.clamp(0, _matches.length - 1);
-      setState(() => _matchIndex = idx);
-      _jumpToRange(_matches[idx]);
-    }
-  }
-
-  void _replaceAllMatches() {
-    if (_findQuery.isEmpty) return;
-    final result = replaceAllInText(
-      _ctrl.text,
-      _findQuery,
-      _replaceText,
-      caseSensitive: _caseSensitive,
-    );
-    _ctrl.text = result.text;
-    setState(() {
-      _matches = const [];
-      _matchIndex = -1;
-    });
-    _syncSearchHighlights();
-  }
+  void _openFind({required bool showReplace}) =>
+      _find.open(showReplace: showReplace);
 
   MarkdownValidationResult _runValidation() {
     _validationTimer?.cancel();
@@ -676,10 +585,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   }
 
   KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
-    if (!_findVisible) return KeyEventResult.ignored;
+    if (!_find.visible) return KeyEventResult.ignored;
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     if (event.logicalKey == LogicalKeyboardKey.escape) {
-      _closeFind();
+      _find.close();
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
@@ -778,30 +687,23 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                   ],
                 ),
               ),
-            if (_findVisible)
+            if (_find.visible)
               MarkdownFindBar(
-                key: ValueKey('find-$_showReplace'),
-                query: _findQuery,
-                replace: _replaceText,
-                caseSensitive: _caseSensitive,
-                showReplace: _showReplace,
-                matchCount: _matches.length,
-                matchIndex: _matchIndex,
-                onQueryChanged: (value) {
-                  _findQuery = value;
-                  _recountMatches(selectFirst: true);
-                },
-                onReplaceChanged: (value) =>
-                    setState(() => _replaceText = value),
-                onCaseSensitiveChanged: (value) {
-                  _caseSensitive = value;
-                  _recountMatches(selectFirst: false);
-                },
-                onNext: _goToNextMatch,
-                onPrevious: _goToPreviousMatch,
-                onReplaceCurrent: _replaceCurrentMatch,
-                onReplaceAll: _replaceAllMatches,
-                onClose: _closeFind,
+                key: ValueKey('find-${_find.showReplace}'),
+                query: _find.query,
+                replace: _find.replacement,
+                caseSensitive: _find.caseSensitive,
+                showReplace: _find.showReplace,
+                matchCount: _find.matchCount,
+                matchIndex: _find.matchIndex,
+                onQueryChanged: _find.setQuery,
+                onReplaceChanged: _find.setReplacement,
+                onCaseSensitiveChanged: _find.setCaseSensitive,
+                onNext: _find.next,
+                onPrevious: _find.previous,
+                onReplaceCurrent: _find.replaceCurrent,
+                onReplaceAll: _find.replaceAll,
+                onClose: _find.close,
               ),
             const Divider(height: 1),
             _editorArea(lineCount, issueLines),
