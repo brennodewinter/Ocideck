@@ -319,27 +319,24 @@ String _rebaseImagePaths(
   final sourceDir = p.dirname(sourcePath);
   final outputDir = p.dirname(outputPath);
   if (p.equals(sourceDir, outputDir)) return markdown;
-  return markdown.replaceAllMapped(
-    RegExp(r'!\[([^\]]*)\]\(([^)]+)\)'),
-    (m) {
-      final alt = m.group(1)!;
-      final raw = m.group(2)!;
-      // Alleen relatieve paden zonder schema — URL's en data-URI's blijven.
-      if (raw.startsWith('http://') ||
-          raw.startsWith('https://') ||
-          raw.startsWith('data:') ||
-          p.isAbsolute(raw)) {
-        return m[0]!;
-      }
-      // Scheid bron en titel (`bron "titel"`).
-      final space = raw.indexOf(RegExp(r'\s'));
-      final src = space < 0 ? raw : raw.substring(0, space);
-      final title = space < 0 ? '' : raw.substring(space);
-      final abs = p.normalize(p.join(sourceDir, src));
-      final rebased = p.relative(abs, from: outputDir);
-      return '![$alt]($rebased$title)';
-    },
-  );
+  return markdown.replaceAllMapped(RegExp(r'!\[([^\]]*)\]\(([^)]+)\)'), (m) {
+    final alt = m.group(1)!;
+    final raw = m.group(2)!;
+    // Alleen relatieve paden zonder schema — URL's en data-URI's blijven.
+    if (raw.startsWith('http://') ||
+        raw.startsWith('https://') ||
+        raw.startsWith('data:') ||
+        p.isAbsolute(raw)) {
+      return m[0]!;
+    }
+    // Scheid bron en titel (`bron "titel"`).
+    final space = raw.indexOf(RegExp(r'\s'));
+    final src = space < 0 ? raw : raw.substring(0, space);
+    final title = space < 0 ? '' : raw.substring(space);
+    final abs = p.normalize(p.join(sourceDir, src));
+    final rebased = p.relative(abs, from: outputDir);
+    return '![$alt]($rebased$title)';
+  });
 }
 
 /// De geprojecteerde body plus alles wat als front matter meereist.

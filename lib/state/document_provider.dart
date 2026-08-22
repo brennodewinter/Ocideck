@@ -242,9 +242,9 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       clearError: true,
       savedSource: state.document?.source,
       visualEdited: false,
-      savedFileHash: savedFileHash ?? DocumentIntegrity.hashMarkdown(
-        state.document?.source ?? '',
-      ),
+      savedFileHash:
+          savedFileHash ??
+          DocumentIntegrity.hashMarkdown(state.document?.source ?? ''),
     );
   }
 

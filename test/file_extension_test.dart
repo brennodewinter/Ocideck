@@ -31,8 +31,10 @@ void main() {
     });
 
     test('stijlprofiel-extensie met variabele hoofdletters', () {
-      expect(withExtension('profiel.OCIDECKSTYLE', '.ocideckstyle'),
-          'profiel.OCIDECKSTYLE');
+      expect(
+        withExtension('profiel.OCIDECKSTYLE', '.ocideckstyle'),
+        'profiel.OCIDECKSTYLE',
+      );
     });
   });
 }

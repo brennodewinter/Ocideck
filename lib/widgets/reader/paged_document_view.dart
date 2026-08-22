@@ -440,7 +440,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     // DocumentMarkdownView tekent ze buiten de blockWrapper, dus de gewone
     // blokmeting ziet ze niet. Zonder deze extra meting vallen lange eindnoten
     // voorbij de laatste berekende pagina en worden ze afgeknipt (#1653).
-    final endnotes = !_notesOnPage && _notes.isNotEmpty ? _notes : const <Footnote>[];
+    final endnotes = !_notesOnPage && _notes.isNotEmpty
+        ? _notes
+        : const <Footnote>[];
     final total = blockCount + notes.length + (endnotes.isNotEmpty ? 1 : 0);
     return ClipRect(
       child: Stack(
@@ -653,10 +655,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                 child: RepaintBoundary(
                   child: Transform.translate(
                     offset: Offset(0, -offset),
-                    child: SizedBox(
-                      width: _contentWidthPx,
-                      child: document,
-                    ),
+                    child: SizedBox(width: _contentWidthPx, child: document),
                   ),
                 ),
               ),

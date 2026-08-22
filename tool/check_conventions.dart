@@ -139,7 +139,9 @@ const Map<String, int> fileSizeBaseline = {
   // valt geen gedrag uit te tillen naar een part zonder een extension met
   // private-veldtoegang te maken. Het scherm heeft al zes part-bestanden; de
   // find/replace-methoden zijn cohesive met de State-levenscyclus.
-  'lib/widgets/document_editor_screen.dart': 1211,
+  // +15 (#1679, #1649): fence-state bijhouden in _documentTitle en visualEdit-
+  // logica in _onControllerChanged — cohesive met de State-levenscyclus.
+  'lib/widgets/document_editor_screen.dart': 1225,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -257,7 +259,8 @@ const Map<String, int> classSizeBaseline = {
   // MarkdownSourceController uit de presentatie-broneditor; de methoden zijn
   // cohesive met de State-levenscyclus (lezen/zetten _controller, _viewMode,
   // setState) en kunnen niet zonder private-veldtoegang naar een losse klasse.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1213,
+  // +16 (#1679, #1649): fence-state in _documentTitle en visualEdit-logica.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1228,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':

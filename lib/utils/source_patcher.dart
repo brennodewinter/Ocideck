@@ -52,8 +52,7 @@ String patchVisualEdits({
 
   // Stap 3: bouw het resultaat op basis van original, met bewerkingen
   // toegepast op de overeenkomende posities.
-  return _applyEdits(origLines, baseLines, currLines, align, hunks)
-      .join(sep);
+  return _applyEdits(origLines, baseLines, currLines, align, hunks).join(sep);
 }
 
 /// Verwijdert een achterblijvende `\r` van een regel na `split('\n')`.
@@ -143,7 +142,7 @@ List<int> _lcsAlign(List<String> a, List<String> b) {
       align[j] = i;
       i++;
       j++;
-    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+    } else if (dp[i + 1][j] > dp[i][j + 1]) {
       i++;
     } else {
       j++;
@@ -198,13 +197,15 @@ List<_Hunk> _lcsDiff(List<String> a, List<String> b) {
 
   // Prefix als equal-hunk.
   if (core.aStart > 0) {
-    hunks.add(_Hunk(
-      equal: true,
-      baselineStart: 0,
-      baselineEnd: core.aStart,
-      currentStart: 0,
-      currentEnd: core.bStart,
-    ));
+    hunks.add(
+      _Hunk(
+        equal: true,
+        baselineStart: 0,
+        baselineEnd: core.aStart,
+        currentStart: 0,
+        currentEnd: core.bStart,
+      ),
+    );
   }
 
   // Kern: LCS op het middenstuk.
@@ -213,36 +214,42 @@ List<_Hunk> _lcsDiff(List<String> a, List<String> b) {
   if (aCore.isNotEmpty || bCore.isNotEmpty) {
     if (aCore.length > _lcsMaxDim || bCore.length > _lcsMaxDim) {
       // Te groot voor volledige LCS: behandel als één grote change-hunk.
-      hunks.add(_Hunk(
-        equal: false,
-        baselineStart: core.aStart,
-        baselineEnd: core.aEnd,
-        currentStart: core.bStart,
-        currentEnd: core.bEnd,
-      ));
+      hunks.add(
+        _Hunk(
+          equal: false,
+          baselineStart: core.aStart,
+          baselineEnd: core.aEnd,
+          currentStart: core.bStart,
+          currentEnd: core.bEnd,
+        ),
+      );
     } else {
       final coreHunks = _lcsHunks(aCore, bCore);
       for (final h in coreHunks) {
-        hunks.add(_Hunk(
-          equal: h.equal,
-          baselineStart: h.baselineStart + core.aStart,
-          baselineEnd: h.baselineEnd + core.aStart,
-          currentStart: h.currentStart + core.bStart,
-          currentEnd: h.currentEnd + core.bStart,
-        ));
+        hunks.add(
+          _Hunk(
+            equal: h.equal,
+            baselineStart: h.baselineStart + core.aStart,
+            baselineEnd: h.baselineEnd + core.aStart,
+            currentStart: h.currentStart + core.bStart,
+            currentEnd: h.currentEnd + core.bStart,
+          ),
+        );
       }
     }
   }
 
   // Suffix als equal-hunk.
   if (core.aEnd < a.length) {
-    hunks.add(_Hunk(
-      equal: true,
-      baselineStart: core.aEnd,
-      baselineEnd: a.length,
-      currentStart: core.bEnd,
-      currentEnd: b.length,
-    ));
+    hunks.add(
+      _Hunk(
+        equal: true,
+        baselineStart: core.aEnd,
+        baselineEnd: a.length,
+        currentStart: core.bEnd,
+        currentEnd: b.length,
+      ),
+    );
   }
 
   return hunks;
@@ -281,7 +288,7 @@ List<_Hunk> _lcsHunks(List<String> a, List<String> b) {
     } else {
       final sI = i, sJ = j;
       while (i < m && j < n && a[i] != b[j]) {
-        if (dp[i + 1][j] >= dp[i][j + 1]) {
+        if (dp[i + 1][j] > dp[i][j + 1]) {
           i++;
         } else {
           j++;

@@ -651,8 +651,9 @@ String _extractImageSource(String raw) {
   }
   // Titels staan tussen aanhalingstekens achteraan: `bron "titel"`.
   final titleMatch = RegExp(r'\s+"[^"]*"\s*$').firstMatch(raw);
-  final withoutTitle =
-      titleMatch != null ? raw.substring(0, titleMatch.start).trim() : raw;
+  final withoutTitle = titleMatch != null
+      ? raw.substring(0, titleMatch.start).trim()
+      : raw;
   // Ontsnapte haakjes tellen mee, niet als afsluiting.
   return withoutTitle.replaceAll(r'\(', '(').replaceAll(r'\)', ')');
 }

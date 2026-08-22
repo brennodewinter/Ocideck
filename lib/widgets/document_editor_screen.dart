@@ -242,8 +242,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // terug op de platte broneditor (niet-rondreisbare Markdown), dan zijn
     // bewerkingen gewoon bronbewerkingen — niet door de Quill-baseline heen
     // sturen (#1649).
-    final isVisualEdit = _viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(body);
+    final isVisualEdit =
+        _viewMode == _DocViewMode.visual && markdownRoundTripsVisually(body);
     ref
         .read(documentProvider.notifier)
         .edit(

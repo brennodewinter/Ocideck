@@ -63,6 +63,8 @@ void main() {
       'tlh',
       'The page setup in this document contains invalid values and was ignored. Your settings are used instead.',
     ),
+    // Klingon heeft geen gangbare vertaling voor deze conflictmelding.
+    ('tlh', 'The file has been modified by another program.'),
     // Deense interfaceterm die letterlijk zo geleend is.
     ('da', 'Look and feel'),
 
