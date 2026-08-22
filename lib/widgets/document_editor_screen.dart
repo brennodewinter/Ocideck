@@ -382,7 +382,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Bron: cursor in de bron-editor + anker in de live weergave (docs-lezer-
   /// mechanisme).
   void _scrollToHeading(MarkdownOutlineEntry entry) {
-    final source = ref.read(documentProvider).document?.source ?? '';
+    final doc = ref.read(documentProvider).document;
+    final source = doc?.source ?? '';
+    final body = doc?.body ?? '';
     final outline = buildMarkdownOutline(source);
     final outlineIndex = outline.indexWhere(
       (e) => e.offset == entry.offset && e.title == entry.title,
@@ -398,8 +400,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     });
 
     if (_viewMode != _DocViewMode.source) return;
+    // headingBlockIndex op de body, niet op de source: de preview rendert de
+    // body, en frontmatter-blokken (thematische ---, sleutelregels) tellen
+    // anders mee en verschuiven het bloknummer (#1670).
     final index = DocumentMarkdownView.headingBlockIndex(
-      source,
+      body,
       headingSlug(entry.title),
     );
     if (index < 0) return;
