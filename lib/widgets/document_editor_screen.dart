@@ -831,7 +831,10 @@ Future<String?> _writeDocumentExport(
   // Exporteer de *body* (zonder het stijl-frontmatter-blok): de `theme:`-regel
   // is een OciDeck-aanwijzing, geen inhoud, en de stijl reist als het gekozen
   // profiel mee via `theme:` hieronder — niet als tekst in de uitvoer.
-  final body = document.body;
+  // Strip ook eventueel gelekte front matter-regels uit de body — een bestand
+  // dat door herhaald plakken meerdere blokken heeft, lekt ze anders als tekst
+  // in de uitvoer (#1726).
+  final body = stripLeadingFrontMatterLeakage(document.body);
   final filePath = state.filePath;
   final projectPath = filePath == null ? null : p.dirname(filePath);
   final settings = ref.read(settingsProvider);

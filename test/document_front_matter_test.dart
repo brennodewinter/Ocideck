@@ -71,6 +71,39 @@ void main() {
     });
   });
 
+  group('stripLeadingFrontMatterLeakage', () {
+    test('plain body is unchanged', () {
+      const body = '# Titel\n\nTekst.';
+      expect(stripLeadingFrontMatterLeakage(body), body);
+    });
+
+    test('strips leaked front matter keys and fences', () {
+      const body =
+          'theme: Vigilis\ntlp: amber\n---\ntheme: Vigilis\ntlp: amber\n---\n# Titel\n\nTekst.';
+      expect(stripLeadingFrontMatterLeakage(body), '# Titel\n\nTekst.');
+    });
+
+    test('does not strip without a --- fence', () {
+      const body = 'theme: Vigilis\ntlp: amber\n# Titel\n';
+      expect(stripLeadingFrontMatterLeakage(body), body);
+    });
+
+    test('stops at a blank line', () {
+      const body = 'theme: Vigilis\n---\n\ntekst eronder\n';
+      expect(stripLeadingFrontMatterLeakage(body), 'tekst eronder\n');
+    });
+
+    test('does not strip unknown keys', () {
+      const body = 'foo: bar\n---\n# Titel\n';
+      expect(stripLeadingFrontMatterLeakage(body), body);
+    });
+
+    test('strips ocideck_ keys too', () {
+      const body = 'ocideck_format: 1\n---\n# Titel\n';
+      expect(stripLeadingFrontMatterLeakage(body), '# Titel\n');
+    });
+  });
+
   group('documentStyleName', () {
     test('null without front matter', () {
       expect(documentStyleName('# Titel\n'), isNull);

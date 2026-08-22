@@ -175,6 +175,48 @@ DocumentSplit splitDocumentFrontMatter(String source) {
 /// The document body — [source] with any leading front-matter block removed.
 String documentBody(String source) => splitDocumentFrontMatter(source).body;
 
+/// Strips leading lines from [body] that look like leaked front matter —
+/// YAML key-value lines with known front-matter keys and `---` fences, zonder
+/// lege regels ertussen. Stopt bij de eerste lege regel of niet-matchende regel.
+/// Stript alleen als de reeks minstens één `---`-fence bevat, zodat een
+/// document dat toevallig met `key: value`-proza begint niet wordt aangetast.
+///
+/// Een bestand dat door herhaald plakken of een fout bij het opslaan meerdere
+/// front matter-blokken heeft, lekt de inhoud ervan als zichtbare tekst in de
+/// uitvoer. Deze functie ruimt die lekkage op (#1726).
+String stripLeadingFrontMatterLeakage(String body) {
+  final lines = body.split('\n');
+  var end = 0;
+  var hasFence = false;
+  while (end < lines.length) {
+    final line = _stripCr(lines[end]).trim();
+    if (line.isEmpty) break;
+    if (line == _fence) {
+      hasFence = true;
+      end++;
+      continue;
+    }
+    final entry = _topLevelScalarLine(line);
+    if (entry != null && _isKnownFrontMatterKey(entry.key)) {
+      end++;
+      continue;
+    }
+    break;
+  }
+  if (!hasFence || end == 0) return body;
+  // Vouw lege regels na de lekkage mee weg, zodat de body bij echte inhoud begint.
+  while (end < lines.length && _stripCr(lines[end]).trim().isEmpty) {
+    end++;
+  }
+  return lines.sublist(end).join('\n');
+}
+
+bool _isKnownFrontMatterKey(String key) =>
+    kDocumentOwnedKeys.contains(key) ||
+    kDocumentRetiredKeys.contains(key) ||
+    kDeckIdentityKeys.contains(key) ||
+    key.startsWith('ocideck_');
+
 /// The style (`theme:` value) declared in the leading front matter, or `null`
 /// when the document has no front matter or no `theme:` key. Quotes are removed.
 String? documentStyleName(String source) {
