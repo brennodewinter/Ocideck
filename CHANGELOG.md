@@ -1793,6 +1793,45 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De Linux-poort viel vijf keer om op één of twee regels — de oorzaak was
+  niet de poort maar de manier waarop we plafonds verhogen.** Tussen 21-08-2026
+  22:38 en 23:51 liep `gate-linux` vijf keer rood op `main`, telkens op
+  `check-conventions`: eerst `tabs_provider.dart` op 1017 regels met een plafond
+  van 1007, daarna `document_editor_screen.dart` op 1211 tegen 1209 en op 1212
+  tegen 1211, met de klasse `_DocumentEditorScreenState` er één regel achteraan.
+  Geen enkele run viel om op een test.
+
+  Wat er gebeurde is een samenloop en geen slordigheid. De statische poort draait
+  per PR en toetst de *voorvertoning* van die ene samenvoeging met `main` zoals
+  die er op dat moment bijstond. Werken er twee sessies tegelijk in hetzelfde
+  bestand — en dat deden ze, de hele documentmodus-golf raakt
+  `document_editor_screen.dart` — dan zijn beide PR's groen en is de uitkomst
+  het niet. Dat het telkens om één regel ging, kwam doordat elke verhoging het
+  plafond exact op de toenmalige telling zette. Nul lucht: de eerstvolgende
+  regel die iemand toevoegt, is er één te veel. De tip onderaan de poortrun
+  vroeg daar zelf om ("lower their fileSizeBaseline to lock in the win"), en die
+  meldde zich ook bij een winst van twee regels.
+
+  De reparatie zit op drie plekken. De zoek-/vervangstand die #1686 in de
+  documenteditor zette, stond bijna letterlijk óók in de presentatie-broneditor;
+  die twee kopieën zijn nu één `FindReplaceSession`. Dat haalt 112 regels uit
+  `document_editor_screen.dart` (1212 → 1100) en 99 uit
+  `markdown_deck_editor.dart` (993 → 894, dat laatste stond zeven regels onder
+  de harde grens van 1000 en was de volgende in de rij). Beide plafonds gaan
+  omlaag — van 1211 en 1213 naar 1150 — maar met vijftig regels lucht in plaats
+  van strak op de telling. En `check_conventions.dart` zegt nu zelf waarom dat
+  zo hoort: de tip vraagt om lucht en zwijgt bij een winst die te klein is om
+  te verzilveren.
+
+  Voorkomen is het daarmee niet; dat kan alleen door elke PR vlak vóór de merge
+  opnieuw tegen de actuele `main` te draaien. Wat wel verandert is de tijd tot
+  het zichtbaar is: `static-gate.yml` draait voortaan ook op een push naar
+  `main`. Tot nu toe was de dure Linux-poort het eerste dat de échte
+  samenvoeging zag, tientallen minuten later — lang genoeg voor de volgende
+  sessie om eroverheen te mergen en dezelfde rode poort nog eens te melden. Drie
+  van de vijf rode runs waren precies dat: hetzelfde onopgemerkte rood, opnieuw
+  gerapporteerd.
+
 - **De Homebrew-cask wordt niet meer door de release geduwd — de tap haalt hem
   zelf op.** Bij v0.4.8 viel de job `homebrew-cask` rood: de forge weigerde
   `HOMEBREW_TAP_TOKEN` met HTTP 401, vlak na een herstart op Forgejo 16.0.1. De

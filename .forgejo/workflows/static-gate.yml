@@ -41,6 +41,21 @@ name: static-gate
 
 on:
   pull_request:
+  # Ook ná de merge, en dat is geen dubbelop. Een PR-run toetst de *voorvertoning*
+  # van die ene samenvoeging met `main` zoals die er op dát moment bijstond. Loopt
+  # er een tweede PR mee die hetzelfde bestand raakt, dan zijn beide runs groen en
+  # is de uitkomst het toch niet: zo dreef `main` op 21-08-2026 vijf keer rood op
+  # de regel- en klasseplafonds, telkens één of twee regels over de rand.
+  #
+  # Tot nu toe was `linux-gate.yml` het eerste dat de échte samenvoeging zag, en
+  # dat is de dure poort op de serieruimte — de uitslag komt tientallen minuten
+  # later. In de tussentijd merget de volgende sessie eroverheen en rapporteert
+  # dezelfde rode poort nog eens. Deze trigger zet dezelfde snelle controles op
+  # `main` neer, zodat een botsing binnen minuten zichtbaar is in plaats van na
+  # de suite. Voorkómen doet hij het niet; dat kan alleen door élke PR vlak vóór
+  # de merge opnieuw tegen de actuele `main` te draaien.
+  push:
+    branches: [main]
   workflow_dispatch:
 
 # Duwt iemand een nieuwe commit op een PR terwijl de vorige poortrun nog loopt,
