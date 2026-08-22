@@ -37,7 +37,11 @@ pw.Widget _event(
     fontWeight: pw.FontWeight.bold,
     color: style.subheadingColor,
   );
-  return pw.Padding(
+  // Een rij is op zichzelf een verticale Flex en kan daardoor over twee
+  // pagina's worden gesplitst. Dan begint de tweede helft boven de bladrand en
+  // verdwijnen label en begin van de kaart. Een gebeurtenis is één kaart en
+  // verhuist daarom als geheel naar het volgende blad.
+  final card = pw.Padding(
     padding: pw.EdgeInsets.only(bottom: last ? size * 0.7 : size * 0.9),
     child: pw.Row(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -150,4 +154,5 @@ pw.Widget _event(
       ],
     ),
   );
+  return pw.Inseparable(child: card);
 }

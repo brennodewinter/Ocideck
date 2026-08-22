@@ -27,6 +27,11 @@ pw.InlineSpan buildDocumentPdfInlineMath(
       width *= scale;
       height *= scale;
       return pw.WidgetSpan(
+        // Een SVG-kader eindigt onder zijn getekende glyphs (MathJax bewaart
+        // ruimte voor staarten). De standaard-baseline zet die kaderrand op de
+        // tekstbaseline en laat de formule daardoor zweven. Een kleine daling
+        // brengt de zichtbare tekens op dezelfde lijn als het omringende proza.
+        baseline: -fontSize * 0.22,
         child: pw.SvgImage(
           svg: svg,
           width: width,
