@@ -264,7 +264,9 @@ List<PdfBlock> _replaceTimelineSentinels(
     if (block is PdfParagraphBlock &&
         block.spans.length == 1 &&
         _timelineSentinelPattern.hasMatch(block.spans.first.text)) {
-      final match = _timelineSentinelPattern.firstMatch(block.spans.first.text)!;
+      final match = _timelineSentinelPattern.firstMatch(
+        block.spans.first.text,
+      )!;
       final idx = int.parse(match.group(1)!);
       if (idx < timelineBlocks.length) {
         result.add(timelineBlocks[idx]);

@@ -18,10 +18,7 @@ void main() {
       const source = 'Ondertitel\n----------\n\nInhoud.\n';
       final texts = DocumentMarkdownView.blockTexts(source);
       expect(texts.first, contains('Ondertitel'));
-      final idx = DocumentMarkdownView.headingBlockIndex(
-        source,
-        'ondertitel',
-      );
+      final idx = DocumentMarkdownView.headingBlockIndex(source, 'ondertitel');
       expect(idx, 0);
     });
 
@@ -37,13 +34,9 @@ void main() {
     });
 
     test('Setext H1 en H2 samen in één document', () {
-      const source =
-          'Hoofdstuk\n========\n\nOnderwerp\n---------\n\nTekst.\n';
+      const source = 'Hoofdstuk\n========\n\nOnderwerp\n---------\n\nTekst.\n';
       final idx1 = DocumentMarkdownView.headingBlockIndex(source, 'hoofdstuk');
-      final idx2 = DocumentMarkdownView.headingBlockIndex(
-        source,
-        'onderwerp',
-      );
+      final idx2 = DocumentMarkdownView.headingBlockIndex(source, 'onderwerp');
       expect(idx1, greaterThanOrEqualTo(0));
       expect(idx2, greaterThanOrEqualTo(0));
       expect(idx2, greaterThan(idx1));

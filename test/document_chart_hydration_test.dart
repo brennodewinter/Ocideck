@@ -143,18 +143,21 @@ void main() {
     expect(out.contains('```chart\n'), isFalse);
   });
 
-  test('chart zonder newline vóór sluithek wordt gehydrateerd (#1668)', () async {
-    await writeDataFile();
-    // De laatste specregel grenst direct aan het sluithek: geen \n voor ```.
-    // Dit is het compacte geval dat het oude patroon miste.
-    final compactBody = StringBuffer()
-      ..write('```chart\n')
-      ..write('{"type": "line", "source": "data/x.json"}')
-      ..write('```');
-    final out = await hydrateDocumentChartData(
-      compactBody.toString(),
-      projectPath: temp.path,
-    );
-    expect(out.contains('4242'), isTrue);
-  });
+  test(
+    'chart zonder newline vóór sluithek wordt gehydrateerd (#1668)',
+    () async {
+      await writeDataFile();
+      // De laatste specregel grenst direct aan het sluithek: geen \n voor ```.
+      // Dit is het compacte geval dat het oude patroon miste.
+      final compactBody = StringBuffer()
+        ..write('```chart\n')
+        ..write('{"type": "line", "source": "data/x.json"}')
+        ..write('```');
+      final out = await hydrateDocumentChartData(
+        compactBody.toString(),
+        projectPath: temp.path,
+      );
+      expect(out.contains('4242'), isTrue);
+    },
+  );
 }

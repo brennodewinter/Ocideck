@@ -356,7 +356,8 @@ void main() {
           '| 09:00 | Ontbijt | Logboek |\n';
       final blocks = markdownToPdfBlocks(source);
       final list = blocks.whereType<PdfListBlock>().single;
-      final spans = (list.items.single.blocks.single as PdfParagraphBlock).spans;
+      final spans =
+          (list.items.single.blocks.single as PdfParagraphBlock).spans;
       // De metadata-koplabel en -waarde staan in de tekst.
       expect(spans.any((s) => s.text.contains('Bron')), isTrue);
       expect(spans.any((s) => s.text.contains('Logboek')), isTrue);

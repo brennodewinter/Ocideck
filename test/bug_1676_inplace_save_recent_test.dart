@@ -24,67 +24,66 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets(
-    'in-place save werkt de recente-bestanden-lijst bij (#1676)',
-    (tester) async {
-      final temp = Directory.systemTemp.createTempSync('ocideck_1676_');
-      addTearDown(() => temp.deleteSync(recursive: true));
-      final path = p.join(temp.path, 'doc.md');
+  testWidgets('in-place save werkt de recente-bestanden-lijst bij (#1676)', (
+    tester,
+  ) async {
+    final temp = Directory.systemTemp.createTempSync('ocideck_1676_');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final path = p.join(temp.path, 'doc.md');
 
-      // Schrijf het oorspronkelijke bestand.
-      File(path).writeAsStringSync('# Oorspronkelijk\n');
+    // Schrijf het oorspronkelijke bestand.
+    File(path).writeAsStringSync('# Oorspronkelijk\n');
 
-      final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
-      final notifier = DocumentNotifier()..loadDocument(doc, filePath: path);
+    final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
+    final notifier = DocumentNotifier()..loadDocument(doc, filePath: path);
 
-      // Bewerk het document (maakt het vuil).
-      notifier.edit('# Gewijzigd\n');
+    // Bewerk het document (maakt het vuil).
+    notifier.edit('# Gewijzigd\n');
 
-      late WidgetRef ref;
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            documentProvider.overrideWith((_) => notifier),
-            fileServiceProvider.overrideWithValue(
-              FileService(
-                MarkdownService(),
-                ImageService(),
-                () => throw UnimplementedError(),
-              ),
-            ),
-          ],
-          child: MaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              FlutterQuillLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            home: Consumer(
-              builder: (context, r, _) {
-                ref = r;
-                return const SizedBox.shrink();
-              },
+    late WidgetRef ref;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          documentProvider.overrideWith((_) => notifier),
+          fileServiceProvider.overrideWithValue(
+            FileService(
+              MarkdownService(),
+              ImageService(),
+              () => throw UnimplementedError(),
             ),
           ),
+        ],
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Consumer(
+            builder: (context, r, _) {
+              ref = r;
+              return const SizedBox.shrink();
+            },
+          ),
         ),
-      );
+      ),
+    );
 
-      final saved = await tester.runAsync(
-        () => saveDocumentWithDestination(
-          tester.element(find.byType(SizedBox)),
-          ref,
-          notifier,
-        ),
-      );
-      expect(saved, isTrue);
+    final saved = await tester.runAsync(
+      () => saveDocumentWithDestination(
+        tester.element(find.byType(SizedBox)),
+        ref,
+        notifier,
+      ),
+    );
+    expect(saved, isTrue);
 
-      // De recente-bestanden-lijst moet het pad bevatten, als document.
-      final recent = ref.read(settingsProvider).recentFiles;
-      final entry = recent.where((f) => f.path == path).toList();
-      expect(entry, hasLength(1));
-      expect(entry.single.kind, MarkdownKind.document);
-    },
-  );
+    // De recente-bestanden-lijst moet het pad bevatten, als document.
+    final recent = ref.read(settingsProvider).recentFiles;
+    final entry = recent.where((f) => f.path == path).toList();
+    expect(entry, hasLength(1));
+    expect(entry.single.kind, MarkdownKind.document);
+  });
 }

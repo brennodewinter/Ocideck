@@ -56,11 +56,7 @@ class ConvertToPresentationDialog extends StatelessWidget {
                 'De documentstijl (thema, paginaformaat, marges) gaat niet mee.',
               ),
             ),
-            _drop(
-              l10n.d(
-                'Documentvelden (kop- en voettekst) gaan niet mee.',
-              ),
-            ),
+            _drop(l10n.d('Documentvelden (kop- en voettekst) gaan niet mee.')),
             _drop(
               l10n.d(
                 'Voetnoten worden platte tekst; een presentatie kent geen noten.',

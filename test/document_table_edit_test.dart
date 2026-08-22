@@ -82,35 +82,38 @@ void main() {
       expect(replaceNthTableBlock(source, 5, '| X |\n| --- |\n| 9 |'), source);
     });
 
-    test('slaat een tijdlijntabel over en telt alleen gewone tabellen (#1662)', () {
-      // Een tijdlijn (<!-- timeline --> + tabel) gevolgd door een gewone
-      // tabel. De weergave telt de tijdlijn als _Kind.timeline, niet als
-      // _Kind.table — dus ordinaal 0 moet de gewone tabel zijn, niet de
-      // tijdlijn.
-      const source =
-          '<!-- timeline -->\n'
-          '| Tijd | Gebeurtenis |\n| --- | --- |\n| 10:00 | Start |\n\n'
-          '# Sectie\n\n'
-          '| A | B |\n| --- | --- |\n| 1 | 2 |\n';
+    test(
+      'slaat een tijdlijntabel over en telt alleen gewone tabellen (#1662)',
+      () {
+        // Een tijdlijn (<!-- timeline --> + tabel) gevolgd door een gewone
+        // tabel. De weergave telt de tijdlijn als _Kind.timeline, niet als
+        // _Kind.table — dus ordinaal 0 moet de gewone tabel zijn, niet de
+        // tijdlijn.
+        const source =
+            '<!-- timeline -->\n'
+            '| Tijd | Gebeurtenis |\n| --- | --- |\n| 10:00 | Start |\n\n'
+            '# Sectie\n\n'
+            '| A | B |\n| --- | --- |\n| 1 | 2 |\n';
 
-      // Ordinaal 0 is de gewone tabel (A/B), niet de tijdlijn.
-      final range = DocumentMarkdownView.nthTableBlockRange(source, 0)!;
-      final lines = source.split('\n');
-      expect(lines.sublist(range[0], range[1]).first, '| A | B |');
-      // De tijdlijn is niet bereikbaar via een tabelordinaal.
-      expect(DocumentMarkdownView.nthTableBlockRange(source, 1), isNull);
+        // Ordinaal 0 is de gewone tabel (A/B), niet de tijdlijn.
+        final range = DocumentMarkdownView.nthTableBlockRange(source, 0)!;
+        final lines = source.split('\n');
+        expect(lines.sublist(range[0], range[1]).first, '| A | B |');
+        // De tijdlijn is niet bereikbaar via een tabelordinaal.
+        expect(DocumentMarkdownView.nthTableBlockRange(source, 1), isNull);
 
-      // replaceNthTableBlock vervangt de gewone tabel, niet de tijdlijn.
-      final replaced = replaceNthTableBlock(
-        source,
-        0,
-        '| X | Y |\n| --- | --- |\n| 9 | 8 |',
-      );
-      expect(replaced, contains('| X | Y |'));
-      expect(replaced, contains('<!-- timeline -->'));
-      expect(replaced, contains('| Tijd | Gebeurtenis |'));
-      expect(replaced, isNot(contains('| A | B |')));
-    });
+        // replaceNthTableBlock vervangt de gewone tabel, niet de tijdlijn.
+        final replaced = replaceNthTableBlock(
+          source,
+          0,
+          '| X | Y |\n| --- | --- |\n| 9 | 8 |',
+        );
+        expect(replaced, contains('| X | Y |'));
+        expect(replaced, contains('<!-- timeline -->'));
+        expect(replaced, contains('| Tijd | Gebeurtenis |'));
+        expect(replaced, isNot(contains('| A | B |')));
+      },
+    );
   });
 
   testWidgets('dubbelklik op de tabel opent de editor en past het toe', (

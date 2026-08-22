@@ -522,10 +522,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// van het originele deck mee, zodat afbeeldingsverwijzingen blijven
   /// werken (#1646).
   void newDocumentFromMarkdown(String source, {String? projectPath}) {
-    _placeDocumentTab(
-      MarkdownDocument.parse(source),
-      projectPath: projectPath,
-    );
+    _placeDocumentTab(MarkdownDocument.parse(source), projectPath: projectPath);
   }
 
   /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande

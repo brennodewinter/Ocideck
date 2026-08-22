@@ -25,28 +25,34 @@ void main() {
       expect(next.body, '---\n\n# Nieuwe pagina\n');
     });
 
-    test('document zonder frontmatter: body met --- krijgt juiste metadata', () {
-      // Een document zónder frontmatter. De body opent met een --- blok.
-      // Vóór de fix werd de oude (lege) metadata hergebruikt, zodat body
-      // het hele source terug gaf (inclusief het --- blok) en frontMatter
-      // leeg bleef — terwijl splitDocumentFrontMatter het --- blok als
-      // frontmatter leest (#1682).
-      final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
-      expect(doc.frontMatter, '');
+    test(
+      'document zonder frontmatter: body met --- krijgt juiste metadata',
+      () {
+        // Een document zónder frontmatter. De body opent met een --- blok.
+        // Vóór de fix werd de oude (lege) metadata hergebruikt, zodat body
+        // het hele source terug gaf (inclusief het --- blok) en frontMatter
+        // leeg bleef — terwijl splitDocumentFrontMatter het --- blok als
+        // frontmatter leest (#1682).
+        final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
+        expect(doc.frontMatter, '');
 
-      // Vervang de body door een tekst die met --- opent.
-      final next = doc.withBody('---\ntitle: Test\n---\n\nContent\n');
-      // De metadata wordt nu opnieuw geparseerd: het --- blok is frontmatter.
-      expect(next.frontMatter, '---\ntitle: Test\n---\n\n');
-      expect(next.body, 'Content\n');
-    });
+        // Vervang de body door een tekst die met --- opent.
+        final next = doc.withBody('---\ntitle: Test\n---\n\nContent\n');
+        // De metadata wordt nu opnieuw geparseerd: het --- blok is frontmatter.
+        expect(next.frontMatter, '---\ntitle: Test\n---\n\n');
+        expect(next.body, 'Content\n');
+      },
+    );
 
-    test('document zonder frontmatter: normale body blijft zonder frontmatter', () {
-      final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
-      final next = doc.withBody('# Vervangen\n');
-      expect(next.frontMatter, '');
-      expect(next.body, '# Vervangen\n');
-      expect(next.source, '# Vervangen\n');
-    });
+    test(
+      'document zonder frontmatter: normale body blijft zonder frontmatter',
+      () {
+        final doc = MarkdownDocument.parse('# Oorspronkelijk\n');
+        final next = doc.withBody('# Vervangen\n');
+        expect(next.frontMatter, '');
+        expect(next.body, '# Vervangen\n');
+        expect(next.source, '# Vervangen\n');
+      },
+    );
   });
 }

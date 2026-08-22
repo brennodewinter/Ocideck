@@ -150,7 +150,11 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   }
 
   /// Laad een reeds ingelezen document (door de tabbeheerder), vers en schoon.
-  void loadDocument(MarkdownDocument document, {String? filePath, String? projectPath}) {
+  void loadDocument(
+    MarkdownDocument document, {
+    String? filePath,
+    String? projectPath,
+  }) {
     _clearHistory();
     state = DocumentState(
       document: document,
