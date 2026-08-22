@@ -96,6 +96,73 @@ Tekst.''';
     expect(RegExp('<!--').allMatches(restored).length, 1);
   });
 
+  test('tijdlijn-marker lekt geen kop-opmaak bij round-trip (#1709)', () {
+    // Regressie: een kale tijdlijn-embed deelde een Quill-regel met de
+    // volgende kop, waardoor `## ` voor `<!-- timeline -->` kwam te staan.
+    const source = '''# Incident
+
+<!-- timeline -->
+| Tijd | Gebeurtenis |
+| --- | --- |
+| 10:00 | Start |
+
+## Analyse
+
+Tekst hier.
+''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, isNot(contains('# <!-- timeline')));
+    expect(restored, isNot(contains('## <!-- timeline')));
+    expect(restored, contains('<!-- timeline -->'));
+    expect(restored, contains('## Analyse'));
+    expect(restored, contains('| 10:00 | Start |'));
+  });
+
+  test('tijdlijn gevolgd door gewone tabel lekt niet (#1709)', () {
+    const source = '''# Rapport
+
+<!-- timeline -->
+| Tijd | Gebeurtenis |
+| --- | --- |
+| 10:00 | Start |
+
+| Nr | Bevinding |
+| --- | --- |
+| 1 | Test |
+''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, isNot(contains('# <!-- timeline')));
+    expect(restored, contains('<!-- timeline -->'));
+    expect(restored, contains('| Nr | Bevinding |'));
+  });
+
+  test('tijdlijn na alinea gevolgd door kop lekt niet (#1709)', () {
+    const source = '''Inleiding.
+
+<!-- timeline -->
+| Tijd | Gebeurtenis |
+| --- | --- |
+| 10:00 | Start |
+
+## Analyse
+
+Tekst.
+''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, isNot(contains('## <!-- timeline')));
+    expect(restored, contains('<!-- timeline -->'));
+    expect(restored, contains('## Analyse'));
+  });
+
   test('een scheiding komt er als `---` uit, niet als `- - -`', () {
     // `DeltaToMarkdown` schrijft `- - -`. Betekenis-identiek, maar OciDeck
     // schrijft en documenteert `---` (het pagina-einde in de documentmodus);
