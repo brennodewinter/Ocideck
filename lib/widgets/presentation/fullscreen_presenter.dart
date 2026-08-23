@@ -9,9 +9,8 @@ import 'package:material_ui/material_ui.dart';
 import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
-import 'package:screen_retriever/screen_retriever.dart';
+import 'package:nativeapi/nativeapi.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:window_manager/window_manager.dart';
 import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
@@ -255,7 +254,7 @@ class FullscreenPresenter extends StatefulWidget {
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
       try {
-        final displays = await screenRetriever.getAllDisplays();
+        final displays = DisplayManager.instance.getAll();
         displayCount = displays.length;
       } catch (e) {
         logWarning('FullscreenPresenter.present: display detection failed', e);

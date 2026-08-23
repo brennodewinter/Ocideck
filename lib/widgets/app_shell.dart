@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart' show StateController;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
-import 'package:window_manager/window_manager.dart';
 
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
+import '../platform/native_window_io.dart' show setWillCloseCallback, quitApp;
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
@@ -193,7 +193,7 @@ class AppShell extends ConsumerStatefulWidget {
   ConsumerState<AppShell> createState() => _AppShellState();
 }
 
-class _AppShellState extends ConsumerState<AppShell> with WindowListener {
+class _AppShellState extends ConsumerState<AppShell> {
   late final OpenFileChannel _openFileChannel;
 
   /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
@@ -210,7 +210,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   @override
   void initState() {
     super.initState();
-    windowManager.addListener(this);
+    setWillCloseCallback(_onWillClose);
     // Warm up the Informatieveiligheid-module state at shell startup so that by
     // the time a deck is opened its `loading` flag has cleared. Without this the
     // very first security-deck open would read the still-loading module and skip
@@ -388,12 +388,19 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
 
   @override
   void dispose() {
-    windowManager.removeListener(this);
+    setWillCloseCallback(() {});
     super.dispose();
   }
 
-  @override
-  void onWindowClose() async {
+  void _onWillClose() {
+    // De willClose-hook is synchroon, maar het bewaken van onopgeslagen werk
+    // vraagt om dialogen en opslaan — dus start het in een fire-and-forget
+    // Future. Wil de bewaking doorgaan, dan roept ze [quitApp]; wil ze
+    // afbreken, dan doet ze niets en het venster blijft open.
+    _handleClose();
+  }
+
+  Future<void> _handleClose() async {
     if (ref.read(tabsProvider).anyDirty) {
       final choice = await _confirmSaveBeforeClose(
         context.l10n.d(
@@ -421,7 +428,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     await ref
         .read(recoveryServiceProvider)
         .discardEach(ref.read(tabsProvider).tabs.map((t) => t.recoveryId));
-    await windowManager.destroy();
+    await quitApp();
   }
 
   Future<_CloseChoice> _confirmSaveBeforeClose(String message) =>
@@ -634,7 +641,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// Twee dingen tegelijk, allebei alleen op web nodig:
   ///
   ///   * de browser krijgt een rem op het sluiten van het tabblad
-  ///     ([setUnsavedWorkGuard]) — op desktop doet `windowManager` dat al;
+  ///     ([setUnsavedWorkGuard]) — op desktop doet de willClose-hook dat al;
   ///   * en de gebruiker hoort één keer dat crashherstel hier niet bestaat.
   ///     [RecoveryService.available] is op web onwaar (geen app-supportmap) en
   ///     de autosave-tik start er niet eens. Dat is een verdedigbare keuze, maar

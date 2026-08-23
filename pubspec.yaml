@@ -19,8 +19,14 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.9.1
   uuid: ^4.5.1
-  screen_retriever: ^0.2.2
-  window_manager: ^0.5.1
+  # nativeapi vervangt screen_retriever + window_manager (uitfasering aangekondigd
+  # in Flutter 3.47). Git-dep naar onze fork op GitHub met de willClose-hook die
+  # OciDeck nodig heeft voor setPreventClose-equivalent. Zie issue #1741.
+  nativeapi:
+    git:
+      url: https://github.com/brennodewinter/nativeapi-flutter.git
+      ref: ae5950fe5745d1d61e1808fc9edc38d49e24ca30
+      path: packages/nativeapi
   shared_preferences: ^2.3.3
   pasteboard: ^0.5.0
   pdf: ^3.13.0
@@ -130,6 +136,16 @@ dev_dependencies:
 
   webview_flutter_platform_interface: any
   vector_math: any
+
+# cnativeapi moet ook uit de fork komen — nativeapi dependt op ^0.1.4 en pub
+# zou de gepubliceerde versie kiezen, die de willClose-hook niet heeft.
+dependency_overrides:
+  cnativeapi:
+    git:
+      url: https://github.com/brennodewinter/nativeapi-flutter.git
+      ref: ae5950fe5745d1d61e1808fc9edc38d49e24ca30
+      path: packages/cnativeapi
+
 flutter:
   config:
     enable-swift-package-manager: false

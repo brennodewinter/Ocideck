@@ -4,7 +4,7 @@ import 'presenter_fullscreen_io.dart'
 
 /// Zet de app in of uit volledig scherm voor de presentatiemodus.
 ///
-/// Op desktop stuurt dit het native venster aan (window_manager); op web de
+/// Op desktop stuurt dit het native venster aan (nativeapi); op web de
 /// browser-Fullscreen-API. Beide zijn best-effort: een platform dat het niet
 /// ondersteunt mag het presenteren nooit blokkeren (zie de aanroepers, die
 /// hier omheen gewoon de presenter-route openen).

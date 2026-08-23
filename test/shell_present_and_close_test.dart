@@ -124,7 +124,7 @@ void main() {
   /// Verlaat de presentatie met Escape en pompt tot de route weg is.
   ///
   /// Net als [present] binnen [WidgetTester.runAsync]: het afsluiten wacht op
-  /// een écht platformverzoek (fullscreen uit via window_manager), dat in de
+  /// een écht platformverzoek (fullscreen uit via nativeapi), dat in de
   /// nep-async-zone nooit terugkomt — dan popt de route niet en blijft de
   /// presenter staan.
   Future<void> exitPresenter(WidgetTester tester) async {

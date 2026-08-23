@@ -5,15 +5,18 @@ part of '../fullscreen_presenter.dart';
 extension _PresenterDisplays on _FullscreenPresenterState {
   Future<void> _loadDisplays() async {
     try {
-      final displays = await screenRetriever.getAllDisplays();
+      final displays = DisplayManager.instance.getAll();
       if (!mounted || displays.isEmpty) return;
-      final bounds = await windowManager.getBounds();
-      final center = bounds.center;
-      final current = displays.indexWhere((d) {
-        final p = d.visiblePosition ?? Offset.zero;
-        final s = d.visibleSize ?? d.size;
-        return Rect.fromLTWH(p.dx, p.dy, s.width, s.height).contains(center);
-      });
+      final window = WindowManager.instance.getCurrent();
+      if (window == null) return;
+      final current = displays.indexWhere(
+        (d) => Rect.fromLTWH(
+          d.position.dx,
+          d.position.dy,
+          d.size.width,
+          d.size.height,
+        ).contains(window.bounds.center),
+      );
       _rebuild(() {
         _displays = displays;
         _displayIndex = current < 0 ? 0 : current;
@@ -23,27 +26,26 @@ extension _PresenterDisplays on _FullscreenPresenterState {
         '_FullscreenPresenterState._loadDisplays: screen detection failed',
         e,
       );
-      // Screen detection is best-effort; presenting should still work.
     }
   }
 
   Future<void> _moveToDisplay(int index) async {
     if (_displays.length < 2) return;
-    final display = _displays[index.clamp(0, _displays.length - 1)];
-    final position = display.visiblePosition ?? Offset.zero;
-    final size = display.visibleSize ?? display.size;
+    final d = _displays[index.clamp(0, _displays.length - 1)];
     try {
-      await windowManager.setFullScreen(false);
-      await windowManager.setBounds(
-        Rect.fromLTWH(position.dx, position.dy, size.width, size.height),
+      final window = WindowManager.instance.getCurrent();
+      if (window == null) return;
+      window.isFullScreen = false;
+      window.bounds = Rect.fromLTWH(
+        d.position.dx,
+        d.position.dy,
+        d.size.width,
+        d.size.height,
       );
-      await windowManager.setFullScreen(true);
+      window.isFullScreen = true;
       if (mounted) _rebuild(() => _displayIndex = index);
     } catch (e) {
-      logError(
-        '_FullscreenPresenterState._moveToDisplay: moving window to display failed',
-        e,
-      );
+      logError('_FullscreenPresenterState._moveToDisplay: failed', e);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -57,8 +59,6 @@ extension _PresenterDisplays on _FullscreenPresenterState {
   Future<void> _cycleDisplay() async {
     if (_displays.isEmpty) await _loadDisplays();
     if (_displays.length < 2) return;
-    // Doof de laser op de beamer: het venster verhuist en zou anders een
-    // achtergebleven stip laten staan tot de muis weer beweegt.
     _onLaserMove(null);
     await _moveToDisplay((_displayIndex + 1) % _displays.length);
   }

@@ -79,7 +79,7 @@ same answer `make licenses` and the SBOM give.
 | `file_selector` | Desktop save-location picker (preserves atomic writes) | BSD-3-Clause |
 | `path_provider`, `path` | Platform directories and path handling | BSD-3-Clause |
 | `uuid` | Slide and asset identifiers | MIT |
-| `screen_retriever`, `window_manager` | Screen geometry and window control for the dual-screen presenter | MIT |
+| `nativeapi` | Screen geometry and window control (replaces screen_retriever + window_manager) | MIT |
 | `shared_preferences` | Settings storage | BSD-3-Clause |
 | `flutter_secure_storage` | The WebDAV/Nextcloud password in the OS keychain | BSD-3-Clause |
 | `pasteboard` | Paste images from the clipboard | Apache-2.0 |
