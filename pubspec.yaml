@@ -25,7 +25,7 @@ dependencies:
   nativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git
-      ref: ae5950fe5745d1d61e1808fc9edc38d49e24ca30
+      ref: 5453312ade837c0d24cb28152359034b4a5f3971
       path: packages/nativeapi
   shared_preferences: ^2.3.3
   pasteboard: ^0.5.0
@@ -143,12 +143,10 @@ dependency_overrides:
   cnativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git
-      ref: ae5950fe5745d1d61e1808fc9edc38d49e24ca30
+      ref: 5453312ade837c0d24cb28152359034b4a5f3971
       path: packages/cnativeapi
 
 flutter:
-  config:
-    enable-swift-package-manager: false
   uses-material-design: true
   assets:
     # Het YuNet-gezichtsmodel (OpenCV Zoo, MIT). 232 KB, en bewust een asset in
