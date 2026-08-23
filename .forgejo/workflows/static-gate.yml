@@ -113,8 +113,6 @@ jobs:
             .dart_tool/hooks_runner
             build/native_assets
           key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
-          restore-keys: |
-            dartcv-linux-
 
       # De commando's zelf staan in de Makefile: `make check-static` is precies de
       # statische deelverzameling die een bijdrager lokaal in `make check` draait.

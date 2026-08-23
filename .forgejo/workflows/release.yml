@@ -92,8 +92,6 @@ jobs:
             .dart_tool/hooks_runner
             build/native_assets
           key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
-          restore-keys: |
-            dartcv-linux-
 
       # Dezelfde poort die elke push krijgt, plus de hardingscontrole. Een tag
       # mag geen artefact uitleveren dat langs de controles is geglipt: dit is
@@ -274,8 +272,6 @@ jobs:
             .dart_tool/hooks_runner
             build/native_assets
           key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
-          restore-keys: |
-            dartcv-linux-
 
       - name: Linux-release bouwen
         run: make build-linux
