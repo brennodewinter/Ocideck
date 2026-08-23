@@ -3492,7 +3492,7 @@ const _dutchSourceAddLt = <String, String>{
       'Naršyklė neturi raktinės, kokią turi kompiuteris: tai, ką OciDeck čia išsaugotų, gali perskaityti bet kuris šio puslapio skriptas. Naudokite darbalaukio versiją — ten paslaptis tikrai patenka į operacinės sistemos raktinę.',
   'Licenties van derden': 'Trečiųjų šalių licencijos',
   'Alle licentieteksten tonen': 'Rodyti visus licencijų tekstus',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Pats OciDeck platinamas pagal EUPL-1.2. Be to, jis sujungia trečiųjų šalių programinę įrangą: Dart ir Flutter paketus, du kartu pateikiamus papildinius, keturias šriftų šeimas, veido modelį privatumo patikrai ir JavaScript, kuris keliauja kartu su HTML eksportu. Kiekvienas išlaiko savo licenciją.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Šiame faile yra trečiųjų šalių programinės įrangos ir kartais šriftas. Žemiau pateikti pilni atitinkamų licencijų tekstai; perduokite juos kartu su failu.',

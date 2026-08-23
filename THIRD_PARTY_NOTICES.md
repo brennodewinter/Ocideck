@@ -53,7 +53,6 @@ changes; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#vendored-forks).
 | Component | Origin (exact commit) | Licence | Local changes |
 | --- | --- | --- | --- |
 | `desktop_multi_window` | [MixinNetwork/flutter-plugins@58a5868](https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window) | **Apache-2.0** | Native macOS/Windows/Linux window placement, borderless fullscreen and close for the dual-screen presenter, plus hover delivery to non-key windows. Six files changed, each carrying an Apache-2.0 §4(b) notice; see [`third_party/desktop_multi_window/MODIFICATIONS.md`](third_party/desktop_multi_window/MODIFICATIONS.md) |
-| `screen_retriever_macos` | [leanflutter/screen_retriever@ed1e522](https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos) | MIT | Swift Package Manager layout added for recent Xcode/CocoaPods; no upstream file edited. See [`third_party/screen_retriever_macos/MODIFICATIONS.md`](third_party/screen_retriever_macos/MODIFICATIONS.md) |
 
 > `desktop_multi_window` was listed here (and in the SBOM) as **MIT** until
 > 2026-07-22. It is not: `third_party/desktop_multi_window/LICENSE` is the
@@ -98,7 +97,7 @@ same answer `make licenses` and the SBOM give.
 | `flutter_highlight`, `highlight` | Syntax highlighting in code slides | MIT |
 | `flutter_math_fork` | Math rendering in the app and PDF | Apache-2.0 |
 | `flutter_quill` | The rich-text slide editor | MIT |
-| `markdown_quill` | Quill ⇄ Markdown conversion for that editor | MIT |
+| `markdown_quill` | Quill ⇄ Markdown conversion for that editor — vendored fork, see `third_party/markdown_quill/MODIFICATIONS.md` | MIT |
 | `markdown` | Markdown parsing outside the Marp path | BSD-3-Clause |
 | `xml` | PPTX (OOXML) writing and SVG handling | MIT |
 | `http` | WebDAV/Nextcloud and Git-over-HTTPS transport (through NetGuard) | BSD-3-Clause |

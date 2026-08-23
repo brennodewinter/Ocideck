@@ -55,7 +55,10 @@ dependencies:
   webview_flutter: ^4.13.0
   webview_flutter_web: ^0.2.3+4
   flutter_quill: ^11.5.1
-  markdown_quill: ^4.3.0
+  # Vendored fork: 17 maanden stale, onverifieerde uitgever. Zie
+  # third_party/markdown_quill/MODIFICATIONS.md en issue #1743.
+  markdown_quill:
+    path: third_party/markdown_quill
   markdown: ^7.3.1
   xml: ^7.0.1
   # Wachtwoord voor de WebDAV/Nextcloud-bron versleuteld in de OS-keychain

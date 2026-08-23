@@ -1,0 +1,19 @@
+name: markdown_quill
+description: Vendored fork of markdown_quill — convert between quill (delta) format and markdown.
+version: 4.3.0
+homepage: https://github.com/TarekkMA/markdown_quill
+
+environment:
+  sdk: ">=3.1.6 <4.0.0"
+  flutter: ">=3.16.0"
+
+dependencies:
+  collection: ^1.18.0
+  flutter_quill: ^11.0.0
+  markdown: ^7.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  meta: ^1.10.0
+  very_good_analysis: ^5.1.0

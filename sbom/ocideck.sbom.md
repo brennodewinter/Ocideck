@@ -4,7 +4,7 @@
 
 This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (229 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **790 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **789 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -19,7 +19,7 @@ The JSON documents carry **790 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (215)
+### Dart / Flutter packages (214)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -124,7 +124,6 @@ The JSON documents carry **790 dependency relations** between these components: 
 | logger _(transitive)_ | 2.7.0 | MIT | SourceHorizon | `pkg:pub/logger@2.7.0` |
 | logging _(transitive)_ | 1.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/logging@1.3.0` |
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
-| markdown_quill _(direct main)_ | 4.3.0 | MIT | TarekkMA | `pkg:pub/markdown_quill@4.3.0` |
 | matcher _(transitive)_ | 0.12.20 | BSD-3-Clause | dart-lang | `pkg:pub/matcher@0.12.20` |
 | material_color_utilities _(transitive)_ | 0.13.0 | Apache-2.0 | material-foundation | `pkg:pub/material_color_utilities@0.13.0` |
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
@@ -239,11 +238,12 @@ The JSON documents carry **790 dependency relations** between these components: 
 | xml _(direct main)_ | 7.0.1 | MIT | renggli | `pkg:pub/xml@7.0.1` |
 | yaml _(direct dev)_ | 3.1.3 | MIT | dart-lang | `pkg:pub/yaml@3.1.3` |
 
-### Vendored plugin forks (third_party/) (1)
+### Vendored plugin forks (third_party/) (2)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | desktop_multi_window _(direct main)_ | 0.3.0 | Apache-2.0 | MixinNetwork | https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window |
+| markdown_quill _(direct main)_ | 4.3.0 | MIT | TarekkMA | https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b |
 
 ### Vendored JavaScript bundles (HTML export) (5)
 
