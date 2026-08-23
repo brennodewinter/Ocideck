@@ -3477,7 +3477,7 @@ const _dutchSourceAddSl = <String, String>{
       'Brskalnik nima zbirke ključev, kakršno ima računalnik: kar bi OciDeck shranil sem, lahko prebere katera koli skripta na tej strani. Uporabite namizno različico — tam skrivnost res pristane v zbirki ključev operacijskega sistema.',
   'Licenties van derden': 'Licence tretjih oseb',
   'Alle licentieteksten tonen': 'Pokaži vsa besedila licenc',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Sam OciDeck je izdan pod EUPL-1.2. Poleg tega vključuje programsko opremo tretjih oseb: paketa Dart in Flutter, dva priložena vtičnika, štiri družine pisav, model obraza za preverjanje zasebnosti in JavaScript, ki potuje z izvozom v HTML. Vsak od njih obdrži svojo licenco.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Ta datoteka vsebuje programsko opremo tretjih oseb in včasih tudi pisavo. Spodaj so celotna besedila pripadajočih licenc; posreduj jih skupaj z datoteko.',

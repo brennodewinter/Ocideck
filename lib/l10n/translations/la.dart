@@ -3497,7 +3497,7 @@ const _dutchSourceAddLa = <String, String>{
       'Navigatrum clavarium non habet sicut computatrum habet: quidquid OciDeck hic servaret, quodlibet scriptum in hac pagina legere potest. Versione mensali utere — ibi arcanum revera in clavarium systematis operandi reponitur.',
   'Licenties van derden': 'Licentiae aliorum',
   'Alle licentieteksten tonen': 'Omnes textus licentiarum monstrare',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck ipsum sub EUPL-1.2 est. Praeterea programmata aliorum colligit: fasciculos Dart et Flutter, duo additamenta inclusa, quattuor familias litterarum, exemplar vultus ad privatam custodiam et JavaScript quod in exportatione HTML comitatur. Unumquodque licentiam suam servat.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Hic fasciculus programmata aliorum et interdum litterarum formam continet. Infra sunt textus licentiarum pleni ad ea pertinentes; eos simul mitte cum hunc fasciculum tradis.',

@@ -3471,7 +3471,7 @@ const _dutchSourceAddCs = <String, String>{
       'Prohlížeč nemá klíčenku, jakou má počítač: co by tu OciDeck uložil, může přečíst jakýkoli skript na této stránce. Použijte desktopovou verzi — tam se tajemství opravdu uloží do klíčenky operačního systému.',
   'Licenties van derden': 'Licence třetích stran',
   'Alle licentieteksten tonen': 'Zobrazit všechny texty licencí',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Samotný OciDeck je pod licencí EUPL-1.2. Kromě toho přibaluje software třetích stran: balíčky Dart a Flutter, dva přiložené doplňky, čtyři rodiny písem, model obličeje pro kontrolu soukromí a JavaScript, který cestuje s exportem do HTML. Každý si ponechává vlastní licenci.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Tento soubor obsahuje software třetích stran a někdy i písmo. Níže jsou úplné texty příslušných licencí; předejte je spolu se souborem.',

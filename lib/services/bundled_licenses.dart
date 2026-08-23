@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 /// Third-party components OciDeck ships that are **not** Dart packages.
 ///
 /// Flutter already collects the licence of every resolved package — including
-/// the two vendored forks under `third_party/` — into the `NOTICES` asset that
+/// the vendored forks under `third_party/` — into the `NOTICES` asset that
 /// `showLicensePage` reads. What it does not know about is everything we bundle
 /// by hand: the four font families, the YuNet face-detection model, and the
 /// five JavaScript/CSS bundles inlined into the offline HTML export.

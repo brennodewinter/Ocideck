@@ -3523,8 +3523,8 @@ const _dutchSourceAddPt = <String, String>{
       'Um navegador não tem um porta-chaves como um computador tem: o que o OciDeck guardaria aqui pode ser lido por qualquer script desta página. Use a versão para computador — aí o segredo vai mesmo para o porta-chaves do sistema operativo.',
   'Licenties van derden': 'Licenças de terceiros',
   'Alle licentieteksten tonen': 'Mostrar todos os textos das licenças',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
-      'O próprio OciDeck é licenciado sob a EUPL-1.2. Além disso, agrega software de terceiros: os pacotes Dart e Flutter, dois plugins incorporados, quatro famílias de tipos de letra, o modelo de rosto do controlo de privacidade e o JavaScript que viaja numa exportação HTML. Cada um mantém a sua própria licença.',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'O próprio OciDeck é licenciado sob a EUPL-1.2. Além disso, agrega software de terceiros: os pacotes Dart e Flutter, dois pacotes incorporados, quatro famílias de tipos de letra, o modelo de rosto do controlo de privacidade e o JavaScript que viaja numa exportação HTML. Cada um mantém a sua própria licença.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Este ficheiro contém software de terceiros e por vezes um tipo de letra. Abaixo estão os textos completos das licenças correspondentes; envie-os juntamente com o ficheiro.',
   'Sporen op dit apparaat': 'Vestígios neste dispositivo',

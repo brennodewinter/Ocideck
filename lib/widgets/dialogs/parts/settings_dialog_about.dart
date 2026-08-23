@@ -321,7 +321,7 @@ extension _SettingsAbout on _SettingsDialogState {
   /// Third-party licences: a link into Flutter's own licence page.
   ///
   /// That page reads the `NOTICES` asset, which already carries the full text
-  /// for every resolved Dart/Flutter package — including the two vendored forks
+  /// for every resolved Dart/Flutter package — including the vendored forks
   /// in `third_party/`. `BundledLicenses.register()` adds what Flutter cannot
   /// know about: the four font families, the YuNet model and the JavaScript
   /// inlined into the HTML export. Without this route the app shipped fonts
@@ -336,7 +336,7 @@ extension _SettingsAbout on _SettingsDialogState {
           children: [
             Text(
               l10n.d(
-                'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.',
+                'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.',
               ),
               style: _aboutBodyStyle,
             ),

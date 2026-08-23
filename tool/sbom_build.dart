@@ -63,7 +63,7 @@ const _validSpdxIds = <String>{
   'EUPL-1.2',
 };
 
-/// Upstream origins of the two vendored (forked) plugins in `third_party/`.
+/// Upstream origins of the vendored (forked) packages in `third_party/`.
 /// Kept here (and in THIRD_PARTY_NOTICES.md) because a path dependency carries
 /// no upstream URL, no upstream revision and no archive hash of its own.
 ///
@@ -87,17 +87,17 @@ const _forkOrigins = <String, ({String vcs, String revision, String subdir})>{
     revision: '58a5868d1cb9031defa5db5868d6aaea0486d24a',
     subdir: 'packages/desktop_multi_window',
   ),
-  'screen_retriever_macos': (
-    vcs: 'https://github.com/leanflutter/screen_retriever',
-    revision: 'ed1e52204d75b69330fb4b0e0b8d4d57e3c53833',
-    subdir: 'packages/screen_retriever_macos',
+  'markdown_quill': (
+    vcs: 'https://github.com/TarekkMA/markdown_quill',
+    revision: '49641654bd584c6f0fc398c2c91383cf13a3424b',
+    subdir: '',
   ),
 };
 
 /// SHA-256 over a vendored fork's entire directory tree.
 ///
 /// A path dependency has no pub archive, so there is no upstream hash to
-/// record — but "no hash at all" leaves the two forks as the only components a
+/// record — but "no hash at all" leaves the forks as the only components a
 /// verifier cannot check. This fills that gap with a hash of what we actually
 /// ship: the digest of a sorted `<relative path> <sha256>` line per file. It is
 /// recomputed on every `make sbom-verify`, so a tampered or accidentally-edited
@@ -486,6 +486,8 @@ List<SbomComponent> _dartPackages() {
           sha256: dir.existsSync() ? forkTreeHash(dir) : null,
           vcsUrl: fork == null
               ? null
+              : fork.subdir.isEmpty
+              ? '${fork.vcs}/tree/${fork.revision}'
               : '${fork.vcs}/tree/${fork.revision}/${fork.subdir}',
           upstreamRevision: fork?.revision,
           scope: scope,
