@@ -12,6 +12,57 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.9] — 2026-08-23
+
+### Added
+
+- feat(timeline): kolomkiezer voor tabel→tijdlijn bij 4+ kolommen (#1632)
+
+### Changed
+
+- chore: schakel Swift Package Manager in + fix nativeapi iOS/macOS builds (#1733) (#1753)
+- chore: migreer screen_retriever + window_manager naar nativeapi (#1741) (#1752)
+- chore: migreer naar standalone material_ui package (#1732) (#1751)
+- chore: vendor markdown_quill fork into third_party/ (#1743)
+- chore(deps): migreer file_picker 11→12, win32 5→6, wakelock_plus 1.7, flutter_secure_storage 11 (#1744) (#1747)
+- chore: verwijder vendored screen_retriever_macos fork (#1741) (#1745)
+- chore(toolchain): pin Flutter 3.47.0 → 3.47.1 + safe dep bumps (#1736) (#1737)
+- Merge pull request #1701 from codex/document-1644-1645-1671-1677
+- Merge pull request #1698: fix(security): harden document export boundaries
+- Documenteditor: zoeken en zoeken-en-vervangen (#1688)
+- Merge pull request #1696: fix(security): harden document input and asset boundaries
+- chore(release): de tap haalt zijn eigen Homebrew-cask op
+
+### Fixed
+
+- fix: macOS crash — NSWindow UI-operaties naar main thread dispatchen (#1755)
+- fix: Wasm web-build + evaluatie #1735 (Wide Gamut) en #1742 (webview_flutter_web) (#1754)
+- fix: Flutter 3.47 batch — Impeller, iOS-target, analyzer 13, re_highlight (#1750)
+- fix(ci): dartcv4-cache-key op versie alleen, niet hele pubspec.lock (#1748) (#1749)
+- fix(pdf): tijdlijn-rail, TLP-badge, front matter-lekkage en woordafbreking (#1724 #1725 #1726 #1727) (#1728)
+- fix: documentexport werkt op web via browser-download (#1720) (#1723)
+- fix(latex): behoud documentopmaak en lijstbetekenis (#1713 #1714 #1715)
+- fix(document): maak PDF-export gelijkwaardiger (#1712 #1716)
+- fix: typen in tabelcel bereikt de cel, niet Quill (#1718) (#1719)
+- fix: tabelcel-focus onttrekt Quills cursor (geen dubbele cursor) (#1717)
+- fix: tijdlijn krijgt eindmarkering en harde verbinding bolletje-kaart (#1711)
+- fix: tijdlijn-embed lekt kop-opmaak naar volgende regel (#1709) (#1710)
+- fix: bug-label batch — 15 issues aangepakt
+- fix(ci): de conventiepoort laten struikelen op één regel is geen poort (#1707)
+- fix: alle accepted issues in één batch (#1706)
+- fix(web): plat .md opent als document i.p.v. geweigerd (#1637)
+- fix(security): valideer geometry-frontmatter, val terug op defaults (#1681)
+- fix(document): weiger `marp` als vrije documentsleutel (#1638)
+- fix(document): hydrateer grafiekdata en projectmap bij conversie (#1639)
+- fix(document): Instellingen opent op appearance, niet presentation (#1697)
+- fix(tabs): sluiten laatste documenttabblad crasht niet meer (#1636) (#1695)
+- fix(security): scan herstelde documentmomentopnames op uitvoerbare inhoud (#1643)
+- fix(pdf): verwijder het praktische maximum op documentlengte (#1689)
+- fix(pdf): verhoog maxPages van 20 naar 1000 voor lange documenten (#1687)
+- fix(reader): los afbeeldingen op in didChangeDependencies, niet initState (#1635)
+- fix(table): spreadsheet-stijl celmarkering bij inline tabel-bewerking (#1633)
+- fix(editor): valt expliciet terug op Bron-modus bij visueel-ontoegankelijke Markdown (#1631)
+
 ## [0.4.8] — 2026-08-21
 
 ### Added
