@@ -876,7 +876,7 @@ class _IndexVisitor extends RecursiveAstVisitor<void> {
     if (parameters == null) return;
     var positional = 0;
     for (final p in parameters.parameters) {
-      final inner = p is DefaultFormalParameter ? p.parameter : p;
+      final inner = p;
       final name = inner.name?.lexeme;
       final selector = p.isNamed ? name : '#${positional++}';
       if (inner is! FieldFormalParameter || name == null || selector == null) {
@@ -1034,12 +1034,12 @@ class _UseVisitor extends RecursiveAstVisitor<void> {
     for (final argument in arguments.arguments) {
       final String selector;
       final Expression value;
-      if (argument is NamedExpression) {
-        selector = argument.name.label.name;
-        value = argument.expression;
+      if (argument is NamedArgument) {
+        selector = argument.name.lexeme;
+        value = argument.argumentExpression;
       } else {
         selector = '#${positional++}';
-        value = argument;
+        value = argument.argumentExpression;
       }
       final sinks = [for (final callee in callees) '$callee|$selector'];
       final shown = <String>{

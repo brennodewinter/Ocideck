@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -65,7 +64,7 @@ void main() {
   });
 
   testWidgets(
-    'syntax highlighting on uses HighlightView for a known language',
+    'syntax highlighting on uses highlighted code for a known language',
     (tester) async {
       final slide = Slide.create(
         SlideType.code,
@@ -75,7 +74,7 @@ void main() {
       await tester.pumpWidget(_host(slide, profile));
       await tester.pump();
 
-      expect(find.byType(HighlightView), findsOneWidget);
+      expect(find.byKey(const Key('highlighted_code')), findsOneWidget);
     },
   );
 
@@ -95,7 +94,7 @@ void main() {
     await tester.pump();
 
     // No per-token highlighting; the code is one flat colour.
-    expect(find.byType(HighlightView), findsNothing);
+    expect(find.byKey(const Key('highlighted_code')), findsNothing);
     final codeText = tester.widget<Text>(find.text('void main() {}'));
     expect(codeText.style?.color, _hex('#33FF33'));
     expect(tester.takeException(), isNull);

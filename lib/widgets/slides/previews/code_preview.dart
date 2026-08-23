@@ -46,7 +46,7 @@ class _CodePreview extends StatelessWidget {
     final bottomPad = _logoAwareBottomPadding(pad, safe.bottom);
     final code = slide.customMarkdown;
     final lang = slide.codeLanguage.trim();
-    final known = lang.isNotEmpty && allLanguages.containsKey(lang);
+    final known = lang.isNotEmpty && builtinAllLanguages.containsKey(lang);
 
     final codeBg = AppTheme.parseHexColor(profile.codeBackgroundColor);
     final codeFg = AppTheme.parseHexColor(profile.codeTextColor);
@@ -78,15 +78,16 @@ class _CodePreview extends StatelessWidget {
         color: codeFg,
       ),
     };
-    Widget buildCode(TextStyle style) => useHighlight
-        ? HighlightView(
-            code,
-            language: lang,
-            theme: highlightTheme,
-            padding: EdgeInsets.zero,
-            textStyle: style,
-          )
-        : Text(code, style: style);
+    Widget buildCode(TextStyle style) {
+      if (!useHighlight) return Text(code, style: style);
+      final result = _highlighter.highlight(code: code, language: lang);
+      final renderer = TextSpanRenderer(style, highlightTheme);
+      result.render(renderer);
+      return RichText(
+        key: const Key('highlighted_code'),
+        text: renderer.span ?? TextSpan(text: code, style: style),
+      );
+    }
 
     return Container(
       color: AppTheme.parseHexColor(profile.slideBackgroundColor),
@@ -153,14 +154,15 @@ class _CodePreview extends StatelessWidget {
   }
 }
 
-/// Register highlight.js language definitions once, so [HighlightView] can
-/// colour any common language without throwing.
-bool _highlightReady = false;
+/// Shared highlighter instance with all built-in languages registered once.
+final Highlight _highlighter = Highlight()
+  ..registerLanguages(builtinAllLanguages);
 
 void _ensureHighlightLanguages() {
-  if (_highlightReady) return;
-  allLanguages.forEach(highlight.registerLanguage);
-  _highlightReady = true;
+  // Touch the highlighter so it is initialized before any build; the
+  // top-level final already does the registration, this just ensures
+  // the lazy field is evaluated early.
+  _highlighter;
 }
 
 // ── Shared helper ─────────────────────────────────────────────────────────────

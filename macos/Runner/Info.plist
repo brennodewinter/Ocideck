@@ -30,8 +30,6 @@
 	<string>NSApplication</string>
 	<key>FLTEnableMergedPlatformUIThread</key>
 	<false/>
-	<key>FLTEnableImpeller</key>
-	<false/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

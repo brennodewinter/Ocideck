@@ -122,11 +122,11 @@ class _NoteVisitor extends RecursiveAstVisitor<void> {
   }
 
   @override
-  void visitNamedExpression(NamedExpression node) {
-    if (_noteArgs.contains(node.name.label.name)) {
-      _collect(node.expression);
+  void visitNamedArgument(NamedArgument node) {
+    if (_noteArgs.contains(node.name.lexeme)) {
+      _collect(node.argumentExpression);
     }
-    super.visitNamedExpression(node);
+    super.visitNamedArgument(node);
   }
 
   @override

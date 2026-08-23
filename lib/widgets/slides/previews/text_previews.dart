@@ -846,15 +846,18 @@ Widget _markdownCodeBlock(String code, String language, double w, String font) {
     height: 1.3,
     color: AppTheme.ghInk,
   );
-  final known = language.isNotEmpty && allLanguages.containsKey(language);
+  final known =
+      language.isNotEmpty && builtinAllLanguages.containsKey(language);
   final Widget content = known
-      ? HighlightView(
-          code,
-          language: language,
-          theme: githubTheme,
-          padding: EdgeInsets.zero,
-          textStyle: mono,
-        )
+      ? () {
+          final result = _highlighter.highlight(code: code, language: language);
+          final renderer = TextSpanRenderer(mono, githubTheme);
+          result.render(renderer);
+          return RichText(
+            key: const Key('highlighted_code'),
+            text: renderer.span ?? TextSpan(text: code, style: mono),
+          );
+        }()
       : Text(code, style: mono);
   return Container(
     width: double.infinity,
