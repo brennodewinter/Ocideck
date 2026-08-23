@@ -70,6 +70,10 @@ const Set<String> uncoveredBaseline = {
   // rechtstreeks getoetst in native_window_test.dart.
   'lib/platform/native_window_io.dart',
   'lib/widgets/presentation/parts/presenter_displays.dart',
+  'lib/widgets/presentation/display_info_io.dart',
+  'lib/widgets/presentation/display_info_web.dart',
+  'lib/widgets/presentation/display_info_data.dart',
+  'lib/widgets/presentation/display_info.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through

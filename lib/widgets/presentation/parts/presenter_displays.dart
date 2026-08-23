@@ -5,21 +5,19 @@ part of '../fullscreen_presenter.dart';
 extension _PresenterDisplays on _FullscreenPresenterState {
   Future<void> _loadDisplays() async {
     try {
-      final displays = DisplayManager.instance.getAll();
+      final displays = getAllDisplays();
       if (!mounted || displays.isEmpty) return;
-      final window = WindowManager.instance.getCurrent();
-      if (window == null) return;
-      final current = displays.indexWhere(
-        (d) => Rect.fromLTWH(
-          d.position.dx,
-          d.position.dy,
-          d.size.width,
-          d.size.height,
-        ).contains(window.bounds.center),
-      );
+      final center = getCurrentWindowCenter();
+      int current = 0;
+      if (center != null) {
+        current = displays.indexWhere(
+          (d) => Rect.fromLTWH(d.x, d.y, d.width, d.height).contains(center),
+        );
+        if (current < 0) current = 0;
+      }
       _rebuild(() {
         _displays = displays;
-        _displayIndex = current < 0 ? 0 : current;
+        _displayIndex = current;
       });
     } catch (e) {
       logWarning(
@@ -31,18 +29,8 @@ extension _PresenterDisplays on _FullscreenPresenterState {
 
   Future<void> _moveToDisplay(int index) async {
     if (_displays.length < 2) return;
-    final d = _displays[index.clamp(0, _displays.length - 1)];
     try {
-      final window = WindowManager.instance.getCurrent();
-      if (window == null) return;
-      window.isFullScreen = false;
-      window.bounds = Rect.fromLTWH(
-        d.position.dx,
-        d.position.dy,
-        d.size.width,
-        d.size.height,
-      );
-      window.isFullScreen = true;
+      moveToDisplay(index, _displays);
       if (mounted) _rebuild(() => _displayIndex = index);
     } catch (e) {
       logError('_FullscreenPresenterState._moveToDisplay: failed', e);
