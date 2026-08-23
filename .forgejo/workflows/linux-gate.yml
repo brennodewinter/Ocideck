@@ -77,7 +77,7 @@ jobs:
     # `make check-no-coverage`) om — fail-closed. Alleen de repo-gekoppelde dingen
     # (pub + dartcv OpenCV-build) blijven op `actions/cache`.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.0
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
     steps:
       - uses: actions/checkout@v4
 
@@ -116,8 +116,6 @@ jobs:
             .dart_tool/hooks_runner
             build/native_assets
           key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
-          restore-keys: |
-            dartcv-linux-
 
       # `check-no-coverage` en niet `check`: de volledige suite draait onverkort,
       # alleen zonder `--coverage`. Die instrumentatie houdt per test een
