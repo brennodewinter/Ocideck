@@ -671,12 +671,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     // heen wijzen. Een stille, onherstelbare instelling is erger dan een
     // ontbrekende knop.
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       dialogTitle: context.l10n.d('Logo kiezen'),
       type: FileType.image,
     );
     if (!mounted) return;
-    final path = result?.files.single.path;
+    final path = file?.path;
     if (path != null) {
       setState(() {
         _themeProfile = _themeProfile.copyWith(logoPath: path);

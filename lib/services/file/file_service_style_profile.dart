@@ -403,36 +403,29 @@ extension FileServiceStyleProfile on FileService {
     return StyleProfileImportOutcome.success(profile, logoOmitted: logoOmitted);
   }
 
-  /// Kies een `.ocideckstyle`-bestand en lees het uit. `withData` levert op web
-  /// én desktop bytes, zodat één pad volstaat (web kent geen bestandspad).
+  /// Kies een `.ocideckstyle`-bestand en lees het uit. `readAsBytes` levert op
+  /// web én desktop bytes, zodat één pad volstaat (web kent geen bestandspad).
   ///
   /// FileType.any, geen `allowedExtensions`: dat filter grijst de zelfverzonnen
   /// `.ocideckstyle` juist úit op macOS (geen UTI) — zelfde reden als bij
   /// [FileService.pickPackageFile]. [importStyleProfileBytes] toetst daarna de
   /// JSON-envelop met de `ocideck`-marker.
   Future<StyleProfileImportOutcome> importStyleProfile() async {
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       dialogTitle: _d('Stijlprofiel importeren'),
       type: FileType.any,
-      withData: true,
     );
-    final file = result?.files.single;
     if (file == null) {
       return const StyleProfileImportOutcome.failed(
         StyleProfileImportFailure.cancelled,
       );
     }
-    if (file.size > FileService.maxStyleProfileBytes) {
+    if (await file.length() > FileService.maxStyleProfileBytes) {
       return const StyleProfileImportOutcome.failed(
         StyleProfileImportFailure.tooLarge,
       );
     }
-    final bytes = file.bytes;
-    if (bytes == null) {
-      return const StyleProfileImportOutcome.failed(
-        StyleProfileImportFailure.invalid,
-      );
-    }
+    final bytes = await file.readAsBytes();
     return importStyleProfileBytes(bytes);
   }
 }

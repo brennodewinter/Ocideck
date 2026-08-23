@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:file_picker/file_picker.dart';
@@ -389,18 +388,14 @@ class _ChartEditorState extends State<ChartEditor> {
   }
 
   Future<void> _importCsv() async {
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       type: FileType.custom,
       allowedExtensions: ['csv'],
-      withData: true,
     );
     if (!mounted) return;
-    if (result == null || result.files.isEmpty) return;
-    final file = result.files.first;
-    final text = file.bytes != null
-        ? utf8.decode(file.bytes!)
-        : (file.path != null ? await File(file.path!).readAsString() : null);
-    if (text == null) return;
+    if (file == null) return;
+    final bytes = await file.readAsBytes();
+    final text = utf8.decode(bytes);
     if (!mounted) return;
 
     // De import vult alleen het grid. Waar de data belandt is geen keuze meer

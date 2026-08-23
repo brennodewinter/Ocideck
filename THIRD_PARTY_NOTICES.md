@@ -76,6 +76,7 @@ same answer `make licenses` and the SBOM give.
 | `flutter`, `flutter_localizations` | The framework and its localisation delegates | BSD-3-Clause (Flutter SDK) |
 | `flutter_riverpod` | Application state | MIT |
 | `file_picker` | Open/save dialogs | MIT |
+| `file_selector` | Desktop save-location picker (preserves atomic writes) | BSD-3-Clause |
 | `path_provider`, `path` | Platform directories and path handling | BSD-3-Clause |
 | `uuid` | Slide and asset identifiers | MIT |
 | `screen_retriever`, `window_manager` | Screen geometry and window control for the dual-screen presenter | MIT |

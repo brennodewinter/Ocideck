@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -199,14 +200,18 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
       return;
     }
     try {
-      final path = await FilePicker.saveFile(
-        dialogTitle: l10n.d('Verzoek (.tsq) exporteren'),
-        fileName: 'ocideck-seal.tsq',
-        bytes: kIsWeb ? tsq : null,
-      );
-      if (path == null && !kIsWeb) return;
-      if (!kIsWeb) {
-        final target = withExtension(path!, '.tsq');
+      if (kIsWeb) {
+        await FilePicker.saveFile(
+          dialogTitle: l10n.d('Verzoek (.tsq) exporteren'),
+          fileName: 'ocideck-seal.tsq',
+          bytes: tsq,
+        );
+      } else {
+        final location = await getSaveLocation(
+          suggestedName: 'ocideck-seal.tsq',
+        );
+        if (location == null) return;
+        final target = withExtension(location.path, '.tsq');
         await writeBytesAtomic(File(target), tsq);
       }
       // Pas onthouden als het verzoek de deur uit is. Andersom zou een
@@ -223,9 +228,9 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
   Future<void> _importTsr(Deck deck) async {
     final l10n = context.l10n;
     try {
-      final result = await FilePicker.pickFiles(withData: true);
-      final bytes = result?.files.single.bytes;
-      if (bytes == null) return;
+      final file = await FilePicker.pickFile();
+      if (file == null) return;
+      final bytes = await file.readAsBytes();
       // De imprint zegt "dit token gaat over deze hash". De nonce zegt "en het
       // is het antwoord op mijn verzoek". Het oordeel zelf staat in
       // rfc3161_timestamp.dart, zodat het toetsbaar is zonder bestandskiezer.

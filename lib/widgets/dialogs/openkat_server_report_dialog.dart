@@ -509,12 +509,12 @@ class _OpenKatServerReportDialogState
 
   Future<void> _pickJsonFile() async {
     if (!supportsLocalProjectFolders) return;
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       type: FileType.custom,
       allowedExtensions: const ['json'],
       dialogTitle: context.l10n.d('JSON-bestand kiezen…'),
     );
-    final path = result?.files.single.path;
+    final path = file?.path;
     if (path == null) return;
     final body = await File(path).readAsString();
     await _importJsonBody(body, preferredName: p.basename(path));
