@@ -4,7 +4,7 @@
 
 This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (216 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **729 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **728 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -19,7 +19,7 @@ The JSON documents carry **729 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (201)
+### Dart / Flutter packages (202)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -156,6 +156,7 @@ The JSON documents carry **729 dependency relations** between these components: 
 | riverpod _(transitive)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.2` |
 | screen_retriever _(direct main)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever@0.2.2` |
 | screen_retriever_linux _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_linux@0.2.2` |
+| screen_retriever_macos _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_macos@0.2.2` |
 | screen_retriever_platform_interface _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_platform_interface@0.2.2` |
 | screen_retriever_windows _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_windows@0.2.2` |
 | shared_preferences _(direct main)_ | 2.5.5 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences@2.5.5` |
@@ -225,12 +226,11 @@ The JSON documents carry **729 dependency relations** between these components: 
 | xml _(direct main)_ | 7.0.1 | MIT | renggli | `pkg:pub/xml@7.0.1` |
 | yaml _(direct dev)_ | 3.1.3 | MIT | dart-lang | `pkg:pub/yaml@3.1.3` |
 
-### Vendored plugin forks (third_party/) (2)
+### Vendored plugin forks (third_party/) (1)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | desktop_multi_window _(direct main)_ | 0.3.0 | Apache-2.0 | MixinNetwork | https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window |
-| screen_retriever_macos _(direct overridden)_ | 0.2.0 | MIT | leanflutter | https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos |
 
 ### Vendored JavaScript bundles (HTML export) (5)
 

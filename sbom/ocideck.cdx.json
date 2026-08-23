@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:36fb6e16-f2f7-5d7c-877a-4b42db47481c",
+  "serialNumber": "urn:uuid:ec80aab0-748b-5693-813b-e07122093cd6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T07:50:19.810435Z",
+    "timestamp": "2026-08-23T09:33:02.843444Z",
     "tools": {
       "components": [
         {
@@ -5586,6 +5586,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/screen_retriever_macos@0.2.2",
+      "type": "library",
+      "supplier": {
+        "name": "leanflutter",
+        "url": [
+          "https://github.com/leanflutter"
+        ]
+      },
+      "name": "screen_retriever_macos",
+      "version": "0.2.2",
+      "purl": "pkg:pub/screen_retriever_macos@0.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1489b99cce597c45a54b9aae1cd94c8d4705353b7e0bb2457a6e4de44e0ad8a"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/screen_retriever_macos/versions/0.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/screen_retriever_platform_interface@0.2.2",
       "type": "library",
       "supplier": {
@@ -8946,55 +8988,6 @@
           "value": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
         }
       ]
-    },
-    {
-      "bom-ref": "fork:screen_retriever_macos@0.2.0",
-      "type": "library",
-      "supplier": {
-        "name": "leanflutter",
-        "url": [
-          "https://github.com/leanflutter"
-        ]
-      },
-      "name": "screen_retriever_macos",
-      "version": "0.2.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "c2dd845611ec1e289ae202094766bb0591017f598ff7f289cb4f53addfaaed53"
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "vcs",
-          "url": "https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos"
-        }
-      ],
-      "properties": [
-        {
-          "name": "ocideck:group",
-          "value": "vendored-fork"
-        },
-        {
-          "name": "cdx:pub:scope",
-          "value": "direct overridden"
-        },
-        {
-          "name": "ocideck:upstream-revision",
-          "value": "ed1e52204d75b69330fb4b0e0b8d4d57e3c53833"
-        },
-        {
-          "name": "ocideck:note",
-          "value": "Vendored fork in third_party/screen_retriever_macos; the local changes are recorded in third_party/screen_retriever_macos/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
-        }
-      ]
     }
   ],
   "dependencies": [
@@ -9008,7 +9001,6 @@
         "font:assets/fonts/Lora-Variable.ttf",
         "font:assets/fonts/Roboto-Variable.ttf",
         "fork:desktop_multi_window@0.3.0",
-        "fork:screen_retriever_macos@0.2.0",
         "pkg:npm/dompurify@3.4.13",
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
@@ -10134,8 +10126,8 @@
     {
       "ref": "pkg:pub/screen_retriever@0.2.2",
       "dependsOn": [
-        "fork:screen_retriever_macos@0.2.0",
         "pkg:pub/screen_retriever_linux@0.2.2",
+        "pkg:pub/screen_retriever_macos@0.2.2",
         "pkg:pub/screen_retriever_platform_interface@0.2.2",
         "pkg:pub/screen_retriever_windows@0.2.2",
         "sdk:flutter@0.0.0"
@@ -10143,6 +10135,13 @@
     },
     {
       "ref": "pkg:pub/screen_retriever_linux@0.2.2",
+      "dependsOn": [
+        "pkg:pub/screen_retriever_platform_interface@0.2.2",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/screen_retriever_macos@0.2.2",
       "dependsOn": [
         "pkg:pub/screen_retriever_platform_interface@0.2.2",
         "sdk:flutter@0.0.0"
@@ -10728,13 +10727,6 @@
     {
       "ref": "fork:desktop_multi_window@0.3.0",
       "dependsOn": [
-        "sdk:flutter@0.0.0"
-      ]
-    },
-    {
-      "ref": "fork:screen_retriever_macos@0.2.0",
-      "dependsOn": [
-        "pkg:pub/screen_retriever_platform_interface@0.2.2",
         "sdk:flutter@0.0.0"
       ]
     }
