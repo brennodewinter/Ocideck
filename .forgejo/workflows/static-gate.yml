@@ -105,6 +105,21 @@ jobs:
       # opnieuw — geen controle vervangen. Dezelfde sleutel als de linux-gate (ook
       # Linux, dezelfde build-hash), zodat één cache beide poorten bedient. Dit
       # blijft op `actions/cache` (niet in het image): het volgt `pubspec.lock`.
+      #
+      # **Sleutel op dartcv4-versie alleen, niet op de hele `pubspec.lock`.** De
+      # OpenCV-build hangt af van de dartcv4-bron, niet van de rest van de
+      # afhankelijkhedenboom. Met `hashFiles('pubspec.lock')` als sleutel
+      # invalidéerde élke dep-bump de cache en bouwde de hook OpenCV vanaf nul
+      # (#1746). Door alleen de dartcv4-versie in de sleutel te zetten blijft de
+      # cache warm over niet-dartcv4-bumps heen. Bij een echte dartcv4-bump
+      # verandert de sleutel en is er geen `restore-keys`-fallback die een stale
+      # CMake-cache van de vorige versie terugzet — dat was de oorzaak van de
+      # "source does not match" fout die eerder tot `13c8a40ce` leidde.
+      - name: dartcv4-versie uit pubspec.lock
+        id: dartcv
+        run: |
+          VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
+          echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
       - name: dartcv4 native OpenCV-build uit de cache
         continue-on-error: true
         uses: actions/cache@v4
@@ -112,7 +127,7 @@ jobs:
           path: |
             .dart_tool/hooks_runner
             build/native_assets
-          key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
+          key: dartcv-linux-${{ steps.dartcv.outputs.versie }}
 
       # De commando's zelf staan in de Makefile: `make check-static` is precies de
       # statische deelverzameling die een bijdrager lokaal in `make check` draait.
