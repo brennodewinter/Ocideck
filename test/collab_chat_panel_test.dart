@@ -2,7 +2,7 @@
 // empty state and the send path), the other stands up a real host session over
 // the fake homeserver and confirms a sent message renders in the panel.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';

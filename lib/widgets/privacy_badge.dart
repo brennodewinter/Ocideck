@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// The "PrivacyKat" mark: an EU-blue (#003399) shield with cat ears and an

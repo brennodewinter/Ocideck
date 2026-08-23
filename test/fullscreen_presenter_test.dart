@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
@@ -20,9 +19,7 @@ Widget _host(
 }) {
   return MaterialApp(
     localizationsDelegates: const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
     ],
     home: FullscreenPresenter(
@@ -41,9 +38,7 @@ Widget _host(
 Widget _presenterOverLauncher({bool showRehearsalSummary = false}) =>
     MaterialApp(
       localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
         FlutterQuillLocalizations.delegate,
       ],
       home: Scaffold(
@@ -1040,9 +1035,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         home: Scaffold(
@@ -1144,9 +1137,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         home: FullscreenPresenter(
@@ -1353,9 +1344,7 @@ void main() {
     Widget dualHost(List<Slide> slides, {bool allowRemoteMedia = false}) {
       return MaterialApp(
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         home: FullscreenPresenter(

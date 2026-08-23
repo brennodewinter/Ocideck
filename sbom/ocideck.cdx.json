@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:f687012e-b94c-53df-8a8b-87b1630aee09",
+  "serialNumber": "urn:uuid:40ec91f1-257a-5313-8a9f-6621f6dbc412",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T16:41:30.459094Z",
+    "timestamp": "2026-08-23T17:06:00.657681Z",
     "tools": {
       "components": [
         {
@@ -1025,6 +1025,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/cupertino_ui@1.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "cupertino_ui",
+      "version": "1.0.0",
+      "purl": "pkg:pub/cupertino_ui@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7ed8ce4159d342eec4c65f4ea6eec57adaf9365404378541f38efc1da20a5b3d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/cupertino_ui/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
         }
       ]
     },
@@ -4238,6 +4280,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/material_ui@1.0.1",
+      "type": "library",
+      "supplier": {
+        "name": "flutter",
+        "url": [
+          "https://github.com/flutter"
+        ]
+      },
+      "name": "material_ui",
+      "version": "1.0.1",
+      "purl": "pkg:pub/material_ui@1.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4f3f38b9953df0a87d6bf5f21880029f77c47048487d5339410c39936be4683b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/material_ui/versions/1.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
         }
       ]
     },
@@ -7840,7 +7924,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct dev"
         }
       ]
     },
@@ -8596,7 +8680,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct dev"
         }
       ]
     },
@@ -9542,6 +9626,7 @@
         "pkg:pub/image@4.9.2",
         "pkg:pub/intl@0.20.3",
         "pkg:pub/markdown@7.3.1",
+        "pkg:pub/material_ui@1.0.1",
         "pkg:pub/pasteboard@0.5.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
@@ -9553,11 +9638,13 @@
         "pkg:pub/url_launcher@6.3.2",
         "pkg:pub/url_launcher_platform_interface@2.3.2",
         "pkg:pub/uuid@4.6.0",
+        "pkg:pub/vector_math@2.4.2",
         "pkg:pub/video_player@2.14.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/wakelock_plus@1.7.0",
         "pkg:pub/web@1.1.1",
         "pkg:pub/webview_flutter@4.14.1",
+        "pkg:pub/webview_flutter_platform_interface@2.15.1",
         "pkg:pub/webview_flutter_web@0.2.3+4",
         "pkg:pub/window_manager@0.5.2",
         "pkg:pub/xml@7.0.1",
@@ -9728,6 +9815,15 @@
     {
       "ref": "pkg:pub/cupertino_icons@1.0.9",
       "dependsOn": []
+    },
+    {
+      "ref": "pkg:pub/cupertino_ui@1.0.0",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/intl@0.20.3",
+        "sdk:flutter@0.0.0",
+        "sdk:flutter_localizations@0.0.0"
+      ]
     },
     {
       "ref": "pkg:pub/dart_quill_delta@10.8.3",
@@ -10398,6 +10494,18 @@
       "ref": "pkg:pub/material_color_utilities@0.13.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1"
+      ]
+    },
+    {
+      "ref": "pkg:pub/material_ui@1.0.1",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/cupertino_ui@1.0.0",
+        "pkg:pub/intl@0.20.3",
+        "pkg:pub/material_color_utilities@0.13.0",
+        "pkg:pub/vector_math@2.4.2",
+        "sdk:flutter@0.0.0",
+        "sdk:flutter_localizations@0.0.0"
       ]
     },
     {

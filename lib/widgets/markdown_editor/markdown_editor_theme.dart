@@ -1,6 +1,6 @@
 import '../reader/document_markdown_view.dart'
     show kDocumentBodyFontSize, kDocumentBodyLineHeight;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../models/settings.dart';
 import '../../theme/app_theme.dart';
 

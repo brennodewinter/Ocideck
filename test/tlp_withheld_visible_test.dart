@@ -7,7 +7,7 @@
 // pakket — zonder teller, plaatshouder of melding. En de "niets te tonen"-tekst
 // wees naar *overslaan*, een andere functie met een eigen badge en een eigen
 // knop.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';

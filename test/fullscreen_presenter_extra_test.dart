@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,9 +9,7 @@ import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 Widget _host(List<Slide> slides, {int initialIndex = 0}) {
   return MaterialApp(
     localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
     ],
     home: FullscreenPresenter(

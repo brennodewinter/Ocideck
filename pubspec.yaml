@@ -71,6 +71,7 @@ dependencies:
   flutter_webrtc: ^1.5.2
   file_selector: ^1.1.0
   re_highlight: ^0.0.3
+  material_ui: ^1.0.1
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
 # De README waarschuwt: "even a module is excluded, its dart code is still
@@ -127,6 +128,8 @@ dev_dependencies:
   # depend on it directly.
   yaml: ^3.1.2
 
+  webview_flutter_platform_interface: any
+  vector_math: any
 flutter:
   config:
     enable-swift-package-manager: false

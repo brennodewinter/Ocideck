@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Text-editing helpers for wrapping selections and toggling line prefixes.
 class MarkdownEditorActions {

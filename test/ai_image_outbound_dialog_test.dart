@@ -5,7 +5,7 @@
 // in de plaats van staat is deze dialoog, en dus is de bewóórding hier de
 // waarborg. Als die stilvalt, valt de waarborg stil.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ai_settings.dart';
 import 'package:ocideck/widgets/dialogs/ai_image_outbound_dialog.dart';

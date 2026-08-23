@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../models/slide.dart';
 import '../../models/video_source.dart';
 import '../../services/image_service.dart';

@@ -3,7 +3,7 @@
 // tested against the fake homeserver in matrix_collab_provider_test.dart; here we
 // test only what the user touches — the link dialogs and which commands appear.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;

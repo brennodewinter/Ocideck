@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show FlutterQuillLocalizations, QuillEditor;
 import 'package:flutter_test/flutter_test.dart';
@@ -39,8 +38,7 @@ Een alinea vooraf.
       MaterialApp(
         localizationsDelegates: const [
           AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,

@@ -3,7 +3,7 @@
 // fingerprints. The link *is* the room secret (a private, non-directory-listed
 // room), so it carries access to the session — but not to the content, which
 // stays end-to-end encrypted by our own keys regardless of who holds the link.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import '../../collab/collab_participant.dart';

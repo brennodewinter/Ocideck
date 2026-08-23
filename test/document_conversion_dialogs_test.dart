@@ -3,8 +3,7 @@
 // bewoording (Opslaan vs Exporteren, geen PDF-belofte) en dat de gekozen
 // profiel/formaat-waarden bij bevestigen doorstromen — plus dat het zegel-verlies
 // expliciet in beeld staat bij deck → document.
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
@@ -17,9 +16,7 @@ Widget _app(Widget home) => MaterialApp(
   supportedLocales: AppLocalizations.supportedLocales,
   localizationsDelegates: const [
     AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
+    ...GlobalMaterialLocalizations.delegates,
   ],
   home: home,
 );

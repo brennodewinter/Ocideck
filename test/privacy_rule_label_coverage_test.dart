@@ -20,7 +20,7 @@
 // lijst aangewezen. Het dekt wel precies de families waarin nieuwe landen en
 // leveranciers bijkomen, en dat is waar het lek zit.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/l10n/slide_quality_localization.dart';

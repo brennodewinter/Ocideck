@@ -3,7 +3,7 @@
 // rendered during a live Matrix session with peers on that slide, so it never
 // touches the slide list outside collaboration (and leaves the goldens alone).
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../collab/matrix_presence.dart';
 import '../../theme/app_theme.dart';

@@ -5,7 +5,7 @@
 // kon — inclusief de inloggegevens van de andere bronnen. Het is nu een gewone
 // widget met een expliciete API: het formulier dat het bewerkt, de weg naar de
 // certificaatbevestiging, en een melding terug wanneer er iets veranderde.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/s3_settings.dart';

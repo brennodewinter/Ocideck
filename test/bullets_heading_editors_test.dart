@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +10,7 @@ import 'package:ocideck/widgets/editors/two_bullets_editor.dart';
 
 const _delegates = <LocalizationsDelegate<dynamic>>[
   AppLocalizations.delegate,
-  GlobalMaterialLocalizations.delegate,
+  ...GlobalMaterialLocalizations.delegates,
   FlutterQuillLocalizations.delegate,
 ];
 

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Het donkere kleurenpalet van de volledig-scherm presentatiemodus
 /// (presenter-view, overlays, ink/annotaties).
