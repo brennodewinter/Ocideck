@@ -25,7 +25,7 @@ dependencies:
   nativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git
-      ref: 5453312ade837c0d24cb28152359034b4a5f3971
+      ref: 0b3aafa797dafd3012a4fdb74f403d6cb20288b1
       path: packages/nativeapi
   shared_preferences: ^2.3.3
   pasteboard: ^0.5.0
@@ -143,7 +143,7 @@ dependency_overrides:
   cnativeapi:
     git:
       url: https://github.com/brennodewinter/nativeapi-flutter.git
-      ref: 5453312ade837c0d24cb28152359034b4a5f3971
+      ref: 0b3aafa797dafd3012a4fdb74f403d6cb20288b1
       path: packages/cnativeapi
 
 flutter:

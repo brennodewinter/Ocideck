@@ -117,8 +117,8 @@ packages:
     dependency: "direct overridden"
     description:
       path: "packages/cnativeapi"
-      ref: "5453312ade837c0d24cb28152359034b4a5f3971"
-      resolved-ref: "5453312ade837c0d24cb28152359034b4a5f3971"
+      ref: "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
+      resolved-ref: "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
       url: "https://github.com/brennodewinter/nativeapi-flutter.git"
     source: git
     version: "0.1.4"
@@ -847,8 +847,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/nativeapi"
-      ref: "5453312ade837c0d24cb28152359034b4a5f3971"
-      resolved-ref: "5453312ade837c0d24cb28152359034b4a5f3971"
+      ref: "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
+      resolved-ref: "0b3aafa797dafd3012a4fdb74f403d6cb20288b1"
       url: "https://github.com/brennodewinter/nativeapi-flutter.git"
     source: git
     version: "0.1.4"
