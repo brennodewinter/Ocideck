@@ -190,24 +190,7 @@ void main() {
     ),
   );
 
-  /// Het afsluiten haalt het venster uit volledig scherm; zonder deze mock
-  /// blijft de presenter daarop hangen en pop't de route nooit.
-  void mockWindowManager(WidgetTester tester) {
-    const windowManager = MethodChannel('window_manager');
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      windowManager,
-      (call) async => null,
-    );
-    addTearDown(
-      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        windowManager,
-        null,
-      ),
-    );
-  }
-
   testWidgets('een vergrendeld deck toont het overzicht nooit', (tester) async {
-    mockWindowManager(tester);
     // De schakelaar staat expliciet aan; de vergrendeling hoort er dwars
     // doorheen te gaan. Wie een deck afspeelt hoort achteraf geen meetrapport
     // over zichzelf te krijgen.
@@ -225,7 +208,6 @@ void main() {
   testWidgets('zonder vergrendeling verschijnt het overzicht wél', (
     tester,
   ) async {
-    mockWindowManager(tester);
     await tester.pumpWidget(presenterOverLauncher(playOnly: false));
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();

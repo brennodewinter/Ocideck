@@ -2,16 +2,16 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (230 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (225 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **801 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **790 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 142 |
-| MIT | 63 |
+| BSD-3-Clause | 141 |
+| MIT | 59 |
 | Apache-2.0 | 18 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
@@ -19,7 +19,7 @@ The JSON documents carry **801 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (215)
+### Dart / Flutter packages (210)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -37,6 +37,7 @@ The JSON documents carry **801 dependency relations** between these components: 
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
 | cli_config _(transitive)_ | 0.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/cli_config@0.2.0` |
 | clock _(transitive)_ | 1.1.2 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.2` |
+| cnativeapi _(direct overridden)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
 | code_assets _(transitive)_ | 1.2.1 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@1.2.1` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
 | convert _(transitive)_ | 3.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/convert@3.1.2` |
@@ -114,7 +115,6 @@ The JSON documents carry **801 dependency relations** between these components: 
 | jni_flutter _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/jni_flutter@1.0.2` |
 | jni_util _(transitive)_ | 1.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/jni_util@1.0.0` |
 | js _(transitive)_ | 0.7.2 | BSD-3-Clause | dart-lang | `pkg:pub/js@0.7.2` |
-| json_annotation _(transitive)_ | 4.12.0 | BSD-3-Clause | google | `pkg:pub/json_annotation@4.12.0` |
 | leak_tracker _(transitive)_ | 11.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker@11.0.2` |
 | leak_tracker_flutter_testing _(transitive)_ | 3.0.10 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_flutter_testing@3.0.10` |
 | leak_tracker_testing _(transitive)_ | 3.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_testing@3.0.2` |
@@ -129,6 +129,7 @@ The JSON documents carry **801 dependency relations** between these components: 
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
 | mime _(transitive)_ | 2.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/mime@2.0.0` |
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
+| nativeapi _(direct main)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
 | node_preamble _(transitive)_ | 2.0.2 | MIT | mbullington | `pkg:pub/node_preamble@2.0.2` |
 | objective_c _(transitive)_ | 9.5.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.5.0` |
@@ -166,11 +167,6 @@ The JSON documents carry **801 dependency relations** between these components: 
 | re_highlight _(direct main)_ | 0.0.3 | MIT | reqable | `pkg:pub/re_highlight@0.0.3` |
 | record_use _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@1.1.1` |
 | riverpod _(transitive)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.2` |
-| screen_retriever _(direct main)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever@0.2.2` |
-| screen_retriever_linux _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_linux@0.2.2` |
-| screen_retriever_macos _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_macos@0.2.2` |
-| screen_retriever_platform_interface _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_platform_interface@0.2.2` |
-| screen_retriever_windows _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_windows@0.2.2` |
 | shared_preferences _(direct main)_ | 2.5.5 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences@2.5.5` |
 | shared_preferences_android _(transitive)_ | 2.4.27 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_android@2.4.27` |
 | shared_preferences_foundation _(transitive)_ | 2.5.6 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_foundation@2.5.6` |
@@ -233,7 +229,6 @@ The JSON documents carry **801 dependency relations** between these components: 
 | webview_flutter_web _(direct main)_ | 0.2.3+4 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_web@0.2.3+4` |
 | webview_flutter_wkwebview _(transitive)_ | 3.26.0 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_wkwebview@3.26.0` |
 | win32 _(transitive)_ | 6.4.0 | BSD-3-Clause | halildurmus | `pkg:pub/win32@6.4.0` |
-| window_manager _(direct main)_ | 0.5.2 | MIT | leanflutter | `pkg:pub/window_manager@0.5.2` |
 | windows_file_picker _(transitive)_ | 1.0.1 | MIT | miguelpruivo | `pkg:pub/windows_file_picker@1.0.1` |
 | xdg_directories _(transitive)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/xdg_directories@1.1.0` |
 | xml _(direct main)_ | 7.0.1 | MIT | renggli | `pkg:pub/xml@7.0.1` |

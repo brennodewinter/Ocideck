@@ -60,6 +60,16 @@ const Set<String> uncoveredBaseline = {
   // and no decision logic hides here. Keep this list to genuine such bindings,
   // not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
+  // UNTESTABLE NATIVE BINDING (#1741): `native_window_io.dart` en
+  // `presenter_displays.dart` praten met nativeapi via FFI. Onder `flutter
+  // test` is geen native library geladen, dus de FFI-calls throwen en worden
+  // gevangen door try/catch — de bestanden draaien maar een paar regels (de
+  // platformcheck en de try/catch wrapper). Vroeger mockte een method-channel
+  // deze calls; nativeapi gebruikt geen method-channel. De enige logica die
+  // hier zit (de willClose-hook registratie, de minimum-grootte const) is
+  // rechtstreeks getoetst in native_window_test.dart.
+  'lib/platform/native_window_io.dart',
+  'lib/widgets/presentation/parts/presenter_displays.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through

@@ -1,4 +1,4 @@
-import 'package:window_manager/window_manager.dart';
+import 'package:nativeapi/nativeapi.dart';
 
 import '../utils/log.dart';
 
@@ -6,8 +6,10 @@ import '../utils/log.dart';
 /// fout mag het presenteren niet blokkeren.
 Future<void> setPresenterFullscreen(bool fullscreen) async {
   try {
-    await windowManager.setFullScreen(fullscreen);
+    final window = WindowManager.instance.getCurrent();
+    if (window == null) return;
+    window.isFullScreen = fullscreen;
   } catch (e) {
-    logWarning('setPresenterFullscreen: window_manager niet beschikbaar', e);
+    logWarning('setPresenterFullscreen: nativeapi niet beschikbaar', e);
   }
 }

@@ -956,18 +956,6 @@ void main() {
     // blank) was covered layer by layer, but never the bottom of the stack:
     // nothing open, so Escape leaves the presentation. That gap is why a report
     // of "Escape does not exit" could not be checked against a test.
-    const windowManager = MethodChannel('window_manager');
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      windowManager,
-      (call) async => null,
-    );
-    addTearDown(
-      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        windowManager,
-        null,
-      ),
-    );
-
     await tester.pumpWidget(_presenterOverLauncher());
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
@@ -987,18 +975,6 @@ void main() {
     // most authors meet when they press Escape: the run appears, and closing it
     // ends the presentation. Worth pinning down, because "Escape did nothing"
     // is exactly how a summary that failed to appear would look.
-    const windowManager = MethodChannel('window_manager');
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      windowManager,
-      (call) async => null,
-    );
-    addTearDown(
-      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        windowManager,
-        null,
-      ),
-    );
-
     await tester.pumpWidget(_presenterOverLauncher(showRehearsalSummary: true));
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
@@ -1016,20 +992,6 @@ void main() {
   });
 
   testWidgets('Ctrl/Cmd + W closes the presentation', (tester) async {
-    // Exit takes the single-screen path, which drops full screen via the
-    // window_manager plugin; stub it so the platform call resolves in the test.
-    const windowManager = MethodChannel('window_manager');
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      windowManager,
-      (call) async => null,
-    );
-    addTearDown(
-      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        windowManager,
-        null,
-      ),
-    );
-
     // Push the presenter over a launcher screen so its exit (Navigator.pop)
     // is observable; disable the rehearsal summary so exit goes straight through.
     await tester.pumpWidget(
