@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
@@ -57,7 +56,7 @@ void main() {
     );
     await tester.pumpWidget(_host(slide));
 
-    expect(find.byType(HighlightView), findsOneWidget);
+    expect(find.byKey(const Key('highlighted_code')), findsOneWidget);
   });
 
   testWidgets('free Markdown renders display math', (tester) async {
@@ -77,8 +76,8 @@ void main() {
     ).copyWith(customMarkdown: '```nonexistentlang\nsome code\n```\n');
     await tester.pumpWidget(_host(slide));
 
-    // No HighlightView (unknown language) and no exception during build.
-    expect(find.byType(HighlightView), findsNothing);
+    // No highlighted code (unknown language) and no exception during build.
+    expect(find.byKey(const Key('highlighted_code')), findsNothing);
     expect(tester.takeException(), isNull);
     expect(find.text('some code'), findsOneWidget);
   });
@@ -119,7 +118,7 @@ void main() {
       var pagesWithCode = 0;
       for (var p = 0; p < pages; p++) {
         await tester.pumpWidget(_host(slide, richTextPage: p));
-        if (find.byType(HighlightView).evaluate().isNotEmpty) {
+        if (find.byKey(const Key('highlighted_code')).evaluate().isNotEmpty) {
           pagesWithCode++;
         }
       }

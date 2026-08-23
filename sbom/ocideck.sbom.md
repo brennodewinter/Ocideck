@@ -2,16 +2,16 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (229 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **788 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **787 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
 | BSD-3-Clause | 140 |
-| MIT | 64 |
+| MIT | 63 |
 | Apache-2.0 | 18 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
@@ -19,7 +19,7 @@ The JSON documents carry **788 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (214)
+### Dart / Flutter packages (213)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -75,7 +75,6 @@ The JSON documents carry **788 dependency relations** between these components: 
 | flutter _(direct main)_ | 0.0.0 | BSD-3-Clause | flutter | Source: sdk. |
 | flutter_colorpicker _(transitive)_ | 1.1.0 | MIT | mchome | `pkg:pub/flutter_colorpicker@1.1.0` |
 | flutter_driver _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
-| flutter_highlight _(direct main)_ | 0.7.0 | MIT | git-touch | `pkg:pub/flutter_highlight@0.7.0` |
 | flutter_keyboard_visibility_linux _(transitive)_ | 1.0.0 | MIT | MisterJimson | `pkg:pub/flutter_keyboard_visibility_linux@1.0.0` |
 | flutter_keyboard_visibility_macos _(transitive)_ | 1.0.0 | MIT | MisterJimson | `pkg:pub/flutter_keyboard_visibility_macos@1.0.0` |
 | flutter_keyboard_visibility_platform_interface _(transitive)_ | 2.0.0 | MIT | MisterJimson | `pkg:pub/flutter_keyboard_visibility_platform_interface@2.0.0` |
@@ -100,7 +99,6 @@ The JSON documents carry **788 dependency relations** between these components: 
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
 | fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
-| highlight _(direct main)_ | 0.7.0 | MIT | pd4d10 | `pkg:pub/highlight@0.7.0` |
 | hooks _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/hooks@2.2.0` |
 | html _(direct main)_ | 0.15.6 | MIT | dart-lang | `pkg:pub/html@0.15.6` |
 | http _(direct main)_ | 1.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/http@1.6.0` |
@@ -163,6 +161,7 @@ The JSON documents carry **788 dependency relations** between these components: 
 | quill_native_bridge_web _(transitive)_ | 0.0.2 | MIT | FlutterQuill | `pkg:pub/quill_native_bridge_web@0.0.2` |
 | quill_native_bridge_windows _(transitive)_ | 0.1.0 | MIT | FlutterQuill | `pkg:pub/quill_native_bridge_windows@0.1.0` |
 | quiver _(transitive)_ | 3.2.2 | Apache-2.0 | google | `pkg:pub/quiver@3.2.2` |
+| re_highlight _(direct main)_ | 0.0.3 | MIT | reqable | `pkg:pub/re_highlight@0.0.3` |
 | record_use _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@1.1.1` |
 | riverpod _(transitive)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.2` |
 | screen_retriever _(direct main)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever@0.2.2` |

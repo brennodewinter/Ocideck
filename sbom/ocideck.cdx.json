@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:4c2f0154-39bc-5b04-84c2-736d367272ba",
+  "serialNumber": "urn:uuid:f687012e-b94c-53df-8a8b-87b1630aee09",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T16:35:52.363060Z",
+    "timestamp": "2026-08-23T16:41:30.459094Z",
     "tools": {
       "components": [
         {
@@ -2229,48 +2229,6 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_highlight@0.7.0",
-      "type": "library",
-      "supplier": {
-        "name": "git-touch",
-        "url": [
-          "https://github.com/git-touch"
-        ]
-      },
-      "name": "flutter_highlight",
-      "version": "0.7.0",
-      "purl": "pkg:pub/flutter_highlight@0.7.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "7b96333867aa07e122e245c033b8ad622e4e3a42a1a2372cbb098a2541d8782c"
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_highlight/versions/0.7.0"
-        }
-      ],
-      "properties": [
-        {
-          "name": "ocideck:group",
-          "value": "dart-package"
-        },
-        {
-          "name": "cdx:pub:scope",
-          "value": "direct main"
-        }
-      ]
-    },
-    {
       "bom-ref": "pkg:pub/flutter_keyboard_visibility_linux@1.0.0",
       "type": "library",
       "supplier": {
@@ -3239,48 +3197,6 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
-        }
-      ]
-    },
-    {
-      "bom-ref": "pkg:pub/highlight@0.7.0",
-      "type": "library",
-      "supplier": {
-        "name": "pd4d10",
-        "url": [
-          "https://github.com/pd4d10"
-        ]
-      },
-      "name": "highlight",
-      "version": "0.7.0",
-      "purl": "pkg:pub/highlight@0.7.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "5353a83ffe3e3eca7df0abfb72dcf3fa66cc56b953728e7113ad4ad88497cf21"
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://pub.dev/packages/highlight/versions/0.7.0"
-        }
-      ],
-      "properties": [
-        {
-          "name": "ocideck:group",
-          "value": "dart-package"
-        },
-        {
-          "name": "cdx:pub:scope",
-          "value": "direct main"
         }
       ]
     },
@@ -5876,6 +5792,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/re_highlight@0.0.3",
+      "type": "library",
+      "supplier": {
+        "name": "reqable",
+        "url": [
+          "https://github.com/reqable"
+        ]
+      },
+      "name": "re_highlight",
+      "version": "0.0.3",
+      "purl": "pkg:pub/re_highlight@0.0.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6c4ac3f76f939fb7ca9df013df98526634e17d8f7460e028bd23a035870024f2"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/re_highlight/versions/0.0.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
         }
       ]
     },
@@ -9572,7 +9530,6 @@
         "pkg:pub/file_picker@12.0.0",
         "pkg:pub/file_selector@1.1.0",
         "pkg:pub/fl_chart@1.2.0",
-        "pkg:pub/flutter_highlight@0.7.0",
         "pkg:pub/flutter_lints@6.0.0",
         "pkg:pub/flutter_math_fork@0.7.4",
         "pkg:pub/flutter_quill@11.5.1",
@@ -9580,7 +9537,6 @@
         "pkg:pub/flutter_secure_storage@11.0.0",
         "pkg:pub/flutter_svg@2.3.0",
         "pkg:pub/flutter_webrtc@1.6.0",
-        "pkg:pub/highlight@0.7.0",
         "pkg:pub/html@0.15.6",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.9.2",
@@ -9591,6 +9547,7 @@
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/pdf@3.13.0",
         "pkg:pub/plugin_platform_interface@2.1.8",
+        "pkg:pub/re_highlight@0.0.3",
         "pkg:pub/screen_retriever@0.2.2",
         "pkg:pub/shared_preferences@2.5.5",
         "pkg:pub/url_launcher@6.3.2",
@@ -10026,13 +9983,6 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_highlight@0.7.0",
-      "dependsOn": [
-        "pkg:pub/highlight@0.7.0",
-        "sdk:flutter@0.0.0"
-      ]
-    },
-    {
       "ref": "pkg:pub/flutter_keyboard_visibility_linux@1.0.0",
       "dependsOn": [
         "pkg:pub/flutter_keyboard_visibility_platform_interface@2.0.0",
@@ -10259,12 +10209,6 @@
         "pkg:pub/file@7.0.1",
         "pkg:pub/path@1.9.1",
         "pkg:pub/string_scanner@1.4.1"
-      ]
-    },
-    {
-      "ref": "pkg:pub/highlight@0.7.0",
-      "dependsOn": [
-        "pkg:pub/collection@1.19.1"
       ]
     },
     {
@@ -10755,6 +10699,14 @@
       "ref": "pkg:pub/quiver@3.2.2",
       "dependsOn": [
         "pkg:pub/matcher@0.12.20"
+      ]
+    },
+    {
+      "ref": "pkg:pub/re_highlight@0.0.3",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/path@1.9.1",
+        "sdk:flutter@0.0.0"
       ]
     },
     {

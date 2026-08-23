@@ -94,7 +94,7 @@ same answer `make licenses` and the SBOM give.
 | `image` | Image decoding, scaling and re-encoding | MIT |
 | `flutter_svg` | SVG rendering in slides and the UI | MIT |
 | `dartcv4` | On-device face **detection** for the privacy check — counts faces, never identifies (native OpenCV binding, successor to the retired `opencv_core`) | Apache-2.0 |
-| `flutter_highlight`, `highlight` | Syntax highlighting in code slides | MIT |
+| `re_highlight` | Syntax highlighting in code slides — active fork of the EOL `flutter_highlight`/`highlight` packages | MIT |
 | `flutter_math_fork` | Math rendering in the app and PDF | Apache-2.0 |
 | `flutter_quill` | The rich-text slide editor | MIT |
 | `markdown_quill` | Quill ⇄ Markdown conversion for that editor — vendored fork, see `third_party/markdown_quill/MODIFICATIONS.md` | MIT |
