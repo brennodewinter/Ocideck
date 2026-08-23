@@ -29,7 +29,7 @@ jobs:
     # Het voorgebakken CI-image draagt node (voor actions/checkout) en curl al;
     # een kale ubuntu zou daar eerst een apt-get voor moeten optuigen.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.0
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
     steps:
       - uses: actions/checkout@v4
 
