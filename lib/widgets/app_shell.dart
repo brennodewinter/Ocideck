@@ -10,7 +10,7 @@ import 'package:path/path.dart' as p;
 
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
-import '../platform/native_window_io.dart' show setWillCloseCallback, quitApp;
+import '../platform/native_window.dart' show setWillCloseCallback, quitApp;
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';

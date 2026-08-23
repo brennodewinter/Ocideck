@@ -9,8 +9,8 @@ import 'package:material_ui/material_ui.dart';
 import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
-import 'package:nativeapi/nativeapi.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+import 'display_info.dart';
 import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
@@ -254,7 +254,7 @@ class FullscreenPresenter extends StatefulWidget {
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
       try {
-        final displays = DisplayManager.instance.getAll();
+        final displays = getAllDisplays();
         displayCount = displays.length;
       } catch (e) {
         logWarning('FullscreenPresenter.present: display detection failed', e);
@@ -644,7 +644,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Known displays for moving the fullscreen presentation window. This is not
   /// a second presenter window; it keeps the current output movable between
   /// screens with S or the presenter-view button.
-  List<Display> _displays = const [];
+  List<DisplayInfo> _displays = const [];
   int _displayIndex = 0;
 
   /// True when this presenter drives a separate audience (beamer) window.
