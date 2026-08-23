@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:0afbfa6c-21ce-5bba-8485-a1fcea588bc3",
+  "serialNumber": "urn:uuid:4c2f0154-39bc-5b04-84c2-736d367272ba",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T12:16:26.962443Z",
+    "timestamp": "2026-08-23T16:35:52.363060Z",
     "tools": {
       "components": [
         {
@@ -63,7 +63,7 @@
   },
   "components": [
     {
-      "bom-ref": "pkg:pub/_fe_analyzer_shared@99.0.0",
+      "bom-ref": "pkg:pub/_fe_analyzer_shared@103.0.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -72,8 +72,8 @@
         ]
       },
       "name": "_fe_analyzer_shared",
-      "version": "99.0.0",
-      "purl": "pkg:pub/_fe_analyzer_shared@99.0.0",
+      "version": "103.0.0",
+      "purl": "pkg:pub/_fe_analyzer_shared@103.0.0",
       "licenses": [
         {
           "license": {
@@ -84,13 +84,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a49d6cf99e8d8e7a8e93668d09ced0bbdb954d0b4fccc2f5f9241c6b87fad95c"
+          "content": "1b0e6a07425a3e460666e88bf1c949ccc7bb0116ad562ce94a1eca60fe820725"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/_fe_analyzer_shared/versions/99.0.0"
+          "url": "https://pub.dev/packages/_fe_analyzer_shared/versions/103.0.0"
         }
       ],
       "properties": [
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/analyzer@12.1.0",
+      "bom-ref": "pkg:pub/analyzer@13.3.0",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -114,8 +114,8 @@
         ]
       },
       "name": "analyzer",
-      "version": "12.1.0",
-      "purl": "pkg:pub/analyzer@12.1.0",
+      "version": "13.3.0",
+      "purl": "pkg:pub/analyzer@13.3.0",
       "licenses": [
         {
           "license": {
@@ -126,13 +126,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "663efa951fb8a45e06f491223a604c93820598f20e6a99c25617a1576065e8b7"
+          "content": "61c04d0c1bfed555c681ea079519933f071a5a026578ff73c4ff0df2d3462e5e"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/analyzer/versions/12.1.0"
+          "url": "https://pub.dev/packages/analyzer/versions/13.3.0"
         }
       ],
       "properties": [
@@ -9560,7 +9560,7 @@
         "pkg:npm/marked@18.0.5",
         "pkg:npm/mathjax@3.2.2",
         "pkg:npm/mermaid@11.16.1",
-        "pkg:pub/analyzer@12.1.0",
+        "pkg:pub/analyzer@13.3.0",
         "pkg:pub/archive@4.0.9",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/crypto@3.0.7",
@@ -9614,16 +9614,15 @@
       ]
     },
     {
-      "ref": "pkg:pub/_fe_analyzer_shared@99.0.0",
+      "ref": "pkg:pub/_fe_analyzer_shared@103.0.0",
       "dependsOn": [
-        "pkg:pub/meta@1.19.0",
-        "pkg:pub/source_span@1.10.2"
+        "pkg:pub/meta@1.19.0"
       ]
     },
     {
-      "ref": "pkg:pub/analyzer@12.1.0",
+      "ref": "pkg:pub/analyzer@13.3.0",
       "dependsOn": [
-        "pkg:pub/_fe_analyzer_shared@99.0.0",
+        "pkg:pub/_fe_analyzer_shared@103.0.0",
         "pkg:pub/collection@1.19.1",
         "pkg:pub/convert@3.1.2",
         "pkg:pub/crypto@3.0.7",
@@ -10986,7 +10985,7 @@
     {
       "ref": "pkg:pub/test@1.31.1",
       "dependsOn": [
-        "pkg:pub/analyzer@12.1.0",
+        "pkg:pub/analyzer@13.3.0",
         "pkg:pub/async@2.13.1",
         "pkg:pub/boolean_selector@2.1.2",
         "pkg:pub/collection@1.19.1",
@@ -11030,7 +11029,7 @@
     {
       "ref": "pkg:pub/test_core@0.6.18",
       "dependsOn": [
-        "pkg:pub/analyzer@12.1.0",
+        "pkg:pub/analyzer@13.3.0",
         "pkg:pub/args@2.7.0",
         "pkg:pub/async@2.13.1",
         "pkg:pub/boolean_selector@2.1.2",

@@ -4,7 +4,7 @@
 
 This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (229 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **789 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **788 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -23,8 +23,8 @@ The JSON documents carry **789 dependency relations** between these components: 
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
-| _fe_analyzer_shared _(transitive)_ | 99.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@99.0.0` |
-| analyzer _(direct dev)_ | 12.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@12.1.0` |
+| _fe_analyzer_shared _(transitive)_ | 103.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@103.0.0` |
+| analyzer _(direct dev)_ | 13.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@13.3.0` |
 | android_file_picker _(transitive)_ | 1.0.1 | MIT | miguelpruivo | `pkg:pub/android_file_picker@1.0.1` |
 | archive _(direct main)_ | 4.0.9 | MIT | brendan-duncan | `pkg:pub/archive@4.0.9` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |

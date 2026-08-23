@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.4.8+22",
-  "documentNamespace": "https://ocideck.app/spdx/caf79d47-69cf-52f3-85a1-c780b317edcb",
+  "documentNamespace": "https://ocideck.app/spdx/2a93195a-494a-5e4d-87c8-20a5f05a90bc",
   "creationInfo": {
-    "created": "2026-08-23T12:16:26.962443Z",
+    "created": "2026-08-23T16:35:52.363060Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -33,46 +33,46 @@
     {
       "SPDXID": "SPDXRef-1--fe-analyzer-shared",
       "name": "_fe_analyzer_shared",
-      "versionInfo": "99.0.0",
+      "versionInfo": "103.0.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/99.0.0",
+      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/103.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a49d6cf99e8d8e7a8e93668d09ced0bbdb954d0b4fccc2f5f9241c6b87fad95c"
+          "checksumValue": "1b0e6a07425a3e460666e88bf1c949ccc7bb0116ad562ce94a1eca60fe820725"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/_fe_analyzer_shared@99.0.0"
+          "referenceLocator": "pkg:pub/_fe_analyzer_shared@103.0.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-2-analyzer",
       "name": "analyzer",
-      "versionInfo": "12.1.0",
+      "versionInfo": "13.3.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/analyzer/versions/12.1.0",
+      "downloadLocation": "https://pub.dev/packages/analyzer/versions/13.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "663efa951fb8a45e06f491223a604c93820598f20e6a99c25617a1576065e8b7"
+          "checksumValue": "61c04d0c1bfed555c681ea079519933f071a5a026578ff73c4ff0df2d3462e5e"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/analyzer@12.1.0"
+          "referenceLocator": "pkg:pub/analyzer@13.3.0"
         }
       ]
     },
@@ -5491,11 +5491,6 @@
       "spdxElementId": "SPDXRef-1--fe-analyzer-shared",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-104-meta"
-    },
-    {
-      "spdxElementId": "SPDXRef-1--fe-analyzer-shared",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-162-source-span"
     },
     {
       "spdxElementId": "SPDXRef-2-analyzer",
