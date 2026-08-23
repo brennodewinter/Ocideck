@@ -259,17 +259,14 @@ Future<List<PickedPresentation>?> _pickPresentations(
   final picked = await FilePicker.pickFiles(
     type: FileType.custom,
     allowedExtensions: presentationImportExtensions,
-    withData: true,
     // Meer tegelijk mag: wie een stapel presentaties overzet, doet dat zelden
     // één voor één. Bij precies één blijft het gedrag ongewijzigd.
-    allowMultiple: true,
     dialogTitle: l10n.d('Presentatie kiezen'),
   );
-  if (picked == null) return null;
+  if (picked.isEmpty) return null;
   return [
-    for (final file in picked.files)
-      if (file.bytes case final bytes?)
-        (bytes: Uint8List.fromList(bytes), name: file.name),
+    for (final file in picked)
+      (bytes: Uint8List.fromList(await file.readAsBytes()), name: file.name),
   ];
 }
 

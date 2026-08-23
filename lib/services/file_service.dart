@@ -4,6 +4,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
@@ -255,11 +256,15 @@ Future<String?> _systemSaveDestination({
   String? dialogTitle,
   String? fileName,
   String? initialDirectory,
-}) => FilePicker.saveFile(
-  dialogTitle: dialogTitle,
-  fileName: fileName,
-  initialDirectory: initialDirectory,
-);
+}) async {
+  // file_picker 12's saveFile requires bytes and writes them non-atomically.
+  // file_selector's getSaveLocation gives just a path, preserving writeBytesAtomic.
+  final location = await getSaveLocation(
+    suggestedName: fileName,
+    initialDirectory: initialDirectory,
+  );
+  return location?.path;
+}
 
 /// Everything that reaches the filesystem on a deck's behalf: opening and
 /// saving, the project folder around a `.md`, the sidecars, the `.ocideck`
@@ -982,8 +987,10 @@ Future<String?> pickDocumentExportDestination({
   required String dialogTitle,
   required String fileName,
   String? initialDirectory,
-}) => FilePicker.saveFile(
-  dialogTitle: dialogTitle,
-  fileName: fileName,
-  initialDirectory: initialDirectory,
-);
+}) async {
+  final location = await getSaveLocation(
+    suggestedName: fileName,
+    initialDirectory: initialDirectory,
+  );
+  return location?.path;
+}

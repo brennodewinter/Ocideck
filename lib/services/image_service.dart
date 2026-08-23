@@ -249,16 +249,14 @@ class ImageService {
     // als hieronder gaat de afbeelding de in-memory store in en krijgt de
     // slide een mem:-pad (zie WebAssetStore).
     if (kIsWeb) {
-      final result = await FilePicker.pickFiles(
+      final file = await FilePicker.pickFile(
         type: FileType.image,
         dialogTitle: _d('Kies een afbeelding'),
-        withData: true,
       );
-      final file = result?.files.single;
-      final bytes = file?.bytes;
-      if (file == null || bytes == null) {
+      if (file == null) {
         return const ImageImportOutcome.failed(ImageImportFailure.cancelled);
       }
+      final bytes = await file.readAsBytes();
       if (bytes.isEmpty ||
           bytes.length > maxImageBytes ||
           !_looksLikeImage(bytes)) {
@@ -269,11 +267,11 @@ class ImageService {
       }
       return storeWebImage(bytes, name: file.name);
     }
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       type: FileType.image,
       dialogTitle: _d('Kies een afbeelding'),
     );
-    final path = result?.files.single.path;
+    final path = file?.path;
     if (path == null) {
       return const ImageImportOutcome.failed(ImageImportFailure.cancelled);
     }
@@ -303,11 +301,11 @@ class ImageService {
     // De knop is inmiddels ook verborgen (video_slide_editor.dart); deze poort
     // staat er zodat het bestand zijn eigen belofte waarmaakt.
     if (!supportsLocalProjectFolders) return null;
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       type: FileType.video,
       dialogTitle: _d('Kies een video'),
     );
-    final path = result?.files.single.path;
+    final path = file?.path;
     if (path == null) return null;
     if (!await _isAcceptableMedia(path, 'pickVideo')) return null;
     return _importIntoProject(path, projectPath, subdir: 'media');
@@ -316,11 +314,11 @@ class ImageService {
   Future<String?> pickAudio({String? projectPath}) async {
     // Zelfde verhaal als [pickVideo]: `path` gooit op web.
     if (!supportsLocalProjectFolders) return null;
-    final result = await FilePicker.pickFiles(
+    final file = await FilePicker.pickFile(
       type: FileType.audio,
       dialogTitle: _d('Kies een audiobestand'),
     );
-    final path = result?.files.single.path;
+    final path = file?.path;
     if (path == null) return null;
     if (!await _isAcceptableMedia(path, 'pickAudio')) return null;
     return _importIntoProject(path, projectPath, subdir: 'media');

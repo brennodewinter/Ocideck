@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^3.3.1
-  file_picker: ^11.0.2
+  file_picker: ^12.0.0
   path_provider: ^2.1.5
   path: ^1.9.1
   uuid: ^4.5.1
@@ -40,7 +40,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   flutter_math_fork: ^0.7.4
   highlight: ^0.7.0
-  wakelock_plus: ^1.5.2
+  wakelock_plus: ^1.7.0
   # Taalbewuste getalnotatie in tabelcellen (render-time, opt-in per kolom).
   # Transitief al aanwezig via flutter_localizations; hier expliciet gemaakt
   # zodat NumberFormat direct importeerbaar is.
@@ -61,13 +61,14 @@ dependencies:
   # Wachtwoord voor de WebDAV/Nextcloud-bron versleuteld in de OS-keychain
   # (macOS/iOS Keychain, elders de veilige backend). Alleen het wachtwoord gaat
   # hierheen; server-URL/gebruikersnaam blijven in het prefs-domein.
-  flutter_secure_storage: ^10.3.1
+  flutter_secure_storage: ^11.0.0
   http: ^1.6.0
   # HTML-parser; zat al transief in de lockfile (o.a. via Quill). Directe dep
   # omdat we klembord-HTML naar Markdown omzetten (#1595), nooit renderen.
   html: ^0.15.6
   cryptography: ^2.9.0
   flutter_webrtc: ^1.5.2
+  file_selector: ^1.1.0
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
 # De README waarschuwt: "even a module is excluded, its dart code is still

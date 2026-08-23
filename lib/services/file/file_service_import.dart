@@ -579,13 +579,13 @@ Future<String?> _pickPathGated({
       // Oude build zonder native handler: val terug op file_picker.
     }
   }
-  final result = await FilePicker.pickFiles(
+  final file = await FilePicker.pickFile(
     dialogTitle: dialogTitle,
     type: type,
     allowedExtensions: allowedExtensions,
     initialDirectory: initialDirectory,
   );
-  return result?.files.single.path;
+  return file?.path;
 }
 
 /// Kies een bestand en lever NAAM + BYTES. Werkt overal, ook op web — dit is de
@@ -593,13 +593,10 @@ Future<String?> _pickPathGated({
 Future<({String name, Uint8List bytes})?> _pickBytes({
   required String dialogTitle,
 }) async {
-  final result = await FilePicker.pickFiles(
+  final file = await FilePicker.pickFile(
     dialogTitle: dialogTitle,
     type: FileType.any,
-    withData: true,
   );
-  final file = result?.files.single;
-  final bytes = file?.bytes;
-  if (file == null || bytes == null) return null;
-  return (name: file.name, bytes: bytes);
+  if (file == null) return null;
+  return (name: file.name, bytes: await file.readAsBytes());
 }
