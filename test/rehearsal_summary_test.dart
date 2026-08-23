@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/question.dart';
@@ -14,9 +13,7 @@ import 'package:ocideck/widgets/presentation/rehearsal_summary.dart';
 /// niet hoort te zijn.
 Widget _wrap(Widget child) => MaterialApp(
   localizationsDelegates: const [
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
+    ...GlobalMaterialLocalizations.delegates,
     FlutterQuillLocalizations.delegate,
   ],
   home: child,

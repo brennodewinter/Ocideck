@@ -6,7 +6,7 @@
 // Flutter-vrij zijn (zie `lib/services/pdf/`): het laden van een asset en het
 // opzoeken van een vertaling zijn juist wél schilwerk, en horen dus hier.
 
-import 'package:flutter/material.dart'
+import 'package:material_ui/material_ui.dart'
     show ScaffoldMessengerState, SnackBar, Text;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 

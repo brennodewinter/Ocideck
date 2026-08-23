@@ -8,7 +8,7 @@
 //
 // En omdat je ze dan tóch leest, staat de beslissing er meteen bij.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';

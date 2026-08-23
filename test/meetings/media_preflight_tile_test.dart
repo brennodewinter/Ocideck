@@ -1,8 +1,7 @@
 // Widget test for the media preflight tile (F3.4a). The media core is injected, so
 // this drives the whole UI without loading a real WebRTC stack.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart';
@@ -31,9 +30,7 @@ Future<void> pumpTile(WidgetTester tester, MediaCoreFactory factory) async {
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
       ],
       home: Scaffold(body: MediaPreflightTile(createMediaCore: factory)),
     ),

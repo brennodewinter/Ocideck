@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -31,9 +30,7 @@ Widget _host(void Function(BuildContext context) onPressed) {
   return MaterialApp(
     localizationsDelegates: const <LocalizationsDelegate<Object?>>[
       AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
     ],
     home: Scaffold(
@@ -52,9 +49,7 @@ Widget _bare(Widget child) {
   return MaterialApp(
     localizationsDelegates: const <LocalizationsDelegate<Object?>>[
       AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
     ],
     home: Scaffold(body: SizedBox(width: 400, height: 500, child: child)),

@@ -10,7 +10,7 @@
 // het opslaandialoog; komt er ooit weer een tussenscherm, dan staat hier iets
 // dat de gebruiker niet meer kan plaatsen, of is de schrijfkant van een
 // sidecar stukgegaan zonder dat iemand het hoort.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';

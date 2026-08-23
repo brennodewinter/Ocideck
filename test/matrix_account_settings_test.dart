@@ -5,7 +5,7 @@
 // token, and the test button confirms it via whoami and fills in the user id and
 // device id (the latter matters for correctness, SELF_ENCRYPTED_RELAY.md §4.3).
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 export '../theme_profile_logo.dart' show ThemeProfileLogo;
 export 'slide_preview.dart' show SlidePreviewWidget;

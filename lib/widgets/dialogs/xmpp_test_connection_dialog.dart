@@ -12,7 +12,7 @@
 // the failure codes are mapped to translated messages here (the session and MUC
 // layers carry no l10n).
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/xmpp_settings.dart';

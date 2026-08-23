@@ -2,15 +2,15 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (228 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.4.8+22** (licence EUPL-1.2) and every third-party component it ships (230 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **787 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **801 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 140 |
+| BSD-3-Clause | 142 |
 | MIT | 63 |
 | Apache-2.0 | 18 |
 | OFL-1.1 | 5 |
@@ -19,7 +19,7 @@ The JSON documents carry **787 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (213)
+### Dart / Flutter packages (215)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -46,6 +46,7 @@ The JSON documents carry **787 dependency relations** between these components: 
 | cryptography _(direct main)_ | 2.9.0 | Apache-2.0 | dint-dev | `pkg:pub/cryptography@2.9.0` |
 | csslib _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/csslib@1.0.2` |
 | cupertino_icons _(direct main)_ | 1.0.9 | MIT | flutter | `pkg:pub/cupertino_icons@1.0.9` |
+| cupertino_ui _(transitive)_ | 1.0.0 | BSD-3-Clause | flutter | `pkg:pub/cupertino_ui@1.0.0` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
 | dart_webrtc _(transitive)_ | 1.8.1 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.1` |
 | dartcv4 _(direct main)_ | 2.3.0 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.3.0` |
@@ -124,6 +125,7 @@ The JSON documents carry **787 dependency relations** between these components: 
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
 | matcher _(transitive)_ | 0.12.20 | BSD-3-Clause | dart-lang | `pkg:pub/matcher@0.12.20` |
 | material_color_utilities _(transitive)_ | 0.13.0 | Apache-2.0 | material-foundation | `pkg:pub/material_color_utilities@0.13.0` |
+| material_ui _(direct main)_ | 1.0.1 | BSD-3-Clause | flutter | `pkg:pub/material_ui@1.0.1` |
 | meta _(transitive)_ | 1.19.0 | BSD-3-Clause | dart-lang | `pkg:pub/meta@1.19.0` |
 | mime _(transitive)_ | 2.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/mime@2.0.0` |
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
@@ -209,7 +211,7 @@ The JSON documents carry **787 dependency relations** between these components: 
 | vector_graphics _(transitive)_ | 1.2.3 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics@1.2.3` |
 | vector_graphics_codec _(transitive)_ | 1.1.13 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_codec@1.1.13` |
 | vector_graphics_compiler _(transitive)_ | 1.3.0 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_compiler@1.3.0` |
-| vector_math _(transitive)_ | 2.4.2 | BSD-3-Clause | flutter | `pkg:pub/vector_math@2.4.2` |
+| vector_math _(direct dev)_ | 2.4.2 | BSD-3-Clause | flutter | `pkg:pub/vector_math@2.4.2` |
 | video_player _(direct main)_ | 2.14.0 | BSD-3-Clause | flutter | `pkg:pub/video_player@2.14.0` |
 | video_player_android _(transitive)_ | 2.12.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_android@2.12.0` |
 | video_player_avfoundation _(transitive)_ | 2.11.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_avfoundation@2.11.0` |
@@ -227,7 +229,7 @@ The JSON documents carry **787 dependency relations** between these components: 
 | webrtc_interface _(transitive)_ | 1.5.1 | MIT | flutter-webrtc.org | `pkg:pub/webrtc_interface@1.5.1` |
 | webview_flutter _(direct main)_ | 4.14.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter@4.14.1` |
 | webview_flutter_android _(transitive)_ | 4.14.0 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_android@4.14.0` |
-| webview_flutter_platform_interface _(transitive)_ | 2.15.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_platform_interface@2.15.1` |
+| webview_flutter_platform_interface _(direct dev)_ | 2.15.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_platform_interface@2.15.1` |
 | webview_flutter_web _(direct main)_ | 0.2.3+4 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_web@0.2.3+4` |
 | webview_flutter_wkwebview _(transitive)_ | 3.26.0 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_wkwebview@3.26.0` |
 | win32 _(transitive)_ | 6.4.0 | BSD-3-Clause | halildurmus | `pkg:pub/win32@6.4.0` |

@@ -4,7 +4,7 @@
 // ziet en er dus hetzelfde van moet kunnen aflezen. Grijs betekent overal
 // hetzelfde: hier is iets gevonden, en jij hebt gezegd dat het zo mag.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../models/markdown_validation.dart';
 import '../../models/privacy_finding.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../markdown_editor/embedded_field_actions.dart';
 import '../slides/inline_markdown.dart';

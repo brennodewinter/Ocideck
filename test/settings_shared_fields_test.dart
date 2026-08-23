@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/widgets/dialogs/settings/settings_section_title.dart';
 import 'package:ocideck/widgets/dialogs/settings/settings_text_field.dart';

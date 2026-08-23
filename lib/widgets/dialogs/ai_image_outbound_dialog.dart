@@ -20,7 +20,7 @@
 // dat er ergens stond dat dat gebeurde — in een app waarvan de belofte begint
 // met "het blijft op dit apparaat".
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ai_settings.dart';

@@ -4,7 +4,7 @@
 // gedeelde `part`-scope, waar het bij élk veld van de andere parts kon —
 // inclusief de inloggegevens van de andere bronnen. Nu een gewone widget met
 // dezelfde expliciete API als [S3Panel].
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/webdav_settings.dart';

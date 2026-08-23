@@ -7,7 +7,7 @@
 // niet vrij te kiezen: de sleutel-uitwisseling adresseert een to-device-bericht
 // op `user-id:device-id`, dus een verkeerd device-id laat een mede-auteur stil
 // buiten de sessie vallen (§4.3).
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../collab/collab_device_store.dart';

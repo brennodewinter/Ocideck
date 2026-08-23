@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,7 +18,7 @@ Widget _host(Widget child) => ProviderScope(
   child: MaterialApp(
     localizationsDelegates: const [
       AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
     ],
     supportedLocales: AppLocalizations.supportedLocales,

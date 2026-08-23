@@ -2,9 +2,8 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,9 +28,7 @@ import 'support/export_bundle_fixture.dart';
 
 const _delegates = <LocalizationsDelegate<dynamic>>[
   AppLocalizations.delegate,
-  GlobalMaterialLocalizations.delegate,
-  GlobalCupertinoLocalizations.delegate,
-  GlobalWidgetsLocalizations.delegate,
+  ...GlobalMaterialLocalizations.delegates,
   FlutterQuillLocalizations.delegate,
 ];
 

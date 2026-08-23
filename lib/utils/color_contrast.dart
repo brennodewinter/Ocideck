@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Parses a hex colour string (`#RRGGBB` or `RRGGBB`). Returns `null` when
 /// invalid so callers can skip the pair instead of throwing.

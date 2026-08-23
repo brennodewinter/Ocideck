@@ -3,8 +3,7 @@
 // press test, read the result — without ever opening a socket. Locale is pinned to
 // Dutch so the assertions match the source strings regardless of translation state.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/xmpp_settings.dart';
@@ -19,9 +18,7 @@ Future<void> pumpDialog(WidgetTester tester, XmppConnectTest connect) async {
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
       ],
       home: Scaffold(body: XmppTestConnectionDialog(connect: connect)),
     ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../models/markdown_kind.dart';
 import '../../platform/platform_features.dart';
 import '../../services/duplicate_service.dart';
