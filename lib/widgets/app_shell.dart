@@ -462,6 +462,14 @@ class _AppShellState extends ConsumerState<AppShell> {
     _openWithSearch(context, ref);
   }
 
+  void _requestDocumentFind({required bool showReplace}) {
+    ref
+        .read(tabsProvider)
+        .current
+        ?.documentNotifier
+        ?.requestFind(showReplace: showReplace);
+  }
+
   bool _dragging = false;
 
   static const _imageExtensions = {
@@ -748,6 +756,14 @@ class _AppShellState extends ConsumerState<AppShell> {
               _openActive,
           const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
               _openActive,
+          const SingleActivator(LogicalKeyboardKey.keyF, control: true): () =>
+              _requestDocumentFind(showReplace: false),
+          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): () =>
+              _requestDocumentFind(showReplace: false),
+          const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
+              _requestDocumentFind(showReplace: true),
+          const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
+              _requestDocumentFind(showReplace: true),
         },
         child: FocusScope(
           autofocus: true,

@@ -281,6 +281,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
   void _syncOutlineToVisualCaret(String plain, int plainOffset) {
     _visualCaret = plainOffset;
+    final sourceOffset = MarkdownCaretMap.of(
+      _controller.text,
+    ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);
+    if (_controller.selection != TextSelection.collapsed(offset: sourceOffset)) {
+      _applyingExternal = true;
+      _controller.selection = TextSelection.collapsed(offset: sourceOffset);
+      _applyingExternal = false;
+    }
     _setActiveOutlineIndex(
       activeOutlineIndexInPlainText(
         buildMarkdownOutline(_controller.text),
@@ -427,6 +435,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      documentProvider.select(
+        (state) => (state.findRequestId, state.findShowReplace),
+      ),
+      (previous, next) {
+        if (previous?.$1 != next.$1 && next.$1 > 0) {
+          _openFind(showReplace: next.$2);
+        }
+      },
+    );
     // Wanneer de body van búiten de editor verandert (ongedaan maken/opnieuw),
     // de controller bijwerken. Bij gewoon typen is de body na de `edit` al gelijk
     // aan de controllertekst, dus dan doet dit niets — geen terugkoppellus. Een

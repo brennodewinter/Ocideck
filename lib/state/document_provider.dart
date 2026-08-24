@@ -24,6 +24,12 @@ class DocumentState {
   final bool canUndo;
   final bool canRedo;
 
+  /// Monotone aanvraag van buiten het schrijfvlak om de zoekbalk te openen.
+  /// De app-schil gebruikt dit voor Ctrl/Cmd+F en Ctrl/Cmd+H wanneer de focus
+  /// bijvoorbeeld nog op een tabblad staat.
+  final int findRequestId;
+  final bool findShowReplace;
+
   /// Telt op bij elke aanvaarde wijziging en bij undo/redo. De editor-subtree is
   /// erop gesleuteld en herleest zijn tekst wanneer een wijziging van búiten de
   /// editor binnenkomt (undo/redo). Het is geen documentversie.
@@ -64,6 +70,8 @@ class DocumentState {
     this.downloadName,
     this.canUndo = false,
     this.canRedo = false,
+    this.findRequestId = 0,
+    this.findShowReplace = false,
     this.revision = 0,
     this.savedSource,
     this.visualEdited = false,
@@ -82,6 +90,8 @@ class DocumentState {
     String? downloadName,
     bool? canUndo,
     bool? canRedo,
+    int? findRequestId,
+    bool? findShowReplace,
     int? revision,
     String? savedSource,
     bool? visualEdited,
@@ -98,6 +108,8 @@ class DocumentState {
       downloadName: downloadName ?? this.downloadName,
       canUndo: canUndo ?? this.canUndo,
       canRedo: canRedo ?? this.canRedo,
+      findRequestId: findRequestId ?? this.findRequestId,
+      findShowReplace: findShowReplace ?? this.findShowReplace,
       revision: revision ?? this.revision,
       savedSource: savedSource ?? this.savedSource,
       visualEdited: visualEdited ?? this.visualEdited,
@@ -131,6 +143,14 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   String? _lastCoalesceKey;
 
   DocumentState get currentState => state;
+
+  void requestFind({required bool showReplace}) {
+    state = state.copyWith(
+      findRequestId: state.findRequestId + 1,
+      findShowReplace: showReplace,
+    );
+  }
+
   bool get canUndo => _undoStack.isNotEmpty;
   bool get canRedo => _redoStack.isNotEmpty;
 

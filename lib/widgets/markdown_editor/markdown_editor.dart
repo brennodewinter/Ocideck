@@ -519,6 +519,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdown(_markdownSnapshot),
     );
+    quill.updateSelection(
+      TextSelection.collapsed(offset: _visualCaretFromSource(quill.document)),
+      ChangeSource.local,
+    );
     _lastQuillDelta = quill.document.toDelta();
     _visualEdited = false;
     _syncingMarkdown = false;
