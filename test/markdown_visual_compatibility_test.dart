@@ -222,10 +222,27 @@ Prijs \\* letterlijk
       expect(markdownVisualLimitations('Zie `\\*` in de tekst.'), isEmpty);
     });
 
-    test('HTML buiten inline code blijft wel een beperking', () {
+    test('HTML-commentaar buiten inline code blijft wel een beperking', () {
+      // HTML-*tags* round-trippen als platte tekst en zijn geen beperking meer
+      // (#1777); HTML-*commentaar* wel. Inline code beschermt allebei.
       expect(
-        markdownVisualLimitations('`<ok>` <html> na de code'),
+        markdownVisualLimitations('`<ok>` <!-- x --> na de code'),
         contains(MarkdownVisualLimitation.rawHtml),
+      );
+    });
+
+    test('HTML-tags in proza zijn geen beperking meer (#1777)', () {
+      // Regressie: een privacy-redactieplaceholder als `<persoon1>` trapte de
+      // visuele modus uit omdat de tag als rauwe HTML werd gezien. De codec
+      // round-tript tags byte-getrouw als letterlijke tekst.
+      expect(markdownVisualLimitations('Dit is <persoon1> in proza.'), isEmpty);
+      expect(
+        markdownVisualLimitations('Zie `<persoon01>` en <persoon1> erna.'),
+        isEmpty,
+      );
+      expect(
+        markdownVisualLimitations('Tekst met <b>vet</b> en <br>.'),
+        isEmpty,
       );
     });
 
@@ -233,8 +250,8 @@ Prijs \\* letterlijk
       expect(firstVisualLimitation('Zie `<persoon01>` in de tekst.'), isNull);
     });
 
-    test('firstVisualLimitation vindt HTML buiten inline code', () {
-      final hit = firstVisualLimitation('`<ok>`\n\n<html> hier');
+    test('firstVisualLimitation vindt HTML-commentaar buiten inline code', () {
+      final hit = firstVisualLimitation('`<ok>`\n\n<!-- x --> hier');
       expect(hit, isNotNull);
       expect(hit!.limitation, MarkdownVisualLimitation.rawHtml);
       expect(hit.lineIndex, 2);
