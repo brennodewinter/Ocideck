@@ -81,7 +81,11 @@ brew install cmake
 ```bash
 # Install required packages (Ubuntu/Debian example)
 sudo apt update
-sudo apt install curl git unzip clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++6
+sudo apt install curl git unzip clang cmake ninja-build pkg-config libgtk-3-dev \
+  liblzma-dev libsecret-1-dev libayatana-appindicator3-dev libstdc++6
+# libsecret-1-dev and libayatana-appindicator3-dev are pkg-config modules that
+# plugins demand at CMake time (flutter_secure_storage_linux and cnativeapi):
+# without them `flutter run -d linux` fails while generating the build files.
 ```
 
 ### Step 3: Clone the Repository

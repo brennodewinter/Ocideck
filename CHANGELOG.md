@@ -240,6 +240,26 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(docs): de linkcontrole van de spiegel liep stuk op één verwijzing in dit
+  bestand. De regel over `EditorTextController` wees met `../lib/…` buiten de
+  werkkopie; vanuit een CHANGELOG in de wortel is dat een pad naast de repo. Nu
+  `lib/…`, zoals elke andere verwijzing hier.
+
+- fix(build): de Linux-build heeft er sinds de nativeapi-migratie (#1741) een
+  systeembibliotheek bij, en die stond nergens. `cnativeapi` eist op Linux vier
+  pkg-config-modules; drie ervan (`gtk+-3.0`, `x11`, `xi`) komen met
+  `libgtk-3-dev` mee, de vierde — `ayatana-appindicator3-0.1` — niet. Daardoor
+  brak `flutter build linux` bij v0.4.9 al tijdens het genereren van de
+  buildbestanden, nog vóór er iets gecompileerd werd: de Linux-job van de
+  releaseketen viel om (geen release), en op de spiegel viel de Linux-poort met
+  hem mee. `libayatana-appindicator3-dev` staat nu in alle drie de
+  buildomgevingen (spiegelpoort, releaseketen, losse Linux-build) en in de
+  opzetgids. Het `.deb` kreeg bovendien `libayatana-appindicator3-1` als
+  `Depends` en de AUR-PKGBUILD `libayatana-appindicator`: de bibliotheek reist
+  niet met de bundel mee, dus zonder die regels installeert het pakket keurig en
+  start de app daarna niet. De rpm leidt zijn eigen soname-eisen af en had de
+  regel niet nodig.
+
 - fix(release): een stilgevallen spiegel van de Homebrew-tap valt nu op. De
   canonieke tap staat op onze eigen forge, maar de `brew tap`-shorthand van
   Homebrew wijst per definitie naar de GitHub-spiegel — stopt het spiegelen, dan
@@ -2078,7 +2098,7 @@ that before deciding whether this alpha fits what you are doing.
   terwijl er geschreven wordt, waarop `saveAs` aan de gegroeide ongedaan-stapel
   zag dat er "tijdens het schrijven was doorgetypt" en het deck bewust vuil
   liet — de stip verscheen dus meteen ná het schrijven weer, en verdween nooit.
-  Nieuw is [`EditorTextController`](../lib/widgets/editors/editor_text_controller.dart):
+  Nieuw is [`EditorTextController`](lib/widgets/editors/editor_text_controller.dart):
   `addListener` blijft ongefilterd (het tekstveld moet van elke cursorwissel
   weten, anders beweegt de cursor niet mee), maar `addTextListener` meldt alleen
   echte tekstwijzigingen. Alle dia-editors, de notitievelden van het

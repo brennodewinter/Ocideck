@@ -13,7 +13,7 @@ pkgdesc="Presentation tool where the content, not the canvas, is the document (M
 arch=('x86_64')
 url="https://pawprint.vigilis.online/LibreKAT/Ocideck"
 license=('EUPL-1.2')
-depends=('gtk3' 'libsecret' 'xz' 'hicolor-icon-theme')
+depends=('gtk3' 'libsecret' 'xz' 'libayatana-appindicator' 'hicolor-icon-theme')
 provides=('ocideck')
 conflicts=('ocideck')
 # The payload is a prebuilt Flutter bundle: no debug symbols to keep, and its
