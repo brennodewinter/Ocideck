@@ -807,10 +807,15 @@ also declares them, but see the [CI note](#continuous-integration).)
   libraries, not the only way anything can. `find_library`, `find_package`, a
   bare `#include` or a build script shelling out to a tool are invisible here.
   That half is covered by actually building: `.forgejo/workflows/linux-build.yml`
-  now also runs after a merge to `main` when `pubspec.lock`, `linux/`,
-  `third_party/` or the CI image changed — the inputs that can break a native
-  build — instead of on every push, which is what #790 switched off for costing
-  17.5 minutes a time.
+  now also runs after a merge to `main` when `pubspec.lock`, `pubspec.yaml`,
+  `.tool-versions`, `linux/`, `third_party/` or the CI image changed — the
+  inputs that can break a native build — instead of on every push, which is what
+  #790 switched off for costing 17.5 minutes a time. That list is itself
+  guarded: `test/linux_pkgconfig_manifest_test.dart` fails if one of those
+  inputs disappears from the path filter, because a build that does not fire
+  guards nothing. `.tool-versions` is in it because a *bare* Flutter pin bump
+  touches neither pubspec file, and a new Flutter is a new compiler, engine and
+  generated CMake.
 - **Failure means:** add the module to the manifest with the package that
   provides it, install that package in the build environments the manifest
   lists, and — if the bundle links the library — name its runtime package in

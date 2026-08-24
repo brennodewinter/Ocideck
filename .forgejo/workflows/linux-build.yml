@@ -15,7 +15,14 @@
 #
 # Daarom bouwt hij weer na een merge — maar alleen wanneer er iets veranderde
 # dat de *native* build kan breken: de opgeloste afhankelijkheden, de eigen
-# Linux-runner, de gevendorde pakketten of het CI-image. Bij een gewone
+# Linux-runner, de gevendorde pakketten, het CI-image of de Flutter-pin.
+#
+# Die laatste stond er eerst niet bij, en dat was mis. Een bump die óók
+# afhankelijkheden meeneemt raakt `pubspec.lock` en gaat dan vanzelf af — maar
+# een kále pin-bump raakt alleen `.tool-versions`, de workflows en de
+# documentatie. Juist die verandert de compiler, de engine en de gegenereerde
+# CMake onder de Linux-build; hem overslaan zou dit hele mechanisme laten
+# missen waarvoor het bestaat. Bij een gewone
 # Dart-wijziging zwijgt hij, dus de 17,5 minuten uit #790 vallen een paar keer
 # per maand en niet bij elke push. `make check-linux-deps` vangt de goedkope
 # helft al in de PR zelf; deze job is er voor wat je alleen ziet door echt te
@@ -36,6 +43,7 @@ on:
       - 'pubspec.lock'
       - 'linux/**'
       - 'third_party/**'
+      - '.tool-versions'
       - '.forgejo/ci-image/**'
       - '.forgejo/workflows/linux-build.yml'
 
