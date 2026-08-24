@@ -278,15 +278,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
-- fix(test): de twee rotatietoetsen op Windows toetsten de testomgeving, niet
-  de app. Binnen `testWidgets` draait de echte gebeurtenislus niet, dus de
-  asynchrone leesbeurt waarmee de voorvertoning het bestand inleest rondt nooit
-  af — de test houdt de bestandshandle open zolang hij duurt. Op POSIX valt dat
-  niet op (een geopend bestand mag je vervangen), op Windows blokkeert het elke
-  schrijfbeurt, en dus stond daar een rotatietoets rood om iets wat de app niet
-  mankeert. De toets laat die leesbeurt nu afronden (`tester.runAsync`) vóór ze
-  handelt, waarmee ze de situatie van een gebruiker nabootst in plaats van een
-  eigenaardigheid van het testraamwerk.
+- fix(crop): een afbeelding draaien deed op Windows niets, en de oorzaak was de
+  voorvertoning zelf. `FileImage` laat de engine het bestand openen met
+  `ui.ImmutableBuffer.fromFilePath`, wat op Windows een geheugenafbeelding
+  oplevert; zolang die leeft weigert Windows het bestand te vervangen of te
+  verwijderen. Het bijsnijdvenster toonde dus een afbeelding op precies het
+  bestand dat het straks ging overschrijven: `rename` mislukte, de terugval mocht
+  het doel niet verwijderen (errno 32), en de schrijffout werd ingeslikt — de
+  preview draaide, het bestand niet, en er kwam geen melding. Het venster voedt
+  zijn voorvertoning nu uit de bytes die het voor het draaien tóch al inleest.
+  Eén leesbeurt in plaats van twee, en geen geheugenafbeelding op een bestand dat
+  we willen herschrijven.
+
+  *Twee eerdere pogingen zaten ernaast en staan hierboven beschreven zoals ze
+  bedoeld waren: de beeldcache loslaten en blokkerend herkansen. Ze konden niet
+  werken — een geheugenafbeelding laat je niet los door te wachten. De
+  CHANGELOG-regel die dit als een probleem van de testomgeving afdeed is
+  hiermee ingetrokken; het was een echte fout voor iedereen die OciDeck op
+  Windows gebruikt.*
 
 - fix(crop): een afbeelding draaien op Windows landde niet op schijf, en een
   mislukte schrijfbeurt kon het origineel meenemen. De voorvertoning van het
