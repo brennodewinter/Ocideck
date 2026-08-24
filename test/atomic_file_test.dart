@@ -102,6 +102,86 @@ void main() {
     });
   });
 
+  group('writeBytesAtomicSyncRetrying', () {
+    // De aanleiding: op Windows houdt een ánder proces een net gelezen bestand
+    // nog even vast, waardoor zowel de rename als het verwijderen van het doel
+    // faalt (errno 32). Het bijsnijdvenster verloor daar elke rotatie op —
+    // geluidloos, want die schrijffout wordt bewust ingeslikt.
+    test('een tijdelijke vergrendeling wordt uitgezeten', () {
+      final temp = Directory.systemTemp.createTempSync('ocideck_retry_');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final target = File(p.join(temp.path, 'out.bin'))
+        ..writeAsStringSync('original');
+
+      var renames = 0;
+      final pauses = <Duration>[];
+      writeBytesAtomicSyncRetrying(
+        target,
+        utf8.encode('replaced'),
+        retryDelay: const Duration(milliseconds: 7),
+        renameOnce: (tmp, destination) {
+          renames++;
+          // Twee keer bezet, daarna geeft de houder hem vrij.
+          if (renames <= 2) {
+            throw const FileSystemException('bezet door een ander proces');
+          }
+          tmp.renameSync(destination);
+        },
+        pause: pauses.add,
+      );
+
+      expect(target.readAsStringSync(), 'replaced');
+      // Drie hernoemingen, twee pogingen: `writeBytesAtomicSync` probeert bij
+      // een mislukte rename zélf nog eens ná het verwijderen van het doel, dus
+      // de eerste poging verbruikt er twee.
+      expect(renames, 3, reason: 'er is niet opnieuw geprobeerd');
+      expect(pauses, [
+        const Duration(milliseconds: 7),
+      ], reason: 'er is niet tussen de pogingen gewacht');
+      expect(temp.listSync().whereType<File>().length, 1);
+    });
+
+    test(
+      'een blijvende vergrendeling gooit, zodat de aanroeper het kan melden',
+      () {
+        final temp = Directory.systemTemp.createTempSync('ocideck_retry_');
+        addTearDown(() => temp.deleteSync(recursive: true));
+        final target = File(p.join(temp.path, 'out.bin'))
+          ..writeAsStringSync('original');
+
+        var renames = 0;
+        expect(
+          () => writeBytesAtomicSyncRetrying(
+            target,
+            utf8.encode('replaced'),
+            attempts: 3,
+            renameOnce: (tmp, destination) {
+              renames++;
+              throw const FileSystemException('blijft bezet');
+            },
+            pause: (_) {},
+          ),
+          throwsA(isA<FileSystemException>()),
+        );
+
+        // Poging 1 verbruikt twee hernoemingen (rename, verwijder doel,
+        // rename), poging 2 en 3 elk één: het doel bestaat dan niet meer, dus
+        // de terugval slaat over.
+        expect(renames, 4, reason: 'het aantal pogingen klopt niet');
+        // Het doel is weg — dat is de prijs van verwijder-dan-hernoem — maar de
+        // inhoud niet: het tijdelijke bestand van de poging die het doel
+        // verwijderde blijft staan als herstelkopie. Zou die ook opgeruimd
+        // worden, dan maakte een mislukte schrijfbeurt een bestaand bestand
+        // leeg.
+        expect(target.existsSync(), isFalse);
+        final over = temp.listSync().whereType<File>().toList();
+        expect(over.length, 1, reason: 'geen of te veel herstelkopieën');
+        expect(over.single.path, endsWith('.tmp'));
+        expect(over.single.readAsStringSync(), 'replaced');
+      },
+    );
+  });
+
   test('on failure the original is intact and no temp file lingers', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_atomic_');
     addTearDown(() => temp.delete(recursive: true));

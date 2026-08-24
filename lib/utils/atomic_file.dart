@@ -46,6 +46,7 @@ int _tempCounter = 0;
 /// projectmap, die allebei hun thema-CSS wegschrijven.
 Future<void> writeBytesAtomic(File target, List<int> bytes) async {
   final tmp = File('${target.path}.${_tempCounter++}.tmp');
+  var targetRemoved = false;
   try {
     await tmp.writeAsBytes(bytes, flush: true);
     try {
@@ -62,15 +63,19 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
       // `MoveFileExW`.
       if (await target.exists()) {
         await target.delete();
+        targetRemoved = true;
         await tmp.rename(target.path);
       } else {
         rethrow;
       }
     }
   } catch (e) {
-    // Log the write failure (we still rethrow) and never leave a stray temp.
+    // Log the write failure (we still rethrow) and never leave a stray temp —
+    // unless the target is already gone and the retry failed too, in which case
+    // this temp is the only copy of the content that is left. Same reasoning as
+    // in [writeBytesAtomicSync].
     logWarning('writeBytesAtomic: write failed', e);
-    if (await tmp.exists()) {
+    if (!targetRemoved && await tmp.exists()) {
       try {
         await tmp.delete();
       } catch (e) {
@@ -85,6 +90,61 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
 /// Atomically write [contents] (UTF-8) to [target].
 Future<void> writeStringAtomic(File target, String contents) {
   return writeBytesAtomic(target, utf8.encode(contents));
+}
+
+/// [writeBytesAtomicSync] with a bounded retry, for a target another process
+/// may be holding open for a moment.
+///
+/// On Windows a file that was just read stays locked briefly — a virus scanner
+/// on a build machine is the classic holder — and then both halves of the
+/// atomic write fail: `rename` refuses to replace an existing file, and the
+/// delete-then-rename fallback cannot delete what someone else has open
+/// (errno 32). The image crop dialog lost every rotation to this, silently.
+///
+/// Blocking rather than async on purpose: the one caller must be able to close
+/// its dialog immediately, and an `await` here would make the window wait for
+/// disk IO. Blocking does not prevent the release either — the holder is a
+/// different process. Same shape as `deleteTempDir` in test/support, which
+/// exists for the same errno.
+///
+/// Throws the last error when every attempt failed, so the caller can report
+/// *why* instead of falling silent. [pause] is a test seam so a test does not
+/// have to spend the real delay.
+void writeBytesAtomicSyncRetrying(
+  File target,
+  List<int> bytes, {
+  int attempts = 5,
+  Duration retryDelay = const Duration(milliseconds: 40),
+  @visibleForTesting void Function(File tmp, String destination)? renameOnce,
+  @visibleForTesting void Function(Duration delay)? pause,
+}) {
+  // Elke poging die het doel verwijderde en daarna alsnog struikelde, laat zijn
+  // tijdelijke bestand staan: dat is dan de enige kopie van de inhoud.
+  final recoveries = <File>[];
+  for (var attempt = 1; ; attempt++) {
+    try {
+      writeBytesAtomicSync(
+        target,
+        bytes,
+        renameOnce: renameOnce,
+        onRecoveryKept: recoveries.add,
+      );
+      // Geslaagd: een herstelkopie van een eerdere poging is nu overbodig, en
+      // laten staan zou een `foto.png.3.tmp` naast het beeld van de gebruiker
+      // achterlaten.
+      for (final recovery in recoveries) {
+        try {
+          if (recovery.existsSync()) recovery.deleteSync();
+        } on Object catch (e) {
+          logWarning('writeBytesAtomicSyncRetrying: recovery cleanup', e);
+        }
+      }
+      return;
+    } on Object {
+      if (attempt >= attempts) rethrow;
+      (pause ?? sleep)(retryDelay);
+    }
+  }
 }
 
 /// Sync variant of [writeBytesAtomic] for callers that can't await (e.g. a
@@ -102,13 +162,23 @@ Future<void> writeStringAtomic(File target, String contents) {
 /// [renameOnce] exists only so a test can prove the fallback without a real
 /// Windows rename failure (same idiom as `deleteOnce` in
 /// `test/support/temp_dir.dart`); leave it out in production use.
+///
+/// [onRecoveryKept] is handed the temp file in the one case where it is
+/// deliberately left behind: the target was already deleted and the retry
+/// failed, so this temp holds the only copy of the content. A caller that
+/// retries (see [writeBytesAtomicSyncRetrying]) removes it once a later
+/// attempt succeeds; a caller that does not gets a recovery file rather than
+/// silence.
 void writeBytesAtomicSync(
   File target,
   List<int> bytes, {
   @visibleForTesting void Function(File tmp, String destination)? renameOnce,
+  void Function(File recovery)? onRecoveryKept,
 }) {
   final rename = renameOnce ?? (File tmp, String dest) => tmp.renameSync(dest);
   final tmp = File('${target.path}.${_tempCounter++}.tmp');
+  // Zodra dit waar is, is `tmp` de enige kopie die er nog van de inhoud is.
+  var targetRemoved = false;
   try {
     tmp.writeAsBytesSync(bytes, flush: true);
     try {
@@ -116,9 +186,10 @@ void writeBytesAtomicSync(
     } on FileSystemException {
       // Windows: rename onto an existing file fails. Identical reasoning and
       // identical ceiling as in [writeBytesAtomic] — the target is only absent
-      // for a content-free gap, and the complete `.tmp` survives a crash in it.
+      // for a content-free gap, and the complete `.tmp` survives it.
       if (target.existsSync()) {
         target.deleteSync();
+        targetRemoved = true;
         rename(tmp, target.path);
       } else {
         rethrow;
@@ -126,7 +197,15 @@ void writeBytesAtomicSync(
     }
   } catch (e) {
     logWarning('writeBytesAtomicSync: write failed', e);
-    if (tmp.existsSync()) {
+    // Ruim het tijdelijke bestand op — behálve wanneer het doel al verwijderd
+    // is en de tweede rename alsnog faalde. Dan is dit geen rommel maar de
+    // enige overgebleven kopie, en weggooien maakt van een mislukte
+    // schrijfbeurt een verloren bestand. Precies dat gat zat hier: de
+    // Windows-terugval verwijdert het doel, en de opruiming eronder gooide
+    // daarna ook nog het herstelbestand weg.
+    if (targetRemoved) {
+      onRecoveryKept?.call(tmp);
+    } else if (tmp.existsSync()) {
       try {
         tmp.deleteSync();
       } catch (e) {
