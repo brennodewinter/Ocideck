@@ -652,6 +652,36 @@ void main() {
   });
 
   group('rebaseImagePathsForTesting (#1673)', () {
+    // Een Markdown-verwijzing is een URL. Op Windows leverde `p.relative` een
+    // pad met backslashes, dat één op één in de link belandde: geen renderer
+    // volgt `..\map\foto.png`, en LaTeX leest de backslash als
+    // ontsnappingsteken. Deze twee toetsen rekenen de Windows-padstijl door op
+    // elke machine, zodat de macOS-poort de Windows-uitkomst bewaakt.
+    final windows = p.Context(style: p.Style.windows);
+
+    test('een Windows-pad levert schuine strepen, geen backslashes', () {
+      const md = '![Alt](images/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        r'C:\project\bron.md',
+        r'C:\output\rapport.md',
+        pathContext: windows,
+      );
+      expect(result, contains('![Alt](../project/images/foto.png)'));
+      expect(result, isNot(contains('\\')));
+    });
+
+    test('een ander station wordt een file-URL, geen half pad', () {
+      const md = '![Alt](images/foto.png)\n';
+      final result = rebaseImagePathsForTesting(
+        md,
+        r'C:\project\bron.md',
+        r'D:\uitvoer\rapport.md',
+        pathContext: windows,
+      );
+      expect(result, contains('![Alt](file:///C:/project/images/foto.png)'));
+    });
+
     test('relatief pad wordt gerebased naar uitvoermap', () {
       const md = '![Alt](images/foto.png)\n';
       final result = rebaseImagePathsForTesting(

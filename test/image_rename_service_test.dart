@@ -87,7 +87,12 @@ void main() {
         '/project/images/100000ABC.png',
         'logo',
       );
-      expect(dest, '/project/images/logo.png');
+      // Een bestandspad krijgt de scheiding van het platform: op Windows is dat
+      // een backslash. Vergelijk dus op padgelijkheid, niet op letterlijke
+      // tekst — anders toetst deze regel de padstijl van macOS in plaats van
+      // het gedrag van destinationPath.
+      expect(p.basename(dest), 'logo.png');
+      expect(p.equals(p.dirname(dest), '/project/images'), isTrue);
     });
 
     test('werkt zonder mapnaam in het pad', () {
@@ -113,7 +118,7 @@ void main() {
       );
 
       expect(result.failure, isNull);
-      expect(result.newPath, '${tempDir.path}/logo.png');
+      expect(result.newPath, p.join(tempDir.path, 'logo.png'));
       expect(File(result.newPath!).existsSync(), isTrue);
       expect(img.existsSync(), isFalse);
       expect(deck.readAsStringSync(), contains('logo.png'));

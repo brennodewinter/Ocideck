@@ -14,6 +14,8 @@ import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/temp_dir.dart';
+
 /// Dekking voor `settings_dialog_profile.dart` — de stijlprofiel-kiezer en
 /// de actieknoppen (nieuw, standaard laden, exporteren, importeren,
 /// verwijderen). De smoke-test opent het dialoog en wandelt door de tabbladen,
@@ -460,7 +462,11 @@ void main() {
     tester,
   ) async {
     final temp = Directory.systemTemp.createTempSync('style_logo_preview');
-    addTearDown(() => temp.deleteSync(recursive: true));
+    // Windows houdt een net ingelezen bestand nog even vast (errno 32); de
+    // hulp probeert het daar een paar keer opnieuw en geeft daarna stil op —
+    // een achtergebleven map in systemTemp is onschadelijk, een gooiende
+    // tearDown maakt een geslaagde test rood.
+    addTearDown(() => deleteTempDir(temp));
     final logo = File('${temp.path}/logo.png')
       ..writeAsBytesSync(
         base64Decode(
