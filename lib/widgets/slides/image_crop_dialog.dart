@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
@@ -278,8 +279,17 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       lastRotationWriteFailure = 'het pad viel buiten de projectmap';
       return;
     }
+    // Laat ons eigen beeld los vóór we schrijven. De voorvertoning heeft dit
+    // bestand net gedecodeerd, en op Windows blijft een net gelezen bestand nog
+    // even vastgehouden (errno 32, "used by another process"). Daar strandde de
+    // rotatie: `rename` mag daar niet over een bestaand bestand, de terugval
+    // wil het doel dan verwijderen, en verwijderen mag niet zolang iemand het
+    // openhoudt — en die iemand waren wij. De dialoog gaat toch dicht, en na
+    // afloop verhoogt `bumpImageVersion` de cachesleutel, dus de renderlaag
+    // haalt het beeld zo meteen opnieuw op.
+    _releasePreview();
     try {
-      writeBytesAtomicSync(File(resolved), bytes);
+      writeBytesAtomicSyncRetrying(File(resolved), bytes);
     } on Object catch (e) {
       // Een schrijffout mag de crop-keuze niet blokkeren — maar hij mag ook
       // niet spoorloos zijn.
@@ -292,6 +302,25 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     // cache-entry te tonen. Werkt voor zowel cappedFileImage als
     // boundedFileImage (thumbnails).
     bumpImageVersion(resolved);
+  }
+
+  /// Geeft de voorvertoning en haar plek in de beeldcache op.
+  ///
+  /// `evict()` levert een Future, maar voor een [FileImage] is de sleutel een
+  /// `SynchronousFuture` — het opruimen gebeurt dus meteen, en daarom hoeft
+  /// deze methode niet async te zijn. Dat is hier geen detail: zou de dialoog
+  /// op een echte Future moeten wachten, dan sluit hij pas ná de schijf-IO, en
+  /// dat is precies wat het oorspronkelijke ontwerp bewust vermeed.
+  void _releasePreview() {
+    final stream = _stream;
+    final listener = _listener;
+    if (stream != null && listener != null) {
+      stream.removeListener(listener);
+    }
+    _stream = null;
+    _listener = null;
+    unawaited(_provider?.evict() ?? Future<bool>.value(false));
+    _provider = null;
   }
 
   @override
