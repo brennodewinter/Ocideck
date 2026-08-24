@@ -35,15 +35,6 @@ String? _documentProjectPath(WidgetRef ref) {
 /// staat zelf (zelfde library), zodat de methoden ongewijzigd blijven werken —
 /// hetzelfde patroon als de tabel-part van de documentweergave.
 extension _DocumentEditorLayouts on _DocumentEditorScreenState {
-  void _setActiveOutlineIndex(int active) {
-    if (active == _activeOutlineIndex) return;
-    // Nooit setState vanuit een controller/Quill-listener tijdens build.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || active == _activeOutlineIndex) return;
-      setState(() => _activeOutlineIndex = active);
-    });
-  }
-
   /// Markeer in de Overzicht-rail de kop waaronder de markdown-caret staat.
   void _syncOutlineToMarkdownCaret() {
     final sel = _controller.selection;
