@@ -819,6 +819,12 @@ class _AppShellState extends ConsumerState<AppShell> {
     newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
     open: _openActive,
     save: _saveActive,
+    find: ref.watch(tabsProvider).current?.documentNotifier == null
+        ? null
+        : () => _requestDocumentFind(showReplace: false),
+    findReplace: ref.watch(tabsProvider).current?.documentNotifier == null
+        ? null
+        : () => _requestDocumentFind(showReplace: true),
     settings: () => SettingsDialog.show(context),
     userGuide: () => DocumentReaderScreen.open(
       context,

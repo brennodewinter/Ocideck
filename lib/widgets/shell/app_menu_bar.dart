@@ -16,6 +16,8 @@ class AppMenuActions {
   /// documenttabblad): zo werkt Cmd+S óók voor een document — vroeger hing dat
   /// aan de deck-only [AppDeckMenuActions.save], die er voor een document niet is.
   final VoidCallback save;
+  final VoidCallback? find;
+  final VoidCallback? findReplace;
 
   final VoidCallback settings;
   final VoidCallback userGuide;
@@ -26,6 +28,8 @@ class AppMenuActions {
     required this.newDocument,
     required this.open,
     required this.save,
+    required this.find,
+    required this.findReplace,
     required this.settings,
     required this.userGuide,
     required this.shortcuts,
@@ -125,7 +129,7 @@ List<PlatformMenuItem> buildAppMenus(
 ) => [
   _appMenu(l10n, actions),
   _fileMenu(l10n, actions, deck),
-  _editMenu(l10n, deck),
+  _editMenu(l10n, actions, deck),
   _presentationMenu(l10n, deck),
   _windowMenu(l10n),
   _helpMenu(l10n, actions),
@@ -236,6 +240,7 @@ PlatformMenu _fileMenu(
 /// toevoegen knippen en plakken wég bij wie met het menu werkt.
 PlatformMenu _editMenu(
   AppLocalizations l10n,
+  AppMenuActions actions,
   AppDeckMenuActions? deck,
 ) => PlatformMenu(
   label: l10n.d('Bewerken'),
@@ -298,12 +303,17 @@ PlatformMenu _editMenu(
         PlatformMenuItem(
           label: l10n.d('Zoeken'),
           shortcut: const SingleActivator(LogicalKeyboardKey.keyF, meta: true),
-          onSelected: deck?.find,
+          onSelected: deck?.find ?? actions.find,
         ),
         PlatformMenuItem(
           label: l10n.t('findReplace'),
-          shortcut: const SingleActivator(LogicalKeyboardKey.keyH, meta: true),
-          onSelected: deck?.findReplace,
+          // Ctrl+H moet native landen: macOS vertaalt hem anders al naar
+          // Backspace voordat Flutter de letter of modifier nog kan zien.
+          shortcut: const SingleActivator(
+            LogicalKeyboardKey.keyH,
+            control: true,
+          ),
+          onSelected: deck?.findReplace ?? actions.findReplace,
         ),
       ],
     ),

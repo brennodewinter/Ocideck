@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/shell/app_menu_bar.dart';
@@ -21,6 +22,8 @@ void main() {
     newDocument: () => note('newDocument'),
     open: () => note('open'),
     save: () => note('appSave'),
+    find: () => note('appFind'),
+    findReplace: () => note('appFindReplace'),
     settings: () => note('settings'),
     userGuide: () => note('userGuide'),
     shortcuts: () => note('shortcuts'),
@@ -94,6 +97,28 @@ void main() {
     save.onSelected!();
     expect(fired, contains('save'));
     expect(fired, isNot(contains('appSave')));
+  });
+
+  test('zoeken en vervangen blijft in een documenttabblad bruikbaar', () {
+    final menus = buildAppMenus(l10n, appActions(), null);
+    final replace = leaves(
+      menus,
+    ).firstWhere((i) => i.label == l10n.t('findReplace'));
+    expect(replace.onSelected, isNotNull);
+    expect(
+      replace.shortcut,
+      const SingleActivator(LogicalKeyboardKey.keyH, control: true),
+    );
+    replace.onSelected!();
+    expect(fired, ['appFindReplace']);
+  });
+
+  test('zoeken en vervangen gebruikt de deckhandeling bij een deck', () {
+    final menus = buildAppMenus(l10n, appActions(), deckActions());
+    leaves(
+      menus,
+    ).firstWhere((i) => i.label == l10n.t('findReplace')).onSelected!();
+    expect(fired, ['findReplace']);
   });
 
   test('ongedaan maken en opnieuw staan in het menu en werken', () {
