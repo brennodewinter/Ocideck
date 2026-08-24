@@ -333,9 +333,15 @@ void main() {
 
     // Het geopende deck landt in een eigen tabblad, dus kijk naar het huidige.
     TabInfo? current() => container.read(tabsProvider).current;
-    await tester.tap(find.text('rapport.md'));
-    await settleUntil(
+    // De file-tap start de échte open-keten (download → schijfimport →
+    // laden) en hoort in één `runAsync`-blok (`act`), niet in `tap` +
+    // `settleUntil`: `settleUntil` geeft de keten per iteratie één 5 ms-venster
+    // voor echte async, wat op de 4-core Linux-runner onder de volle suite niet
+    // toereikend is om de schijf-IO af te ronden. De dialoog-pop volstaat om
+    // `S3BrowserDialog.show` te voltooien; de sluitanimatie is hier niet nodig.
+    await act(
       tester,
+      () => tester.tap(find.text('rapport.md')),
       () => current()?.deckNotifier.currentState.deck?.title == 'Uit de bucket',
       reason: 'het gekozen object is niet als deck geopend',
     );

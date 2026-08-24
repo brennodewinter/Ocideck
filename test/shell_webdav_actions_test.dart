@@ -433,9 +433,16 @@ void main() {
     );
 
     TabInfo? current() => container.read(tabsProvider).current;
-    await tester.tap(find.text('rapport.md'));
-    await settleUntil(
+    // De file-tap start de échte open-keten (download → schijfimport →
+    // laden): die hoort in één `runAsync`-blok (`act`), niet in `tap` +
+    // `settleUntil`. `settleUntil` geeft de keten per iteratie één 5 ms-venster
+    // voor echte async, wat op de 4-core Linux-runner onder de volle suite niet
+    // genoeg is om de schijf-IO af te ronden — vandaar de af en toe rode
+    // linux-gate. De dialoog-pop volstaat om `WebdavBrowserDialog.show` te
+    // voltooien; de visuele sluitanimatie is hier niet nodig, dus `act` mag.
+    await act(
       tester,
+      () => tester.tap(find.text('rapport.md')),
       () => current()?.deckNotifier.currentState.deck?.title == 'Van de server',
       reason: 'het gekozen bestand is niet als deck geopend',
     );
