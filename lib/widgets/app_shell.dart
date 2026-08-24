@@ -11,6 +11,7 @@ import 'package:path/path.dart' as p;
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
 import '../platform/native_window.dart' show setWillCloseCallback, quitApp;
+import '../platform/native_shortcut_channel.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
@@ -196,6 +197,7 @@ class AppShell extends ConsumerStatefulWidget {
 
 class _AppShellState extends ConsumerState<AppShell> {
   late final OpenFileChannel _openFileChannel;
+  late final NativeShortcutChannel _nativeShortcuts;
 
   /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
   /// null als er geen staat. De melding is niet zomaar een mededeling maar een
@@ -212,6 +214,9 @@ class _AppShellState extends ConsumerState<AppShell> {
   void initState() {
     super.initState();
     setWillCloseCallback(_onWillClose);
+    _nativeShortcuts = NativeShortcutChannel(
+      () => _requestDocumentFind(showReplace: true),
+    )..start();
     // Warm up the Informatieveiligheid-module state at shell startup so that by
     // the time a deck is opened its `loading` flag has cleared. Without this the
     // very first security-deck open would read the still-loading module and skip
@@ -390,6 +395,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   @override
   void dispose() {
     setWillCloseCallback(() {});
+    _nativeShortcuts.dispose();
     super.dispose();
   }
 

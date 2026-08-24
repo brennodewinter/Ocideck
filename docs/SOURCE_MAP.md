@@ -1024,7 +1024,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `export_link.dart` — Gedeelde fail-closed schema-allowlist voor klikbare links in audience-exports: alleen web, e-mail en interne ankers; onbekende, relatieve en bestands-URL's blijven platte tekst.
 - `sanitize_svg.dart` — Keeps only the SVG elements and attributes `flutter_svg` actually reads, and drops the rest with a log line. The allow-list is read off `vector_graphics_compiler`, so it is never stricter than the renderer: what it refuses would have been discarded anyway.
 - `safe_filename.dart` — `sanitizeFilename`: deelt het `[\w\s-]`-recept om vrije tekst tot een veilige bestandsnaam-stam te maken, met een fallback-parameter per aanroeper. Voorheen gekopieerd in `file_service_package`, `shell_actions` en `file_service_style_profile`.
-- `physical_control_shortcut.dart` — `PhysicalControlActivator`: een Ctrl-sneltoets op basis van de fysieke lettertoets, voor macOS-combinaties zoals Ctrl+H die vóór Flutter logisch in Backspace worden vertaald.
+- `physical_control_shortcut.dart` — `ControlHActivator`: Flutter-vangnet voor Ctrl+H-varianten die macOS als Backspace doorgeeft.
 - `shortcut_label.dart` — `shortcutLabel`/`labelWithShortcut`: the one place a keyboard shortcut becomes visible text. A shortcut is part translation and part identifier — the key letter is bound to a `LogicalKeyboardKey` and never changes, the modifier does (German reads `Strg`, French `Maj`) — so only the modifier goes through `d()` and the notation is composed here. Keeps a new shortcut free of 31 translations, and stops the same shortcut being spelled two ways in one screen.
 - `table_dates.dart` — `parseIsoDateCell`/`isPastDateCell`: recognises a table cell that is a bare ISO date and whether it has passed. Strict `yyyy-mm-dd` only, and it rejects dates that do not exist (`DateTime` silently rolls 31 February into March). Drives the `table-overdue` marking, which is derived against the day the deck is shown rather than stored.
 - `table_clipboard.dart` — Recognises whether clipboard content is a table and which separator it uses (the part that is genuinely about a paste); the field scanning is `csv.dart`. Parses tabular clipboard content (TSV, CSV, markdown tables).
@@ -1047,6 +1047,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 - `launch_files.dart` — Launch-argumenten (Windows/Linux-bestandsassociaties) en de `?deck=`-deeplink-parser.
 - `native_window.dart` — Export selector for platform-specific window configuration.
+- `native_shortcut_channel.dart` — Ontvangt sneltoetsen zoals Ctrl+H die het macOS-venster vóór de tekstinvoer heeft onderschept.
 - `native_window_io.dart` — Initialises native desktop window options (size, title, focus).
 - `native_window_stub.dart` — No-op window stub for web (part of `native_window`).
 - `platform_features.dart` — Feature detection: desktop, dual-screen, local projects.

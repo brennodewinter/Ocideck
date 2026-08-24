@@ -3,6 +3,8 @@ import FlutterMacOS
 import desktop_multi_window
 
 class MainFlutterWindow: NSWindow {
+  private var shortcutChannel: FlutterMethodChannel?
+
   override func awakeFromNib() {
     pointDartcvAtBundledFramework()
 
@@ -23,6 +25,9 @@ class MainFlutterWindow: NSWindow {
     OpenFileHandler.shared.register(messenger: flutterViewController.engine.binaryMessenger)
     ClipboardHtmlHandler.shared.register(
       messenger: flutterViewController.engine.binaryMessenger)
+    shortcutChannel = FlutterMethodChannel(
+      name: "ocideck/shortcuts",
+      binaryMessenger: flutterViewController.engine.binaryMessenger)
 
     // Register the app's plugins in every sub-window (e.g. the audience/beamer
     // window) too, so video_player, image loading, etc. work there as well.
@@ -31,6 +36,14 @@ class MainFlutterWindow: NSWindow {
     }
 
     super.awakeFromNib()
+  }
+
+  override func sendEvent(_ event: NSEvent) {
+    if isFindReplaceShortcut(event) {
+      shortcutChannel?.invokeMethod("findReplace", arguments: nil)
+      return
+    }
+    super.sendEvent(event)
   }
 
   /// Tells `dartcv4` (behind `opencv_core`) where the OpenCV binary actually is.
@@ -58,4 +71,18 @@ class MainFlutterWindow: NSWindow {
     // pointing the app at a custom OpenCV build keeps working.
     setenv("DARTCV_LIB_PATH", binary, 0)
   }
+}
+
+/// AppKit maakt van Ctrl+H een verwijderteken voordat Flutter de letter of de
+/// modifier nog ziet. Op vensterniveau zijn de oorspronkelijke toetscode en
+/// control-vlag er wel. Een gewone Backspace heeft `\u{7f}`, niet `\u{8}`.
+func isFindReplaceShortcut(_ event: NSEvent) -> Bool {
+  guard event.type == .keyDown else { return false }
+  let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+  guard flags.contains(.control),
+    !flags.contains(.command),
+    !flags.contains(.option),
+    !flags.contains(.shift)
+  else { return false }
+  return event.keyCode == 4 || event.characters == "\u{8}"
 }
