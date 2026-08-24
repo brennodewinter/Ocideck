@@ -271,6 +271,12 @@ void main() {
       await tester.pumpAndSettle();
       await klaar(tester);
 
+      expect(
+        lastRotationWriteFailure,
+        isNull,
+        reason: 'de geroteerde bytes zijn niet weggeschreven',
+      );
+
       // Het resultaat is teruggekomen.
       expect(uitkomst.single, isNotNull);
       // Het bestand op schijf moet zijn bijgewerkt met de geroteerde bytes.
@@ -319,6 +325,16 @@ void main() {
       await tester.tap(find.byIcon(Icons.rotate_right));
       await tester.pumpAndSettle();
       await klaar(tester);
+
+      // Eerst de reden, dan de pixels. Zonder deze regel meldt een mislukte
+      // schrijfbeurt zich als "verwacht blauw, kreeg rood" — waar of niet,
+      // dat vertelt niemand wat er misging, en op Windows was dat precies het
+      // verschil tussen twee releases raden en het antwoord lezen.
+      expect(
+        lastRotationWriteFailure,
+        isNull,
+        reason: 'de geroteerde bytes zijn niet weggeschreven',
+      );
 
       final rotated = img.decodeImage(File(foto).readAsBytesSync())!;
       // 180° houdt de afmetingen gelijk — 90° zou ze omwisselen.
