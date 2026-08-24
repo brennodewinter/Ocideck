@@ -240,6 +240,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(windows): een afbeelding draaien in het bijsnijdvenster deed op Windows
+  niets. De sync-variant van de atomische schrijfhulp miste de terugval die de
+  async-variant al had — op Windows faalt `rename` over een bestaand bestand —
+  en het bijsnijdvenster slikt een schrijffout bewust in, zodat een mislukte
+  schrijfbeurt de bijsnijdkeuze niet blokkeert. Samen maakte dat het geluidloos:
+  de preview draaide, het bestand bleef staan, en er kwam geen melding. De
+  terugval staat er nu, met dezelfde afweging als in de async-variant, en de
+  nieuwe toets bewijst hem zonder een Windows-machine.
+
+- fix(export): een export buiten de projectmap verloor op Windows zijn
+  afbeeldingen. De herberekende relatieve paden (#1673) gingen ongewijzigd de
+  Markdown in, dus met backslashes — maar een Markdown-link is een URL, waarin
+  de backslash geen scheiding is en in de LaTeX-route zelfs als
+  ontsnappingsteken leest. De links krijgen nu URL-scheiding; bestaat er geen
+  relatief pad (een ander station), dan wordt het een `file:`-URL in plaats van
+  een half omgezet pad.
+
 - fix(docs): de linkcontrole van de spiegel liep stuk op één verwijzing in dit
   bestand. De regel over `EditorTextController` wees met `../lib/…` buiten de
   werkkopie; vanuit een CHANGELOG in de wortel is dat een pad naast de repo. Nu
