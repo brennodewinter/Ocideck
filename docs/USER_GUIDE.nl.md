@@ -4739,6 +4739,12 @@ dingen:
   band; ingevoegde documentveldwaarden blijven letterlijke tekst. Compileer met
   `pdflatex` of `xelatex` op een gewone TeX Live-installatie. *(Toegevoegd
   2026-08-07; lijst-, tabel- en documentbandpariteit hersteld 2026-08-22.)*
+  **ePub (`.epub`)** is een EPUB 3-document met herflowbare tekst voor
+  e-readers, tablets en telefoons — de koppen worden de navigatieboom, de
+  noten staan als genummerde lijst achterin, en afbeeldingen reizen als
+  aparte bestanden mee in de ePub. De tekst is leesbare XHTML in een ZIP,
+  dus een geredigeerd gegeven dat er tóch in belandt is even leesbaar als in
+  de `.md`. *(Toegevoegd 2026-08-24, #1761.)*
 
 #### De PDF
 
