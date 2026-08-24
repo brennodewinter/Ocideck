@@ -1,0 +1,89 @@
+# Bouwt de Windows-app na een merge naar main, als controle — niet als levering.
+#
+# ⚠️  Deze map draait alleen op de GitHub-spiegel. Forgejo leest
+# `.forgejo/workflows/` en negeert `.github/`; daar staan de tegenhangers voor
+# Linux (`linux-build.yml`) en macOS (`macos-build.yml`).
+#
+# **Waarom dit bestaat.** Geen enkele poort bouwt de Windows-app: `make check`
+# en de Forgejo-gates draaien `flutter test`, en `flutter build windows` kwam
+# tot nu toe pas voorbij in de releaseketen (`release.yml`, op een `v*`-tag).
+# Op Linux kostte precies dat gat de release van v0.4.9: de nativeapi-migratie
+# (#1741) bracht een plugin mee die een systeembibliotheek eist die niemand
+# installeerde, en de eerste machine die dat merkte was de releaseketen. Alle
+# poorten stonden van de merge tot de tag groen.
+#
+# Windows heeft dezelfde vorm en dezelfde geschiedenis: een MSVC-botsing met het
+# voorgebouwde OpenCV-pakket van dartcv4 dwong ooit een `windows-2022`-pin af
+# (#870). Zo'n botsing ontstaat bij een Flutter-bump of een dependency-bump —
+# en die merk je hier nu binnen een half uur na de merge in plaats van bij de
+# volgende tag.
+#
+# **Alleen bij de invoer die een native build kan breken**, want een build van
+# een half uur bij élke push naar main is precies wat #790 (terecht) uitzette.
+# Bij gewoon Dart-werk zwijgt deze workflow.
+#
+# **Geen artefact.** Dit is een controle: hij bouwt en gooit het resultaat weg.
+# De bundel die gebruikers krijgen komt uit `release.yml`, op een tag, en die
+# blijft de enige plek die iets publiceert.
+name: Windows native build (post-merge)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'windows/**'
+      - 'third_party/**'
+      - '.tool-versions'
+      - '.github/workflows/windows-native-check.yml'
+  workflow_dispatch:
+
+# Deze workflow leest alleen; hij publiceert niets.
+permissions:
+  contents: read
+
+# Twee merges vlak na elkaar hoeven niet allebei te bouwen — de laatste dekt de
+# nieuwste staat. Afbreken kost hier niets: er hangt geen levering aan.
+concurrency:
+  group: windows-native-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Windows (controle)
+    runs-on: windows-latest
+    # De bouw duurt ~20-35 min. Ruim, maar begrensd: een stap die op een venster
+    # wacht dat niemand kan wegklikken maakte in v0.4.7-rc1 bijna de volle zes
+    # standaarduren op (zie release.yml).
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # Laat het token niet in .git/config achter na de checkout.
+          persist-credentials: false
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          # Letterlijk, en dat is met opzet: `make check-toolchain` leest deze
+          # regel en faalt zodra hij afwijkt van de pin in .tool-versions (zie
+          # versionClaimPatterns in tool/check_toolchain.dart). Een tweede plek
+          # om te vergeten is dit dus niet — het is een tweede plek die bewaakt
+          # wordt.
+          flutter-version: 3.47.1
+          cache: true
+
+      - name: Install dependencies
+        # --enforce-lockfile faalt als pubspec.lock is afgedreven, zodat deze
+        # controle dezelfde afhankelijkheden bouwt als de poort keurde.
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build Windows
+        # `make` staat niet betrouwbaar op de Windows-runner, dus Flutter
+        # rechtstreeks — net als in release.yml.
+        run: |
+          flutter config --enable-windows-desktop
+          flutter build windows --release

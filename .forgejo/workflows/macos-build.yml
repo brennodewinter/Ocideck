@@ -10,12 +10,32 @@
 # ook niets te cachen.
 name: macos-build
 
-# Alleen handmatig sinds #790, om dezelfde reden als linux-build.yml: bij elke
-# `v*`-tag bouwt `release.yml` op de GitHub-spiegel deze app al. Dit blijft
-# bestaan voor een build op afroep zonder tag — en omdat deze Mac de enige
-# machine is die het mág (Apple staat macOS alleen op Apple-hardware toe).
+# Handmatig, plus een smalle post-merge-trekker — dezelfde afweging als in
+# linux-build.yml, om dezelfde reden.
+#
+# Het argument uit #790 was: bij elke `v*`-tag bouwt `release.yml` deze app al,
+# dus na een merge nog eens bouwen voegt niets toe. Dat klopt voor het inpakken
+# en niet voor het bouwen: géén poort bouwt de macOS-app, want `make check`
+# draait `flutter test`. Op Linux kostte dat de release van v0.4.9 — een plugin
+# eiste een systeembibliotheek die niemand installeerde, en de eerste machine
+# die het merkte was de releaseketen. Hier kan hetzelfde: een Flutter-bump die
+# de Podfile, een plugin of de gegenereerde Xcode-config raakt, breekt de build
+# pas bij de tag.
+#
+# Dus bouwt hij weer na een merge, maar alleen wanneer er iets veranderde dat de
+# *native* build kan breken. Bij gewoon Dart-werk zwijgt hij. Staat de Mac uit,
+# dan wacht de run; een volgende merge vervangt een wachtende run.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'macos/**'
+      - 'third_party/**'
+      - '.tool-versions'
+      - '.forgejo/workflows/macos-build.yml'
 
 jobs:
   build-macos:

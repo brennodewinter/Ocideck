@@ -1,0 +1,132 @@
+# Generale repetitie bij een toolchain-bump: laat de GitHub-spiegel de volledige
+# pijplijn over déze tak draaien vóór de merge, en faal de PR als dat niet lukt.
+#
+# **Waarom alleen hier.** De poorten van deze forge draaien `flutter test` op
+# Linux en macOS; ze bouwen geen enkele desktop-app en ze zien Windows niet. De
+# spiegel doet dat wel (Gate (Linux) met een echte Linux-build en native scan,
+# Test (macos-latest), Test (windows-2022)) — maar alleen op een `v*`-tag of op
+# afroep. Een Flutter-bump die de build op één van die drie breekt, merk je dus
+# pas in de releaseketen. Dat kostte de release van v0.4.9, waar een plugin een
+# systeembibliotheek eiste die niemand installeerde en CMake omviel vóór er iets
+# gecompileerd was; alle poorten stonden intussen groen.
+#
+# Voor Linux en macOS ondervangen `linux-build.yml` en `macos-build.yml` dat nu
+# ná de merge, en voor Windows doet `.github/workflows/windows-native-check.yml`
+# hetzelfde. Deze workflow zet er de repetitie vóór de merge naast, en alleen
+# waar het risico ontstaat: een wijziging aan `.tool-versions` is een andere
+# compiler, een andere engine en andere gegenereerde build-bestanden op alle
+# drie de platformen tegelijk. Een uur wachten is dan goedkoop; het alternatief
+# is een tag die niets oplevert.
+#
+# **Advies, geen slot.** De takbescherming op `main` eist alleen `static-gate`.
+# Deze run verschijnt als eigen status en faalt zichtbaar; wil je hem
+# blokkerend, zet hem dan bij de vereiste checks.
+#
+# **Zonder secret slaat hij zichzelf over.** `GH_DISPATCH_TOKEN` is hetzelfde
+# fine-grained token dat de releaseketen gebruikt om de Windows-build te
+# starten. Een PR uit een fork krijgt geen secrets; die valt dan terug op een
+# waarschuwing in plaats van een rode poort voor iets waar de indiener niets
+# aan kan doen.
+name: toolchain-rehearsal
+
+on:
+  pull_request:
+    paths:
+      - '.tool-versions'
+
+jobs:
+  rehearsal:
+    name: Spiegel-CI over deze tak
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    # De spiegelrun duurt ~1u05 (de Windows-suite is de traagste). Ruim, maar
+    # begrensd.
+    timeout-minutes: 120
+    steps:
+      # Geen checkout: deze job leest de repo niet, hij praat alleen met de
+      # GitHub-API. Daarmee vervalt ook de node-eis van `actions/checkout` in
+      # een kaal image (zie forgejo-runner-valkuil 2).
+      - name: Gereedschap
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends curl jq ca-certificates
+
+      - name: Repetitie draaien en afwachten
+        env:
+          GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
+        run: |
+          set -u
+          BRANCH="${GITHUB_HEAD_REF}"
+          REPO="brennodewinter/Ocideck"
+          API="https://api.github.com/repos/$REPO"
+
+          if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
+            echo "GH_DISPATCH_TOKEN ontbreekt (fork-PR?) — repetitie overgeslagen." >&2
+            echo "Draai hem met de hand vóór de merge: de spiegel-CI op deze tak." >&2
+            exit 0
+          fi
+
+          # Elke aanroep met een tijdslimiet: een geblackholede route laat een
+          # kale curl anders per poging minutenlang hangen, en de lussen
+          # hieronder tellen pogingen, geen tijd.
+          gh_api() { curl -fsS --connect-timeout 15 --max-time 60 \
+            -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
+
+          # De spiegel is een push-mirror: de tak staat er even later pas.
+          echo "Wachten tot $BRANCH op de spiegel staat…"
+          for POGING in $(seq 1 10); do
+            if gh_api "$API/branches/$BRANCH" >/dev/null 2>&1; then
+              echo "Tak gevonden na $POGING poging(en)."
+              break
+            fi
+            if [ "$POGING" -eq 10 ]; then
+              echo "De tak $BRANCH staat na vijf minuten niet op de spiegel." >&2
+              echo "Controleer de push-mirror; zonder tak valt er niets te toetsen." >&2
+              exit 1
+            fi
+            sleep 30
+          done
+
+          echo "Spiegel-CI dispatchen op $REPO@$BRANCH…"
+          gh_api -X POST "$API/actions/workflows/ci.yml/dispatches" \
+            -d "{\"ref\":\"$BRANCH\"}" \
+            || { echo "Dispatch faalde — controleer GH_DISPATCH_TOKEN (Actions: RW)." >&2; exit 1; }
+          sleep 20
+
+          # De run van déze dispatch: nieuwste dispatch-run op deze tak.
+          RUN=""
+          for POGING in $(seq 1 10); do
+            RUN="$(gh_api "$API/actions/workflows/ci.yml/runs?branch=$BRANCH&event=workflow_dispatch&per_page=1" \
+              | jq -r '.workflow_runs[0].id // empty')"
+            [ -n "$RUN" ] && break
+            sleep 15
+          done
+          if [ -z "$RUN" ]; then
+            echo "Geen run zichtbaar na de dispatch." >&2
+            exit 1
+          fi
+          URL="$(gh_api "$API/actions/runs/$RUN" | jq -r '.html_url')"
+          echo "Repetitie loopt: $URL"
+
+          for POGING in $(seq 1 90); do
+            INFO="$(gh_api "$API/actions/runs/$RUN" | jq -r '"\(.status) \(.conclusion // "")"')"
+            STATUS="${INFO%% *}"
+            CONCLUSIE="${INFO#* }"
+            echo "[$POGING] $STATUS $CONCLUSIE"
+            if [ "$STATUS" = "completed" ]; then
+              echo "--- per job ---"
+              gh_api "$API/actions/runs/$RUN/jobs" \
+                | jq -r '.jobs[] | "  \(.conclusion // .status)  \(.name)"'
+              [ "$CONCLUSIE" = "success" ] && exit 0
+              echo "De repetitie faalde: $URL" >&2
+              echo "Repareer dat vóór de merge — anders vindt de releaseketen het." >&2
+              exit 1
+            fi
+            sleep 60
+          done
+
+          echo "Na 90 minuten was de repetitie nog niet klaar: $URL" >&2
+          exit 1

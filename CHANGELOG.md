@@ -240,6 +240,22 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(ci): elke platformbuild gaat nu vroeger af dan de releaseketen. Geen
+  poort bouwde een desktop-app — `make check` en de forge-poorten draaien
+  `flutter test` — dus een wijziging die de *build* brak, kwam pas bij de tag
+  aan het licht. Dat kostte 0.4.9. Nu bouwt Linux, macOS én Windows na een merge
+  naar main, maar alleen wanneer er iets veranderde dat een native build kan
+  breken (`pubspec.yaml`/`pubspec.lock`, `.tool-versions`, de platformmap,
+  `third_party/` of het CI-image); bij gewoon Dart-werk zwijgen ze. Windows
+  draait op de spiegel, want daar staat de enige Windows-machine.
+
+  Daarnaast krijgt een toolchain-bump een generale repetitie vóór de merge: een
+  PR die `.tool-versions` raakt laat de volledige spiegel-CI over die tak lopen
+  — Linux-build, macOS-tests en de Windows-suite — en faalt zichtbaar als daar
+  iets omvalt. Dat is precies de wijziging die alle drie de platformen tegelijk
+  kan raken. De drie padfilters worden zelf bewaakt door een toets: een build
+  die niet afgaat bewaakt niets.
+
 - feat(ci): een poort die ziet wanneer de Linux-build een systeembibliotheek
   mist. `make check-linux-deps` leest uit de opgeloste plugin-bronnen élke
   pkg-config-module die op Linux `REQUIRED` is, en legt die naast
