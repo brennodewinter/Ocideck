@@ -158,4 +158,74 @@ Een alinea vooraf.
       moreOrLessEquals(before, epsilon: 1),
     );
   });
+
+  testWidgets('een lage cel aanklikken en bewerken houdt die cel in beeld', (
+    tester,
+  ) async {
+    final rows = List.generate(
+      32,
+      (i) => '| $i | ${'Lange wijziging $i. ' * 5} |',
+    ).join('\n');
+    final source =
+        '''
+${List.generate(80, (i) => 'Regel $i.').join('\n\n')}
+
+| Versie | Wijziging |
+| --- | --- |
+$rows
+''';
+    final sourceController = await pump(tester, source);
+    final surface = tester.widget<WysiwygNotesField>(
+      find.byType(WysiwygNotesField),
+    );
+    surface.scrollController.jumpTo(
+      surface.scrollController.position.maxScrollExtent,
+    );
+    await tester.pump();
+
+    final lastCell = find.byType(TextField).last;
+    final before = surface.scrollController.offset;
+    await tester.tap(lastCell);
+    await tester.pump();
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+      reason: 'alleen focus pakken mag de lange tabel niet omhoog trekken',
+    );
+
+    final field = tester.widget<TextField>(lastCell);
+    final original = field.controller!.text;
+    await tester.enterText(lastCell, '${original}x');
+    await tester.pump();
+    await tester.pump();
+
+    final updatedField = tester.widget<TextField>(find.byType(TextField).last);
+    expect(updatedField.controller, same(field.controller));
+    expect(updatedField.focusNode, same(field.focusNode));
+    expect(updatedField.focusNode!.hasFocus, isTrue);
+    expect(updatedField.controller!.text, '${original}x');
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+      reason: 'terugschrijven mag Quill niet naar het embed-begin scrollen',
+    );
+    expect(find.byType(QuillEditor), findsOneWidget);
+
+    tester.testTextInput.updateEditingValue(
+      TextEditingValue(
+        text: original,
+        selection: TextSelection.collapsed(offset: original.length),
+      ),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    final afterBackspace = tester.widget<TextField>(
+      find.byType(TextField).last,
+    );
+    expect(afterBackspace.controller, same(field.controller));
+    expect(afterBackspace.focusNode!.hasFocus, isTrue);
+    expect(sourceController.text, contains('| 31 | $original |'));
+    expect(find.byType(QuillEditor), findsOneWidget);
+  });
 }
