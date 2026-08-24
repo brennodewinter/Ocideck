@@ -1664,6 +1664,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 le téacs athshreabach d\'e-léitheoirí, táibléad agus fóin. Éiríonn ceannteidil as nascleanúint, bíonn nótaí deiridh.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Tá luachanna neamhbhailí i socrú an leathanaigh sa cháipéis seo agus rinneadh neamhshuim de. Úsáidtear do shocruithe.',
   'Het bestand is gewijzigd door een ander programma.':

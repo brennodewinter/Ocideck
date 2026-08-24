@@ -1650,6 +1650,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 з текстом, що переформатовується, для електронних книг, планшетів і телефонів. Заголовки стають навігацією, примітки — наприкінці.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Параметри сторінки в цьому документі містять недійсні значення та були проігноровані. Використовуються ваші налаштування.',
   'Het bestand is gewijzigd door een ander programma.':

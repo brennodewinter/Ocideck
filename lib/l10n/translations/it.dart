@@ -671,6 +671,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Un ePub 3 con testo rifluito per e-reader, tablet e telefoni. Le intestazioni diventano navigazione, le note vanno in fondo.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'L\'impostazione pagina in questo documento contiene valori non validi ed è stata ignorata. Vengono usate le impostazioni.',
   'Het bestand is gewijzigd door een ander programma.':

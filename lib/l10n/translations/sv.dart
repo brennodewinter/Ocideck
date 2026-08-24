@@ -1633,6 +1633,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'En ePub 3 med anpassningsbar text för e-läsare, surfplattor och telefoner. Rubriker blir navigation, noter står längst bak.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Sidinställningarna i detta dokument innehåller ogiltiga värden och ignorerades. Dina inställningar används.',
   'Het bestand is gewijzigd door een ander programma.':

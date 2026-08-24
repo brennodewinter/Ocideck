@@ -299,6 +299,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           DocumentExportFormat.latex => l10n.d(
             'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.',
           ),
+          DocumentExportFormat.epub => l10n.d(
+            'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.',
+          ),
         }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
       ],
     );
@@ -345,8 +348,8 @@ class _FormatOption {
 }
 
 /// De formaten in de volgorde waarin ze worden aangeboden: eerst de platte
-/// tekst waar het hele product op staat, dan wat een ontvanger leest, dan de
-/// zetweg voor wie zelf verder wil.
+/// tekst waar het hele product op staat, dan wat een ontvanger leest — HTML,
+/// PDF, ePub — dan de zetweg voor wie zelf verder wil.
 const _formatOptions = [
   _FormatOption(
     DocumentExportFormat.md,
@@ -355,6 +358,11 @@ const _formatOptions = [
   ),
   _FormatOption(DocumentExportFormat.html, 'HTML', Icons.public_outlined),
   _FormatOption(DocumentExportFormat.pdf, 'PDF', Icons.picture_as_pdf_outlined),
+  _FormatOption(
+    DocumentExportFormat.epub,
+    'ePub (.epub)',
+    Icons.menu_book_outlined,
+  ),
   _FormatOption(
     DocumentExportFormat.latex,
     'LaTeX (.tex)',

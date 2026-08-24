@@ -1659,6 +1659,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Ένα ePub 3 με ανακυκλούμενο κείμενο για ηλεκτρονικούς αναγνώστες, ταμπλέτες και τηλέφωνα. Οι τίτλοι γίνονται πλοήγηση, οι σημειώσεις στο τέλος.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Η διαμόρφωση σελίδας σε αυτό το έγγραφο περιέχει μη έγκυρες τιμές και αγνοήθηκε. Χρησιμοποιούνται οι ρυθμίσεις σας.',
   'Het bestand is gewijzigd door een ander programma.':

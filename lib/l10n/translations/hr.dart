@@ -1638,6 +1638,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 s tekstom koji se prelijeva za e-čitače, tablete i telefone. Naslovi postaju navigacija, bilješke su na kraju.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Postavke stranice u ovom dokumentu sadrže nevažeće vrijednosti i zanemarene su. Koriste se vaše postavke.',
   'Het bestand is gewijzigd door een ander programma.':

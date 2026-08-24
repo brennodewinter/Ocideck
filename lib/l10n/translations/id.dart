@@ -1634,6 +1634,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Sebuah ePub 3 dengan teks yang dapat mengalir ulang untuk e-reader, tablet, dan telepon. Judul menjadi navigasi, catatan ada di belakang.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Tata letak halaman dokumen ini berisi nilai tidak valid dan diabaikan. Setelan Anda digunakan.',
   'Het bestand is gewijzigd door een ander programma.':

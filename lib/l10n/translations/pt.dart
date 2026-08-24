@@ -1662,6 +1662,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Um ePub 3 com texto refluido para e-readers, tablets e telefones. Cabeçalhos tornam-se navegação, notas ficam no final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'A configuração de página neste documento contém valores inválidos e foi ignorada. As suas definições são usadas.',
   'Het bestand is gewijzigd door een ander programma.':

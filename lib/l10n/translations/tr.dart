@@ -2552,6 +2552,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'E-okuyucular, tabletler ve telefonlar için yeniden akışkan metinli bir ePub 3. Başlıklar navigasyon olur, notlar arkada durur.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Bu belgedeki sayfa düzeni geçersiz değerler içeriyor ve yoksayıldı. Ayarlarınız kullanılıyor.',
   'Het bestand is gewijzigd door een ander programma.':

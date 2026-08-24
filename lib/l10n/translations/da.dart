@@ -1634,6 +1634,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'En ePub 3 med tilpasningsdygtig tekst til e-readers, tablets og telefoner. Overskrifter bliver navigation, noter står bagerst.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Sideopsætningen i dette dokument indeholder ugyldige værdier og blev ignoreret. Dine indstillinger bruges.',
   'Het bestand is gewijzigd door een ander programma.':

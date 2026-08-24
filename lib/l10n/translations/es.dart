@@ -671,6 +671,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Un ePub 3 con texto refluido para e-readers, tabletas y teléfonos. Los encabezados se convierten en navegación, las notas van al final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'La configuración de página de este documento contiene valores no válidos y se ha ignorado. Se usa su configuración.',
   'Het bestand is gewijzigd door een ander programma.':

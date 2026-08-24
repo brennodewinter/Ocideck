@@ -1635,6 +1635,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 z besedilom, ki se preliva, za bralnike e-knjig, tablične računalnike in telefone. Naslovi postanejo navigacija, opombe so zadaj.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Nastavitev strani v tem dokumentu vsebuje neveljavne vrednosti in je bila prezrta. Uporabljajo se vaše nastavitve.',
   'Het bestand is gewijzigd door een ander programma.':
