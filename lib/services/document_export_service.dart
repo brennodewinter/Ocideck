@@ -391,22 +391,34 @@ Future<bool> _sameFile(String? sourcePath, String outputPath) async {
 /// Herbaset relatieve afbeeldingspaden in [markdown] van de bronmap naar de
 /// uitvoermap, zodat een .md- of .tex-export buiten de projectmap de beelden
 /// blijft vinden (#1673). Absolute paden, URL's en data-URI's blijven staan.
+///
+/// [pathContext] bestaat alleen voor de toets: daarmee kan een macOS-machine de
+/// Windows-padstijl doorrekenen. Laat hem weg en de stijl van het draaiende
+/// platform geldt.
 @visibleForTesting
 String rebaseImagePathsForTesting(
   String markdown,
   String? sourcePath,
-  String outputPath,
-) => _rebaseImagePaths(markdown, sourcePath, outputPath);
+  String outputPath, {
+  p.Context? pathContext,
+}) => _rebaseImagePaths(
+  markdown,
+  sourcePath,
+  outputPath,
+  pathContext: pathContext,
+);
 
 String _rebaseImagePaths(
   String markdown,
   String? sourcePath,
-  String outputPath,
-) {
+  String outputPath, {
+  p.Context? pathContext,
+}) {
   if (sourcePath == null) return markdown;
-  final sourceDir = p.dirname(sourcePath);
-  final outputDir = p.dirname(outputPath);
-  if (p.equals(sourceDir, outputDir)) return markdown;
+  final ctx = pathContext ?? p.context;
+  final sourceDir = ctx.dirname(sourcePath);
+  final outputDir = ctx.dirname(outputPath);
+  if (ctx.equals(sourceDir, outputDir)) return markdown;
   return markdown.replaceAllMapped(RegExp(r'!\[([^\]]*)\]\(([^)]+)\)'), (m) {
     final alt = m.group(1)!;
     final raw = m.group(2)!;
@@ -414,16 +426,26 @@ String _rebaseImagePaths(
     if (raw.startsWith('http://') ||
         raw.startsWith('https://') ||
         raw.startsWith('data:') ||
-        p.isAbsolute(raw)) {
+        ctx.isAbsolute(raw)) {
       return m[0]!;
     }
     // Scheid bron en titel (`bron "titel"`).
     final space = raw.indexOf(RegExp(r'\s'));
     final src = space < 0 ? raw : raw.substring(0, space);
     final title = space < 0 ? '' : raw.substring(space);
-    final abs = p.normalize(p.join(sourceDir, src));
-    final rebased = p.relative(abs, from: outputDir);
-    return '![$alt]($rebased$title)';
+    final abs = ctx.normalize(ctx.join(sourceDir, src));
+    final rebased = ctx.relative(abs, from: outputDir);
+    // Een Markdown-verwijzing is een URL, geen bestandspad: daar scheidt '/',
+    // ook op Windows. `relative` levert de padstijl van het platform, dus zonder
+    // deze omzetting schreef een export op Windows `![Alt](..\\map\\foto.png)` —
+    // een link die geen enkele renderer volgt en die in LaTeX bovendien als
+    // ontsnappingsteken leest. Kan er geen relatief pad bestaan (op Windows: een
+    // ander station), dan geeft `relative` het absolute pad terug; dat wordt een
+    // file-URL in plaats van een half omgezet pad.
+    final target = ctx.isAbsolute(rebased)
+        ? ctx.toUri(rebased).toString()
+        : p.url.joinAll(ctx.split(rebased));
+    return '![$alt]($target$title)';
   });
 }
 
