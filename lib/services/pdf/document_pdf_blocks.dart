@@ -333,3 +333,60 @@ class PdfRenderedGraphic {
       ? 'PdfRenderedGraphic.svg(${svg!.length} tekens)'
       : 'PdfRenderedGraphic.image(${image!.length} bytes)';
 }
+
+/// Splits een alinea op woordgrens: het eerste deel bevat ruwweg [maxChars]
+/// tekens, de rest volgt als los blok. Geeft `null` als de alinea kort genoeg
+/// is of niet op een woordgrens te splitsen valt.
+///
+/// De twee delen behouden elk hun opmaak: een span die de grens kruist wordt
+/// in twee gesplitst met dezelfde stijl. Het tweede deel krijgt `tight`
+/// spacing bij plaatsing, zodat er geen extra witruimte tussen de twee
+/// helften van dezelfde alinea komt.
+({PdfParagraphBlock first, PdfParagraphBlock rest})?
+splitParagraphAtWordBoundary(PdfParagraphBlock block, int maxChars) {
+  final spans = block.spans;
+  final total = spans.fold<int>(0, (sum, span) => sum + span.text.length);
+  if (total <= maxChars) return null;
+
+  // Vind de split-positie: de laatste spatie vóór of op maxChars.
+  var charCount = 0;
+  var splitChar = -1;
+  var spanIndex = 0;
+  var spanOffset = 0;
+  for (var i = 0; i < spans.length; i++) {
+    final text = spans[i].text;
+    for (var j = 0; j < text.length; j++) {
+      if (text[j] == ' ' && charCount <= maxChars) {
+        splitChar = charCount;
+        spanIndex = i;
+        spanOffset = j;
+      }
+      charCount++;
+    }
+  }
+  if (splitChar < 0) return null; // geen woordgrens gevonden
+
+  final firstSpans = <PdfSpan>[];
+  for (var i = 0; i < spanIndex; i++) {
+    firstSpans.add(spans[i]);
+  }
+  final splitSpan = spans[spanIndex];
+  firstSpans.add(
+    splitSpan.copyWith(text: splitSpan.text.substring(0, spanOffset)),
+  );
+
+  final restSpans = <PdfSpan>[];
+  final afterSplit = splitSpan.text.substring(spanOffset + 1);
+  if (afterSplit.isNotEmpty) {
+    restSpans.add(splitSpan.copyWith(text: afterSplit));
+  }
+  for (var i = spanIndex + 1; i < spans.length; i++) {
+    restSpans.add(spans[i]);
+  }
+  if (restSpans.isEmpty) return null;
+
+  return (
+    first: PdfParagraphBlock(firstSpans),
+    rest: PdfParagraphBlock(restSpans),
+  );
+}
