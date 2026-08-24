@@ -262,6 +262,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(crop): een afbeelding draaien op Windows landde niet op schijf, en een
+  mislukte schrijfbeurt kon het origineel meenemen. De voorvertoning van het
+  bijsnijdvenster houdt het bestand dat ze net las nog even vast; daardoor
+  weigerde Windows het te vervangen (`rename` mag daar niet over een bestaand
+  bestand) én te verwijderen (errno 32, "used by another process"). Het venster
+  laat zijn beeld nu los vóór het schrijft, en de schrijfbeurt krijgt vier korte
+  herkansingen — de vergrendeling komt van een ander proces en is van korte
+  duur. Blijft het toch mislukken, dan blijft de rotatie onuitgevoerd maar staat
+  de reden in het logboek in plaats van nergens.
+
+  Daarbij kwam een ernstiger gat aan het licht in dezelfde terugval: die
+  verwijdert eerst het doel, en de opruiming daarna gooide óók het tijdelijke
+  bestand weg. Een schrijfbeurt die op dat punt strandde liet dus niets over —
+  geen nieuw bestand en geen origineel. De tijdelijke kopie blijft nu staan
+  zodra het doel al weg is, en wordt pas opgeruimd als een volgende poging
+  slaagt. Dit gold ook voor de asynchrone variant, de route waarlangs decks
+  worden opgeslagen.
+
 - fix(windows): een afbeelding draaien in het bijsnijdvenster deed op Windows
   niets. De sync-variant van de atomische schrijfhulp miste de terugval die de
   async-variant al had — op Windows faalt `rename` over een bestaand bestand —
