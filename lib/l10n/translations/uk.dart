@@ -67,6 +67,7 @@ const _stringsUk = {
   'losslessHelp': 'Зображення без втрат у повній роздільній здатності.',
   'exportAsPdf': 'Експортувати як PDF',
   'exportAsPptx': 'Експортувати як PPTX',
+  'exportAsOdp': 'Експортувати як ODP',
   'exportAsHtml': 'Експортувати як HTML (Marp, офлайн)',
   'exportAsLatex': 'Експортувати як LaTeX (Beamer)',
 
@@ -1650,6 +1651,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), який відкривається в LibreOffice або Word. Редагований, із власними виносками та заголовками як контур. Відкрита альтернатива файлу Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 з текстом, що переформатовується, для електронних книг, планшетів і телефонів. Заголовки стають навігацією, примітки — наприкінці.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

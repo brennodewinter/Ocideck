@@ -67,6 +67,7 @@ const _stringsRo = {
   'losslessHelp': 'Imagini fără pierderi, la rezoluție completă.',
   'exportAsPdf': 'Exportă ca PDF',
   'exportAsPptx': 'Exportă ca PPTX',
+  'exportAsOdp': 'Exportă ca ODP',
   'exportAsHtml': 'Exportă ca HTML (Marp, offline)',
   'exportAsLatex': 'Exportă ca LaTeX (Beamer)',
 
@@ -1651,6 +1652,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'Un ODT (OpenDocument Text) care se deschide în LibreOffice sau Word. Editabil, cu note de subsol native și titluri ca structură. Alternativa deschisă la un fișier Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 cu text refluid pentru cititoare electronice, tablete și telefoane. Titlurile devin navigare, notele sunt la final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

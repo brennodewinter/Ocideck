@@ -160,7 +160,7 @@ const Map<String, int> fileSizeBaseline = {
   // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
-  'lib/services/export_service.dart': 1023,
+  'lib/services/export_service.dart': 603,
   // −75 (#1707): de find/replace-staat is naar FindReplaceSession gegaan, een
   // gewone klasse die de documenteditor en de presentatie-broneditor nu delen.
   // De regel hiervóór zei dat dat niet kon zonder private-veldtoegang; dat bleek

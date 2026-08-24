@@ -66,6 +66,7 @@ const _stringsFy = {
   'losslessHelp': 'Ferliesfrije ôfbyldings op folsleine resolúsje.',
   'exportAsPdf': 'Eksportearje as PDF',
   'exportAsPptx': 'Eksportearje as PPTX',
+  'exportAsOdp': 'Eksportearje as ODP',
   'exportAsHtml': 'Eksportearje as HTML (Marp, offline)',
   'exportAsLatex': 'Eksportearje as LaTeX (Beamer)',
 
@@ -674,6 +675,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'In ODT (OpenDocument Text) dy\'t iepenet yn LibreOffice of Word. Bewurkber, mei lânseigen foetnoaten en koppen as ynhâldsopjefte. It iepen alternatyf foar in Word-triem.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'In ePub 3 mei werfloeiende tekst foar e-readers, tablets en telefoans. Kopteksten wurde navigaasje, noten stean efteryn.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

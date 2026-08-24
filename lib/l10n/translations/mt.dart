@@ -67,6 +67,7 @@ const _stringsMt = {
   'losslessHelp': 'Immaġni bla telf b\'reżoluzzjoni sħiħa.',
   'exportAsPdf': 'Esporta bħala PDF',
   'exportAsPptx': 'Esporta bħala PPTX',
+  'exportAsOdp': 'Esporta bħala ODP',
   'exportAsHtml': 'Esporta bħala HTML (Marp, offline)',
   'exportAsLatex': 'Esporta bħala LaTeX (Beamer)',
 
@@ -1653,6 +1654,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text) li jinfetaħ f\'LibreOffice jew Word. Editabbli, b\'footnotes nattivi u headers bhala outline. L-alternattiva miftuha ghal fajl Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 b\'test li jerġa\' jifla għal e-readers, tablets u telefowns. L-intestaturi jsiru navigazzjoni, in-noti jkunu l-aħħar.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

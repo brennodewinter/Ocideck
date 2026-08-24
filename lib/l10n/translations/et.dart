@@ -65,6 +65,7 @@ const _stringsEt = {
   'losslessHelp': 'Kadudeta täiseraldusvõimega pildid.',
   'exportAsPdf': 'Ekspordi PDF-ina',
   'exportAsPptx': 'Ekspordi PPTX-ina',
+  'exportAsOdp': 'Ekspordi ODP-na',
   'exportAsHtml': 'Ekspordi HTML-ina (Marp, võrguühenduseta)',
   'exportAsLatex': 'Ekspordi LaTeXina (Beamer)',
 
@@ -1628,6 +1629,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), mis avaneb LibreOffice\'is voi Wordis. Redigeeritav, algupäraste allmärkuste ja pealkirjadega kontuurina. Avatud alternatiiv Word-failile.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 ümbervoolava tekstiga e-lugejatele, tahvelarvutitele ja telefonidele. Pealkirjad muutuvad navigatsiooniks, märkused on tagumises osas.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

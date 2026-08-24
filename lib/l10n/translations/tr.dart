@@ -66,6 +66,7 @@ const _stringsTr = {
   'losslessHelp': 'Tam çözünürlükte kayıpsız görseller.',
   'exportAsPdf': 'PDF olarak dışa aktar',
   'exportAsPptx': 'PPTX olarak dışa aktar',
+  'exportAsOdp': 'ODP olarak dışa aktar',
   'exportAsHtml': 'HTML olarak dışa aktar (Marp, çevrimdışı)',
   'exportAsLatex': 'LaTeX (Beamer) olarak dışa aktar',
 
@@ -2552,6 +2553,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'LibreOffice veya Word\'de açılan bir ODT (OpenDocument Text). Düzenlenebilir, doğal dipnotlar ve başlıklar olarak ana hatlarla. Bir Word dosyasına açık alternatif.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'E-okuyucular, tabletler ve telefonlar için yeniden akışkan metinli bir ePub 3. Başlıklar navigasyon olur, notlar arkada durur.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

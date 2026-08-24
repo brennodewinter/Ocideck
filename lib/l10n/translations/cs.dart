@@ -67,6 +67,7 @@ const _stringsCs = {
   'losslessHelp': 'Bezztrátové obrázky v plném rozlišení.',
   'exportAsPdf': 'Exportovat jako PDF',
   'exportAsPptx': 'Exportovat jako PPTX',
+  'exportAsOdp': 'Exportovat jako ODP',
   'exportAsHtml': 'Exportovat jako HTML (Marp, offline)',
   'exportAsLatex': 'Exportovat jako LaTeX (Beamer)',
 
@@ -1636,6 +1637,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), který se otevírá v LibreOffice nebo Wordu. Upravitelný, s nativními poznámkami pod čarou a nadpisy jako osnovou. Otevřená alternativa k souboru Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s textem, který se přelévá, pro e-čtečky, tablety a telefony. Nadpisy se stávají navigací, poznámky jsou vzadu.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

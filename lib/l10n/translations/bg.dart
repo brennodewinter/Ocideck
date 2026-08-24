@@ -67,6 +67,7 @@ const _stringsBg = {
   'losslessHelp': 'Изображения без загуба на пълна резолюция.',
   'exportAsPdf': 'Експортиране като PDF',
   'exportAsPptx': 'Експортиране като PPTX',
+  'exportAsOdp': 'Експортирай като ODP',
   'exportAsHtml': 'Експортиране като HTML (Marp, офлайн)',
   'exportAsLatex': 'Експортирай като LaTeX (Beamer)',
 
@@ -1654,6 +1655,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), който се отваря в LibreOffice или Word. Редактируем, с вградени бележки под линия и заглавия като структура. Отворената алтернатива на Word файл.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 с преливащ текст за електронни читалки, таблети и телефони. Заглавията стават навигация, бележките са накрая.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

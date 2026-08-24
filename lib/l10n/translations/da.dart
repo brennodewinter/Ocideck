@@ -66,6 +66,7 @@ const _stringsDa = {
   'losslessHelp': 'Tabsfrie billeder i fuld opløsning.',
   'exportAsPdf': 'Eksportér som PDF',
   'exportAsPptx': 'Eksportér som PPTX',
+  'exportAsOdp': 'Eksporter som ODP',
   'exportAsHtml': 'Eksportér som HTML (Marp, offline)',
   'exportAsLatex': 'Eksportér som LaTeX (Beamer)',
 
@@ -1634,6 +1635,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'En ODT (OpenDocument Text), der åbnes i LibreOffice eller Word. Redigerbar, med indbyggede fodnoter og overskrifter som disposition. Det åbne alternativ til en Word-fil.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'En ePub 3 med tilpasningsdygtig tekst til e-readers, tablets og telefoner. Overskrifter bliver navigation, noter står bagerst.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

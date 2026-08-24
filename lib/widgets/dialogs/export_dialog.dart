@@ -719,6 +719,11 @@ class _ExportDialogState extends State<ExportDialog> {
           onPressed: _loading ? null : () => _export(ExportFormat.pptx),
         ),
         _exportButton(
+          icon: _formatIcon(ExportFormat.odp),
+          label: l10n.t('exportAsOdp'),
+          onPressed: _loading ? null : () => _export(ExportFormat.odp),
+        ),
+        _exportButton(
           icon: _formatIcon(ExportFormat.html),
           label: l10n.t('exportAsHtml'),
           onPressed: _loading ? null : () => _export(ExportFormat.html),
@@ -800,6 +805,8 @@ class _ExportDialogState extends State<ExportDialog> {
       case ExportFormat.pdf:
         return Icons.picture_as_pdf_outlined;
       case ExportFormat.pptx:
+        return Icons.slideshow_outlined;
+      case ExportFormat.odp:
         return Icons.slideshow_outlined;
       case ExportFormat.html:
         return Icons.public_outlined;
