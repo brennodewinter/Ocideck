@@ -56,6 +56,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
+import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
 import '../platform/clipboard_html.dart';

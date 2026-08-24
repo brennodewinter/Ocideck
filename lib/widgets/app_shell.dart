@@ -16,6 +16,7 @@ import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
+import '../utils/physical_control_shortcut.dart';
 import '../utils/safe_filename.dart';
 import '../utils/shortcut_label.dart';
 import '../models/asset_origin.dart';
@@ -761,6 +762,8 @@ class _AppShellState extends ConsumerState<AppShell> {
           const SingleActivator(LogicalKeyboardKey.keyF, meta: true): () =>
               _requestDocumentFind(showReplace: false),
           const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
+              _requestDocumentFind(showReplace: true),
+          const PhysicalControlActivator(PhysicalKeyboardKey.keyH): () =>
               _requestDocumentFind(showReplace: true),
           const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
               _requestDocumentFind(showReplace: true),

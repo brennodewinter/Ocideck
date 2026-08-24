@@ -473,6 +473,7 @@ Widget _withDocumentShortcuts(
       const SingleActivator(LogicalKeyboardKey.keyF, control: true): onFind,
       const SingleActivator(LogicalKeyboardKey.keyH, meta: true): onReplace,
       const SingleActivator(LogicalKeyboardKey.keyH, control: true): onReplace,
+      const PhysicalControlActivator(PhysicalKeyboardKey.keyH): onReplace,
       // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
       // Beide plustoetsen, want op de meeste indelingen zit + op shift-= en
       // levert het toetsenbord `equal` in plaats van `add`.

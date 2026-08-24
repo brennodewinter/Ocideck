@@ -1061,6 +1061,41 @@ void main() {
     expect(find.text('Vervang alles'), findsOneWidget);
   });
 
+  testWidgets('macOS Ctrl+H opent vervangen via de fysieke H-toets', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('een twee drie'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+    await tester.tap(find.byType(TextField).last);
+    await tester.showKeyboard(find.byType(TextField).last);
+
+    await tester.sendKeyDownEvent(
+      LogicalKeyboardKey.controlLeft,
+      physicalKey: PhysicalKeyboardKey.controlLeft,
+      platform: 'macos',
+    );
+    await tester.sendKeyEvent(
+      LogicalKeyboardKey.backspace,
+      physicalKey: PhysicalKeyboardKey.keyH,
+      platform: 'macos',
+    );
+    await tester.sendKeyUpEvent(
+      LogicalKeyboardKey.controlLeft,
+      physicalKey: PhysicalKeyboardKey.controlLeft,
+      platform: 'macos',
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+    expect(find.text('Vervang alles'), findsOneWidget);
+    expect(n.currentState.document!.body, 'een twee drie');
+  });
+
   testWidgets('een Ctrl+H-aanvraag buiten het schrijfvlak opent vervangen', (
     tester,
   ) async {
