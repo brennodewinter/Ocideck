@@ -197,7 +197,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // blok. De stijl (`theme:`) leeft in de frontmatter en wordt beheerd door de
     // Stijl-kiezer, niet als tekst getypt. Elke terugschrijf zet de frontmatter
     // er weer vóór, zodat `document.source` byte-getrouw blijft.
-    final initialBody = ref.read(documentProvider).document?.body ?? '';
+    final initialBody = stripLeadingFrontMatterLeakage(
+      ref.read(documentProvider).document?.body ?? '',
+    );
     _controller = MarkdownSourceController(text: initialBody);
     // Eén luisteraar vangt élke body-wijziging in de controller — typen én de
     // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
@@ -432,8 +434,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // dit terecht niet.
     ref.listen(documentProvider.select((s) => s.document?.body ?? ''), (
       _,
-      body,
+      rawBody,
     ) {
+      final body = stripLeadingFrontMatterLeakage(rawBody);
       if (body != _controller.text) {
         _applyingExternal = true;
         // Behoud de huidige cursorpositie, geklemd op de nieuwe lengte —
@@ -459,8 +462,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         _autoFallbackToSource(body);
       }
     });
-    final source = ref.watch(
-      documentProvider.select((s) => s.document?.body ?? ''),
+    final source = stripLeadingFrontMatterLeakage(
+      ref.watch(documentProvider.select((s) => s.document?.body ?? '')),
     );
     final canUndo = ref.watch(documentProvider.select((s) => s.canUndo));
     final canRedo = ref.watch(documentProvider.select((s) => s.canRedo));
@@ -764,7 +767,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     showReplace: _find.showReplace,
     matchCount: _find.matchCount,
     matchIndex: _find.matchIndex,
-    onQueryChanged: _find.setQuery,
+    onQueryChanged: _find.onQueryFieldChanged,
     onReplaceChanged: _find.setReplacement,
     onCaseSensitiveChanged: _find.setCaseSensitive,
     onNext: _find.next,
