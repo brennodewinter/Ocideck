@@ -161,6 +161,30 @@ void main() {
     expect(n.canUndo, isFalse);
   });
 
+  testWidgets('een stijlwissel houdt TLP metadata buiten de documenttekst', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    const plain = '# Kop\n\nTekst.';
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(plain));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await pickTlp(tester, 'TLP:AMBER');
+    await pickStyle(tester, 'Security');
+
+    expect(n.currentState.document!.tlp, TlpLevel.amber);
+    expect(n.currentState.document!.styleName, 'Security');
+    expect(n.currentState.document!.body, plain);
+    expect(
+      n.currentState.document!.source,
+      '---\ntlp: amber\ntheme: Security\n---\n\n$plain',
+    );
+    expect(find.text('tlp: amber'), findsNothing);
+  });
+
   testWidgets(
     'Document · Eigenschappen bewaart vaste en vrije velden in één stap',
     (tester) async {
