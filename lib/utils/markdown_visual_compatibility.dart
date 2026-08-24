@@ -10,7 +10,14 @@ import '../services/pentest_blocks.dart';
 /// de bronmodus wierp (#1761).
 final _inlineCode = RegExp(r'`[^`\n]+`');
 
-final _rawHtml = RegExp(r'<!--|</?[A-Za-z][^>]*>');
+// Alleen HTML-*commentaar* (`<!-- … -->`) is een beperking: dat is metadata
+// (marp `<!-- _class: lead -->`, niet-herkende `<!-- toc -->`-varianten) die
+// in de bron hoort, niet als letterlijke tekst in de visuele editor. HTML-*tags*
+// (`<persoon1>`, `<br>`, `<div>`, …) reizen als platte tekst door de
+// Markdown↔Quill codec en round-trippen byte-getrouw — geverifieerd voor de
+// volle tag-reeks. Ze vroeger als `rawHtml` flaggen trapte een privacy-
+// redactieconventie als `<persoon1>` de visuele modus uit (#1777).
+final _rawHtml = RegExp(r'<!--');
 final _escapedPunctuation = RegExp(r'\\[\\`*{}\[\]()#+.!_>-]');
 
 /// Constructs that the current rich-text bridge cannot round-trip without
