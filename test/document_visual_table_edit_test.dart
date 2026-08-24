@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
+import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 
 /// De visuele stand blijft staan als je in een tabel typt (#1565).
 ///
@@ -31,8 +32,11 @@ Een alinea vooraf.
   /// De editor met een ouder die op de bron-controller meeluistert — zoals het
   /// documentscherm doet. Zonder die herbouw ziet de test de terugval niet, want
   /// de stand wordt bij het bouwen bepaald.
-  Future<TextEditingController> pump(WidgetTester tester) async {
-    final controller = TextEditingController(text: bron);
+  Future<TextEditingController> pump(
+    WidgetTester tester, [
+    String source = bron,
+  ]) async {
+    final controller = TextEditingController(text: source);
     addTearDown(controller.dispose);
     await tester.pumpWidget(
       MaterialApp(
@@ -110,5 +114,48 @@ Een alinea vooraf.
     final controller = await typeInCell(tester, 'Aapje');
     expect(controller.text, contains('| Aapje | Tester |'));
     expect(find.byType(QuillEditor), findsOneWidget);
+  });
+
+  testWidgets('aanslag voor aanslag blijft de cursor achter het woord', (
+    tester,
+  ) async {
+    await pump(tester);
+    var cell = find.widgetWithText(TextField, 'Aap');
+    await tester.showKeyboard(cell);
+
+    for (final value in const ['Aapj', 'Aapje', 'Aapjes']) {
+      await tester.enterText(cell, value);
+      await tester.pump();
+      await tester.pump();
+      cell = find.widgetWithText(TextField, value);
+      final field = tester.widget<TextField>(cell);
+      expect(field.controller!.selection.baseOffset, value.length);
+      expect(field.focusNode!.hasFocus, isTrue);
+    }
+  });
+
+  testWidgets('typen in een tabel onderaan houdt de scrollpositie vast', (
+    tester,
+  ) async {
+    final long =
+        '${List.generate(80, (i) => 'Regel $i.').join('\n\n')}\n\n$bron';
+    await pump(tester, long);
+    final surface = tester.widget<WysiwygNotesField>(
+      find.byType(WysiwygNotesField),
+    );
+    surface.scrollController.jumpTo(
+      surface.scrollController.position.maxScrollExtent,
+    );
+    await tester.pump();
+    final before = surface.scrollController.offset;
+
+    await tester.enterText(find.widgetWithText(TextField, 'Aap'), 'Aapje');
+    await tester.pump();
+    await tester.pump();
+
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+    );
   });
 }
