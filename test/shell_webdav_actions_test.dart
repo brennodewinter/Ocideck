@@ -433,18 +433,20 @@ void main() {
     );
 
     TabInfo? current() => container.read(tabsProvider).current;
-    // De file-tap start de échte open-keten (download → schijfimport →
-    // laden): die hoort in één `runAsync`-blok (`act`), niet in `tap` +
-    // `settleUntil`. `settleUntil` geeft de keten per iteratie één 5 ms-venster
-    // voor echte async, wat op de 4-core Linux-runner onder de volle suite niet
-    // genoeg is om de schijf-IO af te ronden — vandaar de af en toe rode
-    // linux-gate. De dialoog-pop volstaat om `WebdavBrowserDialog.show` te
-    // voltooien; de visuele sluitanimatie is hier niet nodig, dus `act` mag.
-    await act(
+    // De open-keten (download → schijfimport → laden) doet échte schijf-IO:
+    // bestand schrijven, teruglezen, parsen. Op de 4-core Linux-runner draait
+    // de suite met `--concurrency=14`, dus elk proces krijgt ~28% van een core
+    // en IO voltooit trager. Het standaardbudget van 400 stappen (2 s
+    // wandelklok) is marginaal — soms voltooid, soms niet, en welke van de twee
+    // open-tests rood wordt is toeval. 1200 stappen (6 s wandelklok) geeft
+    // ruimschoots de tijd; de testklok stopt na `_clockSteps` (100) met
+    // oplopen, dus een SnackBar verdwijnt niet door het langer wachten.
+    await tester.tap(find.text('rapport.md'));
+    await settleUntil(
       tester,
-      () => tester.tap(find.text('rapport.md')),
       () => current()?.deckNotifier.currentState.deck?.title == 'Van de server',
       reason: 'het gekozen bestand is niet als deck geopend',
+      steps: 1200,
     );
 
     expect(dav.downloads, contains('rapport.md'));
