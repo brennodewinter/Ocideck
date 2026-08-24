@@ -589,15 +589,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Wissel automatisch naar de Bron-modus en plaats de cursor op de eerste
   /// regel die de visuele editor niet aankan. Toont een snackbar die zegt
-  /// *wat* er mis is en op welke regel, zodat de gebruiker niet hoeft te
-  /// raden waarom de visuele modus niet opent.
+  /// *wat* er mis is en op welke regel, en scrollt naar de probleemregel.
   void _autoFallbackToSource(String body) {
     final hit = firstVisualLimitation(body);
-    // Zet de modus direct, zonder door [_changeViewMode] te gaan — die zou
-    // proberen de visuele caret mee te nemen, en we zijn al aan het verlaten.
+    // Direct, zonder door [_changeViewMode] — we zijn al aan het verlaten.
     setState(() => _viewMode = _DocViewMode.source);
     if (hit == null) return;
-    // Plaats de cursor op het begin van de probleemregel in de bron-controller.
     final lines = body.split('\n');
     final offset = lines
         .take(hit.lineIndex)

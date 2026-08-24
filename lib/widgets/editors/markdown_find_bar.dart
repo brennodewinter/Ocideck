@@ -56,16 +56,15 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     _replaceCtrl = TextEditingController(text: widget.replace);
     _queryFocus = FocusNode();
     _replaceFocus = FocusNode();
+    // Altijd het zoekveld eerst focus geven, ook bij Ctrl+H (vervangen).
+    // Je zoekt eerst, daarna pas vul je het vervangveld in — dat is hoe elke
+    // editor het doet (#1761).
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.showReplace) {
-        _replaceFocus.requestFocus();
-      } else {
-        _queryFocus.requestFocus();
-        _queryCtrl.selection = TextSelection(
-          baseOffset: 0,
-          extentOffset: _queryCtrl.text.length,
-        );
-      }
+      _queryFocus.requestFocus();
+      _queryCtrl.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: _queryCtrl.text.length,
+      );
     });
   }
 
