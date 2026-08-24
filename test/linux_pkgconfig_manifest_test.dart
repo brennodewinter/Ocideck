@@ -113,6 +113,44 @@ void main() {
     });
   });
 
+  group('de post-merge Linux-build gaat af op wat een native build breekt', () {
+    // Laag 2 naast `make check-linux-deps`: die poort ziet alleen wat via
+    // pkg-config gevraagd wordt, de build ziet de rest. Maar een build die niet
+    // afgaat bewaakt niets, en het padfilter is precies de plek waar dat stil
+    // misgaat — `.tool-versions` ontbrak er eerst, waardoor een kále
+    // Flutter-bump (die niets aan pubspec.lock verandert) hem oversloeg.
+    final text = File('.forgejo/workflows/linux-build.yml').readAsStringSync();
+
+    test('de trekker staat op main', () {
+      expect(
+        RegExp(r'push:\s*\n\s*branches:\s*\[main\]').hasMatch(text),
+        isTrue,
+        reason: 'linux-build draait niet meer na een merge naar main',
+      );
+    });
+
+    test('elke invoer die de native build kan breken zit in het padfilter', () {
+      const inputs = {
+        'pubspec.lock':
+            'de opgeloste afhankelijkheden — hier kwam #1741 binnen',
+        'pubspec.yaml': 'een nieuwe of gewijzigde plugin',
+        '.tool-versions': 'de Flutter-pin: andere compiler, engine en CMake',
+        'linux/**': 'de eigen Linux-runner en zijn CMake',
+        'third_party/**': 'de gevendorde pakketten',
+        '.forgejo/ci-image/**': 'de buildomgeving zelf',
+      };
+      for (final entry in inputs.entries) {
+        expect(
+          text.contains("'${entry.key}'"),
+          isTrue,
+          reason:
+              'linux-build slaat een merge over die ${entry.key} raakt '
+              '(${entry.value})',
+        );
+      }
+    });
+  });
+
   test('de gelinkte bibliotheken staan in de pakketafhankelijkheden', () {
     for (final entry in modules) {
       final runtime = (entry['runtime'] as Map?)?.cast<String, String>();
