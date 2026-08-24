@@ -11,6 +11,7 @@ import '../../utils/atomic_file.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/image_limits.dart';
+import '../../utils/log.dart';
 import '../../utils/project_path.dart';
 import '../../services/web_asset_store.dart';
 
@@ -42,6 +43,20 @@ bool imageIsCroppable(String imagePath) =>
 /// crop and returns [imageSize] unchanged.
 ///
 /// Returns the chosen values, or `null` when the author cancels.
+/// Waaróm de laatste rotatie niet op schijf landde — `null` zolang het goed
+/// ging.
+///
+/// `_writeRotatedBytes` slikt een schrijffout bewust in: een volle schijf of
+/// een alleen-lezen map mag de bijsnijdkeuze niet blokkeren. Maar daardoor was
+/// "draaien doet niets" op Windows twee releases lang onzichtbaar — óók in CI,
+/// want de toets zag alleen pixels die niet klopten en `logWarning` schrijft
+/// naar de VM-servicestroom, niet naar de testuitvoer. Zonder dit veld is de
+/// enige manier om de oorzaak te leren: gokken en een uur op de spiegel wachten.
+///
+/// Draagt alleen de fout of een korte reden, nooit een pad of bestandsinhoud.
+@visibleForTesting
+Object? lastRotationWriteFailure;
+
 Future<ImageCropResult?> showImageCropDialog(
   BuildContext context, {
   required String imagePath,
@@ -219,11 +234,24 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   /// Schrijf de geroteerde afbeelding terug naar het bestand (of `mem:`-pad).
   /// Stille no-op als er niet is gedraaid of als schrijven niet kan. Synchroon
   /// zodat de dialoog direct kan sluiten — de afbeelding is klein en lokaal.
+  ///
+  /// Elke uitgang die niets schrijft zet [lastRotationWriteFailure]; zie daar
+  /// waarom dat nodig was.
   void _writeRotatedBytes() {
-    if (_rotationQuarterTurns == 0 || _originalBytes == null) return;
+    lastRotationWriteFailure = null;
+    if (_rotationQuarterTurns == 0 || _originalBytes == null) {
+      if (_rotationQuarterTurns != 0) {
+        lastRotationWriteFailure =
+            'de oorspronkelijke bytes zijn nooit geladen';
+      }
+      return;
+    }
     final original = _originalBytes!;
     final decoded = img.decodeImage(original);
-    if (decoded == null) return;
+    if (decoded == null) {
+      lastRotationWriteFailure = 'de afbeelding was niet te decoderen';
+      return;
+    }
     final rotated = img.copyRotate(
       decoded,
       angle: _rotationQuarterTurns * 90.0,
@@ -246,19 +274,24 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       widget.imagePath,
       widget.projectPath,
     );
-    if (resolved != null) {
-      try {
-        writeBytesAtomicSync(File(resolved), bytes);
-      } on Object {
-        // Een schrijffout mag de crop-keuze niet blokkeren.
-      }
-      // Bump de versie zodat de renderlaag een nieuwe CappedImage-cacheKey
-      // gebruikt (path#N i.p.v. path#(N-1)). De Image-widget ziet een nieuwe
-      // provider identiteit en re-resolve, in plaats van de verouderde
-      // cache-entry te tonen. Werkt voor zowel cappedFileImage als
-      // boundedFileImage (thumbnails).
-      bumpImageVersion(resolved);
+    if (resolved == null) {
+      lastRotationWriteFailure = 'het pad viel buiten de projectmap';
+      return;
     }
+    try {
+      writeBytesAtomicSync(File(resolved), bytes);
+    } on Object catch (e) {
+      // Een schrijffout mag de crop-keuze niet blokkeren — maar hij mag ook
+      // niet spoorloos zijn.
+      lastRotationWriteFailure = e;
+      logWarning('image crop: rotatie niet weggeschreven', e);
+    }
+    // Bump de versie zodat de renderlaag een nieuwe CappedImage-cacheKey
+    // gebruikt (path#N i.p.v. path#(N-1)). De Image-widget ziet een nieuwe
+    // provider identiteit en re-resolve, in plaats van de verouderde
+    // cache-entry te tonen. Werkt voor zowel cappedFileImage als
+    // boundedFileImage (thumbnails).
+    bumpImageVersion(resolved);
   }
 
   @override
