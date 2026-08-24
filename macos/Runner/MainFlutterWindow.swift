@@ -4,6 +4,7 @@ import desktop_multi_window
 
 class MainFlutterWindow: NSWindow {
   private var shortcutChannel: FlutterMethodChannel?
+  private var shortcutMonitor: Any?
 
   override func awakeFromNib() {
     pointDartcvAtBundledFramework()
@@ -28,6 +29,17 @@ class MainFlutterWindow: NSWindow {
     shortcutChannel = FlutterMethodChannel(
       name: "ocideck/shortcuts",
       binaryMessenger: flutterViewController.engine.binaryMessenger)
+    // Een Flutter-tekstveld als first responder kan Ctrl+H al als Backspace
+    // verwerken vóór NSWindow.sendEvent. De lokale monitor zit vóór die
+    // responderketen en geldt alleen voor dit hoofdvenster.
+    shortcutMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+      [weak self] event in
+      guard let self, event.window === self, isFindReplaceShortcut(event) else {
+        return event
+      }
+      self.shortcutChannel?.invokeMethod("findReplace", arguments: nil)
+      return nil
+    }
 
     // Register the app's plugins in every sub-window (e.g. the audience/beamer
     // window) too, so video_player, image loading, etc. work there as well.
@@ -38,12 +50,12 @@ class MainFlutterWindow: NSWindow {
     super.awakeFromNib()
   }
 
-  override func sendEvent(_ event: NSEvent) {
-    if isFindReplaceShortcut(event) {
-      shortcutChannel?.invokeMethod("findReplace", arguments: nil)
-      return
+  override func close() {
+    if let shortcutMonitor {
+      NSEvent.removeMonitor(shortcutMonitor)
+      self.shortcutMonitor = nil
     }
-    super.sendEvent(event)
+    super.close()
   }
 
   /// Tells `dartcv4` (behind `opencv_core`) where the OpenCV binary actually is.
