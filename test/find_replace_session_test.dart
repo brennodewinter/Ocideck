@@ -197,4 +197,35 @@ void main() {
     find.close();
     expect(rebuilds, greaterThan(beforeClose));
   });
+
+  test(
+    'typen in het zoekveld telt mee zonder naar een treffer te springen',
+    () {
+      final find = sessionFor('een kat, twee kat, drie kat');
+      find.open(showReplace: false);
+      final revealsBefore = revealed.length;
+
+      find.onQueryFieldChanged('kat');
+
+      expect(find.matchCount, 3);
+      expect(find.matchIndex, 0);
+      expect(
+        revealed.length,
+        revealsBefore,
+        reason:
+            'typen in het zoekveld mag de focus niet naar het document trekken',
+      );
+    },
+  );
+
+  test('typen in het zoekveld met lege vraag geeft geen treffers', () {
+    final find = sessionFor('kat kat');
+    find.open(showReplace: false);
+    find.onQueryFieldChanged('kat');
+    expect(find.matchCount, 2);
+
+    find.onQueryFieldChanged('');
+    expect(find.matchCount, 0);
+    expect(find.matchIndex, -1);
+  });
 }

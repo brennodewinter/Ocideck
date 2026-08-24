@@ -151,6 +151,22 @@ class DocumentPdfWidgets {
           }
           continue;
         }
+        // De alinea is te lang om als geheel te binden, maar de kop mag toch
+        // niet als wees onderaan staan. Splits de alinea op woordgrens: het
+        // eerste deel reist met de kop mee, de rest volgt los (#1758).
+        if (bound is PdfParagraphBlock) {
+          final pair = splitParagraphAtWordBoundary(bound, _headingGuardChars);
+          if (pair != null) {
+            widgets.add(_headingBoundToNext(block, pair.first, tight: tight));
+            widgets.add(_widget(pair.rest, tight: true));
+            index++;
+            final rest = split?.rest;
+            if (rest != null) widgets.add(_widget(rest, tight: tight));
+            final sp = _spaceAfter(next, tight: tight);
+            if (sp > 0) widgets.add(pw.SizedBox(height: sp));
+            continue;
+          }
+        }
       }
       widgets.add(_widget(block, tight: tight));
       final spacing = _spaceAfter(block, tight: tight);
@@ -241,12 +257,22 @@ class DocumentPdfWidgets {
     );
   }
 
-  /// De grens waarboven een blok niet meer aan zijn kop wordt gebonden.
+  /// De grens waarboven een blok niet meer als geheel aan zijn kop wordt
+  /// gebonden. Ruwweg vijftien regels op A4 — ruim genoeg voor bijna elke
+  /// alinea in een notitie of rapport. Boven deze grens wordt een alinea
+  /// op woordgrens gesplitst: het eerste deel reist met de kop mee in een
+  /// [pw.Inseparable], de rest volgt los. Zo staat een kop nooit als wees
+  /// onderaan een bladzijde (#1758).
   ///
-  /// Ruwweg vijf regels op A4. Groter binden mag van `MultiPage` best, maar dan
-  /// schuift er een gat van diezelfde hoogte voor de kop in de plaats — en een
-  /// half leeg blad is zichtbaarder dan een verweesde kop.
-  static const _keepTogetherChars = 400;
+  /// Groter binden mag van `MultiPage` best, maar dan schuift er een gat van
+  /// diezelfde hoogte voor de kop in de plaats — en een half leeg blad is
+  /// zichtbaarder dan een verweesde kop.
+  static const _keepTogetherChars = 1200;
+
+  /// Hoeveel tekens van een lange alinea meereizen met de kop in de
+  /// [pw.Inseparable] — ruwweg drie regels, genoeg om de kop nooit alleen
+  /// te laten staan.
+  static const _headingGuardChars = 200;
 
   static int _spanTextLength(List<PdfSpan> spans) =>
       spans.fold<int>(0, (sum, span) => sum + span.text.length);

@@ -174,7 +174,11 @@ const Map<String, int> fileSizeBaseline = {
   // twee regels doordat twee sessies tegelijk in dit bestand werkten. Zie de kop
   // van [fileSizeBaseline].
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
-  'lib/widgets/document_editor_screen.dart': 1150,
+  // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
+  'lib/widgets/document_editor_screen.dart': 1153,
+  // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
+  // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
+  'lib/services/pdf/document_pdf_widgets.dart': 1026,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -295,7 +299,8 @@ const Map<String, int> classSizeBaseline = {
   // staat) en `setState` (een callback). Klasse staat op 1115 (was 1228); net
   // als bij het bestand met lucht erboven, om dezelfde reden.
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1150,
+  // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1153,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':

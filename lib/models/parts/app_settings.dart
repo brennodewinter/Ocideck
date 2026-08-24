@@ -94,8 +94,9 @@ class AppSettings {
   final bool documentStyleEnforced;
 
   /// Documentmodus: laat elk hoofdstuk (een H1-kop) bij het exporteren/afdrukken
-  /// op een nieuwe pagina beginnen. Standaard uit. Puur een export-/afdrukkeuze;
-  /// het raakt de `.md` niet.
+  /// op een nieuwe pagina beginnen. Standaard aan — een hoofdstuk opent een nieuw
+  /// vel, zoals een lezer verwacht. Puur een export-/afdrukkeuze; het raakt de
+  /// `.md` niet.
   final bool documentChapterPageBreak;
 
   /// Snijtekens rond het snijformaat in de LaTeX/PDF-export.
@@ -347,7 +348,7 @@ class AppSettings {
     this.selectedAppAppearanceProfileName = 'Europa',
     this.documentDefaultStyle,
     this.documentStyleEnforced = false,
-    this.documentChapterPageBreak = false,
+    this.documentChapterPageBreak = true,
     this.documentCropMarks = false,
     this.documentEditorMaxWidth = 1100,
     this.documentEditorWidth = DocumentEditorWidth.page,
