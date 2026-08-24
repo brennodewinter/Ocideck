@@ -19,6 +19,8 @@ import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/temp_dir.dart';
+
 /// Twee gedeelde handelingen uit `lib/widgets/shell/shell_actions.dart` die
 /// allebei op nul uitgevoerde regels stonden: `presentDeck` (de knop, het
 /// 'alleen afspelen'-scherm en het commandopalet komen er alle drie op uit) en
@@ -577,7 +579,7 @@ void main() {
     'een vuil documenttabblad noemt "document", niet "presentatie" (#1614)',
     (tester) async {
       final temp = Directory.systemTemp.createTempSync('doc_label');
-      addTearDown(() => temp.deleteSync(recursive: true));
+      addTearDown(() => deleteTempDir(temp));
       final path = p.join(temp.path, 'memo.md');
       File(path).writeAsStringSync('# Oorspronkelijk\n');
 
@@ -611,7 +613,11 @@ void main() {
     tester,
   ) async {
     final temp = Directory.systemTemp.createTempSync('doc_save');
-    addTearDown(() => temp.deleteSync(recursive: true));
+    // Windows houdt een net ingelezen bestand nog even vast (errno 32); de
+    // hulp probeert het daar een paar keer opnieuw en geeft daarna stil op —
+    // een achtergebleven map in systemTemp is onschadelijk, een gooiende
+    // tearDown maakt een geslaagde test rood.
+    addTearDown(() => deleteTempDir(temp));
     final path = p.join(temp.path, 'memo.md');
     File(path).writeAsStringSync('# Oorspronkelijk\n');
 

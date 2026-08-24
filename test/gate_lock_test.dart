@@ -17,6 +17,16 @@ void main() {
   late Directory sandbox;
   final script = File('scripts/gate_lock.sh').absolute.path;
 
+  // `gate_lock.sh` is een POSIX-shellscript, en `Process.run` op Windows start
+  // dat niet ("%1 is not a valid Win32 application"). Het slot bestaat voor de
+  // machine waarop `make check` draait — macOS en Linux; geen enkele poort die
+  // merges gate't draait Windows. Het onder Git Bash toetsen zou een draaipunt
+  // toetsen dat niemand gebruikt, dus slaan we over met een reden (zelfde keuze
+  // als in release_auto_version_test.dart).
+  final skipOnWindows = Platform.isWindows
+      ? 'gate_lock.sh is POSIX-only; Process.run start geen .sh op Windows'
+      : null;
+
   setUp(() {
     sandbox = Directory.systemTemp.createTempSync('gate_lock_test');
     // Geen symlink: dan is het slot van deze map alleen, precies zoals een
@@ -55,7 +65,7 @@ void main() {
 
     final lines = File(log).readAsLinesSync();
     expect(lines, ['A-start', 'A-eind', 'B-start', 'B-eind']);
-  });
+  }, skip: skipOnWindows);
 
   test('een slot van een verdwenen proces houdt niemand tegen', () async {
     // Zonder deze tak blokkeert één afgebroken run iedereen tot iemand het slot
@@ -71,7 +81,7 @@ void main() {
     expect(result.exitCode, 0);
     expect(result.stdout, contains('gedraaid'));
     expect(result.stderr, contains('bestaat niet meer'));
-  });
+  }, skip: skipOnWindows);
 
   test('de uitkomst van het commando is de uitkomst van het slot', () async {
     final result = await run(['sh', '-c', 'exit 3']);
@@ -85,7 +95,7 @@ void main() {
       isFalse,
       reason: 'ook na een fout hoort het slot weer vrij te zijn',
     );
-  });
+  }, skip: skipOnWindows);
 
   test('OCIDECK_NO_GATE_LOCK slaat het slot over', () async {
     final result = await run(
@@ -98,7 +108,7 @@ void main() {
       Directory('${sandbox.path}/.dart_tool/ocideck-gate.lock').existsSync(),
       isFalse,
     );
-  });
+  }, skip: skipOnWindows);
 
   test('wachten heeft een grens en zegt waar het slot staat', () async {
     final lock = Directory('${sandbox.path}/.dart_tool/ocideck-gate.lock')
@@ -119,12 +129,12 @@ void main() {
       contains(lock.path),
       reason: 'de melding moet zeggen wélk slot je desnoods weghaalt',
     );
-  });
+  }, skip: skipOnWindows);
 
   test('zonder commando is het een gebruiksfout, geen stilte', () async {
     final result = await run([]);
     expect(result.exitCode, 2);
-  });
+  }, skip: skipOnWindows);
 
   /// De CMake-stempel. Elke worktree noemt dezelfde fysieke buildmap anders,
   /// en CMake weigert dan hard in plaats van te herconfigureren. Serialiseren
@@ -158,7 +168,7 @@ void main() {
       reason: 'zonder _deps volgt een herdownload, en die weigert GitHub',
     );
     expect(result.stderr, contains('/ergens/anders'));
-  });
+  }, skip: skipOnWindows);
 
   test('een cache van deze worktree blijft staan', () async {
     final build = writeCache(
@@ -174,7 +184,7 @@ void main() {
       reason: 'onnodig wissen kost een volledige herbouw van OpenCV',
     );
     expect(Directory('${build.path}/CMakeFiles').existsSync(), isTrue);
-  });
+  }, skip: skipOnWindows);
 
   test('de bouw laat kernen vrij', () async {
     // Zonder rem bouwt CMake met zoveel taken als er kernen zijn; op een
@@ -191,7 +201,7 @@ void main() {
     );
     expect(level, greaterThanOrEqualTo(2));
     if (cores > 6) expect(level, lessThan(cores));
-  });
+  }, skip: skipOnWindows);
 
   test('een eigen rem blijft staan', () async {
     final result = await run(
@@ -200,5 +210,5 @@ void main() {
     );
 
     expect(result.stdout, contains('niveau=3'));
-  });
+  }, skip: skipOnWindows);
 }
