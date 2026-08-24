@@ -1612,6 +1612,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 cheSmoH tlhIngan text e-readers, tablets, phones. mIqHom navigation, qon nach.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'The page setup in this document contains invalid values and was ignored. Your settings are used instead.',
   'Het bestand is gewijzigd door een ander programma.':

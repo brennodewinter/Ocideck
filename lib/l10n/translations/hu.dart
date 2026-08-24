@@ -1636,6 +1636,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Egy ePub 3 újraformázható szöveggel e-olvasókhoz, tabletekhez és telefonokhoz. A címsorok navigációvá válnak, a jegyzetek hátul vannak.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Az oldalbeállítás ebben a dokumentumban érvénytelen értékeket tartalmaz és figyelmen kívül lett hagyva. A beállításait használjuk.',
   'Het bestand is gewijzigd door een ander programma.':

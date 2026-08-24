@@ -1649,6 +1649,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 cum texto refluente pro lectoribus electronicis, tabulis et telephonis. Capita navigationem fiunt, notae ad finem ponuntur.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Dispositio paginarum huius documenti valores invalidos continet et neglecta est. Institutiones tuae adoptantur.',
   'Het bestand is gewijzigd door een ander programma.':

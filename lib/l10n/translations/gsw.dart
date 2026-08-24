@@ -1637,6 +1637,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'En ePub 3 mit umflüüssendem Text für E-Reader, Tablets und Telefon. Überschrifte wärde zue Navigation, Note stönd hinte.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'D Syte-Ystellig i däm Dokumänt hät ungültigi Wärt und isch ignoriert worde. Dini Ystellige wärded verwändet.',
   'Het bestand is gewijzigd door een ander programma.':

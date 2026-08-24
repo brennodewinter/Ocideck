@@ -1653,6 +1653,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 b\'test li jerġa\' jifla għal e-readers, tablets u telefowns. L-intestaturi jsiru navigazzjoni, in-noti jkunu l-aħħar.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'It-twaqqif tal-paġna f\'dan id-dokument fih valuri invalidi u ġie injorat. Qed jintużaw is-settings tiegħek.',
   'Het bestand is gewijzigd door een ander programma.':

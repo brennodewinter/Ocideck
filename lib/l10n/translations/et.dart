@@ -1628,6 +1628,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'ePub 3 ümbervoolava tekstiga e-lugejatele, tahvelarvutitele ja telefonidele. Pealkirjad muutuvad navigatsiooniks, märkused on tagumises osas.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'Selle dokumendi lehekülje seadistus sisaldab vigaseid väärtusi ja need eirati. Kasutatakse teie sätteid.',
   'Het bestand is gewijzigd door een ander programma.':

@@ -673,6 +673,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
+      'Un ePub 3 ku teksto reflowable pa e-reader, tablet i telefone. Titular ta bira navegashon, nota ta bai patras.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
       'E paginasetting den e dokumento aki tin balor inválido i a ignor\'e. Bo settingnan ta wòrdu usá.',
   'Het bestand is gewijzigd door een ander programma.':
