@@ -56,6 +56,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
+import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
 import '../platform/clipboard_html.dart';
@@ -271,34 +272,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     });
   }
 
-  /// Markeer in de Overzicht-rail de kop waaronder de markdown-caret staat.
-  void _syncOutlineToMarkdownCaret() {
-    final sel = _controller.selection;
-    if (!sel.isValid) return;
-    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
-  }
-
-  /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
-  void _syncOutlineToVisualCaret(String plain, int plainOffset) {
-    _visualCaret = plainOffset;
-    _setActiveOutlineIndex(
-      activeOutlineIndexInPlainText(
-        buildMarkdownOutline(_controller.text),
-        plain,
-        plainOffset,
-      ),
-    );
-  }
-
-  void _setActiveOutlineFromMarkdownOffset(int offset) {
-    _setActiveOutlineIndex(
-      activeOutlineIndexForOffset(
-        buildMarkdownOutline(_controller.text),
-        offset,
-      ),
-    );
-  }
-
   /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
   /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt.
   ///
@@ -427,6 +400,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      documentProvider.select(
+        (state) => (state.findRequestId, state.findShowReplace),
+      ),
+      (previous, next) {
+        if (previous?.$1 != next.$1 && next.$1 > 0) {
+          _openFind(showReplace: next.$2);
+        }
+      },
+    );
     // Wanneer de body van búiten de editor verandert (ongedaan maken/opnieuw),
     // de controller bijwerken. Bij gewoon typen is de body na de `edit` al gelijk
     // aan de controllertekst, dus dan doet dit niets — geen terugkoppellus. Een

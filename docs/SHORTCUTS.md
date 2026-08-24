@@ -14,8 +14,8 @@
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |
-| `Ctrl/Cmd + F` | Find (visual mode: the find & replace dialog; markdown mode: the in-editor bar — see below) |
-| `Ctrl/Cmd + H` | Find & replace (visual mode: dialog; markdown mode: in-editor bar — see below) |
+| `Ctrl/Cmd + F` | Find (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
+| `Ctrl/Cmd + H` | Find & replace (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (document mode) | Zoom the writing surface in · out |
 | `Ctrl/Cmd + 0` (document mode) | Back to actual size |

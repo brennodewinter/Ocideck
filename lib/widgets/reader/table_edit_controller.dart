@@ -31,14 +31,26 @@ class TableEditController extends ChangeNotifier {
 
   /// Aangeroepen bij elke inhoudelijke wijziging — één keer per toetsaanslag,
   /// met het volledige raster. De aanroeper serialiseert dat terug naar GFM.
-  final void Function(List<List<String>> rows, List<TableAlign> alignments)
-  onChanged;
+  void Function(List<List<String>> rows, List<TableAlign> alignments) onChanged;
 
   /// Aangeroepen zodra een cel focus krijgt. De eigenaar (de embed-bouwer)
   /// gebruikt dit om Quill's `requestKeyboard` eenmalig over te slaan, zodat de
   /// cel zijn eigen `TextInputConnection` houdt in plaats van dat Quill's
   /// `_TransparentTapGestureRecognizer` die na de tap weer terugkaapt (#1718).
-  final VoidCallback? onCellFocused;
+  VoidCallback? onCellFocused;
+
+  /// Verbindt een bewaard raster opnieuw met de actuele embed-widget.
+  ///
+  /// Quill vervangt zijn embed-knoop bij het terugschrijven. De celcontrollers
+  /// blijven bewust leven, maar hun callbacks moeten dan naar de nieuwe
+  /// widgetstaat wijzen.
+  void reconnect({
+    required void Function(List<List<String>>, List<TableAlign>) onChanged,
+    required VoidCallback? onCellFocused,
+  }) {
+    this.onChanged = onChanged;
+    this.onCellFocused = onCellFocused;
+  }
 
   late List<List<EditorTextController>> _cells;
   late List<List<FocusNode>> _nodes;

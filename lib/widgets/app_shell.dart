@@ -11,11 +11,13 @@ import 'package:path/path.dart' as p;
 import '../l10n/export_block_localization.dart';
 import '../platform/launch_files.dart';
 import '../platform/native_window.dart' show setWillCloseCallback, quitApp;
+import '../platform/native_shortcut_channel.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
 import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
+import '../utils/physical_control_shortcut.dart';
 import '../utils/safe_filename.dart';
 import '../utils/shortcut_label.dart';
 import '../models/asset_origin.dart';
@@ -195,6 +197,7 @@ class AppShell extends ConsumerStatefulWidget {
 
 class _AppShellState extends ConsumerState<AppShell> {
   late final OpenFileChannel _openFileChannel;
+  late final NativeShortcutChannel _nativeShortcuts;
 
   /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
   /// null als er geen staat. De melding is niet zomaar een mededeling maar een
@@ -211,6 +214,9 @@ class _AppShellState extends ConsumerState<AppShell> {
   void initState() {
     super.initState();
     setWillCloseCallback(_onWillClose);
+    _nativeShortcuts = NativeShortcutChannel(
+      () => _requestDocumentFind(showReplace: true),
+    )..start();
     // Warm up the Informatieveiligheid-module state at shell startup so that by
     // the time a deck is opened its `loading` flag has cleared. Without this the
     // very first security-deck open would read the still-loading module and skip
@@ -389,6 +395,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   @override
   void dispose() {
     setWillCloseCallback(() {});
+    _nativeShortcuts.dispose();
     super.dispose();
   }
 
@@ -460,6 +467,14 @@ class _AppShellState extends ConsumerState<AppShell> {
   /// altijd werkt, ongeacht waar de focus zit.
   void _openActive() {
     _openWithSearch(context, ref);
+  }
+
+  void _requestDocumentFind({required bool showReplace}) {
+    ref
+        .read(tabsProvider)
+        .current
+        ?.documentNotifier
+        ?.requestFind(showReplace: showReplace);
   }
 
   bool _dragging = false;
@@ -748,6 +763,16 @@ class _AppShellState extends ConsumerState<AppShell> {
               _openActive,
           const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
               _openActive,
+          const SingleActivator(LogicalKeyboardKey.keyF, control: true): () =>
+              _requestDocumentFind(showReplace: false),
+          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): () =>
+              _requestDocumentFind(showReplace: false),
+          const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
+              _requestDocumentFind(showReplace: true),
+          const ControlHActivator(): () =>
+              _requestDocumentFind(showReplace: true),
+          const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
+              _requestDocumentFind(showReplace: true),
         },
         child: FocusScope(
           autofocus: true,
@@ -800,6 +825,12 @@ class _AppShellState extends ConsumerState<AppShell> {
     newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
     open: _openActive,
     save: _saveActive,
+    find: ref.watch(tabsProvider).current?.documentNotifier == null
+        ? null
+        : () => _requestDocumentFind(showReplace: false),
+    findReplace: ref.watch(tabsProvider).current?.documentNotifier == null
+        ? null
+        : () => _requestDocumentFind(showReplace: true),
     settings: () => SettingsDialog.show(context),
     userGuide: () => DocumentReaderScreen.open(
       context,

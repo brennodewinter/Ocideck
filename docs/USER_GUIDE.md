@@ -4356,8 +4356,10 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   should know you are in the source, otherwise you cannot know how to get back.
   Inside a **table** every cell reads the way it prints — `**bold**` is bold and
   `` `code` `` sits on a code chip. Only the cell the caret is in shows its
-  Markdown, because that is what you are editing at that moment.
-  *(Changed 2026-08-08, extended 2026-08-19.)*
+  Markdown, because that is what you are editing at that moment. Typing,
+  Backspace and navigation keep that cell, caret and scroll position in place;
+  the table is not reopened for every keystroke.
+  *(Changed 2026-08-08, extended 2026-08-24.)*
 - **Source** puts the raw Markdown next to a live rendered preview (stacked when
   the window is too narrow for two readable columns), with double-click editing of
   charts and tables in the preview. Each line has a **line number** on the left:
@@ -4371,6 +4373,10 @@ setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
   something in the source *at one spot*. Character-exact precision is not always
   possible; if you sit inside a formatting marker the caret lands at its start.
   *(Added 2026-08-19.)*
+- **Find and replace works from anywhere in the document tab.** Ctrl/Cmd+F
+  opens Find and Ctrl/Cmd+H opens Find and replace, even when the tab bar or
+  toolbar still has focus. Replacing text keeps the caret and view at the place
+  where you were working instead of returning to the top.
 - **Paste keeps structure from a web editor.** Cmd/Ctrl+V in Visual and Source
   still prefers an image, then a spreadsheet table. After that it reads the
   **HTML** variant of the clipboard when a web page put one there (nested lists,

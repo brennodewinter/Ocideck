@@ -231,6 +231,8 @@ class WysiwygNotesField extends StatefulWidget {
 }
 
 class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
+  final TableEmbedControllerStore _tableEditors = TableEmbedControllerStore();
+
   Future<void> _pasteSanitized() async {
     if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
       return;
@@ -307,6 +309,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   ),
                   TableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,
+                    controllerStore: _tableEditors,
                   ),
                   const DividerEmbedBuilder(),
                   const TocEmbedBuilder(),
@@ -327,6 +330,12 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _tableEditors.dispose();
+    super.dispose();
   }
 }
 

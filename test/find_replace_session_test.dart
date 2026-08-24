@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/text_search.dart';
 import 'package:ocideck/widgets/editors/find_replace_session.dart';
@@ -103,6 +104,7 @@ void main() {
 
   test('alles vervangen laat niets gemarkeerd achter', () {
     final find = sessionFor('kat kat kat');
+    controller.selection = const TextSelection.collapsed(offset: 7);
     find.open(showReplace: true);
     find
       ..setQuery('kat')
@@ -113,6 +115,11 @@ void main() {
     expect(controller.text, 'hond hond hond');
     expect(find.matchCount, 0);
     expect(find.matchIndex, -1);
+    expect(
+      controller.selection.baseOffset,
+      9,
+      reason: 'de schrijfplek reist mee met de vervangingen ervoor',
+    );
   });
 
   test('alles vervangen zonder vraag raakt de tekst niet', () {

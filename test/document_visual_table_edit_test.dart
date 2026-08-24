@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
+import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 
 /// De visuele stand blijft staan als je in een tabel typt (#1565).
 ///
@@ -31,8 +32,11 @@ Een alinea vooraf.
   /// De editor met een ouder die op de bron-controller meeluistert — zoals het
   /// documentscherm doet. Zonder die herbouw ziet de test de terugval niet, want
   /// de stand wordt bij het bouwen bepaald.
-  Future<TextEditingController> pump(WidgetTester tester) async {
-    final controller = TextEditingController(text: bron);
+  Future<TextEditingController> pump(
+    WidgetTester tester, [
+    String source = bron,
+  ]) async {
+    final controller = TextEditingController(text: source);
     addTearDown(controller.dispose);
     await tester.pumpWidget(
       MaterialApp(
@@ -109,6 +113,119 @@ Een alinea vooraf.
   testWidgets('een gewone bewerking landt gewoon in de bron', (tester) async {
     final controller = await typeInCell(tester, 'Aapje');
     expect(controller.text, contains('| Aapje | Tester |'));
+    expect(find.byType(QuillEditor), findsOneWidget);
+  });
+
+  testWidgets('aanslag voor aanslag blijft de cursor achter het woord', (
+    tester,
+  ) async {
+    await pump(tester);
+    var cell = find.widgetWithText(TextField, 'Aap');
+    await tester.showKeyboard(cell);
+
+    for (final value in const ['Aapj', 'Aapje', 'Aapjes']) {
+      await tester.enterText(cell, value);
+      await tester.pump();
+      await tester.pump();
+      cell = find.widgetWithText(TextField, value);
+      final field = tester.widget<TextField>(cell);
+      expect(field.controller!.selection.baseOffset, value.length);
+      expect(field.focusNode!.hasFocus, isTrue);
+    }
+  });
+
+  testWidgets('typen in een tabel onderaan houdt de scrollpositie vast', (
+    tester,
+  ) async {
+    final long =
+        '${List.generate(80, (i) => 'Regel $i.').join('\n\n')}\n\n$bron';
+    await pump(tester, long);
+    final surface = tester.widget<WysiwygNotesField>(
+      find.byType(WysiwygNotesField),
+    );
+    surface.scrollController.jumpTo(
+      surface.scrollController.position.maxScrollExtent,
+    );
+    await tester.pump();
+    final before = surface.scrollController.offset;
+
+    await tester.enterText(find.widgetWithText(TextField, 'Aap'), 'Aapje');
+    await tester.pump();
+    await tester.pump();
+
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+    );
+  });
+
+  testWidgets('een lage cel aanklikken en bewerken houdt die cel in beeld', (
+    tester,
+  ) async {
+    final rows = List.generate(
+      32,
+      (i) => '| $i | ${'Lange wijziging $i. ' * 5} |',
+    ).join('\n');
+    final source =
+        '''
+${List.generate(80, (i) => 'Regel $i.').join('\n\n')}
+
+| Versie | Wijziging |
+| --- | --- |
+$rows
+''';
+    final sourceController = await pump(tester, source);
+    final surface = tester.widget<WysiwygNotesField>(
+      find.byType(WysiwygNotesField),
+    );
+    surface.scrollController.jumpTo(
+      surface.scrollController.position.maxScrollExtent,
+    );
+    await tester.pump();
+
+    final lastCell = find.byType(TextField).last;
+    final before = surface.scrollController.offset;
+    await tester.tap(lastCell);
+    await tester.pump();
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+      reason: 'alleen focus pakken mag de lange tabel niet omhoog trekken',
+    );
+
+    final field = tester.widget<TextField>(lastCell);
+    final original = field.controller!.text;
+    await tester.enterText(lastCell, '${original}x');
+    await tester.pump();
+    await tester.pump();
+
+    final updatedField = tester.widget<TextField>(find.byType(TextField).last);
+    expect(updatedField.controller, same(field.controller));
+    expect(updatedField.focusNode, same(field.focusNode));
+    expect(updatedField.focusNode!.hasFocus, isTrue);
+    expect(updatedField.controller!.text, '${original}x');
+    expect(
+      surface.scrollController.offset,
+      moreOrLessEquals(before, epsilon: 1),
+      reason: 'terugschrijven mag Quill niet naar het embed-begin scrollen',
+    );
+    expect(find.byType(QuillEditor), findsOneWidget);
+
+    tester.testTextInput.updateEditingValue(
+      TextEditingValue(
+        text: original,
+        selection: TextSelection.collapsed(offset: original.length),
+      ),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    final afterBackspace = tester.widget<TextField>(
+      find.byType(TextField).last,
+    );
+    expect(afterBackspace.controller, same(field.controller));
+    expect(afterBackspace.focusNode!.hasFocus, isTrue);
+    expect(sourceController.text, contains('| 31 | $original |'));
     expect(find.byType(QuillEditor), findsOneWidget);
   });
 }

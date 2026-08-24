@@ -35,6 +35,43 @@ String? _documentProjectPath(WidgetRef ref) {
 /// staat zelf (zelfde library), zodat de methoden ongewijzigd blijven werken —
 /// hetzelfde patroon als de tabel-part van de documentweergave.
 extension _DocumentEditorLayouts on _DocumentEditorScreenState {
+  /// Markeer in de Overzicht-rail de kop waaronder de markdown-caret staat.
+  void _syncOutlineToMarkdownCaret() {
+    final sel = _controller.selection;
+    if (!sel.isValid) return;
+    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
+  }
+
+  /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
+  void _syncOutlineToVisualCaret(String plain, int plainOffset) {
+    _visualCaret = plainOffset;
+    final sourceOffset = MarkdownCaretMap.of(
+      _controller.text,
+    ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);
+    if (_controller.selection !=
+        TextSelection.collapsed(offset: sourceOffset)) {
+      _applyingExternal = true;
+      _controller.selection = TextSelection.collapsed(offset: sourceOffset);
+      _applyingExternal = false;
+    }
+    _setActiveOutlineIndex(
+      activeOutlineIndexInPlainText(
+        buildMarkdownOutline(_controller.text),
+        plain,
+        plainOffset,
+      ),
+    );
+  }
+
+  void _setActiveOutlineFromMarkdownOffset(int offset) {
+    _setActiveOutlineIndex(
+      activeOutlineIndexForOffset(
+        buildMarkdownOutline(_controller.text),
+        offset,
+      ),
+    );
+  }
+
   /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
   /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
   /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
@@ -436,6 +473,7 @@ Widget _withDocumentShortcuts(
       const SingleActivator(LogicalKeyboardKey.keyF, control: true): onFind,
       const SingleActivator(LogicalKeyboardKey.keyH, meta: true): onReplace,
       const SingleActivator(LogicalKeyboardKey.keyH, control: true): onReplace,
+      const ControlHActivator(): onReplace,
       // Zoomen zoals overal: Cmd/Ctrl met + of −, en 0 terug naar ware grootte.
       // Beide plustoetsen, want op de meeste indelingen zit + op shift-= en
       // levert het toetsenbord `equal` in plaats van `add`.

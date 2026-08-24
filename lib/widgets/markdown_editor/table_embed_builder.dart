@@ -32,9 +32,10 @@ import 'table_sort_actions.dart';
 /// platte rijke-tekstlaag een tabel tot losse woorden maalde, blijft hij nu één
 /// blok.
 class TableEmbedBuilder extends EmbedBuilder {
-  const TableEmbedBuilder({this.onDiscreteEdit});
+  const TableEmbedBuilder({required this.controllerStore, this.onDiscreteEdit});
 
   final VoidCallback? onDiscreteEdit;
+  final TableEmbedControllerStore controllerStore;
 
   @override
   String get key => EmbeddableTable.tableType;
@@ -58,10 +59,12 @@ class TableEmbedBuilder extends EmbedBuilder {
       );
     }
     return _EditableTableEmbed(
+      key: ValueKey('document-table-${embedContext.node.documentOffset}'),
       gfm: gfm,
       profile: profile,
       embedContext: embedContext,
       onDiscreteEdit: onDiscreteEdit,
+      controllerStore: controllerStore,
     );
   }
 }
@@ -71,16 +74,19 @@ class TableEmbedBuilder extends EmbedBuilder {
 /// en de focus kwijtraken.
 class _EditableTableEmbed extends StatefulWidget {
   const _EditableTableEmbed({
+    super.key,
     required this.gfm,
     required this.profile,
     required this.embedContext,
     required this.onDiscreteEdit,
+    required this.controllerStore,
   });
 
   final String gfm;
   final ThemeProfile? profile;
   final EmbedContext embedContext;
   final VoidCallback? onDiscreteEdit;
+  final TableEmbedControllerStore controllerStore;
 
   @override
   State<_EditableTableEmbed> createState() => _EditableTableEmbedState();
@@ -95,37 +101,22 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   @override
   void initState() {
     super.initState();
-    _editor = _makeController(widget.gfm);
+    _editor = _obtainController();
   }
 
   @override
   void didUpdateWidget(_EditableTableEmbed old) {
     super.didUpdateWidget(old);
-    // De bron verandert normaal alleen dóór ons eigen terugschrijven; komt er
-    // van buiten een andere tabel binnen (ongedaan maken, samenwerking), dan
-    // begint de bewerkstaat opnieuw.
-    if (widget.gfm !=
-        encodeMarkdownTable(_editor.rows, alignments: _editor.alignments)) {
-      _editor.dispose();
-      _editor = _makeController(widget.gfm);
-    }
+    _editor = _obtainController();
   }
 
-  TableEditController _makeController(String gfm) {
-    final decoded = decodeMarkdownTableWithAlignment(gfm.split('\n'));
-    return TableEditController(
-      rows: decoded.rows,
-      alignments: decoded.alignments,
-      onChanged: _writeBack,
-      // Quill's _TransparentTapGestureRecognizer accepteert een tap altijd,
-      // ook als de cel's TextField de arena wint. Daardoor firet onSingleTapUp
-      // en roept requestKeyboard() aan, wat Quill's TextInputConnection
-      // heractiveert en de cel's input steelt (#1718). skipRequestKeyboard
-      // laat die ene aanroep overslaan — de cel houdt zijn eigen verbinding.
-      onCellFocused: () =>
-          widget.embedContext.controller.skipRequestKeyboard = true,
-    );
-  }
+  TableEditController _obtainController() => widget.controllerStore.obtain(
+    widget.embedContext.node.documentOffset,
+    widget.gfm,
+    onChanged: _writeBack,
+    onCellFocused: () =>
+        widget.embedContext.controller.skipRequestKeyboard = true,
+  );
 
   /// De tabel die nog naar het document moet; `null` als er niets wacht.
   String? _pending;
@@ -155,13 +146,18 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
     if (gfm == null || gfm == widget.gfm) return;
     final node = widget.embedContext.node;
     if (node.parent == null) return;
+    widget.controllerStore.remember(node.documentOffset, _editor, gfm);
     // De embed heeft lengte 1 in het Quill-document: dit vervangt exact dit
     // blok en laat de rest van de tekst — en de cursor daarbuiten — met rust.
     widget.embedContext.controller.replaceText(
       node.documentOffset,
       1,
       EmbeddableTable(gfm),
-      null,
+      widget.embedContext.controller.selection,
+      // De inhoud van de cel heeft haar eigen tekstverbinding. Als Quill bij
+      // het vervangen van de embed opnieuw focus vraagt, steelt het die
+      // verbinding en trekt het de lange tabel naar het begin.
+      ignoreFocus: true,
     );
   }
 
@@ -203,7 +199,8 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       node.documentOffset,
       1,
       EmbeddableTable(gfm),
-      null,
+      widget.embedContext.controller.selection,
+      ignoreFocus: true,
     );
   }
 
@@ -291,7 +288,6 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
 
   @override
   void dispose() {
-    _editor.dispose();
     super.dispose();
   }
 
@@ -322,6 +318,57 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       ),
     ],
   );
+}
+
+/// Bewaart de celcontrollers buiten de Quill-embed-widget.
+///
+/// Quill maakt die widget opnieuw zodra de Markdown in de embed wijzigt. De
+/// controllers en focusnodes horen bij de tabel, niet bij die vluchtige
+/// widget; zo blijven cursor, selectie en actieve cel per aanslag intact.
+class TableEmbedControllerStore {
+  final Map<int, ({TableEditController controller, String gfm})> _entries = {};
+
+  TableEditController obtain(
+    int documentOffset,
+    String gfm, {
+    required void Function(List<List<String>>, List<TableAlign>) onChanged,
+    required VoidCallback? onCellFocused,
+  }) {
+    final entry = _entries[documentOffset];
+    final current = entry?.controller;
+    final encoded = current == null
+        ? null
+        : encodeMarkdownTable(current.rows, alignments: current.alignments);
+    if (current != null && (entry!.gfm == gfm || encoded == gfm)) {
+      current.reconnect(onChanged: onChanged, onCellFocused: onCellFocused);
+      return current;
+    }
+    current?.dispose();
+    final decoded = decodeMarkdownTableWithAlignment(gfm.split('\n'));
+    final controller = TableEditController(
+      rows: decoded.rows,
+      alignments: decoded.alignments,
+      onChanged: onChanged,
+      onCellFocused: onCellFocused,
+    );
+    _entries[documentOffset] = (controller: controller, gfm: gfm);
+    return controller;
+  }
+
+  void remember(
+    int documentOffset,
+    TableEditController controller,
+    String gfm,
+  ) {
+    _entries[documentOffset] = (controller: controller, gfm: gfm);
+  }
+
+  void dispose() {
+    for (final entry in _entries.values) {
+      entry.controller.dispose();
+    }
+    _entries.clear();
+  }
 }
 
 enum _TimelineActivationChoice { keepOrder, sort }

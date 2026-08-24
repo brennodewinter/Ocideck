@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../utils/text_search.dart';
 import 'markdown_source_controller.dart';
@@ -214,7 +214,13 @@ class FindReplaceSession {
   void replaceCurrent() {
     if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
     final match = _matches[_matchIndex];
-    controller.text = replaceRange(controller.text, match, _replacement);
+    final next = replaceRange(controller.text, match, _replacement);
+    controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(
+        offset: match.start + _replacement.length,
+      ),
+    );
     recount(selectFirst: false);
     if (_matches.isEmpty) return;
     _matchIndex = _matchIndex.clamp(0, _matches.length - 1);
@@ -227,16 +233,48 @@ class FindReplaceSession {
   /// door het hele document laten springen.
   void replaceAll() {
     if (_query.isEmpty) return;
+    final before = controller.selection;
     final result = replaceAllInText(
       controller.text,
       _query,
       _replacement,
       caseSensitive: _caseSensitive,
     );
-    controller.text = result.text;
+    if (result.count == 0) {
+      _matches = const [];
+      _matchIndex = -1;
+      onChanged();
+      syncHighlights();
+      return;
+    }
+    final start = before.isValid
+        ? _offsetAfterReplacements(before.start)
+        : result.text.length;
+    final end = before.isValid
+        ? _offsetAfterReplacements(before.end)
+        : result.text.length;
+    controller.value = TextEditingValue(
+      text: result.text,
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
     _matches = const [];
     _matchIndex = -1;
     onChanged();
     syncHighlights();
+  }
+
+  /// Laat een cursor of selectierand meereizen met alle vervangingen ervoor.
+  /// Staat hij ín een treffer, dan landt hij achter de vervangtekst — dezelfde
+  /// plek waar gewoon overtypen de cursor zou neerzetten.
+  int _offsetAfterReplacements(int offset) {
+    var delta = 0;
+    for (final match in _matches) {
+      if (offset <= match.start) break;
+      if (offset <= match.end) {
+        return match.start + delta + _replacement.length;
+      }
+      delta += _replacement.length - match.length;
+    }
+    return offset + delta;
   }
 }

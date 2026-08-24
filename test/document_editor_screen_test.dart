@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -1061,6 +1062,61 @@ void main() {
     expect(find.text('Vervang alles'), findsOneWidget);
   });
 
+  testWidgets('macOS Ctrl+H opent vervangen via de fysieke H-toets', (
+    tester,
+  ) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('een twee drie'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+    await tester.tap(find.byType(TextField).last);
+    await tester.showKeyboard(find.byType(TextField).last);
+
+    await tester.sendKeyDownEvent(
+      LogicalKeyboardKey.controlLeft,
+      physicalKey: PhysicalKeyboardKey.controlLeft,
+      platform: 'macos',
+    );
+    await tester.sendKeyEvent(
+      LogicalKeyboardKey.backspace,
+      physicalKey: PhysicalKeyboardKey.backspace,
+      platform: 'macos',
+    );
+    await tester.sendKeyUpEvent(
+      LogicalKeyboardKey.controlLeft,
+      physicalKey: PhysicalKeyboardKey.controlLeft,
+      platform: 'macos',
+    );
+    debugDefaultTargetPlatformOverride = null;
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+    expect(find.text('Vervang alles'), findsOneWidget);
+    expect(n.currentState.document!.body, 'een twee drie');
+  });
+
+  testWidgets('een Ctrl+H-aanvraag buiten het schrijfvlak opent vervangen', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('een twee drie'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+    n.requestFind(showReplace: true);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+    expect(find.text('Vervang alles'), findsOneWidget);
+  });
+
   testWidgets('Bron: Vervang alles vervangt elke treffer in de bron', (
     tester,
   ) async {
@@ -1215,6 +1271,42 @@ void main() {
 
     expect(n.currentState.document!.source, contains('vogel'));
     expect(n.currentState.document!.source, isNot(contains('kat')));
+  });
+
+  testWidgets('Visueel: Vervang alles houdt de plek in het document vast', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final source = '${List.filled(60, 'kat regel').join('\n\n')}\n\nSlot.';
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(source));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    var quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+    quill.controller.updateSelection(
+      TextSelection.collapsed(
+        offset: quill.controller.document.toPlainText().indexOf('Slot'),
+      ),
+      ChangeSource.local,
+    );
+    await tester.pump();
+
+    invokeShortcut(tester, LogicalKeyboardKey.keyH, control: true);
+    await tester.pumpAndSettle();
+    final fields = find.descendant(
+      of: find.byType(MarkdownFindBar),
+      matching: find.byType(TextField),
+    );
+    await tester.enterText(fields.first, 'kat');
+    await tester.enterText(fields.at(1), 'vogel');
+    await tester.tap(find.text('Vervang alles'));
+    await tester.pumpAndSettle();
+
+    quill = tester.widget<QuillEditor>(find.byType(QuillEditor));
+    final plain = quill.controller.document.toPlainText();
+    expect(quill.controller.selection.baseOffset, plain.indexOf('Slot'));
   });
 
   testWidgets('Escape sluit de zoekbalk', (tester) async {

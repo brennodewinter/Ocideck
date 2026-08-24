@@ -1921,6 +1921,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Lange documenten blijven op hun plek tijdens tabelwerk en vervangen
+  (2026-08-24).** Een tabelblok dat na elke aanslag werd teruggeschreven houdt
+  nu dezelfde bewerkidentiteit, focus en documentselectie; daardoor springen
+  celcursor en schrijfvlak niet meer naar het begin en bereikt Backspace niet
+  per ongeluk de broneditor. Zoeken en vervangen is via de actieve documenttab
+  bereikbaar zonder het schrijfvlak eerst focus te geven, en vervangingen laten
+  de bestaande cursor en scrollpositie met de gewijzigde tekst meereizen. Een
+  regressietoets bewaakt daarnaast dat een stijlwissel de documentbrede TLP in
+  frontmatter houdt en niet als zichtbare tekst in de body zet.
+
 - **Inline-wiskunde wordt in de document-PDF nu in de tekstregel gezet
   (#1716).** De PDF herkent dezelfde voorzichtige `$…$`-vorm als het scherm,
   laat valuta, code en losse dollartekens ongemoeid, rendert iedere unieke

@@ -15,6 +15,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -574,6 +575,24 @@ void main() {
     await tester.pumpAndSettle();
     return tab;
   }
+
+  testWidgets('Ctrl+H bereikt een document ook buiten het schrijfvlak', (
+    tester,
+  ) async {
+    await pumpShell(tester, deckOf([bullets('Eerste')]));
+    container.read(tabsProvider.notifier).newDocument();
+    await tester.pumpAndSettle();
+
+    const replace = SingleActivator(LogicalKeyboardKey.keyH, control: true);
+    final shellShortcuts = tester
+        .widgetList<CallbackShortcuts>(find.byType(CallbackShortcuts))
+        .firstWhere((shortcuts) => shortcuts.bindings.containsKey(replace));
+    shellShortcuts.bindings[replace]!();
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MarkdownFindBar), findsOneWidget);
+    expect(find.text('Vervang alles'), findsOneWidget);
+  });
 
   testWidgets(
     'een vuil documenttabblad noemt "document", niet "presentatie" (#1614)',
