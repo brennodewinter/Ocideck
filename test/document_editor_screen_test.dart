@@ -1241,8 +1241,7 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     final source = '${List.filled(60, 'kat regel').join('\n\n')}\n\nSlot.';
-    final n = DocumentNotifier()
-      ..loadDocument(MarkdownDocument.parse(source));
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(source));
     await tester.pumpWidget(harness(n));
     await tester.pump();
 

@@ -240,7 +240,13 @@ class FindReplaceSession {
       _replacement,
       caseSensitive: _caseSensitive,
     );
-    if (result.count == 0) return;
+    if (result.count == 0) {
+      _matches = const [];
+      _matchIndex = -1;
+      onChanged();
+      syncHighlights();
+      return;
+    }
     final start = before.isValid
         ? _offsetAfterReplacements(before.start)
         : result.text.length;

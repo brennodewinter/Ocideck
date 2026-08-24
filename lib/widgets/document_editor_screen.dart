@@ -284,7 +284,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final sourceOffset = MarkdownCaretMap.of(
       _controller.text,
     ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);
-    if (_controller.selection != TextSelection.collapsed(offset: sourceOffset)) {
+    if (_controller.selection !=
+        TextSelection.collapsed(offset: sourceOffset)) {
       _applyingExternal = true;
       _controller.selection = TextSelection.collapsed(offset: sourceOffset);
       _applyingExternal = false;
