@@ -103,9 +103,18 @@ Future<void> writeStringAtomic(File target, String contents) {
 ///
 /// Blocking rather than async on purpose: the one caller must be able to close
 /// its dialog immediately, and an `await` here would make the window wait for
-/// disk IO. Blocking does not prevent the release either — the holder is a
-/// different process. Same shape as `deleteTempDir` in test/support, which
-/// exists for the same errno.
+/// disk IO. Same shape as `deleteTempDir` in test/support, which exists for the
+/// same errno.
+///
+/// **Wat dit níet oplost, en dat is gemeten.** Houdt het eigen proces het doel
+/// open met een leesbeurt die nog moet afronden, dan helpt geen enkele
+/// blokkerende pauze: die houdt juist de isolate bezig die de handle moet
+/// loslaten. Precies dat gebeurt in een widgettest, waar de nep-async van
+/// `testWidgets` de leesbeurt van de voorvertoning nooit laat afronden — de
+/// Windows-CI liet zien dat vier herkansingen daar niets veranderden. De
+/// oplossing zit daar in de toets (`tester.runAsync`), niet hier. Deze
+/// herkansing dekt de andere houder: een proces buiten dit programma, zoals de
+/// virusscanner op een bouwmachine.
 ///
 /// Throws the last error when every attempt failed, so the caller can report
 /// *why* instead of falling silent. [pause] is a test seam so a test does not

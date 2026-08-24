@@ -262,6 +262,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(test): de twee rotatietoetsen op Windows toetsten de testomgeving, niet
+  de app. Binnen `testWidgets` draait de echte gebeurtenislus niet, dus de
+  asynchrone leesbeurt waarmee de voorvertoning het bestand inleest rondt nooit
+  af — de test houdt de bestandshandle open zolang hij duurt. Op POSIX valt dat
+  niet op (een geopend bestand mag je vervangen), op Windows blokkeert het elke
+  schrijfbeurt, en dus stond daar een rotatietoets rood om iets wat de app niet
+  mankeert. De toets laat die leesbeurt nu afronden (`tester.runAsync`) vóór ze
+  handelt, waarmee ze de situatie van een gebruiker nabootst in plaats van een
+  eigenaardigheid van het testraamwerk.
+
 - fix(crop): een afbeelding draaien op Windows landde niet op schijf, en een
   mislukte schrijfbeurt kon het origineel meenemen. De voorvertoning van het
   bijsnijdvenster houdt het bestand dat ze net las nog even vast; daardoor
