@@ -159,12 +159,36 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     _size = widget.imageSize;
     _fx = widget.focalX.clamp(0.0, 1.0);
     _fy = widget.focalY.clamp(0.0, 1.0);
-    _provider = _cropProvider(widget.imagePath, widget.projectPath);
     _loadOriginalBytes();
+    _provider = _voorvertoning();
     final provider = _provider;
     if (provider != null) {
       _listenToStream(provider);
     }
+  }
+
+  /// De provider voor de voorvertoning.
+  ///
+  /// **Uit het geheugen zodra we de bytes toch al hebben, en dat is geen
+  /// optimalisatie.** `FileImage` laat de engine het bestand openen met
+  /// `ui.ImmutableBuffer.fromFilePath`, en die maakt er op Windows een
+  /// geheugenafbeelding van. Zolang die leeft, weigert Windows het bestand te
+  /// vervangen of te verwijderen — en dit venster toont nu juist het bestand dat
+  /// het straks gaat overschrijven. Daar liep het draaien op stuk: `rename`
+  /// mislukte, de terugval mocht het doel niet verwijderen (errno 32), en de
+  /// schrijffout werd ingeslikt zodat de gebruiker een preview zag draaien en
+  /// een bestand hield dat onveranderd bleef.
+  ///
+  /// De bytes staan er al voor het roteren, dus dezelfde bytes voeden de
+  /// voorvertoning. Eén leesbeurt in plaats van twee, en geen afbeelding op een
+  /// bestand dat we willen herschrijven. Lukt het lezen niet (of gaat het om een
+  /// bundled asset of een `mem:`-pad), dan blijft de oude route staan.
+  ImageProvider? _voorvertoning() {
+    final bytes = _originalBytes;
+    if (bytes != null && !isBundledAssetPath(widget.imagePath)) {
+      return cappedMemoryImage(bytes);
+    }
+    return _cropProvider(widget.imagePath, widget.projectPath);
   }
 
   void _listenToStream(ImageProvider provider) {
@@ -342,7 +366,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
         _stream = null;
         _listener = null;
         _intrinsic = null;
-        _provider = _cropProvider(widget.imagePath, widget.projectPath);
+        _provider = _voorvertoning();
         final provider = _provider;
         if (provider != null) _listenToStream(provider);
       }
