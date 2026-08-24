@@ -190,7 +190,7 @@ Future<void> _applyDocumentEditorZoom(SettingsNotifier notifier, double zoom) {
 _readDocumentSettings(SharedPreferences prefs) => (
   defaultStyle: prefs.getString('documentDefaultStyle'),
   styleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
-  chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? false,
+  chapterPageBreak: prefs.getBool('documentChapterPageBreak') ?? true,
   cropMarks: prefs.getBool('documentCropMarks') ?? false,
   editorMaxWidth: _readDocumentEditorMaxWidth(prefs),
   editorWidth: DocumentEditorWidth.values.firstWhere(
