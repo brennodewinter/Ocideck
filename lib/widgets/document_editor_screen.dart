@@ -262,52 +262,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _find.refreshWhileTyping();
   }
 
-  void _setActiveOutlineIndex(int active) {
-    if (active == _activeOutlineIndex) return;
-    // Nooit setState vanuit een controller/Quill-listener tijdens build.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || active == _activeOutlineIndex) return;
-      setState(() => _activeOutlineIndex = active);
-    });
-  }
-
-  /// Markeer in de Overzicht-rail de kop waaronder de markdown-caret staat.
-  void _syncOutlineToMarkdownCaret() {
-    final sel = _controller.selection;
-    if (!sel.isValid) return;
-    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
-  }
-
-  /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
-  void _syncOutlineToVisualCaret(String plain, int plainOffset) {
-    _visualCaret = plainOffset;
-    final sourceOffset = MarkdownCaretMap.of(
-      _controller.text,
-    ).sourceOffsetOf(plainOffset).clamp(0, _controller.text.length);
-    if (_controller.selection !=
-        TextSelection.collapsed(offset: sourceOffset)) {
-      _applyingExternal = true;
-      _controller.selection = TextSelection.collapsed(offset: sourceOffset);
-      _applyingExternal = false;
-    }
-    _setActiveOutlineIndex(
-      activeOutlineIndexInPlainText(
-        buildMarkdownOutline(_controller.text),
-        plain,
-        plainOffset,
-      ),
-    );
-  }
-
-  void _setActiveOutlineFromMarkdownOffset(int offset) {
-    _setActiveOutlineIndex(
-      activeOutlineIndexForOffset(
-        buildMarkdownOutline(_controller.text),
-        offset,
-      ),
-    );
-  }
-
   /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
   /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt.
   ///
