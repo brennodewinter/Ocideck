@@ -114,7 +114,14 @@ void main() {
         isNotNull,
         reason: 'No Depends line in the .deb control.',
       );
-      for (final lib in ['libgtk-3-0', 'libsecret-1-0', 'liblzma5']) {
+      for (final lib in [
+        'libgtk-3-0',
+        'libsecret-1-0',
+        'liblzma5',
+        // cnativeapi links the tray library since the nativeapi migration
+        // (#1741); it is a system lib the bundle does not carry.
+        'libayatana-appindicator3-1',
+      ]) {
         expect(
           depends,
           contains(lib),
@@ -207,7 +214,12 @@ void main() {
         r'depends=\([^)]*\)',
       ).firstMatch(pkgbuild)?.group(0);
       expect(depends, isNotNull);
-      for (final dep in ['gtk3', 'libsecret', 'xz']) {
+      for (final dep in [
+        'gtk3',
+        'libsecret',
+        'xz',
+        'libayatana-appindicator',
+      ]) {
         expect(depends, contains(dep));
       }
     });

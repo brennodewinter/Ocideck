@@ -811,9 +811,13 @@ The **web and Linux jobs run on the prebaked `ocideck-ci:flutter-<pin>` image** 
 the same image the gates use (see the `ci-image.yml` section of
 [CHECKS.md](CHECKS.md)) — so the build-toolchain and the pinned, sha256-verified
 Flutter are baked in rather than installed on every tag. The Linux job additionally `apt-get install`s
-`liblzma-dev` and `libsecret-1-dev`, which only the desktop build links (via
-`flutter_secure_storage` and lzma) and the test-oriented image does not carry,
-plus `rpm` for the packaging step's `rpmbuild`.
+`liblzma-dev`, `libsecret-1-dev` and `libayatana-appindicator3-dev`, which only
+the desktop build links (via `flutter_secure_storage`, lzma and — since the
+nativeapi migration, #1741 — `cnativeapi`'s tray) and the test-oriented image
+does not carry, plus `rpm` for the packaging step's `rpmbuild`. The appindicator
+module is the one of `cnativeapi`'s four pkg-config requirements that
+`libgtk-3-dev` does not pull in, which is why its absence only surfaced at
+`v0.4.9` — as a CMake error before a single file was compiled.
 Both jobs share the gates' `pub`/`dartcv` `actions/cache` keys: `linux-gate`
 populates them on every push to `main` — a scope a tag build can read — so the
 expensive dartcv OpenCV compile is restored *warm* at tag time instead of rebuilt

@@ -104,13 +104,18 @@ build_deb() {
   # Alternatives on the GTK/secret names bridge Debian and Ubuntu 24.04+, which
   # renamed several libs for the 64-bit time_t transition (libgtk-3-0t64). apt
   # picks the first line that exists on the running distro.
+  #
+  # libayatana-appindicator3-1 joined the list with the nativeapi migration
+  # (#1741): cnativeapi links it on Linux for the tray. It is a system library,
+  # so the Flutter bundle does not carry it — without this line the package
+  # installs and then fails to start on a machine that lacks it.
   cat > "$root/DEBIAN/control" <<EOF
 Package: ocideck
 Version: $VERSION
 Architecture: amd64
 Maintainer: $MAINTAINER
 Installed-Size: $size_kb
-Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5
+Depends: libgtk-3-0t64 | libgtk-3-0, libsecret-1-0 | libsecret-1-0t64, liblzma5, libayatana-appindicator3-1
 Section: office
 Priority: optional
 Homepage: $HOMEPAGE
