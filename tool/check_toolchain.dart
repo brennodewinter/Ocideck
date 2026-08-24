@@ -157,6 +157,8 @@ const versionClaimPatterns = <String, String>{
       r'(?:\*\*Flutter |flutter_macos_)(\d+\.\d+\.\d+)',
   '.github/workflows/ci.yml': r'flutter-version: (\d+\.\d+\.\d+)',
   '.github/workflows/release.yml': r'flutter-version: (\d+\.\d+\.\d+)',
+  '.github/workflows/windows-native-check.yml':
+      r'flutter-version: (\d+\.\d+\.\d+)',
 };
 
 /// Alle versie-eisen in [content] volgens [pattern].

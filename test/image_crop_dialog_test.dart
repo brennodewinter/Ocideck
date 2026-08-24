@@ -84,6 +84,18 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
     expect(find.text('Afbeelding aanpassen'), findsOneWidget);
+    // Laat de échte gebeurtenislus even lopen. De voorvertoning leest dit
+    // bestand asynchroon, en binnen de nep-async van `testWidgets` rondt die
+    // leesbeurt nooit af — de test houdt de handle dus open zolang hij duurt.
+    // Op POSIX merk je daar niets van (een geopend bestand mag je vervangen);
+    // op Windows blokkeert diezelfde handle élke schrijfbeurt, en dan staat een
+    // rotatietoets rood om iets wat de app niet mankeert. `runAsync` is de enige
+    // manier om die leesbeurt af te laten ronden; daarna is de situatie gelijk
+    // aan die van een gebruiker, die seconden later op Klaar drukt.
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    );
+    await tester.pumpAndSettle();
     return uitkomst;
   }
 

@@ -754,11 +754,15 @@ also declares them, but see the [CI note](#continuous-integration).)
   On top of that, once the toolchain is correct, it must also appear in
   [Toolchains of record](#toolchains-of-record), so a pin bump cannot leave this
   document behind.
-- **And every place that names the version must agree** (#721). Fifteen version
-  claims live across seven files — `.tool-versions`, `README.md`,
-  `CONTRIBUTING.md`, `BUILD.md`, this file, and both workflows. Raising the pin
-  in one and forgetting another is a silent failure: the documentation then
-  promises something the machine does not do, which is how #598 started.
+- **And every place that names the version must agree** (#721). The claims live
+  in `.tool-versions`, `README.md`, `CONTRIBUTING.md`, `BUILD.md`, this file,
+  the setup and troubleshooting guides, and the mirror workflows that pin
+  `flutter-version:`; `versionClaimPatterns` in `tool/check_toolchain.dart` is
+  the list, and the gate prints how many claims in how many files it compared —
+  repeating those counts here would be a number this document does not own.
+  Raising the pin in one place and forgetting another is a silent failure: the
+  documentation then promises something the machine does not do, which is how
+  #598 started.
 - **A bold version is a requirement; a code-quoted one is a quotation.** That
   distinction is what lets these documents keep telling their own history —
   "the machine ran 3.44.2 while three documents named `3.44.6`" must *not* move
@@ -1955,20 +1959,25 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   the `push` trigger covers `.github/pinned-ci-versions.json`. The same one-time
   dispatch applies to `ci-image.yml`.
 
-### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
+### `.forgejo/workflows/linux-build.yml` — on demand, **and after a merge that can break the native build**
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
   build dependencies; `flutter build linux --release`, then
   `check_bundled_docs_fresh.dart build/linux` (the same freshness gate
   `check-web` runs — a persistent runner's incremental build must not ship docs
   older than `docs/`), and uploads the bundle as the `ocideck-linux-x64` run
   artifact. This is a build, not a gate: it proves the Linux target compiles and
-  packages, nothing more — which is why it stopped running on every push to
-  `main` (#790). It cost 17.5 minutes of
-  runner time per merge, and `release.yml` on the GitHub mirror already builds
-  Linux, macOS and Windows on every `v*` tag. Start it by hand when you want a
-  bundle without cutting a tag.
+  packages, nothing more. #790 took it off every push to `main` — 17.5 minutes
+  of runner time per merge, while `release.yml` on the mirror builds all three
+  platforms on every `v*` tag anyway. That argument held for the *packaging* and
+  not for the *building*: no gate builds a desktop app, so a native break first
+  surfaced at tag time, which is exactly how `v0.4.9` ended up with no release
+  (see [`make check-linux-deps`](#make-check-linux-deps)). It therefore runs
+  again after a merge to `main`, but only when `pubspec.yaml`, `pubspec.lock`,
+  `.tool-versions`, `linux/`, `third_party/` or the CI image changed — the
+  inputs that can break a native build. Ordinary Dart work does not trigger it.
+  Start it by hand when you want a bundle without cutting a tag.
 
-### `.forgejo/workflows/macos-build.yml` — on demand (`workflow_dispatch`)
+### `.forgejo/workflows/macos-build.yml` — on demand, **and after a merge that can break the native build**
 - **build-macos** — runs on a registered **Mac** runner (`runs-on: macos`,
   host mode), not on the server: Apple licenses macOS for Apple hardware only,
   so there is no macOS job the Linux server could legitimately run. The job
@@ -1977,8 +1986,40 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   `check_bundled_docs_fresh.dart build/macos` (the persistent Mac runner is
   exactly where an incremental build could carry stale docs), and uploads the
   `.app` (zipped with `ditto`, which preserves what a plain zip destroys) as the
-  `ocideck-macos` run artifact. On demand for the same reason as the Linux
-  build (#790). When no Mac runner is online the run waits.
+  `ocideck-macos` run artifact. Like the Linux build it also runs after a merge
+  to `main` that touched `pubspec.yaml`, `pubspec.lock`, `.tool-versions`,
+  `macos/` or `third_party/` — the same reasoning, the same failure it prevents.
+  When no Mac runner is online the run waits.
+
+### `.forgejo/workflows/toolchain-rehearsal.yml` — on a pull request that changes `.tool-versions`
+- **rehearsal** — dispatches the mirror's full `ci.yml` against *this branch*
+  and waits for it, so a Flutter bump is rehearsed on all three platforms
+  **before** the merge instead of discovered at tag time. The forge's own gates
+  run `flutter test` on Linux and macOS; they build nothing and they never see
+  Windows. A toolchain bump is the one change that can break the build on all
+  three at once — a different compiler, a different engine, different generated
+  build files — so it is the one change worth an hour of mirror CI up front.
+- It uses the same `GH_DISPATCH_TOKEN` the release chain uses to start the
+  Windows build. A pull request from a fork has no secrets: the job then warns
+  and exits 0 rather than turning red for something the contributor cannot fix.
+- **Advisory, not a lock.** Branch protection on `main` requires only
+  `static-gate`. This run shows up as its own status and fails visibly; put it
+  in the required checks if you want it blocking.
+
+### `.github/workflows/windows-native-check.yml` — after a merge that can break the native build
+- **build** — `flutter build windows --release` on the mirror, with the pinned
+  toolchain, when `pubspec.yaml`, `pubspec.lock`, `.tool-versions`, `windows/`
+  or `third_party/` changed. Windows is the platform with no machine on this
+  forge, so without this the first Windows build of a change was the release
+  chain — and Windows has the same history as Linux here (an MSVC clash with
+  dartcv4's prebuilt OpenCV once forced a `windows-2022` pin, #870).
+- It builds and throws the result away: this is a check, not a delivery. The
+  bundle users get still comes from `release.yml`, on a tag.
+
+The three path filters are themselves guarded by
+`test/native_build_triggers_test.dart`: a build that no longer fires guards
+nothing, and that must not be able to happen quietly. `.tool-versions` is on
+every list because a *bare* pin bump touches neither pubspec file.
 
 ### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
 One tag, one release. Not a gate: everything here assumes `make check` was
