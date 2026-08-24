@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -1064,6 +1065,8 @@ void main() {
   testWidgets('macOS Ctrl+H opent vervangen via de fysieke H-toets', (
     tester,
   ) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -1081,7 +1084,7 @@ void main() {
     );
     await tester.sendKeyEvent(
       LogicalKeyboardKey.backspace,
-      physicalKey: PhysicalKeyboardKey.keyH,
+      physicalKey: PhysicalKeyboardKey.backspace,
       platform: 'macos',
     );
     await tester.sendKeyUpEvent(
@@ -1089,6 +1092,7 @@ void main() {
       physicalKey: PhysicalKeyboardKey.controlLeft,
       platform: 'macos',
     );
+    debugDefaultTargetPlatformOverride = null;
     await tester.pumpAndSettle();
 
     expect(find.byType(MarkdownFindBar), findsOneWidget);

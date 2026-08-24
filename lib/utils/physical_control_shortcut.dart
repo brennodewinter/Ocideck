@@ -1,34 +1,39 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-/// Ctrl-sneltoets die de fysieke lettertoets volgt.
+/// Ctrl+H-sneltoets die de macOS-Backspacevertaling opvangt.
 ///
 /// macOS vertaalt Ctrl+H vóór Flutter naar de logische Backspace-toets. Een
 /// gewone [SingleActivator] ziet daardoor geen H en laat de tekst verwijderen.
-/// De fysieke toets blijft wel H; die is voor deze klassieke sneltoets de
-/// betrouwbare identiteit.
-class PhysicalControlActivator extends ShortcutActivator {
-  const PhysicalControlActivator(this.key);
-
-  final PhysicalKeyboardKey key;
+/// Meestal blijft de fysieke toets H; sommige invoerroutes leveren echter ook
+/// fysiek Backspace. Beide vormen horen bij dezelfde klassieke sneltoets.
+class ControlHActivator extends ShortcutActivator {
+  const ControlHActivator();
 
   @override
   bool accepts(KeyEvent event, HardwareKeyboard state) {
     if (event is! KeyDownEvent && event is! KeyRepeatEvent) return false;
-    return event.physicalKey == key &&
-        state.isControlPressed &&
-        !state.isAltPressed &&
-        !state.isMetaPressed &&
-        !state.isShiftPressed;
+    if (!state.isControlPressed ||
+        state.isAltPressed ||
+        state.isMetaPressed ||
+        state.isShiftPressed) {
+      return false;
+    }
+    if (event.physicalKey == PhysicalKeyboardKey.keyH) return true;
+    // Afhankelijk van de macOS-invoerroute gaat niet alleen de logische H,
+    // maar ook de fysieke identiteit verloren en ontvangt Flutter Backspace.
+    // Met ingehouden Ctrl is dit dezelfde gedocumenteerde Ctrl+H-sneltoets.
+    return defaultTargetPlatform == TargetPlatform.macOS &&
+        event.logicalKey == LogicalKeyboardKey.backspace;
   }
 
   @override
-  String debugDescribeKeys() => 'Control + ${key.debugName ?? key.usbHidUsage}';
+  String debugDescribeKeys() => 'Control + H';
 
   @override
-  bool operator ==(Object other) =>
-      other is PhysicalControlActivator && other.key == key;
+  bool operator ==(Object other) => other is ControlHActivator;
 
   @override
-  int get hashCode => Object.hash(PhysicalControlActivator, key);
+  int get hashCode => 0x4354524c48;
 }

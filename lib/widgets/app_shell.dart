@@ -763,7 +763,7 @@ class _AppShellState extends ConsumerState<AppShell> {
               _requestDocumentFind(showReplace: false),
           const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
               _requestDocumentFind(showReplace: true),
-          const PhysicalControlActivator(PhysicalKeyboardKey.keyH): () =>
+          const ControlHActivator(): () =>
               _requestDocumentFind(showReplace: true),
           const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
               _requestDocumentFind(showReplace: true),
