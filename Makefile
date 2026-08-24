@@ -708,6 +708,19 @@ sbom-verify:
 
 # Project-convention guard: no print() (use the logger in lib/utils/log.dart) and
 # no NEW bare `catch (_)` (a downward-only ratchet; see the script's baseline).
+check-linux-deps:
+	@echo "== OciDeck check: Linux-systeembibliotheken =="
+	@echo "Command: dart run tool/check_linux_pkgconfig.dart"
+	@echo "Covers: elke pkg-config-module die een plugin op Linux met REQUIRED"
+	@echo "        opeist, tegen .github/linux-pkgconfig-modules.json: staat er een"
+	@echo "        apt-pakket tegenover, installeert elke buildomgeving dat, en"
+	@echo "        noemen het .deb en de PKGBUILD de runtime-bibliotheek."
+	@echo "Failure means: een plugin vraagt om een systeembibliotheek die nergens"
+	@echo "        geinstalleerd wordt. 'flutter build linux' faalt dan in CMake"
+	@echo "        voordat er iets gecompileerd is — en dat merk je pas in de"
+	@echo "        releaseketen, zoals bij v0.4.9 (geen release)."
+	dart run tool/check_linux_pkgconfig.dart
+
 check-conventions:
 	@echo "== OciDeck check: conventions =="
 	@echo "Command: dart run tool/check_conventions.dart"
@@ -1217,7 +1230,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-parity translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-parity translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus

@@ -238,6 +238,28 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## [Unreleased]
 
+### Added
+
+- feat(ci): een poort die ziet wanneer de Linux-build een systeembibliotheek
+  mist. `make check-linux-deps` leest uit de opgeloste plugin-bronnen élke
+  pkg-config-module die op Linux `REQUIRED` is, en legt die naast
+  `.github/linux-pkgconfig-modules.json`: staat er een apt-pakket tegenover,
+  installeert elke buildomgeving dat, en noemen het `.deb` en de AUR-PKGBUILD de
+  gelinkte bibliotheek als runtime-eis. Beide richtingen zijn fataal — een
+  module die niemand installeert is de fout die v0.4.9 de das omdeed, een pakket
+  dat niemand meer nodig heeft laten we gebruikers voor niets installeren. De
+  poort zit in `make check` en draait daarmee op elke PR; de tekstelijke helft
+  draait ook in de suite (`test/linux_pkgconfig_manifest_test.dart`).
+
+  De poort ziet alleen wat via pkg-config wordt gevraagd. Voor de rest —
+  `find_library`, een header, een build-script dat een tool aanroept — moet er
+  echt gebouwd worden, en dat gebeurt weer na een merge: `linux-build.yml`
+  draait opnieuw op `main`, maar alleen als `pubspec.lock`, `linux/`,
+  `third_party/` of het CI-image veranderde. Dat zijn de invoeren die een native
+  build kunnen breken; bij gewoon Dart-werk zwijgt hij, dus de 17,5 minuten waar
+  #790 hem om uitzette vallen een paar keer per maand in plaats van bij elke
+  push.
+
 ### Fixed
 
 - fix(docs): de linkcontrole van de spiegel liep stuk op één verwijzing in dit
