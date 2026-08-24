@@ -240,6 +240,11 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(docs): de linkcontrole van de spiegel liep stuk op één verwijzing in dit
+  bestand. De regel over `EditorTextController` wees met `../lib/…` buiten de
+  werkkopie; vanuit een CHANGELOG in de wortel is dat een pad naast de repo. Nu
+  `lib/…`, zoals elke andere verwijzing hier.
+
 - fix(build): de Linux-build heeft er sinds de nativeapi-migratie (#1741) een
   systeembibliotheek bij, en die stond nergens. `cnativeapi` eist op Linux vier
   pkg-config-modules; drie ervan (`gtk+-3.0`, `x11`, `xi`) komen met
@@ -2093,7 +2098,7 @@ that before deciding whether this alpha fits what you are doing.
   terwijl er geschreven wordt, waarop `saveAs` aan de gegroeide ongedaan-stapel
   zag dat er "tijdens het schrijven was doorgetypt" en het deck bewust vuil
   liet — de stip verscheen dus meteen ná het schrijven weer, en verdween nooit.
-  Nieuw is [`EditorTextController`](../lib/widgets/editors/editor_text_controller.dart):
+  Nieuw is [`EditorTextController`](lib/widgets/editors/editor_text_controller.dart):
   `addListener` blijft ongefilterd (het tekstveld moet van elke cursorwissel
   weten, anders beweegt de cursor niet mee), maar `addTextListener` meldt alleen
   echte tekstwijzigingen. Alle dia-editors, de notitievelden van het
