@@ -696,7 +696,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 showReplace: _find.showReplace,
                 matchCount: _find.matchCount,
                 matchIndex: _find.matchIndex,
-                onQueryChanged: _find.setQuery,
+                onQueryChanged: _find.onQueryFieldChanged,
                 onReplaceChanged: _find.setReplacement,
                 onCaseSensitiveChanged: _find.setCaseSensitive,
                 onNext: _find.next,

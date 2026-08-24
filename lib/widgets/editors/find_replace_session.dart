@@ -105,6 +105,22 @@ class FindReplaceSession {
     recount(selectFirst: true);
   }
 
+  /// De zoekvraag zoals die in het zoekveld wordt getypt: telt de treffers
+  /// bij, maar springt niet naar de eerste treffer — anders trekt elke
+  /// toetsaanslag de focus naar het document en kan de gebruiker zijn
+  /// zoekterm niet invullen (#1760).
+  void onQueryFieldChanged(String value) {
+    _query = value;
+    _matches = findAllMatches(
+      controller.text,
+      _query,
+      caseSensitive: _caseSensitive,
+    );
+    _matchIndex = _matches.isEmpty ? -1 : 0;
+    onChanged();
+    syncHighlights();
+  }
+
   /// De vervangtekst. Verandert niets aan de treffers, dus alleen opnieuw
   /// opbouwen.
   void setReplacement(String value) {
