@@ -67,6 +67,7 @@ const _stringsPt = {
   'losslessHelp': 'Imagens sem perdas em resolução total.',
   'exportAsPdf': 'Exportar como PDF',
   'exportAsPptx': 'Exportar como PPTX',
+  'exportAsOdp': 'Exportar como ODP',
   'exportAsHtml': 'Exportar como HTML (Marp, offline)',
   'exportAsLatex': 'Exportar como LaTeX (Beamer)',
 
@@ -1662,6 +1663,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'Um ODT (OpenDocument Text) que abre no LibreOffice ou Word. Editável, com notas de rodapé nativas e cabeçalhos como estrutura. A alternativa aberta a um ficheiro Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Um ePub 3 com texto refluido para e-readers, tablets e telefones. Cabeçalhos tornam-se navegação, notas ficam no final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

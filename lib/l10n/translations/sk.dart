@@ -67,6 +67,7 @@ const _stringsSk = {
   'losslessHelp': 'Bezstratové obrázky v plnom rozlíšení.',
   'exportAsPdf': 'Exportovať ako PDF',
   'exportAsPptx': 'Exportovať ako PPTX',
+  'exportAsOdp': 'Exportovať ako ODP',
   'exportAsHtml': 'Exportovať ako HTML (Marp, offline)',
   'exportAsLatex': 'Exportovať ako LaTeX (Beamer)',
 
@@ -1641,6 +1642,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), ktorý sa otvára v LibreOffice alebo Worde. Upraviteľný, s natívnymi poznámkami pod čiarou a nadpismi ako osnovou. Otvorená alternatíva k súboru Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s prelievajúcim sa textom pre e-čítačky, tablety a telefóny. Nadpisy sa stanú navigáciou, poznámky sú vzadu.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

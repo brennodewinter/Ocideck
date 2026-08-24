@@ -66,6 +66,7 @@ const _stringsId = {
   'losslessHelp': 'Gambar resolusi penuh tanpa kehilangan kualitas.',
   'exportAsPdf': 'Ekspor sebagai PDF',
   'exportAsPptx': 'Ekspor sebagai PPTX',
+  'exportAsOdp': 'Ekspor sebagai ODP',
   'exportAsHtml': 'Ekspor sebagai HTML (Marp, offline)',
   'exportAsLatex': 'Ekspor sebagai LaTeX (Beamer)',
 
@@ -1634,6 +1635,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text) yang dibuka di LibreOffice atau Word. Dapat diedit, dengan catatan kaki asli dan judul sebagai kerangka. Alternatif terbuka untuk file Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Sebuah ePub 3 dengan teks yang dapat mengalir ulang untuk e-reader, tablet, dan telepon. Judul menjadi navigasi, catatan ada di belakang.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

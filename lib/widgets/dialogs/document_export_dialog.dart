@@ -302,6 +302,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           DocumentExportFormat.epub => l10n.d(
             'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.',
           ),
+          DocumentExportFormat.odt => l10n.d(
+            'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.',
+          ),
         }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
       ],
     );
@@ -349,7 +352,7 @@ class _FormatOption {
 
 /// De formaten in de volgorde waarin ze worden aangeboden: eerst de platte
 /// tekst waar het hele product op staat, dan wat een ontvanger leest — HTML,
-/// PDF, ePub — dan de zetweg voor wie zelf verder wil.
+/// PDF, ePub, ODT — dan de zetweg voor wie zelf verder wil.
 const _formatOptions = [
   _FormatOption(
     DocumentExportFormat.md,
@@ -363,6 +366,7 @@ const _formatOptions = [
     'ePub (.epub)',
     Icons.menu_book_outlined,
   ),
+  _FormatOption(DocumentExportFormat.odt, 'ODT (.odt)', Icons.article_outlined),
   _FormatOption(
     DocumentExportFormat.latex,
     'LaTeX (.tex)',

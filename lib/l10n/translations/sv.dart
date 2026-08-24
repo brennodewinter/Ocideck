@@ -66,6 +66,7 @@ const _stringsSv = {
   'losslessHelp': 'Förlustfria bilder i full upplösning.',
   'exportAsPdf': 'Exportera som PDF',
   'exportAsPptx': 'Exportera som PPTX',
+  'exportAsOdp': 'Exportera som ODP',
   'exportAsHtml': 'Exportera som HTML (Marp, offline)',
   'exportAsLatex': 'Exportera som LaTeX (Beamer)',
 
@@ -1633,6 +1634,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'En ODT (OpenDocument Text) som öppnas i LibreOffice eller Word. Redigerbar, med inbyggda fotnoter och rubriker som disposition. Det öppna alternativet till en Word-fil.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'En ePub 3 med anpassningsbar text för e-läsare, surfplattor och telefoner. Rubriker blir navigation, noter står längst bak.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

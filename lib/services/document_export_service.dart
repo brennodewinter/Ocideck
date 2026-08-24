@@ -26,15 +26,17 @@ import 'markdown_service.dart';
 import 'marp_html_service.dart';
 import 'pdf/document_pdf_export.dart';
 import 'epub/document_epub_export.dart';
+import 'odt/document_odt_export.dart';
 import 'privacy/privacy_own_identity.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
-/// LaTeX `article`, een PDF met een echte tekstlaag, en een ePub 3 met
-/// herflowbare tekst voor e-readers. Alle vijf dragen de geredigeerde body —
-/// nooit de rauwe bron.
-enum DocumentExportFormat { md, html, latex, pdf, epub }
+/// LaTeX `article`, een PDF met een echte tekstlaag, een ePub 3 met
+/// herflowbare tekst voor e-readers, en een ODT (OpenDocument Text) als
+/// bewerkbaar open formaat. Alle zes dragen de geredigeerde body — nooit de
+/// rauwe bron.
+enum DocumentExportFormat { md, html, latex, pdf, epub, odt }
 
 /// Ruim onder de gangbare limiet van 255 bytes per padcomponent.
 const maxSuggestedDocumentExportFileNameBytes = 240;
@@ -57,6 +59,7 @@ String suggestedDocumentExportFileName({
     DocumentExportFormat.latex => 'tex',
     DocumentExportFormat.pdf => 'pdf',
     DocumentExportFormat.epub => 'epub',
+    DocumentExportFormat.odt => 'odt',
   };
   final tag = profile == PrivacyExportProfile.redacted
       ? redactedLabel
@@ -295,6 +298,20 @@ Future<Uint8List> buildDocumentExportBytes(
         sourcePath: sourcePath,
         outputPath: outputPath ?? '',
       );
+    case DocumentExportFormat.odt:
+      // ODT (OpenDocument Text, ISO 26300): bewerkbare OpenDocument-XML in
+      // een ZIP. Native voetnoten, koppen met outline-levels, tabellen en
+      // afbeeldingen als aparte entries — hetzelfde `embedImage`-pad als ePub.
+      return buildDocumentExportOdt(
+        bundle,
+        metadata: exportMetadata,
+        chapterPageBreak: chapterPageBreak,
+        footnotePlacement: footnotePlacement,
+        footnotesTitle: footnotesTitle,
+        embedImage: embedImage,
+        sourcePath: sourcePath,
+        outputPath: outputPath ?? '',
+      );
   }
 }
 
@@ -327,6 +344,11 @@ Future<Uint8List> buildDocumentExportBytes(
 ///   herflowbare XHTML in een EPUB-ZIP, met koppen als navigatie en noten
 ///   achterin. De XHTML-tekst is leesbaar in de ZIP, dus de fail-closed test
 ///   kan op de geleverde bytes meten — vergelijkbaar met PDF.
+/// - [DocumentExportFormat.odt] verpakt de geprojecteerde body als ODT
+///   (OpenDocument Text, ISO 26300): bewerkbare OpenDocument-XML in een ZIP,
+///   met native voetnoten en koppen met outline-levels. De XML-tekst is
+///   leesbaar in de ZIP, dus de fail-closed test kan op de geleverde bytes
+///   meten — vergelijkbaar met PDF en ePub.
 ///
 /// Op web ([kIsWeb]) is er geen bestandssysteem: [webFileName] wordt dan de
 /// bestandsnaam van de browser-download, en [outputPath] wordt genegeerd. Op

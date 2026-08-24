@@ -66,6 +66,7 @@ const _stringsPap = {
   'losslessHelp': 'Imágennan sin pèrdida na resolushon kompletu.',
   'exportAsPdf': 'Eksportá komo PDF',
   'exportAsPptx': 'Eksportá komo PPTX',
+  'exportAsOdp': 'Exporta como ODP',
   'exportAsHtml': 'Eksportá komo HTML (Marp, offline)',
   'exportAsLatex': 'Eksportá komo LaTeX (Beamer)',
 
@@ -673,6 +674,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'Un ODT (OpenDocument Text) ku ta habri na LibreOffice of Word. Editabel, ku nota di pia nativo i titulo manera outline. E alternativo habri pa un fail di Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 ku teksto reflowable pa e-reader, tablet i telefone. Titular ta bira navegashon, nota ta bai patras.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

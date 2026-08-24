@@ -66,6 +66,7 @@ const _stringsLv = {
   'losslessHelp': 'Bezzudumu pilnas izšķirtspējas attēli.',
   'exportAsPdf': 'Eksportēt kā PDF',
   'exportAsPptx': 'Eksportēt kā PPTX',
+  'exportAsOdp': 'Eksportēt kā ODP',
   'exportAsHtml': 'Eksportēt kā HTML (Marp, bezsaistē)',
   'exportAsLatex': 'Eksportēt kā LaTeX (Beamer)',
 
@@ -1633,6 +1634,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), kas atveras LibreOffice vai Word. Rediģējams, ar iebūvētām zemsvītras piezīmēm un virsrakstiem kā struktūru. Atvērtā alternatīva Word failam.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 ar pārplūstošu tekstu e-lasītājiem, planšetdatoriem un telefoniem. Virsraksti kļūst par navigāciju, piezīmes ir beigās.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

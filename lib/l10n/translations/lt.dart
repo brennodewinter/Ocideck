@@ -66,6 +66,7 @@ const _stringsLt = {
   'losslessHelp': 'Be nuostolių, visos raiškos paveikslėliai.',
   'exportAsPdf': 'Eksportuoti kaip PDF',
   'exportAsPptx': 'Eksportuoti kaip PPTX',
+  'exportAsOdp': 'Eksportuoti kaip ODP',
   'exportAsHtml': 'Eksportuoti kaip HTML (Marp, neprisijungus)',
   'exportAsLatex': 'Eksportuoti kaip LaTeX (Beamer)',
 
@@ -1641,6 +1642,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text), atveriamas LibreOffice arba Word. Redaguojamas, su savosiomis išnašomis ir antraštėmis kaip struktūra. Atvira alternatyva Word failui.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 su tekstu, pritaikomu e-skaityklėms, planšetėms ir telefonams. Antraštės tampa navigacija, pastabos yra gale.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

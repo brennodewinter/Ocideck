@@ -66,6 +66,7 @@ const _stringsHr = {
   'losslessHelp': 'Slike bez gubitaka u punoj razlučivosti.',
   'exportAsPdf': 'Izvezi kao PDF',
   'exportAsPptx': 'Izvezi kao PPTX',
+  'exportAsOdp': 'Izvezi kao ODP',
   'exportAsHtml': 'Izvezi kao HTML (Marp, izvanmrežno)',
   'exportAsLatex': 'Izvezi kao LaTeX (Beamer)',
 
@@ -1638,6 +1639,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'ODT (OpenDocument Text) koji se otvara u LibreOfficeu ili Wordu. Može se uređivati, s izvornim fusnotama i naslovima kao strukturom. Otvorena alternativa za Word datoteku.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s tekstom koji se prelijeva za e-čitače, tablete i telefone. Naslovi postaju navigacija, bilješke su na kraju.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

@@ -66,6 +66,7 @@ const _stringsEl = {
   'losslessHelp': 'Εικόνες πλήρους ανάλυσης χωρίς απώλειες.',
   'exportAsPdf': 'Εξαγωγή ως PDF',
   'exportAsPptx': 'Εξαγωγή ως PPTX',
+  'exportAsOdp': 'Εξαγωγή ως ODP',
   'exportAsHtml': 'Εξαγωγή ως HTML (Marp, εκτός σύνδεσης)',
   'exportAsLatex': 'Εξαγωγή ως LaTeX (Beamer)',
 
@@ -1659,6 +1660,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'Ένα ODT (OpenDocument Text) που ανοίγει στο LibreOffice ή το Word. Επεξεργάσιμο, με εγγενείς υποσημειώσεις και επικεφαλίδες ως περίγραμμα. Η ανοιχτή εναλλακτική για αρχείο Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Ένα ePub 3 με ανακυκλούμενο κείμενο για ηλεκτρονικούς αναγνώστες, ταμπλέτες και τηλέφωνα. Οι τίτλοι γίνονται πλοήγηση, οι σημειώσεις στο τέλος.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

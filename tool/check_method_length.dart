@@ -100,6 +100,9 @@ const Map<String, int> methodLengthBaseline = {
   // +8: tabel-split actie bij tableDensityMinimum-warning.
   'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
       158,
+  // +1 (#1769): de ODP-case in de formaat-switch. De methode stond al op de
+  // limiet; één case extra is onherleidbare plumbing.
+  'lib/services/export_service.dart::ExportService.export': 151,
 };
 
 bool _isTranslationData(String path) =>

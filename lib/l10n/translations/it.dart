@@ -66,6 +66,7 @@ const _stringsIt = {
   'losslessHelp': 'Immagini senza perdita a piena risoluzione.',
   'exportAsPdf': 'Esporta come PDF',
   'exportAsPptx': 'Esporta come PPTX',
+  'exportAsOdp': 'Esporta come ODP',
   'exportAsHtml': 'Esporta come HTML (Marp, offline)',
   'exportAsLatex': 'Esporta come LaTeX (Beamer)',
 
@@ -671,6 +672,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
+      'Un ODT (OpenDocument Text) che si apre in LibreOffice o Word. Modificabile, con note a piè di pagina native e intestazioni come struttura. L\'alternativa aperta a un file Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 con testo rifluito per e-reader, tablet e telefoni. Le intestazioni diventano navigazione, le note vanno in fondo.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
