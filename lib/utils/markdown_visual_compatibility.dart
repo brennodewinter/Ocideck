@@ -3,6 +3,16 @@ import '../services/document_timeline.dart';
 import '../services/markdown_table_lines.dart';
 import '../services/pentest_blocks.dart';
 
+/// Inline-code-spans: `` `…` `` op één regel. De inhoud reist als `code`-
+/// attribuut door Quill en is platte tekst — hoekhaakjes en backslash-escapes
+/// daarbinnen zijn géén HTML of ontsnapping. Zonder deze stripping gaf
+/// `` `<persoon01>` `` een false positive die het hele document terug in
+/// de bronmodus wierp (#1761).
+final _inlineCode = RegExp(r'`[^`\n]+`');
+
+final _rawHtml = RegExp(r'<!--|</?[A-Za-z][^>]*>');
+final _escapedPunctuation = RegExp(r'\\[\\`*{}\[\]()#+.!_>-]');
+
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
 ///
@@ -97,12 +107,15 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
       // terugvallen naar bronmodus zou juist de vriendelijke foutweg wegnemen.
       supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
     }
+    // Strip inline code voordat we op HTML/escapes checken: de inhoud van
+    // `` `…` `` is platte tekst in Quill, geen Markdown-syntax.
+    final lineWithoutCode = line.replaceAll(_inlineCode, '');
     if (!tocMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
-        RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
+        _rawHtml.hasMatch(lineWithoutCode)) {
       limitations.add(MarkdownVisualLimitation.rawHtml);
     }
-    if (RegExp(r'\\[\\`*{}\[\]()#+.!_>-]').hasMatch(line)) {
+    if (_escapedPunctuation.hasMatch(lineWithoutCode)) {
       limitations.add(MarkdownVisualLimitation.escapedPunctuation);
     }
   }
@@ -162,12 +175,13 @@ VisualLimitationHit? firstVisualLimitation(String markdown) {
       final delimiter = index + 2 < lines.length ? lines[index + 2] : null;
       supportedTimeline = isDocumentTimelineEnvelope(line, header, delimiter);
     }
+    final lineWithoutCode = line.replaceAll(_inlineCode, '');
     if (!tocMarkerLinePattern.hasMatch(line) &&
         !supportedTimeline &&
-        RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
+        _rawHtml.hasMatch(lineWithoutCode)) {
       return VisualLimitationHit(index, MarkdownVisualLimitation.rawHtml);
     }
-    if (RegExp(r'\\[\\`*{}\[\]()#+.!_>-]').hasMatch(line)) {
+    if (_escapedPunctuation.hasMatch(lineWithoutCode)) {
       return VisualLimitationHit(
         index,
         MarkdownVisualLimitation.escapedPunctuation,

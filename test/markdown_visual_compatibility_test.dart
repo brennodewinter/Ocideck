@@ -206,4 +206,38 @@ Prijs \\* letterlijk
       expect(hit.lineIndex, 4);
     });
   });
+
+  group('inline code beschermt inhoud tegen false positives', () {
+    // Regressie (#1761): `<persoon01>` in backticks werd als HTML-tag gezien,
+    // waardoor het hele document uit de visuele modus viel. Inline code reist
+    // als `code`-attribuut door Quill — de inhoud is platte tekst.
+    test('hoekhaakjes in inline code zijn geen rawHtml', () {
+      expect(
+        markdownVisualLimitations('Zie `<persoon01>` in de tekst.'),
+        isEmpty,
+      );
+    });
+
+    test('backslash-escapes in inline code zijn geen escapedPunctuation', () {
+      expect(markdownVisualLimitations('Zie `\\*` in de tekst.'), isEmpty);
+    });
+
+    test('HTML buiten inline code blijft wel een beperking', () {
+      expect(
+        markdownVisualLimitations('`<ok>` <html> na de code'),
+        contains(MarkdownVisualLimitation.rawHtml),
+      );
+    });
+
+    test('firstVisualLimitation negeert hoekhaakjes in inline code', () {
+      expect(firstVisualLimitation('Zie `<persoon01>` in de tekst.'), isNull);
+    });
+
+    test('firstVisualLimitation vindt HTML buiten inline code', () {
+      final hit = firstVisualLimitation('`<ok>`\n\n<html> hier');
+      expect(hit, isNotNull);
+      expect(hit!.limitation, MarkdownVisualLimitation.rawHtml);
+      expect(hit.lineIndex, 2);
+    });
+  });
 }
