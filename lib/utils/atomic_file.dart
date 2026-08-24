@@ -28,6 +28,8 @@ library;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 import 'log.dart';
 
 /// Teller die elke schrijfbeurt binnen dit proces een eigen tijdelijk bestand
@@ -87,12 +89,41 @@ Future<void> writeStringAtomic(File target, String contents) {
 
 /// Sync variant of [writeBytesAtomic] for callers that can't await (e.g. a
 /// dialog `onPressed` that must pop before the test framework pumps). Same
-/// temp-file + rename strategy; throws on failure.
-void writeBytesAtomicSync(File target, List<int> bytes) {
+/// temp-file + rename strategy, *including* the Windows delete-then-rename
+/// fallback; throws on failure.
+///
+/// The fallback used to be missing here while the library doc above already
+/// promised it, and the effect was silent: on Windows every sync atomic write
+/// onto an *existing* file threw, and the one caller — rotating an image in the
+/// crop dialog — swallows write errors so the crop choice survives a failed
+/// write. Rotating therefore did nothing at all on Windows, without a single
+/// message; the mirror's Windows job was red on exactly that test.
+///
+/// [renameOnce] exists only so a test can prove the fallback without a real
+/// Windows rename failure (same idiom as `deleteOnce` in
+/// `test/support/temp_dir.dart`); leave it out in production use.
+void writeBytesAtomicSync(
+  File target,
+  List<int> bytes, {
+  @visibleForTesting void Function(File tmp, String destination)? renameOnce,
+}) {
+  final rename = renameOnce ?? (File tmp, String dest) => tmp.renameSync(dest);
   final tmp = File('${target.path}.${_tempCounter++}.tmp');
   try {
     tmp.writeAsBytesSync(bytes, flush: true);
-    tmp.renameSync(target.path);
+    try {
+      rename(tmp, target.path);
+    } on FileSystemException {
+      // Windows: rename onto an existing file fails. Identical reasoning and
+      // identical ceiling as in [writeBytesAtomic] — the target is only absent
+      // for a content-free gap, and the complete `.tmp` survives a crash in it.
+      if (target.existsSync()) {
+        target.deleteSync();
+        rename(tmp, target.path);
+      } else {
+        rethrow;
+      }
+    }
   } catch (e) {
     logWarning('writeBytesAtomicSync: write failed', e);
     if (tmp.existsSync()) {
