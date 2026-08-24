@@ -25,14 +25,16 @@ import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
 import 'pdf/document_pdf_export.dart';
+import 'epub/document_epub_export.dart';
 import 'privacy/privacy_own_identity.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
-/// LaTeX `article`, en een PDF met een echte tekstlaag. Alle vier dragen de
-/// geredigeerde body — nooit de rauwe bron.
-enum DocumentExportFormat { md, html, latex, pdf }
+/// LaTeX `article`, een PDF met een echte tekstlaag, en een ePub 3 met
+/// herflowbare tekst voor e-readers. Alle vijf dragen de geredigeerde body —
+/// nooit de rauwe bron.
+enum DocumentExportFormat { md, html, latex, pdf, epub }
 
 /// Ruim onder de gangbare limiet van 255 bytes per padcomponent.
 const maxSuggestedDocumentExportFileNameBytes = 240;
@@ -54,6 +56,7 @@ String suggestedDocumentExportFileName({
     DocumentExportFormat.html => 'html',
     DocumentExportFormat.latex => 'tex',
     DocumentExportFormat.pdf => 'pdf',
+    DocumentExportFormat.epub => 'epub',
   };
   final tag = profile == PrivacyExportProfile.redacted
       ? redactedLabel
@@ -278,6 +281,20 @@ Future<Uint8List> buildDocumentExportBytes(
       final coarse = result.coarseLogo;
       if (coarse != null) onPdfCoarseLogo?.call(coarse);
       return result.bytes;
+    case DocumentExportFormat.epub:
+      // ePub 3: herflowbare XHTML in een EPUB-ZIP. Afbeeldingen worden als
+      // aparte entries opgeslagen en via relatieve paden gereferend — niet
+      // als data-URI's zoals HTML. De `embedImage`-callback levert hier de
+      // ruwe bytes op via een aparte resolver (zie document_epub_export.dart).
+      return buildDocumentExportEpub(
+        bundle,
+        metadata: exportMetadata,
+        chapterPageBreak: chapterPageBreak,
+        footnotesTitle: footnotesTitle,
+        embedImage: embedImage,
+        sourcePath: sourcePath,
+        outputPath: outputPath ?? '',
+      );
   }
 }
 
@@ -306,6 +323,10 @@ Future<Uint8List> buildDocumentExportBytes(
 ///   gewone lezer uit te pakken, dus een geredigeerd gegeven dat er tóch in
 ///   belandt is even leesbaar als in de `.md` — de fail-closed test meet dan
 ///   ook op de geleverde bytes (test/pdf/document_pdf_export_privacy_test.dart).
+/// - [DocumentExportFormat.epub] verpakt de geprojecteerde body als ePub 3:
+///   herflowbare XHTML in een EPUB-ZIP, met koppen als navigatie en noten
+///   achterin. De XHTML-tekst is leesbaar in de ZIP, dus de fail-closed test
+///   kan op de geleverde bytes meten — vergelijkbaar met PDF.
 ///
 /// Op web ([kIsWeb]) is er geen bestandssysteem: [webFileName] wordt dan de
 /// bestandsnaam van de browser-download, en [outputPath] wordt genegeerd. Op
