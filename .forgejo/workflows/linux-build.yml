@@ -1,12 +1,26 @@
 # Bouwt de Linux-desktopversie van OciDeck op de eigen Forgejo-runner (pawprint).
 #
-# **Alleen handmatig sinds #790.** Dit draaide bij elke push naar main en kostte
-# daar 17,5 minuten runnertijd, terwijl `release.yml` op de GitHub-spiegel bij
-# elke `v*`-tag al een Linux-, macOS- én Windows-build maakt. Twee keer hetzelfde
-# bouwen levert geen extra zekerheid op — de poort (`ci.yml`) is wat een
-# regressie tegenhoudt, niet het inpakken achteraf. Wat deze workflow wél waard
-# is, is een bundel op afroep zonder een tag te hoeven zetten; vandaar
-# workflow_dispatch en niet weggooien.
+# **Handmatig, plus een smalle post-merge-trekker.** Dit draaide ooit bij elke
+# push naar main en kostte daar 17,5 minuten runnertijd; #790 zette dat uit met
+# het argument dat `release.yml` bij elke `v*`-tag toch al bouwt en dat de poort
+# een regressie tegenhoudt, niet het inpakken achteraf.
+#
+# Dat argument klopte op één punt niet, en dat kostte de release van v0.4.9. Géén
+# poort bouwt de Linux-desktop: `make check(-no-coverage)` draait `flutter test`,
+# en `flutter build linux` kwam pas in de releaseketen langs. De
+# nativeapi-migratie (#1741) bracht een plugin mee die op Linux
+# `ayatana-appindicator3-0.1` opeist; niets installeerde dat; CMake viel om
+# vóórdat er iets gecompileerd was; de job `linux` faalde, `publiceren` needt
+# hem, en er verscheen geen release. Alle poorten stonden die hele tijd groen.
+#
+# Daarom bouwt hij weer na een merge — maar alleen wanneer er iets veranderde
+# dat de *native* build kan breken: de opgeloste afhankelijkheden, de eigen
+# Linux-runner, de gevendorde pakketten of het CI-image. Bij een gewone
+# Dart-wijziging zwijgt hij, dus de 17,5 minuten uit #790 vallen een paar keer
+# per maand en niet bij elke push. `make check-linux-deps` vangt de goedkope
+# helft al in de PR zelf; deze job is er voor wat je alleen ziet door echt te
+# bouwen (find_library, een header, een build-script dat een tool aanroept).
+#
 # De Flutter-toolchain is dezelfde als in ci.yml: de officiële stable-release
 # volgens de pin in .tool-versions, sha256-geverifieerd. (Eerder stond hier het
 # cirruslabs-image; dat bleek kanaal "[user-branch]" uit onbekende bron te
@@ -15,6 +29,15 @@ name: linux-build
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'linux/**'
+      - 'third_party/**'
+      - '.forgejo/ci-image/**'
+      - '.forgejo/workflows/linux-build.yml'
 
 jobs:
   build-linux:

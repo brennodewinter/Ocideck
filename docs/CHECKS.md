@@ -411,6 +411,7 @@ now the only passing state.
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
+| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — |
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
@@ -775,6 +776,48 @@ also declares them, but see the [CI note](#continuous-integration).)
   already exists but does not win, check the `PATH` order in `~/.zshrc` — an
   entry added *before* Homebrew's line loses to it, which is precisely how two
   Flutters disagreed here unnoticed for weeks.
+
+### `make check-linux-deps`
+- **Runs:** `dart run tool/check_linux_pkgconfig.dart`
+- **Covers:** every pkg-config module a Flutter plugin demands on Linux with
+  `pkg_check_modules(... REQUIRED ...)`, re-derived from the resolved sources in
+  `.dart_tool/package_config.json`, against the promises in
+  `.github/linux-pkgconfig-modules.json`: which apt package provides it, which
+  build environments must install it, and which runtime package the `.deb` and
+  the AUR PKGBUILD must depend on.
+- **Why it exists:** because v0.4.9 has no release. The nativeapi migration
+  (#1741) brought in `cnativeapi`, which requires `ayatana-appindicator3-0.1` —
+  the one of its four modules that `libgtk-3-dev` does not pull in. No gate
+  builds the Linux desktop: they all run `flutter test`, and `flutter build
+  linux` first appears in the release chain. So CMake failed there, before
+  compiling a single file, the `linux` job failed, `publiceren` needs it, and the
+  tag produced nothing. Every gate was green from the merge to the tag.
+- **Both directions are fatal.** A module nobody installs is the failure above. A
+  package nobody requires any more is a system library we still make our users
+  install for a reason that no longer exists.
+- **Comments do not count.** The prose that *explains* a package is not the line
+  that installs it, so the comment half of every line is dropped before matching
+  — otherwise deleting an apt argument while leaving its comment keeps the gate
+  green.
+- **A build environment is a composition.** The Forgejo release job installs part
+  of what it needs and inherits the rest from the prebaked CI image, so each
+  environment lists every file that may carry the package and one of them naming
+  it is enough.
+- **Ceiling:** pkg-config is how Flutter's Linux plugins ask for system
+  libraries, not the only way anything can. `find_library`, `find_package`, a
+  bare `#include` or a build script shelling out to a tool are invisible here.
+  That half is covered by actually building: `.forgejo/workflows/linux-build.yml`
+  now also runs after a merge to `main` when `pubspec.lock`, `linux/`,
+  `third_party/` or the CI image changed — the inputs that can break a native
+  build — instead of on every push, which is what #790 switched off for costing
+  17.5 minutes a time.
+- **Failure means:** add the module to the manifest with the package that
+  provides it, install that package in the build environments the manifest
+  lists, and — if the bundle links the library — name its runtime package in
+  `scripts/package_linux.sh` and `packaging/aur/PKGBUILD`. The offline half of
+  this invariant also runs inside the suite
+  (`test/linux_pkgconfig_manifest_test.dart`), so a stale manifest fails with a
+  readable message even where the pub cache is not populated.
 
 ### `make check-version-bump`
 - **Runs:** `dart run tool/check_version_bump.dart`
