@@ -3480,7 +3480,7 @@ const _dutchSourceAddSv = <String, String>{
       'En webbläsare har ingen nyckelring som en dator har: det OciDeck skulle spara här kan vilket skript som helst på den här sidan läsa. Använd skrivbordsversionen — där hamnar hemligheten faktiskt i operativsystemets nyckelring.',
   'Licenties van derden': 'Tredjepartslicenser',
   'Alle licentieteksten tonen': 'Visa alla licenstexter',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck självt ges ut under EUPL-1.2. Dessutom paketerar det programvara från tredje part: Dart- och Flutter-paketen, två medföljande paket, fyra teckensnittsfamiljer, ansiktsmodellen för integritetskontrollen och den JavaScript som följer med en HTML-export. Var och en behåller sin egen licens.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Den här filen innehåller programvara från tredje part och ibland ett teckensnitt. Nedan finns de fullständiga licenstexterna som hör till; skicka med dem när du för filen vidare.',

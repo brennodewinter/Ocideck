@@ -2533,7 +2533,7 @@ const _dutchSourceAddPap = {
       'Un browser no tin un yabero manera un komputadó tin: loke OciDeck lo warda akinan, kualke skript riba e página aki por lesa. Usa e version desktop — einan e sekreto sí ta bai den e yabero di e sistema operativo.',
   'Licenties van derden': 'Lisensia di terseronan',
   'Alle licentieteksten tonen': 'Mustra tur teksto di lisensia',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck mes ta bou di EUPL-1.2. Ademas e ta inkluí software di terseronan: e paketenan di Dart i Flutter, dos plugin inkorporá, kuater famia di lèter, e modelo di kara pa e kontrol di privasidat i e JavaScript ku ta bai huntu den un eksportashon HTML. Kada un ta warda su mes lisensia.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'E archivo aki tin software di terseronan i tin biaha un tipo di lèter. Abou ta e tekstonan kompleto di lisensia ku ta pertenesé na nan; manda nan huntu ora bo pasa e archivo aki.',
