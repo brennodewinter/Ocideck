@@ -1897,6 +1897,21 @@ own Forgejo registry as
   exists and the gates are switched over (a separate PR), the gates keep
   installing the toolchain per run as before — introducing the image cannot break
   CI on its own.
+- **Reaching the daemon from inside the job.** These publish jobs run *inside*
+  the dind sidecar, on a per-run `WORKFLOW-<hash>` network whose gateway **is** the
+  dind daemon (it listens on all interfaces). That address differs per run, so it
+  cannot be written down in advance — and `DOCKER_HOST` is not a usable channel
+  either: the runner config injects
+  `runner.envs.DOCKER_HOST=tcp://docker-in-docker:2375`, and that injection
+  **overrides** a job-level `env:`. The alias itself only exists on the *outer*
+  compose network, so every docker call died on
+  `lookup docker-in-docker … no such host`. That is why this workflow had never
+  once gone green and both images have always been published by hand — a gap that
+  only surfaced when a release stalled on it. The job now reads its own default
+  gateway (`ip route`) into a step output and passes it as `-H` on every docker
+  call: a CLI flag beats the environment, whatever the runner injects.
+  `test/ci_image_docker_host_test.dart` keeps a bare `docker` call from creeping
+  back in.
 - **Two conditions the follow-up (fase 2) must honour** (raised by the
   kernwaardenbewaker on #1141): (1) **continuity** — a `container: image:` pointing
   at the registry is a hard dependency; a registry outage or an accidentally

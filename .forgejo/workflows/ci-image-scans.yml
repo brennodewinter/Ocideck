@@ -47,12 +47,6 @@ concurrency:
 jobs:
   build-publish:
     runs-on: docker
-    # Job-containers draaien ÍN de dind (de runner maakt ze via de dind-daemon).
-    # Ze staan op het dind-netwerk `forgejo-stack_default` (runner-config), waarvan
-    # de gateway (172.30.0.1) de dind-daemon zelf is — die luistert op 0.0.0.0:2375.
-    # De docker-CLI bouwt dus tegen `tcp://172.30.0.1:2375`.
-    env:
-      DOCKER_HOST: tcp://172.30.0.1:2375
     steps:
       # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
       # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
@@ -80,27 +74,66 @@ jobs:
 
       # De job draait in een kaal ubuntu:24.04 (de runner-default), zonder node —
       # en `actions/checkout` is een node-actie. Installeer daarom node, de
-      # docker-CLI die met de dind-service praat (DOCKER_HOST), `git` voor de
-      # checkout, en `jq` om de scanner-pins uit het manifest te lezen.
-      - name: Gereedschap in de container (node + docker-CLI + jq)
+      # docker-CLI die met de dind-daemon praat (het adres komt uit de volgende
+      # stap), `git` voor de checkout, `jq` om de scanner-pins uit het manifest
+      # te lezen, en `iproute2` voor de `ip route` die dat adres oplevert.
+      - name: Gereedschap in de container (node + docker-CLI + jq + iproute2)
         if: steps.guard.outputs.publish == 'yes'
         run: |
           set -eu
           apt-get update
           apt-get install -y --no-install-recommends \
-            nodejs ca-certificates git docker.io jq
+            nodejs ca-certificates git docker.io jq iproute2
+
+      # WAAR DRAAIT DE DAEMON. Deze job draait ÍN de dind, in een netwerk dat de
+      # runner per workflow-run aanmaakt (`WORKFLOW-<hash>`). De gateway van dat
+      # netwerk ÍS de dind-daemon — die luistert op alle interfaces
+      # (`dockerd --host=tcp://0.0.0.0:2375`) — maar het adres verschilt per run
+      # (gezien: 172.19.0.1, 172.23.0.1). Vooraf opschrijven kan dus niet;
+      # uitlezen wel: de default gateway van deze container ÍS dat adres.
+      #
+      # WAAROM NIET VIA `DOCKER_HOST`. De runnerconfig zet
+      # `runner.envs.DOCKER_HOST: tcp://docker-in-docker:2375`, en die injectie
+      # wint van een `env:` in deze workflow — die kwam dus nooit aan. Erger: die
+      # naam is een alias op het BUITENSTE compose-netwerk en bestaat niet in de
+      # dind, dus elke docker-aanroep strandde op
+      # `lookup docker-in-docker on 127.0.0.11:53: no such host`. Dat is de reden
+      # dat deze workflow in zijn hele bestaan geen enkele run groen had en beide
+      # images altijd met de hand zijn gepubliceerd (`make ci-image*-publish`).
+      #
+      # Een `-H`-vlag op de CLI kent dat probleem niet: een vlag wint altijd van
+      # de omgeving, wat de runner ook injecteert. Vandaar een stap-output en
+      # `-H` op élke docker-aanroep hieronder; `test/ci_image_docker_host_test.dart`
+      # bewaakt dat er geen kale `docker`-aanroep terugsluipt.
+      - name: Adres van de docker-daemon bepalen
+        if: steps.guard.outputs.publish == 'yes'
+        id: dockerd
+        run: |
+          set -eu
+          GW="$(ip -4 route show default | awk '{print $3; exit}')"
+          test -n "$GW" || {
+            echo "geen default gateway in deze container — de dind-daemon is zo niet te vinden"
+            exit 1
+          }
+          echo "host=tcp://$GW:2375" >> "$GITHUB_OUTPUT"
+          echo "docker-daemon verwacht op tcp://$GW:2375"
 
       # De dind-service start parallel op; wacht tot de daemon luistert, anders
       # faalt de eerste docker-aanroep op een nog-dichte socket.
       - name: Wacht op de docker-daemon
         if: steps.guard.outputs.publish == 'yes'
+        env:
+          DH: ${{ steps.dockerd.outputs.host }}
         run: |
           set -eu
           for i in $(seq 1 30); do
-            docker info >/dev/null 2>&1 && { echo "daemon bereikbaar"; docker version; exit 0; }
+            docker -H "$DH" info >/dev/null 2>&1 \
+              && { echo "daemon bereikbaar"; docker -H "$DH" version; exit 0; }
             sleep 2
           done
-          echo "docker-daemon kwam niet op binnen 60s"; docker info; exit 1
+          echo "docker-daemon kwam niet op binnen 60s op $DH"
+          docker -H "$DH" info
+          exit 1
 
       - if: steps.guard.outputs.publish == 'yes'
         uses: actions/checkout@v4
@@ -124,23 +157,27 @@ jobs:
 
       - name: Inloggen op de Forgejo-registry
         if: steps.guard.outputs.publish == 'yes'
+        env:
+          DH: ${{ steps.dockerd.outputs.host }}
         run: |
           set -eu
           echo "${{ secrets.CI_IMAGE_TOKEN }}" \
-            | docker login pawprint.vigilis.online \
+            | docker -H "$DH" login pawprint.vigilis.online \
                 -u "${{ vars.CI_IMAGE_USER }}" --password-stdin
 
       - name: Bouwen en pushen
         if: steps.guard.outputs.publish == 'yes'
+        env:
+          DH: ${{ steps.dockerd.outputs.host }}
         run: |
           set -eu
           IMG="pawprint.vigilis.online/librekat/ocideck-scans"
           TAG="${{ steps.pins.outputs.tag }}"
-          docker build \
+          docker -H "$DH" build \
             --build-arg GITLEAKS_VERSION="${{ steps.pins.outputs.gitleaks }}" \
             --build-arg TRUFFLEHOG_VERSION="${{ steps.pins.outputs.trufflehog }}" \
             --build-arg SEMGREP_VERSION="${{ steps.pins.outputs.semgrep }}" \
             -t "$IMG:$TAG" \
             -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
-          docker push "$IMG:$TAG"
+          docker -H "$DH" push "$IMG:$TAG"
           echo "Gepubliceerd: $IMG:$TAG"
