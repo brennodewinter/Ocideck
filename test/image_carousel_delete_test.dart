@@ -279,6 +279,27 @@ void main() {
     await openDeleteDialog(tester);
     await answer(tester, confirm: true);
 
+    // Na de verwijdering herstelt de bibliotheek zich door opnieuw te scannen.
+    // `answer` geeft 400 ms wandelklok (2× `settle`), wat op een snelle machine
+    // volstaat maar op de 4-core Linux-runner onder `--concurrency=14` niet
+    // altijd — de rescan is dan nog bezig en `alpha.png` staat nog in de lijst.
+    // Poll tot de naam echt weg is, met een ruim budget (20 s, zelfde als
+    // `openDeleteDialog`).
+    var gone = false;
+    await tester.runAsync(() async {
+      final deadline = DateTime.now().add(const Duration(seconds: 20));
+      while (DateTime.now().isBefore(deadline)) {
+        if (find.textContaining('alpha.png').evaluate().isEmpty) {
+          gone = true;
+          break;
+        }
+        await tester.pump();
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
+    });
+    await tester.pump();
+    clearLayoutNoise(tester);
+    expect(gone, isTrue, reason: 'alpha.png staat nog in de bibliotheek');
     // De naam van het verwijderde bestand staat nergens meer; de andere wel.
     expect(find.textContaining('alpha.png'), findsNothing);
     expect(find.textContaining('beta.png'), findsWidgets);
