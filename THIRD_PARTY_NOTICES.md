@@ -37,6 +37,7 @@ Shipped inside the app and embedded into the **offline HTML export**
 | [Roboto](https://github.com/googlefonts/roboto-classic) font | Bundled UI font (replaces the runtime fetch from fonts.gstatic.com) | SIL Open Font License 1.1 |
 | [Inter](https://github.com/rsms/inter) font | Bundled selectable interface font | SIL Open Font License 1.1 |
 | [Lora](https://github.com/cyrealtype/Lora-Cyrillic) font | Bundled selectable interface font | SIL Open Font License 1.1 |
+| [Roboto Mono](https://github.com/googlefonts/robotomono) font | Bundled monospace font (registered under `monospace` and `Roboto Mono`; fixes web selection metrics, #1784) | SIL Open Font License 1.1 |
 | [YuNet](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet) (`face_detection_yunet_2023mar.onnx`) | Detects whether a recognisable face appears in a slide image. Runs entirely on this device; only the number of faces is kept, never a template or an identity | MIT |
 
 The exact pinned version, source URL and SHA-256 of every vendored JS bundle
