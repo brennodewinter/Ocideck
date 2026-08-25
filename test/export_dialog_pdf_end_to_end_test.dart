@@ -167,7 +167,11 @@ void main() {
   }
 
   Future<void> runExport(WidgetTester tester) async {
-    for (var i = 0; i < 600; i++) {
+    // 1200 iteraties × 10 ms = 12 s wandelklok. PDF-generatie rendert elke
+    // dia naar een afbeelding, encodeert en schrijft — op de 4-core Linux-
+    // runner onder `--concurrency=14` krijgt elk proces ~28% van een core en
+    // duurt dat langer. 600 (6 s) was marginaal; 1200 geeft ruimschoots.
+    for (var i = 0; i < 1200; i++) {
       await tester.runAsync(
         () => Future<void>.delayed(const Duration(milliseconds: 10)),
       );
