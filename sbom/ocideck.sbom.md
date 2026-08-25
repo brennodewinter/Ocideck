@@ -4,7 +4,7 @@
 
 This is **ocideck 0.4.9+23** (licence EUPL-1.2) and every third-party component it ships (226 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **791 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **791 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -266,7 +266,7 @@ The JSON documents carry **791 dependency relations** between these components: 
 | Inter | — | OFL-1.1 | The Inter Project Authors | `pkg:generic/Inter` |
 | Lora | — | OFL-1.1 | The Lora Project Authors | `pkg:generic/Lora` |
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
-| monospace | — | OFL-1.1 | — | `pkg:generic/monospace` |
+| Roboto Mono | — | OFL-1.1 | The Roboto Mono Project Authors | `pkg:generic/Roboto%20Mono` |
 
 ### Build SDKs (2)
 

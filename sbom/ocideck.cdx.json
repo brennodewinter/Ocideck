@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:7c8877df-f86a-5144-8de2-668a95233cbd",
+  "serialNumber": "urn:uuid:183933ba-11a7-5ce1-8267-ab608c7d9b63",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-25T06:52:21.377605Z",
+    "timestamp": "2026-08-25T07:17:26.719520Z",
     "tools": {
       "components": [
         {
@@ -9005,8 +9005,14 @@
     {
       "bom-ref": "font:assets/fonts/RobotoMono-Variable.ttf",
       "type": "file",
-      "name": "monospace",
-      "purl": "pkg:generic/monospace",
+      "supplier": {
+        "name": "The Roboto Mono Project Authors",
+        "url": [
+          "https://github.com/googlefonts/robotomono"
+        ]
+      },
+      "name": "Roboto Mono",
+      "purl": "pkg:generic/Roboto%20Mono",
       "licenses": [
         {
           "license": {

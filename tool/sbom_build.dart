@@ -647,9 +647,15 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
 /// vendors is needed, and none is kept. The family is matched against the
 /// copyright line, so adding a font with its OFL text is enough; adding one
 /// without simply leaves the supplier absent.
+///
+/// The match checks for `<family> Project` (case-insensitive) rather than just
+/// `<family>`, because a bare `contains` makes 'Roboto' match both
+/// "The Roboto Project Authors" and "The Roboto Mono Project Authors" — and
+/// which one `listSync()` returns first differs between macOS and Linux.
 ({String name, String url})? _fontCopyrightHolder(String family) {
   final dir = Directory('assets/fonts');
   if (!dir.existsSync()) return null;
+  final needle = '$family Project'.toLowerCase();
   for (final entity in dir.listSync()) {
     if (entity is! File || !entity.path.toLowerCase().endsWith('.txt')) {
       continue;
@@ -660,7 +666,7 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
     ).firstMatch(head);
     if (m == null) continue;
     final holder = m.group(1)!.trim();
-    if (!holder.toLowerCase().contains(family.toLowerCase())) continue;
+    if (!holder.toLowerCase().contains(needle)) continue;
     return (name: holder, url: m.group(2)!);
   }
   return null;

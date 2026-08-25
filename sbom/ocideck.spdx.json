@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.4.9+23",
-  "documentNamespace": "https://ocideck.app/spdx/83736b8a-bdc5-50ab-8e04-f46ff48ab5be",
+  "documentNamespace": "https://ocideck.app/spdx/054e0b56-6aae-52a2-86b5-bf04433c2ca2",
   "creationInfo": {
-    "created": "2026-08-25T06:52:21.377605Z",
+    "created": "2026-08-25T07:17:26.719520Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4872,8 +4872,9 @@
       "comment": "Bundled font file assets/Roboto-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-217-monospace",
-      "name": "monospace",
+      "SPDXID": "SPDXRef-217-Roboto-Mono",
+      "name": "Roboto Mono",
+      "supplier": "Organization: The Roboto Mono Project Authors",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "OFL-1.1",
@@ -4888,7 +4889,7 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:generic/monospace"
+          "referenceLocator": "pkg:generic/Roboto%20Mono"
         }
       ],
       "comment": "Bundled font file assets/RobotoMono-Variable.ttf."
@@ -5106,7 +5107,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-217-monospace"
+      "relatedSpdxElement": "SPDXRef-217-Roboto-Mono"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
