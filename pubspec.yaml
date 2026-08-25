@@ -162,6 +162,7 @@ flutter:
     - assets/fonts/Inter-OFL.txt
     - assets/fonts/Lora-OFL.txt
     - assets/fonts/Roboto-OFL.txt
+    - assets/fonts/RobotoMono-OFL.txt
     # Volledige licentieteksten van de gebundelde JavaScript/CSS uit
     # assets/web_export/. Die bestanden dragen hooguit een banner; MIT, BSD-3 en
     # Apache-2.0 vragen de hele tekst bij herdistributie, en de gebruiker die
@@ -267,3 +268,20 @@ flutter:
     - family: Lora
       fonts:
         - asset: assets/fonts/Lora-Variable.ttf
+    # Bundled monospace font, registered under both the literal `Roboto Mono`
+    # name and the generic `monospace` alias. On the CanvasKit web engine a
+    # generic CSS family like `monospace` has no downloadable font file, so
+    # Flutter falls back to a proportional default — and the selection
+    # rectangles (computed from the fallback's metrics) no longer align with
+    # the text on screen (#1784). Registering the file under `monospace` means
+    # every `fontFamily: 'monospace'` reference in the codebase resolves to
+    # this bundled font with consistent metrics on every platform. The
+    # `Roboto Mono` alias makes the option in the code-font settings resolve
+    # to the same file. `Roboto Mono` is listed first so the SBOM component
+    # carries the real font name, not the alias.
+    - family: Roboto Mono
+      fonts:
+        - asset: assets/fonts/RobotoMono-Variable.ttf
+    - family: monospace
+      fonts:
+        - asset: assets/fonts/RobotoMono-Variable.ttf

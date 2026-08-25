@@ -599,11 +599,17 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
   if (fonts == null) return const [];
 
   final out = <SbomComponent>[];
+  final seenAssets = <String>{};
   for (final family in fonts) {
     final familyName = family['family'].toString();
     final assets = (family['fonts'] as YamlList?) ?? const [];
     for (final f in assets) {
       final asset = f['asset'].toString();
+      // Multiple family names can point to the same physical file (e.g. the
+      // `monospace` alias and `Roboto Mono` both use RobotoMono-Variable.ttf).
+      // One SBOM component per file, not per alias — the bom-ref is
+      // `font:$asset` and a duplicate would fail the uniqueness test.
+      if (!seenAssets.add(asset)) continue;
       final file = File(asset);
       final sha = file.existsSync()
           ? sha256.convert(file.readAsBytesSync()).toString()
@@ -641,9 +647,15 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
 /// vendors is needed, and none is kept. The family is matched against the
 /// copyright line, so adding a font with its OFL text is enough; adding one
 /// without simply leaves the supplier absent.
+///
+/// The match checks for `<family> Project` (case-insensitive) rather than just
+/// `<family>`, because a bare `contains` makes 'Roboto' match both
+/// "The Roboto Project Authors" and "The Roboto Mono Project Authors" — and
+/// which one `listSync()` returns first differs between macOS and Linux.
 ({String name, String url})? _fontCopyrightHolder(String family) {
   final dir = Directory('assets/fonts');
   if (!dir.existsSync()) return null;
+  final needle = '$family Project'.toLowerCase();
   for (final entity in dir.listSync()) {
     if (entity is! File || !entity.path.toLowerCase().endsWith('.txt')) {
       continue;
@@ -654,7 +666,7 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
     ).firstMatch(head);
     if (m == null) continue;
     final holder = m.group(1)!.trim();
-    if (!holder.toLowerCase().contains(family.toLowerCase())) continue;
+    if (!holder.toLowerCase().contains(needle)) continue;
     return (name: holder, url: m.group(2)!);
   }
   return null;

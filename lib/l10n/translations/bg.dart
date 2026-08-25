@@ -3516,7 +3516,7 @@ const _dutchSourceAddBg = <String, String>{
       'Браузърът няма ключодържател, какъвто има компютърът: това, което OciDeck би запазил тук, може да прочете всеки скрипт на тази страница. Използвайте настолната версия — там тайната наистина отива в ключодържателя на операционната система.',
   'Licenties van derden': 'Лицензи на трети страни',
   'Alle licentieteksten tonen': 'Показване на всички лицензни текстове',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Самият OciDeck се разпространява под EUPL-1.2. Освен това включва софтуер на трети страни: пакетите Dart и Flutter, две вградени пакета, четири шрифтови семейства, модела на лице за проверката на поверителност и JavaScript, който пътува заедно с експорт в HTML. Всеки от тях запазва собствения си лиценз.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Този файл съдържа софтуер на трети страни, а понякога и шрифт. По-долу са пълните текстове на съответните лицензи; предайте ги заедно с файла.',

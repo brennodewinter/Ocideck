@@ -3486,7 +3486,7 @@ const _dutchSourceAddGsw = <String, String>{
       'E Browser het kein Schlüsselbund, wie ne Computer ein het: Was OciDeck da spychere wür, cha jedes Skript uf dere Syte mitläse. Nimm d Desktop-Version — dört chunnt s Gheimnis würklich i de Schlüsselbund vom Betriebssystem.',
   'Licenties van derden': 'Lizänze vo Dritte',
   'Alle licentieteksten tonen': 'Alli Lizänztäxt zeige',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck sälber schtoht under de EUPL-1.2. Zuesätzlich bündlet\'s Software vo Dritte: d Dart- und Flutter-Päckli, zwe mitgliferti Plugins, vier Schriftfamilie, s Gsichtsmodäll für d Privatschprüefig und s JavaScript, wo bimene HTML-Export mitgoht. Jedes dervo bhaltet sini eigeni Lizänz.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Die Datei enthaltet Software vo Dritte und mängisch au e Schrift. Unte schtönd di vollschtändige Lizänztäxt derzue; gib si mit, wänn du die Datei witergisch.',

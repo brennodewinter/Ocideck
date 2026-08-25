@@ -3499,7 +3499,7 @@ const _dutchSourceAddUk = <String, String>{
       'Браузер не має сховища ключів, як його має комп\'ютер: те, що OciDeck тут зберіг би, може прочитати будь-який скрипт на цій сторінці. Скористайтеся десктопною версією — там секрет справді потрапляє у сховище ключів операційної системи.',
   'Licenties van derden': 'Ліцензії третіх сторін',
   'Alle licentieteksten tonen': 'Показати всі тексти ліцензій',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Сам OciDeck поширюється за ліцензією EUPL-1.2. Крім того, він містить програмне забезпечення третіх сторін: пакунки Dart і Flutter, два вбудовані пакети, чотири родини шрифтів, модель обличчя для перевірки приватності та JavaScript, який подорожує разом з експортом у HTML. Кожен зберігає власну ліцензію.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Цей файл містить програмне забезпечення третіх сторін, а іноді й шрифт. Нижче наведено повні тексти відповідних ліцензій; передавайте їх разом із файлом.',

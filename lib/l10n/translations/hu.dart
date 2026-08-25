@@ -3492,7 +3492,7 @@ const _dutchSourceAddHu = <String, String>{
       'A böngészőnek nincs kulcstartója, mint a számítógépnek: amit az OciDeck itt eltárolna, azt az oldal bármelyik szkriptje elolvashatja. Használd az asztali verziót — ott a titok tényleg az operációs rendszer kulcstartójába kerül.',
   'Licenties van derden': 'Harmadik felek licencei',
   'Alle licentieteksten tonen': 'Az összes licencszöveg megjelenítése',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'Maga az OciDeck az EUPL-1.2 licenc alatt áll. Ezen felül harmadik felek szoftvereit is tartalmazza: a Dart- és Flutter-csomagokat, két mellékelt bővítményt, négy betűtípuscsaládot, az adatvédelmi ellenőrzés arcmodelljét és azt a JavaScriptet, amely egy HTML-exporttal együtt utazik. Mindegyik megtartja a saját licencét.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Ez a fájl harmadik felek szoftverét és olykor egy betűtípust tartalmaz. Alább a hozzájuk tartozó teljes licencszövegek olvashatók; add tovább őket a fájllal együtt.',

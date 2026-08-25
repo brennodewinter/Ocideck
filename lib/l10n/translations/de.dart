@@ -2537,7 +2537,7 @@ const _dutchSourceAddDe = {
       'Ein Browser hat keinen Schlüsselbund, wie ihn ein Computer hat: Was OciDeck hier speichern würde, kann jedes Skript auf dieser Seite mitlesen. Nutze die Desktop-Version — dort landet das Geheimnis wirklich im Schlüsselbund des Betriebssystems.',
   'Licenties van derden': 'Lizenzen Dritter',
   'Alle licentieteksten tonen': 'Alle Lizenztexte anzeigen',
-  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
       'OciDeck selbst steht unter der EUPL-1.2. Darüber hinaus bündelt es Software Dritter: die Dart- und Flutter-Pakete, zwei mitgelieferte Pakete, vier Schriftfamilien, das Gesichtsmodell für die Datenschutzprüfung und das JavaScript, das in einem HTML-Export mitreist. Jedes davon behält seine eigene Lizenz.',
   'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
       'Diese Datei enthält Software Dritter und mitunter eine Schriftart. Unten stehen die zugehörigen vollständigen Lizenztexte; geben Sie sie mit, wenn Sie diese Datei weitergeben.',

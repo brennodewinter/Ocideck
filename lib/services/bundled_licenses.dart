@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 /// Flutter already collects the licence of every resolved package — including
 /// the vendored forks under `third_party/` — into the `NOTICES` asset that
 /// `showLicensePage` reads. What it does not know about is everything we bundle
-/// by hand: the four font families, the YuNet face-detection model, and the
+/// by hand: the five font families, the YuNet face-detection model, and the
 /// five JavaScript/CSS bundles inlined into the offline HTML export.
 ///
 /// Those were shipping without their licence text. That is not a formality:
@@ -73,6 +73,23 @@ abstract final class BundledLicenses {
       license: 'OFL-1.1',
       source: 'https://github.com/cyrealtype/Lora-Cyrillic',
       licenseAsset: 'assets/fonts/Lora-OFL.txt',
+    ),
+    BundledLicense(
+      component: 'Roboto Mono (font)',
+      license: 'OFL-1.1',
+      source: 'https://github.com/googlefonts/robotomono',
+      licenseAsset: 'assets/fonts/RobotoMono-OFL.txt',
+    ),
+    // Same font, registered under the generic `monospace` alias in
+    // pubspec.yaml so every `fontFamily: 'monospace'` reference resolves to
+    // the bundled file on the CanvasKit web engine (#1784). Listed separately
+    // so the licence-page entry matches the family name a user would search
+    // for, and so the "every bundled font family has its OFL" test can find it.
+    BundledLicense(
+      component: 'monospace (font)',
+      license: 'OFL-1.1',
+      source: 'https://github.com/googlefonts/robotomono',
+      licenseAsset: 'assets/fonts/RobotoMono-OFL.txt',
     ),
     BundledLicense(
       component: 'YuNet face-detection model',

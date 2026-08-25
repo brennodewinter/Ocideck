@@ -76,6 +76,34 @@ void main() {
       }
     });
 
+    // Regression for #1784: on the CanvasKit web engine a generic CSS family
+    // like `monospace` has no downloadable font file, so Flutter falls back to
+    // a proportional default and the selection rectangles no longer align with
+    // the text. The fix is to bundle a real monospace font (Roboto Mono) and
+    // register it under the `monospace` name. This test holds that fix in
+    // place: remove the declaration and the web selection bug returns.
+    test('monospace font family is bundled (web selection metrics, #1784)', () {
+      final families = ((pubspec['flutter'] as YamlMap)['fonts'] as YamlList)
+          .map((f) => f['family'].toString())
+          .toSet();
+      expect(
+        families,
+        contains('monospace'),
+        reason:
+            'The `monospace` family must be declared in pubspec.yaml so the '
+            'CanvasKit web engine uses the bundled Roboto Mono file instead of '
+            'a proportional fallback. Without it, text selection on web '
+            'renders with mismatched metrics (#1784).',
+      );
+      expect(
+        families,
+        contains('Roboto Mono'),
+        reason:
+            'The `Roboto Mono` family must be declared so the code-font '
+            'settings option resolves to the bundled file, not a system font.',
+      );
+    });
+
     test('every npm bundle in MANIFEST.json has a licence text', () {
       final manifest =
           jsonDecode(File('assets/web_export/MANIFEST.json').readAsStringSync())

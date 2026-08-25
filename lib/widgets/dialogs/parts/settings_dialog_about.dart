@@ -323,7 +323,7 @@ extension _SettingsAbout on _SettingsDialogState {
   /// That page reads the `NOTICES` asset, which already carries the full text
   /// for every resolved Dart/Flutter package — including the vendored forks
   /// in `third_party/`. `BundledLicenses.register()` adds what Flutter cannot
-  /// know about: the four font families, the YuNet model and the JavaScript
+  /// know about: the five font families, the YuNet model and the JavaScript
   /// inlined into the HTML export. Without this route the app shipped fonts
   /// under OFL-1.1 with no notice a user could ever reach.
   Widget _aboutLicenses(AppLocalizations l10n) => Column(
@@ -336,7 +336,7 @@ extension _SettingsAbout on _SettingsDialogState {
           children: [
             Text(
               l10n.d(
-                'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.',
+                'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde pakketten, vijf lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.',
               ),
               style: _aboutBodyStyle,
             ),
