@@ -124,9 +124,12 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
 
+      // Sinds #1777 round-trippen HTML-*tags* als platte tekst en zijn ze geen
+      // beperking meer; HTML-*commentaar* (`<!-- … -->`) wel — dat is metadata
+      // die in de bron hoort. Deze test gebruikt dus een comment, niet een tag.
       final n = DocumentNotifier()
         ..loadDocument(
-          MarkdownDocument.parse('# Kop\n\n<div>rauwe html</div>\n\nTekst.'),
+          MarkdownDocument.parse('# Kop\n\n<!-- rauwe html -->\n\nTekst.'),
         );
       await tester.pumpWidget(harness(n));
       await tester.pump();
@@ -148,7 +151,7 @@ void main() {
       // En het is écht bewerkbaar: typen stroomt live naar de notifier.
       await tester.enterText(
         find.byType(TextField).first,
-        '# Kop\n\n<div>rauwe html</div>\n\nGewijzigd.',
+        '# Kop\n\n<!-- rauwe html -->\n\nGewijzigd.',
       );
       await tester.pump();
       expect(n.currentState.document!.source, contains('Gewijzigd.'));
