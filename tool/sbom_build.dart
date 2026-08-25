@@ -599,11 +599,17 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
   if (fonts == null) return const [];
 
   final out = <SbomComponent>[];
+  final seenAssets = <String>{};
   for (final family in fonts) {
     final familyName = family['family'].toString();
     final assets = (family['fonts'] as YamlList?) ?? const [];
     for (final f in assets) {
       final asset = f['asset'].toString();
+      // Multiple family names can point to the same physical file (e.g. the
+      // `monospace` alias and `Roboto Mono` both use RobotoMono-Variable.ttf).
+      // One SBOM component per file, not per alias — the bom-ref is
+      // `font:$asset` and a duplicate would fail the uniqueness test.
+      if (!seenAssets.add(asset)) continue;
       final file = File(asset);
       final sha = file.existsSync()
           ? sha256.convert(file.readAsBytesSync()).toString()

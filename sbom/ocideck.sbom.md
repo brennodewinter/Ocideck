@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.4.9+23** (licence EUPL-1.2) and every third-party component it ships (225 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.4.9+23** (licence EUPL-1.2) and every third-party component it ships (226 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **790 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **791 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -13,7 +13,7 @@ The JSON documents carry **790 dependency relations** between these components: 
 | BSD-3-Clause | 141 |
 | MIT | 59 |
 | Apache-2.0 | 18 |
-| OFL-1.1 | 5 |
+| OFL-1.1 | 6 |
 | MPL-2.0 | 1 |
 | BSD | 1 |
 
@@ -257,7 +257,7 @@ The JSON documents carry **790 dependency relations** between these components: 
 | --- | --- | --- | --- | --- |
 | highlight.css | 11.11.1 | BSD-3-Clause | — | Hash-pinned export asset (no npm package). |
 
-### Bundled fonts (5)
+### Bundled fonts (6)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -266,6 +266,7 @@ The JSON documents carry **790 dependency relations** between these components: 
 | Inter | — | OFL-1.1 | The Inter Project Authors | `pkg:generic/Inter` |
 | Lora | — | OFL-1.1 | The Lora Project Authors | `pkg:generic/Lora` |
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
+| monospace | — | OFL-1.1 | — | `pkg:generic/monospace` |
 
 ### Build SDKs (2)
 

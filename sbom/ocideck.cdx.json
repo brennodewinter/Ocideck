@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:87c37542-726a-5247-8906-22adfb294a34",
+  "serialNumber": "urn:uuid:7c8877df-f86a-5144-8de2-668a95233cbd",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T21:40:51.791600Z",
+    "timestamp": "2026-08-25T06:52:21.377605Z",
     "tools": {
       "components": [
         {
@@ -9003,6 +9003,35 @@
       ]
     },
     {
+      "bom-ref": "font:assets/fonts/RobotoMono-Variable.ttf",
+      "type": "file",
+      "name": "monospace",
+      "purl": "pkg:generic/monospace",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "66a80e79d17e4c7cabd162e2916578a4cc08fd19eef6e2a643305eae9c567b2b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/RobotoMono-Variable.ttf."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:npm/dompurify@3.4.13",
       "type": "library",
       "name": "dompurify",
@@ -9367,6 +9396,7 @@
         "font:assets/fonts/Inter-Variable.ttf",
         "font:assets/fonts/Lora-Variable.ttf",
         "font:assets/fonts/Roboto-Variable.ttf",
+        "font:assets/fonts/RobotoMono-Variable.ttf",
         "fork:desktop_multi_window@0.3.0",
         "fork:markdown_quill@4.3.0",
         "git:cnativeapi@0.1.4",
@@ -11188,6 +11218,10 @@
     },
     {
       "ref": "font:assets/fonts/Roboto-Variable.ttf",
+      "dependsOn": []
+    },
+    {
+      "ref": "font:assets/fonts/RobotoMono-Variable.ttf",
       "dependsOn": []
     },
     {
