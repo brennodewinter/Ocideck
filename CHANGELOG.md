@@ -12,6 +12,37 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.10] — 2026-08-25
+
+### Added
+
+- feat(ci): macOS en Windows bouwen ook na een merge + repetitie bij een toolchain-bump (#1781)
+- feat(export): ODT en ODP als open exportformaten (#1768, #1769) (#1773)
+- feat(epub): ePub 3 als documentexportformaat (#1766)
+- feat(ci): poort op de systeembibliotheken die de Linux-build nodig heeft (#1764)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- test: flaky carousel-delete + PDF-export op Linux-runner aangescherpt (#1783)
+- Documentmodus: stabiele tabellen en zoeken/vervangen (#1780)
+- test(shell): open-budget 400→1200 — act-poging uit #1770 teruggedraaid (#1775)
+- test(shell): WebDAV/S3-open via runAsync — linux-gate niet meer rood (#1770)
+
+### Fixed
+
+- fix(web): bundel Roboto Mono voor consistente selectie-metrics in Bron-weergave (#1784)
+- fix(test): HTML-fallback-test gebruikt een comment, niet een tag (#1785)
+- fix(crop): draaien op Windows lukte niet omdat de voorvertoning het bestand vasthield (#1782)
+- fix(ci): een kale Flutter-bump sloeg de post-merge Linux-build over (#1778)
+- fix(editor): HTML-tag-placeholders zoals <persoon1> trappen visuele modus niet meer uit (#1779)
+- fix(crop): rotatie op Windows landt weer, en een mislukte schrijfbeurt wist niets meer (#1776)
+- fix(crop): een mislukte rotatie is niet langer spoorloos (#1774)
+- fix: find/replace focus, inline code false positive, auto-fallback UX (#1772)
+- fix: PDF-export en editor — #1757, #1758, #1759, #1760 (#1765)
+- fix(windows): twee stille Windows-bugs + vijftien platform-aannames in de suite (#1763)
+- fix: Linux-build eist ayatana-appindicator3 + kapotte docslink (#1762)
+
 ## [0.4.9] — 2026-08-23
 
 ### Added
