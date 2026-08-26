@@ -431,6 +431,59 @@ void main() {
     expect(hashText, contains(hash), reason: 'SHA-256 is afgebroken');
   });
 
+  test(
+    'een tabelrij die hoger is dan een blad laat de export niet vastlopen',
+    () async {
+      // Een `pw.Table`-rij kan niet over een bladovergang heen breken. Past de rij
+      // op geen enkel blad, dan plaatst `MultiPage` niets, begint een nieuw blad,
+      // en gebeurt daar hetzelfde: de opmaak loopt oneindig rond (#1798). De
+      // bewaking daarvoor staat upstream in een `assert` en doet in een
+      // uitgeleverde app niets.
+      //
+      // LET OP bij het onderhouden van deze toets: gaat de bescherming stuk, dan
+      // *hangt* hij in plaats van te falen — de lus is synchroon, dus een
+      // `Timeout` vuurt niet. Merk je dat de PDF-suite blijft staan, kijk dan
+      // hier eerst.
+      final lang = List.generate(400, (i) => 'woord$i').join(' ');
+      final bytes = await render('| Kop |\n| --- |\n| $lang |\n');
+      final text = pdfVisibleText(bytes);
+      expect(text, contains('woord0'), reason: 'begin van de cel ontbreekt');
+      expect(text, contains('woord399'), reason: 'eind van de cel ontbreekt');
+      expect(
+        pdfPageCount(bytes),
+        greaterThan(1),
+        reason: 'de inhoud hoort over meerdere bladen te lopen',
+      );
+    },
+  );
+
+  test('de terugvalvorm houdt zichtbaar welke kolom wat is', () async {
+    // De tabelvorm gaat verloren, de betekenis niet: elke waarde krijgt zijn
+    // kolomkop ervoor.
+    final lang = List.generate(400, (i) => 'woord$i').join(' ');
+    final text = pdfVisibleText(
+      await render(
+        '| Toelichting | Status |\n| --- | --- |\n| $lang | Open |\n',
+      ),
+    );
+    expect(text, contains('Toelichting'));
+    expect(text, contains('Status'));
+    expect(text, contains('Open'));
+  });
+
+  test('een gewone tabel blijft gewoon een tabel', () async {
+    // De terugvalvorm mag niet te gretig zijn. Een tabel die past houdt zijn
+    // randen — en die zijn in de tekenstroom te zien als lijnstukken.
+    final bytes = await render(
+      '| Kenmerk | Waarde |\n| --- | --- |\n| Organisatie | RWM |\n',
+    );
+    expect(
+      pdfStrokedLines(bytes),
+      isNotEmpty,
+      reason: 'geen tabelranden: de tabel is als losse blokken gezet',
+    );
+  });
+
   test('uitwijken kost hoogstens één blad, ook bij een hoge rij', () async {
     // De uitwijking van #1790 mag nooit een lus worden. De grendel is dat er op
     // dezelfde leesregel nooit twee keer wordt uitgeweken, en dat elke

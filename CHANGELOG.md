@@ -1987,6 +1987,28 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een tabelrij die hoger is dan een blad laat de export niet meer vastlopen
+  (#1798).** Een `pw.Table`-rij kan niet over een bladovergang heen breken. Past
+  de rij op geen enkel blad, dan plaatst `MultiPage` niets, begint een nieuw
+  blad, en gebeurt daar precies hetzelfde — de opmaak loopt oneindig rond, op
+  volle kracht, zonder melding. De bewaking die dat upstream zou vangen staat in
+  een `assert` en verdwijnt dus in een uitgeleverde app: de gebruiker kreeg een
+  bevroren venster. Eén lange alinea in een tabelcel was genoeg, en dat is in een
+  rapport heel gewoon.
+
+  Zo'n tabel gaat nu als losse blokken de stroom in: per rij elke cel op een
+  eigen regel, met de kolomkop ervoor zodat zichtbaar blijft welk gegeven bij
+  welke kolom hoort. De uitlijning naast elkaar gaat verloren, maar die was bij
+  een cel van een halve bladzijde toch geen leeshulp meer. De inhoud blijft
+  volledig.
+
+  Twee dingen die het uitzoeken leerde. De lus is **synchroon**, dus een
+  `Timeout` in een toets vuurt niet — de isolate geeft nooit terug. En alleen
+  een widget die rechtstreeks in de lijst van `MultiPage` staat mag breken: de
+  eerste terugvalvorm zat in een `pw.Column`, en die plaatst zijn kinderen heel,
+  waardoor de hang gewoon terugkwam in een andere vorm. De blokken gaan daarom
+  plat de stroom in.
+
 - **Een tabel over meerdere bladen laat zijn kopregel niet meer als wees achter
   (#1790).** Korte tabellen waren sinds #1795 gedekt doordat ze zichzelf bij
   elkaar houden; een tabel die langer is dan een blad kan dat niet en hield het
