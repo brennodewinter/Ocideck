@@ -358,8 +358,9 @@ class DocumentPdfWidgets {
     block,
     style: style,
     baseStyle: _baseStyle,
-    text: (spans, textStyle) => pw.RichText(
+    text: (spans, textStyle, {align}) => pw.RichText(
       overflow: pw.TextOverflow.span,
+      textAlign: align ?? pw.TextAlign.left,
       text: pw.TextSpan(
         style: textStyle,
         children: _spans(spans, size: textStyle.fontSize),

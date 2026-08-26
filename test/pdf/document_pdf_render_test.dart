@@ -367,6 +367,29 @@ void main() {
     );
   });
 
+  test('de kop van de tijdkolom staat één keer, niet boven elke kaart', () async {
+    // Met een beschrijvende kop stond dezelfde regel boven elk van de kaarten
+    // — in het RWM-rapport vijftig keer in acht bladzijden (#1793).
+    final rijen = List.generate(
+      12,
+      (i) => '| 27-07 1$i:00 | Gebeurtenis $i | Gemeld |',
+    ).join('\n');
+    final text = pdfVisibleText(
+      await render(
+        '<!-- timeline -->\n'
+        '| Lokale tijd (CEST, UTC+02:00) | Gebeurtenis | Status |\n'
+        '| --- | --- | --- |\n$rijen\n',
+      ),
+    );
+    expect(
+      'Lokale tijd'.allMatches(text),
+      hasLength(1),
+      reason: 'kolomkop herhaald per kaart',
+    );
+    // De inhoud blijft wel gewoon staan.
+    expect(text, contains('Gebeurtenis 11'));
+  });
+
   test('een korte tabel laat zijn kopregel niet als wees achter', () async {
     // `package:pdf` plaatst rijen tot er één niet meer past. Past onderaan een
     // blad alleen de herhaalde kopregel nog, dan tekent hij die daar — en
