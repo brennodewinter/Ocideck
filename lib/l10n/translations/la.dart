@@ -1650,6 +1650,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Una tabula latitudini paginae non convenit, ne minima quidem littera.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabulae latitudini paginae non conveniunt, ne minima quidem littera.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Ideo verba et valores longi, ut summae vel inscriptiones IP, in medio divisi sunt.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Tabulam divide, aut valores longos alterum sub altero pone, non iuxta.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) quod in LibreOffice aut Word aperitur. Mutabile, cum notis pedicularibus nativis et capitibus sicut index. Alternativa aperta fasciculo Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

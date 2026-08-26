@@ -1654,6 +1654,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Tabella waħda ma toqgħodx fil-wisa\' tal-paġna, lanqas bl-iżgħar tipa.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabelli ma joqogħdux fil-wisa\' tal-paġna, lanqas bl-iżgħar tipa.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Għalhekk kliem u valuri twal bħal hashes jew indirizzi IP inqasmu min-nofs.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Aqsam it-tabella, jew qiegħed il-valuri twal wieħed taħt l-ieħor minflok ħdejn xulxin.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) li jinfetaħ f\'LibreOffice jew Word. Editabbli, b\'footnotes nattivi u headers bhala outline. L-alternattiva miftuha ghal fajl Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

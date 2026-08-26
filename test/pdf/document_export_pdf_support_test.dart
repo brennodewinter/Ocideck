@@ -90,4 +90,32 @@ void main() {
       );
     });
   });
+
+  group('de melding bij een tabel die niet past (#1789)', () {
+    test('enkelvoud en meervoud lopen niet door elkaar', () {
+      expect(tablesTooWideMessage(l10n, 1), contains('Eén tabel past niet'));
+      final drie = tablesTooWideMessage(l10n, 3);
+      expect(drie, contains('3 tabellen passen niet'));
+      expect(drie, isNot(contains('{n}')), reason: 'plaatshouder blijft staan');
+    });
+
+    test('noemt wat er verloren gaat en wat de lezer eraan kan doen', () {
+      // "Deze tabel past niet" is een oordeel waar niemand iets mee kan. De
+      // melding noemt daarom de schade (waarden middenin afgebroken) én de twee
+      // vormen die wél passen.
+      final bericht = tablesTooWideMessage(l10n, 1);
+      expect(bericht, contains('IP-adressen'));
+      expect(bericht, contains('onder elkaar'));
+    });
+  });
+
+  test('de documentexport geeft de tabelwaarschuwing door aan de schil', () {
+    // Zelfde bronpoort als hierboven: een melding die de exportdienst wél
+    // vuurt maar het bewerkscherm niet doorgeeft, bereikt niemand.
+    final source = File(
+      'lib/widgets/document_editor_screen.dart',
+    ).readAsStringSync();
+    expect(source, contains('onPdfTablesTooWide:'));
+    expect(source, contains('warnAboutTablesTooWide('));
+  });
 }

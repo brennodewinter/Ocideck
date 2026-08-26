@@ -1655,6 +1655,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Една таблица не се побира в ширината на страницата дори при най-малкия кегел.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} таблици не се побират в ширината на страницата дори при най-малкия кегел.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Затова дълги думи и стойности като хешове или IP адреси са пренесени по средата.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Разделете таблицата или подредете дългите стойности една под друга вместо една до друга.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), който се отваря в LibreOffice или Word. Редактируем, с вградени бележки под линия и заглавия като структура. Отворената алтернатива на Word файл.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

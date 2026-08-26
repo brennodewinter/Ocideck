@@ -1987,6 +1987,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De PDF-export zegt het wanneer een tabel niet past (#1789).** De letter van
+  een tabel krimpt sinds #1795 tot elke kolom haar langste woord draagt, maar
+  niet onbeperkt: onder de ondergrens wordt een tabel eerder onleesbaar dan
+  behulpzaam. Een tabel die dáár nog te breed is — een SHA-512 van 128 tekens is
+  breder dan een A4 ooit kan zijn — krijgt zijn waarden alsnog middenin
+  doorgehakt. Bij een hash of IP-adres is dat geen schoonheidsfout maar verlies:
+  de lezer kan de waarde niet meer overnemen of vergelijken, en juist daarvoor
+  staat hij er. De export telt zulke tabellen nu en meldt ze na afloop, langs
+  dezelfde route als een ontbrekend teken of een te grof logo — met de twee
+  vormen die wél passen erbij, want "maak de tabel smaller" is geen handeling
+  die iemand kan uitvoeren.
+
+  Gemeten met de échte bladbreedte tijdens de export, niet met een A4-aanname in
+  het kwaliteitspaneel: die laag kent het paginaformaat niet en zou ernaast
+  zitten zodra iemand liggend of op A3 zet.
+
 - **De standaardlettermaat van een document wordt 11 punt.** 15,5 was schermmaat:
   het was de maat waarin de lezer altijd al stond, en die reisde als standaard
   voor een *blad* mee zonder ooit tegen papier gehouden te zijn. Op A4 leest dat

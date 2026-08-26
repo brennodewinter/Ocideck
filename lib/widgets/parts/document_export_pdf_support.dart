@@ -56,6 +56,43 @@ String unsupportedCharactersMessage(AppLocalizations l10n, Set<int> runes) {
       '${l10n.d('Exporteer naar HTML of LaTeX als ze in het document horen.')}';
 }
 
+/// De melding bij een tabel die ook op de kleinste letter niet op het blad past.
+///
+/// Noemt wát er misgaat en niet alleen dát het misgaat: bij een hash of een
+/// IP-adres is een afbreking midden in de waarde geen schoonheidsfout maar
+/// verlies — de lezer kan hem daarna niet meer overnemen of vergelijken. Het
+/// advies noemt de twee vormen die wél passen, want "maak de tabel smaller" is
+/// geen handeling die iemand kan uitvoeren.
+String tablesTooWideMessage(AppLocalizations l10n, int count) {
+  final wat = count == 1
+      ? l10n.d(
+          'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.',
+        )
+      : l10n
+            .d(
+              '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.',
+            )
+            .replaceAll('{n}', '$count');
+  return '$wat '
+      '${l10n.d('Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.')} '
+      '${l10n.d('Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.')}';
+}
+
+/// Meld dat de PDF is geschreven met een tabel die niet paste.
+///
+/// Een waarschuwing en geen fout: het bestand staat er, en de tabel is te lezen
+/// — alleen de lange waarden erin niet meer betrouwbaar over te nemen.
+void warnAboutTablesTooWide(
+  ScaffoldMessengerState messenger,
+  AppLocalizations l10n,
+  int count,
+) => messenger.showSnackBar(
+  SnackBar(
+    content: Text(tablesTooWideMessage(l10n, count)),
+    duration: const Duration(seconds: 8),
+  ),
+);
+
 /// Meld dat de PDF is geschreven maar tekens mist.
 ///
 /// Het bestand staat er wél — daarom een waarschuwing en geen fout. Wat níet mag

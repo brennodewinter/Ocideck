@@ -1660,6 +1660,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ένας πίνακας δεν χωρά στο πλάτος σελίδας, ούτε στο μικρότερο μέγεθος γραμματοσειράς.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} πίνακες δεν χωρούν στο πλάτος σελίδας, ούτε στο μικρότερο μέγεθος γραμματοσειράς.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Έτσι, μεγάλες λέξεις και τιμές όπως κατακερματισμοί ή διευθύνσεις IP κόπηκαν στη μέση.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Χωρίστε τον πίνακα ή τοποθετήστε τις μεγάλες τιμές τη μία κάτω από την άλλη αντί δίπλα-δίπλα.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Ένα ODT (OpenDocument Text) που ανοίγει στο LibreOffice ή το Word. Επεξεργάσιμο, με εγγενείς υποσημειώσεις και επικεφαλίδες ως περίγραμμα. Η ανοιχτή εναλλακτική για αρχείο Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

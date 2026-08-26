@@ -2553,6 +2553,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Bir tablo, en küçük punto boyutunda bile sayfa genişliğine sığmıyor.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tablo, en küçük punto boyutunda bile sayfa genişliğine sığmıyor.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Bu yüzden karma değerleri veya IP adresleri gibi uzun sözcükler ortadan bölündü.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Tabloyu bölün ya da uzun değerleri yan yana değil alt alta yerleştirin.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'LibreOffice veya Word\'de açılan bir ODT (OpenDocument Text). Düzenlenebilir, doğal dipnotlar ve başlıklar olarak ana hatlarla. Bir Word dosyasına açık alternatif.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

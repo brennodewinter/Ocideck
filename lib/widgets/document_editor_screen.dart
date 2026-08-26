@@ -922,6 +922,8 @@ Future<String?> _writeDocumentExport(
     onPdfUnsupportedCharacters: (runes) =>
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
     onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),
+    onPdfTablesTooWide: (count) =>
+        warnAboutTablesTooWide(messenger, l10n, count),
     renderMermaid: renderMermaidForPdf,
     renderMath: renderMathForPdf,
     outputPath: outputPath,

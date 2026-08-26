@@ -1642,6 +1642,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Jedna tabuľka sa nezmestí na šírku strany ani pri najmenšom stupni písma.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabuliek sa nezmestí na šírku strany ani pri najmenšom stupni písma.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Dlhé slová a hodnoty ako odtlačky či IP adresy sú preto zalomené uprostred.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Rozdeľte tabuľku alebo umiestnite dlhé hodnoty pod seba namiesto vedľa seba.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), ktorý sa otvára v LibreOffice alebo Worde. Upraviteľný, s natívnymi poznámkami pod čiarou a nadpismi ako osnovou. Otvorená alternatíva k súboru Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

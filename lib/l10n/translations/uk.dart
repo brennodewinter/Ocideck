@@ -1651,6 +1651,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Одна таблиця не вміщається в ширину сторінки навіть за найменшого кегля.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} таблиць не вміщаються в ширину сторінки навіть за найменшого кегля.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Через це довгі слова та значення, як-от хеші чи IP-адреси, розірвано посередині.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Розділіть таблицю або розмістіть довгі значення одне під одним, а не поруч.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), який відкривається в LibreOffice або Word. Редагований, із власними виносками та заголовками як контур. Відкрита альтернатива файлу Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

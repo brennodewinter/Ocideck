@@ -1642,6 +1642,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Viena lentelė netelpa į puslapio plotį net ir mažiausiu šriftu.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} lentelės netelpa į puslapio plotį net ir mažiausiu šriftu.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Todėl ilgi žodžiai ir reikšmės, tokios kaip maišos ar IP adresai, nulaužti per vidurį.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Padalykite lentelę arba ilgas reikšmes išdėstykite viena po kita, o ne greta.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), atveriamas LibreOffice arba Word. Redaguojamas, su savosiomis išnašomis ir antraštėmis kaip struktūra. Atvira alternatyva Word failui.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

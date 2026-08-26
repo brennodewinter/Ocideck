@@ -107,6 +107,7 @@ class DocumentPdfResult {
   const DocumentPdfResult(
     this.bytes, {
     this.unsupportedCharacters = const {},
+    this.tablesTooWide = 0,
     this.logo,
   });
 
@@ -128,6 +129,16 @@ class DocumentPdfResult {
   /// maar mist hij die tekens — en dan hoort de gebruiker dat te horen in plaats
   /// van het zelf te ontdekken. Zie [DocumentPdfFonts.unsupportedRunes].
   final Set<int> unsupportedCharacters;
+
+  /// Het aantal tabellen dat ook op de kleinste toegestane letter niet op de
+  /// bladbreedte paste, en waarvan de export dus woorden en waarden middenin
+  /// heeft doorgehakt.
+  ///
+  /// Nul is de normale uitkomst. Staat er iets, dan is het bestand geschreven
+  /// maar draagt het een tabel waarvan een lezer een hash of IP-adres niet meer
+  /// kan overnemen — en dat hoort de gebruiker te horen in plaats van het zelf
+  /// te ontdekken (#1789).
+  final int tablesTooWide;
 
   bool get isComplete => unsupportedCharacters.isEmpty;
 }
@@ -185,8 +196,11 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     'subtitle': deck.description,
     'author': deck.author,
   };
+  var tablesTooWide = 0;
   final bytes = await buildDocumentPdf(
     blocks,
+    onTablesTooWide: (List<PdfTableBlock> tables) =>
+        tablesTooWide = tables.length,
     style: style,
     fonts: fonts,
     verbatimLabel: labels.labelFor,
@@ -220,6 +234,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   return DocumentPdfResult(
     bytes,
     unsupportedCharacters: fonts.unsupportedRunes(_textOf(blocks)),
+    tablesTooWide: tablesTooWide,
     logo: logoResolutionOf(logo, boxSide: logoWidth),
   );
 }

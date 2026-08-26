@@ -1665,6 +1665,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ní oireann tábla amháin do leithead an leathanaigh, fiú ag an gcló is lú.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ní oireann {n} tábla do leithead an leathanaigh, fiú ag an gcló is lú.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Dá bharr sin briseadh focail agus luachanna fada ar nós hais nó seoltaí IP ina lár.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Roinn an tábla, nó cuir luachanna fada ceann faoi cheann seachas taobh le taobh.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) a osclaíonn i LibreOffice nó Word. Ineagarthóireacht, le fonótaí dúchais agus ceannteidil mar chreatlach. An rogha oscailte do chomhad Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

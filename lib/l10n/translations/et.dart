@@ -1629,6 +1629,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Üks tabel ei mahu lehe laiusesse isegi väikseima kirjasuurusega.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabelit ei mahu lehe laiusesse isegi väikseima kirjasuurusega.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Seetõttu on pikad sõnad ja väärtused, nagu räsid või IP-aadressid, keskelt katki murtud.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Jagage tabel või paigutage pikad väärtused üksteise alla, mitte kõrvuti.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), mis avaneb LibreOffice\'is voi Wordis. Redigeeritav, algupäraste allmärkuste ja pealkirjadega kontuurina. Avatud alternatiiv Word-failile.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

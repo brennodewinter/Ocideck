@@ -1663,6 +1663,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Uma tabela não cabe na largura da página, nem no menor corpo de letra.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabelas não cabem na largura da página, nem no menor corpo de letra.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Por isso, palavras e valores longos como hashes ou endereços IP foram quebrados ao meio.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Divida a tabela ou coloque os valores longos uns abaixo dos outros em vez de lado a lado.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Um ODT (OpenDocument Text) que abre no LibreOffice ou Word. Editável, com notas de rodapé nativas e cabeçalhos como estrutura. A alternativa aberta a um ficheiro Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
