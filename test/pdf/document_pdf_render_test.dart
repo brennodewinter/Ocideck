@@ -333,7 +333,10 @@ void main() {
       // de `1` op de ene regel, de `0.` op de volgende. In de teruggelezen
       // tekst is dat het verschil tussen "10." en "1 0." — de probe zet een
       // spatie tussen twee losse tekststukken.
-      final items = List.generate(14, (i) => '${i + 1}. punt ${i + 1}').join('\n');
+      final items = List.generate(
+        14,
+        (i) => '${i + 1}. punt ${i + 1}',
+      ).join('\n');
       final text = pdfVisibleText(await render('$items\n'));
       // Merkteken én punttekst aaneen: brak het nummer af, dan staat er
       // "1 0. punt 10" en gaat deze vergelijking niet op. Alleen op het
@@ -428,28 +431,31 @@ void main() {
     expect(hashText, contains(hash), reason: 'SHA-256 is afgebroken');
   });
 
-  test('de kop van de tijdkolom staat één keer, niet boven elke kaart', () async {
-    // Met een beschrijvende kop stond dezelfde regel boven elk van de kaarten
-    // — in het RWM-rapport vijftig keer in acht bladzijden (#1793).
-    final rijen = List.generate(
-      12,
-      (i) => '| 27-07 1$i:00 | Gebeurtenis $i | Gemeld |',
-    ).join('\n');
-    final text = pdfVisibleText(
-      await render(
-        '<!-- timeline -->\n'
-        '| Lokale tijd (CEST, UTC+02:00) | Gebeurtenis | Status |\n'
-        '| --- | --- | --- |\n$rijen\n',
-      ),
-    );
-    expect(
-      'Lokale tijd'.allMatches(text),
-      hasLength(1),
-      reason: 'kolomkop herhaald per kaart',
-    );
-    // De inhoud blijft wel gewoon staan.
-    expect(text, contains('Gebeurtenis 11'));
-  });
+  test(
+    'de kop van de tijdkolom staat één keer, niet boven elke kaart',
+    () async {
+      // Met een beschrijvende kop stond dezelfde regel boven elk van de kaarten
+      // — in het RWM-rapport vijftig keer in acht bladzijden (#1793).
+      final rijen = List.generate(
+        12,
+        (i) => '| 27-07 1$i:00 | Gebeurtenis $i | Gemeld |',
+      ).join('\n');
+      final text = pdfVisibleText(
+        await render(
+          '<!-- timeline -->\n'
+          '| Lokale tijd (CEST, UTC+02:00) | Gebeurtenis | Status |\n'
+          '| --- | --- | --- |\n$rijen\n',
+        ),
+      );
+      expect(
+        'Lokale tijd'.allMatches(text),
+        hasLength(1),
+        reason: 'kolomkop herhaald per kaart',
+      );
+      // De inhoud blijft wel gewoon staan.
+      expect(text, contains('Gebeurtenis 11'));
+    },
+  );
 
   test('een korte tabel laat zijn kopregel niet als wees achter', () async {
     // `package:pdf` plaatst rijen tot er één niet meer past. Past onderaan een

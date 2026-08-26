@@ -681,9 +681,7 @@ class DocumentPdfWidgets {
     // plaats van zijn kopregel alleen onderaan achter te laten (#1790). Boven
     // die grens blijft hij verdeelbaar — het vermogen om te breken is voor een
     // lange tabel belangrijker dan een nette kop.
-    return _tableFitsOnAPage(block)
-        ? pw.Inseparable(child: table)
-        : table;
+    return _tableFitsOnAPage(block) ? pw.Inseparable(child: table) : table;
   }
 
   /// Of een tabel klein genoeg is om als geheel op één blad te passen.

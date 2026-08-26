@@ -1987,6 +1987,45 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De standaardlettermaat van een document wordt 12 punt.** 15,5 was schermmaat:
+  het was de maat waarin de lezer altijd al stond, en die reisde als standaard
+  voor een *blad* mee zonder ooit tegen papier gehouden te zijn. Op A4 leest dat
+  als grootletterdruk, en het maakt brede tabellen onnodig krap — bij het werk
+  aan #1794 bleek dat zeven prozakolommen op 15,5 ook gekrompen niet passen,
+  terwijl ze op 11 wél passen. Het bereik (9–28) blijft. **Wie raakt dit?**
+  `toJson` schrijft `documentBodyFontSize` onvoorwaardelijk, dus elk ooit
+  opgeslagen stijlprofiel draagt zijn maat expliciet en verandert niet. Alleen
+  een stijl waarin het veld helemáál ontbreekt — van vóór het bestond, of met de
+  hand geschreven — rendert voortaan kleiner. Dat is een bewuste
+  herinterpretatie van die bestanden en staat daarom hier, en niet alleen in de
+  commit.
+
+- **Zes opmaakfouten in de PDF-export, gevonden door drie geleverde rapporten
+  terug te lezen (#1789–#1794).** Een lijstnummer vanaf tien viel uiteen over
+  twee regels omdat de goot op één cijfer was gedimensioneerd (#1791). Een link
+  van meerdere woorden werd per woord onderstreept: de ontleder levert de tekst
+  van een link in een *tabelcel* als één stuk per woord aan, en `package:pdf`
+  voegt de decoratie alleen samen bij een identiek stijl- én annotatieobject —
+  aangrenzende stukken met gelijke opmaak worden nu in de ontleder samengevoegd
+  (#1792). De kop van een tijdlijnkolom stond boven elke kaart, wat bij een
+  beschrijvende kop vijftig herhalingen in acht bladzijden opleverde (#1793). En
+  een brede tabel brak woorden middenin af — `Veiligheidsvraagstu` / `k`, maar
+  ook hashes en IP-adressen, waar de lezer de waarde daarna niet meer kan
+  overnemen; de letter van zo'n tabel krimpt nu tot elke kolom haar langste
+  woord draagt (#1789, #1794).
+
+  Twee restpunten blijven bewust open. Een tabel die over meerdere bladen loopt
+  houdt zijn verweesde kopregel: `Table` kent daar geen instelling voor en een
+  volledige reparatie vraagt een eigen `SpanningWidget` die zichzelf terugtrekt,
+  met kans op een oneindige lus wanneer de tabel op geen enkel blad past
+  (#1790). En een SHA-512 van 128 tekens is breder dan een A4 ooit kan zijn;
+  onder de krimpondergrens houdt die zijn afbrekingen, en daar is de tabelvorm
+  zelf de verkeerde keuze (#1789).
+
+  Vooraf ging een splitsing: `document_pdf_widgets.dart` stond op 1025 regels
+  tegen een plafond van 1026, en het kolombreedte-rekenwerk is naar een eigen
+  bestand verhuisd. Netto blijft het tekenbestand kleiner dan ervoor.
+
 - **De publiceer-workflows van de CI-images bereiken de docker-daemon weer
   (#1787).** Ze leunden op `DOCKER_HOST`, maar de runnerconfig injecteert daar een
   naam overheen die alleen op het buitenste compose-netwerk bestaat; in de

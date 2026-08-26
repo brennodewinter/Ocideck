@@ -104,7 +104,10 @@ List<List<double>> pdfFillColors(Uint8List bytes) => [
 List<List<double>> pdfStrokedLines(Uint8List bytes) => [
   for (final stream in _inflatedStreams(bytes))
     for (final match in _strokedLine.allMatches(stream))
-      [for (var group = 1; group <= 4; group++) double.parse(match.group(group)!)],
+      [
+        for (var group = 1; group <= 4; group++)
+          double.parse(match.group(group)!),
+      ],
 ];
 
 final _strokedLine = RegExp(
