@@ -675,6 +675,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ien tabel past net op de bledbreedte, ek net by de lytste letter.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabellen passe net op de bledbreedte, ek net by de lytste letter.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Lange wurden en wearden lykas hashes of IP-adressen binne dêrtroch midden trochbrutsen.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Splits de tabel, of set lange wearden ûnder inoar yn stee fan neist inoar.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'In ODT (OpenDocument Text) dy\'t iepenet yn LibreOffice of Word. Bewurkber, mei lânseigen foetnoaten en koppen as ynhâldsopjefte. It iepen alternatyf foar in Word-triem.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

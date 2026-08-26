@@ -1637,6 +1637,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Egy táblázat nem fér el az oldalszélességben, a legkisebb betűmérettel sem.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} táblázat nem fér el az oldalszélességben, a legkisebb betűmérettel sem.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Ezért a hosszú szavak és értékek, például kivonatok vagy IP-címek, szó közben törtek meg.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Ossza szét a táblázatot, vagy tegye a hosszú értékeket egymás alá egymás mellé helyezés helyett.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Egy ODT (OpenDocument Text), amely LibreOffice-ban vagy Wordben nyitható meg. Szerkeszthető, natív lábjegyzetekkel és címsorokkal vázlatként. A Word-fájl nyílt alternatívája.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

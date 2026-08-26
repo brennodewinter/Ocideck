@@ -1636,6 +1636,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Yksi taulukko ei mahdu sivun leveyteen edes pienimmällä kirjasinkoolla.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} taulukkoa ei mahdu sivun leveyteen edes pienimmällä kirjasinkoolla.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Pitkät sanat ja arvot, kuten tiivisteet tai IP-osoitteet, on siksi katkaistu keskeltä.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Jaa taulukko tai aseta pitkät arvot allekkain vierekkäisyyden sijaan.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), joka avautuu LibreOfficeen tai Wordiin. Muokattava, sisältäen alkuperäiset alaviitteet ja otsikot jäsennelmänä. Avoin vaihtoehto Word-tiedostolle.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

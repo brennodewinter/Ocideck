@@ -674,6 +674,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Un tabel no ta kaba den e hanchura di página, ni ku e lèter di mas chikí.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabel no ta kaba den e hanchura di página, ni ku e lèter di mas chikí.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Pesei palabranan i balornan largu manera hash of adres IP a keda kibrá na mitar.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Parti e tabel, of pone e balornan largu un bou di otro en bes di banda di otro.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Un ODT (OpenDocument Text) ku ta habri na LibreOffice of Word. Editabel, ku nota di pia nativo i titulo manera outline. E alternativo habri pa un fail di Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

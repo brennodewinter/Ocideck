@@ -190,6 +190,7 @@ Future<Uint8List> buildDocumentExportBytes(
   MathSvgResolver? renderMath,
   void Function(Set<int> runes)? onPdfUnsupportedCharacters,
   void Function(LogoResolution logo)? onPdfCoarseLogo,
+  void Function(int count)? onPdfTablesTooWide,
   String? sourcePath,
   String? outputPath,
 }) async {
@@ -283,6 +284,13 @@ Future<Uint8List> buildDocumentExportBytes(
       // het bronbestand; zeggen is het enige wat er nog aan te doen valt.
       final coarse = result.coarseLogo;
       if (coarse != null) onPdfCoarseLogo?.call(coarse);
+      // Een tabel die ook op de kleinste letter niet past krijgt zijn woorden
+      // en waarden middenin doorgehakt. Bij een hash of IP-adres kan de lezer
+      // die daarna niet meer overnemen — zeggen is het enige wat er nog aan te
+      // doen valt (#1789).
+      if (result.tablesTooWide > 0) {
+        onPdfTablesTooWide?.call(result.tablesTooWide);
+      }
       return result.bytes;
     case DocumentExportFormat.epub:
       // ePub 3: herflowbare XHTML in een EPUB-ZIP. Afbeeldingen worden als
@@ -377,6 +385,7 @@ Future<String?> writeDocumentExport(
   MathSvgResolver? renderMath,
   void Function(Set<int> runes)? onPdfUnsupportedCharacters,
   void Function(LogoResolution logo)? onPdfCoarseLogo,
+  void Function(int count)? onPdfTablesTooWide,
   String? outputPath,
   String? sourcePath,
   String? webFileName,
@@ -405,6 +414,7 @@ Future<String?> writeDocumentExport(
     renderMermaid: renderMermaid,
     renderMath: renderMath,
     onPdfUnsupportedCharacters: onPdfUnsupportedCharacters,
+    onPdfTablesTooWide: onPdfTablesTooWide,
     onPdfCoarseLogo: onPdfCoarseLogo,
     sourcePath: sourcePath,
     outputPath: kIsWeb ? null : outputPath,

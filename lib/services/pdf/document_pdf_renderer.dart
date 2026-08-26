@@ -23,6 +23,7 @@ import '../export_metadata.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_style.dart';
+import 'document_pdf_table_widths.dart';
 import 'document_pdf_widgets.dart';
 import 'markdown_to_pdf_blocks.dart';
 
@@ -93,6 +94,9 @@ Future<Uint8List> buildDocumentPdf(
   PageMargins? pageMargins,
   bool cropMarks = false,
   ExportDocumentMetadata? metadata,
+  // De tabellen die ook op de kleinste letter niet passen. Een terugroep en
+  // geen retourwaarde, zodat de bestaande aanroepers ongemoeid blijven.
+  void Function(List<PdfTableBlock> tables)? onTablesTooWide,
 }) async {
   final size = pageSize ?? PageSizeSpec.a4;
   final margins = pageMargins ?? const PageMargins();
@@ -134,6 +138,7 @@ Future<Uint8List> buildDocumentPdf(
     cropMarks: cropMarks,
     metadata: metadata,
     headingPages: headingPages,
+    onTablesTooWide: onTablesTooWide,
   );
 }
 
@@ -152,6 +157,9 @@ Future<Uint8List> _render(
   ExportDocumentMetadata? metadata,
   Map<int, int> headingPages = const {},
   void Function(int index, int page)? onHeadingLaidOut,
+  // De tabellen die ook op de kleinste letter niet passen. Een terugroep en
+  // geen retourwaarde, zodat de bestaande aanroepers ongemoeid blijven.
+  void Function(List<PdfTableBlock> tables)? onTablesTooWide,
 }) async {
   final document = pw.Document(
     title: metadata?.title,
@@ -187,6 +195,15 @@ Future<Uint8List> _render(
     headingPages: headingPages,
     onHeadingLaidOut: onHeadingLaidOut,
   );
+  if (onTablesTooWide != null) {
+    final tooWide = pdfTablesThatCannotFit(
+      blocks: blocks,
+      tableWidth: pageTheme.pageFormat.availableWidth,
+      fontSize: style.bodyFontSize,
+      cellPadding: style.tableCellPadding,
+    );
+    if (tooWide.isNotEmpty) onTablesTooWide(tooWide);
+  }
 
   // Eén keer ontleden en één keer inlezen, niet per bladzijde: de band wordt
   // voor élk blad opnieuw gebouwd. Een logo dat daarbij telkens een nieuwe

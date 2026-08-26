@@ -1638,6 +1638,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ei Tabälle passt nid uf d Sytebreiti, au nid bi dr chlynschte Schrift.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} Tabälle passe nid uf d Sytebreiti, au nid bi dr chlynschte Schrift.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Lange Wörter und Wärt wie Hashes oder IP-Adrässe sy drum mittendrin trennt worde.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Teile d Tabälle, oder setz langi Wärt untenand statt näbenand.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'En ODT (OpenDocument Text), wo in LibreOffice oder Word gaat. Bearbeitbar, mit native Fuessnote und Ueberschrifte als Gliederig. Die offni Alternative zun Word-File.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

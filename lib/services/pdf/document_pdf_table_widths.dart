@@ -69,6 +69,59 @@ double pdfTableFontScale({
 /// Hoeveel ruimer de tabel wordt gerekend dan de tekenschatting aangeeft.
 const double _estimateMargin = 1.12;
 
+/// De tabellen in [blocks] die ook op de kleinste toegestane letter niet op de
+/// bladbreedte passen.
+///
+/// [pdfTableFontScale] laat de letter krimpen tot elke kolom haar langste woord
+/// draagt, maar niet onbeperkt: onder [minTableFontScale] wordt een tabel eerder
+/// onleesbaar dan behulpzaam. Een tabel die zelfs op die maat te breed blijft —
+/// een SHA-512 van 128 tekens is breder dan een A4 ooit kan zijn — krijgt zijn
+/// woorden en waarden alsnog middenin doorgehakt.
+///
+/// Dat is geen renderfout meer maar een vormkeuze die niet uitkomt, en de enige
+/// zinnige omgang is het zeggen. Bij een hash of IP-adres is een stille
+/// afbreking bovendien geen schoonheidsfout: de lezer kan de waarde daarna niet
+/// meer overnemen of vergelijken, en juist daarvoor staat hij er (#1789).
+///
+/// Loopt door lijstpunten heen, want ook daar kan een tabel in staan.
+List<PdfTableBlock> pdfTablesThatCannotFit({
+  required List<PdfBlock> blocks,
+  required double tableWidth,
+  required double fontSize,
+  required double cellPadding,
+}) {
+  final out = <PdfTableBlock>[];
+  void walk(List<PdfBlock> list) {
+    for (final block in list) {
+      switch (block) {
+        case PdfTableBlock():
+          final colCount = block.rows.isEmpty
+              ? 0
+              : block.rows.map((r) => r.length).fold(1, math.max);
+          final scale = pdfTableFontScale(
+            rows: block.rows,
+            colCount: colCount,
+            tableWidth: tableWidth,
+            fontSize: fontSize,
+            cellPadding: cellPadding,
+          );
+          // Gelijk aan de ondergrens betekent: de krimp is opgehouden vóór de
+          // tabel paste. De marge vangt het rekenen met drijvende komma.
+          if (scale <= minTableFontScale + 0.0001) out.add(block);
+        case PdfListBlock(:final items):
+          for (final item in items) {
+            walk(item.blocks);
+          }
+        case _:
+          break;
+      }
+    }
+  }
+
+  walk(blocks);
+  return out;
+}
+
 /// De kolombreedte-strategie per kolom voor een PDF-tabel.
 ///
 /// **Waarom dit bestaat in plaats van de `package:pdf`-standaard.** Zonder

@@ -175,4 +175,67 @@ void main() {
       isEmpty,
     );
   });
+
+  group('tabellen die ook gekrompen niet passen (#1789)', () {
+    PdfTableBlock tabel(List<List<String>> rows) => PdfTableBlock([
+      for (final row in rows)
+        [
+          for (final cell in row) [PdfSpan(cell)],
+        ],
+    ], hasHeader: true);
+
+    // De bladbreedte van een A4 met de standaardmarges, in punten.
+    const a4 = 481.9;
+
+    test('een gewone tabel wordt niet gemeld', () {
+      final tooWide = pdfTablesThatCannotFit(
+        blocks: [
+          tabel([
+            ['Kenmerk', 'Waarde'],
+            ['Organisatie', 'RWM'],
+          ]),
+        ],
+        tableWidth: a4,
+        fontSize: 11,
+        cellPadding: 6,
+      );
+      expect(tooWide, isEmpty);
+    });
+
+    test('een SHA-512 naast een SHA-256 past op geen enkele maat', () {
+      // 128 plus 64 hexadecimale tekens zijn samen breder dan een A4 ooit kan
+      // zijn; onder de krimpondergrens houdt zo'n tabel zijn afbrekingen.
+      final tooWide = pdfTablesThatCannotFit(
+        blocks: [
+          tabel([
+            ['Bestandstype', 'Bestandsnaam', 'SHA-256', 'SHA-512'],
+            ['EVTX', 'RD01-SecurityLogs.evtx', 'a' * 64, 'b' * 128],
+          ]),
+        ],
+        tableWidth: a4,
+        fontSize: 11,
+        cellPadding: 6,
+      );
+      expect(tooWide, hasLength(1));
+    });
+
+    test('een tabel in een lijstpunt telt ook mee', () {
+      final tooWide = pdfTablesThatCannotFit(
+        blocks: [
+          PdfListBlock(ordered: false, [
+            PdfListItem([
+              tabel([
+                ['Hash'],
+                ['c' * 200],
+              ]),
+            ]),
+          ]),
+        ],
+        tableWidth: a4,
+        fontSize: 11,
+        cellPadding: 6,
+      );
+      expect(tooWide, hasLength(1));
+    });
+  });
 }

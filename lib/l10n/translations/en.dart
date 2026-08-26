@@ -838,6 +838,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'One table does not fit the page width, not even at the smallest type size.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tables do not fit the page width, not even at the smallest type size.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Long words and values such as hashes or IP addresses have therefore been broken mid-token.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Split the table, or list long values one below the other instead of side by side.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'An ODT (OpenDocument Text) that opens in LibreOffice or Word. Editable, with native footnotes and headings as outline. The open alternative to a Word file.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

@@ -1634,6 +1634,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'En tabell får inte plats på sidbredden, inte ens vid minsta grad.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabeller får inte plats på sidbredden, inte ens vid minsta grad.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Långa ord och värden som hashar eller IP-adresser har därför brutits mitt i.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Dela tabellen, eller placera långa värden under varandra i stället för bredvid varandra.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'En ODT (OpenDocument Text) som öppnas i LibreOffice eller Word. Redigerbar, med inbyggda fotnoter och rubriker som disposition. Det öppna alternativet till en Word-fil.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

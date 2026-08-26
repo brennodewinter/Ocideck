@@ -1613,6 +1613,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'wa\' pat\'IH \'oH nagh beQ \'ab qaS\'e\'; mach ghItlh \'ach not chuv.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} pat\'IH \'oH nagh beQ \'ab qaS\'e\'; mach ghItlh \'ach not chuv.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'vaj mI\' tIq je per tIq — hash, IP nuq — botlh luchevlu\'.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'pat\'IH yIchev, pagh per tIq bIng yIlan, retlh yIlanQo\'.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) loS LibreOffice pagh Word. choHlaH, native qamHommey bogh \'ej tlhoy\' tlhagh. Word mab lo\'Ha\' open alternative.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':

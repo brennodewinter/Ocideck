@@ -1636,6 +1636,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
+      'Ena tabela ne gre na širino strani niti pri najmanjši velikosti pisave.',
+  '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
+      '{n} tabel ne gre na širino strani niti pri najmanjši velikosti pisave.',
+  'Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.':
+      'Zato so dolge besede in vrednosti, kot so zgoščene vrednosti ali naslovi IP, prelomljene na sredini.',
+  'Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.':
+      'Razdelite tabelo ali dolge vrednosti postavite eno pod drugo namesto eno ob drugo.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), ki se odpre v LibreOffice ali Word. Predelovalen, z izvornimi sprotnimi opombami in naslovi kot oris. Odprta alternativa datoteki Word.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
