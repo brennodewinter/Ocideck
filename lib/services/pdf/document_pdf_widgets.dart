@@ -632,6 +632,15 @@ class DocumentPdfWidgets {
 
   pw.Widget _table(PdfTableBlock block) {
     final rows = <pw.TableRow>[];
+    // Past de tabel niet op haar natuurlijke maat, dan krimpt de letter tot ze
+    // wél past — evenredig, zodat de verdeling gelijk blijft (#1789, #1794).
+    final scale = pdfTableFontScale(
+      rows: block.rows,
+      colCount: _tableColCount(block),
+      tableWidth: maxImageWidth,
+      fontSize: style.bodyFontSize,
+      cellPadding: style.tableCellPadding,
+    );
     for (var index = 0; index < block.rows.length; index++) {
       final isHeader = block.hasHeader && index == 0;
       final zebra = !isHeader && index.isEven ? style.tableZebra : null;
@@ -643,7 +652,13 @@ class DocumentPdfWidgets {
           repeat: isHeader,
           children: [
             for (var column = 0; column < block.rows[index].length; column++)
-              _cell(block, row: index, column: column, header: isHeader),
+              _cell(
+                block,
+                row: index,
+                column: column,
+                header: isHeader,
+                scale: scale,
+              ),
           ],
         ),
       );
@@ -657,7 +672,7 @@ class DocumentPdfWidgets {
         rows: block.rows,
         colCount: _tableColCount(block),
         tableWidth: maxImageWidth,
-        fontSize: style.bodyFontSize,
+        fontSize: style.bodyFontSize * scale,
         cellPadding: style.tableCellPadding,
       ),
       children: rows,
@@ -713,6 +728,7 @@ class DocumentPdfWidgets {
     required int row,
     required int column,
     required bool header,
+    double scale = 1,
   }) {
     final alignments = block.alignments;
     final alignment = alignments != null && column < alignments.length
@@ -729,8 +745,9 @@ class DocumentPdfWidgets {
         text: pw.TextSpan(
           style: _baseStyle.copyWith(
             color: header ? style.tableHeaderText : style.tableText,
+            fontSize: style.bodyFontSize * scale,
           ),
-          children: _spans(block.rows[row][column]),
+          children: _spans(block.rows[row][column], scale: scale),
         ),
       ),
     );
@@ -861,11 +878,16 @@ class DocumentPdfWidgets {
         ),
       );
 
-  List<pw.InlineSpan> _spans(List<PdfSpan> spans, {double? size}) => [
-    for (final span in spans) _span(span, size ?? style.bodyFontSize),
+  List<pw.InlineSpan> _spans(
+    List<PdfSpan> spans, {
+    double? size,
+    double scale = 1,
+  }) => [
+    for (final span in spans)
+      _span(span, (size ?? style.bodyFontSize) * scale, scale: scale),
   ];
 
-  pw.InlineSpan _span(PdfSpan span, double size) {
+  pw.InlineSpan _span(PdfSpan span, double size, {double scale = 1}) {
     if (span.math) {
       return buildDocumentPdfInlineMath(
         span,
@@ -892,8 +914,10 @@ class DocumentPdfWidgets {
         fontBold: span.code ? fonts.mono : null,
         fontItalic: span.code ? fonts.mono : null,
         fontBoldItalic: span.code ? fonts.mono : null,
+        // Ook de vaste-breedteletter krimpt mee: juist daar staan de hashes
+        // en IP-adressen die anders middenin afbreken (#1789).
         fontSize: span.code
-            ? style.monoSize
+            ? style.monoSize * scale
             : (span.superscript ? size * 0.7 : size),
         // `null` en niet `normal` wanneer de span er zelf niets van vindt. Een
         // kop staat al op vet, en een span die "gewoon" zégt overstemt dat —

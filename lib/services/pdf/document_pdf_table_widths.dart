@@ -7,11 +7,67 @@
 // `test/pdf/pdf_table_column_widths_test.dart`) en houdt het tekenbestand
 // onder zijn regelplafond.
 
+import 'dart:math' as math;
+
 import 'package:pdf/widgets.dart' as pw;
 
 import 'document_pdf_blocks.dart';
 
 String _cellText(List<PdfSpan> cell) => cell.map((s) => s.text).join();
+
+/// De ondergrens waaronder de letter van een tabel niet meer krimpt.
+///
+/// Onder ruwweg twee derde van de broodtekst wordt een rapporttabel eerder
+/// onleesbaar dan behulpzaam. Een tabel die zelfs op deze maat niet past —
+/// een SHA-512 van 128 tekens is breder dan een A4 ooit kan zijn — houdt zijn
+/// afbrekingen; daar is de tabelvorm zelf de verkeerde keuze.
+const double minTableFontScale = 0.62;
+
+/// De factor waarmee de letter van een tabel moet krimpen om élke kolom haar
+/// langste woord op één regel te laten dragen.
+///
+/// **Waarom krimpen en niet slimmer verdelen.** [pdfTableColumnWidths] verdeelt
+/// de beschikbare breedte evenredig met het langste woord per kolom. Dat werkt
+/// zolang de som van die langste woorden op het blad past. Bij zeven
+/// prozakolommen is dat niet zo, en dan helpt geen enkele verdeelsleutel meer:
+/// de breedte is op. Wat er dan gebeurde was afbreken middenin het woord —
+/// `Veiligheidsvraagstu` / `k`, `Kritie` / `k` (#1794) — of middenin een
+/// hash of IP-adres, waar de lezer de waarde niet eens meer kan overnemen
+/// (#1789).
+///
+/// Een kleinere letter maakt élk langste woord evenredig smaller en herstelt
+/// zo de pasvorm, zonder aan de verdeling te tornen. Zeven kolommen op 8 punt
+/// leest een stuk beter dan zeven kolommen op 11 punt met een afbreking in elk
+/// tweede woord.
+double pdfTableFontScale({
+  required List<List<List<PdfSpan>>> rows,
+  required int colCount,
+  required double tableWidth,
+  required double fontSize,
+  required double cellPadding,
+}) {
+  if (rows.isEmpty || colCount <= 0 || tableWidth <= 0) return 1;
+  var needed = 0.0;
+  for (var c = 0; c < colCount; c++) {
+    needed += _estimatedLongestWordWidth(
+      rows.map((r) => c < r.length ? r[c] : const <PdfSpan>[]),
+      fontSize,
+      cellPadding,
+    );
+  }
+  // Een marge op de schatting, want die is stelselmatig iets te optimistisch:
+  // `_charWidthFactor` meet in kleine letters (een kapitale G telt als 0,55 em
+  // in plaats van ~0,72) en is geijkt op een schreefloze letter, terwijl een
+  // rapport vaak een schreefletter zet. Zonder marge kwam elke kolom één teken
+  // tekort en brak er alsnog een woord af — net niet is hier hetzelfde als
+  // niet.
+  needed *= _estimateMargin;
+  if (needed <= tableWidth) return 1;
+  return math.max(tableWidth / needed, minTableFontScale);
+}
+
+/// Hoeveel ruimer de tabel wordt gerekend dan de tekenschatting aangeeft.
+const double _estimateMargin = 1.12;
 
 /// De kolombreedte-strategie per kolom voor een PDF-tabel.
 ///

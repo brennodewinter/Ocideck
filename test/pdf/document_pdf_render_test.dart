@@ -367,6 +367,67 @@ void main() {
     );
   });
 
+  test('een brede tabel breekt geen woorden middenin', () async {
+    // Zeven prozakolommen passen niet op A4-staand. De verdeelsleutel kon daar
+    // niets meer aan doen — de breedte was op — en `package:pdf` brak dan
+    // middenin het woord af: `Veiligheidsvraagstu` / `k`, `Kritie` / `k`
+    // (#1794). De letter krimpt nu tot de tabel wél past.
+    final text = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| ID | Veiligheidsvraagstuk | Aanbeveling en beoogd resultaat '
+        '| Geadresseerde | Prioriteit | Richttermijn '
+        '| Status en benodigd afsluitbewijs |\n'
+        '|---|---|---|---|---|---|---|\n'
+        '| R-01 | Integriteit en herleidbaarheid van digitaal bewijs zijn nog '
+        'niet volledig geborgd | Verifieer de aangeleverde hashes en '
+        'completeer de bewaarketen | EQUA en RWM IT | Kritiek | Direct '
+        '| In uitvoering; sluit met geverifieerde hashes en '
+        'verzamelmomenten |\n',
+      ),
+    );
+    for (final woord in [
+      'Veiligheidsvraagstuk',
+      'Geadresseerde',
+      'Prioriteit',
+      'Richttermijn',
+      'afsluitbewijs',
+      'Kritiek',
+      'verzamelmomenten',
+      'herleidbaarheid',
+    ]) {
+      expect(text, contains(woord), reason: '"$woord" is afgebroken');
+    }
+  });
+
+  test('een tabel breekt geen hash of IP-adres middenin', () async {
+    // Een afgebroken hash is geen schoonheidsfout: de lezer kan de waarde niet
+    // meer overnemen of vergelijken, en juist daarvoor staat hij er (#1789).
+    const hash =
+        'c2704d20f45f5bdd5e021a963cb80c23c981e623b9ea75edff6b5e75b7d80a28';
+    final text = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| Locatie | Publiek IP-adres | Status |\n|---|---|---|\n'
+        '| Milieupark Born | `178.230.197.173` | Geen openstaande '
+        'beheertoegang aangetroffen |\n'
+        '| Kantoor Sittard | `212.85.56.162` | Wachtwoord gewijzigd |\n',
+      ),
+    );
+    for (final token in ['178.230.197.173', '212.85.56.162']) {
+      expect(text, contains(token), reason: '"$token" is afgebroken');
+    }
+    // Een SHA-256 van 64 tekens moet ook heel blijven.
+    final hashText = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| Bestandstype | Bestandsnaam | SHA-256 |\n|---|---|---|\n'
+        '| ZIP-archief | `GW01-IISLogs.zip` | `$hash` |\n',
+      ),
+    );
+    expect(hashText, contains(hash), reason: 'SHA-256 is afgebroken');
+  });
+
   test('de kop van de tijdkolom staat één keer, niet boven elke kaart', () async {
     // Met een beschrijvende kop stond dezelfde regel boven elk van de kaarten
     // — in het RWM-rapport vijftig keer in acht bladzijden (#1793).

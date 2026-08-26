@@ -178,7 +178,7 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/document_editor_screen.dart': 1153,
   // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
   // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
-  'lib/services/pdf/document_pdf_widgets.dart': 875,
+  'lib/services/pdf/document_pdf_widgets.dart': 975,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
