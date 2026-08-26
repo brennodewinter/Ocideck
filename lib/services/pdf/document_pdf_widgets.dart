@@ -402,9 +402,16 @@ class DocumentPdfWidgets {
 
   pw.Widget _list(PdfListBlock block) {
     final rows = <pw.Widget>[];
+    final gutter = _listGutter(block);
     var number = block.startNumber;
     for (final item in block.items) {
-      rows.add(_listItem(item, marker: block.ordered ? '$number.' : null));
+      rows.add(
+        _listItem(
+          item,
+          gutter: gutter,
+          marker: block.ordered ? '$number.' : null,
+        ),
+      );
       rows.add(pw.SizedBox(height: style.bodyFontSize * 0.25));
       if (block.ordered) number++;
     }
@@ -414,10 +421,34 @@ class DocumentPdfWidgets {
     );
   }
 
-  pw.Widget _listItem(PdfListItem item, {String? marker}) => pw.Row(
+  /// De breedte van de goot vóór een lijstpunt.
+  ///
+  /// Een vaste [DocumentPdfStyle.indent] volstond tot item negen. Vanaf "10."
+  /// paste het nummer er niet meer in en brak `package:pdf` het middenin af —
+  /// de `1` op de ene regel, de `0.` op de volgende (#1791). De goot groeit
+  /// daarom mee met het breedste merkteken van déze lijst. Eén maat voor de
+  /// hele lijst en niet per punt, zodat de tekst links uitgelijnd blijft in
+  /// plaats van bij item tien een stukje op te schuiven.
+  double _listGutter(PdfListBlock block) {
+    if (!block.ordered) return style.indent;
+    final size = style.bodyFontSize;
+    final hoogste = block.startNumber + block.items.length - 1;
+    // Een cijfer is in Helvetica ~0,56 em en de punt ~0,28 em; daarbij de
+    // rechtermarge die `_marker` zelf aanhoudt. Ruim schatten mag: een goot
+    // die een haartje te breed is verschuift de tekst, een die te smal is
+    // hakt het nummer doormidden.
+    final nodig = ('$hoogste'.length * 0.56 + 0.28 + 0.4) * size;
+    return math.max(style.indent, nodig);
+  }
+
+  pw.Widget _listItem(
+    PdfListItem item, {
+    required double gutter,
+    String? marker,
+  }) => pw.Row(
     crossAxisAlignment: pw.CrossAxisAlignment.start,
     children: [
-      pw.SizedBox(width: style.indent, child: _marker(item, marker)),
+      pw.SizedBox(width: gutter, child: _marker(item, marker)),
       pw.Expanded(
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,

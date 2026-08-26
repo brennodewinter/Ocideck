@@ -327,6 +327,27 @@ void main() {
       },
     );
 
+    test('een lijstnummer van twee cijfers blijft heel', () async {
+      // De goot vóór een lijstpunt was op één cijfer gedimensioneerd. Vanaf
+      // item 10 paste het nummer er niet meer in en brak `package:pdf` het af:
+      // de `1` op de ene regel, de `0.` op de volgende. In de teruggelezen
+      // tekst is dat het verschil tussen "10." en "1 0." — de probe zet een
+      // spatie tussen twee losse tekststukken.
+      final items = List.generate(14, (i) => '${i + 1}. punt ${i + 1}').join('\n');
+      final text = pdfVisibleText(await render('$items\n'));
+      // Merkteken én punttekst aaneen: brak het nummer af, dan staat er
+      // "1 0. punt 10" en gaat deze vergelijking niet op. Alleen op het
+      // nummer zoeken zou een vals alarm geven, want "punt 1" gevolgd door
+      // merkteken "2." leest óók als "1 2.".
+      for (var n = 9; n <= 14; n++) {
+        expect(
+          text,
+          contains('$n. punt $n'),
+          reason: 'nummer $n staat los van zijn punttekst — goot te smal',
+        );
+      }
+    });
+
     test('een lange lijst loopt door', () async {
       final items = List.generate(150, (i) => '- punt $i').join('\n');
       final bytes = await render('$items\n');
