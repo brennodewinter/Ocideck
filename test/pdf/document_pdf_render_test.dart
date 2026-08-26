@@ -367,6 +367,37 @@ void main() {
     );
   });
 
+  test('een link van meerdere woorden krijgt één onderstreping', () async {
+    // De onderstreping brak op elke spatie af, waardoor één link eruitzag als
+    // een rij losse links (#1792). `package:pdf` voegt de decoratie van
+    // opeenvolgende woorden alleen samen als stijl én annotatie identiek zijn.
+    for (final geval in <(String, String)>[
+      ('lopende tekst', 'Zie [vier woorden lange link](https://librekat.nl).'),
+      (
+        'in een tabelcel',
+        '| Bron | Gebruik |\n| --- | --- |\n'
+            '| [Rijksoverheid, Cyberbeveiligingswet vanaf 15 augustus 2026 van '
+            'kracht](https://www.rijksoverheid.nl/) | Datum van '
+            'inwerkingtreding en verplichtingen |',
+      ),
+    ]) {
+      // Alleen horizontale lijnstukken, geteld per hoogte. Een tabelrand is
+      // óók een lijn, maar er staat er nooit meer dan één op dezelfde hoogte;
+      // een per woord getekende onderstreping juist wel. Over een regeleinde
+      // heen mág de onderstreping breken — dat is één stuk per hoogte.
+      final perHoogte = <double, int>{};
+      for (final lijn in pdfStrokedLines(await render('${geval.$2}\n'))) {
+        if (lijn[1] != lijn[3]) continue;
+        perHoogte[lijn[1]] = (perHoogte[lijn[1]] ?? 0) + 1;
+      }
+      expect(
+        perHoogte.values,
+        everyElement(1),
+        reason: '${geval.$1}: onderstreping in stukken geknipt ($perHoogte)',
+      );
+    }
+  });
+
   group('de opmaak die de bron voorschrijft', () {
     test('een kop staat vet', () async {
       // Geen enkel sterretje in de bron: het vet komt van de kop zelf. Stond de

@@ -80,6 +80,22 @@ List<List<double>> pdfFillColors(Uint8List bytes) => [
       ],
 ];
 
+/// De getekende lijnstukken uit alle inhoudsstromen, als `[x1, y1, x2, y2]`.
+///
+/// `package:pdf` tekent een onderstreping als één `drawLine` + `strokePath`,
+/// wat in de stroom neerkomt op `x y m  x y l  S`. Eén link hoort dus één
+/// lijnstuk op te leveren; telt hij er meer op dezelfde hoogte, dan is de
+/// onderstreping per woord getekend in plaats van als één geheel (#1792).
+List<List<double>> pdfStrokedLines(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    for (final match in _strokedLine.allMatches(stream))
+      [for (var group = 1; group <= 4; group++) double.parse(match.group(group)!)],
+];
+
+final _strokedLine = RegExp(
+  r'(-?[\d.]+)\s+(-?[\d.]+)\s+m\s+(-?[\d.]+)\s+(-?[\d.]+)\s+l',
+);
+
 final _literalString = RegExp(r'\(((?:[^()\\]|\\.)*)\)');
 final _baseFont = RegExp(r'/BaseFont\s*/([A-Za-z0-9-]+)');
 final _fillColor = RegExp(
