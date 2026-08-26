@@ -1987,12 +1987,13 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
-- **De standaardlettermaat van een document wordt 12 punt.** 15,5 was schermmaat:
+- **De standaardlettermaat van een document wordt 11 punt.** 15,5 was schermmaat:
   het was de maat waarin de lezer altijd al stond, en die reisde als standaard
   voor een *blad* mee zonder ooit tegen papier gehouden te zijn. Op A4 leest dat
   als grootletterdruk, en het maakt brede tabellen onnodig krap — bij het werk
   aan #1794 bleek dat zeven prozakolommen op 15,5 ook gekrompen niet passen,
-  terwijl ze op 11 wél passen. Het bereik (9–28) blijft. **Wie raakt dit?**
+  terwijl ze op 11 wél passen — en 11 is precies de maat waarop de bestaande
+  rapporten al gezet worden. Het bereik (9–28) blijft. **Wie raakt dit?**
   `toJson` schrijft `documentBodyFontSize` onvoorwaardelijk, dus elk ooit
   opgeslagen stijlprofiel draagt zijn maat expliciet en verandert niet. Alleen
   een stijl waarin het veld helemáál ontbreekt — van vóór het bestond, of met de
