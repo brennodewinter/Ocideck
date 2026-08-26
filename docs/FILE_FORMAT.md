@@ -506,7 +506,7 @@ these fields (with defaults):
 | `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |
 | `documentLogoPosition` | `top-right` | Position of the effective document logo in its header/footer band. |
 | `documentLogoSize` | `null` | Document-logo width in px (`32`–`480`). `null` follows `logoSize`. |
-| `documentBodyFontSize` | `12` | Base body-text size of a document, in px (`9`–`28`). Headings, footnotes and timeline cards are proportions of it, in the reader, the visual editor, the page-break calculation and the HTML export alike. A slide is unaffected: it scales its text to the 16:9 frame. |
+| `documentBodyFontSize` | `11` | Base body-text size of a document, in px (`9`–`28`). Headings, footnotes and timeline cards are proportions of it, in the reader, the visual editor, the page-break calculation and the HTML export alike. A slide is unaffected: it scales its text to the 16:9 frame. |
 | `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
 | `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
 | `documentHeadingColor` | `null` | Colour of a document's headings, all levels. `null` keeps the split that was always there: a chapter heading follows `textColor` and a subheading `accentColor`. |
