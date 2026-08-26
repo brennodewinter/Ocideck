@@ -650,7 +650,7 @@ class DocumentPdfWidgets {
     // Kaal en niet in een kader: een tabel is een van de weinige widgets die
     // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
     // verliest hij zodra er iets omheen zit.
-    return pw.Table(
+    final table = pw.Table(
       border: _tableBorder(),
       columnWidths: pdfTableColumnWidths(
         rows: block.rows,
@@ -661,6 +661,50 @@ class DocumentPdfWidgets {
       ),
       children: rows,
     );
+    // Past de hele tabel ruim op een blad, dan houdt hij zichzelf bij elkaar in
+    // plaats van zijn kopregel alleen onderaan achter te laten (#1790). Boven
+    // die grens blijft hij verdeelbaar — het vermogen om te breken is voor een
+    // lange tabel belangrijker dan een nette kop.
+    return _tableFitsOnAPage(block)
+        ? pw.Inseparable(child: table)
+        : table;
+  }
+
+  /// Of een tabel klein genoeg is om als geheel op één blad te passen.
+  ///
+  /// `package:pdf` plaatst rijen tot er één niet meer past. Past alléén de
+  /// herhaalde kopregel nog, dan tekent hij die onderaan het blad en begint de
+  /// inhoud op het volgende — met de kop daar opnieuw. De lezer ziet dan een
+  /// lege gele balk die niets aankondigt (#1790).
+  ///
+  /// `Table` kent geen instelling om dat te voorkomen en `MultiPage` kan een
+  /// spannende widget niet vragen om zich te verplaatsen. Wat hier wél kan is
+  /// een tabel die tóch op één blad past er als geheel op houden. Dat neemt de
+  /// verweesde kop weg voor de korte tabellen die een rapport vult; een tabel
+  /// die over meerdere bladen loopt houdt het euvel, en dat staat als
+  /// restpunt bij het issue.
+  ///
+  /// De grens is dezelfde ruime tekengrens als bij [_bindsToHeading], om
+  /// dezelfde reden: een niet-brekende widget die hoger is dan een blad kan
+  /// `MultiPage` nergens kwijt, en dat is geen schoonheidsfout maar een
+  /// gebroken export. Op een klein vel bindt deze laag daarom niets.
+  bool _tableFitsOnAPage(PdfTableBlock block) {
+    if (maxImageHeight < style.bodyFontSize * 20) return false;
+    // Twee maten, want een tabel kan op twee manieren te hoog worden. Honderd
+    // rijen "rij 3 | 3" tellen nauwelijks tekens en zijn tóch meters hoog;
+    // drie rijen met een alinea per cel tellen veel tekens en zijn dat ook.
+    // Alleen op tekens meten liet de eerste variant binden, en dat brak de
+    // bestaande toets op een doorlopende tabel van 120 rijen.
+    final rowHeight = style.bodyFontSize * 1.35 + style.tableCellPadding * 2;
+    if (block.rows.length * rowHeight > maxImageHeight * 0.4) return false;
+    var chars = 0;
+    for (final row in block.rows) {
+      for (final cell in row) {
+        chars += _spanTextLength(cell);
+        if (chars > _keepTogetherChars) return false;
+      }
+    }
+    return true;
   }
 
   pw.Widget _cell(

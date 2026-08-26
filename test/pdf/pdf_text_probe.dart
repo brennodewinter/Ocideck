@@ -34,6 +34,21 @@ String pdfVisibleText(Uint8List bytes) {
   return text.toString();
 }
 
+/// De zichtbare tekst per inhoudsstroom — voor een tekst-PDF is dat één
+/// stroom per bladzijde, in documentvolgorde.
+///
+/// Waarom naast [pdfVisibleText]: sommige vragen gaan over wát er op één blad
+/// staat en niet of het ergens in het bestand voorkomt. "Staat de kopregel van
+/// een tabel alleen op een blad, zonder een enkele inhoudsrij?" is er zo een
+/// (#1790).
+List<String> pdfVisibleTextPerPage(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    [
+      for (final match in _literalString.allMatches(stream))
+        _unescape(match.group(1)!),
+    ].join(' '),
+];
+
 /// Het aantal bladzijden, geteld aan de `/Type /Page`-objecten.
 int pdfPageCount(Uint8List bytes) =>
     RegExp(r'/Type\s*/Page[^s]').allMatches(latin1.decode(bytes)).length;

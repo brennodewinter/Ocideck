@@ -367,6 +367,36 @@ void main() {
     );
   });
 
+  test('een korte tabel laat zijn kopregel niet als wees achter', () async {
+    // `package:pdf` plaatst rijen tot er één niet meer past. Past onderaan een
+    // blad alleen de herhaalde kopregel nog, dan tekent hij die daar — en
+    // begint de inhoud op het volgende blad, met de kop daar opnieuw. De lezer
+    // ziet een lege balk die niets aankondigt (#1790).
+    //
+    // De vullengte is uitgezocht en niet geraden: bij 47 alinea's valt de
+    // bladrand precies tussen kopregel en eerste inhoudsrij. De toets eist
+    // niet dat de tabel héél blijft — een lange tabel mag breken — maar dat
+    // elk blad waarop de kopregel staat óók een inhoudsrij draagt.
+    final vulling = List.generate(
+      47,
+      (i) => 'Regel $i met genoeg tekst om de bladzijde te vullen.',
+    ).join('\n\n');
+    final bytes = await render(
+      '$vulling\n\n'
+      '| Kenmerk | Waarde |\n| --- | --- |\n'
+      '| Organisatie | RWM |\n| Datum | 31 juli 2026 |\n',
+    );
+    for (final blad in pdfVisibleTextPerPage(bytes)) {
+      if (!blad.contains('Kenmerk')) continue;
+      expect(
+        blad.contains('Organisatie') || blad.contains('Datum'),
+        isTrue,
+        reason: 'kopregel staat alleen op een blad, zonder één inhoudsrij',
+      );
+    }
+    expect(pdfVisibleText(bytes), contains('31 juli 2026'));
+  });
+
   test('een link van meerdere woorden krijgt één onderstreping', () async {
     // De onderstreping brak op elke spatie af, waardoor één link eruitzag als
     // een rij losse links (#1792). `package:pdf` voegt de decoratie van
