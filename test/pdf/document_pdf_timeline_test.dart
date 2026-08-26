@@ -18,11 +18,17 @@ void main() {
               ),
               style: DocumentPdfStyle.fromTheme(const ThemeProfile()),
               baseStyle: const pw.TextStyle(fontSize: 11),
-              text: (spans, style) =>
+              text: (spans, style, {align}) =>
                   pw.Text(spans.map((span) => span.text).join(), style: style),
             )
             as pw.Column;
 
-    expect(timeline.children, everyElement(isA<pw.Inseparable>()));
+    // De kolomkop en zijn tussenruimte staan sinds #1793 één keer bovenaan;
+    // de kaarten zelf blijven onbreekbaar.
+    expect(
+      timeline.children.whereType<pw.Inseparable>(),
+      hasLength(2),
+      reason: 'beide gebeurtenissen horen een onbreekbare kaart te zijn',
+    );
   });
 }

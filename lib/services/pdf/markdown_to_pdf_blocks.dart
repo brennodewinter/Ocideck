@@ -657,8 +657,49 @@ class _PdfBlockConverter {
           out.addAll(spans(node.children ?? const [], inherited));
       }
     }
+    return _mergeAdjacent(out);
+  }
+
+  /// Voegt aangrenzende stukken met dezelfde opmaak samen tot één stuk.
+  ///
+  /// De Markdown-ontleder levert de tekst van een link in een **tabelcel** als
+  /// één stuk per woord aan, terwijl dezelfde link in een alinea één stuk is.
+  /// Voor de betekenis maakt dat niets uit, voor het zetwerk wel: `package:pdf`
+  /// tekent de onderstreping per stuk en voegt twee stukken alleen samen als
+  /// hun stijl- én annotatieobject identiek zijn — en die maakt de renderer per
+  /// stuk vers aan. Eén bronverwijzing viel zo uiteen in losse onderstreepte
+  /// woorden met een gat op elke spatie (#1792).
+  ///
+  /// Samenvoegen hier en niet in de renderer, omdat dit een eigenschap van de
+  /// ontleding is: hoe de ontleder zijn tekstknopen knipt, hoort geen invloed
+  /// te hebben op wat de lezer ziet. Elk uitvoerpad dat deze stukken gebruikt
+  /// profiteert mee.
+  List<PdfSpan> _mergeAdjacent(List<PdfSpan> spans) {
+    final out = <PdfSpan>[];
+    for (final span in spans) {
+      final last = out.isEmpty ? null : out.last;
+      if (last != null && _sameFormatting(last, span)) {
+        out[out.length - 1] = last.copyWith(text: last.text + span.text);
+        continue;
+      }
+      out.add(span);
+    }
     return out;
   }
+
+  /// Of twee stukken in álles behalve hun tekst gelijk zijn.
+  ///
+  /// Een formule telt nooit mee: die wordt een beeld in de regel en gaat met
+  /// geen enkele buur samen.
+  bool _sameFormatting(PdfSpan a, PdfSpan b) =>
+      !a.math &&
+      !b.math &&
+      a.bold == b.bold &&
+      a.italic == b.italic &&
+      a.strikeThrough == b.strikeThrough &&
+      a.code == b.code &&
+      a.href == b.href &&
+      a.superscript == b.superscript;
 
   /// Knipt de voetnoot-merktekens uit de tekst en maakt er hoger geplaatste
   /// nummers van.

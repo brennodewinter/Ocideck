@@ -327,6 +327,30 @@ void main() {
       },
     );
 
+    test('een lijstnummer van twee cijfers blijft heel', () async {
+      // De goot vóór een lijstpunt was op één cijfer gedimensioneerd. Vanaf
+      // item 10 paste het nummer er niet meer in en brak `package:pdf` het af:
+      // de `1` op de ene regel, de `0.` op de volgende. In de teruggelezen
+      // tekst is dat het verschil tussen "10." en "1 0." — de probe zet een
+      // spatie tussen twee losse tekststukken.
+      final items = List.generate(
+        14,
+        (i) => '${i + 1}. punt ${i + 1}',
+      ).join('\n');
+      final text = pdfVisibleText(await render('$items\n'));
+      // Merkteken én punttekst aaneen: brak het nummer af, dan staat er
+      // "1 0. punt 10" en gaat deze vergelijking niet op. Alleen op het
+      // nummer zoeken zou een vals alarm geven, want "punt 1" gevolgd door
+      // merkteken "2." leest óók als "1 2.".
+      for (var n = 9; n <= 14; n++) {
+        expect(
+          text,
+          contains('$n. punt $n'),
+          reason: 'nummer $n staat los van zijn punttekst — goot te smal',
+        );
+      }
+    });
+
     test('een lange lijst loopt door', () async {
       final items = List.generate(150, (i) => '- punt $i').join('\n');
       final bytes = await render('$items\n');
@@ -344,6 +368,154 @@ void main() {
         expect(pdfVisibleText(bytes), contains('Kop'));
       },
     );
+  });
+
+  test('een brede tabel breekt geen woorden middenin', () async {
+    // Zeven prozakolommen passen niet op A4-staand. De verdeelsleutel kon daar
+    // niets meer aan doen — de breedte was op — en `package:pdf` brak dan
+    // middenin het woord af: `Veiligheidsvraagstu` / `k`, `Kritie` / `k`
+    // (#1794). De letter krimpt nu tot de tabel wél past.
+    final text = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| ID | Veiligheidsvraagstuk | Aanbeveling en beoogd resultaat '
+        '| Geadresseerde | Prioriteit | Richttermijn '
+        '| Status en benodigd afsluitbewijs |\n'
+        '|---|---|---|---|---|---|---|\n'
+        '| R-01 | Integriteit en herleidbaarheid van digitaal bewijs zijn nog '
+        'niet volledig geborgd | Verifieer de aangeleverde hashes en '
+        'completeer de bewaarketen | EQUA en RWM IT | Kritiek | Direct '
+        '| In uitvoering; sluit met geverifieerde hashes en '
+        'verzamelmomenten |\n',
+      ),
+    );
+    for (final woord in [
+      'Veiligheidsvraagstuk',
+      'Geadresseerde',
+      'Prioriteit',
+      'Richttermijn',
+      'afsluitbewijs',
+      'Kritiek',
+      'verzamelmomenten',
+      'herleidbaarheid',
+    ]) {
+      expect(text, contains(woord), reason: '"$woord" is afgebroken');
+    }
+  });
+
+  test('een tabel breekt geen hash of IP-adres middenin', () async {
+    // Een afgebroken hash is geen schoonheidsfout: de lezer kan de waarde niet
+    // meer overnemen of vergelijken, en juist daarvoor staat hij er (#1789).
+    const hash =
+        'c2704d20f45f5bdd5e021a963cb80c23c981e623b9ea75edff6b5e75b7d80a28';
+    final text = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| Locatie | Publiek IP-adres | Status |\n|---|---|---|\n'
+        '| Milieupark Born | `178.230.197.173` | Geen openstaande '
+        'beheertoegang aangetroffen |\n'
+        '| Kantoor Sittard | `212.85.56.162` | Wachtwoord gewijzigd |\n',
+      ),
+    );
+    for (final token in ['178.230.197.173', '212.85.56.162']) {
+      expect(text, contains(token), reason: '"$token" is afgebroken');
+    }
+    // Een SHA-256 van 64 tekens moet ook heel blijven.
+    final hashText = pdfVisibleText(
+      await render(
+        theme: const ThemeProfile(documentBodyFontSize: 11),
+        '| Bestandstype | Bestandsnaam | SHA-256 |\n|---|---|---|\n'
+        '| ZIP-archief | `GW01-IISLogs.zip` | `$hash` |\n',
+      ),
+    );
+    expect(hashText, contains(hash), reason: 'SHA-256 is afgebroken');
+  });
+
+  test(
+    'de kop van de tijdkolom staat één keer, niet boven elke kaart',
+    () async {
+      // Met een beschrijvende kop stond dezelfde regel boven elk van de kaarten
+      // — in het RWM-rapport vijftig keer in acht bladzijden (#1793).
+      final rijen = List.generate(
+        12,
+        (i) => '| 27-07 1$i:00 | Gebeurtenis $i | Gemeld |',
+      ).join('\n');
+      final text = pdfVisibleText(
+        await render(
+          '<!-- timeline -->\n'
+          '| Lokale tijd (CEST, UTC+02:00) | Gebeurtenis | Status |\n'
+          '| --- | --- | --- |\n$rijen\n',
+        ),
+      );
+      expect(
+        'Lokale tijd'.allMatches(text),
+        hasLength(1),
+        reason: 'kolomkop herhaald per kaart',
+      );
+      // De inhoud blijft wel gewoon staan.
+      expect(text, contains('Gebeurtenis 11'));
+    },
+  );
+
+  test('een korte tabel laat zijn kopregel niet als wees achter', () async {
+    // `package:pdf` plaatst rijen tot er één niet meer past. Past onderaan een
+    // blad alleen de herhaalde kopregel nog, dan tekent hij die daar — en
+    // begint de inhoud op het volgende blad, met de kop daar opnieuw. De lezer
+    // ziet een lege balk die niets aankondigt (#1790).
+    //
+    // De vullengte is uitgezocht en niet geraden: bij 47 alinea's valt de
+    // bladrand precies tussen kopregel en eerste inhoudsrij. De toets eist
+    // niet dat de tabel héél blijft — een lange tabel mag breken — maar dat
+    // elk blad waarop de kopregel staat óók een inhoudsrij draagt.
+    final vulling = List.generate(
+      47,
+      (i) => 'Regel $i met genoeg tekst om de bladzijde te vullen.',
+    ).join('\n\n');
+    final bytes = await render(
+      '$vulling\n\n'
+      '| Kenmerk | Waarde |\n| --- | --- |\n'
+      '| Organisatie | RWM |\n| Datum | 31 juli 2026 |\n',
+    );
+    for (final blad in pdfVisibleTextPerPage(bytes)) {
+      if (!blad.contains('Kenmerk')) continue;
+      expect(
+        blad.contains('Organisatie') || blad.contains('Datum'),
+        isTrue,
+        reason: 'kopregel staat alleen op een blad, zonder één inhoudsrij',
+      );
+    }
+    expect(pdfVisibleText(bytes), contains('31 juli 2026'));
+  });
+
+  test('een link van meerdere woorden krijgt één onderstreping', () async {
+    // De onderstreping brak op elke spatie af, waardoor één link eruitzag als
+    // een rij losse links (#1792). `package:pdf` voegt de decoratie van
+    // opeenvolgende woorden alleen samen als stijl én annotatie identiek zijn.
+    for (final geval in <(String, String)>[
+      ('lopende tekst', 'Zie [vier woorden lange link](https://librekat.nl).'),
+      (
+        'in een tabelcel',
+        '| Bron | Gebruik |\n| --- | --- |\n'
+            '| [Rijksoverheid, Cyberbeveiligingswet vanaf 15 augustus 2026 van '
+            'kracht](https://www.rijksoverheid.nl/) | Datum van '
+            'inwerkingtreding en verplichtingen |',
+      ),
+    ]) {
+      // Alleen horizontale lijnstukken, geteld per hoogte. Een tabelrand is
+      // óók een lijn, maar er staat er nooit meer dan één op dezelfde hoogte;
+      // een per woord getekende onderstreping juist wel. Over een regeleinde
+      // heen mág de onderstreping breken — dat is één stuk per hoogte.
+      final perHoogte = <double, int>{};
+      for (final lijn in pdfStrokedLines(await render('${geval.$2}\n'))) {
+        if (lijn[1] != lijn[3]) continue;
+        perHoogte[lijn[1]] = (perHoogte[lijn[1]] ?? 0) + 1;
+      }
+      expect(
+        perHoogte.values,
+        everyElement(1),
+        reason: '${geval.$1}: onderstreping in stukken geknipt ($perHoogte)',
+      );
+    }
   });
 
   group('de opmaak die de bron voorschrijft', () {

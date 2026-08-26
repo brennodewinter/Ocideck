@@ -9,7 +9,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:ocideck/services/pdf/document_pdf_blocks.dart';
-import 'package:ocideck/services/pdf/document_pdf_widgets.dart';
+import 'package:ocideck/services/pdf/document_pdf_table_widths.dart';
 
 List<List<List<PdfSpan>>> _table(List<List<String>> cells) => [
   for (final row in cells)

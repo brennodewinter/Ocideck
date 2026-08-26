@@ -26,6 +26,7 @@ import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_inline_math.dart';
 import 'document_pdf_style.dart';
+import 'document_pdf_table_widths.dart';
 import 'document_pdf_timeline.dart';
 
 /// Eén kop zoals de inhoudsopgave en de bladwijzerboom hem kennen.
@@ -357,8 +358,9 @@ class DocumentPdfWidgets {
     block,
     style: style,
     baseStyle: _baseStyle,
-    text: (spans, textStyle) => pw.RichText(
+    text: (spans, textStyle, {align}) => pw.RichText(
       overflow: pw.TextOverflow.span,
+      textAlign: align ?? pw.TextAlign.left,
       text: pw.TextSpan(
         style: textStyle,
         children: _spans(spans, size: textStyle.fontSize),
@@ -401,9 +403,16 @@ class DocumentPdfWidgets {
 
   pw.Widget _list(PdfListBlock block) {
     final rows = <pw.Widget>[];
+    final gutter = _listGutter(block);
     var number = block.startNumber;
     for (final item in block.items) {
-      rows.add(_listItem(item, marker: block.ordered ? '$number.' : null));
+      rows.add(
+        _listItem(
+          item,
+          gutter: gutter,
+          marker: block.ordered ? '$number.' : null,
+        ),
+      );
       rows.add(pw.SizedBox(height: style.bodyFontSize * 0.25));
       if (block.ordered) number++;
     }
@@ -413,10 +422,34 @@ class DocumentPdfWidgets {
     );
   }
 
-  pw.Widget _listItem(PdfListItem item, {String? marker}) => pw.Row(
+  /// De breedte van de goot vóór een lijstpunt.
+  ///
+  /// Een vaste [DocumentPdfStyle.indent] volstond tot item negen. Vanaf "10."
+  /// paste het nummer er niet meer in en brak `package:pdf` het middenin af —
+  /// de `1` op de ene regel, de `0.` op de volgende (#1791). De goot groeit
+  /// daarom mee met het breedste merkteken van déze lijst. Eén maat voor de
+  /// hele lijst en niet per punt, zodat de tekst links uitgelijnd blijft in
+  /// plaats van bij item tien een stukje op te schuiven.
+  double _listGutter(PdfListBlock block) {
+    if (!block.ordered) return style.indent;
+    final size = style.bodyFontSize;
+    final hoogste = block.startNumber + block.items.length - 1;
+    // Een cijfer is in Helvetica ~0,56 em en de punt ~0,28 em; daarbij de
+    // rechtermarge die `_marker` zelf aanhoudt. Ruim schatten mag: een goot
+    // die een haartje te breed is verschuift de tekst, een die te smal is
+    // hakt het nummer doormidden.
+    final nodig = ('$hoogste'.length * 0.56 + 0.28 + 0.4) * size;
+    return math.max(style.indent, nodig);
+  }
+
+  pw.Widget _listItem(
+    PdfListItem item, {
+    required double gutter,
+    String? marker,
+  }) => pw.Row(
     crossAxisAlignment: pw.CrossAxisAlignment.start,
     children: [
-      pw.SizedBox(width: style.indent, child: _marker(item, marker)),
+      pw.SizedBox(width: gutter, child: _marker(item, marker)),
       pw.Expanded(
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -599,6 +632,15 @@ class DocumentPdfWidgets {
 
   pw.Widget _table(PdfTableBlock block) {
     final rows = <pw.TableRow>[];
+    // Past de tabel niet op haar natuurlijke maat, dan krimpt de letter tot ze
+    // wél past — evenredig, zodat de verdeling gelijk blijft (#1789, #1794).
+    final scale = pdfTableFontScale(
+      rows: block.rows,
+      colCount: _tableColCount(block),
+      tableWidth: maxImageWidth,
+      fontSize: style.bodyFontSize,
+      cellPadding: style.tableCellPadding,
+    );
     for (var index = 0; index < block.rows.length; index++) {
       final isHeader = block.hasHeader && index == 0;
       final zebra = !isHeader && index.isEven ? style.tableZebra : null;
@@ -610,7 +652,13 @@ class DocumentPdfWidgets {
           repeat: isHeader,
           children: [
             for (var column = 0; column < block.rows[index].length; column++)
-              _cell(block, row: index, column: column, header: isHeader),
+              _cell(
+                block,
+                row: index,
+                column: column,
+                header: isHeader,
+                scale: scale,
+              ),
           ],
         ),
       );
@@ -618,17 +666,59 @@ class DocumentPdfWidgets {
     // Kaal en niet in een kader: een tabel is een van de weinige widgets die
     // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
     // verliest hij zodra er iets omheen zit.
-    return pw.Table(
+    final table = pw.Table(
       border: _tableBorder(),
       columnWidths: pdfTableColumnWidths(
         rows: block.rows,
         colCount: _tableColCount(block),
         tableWidth: maxImageWidth,
-        fontSize: style.bodyFontSize,
+        fontSize: style.bodyFontSize * scale,
         cellPadding: style.tableCellPadding,
       ),
       children: rows,
     );
+    // Past de hele tabel ruim op een blad, dan houdt hij zichzelf bij elkaar in
+    // plaats van zijn kopregel alleen onderaan achter te laten (#1790). Boven
+    // die grens blijft hij verdeelbaar — het vermogen om te breken is voor een
+    // lange tabel belangrijker dan een nette kop.
+    return _tableFitsOnAPage(block) ? pw.Inseparable(child: table) : table;
+  }
+
+  /// Of een tabel klein genoeg is om als geheel op één blad te passen.
+  ///
+  /// `package:pdf` plaatst rijen tot er één niet meer past. Past alléén de
+  /// herhaalde kopregel nog, dan tekent hij die onderaan het blad en begint de
+  /// inhoud op het volgende — met de kop daar opnieuw. De lezer ziet dan een
+  /// lege gele balk die niets aankondigt (#1790).
+  ///
+  /// `Table` kent geen instelling om dat te voorkomen en `MultiPage` kan een
+  /// spannende widget niet vragen om zich te verplaatsen. Wat hier wél kan is
+  /// een tabel die tóch op één blad past er als geheel op houden. Dat neemt de
+  /// verweesde kop weg voor de korte tabellen die een rapport vult; een tabel
+  /// die over meerdere bladen loopt houdt het euvel, en dat staat als
+  /// restpunt bij het issue.
+  ///
+  /// De grens is dezelfde ruime tekengrens als bij [_bindsToHeading], om
+  /// dezelfde reden: een niet-brekende widget die hoger is dan een blad kan
+  /// `MultiPage` nergens kwijt, en dat is geen schoonheidsfout maar een
+  /// gebroken export. Op een klein vel bindt deze laag daarom niets.
+  bool _tableFitsOnAPage(PdfTableBlock block) {
+    if (maxImageHeight < style.bodyFontSize * 20) return false;
+    // Twee maten, want een tabel kan op twee manieren te hoog worden. Honderd
+    // rijen "rij 3 | 3" tellen nauwelijks tekens en zijn tóch meters hoog;
+    // drie rijen met een alinea per cel tellen veel tekens en zijn dat ook.
+    // Alleen op tekens meten liet de eerste variant binden, en dat brak de
+    // bestaande toets op een doorlopende tabel van 120 rijen.
+    final rowHeight = style.bodyFontSize * 1.35 + style.tableCellPadding * 2;
+    if (block.rows.length * rowHeight > maxImageHeight * 0.4) return false;
+    var chars = 0;
+    for (final row in block.rows) {
+      for (final cell in row) {
+        chars += _spanTextLength(cell);
+        if (chars > _keepTogetherChars) return false;
+      }
+    }
+    return true;
   }
 
   pw.Widget _cell(
@@ -636,6 +726,7 @@ class DocumentPdfWidgets {
     required int row,
     required int column,
     required bool header,
+    double scale = 1,
   }) {
     final alignments = block.alignments;
     final alignment = alignments != null && column < alignments.length
@@ -652,8 +743,9 @@ class DocumentPdfWidgets {
         text: pw.TextSpan(
           style: _baseStyle.copyWith(
             color: header ? style.tableHeaderText : style.tableText,
+            fontSize: style.bodyFontSize * scale,
           ),
-          children: _spans(block.rows[row][column]),
+          children: _spans(block.rows[row][column], scale: scale),
         ),
       ),
     );
@@ -784,11 +876,16 @@ class DocumentPdfWidgets {
         ),
       );
 
-  List<pw.InlineSpan> _spans(List<PdfSpan> spans, {double? size}) => [
-    for (final span in spans) _span(span, size ?? style.bodyFontSize),
+  List<pw.InlineSpan> _spans(
+    List<PdfSpan> spans, {
+    double? size,
+    double scale = 1,
+  }) => [
+    for (final span in spans)
+      _span(span, (size ?? style.bodyFontSize) * scale, scale: scale),
   ];
 
-  pw.InlineSpan _span(PdfSpan span, double size) {
+  pw.InlineSpan _span(PdfSpan span, double size, {double scale = 1}) {
     if (span.math) {
       return buildDocumentPdfInlineMath(
         span,
@@ -815,8 +912,10 @@ class DocumentPdfWidgets {
         fontBold: span.code ? fonts.mono : null,
         fontItalic: span.code ? fonts.mono : null,
         fontBoldItalic: span.code ? fonts.mono : null,
+        // Ook de vaste-breedteletter krimpt mee: juist daar staan de hashes
+        // en IP-adressen die anders middenin afbreken (#1789).
         fontSize: span.code
-            ? style.monoSize
+            ? style.monoSize * scale
             : (span.superscript ? size * 0.7 : size),
         // `null` en niet `normal` wanneer de span er zelf niets van vindt. Een
         // kop staat al op vet, en een span die "gewoon" zégt overstemt dat —
@@ -846,180 +945,3 @@ class DocumentPdfWidgets {
 
 int _tableColCount(PdfTableBlock block) =>
     block.rows.isEmpty ? 0 : block.rows.map((r) => r.length).fold(1, math.max);
-
-String _cellText(List<PdfSpan> cell) => cell.map((s) => s.text).join();
-
-/// De kolombreedte-strategie per kolom voor een PDF-tabel.
-///
-/// **Waarom dit bestaat in plaats van de `package:pdf`-standaard.** Zonder
-/// `columnWidths` valt elke kolom op `IntrinsicColumnWidth`: de kolom wordt zo
-/// breed als haar tekst op één regel nodig heeft, en omdat geen kolom `flex`
-/// heeft (`totalFlex == 0`) schaalt de opmaak alle kolommen pro rato terug tot
-/// de bladspiegel. Een prozakolom met een lange cel claimt op één regel een
-/// enorme breedte, en pro rato drukt dat de smalle kolommen — "Nr.", "Oordeel"
-/// — samen tot één of twee tekens: de tekst komt er verticaal in te staan, een
-/// teken per regel. Dat is wat de RWM-beoordeling onleesbaar maakte.
-///
-/// **Hoe deze functie het oplost.** De breedste kolommen worden één voor één
-/// flex (van breed naar smal) tot de overgebleven intrinsic kolommen samen op
-/// het blad passen. Zodra één kolom flex heeft, schakelt de pro rato-
-/// samendrukking uit en houden de intrinsic kolommen hun echte breedte — geen
-/// stapeling meer. De flex-kolommen delen de ruimte die overblijft.
-///
-/// **Waarom het flex-gewicht op het langste woord staat, niet op de langste
-/// cel.** Een kolom met een lange cel maar korte woorden heeft genoeg aan een
-/// smalle breedte: de tekst breekt op woordgrenzen netjes af. Een kolom met
-/// één lang woord — "Zorgplichtmaatregel", "Bedrijfscontinuïteit" — heeft juist
-/// meer breedte nodig, want een lang woord dat niet past breekt midden in het
-/// woord af. Het flex-gewicht is daarom het langste woord in de kolom: kolommen
-/// met lange woorden krijgen meer van de resterende ruimte.
-///
-/// **Waarom geen echte lettermeting.** Een `pw.Font` is lui en geeft zijn
-/// lettermaten pas tijdens de opmaak, niet bij het bouwen van de widgets. De
-/// schatting (0,5 em per teken) is ruim — ze bepaalt alleen wélke kolommen
-/// flexen en in welke verhouding, niet hun absolute breedte, en een verkeerde
-/// schatting betekent hooguit dat een kolom één regel extra afbreekt, nooit de
-/// stapeling van vroeger.
-Map<int, pw.TableColumnWidth> pdfTableColumnWidths({
-  required List<List<List<PdfSpan>>> rows,
-  required int colCount,
-  required double tableWidth,
-  required double fontSize,
-  required double cellPadding,
-}) {
-  if (rows.isEmpty || colCount <= 0 || tableWidth <= 0) {
-    return const {};
-  }
-
-  // De langste cel per kolom — bepaalt wélke kolommen flex worden.
-  final maxCellLen = <int>[
-    for (var c = 0; c < colCount; c++)
-      rows
-          .map((r) => c < r.length ? _cellText(r[c]).trim().length : 0)
-          .fold(1, (longest, len) => len > longest ? len : longest),
-  ];
-  // De geschatte breedte van het langste woord per kolom, met een correctie
-  // voor vetgedrukte tekst en de werkelijke tekenbreedtes. Het flex-gewicht
-  // is proportioneel aan deze schatting, zodat een kolom met vetgedrukte
-  // tekst meer ruimte krijgt dan een kolom met gewone tekst van dezelfde
-  // lengte.
-  final wordWidth = <double>[
-    for (var c = 0; c < colCount; c++)
-      _estimatedLongestWordWidth(
-        rows.map((r) => c < r.length ? r[c] : const <PdfSpan>[]),
-        fontSize,
-        cellPadding,
-      ),
-  ];
-
-  // Ruime schatting van de kolombreedte op één regel: 0,5 em per teken van de
-  // langste cel, plus celopvulling aan beide zijden.
-  final est = <double>[
-    for (var c = 0; c < colCount; c++)
-      maxCellLen[c] * 0.5 * fontSize + cellPadding * 2,
-  ];
-  final estSum = est.fold<double>(0, (a, b) => a + b);
-
-  // Past de hele tabel op één regel in het blad? Dan gedraagt de standaard
-  // (alles intrinsic) zich goed: de kolommen groeien pro rato mee tot de
-  // bladspiegel. Geen flex nodig, en zo blijft een korte tabel eruit zien
-  // zoals ze altijd al deed.
-  if (estSum <= tableWidth) {
-    return {
-      for (var c = 0; c < colCount; c++) c: const pw.IntrinsicColumnWidth(),
-    };
-  }
-
-  // De tabel past niet op één regel: maak de breedste kolommen één voor één
-  // flex, van breed naar smal, tot de intrinsic kolommen samen ruim op het
-  // blad passen. De grens is niet een vaste fractie maar de som van de
-  // langste-woordenbreedtes van de flex-kolommen: zolang de intrinsic kolommen
-  // meer dan dat overblijft, krijgt elke flex-kolom minstens haar langste woord
-  // breedte (want de flex-ruimte wordt evenredig met de woordbreedte verdeeld).
-  // Zo breekt package:pdf geen woorden midden in af (#1727). Loopt de tabel over
-  // zelfs als alle kolommen flex zijn, dan is afbreken onvermijdelijk.
-  final flex = List<bool>.filled(colCount, false);
-  final order = List<int>.generate(colCount, (i) => i)
-    ..sort((a, b) => est[b].compareTo(est[a]));
-  var intrinsicSum = estSum;
-  var flexMinSum = 0.0;
-  for (final c in order) {
-    if (intrinsicSum <= tableWidth - flexMinSum) break;
-    flex[c] = true;
-    intrinsicSum -= est[c];
-    flexMinSum += wordWidth[c];
-  }
-  // Omdat estSum > tableWidth, zet de lus altijd minstens één kolom op flex —
-  // precies wat de pro rato-samendrukking uitschakelt.
-
-  return {
-    for (var c = 0; c < colCount; c++)
-      c: flex[c]
-          ? pw.FlexColumnWidth(wordWidth[c].clamp(1.0, 999.0))
-          : const pw.IntrinsicColumnWidth(),
-  };
-}
-
-/// De geschatte breedte van het langste woord in een kolom, met een correctie
-/// voor vetgedrukte tekst en de werkelijke tekenbreedtes.
-///
-/// Waarom teken-niveau in plaats van tekenaantal: "Onvoldoende" (veel o, v, d,
-/// e) is per teken breder dan "Zorgplichtmaatregel" (veel l, i, t, r). Op
-/// tekenaantal alleen krijgt de kolom met "Onvoldoende" te weinig ruimte en
-/// breekt het woord midden in af. Deze schatting weegt brede tekens (m, w, O)
-/// zwaarder dan smalle (i, l, t, r), zodat de flex-verdeling de werkelijke
-/// tekstbreedte volgt.
-double _estimatedLongestWordWidth(
-  Iterable<List<PdfSpan>> cells,
-  double fontSize,
-  double padding,
-) {
-  var max = 1.0;
-  for (final cell in cells) {
-    for (final span in cell) {
-      for (final word in span.text.trim().split(RegExp(r'\s+'))) {
-        if (word.isEmpty) continue;
-        final w = _estimateWordWidth(word, fontSize, span.bold);
-        if (w > max) max = w;
-      }
-    }
-  }
-  return max + padding * 2;
-}
-
-/// Schat de breedte van één woord in punten, op basis van tekenbreedtes.
-double _estimateWordWidth(String word, double fontSize, bool bold) {
-  final factor = bold ? 1.1 : 1.0;
-  var width = 0.0;
-  for (final char in word.toLowerCase().runes) {
-    width += _charWidthFactor(char) * fontSize * factor;
-  }
-  return width;
-}
-
-/// De geschatte breedte van één teken in em, voor een schreefloos font
-/// (Helvetica). Brede tekens (m, w) zijn ~0,8 em, smalle (i, l, t) ~0,3 em,
-/// de meeste letters ~0,55 em. De schatting hoeft niet exact te zijn — ze
-/// bepaalt alleen de verhouding tussen flex-kolommen.
-double _charWidthFactor(int rune) {
-  switch (rune) {
-    case 0x69: // i
-    case 0x6c: // l
-    case 0x6a: // j
-    case 0x66: // f
-    case 0x74: // t
-    case 0x72: // r
-    case 0x7c: // |
-      return 0.35;
-    case 0x6d: // m
-    case 0x77: // w
-      return 0.80;
-    case 0x4d: // M
-    case 0x57: // W
-      return 0.85;
-    case 0x20: // space
-      return 0.25;
-    default:
-      return 0.55;
-  }
-}

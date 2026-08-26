@@ -5,7 +5,11 @@ import 'document_pdf_blocks.dart';
 import 'document_pdf_style.dart';
 
 typedef PdfTimelineText =
-    pw.Widget Function(List<PdfSpan> spans, pw.TextStyle textStyle);
+    pw.Widget Function(
+      List<PdfSpan> spans,
+      pw.TextStyle textStyle, {
+      pw.TextAlign? align,
+    });
 
 /// Tekent de schermtaal van een documenttijdlijn met PDF-primitieven.
 pw.Widget buildDocumentPdfTimeline(
@@ -13,13 +17,39 @@ pw.Widget buildDocumentPdfTimeline(
   required DocumentPdfStyle style,
   required pw.TextStyle baseStyle,
   required PdfTimelineText text,
-}) => pw.Column(
-  crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-  children: [
-    for (var index = 0; index < block.events.length; index++)
-      _event(block, index, style: style, baseStyle: baseStyle, text: text),
-  ],
-);
+}) {
+  final size = style.bodyFontSize;
+  final headerStyle = baseStyle.copyWith(
+    fontSize: size * 0.65,
+    fontWeight: pw.FontWeight.bold,
+    color: style.subheadingColor,
+  );
+  return pw.Column(
+    crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+    children: [
+      // De kop van de tijdkolom hoort bij de tijdlijn, niet bij de kaart.
+      // Hij stond boven élke kaart, en met een beschrijvende kop als "Lokale
+      // tijd (CEST, UTC+02:00)" was dat vijftig keer dezelfde regel in acht
+      // bladzijden (#1793). Eén keer, boven de kolom waar hij over gaat.
+      if (block.headers.first.isNotEmpty) ...[
+        pw.SizedBox(
+          width: size * 8.2,
+          child: pw.Padding(
+            padding: pw.EdgeInsets.only(right: size * 2.5),
+            child: pw.Text(
+              block.headers.first,
+              style: headerStyle,
+              textAlign: pw.TextAlign.right,
+            ),
+          ),
+        ),
+        pw.SizedBox(height: size * 0.4),
+      ],
+      for (var index = 0; index < block.events.length; index++)
+        _event(block, index, style: style, baseStyle: baseStyle, text: text),
+    ],
+  );
+}
 
 pw.Widget _event(
   PdfTimelineBlock block,
@@ -113,9 +143,14 @@ pw.Widget _eventCard(
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             children: [
-              if (block.headers.first.isNotEmpty)
-                pw.Text(block.headers.first, style: labelStyle),
-              text(event.marker, labelStyle.copyWith(fontSize: size * 0.81)),
+              // Rechts uitgelijnd, óók wanneer de tijd over twee regels
+              // breekt. Zonder dit stond een korte tijd rechts en een lange
+              // links, en oogde de kolom rafelig (#1793).
+              text(
+                event.marker,
+                labelStyle.copyWith(fontSize: size * 0.81),
+                align: pw.TextAlign.right,
+              ),
             ],
           ),
         ),

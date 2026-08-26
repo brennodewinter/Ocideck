@@ -34,6 +34,21 @@ String pdfVisibleText(Uint8List bytes) {
   return text.toString();
 }
 
+/// De zichtbare tekst per inhoudsstroom — voor een tekst-PDF is dat één
+/// stroom per bladzijde, in documentvolgorde.
+///
+/// Waarom naast [pdfVisibleText]: sommige vragen gaan over wát er op één blad
+/// staat en niet of het ergens in het bestand voorkomt. "Staat de kopregel van
+/// een tabel alleen op een blad, zonder een enkele inhoudsrij?" is er zo een
+/// (#1790).
+List<String> pdfVisibleTextPerPage(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    [
+      for (final match in _literalString.allMatches(stream))
+        _unescape(match.group(1)!),
+    ].join(' '),
+];
+
 /// Het aantal bladzijden, geteld aan de `/Type /Page`-objecten.
 int pdfPageCount(Uint8List bytes) =>
     RegExp(r'/Type\s*/Page[^s]').allMatches(latin1.decode(bytes)).length;
@@ -79,6 +94,25 @@ List<List<double>> pdfFillColors(Uint8List bytes) => [
         double.parse(match.group(3)!),
       ],
 ];
+
+/// De getekende lijnstukken uit alle inhoudsstromen, als `[x1, y1, x2, y2]`.
+///
+/// `package:pdf` tekent een onderstreping als één `drawLine` + `strokePath`,
+/// wat in de stroom neerkomt op `x y m  x y l  S`. Eén link hoort dus één
+/// lijnstuk op te leveren; telt hij er meer op dezelfde hoogte, dan is de
+/// onderstreping per woord getekend in plaats van als één geheel (#1792).
+List<List<double>> pdfStrokedLines(Uint8List bytes) => [
+  for (final stream in _inflatedStreams(bytes))
+    for (final match in _strokedLine.allMatches(stream))
+      [
+        for (var group = 1; group <= 4; group++)
+          double.parse(match.group(group)!),
+      ],
+];
+
+final _strokedLine = RegExp(
+  r'(-?[\d.]+)\s+(-?[\d.]+)\s+m\s+(-?[\d.]+)\s+(-?[\d.]+)\s+l',
+);
 
 final _literalString = RegExp(r'\(((?:[^()\\]|\\.)*)\)');
 final _baseFont = RegExp(r'/BaseFont\s*/([A-Za-z0-9-]+)');
