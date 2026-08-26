@@ -58,7 +58,7 @@ int clampThemeAnimationDuration(int ms) =>
 ///
 /// De ondergrens is de kleinste maat die op papier nog leest, de bovengrens de
 /// grootste waarbij een A4 nog een alinea draagt in plaats van een zin.
-const double kDocumentDefaultBodyFontSize = 15.5;
+const double kDocumentDefaultBodyFontSize = 12.0;
 const double kDocumentMinBodyFontSize = 9.0;
 const double kDocumentMaxBodyFontSize = 28.0;
 

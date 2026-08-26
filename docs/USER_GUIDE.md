@@ -5151,7 +5151,7 @@ find it.
     and the animation duration.
 
   The **base font size** is the size ordinary body text is set in, from 9 to
-  28 px (15.5 px by default — the size documents were always rendered at).
+  28 px, 12 px by default — a page size rather than a screen size.
   Headings, footnotes and timeline cards are proportions of it, so one slider
   resets a document's whole typography. It is a document setting because only a
   page has a fixed type size: a slide scales its text to the 16:9 frame. The

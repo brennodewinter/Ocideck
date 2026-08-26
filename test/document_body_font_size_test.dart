@@ -38,7 +38,7 @@ void main() {
       const profile = ThemeProfile(name: 'Groot', documentBodyFontSize: 20.0);
       final round = ThemeProfile.fromJson(profile.toJson());
       expect(round.documentBodyFontSize, 20.0);
-      expect(round.documentFontScale, closeTo(20.0 / 15.5, 0.0001));
+      expect(round.documentFontScale, closeTo(20.0 / kDocumentDefaultBodyFontSize, 0.0001));
     });
 
     test('een maat buiten het bereik wordt bij het lezen ingeklemd', () {
@@ -65,10 +65,10 @@ void main() {
     // dan haalt een grotere bodytekst zijn eigen kop in.
     test('kopmaten schalen mee met de bodytekst', () {
       final normal = documentHeadingSize(1);
-      final large = documentHeadingSize(1, bodyFontSize: 31.0);
+      final large = documentHeadingSize(1, bodyFontSize: kDocumentDefaultBodyFontSize * 2);
       expect(large, closeTo(normal * 2, 0.001));
       expect(
-        documentHeadingSize(3, bodyFontSize: 31.0),
+        documentHeadingSize(3, bodyFontSize: kDocumentDefaultBodyFontSize * 2),
         closeTo(documentHeadingSize(3) * 2, 0.001),
       );
     });
@@ -80,7 +80,7 @@ void main() {
       final normal = documentKeepWithNextHeight(TextScaler.noScaling);
       final large = documentKeepWithNextHeight(
         TextScaler.noScaling,
-        bodyFontSize: 31.0,
+        bodyFontSize: kDocumentDefaultBodyFontSize * 2,
       );
       expect(large, closeTo(normal * 2, 0.001));
     });
@@ -123,7 +123,7 @@ void main() {
 
     test('de standaardmaat komt ook in de CSS terecht', () async {
       const profile = ThemeProfile(name: 'Standaard');
-      expect(await documentHtml(profile), contains('font-size:15.5px'));
+      expect(await documentHtml(profile), contains('font-size:${kDocumentDefaultBodyFontSize}px'));
     });
   });
 }
