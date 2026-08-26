@@ -25,6 +25,7 @@ import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
 import 'document_pdf_fonts.dart';
 import 'document_pdf_inline_math.dart';
+import 'document_pdf_orphan_safe_table.dart';
 import 'document_pdf_style.dart';
 import 'document_pdf_table_widths.dart';
 import 'document_pdf_timeline.dart';
@@ -666,7 +667,7 @@ class DocumentPdfWidgets {
     // Kaal en niet in een kader: een tabel is een van de weinige widgets die
     // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
     // verliest hij zodra er iets omheen zit.
-    final table = pw.Table(
+    final table = OrphanSafeTable(
       border: _tableBorder(),
       columnWidths: pdfTableColumnWidths(
         rows: block.rows,

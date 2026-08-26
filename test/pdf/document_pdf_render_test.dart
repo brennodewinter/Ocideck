@@ -431,6 +431,72 @@ void main() {
     expect(hashText, contains(hash), reason: 'SHA-256 is afgebroken');
   });
 
+  test('uitwijken kost hoogstens één blad, ook bij een hoge rij', () async {
+    // De uitwijking van #1790 mag nooit een lus worden. De grendel is dat er op
+    // dezelfde leesregel nooit twee keer wordt uitgeweken, en dat elke
+    // geslaagde opmaak die regel opschuift.
+    //
+    // Twee rijen die elk bijna een heel blad hoog zijn zetten de opmaak
+    // herhaaldelijk voor die keuze. Hóger dan een blad kan hier niet: dan loopt
+    // `package:pdf` zelf rond, ook zonder onze tabel — dat is een eigen
+    // melding en geen gedrag dat deze toets moet vastleggen.
+    final hoog = List.generate(120, (i) => 'woord$i').join(' ');
+    final bytes = await render(
+      '| Kenmerk | Waarde |\n| --- | --- |\n'
+      '| Een | $hoog |\n| Twee | $hoog |\n| Drie | kort |\n',
+    );
+    final text = pdfVisibleText(bytes);
+    expect(text, contains('Drie'), reason: 'laatste rij ontbreekt');
+    expect(
+      'Kenmerk'.allMatches(text).length,
+      lessThanOrEqualTo(pdfPageCount(bytes)),
+      reason: 'kopregel vaker gezet dan er bladen zijn',
+    );
+  });
+
+  test(
+    'een tabel over meerdere bladen laat zijn kopregel niet achter',
+    () async {
+      // Het geval waar `Inseparable` niet bij kan: de tabel is te lang om zich
+      // bij elkaar te houden, dus hij spant. Past onderaan een blad alleen de
+      // herhaalde kopregel nog, dan stond die daar als lege balk (#1790).
+      //
+      // Vullengte 32 met 40 rijen is uitgezocht, niet geraden: daar viel de
+      // bladrand precies tussen kopregel en eerste inhoudsrij.
+      final vulling = List.generate(
+        32,
+        (i) => 'Regel $i met genoeg tekst om de bladzijde te vullen.',
+      ).join('\n\n');
+      final body = List.generate(
+        40,
+        (i) => '| Waarde$i | Getal$i |',
+      ).join('\n');
+      final bytes = await render(
+        '$vulling\n\n| Kenmerk | Waarde |\n| --- | --- |\n$body\n',
+      );
+
+      for (final blad in pdfVisibleTextPerPage(bytes)) {
+        if (!blad.contains('Kenmerk')) continue;
+        expect(
+          RegExp(r'Waarde\d').hasMatch(blad),
+          isTrue,
+          reason: 'kopregel staat alleen op een blad, zonder één inhoudsrij',
+        );
+      }
+
+      // En het uitwijken mag geen rij kosten of verdubbelen: dát is waar een
+      // fout in het herstellen van de leesregel zich zou laten zien.
+      final text = pdfVisibleText(bytes);
+      for (var i = 0; i < 40; i++) {
+        expect(
+          RegExp('Waarde$i\\b').allMatches(text),
+          hasLength(1),
+          reason: 'rij $i komt niet precies één keer voor',
+        );
+      }
+    },
+  );
+
   test(
     'de kop van de tijdkolom staat één keer, niet boven elke kaart',
     () async {

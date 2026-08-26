@@ -1987,6 +1987,32 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een tabel over meerdere bladen laat zijn kopregel niet meer als wees achter
+  (#1790).** Korte tabellen waren sinds #1795 gedekt doordat ze zichzelf bij
+  elkaar houden; een tabel die langer is dan een blad kan dat niet en hield het
+  euvel. Ik had dat issue gesloten met de redenering dat `MultiPage` geen route
+  biedt waarlangs een spannende widget zich kan terugtrekken. Dat klopte niet:
+  de eerste opmaakaanroep gebruikt de vólle paginabeperking, waardoor een lange
+  tabel altijd in de spanningstak valt en dáár opnieuw wordt opgemaakt met
+  precies de resterende ruimte. Dat is een aangrijpingspunt.
+
+  `OrphanSafeTable` stelt daar vast dat er alleen herhaalrijen geplaatst zijn en
+  zet `lastLine` op nul; `paint()` tekent dan niets en de opmaak gaat verder op
+  het volgende blad. Twee grendels houden het eindig: uitwijken mag alleen
+  wanneer de aangeboden hoogte merkbaar kleiner is dan de bladhoogte, en nooit
+  twee keer op dezelfde leesregel — elke geslaagde opmaak schuift die op.
+
+  De regressietoets eist twee dingen tegelijk, want de tweede is waar een fout
+  in het herstellen van de leesregel zich zou tonen: geen blad met alleen de
+  kopregel, én alle veertig rijen precies één keer.
+
+- **Bij het toetsen van die grendel bleek `package:pdf` zélf oneindig rond te
+  lopen** wanneer één tabelrij hoger is dan een blad — ook zonder onze tabel,
+  vastgesteld met een kale `pw.Table`. De bewaking die dat zou moeten vangen
+  staat in een `assert` en doet in een release-build niets: de gebruiker krijgt
+  een bevroren venster. Vastgelegd als #1798; de toets op de grendel gebruikt
+  daarom rijen die bijna, maar niet helemaal, een blad hoog zijn.
+
 - **De PDF-export zegt het wanneer een tabel niet past (#1789).** De letter van
   een tabel krimpt sinds #1795 tot elke kolom haar langste woord draagt, maar
   niet onbeperkt: onder de ondergrens wordt een tabel eerder onleesbaar dan
