@@ -1987,6 +1987,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De publiceer-workflows van de CI-images bereiken de docker-daemon weer
+  (#1787).** Ze leunden op `DOCKER_HOST`, maar de runnerconfig injecteert daar een
+  naam overheen die alleen op het buitenste compose-netwerk bestaat; in de
+  docker-in-docker waar de job draait, resolvet die niet. Daardoor had
+  `build-publish` in zijn hele bestaan geen enkele groene run en werden beide
+  images altijd met de hand gepubliceerd — wat pas opviel toen een release erop
+  strandde. De job leest nu zijn eigen default gateway uit (dat adres ís de
+  daemon) en geeft die als `-H` mee aan elke docker-aanroep, wat de omgeving ook
+  zegt. Een poort over beide workflows bewaakt dat er geen kale `docker`-aanroep
+  terugsluipt en dat niemand `DOCKER_HOST` opnieuw als oplossing opschrijft.
+
 - **Lange documenten blijven op hun plek tijdens tabelwerk en vervangen
   (2026-08-24).** Een tabelblok dat na elke aanslag werd teruggeschreven houdt
   nu dezelfde bewerkidentiteit, focus en documentselectie; daardoor springen
