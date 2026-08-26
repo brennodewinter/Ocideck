@@ -30,6 +30,8 @@ import 'document_pdf_style.dart';
 import 'document_pdf_table_widths.dart';
 import 'document_pdf_timeline.dart';
 
+part 'parts/document_pdf_tables.dart';
+
 /// Eén kop zoals de inhoudsopgave en de bladwijzerboom hem kennen.
 class PdfHeadingEntry {
   const PdfHeadingEntry(this.index, this.level, this.title);
@@ -170,7 +172,15 @@ class DocumentPdfWidgets {
           }
         }
       }
-      widgets.add(_widget(block, tight: tight));
+      // Alleen een widget die rechtstreeks in de lijst van `MultiPage` staat
+      // mag over een bladovergang heen breken; een `Column` plaatst zijn
+      // kinderen heel. De terugvalvorm van een te hoge tabel gaat daarom plat
+      // de stroom in en niet als één blok (#1798).
+      if (block is PdfTableBlock && _tableNeedsBlocks(block)) {
+        widgets.addAll(_tableAsBlocks(block));
+      } else {
+        widgets.add(_widget(block, tight: tight));
+      }
       final spacing = _spaceAfter(block, tight: tight);
       if (spacing > 0) widgets.add(pw.SizedBox(height: spacing));
     }
@@ -225,11 +235,10 @@ class DocumentPdfWidgets {
     if (maxImageHeight < style.bodyFontSize * 20) return false;
     return switch (block) {
       PdfParagraphBlock(:final spans) =>
-        _spanTextLength(spans) <= _keepTogetherChars,
-      PdfCodeBlock(:final code) => code.length <= _keepTogetherChars,
-      PdfVerbatimBlock(:final source) => source.length <= _keepTogetherChars,
-      PdfListBlock(:final items) =>
-        _listTextLength(items) <= _keepTogetherChars,
+        spanTextLength(spans) <= keepTogetherChars,
+      PdfCodeBlock(:final code) => code.length <= keepTogetherChars,
+      PdfVerbatimBlock(:final source) => source.length <= keepTogetherChars,
+      PdfListBlock(:final items) => _listTextLength(items) <= keepTogetherChars,
       _ => false,
     };
   }
@@ -269,21 +278,21 @@ class DocumentPdfWidgets {
   /// Groter binden mag van `MultiPage` best, maar dan schuift er een gat van
   /// diezelfde hoogte voor de kop in de plaats — en een half leeg blad is
   /// zichtbaarder dan een verweesde kop.
-  static const _keepTogetherChars = 1200;
+  static const keepTogetherChars = 1200;
 
   /// Hoeveel tekens van een lange alinea meereizen met de kop in de
   /// [pw.Inseparable] — ruwweg drie regels, genoeg om de kop nooit alleen
   /// te laten staan.
   static const _headingGuardChars = 200;
 
-  static int _spanTextLength(List<PdfSpan> spans) =>
+  static int spanTextLength(List<PdfSpan> spans) =>
       spans.fold<int>(0, (sum, span) => sum + span.text.length);
 
   static int _listTextLength(List<PdfListItem> items) {
     var total = 0;
     for (final item in items) {
       for (final block in item.blocks) {
-        if (block is PdfParagraphBlock) total += _spanTextLength(block.spans);
+        if (block is PdfParagraphBlock) total += spanTextLength(block.spans);
       }
     }
     return total;
@@ -628,143 +637,6 @@ class DocumentPdfWidgets {
       return null;
     }
   }
-
-  // ── Tabellen ─────────────────────────────────────────────────────────────
-
-  pw.Widget _table(PdfTableBlock block) {
-    final rows = <pw.TableRow>[];
-    // Past de tabel niet op haar natuurlijke maat, dan krimpt de letter tot ze
-    // wél past — evenredig, zodat de verdeling gelijk blijft (#1789, #1794).
-    final scale = pdfTableFontScale(
-      rows: block.rows,
-      colCount: _tableColCount(block),
-      tableWidth: maxImageWidth,
-      fontSize: style.bodyFontSize,
-      cellPadding: style.tableCellPadding,
-    );
-    for (var index = 0; index < block.rows.length; index++) {
-      final isHeader = block.hasHeader && index == 0;
-      final zebra = !isHeader && index.isEven ? style.tableZebra : null;
-      rows.add(
-        pw.TableRow(
-          decoration: pw.BoxDecoration(
-            color: isHeader ? style.tableHeaderBackground : zebra,
-          ),
-          repeat: isHeader,
-          children: [
-            for (var column = 0; column < block.rows[index].length; column++)
-              _cell(
-                block,
-                row: index,
-                column: column,
-                header: isHeader,
-                scale: scale,
-              ),
-          ],
-        ),
-      );
-    }
-    // Kaal en niet in een kader: een tabel is een van de weinige widgets die
-    // zichzelf over een bladovergang heen kan verdelen, en die eigenschap
-    // verliest hij zodra er iets omheen zit.
-    final table = OrphanSafeTable(
-      border: _tableBorder(),
-      columnWidths: pdfTableColumnWidths(
-        rows: block.rows,
-        colCount: _tableColCount(block),
-        tableWidth: maxImageWidth,
-        fontSize: style.bodyFontSize * scale,
-        cellPadding: style.tableCellPadding,
-      ),
-      children: rows,
-    );
-    // Past de hele tabel ruim op een blad, dan houdt hij zichzelf bij elkaar in
-    // plaats van zijn kopregel alleen onderaan achter te laten (#1790). Boven
-    // die grens blijft hij verdeelbaar — het vermogen om te breken is voor een
-    // lange tabel belangrijker dan een nette kop.
-    return _tableFitsOnAPage(block) ? pw.Inseparable(child: table) : table;
-  }
-
-  /// Of een tabel klein genoeg is om als geheel op één blad te passen.
-  ///
-  /// `package:pdf` plaatst rijen tot er één niet meer past. Past alléén de
-  /// herhaalde kopregel nog, dan tekent hij die onderaan het blad en begint de
-  /// inhoud op het volgende — met de kop daar opnieuw. De lezer ziet dan een
-  /// lege gele balk die niets aankondigt (#1790).
-  ///
-  /// `Table` kent geen instelling om dat te voorkomen en `MultiPage` kan een
-  /// spannende widget niet vragen om zich te verplaatsen. Wat hier wél kan is
-  /// een tabel die tóch op één blad past er als geheel op houden. Dat neemt de
-  /// verweesde kop weg voor de korte tabellen die een rapport vult; een tabel
-  /// die over meerdere bladen loopt houdt het euvel, en dat staat als
-  /// restpunt bij het issue.
-  ///
-  /// De grens is dezelfde ruime tekengrens als bij [_bindsToHeading], om
-  /// dezelfde reden: een niet-brekende widget die hoger is dan een blad kan
-  /// `MultiPage` nergens kwijt, en dat is geen schoonheidsfout maar een
-  /// gebroken export. Op een klein vel bindt deze laag daarom niets.
-  bool _tableFitsOnAPage(PdfTableBlock block) {
-    if (maxImageHeight < style.bodyFontSize * 20) return false;
-    // Twee maten, want een tabel kan op twee manieren te hoog worden. Honderd
-    // rijen "rij 3 | 3" tellen nauwelijks tekens en zijn tóch meters hoog;
-    // drie rijen met een alinea per cel tellen veel tekens en zijn dat ook.
-    // Alleen op tekens meten liet de eerste variant binden, en dat brak de
-    // bestaande toets op een doorlopende tabel van 120 rijen.
-    final rowHeight = style.bodyFontSize * 1.35 + style.tableCellPadding * 2;
-    if (block.rows.length * rowHeight > maxImageHeight * 0.4) return false;
-    var chars = 0;
-    for (final row in block.rows) {
-      for (final cell in row) {
-        chars += _spanTextLength(cell);
-        if (chars > _keepTogetherChars) return false;
-      }
-    }
-    return true;
-  }
-
-  pw.Widget _cell(
-    PdfTableBlock block, {
-    required int row,
-    required int column,
-    required bool header,
-    double scale = 1,
-  }) {
-    final alignments = block.alignments;
-    final alignment = alignments != null && column < alignments.length
-        ? alignments[column]
-        : PdfColumnAlignment.left;
-    return pw.Padding(
-      padding: pw.EdgeInsets.all(style.tableCellPadding),
-      child: pw.RichText(
-        textAlign: switch (alignment) {
-          PdfColumnAlignment.left => pw.TextAlign.left,
-          PdfColumnAlignment.center => pw.TextAlign.center,
-          PdfColumnAlignment.right => pw.TextAlign.right,
-        },
-        text: pw.TextSpan(
-          style: _baseStyle.copyWith(
-            color: header ? style.tableHeaderText : style.tableText,
-            fontSize: style.bodyFontSize * scale,
-          ),
-          children: _spans(block.rows[row][column], scale: scale),
-        ),
-      ),
-    );
-  }
-
-  /// De randvorm van tabellen, gelijk aan wat het stijlprofiel op het scherm en
-  /// in de LaTeX-export doet: omkaderd, alleen horizontale lijnen, of niets.
-  pw.TableBorder? _tableBorder() => switch (style.tableBorderStyle) {
-    TableBorderStyle.boxed => pw.TableBorder.all(
-      color: style.tableBorderColor,
-      width: 0.5,
-    ),
-    TableBorderStyle.lined => pw.TableBorder.symmetric(
-      inside: pw.BorderSide(color: style.tableBorderColor, width: 0.5),
-      outside: pw.BorderSide(color: style.tableBorderColor, width: 0.5),
-    ),
-    TableBorderStyle.none => null,
-  };
 
   // ── Afbeeldingen ─────────────────────────────────────────────────────────
 

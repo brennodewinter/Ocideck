@@ -69,6 +69,52 @@ double pdfTableFontScale({
 /// Hoeveel ruimer de tabel wordt gerekend dan de tekenschatting aangeeft.
 const double _estimateMargin = 1.12;
 
+/// Of één van de cellen van [block] zoveel tekst draagt dat de rij hoger wordt
+/// dan een bladzijde.
+///
+/// **Waarom dit ertoe doet.** Een `pw.Table`-rij kan niet over een bladovergang
+/// heen breken. Past de rij op geen enkel blad, dan plaatst `MultiPage` niets,
+/// begint een nieuw blad, en gebeurt daar precies hetzelfde: de opmaak loopt
+/// oneindig rond. De bewaking die dat upstream zou vangen staat in een `assert`
+/// en doet in een uitgeleverde app niets — de gebruiker krijgt een bevroren
+/// venster zonder melding (#1798).
+///
+/// Eén lange alinea in een tabelcel is genoeg, en dat is in een rapport heel
+/// gewoon. Vandaar dat deze schatting ruim mag zijn: liever een tabel die
+/// onnodig in de terugvalvorm belandt dan een export die vastloopt.
+///
+/// De schatting: de tekst van een cel gedeeld door de kolombreedte geeft het
+/// aantal regels, maal de regelhoogte geeft de celhoogte. De kolombreedte is
+/// [tableWidth] gedeeld door het aantal kolommen — grof, maar voor "past dit
+/// überhaupt op een blad" ruim genoeg.
+bool pdfTableRowExceedsPage(
+  PdfTableBlock block, {
+  required double tableWidth,
+  required double pageHeight,
+  required double fontSize,
+  required double cellPadding,
+}) {
+  if (block.rows.isEmpty || tableWidth <= 0 || pageHeight <= 0) return false;
+  final colCount = block.rows.map((r) => r.length).fold(1, math.max);
+  final colWidth = tableWidth / colCount - cellPadding * 2;
+  if (colWidth <= 0) return true;
+  final lineHeight = fontSize * 1.35;
+  for (final row in block.rows) {
+    var tallest = 0.0;
+    for (final cell in row) {
+      var width = 0.0;
+      for (final span in cell) {
+        width += _estimateWordWidth(span.text, fontSize, span.bold);
+      }
+      final lines = (width / colWidth).ceil();
+      final height = lines * lineHeight + cellPadding * 2;
+      if (height > tallest) tallest = height;
+    }
+    if (tallest > pageHeight) return true;
+  }
+  return false;
+}
+
 /// De tabellen in [blocks] die ook op de kleinste toegestane letter niet op de
 /// bladbreedte passen.
 ///
