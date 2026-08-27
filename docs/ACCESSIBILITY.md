@@ -105,6 +105,19 @@ against their backgrounds at WCAG 2.1 AA, and flags what fails. This helps the
 *audience* of your deck rather than you — but it is the check most presentation
 tools do not do at all.
 
+**And the bundled style profiles are held to it too.** *(Added 2026-08-27,
+#1818.)* Measuring the author's colours while shipping defaults that fail the
+same bar is not a small inconsistency — it is the app disagreeing with itself,
+and the author cannot fix it from the `.md` because styling deliberately does
+not live there (FILE_FORMAT §3.2). The default profile did exactly that: an
+unchecked checklist box at 1.5:1 against a 3:1 floor, so every deck with a
+checklist opened on a warning nobody could act on. `theme_profile_contrast_test`
+now runs every bundled profile through the same analyzer the quality panel uses
+and requires no findings. Deliberate exceptions are listed there by name, with a
+reason and an issue number, and a second test fails once an exception is no
+longer needed — so it gets removed instead of quietly covering the next mistake.
+One exception stands today: the Vigilis brand yellow as a link colour (#1819).
+
 ## What is not in place
 
 **PDF and PPTX exports are images.** This is the largest limitation in this

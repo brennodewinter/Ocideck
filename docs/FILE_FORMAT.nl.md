@@ -510,7 +510,7 @@ deze velden (met standaardwaarden):
 | `textColor` | `#222222` | Tekstkleur. |
 | `accentColor` | `#2E7D64` | Accent (opsommingsmarkering, tabelranden/-koptekst). |
 | `checklistCheckedColor` | `#2E7D64` | Vinkkleur van een afgevinkt checklist-item. |
-| `checklistUncheckedColor` | `#CBD5E1` | Vakkleur van een niet-afgevinkt checklist-item. |
+| `checklistUncheckedColor` | `#64748B` | Vakkleur van een niet-afgevinkt checklist-item. Haalt 4,8:1 op de standaard witte achtergrond en blijft boven 3:1 op een donkere, zodat het vakje zichtbaar is hoe de auteur zijn dia ook zet. *(Was `#CBD5E1` tot 2026-08-27; met 1,5:1 zakte dat door OciDecks eigen 3:1-ondergrens, waardoor elk deck met een checklist opende op een waarschuwing waar de auteur niets aan kon doen — #1818.)* |
 | `checklistStrikeThrough` | `true` | Zet de tekst van een afgevinkt item door. |
 | `bulletMarker` | `dot` | Standaardmarkering voor opsommingslijsten: `dot` of `paw` (een kattenpoot getekend in de accentkleur). Een slide kan die overschrijven (zie §8). |
 | `tableTextColor` | = `textColor` | Tekstkleur in tabellen. |

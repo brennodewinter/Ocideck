@@ -516,7 +516,7 @@ these fields (with defaults):
 | `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
 | `bulletMarker` | `dot` | Default bullet-list marker: `dot` or `paw` (a cat-paw drawn in the accent colour). A slide may override it (see §8). |
 | `checklistCheckedColor` | `#2E7D64` | Tick colour of a checked checklist item. |
-| `checklistUncheckedColor` | `#CBD5E1` | Box colour of an unchecked checklist item. |
+| `checklistUncheckedColor` | `#64748B` | Box colour of an unchecked checklist item. Reaches 4.8:1 on the default white background and stays above 3:1 on a dark one, so the box is visible whichever way the author sets the slide. *(Was `#CBD5E1` until 2026-08-27; at 1.5:1 it failed OciDeck's own 3:1 floor, so every deck with a checklist opened on a warning the author could not act on — #1818.)* |
 | `checklistStrikeThrough` | `true` | Strike through the text of a checked item. |
 | `tableTextColor` | = `textColor` | Text color in tables. |
 | `tableHeaderTextColor` | `#FFFFFF` | Table header text color. |

@@ -182,7 +182,7 @@ class ThemeProfile {
     this.textColor = '#222222',
     this.accentColor = '#2E7D64',
     this.checklistCheckedColor = '#2E7D64',
-    this.checklistUncheckedColor = '#CBD5E1',
+    this.checklistUncheckedColor = '#64748B',
     this.checklistStrikeThrough = true,
     this.bulletMarker = BulletMarker.dot,
     String? tableTextColor,
@@ -280,7 +280,7 @@ class ThemeProfile {
     textColor: '#1E293B',
     accentColor: '#B91C1C',
     checklistCheckedColor: '#15803D',
-    checklistUncheckedColor: '#CBD5E1',
+    checklistUncheckedColor: '#64748B',
     checklistStrikeThrough: true,
     bulletMarker: BulletMarker.dot,
     tableTextColor: '#1E293B',
@@ -305,7 +305,7 @@ class ThemeProfile {
     textColor: '#111318',
     accentColor: '#FFB800',
     checklistCheckedColor: '#15803D',
-    checklistUncheckedColor: '#CBD5E1',
+    checklistUncheckedColor: '#64748B',
     checklistStrikeThrough: true,
     bulletMarker: BulletMarker.dot,
     tableTextColor: '#111318',
@@ -313,7 +313,12 @@ class ThemeProfile {
     tableHeaderBackgroundColor: '#111318',
     titleBackgroundColor: '#111318',
     titleTextColor: '#FFFFFF',
-    sectionBackgroundColor: '#FFB800',
+    // De sectiedia tekent `titleTextColor` op deze achtergrond, en dat wit
+    // haalde op het merkgeel 1,73 — onleesbaar (#1818). Het geel kan hier niet
+    // blijven zolang de sectie zijn tekstkleur deelt met de titeldia, en die
+    // moet wit blijven voor de bijna-zwarte titelachtergrond hierboven. Het
+    // merkaccent zelf blijft ongemoeid: `accentColor` is nog steeds #FFB800.
+    sectionBackgroundColor: '#111318',
     codeBackgroundColor: '#111318',
     codeTextColor: '#F8FAFC',
     codeHighlightSyntax: true,
@@ -530,7 +535,7 @@ class ThemeProfile {
       ),
       checklistUncheckedColor: _color(
         json['checklistUncheckedColor'],
-        '#CBD5E1',
+        '#64748B',
       ),
       checklistStrikeThrough: json['checklistStrikeThrough'] as bool? ?? true,
       bulletMarker: BulletMarker.values.firstWhere(
