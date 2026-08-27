@@ -2485,6 +2485,8 @@ const _dutchSourceAddPt = <String, String>{
   'Toch opnieuw vertrouwen': 'Confiar de novo mesmo assim',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ainda nem todos os dispositivos desta colaboração estão verificados. Compara as impressões digitais para teres a certeza de com quem estás a trabalhar.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'As edições de células da tabela não são sincronizadas com os colaboradores. O título e outros campos sim.',
   'Verifiëren': 'Verificar',
   'Deelnemers verifiëren': 'Verificar participantes',
   '(dit apparaat)': '(este dispositivo)',

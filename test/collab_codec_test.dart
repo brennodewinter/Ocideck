@@ -347,12 +347,70 @@ void main() {
           field: SlideField.tableNumberColumns,
           value: [true, false, true],
         ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.timelineLayout,
+          value: TimelineLayout.horizontal,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.timelineReveal,
+          value: TimelineReveal.steps,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.bulletMarkerOverride,
+          value: BulletMarker.paw,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.quality,
+          value: QualityDisposition.accept,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.findingRole,
+          value: FindingRole.evidence,
+        ),
       ];
       for (final op in cases) {
         final r = decodeDeckOp(encodeDeckOp(op)) as SetSlideField;
         expect(r.field, op.field);
         expect(r.value, op.value);
       }
+    });
+
+    test('viewLimit survives the wire field-by-field', () {
+      final op = SetSlideField(
+        version: 1,
+        authorId: 'p',
+        slideId: 's',
+        field: SlideField.viewLimit,
+        value: const DisplayWindowSpec(
+          limit: 5,
+          mode: DisplayWindowMode.top,
+          key: 'col',
+          remainder: DisplayWindowRemainder.other,
+          showCount: false,
+        ),
+      );
+      final r = decodeDeckOp(encodeDeckOp(op)) as SetSlideField;
+      final v = r.value as DisplayWindowSpec;
+      expect(v.limit, 5);
+      expect(v.mode, DisplayWindowMode.top);
+      expect(v.key, 'col');
+      expect(v.remainder, DisplayWindowRemainder.other);
+      expect(v.showCount, false);
     });
 
     test('SetDeckMeta privacy enum survives', () {

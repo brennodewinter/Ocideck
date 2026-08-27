@@ -2450,6 +2450,8 @@ const _dutchSourceAddLv = <String, String>{
   'Toch opnieuw vertrouwen': 'Tomēr uzticēties atkal',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Šajā sadarbībā vēl nav pārbaudīta katra ierīce. Salīdzini ciparnospiedumus, lai zinātu droši, ar ko strādā.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabulas šūnu rediģējumi netiek sinhronizēti ar līdzautoriem. Virsraksts un citi lauki — jā.',
   'Verifiëren': 'Pārbaudīt',
   'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
   '(dit apparaat)': '(šī ierīce)',

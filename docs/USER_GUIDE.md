@@ -683,6 +683,14 @@ that key: co-authors who verified you before recognise your fingerprint again.
 Removing the Matrix account also removes this identity and your saved
 verifications from the keychain. *(Added 2026-08-01.)*
 
+**Table cell edits do not sync.** When you edit a cell in a table slide during
+a session, that change does not reach the other participants — the title and
+all other fields of the same slide do, but the cell content itself does not.
+A new slide you insert arrives complete; it is only *edits* to existing cells
+that stay local. The editor shows a warning when this applies. This is a known
+limitation: cell-level sync needs finer-grained operations than the current
+model provides, and is planned for a later phase. *(Added 2026-08-27.)*
+
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two

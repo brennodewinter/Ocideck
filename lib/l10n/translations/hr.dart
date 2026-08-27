@@ -2456,6 +2456,8 @@ const _dutchSourceAddHr = <String, String>{
   'Toch opnieuw vertrouwen': 'Ipak ponovno vjeruj',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Nije još svaki uređaj u ovoj suradnji provjeren. Usporedi otiske da budeš siguran s kim radiš.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Uređivanje ćelija tablice ne sinkronizira se sa suradnicima. Naslov i ostala polja da.',
   'Verifiëren': 'Provjeri',
   'Deelnemers verifiëren': 'Provjeri sudionike',
   '(dit apparaat)': '(ovaj uređaj)',

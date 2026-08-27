@@ -2455,6 +2455,8 @@ const _dutchSourceAddDa = <String, String>{
   'Toch opnieuw vertrouwen': 'Stol alligevel på den igen',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ikke alle enheder i dette samarbejde er verificeret endnu. Sammenlign fingeraftrykkene for at være sikker på, hvem du arbejder med.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabelcelle-redigeringer synkroniseres ikke til medforfattere. Titlen og andre felter gør de.',
   'Verifiëren': 'Verificér',
   'Deelnemers verifiëren': 'Verificér deltagere',
   '(dit apparaat)': '(denne enhed)',

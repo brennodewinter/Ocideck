@@ -264,6 +264,21 @@ Het draagbare `.ocideck`-pakket draagt dezelfde `.marprc.yml` aan zijn root, dus
 uitpakken en `marp <naam>.md` draaien vanuit de uitgepakte map werkt hetzelfde.
 → [FILE_FORMAT.md](FILE_FORMAT.md)
 
+## Samenwerken: tabelcel-bewerkingen synchroniseren niet
+
+Als twee of meer mensen tegelijk aan een deck werken, synchroniseert elk veld
+op een dia bij bewerking — behalve de **tabelcellen** zelf. Een nieuwe dia komt
+compleet aan (de hele tabel reist mee bij invoegen), maar het bewerken van een
+cel op een bestaande dia bereikt de andere deelnemers niet. De titel, notities en
+alle andere velden van dezelfde dia synchroniseren wél; alleen de celinhoud
+blijft achter.
+
+Dit is een bewuste v1-grens: sync per cel vraagt een fijnere operatie dan "vervang
+de hele tabel" om te voorkomen dat twee mensen in verschillende cellen elkaar
+overschrijven, en dat is ontwerpwerk voor een latere fase. De editor toont een
+waarschuwing als een tabelia open is in een actieve samenwerkingssessie. →
+[USER_GUIDE.nl.md](USER_GUIDE.nl.md#samen-aan-een-deck-werken)
+
 ## Veel ervan heeft nog nooit een echte server ontmoet
 
 Een werklijst van wat gebouwd is, zijn eigen tests doorstaat, en nog nooit is

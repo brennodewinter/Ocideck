@@ -49,32 +49,23 @@ const Map<String, String> deliberatelyNotSynced = {
       'annotations, the seal) alone, exactly as the op model does". Table '
       'content is carried whole on insert and snapshot, but a cell edit does '
       'not sync. Documented limitation, not an oversight.',
+  'timelineCurrentIndex':
+      'Transient presentation state (which timeline event is currently '
+      'selected during rehearsal), not authored content. Like `renderPage`: '
+      'syncing it would ship one participant\'s presentation position to '
+      'another. The timeline *layout* and *reveal* do sync (#1808).',
 };
 
 /// Known debt: on `Slide`, not in `SlideField`, and nobody has decided whether
 /// that is right. **A ratchet — this set may shrink, never grow.**
 ///
-/// These fields are carried by `slideToJson` but not by `SlideField`, so a
-/// *new* slide arrives complete and an *edit* to the field does not. That is
-/// the `imageZoom` shape. The seven fields that were missing from the
-/// collaboration layer entirely (`anchor`, `nextAnchor`, `ganttScale`,
-/// `ganttSections`, `menuLayout`, `tableColumnAlignments`,
-/// `tableNumberColumns`) were added to both `slideToJson` and `SlideField` in
-/// #1807, fixing the broken "Every field is carried" invariant.
-const Set<String> unsyncedBaseline = {
-  // Carried whole, not carried on edit.
-  'aiAssistedFields',
-  'bulletMarkerOverride',
-  'findingRole',
-  'improvementLayout',
-  'privacy',
-  'quality',
-  'timelineAnimationMs',
-  'timelineCurrentIndex',
-  'timelineLayout',
-  'timelineReveal',
-  'viewLimit',
-};
+/// Empty as of #1808: all fields are either in `SlideField` (sync on edit) or
+/// in `deliberatelyNotSynced` (with a written reason). The seven fields that
+/// were missing from the collaboration layer entirely were added in #1807;
+/// the remaining ten that were carried whole but not on edit were added in
+/// #1808. `timelineCurrentIndex` was moved to `deliberatelyNotSynced` (it is
+/// transient presentation state, like `renderPage`).
+const Set<String> unsyncedBaseline = {};
 
 /// The `final` field names declared directly on `class Slide`.
 List<String> slideFieldNames(String source) {

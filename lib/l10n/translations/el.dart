@@ -2489,6 +2489,8 @@ const _dutchSourceAddEl = <String, String>{
   'Toch opnieuw vertrouwen': 'Εμπιστεύσου ξανά ούτως ή άλλως',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Δεν έχει επαληθευτεί ακόμη κάθε συσκευή σε αυτή τη συνεργασία. Σύγκρινε τα αποτυπώματα για να είσαι σίγουρος με ποιον δουλεύεις.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Οι επεξεργασίες κελιών πίνακα δεν συγχρονίζονται με τους συνσυγγραφείς. Ο τίτλος και τα άλλα πεδία ναι.',
   'Verifiëren': 'Επαλήθευση',
   'Deelnemers verifiëren': 'Επαλήθευση συμμετεχόντων',
   '(dit apparaat)': '(αυτή η συσκευή)',

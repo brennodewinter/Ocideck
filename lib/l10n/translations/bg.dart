@@ -2479,6 +2479,8 @@ const _dutchSourceAddBg = <String, String>{
   'Toch opnieuw vertrouwen': 'Все пак се довери отново',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Все още не всяко устройство в това сътрудничество е потвърдено. Сравни отпечатъците, за да си сигурен с кого работиш.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Редакциите на клетки в таблицата не се синхронизират със съавторите. Заглавието и другите полета — да.',
   'Verifiëren': 'Потвърди',
   'Deelnemers verifiëren': 'Провери участниците',
   '(dit apparaat)': '(това устройство)',

@@ -2456,6 +2456,8 @@ const _dutchSourceAddCs = <String, String>{
   'Toch opnieuw vertrouwen': 'Přesto znovu důvěřovat',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ještě není ověřeno každé zařízení v této spolupráci. Porovnej otisky, aby sis byl jistý, s kým pracuješ.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Úpravy buněk tabulky se nesynchronizují se spoluautory. Nadpis a ostatní pole ano.',
   'Verifiëren': 'Ověřit',
   'Deelnemers verifiëren': 'Ověřit účastníky',
   '(dit apparaat)': '(toto zařízení)',

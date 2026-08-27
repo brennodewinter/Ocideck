@@ -2477,6 +2477,8 @@ const _dutchSourceAddRo = <String, String>{
   'Toch opnieuw vertrouwen': 'Totuși, ai încredere din nou',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Nu toate dispozitivele din această colaborare sunt încă verificate. Compară amprentele pentru a fi sigur cu cine lucrezi.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Editările celulelor tabelului nu se sincronizează cu colaboratorii. Titlul și alte câmpuri da.',
   'Verifiëren': 'Verifică',
   'Deelnemers verifiëren': 'Verifică participanții',
   '(dit apparaat)': '(acest dispozitiv)',

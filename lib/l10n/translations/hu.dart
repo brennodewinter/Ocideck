@@ -2460,6 +2460,8 @@ const _dutchSourceAddHu = <String, String>{
   'Toch opnieuw vertrouwen': 'Mégis bízz meg újra',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ebben az együttműködésben még nem minden eszköz ellenőrzött. Hasonlítsd össze az ujjlenyomatokat, hogy biztos legyél, kivel dolgozol.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'A táblázatcella-szerkesztések nem szinkronizálódnak a társszerzőkkel. A cím és más mezők igen.',
   'Verifiëren': 'Ellenőrzés',
   'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
   '(dit apparaat)': '(ez az eszköz)',

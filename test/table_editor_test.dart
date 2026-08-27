@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
@@ -24,9 +25,11 @@ void main() {
     );
 
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -69,12 +72,14 @@ void main() {
   ) async {
     final slide = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(
-            slide: slide,
-            onUpdate: (_) {},
-            documentContext: true,
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(
+              slide: slide,
+              onUpdate: (_) {},
+              documentContext: true,
+            ),
           ),
         ),
       ),
@@ -91,9 +96,11 @@ void main() {
   ) async {
     final slide = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: slide, onUpdate: (_) {}),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: slide, onUpdate: (_) {}),
+          ),
         ),
       ),
     );
@@ -109,9 +116,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -142,9 +151,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -182,9 +193,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -209,9 +222,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -237,9 +252,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -269,9 +286,11 @@ void main() {
       ],
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -296,9 +315,11 @@ void main() {
       ],
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -341,9 +362,11 @@ void main() {
       ],
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: slide, onUpdate: (_) {}),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: slide, onUpdate: (_) {}),
+          ),
         ),
       ),
     );
@@ -364,9 +387,11 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -388,12 +413,14 @@ void main() {
   ) async {
     var updated = Slide.create(SlideType.table);
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: StatefulBuilder(
-            builder: (context, setState) => TableEditor(
-              slide: updated,
-              onUpdate: (s) => setState(() => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: StatefulBuilder(
+              builder: (context, setState) => TableEditor(
+                slide: updated,
+                onUpdate: (s) => setState(() => updated = s),
+              ),
             ),
           ),
         ),

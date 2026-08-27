@@ -2458,6 +2458,8 @@ const _dutchSourceAddSk = <String, String>{
   'Toch opnieuw vertrouwen': 'Napriek tomu znova dôverovať',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ešte nie je overené každé zariadenie v tejto spolupráci. Porovnaj odtlačky, aby si mal istotu, s kým pracuješ.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Úpravy buniek tabuľky sa nesynchronizujú so spoluautormi. Nadpis a iné polia áno.',
   'Verifiëren': 'Overiť',
   'Deelnemers verifiëren': 'Overiť účastníkov',
   '(dit apparaat)': '(toto zariadenie)',

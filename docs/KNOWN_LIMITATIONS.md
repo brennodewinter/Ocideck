@@ -248,6 +248,20 @@ bug. The portable `.ocideck` package carries the same `.marprc.yml` at its root,
 so extracting it and running `marp <name>.md` from the extracted folder works the
 same way. → [FILE_FORMAT.md](FILE_FORMAT.md)
 
+## Co-authoring: table cell edits do not sync
+
+When two or more people work on a deck together, every field on a slide
+synchronises on edit — except the **table cells** themselves. A new slide
+arrives complete (the whole table travels on insert), but editing a cell on an
+existing slide does not reach the other participants. The title, notes, and all
+other fields of the same slide do sync; only the cell content is left out.
+
+This is a deliberate v1 boundary: cell-level sync would need a finer operation
+than "replace the whole table" to avoid two people in different cells
+overwriting each other, and that is design work for a later phase. The editor
+shows a warning when a table slide is open in an active collaboration session.
+→ [USER_GUIDE.md](USER_GUIDE.md#working-on-a-deck-together)
+
 ## Much of it has never met a real server
 
 A worklist of what is built, passes its own tests, and has never been exercised
