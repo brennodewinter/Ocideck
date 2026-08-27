@@ -461,8 +461,8 @@ It has stayed invisible because the crop dialog's stage is built the same way
 way, so the editor and the slide agree with each other while both disagree with
 the slider. Nothing in the test suite renders a zoomed panel.
 
-**This is a pre-existing defect, not part of this feature, and it needs its own
-issue** — the same treatment §9's first slice got. It is a prerequisite here for
+**This is a pre-existing defect, not part of this feature, and it has its own
+issue (#1813)** — the same treatment §9's first slice got. It is a prerequisite here for
 one reason: §4.1's zoom branch describes what the file *means*, and the first
 surface to implement it faithfully would place callouts somewhere Flutter does
 not. Either every surface reproduces today's clamp, or the renderer is repaired
@@ -598,9 +598,9 @@ reported, not blocked.
    both landing before it:
    **(a)** collaboration parity — the missing `imageZoom` in `SlideField` and the
    diff, plus a registry parity gate (#1803);
-   **(b)** zoom above 100% actually zooming (§4.3) — needed before any surface
-   implements the zoom branch of §4.1, or that surface will place callouts where
-   Flutter does not.
+   **(b)** zoom above 100% actually zooming (§4.3, #1813) — needed before any
+   surface implements the zoom branch of §4.1, or that surface will place
+   callouts where Flutter does not.
 2. Format v2: the grammar of §2, the nested merge of §2.5, codec, checker rules,
    version bump, docs.
 3. The typed model of §3 and the full collaboration chain.
