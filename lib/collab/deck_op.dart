@@ -216,6 +216,7 @@ enum SlideField {
   videoStartMs,
   videoEndMs,
   imageSize,
+  imageZoom,
   titleColumnWidth,
   // — double —
   imageFocalX,
@@ -446,6 +447,7 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
       videoEndMs: _cast<int>(value, field),
     ),
     SlideField.imageSize => slide.copyWith(imageSize: _cast<int>(value, field)),
+    SlideField.imageZoom => slide.copyWith(imageZoom: _cast<int>(value, field)),
     SlideField.titleColumnWidth => slide.copyWith(
       titleColumnWidth: _cast<int>(value, field),
     ),

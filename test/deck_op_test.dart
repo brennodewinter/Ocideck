@@ -79,6 +79,7 @@ _slideCases = {
   SlideField.videoStartMs: (value: 1500, read: (s) => s.videoStartMs),
   SlideField.videoEndMs: (value: 3000, read: (s) => s.videoEndMs),
   SlideField.imageSize: (value: 42, read: (s) => s.imageSize),
+  SlideField.imageZoom: (value: 140, read: (s) => s.imageZoom),
   SlideField.titleColumnWidth: (value: 30, read: (s) => s.titleColumnWidth),
   SlideField.imageFocalX: (value: 0.25, read: (s) => s.imageFocalX),
   SlideField.imageFocalY: (value: 0.75, read: (s) => s.imageFocalY),

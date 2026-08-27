@@ -444,6 +444,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.videoStartMs: _ValueKind.integer,
   SlideField.videoEndMs: _ValueKind.integer,
   SlideField.imageSize: _ValueKind.integer,
+  SlideField.imageZoom: _ValueKind.integer,
   SlideField.titleColumnWidth: _ValueKind.integer,
   SlideField.imageFocalX: _ValueKind.real,
   SlideField.imageFocalY: _ValueKind.real,
