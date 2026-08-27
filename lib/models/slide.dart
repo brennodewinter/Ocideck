@@ -442,11 +442,12 @@ class Slide {
   final String cssClass;
   final String notes;
 
-  /// Marp body lines OciDeck does not model but must never destroy on save.
+  /// Body lines OciDeck does not model but must never destroy on save.
   ///
   /// They are kept verbatim and emitted before the typed body. This covers
-  /// forward-compatible spot directives and extended background syntax while
-  /// the ordinary typed fields remain editable.
+  /// forward-compatible Marp spot directives, extended background syntax, and
+  /// unknown `ocideck_*` directives from a newer reader (#1810) — while the
+  /// ordinary typed fields remain editable.
   final List<String> preservedMarpLines;
   final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance

@@ -29,14 +29,15 @@ Widget _zoomedImage(
       semanticLabel: semanticLabel,
     ); // BoxFit.cover standaard
   }
-  // Defensive cap (parse already clamps): keep the scaled box bounded no matter
-  // how imageSize was set, so an extreme value can't produce a huge layout box.
+  // Clamp here: imageZoom is parsed without bounds (markdown_service_parse.dart
+  // does a bare int.tryParse), so this is the only guard against an extreme
+  // value producing a huge layout box.
   final scale = imageSize.clamp(0, 400) / 100.0;
   // Size the image box to `scale` × the available area and let BoxFit.contain
-  // fit the picture inside it. This produces the same visual result as a
-  // Transform.scale but without a transform layer, which `RepaintBoundary
-  // .toImage` (used for exports) captures far more reliably — a scaled
-  // transform layer would frequently render blank in the exported PNG.
+  // fit the picture inside it. OverflowBox lets the child exceed the parent's
+  // constraints — Align+SizedBox would silently clamp back to the slot (#1813).
+  // No Transform.scale: a transform layer renders blank in RepaintBoundary
+  // .toImage (used for exports), so the box-size approach is more reliable.
   return ClipRect(
     child: ColoredBox(
       color: bgColor,
@@ -44,19 +45,18 @@ Widget _zoomedImage(
         builder: (context, constraints) {
           final boxW = constraints.maxWidth * scale;
           final boxH = constraints.maxHeight * scale;
-          return Align(
+          return OverflowBox(
+            minWidth: boxW,
+            maxWidth: boxW,
+            minHeight: boxH,
+            maxHeight: boxH,
             alignment: alignment,
-            child: SizedBox(
-              width: boxW,
-              height: boxH,
-              // BoxFit.contain: toont de volledige afbeelding zonder bijsnijden
-              child: _resolvedImage(
-                context,
-                imagePath,
-                projectPath,
-                fit: BoxFit.contain,
-                semanticLabel: semanticLabel,
-              ),
+            child: _resolvedImage(
+              context,
+              imagePath,
+              projectPath,
+              fit: BoxFit.contain,
+              semanticLabel: semanticLabel,
             ),
           );
         },

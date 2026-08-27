@@ -234,7 +234,9 @@ extension _MarkdownParse on MarkdownService {
         return '';
       }
       if (content.startsWith('ocideck_image_zoom:')) {
-        zoom = int.tryParse(content.substring(19).trim()) ?? 0;
+        // Clamp at parse like imageSize does (_cappedImageSize): a crafted
+        // `<!-- ocideck_image_zoom: 999999 -->` must not blow the layout box.
+        zoom = (int.tryParse(content.substring(19).trim()) ?? 0).clamp(0, 400);
         return '';
       }
       return m.group(0)!;
