@@ -66,6 +66,22 @@ bool requiresWholeMarpBlockPreservation(String block) {
 /// getypeerde dia bewaard als `preservedMarpLines`. Wat hier staat is de kale
 /// vorm, die Marp vanaf déze dia laat gelden en die OciDeck nergens modelleert
 /// — dus moet het hele blok als bron blijven staan.
+///
+/// **Deze lijst kan verouderen, en dat is de prijs die #1815 bewust betaalt.**
+/// De oude toets ("elk woord gevolgd door een dubbele punt") ving élke
+/// toekomstige Marp-richtlijn vanzelf op; deze niet. Voegt Marp er een toe, dan
+/// bewaart OciDeck een blok dat hem draagt niet meer en gaat de richtlijn bij
+/// het opslaan verloren — tot die naam hier bijstaat.
+///
+/// Toch is dit de goede kant van de afweging. Wat de brede toets kocht was
+/// toekomstvastheid voor een zeldzame gebeurtenis (Marpit heeft in jaren
+/// nauwelijks richtlijnen toegevoegd); wat ze kostte was een dagelijkse,
+/// stille: élke notitie van de vorm `Woord:` sloopte haar dia. Van gedachten
+/// veranderen we zodra dit aan een poort hangt: `make check-marp` (#1804)
+/// draait de échte, gepinde Marp CLI en is de plek om deze lijst tegen die
+/// versie te toetsen. De structurele oplossing is de doorgeeflus van #1810 —
+/// een onbekende richtlijn apart zetten en onveranderd terugschrijven — want
+/// die maakt bewaren-of-niet een niet-vraag.
 const kMarpitDirectiveNames = <String>{
   // Globaal.
   'marp',
