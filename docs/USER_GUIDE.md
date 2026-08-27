@@ -42,6 +42,18 @@ slide-by-slide editor. You compose typed slides, preview them live, present them
 (on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
 HTML file (one file, images and all — see [Exporting](#exporting)).
 Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
+A saved project writes a `.marprc.yml` next to the `.md` that registers the
+generated theme, so the plain Marp CLI invocation — run **from the project
+folder** — loads it with no extra flags:
+
+```sh
+marp deck.md -o out.html
+```
+
+Run Marp from elsewhere (or pass `--no-config-file`) and it falls back to the
+default theme, losing the `section.split` two-column layout — that is the
+documented limitation, not a bug. See [File Format §1.1](FILE_FORMAT.md#11-marp-cli-config-marprcyml).
+*(Verified 2026-08-27 against the real Marp CLI by `make check-marp`, #1804.)*
 
 At a glance, a deck moves through OciDeck like this:
 

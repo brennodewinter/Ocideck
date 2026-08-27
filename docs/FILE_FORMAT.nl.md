@@ -27,13 +27,20 @@
 
 OciDeck slaat presentaties op als **standaard [Marp](https://marp.app/)-Markdown**
 (`.md`). Er is geen eigen binair formaat: een opgeslagen presentatie is *ontworpen*
-om rechtstreeks te worden verwerkt met de Marp CLI of de VS Code Marp-extensie. **Dat is
-niet getoetst tegen de echte gereedschappen** — er is geen Node-gereedschap in deze
-repository en geen test die er een draait, dus behandel het als een ontwerpdoel en niet
-als een geteste garantie, en laat het ons weten als een deck faalt in echte Marp. *(Gecorrigeerd
-2026-07-22: dit beloofde de rondgang zonder meer. OciDeck heeft een eigen renderer
+om rechtstreeks te worden verwerkt met de Marp CLI of de VS Code Marp-extensie. *(Gecorrigeerd
+2026-08-27: hier stond dat compatibiliteit "niet getoetst was tegen de echte
+gereedschappen". Dat is nu wel het geval — een gepinde, repo-eigen echte-Marp-controle
+(`tool/marp-check`, `make check-marp`) rendert een minimaal split-fixture met de
+echte Marp CLI en stelt dat de `section.split`-lay-out overleeft in DOM/CSS en een
+schermafbeelding, ook na verhuizen van de map en op paden met spaties. De
+geverifieerde aanroep is `marp deck.md -o out.html` **uitgevoerd vanuit de
+projectmap**, waar de opgeslagen `.marprc.yml` het gegenereerde thema registreert
+— zie §1. Marp ontdekt een stylesheet naast de deck niet automatisch, dus dat
+configbestand is wat de gewone aanroep laat werken; Marp elders draaien of met
+`--no-config-file` valt terug op het standaardthema en verliest de split-lay-out,
+wat de gedocumenteerde beperking is.)* OciDeck heeft een eigen renderer
 op basis van `marked` en bevat Marp Core niet, wat precies de reden is dat de belofte
-getoetst moest worden in plaats van beweerd.)* OciDeck-specifieke
+getoetst moest worden in plaats van beweerd. OciDeck-specifieke
 informatie wordt weggeschreven op plekken die Marp negeert (front-matter-sleutels en HTML-
 commentaren), zodat het bestand volledig Marp-compatibel blijft en toch verliesloos
 rondgaat in OciDeck.
@@ -56,6 +63,7 @@ daarheen. Paden in de Markdown zijn dan **relatief** ten opzichte van de map met
 ```
 my_presentation/
 ├── My_presentation.md              # the presentation (Marp Markdown)
+├── .marprc.yml                     # Marp CLI-config: registreert het thema (zie §1.1)
 ├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
 ├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
 ├── My_presentation.miauw.json      # MIAUW-disposition sidecar (see §6.5)
@@ -71,6 +79,33 @@ my_presentation/
 └── themes/
     └── ocideck.css                 # generated theme CSS (see §5)
 ```
+
+### 1.1 Marp CLI-config (`.marprc.yml`)
+
+Marp CLI ontdekt een stylesheet naast de deck **niet** automatisch — alleen
+`themes/ocideck.css` naast de `.md` zetten is niet genoeg voor een gewone
+`marp deck.md` om het te laden. OciDeck schrijft daarom een `.marprc.yml` naast
+de `.md` die het gegenereerde thema via Marp's standaard `themeSet`-optie
+registreert:
+
+```yaml
+themeSet:
+  - themes/ocideck.css
+```
+
+Met dat bestand aanwezig laadt de gedocumenteerde aanroep — **uitgevoerd vanuit
+de projectmap** — het thema zonder extra vlaggen:
+
+```sh
+marp deck.md -o out.html
+```
+
+Het pad in `.marprc.yml` is relatief, dus verhuizen of hernoemen van de
+projectmap breekt de thema-ontdekking niet. De beperking is eerlijk: draai Marp
+elders, of met `--no-config-file`, dan valt het terug op zijn standaardthema en
+gaat de `section.split`-tweekolomslay-out verloren. Dit is geverifieerd door een
+gepinde echte-Marp-controle (`tool/marp-check`, `make check-marp`). *(Toegevoegd
+2026-08-27, #1804.)*
 
 > De `.md`-bestandsnaam wordt afgeleid van de presentatietitel: niet-alfanumerieke
 > tekens worden verwijderd en spaties worden `_`.
@@ -2786,6 +2821,7 @@ nog niet is opgeslagen.
 ```
 <title>.ocideck   (zip)
 ├── <title>.md                # Marp Markdown
+├── .marprc.yml               # Marp CLI-config: registreert het thema (§1.1)
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
 ├── <title>.miauw.json        # MIAUW disposition (if present, §6.5)
@@ -2796,6 +2832,10 @@ nog niet is opgeslagen.
 ├── logos/...                 # logo from the style profile
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
+
+Het pakket draagt dezelfde `.marprc.yml` aan zijn root mee als een opgeslagen
+projectmap (§1.1), dus uitpakken en `marp <title>.md` draaien vanuit de
+uitgepakte map laadt het thema op dezelfde manier. *(Toegevoegd 2026-08-27, #1804.)*
 
 Bij het importeren:
 

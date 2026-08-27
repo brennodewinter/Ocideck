@@ -233,12 +233,36 @@ een proxy op de host die de app serveerde — dus die host ziet het adres dat je
 typte. Het eerste bezoek downloadt een grote bundel. → [HOSTING.md](HOSTING.md),
 sectie *Web build limitations to communicate*
 
-## Marp CLI-compatibiliteit is niet geverifieerd
+## Marp CLI: het thema laadt, met één gedocumenteerde kanttekening
 
 De opgeslagen `.md` is ontworpen om verwerkt te worden door de Marp CLI en de VS
-Code Marp-extensie. Dat is niet getest tegen de echte tools — er is geen
-Node-gereedschap in deze repository en geen test die er een draait. →
-[FILE_FORMAT.md](FILE_FORMAT.md)
+Code Marp-extensie. *(Gecorrigeerd 2026-08-27: deze sectie zei dat
+compatibiliteit "niet geverifieerd" was. Dat is nu getest tegen de echte Marp
+CLI — zie hieronder.)*
+
+Een opgeslagen project schrijft een `.marprc.yml` naast de `.md` die de
+gegenereerde `themes/<thema>.css` via Marp's `themeSet`-optie registreert. Een
+gewone aanroep **uitgevoerd vanuit de projectmap** laadt het thema zonder extra
+vlaggen:
+
+```sh
+marp deck.md -o out.html
+```
+
+Dit is geverifieerd door een gepinde, repo-eigen echte-Marp-controle
+(`tool/marp-check`, via `make check-marp` / `make check-full`) die een minimaal
+split-fixture rendert en stelt dat de `section.split`-tweekolomslay-out
+overleeft in zowel de DOM/CSS als een schermafbeelding — ook na verhuizen van de
+map en op paden met spaties.
+
+**De ene kanttekening:** Marp CLI ontdekt een stylesheet naast de deck niet
+automatisch. De `.marprc.yml` is wat de gewone aanroep laat werken, dus **draai
+Marp vanuit de projectmap** (waar `.marprc.yml` staat). Draai je het elders, of
+met `--no-config-file`, dan valt Marp terug op zijn standaardthema en gaat de
+`section.split`-lay-out verloren — dat is de gedocumenteerde beperking, geen bug.
+Het draagbare `.ocideck`-pakket draagt dezelfde `.marprc.yml` aan zijn root, dus
+uitpakken en `marp <naam>.md` draaien vanuit de uitgepakte map werkt hetzelfde.
+→ [FILE_FORMAT.md](FILE_FORMAT.md)
 
 ## Veel ervan heeft nog nooit een echte server ontmoet
 
