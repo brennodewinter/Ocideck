@@ -238,6 +238,40 @@ void main() {
     expect(find.byType(Slider), findsNothing);
   });
 
+  // #1813 — boven 100% werd de zoom stil teruggeknepen: Align → SizedBox
+  // binnen een StackFit.expand klemde het kind af tot het slot, zodat zoom 300
+  // hetzelfde beeld gaf als zoom 100. OverflowBox laat het kind buiten de
+  // oudergrenzen, en deze toets meet de échte afgelegde maat.
+  testWidgets('zoom boven 100% legt een groter kind af dan 100% (#1813)', (
+    tester,
+  ) async {
+    // Zoom 100: het kind vult precies het kader.
+    await open(tester, enableZoom: true, imageSize: 100);
+    final frameSize = tester.getSize(find.byType(AspectRatio));
+    final imageAt100 = tester.getSize(
+      find.descendant(
+        of: find.byType(OverflowBox),
+        matching: find.byType(Image),
+      ),
+    );
+    expect(imageAt100.width, closeTo(frameSize.width, 1.0));
+    expect(imageAt100.height, closeTo(frameSize.height, 1.0));
+    await tester.tap(find.widgetWithText(TextButton, 'Annuleren'));
+    await tester.pumpAndSettle();
+
+    // Zoom 300: het kind hoort 3× zo groot te zijn, niet afgeknepen tot het
+    // kader.
+    await open(tester, enableZoom: true, imageSize: 300);
+    final imageAt300 = tester.getSize(
+      find.descendant(
+        of: find.byType(OverflowBox),
+        matching: find.byType(Image),
+      ),
+    );
+    expect(imageAt300.width, closeTo(frameSize.width * 3, 1.0));
+    expect(imageAt300.height, closeTo(frameSize.height * 3, 1.0));
+  });
+
   testWidgets('een pad buiten de projectmap wordt niet getoond', (
     tester,
   ) async {

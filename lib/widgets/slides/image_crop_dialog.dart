@@ -37,11 +37,11 @@ bool imageIsCroppable(String imagePath) =>
 /// its slot ([frameAspect] = slot width / height), so what the author drags into
 /// place is what the slide shows.
 ///
-/// [enableZoom] is true for the full-slide image and title background, where
-/// [imageSize] is a real zoom (0 = fill/cover, 100 = whole image, up to
-/// [maxZoom]). For the bullets panel and two-images slots it is false: there
-/// [imageSize] is the column width, so the dialog only repositions the cover
-/// crop and returns [imageSize] unchanged.
+/// [enableZoom] is true for every caller: the full-slide image, the title and
+/// section backgrounds, and the bullets-panel / two-images slots. There
+/// [imageSize] is `imageZoom` (0 = fill/cover, 100 = whole image, up to
+/// [maxZoom]); for the full-bleed slides it is `imageSize` with the same
+/// semantics.
 ///
 /// Returns the chosen values, or `null` when the author cancels.
 /// Waaróm de laatste rotatie niet op schijf landde — `null` zolang het goed
@@ -434,17 +434,13 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       );
     }
     final scale = _size / 100.0;
-    return Align(
+    return OverflowBox(
+      minWidth: frameW * scale,
+      maxWidth: frameW * scale,
+      minHeight: frameH * scale,
+      maxHeight: frameH * scale,
       alignment: align,
-      child: SizedBox(
-        width: frameW * scale,
-        height: frameH * scale,
-        child: Image(
-          image: provider,
-          fit: BoxFit.contain,
-          gaplessPlayback: true,
-        ),
-      ),
+      child: Image(image: provider, fit: BoxFit.contain, gaplessPlayback: true),
     );
   }
 
@@ -465,7 +461,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
               if (widget.enableZoom && s.scale != 1.0) {
                 setState(() {
                   // Pinch past de zoom aan: van cover (0) naar inzoomen
-                  // (minZoom..maxZoom). De slider volgt同步.
+                  // (minZoom..maxZoom). De slider volgt mee.
                   final next = (_scaleStart * s.scale).round();
                   _size = next.clamp(widget.minZoom, widget.maxZoom);
                 });

@@ -1903,6 +1903,55 @@ void main() {
     });
   });
 
+  // #1810 — een onbekend `ocideck_*`-directief overleeft geen opslag: het
+  // werd weggegooid of, erger, een presentatienotitie. De doorgeeflus zet het
+  // nu apart en schrijft het onveranderd terug, zoals preservedMarpLines al
+  // doet voor Marp-syntaxis.
+  group('unknown ocideck_* directive survives round-trip (#1810)', () {
+    const directive = '<!-- ocideck_future: 0.62,0.28 -->';
+
+    /// Parseer `md`, schrijf terug, en eis dat `directive` er nog staat.
+    void expectSurvives(String md) {
+      final service = MarkdownService();
+      final deck = service.parseDeck(md);
+      expect(deck, isNotNull, reason: 'parseDeck returned null for:\n$md');
+      final regenerated = service.generateDeck(deck!);
+      expect(
+        regenerated.contains(directive),
+        isTrue,
+        reason: 'directive lost after round-trip:\n$regenerated',
+      );
+    }
+
+    test('at the top of a bullets block', () {
+      expectSurvives(
+        '---\nmarp: true\n---\n\n# Titel\n\n$directive\n\n- Een\n- Twee\n',
+      );
+    });
+
+    test('at the bottom of a bullets block (not a note)', () {
+      // Voor de fix werd dit een presentatienotitie — het directief landde in
+      // de notes van de gebruiker en kwam als notitie terug.
+      expectSurvives(
+        '---\nmarp: true\n---\n\n# Titel\n\n- Een\n- Twee\n\n$directive\n',
+      );
+    });
+
+    test('at the top of a bulletsImage block', () {
+      expectSurvives(
+        '---\nmarp: true\n---\n\n# Titel\n\n$directive\n\n![bg right:40%](images/x.png)\n\n- Een\n',
+      );
+    });
+
+    test('inside a split-text block', () {
+      // De split-text variant gebruikt `ocideck_two_bullets_left:` etc.; een
+      // onbekend directief ertussen moet net zo overleven.
+      expectSurvives(
+        '---\nmarp: true\n---\n\n# Titel\n\n$directive\n\n<!-- ocideck_two_bullets_left: A|B -->\n\n- Een\n',
+      );
+    });
+  });
+
   group('image alt-text round-trips (AI_ASSIST §6.1)', () {
     test('image slide keeps its alt-text', () {
       final out = _roundTrip(

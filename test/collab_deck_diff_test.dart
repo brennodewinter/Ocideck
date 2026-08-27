@@ -9,17 +9,48 @@ Slide s(String id, {String title = ''}) =>
 
 Deck applyAll(Deck deck, List<DeckOp> ops) => ops.fold(deck, applyOp);
 
-/// The strongest check: after applying the diff, a fresh diff must be empty —
-/// meaning `after` was reproduced exactly on the whole syncable surface.
+/// Toetst dat het toepassen van de diff `after` reproduceert op de oppervlakte
+/// die de diff kent — d.w.z. alle velden in [SlideField.values] en
+/// [DeckMetaField.values].
+///
+/// **Beperking:** deze helper is per definitie blind voor alles buiten die
+/// oppervlakten. Een veld dat op [Slide] staat maar niet in [SlideField], wordt
+/// door de diff in béíde richtingen over het hoofd gezien: de hervergelijking
+/// komt leeg terug terwijl de waarde nooit is overgekomen. Dat was precies de
+/// fout van #1803. De poort `check_collab_field_parity.dart` bewaakt die
+/// richting apart.
+///
+/// Naast de hervergelijking vergelijkt deze helper ook veld-voor-veld over
+/// [SlideField.values] tussen het resultaat en `after`, zodat een verschil
+/// binnen de gesynchroniseerde oppervlakte nooit stil door de diff-glitch heen
+/// glipt.
 void expectReproduces(Deck before, Deck after) {
   final ops = deckDiffToOps(before, after, authorId: 'a');
   final result = applyAll(before, ops);
+
+  // Been 1: de hervergelijking moet leeg zijn.
   expect(
     deckDiffToOps(result, after, authorId: 'a'),
     isEmpty,
     reason: 'applying the diff must land on `after` exactly',
   );
   expect(result.slides.map((x) => x.id), after.slides.map((x) => x.id));
+
+  // Been 2: veld-voor-veld over SlideField.values. De hervergelijking hierboven
+  // gebruikt dezelfde diff, dus een bug in slideFieldValue of _valuesEqual zou
+  // in beide richtingen onzichtbaar zijn. Deze directe vergelijking vangt dat.
+  final resultById = {for (final s in result.slides) s.id: s};
+  for (final slide in after.slides) {
+    final got = resultById[slide.id];
+    if (got == null) continue;
+    for (final field in SlideField.values) {
+      expect(
+        slideFieldValue(got, field),
+        slideFieldValue(slide, field),
+        reason: 'field $field on slide ${slide.id} differs after applying ops',
+      );
+    }
+  }
 }
 
 void main() {
@@ -157,10 +188,13 @@ void main() {
     // #1803 — een gewijzigde paneelzoom bereikte de andere cliënt niet: het veld
     // stond niet in [SlideField], en de diff loopt uitsluitend over die enum.
     //
-    // Waarom dit níet met [expectReproduces] getoetst wordt: die helper diffs het
-    // resultaat opnieuw, en een veld dat de diff niet kent is in béíde richtingen
-    // onzichtbaar — de hervergelijking komt dan leeg terug terwijl de waarde
-    // nooit is overgekomen. De toets moet dus de wáárde na toepassing lezen.
+    // Waarom deze toets de wáárde na toepassing leest in plaats van op
+    // [expectReproduces] te leunen: die helper is blind voor velden buiten de
+    // diff-oppervlakte (zie haar doc-comment). Pas nadat imageZoom in
+    // [SlideField] was opgenomen, dekt expectReproduces dit veld — vandaar dat
+    // de aanroep hieronder nu wél groen is. De directe waarde-check blijft als
+    // canarie: mocht iemand imageZoom ooit uit SlideField halen, dan faalt deze
+    // toets eerder dan expectReproduces.
     test('a changed panel zoom reaches the other client (#1803)', () {
       final before = Deck(title: 'd', slides: [s('a').copyWith(imageZoom: 0)]);
       final after = Deck(title: 'd', slides: [s('a').copyWith(imageZoom: 140)]);

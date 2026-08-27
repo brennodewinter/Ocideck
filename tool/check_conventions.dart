@@ -206,7 +206,7 @@ const Map<String, int> fileSizeBaseline = {
   // +8: imageZoom-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +9 (#1162): menuLayout-veld + doc + constructor/copyFrom/copyWith-doorvoer
   // en de import van models/menu.dart.
-  'lib/models/slide.dart': 1080,
+  'lib/models/slide.dart': 1081,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
@@ -418,7 +418,7 @@ const Map<String, int> classSizeBaseline = {
   // filteren ervan uit `effectiveClass`. De body-regelverwerking verhuisde
   // hierbij naar markdown_parse/markdown_service_parse_body.dart — dat maakt de
   // bestanden kleiner, maar de klasse niet.
-  'lib/services/markdown_service.dart#MarkdownService': 2417,
+  'lib/services/markdown_service.dart#MarkdownService': 2422,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie

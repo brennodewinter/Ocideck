@@ -256,6 +256,15 @@ extension _MarkdownParseDirectives on MarkdownService {
           if (marp.preserve) preservedMarpLines.add(m.group(0)!);
           return '';
         }
+        // Een onbekend `ocideck_*`-directief is per definitie een directief,
+        // geen notitie — het mag niet in de notities van de gebruiker landen
+        // (#1810). Bewaar het onveranderd via dezelfde doorgeeflus als Marp-
+        // regels: preservedMarpLines wordt in _writeSlideDirectives exact
+        // zo teruggeschreven als het binnenkwam.
+        if (content.startsWith('ocideck_')) {
+          preservedMarpLines.add(m.group(0)!);
+          return '';
+        }
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
           return _takeNote(notesBuffer, content);

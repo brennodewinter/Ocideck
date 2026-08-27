@@ -53,7 +53,7 @@ const Map<String, int> methodLengthBaseline = {
   // +8 (#1162): de twee navigatie-takken (`ocideck_slide_anchor`/`ocideck_next`),
   // al gehalveerd via de top-level `_firstDirective`-helper.
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
-      188,
+      197,
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
   // +15: tableDecoded/tableAlignments voor GFM-scheidingsrij-uitlijning.
   // +3: tableNumberColumns doorgeven aan Slide.
