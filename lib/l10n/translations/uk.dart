@@ -2472,6 +2472,8 @@ const _dutchSourceAddUk = <String, String>{
   'Toch opnieuw vertrouwen': 'Усе одно довіритися знову',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ще не кожен пристрій у цій співпраці перевірено. Порівняйте відбитки, щоб бути впевненими, з ким ви працюєте.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Редагування клітинок таблиці не синхронізуються зі співавторами. Заголовок та інші поля — так.',
   'Verifiëren': 'Перевірити',
   'Deelnemers verifiëren': 'Перевірити учасників',
   '(dit apparaat)': '(цей пристрій)',

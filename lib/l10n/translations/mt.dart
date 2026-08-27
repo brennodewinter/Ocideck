@@ -2480,6 +2480,8 @@ const _dutchSourceAddMt = <String, String>{
   'Toch opnieuw vertrouwen': 'Xorta erġa\' afda',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Għadu mhux kull apparat f\'din il-kollaborazzjoni verifikat. Qabbel il-marki tas-swaba\' biex tkun ċert ma\' min qed taħdem.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      "Editjar ta' ċelloli tat-tabella ma jiġix sinkronizzat mal-kollaboraturi. It-titlu u oħrajn iva.",
   'Verifiëren': 'Ivverifika',
   'Deelnemers verifiëren': 'Verifika l-parteċipanti',
   '(dit apparaat)': '(dan l-apparat)',

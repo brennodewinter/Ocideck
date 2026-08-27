@@ -2493,6 +2493,8 @@ const _dutchSourceAddGa = <String, String>{
   'Toch opnieuw vertrouwen': 'Bíodh muinín agat arís mar sin féin',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Níl gach gléas sa chomhoibriú seo fíoraithe fós. Cuir na méarloirg i gcomparáid le bheith cinnte cé leis a bhfuil tú ag obair.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Ní shioncrónaítear eagaróga cealla tábla le comhúdair. An teideal agus réimsí eile, tá.',
   'Verifiëren': 'Fíoraigh',
   'Deelnemers verifiëren': 'Fíoraigh na rannpháirtithe',
   '(dit apparaat)': '(an gléas seo)',

@@ -724,6 +724,16 @@ apparaat open je dezelfde plek en **herstel** je vanuit die sleutel: co-auteurs 
 eerder verifieerden herkennen je vingerafdruk weer. Het Matrix-account verwijderen
 verwijdert ook deze identiteit en je opgeslagen verificaties uit de sleutelbos.
 *(Toegevoegd 2026-08-01.)*
+
+**Tabelcel-bewerkingen synchroniseren niet.** Als je een cel in een tabeldia
+bewerkt tijdens een sessie, komt die wijziging niet aan bij de andere deelnemers
+— de titel en alle andere velden van dezelfde dia wel, maar de celinhoud zelf
+niet. Een nieuwe dia die je invoegt komt compleet aan; het zijn alleen
+*bewerkingen* aan bestaande cellen die lokaal blijven. De editor toont een
+waarschuwing wanneer dit van toepassing is. Dit is een bekende beperking:
+sync per cel vraagt fijnere operaties dan het huidige model biedt, en is
+gepland voor een latere fase. *(Toegevoegd 2026-08-27.)*
+
 ## Slidetypes
 
 Voeg een slide toe en kies een type: **titel**, **sectie**scheiding, **opsomming**,

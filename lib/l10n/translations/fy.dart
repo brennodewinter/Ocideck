@@ -1496,6 +1496,8 @@ const _dutchSourceAddFy = {
   'Toch opnieuw vertrouwen': 'Dochs opnij fertrouwe',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Noch net elk apparaat yn dizze gearwurking is ferifiearre. Ferlykje de fingerprints om wis te wêzen mei wa\'tsto wurkest.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabelsel-bewurkingen wurde net syngronisearre nei meiwurkers. De titel en oare fjilden wol.',
   'Verifiëren': 'Ferifiearje',
   'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
   '(dit apparaat)': '(dit apparaat)',

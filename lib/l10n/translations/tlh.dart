@@ -2419,6 +2419,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Toch opnieuw vertrouwen': '\'ach ghItlh voq',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'DaH tlhInganpu\' vangbogh Hoch jan lujpu\'be\'. jan nIDmey yIcompare, Du\' \'Iv vumtaH \'e\' yISovqu\'.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'naDev tetlhvam HovpoH buSbe\'lu\'. wa\'tlhDegh latlh yIloS.',
   'Verifiëren': 'yIlaj',
   'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
   '(dit apparaat)': '(jan vam)',

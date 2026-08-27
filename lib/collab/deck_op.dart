@@ -29,10 +29,14 @@
 // sufficient for v1. The enums are the seam where later fields are added.
 
 import '../models/deck.dart';
+import '../models/display_window_spec.dart';
 import '../models/marp_style.dart';
 import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
+import '../models/quality_disposition.dart';
+import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/timeline.dart';
 
 /// A single authoritative change to a [Deck], ordered by [version].
 ///
@@ -236,6 +240,18 @@ enum SlideField {
   // — table formatting —
   tableColumnAlignments, // List<TableAlign>
   tableNumberColumns, // List<bool>
+  // — timeline (#1808) —
+  timelineLayout, // TimelineLayout
+  timelineReveal, // TimelineReveal
+  timelineAnimationMs, // int? (v1: set but not clear-to-null)
+  // — formatting / disposition (#1808) —
+  bulletMarkerOverride, // BulletMarker? (v1: set but not clear-to-null)
+  improvementLayout,
+  privacy, // PrivacyDisposition? (v1: set but not clear-to-null)
+  quality, // QualityDisposition
+  findingRole, // FindingRole
+  aiAssistedFields, // List<String>
+  viewLimit, // DisplayWindowSpec? (v1: set but not clear-to-null)
 }
 
 /// The deck-level metadata fields a [SetDeckMeta] op can carry.
@@ -496,6 +512,36 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.tableNumberColumns => slide.copyWith(
       tableNumberColumns: _castList<bool>(value, field),
+    ),
+    SlideField.timelineLayout => slide.copyWith(
+      timelineLayout: _cast<TimelineLayout>(value, field),
+    ),
+    SlideField.timelineReveal => slide.copyWith(
+      timelineReveal: _cast<TimelineReveal>(value, field),
+    ),
+    SlideField.timelineAnimationMs => slide.copyWith(
+      timelineAnimationMs: _cast<int>(value, field),
+    ),
+    SlideField.bulletMarkerOverride => slide.copyWith(
+      bulletMarkerOverride: _cast<BulletMarker>(value, field),
+    ),
+    SlideField.improvementLayout => slide.copyWith(
+      improvementLayout: _cast<String>(value, field),
+    ),
+    SlideField.privacy => slide.copyWith(
+      privacy: _cast<PrivacyDisposition>(value, field),
+    ),
+    SlideField.quality => slide.copyWith(
+      quality: _cast<QualityDisposition>(value, field),
+    ),
+    SlideField.findingRole => slide.copyWith(
+      findingRole: _cast<FindingRole>(value, field),
+    ),
+    SlideField.aiAssistedFields => slide.copyWith(
+      aiAssistedFields: _castList<String>(value, field),
+    ),
+    SlideField.viewLimit => slide.copyWith(
+      viewLimit: _cast<DisplayWindowSpec>(value, field),
     ),
   };
 }

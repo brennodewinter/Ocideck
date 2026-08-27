@@ -1,8 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/quality_disposition.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/slide.dart';
 
@@ -99,6 +103,52 @@ _slideCases = {
   SlideField.tableNumberColumns: (
     value: [true, false, true],
     read: (s) => s.tableNumberColumns,
+  ),
+  SlideField.timelineLayout: (
+    value: TimelineLayout.horizontal,
+    read: (s) => s.timelineLayout,
+  ),
+  SlideField.timelineReveal: (
+    value: TimelineReveal.steps,
+    read: (s) => s.timelineReveal,
+  ),
+  SlideField.timelineAnimationMs: (
+    value: 800,
+    read: (s) => s.timelineAnimationMs,
+  ),
+  SlideField.bulletMarkerOverride: (
+    value: BulletMarker.paw,
+    read: (s) => s.bulletMarkerOverride,
+  ),
+  SlideField.improvementLayout: (
+    value: 'fishbone',
+    read: (s) => s.improvementLayout,
+  ),
+  SlideField.privacy: (
+    value: PrivacyDisposition.shield,
+    read: (s) => s.privacy,
+  ),
+  SlideField.quality: (
+    value: QualityDisposition.accept,
+    read: (s) => s.quality,
+  ),
+  SlideField.findingRole: (
+    value: FindingRole.evidence,
+    read: (s) => s.findingRole,
+  ),
+  SlideField.aiAssistedFields: (
+    value: ['title', 'notes'],
+    read: (s) => s.aiAssistedFields,
+  ),
+  SlideField.viewLimit: (
+    value: DisplayWindowSpec(
+      limit: 5,
+      mode: DisplayWindowMode.top,
+      key: 'col',
+      remainder: DisplayWindowRemainder.other,
+      showCount: false,
+    ),
+    read: (s) => s.viewLimit,
   ),
 };
 

@@ -3364,6 +3364,8 @@ const _dutchSourceAddTr = <String, String>{
   'Toch opnieuw vertrouwen': 'Yine de tekrar güven',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Bu iş birliğindeki her cihaz henüz doğrulanmadı. Kiminle çalıştığınızdan emin olmak için parmak izlerini karşılaştırın.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tablo hücresi düzenlemeleri işbirlikçilere senkronize edilmez. Başlık ve diğer alanlar evet.',
   'Verifiëren': 'Doğrula',
   'Deelnemers verifiëren': 'Katılımcıları doğrula',
   '(dit apparaat)': '(bu cihaz)',

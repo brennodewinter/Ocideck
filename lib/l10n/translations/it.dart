@@ -1497,6 +1497,8 @@ const _dutchSourceAddIt = {
   'Toch opnieuw vertrouwen': 'Fidati di nuovo comunque',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Non tutti i dispositivi in questa collaborazione sono ancora verificati. Confronta le impronte per essere sicuro con chi stai lavorando.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Le modifiche alle celle della tabella non sono sincronizzate con i collaboratori. Il titolo e gli altri campi sì.',
   'Verifiëren': 'Verifica',
   'Deelnemers verifiëren': 'Verifica partecipanti',
   '(dit apparaat)': '(questo dispositivo)',

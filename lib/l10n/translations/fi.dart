@@ -2452,6 +2452,8 @@ const _dutchSourceAddFi = <String, String>{
   'Toch opnieuw vertrouwen': 'Luota silti uudelleen',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Kaikkia tämän yhteistyön laitteita ei ole vielä vahvistettu. Vertaa sormenjälkiä varmistuaksesi, kenen kanssa työskentelet.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Taulukon solujen muokkaukset eivät synkronoidu muiden tekijöiden kanssa. Otsikko ja muut kentät kyllä.',
   'Verifiëren': 'Vahvista',
   'Deelnemers verifiëren': 'Varmenna osallistujat',
   '(dit apparaat)': '(tämä laite)',

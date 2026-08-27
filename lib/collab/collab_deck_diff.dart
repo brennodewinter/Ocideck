@@ -206,6 +206,16 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.menuLayout => slide.menuLayout,
     SlideField.tableColumnAlignments => slide.tableColumnAlignments,
     SlideField.tableNumberColumns => slide.tableNumberColumns,
+    SlideField.timelineLayout => slide.timelineLayout,
+    SlideField.timelineReveal => slide.timelineReveal,
+    SlideField.timelineAnimationMs => slide.timelineAnimationMs,
+    SlideField.bulletMarkerOverride => slide.bulletMarkerOverride,
+    SlideField.improvementLayout => slide.improvementLayout,
+    SlideField.privacy => slide.privacy,
+    SlideField.quality => slide.quality,
+    SlideField.findingRole => slide.findingRole,
+    SlideField.aiAssistedFields => slide.aiAssistedFields,
+    SlideField.viewLimit => slide.viewLimit,
   };
 }
 

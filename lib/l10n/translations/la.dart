@@ -2475,6 +2475,8 @@ const _dutchSourceAddLa = <String, String>{
   'Toch opnieuw vertrouwen': 'Nihilominus iterum confide',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Nondum omnis machina in hac cooperatione probata est. Indicia digitorum confer ut certo scias quocum labores.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabulae cellae editiones cum collaboratoribus non synchronizantur. Titulus et alia campi sic.',
   'Verifiëren': 'Proba',
   'Deelnemers verifiëren': 'Participes probare',
   '(dit apparaat)': '(hoc instrumentum)',

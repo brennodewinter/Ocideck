@@ -106,7 +106,11 @@ const Map<String, int> methodLengthBaseline = {
   // +12 (#1807): zeven nieuwe SlideField-cases (anchor, nextAnchor, ganttScale,
   // ganttSections, menuLayout, tableColumnAlignments, tableNumberColumns) in
   // een exhaustive switch — onherleidbare plumbing, één case per veld.
-  'lib/collab/deck_op.dart::_slideWithField': 162,
+  // +30 (#1808): tien extra SlideField-cases (timelineLayout, timelineReveal,
+  // timelineAnimationMs, bulletMarkerOverride, improvementLayout, privacy,
+  // quality, findingRole, aiAssistedFields, viewLimit). Zelfde vorm: exhaustive
+  // switch, één case per veld, niet uit te tillen.
+  'lib/collab/deck_op.dart::_slideWithField': 192,
 };
 
 bool _isTranslationData(String path) =>

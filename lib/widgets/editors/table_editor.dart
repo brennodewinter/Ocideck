@@ -1,7 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../../state/collab_session_provider.dart';
 import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '_editor_field.dart';
@@ -474,6 +476,43 @@ class _TableEditorState extends State<TableEditor> {
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
+        Consumer(
+          builder: (context, ref, _) {
+            final collab = ref.watch(collabSessionProvider);
+            if (!collab.isActive) return const SizedBox.shrink();
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Material(
+                color: AppTheme.amber600.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 7,
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.info_outline,
+                        size: 15,
+                        color: AppTheme.amber600,
+                      ),
+                      const SizedBox(width: 7),
+                      Expanded(
+                        child: Text(
+                          l10n.d(
+                            'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.',
+                          ),
+                          style: const TextStyle(fontSize: 11.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
         if (!widget.documentContext) ...[
           EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
           const SizedBox(height: 16),

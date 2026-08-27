@@ -1654,6 +1654,8 @@ const _dutchSourceAddEn = {
   'Toch opnieuw vertrouwen': 'Trust again anyway',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Not every device in this collaboration is verified yet. Compare the fingerprints to be sure who you are working with.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Table cell edits are not synchronised to collaborators. The title and other fields are.',
   'Verifiëren': 'Verify',
   'Deelnemers verifiëren': 'Verify participants',
   '(dit apparaat)': '(this device)',

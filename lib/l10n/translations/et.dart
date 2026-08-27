@@ -2448,6 +2448,8 @@ const _dutchSourceAddEt = <String, String>{
   'Toch opnieuw vertrouwen': 'Usalda siiski uuesti',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Selles koostöös pole veel iga seade kinnitatud. Võrdle sõrmejälgi, et olla kindel, kellega töötad.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabelirakkude muudatused ei sünkrooni kaasautoritega. Pealkiri ja teised väljad küll.',
   'Verifiëren': 'Kinnita',
   'Deelnemers verifiëren': 'Kinnita osalejad',
   '(dit apparaat)': '(see seade)',

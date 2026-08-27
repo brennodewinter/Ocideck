@@ -1507,6 +1507,8 @@ const _dutchSourceAddFr = {
   'Toch opnieuw vertrouwen': 'Faire confiance à nouveau malgré tout',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Tous les appareils de cette collaboration ne sont pas encore vérifiés. Comparez les empreintes pour être sûr de savoir avec qui vous travaillez.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Les modifications des cellules du tableau ne sont pas synchronisées avec les collaborateurs. Le titre et les autres champs, oui.',
   'Verifiëren': 'Vérifier',
   'Deelnemers verifiëren': 'Vérifier les participants',
   '(dit apparaat)': '(cet appareil)',

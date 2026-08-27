@@ -2452,6 +2452,8 @@ const _dutchSourceAddSv = <String, String>{
   'Toch opnieuw vertrouwen': 'Lita på den igen ändå',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Alla enheter i det här samarbetet är inte verifierade ännu. Jämför fingeravtrycken för att vara säker på vem du arbetar med.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabelcellsredigeringar synkroniseras inte till medförfattare. Titeln och andra fält gör det.',
   'Verifiëren': 'Verifiera',
   'Deelnemers verifiëren': 'Verifiera deltagare',
   '(dit apparaat)': '(den här enheten)',

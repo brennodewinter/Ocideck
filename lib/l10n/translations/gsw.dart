@@ -2456,6 +2456,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Toch opnieuw vertrouwen': 'Trotzdäm wider vertroue',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Na nöd jedes Grät i dere Zämmenarbet isch verifiziert. Vergliich d Fingerabdrück, für sicher z sii, mit wem du schaffsch.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Tabälle-Zälle-Bearbeitige wärded nöd a Mitautore synchrongisiert. Titel und anderi Fälder scho.',
   'Verifiëren': 'Verifiziere',
   'Deelnemers verifiëren': 'Teilnehmer verifiziere',
   '(dit apparaat)': '(das Grät)',

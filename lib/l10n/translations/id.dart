@@ -2454,6 +2454,8 @@ const _dutchSourceAddId = <String, String>{
   'Toch opnieuw vertrouwen': 'Tetap percayai lagi',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Belum semua perangkat dalam kolaborasi ini terverifikasi. Bandingkan sidik jari untuk memastikan dengan siapa kamu bekerja.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Penyuntingan sel tabel tidak disinkronkan ke kolaborator. Judul dan bidang lain ya.',
   'Verifiëren': 'Verifikasi',
   'Deelnemers verifiëren': 'Verifikasi peserta',
   '(dit apparaat)': '(perangkat ini)',

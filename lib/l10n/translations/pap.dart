@@ -1494,6 +1494,8 @@ const _dutchSourceAddPap = {
   'Toch opnieuw vertrouwen': 'Konfia atrobe tòg',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ainda no tur aparato den e kolaborashon aki ta verifiká. Kompará e wela-di-dede pa bo ta sigur ku ken bo ta traha.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Edishon di selula di tabella no ta sinkronisá ku kolaboradónan. Títul i otro veld sí.',
   'Verifiëren': 'Verifiká',
   'Deelnemers verifiëren': 'Verifiká partisipantenan',
   '(dit apparaat)': '(e aparato aki)',

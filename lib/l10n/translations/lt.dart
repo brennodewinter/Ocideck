@@ -2459,6 +2459,8 @@ const _dutchSourceAddLt = <String, String>{
   'Toch opnieuw vertrouwen': 'Vis tiek pasitikėti vėl',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Dar ne kiekvienas įrenginys šioje bendradarbystėje patvirtintas. Palygink kontrolinius kodus, kad būtum tikras, su kuo dirbi.',
+  'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
+      'Lentelės langelių redagavimai nesinchronizuojami su bendraautoriais. Pavadinimas ir kiti laukai — taip.',
   'Verifiëren': 'Patvirtinti',
   'Deelnemers verifiëren': 'Patikrinti dalyvius',
   '(dit apparaat)': '(šis įrenginys)',

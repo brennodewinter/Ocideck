@@ -402,6 +402,12 @@ enum _ValueKind {
   menuLayout,
   tableAlignList,
   boolList,
+  timelineLayout,
+  timelineReveal,
+  bulletMarker,
+  quality,
+  findingRole,
+  viewLimit,
 }
 
 _ValueKind _slideFieldKind(SlideField f) {
@@ -483,6 +489,16 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.menuLayout: _ValueKind.menuLayout,
   SlideField.tableColumnAlignments: _ValueKind.tableAlignList,
   SlideField.tableNumberColumns: _ValueKind.boolList,
+  SlideField.timelineLayout: _ValueKind.timelineLayout,
+  SlideField.timelineReveal: _ValueKind.timelineReveal,
+  SlideField.timelineAnimationMs: _ValueKind.integer,
+  SlideField.bulletMarkerOverride: _ValueKind.bulletMarker,
+  SlideField.improvementLayout: _ValueKind.str,
+  SlideField.privacy: _ValueKind.privacy,
+  SlideField.quality: _ValueKind.quality,
+  SlideField.findingRole: _ValueKind.findingRole,
+  SlideField.aiAssistedFields: _ValueKind.stringList,
+  SlideField.viewLimit: _ValueKind.viewLimit,
 };
 
 /// Mirrors the value types `applyOp` casts each [DeckMetaField] to. A test
@@ -537,6 +553,12 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
       value,
     ).map((e) => e.name).toList(),
     _ValueKind.boolList => _needBoolList(value),
+    _ValueKind.timelineLayout => _need<TimelineLayout>(value).name,
+    _ValueKind.timelineReveal => _need<TimelineReveal>(value).name,
+    _ValueKind.bulletMarker => _need<BulletMarker>(value).name,
+    _ValueKind.quality => _need<QualityDisposition>(value).name,
+    _ValueKind.findingRole => _need<FindingRole>(value).name,
+    _ValueKind.viewLimit => _viewLimitToJson(_need<DisplayWindowSpec>(value)),
   };
 }
 
@@ -583,6 +605,32 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       where,
     ).map((name) => _enumByName(TableAlign.values, name, where)).toList(),
     _ValueKind.boolList => _asBoolList(json, where),
+    _ValueKind.timelineLayout => _enumByName(
+      TimelineLayout.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.timelineReveal => _enumByName(
+      TimelineReveal.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.bulletMarker => _enumByName(
+      BulletMarker.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.quality => _enumByName(
+      QualityDisposition.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.findingRole => _enumByName(
+      FindingRole.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.viewLimit => _viewLimitFromJson(_asMap(json, where)),
   };
 }
 
