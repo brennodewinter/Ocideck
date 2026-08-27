@@ -23,13 +23,20 @@
 
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
 (`.md`). There is no custom binary format: a saved presentation is *designed* to
-be processed directly with the Marp CLI or the VS Code Marp extension. **That has
-not been verified against the real tools** — there is no Node tooling in this
-repository and no test that runs one, so treat it as a design goal rather than a
-tested guarantee, and tell us if a deck fails in real Marp. *(Corrected
-2026-07-22: this promised the round-trip outright. OciDeck has its own renderer
-built on `marked` and does not embed Marp Core, which is exactly why the promise
-needed testing rather than asserting.)* OciDeck-specific
+be processed directly with the Marp CLI or the VS Code Marp extension. *(Corrected
+2026-08-27: this used to say compatibility was "not verified against the real
+tools." It now is — a pinned, repository-native real-Marp check
+(`tool/marp-check`, `make check-marp`) renders a minimal split fixture with the
+real Marp CLI and asserts the `section.split` layout survives in DOM/CSS and a
+screenshot, including after moving the folder and on paths with spaces. The
+verified invocation is `marp deck.md -o out.html` run **from the project
+folder**, where the saved `.marprc.yml` registers the generated theme — see §1.
+Marp does not auto-discover a stylesheet placed beside the deck, so that config
+file is what makes the plain invocation work; running Marp from elsewhere or with
+`--no-config-file` falls back to the default theme and loses the split layout,
+which is the documented limitation.)* OciDeck has its own renderer built on
+`marked` and does not embed Marp Core, which is exactly why the promise needed
+testing rather than asserting. OciDeck-specific
 information is written in places Marp ignores (front-matter keys and HTML
 comments), so the file remains fully Marp-compatible while still round-tripping
 losslessly in OciDeck.
@@ -52,6 +59,7 @@ there. Paths in the Markdown are then **relative** to the folder containing the
 ```
 my_presentation/
 ├── My_presentation.md              # the presentation (Marp Markdown)
+├── .marprc.yml                     # Marp CLI config: registers the theme (see §1.1)
 ├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
 ├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
 ├── My_presentation.miauw.json      # MIAUW-disposition sidecar (see §6.5)
@@ -67,6 +75,32 @@ my_presentation/
 └── themes/
     └── ocideck.css                 # generated theme CSS (see §5)
 ```
+
+### 1.1 Marp CLI config (`.marprc.yml`)
+
+Marp CLI does **not** auto-discover a stylesheet placed beside the deck — merely
+saving `themes/ocideck.css` next to the `.md` is not enough for a plain
+`marp deck.md` to pick it up. OciDeck therefore writes a `.marprc.yml` next to
+the `.md` that registers the generated theme through Marp's standard `themeSet`
+option:
+
+```yaml
+themeSet:
+  - themes/ocideck.css
+```
+
+With that file present, the documented invocation — run **from the project
+folder** — loads the theme with no extra flags:
+
+```sh
+marp deck.md -o out.html
+```
+
+The path inside `.marprc.yml` is relative, so moving or renaming the project
+folder does not break theme discovery. The limitation is honest: run Marp from
+elsewhere, or pass `--no-config-file`, and Marp falls back to its default theme
+and the `section.split` two-column layout is lost. This is verified by a pinned
+real-Marp check (`tool/marp-check`, `make check-marp`). *(Added 2026-08-27, #1804.)*
 
 > The `.md` filename is derived from the presentation title: non-alphanumeric
 > characters are removed and spaces become `_`.
@@ -2790,6 +2824,7 @@ yet.
 ```
 <title>.ocideck   (zip)
 ├── <title>.md                # Marp Markdown
+├── .marprc.yml               # Marp CLI config: registers the theme (§1.1)
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
 ├── <title>.miauw.json        # MIAUW disposition (if present, §6.5)
@@ -2800,6 +2835,10 @@ yet.
 ├── logos/...                 # logo from the style profile
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
+
+The package carries the same `.marprc.yml` at its root as a saved project folder
+(§1.1), so extracting it and running `marp <title>.md` from the extracted folder
+loads the theme the same way. *(Added 2026-08-27, #1804.)*
 
 On import:
 

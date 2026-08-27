@@ -70,12 +70,20 @@ extension _FileServiceProject on FileService {
     updatedDeck = updatedDeck.copyWith(themeProfile: logoAsset.profile);
     await _writeImageCaptions(updatedDeck);
 
-    await _writeTheme(
+    final writtenTheme = await _writeTheme(
       themesDir.path,
       updatedDeck.theme,
       updatedDeck.themeProfile,
       logoAsset.cssUrl,
     );
+    // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; de
+    // standaardroute is een Marp-configuratiebestand dat de CSS via `themeSet`
+    // registreert. Zonder dit valt `marp deck.md` terug op het standaardthema
+    // en gaat de `section.split`-lay-out verloren (#1804). Alleen schrijven
+    // als de thema-CSS er echt staat.
+    if (writtenTheme != null) {
+      await _writeMarpConfig(dir, writtenTheme);
+    }
 
     // Bring linked chart data files along when saving to a new location, then
     // write back what the user changed in the grid. Order matters: the copy
@@ -159,7 +167,10 @@ extension _FileServiceProject on FileService {
     }
   }
 
-  Future<void> _writeTheme(
+  /// Schrijft de gegenereerde thema-CSS en geeft de veilige themanaam terug
+  /// (of `null` als de thema-asset niet gebundeld is in deze build-context —
+  /// dan is er geen CSS om te registreren).
+  Future<String?> _writeTheme(
     String themesPath,
     String themeName,
     ThemeProfile profile,
@@ -172,10 +183,28 @@ extension _FileServiceProject on FileService {
         'assets/themes/ocideck.css',
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
       await writeStringAtomic(dest, _buildThemeCss(base, profile, logoUrl));
+      return safeThemeName;
     } catch (e) {
       // Asset not bundled in this build context; skip
       logWarning('FileService._writeTheme: theme asset not bundled', e);
+      return null;
     }
+  }
+
+  /// Schrijft `.marprc.yml` naast de `.md` zodat een gewone
+  /// `marp deck.md -o out.html` (gedraaid vanuit deze map) de gegenereerde
+  /// thema-CSS laadt. Het pad is relatief, dus verhuizen van de projectmap
+  /// blijft werken. Zie #1804.
+  Future<void> _writeMarpConfig(String projectDir, String themeName) async {
+    await writeStringAtomic(
+      File(p.join(projectDir, '.marprc.yml')),
+      '# OciDeck Marp CLI configuration.\n'
+      '# Registers the generated theme so a plain `marp deck.md -o out.html`\n'
+      '# (run from this folder) loads it. Marp does not auto-discover a\n'
+      '# stylesheet placed beside the deck; this config is the standard route.\n'
+      'themeSet:\n'
+      '  - themes/$themeName.css\n',
+    );
   }
 
   Future<_LogoProjectAsset> _copyLogoToProject(

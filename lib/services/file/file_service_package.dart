@@ -234,6 +234,18 @@ extension FileServicePackage on FileService {
     archive.add(
       ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
     );
+    // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; dit
+    // configuratielid registreert de thema-CSS via `themeSet`, zodat een
+    // uitgepakt pakket met `marp <naam>.md` de lay-out behoudt (#1804).
+    final cfgBytes = utf8.encode(
+      '# OciDeck Marp CLI configuration.\n'
+      '# Registers the generated theme so a plain `marp deck.md -o out.html`\n'
+      '# (run from this folder) loads it. Marp does not auto-discover a\n'
+      '# stylesheet placed beside the deck; this config is the standard route.\n'
+      'themeSet:\n'
+      '  - themes/$themeName.css\n',
+    );
+    archive.add(ArchiveFile('.marprc.yml', cfgBytes.length, cfgBytes));
   }
 
   /// Voeg de sidecar-leden van [packDeck] toe onder [base]: dezelfde

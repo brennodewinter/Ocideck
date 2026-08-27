@@ -46,6 +46,18 @@ slide-voor-slide-editor. Je stelt getypeerde slides samen, bekijkt ze live,
 presenteert ze (op één of twee schermen) en exporteert naar Markdown, PDF, PPTX of
 een enkel offline HTML-bestand (één bestand, inclusief afbeeldingen — zie [Exporteren](#exporteren)).
 Bestanden blijven standaard Marp-Markdown, dus een deck blijft bruikbaar in andere Marp-tools.
+Een opgeslagen project schrijft een `.marprc.yml` naast de `.md` die het
+gegenereerde thema registreert, dus de gewone Marp CLI-aanroep — **uitgevoerd
+vanuit de projectmap** — laadt het zonder extra vlaggen:
+
+```sh
+marp deck.md -o out.html
+```
+
+Draai je Marp elders (of met `--no-config-file`), dan valt het terug op het
+standaardthema en gaat de `section.split`-tweekolomslay-out verloren — dat is de
+gedocumenteerde beperking, geen bug. Zie [Bestandsformaat §1.1](FILE_FORMAT.nl.md#11-marp-cli-config-marprcyml).
+*(Geverifieerd 2026-08-27 tegen de echte Marp CLI door `make check-marp`, #1804.)*
 
 In het kort verplaatst een deck zich als volgt door OciDeck:
 

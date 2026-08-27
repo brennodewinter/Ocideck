@@ -219,12 +219,34 @@ served the app — so that host sees the address you typed. The first visit
 downloads a large bundle. → [HOSTING.md](HOSTING.md), section *Web build
 limitations to communicate*
 
-## Marp CLI compatibility is unverified
+## Marp CLI: the theme loads, with one documented caveat
 
 The saved `.md` is designed to be processed by the Marp CLI and the VS Code Marp
-extension. That has not been tested against the real tools — there is no Node
-tooling in this repository and no test that runs one. →
-[FILE_FORMAT.md](FILE_FORMAT.md)
+extension. *(Corrected 2026-08-27: this section said compatibility was
+"unverified". It is now verified against the real Marp CLI — see below.)*
+
+A saved project writes a `.marprc.yml` next to the `.md` that registers the
+generated `themes/<theme>.css` via Marp's `themeSet` option. A plain invocation
+run **from the project folder** loads the theme with no extra flags:
+
+```sh
+marp deck.md -o out.html
+```
+
+This is verified by a pinned, repository-native real-Marp check
+(`tool/marp-check`, run via `make check-marp` / `make check-full`) that renders a
+minimal split fixture and asserts the `section.split` two-column layout survives
+in both the DOM/CSS and a screenshot — including after moving the folder and on
+paths containing spaces.
+
+**The one caveat:** Marp CLI does not auto-discover a stylesheet placed beside
+the deck. The `.marprc.yml` is what makes the plain invocation work, so **run
+Marp from the project folder** (where `.marprc.yml` lives). If you run it from
+elsewhere, or pass `--no-config-file`, Marp falls back to its default theme and
+the `section.split` layout is lost — that is the documented limitation, not a
+bug. The portable `.ocideck` package carries the same `.marprc.yml` at its root,
+so extracting it and running `marp <name>.md` from the extracted folder works the
+same way. → [FILE_FORMAT.md](FILE_FORMAT.md)
 
 ## Much of it has never met a real server
 

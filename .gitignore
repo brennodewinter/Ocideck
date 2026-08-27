@@ -71,3 +71,8 @@ minisign.key
 
 # Release-artefacten (lokaal gebouwd; nooit committen — belanden anders in de release-tag)
 dist/
+
+# De gepinde Marp CLI-check (`tool/marp-check`) installeert lokaal Node-pakketten
+# (waaronder Chromium via puppeteer). `package.json` en `package-lock.json` zijn
+# wél geversioneerd (de pin); `node_modules/` is een lokaal artefact, geen bron.
+tool/marp-check/node_modules/
