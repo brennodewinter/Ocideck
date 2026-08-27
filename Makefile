@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -388,6 +388,24 @@ check-secrets:
 	gitleaks git . --redact --config .gitleaks.toml
 	trufflehog filesystem . --no-verification --no-update --exclude-paths .trufflehogignore --fail
 	trufflehog git file://. --no-verification --no-update --exclude-paths .trufflehogignore --fail
+
+# Real-Marp CLI regression check for theme loading (#1804). A saved project
+# writes `.marprc.yml` so a plain `marp deck.md` loads the generated theme;
+# without it Marp falls back to the default theme and the `section.split`
+# layout is lost. This renders a minimal split fixture with the REAL pinned
+# Marp CLI and asserts the layout survives in DOM/CSS and a screenshot.
+#
+# NOT in `make check`/`check-static`: it needs Node + a pinned Marp CLI
+# (installed offline once `node_modules` exists), like `check-secrets` needs
+# gitleaks. It runs in `make check-full`. If Node is absent it skips with a
+# clear message rather than reddening the pass — same shape as DAST without a
+# container runtime. See `tool/marp-check/run.sh`.
+check-marp:
+	@echo "== OciDeck check: real-Marp CLI theme loading =="
+	@echo "Command: pinned @marp-team/marp-cli (tool/marp-check)"
+	@echo "Covers: a plain 'marp deck.md' loads the generated OciDeck theme; split layout survives; move + spaces work; default invocation documented."
+	@echo "Failure means: the supported invocation lost the split layout, or the documented limitation changed."
+	bash tool/marp-check/run.sh
 
 # Advisory DAST: an OWASP ZAP baseline (passive) scan against a served build.
 #
@@ -1336,9 +1354,9 @@ check-registrations:
 check-full:
 	@scripts/gate_lock.sh $(MAKE) check-full-locked
 
-check-full-locked: check-locked check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated
+check-full-locked: check-locked check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated check-marp
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, and dependency freshness."
+	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, dependency freshness, and real-Marp theme loading."
 
 # The "ready for tagging" quality pass. Run this BY HAND before `git push origin
 # v*`: it is the last moment a finding can hold back a release instead of ending

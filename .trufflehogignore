@@ -32,3 +32,11 @@
 ^lib/services/privacy/privacy_digital_rules\.dart$
 ^test/privacy_[a-z_]+_test\.dart$
 ^test/native_git_mirror_test\.dart$
+
+# De gepinde Marp CLI-check installeert lokaal Node-pakketten (gitignored). Hun
+# testbestanden bevatten voorbeeld-URI's met placeholder credentials (een HTTP-
+# voorbeeld met user:pass@host en een MongoDB-voorbeeld met username:password)
+# die trufflehog als geheim-vormig herkent. Het zijn geen geheimen en ze reizen
+# niet in de repo — `package.json`/`package-lock.json`/`run.sh` wél,
+# `node_modules/` niet.
+^tool/marp-check/node_modules/

@@ -1,0 +1,9 @@
+{
+  "name": "ocideck-marp-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinned real-Marp CLI regression check for OciDeck theme loading (#1804). Not a published package.",
+  "dependencies": {
+    "@marp-team/marp-cli": "4.4.0"
+  }
+}
