@@ -2949,7 +2949,29 @@ serializer ze schrijft.)*
 | `<!-- ocideck_ms_review -->` | Onzichtbare bewaker op de eerste slide van een toegevoegd ISO 9.3-**directiebeoordelingssjabloon**, zodat de actie opnieuw uitvoeren nooit een tweede exemplaar over de antwoorden van de auteur heen zet. Draagt geen gegevens; hij reist mee als deel van de vrije Markdown van de slide. |
 | `<!-- ocideck_page:N -->` | **Binnen het sprekersnotitieblok**, niet ernaast: scheidt de notities per rijke-tekst*pagina* van één slide, genummerd vanaf 1. Alleen geschreven wanneer een slide op meer dan één pagina notities draagt. Omdat het notitieblok zelf één groot `<!--  -->` is, wordt de eigen afsluiting van de marker op schijf geëscapet tot `--\>`, net als elke andere `-->` in een notitie; bij het lezen wordt dat eerst weer ongedaan gemaakt. |
 | `<!-- ocideck_media_redacted -->` | **Alleen in een export, nooit in een bewaard bestand.** Merkt een slide waarvan het beeld door de privacyprojectie is verwijderd, zodat de HTML-renderer er een redactievlak kan tekenen in plaats van stilzwijgend een gat te tonen. Bestaat alleen in een geprojecteerd artefact (§11), en de schrijver hangt niet alleen aan de vlag maar ook aan het exportpad. |
-| `<!-- ... (vrije tekst) ... -->` | **Sprekersnotities** (elk ander commentaar dat niet met `_` begint). |
+| `<!-- ... (vrije tekst) ... -->` | **Sprekersnotities** — elk ander commentaar dat niet met `_` begint en dat geen Marp-richtlijn noemt (zie hieronder). |
+
+**Een notitie is proza; een richtlijn is een naam die Marp kent.** Het onderscheid
+loopt langs één regel: een commentaar van één regel waarvan de sleutel een van
+Marpits eigen richtlijnnamen is (`paginate`, `header`, `footer`, `class`, `color`,
+`backgroundColor`, `backgroundImage`, `backgroundPosition`, `backgroundRepeat`,
+`backgroundSize`, `size`, `transition`, `theme`, `style`, `headingDivider`,
+`math`, `lang`, `marp`) is een **richtlijn**; al het andere is een notitie. De
+vergelijking is hoofdlettergevoelig, want die van Marpit is dat ook: `footer:` is
+een richtlijn, `Footer:` niet.
+
+Omdat OciDeck die kale vormen (zonder `_`) niet modelleert — ze gelden vanaf díe
+slide, en dat kunnen zijn getypeerde velden niet uitdrukken — blijft een slide die
+er een draagt in zijn geheel vrije Markdown (§9), en de structuurcontrole (§10)
+zegt dat, in plaats van de slide stil zijn type te laten verliezen.
+
+*(Gecorrigeerd 2026-08-27, #1815: de regel luidde "elk woord gevolgd door een
+dubbele punt", en dat is ook de vorm van een gewone zin. Een notitie als
+`Antwoord: onwaar.` of `Pareto: de balken staan gesorteerd.` werd gelezen als een
+onbekende richtlijn en trok zijn hele slide mee naar vrije Markdown — een grafiek
+rendeerde als codeblok, een vraag was niet meer speelbaar — en de
+structuurcontrole meldde niets. Marpit negeert sleutels die het niet kent, dus een
+blok bewaren om zo'n notitie had sowieso geen nut.)*
 
 ---
 
@@ -2969,12 +2991,16 @@ serializer ze schrijft.)*
   daar plaatste — overleven een openen-en-opslaan ongewijzigd (§3.0). Onbekende
   lokale directives blijven behouden. Wanneer getypeerde serialisatie een
   geschreven Marp-bodyconstructie niet kan bewaren zonder die te verplaatsen of
-  te veranderen — bijvoorbeeld een niet-ondersteunde achtergrondcompositie of
-  complexe `fit`-plaatsing — houdt OciDeck de hele getroffen slide als vrije
-  Markdown. Die blijft als bron bewerkbaar en gaat rond zonder de constructie
-  stilletjes weg te gooien. *(Gecorrigeerd 2026-08-10: het oude uitsluitend
-  getypeerde bodypad verloor niet-gemodelleerde markup; #1436 verving dat pad
-  door behoud.)*
+  te veranderen — een niet-ondersteunde achtergrondcompositie, een complexe
+  `fit`-plaatsing, of een kaal Marp-richtlijncommentaar (§8) — houdt OciDeck de
+  hele getroffen slide als vrije Markdown. Die blijft als bron bewerkbaar en gaat
+  rond zonder de constructie stilletjes weg te gooien. Wat dit in gang zet is nu
+  **benoemd** in plaats van geraden: alleen Marpits eigen richtlijnsleutels
+  tellen mee, en de structuurcontrole (§10) meldt de slide, want een slide die
+  zijn type verliest hoort dat niet stil te doen. *(Gecorrigeerd 2026-08-10: het
+  oude uitsluitend getypeerde bodypad verloor niet-gemodelleerde markup; #1436
+  verving dat pad door behoud. Versmald 2026-08-27, #1815: de richtlijntoets
+  matchte elk `woord:`, waardoor gewone sprekersnotities hem in gang zetten.)*
 - **Voorwaartse migratie:** ontbrekende front-matter-velden en
   stijlprofielvelden vallen terug op standaardwaarden, en de afwezigheid van het
   token `no-footer` betekent (voor oudere bestanden) "footer zichtbaar". Een
@@ -3060,6 +3086,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Front matter** | fout | Onbekende `tlp:`-waarde. |
 | **Commentaar** | fout | `<!--` zonder `-->` op dezelfde regel. |
 | **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:` of `advance:`. |
+| **Commentaar** | waarschuwing | Een kale Marp-richtlijn (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck modelleert die niet, dus de hele slide blijft vrije Markdown en krijgt geen slidetype (§8, §9). *(Toegevoegd 2026-08-27, #1815 — deze terugval gebeurde eerder zonder één woord uitleg.)* |
 | **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet gesloten). |
 | **`_class`** | fout | Misvormde `<!-- _class: ... -->`. |
 | **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder.)* |
