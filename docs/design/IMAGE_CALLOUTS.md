@@ -550,9 +550,24 @@ than copying the timeline-only step state. With `reveal: steps`:
 - a group that is not yet revealed is **absent from the accessibility tree**, not
   merely invisible, and the step change is announced — §12.2.
 
-The serialiser may additionally emit Marp `*` / `1)` fragment markers as a
-portable HTML projection, but the durable intent is `reveal:` in §2.2 — a marker
-alone is normalised back to `-` by any older save.
+**No Marp fragment marker is written to the saved deck**, and that is §2.3
+applied to itself. Revision 3 wanted the serialiser to emit `*` / `1)` alongside
+`reveal:` as a portable projection; that is a second copy of the same fact, and a
+hand-edit turning `reveal: steps` into `reveal: all` would leave a foreign Marp
+render still stepping. Smaller consequences than a mark in the wrong place, but
+the same defect, and a rule with one convenient exception is not a rule.
+
+So the front matter carries the intent and a foreign render shows every bullet at
+once. `reveal:` has to be the durable carrier rather than the marker, because a
+marker on its own is normalised back to `-` by any older save
+(`markdown_service_helpers.dart`) — the loss the whole format contract exists to
+avoid.
+
+**Worth revisiting later**, because it would be strictly better: if OciDeck ever
+round-trips `*` losslessly, the marker becomes plain Markdown expressing the
+whole fact, `reveal:` can go, and the portable behaviour comes back for free.
+That is a change to how lists are written, not to this feature, and it needs the
+old-reader question answered first.
 
 ---
 
