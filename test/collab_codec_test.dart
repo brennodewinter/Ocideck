@@ -5,6 +5,7 @@ import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/marp_style.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/quality_disposition.dart';
 import 'package:ocideck/models/settings.dart';
@@ -99,6 +100,13 @@ Slide maximalSlide() => Slide(
   checklistScope: 'https://app.example/login',
   improvementTemplateId: 'fmea',
   improvementLayout: 'fishbone',
+  anchor: 'target-slide',
+  nextAnchor: 'next-target',
+  ganttScale: 'weekly',
+  ganttSections: true,
+  menuLayout: MenuLayout.list,
+  tableColumnAlignments: const [TableAlign.left, TableAlign.right],
+  tableNumberColumns: const [true, false, true],
   renderPage: 3,
 );
 
@@ -179,6 +187,13 @@ void main() {
       expect(r.checklistScope, s.checklistScope);
       expect(r.improvementTemplateId, s.improvementTemplateId);
       expect(r.improvementLayout, s.improvementLayout);
+      expect(r.anchor, s.anchor);
+      expect(r.nextAnchor, s.nextAnchor);
+      expect(r.ganttScale, s.ganttScale);
+      expect(r.ganttSections, s.ganttSections);
+      expect(r.menuLayout, s.menuLayout);
+      expect(r.tableColumnAlignments, s.tableColumnAlignments);
+      expect(r.tableNumberColumns, s.tableNumberColumns);
       expect(r.renderPage, s.renderPage);
     });
 
@@ -310,6 +325,27 @@ void main() {
           slideId: 's',
           field: SlideField.marpStyle,
           value: MarpStyle(color: '#123456', headingFit: true),
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.menuLayout,
+          value: MenuLayout.list,
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.tableColumnAlignments,
+          value: [TableAlign.left, TableAlign.right],
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.tableNumberColumns,
+          value: [true, false, true],
         ),
       ];
       for (final op in cases) {

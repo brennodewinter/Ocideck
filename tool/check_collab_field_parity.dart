@@ -54,19 +54,13 @@ const Map<String, String> deliberatelyNotSynced = {
 /// Known debt: on `Slide`, not in `SlideField`, and nobody has decided whether
 /// that is right. **A ratchet — this set may shrink, never grow.**
 ///
-/// Two distinct problems live here, and the difference matters when they are
-/// picked up:
-///
-/// * The first group is carried by `slideToJson` but not by `SlideField`, so a
-///   *new* slide arrives complete and an *edit* to the field does not. That is
-///   the `imageZoom` shape.
-/// * The second group (`anchor`, `nextAnchor`, `ganttScale`, `ganttSections`,
-///   `menuLayout`, `tableColumnAlignments`, `tableNumberColumns`) is not in the
-///   collaboration layer **at all** — not even in `slideToJson`, whose doc
-///   comment nevertheless promises "Every field is carried so the receiver
-///   reproduces the slide exactly (P3)". For those, an inserted slide reaches
-///   the other client with the field at its default. That is a broken written
-///   invariant and the more serious of the two.
+/// These fields are carried by `slideToJson` but not by `SlideField`, so a
+/// *new* slide arrives complete and an *edit* to the field does not. That is
+/// the `imageZoom` shape. The seven fields that were missing from the
+/// collaboration layer entirely (`anchor`, `nextAnchor`, `ganttScale`,
+/// `ganttSections`, `menuLayout`, `tableColumnAlignments`,
+/// `tableNumberColumns`) were added to both `slideToJson` and `SlideField` in
+/// #1807, fixing the broken "Every field is carried" invariant.
 const Set<String> unsyncedBaseline = {
   // Carried whole, not carried on edit.
   'aiAssistedFields',
@@ -80,14 +74,6 @@ const Set<String> unsyncedBaseline = {
   'timelineLayout',
   'timelineReveal',
   'viewLimit',
-  // Not in the collaboration layer at all — see above.
-  'anchor',
-  'ganttScale',
-  'ganttSections',
-  'menuLayout',
-  'nextAnchor',
-  'tableColumnAlignments',
-  'tableNumberColumns',
 };
 
 /// The `final` field names declared directly on `class Slide`.
