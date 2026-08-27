@@ -414,6 +414,7 @@ now the only passing state.
 | [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — |
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
+| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
@@ -882,6 +883,30 @@ also declares them, but see the [CI note](#continuous-integration).)
   three-part version would let a stale SBOM through.
 - **Failure means:** regenerate the SBOM and commit it — `make sbom` then
   `git add sbom/`.
+
+### `make check-collab-field-parity`
+- **Runs:** `dart run tool/check_collab_field_parity.dart`
+- **Covers:** that every `final` field declared on `class Slide` is in exactly
+  one of three places — the `SlideField` enum (it syncs on edit), the
+  `deliberatelyNotSynced` map (a written decision, with its reason beside it),
+  or `unsyncedBaseline` (known debt, a ratchet that may shrink but never grow).
+  It also refuses a `SlideField` entry that no `Slide` field backs, and an entry
+  in either list for a field that no longer exists.
+- **Why it exists:** two parity tests already guard the collaboration surface —
+  `deck_op_test` asserts every `SlideField` has a case, `collab_codec_test`
+  asserts the codec maps every `SlideField` — and **both look the same way**.
+  They answer "is everything *in* the enum handled?"; neither answers "is every
+  syncable field *in* the enum?". Adding a field to `Slide` therefore lowered no
+  gate at all. That is how `imageZoom` was missed for two weeks (#1803): the op
+  model landed on 2026-07-30 with `imageSize` and all four focal fields, the
+  zoom was added to `Slide` on 2026-08-12, and a changed panel zoom silently
+  never reached the other client while a *newly inserted* slide carried it
+  fine — an asymmetry that makes the bug hard to reproduce on purpose.
+- **Failure means:** classify the field. Sync it (`SlideField` +
+  `slideFieldValue` + `applyOp` + the codec kind map + a case in
+  `test/deck_op_test.dart`), or record in `tool/check_collab_field_parity.dart`
+  why it is excluded. Choosing to leave debt is allowed; leaving the choice
+  unmade is not.
 
 ### `make check-translated-mermaid`
 - **Runs:** `dart run tool/check_translated_mermaid.dart`

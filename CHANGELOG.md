@@ -1987,6 +1987,34 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een gewijzigde paneelzoom bereikt de andere cliënt weer, en een poort houdt
+  de synchroniseerbare oppervlakte voortaan compleet (#1803).** `imageZoom` stond
+  niet in `SlideField`, en `deckDiffToOps` loopt uitsluitend over die enum — er
+  is geen terugval op een hele-dia-operatie. Wie de zoom van een paneelafbeelding
+  versleepte, zag hem bij de ander onveranderd blijven: geen melding, geen
+  conflict, twee bijsnijdingen die stil uiteenlopen tot iemand opslaat.
+
+  De asymmetrie maakte het lastig te vinden. Een *nieuwe* dia droeg de zoom wél
+  mee en een hersynchronisatie herstelde hem ook, want `slideToJson` kent het
+  veld; alleen het *wijzigen* kwam niet aan. Wie het probeerde na te doen met een
+  verse dia zag niets bijzonders.
+
+  Het veld was vergeten, niet uitgesloten: het operatiemodel landde op
+  2026-07-30 mét `imageSize` en alle vier de focal-velden, en `imageZoom` kwam
+  pas op 2026-08-12 in `Slide`. Dat kon gebeuren omdat de twee bestaande
+  pariteitstests allebei dezelfde kant op kijken — ze vragen of alles ín
+  `SlideField` wordt afgehandeld, niet of elk synchroniseerbaar veld ín
+  `SlideField` staat. Een veld toevoegen aan `Slide` haalde dus geen enkele poort
+  omlaag.
+
+  Daarom staat er nu `make check-collab-field-parity`: elk veld van `Slide` moet
+  in de enum staan, óf op een uitsluitingslijst met de reden ernaast, óf op een
+  schuldlijst die alleen mag krimpen. Bewust niet synchroniseren blijft
+  toegestaan; de keuze niet maken niet meer. De poort zet meteen achttien
+  bekende gevallen op die schuldlijst, waarvan zeven ernstiger zijn dan dit
+  ene — die staan helemaal niet in de samenwerklaag, terwijl `slideToJson`
+  belooft dat elk veld wordt meegedragen.
+
 - **Een tabelrij die hoger is dan een blad laat de export niet meer vastlopen
   (#1798).** Een `pw.Table`-rij kan niet over een bladovergang heen breken. Past
   de rij op geen enkel blad, dan plaatst `MultiPage` niets, begint een nieuw
