@@ -763,7 +763,9 @@ are distinguished by ordinal, never by prose.
 
 ### 12.2 What each surface owes
 
-**OciDeck HTML export and the plain-Marp fallback markup.**
+**OciDeck HTML export.** This is the only HTML OciDeck emits with marks in it
+— §2.3 leaves the plain-Marp file without an overlay, so there is no second
+HTML surface to keep in step.
 
 - The description is emitted once, in a visually hidden element with a stable id
   derived from anchor and reference.
@@ -787,8 +789,9 @@ are distinguished by ordinal, never by prose.
 **Flutter — preview, presenter, audience.** The same shape in `Semantics`: each
 marker is a labelled node with the same name, each bullet is described by the
 same prose, unrevealed groups are excluded from the tree rather than merely
-transparent, and the step change goes through the accessibility announcement the
-presenter already uses for slide changes.
+transparent, and the step change goes through
+`SemanticsService.sendAnnouncement`, which `presenter_navigation.dart`
+already uses to announce a slide change.
 
 **LaTeX / Beamer.** No accessibility tree exists and tagged PDF is out of scope.
 The description therefore has to survive as *text*: it is emitted as a TikZ node
