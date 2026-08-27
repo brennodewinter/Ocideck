@@ -383,22 +383,30 @@ all mean the same thing by "the painted rectangle":
 ```
 
 ```css
-/* cover (ze == 0) */
-.ocideck-imgbox { position: absolute;
+/* --iw / --ih: intrinsic pixel size · --fx / --fy: focal 0..1 · --z: ze/100 */
+
+/* cover (ze == 0): the box is a direct child of the slot */
+.ocideck-imgslot > .ocideck-imgbox { position: absolute;
   left: calc(var(--fx) * 100%);   top: calc(var(--fy) * 100%);
   transform: translate(calc(var(--fx) * -100%), calc(var(--fy) * -100%));
   min-width: 100%; min-height: 100%; aspect-ratio: var(--iw) / var(--ih); }
 
-/* zoom (ze > 0) */
+/* zoom (ze > 0): the box sits inside the zoom box and is contained in it */
 .ocideck-imgzoom { position: absolute;
   width: calc(var(--z) * 100%);   height: calc(var(--z) * 100%);
   left: calc(var(--fx) * 100%);   top: calc(var(--fy) * 100%);
   transform: translate(calc(var(--fx) * -100%), calc(var(--fy) * -100%));
   display: flex; align-items: center; justify-content: center; }
-.ocideck-imgbox      { position: relative; aspect-ratio: var(--iw) / var(--ih); }
-.ocideck-imgbox.wide { width: 100%;  height: auto; }   /* W/H ≥ sw/sh */
-.ocideck-imgbox.tall { height: 100%; width: auto; }    /* W/H <  sw/sh */
+.ocideck-imgzoom > .ocideck-imgbox      { position: relative;
+                                          aspect-ratio: var(--iw) / var(--ih); }
+.ocideck-imgzoom > .ocideck-imgbox.wide { width: 100%;  height: auto; }  /* W/H ≥ sw/sh */
+.ocideck-imgzoom > .ocideck-imgbox.tall { height: 100%; width: auto; }   /* W/H <  sw/sh */
 ```
+
+The two `.ocideck-imgbox` rules are scoped by parent on purpose: written as one
+bare selector, the zoom rule's `position: relative` would win over the cover
+rule's `position: absolute` and quietly break the case that needs no zoom box at
+all.
 
 `left` percentages resolve against the slot and `translate` percentages against
 the box's own size, so `left: fx·100%` + `translate: −fx·100%` **is** `(sw − pw)·fx`
