@@ -29,11 +29,13 @@ import 'dart:convert';
 import '../models/deck.dart';
 import '../models/display_window_spec.dart';
 import '../models/marp_style.dart';
+import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
+import '../services/improvement/gantt_dsl.dart';
 import 'collab_transport.dart';
 import 'deck_op.dart';
 
@@ -227,6 +229,13 @@ Map<String, Object?> slideToJson(Slide s) => {
   'checklistScope': s.checklistScope,
   'improvementTemplateId': s.improvementTemplateId,
   'improvementLayout': s.improvementLayout,
+  'anchor': s.anchor,
+  'nextAnchor': s.nextAnchor,
+  'ganttScale': s.ganttScale,
+  'ganttSections': s.ganttSections,
+  'menuLayout': s.menuLayout.name,
+  'tableColumnAlignments': s.tableColumnAlignments.map((e) => e.name).toList(),
+  'tableNumberColumns': s.tableNumberColumns,
   'renderPage': s.renderPage,
 };
 
@@ -336,6 +345,19 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   checklistScope: _str(j, 'checklistScope'),
   improvementTemplateId: _str(j, 'improvementTemplateId'),
   improvementLayout: _str(j, 'improvementLayout'),
+  anchor: j['anchor'] == null ? '' : _str(j, 'anchor'),
+  nextAnchor: j['nextAnchor'] == null ? '' : _str(j, 'nextAnchor'),
+  ganttScale: j['ganttScale'] == null ? ganttScaleAuto : _str(j, 'ganttScale'),
+  ganttSections: j['ganttSections'] == null ? false : _bool(j, 'ganttSections'),
+  menuLayout: j['menuLayout'] == null
+      ? MenuLayout.grid
+      : _enumByName(MenuLayout.values, _str(j, 'menuLayout'), 'menuLayout'),
+  tableColumnAlignments: j['tableColumnAlignments'] == null
+      ? const []
+      : _enumList(j, 'tableColumnAlignments', TableAlign.values),
+  tableNumberColumns: j['tableNumberColumns'] == null
+      ? const []
+      : _boolList(j, 'tableNumberColumns'),
   renderPage: _int(j, 'renderPage'),
 );
 
@@ -377,6 +399,9 @@ enum _ValueKind {
   privacy,
   marpStyle,
   titleColumnLayout,
+  menuLayout,
+  tableAlignList,
+  boolList,
 }
 
 _ValueKind _slideFieldKind(SlideField f) {
@@ -451,6 +476,13 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.imageFocalX2: _ValueKind.real,
   SlideField.imageFocalY2: _ValueKind.real,
   SlideField.advanceDuration: _ValueKind.real,
+  SlideField.anchor: _ValueKind.str,
+  SlideField.nextAnchor: _ValueKind.str,
+  SlideField.ganttScale: _ValueKind.str,
+  SlideField.ganttSections: _ValueKind.boolean,
+  SlideField.menuLayout: _ValueKind.menuLayout,
+  SlideField.tableColumnAlignments: _ValueKind.tableAlignList,
+  SlideField.tableNumberColumns: _ValueKind.boolList,
 };
 
 /// Mirrors the value types `applyOp` casts each [DeckMetaField] to. A test
@@ -500,6 +532,11 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.privacy => _need<PrivacyDisposition>(value).name,
     _ValueKind.marpStyle => _need<MarpStyle>(value).toJson(),
     _ValueKind.titleColumnLayout => _need<TitleColumnLayout>(value).name,
+    _ValueKind.menuLayout => _need<MenuLayout>(value).name,
+    _ValueKind.tableAlignList => _needEnumList<TableAlign>(
+      value,
+    ).map((e) => e.name).toList(),
+    _ValueKind.boolList => _needBoolList(value),
   };
 }
 
@@ -536,6 +573,16 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       _asString(json, where),
       where,
     ),
+    _ValueKind.menuLayout => _enumByName(
+      MenuLayout.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.tableAlignList => _asStrList(
+      json,
+      where,
+    ).map((name) => _enumByName(TableAlign.values, name, where)).toList(),
+    _ValueKind.boolList => _asBoolList(json, where),
   };
 }
 
@@ -631,6 +678,29 @@ List<String> _asStrList(Object? v, String where) {
   throw FormatException('field "$where" expected a list, got ${v.runtimeType}');
 }
 
+List<bool> _asBoolList(Object? v, String where) {
+  if (v is List) return v.map((e) => _asBool(e, where)).toList();
+  throw FormatException('field "$where" expected a list, got ${v.runtimeType}');
+}
+
+List<E> _enumList<E extends Enum>(
+  Map<String, Object?> j,
+  String key,
+  List<E> values,
+) {
+  final v = j[key];
+  if (v is List) {
+    return v.map((e) => _enumByName(values, _asString(e, key), key)).toList();
+  }
+  throw FormatException('field "$key" is not a list (${v.runtimeType})');
+}
+
+List<bool> _boolList(Map<String, Object?> j, String key) {
+  final v = j[key];
+  if (v is List) return v.map((e) => _asBool(e, key)).toList();
+  throw FormatException('field "$key" is not a list (${v.runtimeType})');
+}
+
 /// Assert an in-memory op value has the runtime type the field expects, so a
 /// malformed op is caught at encode time rather than producing lossy JSON.
 T _need<T>(Object? value) {
@@ -642,6 +712,18 @@ List<String> _needStrList(Object? value) {
   if (value is List) return value.map((e) => _need<String>(e)).toList();
   throw FormatException(
     'op value expected a List<String>, got ${value.runtimeType}',
+  );
+}
+
+List<E> _needEnumList<E extends Enum>(Object? value) {
+  if (value is List) return value.map((e) => _need<E>(e)).toList();
+  throw FormatException('op value expected a List, got ${value.runtimeType}');
+}
+
+List<bool> _needBoolList(Object? value) {
+  if (value is List) return value.map((e) => _need<bool>(e)).toList();
+  throw FormatException(
+    'op value expected a List<bool>, got ${value.runtimeType}',
   );
 }
 

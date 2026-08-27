@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/slide.dart';
@@ -86,6 +87,19 @@ _slideCases = {
   SlideField.imageFocalX2: (value: 0.1, read: (s) => s.imageFocalX2),
   SlideField.imageFocalY2: (value: 0.9, read: (s) => s.imageFocalY2),
   SlideField.advanceDuration: (value: 5.0, read: (s) => s.advanceDuration),
+  SlideField.anchor: (value: 'jump-here', read: (s) => s.anchor),
+  SlideField.nextAnchor: (value: 'go-next', read: (s) => s.nextAnchor),
+  SlideField.ganttScale: (value: 'weekly', read: (s) => s.ganttScale),
+  SlideField.ganttSections: (value: true, read: (s) => s.ganttSections),
+  SlideField.menuLayout: (value: MenuLayout.list, read: (s) => s.menuLayout),
+  SlideField.tableColumnAlignments: (
+    value: [TableAlign.left, TableAlign.right],
+    read: (s) => s.tableColumnAlignments,
+  ),
+  SlideField.tableNumberColumns: (
+    value: [true, false, true],
+    read: (s) => s.tableNumberColumns,
+  ),
 };
 
 final Map<DeckMetaField, ({Object? value, Object? Function(Deck) read})>

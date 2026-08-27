@@ -103,6 +103,10 @@ const Map<String, int> methodLengthBaseline = {
   // +1 (#1769): de ODP-case in de formaat-switch. De methode stond al op de
   // limiet; één case extra is onherleidbare plumbing.
   'lib/services/export_service.dart::ExportService.export': 151,
+  // +12 (#1807): zeven nieuwe SlideField-cases (anchor, nextAnchor, ganttScale,
+  // ganttSections, menuLayout, tableColumnAlignments, tableNumberColumns) in
+  // een exhaustive switch — onherleidbare plumbing, één case per veld.
+  'lib/collab/deck_op.dart::_slideWithField': 162,
 };
 
 bool _isTranslationData(String path) =>

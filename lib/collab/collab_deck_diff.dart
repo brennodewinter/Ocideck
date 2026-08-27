@@ -199,6 +199,13 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.imageFocalX2 => slide.imageFocalX2,
     SlideField.imageFocalY2 => slide.imageFocalY2,
     SlideField.advanceDuration => slide.advanceDuration,
+    SlideField.anchor => slide.anchor,
+    SlideField.nextAnchor => slide.nextAnchor,
+    SlideField.ganttScale => slide.ganttScale,
+    SlideField.ganttSections => slide.ganttSections,
+    SlideField.menuLayout => slide.menuLayout,
+    SlideField.tableColumnAlignments => slide.tableColumnAlignments,
+    SlideField.tableNumberColumns => slide.tableNumberColumns,
   };
 }
 

@@ -30,6 +30,7 @@
 
 import '../models/deck.dart';
 import '../models/marp_style.dart';
+import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
 import '../models/slide.dart';
 
@@ -224,6 +225,17 @@ enum SlideField {
   imageFocalX2,
   imageFocalY2,
   advanceDuration,
+  // — non-linear navigation (#1162) —
+  anchor,
+  nextAnchor,
+  // — Gantt —
+  ganttScale,
+  ganttSections,
+  // — menu —
+  menuLayout, // MenuLayout
+  // — table formatting —
+  tableColumnAlignments, // List<TableAlign>
+  tableNumberColumns, // List<bool>
 }
 
 /// The deck-level metadata fields a [SetDeckMeta] op can carry.
@@ -465,6 +477,25 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.advanceDuration => slide.copyWith(
       advanceDuration: _cast<double>(value, field),
+    ),
+    SlideField.anchor => slide.copyWith(anchor: _cast<String>(value, field)),
+    SlideField.nextAnchor => slide.copyWith(
+      nextAnchor: _cast<String>(value, field),
+    ),
+    SlideField.ganttScale => slide.copyWith(
+      ganttScale: _cast<String>(value, field),
+    ),
+    SlideField.ganttSections => slide.copyWith(
+      ganttSections: _cast<bool>(value, field),
+    ),
+    SlideField.menuLayout => slide.copyWith(
+      menuLayout: _cast<MenuLayout>(value, field),
+    ),
+    SlideField.tableColumnAlignments => slide.copyWith(
+      tableColumnAlignments: _castList<TableAlign>(value, field),
+    ),
+    SlideField.tableNumberColumns => slide.copyWith(
+      tableNumberColumns: _castList<bool>(value, field),
     ),
   };
 }
