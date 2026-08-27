@@ -117,6 +117,20 @@ achtergronden op WCAG 2.1 AA, en meldt wat faalt. Dit helpt het *publiek* van je
 deck in plaats van jou — maar het is de controle die de meeste presentatiegereed­schappen
 helemaal niet doen.
 
+**En de gebundelde stijlprofielen worden er ook aan gehouden.** *(Toegevoegd
+2026-08-27, #1818.)* De kleuren van de auteur meten en tegelijk standaarden
+uitleveren die diezelfde lat niet halen, is geen kleine inconsistentie — dan is
+de app het met zichzelf oneens, en de auteur kan er vanuit de `.md` niets aan
+doen omdat styling daar bewust niet in staat (FILE_FORMAT §3.2). Het
+standaardprofiel deed precies dat: een niet-afgevinkt checklistvakje op 1,5:1
+tegen een ondergrens van 3:1, waardoor elk deck met een checklist opende op een
+waarschuwing waar niemand iets mee kon. `theme_profile_contrast_test` haalt nu
+elk gebundeld profiel door dezelfde analyzer als het kwaliteitspaneel en eist nul
+bevindingen. Bewuste uitzonderingen staan daar bij naam, met reden en
+issuenummer, en een tweede test faalt zodra een uitzondering niet meer nodig is —
+zodat hij wordt opgeruimd in plaats van stilletjes de volgende fout te dekken.
+Vandaag staat er één: het Vigilis-merkgeel als linkkleur (#1819).
+
 ## Wat er niet staat
 
 **PDF- en PPTX-exports zijn afbeeldingen.** Dit is de grootste beperking in dit

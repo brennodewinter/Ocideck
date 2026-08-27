@@ -1987,6 +1987,45 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De gebundelde stijlprofielen halen hun eigen contrastondergrens weer
+  (#1818).** Het standaardprofiel droeg `checklistUncheckedColor: '#CBD5E1'` op
+  een witte dia: verhouding 1,48, tegen de 3,0 die `SlideQualityAnalyzer` zelf
+  hanteert. Gevolg: élk deck met een checklist-dia opende meteen op een
+  waarschuwing die de auteur vanuit de `.md` niet kón oplossen, want styling
+  staat bewust niet in het bestand (FILE_FORMAT §3.2). De app zakte door zijn
+  eigen lat zodra je een van zijn eigen diatypes gebruikte.
+
+  De nieuwe waarde is `#64748B`, en die is nagerekend in plaats van gekozen.
+  `#94A3B8` — de voor de hand liggende volgende stap — haalt 2,56 en zou het
+  dus níet hebben opgelost; de lichtste tint die 3,0 raakt ligt rond `#8695AA`
+  (3,05), te weinig marge. `#64748B` haalt 4,76 op wit, en is bovendien de
+  klasse kleur die op béide uitersten werkt: 3,90 / 3,75 / 3,07 op de donkere
+  tinten die deze repo elders voert, waar het oude lichte grijs juist op wit
+  faalde. Een midden-grijs is de enige keuze die 3:1 haalt ongeacht hoe de
+  auteur zijn achtergrond zet.
+
+  Vier kopieën van dezelfde standaard moesten mee: de constructor, `security`,
+  `vigilis` en — bijna vergeten — de terugval in `ThemeProfile.fromJson`. Was
+  die laatste blijven staan, dan had een profiel dat zónder deze sleutel uit de
+  instellingen komt de oude kleur teruggekregen, bij precies de gebruiker die
+  er niets aan veranderd had. Er staat nu een test op dat die twee gelijk zijn.
+
+  Onderweg bleek het breder dan gemeld: Vigilis droeg er nog drie bij. De
+  sectiedia tekende `titleTextColor` (wit) op het merkgeel `#FFB800` — 1,73, en
+  dus onleesbaar. Die achtergrond is nu het merkzwart `#111318`; het geel blijft
+  onaangeroerd als `accentColor`. Dat kón niet anders zolang de sectie zijn
+  tekstkleur deelt met de titeldia, die wit moet blijven. De vierde bevinding —
+  datzelfde geel als linkkleur op wit — is een merkbesluit en blijft staan als
+  benoemde uitzondering in de test, met #1819 erbij.
+
+  Er was niets dat dit bewaakte, en dat was het echte gat.
+  `test/theme_profile_contrast_test.dart` haalt nu elk gebundeld profiel door
+  dezelfde analyzer als het kwaliteitspaneel, over een deck dat elk contrastpaar
+  aanraakt dat de analyzer kent, en eist nul bevindingen. Uitzonderingen staan
+  in één expliciete lijst mét reden en issuenummer — en een tweede test faalt
+  zodra een uitzondering níet meer nodig is, zodat hij wordt opgeruimd in plaats
+  van stilletjes de volgende fout te dekken.
+
 - **Een spreeknotitie die met `Woord:` begint laat de dia niet langer stil
   haar type verliezen (#1815).** `requiresWholeMarpBlockPreservation` zag élk
   enkelregelig commentaar van de vorm `woord:` aan voor een Marp-richtlijn die
