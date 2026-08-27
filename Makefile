@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -861,6 +861,19 @@ check-sbom-version:
 	@echo "Failure means: regenerate the SBOM with 'make sbom' and commit sbom/."
 	dart run tool/check_sbom_version.dart
 
+check-collab-field-parity:
+	@echo "== OciDeck check: collab field parity =="
+	@echo "Command: dart run tool/check_collab_field_parity.dart"
+	@echo "Covers: every field on Slide is accounted for in the syncable"
+	@echo "        surface — in SlideField, on the deliberate-exclusion list"
+	@echo "        with a reason, or on the shrink-only debt baseline. This is"
+	@echo "        the direction the two existing parity tests never check."
+	@echo "Failure means: classify the new field. Either sync it (SlideField +"
+	@echo "        slideFieldValue + applyOp + the codec kind map + a case in"
+	@echo "        test/deck_op_test.dart), or record why it is excluded, in"
+	@echo "        tool/check_collab_field_parity.dart."
+	dart run tool/check_collab_field_parity.dart
+
 # A machine-translated doc must not carry an English mermaid diagram (#1278). The
 # translator leaves code blocks — and so mermaid — untouched, so a diagram's
 # labels stay in the source language while the prose around it is translated. This
@@ -1230,7 +1243,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid check-l10n-parity translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-parity translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus

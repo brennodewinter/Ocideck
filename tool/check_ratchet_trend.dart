@@ -104,6 +104,13 @@ enum RatchetSoort {
 /// niemand ze toen opnoemde.
 const List<Ratchet> ratchets = [
   Ratchet(
+    naam: 'unsyncedBaseline',
+    bestand: 'tool/check_collab_field_parity.dart',
+    soort: RatchetSoort.omvang,
+    richting: Richting.omlaag,
+    wat: 'Slide-velden die niet meereizen bij samenwerken (#1803)',
+  ),
+  Ratchet(
     naam: 'catchUnderscoreBaseline',
     bestand: 'tool/check_conventions.dart',
     soort: RatchetSoort.getal,

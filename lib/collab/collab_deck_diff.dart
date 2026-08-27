@@ -192,6 +192,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.videoStartMs => slide.videoStartMs,
     SlideField.videoEndMs => slide.videoEndMs,
     SlideField.imageSize => slide.imageSize,
+    SlideField.imageZoom => slide.imageZoom,
     SlideField.titleColumnWidth => slide.titleColumnWidth,
     SlideField.imageFocalX => slide.imageFocalX,
     SlideField.imageFocalY => slide.imageFocalY,

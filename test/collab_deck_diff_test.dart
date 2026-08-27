@@ -153,5 +153,32 @@ void main() {
       final after = Deck(title: 'd', slides: [s('x'), s('y'), s('z')]);
       expectReproduces(before, after);
     });
+
+    // #1803 — een gewijzigde paneelzoom bereikte de andere cliënt niet: het veld
+    // stond niet in [SlideField], en de diff loopt uitsluitend over die enum.
+    //
+    // Waarom dit níet met [expectReproduces] getoetst wordt: die helper diffs het
+    // resultaat opnieuw, en een veld dat de diff niet kent is in béíde richtingen
+    // onzichtbaar — de hervergelijking komt dan leeg terug terwijl de waarde
+    // nooit is overgekomen. De toets moet dus de wáárde na toepassing lezen.
+    test('a changed panel zoom reaches the other client (#1803)', () {
+      final before = Deck(title: 'd', slides: [s('a').copyWith(imageZoom: 0)]);
+      final after = Deck(title: 'd', slides: [s('a').copyWith(imageZoom: 140)]);
+
+      final ops = deckDiffToOps(before, after, authorId: 'a');
+      expect(
+        ops,
+        hasLength(1),
+        reason: 'de zoomwijziging moet één op opleveren',
+      );
+      expect((ops.single as SetSlideField).field, SlideField.imageZoom);
+
+      expect(
+        applyAll(before, ops).slides.single.imageZoom,
+        140,
+        reason: 'de ontvanger moet dezelfde bijsnijding zien',
+      );
+      expectReproduces(before, after);
+    });
   });
 }
