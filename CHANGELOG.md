@@ -1987,6 +1987,33 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een spreeknotitie die met `Woord:` begint laat de dia niet langer stil
+  haar type verliezen (#1815).** `requiresWholeMarpBlockPreservation` zag élk
+  enkelregelig commentaar van de vorm `woord:` aan voor een Marp-richtlijn die
+  OciDeck niet modelleert, en zette daarop het hele diablok om in vrije
+  Markdown. Dat is precies de vorm van een gewone notitie. Op een handgeschreven
+  deck van 46 dia's sneuvelden er drie: `<!-- Antwoord: onwaar. -->` op een
+  vraagdia, `<!-- Pareto: de balken staan gesorteerd. -->` op een grafiekdia en
+  `<!-- Verdiepingsdia: valt weg in de export. -->` op een FMEA. De quiz was niet
+  meer speelbaar en de ```chart-fence rendeerde als codeblok.
+
+  De toets gaat nu positief tegen de sleutellijst van Marpit zelf
+  (`kMarpitDirectiveNames`), hoofdlettergevoelig, zoals Marpit zijn eigen
+  sleutels vergelijkt. Dat is niet alleen smaller maar ook juister: Marpit
+  negeert een sleutel die het niet kent, dus een blok bewaren om `Antwoord:`
+  hielp niemand — Marp deed er zelf al niets mee. De uitzonderingslijst
+  (`advance:`, `tlp:`, `ocideck_`, `_`) kon daarmee weg: geen van vieren is een
+  Marp-richtlijn, dus geen van vieren komt de toets nog binnen.
+
+  De keerzijde stond ook stil, en die is nu dicht: valt een dia wél terug omdat
+  er een echte, niet-gemodelleerde richtlijn op staat (`paginate:`, `footer:`,
+  `backgroundPosition:`), dan zegt de structuurcontrole dat nu met naam en
+  gevolg. Op het deck dat de fout blootlegde meldde `MarkdownValidator` nul
+  bevindingen terwijl er drie dia's hun type kwijt waren — precies de stille
+  degradatie waarvoor §10 bestaat. De regressietest zet beide kanten vast: de
+  drie prozanotities houden hun diatype, en acht echte Marpit-sleutels bewaren
+  het blok nog steeds.
+
 - **Een gewijzigde paneelzoom bereikt de andere cliënt weer, en een poort houdt
   de synchroniseerbare oppervlakte voortaan compleet (#1803).** `imageZoom` stond
   niet in `SlideField`, en `deckDiffToOps` loopt uitsluitend over die enum — er

@@ -5,6 +5,7 @@ import '../models/markdown_validation.dart';
 import '../models/privacy_disposition.dart';
 import 'front_matter_merge.dart';
 import 'markdown_service.dart';
+import 'marp_source_preservation.dart';
 import '../utils/log.dart';
 
 part 'markdown_validator_vocabulary.dart';
@@ -254,17 +255,46 @@ class MarkdownValidator {
   /// does not render. Plain prose
   /// comments are speaker notes and are intentionally left alone, so genuine
   /// notes no longer trigger a spurious warning.
+  ///
+  /// Daarnaast (#1815) de kale Marpit-richtlijnen. Die hebben een zwaarder
+  /// gevolg dan "blijft behouden": ze zetten de héle dia op vrije Markdown
+  /// (`requiresWholeMarpBlockPreservation`), dus een grafiek- of vraagdia
+  /// verliest zijn type en rendert als broncode. Dat is de bedoelde uitkomst —
+  /// Marp doet met die sleutel wél iets — maar het hoort niet stil te gebeuren.
+  /// Vóór #1815 meldde de controle hier niets, terwijl een deck van 45 dia's er
+  /// drie op verloor.
   void _validateCommentDirectives(
     String markdown,
     List<MarkdownValidationIssue> issues,
   ) {
     for (final match in _reHtmlCommentMultiline.allMatches(markdown)) {
-      final content = match.group(1)!.trim();
+      final raw = match.group(1)!;
+      final content = raw.trim();
+      final line = markdown.substring(0, match.start).split('\n').length;
+
+      // Meerregelig is een notitieblok, nooit een richtlijn — dezelfde grens
+      // die de bewaarroute zelf trekt.
+      if (!raw.contains('\n')) {
+        final marpitKey = marpitDirectiveKey(content);
+        if (marpitKey != null) {
+          issues.add(
+            MarkdownValidationIssue(
+              line: line,
+              severity: MarkdownValidationSeverity.warning,
+              message:
+                  'Marp-richtlijn `$marpitKey` wordt niet door OciDeck '
+                  'gemodelleerd; deze dia blijft daarom als vrije Markdown '
+                  'staan en krijgt geen diatype.',
+            ),
+          );
+          continue;
+        }
+      }
+
       final keyMatch = _reDirectiveKey.firstMatch(content);
       if (keyMatch == null) continue;
       final key = keyMatch.group(1)!;
       if (_supportedCommentDirectives.contains(key)) continue;
-      final line = markdown.substring(0, match.start).split('\n').length;
       issues.add(
         MarkdownValidationIssue(
           line: line,

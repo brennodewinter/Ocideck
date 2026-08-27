@@ -2946,7 +2946,28 @@ are listed below in the same order the serializer writes them.)*
 | `<!-- ocideck_ms_review -->` | Invisible guard on the first slide of an appended ISO 9.3 **management-review** template, so running the action again never appends a second copy over the author's answers. Carries no data; it round-trips as part of the slide's free Markdown. |
 | `<!-- ocideck_page:N -->` | **Inside the presenter-note block**, not beside it: separates the notes per rich-text *page* of one slide, numbered from 1. Written only when a slide carries notes on more than one page. Because the note block is itself one big `<!--  -->`, the marker's own closing is escaped to `--\>` on disk, exactly like any other `-->` a note contains; reading undoes that before the pages are split. |
 | `<!-- ocideck_media_redacted -->` | **Export only, never in a saved file.** Marks a slide whose image was removed by the privacy projection, so the HTML renderer can draw a redaction block where the picture was instead of silently showing a gap. It exists only in a projected artefact (§11), and the writer is gated on the export path as well as on the flag. |
-| `<!-- ... (free text) ... -->` | **Presenter notes** (any other comment that does not start with `_`). |
+| `<!-- ... (free text) ... -->` | **Presenter notes** — any other comment that does not start with `_` and does not name a Marp directive (see below). |
+
+**A note is prose; a directive is a name Marp knows.** The two are told apart by
+one rule: a single-line comment whose key is one of Marpit's own directive names
+(`paginate`, `header`, `footer`, `class`, `color`, `backgroundColor`,
+`backgroundImage`, `backgroundPosition`, `backgroundRepeat`, `backgroundSize`,
+`size`, `transition`, `theme`, `style`, `headingDivider`, `math`, `lang`, `marp`)
+is a **directive**; anything else is a note. The comparison is case-sensitive,
+because Marpit's own is: `footer:` is a directive, `Footer:` is not.
+
+Because OciDeck does not model those bare (non-`_`) forms — they apply from that
+slide onward, which its typed fields cannot express — a slide carrying one is
+kept whole as free Markdown (§9), and the structure check (§10) says so rather
+than letting the slide lose its type quietly.
+
+*(Corrected 2026-08-27, #1815: the rule used to be "any word followed by a
+colon", which is also the shape of an ordinary sentence. A note reading
+`Antwoord: onwaar.` or `Pareto: de balken staan gesorteerd.` was read as an
+unknown directive and took its whole slide down to free Markdown — a chart
+rendered as a code block, a question stopped being playable — and the structure
+check reported nothing. Marpit ignores keys it does not know, so preserving a
+block for one was never useful in the first place.)*
 
 ---
 
@@ -2963,12 +2984,17 @@ are listed below in the same order the serializer writes them.)*
   not know — Marp options it has not implemented, or a note the author put
   there — survive an open-and-save unchanged (§3.0). Unknown local directives
   are retained. When typed serialisation cannot preserve an authored Marp body
-  construct without moving or changing it — for example an unsupported
-  background composition or complex `fit` placement — OciDeck keeps the whole
-  affected slide as free Markdown. It remains source-editable and round-trips
-  without silently discarding the construct. *(Corrected 2026-08-10: the old
-  typed-only body path did lose unmodelled markup; #1436 replaced that path with
-  preservation.)*
+  construct without moving or changing it — an unsupported background
+  composition, a complex `fit` placement, or a bare Marp directive comment (§8)
+  — OciDeck keeps the whole affected slide as free Markdown. It remains
+  source-editable and round-trips without silently discarding the construct.
+  What triggers this is now **named** rather than guessed at: only Marpit's own
+  directive keys count, and the structure check (§10) reports the slide, because
+  losing a slide type is not something a file should do quietly.
+  *(Corrected 2026-08-10: the old typed-only body path did lose unmodelled
+  markup; #1436 replaced that path with preservation. Narrowed 2026-08-27,
+  #1815: the directive test matched any `word:`, so ordinary presenter notes
+  triggered it.)*
 - **Forward migration:** missing front-matter fields and style-profile fields
   fall back to defaults, and the absence of the `no-footer` token means (for
   older files) "footer visible". A file that declares a *newer* format version
@@ -3048,6 +3074,7 @@ not model is not reported.
 | **Front matter** | error | Unknown `tlp:` value. |
 | **Comment** | error | `<!--` without `-->` on the same line. |
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
+| **Comment** | warning | A bare Marp directive (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck does not model it, so the whole slide stays free Markdown and gets no slide type (§8, §9). *(Added 2026-08-27, #1815 — this fallback used to happen without a word.)* |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
 | **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below.)* |
