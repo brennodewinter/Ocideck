@@ -5,7 +5,7 @@ import 'markdown_front_matter_codec.dart';
 final _backgroundImage = RegExp(r'!\[bg');
 final _wholeBackground = RegExp(r'^!\[([^\]]*)\]\([^)]+\)$');
 final _htmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
-final _marpitDirective = RegExp(r'^[A-Za-z][A-Za-z0-9_-]*\s*:');
+final _directiveKey = RegExp(r'^([A-Za-z][A-Za-z0-9_-]*)\s*:');
 final _imageFilter = RegExp(
   r'\b(?:blur(?::[^\s\]]+)?|brightness(?::[^\s\]]+)?|saturate(?::[^\s\]]+)?|grayscale|sepia|invert)\b',
   caseSensitive: false,
@@ -51,13 +51,59 @@ bool requiresWholeMarpBlockPreservation(String block) {
   for (final match in _htmlComment.allMatches(block)) {
     final raw = match.group(1)!;
     if (raw.contains('\n')) continue;
-    final content = raw.trim();
-    if (_marpitDirective.hasMatch(content) &&
-        !_isKnownOciDeckOrTypedDirective(content)) {
-      return true;
-    }
+    if (marpitDirectiveKey(raw.trim()) != null) return true;
   }
   return false;
+}
+
+/// De Marpit-richtlijnen die een dia-commentaar kan dragen, zónder het
+/// `_`-voorvoegsel van de spot-vorm.
+///
+/// Dit is de sleutellijst van Marp zelf, niet die van OciDeck. De
+/// `_`-varianten die OciDeck wél modelleert (`_color`, `_backgroundColor`,
+/// `_backgroundImage`, `_header`, `_footer`) lopen langs
+/// [parseMarpStyleDirective]; élke andere `_`-richtlijn wordt binnen de
+/// getypeerde dia bewaard als `preservedMarpLines`. Wat hier staat is de kale
+/// vorm, die Marp vanaf déze dia laat gelden en die OciDeck nergens modelleert
+/// — dus moet het hele blok als bron blijven staan.
+const kMarpitDirectiveNames = <String>{
+  // Globaal.
+  'marp',
+  'theme',
+  'style',
+  'headingDivider',
+  // Lokaal.
+  'paginate',
+  'header',
+  'footer',
+  'class',
+  'backgroundColor',
+  'backgroundImage',
+  'backgroundPosition',
+  'backgroundRepeat',
+  'backgroundSize',
+  'color',
+  'size',
+  'transition',
+  // Marp CLI.
+  'math',
+  'lang',
+};
+
+/// De Marpit-richtlijn die [content] noemt, of `null` als het proza is.
+///
+/// Hoofdlettergevoelig, en dat is de kern van de zaak: Marpit vergelijkt zijn
+/// sleutels letterlijk en negeert wat het niet kent. `Antwoord:` en `Footer:`
+/// doen bij Marp dus niets, en er is geen reden om er een dia voor te bewaren.
+/// Vóór #1815 stond hier "elk woord gevolgd door een dubbele punt", en dat is
+/// nu juist de vorm van een gewone notitie: `Antwoord: onwaar.` zette een
+/// vraagdia stil om in vrije Markdown, met de quiz als codeblok tot gevolg.
+///
+/// De keerzijde is even belangrijk: `footer:` of `paginate:` doet Marp wél
+/// iets mee, dus dáár blijft de bron staan. Zie [requiresWholeMarpBlockPreservation].
+String? marpitDirectiveKey(String content) {
+  final key = _directiveKey.firstMatch(content)?.group(1);
+  return key != null && kMarpitDirectiveNames.contains(key) ? key : null;
 }
 
 bool _hasOnlyTypedBackgroundOptions(
@@ -82,11 +128,12 @@ bool _hasOnlyTypedBackgroundOptions(
   return options.isEmpty;
 }
 
-bool _isKnownOciDeckOrTypedDirective(String content) =>
-    content.startsWith('advance:') ||
-    content.startsWith('tlp:') ||
-    content.startsWith('ocideck_') ||
-    content.startsWith('_');
+// De uitzonderingslijst die hier stond (`advance:`, `tlp:`, `ocideck_`, `_`)
+// is met #1815 vervallen. Ze was nodig zolang de toets "elk woord gevolgd door
+// een dubbele punt" luidde en OciDecks eigen richtlijnen er dus in liepen. Nu
+// [marpitDirectiveKey] positief tegen de Marpit-sleutellijst toetst, valt geen
+// van die vier er nog binnen: het zijn geen Marp-richtlijnen. Een uitzondering
+// op een regel die niet meer bestaat, leest als een regel die er nog is.
 
 /// Separates background lines the typed image fields cannot carry losslessly.
 ({String remaining, List<String> preserved}) unsupportedMarpImageLines(
