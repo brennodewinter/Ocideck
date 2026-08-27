@@ -353,3 +353,42 @@ predicted cover crop.
 `--theme-set` is required, and then the layout and the generated callout classes
 both work. Raw `div`/`span` and `class` survive; inline `style` is stripped, with
 or without `--html`.
+
+---
+
+## 11. The trade-off, named
+
+Interchangeability and a rich feature collide here, and pretending otherwise
+would be the real mistake. Written down so the decision stays findable.
+
+**The decisive test — if OciDeck stopped existing tomorrow, could the author
+carry on?** Yes. The bullet says `controller board with display (A)`, and the
+front matter says `A: point 0.402 0.251 | the controller board`. A person with a
+text editor knows which line refers to which place and what is there, in prose.
+Nothing is opaque, nothing is base64, nothing needs OciDeck to be decoded. The
+overlay can be rebuilt in any tool from what the file already says.
+
+**Interchangeability wins over the feature, and the way it wins is the split in
+§2.** The arrow exists only inside OciDeck. It is allowed to, because it is a
+*rendering* over data that is itself fully portable: someone who leaves keeps the
+meaning and loses only the drawing.
+
+**What would change this decision.** If the arrow ever needed geometry of its own
+in the file — bend points, custom routing, a hand-placed tail — the stored data
+would stop being portable meaning and become OciDeck-specific instructions. At
+that point the answer flips and the feature does not get built. That is why §1
+puts bend points and manual routing out of scope, and why §5 uses a computed rail
+instead of an author-placed tail.
+
+**The visible `(A)` is deliberate.** It is the one thing this design adds to the
+prose a foreign reader sees. It is accepted because it is meaningful to a human —
+a callout letter, exactly as a technical manual prints one — rather than machine
+noise. A hidden carrier would have read more cleanly and would have failed the
+test above.
+
+**What honestly degrades.** Without `--theme-set`, a foreign Marp render shows no
+overlay. It also already shows no split layout at all, image overflowing the
+slide — that is true today, before callouts exist, and is worth recording in
+[`KNOWN_LIMITATIONS.md`](../KNOWN_LIMITATIONS.md) on its own account. The derived
+markup of §2.3 neither improves nor worsens that case; it pays off only in the
+`--theme-set` invocation, where it is verified to work.
