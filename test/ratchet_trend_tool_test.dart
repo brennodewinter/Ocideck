@@ -168,6 +168,8 @@ const int perFileFloorPercent = $bestandsvloer;
       int wezen = 0,
       // Idem voor de doorlaatratchet uit check_l10n_dutch_passthrough.dart.
       int doorlaat = 0,
+      // Idem voor de samenwerk-schuldlijst uit check_collab_field_parity.dart.
+      int onsync = 0,
     }) => {
       'tool/check_conventions.dart': conventies(
         katch: katch,
@@ -186,6 +188,10 @@ const int perFileFloorPercent = $bestandsvloer;
       'tool/check_l10n_orphans.dart': 'const int orphanBaseline = $wezen;',
       'tool/check_l10n_dutch_passthrough.dart':
           'const int passthroughBaseline = $doorlaat;',
+      'tool/check_collab_field_parity.dart':
+          'const Set<String> unsyncedBaseline = {'
+          '${List.generate(onsync, (i) => "'veld$i',").join()}'
+          '};',
       'Makefile': 'coverage_summary.dart --min=$vloer --require-instrumented',
     };
 
