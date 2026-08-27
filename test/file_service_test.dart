@@ -666,4 +666,74 @@ void main() {
     final saved = await service.saveDeck(deck, p.join(temp.path, 'deck.md'));
     expect(saved.themeProfile.logoPath, 'logos/client.png');
   });
+
+  // #1804: Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; de
+  // opslag schrijft een `.marprc.yml` die de gegenereerde thema-CSS via
+  // `themeSet` registreert, zodat `marp deck.md` de lay-out behoudt.
+  test('saveDeck writes .marprc.yml registering the generated theme', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_marprc_test_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final deck = Deck(
+      title: 'Marp config',
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Marp config')],
+    );
+
+    await service.saveDeck(deck, p.join(temp.path, 'deck.md'));
+
+    final cfg = File(p.join(temp.path, '.marprc.yml'));
+    expect(await cfg.exists(), true, reason: '.marprc.yml should be written');
+    final contents = await cfg.readAsString();
+    expect(contents, contains('themeSet:'));
+    // The default theme is `ocideck`; the CSS lands at themes/ocideck.css.
+    expect(contents, contains('- themes/ocideck.css'));
+    // Relative path only — moving the project folder must keep it working.
+    expect(contents, isNot(contains(temp.path)));
+    // The theme CSS the config points at must actually exist.
+    expect(
+      await File(p.join(temp.path, 'themes', 'ocideck.css')).exists(),
+      true,
+    );
+  });
+
+  test('export package includes .marprc.yml member', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_marprc_pkg_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final deck = Deck(
+      title: 'Pkg marprc',
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Pkg marprc')],
+    );
+
+    final bytes = await service.buildPackageBytes(deck);
+    final archive = ZipDecoder().decodeBytes(bytes);
+    ArchiveFile? find(String name) {
+      for (final f in archive.files) {
+        if (f.name == name) return f;
+      }
+      return null;
+    }
+
+    final cfg = find('.marprc.yml');
+    expect(cfg, isNotNull, reason: 'package must carry .marprc.yml');
+    final contents = utf8.decode(cfg!.content as List<int>);
+    expect(contents, contains('themeSet:'));
+    expect(contents, contains('- themes/ocideck.css'));
+    // The theme CSS member it references must be in the same package.
+    expect(find('themes/ocideck.css'), isNotNull);
+  });
 }

@@ -360,7 +360,10 @@ const Map<String, int> classSizeBaseline = {
   // `walkMarkdownFiles` in de part `file/file_service_scan.dart` — hij raakt
   // geen veld van deze klasse aan. Netto krimpt de klasse ondanks dat diezelfde
   // scan er de documentkant bij kreeg.
-  'lib/services/file_service.dart#FileService': 2730,
+  // +34 (#1804): `_writeMarpConfig` + `.marprc.yml`-lid in het pakket, zodat
+  // een gewone `marp deck.md` de gegenereerde thema-CSS laadt. Beide horen bij
+  // het opslaan/pakken en raken velden die al in deze klasse leven.
+  'lib/services/file_service.dart#FileService': 2764,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
