@@ -25,17 +25,22 @@ const _gebundeld = <String, ThemeProfile>{
   'Vigilis': ThemeProfile.vigilis,
 };
 
-/// Contrastbevindingen die bewust blijven staan, met de reden en het issue.
+/// Contrastbevindingen die bewust blijven staan, met de reden.
 ///
 /// Eén regel per geval, op `<profiel>/<veld>`. Deze lijst is met opzet
 /// pijnlijk expliciet: een uitzondering die je niet ziet, is een uitzondering
-/// die niemand meer weghaalt. Wordt #1819 opgelost, dan faalt de test op de
-/// *ongebruikte* uitzondering en moet hij hier weg — dat is de bedoeling.
+/// die niemand meer weghaalt. Wordt de kleur ooit aangepast, dan faalt de
+/// test op de *ongebruikte* uitzondering en moet hij hier weg — dat is de
+/// bedoeling.
 const _aanvaard = <String, String>{
   'Vigilis/accentColor':
-      'Het merkgeel #FFB800 haalt als linkkleur 1,7 op wit. Donkerder maken '
-      'verandert het zichtbare merk overal; dat is een merkbesluit, niet een '
-      'reparatie. Zie #1819.',
+      'Het merkgeel #FFB800 is de merkkleur van Vigilis. Als linkkleur op wit '
+      'haalt het 1,7 — onder elke drempel. Donkerder maken (naar ~#96690F, '
+      '4,86) lost het op maar verandert het zichtbare merk overal: '
+      'bulletmarkers, links, tabelkop, randen. Dat is een merkbesluit, geen '
+      'reparatie. De keuze is bewust om het accent te laten staan; de '
+      'sectiedia is wél gerepareerd in #1818 (wit op geel was onleesbaar '
+      'zonder merk-afweging).',
 };
 
 /// Een deck dat elk contrastpaar aanraakt dat de analyzer kent: de titeldia
