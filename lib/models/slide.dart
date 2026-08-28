@@ -8,6 +8,7 @@ import '../services/improvement/tree_spec.dart';
 import '../services/improvement/tree_slide.dart';
 import 'asset_overview_spec.dart';
 import 'checklist_spec.dart';
+import 'image_callout.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'discoveries_spec.dart';
@@ -655,6 +656,20 @@ class Slide {
   /// Round-trips as `<!-- ocideck_next: … -->`.
   final String nextAnchor;
 
+  /// Image callouts on this slide (IMAGE_CALLOUTS.md §3). Each entry links a
+  /// bullet (via its trailing `(A)` reference) to one or more targets in the
+  /// image. Stored deck-side in the `ocideck_callouts` front-matter block keyed
+  /// by [anchor] — the codec is the only code that knows that, so collaboration,
+  /// undo, reorder and delete all ride existing slide-level machinery.
+  final List<ImageCallout> callouts;
+
+  /// Slide-level presentation style for callouts (§3.1). Absent = [CalloutPresentation.pin].
+  final CalloutPresentation calloutPresentation;
+
+  /// When the bullet and its marks appear during a presentation (§7). Absent =
+  /// [BulletRevealMode.all].
+  final BulletRevealMode calloutReveal;
+
   const Slide({
     required this.id,
     required this.type,
@@ -732,6 +747,9 @@ class Slide {
     this.renderPage = 0,
     this.anchor = '',
     this.nextAnchor = '',
+    this.callouts = const [],
+    this.calloutPresentation = CalloutPresentation.pin,
+    this.calloutReveal = BulletRevealMode.all,
   });
 
   factory Slide.create(SlideType type) {
@@ -900,6 +918,9 @@ class Slide {
       checklistScope: src.checklistScope,
       improvementTemplateId: src.improvementTemplateId,
       improvementLayout: src.improvementLayout,
+      callouts: List<ImageCallout>.from(src.callouts),
+      calloutPresentation: src.calloutPresentation,
+      calloutReveal: src.calloutReveal,
     );
   }
 
@@ -984,6 +1005,9 @@ class Slide {
     int? renderPage,
     String? anchor,
     String? nextAnchor,
+    List<ImageCallout>? callouts,
+    CalloutPresentation? calloutPresentation,
+    BulletRevealMode? calloutReveal,
   }) => Slide(
     id: id,
     type: type ?? this.type,
@@ -1068,6 +1092,9 @@ class Slide {
     renderPage: renderPage ?? this.renderPage,
     anchor: anchor ?? this.anchor,
     nextAnchor: nextAnchor ?? this.nextAnchor,
+    callouts: callouts ?? this.callouts,
+    calloutPresentation: calloutPresentation ?? this.calloutPresentation,
+    calloutReveal: calloutReveal ?? this.calloutReveal,
   );
 
   /// Add or remove [field] from [aiAssistedFields] (AI_ASSIST §16.3 provenance):
