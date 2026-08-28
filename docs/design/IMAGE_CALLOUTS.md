@@ -432,18 +432,21 @@ Three findings came out of that run and all three are now contract:
   marker percentages resolve against the zoom box instead of the picture —
   measured as a **1184 px** error, with the picture itself in exactly the right
   place. Silent, and only visible in the zoom cases.
-- **The clamp belongs in the generator.** The file can carry any integer (parsing
-  does not bound it), so a surface that forwards `ocideck_image_zoom: 5000`
-  unclamped diverges from Flutter, which bounds it at paint time. Both clamp to
-  `0..400`, in the same place in the pipeline.
+- **Every surface clamps, and to the same bounds.** When this was measured,
+  `ocideck_image_zoom` was parsed by a bare `int.tryParse` and only the renderer
+  bounded it, so a generator that forwarded `5000` would have diverged from
+  Flutter. The repair of §4.3 closed that too: parsing now clamps to `0..400`,
+  the renderer still does, and a generated surface must do the same rather than
+  trusting the value it is handed.
 
-### 4.3 A prerequisite the measurement uncovered: zoom above 100% does nothing
+### 4.3 A defect the measurement uncovered, since repaired: zoom above 100% did nothing
 
-While specifying §4.1 the zoom branch was measured against the real widget tree
-(`flutter test`, the exact composition of `_zoomedImage` at slot 512×720):
+Specifying §4.1 meant measuring the zoom branch against the real widget tree
+(`flutter test`, the exact composition of `_zoomedImage` at slot 512×720), and the
+renderer did not do what §4.1 says:
 
-| `imageZoom` | box the code asks for | box Flutter actually lays out |
-| ----------- | --------------------- | ----------------------------- |
+| `imageZoom` | box the code asked for | box Flutter laid out |
+| ----------- | ---------------------- | -------------------- |
 | 50 | 256 × 360 | 256 × 360 |
 | 100 | 512 × 720 | 512 × 720 |
 | 140 | 716.8 × 1008 | **512 × 720** |
@@ -452,24 +455,32 @@ While specifying §4.1 the zoom branch was measured against the real widget tree
 
 `Align` lays its child out with `constraints.loosen()`, which keeps the slot as
 the maximum, and `SizedBox` enforces its size *within* the constraints it is
-given. The oversized box is silently clamped back to the slot, so **every zoom
-from 101 to 400 renders identically to 100** — the whole range the slider offers.
-The `ClipRect` around it exists to crop an overflow that never happens.
+given. The oversized box was silently clamped back to the slot, so **every zoom
+from 101 to 400 rendered identically to 100** — the whole range the slider offers.
+The `ClipRect` around it guarded an overflow that never happened.
 
-It has stayed invisible because the crop dialog's stage is built the same way
-(`Align` → `SizedBox` inside a `StackFit.expand` stack) and is clamped the same
-way, so the editor and the slide agree with each other while both disagree with
-the slider. Nothing in the test suite renders a zoomed panel.
+It stayed invisible because the crop dialog's stage was built the same way
+(`Align` → `SizedBox` inside a `StackFit.expand` stack) and clamped the same way,
+so the editor and the slide agreed with each other while both disagreed with the
+slider. Nothing in the suite rendered a zoomed panel.
 
-**This is a pre-existing defect, not part of this feature, and it has its own
-issue (#1813)** — the same treatment §9's first slice got. It is a prerequisite here for
-one reason: §4.1's zoom branch describes what the file *means*, and the first
-surface to implement it faithfully would place callouts somewhere Flutter does
-not. Either every surface reproduces today's clamp, or the renderer is repaired
-first. It should be repaired first; `OverflowBox` is the tool the composition is
-missing, and the comment in `_zoomedImage` explains why a `Transform.scale` is
-not (a transform layer captures unreliably in `RepaintBoundary.toImage`, which is
-how every raster export is made).
+**Repaired in #1813** (`14db05fdf`), before any callout work started: both
+compositions now use `OverflowBox`, which lets a child exceed the parent's
+constraints and — being a `RenderAligningShiftedBox` — positions it by exactly
+the `(sw − bw)·fx` rule §4.1 states, so zoom below 100 keeps working unchanged.
+Re-measured against the repaired composition rather than taken on trust: zoom
+50, 100, 140 and 400 against focal 0, ½ and 1 on both axes, **0.0 px** deviation
+from §4.1 in all twelve.
+A `Transform.scale` was rejected for the reason `_zoomedImage` already recorded:
+a transform layer captures unreliably in `RepaintBoundary.toImage`, which is how
+every raster export is made. The regression test measures the laid-out size at
+zoom 100 against 300 — the only kind of assertion that could have caught this,
+since every test that merely checks `imageZoom` carries the right *value* stayed
+green throughout.
+
+**Why this section stays.** §4.1's zoom branch is only trustworthy because the
+renderer was made to match it. Without this record the next reader cannot tell
+whether the formula describes the code or merely hopes to.
 
 Placement is allowed only on the currently visible crop. If a later recrop, zoom
 or width change would strand a target, saving stops with a recovery choice:
@@ -599,8 +610,8 @@ reported, not blocked.
    **(a)** collaboration parity — the missing `imageZoom` in `SlideField` and the
    diff, plus a registry parity gate (#1803);
    **(b)** zoom above 100% actually zooming (§4.3, #1813) — needed before any
-   surface implements the zoom branch of §4.1, or that surface will place
-   callouts where Flutter does not.
+   surface implements the zoom branch of §4.1, or that surface would place
+   callouts where Flutter does not. **Both have landed.**
 2. Format v2: the grammar of §2, the nested merge of §2.5, codec, checker rules,
    version bump, docs.
 3. The typed model of §3 and the full collaboration chain.
@@ -829,4 +840,4 @@ has no such slot, and that is a limitation to state rather than to paper over.
 | 1 | First proposal: comment directive in the slide block, pins inherit the crop, `〔A〕` reference. |
 | 2 | Measured against a real reader and a real Marp CLI: the comment directive is destroyed in every position, the crop is *not* inherited, TikZ is already present, three decimals keep the privacy scanner quiet. Carrier split into visible reference + front-matter block. |
 | 3 | Frozen: grammar, model, geometry contract, renderer table, reveal plan, limits, order of work, and §11's values trade-off. Derived overlay persisted alongside the canonical data. |
-| 4 | This revision, after review: released reader corrected to `v0.4.10` and the gate made executable (§9, §10); persisted derived overlay dropped, with the guardian reasoning (§2.3); one preservation rule instead of two contradictory ones (§2.4); the nested merge contract that owning the key makes necessary (§2.5); when `(A)` is a callout and when it is prose (§2.6); mode-against-target matrix (§3.1); the complete transform, browser-measured (§4.1, §4.2); zoom above 100% found inert and made a prerequisite (§4.3); rich text ruled a boundary (§6); accessibility contract (§12). |
+| 4 | This revision, after review: released reader corrected to `v0.4.10` and the gate made executable (§9, §10); persisted derived overlay dropped, with the guardian reasoning (§2.3); one preservation rule instead of two contradictory ones (§2.4); the nested merge contract that owning the key makes necessary (§2.5); when `(A)` is a callout and when it is prose (§2.6); mode-against-target matrix (§3.1); the complete transform, browser-measured (§4.1, §4.2); zoom above 100% found inert, made a prerequisite and since repaired (§4.3); rich text ruled a boundary (§6); accessibility contract (§12). |
