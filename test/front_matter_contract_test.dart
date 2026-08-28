@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
@@ -316,7 +317,19 @@ style: |
         final deck = Deck(
           title: 'Titel',
           theme: 'ocideck',
-          slides: [Slide.create(SlideType.title)],
+          slides: [
+            Slide.create(SlideType.title),
+            Slide.create(SlideType.bullets).copyWith(
+              anchor: 'callout-slide',
+              callouts: const [
+                ImageCallout(
+                  reference: 'A',
+                  targets: [CalloutPoint(0.4, 0.2)],
+                  description: 'test callout',
+                ),
+              ],
+            ),
+          ],
           author: 'A. Auteur',
           organization: 'LibreKAT',
           version: '1.0',

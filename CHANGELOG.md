@@ -1987,6 +1987,25 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: datamodel, formaat en verliesvrije samenwerking (#1824).**
+  De eerste stap van het ontwerp in `docs/design/IMAGE_CALLOUTS.md` (rev 4):
+  een getypt slidemodel (`CalloutTarget` als punt of rechthoek, `ImageCallout`,
+  `CalloutPresentation`, `BulletRevealMode`), een parser en lossless writer
+  voor het `ocideck_callouts:`-blok in de front matter, en de integratie met
+  de samenwerkingslaag (`SlideField.callouts`, diff, apply, codec).
+
+  Het formaat krijgt versie 2 zodra een deck voor het eerst callouts opslaat
+  — een versie-1 bestand zonder callouts blijft versie 1. De codec bezit het
+  blok en herschrijft het met de nested merge uit §2.5: alleen bewerkte
+  entries gaan door de canonieke vorm, comments, malformed entries en
+  onbekende tokens blijven byte-voor-byte staan. Een oudere build die het
+  blok niet kent laat het met rust (regel 1 van het formaatcontract) en
+  schrijft versie 2 terug (regel 3).
+
+  De checker meldt ongeldige geometrie (§8), ontbrekende ankers, weesmarkeringen
+  en duplicaten volgens de binding-tabel uit §2.6. Het formatadocument
+  (FILE_FORMAT.md) en de source map zijn bijgewerkt.
+
 - **De gebundelde stijlprofielen halen hun eigen contrastondergrens weer
   (#1818).** Het standaardprofiel droeg `checklistUncheckedColor: '#CBD5E1'` op
   een witte dia: verhouding 1,48, tegen de 3,0 die `SlideQualityAnalyzer` zelf

@@ -4653,4 +4653,14 @@ const _dutchSourceAddIt = {
       'I campi del documento (intestazione e piè di pagina) non vengono mantenuti.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'ha una geometria non valida e non viene disegnato — correggi le coordinate nel front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'fa riferimento a un segno (A) che non è nel testo, o viceversa — collega il segno e la voce tra loro.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'compare due volte in questa diapositiva — ogni segno (A), (B) … può avere una sola voce.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Questa diapositiva ha callout ma nessun ancora — il front matter non può collegarli alla diapositiva. Dai un\'ancora alla diapositiva nell\'editor.',
 };

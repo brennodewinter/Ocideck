@@ -4608,4 +4608,14 @@ const _dutchSourceAddPl = <String, String>{
       'Pola dokumentu (nagłówek i stopka) nie są zachowane.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'ma nieprawidłową geometrię i nie jest rysowany — popraw współrzędne w front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'odnosi się do znacznika (A), którego nie ma w tekście, lub odwrotnie — połącz znacznik i wpis ze sobą.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'występuje dwa razy na tym slajdzie — każdy znacznik (A), (B) … może mieć tylko jeden wpis.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Ten slajd ma callouty, ale nie ma kotwicy — front matter nie może połączyć ich ze slajdem. Nadaj slajdowi kotwicę w edytorze.',
 };

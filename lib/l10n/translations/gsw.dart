@@ -4589,4 +4589,14 @@ const _dutchSourceAddGsw = <String, String>{
       'Dokumäntfälder (Chopf- und Fuesszyyle) wärded nöd übernoh.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'het en ungültigi Geometri und wird nöd zzeichnet — korrigier d Koordinate im Front Matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'verwiist uf e (A)-Markierig, wo nöd im Text steit, oder umgekehrt — verchnüpfi d Markierig und de Itrag mitenand.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'chunnt zweimal uf dere Folie vor — jedi Markierig (A), (B) … dörf nur ei Itrag ha.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Die Folie het Callouts, aber kei Anker — s Front Matter chann si nöd mit de Folie verchnüpfe. Gib de Folie en Anker im Editor.',
 };

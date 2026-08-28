@@ -10,6 +10,7 @@ enum SlideQualityCategory {
   content,
   privacy,
   improvement,
+  callout,
 }
 
 enum SlideQualityIssueKind {
@@ -74,6 +75,17 @@ enum SlideQualityIssueKind {
   // ── Procesverbetering golden thread ───────────────────────────────────
   improvementOrphanId,
   improvementUnusedId,
+
+  // ── Image callouts (#1824, IMAGE_CALLOUTS.md §2.6) ───────────────────
+  // De callout-checker rapporteert vier soorten problemen: ongeldige
+  // geometrie (buiten [0,1] of verkeerd aantal componenten), wees-referenties
+  // (een (A) in de tekst zonder entry, of een entry zonder (A) in de tekst),
+  // dubbele referenties (dezelfde letter twee keer op één dia), en een
+  // ontbrekend anker op een dia die callouts draagt (§2.6 binding).
+  calloutInvalidGeometry,
+  calloutOrphanReference,
+  calloutDuplicateReference,
+  calloutMissingAnchor,
 }
 
 /// Waar binnen een veld een melding precies zit.

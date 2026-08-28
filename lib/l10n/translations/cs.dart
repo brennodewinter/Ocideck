@@ -4572,4 +4572,14 @@ const _dutchSourceAddCs = <String, String>{
       'Pole dokumentu (hlavička a patička) nejsou zachována.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čarou se stanou prostým textem; prezentace nemá poznámky.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'má neplatnou geometrii a není vykreslen — opravte souřadnice v front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'odkazuje na značku (A), která v textu není, nebo naopak — propojte značku a záznam navzájem.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'se vyskytuje dvakrát na tomto snímku — každá značka (A), (B) … může mít pouze jeden záznam.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Tento snímek má callouts, ale nemá kotvu — front matter je nemůže propojit se snímkem. Dejte snímku kotvu v editoru.',
 };

@@ -22,6 +22,7 @@ import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
 import 'front_matter_merge.dart';
+import 'callout_codec.dart';
 import 'markdown_front_matter_codec.dart';
 import 'markdown_table_codec.dart';
 import 'marp_source_preservation.dart';

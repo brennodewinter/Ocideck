@@ -4571,4 +4571,14 @@ const _dutchSourceAddTr = <String, String>{
       'Belge alanları (üstbilgi ve altbilgi) taşınmaz.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'geçersiz geometriye sahip ve çizilmiyor — front matter içindeki koordinatları düzeltin.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'metinde olmayan bir (A) işaretine atıfta bulunuyor, ya da tersi — işareti ve girdiyi birbirine bağlayın.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'bu slaytta iki kez görünüyor — her işaret (A), (B) … yalnızca bir girdiye sahip olabilir.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Bu slayt callout\'lara sahip ama çapası yok — front matter onları slayta bağlayamaz. Slayta düzenleyicide bir çapa verin.',
 };

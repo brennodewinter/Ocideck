@@ -4581,4 +4581,14 @@ const _dutchSourceAddLv = <String, String>{
       'Dokumenta lauki (galvene un kājene) netiek pārņemti.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'ir nederīga ģeometrija un to nezīmē — izlabojiet koordinātes front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'atsaucas uz (A) atzīmi, kas nav tekstā, vai otrādi — savienojiet atzīmi un ierakstu savā starpā.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'parādās divreiz šajā slaidā — katram atzīmēm (A), (B) … drīkst būt tikai viens ieraksts.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Šim slaidam ir callout, bet nav enkura — front matter nevar tos sasaistīt ar slaidu. Piešķiriet slaidam enkuru redaktorā.',
 };

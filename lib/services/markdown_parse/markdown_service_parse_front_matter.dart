@@ -56,6 +56,11 @@ class _FrontMatter {
   /// het de oudste versie. Zie [Deck.formatVersion].
   int formatVersion = kOldestFormatVersion;
 
+  /// Het geparste `ocideck_callouts`-blok (IMAGE_CALLOUTS.md §2), of null als
+  /// het blok afwezig is. De raw lines leven in [sourceLines] en worden door de
+  /// callout-codec gebruikt voor de lossless nested merge (§2.5).
+  CalloutBlockParseResult? calloutBlock;
+
   /// The markdown body with the front-matter block stripped off.
   String body = '';
 }
@@ -201,6 +206,12 @@ extension _MarkdownParseFrontMatter on MarkdownService {
         content = content.substring(end + 5).trim();
       }
     }
+
+    // Het `ocideck_callouts`-blok is een geneste front-matter-sleutel die de
+    // reguliere loop niet vangt (de vervolgregels zijn ingesprongen en hebben
+    // geen key op kolom 0). Parse het apart uit de bronregels — de codec houdt
+    // de raw lines bij voor de lossless nested merge (§2.5).
+    fm.calloutBlock = parseCalloutBlock(fm.sourceLines);
 
     fm.body = content;
     return fm;

@@ -307,6 +307,7 @@ String slideQualityCategoryLabel(
     SlideQualityCategory.content => l10n.d('Inhoud'),
     SlideQualityCategory.privacy => l10n.d('Privacy'),
     SlideQualityCategory.improvement => l10n.d('Procesverbetering'),
+    SlideQualityCategory.callout => l10n.d('Callouts'),
   };
 }
 
@@ -469,6 +470,18 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.improvementUnusedId =>
       '${l10n.d('Golden-thread-id')} ${issue.args['id'] ?? ''} '
           '${l10n.d('staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.')}',
+    SlideQualityIssueKind.calloutInvalidGeometry =>
+      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.')}',
+    SlideQualityIssueKind.calloutOrphanReference =>
+      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.')}',
+    SlideQualityIssueKind.calloutDuplicateReference =>
+      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.')}',
+    SlideQualityIssueKind.calloutMissingAnchor => l10n.d(
+      'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.',
+    ),
   };
 
   // Een over meerdere split-pagina's samengevatte dichtheidsmelding (#1289):

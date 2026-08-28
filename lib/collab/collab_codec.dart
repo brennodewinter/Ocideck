@@ -28,6 +28,7 @@ import 'dart:convert';
 
 import '../models/deck.dart';
 import '../models/display_window_spec.dart';
+import '../models/image_callout.dart';
 import '../models/marp_style.dart';
 import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
@@ -237,6 +238,9 @@ Map<String, Object?> slideToJson(Slide s) => {
   'tableColumnAlignments': s.tableColumnAlignments.map((e) => e.name).toList(),
   'tableNumberColumns': s.tableNumberColumns,
   'renderPage': s.renderPage,
+  'callouts': s.callouts.map((c) => c.toJson()).toList(),
+  'calloutPresentation': s.calloutPresentation.name,
+  'calloutReveal': s.calloutReveal.name,
 };
 
 /// Rebuild a [Slide] from a map produced by [slideToJson]. Fail-closed.
@@ -359,6 +363,26 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
       ? const []
       : _boolList(j, 'tableNumberColumns'),
   renderPage: _int(j, 'renderPage'),
+  callouts: j['callouts'] == null
+      ? const []
+      : _asList(
+          j['callouts'],
+          'callouts',
+        ).map((e) => ImageCallout.fromJson(_asMap(e, 'callouts'))).toList(),
+  calloutPresentation: j['calloutPresentation'] == null
+      ? CalloutPresentation.pin
+      : _enumByName(
+          CalloutPresentation.values,
+          _str(j, 'calloutPresentation'),
+          'calloutPresentation',
+        ),
+  calloutReveal: j['calloutReveal'] == null
+      ? BulletRevealMode.all
+      : _enumByName(
+          BulletRevealMode.values,
+          _str(j, 'calloutReveal'),
+          'calloutReveal',
+        ),
 );
 
 Map<String, Object?> _viewLimitToJson(DisplayWindowSpec v) => {
@@ -408,6 +432,9 @@ enum _ValueKind {
   quality,
   findingRole,
   viewLimit,
+  calloutList,
+  calloutPresentation,
+  calloutReveal,
 }
 
 _ValueKind _slideFieldKind(SlideField f) {
@@ -499,6 +526,9 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.findingRole: _ValueKind.findingRole,
   SlideField.aiAssistedFields: _ValueKind.stringList,
   SlideField.viewLimit: _ValueKind.viewLimit,
+  SlideField.callouts: _ValueKind.calloutList,
+  SlideField.calloutPresentation: _ValueKind.calloutPresentation,
+  SlideField.calloutReveal: _ValueKind.calloutReveal,
 };
 
 /// Mirrors the value types `applyOp` casts each [DeckMetaField] to. A test
@@ -559,6 +589,11 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.quality => _need<QualityDisposition>(value).name,
     _ValueKind.findingRole => _need<FindingRole>(value).name,
     _ValueKind.viewLimit => _viewLimitToJson(_need<DisplayWindowSpec>(value)),
+    _ValueKind.calloutList => _needList<ImageCallout>(
+      value,
+    ).map((c) => c.toJson()).toList(),
+    _ValueKind.calloutPresentation => _need<CalloutPresentation>(value).name,
+    _ValueKind.calloutReveal => _need<BulletRevealMode>(value).name,
   };
 }
 
@@ -631,6 +666,20 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       where,
     ),
     _ValueKind.viewLimit => _viewLimitFromJson(_asMap(json, where)),
+    _ValueKind.calloutList => _asList(
+      json,
+      where,
+    ).map((e) => ImageCallout.fromJson(_asMap(e, where))).toList(),
+    _ValueKind.calloutPresentation => _enumByName(
+      CalloutPresentation.values,
+      _asString(json, where),
+      where,
+    ),
+    _ValueKind.calloutReveal => _enumByName(
+      BulletRevealMode.values,
+      _asString(json, where),
+      where,
+    ),
   };
 }
 
@@ -773,6 +822,18 @@ List<bool> _needBoolList(Object? value) {
   throw FormatException(
     'op value expected a List<bool>, got ${value.runtimeType}',
   );
+}
+
+List<T> _needList<T>(Object? value) {
+  if (value is List) return value.map((e) => _need<T>(e)).toList();
+  throw FormatException(
+    'op value expected a List<$T>, got ${value.runtimeType}',
+  );
+}
+
+List<dynamic> _asList(Object? json, String where) {
+  if (json is List) return json;
+  throw FormatException('field "$where" is not a list (${json.runtimeType})');
 }
 
 E _enumByName<E extends Enum>(List<E> values, String name, String where) {

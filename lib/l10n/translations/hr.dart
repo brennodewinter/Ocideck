@@ -4585,4 +4585,14 @@ const _dutchSourceAddHr = <String, String>{
       'Polja dokumenta (zaglavlje i podnožje) ne prate se.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'ima nevažeću geometriju i ne crta se — ispravite koordinate u front matter-u.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'upućuje na oznaku (A) koja nije u tekstu, ili obrnuto — povežite oznaku i unos međusobno.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'pojavljuje se dvaput na ovom slajdu — svaka oznaka (A), (B) … može imati samo jedan unos.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Ovaj slajd ima callouts ali nema sidro — front matter ih ne može povezati sa slajdom. Zadajte sidro slajdu u uređivaču.',
 };

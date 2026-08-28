@@ -30,6 +30,7 @@
 
 import '../models/deck.dart';
 import '../models/display_window_spec.dart';
+import '../models/image_callout.dart';
 import '../models/marp_style.dart';
 import '../models/menu.dart';
 import '../models/privacy_disposition.dart';
@@ -252,6 +253,10 @@ enum SlideField {
   findingRole, // FindingRole
   aiAssistedFields, // List<String>
   viewLimit, // DisplayWindowSpec? (v1: set but not clear-to-null)
+  // — image callouts (#1824, IMAGE_CALLOUTS.md §3) —
+  callouts, // List<ImageCallout>
+  calloutPresentation, // CalloutPresentation
+  calloutReveal, // BulletRevealMode
 }
 
 /// The deck-level metadata fields a [SetDeckMeta] op can carry.
@@ -542,6 +547,15 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.viewLimit => slide.copyWith(
       viewLimit: _cast<DisplayWindowSpec>(value, field),
+    ),
+    SlideField.callouts => slide.copyWith(
+      callouts: _castList<ImageCallout>(value, field),
+    ),
+    SlideField.calloutPresentation => slide.copyWith(
+      calloutPresentation: _cast<CalloutPresentation>(value, field),
+    ),
+    SlideField.calloutReveal => slide.copyWith(
+      calloutReveal: _cast<BulletRevealMode>(value, field),
     ),
   };
 }

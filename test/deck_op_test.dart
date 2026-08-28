@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/display_window_spec.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/quality_disposition.dart';
@@ -149,6 +150,24 @@ _slideCases = {
       showCount: false,
     ),
     read: (s) => s.viewLimit,
+  ),
+  SlideField.callouts: (
+    value: [
+      const ImageCallout(
+        reference: 'A',
+        targets: [CalloutPoint(0.4, 0.25)],
+        description: 'the controller board',
+      ),
+    ],
+    read: (s) => s.callouts,
+  ),
+  SlideField.calloutPresentation: (
+    value: CalloutPresentation.region,
+    read: (s) => s.calloutPresentation,
+  ),
+  SlideField.calloutReveal: (
+    value: BulletRevealMode.steps,
+    read: (s) => s.calloutReveal,
   ),
 };
 

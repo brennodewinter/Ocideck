@@ -51,6 +51,131 @@ void _checkEmptySlide(Slide slide, int index, List<SlideQualityIssue> issues) {
   );
 }
 
+/// De callout-checker (IMAGE_CALLOUTS.md §2.6). Vier regels, alle per-slide:
+///
+/// 1. **Invalid geometry** — een target met coördinaten buiten [0,1] of een
+///    verkeerd aantal componenten. De codec weigert het te tekenen; de checker
+///    meldt het zodat de auteur weet waarom de pijl ontbreekt.
+/// 2. **Orphan reference** — een callout-entry in de front matter zonder
+///    bijbehorende `(A)`-markering in de tekst, of omgekeerd.
+/// 3. **Duplicate reference** — dezelfde letter twee keer op één dia.
+/// 4. **Missing anchor** — de dia heeft callouts maar geen anker, dus de front
+///    matter kan ze niet aan de dia koppelen.
+///
+/// De checker rapporteert alleen — hij clamp niet, verwijdert niet, en herschikt
+/// niet. De codec behoudt alles byte-voor-byte (§2.5).
+void _checkCallouts(Slide slide, int index, List<SlideQualityIssue> issues) {
+  if (slide.callouts.isEmpty) return;
+
+  // §2.6 binding regel 4: een dia met callouts moet een anker hebben.
+  if (slide.anchor.isEmpty) {
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.calloutMissingAnchor,
+        category: SlideQualityCategory.callout,
+        severity: MarkdownValidationSeverity.error,
+      ),
+    );
+  }
+
+  // Verzamel alle (A)-markeringen in de tekst van deze dia, met telling: een
+  // letter die twee keer voorkomt (geplakte bullet) is een duplicate finding
+  // (§2.6), geen geldige referentie.
+  final textRefCount = <String, int>{};
+  for (final bullet in [...slide.bullets, ...slide.bullets2]) {
+    for (final m in _reCalloutReference.allMatches(bullet)) {
+      final ref = m.group(1)!;
+      textRefCount[ref] = (textRefCount[ref] ?? 0) + 1;
+    }
+  }
+  final textRefs = textRefCount.keys.toSet();
+
+  // §2.6: twee of meer bullets eindigen op (X) → duplicate finding.
+  for (final entry in textRefCount.entries) {
+    if (entry.value > 1) {
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: index,
+          kind: SlideQualityIssueKind.calloutDuplicateReference,
+          category: SlideQualityCategory.callout,
+          severity: MarkdownValidationSeverity.error,
+          args: {'ref': '(${entry.key})'},
+        ),
+      );
+    }
+  }
+
+  // Track welke refs we al gezien hebben voor duplicate detection.
+  final seen = <String>{};
+  for (final callout in slide.callouts) {
+    final ref = callout.reference;
+
+    // Duplicate: dezelfde letter twee keer.
+    if (!seen.add(ref)) {
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: index,
+          kind: SlideQualityIssueKind.calloutDuplicateReference,
+          category: SlideQualityCategory.callout,
+          severity: MarkdownValidationSeverity.error,
+          args: {'ref': '($ref)'},
+        ),
+      );
+    }
+
+    // Invalid geometry: een target buiten [0,1] of met verkeerde componenten.
+    for (final target in callout.targets) {
+      if (!target.isValid) {
+        issues.add(
+          SlideQualityIssue(
+            slideIndex: index,
+            kind: SlideQualityIssueKind.calloutInvalidGeometry,
+            category: SlideQualityCategory.callout,
+            severity: MarkdownValidationSeverity.error,
+            args: {'ref': '($ref)'},
+          ),
+        );
+        break;
+      }
+    }
+
+    // Orphan: entry in front matter zonder (A) in de tekst.
+    if (!textRefs.contains(ref)) {
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: index,
+          kind: SlideQualityIssueKind.calloutOrphanReference,
+          category: SlideQualityCategory.callout,
+          severity: MarkdownValidationSeverity.warning,
+          args: {'ref': '($ref)'},
+        ),
+      );
+    }
+  }
+
+  // Orphan: (A) in de tekst zonder entry in de front matter.
+  final entryRefs = slide.callouts.map((c) => c.reference).toSet();
+  for (final ref in textRefs) {
+    if (!entryRefs.contains(ref)) {
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: index,
+          kind: SlideQualityIssueKind.calloutOrphanReference,
+          category: SlideQualityCategory.callout,
+          severity: MarkdownValidationSeverity.warning,
+          args: {'ref': '($ref)'},
+        ),
+      );
+    }
+  }
+}
+
+/// Herkent een `(A)`-calloutmarkering in slidetekst. Eén hoofdletter tussen
+/// haakjes, optioneel gevolgd door een puntkomma of spatie — niet `(AB)` of
+/// `(a)`, en niet een haakje dat toevallig in een afkorting staat.
+final _reCalloutReference = RegExp(r'\(([A-Z])\)(?:[;,\s]|$)');
+
 /// Draagt [slide] iets dat de kijker te zien krijgt?
 ///
 /// Alleen wat de auteur zelf invulde telt. Vaste kopregels die de app zelf
@@ -245,6 +370,7 @@ class SlideQualityAnalyzer {
     _checkQuestionAnswerable(slide, index, issues);
     _checkFindingSections(slide, index, issues);
     _checkEmptySlide(slide, index, issues);
+    _checkCallouts(slide, index, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
       font: font,

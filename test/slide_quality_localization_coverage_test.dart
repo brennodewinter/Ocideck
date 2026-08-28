@@ -237,6 +237,10 @@ void main() {
       },
       SlideQualityIssueKind.improvementOrphanId: {'id': 'X-01'},
       SlideQualityIssueKind.improvementUnusedId: {'id': 'Y-01'},
+      SlideQualityIssueKind.calloutInvalidGeometry: {'ref': '(A)'},
+      SlideQualityIssueKind.calloutOrphanReference: {'ref': '(A)'},
+      SlideQualityIssueKind.calloutDuplicateReference: {'ref': '(A)'},
+      SlideQualityIssueKind.calloutMissingAnchor: {},
     };
 
     test('produces a non-empty message for each kind in both languages', () {

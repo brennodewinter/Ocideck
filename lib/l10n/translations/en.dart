@@ -2259,6 +2259,16 @@ const _dutchSourceAddEn = {
       'is referenced somewhere but is not on a tree slide — define it on a CTQ or Ishikawa tree.',
   'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
       'is on a tree slide but not used elsewhere — link it to a matrix, flow or other slide.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'has invalid geometry and is not drawn — correct the coordinates in the front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'refers to an (A) mark that is not in the text, or vice versa — link the mark and the entry to each other.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one entry.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'This slide has callouts but no anchor — the front matter cannot link them to the slide. Give the slide an anchor in the editor.',
   'Nieuw verbeteringsproject': 'New improvement project',
   'Kader': 'Framework',
   'Primaire Y-metriek (Y-01)': 'Primary Y metric (Y-01)',

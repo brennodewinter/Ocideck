@@ -4582,4 +4582,14 @@ const _dutchSourceAddDa = <String, String>{
       'Dokumentfelter (sidehoved og sidefod) følger ikke med.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'har ugyldig geometri og tegnes ikke — ret koordinaterne i front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'henviser til en (A)-markering, der ikke står i teksten, eller omvendt — kobl markeringen og posten sammen.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'forekommer to gange på dette dias — hver markering (A), (B) … må kun have én post.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Dette dias har callouts, men ikke et anker — front matter kan ikke koble dem til diaset. Giv diaset et anker i editoren.',
 };

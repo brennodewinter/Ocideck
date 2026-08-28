@@ -4652,4 +4652,14 @@ const _dutchSourceAddGa = <String, String>{
       'Ní thagann réimsí an doiciméid (ceanntásc agus buntásc) leis.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'tá céimseata neamhbhailí aige agus ní tharraingítear é — ceartaigh na comhordanáidí sa front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'tagraíonn sé do mharc (A) atá le fáil sa téacs, nó a mhalairt — nasc an marc agus an iontráil le chéile.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'tagann sé suas faoi dhó ar an sleamhnán seo — ní ceadaithe ach iontráil amháin do gach marc (A), (B) …',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Tá callouts ar an sleamhnán seo ach níl aon ancaire aige — ní féidir leis an front matter iad a nascadh leis an sleamhnán. Tabhair ancaire don sleamhnán san eagarthóir.',
 };

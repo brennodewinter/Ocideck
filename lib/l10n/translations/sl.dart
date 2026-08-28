@@ -4585,4 +4585,14 @@ const _dutchSourceAddSl = <String, String>{
       'Polja dokumenta (glava in noga) se ne prenašajo.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'ima neveljavno geometrijo in se ne nariše — popravite koordinate v front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'se sklicuje na oznako (A), ki ni v besedilu, ali obratno — povežite oznako in vnos med seboj.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'se pojavi dvakrat na tem diapozitivu — vsaka oznaka (A), (B) … sme imeti samo en vnos.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Ta diapozitiv ima calloute, vendar nima sidra — front matter jih ne more povezati z diapozitivom. Dajte diapozitivu sidro v urejevalniku.',
 };

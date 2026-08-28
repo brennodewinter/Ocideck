@@ -4605,4 +4605,14 @@ const _dutchSourceAddUk = <String, String>{
       'Поля документа (верхній і нижній колонтитули) не переносяться.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Виноски стають звичайним текстом; презентація не має виносок.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'має недійсну геометрію і не малюється — виправте координати у front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'посилається на позначку (A), якої немає в тексті, або навпаки — з\'єднайте позначку та запис між собою.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'зустрічається двічі на цьому слайді — кожна позначка (A), (B) … може мати лише один запис.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Цей слайд має callouts, але не має якоря — front matter не може пов\'язати їх зі слайдом. Дайте слайду якір у редакторі.',
 };

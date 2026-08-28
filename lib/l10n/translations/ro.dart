@@ -4628,4 +4628,14 @@ const _dutchSourceAddRo = <String, String>{
       'Câmpurile documentului (antet și subsol) nu sunt păstrate.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notele de subsol devin text simplu; o prezentare nu are note.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'are o geometrie nevalidă și nu este desenat — corectează coordonatele în front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'face trimitere la o marcă (A) care nu este în text, sau invers — leagă marca și intrarea una de cealaltă.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'apare de două ori pe acest slide — fiecare marcă (A), (B) … poate avea o singură intrare.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Acest slide are callout-uri, dar nu are o ancoră — front matter nu le poate lega de slide. Dați slide-ului o ancoră în editor.',
 };
