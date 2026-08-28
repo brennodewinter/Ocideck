@@ -4612,6 +4612,8 @@ const _dutchSourceAddPl = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Usuń cel',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Dodaj cel',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
   'Beschrijving (voor schermlezer)': 'Opis (dla czytnika ekranu)',

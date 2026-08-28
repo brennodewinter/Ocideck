@@ -4585,6 +4585,8 @@ const _dutchSourceAddLv = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Noņemt mērķi',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Pievienot mērķi',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
   'Beschrijving (voor schermlezer)': 'Apraksts (ekrāna lasītājam)',

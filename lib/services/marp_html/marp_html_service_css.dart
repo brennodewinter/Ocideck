@@ -143,6 +143,25 @@ html,body{margin:0;padding:0}
   z-index:3;pointer-events:none}
 .ocideck-callout-desc{position:absolute;width:1px;height:1px;padding:0;
   margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Region presentation (§3.1): a region target is an outlined rectangle with
+   outside dimming. The box-shadow spreads 100vmax of semi-transparent black
+   outward from each region; the imgslot clips it (overflow:hidden), so the
+   shadow becomes the "dim everything outside the region" veil with one
+   property per region. ponytail: overlapping regions dim each other's
+   interior, because a sibling's shadow paints over a transparent box — the
+   upgrade path is a single clip-path veil that excludes every region at once. */
+.ocideck-region{position:absolute;
+  border:2px solid var(--ocideck-accent,#003399);
+  box-shadow:0 0 0 100vmax rgba(0,0,0,.4);
+  z-index:2;pointer-events:none}
+.ocideck-region-num{position:absolute;top:0;left:0;
+  transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;
+  width:1.5em;height:1.5em;
+  border-radius:50%;font-size:14px;font-weight:700;line-height:1;
+  color:#fff;background:var(--ocideck-accent,#003399);
+  border:2px solid #fff;
+  box-shadow:0 0 0 2px var(--ocideck-accent,#003399),0 1px 4px rgba(0,0,0,.5)}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de

@@ -4604,6 +4604,8 @@ const _dutchSourceAddLa = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Destinatio removere',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Destinatio addere',
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',

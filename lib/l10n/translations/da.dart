@@ -4586,6 +4586,8 @@ const _dutchSourceAddDa = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Fjern mål',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Tilføj mål',
   'bv. "de controller board met display"':
       'f.eks. "controller board med display"',

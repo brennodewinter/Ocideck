@@ -4609,6 +4609,8 @@ const _dutchSourceAddUk = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Видалити ціль',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Додати ціль',
   'bv. "de controller board met display"':
       'напр. "плата контролера з дисплеєм"',

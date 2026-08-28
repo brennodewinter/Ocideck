@@ -194,6 +194,56 @@ void main() {
         isEmpty,
       );
     });
+
+    test('region smaller than 0.02 on either axis → invalid geometry', () {
+      final deck = Deck(
+        title: 'test',
+        slides: [
+          calloutSlide(
+            anchor: 's1',
+            bullets: ['text (A)'],
+            callouts: const [
+              ImageCallout(
+                reference: 'A',
+                targets: [CalloutRegion(0.5, 0.5, 0.01, 0.3)],
+              ),
+            ],
+          ),
+        ],
+      );
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.where(
+          (i) => i.kind == SlideQualityIssueKind.calloutInvalidGeometry,
+        ),
+        isNotEmpty,
+      );
+    });
+
+    test('region at minimum size 0.02 → no invalid finding', () {
+      final deck = Deck(
+        title: 'test',
+        slides: [
+          calloutSlide(
+            anchor: 's1',
+            bullets: ['text (A)'],
+            callouts: const [
+              ImageCallout(
+                reference: 'A',
+                targets: [CalloutRegion(0.5, 0.5, 0.02, 0.02)],
+              ),
+            ],
+          ),
+        ],
+      );
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.where(
+          (i) => i.kind == SlideQualityIssueKind.calloutInvalidGeometry,
+        ),
+        isEmpty,
+      );
+    });
   });
 
   group('callout checker — missing anchor', () {

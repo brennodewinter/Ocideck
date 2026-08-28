@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/widgets/editors/callout_editor.dart';
@@ -134,5 +135,77 @@ void main() {
     await tester.tap(find.text('Sluiten'));
     await tester.pumpAndSettle();
     expect(find.text('Afbeeldingsverwijzingen'), findsNothing);
+  });
+
+  testWidgets('presentation mode toggle exists (Pins / Gebieden)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Pins'), findsOneWidget);
+    expect(find.text('Gebieden'), findsOneWidget);
+  });
+
+  testWidgets('adding callout in region mode creates a CalloutRegion', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      calloutPresentation: CalloutPresentation.region,
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Switch to region mode.
+    await tester.tap(find.text('Gebieden'));
+    await tester.pumpAndSettle();
+
+    // Tap "Toevoegen" to add a callout.
+    await tester.tap(find.text('Toevoegen'));
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts, hasLength(1));
+    expect(updated.callouts.first.targets.first, isA<CalloutRegion>());
+    expect(updated.calloutPresentation, CalloutPresentation.region);
+  });
+
+  testWidgets('adding callout in pin mode creates a CalloutPoint', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Toevoegen'));
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts, hasLength(1));
+    expect(updated.callouts.first.targets.first, isA<CalloutPoint>());
   });
 }

@@ -221,12 +221,65 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
         : Colors.white;
     final markerRadius = widget.slotWidth * 0.022;
 
-    final markers = <Widget>[];
+    // §3.1: `mode` is a style, not a promise of shape. In `region` mode a
+    // region target is an outlined rect with outside dimming and the
+    // reference in its top-left corner; a point target is still a pin — a
+    // renderer may reduce geometry, never invent it.
+    final regionMode =
+        widget.slide.calloutPresentation == CalloutPresentation.region;
+
+    final markers = <Widget>[]; // pins (point targets, or pin-mode regions)
+    final regionWidgets = <Widget>[]; // outlines + corner badges
+    final regions = <Rect>[]; // holes punched in the dimming layer
+
     for (final callout in callouts) {
       for (var i = 0; i < callout.targets.length; i++) {
         final target = callout.targets[i];
-        // §3.1 pin mode: point → marker centred on point;
-        // region → marker at region centre.
+
+        if (regionMode && target is CalloutRegion) {
+          final mapped = ImageViewportGeometry.mapTarget(
+            target,
+            painted: painted,
+            slotW: widget.slotWidth,
+            slotH: widget.slotHeight,
+          );
+          // Skip clipped regions — they're outside the visible slot.
+          if (mapped.clipped) continue;
+          final rect = Rect.fromLTWH(mapped.x, mapped.y, mapped.w, mapped.h);
+          regions.add(rect);
+          regionWidgets.add(
+            Positioned(
+              left: mapped.x,
+              top: mapped.y,
+              width: mapped.w,
+              height: mapped.h,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(color: edge, width: markerRadius * 0.4),
+                ),
+              ),
+            ),
+          );
+          // Reference badge tucked into the top-left corner, inside the rect.
+          regionWidgets.add(
+            _CalloutMarker(
+              reference: callout.reference,
+              x: mapped.x + markerRadius,
+              y: mapped.y + markerRadius,
+              markerRadius: markerRadius,
+              accentColor: accent,
+              edgeColor: edge,
+              textColor: textCol,
+              description: callout.description,
+              targetOrdinal: i + 1,
+              targetCount: callout.targets.length,
+            ),
+          );
+          continue;
+        }
+
+        // Pin mode, or a point target in any mode: marker at the point, or
+        // at the region's centre (the rectangle itself is not drawn).
         double ux, uy;
         if (target is CalloutPoint) {
           ux = target.x;
@@ -261,7 +314,60 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
       }
     }
 
-    if (markers.isEmpty) return const SizedBox();
-    return IgnorePointer(child: Stack(children: markers));
+    if (markers.isEmpty && regionWidgets.isEmpty) return const SizedBox();
+
+    // Region mode: one dimming layer with a hole per region, so the area
+    // outside every region is darkened exactly once (no stacking).
+    final children = <Widget>[];
+    if (regions.isNotEmpty) {
+      children.add(
+        Positioned.fill(
+          child: CustomPaint(
+            painter: _RegionDimPainter(
+              regions,
+              AppTheme.redactionInk.withValues(alpha: 0.5),
+            ),
+          ),
+        ),
+      );
+    }
+    children.addAll(regionWidgets);
+    children.addAll(markers);
+
+    return IgnorePointer(child: Stack(children: children));
+  }
+}
+
+/// Paints the region-mode dimming: fills the slot with a semi-transparent
+/// dark layer and cuts a hole for each region rect, so the area outside
+/// every region is darkened exactly once — no stacking across overlapping
+/// regions (§3.1).
+class _RegionDimPainter extends CustomPainter {
+  final List<Rect> regions;
+  final Color dim;
+
+  const _RegionDimPainter(this.regions, this.dim);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final fill = Path()..addRect(Offset.zero & size);
+    var holes = Path();
+    for (final r in regions) {
+      holes = Path.combine(PathOperation.union, holes, Path()..addRect(r));
+    }
+    canvas.drawPath(
+      Path.combine(PathOperation.difference, fill, holes),
+      Paint()..color = dim,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_RegionDimPainter old) {
+    if (dim != old.dim) return true;
+    if (regions.length != old.regions.length) return true;
+    for (var i = 0; i < regions.length; i++) {
+      if (regions[i] != old.regions[i]) return true;
+    }
+    return false;
   }
 }

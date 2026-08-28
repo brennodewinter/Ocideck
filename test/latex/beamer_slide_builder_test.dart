@@ -2,6 +2,7 @@
 // klopt — frames, titels, lijsten, tabellen, code, afbeeldingen, fallback.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/latex/beamer_slide_builder.dart';
 
@@ -468,6 +469,60 @@ void main() {
       final out = buildBeamerBody(deck);
       expect(out, contains(r'\begin{tabular}'));
       expect(out, contains('Server'));
+    });
+  });
+
+  group('buildBeamerBody callouts', () {
+    test('region target in region mode → TikZ rectangle + node', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.bulletsImage).copyWith(
+            title: 'Hardware',
+            bullets: const ['controller board (A)'],
+            imagePath: 'board.png',
+            callouts: const [
+              ImageCallout(
+                reference: 'A',
+                targets: [CalloutRegion(0.2, 0.3, 0.4, 0.5)],
+                description: 'het gebied',
+              ),
+            ],
+            calloutPresentation: CalloutPresentation.region,
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      // A rectangle is drawn with \draw.
+      expect(out, contains(r'\draw['));
+      expect(out, contains('rectangle'));
+      // The reference letter is in a \node.
+      expect(out, contains(r'\node['));
+      expect(out, contains('{A}'));
+    });
+
+    test('point target in region mode → still a pin node, no rectangle', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.bulletsImage).copyWith(
+            title: 'Hardware',
+            bullets: const ['controller board (A)'],
+            imagePath: 'board.png',
+            callouts: const [
+              ImageCallout(
+                reference: 'A',
+                targets: [CalloutPoint(0.4, 0.3)],
+                description: 'een punt',
+              ),
+            ],
+            calloutPresentation: CalloutPresentation.region,
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      // A point in region mode is still a pin — no rectangle.
+      expect(out, isNot(contains('rectangle')));
     });
   });
 }

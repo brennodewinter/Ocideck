@@ -4589,6 +4589,8 @@ const _dutchSourceAddSl = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Odstrani cilj',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Dodaj cilj',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
   'Beschrijving (voor schermlezer)': 'Opis (za bralnik zaslona)',

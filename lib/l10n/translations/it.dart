@@ -4657,6 +4657,8 @@ const _dutchSourceAddIt = {
   'Callouts': 'Callouts',
   'Target verwijderen': 'Rimuovi destinazione',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Aggiungi destinazione',
   'bv. "de controller board met display"':
       'es. "la scheda di controllo con display"',

@@ -4632,6 +4632,8 @@ const _dutchSourceAddRo = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Elimină țintă',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Adaugă țintă',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',
   'Beschrijving (voor schermlezer)': 'Descriere (pentru cititor de ecran)',

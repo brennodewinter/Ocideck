@@ -4591,6 +4591,8 @@ const _dutchSourceAddSk = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Odstrániť cieľ',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Pridať cieľ',
   'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',
   'Beschrijving (voor schermlezer)': 'Popis (pre čítačku obrazovky)',

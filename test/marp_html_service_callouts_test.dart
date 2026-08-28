@@ -208,4 +208,64 @@ void main() {
       expect(result, contains('# Titel'));
     });
   });
+
+  group('renderImageCallouts — region mode (§3.1)', () {
+    test(
+      'region target in region mode → outlined div with correct geometry',
+      () {
+        final body = _body();
+        final slide = _slide(
+          callouts: [
+            const ImageCallout(
+              reference: 'A',
+              targets: [CalloutRegion(0.2, 0.3, 0.4, 0.5)],
+              description: 'het gebied',
+            ),
+          ],
+        ).copyWith(calloutPresentation: CalloutPresentation.region);
+        final result = renderImageCallouts(body, slide);
+        expect(result, contains('ocideck-region'));
+        expect(result, contains('left:20.00%'));
+        expect(result, contains('top:30.00%'));
+        expect(result, contains('width:40.00%'));
+        expect(result, contains('height:50.00%'));
+        expect(result, contains('ocideck-region-num'));
+        expect(result, contains('>A<'));
+      },
+    );
+
+    test('point target in region mode → still a pin, no invented box', () {
+      final body = _body();
+      final slide = _slide(
+        callouts: [
+          const ImageCallout(
+            reference: 'A',
+            targets: [CalloutPoint(0.4, 0.3)],
+            description: 'een punt',
+          ),
+        ],
+      ).copyWith(calloutPresentation: CalloutPresentation.region);
+      final result = renderImageCallouts(body, slide);
+      // A point in region mode is still a pin marker, not a region div.
+      expect(result, contains('ocideck-callout'));
+      expect(result, isNot(contains('ocideck-region')));
+    });
+
+    test('region target in pin mode → marker at centre, no region div', () {
+      final body = _body();
+      final slide = _slide(
+        callouts: [
+          const ImageCallout(
+            reference: 'A',
+            targets: [CalloutRegion(0.2, 0.2, 0.4, 0.4)],
+            description: 'gebied in pin-modus',
+          ),
+        ],
+        // Default presentation is pin.
+      );
+      final result = renderImageCallouts(body, slide);
+      expect(result, contains('ocideck-callout'));
+      expect(result, isNot(contains('ocideck-region')));
+    });
+  });
 }

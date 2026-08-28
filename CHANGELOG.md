@@ -1987,6 +1987,23 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: gebiedsmarkeringen (#1827).** De tweede stap in de
+  image-references-epic: naast puntmarkeringen kan de auteur nu
+  rechthoekige gebieden (regions) slepen op de afbeelding. De
+  presentatiemodus (pins of gebieden) is een slide-level keuze via een
+  SegmentedButton in de callout-editor. In gebiedenmodus tekent de
+  overlay elke regio als een omlijnde rechthoek met dimming erbuiten en
+  het referentienummer in de linkerbovenhoek; een punt-target blijft
+  altijd een pin (§3.1: een renderer mag geometrie reduceren, nooit
+  verzinnen).
+
+  De editor ondersteunt slepen om een nieuwe regio te maken,
+  verplaatsen door binnen de rechthoek te slepen, en vergroten/verkleinen
+  via vier hoekpunten. De HTML-export genereert `div.ocideck-region` met
+  `box-shadow`-dimming en een nummerbadge; de LaTeX/Beamer-export tekent
+  een TikZ-rectangle met een node. De validatie meldt regio's kleiner dan
+  0.02 op een as als ongeldige geometrie.
+
 - **Image callouts: genummerde markeringen van auteuring tot export (#1826).**
   De eerste bruikbare versie van image references: de auteur wijst een
   referentieletter (A–Z) aan een bullet toe, klikt op de afbeelding om een

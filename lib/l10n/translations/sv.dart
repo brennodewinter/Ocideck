@@ -4584,6 +4584,8 @@ const _dutchSourceAddSv = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Ta bort mål',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Lägg till mål',
   'bv. "de controller board met display"':
       't.ex. "kontrollerkortet med display"',

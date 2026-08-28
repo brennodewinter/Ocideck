@@ -2271,6 +2271,8 @@ const _dutchSourceAddEn = {
   'Target toevoegen': 'Add target',
   'Target verwijderen': 'Remove target',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'has invalid geometry and is not drawn — correct the coordinates in the front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

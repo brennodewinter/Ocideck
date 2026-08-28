@@ -212,8 +212,34 @@ String _calloutImageTikz(Slide slide) {
   // Overlay coordinate system: (0,0) = bottom-left, (1,1) = top-right.
   buf.write(r'\begin{scope}[x={(image.south east)},y={(image.north west)}]');
   buf.write('\n');
+  final regionMode = slide.calloutPresentation == CalloutPresentation.region;
   for (final callout in slide.callouts) {
     for (final target in callout.targets) {
+      // Region mode + region target → outlined rectangle with the reference
+      // number in its top-left corner (§3.1). Point targets always render as
+      // a numbered marker, even in region mode (a point is never an invented
+      // box). Pin/arrow mode renders every target as a centred marker.
+      if (regionMode && target is CalloutRegion) {
+        final r = target;
+        // Image space: (x,y) = top-left, y grows down. TikZ y grows up, so
+        // flip: bottom-left = (x, 1 - y - h), top-right = (x + w, 1 - y).
+        final x1 = r.x;
+        final y1 = 1.0 - r.y - r.h;
+        final x2 = r.x + r.w;
+        final y2 = 1.0 - r.y;
+        buf.write(
+          r'\draw[ocideckTableAccent,line width=0.8pt] '
+          '(${x1.toStringAsFixed(4)},${y1.toStringAsFixed(4)}) rectangle '
+          '(${x2.toStringAsFixed(4)},${y2.toStringAsFixed(4)});\n',
+        );
+        buf.write(
+          r'\node[fill=ocideckTableAccent,draw=white,line width=0.8pt,'
+          r'inner sep=1.5pt,font=\bfseries\small,text=white] '
+          'at (${x1.toStringAsFixed(4)},${y2.toStringAsFixed(4)}) '
+          '{${_escapeLatex(callout.reference)}};\n',
+        );
+        continue;
+      }
       double ux, uy;
       if (target is CalloutPoint) {
         ux = target.x;

@@ -74,6 +74,18 @@ const Set<String> uncoveredBaseline = {
   'lib/widgets/presentation/display_info_web.dart',
   'lib/widgets/presentation/display_info_data.dart',
   'lib/widgets/presentation/display_info.dart',
+  // UNTESTABLE IMAGE CODEC: `callout_overlay.dart` resolves intrinsic image
+  // dimensions via CappedImage before drawing markers/regions. The headless
+  // test VM cannot decode the image codec, so _intrinsic stays null and the
+  // build method's early exit (line 200) is all that runs — the rendering
+  // path (markers, region outlines, dimming painter) is unreachable in a
+  // widget test. The geometry mapping is unit-tested in
+  // callout_overlay_test.dart (ImageViewportGeometry.mapTarget), the HTML
+  // and LaTeX export paths are tested in marp_html_service_callouts_test
+  // and beamer_slide_builder_test, and the visual rendering is verified
+  // via the beeldkeuring skill. Adding a test-injection point for the
+  // intrinsic size would add production code for test-only purposes.
+  'lib/widgets/slides/previews/callout_overlay.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through
