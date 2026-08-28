@@ -4640,6 +4640,16 @@ const _dutchSourceAddDe = {
       'Fußnoten werden zu Fließtext; eine Präsentation hat keine Noten.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Ziel entfernen',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Ziel hinzufügen',
+  'bv. "de controller board met display"':
+      'z. B. "die Controller-Platine mit Display"',
+  'Beschrijving (voor schermlezer)': 'Beschreibung (für Screenreader)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Wähle einen Aufzählungspunkt, um eine Referenz zu platzieren.',
+  'Reference verwijderen': 'Referenz entfernen',
+  'Afbeeldingsverwijzingen': 'Bildreferenzen',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'hat eine ungültige Geometrie und wird nicht gezeichnet — korrigiere die Koordinaten im Front Matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

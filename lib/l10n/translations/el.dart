@@ -4654,6 +4654,15 @@ const _dutchSourceAddEl = <String, String>{
       'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Αφαίρεση στόχου',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Προσθήκη στόχου',
+  'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
+  'Beschrijving (voor schermlezer)': 'Περιγραφή (για αναγνώστη οθόνης)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Επιλέξτε μια κουκκίδα για να τοποθετήσετε μια αναφορά.',
+  'Reference verwijderen': 'Αφαίρεση αναφοράς',
+  'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'έχει μη έγκυρη γεωμετρία και δεν σχεδιάζεται — διορθώστε τις συντεταγμένες στο front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

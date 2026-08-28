@@ -92,6 +92,15 @@ class _BulletsImagePreview extends StatelessWidget {
                     altText: slide.imageAltText,
                   ),
                 ),
+                if (slide.callouts.isNotEmpty)
+                  CalloutOverlay(
+                    slide: slide,
+                    projectPath: projectPath,
+                    profile: profile,
+                    slotWidth: imgWidth,
+                    slotHeight: w * 9 / 16,
+                    mediaRedacted: SlideLinkScope.mediaRedactedOf(context),
+                  ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
@@ -263,6 +272,15 @@ class _BulletsImagePreview extends StatelessWidget {
                     altText: slide.imageAltText,
                   ),
                 ),
+                if (slide.callouts.isNotEmpty)
+                  CalloutOverlay(
+                    slide: slide,
+                    projectPath: projectPath,
+                    profile: profile,
+                    slotWidth: imgWidth,
+                    slotHeight: w * 9 / 16,
+                    mediaRedacted: SlideLinkScope.mediaRedactedOf(context),
+                  ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),

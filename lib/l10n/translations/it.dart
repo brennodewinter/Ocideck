@@ -4655,6 +4655,16 @@ const _dutchSourceAddIt = {
       'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Rimuovi destinazione',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Aggiungi destinazione',
+  'bv. "de controller board met display"':
+      'es. "la scheda di controllo con display"',
+  'Beschrijving (voor schermlezer)': 'Descrizione (per lettore di schermo)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Seleziona un punto elenco per inserire un riferimento.',
+  'Reference verwijderen': 'Rimuovi riferimento',
+  'Afbeeldingsverwijzingen': 'Riferimenti immagine',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'ha una geometria non valida e non viene disegnato — correggi le coordinate nel front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

@@ -4601,6 +4601,16 @@ const _dutchSourceAddFy = {
       'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Doel fuortsmite',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Doel tafoegje',
+  'bv. "de controller board met display"':
+      'byg. "de controller board mei display"',
+  'Beschrijving (voor schermlezer)': 'Beskriuwing (foar skermlêzer)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Kies in opsommingsteken om in ferwizing te pleatsen.',
+  'Reference verwijderen': 'Ferwizing fuortsmite',
+  'Afbeeldingsverwijzingen': 'Ofbyldingsferwizingen',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'hat ûnjildige geometry en wurdt net tekene — korrigearje de koördinaten yn it front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

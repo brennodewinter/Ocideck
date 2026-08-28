@@ -111,6 +111,38 @@ html,body{margin:0;padding:0}
 .print-frame>tfoot{display:table-footer-group}
 .document .print-frame>thead>tr,.document .print-frame>tfoot>tr,.document .print-frame>tbody>tr{background:none}
 .document .print-frame>thead>tr>td,.document .print-frame>tfoot>tr>td,.document .print-frame>tbody>tr>td{padding:0;border:0;background:none;color:inherit;text-align:left;vertical-align:top}
+/* Image callout overlay (IMAGE_CALLOUTS.md §4.2, §12.2). The slot wraps the
+   split-image panel when a slide carries callouts; the box is the painted
+   rectangle, and markers are positioned in image-space percentages against it.
+   --fx/--fy: focal 0..1 · --z: ze/100 · --iw/--ih: intrinsic pixels.
+   ponytail: --iw/--ih default to 16/9 because the Slide model carries no
+   intrinsic image dimensions at export time; a render-script pass that reads
+   naturalWidth/Height after load is the upgrade path. */
+.ocideck-imgslot{position:relative;overflow:hidden;min-height:calc(100vh - 96px)}
+.ocideck-imgslot > .ocideck-imgbox{position:absolute;
+  left:calc(var(--fx,0.5) * 100%);top:calc(var(--fy,0.5) * 100%);
+  transform:translate(calc(var(--fx,0.5) * -100%),calc(var(--fy,0.5) * -100%));
+  min-width:100%;min-height:100%;aspect-ratio:var(--iw,16) / var(--ih,9)}
+.ocideck-imgzoom{position:absolute;
+  width:calc(var(--z,0) * 100%);height:calc(var(--z,0) * 100%);
+  left:calc(var(--fx,0.5) * 100%);top:calc(var(--fy,0.5) * 100%);
+  transform:translate(calc(var(--fx,0.5) * -100%),calc(var(--fy,0.5) * -100%));
+  display:flex;align-items:center;justify-content:center}
+.ocideck-imgzoom > .ocideck-imgbox{position:relative;
+  aspect-ratio:var(--iw,16) / var(--ih,9)}
+.ocideck-imgzoom > .ocideck-imgbox.wide{width:100%;height:auto}
+.ocideck-imgzoom > .ocideck-imgbox.tall{height:100%;width:auto}
+.ocideck-imgbox > img{display:block;width:100%;height:100%;object-fit:cover}
+.ocideck-callout{position:absolute;transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;
+  min-width:1.6em;min-height:1.6em;padding:0 .25em;
+  border-radius:50%;font-size:18px;font-weight:700;line-height:1;
+  color:#fff;background:var(--ocideck-accent,#003399);
+  border:2px solid #fff;
+  box-shadow:0 0 0 2px var(--ocideck-accent,#003399),0 1px 4px rgba(0,0,0,.5);
+  z-index:3;pointer-events:none}
+.ocideck-callout-desc{position:absolute;width:1px;height:1px;padding:0;
+  margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de

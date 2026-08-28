@@ -4529,6 +4529,16 @@ const _dutchSourceAddTlh = <String, String>{
       'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'target teq',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'target yIchel',
+  'bv. "de controller board met display"':
+      'ghantoH "controller board display" je',
+  'Beschrijving (voor schermlezer)': 'Del (HaqwI\'vaD)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'bI\'reS yIwIv reference chermeH.',
+  'Reference verwijderen': 'reference teq',
+  'Afbeeldingsverwijzingen': 'mIllogh reference',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'mIq taghbe\' \'ej mIq tlhIHbe\' — front matterDaq coordInatlh DIvI\'.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

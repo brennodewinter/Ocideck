@@ -13,6 +13,7 @@ import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 import 'editor_text_controller.dart';
+import 'callout_editor.dart';
 
 class BulletsImageEditor extends StatefulWidget {
   final Slide slide;
@@ -462,6 +463,17 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             ),
           ),
         ],
+        if (imagePath.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.place, size: 18),
+              label: Text(l10n.d('Afbeeldingsverwijzingen')),
+              onPressed: _openCalloutEditor,
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -488,6 +500,17 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         imageFocalX: result.focalX,
         imageFocalY: result.focalY,
         imageZoom: result.imageSize,
+      ),
+    );
+  }
+
+  Future<void> _openCalloutEditor() async {
+    await showDialog<void>(
+      context: context,
+      builder: (context) => CalloutEditorDialog(
+        slide: widget.slide,
+        projectPath: widget.captionBasePath,
+        onUpdate: (updated) => widget.onUpdate(updated),
       ),
     );
   }

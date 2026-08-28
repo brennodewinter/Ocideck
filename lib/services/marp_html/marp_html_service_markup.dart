@@ -240,6 +240,7 @@ String _renderBodyBlocks(
   required CockpitColorScheme cockpitColorScheme,
   required Map<String, String> signature,
   required ImprovementY01Metric exportY01,
+  Slide? slide,
 }) {
   var out = MarpHtmlService.renderReportingSlide(body, theme: theme);
   out = renderMatrixSlide(out, theme: theme);
@@ -257,11 +258,16 @@ String _renderBodyBlocks(
     signature,
     sealedAt: signature['ocideck_seal_at'] ?? '',
   );
-  return MarpHtmlService.renderCockpitBlocks(
+  out = MarpHtmlService.renderCockpitBlocks(
     out,
     theme: theme,
     scheme: cockpitColorScheme,
   );
+  // Image callouts run last: they need the final body so the split-image div
+  // and bullet list are in their settled form, and they only act when the
+  // slide carries callout data.
+  if (slide != null) out = renderImageCallouts(out, slide);
+  return out;
 }
 
 /// Rendert [markdown] naar de `<section>`(s) met inerte markdown-payload.
@@ -280,6 +286,7 @@ String _renderSections(
   bool continuous = false,
   MarpStyle deckMarpStyle = const MarpStyle(),
   List<MarpStyle> slideMarpStyles = const [],
+  List<Slide> slides = const [],
 }) {
   final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
   if (continuous) {
@@ -311,23 +318,25 @@ String _renderSections(
     ..write(_marpChromeSource('footer', deckMarpStyle.footer));
   final hasLogo = theme?.logoPath?.trim().isNotEmpty == true;
   var slideIndex = 0;
-  for (final slide in MarpHtmlService.marpSlides(markdown)) {
+  for (final slideMd in MarpHtmlService.marpSlides(markdown)) {
     final localStyle = slideIndex < slideMarpStyles.length
         ? slideMarpStyles[slideIndex]
         : const MarpStyle();
     final marpStyle = localStyle.inherit(deckMarpStyle);
+    final slideObj = slideIndex < slides.length ? slides[slideIndex] : null;
     slideIndex++;
     final renderedBlocks = _renderBodyBlocks(
-      slide,
+      slideMd,
       theme: theme,
       cockpitColorScheme: cockpitColorScheme,
       signature: signature,
       exportY01: exportY01,
+      slide: slideObj,
     );
-    final markerClass = _bulletMarkerSectionClass(slide);
-    final logoClass = _logoSectionClass(slide, hasLogo);
-    final anchorId = _slideAnchorIdAttr(slide);
-    final marpSection = _marpSectionStyle(slide, marpStyle);
+    final markerClass = _bulletMarkerSectionClass(slideMd);
+    final logoClass = _logoSectionClass(slideMd, hasLogo);
+    final anchorId = _slideAnchorIdAttr(slideMd);
+    final marpSection = _marpSectionStyle(slideMd, marpStyle);
     sections
       ..write(
         '<section class="slide$markerClass$logoClass${marpSection.classes}"'

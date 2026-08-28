@@ -4583,6 +4583,15 @@ const _dutchSourceAddLv = <String, String>{
       'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Noņemt mērķi',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Pievienot mērķi',
+  'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
+  'Beschrijving (voor schermlezer)': 'Apraksts (ekrāna lasītājam)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Atlasiet aizzīmi, lai novietotu atsauci.',
+  'Reference verwijderen': 'Noņemt atsauci',
+  'Afbeeldingsverwijzingen': 'Attēlu atsauces',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'ir nederīga ģeometrija un to nezīmē — izlabojiet koordinātes front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

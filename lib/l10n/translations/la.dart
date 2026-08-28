@@ -4602,6 +4602,16 @@ const _dutchSourceAddLa = <String, String>{
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Destinatio removere',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Destinatio addere',
+  'bv. "de controller board met display"':
+      'ex. gr. "tabula moderatrix cum monitorio"',
+  'Beschrijving (voor schermlezer)': 'Descriptio (pro lectore schermatis)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Punctum selige ut referentiam ponas.',
+  'Reference verwijderen': 'Referentiam removere',
+  'Afbeeldingsverwijzingen': 'Imaginum referentiae',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'geometria invalida habet et non pingitur — coordinales in front matter corrige.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

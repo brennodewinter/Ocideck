@@ -4584,6 +4584,16 @@ const _dutchSourceAddDa = <String, String>{
       'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Fjern mål',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Tilføj mål',
+  'bv. "de controller board met display"':
+      'f.eks. "controller board med display"',
+  'Beschrijving (voor schermlezer)': 'Beskrivelse (til skærmlæser)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Vælg en punkt for at placere en reference.',
+  'Reference verwijderen': 'Fjern reference',
+  'Afbeeldingsverwijzingen': 'Billedreferencer',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'har ugyldig geometri og tegnes ikke — ret koordinaterne i front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

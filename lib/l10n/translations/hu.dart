@@ -4602,6 +4602,15 @@ const _dutchSourceAddHu = <String, String>{
       'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Cél eltávolítása',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Cél hozzáadása',
+  'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
+  'Beschrijving (voor schermlezer)': 'Leírás (képernyőolvasóhoz)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Válassz egy pontot a hivatkozás elhelyezéséhez.',
+  'Reference verwijderen': 'Hivatkozás eltávolítása',
+  'Afbeeldingsverwijzingen': 'Képhivatkozások',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'érvénytelen geometriája van, és nem lesz megrajzolva — javítsd a koordinátákat a front matter-ben.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

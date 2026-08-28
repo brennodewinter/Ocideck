@@ -4654,6 +4654,16 @@ const _dutchSourceAddGa = <String, String>{
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Sprioc a bhaint',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Sprioc a chur leis',
+  'bv. "de controller board met display"':
+      'm.sh. "an bord rialaithe le scáileán"',
+  'Beschrijving (voor schermlezer)': 'Cur síos (do léitheoir scáileáin)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Roghnaigh urchair chun tagairt a chur.',
+  'Reference verwijderen': 'Bain tagairt',
+  'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'tá céimseata neamhbhailí aige agus ní tharraingítear é — ceartaigh na comhordanáidí sa front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

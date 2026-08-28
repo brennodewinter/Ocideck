@@ -4592,6 +4592,15 @@ const _dutchSourceAddFi = <String, String>{
       'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Poista kohde',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Lisää kohde',
+  'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
+  'Beschrijving (voor schermlezer)': 'Kuvaus (ruudunlukijaa varten)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Valitse luettelomerkki asettaaksesi viitteen.',
+  'Reference verwijderen': 'Poista viite',
+  'Afbeeldingsverwijzingen': 'Kuvaviitteet',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'geometria on virheellinen eikä sitä piirretä — korjaa koordinaatit front matter -osiossa.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
