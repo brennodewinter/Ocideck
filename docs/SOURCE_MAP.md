@@ -184,6 +184,7 @@ list below, which made "where does this belong" slower than it needed to be.)*
 
 - `ai_alt_text_cleanup.dart` — Counts and clears still-unreviewed AI-generated image alt-texts (the bulk-wipe safety net).
 - `callout_codec.dart` — Parser and lossless writer for the `ocideck_callouts` front-matter block (IMAGE_CALLOUTS.md §2.5 nested merge: only edited entries go through canonical, comments/malformed/unknown tokens stay byte-voor-byte).
+- `image_viewport_geometry.dart` — `ImageViewportGeometry`: the Flutter-free geometry contract for image callouts (IMAGE_CALLOUTS.md §4.1). Maps point and region targets from normalised image space to the painted image rectangle, reports clipping, and clamps zoom to 0..400 identically on every surface.
 - `ai_client_service.dart` — The gated, provider-agnostic `/v1` client for the optional local AI backend.
 - `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
 - `ai_security_gate.dart` — Enforces the AI opt-in/consent/endpoint gate before any outbound AI call.
