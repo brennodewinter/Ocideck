@@ -16,6 +16,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'mermaid_diagram.dart';
 import 'chart_hover.dart';
 import 'video_playhead_bus.dart';
+import 'previews/callout_overlay.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../services/improvement/canvas_layout.dart';

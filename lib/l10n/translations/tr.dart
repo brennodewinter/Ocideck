@@ -4573,6 +4573,15 @@ const _dutchSourceAddTr = <String, String>{
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Hedefi kaldır',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Hedef ekle',
+  'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
+  'Beschrijving (voor schermlezer)': 'Açıklama (ekran okuyucu için)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Bir referans yerleştirmek için madde işareti seçin.',
+  'Reference verwijderen': 'Referansı kaldır',
+  'Afbeeldingsverwijzingen': 'Görsel referansları',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'geçersiz geometriye sahip ve çizilmiyor — front matter içindeki koordinatları düzeltin.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

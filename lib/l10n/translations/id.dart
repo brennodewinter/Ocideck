@@ -4596,6 +4596,16 @@ const _dutchSourceAddId = <String, String>{
       'Catatan kaki menjadi teks biasa; presentasi tidak memiliki catatan.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Hapus target',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Tambah target',
+  'bv. "de controller board met display"':
+      'mis. "papan pengendali dengan layar"',
+  'Beschrijving (voor schermlezer)': 'Deskripsi (untuk pembaca layar)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Pilih bullet untuk menempatkan referensi.',
+  'Reference verwijderen': 'Hapus referensi',
+  'Afbeeldingsverwijzingen': 'Referensi gambar',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'memiliki geometri yang tidak valid dan tidak digambar — perbaiki koordinatnya di front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

@@ -243,7 +243,7 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#1162): de import van `services.dart` voor de toetsen van een
   // toetsenbord-bedienbaar menublok. De afhandeling zelf staat in het
   // part-bestand menu_preview_layouts.dart.
-  'lib/widgets/slides/slide_preview.dart': 1043,
+  'lib/widgets/slides/slide_preview.dart': 1044,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij

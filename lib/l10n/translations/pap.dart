@@ -4623,6 +4623,16 @@ const _dutchSourceAddPap = {
       'Footnote ta bira texto sòbel; un presentashon no tin notanan.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Kita meta',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Añadi meta',
+  'bv. "de controller board met display"':
+      'por ehèmpel "e bòrd di kontrol ku display"',
+  'Beschrijving (voor schermlezer)': 'Deskripshon (pa ledo di pantaya)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Skohe un bullet pa pone un referensia.',
+  'Reference verwijderen': 'Kita referensia',
+  'Afbeeldingsverwijzingen': 'Referensian di imágen',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'tin geometria inbalido i no ta dibui — korige e koordinatenan den e front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

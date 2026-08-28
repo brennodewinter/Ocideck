@@ -4673,6 +4673,16 @@ const _dutchSourceAddFr = {
       'Les notes de bas de page deviennent du texte brut ; une présentation n\'a pas de notes.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Supprimer la cible',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Ajouter une cible',
+  'bv. "de controller board met display"':
+      'p. ex. « la carte de contrôle avec écran »',
+  'Beschrijving (voor schermlezer)': 'Description (pour lecteur d\'écran)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Sélectionnez une puce pour placer une référence.',
+  'Reference verwijderen': 'Supprimer la référence',
+  'Afbeeldingsverwijzingen': 'Références d\'image',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'a une géométrie non valide et n\'est pas dessiné — corrigez les coordonnées dans le front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

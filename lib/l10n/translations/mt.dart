@@ -4640,6 +4640,16 @@ const _dutchSourceAddMt = <String, String>{
       'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Neħħi mira',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Żid mira',
+  'bv. "de controller board met display"':
+      'eż. "il-bord tal-kontroll b\'display"',
+  'Beschrijving (voor schermlezer)': 'Deskrizzjoni (għal qarrej tal-iskrin)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Agħżel bullet biex tpoġġi referenza.',
+  'Reference verwijderen': 'Neħħi referenza',
+  'Afbeeldingsverwijzingen': 'Referenzi tal-immaġini',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'għandu ġometrija invalida u mhux miżbugħa — korreġi l-koordinati fil-front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

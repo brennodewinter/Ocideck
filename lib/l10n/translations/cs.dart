@@ -4574,6 +4574,15 @@ const _dutchSourceAddCs = <String, String>{
       'Poznámky pod čarou se stanou prostým textem; prezentace nemá poznámky.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Odstranit cíl',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Přidat cíl',
+  'bv. "de controller board met display"': 'např. "řídící deska s displejem"',
+  'Beschrijving (voor schermlezer)': 'Popis (pro čtečku obrazovky)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Vyberte odrážku pro umístění odkazu.',
+  'Reference verwijderen': 'Odstranit odkaz',
+  'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'má neplatnou geometrii a není vykreslen — opravte souřadnice v front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

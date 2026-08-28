@@ -4628,6 +4628,15 @@ const _dutchSourceAddBg = <String, String>{
       'Бележките под линия стават обикновен текст; презентация няма бележки.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Премахване на цел',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Добавяне на цел',
+  'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
+  'Beschrijving (voor schermlezer)': 'Описание (за екранен четец)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Изберете маркер, за да поставите справка.',
+  'Reference verwijderen': 'Премахване на справка',
+  'Afbeeldingsverwijzingen': 'Справки към изображения',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'има невалидна геометрия и не се чертае — коригирайте координатите в front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

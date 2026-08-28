@@ -4640,6 +4640,15 @@ const _dutchSourceAddPt = <String, String>{
       'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Remover destino',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Adicionar destino',
+  'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
+  'Beschrijving (voor schermlezer)': 'Descrição (para leitor de ecrã)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Selecione um marcador para colocar uma referência.',
+  'Reference verwijderen': 'Remover referência',
+  'Afbeeldingsverwijzingen': 'Referências de imagem',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'tem geometria inválida e não é desenhado — corrija as coordenadas no front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

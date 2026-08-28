@@ -4589,6 +4589,15 @@ const _dutchSourceAddSk = <String, String>{
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Odstrániť cieľ',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Pridať cieľ',
+  'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',
+  'Beschrijving (voor schermlezer)': 'Popis (pre čítačku obrazovky)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Vyberte odrážku na umiestnenie odkazu.',
+  'Reference verwijderen': 'Odstrániť odkaz',
+  'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'má neplatnú geometriu a nekreslí sa — opravte súradnice v front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

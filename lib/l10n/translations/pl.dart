@@ -4610,6 +4610,15 @@ const _dutchSourceAddPl = <String, String>{
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Usuń cel',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Dodaj cel',
+  'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
+  'Beschrijving (voor schermlezer)': 'Opis (dla czytnika ekranu)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Wybierz punkt, aby umieścić odwołanie.',
+  'Reference verwijderen': 'Usuń odwołanie',
+  'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'ma nieprawidłową geometrię i nie jest rysowany — popraw współrzędne w front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

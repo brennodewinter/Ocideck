@@ -9,6 +9,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../l10n/app_localizations.dart';
 import '../models/asset_overview_spec.dart';
 import '../models/chart.dart';
+import '../models/image_callout.dart';
 import 'improvement/chart_derivation.dart';
 import '../models/checklist_spec.dart';
 import '../models/cockpit.dart';
@@ -69,6 +70,7 @@ part 'marp_html/marp_html_service_css.dart';
 part 'marp_html/marp_html_service_render_script.dart';
 part 'marp_html/marp_html_service_images.dart';
 part 'marp_html/marp_html_service_markup.dart';
+part 'marp_html/marp_html_service_callouts.dart';
 part 'marp_html/marp_html_service_notices.dart';
 
 /// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
@@ -218,6 +220,7 @@ class MarpHtmlService {
       slideMarpStyles:
           parsedDeck?.slides.map((slide) => slide.marpStyle).toList() ??
           const [],
+      slides: parsedDeck?.slides ?? const [],
     );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde

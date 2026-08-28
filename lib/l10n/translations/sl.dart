@@ -4587,6 +4587,15 @@ const _dutchSourceAddSl = <String, String>{
       'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Odstrani cilj',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Dodaj cilj',
+  'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
+  'Beschrijving (voor schermlezer)': 'Opis (za bralnik zaslona)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Izberite označbo za postavitev sklica.',
+  'Reference verwijderen': 'Odstrani sklic',
+  'Afbeeldingsverwijzingen': 'Sklice na slike',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'ima neveljavno geometrijo in se ne nariše — popravite koordinate v front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

@@ -4582,6 +4582,16 @@ const _dutchSourceAddSv = <String, String>{
       'Fotnoter blir till vanlig text; en presentation har inte noter.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Ta bort mål',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Lägg till mål',
+  'bv. "de controller board met display"':
+      't.ex. "kontrollerkortet med display"',
+  'Beschrijving (voor schermlezer)': 'Beskrivning (för skärmläsare)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Välj en punkt för att placera en referens.',
+  'Reference verwijderen': 'Ta bort referens',
+  'Afbeeldingsverwijzingen': 'Bildreferenser',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'har ogiltig geometri och ritas inte — korrigera koordinaterna i front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

@@ -45,6 +45,8 @@ const unchangedInEnglish = {
   // identiek aan het Nederlands, maar andere talen vertalen het wél.
   'Callout',
   'Callouts',
+  // Callout-editor: technische term 'target(s)' blijft gelijk in het Engels.
+  'target(s)',
   'CVSS',
   // Het documenttabblad: het Engels houdt 'Document' identiek aan het
   // Nederlands, maar andere talen vertalen het wél (Italiaans Documento, Duits

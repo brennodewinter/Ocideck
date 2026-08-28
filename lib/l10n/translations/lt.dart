@@ -4602,6 +4602,15 @@ const _dutchSourceAddLt = <String, String>{
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Pašalinti tikslą',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Pridėti tikslą',
+  'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
+  'Beschrijving (voor schermlezer)': 'Aprašymas (ekrano skaitytuvui)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Pasirinkite ženklelį, kad patalpintumėte nuorodą.',
+  'Reference verwijderen': 'Pašalinti nuorodą',
+  'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'turi netinkamą geometriją ir nėra braižomas — pataisykite koordinates front matter dalyje.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

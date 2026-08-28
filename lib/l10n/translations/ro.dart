@@ -4630,6 +4630,15 @@ const _dutchSourceAddRo = <String, String>{
       'Notele de subsol devin text simplu; o prezentare nu are note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Elimină țintă',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Adaugă țintă',
+  'bv. "de controller board met display"': 'ex. "placa de control cu display"',
+  'Beschrijving (voor schermlezer)': 'Descriere (pentru cititor de ecran)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Selectați un marcator pentru a plasa o referință.',
+  'Reference verwijderen': 'Elimină referința',
+  'Afbeeldingsverwijzingen': 'Referințe imagine',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'are o geometrie nevalidă și nu este desenat — corectează coordonatele în front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

@@ -4607,6 +4607,16 @@ const _dutchSourceAddUk = <String, String>{
       'Виноски стають звичайним текстом; презентація не має виносок.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Видалити ціль',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Додати ціль',
+  'bv. "de controller board met display"':
+      'напр. "плата контролера з дисплеєм"',
+  'Beschrijving (voor schermlezer)': 'Опис (для програми читання з екрана)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Виберіть маркер, щоб розмістити посилання.',
+  'Reference verwijderen': 'Видалити посилання',
+  'Afbeeldingsverwijzingen': 'Посилання на зображення',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'має недійсну геометрію і не малюється — виправте координати у front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

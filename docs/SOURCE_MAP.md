@@ -184,6 +184,7 @@ list below, which made "where does this belong" slower than it needed to be.)*
 
 - `ai_alt_text_cleanup.dart` — Counts and clears still-unreviewed AI-generated image alt-texts (the bulk-wipe safety net).
 - `callout_codec.dart` — Parser and lossless writer for the `ocideck_callouts` front-matter block (IMAGE_CALLOUTS.md §2.5 nested merge: only edited entries go through canonical, comments/malformed/unknown tokens stay byte-voor-byte).
+- `callout_reference_allocator.dart` — Picks the next free reference letter (A–Z), skipping letters already used by existing callouts and letters that appear as trailing prose on the slide (IMAGE_CALLOUTS.md §6.1).
 - `image_viewport_geometry.dart` — `ImageViewportGeometry`: the Flutter-free geometry contract for image callouts (IMAGE_CALLOUTS.md §4.1). Maps point and region targets from normalised image space to the painted image rectangle, reports clipping, and clamps zoom to 0..400 identically on every surface.
 - `ai_client_service.dart` — The gated, provider-agnostic `/v1` client for the optional local AI backend.
 - `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
@@ -1378,6 +1379,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
 - `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers, group headings/"tussenkoppen").
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
+- `callout_editor.dart` — Dialog for editing image callouts on a bulletsImage slide: assign a reference letter to a bullet, click on the image to place a target, edit the description, delete (IMAGE_CALLOUTS.md §6).
 - `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking). The grid is editable whether or not the data is linked to a file — a linked chart writes that file back on save. It was read-only while linked until that write-back existed.
 - `chart_type_toolbar.dart` — Chart type dropdown plus Gage R&R / DOE / paste / CSV actions, kept outside `_ChartEditorState` for the class-size ratchet.
 - `chart_histogram_limits.dart` — Y-01 deck-limit switch and local USL/LSL/process-target fields for histogram charts.
@@ -1464,6 +1466,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 ### `lib/widgets/slides/previews/` (each `part of slide_preview.dart`)
 
 - `slide_preview_support.dart` — Standalone shared Marp image-filter and link-scope widgets used by preview, presenter and raster export, extracted to keep the central preview library within its size ratchet.
+- `callout_overlay.dart` — Standalone callout overlay widget: paints numbered markers on top of the image slot using `ImageViewportGeometry` to map targets from image space to slot pixels (IMAGE_CALLOUTS.md §4.1). Imported by `slide_preview.dart` and used by the bulletsImage preview.
 
 - `preview_scaffold.dart` — `_PreviewScaffold`: the outer skeleton the report-style previews share — a filled area, a scale-down `FittedBox` over a fixed slide width, the logo-aware margin, and the column under it. Checklist, scope matrix, findings summary, sign-off, finding, free markdown, asset overview and discoveries use it. Chart, cockpit, table and scorecard deliberately do not: they compute their own aspect ratio, drop the `SizedBox.expand`, or give the box a fixed height, and bending the scaffold to cover them would turn it into a widget with ten switches.
 - `bullets_previews.dart` — Bullet-point slide layout.

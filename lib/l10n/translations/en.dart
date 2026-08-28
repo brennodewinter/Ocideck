@@ -2261,6 +2261,16 @@ const _dutchSourceAddEn = {
       'is on a tree slide but not used elsewhere — link it to a matrix, flow or other slide.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Afbeeldingsverwijzingen': 'Image references',
+  'Reference verwijderen': 'Remove reference',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Select a bullet to place a reference.',
+  'Beschrijving (voor schermlezer)': 'Description (for screen reader)',
+  'bv. "de controller board met display"':
+      'e.g. "the controller board with display"',
+  'Target toevoegen': 'Add target',
+  'Target verwijderen': 'Remove target',
+  'target(s)': 'target(s)',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'has invalid geometry and is not drawn — correct the coordinates in the front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

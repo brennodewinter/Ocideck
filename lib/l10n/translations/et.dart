@@ -4579,6 +4579,15 @@ const _dutchSourceAddEt = <String, String>{
       'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Eemalda siht',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Lisada siht',
+  'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
+  'Beschrijving (voor schermlezer)': 'Kirjeldus (ekraanilugeja jaoks)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Vali täpp, et viidet paigutada.',
+  'Reference verwijderen': 'Eemalda viide',
+  'Afbeeldingsverwijzingen': 'Pildiviited',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'on kehtetu geomeetriaga ja seda ei joonistata — paranda koordinaadid front matter-is.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

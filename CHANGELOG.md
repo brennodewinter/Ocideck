@@ -1987,6 +1987,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: genummerde markeringen van auteuring tot export (#1826).**
+  De eerste bruikbare versie van image references: de auteur wijst een
+  referentieletter (A–Z) aan een bullet toe, klikt op de afbeelding om een
+  target te plaatsen, en vult een beschrijving in voor de schermlezer. De
+  markeringen verschijnen in de Flutter-voorvertoning, de presentator, het
+  beeldscherm, de HTML-export (met `aria-label`/`aria-describedby`), de
+  LaTeX/Beamer-export (als TikZ-nodes met relatieve coördinaten), en de
+  raster-export (PDF/PPTX/ODP — via de echte voorvertoningswidget).
+
+  De referentie-allocator slaat letters over die al als proza in de bullets
+  staan (`(A)` als gewone tekst), zodat de allocator nooit de botsing maakt
+  die §2.6 moet melden. De callout-editor is een dialoog in de
+  Bullets+image-editor; de callout-overlay is een standalone widget die
+  `ImageViewportGeometry` (#1825) gebruikt om targets van afbeeldingsruimte
+  naar slot-pixels te mappen.
+
 - **Image callouts: gedeelde geometrie (#1825).** De Flutter-vrije
   `ImageViewportGeometry` uit §4.1 van het ontwerp: neemt intrinsieke
   afbeeldingsgrootte, slot, zoom en focal point en geeft het geschilderde

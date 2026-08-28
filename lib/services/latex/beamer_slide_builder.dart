@@ -13,6 +13,7 @@
 // de aanroep vanuit `ExportService._buildLatex`, die een `ExportBundle` meekrijgt.
 
 import '../../models/deck.dart';
+import '../../models/image_callout.dart';
 import '../../models/slide.dart';
 import '../menu_blocks.dart';
 import 'markdown_to_latex.dart';
@@ -180,13 +181,60 @@ String _bulletsImageSlide(Slide slide) {
   buf.write('\\end{column}\n');
   buf.write('\\begin{column}{0.40\\textwidth}\n');
   if (slide.imagePath.isNotEmpty) {
-    buf.write(
-      r'\includegraphics[width=\textwidth]{'
-      '${_escapeImagePath(slide.imagePath)}}\n',
-    );
+    if (slide.callouts.isNotEmpty) {
+      buf.write(_calloutImageTikz(slide));
+    } else {
+      buf.write(
+        r'\includegraphics[width=\textwidth]{'
+        '${_escapeImagePath(slide.imagePath)}}\n',
+      );
+    }
   }
   buf.write('\\end{column}\n');
   buf.write('\\end{columns}\n');
+  return buf.toString();
+}
+
+/// Wraps the image in a tikzpicture with overlay nodes for callout markers.
+/// Markers are placed in image-space coordinates (0,0) = bottom-left to
+/// (1,1) = top-right, matching the callout target convention.
+/// ponytail: LaTeX doesn't know the intrinsic image size at generation time,
+/// so we use relative coordinates (0–1) on the image node — the markers
+/// scale with the image regardless of its rendered size.
+String _calloutImageTikz(Slide slide) {
+  final buf = StringBuffer();
+  buf.write('\\begin{tikzpicture}\n');
+  buf.write(
+    r'\node[anchor=south west,inner sep=0] (image) at (0,0) '
+    r'{\includegraphics[width=\textwidth]{',
+  );
+  buf.write('${_escapeImagePath(slide.imagePath)}}};\n');
+  // Overlay coordinate system: (0,0) = bottom-left, (1,1) = top-right.
+  buf.write(r'\begin{scope}[x={(image.south east)},y={(image.north west)}]');
+  buf.write('\n');
+  for (final callout in slide.callouts) {
+    for (final target in callout.targets) {
+      double ux, uy;
+      if (target is CalloutPoint) {
+        ux = target.x;
+        uy = target.y;
+      } else {
+        final r = target as CalloutRegion;
+        ux = r.x + r.w / 2;
+        uy = r.y + r.h / 2;
+      }
+      // TikZ y-axis goes up, image-space y goes down → flip y.
+      final tikzY = 1.0 - uy;
+      buf.write(
+        r'\node[circle,fill=ocideckTableAccent,draw=white,line width=0.8pt,'
+        r'inner sep=1.5pt,font=\bfseries\small,text=white] '
+        'at (${ux.toStringAsFixed(4)},${tikzY.toStringAsFixed(4)}) '
+        '{${_escapeLatex(callout.reference)}};\n',
+      );
+    }
+  }
+  buf.write('\\end{scope}\n');
+  buf.write('\\end{tikzpicture}\n');
   return buf.toString();
 }
 

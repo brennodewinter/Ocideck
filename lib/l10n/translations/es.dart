@@ -4649,6 +4649,16 @@ const _dutchSourceAddEs = {
       'Las notas al pie se convierten en texto sin formato; una presentación no tiene notas.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Eliminar destino',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Añadir destino',
+  'bv. "de controller board met display"':
+      'p. ej. "la placa de control con pantalla"',
+  'Beschrijving (voor schermlezer)': 'Descripción (para lector de pantalla)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Selecciona una viñeta para colocar una referencia.',
+  'Reference verwijderen': 'Eliminar referencia',
+  'Afbeeldingsverwijzingen': 'Referencias de imagen',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'tiene una geometría no válida y no se dibuja — corrige las coordenadas en el front matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

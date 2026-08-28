@@ -4591,6 +4591,16 @@ const _dutchSourceAddGsw = <String, String>{
       'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Ziel entferne',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Ziel derzuefüege',
+  'bv. "de controller board met display"':
+      'z. B. "d Controller-Platine mit Display"',
+  'Beschrijving (voor schermlezer)': 'Beschriibig (für Screenreader)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Wähl en Ufzähligspunkt zum e Referänz plaziere.',
+  'Reference verwijderen': 'Referänz entferne',
+  'Afbeeldingsverwijzingen': 'Bildreferänze',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'het en ungültigi Geometri und wird nöd zzeichnet — korrigier d Koordinate im Front Matter.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':

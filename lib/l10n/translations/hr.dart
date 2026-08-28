@@ -4587,6 +4587,16 @@ const _dutchSourceAddHr = <String, String>{
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
+  'Target verwijderen': 'Ukloni cilj',
+  'target(s)': 'target(s)',
+  'Target toevoegen': 'Dodaj cilj',
+  'bv. "de controller board met display"':
+      'npr. "upravljačka ploča s zaslonom"',
+  'Beschrijving (voor schermlezer)': 'Opis (za čitač zaslona)',
+  'Selecteer een bullet om een reference te plaatsen.':
+      'Odaberite grafičku oznaku za postavljanje reference.',
+  'Reference verwijderen': 'Ukloni referencu',
+  'Afbeeldingsverwijzingen': 'Reference slika',
   'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
       'ima nevažeću geometriju i ne crta se — ispravite koordinate u front matter-u.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
