@@ -4575,6 +4575,8 @@ const _dutchSourceAddTr = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Hedefi kaldır',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Hedef ekle',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
   'Beschrijving (voor schermlezer)': 'Açıklama (ekran okuyucu için)',

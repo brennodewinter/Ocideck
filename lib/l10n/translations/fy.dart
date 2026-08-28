@@ -4603,6 +4603,8 @@ const _dutchSourceAddFy = {
   'Callouts': 'Callouts',
   'Target verwijderen': 'Doel fuortsmite',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Doel tafoegje',
   'bv. "de controller board met display"':
       'byg. "de controller board mei display"',

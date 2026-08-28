@@ -4656,6 +4656,8 @@ const _dutchSourceAddGa = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Sprioc a bhaint',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Sprioc a chur leis',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',

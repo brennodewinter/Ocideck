@@ -4642,6 +4642,8 @@ const _dutchSourceAddPt = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Remover destino',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Adicionar destino',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
   'Beschrijving (voor schermlezer)': 'Descrição (para leitor de ecrã)',

@@ -4531,6 +4531,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'target teq',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'target yIchel',
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',

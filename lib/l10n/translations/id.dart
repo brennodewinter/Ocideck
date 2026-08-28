@@ -4598,6 +4598,8 @@ const _dutchSourceAddId = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Hapus target',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Tambah target',
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',

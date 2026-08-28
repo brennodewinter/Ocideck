@@ -4594,6 +4594,8 @@ const _dutchSourceAddFi = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Poista kohde',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Lisää kohde',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
   'Beschrijving (voor schermlezer)': 'Kuvaus (ruudunlukijaa varten)',

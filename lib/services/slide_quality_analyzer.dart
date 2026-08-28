@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
+import '../models/image_callout.dart';
 import 'menu_blocks.dart';
 import '../models/finding_spec.dart';
 import '../models/markdown_validation.dart';
@@ -125,8 +126,11 @@ void _checkCallouts(Slide slide, int index, List<SlideQualityIssue> issues) {
     }
 
     // Invalid geometry: een target buiten [0,1] of met verkeerde componenten.
+    // §8: een region heeft minimaal 0.02 op beide assen.
     for (final target in callout.targets) {
-      if (!target.isValid) {
+      final tooSmall =
+          target is CalloutRegion && (target.w < 0.02 || target.h < 0.02);
+      if (!target.isValid || tooSmall) {
         issues.add(
           SlideQualityIssue(
             slideIndex: index,

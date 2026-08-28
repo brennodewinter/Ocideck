@@ -4593,6 +4593,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Ziel entferne',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Ziel derzuefüege',
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',

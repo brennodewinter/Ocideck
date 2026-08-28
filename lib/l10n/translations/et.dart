@@ -4581,6 +4581,8 @@ const _dutchSourceAddEt = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Eemalda siht',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Lisada siht',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
   'Beschrijving (voor schermlezer)': 'Kirjeldus (ekraanilugeja jaoks)',

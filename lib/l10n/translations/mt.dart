@@ -4642,6 +4642,8 @@ const _dutchSourceAddMt = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Neħħi mira',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Żid mira',
   'bv. "de controller board met display"':
       'eż. "il-bord tal-kontroll b\'display"',

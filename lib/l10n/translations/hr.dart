@@ -4589,6 +4589,8 @@ const _dutchSourceAddHr = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Ukloni cilj',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Dodaj cilj',
   'bv. "de controller board met display"':
       'npr. "upravljačka ploča s zaslonom"',

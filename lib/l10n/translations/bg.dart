@@ -4630,6 +4630,8 @@ const _dutchSourceAddBg = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Премахване на цел',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Добавяне на цел',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
   'Beschrijving (voor schermlezer)': 'Описание (за екранен четец)',

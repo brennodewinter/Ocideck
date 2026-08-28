@@ -26,10 +26,13 @@ final RegExp _bulletRefSuffix = RegExp(r'\s\(([A-Z])\)$');
 /// the focal point and zoom for the imgslot CSS variables, and the anchor that
 /// derives the stable id for each hidden description element.
 ///
-/// In pin mode (the default and the only mode this function draws), a marker
-/// is placed at the point — or at the region's centre (§3.1). The marker is
-/// `role="img"` with an accessible name of the form "reference, description"
-/// and "target n of m" when the reference has more than one target (§12.2).
+/// In pin mode (the default) a marker is placed at the point — or at the
+/// region's centre (§3.1). In region mode a region target is drawn as an
+/// outlined rectangle with outside dimming and the number in its top-left
+/// corner; a point target is still a pin (§3.1 — a renderer may reduce
+/// geometry, never invent it). The marker is `role="img"` with an accessible
+/// name of the form "reference, description" and "target n of m" when the
+/// reference has more than one target (§12.2).
 String renderImageCallouts(String body, Slide slide) {
   if (slide.callouts.isEmpty) return body;
 
@@ -67,10 +70,34 @@ String _renderImgslot(String body, Slide slide) {
 
   // Build callout markers positioned in image-space percentages against the
   // imgbox. In pin mode a marker sits at the point, or at the region's centre.
+  // In region mode a region target is an outlined rectangle with outside
+  // dimming; a point target is still a pin (§3.1).
   final markers = StringBuffer();
+  final isRegionMode = slide.calloutPresentation == CalloutPresentation.region;
   for (final callout in slide.callouts) {
     for (var i = 0; i < callout.targets.length; i++) {
       final target = callout.targets[i];
+      final name = callout.targets.length > 1
+          ? '${callout.reference}, ${callout.description}, '
+                'target ${i + 1} of ${callout.targets.length}'
+          : '${callout.reference}, ${callout.description}';
+      // Region mode draws a region target as an outlined rectangle; a point
+      // target is never given an invented box (§3.1).
+      if (isRegionMode && target is CalloutRegion) {
+        final left = (target.x * 100).toStringAsFixed(2);
+        final top = (target.y * 100).toStringAsFixed(2);
+        final width = (target.w * 100).toStringAsFixed(2);
+        final height = (target.h * 100).toStringAsFixed(2);
+        markers.write(
+          '<div class="ocideck-region" role="img" '
+          'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+          'style="left:$left%;top:$top%;width:$width%;height:$height%">'
+          '<span class="ocideck-region-num">'
+          '${MarpHtmlService._htmlText(callout.reference)}'
+          '</span></div>',
+        );
+        continue;
+      }
       final (cx, cy) = target is CalloutPoint
           ? (target.x, target.y)
           : (() {
@@ -79,10 +106,6 @@ String _renderImgslot(String body, Slide slide) {
             })();
       final left = (cx * 100).toStringAsFixed(2);
       final top = (cy * 100).toStringAsFixed(2);
-      final name = callout.targets.length > 1
-          ? '${callout.reference}, ${callout.description}, '
-                'target ${i + 1} of ${callout.targets.length}'
-          : '${callout.reference}, ${callout.description}';
       markers.write(
         '<span class="ocideck-callout" role="img" '
         'aria-label="${MarpHtmlService._htmlAttr(name)}" '

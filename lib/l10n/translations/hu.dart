@@ -4604,6 +4604,8 @@ const _dutchSourceAddHu = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Cél eltávolítása',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Cél hozzáadása',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
   'Beschrijving (voor schermlezer)': 'Leírás (képernyőolvasóhoz)',

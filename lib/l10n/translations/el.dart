@@ -4656,6 +4656,8 @@ const _dutchSourceAddEl = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Αφαίρεση στόχου',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Προσθήκη στόχου',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
   'Beschrijving (voor schermlezer)': 'Περιγραφή (για αναγνώστη οθόνης)',

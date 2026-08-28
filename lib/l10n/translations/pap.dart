@@ -4625,6 +4625,8 @@ const _dutchSourceAddPap = {
   'Callouts': 'Callouts',
   'Target verwijderen': 'Kita meta',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Añadi meta',
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',

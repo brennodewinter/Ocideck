@@ -4576,6 +4576,8 @@ const _dutchSourceAddCs = <String, String>{
   'Callouts': 'Callouts',
   'Target verwijderen': 'Odstranit cíl',
   'target(s)': 'target(s)',
+  'Pins': 'Pins',
+  'Gebieden': 'Regions',
   'Target toevoegen': 'Přidat cíl',
   'bv. "de controller board met display"': 'např. "řídící deska s displejem"',
   'Beschrijving (voor schermlezer)': 'Popis (pro čtečku obrazovky)',
