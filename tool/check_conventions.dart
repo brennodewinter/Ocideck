@@ -191,6 +191,9 @@ const Map<String, int> fileSizeBaseline = {
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
   'lib/widgets/presentation/fullscreen_presenter.dart': 1038,
+  // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
+  // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
+  'lib/services/slide_quality_analyzer.dart': 1110,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -206,7 +209,9 @@ const Map<String, int> fileSizeBaseline = {
   // +8: imageZoom-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +9 (#1162): menuLayout-veld + doc + constructor/copyFrom/copyWith-doorvoer
   // en de import van models/menu.dart.
-  'lib/models/slide.dart': 1081,
+  // +27 (#1824): callouts, calloutPresentation, calloutReveal-velden + doc +
+  // constructor/duplicate/copyWith-doorvoer voor image callouts.
+  'lib/models/slide.dart': 1115,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
@@ -418,7 +423,9 @@ const Map<String, int> classSizeBaseline = {
   // filteren ervan uit `effectiveClass`. De body-regelverwerking verhuisde
   // hierbij naar markdown_parse/markdown_service_parse_body.dart — dat maakt de
   // bestanden kleiner, maar de klasse niet.
-  'lib/services/markdown_service.dart#MarkdownService': 2422,
+  // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
+  // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
+  'lib/services/markdown_service.dart#MarkdownService': 2455,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
@@ -476,7 +483,10 @@ const Map<String, int> classSizeBaseline = {
   // document-kleurparen als top-level `_checkThemeContrast` naast
   // [_addSlidePairIssue] — zij hangt aan het thema, niet aan de analyzer-staat.
   // De klasse meet 1037.
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1040,
+  // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
+  // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
+  // De klasse meet 1097.
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1110,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd

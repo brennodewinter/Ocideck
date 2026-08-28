@@ -4580,4 +4580,14 @@ const _dutchSourceAddSv = <String, String>{
       'Dokumentfält (sidhuvud och sidfot) följer inte med.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fotnoter blir till vanlig text; en presentation har inte noter.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'har ogiltig geometri och ritas inte — korrigera koordinaterna i front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'hänvisar till en (A)-markering som inte finns i texten, eller tvärtom — koppla markeringen och posten till varandra.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'förekommer två gånger på denna bild — varje markering (A), (B) … får bara ha en post.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Denna bild har callouts men ingen förankring — front matter kan inte koppla dem till bilden. Ge bilden en förankring i redigeraren.',
 };

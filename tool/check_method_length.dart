@@ -90,7 +90,9 @@ const Map<String, int> methodLengthBaseline = {
   // +2 (#1407): imageTitleAbove-parameter + doorvoer in copyWith.
   // +2: imageZoom-parameter + doorvoer in copyWith.
   // +2 (#1162): menuLayout-parameter + doorvoer in copyWith.
-  'lib/models/slide.dart::Slide.copyWith': 166,
+  // +6 (#1824): callouts, calloutPresentation, calloutReveal-parameters +
+  // doorvoer in copyWith voor image callouts.
+  'lib/models/slide.dart::Slide.copyWith': 172,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
@@ -110,7 +112,9 @@ const Map<String, int> methodLengthBaseline = {
   // timelineAnimationMs, bulletMarkerOverride, improvementLayout, privacy,
   // quality, findingRole, aiAssistedFields, viewLimit). Zelfde vorm: exhaustive
   // switch, één case per veld, niet uit te tillen.
-  'lib/collab/deck_op.dart::_slideWithField': 192,
+  // +9 (#1824): callouts, calloutPresentation, calloutReveal — drie nieuwe
+  // cases in de exhaustive switch, zelfde vorm, niet uit te tillen.
+  'lib/collab/deck_op.dart::_slideWithField': 201,
 };
 
 bool _isTranslationData(String path) =>

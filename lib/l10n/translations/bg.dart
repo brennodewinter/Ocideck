@@ -4626,4 +4626,14 @@ const _dutchSourceAddBg = <String, String>{
       'Полетата на документа (горен и долен колонтитул) не се запазват.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Бележките под линия стават обикновен текст; презентация няма бележки.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'има невалидна геометрия и не се чертае — коригирайте координатите в front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'препраща към маркер (A), който не присъства в текста, или обратното — свържете маркера и записа един с друг.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'се среща два пъти на този слайд — всеки маркер (A), (B) … може да има само един запис.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Този слайд има callouts, но няма котва — front matter не може да ги свърже със слайда. Задайте котва на слайда в редактора.',
 };

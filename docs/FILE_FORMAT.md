@@ -231,6 +231,11 @@ open**: looking at someone else's file must not change it. This is the existing
 [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and §6.4. An older file always opens
 and is never made read-only.
 
+**Version 2** is written when a deck first saves an `ocideck_callouts` block
+(IMAGE_CALLOUTS.md §2). A version-1 file without callouts stays version 1;
+opening a version-2 file in a build that does not know callouts leaves the
+block in place (rule 1) and writes `2` back (rule 3).
+
 **4. The meaning of an existing key never changes.** A changed meaning gets a
 new key. This is the precondition that makes "skip what you do not know" safe
 forever: a reader that ignores an unknown key must be able to trust that the
@@ -283,6 +288,7 @@ over the file. See §6.6 for why that changed.)
 | `ocideck_improvement_y01_target` | number/absent | Process target for Y-01. |
 | `ocideck_improvement_y01_baseline` | number/absent | Baseline value for Y-01 (project charter). |
 | `ocideck_improvement_y01_goal` | number/absent | Goal value for Y-01 (project charter). |
+| `ocideck_callouts` | nested block/absent | Image callouts (IMAGE_CALLOUTS.md §2). A nested map keyed by slide anchor, each containing `mode:` / `reveal:` directives and `A: point 0.4 0.2 \| description` entry lines. Written only when at least one slide has callouts; writing it bumps `ocideck_format` to `2`. The codec owns this block: on save, only edited entries go through canonical form — comments, malformed entries and unknown tokens are preserved byte-voor-byte (§2.5 nested merge). |
 
 **Migration (Y-01).** A deck that only has `ocideck_improvement_y01` (name, no
 limit keys) remains valid forever; missing limit keys mean `null`. Charts that

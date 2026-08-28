@@ -4599,4 +4599,14 @@ const _dutchSourceAddFy = {
       'Dokuminfjilden (kop- en foettekst) gean net mei.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'hat ûnjildige geometry en wurdt net tekene — korrigearje de koördinaten yn it front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'ferwiist nei in (A)-markering dy\'t net yn de tekst stiet, of oarsom — keppelje de markering en de ynfier oan inoar.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'komt twa kear foar op dizze dia — eltse markering (A), (B) … mei mar ien ynfier hawwe.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Dizze dia hat callouts mar gjin anker — it front matter kin se net oan de dia keppelje. Jou de dia in anker yn de editor.',
 };

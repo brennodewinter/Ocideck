@@ -23,6 +23,11 @@ sealed class CalloutTarget {
   /// JSON tag for collab codec serialisation.
   String get typeTag;
 
+  /// Of deze geometrie tekenbaar is: alle coördinaten in [0,1] en, voor een
+  /// region, `w > 0`, `h > 0` en `x + w ≤ 1`, `y + h ≤ 1`. De checker meldt
+  /// ongeldige geometrie (§2.6) — het model clamp niet (§2.4).
+  bool get isValid;
+
   Map<String, dynamic> toJson();
   static CalloutTarget fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
@@ -56,8 +61,10 @@ class CalloutPoint extends CalloutTarget {
   String get _geometry => 'point ${_fmt(x)} ${_fmt(y)}';
 
   @override
-  Map<String, dynamic> toJson() =>
-      {'type': 'point', 'x': x, 'y': y};
+  bool get isValid => _inUnit(x) && _inUnit(y);
+
+  @override
+  Map<String, dynamic> toJson() => {'type': 'point', 'x': x, 'y': y};
 
   @override
   bool operator ==(Object other) =>
@@ -82,12 +89,25 @@ class CalloutRegion extends CalloutTarget {
   String get typeTag => 'region';
 
   @override
-  String get _geometry =>
-      'region ${_fmt(x)} ${_fmt(y)} ${_fmt(w)} ${_fmt(h)}';
+  String get _geometry => 'region ${_fmt(x)} ${_fmt(y)} ${_fmt(w)} ${_fmt(h)}';
 
   @override
-  Map<String, dynamic> toJson() =>
-      {'type': 'region', 'x': x, 'y': y, 'w': w, 'h': h};
+  bool get isValid =>
+      _inUnit(x) &&
+      _inUnit(y) &&
+      w > 0 &&
+      h > 0 &&
+      _inUnit(x + w) &&
+      _inUnit(y + h);
+
+  @override
+  Map<String, dynamic> toJson() => {
+    'type': 'region',
+    'x': x,
+    'y': y,
+    'w': w,
+    'h': h,
+  };
 
   @override
   bool operator ==(Object other) =>
@@ -143,7 +163,8 @@ class ImageCallout {
       other.description == description;
 
   @override
-  int get hashCode => Object.hash(reference, Object.hashAll(targets), description);
+  int get hashCode =>
+      Object.hash(reference, Object.hashAll(targets), description);
 
   static bool _listEq(List<CalloutTarget> a, List<CalloutTarget> b) {
     if (a.length != b.length) return false;
@@ -167,3 +188,7 @@ enum BulletRevealMode { all, steps }
 /// Three-decimal formatting (§2.2): the writer always emits exactly three
 /// decimals, so the file heals itself rather than rejecting an honest edit.
 String _fmt(double v) => v.toStringAsFixed(3);
+
+/// Of [v] ligt in het gesloten interval [0, 1]. Een kleine epsilon laat
+/// afrondingsruis toe (0.9999999 → true) zonder 1.001 door te laten.
+bool _inUnit(double v) => v >= -0.001 && v <= 1.001;

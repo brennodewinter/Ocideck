@@ -156,6 +156,29 @@ extension _MarkdownParse on MarkdownService {
       if (slide != null) slides.add(slide);
     }
 
+    // Koppel de callout-data uit de front matter aan de slides via hun anchor
+    // (IMAGE_CALLOUTS.md §3: callouts leven op de Slide, de front matter is
+    // alleen de opslaglocatie). Een slide zonder anchor krijgt geen callouts;
+    // een anchor-blok zonder bijbehorende slide is een wees (§2.4) en blijft
+    // in de front matter staan — de checker meldt het.
+    if (fm.calloutBlock != null && fm.calloutBlock!.present) {
+      final byAnchor = <String, CalloutSlideBlock>{};
+      for (final blk in fm.calloutBlock!.blocks) {
+        byAnchor[blk.anchor] = blk;
+      }
+      for (var i = 0; i < slides.length; i++) {
+        final slide = slides[i];
+        if (slide.anchor.isEmpty) continue;
+        final blk = byAnchor[slide.anchor];
+        if (blk?.typed == null) continue;
+        slides[i] = slide.copyWith(
+          callouts: blk!.typed!.callouts,
+          calloutPresentation: blk.typed!.presentation,
+          calloutReveal: blk.typed!.reveal,
+        );
+      }
+    }
+
     final title =
         fm.presentationTitle ??
         (slides.isNotEmpty && slides.first.title.isNotEmpty

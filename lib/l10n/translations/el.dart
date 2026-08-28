@@ -4652,4 +4652,14 @@ const _dutchSourceAddEl = <String, String>{
       'Τα πεδία του εγγράφου (κεφαλίδα και υποσέλιδο) δεν διατηρούνται.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'έχει μη έγκυρη γεωμετρία και δεν σχεδιάζεται — διορθώστε τις συντεταγμένες στο front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'αναφέρεται σε ένα σημάδι (A) που δεν υπάρχει στο κείμενο, ή αντίστροφα — συνδέστε το σημάδι και την καταχώρηση μεταξύ τους.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'εμφανίζεται δύο φορές σε αυτή τη διαφάνεια — κάθε σημάδι (A), (B) … μπορεί να έχει μόνο μία καταχώρηση.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Αυτή η διαφάνεια έχει callouts αλλά όχι άγκυρα — το front matter δεν μπορεί να τα συνδέσει με τη διαφάνεια. Δώστε στη διαφάνεια μια άγκυρα στον επεξεργαστή.',
 };

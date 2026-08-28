@@ -5,6 +5,8 @@
 // Bewust een losse, afhankelijkheidsvrije module: dit is een tekstbewerking op
 // regels, geen deck-kennis, en zo is het contract apart te toetsen.
 
+import 'callout_codec.dart';
+
 /// De formaatversie die deze build schrijft (front-matter-sleutel
 /// [kFormatVersionKey]).
 ///
@@ -89,6 +91,10 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_improvement_y01_target',
   'ocideck_improvement_y01_baseline',
   'ocideck_improvement_y01_goal',
+  // Image callouts (IMAGE_CALLOUTS.md §2). Owned sinds format v2: de codec
+  // herschrijft het blok met de nested merge van §2.5 — alleen bewerkte entries
+  // gaan door, onbekende/commentaar/malformed regels blijven byte-voor-byte.
+  kCalloutsFrontMatterKey,
 };
 
 /// Sleutels die OciDeck ooit schreef en nu niet meer, maar nog wél bezit.
@@ -190,15 +196,24 @@ List<String> mergeFrontMatter({
 
   final byKey = <String, List<String>>{};
   final order = <String>[];
+  String? currentKey;
   for (final line in generated) {
     final key = frontMatterKeyOf(line);
-    if (key == null) continue;
-    byKey
-        .putIfAbsent(key, () {
-          order.add(key);
-          return <String>[];
-        })
-        .add(line);
+    if (key != null) {
+      currentKey = key;
+      byKey
+          .putIfAbsent(key, () {
+            order.add(key);
+            return <String>[];
+          })
+          .add(line);
+    } else if (currentKey != null && _reContinuation.hasMatch(line)) {
+      // Een vervolgregel hoort bij de sleutel erboven — zonder dit zou een
+      // geneste waarde zoals `ocideck_callouts:` zijn ankerblokken verliezen.
+      byKey[currentKey]!.add(line);
+    } else {
+      currentKey = null;
+    }
   }
 
   final out = <String>[];

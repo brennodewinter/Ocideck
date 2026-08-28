@@ -4600,4 +4600,14 @@ const _dutchSourceAddLt = <String, String>{
       'Dokumento laukai (antraštė ir poraštė) neperkeliami.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'turi netinkamą geometriją ir nėra braižomas — pataisykite koordinates front matter dalyje.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'nurodo (A) žymę, kurios nėra tekste, arba atvirkščiai — susiekite žymę ir įrašą tarpusavyje.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'pasirodo du kartus šiame skaidrėje — kiekviena žymė (A), (B) … gali turėti tik vieną įrašą.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Ši skaidrė turi callout, bet neturi inkaro — front matter negali jų susieti su skaidre. Suteikite skaidrei inkarą rengyklėje.',
 };

@@ -1,6 +1,9 @@
+import 'dart:math' show max;
+
 import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/privacy_disposition.dart';
+import 'callout_codec.dart';
 import 'front_matter_merge.dart';
 
 // YAML scalars that need quoting to remain strings in Marp and other readers.
@@ -20,11 +23,17 @@ List<String> ownedFrontMatterLines(
   required bool includeFormatVersion,
   bool legacySignatureLines = false,
 }) {
+  // Of dit deck callouts heeft — bepaalt of formaatversie 2 wordt geschreven
+  // (IMAGE_CALLOUTS.md §2.4: versie 2 alleen bij de eerste save met een callout,
+  // nooit daarvoor).
+  final hasCallouts = deck.slides.any((s) => s.callouts.isNotEmpty);
+
   final out = <String>['marp: true'];
   if (includeFormatVersion) {
-    out.add(
-      '$kFormatVersionKey: ${persistedFormatVersion(deck.formatVersion)}',
-    );
+    final effective = hasCallouts
+        ? persistedFormatVersion(max(deck.formatVersion, 2))
+        : persistedFormatVersion(deck.formatVersion);
+    out.add('$kFormatVersionKey: $effective');
   }
   out.add('theme: ${deck.theme}');
   if (deck.paginate) out.add('paginate: true');
@@ -110,6 +119,25 @@ List<String> ownedFrontMatterLines(
   addNumber('ocideck_improvement_y01_target', y01.target);
   addNumber('ocideck_improvement_y01_baseline', y01.baseline);
   addNumber('ocideck_improvement_y01_goal', y01.goal);
+
+  // Image callouts (IMAGE_CALLOUTS.md §2). Het blok wordt door de callout-codec
+  // geschreven met de nested merge van §2.5: alleen bewerkte entries gaan door,
+  // onbekende/commentaar/malformed regels blijven byte-voor-byte staan.
+  final calloutLines = serializeCalloutBlock(
+    slidesWithCallouts: [
+      for (final slide in deck.slides)
+        if (slide.callouts.isNotEmpty)
+          (
+            anchor: slide.anchor,
+            callouts: slide.callouts,
+            presentation: slide.calloutPresentation,
+            reveal: slide.calloutReveal,
+          ),
+    ],
+    original: parseCalloutBlock(deck.frontMatterSource),
+  );
+  if (calloutLines != null) out.addAll(calloutLines);
+
   if (legacySignatureLines) _addLegacySignature(out, deck.signature);
   return out;
 }

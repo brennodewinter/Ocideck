@@ -216,6 +216,9 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.findingRole => slide.findingRole,
     SlideField.aiAssistedFields => slide.aiAssistedFields,
     SlideField.viewLimit => slide.viewLimit,
+    SlideField.callouts => slide.callouts,
+    SlideField.calloutPresentation => slide.calloutPresentation,
+    SlideField.calloutReveal => slide.calloutReveal,
   };
 }
 

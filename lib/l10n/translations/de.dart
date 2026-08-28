@@ -4638,4 +4638,14 @@ const _dutchSourceAddDe = {
       'Dokumentfelder (Kopf- und Fußzeile) werden nicht übernommen.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fußnoten werden zu Fließtext; eine Präsentation hat keine Noten.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'hat eine ungültige Geometrie und wird nicht gezeichnet — korrigiere die Koordinaten im Front Matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'verweist auf eine (A)-Markierung, die nicht im Text steht, oder umgekehrt — verknüpfe die Markierung und den Eintrag miteinander.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'kommt zweimal auf dieser Folie vor — jede Markierung (A), (B) … darf nur einen Eintrag haben.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Diese Folie hat Callouts, aber keinen Anker — das Front Matter kann sie nicht mit der Folie verknüpfen. Gib der Folie einen Anker im Editor.',
 };

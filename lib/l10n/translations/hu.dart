@@ -4600,4 +4600,14 @@ const _dutchSourceAddHu = <String, String>{
       'A dokumentum mezői (fejléc és lábléc) nem kerülnek át.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'érvénytelen geometriája van, és nem lesz megrajzolva — javítsd a koordinátákat a front matter-ben.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'egy olyan (A) jelölésre hivatkozik, amely nincs a szövegben, vagy fordítva — kösd össze a jelölést és a bejegyzést egymással.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'kétszer szerepel ezen a dián — minden (A), (B) … jelölésnek csak egy bejegyzése lehet.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Ennek a diának callout-jai vannak, de nincs horgonya — a front matter nem tudja őket a diához kapcsolni. Adj a diának egy horgonyt a szerkesztőben.',
 };

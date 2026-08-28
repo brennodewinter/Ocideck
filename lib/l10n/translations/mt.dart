@@ -4638,4 +4638,14 @@ const _dutchSourceAddMt = <String, String>{
       'L-għalqa tad-dokument (header u footer) ma jiġuux mkaxkra.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'għandu ġometrija invalida u mhux miżbugħa — korreġi l-koordinati fil-front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'jirreferi għal marka (A) li mhux fit-test, jew viċi versa — kollega l-marka u l-entrata ma\' xulxin.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'jidher darbtejn f\'dan is-slide — kull marka (A), (B) … tista\' jkollha entrata waħda biss.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Dan is-slide għandu callouts imma l-ebda ankra — il-front matter ma jistax jikkollegahom mal-slide. Agħti l-slide ankra fl-editur.',
 };

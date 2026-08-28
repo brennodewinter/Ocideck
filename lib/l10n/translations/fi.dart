@@ -4590,4 +4590,14 @@ const _dutchSourceAddFi = <String, String>{
       'Asiakirjan kentät (ylä- ja alatunniste) eivät siirry.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'geometria on virheellinen eikä sitä piirretä — korjaa koordinaatit front matter -osiossa.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'viittaa (A)-merkintään, jota ei ole tekstissä, tai päinvastoin — yhdistä merkintä ja merkintätieto toisiinsa.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'esiintyy kahdesti tällä dioilla — jokaisella merkinnällä (A), (B) … saa olla vain yksi merkintätieto.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Tässä diossa on callouts mutta ei ankkuria — front matter ei voi yhdistää niitä dioon. Anna dion ankkuri editorissa.',
 };

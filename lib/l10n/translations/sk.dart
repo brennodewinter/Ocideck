@@ -4587,4 +4587,14 @@ const _dutchSourceAddSk = <String, String>{
       'Polia dokumentu (hlavička a päta) sa neprenášajú.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'má neplatnú geometriu a nekreslí sa — opravte súradnice v front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'odkazuje na značku (A), ktorá nie je v texte, alebo naopak — prepojte značku a záznam navzájom.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'vyskytuje sa dvakrát na tomto slajde — každá značka (A), (B) … môže mať len jeden záznam.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Tento slajd má callouts, ale nemá kotvu — front matter ich nemôže prepojiť so slajdom. Dajte slajdu kotvu v editore.',
 };

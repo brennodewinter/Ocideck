@@ -47,6 +47,7 @@ branches enriched the same line and the merge kept both copies.
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
+- `image_callout.dart` — `ImageCallout`, `CalloutTarget` (point/region), `CalloutPresentation` and `BulletRevealMode` for linking bullet points to regions on an image (IMAGE_CALLOUTS.md §2).
 - `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or linked data. Also the data-file codec: `dataToJson`/`withJson` for new files, `parseCsv`/`withCsv` for files written before the switch, and `withData` picking on the extension. The data file carries values only — colours stay in the chart block, which is what lets the save path compare two data files to decide whether the *numbers* changed. `parseChartDataJson` returns null rather than empty on a corrupt file, so a chart keeps what it has instead of quietly becoming an empty plot.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `checklist_template.dart` — `ChecklistTemplate`/`ChecklistTemplateItem`: a user-created reusable checklist stored in the settings (feedback #9), with tolerant `encodeList`/`decodeList`.
@@ -182,6 +183,7 @@ code rather than only here. This map stays the file-by-file index.
 list below, which made "where does this belong" slower than it needed to be.)*
 
 - `ai_alt_text_cleanup.dart` — Counts and clears still-unreviewed AI-generated image alt-texts (the bulk-wipe safety net).
+- `callout_codec.dart` — Parser and lossless writer for the `ocideck_callouts` front-matter block (IMAGE_CALLOUTS.md §2.5 nested merge: only edited entries go through canonical, comments/malformed/unknown tokens stay byte-voor-byte).
 - `ai_client_service.dart` — The gated, provider-agnostic `/v1` client for the optional local AI backend.
 - `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
 - `ai_security_gate.dart` — Enforces the AI opt-in/consent/endpoint gate before any outbound AI call.

@@ -4638,4 +4638,14 @@ const _dutchSourceAddPt = <String, String>{
       'Os campos do documento (cabeçalho e rodapé) não são mantidos.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'tem geometria inválida e não é desenhado — corrija as coordenadas no front matter.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'refere-se a uma marca (A) que não está no texto, ou vice-versa — ligue a marca e a entrada uma à outra.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'aparece duas vezes neste slide — cada marca (A), (B) … pode ter apenas uma entrada.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Este slide tem callouts mas nenhuma âncora — o front matter não os pode ligar ao slide. Dê ao slide uma âncora no editor.',
 };

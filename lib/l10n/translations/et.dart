@@ -4577,4 +4577,14 @@ const _dutchSourceAddEt = <String, String>{
       'Dokumendi väljad (päis ja jalus) ei kandu üle.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'on kehtetu geomeetriaga ja seda ei joonistata — paranda koordinaadid front matter-is.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'viitab (A)-märgile, mida tekstis pole, või vastupidi — ühenda märk ja kirje omavahel.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'esineb sellel slaidil kaks korda — iga märk (A), (B) … võib olla ainult ühe kirjega.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Sellel slaidil on callouts, kuid puudub ankur — front matter ei saa neid slaidiga siduda. Anna slaidile ankur redaktoris.',
 };

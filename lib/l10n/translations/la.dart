@@ -4600,4 +4600,14 @@ const _dutchSourceAddLa = <String, String>{
       'Documenti campi (caput et pes) non feruntur.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
+  'Callout': 'Callout',
+  'Callouts': 'Callouts',
+  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
+      'geometria invalida habet et non pingitur — coordinales in front matter corrige.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
+      'ad signum (A) quod in texto non est refert, aut e contra — signum et entry inter se conecte.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
+      'bis in hac lamina apparet — unumquemque signum (A), (B) … unam tantum entry habere potest.',
+  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
+      'Haec lamina callouts sed non ancoram habet — front matter eos ad laminam conectere non potest. Da ancorsm laminae in editore.',
 };
