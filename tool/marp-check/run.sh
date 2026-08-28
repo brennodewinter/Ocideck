@@ -151,8 +151,78 @@ cp -R "$WORK/proj" "$WORK/with spaces"
 assert_contains "$WORK/with spaces/out.html" 'section\.split' \
   "project path with spaces must still load the theme"
 
+# --- F. directive list stays in sync with the pinned Marp (#1817) -------------
+# kMarpitDirectiveNames in lib/services/marp_source_preservation.dart is a
+# hand-maintained list of every Marpit/Marp-Core/Marp-CLI directive name. If
+# Marp adds a directive and we don't, OciDeck silently drops it on save. This
+# gate extracts the real directive names from the *pinned* packages in
+# node_modules and fails on any mismatch — in either direction.
+marp_directives="$(cd "$HERE" && node -e '
+    const fs = require("fs");
+    const path = require("path");
+
+    // 1. Marpit built-in directives (globals + locals).
+    const d = require("@marp-team/marpit/lib/markdown/directives/directives");
+    const names = new Set([...Object.keys(d.globals), ...Object.keys(d.locals)]);
+
+    // 2. marp-core custom directives (math, size — non-enumerable, set via
+    //    Object.defineProperty during construction, so render first).
+    const Marp = require("@marp-team/marp-core/lib/marp.js").default;
+    const marp = new Marp();
+    marp.render("<!-- paginate: true -->\n\n# x\n");
+    for (const scope of ["global", "local"])
+      for (const k of Object.getOwnPropertyNames(marp.customDirectives[scope]))
+        if (k !== "length" && k !== "prototype")
+          names.add(k);
+
+    // 3. Marp CLI custom directives (e.g. transition — registered dynamically
+    //    in the CLI engine, not in marp-core). Grep the bundled source.
+    const cliDir = path.dirname(require.resolve("@marp-team/marp-cli/package.json"));
+    for (const f of fs.readdirSync(cliDir + "/lib")) {
+      if (!f.endsWith(".js") || f.includes(".map")) continue;
+      const src = fs.readFileSync(cliDir + "/lib/" + f, "utf8");
+      const re = /customDirectives\.(?:global|local)\.(\w+)\s*=/g;
+      let m;
+      while ((m = re.exec(src)) !== null) names.add(m[1]);
+    }
+
+    // 4. "marp" is the CLI meta-directive that enables the Marpit engine. It is
+    //    not in any directive list — it is recognised at the CLI level.
+    names.add("marp");
+
+    console.log([...names].sort().join("\n"));
+  ' 2>/dev/null
+)"
+if [ -z "$marp_directives" ]; then
+  echo "marp-check: FAIL — could not extract directive names from pinned Marp" >&2
+  fail=1
+else
+  # Extract kMarpitDirectiveNames from the Dart source — only the quoted
+  # strings inside the set literal, skipping comment lines.
+  ocideck_directives="$(
+    sed -n '/const kMarpitDirectiveNames/,/^};/p' "$REPO/lib/services/marp_source_preservation.dart" |
+      grep -v '^\s*//' |
+      grep -o "'[A-Za-z][A-Za-z0-9_-]*'" | tr -d "'" | sort -u
+  )"
+  # Compare both directions.
+  only_marp="$(comm -23 <(echo "$marp_directives") <(echo "$ocideck_directives"))"
+  only_us="$(comm -13 <(echo "$marp_directives") <(echo "$ocideck_directives"))"
+  if [ -n "$only_marp" ]; then
+    echo "marp-check: FAIL — pinned Marp knows directives OciDeck does not:" >&2
+    echo "$only_marp" | sed 's/^/  /' >&2
+    echo "  Add them to kMarpitDirectiveNames in lib/services/marp_source_preservation.dart" >&2
+    fail=1
+  fi
+  if [ -n "$only_us" ]; then
+    echo "marp-check: FAIL — kMarpitDirectiveNames has directives the pinned Marp does not know:" >&2
+    echo "$only_us" | sed 's/^/  /' >&2
+    echo "  Remove them, or bump the pinned Marp version in tool/marp-check/package.json" >&2
+    fail=1
+  fi
+fi
+
 if [ "$fail" = 0 ]; then
-  echo "marp-check: PASS — plain 'marp deck.md' loads the OciDeck theme; split layout survives; move + spaces work; default invocation documented."
+  echo "marp-check: PASS — theme loads, split survives, move + spaces work, default invocation documented, directive list in sync with pinned Marp."
   exit 0
 fi
 exit 1

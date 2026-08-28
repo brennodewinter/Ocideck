@@ -76,12 +76,14 @@ bool requiresWholeMarpBlockPreservation(String block) {
 /// Toch is dit de goede kant van de afweging. Wat de brede toets kocht was
 /// toekomstvastheid voor een zeldzame gebeurtenis (Marpit heeft in jaren
 /// nauwelijks richtlijnen toegevoegd); wat ze kostte was een dagelijkse,
-/// stille: élke notitie van de vorm `Woord:` sloopte haar dia. Van gedachten
-/// veranderen we zodra dit aan een poort hangt: `make check-marp` (#1804)
-/// draait de échte, gepinde Marp CLI en is de plek om deze lijst tegen die
-/// versie te toetsen. De structurele oplossing is de doorgeeflus van #1810 —
-/// een onbekende richtlijn apart zetten en onveranderd terugschrijven — want
-/// die maakt bewaren-of-niet een niet-vraag.
+/// stille: élke notitie van de vorm `Woord:` sloopte haar dia. Sinds #1817
+/// hangt deze lijst aan een poort: sectie F van `tool/marp-check/run.sh`
+/// extraheert de richtlijnnamen uit de gepinde Marp CLI en faalt bij elke
+/// mismatch — in beide richtingen. Bij een pin-bump die een nieuwe
+/// richtlijn toevoegt, roodt de poort en komt de naam hier bij. De
+/// structurele oplossing is de doorgeeflus van #1810 — een onbekende
+/// richtlijn apart zetten en onveranderd terugschrijven — want die maakt
+/// bewaren-of-niet een niet-vraag.
 const kMarpitDirectiveNames = <String>{
   // Globaal.
   'marp',
