@@ -1987,6 +1987,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: gedeelde geometrie (#1825).** De Flutter-vrije
+  `ImageViewportGeometry` uit §4.1 van het ontwerp: neemt intrinsieke
+  afbeeldingsgrootte, slot, zoom en focal point en geeft het geschilderde
+  afbeeldingsrechterhoek plus gemapte callout-targets. Cover (ze == 0) en zoom
+  (ze > 0) zijn twee verschillende operaties die niet commuteren — cover
+  verplaatst de afbeelding via het focal point, zoom verplaatst de box en
+  centreert de afbeelding erin. Elke surface clamp zoom identiek naar 0..400.
+
+  De vector table dekt 486 gevallen (3 afbeeldingsformaten × 3 slotbreedtes ×
+  6 zoom-inputs × 9 focal-paren), elk met 8 punt-targets en één regio. De
+  pure Dart-implementatie wordt getest tegen een onafhankelijke berekening van
+  §4.1, plus de twee asymmetrieën die makkelijk fout gaan.
+
 - **Image callouts: datamodel, formaat en verliesvrije samenwerking (#1824).**
   De eerste stap van het ontwerp in `docs/design/IMAGE_CALLOUTS.md` (rev 4):
   een getypt slidemodel (`CalloutTarget` als punt of rechthoek, `ImageCallout`,

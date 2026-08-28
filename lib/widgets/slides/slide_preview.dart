@@ -77,6 +77,7 @@ export '../../services/split_run.dart'
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
+export '../../services/image_viewport_geometry.dart' show ImageViewportGeometry;
 import '../../utils/mem_asset_blob.dart';
 import '../../utils/marp_emoji.dart';
 import '../../utils/marp_style_values.dart';
