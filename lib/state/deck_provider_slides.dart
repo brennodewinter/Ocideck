@@ -277,7 +277,7 @@ extension DeckNotifierSlides on DeckNotifier {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
-    slides[index] = updated;
+    slides[index] = _withCalloutAnchor(updated, deck.slides, index);
     // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
     // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
     // bewerking op een ándere slide (zelfde index) niet meecoalescen.
@@ -377,4 +377,25 @@ extension DeckNotifierSlides on DeckNotifier {
     }
     return total;
   }
+}
+
+/// Een dia die beeldverwijzingen draagt, draagt een anker. Het
+/// front-matter-blok is gesleuteld op dat anker (IMAGE_CALLOUTS.md §2.2);
+/// zonder anker belandt het onder een lege sleutel en is bij het heropenen
+/// niet meer aan een dia te koppelen — de verwijzingen zijn dan weg. De
+/// gebruiker ziet het anker nooit, dus het wordt hier toegekend en niet
+/// gevraagd.
+///
+/// Hier, en niet in de editor: alleen op deze plek is het hele deck bekend,
+/// en een anker moet uniek zijn. Twee naamloze dia's zouden anders allebei
+/// `dia` krijgen en elkaars blok overschrijven.
+Slide _withCalloutAnchor(Slide updated, List<Slide> slides, int index) {
+  if (updated.callouts.isEmpty || updated.anchor.isNotEmpty) return updated;
+  final taken = <String>{
+    for (var i = 0; i < slides.length; i++)
+      if (i != index && slides[i].anchor.isNotEmpty) slides[i].anchor,
+  };
+  return updated.copyWith(
+    anchor: uniqueAnchor(slugifyAnchor(updated.title), taken),
+  );
 }

@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/document_signature.dart';
@@ -135,6 +136,66 @@ void main() {
     // Now only one remains; removing again is a no-op.
     n.removeSlide(0);
     expect(n.state.deck!.slides, hasLength(1));
+  });
+
+  test('een dia met verwijzingen krijgt bij updateSlide een anker', () {
+    // Het front-matter-blok van beeldverwijzingen is gesleuteld op het
+    // dia-anker. Zonder anker belandt het onder een lege sleutel en is het bij
+    // heropenen aan geen enkele dia te koppelen: de verwijzingen zijn dan weg.
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bulletsImage, afterIndex: 0);
+    expect(n.state.deck!.slides[1].anchor, isEmpty);
+
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(
+        title: 'Onderdelen van de pomp',
+        bullets: const ['De regelaar zit hier (A)'],
+        callouts: const [
+          ImageCallout(
+            reference: 'A',
+            targets: [CalloutPoint(0.4, 0.2)],
+            description: 'de regelaar',
+          ),
+        ],
+      ),
+    );
+
+    expect(n.state.deck!.slides[1].anchor, 'onderdelen-van-de-pomp');
+  });
+
+  test('twee naamloze dia\'s met verwijzingen krijgen elk een eigen anker', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bulletsImage, afterIndex: 0);
+    n.addSlide(SlideType.bulletsImage, afterIndex: 1);
+
+    const callout = ImageCallout(
+      reference: 'A',
+      targets: [CalloutPoint(0.4, 0.2)],
+    );
+    for (final index in [1, 2]) {
+      n.updateSlide(
+        index,
+        n.state.deck!.slides[index].copyWith(
+          title: '',
+          bullets: const ['Punt (A)'],
+          callouts: const [callout],
+        ),
+      );
+    }
+
+    final eerste = n.state.deck!.slides[1].anchor;
+    final tweede = n.state.deck!.slides[2].anchor;
+    expect(eerste, isNotEmpty);
+    expect(tweede, isNotEmpty);
+    expect(tweede, isNot(eerste));
+  });
+
+  test('een dia zonder verwijzingen krijgt géén anker opgedrongen', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(title: 'Gewone dia'));
+    expect(n.state.deck!.slides[1].anchor, isEmpty);
   });
 
   test('duplicateSlide inserts a copy with a fresh id', () {

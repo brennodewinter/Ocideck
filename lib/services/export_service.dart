@@ -235,42 +235,19 @@ class ExportService {
         '${docMeta.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
-      final Uint8List bytes;
-      switch (format) {
-        case ExportFormat.pdf:
-          bytes = await _buildPdf(
-            images,
-            metadata: docMeta,
-            fallbackTitle: fallbackTitle,
-            compress: compress,
-          );
-        case ExportFormat.pptx:
-          bytes = await _buildPptx(
-            images,
-            metadata: docMeta,
-            fallbackTitle: fallbackTitle,
-            audience: audience,
-          );
-        case ExportFormat.odp:
-          bytes = await _buildOdp(
-            images,
-            metadata: docMeta,
-            fallbackTitle: fallbackTitle,
-            audience: audience,
-          );
-        case ExportFormat.html:
-          bytes = await _buildHtml(
-            markdown!,
-            deckPath: deckPath,
-            themeProfile: themeProfile,
-            cockpitColorScheme: cockpitColorScheme,
-            metadata: docMeta,
-            fallbackTitle: fallbackTitle,
-            interfaceLanguageCode: interfaceLanguageCode,
-          );
-        case ExportFormat.latex:
-          bytes = utf8.encode(_buildLatex(audience!, metadata: docMeta));
-      }
+      final bytes = await _encode(
+        format,
+        images,
+        audience: audience,
+        markdown: markdown,
+        deckPath: deckPath,
+        docMeta: docMeta,
+        fallbackTitle: fallbackTitle,
+        themeProfile: themeProfile,
+        cockpitColorScheme: cockpitColorScheme,
+        interfaceLanguageCode: interfaceLanguageCode,
+        compress: compress,
+      );
       if (kIsWeb) {
         // Web: geen bestandssysteem — file_picker maakt van de bytes een
         // browser-download (Blob + anker). De bestandsnaam is het resultaat.
@@ -312,13 +289,6 @@ class ExportService {
   /// worden op relatief pad gereferentieerd — LaTeX kent geen data-URI-
   /// inlining (ponytail: ceiling is single-file; upgrade path is een zip-bundel
   /// met .tex + images).
-  String _buildLatex(
-    ExportBundle audience, {
-    required ExportDocumentMetadata metadata,
-  }) {
-    final body = buildBeamerBody(audience.audience.deck);
-    return '${beamerPreamble(metadata)}\n$body\n$beamerPostamble\n';
-  }
 
   /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de
   /// bouwer: de projectmap is de map van het deck, en die begrenzing hoort bij
