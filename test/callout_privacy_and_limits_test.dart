@@ -19,6 +19,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart';
 
@@ -67,6 +69,65 @@ void main() {
         isTrue,
         reason: 'Callout descriptions must appear as scannable fragments.',
       );
+    });
+  });
+
+  group('callout privacy — redigeren bereikt de beschrijving', () {
+    // Scannen zonder redigeren is een melding die de gebruiker niet kán
+    // opvolgen: OciWacht meldt de bevinding, de gebruiker zet de dia op
+    // `redact`, en de beschrijving reist onverkort mee naar élk oppervlak dat
+    // hem draagt — het `.md`, de HTML-export, TikZ, en sinds de alt-tekstsleuf
+    // (§12.2) ook de PPTX- en ODP-metadata, waar niemand hem ziet staan.
+    Deck deckMetBeschrijving(PrivacyDisposition stand) => Deck(
+      title: 'deck',
+      slides: [
+        Slide.create(SlideType.bulletsImage).copyWith(
+          anchor: 's1',
+          privacy: stand,
+          bullets: const ['bullet (A)'],
+          callouts: const [
+            ImageCallout(
+              reference: 'A',
+              targets: [CalloutPoint(0.4, 0.2)],
+              description: 'vraag het jan.jansen@ziggo.nl',
+            ),
+          ],
+        ),
+      ],
+    );
+
+    test('dia op redact: het adres verdwijnt uit de beschrijving', () {
+      final projected = PrivacyProjection.forAudience(
+        deckMetBeschrijving(PrivacyDisposition.redact),
+      );
+      final description =
+          projected.deck.slides.first.callouts.first.description;
+      expect(description, isNot(contains('jan.jansen@ziggo.nl')));
+      expect(
+        description,
+        isNot('vraag het jan.jansen@ziggo.nl'),
+        reason: 'de beschrijving moet daadwerkelijk zijn aangepast',
+      );
+    });
+
+    test('dia zonder redact-stand: de beschrijving blijft ongemoeid', () {
+      final projected = PrivacyProjection.forAudience(
+        deckMetBeschrijving(PrivacyDisposition.warn),
+      );
+      expect(
+        projected.deck.slides.first.callouts.first.description,
+        'vraag het jan.jansen@ziggo.nl',
+      );
+    });
+
+    test('de geometrie blijft na redactie staan', () {
+      final projected = PrivacyProjection.forAudience(
+        deckMetBeschrijving(PrivacyDisposition.redact),
+      );
+      final callout = projected.deck.slides.first.callouts.first;
+      expect(callout.reference, 'A');
+      expect(callout.targets, hasLength(1));
+      expect((callout.targets.first as CalloutPoint).x, 0.4);
     });
   });
 

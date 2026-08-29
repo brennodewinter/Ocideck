@@ -283,6 +283,13 @@ in Dutch, and it keeps growing on `main` between releases.
   altijd groen stonden — de markeringen renderden er nooit — toetsen nu het
   echte beeld.
 
+  Onderweg kwam er een privacylek uit: OciWacht scánde de beschrijving van een
+  beeldverwijzing wel, maar de projectie redigeerde hem niet. Wie een bevinding
+  op zo'n beschrijving kreeg en de dia op *redigeren* zette, verstuurde de tekst
+  alsnog — in het `.md`, de HTML-export en de TikZ-notities, en met de nieuwe
+  alt-tekstsleuf op een plek die niemand op het beeld ziet staan. De projectie
+  redigeert hem nu; de geometrie blijft staan.
+
 - feat(ci): elke platformbuild gaat nu vroeger af dan de releaseketen. Geen
   poort bouwde een desktop-app — `make check` en de forge-poorten draaien
   `flutter test` — dus een wijziging die de *build* brak, kwam pas bij de tag

@@ -29,6 +29,7 @@
 // oorspronkelijke markdown. Redactie geldt voor wat je *toont en exporteert*.
 
 import '../../models/deck.dart';
+import '../../models/image_callout.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/settings.dart' show ThemeProfile;
@@ -389,7 +390,28 @@ class PrivacyProjection {
         footer: field('marpFooter', slide.marpStyle.footer),
       );
     }
+    // De beschrijving van een beeldverwijzing is gewone scanbare inhoud (§8) en
+    // hoort dus ook geredigeerd te worden. Zonder deze slag meldde OciWacht een
+    // bevinding die de gebruiker met "redigeren" niet kón oplossen: de tekst
+    // reisde onverkort mee naar het `.md`, de HTML-export, TikZ en de
+    // alt-tekstsleuf van PPTX/ODP — en die laatste staat nergens op het beeld,
+    // dus niemand zou het gezien hebben. De geometrie blijft staan; alleen de
+    // prose gaat door de redactie.
+    final projectedCallouts = [
+      for (var i = 0; i < slide.callouts.length; i++)
+        ImageCallout(
+          reference: slide.callouts[i].reference,
+          targets: slide.callouts[i].targets,
+          description: field(
+            'calloutDescription',
+            slide.callouts[i].description,
+            i,
+          ),
+        ),
+    ];
+
     final projected = slide.copyWith(
+      callouts: projectedCallouts,
       title: field('title', slide.title),
       subtitle: field('subtitle', slide.subtitle),
       columnTitle1: field('columnTitle1', slide.columnTitle1),
