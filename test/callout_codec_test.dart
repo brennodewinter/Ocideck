@@ -11,6 +11,29 @@ void main() {
       expect(result.blocks, isEmpty);
     });
 
+    test('indented ocideck_callouts: key is ignored (not a top-level key)', () {
+      // An indented `ocideck_callouts:` is a continuation line of another
+      // block, not the top-level key. The parser must skip it.
+      final result = parseCalloutBlock([
+        'style: |',
+        '  ocideck_callouts:',
+        '    A: point 0.4 0.2 | desc',
+      ]);
+      expect(result.present, isFalse);
+    });
+
+    test('single-quoted description has quotes stripped', () {
+      final result = parseCalloutBlock([
+        'ocideck_callouts:',
+        '  s1:',
+        "    A: point 0.4 0.2 | 'quoted desc'",
+      ]);
+      expect(
+        result.blocks.single.typed!.callouts.single.description,
+        'quoted desc',
+      );
+    });
+
     test('parses a single anchor with one point callout', () {
       final result = parseCalloutBlock([
         'marp: true',

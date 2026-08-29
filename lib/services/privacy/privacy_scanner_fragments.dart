@@ -159,6 +159,18 @@ extension PrivacyScannerFragments on PrivacyScanner {
     yield (field: 'imagePath2', index: 0, text: slide.imagePath2, context: '');
     yield (field: 'videoPath', index: 0, text: slide.videoPath, context: '');
     yield (field: 'audioPath', index: 0, text: slide.audioPath, context: '');
+    // Callout descriptions are ordinary scannable content (IMAGE_CALLOUTS.md
+    // §8): an email or phone number in a description is a privacy finding,
+    // just as it would be in a bullet. Geometry is excluded — the coordinates
+    // are 3-decimal image-space values that the geo rule cannot flag.
+    for (var i = 0; i < slide.callouts.length; i++) {
+      yield (
+        field: 'calloutDescription',
+        index: i,
+        text: slide.callouts[i].description,
+        context: '',
+      );
+    }
     for (var i = 0; i < slide.bullets.length; i++) {
       yield (field: 'bullets', index: i, text: slide.bullets[i], context: '');
     }

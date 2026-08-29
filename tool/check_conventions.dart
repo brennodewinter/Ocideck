@@ -434,7 +434,10 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
-  'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
+  'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1616,
+  // +12 (#1845): calloutDescription fragments — descriptions are scannable
+  // content per IMAGE_CALLOUTS.md §8; the privacy scanner now yields one
+  // fragment per callout description.
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
   // Verlaagd van 1449 naar 1447, en van 1447 naar 1439: de exportfabriek is

@@ -102,9 +102,9 @@ CalloutBlockParseResult parseCalloutBlock(List<String> sourceLines) {
   int? keyIndex;
   for (var i = 0; i < sourceLines.length; i++) {
     final line = sourceLines[i];
+    // A line that starts with `ocideck_callouts:` is already at column 0 —
+    // an indented line would start with whitespace, not the key.
     if (!line.startsWith('$kCalloutsFrontMatterKey:')) continue;
-    // Must be at column 0 (not indented).
-    if (line.startsWith(' ')) continue;
     keyIndex = i;
     break;
   }
