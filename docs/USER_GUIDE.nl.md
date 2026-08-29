@@ -874,6 +874,30 @@ nummer, en tellen niet mee in de lijst. Ze werken hetzelfde op gewone, genummerd
 en checklist-lijsten en in tweekoloms- en opsomming-met-afbeelding-layouts, en ze
 reizen met het deck mee in de `.md` (zie FILE_FORMAT § Bullets).
 
+**Afbeeldingsverwijzingen.** Op een opsomming-met-afbeelding-slide kun je elke
+opsommingsregel koppelen aan een markering op de afbeelding — een pin (genummerde
+stip) of een gebied (omlijnd rechthoek). Open de **Callout**-editor vanuit de
+opsomming-met-afbeelding-editor, klik op een opsommingsregel, en klik dan op de
+afbeelding om het doel te plaatsen. Elke verwijzing krijgt een referentieletter
+(A–Z) die aan het eind van de opsommingsregel verschijnt als `(A)`; de markering
+op de afbeelding draagt dezelfde letter. Een beschrijvingsveld voedt de
+schermlezer.
+
+Drie presentatiemodi zijn beschikbaar: **Pins** (genummerde stippen), **Gebieden**
+(omlijnde rechthoeken met dimming erbuiten), en **Pijlen** (pijlen vanaf een vaste
+rail aan de linkerrand van de afbeelding naar elk doel). In de pijlmodus krijgt
+een punt-doel een pijl naar het punt; een gebiedsdoel krijgt een omlijnde
+rechthoek met de pijl eindigend op zijn linkerrand. De LaTeX/Beamer-export
+degradeert pijlen tot pins plus de tekstuele referentie.
+
+Standaard zijn alle opsommingen en hun markeringen zichtbaar vanaf het moment
+dat de slide verschijnt. Schakel de onthullingsmodus naar **Stap-voor-stap** om
+ze één voor één te onthullen tijdens een presentatie: de slide opent met alleen
+de titel en afbeelding, en elke voorwaartse klik brengt één opsommingsregel plus
+al zijn markeringen in één keer tevoorschijn. Achterwaarts verbergt ze in
+omgekeerde volgorde. Statische exports (PDF, PPTX, HTML, LaTeX) tonen altijd
+alles — de stapstatus is sessie-lokaal.
+
 ### Grote afbeelding
 
 Eén afbeelding vult de slide als achtergrond. Vink **Afbeelding slidevullend**

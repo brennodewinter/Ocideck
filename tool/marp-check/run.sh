@@ -139,6 +139,65 @@ fi
 assert_absent "$WORK/proj/out-default.html" 'section\.split' \
   "default invocation (no config) must NOT carry the split layout — this is the documented limitation"
 
+# --- G. callout overlay is OciDeck's own — Marp CLI must NOT render it -------
+# The `ocideck_callouts:` front-matter block and the `ocideck-callout` /
+# `ocideck-imgslot` CSS classes are OciDeck-specific. Marp CLI passes unknown
+# front matter through but does not render any overlay. This gate verifies
+# that both invocations (with and without config) produce no callout markup.
+build_callout_fixture() {
+  local dir="$1"
+  mkdir -p "$dir/themes" "$dir/images"
+  cp "$THEME_CSS" "$dir/themes/ocideck.css"
+  printf '%s' "$PNG1x1_B64" | base64 -d > "$dir/images/photo.png"
+  cat > "$dir/.marprc.yml" <<'CFG'
+themeSet:
+  - themes/ocideck.css
+CFG
+  cat > "$dir/deck.md" <<'MD'
+---
+marp: true
+theme: ocideck
+paginate: true
+ocideck_format: 2
+ocideck_callouts:
+  s1:
+    A: point 0.402 0.251 | the controller board
+    B: region 0.500 0.200 0.180 0.220 | the print head
+---
+
+<!-- _class: split -->
+
+## Callout overlay check
+
+<div class="split-text">
+
+- First bullet (A)
+- Second bullet (B)
+
+</div>
+
+<div class="split-image">
+
+![](images/photo.png)
+
+</div>
+MD
+}
+build_callout_fixture "$WORK/callouts"
+( cd "$WORK/callouts" && "$MARP" --no-parallel deck.md -o out.html ) >/dev/null 2>&1
+assert_absent "$WORK/callouts/out.html" 'ocideck-callout' \
+  "Marp CLI must NOT render OciDeck callout overlay markers"
+assert_absent "$WORK/callouts/out.html" 'ocideck-imgslot' \
+  "Marp CLI must NOT render OciDeck imgslot structure"
+assert_absent "$WORK/callouts/out.html" 'ocideck-region' \
+  "Marp CLI must NOT render OciDeck region overlays"
+# The raw front-matter block IS passed through by Marp (it's unknown to Marp,
+# so it stays as-is in the HTML source as a comment or is stripped). The key
+# assertion is that no RENDERED overlay markup appears.
+( cd "$WORK/callouts" && "$MARP" --no-parallel deck.md --no-config-file -o out-default.html ) >/dev/null 2>&1
+assert_absent "$WORK/callouts/out-default.html" 'ocideck-callout' \
+  "Marp CLI (no config) must NOT render OciDeck callout overlay markers"
+
 # --- D. moving the project directory does not break theme discovery ----------
 cp -R "$WORK/proj" "$WORK/moved"
 ( cd "$WORK/moved" && "$MARP" --no-parallel deck.md -o out.html ) >/dev/null 2>&1
