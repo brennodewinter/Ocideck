@@ -267,5 +267,33 @@ void main() {
       expect(result, contains('ocideck-callout'));
       expect(result, isNot(contains('ocideck-region')));
     });
+
+    // §7: static exports flatten reveal — every bullet and target exactly once,
+    // regardless of calloutReveal. The HTML export has no step state.
+    test('reveal:steps → static export shows all callouts (flatten)', () {
+      final body = _body(bullets: ['- Eerste punt (A)', '- Tweede punt (B)']);
+      final slide = _slide(
+        callouts: [
+          const ImageCallout(
+            reference: 'A',
+            targets: [CalloutPoint(0.4, 0.3)],
+            description: 'eerste',
+          ),
+          const ImageCallout(
+            reference: 'B',
+            targets: [CalloutPoint(0.6, 0.5)],
+            description: 'tweede',
+          ),
+        ],
+      ).copyWith(calloutReveal: BulletRevealMode.steps);
+      final result = renderImageCallouts(body, slide);
+      // Both callout markers are present (flattened, not stepped).
+      expect(result, contains('ocideck-callout'));
+      expect(result, contains('>A<'));
+      expect(result, contains('>B<'));
+      // Both bullets are present with their descriptions.
+      expect(result, contains('aria-describedby'));
+      expect(result, contains('ocideck-callout-desc'));
+    });
   });
 }
