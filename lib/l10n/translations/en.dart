@@ -838,6 +838,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Stap-voor-stap': 'Step by step',
+  'Punt': 'Point',
+  'markeringen': 'marks',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'One table does not fit the page width, not even at the smallest type size.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

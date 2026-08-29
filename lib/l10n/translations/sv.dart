@@ -1634,6 +1634,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Stap-voor-stap': 'Steg för steg',
+  'Punt': 'Punkt',
+  'markeringen': 'markeringar',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'En tabell får inte plats på sidbredden, inte ens vid minsta grad.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

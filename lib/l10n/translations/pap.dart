@@ -674,6 +674,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Stap-voor-stap': 'Paso pa paso',
+  'Punt': 'Punto',
+  'markeringen': 'markanan',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Un tabel no ta kaba den e hanchura di página, ni ku e lèter di mas chikí.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

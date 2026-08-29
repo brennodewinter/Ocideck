@@ -1987,6 +1987,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: stap-voor-stap onthullen (#1828).** De
+  presentatiemodus kan nu bullets en hun callout-references één voor één
+  onthullen: `reveal: steps` in de front matter, of een SegmentedButton in
+  de callout-editor. Een headless `PresentationStepPlan` (IMAGE_CALLOUTS.md
+  §7) generaliseert de bestaande tijdlijn-stapmodus tot een gedeeld plan
+  voor zowel tijdlijn als callout-reveal. De presentator houdt één
+  sessie-lokale stap-index; het plan vertaalt die naar wat op elk scherm
+  zichtbaar is — presenter, beamer, en (geflatten) statische export.
+
+  Stap 0 toont titel + afbeelding; elke klik onthult één bullet plus al
+  zijn callout-targets atomair (§7). Terug gaat in reverse; een nieuwe dia
+  reset naar stap 0. De schermlezer kondigt elke stap aan ("Punt 2/3,
+  1 markeringen"). Statische export (HTML, LaTeX, PDF/PPTX/ODP) flattent
+  de reveal: alles staat er, want er is geen stap-status.
+
 - **Image callouts: gebiedsmarkeringen (#1827).** De tweede stap in de
   image-references-epic: naast puntmarkeringen kan de auteur nu
   rechthoekige gebieden (regions) slepen op de afbeelding. De

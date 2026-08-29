@@ -41,6 +41,35 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     );
   }
 
+  /// Meld een stap-onthulling aan schermlezers (§12.2): welke bullet zichtbaar
+  /// werd en hoeveel callout-targets ermee kwamen. Voor een tijdlijn-stap meldt
+  /// dit het nieuwe gebeurtenisnummer.
+  void _announceStep() {
+    if (!mounted) return;
+    final slide = _currentSlide;
+    final plan = _planFor(slide);
+    if (plan is TimelineStepPlan) {
+      final n = plan.revealedEventCount(_stepIndex);
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        '${context.l10n.d('Gebeurtenis')} $n/${plan.eventCount}',
+        TextDirection.ltr,
+      );
+    } else if (plan is CalloutRevealStepPlan) {
+      final bulletCount = plan.revealedBulletCount(_stepIndex);
+      final refs = plan.revealedReferences(_stepIndex);
+      final msg = refs.isEmpty
+          ? '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}'
+          : '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}, '
+                '${refs.length} ${context.l10n.d('markeringen')}';
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        msg,
+        TextDirection.ltr,
+      );
+    }
+  }
+
   /// Ga voorwaarts naar [target] en onthoud de dia die je verlaat op de
   /// retrace-stack, zodat "terug" langs de werkelijke route loopt (#1162).
   void _advanceTo(int target) {
@@ -52,7 +81,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _richTextPage = 0;
       // Een andere dia begint weer bij de eerste menucategorie (#1162).
       _menuCategory = 0;
-      _timelineStep = 0;
+      _stepIndex = 0;
     });
     _loadUserNoteIntoController();
     _scheduleAdvance();
@@ -85,11 +114,12 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _setRichTextPage(_richTextPage + 1);
       return;
     }
-    // Een tijdlijn in stapmodus onthult eerst zijn volgende gebeurtenis.
-    if (_timelineHasMoreSteps) {
-      _rebuild(() => _timelineStep++);
+    // Een slide in stapmodus (tijdlijn of callout-reveal) onthult eerst zijn
+    // volgende stap voordat hij naar de volgende dia gaat (§7).
+    if (_planHasMoreSteps) {
+      _rebuild(() => _stepIndex++);
       _syncAudience();
-      _announceSlide();
+      _announceStep();
       return;
     }
     // Een vraag-slide houdt je vast tot er (juist) is geantwoord.
@@ -131,11 +161,12 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _setRichTextPage(_richTextPage - 1);
       return;
     }
-    // Stap terug binnen een tijdlijn voordat we naar de vorige slide gaan.
-    if (_slideUsesTimelineSteps(_currentSlide) && _timelineStep > 0) {
-      _rebuild(() => _timelineStep--);
+    // Stap terug binnen een plan (tijdlijn of callout-reveal) voordat we naar
+    // de vorige slide gaan (§7).
+    if (_planFor(_currentSlide).hasSteps && _stepIndex > 0) {
+      _rebuild(() => _stepIndex--);
       _syncAudience();
-      _announceSlide();
+      _announceStep();
       return;
     }
     // "Terug" volgt de werkelijke route (#1162): pop de dia die we het laatst
@@ -153,7 +184,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _index = target;
       final prevPlan = _richTextPlanFor(widget.slides[_index]);
       _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
-      _timelineStep = 0;
+      _stepIndex = 0;
     });
     _loadUserNoteIntoController();
     _scheduleAdvance();
@@ -169,7 +200,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _richTextPage = 0;
       // Een andere dia begint weer bij de eerste menucategorie (#1162).
       _menuCategory = 0;
-      _timelineStep = 0;
+      _stepIndex = 0;
       _blank = _Blank.none;
       _gridOpen = false;
       _tableEditMode = false;
@@ -198,7 +229,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _richTextPage = 0;
       // Een andere dia begint weer bij de eerste menucategorie (#1162).
       _menuCategory = 0;
-      _timelineStep = 0;
+      _stepIndex = 0;
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;

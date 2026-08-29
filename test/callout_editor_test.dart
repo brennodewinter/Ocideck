@@ -208,4 +208,47 @@ void main() {
     expect(updated.callouts, hasLength(1));
     expect(updated.callouts.first.targets.first, isA<CalloutPoint>());
   });
+
+  testWidgets('reveal mode toggle exists (Alles tonen / Stap-voor-stap)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Alles tonen'), findsOneWidget);
+    expect(find.text('Stap-voor-stap'), findsOneWidget);
+  });
+
+  testWidgets('switching to Stap-voor-stap emits calloutReveal=steps', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Default is BulletRevealMode.all.
+    expect(updated.calloutReveal, BulletRevealMode.all);
+
+    await tester.tap(find.text('Stap-voor-stap'));
+    await tester.pumpAndSettle();
+
+    expect(updated.calloutReveal, BulletRevealMode.steps);
+  });
 }

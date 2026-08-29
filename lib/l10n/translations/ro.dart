@@ -1652,6 +1652,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Stap-voor-stap': 'Pas cu pas',
+  'Punt': 'Punct',
+  'markeringen': 'marcatori',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Un tabel nu încape pe lățimea paginii, nici la cel mai mic corp de literă.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

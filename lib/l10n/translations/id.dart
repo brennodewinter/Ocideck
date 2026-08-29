@@ -1635,6 +1635,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Stap-voor-stap': 'Langkah demi langkah',
+  'Punt': 'Poin',
+  'markeringen': 'penanda',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Satu tabel tidak muat pada lebar halaman, bahkan pada ukuran huruf terkecil.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

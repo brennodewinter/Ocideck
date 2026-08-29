@@ -1636,6 +1636,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Stap-voor-stap': 'Korak za korakom',
+  'Punt': 'Točka',
+  'markeringen': 'oznake',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Ena tabela ne gre na širino strani niti pri najmanjši velikosti pisave.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

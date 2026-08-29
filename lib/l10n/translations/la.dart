@@ -1650,6 +1650,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Stap-voor-stap': 'Gradatim',
+  'Punt': 'Punctum',
+  'markeringen': 'notae',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Una tabula latitudini paginae non convenit, ne minima quidem littera.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

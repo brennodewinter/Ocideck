@@ -149,6 +149,13 @@ class CalloutOverlay extends StatefulWidget {
   final double slotHeight;
   final bool mediaRedacted;
 
+  /// Welke callout-references zichtbaar zijn in de onthullings-stapmodus (§7).
+  /// Null = alles tonen (statische export, editor, niet-stappende presentatie).
+  /// Wanneer non-null, worden alleen callouts getekend wiens reference in deze
+  /// set zit; de rest is afwezig uit de overlay (en dus uit de accessibility
+  /// tree — §12.2).
+  final Set<String>? revealedReferences;
+
   const CalloutOverlay({
     super.key,
     required this.slide,
@@ -157,6 +164,7 @@ class CalloutOverlay extends StatefulWidget {
     required this.slotWidth,
     required this.slotHeight,
     this.mediaRedacted = false,
+    this.revealedReferences,
   });
 
   @override
@@ -233,6 +241,11 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     final regions = <Rect>[]; // holes punched in the dimming layer
 
     for (final callout in callouts) {
+      // Stapmodus-filter (§7): alleen callouts wiens reference onthuld is.
+      if (widget.revealedReferences != null &&
+          !widget.revealedReferences!.contains(callout.reference)) {
+        continue;
+      }
       for (var i = 0; i < callout.targets.length; i++) {
         final target = callout.targets[i];
 

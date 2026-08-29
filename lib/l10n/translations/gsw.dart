@@ -1638,6 +1638,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Stap-voor-stap': 'Schritt für Schritt',
+  'Punt': 'Punkt',
+  'markeringen': 'Markierige',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Ei Tabälle passt nid uf d Sytebreiti, au nid bi dr chlynschte Schrift.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

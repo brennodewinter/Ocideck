@@ -831,6 +831,20 @@ number, and don't count toward the list. They work the same on plain, numbered
 and checklist lists and in two-column and bullets-with-image layouts, and they
 travel with the deck in the `.md` (see FILE_FORMAT § Bullets).
 
+**Image callouts.** On a bullets-with-image slide you can link each bullet to a
+marker on the image — a pin (numbered dot) or a region (outlined rectangle).
+Open the **Callout** editor from the bullets-with-image editor, click a bullet,
+then click the image to place its target. Each callout gets a reference letter
+(A–Z) that appears at the end of the bullet as `(A)`; the marker on the image
+carries the same letter. A description field feeds the screen reader.
+
+By default every bullet and its markers are visible from the moment the slide
+appears. Switch the reveal mode to **Stap-voor-stap** (Step by step) to reveal
+them one click at a time during a presentation: the slide opens with just the
+title and image, and each forward click brings up one bullet plus all of its
+markers at once. Backward hides them in reverse. Static exports (PDF, PPTX,
+HTML, LaTeX) always show everything — the step state is session-only.
+
 ### Large image
 
 A single image fills the slide as a background. Tick **Afbeelding slidevullend**

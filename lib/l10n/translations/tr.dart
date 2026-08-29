@@ -2553,6 +2553,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Stap-voor-stap': 'Adım adım',
+  'Punt': 'Madde',
+  'markeringen': 'işaretler',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Bir tablo, en küçük punto boyutunda bile sayfa genişliğine sığmıyor.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

@@ -1634,6 +1634,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Stap-voor-stap': 'Solis pa solim',
+  'Punt': 'Punkts',
+  'markeringen': 'atzīmes',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Viena tabula neietilpst lappuses platumā pat mazākajā burtu lielumā.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

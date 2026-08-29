@@ -154,32 +154,38 @@ extension _PresenterContent on _FullscreenPresenterState {
     _pushInk();
   }
 
-  // ── Tijdlijn stap-voor-stap ──────────────────────────────────────────────
+  // ── Stap-voor-stap onthullen (headless PresentationStepPlan, §7) ─────────
 
-  /// True wanneer [slide] zijn gebeurtenissen klik-voor-klik onthult.
-  bool _slideUsesTimelineSteps(Slide slide) =>
-      slide.type == SlideType.timeline &&
-      slide.timelineReveal == TimelineReveal.steps;
+  /// Het headless step-plan voor [slide] (IMAGE_CALLOUTS.md §7). Vervangt de
+  /// oude tijdlijn-only `_slideUsesTimelineSteps`-controle: zowel tijdlijn-stappen
+  /// als callout-reveal-stappen rijden op één plan.
+  PresentationStepPlan _planFor(Slide slide) =>
+      PresentationStepPlan.forSlide(slide);
 
-  int _timelineEventCountFor(Slide slide) =>
-      parseTimelineEvents(slide.bullets).length;
-
-  /// Hoeveel gebeurtenissen nu zichtbaar moeten zijn, of null als de slide niet
-  /// in stapmodus staat (dan toont de tijdlijn alles / tekent zichzelf in).
-  /// Stap 0 toont al de eerste gebeurtenis, zodat de slide nooit leeg opent.
-  int? _timelineRevealedFor(Slide slide) {
-    if (!_slideUsesTimelineSteps(slide)) return null;
-    final n = _timelineEventCountFor(slide);
-    if (n <= 0) return 0;
-    return (_timelineStep + 1).clamp(1, n);
+  /// True zolang er nog een volgende stap te onthullen valt op de huidige slide
+  /// (dan houdt een klik je op de slide). Vervangt `_timelineHasMoreSteps`.
+  bool get _planHasMoreSteps {
+    final plan = _planFor(_currentSlide);
+    if (!plan.hasSteps) return false;
+    return _stepIndex < plan.remainingSteps;
   }
 
-  /// True zolang er nog een volgende gebeurtenis te onthullen valt op de huidige
-  /// tijdlijn-slide (dan houdt een klik je op de slide).
-  bool get _timelineHasMoreSteps {
-    final slide = _currentSlide;
-    if (!_slideUsesTimelineSteps(slide)) return false;
-    return _timelineStep < _timelineEventCountFor(slide) - 1;
+  /// Hoeveel tijdlijn-gebeurtenissen nu zichtbaar moeten zijn, of null als de
+  /// slide geen tijdlijn-stapmodus heeft (dan toont de tijdlijn alles). Stap 0
+  /// toont al de eerste gebeurtenis, zodat de slide nooit leeg opent.
+  int? _timelineRevealedFor(Slide slide) {
+    final plan = _planFor(slide);
+    if (plan is! TimelineStepPlan) return null;
+    return plan.revealedEventCount(_stepIndex);
+  }
+
+  /// Hoeveel callout-bullets nu zichtbaar moeten zijn, of null als de slide
+  /// geen callout-reveal-stapmodus heeft (dan toont de slide alles). Stap 0
+  /// toont titel + afbeelding, geen bullets (§7).
+  int? _calloutRevealedBulletCount(Slide slide) {
+    final plan = _planFor(slide);
+    if (plan is! CalloutRevealStepPlan) return null;
+    return plan.revealedBulletCount(_stepIndex);
   }
 
   void _toggleChecklistItem({

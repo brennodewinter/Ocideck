@@ -1613,6 +1613,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Stap-voor-stap': 'Yan yan',
+  'Punt': 'Qogh',
+  'markeringen': 'nugh',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'wa\' pat\'IH \'oH nagh beQ \'ab qaS\'e\'; mach ghItlh \'ach not chuv.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

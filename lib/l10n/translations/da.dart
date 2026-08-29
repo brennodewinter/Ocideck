@@ -1635,6 +1635,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Stap-voor-stap': 'Trin for trin',
+  'Punt': 'Punkt',
+  'markeringen': 'markeringer',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Én tabel passer ikke til sidebredden, heller ikke ved mindste skriftstørrelse.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

@@ -3,6 +3,30 @@
 // the main library file. Top-level preview widgets relocate verbatim.
 part of '../slide_preview.dart';
 
+/// Trailing `(A)` reference at the end of a bullet (§2.1).
+final RegExp _bulletRefSuffix = RegExp(r'\s\(([A-Z])\)$');
+
+/// De callout-references die zichtbaar zijn bij onthullingsstap [revealCount]:
+/// de trailing `(X)` van de eerste [revealCount] niet-lege bullets, gefilterd
+/// tegen de callouts die op de slide bestaan (§7 — een bullet + zijn targets
+/// onthullen atomair).
+Set<String> _revealedCalloutReferences(
+  List<String> allBullets,
+  List<ImageCallout> callouts,
+  int revealCount,
+) {
+  final calloutRefs = callouts.map((c) => c.reference).toSet();
+  final refs = <String>{};
+  for (final bullet in allBullets.take(
+    revealCount.clamp(0, allBullets.length),
+  )) {
+    final match = _bulletRefSuffix.firstMatch(bullet.trimRight());
+    final ref = match?.group(1);
+    if (ref != null && calloutRefs.contains(ref)) refs.add(ref);
+  }
+  return refs;
+}
+
 class _BulletsImagePreview extends StatelessWidget {
   final Slide slide;
   final double w;
@@ -21,6 +45,11 @@ class _BulletsImagePreview extends StatelessWidget {
   /// (see [SlidePreviewWidget.splitRunPosition]).
   final ({int page, int total})? splitRunPosition;
 
+  /// Callout-reveal stapmodus (§7): hoeveel bullets onthuld zijn. Null = alles
+  /// tonen. Wanneer non-null, toont de slide alleen de eerste N bullets en alleen
+  /// de callouts wiens reference-bullet erin zit.
+  final int? calloutRevealedBulletCount;
+
   const _BulletsImagePreview({
     required this.slide,
     required this.w,
@@ -31,6 +60,7 @@ class _BulletsImagePreview extends StatelessWidget {
     this.numberStart = 1,
     this.fitScaleOverride,
     this.splitRunPosition,
+    this.calloutRevealedBulletCount,
   });
 
   @override
@@ -54,9 +84,20 @@ class _BulletsImagePreview extends StatelessWidget {
     final titleSize = w * 0.042;
     final spacing = verticalPad * 0.32;
     final bulletGap = w * 0.005;
-    final bullets = slide.bullets
+    final allBullets = slide.bullets
         .where((b) => b.trimLeft().isNotEmpty)
         .toList();
+    // Callout-reveal stapmodus (§7): toon alleen de eerste N bullets. Null =
+    // alles tonen (statische export, editor, niet-stappende presentatie).
+    final revealCount = calloutRevealedBulletCount;
+    final bullets = revealCount != null
+        ? allBullets.take(revealCount.clamp(0, allBullets.length)).toList()
+        : allBullets;
+    // Welke callout-references zichtbaar zijn: de references van de zichtbare
+    // bullets. Alleen die callouts worden op de overlay getekend.
+    final revealedRefs = revealCount != null
+        ? _revealedCalloutReferences(allBullets, slide.callouts, revealCount)
+        : null;
     final hasTitle = slide.title.isNotEmpty;
     final textPadding = _bulletsPadding(
       w: w,
@@ -100,6 +141,7 @@ class _BulletsImagePreview extends StatelessWidget {
                     slotWidth: imgWidth,
                     slotHeight: w * 9 / 16,
                     mediaRedacted: SlideLinkScope.mediaRedactedOf(context),
+                    revealedReferences: revealedRefs,
                   ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],

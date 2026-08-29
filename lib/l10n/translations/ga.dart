@@ -1665,6 +1665,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Stap-voor-stap': 'Céim ar chéim',
+  'Punt': 'Pointe',
+  'markeringen': 'marcanna',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Ní oireann tábla amháin do leithead an leathanaigh, fiú ag an gcló is lú.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

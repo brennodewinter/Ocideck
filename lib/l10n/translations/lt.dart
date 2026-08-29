@@ -1642,6 +1642,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Stap-voor-stap': 'Žingsnis po žingsnio',
+  'Punt': 'Taškas',
+  'markeringen': 'žymės',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Viena lentelė netelpa į puslapio plotį net ir mažiausiu šriftu.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

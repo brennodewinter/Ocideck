@@ -1629,6 +1629,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Stap-voor-stap': 'Samm-sammult',
+  'Punt': 'Punkt',
+  'markeringen': 'märgid',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Üks tabel ei mahu lehe laiusesse isegi väikseima kirjasuurusega.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

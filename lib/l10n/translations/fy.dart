@@ -675,6 +675,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Stap-voor-stap': 'Stap foar stap',
+  'Punt': 'Punt',
+  'markeringen': 'markeringen',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Ien tabel past net op de bledbreedte, ek net by de lytste letter.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
