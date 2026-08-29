@@ -271,6 +271,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(callouts): de markeringen ontbraken in élke rasterexport (#1847). PDF,
+  PPTX en ODP kregen de dia zónder spelden, gebieden of pijlen — zichtbaar in de
+  app, weg in het bestand, en niets dat erover klaagde. De overlay tekent niets
+  zolang de intrinsieke beeldmaat onbekend is, en die maat kwam altijd via een
+  `setState`: de export laadt de beelden voor en vangt één frame, en dat frame
+  was er al vóór die tweede ronde. Staat het beeld in de cache, dan levert de
+  maat zich nu synchroon af. Nagemeten op een echte export: de spelden staan er.
+
+- fix(callouts): de markering was op een donkere afbeelding niet te zien
+  (#1847). De rand was altijd donker en de vulling het thema-accent; met het
+  uitgerolde profiel (`#003399` op `#111111`) gaf dat 1,5:1 en 1,16:1 tegen
+  zwart, ver onder de 3,5 die deze app zelf hanteert, en in grijswaarden bleef
+  er een zwevende letter over. Er zit nu een witte ring tussen de vulling en de
+  donkere rand — één lichte en één donkere toon, zoals de HTML-export het al
+  deed. Daarnaast een ondergrens op de straal, zodat de markering op de
+  slidestrook een markering blijft in plaats van te verdwijnen.
+
 - fix(a11y): de onthulstap kondigde het verkeerde aan (#1844). "Punt 1/3, 1
   markeringen" — fout meervoud — en het getal telde alle verwijzingen die
   inmiddels stonden in plaats van de markeringen die bij déze stap verschenen.
