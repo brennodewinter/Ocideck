@@ -1642,6 +1642,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'markering': 'značka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Šípky sa krížia na tomto snímku — zvážte piny namiesto šípok pre čitateľnosť.',
   'Pijlen': 'Šípky',

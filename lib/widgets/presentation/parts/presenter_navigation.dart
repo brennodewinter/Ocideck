@@ -57,11 +57,17 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       );
     } else if (plan is CalloutRevealStepPlan) {
       final bulletCount = plan.revealedBulletCount(_stepIndex);
-      final refs = plan.revealedReferences(_stepIndex);
-      final msg = refs.isEmpty
-          ? '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}'
-          : '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}, '
-                '${refs.length} ${context.l10n.d('markeringen')}';
+      // Het aantal markeringen dat bij *deze* stap verscheen — niet het totaal
+      // dat al stond (§12.2). Anders meldt een bullet zonder verwijzing de
+      // markeringen van de vorige stap opnieuw, en telde één verwijzing met
+      // twee targets voor één.
+      final marks = plan.marksAtStep(_stepIndex);
+      final position =
+          '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}';
+      final msg = marks == 0
+          ? position
+          : '$position, $marks '
+                '${marks == 1 ? context.l10n.d('markering') : context.l10n.d('markeringen')}';
       SemanticsService.sendAnnouncement(
         View.of(context),
         msg,

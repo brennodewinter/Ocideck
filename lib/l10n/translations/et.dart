@@ -1629,6 +1629,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'markering': 'märk',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nooled ristuvad sellel slaidil — kaaluge nõelu noolte asemel loetavuse huvides.',
   'Pijlen': 'Nooled',

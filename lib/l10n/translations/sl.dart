@@ -1636,6 +1636,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'markering': 'oznaka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Puščice se križajo na tem diapozitivu — razmisli o pinih namesto puščicah za berljivost.',
   'Pijlen': 'Puščice',

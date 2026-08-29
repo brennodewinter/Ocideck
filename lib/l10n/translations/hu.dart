@@ -1637,6 +1637,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'markering': 'jelölés',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nyilak keresztezik egymást ezen a dián — fontold meg a tűket a nyilak helyett az olvashatóság érdekében.',
   'Pijlen': 'Nyilak',

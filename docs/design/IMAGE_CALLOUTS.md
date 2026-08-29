@@ -838,6 +838,13 @@ excluded from the tree rather than merely transparent, and the step change goes
 through `SemanticsService.sendAnnouncement`, which `presenter_navigation.dart`
 already uses to announce a slide change.
 
+"How many marks came with it" means the marks of the bullet that just appeared,
+counted per *target* — not the references revealed so far. The two differ
+wherever a reference has several targets, and they differ loudly on a bullet
+with no reference at all: counting the running total there announces marks on a
+step where nothing appeared. A bullet that brings no mark says only its
+position.
+
 The marker's *visible* reference letter is excluded from the tree. It is
 already the first word of the composed name, and leaving it in made a screen
 reader say it twice — "B, the inlet" and then "B".

@@ -1663,6 +1663,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'markering': 'marcador',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Setas se cruzam neste slide — considere pinos em vez de setas para legibilidade.',
   'Pijlen': 'Setas',

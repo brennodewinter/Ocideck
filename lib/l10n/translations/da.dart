@@ -1635,6 +1635,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'markering': 'markering',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pile krydser hinanden på dette dias — overvej pins i stedet for pile for læsbarhed.',
   'Pijlen': 'Pile',

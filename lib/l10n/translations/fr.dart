@@ -675,6 +675,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'markering': 'repère',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Les flèches se croisent sur cette diapositive — envisagez des épingles au lieu de flèches pour la lisibilité.',
   'Pijlen': 'Flèches',

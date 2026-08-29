@@ -1652,6 +1652,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'markering': 'marcator',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Săgețile se încrucișează pe acest slide — luați în considerare ace în loc de săgeți pentru lizibilitate.',
   'Pijlen': 'Săgeți',

@@ -1665,6 +1665,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'markering': 'marc',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Crosann na saigheada a chéile ar an sleamhnán seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',
   'Pijlen': 'Saighead',

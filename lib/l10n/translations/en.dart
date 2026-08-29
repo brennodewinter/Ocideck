@@ -838,6 +838,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'markering': 'mark',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pins instead of arrows for readability.',
   'Pijlen': 'Arrows',

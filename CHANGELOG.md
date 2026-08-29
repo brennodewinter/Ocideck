@@ -271,6 +271,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(a11y): de onthulstap kondigde het verkeerde aan (#1844). "Punt 1/3, 1
+  markeringen" — fout meervoud — en het getal telde alle verwijzingen die
+  inmiddels stonden in plaats van de markeringen die bij déze stap verschenen.
+  Een opsommingsregel zonder verwijzing herhaalde daardoor het totaal van de
+  vorige stap, terwijl er niets bij was gekomen. De melding telt nu targets van
+  de regel die net verscheen, zwijgt over markeringen als er geen bij kwamen, en
+  kent enkelvoud. Onderweg twee vertalingen rechtgezet die het meervoud fout
+  hadden: Fries liet het Nederlandse woord staan, Klingon had "gemeenschap".
+
 - fix(a11y): in pijlmodus noemde de HTML-export elke beeldverwijzing twee keer
   (#1844). De pijllijn en de badge aan het raileinde droegen allebei
   `role="img"` met dezelfde naam, dus een schermlezer las "A, het donkere blok"

@@ -1637,6 +1637,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'markering': 'značka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Šipky se kříží na tomto snímku — zvažte piny místo šipek pro čitelnost.',
   'Pijlen': 'Šipky',

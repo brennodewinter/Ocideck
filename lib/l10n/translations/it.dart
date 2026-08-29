@@ -672,6 +672,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'markering': 'marcatore',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Le frecce si incrociano su questa diapositiva — considera i pin invece delle frecce per la leggibilità.',
   'Pijlen': 'Frecce',
