@@ -18,8 +18,8 @@ import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
+import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
-import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
 import '../../services/privacy/privacy_projection.dart';
@@ -654,7 +654,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int? _lastSentIndex;
   int? _lastSentBlank;
   int? _lastSentRichTextPage;
-  int? _lastSentTimelineStep;
+  int? _lastSentStepIndex;
   int? _lastSentMenuCategory;
 
   /// Monotone teller op 'update'-berichten: method-channel-aanroepen zijn
@@ -674,10 +674,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Pagina binnen een rich-text slide (0-gebaseerd).
   int _richTextPage = 0;
 
-  /// Aantal reeds onthulde extra gebeurtenissen op een tijdlijn-slide in
-  /// stap-voor-stap-modus (0 = alleen de eerste gebeurtenis getoond). Net als
+  /// Sessie-only stap-index voor de headless [PresentationStepPlan]
+  /// (IMAGE_CALLOUTS.md §7). Vervangt het oude tijdlijn-only `_timelineStep`:
+  /// zowel tijdlijn-stappen als callout-reveal-stappen rijden hierop. Net als
   /// [_richTextPage] is dit sessie-only en wordt het naar de beamer gepusht.
-  int _timelineStep = 0;
+  int _stepIndex = 0;
 
   // ── Vraag-slides (sessie-only, niet naar .md) ─────────────────────────────
   /// Live toestand per vraag-slide, gekeyd op [Slide.id]. De presenter is de
@@ -838,7 +839,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (_index == _lastSentIndex &&
         blank == _lastSentBlank &&
         _richTextPage == _lastSentRichTextPage &&
-        _timelineStep == _lastSentTimelineStep &&
+        _stepIndex == _lastSentStepIndex &&
         _menuCategory == _lastSentMenuCategory) {
       return;
     }
@@ -846,7 +847,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _lastSentIndex = _index;
     _lastSentBlank = blank;
     _lastSentRichTextPage = _richTextPage;
-    _lastSentTimelineStep = _timelineStep;
+    _lastSentStepIndex = _stepIndex;
     _lastSentMenuCategory = _menuCategory;
     audienceChannel
         .invokeMethod('update', {
@@ -854,7 +855,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'index': _index,
           'blank': blank,
           'richTextPage': _richTextPage,
-          'timelineStep': _timelineStep,
+          'stepIndex': _stepIndex,
           'menuCategory': _menuCategory,
         })
         .catchError((Object e) {

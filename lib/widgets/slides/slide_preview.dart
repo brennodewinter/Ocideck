@@ -38,6 +38,7 @@ import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
+import '../../models/image_callout.dart';
 import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
 import '../../models/menu.dart';
@@ -400,6 +401,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// de tijdlijn toont alles (en tekent zichzelf in bij [presentationMode]).
   final int? timelineRevealedCount;
 
+  /// Callout-reveal stapmodus (IMAGE_CALLOUTS.md §7): hoeveel bullets tot nu toe
+  /// onthuld zijn (door de presenter aangestuurd). Null = niet in stapmodus →
+  /// de slide toont alles. Alleen van toepassing op bulletsImage met callouts.
+  final int? calloutRevealedBulletCount;
+
   /// First number for this slide's numbered list. 1 restarts; a higher value
   /// continues a numbered list from a previous slide (see [numberedListStartFor]).
   /// Callers with the full deck compute it; standalone previews leave it at 1.
@@ -483,6 +489,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onAnswerSubmit,
     this.onAnswerTextChanged,
     this.timelineRevealedCount,
+    this.calloutRevealedBulletCount,
     this.numberStart = 1,
     this.fitScaleOverride,
     this.splitRunPosition,
@@ -768,6 +775,7 @@ class SlidePreviewWidget extends StatelessWidget {
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
           splitRunPosition: splitRunPosition,
+          calloutRevealedBulletCount: calloutRevealedBulletCount,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(

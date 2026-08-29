@@ -105,6 +105,14 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       _scheduleAdvance();
       return;
     }
+    // Een slide in stapmodus (tijdlijn of callout-reveal) onthult eerst zijn
+    // volgende stap voordat hij automatisch doorschakelt (§7).
+    if (_planHasMoreSteps) {
+      _rebuild(() => _stepIndex++);
+      _syncAudience();
+      _scheduleAdvance();
+      return;
+    }
     // Niet automatisch voorbij een onbeantwoorde vraag schuiven.
     if (_questionBlocksAdvance) return;
     // Auto-play volgt dezelfde sprong-uit als handmatig (#1162), maar vult de
@@ -121,7 +129,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       _richTextPage = 0;
       // Een andere dia begint weer bij de eerste menucategorie (#1162).
       _menuCategory = 0;
-      _timelineStep = 0;
+      _stepIndex = 0;
     });
     _loadUserNoteIntoController();
     _scheduleAdvance();

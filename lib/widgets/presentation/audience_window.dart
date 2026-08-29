@@ -7,8 +7,8 @@ import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
+import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
-import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
 import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
@@ -76,7 +76,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// De categorie die de presentator open heeft op een keuze-menudia (#1162);
   /// dit venster volgt, het kiest niet zelf.
   int _menuCategory = 0;
-  int _timelineStep = 0;
+  int _stepIndex = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
   /// Volgt de kijkstand (zoom + scrollpositie) van een groot mermaid-diagram op
@@ -183,7 +183,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;
           _menuCategory = (m['menuCategory'] as num?)?.toInt() ?? 0;
-          _timelineStep = (m['timelineStep'] as num?)?.toInt() ?? 0;
+          _stepIndex = (m['stepIndex'] as num?)?.toInt() ?? 0;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
           _activeStroke = null; // nor does an in-progress stroke
@@ -316,13 +316,17 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// Reveal count for a timeline in step mode, mirroring the presenter so the
   /// beamer stays in sync; null when the slide isn't a stepping timeline.
   int? _timelineRevealedFor(Slide slide) {
-    if (slide.type != SlideType.timeline ||
-        slide.timelineReveal != TimelineReveal.steps) {
-      return null;
-    }
-    final n = parseTimelineEvents(slide.bullets).length;
-    if (n <= 0) return 0;
-    return (_timelineStep + 1).clamp(1, n);
+    final plan = PresentationStepPlan.forSlide(slide);
+    if (plan is! TimelineStepPlan) return null;
+    return plan.revealedEventCount(_stepIndex);
+  }
+
+  /// Callout bullet reveal count, mirroring the presenter; null when the slide
+  /// isn't in callout-reveal step mode.
+  int? _calloutRevealedBulletCount(Slide slide) {
+    final plan = PresentationStepPlan.forSlide(slide);
+    if (plan is! CalloutRevealStepPlan) return null;
+    return plan.revealedBulletCount(_stepIndex);
   }
 
   /// Cmd+W / Ctrl+W op het beamervenster vraagt de presenter de presentatie af
@@ -431,6 +435,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     menuCategory: _menuCategory,
                     showRichTextPageControls: false,
                     timelineRevealedCount: _timelineRevealedFor(slide),
+                    calloutRevealedBulletCount:
+                        _calloutRevealedBulletCount(slide),
                     tlp: _tlp,
                     organization: _organization,
                     showClassificationWatermark: _showClassificationWatermark,
