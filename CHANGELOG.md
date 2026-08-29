@@ -271,6 +271,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(callouts): een tweede beeldverwijzing wiste de letter van de eerste
+  (#1848). De dialoog rekende bij elke bewerking vanaf de dia zoals die was
+  toen hij openging — hij wordt tussendoor niet opnieuw opgebouwd. Wie twee
+  verwijzingen achter elkaar maakte zonder de dialoog te sluiten, hield er één
+  over: de eerste letter verdween uit de regel, de callout raakte los, en in de
+  dialoog was hij niet meer te bereiken omdat de lijst juist op die letter
+  koppelt. Herstellen maakte het erger — nóg een verwijzing maken verving de
+  volgende letter. De dialoog houdt de regels nu zelf bij.
+
 - fix(callouts): een beeldverwijzing die je in de interface maakte, overleefde
   het opslaan niet (#1848). De editor schreef de zichtbare `(A)` niet in de
   opsommingsregel en de dia kreeg geen anker, dus het front-matter-blok belandde

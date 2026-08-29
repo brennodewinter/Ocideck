@@ -39,6 +39,18 @@ class CalloutEditorDialog extends StatefulWidget {
 
 class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   late List<ImageCallout> _callouts;
+
+  /// De opsommingsregels zoals ze *nu* zijn, inclusief de `(A)` die deze
+  /// dialoog erin schrijft.
+  ///
+  /// Niet `widget.slide.bullets` lezen: de dialoog wordt geopend met de dia van
+  /// dát moment en daarna niet opnieuw opgebouwd. Elke bewerking rekende dus
+  /// vanaf de begintoestand, en de tweede verwijzing overschreef de letter van
+  /// de eerste — die raakte los van haar callout en was in de dialoog niet meer
+  /// te bereiken, want de koppeling loopt via precies die letter. Hier is de
+  /// stand van de dialoog de waarheid, net als bij [_callouts]; de dia buiten
+  /// krijgt hem via [_emit].
+  late List<String> _bullets;
   late CalloutPresentation _presentation;
   late BulletRevealMode _reveal;
   int? _selectedCalloutIndex;
@@ -50,17 +62,18 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   void initState() {
     super.initState();
     _callouts = List.of(widget.slide.callouts);
+    _bullets = List.of(widget.slide.bullets);
     _presentation = widget.slide.calloutPresentation;
     _reveal = widget.slide.calloutReveal;
   }
 
-  void _emit({List<String>? bullets}) {
+  void _emit() {
     widget.onUpdate(
       widget.slide.copyWith(
         callouts: _callouts,
         calloutPresentation: _presentation,
         calloutReveal: _reveal,
-        bullets: bullets,
+        bullets: _bullets,
       ),
     );
   }
@@ -75,25 +88,23 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   /// [filteredIndex] telt in de lijst zónder lege regels — die lijst toont de
   /// dialoog — dus hij wordt hier terugvertaald naar de index in
   /// `slide.bullets`. [reference] `null` haalt de verwijzing er juist af.
-  List<String> _bulletsWithReference(int filteredIndex, String? reference) {
-    final bullets = List.of(widget.slide.bullets);
+  void _setReference(int filteredIndex, String? reference) {
     var seen = -1;
-    for (var i = 0; i < bullets.length; i++) {
-      if (bullets[i].trimLeft().isEmpty) continue;
+    for (var i = 0; i < _bullets.length; i++) {
+      if (_bullets[i].trimLeft().isEmpty) continue;
       seen++;
       if (seen != filteredIndex) continue;
-      final stripped = bullets[i].replaceFirst(RegExp(r'\s\([A-Z]\)\s*$'), '');
-      bullets[i] = reference == null ? stripped : '$stripped ($reference)';
-      break;
+      final stripped = _bullets[i].replaceFirst(RegExp(r'\s\([A-Z]\)\s*$'), '');
+      _bullets[i] = reference == null ? stripped : '$stripped ($reference)';
+      return;
     }
-    return bullets;
   }
 
   /// De index in de lijst zónder lege regels van de bullet die [reference]
   /// draagt, of `null` als geen bullet hem draagt.
   int? _filteredIndexForReference(String reference) {
     var seen = -1;
-    for (final bullet in widget.slide.bullets) {
+    for (final bullet in _bullets) {
       if (bullet.trimLeft().isEmpty) continue;
       seen++;
       if (_calloutLetterForBullet(bullet) == reference) return seen;
@@ -103,9 +114,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
 
   /// Adds a callout to a bullet, assigning the next free reference letter.
   void _addCallout(int bulletIndex) {
-    final bullets = widget.slide.bullets
-        .where((b) => b.trimLeft().isNotEmpty)
-        .toList();
+    final bullets = _bullets.where((b) => b.trimLeft().isNotEmpty).toList();
     if (bulletIndex < 0 || bulletIndex >= bullets.length) return;
 
     final proseLetters = trailingReferenceLetters(bullets);
@@ -121,8 +130,9 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         ImageCallout(reference: ref, targets: [firstTarget], description: ''),
       );
       _selectedCalloutIndex = _callouts.length - 1;
+      _setReference(bulletIndex, ref);
     });
-    _emit(bullets: _bulletsWithReference(bulletIndex, ref));
+    _emit();
   }
 
   void _removeCallout(int index) {
@@ -137,13 +147,10 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         _selectedCalloutIndex = _selectedCalloutIndex! - 1;
       }
     });
-    // De letter gaat mee weg: laat je hem staan, dan leest een volgende opening
-    // hem als een verwijzing die niet bestaat.
-    _emit(
-      bullets: bulletIndex == null
-          ? null
-          : _bulletsWithReference(bulletIndex, null),
-    );
+    // De letter gaat mee weg: laat je hem staan, dan verwijst de zin naar
+    // niets en leest een volgende opening hem als een callout die niet bestaat.
+    if (bulletIndex != null) setState(() => _setReference(bulletIndex, null));
+    _emit();
   }
 
   void _moveTarget(int calloutIndex, int targetIndex, double x, double y) {
@@ -271,9 +278,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final bullets = widget.slide.bullets
-        .where((b) => b.trimLeft().isNotEmpty)
-        .toList();
+    final bullets = _bullets.where((b) => b.trimLeft().isNotEmpty).toList();
 
     return AlertDialog(
       title: Text(l10n.d('Afbeeldingsverwijzingen')),
