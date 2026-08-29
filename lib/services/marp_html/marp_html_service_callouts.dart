@@ -68,107 +68,7 @@ String _renderImgslot(String body, Slide slide) {
   // naturalWidth/Height after load is the upgrade path.
   final slotVars = '--fx:$fx;--fy:$fy;--z:$z;--iw:16;--ih:9';
 
-  // Build callout markers positioned in image-space percentages against the
-  // imgbox. In pin mode a marker sits at the point, or at the region's centre.
-  // In region mode a region target is an outlined rectangle with outside
-  // dimming; a point target is still a pin (§3.1). In arrow mode a horizontal
-  // arrow goes from the left edge (the fixed rail, §5) to the target — at the
-  // point, or on the region's left edge at centre height (§3.1).
-  final markers = StringBuffer();
-  final isRegionMode = slide.calloutPresentation == CalloutPresentation.region;
-  final isArrowMode = slide.calloutPresentation == CalloutPresentation.arrow;
-  for (final callout in slide.callouts) {
-    for (var i = 0; i < callout.targets.length; i++) {
-      final target = callout.targets[i];
-      final name = callout.targets.length > 1
-          ? '${callout.reference}, ${callout.description}, '
-                'target ${i + 1} of ${callout.targets.length}'
-          : '${callout.reference}, ${callout.description}';
-
-      // Arrow mode (§5): horizontal arrow from the fixed rail (left edge) to
-      // the target. Region targets also get an outline; the arrow ends on the
-      // rectangle's left edge at centre height.
-      if (isArrowMode) {
-        if (target is CalloutRegion) {
-          final left = (target.x * 100).toStringAsFixed(2);
-          final top = (target.y * 100).toStringAsFixed(2);
-          final width = (target.w * 100).toStringAsFixed(2);
-          final height = (target.h * 100).toStringAsFixed(2);
-          markers.write(
-            '<div class="ocideck-region" role="img" '
-            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
-            'style="left:$left%;top:$top%;width:$width%;height:$height%">'
-            '<span class="ocideck-region-num">'
-            '${MarpHtmlService._htmlText(callout.reference)}'
-            '</span></div>',
-          );
-          // Arrow to the region's left edge at centre y. De pijl is een lijn
-          // naar een markering die haar naam al draagt; hij krijgt er geen
-          // tweede, anders leest een schermlezer dezelfde verwijzing twee keer
-          // (§12.2).
-          final centerY = ((target.y + target.h / 2) * 100).toStringAsFixed(2);
-          markers.write(
-            '<div class="ocideck-arrow" aria-hidden="true" '
-            'style="left:0%;top:$centerY%;width:$left%"></div>',
-          );
-        } else {
-          final p = target as CalloutPoint;
-          final left = (p.x * 100).toStringAsFixed(2);
-          final top = (p.y * 100).toStringAsFixed(2);
-          // De pijl zelf is decoratie: de badge aan het raileinde draagt de
-          // naam. Gaven beide hem, dan hoorde een schermlezer elke verwijzing
-          // twee keer — dezelfde fout als een markering die haar letter
-          // herhaalt (§12.2).
-          markers.write(
-            '<div class="ocideck-arrow" aria-hidden="true" '
-            'style="left:0%;top:$top%;width:$left%"></div>',
-          );
-          // Reference badge at the rail end.
-          markers.write(
-            '<span class="ocideck-callout" role="img" '
-            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
-            'style="left:0%;top:$top%">'
-            '${MarpHtmlService._htmlText(callout.reference)}'
-            '</span>',
-          );
-        }
-        continue;
-      }
-
-      // Region mode draws a region target as an outlined rectangle; a point
-      // target is never given an invented box (§3.1).
-      if (isRegionMode && target is CalloutRegion) {
-        final left = (target.x * 100).toStringAsFixed(2);
-        final top = (target.y * 100).toStringAsFixed(2);
-        final width = (target.w * 100).toStringAsFixed(2);
-        final height = (target.h * 100).toStringAsFixed(2);
-        markers.write(
-          '<div class="ocideck-region" role="img" '
-          'aria-label="${MarpHtmlService._htmlAttr(name)}" '
-          'style="left:$left%;top:$top%;width:$width%;height:$height%">'
-          '<span class="ocideck-region-num">'
-          '${MarpHtmlService._htmlText(callout.reference)}'
-          '</span></div>',
-        );
-        continue;
-      }
-      final (cx, cy) = target is CalloutPoint
-          ? (target.x, target.y)
-          : (() {
-              final r = target as CalloutRegion;
-              return (r.x + r.w / 2, r.y + r.h / 2);
-            })();
-      final left = (cx * 100).toStringAsFixed(2);
-      final top = (cy * 100).toStringAsFixed(2);
-      markers.write(
-        '<span class="ocideck-callout" role="img" '
-        'aria-label="${MarpHtmlService._htmlAttr(name)}" '
-        'style="left:$left%;top:$top%">'
-        '${MarpHtmlService._htmlText(callout.reference)}'
-        '</span>',
-      );
-    }
-  }
+  final markers = _calloutMarkers(slide);
 
   // Assemble the imgbox: the image plus the markers.
   final imgbox = StringBuffer()
@@ -289,4 +189,114 @@ String _addHiddenCalloutDescriptions(String body, Slide slide) {
 String _calloutDescId(Slide slide, String ref) {
   final anchor = slide.anchor.isNotEmpty ? slide.anchor : 'slide0';
   return 'ocideck-callout-$anchor-$ref';
+}
+
+/// De markeringen voor één dia, als HTML-fragment: per target een pin, een
+/// gebied of een pijl, geplaatst in beeldruimte-percentages tegen de imgbox
+/// (§4.2). Apart van [_renderImgslot] omdat die anders over het
+/// methodeplafond loopt — en omdat dit het enige stuk is dat per
+/// presentatiewijze uiteenloopt.
+String _calloutMarkers(Slide slide) {
+  // Build callout markers positioned in image-space percentages against the
+  // imgbox. In pin mode a marker sits at the point, or at the region's centre.
+  // In region mode a region target is an outlined rectangle with outside
+  // dimming; a point target is still a pin (§3.1). In arrow mode a horizontal
+  // arrow goes from the left edge (the fixed rail, §5) to the target — at the
+  // point, or on the region's left edge at centre height (§3.1).
+  final markers = StringBuffer();
+  final isRegionMode = slide.calloutPresentation == CalloutPresentation.region;
+  final isArrowMode = slide.calloutPresentation == CalloutPresentation.arrow;
+  for (final callout in slide.callouts) {
+    for (var i = 0; i < callout.targets.length; i++) {
+      final target = callout.targets[i];
+      final name = callout.targets.length > 1
+          ? '${callout.reference}, ${callout.description}, '
+                'target ${i + 1} of ${callout.targets.length}'
+          : '${callout.reference}, ${callout.description}';
+
+      // Arrow mode (§5): horizontal arrow from the fixed rail (left edge) to
+      // the target. Region targets also get an outline; the arrow ends on the
+      // rectangle's left edge at centre height.
+      if (isArrowMode) {
+        if (target is CalloutRegion) {
+          final left = (target.x * 100).toStringAsFixed(2);
+          final top = (target.y * 100).toStringAsFixed(2);
+          final width = (target.w * 100).toStringAsFixed(2);
+          final height = (target.h * 100).toStringAsFixed(2);
+          markers.write(
+            '<div class="ocideck-region" role="img" '
+            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+            'style="left:$left%;top:$top%;width:$width%;height:$height%">'
+            '<span class="ocideck-region-num">'
+            '${MarpHtmlService._htmlText(callout.reference)}'
+            '</span></div>',
+          );
+          // Arrow to the region's left edge at centre y. De pijl is een lijn
+          // naar een markering die haar naam al draagt; hij krijgt er geen
+          // tweede, anders leest een schermlezer dezelfde verwijzing twee keer
+          // (§12.2).
+          final centerY = ((target.y + target.h / 2) * 100).toStringAsFixed(2);
+          markers.write(
+            '<div class="ocideck-arrow" aria-hidden="true" '
+            'style="left:0%;top:$centerY%;width:$left%"></div>',
+          );
+        } else {
+          final p = target as CalloutPoint;
+          final left = (p.x * 100).toStringAsFixed(2);
+          final top = (p.y * 100).toStringAsFixed(2);
+          // De pijl zelf is decoratie: de badge aan het raileinde draagt de
+          // naam. Gaven beide hem, dan hoorde een schermlezer elke verwijzing
+          // twee keer — dezelfde fout als een markering die haar letter
+          // herhaalt (§12.2).
+          markers.write(
+            '<div class="ocideck-arrow" aria-hidden="true" '
+            'style="left:0%;top:$top%;width:$left%"></div>',
+          );
+          // Reference badge at the rail end.
+          markers.write(
+            '<span class="ocideck-callout" role="img" '
+            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+            'style="left:0%;top:$top%">'
+            '${MarpHtmlService._htmlText(callout.reference)}'
+            '</span>',
+          );
+        }
+        continue;
+      }
+
+      // Region mode draws a region target as an outlined rectangle; a point
+      // target is never given an invented box (§3.1).
+      if (isRegionMode && target is CalloutRegion) {
+        final left = (target.x * 100).toStringAsFixed(2);
+        final top = (target.y * 100).toStringAsFixed(2);
+        final width = (target.w * 100).toStringAsFixed(2);
+        final height = (target.h * 100).toStringAsFixed(2);
+        markers.write(
+          '<div class="ocideck-region" role="img" '
+          'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+          'style="left:$left%;top:$top%;width:$width%;height:$height%">'
+          '<span class="ocideck-region-num">'
+          '${MarpHtmlService._htmlText(callout.reference)}'
+          '</span></div>',
+        );
+        continue;
+      }
+      final (cx, cy) = target is CalloutPoint
+          ? (target.x, target.y)
+          : (() {
+              final r = target as CalloutRegion;
+              return (r.x + r.w / 2, r.y + r.h / 2);
+            })();
+      final left = (cx * 100).toStringAsFixed(2);
+      final top = (cy * 100).toStringAsFixed(2);
+      markers.write(
+        '<span class="ocideck-callout" role="img" '
+        'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+        'style="left:$left%;top:$top%">'
+        '${MarpHtmlService._htmlText(callout.reference)}'
+        '</span>',
+      );
+    }
+  }
+  return markers.toString();
 }
