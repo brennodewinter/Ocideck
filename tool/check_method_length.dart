@@ -81,8 +81,9 @@ const Map<String, int> methodLengthBaseline = {
   // valt niet zinvol uit een type→widget-switch te tillen. +1: de
   // onMenuBlockTap-doorgifte voor de klik-om-te-springen. +2: de categorie en
   // zijn terugroep, voor het wisselen tussen groepen blokken.
+  // +1 (#1828): calloutRevealedBulletCount doorgeven aan _BulletsImagePreview.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      160,
+      161,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.

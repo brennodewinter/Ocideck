@@ -243,7 +243,9 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#1162): de import van `services.dart` voor de toetsen van een
   // toetsenbord-bedienbaar menublok. De afhandeling zelf staat in het
   // part-bestand menu_preview_layouts.dart.
-  'lib/widgets/slides/slide_preview.dart': 1044,
+  // +8 (#1828): calloutRevealedBulletCount veld + doc + constructor-param +
+  // doorgeven aan _BulletsImagePreview, en de image_callout import.
+  'lib/widgets/slides/slide_preview.dart': 1052,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
@@ -355,8 +357,11 @@ const Map<String, int> classSizeBaseline = {
   // +26 (#1162): de menucategorie — veld, `_setMenuCategory` (in het part-bestand
   // presenter_content.dart, maar lid van deze State), de beamer-sync en het
   // terugzetten bij een diawissel.
+  // +37 (#1828): PresentationStepPlan-migratie — _stepIndex hernoemd van
+  // _timelineStep, _announceStep voor schermlezer, plan-gebaseerde helpers
+  // in presenter_content/navigation/playback/views.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3424,
+      3461,
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen
