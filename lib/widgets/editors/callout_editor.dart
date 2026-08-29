@@ -54,14 +54,51 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     _reveal = widget.slide.calloutReveal;
   }
 
-  void _emit() {
+  void _emit({List<String>? bullets}) {
     widget.onUpdate(
       widget.slide.copyWith(
         callouts: _callouts,
         calloutPresentation: _presentation,
         calloutReveal: _reveal,
+        bullets: bullets,
       ),
     );
+  }
+
+  /// De zichtbare `(A)` aan het eind van de bullet is de koppelsleutel én de
+  /// terugval (§2.1): de ziende lezer leest hem af, de editor koppelt de
+  /// callout eraan, en een oudere lezer die het front-matter-blok niet kent
+  /// houdt er tenminste nog iets aan over. De editor schreef hem niet, en
+  /// daardoor hoorde een in de interface gemaakte callout bij géén enkele
+  /// bullet: na opslaan en heropenen was hij weg.
+  ///
+  /// [filteredIndex] telt in de lijst zónder lege regels — die lijst toont de
+  /// dialoog — dus hij wordt hier terugvertaald naar de index in
+  /// `slide.bullets`. [reference] `null` haalt de verwijzing er juist af.
+  List<String> _bulletsWithReference(int filteredIndex, String? reference) {
+    final bullets = List.of(widget.slide.bullets);
+    var seen = -1;
+    for (var i = 0; i < bullets.length; i++) {
+      if (bullets[i].trimLeft().isEmpty) continue;
+      seen++;
+      if (seen != filteredIndex) continue;
+      final stripped = bullets[i].replaceFirst(RegExp(r'\s\([A-Z]\)\s*$'), '');
+      bullets[i] = reference == null ? stripped : '$stripped ($reference)';
+      break;
+    }
+    return bullets;
+  }
+
+  /// De index in de lijst zónder lege regels van de bullet die [reference]
+  /// draagt, of `null` als geen bullet hem draagt.
+  int? _filteredIndexForReference(String reference) {
+    var seen = -1;
+    for (final bullet in widget.slide.bullets) {
+      if (bullet.trimLeft().isEmpty) continue;
+      seen++;
+      if (_calloutLetterForBullet(bullet) == reference) return seen;
+    }
+    return null;
   }
 
   /// Adds a callout to a bullet, assigning the next free reference letter.
@@ -85,10 +122,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
       );
       _selectedCalloutIndex = _callouts.length - 1;
     });
-    _emit();
+    _emit(bullets: _bulletsWithReference(bulletIndex, ref));
   }
 
   void _removeCallout(int index) {
+    final reference = _callouts[index].reference;
+    final bulletIndex = _filteredIndexForReference(reference);
     setState(() {
       _callouts.removeAt(index);
       if (_selectedCalloutIndex == index) {
@@ -98,7 +137,13 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         _selectedCalloutIndex = _selectedCalloutIndex! - 1;
       }
     });
-    _emit();
+    // De letter gaat mee weg: laat je hem staan, dan leest een volgende opening
+    // hem als een verwijzing die niet bestaat.
+    _emit(
+      bullets: bulletIndex == null
+          ? null
+          : _bulletsWithReference(bulletIndex, null),
+    );
   }
 
   void _moveTarget(int calloutIndex, int targetIndex, double x, double y) {

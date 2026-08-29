@@ -271,6 +271,24 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(callouts): een beeldverwijzing die je in de interface maakte, overleefde
+  het opslaan niet (#1848). De editor schreef de zichtbare `(A)` niet in de
+  opsommingsregel en de dia kreeg geen anker, dus het front-matter-blok belandde
+  onder een lege sleutel en hoorde bij het heropenen bij geen enkele dia: alles
+  wat je in de dialoog had gedaan was weg. Daardoor bleef ook bij élke regel
+  "Toevoegen" staan — de koppeling regel↔verwijzing loopt via precies die
+  letter — en kon je er stilletjes een tweede verwijzing bij zetten waar het
+  formaat er één toestaat. De letter wordt nu geschreven (en bij verwijderen
+  weer weggehaald), en een dia met verwijzingen krijgt een uniek anker toegekend
+  op de plek waar het hele deck bekend is. Handgeschreven decks werkten al; dit
+  brengt de interface op gelijke hoogte.
+
+- fix(export): de LaTeX/Beamer-export compileerde niet zodra er een
+  beeldverwijzing op stond (#1848). De TikZ-code tekent met
+  `fill=ocideckTableAccent`, maar die kleur werd alleen in de article-preamble
+  gedefinieerd; xcolor gaf "Undefined color" en het hele document weigerde. De
+  beamer-preamble definieert hem nu, met de accentkleur van het deck.
+
 - fix(callouts): de markeringen ontbraken in élke rasterexport (#1847). PDF,
   PPTX en ODP kregen de dia zónder spelden, gebieden of pijlen — zichtbaar in de
   app, weg in het bestand, en niets dat erover klaagde. De overlay tekent niets

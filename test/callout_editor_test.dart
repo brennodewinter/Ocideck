@@ -116,6 +116,76 @@ void main() {
     // The callout is emitted via onUpdate with reference 'A'.
     expect(updated.callouts, hasLength(1));
     expect(updated.callouts.first.reference, 'A');
+    // En de zichtbare koppelsleutel staat in de bullet. Zonder die letter
+    // hoort de callout bij niets: na opslaan en heropenen is hij weg, want de
+    // koppeling bullet↔verwijzing loopt via precies deze `(A)` (§2.1).
+    expect(updated.bullets, ['Eerste punt (A)']);
+  });
+
+  testWidgets('een tweede verwijzing landt op de tweede bullet', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt', 'Tweede punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    Widget dialog() => _host(
+      CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s),
+    );
+    await tester.pumpWidget(dialog());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+
+    // De dialoog opnieuw opbouwen met de bijgewerkte dia — zo werkt de editor
+    // ook: elke wijziging gaat door de deckstand heen en komt terug.
+    await tester.pumpWidget(dialog());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+
+    expect(updated.bullets, ['Eerste punt (A)', 'Tweede punt (B)']);
+    expect(updated.callouts.map((c) => c.reference), ['A', 'B']);
+  });
+
+  testWidgets('een verwijzing verwijderen haalt ook de letter weg', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.4, 0.2)],
+          description: 'de klep',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.close).last);
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts, isEmpty);
+    expect(
+      updated.bullets,
+      ['Eerste punt'],
+      reason:
+          'een letter zonder verwijzing leest een volgende opening als een '
+          'callout die niet bestaat',
+    );
   });
 
   testWidgets('close button dismisses the dialog', (tester) async {

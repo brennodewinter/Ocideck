@@ -269,7 +269,13 @@ class ExportService {
             interfaceLanguageCode: interfaceLanguageCode,
           );
         case ExportFormat.latex:
-          bytes = utf8.encode(_buildLatex(audience!, metadata: docMeta));
+          bytes = utf8.encode(
+            _buildLatex(
+              audience!,
+              metadata: docMeta,
+              themeProfile: themeProfile,
+            ),
+          );
       }
       if (kIsWeb) {
         // Web: geen bestandssysteem — file_picker maakt van de bytes een
@@ -315,9 +321,11 @@ class ExportService {
   String _buildLatex(
     ExportBundle audience, {
     required ExportDocumentMetadata metadata,
+    ThemeProfile? themeProfile,
   }) {
     final body = buildBeamerBody(audience.audience.deck);
-    return '${beamerPreamble(metadata)}\n$body\n$beamerPostamble\n';
+    final preamble = beamerPreamble(metadata, themeProfile: themeProfile);
+    return '$preamble\n$body\n$beamerPostamble\n';
   }
 
   /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de

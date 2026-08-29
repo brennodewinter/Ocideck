@@ -259,7 +259,15 @@ const articlePostamble = r'\end{document}';
 /// [meta] levert titel, auteur en taal. [theme] is optioneel — een Beamer-
 /// themanaam (zoals `metropolis` of `default`). De titelpagina wordt
 /// automatisch gegenereerd.
-String beamerPreamble(ExportDocumentMetadata meta, {String? theme}) {
+/// [themeProfile] levert de accentkleur voor de beeldverwijzingen (§5). Zonder
+/// die definitie verwijst de TikZ-code naar `ocideckTableAccent` terwijl xcolor
+/// hem niet kent, en weigert het hele document te compileren — de export ziet
+/// er dan gaaf uit en is onbruikbaar.
+String beamerPreamble(
+  ExportDocumentMetadata meta, {
+  String? theme,
+  ThemeProfile? themeProfile,
+}) {
   final buf = StringBuffer();
   buf.write(
     r'\documentclass[aspectratio=169]{beamer}'
@@ -314,6 +322,13 @@ String beamerPreamble(ExportDocumentMetadata meta, {String? theme}) {
   buf.write(
     r'\usepackage{pgfplots}'
     '\n',
+  );
+  // De accentkleur van de beeldverwijzingen. Beamer deelde deze definitie niet
+  // met de article-preamble, dus verwees de TikZ-code naar een kleur die
+  // nergens bestond.
+  buf.write(
+    '\\definecolor{ocideckTableAccent}{HTML}'
+    '{${_latexHexColor(themeProfile?.accentColor ?? '', '2E7D64')}}\n',
   );
   buf.write(
     r'\pgfplotsset{compat=1.18}'
