@@ -672,6 +672,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Las flechas se cruzan en esta diapositiva — considera pines en lugar de flechas para la legibilidad.',
+  'Pijlen': 'Flechas',
   'Stap-voor-stap': 'Paso a paso',
   'Punt': 'Punto',
   'markeringen': 'marcas',

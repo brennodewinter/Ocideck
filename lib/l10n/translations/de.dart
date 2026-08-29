@@ -675,6 +675,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Pfeile kreuzen sich auf dieser Folie — verwende Pins statt Pfeile für bessere Lesbarkeit.',
+  'Pijlen': 'Pfeile',
   'Stap-voor-stap': 'Schritt für Schritt',
   'Punt': 'Punkt',
   'markeringen': 'Markierungen',

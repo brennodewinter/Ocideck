@@ -838,6 +838,13 @@ then click the image to place its target. Each callout gets a reference letter
 (A–Z) that appears at the end of the bullet as `(A)`; the marker on the image
 carries the same letter. A description field feeds the screen reader.
 
+Three presentation modes are available: **Pins** (numbered dots), **Gebieden**
+(outlined rectangles with dimming outside), and **Pijlen** (arrows from a fixed
+rail at the left edge of the image to each target). In arrow mode, a point
+target gets an arrow to the point; a region target gets an outlined rectangle
+with the arrow ending on its left edge. The LaTeX/Beamer export degrades arrows
+to pins plus the textual reference.
+
 By default every bullet and its markers are visible from the moment the slide
 appears. Switch the reveal mode to **Stap-voor-stap** (Step by step) to reveal
 them one click at a time during a presentation: the slide opens with just the

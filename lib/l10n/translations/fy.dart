@@ -675,6 +675,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Pilen kruise inoar op dizze dia — oerweagje pins ynstee fan pilen foar lêsberens.',
+  'Pijlen': 'Pilen',
   'Stap-voor-stap': 'Stap foar stap',
   'Punt': 'Punt',
   'markeringen': 'markeringen',

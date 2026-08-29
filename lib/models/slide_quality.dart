@@ -86,6 +86,9 @@ enum SlideQualityIssueKind {
   calloutOrphanReference,
   calloutDuplicateReference,
   calloutMissingAnchor,
+  // §5: kruisende pijlen in arrow-modus — een quality finding die pins
+  // suggereert, omdat kruisende pijlen onleesbaar worden.
+  calloutCrossingArrows,
 }
 
 /// Waar binnen een veld een melding precies zit.

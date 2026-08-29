@@ -1642,6 +1642,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Rodyklės kertasi šiame skaidrėje — apsvarstykite kaiščius vietoj rodyklių skaitomumui.',
+  'Pijlen': 'Rodyklės',
   'Stap-voor-stap': 'Žingsnis po žingsnio',
   'Punt': 'Taškas',
   'markeringen': 'žymės',

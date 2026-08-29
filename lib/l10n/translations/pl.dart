@@ -1647,6 +1647,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Strzałki przecinają się na tym slajdzie — rozważ piny zamiast strzałek dla czytelności.',
+  'Pijlen': 'Strzałki',
   'Stap-voor-stap': 'Krok po kroku',
   'Punt': 'Punkt',
   'markeringen': 'znaczniki',

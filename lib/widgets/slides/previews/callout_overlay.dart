@@ -235,10 +235,13 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     // renderer may reduce geometry, never invent it.
     final regionMode =
         widget.slide.calloutPresentation == CalloutPresentation.region;
+    final arrowMode =
+        widget.slide.calloutPresentation == CalloutPresentation.arrow;
 
     final markers = <Widget>[]; // pins (point targets, or pin-mode regions)
     final regionWidgets = <Widget>[]; // outlines + corner badges
     final regions = <Rect>[]; // holes punched in the dimming layer
+    final arrows = <_ArrowSpec>[]; // fixed-rail arrows (§5)
 
     for (final callout in callouts) {
       // Stapmodus-filter (§7): alleen callouts wiens reference onthuld is.
@@ -249,88 +252,269 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
       for (var i = 0; i < callout.targets.length; i++) {
         final target = callout.targets[i];
 
-        if (regionMode && target is CalloutRegion) {
-          final mapped = ImageViewportGeometry.mapTarget(
-            target,
+        if (arrowMode) {
+          _buildArrowTarget(
+            callout: callout,
+            target: target,
+            targetIndex: i,
             painted: painted,
-            slotW: widget.slotWidth,
-            slotH: widget.slotHeight,
+            arrows: arrows,
+            regionWidgets: regionWidgets,
+            accent: accent,
+            edge: edge,
+            textCol: textCol,
+            markerRadius: markerRadius,
           );
-          // Skip clipped regions — they're outside the visible slot.
-          if (mapped.clipped) continue;
-          final rect = Rect.fromLTWH(mapped.x, mapped.y, mapped.w, mapped.h);
-          regions.add(rect);
-          regionWidgets.add(
-            Positioned(
-              left: mapped.x,
-              top: mapped.y,
-              width: mapped.w,
-              height: mapped.h,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: edge, width: markerRadius * 0.4),
-                ),
-              ),
-            ),
-          );
-          // Reference badge tucked into the top-left corner, inside the rect.
-          regionWidgets.add(
-            _CalloutMarker(
-              reference: callout.reference,
-              x: mapped.x + markerRadius,
-              y: mapped.y + markerRadius,
-              markerRadius: markerRadius,
-              accentColor: accent,
-              edgeColor: edge,
-              textColor: textCol,
-              description: callout.description,
-              targetOrdinal: i + 1,
-              targetCount: callout.targets.length,
-            ),
+          continue;
+        }
+
+        if (regionMode && target is CalloutRegion) {
+          _buildRegionTarget(
+            callout: callout,
+            target: target,
+            targetIndex: i,
+            painted: painted,
+            regions: regions,
+            regionWidgets: regionWidgets,
+            accent: accent,
+            edge: edge,
+            textCol: textCol,
+            markerRadius: markerRadius,
           );
           continue;
         }
 
         // Pin mode, or a point target in any mode: marker at the point, or
         // at the region's centre (the rectangle itself is not drawn).
-        double ux, uy;
-        if (target is CalloutPoint) {
-          ux = target.x;
-          uy = target.y;
-        } else {
-          final r = target as CalloutRegion;
-          ux = r.x + r.w / 2;
-          uy = r.y + r.h / 2;
-        }
-        final mapped = ImageViewportGeometry.mapTarget(
-          CalloutPoint(ux, uy),
+        _buildPinTarget(
+          callout: callout,
+          target: target,
+          targetIndex: i,
           painted: painted,
-          slotW: widget.slotWidth,
-          slotH: widget.slotHeight,
-        );
-        // Skip clipped markers — they're outside the visible slot.
-        if (mapped.clipped) continue;
-        markers.add(
-          _CalloutMarker(
-            reference: callout.reference,
-            x: mapped.x,
-            y: mapped.y,
-            markerRadius: markerRadius,
-            accentColor: accent,
-            edgeColor: edge,
-            textColor: textCol,
-            description: callout.description,
-            targetOrdinal: i + 1,
-            targetCount: callout.targets.length,
-          ),
+          markers: markers,
+          accent: accent,
+          edge: edge,
+          textCol: textCol,
+          markerRadius: markerRadius,
         );
       }
     }
 
-    if (markers.isEmpty && regionWidgets.isEmpty) return const SizedBox();
+    if (markers.isEmpty && regionWidgets.isEmpty && arrows.isEmpty) {
+      return const SizedBox();
+    }
 
-    // Region mode: one dimming layer with a hole per region, so the area
-    // outside every region is darkened exactly once (no stacking).
+    return _assembleOverlay(
+      regions: regions,
+      regionWidgets: regionWidgets,
+      markers: markers,
+      arrows: arrows,
+      accent: accent,
+      edge: edge,
+      markerRadius: markerRadius,
+    );
+  }
+
+  /// Builds one arrow-mode target (§5): a horizontal arrow from the fixed
+  /// rail (left edge) to the target. Point targets get an arrow to the
+  /// point; region targets get an outlined rectangle plus an arrow to the
+  /// rectangle's left edge at centre height (§3.1).
+  void _buildArrowTarget({
+    required ImageCallout callout,
+    required CalloutTarget target,
+    required int targetIndex,
+    required GeoRect painted,
+    required List<_ArrowSpec> arrows,
+    required List<Widget> regionWidgets,
+    required Color accent,
+    required Color edge,
+    required Color textCol,
+    required double markerRadius,
+  }) {
+    if (target is CalloutPoint) {
+      final mapped = ImageViewportGeometry.mapTarget(
+        target,
+        painted: painted,
+        slotW: widget.slotWidth,
+        slotH: widget.slotHeight,
+      );
+      if (mapped.clipped) return;
+      arrows.add(
+        _ArrowSpec(
+          railY: mapped.y,
+          endX: mapped.x,
+          endY: mapped.y,
+          reference: callout.reference,
+          accent: accent,
+          edge: edge,
+          textCol: textCol,
+          markerRadius: markerRadius,
+          description: callout.description,
+          targetOrdinal: targetIndex + 1,
+          targetCount: callout.targets.length,
+        ),
+      );
+    } else {
+      final r = target as CalloutRegion;
+      final mapped = ImageViewportGeometry.mapTarget(
+        r,
+        painted: painted,
+        slotW: widget.slotWidth,
+        slotH: widget.slotHeight,
+      );
+      if (mapped.clipped) return;
+      // Region outline (same as region mode, but no dimming).
+      regionWidgets.add(
+        Positioned(
+          left: mapped.x,
+          top: mapped.y,
+          width: mapped.w,
+          height: mapped.h,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: edge, width: markerRadius * 0.4),
+            ),
+          ),
+        ),
+      );
+      // Arrow ends on the left edge of the rect at the centre y
+      // (horizontal line from rail to rect left edge).
+      final centerY = mapped.y + mapped.h / 2;
+      arrows.add(
+        _ArrowSpec(
+          railY: centerY,
+          endX: mapped.x,
+          endY: centerY,
+          reference: callout.reference,
+          accent: accent,
+          edge: edge,
+          textCol: textCol,
+          markerRadius: markerRadius,
+          description: callout.description,
+          targetOrdinal: targetIndex + 1,
+          targetCount: callout.targets.length,
+        ),
+      );
+      // Reference badge in the top-left corner of the region.
+      regionWidgets.add(
+        _CalloutMarker(
+          reference: callout.reference,
+          x: mapped.x + markerRadius,
+          y: mapped.y + markerRadius,
+          markerRadius: markerRadius,
+          accentColor: accent,
+          edgeColor: edge,
+          textColor: textCol,
+          description: callout.description,
+          targetOrdinal: targetIndex + 1,
+          targetCount: callout.targets.length,
+        ),
+      );
+    }
+  }
+
+  /// Region-mode target (§3.1): outlined rectangle with outside dimming
+  /// and the reference badge in its top-left corner.
+  void _buildRegionTarget({
+    required ImageCallout callout,
+    required CalloutRegion target,
+    required int targetIndex,
+    required GeoRect painted,
+    required List<Rect> regions,
+    required List<Widget> regionWidgets,
+    required Color accent,
+    required Color edge,
+    required Color textCol,
+    required double markerRadius,
+  }) {
+    final mapped = ImageViewportGeometry.mapTarget(
+      target,
+      painted: painted,
+      slotW: widget.slotWidth,
+      slotH: widget.slotHeight,
+    );
+    if (mapped.clipped) return;
+    regions.add(Rect.fromLTWH(mapped.x, mapped.y, mapped.w, mapped.h));
+    regionWidgets.add(
+      Positioned(
+        left: mapped.x,
+        top: mapped.y,
+        width: mapped.w,
+        height: mapped.h,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(color: edge, width: markerRadius * 0.4),
+          ),
+        ),
+      ),
+    );
+    regionWidgets.add(
+      _CalloutMarker(
+        reference: callout.reference,
+        x: mapped.x + markerRadius,
+        y: mapped.y + markerRadius,
+        markerRadius: markerRadius,
+        accentColor: accent,
+        edgeColor: edge,
+        textColor: textCol,
+        description: callout.description,
+        targetOrdinal: targetIndex + 1,
+        targetCount: callout.targets.length,
+      ),
+    );
+  }
+
+  /// Pin target (§3.1): marker at the point, or at the region's centre.
+  void _buildPinTarget({
+    required ImageCallout callout,
+    required CalloutTarget target,
+    required int targetIndex,
+    required GeoRect painted,
+    required List<Widget> markers,
+    required Color accent,
+    required Color edge,
+    required Color textCol,
+    required double markerRadius,
+  }) {
+    final (ux, uy) = target is CalloutPoint
+        ? (target.x, target.y)
+        : (() {
+            final r = target as CalloutRegion;
+            return (r.x + r.w / 2, r.y + r.h / 2);
+          })();
+    final mapped = ImageViewportGeometry.mapTarget(
+      CalloutPoint(ux, uy),
+      painted: painted,
+      slotW: widget.slotWidth,
+      slotH: widget.slotHeight,
+    );
+    if (mapped.clipped) return;
+    markers.add(
+      _CalloutMarker(
+        reference: callout.reference,
+        x: mapped.x,
+        y: mapped.y,
+        markerRadius: markerRadius,
+        accentColor: accent,
+        edgeColor: edge,
+        textColor: textCol,
+        description: callout.description,
+        targetOrdinal: targetIndex + 1,
+        targetCount: callout.targets.length,
+      ),
+    );
+  }
+
+  /// Assembles the final overlay Stack from all rendered layers.
+  Widget _assembleOverlay({
+    required List<Rect> regions,
+    required List<Widget> regionWidgets,
+    required List<Widget> markers,
+    required List<_ArrowSpec> arrows,
+    required Color accent,
+    required Color edge,
+    required double markerRadius,
+  }) {
     final children = <Widget>[];
     if (regions.isNotEmpty) {
       children.add(
@@ -346,7 +530,36 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     }
     children.addAll(regionWidgets);
     children.addAll(markers);
-
+    if (arrows.isNotEmpty) {
+      children.add(
+        Positioned.fill(
+          child: CustomPaint(
+            painter: _ArrowPainter(
+              arrows,
+              accent: accent,
+              edge: edge,
+              strokeWidth: markerRadius * 0.3,
+            ),
+          ),
+        ),
+      );
+      for (final a in arrows) {
+        children.add(
+          _CalloutMarker(
+            reference: a.reference,
+            x: a.markerRadius,
+            y: a.railY,
+            markerRadius: a.markerRadius,
+            accentColor: a.accent,
+            edgeColor: a.edge,
+            textColor: a.textCol,
+            description: a.description,
+            targetOrdinal: a.targetOrdinal,
+            targetCount: a.targetCount,
+          ),
+        );
+      }
+    }
     return IgnorePointer(child: Stack(children: children));
   }
 }
@@ -383,4 +596,104 @@ class _RegionDimPainter extends CustomPainter {
     }
     return false;
   }
+}
+
+/// Specification for one fixed-rail arrow (§5): a horizontal line from the
+/// rail at (0, railY) to (endX, endY), with an arrowhead at the target end.
+class _ArrowSpec {
+  final double railY;
+  final double endX;
+  final double endY;
+  final String reference;
+  final Color accent;
+  final Color edge;
+  final Color textCol;
+  final double markerRadius;
+  final String? description;
+  final int targetOrdinal;
+  final int targetCount;
+
+  const _ArrowSpec({
+    required this.railY,
+    required this.endX,
+    required this.endY,
+    required this.reference,
+    required this.accent,
+    required this.edge,
+    required this.textCol,
+    required this.markerRadius,
+    this.description,
+    required this.targetOrdinal,
+    required this.targetCount,
+  });
+}
+
+/// Paints fixed-rail arrows: horizontal lines from the left edge of the
+/// image slot to each target, with arrowheads. The two-tone edge (§6) is
+/// applied as a stroke around the line so it contrasts with arbitrary
+/// image pixels.
+class _ArrowPainter extends CustomPainter {
+  final List<_ArrowSpec> arrows;
+  final Color accent;
+  final Color edge;
+  final double strokeWidth;
+
+  const _ArrowPainter(
+    this.arrows, {
+    required this.accent,
+    required this.edge,
+    required this.strokeWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final headLen = strokeWidth * 3;
+    final headWidth = strokeWidth * 2.5;
+    for (final a in arrows) {
+      // Start point: just right of the rail badge so the line doesn't
+      // overlap the circle.
+      final start = Offset(a.markerRadius * 1.8, a.railY);
+      final end = Offset(a.endX, a.endY);
+      // Edge stroke (two-tone contrast, §6).
+      final edgePaint = Paint()
+        ..color = edge
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth * 1.6
+        ..strokeCap = StrokeCap.round;
+      canvas.drawLine(start, end, edgePaint);
+      // Accent stroke on top.
+      final accentPaint = Paint()
+        ..color = accent
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth
+        ..strokeCap = StrokeCap.round;
+      canvas.drawLine(start, end, accentPaint);
+      // Arrowhead: a filled triangle pointing right.
+      final headPath = Path()
+        ..moveTo(end.dx, end.dy)
+        ..lineTo(end.dx - headLen, end.dy - headWidth)
+        ..lineTo(end.dx - headLen, end.dy + headWidth)
+        ..close();
+      canvas.drawPath(
+        headPath,
+        Paint()
+          ..color = edge
+          ..style = PaintingStyle.fill,
+      );
+      // Slightly smaller accent triangle on top.
+      final innerHead = Path()
+        ..moveTo(end.dx - strokeWidth * 0.3, end.dy)
+        ..lineTo(end.dx - headLen + strokeWidth * 0.5, end.dy - headWidth * 0.7)
+        ..lineTo(end.dx - headLen + strokeWidth * 0.5, end.dy + headWidth * 0.7)
+        ..close();
+      canvas.drawPath(innerHead, Paint()..color = accent);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_ArrowPainter old) =>
+      arrows.length != old.arrows.length ||
+      accent != old.accent ||
+      edge != old.edge ||
+      strokeWidth != old.strokeWidth;
 }

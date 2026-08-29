@@ -47,6 +47,10 @@ const Map<String, int> methodLengthBaseline = {
       153,
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
+  // +4 (#1829): arrow-modus segment in de presentation-mode SegmentedButton
+  // (Pins / Gebieden / Pijlen). De methode stond al op de limiet.
+  'lib/widgets/editors/callout_editor.dart::_CalloutEditorDialogState.build':
+      154,
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).

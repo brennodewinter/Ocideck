@@ -1654,6 +1654,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Il-vleġeġ jaqsmu xulxin fuq din is-slide — ikkunsidra pins minflok vleġeġ għall-leġġibiltà.',
+  'Pijlen': 'Vleġeġ',
   'Stap-voor-stap': 'Pass pass',
   'Punt': 'Punt',
   'markeringen': 'marki',
