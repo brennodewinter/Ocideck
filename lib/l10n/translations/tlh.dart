@@ -1613,12 +1613,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'markering': 'per',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'yan tlhIq wa\'Dich tlhIq — yan tlhIq tlhIq tlhIq tlhIq',
   'Pijlen': 'yan',
   'Stap-voor-stap': 'Yan yan',
   'Punt': 'Qogh',
-  'markeringen': 'nugh',
+  'markeringen': 'per',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'wa\' pat\'IH \'oH nagh beQ \'ab qaS\'e\'; mach ghItlh \'ach not chuv.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

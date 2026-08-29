@@ -811,6 +811,10 @@ HTML surface to keep in step.
   visible text is the sighted reader's join key, and this is the equivalent one.
 - Every string above passes the HTML **attribute** escaper, not the text escaper
   (§9).
+- **One name per reference, per target.** In arrow mode the line and the rail
+  badge point at the same thing; only one of them is named, and the other is
+  `aria-hidden`. Two named nodes for one mark is the same defect as a marker
+  that repeats its own letter — it reads correctly and says everything twice.
 - **Nothing here is `hidden`, and there is no live region.** Revision 4 asked
   the export for both, and that contradicted §7: a static export shows every
   group, so there is no unrevealed state to keep out of the tree and no step to
@@ -833,6 +837,13 @@ the equivalent that reads once, after the bullet), unrevealed groups are
 excluded from the tree rather than merely transparent, and the step change goes
 through `SemanticsService.sendAnnouncement`, which `presenter_navigation.dart`
 already uses to announce a slide change.
+
+"How many marks came with it" means the marks of the bullet that just appeared,
+counted per *target* — not the references revealed so far. The two differ
+wherever a reference has several targets, and they differ loudly on a bullet
+with no reference at all: counting the running total there announces marks on a
+step where nothing appeared. A bullet that brings no mark says only its
+position.
 
 The marker's *visible* reference letter is excluded from the tree. It is
 already the first word of the composed name, and leaving it in made a screen

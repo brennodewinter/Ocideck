@@ -271,6 +271,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(a11y): de onthulstap kondigde het verkeerde aan (#1844). "Punt 1/3, 1
+  markeringen" — fout meervoud — en het getal telde alle verwijzingen die
+  inmiddels stonden in plaats van de markeringen die bij déze stap verschenen.
+  Een opsommingsregel zonder verwijzing herhaalde daardoor het totaal van de
+  vorige stap, terwijl er niets bij was gekomen. De melding telt nu targets van
+  de regel die net verscheen, zwijgt over markeringen als er geen bij kwamen, en
+  kent enkelvoud. Onderweg twee vertalingen rechtgezet die het meervoud fout
+  hadden: Fries liet het Nederlandse woord staan, Klingon had "gemeenschap".
+
+- fix(a11y): in pijlmodus noemde de HTML-export elke beeldverwijzing twee keer
+  (#1844). De pijllijn en de badge aan het raileinde droegen allebei
+  `role="img"` met dezelfde naam, dus een schermlezer las "A, het donkere blok"
+  en daarna nog eens hetzelfde. De pijl is decoratie bij een markering die haar
+  naam al draagt en staat nu met `aria-hidden` buiten de boom; hetzelfde geldt
+  voor de pijl naar een gebied. Gevonden door de accessibility tree van een
+  echte browser te lezen op een echte export, niet in de markup.
+
 - feat(a11y): beeldverwijzingen zijn zonder zicht te lezen, en de exports
   gooien de betekenis niet meer weg (#1844). Een schermlezer noemde de letter
   van een markering twee keer — één keer in de samengestelde naam en nog eens

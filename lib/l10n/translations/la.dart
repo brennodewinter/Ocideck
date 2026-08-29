@@ -1650,6 +1650,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'markering': 'nota',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Sagittae se in hac lamina secant — clavos pro sagittis propter legibilitatem considera.',
   'Pijlen': 'Sagittae',

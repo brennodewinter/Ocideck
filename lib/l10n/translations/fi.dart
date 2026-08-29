@@ -1636,6 +1636,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'markering': 'merkki',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nuolet risteävät tällä kalvolla — harkitse nasteja nuolten sijaan luettavuuden vuoksi.',
   'Pijlen': 'Nuolet',

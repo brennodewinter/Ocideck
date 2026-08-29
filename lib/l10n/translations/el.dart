@@ -1660,6 +1660,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'markering': 'σήμανση',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Τα βέλη διασταυρώνονται σε αυτή τη διαφάνεια — εξέτασε καρφίτσες αντί για βέλη για αναγνωσιμότητα.',
   'Pijlen': 'Βέλη',

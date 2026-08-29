@@ -103,10 +103,16 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
   /// All callout references that exist on the slide (for quick lookup).
   final Set<String> calloutReferences;
 
+  /// Hoeveel targets elke referentie heeft. Nodig om een onthulstap te kunnen
+  /// aankondigen met het aantal markeringen dat er werkelijk bij kwam (§12.2):
+  /// één verwijzing kan meerdere markeringen tegelijk laten verschijnen.
+  final Map<String, int> targetCounts;
+
   CalloutRevealStepPlan({
     required this.bullets,
     required this.bulletReferences,
     required this.calloutReferences,
+    this.targetCounts = const {},
   });
 
   /// Build the plan from a slide's bullets and callouts.
@@ -120,6 +126,10 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
       bullets: bullets,
       bulletReferences: refs,
       calloutReferences: calloutRefs,
+      targetCounts: {
+        for (final callout in slide.callouts)
+          callout.reference: callout.targets.length,
+      },
     );
   }
 
@@ -139,6 +149,17 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
         .toSet();
   }
 
+  /// Hoeveel markeringen er bij *deze* stap zichtbaar werden — de targets van
+  /// de bullet die net verscheen, niet het totaal dat al stond. Een bullet
+  /// zonder verwijzing levert 0: dan is er niets bijgekomen om te melden.
+  int marksAtStep(int step) {
+    final index = step - 1;
+    if (index < 0 || index >= bulletReferences.length) return 0;
+    final reference = bulletReferences[index];
+    if (reference.isEmpty || !calloutReferences.contains(reference)) return 0;
+    return targetCounts[reference] ?? 0;
+  }
+
   /// Extract the trailing `(A)` reference from a bullet, or '' if none.
   static String _extractReference(String bullet) {
     final match = _bulletRefSuffix.firstMatch(bullet.trimRight());
@@ -151,10 +172,19 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
       _listEq(other.bullets, bullets) &&
       _listEq(other.bulletReferences, bulletReferences) &&
       other.calloutReferences.length == calloutReferences.length &&
-      other.calloutReferences.containsAll(calloutReferences);
+      other.calloutReferences.containsAll(calloutReferences) &&
+      _mapEq(other.targetCounts, targetCounts);
 
   @override
   int get hashCode => Object.hash(bullets, bulletReferences, calloutReferences);
+
+  static bool _mapEq(Map<String, int> a, Map<String, int> b) {
+    if (a.length != b.length) return false;
+    for (final entry in a.entries) {
+      if (b[entry.key] != entry.value) return false;
+    }
+    return true;
+  }
 
   static bool _listEq(List<String> a, List<String> b) {
     if (a.length != b.length) return false;

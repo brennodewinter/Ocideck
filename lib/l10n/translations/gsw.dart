@@ -1638,6 +1638,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'markering': 'Markierig',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pfiil chrüüzed sech uf däm Slide — nimm Pins statt Pfiil für besseri Lesbarkeit.',
   'Pijlen': 'Pfiil',

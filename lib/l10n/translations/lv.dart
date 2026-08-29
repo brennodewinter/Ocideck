@@ -1634,6 +1634,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'markering': 'atzīme',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Bultas krustojas uz šī slaida — apsveriet tapas bultu vietā lasāmībai.',
   'Pijlen': 'Bultas',

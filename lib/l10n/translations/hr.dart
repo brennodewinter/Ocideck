@@ -1639,6 +1639,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'markering': 'oznaka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Strelice se križaju na ovom slajdu — razmotri pinove umjesto strelica za čitljivost.',
   'Pijlen': 'Strelice',
