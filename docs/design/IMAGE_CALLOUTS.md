@@ -601,6 +601,14 @@ are what survives someone changing the other. A redacted slide
 description is a quality finding of the same class as an image without alt text —
 reported, not blocked.
 
+"Scannable" was implemented as scanning only until #1844: the scanner emitted
+`calloutDescription` findings that the projection then ignored, so a slide set
+to *redact* still shipped the sentence — in the `.md`, the HTML export and the
+TikZ notes. The projection now redacts the field on the same fragment index the
+scanner reports it on; the geometry is left alone. Scanning a field the
+projection cannot reach is worse than not scanning it: it reports a problem and
+hands the user a control that does nothing.
+
 ---
 
 ## 9. Order of work
