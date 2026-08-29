@@ -1,10 +1,11 @@
 // Part of the export_service library — see export_service.dart.
 //
-// De rasterexports: PDF, PPTX en ODP. Alle drie leveren ze hetzelfde in — de
-// dia is een vastgelegd beeld, niet een structuur — en alle drie dragen ze de
-// betekenis zo ver als het doelformaat toelaat. Hier apart gezet omdat
-// export_service.dart tegen zijn regelplafond aan liep; het is één onderwerp,
-// geen willekeurige snee.
+// Alles wat per exportformaat verschilt: de keuze (`_encode`) en de drie
+// rasterbouwers. De rasterexports leveren alle drie hetzelfde in — de dia is
+// een vastgelegd beeld, niet een structuur — en dragen de betekenis zo ver als
+// het doelformaat toelaat. Wat ná deze laag komt (naamgeving, atomair
+// schrijven, het redactiemanifest) is voor alle vijf de formaten gelijk en
+// staat daarom in export_service.dart.
 part of 'export_service.dart';
 
 /// De sprekersnotities van de geprojecteerde slides, in dezelfde volgorde als
@@ -108,4 +109,68 @@ Uint8List _toJpeg(Uint8List png) {
         )
       : decoded;
   return img.encodeJpg(resized, quality: ExportService._compressedJpegQuality);
+}
+
+extension _ExportFormats on ExportService {
+  /// De bytes van één export, per formaat. Los van [export] omdat die anders
+  /// over het methodeplafond loopt — en omdat dit de enige plek is waar het
+  /// formaat er nog toe doet: alles erna (naamgeving, atomair schrijven, het
+  /// redactiemanifest) is voor alle vijf hetzelfde.
+  Future<Uint8List> _encode(
+    ExportFormat format,
+    List<Uint8List> images, {
+    required ExportBundle? audience,
+    required String? markdown,
+    required String deckPath,
+    required ExportDocumentMetadata docMeta,
+    required String fallbackTitle,
+    required ThemeProfile? themeProfile,
+    required CockpitColorScheme cockpitColorScheme,
+    required String interfaceLanguageCode,
+    required bool compress,
+  }) async {
+    final Uint8List bytes;
+    switch (format) {
+      case ExportFormat.pdf:
+        bytes = await _buildPdf(
+          images,
+          metadata: docMeta,
+          fallbackTitle: fallbackTitle,
+          compress: compress,
+        );
+      case ExportFormat.pptx:
+        bytes = await _buildPptx(
+          images,
+          metadata: docMeta,
+          fallbackTitle: fallbackTitle,
+          audience: audience,
+        );
+      case ExportFormat.odp:
+        bytes = await _buildOdp(
+          images,
+          metadata: docMeta,
+          fallbackTitle: fallbackTitle,
+          audience: audience,
+        );
+      case ExportFormat.html:
+        bytes = await _buildHtml(
+          markdown!,
+          deckPath: deckPath,
+          themeProfile: themeProfile,
+          cockpitColorScheme: cockpitColorScheme,
+          metadata: docMeta,
+          fallbackTitle: fallbackTitle,
+          interfaceLanguageCode: interfaceLanguageCode,
+        );
+      case ExportFormat.latex:
+        bytes = utf8.encode(
+          buildBeamerDocument(
+            audience!.audience.deck,
+            docMeta,
+            themeProfile: themeProfile,
+          ),
+        );
+    }
+    return bytes;
+  }
 }

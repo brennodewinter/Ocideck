@@ -109,7 +109,7 @@ const Map<String, int> methodLengthBaseline = {
       158,
   // +1 (#1769): de ODP-case in de formaat-switch. De methode stond al op de
   // limiet; één case extra is onherleidbare plumbing.
-  'lib/services/export_service.dart::ExportService.export': 148,
+  'lib/services/export_service.dart::ExportService.export': 125,
   // +12 (#1807): zeven nieuwe SlideField-cases (anchor, nextAnchor, ganttScale,
   // ganttSections, menuLayout, tableColumnAlignments, tableNumberColumns) in
   // een exhaustive switch — onherleidbare plumbing, één case per veld.
