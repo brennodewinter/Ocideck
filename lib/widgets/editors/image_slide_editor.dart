@@ -83,7 +83,6 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
       imageSize: widget.slide.imageSize,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,
-      enableZoom: true,
     );
     if (result == null) return;
     widget.onUpdate(

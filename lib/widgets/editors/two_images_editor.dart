@@ -104,7 +104,6 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
       imageSize: widget.slide.imageZoom,
       focalX: isSecond ? widget.slide.imageFocalX2 : widget.slide.imageFocalX,
       focalY: isSecond ? widget.slide.imageFocalY2 : widget.slide.imageFocalY,
-      enableZoom: true,
     );
     if (result == null) return;
     widget.onUpdate(
