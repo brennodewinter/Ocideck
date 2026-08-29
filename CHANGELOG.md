@@ -271,6 +271,25 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(a11y): beeldverwijzingen zijn zonder zicht te lezen, en de exports
+  gooien de betekenis niet meer weg (#1844). Een schermlezer noemde de letter
+  van een markering twee keer — één keer in de samengestelde naam en nog eens
+  omdat de zichtbare letter zelf in de boom stond; die staat er nu buiten. De
+  bullet die een verwijzing draagt kreeg de beschrijving mee, de Flutter-kant
+  van het `aria-describedby` dat de HTML-export al had. PPTX en ODP schrijven
+  de alt-tekst en de beschrijvingen naar de sleuf die het formaat daarvoor
+  heeft (`descr`, `<svg:desc>`); een gerasterde dia blijft structureel
+  ontoegankelijk, maar de betekenis reist nu mee. Drie onthullingstoetsen die
+  altijd groen stonden — de markeringen renderden er nooit — toetsen nu het
+  echte beeld.
+
+  Onderweg kwam er een privacylek uit: OciWacht scánde de beschrijving van een
+  beeldverwijzing wel, maar de projectie redigeerde hem niet. Wie een bevinding
+  op zo'n beschrijving kreeg en de dia op *redigeren* zette, verstuurde de tekst
+  alsnog — in het `.md`, de HTML-export en de TikZ-notities, en met de nieuwe
+  alt-tekstsleuf op een plek die niemand op het beeld ziet staan. De projectie
+  redigeert hem nu; de geometrie blijft staan.
+
 - feat(ci): elke platformbuild gaat nu vroeger af dan de releaseketen. Geen
   poort bouwde een desktop-app — `make check` en de forge-poorten draaien
   `flutter test` — dus een wijziging die de *build* brak, kwam pas bij de tag

@@ -18,6 +18,7 @@ import '../utils/log.dart';
 import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
+import '../models/image_callout.dart';
 import '../models/privacy_disposition.dart';
 import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
@@ -35,6 +36,8 @@ import 'marp_html_service.dart';
 import 'classification_policy.dart';
 import 'odp/deck_odp_export.dart';
 import 'pptx/deck_pptx_export.dart';
+
+part 'export_service_raster.dart';
 
 enum ExportFormat { pdf, pptx, odp, html, latex }
 
@@ -153,12 +156,6 @@ class ExportService {
   /// alleen door `PrivacyProjection` te maken. Er reist dus geen bron meer langs
   /// deze poort, en `tool/check_conventions.dart` (`audienceBoundary`) houdt dat
   /// zo: de build faalt zodra hier weer een rauw `Deck` of `List<Slide>` in kan.
-  /// De sprekersnotities van de geprojecteerde slides, in dezelfde volgorde als
-  /// de gerasterde beelden — het PPTX-notitiepaneel koppelt op index.
-  static List<String>? _notesOf(ExportBundle? audience) => audience == null
-      ? null
-      : [for (final s in audience.audience.slides) s.notes];
-
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
@@ -248,21 +245,18 @@ class ExportService {
             compress: compress,
           );
         case ExportFormat.pptx:
-          bytes = await _offload(
-            () => buildDeckExportPptx(
-              images,
-              metadata: docMeta,
-              fallbackTitle: fallbackTitle,
-              notes: _notesOf(audience),
-            ),
+          bytes = await _buildPptx(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            audience: audience,
           );
         case ExportFormat.odp:
-          bytes = await _offload(
-            () => buildDeckExportOdp(
-              images: images,
-              metadata: docMeta,
-              fallbackTitle: fallbackTitle,
-            ),
+          bytes = await _buildOdp(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            audience: audience,
           );
         case ExportFormat.html:
           bytes = await _buildHtml(
@@ -526,53 +520,5 @@ class ExportService {
           bytes: enc(manifest.toPrettyJson()),
         ),
     ];
-  }
-
-  static Future<Uint8List> _buildPdf(
-    List<Uint8List> images, {
-    required ExportDocumentMetadata metadata,
-    required String fallbackTitle,
-    bool compress = false,
-  }) {
-    return _offload(() async {
-      final doc = pw.Document(
-        title: metadata.displayTitle(fallbackTitle),
-        author: metadata.documentAuthor,
-        subject: metadata.subject(fallbackTitle),
-        keywords: metadata.exportKeywords(),
-        creator: metadata.creator,
-        producer: metadata.producer,
-      );
-      // Page size in points; only the ratio matters for a full-bleed image.
-      const format = PdfPageFormat(1280, 720, marginAll: 0);
-      for (final png in images) {
-        // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
-        // compressed (JPEG) slide embeds just like the lossless one.
-        final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
-        doc.addPage(
-          pw.Page(
-            pageFormat: format,
-            build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
-          ),
-        );
-      }
-      return doc.save();
-    });
-  }
-
-  /// Downscale a rendered slide PNG to [_compressedMaxWidth] and re-encode it as
-  /// JPEG at [_compressedJpegQuality]. Slides are full-bleed (no transparency),
-  /// so dropping the alpha channel is safe.
-  static Uint8List _toJpeg(Uint8List png) {
-    final decoded = img.decodePng(png);
-    if (decoded == null) return png; // Unexpected; keep the original bytes.
-    final resized = decoded.width > _compressedMaxWidth
-        ? img.copyResize(
-            decoded,
-            width: _compressedMaxWidth,
-            interpolation: img.Interpolation.average,
-          )
-        : decoded;
-    return img.encodeJpg(resized, quality: _compressedJpegQuality);
   }
 }

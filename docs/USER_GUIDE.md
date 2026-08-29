@@ -836,7 +836,14 @@ marker on the image — a pin (numbered dot) or a region (outlined rectangle).
 Open the **Callout** editor from the bullets-with-image editor, click a bullet,
 then click the image to place its target. Each callout gets a reference letter
 (A–Z) that appears at the end of the bullet as `(A)`; the marker on the image
-carries the same letter. A description field feeds the screen reader.
+carries the same letter.
+
+The **description** field is what a screen reader reads. It is not drawn on the
+slide, but it is not a private note either: it is ordinary content. OciWacht
+scans it like any bullet, redacting it when the slide is set to *redigeren*, and
+it travels into the HTML export, the LaTeX notes and — new — the alt-text slot of
+PPTX and ODP, so the meaning is not lost on a recipient who cannot see the
+picture. Write it as something you would be happy to send.
 
 Three presentation modes are available: **Pins** (numbered dots), **Gebieden**
 (Regions — outlined rectangles with dimming outside), and **Pijlen** (Arrows —

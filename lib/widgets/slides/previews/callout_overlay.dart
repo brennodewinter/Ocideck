@@ -117,13 +117,20 @@ class _CalloutMarker extends StatelessWidget {
             border: Border.all(color: edgeColor, width: markerRadius * 0.18),
           ),
           alignment: Alignment.center,
-          child: Text(
-            reference,
-            style: TextStyle(
-              color: textColor,
-              fontSize: markerRadius * 1.1,
-              fontWeight: FontWeight.w700,
-              height: 1.0,
+          // De zichtbare letter is de koppelsleutel voor de ziende lezer en
+          // wordt buiten de boom gehouden: hij staat al vooraan in [label], en
+          // zonder deze uitsluiting kondigt een schermlezer hem twee keer aan
+          // ("B, de inlaat" gevolgd door "B") — de naam is dan niet meer wat
+          // §12.2 voorschrijft.
+          child: ExcludeSemantics(
+            child: Text(
+              reference,
+              style: TextStyle(
+                color: textColor,
+                fontSize: markerRadius * 1.1,
+                fontWeight: FontWeight.w700,
+                height: 1.0,
+              ),
             ),
           ),
         ),

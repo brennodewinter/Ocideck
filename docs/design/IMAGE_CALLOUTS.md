@@ -3,7 +3,7 @@
 *Tying a bullet to a part of the picture beside it — as a numbered pin, a
 highlighted region or an arrow — and optionally bringing the two up together.*
 
-> **Status:** design frozen (revision 4), not implemented · **Status last reviewed:** 2026-08-27 · **Published by:** Stichting LibreKAT
+> **Status:** revision 5, implemented and under acceptance · **Status last reviewed:** 2026-08-29 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** When implementation lands,
 > the contributor docs ([`ARCHITECTURE.md`](../ARCHITECTURE.md),
@@ -601,6 +601,14 @@ are what survives someone changing the other. A redacted slide
 description is a quality finding of the same class as an image without alt text —
 reported, not blocked.
 
+"Scannable" was implemented as scanning only until #1844: the scanner emitted
+`calloutDescription` findings that the projection then ignored, so a slide set
+to *redact* still shipped the sentence — in the `.md`, the HTML export and the
+TikZ notes. The projection now redacts the field on the same fragment index the
+scanner reports it on; the geometry is left alone. Scanning a field the
+projection cannot reach is worse than not scanning it: it reports a problem and
+hands the user a control that does nothing.
+
 ---
 
 ## 9. Order of work
@@ -801,23 +809,34 @@ HTML surface to keep in step.
 - The bullet's `<li>` carries `aria-describedby` pointing at that hidden
   description, so reading the bullet reads the meaning once — the `(A)` in the
   visible text is the sighted reader's join key, and this is the equivalent one.
-- With `reveal: steps`, an unrevealed group and its hidden description are
-  `hidden`, therefore **absent from the accessibility tree** and not reachable by
-  a screen reader's own navigation. Visibility and announceability do not
-  disagree.
-- One `aria-live="polite" aria-atomic="true"` region per slide announces each
-  reveal step: the bullet that became visible and how many marks came with it.
-  Announcing the marks individually on a step would flood; the marker labels are
-  there for someone who then walks them.
 - Every string above passes the HTML **attribute** escaper, not the text escaper
   (§9).
+- **Nothing here is `hidden`, and there is no live region.** Revision 4 asked
+  the export for both, and that contradicted §7: a static export shows every
+  group, so there is no unrevealed state to keep out of the tree and no step to
+  announce. A dead `aria-live` region is worse than none — it is markup that
+  claims a behaviour the file does not have. Should the export ever step, both
+  requirements come back with it; `callout_accessibility_test.dart` fails the
+  moment it does, so the pair cannot be forgotten.
 
-**Flutter — preview, presenter, audience.** The same shape in `Semantics`: each
-marker is a labelled node with the same name, each bullet is described by the
-same prose, unrevealed groups are excluded from the tree rather than merely
-transparent, and the step change goes through
-`SemanticsService.sendAnnouncement`, which `presenter_navigation.dart`
+The visually hidden description uses the clip-rect idiom, not `display: none`
+and not `visibility: hidden`. Those two remove the element from the
+accessibility tree as well as from the page, which would silently cut the
+`aria-describedby` it is the target of — the failure would be invisible in
+every DOM assertion that only checks the attribute exists.
+
+**Flutter — preview, presenter, audience.** The same shape in `Semantics`, and
+**this is the surface that owes the reveal semantics**, because it is the only
+one that steps. Each marker is a labelled node with the same name, each bullet
+carries the same prose as its `hint` (Flutter has no `describedby`; the hint is
+the equivalent that reads once, after the bullet), unrevealed groups are
+excluded from the tree rather than merely transparent, and the step change goes
+through `SemanticsService.sendAnnouncement`, which `presenter_navigation.dart`
 already uses to announce a slide change.
+
+The marker's *visible* reference letter is excluded from the tree. It is
+already the first word of the composed name, and leaving it in made a screen
+reader say it twice — "B, the inlet" and then "B".
 
 **LaTeX / Beamer.** No accessibility tree exists and tagged PDF is out of scope.
 The description therefore has to survive as *text*: it is emitted as a TikZ node
@@ -831,6 +850,12 @@ format has somewhere to put it: where a picture carries an alt-text slot, the
 callout descriptions are appended to the image's existing alt text. A raster PDF
 has no such slot, and that is a limitation to state rather than to paper over.
 
+Realised as `calloutAltText` (`image_callout.dart`), written to `descr` on the
+PPTX shape and `<svg:desc>` in the ODP frame. The reference letter travels with
+each description — the sighted reader has it on the picture, so a description
+without it would be unattachable. A redacted slide contributes nothing, in step
+with §8.
+
 ---
 
 ## 13. Revision history
@@ -841,3 +866,4 @@ has no such slot, and that is a limitation to state rather than to paper over.
 | 2 | Measured against a real reader and a real Marp CLI: the comment directive is destroyed in every position, the crop is *not* inherited, TikZ is already present, three decimals keep the privacy scanner quiet. Carrier split into visible reference + front-matter block. |
 | 3 | Frozen: grammar, model, geometry contract, renderer table, reveal plan, limits, order of work, and §11's values trade-off. Derived overlay persisted alongside the canonical data. |
 | 4 | This revision, after review: released reader corrected to `v0.4.10` and the gate made executable (§9, §10); persisted derived overlay dropped, with the guardian reasoning (§2.3); one preservation rule instead of two contradictory ones (§2.4); the nested merge contract that owning the key makes necessary (§2.5); when `(A)` is a callout and when it is prose (§2.6); mode-against-target matrix (§3.1); the complete transform, browser-measured (§4.1, §4.2); zoom above 100% found inert, made a prerequisite and since repaired (§4.3); rich text ruled a boundary (§6); accessibility contract (§12). |
+| 5 | Accessibility gate (#1844), written against the built surfaces: §12.2's two reveal requirements moved from the HTML export — which is static by §7 and therefore has nothing to hide or announce — to the Flutter surface that actually steps; the marker's visible letter excluded from the tree, because it was being announced twice; the bullet's `aria-describedby` given its Flutter equivalent; the raster alt-text slot named (`descr`, `<svg:desc>`) and filled. |

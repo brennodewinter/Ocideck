@@ -19,11 +19,18 @@ import '../export_metadata.dart';
 const int _slideWidthEmu = 12192000;
 const int _slideHeightEmu = 6858000;
 
+/// Bouwt een PPTX uit [images] — één gerasterde afbeelding per slide.
+///
+/// [altTexts], als het meekomt, is per slide de alt-tekst voor het beeld
+/// (IMAGE_CALLOUTS.md §12.2). Een gerasterde slide blijft structureel
+/// ontoegankelijk, maar `descr` op de vorm is de plek die PPTX ervoor heeft;
+/// een lege of ontbrekende regel schrijft geen attribuut.
 Uint8List buildDeckExportPptx(
   List<Uint8List> images, {
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
   List<String>? notes,
+  List<String>? altTexts,
 }) {
   final archive = Archive();
   void addText(String name, String content) {
@@ -68,7 +75,10 @@ Uint8List buildDeckExportPptx(
   for (var i = 0; i < slideCount; i++) {
     final n = i + 1;
     final hasNote = noteFor.containsKey(i);
-    addText('ppt/slides/slide$n.xml', _slideXml());
+    final altText = (altTexts != null && i < altTexts.length)
+        ? altTexts[i].trim()
+        : '';
+    addText('ppt/slides/slide$n.xml', _slideXml(altText));
     addText('ppt/slides/_rels/slide$n.xml.rels', _slideRels(n, hasNote));
     if (hasNote) {
       addText('ppt/notesSlides/notesSlide$n.xml', _notesSlideXml(noteFor[i]!));
@@ -91,6 +101,11 @@ String _xmlEscape(String s) {
       .replaceAll('<', '&lt;')
       .replaceAll('>', '&gt;');
 }
+
+/// XML-escape free text destined for an attribute value. Adds the quote to
+/// what [_xmlEscape] does — an attribute has one more way to break than an
+/// element body.
+String _xmlAttr(String s) => _xmlEscape(s).replaceAll('"', '&quot;');
 
 /// A notesSlide whose body placeholder carries the speaker notes. Newlines in
 /// [note] become separate paragraphs.
@@ -367,7 +382,11 @@ String _slideLayoutRels() {
       '</Relationships>';
 }
 
-String _slideXml() {
+String _slideXml(String altText) {
+  // `descr` is de alt-tekstsleuf van OOXML. Het gaat door de *attribuut*-escaper,
+  // niet die van de tekstinhoud: een aanhalingsteken in een beschrijving zou het
+  // attribuut anders openbreken.
+  final descr = altText.isEmpty ? '' : ' descr="${_xmlAttr(altText)}"';
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
       'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
@@ -377,7 +396,7 @@ String _slideXml() {
       '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/>'
       '<a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>'
       '<p:pic>'
-      '<p:nvPicPr><p:cNvPr id="2" name="Slide"/>'
+      '<p:nvPicPr><p:cNvPr id="2" name="Slide"$descr/>'
       '<p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
       '<p:blipFill><a:blip r:embed="rId2"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>'
       '<p:spPr><a:xfrm><a:off x="0" y="0"/>'

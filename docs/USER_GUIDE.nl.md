@@ -880,8 +880,15 @@ stip) of een gebied (omlijnd rechthoek). Open de **Callout**-editor vanuit de
 opsomming-met-afbeelding-editor, klik op een opsommingsregel, en klik dan op de
 afbeelding om het doel te plaatsen. Elke verwijzing krijgt een referentieletter
 (A–Z) die aan het eind van de opsommingsregel verschijnt als `(A)`; de markering
-op de afbeelding draagt dezelfde letter. Een beschrijvingsveld voedt de
-schermlezer.
+op de afbeelding draagt dezelfde letter.
+
+Het **beschrijvingsveld** is wat een schermlezer voorleest. Het staat niet op de
+dia, maar het is ook geen privé-aantekening: het is gewone inhoud. OciWacht
+scant het als elke andere opsommingsregel en redigeert het wanneer de dia op
+*redigeren* staat, en het reist mee naar de HTML-export, de LaTeX-notities en —
+nieuw — de alt-tekstsleuf van PPTX en ODP, zodat de betekenis niet verloren gaat
+bij een ontvanger die het beeld niet ziet. Schrijf er dus iets in dat je met een
+gerust hart verstuurt.
 
 Drie presentatiemodi zijn beschikbaar: **Pins** (genummerde stippen), **Gebieden**
 (omlijnde rechthoeken met dimming erbuiten), en **Pijlen** (pijlen vanaf een vaste
