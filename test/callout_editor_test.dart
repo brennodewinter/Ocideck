@@ -122,6 +122,67 @@ void main() {
     expect(updated.bullets, ['Eerste punt (A)']);
   });
 
+  testWidgets('twee verwijzingen achter elkaar, zonder de dialoog te sluiten', (
+    tester,
+  ) async {
+    // Zo gebruikt een mens hem: de dialoog blijft open. Hij wordt níet opnieuw
+    // opgebouwd met de bijgewerkte dia, dus `widget.slide` loopt achter. Werd
+    // daaruit gerekend, dan overschreef de tweede verwijzing de letter van de
+    // eerste — die raakte los van haar callout en was in de dialoog niet meer
+    // te bereiken, want de lijst koppelt op precies die letter.
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt', 'Tweede punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+    // Geen nieuwe pumpWidget: de dialoog blijft staan, precies als in de app.
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+
+    expect(updated.bullets, ['Eerste punt (A)', 'Tweede punt (B)']);
+    expect(updated.callouts.map((c) => c.reference), ['A', 'B']);
+    // En de lijst laat het meteen zien: twee badges, geen 'Toevoegen' meer.
+    expect(find.text('Toevoegen'), findsNothing);
+  });
+
+  testWidgets('verwijderen in een openstaande dialoog haalt de letter weg', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt', 'Tweede punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.close).last);
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts, isEmpty);
+    expect(updated.bullets, [
+      'Eerste punt',
+      'Tweede punt',
+    ], reason: 'een letter zonder verwijzing laat de zin naar niets verwijzen');
+  });
+
   testWidgets('een tweede verwijzing landt op de tweede bullet', (
     tester,
   ) async {
