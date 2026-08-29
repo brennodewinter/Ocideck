@@ -53,7 +53,6 @@ void main() {
     int imageSize = 0,
     double focalX = 0.5,
     double focalY = 0.5,
-    bool enableZoom = false,
   }) async {
     final uitkomst = <ImageCropResult?>[];
     await tester.binding.setSurfaceSize(const Size(1000, 900));
@@ -72,7 +71,6 @@ void main() {
                   imageSize: imageSize,
                   focalX: focalX,
                   focalY: focalY,
-                  enableZoom: enableZoom,
                 ),
               ),
               child: const Text('open'),
@@ -159,7 +157,6 @@ void main() {
     // verschuift het brandpunt met 0,25.
     final uitkomst = await open(
       tester,
-      enableZoom: true,
       imageSize: 200,
       focalX: 0.5,
       focalY: 0.5,
@@ -183,7 +180,6 @@ void main() {
   testWidgets('het brandpunt loopt niet voorbij de rand', (tester) async {
     final uitkomst = await open(
       tester,
-      enableZoom: true,
       imageSize: 200,
       focalX: 0.5,
       focalY: 0.5,
@@ -203,21 +199,10 @@ void main() {
     expect(uitkomst.single!.focalY, 1.0);
   });
 
-  testWidgets('zonder zoom blijft de opgegeven maat ongemoeid', (tester) async {
-    // In een kolomslot ís imageSize de kolombreedte, geen zoom. Het venster
-    // verplaatst dan alleen de uitsnede en mag dat getal niet aanraken.
-    final uitkomst = await open(tester, imageSize: 45);
-
-    expect(find.byType(Slider), findsNothing);
-    await klaar(tester);
-
-    expect(uitkomst.single!.imageSize, 45);
-  });
-
   testWidgets('met zoom is er een schuif die de maat verandert', (
     tester,
   ) async {
-    final uitkomst = await open(tester, enableZoom: true, imageSize: 200);
+    final uitkomst = await open(tester, imageSize: 200);
 
     expect(find.byType(Slider), findsOneWidget);
     await tester.drag(find.byType(Slider), const Offset(60, 0));
@@ -234,7 +219,7 @@ void main() {
   testWidgets('op vullend formaat is er geen schuif', (tester) async {
     // imageSize 0 betekent "vullend"; dan valt er niets te zoomen en zou een
     // schuif op 0% een onmogelijke stand tonen.
-    await open(tester, enableZoom: true, imageSize: 0);
+    await open(tester, imageSize: 0);
     expect(find.byType(Slider), findsNothing);
   });
 
@@ -246,7 +231,7 @@ void main() {
     tester,
   ) async {
     // Zoom 100: het kind vult precies het kader.
-    await open(tester, enableZoom: true, imageSize: 100);
+    await open(tester, imageSize: 100);
     final frameSize = tester.getSize(find.byType(AspectRatio));
     final imageAt100 = tester.getSize(
       find.descendant(
@@ -261,7 +246,7 @@ void main() {
 
     // Zoom 300: het kind hoort 3× zo groot te zijn, niet afgeknepen tot het
     // kader.
-    await open(tester, enableZoom: true, imageSize: 300);
+    await open(tester, imageSize: 300);
     final imageAt300 = tester.getSize(
       find.descendant(
         of: find.byType(OverflowBox),

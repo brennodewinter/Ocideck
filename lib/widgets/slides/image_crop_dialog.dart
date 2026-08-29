@@ -37,10 +37,8 @@ bool imageIsCroppable(String imagePath) =>
 /// its slot ([frameAspect] = slot width / height), so what the author drags into
 /// place is what the slide shows.
 ///
-/// [enableZoom] is true for every caller: the full-slide image, the title and
-/// section backgrounds, and the bullets-panel / two-images slots. There
-/// [imageSize] is `imageZoom` (0 = fill/cover, 100 = whole image, up to
-/// [maxZoom]); for the full-bleed slides it is `imageSize` with the same
+/// [imageSize] is `imageZoom` for every caller (0 = fill/cover, 100 = whole
+/// image, up to [maxZoom]); the full-bleed slides use it with the same
 /// semantics.
 ///
 /// Returns the chosen values, or `null` when the author cancels.
@@ -66,7 +64,6 @@ Future<ImageCropResult?> showImageCropDialog(
   required int imageSize,
   required double focalX,
   required double focalY,
-  bool enableZoom = false,
   int minZoom = 100,
   int maxZoom = 400,
   Color backgroundColor = Colors.black,
@@ -80,7 +77,6 @@ Future<ImageCropResult?> showImageCropDialog(
       imageSize: imageSize,
       focalX: focalX,
       focalY: focalY,
-      enableZoom: enableZoom,
       minZoom: minZoom,
       maxZoom: maxZoom,
       backgroundColor: backgroundColor,
@@ -109,7 +105,6 @@ class _ImageCropDialog extends StatefulWidget {
   final int imageSize;
   final double focalX;
   final double focalY;
-  final bool enableZoom;
   final int minZoom;
   final int maxZoom;
   final Color backgroundColor;
@@ -121,7 +116,6 @@ class _ImageCropDialog extends StatefulWidget {
     required this.imageSize,
     required this.focalX,
     required this.focalY,
-    required this.enableZoom,
     required this.minZoom,
     required this.maxZoom,
     required this.backgroundColor,
@@ -143,10 +137,9 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   Uint8List? _originalBytes;
   double _scaleStart = 100; // zoom-niveau bij start van een pinch-gebaar
 
-  // In the panel slots (enableZoom == false) the image always covers its
-  // column, so treat it as cover regardless of what `imageSize` (the column
-  // width) happens to be. For image/title, cover is the explicit 0 zoom.
-  bool get _cover => widget.enableZoom ? _size == 0 : true;
+  // imageSize 0 means "fill/cover" — the image covers the slot with no zoom.
+  // Any other value is a zoom percentage, so the image is shown at that scale.
+  bool get _cover => _size == 0;
 
   /// Kan draaien: geen bundled assets (die zijn read-only) en geen URL's.
   bool get _canRotate =>
@@ -458,7 +451,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
             // en nooit vuren — vandaar dat _drag via focalPointDelta loopt.
             onScaleStart: (_) => _scaleStart = _size.toDouble(),
             onScaleUpdate: (s) {
-              if (widget.enableZoom && s.scale != 1.0) {
+              if (s.scale != 1.0) {
                 setState(() {
                   // Pinch past de zoom aan: van cover (0) naar inzoomen
                   // (minZoom..maxZoom). De slider volgt mee.
@@ -525,7 +518,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   ),
                 ),
               ),
-              if (widget.enableZoom && !_cover) ...[
+              if (!_cover) ...[
                 const SizedBox(height: 8),
                 Row(
                   children: [

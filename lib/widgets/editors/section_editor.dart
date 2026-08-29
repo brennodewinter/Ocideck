@@ -86,7 +86,6 @@ class _SectionEditorState extends ConsumerState<SectionEditor>
       imageSize: widget.slide.imageSize,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,
-      enableZoom: true,
     );
     if (result == null) return;
     widget.onUpdate(
