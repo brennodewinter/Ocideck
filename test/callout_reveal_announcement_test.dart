@@ -2,7 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/image_callout.dart';
+import 'package:ocideck/models/presentation_step_plan.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -106,5 +109,26 @@ void main() {
     // totaal van de vorige.
     await next();
     expect(announced.last, 'Punt 3/3');
+  });
+
+  group('stepAnnouncement — de bewoording, zonder presenter', () {
+    const l10n = AppLocalizations(Locale('nl'));
+
+    test('een tijdlijnstap meldt het gebeurtenisnummer', () {
+      const plan = TimelineStepPlan(eventCount: 4);
+      // Stap 0 toont al de eerste gebeurtenis: stap 2 is de derde.
+      expect(stepAnnouncement(plan, 2, l10n), 'Gebeurtenis 3/4');
+    });
+
+    test('geen stapplan: niets te melden', () {
+      expect(stepAnnouncement(null, 1, l10n), isNull);
+    });
+
+    test('een verwijzing met twee targets telt er twee', () {
+      final plan = CalloutRevealStepPlan.forSlide(_revealSlide());
+      expect(stepAnnouncement(plan, 1, l10n), 'Punt 1/3, 1 markering');
+      expect(stepAnnouncement(plan, 2, l10n), 'Punt 2/3, 2 markeringen');
+      expect(stepAnnouncement(plan, 3, l10n), 'Punt 3/3');
+    });
   });
 }

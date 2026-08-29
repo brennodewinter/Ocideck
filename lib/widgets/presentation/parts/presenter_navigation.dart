@@ -24,6 +24,35 @@ int? _indexOfAnchor(List<Slide> slides, String anchor) {
   return null;
 }
 
+/// De tekst die een stapwissel aan een schermlezer meldt, of null als er niets
+/// te melden valt (§12.2). Top-level en zonder `BuildContext`, zodat de
+/// bewoording los te toetsen is en de forse [_FullscreenPresenterState] er niet
+/// van groeit.
+///
+/// Voor een tijdlijn is dat het gebeurtenisnummer. Voor een
+/// callout-onthulling: welke bullet zichtbaar werd, en hoeveel markeringen er
+/// **bij deze stap** bij kwamen — niet het totaal dat al stond. Dat onderscheid
+/// is het verschil tussen "Punt 3/3" op een regel zonder verwijzing en de
+/// melding van twee markeringen die daar helemaal niet verschenen.
+@visibleForTesting
+String? stepAnnouncement(
+  PresentationStepPlan? plan,
+  int step,
+  AppLocalizations l10n,
+) {
+  if (plan is TimelineStepPlan) {
+    final n = plan.revealedEventCount(step);
+    return '${l10n.d('Gebeurtenis')} $n/${plan.eventCount}';
+  }
+  if (plan is! CalloutRevealStepPlan) return null;
+  final position =
+      '${l10n.d('Punt')} ${plan.revealedBulletCount(step)}/${plan.bullets.length}';
+  final marks = plan.marksAtStep(step);
+  if (marks == 0) return position;
+  final noun = marks == 1 ? l10n.d('markering') : l10n.d('markeringen');
+  return '$position, $marks $noun';
+}
+
 extension _PresenterNavigation on _FullscreenPresenterState {
   /// Meld de slidewissel aan schermlezers (WCAG 4.1.3, statusberichten):
   /// visueel verandert de hele slide, maar zonder aankondiging merkt een
@@ -41,39 +70,22 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     );
   }
 
-  /// Meld een stap-onthulling aan schermlezers (§12.2): welke bullet zichtbaar
-  /// werd en hoeveel callout-targets ermee kwamen. Voor een tijdlijn-stap meldt
-  /// dit het nieuwe gebeurtenisnummer.
+  /// Meld een stap-onthulling aan schermlezers (§12.2). De tekst zelf komt uit
+  /// [stepAnnouncement] — pure logica, los toetsbaar, en het houdt de toch al
+  /// forse [_FullscreenPresenterState] niet verder groeiend.
   void _announceStep() {
     if (!mounted) return;
-    final slide = _currentSlide;
-    final plan = _planFor(slide);
-    if (plan is TimelineStepPlan) {
-      final n = plan.revealedEventCount(_stepIndex);
-      SemanticsService.sendAnnouncement(
-        View.of(context),
-        '${context.l10n.d('Gebeurtenis')} $n/${plan.eventCount}',
-        TextDirection.ltr,
-      );
-    } else if (plan is CalloutRevealStepPlan) {
-      final bulletCount = plan.revealedBulletCount(_stepIndex);
-      // Het aantal markeringen dat bij *deze* stap verscheen — niet het totaal
-      // dat al stond (§12.2). Anders meldt een bullet zonder verwijzing de
-      // markeringen van de vorige stap opnieuw, en telde één verwijzing met
-      // twee targets voor één.
-      final marks = plan.marksAtStep(_stepIndex);
-      final position =
-          '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}';
-      final msg = marks == 0
-          ? position
-          : '$position, $marks '
-                '${marks == 1 ? context.l10n.d('markering') : context.l10n.d('markeringen')}';
-      SemanticsService.sendAnnouncement(
-        View.of(context),
-        msg,
-        TextDirection.ltr,
-      );
-    }
+    final message = stepAnnouncement(
+      _planFor(_currentSlide),
+      _stepIndex,
+      context.l10n,
+    );
+    if (message == null) return;
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      message,
+      TextDirection.ltr,
+    );
   }
 
   /// Ga voorwaarts naar [target] en onthoud de dia die je verlaat op de
