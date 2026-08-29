@@ -158,18 +158,9 @@ void main() {
         type: SlideType.bulletsImage,
         bullets: ['controller (A)', 'print head (B)', 'bolts (C)'],
         callouts: const [
-          ImageCallout(
-            reference: 'A',
-            targets: [CalloutPoint(0.4, 0.25)],
-          ),
-          ImageCallout(
-            reference: 'B',
-            targets: [CalloutPoint(0.6, 0.5)],
-          ),
-          ImageCallout(
-            reference: 'C',
-            targets: [CalloutPoint(0.7, 0.3)],
-          ),
+          ImageCallout(reference: 'A', targets: [CalloutPoint(0.4, 0.25)]),
+          ImageCallout(reference: 'B', targets: [CalloutPoint(0.6, 0.5)]),
+          ImageCallout(reference: 'C', targets: [CalloutPoint(0.7, 0.3)]),
         ],
         calloutReveal: BulletRevealMode.steps,
       );
@@ -238,10 +229,7 @@ void main() {
         callouts: const [
           ImageCallout(
             reference: 'C',
-            targets: [
-              CalloutPoint(0.61, 0.48),
-              CalloutPoint(0.70, 0.30),
-            ],
+            targets: [CalloutPoint(0.61, 0.48), CalloutPoint(0.70, 0.30)],
             description: 'the two mounting bolts',
           ),
         ],
@@ -277,33 +265,35 @@ void main() {
     });
   });
 
-  group('TimelineStepPlan regression (generalisation did not change behaviour)',
-  () {
-    test('timeline steps: step 0 = first event, step N = all', () {
-      final slide = Slide(
-        id: 'test',
-        type: SlideType.timeline,
-        bullets: ['2019 :: A', '2020 :: B', '2021 :: C'],
-        timelineReveal: TimelineReveal.steps,
-      );
-      final plan = PresentationStepPlan.forSlide(slide);
-      expect(plan, isA<TimelineStepPlan>());
-      final tp = plan as TimelineStepPlan;
-      expect(tp.eventCount, 3);
-      expect(tp.remainingSteps, 2);
-      expect(tp.revealedEventCount(0), 1);
-      expect(tp.revealedEventCount(1), 2);
-      expect(tp.revealedEventCount(2), 3);
-    });
+  group(
+    'TimelineStepPlan regression (generalisation did not change behaviour)',
+    () {
+      test('timeline steps: step 0 = first event, step N = all', () {
+        final slide = Slide(
+          id: 'test',
+          type: SlideType.timeline,
+          bullets: ['2019 :: A', '2020 :: B', '2021 :: C'],
+          timelineReveal: TimelineReveal.steps,
+        );
+        final plan = PresentationStepPlan.forSlide(slide);
+        expect(plan, isA<TimelineStepPlan>());
+        final tp = plan as TimelineStepPlan;
+        expect(tp.eventCount, 3);
+        expect(tp.remainingSteps, 2);
+        expect(tp.revealedEventCount(0), 1);
+        expect(tp.revealedEventCount(1), 2);
+        expect(tp.revealedEventCount(2), 3);
+      });
 
-    test('timeline onEnter → no stepping', () {
-      final slide = Slide(
-        id: 'test',
-        type: SlideType.timeline,
-        bullets: ['2019 :: A', '2020 :: B'],
-        timelineReveal: TimelineReveal.onEnter,
-      );
-      expect(PresentationStepPlan.forSlide(slide), isA<NoStepPlan>());
-    });
-  });
+      test('timeline onEnter → no stepping', () {
+        final slide = Slide(
+          id: 'test',
+          type: SlideType.timeline,
+          bullets: ['2019 :: A', '2020 :: B'],
+          timelineReveal: TimelineReveal.onEnter,
+        );
+        expect(PresentationStepPlan.forSlide(slide), isA<NoStepPlan>());
+      });
+    },
+  );
 }

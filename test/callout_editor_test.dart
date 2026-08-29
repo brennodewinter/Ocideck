@@ -215,9 +215,9 @@ void main() {
     await _setSurface(tester);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    final slide = Slide.create(SlideType.bulletsImage).copyWith(
-      bullets: ['Eerste punt'],
-    );
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
 
     await tester.pumpWidget(
       _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
@@ -234,9 +234,9 @@ void main() {
     await _setSurface(tester);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    var updated = Slide.create(SlideType.bulletsImage).copyWith(
-      bullets: ['Eerste punt'],
-    );
+    var updated = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
 
     await tester.pumpWidget(
       _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),

@@ -61,8 +61,12 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       final msg = refs.isEmpty
           ? '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}'
           : '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}, '
-              '${refs.length} ${context.l10n.d('markeringen')}';
-      SemanticsService.sendAnnouncement(View.of(context), msg, TextDirection.ltr);
+                '${refs.length} ${context.l10n.d('markeringen')}';
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        msg,
+        TextDirection.ltr,
+      );
     }
   }
 

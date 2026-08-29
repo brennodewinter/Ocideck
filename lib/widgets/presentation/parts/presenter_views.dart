@@ -61,8 +61,9 @@ extension _PresenterViews on _FullscreenPresenterState {
                         ? (page) => _setRichTextPage(page)
                         : null,
                     timelineRevealedCount: _timelineRevealedFor(slide),
-                    calloutRevealedBulletCount:
-                        _calloutRevealedBulletCount(slide),
+                    calloutRevealedBulletCount: _calloutRevealedBulletCount(
+                      slide,
+                    ),
                     tlp: widget.tlp,
                     organization: widget.organization,
                     showClassificationWatermark:

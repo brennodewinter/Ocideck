@@ -435,8 +435,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     menuCategory: _menuCategory,
                     showRichTextPageControls: false,
                     timelineRevealedCount: _timelineRevealedFor(slide),
-                    calloutRevealedBulletCount:
-                        _calloutRevealedBulletCount(slide),
+                    calloutRevealedBulletCount: _calloutRevealedBulletCount(
+                      slide,
+                    ),
                     tlp: _tlp,
                     organization: _organization,
                     showClassificationWatermark: _showClassificationWatermark,

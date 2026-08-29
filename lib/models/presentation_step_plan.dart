@@ -111,7 +111,9 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
 
   /// Build the plan from a slide's bullets and callouts.
   factory CalloutRevealStepPlan.forSlide(Slide slide) {
-    final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
+    final bullets = slide.bullets
+        .where((b) => b.trimLeft().isNotEmpty)
+        .toList();
     final refs = bullets.map(_extractReference).toList();
     final calloutRefs = slide.callouts.map((c) => c.reference).toSet();
     return CalloutRevealStepPlan(
@@ -152,8 +154,7 @@ class CalloutRevealStepPlan extends PresentationStepPlan {
       other.calloutReferences.containsAll(calloutReferences);
 
   @override
-  int get hashCode =>
-      Object.hash(bullets, bulletReferences, calloutReferences);
+  int get hashCode => Object.hash(bullets, bulletReferences, calloutReferences);
 
   static bool _listEq(List<String> a, List<String> b) {
     if (a.length != b.length) return false;

@@ -17,7 +17,9 @@ Set<String> _revealedCalloutReferences(
 ) {
   final calloutRefs = callouts.map((c) => c.reference).toSet();
   final refs = <String>{};
-  for (final bullet in allBullets.take(revealCount.clamp(0, allBullets.length))) {
+  for (final bullet in allBullets.take(
+    revealCount.clamp(0, allBullets.length),
+  )) {
     final match = _bulletRefSuffix.firstMatch(bullet.trimRight());
     final ref = match?.group(1);
     if (ref != null && calloutRefs.contains(ref)) refs.add(ref);

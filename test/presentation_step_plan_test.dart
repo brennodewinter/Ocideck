@@ -11,15 +11,14 @@ Slide testSlide({
   TimelineReveal? timelineReveal,
   List<ImageCallout> callouts = const [],
   BulletRevealMode calloutReveal = BulletRevealMode.all,
-}) =>
-    Slide(
-      id: 'test',
-      type: type,
-      bullets: bullets,
-      timelineReveal: timelineReveal ?? TimelineReveal.onEnter,
-      callouts: callouts,
-      calloutReveal: calloutReveal,
-    );
+}) => Slide(
+  id: 'test',
+  type: type,
+  bullets: bullets,
+  timelineReveal: timelineReveal ?? TimelineReveal.onEnter,
+  callouts: callouts,
+  calloutReveal: calloutReveal,
+);
 
 void main() {
   group('PresentationStepPlan.forSlide', () {
@@ -79,10 +78,7 @@ void main() {
         type: SlideType.bulletsImage,
         bullets: ['one (A)', 'two (B)'],
         callouts: [
-          ImageCallout(
-            reference: 'A',
-            targets: [const CalloutPoint(0.5, 0.5)],
-          ),
+          ImageCallout(reference: 'A', targets: [const CalloutPoint(0.5, 0.5)]),
         ],
         calloutReveal: BulletRevealMode.all,
       );
@@ -110,10 +106,7 @@ void main() {
             reference: 'A',
             targets: [const CalloutPoint(0.4, 0.25)],
           ),
-          ImageCallout(
-            reference: 'B',
-            targets: [const CalloutPoint(0.6, 0.5)],
-          ),
+          ImageCallout(reference: 'B', targets: [const CalloutPoint(0.6, 0.5)]),
         ],
         calloutReveal: BulletRevealMode.steps,
       );
@@ -143,10 +136,7 @@ void main() {
         type: SlideType.bulletsImage,
         bullets: ['no callout', 'with callout (A)'],
         callouts: [
-          ImageCallout(
-            reference: 'A',
-            targets: [const CalloutPoint(0.5, 0.5)],
-          ),
+          ImageCallout(reference: 'A', targets: [const CalloutPoint(0.5, 0.5)]),
         ],
         calloutReveal: BulletRevealMode.steps,
       );
@@ -165,10 +155,7 @@ void main() {
         type: SlideType.bulletsImage,
         bullets: [],
         callouts: [
-          ImageCallout(
-            reference: 'A',
-            targets: [const CalloutPoint(0.5, 0.5)],
-          ),
+          ImageCallout(reference: 'A', targets: [const CalloutPoint(0.5, 0.5)]),
         ],
         calloutReveal: BulletRevealMode.steps,
       );
