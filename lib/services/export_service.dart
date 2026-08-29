@@ -18,6 +18,7 @@ import '../utils/log.dart';
 import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
+import '../models/image_callout.dart';
 import '../models/privacy_disposition.dart';
 import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
@@ -159,6 +160,21 @@ class ExportService {
       ? null
       : [for (final s in audience.audience.slides) s.notes];
 
+  /// De alt-tekst per slide voor een raster-export (IMAGE_CALLOUTS.md §12.2):
+  /// de bestaande alt-tekst van de afbeelding met de callout-beschrijvingen
+  /// erachter. Een gerasterde slide blijft structureel ontoegankelijk; dit
+  /// voorkomt alleen dat de betekenis wegvalt waar het formaat er een sleuf
+  /// voor heeft. Een geredigeerde slide levert niets — dan staat het beeld er
+  /// ook niet meer.
+  static List<String>? _altTextsOf(ExportBundle? audience) => audience == null
+      ? null
+      : [
+          for (final s in audience.audience.slides)
+            s.mediaRedacted || s.contentRedacted
+                ? ''
+                : calloutAltText(s.imageAltText, s.callouts),
+        ];
+
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
@@ -254,6 +270,7 @@ class ExportService {
               metadata: docMeta,
               fallbackTitle: fallbackTitle,
               notes: _notesOf(audience),
+              altTexts: _altTextsOf(audience),
             ),
           );
         case ExportFormat.odp:
@@ -262,6 +279,7 @@ class ExportService {
               images: images,
               metadata: docMeta,
               fallbackTitle: fallbackTitle,
+              altTexts: _altTextsOf(audience),
             ),
           );
         case ExportFormat.html:

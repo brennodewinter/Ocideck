@@ -374,6 +374,26 @@ class _BulletsImagePreview extends StatelessWidget {
     );
   }
 
+  /// De Flutter-spiegel van het `aria-describedby` uit de HTML-export
+  /// (§12.2): draagt [bullet] een callout-referentie `(A)`, dan krijgt de
+  /// bullet de beschrijving van die referentie als `hint`, in één
+  /// samengevoegde knoop. Een schermlezer leest dan de bullet en daarna één
+  /// keer de betekenis — dezelfde koppeling die de ziende lezer aan de `(A)`
+  /// afleest. Bullets zonder referentie blijven onaangeraakt, zodat er geen
+  /// lege hint of extra knoop bijkomt.
+  Widget _describedByCallout(String bullet, Widget row) {
+    if (slide.callouts.isEmpty) return row;
+    final ref = _bulletRefSuffix.firstMatch(bullet.trimRight())?.group(1);
+    if (ref == null) return row;
+    for (final callout in slide.callouts) {
+      if (callout.reference != ref || callout.description.isEmpty) continue;
+      return MergeSemantics(
+        child: Semantics(hint: callout.description, child: row),
+      );
+    }
+    return row;
+  }
+
   Widget _contentColumn({
     required BuildContext context,
     required double scale,
@@ -444,22 +464,25 @@ class _BulletsImagePreview extends StatelessWidget {
                 slide.listStyle == ListStyle.checklist &&
                 checklistItemChecked(b);
             final fontSize = bulletSize * bulletLevelScale(level) * scale;
-            return _ChecklistBulletRow(
-              bullets: bullets,
-              itemIndex: entry.key,
-              column: 0,
-              listStyle: slide.listStyle,
-              marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
-              checked: checked,
-              text: text,
-              level: level,
-              fontSize: fontSize,
-              bulletSize: bulletSize,
-              bulletGap: bulletGap,
-              scale: scale,
-              font: font,
-              profile: profile,
-              startNumber: numberStart,
+            return _describedByCallout(
+              b,
+              _ChecklistBulletRow(
+                bullets: bullets,
+                itemIndex: entry.key,
+                column: 0,
+                listStyle: slide.listStyle,
+                marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
+                checked: checked,
+                text: text,
+                level: level,
+                fontSize: fontSize,
+                bulletSize: bulletSize,
+                bulletGap: bulletGap,
+                scale: scale,
+                font: font,
+                profile: profile,
+                startNumber: numberStart,
+              ),
             );
           }),
         ],

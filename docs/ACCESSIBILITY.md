@@ -1,6 +1,6 @@
 # OciDeck — Accessibility
 
-> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of what is and is not accessible · **Status last reviewed:** 2026-08-29 · **Published by:** Stichting LibreKAT
 
 What OciDeck does for accessibility, and — the longer half of this document —
 what it does not do. Both halves are here on purpose. A tool that only lists its
@@ -29,6 +29,22 @@ reach the audience are spoken, and spoken separately, because the dimming and th
 two coloured flags that carry the same message on screen are of no use here. Charts expose their
 data as a text alternative (`_semanticsLabel` in `chart_preview.dart`), so a
 chart is readable and not merely present. Icon-only buttons carry a name.
+
+**Image callouts are readable without sight.** A callout ties a bullet to a
+place in the picture (*a numbered pin, a highlighted region or an arrow*), and
+the tie is programmatic, not only visual. In the app each mark is a labelled
+node — *reference, description*, plus *target n of m* when one reference has
+several marks — and the bullet that owns it carries the same description, so
+reading the bullet reads the meaning once. The visible letter on the mark is
+kept out of the tree, because it is already the first word of the label. While
+presenting with step-by-step reveal, a group that has not been revealed yet is
+**absent from the accessibility tree**, not merely transparent, and every step
+is announced with the bullet and how many marks came with it. The HTML export
+carries the same thing in ARIA: `role="img"` with the same name on each mark, a
+visually hidden description with a stable id, and `aria-describedby` on the
+bullet. The HTML export does not step — it shows every group at once — so it has
+no live region. The contract is `docs/design/IMAGE_CALLOUTS.md` §12; the gate is
+`test/callout_accessibility_test.dart`.
 
 **A test that fails the build — and exactly how much of the app it sees.**
 `test/accessibility_labels_test.dart` asserts that every button has an
@@ -127,8 +143,13 @@ page, and the PPTX is one `<p:pic>` per slide. Consequences, stated plainly:
 
 - there is **no text layer**, so nothing can be selected, searched, or read by a
   screen reader;
-- there is **no alt-text** in the output, including for the images you carefully
-  gave alt-text to in the editor;
+- there is **no alt-text** in the PDF, including for the images you carefully
+  gave alt-text to in the editor. PPTX and ODP are a partial exception since
+  2026-08-29: each slide's picture carries a shape-level description (`descr` in
+  PPTX, `<svg:desc>` in ODP) holding the image's alt text and the descriptions
+  of any image callouts on that slide. That is one string per slide, not a
+  structure — it is the difference between the meaning surviving and the
+  meaning being thrown away, not between inaccessible and accessible;
 - there is **no structure** — no headings, no reading order, no tags, no
   table semantics;
 - a chart's data alternative, which the editor exposes, does not survive.

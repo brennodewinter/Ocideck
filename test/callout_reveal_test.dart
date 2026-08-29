@@ -1,6 +1,7 @@
-import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:image/image.dart' as img;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/image_callout.dart';
@@ -18,133 +19,102 @@ import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 /// surface: that `CalloutOverlay` with `revealedReferences` filters callouts,
 /// and that the static export path (no step state) shows everything.
 
-/// A minimal valid 1×1 transparent PNG.
-final _pngBytes = Uint8List.fromList(
-  base64Decode(
-    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk'
-    '+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
-  ),
-);
-
 Widget _host(Widget child) => MaterialApp(
   home: Center(child: SizedBox(width: 400, height: 300, child: child)),
 );
+
+/// Een echt PNG op schijf — de overlay heeft een decodeerbare bron nodig.
+String _writePng(String prefix) {
+  final dir = Directory.systemTemp.createTempSync(prefix);
+  final file = File('${dir.path}/beeld.png');
+  final image = img.Image(width: 200, height: 100);
+  img.fill(image, color: img.ColorRgb8(180, 180, 180));
+  file.writeAsBytesSync(Uint8List.fromList(img.encodePng(image)));
+  return file.path;
+}
+
+Slide _slide(String imagePath) => Slide(
+  id: 'test',
+  type: SlideType.bulletsImage,
+  imagePath: imagePath,
+  callouts: const [
+    ImageCallout(
+      reference: 'A',
+      targets: [CalloutPoint(0.4, 0.3)],
+      description: 'eerste',
+    ),
+    ImageCallout(
+      reference: 'B',
+      targets: [CalloutPoint(0.6, 0.5)],
+      description: 'tweede',
+    ),
+  ],
+);
+
+Future<void> _pumpOverlay(
+  WidgetTester tester,
+  Slide slide, {
+  required Set<String>? revealed,
+}) async {
+  await tester.pumpWidget(
+    _host(
+      CalloutOverlay(
+        slide: slide,
+        profile: const ThemeProfile(),
+        slotWidth: 400,
+        slotHeight: 300,
+        revealedReferences: revealed,
+      ),
+    ),
+  );
+  // De decode is echte async; daarna één frame om de markeringen te tekenen.
+  await Future<void>.delayed(const Duration(milliseconds: 300));
+  await tester.pump();
+}
 
 void main() {
   setUp(WebAssetStore.clear);
   tearDown(WebAssetStore.clear);
 
   group('CalloutOverlay revealedReferences filter', () {
-    testWidgets('null revealedReferences → all callouts processed', (
+    // Deze drie renderen écht. `CalloutOverlay` tekent niets vóór de
+    // intrinsieke beeldmaat bekend is, en die komt uit een echte decode — dus
+    // draaien ze binnen `tester.runAsync` met een PNG op schijf. Zonder dat
+    // vindt de test nul markeringen en bewijst `findsNothing` niets: hij is
+    // dan even groen mét als zónder het onthullingsfilter.
+    testWidgets('null revealedReferences → alle markeringen getekend', (
       tester,
     ) async {
-      final memPath = WebAssetStore.put(_pngBytes, name: 'test.png');
-      final slide = Slide(
-        id: 'test',
-        type: SlideType.bulletsImage,
-        imagePath: memPath,
-        callouts: const [
-          ImageCallout(
-            reference: 'A',
-            targets: [CalloutPoint(0.4, 0.3)],
-            description: 'eerste',
-          ),
-          ImageCallout(
-            reference: 'B',
-            targets: [CalloutPoint(0.6, 0.5)],
-            description: 'tweede',
-          ),
-        ],
-      );
-      // null = show everything (static export, editor, non-stepping).
-      await tester.pumpWidget(
-        _host(
-          CalloutOverlay(
-            slide: slide,
-            profile: const ThemeProfile(),
-            slotWidth: 400,
-            slotHeight: 300,
-            revealedReferences: null,
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      // Image can't resolve in tests → no markers, but no crash either.
-      expect(find.text('A'), findsNothing);
-      expect(find.text('B'), findsNothing);
+      await tester.runAsync(() async {
+        final slide = _slide(_writePng('ocideck_reveal_all'));
+        await _pumpOverlay(tester, slide, revealed: null);
+        expect(find.text('A'), findsOneWidget);
+        expect(find.text('B'), findsOneWidget);
+      });
     });
 
-    testWidgets('empty revealedReferences → no callouts processed', (
+    testWidgets('lege revealedReferences → geen enkele markering', (
       tester,
     ) async {
-      final memPath = WebAssetStore.put(_pngBytes, name: 'test.png');
-      final slide = Slide(
-        id: 'test',
-        type: SlideType.bulletsImage,
-        imagePath: memPath,
-        callouts: const [
-          ImageCallout(
-            reference: 'A',
-            targets: [CalloutPoint(0.4, 0.3)],
-            description: 'eerste',
-          ),
-        ],
-      );
-      // Empty set = step 0, nothing revealed yet.
-      await tester.pumpWidget(
-        _host(
-          CalloutOverlay(
-            slide: slide,
-            profile: const ThemeProfile(),
-            slotWidth: 400,
-            slotHeight: 300,
-            revealedReferences: const {},
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      // No markers at all — A is filtered out.
-      expect(find.text('A'), findsNothing);
+      await tester.runAsync(() async {
+        final slide = _slide(_writePng('ocideck_reveal_none'));
+        // Lege set = stap 0: titel en beeld, verder niets.
+        await _pumpOverlay(tester, slide, revealed: const {});
+        expect(find.text('A'), findsNothing);
+        expect(find.text('B'), findsNothing);
+      });
     });
 
-    testWidgets('partial revealedReferences → only matching callouts', (
+    testWidgets('deel-onthulling → alleen de onthulde markering', (
       tester,
     ) async {
-      final memPath = WebAssetStore.put(_pngBytes, name: 'test.png');
-      final slide = Slide(
-        id: 'test',
-        type: SlideType.bulletsImage,
-        imagePath: memPath,
-        callouts: const [
-          ImageCallout(
-            reference: 'A',
-            targets: [CalloutPoint(0.4, 0.3)],
-            description: 'eerste',
-          ),
-          ImageCallout(
-            reference: 'B',
-            targets: [CalloutPoint(0.6, 0.5)],
-            description: 'tweede',
-          ),
-        ],
-      );
-      // Only A is revealed (step 1 of 2).
-      await tester.pumpWidget(
-        _host(
-          CalloutOverlay(
-            slide: slide,
-            profile: const ThemeProfile(),
-            slotWidth: 400,
-            slotHeight: 300,
-            revealedReferences: const {'A'},
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      // Image can't resolve in tests → no markers, but the filtering code path
-      // is exercised without crash.
-      expect(find.text('A'), findsNothing);
-      expect(find.text('B'), findsNothing);
+      await tester.runAsync(() async {
+        final slide = _slide(_writePng('ocideck_reveal_partial'));
+        // Stap 1 van 2: A staat er, B nog niet.
+        await _pumpOverlay(tester, slide, revealed: const {'A'});
+        expect(find.text('A'), findsOneWidget);
+        expect(find.text('B'), findsNothing);
+      });
     });
   });
 

@@ -32,10 +32,16 @@ const odpSlideHeightCm = 14.29;
 ///
 /// Headless: geen IO. De aanroeler levert [images] (één PNG per slide) en
 /// [metadata], en krijgt de ODT-bytes terug.
+///
+/// [altTexts], als het meekomt, is per slide de alt-tekst voor het beeld
+/// (IMAGE_CALLOUTS.md §12.2). Een gerasterde slide blijft structureel
+/// ontoegankelijk, maar `<svg:desc>` is de plek die ODF ervoor heeft; een lege
+/// of ontbrekende regel schrijft geen element.
 Uint8List buildDeckExportOdp({
   required List<Uint8List> images,
   required ExportDocumentMetadata metadata,
   required String fallbackTitle,
+  List<String>? altTexts,
 }) {
   final archive = Archive();
   void addText(String name, String content) {
@@ -54,7 +60,7 @@ Uint8List buildDeckExportOdp({
   archive.add(mimetypeFile);
 
   addText('META-INF/manifest.xml', _odpManifest(slideCount));
-  addText('content.xml', _odpContentXml(slideCount));
+  addText('content.xml', _odpContentXml(slideCount, altTexts));
   addText('meta.xml', _odpMetaXml(metadata, fallbackTitle: fallbackTitle));
 
   for (var i = 0; i < slideCount; i++) {
@@ -91,7 +97,7 @@ String _odpManifest(int slideCount) {
   return buf.toString();
 }
 
-String _odpContentXml(int slideCount) {
+String _odpContentXml(int slideCount, List<String>? altTexts) {
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
     ..writeln(
@@ -121,11 +127,18 @@ String _odpContentXml(int slideCount) {
     ..writeln('<office:presentation>');
 
   for (var i = 1; i <= slideCount; i++) {
+    // `<svg:desc>` hoort in ODF ná de inhoud van de vorm te staan, en de tekst
+    // gaat door de element-escaper — het is inhoud, geen attribuut.
+    final alt = (altTexts != null && i - 1 < altTexts.length)
+        ? altTexts[i - 1].trim()
+        : '';
+    final desc = alt.isEmpty ? '' : '<svg:desc>${_xmlEscape(alt)}</svg:desc>';
     buf.writeln(
       '<draw:page draw:name="page$i" draw:style-name="dp1">'
       '<draw:frame draw:style-name="gr1" svg:x="0cm" svg:y="0cm" '
       'svg:width="${odpSlideWidthCm}cm" svg:height="${odpSlideHeightCm}cm">'
       '<draw:image xlink:href="Pictures/image$i.png" xlink:type="simple"/>'
+      '$desc'
       '</draw:frame>'
       '</draw:page>',
     );

@@ -192,3 +192,29 @@ String _fmt(double v) => v.toStringAsFixed(3);
 /// Of [v] ligt in het gesloten interval [0, 1]. Een kleine epsilon laat
 /// afrondingsruis toe (0.9999999 → true) zonder 1.001 door te laten.
 bool _inUnit(double v) => v >= -0.001 && v <= 1.001;
+
+/// De alt-tekst voor een raster-export (§12.2): [existingAlt] gevolgd door één
+/// zin per callout-beschrijving, `A: …`.
+///
+/// PDF, PPTX en ODP zijn vastgelegde beelden en blijven structureel
+/// ontoegankelijk — dat verandert dit niet. Wat het wél doet is voorkomen dat
+/// de betekenis wegvalt waar het doelformaat er een plek voor heeft: PPTX heeft
+/// `descr` op de vorm, ODP heeft `<svg:desc>`. De referentieletter gaat mee
+/// omdat de ziende lezer die op het beeld ziet staan; zonder die letter is de
+/// beschrijving los zand.
+///
+/// Beschrijvingsloze callouts vallen weg — een lege `A: ` zegt niets. Elk deel
+/// krijgt een punt zodat een schermlezer de zinnen niet aan elkaar plakt.
+/// Levert een lege string als er niets te zeggen valt; de aanroeper laat het
+/// veld dan weg in plaats van een leeg attribuut te schrijven.
+String calloutAltText(String existingAlt, List<ImageCallout> callouts) {
+  final parts = <String>[];
+  final alt = existingAlt.trim();
+  if (alt.isNotEmpty) parts.add(alt);
+  for (final callout in callouts) {
+    final description = callout.description.trim();
+    if (description.isEmpty) continue;
+    parts.add('${callout.reference}: $description');
+  }
+  return parts.map((p) => p.endsWith('.') ? p : '$p.').join(' ');
+}

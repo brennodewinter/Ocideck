@@ -4,7 +4,7 @@
 
 # OciDeck — Toegankelijkheid
 
-> **Status:** beschrijving van de huidige stand van wat wel en niet toegankelijk is · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** beschrijving van de huidige stand van wat wel en niet toegankelijk is · **Status laatst nagekeken:** 2026-08-29 · **Uitgegeven door:** Stichting LibreKAT
 
 Wat OciDeck voor toegankelijkheid doet, en — de langere helft van dit document —
 wat het niet doet. Beide helften staan hier met opzet. Een gereedschap dat enkel
@@ -36,6 +36,23 @@ scherm dezelfde boodschap dragen hier geen nut hebben. Grafieken tonen hun
 gegevens als tekstalternatief (`_semanticsLabel` in `chart_preview.dart`), zodat
 een grafiek leesbaar is en niet slechts aanwezig. Knoppen met alleen een pictogram
 dragen een naam.
+
+**Beeldverwijzingen zijn zonder zicht te lezen.** Een beeldverwijzing knoopt een
+bullet aan een plek in de afbeelding (*een genummerde speld, een gemarkeerd
+gebied of een pijl*), en die knoop is programmatisch, niet alleen visueel. In de
+app is elke markering een knoop met een naam — *verwijzing, beschrijving*, plus
+*target n van m* als één verwijzing meerdere markeringen heeft — en de bullet
+die hem bezit draagt dezelfde beschrijving, zodat het lezen van de bullet de
+betekenis één keer meeleest. De zichtbare letter op de markering blijft buiten
+de boom, want die staat al vooraan in de naam. Presenteer je met stapsgewijs
+onthullen, dan is een groep die nog niet onthuld is **afwezig uit de
+accessibility tree**, niet enkel doorzichtig, en wordt elke stap aangekondigd
+met de bullet en hoeveel markeringen meekwamen. De HTML-export draagt hetzelfde
+in ARIA: `role="img"` met dezelfde naam op elke markering, een visueel verborgen
+beschrijving met een vast id, en `aria-describedby` op de bullet. De
+HTML-export stapt niet — hij toont elke groep tegelijk — en heeft daarom geen
+live region. Het contract is `docs/design/IMAGE_CALLOUTS.md` §12; de poort is
+`test/callout_accessibility_test.dart`.
 
 **Een test die de build laat falen — en precies hoeveel van de app hij ziet.**
 `test/accessibility_labels_test.dart` stelt vast dat elke knop een toegankelijke
@@ -141,8 +158,14 @@ Gevolgen, ronduit gezegd:
 
 - er is **geen tekstlaag**, dus er is niets te selecteren, te doorzoeken of door
   een schermlezer te lezen;
-- er is **geen alt-tekst** in de uitvoer, ook niet voor de afbeeldingen die je in
-  de editor zorgvuldig alt-tekst gaf;
+- er is **geen alt-tekst** in de PDF, ook niet voor de afbeeldingen die je in
+  de editor zorgvuldig alt-tekst gaf. PPTX en ODP zijn sinds 29-08-2026 een
+  gedeeltelijke uitzondering: de afbeelding van elke dia draagt een beschrijving
+  op de vorm (`descr` in PPTX, `<svg:desc>` in ODP) met de alt-tekst van het
+  beeld en de beschrijvingen van de beeldverwijzingen op die dia. Dat is één
+  regel tekst per dia, geen structuur — het verschil tussen betekenis die
+  overleeft en betekenis die weggegooid wordt, niet tussen ontoegankelijk en
+  toegankelijk;
 - er is **geen structuur** — geen koppen, geen leesvolgorde, geen tags, geen
   tabelsemantiek;
 - het gegevensalternatief van een grafiek, dat de editor toont, overleeft niet.
