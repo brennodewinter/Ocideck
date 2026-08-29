@@ -531,6 +531,20 @@ and named by reference and target number.
 
 Styling is theme-derived **plus a non-optional two-tone edge**: the pixels under
 a mark are arbitrary, so a theme accent cannot be assumed to contrast with them.
+**The two tones are one light and one dark** — a white ring around the accent
+fill, a dark ring around that. Revision 4 said only "the edge is always dark",
+and Flutter implemented exactly that; on a dark picture with the shipped profile
+(accent `#003399`, edge `#111111`) the mark then measured 1.5:1 for the fill and
+1.16:1 for the edge, against this app's own 3.5 floor, and greyscale left a
+letter floating with no mark around it. An edge that is always dark cannot carry
+a promise about arbitrary pixels; one of each tone can. The HTML export already
+did it this way, which is how the divergence was found.
+
+The radius is proportional to the slot **with a floor**. Without one, a mark on
+the slide rail (~121 pt slot) came out at a 2.7 pt radius and vanished into the
+picture: the rail then showed a slide with no sign that it carries references at
+all. The letter is illegible at that size either way — a navigation strip is not
+a reading surface — but the mark has to stay a mark.
 A number reduces reliance on colour but does not say *which part* of a picture is
 meant, so a description is what carries the meaning for a screen reader — the
 mark is never "accessible by construction". The description is written once per

@@ -3,8 +3,8 @@
 // slot pixels, so the overlay stays aligned with the painted image
 // regardless of cover/zoom/focal.
 
-import 'dart:async';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -35,42 +35,54 @@ ImageProvider? _calloutImageProvider(String imagePath, String? projectPath) {
   return cappedFileImage(File(resolved));
 }
 
-/// Resolves the intrinsic dimensions of an image at [imagePath].
-/// Returns null if the image cannot be resolved.
-Future<Size?> _resolveIntrinsicSize(
-  String imagePath,
-  String? projectPath,
-) async {
-  final provider = _calloutImageProvider(imagePath, projectPath);
-  if (provider == null) return null;
-  final completer = Completer<Size?>();
+/// Zoek de intrinsieke maat van [provider] op en geef hem door aan [onSize],
+/// met een vlag die zegt of dat **synchroon** gebeurde.
+///
+/// Staat het beeld al in de imagecache, dan roept [ImageStream.addListener] de
+/// listener meteen aan; dan is `synchronous` waar en mag de aanroeper de maat
+/// direct zetten in plaats van via `setState`. Dat onderscheid draagt de
+/// rasterexports: die laden de beelden voor en vangen dan één frame. Loopt de
+/// maat altijd over een `setState`, dan komt de markering pas in het frame
+/// dáárna — zichtbaar in de app, weg in de PDF, PPTX en ODP.
+///
+/// Levert `null` als de afbeelding niet te lezen is.
+@visibleForTesting
+void resolveIntrinsicSize(
+  ImageProvider provider,
+  void Function(Size? size, bool synchronous) onSize,
+) {
+  var synchronous = true;
   final stream = provider.resolve(ImageConfiguration.empty);
   late ImageStreamListener listener;
-  listener = ImageStreamListener(
-    (info, _) {
-      final size = Size(
-        info.image.width.toDouble(),
-        info.image.height.toDouble(),
-      );
-      info.dispose();
-      if (!completer.isCompleted) completer.complete(size);
-    },
-    onError: (error, _) {
-      if (!completer.isCompleted) completer.complete(null);
-    },
-  );
+  void finish(Size? size) {
+    stream.removeListener(listener);
+    onSize(size, synchronous);
+  }
+
+  listener = ImageStreamListener((info, _) {
+    final size = Size(
+      info.image.width.toDouble(),
+      info.image.height.toDouble(),
+    );
+    info.dispose();
+    finish(size);
+  }, onError: (_, _) => finish(null));
   stream.addListener(listener);
-  final result = await completer.future;
-  stream.removeListener(listener);
-  return result;
+  synchronous = false;
 }
 
 /// A callout marker: a numbered pin drawn on the image overlay.
 ///
-/// Styling is theme-derived plus a non-optional two-tone edge (§6):
-/// the pixels under a mark are arbitrary, so a theme accent cannot be
-/// assumed to contrast with them. The edge is always dark, the fill is
-/// the theme accent, and the text is white-on-accent or dark-on-light.
+/// Styling is theme-derived plus a non-optional two-tone edge (§6): the pixels
+/// under a mark are arbitrary, so a theme accent cannot be assumed to contrast
+/// with them. De vulling is het thema-accent; daaromheen ligt een **witte**
+/// ring en daaromheen een donkere. Twee tonen, en met opzet één lichte en één
+/// donkere: een rand die altijd donker is helpt niet op een donkere
+/// ondergrond. Met het uitgerolde profiel (accent `#003399`, rand `#111111`)
+/// haalde de markering op zwart 1,5:1 voor de vulling en 1,16:1 voor de rand —
+/// ver onder de 3,5 die deze app zelf als ondergrens hanteert. In grijswaarden
+/// bleef er een zwevende letter over. De HTML-export deed het al zo; dit brengt
+/// Flutter in lijn.
 class _CalloutMarker extends StatelessWidget {
   final String reference;
   final double x;
@@ -114,7 +126,12 @@ class _CalloutMarker extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: accentColor,
-            border: Border.all(color: edgeColor, width: markerRadius * 0.18),
+            border: Border.all(color: Colors.white, width: markerRadius * 0.16),
+            boxShadow: [
+              // Een massieve ring buiten de witte: geen vervaging, geen
+              // verschuiving. Dit is de donkere helft van de twee tonen.
+              BoxShadow(color: edgeColor, spreadRadius: markerRadius * 0.12),
+            ],
           ),
           alignment: Alignment.center,
           // De zichtbare letter is de koppelsleutel voor de ziende lezer en
@@ -198,14 +215,34 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     }
   }
 
+  /// Zoek de intrinsieke beeldmaat op. Staat het beeld al in de imagecache, dan
+  /// roept [ImageStream.addListener] de listener **synchroon** aan; die maat
+  /// wordt dan direct gezet, zonder `setState`, zodat de éérste build de
+  /// markeringen al tekent.
+  ///
+  /// Dat onderscheid is niet kosmetisch. De rasterizer (PDF, PPTX, ODP) laadt
+  /// de dia-afbeeldingen voor en vangt daarna een frame zodra de boom niet meer
+  /// hoeft te verven. Ging de maat altijd via een `setState`, dan was dat frame
+  /// al gevangen vóór de overlay iets tekende — en dat is precies wat er
+  /// gebeurde: elke markering ontbrak in élke rasterexport, terwijl de app ze
+  /// wél toonde.
   void _resolveIntrinsic() {
     if (_resolving) return;
+    final provider = _calloutImageProvider(
+      widget.slide.imagePath,
+      widget.projectPath,
+    );
+    if (provider == null) return;
     _resolving = true;
-    _resolveIntrinsicSize(widget.slide.imagePath, widget.projectPath).then((
-      size,
-    ) {
-      if (mounted) setState(() => _intrinsic = size);
+    resolveIntrinsicSize(provider, (size, synchronous) {
       _resolving = false;
+      if (synchronous) {
+        // Nog binnen initState/didUpdateWidget: setState mag hier niet, en
+        // hoeft ook niet — de build die hierop volgt ziet de maat al.
+        _intrinsic = size;
+        return;
+      }
+      if (mounted) setState(() => _intrinsic = size);
     });
   }
 
@@ -234,7 +271,12 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     final textCol = accent.computeLuminance() > 0.5
         ? Colors.black
         : Colors.white;
-    final markerRadius = widget.slotWidth * 0.022;
+    // Evenredig met het slot, met een ondergrens. Zonder die grens verdwijnt
+    // de markering op slidestrook-breedte (~121 pt slot → straal 2,7): de
+    // strook toont dan een dia waarvan niet te zien is dát er verwijzingen op
+    // staan. De letter is daar toch niet te lezen — een navigatiestrook is
+    // geen leesoppervlak — maar de markering moet een markering blijven.
+    final markerRadius = math.max(widget.slotWidth * 0.022, 5.0);
 
     // §3.1: `mode` is a style, not a promise of shape. In `region` mode a
     // region target is an outlined rect with outside dimming and the
