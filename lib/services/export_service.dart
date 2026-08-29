@@ -175,6 +175,40 @@ class ExportService {
                 : calloutAltText(s.imageAltText, s.callouts),
         ];
 
+  /// De PPTX-bouw, van de switch afgehaald zodat [export] onder het
+  /// methodeplafond blijft. Spreektekst en alt-tekst komen uit hetzelfde
+  /// geprojecteerde deck.
+  Future<Uint8List> _buildPptx(
+    List<Uint8List> images, {
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
+    required ExportBundle? audience,
+  }) => _offload(
+    () => buildDeckExportPptx(
+      images,
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      notes: _notesOf(audience),
+      altTexts: _altTextsOf(audience),
+    ),
+  );
+
+  /// De ODP-bouw. ODP kent geen notitieblad in deze export; alleen de
+  /// alt-tekstsleuf reist mee.
+  Future<Uint8List> _buildOdp(
+    List<Uint8List> images, {
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
+    required ExportBundle? audience,
+  }) => _offload(
+    () => buildDeckExportOdp(
+      images: images,
+      metadata: metadata,
+      fallbackTitle: fallbackTitle,
+      altTexts: _altTextsOf(audience),
+    ),
+  );
+
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
@@ -264,23 +298,18 @@ class ExportService {
             compress: compress,
           );
         case ExportFormat.pptx:
-          bytes = await _offload(
-            () => buildDeckExportPptx(
-              images,
-              metadata: docMeta,
-              fallbackTitle: fallbackTitle,
-              notes: _notesOf(audience),
-              altTexts: _altTextsOf(audience),
-            ),
+          bytes = await _buildPptx(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            audience: audience,
           );
         case ExportFormat.odp:
-          bytes = await _offload(
-            () => buildDeckExportOdp(
-              images: images,
-              metadata: docMeta,
-              fallbackTitle: fallbackTitle,
-              altTexts: _altTextsOf(audience),
-            ),
+          bytes = await _buildOdp(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            audience: audience,
           );
         case ExportFormat.html:
           bytes = await _buildHtml(
