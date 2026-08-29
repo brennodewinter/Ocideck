@@ -270,9 +270,9 @@ class ExportService {
           );
         case ExportFormat.latex:
           bytes = utf8.encode(
-            _buildLatex(
-              audience!,
-              metadata: docMeta,
+            buildBeamerDocument(
+              audience!.audience.deck,
+              docMeta,
               themeProfile: themeProfile,
             ),
           );
@@ -318,15 +318,6 @@ class ExportService {
   /// worden op relatief pad gereferentieerd — LaTeX kent geen data-URI-
   /// inlining (ponytail: ceiling is single-file; upgrade path is een zip-bundel
   /// met .tex + images).
-  String _buildLatex(
-    ExportBundle audience, {
-    required ExportDocumentMetadata metadata,
-    ThemeProfile? themeProfile,
-  }) {
-    final body = buildBeamerBody(audience.audience.deck);
-    final preamble = beamerPreamble(metadata, themeProfile: themeProfile);
-    return '$preamble\n$body\n$beamerPostamble\n';
-  }
 
   /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de
   /// bouwer: de projectmap is de map van het deck, en die begrenzing hoort bij

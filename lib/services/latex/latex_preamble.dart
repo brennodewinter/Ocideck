@@ -10,6 +10,7 @@ import '../../models/deck.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart';
 import '../document_chrome_template.dart';
+import 'beamer_slide_builder.dart';
 import 'markdown_to_latex.dart';
 
 /// Bouwt de preamble voor een LaTeX `article`-document.
@@ -448,4 +449,20 @@ String _mm(double mm) =>
 String _latexHexColor(String value, String fallback) {
   final hex = value.replaceFirst('#', '').toUpperCase();
   return RegExp(r'^[0-9A-F]{6}$').hasMatch(hex) ? hex : fallback;
+}
+
+/// Het volledige Beamer-document voor [deck]: preamble, body en postamble.
+///
+/// Hier en niet in `export_service.dart`, omdat dit LaTeX-opbouw is en niets
+/// met bestanden of formaatkeuze te maken heeft — en omdat de preamble en de
+/// body dezelfde accentkleur moeten kennen. Deden ze dat niet, dan tekende de
+/// body met een kleur die de preamble nooit definieerde.
+String buildBeamerDocument(
+  Deck deck,
+  ExportDocumentMetadata metadata, {
+  ThemeProfile? themeProfile,
+}) {
+  final body = buildBeamerBody(deck);
+  final preamble = beamerPreamble(metadata, themeProfile: themeProfile);
+  return '$preamble\n$body\n$beamerPostamble\n';
 }
