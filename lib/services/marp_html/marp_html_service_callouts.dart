@@ -102,20 +102,25 @@ String _renderImgslot(String body, Slide slide) {
             '${MarpHtmlService._htmlText(callout.reference)}'
             '</span></div>',
           );
-          // Arrow to the region's left edge at centre y.
+          // Arrow to the region's left edge at centre y. De pijl is een lijn
+          // naar een markering die haar naam al draagt; hij krijgt er geen
+          // tweede, anders leest een schermlezer dezelfde verwijzing twee keer
+          // (§12.2).
           final centerY = ((target.y + target.h / 2) * 100).toStringAsFixed(2);
           markers.write(
-            '<div class="ocideck-arrow" role="img" '
-            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+            '<div class="ocideck-arrow" aria-hidden="true" '
             'style="left:0%;top:$centerY%;width:$left%"></div>',
           );
         } else {
           final p = target as CalloutPoint;
           final left = (p.x * 100).toStringAsFixed(2);
           final top = (p.y * 100).toStringAsFixed(2);
+          // De pijl zelf is decoratie: de badge aan het raileinde draagt de
+          // naam. Gaven beide hem, dan hoorde een schermlezer elke verwijzing
+          // twee keer — dezelfde fout als een markering die haar letter
+          // herhaalt (§12.2).
           markers.write(
-            '<div class="ocideck-arrow" role="img" '
-            'aria-label="${MarpHtmlService._htmlAttr(name)}" '
+            '<div class="ocideck-arrow" aria-hidden="true" '
             'style="left:0%;top:$top%;width:$left%"></div>',
           );
           // Reference badge at the rail end.

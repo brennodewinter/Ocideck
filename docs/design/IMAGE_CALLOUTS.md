@@ -811,6 +811,10 @@ HTML surface to keep in step.
   visible text is the sighted reader's join key, and this is the equivalent one.
 - Every string above passes the HTML **attribute** escaper, not the text escaper
   (§9).
+- **One name per reference, per target.** In arrow mode the line and the rail
+  badge point at the same thing; only one of them is named, and the other is
+  `aria-hidden`. Two named nodes for one mark is the same defect as a marker
+  that repeats its own letter — it reads correctly and says everything twice.
 - **Nothing here is `hidden`, and there is no live region.** Revision 4 asked
   the export for both, and that contradicted §7: a static export shows every
   group, so there is no unrevealed state to keep out of the tree and no step to

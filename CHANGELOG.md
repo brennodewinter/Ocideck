@@ -271,6 +271,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- fix(a11y): in pijlmodus noemde de HTML-export elke beeldverwijzing twee keer
+  (#1844). De pijllijn en de badge aan het raileinde droegen allebei
+  `role="img"` met dezelfde naam, dus een schermlezer las "A, het donkere blok"
+  en daarna nog eens hetzelfde. De pijl is decoratie bij een markering die haar
+  naam al draagt en staat nu met `aria-hidden` buiten de boom; hetzelfde geldt
+  voor de pijl naar een gebied. Gevonden door de accessibility tree van een
+  echte browser te lezen op een echte export, niet in de markup.
+
 - feat(a11y): beeldverwijzingen zijn zonder zicht te lezen, en de exports
   gooien de betekenis niet meer weg (#1844). Een schermlezer noemde de letter
   van een markering twee keer — één keer in de samengestelde naam en nog eens

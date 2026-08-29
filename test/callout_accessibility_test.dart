@@ -323,15 +323,76 @@ void main() {
       expect(descRule, isNot(contains('visibility:hidden')));
     });
 
-    test('markeringen zijn nooit aria-hidden of naamloos', () {
+    test('pijlmodus noemt elke verwijzing precies één keer', () {
+      // De pijl en de badge wezen naar dezelfde verwijzing en droegen allebei
+      // `role="img"` met dezelfde naam, dus een schermlezer las hem twee keer
+      // voor. Gevonden in de accessibility tree van een echte browser op een
+      // echte export, niet in de markup alleen.
+      final html = renderImageCallouts(
+        '<div class="split-image">\n![beeld](beeld.png)\n</div>\n'
+        '- Het donkere blok links (A)\n',
+        Slide(
+          id: 'dia',
+          anchor: 'dia-1',
+          type: SlideType.bulletsImage,
+          bullets: const ['Het donkere blok links (A)'],
+          imagePath: 'beeld.png',
+          calloutPresentation: CalloutPresentation.arrow,
+          callouts: const [
+            ImageCallout(
+              reference: 'A',
+              targets: [CalloutPoint(0.255, 0.340)],
+              description: 'het donkere blok',
+            ),
+          ],
+        ),
+      );
+      expect(
+        RegExp('aria-label="A, het donkere blok"').allMatches(html).length,
+        1,
+      );
+      // De pijllijn blijft getekend, maar buiten de boom.
+      expect(html, contains('class="ocideck-arrow" aria-hidden="true"'));
+    });
+
+    test('pijl naar een gebied: het gebied draagt de naam, de pijl niet', () {
+      final html = renderImageCallouts(
+        '<div class="split-image">\n![beeld](beeld.png)\n</div>\n'
+        '- Bedienen doe je hier (A)\n',
+        Slide(
+          id: 'dia',
+          anchor: 'dia-1',
+          type: SlideType.bulletsImage,
+          bullets: const ['Bedienen doe je hier (A)'],
+          imagePath: 'beeld.png',
+          calloutPresentation: CalloutPresentation.arrow,
+          callouts: const [
+            ImageCallout(
+              reference: 'A',
+              targets: [CalloutRegion(0.180, 0.240, 0.160, 0.200)],
+              description: 'het bedieningspaneel',
+            ),
+          ],
+        ),
+      );
+      expect(
+        RegExp('aria-label="A, het bedieningspaneel"').allMatches(html).length,
+        1,
+      );
+      expect(html, contains('class="ocideck-region" role="img"'));
+      expect(html, contains('class="ocideck-arrow" aria-hidden="true"'));
+    });
+
+    test('markeringen zijn nooit naamloos', () {
       final html = render(
         _slideWithCallouts(
           imagePath: 'beeld.png',
           callouts: [_twoBolts, _inlet],
         ),
       );
-      expect(html, isNot(contains('aria-hidden')));
-      // Elke role="img" draagt een aria-label.
+      // Elke role="img" draagt een aria-label; een markering mét naam is nooit
+      // uit de boom gehaald.
+      expect(html, isNot(contains('role="img" aria-hidden')));
       final markers = RegExp('role="img"').allMatches(html).length;
       final labelled = RegExp(
         'role="img" aria-label="',
