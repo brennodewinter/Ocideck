@@ -1663,6 +1663,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Stap-voor-stap': 'Passo a passo',
+  'Punt': 'Ponto',
+  'markeringen': 'marcadores',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Uma tabela não cabe na largura da página, nem no menor corpo de letra.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

@@ -1637,6 +1637,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Stap-voor-stap': 'Lépésről lépésre',
+  'Punt': 'Pont',
+  'markeringen': 'jelölések',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Egy táblázat nem fér el az oldalszélességben, a legkisebb betűmérettel sem.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

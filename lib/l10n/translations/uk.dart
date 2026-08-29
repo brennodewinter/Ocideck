@@ -1651,6 +1651,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Stap-voor-stap': 'Крок за кроком',
+  'Punt': 'Пункт',
+  'markeringen': 'позначки',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Одна таблиця не вміщається в ширину сторінки навіть за найменшого кегля.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

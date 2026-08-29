@@ -1655,6 +1655,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Stap-voor-stap': 'Стъпка по стъпка',
+  'Punt': 'Точка',
+  'markeringen': 'маркери',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Една таблица не се побира в ширината на страницата дори при най-малкия кегел.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

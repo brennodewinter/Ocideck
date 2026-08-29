@@ -52,16 +52,16 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       final n = plan.revealedEventCount(_stepIndex);
       SemanticsService.sendAnnouncement(
         View.of(context),
-        '${context.l10n.d('Event')} $n/${plan.eventCount}',
+        '${context.l10n.d('Gebeurtenis')} $n/${plan.eventCount}',
         TextDirection.ltr,
       );
     } else if (plan is CalloutRevealStepPlan) {
       final bulletCount = plan.revealedBulletCount(_stepIndex);
       final refs = plan.revealedReferences(_stepIndex);
       final msg = refs.isEmpty
-          ? '${context.l10n.d('Bullet')} $bulletCount/${plan.bullets.length}'
-          : '${context.l10n.d('Bullet')} $bulletCount/${plan.bullets.length}, '
-              '${refs.length} ${context.l10n.d('marks')}';
+          ? '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}'
+          : '${context.l10n.d('Punt')} $bulletCount/${plan.bullets.length}, '
+              '${refs.length} ${context.l10n.d('markeringen')}';
       SemanticsService.sendAnnouncement(View.of(context), msg, TextDirection.ltr);
     }
   }

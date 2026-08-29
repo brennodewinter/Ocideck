@@ -672,6 +672,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Stap-voor-stap': 'Paso a paso',
+  'Punt': 'Punto',
+  'markeringen': 'marcas',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Una tabla no cabe en el ancho de página, ni siquiera con el cuerpo más pequeño.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

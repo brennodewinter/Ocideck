@@ -1654,6 +1654,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Stap-voor-stap': 'Pass pass',
+  'Punt': 'Punt',
+  'markeringen': 'marki',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Tabella waħda ma toqgħodx fil-wisa\' tal-paġna, lanqas bl-iżgħar tipa.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

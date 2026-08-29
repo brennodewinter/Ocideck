@@ -1637,6 +1637,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Stap-voor-stap': 'Krok za krokem',
+  'Punt': 'Bod',
+  'markeringen': 'značky',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Jedna tabulka se nevejde na šířku stránky ani při nejmenším stupni písma.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

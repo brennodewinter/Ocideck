@@ -1636,6 +1636,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Stap-voor-stap': 'Askel askeleelta',
+  'Punt': 'Kohta',
+  'markeringen': 'merkit',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Yksi taulukko ei mahdu sivun leveyteen edes pienimmällä kirjasinkoolla.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':

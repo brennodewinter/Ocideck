@@ -40,6 +40,7 @@ class CalloutEditorDialog extends StatefulWidget {
 class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   late List<ImageCallout> _callouts;
   late CalloutPresentation _presentation;
+  late BulletRevealMode _reveal;
   int? _selectedCalloutIndex;
 
   /// Region being dragged out — null when not dragging.
@@ -50,6 +51,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     super.initState();
     _callouts = List.of(widget.slide.callouts);
     _presentation = widget.slide.calloutPresentation;
+    _reveal = widget.slide.calloutReveal;
   }
 
   void _emit() {
@@ -57,6 +59,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
       widget.slide.copyWith(
         callouts: _callouts,
         calloutPresentation: _presentation,
+        calloutReveal: _reveal,
       ),
     );
   }
@@ -315,6 +318,31 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
                         selected: {_presentation},
                         onSelectionChanged: (s) {
                           setState(() => _presentation = s.first);
+                          _emit();
+                        },
+                      ),
+                    ),
+                  ),
+                  // §7: reveal mode — all (everything visible) or steps
+                  // (one bullet + its targets per click during presentation).
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: SegmentedButton<BulletRevealMode>(
+                        segments: [
+                          ButtonSegment(
+                            value: BulletRevealMode.all,
+                            label: Text(l10n.d('Alles tonen')),
+                          ),
+                          ButtonSegment(
+                            value: BulletRevealMode.steps,
+                            label: Text(l10n.d('Stap-voor-stap')),
+                          ),
+                        ],
+                        selected: {_reveal},
+                        onSelectionChanged: (s) {
+                          setState(() => _reveal = s.first);
                           _emit();
                         },
                       ),

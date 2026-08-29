@@ -1660,6 +1660,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Stap-voor-stap': 'Βήμα προς βήμα',
+  'Punt': 'Σημείο',
+  'markeringen': 'σημάνσεις',
   'Eén tabel past niet op de bladbreedte, ook niet op de kleinste letter.':
       'Ένας πίνακας δεν χωρά στο πλάτος σελίδας, ούτε στο μικρότερο μέγεθος γραμματοσειράς.',
   '{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.':
