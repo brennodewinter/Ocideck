@@ -1651,6 +1651,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Стрілки перетинаються на цьому слайді — розгляньте піни замість стрілок для читабельності.',
+  'Pijlen': 'Стрілки',
   'Stap-voor-stap': 'Крок за кроком',
   'Punt': 'Пункт',
   'markeringen': 'позначки',

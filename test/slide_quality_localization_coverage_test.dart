@@ -241,6 +241,7 @@ void main() {
       SlideQualityIssueKind.calloutOrphanReference: {'ref': '(A)'},
       SlideQualityIssueKind.calloutDuplicateReference: {'ref': '(A)'},
       SlideQualityIssueKind.calloutMissingAnchor: {},
+      SlideQualityIssueKind.calloutCrossingArrows: {},
     };
 
     test('produces a non-empty message for each kind in both languages', () {

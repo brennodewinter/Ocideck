@@ -2553,6 +2553,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pinleri düşünün.',
+  'Pijlen': 'Oklar',
   'Stap-voor-stap': 'Adım adım',
   'Punt': 'Madde',
   'markeringen': 'işaretler',

@@ -173,6 +173,14 @@ void _checkCallouts(Slide slide, int index, List<SlideQualityIssue> issues) {
       );
     }
   }
+
+  // §5: kruisende pijlen in arrow-modus. Met de fixed-rail-ontwerp (alle
+  // pijlen horizontaal van x=0 naar het target) is kruising geometrisch
+  // onmogelijk — twee horizontale lijnen op verschillende y kruisen nooit.
+  // De check is hier als ankerpunt voor het geval een toekomstige variant
+  // niet-horizontale pijlen toestaat.
+  // ponytail: als pijlen ooit niet-horizontaal worden, is dit de plek om
+  // echte lijn-kruising te detecteren en calloutCrossingArrows te melden.
 }
 
 /// Herkent een `(A)`-calloutmarkering in slidetekst. Eén hoofdletter tussen

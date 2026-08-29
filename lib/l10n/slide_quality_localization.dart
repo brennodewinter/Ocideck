@@ -482,6 +482,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.calloutMissingAnchor => l10n.d(
       'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.',
     ),
+    SlideQualityIssueKind.calloutCrossingArrows => l10n.d(
+      'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.',
+    ),
   };
 
   // Een over meerdere split-pagina's samengevatte dichtheidsmelding (#1289):

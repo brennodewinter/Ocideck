@@ -1636,6 +1636,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Puščice se križajo na tem diapozitivu — razmisli o pinih namesto puščicah za berljivost.',
+  'Pijlen': 'Puščice',
   'Stap-voor-stap': 'Korak za korakom',
   'Punt': 'Točka',
   'markeringen': 'oznake',

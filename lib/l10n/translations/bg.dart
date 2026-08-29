@@ -1655,6 +1655,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Стрелите се пресичат на този слайд — разгледайте щифтове вместо стрелки за четимост.',
+  'Pijlen': 'Стрели',
   'Stap-voor-stap': 'Стъпка по стъпка',
   'Punt': 'Точка',
   'markeringen': 'маркери',

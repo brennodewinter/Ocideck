@@ -1987,6 +1987,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Image callouts: vaste-rail pijlen (#1829).** De derde
+  presentatiemodus voor image-references: pijlen van een vaste rail aan
+  de linkerrand van de afbeelding (de rechterrand van de bullet-kolom)
+  naar elk target. Een punt-target krijgt een pijl naar het punt; een
+  regio-target krijgt een omlijnde rechthoek met de pijl op de linker
+  rand ervan, op de hoogte van het centrum (§3.1). De rail is vast —
+  geen breekbare post-layout-meting, geen handmatige buigpunten (§5).
+
+  De pijlen renderen in de Flutter-voorvertoning, presentator,
+  beeldscherm, HTML-export (met CSS-pijlen en `aria-label`), en de
+  raster-export (PDF/PPTX/ODP — via de Flutter-overlay). De
+  LaTeX/Beamer-export degradeert naar pin/region plus de tekstuele
+  referentie (§5). De stap-voor-stap onthulling uit #1828 werkt
+  ongewijzigd: een pijl verschijnt atomair met zijn bullet.
+
 - **Image callouts: stap-voor-stap onthullen (#1828).** De
   presentatiemodus kan nu bullets en hun callout-references één voor één
   onthullen: `reveal: steps` in de front matter, of een SegmentedButton in

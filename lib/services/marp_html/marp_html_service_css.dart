@@ -162,6 +162,18 @@ html,body{margin:0;padding:0}
   color:#fff;background:var(--ocideck-accent,#003399);
   border:2px solid #fff;
   box-shadow:0 0 0 2px var(--ocideck-accent,#003399),0 1px 4px rgba(0,0,0,.5)}
+/* Arrow presentation (§5): a horizontal line from the fixed rail (left edge
+   of the imgbox) to the target. The arrowhead is a CSS triangle at the right
+   end. The line sits at the target's vertical centre; the rail badge (a
+   .ocideck-callout span at left:0) carries the reference letter. */
+.ocideck-arrow{position:absolute;height:2px;transform:translateY(-50%);
+  background:var(--ocideck-accent,#003399);
+  box-shadow:0 0 0 1px #fff,0 1px 3px rgba(0,0,0,.4);
+  z-index:2;pointer-events:none}
+.ocideck-arrow::after{content:"";position:absolute;right:-1px;top:50%;
+  transform:translateY(-50%);
+  border:6px solid transparent;border-left:8px solid var(--ocideck-accent,#003399);
+  filter:drop-shadow(0 0 1px #fff)}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de

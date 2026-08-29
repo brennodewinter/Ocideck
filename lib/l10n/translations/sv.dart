@@ -1634,6 +1634,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Pilar korsar varandra på denna bild — överväg nålar istället för pilar för läsbarhet.',
+  'Pijlen': 'Pilar',
   'Stap-voor-stap': 'Steg för steg',
   'Punt': 'Punkt',
   'markeringen': 'markeringar',

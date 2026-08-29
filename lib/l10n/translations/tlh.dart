@@ -1613,6 +1613,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'yan tlhIq wa\'Dich tlhIq — yan tlhIq tlhIq tlhIq tlhIq',
+  'Pijlen': 'yan',
   'Stap-voor-stap': 'Yan yan',
   'Punt': 'Qogh',
   'markeringen': 'nugh',

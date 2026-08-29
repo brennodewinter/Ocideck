@@ -1635,6 +1635,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Panah saling menyilang pada slide ini — pertimbangkan pin sebagai ganti panah untuk keterbacaan.',
+  'Pijlen': 'Panah',
   'Stap-voor-stap': 'Langkah demi langkah',
   'Punt': 'Poin',
   'markeringen': 'penanda',

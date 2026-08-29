@@ -1637,6 +1637,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Nyilak keresztezik egymást ezen a dián — fontold meg a tűket a nyilak helyett az olvashatóság érdekében.',
+  'Pijlen': 'Nyilak',
   'Stap-voor-stap': 'Lépésről lépésre',
   'Punt': 'Pont',
   'markeringen': 'jelölések',

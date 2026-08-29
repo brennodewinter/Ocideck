@@ -674,6 +674,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Flecha ta kruza riba e slide aki — konsiderá pin na lugá di flecha pa legibilidat.',
+  'Pijlen': 'Flecha',
   'Stap-voor-stap': 'Paso pa paso',
   'Punt': 'Punto',
   'markeringen': 'markanan',

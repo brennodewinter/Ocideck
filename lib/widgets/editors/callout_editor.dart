@@ -314,6 +314,10 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
                             value: CalloutPresentation.region,
                             label: Text(l10n.d('Gebieden')),
                           ),
+                          ButtonSegment(
+                            value: CalloutPresentation.arrow,
+                            label: Text(l10n.d('Pijlen')),
+                          ),
                         ],
                         selected: {_presentation},
                         onSelectionChanged: (s) {

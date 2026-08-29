@@ -1634,6 +1634,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
+      'Bultas krustojas uz šī slaida — apsveriet tapas bultu vietā lasāmībai.',
+  'Pijlen': 'Bultas',
   'Stap-voor-stap': 'Solis pa solim',
   'Punt': 'Punkts',
   'markeringen': 'atzīmes',
