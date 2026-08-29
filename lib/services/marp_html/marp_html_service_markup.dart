@@ -37,6 +37,26 @@ String _slideAnchorIdAttr(String slideMarkdown) {
   return anchor == null ? '' : ' id="$anchor"';
 }
 
+/// Extra `<section>` class (` split`) for a bulletsImage slide, so the export
+/// stylesheet's grid layout applies. The serialiser writes `<!-- _class: split
+/// -->` via [SlideType.bulletsImage.marpClass]; without this token on the
+/// section the text and image stack vertically instead of sitting side by side
+/// (#1855).
+String _splitSectionClass(String slideMarkdown) {
+  final raw = _slideClassComment.firstMatch(slideMarkdown)?.group(1) ?? '';
+  return raw.split(RegExp(r'\s+')).contains('split') ? ' split' : '';
+}
+
+/// Extracts `--image-width: N%` from the `<!-- _style: … -->` directive so the
+/// split grid's image column matches the panel width the author chose. Returns
+/// `''` when absent — the CSS default (40%) then applies.
+final RegExp _styleImageWidthComment = RegExp(r'--image-width:\s*(\d+)%');
+
+String _splitImageWidthStyle(String slideMarkdown) {
+  final m = _styleImageWidthComment.firstMatch(slideMarkdown);
+  return m == null ? '' : '--image-width:${m.group(1)}%';
+}
+
 final RegExp _safeCssGradient = RegExp(
   r'^(?:(?:repeating-)?(?:linear|radial|conic)-gradient)\([#(),.%a-zA-Z0-9+\- ]+\)$',
 );
@@ -106,6 +126,11 @@ String _marpCssFilters(List<String> filters) {
   if (effectiveTitleColor != null) {
     css.add('--ocideck-title-color:$effectiveTitleColor');
   }
+  // The split grid's image-column width rides on the section as a CSS custom
+  // property, matching the theme CSS. Without it the column falls back to the
+  // 40% default even when the author chose a different panel width (#1855).
+  final imageWidth = _splitImageWidthStyle(slideMarkdown);
+  if (imageWidth.isNotEmpty) css.add(imageWidth);
   final attrs = StringBuffer();
   if (style.imageFit == 'contain') attrs.write(' data-marp-bg-fit="contain"');
   if (filter.isNotEmpty) {
@@ -335,11 +360,12 @@ String _renderSections(
     );
     final markerClass = _bulletMarkerSectionClass(slideMd);
     final logoClass = _logoSectionClass(slideMd, hasLogo);
+    final splitClass = _splitSectionClass(slideMd);
     final anchorId = _slideAnchorIdAttr(slideMd);
     final marpSection = _marpSectionStyle(slideMd, marpStyle);
     sections
       ..write(
-        '<section class="slide$markerClass$logoClass${marpSection.classes}"'
+        '<section class="slide$markerClass$logoClass$splitClass${marpSection.classes}"'
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')
