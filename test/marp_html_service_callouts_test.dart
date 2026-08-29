@@ -207,6 +207,27 @@ void main() {
       final result = renderImageCallouts(body, slide);
       expect(result, contains('# Titel'));
     });
+
+    test('split-image div wrapper survives imgslot rendering (#1855)', () {
+      final body = _body();
+      final slide = _slide(
+        callouts: [
+          const ImageCallout(
+            reference: 'A',
+            targets: [CalloutPoint(0.5, 0.5)],
+            description: 'test',
+          ),
+        ],
+      );
+      final result = renderImageCallouts(body, slide);
+      // The split-image div must still be present — the grid layout depends on
+      // it. Before the fix, _renderImgslot replaced the entire div with only
+      // its inner content.
+      expect(result, contains('<div class="split-image">'));
+      expect(result, contains('</div>'));
+      // The imgslot structure is inside the div.
+      expect(result, contains('ocideck-imgslot'));
+    });
   });
 
   group('renderImageCallouts — region mode (§3.1)', () {

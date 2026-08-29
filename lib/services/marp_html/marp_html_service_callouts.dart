@@ -97,10 +97,14 @@ String _renderImgslot(String body, Slide slide) {
   }
 
   // Replace the image markdown inside the split-image div with the imgslot
-  // HTML. The focus/alt comments are kept — they are inert under marked and
-  // carry no rendering weight.
+  // HTML, keeping the `<div class="split-image">` wrapper so the split grid
+  // layout holds (#1855). The focus/alt comments are kept — they are inert
+  // under marked and carry no rendering weight.
   final newInner = inner.replaceFirst(imgMatch.group(0)!, slot.toString());
-  return body.replaceFirst(divMatch.group(0)!, newInner);
+  return body.replaceFirst(
+    divMatch.group(0)!,
+    '<div class="split-image">\n$newInner\n</div>',
+  );
 }
 
 /// Adds `aria-describedby` to bullet `<li>` elements that carry a callout

@@ -111,6 +111,19 @@ html,body{margin:0;padding:0}
 .print-frame>tfoot{display:table-footer-group}
 .document .print-frame>thead>tr,.document .print-frame>tfoot>tr,.document .print-frame>tbody>tr{background:none}
 .document .print-frame>thead>tr>td,.document .print-frame>tfoot>tr>td,.document .print-frame>tbody>tr>td{padding:0;border:0;background:none;color:inherit;text-align:left;vertical-align:top}
+/* Split layout (bulletsImage): text beside an image, matching the theme CSS
+   in assets/themes/ocideck.css. The serialiser writes `<!-- _class: split -->`
+   and `<div class="split-text">`/`<div class="split-image">`; without these
+   rules the two panels stack vertically (#1855). --image-width is set on the
+   section from the `_style` directive; 40% is the default. */
+section.split{--image-width:40%;--split-margin:48px;display:grid;grid-template-columns:minmax(0,1fr) var(--image-width);gap:var(--split-margin);padding:48px 0 48px var(--split-margin)}
+section.split .split-text{min-width:0}
+section.split .split-text h1{font-size:1.45em;margin-top:0;margin-bottom:.42em}
+section.split .split-text ul{line-height:1.16;padding-left:1em}
+section.split .split-text li{margin:.12em 0}
+section.split .split-image{position:relative;align-self:stretch;min-height:calc(100vh - 96px);margin:-48px 0}
+section.split .split-image p{margin:0;height:100%}
+section.split .split-image img{display:block;width:100%;height:100%;object-fit:cover}
 /* Image callout overlay (IMAGE_CALLOUTS.md §4.2, §12.2). The slot wraps the
    split-image panel when a slide carries callouts; the box is the painted
    rectangle, and markers are positioned in image-space percentages against it.

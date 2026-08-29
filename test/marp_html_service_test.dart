@@ -712,6 +712,66 @@ void main() {}
     );
   });
 
+  group('bulletsImage split layout in HTML export', () {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+
+    Future<String> exportHtml(List<Slide> slides) {
+      final md = MarkdownService().generateDeck(
+        Deck(title: 'D', slides: slides),
+        forExport: true,
+      );
+      return service.build(md);
+    }
+
+    test('section carries the split class', () async {
+      final html = await exportHtml([
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Punten',
+          bullets: const ['Een', 'Twee'],
+          imagePath: 'foto.png',
+        ),
+      ]);
+      expect(html, contains('<section class="slide split"'));
+    });
+
+    test('split CSS rules are present in the export stylesheet', () async {
+      final html = await exportHtml([
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Punten',
+          bullets: const ['Een'],
+          imagePath: 'foto.png',
+        ),
+      ]);
+      expect(html, contains('section.split{'));
+      expect(html, contains('grid-template-columns'));
+      expect(html, contains('section.split .split-image{'));
+    });
+
+    test('--image-width from _style lands on the section', () async {
+      final html = await exportHtml([
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Punten',
+          bullets: const ['Een'],
+          imagePath: 'foto.png',
+          imageSize: 55,
+        ),
+      ]);
+      expect(html, contains('--image-width:55%'));
+    });
+
+    test('a non-split slide does not get the split class', () async {
+      final html = await exportHtml([
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['Een']),
+      ]);
+      expect(html, isNot(contains('class="slide split')));
+    });
+  });
+
   test(
     'een tijdlijndia wordt een tijdlijn, geen opsomming met dubbele punten',
     () {
