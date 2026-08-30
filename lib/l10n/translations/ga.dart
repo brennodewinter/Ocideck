@@ -1667,33 +1667,30 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Scríobhann rothlú cóip rothlaithe in aice leis an mbunchóip; fanann do bhunchomhad gan athrú.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Cuir sprioc leis',
+  'Doel verwijderen': 'Bain sprioc',
+  'Verwijzing verwijderen': 'Bain an tagairt',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Roghnaigh líne chun tagairt a chur.',
   'Vorm van de markering': 'Cruth na marcála',
   'doel': 'sprioc',
   'doelen': 'spriocanna',
   'Verwijzing verwijderd': 'Baineadh an tagairt',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Tagairt íomhá',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'tá comhordanáidí neamhbhailí aige agus ní tharraingítear é — coigeartaigh ionad na sprioce san eagarthóir tagairtí.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'tagraíonn sé do mharc (A) atá nach bhfuil sa téacs, nó a mhalairt — cuir an litir sa téacs nó bain an tagairt.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'tarlaíonn sé faoi dhó ar an sleo seo — gach marc (A), (B) … ní féidir ach tagairt amháin a bheith aige.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Tá tagairtí íomhá ar an sleo seo ach níl aon ancaire aige — ní féidir na tagairtí a nascadh leis an sleo. Tabhair ancaire don sleo san eagarthóir.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Crosaíonn na saigheada ar an sleo seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Cur síos (do léitheoir scáileáin agus onnmhairiú)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'markering': 'marc',
@@ -4694,5 +4691,5 @@ const _dutchSourceAddGa = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
 };

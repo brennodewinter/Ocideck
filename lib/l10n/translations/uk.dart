@@ -1653,14 +1653,11 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Обертання записує повернуту копію поряд з оригіналом; ваш вихідний файл лишається незмінним.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Додати ціль',
+  'Doel verwijderen': 'Видалити ціль',
+  'Verwijzing verwijderen': 'Видалити посилання',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Виберіть рядок для розміщення посилання.',
   'Vorm van de markering': 'Форма маркера',
   'doel': 'ціль',
   'doelen': 'цілі',
@@ -1679,7 +1676,7 @@ const _dutchSourceAddUk = <String, String>{
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Опис (для зчитувача з екрана та експорту)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
   'markering': 'позначка',

@@ -840,14 +840,11 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotating writes a turned copy next to the original; your original file is left unchanged.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focal point, zoom, or target position.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focal point, zoom, or target position, or the marker will not appear on the slide.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Add target',
+  'Doel verwijderen': 'Remove target',
+  'Verwijzing verwijderen': 'Remove reference',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Select a line to place a reference.',
   'Vorm van de markering': 'Shape of the marker',
   'doel': 'target',
   'doelen': 'targets',

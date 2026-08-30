@@ -1656,29 +1656,26 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Id-dawran jikteb kopja mdawra ħdejn l-oriġinal; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'jaqa\' barra l-inħawi viżibbli — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'jaqa\' barra l-parti viżibbli tal-immaġni — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira, inkella l-marka ma tidhirx fuq is-slide.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Żid mira',
+  'Doel verwijderen': 'Neħħi mira',
+  'Verwijzing verwijderen': 'Neħħi referenza',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Agħżel linja biex tqiegħed referenza.',
   'Vorm van de markering': 'Forma tal-marka',
   'doel': 'mira',
   'doelen': 'miri',
   'Verwijzing verwijderd': 'Referenza mneħħija',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referenza tal-immaġini',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'għandu koordinati invalidi u mhux miġbud — aġġusta l-pożizzjoni tal-mira fl-editur tar-referenzi.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'jirreferi għal marka (A) li mhux fit-test, jew viċi versa — żid l-ittra fit-test jew neħħi r-referenza.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'jidher darbtejn fuq din is-slajd — kull marka (A), (B) … tista\' jkollha referenza waħda biss.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Din is-slajd għandha referenzi tal-immaġini imma l-ebda ankra — ir-referenzi ma jistgħux jiġu marbuta mas-slajd. Agħti ankra lill-slajd fl-editur.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Il-vleġeġ jidhlu f\'xulxinmafu fuq din is-slajd — ikkunsidra marki ta\' pin minflok vleġeġ għall-qari.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'jaqa\' barra l-parti viżibbli tal-immaġni — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira, inkella l-marka ma tidhirx fuq is-slide.',
   'Beschrijving (voor schermlezer en export)':

@@ -262,7 +262,7 @@ const Map<String, int> fileSizeBaseline = {
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
   // van 154 naar 41 regels; de filegrootte is de grenswaarde.
-  'lib/widgets/editors/callout_editor.dart': 1042,
+  'lib/widgets/editors/callout_editor.dart': 1045,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle

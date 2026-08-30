@@ -1639,33 +1639,30 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'A forgatás elforgatott másolatot ír az eredeti mellé; az eredeti fájlod változatlan marad.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Cél hozzáadása',
+  'Doel verwijderen': 'Cél eltávolítása',
+  'Verwijzing verwijderen': 'Hivatkozás eltávolítása',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Válasszon egy sort a hivatkozás elhelyezéséhez.',
   'Vorm van de markering': 'Jelölő alakja',
   'doel': 'célpont',
   'doelen': 'célpontok',
   'Verwijzing verwijderd': 'Hivatkozás eltávolítva',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Képhivatkozás',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'érvénytelen koordinátái vannak és nem rajzolódik — állítsa be a cél pozícióját a hivatkozás-szerkesztőben.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'egy (A) jelölésre hivatkozik, amely nincs a szövegben, vagy fordítva — tegye a betűt a szövegbe vagy távolítsa el a hivatkozást.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'kétszer szerepel ezen a dián — minden jelölés (A), (B) … csak egy hivatkozást tartalmazhat.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Ennek a diának képhivatkozásai vannak, de nincs horgonya — a hivatkozások nem kapcsolhatók a diához. Adjon a diának horgonyt a szerkesztőben.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'A nyilak keresztezik egymást ezen a dián — fontolja meg a tűzjelöléseket a nyilak helyett az olvashatóság érdekében.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Leírás (képernyőolvasóhoz és exporthoz)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
   'markering': 'jelölés',
@@ -4641,5 +4638,5 @@ const _dutchSourceAddHu = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Képhivatkozások',
 };

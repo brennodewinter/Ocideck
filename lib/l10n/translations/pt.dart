@@ -1665,33 +1665,30 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rodar escreve uma cópia rodada ao lado do original; o teu ficheiro original fica inalterado.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cai fora da parte visível da imagem — ajuste o ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Adicionar alvo',
+  'Doel verwijderen': 'Remover alvo',
+  'Verwijzing verwijderen': 'Remover referência',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selecione uma linha para colocar uma referência.',
   'Vorm van de markering': 'Forma do marcador',
   'doel': 'alvo',
   'doelen': 'alvos',
   'Verwijzing verwijderd': 'Referência removida',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referência de imagem',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'tem coordenadas inválidas e não é desenhado — ajuste a posição do alvo no editor de referências.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'refere-se a uma marca (A) que não está no texto, ou vice-versa — adicione a letra ao texto ou remova a referência.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'aparece duas vezes neste slide — cada marca (A), (B) … pode ter apenas uma referência.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Este slide tem referências de imagem mas nenhuma âncora — as referências não podem ser vinculadas ao slide. Dê uma âncora ao slide no editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'As setas cruzam-se neste slide — considere marcadores de pino em vez de setas para legibilidade.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cai fora da parte visível da imagem — ajuste o ponto ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Descrição (para leitor de tela e exportação)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'cai fora da área visível — ajuste o ponto ponto focal, o zoom ou a posição do alvo.',
   'markering': 'marcador',
@@ -4679,5 +4676,5 @@ const _dutchSourceAddPt = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Referências de imagem',
 };

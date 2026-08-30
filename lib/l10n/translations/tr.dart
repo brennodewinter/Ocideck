@@ -2555,14 +2555,11 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Döndürmek, orijinalin yanına döndürülmüş bir kopya yazar; özgün dosyanız değişmeden kalır.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Hedef ekle',
+  'Doel verwijderen': 'Hedefi kaldır',
+  'Verwijzing verwijderen': 'Referansı kaldır',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Bir referans yerleştirmek için bir satır seçin.',
   'Vorm van de markering': 'İşaretin şekli',
   'doel': 'hedef',
   'doelen': 'hedefler',

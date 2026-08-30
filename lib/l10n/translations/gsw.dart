@@ -1640,33 +1640,30 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Drääie schrybt e drillti Kopie näbem Original; dys ursprünglichs File blybt unverändered.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Ziil derzuefüege',
+  'Doel verwijderen': 'Ziil entfarne',
+  'Verwijzing verwijderen': 'Referänz entfarne',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Wähl en Ziilpunkt zum en Referänz plaziere.',
   'Vorm van de markering': 'Form vo de Markierig',
   'doel': 'Ziel',
   'doelen': 'Ziel',
   'Verwijzing verwijderd': 'Referänz entfarnt',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Bildreferänz',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'het ungültigi Koordinate und wird nöd zeichnet — pass d Ziilposition im Referänz-Editor aa.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'verwiist uf en (A)-Markierig, wo nöd im Text staat, oder umgecheert — setz de Buechstabe in Text oder entfar d Referänz.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'chunnt zweimal uf dere Folie vor — jedi Markierig (A), (B) … dörf nur eini Referänz ha.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Die Folie het Bildreferänze aber kein Anker — d Referänze chäned nöd mit de Folie verchnüpft werde. Gib de Folie en Anker im Editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Pfiil chrüüzed sich uf dere Folie — bruuch Pins statt Pfiil für e besseri Lesbarkeit.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Beschriibig (für Screenreader und Export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
   'markering': 'Markierig',
@@ -4631,5 +4628,5 @@ const _dutchSourceAddGsw = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Bildreferänze',
 };

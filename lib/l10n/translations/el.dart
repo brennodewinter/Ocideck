@@ -1662,33 +1662,30 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Η περιστροφή γράφει ένα περιστραμμένο αντίγραφο δίπλα στο πρωτότυπο· το αρχικό σας αρχείο μένει αμετάβλητο.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Προσθήκη στόχου',
+  'Doel verwijderen': 'Αφαίρεση στόχου',
+  'Verwijzing verwijderen': 'Αφαίρεση αναφοράς',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Επιλέξτε μια γραμμή για να τοποθετήσετε μια αναφορά.',
   'Vorm van de markering': 'Μορφή του δείκτη',
   'doel': 'στόχος',
   'doelen': 'στόχοι',
   'Verwijzing verwijderd': 'Η αναφορά αφαιρέθηκε',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Αναφορά εικόνας',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'έχει μη έγκυρες συντεταγμένες και δεν σχεδιάζεται — προσαρμόστε τη θέση του στόχου στον επεξεργαστή αναφορών.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'αναφέρεται σε ένα (A) σημάδι που δεν βρίσκεται στο κείμενο, ή αντίστροφα — προσθέστε το γράμμα στο κείμενο ή αφαιρέστε την αναφορά.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'εμφανίζεται δύο φορές σε αυτή τη διαφάνεια — κάθε σημάδι (A), (B) … μπορεί να έχει μόνο μία αναφορά.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Αυτή η διαφάνεια έχει αναφορές εικόνων αλλά δεν έχει άγκυρα — οι αναφορές δεν μπορούν να συνδεθούν με τη διαφάνεια. Δώστε στη διαφάνεια μια άγκυρα στον επεξεργαστή.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Τα βέλη διασταυρώνονται σε αυτή τη διαφάνεια — εξετάστε καρφίδες αντί για βέλη για αναγνωσιμότητα.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Περιγραφή (για αναγνώστη οθόνης και εξαγωγή)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
   'markering': 'σήμανση',
@@ -4693,5 +4690,5 @@ const _dutchSourceAddEl = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
 };

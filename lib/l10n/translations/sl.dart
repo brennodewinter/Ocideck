@@ -1638,33 +1638,30 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Vrtenje zapiše zavrteno kopijo poleg izvirnika; vaša izvorna datoteka ostane nespremenjena.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'pade izven vidnega dela slike — prilagodite gorišče, zum ali položaj cilja, sicer oznaka ne bo prikazana na diapozitivu.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Dodaj cilj',
+  'Doel verwijderen': 'Odstrani cilj',
+  'Verwijzing verwijderen': 'Odstrani sklic',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Izberite vrstico za postavitev sklica.',
   'Vorm van de markering': 'Oblika oznake',
   'doel': 'cilj',
   'doelen': 'cilji',
   'Verwijzing verwijderd': 'Sklic odstranjen',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Sklic na sliko',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'ima neveljavne koordinate in se ne riše — prilagodite položaj cilja v urejevalniku sklicev.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'sklicuje se na oznako (A), ki ni v besedilu, ali obratno — dodajte črko v besedilo ali odstranite sklic.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'pojavi se dvakrat na tem diapozitivu — vsaka oznaka (A), (B) … lahko ima le en sklic.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Ta diapozitiv ima sklice na slike, vendar nima sidra — sklice ni mogoče povezati z diapozitivom. Dajte diapozitivu sidro v urejevalniku.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Puščice se križajo na tem diapozitivu — razmislite o pin oznakah namesto puščic za berljivost.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'pade izven vidnega dela slike — prilagodite gorišče, zum ali položaj cilja, sicer oznaka ne bo prikazana na diapozitivu.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Opis (za bralnik zaslona in izvoz)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
   'markering': 'oznaka',
@@ -4626,5 +4623,5 @@ const _dutchSourceAddSl = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Sklice na slike',
 };

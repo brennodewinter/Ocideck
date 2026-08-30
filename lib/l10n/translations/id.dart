@@ -1637,33 +1637,30 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Memutar menulis salinan terputar di samping aslinya; berkas asli Anda tidak berubah.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'berada di luar bagian gambar yang terlihat — sesuaikan titik fokus, zoom, atau posisi target, jika tidak penanda tidak akan muncul di slide.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Tambah target',
+  'Doel verwijderen': 'Hapus target',
+  'Verwijzing verwijderen': 'Hapus referensi',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Pilih baris untuk menempatkan referensi.',
   'Vorm van de markering': 'Bentuk penanda',
   'doel': 'target',
   'doelen': 'target',
   'Verwijzing verwijderd': 'Referensi dihapus',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referensi gambar',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'memiliki koordinat tidak valid dan tidak digambar — sesuaikan posisi target di editor referensi.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'merujuk ke tanda (A) yang tidak ada dalam teks, atau sebaliknya — tambahkan huruf ke teks atau hapus referensi.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'muncul dua kali pada slide ini — setiap tanda (A), (B) … hanya boleh memiliki satu referensi.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Slide ini memiliki referensi gambar tetapi tidak memiliki jangkar — referensi tidak dapat dikaitkan dengan slide. Beri slide sebuah jangkar di editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Panah saling bersilangan pada slide ini — pertimbangkan penanda pin sebagai ganti panah untuk keterbacaan.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'berada di luar bagian gambar yang terlihat — sesuaikan titik fokus, zoom, atau posisi target, jika tidak penanda tidak akan muncul di slide.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Deskripsi (untuk pembaca layar dan ekspor)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
   'markering': 'penanda',
@@ -4636,5 +4633,5 @@ const _dutchSourceAddId = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Referensi gambar',
 };

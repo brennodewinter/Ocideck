@@ -1638,33 +1638,30 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Kääntäminen kirjoittaa käännetyn kopion alkuperäisen viereen; alkuperäinen tiedostosi säilyy muuttumattomana.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'putoaa kuvan näkyvän osan ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia, muuten merkki ei näy dian.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Lisää kohde',
+  'Doel verwijderen': 'Poista kohde',
+  'Verwijzing verwijderen': 'Poista viite',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Valitse rivi viitten sijoittamiseksi.',
   'Vorm van de markering': 'Merkin muoto',
   'doel': 'kohde',
   'doelen': 'kohteet',
   'Verwijzing verwijderd': 'Viite poistettu',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Kuvaviite',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'on virheelliset koordinaatit eikä sitä piirretä — korjaa kohteen sijainti viite-editorissa.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'viittaa (A)-merkkiin, joka ei ole tekstissä, tai päinvastoin — lisää kirjain tekstiin tai poista viite.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'esiintyy kahdesti tällä dioilla — jokaisella merkillä (A), (B) … voi olla vain yksi viite.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Tällä dioilla on kuvaviitteitä mutta ei ankkuria — viitteitä ei voida kytkeä dioon. Anna diolle ankkuri editorissa.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Nuolet risteävät tällä dioilla — harkitse neuloja nuolten sijaan luettavuuden vuoksi.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'putoaa kuvan näkyvän osan ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia, muuten merkki ei näy dian.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Kuvaus (ruudunlukijaa ja vientiä varten)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
   'markering': 'merkki',
@@ -4631,5 +4628,5 @@ const _dutchSourceAddFi = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Kuvaviitteet',
 };

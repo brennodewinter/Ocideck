@@ -1652,33 +1652,30 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Conversio exemplar versum iuxta archetypum scribit; fasciculus tuus originalis immutatus manet.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'extra visibilem partem imaginis cadit — focum, zoom aut positionem destinati adjusta, aliter signum in pagina non apparebit.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Adde destinatum',
+  'Doel verwijderen': 'Remove destinatum',
+  'Verwijzing verwijderen': 'Remove referentiam',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selige lineam ad referentiam collocandam.',
   'Vorm van de markering': 'Forma signi',
   'doel': 'scopus',
   'doelen': 'scopī',
   'Verwijzing verwijderd': 'Referentia remota',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referentia imaginis',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'coordinatas invalidas habet et non pingitur — corrige positionem destinati in editore referentiarum.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'refert ad signum (A) quod in texto non est, aut e contrario — adde litteram ad textum aut remove referentiam.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'bis in hoc lapillo apparet — unaquaeque nota (A), (B) … unam referentiam habere potest.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Hic lapillus habet referentias imaginum sed non ancoram — referentiae lapillo conecti non possunt. Da lapillo ancoram in editore.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Sagittae se in hoc lapillo intersecant — pinos pro sagittis pro legibilitate considera.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'extra visibilem partem imaginis cadit — focum, zoom aut positionem destinati adjusta, aliter signum in pagina non apparebit.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Descriptio (pro lectore screen et exportatione)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
   'markering': 'nota',
@@ -4642,5 +4639,5 @@ const _dutchSourceAddLa = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Imaginum referentiae',
 };

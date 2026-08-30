@@ -1615,19 +1615,15 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'nISwI\' nagh HaSta velqa\' choHlu\'bogh qojlu\', \'ach nagh HaSta wa\'DIch choHbe\'lu\'.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'vetlh visible mIllogh nagh be\' — focal point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'pagh',
+  'Doel verwijderen': 'pagh',
+  'Verwijzing verwijderen': 'pagh',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'pagh',
   'Vorm van de markering': 'mIv Segh',
-  'doel': 'target',
+  'doel': 'pagh',
   'doelen': 'target',
   'Verwijzing verwijderd': 'reference teqmoH',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'pagh',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'mIq taghbe\' \'ej mIq tlhIHbe\' — Doch qav tu\'lu\'be\'.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':

@@ -1631,33 +1631,30 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pööramine kirjutab pööratud koopia originaali kõrvale; teie algne fail jääb muutmata.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'jääb nähtavast alast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'jääb pildi nähtavast osast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta, muidu marker slaidil ei ilmu.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Lisa siht',
+  'Doel verwijderen': 'Eemalda siht',
+  'Verwijzing verwijderen': 'Eemalda viide',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Vali rida viite asetamiseks.',
   'Vorm van de markering': 'Märgisti kuju',
   'doel': 'sihtmärk',
   'doelen': 'sihtmärgid',
   'Verwijzing verwijderd': 'Viide eemaldatud',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Pildiviide',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'on kehtetud koordinaadid ja seda ei joonistata — korrigeeri sihi asukohta viidete redaktoris.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'viitab (A)-märgile, mis ei ole tekstis, või vastupidi — lisa täht teksti või eemalda viide.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'esineb sellel slaidil kaks korda — iga märk (A), (B) … võib olla ainult üks viide.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Sellel slaidil on pildiviited aga puudub ankur — viiteid ei saa slaidiga siduda. Andke slaidile ankur redaktoris.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Nooled ristuvad sellel slaidil — kaalu noonte asemel tihvtide kasutamist loetavuse huvides.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'jääb pildi nähtavast osast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta, muidu marker slaidil ei ilmu.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Kirjeldus (ekraanilugeja ja ekspordi jaoks)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'jääb nähtavast alast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta.',
   'markering': 'märk',
@@ -4618,5 +4615,5 @@ const _dutchSourceAddEt = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Pildiviited',
 };

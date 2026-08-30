@@ -1637,33 +1637,30 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotation skriver en drejet kopi ved siden af originalen; din oprindelige fil forbliver uændret.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'falder uden for det synlige område — justér brændpunkt, zoom eller målposition.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falder uden for den synlige del af billedet — justér brændpunkt, zoom eller målposition, ellers vises markøren ikke på dias.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Tilføj mål',
+  'Doel verwijderen': 'Fjern mål',
+  'Verwijzing verwijderen': 'Fjern reference',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Vælg en linje for at placere en reference.',
   'Vorm van de markering': 'Markeringens form',
   'doel': 'mål',
   'doelen': 'mål',
   'Verwijzing verwijderd': 'Reference fjernet',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Billedreference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'har ugyldige koordinater og tegnes ikke — justér målpositionen i referenceeditoren.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'refererer til en (A)-markering, der ikke står i teksten, eller omvendt — sæt bogstavet i teksten eller fjern referencen.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'forekommer to gange på dette dias — hver markering (A), (B) … må kun have én reference.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Dette dias har billedreferencer men ingen anker — referencerne kan ikke kobles til diaset. Giv diaset et anker i editoren.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Pile krydser hinanden på dette dias — overvej pin-markeringer i stedet for pile for læsbarhed.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falder uden for den synlige del af billedet — justér brændpunkt, zoom eller målposition, ellers vises markøren ikke på dias.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Beskrivelse (til skærmlæser og eksport)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'falder uden for det synlige område — justér brændpunkt, zoom eller målposition.',
   'markering': 'markering',
@@ -4624,5 +4621,5 @@ const _dutchSourceAddDa = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'f.eks. "controller board med display"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Billedreferencer',
 };

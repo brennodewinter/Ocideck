@@ -677,29 +677,26 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Draaien skriuwt in draaide kopy neist it orizjineel; dyn oarspronklike bestân bliuwt ûnferoare.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Doel tafoegje',
+  'Doel verwijderen': 'Doel fuortsmite',
+  'Verwijzing verwijderen': 'Ferwizing fuortsmite',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Kies in rigel om in ferwizing te pleatsen.',
   'Vorm van de markering': 'Foarm fan de markering',
   'doel': 'doel',
   'doelen': 'doelen',
   'Verwijzing verwijderd': 'Ferwizing fuortsmiten',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Ofbyldingsferwizing',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'hat ûnjildige koördinaten en wurdt net tekene — pas it doelplak oan yn de ferwizingeditor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'ferwiist nei in (A)-markering dy\'t net yn de tekst stiet, of oarsom — set de letter yn de tekst of smyt de ferwizing fuort.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'komt twaris foar op dizze dia — eltse markering (A), (B) … mei mar ien ferwizing hawwe.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Dizze dia hat ofbyldingsferwizingen mar gjin anker — de ferwizingen kinne net oan de dia keppele wurde. Jou de dia in anker yn de editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Pylken kruse op dizze dia — oerweagje pins ynstee fan pylken foar lêsberens.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
   'Beschrijving (voor schermlezer en export)':

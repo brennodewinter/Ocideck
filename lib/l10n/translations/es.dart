@@ -674,33 +674,30 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Girar escribe una copia girada junto al original; tu archivo original queda sin cambios.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cae fuera del área visible — ajusta el punto focal, el zoom o la posición del objetivo.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cae fuera de la parte visible de la imagen — ajusta el punto focal, el zoom o la posición del objetivo, o el marcador no aparecerá en la diapositiva.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Añadir objetivo',
+  'Doel verwijderen': 'Quitar objetivo',
+  'Verwijzing verwijderen': 'Quitar referencia',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selecciona una línea para colocar una referencia.',
   'Vorm van de markering': 'Forma del marcador',
   'doel': 'destino',
   'doelen': 'destinos',
   'Verwijzing verwijderd': 'Referencia eliminada',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referencia de imagen',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'tiene coordenadas no válidas y no se dibuja — ajusta la posición del objetivo en el editor de referencias.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'se refiere a una marca (A) que no está en el texto, o viceversa — añade la letra al texto o elimina la referencia.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'aparece dos veces en esta diapositiva — cada marca (A), (B) … puede tener solo una referencia.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Esta diapositiva tiene referencias de imagen pero no ancla — las referencias no se pueden vincular a la diapositiva. Dale un ancla a la diapositiva en el editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Las flechas se cruzan en esta diapositiva — considera marcadores de pin en lugar de flechas para legibilidad.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cae fuera de la parte visible de la imagen — ajusta el punto punto focal, el zoom o la posición del objetivo, o el marcador no aparecerá en la diapositiva.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Descripción (para lector de pantalla y exportación)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'cae fuera del área visible — ajusta el punto punto focal, el zoom o la posición del objetivo.',
   'markering': 'marca',
@@ -4689,5 +4686,5 @@ const _dutchSourceAddEs = {
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'p. ej. "la placa de control con pantalla"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Referencias de imagen',
 };

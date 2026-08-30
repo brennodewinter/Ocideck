@@ -1644,33 +1644,30 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pasukimas įrašo pasuktą kopiją šalia originalo; jūsų pradinis failas lieka nepakitęs.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'patenka už matomos vaizdo dalies — derinkite židinio tašką, mastelį ar tikslinę padėtį, kitaip žymeklis neatsiras skaidrėje.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Pridėti tikslą',
+  'Doel verwijderen': 'Pašalinti tikslą',
+  'Verwijzing verwijderen': 'Pašalinti nuorodą',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Pasirinkite eilutę nuorodai patalpinti.',
   'Vorm van de markering': 'Žymeklio forma',
   'doel': 'taikinys',
   'doelen': 'taikiniai',
   'Verwijzing verwijderd': 'Nuoroda pašalinta',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Paveikslėlio nuoroda',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'turi netinkamas koordinates ir nėra piešiamas — koreguokite tikslo poziciją nuorodų redaktoriuje.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'nurodo į (A) žymę, kurios nėra tekste, arba atvirkščiai — pridėkite raidę į tekstą arba pašalinkite nuorodą.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'pasirodo du kartus šiame slaide — kiekvienas žymeklis (A), (B) … gali turėti tik vieną nuorodą.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Šis slaidas turi paveikslėlių nuorodų, bet neturi inkaro — nuorodos negali būti susietos su slaidu. Suteikite slaidui inkarą redaktoriuje.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Rodyklės kertasi šiame slaide — apsvarstykite adatų žymeklius vietoj rodyklių skaitomumui.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'patenka už matomos vaizdo dalies — derinkite židinio tašką, mastelį ar tikslinę padėtį, kitaip žymeklis neatsiras skaidrėje.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Aprašymas (ekrano skaitytuvui ir eksportui)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
   'markering': 'žymė',
@@ -4641,5 +4638,5 @@ const _dutchSourceAddLt = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
 };

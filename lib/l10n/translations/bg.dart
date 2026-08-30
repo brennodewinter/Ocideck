@@ -1657,33 +1657,30 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Завъртането записва завъртяно копие до оригинала; вашият оригинален файл остава непроменен.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Добавяне на цел',
+  'Doel verwijderen': 'Премахване на цел',
+  'Verwijzing verwijderen': 'Премахване на препратка',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Изберете ред, за да поставите препратка.',
   'Vorm van de markering': 'Форма на маркера',
   'doel': 'цел',
   'doelen': 'цени',
   'Verwijzing verwijderd': 'Препратката е премахната',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Справка към изображение',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'има невалидни координати и не се чертае — коригирайте позицията на целта в редактора на препратки.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'препраща към (A)-маркер, който не е в текста, или обратното — добавете буквата в текста или премахнете препратката.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'се появява два пъти на този слайд — всяка маркировка (A), (B) … може да има само една препратка.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Този слайд има препратки към изображения, но няма котва — препратките не могат да бъдат свързани със слайда. Дайте на слайда котва в редактора.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Стрелките се пресичат на този слайд — помислете за пинове вместо стрелки за четимост.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Описание (за екранен четец и експорт)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
   'markering': 'маркер',
@@ -4667,5 +4664,5 @@ const _dutchSourceAddBg = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Справки към изображения',
 };

@@ -1654,33 +1654,30 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotirea scrie o copie rotită lângă original; fișierul tău original rămâne neschimbat.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cade în afara zonei vizibile — ajustați punctul focal, zoom-ul sau poziția țintei.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cade în afara părții vizibile a imaginii — ajustați punctul focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Adaugă țintă',
+  'Doel verwijderen': 'Elimină țintă',
+  'Verwijzing verwijderen': 'Elimină referința',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selectați o linie pentru a plasa o referință.',
   'Vorm van de markering': 'Forma marcatorului',
   'doel': 'țintă',
   'doelen': 'ținte',
   'Verwijzing verwijderd': 'Referință ștearsă',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Referință imagine',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'are coordonate invalide și nu este desenat — ajustați poziția țintei în editorul de referințe.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'se referă la o marcă (A) care nu este în text, sau invers — adăugați litera în text sau eliminați referința.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'apare de două ori pe acest slide — fiecare marcă (A), (B) … poate avea o singură referință.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Acest slide are referințe imagine dar fără ancoră — referințele nu pot fi legate de slide. Dați slide-ului o ancoră în editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Săgețile se încrucișează pe acest slide — luați în considerare marcatoare cu pin în loc de săgeți pentru lizibilitate.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cade în afara părții vizibile a imaginii — ajustați punctul punct focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Descriere (pentru cititor de ecran și export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'cade în afara zonei vizibile — ajustați punctul punct focal, zoom-ul sau poziția țintei.',
   'markering': 'marcator',
@@ -4669,5 +4666,5 @@ const _dutchSourceAddRo = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Referințe imagine',
 };

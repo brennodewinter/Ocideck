@@ -3,6 +3,9 @@
 // Minimal viable editor: assign a reference letter to a bullet, place a
 // point target by clicking on the image, edit the description, delete.
 // Opens as a dialog showing the real image with click-to-place markers.
+//
+// ponytail: 332 callout-kwaliteitsmeldingen hebben 1-woord placeholders
+// in ~25 talen; vervang ze door echte vertalingen voor de volgende release.
 
 import 'dart:math' as math;
 

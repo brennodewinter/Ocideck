@@ -1636,33 +1636,30 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pagriešana ieraksta pagrieztu kopiju blakus oriģinālam; jūsu sākotnējais fails paliek nemainīts.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'krīt ārpus attēla redzamās daļas — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju, pretējā gadījumā marķieris neparādīsies uz slaida.',
-  'Doel toevoegen': 'null',
-  'Doel verwijderen': 'null',
-  'Verwijzing verwijderen': 'null',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Doel toevoegen': 'Pievienot mērķi',
+  'Doel verwijderen': 'Noņemt mērķi',
+  'Verwijzing verwijderen': 'Noņemt atsauci',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Izvēlieties rindu atsauces novietošanai.',
   'Vorm van de markering': 'Marķiera forma',
   'doel': 'mērķis',
   'doelen': 'mērķi',
   'Verwijzing verwijderd': 'Atsauce noņemta',
-  'Afbeeldingsverwijzing': 'Image reference',
+  'Afbeeldingsverwijzing': 'Attēla atsauce',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'ir nederīgas koordinātes un to nezīmē — pielāgojiet mērķa pozīciju atsauču redaktorā.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'atsaucas uz (A) atzīmi, kas nav tekstā, vai otrādi — pievienojiet burtu tekstā vai noņemiet atsauci.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'parādās divreiz šajā slaidā — katram atzīmējumam (A), (B) … var būt tikai viena atsauce.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'Šajā slaidā ir attēlu atsauces, bet nav enkura — atsauces nevar saistīt ar slaidu. Piešķiriet slaidam enkuru redaktorā.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'Bultas krustojas šajā slaidā — apsveriet tapu marķierus bultu vietā lasāmībai.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'krīt ārpus attēla redzamās daļas — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju, pretējā gadījumā marķieris neparādīsies uz slaida.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Apraksts (ekrāna lasītājam un eksportam)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
       'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
   'markering': 'atzīme',
@@ -4622,5 +4619,5 @@ const _dutchSourceAddLv = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
-  'Afbeeldingsverwijzingen': 'Image references',
+  'Afbeeldingsverwijzingen': 'Attēlu atsauces',
 };
