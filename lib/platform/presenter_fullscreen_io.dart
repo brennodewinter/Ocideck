@@ -13,3 +13,13 @@ Future<void> setPresenterFullscreen(bool fullscreen) async {
     logWarning('setPresenterFullscreen: nativeapi niet beschikbaar', e);
   }
 }
+
+bool isPresenterFullscreen() {
+  try {
+    final window = WindowManager.instance.getCurrent();
+    return window?.isFullScreen ?? false;
+  } catch (e) {
+    logWarning('isPresenterFullscreen: nativeapi niet beschikbaar', e);
+    return false;
+  }
+}

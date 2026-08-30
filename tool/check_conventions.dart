@@ -190,7 +190,7 @@ const Map<String, int> fileSizeBaseline = {
   // staan al in het part-bestand presenter_beamer_payload.dart.
   // +9 (#1162): het menucategorie-veld met doc, de laatst-verzonden waarde en
   // de drie regels die hem in de beamer-sync meenemen.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1038,
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1066,
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
   'lib/services/slide_quality_analyzer.dart': 1110,
@@ -361,7 +361,7 @@ const Map<String, int> classSizeBaseline = {
   // _timelineStep, _announceStep voor schermlezer, plan-gebaseerde helpers
   // in presenter_content/navigation/playback/views.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3461,
+      3478,
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen

@@ -8,6 +8,7 @@ import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/platform/presenter_fullscreen.dart';
 import 'package:ocideck/services/split_run.dart';
 import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -956,6 +957,13 @@ void main() {
     // blank) was covered layer by layer, but never the bottom of the stack:
     // nothing open, so Escape leaves the presentation. That gap is why a report
     // of "Escape does not exit" could not be checked against a test.
+    //
+    // Op macOS en in de browser onderschept het platform Escape om het volledig
+    // scherm te verlaten — de toets bereikt Flutter niet. De presentator pollt
+    // isPresenterFullscreen() en verlaat de presentatie zodra het volledig
+    // scherm verdwijnt (#1862). In deze test is er geen native venster, dus
+    // isPresenterFullscreen() is altijd false en de guard blijft stil — de
+    // toets zelf doet het werk.
     await tester.pumpWidget(_presenterOverLauncher());
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
@@ -967,6 +975,34 @@ void main() {
     expect(find.text('Eerste'), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });
+
+  test('isPresenterFullscreen returns false without a native window', () {
+    // In de testomgeving is er geen native venster, dus de functie moet
+    // false teruggeven zonder te crashen. Op macOS en in de browser is dit
+    // de functie die de presentator pollt om een Escape-onderschepping door
+    // het platform te detecteren (#1862).
+    expect(isPresenterFullscreen(), isFalse);
+  });
+
+  testWidgets(
+    'the fullscreen guard does not exit when fullscreen was never active',
+    (tester) async {
+      // De guard pollt isPresenterFullscreen() elke 300 ms. In de testomgeving
+      // is dat altijd false, dus _wasFullscreen blijft false en de guard mag
+      // de presentatie nooit verlaten. Dit is de regressietest voor het geval
+      // "geen volledig scherm" — de guard moet transparant zijn.
+      await tester.pumpWidget(_presenterOverLauncher());
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(find.text('Eerste'), findsOneWidget);
+
+      // Laat de guard een paar keer vuren (300 ms interval).
+      await tester.pump(const Duration(milliseconds: 900));
+
+      expect(find.text('Eerste'), findsOneWidget);
+      expect(find.text('open'), findsNothing);
+    },
+  );
 
   testWidgets('with the rehearsal summary on, Escape shows it before leaving', (
     tester,
