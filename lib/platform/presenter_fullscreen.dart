@@ -10,3 +10,11 @@ import 'presenter_fullscreen_io.dart'
 /// hier omheen gewoon de presenter-route openen).
 Future<void> setPresenterFullscreen(bool fullscreen) =>
     impl.setPresenterFullscreen(fullscreen);
+
+/// Of het venster/document momenteel in volledig scherm staat.
+///
+/// macOS en de browser onderscheppen Escape op platformniveau om het volledig
+/// scherm te verlaten — de toets bereikt Flutter dus niet. De presentator
+/// pollt deze functie om dat te detecteren en de presentatie alsnog te
+/// verlaten, zodat Escape doet wat de documentatie belooft (#1862).
+bool isPresenterFullscreen() => impl.isPresenterFullscreen();

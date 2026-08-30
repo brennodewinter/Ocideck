@@ -561,7 +561,16 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   late FocusNode _focusNode;
   Timer? _advanceTimer;
   Timer? _clockTimer;
+  Timer? _fullscreenGuard;
   double _progress = 0; // 0..1 voor de voortgangsbalk
+
+  /// Of het venster in volledig scherm stond toen de presentatie begon. Op
+  /// macOS en in de browser onderschept het platform Escape om het volledig
+  /// scherm te verlaten — de toets bereikt Flutter niet. De [_fullscreenGuard]
+  /// pollt [isPresenterFullscreen] en verlaat de presentatie zodra het volledig
+  /// scherm onverwacht verdwijnt, zodat Escape alsnog doet wat de
+  /// documentatie belooft (#1862).
+  bool _wasFullscreen = false;
 
   /// Presenter view (notities, klok, volgende slide) vs. publieksweergave.
   bool _presenterView = false;
@@ -807,6 +816,23 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _focusNode.requestFocus();
       _loadDisplays();
       _scheduleAdvance();
+      // In enkel-scherm-modus zet `show()` het venster in volledig scherm.
+      // macOS en de browser onderscheppen Escape op platformniveau om het
+      // verlaten — de toets bereikt Flutter niet. Poll het venster en verlaat
+      // de presentatie zodra het volledig scherm onverwacht verdwijnt.
+      if (!_dual) {
+        _fullscreenGuard = Timer.periodic(const Duration(milliseconds: 300), (
+          _,
+        ) {
+          if (!mounted || _exiting) return;
+          final fs = isPresenterFullscreen();
+          if (fs) {
+            _wasFullscreen = true;
+          } else if (_wasFullscreen) {
+            _exit();
+          }
+        });
+      }
     });
   }
 
@@ -814,6 +840,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void dispose() {
     _advanceTimer?.cancel();
     _clockTimer?.cancel();
+    _fullscreenGuard?.cancel();
     _typedTimer?.cancel();
     _fixFlashTimer?.cancel();
     _questionTimer?.cancel();

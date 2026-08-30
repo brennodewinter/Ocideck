@@ -19,3 +19,12 @@ Future<void> setPresenterFullscreen(bool fullscreen) async {
     logWarning('setPresenterFullscreen: browser weigerde fullscreen', e);
   }
 }
+
+bool isPresenterFullscreen() {
+  try {
+    return web.document.fullscreenElement != null;
+  } catch (e) {
+    logWarning('isPresenterFullscreen: browser-API niet beschikbaar', e);
+    return false;
+  }
+}
