@@ -93,6 +93,10 @@ class _SectionEditorState extends ConsumerState<SectionEditor>
         imageSize: result.imageSize,
         imageFocalX: result.focalX,
         imageFocalY: result.focalY,
+        // Draaien schrijft een afgeleide kopie en laat het origineel staan
+        // (IMAGE_ROTATION.md, optie A), dus de dia moet naar dat nieuwe bestand
+        // gaan wijzen. Null betekent: er is niet gedraaid, pad blijft.
+        imagePath: result.rotatedImagePath,
       ),
     );
   }

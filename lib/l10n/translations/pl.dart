@@ -1647,8 +1647,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Obracanie zmienia sam plik obrazu, inaczej niż kadrowanie i powiększanie. Obraz używany przez inne slajdy lub decki obróci się także tam.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Obracanie zapisuje obrócony egzemplarz obok oryginału; Twój pierwotny plik pozostaje bez zmian.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

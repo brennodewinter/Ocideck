@@ -1637,8 +1637,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Otočení změní samotný soubor obrázku, na rozdíl od oříznutí a přiblížení. Obrázek, který používají jiné snímky nebo decky, se otočí i tam.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Otočení zapíše otočenou kopii vedle originálu; váš původní soubor zůstane nezměněn.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'spadá mimo viditelnou oblast — upravte ohnisko, zoom nebo pozici cíle.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

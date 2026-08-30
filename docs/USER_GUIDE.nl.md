@@ -925,19 +925,28 @@ afbeelding per kwartslag met **Linksom** / **Rechtsom**. Dezelfde knop zit op de
 titelachtergrond, het opsomming-en-afbeelding-paneel, en elke afbeelding van een
 twee-afbeeldingen-dia (afbeeldingen op afstand/via URL kunnen zo niet worden aangepast).
 
-**Twee van de drie zijn niet-destructief, één wel.** Het bijsnijden en de zoom bewaren
-een focuspunt en een schaal in de `.md` van het deck en raken het afbeeldingsbestand
-niet aan. **Draaien herschrijft het bestand op schijf wél** — dat moet ook, want de
-draai moet elke export halen en elk ander deck dat dezelfde afbeelding gebruikt — en het
-gebeurt op **Klaar**, niet tijdens het voorbeschouwen. **Annuleren** laat het bestand
-zoals het was. Draai je een afbeelding die je niet zelf hebt gemaakt, of één die door
-meer decks wordt gedeeld, dan verandert hij voor allemaal. Draaien wordt alleen
-aangeboden bij een afbeelding waar OciDeck naartoe kan schrijven: niet bij een
-meegeleverde voorbeeldafbeelding en niet bij één van een URL — daar ontbreken de
-knoppen in plaats van dat ze falen. De dialoog zegt dit alles boven de twee
-draaiknoppen, vóórdat je er een indrukt *(toegevoegd 2026-08-30)*. Of dit zo moet
-blijven werken, wordt gewogen in
-[design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).
+**Geen van de drie raakt je afbeelding aan.** Het bijsnijden en de zoom bewaren een
+focuspunt en een schaal in de `.md` van het deck. **Draaien schrijft een gedraaide
+kopie** naast het origineel — `foto.jpg` wordt `foto.r90.jpg` — en laat de dia daarnaar
+wijzen, dus het bestand dat je hebt binnengehaald staat er nog, en elke andere dia of
+elk ander deck dat het gebruikt merkt niets. De kopie wordt geschreven op **Klaar**;
+**Annuleren** schrijft niets.
+
+Draai je dezelfde afbeelding nog eens, dan telt de hoek op in één kopie in plaats van
+zich te stapelen: nog een kwartslag vanaf `foto.r90.jpg` geeft `foto.r180.jpg`, nooit
+`foto.r90.r90.jpg`. Draai je helemaal terug, dan wijst de dia gewoon weer naar het
+origineel. Draaien wordt alleen aangeboden bij een afbeelding waar OciDeck naast kan
+schrijven: niet bij een meegeleverde voorbeeldafbeelding en niet bij één van een URL —
+daar ontbreken de knoppen in plaats van dat ze falen.
+
+*(Tot 2026-08-30 overschreef draaien je bestand — geen undo, geen kopie, en een
+afbeelding die meer decks deelden draaide in allemaal mee. Dát is wat er veranderd is;
+de afweging staat in [design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).)*
+
+**Eén ding reist niet mee met de draai: beeldverwijzingen.** Het doel van een callout
+staat vast tegen de afbeelding zoals die was, dus na een draai wijzen de markeringen
+naar de verkeerde plek. Plaats de callouts nadat je de oriëntatie hebt vastgezet, of
+verplaats ze erna.
 
 *(Gecorrigeerd 2026-08-30: deze alinea stuurde je naar een knop **Bijsnijden**, die in
 geen van de vijf editors dat opschrift draagt, en zei dat de dialoog "nooit het

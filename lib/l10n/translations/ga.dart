@@ -1665,8 +1665,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Athraíonn rothlú comhad na híomhá féin, murab ionann agus bearradh agus súmáil. Casfaidh íomhá a úsáideann sleamhnáin nó deiceanna eile ansin freisin.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Scríobhann rothlú cóip rothlaithe in aice leis an mbunchóip; fanann do bhunchomhad gan athrú.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

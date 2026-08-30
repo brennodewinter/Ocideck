@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
+import 'package:path/path.dart' as p;
 
 import '../../l10n/app_localizations.dart';
 import '../../models/video_source.dart';
@@ -18,12 +19,72 @@ import '../../services/web_asset_store.dart';
 
 /// The crop choices the author made: the (possibly changed) zoom and the
 /// normalized focal point that decides which part of the picture stays in view.
-/// Rotation (if any) is written back to the file by the dialog itself.
+///
+/// [rotatedImagePath] is the *new* asset the dialog wrote when the author turned
+/// the picture, and `null` when they did not. The caller puts it on the slide in
+/// place of the old path.
+///
+/// **Why a new file and not the old one** (IMAGE_ROTATION.md, option A). Rotating
+/// used to overwrite the source, which meant an unrecoverable edit to a file the
+/// user owns — and one image can back several slides and several decks, so a turn
+/// in this deck silently turned it in the others too. The crop and the zoom next
+/// to it never touched the file; only rotation did, and nothing in the dialog
+/// said so. A derived copy keeps rotation a decision of *this* slide while
+/// leaving every other reference, and the original, exactly as they were.
 class ImageCropResult {
   final int imageSize;
   final double focalX;
   final double focalY;
-  const ImageCropResult(this.imageSize, this.focalX, this.focalY);
+
+  /// The path the slide should carry now, or `null` when nothing was rotated.
+  final String? rotatedImagePath;
+
+  const ImageCropResult(
+    this.imageSize,
+    this.focalX,
+    this.focalY, {
+    this.rotatedImagePath,
+  });
+}
+
+/// The `.r90` / `.r180` / `.r270` marker a rotated copy carries in its name.
+///
+/// It is part of the name rather than a sidecar because it has to survive every
+/// route a deck travels — the package, the git plane, a plain file copy — and a
+/// name is the only carrier all of those keep. It also makes the derivation
+/// legible: someone looking at `images/` sees that `foto.r90.jpg` came from
+/// `foto.jpg` without needing OciDeck to tell them.
+final RegExp _rotationSuffix = RegExp(r'\.r(90|180|270)$');
+
+/// Split [stem] into its base name and the rotation already baked into it.
+///
+/// `foto` → `('foto', 0)` · `foto.r90` → `('foto', 90)`.
+({String base, int degrees}) splitRotationSuffix(String stem) {
+  final match = _rotationSuffix.firstMatch(stem);
+  if (match == null) return (base: stem, degrees: 0);
+  return (
+    base: stem.substring(0, match.start),
+    degrees: int.parse(match.group(1)!),
+  );
+}
+
+/// The file name a copy rotated [quarterTurns] further than [currentName] gets.
+///
+/// The angle **accumulates onto the one already in the name** instead of nesting
+/// a second suffix, so turning `foto.r90.jpg` another quarter gives
+/// `foto.r180.jpg` and never `foto.r90.r90.jpg`. A deck therefore holds at most
+/// three derived copies of a picture rather than a chain that grows with every
+/// visit to the dialog.
+///
+/// Returns `null` when the rotation cancels out — a quarter turn back from
+/// `foto.r90.jpg` is `foto.jpg`, which already exists, so the caller points the
+/// slide at it again instead of writing a fourth identical file.
+String? rotatedCopyName(String currentName, int quarterTurns) {
+  final ext = p.extension(currentName);
+  final split = splitRotationSuffix(p.basenameWithoutExtension(currentName));
+  final total = (split.degrees + quarterTurns * 90) % 360;
+  if (total == 0) return null;
+  return '${split.base}.r$total$ext';
 }
 
 /// A crop needs a picture we can decode locally to show and drag. Remote (URL)
@@ -45,7 +106,7 @@ bool imageIsCroppable(String imagePath) =>
 /// Waaróm de laatste rotatie niet op schijf landde — `null` zolang het goed
 /// ging.
 ///
-/// `_writeRotatedBytes` slikt een schrijffout bewust in: een volle schijf of
+/// `_writeRotatedCopy` slikt een schrijffout bewust in: een volle schijf of
 /// een alleen-lezen map mag de bijsnijdkeuze niet blokkeren. Maar daardoor was
 /// "draaien doet niets" op Windows twee releases lang onzichtbaar — óók in CI,
 /// want de toets zag alleen pixels die niet klopten en `logWarning` schrijft
@@ -255,20 +316,34 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   ///
   /// Elke uitgang die niets schrijft zet [lastRotationWriteFailure]; zie daar
   /// waarom dat nodig was.
-  void _writeRotatedBytes() {
+  /// Schrijf de gedraaide afbeelding als een NIEUWE asset en geef het pad terug
+  /// dat de dia voortaan moet dragen. `null` als er niets te schrijven viel.
+  ///
+  /// **Het origineel blijft staan** (IMAGE_ROTATION.md, optie A). Tot 2026-08-30
+  /// overschreef deze methode het bronbestand: geen undo, geen kopie, en omdat
+  /// één afbeelding meer dia's en meer decks kan voeden, draaide een kwartslag
+  /// hier de foto ook in decks die de auteur niet openhad. De kopie landt naast
+  /// de bron — dat is de `images/`-map van het deck, of de stagingmap van een
+  /// nog niet opgeslagen deck, want een dia mag alleen naar binnen de
+  /// projectmap wijzen. Zo reist ze mee in het pakket en het git-vlak als elke
+  /// andere deck-asset, zonder een OciDeck-artefact in de fotomap van de
+  /// gebruiker achter te laten.
+  ///
+  /// Synchroon, zodat de dialoog direct kan sluiten — de afbeelding is klein en
+  /// lokaal. Elke uitgang die niets schrijft zet [lastRotationWriteFailure];
+  /// zie daar waarom dat nodig was.
+  String? _writeRotatedCopy() {
     lastRotationWriteFailure = null;
-    if (_rotationQuarterTurns == 0 || _originalBytes == null) {
-      if (_rotationQuarterTurns != 0) {
-        lastRotationWriteFailure =
-            'de oorspronkelijke bytes zijn nooit geladen';
-      }
-      return;
+    if (_rotationQuarterTurns == 0) return null;
+    if (_originalBytes == null) {
+      lastRotationWriteFailure = 'de oorspronkelijke bytes zijn nooit geladen';
+      return null;
     }
     final original = _originalBytes!;
     final decoded = img.decodeImage(original);
     if (decoded == null) {
       lastRotationWriteFailure = 'de afbeelding was niet te decoderen';
-      return;
+      return null;
     }
     final rotated = img.copyRotate(
       decoded,
@@ -281,44 +356,73 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
         ? img.encodeGif(rotated)
         : img.encodePng(rotated);
     final bytes = Uint8List.fromList(encoded);
+
     if (WebAssetStore.isMemPath(widget.imagePath)) {
-      // Vervang de bytes op hetzelfde pad. De renderlaag leest de nieuwe bytes
-      // via bytesFor() en krijgt een ander cacheKey-object, dus de Image-widget
-      // re-resolve automatisch.
-      WebAssetStore.replace(widget.imagePath, bytes);
-      return;
+      // Web kent geen bestandssysteem: dezelfde regel, andere opslag. `put`
+      // levert een nieuw `mem:`-pad en laat het oude staan, zodat een dia die
+      // nog naar de ongedraaide bytes wijst die ook houdt.
+      final name = WebAssetStore.nameFor(widget.imagePath) ?? 'afbeelding.png';
+      final copyName = rotatedCopyName(name, _rotationQuarterTurns) ?? name;
+      return WebAssetStore.put(bytes, name: copyName);
     }
+
     final resolved = resolveSlideAssetPath(
       widget.imagePath,
       widget.projectPath,
     );
     if (resolved == null) {
       lastRotationWriteFailure = 'het pad viel buiten de projectmap';
-      return;
+      return null;
     }
+
+    final copyName = rotatedCopyName(
+      p.basename(widget.imagePath),
+      _rotationQuarterTurns,
+    );
+    if (copyName == null) {
+      // De draai heft zichzelf op: `foto.r90.jpg` een kwartslag terug ís
+      // `foto.jpg`. Staat dat er nog, wijs de dia er dan gewoon weer op in
+      // plaats van een vierde identiek bestand te schrijven.
+      final base = _basePathFor(widget.imagePath);
+      final baseResolved = base == null
+          ? null
+          : resolveSlideAssetPath(base, widget.projectPath);
+      if (baseResolved != null && File(baseResolved).existsSync()) return base;
+      // Het origineel is weg (hernoemd, opgeruimd). Dan is de gedraaide kopie
+      // die er nu ligt het enige dat de dia heeft; laat hem staan.
+      return null;
+    }
+
     // Laat ons eigen beeld los vóór we schrijven. De voorvertoning heeft dit
     // bestand net gedecodeerd, en op Windows blijft een net gelezen bestand nog
-    // even vastgehouden (errno 32, "used by another process"). Daar strandde de
-    // rotatie: `rename` mag daar niet over een bestaand bestand, de terugval
-    // wil het doel dan verwijderen, en verwijderen mag niet zolang iemand het
-    // openhoudt — en die iemand waren wij. De dialoog gaat toch dicht, en na
-    // afloop verhoogt `bumpImageVersion` de cachesleutel, dus de renderlaag
-    // haalt het beeld zo meteen opnieuw op.
+    // even vastgehouden (errno 32, "used by another process"). We schrijven nu
+    // wel naar een ánder pad, maar de doelnaam kan van een eerdere ronde al
+    // bestaan — dan speelt dezelfde blokkade weer op.
     _releasePreview();
+    final target = p.join(p.dirname(resolved), copyName);
     try {
-      writeBytesAtomicSyncRetrying(File(resolved), bytes);
+      writeBytesAtomicSyncRetrying(File(target), bytes);
     } on Object catch (e) {
       // Een schrijffout mag de crop-keuze niet blokkeren — maar hij mag ook
-      // niet spoorloos zijn.
+      // niet spoorloos zijn. De dia houdt dan zijn oude, ongedraaide pad.
       lastRotationWriteFailure = e;
-      logWarning('image crop: rotatie niet weggeschreven', e);
+      logWarning('image crop: gedraaide kopie niet weggeschreven', e);
+      return null;
     }
     // Bump de versie zodat de renderlaag een nieuwe CappedImage-cacheKey
-    // gebruikt (path#N i.p.v. path#(N-1)). De Image-widget ziet een nieuwe
-    // provider identiteit en re-resolve, in plaats van de verouderde
-    // cache-entry te tonen. Werkt voor zowel cappedFileImage als
-    // boundedFileImage (thumbnails).
-    bumpImageVersion(resolved);
+    // gebruikt. Het doelpad kan van een eerdere ronde in de cache zitten met
+    // andere bytes.
+    bumpImageVersion(target);
+    return p.join(p.dirname(widget.imagePath), copyName);
+  }
+
+  /// Het pad zonder rotatiemarkering: `images/foto.r90.jpg` → `images/foto.jpg`.
+  /// `null` als er geen markering op zat.
+  String? _basePathFor(String path) {
+    final ext = p.extension(path);
+    final split = splitRotationSuffix(p.basenameWithoutExtension(path));
+    if (split.degrees == 0) return null;
+    return p.join(p.dirname(path), '${split.base}$ext');
   }
 
   /// Geeft de voorvertoning en haar plek in de beeldcache op.
@@ -563,12 +667,13 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                     ),
                   ],
                 ),
-                // Bijsnijden en zoomen bewaren een waarde in het deck; draaien
-                // herschrijft het bestand op schijf. Dat verschil is vanuit de
-                // dialoog niet te zien — dezelfde drie knoppen, twee heel
-                // andere gevolgen — en een afbeelding die meer dia's of meer
-                // decks delen draait overal mee. Daarom staat het er vóórdat
-                // er gedraaid wordt, niet als melding achteraf.
+                // Draaien is de enige van de drie die iets op schijf zet: een
+                // gedraaide kopie naast het origineel (IMAGE_ROTATION.md, optie
+                // A). Dat is geen waarschuwing meer — het origineel blijft
+                // heel — maar wel iets dat de auteur moet weten, want er
+                // verschijnt een bestand in de map en de dia gaat ernaar
+                // wijzen. Tot 2026-08-30 stond hier de waarschuwing die bij het
+                // oude, overschrijvende gedrag hoorde.
                 const SizedBox(height: 6),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -582,7 +687,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                     Expanded(
                       child: Text(
                         l10n.d(
-                          'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.',
+                          'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.',
                         ),
                         style: TextStyle(
                           fontSize: 11,
@@ -604,8 +709,10 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
           ),
           FilledButton(
             onPressed: () {
-              _writeRotatedBytes();
-              Navigator.of(context).pop(ImageCropResult(_size, _fx, _fy));
+              final rotated = _writeRotatedCopy();
+              Navigator.of(context).pop(
+                ImageCropResult(_size, _fx, _fy, rotatedImagePath: rotated),
+              );
             },
             child: Text(l10n.d('Klaar')),
           ),

@@ -1651,8 +1651,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Обертання змінює сам файл зображення, на відміну від обрізання та масштабування. Зображення, яке використовують інші слайди чи колоди, повернеться й там.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Обертання записує повернуту копію поряд з оригіналом; ваш вихідний файл лишається незмінним.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

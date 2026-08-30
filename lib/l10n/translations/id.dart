@@ -1635,8 +1635,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Memutar mengubah berkas gambar itu sendiri, tidak seperti memangkas dan memperbesar. Gambar yang dipakai slide atau dek lain ikut berputar di sana.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Memutar menulis salinan terputar di samping aslinya; berkas asli Anda tidak berubah.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

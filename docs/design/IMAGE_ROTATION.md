@@ -3,13 +3,13 @@
 *The one operation in the image dialog that edits the user's file. What it would
 take to stop, and the three shapes that could replace it.*
 
-> **Status:** decided 2026-08-30 — **Option A**, not yet built · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** decided and built 2026-08-30 — **Option A** · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
-> **This is a design doc, not shipping behaviour.** What ships today is described
-> under [§2](#2-what-happens-today) and, since 2026-08-30, warned about in the
-> dialog itself. When a decision lands, [`FILE_FORMAT.md`](../FILE_FORMAT.md),
+> **Option A shipped on 2026-08-30.** [§2](#2-what-happens-today) describes what
+> the dialog did *before* that and is kept as the record of why this changed;
 > [`USER_GUIDE.md`](../USER_GUIDE.md) and the
-> [`CHANGELOG.md`](../../CHANGELOG.md) carry the truth.
+> [`CHANGELOG.md`](../../CHANGELOG.md) describe what it does now. This document
+> remains the *why* and the weighing.
 
 > Origin: found while checking `USER_GUIDE.md` against the code on 2026-08-30
 > (PR #1870). The guide claimed the dialog "never rewrites the image file"; the
@@ -290,6 +290,23 @@ replace the copy with a field without any user-visible regression.
 
 ---
 
+## 8a. How it was built
+
+`rotatedCopyName` and `splitRotationSuffix` in `image_crop_dialog.dart` hold the
+naming rule as pure functions, unit-tested apart from the widget:
+`foto.png` + 90° → `foto.r90.png`; `foto.r90.png` + 90° → `foto.r180.png`;
+a full circle returns `null`, and the slide points at the original again rather
+than gaining a fourth identical file. A `.r45` in a name is not a marker of ours
+and is left alone.
+
+`_writeRotatedCopy()` replaces `_writeRotatedBytes()` and returns the path the
+slide should carry, or `null` when nothing was written. It writes beside the
+resolved source — which is inside the project or the staging directory, because
+a slide may not point outside it — and on web it calls `WebAssetStore.put`
+instead of `replace`, so the old `mem:` bytes stay for any slide still on them.
+`ImageCropResult.rotatedImagePath` carries it back; the five editors pass it to
+`copyWith`, where `null` means "keep the current path".
+
 ## 9. Open, not decided here
 
 - Whether rotating should offer "apply to every slide using this picture". Under
@@ -298,3 +315,10 @@ replace the copy with a field without any user-visible regression.
   a failed write no longer destroys anything, which lowers the stakes but does
   not answer it.
 - Flips. The importers read them; the editor offers none, and nobody has asked.
+- **Callout targets do not follow a rotation.** A target is stored in the image
+  space of the picture as it was, so after a turn the markers sit in the wrong
+  places. This was equally true when rotation overwrote the file — the change
+  neither caused it nor fixed it — but it is now cheaper to fix, because the
+  geometry contract in §5.2 already knows how to rotate a target and the original
+  is still on disk to compare against. The guide tells the author to settle the
+  orientation before placing callouts; that is a workaround, not an answer.

@@ -675,8 +675,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Draaien feroaret it ôfbyldingsbestân sels, oars as bysnije en zoome. In ôfbylding dy\'t oare dia\'s of decks brûke, draait dêr ek mei.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Draaien skriuwt in draaide kopy neist it orizjineel; dyn oarspronklike bestân bliuwt ûnferoare.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

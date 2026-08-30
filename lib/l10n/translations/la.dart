@@ -1650,8 +1650,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Conversio ipsum imaginis fasciculum mutat, aliter ac resectio et amplificatio. Imago ab aliis scidis vel fasciculis adhibita illic quoque vertitur.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Conversio exemplar versum iuxta archetypum scribit; fasciculus tuus originalis immutatus manet.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

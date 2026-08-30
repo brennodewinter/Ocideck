@@ -1654,8 +1654,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Id-dawran ibiddel il-fajl tal-immaġni nnifsu, b\'differenza mill-qtugħ u ż-żoom. Immaġni użata minn slajds jew decks oħra ddur ukoll hemm.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Id-dawran jikteb kopja mdawra ħdejn l-oriġinal; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'jaqa\' barra l-inħawi viżibbli — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

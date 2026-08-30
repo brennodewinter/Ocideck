@@ -113,6 +113,10 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
         imageFocalX2: isSecond ? result.focalX : null,
         imageFocalY2: isSecond ? result.focalY : null,
         imageZoom: result.imageSize,
+        // Draaien levert een afgeleide kopie op (IMAGE_ROTATION.md, optie A);
+        // die hoort bij de afbeelding die zojuist openstond, niet bij de andere.
+        imagePath: isSecond ? null : result.rotatedImagePath,
+        imagePath2: isSecond ? result.rotatedImagePath : null,
       ),
     );
   }

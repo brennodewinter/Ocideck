@@ -1655,8 +1655,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Завъртането променя самия файл с изображението, за разлика от изрязването и мащабирането. Изображение, използвано от други слайдове или декове, се завърта и там.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Завъртането записва завъртяно копие до оригинала; вашият оригинален файл остава непроменен.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

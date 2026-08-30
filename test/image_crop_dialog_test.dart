@@ -102,6 +102,47 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  // De naamregel van optie A (IMAGE_ROTATION.md §8.3). Hij is puur en dus
+  // goedkoop te toetsen, en juist daar zit het gedrag dat stil kan rotten: een
+  // gestapelde suffix laat een deck bij elk bezoek aan de dialoog groeien, en
+  // een gemiste nul-doorgang schrijft een vierde bestand dat identiek is aan
+  // het origineel dat er al staat.
+  group('rotatedCopyName', () {
+    test('een eerste kwartslag krijgt een r90-naam', () {
+      expect(rotatedCopyName('foto.png', 1), 'foto.r90.png');
+      expect(rotatedCopyName('foto.jpg', 2), 'foto.r180.jpg');
+      expect(rotatedCopyName('foto.jpg', 3), 'foto.r270.jpg');
+    });
+
+    test('de hoek telt op bij die in de naam, en nest niet', () {
+      expect(rotatedCopyName('foto.r90.png', 1), 'foto.r180.png');
+      expect(rotatedCopyName('foto.r180.png', 1), 'foto.r270.png');
+      expect(rotatedCopyName('foto.r90.png', 2), 'foto.r270.png');
+    });
+
+    test('een volle ronde komt uit bij het origineel, dus geen naam', () {
+      expect(rotatedCopyName('foto.r90.png', 3), isNull);
+      expect(rotatedCopyName('foto.r180.png', 2), isNull);
+      expect(rotatedCopyName('foto.png', 4), isNull);
+    });
+
+    test('linksom telt net zo goed terug', () {
+      expect(rotatedCopyName('foto.r180.png', -1), 'foto.r90.png');
+      expect(rotatedCopyName('foto.r90.png', -1), isNull);
+    });
+
+    test('een punt in de naam die geen rotatie is, blijft staan', () {
+      expect(rotatedCopyName('vakantie.2026.png', 1), 'vakantie.2026.r90.png');
+      // `r45` is geen kwartslag en dus geen markering van ons.
+      expect(rotatedCopyName('foto.r45.png', 1), 'foto.r45.r90.png');
+    });
+
+    test('splitRotationSuffix leest de markering terug', () {
+      expect(splitRotationSuffix('foto'), (base: 'foto', degrees: 0));
+      expect(splitRotationSuffix('foto.r270'), (base: 'foto', degrees: 270));
+    });
+  });
+
   group('imageIsCroppable', () {
     test('een lokaal pad is bij te snijden', () {
       expect(imageIsCroppable('images/foto.png'), isTrue);
@@ -344,7 +385,11 @@ void main() {
       File(foto).writeAsBytesSync(img.encodePng(original));
     });
 
-    testWidgets('Rechtsom draait de afbeelding 90° en schrijft terug', (
+    // Dit is de kern van optie A (IMAGE_ROTATION.md): draaien laat het bestand
+    // van de gebruiker met rust en levert een afgeleide kopie op. Ging dit
+    // stuk, dan zou een kwartslag weer een onherstelbare bewerking zijn op een
+    // bestand dat meer dia's en meer decks kunnen delen.
+    testWidgets('Rechtsom laat het origineel staan en schrijft een kopie', (
       tester,
     ) async {
       final origBytes = File(foto).readAsBytesSync();
@@ -358,27 +403,46 @@ void main() {
       expect(
         lastRotationWriteFailure,
         isNull,
-        reason: 'de geroteerde bytes zijn niet weggeschreven',
+        reason: 'de gedraaide kopie is niet weggeschreven',
       );
 
-      // Het resultaat is teruggekomen.
-      expect(uitkomst.single, isNotNull);
-      // Het bestand op schijf moet zijn bijgewerkt met de geroteerde bytes.
-      final newBytes = File(foto).readAsBytesSync();
-      expect(newBytes, isNot(equals(origBytes)));
-      // En de geroteerde afbeelding moet decodeerbaar zijn met dezelfde
-      // afmetingen (2x2 blijft 2x2 bij 90°).
-      final rotated = img.decodeImage(newBytes);
+      // Het origineel is onaangeroerd — dát is de hele wijziging.
+      expect(
+        File(foto).readAsBytesSync(),
+        equals(origBytes),
+        reason: 'het bronbestand is overschreven; optie A verbiedt precies dat',
+      );
+
+      // En de dia krijgt het pad van de kopie terug.
+      final result = uitkomst.single;
+      expect(result, isNotNull);
+      expect(result!.rotatedImagePath, p.join(tmp.path, 'foto.r90.png'));
+
+      final kopie = File(p.join(tmp.path, 'foto.r90.png'));
+      expect(kopie.existsSync(), isTrue, reason: 'de kopie ontbreekt');
+      final rotated = img.decodeImage(kopie.readAsBytesSync());
       expect(rotated, isNotNull);
       expect(rotated!.width, 2);
       expect(rotated.height, 2);
+    });
+
+    testWidgets('zonder draaien komt er geen kopie en geen nieuw pad', (
+      tester,
+    ) async {
+      final uitkomst = await open(tester);
+      await klaar(tester);
+
+      expect(uitkomst.single!.rotatedImagePath, isNull);
+      expect(Directory(tmp.path).listSync().map((e) => p.basename(e.path)), [
+        'foto.png',
+      ], reason: 'er is een bestand bijgekomen zonder dat er gedraaid is');
     });
 
     testWidgets('Herstel zet de rotatie terug naar het origineel', (
       tester,
     ) async {
       final origBytes = File(foto).readAsBytesSync();
-      await open(tester);
+      final uitkomst = await open(tester);
 
       await tester.tap(find.byIcon(Icons.rotate_right));
       await tester.pumpAndSettle();
@@ -387,9 +451,10 @@ void main() {
       await tester.pumpAndSettle();
       await klaar(tester);
 
-      // Zonder rotatie wordt het bestand niet aangeraakt.
-      final newBytes = File(foto).readAsBytesSync();
-      expect(newBytes, equals(origBytes));
+      // Zonder rotatie wordt er niets geschreven en verschuift de dia niet.
+      expect(File(foto).readAsBytesSync(), equals(origBytes));
+      expect(uitkomst.single!.rotatedImagePath, isNull);
+      expect(File(p.join(tmp.path, 'foto.r90.png')).existsSync(), isFalse);
     });
 
     testWidgets('twee keer rechtsom draait 180°, niet twee keer 90°', (
@@ -417,10 +482,15 @@ void main() {
       expect(
         lastRotationWriteFailure,
         isNull,
-        reason: 'de geroteerde bytes zijn niet weggeschreven',
+        reason: 'de gedraaide kopie is niet weggeschreven',
       );
 
-      final rotated = img.decodeImage(File(foto).readAsBytesSync())!;
+      // Twee kwartslagen zijn één kopie op 180°, niet twee kopieën of een
+      // geneste naam als `foto.r90.r90.png`.
+      expect(File(p.join(tmp.path, 'foto.r90.png')).existsSync(), isFalse);
+      final kopie = File(p.join(tmp.path, 'foto.r180.png'));
+      expect(kopie.existsSync(), isTrue);
+      final rotated = img.decodeImage(kopie.readAsBytesSync())!;
       // 180° houdt de afmetingen gelijk — 90° zou ze omwisselen.
       expect(rotated.width, 2);
       expect(rotated.height, 3);
@@ -431,35 +501,32 @@ void main() {
       expect([br.r, br.g, br.b], [255, 0, 0]); // rood
     });
 
-    // Draaien is de énige bewerking in dit venster die het bestand van de
-    // gebruiker herschrijft; slepen en zoomen bewaren een waarde in het deck.
-    // Dat verschil is aan de knoppen niet te zien, en een afbeelding die meer
-    // dia's of decks delen draait overal mee — dus moet het er staan vóórdat er
-    // gedraaid wordt. Zonder deze toets verdwijnt de waarschuwing bij de
-    // eerstvolgende herindeling van de dialoog zonder dat iets rood wordt.
-    // Zie docs/design/IMAGE_ROTATION.md §6.
-    testWidgets('de dialoog waarschuwt vóór het draaien dat het bestand zelf '
-        'verandert', (tester) async {
+    // Draaien is de enige van de drie bewerkingen die iets op schijf zet — een
+    // kopie naast het origineel. Het origineel blijft heel, dus dit is geen
+    // waarschuwing meer, maar de auteur moet wél weten dat er een bestand
+    // bijkomt en dat de dia daarnaar gaat wijzen. Zonder deze toets verdwijnt
+    // die regel bij de eerstvolgende herindeling van de dialoog zonder dat iets
+    // rood wordt. Zie docs/design/IMAGE_ROTATION.md §8a.
+    testWidgets('de dialoog zegt vooraf dat draaien een kopie schrijft', (
+      tester,
+    ) async {
       await open(tester);
 
-      final waarschuwing = find.textContaining(
-        'verandert het afbeeldingsbestand zelf',
-      );
       expect(
-        waarschuwing,
+        find.textContaining('gedraaide kopie naast het origineel'),
         findsOneWidget,
-        reason: 'de waarschuwing hoort zichtbaar te zijn zodra draaien kan',
+        reason: 'de toelichting hoort zichtbaar te zijn zodra draaien kan',
       );
       // Vóór het draaien, niet als melding achteraf: ze staat er al zonder dat
       // er op een draaiknop is geklikt.
       expect(find.byIcon(Icons.rotate_right), findsOneWidget);
 
-      // En ze noemt het gedeelde gebruik, want dát is het gevolg dat buiten
-      // dit deck reikt.
+      // En ze belooft expliciet dat het origineel heel blijft — dát is de
+      // eigenschap waar optie A om draait.
       expect(
-        find.textContaining("meer dia's of decks"),
+        find.textContaining('blijft ongewijzigd'),
         findsOneWidget,
-        reason: 'de gedeelde-afbeelding-gevolgtrekking ontbreekt',
+        reason: 'de belofte over het origineel ontbreekt',
       );
     });
 
@@ -473,7 +540,7 @@ void main() {
 
       expect(find.byIcon(Icons.rotate_right), findsNothing);
       expect(
-        find.textContaining('verandert het afbeeldingsbestand zelf'),
+        find.textContaining('gedraaide kopie naast het origineel'),
         findsNothing,
       );
     });

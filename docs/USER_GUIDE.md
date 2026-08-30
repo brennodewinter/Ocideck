@@ -880,18 +880,28 @@ icons, and turn the picture a quarter at a time with **Linksom** / **Rechtsom**
 bullets-and-image panel, and each image of a two-images slide (remote/URL images
 can't be adjusted this way).
 
-**Two of the three are non-destructive, one is not.** The crop and the zoom store
-a focal point and a scale in the deck's `.md` and never touch the image file.
-**Rotating does rewrite the file on disk** — it has to, because the turn has to
-survive into every export and every other deck that uses the same picture — and
-it is written when you press **Klaar** (Done), not while you preview. **Annuleren**
-(Cancel) leaves the file as it was. Turning a picture you did not shoot yourself,
-or one shared by several decks, changes it for all of them. Rotation is offered
-only for a picture OciDeck can write to: not for a bundled sample image and not
-for one loaded from a URL, where the buttons are absent rather than failing. The
-dialog says all of this above the two turn buttons, before you press one
-*(added 2026-08-30)*. Whether it should keep working this way at all is weighed
-in [design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).
+**None of the three touches your picture.** The crop and the zoom store a focal
+point and a scale in the deck's `.md`. **Rotating writes a turned copy** next to
+the original — `foto.jpg` becomes `foto.r90.jpg` — and points the slide at it,
+so the file you brought in is still there, and any other slide or deck using it
+is unaffected. The copy is written when you press **Klaar** (Done); **Annuleren**
+(Cancel) writes nothing.
+
+Turn the same picture again and the angle accumulates in one copy rather than
+stacking: another quarter from `foto.r90.jpg` gives `foto.r180.jpg`, never
+`foto.r90.r90.jpg`. Turn it all the way back and the slide simply points at the
+original again. Rotation is offered only for a picture OciDeck can write beside:
+not for a bundled sample image and not for one loaded from a URL, where the
+buttons are absent rather than failing.
+
+*(Until 2026-08-30 rotating overwrote your file — no undo, no copy, and a picture
+shared by several decks turned in all of them. That is what changed; the
+reasoning is in [design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).)*
+
+**One thing rotation does not carry: image callouts.** A callout's target is
+stored against the picture as it was, so after a turn its markers point at the
+wrong parts. Place the callouts after you have settled the orientation, or move
+them afterwards.
 
 *(Corrected 2026-08-30: this paragraph told you to click **Bijsnijden**, a button
 that has not carried that label in any of the five editors, and said the dialog

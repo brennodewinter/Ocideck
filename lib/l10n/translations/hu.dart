@@ -1637,8 +1637,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'A forgatás magát a képfájlt változtatja meg, a vágással és a nagyítással ellentétben. A más diák vagy deckek által használt kép ott is elfordul.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'A forgatás elforgatott másolatot ír az eredeti mellé; az eredeti fájlod változatlan marad.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

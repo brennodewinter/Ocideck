@@ -672,8 +672,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Girar cambia el propio archivo de imagen, a diferencia de recortar y hacer zoom. Una imagen usada por otras diapositivas o decks también gira allí.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Girar escribe una copia girada junto al original; tu archivo original queda sin cambios.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'cae fuera del área visible — ajusta el punto focal, el zoom o la posición del objetivo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
