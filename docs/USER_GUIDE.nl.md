@@ -4,7 +4,7 @@
 
 # OciDeck — Gebruikershandleiding
 
-> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-08-07 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -39,12 +39,13 @@
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
 
-*(Toegevoegd 2026-07-22: dit document telt zo'n 3.800 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24 en opnieuw 2026-07-30; er stond 2.992 en daarna 3.350, elk kloppend op het moment van schrijven.)*
+*(Toegevoegd 2026-07-22: dit document telt zo'n 5.300 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24, 2026-07-30 en 2026-08-30; er stond 2.992, daarna 3.350, daarna 3.800, elk kloppend op het moment van schrijven.)*
 
 OciDeck bouwt [Marp](https://marp.app/)-presentaties via een gestructureerde,
 slide-voor-slide-editor. Je stelt getypeerde slides samen, bekijkt ze live,
-presenteert ze (op één of twee schermen) en exporteert naar Markdown, PDF, PPTX of
-een enkel offline HTML-bestand (één bestand, inclusief afbeeldingen — zie [Exporteren](#exporteren)).
+presenteert ze (op één of twee schermen) en exporteert naar Markdown, PDF, PPTX,
+OpenDocument (ODP), LaTeX/Beamer, een enkel offline HTML-bestand (één bestand, inclusief
+afbeeldingen) of een portable `.ocideck`-pakket — zie [Exporteren](#exporteren).
 Bestanden blijven standaard Marp-Markdown, dus een deck blijft bruikbaar in andere Marp-tools.
 Een opgeslagen project schrijft een `.marprc.yml` naast de `.md` die het
 gegenereerde thema registreert, dus de gewone Marp CLI-aanroep — **uitgevoerd
@@ -67,7 +68,7 @@ flowchart LR
     Edit --> Preview[Live voorbeeld]
     Preview --> Edit
     Edit --> Present[Presenteren op één of twee schermen]
-    Edit --> Export[Exporteren naar Markdown, PDF, PPTX of offline HTML]
+    Edit --> Export[Exporteren naar Markdown, PDF, PPTX, ODP, Beamer, offline HTML of een pakket]
     Export --> Reuse[Heropenen in OciDeck of een andere Marp-tool]
 ```
 
@@ -741,7 +742,9 @@ Voeg een slide toe en kies een type: **titel**, **sectie**scheiding, **opsomming
 afbeelding**, **video**, **citaat**, **tabel**, **broncode**, **grafiek** (staaf, horizontale
 staaf, gestapelde staaf, horizontale gestapelde staaf, combo, lijn, vlak, taart, ring,
 spider/radar, spreiding, waterval, heatmap/risicomatrix, of streef-en-werkelijk — plus
-zes statistische types wanneer de module Procesverbetering aanstaat), **cockpit** (een
+acht statistische types wanneer de module Procesverbetering aanstaat; *gecorrigeerd
+2026-08-30, hier stond zes terwijl `chartTypeRequiresProcesverbetering` er acht noemt,
+en de sectie over de module zelf verderop zegt acht*), **cockpit** (een
 dashboard van vliegtuigachtige instrumentmeters),
 **vraag** (een interactieve quizslide, in zes soorten), **tijdlijn** (een geanimeerde tijdlijn van
 gedateerde gebeurtenissen), **scorekaart** (een paar kerncijfers, elk naast het cijfer uit
@@ -914,14 +917,29 @@ buiten het kader valt wordt bijgesneden — handig voor full-bleed-foto's. Laat 
 schaalt hem dan van rand-tot-rand passend tot kleiner, of ingezoomd voorbij het kader.
 Een optionele titeloverlay kan er bovenop liggen.
 
-**Bijsnijden om te passen.** Wanneer een afbeelding is bijgesneden (slidevullend of ingezoomd) en het
-verkeerde deel toont, klik je op **Bijsnijden**. Een live editor opent met de afbeelding
-in zijn vak: **sleep** de afbeelding om te kiezen welk deel in beeld blijft, en —
-voor de grote afbeelding en de titelachtergrond — **zoom** in dezelfde dialoog. Het bijsnijden
-is niet-destructief: het bewaart een focuspunt, herschrijft nooit het afbeeldingsbestand, en
-reist met het deck mee in de `.md`. Dezelfde **Bijsnijden**-knop zit op de
-titelachtergrond, het opsomming-en-afbeelding-paneel, en elke afbeelding van een twee-afbeeldingen-
-slide (afbeeldingen op afstand/via URL kunnen op deze manier niet worden bijgesneden).
+**De afbeelding aanpassen.** Wanneer een afbeelding is bijgesneden (diavullend of
+ingezoomd) en het verkeerde deel toont, klik je op **Afbeelding aanpassen**. Een live
+editor opent met de afbeelding in zijn vak: **sleep** de afbeelding om te kiezen welk
+deel in beeld blijft, **zoom** met de schuif tussen de twee vergrootglazen, en draai de
+afbeelding per kwartslag met **Linksom** / **Rechtsom**. Dezelfde knop zit op de
+titelachtergrond, het opsomming-en-afbeelding-paneel, en elke afbeelding van een
+twee-afbeeldingen-dia (afbeeldingen op afstand/via URL kunnen zo niet worden aangepast).
+
+**Twee van de drie zijn niet-destructief, één wel.** Het bijsnijden en de zoom bewaren
+een focuspunt en een schaal in de `.md` van het deck en raken het afbeeldingsbestand
+niet aan. **Draaien herschrijft het bestand op schijf wél** — dat moet ook, want de
+draai moet elke export halen en elk ander deck dat dezelfde afbeelding gebruikt — en het
+gebeurt op **Klaar**, niet tijdens het voorbeschouwen. **Annuleren** laat het bestand
+zoals het was. Draai je een afbeelding die je niet zelf hebt gemaakt, of één die door
+meer decks wordt gedeeld, dan verandert hij voor allemaal. Draaien wordt alleen
+aangeboden bij een afbeelding waar OciDeck naartoe kan schrijven: niet bij een
+meegeleverde voorbeeldafbeelding en niet bij één van een URL — daar ontbreken de
+knoppen in plaats van dat ze falen.
+
+*(Gecorrigeerd 2026-08-30: deze alinea stuurde je naar een knop **Bijsnijden**, die in
+geen van de vijf editors dat opschrift draagt, en zei dat de dialoog "nooit het
+afbeeldingsbestand herschrijft" terwijl de draaiknoppen in diezelfde dialoog precies dat
+doen.)*
 
 ### Keuzemenu-slides (#1162)
 
@@ -2606,8 +2624,8 @@ dat je altijd weet wat wat is.
 ### Een deel van de gegevens tonen zonder er iets van te verliezen (weergavegrenzen)
 
 Een opsommings-, tabel- of grafiekdia gebouwd uit een grote dataset — een import
-van duizenden rijen, een jaar aan metingen — kan niet alles leesbaar tonen, en tot
-#672 was de enige weg naar een bruikbare dia gegevens verwijderen. **Weergave
+van duizenden rijen, een jaar aan metingen — kan niet alles leesbaar tonen, en
+tot #672 was de enige weg naar een bruikbare dia gegevens verwijderen. **Weergave
 beperken** in de dia-instellingen is het niet-destructieve antwoord: kies een
 maximumaantal zichtbare items, kies *welke* items (eerste of laatste in
 bronvolgorde; hoogste of laagste op een gekozen tabelkolom of grafiekreeks), en
@@ -3064,11 +3082,15 @@ gespiegeld) scherm. Opmerkingen:
 
 Een groot Mermaid-diagram (een gedetailleerde stroomdiagram, een brede Gantt) verschijnt op een
 leesbaar formaat tijdens de presentatie en kan worden **in- en uitgezoomd en versleept** om een deel dichtbij
-te halen: knijp op het trackpad, scroll met de muis, of gebruik de drie knoppen op
-het diagram — **inzoomen**, **uitzoomen** en **passend maken** (terug naar het leesbare
-standaardformaat). Met een beamer aangesloten volgt het publieksvenster mee: je zoom-
-en scrollpositie worden gespiegeld, zodat de zaal precies het deel ziet dat jij
-bekijkt. Naar een andere dia gaan reset de zoom.
+te halen: knijp op het trackpad, scroll met de muis, druk op `+` en `-` op het
+toetsenbord, of gebruik de drie knoppen op het diagram — **inzoomen**, **uitzoomen** en
+**passend maken** (terug naar het leesbare standaardformaat). Met een beamer
+aangesloten volgt het publieksvenster mee: je zoom- en scrollpositie worden
+gespiegeld, zodat de zaal precies het deel ziet dat jij bekijkt. Naar een andere dia
+gaan reset de zoom.
+
+*(De route via het toetsenbord ontbrak in deze alinea en in SHORTCUTS.md tot
+2026-08-30; het is de enige van de vier die zonder aanwijsapparaat werkt.)*
 
 ### Aantekenen tijdens het presenteren
 
@@ -3139,6 +3161,12 @@ Exporteer naar:
 
 - **PDF** en **PPTX** (PPTX bevat sprekersnotities) — weergegeven vanuit de
   slide-renderer in de app.
+- **OpenDocument (ODP)** — dezelfde aanpak van één afbeelding per dia als PPTX,
+  in het open OpenDocument-formaat dat LibreOffice Impress leest. De ontvanger
+  ziet het deck precies zoals het in de app staat; de beschrijving van een
+  beeldverwijzing reist mee als alt-tekst van de afbeelding. *(Toegevoegd
+  2026-08-24, #1769; hier opgenomen 2026-08-30 — de exportdialoog bood hem zes
+  dagen aan terwijl deze lijst van PPTX meteen doorsprong naar LaTeX.)*
 - **LaTeX (Beamer)** — een `.tex`-bestand met een Beamer-preambule en één frame per
   dia. Wiskunde (`$...$` / `$$...$$`) gaat er ongewijzigd doorheen; afbeeldingen
   worden met een relatief pad aangehaald (houd ze naast de `.tex`). Compileer met
@@ -4797,7 +4825,15 @@ dingen:
   noten staan als genummerde lijst achterin, en afbeeldingen reizen als
   aparte bestanden mee in de ePub. De tekst is leesbare XHTML in een ZIP,
   dus een geredigeerd gegeven dat er tóch in belandt is even leesbaar als in
-  de `.md`. *(Toegevoegd 2026-08-24, #1761.)*
+  de `.md`. *(Toegevoegd 2026-08-24, #1761.)* **ODT (`.odt`)** is een
+  OpenDocument Text-bestand dat opent in LibreOffice of Word — bewerkbaar, met
+  native voetnoten en koppen die outline-niveaus dragen. Het is de open
+  tegenhanger van een Word-bestand. *(Toegevoegd 2026-08-24, #1768.)*
+
+  *(Gecorrigeerd 2026-08-30: deze lijst noemde er vijf terwijl de exportdialoog
+  er sinds 2026-08-24 zes aanbiedt. ePub stond bovendien alléén in deze
+  Nederlandse variant, waar de eerstvolgende `make translate-docs` hem zou
+  hebben overschreven — een nieuw formaat hoort eerst in de Engelse bron.)*
 
 #### De PDF
 

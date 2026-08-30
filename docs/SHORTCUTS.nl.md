@@ -4,7 +4,7 @@
 
 # OciDeck — Sneltoetsen
 
-> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-08-02 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
 
 `Ctrl` wordt getoond voor Windows/Linux; gebruik `Cmd` (⌘) op macOS.
 
@@ -122,6 +122,7 @@ Weergave en timing:
 | `A` | Automatisch doorschakelen aan/uit |
 | `L` | Herhalen (opnieuw starten na de laatste slide) aan/uit |
 | `M` | Automatisch doorschakelen nadat de audio van een slide is afgelopen |
+| `+` · `-` | Zoom in · uit op een Mermaid-diagram op de huidige dia (ook de `+`/`-` van het numerieke deel). Op een dia zonder zoombaar diagram doen de toetsen niets, en de zoom spiegelt naar de beamer *(opgenomen 2026-08-30; de toetsen waren er al en stonden nergens)* |
 | `H` · `?` | Toon het overzicht met sneltoetsen in de app |
 | `Ctrl/Cmd + W` | Sluit de presentatie (werkt vanuit het presentator- en het beamervenster) |
 

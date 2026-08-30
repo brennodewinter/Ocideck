@@ -4,7 +4,7 @@
 
 # OciDeck — Bekende beperkingen
 
-> **Status:** actuele lijst van wat er nog niet is · **Status laatst nagekeken:** 2026-07-31 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele lijst van wat er nog niet is · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
 
 Deze pagina bestaat zodat je hem niet zelf hoeft samen te stellen. Elk punt
 hieronder stond al ergens in deze repository opgeschreven; ze waren verspreid
@@ -16,7 +16,7 @@ past bij wat je aan het doen bent.
 
 ## Releases zijn alfa en niet ondertekend
 
-Releases zijn getagd (laatste `0.1.1`, 2026-07-27) en elke release draagt de app
+Releases zijn getagd (laatste `0.4.10`, 2026-08-25) en elke release draagt de app
 voor alle vier de platformen — macOS, Windows, Linux en web — plus beide
 SBOM-formaten en een `SHA256SUMS`-lijst. Die lijst is zelf ondertekend met
 minisign (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de root van de
@@ -84,14 +84,19 @@ browser, of naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog
 dezelfde dag ingeperkt van "toont altijd de bron" toen de tekeningen er waren, en
 nogmaals gecorrigeerd toen de platformgrenzen werkelijk gemeten waren.)*
 
-## Een document exporteren werkt niet in de webversie
+## Een document exporteren komt in de webversie als download, niet als opgeslagen bestand
 
-Niet de PDF, en de andere drie formaten evenmin. De bestandskiezer in de browser
-laat zich niet om een opslagplek vragen zoals die op de desktop — hij wil de
-bytes vooraf — dus de export meldt dat het niet gelukt is en laat het document
-ongemoeid. Voorheen bleef hij zonder een woord op zijn tolletje staan. Het wél
-laten werken betekent de klaargemaakte bytes als download aan de browser geven;
-dat is een eigen wijziging. *(Toegevoegd 2026-08-20.)*
+Alle zes formaten exporteren in de browser, maar je kunt ze geen map aanwijzen: de
+bestandskiezer in de browser wil de bytes vooraf in plaats van een opslagplek, dus de
+klaargemaakte bytes worden als gewone download aan de browser gegeven en belanden waar
+je browser downloads neerzet. Let op de PDF — in de webversie is er geen verborgen
+renderer voor Mermaid-diagrammen en formules, dus die drukken hun bron af in plaats van
+getekend te worden (de regel hieronder).
+
+*(Toegevoegd 2026-08-20 als "een document exporteren werkt niet in de webversie" — toen
+meldde de export dat het niet gelukt was en liet hij het document ongemoeid. Gecorrigeerd
+2026-08-30: #1720 liet het op 2026-08-22 werken via een browser-download, en deze pagina
+bleef ondertussen zeggen dat het niet kon.)*
 
 ## De PDF van een document staat in een standaardletter, niet in die van je document
 
@@ -218,12 +223,21 @@ Hebreeuwse alinea op een dia krijgt de verkeerde basisrichting. →
 
 ## De vertalingen zijn niet nagekeken
 
-Ongeveer 71.500 vertalingen over 32 talen, geproduceerd tijdens AI-ondersteunde
-ontwikkeling en nooit woord voor woord nagekeken door een moedertaalspreker. Een
-build-poort vangt een *ontbrekende* string, niet een verkeerde. Los daarvan tonen
-ongeveer vijftig veldlabels in de dia-editors en een handvol blokkerende
-meldingen nog steeds hun Nederlandse brontekst, ongeacht je taalinstelling. →
+Ongeveer 107.800 vertaalde strings over 32 interfacetalen (geteld 2026-08-30;
+Nederlands is de bron waaruit de andere eenendertig zijn vertaald), geproduceerd
+tijdens AI-ondersteunde ontwikkeling en nooit woord voor woord nagekeken door een
+moedertaalspreker. Een build-poort vangt een *ontbrekende* string, niet een
+verkeerde. →
 [README.md](../README.md#contributing)
+
+*(Gecorrigeerd 2026-08-30 op twee punten. Het getal stond op 71.500 en was sinds het
+opschrijven met de helft gegroeid — het telt tabelregels en beweegt mee met elke string
+die erbij komt, dus lees de datum als onderdeel van het getal. En hier stond "ongeveer
+vijftig veldlabels in de dia-editors en een handvol blokkerende meldingen tonen nog
+steeds hun Nederlandse brontekst, ongeacht je taalinstelling": dat klopt niet meer. Het
+label van een editorveld bereikt het scherm via `l10n.d(widget.label)` net als elke
+andere string, en `test/app_localizations_test.dart` laat de build vallen zodra zo'n
+bronsleutel ontbreekt in een taal die hij moet dekken.)*
 
 ## De webbuild kan minder dan de desktopbuild
 

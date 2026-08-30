@@ -1,6 +1,6 @@
 # OciDeck — Architecture
 
-> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of the system and its layering · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
@@ -147,31 +147,50 @@ a connection that arrives at all can only have come from the pin.
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # mostly loose files, one subject each: markdown,
-              # markdown_validator, file, export, classification_policy,
-              # classification_enforcement_policy, export_metadata, image,
-              # caption, description, image_dedup (md5 duplicates),
-              # image_reference (.md rewrites), recovery, rasterizer,
-              # marp_html, annotation_codec, rehearsal_controller,
+  services/   # mostly loose files, one subject each: markdown_service,
+              # markdown_validator, file_service, export, marp_html_service,
+              # classification_policy, classification_enforcement_policy,
+              # export_metadata, image, caption, description,
+              # image_dedup (md5 duplicates), image_reference (.md rewrites),
+              # recovery, rasterizer, annotation_codec, rehearsal_controller,
+              # slide_quality_analyzer,
               # webdav (Nextcloud source), secret_store (keychain)
               #
-              # …plus the subdirectories that are a subject of their own:
-              #   privacy/             detect, weigh, redact, gate the export
+              # …plus the subdirectories that are a subject of their own.
+              # Sources and reference data:
               #   git/                 forge source (docs/design/GIT_STORAGE.md)
               #   s3/                  bucket source (SigV4 + pinned client)
+              #   net/                 the outbound network guard
               #   cve/                 the offline CVE corpus
               #   cvss/                the CVSS v4.0 scoring engine
-              #   finding_templates/   template content, one file per language
-              #   presentation_search/ the network sources 'Slide zoeken' scans
+              #   openkat/             OpenKAT report ingest
+              #   libreplan/           the read-only LibrePlan connector
               #   info_safety/         what reference data is locally present
-              #   parts/               `part of` spillover, not a cluster
+              #   presentation_search/ the network sources 'Slide zoeken' scans
+              #   finding_templates/   template content, one file per language
+              # Reading and reshaping the deck:
+              #   privacy/             detect, weigh, redact, gate the export
+              #   import/              PPTX/ODP/Keynote → deck
+              #   improvement/         canvas + matrix engines (Scene)
+              #   scene/               the Flutter-free scene model they render
+              # One per output format:
+              #   pdf/ pptx/ odp/ odt/ epub/ latex/
+              # `part of` spillover, not a cluster — the library is the loose
+              # file beside it:
+              #   file/ markdown_parse/ marp_html/ slide_quality/
               #
-              # Each of those (except parts/) carries a header comment naming
-              # what belongs in it and what does not; SOURCE_MAP.md lists which
-              # file holds it.
+              # Each subject directory carries a header comment naming what
+              # belongs in it and what does not; SOURCE_MAP.md lists which file
+              # holds it.
   state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, s3, git, consent, privacy,
               # info_safety, local_cve, deck_quality, …
+  collab/     # the co-authoring module: typed op model, transport seam,
+              # session authority, wire codec (docs/design/COLLABORATION.md)
+  xmpp/       # the XMPP transport collab and calls ride on
+              # (docs/design/XMPP_COLLAB_TRANSPORT.md)
+  meetings/   # the call session: typed events, participants, media core
+              # (docs/design/NATIVE_CALLS.md)
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations + translations/<lang>.dart (32 languages)
@@ -179,24 +198,39 @@ lib/
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
+*(Corrected 2026-08-30. Three top-level directories were missing — `collab/`,
+`xmpp/` and `meetings/`, together some 12,000 lines — so a reader of this map
+could not tell that co-authoring and calls exist at all. The `services/`
+subdirectory list named nine of the twenty-four that are there, and one of the
+nine, `parts/`, no longer exists; the six export directories, the importer, the
+two engines behind the process-improvement slide types and the network guard
+were all absent. A list of siblings goes stale the moment one is added, which is why the
+line above now sends you to `SOURCE_MAP.md` — that one is held to the tree by
+`test/source_map_coverage_test.dart`, and this one is not held by anything.)*
+
 ```mermaid
 flowchart TD
     widgets["widgets/<br/>app shell · panels · dialogs · per-type editors · slides · presenter"]
     state["state/<br/>Riverpod providers"]
     services["services/<br/>markdown · export · privacy · git · s3 · cve · cvss · …"]
+    live["collab/ · xmpp/ · meetings/<br/>co-authoring ops · transport · call session"]
     models["models/<br/>Deck · Slide · ThemeProfile · Chart · Annotation"]
     shared["platform/ · utils/ · theme/ · l10n/<br/>(shared, low-level — anything may use them)"]
 
     widgets --> state
     widgets --> services
+    widgets --> live
     widgets --> models
     state --> services
+    state --> live
     state --> models
     services --> models
+    live --> models
 
     widgets -.-> shared
     state -.-> shared
     services -.-> shared
+    live -.-> shared
     models -.-> shared
 ```
 

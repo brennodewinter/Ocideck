@@ -1,6 +1,6 @@
 # OciDeck — Checks & CI
 
-> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 Every automated check OciDeck runs, what it covers, what a failure means, and how
 to fix it. The **`Makefile` is the single entry point** and the **real gate**:
@@ -1016,9 +1016,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   brand-new, wholly untested file and the percentage does not move a hair: the
   one case a coverage floor exists to catch is the one case it structurally
   cannot see. `--require-instrumented` enumerates `lib/` from disk instead and
-  fails on any file missing from the report. The 84 files legitimately absent
-  today are baselined in `uncoveredBaseline` with a reason each — platform
-  halves / conditional-import facades (the VM test runner cannot load
+  fails on any file missing from the report. The 92 files legitimately absent
+  (counted 2026-08-30) are baselined in `uncoveredBaseline` with a reason each
+  — platform halves / conditional-import facades (the VM test runner cannot load
   `dart:js_interop` code at all), files with no executable lines (`export`
   barrels, enums, const data tables), the per-language finding-template data
   tables under `lib/services/finding_templates/`, and one user-approved native
@@ -1266,9 +1266,16 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** a rule matched. Read it before silencing it; each rule is
   deliberately narrow (the randomness rule keys on the *variable name* so a
   `Random()` for an animation stays quiet).
-- **Both directions are tested:** zero findings across 627 files on `main`, and
-  three findings on a file with planted violations — with the commented-out
-  equivalents correctly ignored.
+- **Both directions are tested:** zero findings across the whole of `lib/`,
+  `tool/` and `test/` on `main`, and three findings on a file with planted
+  violations — with the commented-out equivalents correctly ignored.
+
+  *(Corrected 2026-08-30: this read "627 files", undated, while the three
+  directories held 2,211 Dart files. A file count that moves with every commit
+  says nothing a reader can use — the scope does, so the scope is what is stated.
+  The `uncoveredBaseline` count above kept its number because a reader compares
+  it against the list in `coverage_summary.dart`, but it now carries the date it
+  was counted.)*
 
 ### `make check-secrets`
 - **Runs:** `gitleaks` over the working tree and over all history, then
@@ -1523,7 +1530,7 @@ For focused work, run only the relevant slice instead of the whole suite:
   dead or untested predicate to review. Slow and triage-heavy, so it stays out of
   `make check`. Override the target: `make mutate FILE=lib/services/markdown_service.dart TESTS="test/markdown_round_trip_test.dart"`.
 - **`make test-golden`** — visual-regression goldens for the slide renderer
-  (`test/golden/`). Renders **every one of the 24 slide types** through
+  (`test/golden/`). Renders **every slide type** through
   `SlidePreviewWidget` (the
   widget behind the editor preview, presenter, thumbnails and the PDF/PPTX
   raster) with the default flutter-test font, so the PNGs catch layout /
@@ -1536,13 +1543,16 @@ For focused work, run only the relevant slice instead of the whole suite:
   and regenerate the PNGs on that platform.)
 
   *Corrected 2026-07-22 (#617): this said "each slide type" while the file
-  covered **eight** of the 24. Everything built after the first round — chart,
-  cockpit, timeline, scorecard, finding, checklist, scopeMatrix, discoveries,
+  covered **eight** of the 24 types there were then. Everything built after the
+  first round — chart, cockpit, timeline, scorecard, finding, checklist, scopeMatrix, discoveries,
   findingsSummary, question — had no visual regression test at all, so a theme
   change could shift their layout with nothing turning red. The loop is now over
   `SlideType.values`, which also means a new type gets its golden without anyone
-  remembering to add one. Two sentences to keep straight: they are still
-  excluded from `make check`, deliberately — a pixel comparison in the default
+  remembering to add one. (Corrected again 2026-08-30: the sentence above still
+  read "every one of the 24 slide types" while the enum had reached 32. A loop
+  over `SlideType.values` needs no count beside it, so the number is gone rather
+  than raised — it would only rot again.) Two sentences to keep straight: they
+  are still excluded from `make check`, deliberately — a pixel comparison in the default
   gate would fail on any machine but this one — and they are still only as good
   as somebody typing `make test-golden`.*
 

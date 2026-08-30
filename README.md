@@ -1,8 +1,8 @@
 # OciDeck
 
-> **Status:** current-state project overview · **Status last reviewed:** 2026-08-07 · **Published by:** Stichting LibreKAT
+> **Status:** current-state project overview · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
-> **Alpha — releases are now tagged (latest: `0.1.1`, 2026-07-27).** You can
+> **Alpha — releases are now tagged (latest: `0.4.10`, 2026-08-25).** You can
 > build from source, or download a release build; either way the file format is
 > the part meant to be stable ([FILE_FORMAT.md](docs/FILE_FORMAT.md)), while the
 > application is not yet. What is missing, rough or untested is collected in
@@ -12,12 +12,12 @@ A desktop and web application for building [Marp](https://marp.app/)-compatible
 presentations through a structured, slide-by-slide editor — no raw Markdown
 wrangling required. Compose decks from typed slide templates, preview them live,
 present them fullscreen across two screens, and export to Marp Markdown, PDF,
-PPTX and offline HTML.
+PPTX, OpenDocument (ODP), LaTeX/Beamer, offline HTML or a portable package.
 
 Alongside presentations it also edits a **flowing Markdown document** — a report,
 a memo, a note — in the same window: a plain `.md` that any Markdown reader
-opens, with a visual and a source view, exported to `.md` or one continuous HTML
-file, and convertible either way between a document and a presentation
+opens, with a visual and a source view, exported to `.md`, HTML, PDF, LaTeX,
+ePub or ODT, and convertible either way between a document and a presentation
 ([ARCHITECTURE.md](docs/ARCHITECTURE.md#document-mode)).
 
 > **Try it in your browser:** <https://ocideck.librekat.nl/> — the web build,
@@ -63,13 +63,13 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 ## What it does
 
 - **Structured slide editors** — a dedicated editor per slide type: title, bullets, images, quote, table, code, video, audio, and more.
-- **Document mode** — edits a plain, flowing `.md` document next to presentations, with a visual and a source view, an insert palette and a formatting toolbar; exports to `.md` or one continuous HTML file and converts either way between a document and a presentation.
+- **Document mode** — edits a plain, flowing `.md` document next to presentations, with a visual and a source view, an insert palette and a formatting toolbar; exports to `.md`, one continuous HTML file, a typeset PDF, LaTeX, ePub or ODT, and converts either way between a document and a presentation.
 - **Privacy check and redaction (OciWacht)** — every slide is read for personal data, and what you mark is left out of display and export, not painted over.
 - **Live preview and fullscreen presenter** — presenter view, dual screens, a rehearsal clock, an annotation layer, and live table editing.
-- **Charts, timelines and quiz slides** — thirteen chart types from CSV or an in-app grid, animated timelines, and interactive question slides.
+- **Charts, timelines and quiz slides** — fourteen chart types from CSV or an in-app grid (eight statistical ones join them with the process-improvement module on), animated timelines, and interactive question slides.
 - **Cockpit dashboards** — up to six aviation-style instruments, with an authentic panel look, a classic fallback and a staged power-on sequence in the presenter.
 - **Traffic Light Protocol** — deck-wide and per-slide classification, WYSIWYG marking, and optional export policy that fails closed.
-- **Import and export** — round-trips Marp Markdown, and exports to PDF, PPTX with speaker notes, and a self-contained offline HTML deck.
+- **Import and export** — round-trips Marp Markdown, and exports to PDF, PPTX with speaker notes, OpenDocument (ODP), LaTeX/Beamer, and a self-contained offline HTML deck.
 - **Storage** — local project folders, a portable `.ocideck` package, Nextcloud/WebDAV, S3, or a git repository with history and releases.
 - **Theming, 32 languages and accessibility** — style profiles that travel as a file, a dark interface, and interface text scaling to 200%.
 
@@ -203,13 +203,23 @@ because it is part of building software properly — see
 ```
 lib/
   models/     # Deck, Slide, Settings data models
-  services/   # Markdown, export, file, image, caption, recovery, rasterizer
+  services/   # Markdown, export, file, image, caption, recovery, rasterizer,
+              # privacy, git/S3 sources, and one directory per export format
   state/      # Riverpod providers (deck, editor, settings, tabs, clipboard)
+  collab/     # Co-authoring: op model, transport seam, session authority
+  xmpp/       # The XMPP transport collab and calls ride on
+  meetings/   # Call session: typed events, participants, media core
+  platform/   # Conditional-import platform abstraction (io/web halves)
   widgets/    # UI: app shell, panels, dialogs, per-type editors, presenter
   l10n/       # AppLocalizations (32 languages)
   theme/      # App theming
   utils/      # Small shared helpers (clipboard table parsing, URL launching)
 ```
+
+*(Corrected 2026-08-30: four top-level directories were missing here, including
+the whole co-authoring and calls layer. The fuller map is
+[ARCHITECTURE.md](docs/ARCHITECTURE.md#module-layout); the file-by-file one is
+[SOURCE_MAP.md](docs/SOURCE_MAP.md), which a test holds to the tree.)*
 
 State is managed with [Riverpod](https://riverpod.dev/).
 

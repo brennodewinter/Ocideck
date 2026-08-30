@@ -4,7 +4,7 @@
 
 # OciDeck — Veelgestelde vragen
 
-> **Status:** antwoorden over de huidige stand van zaken; waar een antwoord botst met de code, wint de code · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** antwoorden over de huidige stand van zaken; waar een antwoord botst met de code, wint de code · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
 
 Dit document beantwoordt veelgestelde vragen over de functies, het gebruik en de werking van OciDeck.
 
@@ -37,15 +37,20 @@ kost en je toestaat het te gebruiken, te bestuderen, te wijzigen en te herdistri
 Over ondertekening: het releasemanifest `SHA256SUMS` is ondertekend met minisign, zodat de
 herkomst van een download verifieerbaar is (zie
 [BUILD.md](BUILD.md#signing-status-of-the-published-artifacts)). Releases worden
-getagd (laatste `0.1.1`, 2026-07-27) en bevatten de app voor alle vier de platformen; de
+getagd (laatste `0.4.10`, 2026-08-25) en bevatten de app voor alle vier de platformen; de
 macOS-build is bovendien ondertekend en genotariseerd en opent normaal, terwijl de
 **Windows- en Linux-binaries niet code-signed zijn** — Windows waarschuwt bij de eerste
-start. Je kunt een releasebuild downloaden of vanuit de bron bouwen; hoe dan ook, zie
+start. Windows biedt zowel een installer (snelkoppeling, bestandskoppelingen, schone
+verwijdering) als een portable zip die je gewoon uitpakt; geen van beide werkt zichzelf
+bij. Je kunt een releasebuild downloaden of vanuit de bron bouwen; hoe dan ook, zie
 [BUILD.md](BUILD.md) en de sectie *Getting started* van de
 [README](../README.md). *Gecorrigeerd 2026-07-28: hier stond "nog niets om te downloaden"
 en "er is geen versie getagd" — verouderd sinds `0.1.0` op 2026-07-25.
 De eerdere correctie (2026-07-21) over "volledig gratis te downloaden" blijft
-staan conform de huisregel.*
+staan conform de huisregel. Opnieuw gecorrigeerd 2026-08-30: hier stond als
+laatste release `0.1.1` (2026-07-27) terwijl de gepubliceerde laatste `0.4.10`
+(2026-08-25) was — een versienummer in lopende tekst veroudert bij elke release,
+dus lees het opnieuw uit de releaselijst wanneer je deze alinea aanraakt.*
 
 ## Beveiliging en privacy
 
@@ -150,6 +155,12 @@ OciDeck ondersteunt de volgende grafiektypen:
 - Watervaldiagrammen
 - Heatmaps (die tevens als risicomatrix dienen)
 - Combinatiediagrammen (staven plus de laatste reeks getekend als een lijn op een tweede as)
+- Doel-en-werkelijk-diagrammen (bullet)
+
+Met de module **Procesverbetering** aan komen er acht statistische types bij:
+regelkaart, histogram, Pareto, run chart, boxplot, kansplot, hoofdeffecten en
+interactie. *(Toegevoegd 2026-08-30: deze lijst noemde tien van de veertien gewone
+types en geen van de acht uit de module.)*
 
 ### Hoe werkt de AI-assistent?
 De optionele AI-ondersteuning vereist expliciete toestemming van de gebruiker:

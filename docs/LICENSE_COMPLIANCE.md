@@ -1,6 +1,6 @@
 # OciDeck — Open-Source Licence Compliance
 
-> **Status:** policy, with a dated result under *Latest result* · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** policy, with a dated result under *Latest result* · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 OciDeck is released under the **EUPL-1.2** (see [`../LICENSE.md`](../LICENSE.md)).
 This document records the policy that the project only includes open-source
@@ -62,21 +62,28 @@ Dart/Flutter packages use recognised open-source licences:
 > [`../sbom/ocideck.sbom.md`](../sbom/ocideck.sbom.md), rebuilt by `make sbom`
 > and held current by `make sbom-verify` — read that one if the two disagree.
 
-Counting the whole SBOM (**199** components — packages plus the vendored JS
-bundles, bundled fonts, plugin forks and SDKs) adds 5 × OFL-1.1 (the bundled
-fonts) and 1 × `Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated
-`sbom/ocideck.sbom.md` tallies under Apache-2.0), and lifts BSD-3-Clause to 127
-and MIT to 50.
+Counting the whole SBOM (**226** components — packages plus the vendored JS
+bundles, bundled fonts, plugin forks and SDKs) adds 6 × OFL-1.1 (the bundled
+fonts — five families, of which EB Garamond ships two faces) and 1 ×
+`Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated `sbom/ocideck.sbom.md`
+tallies under Apache-2.0), and lifts BSD-3-Clause to 141 and MIT to 59.
 
 *(Corrected 2026-07-22: this section said 182 packages and 197 components with
 no date on either, so a reader could not tell that the dependency graph had
 moved on. Both numbers are re-counted above and dated; re-run the command and
 `make sbom-verify` when dependencies change, and move the date with them.)*
 
+*(Re-counted 2026-08-30 from `sbom/ocideck.sbom.md` at 0.4.10+24: 199 → 226
+components, BSD-3-Clause 127 → 141, MIT 50 → 59, OFL-1.1 5 → 6. Exactly the
+staleness the note above predicted — five weeks of dependency work, and nothing
+fails when the prose falls behind.)*
+
 Bundled assets: marked (MIT), highlight.js (BSD-3-Clause), Mermaid (MIT, bundling
-DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), five fonts under SIL
-OFL-1.1 (EB Garamond, Roboto, Inter, Lora — licence texts in `assets/fonts/`) and
-the YuNet face-detection model (MIT). The OciDeck-owned brand images in
+DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), five font families
+under SIL OFL-1.1 (EB Garamond, Roboto, Roboto Mono, Inter, Lora — licence texts
+in `assets/fonts/`) and the YuNet face-detection model (MIT).
+*(Roboto Mono added 2026-08-25, #1784; until 2026-08-30 this sentence said "five
+fonts" while naming four.)* The OciDeck-owned brand images in
 `assets/images/` and the theme in `assets/themes/` are the project's own work.
 
 **Conclusion: no non-open-source software is included.**
