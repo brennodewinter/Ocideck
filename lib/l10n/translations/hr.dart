@@ -1645,9 +1645,25 @@ const _dutchSourceAddHr = <String, String>{
       'pada izvan vidljivog područja — prilagodite žarišnu točku, zum ili poziciju cilja.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'pada izvan vidljivog dijela slike — prilagodite žarišnu točku, zum ili poziciju cilja, inače se oznaka neće prikazati na slajdu.',
+  'Verwijzing verwijderd': 'Referenca uklonjena',
+  'Afbeeldingsverwijzing': 'Referenca slike',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'oznaka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Strelice se križaju na ovom slajdu — razmotri pinove umjesto strelica za čitljivost.',
   'Pijlen': 'Strelice',
   'Stap-voor-stap': 'Korak po korak',
   'Punt': 'Točka',
@@ -4600,24 +4616,9 @@ const _dutchSourceAddHr = <String, String>{
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ukloni cilj',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Dodaj cilj',
   'bv. "de controller board met display"':
       'npr. "upravljačka ploča s zaslonom"',
-  'Beschrijving (voor schermlezer)': 'Opis (za čitač zaslona)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Odaberite grafičku oznaku za postavljanje reference.',
-  'Reference verwijderen': 'Ukloni referencu',
   'Afbeeldingsverwijzingen': 'Reference slika',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ima nevažeću geometriju i ne crta se — ispravite koordinate u front matter-u.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'upućuje na oznaku (A) koja nije u tekstu, ili obrnuto — povežite oznaku i unos međusobno.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'pojavljuje se dvaput na ovom slajdu — svaka oznaka (A), (B) … može imati samo jedan unos.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ovaj slajd ima callouts ali nema sidro — front matter ih ne može povezati sa slajdom. Zadajte sidro slajdu u uređivaču.',
 };

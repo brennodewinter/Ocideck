@@ -1653,9 +1653,25 @@ const _dutchSourceAddPl = <String, String>{
       'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'wypada poza widoczną częścią obrazu — dostosuj punkt środkowy, zoom lub pozycję celu, w przeciwnym razie znacznik nie pojawi się na slajdzie.',
+  'Verwijzing verwijderd': 'Odwołanie usunięte',
+  'Afbeeldingsverwijzing': 'Odwołanie do obrazu',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'znacznik',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Strzałki przecinają się na tym slajdzie — rozważ piny zamiast strzałek dla czytelności.',
   'Pijlen': 'Strzałki',
   'Stap-voor-stap': 'Krok po kroku',
   'Punt': 'Punkt',
@@ -4623,23 +4639,8 @@ const _dutchSourceAddPl = <String, String>{
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Usuń cel',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Dodaj cel',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
-  'Beschrijving (voor schermlezer)': 'Opis (dla czytnika ekranu)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Wybierz punkt, aby umieścić odwołanie.',
-  'Reference verwijderen': 'Usuń odwołanie',
   'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ma nieprawidłową geometrię i nie jest rysowany — popraw współrzędne w front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'odnosi się do znacznika (A), którego nie ma w tekście, lub odwrotnie — połącz znacznik i wpis ze sobą.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'występuje dwa razy na tym slajdzie — każdy znacznik (A), (B) … może mieć tylko jeden wpis.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ten slajd ma callouty, ale nie ma kotwicy — front matter nie może połączyć ich ze slajdem. Nadaj slajdowi kotwicę w edytorze.',
 };

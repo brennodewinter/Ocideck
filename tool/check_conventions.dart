@@ -258,6 +258,11 @@ const Map<String, int> fileSizeBaseline = {
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
   'lib/widgets/dialogs/settings_dialog.dart': 1030,
+  // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
+  // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
+  // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
+  // van 154 naar 41 regels; de filegrootte is de grenswaarde.
+  'lib/widgets/editors/callout_editor.dart': 1042,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle

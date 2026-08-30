@@ -2559,9 +2559,25 @@ const _dutchSourceAddTr = <String, String>{
       'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
+  'Verwijzing verwijderd': 'Referans kaldırıldı',
+  'Afbeeldingsverwijzing': 'Görsel referansı',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'işaret',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pinleri düşünün.',
   'Pijlen': 'Oklar',
   'Stap-voor-stap': 'Adım adım',
   'Punt': 'Madde',
@@ -4586,23 +4602,8 @@ const _dutchSourceAddTr = <String, String>{
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Hedefi kaldır',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Hedef ekle',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
-  'Beschrijving (voor schermlezer)': 'Açıklama (ekran okuyucu için)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Bir referans yerleştirmek için madde işareti seçin.',
-  'Reference verwijderen': 'Referansı kaldır',
   'Afbeeldingsverwijzingen': 'Görsel referansları',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'geçersiz geometriye sahip ve çizilmiyor — front matter içindeki koordinatları düzeltin.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'metinde olmayan bir (A) işaretine atıfta bulunuyor, ya da tersi — işareti ve girdiyi birbirine bağlayın.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'bu slaytta iki kez görünüyor — her işaret (A), (B) … yalnızca bir girdiye sahip olabilir.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Bu slayt callout\'lara sahip ama çapası yok — front matter onları slayta bağlayamaz. Slayta düzenleyicide bir çapa verin.',
 };

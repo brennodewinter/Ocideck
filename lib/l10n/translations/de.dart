@@ -681,9 +681,25 @@ const _dutchSourceAddDe = {
       'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, den Zoom oder die Zielposition an.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, den Zoom oder die Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
+  'Verwijzing verwijderd': 'Referenz entfernt',
+  'Afbeeldingsverwijzing': 'Bildreferenz',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'hat ungültige Koordinaten und wird nicht gezeichnet — passe die Zielposition im Referenzen-Editor an.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'verweist auf eine (A)-Markierung, die nicht im Text steht, oder umgekehrt — füge den Buchstaben im Text ein oder entferne die Referenz.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'kommt zweimal auf dieser Folie vor — jede Markierung (A), (B) … darf nur eine Referenz haben.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Diese Folie hat Bildreferenzen, aber keinen Anker — die Referenzen können nicht mit der Folie verknüpft werden. Gib der Folie einen Anker im Editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Pfeile kreuzen sich auf dieser Folie — verwende statt Pfeile Stecknadel-Markierungen für die Lesbarkeit.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, Zoom oder Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
+  'Beschrijving (voor schermlezer en export)':
+      'Beschreibung (für Screenreader und Export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, Zoom oder Zielposition an.',
   'markering': 'Markierung',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pfeile kreuzen sich auf dieser Folie — verwende Pins statt Pfeile für bessere Lesbarkeit.',
   'Pijlen': 'Pfeile',
   'Stap-voor-stap': 'Schritt für Schritt',
   'Punt': 'Punkt',
@@ -4653,24 +4669,9 @@ const _dutchSourceAddDe = {
       'Fußnoten werden zu Fließtext; eine Präsentation hat keine Noten.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ziel entfernen',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Ziel hinzufügen',
   'bv. "de controller board met display"':
       'z. B. "die Controller-Platine mit Display"',
-  'Beschrijving (voor schermlezer)': 'Beschreibung (für Screenreader)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Wähle einen Aufzählungspunkt, um eine Referenz zu platzieren.',
-  'Reference verwijderen': 'Referenz entfernen',
   'Afbeeldingsverwijzingen': 'Bildreferenzen',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'hat eine ungültige Geometrie und wird nicht gezeichnet — korrigiere die Koordinaten im Front Matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'verweist auf eine (A)-Markierung, die nicht im Text steht, oder umgekehrt — verknüpfe die Markierung und den Eintrag miteinander.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'kommt zweimal auf dieser Folie vor — jede Markierung (A), (B) … darf nur einen Eintrag haben.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Diese Folie hat Callouts, aber keinen Anker — das Front Matter kann sie nicht mit der Folie verknüpfen. Gib der Folie einen Anker im Editor.',
 };

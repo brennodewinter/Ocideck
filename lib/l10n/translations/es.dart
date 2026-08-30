@@ -678,9 +678,25 @@ const _dutchSourceAddEs = {
       'cae fuera del área visible — ajusta el punto focal, el zoom o la posición del objetivo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cae fuera de la parte visible de la imagen — ajusta el punto focal, el zoom o la posición del objetivo, o el marcador no aparecerá en la diapositiva.',
+  'Verwijzing verwijderd': 'Referencia eliminada',
+  'Afbeeldingsverwijzing': 'Referencia de imagen',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'tiene coordenadas no válidas y no se dibuja — ajusta la posición del objetivo en el editor de referencias.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'hace referencia a una marca (A) que no está en el texto, o viceversa — añade la letra al texto o elimina la referencia.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'aparece dos veces en esta diapositiva — cada marca (A), (B) … solo puede tener una referencia.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Esta diapositiva tiene referencias de imagen pero no ancla — las referencias no pueden vincularse a la diapositiva. Dale una ancla a la diapositiva en el editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Las flechas se cruzan en esta diapositiva — considera marcadores de chincheta en lugar de flechas para mejor legibilidad.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cae fuera de la parte visible de la imagen — ajusta el punto de enfoque, el zoom o la posición del objetivo, o la marca no aparecerá en la diapositiva.',
+  'Beschrijving (voor schermlezer en export)':
+      'Descripción (para lector de pantalla y exportación)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'cae fuera del área visible — ajusta el punto de enfoque, el zoom o la posición del objetivo.',
   'markering': 'marca',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Las flechas se cruzan en esta diapositiva — considera pines en lugar de flechas para la legibilidad.',
   'Pijlen': 'Flechas',
   'Stap-voor-stap': 'Paso a paso',
   'Punt': 'Punto',
@@ -4662,24 +4678,9 @@ const _dutchSourceAddEs = {
       'Las notas al pie se convierten en texto sin formato; una presentación no tiene notas.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Eliminar destino',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Añadir destino',
   'bv. "de controller board met display"':
       'p. ej. "la placa de control con pantalla"',
-  'Beschrijving (voor schermlezer)': 'Descripción (para lector de pantalla)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Selecciona una viñeta para colocar una referencia.',
-  'Reference verwijderen': 'Eliminar referencia',
   'Afbeeldingsverwijzingen': 'Referencias de imagen',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tiene una geometría no válida y no se dibuja — corrige las coordenadas en el front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'hace referencia a una marca (A) que no está en el texto, o viceversa — enlaza la marca y la entrada entre sí.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'aparece dos veces en esta diapositiva — cada marca (A), (B) … solo puede tener una entrada.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Esta diapositiva tiene callouts pero no ancla — el front matter no puede vincularlos a la diapositiva. Dale un ancla a la diapositiva en el editor.',
 };

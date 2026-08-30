@@ -4,6 +4,8 @@
 // point target by clicking on the image, edit the description, delete.
 // Opens as a dialog showing the real image with click-to-place markers.
 
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 import '../../models/slide.dart';
 import '../../models/image_callout.dart';
@@ -58,6 +60,13 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   late BulletRevealMode _reveal;
   int? _selectedCalloutIndex;
 
+  /// #1863: controller bij de State, niet in build() — anders springt de
+  /// cursor bij elke toetsaanslag naar het eind.
+  late final TextEditingController _descriptionController;
+
+  /// #1864: geselecteerd doel; "Doel verwijderen" haalt dit weg, niet het laatste.
+  int? _selectedTargetIndex;
+
   /// Region being dragged out — null when not dragging.
   DragRegion? _dragRegion;
 
@@ -75,7 +84,36 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     _bullets = List.of(widget.slide.bullets);
     _presentation = widget.slide.calloutPresentation;
     _reveal = widget.slide.calloutReveal;
+    _descriptionController = TextEditingController();
     _resolveIntrinsic();
+  }
+
+  @override
+  void dispose() {
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  /// #1863: sync de controller met de beschrijving van de geselecteerde
+  /// callout, maar alleen als de tekst echt verschilt — zo blijft de cursor
+  /// staan waar de gebruiker hem zette.
+  void _syncDescriptionController() {
+    final callout = _selectedCalloutIndex != null
+        ? _callouts[_selectedCalloutIndex!]
+        : null;
+    if (callout == null) return;
+    if (_descriptionController.text != callout.description) {
+      _descriptionController.text = callout.description;
+    }
+  }
+
+  /// #1864: selecteer een callout en sync de beschrijvingscontroller.
+  void _selectCallout(int? index) {
+    setState(() {
+      _selectedCalloutIndex = index;
+      _selectedTargetIndex = null;
+    });
+    _syncDescriptionController();
   }
 
   @override
@@ -192,28 +230,59 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
       _callouts.add(
         ImageCallout(reference: ref, targets: [firstTarget], description: ''),
       );
-      _selectedCalloutIndex = _callouts.length - 1;
+      _selectCallout(_callouts.length - 1);
       _setReference(bulletIndex, ref);
     });
     _emit();
   }
 
   void _removeCallout(int index) {
-    final reference = _callouts[index].reference;
+    final removed = _callouts[index];
+    final reference = removed.reference;
     final bulletIndex = _filteredIndexForReference(reference);
+    final oldBullets = List<String>.of(_bullets);
     setState(() {
       _callouts.removeAt(index);
       if (_selectedCalloutIndex == index) {
         _selectedCalloutIndex = null;
+        _selectedTargetIndex = null;
       } else if (_selectedCalloutIndex != null &&
           _selectedCalloutIndex! > index) {
         _selectedCalloutIndex = _selectedCalloutIndex! - 1;
       }
+      _syncDescriptionController();
     });
     // De letter gaat mee weg: laat je hem staan, dan verwijst de zin naar
     // niets en leest een volgende opening hem als een callout die niet bestaat.
     if (bulletIndex != null) setState(() => _setReference(bulletIndex, null));
     _emit();
+    _showUndoSnackbar(() {
+      setState(() {
+        _callouts.insert(index, removed);
+        _bullets = oldBullets;
+        _selectedCalloutIndex = index;
+        _selectedTargetIndex = 0;
+      });
+      _syncDescriptionController();
+      _emit();
+    });
+  }
+
+  void _showUndoSnackbar(VoidCallback undo) {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    if (messenger == null) return;
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.d('Verwijzing verwijderd')),
+          action: SnackBarAction(
+            label: context.l10n.d('Ongedaan maken'),
+            onPressed: undo,
+          ),
+          duration: const Duration(seconds: 4),
+        ),
+      );
   }
 
   void _moveTarget(int calloutIndex, int targetIndex, double x, double y) {
@@ -307,14 +376,17 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     _emit();
   }
 
+  /// #1864: verwijder het geselecteerde doel, niet steevast het laatste.
+  /// Bij het laatste doel valt de hele verwijzing weg — dan tonen we een
+  /// undo-melding via [_removeCallout].
   void _removeTarget(int calloutIndex, int targetIndex) {
+    final callout = _callouts[calloutIndex];
+    if (targetIndex < 0 || targetIndex >= callout.targets.length) return;
+    if (callout.targets.length <= 1) {
+      _removeCallout(calloutIndex);
+      return;
+    }
     setState(() {
-      final callout = _callouts[calloutIndex];
-      if (callout.targets.length <= 1) {
-        // Removing the last target removes the callout.
-        _removeCallout(calloutIndex);
-        return;
-      }
       final targets = List.of(callout.targets);
       targets.removeAt(targetIndex);
       _callouts[calloutIndex] = ImageCallout(
@@ -322,6 +394,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         targets: targets,
         description: callout.description,
       );
+      if (_selectedTargetIndex == targetIndex) {
+        _selectedTargetIndex = targetIndex.clamp(0, targets.length - 1);
+      } else if (_selectedTargetIndex != null &&
+          _selectedTargetIndex! > targetIndex) {
+        _selectedTargetIndex = _selectedTargetIndex! - 1;
+      }
     });
     _emit();
   }
@@ -342,141 +420,30 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final bullets = _bullets.where((b) => b.trimLeft().isNotEmpty).toList();
+    // #1859: klem de maat op het kijkvenster, zoals showEmbedEditorDialog.
+    final media = MediaQuery.of(context).size;
+    final width = math.max(400.0, math.min(900.0, media.width - 96));
+    final height = math.max(400.0, math.min(600.0, media.height - 160));
 
     return AlertDialog(
       title: Text(l10n.d('Afbeeldingsverwijzingen')),
       content: SizedBox(
-        width: 900,
-        height: 600,
-        child: Row(
+        width: width,
+        height: height,
+        child: Column(
           children: [
-            // Left: bullet list with add/remove reference buttons.
-            SizedBox(
-              width: 300,
-              child: ListView.builder(
-                itemCount: bullets.length,
-                itemBuilder: (context, i) {
-                  final bullet = bullets[i];
-                  final ref = _calloutLetterForBullet(bullet);
-                  final isSelected =
-                      _calloutForBullet(bullet) != null &&
-                      _selectedCalloutIndex == _calloutIndexForBullet(bullet);
-                  return ListTile(
-                    selected: isSelected,
-                    leading: ref != null
-                        ? CircleAvatar(
-                            radius: 14,
-                            backgroundColor: AppTheme.accentFg,
-                            child: Text(
-                              ref,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                          )
-                        : null,
-                    title: Text(
-                      bullet.replaceAll(RegExp(r'\s\([A-Z]\)$'), ''),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    trailing: ref != null
-                        ? IconButton(
-                            icon: const Icon(Icons.close, size: 18),
-                            tooltip: l10n.d('Reference verwijderen'),
-                            onPressed: () {
-                              final idx = _calloutIndexForBullet(bullet);
-                              if (idx != null) _removeCallout(idx);
-                            },
-                          )
-                        : TextButton(
-                            onPressed: _callouts.length < 26
-                                ? () => _addCallout(i)
-                                : null,
-                            child: Text(l10n.d('Toevoegen')),
-                          ),
-                    onTap: () {
-                      final idx = _calloutIndexForBullet(bullet);
-                      if (idx != null) {
-                        setState(() => _selectedCalloutIndex = idx);
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
-            const VerticalDivider(),
-            // Right: presentation toggle + image with markers + description.
+            // #1859: dia-brede keuzes gelabeld en buiten het werkvlak.
+            _buildSlideSettings(l10n),
+            const Divider(height: 16),
             Expanded(
-              child: Column(
+              child: Row(
                 children: [
-                  // §3.1: slide-level presentation mode selector.
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: SegmentedButton<CalloutPresentation>(
-                        segments: [
-                          ButtonSegment(
-                            value: CalloutPresentation.pin,
-                            label: Text(l10n.d('Pins')),
-                          ),
-                          ButtonSegment(
-                            value: CalloutPresentation.region,
-                            label: Text(l10n.d('Gebieden')),
-                          ),
-                          ButtonSegment(
-                            value: CalloutPresentation.arrow,
-                            label: Text(l10n.d('Pijlen')),
-                          ),
-                        ],
-                        selected: {_presentation},
-                        onSelectionChanged: (s) {
-                          setState(() => _presentation = s.first);
-                          _emit();
-                        },
-                      ),
-                    ),
+                  SizedBox(
+                    width: 260,
+                    child: _buildBulletList(context, bullets, l10n),
                   ),
-                  // §7: reveal mode — all (everything visible) or steps
-                  // (one bullet + its targets per click during presentation).
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: SegmentedButton<BulletRevealMode>(
-                        segments: [
-                          ButtonSegment(
-                            value: BulletRevealMode.all,
-                            label: Text(l10n.d('Alles tonen')),
-                          ),
-                          ButtonSegment(
-                            value: BulletRevealMode.steps,
-                            label: Text(l10n.d('Stap-voor-stap')),
-                          ),
-                        ],
-                        selected: {_reveal},
-                        onSelectionChanged: (s) {
-                          setState(() => _reveal = s.first);
-                          _emit();
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: _selectedCalloutIndex != null
-                        ? _buildImageWithMarkers(context)
-                        : Center(
-                            child: Text(
-                              l10n.d(
-                                'Selecteer een bullet om een reference te plaatsen.',
-                              ),
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ),
-                  ),
+                  const VerticalDivider(),
+                  Expanded(child: _buildWorkSurface(context, l10n)),
                 ],
               ),
             ),
@@ -492,23 +459,156 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     );
   }
 
-  Widget _buildImageWithMarkers(BuildContext context) {
-    final callout = _callouts[_selectedCalloutIndex!];
-    final l10n = context.l10n;
+  static const _labelStyle = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// Dia-brede instellingen: vorm (§3.1) en onthulstand (§7). Gelabeld,
+  /// boven het werkvlak — Wrap houdt ze op één rij als het past (#1859).
+  Widget _buildSlideSettings(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 4,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Text(l10n.d('Vorm van de markering'), style: _labelStyle),
+          SegmentedButton<CalloutPresentation>(
+            segments: [
+              ButtonSegment(
+                value: CalloutPresentation.pin,
+                label: Text(l10n.d('Pins')),
+              ),
+              ButtonSegment(
+                value: CalloutPresentation.region,
+                label: Text(l10n.d('Gebieden')),
+              ),
+              ButtonSegment(
+                value: CalloutPresentation.arrow,
+                label: Text(l10n.d('Pijlen')),
+              ),
+            ],
+            selected: {_presentation},
+            onSelectionChanged: (s) {
+              setState(() => _presentation = s.first);
+              _emit();
+            },
+          ),
+          const SizedBox(width: 16),
+          Text(l10n.d('Tijdens presenteren'), style: _labelStyle),
+          SegmentedButton<BulletRevealMode>(
+            segments: [
+              ButtonSegment(
+                value: BulletRevealMode.all,
+                label: Text(l10n.d('Alles tonen')),
+              ),
+              ButtonSegment(
+                value: BulletRevealMode.steps,
+                label: Text(l10n.d('Stap-voor-stap')),
+              ),
+            ],
+            selected: {_reveal},
+            onSelectionChanged: (s) {
+              setState(() => _reveal = s.first);
+              _emit();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBulletList(
+    BuildContext context,
+    List<String> bullets,
+    AppLocalizations l10n,
+  ) {
+    return ListView.builder(
+      itemCount: bullets.length,
+      itemBuilder: (context, i) {
+        final bullet = bullets[i];
+        final ref = _calloutLetterForBullet(bullet);
+        final isSelected =
+            _calloutForBullet(bullet) != null &&
+            _selectedCalloutIndex == _calloutIndexForBullet(bullet);
+        return ListTile(
+          selected: isSelected,
+          leading: ref != null
+              ? CircleAvatar(
+                  radius: 14,
+                  backgroundColor: AppTheme.accentFg,
+                  child: Text(
+                    ref,
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                )
+              : null,
+          title: Text(
+            bullet.replaceAll(RegExp(r'\s\([A-Z]\)$'), ''),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          trailing: ref != null
+              ? IconButton(
+                  icon: const Icon(Icons.close, size: 18),
+                  tooltip: l10n.d('Verwijzing verwijderen'),
+                  onPressed: () {
+                    final idx = _calloutIndexForBullet(bullet);
+                    if (idx != null) _removeCallout(idx);
+                  },
+                )
+              : TextButton(
+                  onPressed: _callouts.length < 26
+                      ? () => _addCallout(i)
+                      : null,
+                  child: Text(l10n.d('Toevoegen')),
+                ),
+          onTap: () {
+            final idx = _calloutIndexForBullet(bullet);
+            if (idx == null) return;
+            _selectCallout(idx);
+          },
+        );
+      },
+    );
+  }
+
+  /// Het werkvlak: beeld (altijd aanwezig, stabiel), beschrijving en
+  /// doelknoppen op een vaste plek — disabled zolang er niets geselecteerd
+  /// is, zodat er niets verspringt (#1859).
+  Widget _buildWorkSurface(BuildContext context, AppLocalizations l10n) {
+    final callout = _selectedCalloutIndex != null
+        ? _callouts[_selectedCalloutIndex!]
+        : null;
     final intrinsic = _intrinsic;
-    final clippedRefs = _computeClippedRefs(intrinsic);
+    final clippedRefs = callout != null
+        ? _computeClippedRefs(intrinsic)
+        : <String>{};
+    final hasSelection = callout != null;
 
     return Column(
       children: [
         Expanded(
-          child: LayoutBuilder(
-            builder: (context, constraints) => _buildImageStack(
-              callout,
-              intrinsic,
-              constraints.maxWidth,
-              constraints.maxHeight,
-            ),
-          ),
+          child: hasSelection
+              ? LayoutBuilder(
+                  builder: (context, c) => _buildImageStack(
+                    callout,
+                    intrinsic,
+                    c.maxWidth,
+                    c.maxHeight,
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    l10n.d(
+                      'Selecteer een regel om een verwijzing te plaatsen.',
+                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
         ),
         if (clippedRefs.isNotEmpty)
           Padding(
@@ -520,43 +620,51 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
             ),
           ),
         const SizedBox(height: 8),
-        // Description editor.
+        // #1863: controller bij de State. #1859: altijd zichtbaar, disabled
+        // zonder selectie.
         TextField(
+          enabled: hasSelection,
           decoration: InputDecoration(
             labelText: l10n.d('Beschrijving (voor schermlezer en export)'),
             hintText: l10n.d('bv. "de controller board met display"'),
             isDense: true,
           ),
           maxLength: 200,
-          controller: TextEditingController(text: callout.description)
-            ..selection = TextSelection.fromPosition(
-              TextPosition(offset: callout.description.length),
-            ),
-          onChanged: (v) => _setDescription(_selectedCalloutIndex!, v),
+          controller: _descriptionController,
+          onChanged: hasSelection
+              ? (v) => _setDescription(_selectedCalloutIndex!, v)
+              : null,
         ),
-        // Target controls.
-        Row(
+        // Doelknoppen — altijd zichtbaar, disabled zonder selectie (#1859).
+        OverflowBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          overflowAlignment: OverflowBarAlignment.end,
           children: [
             Text(
-              '${callout.targets.length} ${l10n.d('target(s)')}',
+              hasSelection
+                  ? '${callout.targets.length} '
+                        '${callout.targets.length == 1 ? l10n.d('doel') : l10n.d('doelen')}'
+                  : l10n.d('doel'),
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            const Spacer(),
-            if (callout.targets.length < 8)
-              TextButton.icon(
-                icon: const Icon(Icons.add, size: 16),
-                label: Text(l10n.d('Target toevoegen')),
-                onPressed: () => _addTarget(_selectedCalloutIndex!),
-              ),
-            if (callout.targets.length > 1)
-              TextButton.icon(
-                icon: const Icon(Icons.remove, size: 16),
-                label: Text(l10n.d('Target verwijderen')),
-                onPressed: () => _removeTarget(
-                  _selectedCalloutIndex!,
-                  callout.targets.length - 1,
-                ),
-              ),
+            TextButton.icon(
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Doel toevoegen')),
+              onPressed: hasSelection && callout.targets.length < 8
+                  ? () => _addTarget(_selectedCalloutIndex!)
+                  : null,
+            ),
+            // #1864: verwijdert het geselecteerde doel, niet het laatste.
+            TextButton.icon(
+              icon: const Icon(Icons.remove, size: 16),
+              label: Text(l10n.d('Doel verwijderen')),
+              onPressed: _selectedTargetIndex != null
+                  ? () => _removeTarget(
+                      _selectedCalloutIndex!,
+                      _selectedTargetIndex!,
+                    )
+                  : null,
+            ),
           ],
         ),
       ],
@@ -780,7 +888,8 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     final rw = painted == null ? target.w * slotW : mapped!.w;
     final rh = painted == null ? target.h * slotH : mapped!.h;
     final widgets = <Widget>[];
-    // Outline + move handle (drag inside the rect).
+    final selected = i == _selectedTargetIndex;
+    // Outline + move handle. #1864: onTap selecteert het doel.
     widgets.add(
       Positioned(
         left: rx,
@@ -788,6 +897,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         width: rw,
         height: rh,
         child: GestureDetector(
+          onTap: () => setState(() => _selectedTargetIndex = i),
           onPanUpdate: (details) {
             final nx = (target.x + details.delta.dx / dxFactor).clamp(0.0, 1.0);
             final ny = (target.y + details.delta.dy / dyFactor).clamp(0.0, 1.0);
@@ -795,7 +905,10 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
           },
           child: DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: AppTheme.accentFg, width: 2),
+              border: Border.all(
+                color: AppTheme.accentFg,
+                width: selected ? 4 : 2,
+              ),
             ),
           ),
         ),
@@ -871,10 +984,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   ) {
     final mx = painted == null ? p.x * slotW : mapped!.x;
     final my = painted == null ? p.y * slotW : mapped!.y;
+    final selected = i == _selectedTargetIndex;
     return Positioned(
       left: mx - markerRadius,
       top: my - markerRadius,
       child: GestureDetector(
+        onTap: () => setState(() => _selectedTargetIndex = i),
         onPanUpdate: (details) {
           final nx = (p.x + details.delta.dx / dxFactor).clamp(0.0, 1.0);
           final ny = (p.y + details.delta.dy / dyFactor).clamp(0.0, 1.0);
@@ -886,7 +1001,10 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppTheme.accentFg,
-            border: Border.all(color: Colors.black, width: markerRadius * 0.18),
+            border: Border.all(
+              color: selected ? Colors.white : Colors.black,
+              width: markerRadius * (selected ? 0.25 : 0.18),
+            ),
           ),
           alignment: Alignment.center,
           child: Text(
@@ -904,27 +1022,21 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
 
   /// Finds the callout reference letter for a bullet, by matching the
   /// trailing `(A)` in the bullet text.
-  String? _calloutLetterForBullet(String bullet) {
-    final match = RegExp(r'\s\(([A-Z])\)$').firstMatch(bullet.trimRight());
-    return match?.group(1);
-  }
+  String? _calloutLetterForBullet(String bullet) =>
+      RegExp(r'\s\(([A-Z])\)$').firstMatch(bullet.trimRight())?.group(1);
 
   /// Finds the callout for a bullet by its trailing reference letter.
   ImageCallout? _calloutForBullet(String bullet) {
     final letter = _calloutLetterForBullet(bullet);
-    if (letter == null) return null;
-    for (final c in _callouts) {
-      if (c.reference == letter) return c;
-    }
-    return null;
+    return letter == null
+        ? null
+        : _callouts.where((c) => c.reference == letter).firstOrNull;
   }
 
   int? _calloutIndexForBullet(String bullet) {
     final letter = _calloutLetterForBullet(bullet);
     if (letter == null) return null;
-    for (var i = 0; i < _callouts.length; i++) {
-      if (_callouts[i].reference == letter) return i;
-    }
-    return null;
+    final i = _callouts.indexWhere((c) => c.reference == letter);
+    return i >= 0 ? i : null;
   }
 }

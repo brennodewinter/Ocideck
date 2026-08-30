@@ -498,4 +498,152 @@ void main() {
       reason: 'een doel in het midden is altijd zichtbaar',
     );
   });
+
+  testWidgets('beschrijving editen springt niet weg (#1863)', (tester) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.5, 0.5)],
+          description: '',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Selecteer de callout.
+    await tester.tap(find.textContaining('punt').first);
+    await tester.pumpAndSettle();
+
+    // Typ in het beschrijvingsveld — elke aanpassing triggert een rebuild.
+    // #1863: voor de fix maakte build() een nieuwe TextEditingController aan,
+    // die de cursor naar het eind sprong. Nu de controller bij de State staat,
+    // blijft de cursor staan.
+    await tester.enterText(find.byType(TextField), 'abc');
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts.first.description, 'abc');
+
+    // Typ verder — als de controller bij de State staat blijft de tekst
+    // aaneengesloten en gaat de cursor niet weg.
+    await tester.enterText(find.byType(TextField), 'abcdef');
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts.first.description, 'abcdef');
+  });
+
+  testWidgets(
+    'Doel verwijderen haalt het geselecteerde doel weg, niet het laatste (#1864)',
+    (tester) async {
+      await _setSurface(tester);
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final slide = Slide.create(SlideType.bulletsImage).copyWith(
+        bullets: ['punt (A)'],
+        imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+        callouts: const [
+          ImageCallout(
+            reference: 'A',
+            targets: [
+              CalloutPoint(0.2, 0.2),
+              CalloutPoint(0.5, 0.5),
+              CalloutPoint(0.8, 0.8),
+            ],
+            description: '',
+          ),
+        ],
+      );
+
+      var updated = slide;
+      await tester.pumpWidget(
+        _host(CalloutEditorDialog(slide: slide, onUpdate: (s) => updated = s)),
+      );
+      await tester.pumpAndSettle();
+
+      // Selecteer de callout.
+      await tester.tap(find.textContaining('punt').first);
+      await tester.pumpAndSettle();
+
+      // Tik op het middelste doel (0.5, 0.5) om het te selecteren.
+      final imageStack = find.byType(Stack).first;
+      final box = tester.getRect(imageStack);
+      await tester.tapAt(Offset(box.center.dx, box.center.dy));
+      await tester.pumpAndSettle();
+
+      // Verwijder het geselecteerde doel.
+      await tester.tap(find.text('Doel verwijderen'));
+      await tester.pumpAndSettle();
+
+      // Het middelste doel (0.5, 0.5) moet weg zijn, niet het laatste (0.8, 0.8).
+      expect(updated.callouts.first.targets, hasLength(2));
+      expect(
+        updated.callouts.first.targets.map((t) => (t as CalloutPoint).x),
+        containsAll([0.2, 0.8]),
+        reason:
+            'het geselecteerde middelste doel is weg, het laatste staat er nog',
+      );
+    },
+  );
+
+  testWidgets('laatste doel verwijderen toont undo-melding (#1864)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.5, 0.5)],
+          description: 'test',
+        ),
+      ],
+    );
+
+    var updated = slide;
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Selecteer de callout.
+    await tester.tap(find.textContaining('punt').first);
+    await tester.pumpAndSettle();
+
+    // Selecteer het doel door op de marker te tikken.
+    final imageStack = find.byType(Stack).first;
+    final box = tester.getRect(imageStack);
+    await tester.tapAt(Offset(box.center.dx, box.center.dy));
+    await tester.pumpAndSettle();
+
+    // Het enige doel verwijderen — de hele verwijzing valt weg.
+    await tester.tap(find.text('Doel verwijderen'));
+    await tester.pumpAndSettle();
+
+    // De verwijzing is weg.
+    expect(updated.callouts, isEmpty);
+
+    // De undo-melding is verschenen.
+    expect(find.text('Verwijzing verwijderd'), findsOneWidget);
+    expect(find.text('Ongedaan maken'), findsOneWidget);
+
+    // Tik op Ongedaan maken — de verwijzing komt terug.
+    await tester.tap(find.text('Ongedaan maken'));
+    await tester.pumpAndSettle();
+
+    expect(updated.callouts, hasLength(1));
+    expect(updated.callouts.first.reference, 'A');
+  });
 }

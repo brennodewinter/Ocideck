@@ -1648,9 +1648,25 @@ const _dutchSourceAddSk = <String, String>{
       'padá mimo viditeľnej oblasti — upravte ohnisko, zoom alebo pozíciu cieľa.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'padá mimo viditeľnej časti obrázku — upravte ohnisko, zoom alebo pozíciu cieľa, inak sa značka na snímke nezobrazí.',
+  'Verwijzing verwijderd': 'Referencia odstránená',
+  'Afbeeldingsverwijzing': 'Odkaz na obrázok',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'značka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Šípky sa krížia na tomto snímku — zvážte piny namiesto šípok pre čitateľnosť.',
   'Pijlen': 'Šípky',
   'Stap-voor-stap': 'Krok za krokom',
   'Punt': 'Bod',
@@ -4602,23 +4618,8 @@ const _dutchSourceAddSk = <String, String>{
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Odstrániť cieľ',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Pridať cieľ',
   'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',
-  'Beschrijving (voor schermlezer)': 'Popis (pre čítačku obrazovky)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Vyberte odrážku na umiestnenie odkazu.',
-  'Reference verwijderen': 'Odstrániť odkaz',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'má neplatnú geometriu a nekreslí sa — opravte súradnice v front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'odkazuje na značku (A), ktorá nie je v texte, alebo naopak — prepojte značku a záznam navzájom.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'vyskytuje sa dvakrát na tomto slajde — každá značka (A), (B) … môže mať len jeden záznam.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Tento slajd má callouts, ale nemá kotvu — front matter ich nemôže prepojiť so slajdom. Dajte slajdu kotvu v editore.',
 };

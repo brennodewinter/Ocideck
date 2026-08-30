@@ -1643,9 +1643,25 @@ const _dutchSourceAddHu = <String, String>{
       'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
+  'Verwijzing verwijderd': 'Hivatkozás eltávolítva',
+  'Afbeeldingsverwijzing': 'Képhivatkozás',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'jelölés',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Nyilak keresztezik egymást ezen a dián — fontold meg a tűket a nyilak helyett az olvashatóság érdekében.',
   'Pijlen': 'Nyilak',
   'Stap-voor-stap': 'Lépésről lépésre',
   'Punt': 'Pont',
@@ -4615,23 +4631,8 @@ const _dutchSourceAddHu = <String, String>{
       'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Cél eltávolítása',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Cél hozzáadása',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
-  'Beschrijving (voor schermlezer)': 'Leírás (képernyőolvasóhoz)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Válassz egy pontot a hivatkozás elhelyezéséhez.',
-  'Reference verwijderen': 'Hivatkozás eltávolítása',
   'Afbeeldingsverwijzingen': 'Képhivatkozások',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'érvénytelen geometriája van, és nem lesz megrajzolva — javítsd a koordinátákat a front matter-ben.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'egy olyan (A) jelölésre hivatkozik, amely nincs a szövegben, vagy fordítva — kösd össze a jelölést és a bejegyzést egymással.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'kétszer szerepel ezen a dián — minden (A), (B) … jelölésnek csak egy bejegyzése lehet.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ennek a diának callout-jai vannak, de nincs horgonya — a front matter nem tudja őket a diához kapcsolni. Adj a diának egy horgonyt a szerkesztőben.',
 };

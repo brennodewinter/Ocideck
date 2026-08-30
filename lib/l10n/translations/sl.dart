@@ -1642,9 +1642,25 @@ const _dutchSourceAddSl = <String, String>{
       'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'pade izven vidnega dela slike — prilagodite gorišče, zum ali položaj cilja, sicer oznaka ne bo prikazana na diapozitivu.',
+  'Verwijzing verwijderd': 'Sklic odstranjen',
+  'Afbeeldingsverwijzing': 'Sklic na sliko',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'oznaka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Puščice se križajo na tem diapozitivu — razmisli o pinih namesto puščicah za berljivost.',
   'Pijlen': 'Puščice',
   'Stap-voor-stap': 'Korak za korakom',
   'Punt': 'Točka',
@@ -4600,23 +4616,8 @@ const _dutchSourceAddSl = <String, String>{
       'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Odstrani cilj',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Dodaj cilj',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
-  'Beschrijving (voor schermlezer)': 'Opis (za bralnik zaslona)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Izberite označbo za postavitev sklica.',
-  'Reference verwijderen': 'Odstrani sklic',
   'Afbeeldingsverwijzingen': 'Sklice na slike',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ima neveljavno geometrijo in se ne nariše — popravite koordinate v front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'se sklicuje na oznako (A), ki ni v besedilu, ali obratno — povežite oznako in vnos med seboj.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'se pojavi dvakrat na tem diapozitivu — vsaka oznaka (A), (B) … sme imeti samo en vnos.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ta diapozitiv ima calloute, vendar nima sidra — front matter jih ne more povezati z diapozitivom. Dajte diapozitivu sidro v urejevalniku.',
 };

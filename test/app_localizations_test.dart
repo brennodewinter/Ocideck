@@ -45,8 +45,6 @@ const unchangedInEnglish = {
   // identiek aan het Nederlands, maar andere talen vertalen het wél.
   'Callout',
   'Callouts',
-  // Callout-editor: technische term 'target(s)' blijft gelijk in het Engels.
-  'target(s)',
   // Callout-editor: 'Pins' is identiek in het Engels.
   'Pins',
   'CVSS',

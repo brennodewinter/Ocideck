@@ -1648,9 +1648,25 @@ const _dutchSourceAddLt = <String, String>{
       'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'patenka už matomos vaizdo dalies — derinkite židinio tašką, mastelį ar tikslinę padėtį, kitaip žymeklis neatsiras skaidrėje.',
+  'Verwijzing verwijderd': 'Nuoroda pašalinta',
+  'Afbeeldingsverwijzing': 'Paveikslėlio nuoroda',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'žymė',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Rodyklės kertasi šiame skaidrėje — apsvarstykite kaiščius vietoj rodyklių skaitomumui.',
   'Pijlen': 'Rodyklės',
   'Stap-voor-stap': 'Žingsnis po žingsnio',
   'Punt': 'Taškas',
@@ -4615,23 +4631,8 @@ const _dutchSourceAddLt = <String, String>{
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Pašalinti tikslą',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Pridėti tikslą',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
-  'Beschrijving (voor schermlezer)': 'Aprašymas (ekrano skaitytuvui)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Pasirinkite ženklelį, kad patalpintumėte nuorodą.',
-  'Reference verwijderen': 'Pašalinti nuorodą',
   'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'turi netinkamą geometriją ir nėra braižomas — pataisykite koordinates front matter dalyje.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'nurodo (A) žymę, kurios nėra tekste, arba atvirkščiai — susiekite žymę ir įrašą tarpusavyje.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'pasirodo du kartus šiame skaidrėje — kiekviena žymė (A), (B) … gali turėti tik vieną įrašą.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ši skaidrė turi callout, bet neturi inkaro — front matter negali jų susieti su skaidre. Suteikite skaidrei inkarą rengyklėje.',
 };

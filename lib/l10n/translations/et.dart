@@ -1635,9 +1635,25 @@ const _dutchSourceAddEt = <String, String>{
       'jääb nähtavast alast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'jääb pildi nähtavast osast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta, muidu marker slaidil ei ilmu.',
+  'Verwijzing verwijderd': 'Viide eemaldatud',
+  'Afbeeldingsverwijzing': 'Pildiviide',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'märk',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Nooled ristuvad sellel slaidil — kaaluge nõelu noolte asemel loetavuse huvides.',
   'Pijlen': 'Nooled',
   'Stap-voor-stap': 'Samm-sammult',
   'Punt': 'Punkt',
@@ -4592,23 +4608,8 @@ const _dutchSourceAddEt = <String, String>{
       'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Eemalda siht',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Lisada siht',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
-  'Beschrijving (voor schermlezer)': 'Kirjeldus (ekraanilugeja jaoks)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Vali täpp, et viidet paigutada.',
-  'Reference verwijderen': 'Eemalda viide',
   'Afbeeldingsverwijzingen': 'Pildiviited',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'on kehtetu geomeetriaga ja seda ei joonistata — paranda koordinaadid front matter-is.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'viitab (A)-märgile, mida tekstis pole, või vastupidi — ühenda märk ja kirje omavahel.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'esineb sellel slaidil kaks korda — iga märk (A), (B) … võib olla ainult ühe kirjega.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Sellel slaidil on callouts, kuid puudub ankur — front matter ei saa neid slaidiga siduda. Anna slaidile ankur redaktoris.',
 };

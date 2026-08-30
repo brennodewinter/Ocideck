@@ -681,9 +681,25 @@ const _dutchSourceAddFy = {
       'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
+  'Verwijzing verwijderd': 'Ferwizing fuortsmiten',
+  'Afbeeldingsverwijzing': 'Ofbyldingsferwizing',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'markearring',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pilen kruise inoar op dizze dia — oerweagje pins ynstee fan pilen foar lêsberens.',
   'Pijlen': 'Pilen',
   'Stap-voor-stap': 'Stap foar stap',
   'Punt': 'Punt',
@@ -4614,24 +4630,9 @@ const _dutchSourceAddFy = {
       'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Doel fuortsmite',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Doel tafoegje',
   'bv. "de controller board met display"':
       'byg. "de controller board mei display"',
-  'Beschrijving (voor schermlezer)': 'Beskriuwing (foar skermlêzer)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Kies in opsommingsteken om in ferwizing te pleatsen.',
-  'Reference verwijderen': 'Ferwizing fuortsmite',
   'Afbeeldingsverwijzingen': 'Ofbyldingsferwizingen',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'hat ûnjildige geometry en wurdt net tekene — korrigearje de koördinaten yn it front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'ferwiist nei in (A)-markering dy\'t net yn de tekst stiet, of oarsom — keppelje de markering en de ynfier oan inoar.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'komt twa kear foar op dizze dia — eltse markering (A), (B) … mei mar ien ynfier hawwe.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Dizze dia hat callouts mar gjin anker — it front matter kin se net oan de dia keppelje. Jou de dia in anker yn de editor.',
 };

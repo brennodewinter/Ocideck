@@ -1644,9 +1644,25 @@ const _dutchSourceAddGsw = <String, String>{
       'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
+  'Verwijzing verwijderd': 'Referänz entfarnt',
+  'Afbeeldingsverwijzing': 'Bildreferänz',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'Markierig',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pfiil chrüüzed sech uf däm Slide — nimm Pins statt Pfiil für besseri Lesbarkeit.',
   'Pijlen': 'Pfiil',
   'Stap-voor-stap': 'Schritt für Schritt',
   'Punt': 'Punkt',
@@ -4604,24 +4620,9 @@ const _dutchSourceAddGsw = <String, String>{
       'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ziel entferne',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Ziel derzuefüege',
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',
-  'Beschrijving (voor schermlezer)': 'Beschriibig (für Screenreader)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Wähl en Ufzähligspunkt zum e Referänz plaziere.',
-  'Reference verwijderen': 'Referänz entferne',
   'Afbeeldingsverwijzingen': 'Bildreferänze',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'het en ungültigi Geometri und wird nöd zzeichnet — korrigier d Koordinate im Front Matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'verwiist uf e (A)-Markierig, wo nöd im Text steit, oder umgekehrt — verchnüpfi d Markierig und de Itrag mitenand.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'chunnt zweimal uf dere Folie vor — jedi Markierig (A), (B) … dörf nur ei Itrag ha.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Die Folie het Callouts, aber kei Anker — s Front Matter chann si nöd mit de Folie verchnüpfe. Gib de Folie en Anker im Editor.',
 };

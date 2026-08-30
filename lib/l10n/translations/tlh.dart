@@ -1619,9 +1619,25 @@ const _dutchSourceAddTlh = <String, String>{
       'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'vetlh visible mIllogh nagh be\' — focal point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
+  'Verwijzing verwijderd': 'reference teqmoH',
+  'Afbeeldingsverwijzing': 'mIllogh reference',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'per',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'yan tlhIq wa\'Dich tlhIq — yan tlhIq tlhIq tlhIq tlhIq',
   'Pijlen': 'yan',
   'Stap-voor-stap': 'Yan yan',
   'Punt': 'Qogh',
@@ -4542,24 +4558,9 @@ const _dutchSourceAddTlh = <String, String>{
       'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'target teq',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'target yIchel',
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
-  'Beschrijving (voor schermlezer)': 'Del (HaqwI\'vaD)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'bI\'reS yIwIv reference chermeH.',
-  'Reference verwijderen': 'reference teq',
   'Afbeeldingsverwijzingen': 'mIllogh reference',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'mIq taghbe\' \'ej mIq tlhIHbe\' — front matterDaq coordInatlh DIvI\'.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      '(A) ngoq DIvI\'be\' \'ej ngoq \'entry je che\' — ngoq \'entry je rIntIq.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'DI\' wa\'logh cha\'logh nargh — (A), (B) … wa\' entry neH DIvI\'.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'slidevam callouts DIvI\' \'a \'ejDo\' DIvI\'be\' — front matter DIvI\' slide je che\'. \'ejDo\' DIvI\' editorDaq.',
 };

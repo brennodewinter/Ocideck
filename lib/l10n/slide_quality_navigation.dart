@@ -69,8 +69,9 @@ void navigateToSlideQualityIssue({
         builder: (ctx) => CalloutEditorDialog(
           slide: deck.slides[issue.slideIndex],
           projectPath: deck.projectPath,
-          onUpdate: (updated) =>
-              ref.read(deckProvider.notifier).updateSlide(issue.slideIndex, updated),
+          onUpdate: (updated) => ref
+              .read(deckProvider.notifier)
+              .updateSlide(issue.slideIndex, updated),
         ),
       );
       return;

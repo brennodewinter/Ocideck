@@ -1640,9 +1640,25 @@ const _dutchSourceAddSv = <String, String>{
       'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'faller utanför den synliga delen av bilden — justera brännpunkt, zoom eller målposition, annars visas inte markören på sliden.',
+  'Verwijzing verwijderd': 'Referens borttagen',
+  'Afbeeldingsverwijzing': 'Bildreferens',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'markering',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pilar korsar varandra på denna bild — överväg nålar istället för pilar för läsbarhet.',
   'Pijlen': 'Pilar',
   'Stap-voor-stap': 'Steg för steg',
   'Punt': 'Punkt',
@@ -4595,24 +4611,9 @@ const _dutchSourceAddSv = <String, String>{
       'Fotnoter blir till vanlig text; en presentation har inte noter.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ta bort mål',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Lägg till mål',
   'bv. "de controller board met display"':
       't.ex. "kontrollerkortet med display"',
-  'Beschrijving (voor schermlezer)': 'Beskrivning (för skärmläsare)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Välj en punkt för att placera en referens.',
-  'Reference verwijderen': 'Ta bort referens',
   'Afbeeldingsverwijzingen': 'Bildreferenser',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'har ogiltig geometri och ritas inte — korrigera koordinaterna i front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'hänvisar till en (A)-markering som inte finns i texten, eller tvärtom — koppla markeringen och posten till varandra.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'förekommer två gånger på denna bild — varje markering (A), (B) … får bara ha en post.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Denna bild har callouts men ingen förankring — front matter kan inte koppla dem till bilden. Ge bilden en förankring i redigeraren.',
 };

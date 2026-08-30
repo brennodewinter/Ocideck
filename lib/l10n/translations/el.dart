@@ -1666,9 +1666,25 @@ const _dutchSourceAddEl = <String, String>{
       'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
+  'Verwijzing verwijderd': 'Η αναφορά αφαιρέθηκε',
+  'Afbeeldingsverwijzing': 'Αναφορά εικόνας',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'σήμανση',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Τα βέλη διασταυρώνονται σε αυτή τη διαφάνεια — εξέτασε καρφίτσες αντί για βέλη για αναγνωσιμότητα.',
   'Pijlen': 'Βέλη',
   'Stap-voor-stap': 'Βήμα προς βήμα',
   'Punt': 'Σημείο',
@@ -4667,23 +4683,8 @@ const _dutchSourceAddEl = <String, String>{
       'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Αφαίρεση στόχου',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Προσθήκη στόχου',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
-  'Beschrijving (voor schermlezer)': 'Περιγραφή (για αναγνώστη οθόνης)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Επιλέξτε μια κουκκίδα για να τοποθετήσετε μια αναφορά.',
-  'Reference verwijderen': 'Αφαίρεση αναφοράς',
   'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'έχει μη έγκυρη γεωμετρία και δεν σχεδιάζεται — διορθώστε τις συντεταγμένες στο front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'αναφέρεται σε ένα σημάδι (A) που δεν υπάρχει στο κείμενο, ή αντίστροφα — συνδέστε το σημάδι και την καταχώρηση μεταξύ τους.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'εμφανίζεται δύο φορές σε αυτή τη διαφάνεια — κάθε σημάδι (A), (B) … μπορεί να έχει μόνο μία καταχώρηση.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Αυτή η διαφάνεια έχει callouts αλλά όχι άγκυρα — το front matter δεν μπορεί να τα συνδέσει με τη διαφάνεια. Δώστε στη διαφάνεια μια άγκυρα στον επεξεργαστή.',
 };

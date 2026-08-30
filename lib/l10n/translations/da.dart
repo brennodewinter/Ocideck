@@ -1641,9 +1641,25 @@ const _dutchSourceAddDa = <String, String>{
       'falder uden for det synlige område — justér brændpunkt, zoom eller målposition.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falder uden for den synlige del af billedet — justér brændpunkt, zoom eller målposition, ellers vises markøren ikke på dias.',
+  'Verwijzing verwijderd': 'Reference fjernet',
+  'Afbeeldingsverwijzing': 'Billedreference',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'markering',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pile krydser hinanden på dette dias — overvej pins i stedet for pile for læsbarhed.',
   'Pijlen': 'Pile',
   'Stap-voor-stap': 'Trin for trin',
   'Punt': 'Punkt',
@@ -4597,24 +4613,9 @@ const _dutchSourceAddDa = <String, String>{
       'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Fjern mål',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Tilføj mål',
   'bv. "de controller board met display"':
       'f.eks. "controller board med display"',
-  'Beschrijving (voor schermlezer)': 'Beskrivelse (til skærmlæser)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Vælg en punkt for at placere en reference.',
-  'Reference verwijderen': 'Fjern reference',
   'Afbeeldingsverwijzingen': 'Billedreferencer',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'har ugyldig geometri og tegnes ikke — ret koordinaterne i front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'henviser til en (A)-markering, der ikke står i teksten, eller omvendt — kobl markeringen og posten sammen.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'forekommer to gange på dette dias — hver markering (A), (B) … må kun have én post.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Dette dias har callouts, men ikke et anker — front matter kan ikke koble dem til diaset. Giv diaset et anker i editoren.',
 };

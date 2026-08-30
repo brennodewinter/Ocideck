@@ -1656,9 +1656,25 @@ const _dutchSourceAddLa = <String, String>{
       'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'extra visibilem partem imaginis cadit — focum, zoom aut positionem destinati adjusta, aliter signum in pagina non apparebit.',
+  'Verwijzing verwijderd': 'Referentia remota',
+  'Afbeeldingsverwijzing': 'Imaginum referentia',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'nota',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Sagittae se in hac lamina secant — clavos pro sagittis propter legibilitatem considera.',
   'Pijlen': 'Sagittae',
   'Stap-voor-stap': 'Gradatim',
   'Punt': 'Punctum',
@@ -4615,24 +4631,9 @@ const _dutchSourceAddLa = <String, String>{
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Destinatio removere',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Destinatio addere',
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
-  'Beschrijving (voor schermlezer)': 'Descriptio (pro lectore schermatis)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Punctum selige ut referentiam ponas.',
-  'Reference verwijderen': 'Referentiam removere',
   'Afbeeldingsverwijzingen': 'Imaginum referentiae',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'geometria invalida habet et non pingitur — coordinales in front matter corrige.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'ad signum (A) quod in texto non est refert, aut e contra — signum et entry inter se conecte.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'bis in hac lamina apparet — unumquemque signum (A), (B) … unam tantum entry habere potest.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Haec lamina callouts sed non ancoram habet — front matter eos ad laminam conectere non potest. Da ancorsm laminae in editore.',
 };

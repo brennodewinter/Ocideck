@@ -1669,9 +1669,25 @@ const _dutchSourceAddPt = <String, String>{
       'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cai fora da parte visível da imagem — ajuste o ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
+  'Verwijzing verwijderd': 'Referência removida',
+  'Afbeeldingsverwijzing': 'Referência de imagem',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'marcador',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Setas se cruzam neste slide — considere pinos em vez de setas para legibilidade.',
   'Pijlen': 'Setas',
   'Stap-voor-stap': 'Passo a passo',
   'Punt': 'Ponto',
@@ -4653,23 +4669,8 @@ const _dutchSourceAddPt = <String, String>{
       'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Remover destino',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Adicionar destino',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
-  'Beschrijving (voor schermlezer)': 'Descrição (para leitor de ecrã)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Selecione um marcador para colocar uma referência.',
-  'Reference verwijderen': 'Remover referência',
   'Afbeeldingsverwijzingen': 'Referências de imagem',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tem geometria inválida e não é desenhado — corrija as coordenadas no front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'refere-se a uma marca (A) que não está no texto, ou vice-versa — ligue a marca e a entrada uma à outra.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'aparece duas vezes neste slide — cada marca (A), (B) … pode ter apenas uma entrada.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Este slide tem callouts mas nenhuma âncora — o front matter não os pode ligar ao slide. Dê ao slide uma âncora no editor.',
 };

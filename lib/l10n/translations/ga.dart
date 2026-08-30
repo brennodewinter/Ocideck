@@ -1671,9 +1671,25 @@ const _dutchSourceAddGa = <String, String>{
       'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
+  'Verwijzing verwijderd': 'Baineadh an tagairt',
+  'Afbeeldingsverwijzing': 'Tagairt íomhá',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'marc',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Crosann na saigheada a chéile ar an sleamhnán seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',
   'Pijlen': 'Saighead',
   'Stap-voor-stap': 'Céim ar chéim',
   'Punt': 'Pointe',
@@ -4667,24 +4683,9 @@ const _dutchSourceAddGa = <String, String>{
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Sprioc a bhaint',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Sprioc a chur leis',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
-  'Beschrijving (voor schermlezer)': 'Cur síos (do léitheoir scáileáin)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Roghnaigh urchair chun tagairt a chur.',
-  'Reference verwijderen': 'Bain tagairt',
   'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tá céimseata neamhbhailí aige agus ní tharraingítear é — ceartaigh na comhordanáidí sa front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'tagraíonn sé do mharc (A) atá le fáil sa téacs, nó a mhalairt — nasc an marc agus an iontráil le chéile.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'tagann sé suas faoi dhó ar an sleamhnán seo — ní ceadaithe ach iontráil amháin do gach marc (A), (B) …',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Tá callouts ar an sleamhnán seo ach níl aon ancaire aige — ní féidir leis an front matter iad a nascadh leis an sleamhnán. Tabhair ancaire don sleamhnán san eagarthóir.',
 };
