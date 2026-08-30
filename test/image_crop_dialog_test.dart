@@ -430,5 +430,52 @@ void main() {
       expect([tl.r, tl.g, tl.b], [0, 0, 255]); // blauw
       expect([br.r, br.g, br.b], [255, 0, 0]); // rood
     });
+
+    // Draaien is de énige bewerking in dit venster die het bestand van de
+    // gebruiker herschrijft; slepen en zoomen bewaren een waarde in het deck.
+    // Dat verschil is aan de knoppen niet te zien, en een afbeelding die meer
+    // dia's of decks delen draait overal mee — dus moet het er staan vóórdat er
+    // gedraaid wordt. Zonder deze toets verdwijnt de waarschuwing bij de
+    // eerstvolgende herindeling van de dialoog zonder dat iets rood wordt.
+    // Zie docs/design/IMAGE_ROTATION.md §6.
+    testWidgets('de dialoog waarschuwt vóór het draaien dat het bestand zelf '
+        'verandert', (tester) async {
+      await open(tester);
+
+      final waarschuwing = find.textContaining(
+        'verandert het afbeeldingsbestand zelf',
+      );
+      expect(
+        waarschuwing,
+        findsOneWidget,
+        reason: 'de waarschuwing hoort zichtbaar te zijn zodra draaien kan',
+      );
+      // Vóór het draaien, niet als melding achteraf: ze staat er al zonder dat
+      // er op een draaiknop is geklikt.
+      expect(find.byIcon(Icons.rotate_right), findsOneWidget);
+
+      // En ze noemt het gedeelde gebruik, want dát is het gevolg dat buiten
+      // dit deck reikt.
+      expect(
+        find.textContaining("meer dia's of decks"),
+        findsOneWidget,
+        reason: 'de gedeelde-afbeelding-gevolgtrekking ontbreekt',
+      );
+    });
+
+    testWidgets('zonder draaimogelijkheid staat er ook geen waarschuwing', (
+      tester,
+    ) async {
+      // Een meegeleverde asset is alleen-lezen, dus `_canRotate` is onwaar en
+      // de draaiknoppen ontbreken — dan is de waarschuwing ruis in plaats van
+      // hulp.
+      await open(tester, imagePath: 'asset:assets/images/cat-otis.jpg');
+
+      expect(find.byIcon(Icons.rotate_right), findsNothing);
+      expect(
+        find.textContaining('verandert het afbeeldingsbestand zelf'),
+        findsNothing,
+      );
+    });
   });
 }

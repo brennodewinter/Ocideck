@@ -1634,6 +1634,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Pagriešana maina pašu attēla failu, atšķirībā no apgriešanas un tālummaiņas. Attēls, ko izmanto citi slaidi vai deki, pagriežas arī tur.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

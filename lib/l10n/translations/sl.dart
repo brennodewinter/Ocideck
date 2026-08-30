@@ -1636,6 +1636,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Vrtenje spremeni samo datoteko slike, drugače kot obrezovanje in povečava. Slika, ki jo uporabljajo drugi diapozitivi ali decki, se zavrti tudi tam.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

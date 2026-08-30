@@ -672,6 +672,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'La rotazione modifica il file immagine stesso, a differenza del ritaglio e dello zoom. Un\'immagine usata da altre diapositive o deck ruota anche lì.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'cade fuori dall\'area visibile — regola il punto focale, lo zoom o la posizione del target.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

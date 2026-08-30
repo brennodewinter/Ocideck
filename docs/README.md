@@ -88,6 +88,20 @@ they live in the repository. See [How these documents are maintained](#how-these
 | [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
 | [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |
 | [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Research/design contract: how Rocky reports work via API and JSON export, and what that means for a later live OpenKAT integration in OciDeck. Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md). |
+| [OPENKAT_LIVE_UX.md](design/OPENKAT_LIVE_UX.md) | Design appendix, in Dutch, to the OpenKAT build: what the live integration looks like from the user's side. |
+| [IMAGE_CALLOUTS.md](design/IMAGE_CALLOUTS.md) | Revision 5, implemented and under acceptance: tying a bullet to a part of the picture beside it, as a pin, a region or an arrow. Carries the format contract and the shared geometry rules. |
+| [IMAGE_ROTATION.md](design/IMAGE_ROTATION.md) | Decided 2026-08-30, not yet built: rotating a picture in the image dialog rewrites the user's file. Three shapes weighed; copy-on-rotate chosen. |
+| [GANTT_SLIDETYPE.md](design/GANTT_SLIDETYPE.md) | Implemented in #1246: the Gantt slide type, stored as an ordinary Markdown table and rendered through generated Mermaid. |
+| [PROVENANCE_SIGNATURE.md](design/PROVENANCE_SIGNATURE.md) | Partly implemented: cryptographic owner provenance on a distributed deck (format, crypto and service on `main`; the signing UI is next). |
+| [NATIVE_CALLS.md](design/NATIVE_CALLS.md) | Design proposal, partly built (F1–F3.4a landed): calls inside OciDeck over an XMPP spine. |
+| [XMPP_COLLAB_TRANSPORT.md](design/XMPP_COLLAB_TRANSPORT.md) | Design proposal, unbuilt (slice 2 of NATIVE_CALLS §7.1): the XMPP transport the collaboration layer rides on. |
+| [ISO_MANAGEMENTSYSTEEM.md](design/ISO_MANAGEMENTSYSTEEM.md) | Blocks A–C built, in Dutch: ISO 27001/9001/42001 progress reporting. |
+| [LINUX_PACKAGING.md](design/LINUX_PACKAGING.md) | Phase 1 built, in Dutch (#1227): the Linux install routes — AppImage, .deb and .rpm. |
+
+*(Corrected 2026-08-30: nine of the design notes had no row here, including
+`IMAGE_CALLOUTS.md`, which carries a format contract. The 2026-07-22 note below
+records the same failure two months earlier and ends "no test compares the two
+lists" — still true, and this is what that costs.)*
 
 *(Corrected 2026-07-22: this list named seven of the then-nine documents in
 `design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while

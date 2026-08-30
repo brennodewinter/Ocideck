@@ -675,6 +675,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Drehen ändert die Bilddatei selbst, anders als Zuschneiden und Zoomen. Ein Bild, das andere Folien oder Decks verwenden, dreht sich dort ebenfalls mit.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, den Zoom oder die Zielposition an.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

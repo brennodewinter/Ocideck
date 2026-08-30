@@ -674,6 +674,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Bira ta kambia e archivo di imagen mes, kontrali na kòrta i zoom. Un imagen ku otro dia òf deck ta usa, ta bira einan tambe.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'kaai paden di e área visibel — ajusta e punto focal, e zoom of e posishon di e meta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
