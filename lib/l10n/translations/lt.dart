@@ -1642,6 +1642,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'patenka už matomos vaizdo dalies — derinkite židinio tašką, mastelį ar tikslinę padėtį, kitaip žymeklis neatsiras skaidrėje.',
   'markering': 'žymė',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Rodyklės kertasi šiame skaidrėje — apsvarstykite kaiščius vietoj rodyklių skaitomumui.',

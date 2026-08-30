@@ -675,6 +675,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, den Zoom oder die Zielposition an.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, den Zoom oder die Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
   'markering': 'Markierung',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pfeile kreuzen sich auf dieser Folie — verwende Pins statt Pfeile für bessere Lesbarkeit.',

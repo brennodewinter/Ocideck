@@ -21,7 +21,7 @@ import '../../../utils/project_path.dart';
 /// Creates an [ImageProvider] from an image path, mirroring the resolution
 /// logic in `_cropProvider` (image_crop_dialog.dart) without taking a
 /// dependency on that private function.
-ImageProvider? _calloutImageProvider(String imagePath, String? projectPath) {
+ImageProvider? calloutImageProvider(String imagePath, String? projectPath) {
   if (imagePath.isEmpty) return null;
   if (isBundledAssetPath(imagePath)) {
     return cappedBundledAssetImage(bundledAssetKey(imagePath));
@@ -46,7 +46,6 @@ ImageProvider? _calloutImageProvider(String imagePath, String? projectPath) {
 /// dáárna — zichtbaar in de app, weg in de PDF, PPTX en ODP.
 ///
 /// Levert `null` als de afbeelding niet te lezen is.
-@visibleForTesting
 void resolveIntrinsicSize(
   ImageProvider provider,
   void Function(Size? size, bool synchronous) onSize,
@@ -228,7 +227,7 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
   /// wél toonde.
   void _resolveIntrinsic() {
     if (_resolving) return;
-    final provider = _calloutImageProvider(
+    final provider = calloutImageProvider(
       widget.slide.imagePath,
       widget.projectPath,
     );

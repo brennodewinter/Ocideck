@@ -1655,6 +1655,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
   'markering': 'маркер',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Стрелите се пресичат на този слайд — разгледайте щифтове вместо стрелки за четимост.',

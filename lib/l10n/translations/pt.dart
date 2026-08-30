@@ -1663,6 +1663,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cai fora da parte visível da imagem — ajuste o ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
   'markering': 'marcador',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Setas se cruzam neste slide — considere pinos em vez de setas para legibilidade.',

@@ -2553,6 +2553,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
   'markering': 'işaret',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pinleri düşünün.',

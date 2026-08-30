@@ -675,6 +675,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
   'markering': 'markearring',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pilen kruise inoar op dizze dia — oerweagje pins ynstee fan pilen foar lêsberens.',

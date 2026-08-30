@@ -1629,6 +1629,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'jääb nähtavast alast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'jääb pildi nähtavast osast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta, muidu marker slaidil ei ilmu.',
   'markering': 'märk',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nooled ristuvad sellel slaidil — kaaluge nõelu noolte asemel loetavuse huvides.',

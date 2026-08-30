@@ -1665,6 +1665,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
   'markering': 'marc',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Crosann na saigheada a chéile ar an sleamhnán seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',

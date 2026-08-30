@@ -675,6 +675,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'tombe en dehors de la zone visible — ajustez le point focal, le zoom ou la position de la cible.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'tombe en dehors de la partie visible de l\'image — ajustez le point focal, le zoom ou la position de la cible, sinon le marqueur n\'apparaîtra pas sur la diapositive.',
   'markering': 'repère',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Les flèches se croisent sur cette diapositive — envisagez des épingles au lieu de flèches pour la lisibilité.',

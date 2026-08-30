@@ -1650,6 +1650,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'extra visibilem partem imaginis cadit — focum, zoom aut positionem destinati adjusta, aliter signum in pagina non apparebit.',
   'markering': 'nota',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Sagittae se in hac lamina secant — clavos pro sagittis propter legibilitatem considera.',

@@ -1613,6 +1613,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'vetlh visible mIllogh nagh be\' — focal point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
   'markering': 'per',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'yan tlhIq wa\'Dich tlhIq — yan tlhIq tlhIq tlhIq tlhIq',

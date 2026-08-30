@@ -242,6 +242,7 @@ void main() {
       SlideQualityIssueKind.calloutDuplicateReference: {'ref': '(A)'},
       SlideQualityIssueKind.calloutMissingAnchor: {},
       SlideQualityIssueKind.calloutCrossingArrows: {},
+      SlideQualityIssueKind.calloutTargetOutOfView: {'ref': '(A)'},
     };
 
     test('produces a non-empty message for each kind in both languages', () {

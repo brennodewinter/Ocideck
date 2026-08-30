@@ -1639,6 +1639,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'pada izvan vidljivog područja — prilagodite žarišnu točku, zum ili poziciju cilja.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'pada izvan vidljivog dijela slike — prilagodite žarišnu točku, zum ili poziciju cilja, inače se oznaka neće prikazati na slajdu.',
   'markering': 'oznaka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Strelice se križaju na ovom slajdu — razmotri pinove umjesto strelica za čitljivost.',

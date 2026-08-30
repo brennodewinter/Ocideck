@@ -1635,6 +1635,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'berada di luar bagian gambar yang terlihat — sesuaikan titik fokus, zoom, atau posisi target, jika tidak penanda tidak akan muncul di slide.',
   'markering': 'penanda',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Panah saling menyilang pada slide ini — pertimbangkan pin sebagai ganti panah untuk keterbacaan.',

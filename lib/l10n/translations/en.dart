@@ -838,6 +838,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focal point, zoom, or target position.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focal point, zoom, or target position, or the marker will not appear on the slide.',
   'markering': 'mark',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pins instead of arrows for readability.',

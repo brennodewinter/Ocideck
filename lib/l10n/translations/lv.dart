@@ -1634,6 +1634,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'krīt ārpus attēla redzamās daļas — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju, pretējā gadījumā marķieris neparādīsies uz slaida.',
   'markering': 'atzīme',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Bultas krustojas uz šī slaida — apsveriet tapas bultu vietā lasāmībai.',

@@ -1654,6 +1654,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'jaqa\' barra l-inħawi viżibbli — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'jaqa\' barra l-parti viżibbli tal-immaġni — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira, inkella l-marka ma tidhirx fuq is-slide.',
   'markering': 'marka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Il-vleġeġ jaqsmu xulxin fuq din is-slide — ikkunsidra pins minflok vleġeġ għall-leġġibiltà.',

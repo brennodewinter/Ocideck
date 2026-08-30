@@ -1652,6 +1652,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'cade în afara zonei vizibile — ajustați punctul focal, zoom-ul sau poziția țintei.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cade în afara părții vizibile a imaginii — ajustați punctul focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
   'markering': 'marcator',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Săgețile se încrucișează pe acest slide — luați în considerare ace în loc de săgeți pentru lizibilitate.',
