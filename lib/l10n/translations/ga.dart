@@ -1671,8 +1671,15 @@ const _dutchSourceAddGa = <String, String>{
       'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Cruth na marcála',
+  'doel': 'sprioc',
+  'doelen': 'spriocanna',
   'Verwijzing verwijderd': 'Baineadh an tagairt',
-  'Afbeeldingsverwijzing': 'Tagairt íomhá',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1684,11 +1691,11 @@ const _dutchSourceAddGa = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'markering': 'marc',
   'Pijlen': 'Saighead',
   'Stap-voor-stap': 'Céim ar chéim',
@@ -4687,5 +4694,5 @@ const _dutchSourceAddGa = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
-  'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

@@ -681,8 +681,15 @@ const _dutchSourceAddFy = {
       'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Foarm fan de markering',
+  'doel': 'doel',
+  'doelen': 'doelen',
   'Verwijzing verwijderd': 'Ferwizing fuortsmiten',
-  'Afbeeldingsverwijzing': 'Ofbyldingsferwizing',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -694,11 +701,11 @@ const _dutchSourceAddFy = {
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'falt bûten it sichtbere diel fan de ôfbylding — pas it fokuspunt, de zoom of de doelposysje oan, oars ferskynt de markering net op de dia.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Beskriuwing (foar skermlêzer en eksport)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'falt bûten it sichtbere gebiet — pas it fokuspunt, de zoom of de doelposysje oan.',
   'markering': 'markearring',
   'Pijlen': 'Pilen',
   'Stap-voor-stap': 'Stap foar stap',

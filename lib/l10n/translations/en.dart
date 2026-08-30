@@ -844,6 +844,13 @@ const _dutchSourceAddEn = {
       'falls outside the visible area — adjust the focal point, zoom, or target position.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'falls outside the visible part of the image — adjust the focal point, zoom, or target position, or the marker will not appear on the slide.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Shape of the marker',
+  'doel': 'target',
+  'doelen': 'targets',
   'Verwijzing verwijderd': 'Reference removed',
   'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':

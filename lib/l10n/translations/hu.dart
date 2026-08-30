@@ -1643,8 +1643,15 @@ const _dutchSourceAddHu = <String, String>{
       'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Jelölő alakja',
+  'doel': 'célpont',
+  'doelen': 'célpontok',
   'Verwijzing verwijderd': 'Hivatkozás eltávolítva',
-  'Afbeeldingsverwijzing': 'Képhivatkozás',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1656,11 +1663,11 @@ const _dutchSourceAddHu = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
   'markering': 'jelölés',
   'Pijlen': 'Nyilak',
   'Stap-voor-stap': 'Lépésről lépésre',
@@ -4634,5 +4641,5 @@ const _dutchSourceAddHu = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
-  'Afbeeldingsverwijzingen': 'Képhivatkozások',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

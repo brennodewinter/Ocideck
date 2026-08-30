@@ -2559,24 +2559,31 @@ const _dutchSourceAddTr = <String, String>{
       'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'İşaretin şekli',
+  'doel': 'hedef',
+  'doelen': 'hedefler',
   'Verwijzing verwijderd': 'Referans kaldırıldı',
-  'Afbeeldingsverwijzing': 'Görsel referansı',
+  'Afbeeldingsverwijzing': 'Görsel referans',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'geçersiz koordinatlara sahip ve çizilmiyor — hedef konumunu referans editöründe düzeltin.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      '(A) işareti metinde yoksa veya tersi — harfi metne ekleyin veya referansı kaldırın.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'bu slaytta iki kez geçiyor — her (A), (B) … işareti yalnızca bir referans olabilir.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'bu slaytta görsel referanslar var ancak çapa yok — referanslar slayta bağlanamıyor. Slayta editörde bir çapa verin.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pin işaretleri düşünün.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
   'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'Açıklama (ekran okuyucu için ve dışa aktarma)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
   'markering': 'işaret',
   'Pijlen': 'Oklar',
   'Stap-voor-stap': 'Adım adım',
@@ -4605,5 +4612,5 @@ const _dutchSourceAddTr = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
-  'Afbeeldingsverwijzingen': 'Görsel referansları',
+  'Afbeeldingsverwijzingen': 'Görsel referanslar',
 };

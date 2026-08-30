@@ -1661,8 +1661,15 @@ const _dutchSourceAddBg = <String, String>{
       'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Форма на маркера',
+  'doel': 'цел',
+  'doelen': 'цени',
   'Verwijzing verwijderd': 'Препратката е премахната',
-  'Afbeeldingsverwijzing': 'Справка към изображение',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1674,11 +1681,11 @@ const _dutchSourceAddBg = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
   'markering': 'маркер',
   'Pijlen': 'Стрели',
   'Stap-voor-stap': 'Стъпка по стъпка',
@@ -4660,5 +4667,5 @@ const _dutchSourceAddBg = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
-  'Afbeeldingsverwijzingen': 'Справки към изображения',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

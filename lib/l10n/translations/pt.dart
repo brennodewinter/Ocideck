@@ -1669,8 +1669,15 @@ const _dutchSourceAddPt = <String, String>{
       'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cai fora da parte visível da imagem — ajuste o ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forma do marcador',
+  'doel': 'alvo',
+  'doelen': 'alvos',
   'Verwijzing verwijderd': 'Referência removida',
-  'Afbeeldingsverwijzing': 'Referência de imagem',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1682,11 +1689,11 @@ const _dutchSourceAddPt = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'cai fora da parte visível da imagem — ajuste o ponto ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'cai fora da área visível — ajuste o ponto ponto focal, o zoom ou a posição do alvo.',
   'markering': 'marcador',
   'Pijlen': 'Setas',
   'Stap-voor-stap': 'Passo a passo',
@@ -4672,5 +4679,5 @@ const _dutchSourceAddPt = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
-  'Afbeeldingsverwijzingen': 'Referências de imagem',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

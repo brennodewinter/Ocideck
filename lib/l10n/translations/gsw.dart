@@ -1644,8 +1644,15 @@ const _dutchSourceAddGsw = <String, String>{
       'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Form vo de Markierig',
+  'doel': 'Ziel',
+  'doelen': 'Ziel',
   'Verwijzing verwijderd': 'Referänz entfarnt',
-  'Afbeeldingsverwijzing': 'Bildreferänz',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1657,11 +1664,11 @@ const _dutchSourceAddGsw = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
   'markering': 'Markierig',
   'Pijlen': 'Pfiil',
   'Stap-voor-stap': 'Schritt für Schritt',
@@ -4624,5 +4631,5 @@ const _dutchSourceAddGsw = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',
-  'Afbeeldingsverwijzingen': 'Bildreferänze',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

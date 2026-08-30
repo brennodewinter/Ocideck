@@ -678,24 +678,31 @@ const _dutchSourceAddIt = {
       'cade fuori dall\'area visibile — regola il punto focale, lo zoom o la posizione del target.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cade fuori dalla parte visibile dell\'immagine — regola il punto focale, lo zoom o la posizione del target, altrimenti il marcatore non apparirà sulla diapositiva.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forma del marcatore',
+  'doel': 'bersaglio',
+  'doelen': 'bersagli',
   'Verwijzing verwijderd': 'Riferimento rimosso',
-  'Afbeeldingsverwijzing': 'Riferimento immagine',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'ha coordinate non valide e non viene disegnato — regola la posizione del bersaglio nell\'editor dei riferimenti.',
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'si riferisce a un contrassegno (A) che non è nel testo, o viceversa — aggiungi la lettera al testo o rimuovi il riferimento.',
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appare due volte su questa diapositiva — ogni contrassegno (A), (B) … può avere un solo riferimento.',
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'Questa diapositiva ha riferimenti immagine ma nessuna ancora — i riferimenti non possono essere collegati alla diapositiva. Assegna un\'ancora alla diapositiva nell\'editor.',
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Le frecce si incrociano su questa diapositiva — considera contrassegni spilla invece di frecce per la leggibilità.',
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'ricade al di fuori della parte visibile dell\'immagine — regola il punto focale, lo zoom o la posizione del bersaglio, altrimenti il contrassegno non apparirà sulla diapositiva.',
+      'cade fuori dalla parte visibile dell\'immagine — regola il punto punto focalee, lo zoom o la posizione del target, altrimenti il marcatore non apparirà sulla diapositiva.',
   'Beschrijving (voor schermlezer en export)':
-      'Descrizione (per lettore di schermo ed esportazione)',
+      'Descrizione (per lettore di schermo e export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'ricade al di fuori dell\'area visibile — regola il punto focale, lo zoom o la posizione del bersaglio.',
+      'cade fuori dall\'area visibile — regola il punto punto focalee, lo zoom o la posizione del target.',
   'markering': 'marcatore',
   'Pijlen': 'Frecce',
   'Stap-voor-stap': 'Passo dopo passo',

@@ -1658,8 +1658,15 @@ const _dutchSourceAddRo = <String, String>{
       'cade în afara zonei vizibile — ajustați punctul focal, zoom-ul sau poziția țintei.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cade în afara părții vizibile a imaginii — ajustați punctul focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forma marcatorului',
+  'doel': 'țintă',
+  'doelen': 'ținte',
   'Verwijzing verwijderd': 'Referință ștearsă',
-  'Afbeeldingsverwijzing': 'Referință imagine',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1671,11 +1678,11 @@ const _dutchSourceAddRo = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'cade în afara părții vizibile a imaginii — ajustați punctul punct focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'cade în afara zonei vizibile — ajustați punctul punct focal, zoom-ul sau poziția țintei.',
   'markering': 'marcator',
   'Pijlen': 'Săgeți',
   'Stap-voor-stap': 'Pas cu pas',
@@ -4662,5 +4669,5 @@ const _dutchSourceAddRo = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',
-  'Afbeeldingsverwijzingen': 'Referințe imagine',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

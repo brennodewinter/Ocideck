@@ -1657,24 +1657,31 @@ const _dutchSourceAddUk = <String, String>{
       'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Форма маркера',
+  'doel': 'ціль',
+  'doelen': 'цілі',
   'Verwijzing verwijderd': 'Посилання видалено',
   'Afbeeldingsverwijzing': 'Посилання на зображення',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'має недійсні координати і не малюється — виправте позицію цілі у редакторі посилань.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      'посилається на (A)-маркер, якого немає в тексті, або навпаки — вставте літеру в текст або видаліть посилання.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'зустрічається на цьому слайді двічі — кожен (A), (B) … маркер може мати лише одне посилання.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'цей слайд має посилання на зображення, але не має прив’язки — посилання неможливо прив’язати до слайда. Встановіть прив’язку для слайда в редакторі.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'стрілки на цьому слайді перетинаються — замість стрілок розгляньте маркери-шпильки для кращої читабельності.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
   'markering': 'позначка',
   'Pijlen': 'Стрілки',
   'Stap-voor-stap': 'Крок за кроком',

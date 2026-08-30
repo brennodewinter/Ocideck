@@ -1641,8 +1641,15 @@ const _dutchSourceAddId = <String, String>{
       'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'berada di luar bagian gambar yang terlihat — sesuaikan titik fokus, zoom, atau posisi target, jika tidak penanda tidak akan muncul di slide.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Bentuk penanda',
+  'doel': 'target',
+  'doelen': 'target',
   'Verwijzing verwijderd': 'Referensi dihapus',
-  'Afbeeldingsverwijzing': 'Referensi gambar',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1654,11 +1661,11 @@ const _dutchSourceAddId = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'berada di luar bagian gambar yang terlihat — sesuaikan titik fokus, zoom, atau posisi target, jika tidak penanda tidak akan muncul di slide.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'berada di luar area yang terlihat — sesuaikan titik fokus, zoom, atau posisi target.',
   'markering': 'penanda',
   'Pijlen': 'Panah',
   'Stap-voor-stap': 'Langkah demi langkah',
@@ -4629,5 +4636,5 @@ const _dutchSourceAddId = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',
-  'Afbeeldingsverwijzingen': 'Referensi gambar',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

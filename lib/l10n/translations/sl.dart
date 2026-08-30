@@ -1642,8 +1642,15 @@ const _dutchSourceAddSl = <String, String>{
       'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'pade izven vidnega dela slike — prilagodite gorišče, zum ali položaj cilja, sicer oznaka ne bo prikazana na diapozitivu.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Oblika oznake',
+  'doel': 'cilj',
+  'doelen': 'cilji',
   'Verwijzing verwijderd': 'Sklic odstranjen',
-  'Afbeeldingsverwijzing': 'Sklic na sliko',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1655,11 +1662,11 @@ const _dutchSourceAddSl = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'pade izven vidnega dela slike — prilagodite gorišče, zum ali položaj cilja, sicer oznaka ne bo prikazana na diapozitivu.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'pade izven vidnega območja — prilagodite gorišče, zum ali položaj cilja.',
   'markering': 'oznaka',
   'Pijlen': 'Puščice',
   'Stap-voor-stap': 'Korak za korakom',
@@ -4619,5 +4626,5 @@ const _dutchSourceAddSl = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
-  'Afbeeldingsverwijzingen': 'Sklice na slike',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

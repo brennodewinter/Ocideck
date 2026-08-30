@@ -680,8 +680,15 @@ const _dutchSourceAddPap = {
       'kaai paden di e área visibel — ajusta e punto focal, e zoom of e posishon di e meta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'kaai paden di e parti visibel di e imágen — ajusta e punto focal, e zoom of e posishon di e meta, of e marka no ta aparesé riba e slide.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forma di e marka',
+  'doel': 'meta',
+  'doelen': 'metanan',
   'Verwijzing verwijderd': 'Referensia kibra',
-  'Afbeeldingsverwijzing': 'Referensian di imágen',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -693,11 +700,11 @@ const _dutchSourceAddPap = {
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'kaai paden di e parti visibel di e imágen — ajusta e punto punto focal, e zoom of e posishon di e meta, of e marka no ta aparesé riba e slide.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'kaai paden di e área visibel — ajusta e punto punto focal, e zoom of e posishon di e meta.',
   'markering': 'marka',
   'Pijlen': 'Flecha',
   'Stap-voor-stap': 'Paso pa paso',
@@ -4656,5 +4663,5 @@ const _dutchSourceAddPap = {
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',
-  'Afbeeldingsverwijzingen': 'Referensian di imágen',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

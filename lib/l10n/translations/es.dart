@@ -678,24 +678,31 @@ const _dutchSourceAddEs = {
       'cae fuera del área visible — ajusta el punto focal, el zoom o la posición del objetivo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'cae fuera de la parte visible de la imagen — ajusta el punto focal, el zoom o la posición del objetivo, o el marcador no aparecerá en la diapositiva.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forma del marcador',
+  'doel': 'destino',
+  'doelen': 'destinos',
   'Verwijzing verwijderd': 'Referencia eliminada',
-  'Afbeeldingsverwijzing': 'Referencia de imagen',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'tiene coordenadas no válidas y no se dibuja — ajusta la posición del objetivo en el editor de referencias.',
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'hace referencia a una marca (A) que no está en el texto, o viceversa — añade la letra al texto o elimina la referencia.',
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'aparece dos veces en esta diapositiva — cada marca (A), (B) … solo puede tener una referencia.',
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'Esta diapositiva tiene referencias de imagen pero no ancla — las referencias no pueden vincularse a la diapositiva. Dale una ancla a la diapositiva en el editor.',
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Las flechas se cruzan en esta diapositiva — considera marcadores de chincheta en lugar de flechas para mejor legibilidad.',
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cae fuera de la parte visible de la imagen — ajusta el punto de enfoque, el zoom o la posición del objetivo, o la marca no aparecerá en la diapositiva.',
+      'cae fuera de la parte visible de la imagen — ajusta el punto punto focal, el zoom o la posición del objetivo, o el marcador no aparecerá en la diapositiva.',
   'Beschrijving (voor schermlezer en export)':
-      'Descripción (para lector de pantalla y exportación)',
+      'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'cae fuera del área visible — ajusta el punto de enfoque, el zoom o la posición del objetivo.',
+      'cae fuera del área visible — ajusta el punto punto focal, el zoom o la posición del objetivo.',
   'markering': 'marca',
   'Pijlen': 'Flechas',
   'Stap-voor-stap': 'Paso a paso',
@@ -4682,5 +4689,5 @@ const _dutchSourceAddEs = {
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'p. ej. "la placa de control con pantalla"',
-  'Afbeeldingsverwijzingen': 'Referencias de imagen',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

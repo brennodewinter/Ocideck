@@ -1619,24 +1619,30 @@ const _dutchSourceAddTlh = <String, String>{
       'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'vetlh visible mIllogh nagh be\' — focal point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'mIv Segh',
+  'doel': 'target',
+  'doelen': 'target',
   'Verwijzing verwijderd': 'reference teqmoH',
-  'Afbeeldingsverwijzing': 'mIllogh reference',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+      'mIq taghbe\' \'ej mIq tlhIHbe\' — Doch qav tu\'lu\'be\'.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+      '(A) ngoq DIvI\'be\' \'ej ngoq \'angbe\' je che\' — ngoq reference je rIntIq.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+      'DI\' wa\'logh cha\'logh nargh — (A), (B) … wa\' reference neH DIvI\'.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+      'slidevam mIllogh reference\'mey DIvI\' \'a \'ejDo\' DIvI\'be\' — reference\'mey DIvI\' slide je che\'. \'ejDo\' DIvI\' editorDaq.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+      'mIwHommey lughorni\'chu\' — mIwHommey poDqIDlu\'.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
-  'Beschrijving (voor schermlezer en export)':
-      'Description (for screen reader and export)',
+      'vetlh visible mIllogh nagh be\' — foc point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
+  'Beschrijving (voor schermlezer en export)': 'Del (HaqwI\'vaD je yIteq)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'vetlh visible mIllogh Hurgh — foc point, zoom, pagh target position choq.',
   'markering': 'per',
   'Pijlen': 'yan',
   'Stap-voor-stap': 'Yan yan',
@@ -4562,5 +4568,5 @@ const _dutchSourceAddTlh = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
-  'Afbeeldingsverwijzingen': 'mIllogh reference',
+  'Afbeeldingsverwijzingen': 'mIllogh reference\'mey',
 };

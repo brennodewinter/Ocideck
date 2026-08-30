@@ -1640,8 +1640,15 @@ const _dutchSourceAddSv = <String, String>{
       'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'faller utanför den synliga delen av bilden — justera brännpunkt, zoom eller målposition, annars visas inte markören på sliden.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Markörens form',
+  'doel': 'mål',
+  'doelen': 'mål',
   'Verwijzing verwijderd': 'Referens borttagen',
-  'Afbeeldingsverwijzing': 'Bildreferens',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1653,11 +1660,11 @@ const _dutchSourceAddSv = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'faller utanför den synliga delen av bilden — justera brännpunkt, zoom eller målposition, annars visas inte markören på sliden.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
   'markering': 'markering',
   'Pijlen': 'Pilar',
   'Stap-voor-stap': 'Steg för steg',
@@ -4615,5 +4622,5 @@ const _dutchSourceAddSv = <String, String>{
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       't.ex. "kontrollerkortet med display"',
-  'Afbeeldingsverwijzingen': 'Bildreferenser',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

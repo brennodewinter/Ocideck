@@ -1666,8 +1666,15 @@ const _dutchSourceAddEl = <String, String>{
       'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Μορφή του δείκτη',
+  'doel': 'στόχος',
+  'doelen': 'στόχοι',
   'Verwijzing verwijderd': 'Η αναφορά αφαιρέθηκε',
-  'Afbeeldingsverwijzing': 'Αναφορά εικόνας',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1679,11 +1686,11 @@ const _dutchSourceAddEl = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
   'markering': 'σήμανση',
   'Pijlen': 'Βέλη',
   'Stap-voor-stap': 'Βήμα προς βήμα',
@@ -4686,5 +4693,5 @@ const _dutchSourceAddEl = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
-  'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

@@ -681,24 +681,31 @@ const _dutchSourceAddDe = {
       'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, den Zoom oder die Zielposition an.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, den Zoom oder die Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Form der Markierung',
+  'doel': 'Ziel',
+  'doelen': 'Ziele',
   'Verwijzing verwijderd': 'Referenz entfernt',
-  'Afbeeldingsverwijzing': 'Bildreferenz',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'hat ungültige Koordinaten und wird nicht gezeichnet — passe die Zielposition im Referenzen-Editor an.',
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'verweist auf eine (A)-Markierung, die nicht im Text steht, oder umgekehrt — füge den Buchstaben im Text ein oder entferne die Referenz.',
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'kommt zweimal auf dieser Folie vor — jede Markierung (A), (B) … darf nur eine Referenz haben.',
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'Diese Folie hat Bildreferenzen, aber keinen Anker — die Referenzen können nicht mit der Folie verknüpft werden. Gib der Folie einen Anker im Editor.',
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Pfeile kreuzen sich auf dieser Folie — verwende statt Pfeile Stecknadel-Markierungen für die Lesbarkeit.',
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, Zoom oder Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
+      'fällt außerhalb des sichtbaren Teils des Bildes — passe den Fokuspunkt, den Zoom oder die Zielposition an, sonst erscheint die Markierung nicht auf der Folie.',
   'Beschrijving (voor schermlezer en export)':
-      'Beschreibung (für Screenreader und Export)',
+      'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, Zoom oder Zielposition an.',
+      'fällt außerhalb des sichtbaren Bereichs — passe den Fokuspunkt, den Zoom oder die Zielposition an.',
   'markering': 'Markierung',
   'Pijlen': 'Pfeile',
   'Stap-voor-stap': 'Schritt für Schritt',
@@ -4673,5 +4680,5 @@ const _dutchSourceAddDe = {
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
       'z. B. "die Controller-Platine mit Display"',
-  'Afbeeldingsverwijzingen': 'Bildreferenzen',
+  'Afbeeldingsverwijzingen': 'Image references',
 };

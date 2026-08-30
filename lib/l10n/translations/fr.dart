@@ -681,24 +681,31 @@ const _dutchSourceAddFr = {
       'tombe en dehors de la zone visible — ajustez le point focal, le zoom ou la position de la cible.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'tombe en dehors de la partie visible de l\'image — ajustez le point focal, le zoom ou la position de la cible, sinon le marqueur n\'apparaîtra pas sur la diapositive.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Forme du marqueur',
+  'doel': 'cible',
+  'doelen': 'cibles',
   'Verwijzing verwijderd': 'Référence supprimée',
-  'Afbeeldingsverwijzing': 'Référence d\'image',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
-      'a des coordonnées non valides et n\'est pas dessiné — ajuste la position de la cible dans l\'éditeur de références.',
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
-      'fait référence à une marque (A) qui n\'est pas dans le texte, ou inversement — ajoute la lettre dans le texte ou supprime la référence.',
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
   'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
-      'apparaît deux fois sur cette diapositive — chaque marque (A), (B) … ne peut avoir qu\'une seule référence.',
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
   'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
-      'Cette diapositive a des références d\'image mais pas d\'ancre — les références ne peuvent pas être liées à la diapositive. Donne une ancre à la diapositive dans l\'éditeur.',
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
-      'Les flèches se croisent sur cette diapositive — envisage des marqueurs épingles au lieu de flèches pour la lisibilité.',
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'tombe en dehors de la partie visible de l\'image — ajuste le point focal, le zoom ou la position de la cible, sinon la marque n\'apparaîtra pas sur la diapositive.',
+      'tombe en dehors de la partie visible de l\'image — ajustez le point point focal, le zoom ou la position de la cible, sinon le marqueur n\'apparaîtra pas sur la diapositive.',
   'Beschrijving (voor schermlezer en export)':
       'Description (pour lecteur d\'écran et export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'tombe en dehors de la zone visible — ajuste le point focal, le zoom ou la position de la cible.',
+      'tombe en dehors de la zone visible — ajustez le point point focal, le zoom ou la position de la cible.',
   'markering': 'repère',
   'Pijlen': 'Flèches',
   'Stap-voor-stap': 'Étape par étape',

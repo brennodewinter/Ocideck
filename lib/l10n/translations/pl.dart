@@ -1653,8 +1653,15 @@ const _dutchSourceAddPl = <String, String>{
       'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'wypada poza widoczną częścią obrazu — dostosuj punkt środkowy, zoom lub pozycję celu, w przeciwnym razie znacznik nie pojawi się na slajdzie.',
+  'Doel toevoegen': 'null',
+  'Doel verwijderen': 'null',
+  'Verwijzing verwijderen': 'null',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'null',
+  'Vorm van de markering': 'Kształt znacznika',
+  'doel': 'cel',
+  'doelen': 'cele',
   'Verwijzing verwijderd': 'Odwołanie usunięte',
-  'Afbeeldingsverwijzing': 'Odwołanie do obrazu',
+  'Afbeeldingsverwijzing': 'Image reference',
   'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
       'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
   'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
@@ -1666,11 +1673,11 @@ const _dutchSourceAddPl = <String, String>{
   'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
       'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
   'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+      'wypada poza widoczną częścią obrazu — dostosuj punkt środkowy, zoom lub pozycję celu, w przeciwnym razie znacznik nie pojawi się na slajdzie.',
   'Beschrijving (voor schermlezer en export)':
       'Description (for screen reader and export)',
   'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focus point, zoom or target position.',
+      'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
   'markering': 'znacznik',
   'Pijlen': 'Strzałki',
   'Stap-voor-stap': 'Krok po kroku',
@@ -4642,5 +4649,5 @@ const _dutchSourceAddPl = <String, String>{
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
-  'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
+  'Afbeeldingsverwijzingen': 'Image references',
 };
