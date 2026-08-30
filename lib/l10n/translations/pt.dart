@@ -1663,8 +1663,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Rodar altera o próprio ficheiro de imagem, ao contrário de recortar e ampliar. Uma imagem usada por outros diapositivos ou decks também roda aí.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Rodar escreve uma cópia rodada ao lado do original; o teu ficheiro original fica inalterado.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

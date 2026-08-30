@@ -1652,8 +1652,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Rotirea modifică însuși fișierul imaginii, spre deosebire de decupare și mărire. O imagine folosită de alte diapozitive sau deckuri se rotește și acolo.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Rotirea scrie o copie rotită lângă original; fișierul tău original rămâne neschimbat.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'cade în afara zonei vizibile — ajustați punctul focal, zoom-ul sau poziția țintei.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

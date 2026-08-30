@@ -90,7 +90,7 @@ they live in the repository. See [How these documents are maintained](#how-these
 | [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Research/design contract: how Rocky reports work via API and JSON export, and what that means for a later live OpenKAT integration in OciDeck. Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md). |
 | [OPENKAT_LIVE_UX.md](design/OPENKAT_LIVE_UX.md) | Design appendix, in Dutch, to the OpenKAT build: what the live integration looks like from the user's side. |
 | [IMAGE_CALLOUTS.md](design/IMAGE_CALLOUTS.md) | Revision 5, implemented and under acceptance: tying a bullet to a part of the picture beside it, as a pin, a region or an arrow. Carries the format contract and the shared geometry rules. |
-| [IMAGE_ROTATION.md](design/IMAGE_ROTATION.md) | Decided 2026-08-30, not yet built: rotating a picture in the image dialog rewrites the user's file. Three shapes weighed; copy-on-rotate chosen. |
+| [IMAGE_ROTATION.md](design/IMAGE_ROTATION.md) | Decided and built 2026-08-30: rotating a picture used to rewrite the user's file. Three shapes weighed; copy-on-rotate chosen and shipped. |
 | [GANTT_SLIDETYPE.md](design/GANTT_SLIDETYPE.md) | Implemented in #1246: the Gantt slide type, stored as an ordinary Markdown table and rendered through generated Mermaid. |
 | [PROVENANCE_SIGNATURE.md](design/PROVENANCE_SIGNATURE.md) | Partly implemented: cryptographic owner provenance on a distributed deck (format, crypto and service on `main`; the signing UI is next). |
 | [NATIVE_CALLS.md](design/NATIVE_CALLS.md) | Design proposal, partly built (F1–F3.4a landed): calls inside OciDeck over an XMPP spine. |

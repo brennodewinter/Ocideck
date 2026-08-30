@@ -2082,6 +2082,20 @@ that before deciding whether this alpha fits what you are doing.
   kwartslag wordt opnieuw uit het origineel afgeleid. Het bouwen daarvan volgt
   apart — deze wijziging verandert het gedrag nog niet.
 
+- **Draaien laat je afbeelding voortaan met rust (optie A).** `Rechtsom` en
+  `Linksom` schrijven nu een gedraaide kopie naast het origineel — `foto.jpg`
+  wordt `foto.r90.jpg` — en de dia gaat daarnaar wijzen. Het bestand dat je
+  binnenhaalde blijft staan, en elke andere dia of elk ander deck dat het
+  gebruikt merkt niets. Draai je nog eens, dan telt de hoek op in één kopie
+  (`foto.r180.jpg`) in plaats van te stapelen; draai je helemaal terug, dan wijst
+  de dia weer naar het origineel in plaats van een vierde identiek bestand te
+  krijgen. Op web hetzelfde via een nieuw `mem:`-pad in plaats van `replace`.
+  De naamregel staat als pure functies (`rotatedCopyName`,
+  `splitRotationSuffix`) apart getoetst, want dáár zit het gedrag dat stil kan
+  rotten. Wat nog niet meereist: de doelen van beeldverwijzingen staan vast tegen
+  de oude oriëntatie — dat gold ook vóór deze wijziging, en staat als open punt
+  in IMAGE_ROTATION.md §9.
+
 - **Documentatie nagelopen tegen de code (2026-08-30).** Dertien afwijkingen
   tussen `docs/` en wat de app doet, elk tegen de code getoetst en gedateerd
   gecorrigeerd in de tekst zelf. De zwaarste drie: de USER_GUIDE noemde vier

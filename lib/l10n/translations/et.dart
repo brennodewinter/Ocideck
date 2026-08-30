@@ -1629,8 +1629,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Pööramine muudab pildifaili ennast, erinevalt kärpimisest ja suumimisest. Pilt, mida kasutavad teised slaidid või deck\'id, pöördub ka seal.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Pööramine kirjutab pööratud koopia originaali kõrvale; teie algne fail jääb muutmata.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'jääb nähtavast alast väljapoole — kohenda fokaalpunkti, suumi või sihtasukohta.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

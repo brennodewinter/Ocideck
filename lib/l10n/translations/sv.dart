@@ -1634,8 +1634,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
-  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
-      'Rotering ändrar själva bildfilen, till skillnad från beskärning och zoomning. En bild som andra bilder eller decks använder roteras även där.',
+  'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
+      'Rotering skriver en vriden kopia bredvid originalet; din ursprungliga fil lämnas oförändrad.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

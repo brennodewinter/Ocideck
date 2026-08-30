@@ -499,6 +499,11 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         imageFocalX: result.focalX,
         imageFocalY: result.focalY,
         imageZoom: result.imageSize,
+        // Draaien schrijft een afgeleide kopie en laat het origineel staan
+        // (IMAGE_ROTATION.md, optie A). Let op: de callout-targets van deze dia
+        // staan in beeldruimte van de oude oriëntatie en draaien niet mee — zie
+        // de waarschuwing in de dialoog en §9 van het ontwerp.
+        imagePath: result.rotatedImagePath,
       ),
     );
   }
