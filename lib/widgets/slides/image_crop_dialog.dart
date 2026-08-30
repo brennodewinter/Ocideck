@@ -66,7 +66,7 @@ Future<ImageCropResult?> showImageCropDialog(
   required double focalY,
   int minZoom = 100,
   int maxZoom = 400,
-  Color backgroundColor = Colors.black,
+  Color? backgroundColor,
 }) {
   return showDialog<ImageCropResult>(
     context: context,
@@ -107,7 +107,7 @@ class _ImageCropDialog extends StatefulWidget {
   final double focalY;
   final int minZoom;
   final int maxZoom;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   const _ImageCropDialog({
     required this.imagePath,
@@ -352,6 +352,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     setState(() {
       _fx = 0.5;
       _fy = 0.5;
+      _size = widget.imageSize;
       if (_rotationQuarterTurns != 0) {
         _rotationQuarterTurns = 0;
         // Reset naar originele afbeelding.
@@ -467,7 +468,11 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  ColoredBox(color: widget.backgroundColor),
+                  ColoredBox(
+                    color:
+                        widget.backgroundColor ??
+                        Theme.of(context).colorScheme.surface,
+                  ),
                   _stageContent(frameW, frameH),
                   // Rule-of-thirds guides make it easy to line a subject up.
                   const IgnorePointer(child: _ThirdsOverlay()),
@@ -518,28 +523,28 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   ),
                 ),
               ),
-              if (!_cover) ...[
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(Icons.zoom_out, size: 18, color: AppTheme.slate500),
-                    Expanded(
-                      child: Slider(
-                        value: _size.toDouble().clamp(
-                          widget.minZoom.toDouble(),
-                          widget.maxZoom.toDouble(),
-                        ),
-                        min: widget.minZoom.toDouble(),
-                        max: widget.maxZoom.toDouble(),
-                        divisions: (widget.maxZoom - widget.minZoom) ~/ 10,
-                        label: '$_size%',
-                        onChanged: (v) => setState(() => _size = v.round()),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(Icons.zoom_out, size: 18, color: AppTheme.slate500),
+                  Expanded(
+                    child: Slider(
+                      // In cover-modus (_size == 0) toont de schuif op minZoom;
+                      // slepen verlaat cover en stelt een echte zoom in.
+                      value: _size.toDouble().clamp(
+                        widget.minZoom.toDouble(),
+                        widget.maxZoom.toDouble(),
                       ),
+                      min: widget.minZoom.toDouble(),
+                      max: widget.maxZoom.toDouble(),
+                      divisions: (widget.maxZoom - widget.minZoom) ~/ 10,
+                      label: _cover ? '${widget.minZoom}%' : '$_size%',
+                      onChanged: (v) => setState(() => _size = v.round()),
                     ),
-                    Icon(Icons.zoom_in, size: 18, color: AppTheme.slate500),
-                  ],
-                ),
-              ],
+                  ),
+                  Icon(Icons.zoom_in, size: 18, color: AppTheme.slate500),
+                ],
+              ),
               if (_canRotate && _originalBytes != null) ...[
                 const SizedBox(height: 8),
                 Row(
