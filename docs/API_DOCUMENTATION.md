@@ -1,6 +1,6 @@
 # OciDeck — API Documentation
 
-> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state reference for internal APIs · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 This document describes the key internal APIs and interfaces in the OciDeck
 codebase. OciDeck is not a library with a published public API; the surfaces
@@ -244,16 +244,20 @@ the bytes are pulled into memory, and `userFacingError` renders it through
 `packageBudgetMessage` (#1046).
 
 ### ExportService
-`lib/services/export_service.dart` — export to PDF, PPTX, and HTML:
+`lib/services/export_service.dart` — export to PDF, PPTX, ODP, HTML and LaTeX:
 
 ```dart
-// ExportFormat is { pdf, pptx, html }. Images are pre-rendered by the caller.
+// ExportFormat is { pdf, pptx, odp, html, latex }. Images are pre-rendered by
+// the caller.
 Future<ExportResult> export(
   String deckPath,
   ExportFormat format,
   List<Uint8List> images, {
   ExportBundle? audience, /* … */ });
 ```
+
+*(Corrected 2026-08-30: the comment named three of the five formats — `odp` and
+`latex` had been added to the enum without this snippet following.)*
 
 The HTML markdown and the PPTX speaker notes come from `audience`, never from
 loose strings: an `ExportBundle` cannot be built without an `AudienceDeck`, and

@@ -1,6 +1,6 @@
 # OciDeck — Known limitations
 
-> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-07-31 · **Published by:** Stichting LibreKAT
+> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 This page exists so you do not have to assemble it yourself. Every item below
 was already written down somewhere in this repository; they were spread across
@@ -12,7 +12,7 @@ fits what you are doing.
 
 ## Releases are alpha and unsigned
 
-Releases are tagged (latest `0.1.1`, 2026-07-27) and every release carries the
+Releases are tagged (latest `0.4.10`, 2026-08-25) and every release carries the
 app for all four platforms — macOS, Windows, Linux and web — plus both SBOM
 formats and a `SHA256SUMS` list. That list is itself signed with minisign
 (`SHA256SUMS.minisig`, public key `minisign.pub` in the repository root), so the
@@ -80,14 +80,19 @@ to LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from
 "always shows source" once the drawings landed, and corrected again once the
 platform limits were actually measured.)*
 
-## Exporting a document does not work on the web build
+## Exporting a document on the web build arrives as a download, not a saved file
 
-Not the PDF and not the other three formats either. The browser file dialog
-cannot be asked for a save location the way the desktop one can — it wants the
-bytes up front — so the export reports that it did not succeed and leaves the
-document untouched. It used to hang on a spinner instead, saying nothing. Making
-it work would mean handing the finished bytes to the browser as a download; that
-is a separate change. *(Added 2026-08-20.)*
+All six formats export in the browser, but you cannot point them at a folder: the
+browser file dialog wants the bytes up front rather than a save location, so the
+finished bytes are handed to the browser as an ordinary download and land wherever
+your browser puts downloads. The PDF is the one to watch — on the web build there
+is no hidden renderer for Mermaid diagrams and formulas, so those print their
+source instead of being drawn (the row below).
+
+*(Added 2026-08-20 as "exporting a document does not work on the web build" —
+then the export reported failure and left the document untouched. Corrected
+2026-08-30: #1720 made it work through a browser download on 2026-08-22, and this
+page had gone on saying it did not.)*
 
 ## A document's PDF is set in a standard face, not in your document's font
 
@@ -204,12 +209,20 @@ gets the wrong base direction. → [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
 ## The translations have not been reviewed
 
-Roughly 71,500 translations across 32 languages, produced during AI-assisted
-development and never reviewed word by word by a native speaker. A build gate
-catches a *missing* string, not a wrong one. Separately, about fifty field
-labels in the slide editors and a handful of blocking messages still show their
-Dutch source text whatever your language setting. →
+Roughly 107,800 translated strings across 32 interface languages (counted
+2026-08-30; Dutch is the source the other thirty-one are translated from),
+produced during AI-assisted development and never reviewed word by word by a
+native speaker. A build gate catches a *missing* string, not a wrong one. →
 [README.md](../README.md#contributing)
+
+*(Corrected 2026-08-30 on two counts. The figure said 71,500 and had grown by
+half since it was written — it is a count of table entries and moves with every
+string added, so treat the date as part of the number. And this said "about fifty
+field labels in the slide editors and a handful of blocking messages still show
+their Dutch source text whatever your language setting": that is no longer true.
+An editor field label reaches the screen through `l10n.d(widget.label)` like any
+other string, and `test/app_localizations_test.dart` fails the build when such a
+source key is missing from any language it has to cover.)*
 
 ## The web build does less than the desktop build
 

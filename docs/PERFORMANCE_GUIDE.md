@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-10 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -177,12 +177,15 @@ where a deck actually uses diagrams or math.
 ### Codebase & test suite
 | Item | Value |
 |---|---|
-| `lib/` Dart files / lines | ~545 files, ~201 000 lines |
-| Test files | ~356 |
-| `test(` / `testWidgets(` cases | ~2 510 / ~750 |
+| `lib/` Dart files / lines | ~1 143 files, ~430 000 lines |
+| Test files | ~1 022 |
+| `test(` / `testWidgets(` cases | ~8 030 / ~2 030 |
 
-Counted on 2026-07-19. These grow with every feature; treat them as an order of
-magnitude, not a current figure.
+Counted on 2026-08-30. These grow with every feature; treat them as an order of
+magnitude, not a current figure. *(The row above held the 2026-07-19 counts —
+545 files, 356 test files — and six weeks had roughly doubled every one of them.
+"Order of magnitude" is the right caveat, but it stops being a caveat when the
+figure is off by a factor of two, so re-count it when you touch this table.)*
 
 ### Measured timing
 

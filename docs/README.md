@@ -1,6 +1,6 @@
 # OciDeck — Documentation
 
-> **Status:** index of this folder, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** index of this folder, current · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 OciDeck is a privacy-first Marp presentation builder for desktop and web, with no
 application backend — everything runs locally. This folder holds the project
@@ -26,6 +26,7 @@ documentation. Start here and jump to what you need.
 | [PRIVACY.md](PRIVACY.md) | What data stays local, what leaves only on your action, and how. |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | What is accessible, and — the longer half — what is not. |
 | [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) | Fixes for common problems. |
+| [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md) | What is not there yet, in one list, so you do not meet it one surprise at a time. |
 | [FILE_FORMAT.md](FILE_FORMAT.md) | The on-disk Markdown/Marp format — the stable contract. |
 
 ## For contributors & developers
@@ -50,7 +51,13 @@ documentation. Start here and jump to what you need.
 | [SECURITY_DESIGN.md](SECURITY_DESIGN.md) | Security principles and the concrete mechanisms that enforce them. |
 | [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) | Dependency licence compliance. |
 | [SBOM.md](SBOM.md) | The Software Bill of Materials (EU CRA). |
+| [SECURITY_REVIEW_APT.md](SECURITY_REVIEW_APT.md) | A review of the app against a targeted-attacker threat model, and what it found. |
 | [GLOSSARY.md](GLOSSARY.md) | OciDeck-specific terms in one place. |
+
+*(Corrected 2026-08-30: two documents in this folder had no line in this index —
+`KNOWN_LIMITATIONS.md`, which is bundled in the app, translated into Dutch and
+linked from four other pages, and `SECURITY_REVIEW_APT.md`. An index that is
+silently partial sends a reader looking for something that is there.)*
 
 ## Design notes (`design/`)
 

@@ -1,6 +1,6 @@
 # OciDeck — User Guide
 
-> **Status:** current-state user manual · **Status last reviewed:** 2026-08-06 · **Published by:** Stichting LibreKAT
+> **Status:** current-state user manual · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -35,12 +35,13 @@
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
-*(Added 2026-07-22: this document is around 3,800 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24 and again 2026-07-30; it said 2,992 and then 3,350, each true when written.)*
+*(Added 2026-07-22: this document is around 5,300 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24, 2026-07-30 and 2026-08-30; it said 2,992, then 3,350, then 3,800, each true when written.)*
 
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
-(on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
-HTML file (one file, images and all — see [Exporting](#exporting)).
+(on one or two screens), and export to Markdown, PDF, PPTX, OpenDocument (ODP),
+LaTeX/Beamer, a single offline HTML file (one file, images and all), or a portable
+`.ocideck` package — see [Exporting](#exporting).
 Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 A saved project writes a `.marprc.yml` next to the `.md` that registers the
 generated theme, so the plain Marp CLI invocation — run **from the project
@@ -63,7 +64,7 @@ flowchart LR
     Edit --> Preview[Live preview]
     Preview --> Edit
     Edit --> Present[Present on one or two screens]
-    Edit --> Export[Export to Markdown, PDF, PPTX or offline HTML]
+    Edit --> Export[Export to Markdown, PDF, PPTX, ODP, Beamer, offline HTML or a package]
     Export --> Reuse[Reopen in OciDeck or another Marp tool]
 ```
 
@@ -698,7 +699,9 @@ bullet columns**, **bullets + image**, **two images**, **large image**, **video*
 **quote**, **table**, **source code**, **chart** (bar, horizontal
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
 spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual — plus
-six statistical types when the Procesverbetering module is on), **cockpit** (a
+eight statistical types when the Procesverbetering module is on; *corrected
+2026-08-30, this said six while `chartTypeRequiresProcesverbetering` named eight,
+and the module's own section further down says eight*), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
@@ -868,14 +871,29 @@ falls outside the frame — handy for full-bleed photos. Leave it off to show th
 scales it from edge-to-edge fit down to smaller, or zoomed in past the frame.
 An optional title overlay can sit on top.
 
-**Crop to fit.** When a picture is cropped (slide-filling or zoomed in) and the
-wrong part shows, click **Bijsnijden** (Crop). A live editor opens with the image
-inside its slot: **drag** the picture to choose which part stays in view, and —
-for the large image and title background — **zoom** in the same dialog. The crop
-is non-destructive: it stores a focal point, never rewrites the image file, and
-travels with the deck in the `.md`. The same **Bijsnijden** button is on the
-title background, the bullets-and-image panel, and each image of a two-images
-slide (remote/URL images can't be cropped this way).
+**Adjusting the picture.** When a picture is cropped (slide-filling or zoomed
+in) and the wrong part shows, click **Afbeelding aanpassen** (Adjust image). A
+live editor opens with the image inside its slot: **drag** the picture to choose
+which part stays in view, **zoom** with the slider between the two magnifier
+icons, and turn the picture a quarter at a time with **Linksom** / **Rechtsom**
+(anticlockwise / clockwise). The same button is on the title background, the
+bullets-and-image panel, and each image of a two-images slide (remote/URL images
+can't be adjusted this way).
+
+**Two of the three are non-destructive, one is not.** The crop and the zoom store
+a focal point and a scale in the deck's `.md` and never touch the image file.
+**Rotating does rewrite the file on disk** — it has to, because the turn has to
+survive into every export and every other deck that uses the same picture — and
+it is written when you press **Klaar** (Done), not while you preview. **Annuleren**
+(Cancel) leaves the file as it was. Turning a picture you did not shoot yourself,
+or one shared by several decks, changes it for all of them. Rotation is offered
+only for a picture OciDeck can write to: not for a bundled sample image and not
+for one loaded from a URL, where the buttons are absent rather than failing.
+
+*(Corrected 2026-08-30: this paragraph told you to click **Bijsnijden**, a button
+that has not carried that label in any of the five editors, and said the dialog
+"never rewrites the image file" while the rotate buttons in that same dialog do
+exactly that.)*
 
 ### Choice menu slides (#1162)
 
@@ -2967,11 +2985,16 @@ mirrored) display. Notes:
 
 A big Mermaid diagram (a detailed flowchart, a wide Gantt) shows at a readable
 size during the presentation and can be **zoomed and panned** to bring a part up
-close: pinch on the trackpad, scroll with the mouse, or use the three buttons on
-the diagram — **zoom in**, **zoom out**, and **fit** (back to the readable
-default). With a beamer connected, the audience window follows along: your zoom
-and scroll position are mirrored, so the room sees exactly the part you are
-looking at. Moving to another slide resets the zoom.
+close: pinch on the trackpad, scroll with the mouse, press `+` and `-` on the
+keyboard, or use the three buttons on the diagram — **zoom in**, **zoom out**,
+and **fit** (back to the readable default). With a beamer connected, the
+audience window follows along: your zoom and scroll position are mirrored, so the
+room sees exactly the part you are looking at. Moving to another slide resets the
+zoom.
+
+*(The keyboard route was left out of this paragraph and out of SHORTCUTS.md until
+2026-08-30; it is the only one of the four that works without a pointing
+device.)*
 
 ### Annotating while presenting
 
@@ -3042,6 +3065,12 @@ Export to:
 
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app
   slide renderer.
+- **OpenDocument (ODP)** — the same one-picture-per-slide approach as PPTX, in
+  the open OpenDocument format that LibreOffice Impress reads. The recipient sees
+  the deck exactly as it looks in the app; an image callout's description travels
+  as the picture's alt text. *(Added 2026-08-24, #1769; listed here 2026-08-30 —
+  the export dialog had offered it for six days while this list went straight
+  from PPTX to LaTeX.)*
 - **LaTeX (Beamer)** — a `.tex` file with a Beamer preamble and one frame per
   slide. Maths (`$...$` / `$$...$$`) passes through natively; images are
   referenced by relative path (keep them next to the `.tex`). Compile with
@@ -4742,7 +4771,20 @@ your source. The export dialog asks two things:
   safe links) and uses the band's text and background colours; inserted document
   field values remain literal text. Compile with `pdflatex` or `xelatex` using a
   standard TeX Live installation. *(Added 2026-08-07; list, table and document
-  band parity corrected 2026-08-22.)*
+  band parity corrected 2026-08-22.)* **ePub (`.epub`)** is an EPUB 3 document
+  with reflowable text for e-readers, tablets and phones — the headings become
+  the navigation tree, the notes sit at the back as a numbered list, and images
+  travel as separate files inside the ePub. The text is readable XHTML in a ZIP,
+  so a redacted value that slips in anyway is as readable there as in the `.md`.
+  *(Added 2026-08-24, #1761.)* **ODT (`.odt`)** is an OpenDocument Text file that
+  opens in LibreOffice or Word — editable, with native footnotes and headings
+  carrying outline levels. It is the open counterpart of a Word file.
+  *(Added 2026-08-24, #1768.)*
+
+  *(Corrected 2026-08-30: this list named four formats while the export dialog
+  has offered six since 2026-08-24. ePub had been written into the Dutch variant
+  only, where the next `make translate-docs` run would have overwritten it — a
+  new format belongs in this English source first.)*
 
 #### The PDF
 

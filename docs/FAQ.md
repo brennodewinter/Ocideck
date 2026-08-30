@@ -1,6 +1,6 @@
 # OciDeck — Frequently Asked Questions
 
-> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state answers; where one conflicts with the code, the code wins · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 This document answers common questions about OciDeck's features, usage, and functionality.
 
@@ -33,7 +33,7 @@ nothing and lets you use, study, change and redistribute it.
 On signing: the release manifest `SHA256SUMS` is signed with minisign, so a
 download's provenance is verifiable (see
 [BUILD.md](BUILD.md#signing-status-of-the-published-artifacts)). Releases are
-tagged (latest `0.1.1`, 2026-07-27) and carry the app for all four platforms; the
+tagged (latest `0.4.10`, 2026-08-25) and carry the app for all four platforms; the
 macOS build is additionally signed and notarised and opens normally, while the
 **Windows and Linux binaries are not code-signed** — Windows warns on first
 launch. Windows offers both an installer (shortcut, file associations, clean
@@ -42,7 +42,10 @@ uninstall) and a portable zip you can just unpack; neither updates itself. You c
 [README](../README.md). *Corrected 2026-07-28: this said "nothing to download
 yet" and "no version has been tagged" — stale since `0.1.0` on 2026-07-25.
 The earlier correction (2026-07-21) about "completely free to download" is left
-standing per the house rule.*
+standing per the house rule. Corrected again 2026-08-30: the latest release read
+`0.1.1` (2026-07-27) while the published latest was `0.4.10` (2026-08-25) — a
+version number in prose goes stale on every release, so re-read it from the
+release list when you touch this paragraph.*
 
 ## Security and Privacy
 
@@ -147,6 +150,12 @@ OciDeck supports the following chart types:
 - Waterfall charts
 - Heatmaps (which double as risk matrices)
 - Combo charts (bars plus the last series drawn as a line on a second axis)
+- Target-and-actual (bullet) charts
+
+With the **Procesverbetering** module switched on, eight statistical types join
+the list: control chart, histogram, Pareto, run chart, boxplot, probability plot,
+main effects and interaction. *(Added 2026-08-30: this list named ten of the
+fourteen ordinary types and none of the eight from the module.)*
 
 ### How does the AI assistant work?
 The optional AI assistance requires explicit user consent:

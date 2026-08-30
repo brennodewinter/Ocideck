@@ -4,7 +4,7 @@
 
 # OciDeck — Documentation
 
-> **Status:** index van deze map, actueel · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** index van deze map, actueel · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
 
 OciDeck is een privacy-eerst Marp-presentatiebouwer voor desktop en web, zonder
 applicatie-backend — alles draait lokaal. Deze map bevat de projectdocumentatie.
@@ -30,6 +30,7 @@ Begin hier en spring naar wat je nodig hebt.
 | [PRIVACY.md](PRIVACY.md) | Welke data lokaal blijft, wat alleen op jouw actie vertrekt, en hoe. |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | Wat toegankelijk is, en — de langere helft — wat niet. |
 | [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) | Oplossingen voor veelvoorkomende problemen. |
+| [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md) | Wat er nog niet is, in één lijst, zodat je het niet één verrassing per keer tegenkomt. |
 | [FILE_FORMAT.md](FILE_FORMAT.md) | Het Markdown/Marp-formaat op schijf — het stabiele contract. |
 
 ## Voor bijdragers en ontwikkelaars
@@ -54,7 +55,14 @@ Begin hier en spring naar wat je nodig hebt.
 | [SECURITY_DESIGN.md](SECURITY_DESIGN.md) | Beveiligingsprincipes en de concrete mechanismen die ze afdwingen. |
 | [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) | Licentiecompliance van afhankelijkheden. |
 | [SBOM.md](SBOM.md) | De Software Bill of Materials (EU CRA). |
+| [SECURITY_REVIEW_APT.md](SECURITY_REVIEW_APT.md) | Een toetsing van de app tegen een gericht-aanvallersdreigingsmodel, en wat die opleverde. |
 | [GLOSSARY.md](GLOSSARY.md) | OciDeck-specifieke termen op één plek. |
+
+*(Gecorrigeerd 2026-08-30: twee documenten in deze map hadden geen regel in deze
+index — `KNOWN_LIMITATIONS.md`, dat in de app is gebundeld, naar het Nederlands is
+vertaald en vanaf vier andere pagina's wordt aangehaald, en `SECURITY_REVIEW_APT.md`.
+Een index die stilzwijgend onvolledig is, stuurt een lezer op zoek naar iets dat er
+gewoon staat.)*
 
 ## Ontwerpnotities (`design/`)
 

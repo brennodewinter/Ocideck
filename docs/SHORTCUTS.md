@@ -1,6 +1,6 @@
 # OciDeck — Keyboard shortcuts
 
-> **Status:** reference, current · **Status last reviewed:** 2026-08-02 · **Published by:** Stichting LibreKAT
+> **Status:** reference, current · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
 
 `Ctrl` is shown for Windows/Linux; use `Cmd` (⌘) on macOS.
 
@@ -119,6 +119,7 @@ View & timing:
 | `A` | Auto-advance on/off |
 | `L` | Loop (restart after the last slide) on/off |
 | `M` | Advance automatically after a slide's audio finishes |
+| `+` · `-` | Zoom a Mermaid diagram on the current slide in · out (numpad `+`/`-` too). The keys do nothing on a slide without a zoomable diagram, and the zoom mirrors to the beamer *(listed 2026-08-30; the keys were there and undocumented)* |
 | `H` · `?` | Show the in-app shortcut cheatsheet |
 | `Ctrl/Cmd + W` | Close the presentation (works from the presenter and the beamer window) |
 

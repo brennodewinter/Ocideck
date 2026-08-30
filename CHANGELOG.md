@@ -2067,6 +2067,25 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentatie nagelopen tegen de code (2026-08-30).** Dertien afwijkingen
+  tussen `docs/` en wat de app doet, elk tegen de code getoetst en gedateerd
+  gecorrigeerd in de tekst zelf. De zwaarste drie: de USER_GUIDE noemde vier
+  documentexportformaten terwijl de dialoog er zes aanbiedt (ePub stond alléén
+  in de Nederlandse variant, waar `make translate-docs` hem had overschreven),
+  ODP ontbrak in de deck-exportlijst, en de alinea over bijsnijden stuurde de
+  lezer naar een knop **Bijsnijden** die in geen van de vijf editors zo heet —
+  en beloofde dat de dialoog "nooit het afbeeldingsbestand herschrijft", terwijl
+  de draaiknoppen ernaast dat wél doen. Verder: KNOWN_LIMITATIONS zei nog dat
+  documentexport niet werkt op web (opgelost in #1720) en noemde `0.1.1` als
+  laatste release (het is `0.4.10`, ook in README en FAQ); het aantal vertalingen
+  stond op 71.500 tegen ~107.800 nu, en de vijftig Nederlandse veldlabels die
+  het noemde worden allang door `l10n.d()` gehaald; ARCHITECTURE miste `collab/`,
+  `xmpp/` en `meetings/` én vijftien `services/`-submappen; CHECKS sprak van 24
+  slidetypes waar de golden-lus over `SlideType.values` (32) loopt; de
+  toetsenbordzoom `+`/`-` op een Mermaid-dia stond nergens; de docs-index liet
+  KNOWN_LIMITATIONS en SECURITY_REVIEW_APT weg; en een regel in de Nederlandse
+  gids begon met `#672`, wat in de lezer als kop rendert.
+
 - **Image callouts: vaste-rail pijlen (#1829).** De derde
   presentatiemodus voor image-references: pijlen van een vaste rail aan
   de linkerrand van de afbeelding (de rechterrand van de bullet-kolom)
