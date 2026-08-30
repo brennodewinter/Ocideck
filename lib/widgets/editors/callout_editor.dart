@@ -4,17 +4,20 @@
 // point target by clicking on the image, edit the description, delete.
 // Opens as a dialog showing the real image with click-to-place markers.
 
-import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import '../../models/slide.dart';
 import '../../models/image_callout.dart';
 import '../../services/callout_reference_allocator.dart';
+import '../../services/image_viewport_geometry.dart';
 import '../../services/web_asset_store.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
-import '../../utils/image_limits.dart';
+import '../../utils/image_dimensions.dart';
 import '../../utils/project_path.dart';
+import '../../widgets/editors/callout_marker_helpers.dart';
+import '../../widgets/slides/previews/callout_overlay.dart'
+    show calloutImageProvider, resolveIntrinsicSize;
 
 /// A dialog for editing image callouts on a bulletsImage slide.
 ///
@@ -56,7 +59,14 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   int? _selectedCalloutIndex;
 
   /// Region being dragged out — null when not dragging.
-  _DragRegion? _dragRegion;
+  DragRegion? _dragRegion;
+
+  /// Intrinsieke beeldmaat — nodig om doelen door de geometriecontract te
+  /// mappen in plaats van ze blind in slot-ruimte te plaatsen (#1853). Zonder
+  /// dit staat een marker op de verkeerde plek: de editor rendert cover, maar
+  /// plaatst markers alsof het beeld de slot precies vult.
+  Size? _intrinsic;
+  bool _resolving = false;
 
   @override
   void initState() {
@@ -65,6 +75,59 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     _bullets = List.of(widget.slide.bullets);
     _presentation = widget.slide.calloutPresentation;
     _reveal = widget.slide.calloutReveal;
+    _resolveIntrinsic();
+  }
+
+  @override
+  void didUpdateWidget(CalloutEditorDialog oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.slide.imagePath != widget.slide.imagePath ||
+        oldWidget.projectPath != widget.projectPath) {
+      _intrinsic = null;
+      _resolveIntrinsic();
+    }
+  }
+
+  void _resolveIntrinsic() {
+    if (_resolving) return;
+    final path = widget.slide.imagePath;
+    // #1853: lees de intrinsieke maat uit de header waar mogelijk —
+    // synchroon, zonder op de image-decode-pipeline te wachten. Voor
+    // `mem:`-paden staan de bytes direct in de WebAssetStore; voor
+    // bestanden op schijf leest readImageDimensions de header. Alleen
+    // `asset:`-paden (gebundelde logo's) vallen terug op de provider.
+    if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      if (bytes != null) {
+        final dims = imageDimensionsFromBytes(bytes);
+        if (dims != null) {
+          _intrinsic = Size(dims.width.toDouble(), dims.height.toDouble());
+          return;
+        }
+      }
+      return;
+    }
+    if (!isBundledAssetPath(path)) {
+      final resolved = resolveSlideAssetPath(path, widget.projectPath);
+      if (resolved == null) return;
+      final dims = readImageDimensions(resolved);
+      if (dims != null) {
+        _intrinsic = Size(dims.width.toDouble(), dims.height.toDouble());
+      }
+      return;
+    }
+    // asset: — gebundeld, valt terug op de image provider.
+    final provider = calloutImageProvider(path, widget.projectPath);
+    if (provider == null) return;
+    _resolving = true;
+    resolveIntrinsicSize(provider, (size, synchronous) {
+      _resolving = false;
+      if (synchronous) {
+        _intrinsic = size;
+        return;
+      }
+      if (mounted) setState(() => _intrinsic = size);
+    });
   }
 
   void _emit() {
@@ -186,7 +249,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   void _resizeRegion(
     int calloutIndex,
     int targetIndex,
-    _Handle handle,
+    Handle handle,
     double x,
     double y,
   ) {
@@ -198,20 +261,20 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
       final r = targets[targetIndex] as CalloutRegion;
       double nx = r.x, ny = r.y, nw = r.w, nh = r.h;
       switch (handle) {
-        case _Handle.topLeft:
+        case Handle.topLeft:
           nx = cx.clamp(0.0, r.x + r.w - 0.02);
           ny = cy.clamp(0.0, r.y + r.h - 0.02);
           nw = r.x + r.w - nx;
           nh = r.y + r.h - ny;
-        case _Handle.topRight:
+        case Handle.topRight:
           ny = cy.clamp(0.0, r.y + r.h - 0.02);
           nw = (cx - r.x).clamp(0.02, 1.0 - r.x);
           nh = r.y + r.h - ny;
-        case _Handle.bottomLeft:
+        case Handle.bottomLeft:
           nx = cx.clamp(0.0, r.x + r.w - 0.02);
           nw = r.x + r.w - nx;
           nh = (cy - r.y).clamp(0.02, 1.0 - r.y);
-        case _Handle.bottomRight:
+        case Handle.bottomRight:
           nw = (cx - r.x).clamp(0.02, 1.0 - r.x);
           nh = (cy - r.y).clamp(0.02, 1.0 - r.y);
       }
@@ -432,94 +495,30 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   Widget _buildImageWithMarkers(BuildContext context) {
     final callout = _callouts[_selectedCalloutIndex!];
     final l10n = context.l10n;
+    final intrinsic = _intrinsic;
+    final clippedRefs = _computeClippedRefs(intrinsic);
 
     return Column(
       children: [
         Expanded(
           child: LayoutBuilder(
-            builder: (context, constraints) {
-              final slotW = constraints.maxWidth;
-              final slotH = constraints.maxHeight;
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  // Image background.
-                  Container(
-                    color: Colors.black,
-                    child: Image(
-                      image: _calloutImageProvider(
-                        widget.slide.imagePath,
-                        widget.projectPath,
-                      )!,
-                      fit: widget.slide.imageZoom == 0
-                          ? BoxFit.cover
-                          : BoxFit.contain,
-                      alignment: Alignment(
-                        (widget.slide.imageFocalX * 2) - 1,
-                        (widget.slide.imageFocalY * 2) - 1,
-                      ),
-                    ),
-                  ),
-                  // Gesture layer: click-to-place (pin) or drag-out (region).
-                  GestureDetector(
-                    onPanStart: (details) {
-                      if (_presentation != CalloutPresentation.region) return;
-                      final x = details.localPosition.dx / slotW;
-                      final y = details.localPosition.dy / slotH;
-                      setState(() {
-                        _dragRegion = _DragRegion(x, y, 0, 0);
-                      });
-                    },
-                    onPanUpdate: (details) {
-                      if (_dragRegion == null) return;
-                      final x = details.localPosition.dx / slotW;
-                      final y = details.localPosition.dy / slotH;
-                      setState(() {
-                        _dragRegion = _DragRegion.fromDrag(
-                          _dragRegion!.startX,
-                          _dragRegion!.startY,
-                          x.clamp(0.0, 1.0),
-                          y.clamp(0.0, 1.0),
-                        );
-                      });
-                    },
-                    onPanEnd: (_) {
-                      final d = _dragRegion;
-                      if (d != null && d.w >= 0.02 && d.h >= 0.02) {
-                        // Commit the dragged region as the first target.
-                        setState(() {
-                          final callout = _callouts[_selectedCalloutIndex!];
-                          final targets = List.of(callout.targets);
-                          targets[0] = CalloutRegion(d.x, d.y, d.w, d.h);
-                          _callouts[_selectedCalloutIndex!] = ImageCallout(
-                            reference: callout.reference,
-                            targets: targets,
-                            description: callout.description,
-                          );
-                          _dragRegion = null;
-                        });
-                        _emit();
-                      } else {
-                        setState(() => _dragRegion = null);
-                      }
-                    },
-                    onTapUp: (details) {
-                      if (_presentation == CalloutPresentation.region) return;
-                      final x = details.localPosition.dx / slotW;
-                      final y = details.localPosition.dy / slotH;
-                      _moveTarget(_selectedCalloutIndex!, 0, x, y);
-                    },
-                    child: Container(color: Colors.transparent),
-                  ),
-                  // Markers / regions / drag-preview.
-                  ..._buildMarkers(callout, slotW, slotH),
-                  if (_dragRegion != null)
-                    _buildDragPreview(_dragRegion!, slotW, slotH),
-                ],
-              );
-            },
+            builder: (context, constraints) => _buildImageStack(
+              callout,
+              intrinsic,
+              constraints.maxWidth,
+              constraints.maxHeight,
+            ),
           ),
         ),
+        if (clippedRefs.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 4, bottom: 4),
+            child: Text(
+              '${clippedRefs.map((r) => '($r)').join(', ')} '
+              '${l10n.d('valt buiten beeld — pas de focal, zoom of doelpositie aan.')}',
+              style: TextStyle(color: AppTheme.warningFg, fontSize: 12),
+            ),
+          ),
         const SizedBox(height: 8),
         // Description editor.
         TextField(
@@ -564,132 +563,198 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     );
   }
 
-  List<Widget> _buildMarkers(ImageCallout callout, double slotW, double slotH) {
+  Widget _buildImageStack(
+    ImageCallout callout,
+    Size? intrinsic,
+    double slotW,
+    double slotH,
+  ) {
+    final painted = intrinsic == null
+        ? null
+        : ImageViewportGeometry.paintedRect(
+            imageW: intrinsic.width,
+            imageH: intrinsic.height,
+            slotW: slotW,
+            slotH: slotH,
+            focalX: widget.slide.imageFocalX,
+            focalY: widget.slide.imageFocalY,
+            zoom: widget.slide.imageZoom,
+          );
+    double toImgX(double sx) =>
+        painted == null ? sx / slotW : (sx - painted.left) / painted.width;
+    double toImgY(double sy) =>
+        painted == null ? sy / slotH : (sy - painted.top) / painted.height;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          color: Colors.black,
+          child: Image(
+            image: calloutImageProvider(
+              widget.slide.imagePath,
+              widget.projectPath,
+            )!,
+            fit: widget.slide.imageZoom == 0 ? BoxFit.cover : BoxFit.contain,
+            alignment: Alignment(
+              (widget.slide.imageFocalX * 2) - 1,
+              (widget.slide.imageFocalY * 2) - 1,
+            ),
+          ),
+        ),
+        _buildGestureLayer(toImgX, toImgY),
+        ..._buildMarkers(callout, slotW, slotH, painted),
+        if (_dragRegion != null)
+          buildDragPreview(_dragRegion!, slotW, slotH, painted),
+      ],
+    );
+  }
+
+  Widget _buildGestureLayer(
+    double Function(double) toImgX,
+    double Function(double) toImgY,
+  ) {
+    return GestureDetector(
+      onPanStart: (details) {
+        if (_presentation != CalloutPresentation.region) return;
+        final x = toImgX(details.localPosition.dx);
+        final y = toImgY(details.localPosition.dy);
+        setState(() {
+          _dragRegion = DragRegion(x, y, 0, 0);
+        });
+      },
+      onPanUpdate: (details) {
+        if (_dragRegion == null) return;
+        final x = toImgX(details.localPosition.dx);
+        final y = toImgY(details.localPosition.dy);
+        setState(() {
+          _dragRegion = DragRegion.fromDrag(
+            _dragRegion!.startX,
+            _dragRegion!.startY,
+            x.clamp(0.0, 1.0),
+            y.clamp(0.0, 1.0),
+          );
+        });
+      },
+      onPanEnd: (_) {
+        final d = _dragRegion;
+        if (d != null && d.w >= 0.02 && d.h >= 0.02) {
+          setState(() {
+            final callout = _callouts[_selectedCalloutIndex!];
+            final targets = List.of(callout.targets);
+            targets[0] = CalloutRegion(d.x, d.y, d.w, d.h);
+            _callouts[_selectedCalloutIndex!] = ImageCallout(
+              reference: callout.reference,
+              targets: targets,
+              description: callout.description,
+            );
+            _dragRegion = null;
+          });
+          _emit();
+        } else {
+          setState(() => _dragRegion = null);
+        }
+      },
+      onTapUp: (details) {
+        if (_presentation == CalloutPresentation.region) return;
+        final x = toImgX(details.localPosition.dx);
+        final y = toImgY(details.localPosition.dy);
+        _moveTarget(_selectedCalloutIndex!, 0, x, y);
+      },
+      child: Container(color: Colors.transparent),
+    );
+  }
+
+  /// #1853: bereken welke callout-references buiten beeld vallen. De clipping
+  /// hangt af van de aspectratio, niet van de absolute slotmaat, dus een
+  /// representatieve slot is voldoende.
+  Set<String> _computeClippedRefs(Size? intrinsic) {
+    if (intrinsic == null) return {};
+    final imgFraction =
+        (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.40)
+            .clamp(0.1, 0.70);
+    final repW = imgFraction * 16;
+    final repH = 9.0;
+    final repainted = ImageViewportGeometry.paintedRect(
+      imageW: intrinsic.width,
+      imageH: intrinsic.height,
+      slotW: repW,
+      slotH: repH,
+      focalX: widget.slide.imageFocalX,
+      focalY: widget.slide.imageFocalY,
+      zoom: widget.slide.imageZoom,
+    );
+    final clipped = <String>{};
+    for (final c in _callouts) {
+      for (final t in c.targets) {
+        if (!t.isValid) continue;
+        final m = ImageViewportGeometry.mapTarget(
+          t,
+          painted: repainted,
+          slotW: repW,
+          slotH: repH,
+        );
+        if (m.clipped) {
+          clipped.add(c.reference);
+          break;
+        }
+      }
+    }
+    return clipped;
+  }
+
+  List<Widget> _buildMarkers(
+    ImageCallout callout,
+    double slotW,
+    double slotH,
+    GeoRect? painted,
+  ) {
     final markerRadius = slotW * 0.025;
     final handleSize = slotW * 0.02;
     final widgets = <Widget>[];
+    final dxFactor = painted?.width ?? slotW;
+    final dyFactor = painted?.height ?? slotH;
     for (var i = 0; i < callout.targets.length; i++) {
       final target = callout.targets[i];
+      final mapped = painted == null
+          ? null
+          : ImageViewportGeometry.mapTarget(
+              target,
+              painted: painted,
+              slotW: slotW,
+              slotH: slotH,
+            );
+      if (mapped != null && mapped.clipped) {
+        widgets.add(buildClippedBadge(callout.reference, mapped, slotW, slotH));
+        continue;
+      }
       if (target is CalloutRegion) {
-        final rx = target.x * slotW;
-        final ry = target.y * slotH;
-        final rw = target.w * slotW;
-        final rh = target.h * slotH;
-        // Outline + move handle (drag inside the rect).
-        widgets.add(
-          Positioned(
-            left: rx,
-            top: ry,
-            width: rw,
-            height: rh,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                final nx = (target.x + details.delta.dx / slotW).clamp(
-                  0.0,
-                  1.0,
-                );
-                final ny = (target.y + details.delta.dy / slotH).clamp(
-                  0.0,
-                  1.0,
-                );
-                _moveTarget(_selectedCalloutIndex!, i, nx, ny);
-              },
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppTheme.accentFg, width: 2),
-                ),
-              ),
-            ),
+        widgets.addAll(
+          _buildRegionMarker(
+            callout,
+            i,
+            target,
+            mapped,
+            painted,
+            slotW,
+            slotH,
+            markerRadius,
+            handleSize,
+            dxFactor,
+            dyFactor,
           ),
         );
-        // Reference badge in top-left corner.
-        widgets.add(
-          Positioned(
-            left: rx + 2,
-            top: ry + 2,
-            child: Container(
-              width: markerRadius * 2,
-              height: markerRadius * 2,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppTheme.accentFg,
-                border: Border.all(
-                  color: Colors.black,
-                  width: markerRadius * 0.18,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                callout.reference,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: markerRadius,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-        );
-        // Four corner resize handles.
-        for (final handle in _Handle.values) {
-          final (hx, hy) = handle.offset(rx, ry, rw, rh);
-          widgets.add(
-            Positioned(
-              left: hx - handleSize / 2,
-              top: hy - handleSize / 2,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  final nx = (hx + details.delta.dx) / slotW;
-                  final ny = (hy + details.delta.dy) / slotH;
-                  _resizeRegion(_selectedCalloutIndex!, i, handle, nx, ny);
-                },
-                child: Container(
-                  width: handleSize,
-                  height: handleSize,
-                  decoration: BoxDecoration(
-                    color: AppTheme.accentFg,
-                    border: Border.all(color: Colors.black, width: 1),
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
       } else {
-        // Point target: numbered marker centred on the point.
-        final p = target as CalloutPoint;
         widgets.add(
-          Positioned(
-            left: p.x * slotW - markerRadius,
-            top: p.y * slotH - markerRadius,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                final nx = (p.x + details.delta.dx / slotW).clamp(0.0, 1.0);
-                final ny = (p.y + details.delta.dy / slotH).clamp(0.0, 1.0);
-                _moveTarget(_selectedCalloutIndex!, i, nx, ny);
-              },
-              child: Container(
-                width: markerRadius * 2,
-                height: markerRadius * 2,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.accentFg,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: markerRadius * 0.18,
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  callout.reference,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: markerRadius,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
+          _buildPointMarker(
+            callout,
+            i,
+            target as CalloutPoint,
+            mapped,
+            painted,
+            slotW,
+            markerRadius,
+            dxFactor,
+            dyFactor,
           ),
         );
       }
@@ -697,17 +762,141 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     return widgets;
   }
 
-  /// Preview rectangle while dragging out a new region.
-  Widget _buildDragPreview(_DragRegion d, double slotW, double slotH) {
+  List<Widget> _buildRegionMarker(
+    ImageCallout callout,
+    int i,
+    CalloutRegion target,
+    MappedTarget? mapped,
+    GeoRect? painted,
+    double slotW,
+    double slotH,
+    double markerRadius,
+    double handleSize,
+    double dxFactor,
+    double dyFactor,
+  ) {
+    final rx = painted == null ? target.x * slotW : mapped!.x;
+    final ry = painted == null ? target.y * slotH : mapped!.y;
+    final rw = painted == null ? target.w * slotW : mapped!.w;
+    final rh = painted == null ? target.h * slotH : mapped!.h;
+    final widgets = <Widget>[];
+    // Outline + move handle (drag inside the rect).
+    widgets.add(
+      Positioned(
+        left: rx,
+        top: ry,
+        width: rw,
+        height: rh,
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            final nx = (target.x + details.delta.dx / dxFactor).clamp(0.0, 1.0);
+            final ny = (target.y + details.delta.dy / dyFactor).clamp(0.0, 1.0);
+            _moveTarget(_selectedCalloutIndex!, i, nx, ny);
+          },
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: AppTheme.accentFg, width: 2),
+            ),
+          ),
+        ),
+      ),
+    );
+    // Reference badge in top-left corner.
+    widgets.add(
+      Positioned(
+        left: rx + 2,
+        top: ry + 2,
+        child: Container(
+          width: markerRadius * 2,
+          height: markerRadius * 2,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppTheme.accentFg,
+            border: Border.all(color: Colors.black, width: markerRadius * 0.18),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            callout.reference,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: markerRadius,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
+    // Four corner resize handles.
+    for (final handle in Handle.values) {
+      final (hx, hy) = handle.offset(rx, ry, rw, rh);
+      widgets.add(
+        Positioned(
+          left: hx - handleSize / 2,
+          top: hy - handleSize / 2,
+          child: GestureDetector(
+            onPanUpdate: (details) {
+              final nx = painted == null
+                  ? (hx + details.delta.dx) / slotW
+                  : (hx + details.delta.dx - painted.left) / painted.width;
+              final ny = painted == null
+                  ? (hy + details.delta.dy) / slotH
+                  : (hy + details.delta.dy - painted.top) / painted.height;
+              _resizeRegion(_selectedCalloutIndex!, i, handle, nx, ny);
+            },
+            child: Container(
+              width: handleSize,
+              height: handleSize,
+              decoration: BoxDecoration(
+                color: AppTheme.accentFg,
+                border: Border.all(color: Colors.black, width: 1),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return widgets;
+  }
+
+  Widget _buildPointMarker(
+    ImageCallout callout,
+    int i,
+    CalloutPoint p,
+    MappedTarget? mapped,
+    GeoRect? painted,
+    double slotW,
+    double markerRadius,
+    double dxFactor,
+    double dyFactor,
+  ) {
+    final mx = painted == null ? p.x * slotW : mapped!.x;
+    final my = painted == null ? p.y * slotW : mapped!.y;
     return Positioned(
-      left: d.x * slotW,
-      top: d.y * slotH,
-      width: d.w * slotW,
-      height: d.h * slotH,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: AppTheme.accentFg, width: 2),
-          color: AppTheme.accentFg.withValues(alpha: 0.2),
+      left: mx - markerRadius,
+      top: my - markerRadius,
+      child: GestureDetector(
+        onPanUpdate: (details) {
+          final nx = (p.x + details.delta.dx / dxFactor).clamp(0.0, 1.0);
+          final ny = (p.y + details.delta.dy / dyFactor).clamp(0.0, 1.0);
+          _moveTarget(_selectedCalloutIndex!, i, nx, ny);
+        },
+        child: Container(
+          width: markerRadius * 2,
+          height: markerRadius * 2,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppTheme.accentFg,
+            border: Border.all(color: Colors.black, width: markerRadius * 0.18),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            callout.reference,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: markerRadius,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ),
       ),
     );
@@ -738,48 +927,4 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     }
     return null;
   }
-}
-
-/// Creates an ImageProvider from an image path for the callout editor.
-/// Mirrors the logic in _cropProvider (image_crop_dialog.dart).
-ImageProvider? _calloutImageProvider(String imagePath, String? projectPath) {
-  if (imagePath.isEmpty) return null;
-  if (isBundledAssetPath(imagePath)) {
-    return cappedBundledAssetImage(bundledAssetKey(imagePath));
-  }
-  if (WebAssetStore.isMemPath(imagePath)) {
-    final bytes = WebAssetStore.bytesFor(imagePath);
-    return bytes == null ? null : cappedMemoryImage(bytes);
-  }
-  final resolved = resolveSlideAssetPath(imagePath, projectPath);
-  if (resolved == null) return null;
-  return cappedFileImage(File(resolved));
-}
-
-/// Which corner of a region is being dragged.
-enum _Handle { topLeft, topRight, bottomLeft, bottomRight }
-
-extension _HandleOffset on _Handle {
-  (double, double) offset(double rx, double ry, double rw, double rh) {
-    return switch (this) {
-      _Handle.topLeft => (rx, ry),
-      _Handle.topRight => (rx + rw, ry),
-      _Handle.bottomLeft => (rx, ry + rh),
-      _Handle.bottomRight => (rx + rw, ry + rh),
-    };
-  }
-}
-
-/// In-progress region drag: stores the start point and current normalised rect.
-class _DragRegion {
-  final double startX, startY, x, y, w, h;
-  _DragRegion(this.startX, this.startY, this.w, this.h)
-    : x = startX,
-      y = startY;
-
-  _DragRegion.fromDrag(this.startX, this.startY, double endX, double endY)
-    : x = startX < endX ? startX : endX,
-      y = startY < endY ? startY : endY,
-      w = (endX - startX).abs(),
-      h = (endY - startY).abs();
 }

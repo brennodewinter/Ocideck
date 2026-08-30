@@ -674,6 +674,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'kaai paden di e área visibel — ajusta e punto focal, e zoom of e posishon di e meta.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'kaai paden di e parti visibel di e imágen — ajusta e punto focal, e zoom of e posishon di e meta, of e marka no ta aparesé riba e slide.',
   'markering': 'marka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Flecha ta kruza riba e slide aki — konsiderá pin na lugá di flecha pa legibilidat.',

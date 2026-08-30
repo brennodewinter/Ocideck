@@ -422,4 +422,80 @@ void main() {
 
     expect(updated.calloutPresentation, CalloutPresentation.arrow);
   });
+
+  testWidgets('een doel buiten beeld toont een waarschuwing (#1853)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    // Een 1×1 PNG (vierkant) in een slot met aspect ≈ 0.71 (40% van 16:9).
+    // Cover schaalt op slot-hoogte (want beeld is smaller dan slot), dus
+    // de volledige hoogte is zichtbaar en de breedte overflows.
+    // Een doel op x=0.01 valt buiten de zichtbare band (links afgesneden).
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      anchor: 'test',
+      bullets: ['punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.01, 0.5)],
+          description: 'rand',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    // Pump extra frames to allow the image provider to resolve intrinsic dims.
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    // Selecteer de callout door op de bullet te tikken.
+    await tester.tap(find.textContaining('punt').first);
+    await tester.pumpAndSettle();
+
+    // De waarschuwingstekst bevat de reference en "buiten beeld".
+    expect(
+      find.textContaining('buiten beeld'),
+      findsWidgets,
+      reason: 'de editor toont dat doel (A) buiten beeld valt (#1853)',
+    );
+  });
+
+  testWidgets('een doel in het midden toont geen waarschuwing (#1853)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      anchor: 'test',
+      bullets: ['punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.5, 0.5)],
+          description: 'midden',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    // Selecteer de callout door op de bullet te tikken.
+    await tester.tap(find.textContaining('punt').first);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.textContaining('buiten beeld'),
+      findsNothing,
+      reason: 'een doel in het midden is altijd zichtbaar',
+    );
+  });
 }

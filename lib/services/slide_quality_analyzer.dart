@@ -15,15 +15,20 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/video_source.dart';
+import '../utils/bundled_asset.dart';
 import '../utils/color_contrast.dart';
+import '../utils/image_dimensions.dart';
 import '../utils/inline_markdown.dart';
 import '../utils/project_path.dart';
 import '../utils/title_contrast.dart' show kTitleSubtitleAlpha;
 import 'improvement/matrix_slide.dart';
+import 'image_viewport_geometry.dart';
 import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
+import 'web_asset_store.dart';
 
+part 'slide_quality/slide_quality_analyzer_callouts.dart';
 part 'slide_quality/slide_quality_analyzer_content.dart';
 part 'slide_quality/slide_quality_analyzer_density.dart';
 
@@ -51,142 +56,6 @@ void _checkEmptySlide(Slide slide, int index, List<SlideQualityIssue> issues) {
     ),
   );
 }
-
-/// De callout-checker (IMAGE_CALLOUTS.md §2.6). Vier regels, alle per-slide:
-///
-/// 1. **Invalid geometry** — een target met coördinaten buiten [0,1] of een
-///    verkeerd aantal componenten. De codec weigert het te tekenen; de checker
-///    meldt het zodat de auteur weet waarom de pijl ontbreekt.
-/// 2. **Orphan reference** — een callout-entry in de front matter zonder
-///    bijbehorende `(A)`-markering in de tekst, of omgekeerd.
-/// 3. **Duplicate reference** — dezelfde letter twee keer op één dia.
-/// 4. **Missing anchor** — de dia heeft callouts maar geen anker, dus de front
-///    matter kan ze niet aan de dia koppelen.
-///
-/// De checker rapporteert alleen — hij clamp niet, verwijdert niet, en herschikt
-/// niet. De codec behoudt alles byte-voor-byte (§2.5).
-void _checkCallouts(Slide slide, int index, List<SlideQualityIssue> issues) {
-  if (slide.callouts.isEmpty) return;
-
-  // §2.6 binding regel 4: een dia met callouts moet een anker hebben.
-  if (slide.anchor.isEmpty) {
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.calloutMissingAnchor,
-        category: SlideQualityCategory.callout,
-        severity: MarkdownValidationSeverity.error,
-      ),
-    );
-  }
-
-  // Verzamel alle (A)-markeringen in de tekst van deze dia, met telling: een
-  // letter die twee keer voorkomt (geplakte bullet) is een duplicate finding
-  // (§2.6), geen geldige referentie.
-  final textRefCount = <String, int>{};
-  for (final bullet in [...slide.bullets, ...slide.bullets2]) {
-    for (final m in _reCalloutReference.allMatches(bullet)) {
-      final ref = m.group(1)!;
-      textRefCount[ref] = (textRefCount[ref] ?? 0) + 1;
-    }
-  }
-  final textRefs = textRefCount.keys.toSet();
-
-  // §2.6: twee of meer bullets eindigen op (X) → duplicate finding.
-  for (final entry in textRefCount.entries) {
-    if (entry.value > 1) {
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.calloutDuplicateReference,
-          category: SlideQualityCategory.callout,
-          severity: MarkdownValidationSeverity.error,
-          args: {'ref': '(${entry.key})'},
-        ),
-      );
-    }
-  }
-
-  // Track welke refs we al gezien hebben voor duplicate detection.
-  final seen = <String>{};
-  for (final callout in slide.callouts) {
-    final ref = callout.reference;
-
-    // Duplicate: dezelfde letter twee keer.
-    if (!seen.add(ref)) {
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.calloutDuplicateReference,
-          category: SlideQualityCategory.callout,
-          severity: MarkdownValidationSeverity.error,
-          args: {'ref': '($ref)'},
-        ),
-      );
-    }
-
-    // Invalid geometry: een target buiten [0,1] of met verkeerde componenten.
-    // §8: een region heeft minimaal 0.02 op beide assen.
-    for (final target in callout.targets) {
-      final tooSmall =
-          target is CalloutRegion && (target.w < 0.02 || target.h < 0.02);
-      if (!target.isValid || tooSmall) {
-        issues.add(
-          SlideQualityIssue(
-            slideIndex: index,
-            kind: SlideQualityIssueKind.calloutInvalidGeometry,
-            category: SlideQualityCategory.callout,
-            severity: MarkdownValidationSeverity.error,
-            args: {'ref': '($ref)'},
-          ),
-        );
-        break;
-      }
-    }
-
-    // Orphan: entry in front matter zonder (A) in de tekst.
-    if (!textRefs.contains(ref)) {
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.calloutOrphanReference,
-          category: SlideQualityCategory.callout,
-          severity: MarkdownValidationSeverity.warning,
-          args: {'ref': '($ref)'},
-        ),
-      );
-    }
-  }
-
-  // Orphan: (A) in de tekst zonder entry in de front matter.
-  final entryRefs = slide.callouts.map((c) => c.reference).toSet();
-  for (final ref in textRefs) {
-    if (!entryRefs.contains(ref)) {
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.calloutOrphanReference,
-          category: SlideQualityCategory.callout,
-          severity: MarkdownValidationSeverity.warning,
-          args: {'ref': '($ref)'},
-        ),
-      );
-    }
-  }
-
-  // §5: kruisende pijlen in arrow-modus. Met de fixed-rail-ontwerp (alle
-  // pijlen horizontaal van x=0 naar het target) is kruising geometrisch
-  // onmogelijk — twee horizontale lijnen op verschillende y kruisen nooit.
-  // De check is hier als ankerpunt voor het geval een toekomstige variant
-  // niet-horizontale pijlen toestaat.
-  // ponytail: als pijlen ooit niet-horizontaal worden, is dit de plek om
-  // echte lijn-kruising te detecteren en calloutCrossingArrows te melden.
-}
-
-/// Herkent een `(A)`-calloutmarkering in slidetekst. Eén hoofdletter tussen
-/// haakjes, optioneel gevolgd door een puntkomma of spatie — niet `(AB)` of
-/// `(a)`, en niet een haakje dat toevallig in een afkorting staat.
-final _reCalloutReference = RegExp(r'\(([A-Z])\)(?:[;,\s]|$)');
 
 /// Draagt [slide] iets dat de kijker te zien krijgt?
 ///

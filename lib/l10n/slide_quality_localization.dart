@@ -485,6 +485,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.calloutCrossingArrows => l10n.d(
       'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.',
     ),
+    SlideQualityIssueKind.calloutTargetOutOfView =>
+      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.')}',
   };
 
   // Een over meerdere split-pagina's samengevatte dichtheidsmelding (#1289):

@@ -1634,6 +1634,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'faller utanför den synliga delen av bilden — justera brännpunkt, zoom eller målposition, annars visas inte markören på sliden.',
   'markering': 'markering',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pilar korsar varandra på denna bild — överväg nålar istället för pilar för läsbarhet.',

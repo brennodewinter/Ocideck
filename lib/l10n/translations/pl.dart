@@ -1647,6 +1647,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'wypada poza widoczną częścią obrazu — dostosuj punkt środkowy, zoom lub pozycję celu, w przeciwnym razie znacznik nie pojawi się na slajdzie.',
   'markering': 'znacznik',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Strzałki przecinają się na tym slajdzie — rozważ piny zamiast strzałek dla czytelności.',

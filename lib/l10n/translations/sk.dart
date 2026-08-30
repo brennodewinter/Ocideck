@@ -1642,6 +1642,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'padá mimo viditeľnej oblasti — upravte ohnisko, zoom alebo pozíciu cieľa.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'padá mimo viditeľnej časti obrázku — upravte ohnisko, zoom alebo pozíciu cieľa, inak sa značka na snímke nezobrazí.',
   'markering': 'značka',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Šípky sa krížia na tomto snímku — zvážte piny namiesto šípok pre čitateľnosť.',

@@ -1638,6 +1638,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'fallt usserem sichtbare Beriich — pass de Fokuspunkt, de Zoom oder d Ziilposition aa.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'fallt usserem sichtbare Teil vom Bild — pass de Fokuspunkt, de Zoom oder d Ziilposition aa, suscht erschiint d Markierig nöd uf de Folie.',
   'markering': 'Markierig',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pfiil chrüüzed sech uf däm Slide — nimm Pins statt Pfiil für besseri Lesbarkeit.',

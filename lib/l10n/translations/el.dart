@@ -1660,6 +1660,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'πέφτει εκτός ορατού μέρους της εικόνας — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου, διαφορετικά ο δείκτης δεν θα εμφανιστεί στη διαφάνεια.',
   'markering': 'σήμανση',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Τα βέλη διασταυρώνονται σε αυτή τη διαφάνεια — εξέτασε καρφίτσες αντί για βέλη για αναγνωσιμότητα.',

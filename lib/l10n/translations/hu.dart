@@ -1637,6 +1637,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'a látható területen kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'a kép látható részén kívülre esik — állítsa be a fókuszpontot, a nagyítást vagy a célpozíciót, különben a jelölő nem jelenik meg a dián.',
   'markering': 'jelölés',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nyilak keresztezik egymást ezen a dián — fontold meg a tűket a nyilak helyett az olvashatóság érdekében.',

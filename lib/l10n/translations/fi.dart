@@ -1636,6 +1636,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'putoaa kuvan näkyvän osan ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia, muuten merkki ei näy dian.',
   'markering': 'merkki',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Nuolet risteävät tällä kalvolla — harkitse nasteja nuolten sijaan luettavuuden vuoksi.',

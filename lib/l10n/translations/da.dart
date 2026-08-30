@@ -1635,6 +1635,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'falder uden for det synlige område — justér brændpunkt, zoom eller målposition.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falder uden for den synlige del af billedet — justér brændpunkt, zoom eller målposition, ellers vises markøren ikke på dias.',
   'markering': 'markering',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Pile krydser hinanden på dette dias — overvej pins i stedet for pile for læsbarhed.',

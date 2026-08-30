@@ -1651,6 +1651,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
+      'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
+  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
   'markering': 'позначка',
   'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
       'Стрілки перетинаються на цьому слайді — розгляньте піни замість стрілок для читабельності.',

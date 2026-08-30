@@ -89,6 +89,11 @@ enum SlideQualityIssueKind {
   // §5: kruisende pijlen in arrow-modus — een quality finding die pins
   // suggereert, omdat kruisende pijlen onleesbaar worden.
   calloutCrossingArrows,
+  // #1853: een doel valt buiten de zichtbare band die cover/zoom/focal laat
+  // zien. De overlay tekent niets; deze finding meldt het zodat de auteur
+  // weet waarom de markering ontbreekt — dezelfde klasse als een afbeelding
+  // zonder alt-tekst: gerapporteerd, niet geblokkeerd (§8).
+  calloutTargetOutOfView,
 }
 
 /// Waar binnen een veld een melding precies zit.
