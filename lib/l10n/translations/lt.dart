@@ -1642,6 +1642,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Pasukimas pakeičia patį vaizdo failą, kitaip nei apkarpymas ir mastelio keitimas. Vaizdas, naudojamas kitose skaidrėse ar dekuose, pasisuka ir ten.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

@@ -1613,6 +1613,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'nISwI\' nagh HaSta De\' mIw choHlu\', \'ach Say\'moHwI\' je chowI\' rurbe\'. latlh HaSta ghomDaq lo\'lu\'bogh nagh HaSta je choHlu\'.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

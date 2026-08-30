@@ -888,7 +888,10 @@ it is written when you press **Klaar** (Done), not while you preview. **Annulere
 (Cancel) leaves the file as it was. Turning a picture you did not shoot yourself,
 or one shared by several decks, changes it for all of them. Rotation is offered
 only for a picture OciDeck can write to: not for a bundled sample image and not
-for one loaded from a URL, where the buttons are absent rather than failing.
+for one loaded from a URL, where the buttons are absent rather than failing. The
+dialog says all of this above the two turn buttons, before you press one
+*(added 2026-08-30)*. Whether it should keep working this way at all is weighed
+in [design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).
 
 *(Corrected 2026-08-30: this paragraph told you to click **Bijsnijden**, a button
 that has not carried that label in any of the five editors, and said the dialog

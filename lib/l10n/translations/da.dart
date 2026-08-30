@@ -1635,6 +1635,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Rotation ændrer selve billedfilen, i modsætning til beskæring og zoom. Et billede, som andre slides eller decks bruger, drejer også der.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'falder uden for det synlige område — justér brændpunkt, zoom eller målposition.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

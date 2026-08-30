@@ -1660,6 +1660,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Η περιστροφή αλλάζει το ίδιο το αρχείο εικόνας, σε αντίθεση με την περικοπή και το ζουμ. Μια εικόνα που χρησιμοποιούν άλλες διαφάνειες ή decks περιστρέφεται και εκεί.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'πέφτει εκτός ορατής περιοχής — προσαρμόστε το εστιακό σημείο, το ζουμ ή τη θέση στόχου.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

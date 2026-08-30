@@ -1636,6 +1636,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.':
+      'Kääntäminen muuttaa itse kuvatiedostoa, toisin kuin rajaus ja zoomaus. Kuva, jota muut diat tai deckit käyttävät, kääntyy myös siellä.',
   'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
       'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
   'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':

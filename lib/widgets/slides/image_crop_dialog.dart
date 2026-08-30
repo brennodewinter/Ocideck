@@ -563,6 +563,35 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                     ),
                   ],
                 ),
+                // Bijsnijden en zoomen bewaren een waarde in het deck; draaien
+                // herschrijft het bestand op schijf. Dat verschil is vanuit de
+                // dialoog niet te zien — dezelfde drie knoppen, twee heel
+                // andere gevolgen — en een afbeelding die meer dia's of meer
+                // decks delen draait overal mee. Daarom staat het er vóórdat
+                // er gedraaid wordt, niet als melding achteraf.
+                const SizedBox(height: 6),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 14,
+                      color: AppTheme.slate500,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        l10n.d(
+                          'Draaien verandert het afbeeldingsbestand zelf, anders dan bijsnijden en zoomen. Een afbeelding die door meer dia\'s of decks wordt gebruikt, draait daar ook mee.',
+                        ),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.slate500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ],
           ),

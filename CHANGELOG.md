@@ -2067,6 +2067,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Draaien in het aanpasvenster waarschuwt vooraf, en het ontwerp voor
+  niet-destructief draaien ligt er.** Van de drie bewerkingen in de
+  afbeeldingsdialoog bewaren slepen en zoomen een waarde in het deck, maar
+  **draaien herschrijft het bestand van de gebruiker** — zonder undo, en een
+  afbeelding die meer dia's of decks delen draait overal mee. De dialoog zegt
+  dat nu vóórdat er gedraaid wordt, in alle 32 talen, in plaats van dat het
+  alleen uit de code te lezen was. `docs/design/IMAGE_ROTATION.md` weegt de drie
+  vormen die dit kunnen oplossen: kopie-bij-draaien (geen formaatwijziging),
+  een opgeslagen kwartslagveld (wel), of het laten zoals het is. Aanbeveling is
+  de eerste — hij haalt de schade weg zonder het `.md` te raken, en de
+  uitwisselbaarheid geeft daar de doorslag. **De eigenaar koos op 2026-08-30 voor
+  optie A**; de kopie landt in de `images/`-map van het deck en een tweede
+  kwartslag wordt opnieuw uit het origineel afgeleid. Het bouwen daarvan volgt
+  apart — deze wijziging verandert het gedrag nog niet.
+
 - **Documentatie nagelopen tegen de code (2026-08-30).** Dertien afwijkingen
   tussen `docs/` en wat de app doet, elk tegen de code getoetst en gedateerd
   gecorrigeerd in de tekst zelf. De zwaarste drie: de USER_GUIDE noemde vier

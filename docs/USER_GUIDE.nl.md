@@ -934,7 +934,10 @@ zoals het was. Draai je een afbeelding die je niet zelf hebt gemaakt, of één d
 meer decks wordt gedeeld, dan verandert hij voor allemaal. Draaien wordt alleen
 aangeboden bij een afbeelding waar OciDeck naartoe kan schrijven: niet bij een
 meegeleverde voorbeeldafbeelding en niet bij één van een URL — daar ontbreken de
-knoppen in plaats van dat ze falen.
+knoppen in plaats van dat ze falen. De dialoog zegt dit alles boven de twee
+draaiknoppen, vóórdat je er een indrukt *(toegevoegd 2026-08-30)*. Of dit zo moet
+blijven werken, wordt gewogen in
+[design/IMAGE_ROTATION.md](design/IMAGE_ROTATION.md).
 
 *(Gecorrigeerd 2026-08-30: deze alinea stuurde je naar een knop **Bijsnijden**, die in
 geen van de vijf editors dat opschrift draagt, en zei dat de dialoog "nooit het
