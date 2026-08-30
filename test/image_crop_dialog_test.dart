@@ -216,11 +216,64 @@ void main() {
     );
   });
 
-  testWidgets('op vullend formaat is er geen schuif', (tester) async {
-    // imageSize 0 betekent "vullend"; dan valt er niets te zoomen en zou een
-    // schuif op 0% een onmogelijke stand tonen.
+  // #1856 — de schuif was alleen te bereiken met een pinch-gebaar (twee
+  // vingers), niet met muis of toetsenbord. Nu staat hij altijd in beeld,
+  // ook in vullende (cover) modus.
+  testWidgets('op vullend formaat is de schuif wel bereikbaar (#1856)', (
+    tester,
+  ) async {
     await open(tester, imageSize: 0);
-    expect(find.byType(Slider), findsNothing);
+    expect(find.byType(Slider), findsOneWidget);
+  });
+
+  testWidgets('de schuif verlaat cover-modus en stelt zoom in (#1856)', (
+    tester,
+  ) async {
+    final uitkomst = await open(tester, imageSize: 0);
+
+    expect(find.byType(Slider), findsOneWidget);
+    await tester.drag(find.byType(Slider), const Offset(60, 0));
+    await tester.pumpAndSettle();
+    await klaar(tester);
+
+    expect(
+      uitkomst.single!.imageSize,
+      greaterThan(0),
+      reason: 'slepen op de schuif hoort cover te verlaten',
+    );
+  });
+
+  testWidgets('Herstel zet de zoom terug naar de oorspronkelijke waarde', (
+    tester,
+  ) async {
+    final uitkomst = await open(tester, imageSize: 200);
+
+    await tester.drag(find.byType(Slider), const Offset(60, 0));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(TextButton, 'Herstel'));
+    await tester.pumpAndSettle();
+    await klaar(tester);
+
+    expect(
+      uitkomst.single!.imageSize,
+      200,
+      reason:
+          'Herstel hoort de zoom terug te zetten, niet alleen het brandpunt',
+    );
+  });
+
+  // #1856 — de letterbox-balken waren zuiver zwart (rgb(0,0,0)) in elk thema.
+  // De achtergrond hoort het thema-Oppervlak te volgen, niet hard te zwarten.
+  testWidgets('de stage-achtergrond is niet zuiver zwart (#1856)', (
+    tester,
+  ) async {
+    await open(tester, imageSize: 150);
+    final box = tester.widget<ColoredBox>(find.byType(ColoredBox).first);
+    expect(
+      box.color,
+      isNot(Colors.black),
+      reason: 'de letterbox hoort de thema-achtergrond te volgen, niet zwart',
+    );
   });
 
   // #1813 — boven 100% werd de zoom stil teruggeknepen: Align → SizedBox
