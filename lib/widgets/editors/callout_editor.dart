@@ -515,7 +515,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
             padding: const EdgeInsets.only(top: 4, bottom: 4),
             child: Text(
               '${clippedRefs.map((r) => '($r)').join(', ')} '
-              '${l10n.d('valt buiten beeld — pas de focal, zoom of doelpositie aan.')}',
+              '${l10n.d('valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.')}',
               style: TextStyle(color: AppTheme.warningFg, fontSize: 12),
             ),
           ),
@@ -523,7 +523,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         // Description editor.
         TextField(
           decoration: InputDecoration(
-            labelText: l10n.d('Beschrijving (voor schermlezer)'),
+            labelText: l10n.d('Beschrijving (voor schermlezer en export)'),
             hintText: l10n.d('bv. "de controller board met display"'),
             isDense: true,
           ),
