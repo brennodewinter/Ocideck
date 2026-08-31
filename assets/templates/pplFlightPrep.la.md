@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Praeparatio fugae PPL
-## Date · Callsign · Route · PIC
+## Dies · Signum vocationis · Iter · PIC
 
 ---
 
@@ -49,7 +49,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# PAVE Risk Picture
+# Imago periculi PAVE
 
 | Component | Risk | Mitigatio | Decision |
 | --- | --- | --- | --- |
@@ -242,7 +242,7 @@ language: la
 
 ---
 
-# Final Decision
+# Decisio finalis
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 

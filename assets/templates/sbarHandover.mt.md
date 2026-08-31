@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR handover
+title: Konsenja SBAR
 language: mt
 ---
 
 <!-- _class: title -->
 
-# SBAR handover
+# Konsenja SBAR
 ## Pazjent · Sala · Minn min għal min · Data u ħin
 
 ---

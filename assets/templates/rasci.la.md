@@ -35,7 +35,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# RASCI matrix
+# Matrix RASCI
 
 | Negotium | R | A | S | C | I |
 | --- | --- | --- | --- | --- | --- |

@@ -59,7 +59,7 @@ language: fy
 | --- | --- | --- |
 | Projektplan goedkard | … | Planned |
 | Design goedkard | … | Planned |
-| Go-live | … | Planned |
+| Livegong | … | Pland |
 
 ---
 

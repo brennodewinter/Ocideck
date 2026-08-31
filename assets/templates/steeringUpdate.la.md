@@ -13,7 +13,7 @@ language: la
 
 ---
 
-# Management summary
+# Summarium administrationis
 
 - Status in una sententia: ...
 - Clavis progressio: ...

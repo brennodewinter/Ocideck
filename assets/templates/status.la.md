@@ -3,17 +3,17 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Status briefing
+title: Relatio status
 language: la
 ---
 
 <!-- _class: title -->
 
-# Status briefing
+# Relatio status
 
 ---
 
-# Status summary
+# Summarium status
 
 - Altiore status: in semita / operam / discrimine
 - Clavis evolutionis cum priore briefing: ...

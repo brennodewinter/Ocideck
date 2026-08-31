@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Architecture decision / ADR presentation
+title: Decisio architecturae / praesentatio ADR
 language: la
 ---
 
 <!-- _class: title -->
 
-# Architecture decision / ADR presentation
+# Decisio architecturae / praesentatio ADR
 
 ---
 
@@ -108,7 +108,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Trade-off matrix
+# Matrix compensationum
 
 | Criterium | Optio 1 | Optio 2 | Optio 3 |
 | --- | --- | --- | --- |

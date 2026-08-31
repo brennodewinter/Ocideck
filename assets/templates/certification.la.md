@@ -51,7 +51,7 @@ language: la
 
 <!-- _class: table -->
 
-# Open controls
+# Praesidia aperta
 
 | Imperium | Domain | Status |
 | --- | --- | --- |

@@ -21,7 +21,7 @@ language: la
 
 ---
 
-# Current status
+# Status praesens
 
 - Ubi nunc sunt: ...
 - Quid sit amet in progressu: …

@@ -108,13 +108,13 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Trade-off matrix
+# Ofwagingsmatriks
 
 | Kriterium | Opsje 1 | Opsje 2 | Opsje 3 |
 | --- | --- | --- | --- |
 | Kosten | … | … | … |
 | Kompleksiteit | … | … | … |
-| Future-proofing | … | … | … |
+| Takomstbestindigens | … | … | … |
 | Risiko | … | … | … |
 
 ---

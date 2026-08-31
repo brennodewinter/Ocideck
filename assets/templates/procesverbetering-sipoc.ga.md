@@ -37,13 +37,13 @@ language: ga
 
 <!-- _class: table table-editable -->
 
-# Set the process boundaries
+# Socraigh teorainneacha an phróisis
 
-| Boundary | Value |
+| Teorainn | Luach |
 | --- | --- |
 | Process name |  |
-| Start point |  |
-| End point |  |
+| Pointe tosaigh |  |
+| Pointe deiridh |  |
 
 ---
 

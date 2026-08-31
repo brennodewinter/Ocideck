@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Residentibus vespere / participatio foederis
-## Neighbourhood · Topic · Date · Facilitator
+## Vicinia · Argumentum · Dies · Moderator
 
 ---
 

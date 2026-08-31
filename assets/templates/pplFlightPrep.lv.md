@@ -49,7 +49,7 @@ language: lv
 
 <!-- _class: table table-editable -->
 
-# PAVE Risk Picture
+# PAVE riska aina
 
 | Komponents | Risks | Mīkstināšana | Lēmums |
 | --- | --- | --- | --- |

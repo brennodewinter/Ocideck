@@ -31,7 +31,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Test status
+# Status probationis
 
 | Test | Proventus | Testimonium |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ language: la
 - [ ] Securitas review fieri
 - [ ] Nulla nova personalis notitia - vel DPIA sedatus
 - [ ] Secreta et accessus iura sedatus
-- [ ] Vulnerability scan clean
+- [ ] Scrutinium vulnerabilitatum purum
 
 ---
 

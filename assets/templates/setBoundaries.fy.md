@@ -98,7 +98,7 @@ language: fy
 | Mooglike reaksje | Hoe hâld ik myn grins |
 | --- | --- |
 | Druk of "meitsje dit net dreech" | … |
-| Guilt-tripping | … |
+| Skuldgefoel opwekke | … |
 | lilkens of ôfstân | … |
 
 ---

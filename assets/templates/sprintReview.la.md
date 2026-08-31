@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Sprint review / demo
-## Team · Sprint · Date
+## Turma · Sprint · Dies
 
 ---
 
@@ -73,7 +73,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Stakeholder feedback
+# Responsa participum
 
 | Commentarium | Ex | Sequere-sursum |
 | --- | --- | --- |
@@ -98,5 +98,5 @@ language: la
 - [ ] Sprint propositum de quibus et æstimantur
 - [ ] Demonstratum opus delivered
 - [ ] Captum videre cum sequantur-up
-- [ ] Product backlog updated
+- [ ] Index producti renovatus
 - [ ] Mentis proximo concitus shared

@@ -86,7 +86,7 @@ language: la
 
 <!-- _class: findings-summary -->
 
-# Executive summary
+# Summarium exsecutivum
 
 | severitas | Comes |
 | --- | --- |
@@ -105,7 +105,7 @@ language: la
 
 - Attractio :: Kickoff :: Scope et pacta statuta.
 - Test :: Execution :: Testis tempus inquisitionis.
-- Rapport :: Delivery :: Draft and final report.
+- Rapport :: Traditio :: Adumbratio et relatio finalis.
 
 ---
 

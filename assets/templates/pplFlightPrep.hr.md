@@ -238,7 +238,7 @@ language: hr
 | Pridruži se | … | … |
 | Prepreke | … | … |
 | Plan obilaženja | … | … |
-| Taxi / parking | … | … |
+| Taksiranje / parkiranje | … | … |
 
 ---
 

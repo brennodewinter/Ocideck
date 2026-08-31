@@ -38,7 +38,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Budget per item
+# Aestimatio per rem
 
 | Item | Ultimus annus | Rogatio | Mutatio |
 | --- | --- | --- | --- |

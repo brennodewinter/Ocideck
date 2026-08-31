@@ -44,7 +44,7 @@ language: la
 
 ---
 
-# Building layout
+# Dispositio aedificii
 
 - Tabulae et ignis camerae: ...
 - Stairwelli, erigit et effugia: ...

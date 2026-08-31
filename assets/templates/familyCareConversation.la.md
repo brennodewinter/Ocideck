@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Colloquium familiare de cura et curatione
-## Topic · Date · Facilitator · Attendees
+## Argumentum · Dies · Moderator · Praesentes
 
 ---
 

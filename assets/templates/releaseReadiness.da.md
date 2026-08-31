@@ -31,7 +31,7 @@ language: da
 
 <!-- _class: table table-editable -->
 
-# Test status
+# Teststatus
 
 | Test | Resultat | Beviser |
 | --- | --- | --- |

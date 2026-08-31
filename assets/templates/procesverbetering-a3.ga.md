@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Process improvement: A3 project"
+title: "Feabhsú próisis: tionscadal A3"
 language: ga
 ocideck_improvement_framework: a3
 ---

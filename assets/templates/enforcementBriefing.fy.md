@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Enforcement briefing (BOA)
+title: Hanthavingsbriefing (BOA)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Enforcement briefing (BOA)
+# Hanthavingsbriefing (BOA)
 ## Datum · Shift · Wurkgebiet / wyk · Koördinator
 
 ---

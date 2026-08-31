@@ -19,7 +19,7 @@ language: la
 - Minuta et actiones ex conventu praecedente
 - Annua tabula
 - Annuae rationes, consilium audit et missionis
-- Budget and membership fee for the coming year
+- Aestimatio et pretium sodalitatis in annum venturum
 - Tabula electionis, suffragiorum et quaelibet alia negotia
 
 ---

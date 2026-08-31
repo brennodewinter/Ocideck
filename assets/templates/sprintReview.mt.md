@@ -14,7 +14,7 @@ language: mt
 
 ---
 
-# Sprint goal
+# Għan tas-sprint
 
 - L-għan tal-isprint kien:...
 - Mikseb / milħuq parzjalment / mhux milħuq: …

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Project timeline
+title: Ordo temporum incepti
 language: la
 ---
 
 <!-- _class: title -->
 
-# Project timeline
+# Ordo temporum incepti
 
 ---
 
@@ -55,7 +55,7 @@ language: la
 
 # Milestones
 
-| Milestone | Date | Status |
+| Lapis miliarius | Dies | Status |
 | --- | --- | --- |
 | Project consilium probatus | ... | Meditatum |
 | Design probatus | ... | Meditatum |

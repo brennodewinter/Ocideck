@@ -35,7 +35,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# RASCI matrix
+# RASCI-matriks
 
 | Taak | R | A | S | C | ik |
 | --- | --- | --- | --- | --- | --- |

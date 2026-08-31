@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Policy rollout / implementation plan
+title: Explicatio consilii / consilium exsecutionis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Policy rollout / implementation plan
+# Explicatio consilii / consilium exsecutionis
 
 ---
 

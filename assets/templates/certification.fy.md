@@ -79,7 +79,7 @@ language: fy
 
 <!-- _class: timeline -->
 
-# Audit planning
+# Auditplanning
 
 - Moanne 1 :: Ynterne kontrôle :: Self-evaluaasje en befinings.
 - Moanne 2 :: Remedyaksjes :: Iepen items oplosse.

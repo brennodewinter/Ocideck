@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Interactive quiz
+title: Quaestionarium interactivum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Interactive quiz
+# Quaestionarium interactivum
 
 ---
 

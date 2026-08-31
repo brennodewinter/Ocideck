@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Process improvement: DMADV project"
+title: "Feabhsú próisis: tionscadal DMADV"
 language: ga
 ocideck_improvement_framework: dmadv
 ---

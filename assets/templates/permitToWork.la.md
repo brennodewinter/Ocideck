@@ -18,7 +18,7 @@ language: la
 
 - Pro summo periculo opus est quod indiget licentia et solitudo
 - Cogita calidum opus, altitudines, angustiis seu industria
-- The permit records what is allowed, under which conditions
+- Licentia refert quid liceat et quibus condicionibus
 - Sine release et sign-off opus non incipere
 
 ---

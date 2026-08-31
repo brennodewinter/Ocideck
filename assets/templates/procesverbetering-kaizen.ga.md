@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Process improvement: Kaizen project"
+title: "Feabhsú próisis: tionscadal Kaizen"
 language: ga
 ocideck_improvement_framework: kaizen
 ---

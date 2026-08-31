@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST trauma handover
+title: (A)MIST traditio traumatis
 language: la
 ---
 
 <!-- _class: title -->
 
-# (A)MIST trauma handover
+# (A)MIST traditio traumatis
 ## Prehospitale → ED · Expedite · Data et tempora
 
 ---

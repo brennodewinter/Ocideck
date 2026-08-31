@@ -55,7 +55,7 @@ language: la
 
 <!-- _class: timeline -->
 
-# Timing and publication moments
+# Tempora et momenta publicationis
 
 - Hebdomada 1:: Praeparatio Interna :: Textus et Q&A parati.
 - Hebdomada 2:: Alignment :: Socii et oratores informati sunt.

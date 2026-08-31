@@ -30,7 +30,7 @@ language: fy
 | Elemint | Kind | Notysjes |
 | --- | --- | --- |
 | … | Komponint | … |
-| … | Data flow | … |
+| … | Gegevensstream | … |
 | … | Eksterne partij | … |
 
 ---
@@ -48,7 +48,7 @@ language: fy
 
 # STRIDE referinsje
 
-| Category | Meaning |
+| Kategory | Betsjutting |
 | --- | --- |
 | Spoofing | Foardwaan as in oare brûker of tsjinst |
 | Tampering | Unautorisearre wiziging fan gegevens of koade |

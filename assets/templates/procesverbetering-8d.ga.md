@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Process improvement: 8D project"
+title: "Feabhsú próisis: tionscadal 8D"
 language: ga
 ocideck_improvement_framework: 8d
 ---

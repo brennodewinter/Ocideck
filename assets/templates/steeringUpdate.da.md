@@ -23,7 +23,7 @@ language: da
 
 <!-- _class: cockpit -->
 
-# Status dashboard
+# Statusdashboard
 
 ```cockpit
 {

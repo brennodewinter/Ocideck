@@ -31,12 +31,12 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Test status
+# Teststatus
 
 | Test | Result | Bewiis |
 | --- | --- | --- |
 | Funksjonele test | Passearre / iepen | … |
-| Regression test | … | … |
+| Regressytest | … | … |
 | Prestaasje test | … | … |
 
 ---

@@ -23,7 +23,7 @@ language: fy
 
 <!-- _class: cockpit -->
 
-# Status dashboard
+# Statusdashboard
 
 ```cockpit
 {

@@ -14,7 +14,7 @@ language: fy
 
 ---
 
-# Sprint goal
+# Sprintdoel
 
 - It sprintdoel wie:...
 - Berikke / foar in part berikt / net berikt: ...
@@ -73,7 +73,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Stakeholder feedback
+# Weromkoppeling fan belanghawwenden
 
 | Feedback | Fan | Ferfolch |
 | --- | --- | --- |

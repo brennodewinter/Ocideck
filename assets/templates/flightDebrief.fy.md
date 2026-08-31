@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Flight debriefing
+title: Flechtdebriefing
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Flight debriefing
+# Flechtdebriefing
 ## Flecht · Datum · Bemanning
 
 ---

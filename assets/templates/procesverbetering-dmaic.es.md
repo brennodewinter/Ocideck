@@ -68,7 +68,7 @@ Nombrar al cliente, dueño del proceso, ejecutores y expertos requeridos.
 
 Registre hitos, puntos de decisión y fechas de finalización.
 
-## Success criteria
+## Criterios de éxito
 ¿Cuándo se puede demostrar que el resultado es suficientemente bueno y sostenible?
 
 ---

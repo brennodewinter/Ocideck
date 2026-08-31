@@ -25,7 +25,7 @@ language: la
 
 <!-- _class: table -->
 
-# GRIP levels
+# Gradus GRIP
 
 | Level | Scope | Coordinatio |
 | --- | --- | --- |
