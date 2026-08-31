@@ -646,4 +646,93 @@ void main() {
     expect(updated.callouts, hasLength(1));
     expect(updated.callouts.first.reference, 'A');
   });
+
+  // #1854: de stage moet de aspectratio van het echte beeldslot gebruiken,
+  // niet de dialoogverhouding — anders dekt cover een ander deel dan op de dia.
+  testWidgets('stage gebruikt de slot-aspectratio (#1854)', (tester) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['punt (A)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.5, 0.5)],
+          description: '',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle();
+
+    // imgFraction = 0.40 (default), slot-aspect = 0.40 * 16/9 ≈ 0.7111.
+    final aspect = tester
+        .widget<AspectRatio>(find.byType(AspectRatio))
+        .aspectRatio;
+    expect(aspect, closeTo(0.40 * 16 / 9, 0.001));
+  });
+
+  // #1854: alle verwijzingen tonen, niet alleen de geselecteerde — anders
+  // plaats je een tweede doel zonder te zien waar de eerste staat.
+  testWidgets('alle verwijzingen tonen zonder selectie (#1854)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['eerste (A)', 'tweede (B)'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.3, 0.3)],
+          description: '',
+        ),
+        ImageCallout(
+          reference: 'B',
+          targets: [CalloutPoint(0.7, 0.7)],
+          description: '',
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    // Geen callout geselecteerd — toch moeten beide reference-letters als
+    // statische markeringen zichtbaar zijn in het beeldvlak.
+    expect(find.text('A'), findsWidgets);
+    expect(find.text('B'), findsWidgets);
+  });
+
+  // #1854: het beeld is altijd aanwezig, ook zonder selectie — voorheen
+  // toonde het werkvlak "Selecteer een regel" in plaats van de afbeelding.
+  testWidgets('beeld toont altijd, ook zonder selectie (#1854)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['eerste punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    // Het beeld wordt gerenderd (Image widget aanwezig), ook zonder
+    // callout-selectie.
+    expect(find.byType(Image), findsWidgets);
+  });
 }

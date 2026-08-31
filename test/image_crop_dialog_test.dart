@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/widgets/slides/image_crop_dialog.dart';
 import 'package:path/path.dart' as p;
 
@@ -53,6 +54,7 @@ void main() {
     int imageSize = 0,
     double focalX = 0.5,
     double focalY = 0.5,
+    List<ImageCallout>? callouts,
   }) async {
     final uitkomst = <ImageCropResult?>[];
     await tester.binding.setSurfaceSize(const Size(1000, 900));
@@ -71,6 +73,7 @@ void main() {
                   imageSize: imageSize,
                   focalX: focalX,
                   focalY: focalY,
+                  callouts: callouts,
                 ),
               ),
               child: const Text('open'),
@@ -544,5 +547,33 @@ void main() {
         findsNothing,
       );
     });
+  });
+
+  // #1854: de bijsnijddialoog toont de callout-markeringen, zodat de auteur
+  // ziet welke doelen al geplaatst zijn en of bijsnijden ze uit beeld schuift.
+  testWidgets('callout-markeringen tonen in de bijsnijddialoog (#1854)', (
+    tester,
+  ) async {
+    await open(
+      tester,
+      callouts: const [
+        ImageCallout(
+          reference: 'A',
+          targets: [CalloutPoint(0.3, 0.3)],
+          description: '',
+        ),
+        ImageCallout(
+          reference: 'B',
+          targets: [CalloutPoint(0.7, 0.7)],
+          description: '',
+        ),
+      ],
+    );
+    // Extra pump om de image-stream te laten aflopen en _intrinsic te vullen.
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    // Beide reference-letters moeten als markeringen zichtbaar zijn.
+    expect(find.text('A'), findsWidgets);
+    expect(find.text('B'), findsWidgets);
   });
 }
