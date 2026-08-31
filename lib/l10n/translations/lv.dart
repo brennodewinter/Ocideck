@@ -2965,16 +2965,16 @@ const _dutchSourceAddLv = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (apakšējā robeža, neobligāti)',
   'Procesdoel (optioneel)': 'Procesa mērķis (neobligāti)',
   'Fasepoort': 'Fāzes vārti',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Aprēķināt',
+  'Gegevens': 'Dati',
+  'Hellingscoëfficiënt': 'Slīpums',
   'Hypothesetoets': 'Hipotēzes tests',
   'Hypothesetoets…': 'Hipotēzes tests…',
   'Hypothetisch gemiddelde': 'Hipotētiskais vidējais',
   'Lineaire regressie': 'Lineārā regresija',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresija…',
   'Meetdata': 'Mērījumu dati',
-  'Toets': 'Test',
+  'Toets': 'Tests',
   'Tolerantie (optioneel)': 'Pielaide (neobligāti)',
   'Eénsteeks t-toets': 'Viena parauga t tests',
   'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
@@ -3068,7 +3068,7 @@ const _dutchSourceAddLv = <String, String>{
       'nevarēja nolasīt un tika izlaists',
   'ontbrak in het bestand en is overgeslagen': 'trūka failā un tika izlaists',
   'Hoofdeffecten': 'Galvenie efekti',
-  'Interactie': 'Interaction',
+  'Interactie': 'Mijiedarbība',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Nepietiekami dati galveno efektu diagrammai',
   'Te weinig gegevens voor een interactieplot':
@@ -4588,7 +4588,7 @@ const _dutchSourceAddLv = <String, String>{
   'Geen slides gevonden.': 'Nav atrasts neviens slaids.',
   "dia's geïmporteerd.": 'slaidi importēti.',
   'Import mislukt: ': 'Imports neizdevās: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrolsaraksti',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Iestatiet serveri cilnē LibrePlan savienotājs. Kamēr tur nekā nav, nekas nenotiek.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4615,7 +4615,7 @@ const _dutchSourceAddLv = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Apgabali',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
   'Afbeeldingsverwijzingen': 'Attēlu atsauces',
 };

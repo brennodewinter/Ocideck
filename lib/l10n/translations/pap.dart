@@ -2012,14 +2012,14 @@ const _dutchSourceAddPap = {
   'LSL (ondergrens, optioneel)': 'LSL (límite inferior, opsional)',
   'Procesdoel (optioneel)': 'Meta di proseso (opsional)',
   'Fasepoort': 'Porta di fase',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Kalkulá',
+  'Gegevens': 'Datos',
+  'Hellingscoëfficiënt': 'Inklinashon',
   'Hypothesetoets': 'Test di hipótesis',
   'Hypothesetoets…': 'Test di hipótesis…',
   'Hypothetisch gemiddelde': 'Promedio hipotétiko',
   'Lineaire regressie': 'Regreshon lineal',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regreshon…',
   'Meetdata': 'Dato di midishon',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Toleransia (opshonal)',
@@ -2118,7 +2118,7 @@ const _dutchSourceAddPap = {
   'ontbrak in het bestand en is overgeslagen':
       'tabata falta den e archivo i a keda saltá',
   'Hoofdeffecten': 'Efektonan prinsipal',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakshon',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Masha poko data pa un gráfico di efecto prinsipal',
   'Te weinig gegevens voor een interactieplot':
@@ -4628,7 +4628,7 @@ const _dutchSourceAddPap = {
   'Geen slides gevonden.': 'No a haña lámina.',
   "dia's geïmporteerd.": 'lámina importá.',
   'Import mislukt: ': 'Importashon a faya: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Lista di kontrol',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Konfigurá e server na e tab Konektor LibrePlan. Miéntras no tin nada einan, no ta pasa nada.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4655,7 +4655,7 @@ const _dutchSourceAddPap = {
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Footnote ta bira texto sòbel; un presentashon no tin notanan.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Áreanan',
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',
   'Afbeeldingsverwijzingen': 'Referensian di imágen',

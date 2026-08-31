@@ -2934,8 +2934,8 @@ const _dutchSourceAddTlh = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (bIng HeH, chaw\')',
   'Procesdoel (optioneel)': 'Qu\' ngoQ (chaw\')',
   'Fasepoort': 'mIw lojmIt',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
+  'Berekenen': 'togh',
+  'Gegevens': 'De\'',
   'Hellingscoëfficiënt': 'Slope',
   'Hypothesetoets': 'qech \'ol',
   'Hypothesetoets…': 'qech \'ol…',
@@ -4532,7 +4532,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Geen slides gevonden.': '\'echletHommey tu\'lu\'be\'.',
   "dia's geïmporteerd.": '\'echletHommey kII\'lu\'pu\'.',
   'Import mislukt: ': 'kII\' Qaghpu\': ',
-  'Checklists': 'Checklists',
+  'Checklists': 'checklistmey',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'LibrePlan rarwI\' perDaq De\'wI\' yIcher. pa\' pagh tu\'lu\'taHvIS, pagh qaS.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4559,7 +4559,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Sepmey',
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
   'Afbeeldingsverwijzingen': 'mIllogh reference\'mey',

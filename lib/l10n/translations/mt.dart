@@ -3002,14 +3002,14 @@ const _dutchSourceAddMt = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (limitu t\'isfel, fakultattiv)',
   'Procesdoel (optioneel)': 'Mira tal-proċess (fakultattiv)',
   'Fasepoort': 'Bieb ta’ fażi',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Ikkalkula',
+  'Gegevens': 'Dejta',
+  'Hellingscoëfficiënt': 'Inklinazzjoni',
   'Hypothesetoets': 'Test tal-ipoteżi',
   'Hypothesetoets…': 'Test tal-ipoteżi…',
   'Hypothetisch gemiddelde': 'Medja ipotetika',
   'Lineaire regressie': 'Rigressjoni lineari',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Riggressjoni…',
   'Meetdata': 'Data tal-kejl',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Tolleranza (mhux obbligatorju)',
@@ -3106,7 +3106,7 @@ const _dutchSourceAddMt = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'kien nieqes mill-fajl u ġie maqbuż',
   'Hoofdeffecten': 'Effetti prinċipali',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interazzjoni',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Mhux biżżejjed data għal plot tal-effetti ewlenin',
   'Te weinig gegevens voor een interactieplot':
@@ -4645,7 +4645,7 @@ const _dutchSourceAddMt = <String, String>{
   'Geen slides gevonden.': 'Ma nstabet l-ebda slide.',
   "dia's geïmporteerd.": 'slides impurtati.',
   'Import mislukt: ': 'L-importazzjoni falliet: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Listi ta\' kontroll',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Ikkonfigura s-server fit-tab Konnettur LibrePlan. Sakemm hemmhekk ma jkun hemm xejn, ma jiġri xejn.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4672,7 +4672,7 @@ const _dutchSourceAddMt = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Żoni',
   'bv. "de controller board met display"':
       'eż. "il-bord tal-kontroll b\'display"',
   'Afbeeldingsverwijzingen': 'Referenzi tal-immaġini',

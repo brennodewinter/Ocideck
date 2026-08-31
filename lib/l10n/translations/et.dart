@@ -2956,14 +2956,14 @@ const _dutchSourceAddEt = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (alumine piir, valikuline)',
   'Procesdoel (optioneel)': 'Protsessi siht (valikuline)',
   'Fasepoort': 'Faasivärav',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Arvuta',
+  'Gegevens': 'Andmed',
+  'Hellingscoëfficiënt': 'Tõus',
   'Hypothesetoets': 'Hüpoteesi test',
   'Hypothesetoets…': 'Hüpoteesi test…',
   'Hypothetisch gemiddelde': 'Hüpoteetiline keskmine',
   'Lineaire regressie': 'Lineaarne regressioon',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regressioon…',
   'Meetdata': 'Mõõtmisandmed',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Tolerants (valikuline)',
@@ -3060,7 +3060,7 @@ const _dutchSourceAddEt = <String, String>{
       'ei õnnestunud lugeda ja jäeti vahele',
   'ontbrak in het bestand en is overgeslagen': 'puudus failis ja jäeti vahele',
   'Hoofdeffecten': 'Peamõjud',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interaktsioon',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Liiga vähe andmeid peamõjude graafiku jaoks',
   'Te weinig gegevens voor een interactieplot':
@@ -4584,7 +4584,7 @@ const _dutchSourceAddEt = <String, String>{
   'Geen slides gevonden.': 'Slaide ei leitud.',
   "dia's geïmporteerd.": 'slaidi imporditud.',
   'Import mislukt: ': 'Import ebaõnnestus: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrollnimekirjad',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Seadistage server vahekaardil LibrePlani konnektor. Kuni seal pole midagi, ei juhtu midagi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4611,7 +4611,7 @@ const _dutchSourceAddEt = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Alad',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
   'Afbeeldingsverwijzingen': 'Pildiviited',
 };

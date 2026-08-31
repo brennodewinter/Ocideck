@@ -2985,16 +2985,16 @@ const _dutchSourceAddLa = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (limes inferior, optionale)',
   'Procesdoel (optioneel)': 'Scopus processus (optionale)',
   'Fasepoort': 'Porta phaseos',
-  'Berekenen': 'Calculate',
+  'Berekenen': 'Computa',
   'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Hellingscoëfficiënt': 'Inclinatio',
   'Hypothesetoets': 'Probatio hypothesis',
   'Hypothesetoets…': 'Probatio hypothesis…',
   'Hypothetisch gemiddelde': 'Media hypothetica',
   'Lineaire regressie': 'Regressio linearis',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regressio…',
   'Meetdata': 'Data mensurae',
-  'Toets': 'Test',
+  'Toets': 'Probatio',
   'Tolerantie (optioneel)': 'Tolerantia (optativa)',
   'Eénsteeks t-toets': 'Probatio t unius exempli',
   'Twee-steeks t-toets (Welch)': 'Test t a due campioni (Welch)',
@@ -3089,7 +3089,7 @@ const _dutchSourceAddLa = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'in plica deerat et praetermissum est',
   'Hoofdeffecten': 'Effectus principales',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interactio',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Non satis data pro schemate effectuum principalium',
   'Te weinig gegevens voor een interactieplot':
@@ -4607,7 +4607,7 @@ const _dutchSourceAddLa = <String, String>{
   'Geen slides gevonden.': 'Nullae paginae inventae.',
   "dia's geïmporteerd.": 'scidae importatae.',
   'Import mislukt: ': 'Importatio defecit: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Indices',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Servitorem in pagella Coniunctio LibrePlan constitue. Dum ibi nihil est, nihil fit.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4634,7 +4634,7 @@ const _dutchSourceAddLa = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Regiones',
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
   'Afbeeldingsverwijzingen': 'Imaginum referentiae',

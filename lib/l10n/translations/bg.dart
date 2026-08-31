@@ -2997,16 +2997,16 @@ const _dutchSourceAddBg = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (долна граница, незадължително)',
   'Procesdoel (optioneel)': 'Цел на процеса (незадължително)',
   'Fasepoort': 'Фазов шлюз',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Изчисли',
+  'Gegevens': 'Данни',
+  'Hellingscoëfficiënt': 'Наклон',
   'Hypothesetoets': 'Тест на хипотеза',
   'Hypothesetoets…': 'Тест на хипотеза…',
   'Hypothetisch gemiddelde': 'Хипотетична средна стойност',
   'Lineaire regressie': 'Линейна регресия',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Регресия…',
   'Meetdata': 'Данни от измерването',
-  'Toets': 'Test',
+  'Toets': 'Тест',
   'Tolerantie (optioneel)': 'Толеранс (незадължително)',
   'Eénsteeks t-toets': 'Едноизвадков t-тест',
   'Twee-steeks t-toets (Welch)': 't-тест для двох вибірок (Welch)',
@@ -3101,7 +3101,7 @@ const _dutchSourceAddBg = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'липсваше във файла и се пропусна',
   'Hoofdeffecten': 'Главни ефекти',
-  'Interactie': 'Interaction',
+  'Interactie': 'Взаимодействие',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Недостатъчно данни за график на главните ефекти',
   'Te weinig gegevens voor een interactieplot':
@@ -4633,7 +4633,7 @@ const _dutchSourceAddBg = <String, String>{
   'Geen slides gevonden.': 'Не са намерени слайдове.',
   "dia's geïmporteerd.": 'слайда са импортирани.',
   'Import mislukt: ': 'Импортирането е неуспешно: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Контролни списъци',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Настройте сървъра в раздела Конектор LibrePlan. Докато там няма нищо, нищо не се случва.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4660,7 +4660,7 @@ const _dutchSourceAddBg = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Бележките под линия стават обикновен текст; презентация няма бележки.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Области',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
   'Afbeeldingsverwijzingen': 'Справки към изображения',
 };

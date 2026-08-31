@@ -2977,16 +2977,16 @@ const _dutchSourceAddLt = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (apatinė riba, pasirenkama)',
   'Procesdoel (optioneel)': 'Proceso tikslas (pasirenkama)',
   'Fasepoort': 'Fazės vartai',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Skaičiuoti',
+  'Gegevens': 'Duomenys',
+  'Hellingscoëfficiënt': 'Nuolydis',
   'Hypothesetoets': 'Hipotezės testas',
   'Hypothesetoets…': 'Hipotezės testas…',
   'Hypothetisch gemiddelde': 'Hipotetinis vidurkis',
   'Lineaire regressie': 'Tiesinė regresija',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresija…',
   'Meetdata': 'Matavimo duomenys',
-  'Toets': 'Test',
+  'Toets': 'Testas',
   'Tolerantie (optioneel)': 'Leistinoji nuokrypa (nebūtina)',
   'Eénsteeks t-toets': 'Vienos imties t testas',
   'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
@@ -3082,7 +3082,7 @@ const _dutchSourceAddLt = <String, String>{
       'nepavyko nuskaityti ir praleista',
   'ontbrak in het bestand en is overgeslagen': 'trūko faile ir praleista',
   'Hoofdeffecten': 'Pagrindiniai efektai',
-  'Interactie': 'Interaction',
+  'Interactie': 'Sąveika',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Nepakanka duomenų pagrindinių efektų grafikui',
   'Te weinig gegevens voor een interactieplot':
@@ -4607,7 +4607,7 @@ const _dutchSourceAddLt = <String, String>{
   'Geen slides gevonden.': 'Skaidrių nerasta.',
   "dia's geïmporteerd.": 'skaidrės importuotos.',
   'Import mislukt: ': 'Importuoti nepavyko: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontroliniai sąrašai',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Sukonfigūruokite serverį kortelėje LibrePlan jungtis. Kol ten nieko nėra, nieko ir nevyksta.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4634,7 +4634,7 @@ const _dutchSourceAddLt = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Sritys',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
   'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
 };

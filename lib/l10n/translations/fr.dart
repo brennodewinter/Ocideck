@@ -4705,7 +4705,7 @@ const _dutchSourceAddFr = {
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Les notes de bas de page deviennent du texte brut ; une présentation n\'a pas de notes.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Zones',
   'bv. "de controller board met display"':
       'p. ex. « la carte de contrôle avec écran »',
   'Afbeeldingsverwijzingen': 'Références d\'image',

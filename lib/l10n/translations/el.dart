@@ -293,7 +293,7 @@ const _dutchSourceEl = {
       'Η υποστήριξη AI είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
   'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
       'Η υποστήριξη AI είναι προαιρετική και απενεργοποιημένη από προεπιλογή. Δεν αποστέλλεται τίποτα μέχρι να την ενεργοποιήσετε και να επιλέξετε μόνοι σας ένα backend. Αυτή η λειτουργία λειτουργεί μόνο στην έκδοση για υπολογιστή.',
-  'AI-backend': 'Backend AI',
+  'AI-backend': 'Υπηρεσία AI',
   'Lokaal (op dit apparaat)': 'Τοπικά (σε αυτή τη συσκευή)',
   'Zelf gehost (eigen server)': 'Αυτοφιλοξενούμενο (δικός σας διακομιστής)',
   'Cloud (externe dienst)': 'Cloud (εξωτερική υπηρεσία)',
@@ -868,7 +868,7 @@ const _dutchSourceEl = {
   'Duur verlengen': 'Αύξηση διάρκειας',
   'Afspelen': 'Αναπαραγωγή',
   'Pauzeren': 'Παύση',
-  'Opsommingsteken': 'Bullet',
+  'Opsommingsteken': 'Κουκκίδα',
   'Stip': 'Κουκκίδα',
   'Pootje': 'Πατούσα',
   'In tweeën splitsen': 'Διαίρεση στα δύο',
@@ -1017,7 +1017,7 @@ const _dutchSourceEl = {
   'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
       'Τα χρώματα κατάστασης ακολουθούν το χρωματικό σχήμα cockpit· προσαρμόστε το ή δημιουργήστε παραλλαγές μέσω Ρυθμίσεις → Cockpit.',
   'Veel bullets op deze slide': 'Πολλά bullets σε αυτή τη διαφάνεια',
-  'bullets': 'bullets',
+  'bullets': 'κουκκίδες',
   'Overweeg de inhoud te splitsen.':
       'Εξετάστε το ενδεχόμενο να χωρίσετε το περιεχόμενο.',
   'Erg veel bullets op deze slide': 'Πάρα πολλά bullets σε αυτή τη διαφάνεια',
@@ -1057,8 +1057,8 @@ const _dutchSourceEl = {
   'Type': 'Τύπος',
   'Waarde': 'Τιμή',
   'Eenheid': 'Μονάδα',
-  'Pitch': 'Pitch',
-  'Bank': 'Bank',
+  'Pitch': 'Πρόνευση',
+  'Bank': 'Κλίση',
   'Werkelijk': 'Πραγματικό',
   'Doel': 'Στόχος',
   'Markeringslabel': 'Ετικέτα δείκτη',
@@ -1137,7 +1137,7 @@ const _dutchSourceEl = {
   'Toont een streep door voltooide checklistitems.':
       'Εμφανίζει τα ολοκληρωμένα στοιχεία λίστας με διαγράμμιση.',
   'Na media automatisch doorgaan': 'Αυτόματη συνέχεια μετά το μέσο',
-  'Opsomming': 'Bullets',
+  'Opsomming': 'Κουκκίδες',
   'Nummering': 'Αρίθμηση',
   'Varianten': 'Παραλλαγές',
   'Grafiekvarianten maken': 'Δημιουργία παραλλαγών γραφήματος',
@@ -1149,7 +1149,7 @@ const _dutchSourceEl = {
       'Αυτές οι διαφάνειες χρησιμοποιούν τα ίδια δεδομένα, χρώματα και τίτλο. Χρησιμοποιήστε τα βελάκια για να επιλέξετε τη σειρά τους μετά την τρέχουσα διαφάνεια.',
   'Afbeelding': 'Εικόνα',
   'Broncode': 'Πηγαίος κώδικας',
-  'Bullet': 'Bullet',
+  'Bullet': 'Κουκκίδα',
   'Plak of typ hier je broncode...':
       'Επικολλήστε ή πληκτρολογήστε εδώ τον πηγαίο κώδικά σας...',
   'Programmeertaal': 'Γλώσσα προγραμματισμού',
@@ -1163,7 +1163,7 @@ const _dutchSourceEl = {
   'Staaf': 'Ράβδοι',
   'Lijn': 'Γραμμή',
   'Cirkel': 'Πίτα',
-  'Spider': 'Spider',
+  'Spider': 'Ραντάρ',
   'CSV importeren': 'Εισαγωγή CSV',
   'Gekoppeld aan': 'Συνδεδεμένο με',
   'Ontkoppelen': 'Αποσύνδεση',
@@ -3007,19 +3007,19 @@ const _dutchSourceAddEl = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (κατώτατο όριο, προαιρετικό)',
   'Procesdoel (optioneel)': 'Στόχος διαδικασίας (προαιρετικό)',
   'Fasepoort': 'Πύλη φάσης',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Υπολογισμός',
+  'Gegevens': 'Δεδομένα',
+  'Hellingscoëfficiënt': 'Κλίση',
   'Hypothesetoets': 'Έλεγχος υπόθεσης',
   'Hypothesetoets…': 'Έλεγχος υπόθεσης…',
   'Hypothetisch gemiddelde': 'Υποθετικός μέσος',
   'Lineaire regressie': 'Γραμμική παλινδρόμηση',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Παλινδρόμηση…',
   'Meetdata': 'Δεδομένα μετρήσεων',
-  'Toets': 'Test',
+  'Toets': 'Έλεγχος',
   'Tolerantie (optioneel)': 'Ανοχή (προαιρετικό)',
   'Eénsteeks t-toets': 't-έλεγχος ενός δείγματος',
-  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Twee-steeks t-toets (Welch)': 't-έλεγχος δύο δειγμάτων (Welch)',
   'Één kolom getallen (minimaal 2 waarnemingen).':
       'Μία στήλη αριθμών (τουλάχιστον 2 παρατηρήσεις).',
   'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
@@ -3113,7 +3113,7 @@ const _dutchSourceAddEl = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'έλειπε από το αρχείο και παραλείφθηκε',
   'Hoofdeffecten': 'Κύριες επιδράσεις',
-  'Interactie': 'Interaction',
+  'Interactie': 'Αλληλεπίδραση',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Ανεπαρκή δεδομένα για διάγραμμα κύριων επιδράσεων',
   'Te weinig gegevens voor een interactieplot':
@@ -3122,12 +3122,11 @@ const _dutchSourceAddEl = <String, String>{
   'DOE-proefopzet': 'Σχεδιασμός DOE',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Δημιουργεί πίνακα σχεδίου με κωδικοποιημένους παράγοντες (−1/+1) και κενή στήλη Y στο πλέγμα.',
-  'Aantal factoren': 'Anzahl Faktoren',
-  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Aantal factoren': 'Αριθμός παραγόντων',
+  'Volledig factorial (2^k)': 'Πλήρες παραγοντικό (2^k)',
   'Fractioneel (2^(k−p))': 'Κλασματικό (2^(k−p))',
   'Fractie p': 'Κλάσμα p',
-  'runs in standaard Yates-volgorde':
-      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'runs in standaard Yates-volgorde': 'εκτελέσεις σε τυπική σειρά Yates',
   'In raster zetten': 'Τοποθέτηση σε πλέγμα',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Μία σειρά ανά παράγοντα με κωδικοποιημένα επίπεδα −1 και +1· η τελευταία σειρά είναι η απόκριση (Y). Οι γραμμές είναι πειραματικές εκτελέσεις.',
@@ -4659,7 +4658,7 @@ const _dutchSourceAddEl = <String, String>{
   'Geen slides gevonden.': 'Δεν βρέθηκαν διαφάνειες.',
   "dia's geïmporteerd.": 'διαφάνειες εισήχθησαν.',
   'Import mislukt: ': 'Η εισαγωγή απέτυχε: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Λίστες ελέγχου',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Ρυθμίστε τον διακομιστή στην καρτέλα Σύνδεσμος LibrePlan. Όσο εκεί δεν υπάρχει τίποτα, δεν συμβαίνει τίποτα.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4686,7 +4685,7 @@ const _dutchSourceAddEl = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Περιοχές',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
   'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
 };

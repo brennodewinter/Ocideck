@@ -2971,16 +2971,16 @@ const _dutchSourceAddId = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (batas bawah, opsional)',
   'Procesdoel (optioneel)': 'Target proses (opsional)',
   'Fasepoort': 'Gerbang fase',
-  'Berekenen': 'Calculate',
+  'Berekenen': 'Hitung',
   'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Hellingscoëfficiënt': 'Kemiringan',
   'Hypothesetoets': 'Uji hipotesis',
   'Hypothesetoets…': 'Uji hipotesis…',
   'Hypothetisch gemiddelde': 'Rata-rata hipotesis',
   'Lineaire regressie': 'Regresi linear',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresi…',
   'Meetdata': 'Data pengukuran',
-  'Toets': 'Test',
+  'Toets': 'Uji',
   'Tolerantie (optioneel)': 'Toleransi (opsional)',
   'Eénsteeks t-toets': 'Uji t satu sampel',
   'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
@@ -3076,7 +3076,7 @@ const _dutchSourceAddId = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'tidak ada dalam berkas dan dilewati',
   'Hoofdeffecten': 'Efek utama',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interaksi',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Data tidak cukup untuk plot efek utama',
   'Te weinig gegevens voor een interactieplot':
@@ -4602,7 +4602,7 @@ const _dutchSourceAddId = <String, String>{
   'Geen slides gevonden.': 'Tidak ada slide ditemukan.',
   "dia's geïmporteerd.": 'slide diimpor.',
   'Import mislukt: ': 'Impor gagal: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Daftar periksa',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Atur server di tab Konektor LibrePlan. Selama di sana belum ada apa-apa, tidak terjadi apa-apa.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4628,7 +4628,7 @@ const _dutchSourceAddId = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Catatan kaki menjadi teks biasa; presentasi tidak memiliki catatan.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Area',
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',
   'Afbeeldingsverwijzingen': 'Referensi gambar',

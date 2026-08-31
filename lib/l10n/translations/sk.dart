@@ -2968,14 +2968,14 @@ const _dutchSourceAddSk = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (dolná medza, voliteľné)',
   'Procesdoel (optioneel)': 'Cieľ procesu (voliteľné)',
   'Fasepoort': 'Fázová brána',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Vypočítať',
+  'Gegevens': 'Údaje',
+  'Hellingscoëfficiënt': 'Sklon',
   'Hypothesetoets': 'Test hypotézy',
   'Hypothesetoets…': 'Test hypotézy…',
   'Hypothetisch gemiddelde': 'Hypotetický priemer',
   'Lineaire regressie': 'Lineárna regresia',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresia…',
   'Meetdata': 'Namerané údaje',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Tolerancia (voliteľné)',
@@ -3072,7 +3072,7 @@ const _dutchSourceAddSk = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'chýbalo v súbore a bolo preskočené',
   'Hoofdeffecten': 'Hlavné efekty',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakcia',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Príliš málo dát pre graf hlavných efektov',
   'Te weinig gegevens voor een interactieplot':
@@ -4594,7 +4594,7 @@ const _dutchSourceAddSk = <String, String>{
   'Geen slides gevonden.': 'Nenašli sa žiadne snímky.',
   "dia's geïmporteerd.": 'snímok importovaných.',
   'Import mislukt: ': 'Import zlyhal: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrolné zoznamy',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Nastavte server na karte Konektor LibrePlan. Kým tam nič nie je, nič sa nedeje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4621,7 +4621,7 @@ const _dutchSourceAddSk = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Oblasti',
   'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
 };

@@ -2968,14 +2968,14 @@ const _dutchSourceAddHr = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (donja granica, opcionalno)',
   'Procesdoel (optioneel)': 'Cilj procesa (opcionalno)',
   'Fasepoort': 'Fazna vrata',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Izračunaj',
+  'Gegevens': 'Podaci',
+  'Hellingscoëfficiënt': 'Nagib',
   'Hypothesetoets': 'Test hipoteze',
   'Hypothesetoets…': 'Test hipoteze…',
   'Hypothetisch gemiddelde': 'Hipotetska sredina',
   'Lineaire regressie': 'Linearna regresija',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresija…',
   'Meetdata': 'Podaci mjerenja',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Tolerancija (neobavezno)',
@@ -3071,7 +3071,7 @@ const _dutchSourceAddHr = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'nedostajalo je u datoteci i preskočeno je',
   'Hoofdeffecten': 'Glavni učinci',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakcija',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Premalo podataka za grafikon glavnih učinaka',
   'Te weinig gegevens voor een interactieplot':
@@ -4592,7 +4592,7 @@ const _dutchSourceAddHr = <String, String>{
   'Geen slides gevonden.': 'Nisu pronađeni slajdovi.',
   "dia's geïmporteerd.": 'slajdova uvezeno.',
   'Import mislukt: ': 'Uvoz nije uspio: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrolni popisi',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Postavite poslužitelj na kartici Konektor LibrePlan. Dok ondje ništa ne piše, ništa se ne događa.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4619,7 +4619,7 @@ const _dutchSourceAddHr = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Područja',
   'bv. "de controller board met display"':
       'npr. "upravljačka ploča s zaslonom"',
   'Afbeeldingsverwijzingen': 'Reference slika',
