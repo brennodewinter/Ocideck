@@ -64,25 +64,25 @@ Kuvaa tähän tunnistettava tilanne käytännöstä.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Mikä on oikea valinta?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Oikea vastaus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Väärä vastaus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Toinen väärä vastaus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Vielä yksi väärä vastaus",
       "correct": false
     }
   ]

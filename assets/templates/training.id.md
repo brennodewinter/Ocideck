@@ -64,25 +64,25 @@ Jelaskan di sini situasi nyata yang mudah dikenali.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Apa pilihan yang tepat?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Jawaban yang benar",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Jawaban yang salah",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Jawaban salah lainnya",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Satu lagi jawaban yang salah",
       "correct": false
     }
   ]

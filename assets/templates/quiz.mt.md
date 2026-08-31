@@ -28,25 +28,25 @@ language: mt
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ibdel dan bil-mistoqsija tiegħek b'għażla multipla.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "It-tweġiba t-tajba",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Tweġiba ħażina",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Tweġiba ħażina oħra",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "U tweġiba ħażina oħra",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: mt
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ibdel dan b'dikjarazzjoni li hija vera jew falza.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: mt
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ibdel dan b'mistoqsija li għandha aktar minn tweġiba tajba waħda.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Tweġiba tajba 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Tweġiba tajba 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Tweġiba ħażina 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Tweġiba ħażina 2",
       "correct": false
     }
   ]

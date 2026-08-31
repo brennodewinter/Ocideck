@@ -60,7 +60,7 @@ flowchart LR
 # Sampla cód
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Cuir an cód is mian leat a mhíniú in ionad an tsampla seo.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

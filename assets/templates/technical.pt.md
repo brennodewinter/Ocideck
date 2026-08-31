@@ -60,7 +60,7 @@ flowchart LR
 # Exemplo de código
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Substitua este exemplo pelo código que quer explicar.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

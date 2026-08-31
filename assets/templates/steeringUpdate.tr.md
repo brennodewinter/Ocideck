@@ -32,7 +32,7 @@ language: tr
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Bütçe kullanımı",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: tr
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Plana güven",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: tr
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Risk düzeyi",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

@@ -28,25 +28,25 @@ language: et
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Asenda see oma valikvastustega küsimusega.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Õige vastus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Vale vastus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Veel üks vale vastus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ja veel üks vale vastus",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: et
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Asenda see väitega, mis on tõene või väär.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: et
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Asenda see küsimusega, millel on mitu õiget vastust.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Õige vastus 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Õige vastus 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Vale vastus 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Vale vastus 2",
       "correct": false
     }
   ]

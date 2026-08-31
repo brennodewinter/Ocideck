@@ -60,7 +60,7 @@ flowchart LR
 # Eżempju tal-kodiċi
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Ibdel dan l-eżempju bil-kodiċi li trid tispjega.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

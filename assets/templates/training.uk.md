@@ -64,25 +64,25 @@ language: uk
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Який вибір правильний?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правильна відповідь",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ще одна неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "І ще одна неправильна відповідь",
       "correct": false
     }
   ]

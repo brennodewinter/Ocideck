@@ -64,25 +64,25 @@ language: el
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Ποια είναι η σωστή επιλογή;",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Η σωστή απάντηση",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Μια λάθος απάντηση",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Άλλη μια λάθος απάντηση",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Και άλλη μια λάθος απάντηση",
       "correct": false
     }
   ]

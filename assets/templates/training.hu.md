@@ -64,25 +64,25 @@ language: hu
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Mi a helyes választás?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "A helyes válasz",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Még egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "És még egy rossz válasz",
       "correct": false
     }
   ]

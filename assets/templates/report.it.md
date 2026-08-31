@@ -40,16 +40,16 @@ language: it
 {
   "type": "line",
   "x": [
-    "Jan",
+    "Gen",
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mag",
+    "Giu"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Quest'anno",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: it
       ]
     },
     {
-      "name": "Last year",
+      "name": "Anno scorso",
       "data": [
         10.0,
         11.0,

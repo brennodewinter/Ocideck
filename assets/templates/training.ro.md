@@ -64,25 +64,25 @@ Descrie aici o situație recognoscibilă din practică.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Care este alegerea corectă?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Răspunsul corect",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Un răspuns greșit",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Alt răspuns greșit",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Și încă un răspuns greșit",
       "correct": false
     }
   ]

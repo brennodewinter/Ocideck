@@ -32,7 +32,7 @@ language: fy
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budzjetferbrûk",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: fy
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Risikonivo",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: fy
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Fertrouwen yn de planning",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: fy
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Trend iepensteande punten",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

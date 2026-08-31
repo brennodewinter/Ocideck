@@ -28,25 +28,25 @@ language: ro
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Înlocuiește aceasta cu propria ta întrebare cu variante multiple.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Răspunsul corect",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Un răspuns greșit",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Alt răspuns greșit",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Și încă un răspuns greșit",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: ro
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Înlocuiește aceasta cu o afirmație adevărată sau falsă.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: ro
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Înlocuiește aceasta cu o întrebare cu mai multe răspunsuri corecte.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Răspuns corect 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Răspuns corect 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Răspuns greșit 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Răspuns greșit 2",
       "correct": false
     }
   ]

@@ -60,7 +60,7 @@ flowchart LR
 # Примерен код
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Заменете този пример с кода, който искате да обясните.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

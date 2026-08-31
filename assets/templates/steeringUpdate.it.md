@@ -32,7 +32,7 @@ language: it
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Consumo del budget",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: it
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Fiducia nella pianificazione",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: it
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Livello di rischio",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

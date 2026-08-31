@@ -45,7 +45,7 @@ language: fy
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Meldings",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: fy
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Ynsidinten",
       "data": [
         9.0,
         12.0,

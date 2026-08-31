@@ -64,25 +64,25 @@ Beskriuw hjir in werkenbere situaasje út de praktyk.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Wat is de goede kar?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "It goede antwurd",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "In ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Noch in ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "En noch in ferkeard antwurd",
       "correct": false
     }
   ]

@@ -28,14 +28,14 @@ language: mt
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Teknoloġija",
+    "Proċessi",
+    "Nies"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Lest (%)",
       "data": [
         80.0,
         55.0,

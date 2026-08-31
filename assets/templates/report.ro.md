@@ -40,16 +40,16 @@ language: ro
 {
   "type": "line",
   "x": [
-    "Jan",
+    "Ian",
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mai",
+    "Iun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Anul acesta",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: ro
       ]
     },
     {
-      "name": "Last year",
+      "name": "Anul trecut",
       "data": [
         10.0,
         11.0,

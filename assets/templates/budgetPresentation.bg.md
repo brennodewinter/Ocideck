@@ -63,7 +63,7 @@ language: bg
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Бюджет",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: bg
       ]
     },
     {
-      "name": "Actual",
+      "name": "Реализация",
       "data": [
         298.0,
         318.0,

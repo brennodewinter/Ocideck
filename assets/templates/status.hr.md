@@ -32,7 +32,7 @@ language: hr
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Potrošnja proračuna",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: hr
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Razina rizika",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: hr
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Povjerenje u plan",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: hr
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Trend otvorenih točaka",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

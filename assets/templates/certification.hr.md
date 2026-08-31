@@ -28,14 +28,14 @@ language: hr
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Tehnika",
+    "Procesi",
+    "Ljudi"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Spremno (%)",
       "data": [
         80.0,
         55.0,

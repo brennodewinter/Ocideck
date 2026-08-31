@@ -72,7 +72,7 @@ language: da
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realiseret",
       "data": [
         298.0,
         318.0,

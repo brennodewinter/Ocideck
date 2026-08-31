@@ -28,14 +28,14 @@ language: ga
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Beartas",
+    "Teicneolaíocht",
+    "Próisis",
+    "Daoine"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Réidh (%)",
       "data": [
         80.0,
         55.0,

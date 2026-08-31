@@ -32,7 +32,7 @@ language: da
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budgetforbrug",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: da
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Risikoniveau",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: da
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Tillid til planen",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: da
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Tendens for åbne punkter",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

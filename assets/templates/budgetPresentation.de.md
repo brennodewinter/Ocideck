@@ -72,7 +72,7 @@ language: de
       ]
     },
     {
-      "name": "Actual",
+      "name": "Ist",
       "data": [
         298.0,
         318.0,

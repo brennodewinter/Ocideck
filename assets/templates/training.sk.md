@@ -64,25 +64,25 @@ Opíšte tu rozpoznateľnú situáciu z praxe.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Aká je správna voľba?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Správna odpoveď",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Nesprávna odpoveď",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ďalšia nesprávna odpoveď",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "A ešte jedna nesprávna odpoveď",
       "correct": false
     }
   ]

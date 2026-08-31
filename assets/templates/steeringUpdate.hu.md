@@ -32,7 +32,7 @@ language: hu
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Költségvetés felhasználása",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: hu
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Bizalom az ütemtervben",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: hu
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Kockázati szint",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

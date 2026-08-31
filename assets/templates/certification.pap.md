@@ -28,14 +28,14 @@ language: pap
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Polítika",
+    "Tékniko",
+    "Prosesonan",
+    "Hendenan"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Kla (%)",
       "data": [
         80.0,
         55.0,

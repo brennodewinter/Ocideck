@@ -28,14 +28,14 @@ language: pt
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Política",
+    "Tecnologia",
+    "Processos",
+    "Pessoas"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Pronto (%)",
       "data": [
         80.0,
         55.0,

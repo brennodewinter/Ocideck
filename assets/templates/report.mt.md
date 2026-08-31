@@ -41,15 +41,15 @@ language: mt
   "type": "line",
   "x": [
     "Jan",
-    "Feb",
+    "Fra",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mej",
+    "Ġun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Din is-sena",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: mt
       ]
     },
     {
-      "name": "Last year",
+      "name": "Is-sena l-oħra",
       "data": [
         10.0,
         11.0,

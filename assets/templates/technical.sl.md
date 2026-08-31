@@ -60,7 +60,7 @@ flowchart LR
 # Primer kode
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Zamenjaj ta primer s kodo, ki jo želiš pojasniti.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

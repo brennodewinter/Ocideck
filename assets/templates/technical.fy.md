@@ -60,7 +60,7 @@ flowchart LR
 # Koade foarbyld
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Ferfang dit foarbyld troch de koade dy't do taljochtsje wolst.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

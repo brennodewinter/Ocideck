@@ -45,7 +45,7 @@ language: sk
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Hlásenia",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: sk
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenty",
       "data": [
         9.0,
         12.0,

@@ -64,25 +64,25 @@ Aprašykite čia atpažįstamą situaciją iš praktikos.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Koks yra teisingas pasirinkimas?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Teisingas atsakymas",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Dar vienas neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ir dar vienas neteisingas atsakymas",
       "correct": false
     }
   ]

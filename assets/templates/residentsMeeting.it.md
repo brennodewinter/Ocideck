@@ -45,7 +45,7 @@ language: it
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Segnalazioni",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: it
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenti",
       "data": [
         9.0,
         12.0,

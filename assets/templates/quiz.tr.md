@@ -28,25 +28,25 @@ language: tr
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Bunu kendi çoktan seçmeli sorunuzla değiştirin.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Doğru cevap",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Yanlış bir cevap",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Başka bir yanlış cevap",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Bir yanlış cevap daha",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: tr
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Bunu doğru ya da yanlış olan bir ifadeyle değiştirin.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: tr
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Bunu birden fazla doğru cevabı olan bir soruyla değiştirin.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Doğru cevap 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Doğru cevap 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Yanlış cevap 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Yanlış cevap 2",
       "correct": false
     }
   ]

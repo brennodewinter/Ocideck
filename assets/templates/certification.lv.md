@@ -28,14 +28,14 @@ language: lv
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Tehnika",
+    "Procesi",
+    "Cilvēki"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Gatavs (%)",
       "data": [
         80.0,
         55.0,

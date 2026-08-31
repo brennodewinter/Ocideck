@@ -40,16 +40,16 @@ language: el
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Ιαν",
+    "Φεβ",
+    "Μαρ",
+    "Απρ",
+    "Μάι",
+    "Ιούν"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Φέτος",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: el
       ]
     },
     {
-      "name": "Last year",
+      "name": "Πέρυσι",
       "data": [
         10.0,
         11.0,

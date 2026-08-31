@@ -63,7 +63,7 @@ language: id
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Anggaran",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: id
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realisasi",
       "data": [
         298.0,
         318.0,

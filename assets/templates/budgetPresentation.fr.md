@@ -72,7 +72,7 @@ language: fr
       ]
     },
     {
-      "name": "Actual",
+      "name": "Réalisé",
       "data": [
         298.0,
         318.0,

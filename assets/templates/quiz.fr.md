@@ -28,25 +28,25 @@ language: fr
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Remplacez ceci par votre propre question à choix multiple.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "La bonne réponse",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Une mauvaise réponse",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Une autre mauvaise réponse",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Encore une autre mauvaise réponse",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: fr
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Remplacez ceci par une affirmation vraie ou fausse.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: fr
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Remplacez ceci par une question à plusieurs bonnes réponses.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Bonne réponse 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Bonne réponse 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Mauvaise réponse 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Mauvaise réponse 2",
       "correct": false
     }
   ]

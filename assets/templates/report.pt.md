@@ -41,15 +41,15 @@ language: pt
   "type": "line",
   "x": [
     "Jan",
-    "Feb",
+    "Fev",
     "Mar",
-    "Apr",
-    "May",
+    "Abr",
+    "Mai",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Este ano",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: pt
       ]
     },
     {
-      "name": "Last year",
+      "name": "Ano passado",
       "data": [
         10.0,
         11.0,

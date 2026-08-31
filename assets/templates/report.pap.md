@@ -40,16 +40,16 @@ language: pap
 {
   "type": "line",
   "x": [
-    "Jan",
+    "Yan",
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mei",
+    "Yün"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "E aña aki",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: pap
       ]
     },
     {
-      "name": "Last year",
+      "name": "Aña pasá",
       "data": [
         10.0,
         11.0,

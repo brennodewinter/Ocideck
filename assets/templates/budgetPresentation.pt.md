@@ -63,7 +63,7 @@ language: pt
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Orçamento",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: pt
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realizado",
       "data": [
         298.0,
         318.0,

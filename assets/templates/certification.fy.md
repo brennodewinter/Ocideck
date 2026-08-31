@@ -28,14 +28,14 @@ language: fy
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Belied",
+    "Technyk",
+    "Prosessen",
+    "Minsken"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Klear (%)",
       "data": [
         80.0,
         55.0,

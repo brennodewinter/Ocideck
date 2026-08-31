@@ -64,25 +64,25 @@ Describe hic condicionem agnoscibilem ex usu.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Quae est recta electio?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Responsum rectum",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Responsum falsum",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Aliud responsum falsum",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Adhuc aliud responsum falsum",
       "correct": false
     }
   ]

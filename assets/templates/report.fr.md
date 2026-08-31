@@ -40,16 +40,16 @@ language: fr
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Janv",
+    "Févr",
+    "Mars",
+    "Avr",
+    "Mai",
+    "Juin"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Cette année",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: fr
       ]
     },
     {
-      "name": "Last year",
+      "name": "L'an dernier",
       "data": [
         10.0,
         11.0,

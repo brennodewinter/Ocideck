@@ -28,25 +28,25 @@ language: pl
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Zastąp to własnym pytaniem wielokrotnego wyboru.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Prawidłowa odpowiedź",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Błędna odpowiedź",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Kolejna błędna odpowiedź",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "I jeszcze jedna błędna odpowiedź",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: pl
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Zastąp to stwierdzeniem, które jest prawdziwe lub fałszywe.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: pl
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Zastąp to pytaniem z kilkoma prawidłowymi odpowiedziami.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Prawidłowa odpowiedź 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Prawidłowa odpowiedź 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Błędna odpowiedź 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Błędna odpowiedź 2",
       "correct": false
     }
   ]

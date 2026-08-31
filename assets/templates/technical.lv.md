@@ -60,7 +60,7 @@ flowchart LR
 # Koda piemērs
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Aizstājiet šo piemēru ar kodu, kuru vēlaties izskaidrot.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

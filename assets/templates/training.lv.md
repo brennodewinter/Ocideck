@@ -64,25 +64,25 @@ Aprakstiet šeit atpazīstamu situāciju no prakses.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Kura ir pareizā izvēle?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Pareizā atbilde",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Nepareiza atbilde",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Vēl viena nepareiza atbilde",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Un vēl viena nepareiza atbilde",
       "correct": false
     }
   ]

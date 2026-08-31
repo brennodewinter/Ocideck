@@ -40,16 +40,16 @@ language: hr
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Sij",
+    "Velj",
+    "Ožu",
+    "Tra",
+    "Svi",
+    "Lip"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Ove godine",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: hr
       ]
     },
     {
-      "name": "Last year",
+      "name": "Prošle godine",
       "data": [
         10.0,
         11.0,

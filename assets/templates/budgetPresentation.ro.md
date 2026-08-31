@@ -63,7 +63,7 @@ language: ro
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Buget",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: ro
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realizat",
       "data": [
         298.0,
         318.0,

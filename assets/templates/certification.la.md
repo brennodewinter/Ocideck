@@ -28,14 +28,14 @@ language: la
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Consilium",
+    "Technica",
+    "Processus",
+    "Homines"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Paratum (%)",
       "data": [
         80.0,
         55.0,

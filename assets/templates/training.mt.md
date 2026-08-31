@@ -64,25 +64,25 @@ Iddeskrivi hawn sitwazzjoni magħrufa mill-prattika.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "X'inhi l-għażla t-tajba?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "It-tweġiba t-tajba",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Tweġiba ħażina",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Tweġiba ħażina oħra",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "U tweġiba ħażina oħra",
       "correct": false
     }
   ]

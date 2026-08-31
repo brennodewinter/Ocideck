@@ -28,14 +28,14 @@ language: et
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Poliitika",
+    "Tehnika",
+    "Protsessid",
+    "Inimesed"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Valmis (%)",
       "data": [
         80.0,
         55.0,

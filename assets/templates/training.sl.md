@@ -64,25 +64,25 @@ Tukaj opišite prepoznavno situacijo iz prakse.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Katera je pravilna izbira?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Pravilen odgovor",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Napačen odgovor",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Še en napačen odgovor",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "In še en napačen odgovor",
       "correct": false
     }
   ]

@@ -32,7 +32,7 @@ language: la
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Usus aestimationis",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: la
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Gradus periculi",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: la
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Fiducia in ordine temporum",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: la
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Tendentia punctorum apertorum",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

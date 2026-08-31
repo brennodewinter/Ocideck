@@ -32,7 +32,7 @@ language: lv
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budžeta izlietojums",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: lv
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Riska līmenis",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: lv
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Uzticēšanās grafikam",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: lv
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Atvērto punktu tendence",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

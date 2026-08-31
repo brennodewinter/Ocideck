@@ -63,7 +63,7 @@ language: fy
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Begrutting",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: fy
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realisaasje",
       "data": [
         298.0,
         318.0,

@@ -64,25 +64,25 @@ Kirjeldage siin äratuntavat olukorda praktikast.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Milline on õige valik?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Õige vastus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Vale vastus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Veel üks vale vastus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ja veel üks vale vastus",
       "correct": false
     }
   ]

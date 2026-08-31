@@ -45,7 +45,7 @@ language: gsw
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Mäldige",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: gsw
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Vorfäll",
       "data": [
         9.0,
         12.0,

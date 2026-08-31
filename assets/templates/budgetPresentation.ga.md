@@ -63,7 +63,7 @@ language: ga
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Buiséad",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: ga
       ]
     },
     {
-      "name": "Actual",
+      "name": "Iarbhír",
       "data": [
         298.0,
         318.0,

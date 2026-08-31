@@ -40,16 +40,16 @@ language: tr
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
+    "Oca",
+    "Şub",
     "Mar",
-    "Apr",
+    "Nis",
     "May",
-    "Jun"
+    "Haz"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Bu yıl",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: tr
       ]
     },
     {
-      "name": "Last year",
+      "name": "Geçen yıl",
       "data": [
         10.0,
         11.0,

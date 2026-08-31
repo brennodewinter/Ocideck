@@ -28,14 +28,14 @@ language: sl
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Tehnika",
+    "Procesi",
+    "Ljudje"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Pripravljeno (%)",
       "data": [
         80.0,
         55.0,

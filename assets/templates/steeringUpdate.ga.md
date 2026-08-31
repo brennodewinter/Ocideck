@@ -32,7 +32,7 @@ language: ga
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Úsáid an bhuiséid",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: ga
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Muinín as an sceideal",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: ga
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Leibhéal riosca",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

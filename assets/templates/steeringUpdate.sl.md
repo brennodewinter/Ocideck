@@ -32,7 +32,7 @@ language: sl
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Poraba proračuna",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: sl
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Zaupanje v načrt",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: sl
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Raven tveganja",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

@@ -63,7 +63,7 @@ language: cs
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Rozpočet",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: cs
       ]
     },
     {
-      "name": "Actual",
+      "name": "Skutečnost",
       "data": [
         298.0,
         318.0,

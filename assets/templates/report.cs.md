@@ -40,16 +40,16 @@ language: cs
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Led",
+    "Úno",
+    "Bře",
+    "Dub",
+    "Kvě",
+    "Čvn"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Letos",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: cs
       ]
     },
     {
-      "name": "Last year",
+      "name": "Loni",
       "data": [
         10.0,
         11.0,

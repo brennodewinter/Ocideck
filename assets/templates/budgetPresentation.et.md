@@ -63,7 +63,7 @@ language: et
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Eelarve",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: et
       ]
     },
     {
-      "name": "Actual",
+      "name": "Tegelik",
       "data": [
         298.0,
         318.0,

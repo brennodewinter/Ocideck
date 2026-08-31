@@ -45,7 +45,7 @@ language: mt
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Rapporti",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: mt
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Inċidenti",
       "data": [
         9.0,
         12.0,

@@ -40,16 +40,16 @@ language: uk
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Січ",
+    "Лют",
+    "Бер",
+    "Кві",
+    "Тра",
+    "Чер"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Цього року",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: uk
       ]
     },
     {
-      "name": "Last year",
+      "name": "Торік",
       "data": [
         10.0,
         11.0,

@@ -64,25 +64,25 @@ Descrivi qui una situazione riconoscibile tratta dalla pratica.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Qual è la scelta giusta?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "La risposta corretta",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Una risposta sbagliata",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Un'altra risposta sbagliata",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ancora un'altra risposta sbagliata",
       "correct": false
     }
   ]

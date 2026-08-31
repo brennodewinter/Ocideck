@@ -60,7 +60,7 @@ flowchart LR
 # Ehèmpel di kódigo
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Remplasá e ehèmpel aki ku e kódigo ku bo ke splika.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

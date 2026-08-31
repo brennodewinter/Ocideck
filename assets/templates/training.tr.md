@@ -64,25 +64,25 @@ Uygulamadan tanıdık bir durumu burada açıklayın.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Doğru seçim hangisi?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Doğru cevap",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Yanlış bir cevap",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Başka bir yanlış cevap",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Bir yanlış cevap daha",
       "correct": false
     }
   ]

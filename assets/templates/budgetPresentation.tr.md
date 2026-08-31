@@ -63,7 +63,7 @@ language: tr
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Bütçe",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: tr
       ]
     },
     {
-      "name": "Actual",
+      "name": "Gerçekleşen",
       "data": [
         298.0,
         318.0,

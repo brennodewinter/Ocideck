@@ -28,25 +28,25 @@ language: fi
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Korvaa tämä omalla monivalintakysymykselläsi.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Oikea vastaus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Väärä vastaus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Toinen väärä vastaus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Vielä yksi väärä vastaus",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: fi
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Korvaa tämä väittämällä, joka on tosi tai epätosi.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: fi
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Korvaa tämä kysymyksellä, jossa on useita oikeita vastauksia.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Oikea vastaus 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Oikea vastaus 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Väärä vastaus 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Väärä vastaus 2",
       "correct": false
     }
   ]

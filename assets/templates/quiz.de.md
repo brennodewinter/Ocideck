@@ -28,25 +28,25 @@ language: de
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ersetzen Sie dies durch Ihre eigene Multiple-Choice-Frage.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Die richtige Antwort",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Eine falsche Antwort",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Noch eine falsche Antwort",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Und noch eine falsche Antwort",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: de
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ersetzen Sie dies durch eine Aussage, die wahr oder falsch ist.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: de
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ersetzen Sie dies durch eine Frage mit mehreren richtigen Antworten.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Richtige Antwort 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Richtige Antwort 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Falsche Antwort 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Falsche Antwort 2",
       "correct": false
     }
   ]

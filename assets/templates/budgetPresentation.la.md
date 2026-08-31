@@ -63,7 +63,7 @@ language: la
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Aestimatio",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: la
       ]
     },
     {
-      "name": "Actual",
+      "name": "Res acta",
       "data": [
         298.0,
         318.0,

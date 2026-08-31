@@ -40,16 +40,16 @@ language: la
 {
   "type": "line",
   "x": [
-    "Jan",
+    "Ian",
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mai",
+    "Iun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Hoc anno",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: la
       ]
     },
     {
-      "name": "Last year",
+      "name": "Anno superiore",
       "data": [
         10.0,
         11.0,

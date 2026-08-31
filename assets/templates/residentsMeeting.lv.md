@@ -45,7 +45,7 @@ language: lv
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Ziņojumi",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: lv
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenti",
       "data": [
         9.0,
         12.0,

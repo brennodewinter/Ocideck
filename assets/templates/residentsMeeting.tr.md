@@ -45,7 +45,7 @@ language: tr
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Bildirimler",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: tr
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Olaylar",
       "data": [
         9.0,
         12.0,

@@ -28,25 +28,25 @@ language: gsw
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ersetz das dur dini eigni Multiple-Choice-Frag.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Die richtigi Antwort",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "E falschi Antwort",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "No e falschi Antwort",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Und no e falschi Antwort",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: gsw
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ersetz das dur en Uussag, wo wahr oder falsch isch.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: gsw
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ersetz das dur e Frag mit mehrere richtige Antworte.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Richtigi Antwort 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Richtigi Antwort 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Falschi Antwort 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Falschi Antwort 2",
       "correct": false
     }
   ]

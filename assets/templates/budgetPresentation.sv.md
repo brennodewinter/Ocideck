@@ -72,7 +72,7 @@ language: sv
       ]
     },
     {
-      "name": "Actual",
+      "name": "Utfall",
       "data": [
         298.0,
         318.0,

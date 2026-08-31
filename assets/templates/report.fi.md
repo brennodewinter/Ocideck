@@ -40,16 +40,16 @@ language: fi
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Tammi",
+    "Helmi",
+    "Maalis",
+    "Huhti",
+    "Touko",
+    "Kesä"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Tänä vuonna",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: fi
       ]
     },
     {
-      "name": "Last year",
+      "name": "Viime vuonna",
       "data": [
         10.0,
         11.0,

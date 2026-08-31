@@ -64,25 +64,25 @@ Deskribí aki un situashon rekonosibel for di práktika.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Kua ta e eskoho korekto?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "E kontesta korekto",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Un kontesta robes",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ainda un kontesta robes",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "I ainda un kontesta robes",
       "correct": false
     }
   ]

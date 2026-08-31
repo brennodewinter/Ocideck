@@ -32,7 +32,7 @@ language: sv
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budgetförbrukning",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: sv
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Förtroende för planen",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: sv
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Risknivå",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

@@ -60,7 +60,7 @@ flowchart LR
 # Kodo pavyzdys
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Pakeiskite šį pavyzdį kodu, kurį norite paaiškinti.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

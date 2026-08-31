@@ -64,25 +64,25 @@ language: bg
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Кой е правилният избор?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правилният отговор",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Грешен отговор",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Още един грешен отговор",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "И още един грешен отговор",
       "correct": false
     }
   ]

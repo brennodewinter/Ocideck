@@ -45,7 +45,7 @@ language: hr
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Prijave",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: hr
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenti",
       "data": [
         9.0,
         12.0,

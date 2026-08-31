@@ -45,7 +45,7 @@ language: pap
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Notifikashonnan",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: pap
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Insidentenan",
       "data": [
         9.0,
         12.0,

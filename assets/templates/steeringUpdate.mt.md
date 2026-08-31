@@ -32,7 +32,7 @@ language: mt
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Użu tal-baġit",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: mt
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Fiduċja fl-iskeda",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: mt
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Livell ta' riskju",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

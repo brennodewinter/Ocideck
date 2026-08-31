@@ -42,14 +42,14 @@ language: hu
   "x": [
     "Jan",
     "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Már",
+    "Ápr",
+    "Máj",
+    "Jún"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Idén",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: hu
       ]
     },
     {
-      "name": "Last year",
+      "name": "Tavaly",
       "data": [
         10.0,
         11.0,
