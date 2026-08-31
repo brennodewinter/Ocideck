@@ -56,9 +56,10 @@ const Map<String, String> releaseArtefacten = {
 /// `.DS_Store` is Finder-metadata die in `build/web` belandt zodra iemand de
 /// map opent in Finder (#1888). `.gitignore` vangt hem niet — `build/` is geen
 /// git-gebied — en hij brak de reproduceerbaarheid van de bundel en lekte
-/// bestandsnamen op de publieke webhost. Breder: elk `.`-bestand dat niet in
-/// [releaseArtefacten] staat hoort er niet, want het zijn geen artefacten die
-/// de bundel bewust meeneemt. [ruimOnverwachteDotfiles] vangt de hele klasse.
+/// bestandsnamen op de publieke webhost. Breder: elk `.`-bestand dat de bundel
+/// niet bewust meeneemt hoort er niet. [ruimOnverwachteDotfiles] vangt die hele
+/// klasse; [bewusteDotfiles] bepaalt wat "bewust" is, en deze lijst wint daarvan
+/// — `web/.DS_Store` bestaat op een Mac ook.
 const List<String> nietUitleveren = ['.last_build_id', '.DS_Store'];
 
 /// Het bootstrap-bestand dat Flutter genereert, en het enige met een
@@ -173,9 +174,9 @@ List<String> pak(Directory bundel, Directory wortel) {
 
   // Ruim ook `.`-bestanden die niet op de lijst staan maar er niet horen —
   // `.DS_Store`, `.DS_Store?`, `.localized`, en alles wat Finder of de OS
-  // in de bouwmap dropt (#1888). De bundel bewust meegenomen artefacten
-  // (in [releaseArtefacten]) mogen wél met een punt beginnen.
-  ruimOnverwachteDotfiles(bundel);
+  // in de bouwmap dropt (#1888). Wat de bundel bewust meeneemt blijft staan;
+  // zie [bewusteDotfiles] voor waar die opzet uit blijkt (#1888).
+  ruimOnverwachteDotfiles(bundel, bewusteDotfiles(wortel));
 
   normaliseerServiceWorkerVersie(bundel);
 
@@ -217,21 +218,81 @@ void schrijfBuildInfo(Directory bundel) {
   File('${bundel.path}/build-info.json').writeAsStringSync('$info\n');
 }
 
-/// Verwijdert `.`-bestanden in [bundel] die niet in [releaseArtefacten] staan.
+/// De `.`-ingangen die de bundel bewust meeneemt, als pad relatief aan de
+/// bundelwortel.
+///
+/// Twee bronnen, en de tweede repareert wat de sweep van #1888 te ruim wegnam.
+/// [releaseArtefacten] dekt wat déze stap erbij legt, maar `flutter build web`
+/// kopieert `web/` ongewijzigd in `build/web`, en twee van die ingangen
+/// beginnen met een punt omdat de webstandaard dat voorschrijft: `.htaccess`
+/// draagt de beveiligingsheaders waar `tool/check_web_hardening.dart` op staat
+/// (#849), en `.well-known/security.txt` is het meldadres uit RFC 9116. Ze
+/// staan niet in [releaseArtefacten] — deze stap legt ze er niet bij, ze liggen
+/// er al — dus is `web/` de enige plek waar hun opzet uit blijkt. Een sweep die
+/// alleen naar [releaseArtefacten] keek, veegde ze allebei weg.
+///
+/// Afleiden uit `web/` en niet opsommen: een volgende dotfile die daar bewust
+/// bij komt, hoort er dan meteen in — en de vorm van deze fout was juist dat
+/// een lijst achterbleef bij wat de bundel werkelijk meeneemt.
+///
+/// [nietUitleveren] wint van de herkomst: op een Mac ligt in `web/` ook een
+/// `.DS_Store`, en juist die hoort de bundel niet uit (#1888).
+Set<String> bewusteDotfiles(Directory wortel) {
+  final bewust = {
+    for (final doel in releaseArtefacten.values)
+      if (doel.split('/').last.startsWith('.')) doel,
+  };
+  final web = Directory('${wortel.path}/web');
+  if (!web.existsSync()) return bewust;
+  for (final entiteit in web.listSync(recursive: true)) {
+    final pad = relatiefIn(web, entiteit.path);
+    // Een verborgen map neemt zijn hele inhoud mee: `.well-known/security.txt`
+    // begint zelf niet met een punt, maar hoort er wel bij.
+    if (!pad.split('/').any((deel) => deel.startsWith('.'))) continue;
+    if (nietUitleveren.contains(pad.split('/').last)) continue;
+    bewust.add(pad);
+  }
+  return bewust;
+}
+
+/// Verwijdert `.`-ingangen in [bundel] die niet in [bewust] staan.
 ///
 /// De expliciete lijst in [nietUitleveren] vangt de bekende gevallen, maar een
 /// allowlist is sterker dan een denylist: Finder dropt `.DS_Store`, macOS
 /// dropt `.localized`, en de volgende OS-versie dropt iets dat nog niemand
 /// heeft gezien. Alles wat met een punt begint en niet bewust is meegenomen,
 /// hoort niet in een uit te leveren bundel (#1888).
-void ruimOnverwachteDotfiles(Directory bundel) {
-  final bewusteDoelen = releaseArtefacten.values.toSet();
+///
+/// Vergelijken op het volledige pad en niet op de bestandsnaam: `.htaccess`
+/// hoort in de bundelwortel omdat hij in `web/` staat, en dat zegt niets over
+/// een `.htaccess` die ergens diep in `canvaskit/` opduikt.
+void ruimOnverwachteDotfiles(Directory bundel, Set<String> bewust) {
   for (final entiteit in bundel.listSync(recursive: true)) {
-    final naam = entiteit.path.split('/').last;
-    if (!naam.startsWith('.')) continue;
-    if (bewusteDoelen.contains(naam)) continue;
+    final pad = relatiefIn(bundel, entiteit.path);
+    if (!pad.split('/').last.startsWith('.')) continue;
+    if (bewust.contains(pad)) continue;
+    // `listSync` is een momentopname: staat een verborgen map hierboven al
+    // verwijderd, dan bestaat dit pad niet meer en zou `deleteSync` gooien.
+    if (!entiteit.existsSync()) continue;
     entiteit.deleteSync(recursive: true);
   }
+}
+
+/// [pad] relatief aan [wortel], altijd met '/' als scheidingsteken.
+///
+/// Twee redenen om te normaliseren en niet op de OS-scheiding te leunen: de
+/// checksumlijst is een portabel artefact (`sha256sum -c` draait op Linux) en
+/// moet op elk platform dezelfde regels geven; en op Windows levert `listSync`
+/// backslashes, waardoor een prefix-vergelijking met een '/'-achtervoegsel
+/// faalde en het hele absolute pad teruggaf — dat plakte verderop als
+/// `bundel/C:\...\bestand` en gooide een PathNotFoundException.
+String relatiefIn(Directory wortel, String pad) {
+  final basis = wortel.path.replaceAll(r'\', '/');
+  final voorvoegsel = basis.endsWith('/') ? basis : '$basis/';
+  final genormaliseerd = pad.replaceAll(r'\', '/');
+  return genormaliseerd.startsWith(voorvoegsel)
+      ? genormaliseerd.substring(voorvoegsel.length)
+      : genormaliseerd;
 }
 
 /// Vervangt het willekeurige `serviceWorkerVersion`-getal in [bootstrapBestand]
@@ -363,22 +424,12 @@ List<String> controleer(Directory bundel) {
 /// waarom dit de bundelinhoud betreft en niet het tar.gz-omhulsel eromheen, staat
 /// in `assurance/reproduceerbare-builds.md`.
 List<String> bundelBestanden(Directory bundel) {
-  // Paden relatief aan de bundel, altijd met '/' als scheidingsteken. Twee
-  // redenen om hier te normaliseren en niet op de OS-scheiding te leunen: de
-  // checksumlijst is een portabel artefact (`sha256sum -c` draait op Linux) en
-  // moet op elk platform dezelfde regels geven; en op Windows levert `listSync`
-  // backslashes, waardoor een prefix-vergelijking met een '/'-achtervoegsel
-  // faalde en het hele absolute pad teruggaf — dat plakte verderop als
-  // `bundel/C:\...\bestand` en gooide een PathNotFoundException.
-  final wortel = bundel.path.replaceAll(r'\', '/');
-  final voorvoegsel = wortel.endsWith('/') ? wortel : '$wortel/';
   final paden = <String>[];
   for (final entiteit in bundel.listSync(recursive: true)) {
     if (entiteit is! File) continue;
-    final genormaliseerd = entiteit.path.replaceAll(r'\', '/');
-    final pad = genormaliseerd.startsWith(voorvoegsel)
-        ? genormaliseerd.substring(voorvoegsel.length)
-        : genormaliseerd;
+    // Relatief en met '/' als scheidingsteken; zie [relatiefIn] voor waarom
+    // dat op Windows niet vanzelf goed gaat.
+    final pad = relatiefIn(bundel, entiteit.path);
     if (pad == checksumBestand) continue;
     paden.add(pad);
   }

@@ -1245,7 +1245,15 @@ also declares them, but see the [CI note](#continuous-integration).)
   `object-src 'none'`, `form-action 'none'` — that last one does *not* fall back
   to `default-src`, so it is asserted separately), CanvasKit **self-hosted**
   (local wasm + the `useLocalCanvasKit` flag), and the UI font **bundled** — so
-  the running app pulls zero third-party origins.
+  the running app pulls zero third-party origins. It also walks `web/` and
+  asserts that **every** entry reached `build/web`, minus what `nietUitleveren`
+  deliberately drops. Those files are copied by `flutter build web` rather than
+  placed by the packing step, so a test on the source file cannot see whether
+  they survived — and #1888's dotfile sweep proved they might not: it removed
+  `.htaccess` (header-form hardening, #849) and `.well-known/security.txt` (the
+  RFC 9116 disclosure address) from the bundle, and only the first was pinned by
+  name, so the reporting address vanished with no gate going red. Deriving the
+  list from `web/` instead of naming files covers whatever is added there next.
 
   *Release artefacts* — that `LICENSE.md`, `THIRD_PARTY_NOTICES.md` and the
   three SBOM files are in the bundle, and that `SHA256SUMS` describes exactly
@@ -1263,13 +1271,17 @@ also declares them, but see the [CI note](#continuous-integration).)
   closes that gap by construction, naming any file that is stale or missing. It
   rewrites nothing — the fix is a clean rebuild.
 - **Failure means:** a change weakened the CSP, re-introduced a CDN/font fetch,
-  moved something in the bundle after it was sealed, or an incremental build
-  shipped documentation older than `docs/`; the scripts list every broken
-  invariant. See [`BUILD.md`](BUILD.md) for the hardened build and for what the
+  dropped `.htaccess` or `security.txt` from the bundle, moved something in the
+  bundle after it was sealed, or an incremental build shipped documentation
+  older than `docs/`; the scripts list every broken invariant. See [`BUILD.md`](BUILD.md) for the hardened build and for what the
   checksum list does and does not prove.
 - **Note:** the packing logic itself is tested in
   `test/pack_web_release_test.dart`, which runs in `make check` — so a broken
-  checksum list surfaces without waiting for a web build.
+  checksum list surfaces without waiting for a web build. That file also mirrors
+  the real `web/` tree into a stand-in bundle and asserts nothing from it is
+  swept away, which puts the invariant above on the **per-PR** gate: no web
+  build runs there, and #1888 merged green precisely because its own test used a
+  hand-built bundle that happened to contain none of the files it broke.
 
 ### `make deps-outdated` (advisory)
 - **Runs:** `flutter pub outdated`

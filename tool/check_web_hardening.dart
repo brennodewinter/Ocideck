@@ -12,8 +12,13 @@
 //   * .htaccess ships next to the bundle and carries the header-form hardening
 //     (frame-ancestors/HSTS/X-Frame-Options/Permissions-Policy), with its CSP
 //     header mirroring the meta CSP (#849).
+//   * every file in web/ reaches the bundle, so a promise that lives there —
+//     .well-known/security.txt, and whatever is added next — is served and not
+//     merely present in the source (#1888).
 
 import 'dart:io';
+
+import 'pack_web_release.dart' show nietUitleveren;
 
 void main() {
   final webDir = Directory('build/web');
@@ -158,6 +163,34 @@ void main() {
       'Permissions-Policy',
     ]) {
       require(conf.contains(h), '.htaccess must set $h (#849).');
+    }
+  }
+
+  // ── Everything web/ ships actually reaches the bundle (#1888) ──────────────
+  // `flutter build web` copies `web/` into `build/web`, and some of those
+  // entries are promises in their own right: `.htaccess` carries the header-form
+  // hardening (#849), `.well-known/security.txt` is the RFC 9116 disclosure
+  // address. Both had a test on the *source file* and neither had one on the
+  // *artefact*, so when the dotfile sweep of #1888 deleted them from the bundle,
+  // only `.htaccess` — pinned by name in the block above — was noticed. The
+  // reporting address disappeared without a single gate going red.
+  //
+  // Pinning the next file by name would set up the same failure again, one file
+  // later. So this walks `web/` and asserts every entry arrives: a promise put
+  // there is covered the day it lands, by anyone, without remembering to add a
+  // check. `nietUitleveren` is the one list of what is deliberately dropped, and
+  // it is imported rather than restated — two lists of "not shipped" would drift
+  // apart, which is the shape of this bug.
+  final webBron = Directory('web');
+  if (webBron.existsSync()) {
+    for (final entiteit in webBron.listSync(recursive: true)) {
+      if (entiteit is! File) continue;
+      final pad = entiteit.path.replaceAll(r'\', '/').substring('web/'.length);
+      if (nietUitleveren.contains(pad.split('/').last)) continue;
+      require(
+        File('build/web/$pad').existsSync(),
+        'web/$pad did not reach the bundle (#1888).',
+      );
     }
   }
 

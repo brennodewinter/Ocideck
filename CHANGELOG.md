@@ -399,6 +399,22 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(release): `.htaccess` en `security.txt` reisden niet meer mee met de
+  webbundel (#1888-staart). De dotfile-sweep die `.DS_Store` uit `build/web`
+  haalt, hield als "bewust meegenomen" alleen aan wat `releaseArtefacten`
+  noemt — maar de twee dotfiles die er wél horen komen daar niet vandaan:
+  `flutter build web` kopieert ze uit `web/`. Weg waren dus de
+  beveiligingsheaders van #849 en het meldadres uit RFC 9116. De release-poort
+  viel op de eerste (`build/web/.htaccess is missing`) en blokkeerde v0.5.0;
+  de tweede was nergens gedekt en verdween stil. De sweep leidt de
+  uitzonderingen nu af uit `web/` in plaats van uit een lijst die erachteraan
+  loopt, `nietUitleveren` wint nog steeds van die herkomst (`web/.DS_Store`
+  bestaat op een Mac ook). Twee poorten erbij, allebei afgeleid in plaats van
+  opgesomd: `check_web_hardening.dart` loopt `web/` langs en eist dat élke
+  ingang de bundel haalt, en `pack_web_release_test.dart` spiegelt diezelfde
+  boom in een nagebouwde bundel — dat laatste zet de controle op de **per-PR**
+  poort, waar geen webbouw draait en waar #1888 daarom groen doorheen kwam.
+
 - fix(templates): de sjabloontitel volgt nu de titel die de kiezer belooft.
   Beide zijn langs een eigen route vertaald en liepen bij 2.063 van de 2.760
   combinaties uiteen — meestal een andere bewoording, maar ook 98 bestanden

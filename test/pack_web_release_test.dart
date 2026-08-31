@@ -122,6 +122,53 @@ void main() {
       expect(controleer(bundel), isEmpty);
     });
 
+    test('de dotfiles die web/ bewust meeneemt blijven staan (#1888)', () {
+      // Flutter kopieert `web/` in de bundel. Twee van die ingangen beginnen
+      // met een punt en horen er wél in: `.htaccess` draagt de
+      // beveiligingsheaders (#849) waar check_web_hardening.dart op staat, en
+      // `.well-known/security.txt` is het meldadres uit RFC 9116. De
+      // dotfile-sweep van #1888 keek alleen naar releaseArtefacten en veegde
+      // ze allebei weg, waarna de release-poort viel op een bundel die de
+      // vorige release nog wél had.
+      Directory('${wortel.path}/web/.well-known').createSync(recursive: true);
+      File('${wortel.path}/web/.htaccess').writeAsStringSync('Header set X 1');
+      File(
+        '${wortel.path}/web/.well-known/security.txt',
+      ).writeAsStringSync('Contact: mailto:security@librekat.nl');
+      // Op een Mac ligt hier ook Finder-metadata; die hoort er juist niet in.
+      File('${wortel.path}/web/.DS_Store').writeAsStringSync('metadata');
+      // Zoals Flutter het neerzet: alles uit web/ staat al in de bundel.
+      Directory('${bundel.path}/.well-known').createSync(recursive: true);
+      File('${bundel.path}/.htaccess').writeAsStringSync('Header set X 1');
+      File(
+        '${bundel.path}/.well-known/security.txt',
+      ).writeAsStringSync('Contact: mailto:security@librekat.nl');
+      File('${bundel.path}/.DS_Store').writeAsStringSync('metadata');
+
+      pak(bundel, wortel);
+
+      expect(
+        File('${bundel.path}/.htaccess').existsSync(),
+        isTrue,
+        reason: 'de beveiligingsheaders horen met de bundel mee (#849)',
+      );
+      expect(
+        File('${bundel.path}/.well-known/security.txt').existsSync(),
+        isTrue,
+        reason: 'het meldadres hoort met de bundel mee (RFC 9116)',
+      );
+      expect(
+        File('${bundel.path}/.DS_Store').existsSync(),
+        isFalse,
+        reason: 'wat op nietUitleveren staat wint van de web/-herkomst',
+      );
+      // En ze zijn verzegeld: erin zonder in de lijst is niet verzegeld.
+      final lijst = File('${bundel.path}/$checksumBestand').readAsStringSync();
+      expect(lijst, contains('.htaccess'));
+      expect(lijst, contains('.well-known/security.txt'));
+      expect(controleer(bundel), isEmpty);
+    });
+
     test('twee keer inpakken geeft dezelfde lijst', () {
       // Reproduceerbaar, want anders zegt een verschil in de digest niets over
       // de inhoud en wordt de vergelijking met de aankondiging ruis.
@@ -321,6 +368,54 @@ void main() {
           File(bron).existsSync(),
           isTrue,
           reason: '$bron staat in releaseArtefacten maar bestaat niet',
+        );
+      }
+    });
+
+    test('geen enkele ingang uit web/ sneuvelt bij het inpakken', () {
+      // De verzonnen bundel hierboven bewijst dat de sweep opruimt; hij bewijst
+      // niet dat hij de échte bundel heelhoudt, want de bestanden erin zijn
+      // bedacht door dezelfde persoon als de sweep. Precies daar ging #1888
+      // doorheen: die PR had een test die groen bleef terwijl `.htaccess` en
+      // `.well-known/security.txt` uit de bundel verdwenen, en dat kwam pas bij
+      // de release aan het licht — een webbouw draait niet per PR.
+      //
+      // Deze test leest daarom de echte `web/` en zet de namen daaruit in een
+      // nagebouwde bundel. Komt er morgen een dotfile bij, dan telt hij mee
+      // zonder dat iemand hier iets aanpast; de fout van #1888 was juist dat de
+      // lijst met "bewuste" bestanden achterliep op de werkelijkheid.
+      final echteWeb = Directory('web');
+      final verwacht = <String>[];
+      for (final entiteit in echteWeb.listSync(recursive: true)) {
+        if (entiteit is! File) continue;
+        final pad = entiteit.path.substring('web/'.length);
+        // Zoals `flutter build web` het neerzet: web/ staat in de bundel.
+        final uit = File('${bundel.path}/$pad');
+        uit.parent.createSync(recursive: true);
+        uit.writeAsStringSync('inhoud van $pad');
+        // Ook in de nagebouwde wortel, want daar leest [bewusteDotfiles].
+        final bron = File('${wortel.path}/web/$pad');
+        bron.parent.createSync(recursive: true);
+        bron.writeAsStringSync('inhoud van $pad');
+        if (!nietUitleveren.contains(pad.split('/').last)) verwacht.add(pad);
+      }
+      // Anders toetst deze test niets: een lege web/ maakt hem groen.
+      expect(verwacht, isNotEmpty);
+
+      pak(bundel, wortel);
+
+      for (final pad in verwacht) {
+        expect(
+          File('${bundel.path}/$pad').existsSync(),
+          isTrue,
+          reason: 'web/$pad hoort de bundel te halen',
+        );
+      }
+      for (final weg in nietUitleveren) {
+        expect(
+          File('${bundel.path}/$weg').existsSync(),
+          isFalse,
+          reason: '$weg staat op nietUitleveren en hoort de bundel niet uit',
         );
       }
     });
