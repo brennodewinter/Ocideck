@@ -166,10 +166,42 @@ List<String> pak(Directory bundel, Directory wortel) {
 
   normaliseerServiceWorkerVersie(bundel);
 
+  // Een commit-aanduiding in de bundel (#1893): `version.json` geeft alleen
+  // het build-nummer, niet welke commit er live staat. `git describe` is al
+  // berekend door deploy_web.sh, maar dat is een handmatige route die niets
+  // achterlaat. Dit bestand wél — het reist mee in de bundel en in SHA256SUMS.
+  schrijfBuildInfo(bundel);
+
   File(
     '${bundel.path}/$checksumBestand',
   ).writeAsStringSync(checksumLijst(bundel));
   return const [];
+}
+
+/// Schrijft `build-info.json` in [bundel] met de commit-aanduiding.
+///
+/// `git describe --tags --always --dirty` geeft een leesbare aanduiding die
+/// werkt op een tag (`v0.4.10`), een branch (`v0.4.10-24-gabcdef`), of een
+/// kale commit (`abcdef`). Buiten een git-werkkopie (bijv. een uitgepakte
+/// tarball) geeft het `onbekend` — het bestand verschijnt nog steeds, zodat
+/// de checksumlijst compleet is, maar de ontvanger weet dat hij het zelf
+/// moet opzoeken (#1893).
+void schrijfBuildInfo(Directory bundel) {
+  final result = Process.runSync('git', [
+    'describe',
+    '--tags',
+    '--always',
+    '--dirty',
+  ]);
+  final describe = result.exitCode == 0
+      ? (result.stdout as String).trim()
+      : 'onbekend';
+  final info = JsonEncoder.withIndent('  ').convert({
+    // Alleen git_describe, geen build_time: een tijdstip maakt de bundel
+    // niet-reproduceerbaar (#1027) en de "twee keer inpakken"-test faalt.
+    'git_describe': describe,
+  });
+  File('${bundel.path}/build-info.json').writeAsStringSync('$info\n');
 }
 
 /// Vervangt het willekeurige `serviceWorkerVersion`-getal in [bootstrapBestand]

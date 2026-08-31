@@ -332,6 +332,15 @@ jobs:
         if: runner.os == 'macOS'
         run: flutter test integration_test/native_face_scan_test.dart -d macos
 
+      # mermaid en MathJax draaien in een verborgen WebView, en die bestaat
+      # onder `flutter test` niet — daar valt alles stil terug op de bron.
+      # Deze integratietest is de enige plek waar de échte renderpaden in de
+      # document-PDF-export worden aangetoond (#1894). Alleen op macOS, waar
+      # de WebView betrouwbaar laadt; zie de kop van het testbestand.
+      - name: Document-PDF-graphics integratietest (macOS)
+        if: runner.os == 'macOS'
+        run: flutter test integration_test/document_pdf_graphics_test.dart -d macos
+
       - name: Native-scan integratietest (Windows)
         if: runner.os == 'Windows'
         shell: bash
