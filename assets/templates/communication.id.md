@@ -35,9 +35,9 @@ language: id
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Rumuskan pesan inti di sini dalam satu kalimat yang kuat.
 
-— Name or sender
+— Nama atau pengirim
 
 ---
 

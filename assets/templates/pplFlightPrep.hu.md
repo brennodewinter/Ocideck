@@ -14,9 +14,9 @@ language: hu
 
 ---
 
-### Important warning
+### Fontos figyelmeztetés
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Mindig ellenőrizd az aktuális AIP/NOTAM-ot, a hivatalos időjárási információt, a POH/AFM-et, a helyi eljárásokat és a jogszabályi minimumokat. Ez a sablon támogatja a döntést, de nem helyettesíti a kötelező repülés-előkészítést.**
 
 ---
 

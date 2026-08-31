@@ -36,9 +36,9 @@ language: hu
 # Prioritások
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Kritikus sebezhetőségek elhárítása
+2. Hozzáférési jogok felülvizsgálata
+3. Naplózás és monitorozás bevezetése
 
 ---
 

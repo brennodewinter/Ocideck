@@ -21,7 +21,7 @@ language: uk
 
 ---
 
-### Architecture overview
+### Огляд архітектури
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Потік даних або потік процесу
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Користувач надсилає запит
+2. API перевіряє його та маршрутизує
+3. Служба обробляє його та зберігає
+4. Результат повертається до користувача
 
 ---
 

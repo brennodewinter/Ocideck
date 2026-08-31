@@ -37,15 +37,15 @@ language: uk
 
 ---
 
-### Example or case study
+### Приклад або кейс
 
-Describe a recognizable real-world situation here.
+Опишіть тут упізнавану ситуацію з практики.
 
-**What happened?** …
+**Що сталося?** …
 
-**What went wrong — or right?** …
+**Що пішло не так — чи навпаки добре?** …
 
-**What do we learn from this?** …
+**Чого ми з цього вчимося?** …
 
 ---
 

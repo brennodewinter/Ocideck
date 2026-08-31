@@ -35,9 +35,9 @@ language: fy
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulearje hjir de kearnboadskip yn ien krêftige sin.
 
-— Name or sender
+— Namme of ôfstjoerder
 
 ---
 

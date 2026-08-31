@@ -117,19 +117,19 @@ language: tr
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Güvenlik sorununun ne olduğunu burada olgusal ve teknik olarak açıklayın.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Bulgunun nasıl tespit edildiğini yeniden üretilebilir biçimde (kanıtla) açıklayın.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Olası teknik ve ticari etkiyi açıklayın.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Somut ve uygulanabilir azaltıcı önlemi açıklayın.
 
 ---
 

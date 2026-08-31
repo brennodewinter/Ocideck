@@ -35,9 +35,9 @@ language: la
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Hic nuntium praecipuum una sententia valida exprime.
 
-— Name or sender
+— Nomen vel mittens
 
 ---
 

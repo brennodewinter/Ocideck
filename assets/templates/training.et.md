@@ -37,15 +37,15 @@ language: et
 
 ---
 
-### Example or case study
+### Näide või juhtum
 
-Describe a recognizable real-world situation here.
+Kirjeldage siin äratuntavat olukorda praktikast.
 
-**What happened?** …
+**Mis juhtus?** …
 
-**What went wrong — or right?** …
+**Mis läks valesti — või hoopis hästi?** …
 
-**What do we learn from this?** …
+**Mida me sellest õpime?** …
 
 ---
 

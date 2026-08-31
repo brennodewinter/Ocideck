@@ -14,9 +14,9 @@ language: fi
 
 ---
 
-### Important warning
+### Tärkeä varoitus
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Tarkista aina ajantasaiset AIP/NOTAM-tiedot, viralliset säätiedot, POH/AFM, paikalliset menettelyt ja lailliset minimit. Tämä malli tukee päätöksentekoa, mutta ei korvaa pakollista lennon valmistelua.**
 
 ---
 

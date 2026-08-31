@@ -37,15 +37,15 @@ language: de
 
 ---
 
-### Example or case study
+### Beispiel oder Fallstudie
 
-Describe a recognizable real-world situation here.
+Beschreiben Sie hier eine wiedererkennbare Situation aus der Praxis.
 
-**What happened?** …
+**Was ist passiert?** …
 
-**What went wrong — or right?** …
+**Was ist schiefgelaufen — oder gerade gut gegangen?** …
 
-**What do we learn from this?** …
+**Was lernen wir daraus?** …
 
 ---
 

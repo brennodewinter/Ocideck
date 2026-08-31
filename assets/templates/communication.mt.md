@@ -35,9 +35,9 @@ language: mt
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Ifformula hawn il-messaġġ ewlieni f'sentenza waħda qawwija.
 
-— Name or sender
+— Isem jew mittent
 
 ---
 

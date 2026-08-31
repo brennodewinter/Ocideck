@@ -24,11 +24,11 @@ language: sl
 # Projektne faze
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Priprava
+2. Zasnova
+3. Izvedba
+4. Testiranje in prevzem
+5. Zagon in nadaljnja skrb
 
 ---
 

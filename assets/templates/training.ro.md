@@ -37,15 +37,15 @@ language: ro
 
 ---
 
-### Example or case study
+### Exemplu sau studiu de caz
 
-Describe a recognizable real-world situation here.
+Descrie aici o situație recognoscibilă din practică.
 
-**What happened?** …
+**Ce s-a întâmplat?** …
 
-**What went wrong — or right?** …
+**Ce a mers prost — sau tocmai bine?** …
 
-**What do we learn from this?** …
+**Ce învățăm din asta?** …
 
 ---
 

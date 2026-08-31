@@ -37,15 +37,15 @@ language: tr
 
 ---
 
-### Example or case study
+### Örnek veya vaka çalışması
 
-Describe a recognizable real-world situation here.
+Uygulamadan tanıdık bir durumu burada açıklayın.
 
-**What happened?** …
+**Ne oldu?** …
 
-**What went wrong — or right?** …
+**Ne ters gitti — ya da tam tersine iyi gitti?** …
 
-**What do we learn from this?** …
+**Bundan ne öğreniyoruz?** …
 
 ---
 

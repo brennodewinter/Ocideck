@@ -24,20 +24,20 @@ language: id
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Jika Anda tidak bisa menjelaskannya dalam satu kalimat, Anda sendiri belum cukup memahaminya.
 
-— Rule of thumb for a strong pitch
+— Aturan praktis untuk presentasi yang kuat
 
 ---
 
 # Struktur
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Kait: pembuka atau contoh yang menarik
+2. Masalah: rasa sakit apa yang Anda pecahkan, dan untuk siapa
+3. Solusi: apa yang Anda tawarkan, dalam bahasa sederhana
+4. Bukti: angka, contoh, atau demo
+5. Permintaan: langkah berikutnya yang konkret
 
 ---
 

@@ -36,9 +36,9 @@ language: la
 # Priorities
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Vulnerabilitates criticas tollere
+2. Iura accessus recensere
+3. Registrationem et vigilantiam instituere
 
 ---
 

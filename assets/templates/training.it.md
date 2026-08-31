@@ -37,15 +37,15 @@ language: it
 
 ---
 
-### Example or case study
+### Esempio o caso di studio
 
-Describe a recognizable real-world situation here.
+Descrivi qui una situazione riconoscibile tratta dalla pratica.
 
-**What happened?** …
+**Che cosa è successo?** …
 
-**What went wrong — or right?** …
+**Che cosa è andato storto — o proprio bene?** …
 
-**What do we learn from this?** …
+**Che cosa impariamo da questo?** …
 
 ---
 

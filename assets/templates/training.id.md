@@ -37,15 +37,15 @@ language: id
 
 ---
 
-### Example or case study
+### Contoh atau studi kasus
 
-Describe a recognizable real-world situation here.
+Jelaskan di sini situasi nyata yang mudah dikenali.
 
-**What happened?** …
+**Apa yang terjadi?** …
 
-**What went wrong — or right?** …
+**Apa yang salah — atau justru berjalan baik?** …
 
-**What do we learn from this?** …
+**Apa yang kita pelajari dari ini?** …
 
 ---
 

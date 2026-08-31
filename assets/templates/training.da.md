@@ -37,15 +37,15 @@ language: da
 
 ---
 
-### Example or case study
+### Eksempel eller case
 
-Describe a recognizable real-world situation here.
+Beskriv her en genkendelig situation fra praksis.
 
-**What happened?** …
+**Hvad skete der?** …
 
-**What went wrong — or right?** …
+**Hvad gik galt — eller netop godt?** …
 
-**What do we learn from this?** …
+**Hvad lærer vi af det?** …
 
 ---
 

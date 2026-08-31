@@ -14,9 +14,9 @@ language: id
 
 ---
 
-### Important warning
+### Peringatan penting
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Selalu periksa AIP/NOTAM terkini, informasi cuaca resmi, POH/AFM, prosedur setempat, dan minimum yang diwajibkan. Templat ini mendukung pengambilan keputusan, tetapi tidak menggantikan persiapan penerbangan yang wajib.**
 
 ---
 

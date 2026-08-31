@@ -35,9 +35,9 @@ language: tr
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Ana mesajı burada tek bir güçlü cümleyle ifade edin.
 
-— Name or sender
+— Ad veya gönderen
 
 ---
 

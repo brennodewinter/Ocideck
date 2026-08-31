@@ -35,9 +35,9 @@ language: fr
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulez ici le message clé en une phrase percutante.
 
-— Name or sender
+— Nom ou expéditeur
 
 ---
 

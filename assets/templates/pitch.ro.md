@@ -24,20 +24,20 @@ language: ro
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Dacă nu poți să o explici într-o singură propoziție, nici tu însuți nu ai înțeles-o încă destul de bine.
 
-— Rule of thumb for a strong pitch
+— Regulă de bază pentru o prezentare puternică
 
 ---
 
 # Structura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Cârlig: o deschidere sau un exemplu care intrigă
+2. Problemă: ce durere rezolvi și pentru cine
+3. Soluție: ce oferi, în limbaj simplu
+4. Dovadă: cifre, exemplu sau demonstrație
+5. Cerere: pasul următor concret
 
 ---
 

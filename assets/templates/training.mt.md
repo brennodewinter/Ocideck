@@ -37,15 +37,15 @@ language: mt
 
 ---
 
-### Example or case study
+### Eżempju jew studju ta' każ
 
-Describe a recognizable real-world situation here.
+Iddeskrivi hawn sitwazzjoni magħrufa mill-prattika.
 
-**What happened?** …
+**X'ġara?** …
 
-**What went wrong — or right?** …
+**X'mar ħażin — jew propju tajjeb?** …
 
-**What do we learn from this?** …
+**X'nitgħallmu minn dan?** …
 
 ---
 

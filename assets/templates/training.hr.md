@@ -37,15 +37,15 @@ language: hr
 
 ---
 
-### Example or case study
+### Primjer ili studija slučaja
 
-Describe a recognizable real-world situation here.
+Ovdje opišite prepoznatljivu situaciju iz prakse.
 
-**What happened?** …
+**Što se dogodilo?** …
 
-**What went wrong — or right?** …
+**Što je pošlo po zlu — ili baš dobro?** …
 
-**What do we learn from this?** …
+**Što iz toga učimo?** …
 
 ---
 

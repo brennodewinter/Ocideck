@@ -21,7 +21,7 @@ language: hu
 
 ---
 
-### Architecture overview
+### Architektúra áttekintése
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Adatáramlás vagy folyamatfolyamat
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. A felhasználó kérést indít
+2. Az API ellenőrzi és továbbítja
+3. A szolgáltatás feldolgozza és tárolja
+4. Az eredmény visszakerül a felhasználóhoz
 
 ---
 

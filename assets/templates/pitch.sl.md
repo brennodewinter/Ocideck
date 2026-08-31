@@ -24,20 +24,20 @@ language: sl
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Če tega ne znaš razložiti v enem stavku, tudi sam tega še ne razumeš dovolj dobro.
 
-— Rule of thumb for a strong pitch
+— Pravilo za močno predstavitev
 
 ---
 
 # Struktura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Kavelj: zanimiv uvod ali primer
+2. Težava: katero bolečino rešuješ in za koga
+3. Rešitev: kaj ponujaš, v preprostem jeziku
+4. Dokaz: številke, primer ali predstavitev
+5. Vprašanje: konkreten naslednji korak
 
 ---
 

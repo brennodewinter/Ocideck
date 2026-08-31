@@ -24,20 +24,20 @@ language: gsw
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Wänn du s nöd i eim Satz chasch erkläre, häsch es sälber no nöd guet gnueg verstande.
 
-— Rule of thumb for a strong pitch
+— Fuuschtregle für en starke Pitch
 
 ---
 
 # Die Struktur
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Haken: en spannende Iistieg oder es Bispiel
+2. Problem: welle Schmärz du löisch, und für wän
+3. Lösig: was du biitisch, i eifacher Sprach
+4. Beweis: Zahle, Bispiel oder Demo
+5. Frag: de konkret nächst Schritt
 
 ---
 

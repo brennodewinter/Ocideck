@@ -14,9 +14,9 @@ language: mt
 
 ---
 
-### Important warning
+### Twissija importanti
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Iċċekkja dejjem l-AIP/NOTAM attwali, l-informazzjoni uffiċjali dwar it-temp, il-POH/AFM, il-proċeduri lokali u l-minimi legali. Dan il-mudell jappoġġja d-deċiżjoni, iżda ma jissostitwixxix il-preparazzjoni obbligatorja tat-titjira.**
 
 ---
 

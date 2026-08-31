@@ -37,15 +37,15 @@ language: sv
 
 ---
 
-### Example or case study
+### Exempel eller fallstudie
 
-Describe a recognizable real-world situation here.
+Beskriv här en igenkännbar situation från praktiken.
 
-**What happened?** …
+**Vad hände?** …
 
-**What went wrong — or right?** …
+**Vad gick fel — eller just bra?** …
 
-**What do we learn from this?** …
+**Vad lär vi oss av detta?** …
 
 ---
 

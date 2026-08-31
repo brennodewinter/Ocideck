@@ -37,15 +37,15 @@ language: fi
 
 ---
 
-### Example or case study
+### Esimerkki tai tapaus
 
-Describe a recognizable real-world situation here.
+Kuvaa tähän tunnistettava tilanne käytännöstä.
 
-**What happened?** …
+**Mitä tapahtui?** …
 
-**What went wrong — or right?** …
+**Mikä meni pieleen — tai juuri hyvin?** …
 
-**What do we learn from this?** …
+**Mitä opimme tästä?** …
 
 ---
 

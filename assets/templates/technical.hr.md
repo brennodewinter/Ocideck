@@ -21,7 +21,7 @@ language: hr
 
 ---
 
-### Architecture overview
+### Pregled arhitekture
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Tijek podataka ili tijek procesa
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Korisnik šalje zahtjev
+2. API ga potvrđuje i usmjerava
+3. Usluga ga obrađuje i pohranjuje
+4. Rezultat se vraća korisniku
 
 ---
 

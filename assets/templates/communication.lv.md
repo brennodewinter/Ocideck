@@ -35,9 +35,9 @@ language: lv
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulējiet šeit galveno vēstījumu vienā spēcīgā teikumā.
 
-— Name or sender
+— Vārds vai sūtītājs
 
 ---
 

@@ -35,9 +35,9 @@ language: lt
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Suformuluokite čia pagrindinę žinutę vienu stipriu sakiniu.
 
-— Name or sender
+— Vardas arba siuntėjas
 
 ---
 

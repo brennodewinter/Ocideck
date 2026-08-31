@@ -35,9 +35,9 @@ language: cs
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Zformulujte zde klíčové sdělení v jedné silné větě.
 
-— Name or sender
+— Jméno nebo odesílatel
 
 ---
 

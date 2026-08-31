@@ -36,9 +36,9 @@ language: mt
 # Prijoritajiet
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Solvi l-vulnerabbiltajiet kritiċi
+2. Irrevedi d-drittijiet ta' aċċess
+3. Waqqaf il-logging u l-monitoraġġ
 
 ---
 

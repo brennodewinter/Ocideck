@@ -117,19 +117,19 @@ language: fi
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Kuvaa tähän asiallisesti ja teknisesti, mistä tietoturvaongelmassa on kyse.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Kuvaa toistettavasti (todistein), miten havainto todettiin.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Kuvaa mahdollinen tekninen ja liiketoiminnallinen vaikutus.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Kuvaa konkreettinen ja toteutettavissa oleva korjaus.
 
 ---
 

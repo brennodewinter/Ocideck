@@ -37,15 +37,15 @@ language: bg
 
 ---
 
-### Example or case study
+### Пример или казус
 
-Describe a recognizable real-world situation here.
+Опишете тук разпознаваема ситуация от практиката.
 
-**What happened?** …
+**Какво се случи?** …
 
-**What went wrong — or right?** …
+**Какво се обърка — или тъкмо мина добре?** …
 
-**What do we learn from this?** …
+**Какво научаваме от това?** …
 
 ---
 

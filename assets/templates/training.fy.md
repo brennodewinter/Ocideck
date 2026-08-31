@@ -37,15 +37,15 @@ language: fy
 
 ---
 
-### Example or case study
+### Foarbyld of kasus
 
-Describe a recognizable real-world situation here.
+Beskriuw hjir in werkenbere situaasje út de praktyk.
 
-**What happened?** …
+**Wat barde der?** …
 
-**What went wrong — or right?** …
+**Wat gie der mis — of just goed?** …
 
-**What do we learn from this?** …
+**Wat leare wy hjirfan?** …
 
 ---
 

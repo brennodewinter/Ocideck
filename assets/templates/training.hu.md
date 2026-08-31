@@ -37,15 +37,15 @@ language: hu
 
 ---
 
-### Example or case study
+### Példa vagy esettanulmány
 
-Describe a recognizable real-world situation here.
+Írj le itt egy felismerhető helyzetet a gyakorlatból.
 
-**What happened?** …
+**Mi történt?** …
 
-**What went wrong — or right?** …
+**Mi ment rosszul — vagy éppen jól?** …
 
-**What do we learn from this?** …
+**Mit tanulunk ebből?** …
 
 ---
 

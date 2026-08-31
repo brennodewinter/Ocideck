@@ -24,20 +24,20 @@ language: da
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Hvis du ikke kan forklare det i én sætning, forstår du det ikke godt nok selv.
 
-— Rule of thumb for a strong pitch
+— Tommelfingerregel for et stærkt pitch
 
 ---
 
 # Strukturen
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Krog: en fængende åbning eller et eksempel
+2. Problem: hvilken smerte du løser, og for hvem
+3. Løsning: hvad du tilbyder, i almindeligt sprog
+4. Bevis: tal, eksempel eller demo
+5. Spørg: det konkrete næste skridt
 
 ---
 

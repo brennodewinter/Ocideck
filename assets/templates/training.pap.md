@@ -37,15 +37,15 @@ language: pap
 
 ---
 
-### Example or case study
+### Ehèmpel òf kaso
 
-Describe a recognizable real-world situation here.
+Deskribí aki un situashon rekonosibel for di práktika.
 
-**What happened?** …
+**Kiko a pasa?** …
 
-**What went wrong — or right?** …
+**Kiko a bai malu — òf hustamente bon?** …
 
-**What do we learn from this?** …
+**Kiko nos ta siña for di esaki?** …
 
 ---
 

@@ -35,9 +35,9 @@ language: pt
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formule aqui a mensagem central numa frase forte.
 
-— Name or sender
+— Nome ou remetente
 
 ---
 

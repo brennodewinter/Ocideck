@@ -41,11 +41,11 @@ language: ro
 
 ---
 
-### Inject round 1
+### Injectare, runda 1
 
-Describe here the first development presented to the team.
+Descrie aici prima evoluție prezentată echipei.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Întrebare pentru echipă:** ce faceți mai întâi și pe cine informați?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injectare, runda 2
 
-Describe here the escalation or twist in the scenario.
+Descrie aici escaladarea sau răsturnarea de situație din scenariu.
 
-**Question for the team:** does this change your approach — and your communication?
+**Întrebare pentru echipă:** schimbă asta abordarea voastră — și comunicarea voastră?
 
 ---
 

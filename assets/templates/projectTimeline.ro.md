@@ -24,11 +24,11 @@ language: ro
 # Fazele proiectului
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Pregătire
+2. Proiectare
+3. Realizare
+4. Testare și acceptanță
+5. Punere în funcțiune și îngrijire ulterioară
 
 ---
 

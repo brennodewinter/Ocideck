@@ -14,9 +14,9 @@ language: fy
 
 ---
 
-### Important warning
+### Wichtige warskôging
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Kontrolearje altyd aktuele AIP/NOTAM, offisjele waarynformaasje, POH/AFM, lokale prosedueres en wetlike minima. Dizze sjabloan stipet de beslútfoarming, mar ferfangt gjin ferplichte flechtfoarbereiding.**
 
 ---
 

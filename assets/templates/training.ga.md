@@ -37,15 +37,15 @@ language: ga
 
 ---
 
-### Example or case study
+### Sampla nó cás staidéir
 
-Describe a recognizable real-world situation here.
+Déan cur síos anseo ar chás inaitheanta ón saol dáiríre.
 
-**What happened?** …
+**Cad a tharla?** …
 
-**What went wrong — or right?** …
+**Cad a chuaigh amú — nó cad a d'éirigh go maith?** …
 
-**What do we learn from this?** …
+**Cad a fhoghlaimímid uaidh seo?** …
 
 ---
 

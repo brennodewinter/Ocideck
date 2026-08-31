@@ -36,9 +36,9 @@ language: sl
 # Prednostne naloge
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Odpravi kritične ranljivosti
+2. Preveri pravice dostopa
+3. Vzpostavi beleženje in nadzor
 
 ---
 

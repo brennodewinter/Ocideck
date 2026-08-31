@@ -24,11 +24,11 @@ language: la
 # Progressiones Project
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Praeparatio
+2. Designatio
+3. Constructio
+4. Probatio et acceptatio
+5. Inceptio et cura posterior
 
 ---
 

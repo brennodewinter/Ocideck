@@ -21,7 +21,7 @@ language: pap
 
 ---
 
-### Architecture overview
+### Bista general di arkitektura
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Fluho di dato òf fluho di proseso
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. E usuario ta hasi un petishon
+2. E API ta validá i ruteá e petishon
+3. E servisio ta prosesá i warda e petishon
+4. E resultado ta bai bèk pa e usuario
 
 ---
 

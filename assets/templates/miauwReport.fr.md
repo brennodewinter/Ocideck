@@ -117,19 +117,19 @@ language: fr
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Décrivez ici, de façon factuelle et technique, en quoi consiste le problème de sécurité.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Décrivez de façon reproductible (preuves à l'appui) comment la constatation a été établie.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Décrivez l'impact technique et métier possible.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Décrivez la mesure d'atténuation concrète et réalisable.
 
 ---
 

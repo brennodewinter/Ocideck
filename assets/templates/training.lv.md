@@ -37,15 +37,15 @@ language: lv
 
 ---
 
-### Example or case study
+### Piemērs vai gadījuma izpēte
 
-Describe a recognizable real-world situation here.
+Aprakstiet šeit atpazīstamu situāciju no prakses.
 
-**What happened?** …
+**Kas notika?** …
 
-**What went wrong — or right?** …
+**Kas nogāja greizi — vai tieši labi?** …
 
-**What do we learn from this?** …
+**Ko mēs no tā mācāmies?** …
 
 ---
 

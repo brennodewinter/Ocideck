@@ -24,20 +24,20 @@ language: tr
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Tek bir cümleyle anlatamıyorsan, kendin de henüz yeterince iyi anlamamışsındır.
 
-— Rule of thumb for a strong pitch
+— Güçlü bir sunum için temel kural
 
 ---
 
 # yapı
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Kanca: ilgi çekici bir açılış veya örnek
+2. Sorun: hangi acıyı, kimin için çözüyorsun
+3. Çözüm: ne sunduğun, sade bir dille
+4. Kanıt: rakamlar, örnek veya demo
+5. Talep: somut bir sonraki adım
 
 ---
 

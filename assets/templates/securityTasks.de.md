@@ -36,9 +36,9 @@ language: de
 # Prioritäten
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Kritische Schwachstellen beheben
+2. Zugriffsrechte überprüfen
+3. Logging und Monitoring einrichten
 
 ---
 

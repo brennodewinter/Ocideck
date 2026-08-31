@@ -35,9 +35,9 @@ language: hr
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Ovdje formulirajte ključnu poruku u jednoj snažnoj rečenici.
 
-— Name or sender
+— Ime ili pošiljatelj
 
 ---
 

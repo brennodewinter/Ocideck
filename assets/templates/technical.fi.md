@@ -21,7 +21,7 @@ language: fi
 
 ---
 
-### Architecture overview
+### Arkkitehtuurin yleiskuva
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Tietovirta tai prosessivirta
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Käyttäjä tekee pyynnön
+2. API vahvistaa ja reitittää sen
+3. Palvelu käsittelee ja tallentaa sen
+4. Tulos palaa käyttäjälle
 
 ---
 

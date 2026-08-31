@@ -117,19 +117,19 @@ language: la
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Hic re et arte describe quid sit problema securitatis.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Describe modo repetibili (cum documentis) quomodo inventum constitutum sit.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Describe impulsum technicum et negotialem possibilem.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Describe mitigationem certam et effectibilem.
 
 ---
 

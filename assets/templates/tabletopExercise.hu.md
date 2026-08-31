@@ -41,11 +41,11 @@ language: hu
 
 ---
 
-### Inject round 1
+### Injekt, 1. kör
 
-Describe here the first development presented to the team.
+Írd le itt az első fejleményt, amit a csapat elé tárnak.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Kérdés a csapatnak:** mit tesztek először, és kit értesítetek?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injekt, 2. kör
 
-Describe here the escalation or twist in the scenario.
+Írd le itt az eszkalációt vagy a fordulatot a forgatókönyvben.
 
-**Question for the team:** does this change your approach — and your communication?
+**Kérdés a csapatnak:** változtat ez a megközelítéseteken — és a kommunikációtokon?
 
 ---
 

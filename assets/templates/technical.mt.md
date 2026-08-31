@@ -21,7 +21,7 @@ language: mt
 
 ---
 
-### Architecture overview
+### Ħarsa ġenerali lejn l-arkitettura
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Fluss tad-dejta jew fluss tal-proċess
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. L-utent jagħmel talba
+2. L-API tivvalidaha u tirrottaha
+3. Is-servizz jipproċessaha u jaħżinha
+4. Ir-riżultat imur lura għand l-utent
 
 ---
 

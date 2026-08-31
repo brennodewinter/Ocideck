@@ -41,11 +41,11 @@ language: id
 
 ---
 
-### Inject round 1
+### Injek, putaran 1
 
-Describe here the first development presented to the team.
+Jelaskan di sini perkembangan pertama yang disampaikan kepada tim.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Pertanyaan untuk tim:** apa yang Anda lakukan lebih dulu, dan siapa yang Anda beri tahu?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injek, putaran 2
 
-Describe here the escalation or twist in the scenario.
+Jelaskan di sini eskalasi atau perubahan arah dalam skenario.
 
-**Question for the team:** does this change your approach — and your communication?
+**Pertanyaan untuk tim:** apakah ini mengubah pendekatan — dan komunikasi Anda?
 
 ---
 

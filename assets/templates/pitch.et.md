@@ -24,20 +24,20 @@ language: et
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Kui sa ei suuda seda ühe lausega selgitada, ei ole sa sellest ise veel piisavalt hästi aru saanud.
 
-— Rule of thumb for a strong pitch
+— Rusikareegel tugeva esitluse jaoks
 
 ---
 
 # Struktuur
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Konks: intrigeeriv algus või näide
+2. Probleem: millist valu lahendad ja kelle jaoks
+3. Lahendus: mida pakud, lihtsas keeles
+4. Tõestus: numbrid, näide või demo
+5. Küsimus: konkreetne järgmine samm
 
 ---
 

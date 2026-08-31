@@ -24,11 +24,11 @@ language: id
 # Fase proyek
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Persiapan
+2. Perancangan
+3. Pembangunan
+4. Uji dan penerimaan
+5. Go-live dan pemeliharaan lanjutan
 
 ---
 

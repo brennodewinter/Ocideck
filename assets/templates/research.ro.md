@@ -48,15 +48,15 @@ language: ro
 
 ---
 
-### Evidence and sample material
+### Dovezi și material exemplu
 
-*"Quote or passage from the source material."*
+*„Citat sau pasaj din materialul sursă.”*
 
-**Source:** … (document, date)
+**Sursă:** … (document, dată)
 
 **Context:** …
 
-**What this shows:** …
+**Ce arată acest lucru:** …
 
 ---
 
@@ -71,6 +71,6 @@ language: ro
 # Recomandări
 <!-- ocideck_list_style: numbered -->
 
-1. Recommendation 1: …
-2. Recommendation 2: …
-3. Recommendation 3: …
+1. Recomandarea 1: …
+2. Recomandarea 2: …
+3. Recomandarea 3: …

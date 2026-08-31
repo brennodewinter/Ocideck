@@ -14,9 +14,9 @@ language: ga
 
 ---
 
-### Important warning
+### Rabhadh tábhachtach
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Seiceáil i gcónaí na AIP/NOTAM reatha, faisnéis oifigiúil aimsire, an POH/AFM, nósanna imeachta áitiúla agus na híosmhéideanna dlíthiúla. Tacaíonn an teimpléad seo le cinnteoireacht ach ní ionann é agus an t-ullmhúchán eitilte éigeantach.**
 
 ---
 

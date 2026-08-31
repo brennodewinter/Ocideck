@@ -24,11 +24,11 @@ language: mt
 # Fażijiet tal-proġett
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Tħejjija
+2. Disinn
+3. Bini
+4. Ittestjar u aċċettazzjoni
+5. Tnedija u kura ta' wara
 
 ---
 

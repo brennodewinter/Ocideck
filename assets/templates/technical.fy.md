@@ -21,7 +21,7 @@ language: fy
 
 ---
 
-### Architecture overview
+### Arsjitektueroersjoch
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Datastream of prosesstream
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. De brûker docht in oanfraach
+2. De API validearret en routearret
+3. De tsjinst ferwurket en slaat op
+4. It resultaat giet werom nei de brûker
 
 ---
 

@@ -24,20 +24,20 @@ language: fy
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> As je it net yn ien sin útlizze kinne, snappe je it sels noch net goed genôch.
 
-— Rule of thumb for a strong pitch
+— Fûstregel foar in sterke pitch
 
 ---
 
 # De struktuer
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Hook: in prikkeljende iepening of foarbyld
+2. Probleem: hokker pine losse je op, foar wa
+3. Oplossing: wat je biede, yn gewoane taal
+4. Bewiis: sifers, foarbyld of demo
+5. Freegje: de konkrete folgjende stap
 
 ---
 

@@ -24,20 +24,20 @@ language: it
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Se non riesci a spiegarlo in una frase, non l'hai ancora capito abbastanza bene nemmeno tu.
 
-— Rule of thumb for a strong pitch
+— Regola pratica per una presentazione efficace
 
 ---
 
 # La struttura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Gancio: un'apertura o un esempio intrigante
+2. Problema: quale dolore risolvi, e per chi
+3. Soluzione: cosa offri, in parole semplici
+4. Prova: numeri, esempio o demo
+5. Richiesta: il passo successivo concreto
 
 ---
 

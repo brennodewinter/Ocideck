@@ -21,7 +21,7 @@ language: lv
 
 ---
 
-### Architecture overview
+### Arhitektūras pārskats
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Datu plūsma vai procesa plūsma
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Lietotājs nosūta pieprasījumu
+2. API to validē un maršrutē
+3. Pakalpojums to apstrādā un saglabā
+4. Rezultāts nonāk atpakaļ pie lietotāja
 
 ---
 

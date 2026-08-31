@@ -24,11 +24,11 @@ language: cs
 # Fáze projektu
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Příprava
+2. Návrh
+3. Realizace
+4. Testování a akceptace
+5. Spuštění a následná péče
 
 ---
 

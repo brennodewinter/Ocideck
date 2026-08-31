@@ -24,11 +24,11 @@ language: hu
 # A projekt fázisai
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Előkészítés
+2. Tervezés
+3. Megvalósítás
+4. Teszt és átvétel
+5. Élesítés és utógondozás
 
 ---
 

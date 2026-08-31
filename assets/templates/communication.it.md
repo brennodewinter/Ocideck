@@ -35,9 +35,9 @@ language: it
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formula qui il messaggio chiave in una sola frase incisiva.
 
-— Name or sender
+— Nome o mittente
 
 ---
 

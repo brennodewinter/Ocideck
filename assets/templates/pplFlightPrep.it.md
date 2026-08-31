@@ -14,9 +14,9 @@ language: it
 
 ---
 
-### Important warning
+### Avvertenza importante
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Controlla sempre AIP/NOTAM aggiornati, le informazioni meteo ufficiali, il POH/AFM, le procedure locali e i minimi di legge. Questo modello supporta la decisione, ma non sostituisce la preparazione al volo obbligatoria.**
 
 ---
 

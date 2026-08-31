@@ -14,9 +14,9 @@ language: da
 
 ---
 
-### Important warning
+### Vigtig advarsel
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Kontrollér altid aktuelle AIP/NOTAM, officiel vejrinformation, POH/AFM, lokale procedurer og lovbestemte minima. Denne skabelon understøtter beslutninger, men erstatter ikke den obligatoriske flyveforberedelse.**
 
 ---
 

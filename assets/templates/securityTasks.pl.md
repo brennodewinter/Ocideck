@@ -36,9 +36,9 @@ language: pl
 # Priorytety
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Usuń krytyczne podatności
+2. Przejrzyj uprawnienia dostępu
+3. Wdróż logowanie i monitorowanie
 
 ---
 

@@ -35,9 +35,9 @@ language: de
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulieren Sie hier die Kernbotschaft in einem kraftvollen Satz.
 
-— Name or sender
+— Name oder Absender
 
 ---
 

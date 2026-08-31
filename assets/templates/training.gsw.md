@@ -37,15 +37,15 @@ language: gsw
 
 ---
 
-### Example or case study
+### Bispiel oder Fallstudie
 
-Describe a recognizable real-world situation here.
+Beschriib da e wiedererkennbari Situation us de Praxis.
 
-**What happened?** …
+**Was isch passiert?** …
 
-**What went wrong — or right?** …
+**Was isch schiefglaufe — oder grad guet gange?** …
 
-**What do we learn from this?** …
+**Was lerned mir drus?** …
 
 ---
 

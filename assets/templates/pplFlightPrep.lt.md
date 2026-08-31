@@ -14,9 +14,9 @@ language: lt
 
 ---
 
-### Important warning
+### Svarbus įspėjimas
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Visada patikrinkite galiojančius AIP/NOTAM, oficialią orų informaciją, POH/AFM, vietines procedūras ir teisinius minimumus. Šis šablonas padeda priimti sprendimą, bet nepakeičia privalomo skrydžio pasirengimo.**
 
 ---
 

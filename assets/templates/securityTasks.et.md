@@ -36,9 +36,9 @@ language: et
 # Prioriteedid
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Kõrvalda kriitilised haavatavused
+2. Vaata üle juurdepääsuõigused
+3. Seadista logimine ja seire
 
 ---
 

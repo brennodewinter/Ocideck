@@ -14,9 +14,9 @@ language: lv
 
 ---
 
-### Important warning
+### Svarīgs brīdinājums
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Vienmēr pārbaudiet spēkā esošos AIP/NOTAM, oficiālo laika informāciju, POH/AFM, vietējās procedūras un likumā noteiktos minimumus. Šī veidne atbalsta lēmumu pieņemšanu, bet neaizstāj obligāto lidojuma sagatavošanu.**
 
 ---
 

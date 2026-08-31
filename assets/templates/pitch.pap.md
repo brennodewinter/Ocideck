@@ -24,20 +24,20 @@ language: pap
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Si bo no por splik'é den ún frase, bo mes ainda no ta komprendé bon sufisiente.
 
-— Rule of thumb for a strong pitch
+— Regla di pulgar pa un presentashon fuerte
 
 ---
 
 # E struktura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Hook: un apertura òf ehèmpel ku ta yama atenshon
+2. Problema: ki doló bo ta resolvé, i pa ken
+3. Solushon: kiko bo ta ofresé, den lenga simpel
+4. Prueba: sifranan, ehèmpel òf demo
+5. Puntra: e siguiente paso konkreto
 
 ---
 

@@ -37,15 +37,15 @@ language: sl
 
 ---
 
-### Example or case study
+### Primer ali študija primera
 
-Describe a recognizable real-world situation here.
+Tukaj opišite prepoznavno situacijo iz prakse.
 
-**What happened?** …
+**Kaj se je zgodilo?** …
 
-**What went wrong — or right?** …
+**Kaj je šlo narobe — ali ravno dobro?** …
 
-**What do we learn from this?** …
+**Kaj se iz tega naučimo?** …
 
 ---
 

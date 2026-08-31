@@ -35,9 +35,9 @@ language: ga
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Cuir an príomhtheachtaireacht in abairt láidir amháin anseo.
 
-— Name or sender
+— Ainm nó seoltóir
 
 ---
 

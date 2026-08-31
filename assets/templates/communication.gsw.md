@@ -35,9 +35,9 @@ language: gsw
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulier da d Kärnbotschaft i eim chräftige Satz.
 
-— Name or sender
+— Name oder Absänder
 
 ---
 

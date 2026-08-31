@@ -41,11 +41,11 @@ language: ga
 
 ---
 
-### Inject round 1
+### Insteall, babhta 1
 
-Describe here the first development presented to the team.
+Déan cur síos anseo ar an gcéad fhorbairt a chuirtear faoi bhráid an fhoirne.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Ceist don fhoireann:** cad a dhéanann sibh ar dtús, agus cé a chuireann sibh ar an eolas?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Insteall, babhta 2
 
-Describe here the escalation or twist in the scenario.
+Déan cur síos anseo ar an ngéarú nó ar an gcasadh sa chás.
 
-**Question for the team:** does this change your approach — and your communication?
+**Ceist don fhoireann:** an athraíonn sé seo bhur gcur chuige — agus bhur gcumarsáid?
 
 ---
 

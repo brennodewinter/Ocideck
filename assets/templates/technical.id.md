@@ -21,7 +21,7 @@ language: id
 
 ---
 
-### Architecture overview
+### Ikhtisar arsitektur
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Aliran data atau aliran proses
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Pengguna mengirim permintaan
+2. API memvalidasi dan merutekannya
+3. Layanan memproses dan menyimpannya
+4. Hasilnya kembali ke pengguna
 
 ---
 

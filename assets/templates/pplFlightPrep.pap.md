@@ -14,9 +14,9 @@ language: pap
 
 ---
 
-### Important warning
+### Advertensia importante
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Semper chèk e AIP/NOTAM aktual, informashon ofisial di tempu, POH/AFM, prosedura lokal i minimonan legal. E plantia aki ta sostené e tuma di desishon, pero no ta remplasá e preparashon di buelo obligatorio.**
 
 ---
 

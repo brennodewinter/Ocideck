@@ -24,20 +24,20 @@ language: uk
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Якщо ви не можете пояснити це одним реченням, ви й самі ще не розумієте цього достатньо добре.
 
-— Rule of thumb for a strong pitch
+— Правило для сильної презентації
 
 ---
 
 # Структура
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Гачок: інтригуючий початок або приклад
+2. Проблема: який біль ви розв'язуєте і для кого
+3. Рішення: що ви пропонуєте, простою мовою
+4. Доказ: цифри, приклад або демонстрація
+5. Запит: конкретний наступний крок
 
 ---
 

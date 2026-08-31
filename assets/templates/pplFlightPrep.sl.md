@@ -14,9 +14,9 @@ language: sl
 
 ---
 
-### Important warning
+### Pomembno opozorilo
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Vedno preverite veljavne AIP/NOTAM, uradne vremenske informacije, POH/AFM, lokalne postopke in zakonske minimume. Ta predloga podpira odločanje, vendar ne nadomešča obvezne priprave na let.**
 
 ---
 

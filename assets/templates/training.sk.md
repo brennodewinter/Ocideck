@@ -37,15 +37,15 @@ language: sk
 
 ---
 
-### Example or case study
+### Príklad alebo prípadová štúdia
 
-Describe a recognizable real-world situation here.
+Opíšte tu rozpoznateľnú situáciu z praxe.
 
-**What happened?** …
+**Čo sa stalo?** …
 
-**What went wrong — or right?** …
+**Čo sa pokazilo — alebo naopak podarilo?** …
 
-**What do we learn from this?** …
+**Čo sa z toho učíme?** …
 
 ---
 

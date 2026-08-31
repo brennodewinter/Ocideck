@@ -21,7 +21,7 @@ language: da
 
 ---
 
-### Architecture overview
+### Arkitekturoverblik
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Dataflow eller procesflow
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Brugeren sender en anmodning
+2. API'et validerer og router den
+3. Tjenesten behandler og gemmer den
+4. Resultatet går tilbage til brugeren
 
 ---
 

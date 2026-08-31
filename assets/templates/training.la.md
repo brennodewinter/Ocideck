@@ -37,15 +37,15 @@ language: la
 
 ---
 
-### Example or case study
+### Exemplum vel casus
 
-Describe a recognizable real-world situation here.
+Describe hic condicionem agnoscibilem ex usu.
 
-**What happened?** …
+**Quid accidit?** …
 
-**What went wrong — or right?** …
+**Quid male cessit — vel potius bene?** …
 
-**What do we learn from this?** …
+**Quid ex hoc discimus?** …
 
 ---
 

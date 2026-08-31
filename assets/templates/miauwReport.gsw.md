@@ -117,19 +117,19 @@ language: gsw
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Beschriib da sachlich und technisch, was s Sicherheitsproblem isch.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Beschriib nachvollziehbar (mit Bewiis), wie de Befund festgstellt worde isch.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Beschriib die mögliche technischi und gschäftlichi Uswirkig.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Beschriib die konkreti, machbari Gägemassnahm.
 
 ---
 

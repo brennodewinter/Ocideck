@@ -41,11 +41,11 @@ language: pap
 
 ---
 
-### Inject round 1
+### Inhèkshon, ronde 1
 
-Describe here the first development presented to the team.
+Deskribí aki e promé desaroyo ku ta wòrdu presentá na e ekipo.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Pregunta pa e ekipo:** kiko boso ta hasi promé, i ken boso ta informá?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Inhèkshon, ronde 2
 
-Describe here the escalation or twist in the scenario.
+Deskribí aki e eskalashon òf e bira den e senario.
 
-**Question for the team:** does this change your approach — and your communication?
+**Pregunta pa e ekipo:** esaki ta kambia boso enfoke — i boso komunikashon?
 
 ---
 

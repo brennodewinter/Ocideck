@@ -21,7 +21,7 @@ language: fr
 
 ---
 
-### Architecture overview
+### Vue d'ensemble de l'architecture
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Flux de données ou flux de processus
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. L'utilisateur envoie une requête
+2. L'API la valide et l'achemine
+3. Le service la traite et l'enregistre
+4. Le résultat revient à l'utilisateur
 
 ---
 

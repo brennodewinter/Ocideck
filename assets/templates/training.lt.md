@@ -37,15 +37,15 @@ language: lt
 
 ---
 
-### Example or case study
+### Pavyzdys arba atvejo analizė
 
-Describe a recognizable real-world situation here.
+Aprašykite čia atpažįstamą situaciją iš praktikos.
 
-**What happened?** …
+**Kas nutiko?** …
 
-**What went wrong — or right?** …
+**Kas nepavyko — ar kaip tik pavyko?** …
 
-**What do we learn from this?** …
+**Ko iš to pasimokome?** …
 
 ---
 

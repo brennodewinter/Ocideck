@@ -21,7 +21,7 @@ language: ga
 
 ---
 
-### Architecture overview
+### Forbhreathnú ar an ailtireacht
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Sreabhadh sonraí nó sreabhadh próisis
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Déanann an t-úsáideoir iarratas
+2. Bailíochtaíonn an API é agus ródaíonn sé é
+3. Próiseálann an tseirbhís é agus stórálann sí é
+4. Téann an toradh ar ais chuig an úsáideoir
 
 ---
 

@@ -14,9 +14,9 @@ language: tr
 
 ---
 
-### Important warning
+### Önemli uyarı
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Her zaman güncel AIP/NOTAM'ı, resmî hava durumu bilgisini, POH/AFM'yi, yerel prosedürleri ve yasal asgari değerleri kontrol edin. Bu şablon karar vermeyi destekler, ancak zorunlu uçuş hazırlığının yerini almaz.**
 
 ---
 

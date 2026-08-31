@@ -14,9 +14,9 @@ language: la
 
 ---
 
-### Important warning
+### Monitum grave
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Semper AIP/NOTAM recentia, informationem tempestatis publicam, POH/AFM, rationes locales et minima legalia inspice. Haec forma consilium adiuvat, sed praeparationem volatus obligatoriam non substituit.**
 
 ---
 

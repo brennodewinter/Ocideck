@@ -24,11 +24,11 @@ language: lv
 # Projekta fāzes
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Sagatavošana
+2. Projektēšana
+3. Izstrāde
+4. Testēšana un pieņemšana
+5. Palaišana un turpmākā aprūpe
 
 ---
 

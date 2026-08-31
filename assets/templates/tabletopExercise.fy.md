@@ -41,11 +41,11 @@ language: fy
 
 ---
 
-### Inject round 1
+### Inject, rûnte 1
 
-Describe here the first development presented to the team.
+Beskriuw hjir de earste ûntjouwing dy't oan it team foarlein wurdt.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Fraach oan it team:** wat dogge jo earst, en wa ynformearje jo?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Inject, rûnte 2
 
-Describe here the escalation or twist in the scenario.
+Beskriuw hjir de eskalaasje of de wending yn it senario.
 
-**Question for the team:** does this change your approach — and your communication?
+**Fraach oan it team:** feroaret dit jo oanpak — en jo kommunikaasje?
 
 ---
 

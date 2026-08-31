@@ -41,11 +41,11 @@ language: mt
 
 ---
 
-### Inject round 1
+### Injezzjoni, rawnd 1
 
-Describe here the first development presented to the team.
+Iddeskrivi hawn l-ewwel żvilupp ippreżentat lit-tim.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Mistoqsija għat-tim:** x'tagħmlu l-ewwel, u lil min tinfurmaw?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injezzjoni, rawnd 2
 
-Describe here the escalation or twist in the scenario.
+Iddeskrivi hawn l-eskalazzjoni jew il-bidla fix-xenarju.
 
-**Question for the team:** does this change your approach — and your communication?
+**Mistoqsija għat-tim:** dan ibiddel l-approċċ tagħkom — u l-komunikazzjoni tagħkom?
 
 ---
 

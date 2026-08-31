@@ -41,11 +41,11 @@ language: tr
 
 ---
 
-### Inject round 1
+### Enjekte, tur 1
 
-Describe here the first development presented to the team.
+Ekibe sunulan ilk gelişmeyi burada açıklayın.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Ekibe soru:** önce ne yaparsınız ve kimi bilgilendirirsiniz?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Enjekte, tur 2
 
-Describe here the escalation or twist in the scenario.
+Senaryodaki tırmanmayı veya dönüşü burada açıklayın.
 
-**Question for the team:** does this change your approach — and your communication?
+**Ekibe soru:** bu, yaklaşımınızı — ve iletişiminizi — değiştirir mi?
 
 ---
 
