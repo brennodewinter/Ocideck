@@ -2723,7 +2723,12 @@ not travel — see *The two manifest files* below.
 ### The two manifest files
 
 Whenever an export actually removes something, OciDeck writes two extra files
-into the same folder as the export (on the web, into the same download folder):
+into the same folder as the export. In the browser there is no folder, so the
+report and both manifest files arrive together in **one ZIP** — named after the
+export with `.zip` on the end. That is not a cosmetic choice: browsers stop the
+second automatic download in a row, and until then the manifest and the keys
+were the two that silently never arrived while the app said the export had
+succeeded. *(Corrected 2026-09-01, #1902.)*
 
 | File | What is in it | Does it go with the report? |
 | --- | --- | --- |
@@ -5209,7 +5214,7 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | Importing OpenKAT reports | Visible on Integraties but **disabled** — folder import and server tokens need desktop (keychain and local folders). |
 | Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
 | Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |
-| Exporting, sealing, encrypted packages | **Works**, delivered as downloads. |
+| Exporting, sealing, encrypted packages | **Works**, delivered as downloads. An export that consists of more than one file (a redacted report with its manifest, a session with a file per slide) arrives as one ZIP, because a browser stops the second automatic download in a row. And the wording is different on purpose: the browser version says *offered as a download* rather than *exported to*, because a page cannot see whether the file actually reached your downloads folder. |
 
 **The privacy check is the one to be careful with.** It has two halves — it reads
 your text, and it looks at your images for recognisable faces. In a browser only
