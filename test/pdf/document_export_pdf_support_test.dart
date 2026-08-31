@@ -23,10 +23,20 @@ void main() {
     final source = File(
       'lib/widgets/document_editor_screen.dart',
     ).readAsStringSync();
-    final start = source.indexOf('return writeDocumentExport(');
+    // Op `await` en niet op `return`: sinds #1902 vangt het bewerkscherm de
+    // uitkomst op om een geweigerde browserdownload te kunnen melden. De
+    // aanroep is dezelfde; alleen wat ermee gebeurt is veranderd.
+    final start = source.indexOf('await writeDocumentExport(');
     final end = source.indexOf('\n  );', start);
-    expect(start, isNot(-1));
-    expect(end, isNot(-1));
+    // Vóór het snijden, niet erna: anders valt deze toets om met een
+    // RangeError over een index in plaats van te zeggen dat de aanroep niet
+    // gevonden is.
+    expect(
+      start,
+      isNot(-1),
+      reason: 'aanroep van writeDocumentExport niet gevonden',
+    );
+    expect(end, isNot(-1), reason: 'einde van de aanroep niet gevonden');
     final call = source.substring(start, end);
     expect(call, contains('renderMermaid: renderMermaidForPdf'));
     expect(call, contains('renderMath: renderMathForPdf'));
