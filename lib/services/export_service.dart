@@ -24,6 +24,8 @@ import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
 import 'download_delivery.dart';
+export 'export_result.dart';
+import 'export_result.dart';
 import '../models/slide_quality.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
@@ -33,88 +35,10 @@ import 'latex/beamer_slide_builder.dart';
 import 'latex/latex_preamble.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
-import 'classification_policy.dart';
 import 'odp/deck_odp_export.dart';
 import 'pptx/deck_pptx_export.dart';
 
 part 'export_service_raster.dart';
-
-enum ExportFormat { pdf, pptx, odp, html, latex }
-
-extension ExportFormatExtension on ExportFormat {
-  String get label {
-    switch (this) {
-      case ExportFormat.pdf:
-        return 'PDF';
-      case ExportFormat.pptx:
-        return 'PowerPoint (PPTX)';
-      case ExportFormat.odp:
-        return 'OpenDocument (ODP)';
-      case ExportFormat.html:
-        return 'HTML (Marp, self-contained)';
-      case ExportFormat.latex:
-        return 'LaTeX (Beamer)';
-    }
-  }
-
-  String get extension {
-    switch (this) {
-      case ExportFormat.pdf:
-        return '.pdf';
-      case ExportFormat.pptx:
-        return '.pptx';
-      case ExportFormat.odp:
-        return '.odp';
-      case ExportFormat.html:
-        return '.html';
-      case ExportFormat.latex:
-        return '.tex';
-    }
-  }
-}
-
-/// Waarom een export niet lukte, wanneer de dienst dat als *beslissing* weet en
-/// niet als zin — de dienst kent de taal van de gebruiker niet (#576). De schil
-/// maakt er een zin van.
-enum ExportFailure {
-  /// De browser nam de download niet aan. Zegt niets over of een eerder
-  /// aangeboden bestand aankwam: dat kan de pagina niet zien (#1902).
-  downloadNotStarted,
-}
-
-class ExportResult {
-  final bool success;
-  final String? outputPath;
-  final String? error;
-
-  /// Gezet wanneer de reden een beslissing is en geen zin. Zie [ExportFailure].
-  final ExportFailure? failure;
-
-  /// Gezet wanneer het classificatiebeleid de export tegenhield.
-  ///
-  /// Een beslissing en geen zin: de dienst kent de taal van de gebruiker niet,
-  /// en een weigering die het TLP-niveau in de zin noemt heeft geen letterlijke
-  /// vorm om op te vertalen (#576). De schil maakt er een zin van met
-  /// `exportBlockMessage`.
-  final ExportDecision? classificationDecision;
-
-  const ExportResult._({
-    required this.success,
-    this.outputPath,
-    this.error,
-    this.failure,
-    this.classificationDecision,
-  });
-
-  factory ExportResult.ok(String path) =>
-      ExportResult._(success: true, outputPath: path);
-  factory ExportResult.fail(String error) =>
-      ExportResult._(success: false, error: error);
-  factory ExportResult.failed(ExportFailure failure) =>
-      ExportResult._(success: false, failure: failure);
-  factory ExportResult.blockedByClassification(ExportDecision decision) =>
-      ExportResult._(success: false, classificationDecision: decision);
-}
 
 /// Builds PDF and PPTX files from pre-rendered slide images (WYSIWYG export).
 /// Slides are expected to be 16:9 PNG bytes (see [SlideRasterizer]).
@@ -263,24 +187,9 @@ class ExportService {
         interfaceLanguageCode: interfaceLanguageCode,
         compress: compress,
       );
+      // Web: geen bestandssysteem — de export vertrekt als browserdownload.
       if (deliversByDownload) {
-        // Web: geen bestandssysteem — de export vertrekt als browserdownload.
-        //
-        // Het redactiemanifest hoort mee. Zonder de commitments (die met het
-        // rapport meereizen) en de verificatiesleutels (die de auteur houdt) is
-        // geen enkele redactie meer na te trekken. Dat ging op web mis: elk
-        // bestand werd apart aangeboden, en de browser houdt de tweede
-        // download op rij tegen — de auteur kreeg het geredigeerde rapport, las
-        // "geëxporteerd", en had het manifest niet (#1902). Meer dan één
-        // bestand gaat daarom als één ZIP.
-        final delivered = deliverAsDownload([
-          (name: fileName, bytes: bytes),
-          ..._redactionManifestFiles(fileName, redactionManifest),
-        ], bundleName: bundleNameFor(fileName));
-        if (delivered == null) {
-          return ExportResult.failed(ExportFailure.downloadNotStarted);
-        }
-        return ExportResult.ok(delivered);
+        return _deliverExportDownload(fileName, bytes, redactionManifest);
       }
       await Directory(dir).create(recursive: true);
       // Atomair: exporteren over een bestaand bestand mag dat bij een crash
@@ -512,4 +421,30 @@ class ExportService {
         ),
     ];
   }
+}
+
+/// De webaflevering van een export: het bestand zelf plus het redactiemanifest,
+/// als **één** download.
+///
+/// Het manifest hoort mee. Zonder de commitments (die met het rapport
+/// meereizen) en de verificatiesleutels (die de auteur houdt) is geen enkele
+/// redactie meer na te trekken. Precies dat ging op web mis: elk bestand werd
+/// apart aangeboden, en een browser houdt de tweede download op rij tegen — de
+/// auteur kreeg het geredigeerde rapport, las "geëxporteerd", en had het
+/// manifest niet (#1902).
+///
+/// Top-level en niet in de klasse: dit gebruikt geen enkel veld van de dienst,
+/// en [ExportService.export] zat tegen zijn regelplafond.
+ExportResult _deliverExportDownload(
+  String fileName,
+  Uint8List bytes,
+  RedactionManifest redactionManifest,
+) {
+  final delivered = deliverAsDownload([
+    (name: fileName, bytes: bytes),
+    ...ExportService._redactionManifestFiles(fileName, redactionManifest),
+  ], bundleName: bundleNameFor(fileName));
+  return delivered == null
+      ? ExportResult.failed(ExportFailure.downloadNotStarted)
+      : ExportResult.ok(delivered);
 }

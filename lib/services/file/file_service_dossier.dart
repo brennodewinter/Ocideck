@@ -81,9 +81,7 @@ extension FileServiceDossier on FileService {
       reportPdf: reportPdf,
       password: password,
     );
-    final name =
-        '${_safeName(deck.title)}_auditdossier.'
-        '${FileService.packageExtension}';
+    final name = _dossierFileName(deck);
     return deliverAsDownload([
       (name: name, bytes: bytes),
     ], bundleName: bundleNameFor(name));
@@ -94,9 +92,7 @@ extension FileServiceDossier on FileService {
   Future<String?> pickDossierDestination(Deck deck) async {
     return _saveDestination(
       dialogTitle: _d('Auditdossier exporteren'),
-      fileName:
-          '${_safeName(deck.title)}_auditdossier.'
-          '${FileService.packageExtension}',
+      fileName: _dossierFileName(deck),
     );
   }
 
@@ -113,9 +109,6 @@ extension FileServiceDossier on FileService {
       dossierIndex: dossierIndex,
       reportPdf: reportPdf,
     );
-    return {
-      for (final f in archive.files)
-        if (f.isFile) f.name: f.content,
-    };
+    return _flatMembers(archive);
   }
 }

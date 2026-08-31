@@ -970,7 +970,7 @@ class FileService {
   Future<String?> pickPackageDestination(Deck deck) async {
     return _saveDestination(
       dialogTitle: _d('Pakket exporteren'),
-      fileName: '${_safeName(deck.title)}.$packageExtension',
+      fileName: _packageFileName(deck),
     );
   }
 }
