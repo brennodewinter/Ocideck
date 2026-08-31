@@ -1338,6 +1338,12 @@ const _dutchSourceFi = {
   'Afbeelding slidevullend': 'Kuva täyttää dian',
   'Vult de hele slide en snijdt de randen bij':
       'Täyttää koko dian ja rajaa reunat',
+  'Afbeelding paneelvullend': 'Kuva täyttää paneelin',
+  'Vult het paneel en snijdt de randen bij': 'Täyttää paneelin ja rajaa reunat',
+  'Afbeeldingen paneelvullend': 'Kuvat täyttävät paneelinsa',
+  'Vult elk paneel en snijdt de randen bij':
+      'Täyttää jokaisen paneelin ja rajaa reunat',
+  'Vullen (bijsnijden)': 'Täyttää (rajaa)',
   'Afbeelding vult hele slide': 'Kuva täyttää koko dian',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Päällä: täyttää koko dian, otsikko päällä (rajattu). Pois: kuva ylhäällä, otsikko palkissa sen alla.',
@@ -4187,7 +4193,6 @@ const _dutchSourceAddFi = <String, String>{
   'Wat is er veranderd en waarom?': 'Mikä muuttui ja miksi?',
   'Uitbrengen': 'Lähetä',
   'Uitgebracht ter review:': 'Lähetetty tarkistettavaksi:',
-  'Kopieer link': 'Kopioi linkki',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Julkaisu estetty luokittelukäytännön vuoksi.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

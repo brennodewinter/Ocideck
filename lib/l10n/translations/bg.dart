@@ -1350,6 +1350,13 @@ const _dutchSourceBg = {
   'Afbeelding slidevullend': 'Изображението запълва слайда',
   'Vult de hele slide en snijdt de randen bij':
       'Запълва целия слайд и изрязва краищата',
+  'Afbeelding paneelvullend': 'Изображението запълва панела',
+  'Vult het paneel en snijdt de randen bij':
+      'Запълва панела и изрязва краищата',
+  'Afbeeldingen paneelvullend': 'Изображенията запълват панелите си',
+  'Vult elk paneel en snijdt de randen bij':
+      'Запълва всеки панел и изрязва краищата',
+  'Vullen (bijsnijden)': 'Запълни (изрежи)',
   'Afbeelding vult hele slide': 'Изображението запълва целия слайд',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Вкл.: запълва целия слайд, заглавие отгоре (изрязано). Изкл.: изображение отгоре, заглавие в лента отдолу.',
@@ -4224,7 +4231,6 @@ const _dutchSourceAddBg = <String, String>{
   'Wat is er veranderd en waarom?': 'Какво се промени и защо?',
   'Uitbrengen': 'Изпрати',
   'Uitgebracht ter review:': 'Изпратено за преглед:',
-  'Kopieer link': 'Копирай връзката',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Публикуването е блокирано от политиката за класификация.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

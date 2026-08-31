@@ -238,6 +238,26 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
+        const SizedBox(height: 12),
+        // imageZoom 0 = cover (vullen), 100 = contain (passen). Geldt beide
+        // afbeeldingen — sneltoets naast de bijsnijddialoog (#1879).
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          dense: true,
+          title: Text(context.l10n.d('Afbeeldingen paneelvullend')),
+          subtitle: Text(
+            context.l10n.d('Vult elk paneel en snijdt de randen bij'),
+          ),
+          value: widget.slide.imageZoom == 0,
+          onChanged:
+              (widget.slide.imagePath.isEmpty &&
+                  widget.slide.imagePath2.isEmpty)
+              ? null
+              : (checked) => widget.onUpdate(
+                  widget.slide.copyWith(imageZoom: checked == true ? 0 : 100),
+                ),
+        ),
       ],
     );
   }

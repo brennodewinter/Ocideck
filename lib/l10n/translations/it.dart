@@ -3271,7 +3271,6 @@ const _dutchSourceAddIt = {
   'Wat is er veranderd en waarom?': 'Cosa è cambiato e perché?',
   'Uitbrengen': 'Invia',
   'Uitgebracht ter review:': 'Inviato per revisione:',
-  'Kopieer link': 'Copia link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Rilascio bloccato dalla politica di classificazione.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4400,6 +4399,13 @@ const _dutchSourceAddIt = {
   'Afbeelding slidevullend': 'Immagine a tutta diapositiva',
   'Vult de hele slide en snijdt de randen bij':
       'Riempie l\'intera diapositiva e ritaglia i bordi',
+  'Afbeelding paneelvullend': 'Immagine riempie il pannello',
+  'Vult het paneel en snijdt de randen bij':
+      'Riempie il pannello e ritaglia i bordi',
+  'Afbeeldingen paneelvullend': 'Immagini riempiono i pannelli',
+  'Vult elk paneel en snijdt de randen bij':
+      'Riempie ogni pannello e ritaglia i bordi',
+  'Vullen (bijsnijden)': 'Riempire (ritagliare)',
   'Afbeelding vult hele slide': 'L\'immagine riempie l\'intera diapositiva',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Attivo: riempie l\'intera diapositiva, titolo sopra (ritagliato). Disattivo: immagine in alto, titolo in una fascia sotto.',

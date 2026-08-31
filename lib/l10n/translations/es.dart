@@ -3261,7 +3261,6 @@ const _dutchSourceAddEs = {
   'Wat is er veranderd en waarom?': '¿Qué cambió y por qué?',
   'Uitbrengen': 'Enviar',
   'Uitgebracht ter review:': 'Enviado para revisión:',
-  'Kopieer link': 'Copiar enlace',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publicación bloqueada por la política de clasificación.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4392,6 +4391,13 @@ const _dutchSourceAddEs = {
   'Afbeelding slidevullend': 'Imagen a pantalla completa',
   'Vult de hele slide en snijdt de randen bij':
       'Llena toda la diapositiva y recorta los bordes',
+  'Afbeelding paneelvullend': 'Imagen a pantalla completa del panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Llena el panel y recorta los bordes',
+  'Afbeeldingen paneelvullend': 'Imágenes a pantalla completa del panel',
+  'Vult elk paneel en snijdt de randen bij':
+      'Llena cada panel y recorta los bordes',
+  'Vullen (bijsnijden)': 'Llenar (recortar)',
   'Afbeelding vult hele slide': 'La imagen llena toda la diapositiva',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Activado: llena toda la diapositiva, título encima (recortado). Desactivado: imagen arriba, título en una franja debajo.',

@@ -3261,7 +3261,6 @@ const _dutchSourceAddDe = {
   'Wat is er veranderd en waarom?': 'Was hat sich geändert und warum?',
   'Uitbrengen': 'Einreichen',
   'Uitgebracht ter review:': 'Zur Überprüfung eingereicht:',
-  'Kopieer link': 'Link kopieren',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Freigabe durch die Klassifizierungsrichtlinie blockiert.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4387,6 +4386,13 @@ const _dutchSourceAddDe = {
   'Afbeelding slidevullend': 'Bild füllt die Folie',
   'Vult de hele slide en snijdt de randen bij':
       'Füllt die ganze Folie und beschneidet die Ränder',
+  'Afbeelding paneelvullend': 'Bild füllt das Panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Füllt das Panel und beschneidet die Ränder',
+  'Afbeeldingen paneelvullend': 'Bilder füllen ihre Panels',
+  'Vult elk paneel en snijdt de randen bij':
+      'Füllt jedes Panel und beschneidet die Ränder',
+  'Vullen (bijsnijden)': 'Füllen (beschneiden)',
   'Afbeelding vult hele slide': 'Bild füllt die ganze Folie',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'An: füllt die ganze Folie, Titel darüber (beschnitten). Aus: Bild oben, Titel in einem Band darunter.',

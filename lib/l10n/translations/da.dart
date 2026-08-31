@@ -1333,6 +1333,13 @@ const _dutchSourceDa = {
   'Afbeelding slidevullend': 'Billedet fylder sliden',
   'Vult de hele slide en snijdt de randen bij':
       'Fylder hele sliden og beskærer kanterne',
+  'Afbeelding paneelvullend': 'Billede fylder panelet',
+  'Vult het paneel en snijdt de randen bij':
+      'Fylder panelet og beskærer kanterne',
+  'Afbeeldingen paneelvullend': 'Billeder fylder deres paneler',
+  'Vult elk paneel en snijdt de randen bij':
+      'Fylder hvert panel og beskærer kanterne',
+  'Vullen (bijsnijden)': 'Fylde (beskære)',
   'Afbeelding vult hele slide': 'Billedet fylder hele sliden',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Til: fylder hele sliden, titel ovenpå (beskåret). Fra: billede øverst, titel i et bånd nedenunder.',
@@ -4187,7 +4194,6 @@ const _dutchSourceAddDa = <String, String>{
   'Wat is er veranderd en waarom?': 'Hvad blev ændret og hvorfor?',
   'Uitbrengen': 'Send',
   'Uitgebracht ter review:': 'Sendt til gennemgang:',
-  'Kopieer link': 'Kopiér link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Udgivelse blokeret af klassificeringspolitikken.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

@@ -1336,6 +1336,12 @@ const _dutchSourceCs = {
   'Afbeelding slidevullend': 'Obrázek vyplní snímek',
   'Vult de hele slide en snijdt de randen bij':
       'Vyplní celý snímek a ořízne okraje',
+  'Afbeelding paneelvullend': 'Obrázek vyplní panel',
+  'Vult het paneel en snijdt de randen bij': 'Vyplní panel a ořízne okraje',
+  'Afbeeldingen paneelvullend': 'Obrázky vyplní své panely',
+  'Vult elk paneel en snijdt de randen bij':
+      'Vyplní každý panel a ořízne okraje',
+  'Vullen (bijsnijden)': 'Vyplnit (oříznout)',
   'Afbeelding vult hele slide': 'Obrázek vyplní celý snímek',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Zap.: vyplní celý snímek, titulek přes něj (oříznuto). Vyp.: obrázek nahoře, titulek v pruhu pod ním.',
@@ -4174,7 +4180,6 @@ const _dutchSourceAddCs = <String, String>{
   'Wat is er veranderd en waarom?': 'Co se změnilo a proč?',
   'Uitbrengen': 'Odeslat',
   'Uitgebracht ter review:': 'Odesláno ke kontrole:',
-  'Kopieer link': 'Kopírovat odkaz',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Vydání zablokováno zásadami klasifikace.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

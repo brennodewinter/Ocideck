@@ -1335,6 +1335,12 @@ const _dutchSourceSl = {
   'Afbeelding slidevullend': 'Slika zapolni prosojnico',
   'Vult de hele slide en snijdt de randen bij':
       'Zapolni celotno prosojnico in obreže robove',
+  'Afbeelding paneelvullend': 'Slika zapolni panel',
+  'Vult het paneel en snijdt de randen bij': 'Zapolni panel in obreže robove',
+  'Afbeeldingen paneelvullend': 'Slike zapolnijo svoje panele',
+  'Vult elk paneel en snijdt de randen bij':
+      'Zapolni vsak panel in obreže robove',
+  'Vullen (bijsnijden)': 'Zapolniti (obrezati)',
   'Afbeelding vult hele slide': 'Slika zapolni celotno prosojnico',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Vklop: zapolni celotno prosojnico, naslov čez (obrezano). Izklop: slika zgoraj, naslov v pasu spodaj.',
@@ -4187,7 +4193,6 @@ const _dutchSourceAddSl = <String, String>{
   'Wat is er veranderd en waarom?': 'Kaj se je spremenilo in zakaj?',
   'Uitbrengen': 'Pošlji',
   'Uitgebracht ter review:': 'Poslano v pregled:',
-  'Kopieer link': 'Kopiraj povezavo',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Objavo je blokiral pravilnik o klasifikaciji.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

@@ -658,4 +658,27 @@ void main() {
     // Geen StateError: de fix routeert via saveTabWithDestination.
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('Cmd+W sluit het actieve tabblad (#1882)', (tester) async {
+    await pumpShell(tester, deckOf([bullets('Eerste')]));
+    // Open een documenttabblad erbij, zodat sluiten het aantal vermindert
+    // in plaats van het ene tabblad te resetten.
+    container.read(tabsProvider.notifier).newDocument();
+    await tester.pumpAndSettle();
+    final initialCount = container.read(tabsProvider).tabs.length;
+    expect(initialCount, 2);
+
+    const cmdW = SingleActivator(LogicalKeyboardKey.keyW, meta: true);
+    final shellShortcuts = tester
+        .widgetList<CallbackShortcuts>(find.byType(CallbackShortcuts))
+        .firstWhere((s) => s.bindings.containsKey(cmdW));
+    shellShortcuts.bindings[cmdW]!();
+    await tester.pumpAndSettle();
+
+    expect(
+      container.read(tabsProvider).tabs.length,
+      initialCount - 1,
+      reason: 'Cmd+W hoort het actieve tabblad te sluiten',
+    );
+  });
 }

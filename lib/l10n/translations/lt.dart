@@ -1340,6 +1340,13 @@ const _dutchSourceLt = {
   'Afbeelding slidevullend': 'Vaizdas užpildo skaidrę',
   'Vult de hele slide en snijdt de randen bij':
       'Užpildo visą skaidrę ir apkarpo kraštus',
+  'Afbeelding paneelvullend': 'Vaizdas užpildo panelį',
+  'Vult het paneel en snijdt de randen bij':
+      'Užpildo panelį ir apkarpo kraštus',
+  'Afbeeldingen paneelvullend': 'Vaizdai užpildo savo panelius',
+  'Vult elk paneel en snijdt de randen bij':
+      'Užpildo kiekvieną panelį ir apkarpo kraštus',
+  'Vullen (bijsnijden)': 'Užpildyti (apkarpyti)',
   'Afbeelding vult hele slide': 'Vaizdas užpildo visą skaidrę',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Įjungta: užpildo visą skaidrę, pavadinimas viršuje (apkarpyta). Išjungta: vaizdas viršuje, pavadinimas juostoje po juo.',
@@ -4202,7 +4209,6 @@ const _dutchSourceAddLt = <String, String>{
   'Wat is er veranderd en waarom?': 'Kas pasikeitė ir kodėl?',
   'Uitbrengen': 'Pateikti',
   'Uitgebracht ter review:': 'Pateikta peržiūrai:',
-  'Kopieer link': 'Kopijuoti nuorodą',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Išleidimą užblokavo klasifikavimo politika.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

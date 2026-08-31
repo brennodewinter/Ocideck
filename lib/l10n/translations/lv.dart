@@ -1334,6 +1334,12 @@ const _dutchSourceLv = {
   'Afbeelding slidevullend': 'Attēls aizpilda slaidu',
   'Vult de hele slide en snijdt de randen bij':
       'Aizpilda visu slaidu un apgriež malas',
+  'Afbeelding paneelvullend': 'Attēls aizpilda paneli',
+  'Vult het paneel en snijdt de randen bij': 'Aizpilda paneli un apgriež malas',
+  'Afbeeldingen paneelvullend': 'Attēli aizpilda savus paneļus',
+  'Vult elk paneel en snijdt de randen bij':
+      'Aizpilda katru paneli un apgriež malas',
+  'Vullen (bijsnijden)': 'Aizpildīt (apgriezt)',
   'Afbeelding vult hele slide': 'Attēls aizpilda visu slaidu',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Ieslēgts: aizpilda visu slaidu, virsraksts pa virsu (apgriezts). Izslēgts: attēls augšā, virsraksts joslā zem tā.',
@@ -4183,7 +4189,6 @@ const _dutchSourceAddLv = <String, String>{
   'Wat is er veranderd en waarom?': 'Kas mainījās un kāpēc?',
   'Uitbrengen': 'Iesniegt',
   'Uitgebracht ter review:': 'Iesniegts pārskatīšanai:',
-  'Kopieer link': 'Kopēt saiti',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publicēšanu bloķē klasifikācijas politika.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

@@ -452,6 +452,22 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           minValue: 20,
           maxValue: 70,
         ),
+        const SizedBox(height: 8),
+        // imageZoom 0 = cover (vullen), 100 = contain (passen). Sneltoets
+        // naast de bijsnijddialoog, net als bij image-slide (#1879).
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          dense: true,
+          title: Text(l10n.d('Afbeelding paneelvullend')),
+          subtitle: Text(l10n.d('Vult het paneel en snijdt de randen bij')),
+          value: widget.slide.imageZoom == 0,
+          onChanged: imagePath.isEmpty
+              ? null
+              : (checked) => widget.onUpdate(
+                  widget.slide.copyWith(imageZoom: checked == true ? 0 : 100),
+                ),
+        ),
         if (imageIsCroppable(imagePath)) ...[
           const SizedBox(height: 8),
           Align(

@@ -1343,6 +1343,13 @@ const _dutchSourcePl = {
   'Afbeelding slidevullend': 'Obraz wypełnia slajd',
   'Vult de hele slide en snijdt de randen bij':
       'Wypełnia cały slajd i przycina krawędzie',
+  'Afbeelding paneelvullend': 'Obraz wypełnia panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Wypełnia panel i przycina krawędzie',
+  'Afbeeldingen paneelvullend': 'Obrazy wypełniają swoje panele',
+  'Vult elk paneel en snijdt de randen bij':
+      'Wypełnia każdy panel i przycina krawędzie',
+  'Vullen (bijsnijden)': 'Wypełnij (przytnij)',
   'Afbeelding vult hele slide': 'Obraz wypełnia cały slajd',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Wł.: wypełnia cały slajd, tytuł na wierzchu (przycięty). Wył.: obraz u góry, tytuł w pasku poniżej.',
@@ -4207,7 +4214,6 @@ const _dutchSourceAddPl = <String, String>{
   'Wat is er veranderd en waarom?': 'Co się zmieniło i dlaczego?',
   'Uitbrengen': 'Wyślij',
   'Uitgebracht ter review:': 'Wysłano do recenzji:',
-  'Kopieer link': 'Kopiuj link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publikacja zablokowana przez zasady klasyfikacji.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

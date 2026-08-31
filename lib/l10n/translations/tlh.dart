@@ -1316,6 +1316,12 @@ const _dutchSourceTlh = {
   'Afbeelding slidevullend': '\'echletHom buy\'moH mIllogh',
   'Vult de hele slide en snijdt de randen bij':
       'Hoch \'echletHom buy\'moH \'ej HeHmey pe\'',
+  'Afbeelding paneelvullend': '\'echletHom ngeb buy\'moH',
+  'Vult het paneel en snijdt de randen bij': 'ngeb buy\'moH \'ej HeHmey pe\'',
+  'Afbeeldingen paneelvullend': '\'echletHommey ngeb buy\'moH',
+  'Vult elk paneel en snijdt de randen bij':
+      'Hoch ngeb buy\'moH \'ej HeHmey pe\'',
+  'Vullen (bijsnijden)': 'buy\'moH (pe\')',
   'Afbeelding vult hele slide': 'Hoch \'echletHom buy\'moH mIllogh',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'chu\'lu\': Hoch \'echletHom buy\'moH, pong Dung (pe\'lu\'). chu\'be\'lu\': mIllogh Dung, pong bIS\'ub tlhegh.',
@@ -4136,7 +4142,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Wat is er veranderd en waarom?': 'nuq choHlu\' \'ej qatlh?',
   'Uitbrengen': 'ngeH',
   'Uitgebracht ter review:': 'review ngeHta\':',
-  'Kopieer link': 'link velqa\'',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'classification pab review ngeH botlh.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

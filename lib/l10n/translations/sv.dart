@@ -1333,6 +1333,13 @@ const _dutchSourceSv = {
   'Afbeelding slidevullend': 'Bilden fyller bilden helt',
   'Vult de hele slide en snijdt de randen bij':
       'Fyller hela bilden och beskär kanterna',
+  'Afbeelding paneelvullend': 'Bild fyller panelen',
+  'Vult het paneel en snijdt de randen bij':
+      'Fyller panelen och beskär kanterna',
+  'Afbeeldingen paneelvullend': 'Bilder fyller sina paneler',
+  'Vult elk paneel en snijdt de randen bij':
+      'Fyller varje panel och beskär kanterna',
+  'Vullen (bijsnijden)': 'Fylla (beskära)',
   'Afbeelding vult hele slide': 'Bilden fyller hela bilden',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'På: fyller hela bilden, titel ovanpå (beskuren). Av: bild överst, titel i ett band under.',
@@ -4183,7 +4190,6 @@ const _dutchSourceAddSv = <String, String>{
   'Wat is er veranderd en waarom?': 'Vad ändrades och varför?',
   'Uitbrengen': 'Skicka',
   'Uitgebracht ter review:': 'Skickad för granskning:',
-  'Kopieer link': 'Kopiera länk',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publicering blockerad av klassificeringspolicyn.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

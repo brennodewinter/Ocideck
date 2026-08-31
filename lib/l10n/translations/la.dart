@@ -1342,6 +1342,13 @@ const _dutchSourceLa = {
   'Afbeelding slidevullend': 'Imago folium implet',
   'Vult de hele slide en snijdt de randen bij':
       'Totum folium implet et margines resecat',
+  'Afbeelding paneelvullend': 'Imago tabulam implet',
+  'Vult het paneel en snijdt de randen bij':
+      'Tabulam implet et margines resecat',
+  'Afbeeldingen paneelvullend': 'Imagines tabulas suas implent',
+  'Vult elk paneel en snijdt de randen bij':
+      'Omnem tabulam implet et margines resecat',
+  'Vullen (bijsnijden)': 'Implere (resecare)',
   'Afbeelding vult hele slide': 'Imago totum folium implet',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Accensum: totum folium implet, titulus superpositus (resectus). Exstinctum: imago supra, titulus in fascia infra.',
@@ -4201,7 +4208,6 @@ const _dutchSourceAddLa = <String, String>{
   'Wat is er veranderd en waarom?': 'Quid mutatum est et cur?',
   'Uitbrengen': 'Mittere',
   'Uitgebracht ter review:': 'Ad recognitionem missum:',
-  'Kopieer link': 'Nexum exscribere',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Emissio ab consilio classificationis impedita.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

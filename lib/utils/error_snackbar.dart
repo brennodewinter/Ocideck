@@ -3,21 +3,21 @@ import 'package:flutter/services.dart';
 
 import '../l10n/app_localizations.dart';
 
-/// Show an error message the user can COPY: a SnackBar that carries a
-/// **Kopiëren (Copy)** action putting the exact text on the clipboard — so a
-/// failure can be forwarded (e.g. reported here) without retyping it — and that
-/// stays a little longer than a normal notification so there is time to read and
-/// copy it. Pass the [messenger] the caller already holds (captured before an
-/// await, or `ScaffoldMessenger.of(context)`), so it is safe after async gaps.
-void showErrorSnackBar(
+/// Show a snackbar whose text the user can COPY: a **Kopiëren (Copy)** action
+/// puts the exact text on the clipboard — so a URL, path, git result or error
+/// can be forwarded without retyping it. Pass the [messenger] the caller
+/// already holds (captured before an await, or `ScaffoldMessenger.of(context)`),
+/// so it is safe after async gaps.
+void showCopyableSnackBar(
   ScaffoldMessengerState messenger,
   AppLocalizations l10n,
-  String message,
-) {
+  String message, {
+  Duration duration = const Duration(seconds: 5),
+}) {
   messenger.showSnackBar(
     SnackBar(
       content: Text(message),
-      duration: const Duration(seconds: 8),
+      duration: duration,
       action: SnackBarAction(
         label: l10n.d('Kopiëren'),
         onPressed: () {
@@ -35,3 +35,16 @@ void showErrorSnackBar(
     ),
   );
 }
+
+/// Show an error message the user can COPY — [showCopyableSnackBar] with a
+/// longer dwell so there is time to read and copy a failure.
+void showErrorSnackBar(
+  ScaffoldMessengerState messenger,
+  AppLocalizations l10n,
+  String message,
+) => showCopyableSnackBar(
+  messenger,
+  l10n,
+  message,
+  duration: const Duration(seconds: 8),
+);
