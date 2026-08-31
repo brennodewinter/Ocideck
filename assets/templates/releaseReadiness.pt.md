@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB/prontidão para liberação
+title: CAB / prontidão para release
 language: pt
 ---
 
 <!-- _class: title -->
 
-# CAB/prontidão para liberação
+# CAB / prontidão para release
 
 ---
 

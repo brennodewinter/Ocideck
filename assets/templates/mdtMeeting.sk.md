@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stretnutie multidisciplinárneho tímu (MDT)
+title: Multidisciplinárne stretnutie (MDT)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Stretnutie multidisciplinárneho tímu (MDT)
+# Multidisciplinárne stretnutie (MDT)
 ## Prípad · Dátum · Predsedníctvo · Účastníci
 
 ---

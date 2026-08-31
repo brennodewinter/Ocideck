@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METĀNA liela incidenta ziņojums
+title: METHANE ziņojums par lielu incidentu
 language: lv
 ---
 
 <!-- _class: title -->
 
-# METĀNA liela incidenta ziņojums
+# METHANE ziņojums par lielu incidentu
 ## Incidents · Vieta · Datums un laiks · Reportieris
 
 ---

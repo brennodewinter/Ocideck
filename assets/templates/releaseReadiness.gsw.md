@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB/Release-Bereitschaft
+title: CAB / Release Readiness
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# CAB/Release-Bereitschaft
+# CAB / Release Readiness
 
 ---
 

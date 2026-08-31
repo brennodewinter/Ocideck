@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Client petear
+title: Klantpetear
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Client petear
+# Klantpetear
 ## Klant · Kontaktpersoan · Doel · Datum
 
 ---

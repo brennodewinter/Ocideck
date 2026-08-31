@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pèrmit pa traha
+title: Permit di trabou (permit to work)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Pèrmit pa traha
+# Permit di trabou (permit to work)
 ## Trabou · Lugá · Bálido di–pa · Emisor di pèrmit
 
 ---

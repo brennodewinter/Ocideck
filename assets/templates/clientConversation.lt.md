@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kliento pokalbis
+title: Pokalbis su klientu
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Kliento pokalbis
+# Pokalbis su klientu
 ## Klientas · Kontaktinis asmuo · Tikslas · Data
 
 ---

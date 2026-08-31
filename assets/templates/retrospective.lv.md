@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektīva / komandas pilnveidošana
+title: Retrospektīva / komandas pilnveide
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Retrospektīva / komandas pilnveidošana
+# Retrospektīva / komandas pilnveide
 
 ---
 

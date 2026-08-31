@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Invånarkväll / medverkansmöte
+title: Boendemöte / medborgardialog
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Invånarkväll / medverkansmöte
+# Boendemöte / medborgardialog
 ## Grannskap · Ämne · Datum · Facilitator
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Remise du SBAR
+title: Transmission SBAR
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Remise du SBAR
+# Transmission SBAR
 ## Patient · Service · De qui à qui · Date et heure
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: EIPD / evaluación de impacto en la privacidad
+title: DPIA / evaluación de impacto en la privacidad
 language: es
 ---
 
 <!-- _class: title -->
 
-# EIPD / evaluación de impacto en la privacidad
+# DPIA / evaluación de impacto en la privacidad
 
 ---
 

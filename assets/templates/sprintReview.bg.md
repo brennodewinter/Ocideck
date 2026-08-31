@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Спринт преглед / демо
+title: Преглед на спринта / демо
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Спринт преглед / демо
+# Преглед на спринта / демо
 ## Отбор · Спринт · Дата
 
 ---

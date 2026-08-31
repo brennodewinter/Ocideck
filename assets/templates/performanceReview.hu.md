@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Teljesítményértékelés
+title: Teljesítményértékelő beszélgetés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Teljesítményértékelés
+# Teljesítményértékelő beszélgetés
 ## Ki · Időszak · Dátum
 
 ---

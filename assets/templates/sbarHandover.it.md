@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Consegna SBAR
+title: Passaggio di consegne SBAR
 language: it
 ---
 
 <!-- _class: title -->
 
-# Consegna SBAR
+# Passaggio di consegne SBAR
 ## Paziente · Reparto · Da chi a chi · Data e ora
 
 ---

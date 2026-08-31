@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Μεταφορά κακών νέων
+title: Ανακοίνωση δυσάρεστων νέων
 language: el
 ---
 
 <!-- _class: title -->
 
-# Μεταφορά κακών νέων
+# Ανακοίνωση δυσάρεστων νέων
 ## Σε ποιον · Τα νέα · Ημερομηνία
 
 ---

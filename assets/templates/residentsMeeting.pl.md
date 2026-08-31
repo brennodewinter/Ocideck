@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Wieczór mieszkańców / spotkanie partycypacyjne
+title: Spotkanie mieszkańców / spotkanie partycypacyjne
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Wieczór mieszkańców / spotkanie partycypacyjne
+# Spotkanie mieszkańców / spotkanie partycypacyjne
 ## Sąsiedztwo · Temat · Data · Moderator
 
 ---

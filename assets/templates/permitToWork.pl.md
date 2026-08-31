@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zezwolenie na pracę
+title: Zezwolenie na pracę (permit to work)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Zezwolenie na pracę
+# Zezwolenie na pracę (permit to work)
 ## Praca · Lokalizacja · Obowiązuje od–do · Wydawca zezwolenia
 
 ---

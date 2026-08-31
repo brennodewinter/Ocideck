@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Инструктаж за прилагане (BOA)
+title: Инструктаж по правоприлагане (BOA)
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Инструктаж за прилагане (BOA)
+# Инструктаж по правоприлагане (BOA)
 ## Дата · Смяна · Работен район/район · Координатор
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Statusa instruktāža
+title: Statusa brīfings
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Statusa instruktāža
+# Statusa brīfings
 
 ---
 

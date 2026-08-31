@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informationis salus negotium consilium
+title: Consilium operum securitatis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Informationis salus negotium consilium
+# Consilium operum securitatis
 
 ---
 

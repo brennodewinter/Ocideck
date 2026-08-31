@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Подгответе важен разговор
+title: Подготовка на ключов разговор
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Подгответе важен разговор
+# Подготовка на ключов разговор
 
 ## Кой · Тема · Дата
 

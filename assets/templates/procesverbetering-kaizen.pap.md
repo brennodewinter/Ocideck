@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: “Mehorashon di proseso: proyekto Kaizen”
+title: "Mehorashon di proseso: proyekto Kaizen"
 language: pap
 ocideck_improvement_framework: kaizen
 ---

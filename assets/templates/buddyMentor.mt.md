@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy / pjan mentor
+title: Pjan ta' buddy / mentor
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Buddy / pjan mentor
+# Pjan ta' buddy / mentor
 ## Ġdid · Buddy jew mentor · Data tal-bidu
 
 ---

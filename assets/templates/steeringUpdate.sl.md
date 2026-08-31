@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Posodobitev usmerjevalnega odbora / projektnega odbora
+title: Usmerjevalni odbor / posodobitev za project board
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Posodobitev usmerjevalnega odbora / projektnega odbora
+# Usmerjevalni odbor / posodobitev za project board
 
 ---
 

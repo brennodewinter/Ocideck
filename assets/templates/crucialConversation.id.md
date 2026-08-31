@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Persiapkan percakapan penting
+title: Menyiapkan percakapan krusial
 language: id
 ---
 
 <!-- _class: title -->
 
-# Persiapkan percakapan penting
+# Menyiapkan percakapan krusial
 
 ## Siapa · Topik · Tanggal
 

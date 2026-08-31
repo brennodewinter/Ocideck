@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Einen Konflikt durchsprechen
+title: Einen Konflikt klären
 language: de
 ---
 
 <!-- _class: title -->
 
-# Einen Konflikt durchsprechen
+# Einen Konflikt klären
 ## Wer · Über was · Datum
 
 ---

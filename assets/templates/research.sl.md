@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raziskovalna pripoved
+title: Raziskovalna zgodba
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Raziskovalna pripoved
+# Raziskovalna zgodba
 
 ---
 

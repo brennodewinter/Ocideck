@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reviżjoni ta' wara l-inċident / lezzjonijiet meħuda
+title: Reviżjoni wara inċident / tagħlimiet miksuba
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Reviżjoni ta' wara l-inċident / lezzjonijiet meħuda
+# Reviżjoni wara inċident / tagħlimiet miksuba
 
 ---
 

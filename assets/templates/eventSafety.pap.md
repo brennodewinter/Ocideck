@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di seguridat di evento i multitut
+title: Briefing di evento i siguridat di multitut
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di seguridat di evento i multitut
+# Briefing di evento i siguridat di multitut
 ## Evento · Lugá · Fecha · Kordinadó
 
 ---

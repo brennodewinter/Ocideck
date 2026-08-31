@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İlk katılım planı (30-60-90 gün)
+title: Uyum planı (30-60-90 gün)
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İlk katılım planı (30-60-90 gün)
+# Uyum planı (30-60-90 gün)
 ## Yeni işe alınan · Rol · Rehber · Başlangıç ​​tarihi
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bropassage briefing
+title: Maritim passage-/brobriefing
 language: da
 ---
 
 <!-- _class: title -->
 
-# Bropassage briefing
+# Maritim passage-/brobriefing
 ## Rejse · Skib · Dato · Se tidsplan
 
 ---

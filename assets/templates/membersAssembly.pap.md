@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunion general (AGM)
+title: Reunion general di miembronan
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Reunion general (AGM)
+# Reunion general di miembronan
 ## Organisashon · Fecha · Presidente · Miembronan presente
 
 ---

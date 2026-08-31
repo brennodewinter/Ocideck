@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Faisnéisiú na seirbhíse dóiteáin (freagra agus aclaíocht)
+title: Faisnéisiú na seirbhíse dóiteáin (freagairt agus cleachtadh)
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Faisnéisiú na seirbhíse dóiteáin (freagra agus aclaíocht)
+# Faisnéisiú na seirbhíse dóiteáin (freagairt agus cleachtadh)
 ## Cuspóir · Dáta agus am · Ceannasaí teagmhais nó ceannaire aclaíochta · Foireann
 
 ---

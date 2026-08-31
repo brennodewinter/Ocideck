@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Event- og crowd-sikkerhed briefing
+title: Event- og crowd-safety-briefing
 language: da
 ---
 
 <!-- _class: title -->
 
-# Event- og crowd-sikkerhed briefing
+# Event- og crowd-safety-briefing
 ## Arrangement · Sted · Dato · Koordinator
 
 ---

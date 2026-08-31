@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aggiornamento del comitato direttivo/comitato di progetto
+title: Comitato guida / aggiornamento di progetto
 language: it
 ---
 
 <!-- _class: title -->
 
-# Aggiornamento del comitato direttivo/comitato di progetto
+# Comitato guida / aggiornamento di progetto
 
 ---
 

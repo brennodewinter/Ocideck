@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: valná hromada (VH)
+title: Členská schůze (valná hromada)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# valná hromada (VH)
+# Členská schůze (valná hromada)
 ## Organizace · Datum · Předseda · Přítomní členové
 
 ---

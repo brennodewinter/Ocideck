@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Devir/geçiş
+title: Devir teslim / handover
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Devir/geçiş
+# Devir teslim / handover
 
 ---
 

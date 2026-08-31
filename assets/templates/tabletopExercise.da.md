@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bordøvelse / kriseøvelse
+title: Tabletop-øvelse / kriseøvelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# Bordøvelse / kriseøvelse
+# Tabletop-øvelse / kriseøvelse
 
 ---
 

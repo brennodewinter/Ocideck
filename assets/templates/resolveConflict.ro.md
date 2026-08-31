@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorbind printr-un conflict
+title: A rezolva un conflict
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Vorbind printr-un conflict
+# A rezolva un conflict
 ## Cine · Despre ce · Data
 
 ---

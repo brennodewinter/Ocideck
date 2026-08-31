@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Arutledes pingelise suhte üle
+title: Pingelise suhte arutamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Arutledes pingelise suhte üle
+# Pingelise suhte arutamine
 ## Kellega · Mille kohta · Millal
 
 ---

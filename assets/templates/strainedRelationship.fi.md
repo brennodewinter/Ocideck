@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Keskustelua kireästä suhteesta
+title: Kireän suhteen käsittely
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Keskustelua kireästä suhteesta
+# Kireän suhteen käsittely
 ## Kenen kanssa · Mistä · Milloin
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pjan tal-ħidma dwar is-sigurtà tal-informazzjoni
+title: Pjan tal-kompiti tas-sigurtà
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Pjan tal-ħidma dwar is-sigurtà tal-informazzjoni
+# Pjan tal-kompiti tas-sigurtà
 
 ---
 

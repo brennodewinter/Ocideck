@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Перевірка придатності до польоту IMSAFE
+title: IMSAFE перевірка придатності до польоту
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Перевірка придатності до польоту IMSAFE
+# IMSAFE перевірка придатності до польоту
 ## Пілот · Рейс · Дата · Ця перевірка не замінює медичний висновок
 
 ---

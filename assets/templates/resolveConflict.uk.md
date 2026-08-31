@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Розмова через конфлікт
+title: Залагодження конфлікту
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Розмова через конфлікт
+# Залагодження конфлікту
 ## Хто · Про що · Дата
 
 ---

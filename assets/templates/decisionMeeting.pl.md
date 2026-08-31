@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Spotkanie decyzyjne
+title: Narada decyzyjna
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Spotkanie decyzyjne
+# Narada decyzyjna
 ## Spotkanie · Data · Przewodniczący · Uczestnicy
 
 ---

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Folyamatjavítás: Kaizen projekt"
+title: "Folyamatfejlesztés: Kaizen projekt"
 language: hu
 ocideck_improvement_framework: kaizen
 ---

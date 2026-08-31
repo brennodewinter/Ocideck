@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Висновки аудиту та подальші дії
+title: Аудиторські висновки та подальші дії
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Висновки аудиту та подальші дії
+# Аудиторські висновки та подальші дії
 
 ---
 

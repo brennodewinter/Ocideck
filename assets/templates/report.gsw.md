@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bericht
+title: Bricht
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bericht
+# Bricht
 
 ---
 

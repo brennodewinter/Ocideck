@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregled primera socialne domene
+title: Obravnava primerov na socialnem področju
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Pregled primera socialne domene
+# Obravnava primerov na socialnem področju
 ## Ekipa · Datum · Predsednik
 
 ---

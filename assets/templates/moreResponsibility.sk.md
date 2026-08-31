@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Požiadajte o väčšiu zodpovednosť
+title: Žiadosť o väčšiu zodpovednosť
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Požiadajte o väčšiu zodpovednosť
+# Žiadosť o väčšiu zodpovednosť
 ## Kto · Aktuálna rola · Dátum
 
 ---

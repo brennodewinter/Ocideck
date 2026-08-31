@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αξιολόγηση προμηθευτή / κίνδυνος προμηθευτή
+title: Αξιολόγηση προμηθευτών / vendor risk
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αξιολόγηση προμηθευτή / κίνδυνος προμηθευτή
+# Αξιολόγηση προμηθευτών / vendor risk
 
 ---
 

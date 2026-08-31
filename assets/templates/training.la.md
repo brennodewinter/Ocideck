@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Training / officina
+title: Exercitatio / officina
 language: la
 ---
 
 <!-- _class: title -->
 
-# Training / officina
+# Exercitatio / officina
 
 ---
 

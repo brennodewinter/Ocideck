@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passaggio di consegne/transizione
+title: Passaggio di consegne / handover
 language: it
 ---
 
 <!-- _class: title -->
 
-# Passaggio di consegne/transizione
+# Passaggio di consegne / handover
 
 ---
 

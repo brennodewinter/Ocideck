@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekt start / kick-off
+title: Projektstart / kick-off
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Projekt start / kick-off
+# Projektstart / kick-off
 
 ---
 

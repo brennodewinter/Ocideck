@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektivo / mehorashon di tim
+title: Retrospective / mehorashon di tim
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Retrospektivo / mehorashon di tim
+# Retrospective / mehorashon di tim
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Renginio ir minios saugos instruktažas
+title: Renginio ir minios saugumo instruktažas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Renginio ir minios saugos instruktažas
+# Renginio ir minios saugumo instruktažas
 ## Renginys · Vieta · Data · Koordinatorius
 
 ---

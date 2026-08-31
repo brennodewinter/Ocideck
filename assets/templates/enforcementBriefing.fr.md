@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing d’application (BOA)
+title: Briefing d'application (BOA)
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Briefing d’application (BOA)
+# Briefing d'application (BOA)
 ## Date · Quart de travail · Zone de travail/district · Coordonnateur
 
 ---

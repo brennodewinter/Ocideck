@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lennu ülevaade
+title: Lennu debriifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Lennu ülevaade
+# Lennu debriifing
 ## Lend · Kuupäev · Meeskond
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisionsresultat och uppföljning
+title: Revisionsfynd och uppföljning
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Revisionsresultat och uppföljning
+# Revisionsfynd och uppföljning
 
 ---
 

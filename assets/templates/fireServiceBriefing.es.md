@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de bomberos (intervención y ejercicio)
+title: Briefing de bomberos (intervención y simulacro)
 language: es
 ---
 
 <!-- _class: title -->
 
-# Briefing de bomberos (intervención y ejercicio)
+# Briefing de bomberos (intervención y simulacro)
 ## Objeto · Fecha y hora · Jefe de intervención o líder de ejercicio · Equipo
 
 ---

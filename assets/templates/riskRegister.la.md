@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Periculum analysis / periculum mandare
+title: Analysis periculorum / registrum periculorum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Periculum analysis / periculum mandare
+# Analysis periculorum / registrum periculorum
 
 ---
 

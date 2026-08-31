@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Transitus pontis briefing
+title: Praelocutio transitus / pontis maritimi
 language: la
 ---
 
 <!-- _class: title -->
 
-# Transitus pontis briefing
+# Praelocutio transitus / pontis maritimi
 ## Voyage · Navis · Date · Watch schedule
 
 ---

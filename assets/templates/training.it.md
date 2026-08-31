@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Formazione/laboratorio
+title: Formazione / workshop
 language: it
 ---
 
 <!-- _class: title -->
 
-# Formazione/laboratorio
+# Formazione / workshop
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint review / demo
+title: Recensio sprint / demo
 language: la
 ---
 
 <!-- _class: title -->
 
-# Sprint review / demo
+# Recensio sprint / demo
 ## Turma · Sprint · Dies
 
 ---

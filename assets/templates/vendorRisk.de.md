@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lieferantenbewertung / Lieferantenrisiko
+title: Lieferantenbewertung / Vendor Risk
 language: de
 ---
 
 <!-- _class: title -->
 
-# Lieferantenbewertung / Lieferantenrisiko
+# Lieferantenbewertung / Vendor Risk
 
 ---
 

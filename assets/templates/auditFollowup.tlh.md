@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Audit findings and follow-up
+title: juv tu'ghachmey tlha'ghach je
 language: tlh
 ---
 
 <!-- _class: title -->
 
-# Audit findings and follow-up
+# juv tu'ghachmey tlha'ghach je
 
 ---
 

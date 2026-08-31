@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kòntròl di kondishon pa bula INSIGUR
+title: IMSAFE chèk di aptitut pa bula
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kòntròl di kondishon pa bula INSIGUR
+# IMSAFE chèk di aptitut pa bula
 ## Piloto · Buelo · Fecha · E kòntròl aki no ta remplasá huisio médiko
 
 ---

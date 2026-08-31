@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Išlipimas / išėjimas
+title: Offboarding / išėjimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Išlipimas / išėjimas
+# Offboarding / išėjimas
 ## Darbuotojas · Vaidmuo · Paskutinė darbo diena · Vadovas
 
 ---

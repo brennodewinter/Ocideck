@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sesi pemodelan ancaman
+title: Sesi threat modeling
 language: id
 ---
 
 <!-- _class: title -->
 
-# Sesi pemodelan ancaman
+# Sesi threat modeling
 ## Sistem · Tanggal · Fasilitator · Peserta
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ugunsdzēsības dienesta instruktāža (atbilde un vingrinājumi)
+title: Ugunsdzēsēju instruktāža (izsaukums un mācības)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Ugunsdzēsības dienesta instruktāža (atbilde un vingrinājumi)
+# Ugunsdzēsēju instruktāža (izsaukums un mācības)
 ## Objekts · Datums un laiks · Incidenta komandieris vai mācību vadītājs · Apkalpe
 
 ---

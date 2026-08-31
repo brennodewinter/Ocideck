@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Risultati dell'audit e follow-up
+title: Rilievi di audit e follow-up
 language: it
 ---
 
 <!-- _class: title -->
 
-# Risultati dell'audit e follow-up
+# Rilievi di audit e follow-up
 
 ---
 

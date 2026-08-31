@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Piano di attività per la sicurezza delle informazioni
+title: Piano attività di sicurezza
 language: it
 ---
 
 <!-- _class: title -->
 
-# Piano di attività per la sicurezza delle informazioni
+# Piano attività di sicurezza
 
 ---
 

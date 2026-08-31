@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Flydebriefing
+title: Flyvedebriefing
 language: da
 ---
 
 <!-- _class: title -->
 
-# Flydebriefing
+# Flyvedebriefing
 ## Flyvning · Dato · Besætning
 
 ---

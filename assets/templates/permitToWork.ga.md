@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cead oibre
+title: Ceadúnas oibre (permit to work)
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Cead oibre
+# Ceadúnas oibre (permit to work)
 ## Obair · Suíomh · Bailí ó–go · Eisitheoir an cheadúnais
 
 ---

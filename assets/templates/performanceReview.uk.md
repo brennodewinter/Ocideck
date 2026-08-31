@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Огляд продуктивності
+title: Оцінювальна бесіда
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Огляд продуктивності
+# Оцінювальна бесіда
 ## Хто · Період · Дата
 
 ---

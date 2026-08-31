@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brandvæsen briefing (respons og øvelse)
+title: Brandvæsensbriefing (indsats og øvelse)
 language: da
 ---
 
 <!-- _class: title -->
 
-# Brandvæsen briefing (respons og øvelse)
+# Brandvæsensbriefing (indsats og øvelse)
 ## Objekt · Dato og tid · Hændelsesleder eller øvelsesleder · Besætning
 
 ---

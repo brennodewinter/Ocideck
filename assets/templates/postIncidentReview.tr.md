@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Olay sonrası inceleme / öğrenilen dersler
+title: Olay sonrası inceleme / çıkarılan dersler
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Olay sonrası inceleme / öğrenilen dersler
+# Olay sonrası inceleme / çıkarılan dersler
 
 ---
 

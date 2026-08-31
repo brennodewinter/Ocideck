@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuasi & latihan tanggap pertama
+title: Latihan evakuasi dan BHV
 language: id
 ---
 
 <!-- _class: title -->
 
-# Evakuasi & latihan tanggap pertama
+# Latihan evakuasi dan BHV
 ## Lokasi · Tanggal · Pemimpin latihan · Skenario
 
 ---

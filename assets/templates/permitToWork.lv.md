@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Atļauja strādāt
+title: Darba atļauja (permit to work)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Atļauja strādāt
+# Darba atļauja (permit to work)
 ## Darbs · Atrašanās vieta · Derīgs no–līdz · Atļaujas izsniedzējs
 
 ---

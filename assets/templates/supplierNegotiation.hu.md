@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tárgyalás a beszállítókkal
+title: Tárgyalás beszállítókkal
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Tárgyalás a beszállítókkal
+# Tárgyalás beszállítókkal
 ## Szállító · Szerződés · Cél · Dátum
 
 ---

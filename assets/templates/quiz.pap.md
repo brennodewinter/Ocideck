@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kùes interaktivo
+title: Quiz interaktivo
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kùes interaktivo
+# Quiz interaktivo
 
 ---
 

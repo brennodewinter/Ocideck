@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Folyamatjavítás: 8D projekt"
+title: "Folyamatfejlesztés: 8D projekt"
 language: hu
 ocideck_improvement_framework: 8d
 ---

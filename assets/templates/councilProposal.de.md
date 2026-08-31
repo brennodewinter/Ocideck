@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorschlag des Rates/der Exekutive
+title: Rats- / Verwaltungsvorlage
 language: de
 ---
 
 <!-- _class: title -->
 
-# Vorschlag des Rates/der Exekutive
+# Rats- / Verwaltungsvorlage
 ## Betreff · Portfolio · Registrierungsnummer · Autor
 
 ---

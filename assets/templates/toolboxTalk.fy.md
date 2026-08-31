@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox talk / lêste-minute risiko-analyse
+title: Toolbox / LMRA-feiligenskontrôle
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Toolbox talk / lêste-minute risiko-analyse
+# Toolbox / LMRA-feiligenskontrôle
 ## Wurk · Lokaasje · Datum · Bemanning
 
 ---

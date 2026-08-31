@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Multidisziplinäres Teamtreffen (MDT)
+title: Multidisziplinäri Teambesprächig (MDT)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Multidisziplinäres Teamtreffen (MDT)
+# Multidisziplinäri Teambesprächig (MDT)
 ## Fall · Datum · Vorsitzender · Teilnehmer
 
 ---

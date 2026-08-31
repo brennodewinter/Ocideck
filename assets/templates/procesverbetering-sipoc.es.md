@@ -9,7 +9,7 @@ language: es
 
 <!-- _class: title -->
 
-# Descripción general del proceso SIPOC
+# Resumen del proceso SIPOC
 ## Proveedor · Entrada · Proceso · Salida · Cliente
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Výstup / výstup
+title: Offboarding / odchod
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Výstup / výstup
+# Offboarding / odchod
 ## Zaměstnanec · Role · Poslední pracovní den · Manažer
 
 ---

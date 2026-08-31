@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sarunas par algu
+title: Algas pārrunas
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sarunas par algu
+# Algas pārrunas
 ## Kurš · Loma · Datums
 
 ---

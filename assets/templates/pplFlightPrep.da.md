@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL-flyvningsforberedelse
+title: PPL-flyveforberedelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# PPL-flyvningsforberedelse
+# PPL-flyveforberedelse
 ## Dato · Kaldesignal · Rute · PIC
 
 ---

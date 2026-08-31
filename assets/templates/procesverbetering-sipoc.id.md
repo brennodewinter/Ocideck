@@ -9,7 +9,7 @@ language: id
 
 <!-- _class: title -->
 
-# Ikhtisar proses SIPOC
+# Ringkasan proses SIPOC
 ## Pemasok · Masukan · Proses · Keluaran · Pelanggan
 
 ---

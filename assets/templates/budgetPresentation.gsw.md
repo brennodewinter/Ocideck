@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Budgetpräsentation
+title: Budget-Präsentation
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Budgetpräsentation
+# Budget-Präsentation
 ## Organisation · Haushaltsjahr · Moderator
 
 ---

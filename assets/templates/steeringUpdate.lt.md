@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valdymo komiteto / projekto valdybos atnaujinimas
+title: Valdymo grupė / projekto valdybos atnaujinimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Valdymo komiteto / projekto valdybos atnaujinimas
+# Valdymo grupė / projekto valdybos atnaujinimas
 
 ---
 

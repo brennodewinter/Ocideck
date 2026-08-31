@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Athbhreithniú ar chás an fhearainn shóisialta
+title: Athbhreithniú cásanna sa réimse sóisialta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Athbhreithniú ar chás an fhearainn shóisialta
+# Athbhreithniú cásanna sa réimse sóisialta
 ## Foireann · Dáta · Cathaoirleach
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Дебрифинг на полета
+title: Дебрифинг след полет
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Дебрифинг на полета
+# Дебрифинг след полет
 ## Полет · Дата · Екипаж
 
 ---

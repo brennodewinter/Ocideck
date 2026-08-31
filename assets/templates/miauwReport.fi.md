@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW pentest -raportti
+title: MIAUW-tunkeutumistestiraportti
 language: fi
 ---
 
 <!-- _class: title -->
 
-# MIAUW pentest -raportti
+# MIAUW-tunkeutumistestiraportti
 
 ---
 

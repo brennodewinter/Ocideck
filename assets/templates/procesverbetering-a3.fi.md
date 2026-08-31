@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Prosessin parantaminen: A3-projekti"
+title: "Prosessin parannus: A3-projekti"
 language: fi
 ocideck_improvement_framework: a3
 ---

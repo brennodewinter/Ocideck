@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST trauman luovutus
+title: (A)MIST-traumaluovutus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# (A)MIST trauman luovutus
+# (A)MIST-traumaluovutus
 ## Esisairaala → ED · Lähetys · Päivämäärä ja aika
 
 ---

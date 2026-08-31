@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Formation/atelier
+title: Formation / atelier
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Formation/atelier
+# Formation / atelier
 
 ---
 

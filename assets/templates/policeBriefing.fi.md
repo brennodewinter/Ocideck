@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Operatiivinen poliisin tiedotus
+title: Operatiivinen poliisibriefing
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Operatiivinen poliisin tiedotus
+# Operatiivinen poliisibriefing
 ## Päivämäärä · Vaihto · Alue · Lyhyempi
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Setkání multidisciplinárního týmu (MDT)
+title: Multidisciplinární porada (MDT)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Setkání multidisciplinárního týmu (MDT)
+# Multidisciplinární porada (MDT)
 ## Případ · Datum · Předseda · Účastníci
 
 ---

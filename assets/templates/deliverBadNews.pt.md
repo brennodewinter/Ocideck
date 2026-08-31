@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entregando más notícias
+title: Dar más notícias
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Entregando más notícias
+# Dar más notícias
 ## Para quem · As notícias · Data
 
 ---

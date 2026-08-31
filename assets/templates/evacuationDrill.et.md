@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakueerimise ja esmase reageerimise õppus
+title: Evakuatsiooni- ja BHV-õppus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Evakueerimise ja esmase reageerimise õppus
+# Evakuatsiooni- ja BHV-õppus
 ## Sait · Kuupäev · Õppuse juht · Stsenaarium
 
 ---

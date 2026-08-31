@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narrativa de pesquisa
+title: Narrativa de investigação
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Narrativa de pesquisa
+# Narrativa de investigação
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bewertung von Datenschutzverletzungen/Datenschutzvorfällen
+title: Dateläck / Privacy-Vorfall-Beurteilig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bewertung von Datenschutzverletzungen/Datenschutzvorfällen
+# Dateläck / Privacy-Vorfall-Beurteilig
 
 ---
 

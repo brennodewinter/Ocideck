@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seznanitev potnikov (splošno letalstvo)
+title: Briefing potnikov (splošno letalstvo)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Seznanitev potnikov (splošno letalstvo)
+# Briefing potnikov (splošno letalstvo)
 ## Letalo · Let · Poveljnik
 
 ---

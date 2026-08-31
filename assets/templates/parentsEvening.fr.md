@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Soirée parents / soirée d'information
+title: Réunion de parents / soirée d'information
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Soirée parents / soirée d'information
+# Réunion de parents / soirée d'information
 ## Classe ou groupe · Année scolaire · Localisation
 
 ---

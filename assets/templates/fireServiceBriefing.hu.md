@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tűzoltósági eligazítás (reagálás és gyakorlat)
+title: Tűzoltósági eligazítás (bevetés és gyakorlat)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Tűzoltósági eligazítás (reagálás és gyakorlat)
+# Tűzoltósági eligazítás (bevetés és gyakorlat)
 ## Tárgy · Dátum és idő · Eseményparancsnok vagy gyakorlatvezető · Legénység
 
 ---

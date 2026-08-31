@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evaluación de proveedor / riesgo de vendor
+title: Evaluación de proveedores / riesgo de proveedor
 language: es
 ---
 
 <!-- _class: title -->
 
-# Evaluación de proveedor / riesgo de vendor
+# Evaluación de proveedores / riesgo de proveedor
 
 ---
 

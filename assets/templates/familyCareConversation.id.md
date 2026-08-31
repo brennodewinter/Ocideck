@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Percakapan keluarga tentang perawatan dan pengasuhan
+title: Pembicaraan keluarga tentang perawatan dan pendampingan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Percakapan keluarga tentang perawatan dan pengasuhan
+# Pembicaraan keluarga tentang perawatan dan pendampingan
 ## Topik · Tanggal · Fasilitator · Peserta
 
 ---

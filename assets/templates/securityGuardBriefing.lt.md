@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Apsaugos instruktažas / pamainos pradžia
+title: Saugumo instruktažas / pamainos pradžia
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Apsaugos instruktažas / pamainos pradžia
+# Saugumo instruktažas / pamainos pradžia
 ## Data · Pamaina · Vieta / vieta · Pamainos vadovas
 
 ---

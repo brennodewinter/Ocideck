@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Business case / ynvestearringsfoarstel
+title: Businesscase / ynvestearringsfoarstel
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Business case / ynvestearringsfoarstel
+# Businesscase / ynvestearringsfoarstel
 ## Foarstel · Auteur · Beslútsorgaan · Datum
 
 ---

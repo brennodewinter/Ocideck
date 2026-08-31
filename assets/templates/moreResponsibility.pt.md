@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pedindo mais responsabilidade
+title: Pedir mais responsabilidade
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Pedindo mais responsabilidade
+# Pedir mais responsabilidade
 ## Quem · Função atual · Data
 
 ---

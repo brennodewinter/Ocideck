@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de segurança/início do turno
+title: Briefing de segurança / início do turno
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Briefing de segurança/início do turno
+# Briefing de segurança / início do turno
 ## Data · Turno · Local/local · Supervisor de turno
 
 ---

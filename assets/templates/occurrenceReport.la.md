@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eventum fama (sicut cultura)
+title: Nuntiatio eventus (just culture)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Eventum fama (sicut cultura)
+# Nuntiatio eventus (just culture)
 ## Occurrentia · Date et tempus · Notario · Involved
 
 ---

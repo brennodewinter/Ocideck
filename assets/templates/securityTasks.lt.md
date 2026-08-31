@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informacijos saugos užduočių planas
+title: Saugumo užduočių planas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Informacijos saugos užduočių planas
+# Saugumo užduočių planas
 
 ---
 

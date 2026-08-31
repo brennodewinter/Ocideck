@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pratimai ant stalo / krizių pratybos
+title: Stalo pratybos / krizių pratybos
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pratimai ant stalo / krizių pratybos
+# Stalo pratybos / krizių pratybos
 
 ---
 

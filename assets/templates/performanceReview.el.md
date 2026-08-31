@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αξιολόγηση απόδοσης
+title: Συζήτηση αξιολόγησης
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αξιολόγηση απόδοσης
+# Συζήτηση αξιολόγησης
 ## Ποιος · Περίοδος · Ημερομηνία
 
 ---

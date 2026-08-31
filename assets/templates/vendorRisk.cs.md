@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hodnocení dodavatele / riziko prodejce
+title: Hodnocení dodavatele / vendor risk
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Hodnocení dodavatele / riziko prodejce
+# Hodnocení dodavatele / vendor risk
 
 ---
 

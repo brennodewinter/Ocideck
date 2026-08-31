@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eskalazzjoni tal-GRIP
+title: Eskalazzjoni GRIP
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Eskalazzjoni tal-GRIP
+# Eskalazzjoni GRIP
 ## Inċident · Data u ħin · Mexxej · Livell tal-GRIP kurrenti
 
 ---

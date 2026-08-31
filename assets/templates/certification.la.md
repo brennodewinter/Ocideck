@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Certification progressus
+title: Progressus certificationis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Certification progressus
+# Progressus certificationis
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entrenamentu / tayer
+title: Entrenamentu / workshop
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entrenamentu / tayer
+# Entrenamentu / workshop
 
 ---
 

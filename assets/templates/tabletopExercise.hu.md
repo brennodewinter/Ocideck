@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Asztali gyakorlat / krízisgyakorlat
+title: Tabletop-gyakorlat / válsággyakorlat
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Asztali gyakorlat / krízisgyakorlat
+# Tabletop-gyakorlat / válsággyakorlat
 
 ---
 

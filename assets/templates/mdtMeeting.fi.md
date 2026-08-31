@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Monitieteinen tiimikokous (MDT)
+title: Moniammatillinen kokous (MDT)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Monitieteinen tiimikokous (MDT)
+# Moniammatillinen kokous (MDT)
 ## Tapaus · Päivämäärä · Puheenjohtaja · Osallistujat
 
 ---

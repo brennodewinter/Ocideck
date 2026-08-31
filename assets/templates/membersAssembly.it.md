@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Assemblea generale (AGM)
+title: Assemblea dei soci (assemblea generale)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Assemblea generale (AGM)
+# Assemblea dei soci (assemblea generale)
 ## Organizzazione · Data · Presidente · Membri presenti
 
 ---

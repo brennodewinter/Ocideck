@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BOB kriz raporu
+title: BOB kriz raporlaması
 language: tr
 ---
 
 <!-- _class: title -->
 
-# BOB kriz raporu
+# BOB kriz raporlaması
 
 ---
 

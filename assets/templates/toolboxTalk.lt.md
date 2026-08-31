@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Įrankių rinkinio pokalbis / paskutinės minutės rizikos analizė
+title: Toolbox / LMRA saugos patikra
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Įrankių rinkinio pokalbis / paskutinės minutės rizikos analizė
+# Toolbox / LMRA saugos patikra
 ## Darbas · Vieta · Data · Įgula
 
 ---

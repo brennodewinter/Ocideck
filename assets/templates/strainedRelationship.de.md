@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskussion über eine angespannte Beziehung
+title: Eine schwierige Beziehung besprechen
 language: de
 ---
 
 <!-- _class: title -->
 
-# Diskussion über eine angespannte Beziehung
+# Eine schwierige Beziehung besprechen
 ## Mit wem · Über was · Wann
 
 ---

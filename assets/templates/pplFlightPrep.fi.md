@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL-lennon valmistelu
+title: PPL-lennonvalmistelu
 language: fi
 ---
 
 <!-- _class: title -->
 
-# PPL-lennon valmistelu
+# PPL-lennonvalmistelu
 ## Päivämäärä · Kutsumerkki · Reitti · PIC
 
 ---

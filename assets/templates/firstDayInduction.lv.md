@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pirmā diena / indukcija
+title: Pirmā diena / ievads
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Pirmā diena / indukcija
+# Pirmā diena / ievads
 ## Jauns darbā · Loma · Ceļvedis · Datums
 
 ---

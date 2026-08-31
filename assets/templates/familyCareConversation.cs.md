@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rodinný rozhovor o péči a péči
+title: Rodinný rozhovor o péči a pečujících
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Rodinný rozhovor o péči a péči
+# Rodinný rozhovor o péči a pečujících
 ## Téma · Datum · Facilitátor · Účastníci
 
 ---

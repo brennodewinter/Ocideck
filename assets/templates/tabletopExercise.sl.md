@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Namizna vaja/krizna vaja
+title: Vaja tabletop / krizna vaja
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Namizna vaja/krizna vaja
+# Vaja tabletop / krizna vaja
 
 ---
 

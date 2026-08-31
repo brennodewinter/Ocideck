@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / pripravenosť na uvoľnenie
+title: CAB / pripravenosť na vydanie
 language: sk
 ---
 
 <!-- _class: title -->
 
-# CAB / pripravenosť na uvoľnenie
+# CAB / pripravenosť na vydanie
 
 ---
 

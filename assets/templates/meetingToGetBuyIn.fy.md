@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iets dien wurde yn in gearkomste
+title: Wat foar elkoar krije yn in gearkomste
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Iets dien wurde yn in gearkomste
+# Wat foar elkoar krije yn in gearkomste
 ## Gearkomst · Beslút frege · Datum
 
 ---

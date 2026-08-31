@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Harmonogram projektu
+title: Oś czasu projektu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Harmonogram projektu
+# Oś czasu projektu
 
 ---
 

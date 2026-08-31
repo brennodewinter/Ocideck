@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tinjauan kinerja
+title: Penilaian kinerja
 language: id
 ---
 
 <!-- _class: title -->
 
-# Tinjauan kinerja
+# Penilaian kinerja
 ## Siapa · Periode · Tanggal
 
 ---

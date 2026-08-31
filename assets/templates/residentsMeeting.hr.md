@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Večer za štićenike/sudionički sastanak
+title: Susret sa stanovnicima / participativni sastanak
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Večer za štićenike/sudionički sastanak
+# Susret sa stanovnicima / participativni sastanak
 ## Susjedstvo · Tema · Datum · Voditelj
 
 ---

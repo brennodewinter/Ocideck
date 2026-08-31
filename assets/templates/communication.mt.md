@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikazzjonijiet pre-brief
+title: Diskussjoni preliminari tal-komunikazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Komunikazzjonijiet pre-brief
+# Diskussjoni preliminari tal-komunikazzjoni
 
 ---
 

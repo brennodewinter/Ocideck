@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Budjettiesitys
+title: Budjettiesittely
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Budjettiesitys
+# Budjettiesittely
 ## Organisaatio · Budjettivuosi · Esittelijä
 
 ---

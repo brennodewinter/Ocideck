@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Több felelősséget kér
+title: Nagyobb felelősség kérése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Több felelősséget kér
+# Nagyobb felelősség kérése
 ## Ki · Aktuális szerep · Dátum
 
 ---

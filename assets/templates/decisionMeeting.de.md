@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entscheidungstreffen
+title: Entscheidungssitzung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Entscheidungstreffen
+# Entscheidungssitzung
 ## Treffen · Datum · Vorsitzender · Teilnehmer
 
 ---

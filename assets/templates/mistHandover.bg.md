@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST предаване на травма
+title: (A)MIST предаване при травма
 language: bg
 ---
 
 <!-- _class: title -->
 
-# (A) MIST предаване на травма
+# (A)MIST предаване при травма
 ## Доболнична → ЕД · Изпращане · Дата и час
 
 ---

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Processus emendatio: A3 project"
+title: "Processus emendationem: A3 project"
 language: la
 ocideck_improvement_framework: a3
 ---

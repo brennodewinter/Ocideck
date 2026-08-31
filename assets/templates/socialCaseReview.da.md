@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sagsgennemgang af socialt domæne
+title: Sagsgennemgang på socialområdet
 language: da
 ---
 
 <!-- _class: title -->
 
-# Sagsgennemgang af socialt domæne
+# Sagsgennemgang på socialområdet
 ## Team · Dato · Formand
 
 ---

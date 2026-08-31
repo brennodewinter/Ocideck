@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poistuminen/poistuminen
+title: Offboarding / lähtö
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Poistuminen/poistuminen
+# Offboarding / lähtö
 ## Työntekijä · Rooli · Viimeinen työpäivä · Johtaja
 
 ---

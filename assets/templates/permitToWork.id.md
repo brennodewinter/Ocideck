@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Izin untuk bekerja
+title: Izin kerja (permit to work)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Izin untuk bekerja
+# Izin kerja (permit to work)
 ## Pekerjaan · Lokasi · Berlaku dari–sampai · Penerbit izin
 
 ---

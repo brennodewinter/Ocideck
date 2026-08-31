@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo o večji nesreči METHANE
+title: METHANE prijava velikega dogodka
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo o večji nesreči METHANE
+# METHANE prijava velikega dogodka
 ## Incident · Lokacija · Datum in čas · Poročevalec
 
 ---

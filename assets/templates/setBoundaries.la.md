@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Profecti terminos
+title: Fines statuere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Profecti terminos
+# Fines statuere
 ## Cum quo · Quas · Date .
 
 ---

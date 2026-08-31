@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Az incidens utáni áttekintés / levont tanulságok
+title: Incidens utáni értékelés / lessons learned
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Az incidens utáni áttekintés / levont tanulságok
+# Incidens utáni értékelés / lessons learned
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Einen Konflikt durchsprechen
+title: En Konflikt uuseschwätze
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Einen Konflikt durchsprechen
+# En Konflikt uuseschwätze
 ## Wer · Über was · Datum
 
 ---

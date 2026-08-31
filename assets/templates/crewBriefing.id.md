@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan kru/keberangkatan
+title: Briefing kru / keberangkatan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan kru/keberangkatan
+# Briefing kru / keberangkatan
 ## Penerbangan · Kru · Tanggal · Waktu keberangkatan
 
 ---

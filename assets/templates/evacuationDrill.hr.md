@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vježba evakuacije i prvog odgovora
+title: Vježba evakuacije i BHV-a
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Vježba evakuacije i prvog odgovora
+# Vježba evakuacije i BHV-a
 ## Mjesto · Datum · Voditelj bušenja · Scenarij
 
 ---

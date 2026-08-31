@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gotowość CAB / zwolnienia
+title: CAB / gotowość do wydania
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Gotowość CAB / zwolnienia
+# CAB / gotowość do wydania
 
 ---
 

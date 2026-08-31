@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / after-action review
+title: Qu' tlha' ja'chuq / vangghach tlha' noHghach
 language: tlh
 ---
 
 <!-- _class: title -->
 
-# Debriefing / after-action review
+# Qu' tlha' ja'chuq / vangghach tlha' noHghach
 ## Operation · Date and time · Facilitator · Participants
 
 ---

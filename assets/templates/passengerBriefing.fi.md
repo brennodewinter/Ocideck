@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Matkustajien tiedotus (yleinen ilmailu)
+title: Matkustajabriefing (yleisilmailu)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Matkustajien tiedotus (yleinen ilmailu)
+# Matkustajabriefing (yleisilmailu)
 ## Lentokone · Lento · Päällikkö
 
 ---

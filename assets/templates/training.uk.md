@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Тренінг / практикум
+title: Тренінг / воркшоп
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Тренінг / практикум
+# Тренінг / воркшоп
 
 ---
 

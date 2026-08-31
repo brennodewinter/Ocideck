@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Інформація про стан
+title: Статус-брифінг
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Інформація про стан
+# Статус-брифінг
 
 ---
 

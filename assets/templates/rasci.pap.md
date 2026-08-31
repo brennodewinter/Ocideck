@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: “Siguridat di informashon: RASCI / responsabilidatnan”
+title: "Seguridat di informashon: RASCI / TVB"
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Seguridat di informashon: RASCI / responsabilidatnan
+# Seguridat di informashon: RASCI / TVB
 
 ---
 

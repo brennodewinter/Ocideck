@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox-keskustelu / viime hetken riskianalyysi
+title: Toolbox / LMRA-turvallisuustarkistus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Toolbox-keskustelu / viime hetken riskianalyysi
+# Toolbox / LMRA-turvallisuustarkistus
 ## Työ · Sijainti · Päivämäärä · Miehistö
 
 ---

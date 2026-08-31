@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Decernens conventum
+title: Conventus decernendi
 language: la
 ---
 
 <!-- _class: title -->
 
-# Decernens conventum
+# Conventus decernendi
 ## Conventus · Date · Cathedra · Attendees
 
 ---

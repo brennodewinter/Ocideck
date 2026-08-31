@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / pripravljenost za sprostitev
+title: CAB / pripravljenost na izdajo
 language: sl
 ---
 
 <!-- _class: title -->
 
-# CAB / pripravljenost za sprostitev
+# CAB / pripravljenost na izdajo
 
 ---
 

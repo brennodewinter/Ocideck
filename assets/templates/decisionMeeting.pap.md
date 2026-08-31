@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunion di tumamentu di desishon
+title: Reunion pa tuma desishon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Reunion di tumamentu di desishon
+# Reunion pa tuma desishon
 ## Reunion · Fecha · Presidente · Asistentenan
 
 ---

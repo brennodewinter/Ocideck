@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Döntéshozó értekezlet
+title: Döntéshozó megbeszélés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Döntéshozó értekezlet
+# Döntéshozó megbeszélés
 ## Találkozó · Dátum · Elnök · Résztvevők
 
 ---

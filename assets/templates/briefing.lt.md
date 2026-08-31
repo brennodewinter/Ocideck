@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Trumpas aptarimas
+title: Trumpas brifingas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Trumpas aptarimas
+# Trumpas brifingas
 
 ---
 

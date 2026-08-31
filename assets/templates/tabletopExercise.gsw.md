@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tischübung / Krisenübung
+title: Tabletop-Üebig / Chriseüebig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Tischübung / Krisenübung
+# Tabletop-Üebig / Chriseüebig
 
 ---
 

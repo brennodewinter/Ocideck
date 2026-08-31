@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bidu/bidu tal-proġett
+title: Bidu tal-proġett / kick-off
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Bidu/bidu tal-proġett
+# Bidu tal-proġett / kick-off
 
 ---
 

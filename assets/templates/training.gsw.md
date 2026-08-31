@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Schulung / Workshop
+title: Training / Workshop
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Schulung / Workshop
+# Training / Workshop
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE idoneitatem ut- musca reprehendo
+title: IMSAFE probatio idoneitatis ad volandum
 language: la
 ---
 
 <!-- _class: title -->
 
-# IMSAFE idoneitatem ut- musca reprehendo
+# IMSAFE probatio idoneitatis ad volandum
 ## Gubernator · Fugam · Date · Haec perscriptio medici iudicium non substituit
 
 ---

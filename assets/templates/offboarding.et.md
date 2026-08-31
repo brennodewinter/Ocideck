@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pardast lahkumine / väljumine
+title: Offboarding / lahkumine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Pardast lahkumine / väljumine
+# Offboarding / lahkumine
 ## Töötaja · Roll · Viimane tööpäev · Juht
 
 ---

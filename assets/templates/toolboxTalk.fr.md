@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Discussion sur la boîte à outils / analyse des risques de dernière minute
+title: Toolbox / contrôle de sécurité LMRA
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Discussion sur la boîte à outils / analyse des risques de dernière minute
+# Toolbox / contrôle de sécurité LMRA
 ## Travail · Lieu · Date · Equipe
 
 ---

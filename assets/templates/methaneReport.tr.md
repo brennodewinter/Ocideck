@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METAN büyük olay raporu
+title: METHANE büyük olay bildirimi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# METAN büyük olay raporu
+# METHANE büyük olay bildirimi
 ## Olay · Yer · Tarih ve saat · Muhabir
 
 ---

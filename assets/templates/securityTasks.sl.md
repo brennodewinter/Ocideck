@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Načrt nalog za varnost informacij
+title: Načrt varnostnih nalog
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Načrt nalog za varnost informacij
+# Načrt varnostnih nalog
 
 ---
 

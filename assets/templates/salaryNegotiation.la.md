@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Salarium negotium
+title: Negotiatio de stipendio
 language: la
 ---
 
 <!-- _class: title -->
 
-# Salarium negotium
+# Negotiatio de stipendio
 ## Quis · Munus · Date
 
 ---

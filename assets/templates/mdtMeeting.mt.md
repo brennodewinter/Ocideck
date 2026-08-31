@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laqgħa tat-tim multidixxiplinarju (MDT)
+title: Laqgħa multidixxiplinari (MDT)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Laqgħa tat-tim multidixxiplinarju (MDT)
+# Laqgħa multidixxiplinari (MDT)
 ## Każ · Data · President · Attendew
 
 ---

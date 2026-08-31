@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ürituse ja rahvahulga ohutuse infotund
+title: Ürituse ja rahvamassi ohutuse briifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Ürituse ja rahvahulga ohutuse infotund
+# Ürituse ja rahvamassi ohutuse briifing
 ## Sündmus · Asukoht · Kuupäev · Koordinaator
 
 ---

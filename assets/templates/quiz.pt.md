@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Questionário interativo
+title: Quiz interativo
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Questionário interativo
+# Quiz interativo
 
 ---
 

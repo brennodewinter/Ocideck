@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Filgħaxija tar-residenti / laqgħa ta' parteċipazzjoni
+title: Lejla tar-residenti / laqgħa ta' parteċipazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Filgħaxija tar-residenti / laqgħa ta' parteċipazzjoni
+# Lejla tar-residenti / laqgħa ta' parteċipazzjoni
 ## Viċinat · Suġġett · Data · Faċilitatur
 
 ---

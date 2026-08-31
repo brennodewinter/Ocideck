@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aistriú seala altranais
+title: Seachadadh seal altranais
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Aistriú seala altranais
+# Seachadadh seal altranais
 ## Barda · Shift · Cé chuige · Dáta
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Készítsen beszélgetést
+title: Beszélgetés előkészítése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Készítsen beszélgetést
+# Beszélgetés előkészítése
 ## Ki · Téma · Dátum
 
 ---

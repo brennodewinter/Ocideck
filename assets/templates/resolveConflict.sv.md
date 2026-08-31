@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Att prata igenom en konflikt
+title: Prata igenom en konflikt
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Att prata igenom en konflikt
+# Prata igenom en konflikt
 ## Vem · Om vad · Datum
 
 ---

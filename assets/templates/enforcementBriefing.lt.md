@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vykdymo instruktažas (BOA)
+title: Vykdymo užtikrinimo instruktažas (BOA)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Vykdymo instruktažas (BOA)
+# Vykdymo užtikrinimo instruktažas (BOA)
 ## Data · Pamaina · Darbo sritis/rajonas · Koordinatorius
 
 ---

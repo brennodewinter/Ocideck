@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Discutere di una relazione tesa
+title: Affrontare una relazione difficile
 language: it
 ---
 
 <!-- _class: title -->
 
-# Discutere di una relazione tesa
+# Affrontare una relazione difficile
 ## Con chi · A proposito di cosa · Quando
 
 ---

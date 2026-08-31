@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evaluashon di proveedó / riesgo di bendedó
+title: Evaluashon di proveedó / vendor risk
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Evaluashon di proveedó / riesgo di bendedó
+# Evaluashon di proveedó / vendor risk
 
 ---
 

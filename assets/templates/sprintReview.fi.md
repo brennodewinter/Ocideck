@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprintin arvostelu/demo
+title: Sprintin katselmointi / demo
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Sprintin arvostelu/demo
+# Sprintin katselmointi / demo
 ## Joukkue · Sprint · Päivämäärä
 
 ---

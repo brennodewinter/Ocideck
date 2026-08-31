@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE-lentokuntotarkastus
+title: IMSAFE lentokelpoisuustarkistus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# IMSAFE-lentokuntotarkastus
+# IMSAFE lentokelpoisuustarkistus
 ## Lentäjä · Lento · Päivämäärä · Tämä tarkistus ei korvaa lääketieteellistä arviointia
 
 ---

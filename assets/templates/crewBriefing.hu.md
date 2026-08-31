@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Legénység / indulási eligazítás
+title: Legénységi / indulási eligazítás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Legénység / indulási eligazítás
+# Legénységi / indulási eligazítás
 ## Repülés · Legénység · Dátum · Indulási idő
 
 ---

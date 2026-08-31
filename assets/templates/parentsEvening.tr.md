@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Veli gecesi / bilgilendirme gecesi
+title: Veli toplantısı / bilgilendirme akşamı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Veli gecesi / bilgilendirme gecesi
+# Veli toplantısı / bilgilendirme akşamı
 ## Sınıf veya grup · Okul yılı · Yer
 
 ---

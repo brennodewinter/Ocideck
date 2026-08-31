@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Proceso tobulinimas: Kaizen projektas“
+title: "Proceso tobulinimas: Kaizen projektas"
 language: lt
 ocideck_improvement_framework: kaizen
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Premier jour / intégration
+title: Premier jour / accueil
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Premier jour / intégration
+# Premier jour / accueil
 ## Nouvelle recrue · Rôle · Guide · Date
 
 ---

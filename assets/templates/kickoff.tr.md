@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proje başlangıcı/başlangıç
+title: Proje başlangıcı / kick-off
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Proje başlangıcı/başlangıç
+# Proje başlangıcı / kick-off
 
 ---
 

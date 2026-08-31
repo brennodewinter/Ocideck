@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Žádat o větší zodpovědnost
+title: Žádost o větší odpovědnost
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Žádat o větší zodpovědnost
+# Žádost o větší odpovědnost
 ## Kdo · Aktuální role · Datum
 
 ---

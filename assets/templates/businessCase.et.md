@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ärijuhtum / investeerimisettepanek
+title: Äripõhjendus / investeerimisettepanek
 language: et
 ---
 
 <!-- _class: title -->
 
-# Ärijuhtum / investeerimisettepanek
+# Äripõhjendus / investeerimisettepanek
 ## Ettepanek · Autor · Otsustusorgan · Kuupäev
 
 ---

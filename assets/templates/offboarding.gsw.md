@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding/Exit
+title: Offboarding / Uustritt
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Offboarding/Exit
+# Offboarding / Uustritt
 ## Mitarbeiter · Rolle · Letzter Arbeitstag · Manager
 
 ---

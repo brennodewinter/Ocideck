@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Varnostni sestanek / začetek izmene
+title: Varnostni briefing / začetek izmene
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Varnostni sestanek / začetek izmene
+# Varnostni briefing / začetek izmene
 ## Datum · Izmena · Mesto/lokacija · Nadzornik izmene
 
 ---

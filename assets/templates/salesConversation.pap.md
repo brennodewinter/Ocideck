@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kombersashon di benta
+title: Konversashon di benta
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kombersashon di benta
+# Konversashon di benta
 ## Prospekto · Persona di kontakto · Oferta · Fecha
 
 ---

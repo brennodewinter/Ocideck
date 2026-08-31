@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entrega di SBAR
+title: Entrega SBAR
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entrega di SBAR
+# Entrega SBAR
 ## Pashent · Warda · Di ken pa ken · Fecha i ora
 
 ---

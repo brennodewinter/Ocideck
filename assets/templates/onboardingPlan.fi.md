@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aloitussuunnitelma (30-60-90 päivää)
+title: Perehdytyssuunnitelma (30-60-90 päivää)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Aloitussuunnitelma (30-60-90 päivää)
+# Perehdytyssuunnitelma (30-60-90 päivää)
 ## Uusi työntekijä · Rooli · Opas · Aloituspäivä
 
 ---

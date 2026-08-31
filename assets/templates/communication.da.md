@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kommunikation forudgående brief
+title: Formøde om kommunikation
 language: da
 ---
 
 <!-- _class: title -->
 
-# Kommunikation forudgående brief
+# Formøde om kommunikation
 
 ---
 

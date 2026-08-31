@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Σύντομο briefing
+title: Σύντομη ενημέρωση
 language: el
 ---
 
 <!-- _class: title -->
 
-# Σύντομο briefing
+# Σύντομη ενημέρωση
 
 ---
 

@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: “Mehorashon di proseso: proyekto DMAIC”
+title: "Mehoramentu di proseso: proyekto DMAIC"
 language: pap
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Mehorashon di proseso: proyekto DMAIC
+# Mehoramentu di proseso: proyekto DMAIC
 
 ---
 

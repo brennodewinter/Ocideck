@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikacijski predhodnik
+title: Predhodni posvet o komunikaciji
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Komunikacijski predhodnik
+# Predhodni posvet o komunikaciji
 
 ---
 

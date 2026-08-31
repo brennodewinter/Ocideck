@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Konverżazzjoni tal-bejgħ
+title: Konversazzjoni tal-bejgħ
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Konverżazzjoni tal-bejgħ
+# Konversazzjoni tal-bejgħ
 ## Prospett · Persuna ta’ kuntatt · Offerta · Data
 
 ---

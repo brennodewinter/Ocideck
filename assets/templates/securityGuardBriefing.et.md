@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Turvainfo / vahetuse algus
+title: Turvabriifing / vahetuse algus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Turvainfo / vahetuse algus
+# Turvabriifing / vahetuse algus
 ## Kuupäev · Vahetus · Koht/asukoht · Vahetuse juhendaja
 
 ---

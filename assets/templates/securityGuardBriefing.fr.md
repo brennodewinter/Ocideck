@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de sécurité / début de quart de travail
+title: Briefing de sécurité / prise de service
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Briefing de sécurité / début de quart de travail
+# Briefing de sécurité / prise de service
 ## Date · Equipe · Site/lieu · Chef d'équipe
 
 ---

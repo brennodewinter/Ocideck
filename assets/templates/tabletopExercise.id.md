@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Latihan di atas meja / latihan krisis
+title: Latihan tabletop / latihan krisis
 language: id
 ---
 
 <!-- _class: title -->
 
-# Latihan di atas meja / latihan krisis
+# Latihan tabletop / latihan krisis
 
 ---
 

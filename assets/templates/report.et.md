@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Teata
+title: Aruanne
 language: et
 ---
 
 <!-- _class: title -->
 
-# Teata
+# Aruanne
 
 ---
 

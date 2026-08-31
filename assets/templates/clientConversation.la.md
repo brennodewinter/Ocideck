@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Clientem colloquium
+title: Colloquium cum cliente
 language: la
 ---
 
 <!-- _class: title -->
 
-# Clientem colloquium
+# Colloquium cum cliente
 ## Cliens · Persona Contactus · Metam · Date
 
 ---

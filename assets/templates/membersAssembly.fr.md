@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Assemblée générale (AGA)
+title: Assemblée générale (AG)
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Assemblée générale (AGA)
+# Assemblée générale (AG)
 ## Organisation · Date · Président · Membres présents
 
 ---

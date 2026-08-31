@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bericht über einen schweren METHAN-Vorfall
+title: METHANE Grossschadensmäldig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bericht über einen schweren METHAN-Vorfall
+# METHANE Grossschadensmäldig
 ## Vorfall · Ort · Datum und Uhrzeit · Reporter
 
 ---

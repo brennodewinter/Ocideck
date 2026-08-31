@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vijeće/izvršni prijedlog
+title: Prijedlog vijeću / izvršnom tijelu
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Vijeće/izvršni prijedlog
+# Prijedlog vijeću / izvršnom tijelu
 ## Predmet · Portfolio · Matični broj · Autor
 
 ---

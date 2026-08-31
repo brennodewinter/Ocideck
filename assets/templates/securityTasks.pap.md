@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan di tarea di seguridat di informashon
+title: Plan di tarea di seguridat
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Plan di tarea di seguridat di informashon
+# Plan di tarea di seguridat
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Elit taxationem / periculum venditoris
+title: Aestimatio praebitorum / vendor risk
 language: la
 ---
 
 <!-- _class: title -->
 
-# Elit taxationem / periculum venditoris
+# Aestimatio praebitorum / vendor risk
 
 ---
 

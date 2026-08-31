@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Operatiivpolitsei briifing
+title: Operatiivne politseibriifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Operatiivpolitsei briifing
+# Operatiivne politseibriifing
 ## Kuupäev · Vahetus · Piirkond · Lühiajaline
 
 ---

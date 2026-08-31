@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prvi dan / uvod u posao
+title: Prvi dan / uvođenje
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Prvi dan / uvod u posao
+# Prvi dan / uvođenje
 ## Novi zaposlenik · Uloga · Vodič · Datum
 
 ---

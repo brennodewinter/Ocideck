@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narațiune de cercetare
+title: Poveste de investigație
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Narațiune de cercetare
+# Poveste de investigație
 
 ---
 

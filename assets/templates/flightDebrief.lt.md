@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Skrydžio apžvalga
+title: Skrydžio aptarimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Skrydžio apžvalga
+# Skrydžio aptarimas
 ## Skrydis · Data · Įgula
 
 ---

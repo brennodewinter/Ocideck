@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mionteagasc póilíneachta oibriúcháin
+title: Faisnéisiú oibríochtúil póilíneachta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Mionteagasc póilíneachta oibriúcháin
+# Faisnéisiú oibríochtúil póilíneachta
 ## Dáta · Aistriú · Achar · Achoimre
 
 ---

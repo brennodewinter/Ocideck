@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Karar alma toplantısı
+title: Karar toplantısı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Karar alma toplantısı
+# Karar toplantısı
 ## Toplantı · Tarih · Başkan · Katılımcılar
 
 ---

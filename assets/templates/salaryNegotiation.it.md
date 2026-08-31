@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negoziazione salariale
+title: Trattativa salariale
 language: it
 ---
 
 <!-- _class: title -->
 
-# Negoziazione salariale
+# Trattativa salariale
 ## Chi · Ruolo · Data
 
 ---

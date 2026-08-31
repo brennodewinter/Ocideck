@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozmowa rodzinna na temat opieki i opieki
+title: Rozmowa rodzinna o opiece i opiece nieformalnej
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Rozmowa rodzinna na temat opieki i opieki
+# Rozmowa rodzinna o opiece i opiece nieformalnej
 ## Temat · Data · Prowadzący · Uczestnicy
 
 ---

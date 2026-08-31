@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ferpleging shift oerdracht
+title: Ferpleechkundige tsjinstoerdracht
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ferpleging shift oerdracht
+# Ferpleechkundige tsjinstoerdracht
 ## Ward · Shift · Fan wa oan wa · Datum
 
 ---

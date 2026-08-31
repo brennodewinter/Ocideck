@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Controllo IMSAFE dell'idoneità al volo
+title: IMSAFE controllo idoneità al volo
 language: it
 ---
 
 <!-- _class: title -->
 
-# Controllo IMSAFE dell'idoneità al volo
+# IMSAFE controllo idoneità al volo
 ## Pilota · Volo · Data · Questo controllo non sostituisce il giudizio medico
 
 ---

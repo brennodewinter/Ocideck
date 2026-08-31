@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ullmhaigh comhrá
+title: Comhrá a ullmhú
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ullmhaigh comhrá
+# Comhrá a ullmhú
 ## Cé · Topaic · Dáta
 
 ---

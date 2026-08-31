@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIPin eskaloituminen
+title: GRIP-eskalaatio
 language: fi
 ---
 
 <!-- _class: title -->
 
-# GRIPin eskaloituminen
+# GRIP-eskalaatio
 ## Tapahtuma · Päivämäärä ja aika · Johtaja · Nykyinen GRIP-taso
 
 ---

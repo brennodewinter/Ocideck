@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Transferência de turno de enfermagem
+title: Passagem de turno de enfermagem
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Transferência de turno de enfermagem
+# Passagem de turno de enfermagem
 ## Ala · Turno · De quem para quem · Data
 
 ---

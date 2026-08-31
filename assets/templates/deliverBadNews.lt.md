@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prastas naujienas
+title: Blogos žinios pranešimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Prastas naujienas
+# Blogos žinios pranešimas
 ## Kam · Naujienos · Data
 
 ---

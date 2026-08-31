@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Trasferiment ta' xift ta' infermiera
+title: Konsenja tax-xift tal-infermerija
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Trasferiment ta' xift ta' infermiera
+# Konsenja tax-xift tal-infermerija
 ## Ward · Shift · Minn min għal min · Data
 
 ---

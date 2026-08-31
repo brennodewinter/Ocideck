@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing operativo della polizia
+title: Briefing operativo di polizia
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing operativo della polizia
+# Briefing operativo di polizia
 ## Data · Turno · Area · Briefer
 
 ---

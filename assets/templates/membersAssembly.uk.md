@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Загальні збори (AGM)
+title: Загальні збори членів
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Загальні збори (AGM)
+# Загальні збори членів
 ## Організація · Дата · Голова · Присутні члени
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sygeplejevagtaflevering
+title: Sygeplejefaglig vagtoverdragelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# Sygeplejevagtaflevering
+# Sygeplejefaglig vagtoverdragelse
 ## Afdeling · Skift · Fra hvem til hvem · Dato
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rodinný rozhovor o starostlivosti a starostlivosti
+title: Rodinný rozhovor o starostlivosti a opatrovaní
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rodinný rozhovor o starostlivosti a starostlivosti
+# Rodinný rozhovor o starostlivosti a opatrovaní
 ## Téma · Dátum · Facilitátor · Účastníci
 
 ---

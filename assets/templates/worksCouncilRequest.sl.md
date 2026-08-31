@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prošnja za svet delavcev
+title: Zahteva za mnenje sveta delavcev
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Prošnja za svet delavcev
+# Zahteva za mnenje sveta delavcev
 ## Zadeva · Direktor · Svet delavcev · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Taakplan foar ynformaasjefeiligens
+title: Takenplan ynformaasjefeiligens
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Taakplan foar ynformaasjefeiligens
+# Takenplan ynformaasjefeiligens
 
 ---
 

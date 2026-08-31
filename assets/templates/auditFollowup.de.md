@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prüfungsfeststellungen und Folgemaßnahmen
+title: Auditfeststellungen und Nachverfolgung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Prüfungsfeststellungen und Folgemaßnahmen
+# Auditfeststellungen und Nachverfolgung
 
 ---
 

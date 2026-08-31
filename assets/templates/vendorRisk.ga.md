@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Measúnú soláthróra / riosca díoltóra
+title: Measúnú soláthraithe / vendor risk
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Measúnú soláthróra / riosca díoltóra
+# Measúnú soláthraithe / vendor risk
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kilépés/kilépés
+title: Offboarding / kilépés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Kilépés/kilépés
+# Offboarding / kilépés
 ## Alkalmazott · Szerep · Utolsó munkanap · Vezető
 
 ---

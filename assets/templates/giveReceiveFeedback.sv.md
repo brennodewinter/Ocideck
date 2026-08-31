@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Att ge eller ta emot kritik
+title: Ge eller ta emot kritik
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Att ge eller ta emot kritik
+# Ge eller ta emot kritik
 ## Vem · Ämne · Datum
 
 ---

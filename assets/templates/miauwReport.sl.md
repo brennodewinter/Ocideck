@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW pentest poročilo
+title: Poročilo o pentestu MIAUW
 language: sl
 ---
 
 <!-- _class: title -->
 
-# MIAUW pentest poročilo
+# Poročilo o pentestu MIAUW
 
 ---
 

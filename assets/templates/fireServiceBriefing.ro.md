@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing pentru pompieri (răspuns și exercițiu)
+title: Briefing al pompierilor (intervenție și exercițiu)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Briefing pentru pompieri (răspuns și exercițiu)
+# Briefing al pompierilor (intervenție și exercițiu)
 ## Obiect · Data și ora · Comandantul incidentului sau conducătorul exercițiului · Echipaj
 
 ---

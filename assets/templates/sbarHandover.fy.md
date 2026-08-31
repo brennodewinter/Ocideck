@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR oerdracht
+title: SBAR-oerdracht
 language: fy
 ---
 
 <!-- _class: title -->
 
-# SBAR oerdracht
+# SBAR-oerdracht
 ## Patient · Ward · Fan wa oan wa · Datum en tiid
 
 ---

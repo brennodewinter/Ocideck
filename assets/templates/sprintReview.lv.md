@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprinta apskats / demonstrācija
+title: Sprinta pārskats / demo
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sprinta apskats / demonstrācija
+# Sprinta pārskats / demo
 ## Komanda · Sprints · Datums
 
 ---

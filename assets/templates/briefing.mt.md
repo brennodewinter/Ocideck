@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briffinġ qasir
+title: Briefing qasir
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Briffinġ qasir
+# Briefing qasir
 
 ---
 

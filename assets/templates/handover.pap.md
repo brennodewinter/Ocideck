@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entrega / transishon
+title: Traspaso / handover
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entrega / transishon
+# Traspaso / handover
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Juhtkomitee / projekti juhatuse värskendus
+title: Juhtrühm / projektinõukogu ülevaade
 language: et
 ---
 
 <!-- _class: title -->
 
-# Juhtkomitee / projekti juhatuse värskendus
+# Juhtrühm / projektinõukogu ülevaade
 
 ---
 

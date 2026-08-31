@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conventus Generalis (AGM)
+title: Conventus sodalium (conventus generalis)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Conventus Generalis (AGM)
+# Conventus sodalium (conventus generalis)
 ## Organization · Date · Cathedra · Sodales praesentes
 
 ---

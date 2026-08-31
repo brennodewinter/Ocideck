@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ulasan / demo sprint
+title: Sprint review / demo
 language: id
 ---
 
 <!-- _class: title -->
 
-# Ulasan / demo sprint
+# Sprint review / demo
 ## Tim · Sprint · Tanggal
 
 ---

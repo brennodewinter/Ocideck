@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan wdrożenia/wdrożenia polityki
+title: Wdrażanie polityki / plan implementacji
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Plan wdrożenia/wdrożenia polityki
+# Wdrażanie polityki / plan implementacji
 
 ---
 

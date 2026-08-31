@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bilgilendirme / eylem sonrası inceleme
+title: Debrifing / eylem sonrası inceleme
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Bilgilendirme / eylem sonrası inceleme
+# Debrifing / eylem sonrası inceleme
 ## Operasyon · Tarih ve saat · Kolaylaştırıcı · Katılımcılar
 
 ---

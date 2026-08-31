@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan status
+title: Briefing status
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan status
+# Briefing status
 
 ---
 

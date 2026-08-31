@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Simulacro de evacuación y primera respuesta
+title: Simulacro de evacuación y BHV
 language: es
 ---
 
 <!-- _class: title -->
 
-# Simulacro de evacuación y primera respuesta
+# Simulacro de evacuación y BHV
 ## Sede · Fecha · Director del simulacro · Escenario
 
 ---

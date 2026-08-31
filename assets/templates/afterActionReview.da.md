@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / efterhandlingsgennemgang
+title: Debriefing / after-action review
 language: da
 ---
 
 <!-- _class: title -->
 
-# Debriefing / efterhandlingsgennemgang
+# Debriefing / after-action review
 ## Drift · Dato og tid · Facilitator · Deltagere
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plán zavádzania/implementácie politiky
+title: Zavedenie politiky / implementačný plán
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Plán zavádzania/implementácie politiky
+# Zavedenie politiky / implementačný plán
 
 ---
 

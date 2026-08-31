@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pra-komunikasi singkat
+title: Diskusi awal komunikasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pra-komunikasi singkat
+# Diskusi awal komunikasi
 
 ---
 

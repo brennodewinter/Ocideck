@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / kontrola po akci
+title: Debriefing / rozbor po akci
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Debriefing / kontrola po akci
+# Debriefing / rozbor po akci
 ## Provoz · Datum a čas · Facilitátor · Účastníci
 
 ---

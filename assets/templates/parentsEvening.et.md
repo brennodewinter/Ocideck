@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lastevanemate õhtu / teabeõhtu
+title: Lastevanemate koosolek / infoõhtu
 language: et
 ---
 
 <!-- _class: title -->
 
-# Lastevanemate õhtu / teabeõhtu
+# Lastevanemate koosolek / infoõhtu
 ## Klass või rühm · Kooliaasta · Asukoht
 
 ---

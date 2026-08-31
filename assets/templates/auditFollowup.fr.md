@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Résultats de l'audit et suivi
+title: Constats d'audit et suivi
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Résultats de l'audit et suivi
+# Constats d'audit et suivi
 
 ---
 

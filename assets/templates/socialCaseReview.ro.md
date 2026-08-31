@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analiza cazului din domeniul social
+title: Analiza cazurilor din domeniul social
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Analiza cazului din domeniul social
+# Analiza cazurilor din domeniul social
 ## Echipa · Întâlnire · Scaun
 
 ---

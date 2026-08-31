@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / ullmhacht scaoilte
+title: CAB / ullmhacht don scaoileadh
 language: ga
 ---
 
 <!-- _class: title -->
 
-# CAB / ullmhacht scaoilte
+# CAB / ullmhacht don scaoileadh
 
 ---
 

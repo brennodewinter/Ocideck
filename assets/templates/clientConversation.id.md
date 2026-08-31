@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Percakapan klien
+title: Percakapan dengan pelanggan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Percakapan klien
+# Percakapan dengan pelanggan
 ## Klien · Kontak person · Tujuan · Tanggal
 
 ---

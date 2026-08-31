@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Évaluation des violations de données et des incidents liés à la vie privée
+title: Violation de données / évaluation d'incident de confidentialité
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Évaluation des violations de données et des incidents liés à la vie privée
+# Violation de données / évaluation d'incident de confidentialité
 
 ---
 

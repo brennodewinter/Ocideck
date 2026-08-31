@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eżerċizzju fuq il-mejda / drill ta 'kriżi
+title: Eżerċizzju tabletop / eżerċizzju ta' kriżi
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Eżerċizzju fuq il-mejda / drill ta 'kriżi
+# Eżerċizzju tabletop / eżerċizzju ta' kriżi
 
 ---
 

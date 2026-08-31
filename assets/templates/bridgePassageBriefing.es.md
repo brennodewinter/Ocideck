@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de paso de puente
+title: Briefing de paso / puente marítimo
 language: es
 ---
 
 <!-- _class: title -->
 
-# Briefing de paso de puente
+# Briefing de paso / puente marítimo
 ## Viaje · Buque · Fecha · Plan de guardias
 
 ---

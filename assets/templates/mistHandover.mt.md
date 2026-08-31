@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) trasferiment tat-trawma MIST
+title: (A)MIST konsenja ta' trawma
 language: mt
 ---
 
 <!-- _class: title -->
 
-# (A) trasferiment tat-trawma MIST
+# (A)MIST konsenja ta' trawma
 ## Qabel l-isptar → ED · Dispaċċ · Data u ħin
 
 ---

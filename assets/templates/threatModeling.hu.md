@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fenyegetés modellezési munkamenet
+title: Fenyegetésmodellezési ülés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Fenyegetés modellezési munkamenet
+# Fenyegetésmodellezési ülés
 ## Rendszer · Dátum · Lebonyolító · Résztvevők
 
 ---

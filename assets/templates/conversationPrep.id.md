@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Siapkan percakapan
+title: Menyiapkan percakapan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Siapkan percakapan
+# Menyiapkan percakapan
 ## Siapa · Topik · Tanggal
 
 ---

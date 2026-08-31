@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ķirurģiskās drošības kontrolsaraksts (PVO)
+title: Ķirurģiskās drošības kontrolsaraksts (WHO)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Ķirurģiskās drošības kontrolsaraksts (PVO)
+# Ķirurģiskās drošības kontrolsaraksts (WHO)
 ## Procedūra · Pacients · VAI · Datums
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / revishon despues di akshon
+title: Debriefing / after-action review
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Debriefing / revishon despues di akshon
+# Debriefing / after-action review
 ## Operashon · Fecha i ora · Fasilitadó · Partisipantenan
 
 ---

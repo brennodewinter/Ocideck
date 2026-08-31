@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toimittajan arviointi / myyjäriski
+title: Toimittaja-arviointi / vendor risk
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Toimittajan arviointi / myyjäriski
+# Toimittaja-arviointi / vendor risk
 
 ---
 

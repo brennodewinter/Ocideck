@@ -9,7 +9,7 @@ language: ga
 
 <!-- _class: title -->
 
-# Forbhreathnú ar phróiseas SIPOC
+# Forléargas ar phróiseas SIPOC
 ## Soláthraí · Ionchur · Próiseas · Aschur · Custaiméir
 
 ---

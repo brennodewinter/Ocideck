@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Niddiskutu relazzjoni tensjoni
+title: Tiddiskuti relazzjoni li mhux miexja tajjeb
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Niddiskutu relazzjoni tensjoni
+# Tiddiskuti relazzjoni li mhux miexja tajjeb
 ## Ma’ min · Dwar xiex · Meta
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Порушення проблеми на роботі
+title: Порушення проблеми на робочому місці
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Порушення проблеми на роботі
+# Порушення проблеми на робочому місці
 ## Хто · Тема · Дата
 
 ---

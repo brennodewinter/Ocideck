@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversația cu clientul
+title: Discuție cu clientul
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Conversația cu clientul
+# Discuție cu clientul
 ## Client · Persoană de contact · Scop · Data
 
 ---

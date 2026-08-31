@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bewennersjûn / dielnamegearkomste
+title: Bewennersjûn / partisipaasjegearkomste
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Bewennersjûn / dielnamegearkomste
+# Bewennersjûn / partisipaasjegearkomste
 ## Buert · Underwerp · Datum · Fasilitator
 
 ---

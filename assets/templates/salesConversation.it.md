@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversazione sulle vendite
+title: Colloquio di vendita
 language: it
 ---
 
 <!-- _class: title -->
 
-# Conversazione sulle vendite
+# Colloquio di vendita
 ## Prospettivo · Persona da contattare · Offerta · Data
 
 ---

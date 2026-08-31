@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sliktu ziņu sniegšana
+title: Sliktu ziņu paziņošana
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sliktu ziņu sniegšana
+# Sliktu ziņu paziņošana
 ## Kam · Ziņas · Datums
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tráthnóna cónaitheoirí / cruinniú rannpháirtíochta
+title: Oíche cónaitheoirí / cruinniú rannpháirtíochta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tráthnóna cónaitheoirí / cruinniú rannpháirtíochta
+# Oíche cónaitheoirí / cruinniú rannpháirtíochta
 ## Comharsanacht · Topaic · Dáta · Éascaitheoir
 
 ---

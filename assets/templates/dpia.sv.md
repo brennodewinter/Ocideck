@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / integritetskonsekvensbedömning
+title: DPIA / konsekvensbedömning för dataskydd
 language: sv
 ---
 
 <!-- _class: title -->
 
-# DPIA / integritetskonsekvensbedömning
+# DPIA / konsekvensbedömning för dataskydd
 
 ---
 

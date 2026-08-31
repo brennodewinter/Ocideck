@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Χειρουργικός έλεγχος ασφάλειας (WHO)
+title: Λίστα ελέγχου χειρουργικής ασφάλειας (WHO)
 language: el
 ---
 
 <!-- _class: title -->
 
-# Χειρουργικός έλεγχος ασφάλειας (WHO)
+# Λίστα ελέγχου χειρουργικής ασφάλειας (WHO)
 ## Διαδικασία · Ασθενής · OR · Ημερομηνία
 
 ---

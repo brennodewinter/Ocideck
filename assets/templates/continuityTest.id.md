@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kesinambungan usaha/uji DR
+title: Kelangsungan bisnis / uji DR
 language: id
 ---
 
 <!-- _class: title -->
 
-# Kesinambungan usaha/uji DR
+# Kelangsungan bisnis / uji DR
 
 ---
 

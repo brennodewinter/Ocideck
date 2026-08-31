@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Upozorňování na problém v práci
+title: Otevření problému na pracovišti
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Upozorňování na problém v práci
+# Otevření problému na pracovišti
 ## Kdo · Téma · Datum
 
 ---

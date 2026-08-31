@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Arkadaş / mentor planı
+title: Buddy / mentor planı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Arkadaş / mentor planı
+# Buddy / mentor planı
 ## Yeni gelen · Arkadaş veya akıl hocası · Başlangıç ​​tarihi
 
 ---

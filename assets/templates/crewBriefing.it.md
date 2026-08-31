@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing equipaggio/partenza
+title: Briefing equipaggio / partenza
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing equipaggio/partenza
+# Briefing equipaggio / partenza
 ## Volo · Equipaggio · Data · Orario di partenza
 
 ---

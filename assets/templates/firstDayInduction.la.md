@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Primo die / inductio
+title: Dies primus / introductio
 language: la
 ---
 
 <!-- _class: title -->
 
-# Primo die / inductio
+# Dies primus / introductio
 ## Novae mercedis · Munus · Rector · Date
 
 ---

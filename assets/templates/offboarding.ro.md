@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debarcare/ieșire
+title: Offboarding / plecare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Debarcare/ieșire
+# Offboarding / plecare
 ## Angajat · Rol · Ultima zi lucrătoare · Manager
 
 ---

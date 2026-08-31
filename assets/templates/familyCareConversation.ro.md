@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversație în familie despre îngrijire și îngrijire
+title: Discuție de familie despre îngrijire și îngrijitori
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Conversație în familie despre îngrijire și îngrijire
+# Discuție de familie despre îngrijire și îngrijitori
 ## Subiect · Data · Facilitator · Participanți
 
 ---

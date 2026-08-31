@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Análisis di riesgo / registro di riesgo
+title: Análisis di riesgo / risk register
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Análisis di riesgo / registro di riesgo
+# Análisis di riesgo / risk register
 
 ---
 

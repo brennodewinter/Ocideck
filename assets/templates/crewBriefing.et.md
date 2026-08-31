@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Meeskonna / lahkumise instruktaaž
+title: Meeskonna / väljalennu briifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Meeskonna / lahkumise instruktaaž
+# Meeskonna / väljalennu briifing
 ## Lend · Meeskond · Kuupäev · Väljumisaeg
 
 ---

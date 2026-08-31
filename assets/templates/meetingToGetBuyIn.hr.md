@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obaviti nešto na sastanku
+title: Postizanje cilja na sastanku
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Obaviti nešto na sastanku
+# Postizanje cilja na sastanku
 ## Sastanak · Tražena odluka · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Istraživački narativ
+title: Istraživačka priča
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Istraživački narativ
+# Istraživačka priča
 
 ---
 

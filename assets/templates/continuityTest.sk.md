@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontinuita prevádzky / test DR
+title: Business continuity / test DR
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Kontinuita prevádzky / test DR
+# Business continuity / test DR
 
 ---
 

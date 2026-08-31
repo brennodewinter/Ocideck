@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Készítsen elő egy döntő beszélgetést
+title: Sorsdöntő beszélgetés előkészítése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Készítsen elő egy döntő beszélgetést
+# Sorsdöntő beszélgetés előkészítése
 
 ## Ki · Téma · Dátum
 

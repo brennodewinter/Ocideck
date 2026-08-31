@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Wyrażanie lub przyjmowanie krytyki
+title: Udzielanie lub przyjmowanie krytyki
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Wyrażanie lub przyjmowanie krytyki
+# Udzielanie lub przyjmowanie krytyki
 ## Kto · Temat · Data
 
 ---

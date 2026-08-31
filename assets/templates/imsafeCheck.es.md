@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Verificación IMSAFE de aptitud para volar
+title: IMSAFE control de aptitud para volar
 language: es
 ---
 
 <!-- _class: title -->
 
-# Verificación IMSAFE de aptitud para volar
+# IMSAFE control de aptitud para volar
 ## Piloto · Vuelo · Fecha · Esta verificación no sustituye el juicio médico
 
 ---

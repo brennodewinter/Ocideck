@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mokymai / seminarai
+title: Mokymai / dirbtuvės
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Mokymai / seminarai
+# Mokymai / dirbtuvės
 
 ---
 

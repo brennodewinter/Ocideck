@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przegląd przypadków domeny społecznościowej
+title: Omówienie przypadków w obszarze społecznym
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przegląd przypadków domeny społecznościowej
+# Omówienie przypadków w obszarze społecznym
 ## Zespół · Data · Przewodniczący
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Data contritionem / secretum incident taxationem
+title: Aestimatio fugae datorum / incidentis vitae privatae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Data contritionem / secretum incident taxationem
+# Aestimatio fugae datorum / incidentis vitae privatae
 
 ---
 

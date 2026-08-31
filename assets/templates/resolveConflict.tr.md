@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bir çatışma yoluyla konuşmak
+title: Anlaşmazlığı konuşarak çözmek
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Bir çatışma yoluyla konuşmak
+# Anlaşmazlığı konuşarak çözmek
 ## Kim · Ne hakkında · Tarih
 
 ---

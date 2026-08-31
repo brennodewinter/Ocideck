@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negotium causa / investment rogationem
+title: Ratio negotii / propositum collocandae pecuniae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Negotium causa / investment rogationem
+# Ratio negotii / propositum collocandae pecuniae
 ## Propositum · Auctor · Decision Corpus · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Розповідь дослідження
+title: Дослідницька розповідь
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Розповідь дослідження
+# Дослідницька розповідь
 
 ---
 

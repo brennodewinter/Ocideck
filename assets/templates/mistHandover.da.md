@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) TÅGE traumeoverdragelse
+title: (A)MIST-traumaoverdragelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# (A) TÅGE traumeoverdragelse
+# (A)MIST-traumaoverdragelse
 ## Præhospital → ED · Udsendelse · Dato og tid
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan de tareas de seguridad de la información
+title: Plan de tareas de seguridad
 language: es
 ---
 
 <!-- _class: title -->
 
-# Plan de tareas de seguridad de la información
+# Plan de tareas de seguridad
 
 ---
 

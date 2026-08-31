@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rīkkopas diskusija / pēdējā brīža riska analīze
+title: Toolbox / LMRA drošības pārbaude
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Rīkkopas diskusija / pēdējā brīža riska analīze
+# Toolbox / LMRA drošības pārbaude
 ## Darbs · Atrašanās vieta · Datums · Apkalpe
 
 ---

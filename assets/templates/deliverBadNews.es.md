@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Comunicar malas noticias
+title: Dar malas noticias
 language: es
 ---
 
 <!-- _class: title -->
 
-# Comunicar malas noticias
+# Dar malas noticias
 ## A quién · La noticia · Fecha
 
 ---

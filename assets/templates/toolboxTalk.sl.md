@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pogovor o orodju / analiza tveganja v zadnjem trenutku
+title: Toolbox / varnostni pregled LMRA
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Pogovor o orodju / analiza tveganja v zadnjem trenutku
+# Toolbox / varnostni pregled LMRA
 ## Delo · Lokacija · Datum · Ekipa
 
 ---

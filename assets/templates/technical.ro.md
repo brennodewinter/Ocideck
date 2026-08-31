@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Explicator tehnic
+title: Explicație tehnică
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Explicator tehnic
+# Explicație tehnică
 
 ---
 

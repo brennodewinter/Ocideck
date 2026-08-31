@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Papiando pa medio di un konflikto
+title: Resolvé un konflikto
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Papiando pa medio di un konflikto
+# Resolvé un konflikto
 ## Ken · Tokante kiko · Fecha
 
 ---

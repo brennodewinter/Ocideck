@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Penilaian dampak DPIA / privasi
+title: DPIA / penilaian dampak privasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Penilaian dampak DPIA / privasi
+# DPIA / penilaian dampak privasi
 
 ---
 

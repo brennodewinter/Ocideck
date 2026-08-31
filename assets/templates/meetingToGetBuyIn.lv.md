@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kaut ko paveikt sanāksmē
+title: Kā panākt savu sanāksmē
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Kaut ko paveikt sanāksmē
+# Kā panākt savu sanāksmē
 ## Sanāksme · Pieprasīts lēmums · Datums
 
 ---

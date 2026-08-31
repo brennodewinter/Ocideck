@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / measúnú tionchair príobháideachta
+title: DPIA / measúnú tionchair ar phríobháideachas
 language: ga
 ---
 
 <!-- _class: title -->
 
-# DPIA / measúnú tionchair príobháideachta
+# DPIA / measúnú tionchair ar phríobháideachas
 
 ---
 

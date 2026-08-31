@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing/efterhandlingsgenomgång
+title: Debriefing / utvärdering efter insats
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Debriefing/efterhandlingsgenomgång
+# Debriefing / utvärdering efter insats
 ## Drift · Datum och tid · Handledare · Deltagare
 
 ---

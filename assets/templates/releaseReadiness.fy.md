@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / release reewilligens
+title: CAB / release readiness
 language: fy
 ---
 
 <!-- _class: title -->
 
-# CAB / release reewilligens
+# CAB / release readiness
 
 ---
 

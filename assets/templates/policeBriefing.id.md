@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan operasional polisi
+title: Pengarahan operasional kepolisian
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan operasional polisi
+# Pengarahan operasional kepolisian
 ## Tanggal · Shift · Area · Penjelasan Singkat
 
 ---

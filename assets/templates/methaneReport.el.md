@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Έκθεση σοβαρού συμβάντος METHANE
+title: METHANE αναφορά μεγάλου συμβάντος
 language: el
 ---
 
 <!-- _class: title -->
 
-# Έκθεση σοβαρού συμβάντος METHANE
+# METHANE αναφορά μεγάλου συμβάντος
 ## Συμβάν · Τοποθεσία · Ημερομηνία και ώρα · Αναφέρων
 
 ---

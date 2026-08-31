@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE lidojuma piemērotības pārbaude
+title: IMSAFE lidojumderīguma pārbaude
 language: lv
 ---
 
 <!-- _class: title -->
 
-# IMSAFE lidojuma piemērotības pārbaude
+# IMSAFE lidojumderīguma pārbaude
 ## Pilots · Lidojums · Datums · Šī pārbaude neaizstāj medicīnisko spriedumu
 
 ---

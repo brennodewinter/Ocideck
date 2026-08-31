@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kiürítési és elsőreakciós gyakorlat
+title: Kiürítési és BHV-gyakorlat
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Kiürítési és elsőreakciós gyakorlat
+# Kiürítési és BHV-gyakorlat
 ## Helyszín · Dátum · Gyakorlatvezető · Forgatókönyv
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pasākumu un pūļa drošības instruktāža
+title: Pasākuma un pūļa drošības instruktāža
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Pasākumu un pūļa drošības instruktāža
+# Pasākuma un pūļa drošības instruktāža
 ## Pasākums · Vieta · Datums · Koordinators
 
 ---

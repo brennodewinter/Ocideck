@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Duomenų pažeidimo / privatumo incidento įvertinimas
+title: Duomenų nutekėjimo / privatumo incidento vertinimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Duomenų pažeidimo / privatumo incidento įvertinimas
+# Duomenų nutekėjimo / privatumo incidento vertinimas
 
 ---
 

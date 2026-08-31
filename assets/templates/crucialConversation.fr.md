@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Préparez une conversation cruciale
+title: Préparer une conversation cruciale
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Préparez une conversation cruciale
+# Préparer une conversation cruciale
 
 ## Qui · Sujet · Date
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Statusbesprechung
+title: Status-Briefing
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Statusbesprechung
+# Status-Briefing
 
 ---
 

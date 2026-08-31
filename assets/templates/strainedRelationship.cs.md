@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskuse o napjatém vztahu
+title: Rozhovor o napjatém vztahu
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Diskuse o napjatém vztahu
+# Rozhovor o napjatém vztahu
 ## S kým · O čem · Kdy
 
 ---

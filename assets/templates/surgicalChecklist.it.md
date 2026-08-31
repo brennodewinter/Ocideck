@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lista di controllo per la sicurezza chirurgica (OMS)
+title: Checklist di sicurezza chirurgica (WHO)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Lista di controllo per la sicurezza chirurgica (OMS)
+# Checklist di sicurezza chirurgica (WHO)
 ## Procedura · Paziente · OPPURE · Data
 
 ---

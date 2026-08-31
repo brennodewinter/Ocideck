@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing tas-servizz tan-nar (rispons u eżerċizzju)
+title: Briefing tas-servizz tat-tifi tan-nar (intervent u eżerċizzju)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Briefing tas-servizz tan-nar (rispons u eżerċizzju)
+# Briefing tas-servizz tat-tifi tan-nar (intervent u eżerċizzju)
 ## Oġġett · Data u ħin · Kmandant tal-inċident jew mexxej tal-eżerċizzju · Ekwipaġġ
 
 ---

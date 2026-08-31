@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Liiketoiminnan jatkuvuus / DR-testi
+title: Business continuity / DR-testi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Liiketoiminnan jatkuvuus / DR-testi
+# Business continuity / DR-testi
 
 ---
 

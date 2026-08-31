@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregovori o plaći
+title: Pregovaranje o plaći
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Pregovori o plaći
+# Pregovaranje o plaći
 ## Tko · Uloga · Datum
 
 ---

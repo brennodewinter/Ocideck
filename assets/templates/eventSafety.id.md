@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan acara & keselamatan orang banyak
+title: Briefing acara dan keselamatan kerumunan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan acara & keselamatan orang banyak
+# Briefing acara dan keselamatan kerumunan
 ## Acara · Lokasi · Tanggal · Koordinator
 
 ---

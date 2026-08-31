@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Procjena incidenta povrede podataka/privatnosti
+title: Procjena curenja podataka / incidenta privatnosti
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Procjena incidenta povrede podataka/privatnosti
+# Procjena curenja podataka / incidenta privatnosti
 
 ---
 

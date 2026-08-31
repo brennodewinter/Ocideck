@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversa de vendas
+title: Conversa de venda
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Conversa de vendas
+# Conversa de venda
 ## Cliente potencial · Pessoa de contato · Oferta · Data
 
 ---

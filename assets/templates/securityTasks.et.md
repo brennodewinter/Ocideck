@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Infoohutuse ülesannete plaan
+title: Turbeülesannete plaan
 language: et
 ---
 
 <!-- _class: title -->
 
-# Infoohutuse ülesannete plaan
+# Turbeülesannete plaan
 
 ---
 

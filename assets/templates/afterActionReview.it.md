@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing/revisione post-azione
+title: Debriefing / after-action review
 language: it
 ---
 
 <!-- _class: title -->
 
-# Debriefing/revisione post-azione
+# Debriefing / after-action review
 ## Operazione · Data e ora · Facilitatore · Partecipanti
 
 ---

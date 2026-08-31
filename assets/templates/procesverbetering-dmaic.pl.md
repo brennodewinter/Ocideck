@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Usprawnianie procesów: projekt DMAIC”
+title: "Doskonalenie procesów: projekt DMAIC"
 language: pl
 ocideck_improvement_framework: dmaic
 ---

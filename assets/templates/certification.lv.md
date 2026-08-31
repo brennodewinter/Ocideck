@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sertifikācijas gaita
+title: Sertifikācijas progress
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sertifikācijas gaita
+# Sertifikācijas progress
 
 ---
 

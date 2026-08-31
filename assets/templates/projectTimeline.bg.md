@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: График на проекта
+title: Времева линия на проекта
 language: bg
 ---
 
 <!-- _class: title -->
 
-# График на проекта
+# Времева линия на проекта
 
 ---
 

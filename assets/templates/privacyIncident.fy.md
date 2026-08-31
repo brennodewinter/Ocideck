@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beoardieling fan gegevensbrek / privacy-ynsidint
+title: Datalek / beoardieling privacy-ynsidint
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Beoardieling fan gegevensbrek / privacy-ynsidint
+# Datalek / beoardieling privacy-ynsidint
 
 ---
 

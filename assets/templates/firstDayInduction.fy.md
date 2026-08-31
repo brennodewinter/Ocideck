@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Earste dei / induction
+title: Earste dei / yntroduksje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Earste dei / induction
+# Earste dei / yntroduksje
 ## Nije hier · Rol · Gids · Datum
 
 ---

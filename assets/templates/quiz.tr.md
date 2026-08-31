@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İnteraktif sınav
+title: Etkileşimli quiz
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İnteraktif sınav
+# Etkileşimli quiz
 
 ---
 

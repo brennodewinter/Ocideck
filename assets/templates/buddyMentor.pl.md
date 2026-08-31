@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan przyjaciela/mentora
+title: Plan buddy / mentora
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Plan przyjaciela/mentora
+# Plan buddy / mentora
 ## Nowicjusz · Kumpel lub mentor · Data rozpoczęcia
 
 ---

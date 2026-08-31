@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Business kontinuïteit / DR test
+title: Business continuity / DR-test
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Business kontinuïteit / DR test
+# Business continuity / DR-test
 
 ---
 

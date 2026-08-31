@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Зробити щось на зустрічі
+title: Досягнення мети на нараді
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Зробити щось на зустрічі
+# Досягнення мети на нараді
 ## Зустріч · Запит на рішення · Дата
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapat Umum (RUPS)
+title: Rapat umum anggota
 language: id
 ---
 
 <!-- _class: title -->
 
-# Rapat Umum (RUPS)
+# Rapat umum anggota
 ## Organisasi · Tanggal · Ketua · Anggota hadir
 
 ---

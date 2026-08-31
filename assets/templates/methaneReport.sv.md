@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METAN-rapport om större incidenter
+title: METHANE-rapport om storskadehändelse
 language: sv
 ---
 
 <!-- _class: title -->
 
-# METAN-rapport om större incidenter
+# METHANE-rapport om storskadehändelse
 ## Incident · Plats · Datum och tid · Reporter
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Анализ на риска / регистър на риска
+title: Анализ на риска / регистър на рисковете
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Анализ на риска / регистър на риска
+# Анализ на риска / регистър на рисковете
 
 ---
 

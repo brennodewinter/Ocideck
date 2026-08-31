@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport
+title: Raportare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Raport
+# Raportare
 
 ---
 

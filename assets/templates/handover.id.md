@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Serah terima/transisi
+title: Serah terima / handover
 language: id
 ---
 
 <!-- _class: title -->
 
-# Serah terima/transisi
+# Serah terima / handover
 
 ---
 

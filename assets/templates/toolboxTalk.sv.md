@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Verktygslådantal / riskanalys i sista minuten
+title: Toolbox / LMRA-säkerhetskontroll
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Verktygslådantal / riskanalys i sista minuten
+# Toolbox / LMRA-säkerhetskontroll
 ## Arbete · Plats · Datum · Besättning
 
 ---

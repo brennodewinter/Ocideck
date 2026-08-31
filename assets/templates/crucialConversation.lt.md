@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Paruoškite svarbų pokalbį
+title: Pasiruošti lemtingam pokalbiui
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Paruoškite svarbų pokalbį
+# Pasiruošti lemtingam pokalbiui
 
 ## Kas · Tema · Data
 

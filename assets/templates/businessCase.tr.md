@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İş senaryosu / yatırım teklifi
+title: İş gerekçesi / yatırım önerisi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İş senaryosu / yatırım teklifi
+# İş gerekçesi / yatırım önerisi
 ## Teklif · Yazar · Karar organı · Tarih
 
 ---

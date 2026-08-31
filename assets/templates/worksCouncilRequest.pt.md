@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pedido de aconselhamento do conselho de empresa
+title: Pedido de parecer à comissão de trabalhadores
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Pedido de aconselhamento do conselho de empresa
+# Pedido de parecer à comissão de trabalhadores
 ## Assunto · Diretor · Conselho de empresa · Data
 
 ---

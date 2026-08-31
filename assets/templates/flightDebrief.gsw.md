@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Flugbesprechung
+title: Flug-Debriefing
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Flugbesprechung
+# Flug-Debriefing
 ## Flug · Datum · Besatzung
 
 ---

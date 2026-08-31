@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seisiún faisnéise foirne / imeachta
+title: Faisnéisiú criú / imeachta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seisiún faisnéise foirne / imeachta
+# Faisnéisiú criú / imeachta
 ## Eitilt · Criú · Dáta · Am imeachta
 
 ---

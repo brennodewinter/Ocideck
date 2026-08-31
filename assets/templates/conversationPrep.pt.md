@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prepare uma conversa
+title: Preparar uma conversa
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Prepare uma conversa
+# Preparar uma conversa
 ## Quem · Tópico · Data
 
 ---

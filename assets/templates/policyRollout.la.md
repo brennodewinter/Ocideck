@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Explicatio consilii / consilium exsecutionis
+title: Rationem agendi evolvere / consilium exsecutionis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Explicatio consilii / consilium exsecutionis
+# Rationem agendi evolvere / consilium exsecutionis
 
 ---
 

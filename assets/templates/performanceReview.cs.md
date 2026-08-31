@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontrola výkonu
+title: Hodnoticí pohovor
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Kontrola výkonu
+# Hodnoticí pohovor
 ## Kdo · Období · Datum
 
 ---

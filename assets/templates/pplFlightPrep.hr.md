@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL priprema za let
+title: PPL priprema leta
 language: hr
 ---
 
 <!-- _class: title -->
 
-# PPL priprema za let
+# PPL priprema leta
 ## Datum · Pozivni znak · Ruta · PIC
 
 ---

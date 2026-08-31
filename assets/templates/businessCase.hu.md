@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Üzleti eset / befektetési javaslat
+title: Üzleti indoklás / beruházási javaslat
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Üzleti eset / befektetési javaslat
+# Üzleti indoklás / beruházási javaslat
 ## Javaslat · Szerző · Határozati szerv · Dátum
 
 ---

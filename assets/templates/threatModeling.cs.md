@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relace modelování hrozeb
+title: Modelování hrozeb (threat modeling)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Relace modelování hrozeb
+# Modelování hrozeb (threat modeling)
 ## Systém · Datum · Facilitátor · Účastníci
 
 ---

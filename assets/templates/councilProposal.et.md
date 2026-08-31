@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nõukogu / täidesaatev ettepanek
+title: Ettepanek volikogule / valitsusele
 language: et
 ---
 
 <!-- _class: title -->
 
-# Nõukogu / täidesaatev ettepanek
+# Ettepanek volikogule / valitsusele
 ## Teema · Portfoolio · Registreerimisnumber · Autor
 
 ---

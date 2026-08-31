@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Információbiztonság: RASCI / felelősség"
+title: "Információbiztonság: RASCI / TVB"
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Információbiztonság: RASCI / felelősség
+# Információbiztonság: RASCI / TVB
 
 ---
 

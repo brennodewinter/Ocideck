@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo o varnosti dogodkov in množice
+title: Briefing o dogodku in varnosti množice
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo o varnosti dogodkov in množice
+# Briefing o dogodku in varnosti množice
 ## Dogodek · Lokacija · Datum · Koordinator
 
 ---

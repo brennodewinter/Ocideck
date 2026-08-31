@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Интерактивна викторина
+title: Интерактивен куиз
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Интерактивна викторина
+# Интерактивен куиз
 
 ---
 

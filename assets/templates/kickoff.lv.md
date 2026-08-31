@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekta sākums / starts
+title: Projekta sākums / kick-off
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Projekta sākums / starts
+# Projekta sākums / kick-off
 
 ---
 

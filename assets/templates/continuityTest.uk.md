@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Тест безперервності бізнесу / DR
+title: Безперервність бізнесу / DR-тест
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Тест безперервності бізнесу / DR
+# Безперервність бізнесу / DR-тест
 
 ---
 

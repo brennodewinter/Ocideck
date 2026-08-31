@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bereid in krúsjale petear
+title: Krúsjaal petear tariede
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Bereid in krúsjale petear
+# Krúsjaal petear tariede
 
 ## Wa · Underwerp · Datum
 

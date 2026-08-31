@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Operativni policijski brifing
+title: Operativni policijski briefing
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Operativni policijski brifing
+# Operativni policijski briefing
 ## Datum · Premik · Območje · Kratko
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Täytäntöönpanotiedotus (BOA)
+title: Valvontabriefing (BOA)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Täytäntöönpanotiedotus (BOA)
+# Valvontabriefing (BOA)
 ## Päivämäärä · Vuoro · Työalue/piiri · Koordinaattori
 
 ---

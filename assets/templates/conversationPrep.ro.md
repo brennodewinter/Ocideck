@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregătiți o conversație
+title: Pregătirea unei conversații
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Pregătiți o conversație
+# Pregătirea unei conversații
 ## Cine · Subiect · Data
 
 ---

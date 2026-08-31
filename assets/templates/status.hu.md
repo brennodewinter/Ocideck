@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Állapottájékoztató
+title: Státusztájékoztató
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Állapottájékoztató
+# Státusztájékoztató
 
 ---
 

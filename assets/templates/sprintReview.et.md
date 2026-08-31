@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprindi ülevaade / demo
+title: Sprindi ülevaatus / demo
 language: et
 ---
 
 <!-- _class: title -->
 
-# Sprindi ülevaade / demo
+# Sprindi ülevaatus / demo
 ## Meeskond · Sprint · Kuupäev
 
 ---

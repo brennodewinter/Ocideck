@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Spjegatur tekniku
+title: Spjegazzjoni teknika
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Spjegatur tekniku
+# Spjegazzjoni teknika
 
 ---
 

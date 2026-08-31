@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Оцінка постачальника / ризик постачальника
+title: Оцінка постачальників / vendor risk
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Оцінка постачальника / ризик постачальника
+# Оцінка постачальників / vendor risk
 
 ---
 

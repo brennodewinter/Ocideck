@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa straży pożarnej (reagowanie i ćwiczenia)
+title: Odprawa straży pożarnej (działania i ćwiczenia)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa straży pożarnej (reagowanie i ćwiczenia)
+# Odprawa straży pożarnej (działania i ćwiczenia)
 ## Obiekt · Data i godzina · Dowódca incydentu lub dowódca ćwiczenia · Załoga
 
 ---

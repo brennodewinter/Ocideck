@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan jalur jembatan
+title: Briefing pelayaran / anjungan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan jalur jembatan
+# Briefing pelayaran / anjungan
 ## Pelayaran · Kapal · Tanggal · Jadwal tontonan
 
 ---

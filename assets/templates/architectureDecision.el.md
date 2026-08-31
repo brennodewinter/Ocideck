@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αρχιτεκτονική απόφαση / παρουσίαση ADR
+title: Απόφαση αρχιτεκτονικής / παρουσίαση ADR
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αρχιτεκτονική απόφαση / παρουσίαση ADR
+# Απόφαση αρχιτεκτονικής / παρουσίαση ADR
 
 ---
 

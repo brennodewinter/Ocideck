@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politikos diegimo / įgyvendinimo planas
+title: Politikos diegimas / įgyvendinimo planas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Politikos diegimo / įgyvendinimo planas
+# Politikos diegimas / įgyvendinimo planas
 
 ---
 

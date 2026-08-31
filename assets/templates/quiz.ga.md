@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tráth na gceist idirghníomhach
+title: Quiz idirghníomhach
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tráth na gceist idirghníomhach
+# Quiz idirghníomhach
 
 ---
 

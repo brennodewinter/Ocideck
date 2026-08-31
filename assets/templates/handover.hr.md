@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Primopredaja / prijelaz
+title: Primopredaja / handover
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Primopredaja / prijelaz
+# Primopredaja / handover
 
 ---
 

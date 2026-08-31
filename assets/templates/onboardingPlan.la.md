@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Onboarding consilium (30-60-90 dies)
+title: Consilium initiationis (30-60-90 dies)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Onboarding consilium (30-60-90 dies)
+# Consilium initiationis (30-60-90 dies)
 ## Novae mercedis · Munus · Guide · Committitur date
 
 ---

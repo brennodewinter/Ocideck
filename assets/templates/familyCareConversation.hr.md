@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obiteljski razgovor o skrbi i njezi
+title: Obiteljski razgovor o njezi i skrbi
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Obiteljski razgovor o skrbi i njezi
+# Obiteljski razgovor o njezi i skrbi
 ## Tema · Datum · Voditelj · Sudionici
 
 ---

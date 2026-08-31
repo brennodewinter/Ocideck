@@ -1180,16 +1180,45 @@ void main() {
     });
 
     test('document title slides match the l10n picker title per language', () {
-      // Wat de kiezer belooft is wat het document opent: de titeldia van
-      // <id>.en.md draagt dezelfde titel als de Engelse l10n van de kiezer.
+      // Wat de kiezer belooft is wat het document opent — in élke taal, niet
+      // alleen in nl en en. De twee zijn langs verschillende routes vertaald en
+      // liepen bij 2.063 van de 2.760 combinaties uiteen: soms een andere
+      // bewoording, soms een aanhalingsteken dat de vertaalronde typografisch
+      // maakte en daarmee ín de YAML-waarde trok, en bij `pitch` tien talen die
+      // het woord in de verkeerde betekenis namen (teer, speelveld). Deze test
+      // is de reden dat dat niet stilletjes terugkomt.
+      //
+      // Er wordt op twee plekken gekeken, want ze kunnen los van elkaar
+      // afdwalen: de `title:` in de front matter (die `Deck.title` wordt) en de
+      // kop van de titeldia. Geteld over elk bestand dat er ligt, dus ook de
+      // vier Klingon-documenten — die dragen Engelse inhoud, maar wél de titel
+      // die de kiezer belooft.
+      final afwijkend = <String>[];
       for (final template in documentTemplates) {
-        expect(slidesOf(template.id).first.title, template.title);
-        expect(
-          slidesOf(template.id, language: 'en').first.title,
-          AppLocalizations.sourceFor('en', template.title),
-          reason: template.id,
-        );
+        for (final language in [...contentLanguages, 'tlh']) {
+          final file = File('assets/templates/${template.id}.$language.md');
+          if (!file.existsSync()) continue;
+          final want = AppLocalizations.sourceFor(language, template.title);
+          final deck = deckOf(template.id, language: language);
+          if (deck.title != want) {
+            afwijkend.add(
+              '${file.path}: front matter "${deck.title}" != "$want"',
+            );
+          }
+          if (deck.slides.first.title != want) {
+            afwijkend.add(
+              '${file.path}: titeldia "${deck.slides.first.title}" != "$want"',
+            );
+          }
+        }
       }
+      expect(
+        afwijkend,
+        isEmpty,
+        reason:
+            'de sjabloontitel volgt de kiezertitel uit de l10n-tabel; pas de '
+            'vertaling daar aan, niet het document los',
+      );
     });
   });
 

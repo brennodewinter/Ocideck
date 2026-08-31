@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan di inisio (30-60-90 dia)
+title: Plan di introdukshon (30-60-90 dia)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Plan di inisio (30-60-90 dia)
+# Plan di introdukshon (30-60-90 dia)
 ## Kontratashon nobo · Rol · Guia · Fecha di inisio
 
 ---

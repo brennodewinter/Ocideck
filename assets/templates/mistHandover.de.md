@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST-Trauma-Übergabe
+title: (A)MIST-Traumaübergabe
 language: de
 ---
 
 <!-- _class: title -->
 
-# (A)MIST-Trauma-Übergabe
+# (A)MIST-Traumaübergabe
 ## Präklinisch → Notaufnahme · Versand · Datum und Uhrzeit
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR-i üleandmine
+title: SBAR üleandmine
 language: et
 ---
 
 <!-- _class: title -->
 
-# SBAR-i üleandmine
+# SBAR üleandmine
 ## Patsient · Palat · Kellelt kellele · Kuupäev ja kellaaeg
 
 ---

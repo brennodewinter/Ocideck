@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Elanike õhtu / osaluskoosolek
+title: Elanike õhtu / kaasamiskoosolek
 language: et
 ---
 
 <!-- _class: title -->
 
-# Elanike õhtu / osaluskoosolek
+# Elanike õhtu / kaasamiskoosolek
 ## Naabruskond · Teema · Kuupäev · Läbiviija
 
 ---

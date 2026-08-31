@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregled po incidentu / pridobljene izkušnje
+title: Pregled po incidentu / lessons learned
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Pregled po incidentu / pridobljene izkušnje
+# Pregled po incidentu / lessons learned
 
 ---
 

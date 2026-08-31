@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Trasferiment / transizzjoni
+title: Trasferiment / handover
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Trasferiment / transizzjoni
+# Trasferiment / handover
 
 ---
 

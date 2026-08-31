@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing corto
+title: Briefing kòrtiku
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Briefing corto
+# Briefing kòrtiku
 
 ---
 

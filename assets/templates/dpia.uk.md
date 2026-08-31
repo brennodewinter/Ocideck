@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / оцінка впливу на конфіденційність
+title: DPIA / оцінка впливу на приватність
 language: uk
 ---
 
 <!-- _class: title -->
 
-# DPIA / оцінка впливу на конфіденційність
+# DPIA / оцінка впливу на приватність
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Оценка на доставчика/риска на доставчика
+title: Оценка на доставчици / vendor risk
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Оценка на доставчика/риска на доставчика
+# Оценка на доставчици / vendor risk
 
 ---
 

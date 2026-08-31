@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE didelio incidento ataskaita
+title: METHANE pranešimas apie didelį incidentą
 language: lt
 ---
 
 <!-- _class: title -->
 
-# METHANE didelio incidento ataskaita
+# METHANE pranešimas apie didelį incidentą
 ## Incidentas · Vieta · Data ir laikas · Reporteris
 
 ---

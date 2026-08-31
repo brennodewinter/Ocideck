@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relatório de incidente grave com METANO
+title: METHANE relatório de incidente grave
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Relatório de incidente grave com METANO
+# METHANE relatório de incidente grave
 ## Incidente · Local · Data e hora · Repórter
 
 ---

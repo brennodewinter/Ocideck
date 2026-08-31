@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Упражнение на маса/кризисна тренировка
+title: Настолно учение / кризисно учение
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Упражнение на маса/кризисна тренировка
+# Настолно учение / кризисно учение
 
 ---
 

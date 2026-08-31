@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP artışı
+title: GRIP tırmandırması
 language: tr
 ---
 
 <!-- _class: title -->
 
-# GRIP artışı
+# GRIP tırmandırması
 ## Olay · Tarih ve saat · Lider · Mevcut GRIP seviyesi
 
 ---

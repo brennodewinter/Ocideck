@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Elternabend / Informationsabend
+title: Elternabig / Informationsabig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Elternabend / Informationsabend
+# Elternabig / Informationsabig
 ## Klasse oder Gruppe · Schuljahr · Ort
 
 ---

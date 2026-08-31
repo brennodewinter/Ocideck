@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Üleandmine / üleminek
+title: Üleandmine / handover
 language: et
 ---
 
 <!-- _class: title -->
 
-# Üleandmine / üleminek
+# Üleandmine / handover
 
 ---
 

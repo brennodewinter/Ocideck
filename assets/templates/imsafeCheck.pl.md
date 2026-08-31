@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontrola zdolności do lotu IMSAFE
+title: IMSAFE kontrola zdolności do lotu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Kontrola zdolności do lotu IMSAFE
+# IMSAFE kontrola zdolności do lotu
 ## Pilot · Lot · Data · Ta kontrola nie zastępuje opinii lekarskiej
 
 ---

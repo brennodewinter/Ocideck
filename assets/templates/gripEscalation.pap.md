@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eskalashon di GRIP
+title: Eskalashon GRIP
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Eskalashon di GRIP
+# Eskalashon GRIP
 ## Insidente · Fecha i ora · Lider · Nivel di GRIP aktual
 
 ---

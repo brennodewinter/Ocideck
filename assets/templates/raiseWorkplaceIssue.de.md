@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ein Problem bei der Arbeit ansprechen
+title: Ein Problem am Arbeitsplatz ansprechen
 language: de
 ---
 
 <!-- _class: title -->
 
-# Ein Problem bei der Arbeit ansprechen
+# Ein Problem am Arbeitsplatz ansprechen
 ## Wer · Thema · Datum
 
 ---

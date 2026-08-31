@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aisghabhálach / feabhsú foirne
+title: Retrospective / feabhsú foirne
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Aisghabhálach / feabhsú foirne
+# Retrospective / feabhsú foirne
 
 ---
 

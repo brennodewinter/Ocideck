@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kombersashon den famia tokante kuido i kuido
+title: Konversashon di famia tokante kuido i kuido informal
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kombersashon den famia tokante kuido i kuido
+# Konversashon di famia tokante kuido i kuido informal
 ## Tópiko · Fecha · Fasilitadó · Asistentenan
 
 ---

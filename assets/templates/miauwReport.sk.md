@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pentestová správa MIAUW
+title: Správa o pentestu MIAUW
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Pentestová správa MIAUW
+# Správa o pentestu MIAUW
 
 ---
 

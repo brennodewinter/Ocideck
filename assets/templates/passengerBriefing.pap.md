@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di pasahero (aviashon general)
+title: Briefing di pasahero (aviashon general)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di pasahero (aviashon general)
+# Briefing di pasahero (aviashon general)
 ## Avion · Vuelo · Piloto na mando
 
 ---

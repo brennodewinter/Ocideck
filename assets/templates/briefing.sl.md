@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kratek brífing
+title: Kratek brifing
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Kratek brífing
+# Kratek brifing
 
 ---
 

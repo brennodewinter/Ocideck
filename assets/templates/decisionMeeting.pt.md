@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunião de tomada de decisão
+title: Reunião de decisão
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Reunião de tomada de decisão
+# Reunião de decisão
 ## Reunião · Data · Presidente · Participantes
 
 ---

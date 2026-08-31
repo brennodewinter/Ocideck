@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kombersashon ku kliente
+title: Konversashon ku kliente
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kombersashon ku kliente
+# Konversashon ku kliente
 ## Kliente · Persona di kontakto · Meta · Fecha
 
 ---

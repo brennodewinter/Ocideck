@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beslútfoarmjende gearkomste
+title: Beslútfoarmjend oerlis
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Beslútfoarmjende gearkomste
+# Beslútfoarmjend oerlis
 ## Gearkomst · Datum · Foarsitter · Oanwêzigen
 
 ---

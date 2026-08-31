@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İlk gün / göreve başlama
+title: İlk gün / oryantasyon
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İlk gün / göreve başlama
+# İlk gün / oryantasyon
 ## Yeni işe alınan · Rol · Rehber · Tarih
 
 ---

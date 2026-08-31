@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / procjena utjecaja na privatnost
+title: DPIA / procjena učinka na privatnost
 language: hr
 ---
 
 <!-- _class: title -->
 
-# DPIA / procjena utjecaja na privatnost
+# DPIA / procjena učinka na privatnost
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Költségvetési bemutató
+title: Költségvetés bemutatása
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Költségvetési bemutató
+# Költségvetés bemutatása
 ## Szervezet · Költségvetési év · Előadó
 
 ---

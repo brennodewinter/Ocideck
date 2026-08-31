@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Athbhreithniú feidhmíochta
+title: Comhrá feidhmíochta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Athbhreithniú feidhmíochta
+# Comhrá feidhmíochta
 ## Cé · Tréimhse · Dáta
 
 ---

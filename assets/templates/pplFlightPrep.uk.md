@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Підготовка до польоту PPL
+title: PPL підготовка до польоту
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Підготовка до польоту PPL
+# PPL підготовка до польоту
 ## Дата · Позивний · Маршрут · ПІК
 
 ---

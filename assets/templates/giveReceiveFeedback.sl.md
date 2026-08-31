@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dajanje ali sprejemanje kritike
+title: Podajanje ali sprejemanje kritike
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Dajanje ali sprejemanje kritike
+# Podajanje ali sprejemanje kritike
 ## Kdo · Tema · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Procjena dobavljača/rizik dobavljača
+title: Procjena dobavljača / vendor risk
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Procjena dobavljača/rizik dobavljača
+# Procjena dobavljača / vendor risk
 
 ---
 

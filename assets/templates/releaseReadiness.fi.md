@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / vapautusvalmius
+title: CAB / julkaisuvalmius
 language: fi
 ---
 
 <!-- _class: title -->
 
-# CAB / vapautusvalmius
+# CAB / julkaisuvalmius
 
 ---
 

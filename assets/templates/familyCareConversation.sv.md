@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Familjesamtal om vård och omsorg
+title: Familjesamtal om vård och anhörigomsorg
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Familjesamtal om vård och omsorg
+# Familjesamtal om vård och anhörigomsorg
 ## Ämne · Datum · Handledare · Deltagare
 
 ---

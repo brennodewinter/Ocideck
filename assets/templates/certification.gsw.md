@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zertifizierungsfortschritt
+title: Zertifizierigs-Fortschritt
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Zertifizierungsfortschritt
+# Zertifizierigs-Fortschritt
 
 ---
 

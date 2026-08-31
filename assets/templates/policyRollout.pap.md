@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Implementashon di polítika / plan di implementashon
+title: Introdusí polítika / plan di implementashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Implementashon di polítika / plan di implementashon
+# Introdusí polítika / plan di implementashon
 
 ---
 

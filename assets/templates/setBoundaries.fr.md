@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fixer des limites
+title: Poser des limites
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Fixer des limites
+# Poser des limites
 ## Avec qui · À propos de quoi · Rendez-vous
 
 ---

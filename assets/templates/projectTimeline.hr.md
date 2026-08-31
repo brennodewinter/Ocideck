@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vremenski okvir projekta
+title: Vremenska crta projekta
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Vremenski okvir projekta
+# Vremenska crta projekta
 
 ---
 

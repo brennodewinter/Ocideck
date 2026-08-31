@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tapahtuman jälkeinen katsaus / opitut kokemukset
+title: Post-incident review / lessons learned
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tapahtuman jälkeinen katsaus / opitut kokemukset
+# Post-incident review / lessons learned
 
 ---
 

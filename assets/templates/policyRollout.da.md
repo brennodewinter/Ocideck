@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politikudrulning / implementeringsplan
+title: Udrulning af politik / implementeringsplan
 language: da
 ---
 
 <!-- _class: title -->
 
-# Politikudrulning / implementeringsplan
+# Udrulning af politik / implementeringsplan
 
 ---
 

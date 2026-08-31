@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE Fitness-to-Fly-Check
+title: IMSAFE Flugtüechtigkeits-Check
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# IMSAFE Fitness-to-Fly-Check
+# IMSAFE Flugtüechtigkeits-Check
 ## Pilot · Flug · Datum · Diese Überprüfung ersetzt nicht die ärztliche Beurteilung
 
 ---

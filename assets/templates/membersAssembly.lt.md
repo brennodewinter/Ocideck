@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Visuotinis susirinkimas (AM)
+title: Visuotinis narių susirinkimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Visuotinis susirinkimas (AM)
+# Visuotinis narių susirinkimas
 ## Organizacija · Data · Pirmininkas · Dalyvauja nariai
 
 ---

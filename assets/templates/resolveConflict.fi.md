@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Keskustelua konfliktin läpi
+title: Ristiriidan selvittäminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Keskustelua konfliktin läpi
+# Ristiriidan selvittäminen
 ## Kuka · Mistä · Päivämäärä
 
 ---

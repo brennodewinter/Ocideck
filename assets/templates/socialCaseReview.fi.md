@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sosiaalisen verkkotunnuksen tapauskatsaus
+title: Tapauskäsittely sosiaalialalla
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Sosiaalisen verkkotunnuksen tapauskatsaus
+# Tapauskäsittely sosiaalialalla
 ## Joukkue · Päivämäärä · Puheenjohtaja
 
 ---

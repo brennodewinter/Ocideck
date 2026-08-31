@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: TP kriisiaruanne
+title: BOB-kriisiraport
 language: et
 ---
 
 <!-- _class: title -->
 
-# TP kriisiaruanne
+# BOB-kriisiraport
 
 ---
 

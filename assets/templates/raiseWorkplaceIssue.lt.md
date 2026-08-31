@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Problemos iškėlimas darbe
+title: Problemos darbo vietoje iškėlimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Problemos iškėlimas darbe
+# Problemos darbo vietoje iškėlimas
 ## Kas · Tema · Data
 
 ---

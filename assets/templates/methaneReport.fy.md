@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE rapport oer grutte ynsidinten
+title: METHANE grutskalich-ynsidintmelding
 language: fy
 ---
 
 <!-- _class: title -->
 
-# METHANE rapport oer grutte ynsidinten
+# METHANE grutskalich-ynsidintmelding
 ## Ynsidint · Lokaasje · Datum en tiid · Ferslachjouwer
 
 ---

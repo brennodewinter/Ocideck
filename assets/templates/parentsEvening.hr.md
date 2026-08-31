@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Roditeljska večer / informativna večer
+title: Roditeljski sastanak / informativna večer
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Roditeljska večer / informativna večer
+# Roditeljski sastanak / informativna večer
 ## Razred ili grupa · Školska godina · Mjesto
 
 ---

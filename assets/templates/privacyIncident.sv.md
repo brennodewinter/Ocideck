@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Utvärdering av dataintrång/integritetsincident
+title: Dataläcka / bedömning av integritetsincident
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Bedömning av dataintrång/integritetsincident
+# Dataläcka / bedömning av integritetsincident
 
 ---
 

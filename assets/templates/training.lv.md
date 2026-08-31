@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Apmācība / darbnīca
+title: Apmācība / darbseminārs
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Apmācība / darbnīca
+# Apmācība / darbseminārs
 
 ---
 

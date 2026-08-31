@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Συνομιλία πελάτη
+title: Συνομιλία με πελάτη
 language: el
 ---
 
 <!-- _class: title -->
 
-# Συνομιλία πελάτη
+# Συνομιλία με πελάτη
 ## Πελάτης · Υπεύθυνος επικοινωνίας · Στόχος · Ημερομηνία
 
 ---

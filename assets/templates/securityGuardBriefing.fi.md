@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Turvatiedotus / vuoron aloitus
+title: Turvallisuusbriefing / vuoron alku
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Turvatiedotus / vuoron aloitus
+# Turvallisuusbriefing / vuoron alku
 ## Päivämäärä · Vuoro · Paikka/paikka · Vuoronjohtaja
 
 ---

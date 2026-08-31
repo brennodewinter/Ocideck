@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: In einer Besprechung etwas erledigen
+title: In ere Sitzig öppis erreiche
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# In einer Besprechung etwas erledigen
+# In ere Sitzig öppis erreiche
 ## Sitzung · Entscheidung beantragt · Datum
 
 ---

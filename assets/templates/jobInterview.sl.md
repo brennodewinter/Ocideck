@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Razgovor za službo
+title: Zaposlitveni razgovor
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Razgovor za službo
+# Zaposlitveni razgovor
 ## Vloga · Delodajalec · Datum · Anketarji
 
 ---

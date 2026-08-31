@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: In einer Besprechung etwas erledigen
+title: In einer Besprechung etwas erreichen
 language: de
 ---
 
 <!-- _class: title -->
 
-# In einer Besprechung etwas erledigen
+# In einer Besprechung etwas erreichen
 ## Sitzung · Entscheidung beantragt · Datum
 
 ---

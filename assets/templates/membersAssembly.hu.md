@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Közgyűlés (közgyűlés)
+title: Közgyűlés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Közgyűlés (közgyűlés)
+# Közgyűlés
 ## Szervezet · Dátum · Elnök · Jelenlévő tagok
 
 ---

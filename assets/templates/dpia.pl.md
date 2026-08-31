@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / ocena wpływu na prywatność
+title: DPIA / ocena skutków dla prywatności
 language: pl
 ---
 
 <!-- _class: title -->
 
-# DPIA / ocena wpływu na prywatność
+# DPIA / ocena skutków dla prywatności
 
 ---
 

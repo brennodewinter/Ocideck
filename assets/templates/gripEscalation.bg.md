@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP ескалация
+title: Ескалация по GRIP
 language: bg
 ---
 
 <!-- _class: title -->
 
-# GRIP ескалация
+# Ескалация по GRIP
 ## Инцидент · Дата и час · Лидер · Текущо ниво на хватка
 
 ---

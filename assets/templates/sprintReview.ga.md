@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint léirmheas / taispeána
+title: Athbhreithniú sprinte / demo
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Sprint léirmheas / taispeána
+# Athbhreithniú sprinte / demo
 ## Foireann · Sprint · Dáta
 
 ---

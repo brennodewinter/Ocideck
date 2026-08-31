@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tillstånd att arbeta
+title: Arbetstillstånd (permit to work)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Tillstånd att arbeta
+# Arbetstillstånd (permit to work)
 ## Arbete · Plats · Gäller från–till · Tillståndsutfärdare
 
 ---

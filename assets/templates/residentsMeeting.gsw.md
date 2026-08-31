@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bewohnerabend / Mitmachtreffen
+title: Aawohner-Abig / Mitwirkigs-Aalass
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bewohnerabend / Mitmachtreffen
+# Aawohner-Abig / Mitwirkigs-Aalass
 ## Nachbarschaft · Thema · Datum · Moderator
 
 ---

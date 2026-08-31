@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beratungsanfrage des Betriebsrats
+title: Beratungsanfrage Betriebsrat / Mitbestimmung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Beratungsanfrage des Betriebsrats
+# Beratungsanfrage Betriebsrat / Mitbestimmung
 ## Betreff · Direktor · Betriebsrat · Datum
 
 ---

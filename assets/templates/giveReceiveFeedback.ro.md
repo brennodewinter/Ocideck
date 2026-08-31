@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: A da sau a primi critici
+title: A oferi sau a primi critici
 language: ro
 ---
 
 <!-- _class: title -->
 
-# A da sau a primi critici
+# A oferi sau a primi critici
 ## Cine · Subiect · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Feiligensbriefing / ferskowingsstart
+title: Feiligensbriefing / tsjinststart
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Feiligensbriefing / ferskowingsstart
+# Feiligensbriefing / tsjinststart
 ## Datum · Shift · Site / lokaasje · Shift supervisor
 
 ---

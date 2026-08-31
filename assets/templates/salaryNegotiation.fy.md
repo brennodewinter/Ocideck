@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Salaris ûnderhanneling
+title: Salarisûnderhanneling
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Salaris ûnderhanneling
+# Salarisûnderhanneling
 ## Wa · Rol · Datum
 
 ---

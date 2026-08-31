@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ohu modelleerimise seanss
+title: Ohumodelleerimise sessioon
 language: et
 ---
 
 <!-- _class: title -->
 
-# Ohu modelleerimise seanss
+# Ohumodelleerimise sessioon
 ## Süsteem · Kuupäev · Läbiviija · Osalejad
 
 ---

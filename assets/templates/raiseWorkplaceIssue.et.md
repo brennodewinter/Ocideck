@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Probleemi tõstatamine tööl
+title: Probleemi tõstatamine töökohal
 language: et
 ---
 
 <!-- _class: title -->
 
-# Probleemi tõstatamine tööl
+# Probleemi tõstatamine töökohal
 ## Kes · Teema · Kuupäev
 
 ---

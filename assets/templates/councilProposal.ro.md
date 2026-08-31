@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Consiliu / propunere executivă
+title: Propunere pentru consiliu / executiv
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Consiliu / propunere executivă
+# Propunere pentru consiliu / executiv
 ## Subiect · Portofoliu · Număr de înregistrare · Autor
 
 ---

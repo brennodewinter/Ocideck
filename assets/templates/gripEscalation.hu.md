@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP eszkaláció
+title: GRIP-szintemelés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# GRIP eszkaláció
+# GRIP-szintemelés
 ## Esemény · Dátum és idő · Vezető · Aktuális GRIP szint
 
 ---

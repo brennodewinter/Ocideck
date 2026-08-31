@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž posádky / odjezdu
+title: Briefing posádky / před odletem
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž posádky / odjezdu
+# Briefing posádky / před odletem
 ## Let · Posádka · Datum · Čas odletu
 
 ---

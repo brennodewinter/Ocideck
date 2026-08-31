@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Άσκηση επί τραπέζης / δοκιμή κρίσης
+title: Άσκηση tabletop / άσκηση κρίσης
 language: el
 ---
 
 <!-- _class: title -->
 
-# Άσκηση επί τραπέζης / δοκιμή κρίσης
+# Άσκηση tabletop / άσκηση κρίσης
 
 ---
 

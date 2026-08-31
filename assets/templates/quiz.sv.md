@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Interaktiv frågesport
+title: Interaktivt quiz
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Interaktiv frågesport
+# Interaktivt quiz
 
 ---
 

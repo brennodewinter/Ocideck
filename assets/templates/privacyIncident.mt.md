@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valutazzjoni ta' ksur tad-dejta / inċident tal-privatezza
+title: Valutazzjoni ta' ksur ta' data / inċident ta' privatezza
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Valutazzjoni ta' ksur tad-dejta / inċident tal-privatezza
+# Valutazzjoni ta' ksur ta' data / inċident ta' privatezza
 
 ---
 

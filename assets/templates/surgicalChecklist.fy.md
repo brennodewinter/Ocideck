@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Surgical Safety checklist (WHO)
+title: Sjirurgyske feiligenskontrôle (WHO)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Surgical Safety checklist (WHO)
+# Sjirurgyske feiligenskontrôle (WHO)
 ## Proseduere · Pasjint · OF · Datum
 
 ---

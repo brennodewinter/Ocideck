@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seiceáil aclaíochta-le-eitilt IMSAFE
+title: IMSAFE seiceáil oiriúnachta don eitilt
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seiceáil aclaíochta-le-eitilt IMSAFE
+# IMSAFE seiceáil oiriúnachta don eitilt
 ## Píolótach · Eitilte · Dáta · Ní thagann an tseiceáil seo in ionad breithiúnas leighis
 
 ---

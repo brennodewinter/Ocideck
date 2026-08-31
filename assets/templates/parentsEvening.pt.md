@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Noite de pais/noite informativa
+title: Reunião de pais / sessão informativa
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Noite de pais/noite informativa
+# Reunião de pais / sessão informativa
 ## Turma ou grupo · Ano letivo · Localização
 
 ---

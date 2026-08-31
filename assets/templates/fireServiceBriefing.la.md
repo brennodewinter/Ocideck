@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ignis officium briefing (responsio et exercitatio)
+title: Instructio vigilum ignis (missio et exercitatio)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Ignis officium briefing (responsio et exercitatio)
+# Instructio vigilum ignis (missio et exercitatio)
 ## Object · Date et tempus · Incident imperator vel dux exercent · Crew
 
 ---

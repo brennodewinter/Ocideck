@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Malum nuntium delivering
+title: Malum nuntium afferre
 language: la
 ---
 
 <!-- _class: title -->
 
-# Malum nuntium delivering
+# Malum nuntium afferre
 ## Quibus ·nuntius · Date
 
 ---

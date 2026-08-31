@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Business case/investeringsförslag
+title: Businesscase / investeringsförslag
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Business case/investeringsförslag
+# Businesscase / investeringsförslag
 ## Förslag · Författare · Beslutsinstans · Datum
 
 ---

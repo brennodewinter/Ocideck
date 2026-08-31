@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Συζήτηση για μια σύγκρουση
+title: Επίλυση σύγκρουσης με συζήτηση
 language: el
 ---
 
 <!-- _class: title -->
 
-# Συζήτηση για μια σύγκρουση
+# Επίλυση σύγκρουσης με συζήτηση
 ## Ποιος · Για τι · Ημερομηνία
 
 ---

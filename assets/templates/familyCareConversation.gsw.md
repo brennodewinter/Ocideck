@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Familiengespräch über Pflege und Pflege
+title: Familiegspröch über Pfleg und Aaghörigepfleg
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Familiengespräch über Pflege und Pflege
+# Familiegspröch über Pfleg und Aaghörigepfleg
 ## Thema · Datum · Moderator · Teilnehmer
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ag iarraidh tuilleadh freagrachta
+title: Níos mó freagrachta a iarraidh
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ag iarraidh tuilleadh freagrachta
+# Níos mó freagrachta a iarraidh
 ## Cé · Ról reatha · Dáta
 
 ---

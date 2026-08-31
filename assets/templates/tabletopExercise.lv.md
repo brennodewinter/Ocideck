@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vingrinājums uz galda / krīzes treniņš
+title: Galda mācības / krīzes mācības
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Vingrinājums uz galda / krīzes treniņš
+# Galda mācības / krīzes mācības
 
 ---
 

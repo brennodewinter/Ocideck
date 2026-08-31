@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Decisão de arquitetura/apresentação ADR
+title: Decisão de arquitetura / apresentação de ADR
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Decisão de arquitetura/apresentação ADR
+# Decisão de arquitetura / apresentação de ADR
 
 ---
 

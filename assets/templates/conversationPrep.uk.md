@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Підготуйте бесіду
+title: Підготувати розмову
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Підготуйте бесіду
+# Підготувати розмову
 ## Хто · Тема · Дата
 
 ---

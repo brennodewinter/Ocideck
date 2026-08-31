@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Informacijos sauga: RASCI / atsakomybė“
+title: "Informacijos sauga: RASCI / TVB"
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Informacijos sauga: RASCI / pareigos
+# Informacijos sauga: RASCI / TVB
 
 ---
 

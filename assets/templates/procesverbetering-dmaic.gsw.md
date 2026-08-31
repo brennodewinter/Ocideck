@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Prozessverbesserung: DMAIC-Projekt“
+title: "Prozessverbesserig: DMAIC-Projäkt"
 language: gsw
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Prozessverbesserung: DMAIC-Projekt
+# Prozessverbesserig: DMAIC-Projäkt
 
 ---
 

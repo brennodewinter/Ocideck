@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prasa lielāku atbildību
+title: Lūgums pēc lielākas atbildības
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Prasa lielāku atbildību
+# Lūgums pēc lielākas atbildības
 ## Kurš · Pašreizējā loma · Datums
 
 ---

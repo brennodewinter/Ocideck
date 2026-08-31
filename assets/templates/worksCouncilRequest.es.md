@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Solicitud de asesoría al comité de empresa
+title: Solicitud de dictamen al comité de empresa
 language: es
 ---
 
 <!-- _class: title -->
 
-# Solicitud de asesoría al comité de empresa
+# Solicitud de dictamen al comité de empresa
 ## Tema · Director · Comité de empresa · Fecha
 
 ---

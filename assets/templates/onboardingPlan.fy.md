@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Onboardingplan (30-60-90 dagen)
+title: Ynwurkplan (30-60-90 dagen)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Onboardingplan (30-60-90 dagen)
+# Ynwurkplan (30-60-90 dagen)
 ## Nije hier · Rol · Gids · Begjindatum
 
 ---

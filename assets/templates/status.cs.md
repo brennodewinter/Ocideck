@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stavový briefing
+title: Statusový briefing
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Stavový briefing
+# Statusový briefing
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding / exitus
+title: Digressio / offboarding
 language: la
 ---
 
 <!-- _class: title -->
 
-# Offboarding / exitus
+# Digressio / offboarding
 ## Employee · Munus · Opus diei extremum · Procurator
 
 ---

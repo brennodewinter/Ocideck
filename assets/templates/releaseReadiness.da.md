@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / frigivelsesberedskab
+title: CAB / release readiness
 language: da
 ---
 
 <!-- _class: title -->
 
-# CAB / frigivelsesberedskab
+# CAB / release readiness
 
 ---
 

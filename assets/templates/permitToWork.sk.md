@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Povolenie pracovať
+title: Povolenie na prácu (permit to work)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Povolenie pracovať
+# Povolenie na prácu (permit to work)
 ## Práca · Miesto · Platnosť od–do · Vydavateľ povolenia
 
 ---

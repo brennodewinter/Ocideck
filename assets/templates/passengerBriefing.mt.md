@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informazzjoni għall-passiġġieri (avjazzjoni ġenerali)
+title: Briefing tal-passiġġieri (avjazzjoni ġenerali)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Informazzjoni għall-passiġġieri (avjazzjoni ġenerali)
+# Briefing tal-passiġġieri (avjazzjoni ġenerali)
 ## Ajruplani · Titjira · Bdot fil-kmand
 
 ---

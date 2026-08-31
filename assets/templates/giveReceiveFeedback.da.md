@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: At give eller modtage kritik
+title: Give eller modtage kritik
 language: da
 ---
 
 <!-- _class: title -->
 
-# At give eller modtage kritik
+# Give eller modtage kritik
 ## Hvem · Emne · Dato
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Twassil ta' aħbar ħażina
+title: Twassal aħbar ħażina
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Twassil ta' aħbar ħażina
+# Twassal aħbar ħażina
 ## Lil min · L-aħbarijiet · Data
 
 ---

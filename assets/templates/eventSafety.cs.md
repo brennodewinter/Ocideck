@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž o události a bezpečnosti davu
+title: Briefing k akci a bezpečnosti davu
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž o události a bezpečnosti davu
+# Briefing k akci a bezpečnosti davu
 ## Akce · Místo · Datum · Koordinátor
 
 ---

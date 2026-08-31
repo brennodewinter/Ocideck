@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Serata genitori/serata informativa
+title: Riunione con i genitori / serata informativa
 language: it
 ---
 
 <!-- _class: title -->
 
-# Serata genitori/serata informativa
+# Riunione con i genitori / serata informativa
 ## Classe o gruppo · Anno scolastico · Ubicazione
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przegląd sprintu/demo
+title: Przegląd sprintu / demo
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przegląd sprintu/demo
+# Przegląd sprintu / demo
 ## Zespół · Sprint · Randka
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE major-incident fama
+title: METHANE nuntiatio incidentis maioris
 language: la
 ---
 
 <!-- _class: title -->
 
-# METHANE major-incident fama
+# METHANE nuntiatio incidentis maioris
 ## Incidens · Locus · Dies et dies · Notarius
 
 ---

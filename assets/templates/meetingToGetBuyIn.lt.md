@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ką nors padaryti per susitikimą
+title: Kaip pasiekti tikslą susirinkime
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Ką nors padaryti per susitikimą
+# Kaip pasiekti tikslą susirinkime
 ## Posėdis · Reikalingas sprendimas · Data
 
 ---

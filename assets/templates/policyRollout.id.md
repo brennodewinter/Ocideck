@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Peluncuran kebijakan/rencana implementasi
+title: Peluncuran kebijakan / rencana implementasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Peluncuran kebijakan/rencana implementasi
+# Peluncuran kebijakan / rencana implementasi
 
 ---
 

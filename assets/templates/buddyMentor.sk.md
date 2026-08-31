@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plán kamaráta / mentora
+title: Plán buddyho / mentora
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Plán kamaráta / mentora
+# Plán buddyho / mentora
 ## Nováčik · Kamarát alebo mentor · Dátum začiatku
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Planul de sarcini pentru siguranța informațiilor
+title: Plan de sarcini de securitate
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Planul de sarcini pentru siguranța informațiilor
+# Plan de sarcini de securitate
 
 ---
 

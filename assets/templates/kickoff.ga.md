@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tús an tionscadail / tús an tionscadail
+title: Tús tionscadail / kick-off
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tús an tionscadail / tús an tionscadail
+# Tús tionscadail / kick-off
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evaluación de brecha de datos / incidente de privacidad
+title: Brecha de datos / evaluación de incidente de privacidad
 language: es
 ---
 
 <!-- _class: title -->
 
-# Evaluación de brecha de datos / incidente de privacidad
+# Brecha de datos / evaluación de incidente de privacidad
 
 ---
 

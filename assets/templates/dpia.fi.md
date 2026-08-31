@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / tietosuojavaikutusten arviointi
+title: DPIA / tietosuojan vaikutustenarviointi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# DPIA / tietosuojavaikutusten arviointi
+# DPIA / tietosuojan vaikutustenarviointi
 
 ---
 

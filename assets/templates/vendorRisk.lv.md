@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Piegādātāja novērtējums / pārdevēja risks
+title: Piegādātāju izvērtējums / vendor risk
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Piegādātāja novērtējums / pārdevēja risks
+# Piegādātāju izvērtējums / vendor risk
 
 ---
 

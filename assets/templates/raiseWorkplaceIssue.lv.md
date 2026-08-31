@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Problēmas celšana darbā
+title: Problēmas izvirzīšana darba vietā
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Problēmas celšana darbā
+# Problēmas izvirzīšana darba vietā
 ## Kurš · Tēma · Datums
 
 ---

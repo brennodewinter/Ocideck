@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Att sätta gränser
+title: Sätta gränser
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Att sätta gränser
+# Sätta gränser
 ## Med vem · Om vad · Datum
 
 ---

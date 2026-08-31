@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing do serviço de bombeiros (resposta e exercício)
+title: Briefing dos bombeiros (intervenção e exercício)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Briefing do serviço de bombeiros (resposta e exercício)
+# Briefing dos bombeiros (intervenção e exercício)
 ## Objeto · Data e hora · Comandante do incidente ou líder do exercício · Tripulação
 
 ---

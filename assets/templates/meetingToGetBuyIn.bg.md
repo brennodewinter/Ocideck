@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Свършване на нещо на среща
+title: Постигане на нещо на срещата
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Свършване на нещо на среща
+# Постигане на нещо на срещата
 ## Среща · Поискано решение · Дата
 
 ---

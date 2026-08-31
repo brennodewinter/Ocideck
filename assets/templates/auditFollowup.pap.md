@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Resultadonan di ouditoria i siguimentu
+title: Resultadonan di audit i seguimentu
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Resultadonan di ouditoria i siguimentu
+# Resultadonan di audit i seguimentu
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ορισμός ορίων
+title: Θέσπιση ορίων
 language: el
 ---
 
 <!-- _class: title -->
 
-# Ορισμός ορίων
+# Θέσπιση ορίων
 ## Με ποιον · Για τι · Ημερομηνία
 
 ---

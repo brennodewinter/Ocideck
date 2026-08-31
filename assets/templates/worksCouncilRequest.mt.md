@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Talba għall-parir tal-kunsill tax-xogħol
+title: Talba għal parir lill-kunsill tal-ħaddiema
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Talba għall-parir tal-kunsill tax-xogħol
+# Talba għal parir lill-kunsill tal-ħaddiema
 ## Suġġett · Direttur · Kunsill tax-xogħol · Data
 
 ---

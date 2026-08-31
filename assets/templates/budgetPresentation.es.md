@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Presentación de presupuesto
+title: Presentación del presupuesto
 language: es
 ---
 
 <!-- _class: title -->
 
-# Presentación de presupuesto
+# Presentación del presupuesto
 ## Organización · Año presupuestario · Presentador
 
 ---

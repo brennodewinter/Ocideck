@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Najświeższy raport MIAUW
+title: Raport z pentestu MIAUW
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Najświeższy raport MIAUW
+# Raport z pentestu MIAUW
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Příprava letu PPL
+title: Předletová příprava PPL
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Příprava letu PPL
+# Předletová příprava PPL
 ## Datum · Volací znak · Trasa · PIC
 
 ---

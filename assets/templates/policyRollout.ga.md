@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rolladh amach beartais / plean forfheidhmithe
+title: Beartas a chur i bhfeidhm / plean forfheidhmithe
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Rolladh amach beartais / plean forfheidhmithe
+# Beartas a chur i bhfeidhm / plean forfheidhmithe
 
 ---
 

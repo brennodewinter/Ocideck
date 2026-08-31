@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BOB-Krisenbericht
+title: BOB-Chrisebricht
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# BOB-Krisenbericht
+# BOB-Chrisebricht
 
 ---
 

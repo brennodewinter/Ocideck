@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikat wstępny
+title: Wstępne omówienie komunikacji
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Komunikat wstępny
+# Wstępne omówienie komunikacji
 
 ---
 

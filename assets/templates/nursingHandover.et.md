@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Õe vahetuse üleandmine
+title: Õendusvahetuse üleandmine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Õe vahetuse üleandmine
+# Õendusvahetuse üleandmine
 ## Ward · Vahetus · Kellelt kellele · Kuupäev
 
 ---

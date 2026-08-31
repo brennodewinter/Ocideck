@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kritik geben oder annehmen
+title: Kritik gä oder überchoo
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Kritik geben oder annehmen
+# Kritik gä oder überchoo
 ## Wer · Thema · Datum
 
 ---

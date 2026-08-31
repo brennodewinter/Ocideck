@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Repaso / demostrashon di sprint
+title: Sprint review / demo
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Repaso / demostrashon di sprint
+# Sprint review / demo
 ## Tim · Sprint · Fecha
 
 ---

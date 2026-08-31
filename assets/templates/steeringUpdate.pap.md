@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komishon di maneho / aktualisashon di hunta di proyekto
+title: Grupo di direkshon / update di project board
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Komishon di maneho / aktualisashon di hunta di proyekto
+# Grupo di direkshon / update di project board
 
 ---
 

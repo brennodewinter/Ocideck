@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Noite de residentes/reunião de participação
+title: Reunião de moradores / sessão participativa
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Noite de residentes/reunião de participação
+# Reunião de moradores / sessão participativa
 ## Bairro · Tema · Data · Facilitador
 
 ---

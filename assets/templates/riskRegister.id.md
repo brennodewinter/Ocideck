@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analisis risiko / daftar risiko
+title: Analisis risiko / risk register
 language: id
 ---
 
 <!-- _class: title -->
 
-# Analisis risiko / daftar risiko
+# Analisis risiko / risk register
 
 ---
 

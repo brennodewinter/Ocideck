@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing pentru trecerea podului
+title: Briefing maritim de pasaj / punte de comandă
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Briefing pentru trecerea podului
+# Briefing maritim de pasaj / punte de comandă
 ## Călătorie · Navă · Data · Program de vizionare
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obchodní případ / investiční návrh
+title: Business case / investiční návrh
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Obchodní případ / investiční návrh
+# Business case / investiční návrh
 ## Návrh · Autor · Orgán rozhodnutí · Datum
 
 ---

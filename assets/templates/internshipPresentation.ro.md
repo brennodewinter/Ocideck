@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prezentare de stagiu
+title: Prezentarea stagiului
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Prezentare de stagiu
+# Prezentarea stagiului
 ## Companie · Program · Perioada · Nume
 
 ---

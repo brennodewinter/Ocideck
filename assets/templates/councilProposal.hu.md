@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tanács / végrehajtó javaslat
+title: Előterjesztés a testületnek / a vezetésnek
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Tanács / végrehajtó javaslat
+# Előterjesztés a testületnek / a vezetésnek
 ## Tárgy · Portfólió · Regisztrációs szám · Szerző
 
 ---

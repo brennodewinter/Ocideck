@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Razgovor o alatima / analiza rizika u zadnjem trenutku
+title: Toolbox / LMRA sigurnosna provjera
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Razgovor o alatima / analiza rizika u zadnjem trenutku
+# Toolbox / LMRA sigurnosna provjera
 ## Posao · Mjesto · Datum · Posada
 
 ---

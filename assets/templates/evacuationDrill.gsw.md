@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuierungs- und Erstreaktionsübung
+title: Rüümigs- und BHV-Übig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Evakuierungs- und Erstreaktionsübung
+# Rüümigs- und BHV-Übig
 ## Standort · Datum · Übungsleiter · Szenario
 
 ---

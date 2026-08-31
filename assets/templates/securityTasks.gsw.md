@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aufgabenplan zur Informationssicherheit
+title: Security-Ufgabeplan
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Aufgabenplan zur Informationssicherheit
+# Security-Ufgabeplan
 
 ---
 

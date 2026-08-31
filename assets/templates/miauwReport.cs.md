@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW předběžná zpráva
+title: Zpráva o pentestu MIAUW
 language: cs
 ---
 
 <!-- _class: title -->
 
-# MIAUW předběžná zpráva
+# Zpráva o pentestu MIAUW
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di pasashi di brùg
+title: Briefing di pasashi / brùg marítimo
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di pasashi di brùg
+# Briefing di pasashi / brùg marítimo
 ## Biahe · Barku · Fecha · Orario di wak
 
 ---

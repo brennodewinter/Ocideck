@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kirurgisen turvallisuuden tarkistuslista (WHO)
+title: Kirurgian turvallisuustarkistuslista (WHO)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Kirurgisen turvallisuuden tarkistuslista (WHO)
+# Kirurgian turvallisuustarkistuslista (WHO)
 ## Toimenpide · Potilas · TAI · Päivämäärä
 
 ---

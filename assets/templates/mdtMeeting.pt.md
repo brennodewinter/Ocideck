@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunião de equipe multidisciplinar (MDT)
+title: Reunião multidisciplinar (MDT)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Reunião de equipe multidisciplinar (MDT)
+# Reunião multidisciplinar (MDT)
 ## Caso · Data · Presidente · Participantes
 
 ---

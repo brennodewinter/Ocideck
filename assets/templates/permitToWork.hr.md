@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dozvola za rad
+title: Radna dozvola (permit to work)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Dozvola za rad
+# Radna dozvola (permit to work)
 ## Posao · Lokacija · Vrijedi od–do · Izdavatelj dozvole
 
 ---

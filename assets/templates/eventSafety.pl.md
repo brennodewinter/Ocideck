@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa dotycząca wydarzeń i bezpieczeństwa tłumu
+title: Briefing wydarzenia i bezpieczeństwa tłumu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa dotycząca wydarzeń i bezpieczeństwa tłumu
+# Briefing wydarzenia i bezpieczeństwa tłumu
 ## Wydarzenie · Miejsce · Data · Koordynator
 
 ---

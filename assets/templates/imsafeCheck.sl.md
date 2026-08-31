@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE preverjanje sposobnosti za letenje
+title: IMSAFE preverjanje sposobnosti za let
 language: sl
 ---
 
 <!-- _class: title -->
 
-# IMSAFE preverjanje sposobnosti za letenje
+# IMSAFE preverjanje sposobnosti za let
 ## Pilot · Let · Datum · To preverjanje ne nadomesti zdravniške presoje
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprendimų priėmimo susirinkimas
+title: Sprendimų priėmimo posėdis
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Sprendimų priėmimo susirinkimas
+# Sprendimų priėmimo posėdis
 ## Susirinkimas · Data · Pirmininkas · Dalyviai
 
 ---

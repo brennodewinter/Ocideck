@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Post-recensionem incident / Lectiones didicit
+title: Recognitio post incidens / lectiones acceptae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Post-recensionem incident / Lectiones didicit
+# Recognitio post incidens / lectiones acceptae
 
 ---
 

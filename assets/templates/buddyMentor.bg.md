@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: План за приятел/ментор
+title: План за бъди / ментор
 language: bg
 ---
 
 <!-- _class: title -->
 
-# План за приятел/ментор
+# План за бъди / ментор
 ## Новодошъл · Приятел или ментор · Начална дата
 
 ---

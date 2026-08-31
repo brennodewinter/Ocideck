@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Enforcement Briefing (BOA)
+title: Vollzugs-Briefing (BOA)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Enforcement Briefing (BOA)
+# Vollzugs-Briefing (BOA)
 ## Datum · Schicht · Arbeitsbereich/Bezirk · Koordinator
 
 ---

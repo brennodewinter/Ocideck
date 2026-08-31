@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / preparashon pa liberashon
+title: CAB / release readiness
 language: pap
 ---
 
 <!-- _class: title -->
 
-# CAB / preparashon pa liberashon
+# CAB / release readiness
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Budget praesentationis
+title: Praesentatio rationis sumptuum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Budget praesentationis
+# Praesentatio rationis sumptuum
 ## Organization · Donec annus · Presenter
 
 ---

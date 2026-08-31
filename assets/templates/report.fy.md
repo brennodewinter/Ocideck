@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ferslach
+title: Rapportaazje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ferslach
+# Rapportaazje
 
 ---
 

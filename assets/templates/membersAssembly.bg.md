@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Общо събрание (AGM)
+title: Общо събрание на членовете
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Общо събрание (AGM)
+# Общо събрание на членовете
 ## Организация · Дата · Председател · Присъстващи членове
 
 ---

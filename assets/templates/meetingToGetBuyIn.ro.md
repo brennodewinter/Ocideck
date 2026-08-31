@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: A face ceva într-o întâlnire
+title: A obține ceva într-o ședință
 language: ro
 ---
 
 <!-- _class: title -->
 
-# A face ceva într-o întâlnire
+# A obține ceva într-o ședință
 ## Ședință · Solicitare decizie · Data
 
 ---

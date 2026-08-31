@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Első nap / indukció
+title: Első nap / bevezetés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Első nap / indukció
+# Első nap / bevezetés
 ## Új alkalmazott · Szerep · Útmutató · Dátum
 
 ---

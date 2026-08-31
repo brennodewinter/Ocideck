@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Žádost o radu podnikové rady
+title: Žádost o vyjádření rady zaměstnanců
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Žádost o radu podnikové rady
+# Žádost o vyjádření rady zaměstnanců
 ## Předmět · Ředitel · Podniková rada · Datum
 
 ---

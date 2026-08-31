@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: fuga debriefing
+title: Relatio post volatum
 language: la
 ---
 
 <!-- _class: title -->
 
-# fuga debriefing
+# Relatio post volatum
 ## Fuga · Date · Crew
 
 ---

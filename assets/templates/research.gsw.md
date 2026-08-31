@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Forschungsnarrativ
+title: Untersuechigs-Gschicht
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Forschungsnarrativ
+# Untersuechigs-Gschicht
 
 ---
 

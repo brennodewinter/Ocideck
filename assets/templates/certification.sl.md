@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Napredek pri certificiranju
+title: Napredek certificiranja
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Napredek pri certificiranju
+# Napredek certificiranja
 
 ---
 

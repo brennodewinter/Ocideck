@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Resumo de status
+title: Briefing de estado
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Resumo de status
+# Briefing de estado
 
 ---
 

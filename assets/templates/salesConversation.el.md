@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Συζήτηση πωλήσεων
+title: Συνομιλία πωλήσεων
 language: el
 ---
 
 <!-- _class: title -->
 
-# Συζήτηση πωλήσεων
+# Συνομιλία πωλήσεων
 ## Προοπτικός πελάτης · Υπεύθυνος επικοινωνίας · Προσφορά · Ημερομηνία
 
 ---

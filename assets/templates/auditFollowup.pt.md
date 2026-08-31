@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Resultados da auditoria e acompanhamento
+title: Constatações de auditoria e seguimento
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Resultados da auditoria e acompanhamento
+# Constatações de auditoria e seguimento
 
 ---
 

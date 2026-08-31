@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunión de vecinos / reunión de participación
+title: Reunión de vecinos / encuentro participativo
 language: es
 ---
 
 <!-- _class: title -->
 
-# Reunión de vecinos / reunión de participación
+# Reunión de vecinos / encuentro participativo
 ## Barrio · Tema · Fecha · Facilitador
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing opérationnel de la police
+title: Briefing opérationnel de police
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Briefing opérationnel de la police
+# Briefing opérationnel de police
 ## Date · Equipe · Zone · Briefer
 
 ---

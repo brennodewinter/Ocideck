@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Infrakshon di dato / evaluashon di insidente di privasidat
+title: Fuga di dato / evaluashon di insidente di privasidat
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Infrakshon di dato / evaluashon di insidente di privasidat
+# Fuga di dato / evaluashon di insidente di privasidat
 
 ---
 

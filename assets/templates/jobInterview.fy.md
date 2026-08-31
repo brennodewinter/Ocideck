@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Job ynterview
+title: Sollisitaasjepetear
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Job ynterview
+# Sollisitaasjepetear
 ## Rol · Wurkjouwer · Datum · Ynterviewers
 
 ---

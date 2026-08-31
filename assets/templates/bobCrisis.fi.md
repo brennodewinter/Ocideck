@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: ROP-kriisiraportti
+title: BOB-kriisiraportointi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# ROP-kriisiraportti
+# BOB-kriisiraportointi
 
 ---
 

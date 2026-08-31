@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Koosolekul midagi korda saata
+title: Kuidas saada koosolekul soovitu
 language: et
 ---
 
 <!-- _class: title -->
 
-# Koosolekul midagi korda saata
+# Kuidas saada koosolekul soovitu
 ## Koosolek · Nõutud otsus · Kuupäev
 
 ---

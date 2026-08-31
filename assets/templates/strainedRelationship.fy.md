@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: It besprekken fan in spande relaasje
+title: In stroef rinnende relaasje besprekke
 language: fy
 ---
 
 <!-- _class: title -->
 
-# It besprekken fan in spande relaasje
+# In stroef rinnende relaasje besprekke
 ## Mei wa · Oer wat · Wannear
 
 ---

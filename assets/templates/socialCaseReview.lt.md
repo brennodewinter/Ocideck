@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Socialinio domeno atvejo apžvalga
+title: Atvejų aptarimas socialinėje srityje
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Socialinio domeno atvejo apžvalga
+# Atvejų aptarimas socialinėje srityje
 ## Komanda · Data · Pirmininkė
 
 ---

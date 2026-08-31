@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Σχέδιο εργασιών ασφάλειας πληροφοριών
+title: Σχέδιο εργασιών ασφάλειας
 language: el
 ---
 
 <!-- _class: title -->
 
-# Σχέδιο εργασιών ασφάλειας πληροφοριών
+# Σχέδιο εργασιών ασφάλειας
 
 ---
 

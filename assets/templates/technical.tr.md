@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Teknik açıklayıcı
+title: Teknik açıklama
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Teknik açıklayıcı
+# Teknik açıklama
 
 ---
 

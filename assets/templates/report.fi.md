@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raportoi
+title: Raportointi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Raportoi
+# Raportointi
 
 ---
 

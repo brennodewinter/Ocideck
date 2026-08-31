@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / prontezza għar-rilaxx
+title: CAB / tħejjija għar-rilaxx
 language: mt
 ---
 
 <!-- _class: title -->
 
-# CAB / prontezza għar-rilaxx
+# CAB / tħejjija għar-rilaxx
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Skeda ta' żmien tal-proġett
+title: Kronoloġija tal-proġett
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Skeda ta' żmien tal-proġett
+# Kronoloġija tal-proġett
 
 ---
 

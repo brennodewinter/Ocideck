@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kopsapulce (AGM)
+title: Biedru kopsapulce
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Kopsapulce (AGM)
+# Biedru kopsapulce
 ## Organizācija · Datums · Priekšsēdētājs · Dalībnieki
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Druileáil aslonnaithe & céadfhreagartha
+title: Cleachtadh aslonnaithe agus BHV
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Druileáil aslonnaithe & céadfhreagartha
+# Cleachtadh aslonnaithe agus BHV
 ## Suíomh · Dáta · Ceannaire Druileála · Cás
 
 ---

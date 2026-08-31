@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint anmeldelse / demo
+title: Sprint review / demo
 language: da
 ---
 
 <!-- _class: title -->
 
-# Sprint anmeldelse / demo
+# Sprint review / demo
 ## Hold · Sprint · Dato
 
 ---

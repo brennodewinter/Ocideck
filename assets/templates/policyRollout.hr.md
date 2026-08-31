@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uvođenje politike / plan provedbe
+title: Uvođenje politike / plan implementacije
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Uvođenje politike / plan provedbe
+# Uvođenje politike / plan implementacije
 
 ---
 

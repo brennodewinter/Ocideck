@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Datu pārkāpumu/privātuma incidentu novērtējums
+title: Datu noplūdes / privātuma incidenta izvērtējums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Datu pārkāpumu/privātuma incidentu novērtējums
+# Datu noplūdes / privātuma incidenta izvērtējums
 
 ---
 

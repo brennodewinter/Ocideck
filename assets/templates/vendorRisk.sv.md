@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leverantörsbedömning / leverantörsrisk
+title: Leverantörsbedömning / vendor risk
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Leverantörsbedömning / leverantörsrisk
+# Leverantörsbedömning / vendor risk
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport de criză BOB
+title: Raportare de criză BOB
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Raport de criză BOB
+# Raportare de criză BOB
 
 ---
 

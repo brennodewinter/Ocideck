@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Security briefing / subcinctus initio
+title: Instructio securitatis / initium custodiae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Security briefing / subcinctus initio
+# Instructio securitatis / initium custodiae
 ## Date · Shift · Site/locus · Shift supervisoris
 
 ---

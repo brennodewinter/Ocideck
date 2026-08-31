@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sessjoni tal-immudellar tat-theddid
+title: Sessjoni ta' threat modeling
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Sessjoni tal-immudellar tat-theddid
+# Sessjoni ta' threat modeling
 ## Sistema · Data · Facilitator · Parteċipanti
 
 ---

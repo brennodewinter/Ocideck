@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Razprava o napetem odnosu
+title: Pogovor o napetem odnosu
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Razprava o napetem odnosu
+# Pogovor o napetem odnosu
 ## S kom · O čem · Kdaj
 
 ---

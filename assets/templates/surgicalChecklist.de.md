@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Checkliste zur chirurgischen Sicherheit (WHO)
+title: Chirurgische Sicherheits-Checkliste (WHO)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Checkliste zur chirurgischen Sicherheit (WHO)
+# Chirurgische Sicherheits-Checkliste (WHO)
 ## Verfahren · Patient · OP · Datum
 
 ---

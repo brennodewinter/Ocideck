@@ -9,7 +9,7 @@ language: cs
 
 <!-- _class: title -->
 
-# Přehled procesů SIPOC
+# Přehled procesu SIPOC
 ## Dodavatel · Vstup · Proces · Výstup · Zákazník
 
 ---

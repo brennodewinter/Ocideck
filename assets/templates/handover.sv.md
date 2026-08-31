@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Överlämning / övergång
+title: Överlämning / handover
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Överlämning / övergång
+# Överlämning / handover
 
 ---
 

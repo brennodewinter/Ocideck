@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preparación de comunicación
+title: Preparación de la comunicación
 language: es
 ---
 
 <!-- _class: title -->
 
-# Preparación de comunicación
+# Preparación de la comunicación
 
 ---
 

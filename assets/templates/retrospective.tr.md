@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektif / ekip iyileştirme
+title: Retrospektif / ekip iyileştirmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Retrospektif / ekip iyileştirme
+# Retrospektif / ekip iyileştirmesi
 
 ---
 

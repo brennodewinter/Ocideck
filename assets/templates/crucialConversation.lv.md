@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sagatavojiet svarīgu sarunu
+title: Sagatavot izšķirošu sarunu
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sagatavojiet svarīgu sarunu
+# Sagatavot izšķirošu sarunu
 
 ## Kurš · Tēma · Datums
 

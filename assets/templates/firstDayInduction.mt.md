@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: L-ewwel jum / induzzjoni
+title: L-ewwel jum / introduzzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# L-ewwel jum / induzzjoni
+# L-ewwel jum / introduzzjoni
 ## Kiri ġdid · Rwol · Gwida · Data
 
 ---

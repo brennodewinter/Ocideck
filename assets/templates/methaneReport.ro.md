@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport de incident major cu metan
+title: METHANE raportare de incident major
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Raport de incident major cu metan
+# METHANE raportare de incident major
 ## Incident · Locație · Data și ora · Reporter
 
 ---

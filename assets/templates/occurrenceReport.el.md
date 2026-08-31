@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αναφορά συμβάντος (δίκαιη κουλτούρα)
+title: Αναφορά συμβάντος (just culture)
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αναφορά συμβάντος (δίκαιη κουλτούρα)
+# Αναφορά συμβάντος (just culture)
 ## Συμβάν · Ημερομηνία και ώρα · Αναφέρων · Εμπλεκόμενοι
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aktualisierung des Lenkungsausschusses/Projektvorstands
+title: Stüürgruppe / Project-Board-Update
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Aktualisierung des Lenkungsausschusses/Projektvorstands
+# Stüürgruppe / Project-Board-Update
 
 ---
 

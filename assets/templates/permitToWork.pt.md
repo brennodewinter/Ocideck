@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permissão para trabalhar
+title: Autorização de trabalho (permit to work)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Permissão para trabalhar
+# Autorização de trabalho (permit to work)
 ## Trabalho · Localização · Válido de–até · Emissor da licença
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vaja evakuacije in prvega odziva
+title: Vaja evakuacije in BHV
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Vaja evakuacije in prvega odziva
+# Vaja evakuacije in BHV
 ## Stran · Datum · Vodja vrtanja · Scenarij
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Εκπαίδευση / εργαστήριο
+title: Εκπαίδευση / workshop
 language: el
 ---
 
 <!-- _class: title -->
 
-# Εκπαίδευση / εργαστήριο
+# Εκπαίδευση / workshop
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tillsynsbriefing (BOA)
+title: Tillsynsgenomgång (BOA)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Tillsynsbriefing (BOA)
+# Tillsynsgenomgång (BOA)
 ## Datum · Skift · Arbetsområde/distrikt · Samordnare
 
 ---

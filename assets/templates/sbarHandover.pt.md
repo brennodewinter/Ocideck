@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Transferência SBAR
+title: Transmissão SBAR
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Transferência SBAR
+# Transmissão SBAR
 ## Paciente · Enfermaria · De quem para quem · Data e hora
 
 ---

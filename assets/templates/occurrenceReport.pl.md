@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport o zdarzeniu (tylko kultura)
+title: Zgłoszenie zdarzenia (just culture)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Raport o zdarzeniu (tylko kultura)
+# Zgłoszenie zdarzenia (just culture)
 ## Zdarzenie · Data i godzina · Reporter · Zaangażowany
 
 ---

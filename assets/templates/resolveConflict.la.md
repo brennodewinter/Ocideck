@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Loquitur per conflictus
+title: Discordiam colloquendo solvere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Loquitur per conflictus
+# Discordiam colloquendo solvere
 ## Quis · Quas · Date
 
 ---

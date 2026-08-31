@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: It ynstellen fan grinzen
+title: Grinzen stelle
 language: fy
 ---
 
 <!-- _class: title -->
 
-# It ynstellen fan grinzen
+# Grinzen stelle
 ## Mei wa · Oer wat · Datum
 
 ---

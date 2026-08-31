@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL flecht tarieding
+title: PPL Flechttarieding
 language: fy
 ---
 
 <!-- _class: title -->
 
-# PPL flecht tarieding
+# PPL Flechttarieding
 ## Datum · Roepsein · Rûte · PIC
 
 ---

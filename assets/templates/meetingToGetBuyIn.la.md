@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Questus quod factum est in conventu
+title: Aliquid in conventu perficere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Questus quod factum est in conventu
+# Aliquid in conventu perficere
 ## Congressus · Decernendum petitum · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Caint bosca uirlisí / anailís riosca ar an nóiméad deireanach
+title: Toolbox / seiceáil sábháilteachta LMRA
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Caint bosca uirlisí / anailís riosca ar an nóiméad deireanach
+# Toolbox / seiceáil sábháilteachta LMRA
 ## Obair · Suíomh · Dáta · Foireann
 
 ---

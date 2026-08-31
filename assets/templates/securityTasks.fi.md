@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tietoturvallisuustehtäväsuunnitelma
+title: Turvallisuustehtävien suunnitelma
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tietoturvallisuustehtäväsuunnitelma
+# Turvallisuustehtävien suunnitelma
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Сеанс моделювання загроз
+title: Сесія моделювання загроз
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Сеанс моделювання загроз
+# Сесія моделювання загроз
 ## Система · Дата · Ведучий · Учасники
 
 ---

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Prosessin parantaminen: 8D-projekti"
+title: "Prosessin parannus: 8D-projekti"
 language: fi
 ocideck_improvement_framework: 8d
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Излизане / изход
+title: Офбординг / напускане
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Излизане / изход
+# Офбординг / напускане
 ## Служител · Роля · Последен работен ден · Ръководител
 
 ---

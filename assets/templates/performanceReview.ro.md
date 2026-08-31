@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analiza performanței
+title: Evaluare a performanței
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Analiza performanței
+# Evaluare a performanței
 ## Cine · Perioada · Data
 
 ---

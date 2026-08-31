@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tráthnóna tuismitheoirí / tráthnóna eolais
+title: Oíche tuismitheoirí / oíche eolais
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tráthnóna tuismitheoirí / tráthnóna eolais
+# Oíche tuismitheoirí / oíche eolais
 ## Rang nó grúpa · Scoilbhliain · Suíomh
 
 ---

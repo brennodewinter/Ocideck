@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prima zi / inducție
+title: Prima zi / introducere
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Prima zi / inducție
+# Prima zi / introducere
 ## Angajare nouă · Rol · Ghid · Data
 
 ---

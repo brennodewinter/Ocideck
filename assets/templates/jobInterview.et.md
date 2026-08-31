@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tööintervjuu
+title: Töövestlus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tööintervjuu
+# Töövestlus
 ## Roll · Tööandja · Kuupäev · Intervjueerijad
 
 ---

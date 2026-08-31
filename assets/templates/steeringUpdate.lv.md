@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vadības komitejas / projekta padomes atjauninājums
+title: Vadības grupa / projekta valdes atjauninājums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Vadības komitejas / projekta padomes atjauninājums
+# Vadības grupa / projekta valdes atjauninājums
 
 ---
 

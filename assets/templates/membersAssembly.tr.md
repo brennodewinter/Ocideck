@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Genel kurul (AGM)
+title: Genel kurul toplantısı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Genel kurul (AGM)
+# Genel kurul toplantısı
 ## Organizasyon · Tarih · Başkan · Mevcut üyeler
 
 ---

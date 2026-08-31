@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Opdatering af styregruppen/projektbestyrelsen
+title: Styregruppe / project board-update
 language: da
 ---
 
 <!-- _class: title -->
 
-# Opdatering af styregruppen/projektbestyrelsen
+# Styregruppe / project board-update
 
 ---
 

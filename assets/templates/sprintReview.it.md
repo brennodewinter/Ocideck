@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisione/dimostrazione dello sprint
+title: Sprint review / demo
 language: it
 ---
 
 <!-- _class: title -->
 
-# Revisione/dimostrazione dello sprint
+# Sprint review / demo
 ## Squadra · Sprint · Data
 
 ---

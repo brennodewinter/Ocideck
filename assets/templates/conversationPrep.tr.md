@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bir konuşma hazırlayın
+title: Görüşme hazırlığı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Bir konuşma hazırlayın
+# Görüşme hazırlığı
 ## Kim · Konu · Tarih
 
 ---

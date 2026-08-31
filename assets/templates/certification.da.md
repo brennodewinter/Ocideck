@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Certificeringsfremskridt
+title: Certificeringsfremdrift
 language: da
 ---
 
 <!-- _class: title -->
 
-# Certificeringsfremskridt
+# Certificeringsfremdrift
 
 ---
 

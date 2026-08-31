@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Engedély a munkára
+title: Munkavégzési engedély (permit to work)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Engedély a munkára
+# Munkavégzési engedély (permit to work)
 ## Munkahely · Hely · Érvényes tól-ig · Engedélykiadó
 
 ---

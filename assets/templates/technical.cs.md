@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Technický vysvětlovač
+title: Technické vysvětlení
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Technický vysvětlovač
+# Technické vysvětlení
 
 ---
 

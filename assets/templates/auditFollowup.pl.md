@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ustalenia z audytu i działania następcze
+title: Ustalenia audytu i działania następcze
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Ustalenia z audytu i działania następcze
+# Ustalenia audytu i działania następcze
 
 ---
 

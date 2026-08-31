@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Usulan dewan/eksekutif
+title: Usulan untuk dewan / eksekutif
 language: id
 ---
 
 <!-- _class: title -->
 
-# Usulan dewan/eksekutif
+# Usulan untuk dewan / eksekutif
 ## Perihal · Portofolio · Nomor registrasi · Penulis
 
 ---

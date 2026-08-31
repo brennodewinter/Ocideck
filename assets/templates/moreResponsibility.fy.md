@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Freegje om mear ferantwurdlikens
+title: Mear ferantwurdlikheid freegje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Freegje om mear ferantwurdlikens
+# Mear ferantwurdlikheid freegje
 ## Wa · Aktuele rol · Datum
 
 ---

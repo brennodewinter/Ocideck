@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan de îmbarcare (30-60-90 de zile)
+title: Plan de integrare (30-60-90 zile)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Plan de îmbarcare (30-60-90 de zile)
+# Plan de integrare (30-60-90 zile)
 ## Angajare nouă · Rol · Ghid · Data începerii
 
 ---

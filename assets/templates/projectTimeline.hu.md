@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekt idővonal
+title: Projekt-idővonal
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Projekt idővonal
+# Projekt-idővonal
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analyse de rentabilisation / proposition d'investissement
+title: Business case / proposition d'investissement
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Analyse de rentabilisation / proposition d'investissement
+# Business case / proposition d'investissement
 ## Proposition · Auteur · Organe décisionnel · Date
 
 ---

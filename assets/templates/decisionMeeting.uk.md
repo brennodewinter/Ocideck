@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Нарада для прийняття рішень
+title: Нарада для ухвалення рішень
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Нарада для прийняття рішень
+# Нарада для ухвалення рішень
 ## Зустріч · Дата · Голова · Учасники
 
 ---

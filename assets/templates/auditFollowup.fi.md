@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tarkastushavainnot ja seuranta
+title: Auditointihavainnot ja jatkotoimet
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tarkastushavainnot ja seuranta
+# Auditointihavainnot ja jatkotoimet
 
 ---
 

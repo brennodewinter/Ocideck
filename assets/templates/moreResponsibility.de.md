@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bitte um mehr Verantwortung
+title: Mehr Verantwortung erbitten
 language: de
 ---
 
 <!-- _class: title -->
 
-# Bitte um mehr Verantwortung
+# Mehr Verantwortung erbitten
 ## Wer · Aktuelle Rolle · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politiikan käyttöönotto-/toteutussuunnitelma
+title: Politiikan käyttöönotto / toteutussuunnitelma
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Politiikan käyttöönotto-/toteutussuunnitelma
+# Politiikan käyttöönotto / toteutussuunnitelma
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Krátké shrnutí
+title: Krátký briefing
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Krátké shrnutí
+# Krátký briefing
 
 ---
 

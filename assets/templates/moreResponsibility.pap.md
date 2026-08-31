@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pidiendo pa mas responsabilidat
+title: Pidi mas responsabilidat
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Pidiendo pa mas responsabilidat
+# Pidi mas responsabilidat
 ## Ken · Rol aktual · Fecha
 
 ---

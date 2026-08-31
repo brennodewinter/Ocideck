@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / privaatsuse mõju hindamine
+title: DPIA / privaatsuse mõjuhinnang
 language: et
 ---
 
 <!-- _class: title -->
 
-# DPIA / privaatsuse mõju hindamine
+# DPIA / privaatsuse mõjuhinnang
 
 ---
 

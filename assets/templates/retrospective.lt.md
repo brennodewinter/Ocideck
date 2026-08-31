@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektyvus / komandos tobulėjimas
+title: Retrospektyva / komandos tobulinimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Retrospektyvus / komandos tobulėjimas
+# Retrospektyva / komandos tobulinimas
 
 ---
 

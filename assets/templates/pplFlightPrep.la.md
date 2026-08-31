@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Praeparatio fugae PPL
+title: Praeparatio volatus PPL
 language: la
 ---
 
 <!-- _class: title -->
 
-# Praeparatio fugae PPL
+# Praeparatio volatus PPL
 ## Dies · Signum vocationis · Iter · PIC
 
 ---

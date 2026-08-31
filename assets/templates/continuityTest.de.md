@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Geschäftskontinuitäts-/DR-Test
+title: Business Continuity / DR-Test
 language: de
 ---
 
 <!-- _class: title -->
 
-# Geschäftskontinuitäts-/DR-Test
+# Business Continuity / DR-Test
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dyskusja na temat napiętego związku
+title: Omówienie napiętej relacji
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Dyskusja na temat napiętego związku
+# Omówienie napiętej relacji
 ## Z kim · O czym · Kiedy
 
 ---

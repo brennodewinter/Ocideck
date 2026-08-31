@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregled slučajeva društvene domene
+title: Rasprava o slučajevima u socijalnom području
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Pregled slučajeva društvene domene
+# Rasprava o slučajevima u socijalnom području
 ## Tim · Datum · Predsjedavajući
 
 ---

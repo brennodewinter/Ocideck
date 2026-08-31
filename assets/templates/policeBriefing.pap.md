@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon operashonal di polis
+title: Briefing operashonal di polis
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon operashonal di polis
+# Briefing operashonal di polis
 ## Fecha · Turno · Área · Mas kòrtiku
 
 ---

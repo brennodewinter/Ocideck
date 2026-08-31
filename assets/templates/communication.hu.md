@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kommunikációs előzetes
+title: Kommunikációs előkészítő megbeszélés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Kommunikációs előzetes
+# Kommunikációs előkészítő megbeszélés
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lista de verificare a siguranței chirurgicale (OMS)
+title: Listă de verificare a siguranței chirurgicale (WHO)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Lista de verificare a siguranței chirurgicale (OMS)
+# Listă de verificare a siguranței chirurgicale (WHO)
 ## Procedură · Pacient · SAU · Data
 
 ---

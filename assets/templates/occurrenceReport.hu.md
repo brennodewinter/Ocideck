@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Előfordulási jelentés (csak kultúra)
+title: Eseményjelentés (just culture)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Előfordulási jelentés (csak kultúra)
+# Eseményjelentés (just culture)
 ## Előfordulás · Dátum és idő · Riporter · Részt vesz
 
 ---

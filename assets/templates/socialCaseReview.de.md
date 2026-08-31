@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Überprüfung des Falles für soziale Domains
+title: Fallbesprechung im Sozialbereich
 language: de
 ---
 
 <!-- _class: title -->
 
-# Überprüfung des Falles für soziale Domains
+# Fallbesprechung im Sozialbereich
 ## Team · Datum · Vorsitz
 
 ---

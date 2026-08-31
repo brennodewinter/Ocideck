@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Erster Tag / Einführung
+title: Erste Tag / Iiefüehrig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Erster Tag / Einführung
+# Erste Tag / Iiefüehrig
 ## Neuer Mitarbeiter · Rolle · Leitfaden · Datum
 
 ---

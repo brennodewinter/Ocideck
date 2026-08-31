@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Transfert / transition
+title: Transfert / passation
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Transfert / transition
+# Transfert / passation
 
 ---
 

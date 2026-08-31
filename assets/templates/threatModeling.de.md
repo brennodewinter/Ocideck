@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sitzung zur Bedrohungsmodellierung
+title: Threat-Modeling-Sitzung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Sitzung zur Bedrohungsmodellierung
+# Threat-Modeling-Sitzung
 ## System · Datum · Moderator · Teilnehmer
 
 ---

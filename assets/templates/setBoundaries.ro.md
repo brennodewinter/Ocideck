@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stabilirea limitelor
+title: A stabili limite
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Stabilirea limitelor
+# A stabili limite
 ## Cu cine · Despre ce · Întâlnire
 
 ---

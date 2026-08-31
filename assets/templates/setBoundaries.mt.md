@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: L-iffissar tal-konfini
+title: Tistabbilixxi limiti
 language: mt
 ---
 
 <!-- _class: title -->
 
-# L-iffissar tal-konfini
+# Tistabbilixxi limiti
 ## Ma' min · Dwar xiex · Data
 
 ---

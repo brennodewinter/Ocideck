@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy-/mentorôfspraak
+title: Buddy- / mentorôfspraak
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Buddy-/mentorôfspraak
+# Buddy- / mentorôfspraak
 ## Nijkommer · Buddy of mentor · Startdatum
 
 ---

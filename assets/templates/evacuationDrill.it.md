@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Esercitazione di evacuazione ed primo intervento
+title: Esercitazione di evacuazione e BHV
 language: it
 ---
 
 <!-- _class: title -->
 
-# Esercitazione di evacuazione ed primo intervento
+# Esercitazione di evacuazione e BHV
 ## Sito · Data · Leader dell'esercitazione · Scenario
 
 ---

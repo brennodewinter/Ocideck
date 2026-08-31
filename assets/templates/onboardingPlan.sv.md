@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Onboarding-plan (30-60-90 dagar)
+title: Introduktionsplan (30-60-90 dagar)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Onboarding-plan (30-60-90 dagar)
+# Introduktionsplan (30-60-90 dagar)
 ## Nyanställning · Roll · Guide · Startdatum
 
 ---

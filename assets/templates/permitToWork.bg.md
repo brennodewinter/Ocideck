@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Разрешение за работа
+title: Разрешение за работа (permit to work)
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Разрешение за работа
+# Разрешение за работа (permit to work)
 ## Работа · Местоположение · Валидно от–до · Издател на разрешително
 
 ---

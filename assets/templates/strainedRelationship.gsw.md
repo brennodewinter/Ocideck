@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskussion über eine angespannte Beziehung
+title: En schwirigi Beziehig bespräche
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Diskussion über eine angespannte Beziehung
+# En schwirigi Beziehig bespräche
 ## Mit wem · Über was · Wann
 
 ---

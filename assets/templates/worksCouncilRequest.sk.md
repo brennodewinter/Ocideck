@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Žiadosť o radu zamestnaneckej rady
+title: Žiadosť o vyjadrenie zamestnaneckej rady
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Žiadosť o radu zamestnaneckej rady
+# Žiadosť o vyjadrenie zamestnaneckej rady
 ## Predmet · Riaditeľ · Podniková rada · Dátum
 
 ---

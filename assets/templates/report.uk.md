@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: звіт
+title: Звіт
 language: uk
 ---
 
 <!-- _class: title -->
 
-# звіт
+# Звіт
 
 ---
 

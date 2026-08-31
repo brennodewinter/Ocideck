@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Béregyeztetés
+title: Bértárgyalás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Béregyeztetés
+# Bértárgyalás
 ## Ki · Szerep · Dátum
 
 ---

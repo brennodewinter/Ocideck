@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox talk / analýza rizik na poslední chvíli
+title: Toolbox / bezpečnostní kontrola LMRA
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Toolbox talk / analýza rizik na poslední chvíli
+# Toolbox / bezpečnostní kontrola LMRA
 ## Práce · Místo · Datum · Posádka
 
 ---

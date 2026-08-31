@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seisiún faisnéise pasáiste droichead
+title: Faisnéisiú muirí pasáiste / droichid
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seisiún faisnéise pasáiste droichead
+# Faisnéisiú muirí pasáiste / droichid
 ## Turas · Long · Dáta · Sceideal faire
 
 ---

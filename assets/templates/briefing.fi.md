@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lyhyt katsaus
+title: Lyhyt briiffi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Lyhyt katsaus
+# Lyhyt briiffi
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ανάλυση κινδύνου / μητρώο κινδύνου
+title: Ανάλυση κινδύνων / μητρώο κινδύνων
 language: el
 ---
 
 <!-- _class: title -->
 
-# Ανάλυση κινδύνου / μητρώο κινδύνου
+# Ανάλυση κινδύνων / μητρώο κινδύνων
 
 ---
 

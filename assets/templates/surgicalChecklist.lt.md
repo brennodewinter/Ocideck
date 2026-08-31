@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Chirurginės saugos kontrolinis sąrašas (PSO)
+title: Chirurginio saugumo kontrolinis sąrašas (WHO)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Chirurginės saugos kontrolinis sąrašas (PSO)
+# Chirurginio saugumo kontrolinis sąrašas (WHO)
 ## Procedūra · Pacientas · ARBA · Data
 
 ---

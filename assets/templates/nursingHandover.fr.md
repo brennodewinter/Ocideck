@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passation de quart de travail en soins infirmiers
+title: Transmission de service infirmier
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Passation de quart de travail en soins infirmiers
+# Transmission de service infirmier
 ## Quartier · Quart · De qui à qui · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Työharjoittelun esittely
+title: Harjoitteluesitys
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Työharjoittelun esittely
+# Harjoitteluesitys
 ## Yritys · Ohjelma · Kausi · Nimi
 
 ---

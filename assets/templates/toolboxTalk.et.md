@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tööriistakasti jutt / viimase hetke riskianalüüs
+title: Toolbox / LMRA ohutuskontroll
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tööriistakasti jutt / viimase hetke riskianalüüs
+# Toolbox / LMRA ohutuskontroll
 ## Töö · Asukoht · Kuupäev · Meeskond
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan penumpang (penerbangan umum)
+title: Briefing penumpang (penerbangan umum)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan penumpang (penerbangan umum)
+# Briefing penumpang (penerbangan umum)
 ## Pesawat · Penerbangan · Pilot sebagai komando
 
 ---

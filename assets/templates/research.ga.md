@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Inste taighde
+title: Scéal taighde
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Inste taighde
+# Scéal taighde
 
 ---
 

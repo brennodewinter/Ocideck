@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Första dagen/induktion
+title: Första dagen / introduktion
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Första dagen/induktion
+# Första dagen / introduktion
 ## Nyanställning · Roll · Guide · Datum
 
 ---

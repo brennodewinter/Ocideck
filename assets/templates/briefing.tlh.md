@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Short briefing
+title: SoQ ngaj
 language: tlh
 ---
 
 <!-- _class: title -->
 
-# Short briefing
+# SoQ ngaj
 
 ---
 

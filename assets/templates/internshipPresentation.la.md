@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nulla praesentationis
+title: Praesentatio tirocinii
 language: la
 ---
 
 <!-- _class: title -->
 
-# Nulla praesentationis
+# Praesentatio tirocinii
 ## Societas · Program · Tempus · Nomen
 
 ---

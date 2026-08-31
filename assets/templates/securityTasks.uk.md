@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: План завдання з інформаційної безпеки
+title: План завдань з безпеки
 language: uk
 ---
 
 <!-- _class: title -->
 
-# План завдання з інформаційної безпеки
+# План завдань з безпеки
 
 ---
 

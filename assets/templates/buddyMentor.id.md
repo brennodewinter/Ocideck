@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rencana sobat/mentor
+title: Rencana buddy / mentor
 language: id
 ---
 
 <!-- _class: title -->
 
-# Rencana sobat/mentor
+# Rencana buddy / mentor
 ## Pendatang baru · Teman atau mentor · Tanggal mulai
 
 ---

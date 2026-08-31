@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Luovutus / siirto
+title: Luovutus / handover
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Luovutus / siirto
+# Luovutus / handover
 
 ---
 

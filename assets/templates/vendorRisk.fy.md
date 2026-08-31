@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beoardieling fan leveransiers / risiko fan leveransiers
+title: Leveransiersbeoardieling / vendor risk
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Beoardieling fan leveransiers / risiko fan leveransiers
+# Leveransiersbeoardieling / vendor risk
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Műszaki magyarázó
+title: Műszaki magyarázat
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Műszaki magyarázó
+# Műszaki magyarázat
 
 ---
 

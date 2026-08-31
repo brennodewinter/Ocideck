@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prehľad výkonnosti
+title: Hodnotiaci pohovor
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Prehľad výkonnosti
+# Hodnotiaci pohovor
 ## Kto · Obdobie · Dátum
 
 ---

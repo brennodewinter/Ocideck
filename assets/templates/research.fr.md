@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Récit de recherche
+title: Récit d'enquête
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Récit de recherche
+# Récit d'enquête
 
 ---
 

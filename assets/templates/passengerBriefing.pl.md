@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa pasażerska (lotnictwo ogólne)
+title: Odprawa pasażerów (lotnictwo ogólne)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa pasażerska (lotnictwo ogólne)
+# Odprawa pasażerów (lotnictwo ogólne)
 ## Samolot · Lot · Pilot dowodzący
 
 ---

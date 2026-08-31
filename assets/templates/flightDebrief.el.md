@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing πτήσης
+title: Απολογισμός πτήσης
 language: el
 ---
 
 <!-- _class: title -->
 
-# Debriefing πτήσης
+# Απολογισμός πτήσης
 ## Πτήση · Ημερομηνία · Πλήρωμα
 
 ---

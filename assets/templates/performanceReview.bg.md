@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Преглед на ефективността
+title: Разговор за оценка на представянето
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Преглед на ефективността
+# Разговор за оценка на представянето
 ## Кой · Период · Дата
 
 ---

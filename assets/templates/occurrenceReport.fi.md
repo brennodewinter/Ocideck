@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Esiintymisraportti (vain kulttuuri)
+title: Poikkeamailmoitus (just culture)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Esiintymisraportti (vain kulttuuri)
+# Poikkeamailmoitus (just culture)
 ## Tapahtuma · Päivämäärä ja aika · Ilmoittaja · Mukana
 
 ---

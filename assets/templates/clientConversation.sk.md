@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Konverzácia s klientom
+title: Rozhovor so zákazníkom
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Konverzácia s klientom
+# Rozhovor so zákazníkom
 ## Klient · Kontaktná osoba · Cieľ · Dátum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Exercițiu de masă / exercițiu de criză
+title: Exercițiu tabletop / exercițiu de criză
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Exercițiu de masă / exercițiu de criză
+# Exercițiu tabletop / exercițiu de criză
 
 ---
 

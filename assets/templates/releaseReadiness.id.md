@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kesiapan CAB / pelepasan
+title: CAB / kesiapan rilis
 language: id
 ---
 
 <!-- _class: title -->
 
-# Kesiapan CAB / pelepasan
+# CAB / kesiapan rilis
 
 ---
 

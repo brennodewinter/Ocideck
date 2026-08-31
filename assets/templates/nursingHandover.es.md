@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Traspaso de turno de enfermería
+title: Relevo de turno de enfermería
 language: es
 ---
 
 <!-- _class: title -->
 
-# Traspaso de turno de enfermería
+# Relevo de turno de enfermería
 ## Planta · Turno · De quién a quién · Fecha
 
 ---

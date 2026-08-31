@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informácia o presadzovaní práva (BOA)
+title: Brífing pre výkon dohľadu (BOA)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Informácia o presadzovaní práva (BOA)
+# Brífing pre výkon dohľadu (BOA)
 ## Dátum · Zmena · Pracovná oblasť/okres · Koordinátor
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Meitsje in probleem op it wurk
+title: In probleem op it wurk oankaartsje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Meitsje in probleem op it wurk
+# In probleem op it wurk oankaartsje
 ## Wa · Underwerp · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sobre eventos e segurança de multidões
+title: Briefing de evento e segurança de multidões
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Briefing sobre eventos e segurança de multidões
+# Briefing de evento e segurança de multidões
 ## Evento · Local · Data · Coordenador
 
 ---

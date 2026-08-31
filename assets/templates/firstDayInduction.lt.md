@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pirma diena / indukcija
+title: Pirmoji diena / įvadas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pirma diena / indukcija
+# Pirmoji diena / įvadas
 ## Naujas darbuotojas · Vaidmuo · Vadovas · Data
 
 ---

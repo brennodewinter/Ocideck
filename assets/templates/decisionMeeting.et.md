@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Otsustamiskoosolek
+title: Otsustuskoosolek
 language: et
 ---
 
 <!-- _class: title -->
 
-# Otsustamiskoosolek
+# Otsustuskoosolek
 ## Koosolek · Kuupäev · Juhataja · Osalejad
 
 ---

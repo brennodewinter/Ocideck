@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poniendo límitenan
+title: Pone límite
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Poniendo límitenan
+# Pone límite
 ## Ku ken · Tokante kiko · Fecha
 
 ---

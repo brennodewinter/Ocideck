@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Membahas hubungan yang tegang
+title: Membahas hubungan yang tersendat
 language: id
 ---
 
 <!-- _class: title -->
 
-# Membahas hubungan yang tegang
+# Membahas hubungan yang tersendat
 ## Dengan siapa · Tentang apa · Kapan
 
 ---

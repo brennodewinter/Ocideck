@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BIR krisrapport
+title: BOB-krisrapportering
 language: sv
 ---
 
 <!-- _class: title -->
 
-# BIR krisrapport
+# BOB-krisrapportering
 
 ---
 

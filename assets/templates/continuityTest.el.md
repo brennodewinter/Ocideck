@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Δοκιμή επιχειρησιακής συνέχειας / DR
+title: Επιχειρησιακή συνέχεια / δοκιμή DR
 language: el
 ---
 
 <!-- _class: title -->
 
-# Δοκιμή επιχειρησιακής συνέχειας / DR
+# Επιχειρησιακή συνέχεια / δοκιμή DR
 
 ---
 

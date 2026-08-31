@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permintaan saran dewan kerja
+title: Permintaan pendapat dewan karyawan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Permintaan saran dewan kerja
+# Permintaan pendapat dewan karyawan
 ## Perihal · Direktur · Dewan Kerja · Tanggal
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Oluşum raporu (sadece kültür)
+title: Olay bildirimi (just culture)
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Oluşum raporu (sadece kültür)
+# Olay bildirimi (just culture)
 ## Oluşum · Tarih ve saat · Muhabir · Katılan
 
 ---

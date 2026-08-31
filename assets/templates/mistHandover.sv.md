@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST traumaöverlämning
+title: (A)MIST-traumaöverlämning
 language: sv
 ---
 
 <!-- _class: title -->
 
-# (A) MIST traumaöverlämning
+# (A)MIST-traumaöverlämning
 ## Prehospital → ED · Utskick · Datum och tid
 
 ---

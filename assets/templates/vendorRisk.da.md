@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leverandørvurdering / leverandørrisiko
+title: Leverandørvurdering / vendor risk
 language: da
 ---
 
 <!-- _class: title -->
 
-# Leverandørvurdering / leverandørrisiko
+# Leverandørvurdering / vendor risk
 
 ---
 

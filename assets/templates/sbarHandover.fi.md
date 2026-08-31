@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR vaihto
+title: SBAR-luovutus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# SBAR vaihto
+# SBAR-luovutus
 ## Potilas · Osasto · Keneltä kenelle · Päivämäärä ja aika
 
 ---

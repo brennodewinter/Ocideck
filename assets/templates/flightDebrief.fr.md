@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Débriefing du vol
+title: Débriefing de vol
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Débriefing du vol
+# Débriefing de vol
 ## Vol · Date · Equipage
 
 ---

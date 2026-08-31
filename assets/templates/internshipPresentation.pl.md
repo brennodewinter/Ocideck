@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prezentacja stażu
+title: Prezentacja z praktyk
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Prezentacja stażu
+# Prezentacja z praktyk
 ## Firma · Program · Okres · Nazwa
 
 ---

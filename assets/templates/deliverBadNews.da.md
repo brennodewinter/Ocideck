@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leverer dårlige nyheder
+title: Overbringe dårlige nyheder
 language: da
 ---
 
 <!-- _class: title -->
 
-# Leverer dårlige nyheder
+# Overbringe dårlige nyheder
 ## Til hvem · Nyhederne · Dato
 
 ---

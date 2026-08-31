@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bereiten Sie ein Gespräch vor
+title: Gespräch vorbereiten
 language: de
 ---
 
 <!-- _class: title -->
 
-# Bereiten Sie ein Gespräch vor
+# Gespräch vorbereiten
 ## Wer · Thema · Datum
 
 ---

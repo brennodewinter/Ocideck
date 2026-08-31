@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poliitika kasutuselevõtu/rakenduskava
+title: Poliitika juurutamine / rakendusplaan
 language: et
 ---
 
 <!-- _class: title -->
 
-# Poliitika kasutuselevõtu/rakenduskava
+# Poliitika juurutamine / rakendusplaan
 
 ---
 

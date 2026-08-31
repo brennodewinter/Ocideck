@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tilladelse til at arbejde
+title: Arbejdstilladelse (permit to work)
 language: da
 ---
 
 <!-- _class: title -->
 
-# Tilladelse til at arbejde
+# Arbejdstilladelse (permit to work)
 ## Arbejde · Sted · Gyldig fra–til · Tilladelsesudsteder
 
 ---

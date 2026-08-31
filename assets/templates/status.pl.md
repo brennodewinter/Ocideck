@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informacje o stanie
+title: Briefing statusowy
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Informacje o stanie
+# Briefing statusowy
 
 ---
 

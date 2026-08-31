@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Podsumowanie/przegląd po działaniu
+title: Debriefing / analiza po działaniu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Podsumowanie/przegląd po działaniu
+# Debriefing / analiza po działaniu
 ## Operacja · Data i godzina · Prowadzący · Uczestnicy
 
 ---

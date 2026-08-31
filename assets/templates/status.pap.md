@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di status
+title: Briefing di status
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di status
+# Briefing di status
 
 ---
 

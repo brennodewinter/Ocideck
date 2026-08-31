@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ongelman nostaminen työssä
+title: Ongelman esiin ottaminen työpaikalla
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Ongelman nostaminen työssä
+# Ongelman esiin ottaminen työpaikalla
 ## Kuka · Aihe · Päivämäärä
 
 ---

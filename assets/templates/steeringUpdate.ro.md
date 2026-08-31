@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Actualizare comitet director/consiliu de proiect
+title: Actualizare pentru comitetul de coordonare / project board
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Actualizare comitet director/consiliu de proiect
+# Actualizare pentru comitetul de coordonare / project board
 
 ---
 

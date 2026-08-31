@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Technischer Erklärer
+title: Technischi Erklärig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Technischer Erklärer
+# Technischi Erklärig
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rada / výkonný návrh
+title: Návrh pre zastupiteľstvo / radu
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rada / výkonný návrh
+# Návrh pre zastupiteľstvo / radu
 ## Predmet · Portfólio · Registračné číslo · Autor
 
 ---

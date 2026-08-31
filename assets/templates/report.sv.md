@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapportera
+title: Rapportering
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Rapportera
+# Rapportering
 
 ---
 

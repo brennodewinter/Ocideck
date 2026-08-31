@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Şedinţa de luare a deciziilor
+title: Ședință decizională
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Şedinţa de luare a deciziilor
+# Ședință decizională
 ## Întâlnire · Data · Președinte · Participanți
 
 ---

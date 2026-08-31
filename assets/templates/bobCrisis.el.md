@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Έκθεση κρίσης BOB
+title: Αναφορά κρίσης BOB
 language: el
 ---
 
 <!-- _class: title -->
 
-# Έκθεση κρίσης BOB
+# Αναφορά κρίσης BOB
 
 ---
 

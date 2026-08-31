@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregled izvedbe
+title: Razgovor o radnoj uspješnosti
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Pregled izvedbe
+# Razgovor o radnoj uspješnosti
 ## Tko · Razdoblje · Datum
 
 ---

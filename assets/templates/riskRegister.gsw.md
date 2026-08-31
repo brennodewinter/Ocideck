@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Risikoanalyse/Risikoregister
+title: Risikoanalyse / Risk Register
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Risikoanalyse/Risikoregister
+# Risikoanalyse / Risk Register
 
 ---
 

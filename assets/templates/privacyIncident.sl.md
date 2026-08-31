@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ocena incidentov kršitve podatkov/zasebnosti
+title: Ocena uhajanja podatkov / incidenta zasebnosti
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Ocena incidentov kršitve podatkov/zasebnosti
+# Ocena uhajanja podatkov / incidenta zasebnosti
 
 ---
 

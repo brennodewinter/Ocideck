@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport o poważnym incydencie METHANE
+title: METHANE zgłoszenie zdarzenia masowego
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Raport o poważnym incydencie METHANE
+# METHANE zgłoszenie zdarzenia masowego
 ## Zdarzenie · Miejsce · Data i godzina · Reporter
 
 ---

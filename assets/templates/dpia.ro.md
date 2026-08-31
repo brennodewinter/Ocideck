@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / evaluarea impactului asupra vieții private
+title: DPIA / evaluarea impactului asupra confidențialității
 language: ro
 ---
 
 <!-- _class: title -->
 
-# DPIA / evaluarea impactului asupra vieții private
+# DPIA / evaluarea impactului asupra confidențialității
 
 ---
 

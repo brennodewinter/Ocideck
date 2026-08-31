@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Splikadó tékniko
+title: Splikashon tékniko
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Splikadó tékniko
+# Splikashon tékniko
 
 ---
 

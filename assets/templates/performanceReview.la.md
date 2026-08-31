@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Euismod review
+title: Colloquium de opere aestimando
 language: la
 ---
 
 <!-- _class: title -->
 
-# Euismod review
+# Colloquium de opere aestimando
 ## Quis · Period · Date
 
 ---

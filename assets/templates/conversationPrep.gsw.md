@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bereiten Sie ein Gespräch vor
+title: Gspröch vorbereite
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bereiten Sie ein Gespräch vor
+# Gspröch vorbereite
 ## Wer · Thema · Datum
 
 ---

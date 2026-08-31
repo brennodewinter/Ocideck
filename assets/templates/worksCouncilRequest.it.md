@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Richiesta di consulenza al comitato aziendale
+title: Richiesta di parere al consiglio aziendale
 language: it
 ---
 
 <!-- _class: title -->
 
-# Richiesta di consulenza al comitato aziendale
+# Richiesta di parere al consiglio aziendale
 ## Oggetto · Direttore · Comitato aziendale · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Σχέδιο buddy / μέντορα
+title: Πλάνο buddy / μέντορα
 language: el
 ---
 
 <!-- _class: title -->
 
-# Σχέδιο buddy / μέντορα
+# Πλάνο buddy / μέντορα
 ## Νέος · Buddy ή μέντορας · Ημερομηνία έναρξης
 
 ---

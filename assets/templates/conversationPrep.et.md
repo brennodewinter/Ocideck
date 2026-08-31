@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valmistage vestlus ette
+title: Vestluse ettevalmistamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Valmistage vestlus ette
+# Vestluse ettevalmistamine
 ## Kes · Teema · Kuupäev
 
 ---

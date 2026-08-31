@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ayrılma / çıkış
+title: Offboarding / ayrılış
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Ayrılma / çıkış
+# Offboarding / ayrılış
 ## Çalışan · Rol · Son iş günü · Yönetici
 
 ---

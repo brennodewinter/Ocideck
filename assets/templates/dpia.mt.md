@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA/valutazzjoni tal-impatt fuq il-privatezza
+title: DPIA / valutazzjoni tal-impatt fuq il-privatezza
 language: mt
 ---
 
 <!-- _class: title -->
 
-# DPIA/valutazzjoni tal-impatt fuq il-privatezza
+# DPIA / valutazzjoni tal-impatt fuq il-privatezza
 
 ---
 

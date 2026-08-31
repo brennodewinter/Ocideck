@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sull'evento e sulla sicurezza del pubblico
+title: Briefing su evento e sicurezza della folla
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing sull'evento e sulla sicurezza del pubblico
+# Briefing su evento e sicurezza della folla
 ## Evento · Luogo · Data · Coordinatore
 
 ---

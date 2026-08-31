@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Veiktspējas apskats
+title: Snieguma pārrunas
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Veiktspējas apskats
+# Snieguma pārrunas
 ## Kurš · Periods · Datums
 
 ---

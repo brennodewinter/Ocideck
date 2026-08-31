@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Difficultas in opere
+title: Difficultatem in opere proponere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Difficultas in opere
+# Difficultatem in opere proponere
 ## Quis · Topic · Date
 
 ---

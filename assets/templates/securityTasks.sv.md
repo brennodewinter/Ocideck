@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uppgiftsplan för informationssäkerhet
+title: Plan för säkerhetsuppgifter
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Uppgiftsplan för informationssäkerhet
+# Plan för säkerhetsuppgifter
 
 ---
 

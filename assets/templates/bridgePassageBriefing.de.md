@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing über den Brückendurchgang
+title: Maritimes Passage-/Brücken-Briefing
 language: de
 ---
 
 <!-- _class: title -->
 
-# Briefing über den Brückendurchgang
+# Maritimes Passage-/Brücken-Briefing
 ## Reise · Schiff · Datum · Zeitplan ansehen
 
 ---

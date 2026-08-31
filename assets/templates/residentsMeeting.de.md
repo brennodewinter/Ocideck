@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bewohnerabend / Mitmachtreffen
+title: Anwohnerabend / Beteiligungsveranstaltung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Bewohnerabend / Mitmachtreffen
+# Anwohnerabend / Beteiligungsveranstaltung
 ## Nachbarschaft · Thema · Datum · Moderator
 
 ---

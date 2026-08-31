@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Råds-/bestyrelsesforslag
+title: Indstilling til råd / udvalg
 language: da
 ---
 
 <!-- _class: title -->
 
-# Råds-/bestyrelsesforslag
+# Indstilling til råd / udvalg
 ## Emne · Portefølje · Registreringsnummer · Forfatter
 
 ---

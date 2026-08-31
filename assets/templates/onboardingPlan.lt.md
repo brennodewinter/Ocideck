@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Priėmimo planas (30–60–90 dienų)
+title: Įvedimo planas (30-60-90 dienų)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Priėmimo planas (30–60–90 dienų)
+# Įvedimo planas (30-60-90 dienų)
 ## Naujas darbuotojas · Vaidmuo · Vadovas · Pradžios data
 
 ---

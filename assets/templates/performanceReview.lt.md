@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Veiklos peržiūra
+title: Veiklos vertinimo pokalbis
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Veiklos peržiūra
+# Veiklos vertinimo pokalbis
 ## Kas · Laikotarpis · Data
 
 ---

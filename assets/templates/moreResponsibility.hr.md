@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Traži više odgovornosti
+title: Traženje veće odgovornosti
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Traži više odgovornosti
+# Traženje veće odgovornosti
 ## Tko · Trenutna uloga · Datum
 
 ---

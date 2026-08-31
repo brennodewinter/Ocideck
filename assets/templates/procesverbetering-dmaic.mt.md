@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Titjib tal-proċess: proġett DMAIC"
+title: "Titjib tal-proċessi: proġett DMAIC"
 language: mt
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Titjib tal-proċess: proġett DMAIC
+# Titjib tal-proċessi: proġett DMAIC
 
 ---
 

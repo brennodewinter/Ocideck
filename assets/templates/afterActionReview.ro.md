@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / revizuire după acțiune
+title: Debriefing / analiză post-acțiune
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Debriefing / revizuire după acțiune
+# Debriefing / analiză post-acțiune
 ## Funcționare · Data și ora · Facilitator · Participanți
 
 ---

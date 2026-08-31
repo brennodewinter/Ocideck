@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Comhrá teaghlaigh ar chúram agus cúram
+title: Comhrá teaghlaigh faoi chúram agus cúramóireacht
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Comhrá teaghlaigh ar chúram agus cúram
+# Comhrá teaghlaigh faoi chúram agus cúramóireacht
 ## Topaic · Dáta · Éascaitheoir · Lucht freastail
 
 ---

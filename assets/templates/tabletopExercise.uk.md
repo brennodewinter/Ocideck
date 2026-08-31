@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Настільна вправа/кризова вправа
+title: Штабні навчання / кризові навчання
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Настільна вправа/кризова вправа
+# Штабні навчання / кризові навчання
 
 ---
 

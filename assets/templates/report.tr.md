@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapor
+title: Raporlama
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Rapor
+# Raporlama
 
 ---
 

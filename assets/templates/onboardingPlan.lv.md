@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uzņemšanas plāns (30–60–90 dienas)
+title: Ievadīšanas plāns (30-60-90 dienas)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Uzņemšanas plāns (30–60–90 dienas)
+# Ievadīšanas plāns (30-60-90 dienas)
 ## Jauns darbā · Loma · Ceļvedis · Sākuma datums
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sosyal alan vaka incelemesi
+title: Sosyal alanda vaka görüşmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Sosyal alan vaka incelemesi
+# Sosyal alanda vaka görüşmesi
 ## Takım · Tarih · Başkan
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Soirée des résidents / réunion de participation
+title: Réunion d'habitants / rencontre de concertation
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Soirée des résidents / réunion de participation
+# Réunion d'habitants / rencontre de concertation
 ## Quartier · Sujet · Date · Animateur
 
 ---

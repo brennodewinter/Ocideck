@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przegląd po incydencie / wyciągnięte wnioski
+title: Przegląd po incydencie / lessons learned
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przegląd po incydencie / wyciągnięte wnioski
+# Przegląd po incydencie / lessons learned
 
 ---
 

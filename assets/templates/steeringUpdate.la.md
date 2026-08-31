@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gubernaculo committee / tabulam project renovatio
+title: Renovatio coetus gubernantis / project board
 language: la
 ---
 
 <!-- _class: title -->
 
-# Gubernaculo committee / tabulam project renovatio
+# Renovatio coetus gubernantis / project board
 
 ---
 

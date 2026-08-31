@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pjan ta' introduzzjoni/implimentazzjoni tal-politika
+title: Tnedija ta' politika / pjan ta' implimentazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Pjan ta' introduzzjoni/implimentazzjoni tal-politika
+# Tnedija ta' politika / pjan ta' implimentazzjoni
 
 ---
 

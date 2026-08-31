@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Træning/workshop
+title: Træning / workshop
 language: da
 ---
 
 <!-- _class: title -->
 
-# Træning/workshop
+# Træning / workshop
 
 ---
 

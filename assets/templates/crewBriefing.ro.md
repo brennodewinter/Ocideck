@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing pentru echipaj / plecare
+title: Briefing de echipaj / plecare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Briefing pentru echipaj / plecare
+# Briefing de echipaj / plecare
 ## Zbor · Echipaj · Data · Ora plecării
 
 ---

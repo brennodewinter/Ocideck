@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ehersisio di evakuashon i promé kontesta
+title: Simulakro di evakuashon i BHV
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Ehersisio di evakuashon i promé kontesta
+# Simulakro di evakuashon i BHV
 ## Sitio · Fecha · Lider di drill · Senario
 
 ---

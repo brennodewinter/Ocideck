@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Перший день / індукція
+title: Перший день / знайомство
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Перший день / індукція
+# Перший день / знайомство
 ## Новий найманець · Роль · Гід · Дата
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tapahtuma- ja yleisöturvallisuustiedotus
+title: Tapahtuma- ja väkijoukon turvallisuusbriiffi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tapahtuma- ja yleisöturvallisuustiedotus
+# Tapahtuma- ja väkijoukon turvallisuusbriiffi
 ## Tapahtuma · Paikka · Päivämäärä · Koordinaattori
 
 ---

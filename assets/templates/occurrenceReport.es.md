@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reporte de sucesos (cultura justa)
+title: Notificación de suceso (just culture)
 language: es
 ---
 
 <!-- _class: title -->
 
-# Reporte de sucesos (cultura justa)
+# Notificación de suceso (just culture)
 ## Suceso · Fecha y hora · Reportante · Involucrados
 
 ---

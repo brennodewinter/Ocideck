@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Andmerikkumiste/privaatsusjuhtumite hindamine
+title: Andmelekke / privaatsusintsidendi hindamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Andmerikkumiste/privaatsusjuhtumite hindamine
+# Andmelekke / privaatsusintsidendi hindamine
 
 ---
 

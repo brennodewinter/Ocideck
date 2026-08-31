@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iznošenje problema na poslu
+title: Otvaranje problema na radnom mjestu
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Iznošenje problema na poslu
+# Otvaranje problema na radnom mjestu
 ## Tko · Tema · Datum
 
 ---

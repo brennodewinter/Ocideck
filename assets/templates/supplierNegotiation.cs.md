@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Jednání s dodavateli
+title: Vyjednávání s dodavateli
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Jednání s dodavateli
+# Vyjednávání s dodavateli
 ## Dodavatel · Smlouva · Cíl · Datum
 
 ---

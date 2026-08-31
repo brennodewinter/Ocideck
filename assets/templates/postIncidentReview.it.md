@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisione post-incidente/lezioni apprese
+title: Revisione post-incidente / lessons learned
 language: it
 ---
 
 <!-- _class: title -->
 
-# Revisione post-incidente/lezioni apprese
+# Revisione post-incidente / lessons learned
 
 ---
 

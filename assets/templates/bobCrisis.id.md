@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laporan krisis BOB
+title: Pelaporan krisis BOB
 language: id
 ---
 
 <!-- _class: title -->
 
-# Laporan krisis BOB
+# Pelaporan krisis BOB
 
 ---
 

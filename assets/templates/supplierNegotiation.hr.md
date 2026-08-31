@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pregovori s dobavljačima
+title: Pregovaranje s dobavljačima
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Pregovori s dobavljačima
+# Pregovaranje s dobavljačima
 ## Dobavljač · Ugovor · Cilj · Datum
 
 ---

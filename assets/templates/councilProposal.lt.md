@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tarybos / vykdomosios valdžios pasiūlymas
+title: Pasiūlymas tarybai / vykdomajai institucijai
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Tarybos / vykdomosios valdžios pasiūlymas
+# Pasiūlymas tarybai / vykdomajai institucijai
 ## Tema · Portfelis · Registracijos numeris · Autorius
 
 ---

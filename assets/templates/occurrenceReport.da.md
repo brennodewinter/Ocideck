@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hændelsesrapport (bare kultur)
+title: Hændelsesrapport (just culture)
 language: da
 ---
 
 <!-- _class: title -->
 
-# Hændelsesrapport (bare kultur)
+# Hændelsesrapport (just culture)
 ## Forekomst · Dato og tid · Reporter · Involveret
 
 ---

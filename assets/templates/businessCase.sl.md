@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poslovni primer/naložbeni predlog
+title: Poslovni primer / naložbeni predlog
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poslovni primer/naložbeni predlog
+# Poslovni primer / naložbeni predlog
 ## Predlog · Avtor · Organ odločanja · Datum
 
 ---

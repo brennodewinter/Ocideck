@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW-Pentestbericht
+title: MIAUW-Pentescht-Bricht
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# MIAUW-Pentestbericht
+# MIAUW-Pentescht-Bricht
 
 ---
 

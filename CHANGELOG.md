@@ -399,6 +399,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(templates): de sjabloontitel volgt nu de titel die de kiezer belooft.
+  Beide zijn langs een eigen route vertaald en liepen bij 2.063 van de 2.760
+  combinaties uiteen — meestal een andere bewoording, maar ook 98 bestanden
+  waarin de `title:` in de front matter en de kop van de titeldia binnen
+  hetzelfde document al niet meer hetzelfde zeiden. Daaronder zat een echte
+  YAML-val: de vertaalronde maakte de aanhalingstekens rond een titel met een
+  dubbele punt typografisch (`title: „Prozessverbesserung: 8D-Projekt“`), zodat
+  ze in de waarde belandden en de dubbele punt onbeschermd achterbleef. Alles
+  staat nu op de l10n-waarde, met de aanhalingstekens die
+  `markdownYamlScalar` voorschrijft. `deck_template_test` bewaakt het voortaan
+  in élke taal en op beide plekken — het deed dat alleen voor nl en en.
+
 - fix(templates): 29 Maltese sjablonen waren geen Markdown meer. In plaats van
   het sjabloon stond er de kale uitvoer van een vertaalronde in: de
   geëxporteerde waarden achter elkaar met `[[OCIDECK_SEG]]]` ertussen en de

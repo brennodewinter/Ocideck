@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Resumo de voo
+title: Debriefing de voo
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Resumo de voo
+# Debriefing de voo
 ## Voo · Data · Tripulação
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Auditi tulemused ja järelmeetmed
+title: Auditileiud ja järeltegevused
 language: et
 ---
 
 <!-- _class: title -->
 
-# Auditi tulemused ja järelmeetmed
+# Auditileiud ja järeltegevused
 
 ---
 

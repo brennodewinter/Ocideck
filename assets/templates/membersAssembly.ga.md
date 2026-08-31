@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cruinniú Ginearálta (CGB)
+title: Cruinniú ginearálta (CGB)
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Cruinniú Ginearálta (CGB)
+# Cruinniú ginearálta (CGB)
 ## Eagraíocht · Dáta · Cathaoirleach · Baill a bhí i láthair
 
 ---

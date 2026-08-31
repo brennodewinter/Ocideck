@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BOB krizno izvješće
+title: Krizno izvješće BOB
 language: hr
 ---
 
 <!-- _class: title -->
 
-# BOB krizno izvješće
+# Krizno izvješće BOB
 
 ---
 

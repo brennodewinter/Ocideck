@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozhovor cez konflikt
+title: Vyriešenie konfliktu rozhovorom
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rozhovor cez konflikt
+# Vyriešenie konfliktu rozhovorom
 ## Kto · O čom · Dátum
 
 ---

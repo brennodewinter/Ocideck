@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Underhanneling mei leveransiers
+title: Ûnderhanneling mei leveransiers
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Underhanneling mei leveransiers
+# Ûnderhanneling mei leveransiers
 ## Supplier · Kontrakt · Doel · Datum
 
 ---

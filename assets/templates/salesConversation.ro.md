@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversație de vânzări
+title: Discuție de vânzare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Conversație de vânzări
+# Discuție de vânzare
 ## Prospect · Persoană de contact · Oferta · Data
 
 ---

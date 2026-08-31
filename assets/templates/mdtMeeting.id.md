@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pertemuan tim multidisiplin (MDT)
+title: Rapat tim multidisiplin (MDT)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pertemuan tim multidisiplin (MDT)
+# Rapat tim multidisiplin (MDT)
 ## Kasus · Tanggal · Ketua · Peserta
 
 ---

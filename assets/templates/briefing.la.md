@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brevis relatio
+title: Instructio brevis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Brevis relatio
+# Instructio brevis
 
 ---
 

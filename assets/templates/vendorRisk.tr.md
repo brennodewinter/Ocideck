@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tedarikçi değerlendirmesi / satıcı riski
+title: Tedarikçi değerlendirmesi / tedarikçi riski
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Tedarikçi değerlendirmesi / satıcı riski
+# Tedarikçi değerlendirmesi / tedarikçi riski
 
 ---
 

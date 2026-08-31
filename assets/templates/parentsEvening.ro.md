@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seara părinților/seară de informare
+title: Ședință cu părinții / seară de informare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Seara părinților/seară de informare
+# Ședință cu părinții / seară de informare
 ## Clasă sau grup · An școlar · Locație
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozmowa poprzez konflikt
+title: Wyjaśnienie konfliktu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Rozmowa poprzez konflikt
+# Wyjaśnienie konfliktu
 ## Kto · O czym · Data
 
 ---

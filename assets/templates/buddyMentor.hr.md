@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan prijatelja/mentora
+title: Plan buddyja / mentora
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Plan prijatelja/mentora
+# Plan buddyja / mentora
 ## Pridošlica · Prijatelj ili mentor · Datum početka
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Einsatzbesprechung der Polizei
+title: Operativs Polizei-Briefing
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Einsatzbesprechung der Polizei
+# Operativs Polizei-Briefing
 ## Datum · Schicht · Bereich · Briefer
 
 ---

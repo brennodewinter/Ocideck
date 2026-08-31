@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / atbrīvošanas gatavība
+title: CAB / gatavība laidienam
 language: lv
 ---
 
 <!-- _class: title -->
 
-# CAB / atbrīvošanas gatavība
+# CAB / gatavība laidienam
 
 ---
 

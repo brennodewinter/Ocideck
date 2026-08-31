@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mínitheoir teicniúil
+title: Míniú teicniúil
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Mínitheoir teicniúil
+# Míniú teicniúil
 
 ---
 

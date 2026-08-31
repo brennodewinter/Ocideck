@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gennemgang efter hændelsen / erfaringer
+title: Post-incident review / lessons learned
 language: da
 ---
 
 <!-- _class: title -->
 
-# Gennemgang efter hændelsen / erfaringer
+# Post-incident review / lessons learned
 
 ---
 

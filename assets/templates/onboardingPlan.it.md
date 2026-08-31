@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Piano di onboarding (30-60-90 giorni)
+title: Piano di inserimento (30-60-90 giorni)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Piano di onboarding (30-60-90 giorni)
+# Piano di inserimento (30-60-90 giorni)
 ## Nuova assunzione · Ruolo · Guida · Data di inizio
 
 ---

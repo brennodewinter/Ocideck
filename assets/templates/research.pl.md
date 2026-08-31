@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narracja badawcza
+title: Opowieść badawcza
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Narracja badawcza
+# Opowieść badawcza
 
 ---
 

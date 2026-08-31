@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Föräldrakväll / informationskväll
+title: Föräldramöte / informationskväll
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Föräldrakväll / informationskväll
+# Föräldramöte / informationskväll
 ## Klass eller grupp · Läsår · Plats
 
 ---

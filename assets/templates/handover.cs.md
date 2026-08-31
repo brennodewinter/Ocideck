@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Předání / přechod
+title: Předání / handover
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Předání / přechod
+# Předání / handover
 
 ---
 

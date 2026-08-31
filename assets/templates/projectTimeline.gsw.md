@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projektzeitleiste
+title: Projäkt-Ziitlinie
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Projektzeitleiste
+# Projäkt-Ziitlinie
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zpráva o velkém incidentu METHANE
+title: METHANE hlášení hromadné události
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Zpráva o velkém incidentu METHANE
+# METHANE hlášení hromadné události
 ## Incident · Místo · Datum a čas · Reportér
 
 ---

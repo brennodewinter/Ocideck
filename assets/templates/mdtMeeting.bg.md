@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Среща на мултидисциплинарен екип (MDT)
+title: Мултидисциплинарна среща (MDT)
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Среща на мултидисциплинарен екип (MDT)
+# Мултидисциплинарна среща (MDT)
 ## Случай · Дата · Председател · Присъстващи
 
 ---

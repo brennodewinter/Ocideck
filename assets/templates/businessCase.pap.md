@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kaso di negoshi / proposishon di invershon
+title: Caso di negoshi / proposta di invershon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kaso di negoshi / proposishon di invershon
+# Caso di negoshi / proposta di invershon
 ## Proposishon · Outor · Instansia di desishon · Fecha
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dostava loših vijesti
+title: Priopćavanje loših vijesti
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Dostava loših vijesti
+# Priopćavanje loših vijesti
 ## Kome · Vijesti · Datum
 
 ---

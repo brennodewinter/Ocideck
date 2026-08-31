@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Informationssicherheit: RASCI / Verantwortlichkeiten“
+title: "Informationssicherheit: RASCI / Verantwortlichkeiten"
 language: de
 ---
 

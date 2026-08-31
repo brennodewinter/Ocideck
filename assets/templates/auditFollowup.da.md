@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisionsresultater og opfølgning
+title: Auditfund og opfølgning
 language: da
 ---
 
 <!-- _class: title -->
 
-# Revisionsresultater og opfølgning
+# Auditfund og opfølgning
 
 ---
 

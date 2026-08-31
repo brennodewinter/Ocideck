@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE tuarascáil ar mhórtheagmhais
+title: METHANE tuairisc mórtheagmhais
 language: ga
 ---
 
 <!-- _class: title -->
 
-# METHANE tuarascáil ar mhórtheagmhais
+# METHANE tuairisc mórtheagmhais
 ## Eachtra · Suíomh · Dáta agus am · Tuairisceoir
 
 ---

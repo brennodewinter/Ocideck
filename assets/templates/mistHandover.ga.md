@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)aistriú tráma MIST
+title: (A)MIST seachadadh tráma
 language: ga
 ---
 
 <!-- _class: title -->
 
-# (A)aistriú tráma MIST
+# (A)MIST seachadadh tráma
 ## Réamhospidéil → ED · Seolta · Dáta agus am
 
 ---

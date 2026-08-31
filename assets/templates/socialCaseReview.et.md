@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sotsiaalvaldkonna juhtumite ülevaade
+title: Juhtumiarutelu sotsiaalvaldkonnas
 language: et
 ---
 
 <!-- _class: title -->
 
-# Sotsiaalvaldkonna juhtumite ülevaade
+# Juhtumiarutelu sotsiaalvaldkonnas
 ## Meeskond · Kuupäev · Juhataja
 
 ---

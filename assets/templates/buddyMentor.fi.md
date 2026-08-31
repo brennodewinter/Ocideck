@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kaveri-/mentorisuunnitelma
+title: Kummi- / mentorisuunnitelma
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Kaveri-/mentorisuunnitelma
+# Kummi- / mentorisuunnitelma
 ## Uusi tulokas · Kaveri tai mentori · Aloituspäivä
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing da tripulação/partida
+title: Briefing de tripulação / partida
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Briefing da tripulação/partida
+# Briefing de tripulação / partida
 ## Voo · Tripulação · Data · Hora de partida
 
 ---

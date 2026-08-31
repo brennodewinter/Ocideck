@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing dwar l-istatus
+title: Briefing tal-istatus
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Briefing dwar l-istatus
+# Briefing tal-istatus
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Konverżazzjoni klijent
+title: Konversazzjoni mal-klijent
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Konverżazzjoni klijent
+# Konversazzjoni mal-klijent
 ## Klijent · Persuna ta' kuntatt · Għan · Data
 
 ---

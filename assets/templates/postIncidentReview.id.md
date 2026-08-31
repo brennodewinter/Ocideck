@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tinjauan pasca-insiden / pembelajaran
+title: Tinjauan pasca-insiden / lessons learned
 language: id
 ---
 
 <!-- _class: title -->
 
-# Tinjauan pasca-insiden / pembelajaran
+# Tinjauan pasca-insiden / lessons learned
 
 ---
 

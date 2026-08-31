@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan de déploiement/mise en œuvre de la politique
+title: Déploiement d'une politique / plan de mise en œuvre
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Plan de déploiement/mise en œuvre de la politique
+# Déploiement d'une politique / plan de mise en œuvre
 
 ---
 

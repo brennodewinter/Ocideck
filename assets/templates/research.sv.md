@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Forskningsberättelse
+title: Undersökningsberättelse
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Forskningsberättelse
+# Undersökningsberättelse
 
 ---
 

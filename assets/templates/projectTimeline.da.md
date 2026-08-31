@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projektets tidslinje
+title: Projekttidslinje
 language: da
 ---
 
 <!-- _class: title -->
 
-# Projektets tidslinje
+# Projekttidslinje
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Einweisung der Feuerwehr (Reaktion und Übung)
+title: Feuerwehrbriefing (Einsatz und Übung)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Einweisung der Feuerwehr (Reaktion und Übung)
+# Feuerwehrbriefing (Einsatz und Übung)
 ## Objekt · Datum und Uhrzeit · Einsatzleiter oder Übungsleiter · Besatzung
 
 ---

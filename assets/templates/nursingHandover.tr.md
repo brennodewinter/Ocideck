@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hemşirelik vardiyası devri
+title: Hemşirelik vardiya devri
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Hemşirelik vardiyası devri
+# Hemşirelik vardiya devri
 ## Koğuş · Vardiya · Kimden kime · Tarih
 
 ---

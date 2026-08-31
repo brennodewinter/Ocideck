@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW tuarascáil pentest
+title: Tuairisc pentest MIAUW
 language: ga
 ---
 
 <!-- _class: title -->
 
-# MIAUW tuarascáil pentest
+# Tuairisc pentest MIAUW
 
 ---
 

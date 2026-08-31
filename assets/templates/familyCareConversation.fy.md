@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Famyljepetear oer soarch en soarch
+title: Famyljepetear soarch en mantelsoarch
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Famyljepetear oer soarch en soarch
+# Famyljepetear soarch en mantelsoarch
 ## Underwerp · Datum · Fasilitator · Oanwêzigen
 
 ---

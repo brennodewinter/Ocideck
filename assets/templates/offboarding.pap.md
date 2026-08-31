@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sali for di bordo / salida
+title: Offboarding / salida
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Sali for di bordo / salida
+# Offboarding / salida
 ## Empleado · Rol · Ultimo dia di trabou · Gerente
 
 ---

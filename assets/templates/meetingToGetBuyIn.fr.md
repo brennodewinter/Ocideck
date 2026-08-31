@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Faire quelque chose lors d'une réunion
+title: Faire aboutir quelque chose en réunion
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Faire quelque chose lors d'une réunion
+# Faire aboutir quelque chose en réunion
 ## Réunion · Décision demandée · Date
 
 ---

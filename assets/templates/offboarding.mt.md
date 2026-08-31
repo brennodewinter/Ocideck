@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding / ħruġ
+title: Offboarding / tluq
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Offboarding / ħruġ
+# Offboarding / tluq
 ## Impjegat · Rwol · L-aħħar jum tax-xogħol · Maniġer
 
 ---

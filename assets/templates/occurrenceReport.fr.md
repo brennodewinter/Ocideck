@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapport d'événement (culture juste)
+title: Signalement d'événement (just culture)
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Rapport d'événement (culture juste)
+# Signalement d'événement (just culture)
 ## Occurrence · Date et heure · Journaliste · Impliqué
 
 ---

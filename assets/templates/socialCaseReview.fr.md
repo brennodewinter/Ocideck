@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Examen de cas dans le domaine social
+title: Analyse de cas dans le domaine social
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Examen de cas dans le domaine social
+# Analyse de cas dans le domaine social
 ## Équipe · Date · Président
 
 ---

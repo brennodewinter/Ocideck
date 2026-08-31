@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: At rejse et problem på arbejdet
+title: Tage et problem på arbejdspladsen op
 language: da
 ---
 
 <!-- _class: title -->
 
-# At rejse et problem på arbejdet
+# Tage et problem på arbejdspladsen op
 ## Hvem · Emne · Dato
 
 ---

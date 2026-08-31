@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Arsjitektuer beslút / ADR presintaasje
+title: Arsjitektuerbeslút / ADR-presintaasje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Arsjitektuer beslút / ADR presintaasje
+# Arsjitektuerbeslút / ADR-presintaasje
 
 ---
 

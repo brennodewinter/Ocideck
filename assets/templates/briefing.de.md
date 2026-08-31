@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kurzes Briefing
+title: Kurzbriefing
 language: de
 ---
 
 <!-- _class: title -->
 
-# Kurzes Briefing
+# Kurzbriefing
 
 ---
 

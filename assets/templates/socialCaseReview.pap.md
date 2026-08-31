@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revishon di kaso di dominio sosial
+title: Diskushon di kaso den dominio soshal
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Revishon di kaso di dominio sosial
+# Diskushon di kaso den dominio soshal
 ## Tim · Fecha · Presidente
 
 ---

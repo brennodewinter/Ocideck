@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seisiún faisnéise slándála / tús sealaithe
+title: Faisnéisiú slándála / tús an tseala
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seisiún faisnéise slándála / tús sealaithe
+# Faisnéisiú slándála / tús an tseala
 ## Dáta · Aistriú · Suíomh/suíomh · Maoirseoir sealaíochta
 
 ---

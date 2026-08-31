@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pārskats pēc incidenta / gūtās mācības
+title: Pēcincidenta pārskats / gūtās atziņas
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Pārskats pēc incidenta / gūtās mācības
+# Pēcincidenta pārskats / gūtās atziņas
 
 ---
 

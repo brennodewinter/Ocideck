@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa dotycząca przejścia przez most
+title: Briefing przejścia / mostka morskiego
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa dotycząca przejścia przez most
+# Briefing przejścia / mostka morskiego
 ## Podróż · Statek · Data · Harmonogram oglądania
 
 ---

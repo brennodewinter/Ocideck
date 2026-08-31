@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Débarquement / sortie
+title: Offboarding / départ
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Débarquement / sortie
+# Offboarding / départ
 ## Employé · Rôle · Dernier jour ouvrable · Manager
 
 ---

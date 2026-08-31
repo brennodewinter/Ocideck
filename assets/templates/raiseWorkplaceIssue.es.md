@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plantar un problema en el trabajo
+title: Plantear un problema en el trabajo
 language: es
 ---
 
 <!-- _class: title -->
 
-# Plantar un problema en el trabajo
+# Plantear un problema en el trabajo
 ## Quién · Tema · Fecha
 
 ---

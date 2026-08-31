@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Performance resinsje
+title: Funksjonearringspetear
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Performance resinsje
+# Funksjonearringspetear
 ## Wa · Periode · Datum
 
 ---

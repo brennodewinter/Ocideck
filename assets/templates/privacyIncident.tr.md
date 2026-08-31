@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Veri ihlali/gizlilik olayı değerlendirmesi
+title: Veri ihlali / gizlilik olayı değerlendirmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Veri ihlali/gizlilik olayı değerlendirmesi
+# Veri ihlali / gizlilik olayı değerlendirmesi
 
 ---
 

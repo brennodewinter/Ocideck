@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Koarte ynljochting
+title: Koarte briefing
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Koarte ynljochting
+# Koarte briefing
 
 ---
 

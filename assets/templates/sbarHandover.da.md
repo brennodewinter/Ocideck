@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR overdragelse
+title: SBAR-overdragelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# SBAR overdragelse
+# SBAR-overdragelse
 ## Patient · Afdeling · Fra hvem til hvem · Dato og tid
 
 ---

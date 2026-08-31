@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vecāku vakars / informācijas vakars
+title: Vecāku sapulce / informatīvs vakars
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Vecāku vakars / informācijas vakars
+# Vecāku sapulce / informatīvs vakars
 ## Klase vai grupa · Mācību gads · Vieta
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA/privātuma ietekmes novērtējums
+title: DPIA / privātuma ietekmes novērtējums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# DPIA/privātuma ietekmes novērtējums
+# DPIA / privātuma ietekmes novērtējums
 
 ---
 

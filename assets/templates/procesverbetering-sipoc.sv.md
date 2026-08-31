@@ -9,7 +9,7 @@ language: sv
 
 <!-- _class: title -->
 
-# SIPOC processöversikt
+# SIPOC-processöversikt
 ## Leverantör · Input · Process · Output · Kund
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di seguridat / kuminsámentu di turno
+title: Briefing di seguridat / kuminsamentu di turno
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di seguridat / kuminsámentu di turno
+# Briefing di seguridat / kuminsamentu di turno
 ## Fecha · Turno · Sitio/lugá · Supervisor di turno
 
 ---

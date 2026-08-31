@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Adatvédelmi incidens/adatvédelmi incidens értékelése
+title: Adatszivárgás / adatvédelmi incidens értékelése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Adatvédelmi incidens/adatvédelmi incidens értékelése
+# Adatszivárgás / adatvédelmi incidens értékelése
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž o prosazování (BOA)
+title: Briefing pro dozor (BOA)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž o prosazování (BOA)
+# Briefing pro dozor (BOA)
 ## Datum · Směna · Pracovní oblast/okres · Koordinátor
 
 ---

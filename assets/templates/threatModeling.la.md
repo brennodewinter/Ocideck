@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sessionem comminatio modeling
+title: Sessio threat modeling
 language: la
 ---
 
 <!-- _class: title -->
 
-# Sessionem comminatio modeling
+# Sessio threat modeling
 ## Ratio · Date · Facilitator · Participes
 
 ---

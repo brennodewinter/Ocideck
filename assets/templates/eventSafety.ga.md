@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seisiún faisnéise imeachtaí & slua-shábháilteachta
+title: Faisnéisiú imeachta agus sábháilteachta sló
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seisiún faisnéise imeachtaí & slua-shábháilteachta
+# Faisnéisiú imeachta agus sábháilteachta sló
 ## Imeacht · Suíomh · Dáta · Comhordaitheoir
 
 ---

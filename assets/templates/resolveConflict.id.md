@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Berbicara melalui konflik
+title: Menyelesaikan konflik lewat bicara
 language: id
 ---
 
 <!-- _class: title -->
 
-# Berbicara melalui konflik
+# Menyelesaikan konflik lewat bicara
 ## Siapa · Tentang apa · Tanggal
 
 ---

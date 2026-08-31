@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW pentest ataskaita
+title: MIAUW pentesto ataskaita
 language: lt
 ---
 
 <!-- _class: title -->
 
-# MIAUW pentest ataskaita
+# MIAUW pentesto ataskaita
 
 ---
 

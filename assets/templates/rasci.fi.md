@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Tietoturvallisuus: RASCI / vastuut"
+title: "Tietoturva: RASCI / TVB"
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tietoturvallisuus: RASCI / vastuut
+# Tietoturva: RASCI / TVB
 
 ---
 

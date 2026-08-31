@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy-/Mentor-Plan
+title: Buddy-/Mentor-Abmachig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Buddy-/Mentor-Plan
+# Buddy-/Mentor-Abmachig
 ## Neuling · Kumpel oder Mentor · Startdatum
 
 ---

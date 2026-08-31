@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preparazzjoni tat-titjira PPL
+title: Tħejjija tat-titjira PPL
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Preparazzjoni tat-titjira PPL
+# Tħejjija tat-titjira PPL
 ## Data · Callsign · Rotta · PIC
 
 ---

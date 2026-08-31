@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Penyerahan trauma MIST
+title: Serah terima trauma (A)MIST
 language: id
 ---
 
 <!-- _class: title -->
 
-# (A) Penyerahan trauma MIST
+# Serah terima trauma (A)MIST
 ## Pra-Rumah Sakit → ED · Pengiriman · Tanggal dan waktu
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Menyelesaikan sesuatu dalam rapat
+title: Mencapai sesuatu dalam rapat
 language: id
 ---
 
 <!-- _class: title -->
 
-# Menyelesaikan sesuatu dalam rapat
+# Mencapai sesuatu dalam rapat
 ## Rapat · Keputusan diminta · Tanggal
 
 ---

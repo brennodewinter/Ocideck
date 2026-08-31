@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Familiesamtale om pleje og omsorg
+title: Familiesamtale om pleje og pårørendeomsorg
 language: da
 ---
 
 <!-- _class: title -->
 
-# Familiesamtale om pleje og omsorg
+# Familiesamtale om pleje og pårørendeomsorg
 ## Emne · Dato · Facilitator · Deltagere
 
 ---

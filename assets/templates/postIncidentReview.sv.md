@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Granskning/lärdomar efter incidenten
+title: Post-incident review / lessons learned
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Granskning/lärdomar efter incidenten
+# Post-incident review / lessons learned
 
 ---
 

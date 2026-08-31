@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przegląd wydajności
+title: Rozmowa oceniająca
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przegląd wydajności
+# Rozmowa oceniająca
 ## Kto · Okres · Data
 
 ---

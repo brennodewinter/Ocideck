@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Urobiť niečo na stretnutí
+title: Presadenie niečoho na porade
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Urobiť niečo na stretnutí
+# Presadenie niečoho na porade
 ## Stretnutie · Požadované rozhodnutie · Dátum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Miehistön / lähtötiedotus
+title: Miehistö- / lähtöbriiffi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Miehistön / lähtötiedotus
+# Miehistö- / lähtöbriiffi
 ## Lento · Miehistö · Päivämäärä · Lähtöaika
 
 ---

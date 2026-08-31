@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Internship presintaasje
+title: Staazjepresintaasje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Internship presintaasje
+# Staazjepresintaasje
 ## Bedriuw · Programma · Periode · Namme
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Siguranța informațiilor: RASCI / responsabilități”
+title: "Securitatea informațiilor: RASCI / TVB"
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Siguranța informațiilor: RASCI / responsabilități
+# Securitatea informațiilor: RASCI / TVB
 
 ---
 

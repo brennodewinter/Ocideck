@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Discutarea unei relații tensionate
+title: A discuta despre o relație dificilă
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Discutarea unei relații tensionate
+# A discuta despre o relație dificilă
 ## Cu cine · Despre ce · Când
 
 ---

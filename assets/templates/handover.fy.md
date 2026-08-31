@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Oerdracht / oergong
+title: Oerdracht / handover
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Oerdracht / oergong
+# Oerdracht / handover
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox talk / аналіз ризиків в останню хвилину
+title: Toolbox / перевірка безпеки LMRA
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Toolbox talk / аналіз ризиків в останню хвилину
+# Toolbox / перевірка безпеки LMRA
 ## Робота · Місце · Дата · Команда
 
 ---

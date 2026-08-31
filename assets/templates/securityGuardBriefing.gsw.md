@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sicherheitsbesprechung / Schichtbeginn
+title: Sicherheits-Briefing / Dienschtaafang
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Sicherheitsbesprechung / Schichtbeginn
+# Sicherheits-Briefing / Dienschtaafang
 ## Datum · Schicht · Standort/Ort · Schichtleiter
 
 ---

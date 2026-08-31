@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Orabant / transitus
+title: Traditio / handover
 language: la
 ---
 
 <!-- _class: title -->
 
-# Orabant / transitus
+# Traditio / handover
 
 ---
 

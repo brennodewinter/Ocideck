@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Avveniment u aġġornament dwar is-sigurtà tal-folla
+title: Briefing dwar avveniment u sigurtà tal-folla
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Avveniment u aġġornament dwar is-sigurtà tal-folla
+# Briefing dwar avveniment u sigurtà tal-folla
 ## Avveniment · Post · Data · Koordinatur
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Povolení k práci
+title: Povolení k práci (permit to work)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Povolení k práci
+# Povolení k práci (permit to work)
 ## Práce · Místo · Platnost od–do · Vydavatel povolení
 
 ---

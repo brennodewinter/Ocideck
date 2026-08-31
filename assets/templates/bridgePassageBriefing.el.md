@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing διέλευσης από γέφυρα
+title: Ναυτικό briefing διέλευσης / γέφυρας
 language: el
 ---
 
 <!-- _class: title -->
 
-# Briefing διέλευσης από γέφυρα
+# Ναυτικό briefing διέλευσης / γέφυρας
 ## Πλου · Πλοίο · Ημερομηνία · Πρόγραμμα βαρδιών
 
 ---

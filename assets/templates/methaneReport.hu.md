@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE jelentős incidens jelentés
+title: METHANE tömeges esemény bejelentése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# METHANE jelentős incidens jelentés
+# METHANE tömeges esemény bejelentése
 ## Incidens · Hely · Dátum és idő · Riporter
 
 ---

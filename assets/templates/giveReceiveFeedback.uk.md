@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Надавати або отримувати критику
+title: Надання або отримання критики
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Надавати або отримувати критику
+# Надання або отримання критики
 ## Хто · Тема · Дата
 
 ---

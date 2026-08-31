@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Saspīlēto attiecību apspriešana
+title: Saspringtu attiecību pārrunāšana
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Saspīlēto attiecību apspriešana
+# Saspringtu attiecību pārrunāšana
 ## Ar ko · Par ko · Kad
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reporte METHANE de incidente mayor
+title: METHANE notificación de incidente mayor
 language: es
 ---
 
 <!-- _class: title -->
 
-# Reporte METHANE de incidente mayor
+# METHANE notificación de incidente mayor
 ## Incidente · Ubicación · Fecha y hora · Reportante
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa lotnicza
+title: Omówienie po locie
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa lotnicza
+# Omówienie po locie
 ## Lot · Data · Załoga
 
 ---

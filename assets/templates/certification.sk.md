@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Priebeh certifikácie
+title: Postup certifikácie
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Priebeh certifikácie
+# Postup certifikácie
 
 ---
 

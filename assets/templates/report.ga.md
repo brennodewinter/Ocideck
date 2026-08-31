@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tuairisc
+title: Tuairisciú
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tuairisc
+# Tuairisciú
 
 ---
 

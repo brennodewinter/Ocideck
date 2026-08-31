@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kirurški varnostni kontrolni seznam (WHO)
+title: Kontrolni seznam kirurške varnosti (WHO)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Kirurški varnostni kontrolni seznam (WHO)
+# Kontrolni seznam kirurške varnosti (WHO)
 ## Postopek · Pacient · ALI · Datum
 
 ---

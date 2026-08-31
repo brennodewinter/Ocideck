@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gebeurtenisrapport (gewoan kultuer)
+title: Foarfalmelding (just culture)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Gebeurtenisrapport (gewoan kultuer)
+# Foarfalmelding (just culture)
 ## Gebeurtenis · Datum en tiid · Ferslachjouwer · Belutsen
 
 ---

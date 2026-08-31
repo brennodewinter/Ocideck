@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Přehled případu sociální domény
+title: Případová porada v sociální oblasti
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Přehled případu sociální domény
+# Případová porada v sociální oblasti
 ## Tým · Datum · Předseda
 
 ---

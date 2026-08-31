@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cronograma de proyecto
+title: Cronograma del proyecto
 language: es
 ---
 
 <!-- _class: title -->
 
-# Cronograma de proyecto
+# Cronograma del proyecto
 
 ---
 

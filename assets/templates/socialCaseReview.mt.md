@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reviżjoni tal-każ tad-dominju soċjali
+title: Reviżjoni ta' każijiet fil-qasam soċjali
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Reviżjoni tal-każ tad-dominju soċjali
+# Reviżjoni ta' każijiet fil-qasam soċjali
 ## Tim · Data · President
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passagerarinformation (allmänflyg)
+title: Passagerarbriefing (allmänflyg)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Passagerarinformation (allmänflyg)
+# Passagerarbriefing (allmänflyg)
 ## Flygplan · Flygning · Befälhavande pilot
 
 ---
