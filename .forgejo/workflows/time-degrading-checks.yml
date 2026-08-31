@@ -1,0 +1,50 @@
+name: Tijdsvervallende controles
+
+# Controles die van uitkomst veranderen zonder dat de code verandert — een CVE
+# verschijnt, een standaard krijgt een nieuwe editie, een actie krijgt een nieuwe
+# release. Ze hebben een klok nodig, geen wijzigingstrigger. Tot #1892 hadden ze
+# die niet: `make deps-check` (OSV-query op de gebundelde JS), `check_reference_data`
+# (standaardversies), `check_licenses`, en `check-pins` draaiden alleen als iemand
+# ze met de hand typte. Een CVE op marked kon wekenlang onopgemerkt blijven.
+#
+# Deze werkstroom draait ze dagelijks en bij handmatige dispatch. De zware
+# geheimen/SAST-scan zit er niet in — die reageren op code, niet op tijd, en
+# staan al in `scans.yml` per PR. Hier gaat het om de controles die rood worden
+# terwijl de boom stil staat.
+on:
+  schedule:
+    # 05:33 UTC: buiten de spits, een kwartier na de tap-spiegelcheck zodat ze
+    # niet om dezelfde runner vechten.
+    - cron: '33 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  time-degrading:
+    name: CVE's, licenties, pins en referentiedata tegen de klok
+    runs-on: docker
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Werkkopie en Flutter vertrouwen
+        run: |
+          set -eu
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: Gebundelde JS tegen OSV (CVE's op marked, highlight.js, DOMPurify, mermaid, MathJax)
+        run: dart run tool/check_bundled_js.dart
+
+      - name: Referentiedata tegen de laatste editie
+        run: dart run tool/check_reference_data.dart
+
+      - name: Licenties
+        run: dart run tool/check_licenses.dart
+
+      - name: GitHub-actie-pins tegen de laatste release
+        run: dart run tool/check_pinned_versions.dart

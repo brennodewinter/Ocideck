@@ -85,6 +85,20 @@ void main() {
       expect(paden, contains('canvaskit/canvaskit.wasm'));
     });
 
+    test('build-info.json staat in de bundel met een git-describe (#1893)', () {
+      pak(bundel, wortel);
+
+      final info = File('${bundel.path}/build-info.json');
+      expect(info.existsSync(), isTrue, reason: 'build-info.json hoort erin');
+      // In een temp-map zonder git is de terugval 'onbekend'; in de echte
+      // repo geeft git describe een tag of commit-hash. Beide zijn geldig.
+      final inhoud = info.readAsStringSync();
+      expect(inhoud, contains('git_describe'));
+      // Staat in SHA256SUMS, anders is het niet verzegeld.
+      final lijst = File('${bundel.path}/$checksumBestand').readAsLinesSync();
+      expect(lijst, anyElement(contains('build-info.json')));
+    });
+
     test('twee keer inpakken geeft dezelfde lijst', () {
       // Reproduceerbaar, want anders zegt een verschil in de digest niets over
       // de inhoud en wordt de vergelijking met de aankondiging ruis.

@@ -36,8 +36,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  # De poort vóór het bouwen (#1893). `ci.yml` en `release.yml` vuren allebei
+  # onafhankelijk op `v*`-tags; zonder deze gate bouwt en publiceert de
+  # releaseketen gewoon door als `ci.yml` rood is. Cross-workflow `needs` is
+  # in Forgejo onbetrouwbaar, dus draait de poort hier zelf — zelfde
+  # `make check-no-coverage` als `ci.yml`, op dezelfde Mac-runner. Dubbel
+  # uitgevoerd op een tag, maar dat is het punt: een tag die de poort niet
+  # haalt mag geen artefact de deur uit sturen.
+  gate:
+    name: Poort (vóór het bouwen)
+    runs-on: macos
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: De poort
+        run: make check-no-coverage
+
   web:
     name: Web bouwen
+    needs: gate
     runs-on: docker
     # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): OS, node, de
     # build-toolchain (cmake/build-essential voor de dartcv4-OpenCV-hook, #870) en
@@ -224,6 +244,7 @@ jobs:
 
   linux:
     name: Linux bouwen
+    needs: gate
     runs-on: docker
     # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): toolchain + Flutter +
     # Linux-desktop-precache zitten erin. Het image is echter voor de TEST-gates
@@ -336,6 +357,7 @@ jobs:
 
   macos:
     name: macOS bouwen
+    needs: gate
     # Host-modus op de aangemelde Mac (mac-brenno): de toolchain van die
     # machine, die `make check-toolchain` daar al bewaakt. Staat de Mac uit,
     # dan wacht deze job tot hij er weer is.
@@ -383,6 +405,7 @@ jobs:
 
   windows-ophalen:
     name: Windows ophalen van de spiegel
+    needs: gate
     runs-on: docker
     # De poll-lus hieronder is op 45 minuten begrensd, maar één curl zonder
     # tijdslimiet kan daar doorheen hangen (rc1-les: een hang loopt anders tot

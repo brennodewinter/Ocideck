@@ -60,9 +60,16 @@ on:
 # `concurrency` zorgt er alleen voor dat `main` zijn eigen lopende run opzij zet
 # bij een nieuwere merge. `workflow_dispatch` zit via `github.event_name` in een
 # eigen groep, zodat een druk-op-de-knop en een merge elkaar nooit afbreken.
+#
+# `cancel-in-progress: false` (#1890): bij `true` werd één op de drie runs
+# afgebroken — een nieuwe merge op `main` veegt de lopende run weg, en dat
+# meldt zich als "failure / Has been cancelled", niet als "skipped". De
+# afgebroken runs verhullen echte fouten en maken de poort onbetrouwbaar.
+# Met `false` wacht de nieuwe run tot de vorige klaar is; de capacity-1-runner
+# serialiseert toch al, dus de wachttijd is beperkt tot één run.
 concurrency:
   group: linux-gate-${{ github.event_name }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   gate-linux:
