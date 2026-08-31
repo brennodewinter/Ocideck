@@ -85,13 +85,15 @@ void main() {
     );
   });
 
-  test('er worden geen releases beweerd die er niet zijn', () {
+  test('er worden releases beweerd die er ook zijn', () {
     // De release-secties liegen het makkelijkst: ze staan vol in het voorbeeld
-    // van de spec, en overnemen is verleidelijk. Zolang BR.02-04 in
-    // COMPLIANCE.md niet aangevinkt zijn, hoort hier geen pijplijn te staan.
+    // van de spec, en overnemen is verleidelijk. Tot #1889 beweerde dit bestand
+    // dat er geen releases waren, terwijl er 23 `v*`-tags bestonden. De test
+    // houdt nu vast dat de bewering klopt met de werkelijkheid.
     final release = section('repository')['release'] as YamlMap;
-    expect(release['automated-pipeline'], isFalse);
-    expect(release.containsKey('distribution-points'), isFalse);
-    expect(release.containsKey('attestations'), isFalse);
+    expect(release['automated-pipeline'], isTrue);
+    expect(release.containsKey('distribution-points'), isTrue);
+    final distPoints = release['distribution-points'] as YamlList;
+    expect(distPoints, isNotEmpty, reason: 'er zijn releases met distributie');
   });
 }

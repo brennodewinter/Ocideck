@@ -20,9 +20,11 @@ Copyright © 2026 Stichting LibreKAT
 > user asks the same questions by e-mail. Most of the answers already existed,
 > scattered across a dozen files; this gathers them.
 >
-> **Status:** first issue · 2026-07-22 · reflects the default branch on that date.
+> **Status:** revised · 2026-09-01 · reflects the default branch on that date.
+> First issued 2026-07-22; revised 2026-09-01 (#1889) to reflect that the
+> project now has releases, a CI runner, and per-PR secret/SAST scanning.
 
-**Three boxes below are not ticked.** That is the point of the document. A
+**Two boxes below are not ticked.** That is the point of the document. A
 checklist with a quiet yes in a row that deserves a no teaches the reader to
 distrust the rows that are true.
 
@@ -98,13 +100,12 @@ attestation therefore describes the relationship rather than claiming the label.
 |---|---|
 | Project | OciDeck |
 | URL | <https://pawprint.vigilis.online/LibreKAT/Ocideck> |
-| Valid for versions | **The default branch.** There are no releases and no version tags |
-| Valid for dates | Issued 2026-07-22; describes the branch as of that date |
+| Valid for versions | **The default branch and the `v*` release tags.** 23 tags exist, latest `v0.4.9` (23-08-2026) |
+| Valid for dates | Issued 2026-07-22; revised 2026-09-01; describes the branch as of that date |
 
-There is no version identifier to attest to. `pubspec.yaml` carries `0.1.0+1`,
-but that changes only when someone bumps it, so many different commits show the
-same number. **The commit hash is the only real identifier** — pin it and record
-it. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
+`pubspec.yaml` carries `0.4.10+24`. Releases are tagged `v*` and built by an
+automated pipeline (`.forgejo/workflows/release.yml`) with minisign-signed
+artefacts. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
 
 ---
 
@@ -140,7 +141,9 @@ it. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
       [`SECURITY.md`](SECURITY.md)
 - [x] **QA.04 — Repeatable test procedures.**
       [`docs/CHECKS.md`](docs/CHECKS.md) and the [`Makefile`](Makefile). They run
-      locally; there is no CI runner (see QA.06).
+      locally and on the forge: `static-gate` and `scans` per PR, `linux-gate`
+      post-merge, and `ci.yml` on tag pushes (see QA.06 for the contributor
+      gap).
 - [x] **QA.05 — Memory-safety mitigations.** One dependency is not memory-safe:
       `opencv_core` → `dartcv` (C++), which decodes untrusted image data. The
       mitigations, and — measured, not assumed — exactly which malformed inputs
@@ -163,17 +166,19 @@ it. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
 ## Build and release
 
 - [x] **BR.01 — How to build from source.** [`docs/BUILD.md`](docs/BUILD.md)
-- [ ] **BR.02 — Unique, monotonically increasing version identifiers.** **No
-      releases exist**, so there is nothing to version. Tracked in
-      [issue #520](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/520).
-- [ ] **BR.03 — Integrity of released assets, and how to verify it.** **No
-      released assets exist.** Users build from source, so the integrity
-      guarantee available today is the commit history itself. Also #520.
-- [ ] **BR.04 — A descriptive log of functional and security changes per
-      release.** No releases — but the log exists:
-      [`CHANGELOG.md`](CHANGELOG.md) is kept per change, in the user's language,
-      and a security fix is marked `Security:`. This row becomes a yes the day
-      BR.02 does.
+- [x] **BR.02 — Unique, monotonically increasing version identifiers.**
+      Releases are tagged `v*` (semver), 23 tags exist, latest `v0.4.9`.
+      `pubspec.yaml` carries `0.4.10+24`. The release pipeline builds and
+      publishes artefacts per tag.
+- [x] **BR.03 — Integrity of released assets, and how to verify it.**
+      Each release carries `SHA256SUMS` and a minisign signature
+      (`SHA256SUMS.minisig`). The macOS build is signed with a Developer ID and
+      notarised. Linux and Windows are (yet) unsigned. See
+      [`docs/BUILD.md`](docs/BUILD.md) for verification instructions.
+- [x] **BR.04 — A descriptive log of functional and security changes per
+      release.** [`CHANGELOG.md`](CHANGELOG.md) is kept per change, in the
+      user's language, and a security fix is marked `Security:`. Each release
+      tag has a release body on the forge.
 
 ## Vulnerability management
 
@@ -213,11 +218,11 @@ The ORC WG's light-weight summary asks for this, and it is not a template row:
 - **Releases feed** —
   `https://pawprint.vigilis.online/LibreKAT/Ocideck/releases.rss`
 
-It is **empty today**, because there are no releases. That is precisely why it is
-the one to subscribe to: the day it carries an item, that item is a release, and
-a security fix will be in its notes. There is deliberately no mailing list — a
-subscriber list is personal data we would have to hold and protect, and a feed is
-not. [`SECURITY.md`](SECURITY.md) lists the alternatives and what they carry.
+There are 23 releases in the feed, latest `v0.4.9`. A security fix is marked
+`Security:` in the release notes and [`CHANGELOG.md`](CHANGELOG.md). There is
+deliberately no mailing list — a subscriber list is personal data we would have
+to hold and protect, and a feed is not. [`SECURITY.md`](SECURITY.md) lists the
+alternatives and what they carry.
 
 ## Where the risk assessment lives
 
@@ -241,13 +246,15 @@ v2.2.0). It is guarded against drifting from `SECURITY.md` — see
 
 Read this section first if you are deciding whether to depend on the project.
 
-1. **One maintainer, self-merge, no CI runner** (QA.06/QA.07). Everything else on
-   this page rests on one person continuing to care.
-2. **No releases, so no signed or verifiable artefacts** (BR.02–04). You build
-   from source and pin a commit; there is no update mechanism and the project
-   cannot tell you that you are behind.
-3. **One non-memory-safe dependency on the image path** (QA.05), mitigated and
+1. **One maintainer, self-merge** (QA.06/QA.07). Everything else on this page
+   rests on one person continuing to care. There IS a CI runner since
+   23-07-2026 (per-PR scans, post-merge gate, tag-push gate), but it does not
+   replace a second reviewer.
+2. **One non-memory-safe dependency on the image path** (QA.05), mitigated and
    documented, not fuzzed.
+3. **Linux and Windows artefacts are unsigned** (BR.03). The macOS build is
+   signed and notarised; the other two are not, so verification on those
+   platforms is limited to the minisign-signed `SHA256SUMS`.
 
 None of the three is hidden anywhere else in this repository either. They are
 collected here because a reader deserves them in one place rather than assembled

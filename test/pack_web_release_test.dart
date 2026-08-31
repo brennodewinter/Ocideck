@@ -99,6 +99,29 @@ void main() {
       expect(lijst, anyElement(contains('build-info.json')));
     });
 
+    test('.DS_Store en andere dotfiles worden verwijderd (#1888)', () {
+      // Finder dropt .DS_Store in build/web zodra iemand de map opent.
+      File('${bundel.path}/.DS_Store').writeAsStringSync('metadata');
+      File('${bundel.path}/.localized').writeAsStringSync('nl');
+      // Een bewust meegenomen artefact dat met een punt begint mag blijven.
+      // (Er is er nu geen in releaseArtefacten, maar de guard hoort er te zijn.)
+
+      pak(bundel, wortel);
+
+      expect(
+        File('${bundel.path}/.DS_Store').existsSync(),
+        isFalse,
+        reason: '.DS_Store hoort niet in de uit te leveren bundel',
+      );
+      expect(
+        File('${bundel.path}/.localized').existsSync(),
+        isFalse,
+        reason: '.localized hoort niet in de uit te leveren bundel',
+      );
+      // De bundel is nog steeds compleet en verzegeld.
+      expect(controleer(bundel), isEmpty);
+    });
+
     test('twee keer inpakken geeft dezelfde lijst', () {
       // Reproduceerbaar, want anders zegt een verschil in de digest niets over
       // de inhoud en wordt de vergelijking met de aankondiging ruis.

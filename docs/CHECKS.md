@@ -2083,9 +2083,9 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
 - It uses the same `GH_DISPATCH_TOKEN` the release chain uses to start the
   Windows build. A pull request from a fork has no secrets: the job then warns
   and exits 0 rather than turning red for something the contributor cannot fix.
-- **Advisory, not a lock.** Branch protection on `main` requires only
-  `static-gate`. This run shows up as its own status and fails visibly; put it
-  in the required checks if you want it blocking.
+- **Advisory, not a lock.** Branch protection on `main` requires
+  `static-gate` and `scans` (#1891). This run shows up as its own status and
+  fails visibly.
 
 ### `.github/workflows/windows-native-check.yml` — after a merge that can break the native build
 - **build** — `flutter build windows --release` on the mirror, with the pinned
