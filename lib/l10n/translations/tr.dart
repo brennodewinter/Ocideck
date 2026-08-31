@@ -2555,13 +2555,33 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Döndürmek, orijinalin yanına döndürülmüş bir kopya yazar; özgün dosyanız değişmeden kalır.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Hedef ekle',
+  'Doel verwijderen': 'Hedefi kaldır',
+  'Verwijzing verwijderen': 'Referansı kaldır',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Bir referans yerleştirmek için bir satır seçin.',
+  'Vorm van de markering': 'İşaretin şekli',
+  'doel': 'hedef',
+  'doelen': 'hedefler',
+  'Verwijzing verwijderd': 'Referans kaldırıldı',
+  'Afbeeldingsverwijzing': 'Görsel referans',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'geçersiz koordinatlara sahip ve çizilmiyor — hedef konumunu referans editöründe düzeltin.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      '(A) işareti metinde yoksa veya tersi — harfi metne ekleyin veya referansı kaldırın.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'bu slaytta iki kez geçiyor — her (A), (B) … işareti yalnızca bir referans olabilir.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'bu slaytta görsel referanslar var ancak çapa yok — referanslar slayta bağlanamıyor. Slayta editörde bir çapa verin.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pin işaretleri düşünün.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'görünün kısmın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın, aksi halde işaretçi slaytta görünmeyecek.',
+  'Beschrijving (voor schermlezer en export)':
+      'Açıklama (ekran okuyucu için ve dışa aktarma)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'görünür alanın dışına düşüyor — odak noktasını, yakınlaştırmayı veya hedef konumu ayarlayın.',
   'markering': 'işaret',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Oklar bu slaytta birbirini kesiyor — okunabilirlik için oklar yerine pinleri düşünün.',
   'Pijlen': 'Oklar',
   'Stap-voor-stap': 'Adım adım',
   'Punt': 'Madde',
@@ -4586,23 +4606,8 @@ const _dutchSourceAddTr = <String, String>{
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Hedefi kaldır',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Hedef ekle',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
-  'Beschrijving (voor schermlezer)': 'Açıklama (ekran okuyucu için)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Bir referans yerleştirmek için madde işareti seçin.',
-  'Reference verwijderen': 'Referansı kaldır',
-  'Afbeeldingsverwijzingen': 'Görsel referansları',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'geçersiz geometriye sahip ve çizilmiyor — front matter içindeki koordinatları düzeltin.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'metinde olmayan bir (A) işaretine atıfta bulunuyor, ya da tersi — işareti ve girdiyi birbirine bağlayın.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'bu slaytta iki kez görünüyor — her işaret (A), (B) … yalnızca bir girdiye sahip olabilir.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Bu slayt callout\'lara sahip ama çapası yok — front matter onları slayta bağlayamaz. Slayta düzenleyicide bir çapa verin.',
+  'Afbeeldingsverwijzingen': 'Görsel referanslar',
 };

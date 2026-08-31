@@ -1656,13 +1656,33 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Id-dawran jikteb kopja mdawra ħdejn l-oriġinal; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'jaqa\' barra l-inħawi viżibbli — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Żid mira',
+  'Doel verwijderen': 'Neħħi mira',
+  'Verwijzing verwijderen': 'Neħħi referenza',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Agħżel linja biex tqiegħed referenza.',
+  'Vorm van de markering': 'Forma tal-marka',
+  'doel': 'mira',
+  'doelen': 'miri',
+  'Verwijzing verwijderd': 'Referenza mneħħija',
+  'Afbeeldingsverwijzing': 'Referenza tal-immaġini',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'għandu koordinati invalidi u mhux miġbud — aġġusta l-pożizzjoni tal-mira fl-editur tar-referenzi.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'jirreferi għal marka (A) li mhux fit-test, jew viċi versa — żid l-ittra fit-test jew neħħi r-referenza.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'jidher darbtejn fuq din is-slajd — kull marka (A), (B) … tista\' jkollha referenza waħda biss.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Din is-slajd għandha referenzi tal-immaġini imma l-ebda ankra — ir-referenzi ma jistgħux jiġu marbuta mas-slajd. Agħti ankra lill-slajd fl-editur.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Il-vleġeġ jidhlu f\'xulxinmafu fuq din is-slajd — ikkunsidra marki ta\' pin minflok vleġeġ għall-qari.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'jaqa\' barra l-parti viżibbli tal-immaġni — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira, inkella l-marka ma tidhirx fuq is-slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Deskrizzjoni (għal qarrej tal-iskrin u esportazzjoni)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'jaqa\' barra l-inħawi viżibbli — aġġusta l-punt fokali, l-zoom jew il-pożizzjoni tal-mira.',
   'markering': 'marka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Il-vleġeġ jaqsmu xulxin fuq din is-slide — ikkunsidra pins minflok vleġeġ għall-leġġibiltà.',
   'Pijlen': 'Vleġeġ',
   'Stap-voor-stap': 'Pass pass',
   'Punt': 'Punt',
@@ -4653,24 +4673,9 @@ const _dutchSourceAddMt = <String, String>{
       'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Neħħi mira',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Żid mira',
   'bv. "de controller board met display"':
       'eż. "il-bord tal-kontroll b\'display"',
-  'Beschrijving (voor schermlezer)': 'Deskrizzjoni (għal qarrej tal-iskrin)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Agħżel bullet biex tpoġġi referenza.',
-  'Reference verwijderen': 'Neħħi referenza',
   'Afbeeldingsverwijzingen': 'Referenzi tal-immaġini',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'għandu ġometrija invalida u mhux miżbugħa — korreġi l-koordinati fil-front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'jirreferi għal marka (A) li mhux fit-test, jew viċi versa — kollega l-marka u l-entrata ma\' xulxin.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'jidher darbtejn f\'dan is-slide — kull marka (A), (B) … tista\' jkollha entrata waħda biss.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Dan is-slide għandu callouts imma l-ebda ankra — il-front matter ma jistax jikkollegahom mal-slide. Agħti l-slide ankra fl-editur.',
 };

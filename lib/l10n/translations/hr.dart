@@ -1641,13 +1641,33 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotiranje zapisuje zakrenutu kopiju pokraj izvornika; vaša izvorna datoteka ostaje nepromijenjena.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'pada izvan vidljivog područja — prilagodite žarišnu točku, zum ili poziciju cilja.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Dodaj cilj',
+  'Doel verwijderen': 'Ukloni cilj',
+  'Verwijzing verwijderen': 'Ukloni referencu',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Odaberite redak za postavljanje reference.',
+  'Vorm van de markering': 'Oblik oznake',
+  'doel': 'cilj',
+  'doelen': 'ciljevi',
+  'Verwijzing verwijderd': 'Referenca uklonjena',
+  'Afbeeldingsverwijzing': 'Referenca slike',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'ima nevažeće koordinate i ne crta se — prilagodite poziciju cilja u uređivaču referenci.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'upućuje na (A) oznaku koja nije u tekstu, ili obrnuto — dodajte slovo u tekst ili uklonite referencu.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'pojavljuje se dvaput na ovom slajdu — svaka oznaka (A), (B) … može imati samo jednu referencu.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Ovaj slajd ima reference slika ali nema sidro — reference se ne mogu povezati sa slajdom. Dajte slajdu sidro u uređivaču.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Strelice se križaju na ovom slajdu — razmotrite pin oznake umjesto strelica za čitljivost.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'pada izvan vidljivog dijela slike — prilagodite žarišnu točku, zum ili poziciju cilja, inače se oznaka neće prikazati na slajdu.',
+  'Beschrijving (voor schermlezer en export)':
+      'Opis (za čitač zaslona i izvoz)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'pada izvan vidljivog područja — prilagodite žarišnu točku, zum ili poziciju cilja.',
   'markering': 'oznaka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Strelice se križaju na ovom slajdu — razmotri pinove umjesto strelica za čitljivost.',
   'Pijlen': 'Strelice',
   'Stap-voor-stap': 'Korak po korak',
   'Punt': 'Točka',
@@ -4600,24 +4620,9 @@ const _dutchSourceAddHr = <String, String>{
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ukloni cilj',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Dodaj cilj',
   'bv. "de controller board met display"':
       'npr. "upravljačka ploča s zaslonom"',
-  'Beschrijving (voor schermlezer)': 'Opis (za čitač zaslona)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Odaberite grafičku oznaku za postavljanje reference.',
-  'Reference verwijderen': 'Ukloni referencu',
   'Afbeeldingsverwijzingen': 'Reference slika',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ima nevažeću geometriju i ne crta se — ispravite koordinate u front matter-u.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'upućuje na oznaku (A) koja nije u tekstu, ili obrnuto — povežite oznaku i unos međusobno.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'pojavljuje se dvaput na ovom slajdu — svaka oznaka (A), (B) … može imati samo jedan unos.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ovaj slajd ima callouts ali nema sidro — front matter ih ne može povezati sa slajdom. Zadajte sidro slajdu u uređivaču.',
 };

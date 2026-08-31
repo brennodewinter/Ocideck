@@ -1654,13 +1654,33 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotirea scrie o copie rotită lângă original; fișierul tău original rămâne neschimbat.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cade în afara zonei vizibile — ajustați punctul focal, zoom-ul sau poziția țintei.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cade în afara părții vizibile a imaginii — ajustați punctul focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
+  'Doel toevoegen': 'Adaugă țintă',
+  'Doel verwijderen': 'Elimină țintă',
+  'Verwijzing verwijderen': 'Elimină referința',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selectați o linie pentru a plasa o referință.',
+  'Vorm van de markering': 'Forma marcatorului',
+  'doel': 'țintă',
+  'doelen': 'ținte',
+  'Verwijzing verwijderd': 'Referință ștearsă',
+  'Afbeeldingsverwijzing': 'Referință imagine',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'are coordonate invalide și nu este desenat — ajustați poziția țintei în editorul de referințe.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'se referă la o marcă (A) care nu este în text, sau invers — adăugați litera în text sau eliminați referința.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'apare de două ori pe acest slide — fiecare marcă (A), (B) … poate avea o singură referință.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Acest slide are referințe imagine dar fără ancoră — referințele nu pot fi legate de slide. Dați slide-ului o ancoră în editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Săgețile se încrucișează pe acest slide — luați în considerare marcatoare cu pin în loc de săgeți pentru lizibilitate.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cade în afara părții vizibile a imaginii — ajustați punctul punct focal, zoom-ul sau poziția țintei, altfel marcatorul nu va apărea pe diapozitiv.',
+  'Beschrijving (voor schermlezer en export)':
+      'Descriere (pentru cititor de ecran și export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'cade în afara zonei vizibile — ajustați punctul punct focal, zoom-ul sau poziția țintei.',
   'markering': 'marcator',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Săgețile se încrucișează pe acest slide — luați în considerare ace în loc de săgeți pentru lizibilitate.',
   'Pijlen': 'Săgeți',
   'Stap-voor-stap': 'Pas cu pas',
   'Punt': 'Punct',
@@ -4643,23 +4663,8 @@ const _dutchSourceAddRo = <String, String>{
       'Notele de subsol devin text simplu; o prezentare nu are note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Elimină țintă',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Adaugă țintă',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',
-  'Beschrijving (voor schermlezer)': 'Descriere (pentru cititor de ecran)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Selectați un marcator pentru a plasa o referință.',
-  'Reference verwijderen': 'Elimină referința',
   'Afbeeldingsverwijzingen': 'Referințe imagine',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'are o geometrie nevalidă și nu este desenat — corectează coordonatele în front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'face trimitere la o marcă (A) care nu este în text, sau invers — leagă marca și intrarea una de cealaltă.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'apare de două ori pe acest slide — fiecare marcă (A), (B) … poate avea o singură intrare.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Acest slide are callout-uri, dar nu are o ancoră — front matter nu le poate lega de slide. Dați slide-ului o ancoră în editor.',
 };

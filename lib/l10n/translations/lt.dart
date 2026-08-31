@@ -1644,13 +1644,33 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pasukimas įrašo pasuktą kopiją šalia originalo; jūsų pradinis failas lieka nepakitęs.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Pridėti tikslą',
+  'Doel verwijderen': 'Pašalinti tikslą',
+  'Verwijzing verwijderen': 'Pašalinti nuorodą',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Pasirinkite eilutę nuorodai patalpinti.',
+  'Vorm van de markering': 'Žymeklio forma',
+  'doel': 'taikinys',
+  'doelen': 'taikiniai',
+  'Verwijzing verwijderd': 'Nuoroda pašalinta',
+  'Afbeeldingsverwijzing': 'Paveikslėlio nuoroda',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'turi netinkamas koordinates ir nėra piešiamas — koreguokite tikslo poziciją nuorodų redaktoriuje.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'nurodo į (A) žymę, kurios nėra tekste, arba atvirkščiai — pridėkite raidę į tekstą arba pašalinkite nuorodą.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'pasirodo du kartus šiame slaide — kiekvienas žymeklis (A), (B) … gali turėti tik vieną nuorodą.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Šis slaidas turi paveikslėlių nuorodų, bet neturi inkaro — nuorodos negali būti susietos su slaidu. Suteikite slaidui inkarą redaktoriuje.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Rodyklės kertasi šiame slaide — apsvarstykite adatų žymeklius vietoj rodyklių skaitomumui.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'patenka už matomos vaizdo dalies — derinkite židinio tašką, mastelį ar tikslinę padėtį, kitaip žymeklis neatsiras skaidrėje.',
+  'Beschrijving (voor schermlezer en export)':
+      'Aprašymas (ekrano skaitytuvui ir eksportui)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'patenka už matomos srities — derinkite židinio tašką, mastelį ar tikslinę padėtį.',
   'markering': 'žymė',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Rodyklės kertasi šiame skaidrėje — apsvarstykite kaiščius vietoj rodyklių skaitomumui.',
   'Pijlen': 'Rodyklės',
   'Stap-voor-stap': 'Žingsnis po žingsnio',
   'Punt': 'Taškas',
@@ -4615,23 +4635,8 @@ const _dutchSourceAddLt = <String, String>{
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Pašalinti tikslą',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Pridėti tikslą',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
-  'Beschrijving (voor schermlezer)': 'Aprašymas (ekrano skaitytuvui)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Pasirinkite ženklelį, kad patalpintumėte nuorodą.',
-  'Reference verwijderen': 'Pašalinti nuorodą',
   'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'turi netinkamą geometriją ir nėra braižomas — pataisykite koordinates front matter dalyje.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'nurodo (A) žymę, kurios nėra tekste, arba atvirkščiai — susiekite žymę ir įrašą tarpusavyje.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'pasirodo du kartus šiame skaidrėje — kiekviena žymė (A), (B) … gali turėti tik vieną įrašą.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ši skaidrė turi callout, bet neturi inkaro — front matter negali jų susieti su skaidre. Suteikite skaidrei inkarą rengyklėje.',
 };

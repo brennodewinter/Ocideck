@@ -1615,13 +1615,31 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'nISwI\' nagh HaSta velqa\' choHlu\'bogh qojlu\', \'ach nagh HaSta wa\'DIch choHbe\'lu\'.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'vetlh visible mIllogh Hurgh — focal point, zoom, pagh target position choq.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'vetlh visible mIllogh nagh be\' — focal point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
+  'Doel toevoegen': 'pagh',
+  'Doel verwijderen': 'pagh',
+  'Verwijzing verwijderen': 'pagh',
+  'Selecteer een regel om een verwijzing te plaatsen.': 'pagh',
+  'Vorm van de markering': 'mIv Segh',
+  'doel': 'pagh',
+  'doelen': 'target',
+  'Verwijzing verwijderd': 'reference teqmoH',
+  'Afbeeldingsverwijzing': 'pagh',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'mIq taghbe\' \'ej mIq tlhIHbe\' — Doch qav tu\'lu\'be\'.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      '(A) ngoq DIvI\'be\' \'ej ngoq \'angbe\' je che\' — ngoq reference je rIntIq.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'DI\' wa\'logh cha\'logh nargh — (A), (B) … wa\' reference neH DIvI\'.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'slidevam mIllogh reference\'mey DIvI\' \'a \'ejDo\' DIvI\'be\' — reference\'mey DIvI\' slide je che\'. \'ejDo\' DIvI\' editorDaq.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'mIwHommey lughorni\'chu\' — mIwHommey poDqIDlu\'.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'vetlh visible mIllogh nagh be\' — foc point, zoom, pagh target position choq, pagh marker slide tu\'lu\'be\'.',
+  'Beschrijving (voor schermlezer en export)': 'Del (HaqwI\'vaD je yIteq)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'vetlh visible mIllogh Hurgh — foc point, zoom, pagh target position choq.',
   'markering': 'per',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'yan tlhIq wa\'Dich tlhIq — yan tlhIq tlhIq tlhIq tlhIq',
   'Pijlen': 'yan',
   'Stap-voor-stap': 'Yan yan',
   'Punt': 'Qogh',
@@ -4542,24 +4560,9 @@ const _dutchSourceAddTlh = <String, String>{
       'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'target teq',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'target yIchel',
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
-  'Beschrijving (voor schermlezer)': 'Del (HaqwI\'vaD)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'bI\'reS yIwIv reference chermeH.',
-  'Reference verwijderen': 'reference teq',
-  'Afbeeldingsverwijzingen': 'mIllogh reference',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'mIq taghbe\' \'ej mIq tlhIHbe\' — front matterDaq coordInatlh DIvI\'.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      '(A) ngoq DIvI\'be\' \'ej ngoq \'entry je che\' — ngoq \'entry je rIntIq.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'DI\' wa\'logh cha\'logh nargh — (A), (B) … wa\' entry neH DIvI\'.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'slidevam callouts DIvI\' \'a \'ejDo\' DIvI\'be\' — front matter DIvI\' slide je che\'. \'ejDo\' DIvI\' editorDaq.',
+  'Afbeeldingsverwijzingen': 'mIllogh reference\'mey',
 };

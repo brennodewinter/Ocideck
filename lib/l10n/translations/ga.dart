@@ -1667,13 +1667,33 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Scríobhann rothlú cóip rothlaithe in aice leis an mbunchóip; fanann do bhunchomhad gan athrú.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Cuir sprioc leis',
+  'Doel verwijderen': 'Bain sprioc',
+  'Verwijzing verwijderen': 'Bain an tagairt',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Roghnaigh líne chun tagairt a chur.',
+  'Vorm van de markering': 'Cruth na marcála',
+  'doel': 'sprioc',
+  'doelen': 'spriocanna',
+  'Verwijzing verwijderd': 'Baineadh an tagairt',
+  'Afbeeldingsverwijzing': 'Tagairt íomhá',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'tá comhordanáidí neamhbhailí aige agus ní tharraingítear é — coigeartaigh ionad na sprioce san eagarthóir tagairtí.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'tagraíonn sé do mharc (A) atá nach bhfuil sa téacs, nó a mhalairt — cuir an litir sa téacs nó bain an tagairt.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'tarlaíonn sé faoi dhó ar an sleo seo — gach marc (A), (B) … ní féidir ach tagairt amháin a bheith aige.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Tá tagairtí íomhá ar an sleo seo ach níl aon ancaire aige — ní féidir na tagairtí a nascadh leis an sleo. Tabhair ancaire don sleo san eagarthóir.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Crosaíonn na saigheada ar an sleo seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'titeann sé lasmuigh den chuid infheicthe den íomhá — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce, nó ní thaispeánfar an marcóir ar an sleamhnán.',
+  'Beschrijving (voor schermlezer en export)':
+      'Cur síos (do léitheoir scáileáin agus onnmhairiú)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'titeann sé lasmuigh den limistéar infheicthe — coigeartaigh an pointe fócasach, an súmáil nó suíomh na sprioce.',
   'markering': 'marc',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Crosann na saigheada a chéile ar an sleamhnán seo — smaoinigh ar phinn in ionad saigheada don inléiteacht.',
   'Pijlen': 'Saighead',
   'Stap-voor-stap': 'Céim ar chéim',
   'Punt': 'Pointe',
@@ -4667,24 +4687,9 @@ const _dutchSourceAddGa = <String, String>{
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Sprioc a bhaint',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Sprioc a chur leis',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
-  'Beschrijving (voor schermlezer)': 'Cur síos (do léitheoir scáileáin)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Roghnaigh urchair chun tagairt a chur.',
-  'Reference verwijderen': 'Bain tagairt',
   'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tá céimseata neamhbhailí aige agus ní tharraingítear é — ceartaigh na comhordanáidí sa front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'tagraíonn sé do mharc (A) atá le fáil sa téacs, nó a mhalairt — nasc an marc agus an iontráil le chéile.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'tagann sé suas faoi dhó ar an sleamhnán seo — ní ceadaithe ach iontráil amháin do gach marc (A), (B) …',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Tá callouts ar an sleamhnán seo ach níl aon ancaire aige — ní féidir leis an front matter iad a nascadh leis an sleamhnán. Tabhair ancaire don sleamhnán san eagarthóir.',
 };

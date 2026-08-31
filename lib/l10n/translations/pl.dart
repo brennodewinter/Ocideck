@@ -1649,13 +1649,33 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Obracanie zapisuje obrócony egzemplarz obok oryginału; Twój pierwotny plik pozostaje bez zmian.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Dodaj cel',
+  'Doel verwijderen': 'Usuń cel',
+  'Verwijzing verwijderen': 'Usuń odwołanie',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Wybierz wiersz, aby umieścić odwołanie.',
+  'Vorm van de markering': 'Kształt znacznika',
+  'doel': 'cel',
+  'doelen': 'cele',
+  'Verwijzing verwijderd': 'Odwołanie usunięte',
+  'Afbeeldingsverwijzing': 'Odwołanie do obrazu',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'ma nieprawidłowe współrzędne i nie jest rysowany — dostosuj pozycję celu w edytorze odwołań.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'odwołuje się do znacznika (A), którego nie ma w tekście, lub odwrotnie — dodaj literę do tekstu lub usuń odwołanie.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'pojawia się dwa razy na tym slajdzie — każde oznaczenie (A), (B) … może mieć tylko jedno odwołanie.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Ten slajd ma odwołania do obrazów, ale nie ma kotwicy — odwołania nie mogą być powiązane ze slajdem. Nadaj slajdowi kotwicę w edytorze.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Strzałki krzyżują się na tym slajdzie — rozważ znaczniki pin zamiast strzałek dla czytelności.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'wypada poza widoczną częścią obrazu — dostosuj punkt środkowy, zoom lub pozycję celu, w przeciwnym razie znacznik nie pojawi się na slajdzie.',
+  'Beschrijving (voor schermlezer en export)':
+      'Opis (dla czytnika ekranu i eksportu)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'wypada poza widocznym obszarem — dostosuj punkt środkowy, zoom lub pozycję celu.',
   'markering': 'znacznik',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Strzałki przecinają się na tym slajdzie — rozważ piny zamiast strzałek dla czytelności.',
   'Pijlen': 'Strzałki',
   'Stap-voor-stap': 'Krok po kroku',
   'Punt': 'Punkt',
@@ -4623,23 +4643,8 @@ const _dutchSourceAddPl = <String, String>{
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Usuń cel',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Dodaj cel',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
-  'Beschrijving (voor schermlezer)': 'Opis (dla czytnika ekranu)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Wybierz punkt, aby umieścić odwołanie.',
-  'Reference verwijderen': 'Usuń odwołanie',
   'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ma nieprawidłową geometrię i nie jest rysowany — popraw współrzędne w front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'odnosi się do znacznika (A), którego nie ma w tekście, lub odwrotnie — połącz znacznik i wpis ze sobą.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'występuje dwa razy na tym slajdzie — każdy znacznik (A), (B) … może mieć tylko jeden wpis.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Ten slajd ma callouty, ale nie ma kotwicy — front matter nie może połączyć ich ze slajdem. Nadaj slajdowi kotwicę w edytorze.',
 };

@@ -1636,13 +1636,33 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotering skriver en vriden kopia bredvid originalet; din ursprungliga fil lämnas oförändrad.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Lägg till mål',
+  'Doel verwijderen': 'Ta bort mål',
+  'Verwijzing verwijderen': 'Ta bort referens',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Välj en rad för att placera en referens.',
+  'Vorm van de markering': 'Markörens form',
+  'doel': 'mål',
+  'doelen': 'mål',
+  'Verwijzing verwijderd': 'Referens borttagen',
+  'Afbeeldingsverwijzing': 'Bildreferens',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'har ogiltiga koordinater och ritas inte — justera målpositionen i referenseditorn.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'hänvisar till ett (A)-märke som inte finns i texten, eller tvärtom — lägg till bokstaven i texten eller ta bort referensen.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'förekommer två gånger på denna bild — varje märke (A), (B) … får bara ha en referens.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Denna bild har bildreferenser men ingen ankare — referenserna kan inte kopplas till bilden. Ge bilden en ankare i editorn.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Pilar korsar varandra på denna bild — överväg pin-markörer istället för pilar för läsbarhet.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'faller utanför den synliga delen av bilden — justera brännpunkt, zoom eller målposition, annars visas inte markören på sliden.',
+  'Beschrijving (voor schermlezer en export)':
+      'Beskrivning (för skärmläsare och export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'faller utanför det synliga området — justera brännpunkt, zoom eller målposition.',
   'markering': 'markering',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Pilar korsar varandra på denna bild — överväg nålar istället för pilar för läsbarhet.',
   'Pijlen': 'Pilar',
   'Stap-voor-stap': 'Steg för steg',
   'Punt': 'Punkt',
@@ -4595,24 +4615,9 @@ const _dutchSourceAddSv = <String, String>{
       'Fotnoter blir till vanlig text; en presentation har inte noter.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Ta bort mål',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Lägg till mål',
   'bv. "de controller board met display"':
       't.ex. "kontrollerkortet med display"',
-  'Beschrijving (voor schermlezer)': 'Beskrivning (för skärmläsare)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Välj en punkt för att placera en referens.',
-  'Reference verwijderen': 'Ta bort referens',
   'Afbeeldingsverwijzingen': 'Bildreferenser',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'har ogiltig geometri och ritas inte — korrigera koordinaterna i front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'hänvisar till en (A)-markering som inte finns i texten, eller tvärtom — koppla markeringen och posten till varandra.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'förekommer två gånger på denna bild — varje markering (A), (B) … får bara ha en post.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Denna bild har callouts men ingen förankring — front matter kan inte koppla dem till bilden. Ge bilden en förankring i redigeraren.',
 };

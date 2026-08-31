@@ -2,9 +2,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/slide_quality.dart';
+import '../state/deck_provider.dart';
 import '../state/editor_provider.dart';
 import '../widgets/dialogs/presentation_info_dialog.dart';
 import '../widgets/dialogs/settings_dialog.dart';
+import '../widgets/editors/callout_editor.dart';
 
 /// De deckbrede velden die in de front matter staan en dus in het venster
 /// *Presentatiegegevens* worden bewerkt — niet in de kleurinstellingen.
@@ -54,6 +56,26 @@ void navigateToSlideQualityIssue({
       highlightThemeField: issue.field,
     );
     return;
+  }
+  // #1861: callout-meldingen openen de verwijzingeneditor in plaats van alleen
+  // de dia te selecteren — de reparatie zit in die dialoog, niet op de regel.
+  if (issue.category == SlideQualityCategory.callout) {
+    final deck = ref.read(deckProvider).deck;
+    if (deck != null &&
+        issue.slideIndex >= 0 &&
+        issue.slideIndex < deck.slides.length) {
+      showDialog<void>(
+        context: context,
+        builder: (ctx) => CalloutEditorDialog(
+          slide: deck.slides[issue.slideIndex],
+          projectPath: deck.projectPath,
+          onUpdate: (updated) => ref
+              .read(deckProvider.notifier)
+              .updateSlide(issue.slideIndex, updated),
+        ),
+      );
+      return;
+    }
   }
   ref
       .read(editorProvider.notifier)

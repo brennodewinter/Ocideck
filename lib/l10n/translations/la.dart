@@ -1652,13 +1652,33 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Conversio exemplar versum iuxta archetypum scribit; fasciculus tuus originalis immutatus manet.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Adde destinatum',
+  'Doel verwijderen': 'Remove destinatum',
+  'Verwijzing verwijderen': 'Remove referentiam',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selige lineam ad referentiam collocandam.',
+  'Vorm van de markering': 'Forma signi',
+  'doel': 'scopus',
+  'doelen': 'scopī',
+  'Verwijzing verwijderd': 'Referentia remota',
+  'Afbeeldingsverwijzing': 'Referentia imaginis',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'coordinatas invalidas habet et non pingitur — corrige positionem destinati in editore referentiarum.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refert ad signum (A) quod in texto non est, aut e contrario — adde litteram ad textum aut remove referentiam.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'bis in hoc lapillo apparet — unaquaeque nota (A), (B) … unam referentiam habere potest.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Hic lapillus habet referentias imaginum sed non ancoram — referentiae lapillo conecti non possunt. Da lapillo ancoram in editore.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Sagittae se in hoc lapillo intersecant — pinos pro sagittis pro legibilitate considera.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'extra visibilem partem imaginis cadit — focum, zoom aut positionem destinati adjusta, aliter signum in pagina non apparebit.',
+  'Beschrijving (voor schermlezer en export)':
+      'Descriptio (pro lectore screen et exportatione)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'extra visibilem regionem cadit — focum, zoom aut positionem destinati adjusta.',
   'markering': 'nota',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Sagittae se in hac lamina secant — clavos pro sagittis propter legibilitatem considera.',
   'Pijlen': 'Sagittae',
   'Stap-voor-stap': 'Gradatim',
   'Punt': 'Punctum',
@@ -4615,24 +4635,9 @@ const _dutchSourceAddLa = <String, String>{
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Destinatio removere',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Destinatio addere',
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
-  'Beschrijving (voor schermlezer)': 'Descriptio (pro lectore schermatis)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Punctum selige ut referentiam ponas.',
-  'Reference verwijderen': 'Referentiam removere',
   'Afbeeldingsverwijzingen': 'Imaginum referentiae',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'geometria invalida habet et non pingitur — coordinales in front matter corrige.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'ad signum (A) quod in texto non est refert, aut e contra — signum et entry inter se conecte.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'bis in hac lamina apparet — unumquemque signum (A), (B) … unam tantum entry habere potest.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Haec lamina callouts sed non ancoram habet — front matter eos ad laminam conectere non potest. Da ancorsm laminae in editore.',
 };

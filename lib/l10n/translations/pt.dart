@@ -1665,13 +1665,33 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rodar escreve uma cópia rodada ao lado do original; o teu ficheiro original fica inalterado.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cai fora da área visível — ajuste o ponto focal, o zoom ou a posição do alvo.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cai fora da parte visível da imagem — ajuste o ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
+  'Doel toevoegen': 'Adicionar alvo',
+  'Doel verwijderen': 'Remover alvo',
+  'Verwijzing verwijderen': 'Remover referência',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Selecione uma linha para colocar uma referência.',
+  'Vorm van de markering': 'Forma do marcador',
+  'doel': 'alvo',
+  'doelen': 'alvos',
+  'Verwijzing verwijderd': 'Referência removida',
+  'Afbeeldingsverwijzing': 'Referência de imagem',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'tem coordenadas inválidas e não é desenhado — ajuste a posição do alvo no editor de referências.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refere-se a uma marca (A) que não está no texto, ou vice-versa — adicione a letra ao texto ou remova a referência.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'aparece duas vezes neste slide — cada marca (A), (B) … pode ter apenas uma referência.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Este slide tem referências de imagem mas nenhuma âncora — as referências não podem ser vinculadas ao slide. Dê uma âncora ao slide no editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'As setas cruzam-se neste slide — considere marcadores de pino em vez de setas para legibilidade.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cai fora da parte visível da imagem — ajuste o ponto ponto focal, o zoom ou a posição do alvo, ou o marcador não aparecerá no slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Descrição (para leitor de tela e exportação)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'cai fora da área visível — ajuste o ponto ponto focal, o zoom ou a posição do alvo.',
   'markering': 'marcador',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Setas se cruzam neste slide — considere pinos em vez de setas para legibilidade.',
   'Pijlen': 'Setas',
   'Stap-voor-stap': 'Passo a passo',
   'Punt': 'Ponto',
@@ -4653,23 +4673,8 @@ const _dutchSourceAddPt = <String, String>{
       'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Remover destino',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Adicionar destino',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',
-  'Beschrijving (voor schermlezer)': 'Descrição (para leitor de ecrã)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Selecione um marcador para colocar uma referência.',
-  'Reference verwijderen': 'Remover referência',
   'Afbeeldingsverwijzingen': 'Referências de imagem',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tem geometria inválida e não é desenhado — corrija as coordenadas no front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'refere-se a uma marca (A) que não está no texto, ou vice-versa — ligue a marca e a entrada uma à outra.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'aparece duas vezes neste slide — cada marca (A), (B) … pode ter apenas uma entrada.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Este slide tem callouts mas nenhuma âncora — o front matter não os pode ligar ao slide. Dê ao slide uma âncora no editor.',
 };

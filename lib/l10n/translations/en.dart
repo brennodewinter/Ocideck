@@ -840,13 +840,33 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotating writes a turned copy next to the original; your original file is left unchanged.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'falls outside the visible area — adjust the focal point, zoom, or target position.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'falls outside the visible part of the image — adjust the focal point, zoom, or target position, or the marker will not appear on the slide.',
+  'Doel toevoegen': 'Add target',
+  'Doel verwijderen': 'Remove target',
+  'Verwijzing verwijderen': 'Remove reference',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Select a line to place a reference.',
+  'Vorm van de markering': 'Shape of the marker',
+  'doel': 'target',
+  'doelen': 'targets',
+  'Verwijzing verwijderd': 'Reference removed',
+  'Afbeeldingsverwijzing': 'Image reference',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'has invalid coordinates and is not drawn — adjust the target position in the references editor.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'refers to an (A) mark that is not in the text, or vice versa — add the letter to the text or remove the reference.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appears twice on this slide — each mark (A), (B) … may have only one reference.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'This slide has image references but no anchor — the references cannot be linked to the slide. Give the slide an anchor in the editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Arrows cross each other on this slide — consider pin markers instead of arrows for readability.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'falls outside the visible part of the image — adjust the focus point, zoom or target position, or the mark will not appear on the slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Description (for screen reader and export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'falls outside the visible area — adjust the focus point, zoom or target position.',
   'markering': 'mark',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Arrows cross each other on this slide — consider pins instead of arrows for readability.',
   'Pijlen': 'Arrows',
   'Stap-voor-stap': 'Step by step',
   'Punt': 'Point',
@@ -2275,25 +2295,10 @@ const _dutchSourceAddEn = {
   'Callout': 'Callout',
   'Callouts': 'Callouts',
   'Afbeeldingsverwijzingen': 'Image references',
-  'Reference verwijderen': 'Remove reference',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Select a bullet to place a reference.',
-  'Beschrijving (voor schermlezer)': 'Description (for screen reader)',
   'bv. "de controller board met display"':
       'e.g. "the controller board with display"',
-  'Target toevoegen': 'Add target',
-  'Target verwijderen': 'Remove target',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'has invalid geometry and is not drawn — correct the coordinates in the front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'refers to an (A) mark that is not in the text, or vice versa — link the mark and the entry to each other.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'appears twice on this slide — each mark (A), (B) … may have only one entry.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'This slide has callouts but no anchor — the front matter cannot link them to the slide. Give the slide an anchor in the editor.',
   'Nieuw verbeteringsproject': 'New improvement project',
   'Kader': 'Framework',
   'Primaire Y-metriek (Y-01)': 'Primary Y metric (Y-01)',

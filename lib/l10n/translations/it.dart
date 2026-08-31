@@ -674,13 +674,33 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'La rotazione scrive una copia ruotata accanto all\'originale; il file originale resta invariato.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'cade fuori dall\'area visibile — regola il punto focale, lo zoom o la posizione del target.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'cade fuori dalla parte visibile dell\'immagine — regola il punto focale, lo zoom o la posizione del target, altrimenti il marcatore non apparirà sulla diapositiva.',
+  'Doel toevoegen': 'Aggiungi target',
+  'Doel verwijderen': 'Rimuovi target',
+  'Verwijzing verwijderen': 'Rimuovi riferimento',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Seleziona una riga per posizionare un riferimento.',
+  'Vorm van de markering': 'Forma del marcatore',
+  'doel': 'bersaglio',
+  'doelen': 'bersagli',
+  'Verwijzing verwijderd': 'Riferimento rimosso',
+  'Afbeeldingsverwijzing': 'Riferimento immagine',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'ha coordinate non valide e non viene disegnato — regola la posizione del target nell\'editor dei riferimenti.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'si riferisce a un segno (A) che non è nel testo, o viceversa — aggiungi la lettera al testo o rimuovi il riferimento.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'appare due volte su questa diapositiva — ogni segno (A), (B) … può avere solo un riferimento.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Questa diapositiva ha riferimenti immagine ma nessun ancoraggio — i riferimenti non possono essere collegati alla diapositiva. Dai un\'ancora alla diapositiva nell\'editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Le frecce si incrociano su questa diapositiva — considera i pin al posto delle frecce per la leggibilità.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'cade fuori dalla parte visibile dell\'immagine — regola il punto punto focalee, lo zoom o la posizione del target, altrimenti il marcatore non apparirà sulla diapositiva.',
+  'Beschrijving (voor schermlezer en export)':
+      'Descrizione (per lettore di schermo e export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'cade fuori dall\'area visibile — regola il punto punto focalee, lo zoom o la posizione del target.',
   'markering': 'marcatore',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Le frecce si incrociano su questa diapositiva — considera i pin invece delle frecce per la leggibilità.',
   'Pijlen': 'Frecce',
   'Stap-voor-stap': 'Passo dopo passo',
   'Punt': 'Punto',
@@ -4668,24 +4688,9 @@ const _dutchSourceAddIt = {
       'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Rimuovi destinazione',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Aggiungi destinazione',
   'bv. "de controller board met display"':
       'es. "la scheda di controllo con display"',
-  'Beschrijving (voor schermlezer)': 'Descrizione (per lettore di schermo)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Seleziona un punto elenco per inserire un riferimento.',
-  'Reference verwijderen': 'Rimuovi riferimento',
   'Afbeeldingsverwijzingen': 'Riferimenti immagine',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ha una geometria non valida e non viene disegnato — correggi le coordinate nel front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'fa riferimento a un segno (A) che non è nel testo, o viceversa — collega il segno e la voce tra loro.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'compare due volte in questa diapositiva — ogni segno (A), (B) … può avere una sola voce.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Questa diapositiva ha callout ma nessun ancora — il front matter non può collegarli alla diapositiva. Dai un\'ancora alla diapositiva nell\'editor.',
 };

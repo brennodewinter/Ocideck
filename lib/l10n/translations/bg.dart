@@ -1657,13 +1657,33 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Завъртането записва завъртяно копие до оригинала; вашият оригинален файл остава непроменен.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Добавяне на цел',
+  'Doel verwijderen': 'Премахване на цел',
+  'Verwijzing verwijderen': 'Премахване на препратка',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Изберете ред, за да поставите препратка.',
+  'Vorm van de markering': 'Форма на маркера',
+  'doel': 'цел',
+  'doelen': 'цени',
+  'Verwijzing verwijderd': 'Препратката е премахната',
+  'Afbeeldingsverwijzing': 'Справка към изображение',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'има невалидни координати и не се чертае — коригирайте позицията на целта в редактора на препратки.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'препраща към (A)-маркер, който не е в текста, или обратното — добавете буквата в текста или премахнете препратката.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'се появява два пъти на този слайд — всяка маркировка (A), (B) … може да има само една препратка.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Този слайд има препратки към изображения, но няма котва — препратките не могат да бъдат свързани със слайда. Дайте на слайда котва в редактора.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Стрелките се пресичат на този слайд — помислете за пинове вместо стрелки за четимост.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'попада извън видимата част на изображението — коригирайте фокуса, мащаба или позицията на целта, иначе маркерът няма да се появи на слайда.',
+  'Beschrijving (voor schermlezer en export)':
+      'Описание (за екранен четец и експорт)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'попада извън видимата област — коригирайте фокуса, мащаба или позицията на целта.',
   'markering': 'маркер',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Стрелите се пресичат на този слайд — разгледайте щифтове вместо стрелки за четимост.',
   'Pijlen': 'Стрели',
   'Stap-voor-stap': 'Стъпка по стъпка',
   'Punt': 'Точка',
@@ -4641,23 +4661,8 @@ const _dutchSourceAddBg = <String, String>{
       'Бележките под линия стават обикновен текст; презентация няма бележки.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Премахване на цел',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Добавяне на цел',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
-  'Beschrijving (voor schermlezer)': 'Описание (за екранен четец)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Изберете маркер, за да поставите справка.',
-  'Reference verwijderen': 'Премахване на справка',
   'Afbeeldingsverwijzingen': 'Справки към изображения',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'има невалидна геометрия и не се чертае — коригирайте координатите в front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'препраща към маркер (A), който не присъства в текста, или обратното — свържете маркера и записа един с друг.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'се среща два пъти на този слайд — всеки маркер (A), (B) … може да има само един запис.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Този слайд има callouts, но няма котва — front matter не може да ги свърже със слайда. Задайте котва на слайда в редактора.',
 };

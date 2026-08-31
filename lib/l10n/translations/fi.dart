@@ -1638,13 +1638,33 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Kääntäminen kirjoittaa käännetyn kopion alkuperäisen viereen; alkuperäinen tiedostosi säilyy muuttumattomana.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Lisää kohde',
+  'Doel verwijderen': 'Poista kohde',
+  'Verwijzing verwijderen': 'Poista viite',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Valitse rivi viitten sijoittamiseksi.',
+  'Vorm van de markering': 'Merkin muoto',
+  'doel': 'kohde',
+  'doelen': 'kohteet',
+  'Verwijzing verwijderd': 'Viite poistettu',
+  'Afbeeldingsverwijzing': 'Kuvaviite',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'on virheelliset koordinaatit eikä sitä piirretä — korjaa kohteen sijainti viite-editorissa.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'viittaa (A)-merkkiin, joka ei ole tekstissä, tai päinvastoin — lisää kirjain tekstiin tai poista viite.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'esiintyy kahdesti tällä dioilla — jokaisella merkillä (A), (B) … voi olla vain yksi viite.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Tällä dioilla on kuvaviitteitä mutta ei ankkuria — viitteitä ei voida kytkeä dioon. Anna diolle ankkuri editorissa.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Nuolet risteävät tällä dioilla — harkitse neuloja nuolten sijaan luettavuuden vuoksi.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'putoaa kuvan näkyvän osan ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia, muuten merkki ei näy dian.',
+  'Beschrijving (voor schermlezer en export)':
+      'Kuvaus (ruudunlukijaa ja vientiä varten)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'putoaa näkyvän alueen ulkopuolelle — säädä polttopistettä, zoomia tai kohteen sijaintia.',
   'markering': 'merkki',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Nuolet risteävät tällä kalvolla — harkitse nasteja nuolten sijaan luettavuuden vuoksi.',
   'Pijlen': 'Nuolet',
   'Stap-voor-stap': 'Askel askeleelta',
   'Punt': 'Kohta',
@@ -4605,23 +4625,8 @@ const _dutchSourceAddFi = <String, String>{
       'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Poista kohde',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Lisää kohde',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
-  'Beschrijving (voor schermlezer)': 'Kuvaus (ruudunlukijaa varten)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Valitse luettelomerkki asettaaksesi viitteen.',
-  'Reference verwijderen': 'Poista viite',
   'Afbeeldingsverwijzingen': 'Kuvaviitteet',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'geometria on virheellinen eikä sitä piirretä — korjaa koordinaatit front matter -osiossa.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'viittaa (A)-merkintään, jota ei ole tekstissä, tai päinvastoin — yhdistä merkintä ja merkintätieto toisiinsa.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'esiintyy kahdesti tällä dioilla — jokaisella merkinnällä (A), (B) … saa olla vain yksi merkintätieto.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Tässä diossa on callouts mutta ei ankkuria — front matter ei voi yhdistää niitä dioon. Anna dion ankkuri editorissa.',
 };

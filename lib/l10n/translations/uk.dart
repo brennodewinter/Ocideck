@@ -1653,13 +1653,33 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Обертання записує повернуту копію поряд з оригіналом; ваш вихідний файл лишається незмінним.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Додати ціль',
+  'Doel verwijderen': 'Видалити ціль',
+  'Verwijzing verwijderen': 'Видалити посилання',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Виберіть рядок для розміщення посилання.',
+  'Vorm van de markering': 'Форма маркера',
+  'doel': 'ціль',
+  'doelen': 'цілі',
+  'Verwijzing verwijderd': 'Посилання видалено',
+  'Afbeeldingsverwijzing': 'Посилання на зображення',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'має недійсні координати і не малюється — виправте позицію цілі у редакторі посилань.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'посилається на (A)-маркер, якого немає в тексті, або навпаки — вставте літеру в текст або видаліть посилання.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'зустрічається на цьому слайді двічі — кожен (A), (B) … маркер може мати лише одне посилання.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'цей слайд має посилання на зображення, але не має прив’язки — посилання неможливо прив’язати до слайда. Встановіть прив’язку для слайда в редакторі.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'стрілки на цьому слайді перетинаються — замість стрілок розгляньте маркери-шпильки для кращої читабельності.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'потрапляє за межі видимої частини зображення — відкоригуйте фокус, масштаб або позицію цілі, інакше маркер не з\'явиться на слайді.',
+  'Beschrijving (voor schermlezer en export)':
+      'Опис (для зчитувача з екрана та експорту)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'потрапляє за межі видимої області — відкоригуйте фокус, масштаб або позицію цілі.',
   'markering': 'позначка',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Стрілки перетинаються на цьому слайді — розгляньте піни замість стрілок для читабельності.',
   'Pijlen': 'Стрілки',
   'Stap-voor-stap': 'Крок за кроком',
   'Punt': 'Пункт',
@@ -4620,24 +4640,9 @@ const _dutchSourceAddUk = <String, String>{
       'Виноски стають звичайним текстом; презентація не має виносок.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Видалити ціль',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Додати ціль',
   'bv. "de controller board met display"':
       'напр. "плата контролера з дисплеєм"',
-  'Beschrijving (voor schermlezer)': 'Опис (для програми читання з екрана)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Виберіть маркер, щоб розмістити посилання.',
-  'Reference verwijderen': 'Видалити посилання',
   'Afbeeldingsverwijzingen': 'Посилання на зображення',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'має недійсну геометрію і не малюється — виправте координати у front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'посилається на позначку (A), якої немає в тексті, або навпаки — з\'єднайте позначку та запис між собою.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'зустрічається двічі на цьому слайді — кожна позначка (A), (B) … може мати лише один запис.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Цей слайд має callouts, але не має якоря — front matter не може пов\'язати їх зі слайдом. Дайте слайду якір у редакторі.',
 };

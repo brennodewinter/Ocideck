@@ -1644,13 +1644,33 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Otočenie zapíše otočenú kópiu vedľa originálu; váš pôvodný súbor zostane nezmenený.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'padá mimo viditeľnej oblasti — upravte ohnisko, zoom alebo pozíciu cieľa.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Pridať cieľ',
+  'Doel verwijderen': 'Odstrániť cieľ',
+  'Verwijzing verwijderen': 'Odstrániť referenciu',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Vyberte riadok na umiestnenie referencie.',
+  'Vorm van de markering': 'Tvar značky',
+  'doel': 'cieľ',
+  'doelen': 'ciele',
+  'Verwijzing verwijderd': 'Referencia odstránená',
+  'Afbeeldingsverwijzing': 'Odkaz na obrázok',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'má neplatné súradnice a nekreslí sa — upravte pozíciu cieľa v editore referencií.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'odkazuje na (A) značku, ktorá nie je v texte, alebo naopak — pridajte písmeno do textu alebo odstráňte referenciu.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'objavuje sa dvakrát na tomto snímku — každá značka (A), (B) … môže mať len jednu referenciu.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Tento snímok má odkazy na obrázky, ale nemá kotvu — odkazy nemožno prepojiť so snímkom. Dajte snímku kotvu v editore.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Šípky sa krížia na tomto snímku — zvážte pinové značky namiesto šípok pre čitateľnosť.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'padá mimo viditeľnej časti obrázku — upravte ohnisko, zoom alebo pozíciu cieľa, inak sa značka na snímke nezobrazí.',
+  'Beschrijving (voor schermlezer en export)':
+      'Popis (pre čítačku obrazovky a export)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'padá mimo viditeľnej oblasti — upravte ohnisko, zoom alebo pozíciu cieľa.',
   'markering': 'značka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Šípky sa krížia na tomto snímku — zvážte piny namiesto šípok pre čitateľnosť.',
   'Pijlen': 'Šípky',
   'Stap-voor-stap': 'Krok za krokom',
   'Punt': 'Bod',
@@ -4602,23 +4622,8 @@ const _dutchSourceAddSk = <String, String>{
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Odstrániť cieľ',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Pridať cieľ',
   'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',
-  'Beschrijving (voor schermlezer)': 'Popis (pre čítačku obrazovky)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Vyberte odrážku na umiestnenie odkazu.',
-  'Reference verwijderen': 'Odstrániť odkaz',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'má neplatnú geometriu a nekreslí sa — opravte súradnice v front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'odkazuje na značku (A), ktorá nie je v texte, alebo naopak — prepojte značku a záznam navzájom.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'vyskytuje sa dvakrát na tomto slajde — každá značka (A), (B) … môže mať len jeden záznam.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Tento slajd má callouts, ale nemá kotvu — front matter ich nemôže prepojiť so slajdom. Dajte slajdu kotvu v editore.',
 };

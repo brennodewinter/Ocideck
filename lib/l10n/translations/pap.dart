@@ -676,13 +676,33 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Bira ta skirbi un kopia birá banda di e original; bo archivo original ta keda sin kambio.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'kaai paden di e área visibel — ajusta e punto focal, e zoom of e posishon di e meta.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
-      'kaai paden di e parti visibel di e imágen — ajusta e punto focal, e zoom of e posishon di e meta, of e marka no ta aparesé riba e slide.',
+  'Doel toevoegen': 'Añadi meta',
+  'Doel verwijderen': 'Kibra meta',
+  'Verwijzing verwijderen': 'Kibra referensia',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Skogi un linia pa pone un referensia.',
+  'Vorm van de markering': 'Forma di e marka',
+  'doel': 'meta',
+  'doelen': 'metanan',
+  'Verwijzing verwijderd': 'Referensia kibra',
+  'Afbeeldingsverwijzing': 'Referensia di imágen',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'tin koordinatenan invalidu i no ta wòrdu dibujá — ajusta e posishon di meta den e editor di referensian.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'ta referi na un marka (A) ku no ta na teksto, of al kontrali — pone e letra na teksto of kibra e referensia.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'aparesé dos bia na e slay aki — kada marka (A), (B) … por tin un referensia so.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'E slay aki tin referensian di imágen pero no tin ankra — bo no por konektá e referensian ku e slay. Duna e slay un ankra den e editor.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Flecha ta krusa riba e slay aki — konsiderá marka di pin na lugá di flecha pa legibilidat.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+      'kaai paden di e parti visibel di e imágen — ajusta e punto punto focal, e zoom of e posishon di e meta, of e marka no ta aparesé riba e slide.',
+  'Beschrijving (voor schermlezer en export)':
+      'Deskripshon (pa lektor di pantaya i exportashon)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'kaai paden di e área visibel — ajusta e punto punto focal, e zoom of e posishon di e meta.',
   'markering': 'marka',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Flecha ta kruza riba e slide aki — konsiderá pin na lugá di flecha pa legibilidat.',
   'Pijlen': 'Flecha',
   'Stap-voor-stap': 'Paso pa paso',
   'Punt': 'Punto',
@@ -4636,24 +4656,9 @@ const _dutchSourceAddPap = {
       'Footnote ta bira texto sòbel; un presentashon no tin notanan.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Kita meta',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Añadi meta',
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',
-  'Beschrijving (voor schermlezer)': 'Deskripshon (pa ledo di pantaya)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Skohe un bullet pa pone un referensia.',
-  'Reference verwijderen': 'Kita referensia',
   'Afbeeldingsverwijzingen': 'Referensian di imágen',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'tin geometria inbalido i no ta dibui — korige e koordinatenan den e front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'ta referí na un marka (A) ku no ta den e teksto, of al kontrario — konektá e marka i e entrada ku otro.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'ta aparesé dos bia na e slide aki — kada marka (A), (B) … por tin solamente un entrada.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'E slide aki tin callouts pero no tin ankra — e front matter no por konektá nan ku e slide. Duna e slide un ankra den e editor.',
 };

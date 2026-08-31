@@ -307,7 +307,7 @@ String slideQualityCategoryLabel(
     SlideQualityCategory.content => l10n.d('Inhoud'),
     SlideQualityCategory.privacy => l10n.d('Privacy'),
     SlideQualityCategory.improvement => l10n.d('Procesverbetering'),
-    SlideQualityCategory.callout => l10n.d('Callouts'),
+    SlideQualityCategory.callout => l10n.d('Afbeeldingsverwijzingen'),
   };
 }
 
@@ -471,23 +471,23 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
       '${l10n.d('Golden-thread-id')} ${issue.args['id'] ?? ''} '
           '${l10n.d('staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.')}',
     SlideQualityIssueKind.calloutInvalidGeometry =>
-      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
-          '${l10n.d('heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.')}',
+      '${l10n.d('Afbeeldingsverwijzing')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.')}',
     SlideQualityIssueKind.calloutOrphanReference =>
-      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
-          '${l10n.d('verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.')}',
+      '${l10n.d('Afbeeldingsverwijzing')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.')}',
     SlideQualityIssueKind.calloutDuplicateReference =>
-      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
-          '${l10n.d('komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.')}',
+      '${l10n.d('Afbeeldingsverwijzing')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.')}',
     SlideQualityIssueKind.calloutMissingAnchor => l10n.d(
-      'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.',
+      'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.',
     ),
     SlideQualityIssueKind.calloutCrossingArrows => l10n.d(
-      'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.',
+      'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.',
     ),
     SlideQualityIssueKind.calloutTargetOutOfView =>
-      '${l10n.d('Callout')} ${issue.args['ref'] ?? ''} '
-          '${l10n.d('valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.')}',
+      '${l10n.d('Afbeeldingsverwijzing')} ${issue.args['ref'] ?? ''} '
+          '${l10n.d('valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.')}',
   };
 
   // Een over meerdere split-pagina's samengevatte dichtheidsmelding (#1289):

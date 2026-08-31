@@ -1636,13 +1636,33 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pagriešana ieraksta pagrieztu kopiju blakus oriģinālam; jūsu sākotnējais fails paliek nemainīts.',
-  'valt buiten beeld — pas de focal, zoom of doelpositie aan.':
-      'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
-  'valt buiten het zichtbare deel van de afbeelding — pas de focal, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
+  'Doel toevoegen': 'Pievienot mērķi',
+  'Doel verwijderen': 'Noņemt mērķi',
+  'Verwijzing verwijderen': 'Noņemt atsauci',
+  'Selecteer een regel om een verwijzing te plaatsen.':
+      'Izvēlieties rindu atsauces novietošanai.',
+  'Vorm van de markering': 'Marķiera forma',
+  'doel': 'mērķis',
+  'doelen': 'mērķi',
+  'Verwijzing verwijderd': 'Atsauce noņemta',
+  'Afbeeldingsverwijzing': 'Attēla atsauce',
+  'heeft ongeldige coördinaten en wordt niet getekend — pas de doelpositie aan in de verwijzingeneditor.':
+      'ir nederīgas koordinātes un to nezīmē — pielāgojiet mērķa pozīciju atsauču redaktorā.',
+  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — zet de letter in de tekst of verwijder de verwijzing.':
+      'atsaucas uz (A) atzīmi, kas nav tekstā, vai otrādi — pievienojiet burtu tekstā vai noņemiet atsauci.',
+  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één verwijzing hebben.':
+      'parādās divreiz šajā slaidā — katram atzīmējumam (A), (B) … var būt tikai viena atsauce.',
+  'Deze dia heeft afbeeldingsverwijzingen maar geen anker — de verwijzingen kunnen niet aan de dia worden gekoppeld. Geef de dia een anker in de editor.':
+      'Šajā slaidā ir attēlu atsauces, bet nav enkura — atsauces nevar saistīt ar slaidu. Piešķiriet slaidam enkuru redaktorā.',
+  'Pijlen kruisen elkaar op deze dia — overweeg pinmarkeringen in plaats van pijlen voor leesbaarheid.':
+      'Bultas krustojas šajā slaidā — apsveriet tapu marķierus bultu vietā lasāmībai.',
+  'valt buiten het zichtbare deel van de afbeelding — pas het focuspunt, zoom of doelpositie aan, of de markering verschijnt niet op de dia.':
       'krīt ārpus attēla redzamās daļas — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju, pretējā gadījumā marķieris neparādīsies uz slaida.',
+  'Beschrijving (voor schermlezer en export)':
+      'Apraksts (ekrāna lasītājam un eksportam)',
+  'valt buiten beeld — pas het focuspunt, zoom of doelpositie aan.':
+      'krīt ārpus redzamā apgabala — pielāgojiet fokusa punktu, tālummaiņu vai mērķa pozīciju.',
   'markering': 'atzīme',
-  'Pijlen kruisen elkaar op deze dia — overweeg pins in plaats van pijlen voor leesbaarheid.':
-      'Bultas krustojas uz šī slaida — apsveriet tapas bultu vietā lasāmībai.',
   'Pijlen': 'Bultas',
   'Stap-voor-stap': 'Solis pa solim',
   'Punt': 'Punkts',
@@ -4596,23 +4616,8 @@ const _dutchSourceAddLv = <String, String>{
       'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
   'Callout': 'Callout',
   'Callouts': 'Callouts',
-  'Target verwijderen': 'Noņemt mērķi',
-  'target(s)': 'target(s)',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
-  'Target toevoegen': 'Pievienot mērķi',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
-  'Beschrijving (voor schermlezer)': 'Apraksts (ekrāna lasītājam)',
-  'Selecteer een bullet om een reference te plaatsen.':
-      'Atlasiet aizzīmi, lai novietotu atsauci.',
-  'Reference verwijderen': 'Noņemt atsauci',
   'Afbeeldingsverwijzingen': 'Attēlu atsauces',
-  'heeft ongeldige geometrie en wordt niet getekend — corrigeer de coördinaten in de front matter.':
-      'ir nederīga ģeometrija un to nezīmē — izlabojiet koordinātes front matter.',
-  'verwijst naar een (A)-markering die niet in de tekst staat, of omgekeerd — koppel de markering en de entry aan elkaar.':
-      'atsaucas uz (A) atzīmi, kas nav tekstā, vai otrādi — savienojiet atzīmi un ierakstu savā starpā.',
-  'komt twee keer voor op deze dia — elke markering (A), (B) … mag maar één entry hebben.':
-      'parādās divreiz šajā slaidā — katram atzīmēm (A), (B) … drīkst būt tikai viens ieraksts.',
-  'Deze dia heeft callouts maar geen anker — de front matter kan ze niet aan de dia koppelen. Geef de dia een anker in de editor.':
-      'Šim slaidam ir callout, bet nav enkura — front matter nevar tos sasaistīt ar slaidu. Piešķiriet slaidam enkuru redaktorā.',
 };
