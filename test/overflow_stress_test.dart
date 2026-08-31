@@ -36,11 +36,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// breed-maar-kort en smal dwingen de verticale as het hardst, waar
 /// Column/Spacer-overflows vandaan komen. Smal hoort erbij omdat zulke
 /// oppervlakken ook op het web draaien, zonder minimum vensterbreedte.
+/// 600×600 dekt de grens waar de instellingen-dialoog net de rail-layout
+/// kiest en het zoekveld krap wordt (#1885); 320×568 is een telefoonbreedte
+/// op het web.
 const _fullViewportSizes = <(String, Size)>[
   ('breed 1200x800', Size(1200, 800)),
   ('breed-en-kort 1100x560', Size(1100, 560)),
+  ('smal 600x600', Size(600, 600)),
   ('smal 440x760', Size(440, 760)),
   ('smal-en-kort 400x600', Size(400, 600)),
+  ('telefoon 320x568', Size(320, 568)),
 ];
 
 /// Viewports voor een modaal dialoog. Een dialoog rendert nooit smaller dan het
@@ -48,6 +53,12 @@ const _fullViewportSizes = <(String, Size)>[
 /// `lib/platform/native_window_io.dart`, `minimumWindowSize`). Toetsen onder die
 /// grens zou een onbereikbare stand keuren; wél de korte- en hoge-inhoud-hoeken
 /// binnen dat werkgebied, want 200% tekst dwingt vooral de verticale as.
+/// 600×600 zit alleen in `_narrowSettingsViewports` (per-tabblad-lus), niet
+/// hier: de markdown-tekstverwerker-dialoog deelt deze lijst en diens
+/// Quill-toolbar loopt op die breedte bij 200% tekst — een apart probleem
+/// buiten #1885. 320×568 zit in een aparte 100%-tekst-lus hieronder, want bij
+/// 200% tekst is een telefoonbreedte een extreme stand die veel losse
+/// overlopen opent buiten #1885.
 const _dialogViewportSizes = <(String, Size)>[
   ('minimumvenster 1000x650', Size(1000, 650)),
   ('minimumbreedte, hoog 1000x900', Size(1000, 900)),
@@ -141,6 +152,7 @@ final _surfaces = <_Surface>[
 const _narrowSettingsViewports = <(String, Size)>[
   ('smal-en-kort 400x600', Size(400, 600)),
   ('smal 440x760', Size(440, 760)),
+  ('smal web 600x600', Size(600, 600)),
 ];
 
 /// Opent het instellingen-dialoog vanuit de echte app-context, die [AppShell]
@@ -184,14 +196,24 @@ Future<void> _applyStressTextScale(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+/// Zet de venstermaat via `tester.view.physicalSize` (niet
+/// `binding.setSurfaceSize`): `setSurfaceSize` verandert de rendersurface maar
+/// `MediaQuery.sizeOf` leest de `FlutterView`, die de wijziging niet ziet —
+/// breedte-afhankelijke takken bleven op 800 px draaien en de poort zag de
+/// overlopen niet (#1884).
+void _setViewport(WidgetTester tester, Size size) {
+  tester.view.physicalSize = size;
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.reset);
+}
+
 void main() {
   for (final surface in _surfaces) {
     for (final (sizeLabel, size) in surface.sizes) {
       testWidgets(
         '${surface.name} loopt niet over bij 200% tekst op $sizeLabel',
         (tester) async {
-          await tester.binding.setSurfaceSize(size);
-          addTearDown(() => tester.binding.setSurfaceSize(null));
+          _setViewport(tester, size);
 
           await surface.pump(tester);
           await _applyStressTextScale(tester);
@@ -220,8 +242,7 @@ void main() {
         'instellingen-tabblad ${section.name} loopt niet over bij 200% tekst '
         'op $sizeLabel',
         (tester) async {
-          await tester.binding.setSurfaceSize(size);
-          addTearDown(() => tester.binding.setSurfaceSize(null));
+          _setViewport(tester, size);
 
           await _openSettingsDialog(tester, section: section);
           await _applyStressTextScale(tester);
@@ -241,5 +262,32 @@ void main() {
         },
       );
     }
+  }
+
+  // 320×568 (telefoonbreedte op het web) bij standaardtekst — de maat waarop
+  // #1885 de 54-px-overloop mat. Bij 200% tekst opent deze breedte veel losse
+  // overlopen buiten dit issue; die zijn een aparte zorg. Hier gaat het erom
+  // dat het zoekveld en de dialoog-schil op telefoonbreedte niet overlopen.
+  for (final section in SettingsSection.values) {
+    testWidgets(
+      'instellingen-tabblad ${section.name} loopt niet over op telefoon web '
+      '320x568 bij 100% tekst',
+      (tester) async {
+        _setViewport(tester, const Size(320, 568));
+
+        await _openSettingsDialog(tester, section: section);
+        // Geen _applyStressTextScale: 100% tekst, zoals het issue mat.
+        tester.binding.scheduleFrame();
+        await tester.pumpAndSettle();
+
+        expect(
+          tester.takeException(),
+          isNull,
+          reason:
+              'instellingen-tabblad ${section.name} loopt over op telefoon web '
+              '320x568 bij 100% interface-tekst',
+        );
+      },
+    );
   }
 }

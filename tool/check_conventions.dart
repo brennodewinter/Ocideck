@@ -341,7 +341,9 @@ const Map<String, int> classSizeBaseline = {
       // leest een veld van dit scherm, dus ze hoorden er ook niet in — de
       // driedeling van de stijlbouwer (algemeen/document/presentatie) betaalde
       // zichzelf zo terug.
-      6177,
+      // +26 (#1885): flexibel zoekveld (ConstrainedBox i.p.v. vaste 260 px),
+      // SegmentedButton-iconen weg op smal, _profileSelector in Wrap op smal.
+      6203,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -456,7 +458,10 @@ const Map<String, int> classSizeBaseline = {
   // naar een top-level functie in hetzelfde part-bestand gegaan (#1589). Hij
   // raakte geen enkel veld van de State, dus hij hoorde er ook niet in te
   // tellen.
-  'lib/widgets/app_shell.dart#_MainLayoutState': 1439,
+  'lib/widgets/app_shell.dart#_MainLayoutState':
+      // +10 (#1881): showRail-guard die de rail laat invallen op smal web,
+      // anders gooit num.clamp ArgumentError onder 210 px vensterbreedte.
+      1449,
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de

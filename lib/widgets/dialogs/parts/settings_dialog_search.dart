@@ -101,9 +101,16 @@ extension _SettingsSearch on _SettingsDialogState {
 
   Widget _settingsSearchField() {
     final l10n = context.l10n;
-    return SizedBox(
-      width: 260,
-      height: 36,
+    // Vaste 260 px liep over op smal web (600×600: 8 px, 320×568: 54 px) omdat
+    // de kop-Row de zoekveldbreedte niet kon krimpen — #1885. ConstrainedBox
+    // met een maximum laat het veld meebuigen; de Flexible in _contentHeader
+    // geeft het de ruimte die over is.
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 260,
+        maxHeight: 36,
+        minHeight: 36,
+      ),
       child: TextField(
         controller: _searchController,
         onChanged: (v) => _rebuild(() => _searchQuery = v.trim()),

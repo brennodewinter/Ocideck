@@ -25,76 +25,95 @@ String _importFailureText(
 extension _SettingsProfile on _SettingsDialogState {
   Widget _profileSelector(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: TextField(
-            controller: _profileName,
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(
-              labelText: l10n.d('Stijlprofiel'),
-              hintText: l10n.d('Naam van het stijlprofiel'),
-              isDense: true,
-              prefixIcon: const Icon(Icons.style_outlined, size: 18),
-              suffixIcon: PopupMenuButton<String>(
-                tooltip: l10n.d('Ander profiel kiezen'),
-                icon: const Icon(Icons.arrow_drop_down),
-                onSelected: _selectProfile,
-                itemBuilder: (context) => [
-                  for (final profile in profiles)
-                    PopupMenuItem(
-                      value: profile.name,
-                      child: Row(
-                        children: [
-                          if (profile.name == _originalName)
-                            const Padding(
-                              padding: EdgeInsets.only(right: 8),
-                              child: Icon(Icons.check, size: 16),
-                            ),
-                          Expanded(child: Text(profile.name)),
-                        ],
+    final nameField = TextField(
+      controller: _profileName,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        labelText: l10n.d('Stijlprofiel'),
+        hintText: l10n.d('Naam van het stijlprofiel'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.style_outlined, size: 18),
+        suffixIcon: PopupMenuButton<String>(
+          tooltip: l10n.d('Ander profiel kiezen'),
+          icon: const Icon(Icons.arrow_drop_down),
+          onSelected: _selectProfile,
+          itemBuilder: (context) => [
+            for (final profile in profiles)
+              PopupMenuItem(
+                value: profile.name,
+                child: Row(
+                  children: [
+                    if (profile.name == _originalName)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(Icons.check, size: 16),
                       ),
-                    ),
-                ],
+                    Expanded(child: Text(profile.name)),
+                  ],
+                ),
               ),
-            ),
-            onChanged: (value) {
-              final name = value.trim();
-              _themeProfile = _themeProfile.copyWith(
-                name: name.isEmpty ? _themeProfile.name : name,
-              );
-              _profileTouched = true;
-            },
-          ),
+          ],
         ),
-        const SizedBox(width: 8),
-        IconButton(
-          tooltip: l10n.d('Nieuw profiel'),
-          onPressed: _createProfile,
-          icon: const Icon(Icons.add, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Standaardprofiel laden'),
-          onPressed: _loadDefaultProfile,
-          icon: const Icon(Icons.restart_alt, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Profiel exporteren'),
-          onPressed: _exportProfile,
-          icon: const Icon(Icons.file_download_outlined, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Profiel importeren'),
-          onPressed: _importProfile,
-          icon: const Icon(Icons.file_upload_outlined, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Profiel verwijderen'),
-          onPressed: profiles.length <= 1 ? null : _deleteProfile,
-          icon: const Icon(Icons.delete_outline, size: 18),
-        ),
-      ],
+      ),
+      onChanged: (value) {
+        final name = value.trim();
+        _themeProfile = _themeProfile.copyWith(
+          name: name.isEmpty ? _themeProfile.name : name,
+        );
+        _profileTouched = true;
+      },
+    );
+    final buttons = <Widget>[
+      IconButton(
+        tooltip: l10n.d('Nieuw profiel'),
+        onPressed: _createProfile,
+        icon: const Icon(Icons.add, size: 18),
+      ),
+      IconButton(
+        tooltip: l10n.d('Standaardprofiel laden'),
+        onPressed: _loadDefaultProfile,
+        icon: const Icon(Icons.restart_alt, size: 18),
+      ),
+      IconButton(
+        tooltip: l10n.d('Profiel exporteren'),
+        onPressed: _exportProfile,
+        icon: const Icon(Icons.file_download_outlined, size: 18),
+      ),
+      IconButton(
+        tooltip: l10n.d('Profiel importeren'),
+        onPressed: _importProfile,
+        icon: const Icon(Icons.file_upload_outlined, size: 18),
+      ),
+      IconButton(
+        tooltip: l10n.d('Profiel verwijderen'),
+        onPressed: profiles.length <= 1 ? null : _deleteProfile,
+        icon: const Icon(Icons.delete_outline, size: 18),
+      ),
+    ];
+    // Op smal web (telefoonbreedte) passen vijf 48-px-knoppen niet naast het
+    // tekstveld — de Row liep 4 px over (#1885). Onder 400 px gaan de knoppen
+    // in een Wrap onder het veld; daarboven blijft de oorspronkelijke Row.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 400) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              nameField,
+              const SizedBox(height: 8),
+              Wrap(spacing: 4, runSpacing: 4, children: buttons),
+            ],
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: nameField),
+            const SizedBox(width: 8),
+            ...buttons,
+          ],
+        );
+      },
     );
   }
 

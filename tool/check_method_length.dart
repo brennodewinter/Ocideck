@@ -30,6 +30,9 @@ const int maxMethodLines = 150;
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
 const Map<String, int> methodLengthBaseline = {
+  // +8 (#1881): showRail-guard die de rail laat invallen op smal web.
+  // De methode stond al op de limiet.
+  'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 158,
   // +13 (#1655, #1654): voetnoot-clip met ConstrainedBox + RepaintBoundary
   // in het documentvenster. De methode stond al op de limiet.
   'lib/widgets/reader/paged_document_view.dart::_PagedDocumentViewState._sheet':

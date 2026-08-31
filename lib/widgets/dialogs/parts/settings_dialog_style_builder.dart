@@ -142,22 +142,30 @@ class _DocumentStyleBuilder {
   }
 
   Widget _surfaceSelector(AppLocalizations l10n, _StyleSurface surface) =>
-      SegmentedButton<_StyleSurface>(
-        segments: [
-          for (final value in _StyleSurface.values)
-            ButtonSegment(
-              value: value,
-              label: Text(
-                value.label(l10n),
-                key: Key('style-surface-${value.name}'),
-              ),
-              icon: Icon(value.icon, size: 17),
-            ),
-        ],
-        selected: {surface},
-        showSelectedIcon: false,
-        onSelectionChanged: (value) =>
-            _rebuild(() => _styleSurface = value.first),
+      LayoutBuilder(
+        builder: (context, constraints) {
+          // Op smal web (telefoonbreedte) past de SegmentedButton met icoon +
+          // label net niet; de iconen vallen dan weg zodat de labels alleen
+          // passen (#1885).
+          final showIcons = constraints.maxWidth > 260;
+          return SegmentedButton<_StyleSurface>(
+            segments: [
+              for (final value in _StyleSurface.values)
+                ButtonSegment(
+                  value: value,
+                  label: Text(
+                    value.label(l10n),
+                    key: Key('style-surface-${value.name}'),
+                  ),
+                  icon: showIcons ? Icon(value.icon, size: 17) : null,
+                ),
+            ],
+            selected: {surface},
+            showSelectedIcon: false,
+            onSelectionChanged: (value) =>
+                _rebuild(() => _styleSurface = value.first),
+          );
+        },
       );
 
   Widget _surfaceHint(AppLocalizations l10n, _StyleSurface surface) => Row(
