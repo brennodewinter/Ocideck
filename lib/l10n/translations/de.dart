@@ -680,8 +680,6 @@ const _dutchSourceAddDe = {
   'Doel toevoegen': 'Ziel hinzufügen',
   'Doel verwijderen': 'Ziel entfernen',
   'Verwijzing verwijderen': 'Referenz entfernen',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Wähle einen Aufzählungspunkt, um eine Referenz zu platzieren.',
   'Vorm van de markering': 'Form der Markierung',
   'doel': 'Ziel',
   'doelen': 'Ziele',

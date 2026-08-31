@@ -1641,8 +1641,6 @@ const _dutchSourceAddSl = <String, String>{
   'Doel toevoegen': 'Dodaj cilj',
   'Doel verwijderen': 'Odstrani cilj',
   'Verwijzing verwijderen': 'Odstrani sklic',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Izberite vrstico za postavitev sklica.',
   'Vorm van de markering': 'Oblika oznake',
   'doel': 'cilj',
   'doelen': 'cilji',

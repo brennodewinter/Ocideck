@@ -677,8 +677,6 @@ const _dutchSourceAddIt = {
   'Doel toevoegen': 'Aggiungi target',
   'Doel verwijderen': 'Rimuovi target',
   'Verwijzing verwijderen': 'Rimuovi riferimento',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Seleziona una riga per posizionare un riferimento.',
   'Vorm van de markering': 'Forma del marcatore',
   'doel': 'bersaglio',
   'doelen': 'bersagli',

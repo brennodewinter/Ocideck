@@ -1640,8 +1640,6 @@ const _dutchSourceAddDa = <String, String>{
   'Doel toevoegen': 'Tilføj mål',
   'Doel verwijderen': 'Fjern mål',
   'Verwijzing verwijderen': 'Fjern reference',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Vælg en linje for at placere en reference.',
   'Vorm van de markering': 'Markeringens form',
   'doel': 'mål',
   'doelen': 'mål',

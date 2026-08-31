@@ -1665,8 +1665,6 @@ const _dutchSourceAddEl = <String, String>{
   'Doel toevoegen': 'Προσθήκη στόχου',
   'Doel verwijderen': 'Αφαίρεση στόχου',
   'Verwijzing verwijderen': 'Αφαίρεση αναφοράς',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Επιλέξτε μια γραμμή για να τοποθετήσετε μια αναφορά.',
   'Vorm van de markering': 'Μορφή του δείκτη',
   'doel': 'στόχος',
   'doelen': 'στόχοι',

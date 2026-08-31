@@ -679,8 +679,6 @@ const _dutchSourceAddPap = {
   'Doel toevoegen': 'Añadi meta',
   'Doel verwijderen': 'Kibra meta',
   'Verwijzing verwijderen': 'Kibra referensia',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Skogi un linia pa pone un referensia.',
   'Vorm van de markering': 'Forma di e marka',
   'doel': 'meta',
   'doelen': 'metanan',

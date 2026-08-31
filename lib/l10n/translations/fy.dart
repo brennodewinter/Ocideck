@@ -680,8 +680,6 @@ const _dutchSourceAddFy = {
   'Doel toevoegen': 'Doel tafoegje',
   'Doel verwijderen': 'Doel fuortsmite',
   'Verwijzing verwijderen': 'Ferwizing fuortsmite',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Kies in rigel om in ferwizing te pleatsen.',
   'Vorm van de markering': 'Foarm fan de markering',
   'doel': 'doel',
   'doelen': 'doelen',

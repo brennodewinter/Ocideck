@@ -492,6 +492,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       imageSize: widget.slide.imageZoom,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,
+      callouts: widget.slide.callouts,
     );
     if (result == null) return;
     widget.onUpdate(

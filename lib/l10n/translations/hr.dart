@@ -1644,8 +1644,6 @@ const _dutchSourceAddHr = <String, String>{
   'Doel toevoegen': 'Dodaj cilj',
   'Doel verwijderen': 'Ukloni cilj',
   'Verwijzing verwijderen': 'Ukloni referencu',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Odaberite redak za postavljanje reference.',
   'Vorm van de markering': 'Oblik oznake',
   'doel': 'cilj',
   'doelen': 'ciljevi',

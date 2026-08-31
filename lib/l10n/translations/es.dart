@@ -677,8 +677,6 @@ const _dutchSourceAddEs = {
   'Doel toevoegen': 'Añadir objetivo',
   'Doel verwijderen': 'Quitar objetivo',
   'Verwijzing verwijderen': 'Quitar referencia',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Selecciona una línea para colocar una referencia.',
   'Vorm van de markering': 'Forma del marcador',
   'doel': 'destino',
   'doelen': 'destinos',

@@ -1655,8 +1655,6 @@ const _dutchSourceAddLa = <String, String>{
   'Doel toevoegen': 'Adde destinatum',
   'Doel verwijderen': 'Remove destinatum',
   'Verwijzing verwijderen': 'Remove referentiam',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Selige lineam ad referentiam collocandam.',
   'Vorm van de markering': 'Forma signi',
   'doel': 'scopus',
   'doelen': 'scopī',

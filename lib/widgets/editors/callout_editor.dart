@@ -587,31 +587,26 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         ? _callouts[_selectedCalloutIndex!]
         : null;
     final intrinsic = _intrinsic;
-    final clippedRefs = callout != null
-        ? _computeClippedRefs(intrinsic)
-        : <String>{};
+    final clippedRefs = _computeClippedRefs(intrinsic);
     final hasSelection = callout != null;
+    // #1854: stage in de aspectratio van het echte beeldslot, niet de
+    // dialoogverhouding — anders dekt cover een ander deel dan op de dia.
+    final imgFraction =
+        (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.40)
+            .clamp(0.1, 0.70);
 
     return Column(
       children: [
         Expanded(
-          child: hasSelection
-              ? LayoutBuilder(
-                  builder: (context, c) => _buildImageStack(
-                    callout,
-                    intrinsic,
-                    c.maxWidth,
-                    c.maxHeight,
-                  ),
-                )
-              : Center(
-                  child: Text(
-                    l10n.d(
-                      'Selecteer een regel om een verwijzing te plaatsen.',
-                    ),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: imgFraction * 16 / 9,
+              child: LayoutBuilder(
+                builder: (context, c) =>
+                    _buildImageStack(intrinsic, c.maxWidth, c.maxHeight),
+              ),
+            ),
+          ),
         ),
         if (clippedRefs.isNotEmpty)
           Padding(
@@ -674,12 +669,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     );
   }
 
-  Widget _buildImageStack(
-    ImageCallout callout,
-    Size? intrinsic,
-    double slotW,
-    double slotH,
-  ) {
+  Widget _buildImageStack(Size? intrinsic, double slotW, double slotH) {
     final painted = intrinsic == null
         ? null
         : ImageViewportGeometry.paintedRect(
@@ -695,25 +685,46 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         painted == null ? sx / slotW : (sx - painted.left) / painted.width;
     double toImgY(double sy) =>
         painted == null ? sy / slotH : (sy - painted.top) / painted.height;
+    final provider = calloutImageProvider(
+      widget.slide.imagePath,
+      widget.projectPath,
+    );
     return Stack(
       fit: StackFit.expand,
       children: [
         Container(
           color: Colors.black,
-          child: Image(
-            image: calloutImageProvider(
-              widget.slide.imagePath,
-              widget.projectPath,
-            )!,
-            fit: widget.slide.imageZoom == 0 ? BoxFit.cover : BoxFit.contain,
-            alignment: Alignment(
-              (widget.slide.imageFocalX * 2) - 1,
-              (widget.slide.imageFocalY * 2) - 1,
-            ),
-          ),
+          child: provider == null
+              ? const SizedBox()
+              : Image(
+                  image: provider,
+                  fit: widget.slide.imageZoom == 0
+                      ? BoxFit.cover
+                      : BoxFit.contain,
+                  alignment: Alignment(
+                    widget.slide.imageFocalX * 2 - 1,
+                    widget.slide.imageFocalY * 2 - 1,
+                  ),
+                ),
         ),
-        _buildGestureLayer(toImgX, toImgY),
-        ..._buildMarkers(callout, slotW, slotH, painted),
+        // #1854: alle verwijzingen tonen; geselecteerde interactief, overige statisch.
+        if (_selectedCalloutIndex != null) _buildGestureLayer(toImgX, toImgY),
+        for (var ci = 0; ci < _callouts.length; ci++)
+          if (ci != _selectedCalloutIndex)
+            ...buildStaticCalloutMarkers(
+              _callouts[ci],
+              slotW,
+              slotH,
+              painted,
+              onTap: () => _selectCallout(ci),
+            ),
+        if (_selectedCalloutIndex != null)
+          ..._buildMarkers(
+            _callouts[_selectedCalloutIndex!],
+            slotW,
+            slotH,
+            painted,
+          ),
         if (_dragRegion != null)
           buildDragPreview(_dragRegion!, slotW, slotH, painted),
       ],

@@ -262,7 +262,11 @@ const Map<String, int> fileSizeBaseline = {
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
   // van 154 naar 41 regels; de filegrootte is de grenswaarde.
-  'lib/widgets/editors/callout_editor.dart': 1045,
+  // +11 (#1854): stage in echte slot-aspectratio + alle callouts tonen (§6).
+  // Statische markeringen staan in callout_marker_helpers.dart; hier is de
+  // null-image guard (beeld toont altijd, ook zonder selectie) en de
+  // for-loop die alle callouts doorloopt.
+  'lib/widgets/editors/callout_editor.dart': 1056,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -512,6 +516,10 @@ const Map<String, int> classSizeBaseline = {
   // read and the wrap call remain in the state class.
   // +1 (#1164): splitRunPosition-doorvoer naar de thumbnail voor de (2/3)-teller.
   'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1025,
+  // +9 (#1854): null-image guard (beeld toont altijd) + for-loop die alle
+  // callouts doorloopt in _buildImageStack. Statische markeringen staan in
+  // callout_marker_helpers.dart; de klasse houdt de loop en de guard.
+  'lib/widgets/editors/callout_editor.dart#_CalloutEditorDialogState': 1009,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

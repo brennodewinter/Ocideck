@@ -843,8 +843,6 @@ const _dutchSourceAddEn = {
   'Doel toevoegen': 'Add target',
   'Doel verwijderen': 'Remove target',
   'Verwijzing verwijderen': 'Remove reference',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Select a line to place a reference.',
   'Vorm van de markering': 'Shape of the marker',
   'doel': 'target',
   'doelen': 'targets',

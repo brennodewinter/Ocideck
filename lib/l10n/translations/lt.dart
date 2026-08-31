@@ -1647,8 +1647,6 @@ const _dutchSourceAddLt = <String, String>{
   'Doel toevoegen': 'Pridėti tikslą',
   'Doel verwijderen': 'Pašalinti tikslą',
   'Verwijzing verwijderen': 'Pašalinti nuorodą',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Pasirinkite eilutę nuorodai patalpinti.',
   'Vorm van de markering': 'Žymeklio forma',
   'doel': 'taikinys',
   'doelen': 'taikiniai',

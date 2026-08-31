@@ -1642,8 +1642,6 @@ const _dutchSourceAddCs = <String, String>{
   'Doel toevoegen': 'Přidat cíl',
   'Doel verwijderen': 'Odebrat cíl',
   'Verwijzing verwijderen': 'Odebrat referenci',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Vyberte řádek pro umístění reference.',
   'Vorm van de markering': 'Tvar značky',
   'doel': 'cíl',
   'doelen': 'cíle',

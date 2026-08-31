@@ -1660,8 +1660,6 @@ const _dutchSourceAddBg = <String, String>{
   'Doel toevoegen': 'Добавяне на цел',
   'Doel verwijderen': 'Премахване на цел',
   'Verwijzing verwijderen': 'Премахване на препратка',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Изберете ред, за да поставите препратка.',
   'Vorm van de markering': 'Форма на маркера',
   'doel': 'цел',
   'doelen': 'цени',

@@ -3,6 +3,7 @@
 // types, no State dependencies.
 
 import 'package:material_ui/material_ui.dart';
+import '../../models/image_callout.dart';
 import '../../services/image_viewport_geometry.dart';
 import '../../theme/app_theme.dart';
 
@@ -65,6 +66,92 @@ Widget buildDragPreview(
       ),
     ),
   );
+}
+
+/// #1854: statische markeringen voor een niet-geselecteerde callout — een
+/// gedimde badge met de reference-letter per doel, regio's krijgen een
+/// gedimde omlijning. [onTap] selecteert de callout in de editor.
+List<Widget> buildStaticCalloutMarkers(
+  ImageCallout callout,
+  double slotW,
+  double slotH,
+  GeoRect? painted, {
+  VoidCallback? onTap,
+}) {
+  final r = slotW * 0.022;
+  final ws = <Widget>[];
+  for (final t in callout.targets) {
+    if (!t.isValid) continue;
+    final m = painted == null
+        ? null
+        : ImageViewportGeometry.mapTarget(
+            t,
+            painted: painted,
+            slotW: slotW,
+            slotH: slotH,
+          );
+    if (m != null && m.clipped) continue;
+    double cx, cy;
+    if (t is CalloutRegion) {
+      final rx = painted == null ? t.x * slotW : m!.x;
+      final ry = painted == null ? t.y * slotH : m!.y;
+      final rw = painted == null ? t.w * slotW : m!.w;
+      final rh = painted == null ? t.h * slotH : m!.h;
+      ws.add(
+        Positioned(
+          left: rx,
+          top: ry,
+          width: rw,
+          height: rh,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppTheme.accentFg.withValues(alpha: 0.5),
+                width: 2,
+              ),
+            ),
+          ),
+        ),
+      );
+      cx = rx + r;
+      cy = ry + r;
+    } else {
+      final p = t as CalloutPoint;
+      cx = painted == null ? p.x * slotW : m!.x;
+      cy = painted == null ? p.y * slotH : m!.y;
+    }
+    ws.add(
+      Positioned(
+        left: cx - r,
+        top: cy - r,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            width: r * 2,
+            height: r * 2,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppTheme.accentFg.withValues(alpha: 0.7),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.5),
+                width: r * 0.18,
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              callout.reference,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: r,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  return ws;
 }
 
 /// Which corner of a region is being dragged.

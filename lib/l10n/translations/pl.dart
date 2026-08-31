@@ -1652,8 +1652,6 @@ const _dutchSourceAddPl = <String, String>{
   'Doel toevoegen': 'Dodaj cel',
   'Doel verwijderen': 'Usuń cel',
   'Verwijzing verwijderen': 'Usuń odwołanie',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Wybierz wiersz, aby umieścić odwołanie.',
   'Vorm van de markering': 'Kształt znacznika',
   'doel': 'cel',
   'doelen': 'cele',

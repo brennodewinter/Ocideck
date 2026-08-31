@@ -1642,8 +1642,6 @@ const _dutchSourceAddHu = <String, String>{
   'Doel toevoegen': 'Cél hozzáadása',
   'Doel verwijderen': 'Cél eltávolítása',
   'Verwijzing verwijderen': 'Hivatkozás eltávolítása',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Válasszon egy sort a hivatkozás elhelyezéséhez.',
   'Vorm van de markering': 'Jelölő alakja',
   'doel': 'célpont',
   'doelen': 'célpontok',
