@@ -284,6 +284,19 @@ in Dutch, and it keeps growing on `main` between releases.
   nu, op "dank", "bijdragers", "contributors" en "credits" — want wie de namen
   zoekt, kent het woord "dank" niet per se. Geen nieuwe interfacetekst: beide
   tegels dragen het bestaande label "Met dank aan".
+- feat(ci): `web-gate` bouwt de webbundel op een PR die hem kan breken
+  (#1888-staart). `make check-web` is de enige controle die naar een *gebouwde*
+  bundel kijkt, en die draaide alleen lokaal in `check-full` en op een `v*`-tag.
+  Tussen die twee bouwde niets de web — precies het gat waardoor de verdwenen
+  `.htaccess` en `.well-known/security.txt` pas in fase 1 van de v0.5.0-release
+  boven kwamen, weken na de merge. De nieuwe workflow draait dezelfde
+  `make check-web` op het gepinde CI-image, maar alleen wanneer de wijziging de
+  bundel kan raken: `web/**`, de drie `tool/`-scripts, de `Makefile`, de twee
+  pubspec-bestanden, de Flutter-pin, het CI-image en de workflow zelf. Bewust
+  géén vereiste check — een vereiste context met een padfilter meldt zich niet op
+  een PR die die paden niet raakt en laat die dan eeuwig `pending` hangen.
+  `test/web_gate_triggers_test.dart` bewaakt dat padfilter per trekker, met de
+  reden per ingang; een poort die niet afgaat bewaakt niets.
 
 - feat(l10n): poort op onvertaalde sjabloontekst
   (`make check-untranslated-templates`). `tool/template_l10n_po.dart` pelt maar
