@@ -17,7 +17,10 @@ import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/download_delivery.dart';
+import 'package:ocideck/models/settings.dart' show ThemeProfile;
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
@@ -167,5 +170,29 @@ void main() {
       ),
       isNull,
     );
+  });
+
+  test('een geweigerd stijlprofiel meldt niet dat het is opgeslagen', () async {
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      ThemeProfile.new,
+    );
+    const profile = ThemeProfile(name: 'Huisstijl');
+
+    final ok = await service.exportStyleProfile(profile);
+    expect(ok.saved, isTrue);
+    expect(ok.downloadRefused, isFalse);
+    expect(calls, hasLength(1));
+    expect(
+      calls.single.name,
+      endsWith('.${FileService.styleProfileExtension}'),
+    );
+
+    // Afbreken is stil, een weigering niet: de schil moet het verschil zien.
+    accept = false;
+    final refused = await service.exportStyleProfile(profile);
+    expect(refused.saved, isFalse);
+    expect(refused.downloadRefused, isTrue);
   });
 }

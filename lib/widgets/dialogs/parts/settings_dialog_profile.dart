@@ -157,7 +157,21 @@ extension _SettingsProfile on _SettingsDialogState {
             _editedProfile(),
             projectPath: _currentProjectPath,
           );
-      if (!mounted || !outcome.saved) return;
+      if (!mounted) return;
+      // Afbreken is stil; een geweigerde browserdownload niet — de gebruiker
+      // heeft daar niets afgebroken en zou anders denken dat het bestand er is
+      // (#1902).
+      if (outcome.downloadRefused) {
+        showErrorSnackBar(
+          messenger,
+          l10n,
+          l10n.d(
+            'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+          ),
+        );
+        return;
+      }
+      if (!outcome.saved) return;
       messenger.showSnackBar(
         SnackBar(
           content: Text(

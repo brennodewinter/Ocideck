@@ -8,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
+import '../../services/download_delivery.dart';
 import '../../services/rfc3161_timestamp.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
@@ -200,12 +201,23 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
       return;
     }
     try {
-      if (kIsWeb) {
-        await FilePicker.saveFile(
-          dialogTitle: l10n.d('Verzoek (.tsq) exporteren'),
-          fileName: 'ocideck-seal.tsq',
-          bytes: tsq,
-        );
+      if (deliversByDownload) {
+        // Nam de browser de download niet aan, dan is het verzoek er niet — en
+        // dan mag de nonce hieronder niet bewaard worden. Precies waar de
+        // comment daar voor waarschuwt, maar tot #1902 wist dit pad niet dat
+        // het misging: saveFile geeft op web altijd null terug.
+        const name = 'ocideck-seal.tsq';
+        if (deliverAsDownload([
+              (name: name, bytes: tsq),
+            ], bundleName: bundleNameFor(name)) ==
+            null) {
+          _toast(
+            l10n.d(
+              'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+            ),
+          );
+          return;
+        }
       } else {
         final location = await getSaveLocation(
           suggestedName: 'ocideck-seal.tsq',
