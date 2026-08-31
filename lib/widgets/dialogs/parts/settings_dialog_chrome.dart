@@ -673,7 +673,7 @@ extension _SettingsChrome on _SettingsDialogState {
               ),
             ),
           ),
-          _settingsSearchField(),
+          Flexible(child: _settingsSearchField()),
           IconButton(
             tooltip: context.l10n.t('cancel'),
             onPressed: () => Navigator.pop(context),

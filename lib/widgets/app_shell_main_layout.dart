@@ -156,12 +156,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               // "A _RenderLayoutBuilder was mutated in performLayout". The
               // body row spans the window, so the window width is equivalent.
               final bodyWidth = MediaQuery.sizeOf(ctx).width;
-              final maxRailWidth = (bodyWidth - _minEditorWidth)
-                  .clamp(_minSlideRailWidth, bodyWidth)
-                  .toDouble();
-              final railWidth = _slideRailWidth
-                  .clamp(_minSlideRailWidth, maxRailWidth)
-                  .toDouble();
+              // Op smal web kan het venster onder rail-plus-editor komen; de
+              // rail valt dan weg (#1881) — anders gooit clamp ArgumentError.
+              final showRail =
+                  bodyWidth >= _minSlideRailWidth + _minEditorWidth;
+              final maxRailWidth = showRail
+                  ? (bodyWidth - _minEditorWidth)
+                        .clamp(_minSlideRailWidth, bodyWidth)
+                        .toDouble()
+                  : 0.0;
+              final railWidth = showRail
+                  ? _slideRailWidth
+                        .clamp(_minSlideRailWidth, maxRailWidth)
+                        .toDouble()
+                  : 0.0;
               if (railWidth != _slideRailWidth) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (mounted) setState(() => _slideRailWidth = railWidth);
@@ -173,23 +181,25 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               // editing continues. `collabChatRail` is empty otherwise.
               final workspace = Row(
                 children: [
-                  SizedBox(
-                    width: railWidth,
-                    child: SlideListPanel(
-                      railWidth: railWidth,
-                      onPresentFromHere: (i) =>
-                          _presentFromSlide(context, ref, i),
+                  if (showRail) ...[
+                    SizedBox(
+                      width: railWidth,
+                      child: SlideListPanel(
+                        railWidth: railWidth,
+                        onPresentFromHere: (i) =>
+                            _presentFromSlide(context, ref, i),
+                      ),
                     ),
-                  ),
-                  _ResizableDivider(
-                    onDrag: (delta) {
-                      setState(() {
-                        _slideRailWidth = (_slideRailWidth + delta)
-                            .clamp(_minSlideRailWidth, maxRailWidth)
-                            .toDouble();
-                      });
-                    },
-                  ),
+                    _ResizableDivider(
+                      onDrag: (delta) {
+                        setState(() {
+                          _slideRailWidth = (_slideRailWidth + delta)
+                              .clamp(_minSlideRailWidth, maxRailWidth)
+                              .toDouble();
+                        });
+                      },
+                    ),
+                  ],
                   const Expanded(child: EditorPanel()),
                   ...collabChatRail(ref),
                   ...callRail(ref),

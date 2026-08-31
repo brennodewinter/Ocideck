@@ -48,9 +48,13 @@ class _ResizableDialogBoxState extends State<ResizableDialogBox> {
   @override
   Widget build(BuildContext context) {
     final max = widget.maxWidth ?? MediaQuery.sizeOf(context).width - 80;
+    // Op smal web kan `max` onder `minWidth` zakken; `num.clamp` gooit dan
+    // ArgumentError. De vloer beweegt mee met wat er echt is — een smallere
+    // box is beter dan een foutvlak (#1883).
+    final min = widget.minWidth.clamp(0.0, max);
     final handle = DialogResizeHandle(onDrag: _growBy);
     return SizedBox(
-      width: _width.clamp(widget.minWidth, max),
+      width: _width.clamp(min, max),
       height: widget.height,
       child: widget.builder(context, handle),
     );
@@ -58,8 +62,9 @@ class _ResizableDialogBoxState extends State<ResizableDialogBox> {
 
   void _growBy(double dx) {
     final max = widget.maxWidth ?? MediaQuery.sizeOf(context).width - 80;
+    final min = widget.minWidth.clamp(0.0, max);
     setState(() {
-      _width = (_width + dx).clamp(widget.minWidth, max);
+      _width = (_width + dx).clamp(min, max);
     });
   }
 
