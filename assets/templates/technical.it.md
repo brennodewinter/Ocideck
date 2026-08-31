@@ -21,7 +21,7 @@ language: it
 
 ---
 
-### Architecture overview
+### Panoramica dell'architettura
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Flusso di dati o flusso di processi
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. L'utente effettua una richiesta
+2. L'API la convalida e la instrada
+3. Il servizio la elabora e la memorizza
+4. Il risultato torna all'utente
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Esempio di codice
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Sostituisci questo esempio con il codice che vuoi spiegare.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

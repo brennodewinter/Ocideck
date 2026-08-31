@@ -14,9 +14,9 @@ language: bg
 
 ---
 
-### Important warning
+### Важно предупреждение
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Винаги проверявайте актуалните AIP/NOTAM, официалната метеорологична информация, POH/AFM, местните процедури и законовите минимуми. Този шаблон подпомага вземането на решения, но не замества задължителната подготовка за полет.**
 
 ---
 

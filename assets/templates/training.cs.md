@@ -37,15 +37,15 @@ language: cs
 
 ---
 
-### Example or case study
+### Příklad nebo případová studie
 
-Describe a recognizable real-world situation here.
+Popište zde rozpoznatelnou situaci z praxe.
 
-**What happened?** …
+**Co se stalo?** …
 
-**What went wrong — or right?** …
+**Co se pokazilo — nebo naopak povedlo?** …
 
-**What do we learn from this?** …
+**Co se z toho učíme?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Jaká je správná volba?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Správná odpověď",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Špatná odpověď",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Další špatná odpověď",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "A ještě jedna špatná odpověď",
       "correct": false
     }
   ]

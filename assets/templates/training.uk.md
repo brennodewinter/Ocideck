@@ -37,15 +37,15 @@ language: uk
 
 ---
 
-### Example or case study
+### Приклад або кейс
 
-Describe a recognizable real-world situation here.
+Опишіть тут упізнавану ситуацію з практики.
 
-**What happened?** …
+**Що сталося?** …
 
-**What went wrong — or right?** …
+**Що пішло не так — чи навпаки добре?** …
 
-**What do we learn from this?** …
+**Чого ми з цього вчимося?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Який вибір правильний?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правильна відповідь",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ще одна неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "І ще одна неправильна відповідь",
       "correct": false
     }
   ]

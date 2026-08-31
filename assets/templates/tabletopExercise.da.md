@@ -41,11 +41,11 @@ language: da
 
 ---
 
-### Inject round 1
+### Inject, runde 1
 
-Describe here the first development presented to the team.
+Beskriv her den første udvikling, der præsenteres for teamet.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Spørgsmål til teamet:** hvad gør I først, og hvem informerer I?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Inject, runde 2
 
-Describe here the escalation or twist in the scenario.
+Beskriv her eskaleringen eller drejningen i scenariet.
 
-**Question for the team:** does this change your approach — and your communication?
+**Spørgsmål til teamet:** ændrer det jeres tilgang — og jeres kommunikation?
 
 ---
 

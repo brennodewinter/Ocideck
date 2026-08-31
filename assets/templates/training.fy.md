@@ -37,15 +37,15 @@ language: fy
 
 ---
 
-### Example or case study
+### Foarbyld of kasus
 
-Describe a recognizable real-world situation here.
+Beskriuw hjir in werkenbere situaasje út de praktyk.
 
-**What happened?** …
+**Wat barde der?** …
 
-**What went wrong — or right?** …
+**Wat gie der mis — of just goed?** …
 
-**What do we learn from this?** …
+**Wat leare wy hjirfan?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Wat is de goede kar?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "It goede antwurd",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "In ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Noch in ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "En noch in ferkeard antwurd",
       "correct": false
     }
   ]
@@ -93,6 +93,6 @@ Describe a recognizable real-world situation here.
 
 # Gearfetting
 
-- Key takeaway 1: …
-- Key takeaway 2: …
+- Wichtichste ynsjoch 1: …
+- Wichtichste ynsjoch 2: …
 - Wolle jo mear witte? …

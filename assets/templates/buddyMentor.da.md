@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy / mentor plan
+title: Buddy-/mentoraftale
 language: da
 ---
 
 <!-- _class: title -->
 
-# Buddy / mentor plan
+# Buddy-/mentoraftale
 ## Nytilkommen · Ven eller mentor · Startdato
 
 ---

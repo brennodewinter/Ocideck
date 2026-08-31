@@ -117,19 +117,19 @@ language: id
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Jelaskan di sini secara faktual dan teknis apa masalah keamanannya.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Jelaskan secara dapat direproduksi (dengan bukti) bagaimana temuan itu ditetapkan.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Jelaskan kemungkinan dampak teknis dan bisnisnya.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Jelaskan mitigasi yang konkret dan dapat dicapai.
 
 ---
 

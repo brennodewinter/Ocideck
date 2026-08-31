@@ -24,11 +24,11 @@ language: tr
 # Proje aşamaları
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Hazırlık
+2. Tasarım
+3. Geliştirme
+4. Test ve kabul
+5. Devreye alma ve sonraki bakım
 
 ---
 

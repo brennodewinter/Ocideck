@@ -90,7 +90,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Follow-up status
+# Opfolchstatus
 
 | Finding | Status | Taljochting |
 | --- | --- | --- |

@@ -28,21 +28,21 @@ language: uk
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Коли я даю</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Опиши поведінку, а не людину</li>
+<li>Факт → ефект → прохання</li>
+<li>Вчасно, не накопичено</li>
+<li>Перевір, як це сприймається</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Коли я отримую</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Слухай, не захищаючись одразу</li>
+<li>Попроси конкретний приклад</li>
+<li>Подякуй за відвертість</li>
+<li>Візьми час, перш ніж відповісти</li>
 </ul>
 </div>
 </div>

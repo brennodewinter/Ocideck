@@ -37,15 +37,15 @@ language: fi
 
 ---
 
-### Example or case study
+### Esimerkki tai tapaus
 
-Describe a recognizable real-world situation here.
+Kuvaa tähän tunnistettava tilanne käytännöstä.
 
-**What happened?** …
+**Mitä tapahtui?** …
 
-**What went wrong — or right?** …
+**Mikä meni pieleen — tai juuri hyvin?** …
 
-**What do we learn from this?** …
+**Mitä opimme tästä?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Mikä on oikea valinta?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Oikea vastaus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Väärä vastaus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Toinen väärä vastaus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Vielä yksi väärä vastaus",
       "correct": false
     }
   ]

@@ -32,7 +32,7 @@ language: et
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Eelarve kasutus",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: et
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Riskitase",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: et
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Kindlus ajakavas",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: et
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Avatud punktide trend",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

@@ -4660,7 +4660,7 @@ const _dutchSourceAddIt = {
   'Geen slides gevonden.': 'Nessuna diapositiva trovata.',
   "dia's geïmporteerd.": 'diapositive importate.',
   'Import mislukt: ': 'Importazione non riuscita: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Checklist',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Configurate il server nella scheda Connettore LibrePlan. Finché lì non c\'è nulla, non succede niente.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4687,7 +4687,7 @@ const _dutchSourceAddIt = {
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Aree',
   'bv. "de controller board met display"':
       'es. "la scheda di controllo con display"',
   'Afbeeldingsverwijzingen': 'Riferimenti immagine',

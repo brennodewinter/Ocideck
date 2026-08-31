@@ -28,14 +28,14 @@ language: fi
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politiikka",
+    "Tekniikka",
+    "Prosessit",
+    "Ihmiset"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Valmis (%)",
       "data": [
         80.0,
         55.0,

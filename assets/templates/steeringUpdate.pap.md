@@ -32,7 +32,7 @@ language: pap
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Uso di presupuesto",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: pap
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Konfiansa den planifikashon",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: pap
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Nivel di risiko",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

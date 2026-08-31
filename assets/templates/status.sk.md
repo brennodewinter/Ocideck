@@ -32,7 +32,7 @@ language: sk
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Čerpanie rozpočtu",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: sk
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Úroveň rizika",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: sk
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Dôvera v plán",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: sk
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Trend otvorených bodov",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

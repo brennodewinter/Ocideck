@@ -63,7 +63,7 @@ language: mt
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Baġit",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: mt
       ]
     },
     {
-      "name": "Actual",
+      "name": "Attwali",
       "data": [
         298.0,
         318.0,

@@ -37,15 +37,15 @@ language: hu
 
 ---
 
-### Example or case study
+### Példa vagy esettanulmány
 
-Describe a recognizable real-world situation here.
+Írj le itt egy felismerhető helyzetet a gyakorlatból.
 
-**What happened?** …
+**Mi történt?** …
 
-**What went wrong — or right?** …
+**Mi ment rosszul — vagy éppen jól?** …
 
-**What do we learn from this?** …
+**Mit tanulunk ebből?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Mi a helyes választás?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "A helyes válasz",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Még egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "És még egy rossz válasz",
       "correct": false
     }
   ]

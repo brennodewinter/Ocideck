@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE fitness-to-fly check
+title: IMSAFE fit-to-fly-kontroll
 language: sv
 ---
 
 <!-- _class: title -->
 
-# IMSAFE fitness-to-fly check
+# IMSAFE fit-to-fly-kontroll
 ## Pilot · Flygning · Datum · Denna kontroll ersätter inte medicinsk bedömning
 
 ---

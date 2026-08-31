@@ -32,7 +32,7 @@ language: id
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Penggunaan anggaran",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: id
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Keyakinan pada jadwal",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: id
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Tingkat risiko",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Steering committee / project board update
+title: Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
 language: mt
 ---
 
@@ -11,283 +11,19 @@ language: mt
 
 # Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
 
-[[OCIDECK_SEG]]] 
-
-Status f'sentenza waħda:...
-
-[[OCIDECK_SEG]]] 
-
-Żvilupp ewlieni:...
-
-[[OCIDECK_SEG]]] 
-
-Mistoqsija ewlenija għall-kumitat ta' tmexxija:...
-
-[[OCIDECK_SEG]]] 
-
-Sommarju tal-ġestjoni
-
-[[OCIDECK_SEG]]] 
-
-Dashboard tal-istatus
-
-[[OCIDECK_SEG]]] 
-
-Q1 :: Tragward 1 :: Miksuba.
-
-[[OCIDECK_SEG]]] 
-
-Q2 :: Milestone 2 :: Fit-triq it-tajba.
-
-[[OCIDECK_SEG]]] 
-
-Q3 :: Milestone 3 :: Jeħtieġ attenzjoni.
-
-[[OCIDECK_SEG]]] 
-
-Skeda u tragwardi
-
-[[OCIDECK_SEG]]] 
-
-Baġit u riżorsi
-
-[[OCIDECK_SEG]]] 
-
-Oġġett
-
-[[OCIDECK_SEG]]] 
-
-Ibbaġitjat
-
-[[OCIDECK_SEG]]] 
-
-Minfuqa
-
-[[OCIDECK_SEG]]] 
-
-Tbassir
-
-[[OCIDECK_SEG]]] 
-
-Baġit totali
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Sforz tat-tim (FTE)
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Riskji u kwistjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Riskju jew kwistjoni
-
-[[OCIDECK_SEG]]] 
-
-Status
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Ġdid / għaddej / magħluq
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Deċiżjonijiet mitluba
-
-[[OCIDECK_SEG]]] 
-
-Deċiżjoni
-
-[[OCIDECK_SEG]]] 
-
-Spjegazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Riżultat
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Approvat / miċħuda / differita
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Azzjonijiet mill-aħħar darba
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni
-
-[[OCIDECK_SEG]]] 
-
-Sid
-
-[[OCIDECK_SEG]]] 
-
-Status
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Imlesta / għaddejja / imdewma
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Azzjonijiet ġodda
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni
-
-[[OCIDECK_SEG]]] 
-
-Sid
-
-[[OCIDECK_SEG]]] 
-
-Skadenza
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Eskalazzjoni: … — mitluba mill-kumitat ta' tmexxija: …
-
-[[OCIDECK_SEG]]] 
-
-Ebda eskalazzjoni: ikkonferma u rrekordja
-
-[[OCIDECK_SEG]]] 
-
-Eskalazzjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
-
 ---
 
-# Management summary
+# Sommarju tal-ġestjoni
 
-- Status in one sentence: …
-- Key development: …
-- Key question for the steering committee: …
+- Status f'sentenza waħda:...
+- Żvilupp ewlieni:...
+- Mistoqsija ewlenija għall-kumitat ta' tmexxija:...
 
 ---
 
 <!-- _class: cockpit -->
 
-# Status dashboard
+# Dashboard tal-istatus
 
 ```cockpit
 {
@@ -296,7 +32,7 @@ Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Użu tal-baġit",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -307,7 +43,7 @@ Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Fiduċja fl-iskeda",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -318,7 +54,7 @@ Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Livell ta' riskju",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -335,70 +71,70 @@ Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
 
 <!-- _class: timeline -->
 
-# Schedule and milestones
+# Skeda u tragwardi
 
-- Q1 :: Milestone 1 :: Achieved.
-- Q2 :: Milestone 2 :: On track.
-- Q3 :: Milestone 3 :: Needs attention.
+- Q1 :: Tragward 1 :: Miksuba.
+- Q2 :: Milestone 2 :: Fit-triq it-tajba.
+- Q3 :: Milestone 3 :: Jeħtieġ attenzjoni.
 
 ---
 
 <!-- _class: table -->
 
-# Budget and resources
+# Baġit u riżorsi
 
-| Item | Budgeted | Spent | Forecast |
+| Oġġett | Ibbaġitjat | Minfuqa | Tbassir |
 | --- | --- | --- | --- |
-| Total budget | … | … | … |
-| Team effort (FTE) | … | … | … |
+| Baġit totali | … | … | … |
+| Sforz tat-tim (FTE) | … | … | … |
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Risks and issues
+# Riskji u kwistjonijiet
 
-| Risk or issue | Status | Action |
+| Riskju jew kwistjoni | Status | Azzjoni |
 | --- | --- | --- |
-| … | New / ongoing / closed | … |
-| … | … | … |
-
----
-
-<!-- _class: table table-editable -->
-
-# Decisions requested
-
-| Decision | Explanation | Outcome |
-| --- | --- | --- |
-| … | … | Approved / rejected / deferred |
+| … | Ġdid / għaddej / magħluq | … |
 | … | … | … |
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Actions from last time
+# Deċiżjonijiet mitluba
 
-| Action | Owner | Status |
+| Deċiżjoni | Spjegazzjoni | Riżultat |
 | --- | --- | --- |
-| … | … | Completed / in progress / delayed |
+| … | … | Approvat / miċħuda / differita |
 | … | … | … |
 
 ---
 
 <!-- _class: table table-editable -->
 
-# New actions
+# Azzjonijiet mill-aħħar darba
 
-| Action | Owner | Deadline |
+| Azzjoni | Sid | Status |
+| --- | --- | --- |
+| … | … | Imlesta / għaddejja / imdewma |
+| … | … | … |
+
+---
+
+<!-- _class: table table-editable -->
+
+# Azzjonijiet ġodda
+
+| Azzjoni | Sid | Skadenza |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
 
 ---
 
-# Escalations
+# Eskalazzjonijiet
 
-- Escalation: … — requested of the steering committee: …
-- No escalations: confirm and record
+- Eskalazzjoni: … — mitluba mill-kumitat ta' tmexxija: …
+- Ebda eskalazzjoni: ikkonferma u rrekordja

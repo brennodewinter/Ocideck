@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nodrošiniet piķi
+title: Prezentēt pitch
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Nodrošiniet piķi
+# Prezentēt pitch
 ## Kam tas paredzēts · Ko jūs jautājat · Laiks · Datums
 
 ---
@@ -24,20 +24,20 @@ language: lv
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Ja jūs to nevarat izskaidrot vienā teikumā, jūs pats to vēl neesat pietiekami labi sapratis.
 
-— Rule of thumb for a strong pitch
+— Īkšķa likums spēcīgai prezentācijai
 
 ---
 
 # Struktūra
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Āķis: intriģējošs sākums vai piemērs
+2. Problēma: kādas sāpes jūs risināt un kam
+3. Risinājums: ko jūs piedāvājat, vienkāršā valodā
+4. Pierādījums: skaitļi, piemērs vai demonstrācija
+5. Jautājums: konkrētais nākamais solis
 
 ---
 

@@ -36,9 +36,9 @@ language: tr
 # Öncelikler
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Kritik güvenlik açıklarını giderin
+2. Erişim haklarını gözden geçirin
+3. Günlük kaydı ve izlemeyi kurun
 
 ---
 

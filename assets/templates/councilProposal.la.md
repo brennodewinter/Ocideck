@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Consilium / rogatio exsecutiva
-## Subject · Portfolio · Registration number · Author
+## Res · Portfolium · Numerus registrationis · Auctor
 
 ---
 
@@ -61,7 +61,7 @@ language: la
 
 <!-- _class: table -->
 
-# Financial coverage
+# Tegumentum pecuniarium
 
 | Item | Structural vel unum-off | Moles | Funding fons |
 | --- | --- | --- | --- |
@@ -95,7 +95,7 @@ language: la
 
 # Commendationes et emendationes
 
-| Type | Content | Tabled by | Resolution |
+| Genus | Contentum | Propositum a | Decretum |
 | --- | --- | --- | --- |
 | ... | ... | ... | ... |
 | ... | ... | ... | ... |

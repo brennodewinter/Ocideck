@@ -35,7 +35,7 @@ language: da
 
 <!-- _class: table table-editable -->
 
-# RASCI matrix
+# RASCI-matrix
 
 | Opgave | R | A | S | C | jeg |
 | --- | --- | --- | --- | --- | --- |

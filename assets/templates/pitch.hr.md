@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Isporučite ponudu
+title: Održati pitch
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Isporučite ponudu
+# Održati pitch
 ## Za koga je · Što tražite · Vrijeme · Datum
 
 ---
@@ -24,20 +24,20 @@ language: hr
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Ako to ne možete objasniti u jednoj rečenici, ni sami to još niste dovoljno dobro razumjeli.
 
-— Rule of thumb for a strong pitch
+— Pravilo za snažnu prezentaciju
 
 ---
 
 # Struktura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Kuka: intrigantan uvod ili primjer
+2. Problem: koju bol rješavate i za koga
+3. Rješenje: što nudite, jednostavnim jezikom
+4. Dokaz: brojke, primjer ili demonstracija
+5. Pitanje: konkretan sljedeći korak
 
 ---
 

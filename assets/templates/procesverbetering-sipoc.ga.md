@@ -37,13 +37,13 @@ language: ga
 
 <!-- _class: table table-editable -->
 
-# Set the process boundaries
+# Socraigh teorainneacha an phróisis
 
-| Boundary | Value |
+| Teorainn | Luach |
 | --- | --- |
 | Process name |  |
-| Start point |  |
-| End point |  |
+| Pointe tosaigh |  |
+| Pointe deiridh |  |
 
 ---
 
@@ -63,12 +63,12 @@ language: ga
 
 # Seicliosta - Críochnaigh ó dheas go clé
 
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.
+1. Socraigh pointí tosaigh agus deiridh soiléire don phróiseas.
+2. Ainmnigh na custaiméirí atá ag brath ar an toradh.
+3. Déan cur síos ar na haschuir a fhaigheann siad.
+4. Déan achoimre ar an bpróiseas i 4 go 7 ngníomhaíocht ardleibhéil.
+5. Cinntigh cé na hionchuir a theastaíonn ó na gníomhaíochtaí sin.
+6. Nasc gach ionchur leis an soláthraí a chuireann ar fáil é.
 
 ---
 

@@ -21,7 +21,7 @@ language: la
 
 ---
 
-### Architecture overview
+### Conspectus architecturae
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Data fluxus seu processus influunt
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Usor petitionem facit
+2. API eam probat et dirigit
+3. Servitium eam tractat et servat
+4. Effectus ad usorem redit
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # exemplum codicis
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Substitue hoc exemplum codice quem explicare vis.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

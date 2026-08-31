@@ -14,9 +14,9 @@ language: uk
 
 ---
 
-### Important warning
+### Важливе попередження
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Завжди перевіряйте чинні AIP/NOTAM, офіційну метеоінформацію, POH/AFM, місцеві процедури та законодавчі мінімуми. Цей шаблон підтримує ухвалення рішення, але не замінює обов'язкової підготовки до польоту.**
 
 ---
 

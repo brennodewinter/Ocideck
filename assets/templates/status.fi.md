@@ -32,7 +32,7 @@ language: fi
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budjetin käyttö",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: fi
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Riskitaso",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: fi
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Luottamus aikatauluun",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: fi
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Avoimien kohtien suuntaus",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

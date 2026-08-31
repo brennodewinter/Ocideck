@@ -42,14 +42,14 @@ language: gsw
   "x": [
     "Jan",
     "Feb",
-    "Mar",
+    "Mär",
     "Apr",
-    "May",
+    "Mai",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Das Jahr",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: gsw
       ]
     },
     {
-      "name": "Last year",
+      "name": "Letscht Jahr",
       "data": [
         10.0,
         11.0,

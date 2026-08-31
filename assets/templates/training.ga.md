@@ -37,15 +37,15 @@ language: ga
 
 ---
 
-### Example or case study
+### Sampla nó cás staidéir
 
-Describe a recognizable real-world situation here.
+Déan cur síos anseo ar chás inaitheanta ón saol dáiríre.
 
-**What happened?** …
+**Cad a tharla?** …
 
-**What went wrong — or right?** …
+**Cad a chuaigh amú — nó cad a d'éirigh go maith?** …
 
-**What do we learn from this?** …
+**Cad a fhoghlaimímid uaidh seo?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Cad é an rogha cheart?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "An freagra ceart",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Freagra mícheart",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Freagra mícheart eile",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Agus freagra mícheart eile fós",
       "correct": false
     }
   ]

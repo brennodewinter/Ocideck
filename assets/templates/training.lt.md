@@ -37,15 +37,15 @@ language: lt
 
 ---
 
-### Example or case study
+### Pavyzdys arba atvejo analizė
 
-Describe a recognizable real-world situation here.
+Aprašykite čia atpažįstamą situaciją iš praktikos.
 
-**What happened?** …
+**Kas nutiko?** …
 
-**What went wrong — or right?** …
+**Kas nepavyko — ar kaip tik pavyko?** …
 
-**What do we learn from this?** …
+**Ko iš to pasimokome?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Koks yra teisingas pasirinkimas?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Teisingas atsakymas",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Dar vienas neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ir dar vienas neteisingas atsakymas",
       "correct": false
     }
   ]

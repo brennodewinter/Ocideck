@@ -25,7 +25,7 @@ language: la
 
 ---
 
-# What does SIPOC map?
+# Quid SIPOC describit?
 
 - ** Supplier: ** processus necessitates vel opibus praebet indicium.
 - **Input:** data, materiae vel aliae condiciones processu requisitae.

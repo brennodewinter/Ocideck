@@ -45,7 +45,7 @@ language: hu
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Bejelentések",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: hu
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidensek",
       "data": [
         9.0,
         12.0,

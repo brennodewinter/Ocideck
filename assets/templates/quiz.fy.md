@@ -28,25 +28,25 @@ language: fy
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ferfang dit troch dyn eigen mearkarfraach.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "It goede antwurd",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "In ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Noch in ferkeard antwurd",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "En noch in ferkeard antwurd",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: fy
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ferfang dit troch in stelling dy't wier of net wier is.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: fy
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ferfang dit troch in fraach mei meardere goede antwurden.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Goed antwurd 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Goed antwurd 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Ferkeard antwurd 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Ferkeard antwurd 2",
       "correct": false
     }
   ]

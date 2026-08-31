@@ -32,7 +32,7 @@ language: bg
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Използване на бюджета",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: bg
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Ниво на риск",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: bg
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Увереност в планирането",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: bg
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Тенденция на отворените точки",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

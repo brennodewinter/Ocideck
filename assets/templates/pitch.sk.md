@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Doručiť ihrisko
+title: Predniesť pitch
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Doručiť ihrisko
+# Predniesť pitch
 ## Pre koho je určený · Na čo sa pýtate · Čas · Dátum
 
 ---
@@ -24,20 +24,20 @@ language: sk
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Ak to nedokážete vysvetliť jednou vetou, sami tomu ešte nerozumiete dostatočne dobre.
 
-— Rule of thumb for a strong pitch
+— Základné pravidlo pre silnú prezentáciu
 
 ---
 
 # Štruktúra
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Háčik: pútavý úvod alebo príklad
+2. Problém: akú bolesť riešite a pre koho
+3. Riešenie: čo ponúkate, jednoduchým jazykom
+4. Dôkaz: čísla, príklad alebo ukážka
+5. Žiadosť: konkrétny ďalší krok
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pateikite aikštę
+title: Pristatyti pitch'ą
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pateikite aikštę
+# Pristatyti pitch'ą
 ## Kam skirta · Ko klausiate · Laikas · Data
 
 ---
@@ -24,20 +24,20 @@ language: lt
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Jei negalite to paaiškinti vienu sakiniu, patys dar nesate to pakankamai gerai supratę.
 
-— Rule of thumb for a strong pitch
+— Nykščio taisyklė stipriam pristatymui
 
 ---
 
 # Struktūra
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Kabliukas: intriguojanti pradžia arba pavyzdys
+2. Problema: kokį skausmą sprendžiate ir kam
+3. Sprendimas: ką siūlote, paprasta kalba
+4. Įrodymas: skaičiai, pavyzdys arba demonstracija
+5. Prašymas: konkretus kitas žingsnis
 
 ---
 

@@ -40,16 +40,16 @@ language: et
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
+    "Jaan",
+    "Veebr",
+    "Märts",
     "Apr",
-    "May",
-    "Jun"
+    "Mai",
+    "Juuni"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Tänavu",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: et
       ]
     },
     {
-      "name": "Last year",
+      "name": "Eelmisel aastal",
       "data": [
         10.0,
         11.0,

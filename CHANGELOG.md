@@ -271,6 +271,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(l10n): poort op onvertaalde sjabloontekst
+  (`make check-untranslated-templates`). `tool/template_l10n_po.dart` pelt maar
+  vijf dingen uit een sjabloon — `title:`, `# `, `## `, bullets en tabelrijen —
+  en alles daarbuiten reist als `raw` mee. Wat de Engelse bron zei, bleef de
+  vertaling dus zeggen. De nieuwe poort vergelijkt per regel tegen de Engelse
+  bron én tegen de Nederlandse: staat een regel in het Nederlands óók zo, dan is
+  hij zo bedoeld (de SIPOC-tabelkop die het acroniem spelt, `ATIS / QNH`,
+  `**Scope object:**` dat `FindingSpec` als sleutel leest) en telt hij niet mee.
+  Ratchet op nul.
+
 - fix(callouts): een tweede beeldverwijzing wiste de letter van de eerste
   (#1848). De dialoog rekende bij elke bewerking vanaf de dia zoals die was
   toen hij openging — hij wordt tussendoor niet opnieuw opgebouwd. Wie twee
@@ -388,6 +398,27 @@ in Dutch, and it keeps growing on `main` between releases.
   push.
 
 ### Fixed
+
+- fix(templates): 29 Maltese sjablonen waren geen Markdown meer. In plaats van
+  het sjabloon stond er de kale uitvoer van een vertaalronde in: de
+  geëxporteerde waarden achter elkaar met `[[OCIDECK_SEG]]]` ertussen en de
+  Engelse bron eraan geplakt. Geen dia-scheidingen, geen koppen, geen tabellen,
+  en de scheider letterlijk in beeld. Herbouwd uit de waarden die er wél in
+  stonden, langs de importroute die de tool al kent.
+
+- fix(templates): sjabloontekst die in geen enkele taal vertaald was. 47 regels
+  in twaalf sjablonen (genummerde lijsten, citaten, `###`-koppen, alinea's), de
+  tekstvelden in de `question`-, `chart`- en `cockpit`-blokken van negen
+  sjablonen, en de tekst binnen de HTML-blokken van vier — alles in 27 talen.
+  Plus de koppen, titels en tabelcellen die één taal liet staan, met het Latijn
+  als grootste post.
+
+- fix(l10n): vertalingen die onder de drempel van de bestaande poorten door
+  glipten. Het Grieks droeg vier Duitse waarden uit het DOE-blok, en `Gebieden`
+  (nieuw bij de Callout Editor) stond in alle 31 talen in het Engels, net als
+  `Toets`, `Interactie`, `Berekenen`, `Gegevens`, `Hellingscoëfficiënt`,
+  `Regressie…` en `Checklists` in een deel ervan. Waar het Engelse woord het
+  woord ván die taal is, blijft het staan.
 
 - fix(crop): een afbeelding draaien deed op Windows niets, en de oorzaak was de
   voorvertoning zelf. `FileImage` laat de engine het bestand openen met

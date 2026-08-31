@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iwassal żift
+title: Agħmel pitch
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Iwassal żift
+# Agħmel pitch
 ## Għal min hu · Dak li qed titlob · Ħin · Data
 
 ---
@@ -24,20 +24,20 @@ language: mt
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Jekk ma tistax tispjegah f'sentenza waħda, lanqas int stess ma tifhmu biżżejjed.
 
-— Rule of thumb for a strong pitch
+— Regola prattika għal preżentazzjoni b'saħħitha
 
 ---
 
 # L-istruttura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Ganċ: bidu jew eżempju li jiġbed
+2. Problema: liema uġigħ qed issolvi, u għal min
+3. Soluzzjoni: dak li toffri, b'lingwaġġ sempliċi
+4. Prova: numri, eżempju jew dimostrazzjoni
+5. Talba: il-pass konkret li jmiss
 
 ---
 

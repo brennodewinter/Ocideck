@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toimita pitch
+title: Pitchin pitäminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Toimita pitch
+# Pitchin pitäminen
 ## Kenelle se on tarkoitettu · Mitä kysyt · Aika · Päivämäärä
 
 ---
@@ -24,20 +24,20 @@ language: fi
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Jos et osaa selittää sitä yhdellä lauseella, et itsekään ymmärrä sitä vielä tarpeeksi hyvin.
 
-— Rule of thumb for a strong pitch
+— Nyrkkisääntö vahvaan esitykseen
 
 ---
 
 # Rakenne
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Koukku: kiinnostava avaus tai esimerkki
+2. Ongelma: minkä kivun ratkaiset ja kenelle
+3. Ratkaisu: mitä tarjoat, selkokielellä
+4. Todistus: luvut, esimerkki tai demo
+5. Kysy: konkreettinen seuraava askel
 
 ---
 

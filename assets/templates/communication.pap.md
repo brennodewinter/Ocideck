@@ -35,9 +35,9 @@ language: pap
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulá aki e mensahe prinsipal den un frase potente.
 
-— Name or sender
+— Nòmber òf remitente
 
 ---
 

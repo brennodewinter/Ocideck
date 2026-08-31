@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Enforcement briefing (BOA)
+title: Tillsynsbriefing (BOA)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Enforcement briefing (BOA)
+# Tillsynsbriefing (BOA)
 ## Datum · Skift · Arbetsområde/distrikt · Samordnare
 
 ---

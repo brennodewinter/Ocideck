@@ -14,9 +14,9 @@ language: hr
 
 ---
 
-### Important warning
+### Važno upozorenje
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Uvijek provjerite važeće AIP/NOTAM, službene meteorološke informacije, POH/AFM, lokalne postupke i zakonske minimume. Ovaj predložak podupire odlučivanje, ali ne zamjenjuje obveznu pripremu leta.**
 
 ---
 
@@ -238,7 +238,7 @@ language: hr
 | Pridruži se | … | … |
 | Prepreke | … | … |
 | Plan obilaženja | … | … |
-| Taxi / parking | … | … |
+| Taksiranje / parkiranje | … | … |
 
 ---
 

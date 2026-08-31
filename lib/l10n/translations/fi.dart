@@ -3071,7 +3071,7 @@ const _dutchSourceAddFi = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'puuttui tiedostosta ja ohitettiin',
   'Hoofdeffecten': 'Päävaikutukset',
-  'Interactie': 'Interaction',
+  'Interactie': 'Yhdysvaikutus',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Liian vähän dataa päävaikutuskuvaajaan',
   'Te weinig gegevens voor een interactieplot':
@@ -4597,7 +4597,7 @@ const _dutchSourceAddFi = <String, String>{
   'Geen slides gevonden.': 'Dioja ei löytynyt.',
   "dia's geïmporteerd.": 'diaa tuotu.',
   'Import mislukt: ': 'Tuonti epäonnistui: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Tarkistuslistat',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Määritä palvelin LibrePlan-liitin-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4624,7 +4624,7 @@ const _dutchSourceAddFi = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Alueet',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
   'Afbeeldingsverwijzingen': 'Kuvaviitteet',
 };

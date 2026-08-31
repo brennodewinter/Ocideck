@@ -28,25 +28,25 @@ language: hr
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Zamijenite ovo vlastitim pitanjem s višestrukim izborom.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Točan odgovor",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Netočan odgovor",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Još jedan netočan odgovor",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "I još jedan netočan odgovor",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: hr
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Zamijenite ovo tvrdnjom koja je točna ili netočna.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: hr
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Zamijenite ovo pitanjem s više točnih odgovora.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Točan odgovor 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Točan odgovor 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Netočan odgovor 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Netočan odgovor 2",
       "correct": false
     }
   ]

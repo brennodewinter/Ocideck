@@ -36,9 +36,9 @@ language: lt
 # Prioritetai
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Pašalinti kritinius pažeidžiamumus
+2. Peržiūrėti prieigos teises
+3. Įdiegti žurnalų vedimą ir stebėseną
 
 ---
 

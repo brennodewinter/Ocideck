@@ -35,9 +35,9 @@ language: hu
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Fogalmazd meg itt a fő üzenetet egyetlen erőteljes mondatban.
 
-— Name or sender
+— Név vagy feladó
 
 ---
 

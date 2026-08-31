@@ -28,14 +28,14 @@ language: uk
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Політика",
+    "Технології",
+    "Процеси",
+    "Люди"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Готово (%)",
       "data": [
         80.0,
         55.0,

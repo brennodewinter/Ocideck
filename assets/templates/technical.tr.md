@@ -21,7 +21,7 @@ language: tr
 
 ---
 
-### Architecture overview
+### Mimari genel bakış
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Veri akışı veya süreç akışı
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Kullanıcı bir istek gönderir
+2. API isteği doğrular ve yönlendirir
+3. Servis isteği işler ve saklar
+4. Sonuç kullanıcıya döner
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Kod örneği
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Bu örneği açıklamak istediğiniz kodla değiştirin.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

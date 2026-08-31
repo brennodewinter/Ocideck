@@ -32,7 +32,7 @@ language: uk
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Використання бюджету",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: uk
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Рівень ризику",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: uk
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Упевненість у графіку",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: uk
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Тренд відкритих пунктів",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

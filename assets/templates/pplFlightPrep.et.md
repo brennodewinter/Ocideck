@@ -14,9 +14,9 @@ language: et
 
 ---
 
-### Important warning
+### Oluline hoiatus
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Kontrollige alati kehtivaid AIP/NOTAM-e, ametlikku ilmateavet, POH/AFM-i, kohalikke protseduure ja seaduslikke miinimume. See mall toetab otsustamist, kuid ei asenda kohustuslikku lennuettevalmistust.**
 
 ---
 

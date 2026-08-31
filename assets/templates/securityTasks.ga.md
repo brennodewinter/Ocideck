@@ -36,9 +36,9 @@ language: ga
 # Tosaíochtaí
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Réitigh leochaileachtaí criticiúla
+2. Athbhreithnigh cearta rochtana
+3. Cuir logáil agus monatóireacht ar bun
 
 ---
 

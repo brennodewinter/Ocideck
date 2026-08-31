@@ -117,19 +117,19 @@ language: lt
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Aprašykite čia faktiškai ir techniškai, kokia yra saugumo problema.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Aprašykite atkuriamai (su įrodymais), kaip nustatytas radinys.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Aprašykite galimą techninį ir verslo poveikį.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Aprašykite konkrečią, įgyvendinamą priemonę.
 
 ---
 

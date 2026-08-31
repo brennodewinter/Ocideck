@@ -28,14 +28,14 @@ language: tr
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Teknoloji",
+    "Süreçler",
+    "İnsanlar"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Hazır (%)",
       "data": [
         80.0,
         55.0,

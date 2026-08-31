@@ -41,11 +41,11 @@ language: lv
 
 ---
 
-### Inject round 1
+### Injekcija, 1. kārta
 
-Describe here the first development presented to the team.
+Aprakstiet šeit pirmo notikumu gaitu, ko izklāsta komandai.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Jautājums komandai:** ko jūs darāt vispirms un kuru informējat?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injekcija, 2. kārta
 
-Describe here the escalation or twist in the scenario.
+Aprakstiet šeit scenārija eskalāciju vai pavērsienu.
 
-**Question for the team:** does this change your approach — and your communication?
+**Jautājums komandai:** vai tas maina jūsu pieeju — un jūsu komunikāciju?
 
 ---
 

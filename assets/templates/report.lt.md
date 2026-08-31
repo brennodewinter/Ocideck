@@ -40,16 +40,16 @@ language: lt
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Sau",
+    "Vas",
+    "Kov",
+    "Bal",
+    "Geg",
+    "Bir"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Šiemet",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: lt
       ]
     },
     {
-      "name": "Last year",
+      "name": "Pernai",
       "data": [
         10.0,
         11.0,

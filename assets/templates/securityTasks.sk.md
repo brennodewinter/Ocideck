@@ -36,9 +36,9 @@ language: sk
 # Priority
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Odstrániť kritické zraniteľnosti
+2. Prehodnotiť prístupové práva
+3. Zaviesť logovanie a monitoring
 
 ---
 

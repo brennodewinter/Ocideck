@@ -40,16 +40,16 @@ language: bg
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Яну",
+    "Фев",
+    "Мар",
+    "Апр",
+    "Май",
+    "Юни"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Тази година",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: bg
       ]
     },
     {
-      "name": "Last year",
+      "name": "Миналата година",
       "data": [
         10.0,
         11.0,

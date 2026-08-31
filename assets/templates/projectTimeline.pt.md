@@ -24,11 +24,11 @@ language: pt
 # Fases do projeto
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Preparação
+2. Conceção
+3. Construção
+4. Teste e aceitação
+5. Entrada em produção e acompanhamento
 
 ---
 

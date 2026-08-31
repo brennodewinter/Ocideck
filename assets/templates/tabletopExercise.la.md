@@ -41,11 +41,11 @@ language: la
 
 ---
 
-### Inject round 1
+### Iniectio, circulus 1
 
-Describe here the first development presented to the team.
+Describe hic primum eventum turmae propositum.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Quaestio turmae:** quid primum facitis, et quem certiorem facitis?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Iniectio, circulus 2
 
-Describe here the escalation or twist in the scenario.
+Describe hic escalationem vel conversionem in argumento.
 
-**Question for the team:** does this change your approach — and your communication?
+**Quaestio turmae:** mutat hoc rationem vestram — et communicationem vestram?
 
 ---
 

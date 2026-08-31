@@ -37,15 +37,15 @@ language: sv
 
 ---
 
-### Example or case study
+### Exempel eller fallstudie
 
-Describe a recognizable real-world situation here.
+Beskriv här en igenkännbar situation från praktiken.
 
-**What happened?** …
+**Vad hände?** …
 
-**What went wrong — or right?** …
+**Vad gick fel — eller just bra?** …
 
-**What do we learn from this?** …
+**Vad lär vi oss av detta?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Vad är det rätta valet?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Det rätta svaret",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Ett felaktigt svar",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ännu ett felaktigt svar",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Och ännu ett felaktigt svar",
       "correct": false
     }
   ]

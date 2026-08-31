@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Residentibus vespere / participatio foederis
-## Neighbourhood · Topic · Date · Facilitator
+## Vicinia · Argumentum · Dies · Moderator
 
 ---
 
@@ -45,7 +45,7 @@ language: la
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Nuntiationes",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: la
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidentia",
       "data": [
         9.0,
         12.0,

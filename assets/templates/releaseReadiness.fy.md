@@ -31,12 +31,12 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Test status
+# Teststatus
 
 | Test | Result | Bewiis |
 | --- | --- | --- |
 | Funksjonele test | Passearre / iepen | … |
-| Regression test | … | … |
+| Regressytest | … | … |
 | Prestaasje test | … | … |
 
 ---
@@ -66,9 +66,9 @@ language: fy
 # Plan werom
 <!-- ocideck_list_style: numbered -->
 
-1. Rollback possible until: …
-2. Rollback steps: …
-3. Go/no-go rollback decision point: …
+1. Weromdraaie kin oant: …
+2. Rollback-stappen: …
+3. Beslútmomint go/no-go rollback: …
 
 ---
 

@@ -28,14 +28,14 @@ language: gsw
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Richtlinie",
+    "Technik",
+    "Prozäss",
+    "Mänsche"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Fertig (%)",
       "data": [
         80.0,
         55.0,

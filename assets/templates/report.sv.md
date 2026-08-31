@@ -44,12 +44,12 @@ language: sv
     "Feb",
     "Mar",
     "Apr",
-    "May",
+    "Maj",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "I år",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: sv
       ]
     },
     {
-      "name": "Last year",
+      "name": "Förra året",
       "data": [
         10.0,
         11.0,

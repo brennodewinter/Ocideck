@@ -24,20 +24,20 @@ language: fr
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Si vous ne pouvez pas l'expliquer en une phrase, c'est que vous ne le comprenez pas encore assez bien vous-même.
 
-— Rule of thumb for a strong pitch
+— Règle générale pour un pitch percutant
 
 ---
 
 # La construction
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Crochet : une accroche ou un exemple intrigant
+2. Problème : quelle douleur vous résolvez, et pour qui
+3. Solution : ce que vous proposez, en langage simple
+4. Preuve : chiffres, exemple ou démonstration
+5. Demander : l'étape suivante concrète
 
 ---
 

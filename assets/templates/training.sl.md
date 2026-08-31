@@ -37,15 +37,15 @@ language: sl
 
 ---
 
-### Example or case study
+### Primer ali študija primera
 
-Describe a recognizable real-world situation here.
+Tukaj opišite prepoznavno situacijo iz prakse.
 
-**What happened?** …
+**Kaj se je zgodilo?** …
 
-**What went wrong — or right?** …
+**Kaj je šlo narobe — ali ravno dobro?** …
 
-**What do we learn from this?** …
+**Kaj se iz tega naučimo?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Katera je pravilna izbira?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Pravilen odgovor",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Napačen odgovor",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Še en napačen odgovor",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "In še en napačen odgovor",
       "correct": false
     }
   ]

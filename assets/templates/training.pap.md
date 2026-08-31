@@ -37,15 +37,15 @@ language: pap
 
 ---
 
-### Example or case study
+### Ehèmpel òf kaso
 
-Describe a recognizable real-world situation here.
+Deskribí aki un situashon rekonosibel for di práktika.
 
-**What happened?** …
+**Kiko a pasa?** …
 
-**What went wrong — or right?** …
+**Kiko a bai malu — òf hustamente bon?** …
 
-**What do we learn from this?** …
+**Kiko nos ta siña for di esaki?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Kua ta e eskoho korekto?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "E kontesta korekto",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Un kontesta robes",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ainda un kontesta robes",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "I ainda un kontesta robes",
       "correct": false
     }
   ]

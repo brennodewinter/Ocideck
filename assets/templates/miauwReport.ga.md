@@ -117,19 +117,19 @@ language: ga
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Déan cur síos anseo, go fírinneach agus go teicniúil, ar an bhfadhb slándála.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Déan cur síos in-atáirgthe (le fianaise) ar an gcaoi ar aimsíodh an fhionnachtain.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Déan cur síos ar an tionchar teicniúil agus gnó a d'fhéadfadh a bheith ann.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Déan cur síos ar an maolú nithiúil, indéanta.
 
 ---
 

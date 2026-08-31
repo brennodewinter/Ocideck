@@ -28,14 +28,14 @@ language: da
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politik",
+    "Teknik",
+    "Processer",
+    "Mennesker"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Klar (%)",
       "data": [
         80.0,
         55.0,

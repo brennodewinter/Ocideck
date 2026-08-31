@@ -117,19 +117,19 @@ language: fy
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Beskriuw hjir feitlik en technysk wat it feiligensprobleem is.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Beskriuw reprodusearber (mei bewiis) hoe't de befining fêststeld is.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Beskriuw de mooglike technyske en saaklike ympakt.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Beskriuw de konkrete, helbere mitigaasje.
 
 ---
 

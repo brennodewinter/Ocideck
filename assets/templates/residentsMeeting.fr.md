@@ -45,7 +45,7 @@ language: fr
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Signalements",
       "data": [
         24.0,
         31.0,

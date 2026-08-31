@@ -32,7 +32,7 @@ language: ro
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Consumul bugetului",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: ro
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Încrederea în planificare",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: ro
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Nivelul de risc",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

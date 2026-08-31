@@ -3078,7 +3078,7 @@ const _dutchSourceAddHu = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'hiányzott a fájlból, ezért ki lett hagyva',
   'Hoofdeffecten': 'Főhatások',
-  'Interactie': 'Interaction',
+  'Interactie': 'Kölcsönhatás',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Túl kevés adat a főhatás ábrához',
   'Te weinig gegevens voor een interactieplot':
@@ -4607,7 +4607,7 @@ const _dutchSourceAddHu = <String, String>{
   'Geen slides gevonden.': 'Nem található dia.',
   "dia's geïmporteerd.": 'dia importálva.',
   'Import mislukt: ': 'Az importálás nem sikerült: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Ellenőrzőlisták',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Állítsa be a kiszolgálót a LibrePlan-csatoló lapon. Amíg ott nincs semmi, nem történik semmi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4634,7 +4634,7 @@ const _dutchSourceAddHu = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Területek',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',
   'Afbeeldingsverwijzingen': 'Képhivatkozások',
 };

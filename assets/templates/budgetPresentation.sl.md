@@ -63,7 +63,7 @@ language: sl
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Proračun",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: sl
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realizacija",
       "data": [
         298.0,
         318.0,

@@ -28,21 +28,21 @@ language: sv
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">När jag ger den</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Beskriv beteende, inte personen</li>
+<li>Fakta → effekt → önskan</li>
+<li>I tid, inte hopsamlat</li>
+<li>Kolla hur det landar</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">När jag tar emot den</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Lyssna utan att genast försvara dig</li>
+<li>Be om ett konkret exempel</li>
+<li>Tacka för öppenheten</li>
+<li>Ta dig tid innan du svarar</li>
 </ul>
 </div>
 </div>

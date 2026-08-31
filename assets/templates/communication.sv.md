@@ -35,9 +35,9 @@ language: sv
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulera kärnbudskapet här i en enda kraftfull mening.
 
-— Name or sender
+— Namn eller avsändare
 
 ---
 

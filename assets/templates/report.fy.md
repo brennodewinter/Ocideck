@@ -42,14 +42,14 @@ language: fy
   "x": [
     "Jan",
     "Feb",
-    "Mar",
+    "Mrt",
     "Apr",
-    "May",
+    "Maa",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Dit jier",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: fy
       ]
     },
     {
-      "name": "Last year",
+      "name": "Ferline jier",
       "data": [
         10.0,
         11.0,

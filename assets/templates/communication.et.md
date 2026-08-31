@@ -35,9 +35,9 @@ language: et
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Sõnastage siin põhisõnum ühe jõulise lausega.
 
-— Name or sender
+— Nimi või saatja
 
 ---
 

@@ -36,9 +36,9 @@ language: sv
 # Prioriteringar
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Åtgärda kritiska sårbarheter
+2. Se över behörigheter
+3. Inför loggning och övervakning
 
 ---
 

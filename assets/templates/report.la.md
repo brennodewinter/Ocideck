@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Report
+title: Relatio
 language: la
 ---
 
@@ -13,7 +13,7 @@ language: la
 
 ---
 
-# Executive summary
+# Summarium exsecutivum
 
 - Clavis conclusio: ...
 - Maximum periculum aut declinatio: ...
@@ -28,7 +28,7 @@ language: la
 | Label | Precium | Antecedens | Unitas | Verticitas |
 | --- | --- | --- | --- | --- |
 | Finis factum | 72 | 65 | % | higher-better |
-| Open items | 18 | 12 |  | lower-better |
+| Res apertae | 18 | 12 |  | lower-better |
 | Periculum campester | 3.5 | 4.2 | /10 | lower-better |
 | Duc tempus | 21 | 21 | diebus | lower-better |
 
@@ -40,16 +40,16 @@ language: la
 {
   "type": "line",
   "x": [
-    "Jan",
+    "Ian",
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mai",
+    "Iun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Hoc anno",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: la
       ]
     },
     {
-      "name": "Last year",
+      "name": "Anno superiore",
       "data": [
         10.0,
         11.0,

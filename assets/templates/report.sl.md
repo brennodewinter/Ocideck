@@ -44,12 +44,12 @@ language: sl
     "Feb",
     "Mar",
     "Apr",
-    "May",
+    "Maj",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Letos",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: sl
       ]
     },
     {
-      "name": "Last year",
+      "name": "Lani",
       "data": [
         10.0,
         11.0,

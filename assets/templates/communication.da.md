@@ -35,9 +35,9 @@ language: da
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulér kernebudskabet her i én stærk sætning.
 
-— Name or sender
+— Navn eller afsender
 
 ---
 

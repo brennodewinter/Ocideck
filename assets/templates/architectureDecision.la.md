@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Architecture decision / ADR presentation
+title: Decisio architecturae / praesentatio ADR
 language: la
 ---
 
 <!-- _class: title -->
 
-# Architecture decision / ADR presentation
+# Decisio architecturae / praesentatio ADR
 
 ---
 
@@ -43,14 +43,14 @@ language: la
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Commoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Incommoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -66,14 +66,14 @@ language: la
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Commoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Incommoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -89,14 +89,14 @@ language: la
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Commoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Incommoda</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -108,7 +108,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Trade-off matrix
+# Matrix compensationum
 
 | Criterium | Optio 1 | Optio 2 | Optio 3 |
 | --- | --- | --- | --- |

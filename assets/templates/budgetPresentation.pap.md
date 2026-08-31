@@ -63,7 +63,7 @@ language: pap
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Presupuesto",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: pap
       ]
     },
     {
-      "name": "Actual",
+      "name": "Realisashon",
       "data": [
         298.0,
         318.0,

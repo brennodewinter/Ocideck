@@ -36,9 +36,9 @@ language: pap
 # Prioridatnan
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Resolvé bulnerabilidatnan krítiko
+2. Revisá derechonan di akseso
+3. Establesé logging i monitoreo
 
 ---
 

@@ -28,25 +28,25 @@ language: hu
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Cseréld ezt saját feleletválasztós kérdésedre.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "A helyes válasz",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Még egy rossz válasz",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "És még egy rossz válasz",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: hu
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Cseréld ezt egy állításra, amely igaz vagy hamis.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: hu
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Cseréld ezt egy kérdésre, amelynek több helyes válasza van.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Helyes válasz 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Helyes válasz 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Rossz válasz 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Rossz válasz 2",
       "correct": false
     }
   ]

@@ -40,16 +40,16 @@ language: ga
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Ean",
+    "Feabh",
+    "Márta",
+    "Aib",
+    "Beal",
+    "Meith"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "I mbliana",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: ga
       ]
     },
     {
-      "name": "Last year",
+      "name": "Anuraidh",
       "data": [
         10.0,
         11.0,

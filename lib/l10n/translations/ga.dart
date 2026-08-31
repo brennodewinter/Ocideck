@@ -3014,16 +3014,16 @@ const _dutchSourceAddGa = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (teorainn íochtarach, roghnach)',
   'Procesdoel (optioneel)': 'Sprioc próisis (roghnach)',
   'Fasepoort': 'Geata céime',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Ríomh',
+  'Gegevens': 'Sonraí',
+  'Hellingscoëfficiënt': 'Fána',
   'Hypothesetoets': 'Tástáil hipitéise',
   'Hypothesetoets…': 'Tástáil hipitéise…',
   'Hypothetisch gemiddelde': 'Meán hipitéiseach',
   'Lineaire regressie': 'Aischéimniú líneach',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Aischéimniú…',
   'Meetdata': 'Sonraí tomhais',
-  'Toets': 'Test',
+  'Toets': 'Tástáil',
   'Tolerantie (optioneel)': 'Lamháltas (roghnach)',
   'Eénsteeks t-toets': 'Tástáil t aonshampla',
   'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
@@ -3118,7 +3118,7 @@ const _dutchSourceAddGa = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'bhí sé ar iarraidh sa chomhad agus fágadh ar lár é',
   'Hoofdeffecten': 'Príomhéifeachtaí',
-  'Interactie': 'Interaction',
+  'Interactie': 'Idirghníomhaíocht',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Níl go leor sonraí le haghaidh plota príomhéifeachtaí',
   'Te weinig gegevens voor een interactieplot':
@@ -4659,7 +4659,7 @@ const _dutchSourceAddGa = <String, String>{
   'Geen slides gevonden.': 'Níor aimsíodh aon sleamhnán.',
   "dia's geïmporteerd.": 'sleamhnáin iompórtáilte.',
   'Import mislukt: ': 'Theip ar an iompórtáil: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Seicliostaí',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Cumraigh an freastalaí sa chluaisín Nascóir LibrePlan. Fad is nach bhfuil aon rud ann, ní tharlaíonn aon rud.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4686,7 +4686,7 @@ const _dutchSourceAddGa = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Réigiúin',
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
   'Afbeeldingsverwijzingen': 'Tagairtí íomhá',

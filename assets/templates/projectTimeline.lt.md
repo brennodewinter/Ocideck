@@ -24,11 +24,11 @@ language: lt
 # Projekto etapai
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Pasirengimas
+2. Projektavimas
+3. Įgyvendinimas
+4. Testavimas ir priėmimas
+5. Paleidimas ir tolesnė priežiūra
 
 ---
 

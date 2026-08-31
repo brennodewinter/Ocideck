@@ -41,11 +41,11 @@ language: fi
 
 ---
 
-### Inject round 1
+### Injekti, kierros 1
 
-Describe here the first development presented to the team.
+Kuvaa tähän ensimmäinen tiimille esitettävä kehityskulku.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Kysymys tiimille:** mitä teette ensin ja kenelle ilmoitatte?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injekti, kierros 2
 
-Describe here the escalation or twist in the scenario.
+Kuvaa tähän skenaarion eskaloituminen tai käänne.
 
-**Question for the team:** does this change your approach — and your communication?
+**Kysymys tiimille:** muuttaako tämä lähestymistapaanne — ja viestintäänne?
 
 ---
 

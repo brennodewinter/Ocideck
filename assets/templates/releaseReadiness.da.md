@@ -31,7 +31,7 @@ language: da
 
 <!-- _class: table table-editable -->
 
-# Test status
+# Teststatus
 
 | Test | Resultat | Beviser |
 | --- | --- | --- |
@@ -66,9 +66,9 @@ language: da
 # Tilbageføringsplan
 <!-- ocideck_list_style: numbered -->
 
-1. Rollback possible until: …
-2. Rollback steps: …
-3. Go/no-go rollback decision point: …
+1. Tilbagerulning mulig indtil: …
+2. Trin til tilbagerulning: …
+3. Go/no-go-beslutningspunkt for tilbagerulning: …
 
 ---
 

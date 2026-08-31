@@ -32,7 +32,7 @@ language: gsw
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Budgetverbruuch",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: gsw
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Vertraue i d Planig",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: gsw
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Risikoniveau",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

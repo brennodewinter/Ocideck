@@ -117,19 +117,19 @@ language: bg
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Опишете тук фактически и технически какъв е проблемът със сигурността.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Опишете възпроизводимо (с доказателства) как е установена находката.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Опишете възможното техническо и делово въздействие.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Опишете конкретното, изпълнимо смекчаване.
 
 ---
 

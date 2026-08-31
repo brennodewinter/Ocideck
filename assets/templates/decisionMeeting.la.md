@@ -38,7 +38,7 @@ language: la
 # Agenda item 1: ...
 
 - Rogatio: quid est in mensa, et quis eam inducit?
-- Context: the background and what has been discussed before
+- Contextus: fundamentum et quae antea tractata sunt
 - Petitus exitus: notate, collige opiniones vel decernere
 - Coactus quae applicant: budget, capacitas, consilium
 
@@ -55,7 +55,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Decision log
+# Acta decisionum
 
 | Decision | dominus | Sequere-sursum |
 | --- | --- | --- |

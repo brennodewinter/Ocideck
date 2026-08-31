@@ -35,9 +35,9 @@ language: uk
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Сформулюйте тут основне повідомлення одним сильним реченням.
 
-— Name or sender
+— Ім'я або відправник
 
 ---
 

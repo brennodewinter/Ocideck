@@ -37,15 +37,15 @@ language: pl
 
 ---
 
-### Example or case study
+### Przykład lub studium przypadku
 
-Describe a recognizable real-world situation here.
+Opisz tu rozpoznawalną sytuację z praktyki.
 
-**What happened?** …
+**Co się stało?** …
 
-**What went wrong — or right?** …
+**Co poszło źle — albo właśnie dobrze?** …
 
-**What do we learn from this?** …
+**Czego się z tego uczymy?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Jaki jest właściwy wybór?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Prawidłowa odpowiedź",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Błędna odpowiedź",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Kolejna błędna odpowiedź",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "I jeszcze jedna błędna odpowiedź",
       "correct": false
     }
   ]

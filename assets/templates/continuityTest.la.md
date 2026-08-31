@@ -17,7 +17,7 @@ language: la
 
 - Sem: ... (e.g. Mauris interdum eu, pretium pretium)
 - Assumptio ante: ...
-- Test type: tabletop / partial / full
+- Genus probationis: tabletop / partialis / plena
 
 ---
 
@@ -42,7 +42,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# RTO / RPO overview
+# Conspectus RTO / RPO
 
 | Processus seu ratio | RTO | RPO | Occurrit? |
 | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ language: la
 
 <!-- _class: timeline -->
 
-# Test timeline
+# Ordo temporum probationis
 
 - T+0 :: Test initium :: varius nuntiatum.
 - T ++ :: Failover started

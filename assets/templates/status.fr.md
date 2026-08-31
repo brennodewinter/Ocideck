@@ -32,7 +32,7 @@ language: fr
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Consommation du budget",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: fr
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Niveau de risque",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,
@@ -54,7 +54,7 @@ language: fr
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Confiance dans le planning",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -65,7 +65,7 @@ language: fr
     },
     {
       "type": "climbDescent",
-      "label": "Trend of open items",
+      "label": "Tendance des points ouverts",
       "min": -10.0,
       "max": 10.0,
       "neutralFrom": -2.0,

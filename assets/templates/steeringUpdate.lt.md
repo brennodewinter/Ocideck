@@ -32,7 +32,7 @@ language: lt
   "meters": [
     {
       "type": "speedometer",
-      "label": "Budget usage",
+      "label": "Biudžeto naudojimas",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -43,7 +43,7 @@ language: lt
     },
     {
       "type": "voltmeter",
-      "label": "Schedule confidence",
+      "label": "Pasitikėjimas grafiku",
       "unit": "%",
       "min": 0.0,
       "max": 100.0,
@@ -54,7 +54,7 @@ language: lt
     },
     {
       "type": "thermometer",
-      "label": "Risk level",
+      "label": "Rizikos lygis",
       "unit": "/10",
       "min": 0.0,
       "max": 10.0,

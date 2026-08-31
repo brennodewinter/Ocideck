@@ -45,7 +45,7 @@ language: bg
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Сигнали",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: bg
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Инциденти",
       "data": [
         9.0,
         12.0,

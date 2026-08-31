@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seachadadh páirc
+title: Pitch a thabhairt
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seachadadh páirc
+# Pitch a thabhairt
 ## Cé dó atá sé · Cad atá á iarraidh agat · Am · Dáta
 
 ---
@@ -24,20 +24,20 @@ language: ga
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Mura féidir leat é a mhíniú in aon abairt amháin, níl sé tuigthe go maith go leor agat féin fós.
 
-— Rule of thumb for a strong pitch
+— Riail ordóige do phíosa láidir
 
 ---
 
 # An struchtúr
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Duán: tús nó sampla a mheallann
+2. Fadhb: cén phian atá á réiteach agat, agus do cé
+3. Réiteach: a bhfuil á thairiscint agat, i dteanga shimplí
+4. Cruthúnas: figiúirí, sampla nó taispeántas
+5. Iarr: an chéad chéim eile go sonrach
 
 ---
 

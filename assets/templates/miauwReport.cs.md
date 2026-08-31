@@ -117,19 +117,19 @@ language: cs
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Popište zde věcně a technicky, v čem spočívá bezpečnostní problém.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Popište reprodukovatelně (s důkazy), jak bylo zjištění doloženo.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Popište možný technický a obchodní dopad.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Popište konkrétní, dosažitelné opatření.
 
 ---
 

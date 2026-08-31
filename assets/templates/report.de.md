@@ -42,14 +42,14 @@ language: de
   "x": [
     "Jan",
     "Feb",
-    "Mar",
+    "Mär",
     "Apr",
-    "May",
+    "Mai",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Dieses Jahr",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: de
       ]
     },
     {
-      "name": "Last year",
+      "name": "Letztes Jahr",
       "data": [
         10.0,
         11.0,

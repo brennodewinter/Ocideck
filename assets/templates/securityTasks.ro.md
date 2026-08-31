@@ -36,9 +36,9 @@ language: ro
 # Priorități
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Remediază vulnerabilitățile critice
+2. Revizuiește drepturile de acces
+3. Configurează jurnalizarea și monitorizarea
 
 ---
 

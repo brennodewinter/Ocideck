@@ -44,12 +44,12 @@ language: id
     "Feb",
     "Mar",
     "Apr",
-    "May",
+    "Mei",
     "Jun"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Tahun ini",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: id
       ]
     },
     {
-      "name": "Last year",
+      "name": "Tahun lalu",
       "data": [
         10.0,
         11.0,

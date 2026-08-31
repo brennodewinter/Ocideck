@@ -40,16 +40,16 @@ language: pl
 {
   "type": "line",
   "x": [
-    "Jan",
-    "Feb",
+    "Sty",
+    "Lut",
     "Mar",
-    "Apr",
-    "May",
-    "Jun"
+    "Kwi",
+    "Maj",
+    "Cze"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "W tym roku",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: pl
       ]
     },
     {
-      "name": "Last year",
+      "name": "W zeszłym roku",
       "data": [
         10.0,
         11.0,

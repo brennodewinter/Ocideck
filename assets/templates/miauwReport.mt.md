@@ -117,19 +117,19 @@ language: mt
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Iddeskrivi hawn, b'mod fattwali u tekniku, x'inhi l-problema ta' sigurtà.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Iddeskrivi b'mod riproduċibbli (b'evidenza) kif ġiet stabbilita s-sejba.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Iddeskrivi l-impatt tekniku u kummerċjali possibbli.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Iddeskrivi l-mitigazzjoni konkreta u fattibbli.
 
 ---
 

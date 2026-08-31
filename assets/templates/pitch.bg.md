@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доставете представяне
+title: Представяне на питч
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доставете представяне
+# Представяне на питч
 ## За кого е · Какво питате · Час · Дата
 
 ---
@@ -24,20 +24,20 @@ language: bg
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Ако не можете да го обясните в едно изречение, сами още не сте го разбрали достатъчно добре.
 
-— Rule of thumb for a strong pitch
+— Основно правило за силна презентация
 
 ---
 
 # Структурата
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Кука: интригуващо начало или пример
+2. Проблем: каква болка решавате и за кого
+3. Решение: какво предлагате, на обикновен език
+4. Доказателство: числа, пример или демонстрация
+5. Питане: конкретната следваща стъпка
 
 ---
 

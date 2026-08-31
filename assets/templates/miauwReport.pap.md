@@ -117,19 +117,19 @@ language: pap
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Deskribí aki, faktual i tékniko, kiko ta e problema di siguridat.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Deskribí di manera reprodusibel (ku prueba) kon a konstatá e hayasgo.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Deskribí e posibel impakto tékniko i komersial.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Deskribí e mitigashon konkreto i alkansabel.
 
 ---
 

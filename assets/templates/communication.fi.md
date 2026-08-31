@@ -35,9 +35,9 @@ language: fi
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Muotoile ydinviesti tähän yhdellä vahvalla lauseella.
 
-— Name or sender
+— Nimi tai lähettäjä
 
 ---
 

@@ -45,7 +45,7 @@ language: pt
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Relatos",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: pt
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidentes",
       "data": [
         9.0,
         12.0,

@@ -64,7 +64,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Impact analysis
+# Analysis impulsus
 
 | Area | Impact nunc | Expectata progressio |
 | --- | --- | --- |
@@ -129,7 +129,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Decision log
+# Acta decisionum
 
 | Decision | By | Tempus | Communicare? |
 | --- | --- | --- | --- |

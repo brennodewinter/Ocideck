@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Adj egy pályát
+title: Pitch tartása
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Adj egy pályát
+# Pitch tartása
 ## Kinek szól · Mit kérdez · Idő · Dátum
 
 ---
@@ -24,20 +24,20 @@ language: hu
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Ha nem tudod egyetlen mondatban elmagyarázni, akkor te magad sem érted még elég jól.
 
-— Rule of thumb for a strong pitch
+— Ökölszabály egy erős pitchhez
 
 ---
 
 # A szerkezet
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Horog: figyelemfelkeltő nyitás vagy példa
+2. Probléma: milyen fájdalmat oldasz meg, és kinek
+3. Megoldás: mit kínálsz, egyszerű nyelven
+4. Bizonyítás: számok, példa vagy demó
+5. Kérés: a konkrét következő lépés
 
 ---
 

@@ -28,21 +28,21 @@ language: gsw
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Wänn ich se gib</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Beschriib s Verhalte, nöd d Person</li>
+<li>Fakt → Wirkig → Bitt</li>
+<li>Rächtziitig, nöd gsammlet</li>
+<li>Lueg, wie s aachunnt</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Wänn ich se überchum</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Zueloose, ohni sich sofort z verteidige</li>
+<li>Frag na eme konkrete Bispiel</li>
+<li>Dank für d Offeheit</li>
+<li>Nimm der Ziit, bevor d antwortisch</li>
 </ul>
 </div>
 </div>

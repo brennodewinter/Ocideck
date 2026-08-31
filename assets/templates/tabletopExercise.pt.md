@@ -41,11 +41,11 @@ language: pt
 
 ---
 
-### Inject round 1
+### Inject, ronda 1
 
-Describe here the first development presented to the team.
+Descreva aqui o primeiro desenvolvimento apresentado à equipa.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Pergunta à equipa:** o que fazem primeiro e quem informam?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Inject, ronda 2
 
-Describe here the escalation or twist in the scenario.
+Descreva aqui a escalada ou a reviravolta no cenário.
 
-**Question for the team:** does this change your approach — and your communication?
+**Pergunta à equipa:** isto muda a vossa abordagem — e a vossa comunicação?
 
 ---
 

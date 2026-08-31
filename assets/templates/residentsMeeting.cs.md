@@ -45,7 +45,7 @@ language: cs
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Hlášení",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: cs
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenty",
       "data": [
         9.0,
         12.0,

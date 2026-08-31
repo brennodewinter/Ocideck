@@ -28,25 +28,25 @@ language: sk
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Nahraďte to vlastnou otázkou s výberom odpovedí.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Správna odpoveď",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Nesprávna odpoveď",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ďalšia nesprávna odpoveď",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "A ešte jedna nesprávna odpoveď",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: sk
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Nahraďte to tvrdením, ktoré je pravdivé alebo nepravdivé.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: sk
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Nahraďte to otázkou s viacerými správnymi odpoveďami.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Správna odpoveď 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Správna odpoveď 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Nesprávna odpoveď 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Nesprávna odpoveď 2",
       "correct": false
     }
   ]

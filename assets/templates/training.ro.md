@@ -37,15 +37,15 @@ language: ro
 
 ---
 
-### Example or case study
+### Exemplu sau studiu de caz
 
-Describe a recognizable real-world situation here.
+Descrie aici o situație recognoscibilă din practică.
 
-**What happened?** …
+**Ce s-a întâmplat?** …
 
-**What went wrong — or right?** …
+**Ce a mers prost — sau tocmai bine?** …
 
-**What do we learn from this?** …
+**Ce învățăm din asta?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Care este alegerea corectă?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Răspunsul corect",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Un răspuns greșit",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Alt răspuns greșit",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Și încă un răspuns greșit",
       "correct": false
     }
   ]

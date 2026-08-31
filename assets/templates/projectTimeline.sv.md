@@ -24,11 +24,11 @@ language: sv
 # Projektets faser
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
+1. Förberedelse
 2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+3. Genomförande
+4. Test och acceptans
+5. Driftsättning och efterarbete
 
 ---
 

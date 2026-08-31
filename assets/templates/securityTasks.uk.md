@@ -36,9 +36,9 @@ language: uk
 # Пріоритети
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Усунути критичні вразливості
+2. Переглянути права доступу
+3. Налаштувати журналювання та моніторинг
 
 ---
 

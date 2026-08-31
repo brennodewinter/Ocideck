@@ -63,7 +63,7 @@ language: lv
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Budžets",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: lv
       ]
     },
     {
-      "name": "Actual",
+      "name": "Izpilde",
       "data": [
         298.0,
         318.0,

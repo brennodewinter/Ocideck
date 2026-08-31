@@ -37,15 +37,15 @@ language: tr
 
 ---
 
-### Example or case study
+### Örnek veya vaka çalışması
 
-Describe a recognizable real-world situation here.
+Uygulamadan tanıdık bir durumu burada açıklayın.
 
-**What happened?** …
+**Ne oldu?** …
 
-**What went wrong — or right?** …
+**Ne ters gitti — ya da tam tersine iyi gitti?** …
 
-**What do we learn from this?** …
+**Bundan ne öğreniyoruz?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Doğru seçim hangisi?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Doğru cevap",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Yanlış bir cevap",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Başka bir yanlış cevap",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Bir yanlış cevap daha",
       "correct": false
     }
   ]

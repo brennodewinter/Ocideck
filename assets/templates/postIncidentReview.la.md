@@ -13,7 +13,7 @@ language: la
 
 ---
 
-# Incident overview
+# Conspectus incidentis
 
 - Quod factum est: ...
 - Cognito et a quo: …
@@ -34,7 +34,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Impact analysis
+# Analysis impulsus
 
 | Area | Impact | Duratio |
 | --- | --- | --- |

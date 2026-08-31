@@ -2972,9 +2972,9 @@ const _dutchSourceAddGsw = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (Untergränze, optional)',
   'Procesdoel (optioneel)': 'Prozessziel (optional)',
   'Fasepoort': 'Phase-Gate',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Berächne',
+  'Gegevens': 'Date',
+  'Hellingscoëfficiënt': 'Steigig',
   'Hypothesetoets': 'Hypothesetescht',
   'Hypothesetoets…': 'Hypothesetescht…',
   'Hypothetisch gemiddelde': 'Hypothetische Mittelwärt',
@@ -3075,7 +3075,7 @@ const _dutchSourceAddGsw = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'het im File gfäält und isch übersprunge worde',
   'Hoofdeffecten': 'Haupteffäkt',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interaktion',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Z wenig Date für es Haupteffektediagramm',
   'Te weinig gegevens voor een interactieplot':
@@ -4597,7 +4597,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Geen slides gevonden.': 'Kei Slides gfunde.',
   "dia's geïmporteerd.": 'Slides importiert.',
   'Import mislukt: ': 'Import fählgschlage: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Checkliste',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Richt de Server im Tab LibrePlan-Konnektor ii. So lang det nüt staat, passiert nüt.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4623,7 +4623,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Beriich',
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',
   'Afbeeldingsverwijzingen': 'Bildreferänze',

@@ -46,7 +46,7 @@ language: da
 
 <!-- _class: table -->
 
-# STRIDE reference
+# STRIDE-reference
 
 | Kategori | Betydning |
 | --- | --- |

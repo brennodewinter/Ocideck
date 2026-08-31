@@ -117,19 +117,19 @@ language: ro
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Descrie aici, factual și tehnic, în ce constă problema de securitate.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Descrie reproductibil (cu dovezi) cum a fost stabilită constatarea.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Descrie posibilul impact tehnic și de afaceri.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Descrie măsura de atenuare concretă și realizabilă.
 
 ---
 

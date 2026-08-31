@@ -21,7 +21,7 @@ language: lt
 
 ---
 
-### Architecture overview
+### Architektūros apžvalga
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Duomenų srautas arba proceso srautas
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Naudotojas pateikia užklausą
+2. API ją patvirtina ir nukreipia
+3. Paslauga ją apdoroja ir išsaugo
+4. Rezultatas grįžta naudotojui
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Kodo pavyzdys
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Pakeiskite šį pavyzdį kodu, kurį norite paaiškinti.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

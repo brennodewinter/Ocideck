@@ -37,15 +37,15 @@ language: la
 
 ---
 
-### Example or case study
+### Exemplum vel casus
 
-Describe a recognizable real-world situation here.
+Describe hic condicionem agnoscibilem ex usu.
 
-**What happened?** …
+**Quid accidit?** …
 
-**What went wrong — or right?** …
+**Quid male cessit — vel potius bene?** …
 
-**What do we learn from this?** …
+**Quid ex hoc discimus?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Quae est recta electio?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Responsum rectum",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Responsum falsum",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Aliud responsum falsum",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Adhuc aliud responsum falsum",
       "correct": false
     }
   ]

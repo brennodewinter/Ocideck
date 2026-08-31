@@ -28,25 +28,25 @@ language: id
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ganti ini dengan pertanyaan pilihan ganda Anda sendiri.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Jawaban yang benar",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Jawaban yang salah",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Jawaban salah lainnya",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Satu lagi jawaban yang salah",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: id
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ganti ini dengan pernyataan yang benar atau salah.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: id
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ganti ini dengan pertanyaan yang memiliki beberapa jawaban benar.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Jawaban benar 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Jawaban benar 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Jawaban salah 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Jawaban salah 2",
       "correct": false
     }
   ]

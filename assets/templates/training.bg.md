@@ -37,15 +37,15 @@ language: bg
 
 ---
 
-### Example or case study
+### Пример или казус
 
-Describe a recognizable real-world situation here.
+Опишете тук разпознаваема ситуация от практиката.
 
-**What happened?** …
+**Какво се случи?** …
 
-**What went wrong — or right?** …
+**Какво се обърка — или тъкмо мина добре?** …
 
-**What do we learn from this?** …
+**Какво научаваме от това?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Кой е правилният избор?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правилният отговор",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Грешен отговор",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Още един грешен отговор",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "И още един грешен отговор",
       "correct": false
     }
   ]

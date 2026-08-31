@@ -29,13 +29,13 @@ language: sv
   "maxBound": 100.0,
   "x": [
     "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Teknik",
+    "Processer",
+    "Människor"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Klart (%)",
       "data": [
         80.0,
         55.0,

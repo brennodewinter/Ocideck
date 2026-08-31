@@ -41,11 +41,11 @@ language: sk
 
 ---
 
-### Inject round 1
+### Injekt, kolo 1
 
-Describe here the first development presented to the team.
+Opíšte tu prvý vývoj predložený tímu.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Otázka pre tím:** čo urobíte najprv a koho informujete?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injekt, kolo 2
 
-Describe here the escalation or twist in the scenario.
+Opíšte tu eskaláciu alebo zvrat v scenári.
 
-**Question for the team:** does this change your approach — and your communication?
+**Otázka pre tím:** mení to váš postup — a vašu komunikáciu?
 
 ---
 

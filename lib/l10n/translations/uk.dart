@@ -3085,7 +3085,7 @@ const _dutchSourceAddUk = <String, String>{
       'не вдалося прочитати й пропущено',
   'ontbrak in het bestand en is overgeslagen': 'бракувало у файлі й пропущено',
   'Hoofdeffecten': 'Основні ефекти',
-  'Interactie': 'Interaction',
+  'Interactie': 'Взаємодія',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Замало даних для графіка головних ефектів',
   'Te weinig gegevens voor een interactieplot':
@@ -4612,7 +4612,7 @@ const _dutchSourceAddUk = <String, String>{
   'Geen slides gevonden.': 'Слайдів не знайдено.',
   "dia's geïmporteerd.": 'слайдів імпортовано.',
   'Import mislukt: ': 'Не вдалося імпортувати: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Контрольні списки',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Налаштуйте сервер на вкладці Конектор LibrePlan. Доки там нічого немає, нічого не відбувається.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4639,7 +4639,7 @@ const _dutchSourceAddUk = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Виноски стають звичайним текстом; презентація не має виносок.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Області',
   'bv. "de controller board met display"':
       'напр. "плата контролера з дисплеєм"',
   'Afbeeldingsverwijzingen': 'Посилання на зображення',

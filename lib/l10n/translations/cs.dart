@@ -3065,7 +3065,7 @@ const _dutchSourceAddCs = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'chybělo v souboru a bylo přeskočeno',
   'Hoofdeffecten': 'Hlavní efekty',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakce',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Příliš málo dat pro graf hlavních efektů',
   'Te weinig gegevens voor een interactieplot':
@@ -4579,7 +4579,7 @@ const _dutchSourceAddCs = <String, String>{
   'Geen slides gevonden.': 'Nebyly nalezeny žádné snímky.',
   "dia's geïmporteerd.": 'snímků importováno.',
   'Import mislukt: ': 'Import selhal: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrolní seznamy',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Nastavte server na kartě Konektor LibrePlan. Dokud tam nic není, nic se neděje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4606,7 +4606,7 @@ const _dutchSourceAddCs = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čarou se stanou prostým textem; prezentace nemá poznámky.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Oblasti',
   'bv. "de controller board met display"': 'např. "řídící deska s displejem"',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
 };

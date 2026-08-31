@@ -45,7 +45,7 @@ language: fi
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Ilmoitukset",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: fi
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Poikkeamat",
       "data": [
         9.0,
         12.0,

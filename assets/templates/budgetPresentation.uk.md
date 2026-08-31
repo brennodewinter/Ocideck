@@ -63,7 +63,7 @@ language: uk
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Бюджет",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: uk
       ]
     },
     {
-      "name": "Actual",
+      "name": "Фактично",
       "data": [
         298.0,
         318.0,

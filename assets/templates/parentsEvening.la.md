@@ -69,7 +69,7 @@ language: la
 
 # Communicatio et quomodo ad nos pervenire
 
-| Channel | Used for |
+| Canalis | Usus |
 | --- | --- |
 | Parent porta vel app | Gradus, Duis et absentia |
 | Newsletter | ... |

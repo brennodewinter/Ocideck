@@ -37,15 +37,15 @@ language: gsw
 
 ---
 
-### Example or case study
+### Bispiel oder Fallstudie
 
-Describe a recognizable real-world situation here.
+Beschriib da e wiedererkennbari Situation us de Praxis.
 
-**What happened?** …
+**Was isch passiert?** …
 
-**What went wrong — or right?** …
+**Was isch schiefglaufe — oder grad guet gange?** …
 
-**What do we learn from this?** …
+**Was lerned mir drus?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Was isch die richtigi Wahl?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Die richtigi Antwort",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "E falschi Antwort",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "No e falschi Antwort",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Und no e falschi Antwort",
       "correct": false
     }
   ]

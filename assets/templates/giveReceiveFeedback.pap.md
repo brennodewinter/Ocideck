@@ -28,21 +28,21 @@ language: pap
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Ora mi ta duna</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Deskribí komportashon, no e persona</li>
+<li>Echo → efekto → petishon</li>
+<li>Na tempu, no wardá</li>
+<li>Chèk kon e ta yega</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Ora mi ta risibí</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Skucha sin defendé bo mes mesora</li>
+<li>Puntra pa un ehèmpel konkreto</li>
+<li>Gradisí pa e apertura</li>
+<li>Tuma tempu promé ku bo kontestá</li>
 </ul>
 </div>
 </div>

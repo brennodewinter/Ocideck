@@ -35,9 +35,9 @@ language: ro
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Formulează aici mesajul central într-o singură frază puternică.
 
-— Name or sender
+— Nume sau expeditor
 
 ---
 

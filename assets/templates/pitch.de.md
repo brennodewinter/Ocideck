@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Liefern Sie einen Pitch
+title: Einen Pitch halten
 language: de
 ---
 
 <!-- _class: title -->
 
-# Liefern Sie einen Pitch
+# Einen Pitch halten
 ## Für wen es ist · Was Sie fragen · Uhrzeit · Datum
 
 ---
@@ -24,20 +24,20 @@ language: de
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Wenn Sie es nicht in einem Satz erklären können, haben Sie es selbst noch nicht gut genug verstanden.
 
-— Rule of thumb for a strong pitch
+— Faustregel für einen starken Pitch
 
 ---
 
 # Die Struktur
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Haken: ein reizvoller Einstieg oder ein Beispiel
+2. Problem: welchen Schmerz Sie lösen, und für wen
+3. Lösung: was Sie bieten, in einfacher Sprache
+4. Beweis: Zahlen, Beispiel oder Demo
+5. Frage: der konkrete nächste Schritt
 
 ---
 

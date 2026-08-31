@@ -45,7 +45,7 @@ language: lt
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Pranešimai",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: lt
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidentai",
       "data": [
         9.0,
         12.0,

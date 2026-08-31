@@ -28,25 +28,25 @@ language: lt
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Pakeiskite tai savo klausimu su keliais atsakymų variantais.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Teisingas atsakymas",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Dar vienas neteisingas atsakymas",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ir dar vienas neteisingas atsakymas",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: lt
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Pakeiskite tai teiginiu, kuris yra teisingas arba klaidingas.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: lt
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Pakeiskite tai klausimu, kuris turi kelis teisingus atsakymus.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Teisingas atsakymas 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Teisingas atsakymas 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Neteisingas atsakymas 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Neteisingas atsakymas 2",
       "correct": false
     }
   ]

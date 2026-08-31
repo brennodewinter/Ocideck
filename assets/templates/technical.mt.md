@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Technical explainer
+title: Spjegatur tekniku
 language: mt
 ---
 
@@ -11,145 +11,17 @@ language: mt
 
 # Spjegatur tekniku
 
-[[OCIDECK_SEG]]] 
+---
 
-Għalxiex hu dan il-komponent: …
+# Kuntest u għan
 
-[[OCIDECK_SEG]]] 
-
-Għal min hi din l-ispjegazzjoni:…
-
-[[OCIDECK_SEG]]] 
-
-Dak li ser tifhem sa l-aħħar:...
-
-[[OCIDECK_SEG]]] 
-
-Kuntest u għan
-
-[[OCIDECK_SEG]]] 
-
-Komponenti u responsabbiltajiet
-
-[[OCIDECK_SEG]]] 
-
-Komponent
-
-[[OCIDECK_SEG]]] 
-
-Responsabbiltà
-
-[[OCIDECK_SEG]]] 
-
-Sid
-
-[[OCIDECK_SEG]]] 
-
-Klijent
-
-[[OCIDECK_SEG]]] 
-
-Preżentazzjoni u input
-
-[[OCIDECK_SEG]]] 
-
-Tim A
-
-[[OCIDECK_SEG]]] 
-
-API
-
-[[OCIDECK_SEG]]] 
-
-Validazzjoni u rotta
-
-[[OCIDECK_SEG]]] 
-
-Tim B
-
-[[OCIDECK_SEG]]] 
-
-Servizz
-
-[[OCIDECK_SEG]]] 
-
-Loġika tan-negozju
-
-[[OCIDECK_SEG]]] 
-
-Tim B
-
-[[OCIDECK_SEG]]] 
-
-Database
-
-[[OCIDECK_SEG]]] 
-
-Ħażna
-
-[[OCIDECK_SEG]]] 
-
-Tim C
-
-[[OCIDECK_SEG]]] 
-
-Fluss tad-dejta jew fluss tal-proċess
-
-[[OCIDECK_SEG]]] 
-
-Eżempju tal-kodiċi
-
-[[OCIDECK_SEG]]] 
-
-Soluzzjoni magħżula: … — għaliex: …
-
-[[OCIDECK_SEG]]] 
-
-Alternattiva miċħuda: … — għaliex: …
-
-[[OCIDECK_SEG]]] 
-
-Riskju magħruf:…
-
-[[OCIDECK_SEG]]] 
-
-Riskji u kompromessi
-
-[[OCIDECK_SEG]]] 
-
-Disinn diskuss mat-tim
-
-[[OCIDECK_SEG]]] 
-
-Testijiet bil-miktub
-
-[[OCIDECK_SEG]]] 
-
-Dokumentazzjoni aġġornata
-
-[[OCIDECK_SEG]]] 
-
-Monitoraġġ stabbilit
-
-[[OCIDECK_SEG]]] 
-
-Lista ta' kontroll tal-implimentazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Spjegatur tekniku
+- Għalxiex hu dan il-komponent: …
+- Għal min hi din l-ispjegazzjoni:…
+- Dak li ser tifhem sa l-aħħar:...
 
 ---
 
-# Context and goal
-
-- What this component is for: …
-- Who this explanation is for: …
-- What you'll understand by the end: …
-
----
-
-### Architecture overview
+### Ħarsa ġenerali lejn l-arkitettura
 
 ```mermaid
 flowchart LR
@@ -162,33 +34,33 @@ flowchart LR
 
 <!-- _class: table -->
 
-# Components and responsibilities
+# Komponenti u responsabbiltajiet
 
-| Component | Responsibility | Owner |
+| Komponent | Responsabbiltà | Sid |
 | --- | --- | --- |
-| Client | Presentation and input | Team A |
-| API | Validation and routing | Team B |
-| Service | Business logic | Team B |
-| Database | Storage | Team C |
+| Klijent | Preżentazzjoni u input | Tim A |
+| API | Validazzjoni u rotta | Tim B |
+| Servizz | Loġika tan-negozju | Tim B |
+| Database | Ħażna | Tim C |
 
 ---
 
-# Data flow or process flow
+# Fluss tad-dejta jew fluss tal-proċess
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. L-utent jagħmel talba
+2. L-API tivvalidaha u tirrottaha
+3. Is-servizz jipproċessaha u jaħżinha
+4. Ir-riżultat imur lura għand l-utent
 
 ---
 
 <!-- _class: code -->
 
-# Code example
+# Eżempju tal-kodiċi
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Ibdel dan l-eżempju bil-kodiċi li trid tispjega.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);
@@ -198,18 +70,18 @@ Future<Result> handleRequest(Request request) async {
 
 ---
 
-# Risks and trade-offs
+# Riskji u kompromessi
 
-- Chosen solution: … — because: …
-- Rejected alternative: … — because: …
-- Known risk: …
+- Soluzzjoni magħżula: … — għaliex: …
+- Alternattiva miċħuda: … — għaliex: …
+- Riskju magħruf:…
 
 ---
 
-# Implementation checklist
+# Lista ta' kontroll tal-implimentazzjoni
 <!-- ocideck_list_style: checklist -->
 
-- [ ] Design discussed with the team
-- [ ] Tests written
-- [ ] Documentation updated
-- [ ] Monitoring set up
+- [ ] Disinn diskuss mat-tim
+- [ ] Testijiet bil-miktub
+- [ ] Dokumentazzjoni aġġornata
+- [ ] Monitoraġġ stabbilit

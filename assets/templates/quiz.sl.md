@@ -28,25 +28,25 @@ language: sl
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Zamenjaj to s svojim vprašanjem z več možnimi odgovori.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Pravilen odgovor",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Napačen odgovor",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Še en napačen odgovor",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "In še en napačen odgovor",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: sl
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Zamenjaj to s trditvijo, ki je resnična ali neresnična.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: sl
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Zamenjaj to z vprašanjem, ki ima več pravilnih odgovorov.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Pravilen odgovor 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Pravilen odgovor 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Napačen odgovor 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Napačen odgovor 2",
       "correct": false
     }
   ]

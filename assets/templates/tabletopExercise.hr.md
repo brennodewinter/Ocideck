@@ -41,11 +41,11 @@ language: hr
 
 ---
 
-### Inject round 1
+### Injekt, krug 1
 
-Describe here the first development presented to the team.
+Ovdje opišite prvi razvoj događaja koji se predstavlja timu.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Pitanje za tim:** što radite prvo i koga obavještavate?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injekt, krug 2
 
-Describe here the escalation or twist in the scenario.
+Ovdje opišite eskalaciju ili obrat u scenariju.
 
-**Question for the team:** does this change your approach — and your communication?
+**Pitanje za tim:** mijenja li to vaš pristup — i vašu komunikaciju?
 
 ---
 

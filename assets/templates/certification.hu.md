@@ -28,14 +28,14 @@ language: hu
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Technika",
+    "Folyamatok",
+    "Emberek"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Kész (%)",
       "data": [
         80.0,
         55.0,

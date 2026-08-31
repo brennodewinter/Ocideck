@@ -28,21 +28,21 @@ language: tr
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Verirken</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Kişiyi değil, davranışı tanımla</li>
+<li>Olgu → etki → istek</li>
+<li>Zamanında, biriktirmeden</li>
+<li>Nasıl karşılandığını kontrol et</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Alırken</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Hemen savunmaya geçmeden dinle</li>
+<li>Somut bir örnek iste</li>
+<li>Açıklığı için teşekkür et</li>
+<li>Yanıtlamadan önce zaman ayır</li>
 </ul>
 </div>
 </div>

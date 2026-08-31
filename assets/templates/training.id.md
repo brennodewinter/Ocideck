@@ -37,15 +37,15 @@ language: id
 
 ---
 
-### Example or case study
+### Contoh atau studi kasus
 
-Describe a recognizable real-world situation here.
+Jelaskan di sini situasi nyata yang mudah dikenali.
 
-**What happened?** …
+**Apa yang terjadi?** …
 
-**What went wrong — or right?** …
+**Apa yang salah — atau justru berjalan baik?** …
 
-**What do we learn from this?** …
+**Apa yang kita pelajari dari ini?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Apa pilihan yang tepat?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Jawaban yang benar",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Jawaban yang salah",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Jawaban salah lainnya",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Satu lagi jawaban yang salah",
       "correct": false
     }
   ]

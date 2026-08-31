@@ -63,7 +63,7 @@ language: fi
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Budjetti",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: fi
       ]
     },
     {
-      "name": "Actual",
+      "name": "Toteuma",
       "data": [
         298.0,
         318.0,

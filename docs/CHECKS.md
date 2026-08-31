@@ -416,6 +416,7 @@ now the only passing state.
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
+| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
@@ -934,6 +935,36 @@ also declares them, but see the [CI note](#continuous-integration).)
   variant, keeping the node IDs and mermaid syntax intact; or, if the diagram
   genuinely carries no prose, add its body to `languageNeutralMermaidBlocks` in
   `tool/check_translated_mermaid.dart`.
+
+### `make check-untranslated-templates`
+- **Runs:** `dart run tool/check_untranslated_templates.dart`
+- **Covers:** every `assets/templates/<id>.<lang>.md`. A line counts as
+  untranslated when it stands verbatim in the English base **and** does not stand
+  verbatim in the Dutch source, and carries at least `minimumWords` (currently
+  **2**) words of three or more Latin letters. Klingon is skipped
+  (`skippedLanguages`): `TemplateContentService.languagesWithContent` deliberately
+  keeps it on the English fallback. Ratchet: `untranslatedBaseline` (currently
+  **0**).
+- **Why it exists:** `tool/template_l10n_po.dart` peels only five things out of a
+  template — `title:`, `# `, `## `, bullets and table rows. Everything else
+  travels along as a `raw` segment, so whatever the English base said the
+  translation kept saying. That was not theory: 47 raw lines in twelve templates
+  stood in English in every translated language but Spanish and Greek, nine
+  templates carried English answers,
+  chart series and meter labels inside their ` ```question `, ` ```chart ` and
+  ` ```cockpit ` blocks, and four templates carried English text inside embedded
+  HTML. The three l10n gates never saw any of it — they watch
+  `lib/l10n/translations/`, not `assets/`.
+- **Why Dutch is the yardstick and not English alone:** Dutch is the source
+  language of the content, so a line that is identical in Dutch is the authored
+  form rather than a gap. That one rule silences the SIPOC table head (which
+  spells the acronym), `Destination METAR/TAF`, `ATIS / QNH`, `Sterile cockpit`,
+  `Check-out`, the language-neutral mermaid diagram in `technical`, and
+  `**Scope object:**` — which `FindingSpec` parses as a key and must stay English.
+- **Failure means:** translate the named line in place, or — if the English words
+  genuinely are that language's words — add the `(language, line)` pair to
+  `allowedCognates` in `tool/check_untranslated_templates.dart` with the reason.
+  `--list` prints every hit.
 
 ### `make translate-docs-check`
 - **Runs:** `dart run tool/translate_docs.dart --check`

@@ -117,19 +117,19 @@ language: lv
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Aprakstiet šeit faktiski un tehniski, kāda ir drošības problēma.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Aprakstiet atkārtojami (ar pierādījumiem), kā konstatējums tika noteikts.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Aprakstiet iespējamo tehnisko un biznesa ietekmi.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Aprakstiet konkrētu, īstenojamu risinājumu.
 
 ---
 

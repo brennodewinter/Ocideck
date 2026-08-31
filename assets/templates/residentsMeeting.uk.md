@@ -45,7 +45,7 @@ language: uk
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Звернення",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: uk
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Інциденти",
       "data": [
         9.0,
         12.0,

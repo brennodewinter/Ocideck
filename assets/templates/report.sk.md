@@ -44,12 +44,12 @@ language: sk
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Máj",
+    "Jún"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Tento rok",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: sk
       ]
     },
     {
-      "name": "Last year",
+      "name": "Minulý rok",
       "data": [
         10.0,
         11.0,

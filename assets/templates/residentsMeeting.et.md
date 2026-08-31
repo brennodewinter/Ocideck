@@ -45,7 +45,7 @@ language: et
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Teated",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: et
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Intsidendid",
       "data": [
         9.0,
         12.0,

@@ -87,7 +87,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# Decision log
+# Acta decisionum
 
 | Decision | By | Tempus |
 | --- | --- | --- |

@@ -36,9 +36,9 @@ language: id
 # Prioritas
 <!-- ocideck_list_style: numbered -->
 
-1. Resolve critical vulnerabilities
-2. Review access rights
-3. Set up logging and monitoring
+1. Atasi kerentanan kritis
+2. Tinjau hak akses
+3. Siapkan pencatatan log dan pemantauan
 
 ---
 

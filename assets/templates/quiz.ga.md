@@ -28,25 +28,25 @@ language: ga
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Cuir do cheist ilroghnach féin in ionad seo.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "An freagra ceart",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Freagra mícheart",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Freagra mícheart eile",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Agus freagra mícheart eile fós",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: ga
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Cuir ráiteas atá fíor nó bréagach in ionad seo.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: ga
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Cuir ceist a bhfuil níos mó ná freagra ceart amháin aici in ionad seo.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Freagra ceart 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Freagra ceart 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Freagra mícheart 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Freagra mícheart 2",
       "correct": false
     }
   ]

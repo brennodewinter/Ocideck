@@ -68,7 +68,7 @@ language: la
 
 <!-- _class: table table-editable -->
 
-# TEM review
+# Recognitio TEM
 
 | Comminatio vel error | Quomodo agnita? | Quomodo tractanda? |
 | --- | --- | --- |

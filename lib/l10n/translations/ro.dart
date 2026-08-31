@@ -3097,7 +3097,7 @@ const _dutchSourceAddRo = <String, String>{
   'kon niet worden gelezen en is overgeslagen': 'nu s-a putut citi și s-a omis',
   'ontbrak in het bestand en is overgeslagen': 'lipsea din fișier și s-a omis',
   'Hoofdeffecten': 'Efecte principale',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interacțiune',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Prea puține date pentru un grafic de efecte principale',
   'Te weinig gegevens voor een interactieplot':
@@ -4635,7 +4635,7 @@ const _dutchSourceAddRo = <String, String>{
   'Geen slides gevonden.': 'Nu s-au găsit slide-uri.',
   "dia's geïmporteerd.": 'slide-uri importate.',
   'Import mislukt: ': 'Importul a eșuat: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Liste de verificare',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Configurați serverul în fila Conector LibrePlan. Cât timp acolo nu este nimic, nu se întâmplă nimic.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4662,7 +4662,7 @@ const _dutchSourceAddRo = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notele de subsol devin text simplu; o prezentare nu are note.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Regiuni',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',
   'Afbeeldingsverwijzingen': 'Referințe imagine',
 };

@@ -3,419 +3,31 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Security briefing / shift start
+title: Briefing tas-sigurtà / bidu tax-xift
 language: mt
 ---
 
 <!-- _class: title -->
 
 # Briefing tas-sigurtà / bidu tax-xift
-
-[[OCIDECK_SEG]]] 
-
-Data · Xift · Sit/post · Superviżur tax-xift
-
-[[OCIDECK_SEG]]] 
-
-Għan: kulħadd jibda l-bidla bl-istess stampa
-
-[[OCIDECK_SEG]]] 
-
-Tieqa tal-ħin tax-xift: … sa …
-
-[[OCIDECK_SEG]]] 
-
-Sit/post: …
-
-[[OCIDECK_SEG]]] 
-
-Superviżur tax-xift u dettalji ta' kuntatt:…
-
-[[OCIDECK_SEG]]] 
-
-Għan u tieqa ta' żmien ta' dan il-briefing
-
-[[OCIDECK_SEG]]] 
-
-Punti ewlenin mill-ġrajjiet kurrenti u l-bidla preċedenti
-
-[[OCIDECK_SEG]]] 
-
-Suġġett
-
-[[OCIDECK_SEG]]] 
-
-X'qed jiġri
-
-[[OCIDECK_SEG]]] 
-
-Segwi din il-bidla
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Punti ta' attenzjoni għall-bidla
-
-[[OCIDECK_SEG]]] 
-
-Post/żona
-
-[[OCIDECK_SEG]]] 
-
-Punt ta 'attenzjoni
-
-[[OCIDECK_SEG]]] 
-
-X'għandek tagħmel
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Avvenimenti speċjali għall-ġurnata
-
-[[OCIDECK_SEG]]] 
-
-Ħin
-
-[[OCIDECK_SEG]]] 
-
-Avveniment speċjali (żjara, kunsinna, avveniment)
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Xogħol ta’ manutenzjoni fuq il-bini jew is-sit
-
-[[OCIDECK_SEG]]] 
-
-Post
-
-[[OCIDECK_SEG]]] 
-
-Xogħol
-
-[[OCIDECK_SEG]]] 
-
-Kumpanija/kuntatt
-
-[[OCIDECK_SEG]]] 
-
-Tieqa tal-ħin
-
-[[OCIDECK_SEG]]] 
-
-Impatt fuq is-sigurtà
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Persunal
-
-[[OCIDECK_SEG]]] 
-
-Post/rwol
-
-[[OCIDECK_SEG]]] 
-
-Isem
-
-[[OCIDECK_SEG]]] 
-
-Tieqa tal-ħin
-
-[[OCIDECK_SEG]]] 
-
-Radju/kuntatt
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Kamra tal-kontroll u numru ta' emerġenza: …
-
-[[OCIDECK_SEG]]] 
-
-Tim ta' rispons għal evakwazzjoni u emerġenza: punt ta' assemblaġġ u kompiti
-
-[[OCIDECK_SEG]]] 
-
-L-ewwel għajnuna u AED: il-post u l-persuni nominati
-
-[[OCIDECK_SEG]]] 
-
-Linja ta 'eskalazzjoni u twissija: lil min iċċempel u meta
-
-[[OCIDECK_SEG]]] 
-
-Theddida ta' bomba jew pakkett suspettuż: proċedura
-
-[[OCIDECK_SEG]]] 
-
-Twissija u emerġenzi
-
-[[OCIDECK_SEG]]] 
-
-Ittestjat bir-radju u jaħdem il-konnessjoni
-
-[[OCIDECK_SEG]]] 
-
-Iċ-ċwievet u l-passes ta' aċċess kompluti
-
-[[OCIDECK_SEG]]] 
-
-Is-sistema tal-kameras u l-ħażna tal-filmati jaħdmu
-
-[[OCIDECK_SEG]]] 
-
-Kontroll tal-aċċess u barrieri ċċekkjati
-
-[[OCIDECK_SEG]]] 
-
-Grazzi u sorveljanza skedata
-
-[[OCIDECK_SEG]]] 
-
-Trasferiment minn shift preċedenti riċevut u ffirmat
-
-[[OCIDECK_SEG]]] 
-
-Kontrolli qabel ix-xift
-
-[[OCIDECK_SEG]]] 
-
-Avvenimenti speċjali rreġistrati fil-ġurnal ta 'kuljum
-
-[[OCIDECK_SEG]]] 
-
-Azzjonijiet pendenti mgħoddija lill-xift li jmiss
-
-[[OCIDECK_SEG]]] 
-
-Inċidenti rrappurtati u rreġistrati
-
-[[OCIDECK_SEG]]] 
-
-Ċwievet, radju u tagħmir mgħoddija
-
-[[OCIDECK_SEG]]] 
-
-Trasferiment fi tmiem ix-xift
-
-[[OCIDECK_SEG]]] 
-
-Briefing tas-sigurtà / bidu tax-xift
-## Date · Shift · Site/location · Shift supervisor
+## Data · Xift · Sit/post · Superviżur tax-xift
 
 ---
 
-# Purpose and time window of this briefing
+# Għan u tieqa ta' żmien ta' dan il-briefing
 
-- Purpose: everyone starts the shift with the same picture
-- Shift time window: … to …
-- Site/location: …
-- Shift supervisor and contact details: …
+- Għan: kulħadd jibda l-bidla bl-istess stampa
+- Tieqa tal-ħin tax-xift: … sa …
+- Sit/post: …
+- Superviżur tax-xift u dettalji ta' kuntatt:…
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Key points from current events and the previous shift
+# Punti ewlenin mill-ġrajjiet kurrenti u l-bidla preċedenti
 
-| Topic | What's going on | Follow-up this shift |
+| Suġġett | X'qed jiġri | Segwi din il-bidla |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
@@ -425,9 +37,9 @@ Briefing tas-sigurtà / bidu tax-xift
 
 <!-- _class: table table-editable -->
 
-# Points of attention for the shift
+# Punti ta' attenzjoni għall-bidla
 
-| Location/area | Point of attention | What to do |
+| Post/żona | Punt ta 'attenzjoni | X'għandek tagħmel |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
@@ -437,9 +49,9 @@ Briefing tas-sigurtà / bidu tax-xift
 
 <!-- _class: table table-editable -->
 
-# Special events for the day
+# Avvenimenti speċjali għall-ġurnata
 
-| Time | Special event (visit, delivery, event) | Action |
+| Ħin | Avveniment speċjali (żjara, kunsinna, avveniment) | Azzjoni |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
@@ -449,9 +61,9 @@ Briefing tas-sigurtà / bidu tax-xift
 
 <!-- _class: table table-editable -->
 
-# Maintenance work on the building or site
+# Xogħol ta’ manutenzjoni fuq il-bini jew is-sit
 
-| Location | Work | Company/contact | Time window | Impact on security |
+| Post | Xogħol | Kumpanija/kuntatt | Tieqa tal-ħin | Impatt fuq is-sigurtà |
 | --- | --- | --- | --- | --- |
 | … | … | … | … | … |
 | … | … | … | … | … |
@@ -460,9 +72,9 @@ Briefing tas-sigurtà / bidu tax-xift
 
 <!-- _class: table table-editable -->
 
-# Staffing
+# Persunal
 
-| Post/role | Name | Time window | Radio/contact |
+| Post/rwol | Isem | Tieqa tal-ħin | Radju/kuntatt |
 | --- | --- | --- | --- |
 | … | … | … | … |
 | … | … | … | … |
@@ -470,32 +82,32 @@ Briefing tas-sigurtà / bidu tax-xift
 
 ---
 
-# Alerting and emergencies
+# Twissija u emerġenzi
 
-- Control room and emergency number: …
-- Evacuation and emergency response team: assembly point and tasks
-- First aid and AED: location and designated persons
-- Escalation and warning line: who to call and when
-- Bomb threat or suspicious package: procedure
+- Kamra tal-kontroll u numru ta' emerġenza: …
+- Tim ta' rispons għal evakwazzjoni u emerġenza: punt ta' assemblaġġ u kompiti
+- L-ewwel għajnuna u AED: il-post u l-persuni nominati
+- Linja ta 'eskalazzjoni u twissija: lil min iċċempel u meta
+- Theddida ta' bomba jew pakkett suspettuż: proċedura
 
 ---
 
-# Pre-shift checks
+# Kontrolli qabel ix-xift
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] Radio tested and connection working
-- [ ] Keys and access passes complete
-- [ ] Camera system and footage storage working
-- [ ] Access control and barriers checked
-- [ ] Patrols and surveillance scheduled
-- [ ] Handover from previous shift received and signed
+- [ ] Ittestjat bir-radju u jaħdem il-konnessjoni
+- [ ] Iċ-ċwievet u l-passes ta' aċċess kompluti
+- [ ] Is-sistema tal-kameras u l-ħażna tal-filmati jaħdmu
+- [ ] Kontroll tal-aċċess u barrieri ċċekkjati
+- [ ] Grazzi u sorveljanza skedata
+- [ ] Trasferiment minn shift preċedenti riċevut u ffirmat
 
 ---
 
-# End-of-shift handover
+# Trasferiment fi tmiem ix-xift
 
-- Special events recorded in the daily log
-- Outstanding actions handed over to the next shift
-- Incidents reported and logged
-- Keys, radio and equipment handed over
+- Avvenimenti speċjali rreġistrati fil-ġurnal ta 'kuljum
+- Azzjonijiet pendenti mgħoddija lill-xift li jmiss
+- Inċidenti rrappurtati u rreġistrati
+- Ċwievet, radju u tagħmir mgħoddija

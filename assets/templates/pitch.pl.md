@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dostarcz prezentację
+title: Przedstawić pitch
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Dostarcz prezentację
+# Przedstawić pitch
 ## Dla kogo · O co pytasz · Czas · Data
 
 ---
@@ -24,20 +24,20 @@ language: pl
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Jeśli nie potrafisz wyjaśnić tego w jednym zdaniu, sam jeszcze nie rozumiesz tego wystarczająco dobrze.
 
-— Rule of thumb for a strong pitch
+— Zasada mocnej prezentacji
 
 ---
 
 # Struktura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Hak: intrygujące otwarcie lub przykład
+2. Problem: jaki ból rozwiązujesz i dla kogo
+3. Rozwiązanie: co oferujesz, prostym językiem
+4. Dowód: liczby, przykład lub demo
+5. Prośba: konkretny następny krok
 
 ---
 

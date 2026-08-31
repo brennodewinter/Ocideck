@@ -28,21 +28,21 @@ language: fi
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Kun annan sen</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Kuvaa käytöstä, älä ihmistä</li>
+<li>Fakta → vaikutus → pyyntö</li>
+<li>Ajoissa, ei kasattuna</li>
+<li>Tarkista, miten se otetaan vastaan</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Kun saan sen</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Kuuntele puolustautumatta heti</li>
+<li>Pyydä konkreettinen esimerkki</li>
+<li>Kiitä avoimuudesta</li>
+<li>Ota aikaa ennen vastaamista</li>
 </ul>
 </div>
 </div>

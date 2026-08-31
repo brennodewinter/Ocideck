@@ -72,7 +72,7 @@ language: gsw
       ]
     },
     {
-      "name": "Actual",
+      "name": "Ischt",
       "data": [
         298.0,
         318.0,

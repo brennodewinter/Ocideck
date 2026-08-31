@@ -43,14 +43,14 @@ language: fy
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Foardielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Neidielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -66,14 +66,14 @@ language: fy
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Foardielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Neidielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -89,14 +89,14 @@ language: fy
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Foardielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Neidielen</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -108,13 +108,13 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Trade-off matrix
+# Ofwagingsmatriks
 
 | Kriterium | Opsje 1 | Opsje 2 | Opsje 3 |
 | --- | --- | --- | --- |
 | Kosten | … | … | … |
 | Kompleksiteit | … | … | … |
-| Future-proofing | … | … | … |
+| Takomstbestindigens | … | … | … |
 | Risiko | … | … | … |
 
 ---

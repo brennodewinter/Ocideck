@@ -28,25 +28,25 @@ language: da
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Erstat dette med dit eget multiple choice-spørgsmål.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Det rigtige svar",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Et forkert svar",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Endnu et forkert svar",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Og endnu et forkert svar",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: da
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Erstat dette med et udsagn, der er sandt eller falsk.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: da
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Erstat dette med et spørgsmål med flere rigtige svar.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Rigtigt svar 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Rigtigt svar 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Forkert svar 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Forkert svar 2",
       "correct": false
     }
   ]

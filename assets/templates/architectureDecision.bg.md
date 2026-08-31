@@ -43,14 +43,14 @@ language: bg
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Предимства</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Недостатъци</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -66,14 +66,14 @@ language: bg
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Предимства</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Недостатъци</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -89,14 +89,14 @@ language: bg
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Advantages</h3>
+<h3 style="margin:0 0 .5rem;">Предимства</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Disadvantages</h3>
+<h3 style="margin:0 0 .5rem;">Недостатъци</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>

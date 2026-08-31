@@ -28,25 +28,25 @@ language: sv
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Ersätt detta med din egen flervalsfråga.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Det rätta svaret",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Ett felaktigt svar",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ännu ett felaktigt svar",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Och ännu ett felaktigt svar",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: sv
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Ersätt detta med ett påstående som är sant eller falskt.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: sv
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Ersätt detta med en fråga som har flera rätta svar.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Rätt svar 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Rätt svar 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Fel svar 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Fel svar 2",
       "correct": false
     }
   ]

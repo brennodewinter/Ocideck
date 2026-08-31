@@ -63,7 +63,7 @@ language: lt
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Biudžetas",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: lt
       ]
     },
     {
-      "name": "Actual",
+      "name": "Faktinis",
       "data": [
         298.0,
         318.0,

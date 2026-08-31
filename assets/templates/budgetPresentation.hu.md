@@ -63,7 +63,7 @@ language: hu
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Költségvetés",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: hu
       ]
     },
     {
-      "name": "Actual",
+      "name": "Tényleges",
       "data": [
         298.0,
         318.0,

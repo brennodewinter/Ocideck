@@ -3091,7 +3091,7 @@ const _dutchSourceAddPl = <String, String>{
       'nie udało się odczytać i pominięto',
   'ontbrak in het bestand en is overgeslagen': 'brakowało w pliku i pominięto',
   'Hoofdeffecten': 'Efekty główne',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakcja',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Za mało danych do wykresu efektów głównych',
   'Te weinig gegevens voor een interactieplot':
@@ -4615,7 +4615,7 @@ const _dutchSourceAddPl = <String, String>{
   'Geen slides gevonden.': 'Nie znaleziono slajdów.',
   "dia's geïmporteerd.": 'slajdy zaimportowane.',
   'Import mislukt: ': 'Import nie powiódł się: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Listy kontrolne',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Skonfiguruj serwer na karcie Łącznik LibrePlan. Dopóki nic tam nie ma, nic się nie dzieje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4642,7 +4642,7 @@ const _dutchSourceAddPl = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Obszary',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
   'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
 };

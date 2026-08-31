@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Libera picem
+title: Pitch praebere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Libera picem
+# Pitch praebere
 ## Quis est de eo quod petis · Tempus · Date
 
 ---
@@ -24,20 +24,20 @@ language: la
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Si id una sententia explicare non potes, ne ipse quidem satis bene intellegis.
 
-— Rule of thumb for a strong pitch
+— Regula pollicis ad orationem validam
 
 ---
 
 # Structura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Hamus: exordium vel exemplum quod animum rapit
+2. Quaestio: quem dolorem solvis, et cui
+3. Solutio: quid offeras, sermone simplici
+4. Probatio: numeri, exemplum aut demonstratio
+5. Petitio: gradus proximus certus
 
 ---
 

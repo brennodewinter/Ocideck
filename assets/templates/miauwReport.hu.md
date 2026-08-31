@@ -117,19 +117,19 @@ language: hu
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Írd le itt tényszerűen és műszakian, mi a biztonsági probléma.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Írd le reprodukálhatóan (bizonyítékkal), hogyan állapítottad meg a megállapítást.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Írd le a lehetséges műszaki és üzleti hatást.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Írd le a konkrét, megvalósítható enyhítést.
 
 ---
 

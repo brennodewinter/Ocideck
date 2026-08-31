@@ -45,7 +45,7 @@ language: ro
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Sesizări",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: ro
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidente",
       "data": [
         9.0,
         12.0,

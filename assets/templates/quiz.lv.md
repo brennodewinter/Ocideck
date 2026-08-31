@@ -28,25 +28,25 @@ language: lv
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Aizstājiet to ar savu jautājumu ar atbilžu variantiem.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Pareizā atbilde",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Nepareiza atbilde",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Vēl viena nepareiza atbilde",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Un vēl viena nepareiza atbilde",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: lv
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Aizstājiet to ar apgalvojumu, kas ir patiess vai aplams.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: lv
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Aizstājiet to ar jautājumu, kuram ir vairākas pareizas atbildes.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Pareiza atbilde 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Pareiza atbilde 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Nepareiza atbilde 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Nepareiza atbilde 2",
       "correct": false
     }
   ]

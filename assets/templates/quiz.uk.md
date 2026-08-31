@@ -28,25 +28,25 @@ language: uk
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Замініть це власним запитанням із варіантами відповідей.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правильна відповідь",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Ще одна неправильна відповідь",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "І ще одна неправильна відповідь",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: uk
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Замініть це твердженням, яке є правдивим або хибним.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: uk
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Замініть це запитанням із кількома правильними відповідями.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Правильна відповідь 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Правильна відповідь 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Неправильна відповідь 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Неправильна відповідь 2",
       "correct": false
     }
   ]

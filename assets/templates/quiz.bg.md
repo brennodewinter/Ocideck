@@ -28,25 +28,25 @@ language: bg
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Заменете това със собствен въпрос с избор от няколко отговора.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Правилният отговор",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Грешен отговор",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Още един грешен отговор",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "И още един грешен отговор",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: bg
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Заменете това с твърдение, което е вярно или невярно.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: bg
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Заменете това с въпрос с няколко верни отговора.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Верен отговор 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Верен отговор 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Грешен отговор 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Грешен отговор 2",
       "correct": false
     }
   ]

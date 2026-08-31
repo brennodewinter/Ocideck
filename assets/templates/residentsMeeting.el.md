@@ -45,7 +45,7 @@ language: el
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Αναφορές",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: el
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Περιστατικά",
       "data": [
         9.0,
         12.0,

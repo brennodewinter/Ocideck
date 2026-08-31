@@ -72,7 +72,7 @@ language: it
       ]
     },
     {
-      "name": "Actual",
+      "name": "Consuntivo",
       "data": [
         298.0,
         318.0,

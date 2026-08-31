@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Interactive quiz
+title: Quaestionarium interactivum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Interactive quiz
+# Quaestionarium interactivum
 
 ---
 
@@ -28,25 +28,25 @@ language: la
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "Replace this with your own multiple-choice question.",
+  "prompt": "Substitue hoc tua quaestione multiplicis electionis.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Responsum rectum",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Responsum falsum",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Aliud responsum falsum",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Adhuc aliud responsum falsum",
       "correct": false
     }
   ]
@@ -69,7 +69,7 @@ language: la
 ```question
 {
   "kind": "trueFalse",
-  "prompt": "Replace this with a statement that is true or false.",
+  "prompt": "Substitue hoc enuntiatione quae vera aut falsa est.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
@@ -87,25 +87,25 @@ language: la
 ```question
 {
   "kind": "multipleCorrect",
-  "prompt": "Replace this with a question that has multiple correct answers.",
+  "prompt": "Substitue hoc quaestione cum pluribus responsis rectis.",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "Correct answer 1",
+      "text": "Responsum rectum 1",
       "correct": true
     },
     {
-      "text": "Correct answer 2",
+      "text": "Responsum rectum 2",
       "correct": true
     },
     {
-      "text": "Wrong answer 1",
+      "text": "Responsum falsum 1",
       "correct": false
     },
     {
-      "text": "Wrong answer 2",
+      "text": "Responsum falsum 2",
       "correct": false
     }
   ]

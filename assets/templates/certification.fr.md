@@ -28,14 +28,14 @@ language: fr
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politique",
+    "Technique",
+    "Processus",
+    "Personnes"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Prêt (%)",
       "data": [
         80.0,
         55.0,

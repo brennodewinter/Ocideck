@@ -24,11 +24,11 @@ language: pap
 # Fasenan di proyekto
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Preparashon
+2. Diseño
+3. Realisashon
+4. Tèst i akseptashon
+5. Lansamentu i kuido despues
 
 ---
 

@@ -10,7 +10,7 @@ language: la
 <!-- _class: title -->
 
 # Operational vigilum briefing
-## Date · Shift · Area · Briefer
+## Dies · Vices · Regio · Relator
 
 ---
 

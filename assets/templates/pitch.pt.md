@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Faça um argumento de venda
+title: Fazer um pitch
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Faça um argumento de venda
+# Fazer um pitch
 ## Para quem se destina · O que você está perguntando · Hora · Data
 
 ---
@@ -24,20 +24,20 @@ language: pt
 
 <!-- _class: quote -->
 
-> If you can't explain it in one sentence, you don't understand it well enough yourself.
+> Se não consegue explicá-lo numa frase, ainda não o compreende suficientemente bem.
 
-— Rule of thumb for a strong pitch
+— Regra prática para uma apresentação forte
 
 ---
 
 # A estrutura
 <!-- ocideck_list_style: numbered -->
 
-1. Hook: an intriguing opening or example
-2. Problem: what pain you're solving, for whom
-3. Solution: what you offer, in plain language
-4. Proof: numbers, example, or demo
-5. Ask: the concrete next step
+1. Gancho: uma abertura ou exemplo intrigante
+2. Problema: que dor resolve, e para quem
+3. Solução: o que oferece, em linguagem simples
+4. Prova: números, exemplo ou demonstração
+5. Pedido: o próximo passo concreto
 
 ---
 

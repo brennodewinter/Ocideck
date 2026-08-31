@@ -35,9 +35,9 @@ language: sk
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Sformulujte tu kľúčové posolstvo v jednej silnej vete.
 
-— Name or sender
+— Meno alebo odosielateľ
 
 ---
 

@@ -14,9 +14,9 @@ language: gsw
 
 ---
 
-### Important warning
+### Wichtige Hiiwiis
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Prüef immer aktuelli AIP/NOTAM, offizielli Wätterinformatione, POH/AFM, lokali Verfahre und gsetzlichi Minima. Die Vorlag unterstützt de Entscheid, ersetzt aber kei vorgschriebni Flugvorbereitig.**
 
 ---
 

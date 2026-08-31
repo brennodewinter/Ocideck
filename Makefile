@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -911,6 +911,27 @@ check-translated-mermaid:
 	@echo "        tool/check_translated_mermaid.dart."
 	dart run tool/check_translated_mermaid.dart
 
+# Een vertaald sjabloon in assets/templates/ mag geen Engels dragen waar zijn
+# eigen taal hoort. tool/template_l10n_po.dart pelt alleen `title:`, `# `, `## `,
+# bullets en tabelrijen eruit; genummerde lijsten, citaten, `###`-koppen,
+# alinea's, HTML-blokken en codeblokken reizen als `raw` mee en bleven dus staan
+# zoals de Engelse bron ze schreef. Deze poort vergelijkt per regel tegen de
+# Engelse bron én tegen de Nederlandse: wat in het Nederlands óók zo staat, is
+# de bedoelde vorm en telt niet mee.
+check-untranslated-templates:
+	@echo "== OciDeck check: onvertaalde sjabloonregels =="
+	@echo "Command: dart run tool/check_untranslated_templates.dart"
+	@echo "Covers: elke assets/templates/<id>.<taal>.md — een regel die letterlijk"
+	@echo "        in de Engelse bron staat en NIET in de Nederlandse is een"
+	@echo "        vertaalgat. Vanaf twee woorden; Klingon staat bewust op de"
+	@echo "        Engelse terugval (TemplateContentService.languagesWithContent)."
+	@echo "Failure means: vertaal de regel ter plekke, of — als het Engelse woord"
+	@echo "        het woord ván die taal is — zet het paar (taal, regel) in"
+	@echo "        allowedCognates in tool/check_untranslated_templates.dart"
+	@echo "        mét de reden."
+	@echo "        Volledige lijst: dart run tool/check_untranslated_templates.dart --list"
+	dart run tool/check_untranslated_templates.dart
+
 # De ANDERE kant van de vertaalpoorten. `l10n-check` en app_localizations_test
 # bewaken dat elke gebruikte sleutel in alle 32 talen bestaat; niets vroeg of
 # een sleutel nog wordt opgehaald. Elke wees kost 32 regels onderhoud voor
@@ -1261,7 +1282,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-l10n-parity translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus

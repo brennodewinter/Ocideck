@@ -41,11 +41,11 @@ language: gsw
 
 ---
 
-### Inject round 1
+### Inject, Rundi 1
 
-Describe here the first development presented to the team.
+Beschriib da die erschti Entwicklig, wo em Team vorgleit wird.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Frag as Team:** was mached er zerscht, und wän informiered er?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Inject, Rundi 2
 
-Describe here the escalation or twist in the scenario.
+Beschriib da d Eskalation oder d Wändig im Szenario.
 
-**Question for the team:** does this change your approach — and your communication?
+**Frag as Team:** änderet das eui Vorgehensewiis — und eui Kommunikation?
 
 ---
 

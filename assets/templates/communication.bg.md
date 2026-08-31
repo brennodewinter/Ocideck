@@ -35,9 +35,9 @@ language: bg
 
 <!-- _class: quote -->
 
-> Formulate the key message here in one powerful sentence.
+> Формулирайте тук основното послание в едно силно изречение.
 
-— Name or sender
+— Име или подател
 
 ---
 

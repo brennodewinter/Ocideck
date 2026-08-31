@@ -41,11 +41,11 @@ language: lt
 
 ---
 
-### Inject round 1
+### Injektas, 1 raundas
 
-Describe here the first development presented to the team.
+Aprašykite čia pirmą įvykių raidą, pateiktą komandai.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Klausimas komandai:** ką darote pirmiausia ir ką informuojate?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Injektas, 2 raundas
 
-Describe here the escalation or twist in the scenario.
+Aprašykite čia scenarijaus eskalaciją arba posūkį.
 
-**Question for the team:** does this change your approach — and your communication?
+**Klausimas komandai:** ar tai keičia jūsų požiūrį — ir jūsų komunikaciją?
 
 ---
 

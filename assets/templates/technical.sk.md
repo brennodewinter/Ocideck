@@ -21,7 +21,7 @@ language: sk
 
 ---
 
-### Architecture overview
+### Prehľad architektúry
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Dátový tok alebo procesný tok
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Používateľ odošle požiadavku
+2. API ju overí a nasmeruje
+3. Služba ju spracuje a uloží
+4. Výsledok sa vracia používateľovi
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Príklad kódu
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Nahraďte tento príklad kódom, ktorý chcete vysvetliť.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

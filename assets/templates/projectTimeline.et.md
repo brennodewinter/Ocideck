@@ -24,11 +24,11 @@ language: et
 # Projekti etapid
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Ettevalmistus
+2. Kavandamine
+3. Teostus
+4. Testimine ja vastuvõtt
+5. Käivitamine ja järelhooldus
 
 ---
 

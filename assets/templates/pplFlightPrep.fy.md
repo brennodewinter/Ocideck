@@ -14,9 +14,9 @@ language: fy
 
 ---
 
-### Important warning
+### Wichtige warskôging
 
-**Always check the current AIP/NOTAM, official weather information, POH/AFM, local procedures and legal minima. This template supports decision-making but does not replace mandatory flight preparation.**
+**Kontrolearje altyd aktuele AIP/NOTAM, offisjele waarynformaasje, POH/AFM, lokale prosedueres en wetlike minima. Dizze sjabloan stipet de beslútfoarming, mar ferfangt gjin ferplichte flechtfoarbereiding.**
 
 ---
 
@@ -49,7 +49,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# PAVE Risk Picture
+# PAVE-risikobyld
 
 | Komponint | Risiko | Mitigaasje | Beslút |
 | --- | --- | --- | --- |
@@ -62,7 +62,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Flight Profile
+# Flechtprofyl
 
 | Field | Wearde | Opmerking |
 | --- | --- | --- |
@@ -159,7 +159,7 @@ language: fy
 
 <!-- _class: table table-editable -->
 
-# Fuel Planning
+# Brânstofplanning
 
 | Komponint | Minuten | Liters | Opmerking |
 | --- | --- | --- | --- |
@@ -195,12 +195,12 @@ language: fy
 | Leech wolkebasis | … | … | … | … |
 | Drokke loftrom | … | … | … | … |
 | Passazjier druk | … | … | … | … |
-| Marginal fuel | … | … | … | … |
+| Marginale brânstof | … | … | … | … |
 | Unbekend fleanfjild | … | … | … | … |
 
 ---
 
-# Passenger Briefing
+# Passazjiersbriefing
 <!-- ocideck_list_style: checklist -->
 
 - [ ] Seatbelts en doarren

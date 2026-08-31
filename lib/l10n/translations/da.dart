@@ -3070,7 +3070,7 @@ const _dutchSourceAddDa = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'manglede i filen og blev sprunget over',
   'Hoofdeffecten': 'Hovedeffekter',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interaktion',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'For få data til et hovedeffektplot',
   'Te weinig gegevens voor een interactieplot':
@@ -4590,7 +4590,7 @@ const _dutchSourceAddDa = <String, String>{
   'Geen slides gevonden.': 'Ingen slides fundet.',
   "dia's geïmporteerd.": 'slides importeret.',
   'Import mislukt: ': 'Import mislykkedes: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Tjeklister',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Opsæt serveren under fanen LibrePlan-konnektor. Så længe der ikke står noget, sker der ingenting.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4616,7 +4616,7 @@ const _dutchSourceAddDa = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Områder',
   'bv. "de controller board met display"':
       'f.eks. "controller board med display"',
   'Afbeeldingsverwijzingen': 'Billedreferencer',

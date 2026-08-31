@@ -63,7 +63,7 @@ language: pl
   ],
   "series": [
     {
-      "name": "Budget",
+      "name": "Budżet",
       "data": [
         310.0,
         305.0,
@@ -72,7 +72,7 @@ language: pl
       ]
     },
     {
-      "name": "Actual",
+      "name": "Wykonanie",
       "data": [
         298.0,
         318.0,

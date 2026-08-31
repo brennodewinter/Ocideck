@@ -24,11 +24,11 @@ language: uk
 # Фази проекту
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Підготовка
+2. Проєктування
+3. Реалізація
+4. Тестування та приймання
+5. Запуск і подальший супровід
 
 ---
 

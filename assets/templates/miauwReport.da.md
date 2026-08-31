@@ -117,19 +117,19 @@ language: da
 
 ## Description
 
-Describe here, factually and technically, what the security issue is.
+Beskriv her sagligt og teknisk, hvad sikkerhedsproblemet er.
 
 ## Confirmation (reproduction)
 
-Describe, in a reproducible way (with evidence), how the finding was established.
+Beskriv reproducerbart (med bevis), hvordan fundet blev fastslået.
 
 ## Possible impact
 
-Describe the possible technical and business impact.
+Beskriv den mulige tekniske og forretningsmæssige konsekvens.
 
 ## Recommendation
 
-Describe the concrete, achievable mitigation.
+Beskriv den konkrete, opnåelige afhjælpning.
 
 ---
 

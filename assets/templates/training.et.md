@@ -37,15 +37,15 @@ language: et
 
 ---
 
-### Example or case study
+### Näide või juhtum
 
-Describe a recognizable real-world situation here.
+Kirjeldage siin äratuntavat olukorda praktikast.
 
-**What happened?** …
+**Mis juhtus?** …
 
-**What went wrong — or right?** …
+**Mis läks valesti — või hoopis hästi?** …
 
-**What do we learn from this?** …
+**Mida me sellest õpime?** …
 
 ---
 
@@ -64,25 +64,25 @@ Describe a recognizable real-world situation here.
 ```question
 {
   "kind": "multipleChoice",
-  "prompt": "What is the right choice?",
+  "prompt": "Milline on õige valik?",
   "optionCount": 4,
   "timeLimitSeconds": 0,
   "onWrong": "retry",
   "answers": [
     {
-      "text": "The correct answer",
+      "text": "Õige vastus",
       "correct": true
     },
     {
-      "text": "A wrong answer",
+      "text": "Vale vastus",
       "correct": false
     },
     {
-      "text": "Another wrong answer",
+      "text": "Veel üks vale vastus",
       "correct": false
     },
     {
-      "text": "Yet another wrong answer",
+      "text": "Ja veel üks vale vastus",
       "correct": false
     }
   ]

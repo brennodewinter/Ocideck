@@ -45,7 +45,7 @@ language: id
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Laporan",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: id
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Insiden",
       "data": [
         9.0,
         12.0,

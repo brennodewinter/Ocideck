@@ -2964,14 +2964,14 @@ const _dutchSourceAddSl = <String, String>{
   'LSL (ondergrens, optioneel)': 'LSL (spodnja meja, izbirno)',
   'Procesdoel (optioneel)': 'Cilj procesa (izbirno)',
   'Fasepoort': 'Fazna vrata',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Izračunaj',
+  'Gegevens': 'Podatki',
+  'Hellingscoëfficiënt': 'Naklon',
   'Hypothesetoets': 'Test hipoteze',
   'Hypothesetoets…': 'Test hipoteze…',
   'Hypothetisch gemiddelde': 'Hipotetično povprečje',
   'Lineaire regressie': 'Linearna regresija',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresija…',
   'Meetdata': 'Merilni podatki',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Toleranca (neobvezno)',
@@ -3068,7 +3068,7 @@ const _dutchSourceAddSl = <String, String>{
   'ontbrak in het bestand en is overgeslagen':
       'manjkalo je v datoteki in je bilo preskočeno',
   'Hoofdeffecten': 'Glavni učinki',
-  'Interactie': 'Interaction',
+  'Interactie': 'Interakcija',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Premalo podatkov za grafikon glavnih učinkov',
   'Te weinig gegevens voor een interactieplot':
@@ -4592,7 +4592,7 @@ const _dutchSourceAddSl = <String, String>{
   'Geen slides gevonden.': 'Ni najdenih diapozitivov.',
   "dia's geïmporteerd.": 'diapozitivov uvoženih.',
   'Import mislukt: ': 'Uvoz ni uspel: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrolni seznami',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Nastavite strežnik na zavihku Konektor LibrePlan. Dokler tam ni ničesar, se ne zgodi nič.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4619,7 +4619,7 @@ const _dutchSourceAddSl = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Območja',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
   'Afbeeldingsverwijzingen': 'Sklice na slike',
 };

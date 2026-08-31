@@ -28,14 +28,14 @@ language: lt
   "type": "bar",
   "maxBound": 100.0,
   "x": [
-    "Policy",
-    "Technology",
-    "Processes",
-    "People"
+    "Politika",
+    "Technika",
+    "Procesai",
+    "Žmonės"
   ],
   "series": [
     {
-      "name": "Ready (%)",
+      "name": "Parengta (%)",
       "data": [
         80.0,
         55.0,

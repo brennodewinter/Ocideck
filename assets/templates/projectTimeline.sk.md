@@ -24,11 +24,11 @@ language: sk
 # Fázy projektu
 <!-- ocideck_list_style: numbered -->
 
-1. Preparation
-2. Design
-3. Build
-4. Test and acceptance
-5. Go-live and aftercare
+1. Príprava
+2. Návrh
+3. Realizácia
+4. Testovanie a akceptácia
+5. Spustenie a následná starostlivosť
 
 ---
 

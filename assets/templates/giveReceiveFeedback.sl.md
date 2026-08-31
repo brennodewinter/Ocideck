@@ -28,21 +28,21 @@ language: sl
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Ko jo dajem</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Opiši vedenje, ne osebe</li>
+<li>Dejstvo → učinek → prošnja</li>
+<li>Pravočasno, ne nakopičeno</li>
+<li>Preveri, kako je sprejeto</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Ko jo prejmem</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Poslušaj brez takojšnjega branjenja</li>
+<li>Vprašaj za konkreten primer</li>
+<li>Zahvali se za odkritost</li>
+<li>Vzemi si čas, preden odgovoriš</li>
 </ul>
 </div>
 </div>

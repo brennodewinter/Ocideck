@@ -3976,7 +3976,7 @@ const _dutchSourceAddTr = <String, String>{
   'kon niet worden gelezen en is overgeslagen': 'okunamadı ve atlandı',
   'ontbrak in het bestand en is overgeslagen': 'dosyada eksikti ve atlandı',
   'Hoofdeffecten': 'Ana etkiler',
-  'Interactie': 'Interaction',
+  'Interactie': 'Etkileşim',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Ana etkiler grafiği için yetersiz veri',
   'Te weinig gegevens voor een interactieplot':
@@ -4578,7 +4578,7 @@ const _dutchSourceAddTr = <String, String>{
   'Geen slides gevonden.': 'Slayt bulunamadı.',
   "dia's geïmporteerd.": 'slayt içe aktarıldı.',
   'Import mislukt: ': 'İçe aktarma başarısız: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrol listeleri',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Sunucuyu LibrePlan bağlayıcısı sekmesinde yapılandırın. Orada bir şey olmadığı sürece hiçbir şey olmaz.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4605,7 +4605,7 @@ const _dutchSourceAddTr = <String, String>{
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Bölgeler',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
   'Afbeeldingsverwijzingen': 'Görsel referanslar',
 };

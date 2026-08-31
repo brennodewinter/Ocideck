@@ -21,7 +21,7 @@ language: ro
 
 ---
 
-### Architecture overview
+### Privire de ansamblu asupra arhitecturii
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Flux de date sau flux de proces
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Utilizatorul face o cerere
+2. API-ul o validează și o direcționează
+3. Serviciul o procesează și o stochează
+4. Rezultatul se întoarce la utilizator
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Exemplu de cod
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Înlocuiește acest exemplu cu codul pe care vrei să îl explici.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

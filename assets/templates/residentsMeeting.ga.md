@@ -45,7 +45,7 @@ language: ga
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Tuairiscí",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: ga
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Teagmhais",
       "data": [
         9.0,
         12.0,

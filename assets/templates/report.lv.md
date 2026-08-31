@@ -44,12 +44,12 @@ language: lv
     "Feb",
     "Mar",
     "Apr",
-    "May",
-    "Jun"
+    "Mai",
+    "Jūn"
   ],
   "series": [
     {
-      "name": "This year",
+      "name": "Šogad",
       "data": [
         12.0,
         14.0,
@@ -60,7 +60,7 @@ language: lv
       ]
     },
     {
-      "name": "Last year",
+      "name": "Pērn",
       "data": [
         10.0,
         11.0,

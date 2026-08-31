@@ -21,7 +21,7 @@ language: bg
 
 ---
 
-### Architecture overview
+### Преглед на архитектурата
 
 ```mermaid
 flowchart LR
@@ -48,10 +48,10 @@ flowchart LR
 # Поток от данни или поток от процеси
 <!-- ocideck_list_style: numbered -->
 
-1. The user makes a request
-2. The API validates and routes it
-3. The service processes and stores it
-4. The result goes back to the user
+1. Потребителят прави заявка
+2. API я валидира и маршрутизира
+3. Услугата я обработва и съхранява
+4. Резултатът се връща при потребителя
 
 ---
 
@@ -60,7 +60,7 @@ flowchart LR
 # Примерен код
 
 ```dart
-/// Replace this example with the code you want to explain.
+/// Заменете този пример с кода, който искате да обясните.
 Future<Result> handleRequest(Request request) async {
   final input = validate(request);
   final result = await service.process(input);

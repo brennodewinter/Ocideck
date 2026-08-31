@@ -2011,14 +2011,14 @@ const _dutchSourceAddFy = {
   'LSL (ondergrens, optioneel)': 'LSL (ûndergrins, opsjoneel)',
   'Procesdoel (optioneel)': 'Prosesdoel (opsjoneel)',
   'Fasepoort': 'Fasepoarte',
-  'Berekenen': 'Calculate',
-  'Gegevens': 'Data',
-  'Hellingscoëfficiënt': 'Slope',
+  'Berekenen': 'Berekenje',
+  'Gegevens': 'Gegevens',
+  'Hellingscoëfficiënt': 'Helling',
   'Hypothesetoets': 'Hypoteezetoets',
   'Hypothesetoets…': 'Hypoteezetoets…',
   'Hypothetisch gemiddelde': 'Hypotetysk gemiddelde',
   'Lineaire regressie': 'Lineêre regressy',
-  'Regressie…': 'Regression…',
+  'Regressie…': 'Regresje…',
   'Meetdata': 'Mjitgegevens',
   'Toets': 'Test',
   'Tolerantie (optioneel)': 'Tolerânsje (opsjoneel)',
@@ -2113,7 +2113,7 @@ const _dutchSourceAddFy = {
   'ontbrak in het bestand en is overgeslagen':
       'ûntbriek yn it bestân en is oerslein',
   'Hoofdeffecten': 'Haadeffekten',
-  'Interactie': 'Interaction',
+  'Interactie': 'Ynteraksje',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Te min gegevens foar in haadeffektenplot',
   'Te weinig gegevens voor een interactieplot':
@@ -4606,7 +4606,7 @@ const _dutchSourceAddFy = {
   'Geen slides gevonden.': 'Gjin dia\'s fûn.',
   "dia's geïmporteerd.": 'dia\'s ymportearre.',
   'Import mislukt: ': 'Ymport mislearre: ',
-  'Checklists': 'Checklists',
+  'Checklists': 'Kontrôlelisten',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
       'Stel de server yn op it ljepblêd LibrePlan-keppeling. Salang\'t dêr neat stiet, bart der neat.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
@@ -4633,7 +4633,7 @@ const _dutchSourceAddFy = {
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
   'Pins': 'Pins',
-  'Gebieden': 'Regions',
+  'Gebieden': 'Gebieten',
   'bv. "de controller board met display"':
       'byg. "de controller board mei display"',
   'Afbeeldingsverwijzingen': 'Ofbyldingsferwizingen',

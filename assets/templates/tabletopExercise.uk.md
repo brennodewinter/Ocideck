@@ -41,11 +41,11 @@ language: uk
 
 ---
 
-### Inject round 1
+### Інжект, раунд 1
 
-Describe here the first development presented to the team.
+Опишіть тут перший розвиток подій, який подають команді.
 
-**Question for the team:** what do you do first, and who do you inform?
+**Питання до команди:** що ви робите першим і кого інформуєте?
 
 ---
 
@@ -60,11 +60,11 @@ Describe here the first development presented to the team.
 
 ---
 
-### Inject round 2
+### Інжект, раунд 2
 
-Describe here the escalation or twist in the scenario.
+Опишіть тут ескалацію або поворот у сценарії.
 
-**Question for the team:** does this change your approach — and your communication?
+**Питання до команди:** чи змінює це ваш підхід — і вашу комунікацію?
 
 ---
 

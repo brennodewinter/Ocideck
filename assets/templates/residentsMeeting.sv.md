@@ -45,7 +45,7 @@ language: sv
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Anmälningar",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: sv
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Incidenter",
       "data": [
         9.0,
         12.0,

@@ -45,7 +45,7 @@ language: da
   ],
   "series": [
     {
-      "name": "Reports",
+      "name": "Anmeldelser",
       "data": [
         24.0,
         31.0,
@@ -54,7 +54,7 @@ language: da
       ]
     },
     {
-      "name": "Incidents",
+      "name": "Hændelser",
       "data": [
         9.0,
         12.0,
