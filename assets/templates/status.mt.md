@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Status briefing
+title: Briefing dwar l-istatus
 language: mt
 ---
 
@@ -11,127 +11,19 @@ language: mt
 
 # Briefing dwar l-istatus
 
-[[OCIDECK_SEG]]] 
-
-Status ġenerali: fit-triq it-tajba / jeħtieġ attenzjoni / kritiku
-
-[[OCIDECK_SEG]]] 
-
-Żvilupp ewlieni mill-briefing preċedenti:...
-
-[[OCIDECK_SEG]]] 
-
-Prospetti għall-perjodu li ġej:...
-
-[[OCIDECK_SEG]]] 
-
-Sommarju tal-istatus
-
-[[OCIDECK_SEG]]] 
-
-Dashboard tal-istatus
-
-[[OCIDECK_SEG]]] 
-
-Progress għal kull workstream
-
-[[OCIDECK_SEG]]] 
-
-Workstream
-
-[[OCIDECK_SEG]]] 
-
-Status
-
-[[OCIDECK_SEG]]] 
-
-Spjegazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Workstream A
-
-[[OCIDECK_SEG]]] 
-
-🟢 Fit-triq it-tajba
-
-[[OCIDECK_SEG]]] 
-
-Proċediment kif ippjanat
-
-[[OCIDECK_SEG]]] 
-
-Workstream B
-
-[[OCIDECK_SEG]]] 
-
-🟠 Attenzjoni
-
-[[OCIDECK_SEG]]] 
-
-Tistenna deċiżjoni
-
-[[OCIDECK_SEG]]] 
-
-Workstream Ċ
-
-[[OCIDECK_SEG]]] 
-
-🔴 Kritika
-
-[[OCIDECK_SEG]]] 
-
-Nuqqas ta' kapaċità
-
-[[OCIDECK_SEG]]] 
-
-Riskju 1: … (probabbiltà: għolja, impatt: kbir)
-
-[[OCIDECK_SEG]]] 
-
-Riskju 2: … (probabbiltà: baxx, impatt: kbir)
-
-[[OCIDECK_SEG]]] 
-
-Blocker: … — għajnuna meħtieġa minn…
-
-[[OCIDECK_SEG]]] 
-
-Riskji u imblokkaturi
-
-[[OCIDECK_SEG]]] 
-
-Deċiżjoni meħtieġa:…
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni: … (sid, data)
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni: … (sid, data)
-
-[[OCIDECK_SEG]]] 
-
-Deċiżjonijiet u azzjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Briefing dwar l-istatus
-
 ---
 
-# Status summary
+# Sommarju tal-istatus
 
-- Overall status: on track / needs attention / critical
-- Key development since the previous briefing: …
-- Outlook for the coming period: …
+- Status ġenerali: fit-triq it-tajba / jeħtieġ attenzjoni / kritiku
+- Żvilupp ewlieni mill-briefing preċedenti:...
+- Prospetti għall-perjodu li ġej:...
 
 ---
 
 <!-- _class: cockpit -->
 
-# Status dashboard
+# Dashboard tal-istatus
 
 ```cockpit
 {
@@ -188,26 +80,26 @@ Briefing dwar l-istatus
 
 <!-- _class: table -->
 
-# Progress per workstream
+# Progress għal kull workstream
 
-| Workstream | Status | Explanation |
+| Workstream | Status | Spjegazzjoni |
 | --- | --- | --- |
-| Workstream A | 🟢 On track | Proceeding as planned |
-| Workstream B | 🟠 Attention | Awaiting decision |
-| Workstream C | 🔴 Critical | Lacking capacity |
+| Workstream A | 🟢 Fit-triq it-tajba | Proċediment kif ippjanat |
+| Workstream B | 🟠 Attenzjoni | Tistenna deċiżjoni |
+| Workstream Ċ | 🔴 Kritika | Nuqqas ta' kapaċità |
 
 ---
 
-# Risks and blockers
+# Riskji u imblokkaturi
 
-- Risk 1: … (likelihood: high, impact: major)
-- Risk 2: … (likelihood: low, impact: major)
-- Blocker: … — help needed from …
+- Riskju 1: … (probabbiltà: għolja, impatt: kbir)
+- Riskju 2: … (probabbiltà: baxx, impatt: kbir)
+- Blocker: … — għajnuna meħtieġa minn…
 
 ---
 
-# Decisions and actions
+# Deċiżjonijiet u azzjonijiet
 
-- Decision needed: …
-- Action: … (owner, date)
-- Action: … (owner, date)
+- Deċiżjoni meħtieġa:…
+- Azzjoni: … (sid, data)
+- Azzjoni: … (sid, data)

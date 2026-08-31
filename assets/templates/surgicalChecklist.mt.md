@@ -3,246 +3,78 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Surgical safety checklist (WHO)
+title: Lista ta' kontroll tas-sigurtà kirurġika (WHO)
 language: mt
 ---
 
 <!-- _class: title -->
 
 # Lista ta' kontroll tas-sigurtà kirurġika (WHO)
-
-[[OCIDECK_SEG]]] 
-
-Proċedura · Pazjent · JEW · Data
-
-[[OCIDECK_SEG]]] 
-
-**Idħol:** qabel l-induzzjoni tal-anestesija
-
-[[OCIDECK_SEG]]] 
-
-**Time-out:** eżatt qabel l-inċiżjoni, mat-tim kollu
-
-[[OCIDECK_SEG]]] 
-
-**Oħroġ:** qabel il-pazjent iħalli l-OR
-
-[[OCIDECK_SEG]]] 
-
-Kull mument huwa ċekk li jingħad b'leħen għoli, mhux formalità
-
-[[OCIDECK_SEG]]] 
-
-Tliet mumenti madwar il-proċedura
-
-[[OCIDECK_SEG]]] 
-
-Identità, proċedura u sit ikkonfermati
-
-[[OCIDECK_SEG]]] 
-
-Kunsens (kunsens infurmat) preżenti
-
-[[OCIDECK_SEG]]] 
-
-Sit kirurġiku mmarkat
-
-[[OCIDECK_SEG]]] 
-
-Tagħmir tal-anestesija u medikazzjoni kkontrollati
-
-[[OCIDECK_SEG]]] 
-
-Pulse oximeter imwaħħal u jaħdem
-
-[[OCIDECK_SEG]]] 
-
-Allerġiji, passaġġi tan-nifs u riskju ta 'aspirazzjoni diskussi
-
-[[OCIDECK_SEG]]] 
-
-Sign in - qabel l-induzzjoni
-
-[[OCIDECK_SEG]]] 
-
-Il-membri kollha tat-tim introdotti bl-isem u r-rwol
-
-[[OCIDECK_SEG]]] 
-
-Pazjent, proċedura u sit ikkonfermati b'leħen għoli
-
-[[OCIDECK_SEG]]] 
-
-Passi kritiċi antiċipati ddikjarati
-
-[[OCIDECK_SEG]]] 
-
-Profilassi antibijotika mogħtija fi żmien 60 minuta
-
-[[OCIDECK_SEG]]] 
-
-Immaġini meħtieġa murija
-
-[[OCIDECK_SEG]]] 
-
-Sterilità u tagħmir fl-ordni
-
-[[OCIDECK_SEG]]] 
-
-Time-out - qabel l-inċiżjoni
-
-[[OCIDECK_SEG]]] 
-
-Proċedura mwettqa msemmija b'leħen għoli
-
-[[OCIDECK_SEG]]] 
-
-Strumenti, swabs u labar magħduda u kompluti
-
-[[OCIDECK_SEG]]] 
-
-Kampjuni ttikkettjati b'mod korrett
-
-[[OCIDECK_SEG]]] 
-
-Problemi tat-tagħmir innutati
-
-[[OCIDECK_SEG]]] 
-
-Punti ewlenin għall-irkupru u l-kura mogħtija
-
-[[OCIDECK_SEG]]] 
-
-Iffirma — qabel ma titlaq mill-OR
-
-[[OCIDECK_SEG]]] 
-
-Noti u punti ta' attenzjoni
-
-[[OCIDECK_SEG]]] 
-
-Suġġett
-
-[[OCIDECK_SEG]]] 
-
-Ftehim
-
-[[OCIDECK_SEG]]] 
-
-Min
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Rapport u proċeduri rreġistrati: …
-
-[[OCIDECK_SEG]]] 
-
-Istruzzjonijiet wara l-operazzjoni mogħtija: …
-
-[[OCIDECK_SEG]]] 
-
-Noti għall-irkupru u s-sala: …
-
-[[OCIDECK_SEG]]] 
-
-Familja jew persuna ta’ kuntatt infurmata: …
-
-[[OCIDECK_SEG]]] 
-
-Wara l-proċedura
-
-[[OCIDECK_SEG]]] 
-
-Lista ta' kontroll tas-sigurtà kirurġika (WHO)
-## Procedure · Patient · OR · Date
+## Proċedura · Pazjent · JEW · Data
 
 ---
 
-# Three moments around the procedure
+# Tliet mumenti madwar il-proċedura
 
-- **Sign in:** before induction of anaesthesia
-- **Time-out:** just before the incision, with the whole team
-- **Sign out:** before the patient leaves the OR
-- Each moment is a check said out loud, not a formality
+- **Idħol:** qabel l-induzzjoni tal-anestesija
+- **Time-out:** eżatt qabel l-inċiżjoni, mat-tim kollu
+- **Oħroġ:** qabel il-pazjent iħalli l-OR
+- Kull mument huwa ċekk li jingħad b'leħen għoli, mhux formalità
 
 ---
 
-# Sign in — before induction
+# Sign in - qabel l-induzzjoni
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] Identity, procedure and site confirmed
-- [ ] Consent (informed consent) present
-- [ ] Surgical site marked
-- [ ] Anaesthesia equipment and medication checked
-- [ ] Pulse oximeter attached and working
-- [ ] Allergies, airway and aspiration risk discussed
+- [ ] Identità, proċedura u sit ikkonfermati
+- [ ] Kunsens (kunsens infurmat) preżenti
+- [ ] Sit kirurġiku mmarkat
+- [ ] Tagħmir tal-anestesija u medikazzjoni kkontrollati
+- [ ] Pulse oximeter imwaħħal u jaħdem
+- [ ] Allerġiji, passaġġi tan-nifs u riskju ta 'aspirazzjoni diskussi
 
 ---
 
-# Time-out — before the incision
+# Time-out - qabel l-inċiżjoni
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] All team members introduced by name and role
-- [ ] Patient, procedure and site confirmed out loud
-- [ ] Anticipated critical steps stated
-- [ ] Antibiotic prophylaxis given within 60 minutes
-- [ ] Required imaging displayed
-- [ ] Sterility and equipment in order
+- [ ] Il-membri kollha tat-tim introdotti bl-isem u r-rwol
+- [ ] Pazjent, proċedura u sit ikkonfermati b'leħen għoli
+- [ ] Passi kritiċi antiċipati ddikjarati
+- [ ] Profilassi antibijotika mogħtija fi żmien 60 minuta
+- [ ] Immaġini meħtieġa murija
+- [ ] Sterilità u tagħmir fl-ordni
 
 ---
 
-# Sign out — before leaving the OR
+# Iffirma — qabel ma titlaq mill-OR
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] Procedure performed named out loud
-- [ ] Instruments, swabs and needles counted and complete
-- [ ] Specimens labelled correctly
-- [ ] Equipment problems noted
-- [ ] Key points for recovery and care handed over
+- [ ] Proċedura mwettqa msemmija b'leħen għoli
+- [ ] Strumenti, swabs u labar magħduda u kompluti
+- [ ] Kampjuni ttikkettjati b'mod korrett
+- [ ] Problemi tat-tagħmir innutati
+- [ ] Punti ewlenin għall-irkupru u l-kura mogħtija
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Notes and points of attention
+# Noti u punti ta' attenzjoni
 
-| Topic | Agreement | Who |
+| Suġġett | Ftehim | Min |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
 
 ---
 
-# After the procedure
+# Wara l-proċedura
 
-- Report and procedures recorded: …
-- Post-operative instructions handed over: …
-- Notes for recovery and the ward: …
-- Family or contact person informed: …
+- Rapport u proċeduri rreġistrati: …
+- Istruzzjonijiet wara l-operazzjoni mogħtija: …
+- Noti għall-irkupru u s-sala: …
+- Familja jew persuna ta’ kuntatt infurmata: …

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Training / workshop
+title: Taħriġ / workshop
 language: mt
 ---
 
@@ -11,117 +11,29 @@ language: mt
 
 # Taħriġ / workshop
 
-[[OCIDECK_SEG]]] 
+---
 
-Wara din is-sessjoni tkun taf:...
+# Għanijiet ta' tagħlim
 
-[[OCIDECK_SEG]]] 
-
-Wara din is-sessjoni tkun tista':...
-
-[[OCIDECK_SEG]]] 
-
-Wara din is-sessjoni int se tagħraf:…
-
-[[OCIDECK_SEG]]] 
-
-Għanijiet ta' tagħlim
-
-[[OCIDECK_SEG]]] 
-
-Dak li jmur ħażin mingħajr dan l-għarfien:...
-
-[[OCIDECK_SEG]]] 
-
-Dak li jagħtik:…
-
-[[OCIDECK_SEG]]] 
-
-Eżempju prattiku:…
-
-[[OCIDECK_SEG]]] 
-
-Għaliex dan is-suġġett huwa importanti
-
-[[OCIDECK_SEG]]] 
-
-Kunċett 1: spjegazzjoni qasira
-
-[[OCIDECK_SEG]]] 
-
-Kunċett 2: spjegazzjoni qasira
-
-[[OCIDECK_SEG]]] 
-
-Kunċett 3: spjegazzjoni qasira
-
-[[OCIDECK_SEG]]] 
-
-Kunċetti ewlenin
-
-[[OCIDECK_SEG]]] 
-
-Assenjament:…
-
-[[OCIDECK_SEG]]] 
-
-Format: pari / gruppi żgħar
-
-[[OCIDECK_SEG]]] 
-
-Ħin: 10 minuti
-
-[[OCIDECK_SEG]]] 
-
-Eżerċizzju jew diskussjoni
-
-[[OCIDECK_SEG]]] 
-
-Mistoqsija tal-kwizz
-
-[[OCIDECK_SEG]]] 
-
-Takeaway ewlieni 1:…
-
-[[OCIDECK_SEG]]] 
-
-It-teħid ewlieni 2:…
-
-[[OCIDECK_SEG]]] 
-
-Trid tkun taf aktar? …
-
-[[OCIDECK_SEG]]] 
-
-Sommarju
-
-[[OCIDECK_SEG]]] 
-
-Taħriġ / workshop
+- Wara din is-sessjoni tkun taf:...
+- Wara din is-sessjoni tkun tista':...
+- Wara din is-sessjoni int se tagħraf:…
 
 ---
 
-# Learning objectives
+# Għaliex dan is-suġġett huwa importanti
 
-- After this session you will know: …
-- After this session you will be able to: …
-- After this session you will recognize: …
-
----
-
-# Why this topic matters
-
-- What goes wrong without this knowledge: …
-- What it gives you: …
-- Practical example: …
+- Dak li jmur ħażin mingħajr dan l-għarfien:...
+- Dak li jagħtik:…
+- Eżempju prattiku:…
 
 ---
 
-# Key concepts
+# Kunċetti ewlenin
 
-- Concept 1: brief explanation
-- Concept 2: brief explanation
-- Concept 3: brief explanation
+- Kunċett 1: spjegazzjoni qasira
+- Kunċett 2: spjegazzjoni qasira
+- Kunċett 3: spjegazzjoni qasira
 
 ---
 
@@ -137,17 +49,17 @@ Describe a recognizable real-world situation here.
 
 ---
 
-# Exercise or discussion
+# Eżerċizzju jew diskussjoni
 
-- Assignment: …
-- Format: pairs / small groups
-- Time: 10 minutes
+- Assenjament:…
+- Format: pari / gruppi żgħar
+- Ħin: 10 minuti
 
 ---
 
 <!-- _class: question -->
 
-# Quiz question
+# Mistoqsija tal-kwizz
 
 ```question
 {
@@ -179,8 +91,8 @@ Describe a recognizable real-world situation here.
 
 ---
 
-# Summary
+# Sommarju
 
-- Key takeaway 1: …
-- Key takeaway 2: …
-- Want to know more? …
+- Takeaway ewlieni 1:…
+- It-teħid ewlieni 2:…
+- Trid tkun taf aktar? …

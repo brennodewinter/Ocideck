@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Research narrative
+title: Narrattiva tar-riċerka
 language: mt
 ---
 
@@ -11,132 +11,40 @@ language: mt
 
 # Narrattiva tar-riċerka
 
-[[OCIDECK_SEG]]] 
+---
 
-Mistoqsija ewlenija:…
+# Mistoqsija ta' riċerka
 
-[[OCIDECK_SEG]]] 
-
-Sub-mistoqsija 1: …
-
-[[OCIDECK_SEG]]] 
-
-Sub-mistoqsija 2: …
-
-[[OCIDECK_SEG]]] 
-
-Mistoqsija ta' riċerka
-
-[[OCIDECK_SEG]]] 
-
-Metodu: analiżi tad-dokumenti / intervisti / analiżi tad-dejta
-
-[[OCIDECK_SEG]]] 
-
-Sorsi:…
-
-[[OCIDECK_SEG]]] 
-
-Perjodu ta' riċerka:...
-
-[[OCIDECK_SEG]]] 
-
-Metodu u sorsi
-
-[[OCIDECK_SEG]]] 
-
-Jan :: L-ewwel sinjal :: Trigger għar-riċerka.
-
-[[OCIDECK_SEG]]] 
-
-Mar :: Joħroġ mudell :: Sorsi multipli jindikaw l-istess mod.
-
-[[OCIDECK_SEG]]] 
-
-Mejju :: Konferma :: Sejba ewlenija kkorroborata bid-dokumenti.
-
-[[OCIDECK_SEG]]] 
-
-Ġun :: Konklużjoni
-
-[[OCIDECK_SEG]]] 
-
-Skeda taż-żmien tas-sejbiet
-
-[[OCIDECK_SEG]]] 
-
-Osservazzjoni 1: …
-
-[[OCIDECK_SEG]]] 
-
-Osservazzjoni 2: …
-
-[[OCIDECK_SEG]]] 
-
-Osservazzjoni 3: …
-
-[[OCIDECK_SEG]]] 
-
-Osservazzjonijiet ewlenin
-
-[[OCIDECK_SEG]]] 
-
-Tweġiba għall-mistoqsija prinċipali:…
-
-[[OCIDECK_SEG]]] 
-
-Evidenza ewlenija ta' sostenn: …
-
-[[OCIDECK_SEG]]] 
-
-Dak li ma stajniex nistabbilixxu:...
-
-[[OCIDECK_SEG]]] 
-
-Konklużjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Rakkomandazzjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Narrattiva tar-riċerka
+- Mistoqsija ewlenija:…
+- Sub-mistoqsija 1: …
+- Sub-mistoqsija 2: …
 
 ---
 
-# Research question
+# Metodu u sorsi
 
-- Main question: …
-- Sub-question 1: …
-- Sub-question 2: …
-
----
-
-# Method and sources
-
-- Method: document analysis / interviews / data analysis
-- Sources: …
-- Research period: …
+- Metodu: analiżi tad-dokumenti / intervisti / analiżi tad-dejta
+- Sorsi:…
+- Perjodu ta' riċerka:...
 
 ---
 
 <!-- _class: timeline -->
 
-# Timeline of findings
+# Skeda taż-żmien tas-sejbiet
 
-- Jan :: First signal :: Trigger for the research.
-- Mar :: Pattern emerges :: Multiple sources point the same way.
-- May :: Confirmation :: Key finding corroborated with documents.
-- Jun :: Conclusion
+- Jan :: L-ewwel sinjal :: Trigger għar-riċerka.
+- Mar :: Joħroġ mudell :: Sorsi multipli jindikaw l-istess mod.
+- Mejju :: Konferma :: Sejba ewlenija kkorroborata bid-dokumenti.
+- Ġun :: Konklużjoni
 
 ---
 
-# Key observations
+# Osservazzjonijiet ewlenin
 
-- Observation 1: …
-- Observation 2: …
-- Observation 3: …
+- Osservazzjoni 1: …
+- Osservazzjoni 2: …
+- Osservazzjoni 3: …
 
 ---
 
@@ -152,15 +60,15 @@ Narrattiva tar-riċerka
 
 ---
 
-# Conclusions
+# Konklużjonijiet
 
-- Answer to the main question: …
-- Key supporting evidence: …
-- What we could not establish: …
+- Tweġiba għall-mistoqsija prinċipali:…
+- Evidenza ewlenija ta' sostenn: …
+- Dak li ma stajniex nistabbilixxu:...
 
 ---
 
-# Recommendations
+# Rakkomandazzjonijiet
 <!-- ocideck_list_style: numbered -->
 
 1. Recommendation 1: …

@@ -3,268 +3,52 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negotiation with suppliers
+title: Negozjati mal-fornituri
 language: mt
 ---
 
 <!-- _class: title -->
 
 # Negozjati mal-fornituri
-
-[[OCIDECK_SEG]]] 
-
-Fornitur · Kuntratt · Għan · Data
-
-[[OCIDECK_SEG]]] 
-
-Dak li rrid niżgura (prezz, termini, servizz): …
-
-[[OCIDECK_SEG]]] 
-
-Għaliex dan huwa importanti għalina:…
-
-[[OCIDECK_SEG]]] 
-
-Ir-relazzjoni li rridu nżommu:...
-
-[[OCIDECK_SEG]]] 
-
-Għan tan-negozjati
-
-[[OCIDECK_SEG]]] 
-
-Riżultat fil-mira (ambizzjuż): …
-
-[[OCIDECK_SEG]]] 
-
-Riżultat aċċettabbli:...
-
-[[OCIDECK_SEG]]] 
-
-Il-linja tal-qiegħ u l-alternattiva tiegħi (BATNA): …
-
-[[OCIDECK_SEG]]] 
-
-Fejn x'aktarx tinsab iż-żona reċiproka (ZOPA): …
-
-[[OCIDECK_SEG]]] 
-
-Il-kamra tan-negozjati tiegħi
-
-[[OCIDECK_SEG]]] 
-
-Ħtiġiet u xewqat
-
-[[OCIDECK_SEG]]] 
-
-Oġġett
-
-[[OCIDECK_SEG]]] 
-
-Must-have jew nice-to-have
-
-[[OCIDECK_SEG]]] 
-
-X'jiswa għalija
-
-[[OCIDECK_SEG]]] 
-
-Prezz
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Ħin tal-kunsinna
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Servizz u garanzija
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Termini tal-ħlas
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Punti ta' negozjar
-
-[[OCIDECK_SEG]]] 
-
-Oġġett
-
-[[OCIDECK_SEG]]] 
-
-Offerta tal-ftuħ
-
-[[OCIDECK_SEG]]] 
-
-Mira
-
-[[OCIDECK_SEG]]] 
-
-Bottom line
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Antiċipazzjoni tattiċi
-
-[[OCIDECK_SEG]]] 
-
-X'tista 'tagħmel in-naħa l-oħra
-
-[[OCIDECK_SEG]]] 
-
-Ir-rispons tiegħi
-
-[[OCIDECK_SEG]]] 
-
-"Dan huwa l-prezz finali tagħna"
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Pressjoni tal-ħin
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Il-ġbir flimkien tat-talbiet
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Ftehimiet miġbura fil-qosor u kkonfermati
-
-[[OCIDECK_SEG]]] 
-
-Prezz u termini rreġistrati
-
-[[OCIDECK_SEG]]] 
-
-Min jiffirma u meta jiġi determinat
-
-[[OCIDECK_SEG]]] 
-
-Moment ta' segwitu u reviżjoni miftiehem
-
-[[OCIDECK_SEG]]] 
-
-Ftehim u dokumentazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Negozjati mal-fornituri
-## Supplier · Contract · Goal · Date
+## Fornitur · Kuntratt · Għan · Data
 
 ---
 
-# Goal of the negotiation
+# Għan tan-negozjati
 
-- What I want to secure (price, terms, service): …
-- Why this matters to us: …
-- The relationship we want to maintain: …
+- Dak li rrid niżgura (prezz, termini, servizz): …
+- Għaliex dan huwa importanti għalina:…
+- Ir-relazzjoni li rridu nżommu:...
 
 ---
 
-# My negotiating room
+# Il-kamra tan-negozjati tiegħi
 
-- Target outcome (ambitious): …
-- Acceptable outcome: …
-- Bottom line and my alternative (BATNA): …
-- Where the mutual zone likely lies (ZOPA): …
+- Riżultat fil-mira (ambizzjuż): …
+- Riżultat aċċettabbli:...
+- Il-linja tal-qiegħ u l-alternattiva tiegħi (BATNA): …
+- Fejn x'aktarx tinsab iż-żona reċiproka (ZOPA): …
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Requirements and wishes
+# Ħtiġiet u xewqat
 
-| Item | Must-have or nice-to-have | What it's worth to me |
+| Oġġett | Must-have jew nice-to-have | X'jiswa għalija |
 | --- | --- | --- |
-| Price | … | … |
-| Delivery time | … | … |
-| Service and warranty | … | … |
-| Payment terms | … | … |
+| Prezz | … | … |
+| Ħin tal-kunsinna | … | … |
+| Servizz u garanzija | … | … |
+| Termini tal-ħlas | … | … |
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Negotiation points
+# Punti ta' negozjar
 
-| Item | Opening offer | Target | Bottom line |
+| Oġġett | Offerta tal-ftuħ | Mira | Bottom line |
 | --- | --- | --- | --- |
 | … | … | … | … |
 | … | … | … | … |
@@ -273,21 +57,21 @@ Negozjati mal-fornituri
 
 <!-- _class: table table-editable -->
 
-# Anticipating tactics
+# Antiċipazzjoni tattiċi
 
-| What the other side might do | My response |
+| X'tista 'tagħmel in-naħa l-oħra | Ir-rispons tiegħi |
 | --- | --- |
-| "This is our final price" | … |
-| Time pressure | … |
-| Bundling demands together | … |
+| "Dan huwa l-prezz finali tagħna" | … |
+| Pressjoni tal-ħin | … |
+| Il-ġbir flimkien tat-talbiet | … |
 
 ---
 
-# Agreements and documentation
+# Ftehim u dokumentazzjoni
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] Agreements summarized and confirmed
-- [ ] Price and terms recorded
-- [ ] Who signs and when determined
-- [ ] Follow-up and review moment agreed
+- [ ] Ftehimiet miġbura fil-qosor u kkonfermati
+- [ ] Prezz u termini rreġistrati
+- [ ] Min jiffirma u meta jiġi determinat
+- [ ] Moment ta' segwitu u reviżjoni miftiehem

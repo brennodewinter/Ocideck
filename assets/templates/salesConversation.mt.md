@@ -3,263 +3,43 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sales conversation
+title: Konverżazzjoni tal-bejgħ
 language: mt
 ---
 
 <!-- _class: title -->
 
 # Konverżazzjoni tal-bejgħ
-
-[[OCIDECK_SEG]]] 
-
-Prospett · Persuna ta’ kuntatt · Offerta · Data
-
-[[OCIDECK_SEG]]] 
-
-X'qed inbiegħ u lil min:...
-
-[[OCIDECK_SEG]]] 
-
-L-għan ta’ din il-konversazzjoni:…
-
-[[OCIDECK_SEG]]] 
-
-Ir-riżultat mixtieq: ordni, laqgħa ta 'segwitu, kwotazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Għan u offerta
-
-[[OCIDECK_SEG]]] 
-
-Mistoqsijiet bl-użu ta' SPIN
-
-[[OCIDECK_SEG]]] 
-
-Tip ta' mistoqsija
-
-[[OCIDECK_SEG]]] 
-
-Il-mistoqsija tiegħi
-
-[[OCIDECK_SEG]]] 
-
-Dak li rrid nitgħallem
-
-[[OCIDECK_SEG]]] 
-
-Sitwazzjoni
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Fatti u kuntest
-
-[[OCIDECK_SEG]]] 
-
-Problema
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Fejn tweġġa’
-
-[[OCIDECK_SEG]]] 
-
-Implikazzjoni
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-X'jiswa l-problema
-
-[[OCIDECK_SEG]]] 
-
-Ħtieġa-ħlas
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Valur ta' soluzzjoni
-
-[[OCIDECK_SEG]]] 
-
-Mill-ħtieġa għall-valur
-
-[[OCIDECK_SEG]]] 
-
-Ħtieġa
-
-[[OCIDECK_SEG]]] 
-
-Karatteristika tal-offerta tagħna
-
-[[OCIDECK_SEG]]] 
-
-Benefiċċju għall-klijent
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Oġġezzjonijiet u tweġiba tiegħi
-
-[[OCIDECK_SEG]]] 
-
-Oġġezzjoni
-
-[[OCIDECK_SEG]]] 
-
-Irrikonoxxi
-
-[[OCIDECK_SEG]]] 
-
-Counter jew alternattiva
-
-[[OCIDECK_SEG]]] 
-
-Prezz
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Iż-żmien
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Dubju dwar il-valur
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-Agħti fil-qosor il-valur miftiehem
-
-[[OCIDECK_SEG]]] 
-
-Staqsi mistoqsija konkreta tal-għeluq
-
-[[OCIDECK_SEG]]] 
-
-Agħmel il-pass li jmiss żgħir u ċar
-
-[[OCIDECK_SEG]]] 
-
-Ikkonferma l-ftehim mill-ewwel
-
-[[OCIDECK_SEG]]] 
-
-Għeluq
-
-[[OCIDECK_SEG]]] 
-
-Ħtieġa u valur ikkonfermati
-
-[[OCIDECK_SEG]]] 
-
-Il-pass li jmiss jew l-ordni miftiehma
-
-[[OCIDECK_SEG]]] 
-
-Kwotazzjoni jew konferma impenjata
-
-[[OCIDECK_SEG]]] 
-
-Data ta' segwitu stabbilita
-
-[[OCIDECK_SEG]]] 
-
-Segwitu
-
-[[OCIDECK_SEG]]] 
-
-Konverżazzjoni tal-bejgħ
-## Prospect · Contact person · Offer · Date
+## Prospett · Persuna ta’ kuntatt · Offerta · Data
 
 ---
 
-# Goal and offer
+# Għan u offerta
 
-- What I'm selling and to whom: …
-- The goal of this conversation: …
-- The desired outcome: order, follow-up meeting, quote
+- X'qed inbiegħ u lil min:...
+- L-għan ta’ din il-konversazzjoni:…
+- Ir-riżultat mixtieq: ordni, laqgħa ta 'segwitu, kwotazzjoni
 
 ---
 
 <!-- _class: table table-editable -->
 
-# Questions using SPIN
+# Mistoqsijiet bl-użu ta' SPIN
 
-| Question type | My question | What I want to learn |
+| Tip ta' mistoqsija | Il-mistoqsija tiegħi | Dak li rrid nitgħallem |
 | --- | --- | --- |
-| Situation | … | Facts and context |
-| Problem | … | Where it hurts |
-| Implication | … | What the problem costs |
-| Need-payoff | … | Value of a solution |
+| Sitwazzjoni | … | Fatti u kuntest |
+| Problema | … | Fejn tweġġa’ |
+| Implikazzjoni | … | X'jiswa l-problema |
+| Ħtieġa-ħlas | … | Valur ta' soluzzjoni |
 
 ---
 
 <!-- _class: table table-editable -->
 
-# From need to value
+# Mill-ħtieġa għall-valur
 
-| Need | Feature of our offer | Benefit for the client |
+| Ħtieġa | Karatteristika tal-offerta tagħna | Benefiċċju għall-klijent |
 | --- | --- | --- |
 | … | … | … |
 | … | … | … |
@@ -268,30 +48,30 @@ Konverżazzjoni tal-bejgħ
 
 <!-- _class: table table-editable -->
 
-# Objections and my response
+# Oġġezzjonijiet u tweġiba tiegħi
 
-| Objection | Acknowledge | Counter or alternative |
+| Oġġezzjoni | Irrikonoxxi | Counter jew alternattiva |
 | --- | --- | --- |
-| Price | … | … |
-| Timing | … | … |
-| Doubt about value | … | … |
+| Prezz | … | … |
+| Iż-żmien | … | … |
+| Dubju dwar il-valur | … | … |
 
 ---
 
-# Closing
+# Għeluq
 
-- Summarize the agreed value
-- Ask a concrete closing question
-- Make the next step small and clear
-- Confirm the agreement right away
+- Agħti fil-qosor il-valur miftiehem
+- Staqsi mistoqsija konkreta tal-għeluq
+- Agħmel il-pass li jmiss żgħir u ċar
+- Ikkonferma l-ftehim mill-ewwel
 
 ---
 
-# Follow-up
+# Segwitu
 <!-- ocideck_list_style: checklist -->
 <!-- ocideck_checklist_progress: true -->
 
-- [ ] Need and value confirmed
-- [ ] Next step or order agreed
-- [ ] Quote or confirmation committed to
-- [ ] Follow-up date set
+- [ ] Ħtieġa u valur ikkonfermati
+- [ ] Il-pass li jmiss jew l-ordni miftiehma
+- [ ] Kwotazzjoni jew konferma impenjata
+- [ ] Data ta' segwitu stabbilita

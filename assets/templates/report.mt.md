@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Report
+title: Rapport
 language: mt
 ---
 
@@ -11,250 +11,26 @@ language: mt
 
 # Rapport
 
-[[OCIDECK_SEG]]] 
-
-Konklużjoni ewlenija: …
-
-[[OCIDECK_SEG]]] 
-
-L-akbar riskju jew devjazzjoni: …
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni mitluba:…
-
-[[OCIDECK_SEG]]] 
-
-Sommarju eżekuttiv
-
-[[OCIDECK_SEG]]] 
-
-Ċifri ewlenin
-
-[[OCIDECK_SEG]]] 
-
-Tikketta
-
-[[OCIDECK_SEG]]] 
-
-Valur
-
-[[OCIDECK_SEG]]] 
-
-Preċedenti
-
-[[OCIDECK_SEG]]] 
-
-Unità
-
-[[OCIDECK_SEG]]] 
-
-Polarità
-
-[[OCIDECK_SEG]]] 
-
-Kisba tal-għan
-
-[[OCIDECK_SEG]]] 
-
-72
-
-[[OCIDECK_SEG]]] 
-
-65
-
-[[OCIDECK_SEG]]] 
-
-%
-
-[[OCIDECK_SEG]]] 
-
-ogħla-aħjar
-
-[[OCIDECK_SEG]]] 
-
-Oġġetti miftuħa
-
-[[OCIDECK_SEG]]] 
-
-18
-
-[[OCIDECK_SEG]]] 
-
-12
-
-[[OCIDECK_SEG]]] 
-
-
-
-[[OCIDECK_SEG]]] 
-
-aktar baxx-aħjar
-
-[[OCIDECK_SEG]]] 
-
-Livell tar-riskju
-
-[[OCIDECK_SEG]]] 
-
-3.5
-
-[[OCIDECK_SEG]]] 
-
-4.2
-
-[[OCIDECK_SEG]]] 
-
-/10
-
-[[OCIDECK_SEG]]] 
-
-aktar baxx-aħjar
-
-[[OCIDECK_SEG]]] 
-
-Żmien taċ-ċomb
-
-[[OCIDECK_SEG]]] 
-
-21
-
-[[OCIDECK_SEG]]] 
-
-21
-
-[[OCIDECK_SEG]]] 
-
-jiem
-
-[[OCIDECK_SEG]]] 
-
-aktar baxx-aħjar
-
-[[OCIDECK_SEG]]] 
-
-Dak li jispikka fiċ-ċifri: …
-
-[[OCIDECK_SEG]]] 
-
-Spjegazzjoni:…
-
-[[OCIDECK_SEG]]] 
-
-Xi jfisser dan għall-għan:...
-
-[[OCIDECK_SEG]]] 
-
-Analiżi u interpretazzjoni
-
-[[OCIDECK_SEG]]] 
-
-Devjazzjoni: … (kawża, skala)
-
-[[OCIDECK_SEG]]] 
-
-Riskju għall-perjodu li ġej:…
-
-[[OCIDECK_SEG]]] 
-
-Miżura ta' kontroll: …
-
-[[OCIDECK_SEG]]] 
-
-Riskji u devjazzjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Azzjonijiet u deċiżjonijiet
-
-[[OCIDECK_SEG]]] 
-
-Azzjoni
-
-[[OCIDECK_SEG]]] 
-
-Sid
-
-[[OCIDECK_SEG]]] 
-
-Skadenza
-
-[[OCIDECK_SEG]]] 
-
-Status
-
-[[OCIDECK_SEG]]] 
-
-Dak li qed nitolbu deċiżjoni dwar:...
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-
-
-[[OCIDECK_SEG]]] 
-
-Miftuħa
-
-[[OCIDECK_SEG]]] 
-
-X'inhu għaddej u ma' min:...
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-
-
-[[OCIDECK_SEG]]] 
-
-Fil-progress
-
-[[OCIDECK_SEG]]] 
-
-X'inhu mwaħħla u jeħtieġ attenzjoni:...
-
-[[OCIDECK_SEG]]] 
-
-…
-
-[[OCIDECK_SEG]]] 
-
-
-
-[[OCIDECK_SEG]]] 
-
-Miftuħa
-
-[[OCIDECK_SEG]]] 
-
-Rapport
-
 ---
 
-# Executive summary
+# Sommarju eżekuttiv
 
-- Key conclusion: …
-- Biggest risk or deviation: …
-- Requested action: …
+- Konklużjoni ewlenija: …
+- L-akbar riskju jew devjazzjoni: …
+- Azzjoni mitluba:…
 
 ---
 
 <!-- _class: scorecard -->
 
-# Key figures
+# Ċifri ewlenin
 
-| Label | Value | Previous | Unit | Polarity |
+| Tikketta | Valur | Preċedenti | Unità | Polarità |
 | --- | --- | --- | --- | --- |
-| Goal achievement | 72 | 65 | % | higher-better |
-| Open items | 18 | 12 |  | lower-better |
-| Risk level | 3.5 | 4.2 | /10 | lower-better |
-| Lead time | 21 | 21 | days | lower-better |
+| Kisba tal-għan | 72 | 65 | % | higher-better |
+| Oġġetti miftuħa | 18 | 12 |  | lower-better |
+| Livell tar-riskju | 3.5 | 4.2 | /10 | lower-better |
+| Żmien taċ-ċomb | 21 | 21 | jiem | lower-better |
 
 ---
 
@@ -300,28 +76,28 @@ Rapport
 
 ---
 
-# Analysis and interpretation
+# Analiżi u interpretazzjoni
 
-- What stands out in the figures: …
-- Explanation: …
-- What this means for the goal: …
+- Dak li jispikka fiċ-ċifri: …
+- Spjegazzjoni:…
+- Xi jfisser dan għall-għan:...
 
 ---
 
-# Risks and deviations
+# Riskji u devjazzjonijiet
 
-- Deviation: … (cause, scale)
-- Risk for the coming period: …
-- Control measure: …
+- Devjazzjoni: … (kawża, skala)
+- Riskju għall-perjodu li ġej:…
+- Miżura ta' kontroll: …
 
 ---
 
 <!-- _class: table -->
 
-# Actions and decisions
+# Azzjonijiet u deċiżjonijiet
 
-| Action | Owner | Deadline | Status |
+| Azzjoni | Sid | Skadenza | Status |
 | --- | --- | --- | --- |
-| What we're asking a decision on: … | … |  | Open |
-| What's in progress and with whom: … | … |  | In progress |
-| What's stuck and needs attention: … | … |  | Open |
+| Dak li qed nitolbu deċiżjoni dwar:... | … |  | Miftuħa |
+| X'inhu għaddej u ma' min:... | … |  | Fil-progress |
+| X'inhu mwaħħla u jeħtieġ attenzjoni:... | … |  | Miftuħa |
