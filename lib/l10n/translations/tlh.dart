@@ -4558,8 +4558,6 @@ const _dutchSourceAddTlh = <String, String>{
       'Docuy mI\' (nav\' poSvo\' nIqvo\') DIloHbe\'.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Qum Hov poD DIloH; presentation Qum DIloHbe\'.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

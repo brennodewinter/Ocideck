@@ -4633,8 +4633,6 @@ const _dutchSourceAddLt = <String, String>{
       'Dokumento laukai (antraštė ir poraštė) neperkeliami.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Išnašos tampa paprastu tekstu; prezentacija neturi išnašų.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',

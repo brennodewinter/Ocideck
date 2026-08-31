@@ -4613,8 +4613,6 @@ const _dutchSourceAddSv = <String, String>{
       'Dokumentfält (sidhuvud och sidfot) följer inte med.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fotnoter blir till vanlig text; en presentation har inte noter.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

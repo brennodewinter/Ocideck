@@ -4605,8 +4605,6 @@ const _dutchSourceAddCs = <String, String>{
       'Pole dokumentu (hlavička a patička) nejsou zachována.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čarou se stanou prostým textem; prezentace nemá poznámky.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'např. "řídící deska s displejem"',

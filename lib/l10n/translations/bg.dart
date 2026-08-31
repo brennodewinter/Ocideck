@@ -4659,8 +4659,6 @@ const _dutchSourceAddBg = <String, String>{
       'Полетата на документа (горен и долен колонтитул) не се запазват.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Бележките под линия стават обикновен текст; презентация няма бележки.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',

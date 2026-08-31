@@ -4604,8 +4604,6 @@ const _dutchSourceAddTr = <String, String>{
       'Belge alanları (üstbilgi ve altbilgi) taşınmaz.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Dipnotlar düz metin olur; bir sunumun notu yoktur.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',

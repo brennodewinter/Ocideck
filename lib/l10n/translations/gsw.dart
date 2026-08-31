@@ -4622,8 +4622,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Dokumäntfälder (Chopf- und Fuesszyyle) wärded nöd übernoh.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fuessnote wärded zu flüssigem Text; e Präsentation hät kei Note.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

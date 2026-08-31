@@ -4614,8 +4614,6 @@ const _dutchSourceAddLv = <String, String>{
       'Dokumenta lauki (galvene un kājene) netiek pārņemti.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Vēres kļūst par vienkāršu tekstu; prezentācijai nav vēreru.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',

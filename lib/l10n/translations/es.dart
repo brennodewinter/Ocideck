@@ -4680,8 +4680,6 @@ const _dutchSourceAddEs = {
       'Los campos del documento (encabezado y pie de página) no se incluyen.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Las notas al pie se convierten en texto sin formato; una presentación no tiene notas.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

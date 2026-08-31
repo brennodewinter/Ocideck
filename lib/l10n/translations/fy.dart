@@ -4632,8 +4632,6 @@ const _dutchSourceAddFy = {
       'Dokuminfjilden (kop- en foettekst) gean net mei.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Foetnoten wurde platte tekst; in presintaasje hat gjin noten.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

@@ -4638,8 +4638,6 @@ const _dutchSourceAddUk = <String, String>{
       'Поля документа (верхній і нижній колонтитули) не переносяться.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Виноски стають звичайним текстом; презентація не має виносок.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

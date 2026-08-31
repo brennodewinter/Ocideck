@@ -4615,8 +4615,6 @@ const _dutchSourceAddDa = <String, String>{
       'Dokumentfelter (sidehoved og sidefod) følger ikke med.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fodnoter bliver til almindelig tekst; en præsentation har ikke noter.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

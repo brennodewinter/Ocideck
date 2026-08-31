@@ -4618,8 +4618,6 @@ const _dutchSourceAddSl = <String, String>{
       'Polja dokumenta (glava in noga) se ne prenašajo.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Sprotni opombe postanejo navadno besedilo; predstavitev nima opomb.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',

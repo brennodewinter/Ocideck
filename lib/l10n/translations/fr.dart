@@ -4704,8 +4704,6 @@ const _dutchSourceAddFr = {
       'Les champs du document (en-tête et pied de page) ne sont pas conservés.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Les notes de bas de page deviennent du texte brut ; une présentation n\'a pas de notes.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

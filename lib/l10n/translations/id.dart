@@ -4627,8 +4627,6 @@ const _dutchSourceAddId = <String, String>{
       'Field dokumen (header dan footer) tidak ikut.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Catatan kaki menjadi teks biasa; presentasi tidak memiliki catatan.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

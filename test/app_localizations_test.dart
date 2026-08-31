@@ -41,10 +41,6 @@ const unchangedInEnglish = {
   // Médias, Grieks Πολυμέσα, …), dus alleen op de Engelse witte lijst — niet op
   // unchangedInAllLanguages.
   'Media (WebRTC)',
-  // Image callouts: het Engels houdt het leenwoord 'Callout'/'Callouts'
-  // identiek aan het Nederlands, maar andere talen vertalen het wél.
-  'Callout',
-  'Callouts',
   // Callout-editor: 'Pins' is identiek in het Engels.
   'Pins',
   'CVSS',

@@ -4671,8 +4671,6 @@ const _dutchSourceAddDe = {
       'Dokumentfelder (Kopf- und Fußzeile) werden nicht übernommen.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Fußnoten werden zu Fließtext; eine Präsentation hat keine Noten.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

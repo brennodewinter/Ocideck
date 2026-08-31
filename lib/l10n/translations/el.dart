@@ -4685,8 +4685,6 @@ const _dutchSourceAddEl = <String, String>{
       'Τα πεδία του εγγράφου (κεφαλίδα και υποσέλιδο) δεν διατηρούνται.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Οι υποσημειώσεις γίνονται απλό κείμενο· μια παρουσίαση δεν έχει σημειώσεις.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',

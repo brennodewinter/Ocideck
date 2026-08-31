@@ -4641,8 +4641,6 @@ const _dutchSourceAddPl = <String, String>{
       'Pola dokumentu (nagłówek i stopka) nie są zachowane.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Przypisy stają się zwykłym tekstem; prezentacja nie ma przypisów.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',

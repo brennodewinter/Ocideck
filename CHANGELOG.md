@@ -2067,6 +2067,14 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Twee weeskeys uit de vertaaltabellen (#1861-staart).** `'Callout'` en
+  `'Callouts'` stonden in alle 31 tabellen terwijl niets in `lib/` ze nog
+  opzoekt — de opruimhelft van de #1861-commit was nooit geland terwijl de
+  toevoegingen dat wél waren. Ook de twee bijbehorende regels op de Engelse
+  witte lijst in `app_localizations_test.dart` zijn weg; die bestonden alleen
+  om deze sleutels te dekken. Geen gedragswijziging: een sleutel die niemand
+  opvraagt, komt nergens op het scherm.
+
 - **Draaien in het aanpasvenster waarschuwt vooraf, en het ontwerp voor
   niet-destructief draaien ligt er.** Van de drie bewerkingen in de
   afbeeldingsdialoog bewaren slepen en zoomen een waarde in het deck, maar

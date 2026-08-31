@@ -4686,8 +4686,6 @@ const _dutchSourceAddIt = {
       'I campi del documento (intestazione e piè di pagina) non vengono mantenuti.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Le note a piè di pagina diventano testo semplice; una presentazione non ha note.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
