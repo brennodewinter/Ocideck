@@ -143,6 +143,99 @@ Widget _thanksHeart(BuildContext context, AppLocalizations l10n) {
   );
 }
 
+/// De inhoud van de kaart onder "Mogelijk gemaakt door": het Vigilis-logo en,
+/// op dezelfde regel, de tegel naar het dankwoord. Ze staan op één hoogte omdat
+/// ze dezelfde vraag beantwoorden — wat OciDeck mogelijk maakt is geld én
+/// mensen. "Vigilis" is een eigennaam en blijft in elke taal gelijk.
+///
+/// `spaceBetween` en geen vaste tussenruimte: het logo houdt de linkerrand van
+/// de kaart, de tegel de rechterrand. Vlak naast elkaar leken het één blok en
+/// leek de tegel bij het merk te horen; met de kaartbreedte ertussen leest het
+/// als twee dingen naast elkaar.
+///
+/// Wrap en geen Row: bij 200% interface-tekst of een smalle dialoogkolom groeit
+/// de tegel tot hij niet meer naast het logo past, en dan zakt hij eronder in
+/// plaats van over de rand van de kaart te lopen. Een eigen regel krijgt hij
+/// links, niet rechts — een losse tegel tegen de rechterrand zweeft.
+///
+/// Top-level en geen lid van de extension, om dezelfde reden als
+/// [_publisherCardBody]: de klasse-plafondratchet telt élk extension-lid mee bij
+/// _SettingsDialogState.
+Widget _madePossibleByBody(BuildContext context, AppLocalizations l10n) {
+  return Wrap(
+    alignment: WrapAlignment.spaceBetween,
+    spacing: 16,
+    runSpacing: 12,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
+      Image.asset(
+        BrandLogo.vigilis.assetKey,
+        height: 34,
+        fit: BoxFit.contain,
+        alignment: Alignment.centerLeft,
+        filterQuality: FilterQuality.high,
+        semanticLabel: l10n.d('Vigilis'),
+      ),
+      _thanksTile(context, l10n),
+    ],
+  );
+}
+
+/// De dankwoord-tegel rechts in de kaart onder "Mogelijk gemaakt door", op
+/// dezelfde regel als het Vigilis-logo: dezelfde route als [_thanksHeart], maar
+/// met het woord erbij. Het hartje alleen bleek
+/// te stil — wie de namen zoekt moet ze kunnen zíen staan in plaats van te
+/// moeten raden dat een icoontje klikbaar is. De vulling is `slate50` en niet
+/// `paper`, want de kaart eromheen is al `paper` en dan verdwijnt de tegel erin.
+///
+/// Top-level en geen lid van de extension, om dezelfde reden als
+/// [_publisherCardBody] en [_thanksHeart]: de klasse-plafondratchet telt élk
+/// extension-lid mee bij _SettingsDialogState, en deze tegel heeft niets van die
+/// state nodig — alleen de [context] om de lezer op de wortelnavigator te duwen.
+Widget _thanksTile(BuildContext context, AppLocalizations l10n) {
+  final label = l10n.d('Met dank aan');
+  return Material(
+    color: AppTheme.slate50,
+    borderRadius: BorderRadius.circular(10),
+    child: InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () => DocumentReaderScreen.open(
+        context,
+        title: label,
+        assetBase: 'CONTRIBUTORS.md',
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          border: Border.all(color: AppTheme.slate300),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.favorite, size: 18, color: AppTheme.coral),
+            const SizedBox(width: 10),
+            // Flexible: bij 200% interface-tekst groeit het label voorbij de
+            // kaartbreedte, en dan hoort het af te breken, niet over te lopen.
+            Flexible(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.slate700,
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Icon(Icons.chevron_right, size: 18, color: AppTheme.slate400),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 /// Een label-waarderegel uit de contactkaart, eventueel als link.
 ///
 /// Top-level en geen lid van de extension, om dezelfde reden als
@@ -299,22 +392,14 @@ extension _SettingsAbout on _SettingsDialogState {
   );
 
   /// The sponsor credit, as its own block under the publisher: the heading
-  /// carries the translated "made possible by" line, the card only the logo.
-  /// "Vigilis" is a proper noun and stays identical in every language.
+  /// carries the translated "made possible by" line, the card the logo and the
+  /// thank-you tile. Body in the top-level [_madePossibleByBody] so the class
+  /// ceiling in tool/check_conventions.dart does not grow with layout.
   Widget _aboutMadePossibleBy(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       _aboutHeading(Icons.handshake_outlined, l10n.d('Mogelijk gemaakt door')),
-      _aboutCard(
-        Image.asset(
-          BrandLogo.vigilis.assetKey,
-          height: 34,
-          fit: BoxFit.contain,
-          alignment: Alignment.centerLeft,
-          filterQuality: FilterQuality.high,
-          semanticLabel: l10n.d('Vigilis'),
-        ),
-      ),
+      _aboutCard(_madePossibleByBody(context, l10n)),
     ],
   );
 

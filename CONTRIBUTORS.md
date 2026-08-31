@@ -22,6 +22,7 @@ lifeblood of open source, and we do not take a single one of them for granted.
 - Youetta de Jager
 - Jan Klopper
 - Reinoud van Leeuwen
+- Mieke van Oers
 - Astrid Oosenbrug
 - Peter Ros
 - Mirjam de Winter

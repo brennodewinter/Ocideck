@@ -28,7 +28,12 @@ extension _SettingsDocs on _SettingsDialogState {
   Widget _documentationTab() {
     final l10n = context.l10n;
     return DocumentationSearchTab(
-      sections: [_userDocs(l10n), _technicalDocs(l10n), _licenceDocs(l10n)],
+      sections: [
+        _userDocs(l10n),
+        _technicalDocs(l10n),
+        _licenceDocs(l10n),
+        _projectDocs(l10n),
+      ],
       repositoryDocsUrl: kRepositoryDocsUrl,
     );
   }
@@ -148,6 +153,21 @@ DocSection _licenceDocs(AppLocalizations l10n) => DocSection(
       title: l10n.d('Licentie (EUPL 1.2)'),
       assetBase: 'LICENSE.md',
       onlineUrl: PrivacyStatementContent.licenseUrl,
+    ),
+  ],
+);
+
+// Het dankwoord hoort ook in deze lijst en niet alleen achter het hartje in de
+// banner van "Over OciDeck": wie de namen zoekt, zoekt ze in de
+// documentatielijst — en één klein icoon zonder woord erbij is geen vindplaats.
+// Eigen sectie, want het is geen handleiding, geen techniek en geen licentie.
+DocSection _projectDocs(AppLocalizations l10n) => DocSection(
+  label: l10n.d('Over OciDeck'),
+  entries: [
+    DocEntry(
+      icon: Icons.favorite_outline,
+      title: l10n.d('Met dank aan'),
+      assetBase: 'CONTRIBUTORS.md',
     ),
   ],
 );

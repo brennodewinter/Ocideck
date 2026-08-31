@@ -271,6 +271,20 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(over): het dankwoord is te *vinden* — een tegel in Documentatie en een
+  tegel naast het Vigilis-logo. De namen van iedereen die aan OciDeck heeft
+  bijgedragen zaten achter één ingang: het hartje naast de merknaam in "Over
+  OciDeck". Achttien pixels, geen woord erbij, en in de documentatielijst — de
+  plek waar je een document zóekt — stond het niet. Het dankwoord staat nu als
+  eigen sectie "Over OciDeck" onderaan Instellingen → Documentatie, en als tegel
+  op dezelfde regel als het Vigilis-logo onder "Mogelijk gemaakt door" — logo
+  links, tegel rechts: wat OciDeck mogelijk maakt is geld én mensen. Het hartje
+  blijft staan, het is alleen niet meer de enige weg. Ook de zoeker in de
+  instellingen kent het dankwoord
+  nu, op "dank", "bijdragers", "contributors" en "credits" — want wie de namen
+  zoekt, kent het woord "dank" niet per se. Geen nieuwe interfacetekst: beide
+  tegels dragen het bestaande label "Met dank aan".
+
 - feat(l10n): poort op onvertaalde sjabloontekst
   (`make check-untranslated-templates`). `tool/template_l10n_po.dart` pelt maar
   vijf dingen uit een sjabloon — `title:`, `# `, `## `, bullets en tabelrijen —

@@ -3303,6 +3303,15 @@ the editor half of it.
   restores the full grouped list, and the repository footer stays visible even
   when nothing matches. The search runs over the documents in your current
   interface language.
+- **The thank-you page** — the people who helped shape OciDeck are named on a
+  page of their own, and it has three doors. *Settings → Documentation* closes
+  its list with an **Over OciDeck** section holding **Met dank aan**; the
+  *Settings → Over OciDeck* tab carries the same tile under **Mogelijk gemaakt
+  door**, on the same line as the Vigilis logo and against the right edge of the
+  card; and the heart next to the OciDeck name in
+  that tab's banner opens it too. Contributed and would like to be listed? Add
+  yourself in your first pull request. Named there and would rather not be?
+  Write to stichting@librekat.nl and it comes off — no reason needed.
 - **Keyboard** — the panel divider between the slide list and the editor can be
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully
   keyboard-operable.
