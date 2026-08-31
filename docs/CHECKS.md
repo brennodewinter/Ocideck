@@ -19,8 +19,9 @@ Windows installer) that are *tests* and so escaped the static subset. **Since #1
 is a required status check** (branch protection on `main`): a PR does not merge
 until it passes, via the web UI or the REST/`tea` merge API. That is the
 prevention layer — drift is stopped at the PR instead of landing. Two things it
-still does **not** hard-block, on purpose: the **coverage floors**. The **full
-test suite** runs **post-merge on every push to `main`** — `linux-gate.yml`,
+still does **not** hard-block, on purpose: the **coverage floors** and the
+**full test suite**. The full test suite runs **post-merge on every push to
+`main`** — `linux-gate.yml`,
 `make check-no-coverage` — as a detection smoke alarm: a Linux-specific or
 load-sensitive test (path separators, subprocess timeouts, I/O races) can be
 green on the fast maintainer Mac and red only on the Linux runner, and this
@@ -364,18 +365,19 @@ It is now the official stable SDK, hash-verified before unpacking; see
 [Toolchains of record](#toolchains-of-record) for how, and `make check-toolchain`
 for what now keeps this paragraph from going stale again (#598).
 
-**The whole gate takes about three minutes.** Measured 2026-07-22 on the machine
-above: the test suite (5 768 tests, 2 skipped) finishes in 2:04, and the checks
+**The whole gate takes about five minutes.** Measured 2026-09-01 on the machine
+above: the test suite (11 041 tests, 1 skipped) finishes in 4:00, and the checks
 around it — format, analyze, conventions, method length, dead code, hardcoded
-text, and two coverage passes — bring it to roughly three. Worth stating,
-because "5 700 tests plus a coverage floor plus eight ratchets" reads like half
-an hour, and a contributor who assumes that never runs it.
+text, two coverage passes, and (on macOS) the golden visual-regression suite —
+bring it to roughly five. Worth stating, because "11 000 tests plus a coverage
+floor plus eight ratchets plus goldens" reads like half an hour, and a
+contributor who assumes that never runs it.
 
 | Command | Outcome |
 | --- | --- |
 | `make check` (the whole gate) | pass — exit 0 |
-| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 5587 tests, 2 skipped |
-| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 86.2% (46 761/54 264 lines, 545 instrumented files); no `lib/` file outside the census |
+| `flutter test --test-randomize-ordering-seed random --exclude-tags golden` | pass — 11 041 tests, 1 skipped |
+| `dart run tool/coverage_summary.dart --min=80 --require-instrumented` | pass — 87.1% (87 721/100 751 lines, 1026 instrumented files); no `lib/` file outside the census |
 | `dart run tool/coverage_summary.dart --per-file-floor` | pass — 0 files below the per-file floor |
 | `dart run tool/check_licenses.dart` | pass — 187 packages, all recognised open-source ([`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md)) |
 
@@ -400,42 +402,42 @@ now the only passing state.
 
 ## All checks at a glance
 
-| Check | Verifies | In `make check` | In `check-full` | In CI workflow † |
-| --- | --- | :---: | :---: | :---: |
-| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
-| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ |
-| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ |
-| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
-| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
-| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
-| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
-| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
-| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — |
-| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
-| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
-| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ |
-| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
-| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ |
-| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
-| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
-| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
-| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — |
-| [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — |
-| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | — | ✅ | — |
-| [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
-| [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
-| [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
-| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
-| [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
-| [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
-| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ |
-| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ |
-| [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — |
-| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
-| [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
-| [`make check-pins`](#make-check-pins-advisory) | Exact-pinned CI versions — actions *and* scanner binaries — vs their latest release (advisory) | — | — | — |
+| Check | Verifies | In `make check` | In `check-full` | In CI workflow † | Blocks merge? |
+| --- | --- | :---: | :---: | :---: | --- |
+| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ | local only (post-merge on `main`) |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) | local only |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | local only |
+| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
+| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
+| [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ | local only (`check-full`) |
+| [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ | local only (`check-full`) |
+| [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ | local only (`check-full`) |
+| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | local only (`check-full`) |
+| [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | advisory |
+| [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | advisory |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | required (via `scans`, #1891) |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ | required (via `scans`, #1891) |
+| [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — | local only (`check-full`) |
+| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — | advisory |
+| [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) | advisory |
+| [`make check-pins`](#make-check-pins-advisory) | Exact-pinned CI versions — actions *and* scanner binaries — vs their latest release (advisory) | — | — | — | advisory |
 
 † The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
 not what runs. That workflow does not execute: Forgejo reads
@@ -449,6 +451,13 @@ every pull request (#778), and — since #1118 — the static gates
 request too (`.forgejo/workflows/static-gate.yml`). Those are the checks in this
 table that a forge actually runs before a merge; the full test suite and the two
 coverage floors still run only in your local `make check`.
+
+‡ The **Blocks merge?** column says whether a failing check prevents a PR from
+merging into `main`. **required** = a required status check on branch protection
+(`static-gate` since #1118, `scans` since #1891). **local only** = runs in
+`make check` on the committer's machine, not on the forge. **post-merge** = runs
+after the merge, as detection not prevention. **advisory** = never blocks.
+
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
