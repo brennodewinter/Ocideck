@@ -1,0 +1,143 @@
+# Bouwt de webbundel op een PR die hem kan breken, en draait er de harding op.
+#
+# **Waarom deze workflow bestaat.** `make check-web` bouwt echt
+# (`flutter build web --release --no-web-resources-cdn --csp`) en controleert
+# daarna de gebouwde bundel. Dat is te duur voor elke PR, dus het zat alleen in
+# `check-full` op de machine van de committer en in `release.yml` op een
+# `v*`-tag. Tussen die twee zag niets een echte webbouw.
+#
+# Dat kostte de release van v0.5.0. De dotfile-opruiming uit #1888 hield als
+# "bewust meegenomen" alleen aan wat `releaseArtefacten` noemt — een lijst die
+# beschrijft wat de inpakstap er zélf bij legt, niet wat de bundel bevat. De
+# twee dotfiles die er wél horen komen uit `web/`, en `flutter build web`
+# kopieert die. Weg waren `build/web/.htaccess` (de header-vorm-harding van
+# #849) en `build/web/.well-known/security.txt` (het meldadres uit RFC 9116).
+# Fase 1 van de releaseketen was de eerste machine die het merkte, wekenlang na
+# de merge. Alle poorten stonden intussen groen: #1888 voegde zelf een test toe,
+# maar die draaide op een met de hand gebouwde bundel die precies de bestanden
+# miste die de wijziging brak.
+#
+# Er staat nu twee keer iets tegen die faalklasse, met opzet op verschillende
+# hoogte. `pack_web_release_test.dart` spiegelt de échte `web/`-boom in een
+# nagebouwde bundel en draait in `make check` — goedkoop, per commit, maar het
+# blijft een nabootsing van het bouwen. Deze workflow doet het echte werk: één
+# `flutter build web`, en dan dezelfde controle die de tag straks ook krijgt.
+#
+# **Waarom een padfilter en geen onvoorwaardelijke poort.** De bouw kost
+# minuten, en een gewone Dart-wijziging kan de bundel niet raken. Hij gaat
+# daarom alleen af op de invoeren die dat wél kunnen; die lijst staat met de
+# reden per ingang in `test/web_gate_triggers_test.dart`, want een poort die
+# niet afgaat bewaakt niets en dat is precies hoe deze bescherming stil kan
+# verdwijnen (zoals `.tool-versions` ooit uit het filter van `linux-build.yml`
+# ontbrak).
+#
+# **Bewust géén vereiste check.** Branch-bescherming leest de combined status en
+# wacht op elke context die zij eist. Een vereiste check met een padfilter meldt
+# zich niet op een PR die die paden niet raakt, en dan blijft die PR eeuwig
+# `pending` hangen. Zet `web-gate` dus niet in `status_check_contexts` —
+# `static-gate` en `scans` zijn de vereiste, filterloze poorten. Deze is
+# blokkerend in de praktijk (rood is rood, je merget er niet overheen) zonder
+# het mechanisme te zijn dat op elke PR moet vuren.
+#
+# **Waarom op het voorgebakken CI-image.** Zelfde redenering als `static-gate`:
+# OS, node, de build-toolchain en de gepinde, sha256-geverifieerde Flutter zitten
+# er al in. Het tag ís de Flutter-pin; loopt het achter op `.tool-versions`, dan
+# valt `check-toolchain` elders om — fail-closed, geen stille drift. De
+# web-engine-artefacten zitten er níet in (`--no-web` in het image) en worden bij
+# `flutter build web` opgehaald; dat is een kleine download.
+name: web-gate
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'tool/pack_web_release.dart'
+      - 'tool/check_web_hardening.dart'
+      - 'tool/check_bundled_docs_fresh.dart'
+      - 'Makefile'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - '.forgejo/ci-image/**'
+      - '.forgejo/workflows/web-gate.yml'
+  # Ook ná de merge, en dat is geen dubbelop. Een PR-run toetst de
+  # *voorvertoning* van die ene samenvoeging met `main` zoals die er op dát
+  # moment bijstond. Landen er twee PR's vlak na elkaar die allebei de bundel
+  # raken, dan zijn beide runs groen en is de uitkomst het toch niet.
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'tool/pack_web_release.dart'
+      - 'tool/check_web_hardening.dart'
+      - 'tool/check_bundled_docs_fresh.dart'
+      - 'Makefile'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - '.forgejo/ci-image/**'
+      - '.forgejo/workflows/web-gate.yml'
+  workflow_dispatch:
+
+# Duwt iemand een nieuwe commit op een PR terwijl de vorige bouw nog loopt, dan
+# zet die de lopende run opzij. Afbreken kost hier niets: deze poort bouwt de
+# héle bundel op de nieuwste commit, dus de latere run dekt onverkort wat de
+# afgebroken run zou hebben gezien.
+concurrency:
+  group: web-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-gate:
+    runs-on: docker
+    container:
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+    steps:
+      - uses: actions/checkout@v4
+
+      # De werkkopie is van een andere uid dan root; zonder dit weigert git
+      # bewerkingen. `/opt/flutter` (ingebakken) heeft dezelfde behandeling
+      # nodig, want Flutter draait git op zijn eigen checkout.
+      - name: Werkkopie en Flutter vertrouwen
+        run: |
+          set -eu
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      # Zelfde sleutel als static-gate/linux-gate/release, met opzet: één cache
+      # bedient alle poorten. Op versie alleen, geen `hashFiles` en geen
+      # `restore-keys` — zie #1748 en `test/dartcv_cache_key_test.dart`.
+      - name: dartcv4-versie uit pubspec.lock
+        id: dartcv
+        run: |
+          VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
+          echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ steps.dartcv.outputs.versie }}
+
+      # De poort staat in de Makefile: `make check-web` bouwt de bundel en
+      # draait er de drie controles op (harding, release-artefacten, verse
+      # gebundelde documentatie). Ze hier overtypen zou een tweede waarheid
+      # opleveren die uit elkaar gaat lopen — dezelfde reden waarom static-gate
+      # `make check-static` aanroept.
+      - name: De webbundel bouwen en controleren
+        run: make check-web

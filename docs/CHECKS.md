@@ -44,8 +44,9 @@ still the coverage gate.
 > `branch_protections` API) — the rule is server state, not in a commit, so
 > lifting it is immediate and reversible.
 
-**Two workflows already run per pull request, each for its own deliberate
-reason.** The older is `.forgejo/workflows/scans.yml`, which runs the
+**Three workflows run per pull request, each for its own deliberate
+reason** — two unconditionally, one only when the change can reach the web
+bundle. The oldest is `.forgejo/workflows/scans.yml`, which runs the
 secret and SAST scans (`make check-secrets`, `make sast`) on **every pull
 request** (#778). Those take 17 and 2 seconds locally against the 22 minutes per
 pull request that moved the gate to a tag, so the timing argument that moved the
@@ -54,7 +55,13 @@ interchangeable. Found before the merge it is an edit; found after, it is in the
 history and revoking is the only real remedy. It scanned pushes to `main` as
 well until the redundant post-merge run — re-reading the same full history the
 pull request had just cleared — proved to be the one real source of failure
-mail; that trigger was dropped. See
+mail; that trigger was dropped. The third is
+`.forgejo/workflows/web-gate.yml` (#1888-tail), which *builds* the web bundle
+and runs [`make check-web`](#make-check-web) on it — but only on a pull request
+that touches something able to break it. It is the one per-PR workflow with a
+**path filter**, and therefore deliberately **not** a required check: a required
+context that stays silent on an unrelated PR would leave that PR pending
+forever. See
 [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
@@ -429,7 +436,7 @@ now the only passing state.
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ | local only (`check-full`) |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ | local only (`check-full`) |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ | local only (`check-full`) |
-| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | local only (`check-full`) |
+| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | conditional (via `web-gate`, #1888-tail) |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | advisory |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | advisory |
 | [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | required (via `scans`, #1891) |
@@ -448,13 +455,20 @@ is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
 [`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
 every pull request (#778), and — since #1118 — the static gates
 (`$(STATIC_GATES)`) via [`make check-static`](#make-check-static) on every pull
-request too (`.forgejo/workflows/static-gate.yml`). Those are the checks in this
+request too (`.forgejo/workflows/static-gate.yml`), plus — since #1888-tail —
+[`make check-web`](#make-check-web) on a pull request that can reach the web
+bundle (`.forgejo/workflows/web-gate.yml`, path-filtered). Those are the checks in this
 table that a forge actually runs before a merge; the full test suite and the two
 coverage floors still run only in your local `make check`.
 
 ‡ The **Blocks merge?** column says whether a failing check prevents a PR from
 merging into `main`. **required** = a required status check on branch protection
-(`static-gate` since #1118, `scans` since #1891). **local only** = runs in
+(`static-gate` since #1118, `scans` since #1891). **conditional** = runs on a
+pull request, but only when the change touches the paths that can break it, and
+so cannot be a required context — a filtered check that never reports would hang
+every unrelated PR on a status that never arrives. Red still stops a merge in
+practice; it is simply not the mechanism branch protection waits for.
+**local only** = runs in
 `make check` on the committer's machine, not on the forge. **post-merge** = runs
 after the merge, as detection not prevention. **advisory** = never blocks.
 
@@ -1282,6 +1296,11 @@ also declares them, but see the [CI note](#continuous-integration).)
   swept away, which puts the invariant above on the **per-PR** gate: no web
   build runs there, and #1888 merged green precisely because its own test used a
   hand-built bundle that happened to contain none of the files it broke.
+  Since #1888-tail there is a second, higher layer:
+  [`web-gate.yml`](#forgejoworkflowsweb-gateyml--the-web-bundle-per-pull-request-that-can-break-it)
+  runs this whole target — a real `flutter build web` — on a pull request that
+  touches the source, the packing step or the toolchain. The test stays the
+  cheap per-commit layer; the workflow is the one that actually builds.
 
 ### `make deps-outdated` (advisory)
 - **Runs:** `flutter pub outdated`
@@ -1910,6 +1929,58 @@ that reaches beyond `build/test_cache`.
   exactly as in `linux-gate.yml`.
 - **A superseded run cancels** (`concurrency`, `cancel-in-progress`): the gate
   reads the whole tree at the newest commit, so a later run covers everything an
+  aborted one would have seen.
+
+### `.forgejo/workflows/web-gate.yml` — the web bundle, per pull request that can break it
+- **web-gate** — on the prebaked CI image, same container and same two caches as
+  `static-gate.yml`: `flutter pub get`, then [`make check-web`](#make-check-web).
+  That is a real `flutter build web --release --no-web-resources-cdn --csp`
+  followed by the three checks on the built bundle. The web engine artifacts are
+  *not* baked into the image (`--no-web`) and are fetched during the build; that
+  is a small download.
+- **Why it exists (#1888-tail).** `make check-web` is the only check that looks
+  at a *built* bundle, and it lived in `check-full` on the committer's machine
+  and in `release.yml` on a `v*` tag. Between those two, nothing ever built the
+  web. #1888's dotfile sweep kept only what `releaseArtefacten` names — a list
+  describing what the packing step *adds*, not what the bundle *contains* — and
+  the two dotfiles that belong there come from `web/`, copied by `flutter build
+  web`. So `build/web/.htaccess` (header-form hardening, #849) and
+  `build/web/.well-known/security.txt` (the RFC 9116 reporting address) stopped
+  being shipped. The first machine to notice was phase 1 of the release chain,
+  weeks after the merge, and it aborted the v0.5.0 release. Every gate was green
+  the whole time.
+- **Two layers, on purpose.** `test/pack_web_release_test.dart` mirrors the real
+  `web/` tree into a stand-in bundle and runs in `make check` — cheap, per
+  commit, but still a simulation of building. This workflow does the real thing
+  once, on the changes that can break it, with the same command the tag will
+  run. Neither replaces the other: the test catches the logic, the workflow
+  catches what only a build shows (an asset that does not survive, a plugin with
+  no web implementation, a loader the pin changed).
+- **Why a path filter, and what is on it.** The build costs minutes and an
+  ordinary Dart change cannot reach the bundle. It fires on `web/**`, the three
+  `tool/` scripts `check-web` runs, the `Makefile` (it holds the hardening
+  flags), `pubspec.yaml`/`pubspec.lock`, `.tool-versions` and
+  `.forgejo/ci-image/**` — and on itself, so a change to the gate re-runs it.
+  `docs/**` is deliberately **absent**: the bundled-docs check exists for
+  *incremental* builds, and CI always builds clean.
+- **The filter is itself guarded.** `test/web_gate_triggers_test.dart` parses
+  this file and asserts, per trigger, that every input is on the list — with the
+  reason for each one, so a later reader can judge before removing it. A gate
+  that no longer fires guards nothing, and that is exactly how `.tool-versions`
+  once fell off `linux-build.yml`'s filter. It checks `pull_request` and `push`
+  **separately**, and that the two lists have not drifted apart: a substring
+  search over the file would pass while one trigger had quietly lost an entry.
+- **Deliberately not a required check.** Branch protection waits for every
+  context it requires. A required check with a path filter never reports on a
+  pull request that does not match it, so that PR hangs pending forever. Keep
+  `web-gate` out of `status_check_contexts`; `static-gate` and `scans` are the
+  required, unfiltered gates. Red here still stops a merge in practice — it is
+  simply not the mechanism branch protection blocks on.
+- **It also fires on `push` to `main`**, for the same reason `static-gate` does:
+  a PR run tests the *preview* of one merge, and two bundle-touching PRs landing
+  together can each be green while the result is not.
+- **A superseded run cancels** (`concurrency`, `cancel-in-progress`): it builds
+  the whole bundle at the newest commit, so a later run covers everything an
   aborted one would have seen.
 
 ### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`) **and on every push to `main`** (#1123)
