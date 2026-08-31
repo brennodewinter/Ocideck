@@ -2292,8 +2292,6 @@ const _dutchSourceAddEn = {
       'is referenced somewhere but is not on a tree slide — define it on a CTQ or Ishikawa tree.',
   'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
       'is on a tree slide but not used elsewhere — link it to a matrix, flow or other slide.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Afbeeldingsverwijzingen': 'Image references',
   'bv. "de controller board met display"':
       'e.g. "the controller board with display"',

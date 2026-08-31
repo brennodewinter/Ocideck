@@ -4620,8 +4620,6 @@ const _dutchSourceAddSk = <String, String>{
       'Polia dokumentu (hlavička a päta) sa neprenášajú.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Poznámky pod čiarou sa stanú obyčajným textom; prezentácia nemá poznámky.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'napr. "riadiaca doska s displejom"',

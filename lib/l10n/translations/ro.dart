@@ -4661,8 +4661,6 @@ const _dutchSourceAddRo = <String, String>{
       'Câmpurile documentului (antet și subsol) nu sunt păstrate.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notele de subsol devin text simplu; o prezentare nu are note.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "placa de control cu display"',

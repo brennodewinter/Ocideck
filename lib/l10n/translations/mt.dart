@@ -4671,8 +4671,6 @@ const _dutchSourceAddMt = <String, String>{
       'L-għalqa tad-dokument (header u footer) ma jiġuux mkaxkra.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'In-noti tal-isfel isiru test sempliċi; preżentazzjoni m\'għandhiex noti.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

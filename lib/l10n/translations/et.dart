@@ -4610,8 +4610,6 @@ const _dutchSourceAddEt = <String, String>{
       'Dokumendi väljad (päis ja jalus) ei kandu üle.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Allmärkused muutuvad lihttekstiks; esitlusel pole allmärkusi.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',

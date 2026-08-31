@@ -4671,8 +4671,6 @@ const _dutchSourceAddPt = <String, String>{
       'Os campos do documento (cabeçalho e rodapé) não são mantidos.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'As notas de rodapé tornam-se texto simples; uma apresentação não tem notas.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'ex. "a placa de controlo com ecrã"',

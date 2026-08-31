@@ -4633,8 +4633,6 @@ const _dutchSourceAddHu = <String, String>{
       'A dokumentum mezői (fejléc és lábléc) nem kerülnek át.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'A lábjegyzetek egyszerű szöveggé válnak; a prezentációnak nincsenek jegyzetei.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'pl. "a vezérlőpanel kijelzővel"',

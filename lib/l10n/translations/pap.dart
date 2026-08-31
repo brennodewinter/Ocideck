@@ -4654,8 +4654,6 @@ const _dutchSourceAddPap = {
       'E fieldnan di dokumentu (header i footer) no ta keda.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Footnote ta bira texto sòbel; un presentashon no tin notanan.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

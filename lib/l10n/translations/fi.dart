@@ -4623,8 +4623,6 @@ const _dutchSourceAddFi = <String, String>{
       'Asiakirjan kentät (ylä- ja alatunniste) eivät siirry.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Alaviitteet muuttuvat tavalliseksi tekstiksi; esityksessä ei ole alaviitteitä.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',

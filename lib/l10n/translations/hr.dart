@@ -4618,8 +4618,6 @@ const _dutchSourceAddHr = <String, String>{
       'Polja dokumenta (zaglavlje i podnožje) ne prate se.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bilješke postaju običan tekst; prezentacija nema bilješke.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

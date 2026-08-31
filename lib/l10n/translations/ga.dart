@@ -4685,8 +4685,6 @@ const _dutchSourceAddGa = <String, String>{
       'Ní thagann réimsí an doiciméid (ceanntásc agus buntásc) leis.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Bíonn fótnótaí ina ngnáth-théacs; níl fótnótaí ag cur i láthair.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':

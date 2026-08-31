@@ -4633,8 +4633,6 @@ const _dutchSourceAddLa = <String, String>{
       'Documenti campi (caput et pes) non feruntur.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Notae subtus fiunt textus planus; praesentatio notas non habet.',
-  'Callout': 'Callout',
-  'Callouts': 'Callouts',
   'Pins': 'Pins',
   'Gebieden': 'Regions',
   'bv. "de controller board met display"':
