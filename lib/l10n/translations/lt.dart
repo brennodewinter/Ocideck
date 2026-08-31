@@ -1649,6 +1649,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Aangeboden als download:': 'Pasiūlyta atsisiųsti:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Naršyklė nepriėmė atsisiuntimo. Leiskite atsisiuntimus šiai svetainei ir bandykite dar kartą.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Sesijos failai neišsaugoti. Pakeitimai vis dar yra pristatyme.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Spustelėkite vaizdą, kur šis taškas nurodo.',
   'Sleep op de afbeelding om een gebied te markeren.':

@@ -838,6 +838,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Aangeboden als download:': 'Offered as a download:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'The browser did not accept the download. Allow downloads for this site and try again.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'The session files were not saved. The changes are still in the deck.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Click on the image where this bullet refers to.',
   'Sleep op de afbeelding om een gebied te markeren.':

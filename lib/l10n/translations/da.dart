@@ -1642,6 +1642,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Aangeboden als download:': 'Tilbudt som download:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Browseren tog ikke imod downloaden. Tillad downloads for dette websted, og prøv igen.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Sessionsfilerne blev ikke gemt. Ændringerne er stadig i præsentationen.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klik på billedet, hvor dette punkt henviser til.',
   'Sleep op de afbeelding om een gebied te markeren.':

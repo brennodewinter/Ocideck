@@ -1642,6 +1642,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Aangeboden als download:': 'Tarjottu latauksena:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Selain ei hyväksynyt latausta. Salli lataukset tälle sivustolle ja yritä uudelleen.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Istuntotiedostoja ei tallennettu. Muutokset ovat yhä esityksessä.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Napsauta kuvaa kohtaan, johon tämä kohta viittaa.',
   'Sleep op de afbeelding om een gebied te markeren.':

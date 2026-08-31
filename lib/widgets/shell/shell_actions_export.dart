@@ -1,5 +1,21 @@
 part of '../app_shell.dart';
 
+/// Het kopje boven de naam van het opgeleverde pakket. Op web is dat geen
+/// bestand op een pad maar een aangeboden download — zie [exportDeliveryLabel].
+String _packageDeliveredLabel(AppLocalizations l10n) => deliversByDownload
+    ? exportDeliveryLabel(l10n)
+    : l10n.d('Pakket geëxporteerd naar:');
+
+/// Idem voor het auditdossier.
+String _dossierDeliveredLabel(AppLocalizations l10n) => deliversByDownload
+    ? exportDeliveryLabel(l10n)
+    : l10n.d('Auditdossier geëxporteerd naar:');
+
+/// Wat er staat als de browser de download niet aannam.
+String _downloadRefusedMessage(AppLocalizations l10n) => l10n.d(
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+);
+
 /// De twee uitvoerpaden die niet door [ExportService] lopen: het `.ocideck`-
 /// pakket en het auditdossier.
 ///
@@ -37,8 +53,8 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
   final l10n = context.l10n;
   final fileService = ref.read(fileServiceProvider);
   try {
-    final String dest;
-    if (isWebPlatform) {
+    final String? dest;
+    if (deliversByDownload) {
       dest = await fileService.downloadPackage(deck, password: password);
     } else {
       final picked = await fileService.pickPackageDestination(deck);
@@ -47,8 +63,18 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
       dest = picked;
     }
     if (!context.mounted) return;
+    // `null` komt alleen van de webtak: de browser nam de download niet aan.
+    // Een naam melden die nergens staat is erger dan de fout melden (#1902).
+    if (dest == null) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        _downloadRefusedMessage(l10n),
+      );
+      return;
+    }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${l10n.d('Pakket geëxporteerd naar:')}\n$dest')),
+      SnackBar(content: Text('${_packageDeliveredLabel(l10n)}\n$dest')),
     );
   } catch (e) {
     logError('AppShell: pakketexport mislukt', e);
@@ -96,8 +122,8 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
   final index = buildAuditDossier(deck, evidenceHashes: hashes);
   final fileService = ref.read(fileServiceProvider);
   try {
-    final String dest;
-    if (isWebPlatform) {
+    final String? dest;
+    if (deliversByDownload) {
       dest = await fileService.downloadDossier(
         deck,
         dossierIndex: index,
@@ -115,10 +141,16 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
       dest = picked;
     }
     if (!context.mounted) return;
+    if (dest == null) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        _downloadRefusedMessage(l10n),
+      );
+      return;
+    }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${l10n.d('Auditdossier geëxporteerd naar:')}\n$dest'),
-      ),
+      SnackBar(content: Text('${_dossierDeliveredLabel(l10n)}\n$dest')),
     );
   } catch (e) {
     logError('AppShell: auditdossier-export mislukt', e);

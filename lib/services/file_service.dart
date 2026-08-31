@@ -24,7 +24,6 @@ import '../utils/archive_limits.dart';
 import '../utils/atomic_file.dart';
 import '../utils/safe_filename.dart';
 import '../utils/bundled_asset.dart';
-import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/markdown_files.dart';
 import '../utils/json_depth_guard.dart';
@@ -33,6 +32,7 @@ import '../utils/pinned_http_client.dart';
 import '../utils/file_extension.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
+import 'download_delivery.dart';
 import 'net/transport_failure.dart';
 import 'annotation_codec.dart';
 import 'document_integrity.dart';
@@ -563,7 +563,7 @@ class FileService {
   String? downloadDeckAsFile(Deck deck) {
     final markdown = _md.generateDeck(deck, inlineChartData: true);
     final name = '${_safeName(deck.title)}.md';
-    return downloadTextFile(name, markdown) ? name : null;
+    return deliverTextAsDownload(name, markdown);
   }
 
   /// Scan the `.md` at [filePath] for executable/dangerous content before it is

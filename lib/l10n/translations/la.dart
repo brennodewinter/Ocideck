@@ -1657,6 +1657,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Aangeboden als download:': 'Ut receptum oblatum:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Navigatrum receptum non accepit. Recepta huic loco permitte et itera.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Fasciculi sessionis non servati sunt. Mutationes adhuc in fasce sunt.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Imaginem clicke ubi hoc punctum refert.',
   'Sleep op de afbeelding om een gebied te markeren.':

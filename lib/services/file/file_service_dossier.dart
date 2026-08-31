@@ -67,9 +67,9 @@ extension FileServiceDossier on FileService {
   }
 
   /// Web: build the dossier in memory and offer it to the browser as a download.
-  /// Returns the filename used. Mirrors [downloadPackage] with a dossier-distinct
-  /// name.
-  Future<String> downloadDossier(
+  /// Returns the filename used, or `null` when the browser did not accept the
+  /// download (#1902). Mirrors [downloadPackage] with a dossier-distinct name.
+  Future<String?> downloadDossier(
     Deck deck, {
     required String dossierIndex,
     List<int>? reportPdf,
@@ -84,8 +84,9 @@ extension FileServiceDossier on FileService {
     final name =
         '${_safeName(deck.title)}_auditdossier.'
         '${FileService.packageExtension}';
-    await FilePicker.saveFile(fileName: name, bytes: bytes);
-    return name;
+    return deliverAsDownload([
+      (name: name, bytes: bytes),
+    ], bundleName: bundleNameFor(name));
   }
 
   /// Desktop: ask where to write the dossier, defaulting to a dossier-distinct

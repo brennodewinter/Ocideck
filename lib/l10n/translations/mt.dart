@@ -1660,6 +1660,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aangeboden als download:': 'Offrut bħala tniżżil:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Il-browser ma aċċettax it-tniżżil. Ippermetti t-tniżżil għal dan is-sit u erġa\' pprova.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Il-fajls tas-sessjoni ma ġewx issejvjati. Il-bidliet għadhom fil-preżentazzjoni.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Ikklikkja l-immaġni fejn din il-punt tirreferi.',
   'Sleep op de afbeelding om een gebied te markeren.':

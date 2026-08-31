@@ -1643,6 +1643,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Aangeboden als download:': 'Nabídnuto ke stažení:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Prohlížeč stahování nepřijal. Povolte stahování pro tento web a zkuste to znovu.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Soubory relace nebyly uloženy. Změny jsou stále v prezentaci.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klikněte na obrázek, kam tento bod odkazuje.',
   'Sleep op de afbeelding om een gebied te markeren.':

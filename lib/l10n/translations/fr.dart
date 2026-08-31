@@ -675,6 +675,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Aangeboden als download:': 'Proposé au téléchargement :',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Le navigateur n\'a pas accepté le téléchargement. Autorisez les téléchargements pour ce site et réessayez.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Les fichiers de session n\'ont pas été enregistrés. Les modifications sont toujours dans la présentation.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Cliquez sur l\'image à l\'endroit où ce point se réfère.',
   'Sleep op de afbeelding om een gebied te markeren.':

@@ -1644,6 +1644,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Aangeboden als download:': 'Letöltésként felajánlva:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'A böngésző nem fogadta el a letöltést. Engedélyezze a letöltéseket ehhez az oldalhoz, és próbálja újra.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'A munkamenet fájljai nem lettek mentve. A módosítások továbbra is a bemutatóban vannak.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Kattintson a képen oda, ahová ez a pont hivatkozik.',
   'Sleep op de afbeelding om een gebied te markeren.':

@@ -1657,6 +1657,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Aangeboden als download:': 'Запропоновано як завантаження:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Браузер не прийняв завантаження. Дозвольте завантаження для цього сайту та спробуйте ще раз.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Файли сесії не збережено. Зміни й досі в презентації.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Натисніть на зображення там, куди посилається цей пункт.',
   'Sleep op de afbeelding om een gebied te markeren.':

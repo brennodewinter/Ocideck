@@ -1,8 +1,21 @@
-// Wat het exportvenster toont als een export omvalt.
+// Wat het exportvenster toont als een export omvalt — en hoe het de goede
+// afloop benoemt.
 //
 // Los van het venster omdat het pure tekstkeuze is: geen toestand, geen
 // widgets, en zo te toetsen zonder een dialoog te openen.
 import '../../l10n/app_localizations.dart';
+import '../../services/download_delivery.dart';
+import '../../services/export_service.dart' show ExportFailure;
+
+/// Het kopje boven de naam van wat er zojuist is opgeleverd.
+///
+/// Op web is dat geen bestand op een pad maar een download die is *aangeboden*:
+/// de pagina kan niet zien of hij in de downloadmap aankwam (#1902). "Geëxpor-
+/// teerd naar" beweert daar meer dan we weten, en dat is precies het verschil
+/// dat de gebruiker nodig heeft als er niets blijkt te staan.
+String exportDeliveryLabel(AppLocalizations l10n) => deliversByDownload
+    ? l10n.d('Aangeboden als download:')
+    : l10n.t('exportedTo');
 
 /// Waar een export was toen hij omviel.
 ///
@@ -53,3 +66,19 @@ String exportFailureText(
   return '${l10n.d('De export is mislukt.')}\n$what\n\n'
       '${l10n.d('Technische melding:')} $error';
 }
+
+/// De tekst bij een export die niet op een uitzondering strandde maar op een
+/// beslissing van de dienst.
+///
+/// De dienst kent de taal van de gebruiker niet en levert daarom de reden en
+/// niet de zin (#576); hier wordt er een zin van. Bewust zonder "technische
+/// melding": er is geen uitzondering om te tonen, en een lege regel achter het
+/// kopje leest als een weggevallen fout.
+String exportFailureReasonText(
+  AppLocalizations l10n,
+  ExportFailure failure,
+) => switch (failure) {
+  ExportFailure.downloadNotStarted =>
+    '${l10n.d('De export is mislukt.')}\n'
+        '${l10n.d('De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.')}',
+};

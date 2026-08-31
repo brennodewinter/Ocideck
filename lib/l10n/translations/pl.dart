@@ -1654,6 +1654,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Aangeboden als download:': 'Zaoferowano do pobrania:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Przeglądarka nie przyjęła pobierania. Zezwól na pobieranie dla tej witryny i spróbuj ponownie.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Pliki sesji nie zostały zapisane. Zmiany nadal znajdują się w prezentacji.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Kliknij na obrazie, gdzie ten punkt się odnosi.',
   'Sleep op de afbeelding om een gebied te markeren.':

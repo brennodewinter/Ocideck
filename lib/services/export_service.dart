@@ -5,7 +5,6 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
@@ -24,6 +23,7 @@ import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
+import 'download_delivery.dart';
 import '../models/slide_quality.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
@@ -73,10 +73,22 @@ extension ExportFormatExtension on ExportFormat {
   }
 }
 
+/// Waarom een export niet lukte, wanneer de dienst dat als *beslissing* weet en
+/// niet als zin — de dienst kent de taal van de gebruiker niet (#576). De schil
+/// maakt er een zin van.
+enum ExportFailure {
+  /// De browser nam de download niet aan. Zegt niets over of een eerder
+  /// aangeboden bestand aankwam: dat kan de pagina niet zien (#1902).
+  downloadNotStarted,
+}
+
 class ExportResult {
   final bool success;
   final String? outputPath;
   final String? error;
+
+  /// Gezet wanneer de reden een beslissing is en geen zin. Zie [ExportFailure].
+  final ExportFailure? failure;
 
   /// Gezet wanneer het classificatiebeleid de export tegenhield.
   ///
@@ -90,6 +102,7 @@ class ExportResult {
     required this.success,
     this.outputPath,
     this.error,
+    this.failure,
     this.classificationDecision,
   });
 
@@ -97,6 +110,8 @@ class ExportResult {
       ExportResult._(success: true, outputPath: path);
   factory ExportResult.fail(String error) =>
       ExportResult._(success: false, error: error);
+  factory ExportResult.failed(ExportFailure failure) =>
+      ExportResult._(success: false, failure: failure);
   factory ExportResult.blockedByClassification(ExportDecision decision) =>
       ExportResult._(success: false, classificationDecision: decision);
 }
@@ -248,18 +263,24 @@ class ExportService {
         interfaceLanguageCode: interfaceLanguageCode,
         compress: compress,
       );
-      if (kIsWeb) {
-        // Web: geen bestandssysteem — file_picker maakt van de bytes een
-        // browser-download (Blob + anker). De bestandsnaam is het resultaat.
-        await FilePicker.saveFile(fileName: fileName, bytes: bytes);
-        // Het redactiemanifest hoort ook op web mee. Zonder dit kreeg de auteur
-        // wél het geredigeerde rapport gedownload maar niet de commitments (die
-        // met het rapport meereizen) of de verificatiesleutels (die de auteur
-        // houdt) — dan is geen enkele redactie meer na te trekken.
-        for (final f in _redactionManifestFiles(fileName, redactionManifest)) {
-          await FilePicker.saveFile(fileName: f.name, bytes: f.bytes);
+      if (deliversByDownload) {
+        // Web: geen bestandssysteem — de export vertrekt als browserdownload.
+        //
+        // Het redactiemanifest hoort mee. Zonder de commitments (die met het
+        // rapport meereizen) en de verificatiesleutels (die de auteur houdt) is
+        // geen enkele redactie meer na te trekken. Dat ging op web mis: elk
+        // bestand werd apart aangeboden, en de browser houdt de tweede
+        // download op rij tegen — de auteur kreeg het geredigeerde rapport, las
+        // "geëxporteerd", en had het manifest niet (#1902). Meer dan één
+        // bestand gaat daarom als één ZIP.
+        final delivered = deliverAsDownload([
+          (name: fileName, bytes: bytes),
+          ..._redactionManifestFiles(fileName, redactionManifest),
+        ], bundleName: bundleNameFor(fileName));
+        if (delivered == null) {
+          return ExportResult.failed(ExportFailure.downloadNotStarted);
         }
-        return ExportResult.ok(fileName);
+        return ExportResult.ok(delivered);
       }
       await Directory(dir).create(recursive: true);
       // Atomair: exporteren over een bestaand bestand mag dat bij een crash

@@ -48,13 +48,18 @@ extension FileServicePackage on FileService {
   }
 
   /// Web: bouw het pakket in het geheugen en bied het de browser als download
-  /// aan. Retourneert de gebruikte bestandsnaam. In tegenstelling tot de kale
-  /// `.md`-download reizen de afbeeldingen (mem:-assets) en sidecars hier mee.
-  Future<String> downloadPackage(Deck deck, {String? password}) async {
+  /// aan. In tegenstelling tot de kale `.md`-download reizen de afbeeldingen
+  /// (mem:-assets) en sidecars hier mee.
+  ///
+  /// Retourneert de gebruikte bestandsnaam, of `null` als de browser de
+  /// download niet aannam — de schil meldt dan geen pakket dat er niet is
+  /// (#1902).
+  Future<String?> downloadPackage(Deck deck, {String? password}) async {
     final bytes = await buildPackageBytes(deck, password: password);
     final name = '${_safeName(deck.title)}.${FileService.packageExtension}';
-    await FilePicker.saveFile(fileName: name, bytes: bytes);
-    return name;
+    return deliverAsDownload([
+      (name: name, bytes: bytes),
+    ], bundleName: bundleNameFor(name));
   }
 
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar

@@ -1641,6 +1641,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Aangeboden als download:': 'Erbjuden som nedladdning:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Webbläsaren tog inte emot nedladdningen. Tillåt nedladdningar för den här webbplatsen och försök igen.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Sessionsfilerna sparades inte. Ändringarna finns kvar i presentationen.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klicka på bilden där denna punkt hänvisar till.',
   'Sleep op de afbeelding om een gebied te markeren.':

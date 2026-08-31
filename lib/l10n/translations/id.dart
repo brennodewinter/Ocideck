@@ -1642,6 +1642,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Aangeboden als download:': 'Ditawarkan sebagai unduhan:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Peramban tidak menerima unduhan. Izinkan unduhan untuk situs ini dan coba lagi.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Berkas sesi tidak disimpan. Perubahan masih ada di dek.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klik pada gambar tempat poin ini merujuk.',
   'Sleep op de afbeelding om een gebied te markeren.':

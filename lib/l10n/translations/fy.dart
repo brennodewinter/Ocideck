@@ -675,6 +675,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Aangeboden als download:': 'Oanbean as download:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'De browser hat de download net oannommen. Tastean downloads foar dizze side en probearje it nochris.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'De sesjebestannen binne net bewarre. De feroaringen steane noch yn it deck.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klik op it byld wêr\'t dit punt nei ferwiist.',
   'Sleep op de afbeelding om een gebied te markeren.':

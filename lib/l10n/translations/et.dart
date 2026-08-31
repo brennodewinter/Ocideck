@@ -1635,6 +1635,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Aangeboden als download:': 'Pakutud allalaadimisena:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Brauser ei võtnud allalaadimist vastu. Lubage sellel saidil allalaadimised ja proovige uuesti.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Seansifaile ei salvestatud. Muudatused on endiselt esitluses.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klõpsake pildil, kuhu see punkt viitab.',
   'Sleep op de afbeelding om een gebied te markeren.':

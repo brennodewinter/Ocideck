@@ -1645,6 +1645,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Aangeboden als download:': 'Als Download aabotte:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'De Browser hät de Download nöd aagno. Erlaub Downloads für die Site und probier\'s nomal.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'D Sitzigsdateie sind nöd gspeicheret worde. D Änderige sind na im Deck.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klick uf s Bild, wo däre Punkt sich druf bezieht.',
   'Sleep op de afbeelding om een gebied te markeren.':

@@ -1662,6 +1662,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Aangeboden als download:': 'Предложено за изтегляне:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Браузърът не прие изтеглянето. Разрешете изтеглянията за този сайт и опитайте отново.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Файловете от сесията не са запазени. Промените са още в презентацията.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Щракнете върху изображението, където тази точка се отнася.',
   'Sleep op de afbeelding om een gebied te markeren.':
