@@ -7,15 +7,19 @@ import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 
 import '../../l10n/app_localizations.dart';
+import '../../models/image_callout.dart';
 import '../../models/video_source.dart';
+import '../../services/image_viewport_geometry.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/atomic_file.dart';
 import '../../utils/bundled_asset.dart';
+import '../../utils/image_dimensions.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/project_path.dart';
 import '../../services/web_asset_store.dart';
+import '../../widgets/editors/callout_marker_helpers.dart';
 
 /// The crop choices the author made: the (possibly changed) zoom and the
 /// normalized focal point that decides which part of the picture stays in view.
@@ -128,6 +132,7 @@ Future<ImageCropResult?> showImageCropDialog(
   int minZoom = 100,
   int maxZoom = 400,
   Color? backgroundColor,
+  List<ImageCallout>? callouts,
 }) {
   return showDialog<ImageCropResult>(
     context: context,
@@ -141,6 +146,7 @@ Future<ImageCropResult?> showImageCropDialog(
       minZoom: minZoom,
       maxZoom: maxZoom,
       backgroundColor: backgroundColor,
+      callouts: callouts ?? const [],
     ),
   );
 }
@@ -169,6 +175,7 @@ class _ImageCropDialog extends StatefulWidget {
   final int minZoom;
   final int maxZoom;
   final Color? backgroundColor;
+  final List<ImageCallout> callouts;
 
   const _ImageCropDialog({
     required this.imagePath,
@@ -180,6 +187,7 @@ class _ImageCropDialog extends StatefulWidget {
     required this.minZoom,
     required this.maxZoom,
     required this.backgroundColor,
+    this.callouts = const [],
   });
 
   @override
@@ -214,6 +222,16 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     _fx = widget.focalX.clamp(0.0, 1.0);
     _fy = widget.focalY.clamp(0.0, 1.0);
     _loadOriginalBytes();
+    // #1854: probeer de intrinsieke maat synchroon te lezen uit de header,
+    // zodat callout-markeringen direct meeliften — de stream-listener vuurt
+    // in een testomgeving niet altijd binnen de eerste pump.
+    final bytes = _originalBytes;
+    if (bytes != null) {
+      final dims = imageDimensionsFromBytes(bytes);
+      if (dims != null) {
+        _intrinsic = Size(dims.width.toDouble(), dims.height.toDouble());
+      }
+    }
     _provider = _voorvertoning();
     final provider = _provider;
     if (provider != null) {
@@ -542,6 +560,31 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     );
   }
 
+  /// #1854: callout-markeringen over de bijsnijdstage, zodat de auteur ziet
+  /// welke doelen al geplaatst zijn en of bijsnijden ze uit beeld schuift.
+  /// De markeringen volgen de live focal-/zoom-waarden van de dialoog.
+  Widget _calloutOverlay(double frameW, double frameH) {
+    final callouts = widget.callouts;
+    final intrinsic = _intrinsic;
+    if (callouts.isEmpty || intrinsic == null) return const SizedBox();
+    final painted = ImageViewportGeometry.paintedRect(
+      imageW: intrinsic.width,
+      imageH: intrinsic.height,
+      slotW: frameW,
+      slotH: frameH,
+      focalX: _fx,
+      focalY: _fy,
+      zoom: _size,
+    );
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        for (final c in callouts)
+          ...buildStaticCalloutMarkers(c, frameW, frameH, painted),
+      ],
+    );
+  }
+
   Widget _stage() {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -580,6 +623,10 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   _stageContent(frameW, frameH),
                   // Rule-of-thirds guides make it easy to line a subject up.
                   const IgnorePointer(child: _ThirdsOverlay()),
+                  // #1854: callout-markeringen meeladen zodat je ziet welke
+                  // doelen je al geplaatst hebt — bijsnijden schuift ze
+                  // mogelijk het beeld uit.
+                  IgnorePointer(child: _calloutOverlay(frameW, frameH)),
                 ],
               ),
             ),
