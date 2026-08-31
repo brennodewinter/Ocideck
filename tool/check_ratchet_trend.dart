@@ -33,7 +33,7 @@
 // importeren: dan zou de historische waarde onbereikbaar zijn, en juist het
 // verschil tussen toen en nu is wat hier gemeten wordt.
 //
-// Het ijkpunt is de laatste commit vóór N dagen geleden (standaard 90). Dagen
+// Het ijkpunt is de laatste commit vóór N dagen geleden (standaard 30). Dagen
 // en geen commits: "hoe lang staat dit al stil" is een vraag over tijd, en
 // honderd commits kunnen een week of een jaar beslaan.
 //
@@ -806,7 +806,7 @@ const _gebruik = '''
 Gebruik: dart run tool/check_ratchet_trend.dart [--sinds=<dagen>] [--strict]
 
   --sinds=<dagen>  Vergelijk met de laatste commit vóór zoveel dagen geleden
-                   (standaard 90).
+                   (standaard 30).
   --strict         Eindig op 1 bij een stilstaande basislijn. Standaard is dit
                    adviserend: stilstand tot een rode bouw maken straft een
                    rustige maand.
@@ -820,7 +820,7 @@ void main(List<String> args) {
     stdout.writeln(_gebruik);
     return;
   }
-  var dagen = 90;
+  var dagen = 30;
   var strict = false;
   for (final arg in args) {
     if (arg == '--strict') {
