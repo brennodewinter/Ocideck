@@ -1634,8 +1634,6 @@ const _dutchSourceAddEt = <String, String>{
   'Doel toevoegen': 'Lisa siht',
   'Doel verwijderen': 'Eemalda siht',
   'Verwijzing verwijderen': 'Eemalda viide',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Vali rida viite asetamiseks.',
   'Vorm van de markering': 'Märgisti kuju',
   'doel': 'sihtmärk',
   'doelen': 'sihtmärgid',

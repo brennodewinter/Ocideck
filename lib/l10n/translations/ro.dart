@@ -1657,8 +1657,6 @@ const _dutchSourceAddRo = <String, String>{
   'Doel toevoegen': 'Adaugă țintă',
   'Doel verwijderen': 'Elimină țintă',
   'Verwijzing verwijderen': 'Elimină referința',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Selectați o linie pentru a plasa o referință.',
   'Vorm van de markering': 'Forma marcatorului',
   'doel': 'țintă',
   'doelen': 'ținte',

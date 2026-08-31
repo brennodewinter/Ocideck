@@ -680,8 +680,6 @@ const _dutchSourceAddFr = {
   'Doel toevoegen': 'Ajouter une cible',
   'Doel verwijderen': 'Supprimer la cible',
   'Verwijzing verwijderen': 'Supprimer la référence',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Sélectionnez une ligne pour placer une référence.',
   'Vorm van de markering': 'Forme du marqueur',
   'doel': 'cible',
   'doelen': 'cibles',

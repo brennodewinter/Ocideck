@@ -1640,8 +1640,6 @@ const _dutchSourceAddId = <String, String>{
   'Doel toevoegen': 'Tambah target',
   'Doel verwijderen': 'Hapus target',
   'Verwijzing verwijderen': 'Hapus referensi',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Pilih baris untuk menempatkan referensi.',
   'Vorm van de markering': 'Bentuk penanda',
   'doel': 'target',
   'doelen': 'target',

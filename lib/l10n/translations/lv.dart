@@ -1639,8 +1639,6 @@ const _dutchSourceAddLv = <String, String>{
   'Doel toevoegen': 'Pievienot mērķi',
   'Doel verwijderen': 'Noņemt mērķi',
   'Verwijzing verwijderen': 'Noņemt atsauci',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Izvēlieties rindu atsauces novietošanai.',
   'Vorm van de markering': 'Marķiera forma',
   'doel': 'mērķis',
   'doelen': 'mērķi',

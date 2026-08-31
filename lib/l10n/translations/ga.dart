@@ -1670,8 +1670,6 @@ const _dutchSourceAddGa = <String, String>{
   'Doel toevoegen': 'Cuir sprioc leis',
   'Doel verwijderen': 'Bain sprioc',
   'Verwijzing verwijderen': 'Bain an tagairt',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Roghnaigh líne chun tagairt a chur.',
   'Vorm van de markering': 'Cruth na marcála',
   'doel': 'sprioc',
   'doelen': 'spriocanna',

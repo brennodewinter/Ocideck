@@ -1656,8 +1656,6 @@ const _dutchSourceAddUk = <String, String>{
   'Doel toevoegen': 'Додати ціль',
   'Doel verwijderen': 'Видалити ціль',
   'Verwijzing verwijderen': 'Видалити посилання',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Виберіть рядок для розміщення посилання.',
   'Vorm van de markering': 'Форма маркера',
   'doel': 'ціль',
   'doelen': 'цілі',

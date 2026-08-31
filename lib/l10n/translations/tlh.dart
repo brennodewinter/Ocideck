@@ -1618,7 +1618,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Doel toevoegen': 'pagh',
   'Doel verwijderen': 'pagh',
   'Verwijzing verwijderen': 'pagh',
-  'Selecteer een regel om een verwijzing te plaatsen.': 'pagh',
   'Vorm van de markering': 'mIv Segh',
   'doel': 'pagh',
   'doelen': 'target',

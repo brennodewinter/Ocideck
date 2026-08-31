@@ -1647,8 +1647,6 @@ const _dutchSourceAddSk = <String, String>{
   'Doel toevoegen': 'Pridať cieľ',
   'Doel verwijderen': 'Odstrániť cieľ',
   'Verwijzing verwijderen': 'Odstrániť referenciu',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Vyberte riadok na umiestnenie referencie.',
   'Vorm van de markering': 'Tvar značky',
   'doel': 'cieľ',
   'doelen': 'ciele',

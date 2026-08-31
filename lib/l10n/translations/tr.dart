@@ -2558,8 +2558,6 @@ const _dutchSourceAddTr = <String, String>{
   'Doel toevoegen': 'Hedef ekle',
   'Doel verwijderen': 'Hedefi kaldır',
   'Verwijzing verwijderen': 'Referansı kaldır',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Bir referans yerleştirmek için bir satır seçin.',
   'Vorm van de markering': 'İşaretin şekli',
   'doel': 'hedef',
   'doelen': 'hedefler',

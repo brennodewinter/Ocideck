@@ -1668,8 +1668,6 @@ const _dutchSourceAddPt = <String, String>{
   'Doel toevoegen': 'Adicionar alvo',
   'Doel verwijderen': 'Remover alvo',
   'Verwijzing verwijderen': 'Remover referência',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Selecione uma linha para colocar uma referência.',
   'Vorm van de markering': 'Forma do marcador',
   'doel': 'alvo',
   'doelen': 'alvos',

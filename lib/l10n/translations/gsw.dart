@@ -1643,8 +1643,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Doel toevoegen': 'Ziil derzuefüege',
   'Doel verwijderen': 'Ziil entfarne',
   'Verwijzing verwijderen': 'Referänz entfarne',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Wähl en Ziilpunkt zum en Referänz plaziere.',
   'Vorm van de markering': 'Form vo de Markierig',
   'doel': 'Ziel',
   'doelen': 'Ziel',

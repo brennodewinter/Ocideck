@@ -1639,8 +1639,6 @@ const _dutchSourceAddSv = <String, String>{
   'Doel toevoegen': 'Lägg till mål',
   'Doel verwijderen': 'Ta bort mål',
   'Verwijzing verwijderen': 'Ta bort referens',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Välj en rad för att placera en referens.',
   'Vorm van de markering': 'Markörens form',
   'doel': 'mål',
   'doelen': 'mål',

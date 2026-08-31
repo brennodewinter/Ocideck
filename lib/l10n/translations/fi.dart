@@ -1641,8 +1641,6 @@ const _dutchSourceAddFi = <String, String>{
   'Doel toevoegen': 'Lisää kohde',
   'Doel verwijderen': 'Poista kohde',
   'Verwijzing verwijderen': 'Poista viite',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Valitse rivi viitten sijoittamiseksi.',
   'Vorm van de markering': 'Merkin muoto',
   'doel': 'kohde',
   'doelen': 'kohteet',

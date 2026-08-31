@@ -1659,8 +1659,6 @@ const _dutchSourceAddMt = <String, String>{
   'Doel toevoegen': 'Żid mira',
   'Doel verwijderen': 'Neħħi mira',
   'Verwijzing verwijderen': 'Neħħi referenza',
-  'Selecteer een regel om een verwijzing te plaatsen.':
-      'Agħżel linja biex tqiegħed referenza.',
   'Vorm van de markering': 'Forma tal-marka',
   'doel': 'mira',
   'doelen': 'miri',
