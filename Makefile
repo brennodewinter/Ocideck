@@ -1298,8 +1298,11 @@ check:
 	@scripts/gate_lock.sh $(MAKE) check-locked
 
 check-locked: $(STATIC_GATES) coverage coverage-per-file
+	@case "$$(uname -s)" in \
+	  Darwin) $(MAKE) test-golden ;; \
+	esac
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
+	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, the full Flutter test suite, the coverage floor, the per-file coverage floor, and (on macOS) the golden visual-regression suite."
 
 # Dezelfde poort, maar met `test` in plaats van `coverage` — de volledige suite
 # draait onverkort, alleen ongeïnstrumenteerd.
