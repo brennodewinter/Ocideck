@@ -14,8 +14,8 @@
 
 header:
   schema-version: 2.2.0
-  last-updated: '2026-07-22'
-  last-reviewed: '2026-07-22'
+  last-updated: '2026-09-01'
+  last-reviewed: '2026-09-01'
   url: https://pawprint.vigilis.online/LibreKAT/Ocideck/raw/branch/main/security-insights.yml
   comment: |
     Single-repository project: the project and repository sections below both
@@ -65,9 +65,11 @@ repository:
   status: active
   bug-fixes-only: false
   accepts-change-request: true
-  # No bots, no Dependabot, no CI runner on the forge. An automated change
-  # request would land unreviewed by anything, since `make check` runs on the
-  # maintainer's machine and not on the forge.
+  # No bots, no Dependabot. There IS a CI runner on the forge since
+  # 23-07-2026 (static-gate + scans per PR, linux-gate post-merge), but
+  # automated change requests would still land unreviewed by a human —
+  # `make check` runs on the maintainer's machine before the merge, and
+  # the forge gates are detection, not approval.
   accepts-automated-change-request: false
   no-third-party-packages: false
   core-team:
@@ -84,13 +86,23 @@ repository:
     expression: EUPL-1.2
   release:
     changelog: https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/CHANGELOG.md
-    automated-pipeline: false
+    automated-pipeline: true
+    distribution-points:
+      - url: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases
+        comment: |
+          Forgejo releases with minisign-signed artefacts (SHA256SUMS +
+          SHA256SUMS.minisig). The macOS build is signed with a Developer ID
+          and notarised; Linux and Windows are (yet) unsigned.
+      - url: https://ocideck.librekat.nl
+        comment: Live web version of the latest release.
+      - url: https://github.com/brennodewinter/homebrew-ocideck
+        comment: Homebrew cask (push-mirror of the canonical tap on the forge).
     comment: |
-      There are no releases yet: no tags, no built artefacts, no distribution
-      points. Users build from source (docs/BUILD.md) and pin a commit — the
-      commit hash is the only version identifier that exists. `distribution-
-      points` and `attestations` are omitted for that reason rather than
-      forgotten; see COMPLIANCE.md rows BR.02-04.
+      Releases are tagged `v*` and built by `.forgejo/workflows/release.yml`,
+      which runs `make check-no-coverage` as a gate before any build job
+      (#1893). Artefacts: macOS .app zip, Linux tarball + AppImage + .deb +
+      .rpm, Windows zip + installer, web bundle. SBOM (CycloneDX + SPDX)
+      travels with each release.
   security:
     assessments:
       self:
@@ -112,28 +124,32 @@ repository:
           - custom
         integration:
           adhoc: true
-          ci: false
+          ci: true
           release: false
         comment: |
           Local rules only (semgrep/ocideck.yaml), never `--config auto`, which
           would fetch rules over the network during a scan and send metrics.
-          Run via `make sast`.
+          Runs on every PR via `.forgejo/workflows/scans.yml` (`make sast`).
       - name: gitleaks
         type: secret-scanning
         integration:
           adhoc: true
-          ci: false
+          ci: true
           release: false
-        comment: Run via `make check-secrets`, over the working tree and history.
+        comment: |
+          Runs on every PR via `.forgejo/workflows/scans.yml` and on tag pushes
+          via `.github/workflows/ci.yml`. `make check-secrets` over the working
+          tree and history.
       - name: TruffleHog
         type: secret-scanning
         integration:
           adhoc: true
-          ci: false
+          ci: true
           release: false
         comment: |
-          Run via `make check-secrets` with `--no-verification`, so candidate
-          keys are never sent to the issuing service.
+          Runs on every PR via `.forgejo/workflows/scans.yml` with
+          `--no-verification`, so candidate keys are never sent to the issuing
+          service.
       - name: OSV
         type: SCA
         integration:
@@ -141,11 +157,15 @@ repository:
           ci: false
           release: false
         comment: |
-          `make deps-check` scans the vendored export JavaScript. The Dart
-          package graph is scanned only advisorily (`make trivy`), because pub
-          advisory coverage is sparse.
+          `make deps-check` scans the vendored export JavaScript. Runs daily
+          via `.forgejo/workflows/time-degrading-checks.yml` (#1892) and on tag
+          pushes via `.github/workflows/ci.yml`. The Dart package graph is
+          scanned only advisorily (`make trivy`), because pub advisory
+          coverage is sparse.
     comment: |
-      Every tool above runs on the maintainer's machine, never on the forge:
-      there is no CI runner. `.github/workflows/ci.yml` declares a pipeline that
-      does not execute. What actually gates a change is `make check` before the
-      merge — see docs/CHECKS.md.
+      Semgrep, gitleaks and TruffleHog run on every PR via
+      `.forgejo/workflows/scans.yml`. OSV runs daily and on tags. The
+      maintainer runs `make check` (the full gate) locally before every merge
+      — see docs/CHECKS.md. `.github/workflows/ci.yml` is the tag-push gate
+      (Linux + macOS + Windows); `.forgejo/workflows/ci.yml` is the same gate
+      on the Mac runner.

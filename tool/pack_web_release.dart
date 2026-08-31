@@ -52,7 +52,14 @@ const Map<String, String> releaseArtefacten = {
 /// dan kan iemand die zelf bouwt — precies wat KNOWN_LIMITATIONS aanraadt —
 /// de gepubliceerde digest nóóit reproduceren, om een reden die niets met de
 /// code te maken heeft. De ontvanger heeft er bovendien niets aan.
-const List<String> nietUitleveren = ['.last_build_id'];
+///
+/// `.DS_Store` is Finder-metadata die in `build/web` belandt zodra iemand de
+/// map opent in Finder (#1888). `.gitignore` vangt hem niet — `build/` is geen
+/// git-gebied — en hij brak de reproduceerbaarheid van de bundel en lekte
+/// bestandsnamen op de publieke webhost. Breder: elk `.`-bestand dat niet in
+/// [releaseArtefacten] staat hoort er niet, want het zijn geen artefacten die
+/// de bundel bewust meeneemt. [ruimOnverwachteDotfiles] vangt de hele klasse.
+const List<String> nietUitleveren = ['.last_build_id', '.DS_Store'];
 
 /// Het bootstrap-bestand dat Flutter genereert, en het enige met een
 /// bouw-tot-bouw-verschil.
@@ -164,6 +171,12 @@ List<String> pak(Directory bundel, Directory wortel) {
     if (bestand.existsSync()) bestand.deleteSync();
   }
 
+  // Ruim ook `.`-bestanden die niet op de lijst staan maar er niet horen —
+  // `.DS_Store`, `.DS_Store?`, `.localized`, en alles wat Finder of de OS
+  // in de bouwmap dropt (#1888). De bundel bewust meegenomen artefacten
+  // (in [releaseArtefacten]) mogen wél met een punt beginnen.
+  ruimOnverwachteDotfiles(bundel);
+
   normaliseerServiceWorkerVersie(bundel);
 
   // Een commit-aanduiding in de bundel (#1893): `version.json` geeft alleen
@@ -202,6 +215,23 @@ void schrijfBuildInfo(Directory bundel) {
     'git_describe': describe,
   });
   File('${bundel.path}/build-info.json').writeAsStringSync('$info\n');
+}
+
+/// Verwijdert `.`-bestanden in [bundel] die niet in [releaseArtefacten] staan.
+///
+/// De expliciete lijst in [nietUitleveren] vangt de bekende gevallen, maar een
+/// allowlist is sterker dan een denylist: Finder dropt `.DS_Store`, macOS
+/// dropt `.localized`, en de volgende OS-versie dropt iets dat nog niemand
+/// heeft gezien. Alles wat met een punt begint en niet bewust is meegenomen,
+/// hoort niet in een uit te leveren bundel (#1888).
+void ruimOnverwachteDotfiles(Directory bundel) {
+  final bewusteDoelen = releaseArtefacten.values.toSet();
+  for (final entiteit in bundel.listSync(recursive: true)) {
+    final naam = entiteit.path.split('/').last;
+    if (!naam.startsWith('.')) continue;
+    if (bewusteDoelen.contains(naam)) continue;
+    entiteit.deleteSync(recursive: true);
+  }
 }
 
 /// Vervangt het willekeurige `serviceWorkerVersion`-getal in [bootstrapBestand]
