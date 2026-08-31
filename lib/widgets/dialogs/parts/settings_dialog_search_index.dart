@@ -606,6 +606,26 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: null,
     keywords: ['iban', 'bank', 'rekening', 'doneren', 'donatie', 'steunen'],
   ),
+  // Eén ingang, hoewel het dankwoord op twee plekken staat (hier en in
+  // Documentatie): twee treffers met dezelfde naam laten de zoeker kiezen
+  // tussen twee routes naar hetzelfde document. Deze wijst naar de tegel die
+  // naast het Vigilis-logo staat. Wie "bijdragers" of "credits" typt kent het
+  // woord "dank" niet per se — vandaar de synoniemen.
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
+    label: 'Met dank aan',
+    section: null,
+    keywords: [
+      'dank',
+      'dankwoord',
+      'bijdrage',
+      'bijdragers',
+      'contributors',
+      'credits',
+      'mensen',
+      'namen',
+    ],
+  ),
   SettingsSearchEntry(
     tab: SettingsSection.about,
     label: 'Licenties van derden',
