@@ -1341,6 +1341,12 @@ const _dutchSourceSk = {
   'Afbeelding slidevullend': 'Obrázok vyplní snímku',
   'Vult de hele slide en snijdt de randen bij':
       'Vyplní celú snímku a oreže okraje',
+  'Afbeelding paneelvullend': 'Obrázok vyplní panel',
+  'Vult het paneel en snijdt de randen bij': 'Vyplní panel a oreže okraje',
+  'Afbeeldingen paneelvullend': 'Obrázky vyplnia svoje panely',
+  'Vult elk paneel en snijdt de randen bij':
+      'Vyplní každý panel a oreže okraje',
+  'Vullen (bijsnijden)': 'Vyplniť (orezať)',
   'Afbeelding vult hele slide': 'Obrázok vyplní celú snímku',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Zap.: vyplní celú snímku, titulok cez ňu (orezané). Vyp.: obrázok hore, titulok v páse pod ním.',
@@ -4189,7 +4195,6 @@ const _dutchSourceAddSk = <String, String>{
   'Wat is er veranderd en waarom?': 'Čo sa zmenilo a prečo?',
   'Uitbrengen': 'Odoslať',
   'Uitgebracht ter review:': 'Odoslané na kontrolu:',
-  'Kopieer link': 'Kopírovať odkaz',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Vydanie zablokovala klasifikačná politika.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

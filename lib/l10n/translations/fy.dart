@@ -3242,7 +3242,6 @@ const _dutchSourceAddFy = {
   'Wat is er veranderd en waarom?': 'Wat is der feroare en wêrom?',
   'Uitbrengen': 'Yntsjinje',
   'Uitgebracht ter review:': 'Foar review yntsjinne:',
-  'Kopieer link': 'Keppeling kopiearje',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Utbringen blokkearre troch it klassifikaasjebelied.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4352,6 +4351,13 @@ const _dutchSourceAddFy = {
   'Afbeelding slidevullend': 'Ofbylding slidefoljend',
   'Vult de hele slide en snijdt de randen bij':
       'Follet de hiele slide en snijt de rânen by',
+  'Afbeelding paneelvullend': 'Ofbylding follet it paniel',
+  'Vult het paneel en snijdt de randen bij':
+      'Follet it paniel en snijt de rânen by',
+  'Afbeeldingen paneelvullend': 'Ofbyldingen folje har panielen',
+  'Vult elk paneel en snijdt de randen bij':
+      'Follet elk paniel en snijt de rânen by',
+  'Vullen (bijsnijden)': 'Folje (bynsnije)',
   'Afbeelding vult hele slide': 'Ofbylding follet de hiele slide',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Oan: follet de hiele slide, titel deroerhinne (bysnien). Ut: byld boppe-oan, titel yn in bân derûnder.',

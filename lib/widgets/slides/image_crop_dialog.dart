@@ -696,6 +696,26 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   Icon(Icons.zoom_in, size: 18, color: AppTheme.slate500),
                 ],
               ),
+              // Cover (imageSize 0) staat onder de schuif en is onbereikbaar
+              // zodra je eenmaal inzoomt — deze knop zet het terug (#1879).
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () => setState(() => _size = 0),
+                  icon: Icon(
+                    Icons.crop_free,
+                    size: 16,
+                    color: _cover ? AppTheme.accentFg : AppTheme.slate500,
+                  ),
+                  label: Text(
+                    context.l10n.d('Vullen (bijsnijden)'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: _cover ? AppTheme.accentFg : AppTheme.slate600,
+                    ),
+                  ),
+                ),
+              ),
               if (_canRotate && _originalBytes != null) ...[
                 const SizedBox(height: 8),
                 Row(

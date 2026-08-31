@@ -1348,6 +1348,12 @@ const _dutchSourceUk = {
   'Afbeelding slidevullend': 'Зображення заповнює слайд',
   'Vult de hele slide en snijdt de randen bij':
       'Заповнює весь слайд і обрізає краї',
+  'Afbeelding paneelvullend': 'Зображення заповнює панель',
+  'Vult het paneel en snijdt de randen bij': 'Заповнює панель і обрізає краї',
+  'Afbeeldingen paneelvullend': 'Зображення заповнюють свої панелі',
+  'Vult elk paneel en snijdt de randen bij':
+      'Заповнює кожну панель і обрізає краї',
+  'Vullen (bijsnijden)': 'Заповнити (обрізати)',
   'Afbeelding vult hele slide': 'Зображення заповнює весь слайд',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Увімк.: заповнює весь слайд, заголовок зверху (обрізано). Вимк.: зображення вгорі, заголовок у смузі під ним.',
@@ -4203,7 +4209,6 @@ const _dutchSourceAddUk = <String, String>{
   'Wat is er veranderd en waarom?': 'Що змінилося і чому?',
   'Uitbrengen': 'Надіслати',
   'Uitgebracht ter review:': 'Надіслано на рецензування:',
-  'Kopieer link': 'Копіювати посилання',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Випуск заблоковано політикою класифікації.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

@@ -1338,6 +1338,13 @@ const _dutchSourceHr = {
   'Afbeelding slidevullend': 'Slika ispunjava slajd',
   'Vult de hele slide en snijdt de randen bij':
       'Ispunjava cijeli slajd i obrezuje rubove',
+  'Afbeelding paneelvullend': 'Slika ispunjava panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Ispunjava panel i obrezuje rubove',
+  'Afbeeldingen paneelvullend': 'Slike ispunjavaju svoje panele',
+  'Vult elk paneel en snijdt de randen bij':
+      'Ispunjava svaki panel i obrezuje rubove',
+  'Vullen (bijsnijden)': 'Ispuniti (obrezati)',
   'Afbeelding vult hele slide': 'Slika ispunjava cijeli slajd',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Uklj.: ispunjava cijeli slajd, naslov preko (obrezano). Isklj.: slika gore, naslov u traci ispod.',
@@ -4185,7 +4192,6 @@ const _dutchSourceAddHr = <String, String>{
   'Wat is er veranderd en waarom?': 'Što se promijenilo i zašto?',
   'Uitbrengen': 'Pošalji',
   'Uitgebracht ter review:': 'Poslano na pregled:',
-  'Kopieer link': 'Kopiraj poveznicu',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Objava blokirana pravilima klasifikacije.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

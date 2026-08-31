@@ -3387,7 +3387,6 @@ const _dutchSourceAddEn = {
   'Wat is er veranderd en waarom?': 'What changed and why?',
   'Uitbrengen': 'Submit',
   'Uitgebracht ter review:': 'Submitted for review:',
-  'Kopieer link': 'Copy link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Release blocked by the classification policy.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4336,6 +4335,13 @@ const _dutchSourceAddEn = {
   'Afbeelding slidevullend': 'Image fills the slide',
   'Vult de hele slide en snijdt de randen bij':
       'Fills the whole slide and crops the edges',
+  'Afbeelding paneelvullend': 'Image fills the panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Fills the panel and crops the edges',
+  'Afbeeldingen paneelvullend': 'Images fill their panels',
+  'Vult elk paneel en snijdt de randen bij':
+      'Fills each panel and crops the edges',
+  'Vullen (bijsnijden)': 'Fill (crop)',
   'Afbeelding vult hele slide': 'Image fills the whole slide',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'On: fills the whole slide, title on top (cropped). Off: image at the top, title in a band below it.',

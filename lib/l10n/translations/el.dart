@@ -1352,6 +1352,13 @@ const _dutchSourceEl = {
   'Afbeelding slidevullend': 'Η εικόνα γεμίζει τη διαφάνεια',
   'Vult de hele slide en snijdt de randen bij':
       'Γεμίζει όλη τη διαφάνεια και περικόπτει τις άκρες',
+  'Afbeelding paneelvullend': 'Η εικόνα γεμίζει το πάνελ',
+  'Vult het paneel en snijdt de randen bij':
+      'Γεμίζει το πάνελ και περικόπτει τις άκρες',
+  'Afbeeldingen paneelvullend': 'Οι εικόνες γεμίζουν τα πάνελ τους',
+  'Vult elk paneel en snijdt de randen bij':
+      'Γεμίζει κάθε πάνελ και περικόπτει τις άκρες',
+  'Vullen (bijsnijden)': 'Γέμισμα (περικοπή)',
   'Afbeelding vult hele slide': 'Η εικόνα γεμίζει όλη τη διαφάνεια',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Ενεργό: γεμίζει όλη τη διαφάνεια, τίτλος από πάνω (περικομμένο). Ανενεργό: εικόνα επάνω, τίτλος σε ζώνη από κάτω.',
@@ -4246,7 +4253,6 @@ const _dutchSourceAddEl = <String, String>{
   'Wat is er veranderd en waarom?': 'Τι άλλαξε και γιατί;',
   'Uitbrengen': 'Υποβολή',
   'Uitgebracht ter review:': 'Υποβλήθηκε για έλεγχο:',
-  'Kopieer link': 'Αντιγραφή συνδέσμου',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Η δημοσίευση αποκλείστηκε από την πολιτική διαβάθμισης.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

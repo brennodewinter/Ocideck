@@ -1359,6 +1359,13 @@ const _dutchSourceGa = {
   'Afbeelding slidevullend': 'Líonann an íomhá an sleamhnán',
   'Vult de hele slide en snijdt de randen bij':
       'Líonann sé an sleamhnán ar fad agus bearrann sé na himill',
+  'Afbeelding paneelvullend': 'Líonann an íomhá an painéal',
+  'Vult het paneel en snijdt de randen bij':
+      'Líonann sé an painéal agus bearrann sé na himill',
+  'Afbeeldingen paneelvullend': 'Líonann na híomhánna a bpainéil',
+  'Vult elk paneel en snijdt de randen bij':
+      'Líonann sé gach painéal agus bearrann sé na himill',
+  'Vullen (bijsnijden)': 'Líon (bearr)',
   'Afbeelding vult hele slide': 'Líonann an íomhá an sleamhnán ar fad',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Ann: líonann sé an sleamhnán ar fad, teideal anuas air (bearrtha). As: íomhá ag an mbarr, teideal i mbanda faoi.',
@@ -4250,7 +4257,6 @@ const _dutchSourceAddGa = <String, String>{
   'Wat is er veranderd en waarom?': 'Cad a athraíodh agus cén fáth?',
   'Uitbrengen': 'Cuir isteach',
   'Uitgebracht ter review:': 'Curtha isteach le hathbhreithniú:',
-  'Kopieer link': 'Cóipeáil an nasc',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Chuir an polasaí aicmithe bac ar an eisiúint.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

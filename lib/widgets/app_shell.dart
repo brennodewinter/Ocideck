@@ -453,6 +453,11 @@ class _AppShellState extends ConsumerState<AppShell> {
 
   Future<void> _onCloseTab(int index) => requestCloseTab(context, ref, index);
 
+  /// Sluit het actieve tabblad. App-breed zodat Cmd/Ctrl+W altijd werkt,
+  /// ongeacht waar de focus zit — net als Cmd/Ctrl+S hierboven. De
+  /// niet-opgeslagen-wijzigingen-check zit in [requestCloseTab].
+  void _closeActive() => _onCloseTab(ref.read(tabsProvider).clampedIndex);
+
   /// Sla het actieve tabblad op. App-breed zodat Ctrl/Cmd+S altijd werkt,
   /// ongeacht waar de focus zit — én ongeacht de soort. Voor een documenttabblad
   /// was dit stuk: het riep de deck-opslag aan, die een document niet kent, dus
@@ -773,6 +778,10 @@ class _AppShellState extends ConsumerState<AppShell> {
               _requestDocumentFind(showReplace: true),
           const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
               _requestDocumentFind(showReplace: true),
+          const SingleActivator(LogicalKeyboardKey.keyW, control: true):
+              _closeActive,
+          const SingleActivator(LogicalKeyboardKey.keyW, meta: true):
+              _closeActive,
         },
         child: FocusScope(
           autofocus: true,

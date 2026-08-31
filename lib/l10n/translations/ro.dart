@@ -1345,6 +1345,12 @@ const _dutchSourceRo = {
   'Afbeelding slidevullend': 'Imaginea umple diapozitivul',
   'Vult de hele slide en snijdt de randen bij':
       'Umple tot diapozitivul și taie marginile',
+  'Afbeelding paneelvullend': 'Imaginea umple panoul',
+  'Vult het paneel en snijdt de randen bij': 'Umple panoul și taie marginile',
+  'Afbeeldingen paneelvullend': 'Imaginile umplu panourile',
+  'Vult elk paneel en snijdt de randen bij':
+      'Umple fiecare panou și taie marginile',
+  'Vullen (bijsnijden)': 'Umple (tăia)',
   'Afbeelding vult hele slide': 'Imaginea umple tot diapozitivul',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Pornit: umple tot diapozitivul, titlul deasupra (decupat). Oprit: imaginea sus, titlul într-o bandă dedesubt.',
@@ -4228,7 +4234,6 @@ const _dutchSourceAddRo = <String, String>{
   'Wat is er veranderd en waarom?': 'Ce s-a schimbat și de ce?',
   'Uitbrengen': 'Trimite',
   'Uitgebracht ter review:': 'Trimis spre revizuire:',
-  'Kopieer link': 'Copiază linkul',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publicarea a fost blocată de politica de clasificare.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

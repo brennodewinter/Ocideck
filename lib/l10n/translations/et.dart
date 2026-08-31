@@ -1330,6 +1330,12 @@ const _dutchSourceEt = {
   'Afbeelding slidevullend': 'Pilt täidab slaidi',
   'Vult de hele slide en snijdt de randen bij':
       'Täidab kogu slaidi ja kärbib servi',
+  'Afbeelding paneelvullend': 'Pilt täidab paneeli',
+  'Vult het paneel en snijdt de randen bij': 'Täidab paneeli ja kärbib servi',
+  'Afbeeldingen paneelvullend': 'Pildid täidavad oma paneelid',
+  'Vult elk paneel en snijdt de randen bij':
+      'Täidab iga paneeli ja kärbib servi',
+  'Vullen (bijsnijden)': 'Täida (kärbi)',
   'Afbeelding vult hele slide': 'Pilt täidab kogu slaidi',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Sees: täidab kogu slaidi, pealkiri peal (kärbitud). Väljas: pilt üleval, pealkiri ribas selle all.',
@@ -4178,7 +4184,6 @@ const _dutchSourceAddEt = <String, String>{
   'Wat is er veranderd en waarom?': 'Mis muutus ja miks?',
   'Uitbrengen': 'Esita',
   'Uitgebracht ter review:': 'Esitatud ülevaatuseks:',
-  'Kopieer link': 'Kopeeri link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Avaldamise blokeeris klassifitseerimispoliitika.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

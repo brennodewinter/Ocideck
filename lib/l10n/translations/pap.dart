@@ -3252,7 +3252,6 @@ const _dutchSourceAddPap = {
   'Wat is er veranderd en waarom?': 'Kiko a kambia i pakiko?',
   'Uitbrengen': 'Manda',
   'Uitgebracht ter review:': 'Mandá pa revishon:',
-  'Kopieer link': 'Kopia link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publikashon blokiá pa e norma di klasifikashon.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -4371,6 +4370,13 @@ const _dutchSourceAddPap = {
   'Afbeelding slidevullend': 'Imágen ta yena e slide',
   'Vult de hele slide en snijdt de randen bij':
       'Ta yena henter e slide i ta kòrta e ramanan',
+  'Afbeelding paneelvullend': 'Imágen ta yena e panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Ta yena e panel i ta kòrta e ramanan',
+  'Afbeeldingen paneelvullend': 'Imágennan ta yena nan panelnan',
+  'Vult elk paneel en snijdt de randen bij':
+      'Ta yena kada panel i ta kòrta e ramanan',
+  'Vullen (bijsnijden)': 'Yena (kòrta)',
   'Afbeelding vult hele slide': 'Imágen ta yena henter e slide',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Sendé: ta yena henter e slide, título riba dje (kòrtá). Pagá: imágen ariba, título den un banda bou di dje.',

@@ -1357,6 +1357,13 @@ const _dutchSourcePt = {
   'Afbeelding slidevullend': 'A imagem preenche o diapositivo',
   'Vult de hele slide en snijdt de randen bij':
       'Preenche todo o diapositivo e corta as margens',
+  'Afbeelding paneelvullend': 'Imagem preenche o painel',
+  'Vult het paneel en snijdt de randen bij':
+      'Preenche o painel e corta as margens',
+  'Afbeeldingen paneelvullend': 'Imagens preenchem os painéis',
+  'Vult elk paneel en snijdt de randen bij':
+      'Preenche cada painel e corta as margens',
+  'Vullen (bijsnijden)': 'Preencher (cortar)',
   'Afbeelding vult hele slide': 'A imagem preenche todo o diapositivo',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Ligado: preenche todo o diapositivo, título por cima (cortado). Desligado: imagem em cima, título numa faixa por baixo.',
@@ -4234,7 +4241,6 @@ const _dutchSourceAddPt = <String, String>{
   'Wat is er veranderd en waarom?': 'O que mudou e por quê?',
   'Uitbrengen': 'Enviar',
   'Uitgebracht ter review:': 'Enviado para revisão:',
-  'Kopieer link': 'Copiar link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Publicação bloqueada pela política de classificação.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

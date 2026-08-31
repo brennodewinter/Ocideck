@@ -1334,6 +1334,13 @@ const _dutchSourceId = {
   'Afbeelding slidevullend': 'Gambar memenuhi slide',
   'Vult de hele slide en snijdt de randen bij':
       'Memenuhi seluruh slide dan memotong tepinya',
+  'Afbeelding paneelvullend': 'Gambar memenuhi panel',
+  'Vult het paneel en snijdt de randen bij':
+      'Memenuhi panel dan memotong tepinya',
+  'Afbeeldingen paneelvullend': 'Gambar memenuhi panelnya',
+  'Vult elk paneel en snijdt de randen bij':
+      'Memenuhi setiap panel dan memotong tepinya',
+  'Vullen (bijsnijden)': 'Memenuhi (memotong)',
   'Afbeelding vult hele slide': 'Gambar memenuhi seluruh slide',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Aktif: memenuhi seluruh slide, judul di atasnya (terpotong). Nonaktif: gambar di atas, judul di pita di bawahnya.',
@@ -4196,7 +4203,6 @@ const _dutchSourceAddId = <String, String>{
   'Wat is er veranderd en waarom?': 'Apa yang berubah dan mengapa?',
   'Uitbrengen': 'Kirim',
   'Uitgebracht ter review:': 'Dikirim untuk ditinjau:',
-  'Kopieer link': 'Salin tautan',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Rilis diblokir oleh kebijakan klasifikasi.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

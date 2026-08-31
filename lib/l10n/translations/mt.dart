@@ -1347,6 +1347,12 @@ const _dutchSourceMt = {
   'Afbeelding slidevullend': 'L-istampa timla l-islajd',
   'Vult de hele slide en snijdt de randen bij':
       'Timla l-islajd kollu u taqta\' t-truf',
+  'Afbeelding paneelvullend': 'L-immaġni timla l-pannell',
+  'Vult het paneel en snijdt de randen bij': 'Timla l-pannell u taqta\' t-truf',
+  'Afbeeldingen paneelvullend': 'L-immaġni jimlu l-pannelli tagħhom',
+  'Vult elk paneel en snijdt de randen bij':
+      'Timla kull pannell u taqta\' t-truf',
+  'Vullen (bijsnijden)': 'Imla (aqta\')',
   'Afbeelding vult hele slide': 'L-istampa timla l-islajd kollu',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Mixgħul: timla l-islajd kollu, it-titlu fuqha (maqtugħ). Mitfi: l-istampa fuq, it-titlu f\'faxxa taħtha.',
@@ -4233,7 +4239,6 @@ const _dutchSourceAddMt = <String, String>{
   'Wat is er veranderd en waarom?': 'X\'inbidel u għaliex?',
   'Uitbrengen': 'Ibgħat',
   'Uitgebracht ter review:': 'Mibgħut għar-reviżjoni:',
-  'Kopieer link': 'Ikkopja l-link',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Il-pubblikazzjoni mblukkata mill-politika ta\' klassifikazzjoni.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

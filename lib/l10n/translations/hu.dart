@@ -1336,6 +1336,13 @@ const _dutchSourceHu = {
   'Afbeelding slidevullend': 'A kép kitölti a diát',
   'Vult de hele slide en snijdt de randen bij':
       'Kitölti az egész diát és levágja a széleket',
+  'Afbeelding paneelvullend': 'Kép kitölti a panelt',
+  'Vult het paneel en snijdt de randen bij':
+      'Kitölti a panelt és levágja a széleket',
+  'Afbeeldingen paneelvullend': 'Képek kitöltik a paneljeiket',
+  'Vult elk paneel en snijdt de randen bij':
+      'Kitölti minden panelt és levágja a széleket',
+  'Vullen (bijsnijden)': 'Kitölteni (levágni)',
   'Afbeelding vult hele slide': 'A kép kitölti az egész diát',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Be: kitölti az egész diát, a cím fölötte (levágva). Ki: kép felül, cím egy sávban alatta.',
@@ -4199,7 +4206,6 @@ const _dutchSourceAddHu = <String, String>{
   'Wat is er veranderd en waarom?': 'Mi változott és miért?',
   'Uitbrengen': 'Beküldés',
   'Uitgebracht ter review:': 'Beküldve felülvizsgálatra:',
-  'Kopieer link': 'Hivatkozás másolása',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'A kiadást a besorolási szabályzat letiltotta.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':

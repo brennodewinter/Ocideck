@@ -53,18 +53,16 @@ Future<void> _reportGitSaveResult(
   switch (result.status) {
     case GitSaveStatus.committed:
       final base = '${l10n.d('Opgeslagen in git:')} $deckDir';
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            result.warnings.isEmpty
-                ? base
-                // De warnings zijn verwijzingen die niet gepoold konden
-                // worden — onleesbaar, zonder bruikbare extensie of buiten
-                // het project. Media reist gewoon mee; dat "video en audio
-                // niet meegaan" stond hier tot 23-07-2026 en was achterhaald.
-                : '$base — ${l10n.d('niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)')}',
-          ),
-        ),
+      showCopyableSnackBar(
+        messenger,
+        l10n,
+        result.warnings.isEmpty
+            ? base
+            // De warnings zijn verwijzingen die niet gepoold konden
+            // worden — onleesbaar, zonder bruikbare extensie of buiten
+            // het project. Media reist gewoon mee; dat "video en audio
+            // niet meegaan" stond hier tot 23-07-2026 en was achterhaald.
+            : '$base — ${l10n.d('niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)')}',
       );
     case GitSaveStatus.queued:
       messenger.showSnackBar(
@@ -220,7 +218,7 @@ Future<void> _saveToGit(
     // De ruwe tekst hoort in het log: dáár wil je "Onverwachte status 418"
     // lezen. De gebruiker krijgt de vertaalde melding per foutsoort.
     logWarning('shell_actions_git: opslaan mislukt', e);
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
   } on GitCliException catch (e) {
     // Het native plane faalt lokaal met git's stderr: een achtergebleven
     // index.lock, een volle schijf, een kapotte index, een blijven staan
@@ -340,27 +338,23 @@ Future<void> _flushGitQueue(
           .read(tabsProvider.notifier)
           .syncGitNative(native);
       if (!context.mounted || silent) return; // een stille flush meldt niets
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(switch (result.status) {
-            GitSaveStatus.committed ||
-            GitSaveStatus.merged => l10n.d('Gesynchroniseerd met git.'),
-            GitSaveStatus.queued => l10n.d(
-              'Nog geen verbinding — het gaat later mee.',
-            ),
-            GitSaveStatus.conflict => l10n.d(
-              'De branch is verzet; je commits staan lokaal klaar.',
-            ),
-            // Lokaal bewaard, maar publiceren lukte niet en lost zichzelf niet
-            // op: toon de verhelpbare reden rechtstreeks (token, certificaat…).
-            GitSaveStatus.pushFailed =>
-              result.pushError != null
-                  ? gitForgeErrorMessage(l10n, result.pushError!)
-                  : l10n.d('Synchroniseren mislukt.'),
-            GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
-          }),
+      showCopyableSnackBar(messenger, l10n, switch (result.status) {
+        GitSaveStatus.committed ||
+        GitSaveStatus.merged => l10n.d('Gesynchroniseerd met git.'),
+        GitSaveStatus.queued => l10n.d(
+          'Nog geen verbinding — het gaat later mee.',
         ),
-      );
+        GitSaveStatus.conflict => l10n.d(
+          'De branch is verzet; je commits staan lokaal klaar.',
+        ),
+        // Lokaal bewaard, maar publiceren lukte niet en lost zichzelf niet
+        // op: toon de verhelpbare reden rechtstreeks (token, certificaat…).
+        GitSaveStatus.pushFailed =>
+          result.pushError != null
+              ? gitForgeErrorMessage(l10n, result.pushError!)
+              : l10n.d('Synchroniseren mislukt.'),
+        GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
+      });
       return;
     }
 
@@ -390,7 +384,7 @@ Future<void> _flushGitQueue(
           '${l10n.d('Gesynchroniseerd:')} $settled — '
           '${l10n.d('nog in de wachtrij:')} $stuck';
     }
-    messenger.showSnackBar(SnackBar(content: Text(text)));
+    showCopyableSnackBar(messenger, l10n, text);
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: synchroniseren mislukt', e);
     if (!context.mounted || silent) return;
@@ -453,7 +447,7 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
     );
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: forge-aanroep mislukt', e);
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
     return;
   }
   if (!context.mounted) return;
@@ -495,7 +489,7 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
     );
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: forge-aanroep mislukt', e);
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
   }
 }
 
@@ -566,7 +560,7 @@ Future<void> _compareVersions(
     );
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: forge-aanroep mislukt', e);
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
   }
 }
 
@@ -608,17 +602,11 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
   switch (result.status) {
     case ReviewStatus.opened:
       final url = result.pr?.url ?? '';
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text('${l10n.d('Uitgebracht ter review:')} $url'),
-          duration: const Duration(seconds: 8),
-          action: url.isEmpty
-              ? null
-              : SnackBarAction(
-                  label: l10n.d('Kopieer link'),
-                  onPressed: () => Clipboard.setData(ClipboardData(text: url)),
-                ),
-        ),
+      showCopyableSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Uitgebracht ter review:')} $url',
+        duration: const Duration(seconds: 8),
       );
     case ReviewStatus.blocked:
       showErrorSnackBar(
@@ -732,10 +720,10 @@ Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
   if (!context.mounted) return;
   switch (result.status) {
     case ReleaseStatus.tagged:
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text('${l10n.d('Versie vastgelegd:')} ${result.tag?.name}'),
-        ),
+      showCopyableSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Versie vastgelegd:')} ${result.tag?.name}',
       );
     case ReleaseStatus.blocked:
       showErrorSnackBar(
@@ -796,7 +784,7 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
     ).build(includeReleases: true);
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: forge-aanroep mislukt', e);
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
     return;
   }
   if (!context.mounted) return;
@@ -835,7 +823,7 @@ Future<void> _showAssetRights(BuildContext context, WidgetRef ref) async {
     );
   } on GitForgeException catch (e) {
     if (!context.mounted) return;
-    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
   }
 }
 

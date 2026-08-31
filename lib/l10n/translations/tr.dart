@@ -1367,7 +1367,6 @@ const _dutchSourceTr = {
   'Wat is er veranderd en waarom?': 'Ne değişti ve neden?',
   'Uitbrengen': 'Sun',
   'Uitgebracht ter review:': 'İncelemeye sunuldu:',
-  'Kopieer link': 'Bağlantıyı kopyala',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Yayımlama, sınıflandırma politikası tarafından engellendi.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
@@ -2314,6 +2313,13 @@ const _dutchSourceTr = {
   'Afbeelding slidevullend': 'Görsel slaydı kaplasın',
   'Vult de hele slide en snijdt de randen bij':
       'Slaydın tamamını kaplar ve kenarları kırpar',
+  'Afbeelding paneelvullend': 'Görüntü paneli kaplar',
+  'Vult het paneel en snijdt de randen bij':
+      'Paneli kaplar ve kenarları kırpar',
+  'Afbeeldingen paneelvullend': 'Görüntüler panellerini kaplar',
+  'Vult elk paneel en snijdt de randen bij':
+      'Her paneli kaplar ve kenarları kırpar',
+  'Vullen (bijsnijden)': 'Doldur (kırp)',
   'Afbeelding vult hele slide': 'Görsel slaydın tamamını kaplar',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Açık: slaydın tamamını kaplar, başlık üzerinde (kırpılmış). Kapalı: görsel üstte, başlık altındaki bir şeritte.',

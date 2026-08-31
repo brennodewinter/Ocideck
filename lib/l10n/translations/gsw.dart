@@ -1337,6 +1337,13 @@ const _dutchSourceGsw = {
   'Afbeelding slidevullend': 'Bild füllt d Folie',
   'Vult de hele slide en snijdt de randen bij':
       'Füllt di ganz Folie und schnidt d Ränder ab',
+  'Afbeelding paneelvullend': 'Bild füllt das Panäl',
+  'Vult het paneel en snijdt de randen bij':
+      'Füllt das Panäl und schnidt d Ränder ab',
+  'Afbeeldingen paneelvullend': 'Bilder fülln ihr Panäl',
+  'Vult elk paneel en snijdt de randen bij':
+      'Füllt jedes Panäl und schnidt d Ränder ab',
+  'Vullen (bijsnijden)': 'Fülle (beschneide)',
   'Afbeelding vult hele slide': 'Bild füllt di ganz Folie',
   'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
       'Aa: füllt di ganz Folie, Titel drüber (abgschnitte). Us: Bild obe, Titel in eme Band drunter.',
@@ -4192,7 +4199,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Wat is er veranderd en waarom?': 'Was het sich gänderet und wurum?',
   'Uitbrengen': 'Ischicke',
   'Uitgebracht ter review:': 'Zur Prüefig ischickt:',
-  'Kopieer link': 'Link kopiere',
   'Uitbrengen geblokkeerd door het classificatiebeleid.':
       'Freigab dur d Klassifizierigsrichtlinie blockiert.',
   'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
