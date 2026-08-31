@@ -3160,9 +3160,11 @@ document properties and the filename only. See
 ## 12. Redaction Manifest Files (Beside an Export)
 
 When an export actually removes something (§3.1a), OciDeck writes two JSON files
-into the same folder as the export — on the web, into the same download folder.
-They are export artefacts, not deck sidecars: nothing reads them back in, and
-they never appear next to the `.md`.
+into the same folder as the export. On the web there is no folder: the report and
+both JSON files arrive together in one ZIP named after the export (#1902 — offered
+one by one, the browser stopped everything after the first). They are export
+artefacts, not deck sidecars: nothing reads them back in, and they never appear
+next to the `.md`.
 
 | File | Contains | Travels with the report |
 | --- | --- | --- |

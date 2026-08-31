@@ -3161,9 +3161,11 @@ in de documenteigenschappen en de bestandsnaam. Zie
 ## 12. Redactie-manifestbestanden (naast een export)
 
 Wanneer een export daadwerkelijk iets verwijdert (§3.1a), schrijft OciDeck twee
-JSON-bestanden in dezelfde map als de export — op het web, in dezelfde
-downloadmap. Het zijn exportartefacten, geen deck-sidecars: niets leest ze weer
-in, en ze verschijnen nooit naast de `.md`.
+JSON-bestanden in dezelfde map als de export. Op het web is er geen map: het
+rapport en beide JSON-bestanden komen samen aan in één ZIP, genoemd naar de
+export (#1902 — één voor één aangeboden hield de browser alles ná de eerste
+tegen). Het zijn exportartefacten, geen deck-sidecars: niets leest ze weer in, en
+ze verschijnen nooit naast de `.md`.
 
 | Bestand | Bevat | Reist mee met het rapport |
 | --- | --- | --- |

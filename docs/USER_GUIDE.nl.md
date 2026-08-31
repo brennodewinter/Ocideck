@@ -2818,7 +2818,12 @@ niet meereizen — zie *De twee manifestbestanden* hieronder.
 ### De twee manifestbestanden
 
 Telkens als een export daadwerkelijk iets verwijdert, schrijft OciDeck twee extra
-bestanden in dezelfde map als de export (op het web, in dezelfde downloadmap):
+bestanden in dezelfde map als de export. In de browser is er geen map, dus komen
+het rapport en beide manifestbestanden samen aan in **één ZIP** — genoemd naar de
+export met `.zip` erachter. Dat is geen cosmetische keuze: browsers houden de
+tweede automatische download op rij tegen, en tot dan waren het manifest en de
+sleutels juist de twee die stilzwijgend nooit aankwamen terwijl de app meldde dat
+de export gelukt was. *(Gecorrigeerd 01-09-2026, #1902.)*
 
 | Bestand | Wat erin zit | Gaat het mee met het rapport? |
 | --- | --- | --- |
@@ -5238,7 +5243,7 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 | OpenKAT-rapporten importeren | Zichtbaar op Integraties maar **uitgeschakeld** — map-import en servertokens hebben desktop nodig (sleutelhanger en lokale mappen). |
 | **Één** PowerPoint-, Keynote- of Impress-bestand importeren | **Werkt**. De conversie draait op de bytes die je koos en het resultaat opent in een tabblad. |
 | **Meerdere** presentaties tegelijk importeren | Afwezig. De wachtrij schrijft elk geconverteerd deck als een bestand naar een map die je kiest, en de browser heeft geen map om te kiezen. Het dialoog zegt dat in plaats van een knop aan te bieden die niet kan werken. |
-| Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. |
+| Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. Een export die uit meer dan één bestand bestaat (een geredigeerd rapport met zijn manifest, een sessie met een bestand per dia) komt aan als één ZIP, omdat een browser de tweede automatische download op rij tegenhoudt. En de bewoording is met opzet anders: de webversie zegt *aangeboden als download* in plaats van *geëxporteerd naar*, omdat een pagina niet kan zien of het bestand werkelijk in je downloadmap terechtkwam. |
 
 **De privacycontrole is degene om voorzichtig mee te zijn.** Hij heeft twee helften — hij leest
 je tekst, en hij kijkt naar je afbeeldingen voor herkenbare gezichten. In een browser draait alleen
