@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Співбесіда при прийомі на роботу
+title: Співбесіда
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Співбесіда при прийомі на роботу
+# Співбесіда
 ## Роль · Роботодавець · Дата · Інтерв'юери
 
 ---

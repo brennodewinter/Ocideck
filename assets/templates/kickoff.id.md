@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permulaan/permulaan proyek
+title: Awal proyek / kick-off
 language: id
 ---
 
 <!-- _class: title -->
 
-# Permulaan/permulaan proyek
+# Awal proyek / kick-off
 
 ---
 

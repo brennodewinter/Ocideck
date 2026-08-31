@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beboeraften / deltagelsesmøde
+title: Beboermøde / borgerinddragelsesmøde
 language: da
 ---
 
 <!-- _class: title -->
 
-# Beboeraften / deltagelsesmøde
+# Beboermøde / borgerinddragelsesmøde
 ## Nabolag · Emne · Dato · Facilitator
 
 ---

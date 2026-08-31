@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sertifisearring foarútgong
+title: Sertifisearring fuortgong
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Sertifisearring foarútgong
+# Sertifisearring fuortgong
 
 ---
 

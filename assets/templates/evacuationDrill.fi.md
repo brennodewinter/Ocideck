@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuointi- ja ensiapuharjoitus
+title: Evakuointi- ja BHV-harjoitus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Evakuointi- ja ensiapuharjoitus
+# Evakuointi- ja BHV-harjoitus
 ## Sivusto · Päivämäärä · Harjoituksen johtaja · Skenaario
 
 ---

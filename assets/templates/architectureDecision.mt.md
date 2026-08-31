@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Deċiżjoni tal-arkitettura / preżentazzjoni tal-ADR
+title: Deċiżjoni ta' arkitettura / preżentazzjoni ADR
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Deċiżjoni tal-arkitettura / preżentazzjoni tal-ADR
+# Deċiżjoni ta' arkitettura / preżentazzjoni ADR
 
 ---
 

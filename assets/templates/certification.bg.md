@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Напредък на сертифицирането
+title: Напредък по сертификацията
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Напредък на сертифицирането
+# Напредък по сертификацията
 
 ---
 

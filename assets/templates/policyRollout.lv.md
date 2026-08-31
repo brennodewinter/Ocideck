@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politikas izvēršanas/īstenošanas plāns
+title: Politikas ieviešana / ieviešanas plāns
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Politikas izvēršanas/īstenošanas plāns
+# Politikas ieviešana / ieviešanas plāns
 
 ---
 

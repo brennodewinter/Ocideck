@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relatio status
+title: Instructio status
 language: la
 ---
 
 <!-- _class: title -->
 
-# Relatio status
+# Instructio status
 
 ---
 

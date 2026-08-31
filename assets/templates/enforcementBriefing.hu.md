@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Végrehajtási tájékoztató (BOA)
+title: Végrehajtási eligazítás (BOA)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Végrehajtási tájékoztató (BOA)
+# Végrehajtási eligazítás (BOA)
 ## Dátum · Műszak · Munkaterület/körzet · Koordinátor
 
 ---

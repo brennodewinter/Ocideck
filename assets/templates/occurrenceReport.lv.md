@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ziņojums par notikumiem (tikai kultūra)
+title: Notikuma ziņojums (just culture)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Ziņojums par notikumiem (tikai kultūra)
+# Notikuma ziņojums (just culture)
 ## Notikums · Datums un laiks · Ziņotājs · Iesaistīts
 
 ---

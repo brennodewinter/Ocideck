@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Parentum vesperi / notitia vesperum
+title: Vespera parentum / vespera informationis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Parentum vesperi / notitia vesperum
+# Vespera parentum / vespera informationis
 ## Classis vel coetus · schola anno · Locus
 
 ---

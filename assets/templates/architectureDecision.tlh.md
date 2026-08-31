@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Architecture decision / ADR presentation
+title: chenmoHmeH nab wuqghach / ADR cha'nav
 language: tlh
 ---
 
 <!-- _class: title -->
 
-# Architecture decision / ADR presentation
+# chenmoHmeH nab wuqghach / ADR cha'nav
 
 ---
 

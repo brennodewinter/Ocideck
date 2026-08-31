@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sullo stato
+title: Briefing di stato
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing sullo stato
+# Briefing di stato
 
 ---
 

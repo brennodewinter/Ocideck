@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Ynformaasjefeiligens: RASCI / ferantwurdlikheden"
+title: "Ynformaasjefeiligens: RASCI / TVB"
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ynformaasje feiligens: RASCI / ferantwurdlikheden
+# Ynformaasjefeiligens: RASCI / TVB
 
 ---
 

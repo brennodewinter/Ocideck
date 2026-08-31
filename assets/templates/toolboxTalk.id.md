@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pembicaraan toolbox / analisis risiko di menit-menit terakhir
+title: Toolbox / pemeriksaan keselamatan LMRA
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pembicaraan toolbox / analisis risiko di menit-menit terakhir
+# Toolbox / pemeriksaan keselamatan LMRA
 ## Pekerjaan · Lokasi · Tanggal · Kru
 
 ---

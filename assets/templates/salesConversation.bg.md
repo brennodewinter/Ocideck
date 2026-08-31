@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Разговор за продажба
+title: Търговски разговор
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Разговор за продажба
+# Търговски разговор
 ## Проспект · Лице за контакт · Оферта · Дата
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tilta pārejas instruktāža
+title: Jūras pārejas / tiltiņa instruktāža
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Tilta pārejas instruktāža
+# Jūras pārejas / tiltiņa instruktāža
 ## Reiss · Piegāde · Datums · Skatīšanās grafiks
 
 ---

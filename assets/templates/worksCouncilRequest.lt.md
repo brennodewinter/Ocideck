@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Darbo tarybos prašymas konsultuotis
+title: Prašymas darbo tarybai pateikti nuomonę
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Darbo tarybos prašymas konsultuotis
+# Prašymas darbo tarybai pateikti nuomonę
 ## Tema · Direktorius · Darbo taryba · Data
 
 ---

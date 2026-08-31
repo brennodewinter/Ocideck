@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entrevista pa trabou
+title: Entrevista di trabou
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entrevista pa trabou
+# Entrevista di trabou
 ## Papel · Dunadó di Trabou · Fecha · Entrevistadónan
 
 ---

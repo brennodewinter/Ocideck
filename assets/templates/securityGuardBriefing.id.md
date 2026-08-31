@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan keamanan / permulaan shift
+title: Pengarahan keamanan / awal tugas jaga
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan keamanan / permulaan shift
+# Pengarahan keamanan / awal tugas jaga
 ## Tanggal · Shift · Lokasi/lokasi · Shift supervisor
 
 ---

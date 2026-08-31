@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Inštruktáž pre cestujúcich (všeobecné letectvo)
+title: Brífing cestujúcich (všeobecné letectvo)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Inštruktáž pre cestujúcich (všeobecné letectvo)
+# Brífing cestujúcich (všeobecné letectvo)
 ## Lietadlo · Let · Veliaci pilot
 
 ---

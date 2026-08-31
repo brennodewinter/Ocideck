@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / готовност за освобождаване
+title: CAB / готовност за релийз
 language: bg
 ---
 
 <!-- _class: title -->
 
-# CAB / готовност за освобождаване
+# CAB / готовност за релийз
 
 ---
 

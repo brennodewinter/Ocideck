@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nalazi revizije i praćenje
+title: Nalazi audita i daljnje mjere
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Nalazi revizije i praćenje
+# Nalazi audita i daljnje mjere
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lühike brifing
+title: Lühike briifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Lühike brifing
+# Lühike briifing
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obavještavanje putnika (opće zrakoplovstvo)
+title: Brifing putnika (generalna avijacija)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Obavještavanje putnika (opće zrakoplovstvo)
+# Brifing putnika (generalna avijacija)
 ## Zrakoplov · Let · Zapovjednik
 
 ---

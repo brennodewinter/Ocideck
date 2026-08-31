@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ried / útfierend foarstel
+title: Rieds- / kolleezjefoarstel
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ried / útfierend foarstel
+# Rieds- / kolleezjefoarstel
 ## Underwerp · Portfolio · Registraasjenûmer · Auteur
 
 ---

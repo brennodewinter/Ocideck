@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tasc plean um shábháilteacht faisnéise
+title: Plean tascanna slándála
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tasc plean um shábháilteacht faisnéise
+# Plean tascanna slándála
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Передача травми MIST
+title: (A)MIST передача травми
 language: uk
 ---
 
 <!-- _class: title -->
 
-# (A) Передача травми MIST
+# (A)MIST передача травми
 ## Догоспіталь → Швидка допомога · Відправлення · Дата та час
 
 ---

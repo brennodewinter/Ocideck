@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evacuare și exercițiu de prim răspuns
+title: Exercițiu de evacuare și BHV
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Exercițiu de evacuare și prim răspuns
+# Exercițiu de evacuare și BHV
 ## Site · Data · Lider foraj · Scenariu
 
 ---

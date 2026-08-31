@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pripremite ključni razgovor
+title: Priprema ključnog razgovora
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Pripremite ključni razgovor
+# Priprema ključnog razgovora
 
 ## Tko · Tema · Datum
 

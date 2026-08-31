@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL lennu ettevalmistamine
+title: PPL lennuettevalmistus
 language: et
 ---
 
 <!-- _class: title -->
 
-# PPL lennu ettevalmistamine
+# PPL lennuettevalmistus
 ## Kuupäev · Kutsung · Marsruut · PIC
 
 ---

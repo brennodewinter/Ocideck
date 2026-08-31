@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA/valutazione impatto privacy
+title: DPIA / valutazione d'impatto sulla privacy
 language: it
 ---
 
 <!-- _class: title -->
 
-# DPIA/valutazione impatto privacy
+# DPIA / valutazione d'impatto sulla privacy
 
 ---
 

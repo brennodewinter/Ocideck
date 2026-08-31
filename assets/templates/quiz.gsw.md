@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Interaktives Quiz
+title: Interaktivs Quiz
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Interaktives Quiz
+# Interaktivs Quiz
 
 ---
 

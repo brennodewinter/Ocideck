@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Звіт про подію (лише культура)
+title: Повідомлення про подію (just culture)
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Звіт про подію (лише культура)
+# Повідомлення про подію (just culture)
 ## Подія · Дата та час · Репортер · Причетний
 
 ---

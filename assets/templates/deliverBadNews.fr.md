@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Annoncer de mauvaises nouvelles
+title: Annoncer une mauvaise nouvelle
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Annoncer de mauvaises nouvelles
+# Annoncer une mauvaise nouvelle
 ## À qui · L'actualité · Date
 
 ---

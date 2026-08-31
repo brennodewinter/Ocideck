@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zahtjev za savjet radničkog vijeća
+title: Zahtjev za mišljenje radničkog vijeća
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Zahtjev za savjet radničkog vijeća
+# Zahtjev za mišljenje radničkog vijeća
 ## Predmet · Direktor · Radničko vijeće · Datum
 
 ---

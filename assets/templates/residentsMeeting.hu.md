@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lakossági est / részvételi értekezlet
+title: Lakossági fórum / részvételi találkozó
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Lakossági est / részvételi értekezlet
+# Lakossági fórum / részvételi találkozó
 ## Környék · Téma · Időpont · Facilitátor
 
 ---

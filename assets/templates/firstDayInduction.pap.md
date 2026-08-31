@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Promé dia / indukshon
+title: Promé dia / introdukshon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Promé dia / indukshon
+# Promé dia / introdukshon
 ## Kontratashon nobo · Rol · Guia · Fecha
 
 ---

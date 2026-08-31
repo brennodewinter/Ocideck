@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cleachtadh boird / druil géarchéime
+title: Cleachtadh tabletop / cleachtadh géarchéime
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Cleachtadh boird / druil géarchéime
+# Cleachtadh tabletop / cleachtadh géarchéime
 
 ---
 

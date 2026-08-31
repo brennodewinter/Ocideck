@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Konverżazzjoni tal-familja dwar il-kura u l-kura
+title: Konversazzjoni tal-familja dwar il-kura u l-indukrar
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Konverżazzjoni tal-familja dwar il-kura u l-kura
+# Konversazzjoni tal-familja dwar il-kura u l-indukrar
 ## Suġġett · Data · Facilitator · Attendew
 
 ---

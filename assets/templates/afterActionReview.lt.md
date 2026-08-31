@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Apžvalga / peržiūra po veiksmų
+title: Debrifingas / analizė po veiksmų
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Apžvalga / peržiūra po veiksmų
+# Debrifingas / analizė po veiksmų
 ## Operacija · Data ir laikas · Vykdytojas · Dalyviai
 
 ---

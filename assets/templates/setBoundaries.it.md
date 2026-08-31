@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stabilire i confini
+title: Porre dei limiti
 language: it
 ---
 
 <!-- _class: title -->
 
-# Stabilire i confini
+# Porre dei limiti
 ## Con chi · Su cosa · Data
 
 ---

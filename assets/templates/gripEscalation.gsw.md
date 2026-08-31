@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP-Eskalation
+title: GRIP-Hochstuefig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# GRIP-Eskalation
+# GRIP-Hochstuefig
 ## Vorfall · Datum und Uhrzeit · Leiter · Aktuelles GRIP-Level
 
 ---

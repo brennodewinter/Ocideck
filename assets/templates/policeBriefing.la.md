@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Operational vigilum briefing
+title: Instructio operativa vigilum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Operational vigilum briefing
+# Instructio operativa vigilum
 ## Dies · Vices · Regio · Relator
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tabletop exercitatio / discriminis terebro
+title: Exercitatio tabletop / exercitatio crisis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Tabletop exercitatio / discriminis terebro
+# Exercitatio tabletop / exercitatio crisis
 
 ---
 

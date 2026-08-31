@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laqgħa tat-teħid tad-deċiżjonijiet
+title: Laqgħa għat-teħid ta' deċiżjonijiet
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Laqgħa tat-teħid tad-deċiżjonijiet
+# Laqgħa għat-teħid ta' deċiżjonijiet
 ## Laqgħa · Data · President · Attendew
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Neuvottelut toimittajien kanssa
+title: Neuvottelu toimittajien kanssa
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Neuvottelut toimittajien kanssa
+# Neuvottelu toimittajien kanssa
 ## Toimittaja · Sopimus · Tavoite · Päivämäärä
 
 ---

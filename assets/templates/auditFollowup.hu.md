@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Az ellenőrzés megállapításai és nyomon követése
+title: Auditmegállapítások és nyomon követés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Az ellenőrzés megállapításai és nyomon követése
+# Auditmegállapítások és nyomon követés
 
 ---
 

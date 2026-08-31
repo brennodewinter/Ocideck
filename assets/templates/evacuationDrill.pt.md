@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evacuação e exercício de primeira resposta
+title: Simulacro de evacuação e BHV
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Evacuação e exercício de primeira resposta
+# Simulacro de evacuação e BHV
 ## Local · Data · Líder de treinamento · Cenário
 
 ---

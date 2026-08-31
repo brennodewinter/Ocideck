@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Budget presintaasje
+title: Begrutting / budzjetpresintaasje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Budget presintaasje
+# Begrutting / budzjetpresintaasje
 ## Organisaasje · Begruttingsjier · Presintator
 
 ---

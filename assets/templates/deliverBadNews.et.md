@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Halbade uudiste edastamine
+title: Halva uudise edastamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Halbade uudiste edastamine
+# Halva uudise edastamine
 ## Kellele · Uudised · Kuupäev
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Continuitatea afacerii / test DR
+title: Continuitatea activității / test DR
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Continuitatea afacerii / test DR
+# Continuitatea activității / test DR
 
 ---
 

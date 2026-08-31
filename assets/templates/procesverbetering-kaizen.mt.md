@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Titjib tal-proċess: proġett Kaizen"
+title: "Titjib tal-proċess: Proġett Kaizen"
 language: mt
 ocideck_improvement_framework: kaizen
 ---

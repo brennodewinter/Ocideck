@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Miglioramento dei processi: progetto 8D"
+title: "Miglioramento del processo: progetto 8D"
 language: it
 ocideck_improvement_framework: 8d
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa bezpieczeństwa / rozpoczęcie zmiany
+title: Odprawa ochrony / początek służby
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa bezpieczeństwa / rozpoczęcie zmiany
+# Odprawa ochrony / początek służby
 ## Data · Zmiana · Miejsce/lokalizacja · Kierownik zmiany
 
 ---

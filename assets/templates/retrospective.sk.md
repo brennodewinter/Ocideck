@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektíva / zlepšenie tímu
+title: Retrospektíva / zlepšovanie tímu
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Retrospektíva / zlepšenie tímu
+# Retrospektíva / zlepšovanie tímu
 
 ---
 

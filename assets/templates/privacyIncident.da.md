@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vurdering af databrud/privatlivshændelse
+title: Databrud / vurdering af privatlivshændelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# Vurdering af databrud/privatlivshændelse
+# Databrud / vurdering af privatlivshændelse
 
 ---
 

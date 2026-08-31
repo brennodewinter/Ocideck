@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uzasadnienie biznesowe/propozycja inwestycji
+title: Uzasadnienie biznesowe / propozycja inwestycji
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Uzasadnienie biznesowe/propozycja inwestycji
+# Uzasadnienie biznesowe / propozycja inwestycji
 ## Wniosek · Autor · Organ decyzyjny · Data
 
 ---

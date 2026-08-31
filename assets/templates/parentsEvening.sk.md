@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rodičovský večer / informačný večer
+title: Rodičovské združenie / informačný večer
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rodičovský večer / informačný večer
+# Rodičovské združenie / informačný večer
 ## Trieda alebo skupina · Školský rok · Miesto
 
 ---

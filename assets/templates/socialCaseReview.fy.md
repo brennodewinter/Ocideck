@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sosjaal domein saak review
+title: Kasuïstykbesprek sosjaal domein
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Sosjaal domein saak review
+# Kasuïstykbesprek sosjaal domein
 ## Team · Datum · Foarsitter
 
 ---

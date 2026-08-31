@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di enforsamentu (BOA)
+title: Briefing di fiskalisashon (BOA)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di enforsamentu (BOA)
+# Briefing di fiskalisashon (BOA)
 ## Fecha · Turno · Área di trabou/distrito · Kordinadó
 
 ---

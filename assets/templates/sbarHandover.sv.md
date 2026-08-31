@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR överlämning
+title: SBAR-överlämning
 language: sv
 ---
 
 <!-- _class: title -->
 
-# SBAR överlämning
+# SBAR-överlämning
 ## Patient · Avdelning · Från vem till vem · Datum och tid
 
 ---

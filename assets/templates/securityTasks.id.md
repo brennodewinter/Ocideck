@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rencana tugas keamanan informasi
+title: Rencana tugas keamanan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Rencana tugas keamanan informasi
+# Rencana tugas keamanan
 
 ---
 

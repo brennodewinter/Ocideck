@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seznanitev gasilske službe (odziv in vaja)
+title: Gasilski briefing (intervencija in vaja)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Seznanitev gasilske službe (odziv in vaja)
+# Gasilski briefing (intervencija in vaja)
 ## Predmet · Datum in čas · Poveljnik incidenta ali vodja vaje · Posadka
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: It leverjen fan min nijs
+title: Min nijs bringe
 language: fy
 ---
 
 <!-- _class: title -->
 
-# It leverjen fan min nijs
+# Min nijs bringe
 ## Oan wa · It nijs · Datum
 
 ---

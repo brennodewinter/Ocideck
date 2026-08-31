@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seshon di modelahe di menasa
+title: Seshon di threat modeling
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Seshon di modelahe di menasa
+# Seshon di threat modeling
 ## Sistema · Fecha · Fasilitadó · Partisipantenan
 
 ---

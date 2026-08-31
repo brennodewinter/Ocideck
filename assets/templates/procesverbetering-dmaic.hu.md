@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Folyamatjavítás: DMAIC projekt"
+title: "Folyamatfejlesztés: DMAIC projekt"
 language: hu
 ocideck_improvement_framework: dmaic
 ---

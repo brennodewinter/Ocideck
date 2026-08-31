@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint áttekintés / bemutató
+title: Sprint review / demó
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Sprint áttekintés / bemutató
+# Sprint review / demó
 ## Csapat · Sprint · Dátum
 
 ---

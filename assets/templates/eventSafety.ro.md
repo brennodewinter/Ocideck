@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eveniment și informare privind siguranța publicului
+title: Briefing de eveniment și siguranța mulțimii
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Eveniment și informare privind siguranța publicului
+# Briefing de eveniment și siguranța mulțimii
 ## Eveniment · Locație · Data · Coordonator
 
 ---

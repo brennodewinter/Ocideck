@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pārskats/pārskats pēc darbības
+title: Debrīfings / analīze pēc darbības
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Pārskats/pārskats pēc darbības
+# Debrīfings / analīze pēc darbības
 ## Darbība · Datums un laiks · Vadītājs · Dalībnieki
 
 ---

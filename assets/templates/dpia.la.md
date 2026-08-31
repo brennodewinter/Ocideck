@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / secretum impulsum taxationem
+title: DPIA / aestimatio effectus in vitam privatam
 language: la
 ---
 
 <!-- _class: title -->
 
-# DPIA / secretum impulsum taxationem
+# DPIA / aestimatio effectus in vitam privatam
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entscheidungstreffen
+title: Entscheidigs-Sitzig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Entscheidungstreffen
+# Entscheidigs-Sitzig
 ## Treffen · Datum · Vorsitzender · Teilnehmer
 
 ---

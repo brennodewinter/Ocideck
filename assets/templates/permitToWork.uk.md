@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Дозвіл на роботу
+title: Дозвіл на роботу (permit to work)
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Дозвіл на роботу
+# Дозвіл на роботу (permit to work)
 ## Робота · Місцезнаходження · Діє з–до · Видавець дозволу
 
 ---

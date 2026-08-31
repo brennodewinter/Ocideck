@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mluvit přes konflikt
+title: Vyříkání konfliktu
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Mluvit přes konflikt
+# Vyříkání konfliktu
 ## Kdo · O čem · Datum
 
 ---

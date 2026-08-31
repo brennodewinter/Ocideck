@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskusia o napätom vzťahu
+title: Rozhovor o napätom vzťahu
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Diskusia o napätom vzťahu
+# Rozhovor o napätom vzťahu
 ## S kým · O čom · Kedy
 
 ---

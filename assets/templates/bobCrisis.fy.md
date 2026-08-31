@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BOB krisis rapport
+title: BOB-krisisrapportaazje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# BOB krisis rapport
+# BOB-krisisrapportaazje
 
 ---
 

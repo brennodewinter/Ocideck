@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST przekazanie traumy
+title: (A)MIST przekazanie urazu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# (A) MIST przekazanie traumy
+# (A)MIST przekazanie urazu
 ## Przedszpitalny → SOR · Wysyłka · Data i godzina
 
 ---

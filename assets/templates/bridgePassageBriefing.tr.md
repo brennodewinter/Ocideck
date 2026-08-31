@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Köprü geçiş brifingi
+title: Denizcilik geçiş / köprüüstü brifingi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Köprü geçiş brifingi
+# Denizcilik geçiş / köprüüstü brifingi
 ## Yolculuk · Gemi · Tarih · Programı izle
 
 ---

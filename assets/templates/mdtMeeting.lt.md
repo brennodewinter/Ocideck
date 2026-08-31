@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Daugiadisciplininis komandos susitikimas (MDT)
+title: Daugiadalykis komandos susitikimas (MDT)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Daugiadisciplininis komandos susitikimas (MDT)
+# Daugiadalykis komandos susitikimas (MDT)
 ## Byla · Data · Pirmininkė · Dalyviai
 
 ---

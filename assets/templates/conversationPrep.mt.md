@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ipprepara konverżazzjoni
+title: Ipprepara konversazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Ipprepara konverżazzjoni
+# Ipprepara konversazzjoni
 ## Min · Suġġett · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projektzeitleiste
+title: Projektzeitplan
 language: de
 ---
 
 <!-- _class: title -->
 
-# Projektzeitleiste
+# Projektzeitplan
 
 ---
 

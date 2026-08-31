@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo o dogodku (samo kultura)
+title: Prijava dogodka (just culture)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo o dogodku (samo kultura)
+# Prijava dogodka (just culture)
 ## Dogodek · Datum in čas · Prijavitelj · Vpleten
 
 ---

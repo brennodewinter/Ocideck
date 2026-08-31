@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tariede in petear
+title: Petear tariede
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Tariede in petear
+# Petear tariede
 ## Wa · Underwerp · Datum
 
 ---

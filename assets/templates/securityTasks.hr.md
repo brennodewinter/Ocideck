@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan zadataka informacijske sigurnosti
+title: Plan sigurnosnih zadataka
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Plan zadataka informacijske sigurnosti
+# Plan sigurnosnih zadataka
 
 ---
 

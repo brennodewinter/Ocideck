@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Priešgaisrinės tarnybos instruktažas (reagavimas ir pratybos)
+title: Ugniagesių instruktažas (operacija ir pratybos)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Priešgaisrinės tarnybos instruktažas (reagavimas ir pratybos)
+# Ugniagesių instruktažas (operacija ir pratybos)
 ## Objektas · Data ir laikas · Incidento vadas arba pratybų vadovas · Įgula
 
 ---

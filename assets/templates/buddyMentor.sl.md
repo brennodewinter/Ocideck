@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Načrt prijatelja/mentorja
+title: Načrt buddyja / mentorja
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Načrt prijatelja/mentorja
+# Načrt buddyja / mentorja
 ## Novinec · Prijatelj ali mentor · Datum začetka
 
 ---

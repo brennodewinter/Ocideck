@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revīzijas konstatējumi un turpmākie pasākumi
+title: Audita konstatējumi un turpmākie pasākumi
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Revīzijas konstatējumi un turpmākie pasākumi
+# Audita konstatējumi un turpmākie pasākumi
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Multidiszciplináris csapattalálkozó (MDT)
+title: Multidiszciplináris megbeszélés (MDT)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Multidiszciplináris csapattalálkozó (MDT)
+# Multidiszciplináris megbeszélés (MDT)
 ## Ügy · Dátum · Elnök · Résztvevők
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hoitotyövuoron luovutus
+title: Hoitajien vuoronvaihtoraportti
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Hoitotyövuoron luovutus
+# Hoitajien vuoronvaihtoraportti
 ## Seurakunta · Vaihto · Keneltä kenelle · Päivämäärä
 
 ---

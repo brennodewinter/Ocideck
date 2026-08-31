@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Advysfersyk fan de ûndernimmingsried
+title: Advysoanfraach OR / meisizzenskip
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Advysfersyk fan de ûndernimmingsried
+# Advysoanfraach OR / meisizzenskip
 ## Underwerp · Direkteur · Undernimmingsried · Datum
 
 ---

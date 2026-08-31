@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Simulación de crisis / ejercicio de mesa
+title: Ejercicio tabletop / simulacro de crisis
 language: es
 ---
 
 <!-- _class: title -->
 
-# Simulación de crisis / ejercicio de mesa
+# Ejercicio tabletop / simulacro de crisis
 
 ---
 

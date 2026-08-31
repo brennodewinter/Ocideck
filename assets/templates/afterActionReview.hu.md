@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tájékoztatás/akció utáni áttekintés
+title: Debriefing / akció utáni elemzés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Tájékoztatás/akció utáni áttekintés
+# Debriefing / akció utáni elemzés
 ## Működés · Dátum és idő · Lebonyolító · Résztvevők
 
 ---

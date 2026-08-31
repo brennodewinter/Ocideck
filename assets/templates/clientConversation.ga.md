@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Comhrá cliant
+title: Comhrá custaiméara
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Comhrá cliant
+# Comhrá custaiméara
 ## Cliant · Duine teagmhála · Sprioc · Dáta
 
 ---

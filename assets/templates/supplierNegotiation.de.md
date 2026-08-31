@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Verhandlungen mit Lieferanten
+title: Verhandlung mit Lieferanten
 language: de
 ---
 
 <!-- _class: title -->
 
-# Verhandlungen mit Lieferanten
+# Verhandlung mit Lieferanten
 ## Lieferant · Vertrag · Ziel · Datum
 
 ---

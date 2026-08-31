@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iskrcavanje / izlaz
+title: Offboarding / odlazak
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Iskrcavanje / izlaz
+# Offboarding / odlazak
 ## Zaposlenik · Uloga · Zadnji radni dan · Voditelj
 
 ---

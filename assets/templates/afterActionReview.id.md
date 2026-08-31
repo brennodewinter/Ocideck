@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing/review setelah tindakan
+title: Debriefing / tinjauan pasca-tindakan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Debriefing/review setelah tindakan
+# Debriefing / tinjauan pasca-tindakan
 ## Operasi · Tanggal dan waktu · Fasilitator · Peserta
 
 ---

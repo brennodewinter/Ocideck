@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sesiune de modelare a amenințărilor
+title: Sesiune de threat modeling
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Sesiune de modelare a amenințărilor
+# Sesiune de threat modeling
 ## Sistem · Data · Facilitator · Participanți
 
 ---

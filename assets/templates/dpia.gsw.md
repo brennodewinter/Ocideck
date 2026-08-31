@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / Datenschutz-Folgenabschätzung
+title: DPIA / Privacy Impact Assessment
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# DPIA / Datenschutz-Folgenabschätzung
+# DPIA / Privacy Impact Assessment
 
 ---
 

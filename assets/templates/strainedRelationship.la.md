@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: De relatione coacta
+title: De relatione difficili colloqui
 language: la
 ---
 
 <!-- _class: title -->
 
-# De relatione coacta
+# De relatione difficili colloqui
 ## Cum quo · Qua?
 
 ---

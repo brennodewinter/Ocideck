@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bezpečnostná inštruktáž / začiatok zmeny
+title: Bezpečnostný brífing / začiatok zmeny
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Bezpečnostná inštruktáž / začiatok zmeny
+# Bezpečnostný brífing / začiatok zmeny
 ## Dátum · Zmena · Miesto/miesto · Vedúci zmeny
 
 ---

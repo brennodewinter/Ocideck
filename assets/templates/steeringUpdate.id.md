@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pembaruan komite pengarah / dewan proyek
+title: Komite pengarah / pembaruan project board
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pembaruan komite pengarah / dewan proyek
+# Komite pengarah / pembaruan project board
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Familiengespräch über Pflege und Pflege
+title: Familiengespräch zu Pflege und Angehörigenpflege
 language: de
 ---
 
 <!-- _class: title -->
 
-# Familiengespräch über Pflege und Pflege
+# Familiengespräch zu Pflege und Angehörigenpflege
 ## Thema · Datum · Moderator · Teilnehmer
 
 ---

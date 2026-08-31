@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proyekto inisio / inisio
+title: Inisio di proyekto / kick-off
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Proyekto inisio / inisio
+# Inisio di proyekto / kick-off
 
 ---
 

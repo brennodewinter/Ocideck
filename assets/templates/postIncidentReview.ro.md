@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analiza post-incident/lecții învățate
+title: Analiză post-incident / lecții învățate
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Analiza post-incident/lecții învățate
+# Analiză post-incident / lecții învățate
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Intervista tax-xogħol
+title: Intervista għax-xogħol
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Intervista tax-xogħol
+# Intervista għax-xogħol
 ## Rwol · Min iħaddem · Data · Intervistaturi
 
 ---

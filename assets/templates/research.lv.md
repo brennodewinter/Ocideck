@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pētījuma stāstījums
+title: Pētījuma stāsts
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Pētījuma stāstījums
+# Pētījuma stāsts
 
 ---
 

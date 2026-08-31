@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Peningkatan GRIP
+title: Eskalasi GRIP
 language: id
 ---
 
 <!-- _class: title -->
 
-# Peningkatan GRIP
+# Eskalasi GRIP
 ## Insiden · Tanggal dan waktu · Pemimpin · Level GRIP saat ini
 
 ---

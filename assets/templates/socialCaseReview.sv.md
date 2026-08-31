@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Social domän ärendegranskning
+title: Ärendegenomgång inom det sociala området
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Social domän ärendegranskning
+# Ärendegenomgång inom det sociala området
 ## Team · Datum · Ordförande
 
 ---

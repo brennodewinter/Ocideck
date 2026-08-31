@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuierungs- und Erstreaktionsübung
+title: Räumungs- und BHV-Übung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Evakuierungs- und Erstreaktionsübung
+# Räumungs- und BHV-Übung
 ## Standort · Datum · Übungsleiter · Szenario
 
 ---

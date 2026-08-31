@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Palestra de segurança / análise de risco de última hora
+title: Toolbox / verificação de segurança LMRA
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Palestra de segurança / análise de risco de última hora
+# Toolbox / verificação de segurança LMRA
 ## Trabalho · Local · Data · Equipe
 
 ---

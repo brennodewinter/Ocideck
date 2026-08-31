@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Prozessverbesserung: Kaizen-Projekt“
+title: "Prozessverbesserung: Kaizen-Projekt"
 language: gsw
 ocideck_improvement_framework: kaizen
 ---

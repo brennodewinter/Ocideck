@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Prosessin parantaminen: DMAIC-projekti"
+title: "Prosessien parantaminen: DMAIC-projekti"
 language: fi
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Prosessin parantaminen: DMAIC-projekti
+# Prosessien parantaminen: DMAIC-projekti
 
 ---
 

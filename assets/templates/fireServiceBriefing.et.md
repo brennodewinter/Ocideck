@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tuletõrje briifing (reageerimine ja õppus)
+title: Päästeteenistuse briifing (väljasõit ja õppus)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tuletõrje briifing (reageerimine ja õppus)
+# Päästeteenistuse briifing (väljasõit ja õppus)
 ## Objekt · Kuupäev ja kellaaeg · Juhtumi ülem või õppuse juht · Meeskond
 
 ---

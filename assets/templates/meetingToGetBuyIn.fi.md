@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Saada jotain aikaan kokouksessa
+title: Kuinka saada tahtonsa läpi kokouksessa
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Saada jotain aikaan kokouksessa
+# Kuinka saada tahtonsa läpi kokouksessa
 ## Kokous · Päätöstä pyydetään · Päivämäärä
 
 ---

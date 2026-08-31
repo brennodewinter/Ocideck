@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Übergabe der Pflegeschicht
+title: Pflegerische Dienstübergabe
 language: de
 ---
 
 <!-- _class: title -->
 
-# Übergabe der Pflegeschicht
+# Pflegerische Dienstübergabe
 ## Gemeinde · Schicht · Von wem an wen · Datum
 
 ---

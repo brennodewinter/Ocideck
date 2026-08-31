@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Izvješće o velikoj nesreći METHANE
+title: METHANE prijava velikog incidenta
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Izvješće o velikoj nesreći METHANE
+# METHANE prijava velikog incidenta
 ## Incident · Mjesto · Datum i vrijeme · Izvjestitelj
 
 ---

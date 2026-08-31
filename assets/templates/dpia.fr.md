@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / évaluation des impacts sur la vie privée
+title: DPIA / analyse d'impact sur la vie privée
 language: fr
 ---
 
 <!-- _class: title -->
 
-# DPIA / évaluation des impacts sur la vie privée
+# DPIA / analyse d'impact sur la vie privée
 
 ---
 

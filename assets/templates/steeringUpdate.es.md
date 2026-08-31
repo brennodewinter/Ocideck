@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Actualización del comité de dirección / project board
+title: Comité de dirección / actualización del proyecto
 language: es
 ---
 
 <!-- _class: title -->
 
-# Actualización del comité de dirección / project board
+# Comité de dirección / actualización del proyecto
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dul chun cinn deimhnithe
+title: Dul chun cinn an deimhniúcháin
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Dul chun cinn deimhnithe
+# Dul chun cinn an deimhniúcháin
 
 ---
 

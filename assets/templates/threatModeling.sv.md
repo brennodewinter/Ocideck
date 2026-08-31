@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hotmodelleringssession
+title: Threat modeling-session
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Hotmodelleringssession
+# Threat modeling-session
 ## System · Datum · Handledare · Deltagare
 
 ---

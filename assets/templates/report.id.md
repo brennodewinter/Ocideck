@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laporkan
+title: Laporan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Laporkan
+# Laporan
 
 ---
 

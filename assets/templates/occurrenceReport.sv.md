@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Händelserapport (bara kultur)
+title: Händelserapport (just culture)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Händelserapport (bara kultur)
+# Händelserapport (just culture)
 ## Händelse · Datum och tid · Reporter · Inblandad
 
 ---

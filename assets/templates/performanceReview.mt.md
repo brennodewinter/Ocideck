@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reviżjoni tal-prestazzjoni
+title: Laqgħa ta' evalwazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Reviżjoni tal-prestazzjoni
+# Laqgħa ta' evalwazzjoni
 ## Min · Perjodu · Data
 
 ---

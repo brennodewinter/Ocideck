@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy / mentor terv
+title: Buddy-/mentorterv
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Buddy / mentor terv
+# Buddy-/mentorterv
 ## Újonc · Barát vagy mentor · Kezdés dátuma
 
 ---

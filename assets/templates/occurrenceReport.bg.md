@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доклад за събитие (само култура)
+title: Съобщение за събитие (just culture)
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доклад за събитие (само култура)
+# Съобщение за събитие (just culture)
 ## Събитие · Дата и час · Репортер · Замесен
 
 ---

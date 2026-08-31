@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Portare a termine qualcosa durante una riunione
+title: Ottenere qualcosa in una riunione
 language: it
 ---
 
 <!-- _class: title -->
 
-# Portare a termine qualcosa durante una riunione
+# Ottenere qualcosa in una riunione
 ## Riunione · Decisione richiesta · Data
 
 ---

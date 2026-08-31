@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Luba töötamiseks
+title: Tööluba (permit to work)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Luba töötamiseks
+# Tööluba (permit to work)
 ## Töö · Asukoht · Kehtib alates–kuni · Loa andja
 
 ---

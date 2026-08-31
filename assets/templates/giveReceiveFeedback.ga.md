@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ag tabhairt nó ag fáil cáineadh
+title: Cáineadh a thabhairt nó a fháil
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ag tabhairt nó ag fáil cáineadh
+# Cáineadh a thabhairt nó a fháil
 ## Cé · Topaic · Dáta
 
 ---

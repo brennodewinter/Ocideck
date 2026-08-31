@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ynteraktive kwis
+title: Ynteraktive quiz
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ynteraktive kwis
+# Ynteraktive quiz
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preżentazzjoni ta' apprendistat
+title: Preżentazzjoni tal-internship
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Preżentazzjoni ta' apprendistat
+# Preżentazzjoni tal-internship
 ## Kumpanija · Programm · Perjodu · Isem
 
 ---

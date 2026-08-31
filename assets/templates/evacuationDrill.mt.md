@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakwazzjoni u drill tal-ewwel rispons
+title: Eżerċizzju ta' evakwazzjoni u BHV
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Evakwazzjoni u drill tal-ewwel rispons
+# Eżerċizzju ta' evakwazzjoni u BHV
 ## Sit · Data · Mexxej tat-tħaffir · Xenarju
 
 ---

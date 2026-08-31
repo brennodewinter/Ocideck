@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Говорене чрез конфликт
+title: Изясняване на конфликт
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Говорене чрез конфликт
+# Изясняване на конфликт
 ## Кой · За какво · Дата
 
 ---

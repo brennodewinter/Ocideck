@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorbesprechung zur Kommunikation
+title: Vorbesprechung Kommunikation
 language: de
 ---
 
 <!-- _class: title -->
 
-# Vorbesprechung zur Kommunikation
+# Vorbesprechung Kommunikation
 
 ---
 

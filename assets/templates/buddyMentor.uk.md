@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: План друга/наставника
+title: План бадді / наставника
 language: uk
 ---
 
 <!-- _class: title -->
 
-# План друга/наставника
+# План бадді / наставника
 ## Новачок · Друг або наставник · Дата початку
 
 ---

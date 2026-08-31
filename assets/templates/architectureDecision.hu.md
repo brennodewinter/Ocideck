@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Építészeti döntés / ADR bemutató
+title: Architektúradöntés / ADR-prezentáció
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Építészeti döntés / ADR bemutató
+# Architektúradöntés / ADR-prezentáció
 
 ---
 

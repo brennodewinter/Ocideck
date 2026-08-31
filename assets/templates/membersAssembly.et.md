@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Üldkoosolek (AGM)
+title: Üldkoosolek
 language: et
 ---
 
 <!-- _class: title -->
 
-# Üldkoosolek (AGM)
+# Üldkoosolek
 ## Organisatsioon · Kuupäev · Juhataja · Kohalolevad liikmed
 
 ---

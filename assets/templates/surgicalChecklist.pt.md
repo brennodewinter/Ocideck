@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lista de verificação de segurança cirúrgica (OMS)
+title: Lista de verificação de segurança cirúrgica (WHO)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Lista de verificação de segurança cirúrgica (OMS)
+# Lista de verificação de segurança cirúrgica (WHO)
 ## Procedimento · Paciente · OU · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eszköztár beszélgetés / last-minute kockázatelemzés
+title: Toolbox / LMRA biztonsági ellenőrzés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Eszköztár beszélgetés / last-minute kockázatelemzés
+# Toolbox / LMRA biztonsági ellenőrzés
 ## Munka · Hely · Dátum · Legénység
 
 ---

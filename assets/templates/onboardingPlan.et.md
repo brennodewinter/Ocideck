@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sissetulekuplaan (30–60–90 päeva)
+title: Sisseelamiskava (30-60-90 päeva)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Sissetulekuplaan (30–60–90 päeva)
+# Sisseelamiskava (30-60-90 päeva)
 ## Uus töötaja · Roll · Juhend · Alguskuupäev
 
 ---

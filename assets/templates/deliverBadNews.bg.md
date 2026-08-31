@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доставяне на лоши новини
+title: Съобщаване на лоши новини
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доставяне на лоши новини
+# Съобщаване на лоши новини
 ## На кого · Новините · Дата
 
 ---

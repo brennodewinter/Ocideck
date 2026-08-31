@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analiza tveganja / register tveganj
+title: Analiza tveganj / register tveganj
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Analiza tveganja / register tveganj
+# Analiza tveganj / register tveganj
 
 ---
 

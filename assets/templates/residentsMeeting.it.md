@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Serata dei residenti/incontro di partecipazione
+title: Serata per i residenti / incontro di partecipazione
 language: it
 ---
 
 <!-- _class: title -->
 
-# Serata dei residenti/incontro di partecipazione
+# Serata per i residenti / incontro di partecipazione
 ## Quartiere · Argomento · Data · Facilitatore
 
 ---

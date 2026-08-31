@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST παράδοση τραυματία
+title: (A)MIST παράδοση τραύματος
 language: el
 ---
 
 <!-- _class: title -->
 
-# (A)MIST παράδοση τραυματία
+# (A)MIST παράδοση τραύματος
 ## Προνοσοκομειακή → ED · Αποστολή · Ημερομηνία και ώρα
 
 ---

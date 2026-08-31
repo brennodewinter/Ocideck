@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ápoló műszak átadása
+title: Ápolói műszakátadás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Ápoló műszak átadása
+# Ápolói műszakátadás
 ## Egyházközség · Műszak · Kitől kinek · Dátum
 
 ---

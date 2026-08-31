@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Schlechte Nachrichten überbringen
+title: Schlächti Nachrichte überbringe
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Schlechte Nachrichten überbringen
+# Schlächti Nachrichte überbringe
 ## An wen · Die Nachrichten · Datum
 
 ---

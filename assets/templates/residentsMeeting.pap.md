@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunion di anochi / partisipashon di residentenan
+title: Anochi di habitantenan / enkuentro di partisipashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Reunion di anochi / partisipashon di residentenan
+# Anochi di habitantenan / enkuentro di partisipashon
 ## Bario · Tópiko · Fecha · Fasilitadó
 
 ---

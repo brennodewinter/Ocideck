@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hídátjáró tájékoztató
+title: Tengeri áthaladási / hídeligazítás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Hídátjáró tájékoztató
+# Tengeri áthaladási / hídeligazítás
 ## Utazás · Szállítás · Dátum · Megtekintési ütemezés
 
 ---

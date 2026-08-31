@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa załogi/odlotu
+title: Briefing załogi / przed startem
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa załogi/odlotu
+# Briefing załogi / przed startem
 ## Lot · Załoga · Data · Godzina odlotu
 
 ---

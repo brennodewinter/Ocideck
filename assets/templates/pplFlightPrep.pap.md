@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preparashon di buelo di PPL
+title: Preparashon di buelo PPL
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Preparashon di buelo di PPL
+# Preparashon di buelo PPL
 ## Fecha · Seña di yamada · Ruta · PIC
 
 ---

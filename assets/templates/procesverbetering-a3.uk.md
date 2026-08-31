@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: «Удосконалення процесу: проект А3»
+title: "Удосконалення процесу: проект А3"
 language: uk
 ocideck_improvement_framework: a3
 ---

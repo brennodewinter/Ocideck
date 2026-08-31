@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ferkeap petear
+title: Ferkeappetear
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Ferkeap petear
+# Ferkeappetear
 ## Perspektyf · Kontaktpersoan · Oanbod · Datum
 
 ---

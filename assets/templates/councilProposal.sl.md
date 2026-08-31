@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Svet / izvršni predlog
+title: Predlog za svet / izvršni organ
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Svet / izvršni predlog
+# Predlog za svet / izvršni organ
 ## Zadeva · Portfolio · Registrska številka · Avtor
 
 ---

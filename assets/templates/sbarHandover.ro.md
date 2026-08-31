@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Predarea SBAR
+title: Predare SBAR
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Predarea SBAR
+# Predare SBAR
 ## Pacient · Secție · De la cine la cine · Data și ora
 
 ---

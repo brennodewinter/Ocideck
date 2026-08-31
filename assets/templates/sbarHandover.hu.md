@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR átadás
+title: SBAR-átadás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# SBAR átadás
+# SBAR-átadás
 ## Beteg · Osztály · Kitől kinek · Dátum és idő
 
 ---

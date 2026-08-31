@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sur le passage du pont
+title: Briefing de passage / passerelle maritime
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Briefing sur le passage du pont
+# Briefing de passage / passerelle maritime
 ## Voyage · Navire · Date · Horaires de veille
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuaasje en earste-antwurd drill
+title: Ûntromings- en BHV-oefening
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Evakuaasje en earste-antwurd drill
+# Ûntromings- en BHV-oefening
 ## Site · Datum · Drill lieder · Senario
 
 ---

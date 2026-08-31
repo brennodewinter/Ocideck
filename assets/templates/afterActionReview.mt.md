@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / reviżjoni ta' wara l-azzjoni
+title: Debriefing / analiżi wara l-azzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Debriefing / reviżjoni ta' wara l-azzjoni
+# Debriefing / analiżi wara l-azzjoni
 ## Operazzjoni · Data u ħin · Facilitator · Parteċipanti
 
 ---

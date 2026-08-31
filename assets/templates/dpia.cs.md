@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / posouzení dopadu na soukromí
+title: DPIA / posouzení vlivu na soukromí
 language: cs
 ---
 
 <!-- _class: title -->
 
-# DPIA / posouzení dopadu na soukromí
+# DPIA / posouzení vlivu na soukromí
 
 ---
 

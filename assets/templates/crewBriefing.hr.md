@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brifing za posadu/odlazak
+title: Brifing posade / prije polaska
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Brifing za posadu/odlazak
+# Brifing posade / prije polaska
 ## Let · Posada · Datum · Vrijeme polaska
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST traumos perdavimas
+title: (A)MIST traumos perdavimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# (A) MIST traumos perdavimas
+# (A)MIST traumos perdavimas
 ## Ligoninė → ED · Išsiuntimas · Data ir laikas
 
 ---

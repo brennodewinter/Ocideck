@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Charla de seguridad / análisis de riesgo de último minuto
+title: Toolbox / control de seguridad LMRA
 language: es
 ---
 
 <!-- _class: title -->
 
-# Charla de seguridad / análisis de riesgo de último minuto
+# Toolbox / control de seguridad LMRA
 ## Trabajo · Ubicación · Fecha · Equipo
 
 ---

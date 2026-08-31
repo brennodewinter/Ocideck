@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negocierea salariului
+title: Negociere salarială
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Negocierea salariului
+# Negociere salarială
 ## Cine · Rol · Data
 
 ---

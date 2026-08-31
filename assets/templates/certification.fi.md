@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sertifioinnin edistyminen
+title: Sertifioinnin eteneminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Sertifioinnin edistyminen
+# Sertifioinnin eteneminen
 
 ---
 

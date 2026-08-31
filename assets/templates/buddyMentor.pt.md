@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plano de amigo/mentor
+title: Plano de buddy / mentor
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Plano de amigo/mentor
+# Plano de buddy / mentor
 ## Recém-chegado · Amigo ou mentor · Data de início
 
 ---

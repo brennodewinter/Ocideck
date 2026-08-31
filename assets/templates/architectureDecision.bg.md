@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Архитектурно решение / презентация на ADR
+title: Архитектурно решение / ADR презентация
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Архитектурно решение / презентация на ADR
+# Архитектурно решение / ADR презентация
 
 ---
 

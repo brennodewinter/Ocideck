@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plean cara / meantóra
+title: Plean buddy / meantóra
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Plean cara / meantóra
+# Plean buddy / meantóra
 ## Núíosach · Cairde nó meantóir · Dáta tosaithe
 
 ---

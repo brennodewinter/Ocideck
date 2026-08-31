@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Γενική συνέλευση (AGM)
+title: Γενική συνέλευση μελών
 language: el
 ---
 
 <!-- _class: title -->
 
-# Γενική συνέλευση (AGM)
+# Γενική συνέλευση μελών
 ## Οργανισμός · Ημερομηνία · Πρόεδρος · Παρόντα μέλη
 
 ---

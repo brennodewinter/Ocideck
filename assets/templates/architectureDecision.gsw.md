@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Architekturentscheidung / ADR-Präsentation
+title: Architekturentscheid / ADR-Präsentation
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Architekturentscheidung / ADR-Präsentation
+# Architekturentscheid / ADR-Präsentation
 
 ---
 

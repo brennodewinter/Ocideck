@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Predare/tranziție
+title: Predare / handover
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Predare/tranziție
+# Predare / handover
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tėvelių vakaras / informacinis vakaras
+title: Tėvų susirinkimas / informacinis vakaras
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Tėvelių vakaras / informacinis vakaras
+# Tėvų susirinkimas / informacinis vakaras
 ## Klasė ar grupė · Mokslo metai · Vieta
 
 ---

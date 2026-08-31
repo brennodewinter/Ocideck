@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Escalade GRIP
+title: Montée en puissance GRIP
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Escalade GRIP
+# Montée en puissance GRIP
 ## Incident · Date et heure · Leader · Niveau GRIP actuel
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Обсъждане на обтегнати отношения
+title: Разговор за обтегната връзка
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Обсъждане на обтегнати отношения
+# Разговор за обтегната връзка
 ## С кого · За какво · Кога
 
 ---

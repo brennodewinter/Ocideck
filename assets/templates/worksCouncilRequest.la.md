@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Consilio opus consilium petentibus
+title: Petitio consilii ad concilium operariorum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Consilio opus consilium petentibus
+# Petitio consilii ad concilium operariorum
 ## Subject · Director · Works consilium · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Talitluspidevuse / DR test
+title: Talitluspidevus / DR-test
 language: et
 ---
 
 <!-- _class: title -->
 
-# Talitluspidevuse / DR test
+# Talitluspidevus / DR-test
 
 ---
 

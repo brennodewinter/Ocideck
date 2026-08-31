@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Irányítóbizottság / projektbizottság frissítése
+title: Irányítóbizottság / project board beszámoló
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Irányítóbizottság / projektbizottság frissítése
+# Irányítóbizottság / project board beszámoló
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brifing o događajima i sigurnosti u gužvi
+title: Brifing o događaju i sigurnosti mnoštva
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Brifing o događajima i sigurnosti u gužvi
+# Brifing o događaju i sigurnosti mnoštva
 ## Događaj · Mjesto · Datum · Koordinator
 
 ---

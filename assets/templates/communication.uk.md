@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Комунікаційний попередній бриф
+title: Підготовча нарада з комунікації
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Комунікаційний попередній бриф
+# Підготовча нарада з комунікації
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Présentation budgétaire
+title: Présentation du budget
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Présentation budgétaire
+# Présentation du budget
 ## Organisation · Année budgétaire · Présentateur
 
 ---

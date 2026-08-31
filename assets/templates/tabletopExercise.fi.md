@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pöytäharjoitus / kriisiharjoitus
+title: Tabletop-harjoitus / kriisiharjoitus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Pöytäharjoitus / kriisiharjoitus
+# Tabletop-harjoitus / kriisiharjoitus
 
 ---
 

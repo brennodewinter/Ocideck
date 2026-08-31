@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Traspaso SBAR
+title: Transferencia SBAR
 language: es
 ---
 
 <!-- _class: title -->
 
-# Traspaso SBAR
+# Transferencia SBAR
 ## Paciente · Planta · De quién a quién · Fecha y hora
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Πρώτη μέρα / ένταξη
+title: Πρώτη μέρα / υποδοχή
 language: el
 ---
 
 <!-- _class: title -->
 
-# Πρώτη μέρα / ένταξη
+# Πρώτη μέρα / υποδοχή
 ## Νέος υπάλληλος · Ρόλος · Οδηγός · Ημερομηνία
 
 ---

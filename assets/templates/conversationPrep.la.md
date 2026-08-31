@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Para colloquium
+title: Colloquium praeparare
 language: la
 ---
 
 <!-- _class: title -->
 
-# Para colloquium
+# Colloquium praeparare
 ## Quis · Topic · Date
 
 ---

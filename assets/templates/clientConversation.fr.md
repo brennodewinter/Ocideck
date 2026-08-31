@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversation avec les clients
+title: Entretien client
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Conversation avec les clients
+# Entretien client
 ## Client · Personne de contact · Objectif · Date
 
 ---

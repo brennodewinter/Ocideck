@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Üzemi tanácsi tanácskérés
+title: Véleménykérés az üzemi tanácstól
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Üzemi tanácsi tanácskérés
+# Véleménykérés az üzemi tanácstól
 ## Tárgy · Igazgató · Üzemi tanács · Dátum
 
 ---

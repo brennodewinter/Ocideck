@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Protsessi täiustamine: DMAIC projekt"
+title: "Protsesside parendamine: DMAIC projekt"
 language: et
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Protsessi täiustamine: DMAIC projekt
+# Protsesside parendamine: DMAIC projekt
 
 ---
 

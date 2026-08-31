@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Planul de implementare/implementare a politicii
+title: Lansarea unei politici / plan de implementare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Planul de implementare/implementare a politicii
+# Lansarea unei politici / plan de implementare
 
 ---
 

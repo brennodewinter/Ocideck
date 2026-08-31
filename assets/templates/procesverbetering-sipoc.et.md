@@ -9,7 +9,7 @@ language: et
 
 <!-- _class: title -->
 
-# SIPOC protsessi ülevaade
+# SIPOC-protsessi ülevaade
 ## Tarnija · Sisend · Protsess · Väljund · Klient
 
 ---

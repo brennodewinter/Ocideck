@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Представяне на бюджета
+title: Представяне на бюджет
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Представяне на бюджета
+# Представяне на бюджет
 ## Организация · Бюджетна година · Водещ
 
 ---

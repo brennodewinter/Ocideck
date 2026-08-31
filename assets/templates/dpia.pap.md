@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / evaluashon di impakto riba privasidat
+title: DPIA / privacy impact assessment
 language: pap
 ---
 
 <!-- _class: title -->
 
-# DPIA / evaluashon di impakto riba privasidat
+# DPIA / privacy impact assessment
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Préparation du vol PPL
+title: Préparation de vol PPL
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Préparation du vol PPL
+# Préparation de vol PPL
 ## Date · Indicatif · Itinéraire · PIC
 
 ---

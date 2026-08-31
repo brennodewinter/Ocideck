@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prepará un kombersashon
+title: Prepará un konversashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Prepará un kombersashon
+# Prepará un konversashon
 ## Ken · Tópiko · Fecha
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narrattiva tar-riċerka
+title: Storja ta' riċerka
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Narrattiva tar-riċerka
+# Storja ta' riċerka
 
 ---
 

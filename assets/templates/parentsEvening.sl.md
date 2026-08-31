@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Starševski večer / informativni večer
+title: Roditeljski sestanek / informativni večer
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Starševski večer / informativni večer
+# Roditeljski sestanek / informativni večer
 ## Razred ali skupina · Šolsko leto · Lokacija
 
 ---

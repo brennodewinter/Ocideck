@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sull'applicazione (BOA)
+title: Briefing di vigilanza (BOA)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing sull'applicazione (BOA)
+# Briefing di vigilanza (BOA)
 ## Data · Turno · Area/distretto di lavoro · Coordinatore
 
 ---

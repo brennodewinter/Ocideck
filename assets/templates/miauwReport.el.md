@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Έκθεση pentest MIAUW
+title: Αναφορά pentest MIAUW
 language: el
 ---
 
 <!-- _class: title -->
 
-# Έκθεση pentest MIAUW
+# Αναφορά pentest MIAUW
 
 ---
 

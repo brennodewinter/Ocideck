@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ocena dobavitelja/tveganje prodajalca
+title: Ocena dobavitelja / vendor risk
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Ocena dobavitelja/tveganje prodajalca
+# Ocena dobavitelja / vendor risk
 
 ---
 

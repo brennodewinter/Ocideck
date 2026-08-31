@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Anailís riosca / clár riosca
+title: Anailís riosca / clár rioscaí
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Anailís riosca / clár riosca
+# Anailís riosca / clár rioscaí
 
 ---
 

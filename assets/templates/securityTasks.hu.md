@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Információbiztonsági feladatterv
+title: Biztonsági feladatterv
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Információbiztonsági feladatterv
+# Biztonsági feladatterv
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prezentace stáže
+title: Prezentace ze stáže
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Prezentace stáže
+# Prezentace ze stáže
 ## Společnost · Program · Období · Název
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Esimene päev / induktsioon
+title: Esimene päev / sissejuhatus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Esimene päev / induktsioon
+# Esimene päev / sissejuhatus
 ## Uus töötaja · Roll · Juhend · Kuupäev
 
 ---

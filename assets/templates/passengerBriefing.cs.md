@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž cestujících (všeobecné letectví)
+title: Briefing cestujících (všeobecné letectví)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž cestujících (všeobecné letectví)
+# Briefing cestujících (všeobecné letectví)
 ## Letadlo · Let · Velící pilot
 
 ---

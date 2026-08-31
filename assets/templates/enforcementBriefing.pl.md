@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odprawa dotycząca egzekwowania prawa (BOA)
+title: Odprawa egzekwowania przepisów (BOA)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Odprawa dotycząca egzekwowania prawa (BOA)
+# Odprawa egzekwowania przepisów (BOA)
 ## Data · Zmiana · Obszar pracy/okręg · Koordynator
 
 ---

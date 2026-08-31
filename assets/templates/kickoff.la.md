@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Project satus / calcitrant-off
+title: Initium proiecti / kick-off
 language: la
 ---
 
 <!-- _class: title -->
 
-# Project satus / calcitrant-off
+# Initium proiecti / kick-off
 
 ---
 

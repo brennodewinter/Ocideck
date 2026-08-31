@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tulemuslikkuse ülevaade
+title: Arenguvestlus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tulemuslikkuse ülevaade
+# Arenguvestlus
 ## Kes · Periood · Kuupäev
 
 ---

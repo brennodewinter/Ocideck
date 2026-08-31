@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Förhandsrapport för kommunikation
+title: Förmöte om kommunikation
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Förhandsrapport för kommunikation
+# Förmöte om kommunikation
 
 ---
 

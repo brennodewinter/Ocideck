@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passaggio del turno infermieristico
+title: Passaggio di consegne infermieristico
 language: it
 ---
 
 <!-- _class: title -->
 
-# Passaggio del turno infermieristico
+# Passaggio di consegne infermieristico
 ## Reparto · Turno · Da chi a chi · Data
 
 ---

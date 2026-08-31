@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Palokunnan tiedotus (vastaus ja harjoitus)
+title: Palokuntabriefing (tehtävä ja harjoitus)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Palokunnan tiedotus (vastaus ja harjoitus)
+# Palokuntabriefing (tehtävä ja harjoitus)
 ## Kohde · Päivämäärä ja aika · Tapahtuman komentaja tai harjoituksen johtaja · Miehistö
 
 ---

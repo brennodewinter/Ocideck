@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW pentest fama
+title: Relatio pentesti MIAUW
 language: la
 ---
 
 <!-- _class: title -->
 
-# MIAUW pentest fama
+# Relatio pentesti MIAUW
 
 ---
 

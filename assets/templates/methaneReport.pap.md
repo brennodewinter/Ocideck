@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapòrt di insidentenan grandi di METAN
+title: METHANE notifikashon di insidente mayor
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Rapòrt di insidentenan grandi di METAN
+# METHANE notifikashon di insidente mayor
 ## Insidente · Lugá · Fecha i ora · Reportero
 
 ---

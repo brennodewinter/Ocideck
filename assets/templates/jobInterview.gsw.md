@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorstellungsgespräch
+title: Vorstelligsgspröch
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Vorstellungsgespräch
+# Vorstelligsgspröch
 ## Rolle · Arbeitgeber · Datum · Interviewer
 
 ---

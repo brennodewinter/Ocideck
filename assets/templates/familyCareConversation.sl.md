@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Družinski pogovor o negi in negi
+title: Družinski pogovor o negi in oskrbi
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Družinski pogovor o negi in negi
+# Družinski pogovor o negi in oskrbi
 ## Tema · Datum · Moderator · Udeleženci
 
 ---

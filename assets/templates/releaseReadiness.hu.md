@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / felszabadítási készenlét
+title: CAB / release readiness
 language: hu
 ---
 
 <!-- _class: title -->
 
-# CAB / felszabadítási készenlét
+# CAB / release readiness
 
 ---
 

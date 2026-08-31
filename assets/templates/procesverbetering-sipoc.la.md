@@ -9,7 +9,7 @@ language: la
 
 <!-- _class: title -->
 
-# SIPOC processus overview
+# Conspectus processus SIPOC
 ## Supplementum · Input · Processus · Output · Customer
 
 ---

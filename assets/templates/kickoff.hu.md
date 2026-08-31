@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekt indítása / kick-off
+title: Projektindítás / kick-off
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Projekt indítása / kick-off
+# Projektindítás / kick-off
 
 ---
 

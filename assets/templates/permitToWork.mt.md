@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permess għax-xogħol
+title: Permess tax-xogħol (permit to work)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Permess għax-xogħol
+# Permess tax-xogħol (permit to work)
 ## Xogħol · Post · Valid minn–sal · Emittent tal-permess
 
 ---

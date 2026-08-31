@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing dei vigili del fuoco (risposta ed esercitazione)
+title: Briefing dei vigili del fuoco (intervento ed esercitazione)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing dei vigili del fuoco (risposta ed esercitazione)
+# Briefing dei vigili del fuoco (intervento ed esercitazione)
 ## Oggetto · Data e ora · Comandante dell'incidente o leader dell'esercitazione · Equipaggio
 
 ---

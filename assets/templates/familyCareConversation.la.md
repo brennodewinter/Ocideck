@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Colloquium familiare de cura et curatione
+title: Colloquium familiare de cura et curatione propinquorum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Colloquium familiare de cura et curatione
+# Colloquium familiare de cura et curatione propinquorum
 ## Argumentum · Dies · Moderator · Praesentes
 
 ---

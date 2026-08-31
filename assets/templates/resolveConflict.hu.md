@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beszélgetés a konfliktuson keresztül
+title: Konfliktus megbeszélése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Beszélgetés a konfliktuson keresztül
+# Konfliktus megbeszélése
 ## Ki · Miről · Dátum
 
 ---

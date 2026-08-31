@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Update fan stjoergroep / projektried
+title: Stjoergroep / project board update
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Update fan stjoergroep / projektried
+# Stjoergroep / project board update
 
 ---
 

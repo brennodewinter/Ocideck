@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relatório de ocorrência (apenas cultura)
+title: Comunicação de ocorrência (just culture)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Relatório de ocorrência (apenas cultura)
+# Comunicação de ocorrência (just culture)
 ## Ocorrência · Data e hora · Repórter · Envolvido
 
 ---

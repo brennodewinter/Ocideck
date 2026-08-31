@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revizijske ugotovitve in nadaljnje ukrepanje
+title: Revizijske ugotovitve in nadaljnji ukrepi
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Revizijske ugotovitve in nadaljnje ukrepanje
+# Revizijske ugotovitve in nadaljnji ukrepi
 
 ---
 

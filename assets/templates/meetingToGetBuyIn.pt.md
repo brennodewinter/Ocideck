@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fazer algo em uma reunião
+title: Conseguir algo numa reunião
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Fazer algo em uma reunião
+# Conseguir algo numa reunião
 ## Reunião · Decisão solicitada · Data
 
 ---

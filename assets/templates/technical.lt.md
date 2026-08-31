@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Techninis paaiškinėjas
+title: Techninis paaiškinimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Techninis paaiškinėjas
+# Techninis paaiškinimas
 
 ---
 

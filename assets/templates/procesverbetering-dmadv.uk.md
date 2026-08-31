@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: «Покращення процесу: проект DMADV»
+title: "Удосконалення процесу: проект DMADV"
 language: uk
 ocideck_improvement_framework: dmadv
 ---

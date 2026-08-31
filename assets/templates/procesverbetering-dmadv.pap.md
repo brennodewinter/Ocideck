@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Mehoracion di proceso: proyecto DMADV"
+title: "Mehorashon di proseso: proyekto DMADV"
 language: pap
 ocideck_improvement_framework: dmadv
 ---

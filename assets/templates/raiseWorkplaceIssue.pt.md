@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Levantando um problema no trabalho
+title: Abordar um problema no trabalho
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Levantando um problema no trabalho
+# Abordar um problema no trabalho
 ## Quem · Tópico · Data
 
 ---

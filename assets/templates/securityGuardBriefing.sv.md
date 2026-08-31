@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Säkerhetsgenomgång/skiftstart
+title: Säkerhetsgenomgång / passstart
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Säkerhetsgenomgång/skiftstart
+# Säkerhetsgenomgång / passstart
 ## Datum · Skift · Plats/plats · Skiftledare
 
 ---

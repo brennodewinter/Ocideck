@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Primopredaja smjene za njegu
+title: Sestrinska primopredaja smjene
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Primopredaja smjene za njegu
+# Sestrinska primopredaja smjene
 ## Ward · Smjena · Od koga kome · Datum
 
 ---

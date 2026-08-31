@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zgłaszanie problemu w pracy
+title: Poruszenie problemu w miejscu pracy
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Zgłaszanie problemu w pracy
+# Poruszenie problemu w miejscu pracy
 ## Kto · Temat · Data
 
 ---

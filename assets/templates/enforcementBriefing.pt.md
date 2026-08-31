@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de aplicação (BOA)
+title: Briefing de fiscalização (BOA)
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Briefing de aplicação (BOA)
+# Briefing de fiscalização (BOA)
 ## Data · Turno · Área/distrito de trabalho · Coordenador
 
 ---

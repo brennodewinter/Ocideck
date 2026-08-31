@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint incelemesi / demosu
+title: Sprint incelemesi / demo
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Sprint incelemesi / demosu
+# Sprint incelemesi / demo
 ## Takım · Sprint · Tarih
 
 ---

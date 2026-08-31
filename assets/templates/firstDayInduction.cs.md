@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: První den / indukce
+title: První den / uvedení
 language: cs
 ---
 
 <!-- _class: title -->
 
-# První den / indukce
+# První den / uvedení
 ## Nový zaměstnanec · Role · Průvodce · Datum
 
 ---

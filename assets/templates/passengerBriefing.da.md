@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passager briefing (generel luftfart)
+title: Passagerbriefing (almenflyvning)
 language: da
 ---
 
 <!-- _class: title -->
 
-# Passager briefing (generel luftfart)
+# Passagerbriefing (almenflyvning)
 ## Fly · Flyvning · Pilot i kommando
 
 ---

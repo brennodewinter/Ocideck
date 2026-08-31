@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Palkkaneuvottelut
+title: Palkkaneuvottelu
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Palkkaneuvottelut
+# Palkkaneuvottelu
 ## Kuka · Rooli · Päivämäärä
 
 ---

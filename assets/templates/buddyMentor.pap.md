@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan di amigu / mentor
+title: Plan di buddy / mentor
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Plan di amigu / mentor
+# Plan di buddy / mentor
 ## Nobo · Kompañero òf mentor · Fecha di inisio
 
 ---

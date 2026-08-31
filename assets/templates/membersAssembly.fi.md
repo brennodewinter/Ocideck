@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Yhtiökokous
+title: Yhdistyksen kokous (vuosikokous)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Yhtiökokous
+# Yhdistyksen kokous (vuosikokous)
 ## Organisaatio · Päivämäärä · Puheenjohtaja · Jäsenet läsnä
 
 ---

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Folyamatjavítás: A3 projekt"
+title: "Folyamatfejlesztés: A3 projekt"
 language: hu
 ocideck_improvement_framework: a3
 ---

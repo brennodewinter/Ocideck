@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sárú sonraí / measúnú teagmhais phríobháideachais
+title: Measúnú ar sceitheadh sonraí / teagmhas príobháideachais
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Sárú sonraí / measúnú teagmhais phríobháideachais
+# Measúnú ar sceitheadh sonraí / teagmhas príobháideachais
 
 ---
 

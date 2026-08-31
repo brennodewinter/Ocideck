@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekti algus / avalöök
+title: Projekti algus / kick-off
 language: et
 ---
 
 <!-- _class: title -->
 
-# Projekti algus / avalöök
+# Projekti algus / kick-off
 
 ---
 

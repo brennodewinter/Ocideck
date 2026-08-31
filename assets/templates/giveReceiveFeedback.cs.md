@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dávat nebo přijímat kritiku
+title: Poskytování a přijímání kritiky
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Dávat nebo přijímat kritiku
+# Poskytování a přijímání kritiky
 ## Kdo · Téma · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Кратко брифиране
+title: Кратък брифинг
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Кратко брифиране
+# Кратък брифинг
 
 ---
 

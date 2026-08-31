@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CABINA/prontezza sgancio
+title: CAB / release readiness
 language: it
 ---
 
 <!-- _class: title -->
 
-# CABINA/prontezza sgancio
+# CAB / release readiness
 
 ---
 

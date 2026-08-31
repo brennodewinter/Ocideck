@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Szállítói értékelés / szállítói kockázat
+title: Beszállítói értékelés / vendor risk
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Szállítói értékelés / szállítói kockázat
+# Beszállítói értékelés / vendor risk
 
 ---
 

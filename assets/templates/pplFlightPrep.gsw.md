@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL-Flugvorbereitung
+title: PPL Flugvorbereitig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# PPL-Flugvorbereitung
+# PPL Flugvorbereitig
 ## Datum · Rufzeichen · Route · PIC
 
 ---

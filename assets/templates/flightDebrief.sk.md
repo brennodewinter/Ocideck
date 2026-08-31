@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Letový rozbor
+title: Rozbor po lete
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Letový rozbor
+# Rozbor po lete
 ## Let · Dátum · Posádka
 
 ---

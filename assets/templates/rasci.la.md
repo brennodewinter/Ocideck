@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Notitia salute: Rasci / officia"
+title: "Securitas informationis: RASCI / TVB"
 language: la
 ---
 
 <!-- _class: title -->
 
-# Informationes salus: RASCI / officia
+# Securitas informationis: RASCI / TVB
 
 ---
 

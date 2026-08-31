@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE repülési alkalmassági ellenőrzés
+title: IMSAFE repülésre való alkalmasság ellenőrzése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# IMSAFE repülési alkalmassági ellenőrzés
+# IMSAFE repülésre való alkalmasság ellenőrzése
 ## Pilóta · Repülés · Dátum · Ez az ellenőrzés nem helyettesíti az orvosi megítélést
 
 ---

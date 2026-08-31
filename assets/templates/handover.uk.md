@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Передача справ / перехід
+title: Передавання справ / handover
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Передача / перехід
+# Передавання справ / handover
 
 ---
 

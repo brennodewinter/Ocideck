@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuacijos ir pirmojo reagavimo pratybos
+title: Evakuacijos ir BHV pratybos
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Evakuacijos ir pirmojo reagavimo pratybos
+# Evakuacijos ir BHV pratybos
 ## Svetainė · Data · Mokymosi vadovas · Scenarijus
 
 ---

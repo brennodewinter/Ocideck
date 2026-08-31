@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informazzjoni dwar l-infurzar (BOA)
+title: Briefing tal-infurzar (BOA)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Informazzjoni dwar l-infurzar (BOA)
+# Briefing tal-infurzar (BOA)
 ## Data · Xift · Żona/distrett tax-xogħol · Koordinatur
 
 ---

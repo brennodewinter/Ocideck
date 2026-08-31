@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tuairisc tarlaithe (ach cultúr)
+title: Tuairisc teagmhais (just culture)
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tuairisc tarlaithe (ach cultúr)
+# Tuairisc teagmhais (just culture)
 ## Tarlú · Dáta agus am · Tuairisceoir · Páirteach
 
 ---

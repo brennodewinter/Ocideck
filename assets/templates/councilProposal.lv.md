@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Padomes/izpildvaras priekšlikums
+title: Priekšlikums domei / valdei
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Padomes/izpildvaras priekšlikums
+# Priekšlikums domei / valdei
 ## Tēma · Portfelis · Reģistrācijas numurs · Autors
 
 ---

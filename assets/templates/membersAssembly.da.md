@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Generalforsamling (generalforsamling)
+title: Generalforsamling
 language: da
 ---
 
 <!-- _class: title -->
 
-# Generalforsamling (generalforsamling)
+# Generalforsamling
 ## Organisation · Dato · Formand · Tilstedeværende medlemmer
 
 ---

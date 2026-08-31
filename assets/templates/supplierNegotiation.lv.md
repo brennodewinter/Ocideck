@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sarunas ar piegādātājiem
+title: Pārrunas ar piegādātājiem
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sarunas ar piegādātājiem
+# Pārrunas ar piegādātājiem
 ## Piegādātājs · Līgums · Mērķis · Datums
 
 ---

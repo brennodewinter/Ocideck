@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Розбір польотів
+title: Дебрифінг після польоту
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Розбір польотів
+# Дебрифінг після польоту
 ## Рейс · Дата · Екіпаж
 
 ---

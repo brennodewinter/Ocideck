@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozmowa o zestawie narzędzi / analiza ryzyka w ostatniej chwili
+title: Toolbox / kontrola bezpieczeństwa LMRA
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Rozmowa o zestawie narzędzi / analiza ryzyka w ostatniej chwili
+# Toolbox / kontrola bezpieczeństwa LMRA
 ## Praca · Lokalizacja · Data · Załoga
 
 ---

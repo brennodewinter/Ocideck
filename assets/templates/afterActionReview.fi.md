@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Selvitys / jälkiarviointi
+title: Jälkipuinti / after-action review
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Selvitys / jälkiarviointi
+# Jälkipuinti / after-action review
 ## Toiminta · Päivämäärä ja aika · Ohjaaja · Osallistujat
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Άδεια εργασίας
+title: Άδεια εργασίας (permit to work)
 language: el
 ---
 
 <!-- _class: title -->
 
-# Άδεια εργασίας
+# Άδεια εργασίας (permit to work)
 ## Εργασία · Τοποθεσία · Ισχύει από–έως · Εκδότης άδειας
 
 ---

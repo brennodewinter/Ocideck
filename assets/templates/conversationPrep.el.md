@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Προετοιμασία συνομιλίας
+title: Προετοιμασία συζήτησης
 language: el
 ---
 
 <!-- _class: title -->
 
-# Προετοιμασία συνομιλίας
+# Προετοιμασία συζήτησης
 ## Ποιος · Θέμα · Ημερομηνία
 
 ---

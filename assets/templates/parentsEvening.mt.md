@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Serata tal-ġenituri/serata ta’ informazzjoni
+title: Lejla tal-ġenituri / lejla ta' informazzjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Serata tal-ġenituri/serata ta’ informazzjoni
+# Lejla tal-ġenituri / lejla ta' informazzjoni
 ## Klassi jew grupp · Sena skolastika · Post
 
 ---

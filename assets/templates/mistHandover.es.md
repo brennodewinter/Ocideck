@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Traspaso de trauma (A)MIST
+title: (A)MIST transferencia de trauma
 language: es
 ---
 
 <!-- _class: title -->
 
-# Traspaso de trauma (A)MIST
+# (A)MIST transferencia de trauma
 ## Prehospitalario → Urgencias · Despacho · Fecha y hora
 
 ---

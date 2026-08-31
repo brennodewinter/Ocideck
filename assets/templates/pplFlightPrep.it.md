@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preparazione del volo PPL
+title: Preparazione volo PPL
 language: it
 ---
 
 <!-- _class: title -->
 
-# Preparazione del volo PPL
+# Preparazione volo PPL
 ## Data · Nominativo · Rotta · PIC
 
 ---

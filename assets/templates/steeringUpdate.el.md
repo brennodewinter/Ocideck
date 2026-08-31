@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ενημέρωση επιτροπής κατεύθυνσης / συμβουλίου έργου
+title: Συντονιστική επιτροπή / ενημέρωση project board
 language: el
 ---
 
 <!-- _class: title -->
 
-# Ενημέρωση επιτροπής κατεύθυνσης / συμβουλίου έργου
+# Συντονιστική επιτροπή / ενημέρωση project board
 
 ---
 

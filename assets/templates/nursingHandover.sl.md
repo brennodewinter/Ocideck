@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Primopredaja negovalne izmene
+title: Predaja negovalne izmene
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Primopredaja negovalne izmene
+# Predaja negovalne izmene
 ## Ward · Shift · Od koga komu · Datum
 
 ---

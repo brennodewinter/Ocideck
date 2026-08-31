@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valutazzjoni tal-fornitur/riskju tal-bejjiegħ
+title: Valutazzjoni tal-fornituri / vendor risk
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Valutazzjoni tal-fornitur/riskju tal-bejjiegħ
+# Valutazzjoni tal-fornituri / vendor risk
 
 ---
 

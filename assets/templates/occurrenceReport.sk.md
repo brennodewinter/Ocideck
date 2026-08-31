@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Správa o výskyte (len kultúra)
+title: Hlásenie udalosti (just culture)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Správa o výskyte (len kultúra)
+# Hlásenie udalosti (just culture)
 ## Výskyt · Dátum a čas · Reportér · Zúčastnený
 
 ---

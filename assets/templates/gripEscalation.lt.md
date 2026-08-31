@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP eskalacija
+title: GRIP eskalavimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# GRIP eskalacija
+# GRIP eskalavimas
 ## Incidentas · Data ir laikas · Vadovas · Dabartinis GRIP lygis
 
 ---

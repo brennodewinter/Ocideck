@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Flugbesprechung
+title: Flugnachbesprechung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Flugbesprechung
+# Flugnachbesprechung
 ## Flug · Datum · Besatzung
 
 ---

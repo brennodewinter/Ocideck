@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Liiketapaus / investointiehdotus
+title: Liiketoimintaperustelu / investointiehdotus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Liiketapaus / investointiehdotus
+# Liiketoimintaperustelu / investointiehdotus
 ## Ehdotus · Tekijä · Päätöksentekoelin · Päivämäärä
 
 ---

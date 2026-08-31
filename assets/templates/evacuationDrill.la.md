@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evacuatione & primo-responsio terebro
+title: Exercitatio evacuationis et BHV
 language: la
 ---
 
 <!-- _class: title -->
 
-# Evacuatione & primo-responsio terebro
+# Exercitatio evacuationis et BHV
 ## Site · Date · Drill princeps · varius
 
 ---

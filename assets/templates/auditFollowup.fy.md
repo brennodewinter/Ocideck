@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Audit befinings en follow-up
+title: Auditbefiningen en opfolging
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Audit befinings en follow-up
+# Auditbefiningen en opfolging
 
 ---
 

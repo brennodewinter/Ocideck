@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Jõustamisalane infotund (BOA)
+title: Korrakaitsebriifing (BOA)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Jõustamisalane infotund (BOA)
+# Korrakaitsebriifing (BOA)
 ## Kuupäev · Vahetus · Tööpiirkond/piirkond · Koordinaator
 
 ---

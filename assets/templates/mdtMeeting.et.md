@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Multidistsiplinaarne meeskonna koosolek (MDT)
+title: Multidistsiplinaarne koosolek (MDT)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Multidistsiplinaarne meeskonna koosolek (MDT)
+# Multidistsiplinaarne koosolek (MDT)
 ## Juhtum · Kuupäev · Juhataja · Osalejad
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cur i láthair intéirneacht
+title: Cur i láthair intéirneachta
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Cur i láthair intéirneacht
+# Cur i láthair intéirneachta
 ## Cuideachta · Clár · Tréimhse · Ainm
 
 ---

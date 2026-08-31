@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gyakornoki bemutató
+title: Szakmai gyakorlat bemutatása
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Gyakornoki bemutató
+# Szakmai gyakorlat bemutatása
 ## Vállalat · Program · Időszak · Név
 
 ---

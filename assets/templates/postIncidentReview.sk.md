@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Preskúmanie po incidente / získané ponaučenia
+title: Preskúmanie po incidente / lessons learned
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Preskúmanie po incidente / získané ponaučenia
+# Preskúmanie po incidente / lessons learned
 
 ---
 

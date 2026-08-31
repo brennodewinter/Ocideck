@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lanta un problema na trabou
+title: Trese un problema na trabou dilanti
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Lanta un problema na trabou
+# Trese un problema na trabou dilanti
 ## Ken · Tópiko · Fecha
 
 ---

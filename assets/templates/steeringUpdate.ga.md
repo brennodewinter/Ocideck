@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Coiste stiúrtha / bord tionscadail chun dáta
+title: Nuashonrú don ghrúpa stiúrtha / project board
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Coiste stiúrtha / bord tionscadail chun dáta
+# Nuashonrú don ghrúpa stiúrtha / project board
 
 ---
 

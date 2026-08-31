@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Predarea traumei MIST
+title: (A)MIST predare traumă
 language: ro
 ---
 
 <!-- _class: title -->
 
-# (A) Predarea traumei MIST
+# (A)MIST predare traumă
 ## Prespital → ED · Expediere · Data și ora
 
 ---

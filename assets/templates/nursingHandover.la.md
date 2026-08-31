@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lorem subcinctus orabant
+title: Traditio custodiae curatricum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Lorem subcinctus orabant
+# Traditio custodiae curatricum
 ## Pupillus · Shift · A quo cui · Date
 
 ---

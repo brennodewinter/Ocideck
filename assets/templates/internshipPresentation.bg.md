@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Презентация за стаж
+title: Презентация от стаж
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Презентация за стаж
+# Презентация от стаж
 ## Компания · Програма · Период · Име
 
 ---

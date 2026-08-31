@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR παράδοση βάρδιας
+title: Παράδοση SBAR
 language: el
 ---
 
 <!-- _class: title -->
 
-# SBAR παράδοση βάρδιας
+# Παράδοση SBAR
 ## Ασθενής · Νοσηλευτική μονάδα · Από ποιον σε ποιον · Ημερομηνία και ώρα
 
 ---

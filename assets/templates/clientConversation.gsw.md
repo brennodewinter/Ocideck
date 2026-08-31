@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kundengespräch
+title: Chundegspröch
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Kundengespräch
+# Chundegspröch
 ## Kunde · Ansprechpartner · Ziel · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontrolni popis kirurške sigurnosti (WHO)
+title: Kirurški sigurnosni popis (WHO)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Kontrolni popis kirurške sigurnosti (WHO)
+# Kirurški sigurnosni popis (WHO)
 ## Postupak · Pacijent · ILI · Datum
 
 ---

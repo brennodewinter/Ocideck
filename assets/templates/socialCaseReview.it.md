@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisione del caso nel dominio sociale
+title: Discussione di casi nel settore sociale
 language: it
 ---
 
 <!-- _class: title -->
 
-# Revisione del caso nel dominio sociale
+# Discussione di casi nel settore sociale
 ## Squadra · Data · Presidente
 
 ---

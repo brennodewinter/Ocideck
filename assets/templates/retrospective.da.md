@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektiv / team forbedring
+title: Retrospektiv / teamforbedring
 language: da
 ---
 
 <!-- _class: title -->
 
-# Retrospektiv / team forbedring
+# Retrospektiv / teamforbedring
 
 ---
 

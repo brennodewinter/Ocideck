@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Übergabe der Pflegeschicht
+title: Pfläg-Dienstübergab
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Übergabe der Pflegeschicht
+# Pfläg-Dienstübergab
 ## Gemeinde · Schicht · Von wem an wen · Datum
 
 ---

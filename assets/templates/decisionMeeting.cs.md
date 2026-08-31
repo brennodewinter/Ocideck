@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozhodovací jednání
+title: Rozhodovací porada
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Rozhodovací jednání
+# Rozhodovací porada
 ## Schůze · Datum · Předseda · Účastníci
 
 ---

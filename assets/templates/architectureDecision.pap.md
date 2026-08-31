@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Desishon di arkitektura / presentashon di ADR
+title: Desishon di arkitektura / presentashon ADR
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Desishon di arkitektura / presentashon di ADR
+# Desishon di arkitektura / presentashon ADR
 
 ---
 

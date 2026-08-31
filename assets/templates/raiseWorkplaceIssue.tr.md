@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İşyerinde bir sorunu dile getirmek
+title: İş yerindeki bir sorunu dile getirmek
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İşyerinde bir sorunu dile getirmek
+# İş yerindeki bir sorunu dile getirmek
 ## Kim · Konu · Tarih
 
 ---

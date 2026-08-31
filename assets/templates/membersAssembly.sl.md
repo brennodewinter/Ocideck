@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Skupščina (AGM)
+title: Občni zbor članov
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Skupščina (AGM)
+# Občni zbor članov
 ## Organizacija · Datum · Predsednik · Prisotni člani
 
 ---

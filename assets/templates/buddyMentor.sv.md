@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kompis/mentorplan
+title: Buddy-/mentorplan
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Kompis/mentorplan
+# Buddy-/mentorplan
 ## Nykomling · Kompis eller mentor · Startdatum
 
 ---

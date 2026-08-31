@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Viestinnän ennakkotiedote
+title: Viestinnän ennakkopalaveri
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Viestinnän ennakkotiedote
+# Viestinnän ennakkopalaveri
 
 ---
 

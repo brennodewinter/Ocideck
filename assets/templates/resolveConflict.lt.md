@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kalbėjimas per konfliktą
+title: Konflikto išsiaiškinimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Kalbėjimas per konfliktą
+# Konflikto išsiaiškinimas
 ## Kas · Apie ką · Data
 
 ---

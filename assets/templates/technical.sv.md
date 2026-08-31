@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Teknisk förklarare
+title: Teknisk förklaring
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Teknisk förklarare
+# Teknisk förklaring
 
 ---
 

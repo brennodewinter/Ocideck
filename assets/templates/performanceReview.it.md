@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisione delle prestazioni
+title: Colloquio di valutazione
 language: it
 ---
 
 <!-- _class: title -->
 
-# Revisione delle prestazioni
+# Colloquio di valutazione
 ## Chi · Periodo · Data
 
 ---

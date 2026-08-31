@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kritikas sniegšana vai saņemšana
+title: Kritikas izteikšana vai saņemšana
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Kritikas sniegšana vai saņemšana
+# Kritikas izteikšana vai saņemšana
 ## Kurš · Tēma · Datums
 
 ---

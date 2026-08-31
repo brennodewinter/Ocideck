@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ispitivanje leta
+title: Debriefing leta
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Ispitivanje leta
+# Debriefing leta
 ## Let · Datum · Posada
 
 ---

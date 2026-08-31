@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Palga läbirääkimised
+title: Palgaläbirääkimised
 language: et
 ---
 
 <!-- _class: title -->
 
-# Palga läbirääkimised
+# Palgaläbirääkimised
 ## Kes · Roll · Kuupäev
 
 ---

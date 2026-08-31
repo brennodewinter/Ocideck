@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Decisio architecturae / praesentatio ADR
+title: Decretum architecturae / expositio ADR
 language: la
 ---
 
 <!-- _class: title -->
 
-# Decisio architecturae / praesentatio ADR
+# Decretum architecturae / expositio ADR
 
 ---
 

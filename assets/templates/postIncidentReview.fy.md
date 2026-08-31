@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Post-ynsidint resinsje / lessen leard
+title: Post-incident review / lessons learned
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Post-ynsidint resinsje / lessen leard
+# Post-incident review / lessons learned
 
 ---
 

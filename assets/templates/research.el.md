@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αφήγηση έρευνας
+title: Ερευνητική αφήγηση
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αφήγηση έρευνας
+# Ερευνητική αφήγηση
 
 ---
 

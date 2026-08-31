@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruções sobre a passagem da ponte
+title: Briefing marítimo de passagem / ponte
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Instruções sobre a passagem da ponte
+# Briefing marítimo de passagem / ponte
 ## Viagem · Navio · Data · Horário de exibição
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Päätöksentekokokous
+title: Päätöskokous
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Päätöksentekokokous
+# Päätöskokous
 ## Kokous · Päivämäärä · Puheenjohtaja · Osallistujat
 
 ---

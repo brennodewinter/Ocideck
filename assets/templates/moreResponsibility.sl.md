@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zahteva večjo odgovornost
+title: Prošnja za več odgovornosti
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Zahteva večjo odgovornost
+# Prošnja za več odgovornosti
 ## Kdo · Trenutna vloga · Datum
 
 ---

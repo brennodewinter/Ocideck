@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ag caint trí choimhlint
+title: Coinbhleacht a réiteach trí chaint
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ag caint trí choimhlint
+# Coinbhleacht a réiteach trí chaint
 ## Cé · Cad faoi · Dáta
 
 ---

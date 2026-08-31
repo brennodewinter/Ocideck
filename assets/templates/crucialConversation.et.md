@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valmistage ette ülioluline vestlus
+title: Otsustava vestluse ettevalmistamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Valmistage ette ülioluline vestlus
+# Otsustava vestluse ettevalmistamine
 
 ## Kes · Teema · Kuupäev
 

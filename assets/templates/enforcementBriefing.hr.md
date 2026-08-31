@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obavijest o provedbi (BOA)
+title: Brifing za nadzor (BOA)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Obavijest o provedbi (BOA)
+# Brifing za nadzor (BOA)
 ## Datum · Smjena · Radno područje/okrug · Koordinator
 
 ---

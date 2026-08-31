@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Præstationsgennemgang
+title: Medarbejdersamtale
 language: da
 ---
 
 <!-- _class: title -->
 
-# Præstationsgennemgang
+# Medarbejdersamtale
 ## Hvem · Periode · Dato
 
 ---

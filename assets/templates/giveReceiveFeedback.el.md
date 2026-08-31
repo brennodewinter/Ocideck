@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Δίνοντας ή λαμβάνοντας κριτική
+title: Άσκηση ή αποδοχή κριτικής
 language: el
 ---
 
 <!-- _class: title -->
 
-# Δίνοντας ή λαμβάνοντας κριτική
+# Άσκηση ή αποδοχή κριτικής
 ## Ποιος · Θέμα · Ημερομηνία
 
 ---

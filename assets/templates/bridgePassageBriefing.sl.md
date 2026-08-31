@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročanje o prehodu mostu
+title: Pomorski briefing prehoda / mostu
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročanje o prehodu mostu
+# Pomorski briefing prehoda / mostu
 ## Potovanje · Ladja · Datum · Urnik urnika
 
 ---

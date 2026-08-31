@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sesión de modelado de amenazas
+title: Sesión de threat modeling
 language: es
 ---
 
 <!-- _class: title -->
 
-# Sesión de modelado de amenazas
+# Sesión de threat modeling
 ## Sistema · Fecha · Facilitador · Participantes
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kratki briefing
+title: Kratki brifing
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Kratki briefing
+# Kratki brifing
 
 ---
 

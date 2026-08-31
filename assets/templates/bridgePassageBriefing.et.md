@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Silla läbimise instruktaaž
+title: Meresõidu ülesõidu / komandosilla briifing
 language: et
 ---
 
 <!-- _class: title -->
 
-# Silla läbimise instruktaaž
+# Meresõidu ülesõidu / komandosilla briifing
 ## Reis · Laev · Kuupäev · Vaata ajakava
 
 ---

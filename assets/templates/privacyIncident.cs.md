@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Posouzení porušení dat / ochrany soukromí
+title: Posouzení úniku dat / incidentu soukromí
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Posouzení porušení dat / ochrany soukromí
+# Posouzení úniku dat / incidentu soukromí
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tehnični razlagalec
+title: Tehnična razlaga
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Tehnični razlagalec
+# Tehnična razlaga
 
 ---
 

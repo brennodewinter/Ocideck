@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Přináší špatné zprávy
+title: Sdělení špatných zpráv
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Přináší špatné zprávy
+# Sdělení špatných zpráv
 ## Komu · Novinky · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Business Case/Investitionsvorschlag
+title: Businesscase / Investitionsvorschlag
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Business Case/Investitionsvorschlag
+# Businesscase / Investitionsvorschlag
 ## Vorschlag · Autor · Entscheidungsgremium · Datum
 
 ---

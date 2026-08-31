@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pré-brief de comunicações
+title: Reunião prévia de comunicação
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Pré-brief de comunicações
+# Reunião prévia de comunicação
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikācijas iepriekšēja īsziņa
+title: Komunikācijas priekšapspriede
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Komunikācijas iepriekšēja īsziņa
+# Komunikācijas priekšapspriede
 
 ---
 

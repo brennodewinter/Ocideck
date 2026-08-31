@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Saruna caur konfliktu
+title: Konflikta izrunāšana
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Saruna caur konfliktu
+# Konflikta izrunāšana
 ## Kurš · Par ko · Datums
 
 ---

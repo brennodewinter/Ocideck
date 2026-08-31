@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Übergabe / Übergang
+title: Übergabe / Handover
 language: de
 ---
 
 <!-- _class: title -->
 
-# Übergabe / Übergang
+# Übergabe / Handover
 
 ---
 

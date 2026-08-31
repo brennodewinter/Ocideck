@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mürettebat / kalkış brifingi
+title: Ekip / kalkış brifingi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Mürettebat / kalkış brifingi
+# Ekip / kalkış brifingi
 ## Uçuş · Mürettebat · Tarih · Kalkış saati
 
 ---

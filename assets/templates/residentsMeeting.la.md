@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Residentibus vespere / participatio foederis
+title: Vespera incolarum / conventus participationis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Residentibus vespere / participatio foederis
+# Vespera incolarum / conventus participationis
 ## Vicinia · Argumentum · Dies · Moderator
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Progression de la certification
+title: Avancement de la certification
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Progression de la certification
+# Avancement de la certification
 
 ---
 

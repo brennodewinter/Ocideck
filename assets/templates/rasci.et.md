@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Teabeohutus: RASCI / kohustused"
+title: "Infoturve: RASCI / TVB"
 language: et
 ---
 
 <!-- _class: title -->
 
-# Infoohutus: RASCI / kohustused
+# Infoturve: RASCI / TVB
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tuarascáil géarchéime BOB
+title: Tuairisciú géarchéime BOB
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Tuarascáil géarchéime BOB
+# Tuairisciú géarchéime BOB
 
 ---
 

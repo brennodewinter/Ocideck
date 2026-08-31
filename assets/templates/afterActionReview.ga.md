@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Athbhreithniú ar fhaisnéisiú / iarghníomhaíocht
+title: Debriefing / athbhreithniú iarghnímh
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Athbhreithniú ar fhaisnéisiú / iarghníomhaíocht
+# Debriefing / athbhreithniú iarghnímh
 ## Oibríocht · Dáta agus am · Éascaitheoir · Rannpháirtithe
 
 ---

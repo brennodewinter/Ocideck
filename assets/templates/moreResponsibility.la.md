@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Postulantes magis responsibility
+title: Maiorem responsabilitatem petere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Postulantes magis responsibility
+# Maiorem responsabilitatem petere
 ## Quis · Munus Current · Date
 
 ---

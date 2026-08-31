@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskutera ett ansträngt förhållande
+title: Diskutera en ansträngd relation
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Diskutera ett ansträngt förhållande
+# Diskutera en ansträngd relation
 ## Med vem · Om vad · När
 
 ---

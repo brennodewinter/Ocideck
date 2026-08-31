@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapporto sugli incidenti gravi del METANO
+title: METHANE segnalazione di maxi-emergenza
 language: it
 ---
 
 <!-- _class: title -->
 
-# Rapporto sugli incidenti gravi del METANO
+# METHANE segnalazione di maxi-emergenza
 ## Incidente · Luogo · Data e ora · Reporter
 
 ---

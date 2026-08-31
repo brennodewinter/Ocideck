@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tqajjem problema fuq ix-xogħol
+title: Tqajjem problema fuq il-post tax-xogħol
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Tqajjem problema fuq ix-xogħol
+# Tqajjem problema fuq il-post tax-xogħol
 ## Min · Suġġett · Data
 
 ---

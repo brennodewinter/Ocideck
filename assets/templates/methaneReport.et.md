@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE'i suurõnnetuse aruanne
+title: METHANE suurõnnetuse teade
 language: et
 ---
 
 <!-- _class: title -->
 
-# METHANE'i suurõnnetuse aruanne
+# METHANE suurõnnetuse teade
 ## Juhtum · Asukoht · Kuupäev ja kellaaeg · Reporter
 
 ---

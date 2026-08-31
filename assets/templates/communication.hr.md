@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikacijski pre-brif
+title: Pripremni sastanak o komunikaciji
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Komunikacijski pre-brif
+# Pripremni sastanak o komunikaciji
 
 ---
 

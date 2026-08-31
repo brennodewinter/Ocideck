@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Trening/radionica
+title: Trening / radionica
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Trening/radionica
+# Trening / radionica
 
 ---
 

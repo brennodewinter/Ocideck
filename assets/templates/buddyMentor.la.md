@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Buddy / oraculi consilium
+title: Consilium socii / magistri
 language: la
 ---
 
 <!-- _class: title -->
 
-# Buddy / oraculi consilium
+# Consilium socii / magistri
 ## Advena · Buddy vel matrona · Committitur date
 
 ---

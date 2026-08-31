@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доклад за голям инцидент с МЕТАН
+title: METHANE съобщение за голям инцидент
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доклад за голям инцидент с МЕТАН
+# METHANE съобщение за голям инцидент
 ## Инцидент · Място · Дата и час · Репортер
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toplantıda bir şeyler yaptırmak
+title: Bir toplantıda istediğinizi elde etmek
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Toplantıda bir şeyler yaptırmak
+# Bir toplantıda istediğinizi elde etmek
 ## Toplantı · Karar talep edildi · Tarih
 
 ---

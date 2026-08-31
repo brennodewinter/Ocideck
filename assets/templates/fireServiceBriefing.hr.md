@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brifing vatrogasne službe (odgovor i vježba)
+title: Vatrogasni brifing (intervencija i vježba)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Brifing vatrogasne službe (odgovor i vježba)
+# Vatrogasni brifing (intervencija i vježba)
 ## Objekt · Datum i vrijeme · Zapovjednik incidenta ili voditelj vježbe · Posada
 
 ---

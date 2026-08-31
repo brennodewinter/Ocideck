@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Переговори щодо зарплати
+title: Переговори про зарплату
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Переговори щодо зарплати
+# Переговори про зарплату
 ## Хто · Роль · Дата
 
 ---

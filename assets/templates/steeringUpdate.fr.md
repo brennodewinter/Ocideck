@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Le point sur le comité de pilotage / comité de projet
+title: Comité de pilotage / point d'avancement projet
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Le point sur le comité de pilotage / comité de projet
+# Comité de pilotage / point d'avancement projet
 
 ---
 

@@ -59,6 +59,13 @@ void main() {
     test('cijfers en leestekens maken nog geen woord', () {
       expect(carriesWords('| … | … | … |'), isFalse);
     });
+
+    test('de front-matter-sleutel telt niet als woord', () {
+      // Anders haalt een titel van één woord de drempel op `title:` zelf, en
+      // meldt de poort `title: Report` wél en `# Report` niet.
+      expect(carriesWords('title: Report'), isFalse);
+      expect(carriesWords('title: Executive summary'), isTrue);
+    });
   });
 
   group('findUntranslated', () {

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontinuidat di negoshi / tèst di DR
+title: Business continuity / test di DR
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kontinuidat di negoshi / tèst di DR
+# Business continuity / test di DR
 
 ---
 

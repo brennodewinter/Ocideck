@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Viator briefing (generalis aviation)
+title: Instructio vectorum (aviatio generalis)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Viator briefing (generalis aviation)
+# Instructio vectorum (aviatio generalis)
 ## Aircraft · fuga · Gubernator in imperio
 
 ---

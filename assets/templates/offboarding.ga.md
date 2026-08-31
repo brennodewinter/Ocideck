@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding / scoir
+title: Offboarding / imeacht
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Offboarding / scoir
+# Offboarding / imeacht
 ## Fostaí · Ról · An lá oibre deiridh · Bainisteoir
 
 ---

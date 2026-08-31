@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prośba o poradę rady zakładowej
+title: Wniosek o opinię rady pracowników
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Prośba o poradę rady zakładowej
+# Wniosek o opinię rady pracowników
 ## Temat · Dyrektor · Rada zakładowa · Data
 
 ---

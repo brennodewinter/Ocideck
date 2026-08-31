@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pelatihan/lokakarya
+title: Pelatihan / workshop
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pelatihan/lokakarya
+# Pelatihan / workshop
 
 ---
 

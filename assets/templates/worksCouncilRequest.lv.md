@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Darba padomes konsultācijas pieprasījums
+title: Atzinuma pieprasījums darbinieku padomei
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Darba padomes konsultācijas pieprasījums
+# Atzinuma pieprasījums darbinieku padomei
 ## Priekšmets · Direktors · Darba padome · Datums
 
 ---

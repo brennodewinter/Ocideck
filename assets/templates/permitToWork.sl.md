@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dovoljenje za delo
+title: Delovno dovoljenje (permit to work)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Dovoljenje za delo
+# Delovno dovoljenje (permit to work)
 ## Delo · Lokacija · Veljavnost od–do · Izdajatelj dovoljenja
 
 ---

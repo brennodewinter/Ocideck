@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL-flygförberedelser
+title: PPL-flygförberedelse
 language: sv
 ---
 
 <!-- _class: title -->
 
-# PPL-flygförberedelser
+# PPL-flygförberedelse
 ## Datum · Anropssignal · Rutt · PIC
 
 ---

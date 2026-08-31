@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: escaladarea GRIP
+title: Escaladare GRIP
 language: ro
 ---
 
 <!-- _class: title -->
 
-# escaladarea GRIP
+# Escaladare GRIP
 ## Incident · Data și ora · Lider · Nivelul GRIP curent
 
 ---

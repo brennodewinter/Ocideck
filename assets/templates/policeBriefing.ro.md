@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing operațional de poliție
+title: Briefing operațional al poliției
 language: ro
 ---
 

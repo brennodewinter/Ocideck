@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tarnija hindamine / müüja risk
+title: Tarnija hindamine / vendor risk
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tarnija hindamine / müüja risk
+# Tarnija hindamine / vendor risk
 
 ---
 

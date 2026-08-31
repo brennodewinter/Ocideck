@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Penilaian pelanggaran data/insiden privasi
+title: Kebocoran data / penilaian insiden privasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Penilaian pelanggaran data/insiden privasi
+# Kebocoran data / penilaian insiden privasi
 
 ---
 

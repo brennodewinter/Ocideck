@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Liña di tempu di e proyekto
+title: Liña di tempu di proyekto
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Liña di tempu di e proyekto
+# Liña di tempu di proyekto
 
 ---
 

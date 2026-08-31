@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing sul passaggio del ponte
+title: Briefing di passaggio / ponte marittimo
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing sul passaggio del ponte
+# Briefing di passaggio / ponte marittimo
 ## Viaggio · Nave · Data · Guarda il programma
 
 ---

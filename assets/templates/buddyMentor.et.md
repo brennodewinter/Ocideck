@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sõbra / mentori plaan
+title: Buddy / mentori kava
 language: et
 ---
 
 <!-- _class: title -->
 
-# Sõbra / mentori plaan
+# Buddy / mentori kava
 ## Uustulnuk · Sõber või mentor · Alguskuupäev
 
 ---

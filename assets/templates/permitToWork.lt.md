@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leidimas dirbti
+title: Leidimas dirbti (permit to work)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Leidimas dirbti
+# Leidimas dirbti (permit to work)
 ## Darbas · Vieta · Galioja nuo–iki · Leidimo išdavėjas
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valutazione della violazione dei dati/incidente sulla privacy
+title: Data breach / valutazione incidente privacy
 language: it
 ---
 
 <!-- _class: title -->
 
-# Valutazione della violazione dei dati/incidente sulla privacy
+# Data breach / valutazione incidente privacy
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Predstavitev pripravništva
+title: Predstavitev prakse
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Predstavitev pripravništva
+# Predstavitev prakse
 ## Podjetje · Program · Obdobje · Ime
 
 ---

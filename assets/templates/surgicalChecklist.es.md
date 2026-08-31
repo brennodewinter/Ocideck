@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Checklist de seguridad quirúrgica (OMS)
+title: Lista de verificación de seguridad quirúrgica (WHO)
 language: es
 ---
 
 <!-- _class: title -->
 
-# Checklist de seguridad quirúrgica (OMS)
+# Lista de verificación de seguridad quirúrgica (WHO)
 ## Procedimiento · Paciente · Quirófano · Fecha
 
 ---

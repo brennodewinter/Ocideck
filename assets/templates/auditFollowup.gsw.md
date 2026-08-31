@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prüfungsfeststellungen und Folgemassnahmen
+title: Audit-Befund und Nachverfolgig
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Prüfungsfeststellungen und Folgemassnahmen
+# Audit-Befund und Nachverfolgig
 
 ---
 

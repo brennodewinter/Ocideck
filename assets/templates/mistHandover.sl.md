@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST predaja travme
+title: (A)MIST predaja poškodbe
 language: sl
 ---
 
 <!-- _class: title -->
 
-# (A)MIST predaja travme
+# (A)MIST predaja poškodbe
 ## Prehospital → ED · Odprema · Datum in ura
 
 ---

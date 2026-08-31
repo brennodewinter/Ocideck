@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Araç kutusu konuşması / son dakika risk analizi
+title: Toolbox / LMRA güvenlik kontrolü
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Araç kutusu konuşması / son dakika risk analizi
+# Toolbox / LMRA güvenlik kontrolü
 ## İş · Yer · Tarih · Ekip
 
 ---

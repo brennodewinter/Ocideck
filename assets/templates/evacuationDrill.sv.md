@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuering och första insatsövning
+title: Utrymnings- och BHV-övning
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Evakuering och första insatsövning
+# Utrymnings- och BHV-övning
 ## Webbplats · Datum · Drillledare · Scenario
 
 ---

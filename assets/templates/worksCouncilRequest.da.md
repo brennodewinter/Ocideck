@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Anmodning om råd fra samarbejdsrådet
+title: Høring af samarbejdsudvalget
 language: da
 ---
 
 <!-- _class: title -->
 
-# Anmodning om råd fra samarbejdsrådet
+# Høring af samarbejdsudvalget
 ## Emne · Direktør · Samarbejdsudvalg · Dato
 
 ---

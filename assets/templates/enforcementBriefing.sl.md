@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Obvestilo o izvrševanju (BOA)
+title: Briefing za inšpekcijski nadzor (BOA)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Obvestilo o izvrševanju (BOA)
+# Briefing za inšpekcijski nadzor (BOA)
 ## Datum · Izmena · Delovno območje/rajon · Koordinator
 
 ---

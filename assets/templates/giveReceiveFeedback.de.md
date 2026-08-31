@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kritik geben oder annehmen
+title: Kritik geben oder erhalten
 language: de
 ---
 
 <!-- _class: title -->
 
-# Kritik geben oder annehmen
+# Kritik geben oder erhalten
 ## Wer · Thema · Datum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Demande d'avis du comité d'entreprise
+title: Demande d'avis au comité d'entreprise
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Demande d'avis du comité d'entreprise
+# Demande d'avis au comité d'entreprise
 ## Objet · Directeur · Comité d'entreprise · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ordo temporum incepti
+title: Linea temporis proiecti
 language: la
 ---
 
 <!-- _class: title -->
 
-# Ordo temporum incepti
+# Linea temporis proiecti
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL repülés előkészítése
+title: PPL repülés-előkészítés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# PPL repülés előkészítése
+# PPL repülés-előkészítés
 ## Dátum · Hívójel · Útvonal · PIC
 
 ---

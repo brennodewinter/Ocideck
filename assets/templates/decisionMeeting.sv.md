@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beslutsfattande möte
+title: Beslutsmöte
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Beslutsfattande möte
+# Beslutsmöte
 ## Möte · Datum · Ordförande · Deltagare
 
 ---

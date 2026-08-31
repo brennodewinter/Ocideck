@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Кризовий звіт BOB
+title: BOB-кризовий звіт
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Кризовий звіт BOB
+# BOB-кризовий звіт
 
 ---
 

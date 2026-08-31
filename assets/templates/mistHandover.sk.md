@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Odovzdanie traumy (A)MIST
+title: (A)MIST odovzdanie traumy
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Odovzdanie traumy (A)MIST
+# (A)MIST odovzdanie traumy
 ## Prednemocnica → ED · Odoslanie · Dátum a čas
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž o průjezdu mostem
+title: Námořní briefing plavby / můstku
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž o průjezdu mostem
+# Námořní briefing plavby / můstku
 ## Plavba · Loď · Datum · Plán sledování
 
 ---

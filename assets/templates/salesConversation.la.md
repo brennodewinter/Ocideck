@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sales colloquium
+title: Colloquium venditionis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Sales colloquium
+# Colloquium venditionis
 ## Prospectus · Persona Contactus · Offer · Date
 
 ---

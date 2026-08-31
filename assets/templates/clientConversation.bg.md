@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Разговор с клиента
+title: Разговор с клиент
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Разговор с клиента
+# Разговор с клиент
 ## Клиент · Лице за контакт · Цел · Дата
 
 ---

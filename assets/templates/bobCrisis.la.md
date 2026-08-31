@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bob discrimine fama
+title: Relatio crisis BOB
 language: la
 ---
 
 <!-- _class: title -->
 
-# Bob discrimine fama
+# Relatio crisis BOB
 
 ---
 

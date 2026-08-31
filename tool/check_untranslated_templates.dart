@@ -166,8 +166,16 @@ Set<String> comparableLines(String markdown) {
 }
 
 /// Whether [line] carries enough words to make identity meaningful.
-bool carriesWords(String line) =>
-    RegExp(r'[A-Za-z]{3,}').allMatches(line).length >= minimumWords;
+///
+/// De `title:`-sleutel telt niet mee. Hij staat er in elke taal, dus zonder deze
+/// aftrek haalt een titel van één woord de drempel op zijn eigen sleutelnaam —
+/// en dan meldt de poort het Italiaanse `title: Report` wel en de kop
+/// `# Report` eronder niet. Dezelfde waarde, twee uitkomsten: dat is geen
+/// drempel maar toeval.
+bool carriesWords(String line) {
+  final value = line.startsWith('title:') ? line.substring(6) : line;
+  return RegExp(r'[A-Za-z]{3,}').allMatches(value).length >= minimumWords;
+}
 
 /// Every template id that has both a base and a source document on disk.
 List<String> templateIds(String root) {

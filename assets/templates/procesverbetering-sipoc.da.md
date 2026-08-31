@@ -9,7 +9,7 @@ language: da
 
 <!-- _class: title -->
 
-# SIPOC proces oversigt
+# SIPOC-procesoversigt
 ## Leverandør · Input · Proces · Output · Kunde
 
 ---

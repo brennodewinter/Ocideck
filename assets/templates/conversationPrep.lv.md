@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sagatavojiet sarunu
+title: Sagatavot sarunu
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sagatavojiet sarunu
+# Sagatavot sarunu
 ## Kurš · Tēma · Datums
 
 ---

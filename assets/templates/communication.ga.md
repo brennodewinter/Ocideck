@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cumarsáid réamhghairid
+title: Réamhphlé cumarsáide
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Cumarsáid réamhghairid
+# Réamhphlé cumarsáide
 
 ---
 

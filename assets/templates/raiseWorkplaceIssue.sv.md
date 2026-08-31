@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Att ta upp ett problem på jobbet
+title: Ta upp ett problem på arbetsplatsen
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Att ta upp ett problem på jobbet
+# Ta upp ett problem på arbetsplatsen
 ## Vem · Ämne · Datum
 
 ---

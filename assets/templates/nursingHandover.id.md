@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Serah terima shift keperawatan
+title: Serah terima jaga keperawatan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Serah terima shift keperawatan
+# Serah terima jaga keperawatan
 ## Lingkungan · Pergeseran · Dari siapa ke siapa · Tanggal
 
 ---

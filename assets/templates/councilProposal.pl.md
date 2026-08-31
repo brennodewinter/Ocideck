@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Wniosek Rady / Wykonawcy
+title: Projekt uchwały rady / zarządu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Wniosek Rady / Wykonawcy
+# Projekt uchwały rady / zarządu
 ## Temat · Teczka · Numer rejestracyjny · Autor
 
 ---

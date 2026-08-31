@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pre-kòrtiku di komunikashon
+title: Preparashon di komunikashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Pre-kòrtiku di komunikashon
+# Preparashon di komunikashon
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Transfert du traumatisme MIST
+title: Transmission trauma (A)MIST
 language: fr
 ---
 
 <!-- _class: title -->
 
-# (A) Transfert du traumatisme MIST
+# Transmission trauma (A)MIST
 ## Préhospitalier → ED · Expédition · Date et heure
 
 ---

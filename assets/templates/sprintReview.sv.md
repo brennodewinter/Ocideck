@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint recension / demo
+title: Sprint review / demo
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Sprint recension / demo
+# Sprint review / demo
 ## Lag · Sprint · Datum
 
 ---

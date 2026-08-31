@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tutkimuskertomus
+title: Tutkimustarina
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tutkimuskertomus
+# Tutkimustarina
 
 ---
 

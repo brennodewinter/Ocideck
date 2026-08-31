@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Načrt uvedbe/izvedbe politike
+title: Uvajanje politike / izvedbeni načrt
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Načrt uvedbe/izvedbe politike
+# Uvajanje politike / izvedbeni načrt
 
 ---
 

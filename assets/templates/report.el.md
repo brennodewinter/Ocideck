@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Έκθεση
+title: Αναφορά
 language: el
 ---
 
 <!-- _class: title -->
 
-# Έκθεση
+# Αναφορά
 
 ---
 

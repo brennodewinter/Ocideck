@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Wieczór rodziców / wieczór informacyjny
+title: Zebranie rodziców / wieczór informacyjny
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Wieczór rodziców / wieczór informacyjny
+# Zebranie rodziców / wieczór informacyjny
 ## Klasa lub grupa · Rok szkolny · Lokalizacja
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Présentation du stage
+title: Présentation de stage
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Présentation du stage
+# Présentation de stage
 ## Entreprise · Programme · Période · Nom
 
 ---

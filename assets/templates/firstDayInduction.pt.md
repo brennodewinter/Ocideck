@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Primeiro dia / indução
+title: Primeiro dia / acolhimento
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Primeiro dia / indução
+# Primeiro dia / acolhimento
 ## Nova contratação · Função · Guia · Data
 
 ---

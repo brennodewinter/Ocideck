@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passenger briefing (algemiene loftfeart)
+title: Passazjiersbriefing (lytse loftfeart)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Passenger briefing (algemiene loftfeart)
+# Passazjiersbriefing (lytse loftfeart)
 ## Fleantúch · Flean · Pilot yn kommando
 
 ---

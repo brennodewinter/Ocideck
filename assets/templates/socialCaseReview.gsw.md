@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Überprüfung des Falles für soziale Domains
+title: Fallbesprächig im Sozialberiich
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Überprüfung des Falles für soziale Domains
+# Fallbesprächig im Sozialberiich
 ## Team · Datum · Vorsitz
 
 ---

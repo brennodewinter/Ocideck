@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relatório de crise do BOB
+title: Relatório de crise BOB
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Relatório de crise do BOB
+# Relatório de crise BOB
 
 ---
 

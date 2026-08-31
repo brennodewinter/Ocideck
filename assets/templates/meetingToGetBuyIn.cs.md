@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Něco udělat na schůzce
+title: Prosazení něčeho na jednání
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Něco udělat na schůzce
+# Prosazení něčeho na jednání
 ## Schůze · Požadované rozhodnutí · Datum
 
 ---

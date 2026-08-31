@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: At få lavet noget på et møde
+title: Få noget igennem på et møde
 language: da
 ---
 
 <!-- _class: title -->
 
-# At få lavet noget på et møde
+# Få noget igennem på et møde
 ## Møde · Beslutning anmodet · Dato
 
 ---

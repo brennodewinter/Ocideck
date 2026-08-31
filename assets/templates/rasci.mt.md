@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Sigurtà tal-informazzjoni: RASCI / responsabbiltajiet"
+title: "Sigurtà tal-informazzjoni: RASCI / TVB"
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Sigurtà tal-informazzjoni: RASCI / responsabbiltajiet
+# Sigurtà tal-informazzjoni: RASCI / TVB
 
 ---
 

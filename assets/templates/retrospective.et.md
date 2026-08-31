@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tagasivaade / meeskonna täiustamine
+title: Retrospektiiv / meeskonna täiustamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tagasivaade / meeskonna täiustamine
+# Retrospektiiv / meeskonna täiustamine
 
 ---
 

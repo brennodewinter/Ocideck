@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Processus emendationem: DMAIC project"
+title: "Emendatio processuum: propositum DMAIC"
 language: la
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Processus emendationem: DMAIC project
+# Emendatio processuum: propositum DMAIC
 
 ---
 

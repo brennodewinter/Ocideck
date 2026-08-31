@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nitkellmu permezz ta' kunflitt
+title: Issolvi kunflitt bid-diskussjoni
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Nitkellmu permezz ta' kunflitt
+# Issolvi kunflitt bid-diskussjoni
 ## Min · Dwar xiex · Data
 
 ---

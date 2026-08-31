@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plano de implantação/implementação de políticas
+title: Implementar uma política / plano de implementação
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Plano de implantação/implementação de políticas
+# Implementar uma política / plano de implementação
 
 ---
 

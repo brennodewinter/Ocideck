@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / post-actio recensionem
+title: Debriefing / recensio post actionem
 language: la
 ---
 
 <!-- _class: title -->
 
-# Debriefing / post-actio recensionem
+# Debriefing / recensio post actionem
 ## Operatio · Date et tempus · Facilitator · participes
 
 ---

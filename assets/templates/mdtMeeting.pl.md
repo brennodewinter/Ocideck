@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Spotkanie zespołu multidyscyplinarnego (MDT)
+title: Spotkanie zespołu wielodyscyplinarnego (MDT)
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Spotkanie zespołu multidyscyplinarnego (MDT)
+# Spotkanie zespołu wielodyscyplinarnego (MDT)
 ## Sprawa · Data · Przewodniczący · Uczestnicy
 
 ---

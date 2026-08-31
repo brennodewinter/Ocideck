@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo o letu
+title: Debriefing leta
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo o letu
+# Debriefing leta
 ## Let · Datum · Posadka
 
 ---

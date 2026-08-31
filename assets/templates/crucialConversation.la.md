@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Parare colloquium
+title: Colloquium cardinale praeparare
 language: la
 ---
 
 <!-- _class: title -->
 
-# Parare colloquium
+# Colloquium cardinale praeparare
 
 ## Quis · Topic · Date
 

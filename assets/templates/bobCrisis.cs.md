@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Zpráva o krizi BOB
+title: Krizová zpráva BOB
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Zpráva o krizi BOB
+# Krizová zpráva BOB
 
 ---
 

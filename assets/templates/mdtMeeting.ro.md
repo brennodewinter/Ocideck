@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reuniunea echipei multidisciplinare (MDT)
+title: Ședință multidisciplinară (MDT)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Reuniunea echipei multidisciplinare (MDT)
+# Ședință multidisciplinară (MDT)
 ## Caz · Data · Președinte · Participanți
 
 ---

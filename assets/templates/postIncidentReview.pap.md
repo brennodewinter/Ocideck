@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revishon despues di insidente / lèsnan siña
+title: Post-incident review / lessons learned
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Revishon despues di insidente / lèsnan siña
+# Post-incident review / lessons learned
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bilan post-incident / leçons apprises
+title: Revue post-incident / retour d'expérience
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Bilan post-incident / leçons apprises
+# Revue post-incident / retour d'expérience
 
 ---
 

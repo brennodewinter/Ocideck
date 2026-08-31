@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Komunikačný predbežný prehľad
+title: Predbežná porada o komunikácii
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Komunikačný predbežný prehľad
+# Predbežná porada o komunikácii
 
 ---
 

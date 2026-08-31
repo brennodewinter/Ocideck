@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ziņojums
+title: Pārskats
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Ziņojums
+# Pārskats
 
 ---
 

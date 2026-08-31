@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / préparation à la publication
+title: CAB / préparation à la mise en production
 language: fr
 ---
 
 <!-- _class: title -->
 
-# CAB / préparation à la publication
+# CAB / préparation à la mise en production
 
 ---
 

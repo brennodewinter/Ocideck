@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Status-briefing
+title: Statusbriefing
 language: da
 ---
 
 <!-- _class: title -->
 
-# Status-briefing
+# Statusbriefing
 
 ---
 

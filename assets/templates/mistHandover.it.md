@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Passaggio del trauma MIST
+title: (A)MIST passaggio trauma
 language: it
 ---
 
 <!-- _class: title -->
 
-# (A) Passaggio del trauma MIST
+# (A)MIST passaggio trauma
 ## Preospedaliero → PS · Invio · Data e ora
 
 ---

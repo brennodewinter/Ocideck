@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriefing / resinsje nei aksje
+title: Debriefing / after-action review
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Debriefing / resinsje nei aksje
+# Debriefing / after-action review
 ## Operaasje · Datum en tiid · Fasilitator · Dielnimmers
 
 ---

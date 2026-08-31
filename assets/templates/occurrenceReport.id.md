@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laporan kejadian (hanya budaya)
+title: Laporan kejadian (just culture)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Laporan kejadian (hanya budaya)
+# Laporan kejadian (just culture)
 ## Kejadian · Tanggal dan waktu · Reporter · Terlibat
 
 ---

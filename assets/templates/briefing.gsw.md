@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kurze Einweisung
+title: Churzes Briefing
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Kurze Einweisung
+# Churzes Briefing
 
 ---
 

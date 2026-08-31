@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Îmbunătățirea procesului: proiectul Kaizen”
+title: "Îmbunătățirea procesului: proiect Kaizen"
 language: ro
 ocideck_improvement_framework: kaizen
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Töönõukogu nõustamissoov
+title: Arvamuse taotlus töötajate esindusele
 language: et
 ---
 
 <!-- _class: title -->
 
-# Töönõukogu nõustamissoov
+# Arvamuse taotlus töötajate esindusele
 ## Teema · Direktor · Töönõukogu · Kuupäev
 
 ---

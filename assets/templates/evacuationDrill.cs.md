@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuace a cvičení první reakce
+title: Nácvik evakuace a BHV
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Evakuace a cvičení první reakce
+# Nácvik evakuace a BHV
 ## Místo · Datum · Vedoucí vrtačky · Scénář
 
 ---

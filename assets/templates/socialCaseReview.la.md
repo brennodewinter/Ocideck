@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Socialis domain causam review
+title: Disputatio casuum in campo sociali
 language: la
 ---
 
 <!-- _class: title -->
 
-# Socialis domain causam review
+# Disputatio casuum in campo sociali
 ## Team · Date · Cathedra
 
 ---

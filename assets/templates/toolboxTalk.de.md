@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox-Talk / Last-Minute-Risikoanalyse
+title: Toolbox / LMRA-Sicherheitscheck
 language: de
 ---
 
 <!-- _class: title -->
 
-# Toolbox-Talk / Last-Minute-Risikoanalyse
+# Toolbox / LMRA-Sicherheitscheck
 ## Arbeit · Ort · Datum · Crew
 
 ---

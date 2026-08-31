@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Çalışma izni
+title: Çalışma izni (permit to work)
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Çalışma izni
+# Çalışma izni (permit to work)
 ## İş · Yer · Geçerlilik tarihi – bitiş tarihi · İzin veren kuruluş
 
 ---

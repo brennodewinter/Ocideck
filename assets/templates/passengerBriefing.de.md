@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Passagierbesprechung (allgemeine Luftfahrt)
+title: Passagierbriefing (allgemeine Luftfahrt)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Passagierbesprechung (allgemeine Luftfahrt)
+# Passagierbriefing (allgemeine Luftfahrt)
 ## Flugzeug · Flug · Verantwortlicher Pilot
 
 ---

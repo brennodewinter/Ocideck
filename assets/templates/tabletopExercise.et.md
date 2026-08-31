@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lauaharjutus / kriisiõppus
+title: Lauaõppus / kriisiõppus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Lauaharjutus / kriisiõppus
+# Lauaõppus / kriisiõppus
 
 ---
 

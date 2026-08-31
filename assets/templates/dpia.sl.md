@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / ocena vpliva na zasebnost
+title: DPIA / ocena učinka na zasebnost
 language: sl
 ---
 
 <!-- _class: title -->
 
-# DPIA / ocena vpliva na zasebnost
+# DPIA / ocena učinka na zasebnost
 
 ---
 

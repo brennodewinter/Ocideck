@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tagħmel xi ħaġa f'laqgħa
+title: Tikseb xi ħaġa f'laqgħa
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Tagħmel xi ħaġa f'laqgħa
+# Tikseb xi ħaġa f'laqgħa
 ## Laqgħa · Deċiżjoni mitluba · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Načrt priprave (30-60-90 dni)
+title: Načrt uvajanja (30-60-90 dni)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Načrt priprave (30-60-90 dni)
+# Načrt uvajanja (30-60-90 dni)
 ## Nova zaposlitev · Vloga · Vodnik · Datum začetka
 
 ---

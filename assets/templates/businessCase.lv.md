@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Biznesa gadījums / investīciju priekšlikums
+title: Biznesa pamatojums / investīciju priekšlikums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Biznesa gadījums / investīciju priekšlikums
+# Biznesa pamatojums / investīciju priekšlikums
 ## Priekšlikums · Autors · Lēmuma institūcija · Datums
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hauptversammlung (Hauptversammlung)
+title: Mitgliederversammlung (MV)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Hauptversammlung (Hauptversammlung)
+# Mitgliederversammlung (MV)
 ## Organisation · Datum · Vorsitz · Anwesende Mitglieder
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αποχώρηση / έξοδος
+title: Offboarding / αποχώρηση
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αποχώρηση / έξοδος
+# Offboarding / αποχώρηση
 ## Εργαζόμενος · Ρόλος · Τελευταία ημέρα εργασίας · Προϊστάμενος
 
 ---

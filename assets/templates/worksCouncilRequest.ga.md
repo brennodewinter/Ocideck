@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iarratas ar chomhairle na comhairle oibreacha
+title: Iarratas comhairle ar chomhairle na n-oibrithe
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Iarratas ar chomhairle na comhairle oibreacha
+# Iarratas comhairle ar chomhairle na n-oibrithe
 ## Ábhar · Stiúrthóir · Comhairle oibreacha · Dáta
 
 ---

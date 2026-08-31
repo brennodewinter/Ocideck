@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Yönlendirme komitesi / proje kurulu güncellemesi
+title: Yönlendirme kurulu / proje kurulu güncellemesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Yönlendirme komitesi / proje kurulu güncellemesi
+# Yönlendirme kurulu / proje kurulu güncellemesi
 
 ---
 

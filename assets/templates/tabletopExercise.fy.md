@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tafeloefening / krisisoefening
+title: Tabletop-oefening / krisisoefening
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Tafeloefening / krisisoefening
+# Tabletop-oefening / krisisoefening
 
 ---
 

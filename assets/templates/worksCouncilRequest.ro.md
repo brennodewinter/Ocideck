@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Solicitare aviz comitetului de întreprindere
+title: Cerere de aviz către consiliul salariaților
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Solicitare aviz comitetului de întreprindere
+# Cerere de aviz către consiliul salariaților
 ## Subiect · Director · Comitet de întreprindere · Data
 
 ---

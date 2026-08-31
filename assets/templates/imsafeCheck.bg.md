@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE проверка на годността за полет
+title: IMSAFE проверка на годност за полет
 language: bg
 ---
 
 <!-- _class: title -->
 
-# IMSAFE проверка на годността за полет
+# IMSAFE проверка на годност за полет
 ## Пилот · Полет · Дата · Тази проверка не замества медицинската преценка
 
 ---

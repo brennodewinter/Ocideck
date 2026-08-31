@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Onboarding-Plan (30-60-90 Tage)
+title: Iiarbeitigsplan (30-60-90 Täg)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Onboarding-Plan (30-60-90 Tage)
+# Iiarbeitigsplan (30-60-90 Täg)
 ## Neuer Mitarbeiter · Rolle · Leitfaden · Startdatum
 
 ---

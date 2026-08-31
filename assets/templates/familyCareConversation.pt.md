@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversa familiar sobre cuidado e cuidado
+title: Conversa em família sobre cuidados e cuidadores
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Conversa familiar sobre cuidado e cuidado
+# Conversa em família sobre cuidados e cuidadores
 ## Tópico · Data · Facilitador · Participantes
 
 ---

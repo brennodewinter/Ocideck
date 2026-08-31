@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bitte um mehr Verantwortung
+title: Meh Verantwortig frage
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bitte um mehr Verantwortung
+# Meh Verantwortig frage
 ## Wer · Aktuelle Rolle · Datum
 
 ---

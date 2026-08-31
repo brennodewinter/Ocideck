@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brêge passaazje briefing
+title: Maritime passaazje-/brêgebriefing
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Brêge passaazje briefing
+# Maritime passaazje-/brêgebriefing
 ## Reis · Skip · Datum · Watch skema
 
 ---

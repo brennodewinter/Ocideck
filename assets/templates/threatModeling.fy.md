@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sesje foar bedrigingsmodellen
+title: Threat modeling-sesje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Sesje foar bedrigingsmodellen
+# Threat modeling-sesje
 ## Systeem · Datum · Fasilitator · Dielnimmers
 
 ---

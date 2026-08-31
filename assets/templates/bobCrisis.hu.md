@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: BOB válságjelentés
+title: BOB-válságjelentés
 language: hu
 ---
 
 <!-- _class: title -->
 
-# BOB válságjelentés
+# BOB-válságjelentés
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bordsövning / krisövning
+title: Tabletop-övning / krisövning
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Bordsövning / krisövning
+# Tabletop-övning / krisövning
 
 ---
 

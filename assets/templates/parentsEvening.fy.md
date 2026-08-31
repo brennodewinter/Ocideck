@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aldenjûn / ynformaasjejûn
+title: Alderjûn / ynformaasjejûn
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Aldenjûn / ynformaasjejûn
+# Alderjûn / ynformaasjejûn
 ## Klasse of groep · Skoaljier · Lokaasje
 
 ---

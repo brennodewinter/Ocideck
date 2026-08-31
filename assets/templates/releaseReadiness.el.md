@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / ετοιμότητα κυκλοφορίας
+title: CAB / ετοιμότητα έκδοσης
 language: el
 ---
 
 <!-- _class: title -->
 
-# CAB / ετοιμότητα κυκλοφορίας
+# CAB / ετοιμότητα έκδοσης
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / vurdering af indvirkning på privatlivets fred
+title: DPIA / konsekvensanalyse for databeskyttelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# DPIA / vurdering af indvirkning på privatlivets fred
+# DPIA / konsekvensanalyse for databeskyttelse
 
 ---
 

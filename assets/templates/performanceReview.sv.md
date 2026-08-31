@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prestandagranskning
+title: Medarbetarsamtal
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Prestandagranskning
+# Medarbetarsamtal
 ## Vem · Period · Datum
 
 ---

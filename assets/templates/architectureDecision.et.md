@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Arhitektuuriotsus / ADR esitlus
+title: Arhitektuuriotsus / ADR-esitlus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Arhitektuuriotsus / ADR esitlus
+# Arhitektuuriotsus / ADR-esitlus
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Genus salus chirurgicam (QUI)
+title: Index securitatis chirurgicae (WHO)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Genus salus chirurgicam (QUI)
+# Index securitatis chirurgicae (WHO)
 ## Procedure · Patiens · OR · Date
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ģimenes saruna par aprūpi un aprūpi
+title: Ģimenes saruna par aprūpi un tuvinieku aprūpi
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Ģimenes saruna par aprūpi un aprūpi
+# Ģimenes saruna par aprūpi un tuvinieku aprūpi
 ## Tēma · Datums · Vadītājs · Dalībnieki
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Αναδρομικό / βελτίωση ομάδας
+title: Retrospective / βελτίωση ομάδας
 language: el
 ---
 
 <!-- _class: title -->
 
-# Αναδρομικό / βελτίωση ομάδας
+# Retrospective / βελτίωση ομάδας
 
 ---
 

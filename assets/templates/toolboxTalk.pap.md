@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kombersashon di kaha di hèrmènt / analisis di riesgo di último ora
+title: Toolbox / chèk di siguridat LMRA
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Kombersashon di kaha di hèrmènt / analisis di riesgo di último ora
+# Toolbox / chèk di siguridat LMRA
 ## Trabou · Lugá · Fecha · Tripulashon
 
 ---

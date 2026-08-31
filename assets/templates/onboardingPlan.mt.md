@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pjan ta' abbord (30-60-90 jum)
+title: Pjan ta' introduzzjoni (30-60-90 jum)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Pjan ta' abbord (30-60-90 jum)
+# Pjan ta' introduzzjoni (30-60-90 jum)
 ## Kiri ġdid · Rwol · Gwida · Data tal-bidu
 
 ---

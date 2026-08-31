@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bakım ve bakım verme konusunda aile sohbeti
+title: Bakım ve aile bakımı üzerine aile görüşmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Bakım ve bakım verme konusunda aile sohbeti
+# Bakım ve aile bakımı üzerine aile görüşmesi
 ## Konu · Tarih · Kolaylaştırıcı · Katılımcılar
 
 ---

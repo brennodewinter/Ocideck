@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektiva / izboljšanje ekipe
+title: Retrospektiva / izboljševanje ekipe
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Retrospektiva / izboljšanje ekipe
+# Retrospektiva / izboljševanje ekipe
 
 ---
 

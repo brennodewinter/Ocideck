@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuācijas un pirmās reaģēšanas mācības
+title: Evakuācijas un BHV mācības
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Evakuācijas un pirmās reaģēšanas mācības
+# Evakuācijas un BHV mācības
 ## Vietne · Datums · Treniņa vadītājs · Scenārijs
 
 ---

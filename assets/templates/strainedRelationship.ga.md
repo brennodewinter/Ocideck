@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ag plé caidreamh faoi bhrú
+title: Caidreamh atá ag dul chun deacrachta a phlé
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ag plé caidreamh faoi bhrú
+# Caidreamh atá ag dul chun deacrachta a phlé
 ## Cé leis · Cad é · Cén uair
 
 ---

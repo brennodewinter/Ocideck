@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Walne zgromadzenie (WZ)
+title: Walne zebranie członków
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Walne zgromadzenie (WZ)
+# Walne zebranie członków
 ## Organizacja · Data · Przewodniczący · Członkowie obecni
 
 ---

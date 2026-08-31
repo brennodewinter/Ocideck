@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przygotuj kluczową rozmowę
+title: Przygotowanie kluczowej rozmowy
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przygotuj kluczową rozmowę
+# Przygotowanie kluczowej rozmowy
 
 ## Kto · Temat · Data
 

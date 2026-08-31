@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eveneminten en crowd-feiligens briefing
+title: Evenemint- en crowd-safetybriefing
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Eveneminten en crowd-feiligens briefing
+# Evenemint- en crowd-safetybriefing
 ## Event · Lokaasje · Datum · Koördinator
 
 ---

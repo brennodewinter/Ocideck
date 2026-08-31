@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evenemangs- och publiksäkerhetsgenomgång
+title: Evenemangs- och crowd-safety-briefing
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Evenemangs- och publiksäkerhetsgenomgång
+# Evenemangs- och crowd-safety-briefing
 ## Event · Plats · Datum · Samordnare
 
 ---

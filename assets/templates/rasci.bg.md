@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Информационна безопасност: RASCI / отговорности“
+title: "Информационна сигурност: RASCI / TVB"
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Информационна безопасност: RASCI / отговорности
+# Информационна сигурност: RASCI / TVB
 
 ---
 

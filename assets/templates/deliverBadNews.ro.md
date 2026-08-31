@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Oferă vești proaste
+title: A transmite vești proaste
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Oferă vești proaste
+# A transmite vești proaste
 ## Cui · Știrile · Data
 
 ---

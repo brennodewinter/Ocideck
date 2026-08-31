@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding/utfart
+title: Offboarding / avslut
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Offboarding/utfart
+# Offboarding / avslut
 ## Anställd · Roll · Sista arbetsdagen · Chef
 
 ---

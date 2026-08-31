@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Test ciągłości działania / DR
+title: Ciągłość działania / test DR
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Test ciągłości działania / DR
+# Ciągłość działania / test DR
 
 ---
 

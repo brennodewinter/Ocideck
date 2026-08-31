@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pré-brief des communications
+title: Pré-briefing communication
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Pré-brief des communications
+# Pré-briefing communication
 
 ---
 

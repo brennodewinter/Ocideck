@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE suuronnettomuusraportti
+title: METHANE suuronnettomuusilmoitus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# METHANE suuronnettomuusraportti
+# METHANE suuronnettomuusilmoitus
 ## Tapahtuma · Paikka · Päivämäärä ja aika · Reportteri
 
 ---

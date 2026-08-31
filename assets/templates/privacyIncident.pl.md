@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ocena naruszenia danych/naruszenia prywatności
+title: Ocena wycieku danych / incydentu prywatności
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Ocena naruszenia danych/naruszenia prywatności
+# Ocena wycieku danych / incydentu prywatności
 
 ---
 

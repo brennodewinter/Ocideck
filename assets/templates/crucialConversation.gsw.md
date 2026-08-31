@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bereiten Sie ein entscheidendes Gespräch vor
+title: Entscheidends Gspröch vorbereite
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Bereiten Sie ein entscheidendes Gespräch vor
+# Entscheidends Gspröch vorbereite
 
 ## Wer · Thema · Datum
 

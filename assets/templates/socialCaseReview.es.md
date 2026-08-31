@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revisión de caso del ámbito social
+title: Revisión de casos del ámbito social
 language: es
 ---
 
 <!-- _class: title -->
 
-# Revisión de caso del ámbito social
+# Revisión de casos del ámbito social
 ## Equipo · Fecha · Presidente
 
 ---

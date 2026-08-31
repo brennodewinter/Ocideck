@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: DPIA / оценка на въздействието върху поверителността
+title: DPIA / оценка на въздействието върху личните данни
 language: bg
 ---
 
 <!-- _class: title -->
 
-# DPIA / оценка на въздействието върху поверителността
+# DPIA / оценка на въздействието върху личните данни
 
 ---
 

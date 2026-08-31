@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST trauma oerdracht
+title: (A)MIST-trauma-oerdracht
 language: fy
 ---
 
 <!-- _class: title -->
 
-# (A) MIST trauma oerdracht
+# (A)MIST-trauma-oerdracht
 ## Presikehûs → ED · Ferstjoeren · Datum en tiid
 
 ---

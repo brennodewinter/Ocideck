@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Operatív rendőrségi tájékoztató
+title: Operatív rendőrségi eligazítás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Operatív rendőrségi tájékoztató
+# Operatív rendőrségi eligazítás
 ## Dátum · Műszak · Terület · Rövidebb
 
 ---

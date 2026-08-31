@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prepará un kombersashon krusial
+title: Prepará un konversashon krusial
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Prepará un kombersashon krusial
+# Prepará un konversashon krusial
 
 ## Ken · Tópiko · Fecha
 

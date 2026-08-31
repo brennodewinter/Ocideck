@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Athbhreithniú iar-eachtra / ceachtanna foghlamtha
+title: Athbhreithniú iar-theagmhais / ceachtanna foghlamtha
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Athbhreithniú iar-eachtra / ceachtanna foghlamtha
+# Athbhreithniú iar-theagmhais / ceachtanna foghlamtha
 
 ---
 

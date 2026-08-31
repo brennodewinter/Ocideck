@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint reviżjoni / demo
+title: Reviżjoni tal-isprint / demo
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Sprint reviżjoni / demo
+# Reviżjoni tal-isprint / demo
 ## Tim · Sprint · Data
 
 ---

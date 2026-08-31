@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kasus bisnis/proposal investasi
+title: Kasus bisnis / proposal investasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Kasus bisnis/proposal investasi
+# Kasus bisnis / proposal investasi
 ## Proposal · Penulis · Badan Keputusan · Tanggal
 
 ---

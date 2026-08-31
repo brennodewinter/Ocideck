@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Raport de apariție (doar cultura)
+title: Raportare de eveniment (just culture)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Raport de apariție (doar cultura)
+# Raportare de eveniment (just culture)
 ## Apariție · Data și ora · Reporter · Implicat
 
 ---

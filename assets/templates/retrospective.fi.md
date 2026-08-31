@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektiivinen / tiimin parannus
+title: Retrospektiivi / tiimin kehittäminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Retrospektiivinen / tiimin parannus
+# Retrospektiivi / tiimin kehittäminen
 
 ---
 

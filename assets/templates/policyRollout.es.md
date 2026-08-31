@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Despliegue de política / plan de implementación
+title: Despliegue de política / plan de implantación
 language: es
 ---
 
 <!-- _class: title -->
 
-# Despliegue de política / plan de implementación
+# Despliegue de política / plan de implantación
 
 ---
 

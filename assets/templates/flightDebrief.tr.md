@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uçuş bilgilendirmesi
+title: Uçuş debrifingi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Uçuş bilgilendirmesi
+# Uçuş debrifingi
 ## Uçuş · Tarih · Mürettebat
 
 ---

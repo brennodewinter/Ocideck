@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Projekta laika skala
+title: Projekta laika grafiks
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Projekta laika skala
+# Projekta laika grafiks
 
 ---
 

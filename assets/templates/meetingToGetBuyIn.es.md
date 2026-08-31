@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conseguir algo hecho en una reunión
+title: Conseguir algo en una reunión
 language: es
 ---
 
 <!-- _class: title -->
 
-# Conseguir algo hecho en una reunión
+# Conseguir algo en una reunión
 ## Reunión · Decisión solicitada · Fecha
 
 ---

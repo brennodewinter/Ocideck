@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapòrt di suseso (djis kultura)
+title: Notifikashon di suseso (just culture)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Rapòrt di suseso (djis kultura)
+# Notifikashon di suseso (just culture)
 ## Suseso · Fecha i ora · Reportero · Enbolbí
 
 ---

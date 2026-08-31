@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Хронологія проекту
+title: Часова шкала проєкту
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Хронологія проекту
+# Часова шкала проєкту
 
 ---
 

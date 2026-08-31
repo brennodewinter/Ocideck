@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Soulever un problème au travail
+title: Aborder un problème au travail
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Soulever un problème au travail
+# Aborder un problème au travail
 ## Qui · Sujet · Date
 
 ---

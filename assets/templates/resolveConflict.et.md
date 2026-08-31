@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Läbi konflikti rääkimine
+title: Konflikti selgeksrääkimine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Läbi konflikti rääkimine
+# Konflikti selgeksrääkimine
 ## Kes · Mille kohta · Kuupäev
 
 ---

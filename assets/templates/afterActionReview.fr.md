@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Débriefing / revue après action
+title: Débriefing / retour d'expérience
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Débriefing / revue après action
+# Débriefing / retour d'expérience
 ## Fonctionnement · Date et heure · Animateur · Participants
 
 ---

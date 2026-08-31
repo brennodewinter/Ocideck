@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Przygotuj rozmowę
+title: Przygotowanie rozmowy
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Przygotuj rozmowę
+# Przygotowanie rozmowy
 ## Kto · Temat · Data
 
 ---

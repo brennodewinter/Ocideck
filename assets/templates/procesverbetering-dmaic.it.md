@@ -10,7 +10,7 @@ ocideck_improvement_framework: dmaic
 
 <!-- _class: title -->
 
-# Miglioramento del processo: progetto DMAIC
+# Miglioramento dei processi: progetto DMAIC
 
 ---
 

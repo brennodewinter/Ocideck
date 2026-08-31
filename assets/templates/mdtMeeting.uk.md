@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Зустріч мультидисциплінарної команди (MDT)
+title: Мультидисциплінарна нарада (MDT)
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Зустріч мультидисциплінарної команди (MDT)
+# Мультидисциплінарна нарада (MDT)
 ## Справа · Дата · Голова · Присутні
 
 ---

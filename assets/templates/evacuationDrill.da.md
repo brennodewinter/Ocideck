@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evakuering og første indsats øvelse
+title: Evakuerings- og BHV-øvelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# Evakuering og første indsats øvelse
+# Evakuerings- og BHV-øvelse
 ## Site · Dato · Boreleder · Scenario
 
 ---

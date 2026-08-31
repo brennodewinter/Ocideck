@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Investigatio narratio
+title: Narratio investigationis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Investigatio narratio
+# Narratio investigationis
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) Transferência de trauma MIST
+title: (A)MIST passagem de trauma
 language: pt
 ---
 
 <!-- _class: title -->
 
-# (A) Transferência de trauma MIST
+# (A)MIST passagem de trauma
 ## Pré-hospitalar → DE · Despacho · Data e hora
 
 ---

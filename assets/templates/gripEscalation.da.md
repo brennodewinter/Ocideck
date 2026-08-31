@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP-eskalering
+title: GRIP-opskalering
 language: da
 ---
 
 <!-- _class: title -->
 
-# GRIP-eskalering
+# GRIP-opskalering
 ## Hændelse · Dato og tid · Leder · Aktuelt GRIP-niveau
 
 ---

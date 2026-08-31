@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Családi beszélgetés a gondozásról és gondozásról
+title: Családi beszélgetés a gondozásról és az ápolásról
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Családi beszélgetés a gondozásról és gondozásról
+# Családi beszélgetés a gondozásról és az ápolásról
 ## Téma · Dátum · Facilitátor · Résztvevők
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bewertung von Datenschutzverletzungen/Datenschutzvorfällen
+title: Datenpanne / Bewertung eines Datenschutzvorfalls
 language: de
 ---
 
 <!-- _class: title -->
 
-# Bewertung von Datenschutzverletzungen/Datenschutzvorfällen
+# Datenpanne / Bewertung eines Datenschutzvorfalls
 
 ---
 

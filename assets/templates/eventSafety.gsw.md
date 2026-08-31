@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Veranstaltungs- und Sicherheitsbesprechung
+title: Event- und Crowd-Safety-Briefing
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Veranstaltungs- und Sicherheitsbesprechung
+# Event- und Crowd-Safety-Briefing
 ## Veranstaltung · Ort · Datum · Koordinator
 
 ---

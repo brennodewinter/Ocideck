@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pre-brief de comunicare
+title: Discuție preliminară de comunicare
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Pre-brief de comunicare
+# Discuție preliminară de comunicare
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozhodnutie o architektúre / prezentácia ADR
+title: Architektonické rozhodnutie / prezentácia ADR
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rozhodnutie o architektúre / prezentácia ADR
+# Architektonické rozhodnutie / prezentácia ADR
 
 ---
 

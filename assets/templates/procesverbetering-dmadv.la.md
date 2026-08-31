@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Processus emendatio: consilium DMADV"
+title: "Processus emendationem: DMADV project"
 language: la
 ocideck_improvement_framework: dmadv
 ---

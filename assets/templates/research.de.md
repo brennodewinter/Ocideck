@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Forschungsnarrativ
+title: Untersuchungsstory
 language: de
 ---
 
 <!-- _class: title -->
 
-# Forschungsnarrativ
+# Untersuchungsstory
 
 ---
 

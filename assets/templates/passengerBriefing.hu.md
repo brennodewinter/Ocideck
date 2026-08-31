@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Utasok eligazítása (általános légi közlekedés)
+title: Utaseligazítás (kisgépes repülés)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Utasok eligazítása (általános légi közlekedés)
+# Utaseligazítás (kisgépes repülés)
 ## Repülőgép · Repülés · Pilóta parancsnok
 
 ---

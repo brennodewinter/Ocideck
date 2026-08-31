@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Escalación GRIP
+title: Escalado GRIP
 language: es
 ---
 
 <!-- _class: title -->
 
-# Escalación GRIP
+# Escalado GRIP
 ## Incidente · Fecha y hora · Líder · Nivel GRIP actual
 
 ---

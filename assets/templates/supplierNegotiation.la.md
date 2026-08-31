@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negotium cum instructus
+title: Negotiatio cum praebitoribus
 language: la
 ---
 
 <!-- _class: title -->
 
-# Negotium cum instructus
+# Negotiatio cum praebitoribus
 ## Supplementum · Contractus · Metam · Date
 
 ---

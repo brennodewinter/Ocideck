@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan pemadam kebakaran (respon dan latihan)
+title: Briefing pemadam kebakaran (operasi dan latihan)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan pemadam kebakaran (respon dan latihan)
+# Briefing pemadam kebakaran (operasi dan latihan)
 ## Objek · Tanggal dan waktu · Komandan insiden atau pemimpin latihan · Kru
 
 ---

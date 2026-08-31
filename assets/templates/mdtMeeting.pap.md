@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Reunion di tim multidisiplinario (MDT)
+title: Reunion multidisiplinario (MDT)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Reunion di tim multidisiplinario (MDT)
+# Reunion multidisiplinario (MDT)
 ## Kaso · Fecha · Presidente · Asistentenan
 
 ---

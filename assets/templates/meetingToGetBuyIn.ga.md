@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rud éigin a dhéanamh i gcruinniú
+title: Rud a bhaint amach ag cruinniú
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Rud éigin a dhéanamh i gcruinniú
+# Rud a bhaint amach ag cruinniú
 ## Cruinniú · Cinneadh iarrtha · Dáta
 
 ---

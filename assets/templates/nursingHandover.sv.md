@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sjuksköterskeskiftsöverlämning
+title: Omvårdnadsöverlämning vid skiftbyte
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Sjuksköterskeskiftsöverlämning
+# Omvårdnadsöverlämning vid skiftbyte
 ## Avdelning · Skift · Från vem till vem · Datum
 
 ---

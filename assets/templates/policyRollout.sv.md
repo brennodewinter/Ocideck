@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Policy utrullning/implementeringsplan
+title: Utrullning av policy / genomförandeplan
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Policy utrullning / genomförandeplan
+# Utrullning av policy / genomförandeplan
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Garis waktu proyek
+title: Linimasa proyek
 language: id
 ---
 
 <!-- _class: title -->
 
-# Garis waktu proyek
+# Linimasa proyek
 
 ---
 

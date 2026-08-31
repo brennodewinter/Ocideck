@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Estabelecendo limites
+title: Definir limites
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Estabelecendo limites
+# Definir limites
 ## Com quem · Sobre o quê · Data
 
 ---

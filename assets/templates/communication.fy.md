@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kommunikaasje pre-brief
+title: Foaroerlis kommunikaasje
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Kommunikaasje pre-brief
+# Foaroerlis kommunikaasje
 
 ---
 

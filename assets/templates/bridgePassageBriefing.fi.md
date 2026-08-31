@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Siltakäytävän tiedotustilaisuus
+title: Merenkulun reitti- / komentosiltabriiffi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Siltakäytävän tiedotustilaisuus
+# Merenkulun reitti- / komentosiltabriiffi
 ## Matka · Laiva · Päivämäärä · Katso aikataulu
 
 ---

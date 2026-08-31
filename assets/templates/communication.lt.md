@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Išankstinė komunikacijos informacija
+title: Išankstinis komunikacijos aptarimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Išankstinė komunikacijos informacija
+# Išankstinis komunikacijos aptarimas
 
 ---
 

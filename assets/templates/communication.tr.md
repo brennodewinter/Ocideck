@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İletişim ön brifingi
+title: İletişim ön görüşmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İletişim ön brifingi
+# İletişim ön görüşmesi
 
 ---
 

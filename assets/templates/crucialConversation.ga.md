@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ullmhaigh comhrá ríthábhachtach
+title: Comhrá criticiúil a ullmhú
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Ullmhaigh comhrá ríthábhachtach
+# Comhrá criticiúil a ullmhú
 
 ## Cé · Topaic · Dáta
 

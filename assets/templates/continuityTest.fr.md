@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Test de continuité d'activité / DR
+title: Continuité d'activité / test DR
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Test de continuité d'activité / DR
+# Continuité d'activité / test DR
 
 ---
 

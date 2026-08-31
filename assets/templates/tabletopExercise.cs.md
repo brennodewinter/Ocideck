@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stolní cvičení / krizové cvičení
+title: Cvičení tabletop / krizové cvičení
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Stolní cvičení / krizové cvičení
+# Cvičení tabletop / krizové cvičení
 
 ---
 

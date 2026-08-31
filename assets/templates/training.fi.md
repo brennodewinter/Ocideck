@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Koulutus/työpaja
+title: Koulutus / työpaja
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Koulutus/työpaja
+# Koulutus / työpaja
 
 ---
 

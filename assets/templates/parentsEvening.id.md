@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Malam orang tua/malam informasi
+title: Pertemuan orang tua / malam informasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Malam orang tua/malam informasi
+# Pertemuan orang tua / malam informasi
 ## Kelas atau kelompok · Tahun ajaran · Lokasi
 
 ---

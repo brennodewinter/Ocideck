@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Företagsrådsförfrågan
+title: Begäran om yttrande från personalrådet
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Företagsrådsförfrågan
+# Begäran om yttrande från personalrådet
 ## Ämne · Direktör · Företagsråd · Datum
 
 ---

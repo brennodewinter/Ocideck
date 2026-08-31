@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Висадка / вихід
+title: Офбординг / звільнення
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Висадка / вихід
+# Офбординг / звільнення
 ## Співробітник · Роль · Останній робочий день · Керівник
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ispitivanje / pregled nakon akcije
+title: Debriefing / analiza nakon djelovanja
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Ispitivanje / pregled nakon akcije
+# Debriefing / analiza nakon djelovanja
 ## Operacija · Datum i vrijeme · Voditelj · Sudionici
 
 ---

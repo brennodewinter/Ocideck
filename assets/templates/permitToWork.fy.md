@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fergunning om te wurkjen
+title: Wurkfergunning (permit to work)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Fergunning om te wurkjen
+# Wurkfergunning (permit to work)
 ## Wurk · Lokaasje · Jildich fan - oant · Fergunning útjouwer
 
 ---

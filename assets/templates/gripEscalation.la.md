@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PROPAGATIO GRIP
+title: Ascensio GRIP
 language: la
 ---
 
 <!-- _class: title -->
 
-# PROPAGATIO GRIP
+# Ascensio GRIP
 ## Incident · Date et tempus · Dux · Current GRIP level
 
 ---

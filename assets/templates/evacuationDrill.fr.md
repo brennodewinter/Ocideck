@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Exercice d'évacuation et de première réponse
+title: Exercice d'évacuation et BHV
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Exercice d'évacuation et de première réponse
+# Exercice d'évacuation et BHV
 ## Site · Date · Chef de forage · Scénario
 
 ---

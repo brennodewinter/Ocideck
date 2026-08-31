@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lidojuma pārskats
+title: Lidojuma debrīfings
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Lidojuma pārskats
+# Lidojuma debrīfings
 ## Lidojums · Datums · Apkalpe
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: «Інформаційна безпека: РАСКІ / обов'язки»
+title: "Інформаційна безпека: RASCI / TVB"
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Інформаційна безпека: РАСКІ /обов
+# Інформаційна безпека: RASCI / TVB
 
 ---
 

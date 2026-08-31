@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Værktøjskassesnak / risikoanalyse i sidste øjeblik
+title: Toolbox / LMRA-sikkerhedstjek
 language: da
 ---
 
 <!-- _class: title -->
 
-# Værktøjskassesnak / risikoanalyse i sidste øjeblik
+# Toolbox / LMRA-sikkerhedstjek
 ## Arbejde · Sted · Dato · Besætning
 
 ---

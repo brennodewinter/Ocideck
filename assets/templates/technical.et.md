@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tehniline selgitaja
+title: Tehniline selgitus
 language: et
 ---
 
 <!-- _class: title -->
 
-# Tehniline selgitaja
+# Tehniline selgitus
 
 ---
 

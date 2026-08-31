@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pengarahan penegakan hukum (BOA)
+title: Pengarahan penegakan (BOA)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pengarahan penegakan hukum (BOA)
+# Pengarahan penegakan (BOA)
 ## Tanggal · Shift · Wilayah kerja/kabupaten · Koordinator
 
 ---

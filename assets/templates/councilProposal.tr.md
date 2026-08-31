@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Konsey / yürütme teklifi
+title: Meclis / yürütme önerisi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Konsey / yürütme teklifi
+# Meclis / yürütme önerisi
 ## Konu · Portföy · Kayıt numarası · Yazar
 
 ---

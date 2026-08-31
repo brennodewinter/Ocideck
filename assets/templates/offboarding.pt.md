@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Desembarque/saída
+title: Offboarding / saída
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Desembarque/saída
+# Offboarding / saída
 ## Funcionário · Função · Último dia útil · Gerente
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lieferantenbewertung / Lieferantenrisiko
+title: Lieferante-Beurteilig / Vendor Risk
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Lieferantenbewertung / Lieferantenrisiko
+# Lieferante-Beurteilig / Vendor Risk
 
 ---
 

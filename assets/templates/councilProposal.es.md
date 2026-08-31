@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Propuesta al consejo / ejecutivo
+title: Propuesta al pleno / al ejecutivo
 language: es
 ---
 
 <!-- _class: title -->
 
-# Propuesta al consejo / ejecutivo
+# Propuesta al pleno / al ejecutivo
 ## Tema · Cartera · Número de registro · Autor
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kwizz interattiv
+title: Kwiżż interattiv
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Kwizz interattiv
+# Kwiżż interattiv
 
 ---
 

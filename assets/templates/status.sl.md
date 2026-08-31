@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo o stanju
+title: Statusni brifing
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo o stanju
+# Statusni brifing
 
 ---
 

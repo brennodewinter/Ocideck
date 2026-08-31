@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toolbox Disputatio / ultimo-minute periculo analysis
+title: Toolbox / probatio securitatis LMRA
 language: la
 ---
 
 <!-- _class: title -->
 
-# Toolbox Disputatio / ultimo-minute periculo analysis
+# Toolbox / probatio securitatis LMRA
 ## Opus · Locus · Date · Crew
 
 ---

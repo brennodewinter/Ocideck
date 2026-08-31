@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: “Mehorashon di proseso: proyekto A3”
+title: "Mehorashon di proseso: proyekto A3"
 language: pap
 ocideck_improvement_framework: a3
 ---

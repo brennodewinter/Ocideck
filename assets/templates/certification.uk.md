@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Хід сертифікації
+title: Прогрес сертифікації
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Хід сертифікації
+# Прогрес сертифікації
 
 ---
 

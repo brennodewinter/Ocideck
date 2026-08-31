@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapport tal-kriżi BOB
+title: Rappurtar ta' kriżi BOB
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Rapport tal-kriżi BOB
+# Rappurtar ta' kriżi BOB
 
 ---
 

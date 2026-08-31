@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Audit Inventiones et sequitur
+title: Inventa inspectionis et prosecutio
 language: la
 ---
 
 <!-- _class: title -->
 
-# Audit Inventiones et sequitur
+# Inventa inspectionis et prosecutio
 
 ---
 

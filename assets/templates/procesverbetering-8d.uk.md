@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: «Удосконалення процесу: 8D проект»
+title: "Удосконалення процесу: 8D проект"
 language: uk
 ocideck_improvement_framework: 8d
 ---

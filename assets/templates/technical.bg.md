@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Технически обяснител
+title: Техническо обяснение
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Технически обяснител
+# Техническо обяснение
 
 ---
 

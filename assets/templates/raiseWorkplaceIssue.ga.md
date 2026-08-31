@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fadhb a ardú ag an obair
+title: Fadhb san ionad oibre a ardú
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Fadhb a ardú ag an obair
+# Fadhb san ionad oibre a ardú
 ## Cé · Topaic · Dáta
 
 ---

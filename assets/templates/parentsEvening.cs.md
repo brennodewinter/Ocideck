@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rodičovský večer / informační večer
+title: Třídní schůzka / informační večer
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Rodičovský večer / informační večer
+# Třídní schůzka / informační večer
 ## Třída nebo skupina · Školní rok · Místo
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapport tal-okkorrenza (kultura biss)
+title: Rapport ta' okkorrenza (just culture)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Rapport tal-okkorrenza (kultura biss)
+# Rapport ta' okkorrenza (just culture)
 ## Okkorrenza · Data u ħin · Reporter · Involut
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan de prieteni/mentor
+title: Plan buddy / mentor
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Plan de prieteni/mentor
+# Plan buddy / mentor
 ## Nou venit · Prieten sau mentor · Data începerii
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valamit elintézni egy értekezleten
+title: Hogyan érd el a célod egy megbeszélésen
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Valamit elintézni egy értekezleten
+# Hogyan érd el a célod egy megbeszélésen
 ## Ülés · Döntés kérése · Dátum
 
 ---

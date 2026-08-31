@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tahliye ve ilk müdahale tatbikatı
+title: Tahliye ve BHV tatbikatı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Tahliye ve ilk müdahale tatbikatı
+# Tahliye ve BHV tatbikatı
 ## Tesis · Tarih · Tatbikat lideri · Senaryo
 
 ---

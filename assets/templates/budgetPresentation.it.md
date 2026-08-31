@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Presentazione del bilancio
+title: Presentazione del budget
 language: it
 ---
 
 <!-- _class: title -->
 
-# Presentazione del bilancio
+# Presentazione del budget
 ## Organizzazione · Anno di bilancio · Presentatore
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Penilaian pemasok / risiko vendor
+title: Penilaian pemasok / vendor risk
 language: id
 ---
 
 <!-- _class: title -->
 
-# Penilaian pemasok / risiko vendor
+# Penilaian pemasok / vendor risk
 
 ---
 

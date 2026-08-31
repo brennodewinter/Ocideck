@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: MIAUW pentest ziņojums
+title: MIAUW pentesta ziņojums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# MIAUW pentest ziņojums
+# MIAUW pentesta ziņojums
 
 ---
 

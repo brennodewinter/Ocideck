@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tehniskais skaidrotājs
+title: Tehnisks skaidrojums
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Tehniskais skaidrotājs
+# Tehnisks skaidrojums
 
 ---
 

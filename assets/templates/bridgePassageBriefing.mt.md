@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing tal-passaġġ tal-pont
+title: Briefing marittimu tal-passaġġ / pont
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Briefing tal-passaġġ tal-pont
+# Briefing marittimu tal-passaġġ / pont
 ## Vjaġġ · Vapur · Data · Skeda tal-għassa
 
 ---

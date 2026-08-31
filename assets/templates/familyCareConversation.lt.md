@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Šeimos pokalbis apie priežiūrą ir globą
+title: Šeimos pokalbis apie priežiūrą ir artimųjų slaugą
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Šeimos pokalbis apie priežiūrą ir globą
+# Šeimos pokalbis apie priežiūrą ir artimųjų slaugą
 ## Tema · Data · Vykdytojas · Dalyviai
 
 ---

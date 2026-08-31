@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE uçmaya uygunluk kontrolü
+title: IMSAFE uçuşa uygunluk kontrolü
 language: tr
 ---
 
 <!-- _class: title -->
 
-# IMSAFE uçmaya uygunluk kontrolü
+# IMSAFE uçuşa uygunluk kontrolü
 ## Pilot · Uçuş · Tarih · Bu kontrol tıbbi kararın yerine geçmez
 
 ---

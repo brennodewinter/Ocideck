@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: „Proceso tobulinimas: A3 projektas“
+title: "Proceso tobulinimas: A3 projektas"
 language: lt
 ocideck_improvement_framework: a3
 ---

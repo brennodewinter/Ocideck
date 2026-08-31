@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Glavna skupština (AGM)
+title: Skupština članova
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Glavna skupština (AGM)
+# Skupština članova
 ## Organizacija · Datum · Predsjedavajući · Prisutni članovi
 
 ---

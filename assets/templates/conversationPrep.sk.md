@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pripravte si rozhovor
+title: Príprava rozhovoru
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Pripravte si rozhovor
+# Príprava rozhovoru
 ## Kto · Téma · Dátum
 
 ---

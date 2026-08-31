@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorkommensbericht (nur Kultur)
+title: Ereignismäldig (just culture)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Vorkommensbericht (nur Kultur)
+# Ereignismäldig (just culture)
 ## Vorkommen · Datum und Uhrzeit · Reporter · Beteiligt
 
 ---

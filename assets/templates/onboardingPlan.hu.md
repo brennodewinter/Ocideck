@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Felvételi terv (30-60-90 nap)
+title: Beillesztési terv (30-60-90 nap)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Felvételi terv (30-60-90 nap)
+# Beillesztési terv (30-60-90 nap)
 ## Új alkalmazott · Szerep · Útmutató · Kezdés dátuma
 
 ---

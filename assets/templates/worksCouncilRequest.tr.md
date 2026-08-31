@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: İş konseyi tavsiye talebi
+title: Çalışan temsilciliğinden görüş talebi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# İş konseyi tavsiye talebi
+# Çalışan temsilciliğinden görüş talebi
 ## Konu · Direktör · Çalışma konseyi · Tarih
 
 ---

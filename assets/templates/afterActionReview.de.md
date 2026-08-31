@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nachbesprechung/Nachbesprechung
+title: Debriefing / After-Action-Review
 language: de
 ---
 
 <!-- _class: title -->
 
-# Nachbesprechung/Nachbesprechung
+# Debriefing / After-Action-Review
 ## Durchführung · Datum und Uhrzeit · Moderator · Teilnehmer
 
 ---

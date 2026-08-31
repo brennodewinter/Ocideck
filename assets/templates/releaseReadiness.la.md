@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / release promptitudinem
+title: CAB / promptitudo emissionis
 language: la
 ---
 
 <!-- _class: title -->
 
-# CAB / release promptitudinem
+# CAB / promptitudo emissionis
 
 ---
 

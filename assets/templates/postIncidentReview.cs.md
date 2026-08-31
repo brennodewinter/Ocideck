@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontrola po incidentu / poučení
+title: Přezkoumání po incidentu / lessons learned
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Kontrola po incidentu / poučení
+# Přezkoumání po incidentu / lessons learned
 
 ---
 

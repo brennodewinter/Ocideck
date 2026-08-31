@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Începutul / lansarea proiectului
+title: Start de proiect / kick-off
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Începutul / lansarea proiectului
+# Start de proiect / kick-off
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sebészeti biztonsági ellenőrző lista (WHO)
+title: Sebészeti biztonsági ellenőrzőlista (WHO)
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Sebészeti biztonsági ellenőrző lista (WHO)
+# Sebészeti biztonsági ellenőrzőlista (WHO)
 ## Eljárás · Páciens · VAGY · Dátum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Besättnings-/avgångsgenomgång
+title: Besättnings-/avgångsbriefing
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Besättnings-/avgångsgenomgång
+# Besättnings-/avgångsbriefing
 ## Flyg · Besättning · Datum · Avgångstid
 
 ---

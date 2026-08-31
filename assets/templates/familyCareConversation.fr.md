@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversation familiale sur les soins et la prestation de soins
+title: Conversation familiale sur les soins et l'aide aux proches
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Conversation familiale sur les soins et la prestation de soins
+# Conversation familiale sur les soins et l'aide aux proches
 ## Sujet · Date · Animateur · Participants
 
 ---

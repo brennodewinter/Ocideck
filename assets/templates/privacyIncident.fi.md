@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tietoturvaloukkauksen/tietosuojatapahtuman arviointi
+title: Tietovuoto / tietosuojapoikkeaman arviointi
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tietoturvaloukkauksen/tietosuojatapahtuman arviointi
+# Tietovuoto / tietosuojapoikkeaman arviointi
 
 ---
 

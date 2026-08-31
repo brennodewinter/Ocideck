@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evaluarea incidentului de încălcare a datelor / confidențialitate
+title: Evaluarea unei breșe de date / a unui incident de confidențialitate
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Evaluarea incidentului de încălcare a datelor / confidențialitate
+# Evaluarea unei breșe de date / a unui incident de confidențialitate
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lista di kòntròl di seguridat kirúrgiko (WHO)
+title: Lista di kontrol di siguridat kirúrgiko (WHO)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Lista di kòntròl di seguridat kirúrgiko (WHO)
+# Lista di kontrol di siguridat kirúrgiko (WHO)
 ## Prosedura · Pashènt · ÒF · Fecha
 
 ---

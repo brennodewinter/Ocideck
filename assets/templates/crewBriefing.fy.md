@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bemanning / fertrek briefing
+title: Bemanning- / fertrekbriefing
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Bemanning / fertrek briefing
+# Bemanning- / fertrekbriefing
 ## Flecht · Bemanning · Datum · Fertrektiid
 
 ---

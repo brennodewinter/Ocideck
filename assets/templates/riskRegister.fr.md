@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analyse des risques / registre des risques
+title: Analyse de risques / registre des risques
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Analyse des risques / registre des risques
+# Analyse de risques / registre des risques
 
 ---
 

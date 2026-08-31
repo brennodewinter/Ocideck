@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dar o recibir crítica
+title: Dar o recibir críticas
 language: es
 ---
 
 <!-- _class: title -->
 
-# Dar o recibir crítica
+# Dar o recibir críticas
 ## Quién · Tema · Fecha
 
 ---

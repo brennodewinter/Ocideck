@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kritikos teikimas arba priėmimas
+title: Kritikos išsakymas ar priėmimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Kritikos teikimas arba priėmimas
+# Kritikos išsakymas ar priėmimas
 ## Kas · Tema · Data
 
 ---

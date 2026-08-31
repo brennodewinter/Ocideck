@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Technical explicator
+title: Explicatio technica
 language: la
 ---
 
 <!-- _class: title -->
 
-# Technical explicator
+# Explicatio technica
 
 ---
 

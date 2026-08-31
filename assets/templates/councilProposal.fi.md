@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Neuvoston / toimeenpanovallan ehdotus
+title: Esitys valtuustolle / hallitukselle
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Neuvoston / toimeenpanovallan ehdotus
+# Esitys valtuustolle / hallitukselle
 ## Aihe · Portfolio · Rekisterinumero · Tekijä
 
 ---

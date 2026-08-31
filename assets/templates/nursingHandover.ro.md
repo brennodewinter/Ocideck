@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Predarea turelor de asistenta medicala
+title: Predarea turei de nursing
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Predarea turelor de asistenta medicala
+# Predarea turei de nursing
 ## Secție · Schimbă · De la cine la cine · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Verslo atvejis / investicinis pasiūlymas
+title: Verslo pagrindimas / investicijų pasiūlymas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Verslo atvejis / investicinis pasiūlymas
+# Verslo pagrindimas / investicijų pasiūlymas
 ## Pasiūlymas · Autorius · Sprendimo institucija · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Презентація інтернатури
+title: Презентація стажування
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Презентація інтернатури
+# Презентація стажування
 ## Компанія · Програма · Період · Назва
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Exercício de mesa/exercício de crise
+title: Exercício tabletop / exercício de crise
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Exercício de mesa/exercício de crise
+# Exercício tabletop / exercício de crise
 
 ---
 

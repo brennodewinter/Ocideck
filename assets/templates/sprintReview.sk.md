@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint recenzia / demo
+title: Sprint review / demo
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Sprint recenzia / demo
+# Sprint review / demo
 ## Tím · Šprint · Dátum
 
 ---

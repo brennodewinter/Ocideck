@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narrazione della ricerca
+title: Racconto d'indagine
 language: it
 ---
 
 <!-- _class: title -->
 
-# Narrazione della ricerca
+# Racconto d'indagine
 
 ---
 

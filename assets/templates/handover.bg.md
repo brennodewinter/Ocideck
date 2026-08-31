@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Предаване / преход
+title: Предаване / handover
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Предаване / преход
+# Предаване / handover
 
 ---
 

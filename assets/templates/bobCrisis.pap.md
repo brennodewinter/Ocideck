@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapòrt di krísis di BOB
+title: Rapòrt di krisis BOB
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Rapòrt di krísis di BOB
+# Rapòrt di krisis BOB
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bropassage genomgång
+title: Maritim passage-/bryggbriefing
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Bropassage genomgång
+# Maritim passage-/bryggbriefing
 ## Resa · Fartyg · Datum · Titta schema
 
 ---

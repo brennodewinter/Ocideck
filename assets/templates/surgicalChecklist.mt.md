@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lista ta' kontroll tas-sigurtà kirurġika (WHO)
+title: Lista ta' kontroll għas-sigurtà kirurġika (WHO)
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Lista ta' kontroll tas-sigurtà kirurġika (WHO)
+# Lista ta' kontroll għas-sigurtà kirurġika (WHO)
 ## Proċedura · Pazjent · JEW · Data
 
 ---

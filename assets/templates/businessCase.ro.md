@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Caz de afaceri / propunere de investiție
+title: Business case / propunere de investiție
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Caz de afaceri / propunere de investiție
+# Business case / propunere de investiție
 ## Propunere · Autor · Organ de decizie · Data
 
 ---

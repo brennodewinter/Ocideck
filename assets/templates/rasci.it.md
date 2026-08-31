@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Sicurezza delle informazioni: RASCI/responsabilità"
+title: "Sicurezza delle informazioni: RASCI / responsabilità"
 language: it
 ---
 
 <!-- _class: title -->
 
-# Sicurezza delle informazioni: RASCI/responsabilità
+# Sicurezza delle informazioni: RASCI / responsabilità
 
 ---
 

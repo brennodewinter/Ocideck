@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR предаване
+title: Предаване по SBAR
 language: bg
 ---
 
 <!-- _class: title -->
 
-# SBAR предаване
+# Предаване по SBAR
 ## Пациент · Отделение · От кого на кого · Дата и час
 
 ---

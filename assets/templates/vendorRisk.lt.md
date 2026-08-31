@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tiekėjo įvertinimas / pardavėjo rizika
+title: Tiekėjų vertinimas / vendor risk
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Tiekėjo įvertinimas / pardavėjo rizika
+# Tiekėjų vertinimas / vendor risk
 
 ---
 

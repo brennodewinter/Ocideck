@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Munkahelyi probléma felvetése
+title: Probléma felvetése a munkahelyen
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Munkahelyi probléma felvetése
+# Probléma felvetése a munkahelyen
 ## Ki · Téma · Dátum
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uygulama brifingi (BOA)
+title: Yaptırım brifingi (BOA)
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Uygulama brifingi (BOA)
+# Yaptırım brifingi (BOA)
 ## Tarih · Vardiya · Çalışma alanı/bölge · Koordinatör
 
 ---

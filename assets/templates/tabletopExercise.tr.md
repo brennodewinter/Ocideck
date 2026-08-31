@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Masaüstü egzersizi / kriz tatbikatı
+title: Masa başı tatbikat / kriz tatbikatı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Masaüstü egzersizi / kriz tatbikatı
+# Masa başı tatbikat / kriz tatbikatı
 
 ---
 

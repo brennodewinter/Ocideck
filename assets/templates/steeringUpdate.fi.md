@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ohjauskomitean/projektin hallituksen päivitys
+title: Ohjausryhmä / project board -katsaus
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Ohjauskomitean/projektin hallituksen päivitys
+# Ohjausryhmä / project board -katsaus
 
 ---
 

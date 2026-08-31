@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Προετοιμασία επικοινωνίας
+title: Προκαταρκτική συζήτηση επικοινωνίας
 language: el
 ---
 
 <!-- _class: title -->
 
-# Προετοιμασία επικοινωνίας
+# Προκαταρκτική συζήτηση επικοινωνίας
 
 ---
 

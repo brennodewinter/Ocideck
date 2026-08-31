@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / vabastamise valmisolek
+title: CAB / väljalaske valmidus
 language: et
 ---
 
 <!-- _class: title -->
 
-# CAB / vabastamise valmisolek
+# CAB / väljalaske valmidus
 
 ---
 

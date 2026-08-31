@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cronologia del progetto
+title: Timeline di progetto
 language: it
 ---
 
 <!-- _class: title -->
 
-# Cronologia del progetto
+# Timeline di progetto
 
 ---
 

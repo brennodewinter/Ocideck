@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Předběžná informace o komunikaci
+title: Předběžná porada o komunikaci
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Předběžná informace o komunikaci
+# Předběžná porada o komunikaci
 
 ---
 

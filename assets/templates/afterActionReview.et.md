@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Debriifing / tegevusjärgne ülevaade
+title: Debriifing / tegevusjärgne analüüs
 language: et
 ---
 
 <!-- _class: title -->
 
-# Debriifing / tegevusjärgne ülevaade
+# Debriifing / tegevusjärgne analüüs
 ## Toiming · Kuupäev ja kellaaeg · Koolitaja · Osalejad
 
 ---

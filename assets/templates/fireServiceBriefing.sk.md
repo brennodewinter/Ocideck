@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brífing požiarnej služby (reakcia a cvičenie)
+title: Hasičský brífing (zásah a cvičenie)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Brífing požiarnej služby (reakcia a cvičenie)
+# Hasičský brífing (zásah a cvičenie)
 ## Objekt · Dátum a čas · Veliteľ incidentu alebo vedúci cvičenia · Posádka
 
 ---

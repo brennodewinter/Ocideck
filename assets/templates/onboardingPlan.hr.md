@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan pripreme (30-60-90 dana)
+title: Plan uvođenja (30-60-90 dana)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Plan pripreme (30-60-90 dana)
+# Plan uvođenja (30-60-90 dana)
 ## Novi zaposlenik · Uloga · Vodič · Datum početka
 
 ---

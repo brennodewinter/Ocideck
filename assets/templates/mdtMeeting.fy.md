@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Multidissiplinêre teamgearkomste (MDT)
+title: Multydissiplinêr oerlis (MDT)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Multidissiplinêre teamgearkomste (MDT)
+# Multydissiplinêr oerlis (MDT)
 ## Saak · Datum · Foarsitter · Oanwêzigen
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proposta do conselho/executivo
+title: Proposta à assembleia / ao executivo
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Proposta do conselho/executivo
+# Proposta à assembleia / ao executivo
 ## Assunto · Portfólio · Número de registro · Autor
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cere mai multă responsabilitate
+title: A cere mai multă responsabilitate
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Cere mai multă responsabilitate
+# A cere mai multă responsabilitate
 ## Cine · Rolul actual · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ridicarea unei probleme la locul de muncă
+title: A aborda o problemă la locul de muncă
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Ridicarea unei probleme la locul de muncă
+# A aborda o problemă la locul de muncă
 ## Cine · Subiect · Data
 
 ---

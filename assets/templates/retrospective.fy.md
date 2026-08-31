@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektyf / teamferbettering
+title: Retrospective / teamferbettering
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Retrospektyf / teamferbettering
+# Retrospective / teamferbettering
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prekinjenost poslovanja / DR test
+title: Neprekinjeno poslovanje / test DR
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Prekinjenost poslovanja / DR test
+# Neprekinjeno poslovanje / test DR
 
 ---
 

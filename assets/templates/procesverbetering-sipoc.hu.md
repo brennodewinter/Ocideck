@@ -9,7 +9,7 @@ language: hu
 
 <!-- _class: title -->
 
-# SIPOC folyamat áttekintése
+# SIPOC folyamatáttekintés
 ## Szállító · Bemenet · Folyamat · Kimenet · Vevő
 
 ---

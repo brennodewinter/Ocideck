@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Vorkommensbericht (nur Kultur)
+title: Ereignismeldung (just culture)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Vorkommensbericht (nur Kultur)
+# Ereignismeldung (just culture)
 ## Vorkommen · Datum und Uhrzeit · Reporter · Beteiligt
 
 ---

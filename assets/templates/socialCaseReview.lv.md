@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sociālā domēna gadījuma apskats
+title: Gadījumu izskatīšana sociālajā jomā
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Sociālā domēna gadījuma apskats
+# Gadījumu izskatīšana sociālajā jomā
 ## Komanda · Datums · Sēdes vadītājs
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pogovor skozi konflikt
+title: Razčiščevanje konflikta
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Pogovor skozi konflikt
+# Razčiščevanje konflikta
 ## Kdo · O čem · Datum
 
 ---

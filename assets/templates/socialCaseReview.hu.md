@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: A közösségi tartomány eseteinek áttekintése
+title: Esetmegbeszélés a szociális területen
 language: hu
 ---
 
 <!-- _class: title -->
 
-# A közösségi tartomány eseteinek áttekintése
+# Esetmegbeszélés a szociális területen
 ## Csapat · Dátum · Elnök
 
 ---

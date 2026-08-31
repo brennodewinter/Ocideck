@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Einweisung der Feuerwehr (Reaktion und Übung)
+title: Füürwehr-Briefing (Iisatz und Üebig)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Einweisung der Feuerwehr (Reaktion und Übung)
+# Füürwehr-Briefing (Iisatz und Üebig)
 ## Objekt · Datum und Uhrzeit · Einsatzleiter oder Übungsleiter · Besatzung
 
 ---

@@ -3,14 +3,14 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Feabhsú próisis: tionscadal DMAIC"
+title: "Feabhsú próiseas: tionscadal DMAIC"
 language: ga
 ocideck_improvement_framework: dmaic
 ---
 
 <!-- _class: title -->
 
-# Feabhsú próisis: tionscadal DMAIC
+# Feabhsú próiseas: tionscadal DMAIC
 
 ---
 

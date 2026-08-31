@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Klientu saruna
+title: Saruna ar klientu
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Klientu saruna
+# Saruna ar klientu
 ## Klients · Kontaktpersona · Mērķis · Datums
 
 ---

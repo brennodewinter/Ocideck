@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE tinkamumo skraidyti patikra
+title: IMSAFE tinkamumo skristi patikra
 language: lt
 ---
 
 <!-- _class: title -->
 
-# IMSAFE tinkamumo skraidyti patikra
+# IMSAFE tinkamumo skristi patikra
 ## Pilotas · Skrydis · Data · Šis patikrinimas nepakeičia medicininio sprendimo
 
 ---

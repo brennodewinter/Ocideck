@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ćwiczenia ewakuacyjne i pierwszej reakcji
+title: Ćwiczenie ewakuacji i BHV
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Ćwiczenia ewakuacyjne i pierwszej reakcji
+# Ćwiczenie ewakuacji i BHV
 ## Miejsce · Data · Lider ćwiczenia · Scenariusz
 
 ---

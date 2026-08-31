@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aktualizace řídícího výboru / projektové rady
+title: Řídicí výbor / aktualizace pro project board
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Aktualizace řídícího výboru / projektové rady
+# Řídicí výbor / aktualizace pro project board
 
 ---
 

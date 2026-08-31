@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tinjauan kasus domain sosial
+title: Pembahasan kasus bidang sosial
 language: id
 ---
 
 <!-- _class: title -->
 
-# Tinjauan kasus domain sosial
+# Pembahasan kasus bidang sosial
 ## Tim · Tanggal · Ketua
 
 ---

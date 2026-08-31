@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bolagsstämma
+title: Årsmöte (föreningsstämma)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Bolagsstämma
+# Årsmöte (föreningsstämma)
 ## Organisation · Datum · Ordförande · Medlemmar närvarande
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Udalosť a brífing o bezpečnosti davu
+title: Briefing k podujatiu a bezpečnosti davu
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Udalosť a brífing o bezpečnosti davu
+# Briefing k podujatiu a bezpečnosti davu
 ## Podujatie · Miesto · Dátum · Koordinátor
 
 ---

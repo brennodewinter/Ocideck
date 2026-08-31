@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Uurimuse narratiiv
+title: Uurimislugu
 language: et
 ---
 
 <!-- _class: title -->
 
-# Uurimuse narratiiv
+# Uurimislugu
 
 ---
 

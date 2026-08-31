@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informare privind aplicarea (BOA)
+title: Briefing de aplicare a legii (BOA)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Informare privind aplicarea (BOA)
+# Briefing de aplicare a legii (BOA)
 ## Data · Schimb · Zona de lucru/sector · Coordonator
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: At diskutere et anstrengt forhold
+title: Drøfte et anstrengt forhold
 language: da
 ---
 
 <!-- _class: title -->
 
-# At diskutere et anstrengt forhold
+# Drøfte et anstrengt forhold
 ## Med hvem · Om hvad · Hvornår
 
 ---

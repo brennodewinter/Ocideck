@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sastanak multidisciplinarnog tima (MDT)
+title: Multidisciplinarni sastanak (MDT)
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Sastanak multidisciplinarnog tima (MDT)
+# Multidisciplinarni sastanak (MDT)
 ## Slučaj · Datum · Predsjedavajući · Prisutni
 
 ---

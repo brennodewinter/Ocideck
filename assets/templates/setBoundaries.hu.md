@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Határok felállítása
+title: Határok kijelölése
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Határok felállítása
+# Határok kijelölése
 ## Kivel · Miről · Dátum
 
 ---

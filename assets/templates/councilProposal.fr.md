@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proposition du Conseil/exécutif
+title: Proposition au conseil / à l'exécutif
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Proposition du Conseil/exécutif
+# Proposition au conseil / à l'exécutif
 ## Sujet · Portfolio · Numéro d'enregistrement · Auteur
 
 ---

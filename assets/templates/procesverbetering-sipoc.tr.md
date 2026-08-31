@@ -9,7 +9,7 @@ language: tr
 
 <!-- _class: title -->
 
-# SIPOC sürecine genel bakış
+# SIPOC süreç genel görünümü
 ## Tedarikçi · Girdi · Süreç · Çıktı · Müşteri
 
 ---

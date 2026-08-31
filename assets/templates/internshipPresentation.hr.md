@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prezentacija stažiranja
+title: Prezentacija stručne prakse
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Prezentacija stažiranja
+# Prezentacija stručne prakse
 ## Tvrtka · Program · Razdoblje · Naziv
 
 ---

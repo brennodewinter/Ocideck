@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Обучение / семинар
+title: Обучение / уъркшоп
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Обучение / семинар
+# Обучение / уъркшоп
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: METHANE-rapport om større hændelser
+title: METHANE-melding om større hændelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# METHANE-rapport om større hændelser
+# METHANE-melding om større hændelse
 ## Hændelse · Sted · Dato og tid · Reporter
 
 ---

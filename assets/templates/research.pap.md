@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narativo di investigashon
+title: Historia di investigashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Narativo di investigashon
+# Historia di investigashon
 
 ---
 

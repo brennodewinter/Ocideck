@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Suhtlemise eelinfo
+title: Kommunikatsiooni eelarutelu
 language: et
 ---
 
 <!-- _class: title -->
 
-# Suhtlemise eelinfo
+# Kommunikatsiooni eelarutelu
 
 ---
 

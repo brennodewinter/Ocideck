@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Algemiene gearkomste (AGM)
+title: Ledegearkomste (ALG)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Algemiene gearkomste (AGM)
+# Ledegearkomste (ALG)
 ## Organisaasje · Datum · Foarsitter · Leden oanwêzich
 
 ---

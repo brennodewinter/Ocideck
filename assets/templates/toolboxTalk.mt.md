@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Taħdita tal-kaxxa tal-għodda / analiżi tar-riskju tal-aħħar minuta
+title: Toolbox / verifika tas-sigurtà LMRA
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Taħdita tal-kaxxa tal-għodda / analiżi tar-riskju tal-aħħar minuta
+# Toolbox / verifika tas-sigurtà LMRA
 ## Xogħol · Post · Data · Ekwipaġġ
 
 ---

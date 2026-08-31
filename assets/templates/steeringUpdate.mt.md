@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
+title: Aġġornament għall-grupp ta' tmexxija / project board
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Aġġornament tal-kumitat ta' tmexxija/bord tal-proġett
+# Aġġornament għall-grupp ta' tmexxija / project board
 
 ---
 

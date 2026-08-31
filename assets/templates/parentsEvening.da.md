@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Forældreaften / informationsaften
+title: Forældremøde / informationsaften
 language: da
 ---
 
 <!-- _class: title -->
 
-# Forældreaften / informationsaften
+# Forældremøde / informationsaften
 ## Klasse eller gruppe · Skoleår · Sted
 
 ---

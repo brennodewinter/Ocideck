@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tekninen selittäjä
+title: Tekninen selitys
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Tekninen selittäjä
+# Tekninen selitys
 
 ---
 

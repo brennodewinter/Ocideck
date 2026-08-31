@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prate troch in konflikt
+title: In konflikt útprate
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Prate troch in konflikt
+# In konflikt útprate
 ## Wa · Oer wat · Datum
 
 ---

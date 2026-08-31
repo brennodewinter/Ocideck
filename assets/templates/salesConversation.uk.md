@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Розмова про продаж
+title: Продажна розмова
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Розмова про продаж
+# Продажна розмова
 ## Проспект · Контактна особа · Пропозиція · Дата
 
 ---

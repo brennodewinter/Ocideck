@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seara rezidenților / întâlnire de participare
+title: Întâlnire cu locuitorii / întâlnire participativă
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Seara rezidenților / întâlnire de participare
+# Întâlnire cu locuitorii / întâlnire participativă
 ## Cartier · Subiect · Data · Facilitator
 
 ---

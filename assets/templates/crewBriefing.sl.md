@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seznanitev posadke/odhoda
+title: Briefing posadke / pred odhodom
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Seznanitev posadke/odhoda
+# Briefing posadke / pred odhodom
 ## Let · Posadka · Datum · Ura odhoda
 
 ---

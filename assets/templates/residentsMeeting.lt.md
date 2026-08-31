@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gyventojų vakaras/dalyvavimo susirinkimas
+title: Gyventojų vakaras / dalyvavimo susitikimas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Gyventojų vakaras/dalyvavimo susirinkimas
+# Gyventojų vakaras / dalyvavimo susitikimas
 ## Kaimynystė · Tema · Data · Pagalbininkas
 
 ---

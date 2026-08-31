@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Draugu/mentora plāns
+title: Badija / mentora plāns
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Draugu/mentora plāns
+# Badija / mentora plāns
 ## Jaunpienācējs · Draugs vai mentors · Sākuma datums
 
 ---

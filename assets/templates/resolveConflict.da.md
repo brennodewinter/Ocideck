@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: At tale gennem en konflikt
+title: Tale en konflikt igennem
 language: da
 ---
 
 <!-- _class: title -->
 
-# At tale gennem en konflikt
+# Tale en konflikt igennem
 ## Hvem · Om hvad · Dato
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Discuție cu instrumente / analiza riscului de ultimă oră
+title: Toolbox / verificare de siguranță LMRA
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Discuție cu instrumente / analiza riscului de ultimă oră
+# Toolbox / verificare de siguranță LMRA
 ## Muncă · Locație · Data · Echipaj
 
 ---

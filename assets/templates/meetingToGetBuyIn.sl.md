@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nekaj ​​narediti na sestanku
+title: Doseganje cilja na sestanku
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Nekaj ​​narediti na sestanku
+# Doseganje cilja na sestanku
 ## Sestanek · Zahtevan sklep · Datum
 
 ---

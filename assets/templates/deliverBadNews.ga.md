@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Drochscéal a sheachadadh
+title: Drochscéala a thabhairt
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Drochscéal a sheachadadh
+# Drochscéala a thabhairt
 ## Cé leis · An Nuacht · Dáta
 
 ---

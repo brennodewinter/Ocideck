@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fratrædelse / offboarding
+title: Offboarding / fratrædelse
 language: da
 ---
 
 <!-- _class: title -->
 
-# Fratrædelse / offboarding
+# Offboarding / fratrædelse
 ## Medarbejder · Rolle · Sidste arbejdsdag · Leder
 
 ---

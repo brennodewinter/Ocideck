@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Informashon di servisio di bombero (kontesta i ehersisio)
+title: Briefing di bombero (akshon i ehersisio)
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Informashon di servisio di bombero (kontesta i ehersisio)
+# Briefing di bombero (akshon i ehersisio)
 ## Opheto · Fecha i ora · Komandante di insidente òf lider di ehersisio · Tripulashon
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ćwiczenia na stole / ćwiczenia kryzysowe
+title: Ćwiczenie tabletop / ćwiczenie kryzysowe
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Ćwiczenia na stole / ćwiczenia kryzysowe
+# Ćwiczenie tabletop / ćwiczenie kryzysowe
 
 ---
 

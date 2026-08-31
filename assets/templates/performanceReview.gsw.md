@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leistungsbeurteilung
+title: Mitarbeitergspröch
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Leistungsbeurteilung
+# Mitarbeitergspröch
 ## Wer · Zeitraum · Datum
 
 ---

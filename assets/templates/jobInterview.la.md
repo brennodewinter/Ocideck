@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Job colloquium
+title: Colloquium de munere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Job colloquium
+# Colloquium de munere
 ## Munus · Employer · Date · Interviewers
 
 ---

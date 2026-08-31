@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Poročilo / pregled po ukrepanju
+title: Debriefing / analiza po akciji
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Poročilo / pregled po ukrepanju
+# Debriefing / analiza po akciji
 ## Operacija · Datum in čas · Moderator · Udeleženci
 
 ---

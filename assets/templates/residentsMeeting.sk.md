@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Večerné / účastnícke stretnutie obyvateľov
+title: Stretnutie s obyvateľmi / participačné stretnutie
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Večerné / účastnícke stretnutie obyvateľov
+# Stretnutie s obyvateľmi / participačné stretnutie
 ## Okolie · Téma · Dátum · Facilitátor
 
 ---

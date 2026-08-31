@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding/uscita
+title: Offboarding / uscita
 language: it
 ---
 
 <!-- _class: title -->
 
-# Offboarding/uscita
+# Offboarding / uscita
 ## Dipendente · Ruolo · Ultimo giorno lavorativo · Manager
 
 ---

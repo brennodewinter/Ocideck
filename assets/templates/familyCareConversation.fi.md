@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Perhekeskustelu hoidosta ja hoidosta
+title: Perhekeskustelu hoidosta ja omaishoidosta
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Perhekeskustelu hoidosta ja hoidosta
+# Perhekeskustelu hoidosta ja omaishoidosta
 ## Aihe · Päivämäärä · Ohjaaja · Osallistujat
 
 ---

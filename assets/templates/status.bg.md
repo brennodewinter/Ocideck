@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Инструктаж за състоянието
+title: Статус брифинг
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Инструктаж за състоянието
+# Статус брифинг
 
 ---
 

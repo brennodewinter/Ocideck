@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lupa työskennellä
+title: Työlupa (permit to work)
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Lupa työskennellä
+# Työlupa (permit to work)
 ## Työ · Sijainti · Voimassa alkaen–to · Luvan myöntäjä
 
 ---

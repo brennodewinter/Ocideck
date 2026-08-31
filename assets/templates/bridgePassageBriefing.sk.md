@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brífing prejazdu mostom
+title: Námorný briefing plavby / mostíka
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Brífing prejazdu mostom
+# Námorný briefing plavby / mostíka
 ## Plavba · Loď · Dátum · Plán sledovania
 
 ---

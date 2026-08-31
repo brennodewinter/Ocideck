@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing ai passeggeri (aviazione generale)
+title: Briefing passeggeri (aviazione generale)
 language: it
 ---
 
 <!-- _class: title -->
 
-# Briefing ai passeggeri (aviazione generale)
+# Briefing passeggeri (aviazione generale)
 ## Aereo · Volo · Pilota al comando
 
 ---

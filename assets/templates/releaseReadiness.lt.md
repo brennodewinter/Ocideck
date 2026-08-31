@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / paleidimo parengtis
+title: CAB / pasirengimas leidimui
 language: lt
 ---
 
 <!-- _class: title -->
 
-# CAB / paleidimo parengtis
+# CAB / pasirengimas leidimui
 
 ---
 

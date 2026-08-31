@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Valmistele tärkeä keskustelu
+title: Valmistele ratkaiseva keskustelu
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Valmistele tärkeä keskustelu
+# Valmistele ratkaiseva keskustelu
 
 ## Kuka · Aihe · Päivämäärä
 

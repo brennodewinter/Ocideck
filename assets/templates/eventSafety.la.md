@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Eventus & vulgus salutem briefing
+title: Praelocutio eventus et securitatis turbae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Eventus & vulgus salutem briefing
+# Praelocutio eventus et securitatis turbae
 ## Eventus · Locus · Date · Coordinator
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Laporan insiden besar METAN
+title: METHANE laporan insiden besar
 language: id
 ---
 
 <!-- _class: title -->
 
-# Laporan insiden besar METAN
+# METHANE laporan insiden besar
 ## Insiden · Lokasi · Tanggal dan waktu · Reporter
 
 ---

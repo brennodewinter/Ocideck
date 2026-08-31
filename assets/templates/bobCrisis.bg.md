@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доклад за кризата на BOB
+title: BOB кризисен доклад
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доклад за кризата на BOB
+# BOB кризисен доклад
 
 ---
 

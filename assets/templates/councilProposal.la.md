@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Consilium / rogatio exsecutiva
+title: Propositio ad concilium / ad magistratum
 language: la
 ---
 
 <!-- _class: title -->
 
-# Consilium / rogatio exsecutiva
+# Propositio ad concilium / ad magistratum
 ## Res · Portfolium · Numerus registrationis · Auctor
 
 ---

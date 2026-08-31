@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iedzīvotāju vakars / līdzdalības sapulce
+title: Iedzīvotāju vakars / līdzdalības sanāksme
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Iedzīvotāju vakars / līdzdalības sapulce
+# Iedzīvotāju vakars / līdzdalības sanāksme
 ## Apkārtne · Tēma · Datums · Vadītājs
 
 ---

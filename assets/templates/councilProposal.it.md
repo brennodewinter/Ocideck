@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proposta del Consiglio/esecutivo
+title: Proposta al consiglio / alla giunta
 language: it
 ---
 
 <!-- _class: title -->
 
-# Proposta del Consiglio/esecutivo
+# Proposta al consiglio / alla giunta
 ## Oggetto · Portfolio · Numero di registrazione · Autore
 
 ---

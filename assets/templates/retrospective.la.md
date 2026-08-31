@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospective / quadrigis melius
+title: Retrospectiva / emendatio turmae
 language: la
 ---
 
 <!-- _class: title -->
 
-# Retrospective / quadrigis melius
+# Retrospectiva / emendatio turmae
 
 ---
 

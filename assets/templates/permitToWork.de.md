@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Arbeitserlaubnis
+title: Arbeitsfreigabe (permit to work)
 language: de
 ---
 
 <!-- _class: title -->
 
-# Arbeitserlaubnis
+# Arbeitsfreigabe (permit to work)
 ## Arbeit · Standort · Gültig von–bis · Genehmigungsaussteller
 
 ---

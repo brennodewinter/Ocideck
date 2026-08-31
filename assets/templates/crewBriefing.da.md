@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Besætnings-/afgangsbriefing
+title: Crew-/afgangsbriefing
 language: da
 ---
 
 <!-- _class: title -->
 
-# Besætnings-/afgangsbriefing
+# Crew-/afgangsbriefing
 ## Fly · Besætning · Dato · Afgangstid
 
 ---

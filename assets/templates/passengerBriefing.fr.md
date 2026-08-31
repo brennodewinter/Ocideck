@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing des passagers (aviation générale)
+title: Briefing passagers (aviation générale)
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Briefing des passagers (aviation générale)
+# Briefing passagers (aviation générale)
 ## Aéronef · Vol · Commandant de bord
 
 ---

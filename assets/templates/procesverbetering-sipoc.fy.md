@@ -9,7 +9,7 @@ language: fy
 
 <!-- _class: title -->
 
-# SIPOC proses oersjoch
+# SIPOC-prosesoersjoch
 ## Supplier · Ynput · Proses · Utfier · Klant
 
 ---

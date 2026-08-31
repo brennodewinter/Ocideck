@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pierwszy dzień/indukcja
+title: Pierwszy dzień / wprowadzenie
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Pierwszy dzień/indukcja
+# Pierwszy dzień / wprowadzenie
 ## Nowy pracownik · Rola · Przewodnik · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Παράδοση / μετάβαση
+title: Παράδοση / handover
 language: el
 ---
 
 <!-- _class: title -->
 
-# Παράδοση / μετάβαση
+# Παράδοση / handover
 
 ---
 

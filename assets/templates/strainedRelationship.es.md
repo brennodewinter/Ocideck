@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hablar sobre una relación tensa
+title: Hablar de una relación difícil
 language: es
 ---
 
 <!-- _class: title -->
 
-# Hablar sobre una relación tensa
+# Hablar de una relación difícil
 ## Con quién · Sobre qué · Cuándo
 
 ---

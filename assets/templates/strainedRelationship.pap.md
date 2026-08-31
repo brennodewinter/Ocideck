@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Diskutiendo un relashon tenso
+title: Papia tokante un relashon difísil
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Diskutiendo un relashon tenso
+# Papia tokante un relashon difísil
 ## Ku ken · Tokante kiko · Ki ora
 
 ---

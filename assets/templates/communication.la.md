@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Communications pre-brevis
+title: Colloquium praevium communicationis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Communications pre-brevis
+# Colloquium praevium communicationis
 
 ---
 

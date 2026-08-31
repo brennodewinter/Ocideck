@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Evaluarea furnizorului / riscul furnizorului
+title: Evaluarea furnizorilor / vendor risk
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Evaluarea furnizorului / riscul furnizorului
+# Evaluarea furnizorilor / vendor risk
 
 ---
 

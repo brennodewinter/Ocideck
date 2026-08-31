@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Levererar dåliga nyheter
+title: Framföra dåliga nyheter
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Levererar dåliga nyheter
+# Framföra dåliga nyheter
 ## Till vem · Nyheterna · Datum
 
 ---

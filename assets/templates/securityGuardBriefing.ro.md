@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Briefing de securitate / începerea schimbului
+title: Briefing de securitate / începutul turei
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Briefing de securitate / începerea schimbului
+# Briefing de securitate / începutul turei
 ## Data · Schimb · Locație/Locație · Supervizor de tură
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Narrativa de investigación
+title: Relato de investigación
 language: es
 ---
 
 <!-- _class: title -->
 
-# Narrativa de investigación
+# Relato de investigación
 
 ---
 

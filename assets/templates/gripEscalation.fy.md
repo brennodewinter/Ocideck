@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIP-eskalaasje
+title: GRIP-opskaling
 language: fy
 ---
 
 <!-- _class: title -->
 
-# GRIP-eskalaasje
+# GRIP-opskaling
 ## Ynsidint · Datum en tiid · Leader · Aktueel GRIP-nivo
 
 ---

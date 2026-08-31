@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Átadás / átállás
+title: Átadás-átvétel / handover
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Átadás / átállás
+# Átadás-átvétel / handover
 
 ---
 

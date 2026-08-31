@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seisiún samhaltú bagairt
+title: Seisiún samhaltaithe bagairtí
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seisiún samhaltú bagairt
+# Seisiún samhaltaithe bagairtí
 ## Córas · Dáta · Éascaitheoir · Rannpháirtithe
 
 ---

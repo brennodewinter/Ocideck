@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Crew-/Abflugbesprechung
+title: Crew-/Abflug-Briefing
 language: de
 ---
 
 <!-- _class: title -->
 
-# Crew-/Abflugbesprechung
+# Crew-/Abflug-Briefing
 ## Flug · Besatzung · Datum · Abflugzeit
 
 ---

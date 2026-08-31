@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negotium continuitatis / DR test
+title: Continuitas negotii / probatio DR
 language: la
 ---
 
 <!-- _class: title -->
 
-# Negotium continuitatis / DR test
+# Continuitas negotii / probatio DR
 
 ---
 

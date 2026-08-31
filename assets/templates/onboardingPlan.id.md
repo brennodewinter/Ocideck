@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Paket orientasi (30-60-90 hari)
+title: Rencana orientasi (30-60-90 hari)
 language: id
 ---
 
 <!-- _class: title -->
 
-# Paket orientasi (30-60-90 hari)
+# Rencana orientasi (30-60-90 hari)
 ## Karyawan baru · Peran · Panduan · Tanggal mulai
 
 ---

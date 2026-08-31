@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Richtlinieneinführungs-/Implementierungsplan
+title: Richtlinie ausrollen / Umsetzungsplan
 language: de
 ---
 
 <!-- _class: title -->
 
-# Richtlinieneinführungs-/Implementierungsplan
+# Richtlinie ausrollen / Umsetzungsplan
 
 ---
 

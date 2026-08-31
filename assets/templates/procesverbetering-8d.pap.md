@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: “Mehorashon di proseso: proyekto 8D”
+title: "Mehorashon di proseso: proyekto 8D"
 language: pap
 ocideck_improvement_framework: 8d
 ---

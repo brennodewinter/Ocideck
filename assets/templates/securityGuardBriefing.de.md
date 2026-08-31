@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sicherheitsbesprechung / Schichtbeginn
+title: Sicherheitsbriefing / Dienstbeginn
 language: de
 ---
 
 <!-- _class: title -->
 
-# Sicherheitsbesprechung / Schichtbeginn
+# Sicherheitsbriefing / Dienstbeginn
 ## Datum · Schicht · Standort/Ort · Schichtleiter
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Performans incelemesi
+title: Performans görüşmesi
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Performans incelemesi
+# Performans görüşmesi
 ## Kim · Dönem · Tarih
 
 ---

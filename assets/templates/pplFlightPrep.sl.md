@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL priprava na let
+title: Priprava na let PPL
 language: sl
 ---
 
 <!-- _class: title -->
 
-# PPL priprava na let
+# Priprava na let PPL
 ## Datum · Klicni znak · Pot · PIC
 
 ---

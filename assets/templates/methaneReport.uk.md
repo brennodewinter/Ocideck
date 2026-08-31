@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Звіт про значний інцидент на METHANE
+title: METHANE повідомлення про велику подію
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Звіт про значний інцидент на METHANE
+# METHANE повідомлення про велику подію
 ## Інцидент · Місце · Дата і час · Репортер
 
 ---

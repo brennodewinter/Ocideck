@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sınırları belirleme
+title: Sınır koymak
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Sınırları belirleme
+# Sınır koymak
 ## Kiminle · Ne hakkında · Tarih
 
 ---

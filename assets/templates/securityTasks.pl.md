@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plan zadań związanych z bezpieczeństwem informacji
+title: Plan zadań bezpieczeństwa
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Plan zadań związanych z bezpieczeństwem informacji
+# Plan zadań bezpieczeństwa
 
 ---
 

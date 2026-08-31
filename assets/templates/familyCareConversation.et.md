@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Perekonnavestlus hooldusest ja hooldamisest
+title: Perevestlus hooldusest ja omastehooldusest
 language: et
 ---
 
 <!-- _class: title -->
 
-# Perekonnavestlus hooldusest ja hooldamisest
+# Perevestlus hooldusest ja omastehooldusest
 ## Teema · Kuupäev · Läbiviija · Osalejad
 
 ---

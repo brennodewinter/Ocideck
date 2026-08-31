@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dare vel reprehensionem accipere
+title: Reprehensionem dare vel accipere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Dare vel reprehensionem accipere
+# Reprehensionem dare vel accipere
 ## Quis · Topic · Date
 
 ---

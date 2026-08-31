@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kort genomgång
+title: Kort briefing
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Kort genomgång
+# Kort briefing
 
 ---
 

@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Folyamatjavítás: DMADV projekt"
+title: "Folyamatfejlesztés: DMADV projekt"
 language: hu
 ocideck_improvement_framework: dmadv
 ---

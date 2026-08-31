@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Докладвай
+title: Отчет
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Докладвай
+# Отчет
 
 ---
 

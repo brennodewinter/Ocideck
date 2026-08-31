@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ευρήματα ελέγχου και παρακολούθηση
+title: Ευρήματα audit και παρακολούθηση
 language: el
 ---
 
 <!-- _class: title -->
 
-# Ευρήματα ελέγχου και παρακολούθηση
+# Ευρήματα audit και παρακολούθηση
 
 ---
 

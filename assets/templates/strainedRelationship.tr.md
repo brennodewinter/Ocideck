@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Gergin bir ilişkiyi tartışmak
+title: Gerginleşen bir ilişkiyi konuşmak
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Gergin bir ilişkiyi tartışmak
+# Gerginleşen bir ilişkiyi konuşmak
 ## Kiminle · Ne hakkında · Ne zaman
 
 ---

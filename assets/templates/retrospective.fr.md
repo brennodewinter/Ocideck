@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rétrospective / amélioration de l'équipe
+title: Rétrospective / amélioration d'équipe
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Rétrospective / amélioration de l'équipe
+# Rétrospective / amélioration d'équipe
 
 ---
 

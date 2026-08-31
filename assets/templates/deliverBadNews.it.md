@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fornire cattive notizie
+title: Comunicare una cattiva notizia
 language: it
 ---
 
 <!-- _class: title -->
 
-# Fornire cattive notizie
+# Comunicare una cattiva notizia
 ## A chi · La notizia · Data
 
 ---

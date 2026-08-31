@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kutatási narratíva
+title: Kutatási történet
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Kutatási narratíva
+# Kutatási történet
 
 ---
 

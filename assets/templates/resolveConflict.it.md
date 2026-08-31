@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Parlare attraverso un conflitto
+title: Risolvere un conflitto
 language: it
 ---
 
 <!-- _class: title -->
 
-# Parlare attraverso un conflitto
+# Risolvere un conflitto
 ## Chi · Riguardo cosa · Data
 
 ---

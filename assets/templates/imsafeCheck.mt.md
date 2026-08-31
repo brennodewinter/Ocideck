@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE verifika tal-fitness-to-fly
+title: IMSAFE verifika tal-idoneità għat-titjira
 language: mt
 ---
 
 <!-- _class: title -->
 
-# IMSAFE verifika tal-fitness-to-fly
+# IMSAFE verifika tal-idoneità għat-titjira
 ## Bdot · Titjira · Data · Dan il-kontroll ma jissostitwixxix il-ġudizzju mediku
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ažuriranje Upravnog odbora / projektnog odbora
+title: Upravljački odbor / ažuriranje za project board
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Ažuriranje Upravnog odbora / projektnog odbora
+# Upravljački odbor / ažuriranje za project board
 
 ---
 

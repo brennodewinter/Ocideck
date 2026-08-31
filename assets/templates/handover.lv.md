@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nodošana / pāreja
+title: Nodošana / handover
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Nodošana / pāreja
+# Nodošana / handover
 
 ---
 

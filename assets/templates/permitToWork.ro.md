@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permis de lucru
+title: Permis de lucru (permit to work)
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Permis de lucru
+# Permis de lucru (permit to work)
 ## Lucru · Locație · Valabil de la–la · Emitent permis
 
 ---

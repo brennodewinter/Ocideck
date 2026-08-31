@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Malam warga/rapat partisipasi
+title: Pertemuan warga / forum partisipasi
 language: id
 ---
 
 <!-- _class: title -->
 
-# Malam warga/rapat partisipasi
+# Pertemuan warga / forum partisipasi
 ## Lingkungan · Topik · Tanggal · Fasilitator
 
 ---

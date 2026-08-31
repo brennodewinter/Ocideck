@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Izpildes instruktāža (BOA)
+title: Uzraudzības instruktāža (BOA)
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Izpildes instruktāža (BOA)
+# Uzraudzības instruktāža (BOA)
 ## Datums · Maiņa · Darba zona/rajons · Koordinators
 
 ---

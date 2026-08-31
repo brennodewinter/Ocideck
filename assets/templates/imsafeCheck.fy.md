@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE fitness-to-fly kontrôle
+title: IMSAFE fit-to-fly-kontrôle
 language: fy
 ---
 
 <!-- _class: title -->
 
-# IMSAFE fitness-to-fly kontrôle
+# IMSAFE fit-to-fly-kontrôle
 ## Pilot · Flight · Datum · Dizze kontrôle net ferfange medyske oardiel
 
 ---

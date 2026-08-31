@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plán registrácie (30-60-90 dní)
+title: Plán zaškolenia (30-60-90 dní)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Plán registrácie (30-60-90 dní)
+# Plán zaškolenia (30-60-90 dní)
 ## Nový zamestnanec · Rola · Sprievodca · Dátum začiatku
 
 ---

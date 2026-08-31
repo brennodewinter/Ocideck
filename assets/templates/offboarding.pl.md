@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Wyjście na pokład / wyjście
+title: Offboarding / odejście
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Wyjście na pokład / wyjście
+# Offboarding / odejście
 ## Pracownik · Rola · Ostatni dzień pracy · Menedżer
 
 ---

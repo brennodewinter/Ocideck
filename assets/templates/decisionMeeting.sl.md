@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sestanek odločanja
+title: Odločevalni sestanek
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Sestanek odločanja
+# Odločevalni sestanek
 ## Sestanek · Datum · Predsedujoči · Udeleženci
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sestanek multidisciplinarnega tima (MDT)
+title: Multidisciplinarni sestanek (MDT)
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Sestanek multidisciplinarnega tima (MDT)
+# Multidisciplinarni sestanek (MDT)
 ## Primer · Datum · Predsedujoči · Udeleženci
 
 ---

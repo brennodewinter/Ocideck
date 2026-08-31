@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: IMSAFE fit-to-fly-tjek
+title: IMSAFE flyvegnethedstjek
 language: da
 ---
 
 <!-- _class: title -->
 
-# IMSAFE fit-to-fly-tjek
+# IMSAFE flyvegnethedstjek
 ## Pilot · Flyvning · Dato · Dette tjek erstatter ikke lægelig vurdering
 
 ---

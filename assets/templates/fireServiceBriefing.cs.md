@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Instruktáž požární služby (reakce a cvičení)
+title: Hasičský briefing (zásah a cvičení)
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Instruktáž požární služby (reakce a cvičení)
+# Hasičský briefing (zásah a cvičení)
 ## Objekt · Datum a čas · Velitel incidentu nebo vedoucí cvičení · Posádka
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hauptversammlung (Hauptversammlung)
+title: Mitgliederversammlig (GV)
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Hauptversammlung (Hauptversammlung)
+# Mitgliederversammlig (GV)
 ## Organisation · Datum · Vorsitz · Anwesende Mitglieder
 
 ---

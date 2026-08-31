@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aktualizacja komitetu sterującego / komisji projektowej
+title: Komitet sterujący / aktualizacja project board
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Aktualizacja komitetu sterującego / komisji projektowej
+# Komitet sterujący / aktualizacja project board
 
 ---
 

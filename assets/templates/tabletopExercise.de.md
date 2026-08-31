@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tischübung / Krisenübung
+title: Tabletop-Übung / Krisenübung
 language: de
 ---
 
 <!-- _class: title -->
 
-# Tischübung / Krisenübung
+# Tabletop-Übung / Krisenübung
 
 ---
 

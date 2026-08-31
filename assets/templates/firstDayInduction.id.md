@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hari pertama/induksi
+title: Hari pertama / pengenalan
 language: id
 ---
 
 <!-- _class: title -->
 
-# Hari pertama/induksi
+# Hari pertama / pengenalan
 ## Karyawan baru · Peran · Panduan · Tanggal
 
 ---

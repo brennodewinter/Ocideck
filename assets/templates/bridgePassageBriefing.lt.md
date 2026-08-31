@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Tilto pravažiavimo instruktažas
+title: Jūrinis perėjimo / tiltelio instruktažas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Tilto pravažiavimo instruktažas
+# Jūrinis perėjimo / tiltelio instruktažas
 ## Kelionė · Laivas · Data · Žiūrėti tvarkaraštį
 
 ---

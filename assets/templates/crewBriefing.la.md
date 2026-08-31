@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Cantavit / discessum briefing
+title: Praelocutio manus / profectionis
 language: la
 ---
 
 <!-- _class: title -->
 
-# Cantavit / discessum briefing
+# Praelocutio manus / profectionis
 ## Fugam · Crew · Date · Discessum time
 
 ---

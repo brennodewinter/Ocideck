@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sprint review / demonstrație
+title: Revizuirea sprintului / demo
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Sprint review / demonstrație
+# Revizuirea sprintului / demo
 ## Echipa · Sprint · Data
 
 ---

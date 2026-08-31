@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permiso de trabajo
+title: Permiso de trabajo (permit to work)
 language: es
 ---
 
 <!-- _class: title -->
 
-# Permiso de trabajo
+# Permiso de trabajo (permit to work)
 ## Trabajo · Ubicación · Válido de–a · Emisor del permiso
 
 ---

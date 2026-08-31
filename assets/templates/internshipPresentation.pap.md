@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Presentashon di stazje
+title: Presentashon di stage
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Presentashon di stazje
+# Presentashon di stage
 ## Kompania · Programa · Periodo · Nòmber
 
 ---

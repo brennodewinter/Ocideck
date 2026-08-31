@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kontrola letovej spôsobilosti IMSAFE
+title: IMSAFE kontrola spôsobilosti na let
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Kontrola letovej spôsobilosti IMSAFE
+# IMSAFE kontrola spôsobilosti na let
 ## Pilot · Let · Dátum · Táto kontrola nenahrádza lekárske posúdenie
 
 ---

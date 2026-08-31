@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: SBAR orabant
+title: Traditio SBAR
 language: la
 ---
 
 <!-- _class: title -->
 
-# SBAR orabant
+# Traditio SBAR
 ## Patiens pupillus. A quo cui data est aetas
 
 ---

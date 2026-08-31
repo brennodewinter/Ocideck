@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aistriú / aistriú
+title: Aistriú / handover
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Aistriú / aistriú
+# Aistriú / handover
 
 ---
 

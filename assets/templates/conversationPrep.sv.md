@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Förbered en konversation
+title: Förbered ett samtal
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Förbered en konversation
+# Förbered ett samtal
 ## Vem · Ämne · Datum
 
 ---

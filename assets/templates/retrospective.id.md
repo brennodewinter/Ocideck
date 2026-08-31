@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Retrospektif / peningkatan tim
+title: Retrospektif / perbaikan tim
 language: id
 ---
 
 <!-- _class: title -->
 
-# Retrospektif / peningkatan tim
+# Retrospektif / perbaikan tim
 
 ---
 

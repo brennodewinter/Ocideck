@@ -9,7 +9,7 @@ language: mt
 
 <!-- _class: title -->
 
-# Ħarsa ġenerali tal-proċess SIPOC
+# Ħarsa ġenerali lejn il-proċess SIPOC
 ## Fornitur · Input · Proċess · Output · Klijent
 
 ---

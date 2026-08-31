@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Večer stanovalcev/sodelovalni sestanek
+title: Večer za prebivalce / participativno srečanje
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Večer stanovalcev/sodelovalni sestanek
+# Večer za prebivalce / participativno srečanje
 ## Soseska · Tema · Datum · Moderator
 
 ---

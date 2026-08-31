@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nitolbu għal aktar responsabbiltà
+title: Titlob aktar responsabbiltà
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Nitolbu għal aktar responsabbiltà
+# Titlob aktar responsabbiltà
 ## Min · Rwol attwali · Data
 
 ---

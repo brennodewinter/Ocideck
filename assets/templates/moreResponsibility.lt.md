@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prašo daugiau atsakomybės
+title: Didesnės atsakomybės prašymas
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Prašo daugiau atsakomybės
+# Didesnės atsakomybės prašymas
 ## Kas · Dabartinis vaidmuo · Data
 
 ---

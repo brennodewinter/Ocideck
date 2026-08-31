@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plean bordála (30-60-90 lá)
+title: Plean ionduchtaithe (30-60-90 lá)
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Plean bordála (30-60-90 lá)
+# Plean ionduchtaithe (30-60-90 lá)
 ## Fruiliú nua · Ról · Treoraí · Dáta tosaithe
 
 ---

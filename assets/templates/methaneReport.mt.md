@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapport ta' inċident kbir METHANE
+title: METHANE rapport ta' inċident kbir
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Rapport ta' inċident kbir METHANE
+# METHANE rapport ta' inċident kbir
 ## Inċident · Post · Data u ħin · Reporter
 
 ---

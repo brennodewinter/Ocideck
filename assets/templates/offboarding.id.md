@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Keluar / keluar
+title: Offboarding / keluar
 language: id
 ---
 
 <!-- _class: title -->
 
-# Keluar / keluar
+# Offboarding / keluar
 ## Karyawan · Peran · Hari kerja terakhir · Manajer
 
 ---

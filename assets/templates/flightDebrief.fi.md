@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Lennon selvitys
+title: Lennon jälkipuinti
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Lennon selvitys
+# Lennon jälkipuinti
 ## Lento · Päivämäärä · Miehistö
 
 ---

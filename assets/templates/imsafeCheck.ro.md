@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Verificare IMSAFE fitness-to-fly
+title: IMSAFE verificarea aptitudinii de zbor
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Verificare IMSAFE fitness-to-fly
+# IMSAFE verificarea aptitudinii de zbor
 ## Pilot · Zbor · Data · Această verificare nu înlocuiește judecata medicală
 
 ---

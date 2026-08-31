@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brandtjänstgenomgång (insats och övning)
+title: Briefing för räddningstjänsten (insats och övning)
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Brandtjänstgenomgång (insats och övning)
+# Briefing för räddningstjänsten (insats och övning)
 ## Objekt · Datum och tid · Incidentchef eller övningsledare · Besättning
 
 ---

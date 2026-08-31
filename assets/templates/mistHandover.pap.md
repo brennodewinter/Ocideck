@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A) MIST trauma handover
+title: (A)MIST entrega di trauma
 language: pap
 ---
 
 <!-- _class: title -->
 
-# (A) MIST trauma handover
+# (A)MIST entrega di trauma
 ## Prehospitalario → ED · Despacho · Fecha i ora
 
 ---

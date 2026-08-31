@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / pregătire pentru eliberare
+title: CAB / pregătirea lansării
 language: ro
 ---
 
 <!-- _class: title -->
 
-# CAB / pregătire pentru eliberare
+# CAB / pregătirea lansării
 
 ---
 

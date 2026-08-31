@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brifing o prolazu mosta
+title: Pomorski brifing prolaska / mosta
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Brifing o prolazu mosta
+# Pomorski brifing prolaska / mosta
 ## Putovanje · Brod · Datum · Raspored gledanja
 
 ---

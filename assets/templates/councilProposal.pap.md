@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Proposishon di konseho / ehekutivo
+title: Proposta pa konseho / ehekutivo
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Proposishon di konseho / ehekutivo
+# Proposta pa konseho / ehekutivo
 ## Tema · Kartera · Number di inskripshon · Outor
 
 ---

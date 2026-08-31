@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sakinlerin akşamı / katılım toplantısı
+title: Sakinler toplantısı / katılım buluşması
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Sakinlerin akşamı / katılım toplantısı
+# Sakinler toplantısı / katılım buluşması
 ## Mahalle · Konu · Tarih · Kolaylaştırıcı
 
 ---

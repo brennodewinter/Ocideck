@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Stolna vježba / krizna vježba
+title: Tabletop vježba / krizna vježba
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Stolna vježba / krizna vježba
+# Tabletop vježba / krizna vježba
 
 ---
 

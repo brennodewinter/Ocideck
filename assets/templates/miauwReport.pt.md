@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Relatório de teste de invasão MIAUW
+title: Relatório de pentest MIAUW
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Relatório de teste de invasão MIAUW
+# Relatório de pentest MIAUW
 
 ---
 

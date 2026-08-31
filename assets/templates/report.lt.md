@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pranešimas
+title: Ataskaita
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pranešimas
+# Ataskaita
 
 ---
 

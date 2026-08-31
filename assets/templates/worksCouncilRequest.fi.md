@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Yritysneuvoston neuvontapyyntö
+title: Lausuntopyyntö yhteistoimintaelimelle
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Yritysneuvoston neuvontapyyntö
+# Lausuntopyyntö yhteistoimintaelimelle
 ## Aihe · Johtaja · Yritysneuvosto · Päivämäärä
 
 ---

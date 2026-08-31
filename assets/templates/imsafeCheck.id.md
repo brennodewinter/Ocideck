@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pemeriksaan kebugaran untuk terbang IMSAFE
+title: IMSAFE pemeriksaan kelaikan terbang
 language: id
 ---
 
 <!-- _class: title -->
 
-# Pemeriksaan kebugaran untuk terbang IMSAFE
+# IMSAFE pemeriksaan kelaikan terbang
 ## Pilot · Penerbangan · Tanggal · Pemeriksaan ini tidak menggantikan penilaian medis
 
 ---

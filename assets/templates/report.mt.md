@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rapport
+title: Rappurtar
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Rapport
+# Rappurtar
 
 ---
 

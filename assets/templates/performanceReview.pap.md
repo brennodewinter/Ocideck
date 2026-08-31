@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Revishon di rendimentu
+title: Konversashon di evaluashon
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Revishon di rendimentu
+# Konversashon di evaluashon
 ## Ken · Periodo · Fecha
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Izkāpšana / iziešana
+title: Aiziešana / offboarding
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Izkāpšana / iziešana
+# Aiziešana / offboarding
 ## Darbinieks · Loma · Pēdējā darba diena · Vadītājs
 
 ---

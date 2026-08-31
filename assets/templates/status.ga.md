@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Mionteagasc stádais
+title: Faisnéisiú stádais
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Mionteagasc stádais
+# Faisnéisiú stádais
 
 ---
 

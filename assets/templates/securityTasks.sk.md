@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Plán úloh informačnej bezpečnosti
+title: Plán bezpečnostných úloh
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Plán úloh informačnej bezpečnosti
+# Plán bezpečnostných úloh
 
 ---
 

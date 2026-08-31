@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ανασκόπηση Sprint / demo
+title: Ανασκόπηση sprint / επίδειξη
 language: el
 ---
 
 <!-- _class: title -->
 
-# Ανασκόπηση Sprint / demo
+# Ανασκόπηση sprint / επίδειξη
 ## Ομάδα · Sprint · Ημερομηνία
 
 ---

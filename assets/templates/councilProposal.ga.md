@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Comhairle/togra feidhmiúcháin
+title: Togra don chomhairle / don fheidhmeannas
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Comhairle/togra feidhmiúcháin
+# Togra don chomhairle / don fheidhmeannas
 ## Ábhar · Punann · Cláruimhir · Údar
 
 ---

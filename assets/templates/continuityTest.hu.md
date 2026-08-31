@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Üzletmenet-folytonosság / DR teszt
+title: Üzletmenet-folytonosság / DR-teszt
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Üzletmenet-folytonosság / DR teszt
+# Üzletmenet-folytonosság / DR-teszt
 
 ---
 

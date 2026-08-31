@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Kunsill / proposta eżekuttiva
+title: Proposta lill-kunsill / lill-eżekuttiv
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Kunsill / proposta eżekuttiva
+# Proposta lill-kunsill / lill-eżekuttiv
 ## Suġġett · Portafoll · Numru ta’ reġistrazzjoni · Awtur
 
 ---

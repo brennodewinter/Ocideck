@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politika kidolgozási/végrehajtási terv
+title: Szabályzat bevezetése / megvalósítási terv
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Politika kidolgozási/végrehajtási terv
+# Szabályzat bevezetése / megvalósítási terv
 
 ---
 

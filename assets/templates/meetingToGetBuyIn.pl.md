@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Załatwienie czegoś podczas spotkania
+title: Osiągnięcie celu na spotkaniu
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Załatwienie czegoś podczas spotkania
+# Osiągnięcie celu na spotkaniu
 ## Spotkanie · Prośba o decyzję · Data
 
 ---

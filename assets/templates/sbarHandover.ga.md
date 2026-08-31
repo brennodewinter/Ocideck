@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: aistriú SBAR
+title: Seachadadh SBAR
 language: ga
 ---
 
 <!-- _class: title -->
 
-# aistriú SBAR
+# Seachadadh SBAR
 ## Othar · Barda · Ó Cé chuige · Dáta agus am
 
 ---

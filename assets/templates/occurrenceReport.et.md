@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Esinemisaruanne (ainult kultuur)
+title: Juhtumiteade (just culture)
 language: et
 ---
 
 <!-- _class: title -->
 
-# Esinemisaruanne (ainult kultuur)
+# Juhtumiteade (just culture)
 ## Esinemine · Kuupäev ja kellaaeg · Teataja · Kaasatud
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Förslag från rådet/verkställande direktören
+title: Förslag till fullmäktige / styrelse
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Förslag från rådet/verkställande direktören
+# Förslag till fullmäktige / styrelse
 ## Ämne · Portfölj · Registreringsnummer · Författare
 
 ---

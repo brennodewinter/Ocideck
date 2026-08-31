@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sertifikavimo eiga
+title: Sertifikavimo pažanga
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Sertifikavimo eiga
+# Sertifikavimo pažanga
 
 ---
 

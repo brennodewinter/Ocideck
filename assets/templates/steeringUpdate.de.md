@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Aktualisierung des Lenkungsausschusses/Projektvorstands
+title: Lenkungsausschuss / Project-Board-Update
 language: de
 ---
 
 <!-- _class: title -->
 
-# Aktualisierung des Lenkungsausschusses/Projektvorstands
+# Lenkungsausschuss / Project-Board-Update
 
 ---
 

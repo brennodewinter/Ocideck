@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: PPL paruošimas skrydžiui
+title: PPL pasirengimas skrydžiui
 language: lt
 ---
 
 <!-- _class: title -->
 
-# PPL paruošimas skrydžiui
+# PPL pasirengimas skrydžiui
 ## Data · Kvietimas · Maršrutas · PIC
 
 ---

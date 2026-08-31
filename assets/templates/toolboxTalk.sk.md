@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Rozhovor s nástrojmi / analýza rizík na poslednú chvíľu
+title: Toolbox / bezpečnostná kontrola LMRA
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Rozhovor s nástrojmi / analýza rizík na poslednú chvíľu
+# Toolbox / bezpečnostná kontrola LMRA
 ## Práca · Miesto · Dátum · Posádka
 
 ---

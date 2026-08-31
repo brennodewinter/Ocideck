@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Prvý deň / indukcia
+title: Prvý deň / uvedenie
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Prvý deň / indukcia
+# Prvý deň / uvedenie
 ## Nový zamestnanec · Úloha · Sprievodca · Dátum
 
 ---

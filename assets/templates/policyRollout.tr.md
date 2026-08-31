@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Politikanın kullanıma sunulması / uygulama planı
+title: Politika yayılımı / uygulama planı
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Politikanın kullanıma sunulması / uygulama planı
+# Politika yayılımı / uygulama planı
 
 ---
 

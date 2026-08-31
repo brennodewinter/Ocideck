@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Izkrcanje/izhod
+title: Offboarding / odhod
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Izkrcanje/izhod
+# Offboarding / odhod
 ## Zaposleni · Vloga · Zadnji delovni dan · Vodja
 
 ---

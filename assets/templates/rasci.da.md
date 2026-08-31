@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Informationssikkerhed: RASCI / ansvar"
+title: "Informationssikkerhed: RASCI / TVB"
 language: da
 ---
 
 <!-- _class: title -->
 
-# Informationssikkerhed: RASCI / ansvar
+# Informationssikkerhed: RASCI / TVB
 
 ---
 

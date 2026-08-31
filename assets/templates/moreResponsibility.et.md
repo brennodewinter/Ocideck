@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nõuab suuremat vastutust
+title: Suurema vastutuse küsimine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Nõuab suuremat vastutust
+# Suurema vastutuse küsimine
 ## Kes · Praegune roll · Kuupäev
 
 ---

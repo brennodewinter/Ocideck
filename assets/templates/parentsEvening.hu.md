@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Szülői est / tájékoztató est
+title: Szülői értekezlet / tájékoztató est
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Szülői est / tájékoztató est
+# Szülői értekezlet / tájékoztató est
 ## Osztály vagy csoport · Tanév · Helyszín
 
 ---

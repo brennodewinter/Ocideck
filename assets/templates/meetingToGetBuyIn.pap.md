@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Hasi algu den un reunion
+title: Logra algu den un reunion
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Hasi algu den un reunion
+# Logra algu den un reunion
 ## Reunion · Desishon pidi · Fecha
 
 ---

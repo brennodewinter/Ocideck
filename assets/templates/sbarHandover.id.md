@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: serah terima SBAR
+title: Serah terima SBAR
 language: id
 ---
 
 <!-- _class: title -->
 
-# serah terima SBAR
+# Serah terima SBAR
 ## Pasien · Bangsal · Dari siapa kepada siapa · Tanggal dan waktu
 
 ---

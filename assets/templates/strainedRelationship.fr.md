@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Discuter d'une relation tendue
+title: Aborder une relation difficile
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Discuter d'une relation tendue
+# Aborder une relation difficile
 ## Avec qui · À propos de quoi · Quand
 
 ---

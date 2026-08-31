@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Negozjati mal-fornituri
+title: Negozjar mal-fornituri
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Negozjati mal-fornituri
+# Negozjar mal-fornituri
 ## Fornitur · Kuntratt · Għan · Data
 
 ---

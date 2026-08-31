@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pardavimų pokalbis
+title: Pardavimo pokalbis
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pardavimų pokalbis
+# Pardavimo pokalbis
 ## Prospektas · Kontaktinis asmuo · Pasiūlymas · Data
 
 ---

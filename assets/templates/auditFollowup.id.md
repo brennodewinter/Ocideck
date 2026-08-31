@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Temuan audit dan tindak lanjutnya
+title: Temuan audit dan tindak lanjut
 language: id
 ---
 
 <!-- _class: title -->
 
-# Temuan audit dan tindak lanjutnya
+# Temuan audit dan tindak lanjut
 
 ---
 

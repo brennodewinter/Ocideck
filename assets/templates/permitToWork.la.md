@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Permittere ad opus
+title: Licentia operis (permit to work)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Permittere ad opus
+# Licentia operis (permit to work)
 ## Opus · Locus · Fortis ab-ad · Sine issuer
 
 ---

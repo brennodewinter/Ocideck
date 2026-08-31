@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Piano di attuazione/implementazione delle politiche
+title: Rollout di una policy / piano di attuazione
 language: it
 ---
 
 <!-- _class: title -->
 
-# Piano di attuazione/implementazione delle politiche
+# Rollout di una policy / piano di attuazione
 
 ---
 

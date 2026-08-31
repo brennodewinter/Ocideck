@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Trusselsmodelleringssession
+title: Threat modeling-session
 language: da
 ---
 
 <!-- _class: title -->
 
-# Trusselsmodelleringssession
+# Threat modeling-session
 ## System · Dato · Facilitator · Deltagere
 
 ---

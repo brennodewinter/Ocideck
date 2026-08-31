@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Analiżi tar-riskju/reġistru tar-riskju
+title: Analiżi tar-riskju / reġistru tar-riskji
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Analiżi tar-riskju/reġistru tar-riskju
+# Analiżi tar-riskju / reġistru tar-riskji
 
 ---
 

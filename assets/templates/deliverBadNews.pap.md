@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entregando mal notisia
+title: Trese notisia malu
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entregando mal notisia
+# Trese notisia malu
 ## Na ken · E notisia · Fecha
 
 ---

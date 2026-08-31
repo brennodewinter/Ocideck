@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: GRIPi eskalatsioon
+title: GRIP-eskaleerimine
 language: et
 ---
 
 <!-- _class: title -->
 
-# GRIPi eskalatsioon
+# GRIP-eskaleerimine
 ## Juhtum · Kuupäev ja kellaaeg · Juht · Praegune GRIP tase
 
 ---

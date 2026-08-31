@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: (A)MIST trauma átadása
+title: (A)MIST trauma-átadás
 language: hu
 ---
 
 <!-- _class: title -->
 
-# (A)MIST trauma átadása
+# (A)MIST trauma-átadás
 ## Prehospital → ED · Feladás · Dátum és idő
 
 ---

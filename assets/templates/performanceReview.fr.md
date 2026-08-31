@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Évaluation des performances
+title: Entretien d'évaluation
 language: fr
 ---
 
 <!-- _class: title -->
 
-# Évaluation des performances
+# Entretien d'évaluation
 ## Qui · Période · Date
 
 ---

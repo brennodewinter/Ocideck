@@ -3,7 +3,7 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: "Processus emendationis: Kaizen project"
+title: "Processus emendationem: Kaizen project"
 language: la
 ocideck_improvement_framework: kaizen
 ---

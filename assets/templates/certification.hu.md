@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: A tanúsítás folyamata
+title: Tanúsítás előrehaladása
 language: hu
 ---
 
 <!-- _class: title -->
 
-# A tanúsítás folyamata
+# Tanúsítás előrehaladása
 
 ---
 

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: izvješće
+title: Izvještaj
 language: hr
 ---
 
 <!-- _class: title -->
 
-# izvješće
+# Izvještaj
 
 ---
 

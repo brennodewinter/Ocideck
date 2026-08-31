@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Įvykio ataskaita (tik kultūra)
+title: Įvykio pranešimas (just culture)
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Įvykio ataskaita (tik kultūra)
+# Įvykio pranešimas (just culture)
 ## Įvykis · Data ir laikas · Pranešėjas · Dalyvauja
 
 ---

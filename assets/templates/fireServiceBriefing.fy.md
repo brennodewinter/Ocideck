@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Brânwachtbriefing (antwurd en oefening)
+title: Brânwachtbriefing (ynset en oefening)
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Brânwachtbriefing (antwurd en oefening)
+# Brânwachtbriefing (ynset en oefening)
 ## Objekt · Datum en tiid · Ynsidint kommandant of oefening lieder · Bemanning
 
 ---

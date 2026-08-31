@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Turma multidisciplinaris foederis (MDT)
+title: Conventus multidisciplinaris (MDT)
 language: la
 ---
 
 <!-- _class: title -->
 
-# Turma multidisciplinaris foederis (MDT)
+# Conventus multidisciplinaris (MDT)
 ## Casus · Date · Cathedra · Attendees
 
 ---

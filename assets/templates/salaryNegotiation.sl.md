@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pogajanje o plačah
+title: Pogajanje o plači
 language: sl
 ---
 
 <!-- _class: title -->
 
-# Pogajanje o plačah
+# Pogajanje o plači
 ## Kdo · Vloga · Datum
 
 ---

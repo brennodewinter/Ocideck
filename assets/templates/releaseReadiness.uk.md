@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: CAB / Готовність до випуску
+title: CAB / готовність до релізу
 language: uk
 ---
 
 <!-- _class: title -->
 
-# CAB / Готовність до випуску
+# CAB / готовність до релізу
 
 ---
 

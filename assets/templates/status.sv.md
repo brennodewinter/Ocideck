@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Statusgenomgång
+title: Statusbriefing
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Statusgenomgång
+# Statusbriefing
 
 ---
 

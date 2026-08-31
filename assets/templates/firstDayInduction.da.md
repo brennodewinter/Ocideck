@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Første dag / induktion
+title: Første dag / introduktion
 language: da
 ---
 
 <!-- _class: title -->
 
-# Første dag / induktion
+# Første dag / introduktion
 ## Nyansættelse · Rolle · Vejleder · Dato
 
 ---

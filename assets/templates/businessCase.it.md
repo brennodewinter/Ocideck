@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Caso aziendale/proposta di investimento
+title: Business case / proposta di investimento
 language: it
 ---
 
 <!-- _class: title -->
 
-# Caso aziendale/proposta di investimento
+# Business case / proposta di investimento
 ## Proposta · Autore · Organo decisionale · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Conversazione familiare sulla cura e sul caregiving
+title: Colloquio familiare su cure e assistenza
 language: it
 ---
 
 <!-- _class: title -->
 
-# Conversazione familiare sulla cura e sul caregiving
+# Colloquio familiare su cure e assistenza
 ## Argomento · Data · Facilitatore · Partecipanti
 
 ---

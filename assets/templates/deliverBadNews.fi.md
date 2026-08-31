@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Huonojen uutisten välittäminen
+title: Huonojen uutisten kertominen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Huonojen uutisten välittäminen
+# Huonojen uutisten kertominen
 ## Kenelle · Uutiset · Päivämäärä
 
 ---

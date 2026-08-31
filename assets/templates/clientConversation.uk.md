@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Розмова клієнта
+title: Розмова з клієнтом
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Розмова клієнта
+# Розмова з клієнтом
 ## Клієнт · Контактна особа · Мета · Дата
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ensimmäinen päivä / induktio
+title: Ensimmäinen päivä / perehdytys
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Ensimmäinen päivä / induktio
+# Ensimmäinen päivä / perehdytys
 ## Uusi työntekijä · Rooli · Opas · Päivämäärä
 
 ---

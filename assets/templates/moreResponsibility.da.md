@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Beder om mere ansvar
+title: Bede om mere ansvar
 language: da
 ---
 
 <!-- _class: title -->
 
-# Beder om mere ansvar
+# Bede om mere ansvar
 ## Hvem · Nuværende rolle · Dato
 
 ---

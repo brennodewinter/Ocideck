@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pyytää lisää vastuuta
+title: Suuremman vastuun pyytäminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Pyytää lisää vastuuta
+# Suuremman vastuun pyytäminen
 ## Kuka · Nykyinen rooli · Päivämäärä
 
 ---

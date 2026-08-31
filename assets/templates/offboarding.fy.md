@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Offboarding / útgong
+title: Utstjinsttreding / offboarding
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Offboarding / útgong
+# Utstjinsttreding / offboarding
 ## Meiwurker · Rol · Lêste wurkdei · Manager
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: valné zhromaždenie (VZ)
+title: Členská schôdza (valné zhromaždenie)
 language: sk
 ---
 
 <!-- _class: title -->
 
-# valné zhromaždenie (VZ)
+# Členská schôdza (valné zhromaždenie)
 ## Organizácia · Dátum · Predseda · Prítomní členovia
 
 ---

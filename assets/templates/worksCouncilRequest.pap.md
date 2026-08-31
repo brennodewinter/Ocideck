@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Petishon di konseho di konseho di trabou
+title: Petishon di konseho na e konseho di empleadonan
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Petishon di konseho di konseho di trabou
+# Petishon di konseho na e konseho di empleadonan
 ## Materia · Direktor · Konseho di trabou · Fecha
 
 ---
