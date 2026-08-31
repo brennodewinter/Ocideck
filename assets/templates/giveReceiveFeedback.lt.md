@@ -28,21 +28,21 @@ language: lt
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Kai ją duodu</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Apibūdink elgesį, ne žmogų</li>
+<li>Faktas → poveikis → prašymas</li>
+<li>Laiku, ne sukaupus</li>
+<li>Patikrink, kaip tai priimta</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Kai ją gaunu</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Klausyk iš karto negindamas savęs</li>
+<li>Paprašyk konkretaus pavyzdžio</li>
+<li>Padėkok už atvirumą</li>
+<li>Skirk laiko prieš atsakydamas</li>
 </ul>
 </div>
 </div>

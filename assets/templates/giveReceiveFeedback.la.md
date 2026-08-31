@@ -28,21 +28,21 @@ language: la
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Cum do</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Describe mores, non hominem</li>
+<li>Factum → effectus → petitio</li>
+<li>In tempore, non congesta</li>
+<li>Vide quomodo accipiatur</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Cum accipio</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Audi neque statim te defende</li>
+<li>Pete exemplum certum</li>
+<li>Gratias age pro candore</li>
+<li>Sume tempus antequam respondeas</li>
 </ul>
 </div>
 </div>

@@ -28,21 +28,21 @@ language: pl
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Kiedy jej udzielam</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Opisz zachowanie, nie osobę</li>
+<li>Fakt → efekt → prośba</li>
+<li>Na czas, nie zbierane</li>
+<li>Sprawdź, jak to trafia</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Kiedy ją otrzymuję</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Słuchaj, nie broniąc się od razu</li>
+<li>Poproś o konkretny przykład</li>
+<li>Podziękuj za otwartość</li>
+<li>Daj sobie czas przed odpowiedzią</li>
 </ul>
 </div>
 </div>

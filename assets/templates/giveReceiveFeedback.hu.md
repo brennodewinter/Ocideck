@@ -28,21 +28,21 @@ language: hu
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">When I give it</h3>
+<h3 style="margin:0 0 .5rem;">Amikor adom</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Describe behavior, not the person</li>
-<li>Fact → effect → request</li>
-<li>Promptly, not stockpiled</li>
-<li>Check how it lands</li>
+<li>Viselkedést írj le, ne a személyt</li>
+<li>Tény → hatás → kérés</li>
+<li>Időben, nem felhalmozva</li>
+<li>Nézd meg, hogyan érkezik meg</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">When I receive it</h3>
+<h3 style="margin:0 0 .5rem;">Amikor kapom</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Listen without immediately getting defensive</li>
-<li>Ask for a specific example</li>
-<li>Thank them for their openness</li>
-<li>Take time before responding</li>
+<li>Hallgasd meg, ne védekezz azonnal</li>
+<li>Kérj konkrét példát</li>
+<li>Köszönd meg a nyíltságot</li>
+<li>Szánj időt, mielőtt válaszolsz</li>
 </ul>
 </div>
 </div>

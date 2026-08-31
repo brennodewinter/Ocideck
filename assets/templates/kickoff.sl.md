@@ -35,18 +35,18 @@ language: sl
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">In scope</h3>
+<h3 style="margin:0 0 .5rem;">V obsegu</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
+<li>Postavka 1</li>
+<li>Postavka 2</li>
+<li>Postavka 3</li>
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">Out of scope</h3>
+<h3 style="margin:0 0 .5rem;">Zunaj obsega</h3>
 <ul style="margin:0; padding-left:1.3em;">
-<li>Item A</li>
-<li>Item B</li>
+<li>Postavka A</li>
+<li>Postavka B</li>
 </ul>
 </div>
 </div>

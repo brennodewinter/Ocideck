@@ -62,7 +62,7 @@ language: et
 
 <div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
 <div>
-<h3 style="margin:0 0 .5rem;">Where I am strong</h3>
+<h3 style="margin:0 0 .5rem;">Milles ma olen tugev</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
@@ -70,7 +70,7 @@ language: et
 </ul>
 </div>
 <div>
-<h3 style="margin:0 0 .5rem;">What I am honest about</h3>
+<h3 style="margin:0 0 .5rem;">Milles ma olen aus</h3>
 <ul style="margin:0; padding-left:1.3em;">
 <li>…</li>
 <li>…</li>
