@@ -170,6 +170,8 @@ const int perFileFloorPercent = $bestandsvloer;
       int doorlaat = 0,
       // Idem voor de samenwerk-schuldlijst uit check_collab_field_parity.dart.
       int onsync = 0,
+      // Idem voor de sjabloonratchet uit check_untranslated_templates.dart.
+      int onvertaald = 0,
     }) => {
       'tool/check_conventions.dart': conventies(
         katch: katch,
@@ -188,6 +190,8 @@ const int perFileFloorPercent = $bestandsvloer;
       'tool/check_l10n_orphans.dart': 'const int orphanBaseline = $wezen;',
       'tool/check_l10n_dutch_passthrough.dart':
           'const int passthroughBaseline = $doorlaat;',
+      'tool/check_untranslated_templates.dart':
+          'const int untranslatedBaseline = $onvertaald;',
       'tool/check_collab_field_parity.dart':
           'const Set<String> unsyncedBaseline = {'
           '${List.generate(onsync, (i) => "'veld$i',").join()}'

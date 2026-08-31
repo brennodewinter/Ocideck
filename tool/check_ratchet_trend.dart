@@ -223,6 +223,13 @@ const List<Ratchet> ratchets = [
     wat: 'vertalingen die de Nederlandse bron letterlijk doorlaten',
   ),
   Ratchet(
+    naam: 'untranslatedBaseline',
+    bestand: 'tool/check_untranslated_templates.dart',
+    soort: RatchetSoort.getal,
+    richting: Richting.omlaag,
+    wat: 'sjabloonregels die in het Engels bleven staan',
+  ),
+  Ratchet(
     naam: 'perFileFloorPercent',
     bestand: 'tool/coverage_summary.dart',
     soort: RatchetSoort.getal,
