@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Oferă o prezentare
+title: Susține un pitch
 language: ro
 ---
 
 <!-- _class: title -->
 
-# Oferă o prezentare
+# Susține un pitch
 ## Cui i se adresează · Ce întrebi · Ora · Data
 
 ---

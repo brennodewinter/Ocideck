@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Nodrošiniet piķi
+title: Prezentēt pitch
 language: lv
 ---
 
 <!-- _class: title -->
 
-# Nodrošiniet piķi
+# Prezentēt pitch
 ## Kam tas paredzēts · Ko jūs jautājat · Laiks · Datums
 
 ---

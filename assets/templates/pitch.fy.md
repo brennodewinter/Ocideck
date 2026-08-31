@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Leverje in pitch
+title: In pitch jaan
 language: fy
 ---
 
 <!-- _class: title -->
 
-# Leverje in pitch
+# In pitch jaan
 ## Foar wa is it · Wat jo freegje · Tiid · Datum
 
 ---

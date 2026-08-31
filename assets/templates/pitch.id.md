@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Sampaikan promosi
+title: Menyampaikan pitch
 language: id
 ---
 
 <!-- _class: title -->
 
-# Sampaikan promosi
+# Menyampaikan pitch
 ## Untuk siapa · Apa yang Anda tanyakan · Waktu · Tanggal
 
 ---

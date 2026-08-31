@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Iwassal żift
+title: Agħmel pitch
 language: mt
 ---
 
 <!-- _class: title -->
 
-# Iwassal żift
+# Agħmel pitch
 ## Għal min hu · Dak li qed titlob · Ħin · Data
 
 ---

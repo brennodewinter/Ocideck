@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Adj egy pályát
+title: Pitch tartása
 language: hu
 ---
 
 <!-- _class: title -->
 
-# Adj egy pályát
+# Pitch tartása
 ## Kinek szól · Mit kérdez · Idő · Dátum
 
 ---

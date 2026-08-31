@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Ge ett pitche
+title: Hålla en pitch
 language: sv
 ---
 
 <!-- _class: title -->
 
-# Ge ett pitche
+# Hålla en pitch
 ## Vem det är till · Vad du frågar · Tid · Datum
 
 ---

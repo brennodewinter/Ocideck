@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Liefern Sie einen Pitch
+title: En Pitch halte
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Liefern Sie einen Pitch
+# En Pitch halte
 ## Für wen es ist · Was Sie fragen · Uhrzeit · Datum
 
 ---

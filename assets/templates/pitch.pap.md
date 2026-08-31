@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Entregá un presentashon
+title: Duna un pitch
 language: pap
 ---
 
 <!-- _class: title -->
 
-# Entregá un presentashon
+# Duna un pitch
 ## Pa ken e ta · Kiko bo ta puntra · Ora · Fecha
 
 ---

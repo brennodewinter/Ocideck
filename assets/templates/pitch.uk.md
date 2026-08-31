@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доставте подачу
+title: Провести пітч
 language: uk
 ---
 
 <!-- _class: title -->
 
-# Доставте подачу
+# Провести пітч
 ## Для кого це · Про що ви запитуєте · Час · Дата
 
 ---

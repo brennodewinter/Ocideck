@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Παρουσίαση πρότασης
+title: Παρουσίαση pitch
 language: el
 ---
 
 <!-- _class: title -->
 
-# Παρουσίαση πρότασης
+# Παρουσίαση pitch
 ## Αποδέκτης · Τι ζητάτε · Ώρα · Ημερομηνία
 
 ---

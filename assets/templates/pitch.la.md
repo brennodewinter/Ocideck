@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Libera picem
+title: Pitch praebere
 language: la
 ---
 
 <!-- _class: title -->
 
-# Libera picem
+# Pitch praebere
 ## Quis est de eo quod petis · Tempus · Date
 
 ---

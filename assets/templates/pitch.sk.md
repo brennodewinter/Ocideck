@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Doručiť ihrisko
+title: Predniesť pitch
 language: sk
 ---
 
 <!-- _class: title -->
 
-# Doručiť ihrisko
+# Predniesť pitch
 ## Pre koho je určený · Na čo sa pýtate · Čas · Dátum
 
 ---

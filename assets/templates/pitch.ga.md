@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Seachadadh páirc
+title: Pitch a thabhairt
 language: ga
 ---
 
 <!-- _class: title -->
 
-# Seachadadh páirc
+# Pitch a thabhairt
 ## Cé dó atá sé · Cad atá á iarraidh agat · Am · Dáta
 
 ---

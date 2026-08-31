@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Isporučite ponudu
+title: Održati pitch
 language: hr
 ---
 
 <!-- _class: title -->
 
-# Isporučite ponudu
+# Održati pitch
 ## Za koga je · Što tražite · Vrijeme · Datum
 
 ---

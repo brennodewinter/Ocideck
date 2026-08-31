@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Доставете представяне
+title: Представяне на питч
 language: bg
 ---
 
 <!-- _class: title -->
 
-# Доставете представяне
+# Представяне на питч
 ## За кого е · Какво питате · Час · Дата
 
 ---

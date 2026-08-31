@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Dostarcz prezentację
+title: Przedstawić pitch
 language: pl
 ---
 
 <!-- _class: title -->
 
-# Dostarcz prezentację
+# Przedstawić pitch
 ## Dla kogo · O co pytasz · Czas · Data
 
 ---

@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Bir sunum yapın
+title: Pitch yapmak
 language: tr
 ---
 
 <!-- _class: title -->
 
-# Bir sunum yapın
+# Pitch yapmak
 ## Kimin için · Ne soruyorsun · Saat · Tarih
 
 ---

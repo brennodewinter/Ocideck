@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Afgiv et pitch
+title: Holde en pitch
 language: da
 ---
 
 <!-- _class: title -->
 
-# Afgiv et pitch
+# Holde en pitch
 ## Hvem er det til · Hvad du spørger om · Tid · Dato
 
 ---

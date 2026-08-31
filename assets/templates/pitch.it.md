@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Fai una presentazione
+title: Fare un pitch
 language: it
 ---
 
 <!-- _class: title -->
 
-# Fai una presentazione
+# Fare un pitch
 ## A chi è rivolto · Cosa chiedi · Ora · Data
 
 ---

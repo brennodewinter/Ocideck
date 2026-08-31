@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Doručte nabídku
+title: Přednést pitch
 language: cs
 ---
 
 <!-- _class: title -->
 
-# Doručte nabídku
+# Přednést pitch
 ## Pro koho to je · Na co se ptáte · Čas · Datum
 
 ---

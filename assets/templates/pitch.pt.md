@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Faça um argumento de venda
+title: Fazer um pitch
 language: pt
 ---
 
 <!-- _class: title -->
 
-# Faça um argumento de venda
+# Fazer um pitch
 ## Para quem se destina · O que você está perguntando · Hora · Data
 
 ---

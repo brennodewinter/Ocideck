@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Pateikite aikštę
+title: Pristatyti pitch'ą
 language: lt
 ---
 
 <!-- _class: title -->
 
-# Pateikite aikštę
+# Pristatyti pitch'ą
 ## Kam skirta · Ko klausiate · Laikas · Data
 
 ---

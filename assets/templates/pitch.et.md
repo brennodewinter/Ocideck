@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Esitage pigi
+title: Pitchi esitamine
 language: et
 ---
 
 <!-- _class: title -->
 
-# Esitage pigi
+# Pitchi esitamine
 ## Kellele see on mõeldud · Mida te küsite · Kellaaeg · Kuupäev
 
 ---

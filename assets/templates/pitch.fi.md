@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Toimita pitch
+title: Pitchin pitäminen
 language: fi
 ---
 
 <!-- _class: title -->
 
-# Toimita pitch
+# Pitchin pitäminen
 ## Kenelle se on tarkoitettu · Mitä kysyt · Aika · Päivämäärä
 
 ---
