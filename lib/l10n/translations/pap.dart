@@ -674,6 +674,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klik riba e imagen unda e punto ta referí na.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Drag riba e imagen pa marka un área.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Ta aplica na e dia kompletu — ta determiná kon referensianan ta wòrdu dibishoná durante presentashon, no kon bo ta editá nan.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Bira ta skirbi un kopia birá banda di e original; bo archivo original ta keda sin kambio.',
   'Doel toevoegen': 'Añadi meta',

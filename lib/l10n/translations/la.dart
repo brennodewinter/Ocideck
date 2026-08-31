@@ -1650,6 +1650,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Imaginem clicke ubi hoc punctum refert.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Imaginem trahere aream notare.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Tota lamina valet — determinat quomodo notae in praesentatione designantur, non quomodo eas modifies.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Conversio exemplar versum iuxta archetypum scribit; fasciculus tuus originalis immutatus manet.',
   'Doel toevoegen': 'Adde destinatum',

@@ -266,7 +266,10 @@ const Map<String, int> fileSizeBaseline = {
   // Statische markeringen staan in callout_marker_helpers.dart; hier is de
   // null-image guard (beeld toont altijd, ook zonder selectie) en de
   // for-loop die alle callouts doorloopt.
-  'lib/widgets/editors/callout_editor.dart': 1056,
+  // +161 (#1860): click-to-place (_placeTarget, _cancelPlacing,
+  // plaatsingsmodus in gesture layer + instructie-overlay), hernummeren in
+  // leesvolgorde (_renumberReferences), hint onder presentatiewijze.
+  'lib/widgets/editors/callout_editor.dart': 1227,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -519,7 +522,8 @@ const Map<String, int> classSizeBaseline = {
   // +9 (#1854): null-image guard (beeld toont altijd) + for-loop die alle
   // callouts doorloopt in _buildImageStack. Statische markeringen staan in
   // callout_marker_helpers.dart; de klasse houdt de loop en de guard.
-  'lib/widgets/editors/callout_editor.dart#_CalloutEditorDialogState': 1009,
+  // +161 (#1860): click-to-place, _renumberReferences, hint tekst.
+  'lib/widgets/editors/callout_editor.dart#_CalloutEditorDialogState': 1180,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

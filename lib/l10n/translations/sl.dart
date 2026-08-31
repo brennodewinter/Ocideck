@@ -1636,6 +1636,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Kliknite na sliko, kamor se ta točka nanaša.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Povlecite po sliki za označevanje območja.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Velja za cel diapozitiv — določa, kako se reference rišejo med predstavitvijo, ne kako jih urejate.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Vrtenje zapiše zavrteno kopijo poleg izvirnika; vaša izvorna datoteka ostane nespremenjena.',
   'Doel toevoegen': 'Dodaj cilj',

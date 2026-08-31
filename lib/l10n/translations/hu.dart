@@ -1637,6 +1637,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Kattintson a képen oda, ahová ez a pont hivatkozik.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Húzzon a képen egy terület megjelöléséhez.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'A teljes diára vonatkozik — meghatározza, hogyan rajzolódnak a hivatkozások a prezentáció során, nem pedig, hogyan szerkeszted őket.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'A forgatás elforgatott másolatot ír az eredeti mellé; az eredeti fájlod változatlan marad.',
   'Doel toevoegen': 'Cél hozzáadása',

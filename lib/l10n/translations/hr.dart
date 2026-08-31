@@ -1639,6 +1639,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Kliknite na sliku gdje se ovaj bod odnosi.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Vucite po slici za označavanje područja.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Vrijedi za cijeli slajd — određuje kako se reference crtaju tijekom prezentacije, a ne kako ih uređujete.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotiranje zapisuje zakrenutu kopiju pokraj izvornika; vaša izvorna datoteka ostaje nepromijenjena.',
   'Doel toevoegen': 'Dodaj cilj',

@@ -1665,6 +1665,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Cliceáil ar an íomhá áit a ndéanann an pointe seo tagairt.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Tarraing ar an íomhá chun limistéar a mharcáil.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Baineann sé leis an sleá iomlán — cinneoidh sé conas a tarraingtear tagairtí le linn na láithreoide, ní conas a chuireann tú in eagar iad.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Scríobhann rothlú cóip rothlaithe in aice leis an mbunchóip; fanann do bhunchomhad gan athrú.',
   'Doel toevoegen': 'Cuir sprioc leis',

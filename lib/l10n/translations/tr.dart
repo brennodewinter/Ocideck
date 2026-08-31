@@ -2553,6 +2553,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Bu noktanın başvurduğu yeri görselde tıklayın.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Bir alanı işaretlemek için görselde sürükleyin.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Tüm slayt için geçerlidir — sunum sırasında referansların nasıl çizileceğini belirler, nasıl düzenlediğinizi değil.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Döndürmek, orijinalin yanına döndürülmüş bir kopya yazar; özgün dosyanız değişmeden kalır.',
   'Doel toevoegen': 'Hedef ekle',

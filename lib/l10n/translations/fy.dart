@@ -675,6 +675,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klik op it byld wêr\'t dit punt nei ferwiist.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Sleep op it byld om in gebiet te markearjen.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Jildich foar de hiele dia — bepaalt hoe ferwizings by de presintaasje tekene wurde, net hoe\'t jo se bewurkje.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Draaien skriuwt in draaide kopy neist it orizjineel; dyn oarspronklike bestân bliuwt ûnferoare.',
   'Doel toevoegen': 'Doel tafoegje',

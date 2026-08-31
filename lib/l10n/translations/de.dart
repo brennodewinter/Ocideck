@@ -675,6 +675,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klicke auf das Bild, worauf dieser Punkt verweist.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Ziehe auf dem Bild, um einen Bereich zu markieren.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Gilt für die gesamte Folie — bestimmt, wie Hinweise während der Präsentation gezeichnet werden, nicht wie du sie bearbeitest.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Drehen schreibt eine gedrehte Kopie neben das Original; Ihre Ursprungsdatei bleibt unverändert.',
   'Doel toevoegen': 'Ziel hinzufügen',

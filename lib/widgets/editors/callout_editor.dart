@@ -70,6 +70,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   /// #1864: geselecteerd doel; "Doel verwijderen" haalt dit weg, niet het laatste.
   int? _selectedTargetIndex;
 
+  /// #1860: wanneer non-null staat de editor in plaatsingsmodus voor de
+  /// callout op deze index — "Toevoegen" heeft de callout aangemaakt maar
+  /// nog geen doel geplaatst. De eerste klik (pin/pijl) of sleep (gebied)
+  /// op het beeld plaatst het doel; daarna wordt dit weer `null`.
+  int? _placingCalloutIndex;
+
   /// Region being dragged out — null when not dragging.
   DragRegion? _dragRegion;
 
@@ -171,10 +177,57 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     });
   }
 
+  /// #1860: hernummer verwijzingen in leesvolgorde (boven naar beneden) en
+  /// herschik de callouts-lijst zodat de front-matter ze in leesvolgorde
+  /// schrijft. Letters volgden aanmaakvolgorde — het publiek zag A, B, D, C.
+  void _renumberReferences() {
+    final pairs = <(int, int)>[];
+    var seen = -1;
+    for (var i = 0; i < _bullets.length; i++) {
+      if (_bullets[i].trimLeft().isEmpty) continue;
+      seen++;
+      final letter = _calloutLetterForBullet(_bullets[i]);
+      if (letter == null) continue;
+      final ci = _callouts.indexWhere((c) => c.reference == letter);
+      if (ci >= 0) pairs.add((ci, seen));
+    }
+    var needs = false;
+    for (var i = 0; i < pairs.length; i++) {
+      if (_callouts[pairs[i].$1].reference != String.fromCharCode(65 + i) ||
+          pairs[i].$1 != i) {
+        needs = true;
+        break;
+      }
+    }
+    if (!needs) return;
+    for (var i = 0; i < _bullets.length; i++) {
+      _bullets[i] = _bullets[i].replaceFirst(RegExp(r'\s\([A-Z]\)\s*$'), '');
+    }
+    final reordered = <ImageCallout>[];
+    for (var i = 0; i < pairs.length; i++) {
+      final newLetter = String.fromCharCode(65 + i);
+      final old = _callouts[pairs[i].$1];
+      reordered.add(
+        ImageCallout(
+          reference: newLetter,
+          targets: old.targets,
+          description: old.description,
+        ),
+      );
+      _setReference(pairs[i].$2, newLetter);
+    }
+    for (var ci = 0; ci < _callouts.length; ci++) {
+      if (!pairs.any((p) => p.$1 == ci)) reordered.add(_callouts[ci]);
+    }
+    _callouts = reordered;
+  }
+
   void _emit() {
+    _renumberReferences();
+    final complete = _callouts.where((c) => c.targets.isNotEmpty).toList();
     widget.onUpdate(
       widget.slide.copyWith(
-        callouts: _callouts,
+        callouts: complete,
         calloutPresentation: _presentation,
         calloutReveal: _reveal,
         bullets: _bullets,
@@ -217,26 +270,67 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
   }
 
   /// Adds a callout to a bullet, assigning the next free reference letter.
+  /// #1860: plaatst geen doel op 0.5/0.5 maar gaat in plaatsingsmodus —
+  /// de gebruiker klikt of sleept op het beeld om het doel te plaatsen.
   void _addCallout(int bulletIndex) {
     final bullets = _bullets.where((b) => b.trimLeft().isNotEmpty).toList();
     if (bulletIndex < 0 || bulletIndex >= bullets.length) return;
+
+    // Een vorige onvoltooide plaatsing opruimen — geen doel, geen emit geweest.
+    if (_placingCalloutIndex != null) _cancelPlacing();
 
     final proseLetters = trailingReferenceLetters(bullets);
     final usedLetters = calloutLetters(_callouts);
     final ref = nextFreeReference(usedLetters, proseLetters);
     if (ref == null) return; // §8: 26 references max.
 
-    final firstTarget = _presentation == CalloutPresentation.region
-        ? const CalloutRegion(0.3, 0.3, 0.4, 0.4)
-        : const CalloutPoint(0.5, 0.5);
     setState(() {
       _callouts.add(
-        ImageCallout(reference: ref, targets: [firstTarget], description: ''),
+        ImageCallout(reference: ref, targets: const [], description: ''),
       );
       _selectCallout(_callouts.length - 1);
       _setReference(bulletIndex, ref);
+      _placingCalloutIndex = _callouts.length - 1;
+    });
+    // Geen _emit: de callout is incompleet zolang er geen doel is. Pas na
+    // plaatsing (_placeTarget of drag-end) gaat de stand naar de dia.
+  }
+
+  /// #1860: plaats een punt-doel op de geklikte positie en verlaat
+  /// plaatsingsmodus.
+  void _placeTarget(int calloutIndex, double x, double y) {
+    setState(() {
+      final callout = _callouts[calloutIndex];
+      _callouts[calloutIndex] = ImageCallout(
+        reference: callout.reference,
+        targets: [CalloutPoint(x.clamp(0.0, 1.0), y.clamp(0.0, 1.0))],
+        description: callout.description,
+      );
+      _placingCalloutIndex = null;
+      _selectedTargetIndex = 0;
     });
     _emit();
+  }
+
+  /// #1860: ruim een onvoltooide plaatsing op — verwijder de callout en
+  /// de letter van de bullet.
+  void _cancelPlacing() {
+    final ci = _placingCalloutIndex;
+    if (ci == null) return;
+    final callout = _callouts[ci];
+    final bulletIdx = _filteredIndexForReference(callout.reference);
+    setState(() {
+      _callouts.removeAt(ci);
+      _placingCalloutIndex = null;
+      if (_selectedCalloutIndex == ci) {
+        _selectedCalloutIndex = null;
+        _selectedTargetIndex = null;
+      } else if (_selectedCalloutIndex != null && _selectedCalloutIndex! > ci) {
+        _selectedCalloutIndex = _selectedCalloutIndex! - 1;
+      }
+      if (bulletIdx != null) _setReference(bulletIdx, null);
+      _syncDescriptionController();
+    });
   }
 
   void _removeCallout(int index) {
@@ -469,54 +563,73 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
 
   /// Dia-brede instellingen: vorm (§3.1) en onthulstand (§7). Gelabeld,
   /// boven het werkvlak — Wrap houdt ze op één rij als het past (#1859).
+  /// #1860: hint onder de knoppen legt uit dat de vorm dia-breed is en
+  /// alleen de presentatie beïnvloedt — niet de editing.
   Widget _buildSlideSettings(AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 4,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.d('Vorm van de markering'), style: _labelStyle),
-          SegmentedButton<CalloutPresentation>(
-            segments: [
-              ButtonSegment(
-                value: CalloutPresentation.pin,
-                label: Text(l10n.d('Pins')),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(l10n.d('Vorm van de markering'), style: _labelStyle),
+              SegmentedButton<CalloutPresentation>(
+                segments: [
+                  ButtonSegment(
+                    value: CalloutPresentation.pin,
+                    label: Text(l10n.d('Pins')),
+                  ),
+                  ButtonSegment(
+                    value: CalloutPresentation.region,
+                    label: Text(l10n.d('Gebieden')),
+                  ),
+                  ButtonSegment(
+                    value: CalloutPresentation.arrow,
+                    label: Text(l10n.d('Pijlen')),
+                  ),
+                ],
+                selected: {_presentation},
+                onSelectionChanged: (s) {
+                  setState(() => _presentation = s.first);
+                  _emit();
+                },
               ),
-              ButtonSegment(
-                value: CalloutPresentation.region,
-                label: Text(l10n.d('Gebieden')),
-              ),
-              ButtonSegment(
-                value: CalloutPresentation.arrow,
-                label: Text(l10n.d('Pijlen')),
+              const SizedBox(width: 16),
+              Text(l10n.d('Tijdens presenteren'), style: _labelStyle),
+              SegmentedButton<BulletRevealMode>(
+                segments: [
+                  ButtonSegment(
+                    value: BulletRevealMode.all,
+                    label: Text(l10n.d('Alles tonen')),
+                  ),
+                  ButtonSegment(
+                    value: BulletRevealMode.steps,
+                    label: Text(l10n.d('Stap-voor-stap')),
+                  ),
+                ],
+                selected: {_reveal},
+                onSelectionChanged: (s) {
+                  setState(() => _reveal = s.first);
+                  _emit();
+                },
               ),
             ],
-            selected: {_presentation},
-            onSelectionChanged: (s) {
-              setState(() => _presentation = s.first);
-              _emit();
-            },
           ),
-          const SizedBox(width: 16),
-          Text(l10n.d('Tijdens presenteren'), style: _labelStyle),
-          SegmentedButton<BulletRevealMode>(
-            segments: [
-              ButtonSegment(
-                value: BulletRevealMode.all,
-                label: Text(l10n.d('Alles tonen')),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Text(
+              l10n.d(
+                'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.',
               ),
-              ButtonSegment(
-                value: BulletRevealMode.steps,
-                label: Text(l10n.d('Stap-voor-stap')),
+              style: TextStyle(
+                fontSize: 11,
+                color: Theme.of(context).hintColor,
               ),
-            ],
-            selected: {_reveal},
-            onSelectionChanged: (s) {
-              setState(() => _reveal = s.first);
-              _emit();
-            },
+            ),
           ),
         ],
       ),
@@ -603,7 +716,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
               aspectRatio: imgFraction * 16 / 9,
               child: LayoutBuilder(
                 builder: (context, c) =>
-                    _buildImageStack(intrinsic, c.maxWidth, c.maxHeight),
+                    _buildImageStack(intrinsic, c.maxWidth, c.maxHeight, l10n),
               ),
             ),
           ),
@@ -648,7 +761,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
             TextButton.icon(
               icon: const Icon(Icons.add, size: 16),
               label: Text(l10n.d('Doel toevoegen')),
-              onPressed: hasSelection && callout.targets.length < 8
+              // #1860: uit in plaatsingsmodus — het eerste doel plaats je
+              // door op het beeld te klikken, niet via deze knop.
+              onPressed:
+                  hasSelection &&
+                      callout.targets.length < 8 &&
+                      _placingCalloutIndex == null
                   ? () => _addTarget(_selectedCalloutIndex!)
                   : null,
             ),
@@ -669,7 +787,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     );
   }
 
-  Widget _buildImageStack(Size? intrinsic, double slotW, double slotH) {
+  Widget _buildImageStack(
+    Size? intrinsic,
+    double slotW,
+    double slotH,
+    AppLocalizations l10n,
+  ) {
     final painted = intrinsic == null
         ? null
         : ImageViewportGeometry.paintedRect(
@@ -708,7 +831,10 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
                 ),
         ),
         // #1854: alle verwijzingen tonen; geselecteerde interactief, overige statisch.
-        if (_selectedCalloutIndex != null) _buildGestureLayer(toImgX, toImgY),
+        // #1860: in plaatsingsmodus staat de gesture layer bovenop de markers
+        // zodat een tik altijd het nieuwe doel plaatst, niet een bestaande selecteert.
+        if (_selectedCalloutIndex != null && _placingCalloutIndex == null)
+          _buildGestureLayer(toImgX, toImgY),
         for (var ci = 0; ci < _callouts.length; ci++)
           if (ci != _selectedCalloutIndex)
             ...buildStaticCalloutMarkers(
@@ -727,6 +853,33 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
           ),
         if (_dragRegion != null)
           buildDragPreview(_dragRegion!, slotW, slotH, painted),
+        // #1860: in plaatsingsmodus staat de gesture layer bovenop de markers.
+        if (_placingCalloutIndex != null) _buildGestureLayer(toImgX, toImgY),
+        // #1860: instructie-overlay in plaatsingsmodus.
+        if (_placingCalloutIndex != null)
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.7),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    _presentation == CalloutPresentation.region
+                        ? l10n.d(
+                            'Sleep op de afbeelding om een gebied te markeren.',
+                          )
+                        : l10n.d(
+                            'Klik op de afbeelding waar deze regel naar verwijst.',
+                          ),
+                    style: const TextStyle(color: Colors.white, fontSize: 13),
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -735,6 +888,7 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     double Function(double) toImgX,
     double Function(double) toImgY,
   ) {
+    final placing = _placingCalloutIndex != null;
     return GestureDetector(
       onPanStart: (details) {
         if (_presentation != CalloutPresentation.region) return;
@@ -762,13 +916,25 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         if (d != null && d.w >= 0.02 && d.h >= 0.02) {
           setState(() {
             final callout = _callouts[_selectedCalloutIndex!];
-            final targets = List.of(callout.targets);
-            targets[0] = CalloutRegion(d.x, d.y, d.w, d.h);
-            _callouts[_selectedCalloutIndex!] = ImageCallout(
-              reference: callout.reference,
-              targets: targets,
-              description: callout.description,
-            );
+            // #1860: in plaatsingsmodus voegen we het doel toe, niet
+            // vervangen — targets is leeg.
+            if (placing) {
+              _callouts[_selectedCalloutIndex!] = ImageCallout(
+                reference: callout.reference,
+                targets: [CalloutRegion(d.x, d.y, d.w, d.h)],
+                description: callout.description,
+              );
+              _placingCalloutIndex = null;
+              _selectedTargetIndex = 0;
+            } else {
+              final targets = List.of(callout.targets);
+              targets[0] = CalloutRegion(d.x, d.y, d.w, d.h);
+              _callouts[_selectedCalloutIndex!] = ImageCallout(
+                reference: callout.reference,
+                targets: targets,
+                description: callout.description,
+              );
+            }
             _dragRegion = null;
           });
           _emit();
@@ -780,7 +946,12 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
         if (_presentation == CalloutPresentation.region) return;
         final x = toImgX(details.localPosition.dx);
         final y = toImgY(details.localPosition.dy);
-        _moveTarget(_selectedCalloutIndex!, 0, x, y);
+        // #1860: in plaatsingsmodus plaatsen we een nieuw doel.
+        if (placing) {
+          _placeTarget(_selectedCalloutIndex!, x, y);
+        } else {
+          _moveTarget(_selectedCalloutIndex!, 0, x, y);
+        }
       },
       child: Container(color: Colors.transparent),
     );

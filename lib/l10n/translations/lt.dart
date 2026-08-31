@@ -1642,6 +1642,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Spustelėkite vaizdą, kur šis taškas nurodo.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Tempkite ant vaizdo, kad pažymėtumėte sritį.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Taikoma visam skaidrei — nustato, kaip nuorodos piešiamos per pristatymą, o ne kaip jas redaguojate.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pasukimas įrašo pasuktą kopiją šalia originalo; jūsų pradinis failas lieka nepakitęs.',
   'Doel toevoegen': 'Pridėti tikslą',

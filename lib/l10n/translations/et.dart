@@ -1629,6 +1629,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klõpsake pildil, kuhu see punkt viitab.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Lohistage pildil ala märkimiseks.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Kehtib kogu slaidi kohta — määrab, kuidas viited esitluse ajal joonistatakse, mitte kuidas neid redigeerite.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pööramine kirjutab pööratud koopia originaali kõrvale; teie algne fail jääb muutmata.',
   'Doel toevoegen': 'Lisa siht',

@@ -1634,6 +1634,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klicka på bilden där denna punkt hänvisar till.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Dra på bilden för att markera ett område.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Gäller hela bilden — avgör hur referenser ritas under presentationen, inte hur du redigerar dem.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotering skriver en vriden kopia bredvid originalet; din ursprungliga fil lämnas oförändrad.',
   'Doel toevoegen': 'Lägg till mål',

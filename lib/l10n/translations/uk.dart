@@ -1651,6 +1651,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Натисніть на зображення там, куди посилається цей пункт.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Перетягніть на зображенні, щоб позначити область.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Стосується всього слайда — визначає, як посилання малюються під час презентації, а не як ви їх редагуєте.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Обертання записує повернуту копію поряд з оригіналом; ваш вихідний файл лишається незмінним.',
   'Doel toevoegen': 'Додати ціль',
