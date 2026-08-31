@@ -1660,6 +1660,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Κάντε κλικ στην εικόνα όπου αναφέρεται αυτό το σημείο.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Σύρετε στην εικόνα για να σημειώσετε μια περιοχή.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Ισχύει για ολόκληρη τη διαφάνεια — καθορίζει πώς σχεδιάζονται οι αναφορές κατά την παρουσίαση, όχι πώς τις επεξεργάζεστε.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Η περιστροφή γράφει ένα περιστραμμένο αντίγραφο δίπλα στο πρωτότυπο· το αρχικό σας αρχείο μένει αμετάβλητο.',
   'Doel toevoegen': 'Προσθήκη στόχου',

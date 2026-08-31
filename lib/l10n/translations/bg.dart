@@ -1655,6 +1655,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Щракнете върху изображението, където тази точка се отнася.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Влачете върху изображението, за да маркирате област.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Отнася се за целия слайд — определя как се чертаят препратките по време на презентацията, не как ги редактирате.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Завъртането записва завъртяно копие до оригинала; вашият оригинален файл остава непроменен.',
   'Doel toevoegen': 'Добавяне на цел',

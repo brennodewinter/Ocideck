@@ -1654,6 +1654,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Ikklikkja l-immaġni fejn din il-punt tirreferi.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Iġbed fuq l-immaġni biex timmarka żona.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Japplika għal is-slide kollha — jiddetermina kif ir-referenzi jiġu miżbugħa waqt il-preżentazzjoni, mhux kif inti teditjahom.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Id-dawran jikteb kopja mdawra ħdejn l-oriġinal; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
   'Doel toevoegen': 'Żid mira',

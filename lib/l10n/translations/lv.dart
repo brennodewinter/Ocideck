@@ -1634,6 +1634,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klikšķiniet uz attēla, uz kurieni šis punkts atsaucas.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Velciet uz attēla, lai atzīmētu apgabalu.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Attiecas uz visu slaidu — nosaka, kā atsauces tiek zīmētas prezentācijas laikā, nevis kā jūs tās rediģējat.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Pagriešana ieraksta pagrieztu kopiju blakus oriģinālam; jūsu sākotnējais fails paliek nemainīts.',
   'Doel toevoegen': 'Pievienot mērķi',

@@ -1647,6 +1647,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Kliknij na obrazie, gdzie ten punkt się odnosi.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Przeciągnij na obrazie, aby zaznaczyć obszar.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Dotyczy całego slajdu — określa, jak odniesienia są rysowane podczas prezentacji, a nie jak je edytujesz.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Obracanie zapisuje obrócony egzemplarz obok oryginału; Twój pierwotny plik pozostaje bez zmian.',
   'Doel toevoegen': 'Dodaj cel',

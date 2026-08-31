@@ -838,6 +838,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Click on the image where this bullet refers to.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Drag on the image to mark an area.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Applies to the whole slide — determines how callouts are drawn during presentation, not how you edit them.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotating writes a turned copy next to the original; your original file is left unchanged.',
   'Doel toevoegen': 'Add target',

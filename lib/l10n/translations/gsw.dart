@@ -1638,6 +1638,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klick uf s Bild, wo däre Punkt sich druf bezieht.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Zieh ufem Bild, zum en Beriich markiere.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Gilt für die gsamti Folie — bestimmt, wie Hinwys während de Präsentation zeichnet wärde, nöd wie du sie bearbeitisch.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Drääie schrybt e drillti Kopie näbem Original; dys ursprünglichs File blybt unverändered.',
   'Doel toevoegen': 'Ziil derzuefüege',

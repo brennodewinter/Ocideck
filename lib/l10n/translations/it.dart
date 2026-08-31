@@ -672,6 +672,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Fai clic sull\'immagine dove questo punto fa riferimento.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Trascina sull\'immagine per contrassegnare un\'area.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Si applica all\'intera diapositiva — determina come i richiami vengono disegnati durante la presentazione, non come li modifichi.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'La rotazione scrive una copia ruotata accanto all\'originale; il file originale resta invariato.',
   'Doel toevoegen': 'Aggiungi target',

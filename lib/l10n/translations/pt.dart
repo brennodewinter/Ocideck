@@ -1663,6 +1663,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Clique na imagem onde este ponto se refere.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Arraste na imagem para marcar uma área.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Aplica-se a todo o slide — determina como as referências são desenhadas durante a apresentação, não como as edita.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rodar escreve uma cópia rodada ao lado do original; o teu ficheiro original fica inalterado.',
   'Doel toevoegen': 'Adicionar alvo',

@@ -1613,6 +1613,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'mIllogh naDev yIvan, \'ej nugh point referrer.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'mIllogh yIchev, \'ej area yImark.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Hoch slide va — qaH presentation callouts mIllogh, edit nagh.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'nISwI\' nagh HaSta velqa\' choHlu\'bogh qojlu\', \'ach nagh HaSta wa\'DIch choHbe\'lu\'.',
   'Doel toevoegen': 'pagh',

@@ -35,6 +35,14 @@ final _pngBytes = Uint8List.fromList(
   ),
 );
 
+/// #1860: tik op het beeld om een doel te plaatsen (plaatsingsmodus).
+/// Tikt op het midden van het beeldvlak (AspectRatio).
+Future<void> _placeOnImage(WidgetTester tester) async {
+  final box = tester.getRect(find.byType(AspectRatio));
+  await tester.tapAt(Offset(box.center.dx, box.center.dy));
+  await tester.pumpAndSettle();
+}
+
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
   setUp(WebAssetStore.clear);
@@ -109,9 +117,13 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    // Tap "Toevoegen" to add a callout to the first bullet.
+    // #1860: "Toevoegen" gaat in plaatsingsmodus — nog geen doel geplaatst.
     await tester.tap(find.text('Toevoegen'));
     await tester.pumpAndSettle();
+    expect(updated.callouts, isEmpty, reason: 'nog geen emit vóór plaatsing');
+
+    // Tik op het beeld om het doel te plaatsen.
+    await _placeOnImage(tester);
 
     // The callout is emitted via onUpdate with reference 'A'.
     expect(updated.callouts, hasLength(1));
@@ -143,11 +155,14 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // #1860: plaats eerste verwijzing.
     await tester.tap(find.text('Toevoegen').first);
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
     // Geen nieuwe pumpWidget: de dialoog blijft staan, precies als in de app.
     await tester.tap(find.text('Toevoegen').first);
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
 
     expect(updated.bullets, ['Eerste punt (A)', 'Tweede punt (B)']);
     expect(updated.callouts.map((c) => c.reference), ['A', 'B']);
@@ -171,8 +186,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // #1860: plaats eerst een verwijzing, dan pas verwijderen.
     await tester.tap(find.text('Toevoegen').first);
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
     await tester.tap(find.byIcon(Icons.close).last);
     await tester.pumpAndSettle();
 
@@ -201,6 +218,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Toevoegen').first);
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
 
     // De dialoog opnieuw opbouwen met de bijgewerkte dia — zo werkt de editor
     // ook: elke wijziging gaat door de deckstand heen en komt terug.
@@ -208,6 +226,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Toevoegen').first);
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
 
     expect(updated.bullets, ['Eerste punt (A)', 'Tweede punt (B)']);
     expect(updated.callouts.map((c) => c.reference), ['A', 'B']);
@@ -308,8 +327,14 @@ void main() {
     await tester.tap(find.text('Gebieden'));
     await tester.pumpAndSettle();
 
-    // Tap "Toevoegen" to add a callout.
+    // #1860: "Toevoegen" gaat in plaatsingsmodus — sleep op het beeld.
     await tester.tap(find.text('Toevoegen'));
+    await tester.pumpAndSettle();
+    final box = tester.getRect(find.byType(AspectRatio));
+    await tester.dragFrom(
+      Offset(box.left + box.width * 0.3, box.top + box.height * 0.3),
+      Offset(box.width * 0.3, box.height * 0.3),
+    );
     await tester.pumpAndSettle();
 
     expect(updated.callouts, hasLength(1));
@@ -333,8 +358,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // #1860: "Toevoegen" gaat in plaatsingsmodus — tik op het beeld.
     await tester.tap(find.text('Toevoegen'));
     await tester.pumpAndSettle();
+    await _placeOnImage(tester);
 
     expect(updated.callouts, hasLength(1));
     expect(updated.callouts.first.targets.first, isA<CalloutPoint>());
@@ -734,5 +761,169 @@ void main() {
     // Het beeld wordt gerenderd (Image widget aanwezig), ook zonder
     // callout-selectie.
     expect(find.byType(Image), findsWidgets);
+  });
+
+  // #1860: "Toevoegen" plaatst niet meteen op 0.5/0.5 maar toont een
+  // instructie en wacht op een klik op het beeld.
+  testWidgets('plaatsingsmodus toont instructie en wacht op klik (#1860)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Toevoegen'));
+    await tester.pumpAndSettle();
+
+    // Instructie is zichtbaar.
+    expect(
+      find.text('Klik op de afbeelding waar deze regel naar verwijst.'),
+      findsOneWidget,
+    );
+    // Nog geen emit — de callout is incompleet.
+    expect(updated.callouts, isEmpty);
+
+    // Tik op het beeld plaatst het doel.
+    await _placeOnImage(tester);
+    expect(updated.callouts, hasLength(1));
+    expect(updated.callouts.first.targets, hasLength(1));
+  });
+
+  // #1860: in gebied-modus toont de plaatsingsmodus een sleep-instructie.
+  testWidgets(
+    'plaatsingsmodus in gebied-modus toont sleep-instructie (#1860)',
+    (tester) async {
+      await _setSurface(tester);
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final slide = Slide.create(SlideType.bulletsImage).copyWith(
+        bullets: ['Eerste punt'],
+        imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+        calloutPresentation: CalloutPresentation.region,
+      );
+
+      await tester.pumpWidget(
+        _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Toevoegen'));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text('Sleep op de afbeelding om een gebied te markeren.'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  // #1860: "Toevoegen" op een andere bullet annuleert de vorige plaatsing.
+  testWidgets('tweede Toevoegen annuleert onvoltooide plaatsing (#1860)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Eerste punt', 'Tweede punt'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Start plaatsing voor eerste bullet — niet afmaken.
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+    expect(updated.callouts, isEmpty, reason: 'nog geen emit');
+
+    // Start plaatsing voor tweede bullet — eerste moet worden geannuleerd.
+    await tester.tap(find.text('Toevoegen').first);
+    await tester.pumpAndSettle();
+
+    // Plaats het doel voor de tweede bullet.
+    await _placeOnImage(tester);
+
+    expect(updated.callouts, hasLength(1));
+    expect(updated.callouts.first.reference, 'A');
+    // De eerste bullet heeft geen letter meer.
+    expect(updated.bullets, ['Eerste punt', 'Tweede punt (A)']);
+  });
+
+  // #1860: letters volgen leesvolgorde, niet aanmaakvolgorde.
+  testWidgets('letters hernummeren in leesvolgorde (#1860)', (tester) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    var updated = Slide.create(SlideType.bulletsImage).copyWith(
+      bullets: ['Punt 1', 'Punt 2', 'Punt 3', 'Punt 4'],
+      imagePath: WebAssetStore.put(_pngBytes, name: 'test.png'),
+    );
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: updated, onUpdate: (s) => updated = s)),
+    );
+    await tester.pumpAndSettle();
+
+    // Voeg verwijzingen toe in volgorde 1, 2, 4, 3 — niet in leesvolgorde.
+    // Punt 1 → A
+    await tester.tap(find.text('Toevoegen').at(0));
+    await tester.pumpAndSettle();
+    await _placeOnImage(tester);
+    // Punt 2 → B (enige Toevoegen-knop over voor punt 2)
+    await tester.tap(find.text('Toevoegen').at(0));
+    await tester.pumpAndSettle();
+    await _placeOnImage(tester);
+    // Punt 4 → C in aanmaakvolgorde (twee Toevoegen-knoppen: punt 3 en 4)
+    await tester.tap(find.text('Toevoegen').at(1));
+    await tester.pumpAndSettle();
+    await _placeOnImage(tester);
+    // Punt 3 → D in aanmaakvolgorde (enige Toevoegen-knop over: punt 3)
+    await tester.tap(find.text('Toevoegen').at(0));
+    await tester.pumpAndSettle();
+    await _placeOnImage(tester);
+
+    // Letters moeten in leesvolgorde staan: 1→A, 2→B, 3→C, 4→D.
+    expect(updated.bullets, [
+      'Punt 1 (A)',
+      'Punt 2 (B)',
+      'Punt 3 (C)',
+      'Punt 4 (D)',
+    ]);
+    expect(updated.callouts.map((c) => c.reference), ['A', 'B', 'C', 'D']);
+  });
+
+  // #1860: hint onder de presentatiewijze-knoppen legt uit dat het dia-breed is.
+  testWidgets('presentatiewijze toont hint over dia-brede werking (#1860)', (
+    tester,
+  ) async {
+    await _setSurface(tester);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(bullets: ['Eerste punt']);
+
+    await tester.pumpWidget(
+      _host(CalloutEditorDialog(slide: slide, onUpdate: (_) {})),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.textContaining('Geldt voor de hele dia'),
+      findsOneWidget,
+      reason: 'de hint legt uit dat de presentatiewijze dia-breed is',
+    );
   });
 }

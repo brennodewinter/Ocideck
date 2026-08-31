@@ -1635,6 +1635,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klik pada gambar tempat poin ini merujuk.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Seret pada gambar untuk menandai area.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Berlaku untuk seluruh slide — menentukan bagaimana callout digambar selama presentasi, bukan bagaimana Anda mengeditnya.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Memutar menulis salinan terputar di samping aslinya; berkas asli Anda tidak berubah.',
   'Doel toevoegen': 'Tambah target',

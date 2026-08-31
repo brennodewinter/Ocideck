@@ -1636,6 +1636,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Napsauta kuvaa kohtaan, johon tämä kohta viittaa.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Raahaa kuvassa merkitäksesi alueen.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Koskee koko diaa — määrittää, miten viitteet piirretään esityksen aikana, ei miten muokkaat niitä.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Kääntäminen kirjoittaa käännetyn kopion alkuperäisen viereen; alkuperäinen tiedostosi säilyy muuttumattomana.',
   'Doel toevoegen': 'Lisää kohde',

@@ -1635,6 +1635,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Klik på billedet, hvor dette punkt henviser til.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Træk på billedet for at markere et område.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Gælder for hele diasset — bestemmer, hvordan referencer tegnes under præsentationen, ikke hvordan du redigerer dem.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotation skriver en drejet kopi ved siden af originalen; din oprindelige fil forbliver uændret.',
   'Doel toevoegen': 'Tilføj mål',

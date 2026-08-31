@@ -675,6 +675,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Cliquez sur l\'image à l\'endroit où ce point se réfère.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Glissez sur l\'image pour marquer une zone.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'S\'applique à toute la diapositive — détermine comment les annotations sont dessinées pendant la présentation, pas comment vous les modifiez.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'La rotation écrit une copie pivotée à côté de l\'original ; votre fichier d\'origine reste inchangé.',
   'Doel toevoegen': 'Ajouter une cible',

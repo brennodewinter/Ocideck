@@ -1652,6 +1652,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Klik op de afbeelding waar deze regel naar verwijst.':
+      'Faceți clic pe imaginea unde acest punct face referire.',
+  'Sleep op de afbeelding om een gebied te markeren.':
+      'Trageți pe imagine pentru a marca o zonă.',
+  'Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.':
+      'Se aplică întregului slide — determină cum sunt desenate referințele în timpul prezentării, nu cum le editați.',
   'Draaien schrijft een gedraaide kopie naast het origineel; je oorspronkelijke bestand blijft ongewijzigd.':
       'Rotirea scrie o copie rotită lângă original; fișierul tău original rămâne neschimbat.',
   'Doel toevoegen': 'Adaugă țintă',
