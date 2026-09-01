@@ -172,10 +172,13 @@ ship.
 
 **Consequences to verify (open questions the gate must close):**
 
-- The truncation heuristic `_looksTruncated`
-  ([`file_service_open.dart`](../../lib/services/file/file_service_open.dart))
-  assumes a front-matter header with a slide body; a plain document with no
-  `---` must be shown, provably, not to trip it.
+- ~~The truncation heuristic `_looksTruncated`~~ — **gone since #1909.** It read
+  "complete front matter, no slide body" as a cut-short file, but that is exactly
+  what OciDeck writes for a deck whose only slide is still empty, so the save
+  path could no longer read back its own output. Empty and truncated are
+  byte-identical, so the question was never decidable from the file; the deck
+  path now opens such a file as an empty presentation. Nothing on the document
+  path depended on it.
 - The identity gate widening keeps the existing order: size-cap → UTF-8 read →
   `MarkdownSafetyScanner` (fail-closed) → path containment run **before** the
   marp check, so a document inherits the safety scan automatically. (Verified in
