@@ -600,9 +600,11 @@ void main() {
       await failureFor('readme.md', '# Plain notes, not a deck\n'),
       OpenFailure.notPresentation,
     );
+    // Front matter zonder body is géén reden: dat is een lége presentatie, en
+    // precies wat OciDeck zelf wegschrijft zolang de enige dia leeg is (#1909).
     expect(
-      await failureFor('trunc.md', '---\nmarp: true\ntitle: X\n---\n'),
-      OpenFailure.corrupt,
+      await failureFor('leeg.md', '---\nmarp: true\ntitle: X\n---\n'),
+      isNull,
     );
     expect(
       await failureFor(

@@ -500,6 +500,26 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(opslaan): "Opgeslagen, maar het bestand kon niet opnieuw worden gelezen"
+  over een bestand waar niets mis mee was (#1909). Na het opslaan leest OciDeck
+  het zojuist geschreven bestand terug — om de genormaliseerde vorm op te pakken
+  en de bytes opnieuw langs de veiligheidsscan te halen. Die teruglezing
+  weigerde front matter zonder diablok als "afgekapt bestand" (#1350). Dat
+  rustte op een aanname die niet klopt: een dia die nog leeg is serialiseert naar
+  niets, dus is dát precies de vorm die OciDeck zélf wegschrijft voor een
+  presentatie waarvan de enige dia nog leeg is. Het opslaan las daardoor zijn
+  eigen bestand niet meer terug, en — het ergere deel — hetzelfde bestand opnieuw
+  openen lukte ook niet. Afgekapt en leeg zijn in de bytes niet te
+  onderscheiden, dus viel er niets te verfijnen: front matter zonder body is nu
+  een lege presentatie. Wat OciDeck schrijft, moet OciDeck kunnen teruglezen; een
+  bestand met alleen front matter is bovendien geldige Marp die een andere editor
+  ons mag aanreiken, en waarschuwen bij élke lege presentatie zou de normale
+  toestand tot uitzondering maken. Wat we opgeven is de mélding bij een echt
+  afgekapt bestand, niet de inhoud — die was daar al weg vóór wij hem lazen.
+  Gold voor alle drie de routes: schijf, en via `openDeckFromContent` ook git en
+  WebDAV, waar de weigering de gebruiker in zijn eigen opgeslagen werk trof.
+  Met dank aan kwoot voor de melding en de schermafdruk.
+
 - fix(release): `.htaccess` en `security.txt` reisden niet meer mee met de
   webbundel (#1888-staart). De dotfile-sweep die `.DS_Store` uit `build/web`
   haalt, hield als "bewust meegenomen" alleen aan wat `releaseArtefacten`
