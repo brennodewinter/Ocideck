@@ -16,6 +16,8 @@ import 'package:ocideck/services/pptx/deck_pptx_export.dart';
 import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
+import 'support/warm_image_cache.dart';
+
 /// De toegankelijkheidspoort voor beeldverwijzingen (#1844, IMAGE_CALLOUTS.md
 /// §12).
 ///
@@ -30,6 +32,16 @@ import 'package:ocideck/widgets/slides/slide_preview.dart';
 /// intrinsieke beeldmaat bekend is, en die maat komt uit een echte decode. Een
 /// widgettest die dat overslaat vindt nul markeringen — en bewijst dan even
 /// hard "niets getekend" als "alles goed getekend".
+///
+/// Daarom staat er ná elk `_writePng` een [warmImageCache]. Hier stond 300 ms
+/// wandelklok, en die gok viel op 31-08 en 01-09-2026 om op de linux-runner
+/// (taken 5001 en 5200): de semantics-boom droeg drie lege labels omdat de
+/// decode nog liep. Voorladen haalt de gok wég in plaats van hem te verruimen —
+/// de overlay krijgt zijn maat dan synchroon, precies zoals de rasterexports
+/// hun beelden voorladen. Voor de toetsen die *afwezigheid* bewijzen (de
+/// geredigeerde dia, de niet-onthulde groep) is dat geen luxe maar de hele
+/// bewijskracht: zonder warme cache slagen ze ook wanneer er nog niets
+/// getekend ís.
 
 /// Alle knopen van de semantics-boom, plat — de boom zoals een schermlezer
 /// hem krijgt, niet de widgetboom.
@@ -106,6 +118,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_one');
+        await warmImageCache(path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
@@ -116,7 +129,6 @@ void main() {
             ),
           ),
         );
-        await Future<void>.delayed(const Duration(milliseconds: 300));
         await tester.pump();
 
         expect(_labels(tester), contains('B, de inlaat'));
@@ -130,6 +142,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_multi');
+        await warmImageCache(path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
@@ -140,7 +153,6 @@ void main() {
             ),
           ),
         );
-        await Future<void>.delayed(const Duration(milliseconds: 300));
         await tester.pump();
 
         final labels = _labels(tester);
@@ -164,6 +176,7 @@ void main() {
         await tester.runAsync(() async {
           final handle = tester.ensureSemantics();
           final path = _writePng('ocideck_a11y_reveal');
+          await warmImageCache(path);
           final slide = _slideWithCallouts(
             imagePath: path,
             callouts: [_twoBolts, _inlet],
@@ -181,7 +194,6 @@ void main() {
               ),
             ),
           );
-          await Future<void>.delayed(const Duration(milliseconds: 300));
           await tester.pump();
 
           var labels = _labels(tester);
@@ -209,7 +221,6 @@ void main() {
               ),
             ),
           );
-          await Future<void>.delayed(const Duration(milliseconds: 300));
           await tester.pump();
 
           labels = _labels(tester);
@@ -225,6 +236,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_redact');
+        await warmImageCache(path);
         await tester.pumpWidget(
           _host(
             CalloutOverlay(
@@ -239,7 +251,6 @@ void main() {
             ),
           ),
         );
-        await Future<void>.delayed(const Duration(milliseconds: 300));
         await tester.pump();
 
         expect(
@@ -257,6 +268,7 @@ void main() {
       await tester.runAsync(() async {
         final handle = tester.ensureSemantics();
         final path = _writePng('ocideck_a11y_bullet');
+        await warmImageCache(path);
         final slide = _slideWithCallouts(
           imagePath: path,
           callouts: [_twoBolts, _inlet],
@@ -279,7 +291,6 @@ void main() {
             ),
           ),
         );
-        await Future<void>.delayed(const Duration(milliseconds: 300));
         await tester.pump();
 
         final hints = _hints(tester);

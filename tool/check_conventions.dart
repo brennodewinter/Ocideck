@@ -797,11 +797,11 @@ const Map<String, int> fixedDelayBaseline = {
   'test/shell_webdav_actions_test.dart': 2,
 
   // ── Schuld: nog te vertalen naar pumpUntil ──
-  // Bewezen rood op de linux-gate. callout_accessibility viel om op 31-08
-  // (taak 5001) en 01-09 (taak 5200), document_editor_screen vijf keer op
-  // 24/25-08 (taken 3421, 3433, 3439, 3448, 3480), export_dialog_pdf op 24-08
-  // (taak 3404) — daar is toen alleen het getal verhoogd, niet de gok weggehaald.
-  'test/callout_accessibility_test.dart': 5,
+  // Bewezen rood op de linux-gate: document_editor_screen vijf keer op 24/25-08
+  // (taken 3421, 3433, 3439, 3448, 3480), export_dialog_pdf op 24-08 (taak
+  // 3404) — daar is toen alleen het getal verhoogd, niet de gok weggehaald.
+  // (callout_accessibility en callout_reveal stonden hier ook; die laden hun
+  // beeld nu voor en hebben geen wachtpunt meer.)
   'test/document_editor_screen_test.dart': 3,
   'test/export_dialog_pdf_end_to_end_test.dart': 1,
   // Nog niet rood gezien, zelfde vorm en dus dezelfde kans.

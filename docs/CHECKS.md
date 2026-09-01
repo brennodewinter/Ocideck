@@ -619,7 +619,10 @@ also declares them, but see the [CI note](#continuous-integration).)
     `image_carousel_delete_test` failed the linux gate nine times in twelve
     days on exactly the fault it was built to catch. It now accepts the type
     argument and counts parentheses to the end of the call.
-    `test/fixed_delay_ratchet_test.dart` holds both blind spots as cases.
+    `test/fixed_delay_ratchet_test.dart` holds both blind spots as cases. One
+    limit remains and is deliberate: a wait point inside a helper that is
+    *called* from a `runAsync` block is not lexically inside it, so the gate
+    does not see it. `callout_reveal_test` was exactly that shape.
     Line comments and triple-quoted string literals are stripped before
     matching, so the helper's own documentation and that test's own specimens —
     both of which spell the anti-pattern out on purpose — do not trip the
