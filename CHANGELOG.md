@@ -12,6 +12,72 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.5.0] — 2026-09-01
+
+### Added
+
+- feat(ci): web-gate bouwt de webbundel op een PR die hem kan breken (#1888-staart) (#1905)
+- feat(over): het dankwoord is te vinden — tegel in Documentatie en naast het Vigilis-logo (#1904)
+- feat(ux): Cmd+W sluit tabblad, kopieerbare snackbars, afbeelding passen/vullen (#1879, #1880, #1882) (#1897)
+- feat(bijsnijden): draaien schrijft een kopie en laat het origineel staan (#1873)
+- feat(callouts): vaste-rail pijlen (#1829) (#1837)
+- feat(callouts): stap-voor-stap onthullen (#1828) (#1836)
+- feat(callouts): highlighted regions — authoring, render, export (#1827)
+- feat(callouts): numbered markers from authoring to export (#1826)
+- feat(callouts): shared image geometry contract (#1833)
+- feat(callouts): codec, front matter, collaboration, checker, tests (#1832)
+- feat(pdf): de export zegt het wanneer een tabel niet op het blad past (#1797)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- docs: dank Mieke van Oers in de CHANGELOG (#1907)
+- docs(CHECKS): looptijdclaim, ontbrekend tweede ding, poortenmatrix (#1895) (#1901)
+- Sjabloontitel volgt de titel die de kiezer belooft (#1877)
+- Vertaalgaten in de tabellen en de sjablonen dichten, met een poort erop (#1875)
+- chore(l10n): verwijder de twee weeskeys 'Callout' en 'Callouts' (#1874)
+- ux(bijsnijden): draaien waarschuwt vooraf dat het het bestand herschrijft (#1872)
+- docs: breng de documentatie terug in overeenstemming met de code (#1870)
+- a11y+privacy(callouts): toegankelijkheidspoort #1801 (#1851)
+- test(callouts): acceptatiepoorten voor #1801 (#1850)
+- refactor: verwijder enableZoom-parameter uit bijsnijddialoog (#1831) (#1838)
+- docs(design): de zoomvoorwaarde is vervuld, en §4.2 beschreef de oude code (#1801)
+- docs(design): het callout-formaat na de tweede review (#1801)
+- docs(design): beeldverwijzingen op een bullets+beeld-dia (#1801)
+
+### Fixed
+
+- fix(export): één download per webexport, en alleen melden wat we weten (#1902) (#1906)
+- fix(release): de webbundel raakte .htaccess en security.txt kwijt (#1888) (#1903)
+- fix(quality): golden-suite in make check, ratchet-venster van 90 naar 30 dagen (#1886, #1887) (#1900)
+- fix(security): .DS_Store uit webbundel, attestatie op waarheid, branch-protection (#1888, #1889, #1891) (#1899)
+- fix(ci): linux-gate afbreken, tijdsvervallende controles, release-poort, PDF-integratietest (#1890, #1892, #1893, #1894) (#1898)
+- fix(layout): overloop op smal web en onder 210 px vensterbreedte (#1881, #1883, #1884, #1885) (#1896)
+- fix(callouts): plaatsingsmodus, leesvolgorde-letters, presentatiehint (#1860) (#1878)
+- fix(callouts): stage in echte slot-aspectratio + alle verwijzingen tonen (#1854) (#1876)
+- fix(callouts): layout Callout Editor + cursor en verwijder gedrag (#1859, #1863, #1864)
+- fix(crop): zoomregelaar bereikbaar met muis/toetsenbord + thema-achtergrond (#1856) (#1869)
+- fix(callouts): report clipped targets as quality finding + editor warning (#1853) (#1868)
+- fix(presentatie): Escape verlaat presentatie na platform-fullscreen-exit (#1862) (#1867)
+- fix(export): split-layout terug in de HTML-export (#1855) (#1866)
+- fix(callouts): de dialoog rekende vanaf een verouderde kopie (#1865)
+- fix(callouts): een callout uit de interface overleeft nu het opslaan (#1858)
+- fix(callouts): markeringen terug in de rasterexport, en zichtbaar op donker (#1857)
+- fix(a11y): pijl en onthulstap zeiden het verkeerde (#1852)
+- fix: Marp-richtlijnlijst hangt aan poort, Vigilis-accentgeel bewust geaccepteerd (#1817, #1819)
+- fix: onbekend directief overleeft opslag, zoom boven 100% werkt, expectReproduces eerlijk (#1810, #1811, #1813)
+- fix(collab): laatste tien SlideField-velden syncen + tabelgrens gedocumenteerd (#1808, #1809)
+- fix(stijl): de gebundelde profielen halen hun eigen contrastondergrens (#1820)
+- fix(formaat): een notitie die met "Woord:" begint is geen Marp-richtlijn (#1816)
+- fix(collab): zeven Slide-velden reizen mee in de samenwerklaag (#1807)
+- fix(marp): laad het opgeslagen thema in een gewone marp deck.md (#1812)
+- fix(collab): een gewijzigde paneelzoom reist weer mee, plus een poort op de synchroniseerbare oppervlakte (#1803)
+- fix(pdf): een tabelrij hoger dan een blad laat de export niet vastlopen (#1800)
+- fix(pdf): een tabel over meerdere bladen laat zijn kopregel niet achter (#1799)
+- fix(document): de standaardmaat voor documenten wordt 11 punt (#1796)
+- fix(pdf): zes opmaakfouten in de documentexport (#1789-#1794) + documentmaat 12pt (#1795)
+- fix(ci): image-publicatie bereikt de docker-daemon weer (#1787)
+
 ## [0.4.10] — 2026-08-25
 
 ### Added
