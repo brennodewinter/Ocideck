@@ -280,10 +280,10 @@ in Dutch, and it keeps growing on `main` between releases.
   op dezelfde regel als het Vigilis-logo onder "Mogelijk gemaakt door" — logo
   links, tegel rechts: wat OciDeck mogelijk maakt is geld én mensen. Het hartje
   blijft staan, het is alleen niet meer de enige weg. Ook de zoeker in de
-  instellingen kent het dankwoord
-  nu, op "dank", "bijdragers", "contributors" en "credits" — want wie de namen
-  zoekt, kent het woord "dank" niet per se. Geen nieuwe interfacetekst: beide
-  tegels dragen het bestaande label "Met dank aan".
+  instellingen kent het dankwoord nu, op "dank", "bijdragers", "contributors"
+  en "credits" — want wie de namen zoekt, kent het woord "dank" niet per se.
+  Geen nieuwe interfacetekst: beide tegels dragen het bestaande label
+  "Met dank aan".
 - feat(ci): `web-gate` bouwt de webbundel op een PR die hem kan breken
   (#1888-staart). `make check-web` is de enige controle die naar een *gebouwde*
   bundel kijkt, en die draaide alleen lokaal in `check-full` en op een `v*`-tag.
@@ -423,6 +423,14 @@ in Dutch, and it keeps growing on `main` between releases.
   build kunnen breken; bij gewoon Dart-werk zwijgt hij, dus de 17,5 minuten waar
   #790 hem om uitzette vallen een paar keer per maand in plaats van bij elke
   push.
+
+### Changed
+
+- docs: dank **Mieke van Oers** in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
+  Toegevoegd aan de danklijst, alfabetisch op achternaam tussen van Leeuwen en
+  Oosenbrug. De app rendert dat bestand rechtstreeks, dus ze staat meteen in de
+  leesweergave — achter het hartje én achter de twee tegels uit de vorige
+  regel.
 
 ### Fixed
 
