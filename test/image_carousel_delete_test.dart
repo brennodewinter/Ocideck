@@ -11,6 +11,8 @@ import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+
 /// Het verwijderpad van de afbeeldingenbibliotheek
 /// (`parts/image_carousel_picker_delete.dart`). Dat is de enige plek in OciDeck
 /// waar een bestand onherroepelijk van schijf gaat, en het is bewust géén
@@ -26,6 +28,12 @@ final _onePixelPng = base64Decode(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8z8BQDwAEhQGA'
   'hKmMIQAAAABJRU5ErkJggg==',
 );
+
+/// Wachtbudget voor de `pumpUntil`-punten hieronder. Ruim, want de linux-gate
+/// draait deze suite op vier kernen onder `--concurrency=14`: "klaar" kan daar
+/// seconden duren waar het hier milliseconden is. `pumpUntil` breekt af zodra
+/// de voorwaarde waar is, dus op een snelle machine kost die ruimte niets.
+const _budget = Duration(seconds: 20);
 
 void main() {
   late Directory tmp;
@@ -80,15 +88,6 @@ void main() {
     while (tester.takeException() != null) {}
   }
 
-  Future<void> settle(WidgetTester tester) async {
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 200)),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
-    clearLayoutNoise(tester);
-  }
-
   Future<void> pumpPicker(
     WidgetTester tester, {
     List<String> Function(String)? usageOf,
@@ -111,10 +110,20 @@ void main() {
           ),
         ),
       );
-      await Future<void>.delayed(const Duration(milliseconds: 300));
     });
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
+    // Hier stond 300 ms wandelklok plus twee pumps — een gok op hoe lang de
+    // mapscan duurt. Op de belaste Linux-runner bleek die gok negen keer te
+    // krap, en dan viel telkens een andere test uit dit bestand om op een
+    // ontbrekende Verwijderen-knop. Wacht daarom op de knop zelf: die staat er
+    // pas als de scan de laadindicator heeft weggehaald én de beginselectie is
+    // gezet, en dat is precies wat elke test hierna aantikt.
+    await pumpUntil(
+      tester,
+      () =>
+          find.widgetWithText(TextButton, 'Verwijderen').evaluate().isNotEmpty,
+      timeout: _budget,
+      reason: 'de mapscan van de afbeeldingkiezer bleef laden',
+    );
     clearLayoutNoise(tester);
   }
 
@@ -122,21 +131,13 @@ void main() {
   /// er staat — dat komt pas ná de schijfscan.
   Future<void> openDeleteDialog(WidgetTester tester) async {
     await tester.tap(find.widgetWithText(TextButton, 'Verwijderen'));
-    var gezien = false;
-    await tester.runAsync(() async {
-      final deadline = DateTime.now().add(const Duration(seconds: 20));
-      while (DateTime.now().isBefore(deadline)) {
-        if (find.text('Afbeelding verwijderen?').evaluate().isNotEmpty) {
-          gezien = true;
-          break;
-        }
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 5));
-      }
-    });
-    await tester.pump();
+    await pumpUntil(
+      tester,
+      () => find.text('Afbeelding verwijderen?').evaluate().isNotEmpty,
+      timeout: _budget,
+      reason: 'de bevestigingsvraag kwam niet op',
+    );
     clearLayoutNoise(tester);
-    expect(gezien, isTrue, reason: 'de bevestigingsvraag kwam niet op');
   }
 
   /// Bevestigt (of annuleert) en laat het verwijderen afmaken.
@@ -151,8 +152,16 @@ void main() {
             : find.widgetWithText(TextButton, 'Annuleren'),
       ),
     );
-    await settle(tester);
-    await settle(tester);
+    // Het venster sluiten is het enige wat dit antwoord zelf oplevert; wat er
+    // daarna gebeurt (het bestand wissen, de bibliotheek herscannen) is aan de
+    // aanroeper om af te wachten — die weet welke uitkomst hij bewéért.
+    await pumpUntil(
+      tester,
+      () => find.byType(AlertDialog).evaluate().isEmpty,
+      timeout: _budget,
+      reason: 'het bevestigingsvenster bleef staan',
+    );
+    clearLayoutNoise(tester);
   }
 
   testWidgets(
@@ -171,6 +180,13 @@ void main() {
 
       await answer(tester, confirm: true);
 
+      // Het wissen loopt op echte file-IO ná het sluiten van het venster.
+      await pumpUntil(
+        tester,
+        () => !File(alpha).existsSync(),
+        timeout: _budget,
+        reason: 'alpha.png stond na bevestiging nog op schijf',
+      );
       expect(File(alpha).existsSync(), isFalse);
     },
   );
@@ -279,27 +295,15 @@ void main() {
     await openDeleteDialog(tester);
     await answer(tester, confirm: true);
 
-    // Na de verwijdering herstelt de bibliotheek zich door opnieuw te scannen.
-    // `answer` geeft 400 ms wandelklok (2× `settle`), wat op een snelle machine
-    // volstaat maar op de 4-core Linux-runner onder `--concurrency=14` niet
-    // altijd — de rescan is dan nog bezig en `alpha.png` staat nog in de lijst.
-    // Poll tot de naam echt weg is, met een ruim budget (20 s, zelfde als
-    // `openDeleteDialog`).
-    var gone = false;
-    await tester.runAsync(() async {
-      final deadline = DateTime.now().add(const Duration(seconds: 20));
-      while (DateTime.now().isBefore(deadline)) {
-        if (find.textContaining('alpha.png').evaluate().isEmpty) {
-          gone = true;
-          break;
-        }
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 5));
-      }
-    });
-    await tester.pump();
+    // Na de verwijdering herstelt de bibliotheek zich door opnieuw te scannen;
+    // pas daarna is de naam uit de boom.
+    await pumpUntil(
+      tester,
+      () => find.textContaining('alpha.png').evaluate().isEmpty,
+      timeout: _budget,
+      reason: 'alpha.png staat nog in de bibliotheek',
+    );
     clearLayoutNoise(tester);
-    expect(gone, isTrue, reason: 'alpha.png staat nog in de bibliotheek');
     // De naam van het verwijderde bestand staat nergens meer; de andere wel.
     expect(find.textContaining('alpha.png'), findsNothing);
     expect(find.textContaining('beta.png'), findsWidgets);
