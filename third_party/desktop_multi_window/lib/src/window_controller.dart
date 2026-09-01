@@ -105,8 +105,19 @@ class WindowController {
   /// [external] is true the first non-main screen (e.g. a beamer) is used,
   /// otherwise the main screen. The window does not become key, so keyboard
   /// focus stays with the window that had it. (macOS, Windows, Linux)
-  Future<void> coverScreen({bool external = true}) =>
-      _callWindowMethod('window_coverScreen', {'external': external});
+  ///
+  /// Pass [presenterScreen] (the 0-based index of the screen the presenter
+  /// window is on, in the same order the platform enumerates its screens) to
+  /// place this cover on the screen the presenter is *not* on. This overrides
+  /// the [external] heuristic, which picks the non-primary screen — correct
+  /// only when the presenter itself is on the primary screen. In a reversed
+  /// setup (presenter on the external display) the heuristic would put both
+  /// windows on the same screen; [presenterScreen] fixes that (#1913).
+  Future<void> coverScreen({bool external = true, int? presenterScreen}) =>
+      _callWindowMethod('window_coverScreen', {
+        'external': external,
+        if (presenterScreen != null) 'presenterScreen': presenterScreen,
+      });
 
   @optionalTypeArgs
   Future<T?> invokeMethod<T>(String method, [dynamic arguments]) =>

@@ -26,11 +26,11 @@ be positioned, and the presenter's keyboard focus cannot be kept on the laptop.
 
 | File | Change |
 | --- | --- |
-| `lib/src/window_controller.dart` | Added `close()`, `setFrame(Rect)` and `coverScreen({external})` to the Dart API. |
-| `macos/Classes/FlutterWindow.swift` | Implemented `window_close`, `window_setFrame` and `window_coverScreen`. The cover window is borderless, sits at `.statusBar` level so it hides the menu bar/notch on the beamer, joins all Spaces, and is ordered front *without* becoming key so keyboard focus stays with the presenter. |
+| `lib/src/window_controller.dart` | Added `close()`, `setFrame(Rect)` and `coverScreen({external, presenterScreen})` to the Dart API. `presenterScreen` targets the screen the presenter is *not* on, overriding the `external` heuristic (#1913). |
+| `macos/Classes/FlutterWindow.swift` | Implemented `window_close`, `window_setFrame` and `window_coverScreen`. The cover window is borderless, sits at `.statusBar` level so it hides the menu bar/notch on the beamer, joins all Spaces, and is ordered front *without* becoming key so keyboard focus stays with the presenter. `window_coverScreen` honours an optional `presenterScreen` index to cover the screen the presenter is not on (#1913). |
 | `macos/Classes/FlutterMultiWindowPlugin.swift` | Set `mouseTrackingMode = .inActiveApp` on the sub-window's `FlutterViewController`, so hover events reach a window that is never key (chart hover on the beamer). Also skip the window being registered or created when broadcasting `onWindowsChanged` (in both `AttachWindow` and `CreateWindow`): its Flutter engine's platform-message handler is not installed yet, so sending to it made `FlutterEngineSendPlatformMessage` fail with `kInvalidArguments` — as the first log line on startup (main window) and again when the audience window opens. |
-| `windows/flutter_window_wrapper.h` | Implemented `window_close`, `window_setFrame` and `window_coverScreen` on Win32, including monitor enumeration to pick the external display. |
-| `linux/flutter_window.cc` | Implemented `window_close` (destroying the GTK window on idle), `window_setFrame` and `window_coverScreen` with GDK monitor selection. |
+| `windows/flutter_window_wrapper.h` | Implemented `window_close`, `window_setFrame` and `window_coverScreen` on Win32, including monitor enumeration to pick the external display. `window_coverScreen` honours an optional `presenterScreen` index (#1913). |
+| `linux/flutter_window.cc` | Implemented `window_close` (destroying the GTK window on idle), `window_setFrame` and `window_coverScreen` with GDK monitor selection. `window_coverScreen` honours an optional `presenterScreen` index (#1913). |
 | `linux/multi_window_manager.cc` | Stopped removing the `FlView` from its container on window destroy; letting GTK tear the view down with the window avoids `FlutterEngineRemoveView` errors. |
 
 ## Keeping it honest

@@ -131,7 +131,27 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
       }
 
       gint target_monitor = current_monitor;
-      if (ReadExternalArgument(arguments) && monitor_count > 1) {
+      // Prefer the screen the presenter is NOT on, when told which one that is
+      // (index in gdk_display monitor order). The `external` heuristic below
+      // picks the non-primary screen, which is only right when the presenter
+      // sits on the primary screen; in a reversed setup it would pile both
+      // windows on the external display (#1913).
+      FlValue* presenter_screen =
+          arguments ? fl_value_lookup_string(arguments, "presenterScreen")
+                    : nullptr;
+      if (presenter_screen != nullptr &&
+          fl_value_get_type(presenter_screen) == FL_VALUE_TYPE_INT &&
+          monitor_count > 1) {
+        gint presenter = fl_value_get_int(presenter_screen);
+        if (presenter >= 0 && presenter < monitor_count) {
+          for (gint i = 0; i < monitor_count; ++i) {
+            if (i != presenter) {
+              target_monitor = i;
+              break;
+            }
+          }
+        }
+      } else if (ReadExternalArgument(arguments) && monitor_count > 1) {
         for (gint i = 0; i < monitor_count; ++i) {
           if (i != current_monitor) {
             target_monitor = i;

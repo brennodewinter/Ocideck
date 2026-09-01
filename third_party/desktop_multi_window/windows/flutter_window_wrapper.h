@@ -13,6 +13,7 @@
 #include <flutter/method_result.h>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace {
 
@@ -20,6 +21,9 @@ struct MonitorSearch {
   HMONITOR current = nullptr;
   HMONITOR external = nullptr;
   HMONITOR fallback = nullptr;
+  // All monitors in EnumDisplayMonitors order, so a caller-supplied screen
+  // index maps to the same monitor the platform enumerates (#1913).
+  std::vector<HMONITOR> monitors;
 };
 
 inline BOOL CALLBACK FindPresentationMonitor(HMONITOR monitor,
@@ -27,6 +31,7 @@ inline BOOL CALLBACK FindPresentationMonitor(HMONITOR monitor,
                                              LPRECT,
                                              LPARAM data) {
   auto* search = reinterpret_cast<MonitorSearch*>(data);
+  search->monitors.push_back(monitor);
   if (!search->fallback) {
     search->fallback = monitor;
   }
@@ -133,11 +138,42 @@ class FlutterWindowWrapper {
           nullptr, nullptr, FindPresentationMonitor,
           reinterpret_cast<LPARAM>(&search));
 
-      HMONITOR target = search.current;
-      if (ReadExternalArgument(arguments) && search.external) {
-        target = search.external;
-      } else if (!target) {
-        target = search.fallback;
+      HMONITOR target = nullptr;
+      // Prefer the screen the presenter is NOT on, when told which one that is
+      // (index in the same EnumDisplayMonitors order). The `external` heuristic
+      // below picks the non-primary screen, which is only right when the
+      // presenter sits on the primary screen; in a reversed setup it would pile
+      // both windows on the external display (#1913).
+      if (arguments) {
+        const auto it = arguments->find(flutter::EncodableValue("presenterScreen"));
+        if (it != arguments->end()) {
+          // The standard codec may deliver the index as int32 or int64.
+          int presenter_index = -1;
+          if (const auto* i32 = std::get_if<int>(&it->second)) {
+            presenter_index = *i32;
+          } else if (const auto* i64 = std::get_if<int64_t>(&it->second)) {
+            presenter_index = static_cast<int>(*i64);
+          }
+          if (presenter_index >= 0 &&
+              presenter_index < static_cast<int>(search.monitors.size()) &&
+              search.monitors.size() > 1) {
+            HMONITOR presenter = search.monitors[presenter_index];
+            for (HMONITOR m : search.monitors) {
+              if (m != presenter) {
+                target = m;
+                break;
+              }
+            }
+          }
+        }
+      }
+      if (!target) {
+        target = search.current;
+        if (ReadExternalArgument(arguments) && search.external) {
+          target = search.external;
+        } else if (!target) {
+          target = search.fallback;
+        }
       }
 
       MONITORINFO monitor_info{sizeof(MONITORINFO)};

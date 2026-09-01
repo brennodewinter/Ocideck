@@ -460,7 +460,7 @@ class FullscreenPresenter extends StatefulWidget {
       );
       audienceHandle = AudienceWindowHandle(audience);
       await audience.show();
-      await audience.coverScreen(external: true);
+      await audience.coverScreen(presenterScreen: presenterScreenIndex());
     } catch (e) {
       logError(
         'FullscreenPresenter.showDualScreen: audience window setup failed',
