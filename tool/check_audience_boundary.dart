@@ -89,7 +89,8 @@ const Map<String, Surface> _registry = {
   ),
   'lib/widgets/presentation/session_export.dart::_downloadSessionSlides': Surface(
     SurfaceKind.audience,
-    'Session-data-export (#1235): per gewijzigde dia één .md naar de spreker. '
+    'Session-data-export (#1235): per gewijzigde dia één .md naar de spreker '
+    '(op web samen in één ZIP, #1902). '
     'De data verlaat het deck naar losse bestanden die elders gebruikt worden — '
     'een ontvanger-oppervlak. Gaat door PrivacyProjection.forAudience, met een '
     'waarschuwingsschildje als de scan persoonsgegevens vindt.',
@@ -102,8 +103,8 @@ const Map<String, Surface> _registry = {
   'lib/services/document_export_service.dart::writeDocumentExport': Surface(
     SurfaceKind.audience,
     'De documentmodus-export (§11.2): schrijft het geprojecteerde `.md`, HTML, '
-    'LaTeX of PDF weg — op desktop atomisch naar schijf, op web als '
-    'browser-download via FilePicker.saveFile. De geredigeerde body komt via '
+    'LaTeX of PDF weg — op desktop atomisch naar schijf, op web als één '
+    'browser-download via deliverAsDownload. De geredigeerde body komt via '
     'de ExportBundle binnen (projectedDocumentBody leest '
     'bundle.audience.deck), nooit de rauwe bron; daarom neemt de '
     'schrijfsignatuur een ExportBundle en geen rauwe Deck. Het `.md` krijgt '
@@ -120,6 +121,14 @@ const Map<String, Surface> _registry = {
   // Deze stonden nergens geclassificeerd, en dat was de eigenlijke leemte. Het
   // is geen lek — het pakket hoort de bron te dragen — maar wie hierna een
   // export toevoegt, kon nergens zien aan welke kant hij stond.
+  'lib/services/file_service.dart::downloadDeckAsFile': Surface(
+    SurfaceKind.source,
+    'Opslaan op web: er is geen map om in te schrijven, dus het deck van de '
+    'gebruiker komt als download bij hem terug. Dat is zijn eigen werk en geen '
+    'levering aan een ontvanger — redigeren zou hier zijn deck stukmaken. '
+    'Stond hier tot #1902 niet in: het pad liep via downloadTextFile, en dat '
+    'stond niet tussen de primitieven, dus de vraag werd nooit gesteld.',
+  ),
   'lib/services/file/file_service_package.dart::exportPackage': Surface(
     SurfaceKind.source,
     'Een `.ocideck`-pakket is het project zelf: de `.md` plus de assets, zodat '
@@ -198,6 +207,8 @@ const Map<String, Surface> _registry = {
 /// waarmee dia-inhoud een ontvangend kanaal bereikt.
 const _artifactPrimitives = [
   'FilePicker.saveFile(',
+  'deliverAsDownload(',
+  'deliverTextAsDownload(',
   'Clipboard.setData(',
   '.toImage(',
   '.toByteData(',

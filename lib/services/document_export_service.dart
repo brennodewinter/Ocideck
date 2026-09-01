@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 
 import '../models/privacy_disposition.dart';
@@ -15,6 +14,7 @@ import '../utils/atomic_file.dart';
 import 'document_chart_hydration.dart';
 import 'classification_enforcement_policy.dart';
 import 'document_deck_bridge.dart';
+import 'download_delivery.dart';
 import 'document_footnote_setup.dart';
 import 'document_page_setup.dart';
 import 'footnotes_html.dart';
@@ -161,7 +161,7 @@ String projectedDocumentBody(ExportBundle bundle) =>
 /// Bouwt de bytes voor een document-export in [format]. Headless: geen IO.
 ///
 /// Op desktop schrijft [writeDocumentExport] deze bytes atomisch weg; op web
-/// geeft de aanroeper ze aan `FilePicker.saveFile` als browser-download. De
+/// biedt hij ze via `deliverAsDownload` als browser-download aan. De
 /// PDF-callbacks ([onPdfUnsupportedCharacters], [onPdfCoarseLogo]) vuren in
 /// beide paden — een teken dat de tekstlaag niet kent, of een te grof logo,
 /// is geen schrijffout maar een bronprobleem dat de auteur hoort te weten.
@@ -331,7 +331,7 @@ Future<Uint8List> buildDocumentExportBytes(
 /// rauwe bron. Daarom neemt deze functie een [ExportBundle] en geen `Deck` of
 /// `List<Slide>`; die vorm is precies wat de compile-time projectiegrens
 /// (`tool/check_audience_boundary.dart`) verlangt van een schrijver die
-/// `writeBytesAtomic` of `FilePicker.saveFile` raakt.
+/// `writeBytesAtomic` of `deliverAsDownload` raakt.
 ///
 /// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg,
 ///   met de geldende paginaopmaak ([pageSize]/[pageMargins]) in Pandoc-front
@@ -358,10 +358,10 @@ Future<Uint8List> buildDocumentExportBytes(
 ///   leesbaar in de ZIP, dus de fail-closed test kan op de geleverde bytes
 ///   meten — vergelijkbaar met PDF en ePub.
 ///
-/// Op web ([kIsWeb]) is er geen bestandssysteem: [webFileName] wordt dan de
-/// bestandsnaam van de browser-download, en [outputPath] wordt genegeerd. Op
-/// desktop is [outputPath] het pad dat atomisch wordt beschreven, en
-/// [webFileName] wordt genegeerd.
+/// Op web ([deliversByDownload]) is er geen bestandssysteem: [webFileName]
+/// wordt dan de bestandsnaam van de browser-download, en [outputPath] wordt
+/// genegeerd. Op desktop is [outputPath] het pad dat atomisch wordt beschreven,
+/// en [webFileName] wordt genegeerd.
 ///
 /// Geeft het geschreven pad (desktop) of de bestandsnaam (web) terug, of
 /// `null` bij een geblokkeerde classificatie of wanneer het doel gelijk is
@@ -390,7 +390,7 @@ Future<String?> writeDocumentExport(
   String? sourcePath,
   String? webFileName,
 }) async {
-  if (!kIsWeb) {
+  if (!deliversByDownload) {
     if (outputPath == null) return null;
     if (await _sameFile(sourcePath, outputPath)) return null;
   }
@@ -417,13 +417,15 @@ Future<String?> writeDocumentExport(
     onPdfTablesTooWide: onPdfTablesTooWide,
     onPdfCoarseLogo: onPdfCoarseLogo,
     sourcePath: sourcePath,
-    outputPath: kIsWeb ? null : outputPath,
+    outputPath: deliversByDownload ? null : outputPath,
   );
-  if (kIsWeb) {
-    // Web: geen bestandssysteem — file_picker maakt van de bytes een
-    // browser-download (Blob + anker). De bestandsnaam is het resultaat.
-    await FilePicker.saveFile(fileName: webFileName!, bytes: bytes);
-    return webFileName;
+  if (deliversByDownload) {
+    // Web: geen bestandssysteem — de bytes vertrekken als browserdownload.
+    // `null` betekent dat de browser hem niet aannam; de schil zegt dat dan
+    // ook, in plaats van een bestandsnaam te melden die nergens staat (#1902).
+    return deliverAsDownload([
+      (name: webFileName!, bytes: bytes),
+    ], bundleName: bundleNameFor(webFileName));
   }
   await writeBytesAtomic(File(outputPath!), bytes);
   return outputPath;

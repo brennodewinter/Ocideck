@@ -62,8 +62,14 @@ Future<({String? path, bool budgetExceeded})> _materializeStyleLogoSafely(
 
 /// Uitkomst van een export.
 class StyleProfileExportOutcome {
-  /// False wanneer de gebruiker de opslaan-dialoog afbrak.
+  /// False wanneer de gebruiker de opslaan-dialoog afbrak — of, op web, wanneer
+  /// de browser de download niet aannam. Zie [downloadRefused] voor het
+  /// verschil: het eerste is een besluit, het tweede een fout.
   final bool saved;
+
+  /// True wanneer de browser de download weigerde (#1902). Afbreken is stil;
+  /// dit hoort de gebruiker te horen, want hij heeft niets afgebroken.
+  final bool downloadRefused;
 
   /// True wanneer het profiel een eigen logo had dat niet kon worden
   /// ingesloten (bestand weg, of de mem:-store leeg na een herlaad).
@@ -72,6 +78,7 @@ class StyleProfileExportOutcome {
   const StyleProfileExportOutcome({
     required this.saved,
     this.logoOmitted = false,
+    this.downloadRefused = false,
   });
 }
 
@@ -255,11 +262,14 @@ extension FileServiceStyleProfile on FileService {
     const ext = FileService.styleProfileExtension;
     final name = '${_safeProfileFileName(profile.name)}.$ext';
 
-    if (kIsWeb) {
-      await FilePicker.saveFile(fileName: name, bytes: built.bytes);
+    if (deliversByDownload) {
+      final delivered = deliverAsDownload([
+        (name: name, bytes: built.bytes),
+      ], bundleName: bundleNameFor(name));
       return StyleProfileExportOutcome(
-        saved: true,
+        saved: delivered != null,
         logoOmitted: built.logoOmitted,
+        downloadRefused: delivered == null,
       );
     }
     final dest = await _saveDestination(

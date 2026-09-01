@@ -1648,6 +1648,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Aangeboden als download:': 'Ponúknuté na stiahnutie:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Prehliadač stiahnutie neprijal. Povoľte sťahovanie pre túto stránku a skúste to znova.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Súbory relácie neboli uložené. Zmeny sú stále v prezentácii.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Kliknite na obrázok, kam tento bod odkazuje.',
   'Sleep op de afbeelding om een gebied te markeren.':

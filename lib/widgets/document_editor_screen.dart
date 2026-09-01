@@ -3,7 +3,6 @@ import '../services/document_page_setup.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' show EditorState;
@@ -25,6 +24,7 @@ import '../services/classification_enforcement_policy.dart';
 import '../services/description_service.dart';
 import '../services/document_chart_hydration.dart';
 import '../services/document_deck_bridge.dart';
+import '../services/download_delivery.dart';
 import '../services/document_export_service.dart';
 import 'parts/document_export_pdf_support.dart';
 import '../services/document_footnote_setup.dart';
@@ -867,7 +867,7 @@ Future<String?> _writeDocumentExport(
   // een pad, dan schrijft writeDocumentExport daar atomisch naartoe.
   final String? outputPath;
   final String? webFileName;
-  if (kIsWeb) {
+  if (deliversByDownload) {
     outputPath = null;
     webFileName = suggestedDocumentExportFileName(
       title: bundle.audience.deck.title,
@@ -889,7 +889,7 @@ Future<String?> _writeDocumentExport(
     webFileName = null;
   }
 
-  return writeDocumentExport(
+  final delivered = await writeDocumentExport(
     bundle,
     format,
     html: MarpHtmlService(),
@@ -930,6 +930,20 @@ Future<String?> _writeDocumentExport(
     sourcePath: filePath,
     webFileName: webFileName,
   );
+  // Op web is `null` hier de mislukte download — de andere twee null-redenen
+  // (geen pad, doel is de bron) horen bij het schijfpad. Zonder deze melding
+  // sloot de dialoog terug naar zijn opties zonder één woord, terwijl de
+  // gebruiker net op Exporteren had gedrukt (#1902).
+  if (delivered == null && deliversByDownload) {
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d(
+        'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+      ),
+    );
+  }
+  return delivered;
 }
 
 /// Kiest het uitvoerpad voor een documentexport. De extensie én het profiel

@@ -160,7 +160,7 @@ const Map<String, int> fileSizeBaseline = {
   // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
-  'lib/services/export_service.dart': 494,
+  'lib/services/export_service.dart': 485,
   // −75 (#1707): de find/replace-staat is naar FindReplaceSession gegaan, een
   // gewone klasse die de documenteditor en de presentatie-broneditor nu delen.
   // De regel hiervóór zei dat dat niet kon zonder private-veldtoegang; dat bleek
@@ -618,8 +618,14 @@ final _pickFiles = RegExp(r'FilePicker\.pickFiles\s*\(');
 /// bij: dat is de meest directe vorm, en `image_service.dart` gebruikt hem al
 /// zo. De eerste versie van deze regel kende hem niet en zette twee correct
 /// gepoorte bestanden daardoor ten onrechte in de basislijn.
+///
+/// `deliversByDownload` (services/download_delivery.dart) telt sinds #1902 mee.
+/// Het is dezelfde vraag in de vorm waarin de exportpaden hem stellen — "komt
+/// dit als download aan of als bestand op schijf" — en de productiewaarde ís
+/// `kIsWeb`. Alleen een test kan hem omzetten, en dat is precies waarvoor hij
+/// bestaat: zonder die haak lag de hele webtak buiten bereik van de suite.
 final _platformFlag = RegExp(
-  r'\b(supportsLocalProjectFolders|isWebPlatform|kIsWeb)\b',
+  r'\b(supportsLocalProjectFolders|isWebPlatform|kIsWeb|deliversByDownload)\b',
 );
 
 /// Bestanden die vandaag een pad uit de kiezer halen zonder de vlag zelf te

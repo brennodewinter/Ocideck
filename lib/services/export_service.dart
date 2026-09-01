@@ -5,7 +5,6 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
@@ -24,6 +23,9 @@ import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
+import 'download_delivery.dart';
+export 'export_result.dart';
+import 'export_result.dart';
 import '../models/slide_quality.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
@@ -33,73 +35,10 @@ import 'latex/beamer_slide_builder.dart';
 import 'latex/latex_preamble.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
-import 'classification_policy.dart';
 import 'odp/deck_odp_export.dart';
 import 'pptx/deck_pptx_export.dart';
 
 part 'export_service_raster.dart';
-
-enum ExportFormat { pdf, pptx, odp, html, latex }
-
-extension ExportFormatExtension on ExportFormat {
-  String get label {
-    switch (this) {
-      case ExportFormat.pdf:
-        return 'PDF';
-      case ExportFormat.pptx:
-        return 'PowerPoint (PPTX)';
-      case ExportFormat.odp:
-        return 'OpenDocument (ODP)';
-      case ExportFormat.html:
-        return 'HTML (Marp, self-contained)';
-      case ExportFormat.latex:
-        return 'LaTeX (Beamer)';
-    }
-  }
-
-  String get extension {
-    switch (this) {
-      case ExportFormat.pdf:
-        return '.pdf';
-      case ExportFormat.pptx:
-        return '.pptx';
-      case ExportFormat.odp:
-        return '.odp';
-      case ExportFormat.html:
-        return '.html';
-      case ExportFormat.latex:
-        return '.tex';
-    }
-  }
-}
-
-class ExportResult {
-  final bool success;
-  final String? outputPath;
-  final String? error;
-
-  /// Gezet wanneer het classificatiebeleid de export tegenhield.
-  ///
-  /// Een beslissing en geen zin: de dienst kent de taal van de gebruiker niet,
-  /// en een weigering die het TLP-niveau in de zin noemt heeft geen letterlijke
-  /// vorm om op te vertalen (#576). De schil maakt er een zin van met
-  /// `exportBlockMessage`.
-  final ExportDecision? classificationDecision;
-
-  const ExportResult._({
-    required this.success,
-    this.outputPath,
-    this.error,
-    this.classificationDecision,
-  });
-
-  factory ExportResult.ok(String path) =>
-      ExportResult._(success: true, outputPath: path);
-  factory ExportResult.fail(String error) =>
-      ExportResult._(success: false, error: error);
-  factory ExportResult.blockedByClassification(ExportDecision decision) =>
-      ExportResult._(success: false, classificationDecision: decision);
-}
 
 /// Builds PDF and PPTX files from pre-rendered slide images (WYSIWYG export).
 /// Slides are expected to be 16:9 PNG bytes (see [SlideRasterizer]).
@@ -248,18 +187,9 @@ class ExportService {
         interfaceLanguageCode: interfaceLanguageCode,
         compress: compress,
       );
-      if (kIsWeb) {
-        // Web: geen bestandssysteem — file_picker maakt van de bytes een
-        // browser-download (Blob + anker). De bestandsnaam is het resultaat.
-        await FilePicker.saveFile(fileName: fileName, bytes: bytes);
-        // Het redactiemanifest hoort ook op web mee. Zonder dit kreeg de auteur
-        // wél het geredigeerde rapport gedownload maar niet de commitments (die
-        // met het rapport meereizen) of de verificatiesleutels (die de auteur
-        // houdt) — dan is geen enkele redactie meer na te trekken.
-        for (final f in _redactionManifestFiles(fileName, redactionManifest)) {
-          await FilePicker.saveFile(fileName: f.name, bytes: f.bytes);
-        }
-        return ExportResult.ok(fileName);
+      // Web: geen bestandssysteem — de export vertrekt als browserdownload.
+      if (deliversByDownload) {
+        return _deliverExportDownload(fileName, bytes, redactionManifest);
       }
       await Directory(dir).create(recursive: true);
       // Atomair: exporteren over een bestaand bestand mag dat bij een crash
@@ -491,4 +421,30 @@ class ExportService {
         ),
     ];
   }
+}
+
+/// De webaflevering van een export: het bestand zelf plus het redactiemanifest,
+/// als **één** download.
+///
+/// Het manifest hoort mee. Zonder de commitments (die met het rapport
+/// meereizen) en de verificatiesleutels (die de auteur houdt) is geen enkele
+/// redactie meer na te trekken. Precies dat ging op web mis: elk bestand werd
+/// apart aangeboden, en een browser houdt de tweede download op rij tegen — de
+/// auteur kreeg het geredigeerde rapport, las "geëxporteerd", en had het
+/// manifest niet (#1902).
+///
+/// Top-level en niet in de klasse: dit gebruikt geen enkel veld van de dienst,
+/// en [ExportService.export] zat tegen zijn regelplafond.
+ExportResult _deliverExportDownload(
+  String fileName,
+  Uint8List bytes,
+  RedactionManifest redactionManifest,
+) {
+  final delivered = deliverAsDownload([
+    (name: fileName, bytes: bytes),
+    ...ExportService._redactionManifestFiles(fileName, redactionManifest),
+  ], bundleName: bundleNameFor(fileName));
+  return delivered == null
+      ? ExportResult.failed(ExportFailure.downloadNotStarted)
+      : ExportResult.ok(delivered);
 }

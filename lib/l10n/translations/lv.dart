@@ -1640,6 +1640,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Aangeboden als download:': 'Piedāvāts kā lejupielāde:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Pārlūks lejupielādi nepieņēma. Atļaujiet lejupielādes šai vietnei un mēģiniet vēlreiz.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Sesijas faili netika saglabāti. Izmaiņas joprojām ir prezentācijā.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klikšķiniet uz attēla, uz kurieni šis punkts atsaucas.',
   'Sleep op de afbeelding om een gebied te markeren.':

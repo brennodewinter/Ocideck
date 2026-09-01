@@ -6,6 +6,7 @@ import '../../models/privacy_disposition.dart';
 import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
+import 'export_failure_text.dart';
 
 /// De compacte export-dialoog voor een plat-Markdown-**document**
 /// (DOCUMENT_MODE.md §11.2). Kiest het **profiel** (Volledig / Geredigeerd) en
@@ -316,7 +317,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
       Icon(Icons.check_circle, color: AppTheme.successFg, size: 36),
       const SizedBox(height: 12),
       SelectableText(
-        '${l10n.t('exportedTo')}\n$path',
+        '${exportDeliveryLabel(l10n)}\n$path',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 13, color: AppTheme.successFg),
       ),

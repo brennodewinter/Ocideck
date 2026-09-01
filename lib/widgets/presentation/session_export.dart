@@ -20,7 +20,9 @@
 /// de spreker mag doorgaan, maar is geïnformeerd.
 library;
 
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
@@ -30,7 +32,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
-import '../../platform/platform_features.dart';
+import '../../services/download_delivery.dart';
 import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/privacy/privacy_scanner.dart';
@@ -38,12 +40,17 @@ import '../../state/deck_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../utils/atomic_file.dart';
-import '../../utils/file_download.dart';
+import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../../utils/safe_filename.dart';
 
 /// De keuze uit de afloop-dialoog.
 enum _SessionExportChoice { keep, download }
+
+/// Hoe de export afliep. Afbreken en mislukken zijn twee dingen: bij het eerste
+/// heeft de spreker zelf besloten, bij het tweede hoort hij te horen dat zijn
+/// sessiebestanden er niet zijn.
+enum _SessionExportOutcome { done, cancelled, failed }
 
 /// Biedt na afloop van een presentatie aan om session-data-edits als losse
 /// `.md`-bestanden te bewaren en het deck schoon te houden. Toont de dialoog
@@ -89,9 +96,20 @@ Future<void> offerSessionExport(
     regions: settings.privacyRegions,
     ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
   );
-  final ok = await _downloadSessionSlides(context, ref, audience, edited);
-  if (ok) {
+  final outcome = await _downloadSessionSlides(context, ref, audience, edited);
+  if (outcome == _SessionExportOutcome.done) {
     deckNotifier.revertSlidesById(sessionOriginals);
+  } else if (outcome == _SessionExportOutcome.failed && context.mounted) {
+    // Niet gelukt: de bewerkingen blijven in het deck staan (dat is het veilige
+    // uiteinde), maar dat moet de spreker wél weten — anders sluit hij af in de
+    // veronderstelling dat de sessie bewaard is.
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      context.l10n.d(
+        'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.',
+      ),
+    );
   }
 }
 
@@ -275,10 +293,10 @@ class _PrivacyShieldBadgeState extends State<_PrivacyShieldBadge>
 }
 
 /// Schrijft per gewijzigde dia één `.md` uit het geprojecteerde [audience]-
-/// deck. Desktop: één map kiezen, alles daarin schrijven. Web: losse browser-
-/// downloads (geen schrijfbaar bestandssysteem). [edited] levert de bron-index
+/// deck. Desktop: één map kiezen, alles daarin schrijven. Web: één ZIP als
+/// download (geen schrijfbaar bestandssysteem). [edited] levert de bron-index
 /// per slide-id, zodat de bestandsnaam de oorspronkelijke volgorde behoudt.
-Future<bool> _downloadSessionSlides(
+Future<_SessionExportOutcome> _downloadSessionSlides(
   BuildContext context,
   WidgetRef ref,
   AudienceDeck audience,
@@ -299,32 +317,52 @@ Future<bool> _downloadSessionSlides(
       exported[entry.key] = entry.value;
     }
   }
-  if (!supportsLocalProjectFolders) {
-    var ok = true;
-    for (final entry in exported.entries) {
-      final name = _sessionSlideFileName(entry.key, entry.value);
-      final content = md.generateSlide(entry.value, forExport: true);
-      if (!downloadTextFile(name, content)) ok = false;
-    }
-    return ok;
+  if (deliversByDownload) {
+    // Eén download voor de hele sessie. Per dia een eigen download aanbieden
+    // ging mis zodra het er meer dan één was: de browser houdt de tweede
+    // tegen, en dan hield de spreker één dia over terwijl de app de rest
+    // stilzwijgend liet vallen en toch "gedownload" meldde (#1902).
+    final files = [
+      for (final entry in exported.entries)
+        (
+          name: _sessionSlideFileName(entry.key, entry.value),
+          bytes: Uint8List.fromList(
+            utf8.encode(md.generateSlide(entry.value, forExport: true)),
+          ),
+        ),
+    ];
+    return deliverAsDownload(
+              files,
+              bundleName: _sessionBundleName(audience.deck.title),
+            ) ==
+            null
+        ? _SessionExportOutcome.failed
+        : _SessionExportOutcome.done;
   }
   final dir = await FilePicker.getDirectoryPath(
     dialogTitle: l10n.d('Map voor sessie-bestanden kiezen'),
     initialDirectory: settings.homeDirectory,
   );
-  if (dir == null) return false; // gebruiker geannuleerd — deck ongemoeid
+  // Geannuleerd — deck ongemoeid, en geen foutmelding: dit was een besluit.
+  if (dir == null) return _SessionExportOutcome.cancelled;
   try {
     for (final entry in exported.entries) {
       final name = _sessionSlideFileName(entry.key, entry.value);
       final content = md.generateSlide(entry.value, forExport: true);
       await writeStringAtomic(File('$dir/$name'), content);
     }
-    return true;
+    return _SessionExportOutcome.done;
   } catch (e, s) {
     logError('sessionExport: schrijven naar map mislukt', e, s);
-    return false;
+    return _SessionExportOutcome.failed;
   }
 }
+
+/// De ZIP-naam waaronder een sessie-export op web vertrekt. De dia's zitten
+/// er op hun eigen naam in; `-sessie` houdt hem uit elkaar met een gewone
+/// export van hetzelfde deck.
+String _sessionBundleName(String deckTitle) =>
+    '${sanitizeFilename(deckTitle, fallback: 'presentatie')}-sessie.zip';
 
 /// `<index+1:02> - <slugged titel>.md`. Vast volgorde, herkenbaar, geen
 /// naamconflicten door de index.

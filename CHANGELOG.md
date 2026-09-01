@@ -2153,6 +2153,27 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een webexport meldde "geëxporteerd" ook als er niets vertrok (#1902).** In
+  de browser is elke uitgang een download, en de app las het uitblijven van een
+  uitzondering als succes: `FilePicker.saveFile` geeft op web altijd `null`
+  terug, ook wanneer het goed ging, dus was er niets om op te controleren. De
+  scherpste vorm zat bij een geredigeerde export. Die bood drie bestanden
+  achter elkaar aan — het rapport, de commitments, de verificatiesleutels — en
+  browsers houden de tweede automatische download op rij tegen. De auteur hield
+  een geredigeerd rapport over, las "geëxporteerd naar", en had niets om ook
+  maar één redactie mee na te trekken. Nu gaat een export die uit meer dan één
+  bestand bestaat als **één ZIP** de deur uit (ook de sessie-export, die per
+  dia een bestand schreef), meldt de webversie *aangeboden als download* in
+  plaats van *geëxporteerd naar* — de pagina kan niet zien of een bestand in de
+  downloadmap aankwam — en levert een geweigerde download een echte fout op in
+  plaats van een bestandsnaam die nergens staat. De hele webtak lag buiten
+  bereik van de suite (`kIsWeb` is op de VM altijd `false`); twee haken in
+  `lib/services/download_delivery.dart` maken hem meetbaar, en de nieuwe tests
+  vallen om op precies het oude gedrag. `downloadDeckAsFile` staat nu ook in
+  het register van `tool/check_audience_boundary.dart`: het liep via een
+  primitief dat de poort niet kende, dus de vraag aan welke kant van de
+  projectiegrens het stond was nooit gesteld.
+
 - **Twee weeskeys uit de vertaaltabellen (#1861-staart).** `'Callout'` en
   `'Callouts'` stonden in alle 31 tabellen terwijl niets in `lib/` ze nog
   opzoekt — de opruimhelft van de #1861-commit was nooit geland terwijl de

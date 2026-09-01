@@ -675,6 +675,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Aangeboden als download:': 'Als Download angeboten:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Der Browser hat den Download nicht angenommen. Erlauben Sie Downloads für diese Website und versuchen Sie es erneut.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Die Sitzungsdateien wurden nicht gespeichert. Die Änderungen sind noch in der Präsentation.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klicke auf das Bild, worauf dieser Punkt verweist.',
   'Sleep op de afbeelding om een gebied te markeren.':

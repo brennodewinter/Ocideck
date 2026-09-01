@@ -1670,6 +1670,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Aangeboden als download:': 'Oferecido como transferência:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'O navegador não aceitou a transferência. Permita transferências para este site e tente novamente.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Os ficheiros da sessão não foram guardados. As alterações continuam na apresentação.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Clique na imagem onde este ponto se refere.',
   'Sleep op de afbeelding om een gebied te markeren.':

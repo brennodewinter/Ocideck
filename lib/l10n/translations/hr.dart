@@ -1646,6 +1646,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Aangeboden als download:': 'Ponuđeno kao preuzimanje:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Preglednik nije prihvatio preuzimanje. Dopustite preuzimanja za ovo mjesto i pokušajte ponovno.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Datoteke sesije nisu spremljene. Promjene su i dalje u prezentaciji.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Kliknite na sliku gdje se ovaj bod odnosi.',
   'Sleep op de afbeelding om een gebied te markeren.':

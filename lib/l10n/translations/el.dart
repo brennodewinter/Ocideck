@@ -1667,6 +1667,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aangeboden als download:': 'Προσφέρθηκε ως λήψη:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Το πρόγραμμα περιήγησης δεν δέχτηκε τη λήψη. Επιτρέψτε τις λήψεις για αυτόν τον ιστότοπο και δοκιμάστε ξανά.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Τα αρχεία της συνεδρίας δεν αποθηκεύτηκαν. Οι αλλαγές παραμένουν στην παρουσίαση.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Κάντε κλικ στην εικόνα όπου αναφέρεται αυτό το σημείο.',
   'Sleep op de afbeelding om een gebied te markeren.':

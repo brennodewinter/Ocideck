@@ -467,8 +467,10 @@ class _ExportDialogState extends State<ExportDialog> {
       _success = r.success;
       _outputPath = r.success ? r.outputPath : null;
       _result = r.success
-          ? '${l10n.t('exportedTo')}\n${r.outputPath}'
-          : r.error;
+          ? '${exportDeliveryLabel(l10n)}\n${r.outputPath}'
+          : (r.failure != null
+                ? exportFailureReasonText(l10n, r.failure!)
+                : r.error);
     });
   }
 

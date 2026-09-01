@@ -48,13 +48,18 @@ extension FileServicePackage on FileService {
   }
 
   /// Web: bouw het pakket in het geheugen en bied het de browser als download
-  /// aan. Retourneert de gebruikte bestandsnaam. In tegenstelling tot de kale
-  /// `.md`-download reizen de afbeeldingen (mem:-assets) en sidecars hier mee.
-  Future<String> downloadPackage(Deck deck, {String? password}) async {
+  /// aan. In tegenstelling tot de kale `.md`-download reizen de afbeeldingen
+  /// (mem:-assets) en sidecars hier mee.
+  ///
+  /// Retourneert de gebruikte bestandsnaam, of `null` als de browser de
+  /// download niet aannam — de schil meldt dan geen pakket dat er niet is
+  /// (#1902).
+  Future<String?> downloadPackage(Deck deck, {String? password}) async {
     final bytes = await buildPackageBytes(deck, password: password);
-    final name = '${_safeName(deck.title)}.${FileService.packageExtension}';
-    await FilePicker.saveFile(fileName: name, bytes: bytes);
-    return name;
+    final name = _packageFileName(deck);
+    return deliverAsDownload([
+      (name: name, bytes: bytes),
+    ], bundleName: bundleNameFor(name));
   }
 
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
@@ -65,10 +70,7 @@ extension FileServicePackage on FileService {
     int budgetBytes = FileService.maxPackageBytes,
   }) async {
     final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
-    return {
-      for (final f in archive.files)
-        if (f.isFile) f.name: f.content,
-    };
+    return _flatMembers(archive);
   }
 
   Future<Archive> _buildPackageArchive(
@@ -467,3 +469,21 @@ class _CappedOutputStream extends OutputMemoryStream {
     super.writeStream(stream);
   }
 }
+
+/// Een archief als platte kaart pad → bytes, mappen weggelaten. Gedeeld door de
+/// pakket- en dossierleden, en top-level omdat het niets van [FileService]
+/// nodig heeft — de klasse zat tegen haar plafond.
+Map<String, List<int>> _flatMembers(Archive archive) => {
+  for (final f in archive.files)
+    if (f.isFile) f.name: f.content,
+};
+
+/// De bestandsnaam van een `.ocideck`-pakket voor [deck]. Stond op drie plekken
+/// letterlijk uitgeschreven.
+String _packageFileName(Deck deck) =>
+    '${_safeName(deck.title)}.${FileService.packageExtension}';
+
+/// Idem voor het auditdossier, dat een eigen achtervoegsel draagt zodat het niet
+/// voor een gewoon pakket wordt aangezien.
+String _dossierFileName(Deck deck) =>
+    '${_safeName(deck.title)}_auditdossier.${FileService.packageExtension}';

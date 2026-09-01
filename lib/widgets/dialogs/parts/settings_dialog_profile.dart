@@ -147,38 +147,14 @@ extension _SettingsProfile on _SettingsDialogState {
   /// Schrijf het profiel zoals het in de editor staat weg als los bestand.
   /// Bewust het bewerkte profiel en niet het opgeslagene: je exporteert wat je
   /// ziet, ook zonder eerst op Opslaan te drukken.
-  Future<void> _exportProfile() async {
-    final l10n = context.l10n;
-    final messenger = ScaffoldMessenger.of(context);
-    try {
-      final outcome = await ref
-          .read(fileServiceProvider)
-          .exportStyleProfile(
-            _editedProfile(),
-            projectPath: _currentProjectPath,
-          );
-      if (!mounted || !outcome.saved) return;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            outcome.logoOmitted
-                ? l10n.d(
-                    'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen',
-                  )
-                : l10n.d('Stijlprofiel geëxporteerd'),
-          ),
-        ),
-      );
-    } catch (e) {
-      logWarning('SettingsDialog: stijlprofiel exporteren mislukt', e);
-      if (!mounted) return;
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        l10n.d('Stijlprofiel exporteren mislukt'),
-      );
-    }
-  }
+  Future<void> _exportProfile() => _exportStyleProfileAndReport(
+    ref.read(fileServiceProvider),
+    _editedProfile(),
+    projectPath: _currentProjectPath,
+    messenger: ScaffoldMessenger.of(context),
+    l10n: context.l10n,
+    stillMounted: () => mounted,
+  );
 
   /// Lees een los profielbestand in, bewaar het als nieuw profiel en zet het
   /// meteen in de editor. Opslaan gaat via saveThemeProfile, die de naam al
@@ -228,5 +204,60 @@ extension _SettingsProfile on _SettingsDialogState {
         '— ${l10n.d('het ingesloten logo kon niet worden teruggezet')}',
     ].join(' ');
     messenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
+/// Exporteert [profile] en meldt de uitkomst aan de gebruiker.
+///
+/// Top-level en niet in `_SettingsDialogState`: het gebruikt niets van de
+/// dialoogtoestand behalve wat het meekrijgt, en die klasse zit tegen haar
+/// plafond. [stillMounted] blijft nodig omdat het scherm tijdens het exporteren
+/// kan sluiten — de melding hoort dan achterwege te blijven, net als voorheen.
+Future<void> _exportStyleProfileAndReport(
+  FileService fileService,
+  ThemeProfile profile, {
+  required String? projectPath,
+  required ScaffoldMessengerState messenger,
+  required AppLocalizations l10n,
+  required bool Function() stillMounted,
+}) async {
+  try {
+    final outcome = await fileService.exportStyleProfile(
+      profile,
+      projectPath: projectPath,
+    );
+    if (!stillMounted()) return;
+    // Afbreken is stil; een geweigerde browserdownload niet — de gebruiker heeft
+    // daar niets afgebroken en zou anders denken dat het bestand er is (#1902).
+    if (outcome.downloadRefused) {
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        l10n.d(
+          'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+        ),
+      );
+      return;
+    }
+    if (!outcome.saved) return;
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          outcome.logoOmitted
+              ? l10n.d(
+                  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen',
+                )
+              : l10n.d('Stijlprofiel geëxporteerd'),
+        ),
+      ),
+    );
+  } catch (e) {
+    logWarning('SettingsDialog: stijlprofiel exporteren mislukt', e);
+    if (!stillMounted()) return;
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      l10n.d('Stijlprofiel exporteren mislukt'),
+    );
   }
 }

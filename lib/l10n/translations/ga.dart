@@ -1672,6 +1672,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Aangeboden als download:': 'Tairgthe mar íoslódáil:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Níor ghlac an brabhsálaí leis an íoslódáil. Ceadaigh íoslódálacha don suíomh seo agus bain triail eile as.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Níor sábháladh comhaid an tseisiúin. Tá na hathruithe sa taispeántas fós.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Cliceáil ar an íomhá áit a ndéanann an pointe seo tagairt.',
   'Sleep op de afbeelding om een gebied te markeren.':

@@ -1642,6 +1642,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Aangeboden als download:': 'Ponujeno kot prenos:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Brskalnik prenosa ni sprejel. Dovolite prenose za to spletno mesto in poskusite znova.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Datoteke seje niso bile shranjene. Spremembe so še vedno v predstavitvi.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Kliknite na sliko, kamor se ta točka nanaša.',
   'Sleep op de afbeelding om een gebied te markeren.':

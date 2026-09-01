@@ -2559,6 +2559,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Aangeboden als download:': 'İndirme olarak sunuldu:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Tarayıcı indirmeyi kabul etmedi. Bu site için indirmelere izin verin ve yeniden deneyin.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Oturum dosyaları kaydedilmedi. Değişiklikler hâlâ sunumda.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Bu noktanın başvurduğu yeri görselde tıklayın.',
   'Sleep op de afbeelding om een gebied te markeren.':

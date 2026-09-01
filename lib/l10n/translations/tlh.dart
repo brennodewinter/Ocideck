@@ -1619,6 +1619,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Aangeboden als download:': 'download nobta\':',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'download lajbe\' browser. DaqvamvaD downloadmey yIchaw\' \'ej yInID.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Sessie ngoghmey polbe\'lu\'. deckDaq ratlh choHmey.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'mIllogh naDev yIvan, \'ej nugh point referrer.',
   'Sleep op de afbeelding om een gebied te markeren.':

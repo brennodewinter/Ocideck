@@ -1658,6 +1658,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Aangeboden als download:': 'Oferit ca descărcare:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'Browserul nu a acceptat descărcarea. Permiteți descărcările pentru acest site și încercați din nou.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'Fișierele sesiunii nu au fost salvate. Modificările sunt încă în prezentare.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Faceți clic pe imaginea unde acest punct face referire.',
   'Sleep op de afbeelding om een gebied te markeren.':

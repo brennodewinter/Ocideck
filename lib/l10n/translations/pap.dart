@@ -674,6 +674,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Aangeboden als download:': 'Ofresé komo download:',
+  'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
+      'E browser no a aseptá e download. Permití download pa e sitio aki i purba atrobe.',
+  'De sessiebestanden zijn niet opgeslagen. De wijzigingen staan nog in het deck.':
+      'E archivonan di sesion no a wòrdu warda. E kambionan ta ainda den e deck.',
   'Klik op de afbeelding waar deze regel naar verwijst.':
       'Klik riba e imagen unda e punto ta referí na.',
   'Sleep op de afbeelding om een gebied te markeren.':
