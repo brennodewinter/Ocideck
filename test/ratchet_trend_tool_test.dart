@@ -124,6 +124,9 @@ const Map<String, String> b = {
       required int nosemgrep,
       int picker = 2,
       int klassen = 2,
+      // Nul, zodat de wachtpuntratchet in de vergelijkingen hieronder meedoet
+      // als "al af" en de tellingen over hun eigen onderwerp blijven gaan.
+      int vasteWacht = 0,
     }) =>
         '''
 const int catchUnderscoreBaseline = $katch;
@@ -140,6 +143,9 @@ const Map<String, String> filePickerPathBaseline = {
 ${List.generate(picker, (i) => "  'lib/een$i.dart': 'reden',").join('\n')}
 };
 const int nosemgrepBaseline = $nosemgrep;
+const Map<String, int> fixedDelayBaseline = {
+${List.generate(vasteWacht, (i) => "  'test/een\$i.dart': 1,").join('\n')}
+};
 ''';
 
     const methodeLengte = 'const Map<String, int> methodLengthBaseline = {};';
