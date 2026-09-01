@@ -755,7 +755,107 @@ List<String> _filePickerPathViolations() {
 // echte tijd af met een `pump` en kijk na elke stap of het resultaat er ís, met
 // een bovengrens zodat een vastloper alsnog faalt.
 final _runAsync = RegExp(r'runAsync\s*\(');
-final _futureDelayed = RegExp(r'Future\.delayed\s*\(');
+
+/// `Future.delayed(` — met of zonder typeargument.
+///
+/// Dat `(?:<[^>]*>)?` is niet cosmetisch. De poort zocht tot 2026-09-01 alleen
+/// de kale vorm, terwijl 126 van de 129 wachtpunten in `test/` als
+/// `Future<void>.delayed(` geschreven staan: hij zag 3 van de 129 en meldde al
+/// die tijd groen. `image_carousel_delete_test` liep negen keer rood op de
+/// linux-gate met precies de fout die deze poort hoort te vangen, zonder dat de
+/// poort ooit iets zei. Een poort die de schrijfwijze van de codebase niet kent,
+/// meet niets.
+final _futureDelayed = RegExp(r'Future(?:<[^>]*>)?\.delayed\s*\(');
+
+/// Wachtpunten die vandaag nog op een vaste klok staan.
+/// RATCHET: mag krimpen, nooit groeien.
+///
+/// De sleutel is het pad, de waarde het aantal treffers dat daar nu staat. Deze
+/// lijst is ontstaan toen de poort hierboven eindelijk zag wat er stond; hij is
+/// geen vrijbrief maar een meetpunt. Twee soorten staan erin, en het verschil
+/// hoort zichtbaar te blijven:
+///
+/// * **Bewuste uitzondering** — er valt niets aan te wijzen dat "klaar"
+///   betekent, dus een vaste flush is daar de eerlijke vorm. Welke dat zijn en
+///   waaróm staat in het doc-commentaar van `test/support/pump_until.dart`,
+///   onder "Waar dit bewust níét gebruikt wordt". Die entries mogen blijven.
+/// * **Schuld** — een gok die nog naar `pumpUntil` moet. Elke daarvan is een
+///   linux-gate die op een drukke dag rood kan lopen.
+const Map<String, int> fixedDelayBaseline = {
+  // ── Bewuste uitzonderingen (zie pump_until.dart) ──
+  // Een nep-videoplatform waarvan de stream-subscription leegloopt: een
+  // wachtrij, geen zwaar werk, en geen gedeelde uitkomst om op te wachten.
+  'test/media_lifecycle_test.dart': 1,
+  'test/media_previews_video_coverage_test.dart': 1,
+  // `settle` na een klik of een zoekterm: tot rust laten komen, niet wachten op
+  // een aanwijsbaar resultaat. De mapscan in ditzelfde bestand wacht wél.
+  'test/image_carousel_picker_smoke_test.dart': 1,
+  // De handeling zelf moet bínnen runAsync beginnen: een isolate die daarbuiten
+  // start hangt in een testproces na de eerste keer. Die volgorde omdraaien
+  // maakt deze tests stuk.
+  'test/shell_s3_actions_test.dart': 2,
+  'test/shell_webdav_actions_test.dart': 2,
+
+  // ── Schuld: nog te vertalen naar pumpUntil ──
+  // Bewezen rood op de linux-gate: document_editor_screen vijf keer op 24/25-08
+  // (taken 3421, 3433, 3439, 3448, 3480), export_dialog_pdf op 24-08 (taak
+  // 3404) — daar is toen alleen het getal verhoogd, niet de gok weggehaald.
+  // (callout_accessibility en callout_reveal stonden hier ook; die laden hun
+  // beeld nu voor en hebben geen wachtpunt meer.)
+  'test/document_editor_screen_test.dart': 3,
+  'test/export_dialog_pdf_end_to_end_test.dart': 1,
+  // Nog niet rood gezien, zelfde vorm en dus dezelfde kans.
+  'test/bullets_image_preview_test.dart': 1,
+  'test/callout_raster_export_frame_test.dart': 1,
+  'test/document_new_and_save_as_test.dart': 1,
+  'test/image_carousel_picker_actions_test.dart': 3,
+  'test/image_carousel_rename_test.dart': 1,
+  'test/image_crop_dialog_test.dart': 1,
+  'test/image_slides_preview_test.dart': 2,
+  'test/info_safety_prompt_test.dart': 1,
+  'test/pdf_export_slide_types_test.dart': 1,
+  'test/shell_export_actions_test.dart': 1,
+  'test/shell_git_actions_extra_test.dart': 1,
+  'test/shell_git_actions_test.dart': 1,
+  'test/shell_present_and_close_test.dart': 2,
+  'test/shell_url_import_test.dart': 1,
+  'test/slide_rasterizer_test.dart': 2,
+  'test/slide_thumbnail_remote_media_test.dart': 1,
+  'test/split_bullets_image_page_target_test.dart': 1,
+};
+
+/// Haalt drieaanhalige stringliteralen weg vóór het zoeken.
+///
+/// Zo'n literaal is data, geen code: hij draait nooit. Een test die het
+/// antipatroon als voorbeeld ópschrijft om te toetsen dat de poort het vindt —
+/// `test/fixed_delay_ratchet_test.dart` doet precies dat — is geen overtreding,
+/// en een poort die zijn eigen toets afkeurt is niet te handhaven. Zelfde
+/// redenering als bij [_withoutLineComments], een verdieping hoger.
+String _withoutTripleQuoted(String source) {
+  final buffer = StringBuffer();
+  var i = 0;
+  while (i < source.length) {
+    final singles = source.indexOf("'''", i);
+    final doubles = source.indexOf('"""', i);
+    final at = singles < 0
+        ? doubles
+        : (doubles < 0 ? singles : (singles < doubles ? singles : doubles));
+    if (at < 0) {
+      buffer.write(source.substring(i));
+      break;
+    }
+    buffer.write(source.substring(i, at));
+    final marker = source.substring(at, at + 3);
+    final close = source.indexOf(marker, at + 3);
+    if (close < 0) break;
+    // De regelovergangen blijven staan, anders schuiven de gerapporteerde
+    // regelnummers op ten opzichte van het echte bestand.
+    final span = source.substring(at, close + 3);
+    buffer.write('\n' * '\n'.allMatches(span).length);
+    i = close + 3;
+  }
+  return buffer.toString();
+}
 
 /// Haalt regelcommentaar weg vóór het zoeken.
 ///
@@ -778,30 +878,110 @@ String _withoutLineComments(String source) => source
     })
     .join('\n');
 
-/// Tests die binnen een `runAsync` op een vaste klok wachten.
-List<String> _fixedDelayInRunAsync() {
-  final hits = <String>[];
-  for (final file in Directory('test').listSync(recursive: true)) {
-    if (file is! File || !file.path.endsWith('.dart')) continue;
-    final source = _withoutLineComments(file.readAsStringSync());
-    if (!source.contains('runAsync')) continue;
-
-    for (final start in _runAsync.allMatches(source)) {
-      // Het venster loopt tot het einde van de aanroep; bij gebrek aan een
-      // parser is 400 tekens ruim genoeg voor de vormen die hier voorkomen en
-      // te krap om de volgende test binnen te trekken.
-      final end = (start.end + 400).clamp(0, source.length);
-      final scope = source.substring(start.end, end);
-      final delay = _futureDelayed.firstMatch(scope);
-      if (delay == null) continue;
-      final line = '\n'.allMatches(source.substring(0, start.start)).length + 1;
-      hits.add(
-        '${file.path}:$line: Future.delayed binnen runAsync — wacht op het '
-        'resultaat, niet op de klok (zie test/support/pump_until.dart)',
-      );
+/// De tekst binnen de haakjes van de aanroep die op [open] begint.
+///
+/// Hier stond een venster van 400 tekens. Dat leek pragmatisch en was het niet:
+/// `image_carousel_delete_test.pumpPicker` zette zijn `Future<void>.delayed`
+/// ná een `pumpWidget` met een hele widgetboom erin, ruim voorbij die 400 — en
+/// juist dát wachtpunt liet de linux-gate negen keer omvallen. Een venster op
+/// tekens meet de vorm van de code, niet de aanroep. Tel dus haakjes, en stop
+/// waar de aanroep stopt.
+///
+/// Haakjes in stringliteralen worden overgeslagen; die zouden de telling
+/// scheeftrekken.
+String _callScope(String source, int open) {
+  var depth = 0;
+  String? quote;
+  for (var i = open; i < source.length; i++) {
+    final c = source[i];
+    if (quote != null) {
+      if (c == r'\') {
+        i++;
+      } else if (c == quote) {
+        quote = null;
+      }
+      continue;
+    }
+    if (c == "'" || c == '"') {
+      quote = c;
+      continue;
+    }
+    if (c == '(') {
+      depth++;
+    } else if (c == ')') {
+      depth--;
+      if (depth == 0) return source.substring(open + 1, i);
     }
   }
-  return hits;
+  return source.substring(open);
+}
+
+/// Wat de poort over de vaste wachtpunten te melden heeft.
+class _DelayScan {
+  const _DelayScan(this.overBasislijn, this.gekrompen);
+
+  /// Bestanden die meer treffers dragen dan hun basislijn toestaat — of die er
+  /// helemaal niet in staan. Dit is de faal.
+  final List<String> overBasislijn;
+
+  /// Bestanden die minder treffers dragen dan hun basislijn: winst die nog
+  /// vastgezet moet worden. Adviserend, zoals bij de andere ratchets.
+  final List<String> gekrompen;
+}
+
+/// De regelnummers per bestand waar een `runAsync` op een vaste klok wacht.
+///
+/// Los van de schijf zodat de meting zelf toetsbaar is; zie
+/// `test/fixed_delay_ratchet_test.dart`. Het regelnummer is dat van de
+/// `runAsync`, niet van de `Future.delayed` erbinnen: dát is het punt waar de
+/// lezer de vervanging moet aanbrengen.
+Map<String, List<int>> fixedDelaysIn(Map<String, String> sources) {
+  final perBestand = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    final source = _withoutLineComments(_withoutTripleQuoted(raw));
+    if (!source.contains('runAsync')) return;
+    final hits = perBestand.putIfAbsent(path, () => <int>[]);
+    for (final start in _runAsync.allMatches(source)) {
+      final scope = _callScope(source, start.end - 1);
+      if (!_futureDelayed.hasMatch(scope)) continue;
+      hits.add('\n'.allMatches(source.substring(0, start.start)).length + 1);
+    }
+  });
+  return perBestand;
+}
+
+/// Tests die binnen een `runAsync` op een vaste klok wachten.
+_DelayScan _fixedDelayInRunAsync() {
+  final sources = <String, String>{};
+  for (final file in Directory('test').listSync(recursive: true)) {
+    if (file is! File || !file.path.endsWith('.dart')) continue;
+    final path = file.path.replaceAll(r'\', '/');
+    // De hulp zelf wisselt per ontwerp korte stapjes echte tijd af met een
+    // `pump`. Dat is niet het antipatroon, dat is het alternatief.
+    if (path == 'test/support/pump_until.dart') continue;
+    sources[path] = file.readAsStringSync();
+  }
+  final perBestand = fixedDelaysIn(sources);
+
+  final over = <String>[];
+  final gekrompen = <String>[];
+  perBestand.forEach((path, hits) {
+    final toegestaan = fixedDelayBaseline[path] ?? 0;
+    if (hits.length > toegestaan) {
+      over.add(
+        '$path: ${hits.length} wachtpunt(en), basislijn $toegestaan — regel '
+        '${hits.join(', ')}',
+      );
+    } else if (hits.length < toegestaan) {
+      gekrompen.add('$path: ${hits.length} (basislijn $toegestaan)');
+    }
+  });
+  for (final path in fixedDelayBaseline.keys) {
+    if (!perBestand.containsKey(path)) {
+      gekrompen.add('$path: 0 (basislijn ${fixedDelayBaseline[path]})');
+    }
+  }
+  return _DelayScan(over, gekrompen);
 }
 
 /// Onderdrukte SAST-bevindingen in `lib/`. RATCHET: mag krimpen, niet groeien.
@@ -1167,16 +1347,18 @@ void main() {
     );
   }
 
-  final delayHits = _fixedDelayInRunAsync();
-  if (delayHits.isNotEmpty) {
+  final delays = _fixedDelayInRunAsync();
+  if (delays.overBasislijn.isNotEmpty) {
     failures.add(
       'Een test wacht binnen `runAsync` op een vaste klok in plaats van op het '
       'resultaat. Zo\'n test slaagt los en faalt onder een volle `make check` — '
       'de duurste faalvorm die er is, want hij wordt opnieuw gedraaid, slaagt, '
       'en dan heet het toeval. Gebruik `pumpUntil` uit '
       'test/support/pump_until.dart: die wacht tot het er ís, met een '
-      'bovengrens zodat een vastloper alsnog faalt:\n'
-      '    ${delayHits.join('\n    ')}',
+      'bovengrens zodat een vastloper alsnog faalt. Verhoog '
+      '`fixedDelayBaseline` niet om dit stil te krijgen — die lijst mag alleen '
+      'krimpen:\n'
+      '    ${delays.overBasislijn.join('\n    ')}',
     );
   }
 
@@ -1330,7 +1512,8 @@ void main() {
       '${modelUiImports.length}; layer direction clean; file sizes within '
       'ceilings; class sizes within ceilings (max $maxClassLines, '
       '${classSizeBaseline.length} baselined); FilePicker paths gated '
-      '(baseline ${filePickerPathBaseline.length}).',
+      '(baseline ${filePickerPathBaseline.length}); vaste wachtpunten in '
+      'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)).',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(
@@ -1358,6 +1541,15 @@ void main() {
         '$_baselineHeadroom lines above the new count, not exactly onto it '
         '($_headroomWhy):\n'
         '    ${shrunk.join('\n    ')}',
+      );
+    }
+    if (delays.gekrompen.isNotEmpty) {
+      stdout.writeln(
+        'Tip: ${delays.gekrompen.length} bestand(en) dragen minder vaste '
+        'wachtpunten dan hun fixedDelayBaseline — verlaag de basislijn (of haal '
+        'de regel weg bij 0) om de winst vast te zetten. Hier geen lucht laten: '
+        'een wachtpunt komt niet vanzelf terug:\n'
+        '    ${delays.gekrompen.join('\n    ')}',
       );
     }
     if (shrunkClasses.isNotEmpty) {

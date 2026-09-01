@@ -413,7 +413,7 @@ now the only passing state.
 | --- | --- | :---: | :---: | :---: | --- |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size & FilePicker-gate ratchets | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | required (via `static-gate`) |
@@ -594,18 +594,39 @@ also declares them, but see the [CI note](#continuous-integration).)
     conditional import with no injection point, and there is no
     `--platform chrome` target — so a widget test sits green around the broken
     branch. That is how the buttons in issue #150 came back as #506.
-  - **no fixed delay inside `runAsync` in tests** — `runAsync(() =>
+  - **fixed-delay ratchet for tests** (`fixedDelayBaseline`) — `runAsync(() =>
     Future.delayed(const Duration(milliseconds: 80)))` waits on a guess about
     how long real work takes on this machine, not on the result. Such a test
     passes in isolation and fails under a loaded `make check`, which is the
     most expensive failure mode there is: it gets re-run, passes, and everyone
-    concludes it was a fluke. Four tests were repaired for exactly this reason
-    on a single day. Use `pumpUntil` from `test/support/pump_until.dart`, which
-    alternates short steps of real time with a `pump` and checks whether the
-    result is *there*, with an upper bound so a genuinely stuck future still
-    fails with a readable message. Line comments are stripped before matching,
-    so the helper's own documentation — which spells the anti-pattern out to
-    explain it — does not trip the gate.
+    concludes it was a fluke. Use `pumpUntil` from
+    `test/support/pump_until.dart`, which alternates short steps of real time
+    with a `pump` and checks whether the result is *there*, with an upper bound
+    so a genuinely stuck future still fails with a readable message.
+
+    The baseline is a per-file count of the wait points that still exist; it
+    may shrink but never grow, and a file that drops below its entry is
+    reported so the win gets locked in. Two kinds of entry live in it and the
+    comments keep them apart: deliberate exceptions (a queue draining, an
+    isolate that must start inside `runAsync` — the reasons are written out in
+    `pump_until.dart`) and debt still to be converted.
+
+    **This gate measured almost nothing between 2026-07 and 2026-09-01.** It
+    matched only the bare spelling `Future.delayed(`, while 126 of the 129 wait
+    points in `test/` are written `Future<void>.delayed(`, and it looked just
+    400 characters past the `runAsync(` — less than one `pumpWidget` with a
+    widget tree in it. It saw 3 of 129 and reported green while
+    `image_carousel_delete_test` failed the linux gate nine times in twelve
+    days on exactly the fault it was built to catch. It now accepts the type
+    argument and counts parentheses to the end of the call.
+    `test/fixed_delay_ratchet_test.dart` holds both blind spots as cases. One
+    limit remains and is deliberate: a wait point inside a helper that is
+    *called* from a `runAsync` block is not lexically inside it, so the gate
+    does not see it. `callout_reveal_test` was exactly that shape.
+    Line comments and triple-quoted string literals are stripped before
+    matching, so the helper's own documentation and that test's own specimens —
+    both of which spell the anti-pattern out on purpose — do not trip the
+    gate.
   - **suppressed SAST findings ratchet** — `// nosemgrep:` comments in `lib/`
     may shrink but never grow (`nosemgrepBaseline`, currently **1**). One
     suppression is a judgement; ten is a habit, and then a green `make sast`

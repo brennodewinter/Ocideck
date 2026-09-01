@@ -500,6 +500,36 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(test): de linux-gate viel negen keer om op een wachttijd die geen
+  wachttijd was (#1911). `image_carousel_delete_test` liet de afbeeldingkiezer
+  300 ms wandelklok draaien en nam daarna aan dat de mapscan klaar was. Op de
+  runner — vier kernen, `--concurrency=14` — was hij dat soms niet, en dan stond
+  de Verwijderen-knop nog niet in de boom. Welke test dat trof hing van de
+  planning af, dus stond er elke keer een andere naam in het faalbericht en las
+  het als toeval; het waren negen keer dezelfde regel. Alle wachtpunten in dat
+  bestand wachten nu op de uitkomst zelf (`pumpUntil`), en het bestand is
+  daarmee ook sneller: 2 s in plaats van 300 ms staan wachten per test.
+- fix(test): de callout-toetsen wachtten óók op een klok (#1911).
+  `callout_accessibility_test` en `callout_reveal_test` gaven de overlay 300 ms
+  om zijn beeld te decoderen; op de runner viel dat op 31-08 en 01-09 om, met
+  een semantics-boom van drie lege labels als bewijs. Hier is niet beter
+  gewacht maar het wachten wéggehaald: de test laadt het beeld voor, zoals de
+  rasterexports dat al doen, en dan krijgt de overlay zijn maat synchroon en
+  tekent hij in de eerste build. Dat repareert ook een stillere fout — de
+  toetsen die bewíjzen dat er niets getekend wordt (geredigeerde dia,
+  niet-onthulde groep) slaagden zonder warme cache ook wanneer er nog niets
+  getekend wás.
+- fix(poort): de poort die dit had moeten vangen, mat bijna niets (#1911). Hij
+  zocht de kale schrijfwijze `Future.delayed(` terwijl 126 van de 129
+  wachtpunten in `test/` `Future<void>.delayed(` schrijven, en keek 400 tekens
+  voorbij de `runAsync(` — minder dan één `pumpWidget` met een widgetboom erin.
+  Zo zag hij 3 van de 129 en meldde anderhalve maand groen, terwijl precies de
+  fout die hij moest vangen de gate deed omvallen. Hij kent nu het
+  typeargument, telt haakjes tot het einde van de aanroep, en de gevonden
+  achterstand staat als krimp-alleen basislijn (`fixedDelayBaseline`) met per
+  regel het onderscheid tussen bewuste uitzondering en schuld.
+  `test/fixed_delay_ratchet_test.dart` houdt beide blinde vlekken vast.
+
 - fix(opslaan): "Opgeslagen, maar het bestand kon niet opnieuw worden gelezen"
   over een bestand waar niets mis mee was (#1909). Na het opslaan leest OciDeck
   het zojuist geschreven bestand terug — om de genormaliseerde vorm op te pakken

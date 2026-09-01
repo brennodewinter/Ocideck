@@ -167,6 +167,13 @@ const List<Ratchet> ratchets = [
     wat: 'bestanden die hun platformpoort bij de aanroeper hebben',
   ),
   Ratchet(
+    naam: 'fixedDelayBaseline',
+    bestand: 'tool/check_conventions.dart',
+    soort: RatchetSoort.omvang,
+    richting: Richting.omlaag,
+    wat: 'tests die binnen runAsync op een vaste klok wachten (#1911)',
+  ),
+  Ratchet(
     naam: 'nosemgrepBaseline',
     bestand: 'tool/check_conventions.dart',
     soort: RatchetSoort.getal,

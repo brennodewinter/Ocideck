@@ -12,6 +12,8 @@ import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 
+import 'support/warm_image_cache.dart';
+
 /// Tests for the callout reveal step mode (IMAGE_CALLOUTS.md §7).
 ///
 /// The plan-level logic (which references are revealed at which step) is tested
@@ -56,6 +58,10 @@ Future<void> _pumpOverlay(
   Slide slide, {
   required Set<String>? revealed,
 }) async {
+  // Voorladen in plaats van wachten: de overlay krijgt zijn beeldmaat dan
+  // synchroon en tekent in de eerste build. Hier stond 300 ms wandelklok, en
+  // die gok viel op 01-09-2026 om op de linux-runner (taak 5200).
+  await warmImageCache(slide.imagePath);
   await tester.pumpWidget(
     _host(
       CalloutOverlay(
@@ -67,8 +73,6 @@ Future<void> _pumpOverlay(
       ),
     ),
   );
-  // De decode is echte async; daarna één frame om de markeringen te tekenen.
-  await Future<void>.delayed(const Duration(milliseconds: 300));
   await tester.pump();
 }
 
@@ -79,9 +83,11 @@ void main() {
   group('CalloutOverlay revealedReferences filter', () {
     // Deze drie renderen écht. `CalloutOverlay` tekent niets vóór de
     // intrinsieke beeldmaat bekend is, en die komt uit een echte decode — dus
-    // draaien ze binnen `tester.runAsync` met een PNG op schijf. Zonder dat
-    // vindt de test nul markeringen en bewijst `findsNothing` niets: hij is
-    // dan even groen mét als zónder het onthullingsfilter.
+    // draaien ze binnen `tester.runAsync` met een PNG op schijf, dat
+    // `_pumpOverlay` eerst voorlaadt. Zonder dat vindt de test nul markeringen
+    // en bewijst `findsNothing` niets: hij is dan even groen mét als zónder het
+    // onthullingsfilter. Het voorladen ís hier dus de bewijskracht, niet alleen
+    // een snelheidstruc.
     testWidgets('null revealedReferences → alle markeringen getekend', (
       tester,
     ) async {
