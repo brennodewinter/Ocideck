@@ -8,13 +8,7 @@ extension _PresenterDisplays on _FullscreenPresenterState {
       final displays = getAllDisplays();
       if (!mounted || displays.isEmpty) return;
       final center = getCurrentWindowCenter();
-      int current = 0;
-      if (center != null) {
-        current = displays.indexWhere(
-          (d) => Rect.fromLTWH(d.x, d.y, d.width, d.height).contains(center),
-        );
-        if (current < 0) current = 0;
-      }
+      final current = screenIndexContaining(displays, center) ?? 0;
       _rebuild(() {
         _displays = displays;
         _displayIndex = current;

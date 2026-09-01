@@ -125,11 +125,25 @@ class FlutterWindow: NSObject {
             // used to show the audience slide fullscreen on the beamer while the
             // main (presenter) window stays on the laptop. We deliberately do not
             // make it the key window, so the keyboard stays with the presenter.
-            let external = (args?["external"] as? Bool) ?? true
             let screens = NSScreen.screens
-            var target: NSScreen? = NSScreen.main
-            if external, let ext = screens.first(where: { $0 != NSScreen.main }) {
-                target = ext
+            var target: NSScreen? = nil
+            // Prefer the screen the presenter is NOT on, when told which one that
+            // is. The `external` heuristic below picks the non-primary screen,
+            // which is only right when the presenter sits on the primary screen;
+            // in a reversed setup it would pile both windows on the external
+            // display (#1913).
+            if let presenterIndex = args?["presenterScreen"] as? Int,
+               presenterIndex >= 0, presenterIndex < screens.count,
+               screens.count > 1 {
+                let presenterScreen = screens[presenterIndex]
+                target = screens.first(where: { $0 != presenterScreen })
+            }
+            if target == nil {
+                let external = (args?["external"] as? Bool) ?? true
+                target = NSScreen.main
+                if external, let ext = screens.first(where: { $0 != NSScreen.main }) {
+                    target = ext
+                }
             }
             if let screen = target ?? screens.first {
                 window.styleMask = [.borderless]
