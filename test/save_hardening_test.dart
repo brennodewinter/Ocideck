@@ -128,11 +128,16 @@ void main() {
       expect(crlfDeck.slides.length, lfDeck.slides.length);
     });
 
-    test('a truncated file (frontmatter, empty body) returns null', () async {
-      final file = File(p.join(temp.path, 'truncated.md'));
+    // Deze toets stond er omgekeerd in: front matter zonder body gold als een
+    // afgekapt bestand en werd geweigerd (#1350). Die regel is teruggedraaid in
+    // #1909 — zie de motivering bij `openDeckDetailed`. Dezelfde bytes zijn ook
+    // wat OciDeck zelf wegschrijft voor een presentatie waarvan de enige dia nog
+    // leeg is, en die moest het kunnen teruglezen.
+    test('een presentatie zonder body opent als lege presentatie', () async {
+      final file = File(p.join(temp.path, 'leeg.md'));
       await file.writeAsString('---\nmarp: true\ntitle: X\n---\n');
 
-      expect(await service.openDeck(file.path), isNull);
+      expect(await service.openDeck(file.path), isNotNull);
     });
 
     test('non-UTF8 bytes return null instead of throwing', () async {

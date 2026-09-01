@@ -30,19 +30,28 @@ void main() {
   );
 
   group('corrupt-file corpus', () {
-    // ── #1350: Afgebroken deck ──────────────────────────────────────────
-    test('afgebroken deck (frontmatter compleet, body leeg) wordt geweigerd '
-        'via openDeckFromContent', () {
-      final raw = '---\nmarp: true\ntheme: default\n---\n';
-      final result = makeService().openDeckFromContent(raw);
-      expect(
-        result.failure,
-        OpenFailure.corrupt,
-        reason:
-            'Een afgebroken deck moet als corrupt worden geweigerd, '
-            'niet stil als een bijna-leeg deck worden geopend.',
-      );
-    });
+    // ── #1350, teruggedraaid in #1909 ───────────────────────────────────
+    // Front matter zonder body gold hier als "afgekapt" en werd geweigerd. Dat
+    // is precies de vorm die OciDeck zélf wegschrijft voor een presentatie
+    // waarvan de enige dia nog leeg is, dus de weigering trof het eigen werk van
+    // de gebruiker — zie de motivering bij `openDeckDetailed`. Wat de corpus
+    // hier bewaakt is daarmee verschoven van "weigert" naar "opent zonder te
+    // crashen of te blijven hangen", de andere helft van de corpus-belofte.
+    test(
+      'deck zonder body opent als lege presentatie via openDeckFromContent',
+      () {
+        final raw = '---\nmarp: true\ntheme: default\n---\n';
+        final result = makeService().openDeckFromContent(raw);
+        expect(result.failure, isNull);
+        expect(
+          result.deck,
+          isNotNull,
+          reason:
+              'Een lege presentatie is niet te onderscheiden van een afgekapte, '
+              'en OciDeck moet kunnen teruglezen wat het zelf schrijft.',
+        );
+      },
+    );
 
     // ── #1353: Diep-geneste JSON ────────────────────────────────────────
     test('diep-geneste JSON wordt geweigerd vóór jsonDecode', () {

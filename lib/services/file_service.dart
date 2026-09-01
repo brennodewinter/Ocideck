@@ -631,16 +631,25 @@ class FileService {
     if (parsed == null) {
       return const DeckOpenResult.failed(OpenFailure.corrupt);
     }
-    // Guard against silently opening a truncated/corrupt file as a blank deck:
-    // a valid save always emits at least one slide block after the frontmatter,
-    // so a complete header with an empty body means the source was cut short.
-    if (content == null && _looksTruncated(raw, parsed)) {
-      logWarning(
-        'FileService.openDeck: frontmatter present but no slide body',
-        filePath,
-      );
-      return const DeckOpenResult.failed(OpenFailure.corrupt);
-    }
+    // Front matter zonder body is een lége presentatie, geen kapotte. Hier
+    // stond de omgekeerde regel (#1350: een afgebroken download opent niet stil
+    // als een bijna-leeg deck), maar die rustte op een aanname die niet klopte —
+    // "een geldige opslag schrijft altijd minstens één diablok". Een dia die nog
+    // leeg is serialiseert naar niets, dus dít is precies de vorm die OciDeck
+    // zélf wegschrijft voor een presentatie waarvan de enige dia nog leeg is.
+    // Gevolg was #1909: het opslaan las zijn eigen zojuist geschreven bestand
+    // niet meer terug en meldde dat aan de gebruiker als een fout.
+    //
+    // Afgekapt en leeg zijn in de bytes niet te onderscheiden — ze zijn
+    // identiek — dus er viel niets te verfijnen, alleen te kiezen. De keuze
+    // valt om drie redenen deze kant op: wat we schrijven moeten we kunnen
+    // teruglezen; front matter zonder body is geldige Marp die een andere
+    // editor ons mag aanreiken, en die weigeren breekt de uitwisselbelofte; en
+    // waarschuwen bij élke lege presentatie zou de normale toestand tot
+    // uitzondering maken. Wat we opgeven is de melding, niet de inhoud: bij een
+    // echt afgekapt bestand was de body al weg vóór wij hem lazen, en de
+    // gebruiker ziet een lege presentatie.
+
     // The file carries only content; apply the active style profile on open.
     final deck = parsed.copyWith(
       themeProfile: activeProfileFor(projectPath: parsed.projectPath),
@@ -938,16 +947,10 @@ class FileService {
     }
     final parsed = _md.parseDeck(raw);
     if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
-    // Dezelfde truncatie-check als het schijf-pad: een afgebroken download
-    // (frontmatter wel, body niet) opent hier niet stil als een bijna-leeg deck.
-    if (_looksTruncated(raw, parsed)) {
-      logWarning(
-        'FileService.openDeckFromContent: frontmatter present but no slide '
-        'body',
-        sourceName,
-      );
-      return (deck: null, failure: OpenFailure.corrupt);
-    }
+    // Geen truncatie-check meer, om dezelfde reden als op het schijf-pad: een
+    // lege body is een lege presentatie (#1909). Dit pad opende ook decks die
+    // uit git of WebDAV terugkomen — dáár trof de weigering de gebruiker in
+    // zijn eigen, keurig opgeslagen werk.
     // Inhoud draagt geen opmaak; pas het actieve stijlprofiel toe bij openen.
     return (
       deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),

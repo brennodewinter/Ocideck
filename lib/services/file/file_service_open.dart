@@ -247,22 +247,6 @@ Future<({String? raw, OpenFailure? failure})> _readAndScanMarkdown(
 }
 
 extension _FileServiceOpen on FileService {
-  /// True when [raw] opens with a complete frontmatter block but carries no
-  /// slide body after it, while [parsed] degraded to the single placeholder
-  /// slide — the signature of a truncated or corrupt deck file.
-  bool _looksTruncated(String raw, Deck parsed) {
-    if (parsed.slides.length != 1) return false;
-    final norm = raw.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
-    if (!norm.startsWith('---\n')) return false;
-    final end = norm.indexOf('\n---\n', 4);
-    // Unterminated frontmatter: leave it to the parser rather than reject here.
-    if (end == -1) return false;
-    // A complete frontmatter header followed by no slide body means the file
-    // was cut short — trim only the part *after* the closing fence so the
-    // fence's own trailing newline is preserved.
-    return norm.substring(end + 5).trim().isEmpty;
-  }
-
   /// Legt de lagen die naast de markdown wonen terug op [deck]: de
   /// inkt-annotaties, de gebruikersnotities, de MIAUW-dispositie en het zegel.
   ///
