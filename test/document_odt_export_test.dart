@@ -88,7 +88,7 @@ void main() {
 
     expect(content, contains('UNIEKPROZA'));
     expect(content, contains('<text:h'));
-    expect(content, contains('<text:p>'));
+    expect(content, contains('<text:p text:style-name="Standard">'));
     expect(content, contains('<text:list'));
     expect(content, contains('<text:list-item'));
     // Well-formed: XML-declaratie en OpenDocument-namespace.
@@ -232,6 +232,51 @@ void main() {
     expect(content, contains('<table:table-cell'));
     expect(content, contains('Naam'));
     expect(content, contains('Waarde'));
+  });
+
+  // Issue #1917: de ODT-export plakte alles tegen elkaar — geen alinea- of
+  // hoofdstukruimte. Deze test bewijst dat de stijlen die dat oplossen
+  // aanwezig zijn in content.xml.
+  test(
+    'odt: alinea- en kopruimte — default-paragraph, Standard, keep-with-next',
+    () async {
+      final bundle = await buildBundle(
+        '# Hoofdstuk\n\nEerste alinea.\n\nTweede alinea.\n',
+      );
+      final bytes = await buildDocumentExportOdt(bundle);
+      final archive = ZipDecoder().decodeBytes(bytes);
+      final content = _readEntry(archive, 'content.xml');
+
+      // Default-paragraph-stijl met marge: kale <text:p> erft nu ruimte.
+      expect(content, contains('style:default-style'));
+      expect(content, contains('style:family="paragraph"'));
+      expect(content, contains('fo:margin-bottom="0.3cm"'));
+
+      // Expliciete Standard-body-stijl die body-alinea's refereren.
+      expect(content, contains('style:name="Standard"'));
+
+      // Body-alinea's refereren de Standard-stijl, niet kale <text:p>.
+      expect(content, contains('<text:p text:style-name="Standard">'));
+
+      // Koppen hebben keep-with-next zodat ze niet wees onderaan een pagina.
+      expect(content, contains('fo:keep-with-next="true"'));
+
+      // Koppen hebben alineamarges (top + bottom).
+      expect(content, contains('fo:margin-top="0.8cm"'));
+      expect(content, contains('fo:margin-bottom="0.3cm"'));
+    },
+  );
+
+  test("odt: list-item-alinea's refereren de Standard-stijl", () async {
+    final bundle = await buildBundle('- punt 1\n- punt 2\n');
+    final bytes = await buildDocumentExportOdt(bundle);
+    final archive = ZipDecoder().decodeBytes(bytes);
+    final content = _readEntry(archive, 'content.xml');
+
+    expect(
+      content,
+      contains('<text:list-item><text:p text:style-name="Standard">'),
+    );
   });
 }
 

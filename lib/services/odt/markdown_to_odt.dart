@@ -280,7 +280,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
 
       // ── Alinea's en blokken ──
       case 'p':
-        output.write('<text:p>');
+        output.write('<text:p text:style-name="Standard">');
         _stack.add(_Ctx.paragraph);
       case 'blockquote':
         output.write('<text:p text:style-name="Quote">');
@@ -297,7 +297,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
         output.write('<text:list text:style-name="Ordered_List">');
         _stack.add(_Ctx.orderedList);
       case 'li':
-        output.write('<text:list-item><text:p>');
+        output.write('<text:list-item><text:p text:style-name="Standard">');
         _stack.add(_Ctx.listItem);
       case 'input':
         return false;
