@@ -316,7 +316,8 @@ const Map<String, int> classSizeBaseline = {
   // kan niet zonder de interne _Kind-enum en de _parse-lus.
   // +23 (#1647): Setext-kopherkenning in _parse — _isSetextUnderline helper
   // en de check in de paragraaf-fallback. Cohesief met de _parse-lus.
-  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1031,
+  // +5 (#1921): scaleMermaidToFit parameter for paginated Mermaid scaling.
+  'lib/widgets/reader/document_markdown_view.dart#DocumentMarkdownView': 1036,
   // −78 (#1707): find/replace-staat naar FindReplaceSession. Wat de klasse aan
   // die methoden hield was `_controller` (gaat mee als parameter), `_viewMode`
   // (blijft hier: alleen de gastheer weet of de cursor in de bron of in Quill

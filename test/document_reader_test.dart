@@ -350,6 +350,29 @@ void main() {
       expect(find.byType(Scrollbar), findsOneWidget);
     });
 
+    testWidgets('scaleToFit scales a wide diagram instead of scrolling', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: DocMermaidView(
+                source: 'graph TD; A-->B;',
+                fallback: const Text('FALLBACK'),
+                scaleToFit: true,
+                renderer: (_) async => wideSvg,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(SvgPicture), findsOneWidget);
+      // No scrollbar — the diagram is scaled to fit, not scrolled.
+      expect(find.byType(Scrollbar), findsNothing);
+    });
+
     testWidgets('shows a spinner while rendering is in flight', (tester) async {
       // A future that never completes stays in the loading branch.
       await pumpMermaid(tester, (_) => Completer<String?>().future);
@@ -440,14 +463,30 @@ void main() {
       );
     });
 
-    test('leaves a diagram that sets its own directive untouched', () {
+    test('merges theme into an existing init directive', () {
       const src = '%%{init: {"theme":"forest"}}%%\ngraph TD; A-->B;';
-      expect(mermaidWithDarkTheme(src), src);
+      expect(
+        mermaidWithDarkTheme(src),
+        '%%{init: {"theme":"dark"}}%%\ngraph TD; A-->B;',
+      );
     });
 
-    test('leaves a diagram opening with YAML frontmatter untouched', () {
+    test('preserves existing keys when merging theme', () {
+      const src =
+          '%%{init: {"themeVariables": {"primaryColor": "#ff0"}}}%%\ngraph TD;';
+      final result = mermaidWithDarkTheme(src);
+      expect(result, contains('"theme":"dark"'));
+      expect(result, contains('"primaryColor":"#ff0"'));
+      expect(result, startsWith('%%{init:'));
+      expect(result, contains('graph TD;'));
+    });
+
+    test('adds the directive after YAML frontmatter', () {
       const src = '---\ntitle: Flow\n---\ngraph TD; A-->B;';
-      expect(mermaidWithDarkTheme(src), src);
+      expect(
+        mermaidWithDarkTheme(src),
+        '---\ntitle: Flow\n---\n%%{init: {"theme":"dark"}}%%\ngraph TD; A-->B;',
+      );
     });
   });
 

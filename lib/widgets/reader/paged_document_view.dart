@@ -336,6 +336,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       // Onderaan het blad tekent dít scherm ze, per vel; achterin lopen ze
       // gewoon als laatste blokken in de stroom mee.
       footnotesAtEnd: !_notesOnPage,
+      // Een breed diagram schaalt af op de vaste kolombreedte, net als in de
+      // PDF — een schuifbalk snijdt hier af op een vel.
+      scaleMermaidToFit: true,
     );
     final offsets = documentPageOffsets(
       blockHeights: heights,
@@ -463,6 +466,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
                     chartTheme: widget.profile,
                     hideRules: true,
                     footnotesAtEnd: !_notesOnPage,
+                    scaleMermaidToFit: true,
                     blockWrapper: (index, block) => _MeasuredBlock(
                       index: index,
                       onMeasured: (i, height) =>

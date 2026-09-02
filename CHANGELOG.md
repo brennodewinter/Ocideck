@@ -500,6 +500,20 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(mermaid): een diagram met een eigen `%%{init}`-directive bleef licht in
+  donker thema, en een breed diagram werd in Pagina's afgesneden (#1921, #1922).
+  Twee fouten met dezelfde wortel: de lezer kreeg één behandeling en de
+  gepagineerde weergave erfde die, terwijl een vel geen schuifbalk heeft.
+  `mermaidWithDarkTheme` sloeg zijn `theme: dark` volledig over zodra de bron al
+  met `%%{` begon — bedoeld om andermans directive te sparen, met als gevolg dat
+  wie alleen een `themeVariables`-kleur zette een wit diagram in donkere prose
+  hield. Hij voegt de sleutel nu sámen in de bestaande JSON en zet hem ná
+  YAML-frontmatter in plaats van de directive te laten vallen. En een diagram
+  dat breder is dan de tekstkolom schaalt in de Pagina's-weergave nu af op die
+  kolom, dezelfde korrel als `BoxFit.contain` in de PDF; de gewone lezer houdt
+  zijn horizontale schuif, want daar is geen vaste bladbreedte om tegenaan te
+  lopen.
+
 - fix(test): de linux-gate viel negen keer om op een wachttijd die geen
   wachttijd was (#1911). `image_carousel_delete_test` liet de afbeeldingkiezer
   300 ms wandelklok draaien en nam daarna aan dat de mapscan klaar was. Op de
