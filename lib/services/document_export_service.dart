@@ -27,16 +27,18 @@ import 'marp_html_service.dart';
 import 'pdf/document_pdf_export.dart';
 import 'epub/document_epub_export.dart';
 import 'odt/document_odt_export.dart';
+import 'docx/document_docx_export.dart';
 import 'privacy/privacy_own_identity.dart';
 import '../utils/document_front_matter.dart';
 
 /// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
 /// LaTeX `article`, een PDF met een echte tekstlaag, een ePub 3 met
-/// herflowbare tekst voor e-readers, en een ODT (OpenDocument Text) als
-/// bewerkbaar open formaat. Alle zes dragen de geredigeerde body — nooit de
-/// rauwe bron.
-enum DocumentExportFormat { md, html, latex, pdf, epub, odt }
+/// herflowbare tekst voor e-readers, een ODT (OpenDocument Text) als
+/// bewerkbaar open formaat, en een DOCX (WordprocessingML) als bewerkbaar
+/// Word-bestand met Mermaid-diagrammen als hoogwaardige afbeeldingen. Alle
+/// zeven dragen de geredigeerde body — nooit de rauwe bron.
+enum DocumentExportFormat { md, html, latex, pdf, epub, odt, docx }
 
 /// Ruim onder de gangbare limiet van 255 bytes per padcomponent.
 const maxSuggestedDocumentExportFileNameBytes = 240;
@@ -60,6 +62,7 @@ String suggestedDocumentExportFileName({
     DocumentExportFormat.pdf => 'pdf',
     DocumentExportFormat.epub => 'epub',
     DocumentExportFormat.odt => 'odt',
+    DocumentExportFormat.docx => 'docx',
   };
   final tag = profile == PrivacyExportProfile.redacted
       ? redactedLabel
@@ -255,17 +258,11 @@ Future<Uint8List> buildDocumentExportBytes(
           '${articlePreamble(meta, theme: theme, documentFields: chromeFields, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins(), cropMarks: cropMarks)}\n$body\n$articlePostamble\n';
       return Uint8List.fromList(utf8.encode(tex));
     case DocumentExportFormat.pdf:
-      final result = await buildDocumentExportPdf(
+      return _buildPdfBytes(
         bundle,
-        labels:
-            pdfLabels ??
-            DocumentPdfLabels(
-              footnotesTitle: footnotesTitle,
-              mathLabel: 'math',
-              mermaidLabel: 'mermaid',
-              chartLabel: 'chart',
-            ),
-        fallbackFont: pdfFallbackFont,
+        exportMetadata: exportMetadata,
+        pdfLabels: pdfLabels,
+        pdfFallbackFont: pdfFallbackFont,
         embedImage: embedImage,
         renderMermaid: renderMermaid,
         renderMath: renderMath,
@@ -273,25 +270,11 @@ Future<Uint8List> buildDocumentExportBytes(
         cropMarks: cropMarks,
         pageSize: pageSize,
         pageMargins: pageMargins,
-        metadata: exportMetadata,
+        footnotesTitle: footnotesTitle,
+        onPdfUnsupportedCharacters: onPdfUnsupportedCharacters,
+        onPdfCoarseLogo: onPdfCoarseLogo,
+        onPdfTablesTooWide: onPdfTablesTooWide,
       );
-      // Een teken dat geen enkele snede kent verdwijnt uit de tekstlaag zonder
-      // dat het bestand ergens klaagt. De schil hoort dat te kunnen melden.
-      if (!result.isComplete) {
-        onPdfUnsupportedCharacters?.call(result.unsupportedCharacters);
-      }
-      // Een logo dat te grof is voor drukwerk is geen fout in de export maar in
-      // het bronbestand; zeggen is het enige wat er nog aan te doen valt.
-      final coarse = result.coarseLogo;
-      if (coarse != null) onPdfCoarseLogo?.call(coarse);
-      // Een tabel die ook op de kleinste letter niet past krijgt zijn woorden
-      // en waarden middenin doorgehakt. Bij een hash of IP-adres kan de lezer
-      // die daarna niet meer overnemen — zeggen is het enige wat er nog aan te
-      // doen valt (#1789).
-      if (result.tablesTooWide > 0) {
-        onPdfTablesTooWide?.call(result.tablesTooWide);
-      }
-      return result.bytes;
     case DocumentExportFormat.epub:
       // ePub 3: herflowbare XHTML in een EPUB-ZIP. Afbeeldingen worden als
       // aparte entries opgeslagen en via relatieve paden gereferend — niet
@@ -320,7 +303,100 @@ Future<Uint8List> buildDocumentExportBytes(
         sourcePath: sourcePath,
         outputPath: outputPath ?? '',
       );
+    case DocumentExportFormat.docx:
+      return _buildDocxBytes(
+        bundle,
+        exportMetadata: exportMetadata,
+        chapterPageBreak: chapterPageBreak,
+        footnotePlacement: footnotePlacement,
+        footnotesTitle: footnotesTitle,
+        embedImage: embedImage,
+        renderMermaid: renderMermaid,
+        renderMath: renderMath,
+        sourcePath: sourcePath,
+        outputPath: outputPath ?? '',
+      );
   }
+}
+
+/// DOCX (WordprocessingML / OOXML): bewerkbare Word-XML in een ZIP, met
+/// native voetnoten, koppen met outline-levels, en Mermaid-diagrammen
+/// als hoogwaardige PNG-afbeeldingen (gerasteriseerd via flutter_svg).
+/// Hetzelfde `embedImage`-pad als ODT/ePub; `renderMermaid`/`renderMath`
+/// hetzelfde als de PDF.
+Future<Uint8List> _buildDocxBytes(
+  ExportBundle bundle, {
+  required ExportDocumentMetadata exportMetadata,
+  required bool chapterPageBreak,
+  required FootnotePlacement footnotePlacement,
+  required String footnotesTitle,
+  required HtmlImageResolver? embedImage,
+  required MermaidSvgResolver? renderMermaid,
+  required MathSvgResolver? renderMath,
+  required String? sourcePath,
+  required String outputPath,
+}) => buildDocumentExportDocx(
+  bundle,
+  metadata: exportMetadata,
+  chapterPageBreak: chapterPageBreak,
+  footnotePlacement: footnotePlacement,
+  footnotesTitle: footnotesTitle,
+  embedImage: embedImage,
+  renderMermaid: renderMermaid,
+  renderMath: renderMath,
+  sourcePath: sourcePath,
+  outputPath: outputPath,
+);
+
+/// PDF-export met tekstlaag. De callbacks melden tekens die geen snede kent,
+/// een te grof logo, en te brede tabellen — zeggen is het enige wat er nog
+/// aan te doen valt (#1789).
+Future<Uint8List> _buildPdfBytes(
+  ExportBundle bundle, {
+  required ExportDocumentMetadata exportMetadata,
+  required DocumentPdfLabels? pdfLabels,
+  required ByteData? pdfFallbackFont,
+  required HtmlImageResolver? embedImage,
+  required MermaidSvgResolver? renderMermaid,
+  required MathSvgResolver? renderMath,
+  required bool chapterPageBreak,
+  required bool cropMarks,
+  required PageSizeSpec? pageSize,
+  required PageMargins? pageMargins,
+  required String footnotesTitle,
+  required void Function(Set<int> runes)? onPdfUnsupportedCharacters,
+  required void Function(LogoResolution logo)? onPdfCoarseLogo,
+  required void Function(int count)? onPdfTablesTooWide,
+}) async {
+  final result = await buildDocumentExportPdf(
+    bundle,
+    labels:
+        pdfLabels ??
+        DocumentPdfLabels(
+          footnotesTitle: footnotesTitle,
+          mathLabel: 'math',
+          mermaidLabel: 'mermaid',
+          chartLabel: 'chart',
+        ),
+    fallbackFont: pdfFallbackFont,
+    embedImage: embedImage,
+    renderMermaid: renderMermaid,
+    renderMath: renderMath,
+    chapterPageBreak: chapterPageBreak,
+    cropMarks: cropMarks,
+    pageSize: pageSize,
+    pageMargins: pageMargins,
+    metadata: exportMetadata,
+  );
+  if (!result.isComplete) {
+    onPdfUnsupportedCharacters?.call(result.unsupportedCharacters);
+  }
+  final coarse = result.coarseLogo;
+  if (coarse != null) onPdfCoarseLogo?.call(coarse);
+  if (result.tablesTooWide > 0) {
+    onPdfTablesTooWide?.call(result.tablesTooWide);
+  }
+  return result.bytes;
 }
 
 /// Schrijft een document-export naar [outputPath] (desktop) of als
@@ -357,6 +433,10 @@ Future<Uint8List> buildDocumentExportBytes(
 ///   met native voetnoten en koppen met outline-levels. De XML-tekst is
 ///   leesbaar in de ZIP, dus de fail-closed test kan op de geleverde bytes
 ///   meten — vergelijkbaar met PDF en ePub.
+/// - [DocumentExportFormat.docx] verpakt de geprojecteerde body als DOCX
+///   (WordprocessingML / OOXML): bewerkbare Word-XML in een ZIP, met native
+///   voetnoten, koppen met outline-levels, en Mermaid-diagrammen als
+///   hoogwaardige PNG-afbeeldingen. Opent in Word, Pages en LibreOffice.
 ///
 /// Op web ([deliversByDownload]) is er geen bestandssysteem: [webFileName]
 /// wordt dan de bestandsnaam van de browser-download, en [outputPath] wordt

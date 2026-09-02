@@ -1694,6 +1694,8 @@ const _dutchSourceAddDa = <String, String>{
       'Del tabellen, eller sæt lange værdier under hinanden i stedet for ved siden af hinanden.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'En ODT (OpenDocument Text), der åbnes i LibreOffice eller Word. Redigerbar, med indbyggede fodnoter og overskrifter som disposition. Det åbne alternativ til en Word-fil.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Et Word-dokument (.docx), der abnes i Word, Pages og LibreOffice. Redigerbart, med indfodte fodnoter og overskrifter som disposition. Mermaid-diagrammer indlejres som billeder af hoj kvalitet.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'En ePub 3 med tilpasningsdygtig tekst til e-readers, tablets og telefoner. Overskrifter bliver navigation, noter står bagerst.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

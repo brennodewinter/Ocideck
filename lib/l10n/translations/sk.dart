@@ -1700,6 +1700,8 @@ const _dutchSourceAddSk = <String, String>{
       'Rozdeľte tabuľku alebo umiestnite dlhé hodnoty pod seba namiesto vedľa seba.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), ktorý sa otvára v LibreOffice alebo Worde. Upraviteľný, s natívnymi poznámkami pod čiarou a nadpismi ako osnovou. Otvorená alternatíva k súboru Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokument Word (.docx), ktory sa otvara v aplikaciach Word, Pages a LibreOffice. Upravitelny, s nativnymi poznamkami pod carou a nadpismi ako osnovou. Mermaid diagramy su vlozene ako vysokokvalitne obrazky.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s prelievajúcim sa textom pre e-čítačky, tablety a telefóny. Nadpisy sa stanú navigáciou, poznámky sú vzadu.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

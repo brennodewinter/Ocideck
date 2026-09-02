@@ -1714,6 +1714,8 @@ const _dutchSourceAddBg = <String, String>{
       'Разделете таблицата или подредете дългите стойности една под друга вместо една до друга.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), който се отваря в LibreOffice или Word. Редактируем, с вградени бележки под линия и заглавия като структура. Отворената алтернатива на Word файл.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word документ (.docx), който се отваря в Word, Pages и LibreOffice. Редактируем, с вградени бележки под линия и заглавия като структура. Mermaid диаграмите са вградени като висококачествени изображения.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 с преливащ текст за електронни читалки, таблети и телефони. Заглавията стават навигация, бележките са накрая.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

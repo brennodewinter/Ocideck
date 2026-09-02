@@ -1724,6 +1724,8 @@ const _dutchSourceAddGa = <String, String>{
       'Roinn an tábla, nó cuir luachanna fada ceann faoi cheann seachas taobh le taobh.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) a osclaíonn i LibreOffice nó Word. Ineagarthóireacht, le fonótaí dúchais agus ceannteidil mar chreatlach. An rogha oscailte do chomhad Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Caipis Word (.docx) a osclaionn i Word, Pages agus LibreOffice. Ineagarthoireacht, le fonotai duchasacha agus ceannteidil mar chreatlach. Ta diagrammer Mermaid leabaithe mar imhanna ardchaighdeain.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 le téacs athshreabach d\'e-léitheoirí, táibléad agus fóin. Éiríonn ceannteidil as nascleanúint, bíonn nótaí deiridh.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

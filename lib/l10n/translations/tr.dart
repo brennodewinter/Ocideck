@@ -2611,6 +2611,8 @@ const _dutchSourceAddTr = <String, String>{
       'Tabloyu bölün ya da uzun değerleri yan yana değil alt alta yerleştirin.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'LibreOffice veya Word\'de açılan bir ODT (OpenDocument Text). Düzenlenebilir, doğal dipnotlar ve başlıklar olarak ana hatlarla. Bir Word dosyasına açık alternatif.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word, Pages ve LibreOffice\'da açılan bir Word belgesi (.docx). Düzenlenebilir, doğal dipnotlar ve başlıklar olarak ana hatlarla. Mermaid diyagramları yüksek kaliteli görüntüler olarak gömülür.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'E-okuyucular, tabletler ve telefonlar için yeniden akışkan metinli bir ePub 3. Başlıklar navigasyon olur, notlar arkada durur.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

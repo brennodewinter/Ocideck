@@ -1698,6 +1698,8 @@ const _dutchSourceAddHr = <String, String>{
       'Podijelite tablicu ili poredajte duge vrijednosti jednu ispod druge umjesto jednu uz drugu.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) koji se otvara u LibreOfficeu ili Wordu. Može se uređivati, s izvornim fusnotama i naslovima kao strukturom. Otvorena alternativa za Word datoteku.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word dokument (.docx) koji se otvara u Wordu, Pagesu i LibreOfficeu. Moze se uredivati, s izvornim fusnotama i naslovima kao strukturom. Mermaid dijagrami su ugradeni kao visokokvalitetne slike.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s tekstom koji se prelijeva za e-čitače, tablete i telefone. Naslovi postaju navigacija, bilješke su na kraju.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

@@ -1687,6 +1687,8 @@ const _dutchSourceAddEt = <String, String>{
       'Jagage tabel või paigutage pikad väärtused üksteise alla, mitte kõrvuti.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), mis avaneb LibreOffice\'is voi Wordis. Redigeeritav, algupäraste allmärkuste ja pealkirjadega kontuurina. Avatud alternatiiv Word-failile.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Wordi dokument (.docx), mis avaneb Wordis, Pagesis ja LibreOfficeis. Redigeeritav, alguparaste allmarkuste ja pealkirjadega ulevaateena. Mermaid diagrammid on manustatud kui kvaliteetsed pildid.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 ümbervoolava tekstiga e-lugejatele, tahvelarvutitele ja telefonidele. Pealkirjad muutuvad navigatsiooniks, märkused on tagumises osas.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

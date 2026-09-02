@@ -726,6 +726,8 @@ const _dutchSourceAddPap = {
       'Parti e tabel, of pone e balornan largu un bou di otro en bes di banda di otro.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Un ODT (OpenDocument Text) ku ta habri na LibreOffice of Word. Editabel, ku nota di pia nativo i titulo manera outline. E alternativo habri pa un fail di Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Un dokumento di Word (.docx) ku ta habri den Word, Pages i LibreOffice. Editabel, ku nota di pia nativo i titulo komo outline. Diagramnan di Mermaid ta inkorpora komo imagen di alta kualidat.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 ku teksto reflowable pa e-reader, tablet i telefone. Titular ta bira navegashon, nota ta bai patras.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

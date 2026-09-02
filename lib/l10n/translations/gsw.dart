@@ -1697,6 +1697,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Teile d Tabälle, oder setz langi Wärt untenand statt näbenand.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'En ODT (OpenDocument Text), wo in LibreOffice oder Word gaat. Bearbeitbar, mit native Fuessnote und Ueberschrifte als Gliederig. Die offni Alternative zun Word-File.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'En Word-Dokument (.docx), wo sich in Word, Pages und LibreOffice offnet. Bearbeitbar, mit native Fussnote und Ueberschrifte als Gliederig. Mermaid-Diagramm werde als hochwertigi Bilder ybettet.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'En ePub 3 mit umflüüssendem Text für E-Reader, Tablets und Telefon. Überschrifte wärde zue Navigation, Note stönd hinte.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

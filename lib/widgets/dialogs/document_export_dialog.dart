@@ -306,6 +306,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           DocumentExportFormat.odt => l10n.d(
             'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.',
           ),
+          DocumentExportFormat.docx => l10n.d(
+            'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.',
+          ),
         }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
       ],
     );
@@ -368,6 +371,11 @@ const _formatOptions = [
     Icons.menu_book_outlined,
   ),
   _FormatOption(DocumentExportFormat.odt, 'ODT (.odt)', Icons.article_outlined),
+  _FormatOption(
+    DocumentExportFormat.docx,
+    'Word (.docx)',
+    Icons.file_copy_outlined,
+  ),
   _FormatOption(
     DocumentExportFormat.latex,
     'LaTeX (.tex)',

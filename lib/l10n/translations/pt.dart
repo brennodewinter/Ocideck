@@ -1722,6 +1722,8 @@ const _dutchSourceAddPt = <String, String>{
       'Divida a tabela ou coloque os valores longos uns abaixo dos outros em vez de lado a lado.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Um ODT (OpenDocument Text) que abre no LibreOffice ou Word. Editável, com notas de rodapé nativas e cabeçalhos como estrutura. A alternativa aberta a um ficheiro Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Um documento Word (.docx) que abre no Word, Pages e LibreOffice. Editavel, com notas de rodape nativas e titulos como contorno. Os diagramas Mermaid sao incorporados como imagens de alta qualidade.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Um ePub 3 com texto refluido para e-readers, tablets e telefones. Cabeçalhos tornam-se navegação, notas ficam no final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

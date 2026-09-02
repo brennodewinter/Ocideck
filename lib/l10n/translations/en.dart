@@ -890,6 +890,8 @@ const _dutchSourceAddEn = {
       'Split the table, or list long values one below the other instead of side by side.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'An ODT (OpenDocument Text) that opens in LibreOffice or Word. Editable, with native footnotes and headings as outline. The open alternative to a Word file.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'A Word document (.docx) that opens in Word, Pages and LibreOffice. Editable, with native footnotes and headings as outline. Mermaid diagrams are embedded as high-quality images.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'An ePub 3 with reflowable text for e-readers, tablets and phones. Headings become navigation, notes go at the back.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

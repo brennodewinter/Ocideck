@@ -1670,6 +1670,8 @@ const _dutchSourceAddTlh = <String, String>{
       'pat\'IH yIchev, pagh per tIq bIng yIlan, retlh yIlanQo\'.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) loS LibreOffice pagh Word. choHlaH, native qamHommey bogh \'ej tlhoy\' tlhagh. Word mab lo\'Ha\' open alternative.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word-doc (.docx) loS Word, Pages, LibreOffice. choHlaH, native qamHommey bogh \'ej tlhoy\' tlhagh. Mermaid diagrammey high-quality mIl chu\'lu\'.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 cheSmoH tlhIngan text e-readers, tablets, phones. mIqHom navigation, qon nach.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

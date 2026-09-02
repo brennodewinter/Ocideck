@@ -1696,6 +1696,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ossza szét a táblázatot, vagy tegye a hosszú értékeket egymás alá egymás mellé helyezés helyett.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Egy ODT (OpenDocument Text), amely LibreOffice-ban vagy Wordben nyitható meg. Szerkeszthető, natív lábjegyzetekkel és címsorokkal vázlatként. A Word-fájl nyílt alternatívája.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Egy Word-dokumentum (.docx), amely megnyilik a Wordben, Pagesben es LibreOffice-ban. Szerkesztheto, nativ labjegyzetekkel es cimsorokkal vazlatkent. A Mermaid-diagramok kiváló minősegű kepkent vannak beagyazva.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Egy ePub 3 újraformázható szöveggel e-olvasókhoz, tabletekhez és telefonokhoz. A címsorok navigációvá válnak, a jegyzetek hátul vannak.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

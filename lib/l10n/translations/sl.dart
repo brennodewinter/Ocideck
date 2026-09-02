@@ -1694,6 +1694,8 @@ const _dutchSourceAddSl = <String, String>{
       'Razdelite tabelo ali dolge vrednosti postavite eno pod drugo namesto eno ob drugo.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), ki se odpre v LibreOffice ali Word. Predelovalen, z izvornimi sprotnimi opombami in naslovi kot oris. Odprta alternativa datoteki Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokument Word (.docx), ki se odpre v Wordu, Pages in LibreOffice. Uredljiv, z izvornimi opombami in naslovi kot oris. Mermaid diagrami so vdelani kot visokokakovostne slike.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 z besedilom, ki se preliva, za bralnike e-knjig, tablične računalnike in telefone. Naslovi postanejo navigacija, opombe so zadaj.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

@@ -1695,6 +1695,8 @@ const _dutchSourceAddCs = <String, String>{
       'Rozdělte tabulku, nebo umístěte dlouhé hodnoty pod sebe místo vedle sebe.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), který se otevírá v LibreOffice nebo Wordu. Upravitelný, s nativními poznámkami pod čarou a nadpisy jako osnovou. Otevřená alternativa k souboru Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokument Word (.docx), ktery se otevra v aplikacich Word, Pages a LibreOffice. Upravitelny, s nativnimi poznamkami pod carou a nadpisy jako osnovou. Mermaid diagramy jsou vlozeny jako vysoce kvalitni obrazky.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 s textem, který se přelévá, pro e-čtečky, tablety a telefony. Nadpisy se stávají navigací, poznámky jsou vzadu.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

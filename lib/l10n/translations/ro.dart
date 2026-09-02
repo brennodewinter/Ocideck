@@ -1710,6 +1710,8 @@ const _dutchSourceAddRo = <String, String>{
       'Împărțiți tabelul sau așezați valorile lungi una sub alta în loc de una lângă alta.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Un ODT (OpenDocument Text) care se deschide în LibreOffice sau Word. Editabil, cu note de subsol native și titluri ca structură. Alternativa deschisă la un fișier Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Un document Word (.docx) care se deschide in Word, Pages si LibreOffice. Editabil, cu note de subsol native si titluri ca schita. Diagramele Mermaid sunt incorporate ca imagini de inalta calitate.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 cu text refluid pentru cititoare electronice, tablete și telefoane. Titlurile devin navigare, notele sunt la final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
