@@ -3,7 +3,7 @@
 // library file. These were private `static` MarpHtmlService helpers; as
 // top-level private functions they share the library and are called by
 // bare name from the service's public render methods.
-//
+
 // De SVG tekent dezelfde indeling als de app: raster, wijzerplaat,
 // uitleesvenster en label komen uit `CockpitGridPlan`/`CockpitCellPlan`
 // (services/cockpit_layout.dart), en de regelval van label en eenheid uit
