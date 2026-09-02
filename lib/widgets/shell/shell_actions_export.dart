@@ -24,6 +24,10 @@ String _downloadRefusedMessage(AppLocalizations l10n) => l10n.d(
 /// markdown plus élke asset — en allebei gingen ze om de classificatiepoort
 /// heen die ARCHITECTURE.md bij name aan het pakket toeschrijft.
 
+/// Exporteer het huidige deck als zelfstandig `.ocideck`-pakket. Toont eerst de
+/// [PackageEncryptDialog] zodat de gebruiker het pakket optioneel met een
+/// wachtwoord (AES-256) kan beschermen; annuleren daar breekt de export af. Op
+/// web wordt het pakket in het geheugen gebouwd en als download aangeboden.
 Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
   final deck = ref.read(deckProvider).deck!;
   // De classificatiepoort, ook hier. Dit pad ging er volledig omheen terwijl

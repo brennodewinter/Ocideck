@@ -134,10 +134,10 @@ String _unreadableMessage(
   null => l10n.d('Kon dit bestand niet openen.'),
 };
 
-/// Exporteer het huidige deck als zelfstandig `.ocideck`-pakket. Toont eerst de
-/// [PackageEncryptDialog] zodat de gebruiker het pakket optioneel met een
-/// wachtwoord (AES-256) kan beschermen; annuleren daar breekt de export af. Op
-/// web wordt het pakket in het geheugen gebouwd en als download aangeboden.
+/// Open een presentatie of document via de zoek-/kies-dialoog: de ingestelde
+/// bibliotheken worden doorzocht, de gebruiker kiest een bestand (of bladert
+/// naar één buiten de bibliotheken), en het opent in een tabblad. Op web is er
+/// geen bestandssysteem om te doorzoeken; daar levert de browser-picker bytes.
 Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
   // Op web is er geen bestandssysteem om te doorzoeken; alle open-ingangen
   // (welkomstscherm, menu, Ctrl/Cmd+O) lopen daar via de browser-picker.
