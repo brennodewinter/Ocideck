@@ -476,6 +476,50 @@ class _AppShellState extends ConsumerState<AppShell> {
     _openWithSearch(context, ref);
   }
 
+  /// Wikkelt een app-brede sneltoets zodat hij niets doet zolang er iets boven
+  /// de shell staat — een dialoog, de documentlezer, het presentatiescherm.
+  ///
+  /// Zonder deze poort stapelde twee keer Ctrl/Cmd+O twee openen-dialogen
+  /// (#1927). `showDialog` duwt zijn route synchroon, maar de focusboom
+  /// verwerkt die wissel pas in de volgende frame; twee aanslagen binnen
+  /// dezelfde frame komen dus allebei nog bij deze binding aan. Op macOS telt
+  /// daar een tweede ingang bij op: de native menubalk draagt dezelfde
+  /// Cmd-sneltoets. De navigatiegeschiedenis weet het meteen, dus die is hier
+  /// de betrouwbare bron — en de poort geldt voor élke app-brede sneltoets,
+  /// niet alleen voor openen.
+  VoidCallback _onlyWhenShellIsOnTop(VoidCallback action) => () {
+    if (Navigator.of(context, rootNavigator: true).canPop()) return;
+    action();
+  };
+
+  /// De app-brede sneltoetsen, alle door [_onlyWhenShellIsOnTop]. Losse
+  /// methode zodat [build] onder de methodelengte-ratchet blijft.
+  Map<ShortcutActivator, VoidCallback> _appWideShortcuts() => {
+    const SingleActivator(LogicalKeyboardKey.keyS, control: true):
+        _onlyWhenShellIsOnTop(_saveActive),
+    const SingleActivator(LogicalKeyboardKey.keyS, meta: true):
+        _onlyWhenShellIsOnTop(_saveActive),
+    const SingleActivator(LogicalKeyboardKey.keyO, control: true):
+        _onlyWhenShellIsOnTop(_openActive),
+    const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
+        _onlyWhenShellIsOnTop(_openActive),
+    const SingleActivator(LogicalKeyboardKey.keyF, control: true):
+        _onlyWhenShellIsOnTop(() => _requestDocumentFind(showReplace: false)),
+    const SingleActivator(LogicalKeyboardKey.keyF, meta: true):
+        _onlyWhenShellIsOnTop(() => _requestDocumentFind(showReplace: false)),
+    const SingleActivator(LogicalKeyboardKey.keyH, control: true):
+        _onlyWhenShellIsOnTop(() => _requestDocumentFind(showReplace: true)),
+    const ControlHActivator(): _onlyWhenShellIsOnTop(
+      () => _requestDocumentFind(showReplace: true),
+    ),
+    const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
+        _onlyWhenShellIsOnTop(() => _requestDocumentFind(showReplace: true)),
+    const SingleActivator(LogicalKeyboardKey.keyW, control: true):
+        _onlyWhenShellIsOnTop(_closeActive),
+    const SingleActivator(LogicalKeyboardKey.keyW, meta: true):
+        _onlyWhenShellIsOnTop(_closeActive),
+  };
+
   void _requestDocumentFind({required bool showReplace}) {
     ref
         .read(tabsProvider)
@@ -761,30 +805,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       actions: _menuActions(context.l10n),
       deckActions: _deckMenuActions(),
       child: CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.keyS, control: true):
-              _saveActive,
-          const SingleActivator(LogicalKeyboardKey.keyS, meta: true):
-              _saveActive,
-          const SingleActivator(LogicalKeyboardKey.keyO, control: true):
-              _openActive,
-          const SingleActivator(LogicalKeyboardKey.keyO, meta: true):
-              _openActive,
-          const SingleActivator(LogicalKeyboardKey.keyF, control: true): () =>
-              _requestDocumentFind(showReplace: false),
-          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): () =>
-              _requestDocumentFind(showReplace: false),
-          const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
-              _requestDocumentFind(showReplace: true),
-          const ControlHActivator(): () =>
-              _requestDocumentFind(showReplace: true),
-          const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
-              _requestDocumentFind(showReplace: true),
-          const SingleActivator(LogicalKeyboardKey.keyW, control: true):
-              _closeActive,
-          const SingleActivator(LogicalKeyboardKey.keyW, meta: true):
-              _closeActive,
-        },
+        bindings: _appWideShortcuts(),
         child: FocusScope(
           autofocus: true,
           child: DropTarget(
