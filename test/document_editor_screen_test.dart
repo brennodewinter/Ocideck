@@ -19,6 +19,7 @@ import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'support/pump_until.dart';
 
 void main() {
   setUp(() {
@@ -132,9 +133,16 @@ void main() {
           MarkdownDocument.parse('# Kop\n\n<!-- rauwe html -->\n\nTekst.'),
         );
       await tester.pumpWidget(harness(n));
-      await tester.pump();
-      // De auto-fallback plant de snackbar ná de eerste frame; geef hem die.
-      await tester.pump();
+      // De auto-fallback gebeurt ná de eerste frame. Hier stonden twee kale
+      // `pump()`s — een gok op hoeveel frames dat kost, en die gok viel op
+      // 24/25-08-2026 vijf keer om op de linux-gate (taken 3421, 3433, 3439,
+      // 3448, 3480): de terugval was nog niet gebeurd en de visuele editor
+      // stond er nog. Wacht op de terugval zelf.
+      await pumpUntil(
+        tester,
+        () => find.byType(MarkdownNotesEditor).evaluate().isEmpty,
+        reason: 'de terugval naar Bron-modus bleef uit',
+      );
       // Een constructie die de brug niet verliesvrij aankan, valt nu expliciet
       // terug op de Bron-modus (bron + live weergave) — niet stilletjes op
       // brontekst in de visuele modus.
@@ -441,19 +449,18 @@ void main() {
     final shortcuts = tester
         .widgetList<CallbackShortcuts>(find.byType(CallbackShortcuts))
         .firstWhere((w) => w.bindings.containsKey(saveActivator));
-    await tester.runAsync(() async {
-      shortcuts.bindings[saveActivator]!();
-      // isDirty clear't pas ná de awaited atomic write (document_editor_screen
-      // roept markSaved aan ná `await saveDocument`), dus dit is het juiste
-      // wachtsignaal. Het budget moet wel ruim: op de Forgejo linux-gate draaien
-      // vier job-containers parallel op één dind, en onder die I/O-contentie
-      // haalde de write de oude 500ms niet → de lus las nog 'oud'. 5s vangt de
-      // last-piek af zonder een echte hang te verbergen (bounded).
-      for (var i = 0; i < 500 && n.currentState.isDirty; i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-      }
-    });
-    await tester.pump();
+    await tester.runAsync(() async => shortcuts.bindings[saveActivator]!());
+    // isDirty clear't pas ná de awaited atomic write (document_editor_screen
+    // roept markSaved aan ná `await saveDocument`), dus dit is het juiste
+    // wachtsignaal. Het budget moet ruim: op de Forgejo linux-gate draaien vier
+    // job-containers parallel op één dind, en onder die I/O-contentie haalde de
+    // write de oude 500 ms niet — de lus las dan nog 'oud'.
+    await pumpUntil(
+      tester,
+      () => !n.currentState.isDirty,
+      timeout: const Duration(seconds: 5),
+      reason: 'de opslag maakte het document niet schoon',
+    );
 
     expect(File(path).readAsStringSync(), 'nieuw\n');
     expect(n.currentState.isDirty, isFalse);
@@ -770,10 +777,11 @@ void main() {
       await tester.tap(find.text('Afbeelding'));
       await tester.pump();
       // De scan/I/O van de carrousel; font-overflow in tests is cosmetisch.
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 200)),
+      await pumpUntil(
+        tester,
+        () => find.byType(ImageCarouselPicker).evaluate().isNotEmpty,
+        reason: 'de afbeeldingkiezer kwam niet op',
       );
-      await tester.pump();
       while (tester.takeException() != null) {}
 
       expect(find.byType(ImageCarouselPicker), findsOneWidget);
@@ -794,10 +802,11 @@ void main() {
 
       await tester.tap(find.byTooltip('Afbeelding'));
       await tester.pump();
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 200)),
+      await pumpUntil(
+        tester,
+        () => find.byType(ImageCarouselPicker).evaluate().isNotEmpty,
+        reason: 'de afbeeldingkiezer kwam niet op',
       );
-      await tester.pump();
       while (tester.takeException() != null) {}
 
       expect(find.byType(ImageCarouselPicker), findsOneWidget);

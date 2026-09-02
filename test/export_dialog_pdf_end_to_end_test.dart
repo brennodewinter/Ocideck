@@ -16,6 +16,7 @@ import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
+import 'support/pump_until.dart';
 
 /// De exportknop zoals een gebruiker hem indrukt — door de héle dialoog heen.
 ///
@@ -167,17 +168,19 @@ void main() {
   }
 
   Future<void> runExport(WidgetTester tester) async {
-    // 1200 iteraties × 10 ms = 12 s wandelklok. PDF-generatie rendert elke
-    // dia naar een afbeelding, encodeert en schrijft — op de 4-core Linux-
-    // runner onder `--concurrency=14` krijgt elk proces ~28% van een core en
-    // duurt dat langer. 600 (6 s) was marginaal; 1200 geeft ruimschoots.
-    for (var i = 0; i < 1200; i++) {
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 10)),
-      );
-      await tester.pump(const Duration(milliseconds: 16));
-      if (pdfsIn(tmp).isNotEmpty || failureTextIn(tester) != null) return;
-    }
+    // Wachten tot de export een uitkomst heeft: een PDF op schijf, of de
+    // mislukkingsmelding. Ruim budget — PDF-generatie rendert elke dia naar een
+    // afbeelding, encodeert en schrijft, en op de 4-core Linux-runner onder
+    // `--concurrency=14` krijgt elk proces ~28% van een core. Hier stond
+    // dezelfde lus met de hand geschreven; `pumpUntil` is hetzelfde patroon en
+    // faalt met een leesbare melding in plaats van stil door te lopen naar een
+    // toets die "geen bestand" zegt.
+    await pumpUntil(
+      tester,
+      () => pdfsIn(tmp).isNotEmpty || failureTextIn(tester) != null,
+      timeout: const Duration(seconds: 12),
+      reason: 'de export leverde geen PDF en geen melding',
+    );
   }
 
   testWidgets('de PDF-knop levert een bestand op een pentestdeck (#714)', (
