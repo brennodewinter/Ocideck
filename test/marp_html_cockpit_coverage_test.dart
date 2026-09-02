@@ -65,7 +65,9 @@ void main() {
       },
     ], scheme: customScheme);
     expect(speed, contains('Speed'));
-    expect(speed, contains('78%'));
+    // Getal en korte eenheid staan als aparte tekstknopen in het venster.
+    expect(speed, contains('>78<tspan'));
+    expect(speed, contains('>%</tspan>'));
     expect(speed, contains('#101010')); // good zone
     expect(speed, contains('#303030')); // critical zone
 
@@ -83,7 +85,8 @@ void main() {
         'value': 92,
       },
     ], scheme: customScheme);
-    expect(volt, contains('92V'));
+    expect(volt, contains('>92<tspan'));
+    expect(volt, contains('>V</tspan>'));
     expect(volt, contains('#101010')); // good zone
     expect(volt, contains('#303030')); // critical zone
 
@@ -101,7 +104,8 @@ void main() {
         'value': 3200,
       },
     ]);
-    expect(alt, contains('3200ft'));
+    expect(alt, contains('>3200<tspan'));
+    expect(alt, contains('>ft</tspan>'));
     expect(alt, contains('<svg'));
   });
 
@@ -173,8 +177,13 @@ void main() {
     ], scheme: customScheme);
     expect(svg, contains('#505050')); // sky
     expect(svg, contains('#606060')); // ground
-    expect(svg, contains('cockpit-horizon-0'));
-    expect(svg, contains('P 20 / B 15'));
+    // Het clip-id draagt een suffix per SVG: meerdere cockpit-dia's delen
+    // één HTML-document en één id-namespace.
+    expect(svg, contains('cockpit-horizon-0-'));
+    // Pitch en bank staan als twee regels in het uitleesvenster, niet meer
+    // op de grond van de horizon.
+    expect(svg, contains('>P 20<'));
+    expect(svg, contains('>B 15<'));
   });
 
   test('horizon clamps extreme pitch and bank', () {
@@ -182,7 +191,8 @@ void main() {
     final svg = renderMeters([
       {'type': 'horizon', 'label': 'Att', 'pitch': 60, 'bank': -80},
     ]);
-    expect(svg, contains('P 45 / B -60'));
+    expect(svg, contains('>P 45<'));
+    expect(svg, contains('>B -60<'));
   });
 
   test('heading renders compass, actual/target and a marker label', () {
@@ -220,13 +230,15 @@ void main() {
   });
 
   test('theme accent colour is threaded into the gauge, default otherwise', () {
+    // Authentiek draagt het accent op de horizonbalk en de kompasmarker, net
+    // als de app; de naald is inkt.
     final themed = renderMeters([
-      {'type': 'speedometer', 'label': 'S', 'value': 30},
+      {'type': 'horizon', 'label': 'S', 'pitch': 0, 'bank': 0},
     ], theme: const ThemeProfile(accentColor: '#123456'));
     expect(themed, contains('#123456'));
 
     final plain = renderMeters([
-      {'type': 'speedometer', 'label': 'S', 'value': 30},
+      {'type': 'horizon', 'label': 'S', 'pitch': 0, 'bank': 0},
     ]);
     // Falls back to the built-in accent when no theme is supplied.
     expect(plain, contains('#38BDF8'));

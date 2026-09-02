@@ -13,6 +13,7 @@ import '../models/image_callout.dart';
 import 'improvement/chart_derivation.dart';
 import '../models/checklist_spec.dart';
 import '../models/cockpit.dart';
+import 'cockpit_layout.dart';
 import '../models/discoveries_spec.dart';
 import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
