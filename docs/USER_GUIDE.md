@@ -4448,8 +4448,9 @@ A toggle at the top of the document editor chooses how you work. *(A third
 setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
 
 - **Visual** is a rich-text writing surface — you type directly on the document
-  as it renders, with tables, charts, Mermaid diagrams and images shown as
-  editable blocks. On a wide enough window an **outline rail** of the document's
+  as it renders, with tables and images shown as editable blocks and Mermaid
+  diagrams drawn in place as read-only cards *(since 2026-09-02; a ` ```chart `
+  fence is still shown as its source there, and is edited in Source).* On a wide enough window an **outline rail** of the document's
   headings appears beside it; clicking a heading scrolls to it. If the file
   contains a construct the visual bridge cannot round-trip losslessly (raw HTML,
   escaped punctuation), Visual does **not** lock you out: it keeps you
