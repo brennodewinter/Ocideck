@@ -612,21 +612,36 @@ also declares them, but see the [CI note](#continuous-integration).)
     `pump_until.dart`) and debt still to be converted.
 
     **This gate measured almost nothing between 2026-07 and 2026-09-01.** It
-    matched only the bare spelling `Future.delayed(`, while 126 of the 129 wait
-    points in `test/` are written `Future<void>.delayed(`, and it looked just
-    400 characters past the `runAsync(` — less than one `pumpWidget` with a
-    widget tree in it. It saw 3 of 129 and reported green while
-    `image_carousel_delete_test` failed the linux gate nine times in twelve
-    days on exactly the fault it was built to catch. It now accepts the type
-    argument and counts parentheses to the end of the call.
-    `test/fixed_delay_ratchet_test.dart` holds both blind spots as cases. One
-    limit remains and is deliberate: a wait point inside a helper that is
-    *called* from a `runAsync` block is not lexically inside it, so the gate
-    does not see it. `callout_reveal_test` was exactly that shape.
-    Line comments and triple-quoted string literals are stripped before
-    matching, so the helper's own documentation and that test's own specimens —
-    both of which spell the anti-pattern out on purpose — do not trip the
-    gate.
+    was a regular expression looking for the bare spelling `Future.delayed(`
+    and reading 400 characters past the `runAsync(`. Three blind spots followed
+    from that, and all three had already cost red gates:
+
+    1. **the type argument** — 126 of the 129 wait points in `test/` are written
+       `Future<void>.delayed(`. The gate saw 3 of 129 and reported green while
+       `image_carousel_delete_test` failed the linux gate nine times in twelve
+       days;
+    2. **the reach** — one `pumpWidget` with a widget tree in it is longer than
+       400 characters, and that is exactly where the failing wait point sat;
+    3. **the detour** — a wait point inside a helper *called* from a `runAsync`
+       block is not lexically inside it. `callout_reveal_test._pumpOverlay` had
+       that shape and was never seen.
+
+    The measurement therefore runs over the AST (the `analyzer` package, as
+    `check_method_length` already did), with a call graph within the file: a
+    `runAsync` counts when it reaches a fixed wait directly, or through a helper
+    declared in the same file. Comments and string literals fall away by
+    construction — the parser makes no call nodes out of them — so the two text
+    filters this used to need are gone, and so is the risk that the gate trips
+    over its own documentation. A file that fails to parse is reported rather
+    than skipped: "silently measuring nothing" is the failure mode that made
+    this gate useless for six weeks, and it must not recur quietly.
+    `test/fixed_delay_ratchet_test.dart` holds all three blind spots as cases.
+
+    What the gate still does *not* cover is a guess measured in **frames**
+    rather than wall-clock — two bare `pump()` calls and then an assertion that
+    an async fallback has happened. That shape failed the gate five times in
+    `document_editor_screen_test`; it is fixed there, but no gate would catch
+    the next one.
   - **suppressed SAST findings ratchet** — `// nosemgrep:` comments in `lib/`
     may shrink but never grow (`nosemgrepBaseline`, currently **1**). One
     suppression is a judgement; ten is a habit, and then a green `make sast`

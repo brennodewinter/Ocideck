@@ -30,6 +30,11 @@
 
 import 'dart:io';
 
+import 'package:analyzer/dart/analysis/features.dart';
+import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
+
 /// Bare `catch (_)` sites allowed in lib/. Ratchet only downwards (now 0).
 const int catchUnderscoreBaseline = 0;
 
@@ -754,18 +759,6 @@ List<String> _filePickerPathViolations() {
 // Het alternatief staat in `test/support/pump_until.dart`: wissel korte stapjes
 // echte tijd af met een `pump` en kijk na elke stap of het resultaat er ís, met
 // een bovengrens zodat een vastloper alsnog faalt.
-final _runAsync = RegExp(r'runAsync\s*\(');
-
-/// `Future.delayed(` — met of zonder typeargument.
-///
-/// Dat `(?:<[^>]*>)?` is niet cosmetisch. De poort zocht tot 2026-09-01 alleen
-/// de kale vorm, terwijl 126 van de 129 wachtpunten in `test/` als
-/// `Future<void>.delayed(` geschreven staan: hij zag 3 van de 129 en meldde al
-/// die tijd groen. `image_carousel_delete_test` liep negen keer rood op de
-/// linux-gate met precies de fout die deze poort hoort te vangen, zonder dat de
-/// poort ooit iets zei. Een poort die de schrijfwijze van de codebase niet kent,
-/// meet niets.
-final _futureDelayed = RegExp(r'Future(?:<[^>]*>)?\.delayed\s*\(');
 
 /// Wachtpunten die vandaag nog op een vaste klok staan.
 /// RATCHET: mag krimpen, nooit groeien.
@@ -797,14 +790,11 @@ const Map<String, int> fixedDelayBaseline = {
   'test/shell_webdav_actions_test.dart': 2,
 
   // ── Schuld: nog te vertalen naar pumpUntil ──
-  // Bewezen rood op de linux-gate: document_editor_screen vijf keer op 24/25-08
-  // (taken 3421, 3433, 3439, 3448, 3480), export_dialog_pdf op 24-08 (taak
-  // 3404) — daar is toen alleen het getal verhoogd, niet de gok weggehaald.
-  // (callout_accessibility en callout_reveal stonden hier ook; die laden hun
-  // beeld nu voor en hebben geen wachtpunt meer.)
-  'test/document_editor_screen_test.dart': 3,
-  'test/export_dialog_pdf_end_to_end_test.dart': 1,
-  // Nog niet rood gezien, zelfde vorm en dus dezelfde kans.
+  // Alles wat ooit rood op de linux-gate stond, is inmiddels omgezet:
+  // image_carousel_delete (9×), callout_accessibility (2×), callout_reveal (1×),
+  // document_editor_screen (5×) en export_dialog_pdf (1×). Wat hier nog staat,
+  // is nog niet rood gezien — maar het draagt dezelfde vorm en dus dezelfde
+  // kans, en dat is precies waarom het geteld wordt in plaats van vergeten.
   'test/bullets_image_preview_test.dart': 1,
   'test/callout_raster_export_frame_test.dart': 1,
   'test/document_new_and_save_as_test.dart': 1,
@@ -824,98 +814,6 @@ const Map<String, int> fixedDelayBaseline = {
   'test/split_bullets_image_page_target_test.dart': 1,
 };
 
-/// Haalt drieaanhalige stringliteralen weg vóór het zoeken.
-///
-/// Zo'n literaal is data, geen code: hij draait nooit. Een test die het
-/// antipatroon als voorbeeld ópschrijft om te toetsen dat de poort het vindt —
-/// `test/fixed_delay_ratchet_test.dart` doet precies dat — is geen overtreding,
-/// en een poort die zijn eigen toets afkeurt is niet te handhaven. Zelfde
-/// redenering als bij [_withoutLineComments], een verdieping hoger.
-String _withoutTripleQuoted(String source) {
-  final buffer = StringBuffer();
-  var i = 0;
-  while (i < source.length) {
-    final singles = source.indexOf("'''", i);
-    final doubles = source.indexOf('"""', i);
-    final at = singles < 0
-        ? doubles
-        : (doubles < 0 ? singles : (singles < doubles ? singles : doubles));
-    if (at < 0) {
-      buffer.write(source.substring(i));
-      break;
-    }
-    buffer.write(source.substring(i, at));
-    final marker = source.substring(at, at + 3);
-    final close = source.indexOf(marker, at + 3);
-    if (close < 0) break;
-    // De regelovergangen blijven staan, anders schuiven de gerapporteerde
-    // regelnummers op ten opzichte van het echte bestand.
-    final span = source.substring(at, close + 3);
-    buffer.write('\n' * '\n'.allMatches(span).length);
-    i = close + 3;
-  }
-  return buffer.toString();
-}
-
-/// Haalt regelcommentaar weg vóór het zoeken.
-///
-/// Zonder dit valt de poort over zijn eigen tegenvoorbeeld: het doc-commentaar
-/// van `pump_until.dart` schrijft het antipatroon voluit op om uit te leggen
-/// waaróm het fout is. Een poort die zijn eigen uitleg verbiedt, wordt weggezet
-/// — en terecht.
-String _withoutLineComments(String source) => source
-    .split('\n')
-    .map((line) {
-      final at = line.indexOf('//');
-      if (at < 0) return line;
-      // Een `//` binnen een string laten we staan; het gaat hier om
-      // commentaarregels, niet om URL's in testdata.
-      final before = line.substring(0, at);
-      final quotes =
-          "'".allMatches(before).length + '"'.allMatches(before).length;
-      if (quotes.isOdd) return line;
-      return before;
-    })
-    .join('\n');
-
-/// De tekst binnen de haakjes van de aanroep die op [open] begint.
-///
-/// Hier stond een venster van 400 tekens. Dat leek pragmatisch en was het niet:
-/// `image_carousel_delete_test.pumpPicker` zette zijn `Future<void>.delayed`
-/// ná een `pumpWidget` met een hele widgetboom erin, ruim voorbij die 400 — en
-/// juist dát wachtpunt liet de linux-gate negen keer omvallen. Een venster op
-/// tekens meet de vorm van de code, niet de aanroep. Tel dus haakjes, en stop
-/// waar de aanroep stopt.
-///
-/// Haakjes in stringliteralen worden overgeslagen; die zouden de telling
-/// scheeftrekken.
-String _callScope(String source, int open) {
-  var depth = 0;
-  String? quote;
-  for (var i = open; i < source.length; i++) {
-    final c = source[i];
-    if (quote != null) {
-      if (c == r'\') {
-        i++;
-      } else if (c == quote) {
-        quote = null;
-      }
-      continue;
-    }
-    if (c == "'" || c == '"') {
-      quote = c;
-      continue;
-    }
-    if (c == '(') {
-      depth++;
-    } else if (c == ')') {
-      depth--;
-      if (depth == 0) return source.substring(open + 1, i);
-    }
-  }
-  return source.substring(open);
-}
-
 /// Wat de poort over de vaste wachtpunten te melden heeft.
 class _DelayScan {
   const _DelayScan(this.overBasislijn, this.gekrompen);
@@ -929,23 +827,183 @@ class _DelayScan {
   final List<String> gekrompen;
 }
 
+/// Is dit knooppunt een `Future.delayed(…)` — in welke schrijfwijze dan ook?
+///
+/// Twee vormen, want de parser maakt er niet één van: `Future.delayed(x)` wordt
+/// een [MethodInvocation] met `Future` als doel, `Future<void>.delayed(x)` een
+/// [InstanceCreationExpression] met een expliciet typeargument. De poort zocht
+/// tot 2026-09-01 alleen de eerste — en 126 van de 129 wachtpunten in `test/`
+/// schrijven de tweede.
+bool _isFutureDelayed(AstNode node) {
+  if (node is MethodInvocation) {
+    return node.methodName.name == 'delayed' &&
+        (node.target?.toSource().startsWith('Future') ?? false);
+  }
+  if (node is InstanceCreationExpression) {
+    final naam = node.constructorName.toSource();
+    return naam.startsWith('Future') && naam.endsWith('.delayed');
+  }
+  return false;
+}
+
+/// Verzamelt per bestand welke declaraties een vast wachtpunt dragen, welke
+/// declaraties elkaar aanroepen, en waar de `runAsync`-aanroepen staan.
+class _DelayVisitor extends RecursiveAstVisitor<void> {
+  /// De declaratie waar de bezoeker nu in zit, of `null` op bestandsniveau.
+  String? _huidige;
+
+  /// Declaraties met een `Future.delayed` rechtstreeks in hun lichaam.
+  final Set<String> wacht = {};
+
+  /// Declaratie → de namen die zij aanroept. De basis van de call-graph.
+  final Map<String, Set<String>> roept = {};
+
+  /// De `runAsync`-aanroepen: hun offset plus de namen die erbinnen worden
+  /// aangeroepen, en of er rechtstreeks een wachtpunt in zit.
+  final List<({int offset, Set<String> roept, bool direct})> runAsyncs = [];
+
+  void _inDeclaratie(String naam, void Function() body) {
+    final vorige = _huidige;
+    _huidige = naam;
+    roept.putIfAbsent(naam, () => <String>{});
+    body();
+    _huidige = vorige;
+  }
+
+  @override
+  void visitFunctionDeclaration(FunctionDeclaration node) {
+    _inDeclaratie(node.name.lexeme, () => super.visitFunctionDeclaration(node));
+  }
+
+  @override
+  void visitMethodDeclaration(MethodDeclaration node) {
+    _inDeclaratie(node.name.lexeme, () => super.visitMethodDeclaration(node));
+  }
+
+  /// Een lokale hulp in een testbestand is meestal een `Future<void> foo()`
+  /// binnen `main()`; die telt als eigen declaratie, niet als deel van `main`.
+  @override
+  void visitFunctionDeclarationStatement(FunctionDeclarationStatement node) {
+    _inDeclaratie(
+      node.functionDeclaration.name.lexeme,
+      () => super.visitFunctionDeclarationStatement(node),
+    );
+  }
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    if (_isFutureDelayed(node) && _huidige != null) wacht.add(_huidige!);
+    super.visitInstanceCreationExpression(node);
+  }
+
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    if (_isFutureDelayed(node)) {
+      if (_huidige != null) wacht.add(_huidige!);
+    } else if (node.methodName.name == 'runAsync') {
+      final binnen = _AanroepVerzamelaar();
+      node.argumentList.accept(binnen);
+      runAsyncs.add((
+        offset: node.offset,
+        roept: binnen.namen,
+        direct: binnen.wachtpunt,
+      ));
+    } else if (_huidige != null) {
+      roept[_huidige]!.add(node.methodName.name);
+    }
+    super.visitMethodInvocation(node);
+  }
+}
+
+/// De namen die binnen één stuk boom worden aangeroepen, plus of er een
+/// wachtpunt rechtstreeks in staat.
+class _AanroepVerzamelaar extends RecursiveAstVisitor<void> {
+  final Set<String> namen = {};
+  bool wachtpunt = false;
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    if (_isFutureDelayed(node)) wachtpunt = true;
+    super.visitInstanceCreationExpression(node);
+  }
+
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    if (_isFutureDelayed(node)) {
+      wachtpunt = true;
+    } else {
+      namen.add(node.methodName.name);
+    }
+    super.visitMethodInvocation(node);
+  }
+}
+
 /// De regelnummers per bestand waar een `runAsync` op een vaste klok wacht.
 ///
 /// Los van de schijf zodat de meting zelf toetsbaar is; zie
 /// `test/fixed_delay_ratchet_test.dart`. Het regelnummer is dat van de
 /// `runAsync`, niet van de `Future.delayed` erbinnen: dát is het punt waar de
 /// lezer de vervanging moet aanbrengen.
+///
+/// ── Waarom dit over de AST loopt en niet over tekst ──
+///
+/// De vorige versie zocht `runAsync(` met een reguliere uitdrukking en las
+/// vandaar tot het sluithaakje. Dat mist twee dingen die allebei echt gebeurd
+/// zijn. Ten eerste de schrijfwijze: `Future<void>.delayed` glipte langs een
+/// patroon dat alleen `Future.delayed` kende. Ten tweede — en dat is de reden
+/// voor deze herschrijving — een wachtpunt dat níet lexicaal binnen de
+/// `runAsync` staat maar in een hulp die daarvandaan wordt **aangeroepen**.
+/// `callout_reveal_test._pumpOverlay` had precies die vorm en is nooit gezien.
+///
+/// De call-graph blijft binnen één bestand en dat is genoeg: een testhulp die
+/// echte tijd laat verstrijken hoort bij de test die hem gebruikt. Reikt hij
+/// verder (zoals `pump_until.dart`), dan is dat een gedeelde hulp met een eigen
+/// doc-comment, en die staat hier bewust buiten.
+///
+/// Commentaar en stringliteralen vallen vanzelf weg: de parser maakt er geen
+/// aanroepknooppunten van. De twee tekstfilters die daarvoor nodig waren zijn
+/// daarmee verdwenen.
 Map<String, List<int>> fixedDelaysIn(Map<String, String> sources) {
   final perBestand = <String, List<int>>{};
   sources.forEach((path, raw) {
-    final source = _withoutLineComments(_withoutTripleQuoted(raw));
-    if (!source.contains('runAsync')) return;
-    final hits = perBestand.putIfAbsent(path, () => <int>[]);
-    for (final start in _runAsync.allMatches(source)) {
-      final scope = _callScope(source, start.end - 1);
-      if (!_futureDelayed.hasMatch(scope)) continue;
-      hits.add('\n'.allMatches(source.substring(0, start.start)).length + 1);
+    if (!raw.contains('runAsync')) return;
+    final ontleed = parseString(
+      content: raw,
+      featureSet: FeatureSet.latestLanguageVersion(),
+      throwIfDiagnostics: false,
+    );
+    final regels = ontleed.lineInfo;
+    if (ontleed.errors.isNotEmpty) {
+      // Een testbestand dat niet parseert is geen groen bestand. Zonder deze
+      // tak zou de poort er stil overheen lopen — en "stil niets meten" is
+      // precies de faalvorm die deze poort in september 2026 anderhalve maand
+      // liet doorgaan. `analyze` vangt dit normaal eerder; komt het hier toch
+      // langs, dan moet het opvallen.
+      perBestand[path] = [
+        regels.getLocation(ontleed.errors.first.offset).lineNumber,
+      ];
+      return;
     }
+    final bezoeker = _DelayVisitor();
+    ontleed.unit.accept(bezoeker);
+
+    // Welke declaraties leiden — direct of via een andere hulp in dit bestand —
+    // tot een vast wachtpunt? Herhaal tot er niets meer bij komt.
+    final wacht = {...bezoeker.wacht};
+    for (var ronde = 0; ronde < 10; ronde++) {
+      final voor = wacht.length;
+      bezoeker.roept.forEach((naam, aangeroepen) {
+        if (aangeroepen.any(wacht.contains)) wacht.add(naam);
+      });
+      if (wacht.length == voor) break;
+    }
+
+    final hits = perBestand.putIfAbsent(path, () => <int>[]);
+    for (final aanroep in bezoeker.runAsyncs) {
+      if (!aanroep.direct && !aanroep.roept.any(wacht.contains)) continue;
+      hits.add(regels.getLocation(aanroep.offset).lineNumber);
+    }
+    hits.sort();
   });
   return perBestand;
 }

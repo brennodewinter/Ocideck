@@ -509,6 +509,22 @@ in Dutch, and it keeps growing on `main` between releases.
   het als toeval; het waren negen keer dezelfde regel. Alle wachtpunten in dat
   bestand wachten nu op de uitkomst zelf (`pumpUntil`), en het bestand is
   daarmee ook sneller: 2 s in plaats van 300 ms staan wachten per test.
+- fix(poort): de wachtpuntpoort meet nu over de AST, en de laatste bewezen
+  rode tests zijn om (#1911). De poort was een reguliere uitdrukking en had drie
+  blinde vlekken; de derde — een wachtpunt in een hulp die vánuit `runAsync`
+  wordt *aangeroepen* — bleef vorige ronde staan. Met de `analyzer` en een
+  call-graph binnen het bestand is die weg, en vallen commentaar en
+  stringliteralen vanzelf buiten de meting in plaats van via twee tekstfilters.
+  Een bestand dat niet parseert wordt voortaan gemeld in plaats van
+  overgeslagen: "stil niets meten" is precies wat deze poort zes weken
+  onbruikbaar maakte. Verder omgezet: `export_dialog_pdf_end_to_end_test` en
+  `document_editor_screen_test`, allebei bewezen rood. Twee daarvan waren al
+  pollussen met een afbreekvoorwaarde — die zijn nu `pumpUntil` in plaats van
+  met de hand geschreven. De derde faalde op iets wat géén poort ziet: twee
+  kale `pump()`-frames en dan toetsen of een asynchrone terugval al gebeurd was.
+  Daarmee draagt geen enkel bestand dat ooit rood stond nog een gok; de
+  basislijn staat op 22 bestanden en 28 wachtpunten, allemaal nog niet rood
+  gezien.
 - fix(test): de callout-toetsen wachtten óók op een klok (#1911).
   `callout_accessibility_test` en `callout_reveal_test` gaven de overlay 300 ms
   om zijn beeld te decoderen; op de runner viel dat op 31-08 en 01-09 om, met
