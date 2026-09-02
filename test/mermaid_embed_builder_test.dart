@@ -137,7 +137,10 @@ graph TD; A-->B;
     );
     // De rijke-tekstlaag escapet leestekens; een diagram is geen proza, dus de
     // directive moet er teken voor teken uitkomen zoals hij erin ging.
-    expect(terug, contains('%%{init: {"themeVariables": {"primaryColor": "#ff0"}}}%%'));
+    expect(
+      terug,
+      contains('%%{init: {"themeVariables": {"primaryColor": "#ff0"}}}%%'),
+    );
   });
 
   test('een gewoon codeblok blijft een codeblok', () {

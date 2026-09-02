@@ -25,7 +25,9 @@ import 'package:markdown/markdown.dart';
 /// eventueel met spaties eromheen. Meer tildes of extra info-woorden achter de
 /// taal horen bij een gewoon codeblok — die laat deze syntax met opzet liggen,
 /// zodat de standaardregel ze afhandelt.
-final RegExp mermaidFenceOpenPattern = RegExp(r'^\s{0,3}```[ \t]*mermaid[ \t]*$');
+final RegExp mermaidFenceOpenPattern = RegExp(
+  r'^\s{0,3}```[ \t]*mermaid[ \t]*$',
+);
 
 /// De sluitregel van diezelfde fence.
 final RegExp _mermaidFenceClosePattern = RegExp(r'^\s{0,3}```[ \t]*$');
