@@ -528,6 +528,14 @@ in Dutch, and it keeps growing on `main` between releases.
   bezel valt en dat de zes meters uit de aanleiding zonder ellipsis passen; de
   clip-ids in de export dragen nu een suffix per SVG, want twee cockpit-dia's in
   één document deelden `#cockpit-horizon-0` en de tweede verloor zijn tekst.
+  Uit de beeldkeuring in de echte renderer: de rollende uitlezing houdt de
+  decimalen van de eindwaarde (geen "1450.3…" meer buiten het venster), de
+  thermometerbuis begint onder de testlampjes, de klim/daling-cijfers staan in
+  de vrije linkerhelft (de naald liep door de "0"), het horizonsymbool is wit
+  met een donkere rand (accent op lucht was 2,5:1), schaalcijfers en eenheid
+  staan op volle dekking (AA), een negatief getal draagt een echt minteken, en
+  een stapel die niet past krimpt rasterbreed zodat de getalmaat per dia gelijk
+  blijft.
 - fix(mermaid): een diagram met een eigen `%%{init}`-directive bleef licht in
   donker thema, en een breed diagram werd in Pagina's afgesneden (#1921, #1922).
   Twee fouten met dezelfde wortel: de lezer kreeg één behandeling en de

@@ -148,6 +148,13 @@ String _cockpitSvg(
     height: grid.cellHeight,
     longestDigits: cockpitLongestDigits(meters),
   );
+  final readoutScale = cockpitReadoutScale(
+    meters,
+    plan,
+    attitudeTemplate: _cockpitAttitudeTemplate,
+    actualTemplate: _cockpitActualTemplate,
+    targetTemplate: _cockpitTargetTemplate,
+  );
   final b = StringBuffer()
     ..write(
       '<svg viewBox="0 0 ${_num(_cockpitSvgWidth)} ${_num(_cockpitSvgHeight)}" '
@@ -172,18 +179,34 @@ String _cockpitSvg(
       '<g transform="translate(${_num(cell.x + inset)} ${_num(cell.y + inset)})">'
       '<g class="cockpit-meter" style="--meter-index:$i">',
     );
-    _cockpitInstrumentSvg(b, meters[i], i, plan, scheme, p, authentic, suffix);
+    _cockpitInstrumentSvg(
+      b,
+      meters[i],
+      i,
+      plan,
+      readoutScale,
+      scheme,
+      p,
+      authentic,
+      suffix,
+    );
     b.write('</g></g>');
   }
   b.write('</svg>');
   return b.toString();
 }
 
+/// De Engelse standaardsjablonen van de export; de app geeft de vertaalde mee.
+const _cockpitAttitudeTemplate = 'P {pitch}  B {bank}';
+const _cockpitActualTemplate = 'ACT {value}°';
+const _cockpitTargetTemplate = 'TGT {heading}°';
+
 void _cockpitInstrumentSvg(
   StringBuffer b,
   CockpitMeterSpec meter,
   int index,
   CockpitCellPlan plan,
+  double readoutScale,
   CockpitColorScheme scheme,
   _CockpitSvgPalette p,
   bool authentic,
@@ -227,7 +250,7 @@ void _cockpitInstrumentSvg(
       _arcGaugeSvg(b, meter, cx, cy, s, plan, scheme, p, 120, 300);
       break;
   }
-  _readoutSvg(b, meter, '$index-$suffix', plan, p, authentic);
+  _readoutSvg(b, meter, '$index-$suffix', plan, readoutScale, p, authentic);
   _labelSvg(b, meter, index, '$index-$suffix', plan, p);
 }
 
@@ -309,7 +332,7 @@ String _scaleText(
   if (plan.scaleSize < cockpitMinTextPx) return '';
   return '<text x="${_num(x)}" y="${_num(y)}" text-anchor="$anchor" '
       'dominant-baseline="central" font-size="${_num(plan.scaleSize)}" '
-      'font-weight="600" fill="${p.inkMuted}" fill-opacity=".85">${_esc(text)}</text>';
+      'font-weight="600" fill="${p.inkMuted}">${_esc(text)}</text>';
 }
 
 String _needleSvg(
@@ -402,8 +425,12 @@ void _arcGaugeSvg(
   final wide = sweep > 220;
   final lx = r * (wide ? .62 : .78), ly = r * (wide ? .40 : .54);
   b
-    ..write(_scaleText(cx - lx, cy + ly, _num(meter.min), plan, p))
-    ..write(_scaleText(cx + lx, cy + ly, _num(meter.max), plan, p))
+    ..write(
+      _scaleText(cx - lx, cy + ly, cockpitFormatNumber(meter.min), plan, p),
+    )
+    ..write(
+      _scaleText(cx + lx, cy + ly, cockpitFormatNumber(meter.max), plan, p),
+    )
     ..write(
       _needleSvg(cx, cy, angleFor(meter.value), r - stroke * 1.35, s, p.needle),
     )
@@ -502,10 +529,24 @@ void _thermometerSvg(
       'L${_num(cx + tube / 2 + tube * .62)},${_num(levelY + tube * .30)} Z" fill="${p.ink}"/>',
     )
     ..write(
-      _scaleText(cx - s * .10, chTop, _num(meter.max), plan, p, anchor: 'end'),
+      _scaleText(
+        cx - s * .10,
+        chTop,
+        cockpitFormatNumber(meter.max),
+        plan,
+        p,
+        anchor: 'end',
+      ),
     )
     ..write(
-      _scaleText(cx - s * .10, bulbY, _num(meter.min), plan, p, anchor: 'end'),
+      _scaleText(
+        cx - s * .10,
+        bulbY,
+        cockpitFormatNumber(meter.min),
+        plan,
+        p,
+        anchor: 'end',
+      ),
     );
 }
 
@@ -538,10 +579,24 @@ void _climbDescentSvg(
   }
   b
     ..write(
-      _scaleText(cx - r * .50, cy - r * .52, '+${_num(meter.max)}', plan, p),
+      _scaleText(
+        cx - r * .50,
+        cy - r * .52,
+        '+${cockpitFormatNumber(meter.max)}',
+        plan,
+        p,
+      ),
     )
     ..write(_scaleText(cx - r * .62, cy, '0', plan, p))
-    ..write(_scaleText(cx - r * .50, cy + r * .52, _num(meter.min), plan, p))
+    ..write(
+      _scaleText(
+        cx - r * .50,
+        cy + r * .52,
+        cockpitFormatNumber(meter.min),
+        plan,
+        p,
+      ),
+    )
     ..write(_needleSvg(cx, cy, 90 - 180 * n, r * .76, s, p.needle))
     ..write(_hubSvg(cx, cy, s, p));
 }
@@ -656,6 +711,7 @@ void _readoutSvg(
   CockpitMeterSpec meter,
   String id,
   CockpitCellPlan plan,
+  double readoutScale,
   _CockpitSvgPalette p,
   bool authentic,
 ) {
@@ -672,9 +728,10 @@ void _readoutSvg(
   final lines = cockpitReadoutLines(
     meter,
     plan,
-    attitudeTemplate: 'P {pitch}  B {bank}',
-    actualTemplate: 'ACT {value}°',
-    targetTemplate: 'TGT {heading}°',
+    attitudeTemplate: _cockpitAttitudeTemplate,
+    actualTemplate: _cockpitActualTemplate,
+    targetTemplate: _cockpitTargetTemplate,
+    scale: readoutScale,
   );
   final clip = 'cockpit-readout-$id';
   b.write(
@@ -690,7 +747,9 @@ void _readoutSvg(
     }
     final cy = y + line.height / 2;
     final color = line.strong ? p.ink : p.inkMuted;
-    final unit = line.inlineUnit;
+    final unit = line.inlineUnitSize >= cockpitMinTextPx
+        ? line.inlineUnit
+        : null;
     b.write(
       '<text x="${_num(win.centerX)}" y="${_num(cy)}" text-anchor="middle" '
       'dominant-baseline="central" font-size="${_num(line.size)}" '

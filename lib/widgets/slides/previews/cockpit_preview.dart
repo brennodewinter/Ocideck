@@ -188,6 +188,15 @@ class _CockpitGrid extends StatelessWidget {
           height: gridPlan.cellHeight,
           longestDigits: cockpitLongestDigits(meters),
         );
+        // Eén krimpfactor voor de hele dia, zodat een cel met twee
+        // eenheidregels niet als enige een kleiner getal krijgt.
+        final readoutScale = cockpitReadoutScale(
+          meters,
+          cellPlan,
+          attitudeTemplate: context.l10n.d('P {pitch}  B {bank}'),
+          actualTemplate: context.l10n.d('ACT {value}°'),
+          targetTemplate: context.l10n.d('TGT {heading}°'),
+        );
         return Stack(
           clipBehavior: Clip.none,
           children: [
@@ -200,6 +209,7 @@ class _CockpitGrid extends StatelessWidget {
                 child: _CockpitInstrument(
                   meter: meters[i],
                   plan: cellPlan,
+                  readoutScale: readoutScale,
                   progress: _stagger(
                     bootProgress,
                     i,
@@ -260,6 +270,7 @@ class _CockpitGrid extends StatelessWidget {
 class _CockpitInstrument extends StatelessWidget {
   final CockpitMeterSpec meter;
   final CockpitCellPlan plan;
+  final double readoutScale;
   final double progress;
   final CockpitVisualStyle visualStyle;
   final Color accent;
@@ -277,6 +288,7 @@ class _CockpitInstrument extends StatelessWidget {
   const _CockpitInstrument({
     required this.meter,
     required this.plan,
+    required this.readoutScale,
     required this.progress,
     required this.visualStyle,
     required this.accent,
@@ -309,6 +321,7 @@ class _CockpitInstrument extends StatelessWidget {
             painter: _CockpitInstrumentPainter(
               meter: meter,
               plan: plan,
+              readoutScale: readoutScale,
               progress: progress.clamp(0, 1).toDouble(),
               visualStyle: visualStyle,
               accent: accent,

@@ -70,6 +70,9 @@ void main() {
     expect(speed, contains('>%</tspan>'));
     expect(speed, contains('#101010')); // good zone
     expect(speed, contains('#303030')); // critical zone
+    // Schaalcijfers op volle dekking: met 0,85 alfa bleven ze in de lichte
+    // export op 4,05:1, onder AA.
+    expect(speed, isNot(contains('fill-opacity=".85"')));
 
     // Voltmeter: redFrom (50) < greenFrom (75) → green-high "if" branch.
     final volt = renderMeters([
@@ -166,9 +169,10 @@ void main() {
         'value': -8,
       },
     ]);
-    // No leading + for a non-positive value.
-    expect(down, contains('-8'));
-    expect(down, isNot(contains('+-8')));
+    // No leading + for a non-positive value; a real minus sign (U+2212)
+    // beside the plus, not a hyphen.
+    expect(down, contains('\u22128'));
+    expect(down, isNot(contains('-8')));
   });
 
   test('cells keep their translate when the power-on animation scales', () {
@@ -213,7 +217,7 @@ void main() {
       {'type': 'horizon', 'label': 'Att', 'pitch': 60, 'bank': -80},
     ]);
     expect(svg, contains('>P 45<'));
-    expect(svg, contains('>B -60<'));
+    expect(svg, contains('>B \u221260<'));
   });
 
   test('heading renders compass, actual/target and a marker label', () {

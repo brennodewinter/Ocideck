@@ -212,7 +212,10 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
     final muted = _instrumentMuted.withValues(
       alpha: _instrumentMuted.a * _power,
     );
-    final unit = line.inlineUnit;
+    // Een inline-eenheid van vier pixels is in de miniatuur alleen een vlek.
+    final unit = line.inlineUnitSize >= cockpitMinTextPx
+        ? line.inlineUnit
+        : null;
     final painter = TextPainter(
       text: TextSpan(
         children: [

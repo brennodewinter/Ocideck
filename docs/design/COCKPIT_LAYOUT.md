@@ -99,10 +99,12 @@ met de schroeven op inzet 0,065 van haar kortste zijde; venster y 0,58·h …
 het spiegelbeeld); getal 0,14·h, eenheid 0,06·h; labelstrook 0,86·h … h met
 L = 0,08·h.
 
-**Hoogtevangnet.** Past de regelstapel niet in 0,92× de vensterhoogte (twee
+**Hoogtevangnet.** Past een regelstapel niet in 0,92× de vensterhoogte (twee
 horizonregels op getalmaat; een gestapelde cel met een lange eenheid), dan
-krimpt de hele stapel evenredig — de verhouding getal/eenheid blijft, niets
-steekt over de plaat.
+krimpen álle vensters van de dia met dezelfde factor (`cockpitReadoutScale`):
+de verhouding getal/eenheid blijft, niets steekt over de plaat, en de belofte
+"één getalmaat per dia" blijft staan. Een negatief getal draagt een echt
+minteken (U+2212) naast de plus.
 
 ## 6. Cascade (identiek in painter en export)
 

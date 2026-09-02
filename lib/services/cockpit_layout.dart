@@ -129,8 +129,12 @@ int cockpitDecimals(double value) => value == value.roundToDouble() ? 0 : 1;
 /// Getal zonder overbodige decimalen: 70 → "70", 8.4 → "8.4". Met [decimals]
 /// volgt het getal een opgelegd aantal — de rollende uitlezing toont onderweg
 /// "85", niet "85.6", zodat hij nooit breder wordt dan het budget.
-String cockpitFormatNumber(double value, {int? decimals}) =>
-    value.toStringAsFixed(decimals ?? cockpitDecimals(value));
+String cockpitFormatNumber(double value, {int? decimals}) {
+  final text = value.toStringAsFixed(decimals ?? cockpitDecimals(value));
+  // Een echt minteken (U+2212) naast de "+": een koppelteken oogt ongelijk in
+  // "+20 / −20" en is smaller dan de plus.
+  return text.startsWith('-') ? '\u2212${text.substring(1)}' : text;
+}
 
 /// De uitlezing van een scalaire meter; klim/daling krijgt een plusteken. Een
 /// tussenstand ([shown]) houdt de decimalen van de eindwaarde.
@@ -478,8 +482,9 @@ List<CockpitReadoutLine> cockpitReadoutLines(
   required String targetTemplate,
   double? shownValue,
   double? shownHeading,
-}) => _fitWindowHeight(
-  _readoutLines(
+  double scale = 1,
+}) {
+  final lines = _readoutLines(
     meter,
     plan,
     attitudeTemplate: attitudeTemplate,
@@ -487,9 +492,40 @@ List<CockpitReadoutLine> cockpitReadoutLines(
     targetTemplate: targetTemplate,
     shownValue: shownValue,
     shownHeading: shownHeading,
-  ),
-  plan.window.h * 0.92,
-);
+  );
+  return _fitWindowHeight(
+    scale == 1 ? lines : [for (final l in lines) l.scaled(scale)],
+    plan.window.h * 0.92,
+  );
+}
+
+/// De rasterbrede krimpfactor voor de vensterregels: de kleinste factor waarmee
+/// élke stapel op de dia in zijn venster past. Eén factor voor alle cellen,
+/// zodat de getalmaat niet per cel verschilt (de belofte "één getalmaat per
+/// dia"); per cel blijft [cockpitReadoutLines] als vangnet.
+double cockpitReadoutScale(
+  List<CockpitMeterSpec> meters,
+  CockpitCellPlan plan, {
+  required String attitudeTemplate,
+  required String actualTemplate,
+  required String targetTemplate,
+}) {
+  var scale = 1.0;
+  final limit = plan.window.h * 0.92;
+  for (final m in meters) {
+    final height = cockpitReadoutHeight(
+      _readoutLines(
+        m,
+        plan,
+        attitudeTemplate: attitudeTemplate,
+        actualTemplate: actualTemplate,
+        targetTemplate: targetTemplate,
+      ),
+    );
+    if (height > limit && height > 0) scale = math.min(scale, limit / height);
+  }
+  return scale;
+}
 
 /// Past de stapel niet in het venster (twee horizonregels op getalmaat, een
 /// gestapelde cel met een lange eenheid), dan krimpt alles evenredig: de
@@ -499,7 +535,9 @@ List<CockpitReadoutLine> _fitWindowHeight(
   double maxHeight,
 ) {
   final height = cockpitReadoutHeight(lines);
-  if (height <= maxHeight || height <= 0) return lines;
+  // Een stapel die door de rasterbrede factor precies op de grens staat mag
+  // niet nog eens een afrondingsfractie krimpen: dan verschillen de cellen.
+  if (height <= maxHeight + 1e-6 || height <= 0) return lines;
   final factor = maxHeight / height;
   return [for (final l in lines) l.scaled(factor)];
 }

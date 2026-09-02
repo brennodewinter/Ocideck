@@ -7,6 +7,9 @@ part of '../slide_preview.dart';
 class _CockpitInstrumentPainter extends CustomPainter {
   final CockpitMeterSpec meter;
   final CockpitCellPlan plan;
+
+  /// Rasterbrede krimpfactor voor de vensterregels ([cockpitReadoutScale]).
+  final double readoutScale;
   final double progress;
   final CockpitVisualStyle visualStyle;
   final Color accent;
@@ -34,6 +37,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
   _CockpitInstrumentPainter({
     required this.meter,
     required this.plan,
+    required this.readoutScale,
     required this.progress,
     required this.visualStyle,
     required this.accent,
@@ -547,6 +551,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
       targetTemplate: faceText.target,
       shownValue: _animatedValue(meter.value),
       shownHeading: _animatedHeading(meter.value),
+      scale: readoutScale,
     );
     var y = rect.center.dy - cockpitReadoutHeight(lines) / 2;
     for (final line in lines) {
@@ -575,6 +580,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
       oldDelegate.plan.width != plan.width ||
       oldDelegate.plan.height != plan.height ||
       oldDelegate.plan.numberSize != plan.numberSize ||
+      oldDelegate.readoutScale != readoutScale ||
       oldDelegate.progress != progress ||
       oldDelegate.visualStyle != visualStyle ||
       oldDelegate.accent != accent ||

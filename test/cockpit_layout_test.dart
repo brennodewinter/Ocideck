@@ -331,6 +331,43 @@ void main() {
       },
     );
 
+    test('één getalmaat per dia, ook als één stapel moet krimpen', () {
+      // Drie meters op één rij (gestapeld): alleen Inspanning heeft twee
+      // eenheidregels. De rasterbrede factor krimpt álle vensters evenveel.
+      final grid3 = CockpitGridPlan.compute(
+        count: 3,
+        width: rasterW,
+        height: 675,
+      );
+      final three = deck.take(3).toList();
+      final plan3 = CockpitCellPlan.compute(
+        width: grid3.cellWidth,
+        height: grid3.cellHeight,
+        longestDigits: cockpitLongestDigits(three),
+      );
+      final scale = cockpitReadoutScale(
+        three,
+        plan3,
+        attitudeTemplate: 'P {pitch}  B {bank}',
+        actualTemplate: 'ACT {value}°',
+        targetTemplate: 'TGT {heading}°',
+      );
+      expect(scale, lessThan(1));
+      final sizes = [
+        for (final m in three)
+          cockpitReadoutLines(
+            m,
+            plan3,
+            attitudeTemplate: 'P {pitch}  B {bank}',
+            actualTemplate: 'ACT {value}°',
+            targetTemplate: 'TGT {heading}°',
+            scale: scale,
+          ).first.size,
+      ];
+      expect(sizes.toSet(), hasLength(1));
+      expect(sizes.first, closeTo(plan3.numberSize * scale, 0.01));
+    });
+
     test('de cascade: passen, krimpen, wikkelen, dan pas ellipsis', () {
       final fits = fitCockpitText(
         'Tempo ten opzichte van plan',
@@ -420,7 +457,7 @@ void main() {
             value: -8,
           ),
         ),
-        '-8',
+        '\u22128',
       );
     });
   });
