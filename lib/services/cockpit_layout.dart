@@ -434,7 +434,8 @@ class CockpitReadoutLine {
     final em = strong ? cockpitDigitEm : cockpitTextEm;
     var w = text.runes.length * em * size;
     final unit = inlineUnit;
-    if (unit != null) w += inlineGap + unit.runes.length * cockpitTextEm * inlineUnitSize;
+    if (unit != null)
+      w += inlineGap + unit.runes.length * cockpitTextEm * inlineUnitSize;
     return w;
   }
 
@@ -466,13 +467,13 @@ List<CockpitReadoutLine> cockpitReadoutLines(
         longest = math.max(longest, l.runes.length);
       }
       final size = math.min(nf, width / (cockpitDigitEm * longest));
-      return [
-        for (final l in lines) CockpitReadoutLine(l, size, strong: true),
-      ];
+      return [for (final l in lines) CockpitReadoutLine(l, size, strong: true)];
     case CockpitMeterType.heading:
       final actual = actualTemplate.replaceAll(
         '{value}',
-        cockpitFormatNumber((shownHeading ?? meter.value) % 360).padLeft(3, '0'),
+        cockpitFormatNumber(
+          (shownHeading ?? meter.value) % 360,
+        ).padLeft(3, '0'),
       );
       final target = targetTemplate.replaceAll(
         '{heading}',

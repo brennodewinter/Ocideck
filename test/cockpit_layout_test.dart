@@ -138,38 +138,44 @@ void main() {
     });
 
     for (final count in [1, 2, 3, 4, 5, 6]) {
-      test('$count meters: venster raakt de bezel niet en blijft in de cel', () {
-        final p = planFor(count);
-        final win = p.window;
-        // Alle vier de hoeken van het venster buiten de bezelcirkel.
-        for (final (dx, dy) in [
-          (win.x, win.y),
-          (win.right, win.y),
-          (win.x, win.bottom),
-          (win.right, win.bottom),
-        ]) {
-          final ddx = dx - p.dialCenterX;
-          final ddy = dy - p.dialCenterY;
-          final dist = (ddx * ddx + ddy * ddy);
+      test(
+        '$count meters: venster raakt de bezel niet en blijft in de cel',
+        () {
+          final p = planFor(count);
+          final win = p.window;
+          // Alle vier de hoeken van het venster buiten de bezelcirkel.
+          for (final (dx, dy) in [
+            (win.x, win.y),
+            (win.right, win.y),
+            (win.x, win.bottom),
+            (win.right, win.bottom),
+          ]) {
+            final ddx = dx - p.dialCenterX;
+            final ddy = dy - p.dialCenterY;
+            final dist = (ddx * ddx + ddy * ddy);
+            expect(
+              dist,
+              greaterThanOrEqualTo(p.bezelRadius * p.bezelRadius),
+              reason: 'vensterhoek ($dx, $dy) ligt op de bezel',
+            );
+          }
+          expect(win.x, greaterThanOrEqualTo(0));
+          expect(win.right, lessThanOrEqualTo(p.width + 0.01));
+          expect(win.bottom, lessThanOrEqualTo(p.instrumentBand.bottom + 0.01));
+          // De bezel zelf blijft binnen de instrumentband.
+          expect(p.dialCenterX - p.bezelRadius, greaterThanOrEqualTo(-0.01));
           expect(
-            dist,
-            greaterThanOrEqualTo(p.bezelRadius * p.bezelRadius),
-            reason: 'vensterhoek ($dx, $dy) ligt op de bezel',
+            p.dialCenterY + p.bezelRadius,
+            lessThanOrEqualTo(p.instrumentBand.bottom + 0.01),
           );
-        }
-        expect(win.x, greaterThanOrEqualTo(0));
-        expect(win.right, lessThanOrEqualTo(p.width + 0.01));
-        expect(win.bottom, lessThanOrEqualTo(p.instrumentBand.bottom + 0.01));
-        // De bezel zelf blijft binnen de instrumentband.
-        expect(p.dialCenterX - p.bezelRadius, greaterThanOrEqualTo(-0.01));
-        expect(
-          p.dialCenterY + p.bezelRadius,
-          lessThanOrEqualTo(p.instrumentBand.bottom + 0.01),
-        );
-        // Het label onder de groep, binnen de cel.
-        expect(p.labelBox.y, greaterThanOrEqualTo(p.instrumentBand.bottom - 0.01));
-        expect(p.labelBox.bottom, lessThanOrEqualTo(p.height + 0.01));
-      });
+          // Het label onder de groep, binnen de cel.
+          expect(
+            p.labelBox.y,
+            greaterThanOrEqualTo(p.instrumentBand.bottom - 0.01),
+          );
+          expect(p.labelBox.bottom, lessThanOrEqualTo(p.height + 0.01));
+        },
+      );
     }
 
     test('zes meters op 1080p: de maten uit het ontwerp', () {
@@ -220,7 +226,11 @@ void main() {
         expect(label.size, plan.labelSize, reason: m.label);
         expect(label.lines, hasLength(1), reason: m.label);
         for (final l in lines(m)) {
-          expect(l.text.endsWith('…'), isFalse, reason: '${m.label}: ${l.text}');
+          expect(
+            l.text.endsWith('…'),
+            isFalse,
+            reason: '${m.label}: ${l.text}',
+          );
           expect(
             l.estimatedWidth,
             lessThanOrEqualTo(plan.windowTextWidth + 0.01),
@@ -260,26 +270,32 @@ void main() {
       expect(splitCockpitAttitude('Pitch 4 Bank 0'), ['Pitch 4 Bank 0']);
     });
 
-    test('het kompas zet ACT, TGT en een begrensde markerregel in het venster', () {
-      const longMarker = 'Kursabweichungen im Steigflug über dem Fjord';
-      final l = lines(
-        const CockpitMeterSpec(
-          type: CockpitMeterType.heading,
-          label: 'Course',
-          value: 187,
-          heading: 90,
-          markerLabel: longMarker,
-        ),
-      );
-      expect(l.first.text, 'ACT 187°');
-      expect(l[1].text, 'TGT 090°');
-      final marker = l.skip(2).map((x) => x.text).toList();
-      expect(marker, hasLength(2));
-      expect(marker.last, endsWith('…'));
-      for (final line in l) {
-        expect(line.estimatedWidth, lessThanOrEqualTo(plan.windowTextWidth + 0.01));
-      }
-    });
+    test(
+      'het kompas zet ACT, TGT en een begrensde markerregel in het venster',
+      () {
+        const longMarker = 'Kursabweichungen im Steigflug über dem Fjord';
+        final l = lines(
+          const CockpitMeterSpec(
+            type: CockpitMeterType.heading,
+            label: 'Course',
+            value: 187,
+            heading: 90,
+            markerLabel: longMarker,
+          ),
+        );
+        expect(l.first.text, 'ACT 187°');
+        expect(l[1].text, 'TGT 090°');
+        final marker = l.skip(2).map((x) => x.text).toList();
+        expect(marker, hasLength(2));
+        expect(marker.last, endsWith('…'));
+        for (final line in l) {
+          expect(
+            line.estimatedWidth,
+            lessThanOrEqualTo(plan.windowTextWidth + 0.01),
+          );
+        }
+      },
+    );
 
     test('de cascade: passen, krimpen, wikkelen, dan pas ellipsis', () {
       final fits = fitCockpitText(

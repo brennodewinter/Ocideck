@@ -262,12 +262,16 @@ void _bezelSvg(
       '<circle cx="${_num(cx)}" cy="${_num(cy + s * .025)}" r="${_num(r * 1.03)}" '
       'fill="#000" fill-opacity=".6"/>',
     )
-    ..write('<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r)}" fill="${p.bezel}"/>')
+    ..write(
+      '<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r)}" fill="${p.bezel}"/>',
+    )
     ..write(
       '<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r * .93)}" fill="none" '
       'stroke="${p.bezelStroke}" stroke-width="${_num(math.max(2, s * .025))}"/>',
     )
-    ..write('<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r * .88)}" fill="${p.face}"/>')
+    ..write(
+      '<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r * .88)}" fill="${p.face}"/>',
+    )
     ..write(
       '<circle cx="${_num(cx)}" cy="${_num(cy)}" r="${_num(r * .86)}" fill="none" '
       'stroke="${p.faceStroke}" stroke-opacity=".22" stroke-width="1"/>',
@@ -279,7 +283,9 @@ void _bezelSvg(
   for (var i = 0; i < lamps.length; i++) {
     final x = cx + (i - 1) * r * 0.19;
     b
-      ..write('<circle cx="${_num(x)}" cy="${_num(lampY)}" r="${_num(r * .027)}" fill="#000"/>')
+      ..write(
+        '<circle cx="${_num(x)}" cy="${_num(lampY)}" r="${_num(r * .027)}" fill="#000"/>',
+      )
       ..write(
         '<circle cx="${_num(x)}" cy="${_num(lampY)}" r="${_num(r * .019)}" '
         'fill="${lamps[i]}" fill-opacity=".18"/>',
@@ -419,15 +425,17 @@ void _thermometerSvg(
   final bulbY = cy + s * 0.10;
   final chTop = topY + tube * .5;
   final span = bulbY - chTop;
-  final n = ((meter.value - meter.min) /
-          ((meter.max - meter.min) == 0 ? 1.0 : meter.max - meter.min))
-      .clamp(0.0, 1.0);
+  final n =
+      ((meter.value - meter.min) /
+              ((meter.max - meter.min) == 0 ? 1.0 : meter.max - meter.min))
+          .clamp(0.0, 1.0);
   final levelY = bulbY - span * n;
   final greenStart = math.min(meter.greenFrom, meter.greenTo);
   final greenEnd = math.max(meter.greenFrom, meter.greenTo);
-  double norm(double v) => ((v - meter.min) /
-          ((meter.max - meter.min) == 0 ? 1.0 : meter.max - meter.min))
-      .clamp(0.0, 1.0);
+  double norm(double v) =>
+      ((v - meter.min) /
+              ((meter.max - meter.min) == 0 ? 1.0 : meter.max - meter.min))
+          .clamp(0.0, 1.0);
   final List<(double, String)> stops;
   if (meter.redFrom > greenEnd) {
     final gs = norm(greenStart);
@@ -469,7 +477,9 @@ void _thermometerSvg(
       '</linearGradient></defs>',
     )
     ..write('<path d="$tubeOpen Z" fill="url(#$gradient)"/>')
-    ..write('<circle cx="${_num(cx)}" cy="${_num(bulbY)}" r="${_num(bulbR)}" fill="url(#$gradient)"/>')
+    ..write(
+      '<circle cx="${_num(cx)}" cy="${_num(bulbY)}" r="${_num(bulbR)}" fill="url(#$gradient)"/>',
+    )
     ..write(
       '<path d="$tubeOpen" fill="none" stroke="${p.ink}" stroke-opacity=".42" stroke-width="$sw"/>',
     )
@@ -487,8 +497,12 @@ void _thermometerSvg(
       'L${_num(cx + tube / 2 + tube * .62)},${_num(levelY - tube * .30)} '
       'L${_num(cx + tube / 2 + tube * .62)},${_num(levelY + tube * .30)} Z" fill="${p.ink}"/>',
     )
-    ..write(_scaleText(cx - s * .10, chTop, _num(meter.max), plan, p, anchor: 'end'))
-    ..write(_scaleText(cx - s * .10, bulbY, _num(meter.min), plan, p, anchor: 'end'));
+    ..write(
+      _scaleText(cx - s * .10, chTop, _num(meter.max), plan, p, anchor: 'end'),
+    )
+    ..write(
+      _scaleText(cx - s * .10, bulbY, _num(meter.min), plan, p, anchor: 'end'),
+    );
 }
 
 void _climbDescentSvg(

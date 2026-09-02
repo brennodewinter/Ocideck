@@ -208,7 +208,9 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
   /// cijfers zodat de rollende uitlezing niet wiebelt.
   void _readoutLine(Canvas canvas, Offset center, CockpitReadoutLine line) {
     final ink = _instrumentInk.withValues(alpha: _power);
-    final muted = _instrumentMuted.withValues(alpha: _instrumentMuted.a * _power);
+    final muted = _instrumentMuted.withValues(
+      alpha: _instrumentMuted.a * _power,
+    );
     final unit = line.inlineUnit;
     final painter = TextPainter(
       text: TextSpan(
