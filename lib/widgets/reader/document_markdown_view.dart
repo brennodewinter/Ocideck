@@ -88,6 +88,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.tocSource,
     this.blockWrapper,
     this.footnotesAtEnd = true,
+    this.scaleMermaidToFit = false,
   });
 
   final String markdown;
@@ -132,6 +133,9 @@ class DocumentMarkdownView extends StatelessWidget {
   /// [DocMermaidView]) to the shared render service. Tests pass a fake so the
   /// diagram path can be exercised without a WebView.
   final MermaidRenderer? mermaidRenderer;
+
+  /// Scale wide Mermaid diagrams to the column instead of scrolling (paginated view).
+  final bool scaleMermaidToFit;
 
   /// Stijlprofiel voor de kleuren van een ```chart-blok. `null` → de
   /// standaardkleuren van de grafiek-SVG. Een document heeft geen deck-thema, dus
@@ -798,6 +802,7 @@ class DocumentMarkdownView extends StatelessWidget {
     source: code,
     fallback: _codeBlock(t, code),
     dark: t.dark,
+    scaleToFit: scaleMermaidToFit,
     renderer: mermaidRenderer,
   );
 

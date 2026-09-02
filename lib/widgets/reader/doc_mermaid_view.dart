@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -38,6 +40,7 @@ class DocMermaidView extends StatefulWidget {
     required this.source,
     required this.fallback,
     this.dark = false,
+    this.scaleToFit = false,
     this.renderer,
   });
 
@@ -52,6 +55,13 @@ class DocMermaidView extends StatefulWidget {
   /// theme with light strokes) and the card colours; `false` keeps the original
   /// near-white card and dark-on-light diagram.
   final bool dark;
+
+  /// When true, a diagram wider than the column is **scaled down** to fit
+  /// (height follows proportionally) instead of scrolling horizontally. Used
+  /// by the paginated "Pagina's"-weergave, where a scrollbar clips the diagram
+  /// on a fixed-width sheet — the reader keeps [scaleToFit] false so a wide
+  /// flowchart stays full-size and scrollable.
+  final bool scaleToFit;
 
   /// Injectable for tests; defaults to the shared [MermaidRenderService].
   final MermaidRenderer? renderer;
@@ -178,6 +188,24 @@ class _DocMermaidViewState extends State<DocMermaidView> {
             // Fits the column: centre it, no scrolling needed.
             return Center(child: picture);
           }
+          if (widget.scaleToFit) {
+            // Paginated view: scale down to the column width so the diagram
+            // isn't clipped with a scrollbar on a fixed-width sheet. Height
+            // follows proportionally — same grain as the PDF's BoxFit.contain.
+            final scale = constraints.maxWidth / natural.width;
+            return Center(
+              child: SizedBox(
+                width: natural.width * scale,
+                height: natural.height * scale,
+                child: SvgPicture.string(
+                  svg,
+                  width: natural.width * scale,
+                  height: natural.height * scale,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          }
           // Wider than the column: scroll horizontally, with a visible thumb so
           // it reads as scrollable rather than clipped.
           return Scrollbar(
@@ -201,13 +229,73 @@ class _DocMermaidViewState extends State<DocMermaidView> {
 /// `kMermaidInitConfig`'s `secure` list, so a per-diagram directive may override
 /// it without touching the locked-down security posture.
 ///
-/// Skipped when the source already opens with its own directive (`%%{`) or with
-/// YAML frontmatter (`---`) — both must stay the first line, and a diagram that
-/// sets its own theme keeps it.
+/// When the source already opens with its own `%%{init: …}%%` directive, the
+/// `theme: dark` key is **merged into** that directive's JSON (existing keys
+/// preserved, `theme` added or overwritten) instead of skipping it entirely —
+/// a diagram that customises colours but not the theme still gets dark strokes
+/// in the dark reader. When the source opens with YAML frontmatter (`---`),
+/// the directive is placed after the closing `---` so the frontmatter stays
+/// first.
 String mermaidWithDarkTheme(String source) {
-  final head = source.trimLeft();
-  if (head.startsWith('%%{') || head.startsWith('---')) return source;
+  final trimmed = source.trimLeft();
+
+  // YAML frontmatter must stay the first line; add the directive after the
+  // closing `---`.
+  if (trimmed.startsWith('---')) {
+    final fm = RegExp(
+      r'^---[ \t]*\r?\n.*?\r?\n---[ \t]*\r?\n?',
+      dotAll: true,
+    ).firstMatch(source);
+    if (fm != null) {
+      return '${source.substring(0, fm.end)}%%{init: {"theme":"dark"}}%%\n${source.substring(fm.end)}';
+    }
+  }
+
+  // Existing %%{init: …}%% directive: inject theme into its JSON so dark wins
+  // even when the source set a different theme.
+  final merged = _injectDarkThemeIntoInit(source);
+  if (merged != null) return merged;
+
   return '%%{init: {"theme":"dark"}}%%\n$source';
+}
+
+/// Finds the first `%%{init: {…}}%%` directive in [source], parses its JSON,
+/// sets `theme` to `"dark"`, and returns the source with the directive
+/// replaced. Returns `null` when no parseable directive is found (malformed
+/// JSON, missing `}%%`, or no directive at all).
+String? _injectDarkThemeIntoInit(String source) {
+  final idx = source.indexOf('%%{init:');
+  if (idx < 0) return null;
+  final jsonStart = source.indexOf('{', idx + 8);
+  if (jsonStart < 0) return null;
+  // Count braces to find the end of the JSON argument.
+  var depth = 0;
+  var i = jsonStart;
+  for (; i < source.length; i++) {
+    if (source[i] == '{') {
+      depth++;
+    } else if (source[i] == '}') {
+      if (--depth == 0) {
+        i++;
+        break;
+      }
+    }
+  }
+  if (depth != 0) return null;
+  // Expect }%% after the JSON object (possibly with spaces).
+  var j = i;
+  while (j < source.length && source[j] == ' ') {
+    j++;
+  }
+  if (!source.startsWith('}%%', j)) return null;
+  try {
+    final config =
+        jsonDecode(source.substring(jsonStart, i)) as Map<String, dynamic>;
+    config['theme'] = 'dark';
+    return '${source.substring(0, idx)}%%{init: ${jsonEncode(config)}}%%${source.substring(j + 3)}';
+  } on FormatException {
+    return null;
+  }
 }
 
 /// The diagram's intrinsic pixel size, read from the SVG `viewBox`
