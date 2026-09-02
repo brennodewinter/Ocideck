@@ -1196,7 +1196,7 @@ zodat alle uitlezingen op één lijn staan en de rollende uitlezing nooit van
 maat verandert. Een korte eenheid als "%" of "/10" staat inline achter het
 getal; een langere ("ml per uur") krijgt er een of twee regels onder. Het label
 spant de volle celbreedte onder de groep en groeit met de cel mee: op een
-1080p-beamer met zes meters is het zo'n 32 px, op één regel tot ongeveer dertig
+1080p-beamer met zes meters is het ruim 30 px, op één regel tot ongeveer dertig
 tekens, daarna twee regels. Lange tekst krimpt eerst iets, wikkelt dan, en
 eindigt alleen in uiterste nood in een ellipsis. Cellen smaller dan 1,35 : 1
 (twee meters op een 16:9-slide, of drie op één rij) zetten de uitlezing onder

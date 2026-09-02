@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/services/cockpit_layout.dart';
@@ -138,51 +140,55 @@ void main() {
     });
 
     for (final count in [1, 2, 3, 4, 5, 6]) {
-      test(
-        '$count meters: venster raakt de bezel niet en blijft in de cel',
-        () {
-          final p = planFor(count);
-          final win = p.window;
-          // Alle vier de hoeken van het venster buiten de bezelcirkel.
-          for (final (dx, dy) in [
-            (win.x, win.y),
-            (win.right, win.y),
-            (win.x, win.bottom),
-            (win.right, win.bottom),
-          ]) {
-            final ddx = dx - p.dialCenterX;
-            final ddy = dy - p.dialCenterY;
-            final dist = (ddx * ddx + ddy * ddy);
-            expect(
-              dist,
-              greaterThanOrEqualTo(p.bezelRadius * p.bezelRadius),
-              reason: 'vensterhoek ($dx, $dy) ligt op de bezel',
-            );
-          }
-          expect(win.x, greaterThanOrEqualTo(0));
-          expect(win.right, lessThanOrEqualTo(p.width + 0.01));
-          expect(win.bottom, lessThanOrEqualTo(p.instrumentBand.bottom + 0.01));
-          // De bezel zelf blijft binnen de instrumentband.
-          expect(p.dialCenterX - p.bezelRadius, greaterThanOrEqualTo(-0.01));
+      test('$count meters: venster raakt de bezel niet en blijft in de cel', () {
+        final p = planFor(count);
+        final win = p.window;
+        // Gestapeld: de plaat blijft tussen de onderste schroeven van de band.
+        if (p.mode == CockpitCellMode.stacked) {
+          final band = p.instrumentBand;
+          final inset = 0.065 * math.min(band.w, band.h);
+          expect(win.x, greaterThan(inset * 2));
+          expect(win.right, lessThan(band.right - inset * 2));
+        }
+        // Alle vier de hoeken van het venster buiten de bezelcirkel.
+        for (final (dx, dy) in [
+          (win.x, win.y),
+          (win.right, win.y),
+          (win.x, win.bottom),
+          (win.right, win.bottom),
+        ]) {
+          final ddx = dx - p.dialCenterX;
+          final ddy = dy - p.dialCenterY;
+          final dist = (ddx * ddx + ddy * ddy);
           expect(
-            p.dialCenterY + p.bezelRadius,
-            lessThanOrEqualTo(p.instrumentBand.bottom + 0.01),
+            dist,
+            greaterThanOrEqualTo(p.bezelRadius * p.bezelRadius),
+            reason: 'vensterhoek ($dx, $dy) ligt op de bezel',
           );
-          // Het label onder de groep, binnen de cel.
-          expect(
-            p.labelBox.y,
-            greaterThanOrEqualTo(p.instrumentBand.bottom - 0.01),
-          );
-          expect(p.labelBox.bottom, lessThanOrEqualTo(p.height + 0.01));
-        },
-      );
+        }
+        expect(win.x, greaterThanOrEqualTo(0));
+        expect(win.right, lessThanOrEqualTo(p.width + 0.01));
+        expect(win.bottom, lessThanOrEqualTo(p.instrumentBand.bottom + 0.01));
+        // De bezel zelf blijft binnen de instrumentband.
+        expect(p.dialCenterX - p.bezelRadius, greaterThanOrEqualTo(-0.01));
+        expect(
+          p.dialCenterY + p.bezelRadius,
+          lessThanOrEqualTo(p.instrumentBand.bottom + 0.01),
+        );
+        // Het label onder de groep, binnen de cel.
+        expect(
+          p.labelBox.y,
+          greaterThanOrEqualTo(p.instrumentBand.bottom - 0.01),
+        );
+        expect(p.labelBox.bottom, lessThanOrEqualTo(p.height + 0.01));
+      });
     }
 
     test('zes meters op 1080p: de maten uit het ontwerp', () {
       final p = planFor(6);
       expect(p.bezelRadius * 2, closeTo(300, 6));
-      expect(p.numberSize, closeTo(82, 3));
-      expect(p.labelSize, closeTo(32, 1));
+      expect(p.numberSize, closeTo(76, 3));
+      expect(p.labelSize, closeTo(36, 1));
       expect(p.scaleSize, closeTo(21, 1));
       expect(p.window.w, closeTo(205, 5));
     });
@@ -223,7 +229,12 @@ void main() {
       for (final m in deck) {
         final label = plan.fitLabel(m.label);
         expect(label.ellipsized, isFalse, reason: m.label);
-        expect(label.size, plan.labelSize, reason: m.label);
+        // Eén regel; het langste label mag iets krimpen, niet naar de vloer.
+        expect(
+          label.size,
+          greaterThanOrEqualTo(plan.labelSize * 0.85),
+          reason: m.label,
+        );
         expect(label.lines, hasLength(1), reason: m.label);
         for (final l in lines(m)) {
           expect(
@@ -267,6 +278,29 @@ void main() {
       final l = lines(deck[5]);
       expect(l.map((x) => x.text), ['P 4', 'B 0']);
       expect(l.every((x) => x.strong), isTrue);
+      // Twee regels op getalmaat passen niet in het venster: evenredig
+      // gekrompen, zodat niets over de plaat steekt.
+      expect(cockpitReadoutHeight(l), lessThanOrEqualTo(plan.window.h));
+      expect(l.first.size, lessThanOrEqualTo(plan.numberSize));
+      // Met de logostrook is de cel 560×322: daar passen twee regels op
+      // getalmaat niet en krimpt de stapel.
+      final low = CockpitCellPlan.compute(
+        width: 560,
+        height: 322,
+        longestDigits: 4,
+      );
+      final lowLines = cockpitReadoutLines(
+        deck[5],
+        low,
+        attitudeTemplate: 'P {pitch}  B {bank}',
+        actualTemplate: 'ACT {value}°',
+        targetTemplate: 'TGT {heading}°',
+      );
+      expect(lowLines.first.size, lessThan(low.numberSize));
+      expect(
+        cockpitReadoutHeight(lowLines),
+        lessThanOrEqualTo(low.window.h * 0.92 + 0.01),
+      );
       expect(splitCockpitAttitude('Pitch 4 Bank 0'), ['Pitch 4 Bank 0']);
     });
 
@@ -361,6 +395,22 @@ void main() {
       expect(cockpitFormatNumber(70), '70');
       expect(cockpitFormatNumber(8.4), '8.4');
       expect(cockpitValueText(deck[4]), '+3');
+      // De rollende uitlezing houdt de decimalen van de eindwaarde: "1450.3"
+      // onderweg naar 1500 zou breder zijn dan het budget van vier tekens.
+      expect(cockpitValueText(deck[3], shown: 1450.3), '1450');
+      expect(
+        cockpitValueText(
+          const CockpitMeterSpec(min: 0, max: 10, value: 8.4),
+          shown: 9.96,
+        ),
+        '10.0',
+      );
+      expect(
+        cockpitLongestDigits(const [
+          CockpitMeterSpec(min: 0, max: 10, value: 8.4),
+        ]),
+        4, // "10.0"
+      );
       expect(
         cockpitValueText(
           const CockpitMeterSpec(

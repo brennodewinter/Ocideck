@@ -123,15 +123,20 @@ class CockpitGridPlan {
   }
 }
 
-/// Getal zonder overbodige decimalen: 70 → "70", 8.4 → "8.4".
-String cockpitFormatNumber(double value) => value == value.roundToDouble()
-    ? value.toStringAsFixed(0)
-    : value.toStringAsFixed(1);
+/// Aantal decimalen dat een waarde toont: geheel → 0, anders 1.
+int cockpitDecimals(double value) => value == value.roundToDouble() ? 0 : 1;
 
-/// De uitlezing van een scalaire meter; klim/daling krijgt een plusteken.
+/// Getal zonder overbodige decimalen: 70 → "70", 8.4 → "8.4". Met [decimals]
+/// volgt het getal een opgelegd aantal — de rollende uitlezing toont onderweg
+/// "85", niet "85.6", zodat hij nooit breder wordt dan het budget.
+String cockpitFormatNumber(double value, {int? decimals}) =>
+    value.toStringAsFixed(decimals ?? cockpitDecimals(value));
+
+/// De uitlezing van een scalaire meter; klim/daling krijgt een plusteken. Een
+/// tussenstand ([shown]) houdt de decimalen van de eindwaarde.
 String cockpitValueText(CockpitMeterSpec meter, {double? shown}) {
   final v = shown ?? meter.value;
-  final text = cockpitFormatNumber(v);
+  final text = cockpitFormatNumber(v, decimals: cockpitDecimals(meter.value));
   if (meter.type == CockpitMeterType.climbDescent && v > 0) return '+$text';
   return text;
 }
@@ -153,13 +158,16 @@ int cockpitLongestDigits(List<CockpitMeterSpec> meters) {
   var longest = 1;
   for (final m in meters) {
     if (!_isNumeric(m.type)) continue;
+    // Minimum en maximum in de decimalen van de waarde: de naald zwiept
+    // langs beide, en de uitlezing rolt mee in diezelfde notatie.
+    final d = cockpitDecimals(m.value);
     final candidates = [
-      cockpitFormatNumber(m.min),
-      cockpitFormatNumber(m.max),
+      cockpitFormatNumber(m.min, decimals: d),
+      cockpitFormatNumber(m.max, decimals: d),
       cockpitValueText(m),
     ];
     if (m.type == CockpitMeterType.climbDescent) {
-      candidates.add('+${cockpitFormatNumber(m.max)}');
+      candidates.add('+${cockpitFormatNumber(m.max, decimals: d)}');
     }
     for (final c in candidates) {
       longest = math.max(longest, c.length);
@@ -349,7 +357,7 @@ class CockpitCellPlan {
       final cw = math.max(1.0, math.min(xR - xL, 1.4 * d));
       final group = x0 + d + 0.03 * w + cw;
       final shift = math.max(0.0, (w - group - 0.03 * w) / 2);
-      final nf = math.min(0.34 * bandH, cw / (cockpitDigitEm * digits));
+      final nf = math.min(0.34 * bandH, 0.92 * cw / (cockpitDigitEm * digits));
       final uf = (0.32 * nf).clamp(0.055 * h, 0.085 * h).toDouble();
       return CockpitCellPlan._(
         mode: CockpitCellMode.wide,
@@ -364,28 +372,34 @@ class CockpitCellPlan {
         numberSize: nf,
         unitSize: uf,
         unitFloor: 0.055 * h,
-        labelSize: 0.085 * h,
+        labelSize: 0.095 * h,
         labelFloor: 0.055 * h,
         scaleSize: 0.065 * d,
       );
     }
-    final d = 0.62 * h;
-    final cw = 0.90 * w;
-    final nf = math.min(0.14 * h, cw / (cockpitDigitEm * digits));
+    // Gestapeld: wijzerplaat bovenin, venster eronder, tussen de onderste
+    // schroeven van de band (inzet 0,065 van de kortste bandzijde) zodat de
+    // plaat ze niet bedekt.
+    final d = 0.56 * h;
+    final bandH = 0.86 * h;
+    final inset = 0.065 * math.min(w, bandH);
+    final x0 = 0.05 * w + 2.2 * inset;
+    final cw = math.max(1.0, w - 2 * x0);
+    final nf = math.min(0.14 * h, 0.92 * cw / (cockpitDigitEm * digits));
     return CockpitCellPlan._(
       mode: CockpitCellMode.stacked,
       width: w,
       height: h,
       dialSide: d,
       dialCenterX: w / 2,
-      dialCenterY: d / 2,
-      instrumentBand: CockpitRect(0, 0, w, 0.86 * h),
-      window: CockpitRect(0.05 * w, 0.62 * h, cw, 0.24 * h),
-      labelBox: CockpitRect(0.05 * w, 0.86 * h, 0.90 * w, 0.14 * h),
+      dialCenterY: 0.29 * h,
+      instrumentBand: CockpitRect(0, 0, w, bandH),
+      window: CockpitRect(x0, 0.58 * h, cw, 0.26 * h),
+      labelBox: CockpitRect(0.05 * w, bandH, 0.90 * w, h - bandH),
       numberSize: nf,
       unitSize: 0.06 * h,
       unitFloor: 0.045 * h,
-      labelSize: 0.07 * h,
+      labelSize: 0.08 * h,
       labelFloor: 0.05 * h,
       scaleSize: 0.065 * d,
     );
@@ -429,6 +443,16 @@ class CockpitReadoutLine {
   /// Regelhoogte: het getal staat strak (1,0), lopende tekst op 1,15.
   double get height => size * (strong ? 1.0 : cockpitLineHeight);
 
+  /// Dezelfde regel, evenredig verkleind.
+  CockpitReadoutLine scaled(double factor) => CockpitReadoutLine(
+    text,
+    size * factor,
+    strong: strong,
+    inlineUnit: inlineUnit,
+    inlineUnitSize: inlineUnitSize * factor,
+    gapAfter: gapAfter * factor,
+  );
+
   /// Geschatte breedte, inclusief inline eenheid.
   double get estimatedWidth {
     final em = strong ? cockpitDigitEm : cockpitTextEm;
@@ -447,6 +471,40 @@ class CockpitReadoutLine {
 /// of voor horizon en kompas de attitude- en koersregels. De sjablonen komen
 /// vertaald van buiten; de export geeft zijn Engelse standaard mee.
 List<CockpitReadoutLine> cockpitReadoutLines(
+  CockpitMeterSpec meter,
+  CockpitCellPlan plan, {
+  required String attitudeTemplate,
+  required String actualTemplate,
+  required String targetTemplate,
+  double? shownValue,
+  double? shownHeading,
+}) => _fitWindowHeight(
+  _readoutLines(
+    meter,
+    plan,
+    attitudeTemplate: attitudeTemplate,
+    actualTemplate: actualTemplate,
+    targetTemplate: targetTemplate,
+    shownValue: shownValue,
+    shownHeading: shownHeading,
+  ),
+  plan.window.h * 0.92,
+);
+
+/// Past de stapel niet in het venster (twee horizonregels op getalmaat, een
+/// gestapelde cel met een lange eenheid), dan krimpt alles evenredig: de
+/// verhouding tussen getal en eenheid blijft, en niets steekt over de plaat.
+List<CockpitReadoutLine> _fitWindowHeight(
+  List<CockpitReadoutLine> lines,
+  double maxHeight,
+) {
+  final height = cockpitReadoutHeight(lines);
+  if (height <= maxHeight || height <= 0) return lines;
+  final factor = maxHeight / height;
+  return [for (final l in lines) l.scaled(factor)];
+}
+
+List<CockpitReadoutLine> _readoutLines(
   CockpitMeterSpec meter,
   CockpitCellPlan plan, {
   required String attitudeTemplate,
@@ -531,7 +589,7 @@ List<CockpitReadoutLine> cockpitReadoutLines(
           nf,
           strong: true,
           inlineUnit: inline ? meter.unit : null,
-          inlineUnitSize: nf * 0.45,
+          inlineUnitSize: nf * 0.36,
           gapAfter: unit.lines.isEmpty ? 0 : plan.unitSize * 0.15,
         ),
         for (final l in unit.lines) CockpitReadoutLine(l, unit.size),

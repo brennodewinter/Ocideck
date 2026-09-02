@@ -67,15 +67,23 @@ dwong de altimeter van 300° naar 270°.
 - Venster: van xL = cx + bezel + 0,03·w tot xR = 0,97·w, breedte
   cw = min(xR − xL, 1,4·d); plaat y 0,19·ih … 0,81·ih. De groep (plaat +
   spleet + venster) wordt in de cel gecentreerd.
-- Getal: N = min(0,34·ih, cw / (0,62 · n_dia)), w800, tabellaire cijfers. Een
-  korte eenheid (≤ 3 tekens, geen spatie) staat inline erachter op 0,45·N met
-  een spatie van 0,1·N. Anders een eenheidregel eronder:
+- Getal: N = min(0,34·ih, 0,92·cw / (0,62 · n_dia)), w800, tabellaire cijfers.
+  Een korte eenheid (≤ 3 tekens, geen spatie) staat inline erachter op 0,36·N
+  met een spatie van 0,1·N. Een tussenstand tijdens de animatie houdt de
+  decimalen van de eindwaarde ("1450", niet "1450.3"), en n_dia telt min en max
+  in diezelfde notatie. Anders een eenheidregel eronder:
   U = clamp(0,32·N, 0,055·h, 0,085·h), w600, gedempt, max 2 regels.
-- Label: L = 0,085·h, w700, breedte 0,90·w, max 2 regels; vloer 0,055·h.
-- Schaalcijfers: 0,065·d, gedempt; speedometer/altimeter op (±0,62r, +0,40r),
-  voltmeter op (±0,78r, +0,54r), thermometer rechts uitgelijnd op cx − 0,10·d
-  bij kanaaltop (max) en bol (min), klim/daling "+max" boven, "0" rechts,
-  "min" onder.
+- Label: L = 0,095·h, w700, breedte 0,90·w, max 2 regels; vloer 0,055·h.
+- Schaalcijfers: 0,065·d, gedempte inkt op volle dekking (5,2:1 op de crème
+  plaat); speedometer/altimeter op (±0,62r, +0,40r), voltmeter op (±0,78r,
+  +0,54r), thermometer rechts uitgelijnd op cx − 0,10·d bij kanaaltop (max) en
+  bol (min) — de buis begint op −0,25·s, onder de lampjes, en de bol staat op
+  +0,14·s — klim/daling "+max", "0" en "min" in de vrije linkerhelft op
+  (−0,50r, −0,52r), (−0,62r, 0) en (−0,50r, +0,52r): de naald bestrijkt de
+  rechterhelft en liep op de 0°-lijn dwars door de "0".
+- Horizon: het vliegtuigsymbool is wit met een donkere rand, zoals de
+  horizonlijn; in accentkleur was het op de lucht (EU-blauw op #2563EB, 2,5:1)
+  onzichtbaar.
 - Horizon: "P {pitch}" / "B {bank}" als twee regels in het venster op N —
   de vertaalde regel "P {pitch}  B {bank}" wordt op de run van twee spaties
   gesplitst, dus zonder nieuwe vertaalstring. Kompas: ACT op
@@ -85,9 +93,16 @@ dwong de altimeter van 300° naar 270°.
 
 ## 5. Cel, gestapeld (a < 1,35)
 
-Wijzerplaat d = 0,62·h bovenin gecentreerd; uitleesband y 0,62·h … 0,86·h
-over 0,90·w (getal 0,14·h, eenheid 0,06·h); labelstrook 0,86·h … h met
-L = 0,07·h.
+Wijzerplaat d = 0,56·h, middelpunt (0,5·w, 0,29·h); instrumentband 0 … 0,86·h
+met de schroeven op inzet 0,065 van haar kortste zijde; venster y 0,58·h …
+0,84·h, in de breedte tussen de onderste schroeven (van 0,05·w + 2,2·inzet tot
+het spiegelbeeld); getal 0,14·h, eenheid 0,06·h; labelstrook 0,86·h … h met
+L = 0,08·h.
+
+**Hoogtevangnet.** Past de regelstapel niet in 0,92× de vensterhoogte (twee
+horizonregels op getalmaat; een gestapelde cel met een lange eenheid), dan
+krimpt de hele stapel evenredig — de verhouding getal/eenheid blijft, niets
+steekt over de plaat.
 
 ## 6. Cascade (identiek in painter en export)
 
@@ -100,17 +115,21 @@ een ellipsis (hun maat volgt uit het langste getal); schaalcijfers krimpen,
 verplaatsen nooit. Onder 7 px wordt tekst niet getekend (de miniatuur in de
 slidestrook).
 
-## 7. Doorrekening (zes meters, 1920×1080, cel 561×379)
+## 7. Doorrekening (zes meters, 1920×1080)
 
-| zone | maat | tekst | breedte | budget |
+Zonder logostrook is de cel 561×379 (raster 1746×789); met het LibreKAT-logo
+is hij 560×322, en dan zijn alle maten 0,85× (getal 76 → 93 px omdat het
+venster relatief breder is; label 36 → 31 px; bezel Ø 300 → 254).
+
+| zone | maat (cel 561×379) | tekst | breedte | budget |
 |---|---|---|---|---|
 | bezel | Ø 300 (was 328) | | | |
-| getal | 82 px (was 35) | "1500" | 203 px | 205 px |
+| getal | 76 px (was 35) | "1500" | 188 px | 189 px |
 | eenheid | 24 px | "% van maximale" / "hartslag" | 185 / 106 px | 189 px |
-| eenheid | 26 px | "ml per uur" | 143 px | 189 px |
-| label | 32 px (was 18) | "Tempo ten opzichte van plan" | 475 px | 505 px |
+| eenheid | 24 px | "ml per uur" | 132 px | 189 px |
+| label | 36 → 34 px (was 18) | "Tempo ten opzichte van plan" | 505 px | 505 px |
 | schaalcijfers | 21 px (was 16) | "1000" | 46 px | vrij binnen de boog |
-| horizon | 82 px | "P 4" / "B 0" | 152 px | 189 px |
+| horizon | 2 × 63 px | "P 4" / "B 0" | 117 px | venster 200 px hoog |
 
 Eén meter: getal tot 0,34× de instrumenthoogte, label 58 px, eenheid op één
 regel. Vier meters (de gedocumenteerde look met "%", "/10"): eenheid inline,

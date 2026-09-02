@@ -164,12 +164,16 @@ String _cockpitSvg(
   }
   for (var i = 0; i < meters.length; i++) {
     final cell = grid.cells[i];
+    // De verplaatsing op een eigen buitenste <g>: de cockpitPowerOn-animatie
+    // zet `transform: scale()` als CSS-eigenschap op `.cockpit-meter`, en die
+    // overschrijft een transform-attribuut op hetzelfde element — alle meters
+    // belandden op elkaar in cel 0.
     b.write(
-      '<g class="cockpit-meter" style="--meter-index:$i" '
-      'transform="translate(${_num(cell.x + inset)} ${_num(cell.y + inset)})">',
+      '<g transform="translate(${_num(cell.x + inset)} ${_num(cell.y + inset)})">'
+      '<g class="cockpit-meter" style="--meter-index:$i">',
     );
     _cockpitInstrumentSvg(b, meters[i], i, plan, scheme, p, authentic, suffix);
-    b.write('</g>');
+    b.write('</g></g>');
   }
   b.write('</svg>');
   return b.toString();
@@ -421,8 +425,8 @@ void _thermometerSvg(
   // als gradiënt over de zones, markeerstreep op de waarde.
   final tube = s * 0.11;
   final bulbR = tube * 0.82;
-  final topY = cy - s * 0.32;
-  final bulbY = cy + s * 0.10;
+  final topY = cy - s * 0.25;
+  final bulbY = cy + s * 0.14;
   final chTop = topY + tube * .5;
   final span = bulbY - chTop;
   final n =
@@ -533,9 +537,11 @@ void _climbDescentSvg(
     );
   }
   b
-    ..write(_scaleText(cx, cy - r * .58, '+${_num(meter.max)}', plan, p))
-    ..write(_scaleText(cx + r * .60, cy, '0', plan, p))
-    ..write(_scaleText(cx, cy + r * .66, _num(meter.min), plan, p))
+    ..write(
+      _scaleText(cx - r * .50, cy - r * .52, '+${_num(meter.max)}', plan, p),
+    )
+    ..write(_scaleText(cx - r * .62, cy, '0', plan, p))
+    ..write(_scaleText(cx - r * .50, cy + r * .52, _num(meter.min), plan, p))
     ..write(_needleSvg(cx, cy, 90 - 180 * n, r * .76, s, p.needle))
     ..write(_hubSvg(cx, cy, s, p));
 }
@@ -574,7 +580,10 @@ void _horizonSvg(
     )
     ..write(
       '<line x1="${_num(cx - r * .38)}" y1="${_num(cy)}" x2="${_num(cx + r * .38)}" '
-      'y2="${_num(cy)}" stroke="${p.accent}" stroke-width="${_num(s * .018)}" '
+      'y2="${_num(cy)}" stroke="#000" stroke-opacity=".55" '
+      'stroke-width="${_num(s * .028)}" stroke-linecap="round"/>'
+      '<line x1="${_num(cx - r * .38)}" y1="${_num(cy)}" x2="${_num(cx + r * .38)}" '
+      'y2="${_num(cy)}" stroke="#FFFFFF" stroke-width="${_num(s * .016)}" '
       'stroke-linecap="round"/>',
     );
   // Pitch en bank staan in het uitleesvenster, niet meer op de grond.
@@ -675,6 +684,10 @@ void _readoutSvg(
   );
   var y = win.centerY - cockpitReadoutHeight(lines) / 2;
   for (final line in lines) {
+    if (line.size < cockpitMinTextPx) {
+      y += line.height + line.gapAfter;
+      continue;
+    }
     final cy = y + line.height / 2;
     final color = line.strong ? p.ink : p.inkMuted;
     final unit = line.inlineUnit;

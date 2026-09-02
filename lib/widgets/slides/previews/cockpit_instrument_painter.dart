@@ -232,11 +232,13 @@ class _CockpitInstrumentPainter extends CustomPainter {
   void _thermometer(Canvas canvas, Offset c, double s) {
     // De buis staat op de bezel-as; het getal staat niet meer onder de bol
     // maar in het venster, dus de plaat is helemaal voor de buis.
+    // De buis begint onder de lampjes (op −0,307·s) en de bol zakt mee, zodat
+    // de testlampen en het maximum-cijfer vrij blijven.
     final cx = c.dx;
     final tubeWidth = s * 0.11;
     final bulbRadius = tubeWidth * 0.82;
-    final topY = c.dy - s * 0.32;
-    final bulbCenter = Offset(cx, c.dy + s * 0.10);
+    final topY = c.dy - s * 0.25;
+    final bulbCenter = Offset(cx, c.dy + s * 0.14);
     final channelTop = topY + tubeWidth * 0.5;
     final channelBottom = bulbCenter.dy;
     final span = channelBottom - channelTop;
@@ -386,17 +388,18 @@ class _CockpitInstrumentPainter extends CustomPainter {
       );
     }
     // Het bereik met teken in plaats van een kaal + en −: dezelfde inkt, meer
-    // informatie, geen vertaling nodig.
+    // informatie, geen vertaling nodig. In de linkerhelft, want de naald
+    // bestrijkt de rechter: op de 0°-lijn liep hij dwars door de "0".
     _scaleLabel(
       canvas,
       '+${cockpitFormatNumber(meter.max)}',
-      c + Offset(0, -r * 0.58),
+      c + Offset(-r * 0.50, -r * 0.52),
     );
-    _scaleLabel(canvas, '0', c + Offset(r * 0.60, 0));
+    _scaleLabel(canvas, '0', c + Offset(-r * 0.62, 0));
     _scaleLabel(
       canvas,
       cockpitFormatNumber(meter.min),
-      c + Offset(0, r * 0.66),
+      c + Offset(-r * 0.50, r * 0.52),
     );
     final shown = _animatedValue(meter.value);
     final angle = _rad(90 - 180 * _norm(shown));
@@ -435,12 +438,22 @@ class _CockpitInstrumentPainter extends CustomPainter {
         ..strokeWidth = s * 0.018
         ..color = _line(0.55),
     );
+    // Het vliegtuigsymbool: wit met een donkere rand, zoals de horizonlijn.
+    // In accentkleur was het op de lucht (EU-blauw op #2563EB) onzichtbaar.
     canvas.drawLine(
       Offset(c.dx - r * 0.38, c.dy),
       Offset(c.dx + r * 0.38, c.dy),
       Paint()
-        ..color = accent
-        ..strokeWidth = s * 0.018
+        ..color = Colors.black.withValues(alpha: 0.55)
+        ..strokeWidth = s * 0.028
+        ..strokeCap = StrokeCap.round,
+    );
+    canvas.drawLine(
+      Offset(c.dx - r * 0.38, c.dy),
+      Offset(c.dx + r * 0.38, c.dy),
+      Paint()
+        ..color = Colors.white
+        ..strokeWidth = s * 0.016
         ..strokeCap = StrokeCap.round,
     );
     // Pitch en bank staan in het venster (inkt op plaat) en niet meer
@@ -537,7 +550,10 @@ class _CockpitInstrumentPainter extends CustomPainter {
     );
     var y = rect.center.dy - cockpitReadoutHeight(lines) / 2;
     for (final line in lines) {
-      _readoutLine(canvas, Offset(rect.center.dx, y + line.height / 2), line);
+      // Een eenheidregel van vier pixels is in de miniatuur alleen een vlek.
+      if (line.size >= cockpitMinTextPx) {
+        _readoutLine(canvas, Offset(rect.center.dx, y + line.height / 2), line);
+      }
       y += line.height + line.gapAfter;
     }
   }

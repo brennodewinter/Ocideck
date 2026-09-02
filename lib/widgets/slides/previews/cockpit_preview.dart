@@ -130,7 +130,9 @@ class _CockpitPreviewState extends State<_CockpitPreview>
                   accent: accent,
                   surface: bg,
                   textColor: textColor,
-                  mutedColor: textColor.withValues(alpha: 0.62),
+                  // 0,75 in plaats van 0,62: eenheid en schaalcijfers in
+                  // klassiek halen dan AA op de dia-achtergrond.
+                  mutedColor: textColor.withValues(alpha: 0.75),
                   scheme: widget.scheme,
                   bootProgress: boot,
                   font: widget.font,

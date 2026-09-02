@@ -21,8 +21,9 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
 
   Color get _instrumentInk => _authentic ? _palette.ink : textColor;
 
-  Color get _instrumentMuted =>
-      _authentic ? _palette.inkMuted.withValues(alpha: 0.85) : mutedColor;
+  /// Gedempte inkt op volle dekking: op de crème plaat haalt #585D64 zo
+  /// 5,2:1, met 0,85 alfa bleef hij op 3,96:1 onder AA.
+  Color get _instrumentMuted => _authentic ? _palette.inkMuted : mutedColor;
 
   /// Structural lines (gauge tracks, ticks, glass) derive from the instrument
   /// ink at low opacity so they read on any slide background.

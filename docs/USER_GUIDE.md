@@ -1149,7 +1149,7 @@ longest number on it, so all read-outs line up and the rolling read-out never
 changes size. A short unit such as "%" or "/10" sits inline behind the number;
 a longer one ("ml per hour") gets its own line or two underneath. The label
 spans the full width of the cell below the group and grows with the cell: on a
-1080p beamer with six meters it is about 32 px, on one line up to some thirty
+1080p beamer with six meters it is over 30 px, on one line up to some thirty
 characters, then two lines. Long text shrinks a little, then wraps, and only as
 a last resort ends in an ellipsis. Cells narrower than 1.35 : 1 (two meters on
 a 16:9 slide, or three on one row) stack the read-out under the dial instead.

@@ -171,6 +171,27 @@ void main() {
     expect(down, isNot(contains('+-8')));
   });
 
+  test('cells keep their translate when the power-on animation scales', () {
+    // De cockpitPowerOn-keyframes zetten `transform:scale()` als CSS op
+    // `.cockpit-meter`; een transform-attribuut op datzelfde element werd
+    // overschreven en alle meters vielen op cel 0. De verplaatsing staat
+    // daarom op een eigen buitenste <g>.
+    final svg = renderMeters([
+      {'type': 'speedometer', 'label': 'A', 'value': 10},
+      {'type': 'speedometer', 'label': 'B', 'value': 20},
+    ]);
+    final translated = RegExp(
+      r'<g transform="translate\([^"]+\)"><g class="cockpit-meter"',
+    );
+    expect(translated.allMatches(svg), hasLength(2));
+    expect(
+      svg,
+      isNot(
+        contains('class="cockpit-meter" style="--meter-index:0" transform='),
+      ),
+    );
+  });
+
   test('horizon renders sky/ground bands and a clip path', () {
     final svg = renderMeters([
       {'type': 'horizon', 'label': 'Attitude', 'pitch': 20, 'bank': 15},
@@ -230,15 +251,15 @@ void main() {
   });
 
   test('theme accent colour is threaded into the gauge, default otherwise', () {
-    // Authentiek draagt het accent op de horizonbalk en de kompasmarker, net
-    // als de app; de naald is inkt.
+    // Authentiek draagt het accent op de kompasmarker, net als de app; de
+    // naald is inkt en het horizonsymbool is wit met een donkere rand.
     final themed = renderMeters([
-      {'type': 'horizon', 'label': 'S', 'pitch': 0, 'bank': 0},
+      {'type': 'heading', 'label': 'S', 'value': 0, 'heading': 90},
     ], theme: const ThemeProfile(accentColor: '#123456'));
     expect(themed, contains('#123456'));
 
     final plain = renderMeters([
-      {'type': 'horizon', 'label': 'S', 'pitch': 0, 'bank': 0},
+      {'type': 'heading', 'label': 'S', 'value': 0, 'heading': 90},
     ]);
     // Falls back to the built-in accent when no theme is supplied.
     expect(plain, contains('#38BDF8'));
