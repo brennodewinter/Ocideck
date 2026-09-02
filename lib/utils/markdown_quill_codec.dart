@@ -5,6 +5,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 import 'footnote_embed_syntax.dart';
 import 'image_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
+import 'mermaid_embed_syntax.dart';
 import 'pentest_block_embed_syntax.dart';
 import 'toc_embed_syntax.dart';
 import 'timeline_table_embed_syntax.dart';
@@ -50,6 +51,10 @@ class MarkdownQuillCodec {
       PentestFindingHeadSyntax(),
       PentestWholeBlockSyntax(),
       TocMarkerSyntax(),
+      // Vóór de standaard-fenceregel: zonder deze regel werd een
+      // ```mermaid-fence een gewoon codeblok en tekende de visuele editor
+      // als enige weergave het diagram niet (#1920).
+      MermaidFenceSyntax(),
       FootnoteDefSyntax(),
       EmbeddableTableSyntax(),
     ],
@@ -68,6 +73,7 @@ class MarkdownQuillCodec {
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
+      EmbeddableMermaid.mermaidType: EmbeddableMermaid.fromMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.fromMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.fromMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.fromMdSyntax,
@@ -79,6 +85,7 @@ class MarkdownQuillCodec {
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
+      EmbeddableMermaid.mermaidType: EmbeddableMermaid.toMdSyntax,
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.toMdSyntax,
