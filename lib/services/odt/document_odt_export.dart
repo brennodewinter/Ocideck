@@ -290,23 +290,41 @@ String _buildManifest(List<_OdtImage> images) {
 
 /// ODT-stijlen voor de automatic-styles sectie. Definieert koppen, alinea's,
 /// inline-opmaak, tabellen en lijsten die de converter refereert.
+///
+/// De default-paragraph-stijl en de kop-marges zorgen ervoor dat het document
+/// ademt: alinea's hebben onderlinge ruimte en een kop blijft nooit wees
+/// onderaan een pagina (`fo:keep-with-next`). Zonder deze zou alles tegen
+/// elkaar plakken — issue #1917.
 const _odtStyles = '''
-<style:style style:name="Heading_20_1" style:family="paragraph">
+<style:default-style style:family="paragraph">
+  <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%" fo:text-align="start" style:justify-single-word="false"/>
+  <style:text-properties fo:font-size="100%" style:font-name-asian="Noto Sans CJK SC"/>
+</style:default-style>
+<style:style style:name="Standard" style:family="paragraph" style:class="text">
+  <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>
+</style:style>
+<style:style style:name="Heading_20_1" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.8cm" fo:margin-bottom="0.3cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="170%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Heading_20_2" style:family="paragraph">
+<style:style style:name="Heading_20_2" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.6cm" fo:margin-bottom="0.25cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="140%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Heading_20_3" style:family="paragraph">
+<style:style style:name="Heading_20_3" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.5cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="120%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Heading_20_4" style:family="paragraph">
+<style:style style:name="Heading_20_4" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.4cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="110%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Heading_20_5" style:family="paragraph">
+<style:style style:name="Heading_20_5" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="100%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Heading_20_6" style:family="paragraph">
+<style:style style:name="Heading_20_6" style:family="paragraph" style:next-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
   <style:text-properties fo:font-size="100%" fo:font-weight="bold" fo:font-style="italic" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Strong" style:family="text">
@@ -321,25 +339,28 @@ const _odtStyles = '''
 <style:style style:name="Source_Text" style:family="text">
   <style:text-properties style:font-name="Liberation Mono" fo:font-family="Liberation Mono" style:font-name-asian="Liberation Mono" style:font-name-complex="Liberation Mono"/>
 </style:style>
-<style:style style:name="Preformatted_Text" style:family="paragraph">
-  <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.2cm" fo:background-color="transparent"/>
+<style:style style:name="Preformatted_Text" style:family="paragraph" style:parent-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.4cm" fo:background-color="transparent" fo:line-height="100%"/>
   <style:text-properties style:font-name="Liberation Mono" fo:font-family="Liberation Mono" style:font-name-asian="Liberation Mono" style:font-name-complex="Liberation Mono" fo:font-size="90%"/>
 </style:style>
-<style:style style:name="Quote" style:family="paragraph">
-  <style:paragraph-properties fo:margin-left="1cm" fo:margin-right="1cm" fo:margin-top="0.3cm" fo:margin-bottom="0.3cm" fo:text-indent="0cm" style:justify-single-word="false"/>
+<style:style style:name="Quote" style:family="paragraph" style:parent-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:margin-left="1cm" fo:margin-right="1cm" fo:margin-top="0.4cm" fo:margin-bottom="0.4cm" fo:text-indent="0cm" style:justify-single-word="false"/>
   <style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/>
 </style:style>
-<style:style style:name="Horizontal_Line" style:family="paragraph">
-  <style:paragraph-properties fo:border-bottom="0.5pt solid #000000" fo:padding="0cm" fo:margin-top="0.3cm" fo:margin-bottom="0.3cm"/>
+<style:style style:name="Horizontal_Line" style:family="paragraph" style:parent-style-name="Standard" style:class="text">
+  <style:paragraph-properties fo:border-bottom="0.5pt solid #000000" fo:padding="0cm" fo:margin-top="0.4cm" fo:margin-bottom="0.4cm"/>
 </style:style>
-<style:style style:name="Table_20_Heading" style:family="paragraph">
+<style:style style:name="Table_20_Heading" style:family="paragraph" style:parent-style-name="Standard">
+  <style:paragraph-properties fo:margin-bottom="0cm"/>
   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
-<style:style style:name="Table_20_Contents" style:family="paragraph"/>
-<style:style style:name="Table_20_Center" style:family="paragraph">
+<style:style style:name="Table_20_Contents" style:family="paragraph" style:parent-style-name="Standard">
+  <style:paragraph-properties fo:margin-bottom="0cm"/>
+</style:style>
+<style:style style:name="Table_20_Center" style:family="paragraph" style:parent-style-name="Table_20_Contents">
   <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
 </style:style>
-<style:style style:name="Table_20_Right" style:family="paragraph">
+<style:style style:name="Table_20_Right" style:family="paragraph" style:parent-style-name="Table_20_Contents">
   <style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
 </style:style>
 <style:style style:name="Graphics" style:family="graphic">
