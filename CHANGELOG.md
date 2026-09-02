@@ -536,6 +536,21 @@ in Dutch, and it keeps growing on `main` between releases.
   staan op volle dekking (AA), een negatief getal draagt een echt minteken, en
   een stapel die niet past krimpt rasterbreed zodat de getalmaat per dia gelijk
   blijft.
+- fix(document): een ```mermaid-fence tekent nu ook in de visuele editor als
+  diagram (#1920). `DOCUMENT_MODE.md` §4.3 belooft mermaid als gerenderde kaart
+  in de visuele modus, en lezer, voorvertoning, Pagina's, PDF en HTML-export
+  deden dat al — de editor als enige niet. De oorzaak lag niet bij de
+  vangnet-bouwer, zoals bij een onbekend embed-type: de fence-scanner slaat
+  alles binnen een ```-fence bewust over, dus de visuele modus ging gewoon open,
+  maar de codec kende geen mermaid-embed en dan blijft er een gewoon
+  Quill-codeblok over. De fence reist nu als één blok-embed, met beide
+  ```-regels erin, en de terugweg schrijft hem verbatim weg — `DeltaToMarkdown`
+  escapet leestekens, en een `%%{init}`-directive of een `<br/>` in een label is
+  geen proza. De kaart hergebruikt dezelfde weergave als de lezer, dus er is
+  geen tweede renderpad en op een machine zonder WebView valt hij op precies
+  dezelfde manier terug op het codeblok. Bewerken gaat via de Bron-modus, net
+  als bij de andere atomaire blokken.
+
 - fix(mermaid): een diagram met een eigen `%%{init}`-directive bleef licht in
   donker thema, en een breed diagram werd in Pagina's afgesneden (#1921, #1922).
   Twee fouten met dezelfde wortel: de lezer kreeg één behandeling en de
