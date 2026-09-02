@@ -3985,9 +3985,9 @@ whose language is `mermaid`:
 ````markdown
 ```mermaid
 graph TD;
-  A[Melding] --> B{Bevestigd?};
-  B -->|ja| C[Onderzoek];
-  B -->|nee| D[Afgesloten];
+  A[Report] --> B{Confirmed?};
+  B -->|yes| C[Investigation];
+  B -->|no| D[Closed];
 ```
 ````
 
