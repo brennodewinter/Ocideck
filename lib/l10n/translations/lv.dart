@@ -1692,6 +1692,8 @@ const _dutchSourceAddLv = <String, String>{
       'Sadaliet tabulu vai novietojiet garās vērtības citu zem citas, nevis blakus.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), kas atveras LibreOffice vai Word. Rediģējams, ar iebūvētām zemsvītras piezīmēm un virsrakstiem kā struktūru. Atvērtā alternatīva Word failam.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word dokuments (.docx), kas atveras Word, Pages un LibreOffice. Redigejams, ar dzimtam zemsvitram un virsrakstiem ka strukturu. Mermaid diagrammas ir iegultas ka augstas kvalitates atteli.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 ar pārplūstošu tekstu e-lasītājiem, planšetdatoriem un telefoniem. Virsraksti kļūst par navigāciju, piezīmes ir beigās.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

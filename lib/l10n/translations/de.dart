@@ -727,6 +727,8 @@ const _dutchSourceAddDe = {
       'Teilen Sie die Tabelle, oder setzen Sie lange Werte untereinander statt nebeneinander.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Eine ODT-Datei (OpenDocument Text), die in LibreOffice oder Word geöffnet wird. Bearbeitbar, mit nativen Fußnoten und Überschriften als Gliederung. Die offene Alternative zu einer Word-Datei.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Ein Word-Dokument (.docx), das in Word, Pages und LibreOffice geoffnet wird. Bearbeitbar, mit nativen Fussnoten und Ueberschriften als Gliederung. Mermaid-Diagramme werden als hochwertige Bilder eingebettet.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Ein ePub 3 mit umfließendem Text für E-Reader, Tablets und Telefone. Überschriften werden Navigation, Noten stehen hinten.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

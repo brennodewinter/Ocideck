@@ -1694,6 +1694,8 @@ const _dutchSourceAddFi = <String, String>{
       'Jaa taulukko tai aseta pitkät arvot allekkain vierekkäisyyden sijaan.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), joka avautuu LibreOfficeen tai Wordiin. Muokattava, sisältäen alkuperäiset alaviitteet ja otsikot jäsennelmänä. Avoin vaihtoehto Word-tiedostolle.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word-asiakirja (.docx), joka avautuu Wordissa, Pagesissa ja LibreOfficessa. Muokattava, sisltaen alkuperaiset alaviitteet ja otsikot jasennelmana. Mermaid-kaaviot upotetaan korkealaatuisina kuvina.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3, jonka teksti mukautuu e-lukulaitteille, tableteille ja puhelimille. Otsikoista tulee navigointi, huomautukset ovat lopussa.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

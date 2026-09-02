@@ -727,6 +727,8 @@ const _dutchSourceAddFy = {
       'Splits de tabel, of set lange wearden ûnder inoar yn stee fan neist inoar.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'In ODT (OpenDocument Text) dy\'t iepenet yn LibreOffice of Word. Bewurkber, mei lânseigen foetnoaten en koppen as ynhâldsopjefte. It iepen alternatyf foar in Word-triem.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'In Word-dokumint (.docx) dat iepenet yn Word, Pages en LibreOffice. Bewurkber, mei native foetnoaten en koppen as ynhaldsoersjoch. Mermaid-diagrammen wurde as heechweardige ofbyldings ynbede.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'In ePub 3 mei werfloeiende tekst foar e-readers, tablets en telefoans. Kopteksten wurde navigaasje, noten stean efteryn.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

@@ -1709,6 +1709,8 @@ const _dutchSourceAddLa = <String, String>{
       'Tabulam divide, aut valores longos alterum sub altero pone, non iuxta.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) quod in LibreOffice aut Word aperitur. Mutabile, cum notis pedicularibus nativis et capitibus sicut index. Alternativa aperta fasciculo Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Documentum Word (.docx) quod aperitur in Word, Pages et LibreOffice. Mutabile, cum notis pedum nativis et titulis ut schema. Mermaid diagrammata insita sunt ut imagines altae qualitatis.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 cum texto refluente pro lectoribus electronicis, tabulis et telephonis. Capita navigationem fiunt, notae ad finem ponuntur.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

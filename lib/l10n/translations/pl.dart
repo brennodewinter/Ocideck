@@ -1706,6 +1706,8 @@ const _dutchSourceAddPl = <String, String>{
       'Podziel tabelę albo umieść długie wartości jedna pod drugą zamiast obok siebie.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Plik ODT (OpenDocument Text) otwierany w LibreOffice lub Word. Edytowalny, z natywnymi przypisami i nagłówkami jako konspekt. Otwarta alternatywa dla pliku Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokument Word (.docx), ktory otwiera sie w programach Word, Pages i LibreOffice. Edytowalny, z natywnymi przypisami i naglowkami jako konspekt. Diagramy Mermaid sa osadzane jako wysokiej jakosci obrazy.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Plik ePub 3 z tekstem przepływnym dla czytników e-booków, tabletów i telefonów. Nagłówki stają się nawigacją, notatki są z tyłu.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

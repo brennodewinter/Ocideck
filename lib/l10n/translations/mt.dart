@@ -1712,6 +1712,8 @@ const _dutchSourceAddMt = <String, String>{
       'Aqsam it-tabella, jew qiegħed il-valuri twal wieħed taħt l-ieħor minflok ħdejn xulxin.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) li jinfetaħ f\'LibreOffice jew Word. Editabbli, b\'footnotes nattivi u headers bhala outline. L-alternattiva miftuha ghal fajl Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokument Word (.docx) li jinfetaħ f\'Word, Pages u LibreOffice. Editabbli, b\'footnotes nattivi u headers bhala outline. Id-dijagrammi Mermaid huma inkorporati bhal stampi ta\' kwalita gholja.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 b\'test li jerġa\' jifla għal e-readers, tablets u telefowns. L-intestaturi jsiru navigazzjoni, in-noti jkunu l-aħħar.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

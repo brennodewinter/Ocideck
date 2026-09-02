@@ -1694,6 +1694,8 @@ const _dutchSourceAddId = <String, String>{
       'Pisahkan tabelnya, atau susun nilai panjang ke bawah alih-alih berdampingan.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text) yang dibuka di LibreOffice atau Word. Dapat diedit, dengan catatan kaki asli dan judul sebagai kerangka. Alternatif terbuka untuk file Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Dokumen Word (.docx) yang dibuka di Word, Pages, dan LibreOffice. Dapat diedit, dengan catatan kaki asli dan judul sebagai kerangka. Diagram Mermaid disematkan sebagai gambar berkualitas tinggi.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Sebuah ePub 3 dengan teks yang dapat mengalir ulang untuk e-reader, tablet, dan telepon. Judul menjadi navigasi, catatan ada di belakang.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

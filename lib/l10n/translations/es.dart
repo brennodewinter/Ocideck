@@ -724,6 +724,8 @@ const _dutchSourceAddEs = {
       'Divide la tabla o coloca los valores largos uno debajo de otro en lugar de uno al lado del otro.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Un ODT (OpenDocument Text) que se abre en LibreOffice o Word. Editable, con notas al pie nativas y encabezados como esquema. La alternativa abierta a un archivo de Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Un documento de Word (.docx) que se abre en Word, Pages y LibreOffice. Editable, con notas al pie nativas y encabezados como esquema. Los diagramas de Mermaid se incrustan como imagenes de alta calidad.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Un ePub 3 con texto refluido para e-readers, tabletas y teléfonos. Los encabezados se convierten en navegación, las notas van al final.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

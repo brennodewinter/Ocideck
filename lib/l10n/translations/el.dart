@@ -1719,6 +1719,8 @@ const _dutchSourceAddEl = <String, String>{
       'Χωρίστε τον πίνακα ή τοποθετήστε τις μεγάλες τιμές τη μία κάτω από την άλλη αντί δίπλα-δίπλα.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'Ένα ODT (OpenDocument Text) που ανοίγει στο LibreOffice ή το Word. Επεξεργάσιμο, με εγγενείς υποσημειώσεις και επικεφαλίδες ως περίγραμμα. Η ανοιχτή εναλλακτική για αρχείο Word.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Ένα έγγραφο Word (.docx) που ανοίγει στο Word, το Pages και το LibreOffice. Επεξεργάσιμο, με εγγενείς υποσημειώσεις και επικεφαλίδες ως περίγραμμα. Τα διαγράμματα Mermaid ενσωματώνονται ως εικόνες υψηλής ποιότητας.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'Ένα ePub 3 με ανακυκλούμενο κείμενο για ηλεκτρονικούς αναγνώστες, ταμπλέτες και τηλέφωνα. Οι τίτλοι γίνονται πλοήγηση, οι σημειώσεις στο τέλος.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':

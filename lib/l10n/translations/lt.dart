@@ -1701,6 +1701,8 @@ const _dutchSourceAddLt = <String, String>{
       'Padalykite lentelę arba ilgas reikšmes išdėstykite viena po kita, o ne greta.',
   'Een ODT (OpenDocument Text) die opent in LibreOffice of Word. Bewerkbaar, met native voetnoten en koppen als outline. Het open tegenhanger van een Word-bestand.':
       'ODT (OpenDocument Text), atveriamas LibreOffice arba Word. Redaguojamas, su savosiomis išnašomis ir antraštėmis kaip struktūra. Atvira alternatyva Word failui.',
+  'Een Word-document (.docx) dat opent in Word, Pages en LibreOffice. Bewerkbaar, met native voetnoten en koppen als outline. Mermaid-diagrammen worden als hoogwaardige afbeeldingen ingebed.':
+      'Word dokumentas (.docx), atidaromas su Word, Pages ir LibreOffice. Redaguojamas, su natyviomis isnasomis ir antrastemis kaip struktura. Mermaid diagramos idetos kaip aukstos kokybes vaizdai.',
   'Een ePub 3 met herflowbare tekst voor e-readers, tablets en telefoons. Koppen worden navigatie, noten staan achterin.':
       'ePub 3 su tekstu, pritaikomu e-skaityklėms, planšetėms ir telefonams. Antraštės tampa navigacija, pastabos yra gale.',
   'De paginaopmaak in dit document bevat ongeldige waarden en is genegeerd. De instellingen worden gebruikt.':
