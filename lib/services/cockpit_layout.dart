@@ -434,8 +434,9 @@ class CockpitReadoutLine {
     final em = strong ? cockpitDigitEm : cockpitTextEm;
     var w = text.runes.length * em * size;
     final unit = inlineUnit;
-    if (unit != null)
+    if (unit != null) {
       w += inlineGap + unit.runes.length * cockpitTextEm * inlineUnitSize;
+    }
     return w;
   }
 
