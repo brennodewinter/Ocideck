@@ -3916,6 +3916,12 @@ bytes on the way out:
   is a single document action and cannot leave a marker behind without its
   table — the failure the atomicity above exists to prevent.
 
+The timeline is therefore the one chronology form that works in **every**
+view: reader, preview, Pagina's, PDF, HTML export and the visual editor all
+render it, on every platform, because it is drawn in Dart and needs no
+renderer of its own. A ```mermaid `gantt` is the richer picture; a marked GFM
+table is the one that always arrives.
+
 ### 14.12 Document fields and chrome templates *(added 2026-08-19)*
 
 A document can carry an open set of one-line string fields in its leading YAML
@@ -3970,3 +3976,55 @@ standard three fields use the title/description/author privacy paths and custom
 fields use the document-field path. The projected field map — never the source
 map — then feeds projected Markdown, HTML and LaTeX, which keeps privacy and
 export behaviour equal across all three outputs.
+
+### 14.13 Mermaid diagram — a ```mermaid fence *(added 2026-09-02)*
+
+A diagram is not a new data format either. It is an ordinary fenced code block
+whose language is `mermaid`:
+
+````markdown
+```mermaid
+graph TD;
+  A[Report] --> B{Confirmed?};
+  B -->|yes| C[Investigation];
+  B -->|no| D[Closed];
+```
+````
+
+Any Markdown reader that does not know Mermaid shows the source as a code
+block, which is the whole point of choosing a fence: the file stays readable
+and no OciDeck-specific syntax is introduced. Removing nothing is the inverse
+operation — there is no marker to strip.
+
+OciDeck draws the diagram in the reader, the preview, the Pagina's view, the
+PDF export, the HTML export and the visual editor. The source travels
+byte-faithfully through all of them; the rich-text layer never rewrites it.
+
+**Rendering rules.** The renderer is Mermaid itself, initialised from one
+shared configuration (`kMermaidInitConfig`), and the resulting SVG is passed
+through the same allow-list sanitiser as every other drawing:
+
+- `htmlLabels` is **off**. A line break inside a label is `<br/>`; HTML in a
+  label is not rendered.
+- `securityLevel` is `strict`, and a per-diagram `%%{init: …}%%` directive is
+  honoured **except** for the six locked keys `secure`, `securityLevel`,
+  `startOnLoad`, `maxTextSize`, `suppressErrorRendering` and `htmlLabels`. A
+  diagram can therefore set its own theme or theme variables, but cannot loosen
+  the security posture of the document that carries it.
+- The SVG allow-list keeps containers, references and shapes. `<style>` is
+  inlined before sanitising; `<marker>`, `<filter>` and `<foreignObject>` are
+  removed, which is why arrowheads arrive as baked polygons rather than marker
+  references.
+- In the reader the diagram is drawn at its **natural size** and its block
+  scrolls horizontally when it is wider than the column, so a wide flowchart
+  can be reached in full without a second vertical scroller fighting the page.
+  In the **Pagina's view and the PDF** the diagram is instead **scaled down** to
+  the text column, because a sheet has a fixed width and a scrollbar would clip
+  it. Keeping a diagram within the text column (642 px at A4 with 20 mm
+  margins) therefore avoids any scaling at all.
+- Where no renderer is available the fence falls back to the ordinary code
+  block, so the source is visible rather than an empty frame. On screen that is
+  **Windows and Linux**, where the hidden WebView the renderer needs has no
+  platform implementation; macOS, Android, iOS and the web build (which draws
+  through the bundled `mermaid.min.js` directly) all render. For the **PDF** the
+  set is different again — see KNOWN_LIMITATIONS.md.
