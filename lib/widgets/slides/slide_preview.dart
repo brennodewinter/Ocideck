@@ -195,14 +195,6 @@ Widget _md(
   );
 }
 
-EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile);
-  return EdgeInsets.only(top: top, bottom: bottom);
-}
-
-double _logoAwareBottomPadding(double defaultPad, double safeBottom) =>
-    safeBottom <= 0 ? defaultPad : math.max(defaultPad, safeBottom);
-
 /// De dikte van een voortgangsbalk in een preview, afgeleid van de breedte
 /// waarop de dia wordt opgemaakt.
 ///
