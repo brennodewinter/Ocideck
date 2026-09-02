@@ -10,6 +10,7 @@
 | --- | --- |
 | `Ctrl/Cmd + K` | Open the command palette (searchable list of actions) |
 | `Ctrl/Cmd + O` | Open a presentation |
+| `Ctrl/Cmd + W` | Close the active tab (asks first when it has unsaved work) |
 | `Ctrl/Cmd + S` | Save the active tab — a presentation or a document (*corrected 2026-08-08: it saves a document too, in every mode, not only a deck*) |
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
@@ -26,6 +27,15 @@
 
 *Added 2026-07-22: `Ctrl/Cmd + F` was bound app-wide but only listed under
 Markdown mode, so in visual mode it looked as though there was no find key.*
+
+*Added 2026-09-02: `Ctrl/Cmd + W` was bound app-wide since 0.5.0 but only
+listed for the presenter, so closing a tab by keyboard was undocumented.*
+
+The shortcuts in this table act on the editor behind whatever is in front of
+it, so they do nothing while a dialog, the documentation reader or the
+presentation screen is on top — press `Esc` first. Before 2026-09-02 they fired
+straight through, and pressing `Ctrl/Cmd + O` twice in quick succession left two
+"Open presentation" dialogs stacked on each other (#1927).
 
 In the **add-slide dialog**, `Tab` moves between the type cards, `Enter` picks
 the focused one, and `Esc` cancels. The card that has focus also drives the
