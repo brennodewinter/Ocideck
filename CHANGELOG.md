@@ -550,6 +550,18 @@ in Dutch, and it keeps growing on `main` between releases.
   geen tweede renderpad en op een machine zonder WebView valt hij op precies
   dezelfde manier terug op het codeblok. Bewerken gaat via de Bron-modus, net
   als bij de andere atomaire blokken.
+- fix(shell): twee keer Ctrl/Cmd+O opende twee openen-dialogen (#1927). Wie de
+  sneltoets twee keer snel achter elkaar indrukte, kreeg twee gestapelde
+  "Presentatie openen"-dialogen en moest de onderste apart wegklikken.
+  `showDialog` duwt zijn route synchroon, maar de focusboom verwerkt die wissel
+  pas in de volgende frame — de tweede aanslag komt dus nog bij de app-brede
+  binding aan. Op macOS telt daar een tweede ingang bij op: de native menubalk
+  draagt dezelfde Cmd-sneltoets. Alle app-brede sneltoetsen lopen nu langs
+  dezelfde poort: staat er iets boven de shell (een dialoog, de
+  documentatielezer, het presentatiescherm), dan doet de sneltoets niets. Dat
+  geldt dus ook voor opslaan, sluiten en zoeken, en niet alleen voor openen —
+  de navigatiegeschiedenis weet meteen wat er bovenop ligt, de focusboom een
+  frame later.
 
 - fix(mermaid): een diagram met een eigen `%%{init}`-directive bleef licht in
   donker thema, en een breed diagram werd in Pagina's afgesneden (#1921, #1922).
