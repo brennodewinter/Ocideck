@@ -2387,6 +2387,30 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Eén gedachtestreepje in een grafiektitel kostte de hele PDF-export
+  (#1942).** De SVG-lezer van `package:pdf` kiest voor elke `<text>` in een
+  ingesloten tekening hardgecodeerd een van de veertien standaardsneden, zonder
+  terugvallijst — en die sneden reiken tot Latin-1. Alles daarboven laat
+  `stringMetrics` werpen, en wel vanuit `SvgImage.paint`: dat is tijdens
+  `document.save()`, ruim voorbij de `try` die de tekening zelf omsluit. Niet
+  dat ene diagram viel dus weg, maar het hele document. Het gevoelige is dat
+  het níet om exotische schriften gaat: een gedachtestreepje, een
+  krul-apostrof, een beletselteken of een pijl staat geen van alle in Latin-1,
+  en dat zijn precies de tekens die een tekstverwerker vanzelf maakt. Grafieken
+  zetten de titel, reeksnamen en aslabels van de auteur letterlijk in `<text>`,
+  dus was de weg ernaartoe kort. Een tekening met zulke tekens gaat nu op het
+  gebundelde Unicode-font dat de export toch al als terugval meedraagt; de rest
+  blijft op de standaardsneden staan, want díe dragen een echte vette en
+  cursieve snede. Is er geen Unicode-font, dan valt de tekening terug op haar
+  bron in plaats van de export af te breken — dezelfde afweging die er voor een
+  onleesbare SVG al stond, alleen kon de `try` hem hier niet maken.
+- **`unhandled element <defs/>` in elke debug-run (#1942).** Onze eigen
+  opschoning: `sanitizeMermaidSvg` haalt `<marker>` en `<style>` uit de `defs`
+  van mermaid weg omdat flutter_svg ze toch niet leest, en de serializer
+  schrijft wat overblijft als `<defs/>`. Juist die zelfsluitende vorm handelt
+  `vector_graphics_compiler` niet af. Er ging niets verloren — de `defs` was al
+  leeg — maar een melding die niets betekent leert je de meldingen negeren die
+  wél iets betekenen. Een leeggelopen `defs` gaat er nu mee uit.
 - **Een webexport meldde "geëxporteerd" ook als er niets vertrok (#1902).** In
   de browser is elke uitgang een download, en de app las het uitblijven van een
   uitzondering als succes: `FilePicker.saveFile` geeft op web altijd `null`
