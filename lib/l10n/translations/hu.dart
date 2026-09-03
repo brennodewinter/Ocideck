@@ -66,9 +66,9 @@ const _stringsHu = {
   'losslessHelp': 'Veszteségmentes, teljes felbontású képek.',
   'exportAsPdf': 'PDF (kép diánként)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML-fájl (offline működik)',
   'exportAsLatex': 'LaTeX forrás',
+  'exportAsOdp': 'OpenDocument-bemutató',
 
   'renderingSlides': 'Diák renderelése…',
   'buildingHtml': 'HTML összeállítása…',
@@ -1635,6 +1635,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML bármely böngészőben megnyílik internet nélkül, és kódblokkokat, matematikát és mermaid-diagramokat jelenít meg. LaTeX forráskód, amelyet pdflatex vagy xelatex segítségével fordítasz.',
   'Nu niet': 'Most nem',
   'Herstelkopie weggooien': 'Helyreállítási másolat elvetése',
   'Openen en verder werken': 'Megnyitás és folytatás',

@@ -66,7 +66,7 @@ const _stringsLt = {
   'losslessHelp': 'Be nuostolių, visos raiškos paveikslėliai.',
   'exportAsPdf': 'PDF (paveikslėlis ant skaidrės)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument pristatymas',
   'exportAsHtml': 'HTML failas (veikia neprisijungus)',
   'exportAsLatex': 'LaTeX šaltinis',
 
@@ -1640,6 +1640,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML atsidaro bet kurioje naršyklėje be interneto ir renderuoja kodo blokus, matematiką ir mermaid diagramas. LaTeX yra pirminis kodas, kurį kompiliuojate su pdflatex arba xelatex.',
   'Nu niet': 'Ne dabar',
   'Herstelkopie weggooien': 'Šalinti atkūrimo kopiją',
   'Openen en verder werken': 'Atverti ir tęsti',

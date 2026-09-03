@@ -66,7 +66,7 @@ const _stringsNl = {
   'losslessHelp': 'Verliesvrije afbeeldingen op volledige resolutie.',
   'exportAsPdf': 'PDF (plaatje per dia)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument-presentatie',
   'exportAsHtml': 'HTML-bestand (werkt offline)',
   'exportAsLatex': 'LaTeX-bron',
   'renderingSlides': 'Slides renderen…',

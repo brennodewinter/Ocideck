@@ -66,8 +66,8 @@ const _stringsId = {
   'losslessHelp': 'Gambar resolusi penuh tanpa kehilangan kualitas.',
   'exportAsPdf': 'PDF (gambar per slide)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'Berkas HTML (bekerja offline)',
+  'exportAsOdp': 'Presentasi OpenDocument',
   'exportAsLatex': 'Sumber LaTeX',
 
   'renderingSlides': 'Merender slide…',
@@ -1633,6 +1633,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. LaTeX adalah kode sumber yang Anda kompilasi dengan pdflatex atau xelatex.',
   'Nu niet': 'Sekarang tidak',
   'Herstelkopie weggooien': 'Buang salinan pemulihan',
   'Openen en verder werken': 'Buka dan lanjutkan',

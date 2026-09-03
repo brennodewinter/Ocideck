@@ -66,7 +66,7 @@ const _stringsEl = {
   'losslessHelp': 'Εικόνες πλήρους ανάλυσης χωρίς απώλειες.',
   'exportAsPdf': 'PDF (εικόνα ανά διαφάνεια)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'Παρουσίαση OpenDocument',
   'exportAsHtml': 'Αρχείο HTML (λειτουργεί εκτός σύνδεσης)',
   'exportAsLatex': 'Πηγαίος κώδικας LaTeX',
 
@@ -1658,6 +1658,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML ανοίγει σε οποιονδήποτε περιηγητή χωρίς ίντερνετ και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα mermaid. LaTeX είναι πηγαίος κώδικας που μεταγλωττίζετε με pdflatex ή xelatex.',
   'Nu niet': 'Όχι τώρα',
   'Herstelkopie weggooien': 'Απόρριψη αντιγράφου ανάκτησης',
   'Openen en verder werken': 'Άνοιγμα και συνέχεια',

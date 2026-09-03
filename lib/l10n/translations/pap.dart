@@ -66,8 +66,8 @@ const _stringsPap = {
   'losslessHelp': 'Imágennan sin pèrdida na resolushon kompletu.',
   'exportAsPdf': 'PDF (imágen pa kada dia)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'Archivo HTML (ta traha sin internet)',
+  'exportAsOdp': 'Presentashon OpenDocument',
   'exportAsLatex': 'Fuente LaTeX',
 
   'renderingSlides': 'Render slides…',
@@ -667,6 +667,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML ta habri den kualkier browser sin internet i ta render bloki di kódigo, wiskunde i mermaid-diagram. LaTeX ta kódigo di fuente ku bo ta kompilá ku pdflatex of xelatex.',
   'Nu niet': 'Awor no',
   'Herstelkopie weggooien': 'Gitu e kopia di restòr',
   'Openen en verder werken': 'Habri i sigui',

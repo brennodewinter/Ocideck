@@ -66,7 +66,7 @@ const _stringsIt = {
   'losslessHelp': 'Immagini senza perdita a piena risoluzione.',
   'exportAsPdf': 'PDF (immagine per diapositiva)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'Presentazione OpenDocument',
   'exportAsHtml': 'File HTML (funziona offline)',
   'exportAsLatex': 'Sorgente LaTeX',
 
@@ -665,6 +665,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML si apre in qualsiasi browser senza internet e renderizza blocchi di codice, matematica e diagrammi mermaid. LaTeX è codice sorgente che compili con pdflatex o xelatex.',
   'Nu niet': 'Non ora',
   'Herstelkopie weggooien': 'Scarta la copia di ripristino',
   'Openen en verder werken': 'Apri e continua',

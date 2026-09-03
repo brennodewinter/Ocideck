@@ -66,7 +66,7 @@ const _stringsHr = {
   'losslessHelp': 'Slike bez gubitaka u punoj razlučivosti.',
   'exportAsPdf': 'PDF (slika po slajdu)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument prezentacija',
   'exportAsHtml': 'HTML datoteka (radi izvanmrežno)',
   'exportAsLatex': 'LaTeX izvor',
 
@@ -1637,6 +1637,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX je izvorni kod koji kompilirate s pdflatex ili xelatex.',
   'Nu niet': 'Ne sada',
   'Herstelkopie weggooien': 'Odbaci kopiju za oporavak',
   'Openen en verder werken': 'Otvori i nastavi',

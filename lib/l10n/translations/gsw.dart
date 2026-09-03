@@ -66,7 +66,7 @@ const _stringsGsw = {
   'losslessHelp': 'Verlustfreii Bilder uf voller Uflösig.',
   'exportAsPdf': 'PDF (Bild pro Folie)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument-Präsentation',
   'exportAsHtml': 'HTML-Datei (funktioniert offline)',
   'exportAsLatex': 'LaTeX-Quelle',
 
@@ -1636,6 +1636,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML öffnet sich in jedem Browser ohni Internet und rendert Codeblöck, Mathe und Mermaid-Diagramm. LaTeX isch Quellcode, wo du mit pdflatex oder xelatex kompilierisch.',
   'Nu niet': 'Jetz nöd',
   'Herstelkopie weggooien': 'Widerherstelligskopii wegwerfe',
   'Openen en verder werken': 'Öffne und witer schaffe',

@@ -66,8 +66,8 @@ const _stringsFy = {
   'losslessHelp': 'Ferliesfrije ôfbyldings op folsleine resolúsje.',
   'exportAsPdf': 'PDF (byldje per dia)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML-bestân (wurkt offline)',
+  'exportAsOdp': 'OpenDocument-presintaasje',
   'exportAsLatex': 'LaTeX-boarne',
 
   'renderingSlides': 'Slides renderje…',
@@ -668,6 +668,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML iepenet yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en mermaid-diagrammen. LaTeX is boarnekoade dy\'t jo kompilearje mei pdflatex of xelatex.',
   'Nu niet': 'No net',
   'Herstelkopie weggooien': 'Werstelkopy fuortsmite',
   'Openen en verder werken': 'Iepenje en fierder gean',

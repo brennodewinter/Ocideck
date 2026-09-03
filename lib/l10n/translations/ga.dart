@@ -68,7 +68,7 @@ const _stringsGa = {
   'losslessHelp': 'Íomhánna gan chailliúint ar lánthaifeach.',
   'exportAsPdf': 'PDF (íomhá in aghaidh an tsleamhnáin)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'Láithreoíocht OpenDocument',
   'exportAsHtml': 'Comhad HTML (oibríonn as líne)',
   'exportAsLatex': 'Foinse LaTeX',
 
@@ -1663,6 +1663,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus déanann sé blocanna cóid, matamaitic agus léaráidí mermaid a rindreáil. LaTeX is cód foinse é a dhéanann tú tiomsú le pdflatex nó xelatex.',
   'Nu niet': 'Ní anois',
   'Herstelkopie weggooien': 'Cuir an cóip aisghabhála i leataobh',
   'Openen en verder werken': 'Oscail agus lean ar aghaidh',

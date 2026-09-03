@@ -64,9 +64,9 @@ const _stringsTlh = {
   'losslessHelp': 'chIlbe\'lu\'bogh naghmey QaQ naQ.',
   'exportAsPdf': 'PDF (mIl \'agh DI\'SIc)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML mI\' (offline Dajatlh)',
   'exportAsLatex': 'LaTeX ngerIq',
+  'exportAsOdp': 'OpenDocument nagh beQmey',
 
   'renderingSlides': '\'echletHommey chenmoHlu\'…',
   'buildingHtml': 'HTML chenmoHlu\'…',
@@ -1610,6 +1610,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML browserDaq Internet pagh naQ vIlo\'chugh nagh Qavmey, mI\' nugh mermaid nagh beQmey je nargh. LaTeX mI\' \'oH, pdflatex pagh xelatex lo\' Dalo\'taHvIS.',
   'Nu niet': 'DaHbe\'',
   'Herstelkopie weggooien': 'Qaw\'Ha\'qaS ngeH',
   'Openen en verder werken': 'poSmoH \'ej ratlh',

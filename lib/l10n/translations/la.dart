@@ -68,8 +68,8 @@ const _stringsLa = {
   'losslessHelp': 'Imagines integrae plena resolutione sine damno.',
   'exportAsPdf': 'PDF (imago per lamina)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'Fasciculus HTML (sine rete operatur)',
+  'exportAsOdp': 'Praesentatio OpenDocument',
   'exportAsLatex': 'Fons LaTeX',
 
   'renderingSlides': 'Diapositivae exhibentur…',
@@ -1648,6 +1648,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML in quolibet navigatro sine interrete aperit et codicis blocos, mathematicam diagrammataque mermaid rendit. LaTeX est codex fontis quem cum pdflatex vel xelatex compilas.',
   'Nu niet': 'Nunc non',
   'Herstelkopie weggooien': 'Recuperationis exemplar abiice',
   'Openen en verder werken': 'Aperi et perge',
