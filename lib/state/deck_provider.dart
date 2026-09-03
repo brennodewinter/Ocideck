@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
@@ -187,6 +189,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// Cmd/Ctrl+S key bindings all call [save]) writing the same file at once.
   bool _saving = false;
 
+  /// #1952: een tweede Cmd/Ctrl+S tijdens een lopende opslag werd stilletjes
+  /// genegeerd. Nu onthouden we hem en slaan opnieuw op nadat de eerste klaar
+  /// is — maar alleen als het tabblad nog vuil is (de eerste opslag kan al
+  /// schoon hebben gemaakt, of de gebruiker kan ondertussen hebben getypt).
+  bool _saveQueued = false;
+
   /// Snelle, opeenvolgende bewerkingen (zoals typen) worden samengevoegd tot
   /// één ongedaan-maken-stap zolang ze dezelfde [_lastCoalesceKey] delen en
   /// binnen dit tijdvenster vallen.
@@ -328,9 +336,13 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   Future<bool> save({String? initialDirectory}) async {
-    // Reject a second concurrent save rather than interleaving two writes to
-    // the same file. A dropped trigger is harmless — the deck is still dirty.
-    if (_saving) return false;
+    // Wijs een tweede gelijktijdige opslag af — twee schrijfbeurten door
+    // elkaar is erger — maar onthoud hem: ná de eerste opslag opnieuw
+    // proberen als het tabblad nog vuil is (#1952).
+    if (_saving) {
+      _saveQueued = true;
+      return false;
+    }
     _saving = true;
     try {
       // Web kent geen schrijfbaar bestandssysteem: opslaan is daar de
@@ -343,6 +355,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
       }
     } finally {
       _saving = false;
+      if (_saveQueued) {
+        _saveQueued = false;
+        // ponytail: unawaited — de aanroeper van de eerste save heeft zijn
+        // resultaat al; de herhaling is een gunst, geen belofte aan hem.
+        if (state.isDirty) unawaited(save(initialDirectory: initialDirectory));
+      }
     }
   }
 

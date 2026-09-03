@@ -502,7 +502,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1380, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1396, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
@@ -520,6 +520,9 @@ const Map<String, int> classSizeBaseline = {
   // +4 (#1950): _reportChartWarnings retourneert of er grafiekdata-waarschuwingen
   // waren, zodat _saveToPath/saveAs het tabblad vuil kunnen houden — de cijfers
   // staan dan inline in de .md als vangnet. Twee var-declaraties + één return.
+  // +16 (#1952): _saveQueued-wachtrij in save() — een tweede Cmd/Ctrl+S tijdens
+  // een lopende opslag wordt onthouden en opnieuw uitgevoerd als het tabblad nog
+  // vuil is. Eén veld + vijf regels in save() + import dart:async.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
