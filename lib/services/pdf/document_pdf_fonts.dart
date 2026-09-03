@@ -118,6 +118,36 @@ class DocumentPdfFonts {
         ),
       );
 
+  /// Hoe de tekst in een *ingesloten tekening* gezet moet worden.
+  ///
+  /// Waarom een tekening een eigen antwoord krijgt: `pw.SvgImage` gaat niet
+  /// door het thema hierboven maar door de SVG-lezer van `package:pdf`, en die
+  /// kiest voor elke `<text>` hardgecodeerd een van de veertien
+  /// standaardsneden (`src/svg/painter.dart`) — zonder terugvallijst. Die
+  /// sneden reiken tot Latin-1, en `stringMetrics` *werpt* op alles daarboven,
+  /// vanuit `SvgImage.paint`. Dat is tijdens `document.save()`, dus buiten elke
+  /// `try` rond de tekening zelf: één gedachtestreepje in een grafiektitel
+  /// kostte zo het hele document (#1942).
+  ///
+  /// Er wordt naar de héle SVG gekeken en niet alleen naar de tekstknopen. Dat
+  /// is met opzet ruimer dan nodig: een scan die één plek mist waar tekst kan
+  /// staan (een `<text>` in een `<symbol>` die via `<use>` wordt aangeroepen,
+  /// bijvoorbeeld) zet de afbreker terug. De prijs is dat een tekening die zo'n
+  /// teken alleen buiten haar tekst draagt onnodig op het terugvalfont komt —
+  /// een tekening die dan nog steeds klopt.
+  SvgTypesetting svgTypesetting(String svg) {
+    if (!svg.runes.any((rune) => rune > 0xFF)) {
+      return const SvgTypesetting.standard();
+    }
+    final font = unicode;
+    return font == null
+        ? const SvgTypesetting.unsettable()
+        : SvgTypesetting.withFont(font);
+  }
+
+  /// Het gebundelde Unicode-rijke font, of `null` als de aanroeper er geen gaf.
+  pw.Font? get unicode => fallback.isEmpty ? null : fallback.first;
+
   /// De tekens in [text] die geen enkele beschikbare snede kan zetten.
   ///
   /// Waarom dit bestaat: een teken dat nergens in staat verdwijnt in een PDF
@@ -141,4 +171,29 @@ class DocumentPdfFonts {
     if (rune < 0x100) return true;
     return fallbackCoverage.containsKey(rune);
   }
+}
+
+/// Waarmee de tekst in één ingesloten tekening gezet wordt.
+///
+/// Drie uitkomsten, en ze vragen alle drie iets anders van de aanroeper: laat
+/// de lezer zelf kiezen, geef hem deze snede mee, of teken de tekening niet.
+/// Zie [DocumentPdfFonts.svgTypesetting] voor waarom de derde bestaat.
+class SvgTypesetting {
+  /// De standaardsneden volstaan; de lezer kiest zelf.
+  const SvgTypesetting.standard() : font = null, settable = true;
+
+  /// Deze snede moet het doen, want de standaardsneden kunnen het niet.
+  const SvgTypesetting.withFont(pw.Font this.font) : settable = true;
+
+  /// Geen enkele beschikbare snede kan deze tekening zetten.
+  const SvgTypesetting.unsettable() : font = null, settable = false;
+
+  /// De snede die aan `customFontLookup` meegegeven moet worden, of `null` als
+  /// de lezer zijn eigen keuze mag houden.
+  final pw.Font? font;
+
+  /// Of de tekening überhaupt getekend kan worden. Is dit `false`, dan hoort de
+  /// aanroeper terug te vallen op de bron: `pw.SvgImage` zou pas bij `save()`
+  /// werpen, en dan is het hele document weg.
+  final bool settable;
 }

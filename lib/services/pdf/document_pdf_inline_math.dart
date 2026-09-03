@@ -4,6 +4,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../../utils/log.dart';
 import 'document_pdf_blocks.dart';
+import 'document_pdf_fonts.dart';
 
 /// Zet een formule als SVG in de tekstregel en houdt de TeX als terugval.
 pw.InlineSpan buildDocumentPdfInlineMath(
@@ -11,11 +12,18 @@ pw.InlineSpan buildDocumentPdfInlineMath(
   required double fontSize,
   required double maxWidth,
   required Map<String, PdfRenderedGraphic> graphics,
+  required DocumentPdfFonts fonts,
   required pw.InlineSpan Function(String source) fallback,
 }) {
   final graphic = graphics[span.text.trim()];
   final svg = graphic?.svg;
-  if (svg != null) {
+  // MathJax zet zijn glyphs als `<path>`, maar een `\text{…}` komt er als
+  // echte `<text>` uit — en dan geldt de Latin-1-grens van de SVG-lezer ook
+  // hier. Zie [DocumentPdfFonts.svgFont]; zonder passende snede blijft de TeX
+  // in de zin staan, wat sowieso de terugval van dit bestand is.
+  final typesetting = svg == null ? null : fonts.svgTypesetting(svg);
+  final svgFont = typesetting?.font;
+  if (svg != null && typesetting!.settable) {
     try {
       var width = graphic?.naturalWidth ?? fontSize * 4;
       var height = graphic?.naturalHeight ?? fontSize * 1.2;
@@ -37,6 +45,7 @@ pw.InlineSpan buildDocumentPdfInlineMath(
           width: width,
           height: height,
           fit: pw.BoxFit.contain,
+          customFontLookup: svgFont == null ? null : (_, _, _) => svgFont,
         ),
       );
     } catch (error) {
