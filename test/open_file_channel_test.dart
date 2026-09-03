@@ -16,7 +16,11 @@ void main() {
   Object? launchFiles;
   final opened = <List<String>>[];
   final pickCalls = <Map<Object?, Object?>>[];
-  String? pickResult;
+
+  /// Wat de hostkant teruggeeft. Sinds #1928 altijd een LIJST — ook voor één
+  /// bestand — zodat er maar één vorm over het kanaal reist; `null` staat voor
+  /// een host die niets stuurde.
+  List<String>? pickResults;
   final saveCalls = <Map<Object?, Object?>>[];
   String? saveResult;
 
@@ -24,7 +28,7 @@ void main() {
     launchFiles = null;
     opened.clear();
     pickCalls.clear();
-    pickResult = null;
+    pickResults = null;
     saveCalls.clear();
     saveResult = null;
     // De inbound-handler is globaal per kanaalnaam; zonder wissen luistert de
@@ -36,7 +40,7 @@ void main() {
       if (call.method == 'getLaunchFiles') return launchFiles;
       if (call.method == 'pickFile') {
         pickCalls.add(Map<Object?, Object?>.from(call.arguments as Map));
-        return pickResult;
+        return pickResults;
       }
       if (call.method == 'saveFile') {
         saveCalls.add(Map<Object?, Object?>.from(call.arguments as Map));
@@ -111,7 +115,7 @@ void main() {
   });
 
   test('pickUnfilteredMacFile stuurt titel en startmap mee', () async {
-    pickResult = '/tmp/gekozen.md';
+    pickResults = ['/tmp/gekozen.md'];
     final path = await pickUnfilteredMacFile(
       dialogTitle: 'Presentatie openen',
       initialDirectory: '/tmp',
@@ -121,6 +125,8 @@ void main() {
       expect(pickCalls, hasLength(1));
       expect(pickCalls.single['dialogTitle'], 'Presentatie openen');
       expect(pickCalls.single['initialDirectory'], '/tmp');
+      // De enkelvoudige wikkel vraagt geen meervoudige selectie aan (#1928).
+      expect(pickCalls.single['allowsMultiple'], isFalse);
     } else {
       expect(path, isNull);
       expect(pickCalls, isEmpty);
@@ -128,9 +134,38 @@ void main() {
   });
 
   test('pickUnfilteredMacFile bij annuleren: null', () async {
-    pickResult = null;
+    pickResults = const [];
     final path = await pickUnfilteredMacFile(dialogTitle: 'x');
     expect(path, isNull);
+  });
+
+  test('pickUnfilteredMacFile neemt het eerste van meerdere', () async {
+    // De hostkant kán er meerdere teruggeven; de enkelvoudige wikkel mag daar
+    // niet op stuklopen (#1928).
+    pickResults = ['/tmp/een.md', '/tmp/twee.md'];
+    final path = await pickUnfilteredMacFile(dialogTitle: 'x');
+    expect(path, Platform.isMacOS ? '/tmp/een.md' : isNull);
+  });
+
+  test('pickUnfilteredMacFiles vraagt meervoudig aan en levert alles', () async {
+    pickResults = ['/tmp/een.md', '/tmp/twee.md'];
+    final paths = await pickUnfilteredMacFiles(
+      dialogTitle: 'Presentaties openen',
+      allowsMultiple: true,
+    );
+    if (Platform.isMacOS) {
+      expect(paths, ['/tmp/een.md', '/tmp/twee.md']);
+      expect(pickCalls.single['allowsMultiple'], isTrue);
+    } else {
+      // Buiten macOS bestaat dit paneel niet: leeg, en het kanaal blijft stil.
+      expect(paths, isEmpty);
+      expect(pickCalls, isEmpty);
+    }
+  });
+
+  test('pickUnfilteredMacFiles bij annuleren: leeg', () async {
+    pickResults = const [];
+    expect(await pickUnfilteredMacFiles(dialogTitle: 'x'), isEmpty);
   });
 
   test('pickUnfilteredMacFile bij MissingPluginException gooit door', () async {
