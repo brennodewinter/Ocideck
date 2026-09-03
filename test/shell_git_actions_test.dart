@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show LogicalKeyboardKey, rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
@@ -274,6 +274,44 @@ void main() {
       expect(repo.files.keys, voor.keys);
       expect(find.textContaining('Opgeslagen in git:'), findsNothing);
     });
+
+    // #1948: annuleren van de git-opslaan-dialoog moet `false` teruggeven
+    // aan de afsluitlus, anders wist die de herstelkopie en sluit hij de
+    // app terwijl het werk nergens staat.
+    testWidgets(
+      'Opslaan via Cmd+S met git-herkomst annuleert zonder succesmelding (#1948)',
+      (tester) async {
+        await pumpShell(tester, origin: gitOrigin());
+        final container = ProviderScope.containerOf(
+          tester.element(find.byType(AppShell)),
+        );
+        container.read(tabsProvider).current!.deckNotifier.markDirty();
+        await tester.pumpAndSettle();
+
+        // Cmd+S roept saveTabWithDestination aan, dat via _saveToOrigin bij
+        // _saveToGit uitkomt — dezelfde keten als de afsluitlus gebruikt.
+        const cmdS = SingleActivator(LogicalKeyboardKey.keyS, meta: true);
+        final shellShortcuts = tester
+            .widgetList<CallbackShortcuts>(find.byType(CallbackShortcuts))
+            .firstWhere((s) => s.bindings.containsKey(cmdS));
+        shellShortcuts.bindings[cmdS]!();
+        await tester.pumpAndSettle();
+
+        // Het git-opslaan-dialoog verschijnt — annuleer het.
+        expect(find.text('Deknaam'), findsOneWidget);
+        await tester.tap(
+          find.descendant(
+            of: find.byType(AlertDialog),
+            matching: find.widgetWithText(TextButton, 'Annuleren'),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Geen succesmelding: het werk is niet opgeslagen, en de afsluitlus
+        // mag dit niet als "bewaard" tellen.
+        expect(find.textContaining('Opgeslagen in git:'), findsNothing);
+      },
+    );
 
     testWidgets('ook met video en tekeningen komt er geen tussenvraag', (
       tester,

@@ -215,8 +215,10 @@ Future<bool> _saveToOrigin(
     case S3Origin():
       return _saveToS3(context, ref, silent: true);
     case GitOrigin():
-      await _saveToGit(context, ref);
-      return true;
+      // #1948: git-opslaan kan annuleren of falen — geef dat door aan de
+      // afsluitlus, anders wist die de herstelkopie en sluit hij de app
+      // terwijl het werk nergens staat.
+      return _saveToGit(context, ref);
   }
   // StorageOrigin is geen sealed type (de implementaties wonen bij hun eigen
   // instellingen), dus een onbekende soort valt terug op "niet afgehandeld" en
