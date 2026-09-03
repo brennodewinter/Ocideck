@@ -126,9 +126,30 @@ void _keepOnlyAllowed(XmlElement element, _Dropped dropped) {
       continue;
     }
     _keepOnlyAllowed(child, dropped);
+    if (_isEmptyDefs(child)) child.remove();
   }
   _keepOnlyAllowedAttributes(element, dropped);
 }
+
+/// Een `<defs>` waar na het opschonen niets meer in zit.
+///
+/// Mermaid vult zijn `defs` met `<marker>` en `<style>`, en allebei gaan ze
+/// hierboven weg omdat de renderer ze toch niet leest. Wat overblijft schrijft
+/// de serializer als `<defs/>` — en juist die zelfsluitende vorm handelt
+/// `vector_graphics_compiler` níet af: `defs` gaat daar alleen door
+/// `addGroup` heen als er een sluittag bij hoort, anders valt het door naar de
+/// vormen en meldt de parser `unhandled element <defs/>`. Er ging niets
+/// verloren (de `defs` was al leeg), maar de melding staat in elke debug-run.
+/// Weghalen scheelt tevens de bytes.
+///
+/// Niet geteld als "weggegooid": er zat niets meer in om te verliezen, en de
+/// telling hierboven is er om echte verliezen op te laten vallen.
+bool _isEmptyDefs(XmlElement element) =>
+    element.name.local == 'defs' &&
+    element.childElements.isEmpty &&
+    element.children.every(
+      (node) => node is XmlText && node.value.trim().isEmpty,
+    );
 
 void _keepOnlyAllowedAttributes(XmlElement element, _Dropped dropped) {
   for (final attr in element.attributes.toList()) {
