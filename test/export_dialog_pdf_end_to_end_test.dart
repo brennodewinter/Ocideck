@@ -188,7 +188,7 @@ void main() {
   ) async {
     await pumpDialog(tester, pentestDeck());
 
-    final button = find.widgetWithText(OutlinedButton, 'Exporteer als PDF');
+    final button = find.widgetWithText(OutlinedButton, 'PDF (plaatje per dia)');
     expect(button, findsOneWidget);
     await tester.ensureVisible(button);
     await tester.pump();
@@ -228,7 +228,7 @@ void main() {
     await tester.tap(compact.first);
     await tester.pump(const Duration(milliseconds: 100));
 
-    final button = find.widgetWithText(OutlinedButton, 'Exporteer als PDF');
+    final button = find.widgetWithText(OutlinedButton, 'PDF (plaatje per dia)');
     await tester.ensureVisible(button);
     await tester.pump();
     await tester.tap(button);

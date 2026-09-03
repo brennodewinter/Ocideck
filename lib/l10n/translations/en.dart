@@ -64,11 +64,11 @@ const _stringsEn = {
   'compressedHelp':
       'Lower-resolution JPEG, meant for handouts, with a much smaller file (saved separately as “-compact”).',
   'losslessHelp': 'Lossless full-resolution images.',
-  'exportAsPdf': 'Export as PDF',
-  'exportAsPptx': 'Export as PPTX',
-  'exportAsOdp': 'Export as ODP',
-  'exportAsHtml': 'Export as HTML (Marp, offline)',
-  'exportAsLatex': 'Export as LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (image per slide)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML file (works offline)',
+  'exportAsLatex': 'LaTeX source',
 
   'renderingSlides': 'Rendering slides…',
   'buildingHtml': 'Building HTML…',
@@ -1225,8 +1225,8 @@ const _dutchSourceAddEn = {
       'The destination disk has insufficient space. Free up space and try again.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'The seal of this deck no longer matches its content — it was edited after sealing.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML opens in any browser without internet and renders code blocks, math, and mermaid diagrams. LaTeX (Beamer) compiles with pdflatex or xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'An HTML file opens in any browser without internet and renders code blocks, math, and mermaid diagrams. LaTeX source compiles with pdflatex or xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'A LaTeX article document. Math passes through directly; images are referenced by relative path. Compile with pdflatex or xelatex.',
   'Afbeelding geplakt': 'Image pasted',
@@ -4216,8 +4216,6 @@ const _dutchSourceAddEn = {
   'Systeem (monospace)': 'System (monospace)',
   'Platte tekst': 'Plain text',
   'Titel (optioneel)': 'Title (optional)',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML opens in any browser without internet and renders code blocks, math and Mermaid diagrams.',
   'Laatste slide': 'Final slide',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown for final slide',

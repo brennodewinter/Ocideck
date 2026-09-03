@@ -35,6 +35,10 @@ class _DeckStatusBar extends StatelessWidget {
   final VoidCallback? onExport;
   final String exportTooltip;
 
+  /// Spring naar de eerste slide met een openstaande bevinding. Doorgegeven
+  /// aan [_ExportReadinessChip] voor het klikdoel bij kwaliteit/privacy-issues.
+  final VoidCallback? onJumpToFindings;
+
   /// De samengevatte exportstatus plus de onderliggende kwaliteitsmeldingen
   /// (voor de tooltip-tekst van de statuschip).
   final ExportReadiness readiness;
@@ -55,6 +59,7 @@ class _DeckStatusBar extends StatelessWidget {
     required this.readiness,
     required this.quality,
     this.remoteOrigin,
+    this.onJumpToFindings,
   });
 
   @override
@@ -151,6 +156,7 @@ class _DeckStatusBar extends StatelessWidget {
               deckState: deckState,
               onSave: onSave,
               onExport: onExport,
+              onJumpToFindings: onJumpToFindings,
             ),
             const SizedBox(width: 6),
             _StatusAction(
@@ -214,7 +220,9 @@ bool statusShowsPrivacyMark(ExportReadinessStatus status) =>
 /// De exportstatus in één oogopslag: "Klaar voor export", "Nog opslaan
 /// nodig", "N kwaliteitswaarschuwing(en)" of "TLP/kwaliteit blokkeert
 /// export". Klikken doet het meest logische vervolg: opslaan wanneer dat de
-/// blokkade is, anders de exportdialoog openen (die toont de details).
+/// blokkade is, springen naar de eerste slide met een openstaande bevinding
+/// wanneer er kwaliteit- of privacy-issues zijn, anders de exportdialoog
+/// openen (#1963).
 class _ExportReadinessChip extends StatelessWidget {
   final ExportReadiness readiness;
   final SlideQualityResult quality;
@@ -222,12 +230,18 @@ class _ExportReadinessChip extends StatelessWidget {
   final Future<void> Function() onSave;
   final VoidCallback? onExport;
 
+  /// Spring naar de eerste slide met een openstaande kwaliteits- of
+  /// privacybevinding. Alleen gezet bij de statussen die daarom vragen;
+  /// anders is [onExport] het klikdoel.
+  final VoidCallback? onJumpToFindings;
+
   const _ExportReadinessChip({
     required this.readiness,
     required this.quality,
     required this.deckState,
     required this.onSave,
     required this.onExport,
+    this.onJumpToFindings,
   });
 
   @override
@@ -307,9 +321,19 @@ class _ExportReadinessChip extends StatelessWidget {
       ),
     };
 
-    final onTap = readiness.status == ExportReadinessStatus.needsSave
-        ? () => onSave()
-        : onExport;
+    // Klikdoel: opslaan als dat de blokkade is, spring naar de eerste slide
+    // met een openstaande bevinding bij kwaliteit/privacy-issues, anders
+    // export. De exportdialoog toont de details, maar de werkplek — waar je
+    // de keuze per bevinding maakt — zit bij de slide, niet in de export
+    // (#1963).
+    final onTap = switch (readiness.status) {
+      ExportReadinessStatus.needsSave => () => onSave(),
+      ExportReadinessStatus.qualityWarnings ||
+      ExportReadinessStatus.privacyWarnings ||
+      ExportReadinessStatus.blockedByPrivacy ||
+      ExportReadinessStatus.blockedByQuality => onJumpToFindings ?? onExport,
+      _ => onExport,
+    };
 
     return Tooltip(
       message: tooltip,

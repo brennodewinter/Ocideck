@@ -63,11 +63,11 @@ const _stringsEt = {
   'compressedHelp':
       'Madalama eraldusvõimega JPEG, mõeldud jaotusmaterjaliks, palju väiksem fail (salvestatakse eraldi kui „-compact“).',
   'losslessHelp': 'Kadudeta täiseraldusvõimega pildid.',
-  'exportAsPdf': 'Ekspordi PDF-ina',
-  'exportAsPptx': 'Ekspordi PPTX-ina',
-  'exportAsOdp': 'Ekspordi ODP-na',
-  'exportAsHtml': 'Ekspordi HTML-ina (Marp, võrguühenduseta)',
-  'exportAsLatex': 'Ekspordi LaTeXina (Beamer)',
+  'exportAsPdf': 'PDF (pilt slaidi kohta)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-fail (töötab võrguta)',
+  'exportAsLatex': 'LaTeX-allikas',
 
   'renderingSlides': 'Slaidide renderdamine…',
   'buildingHtml': 'HTML-i koostamine…',
@@ -1178,8 +1178,6 @@ const _dutchSourceEt = {
   'Subkop': 'Alapealkiri',
   'Systeem (monospace)': 'Süsteem (monospace)',
   'Platte tekst': 'Lihttekst',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML avaneb igas brauseris ilma internetita ning renderdab koodiplokid, matemaatika ja Mermaid-diagrammid.',
   'Laatste slide': 'Viimane slaid',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown viimase slaidi jaoks',
@@ -2022,8 +2020,8 @@ const _dutchSourceAddEt = <String, String>{
       'Sihtkettal pole piisavalt ruumi. Vabastage ruumi ja proovige uuesti.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Selle deki pitser ei vasta enam sisule — seda muudeti pärast pitseerimist.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML avaneb igas brauseris ilma internetita ja renderdab koodiplokid, matemaatika ja mermaid diagrammid. LaTeX (Beamer) kompileeritakse pdflatex või xelatex-iga.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML-fail avaneb igas brauseris ilma internetita ja renderdab koodiplokid, matemaatika ja mermaid diagrammid. LaTeX-allikas kompileeritakse pdflatex või xelatex abil.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article dokument. Matemaatika läheb otse läbi; pildid viidatakse suhtelise teega. Kompileeri pdflatex või xelatex-iga.',
   'Afbeelding geplakt': 'Pilt kleebitud',

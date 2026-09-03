@@ -64,11 +64,11 @@ const _stringsHr = {
   'compressedHelp':
       'JPEG niže razlučivosti, namijenjen za materijale, s puno manjom datotekom (spremljeno zasebno kao „-compact”).',
   'losslessHelp': 'Slike bez gubitaka u punoj razlučivosti.',
-  'exportAsPdf': 'Izvezi kao PDF',
-  'exportAsPptx': 'Izvezi kao PPTX',
-  'exportAsOdp': 'Izvezi kao ODP',
-  'exportAsHtml': 'Izvezi kao HTML (Marp, izvanmrežno)',
-  'exportAsLatex': 'Izvezi kao LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (slika po slajdu)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML datoteka (radi izvanmrežno)',
+  'exportAsLatex': 'LaTeX izvor',
 
   'renderingSlides': 'Iscrtavanje slajdova…',
   'buildingHtml': 'Izrada HTML-a…',
@@ -1186,8 +1186,6 @@ const _dutchSourceHr = {
   'Subkop': 'Podnaslov',
   'Systeem (monospace)': 'Sustav (monospace)',
   'Platte tekst': 'Obični tekst',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove kôda, matematiku i Mermaid dijagrame.',
   'Laatste slide': 'Završni slajd',
   'Logo px': 'Logotip px',
   'Markdown voor laatste slide': 'Markdown za završni slajd',
@@ -2033,8 +2031,8 @@ const _dutchSourceAddHr = <String, String>{
       'Odredišni disk nema dovoljno prostora. Oslobodite prostor i pokušajte ponovno.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Pečat ovog decka više ne odgovara sadržaju — uređivan je nakon pečaćenja.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX (Beamer) kompilira se s pdflatex ili xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML datoteka otvara se u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX izvor se kompajlira s pdflatex ili xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article dokument. Matematika prolazi izravno; slike se referenciraju relativnom putanjom. Kompilirajte s pdflatex ili xelatex.',
   'Afbeelding geplakt': 'Slika zalijepljena',

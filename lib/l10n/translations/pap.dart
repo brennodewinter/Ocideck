@@ -64,11 +64,11 @@ const _stringsPap = {
   'compressedHelp':
       'JPEG ku resolushon mas abou, pa handout, ku un file hopi mas chikí (wardá apart komo “-compact”).',
   'losslessHelp': 'Imágennan sin pèrdida na resolushon kompletu.',
-  'exportAsPdf': 'Eksportá komo PDF',
-  'exportAsPptx': 'Eksportá komo PPTX',
-  'exportAsOdp': 'Exporta como ODP',
-  'exportAsHtml': 'Eksportá komo HTML (Marp, offline)',
-  'exportAsLatex': 'Eksportá komo LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (imágen pa kada dia)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Archivo HTML (ta traha sin internet)',
+  'exportAsLatex': 'Fuente LaTeX',
 
   'renderingSlides': 'Render slides…',
   'buildingHtml': 'Trahando HTML…',
@@ -1063,8 +1063,8 @@ const _dutchSourceAddPap = {
       'Disco di destinashon no tin espasio sufisiente. Libera espasio i purba atrobe.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Sello di e deck aki no ta korespondí mas ku su kontenido — el a kambia despues di sello.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML ta habri den kua browser sin internet i ta renderia blokinan di kódigo, matemátika i diagramnan mermaid. LaTeX (Beamer) ta kompilá ku pdflatex of xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Un archivo HTML ta habri den kualkier browser sin internet i ta renderisa blokinan di kódigo, matemátika i diagramnan mermaid. E fuente LaTeX bo ta kompilá ku pdflatex of xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Un dokumento di LaTeX article. Matematika ta pasa direkto; imágen ta referensiá pa kamino relativo. Kompilá ku pdflatex of xelatex.',
   'Afbeelding geplakt': 'Imagen pegá',
@@ -4116,8 +4116,6 @@ const _dutchSourceAddPap = {
   'Geen slides gevonden voor': 'No a haña lámina pa',
   'Geen slides met': 'No tin lámina ku',
   'Geselecteerd': 'Seleshoná',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML ta habri den tur browser sin internet i ta render bloknan di kódigo, matemátika i diagramnan Mermaid.',
   'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
       'E archivo ta wòrdu kitá permanentemente for di disko. E akshon aki no por wòrdu deshasí.',
   'Ingezoomd': 'Zoom paden',

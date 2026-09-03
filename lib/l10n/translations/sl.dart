@@ -64,11 +64,11 @@ const _stringsSl = {
   'compressedHelp':
       'JPEG z nižjo ločljivostjo, namenjen izročkom, z veliko manjšo datoteko (shranjeno ločeno kot »-compact«).',
   'losslessHelp': 'Slike brez izgub v polni ločljivosti.',
-  'exportAsPdf': 'Izvozi kot PDF',
-  'exportAsPptx': 'Izvozi kot PPTX',
-  'exportAsOdp': 'Izvozi kot ODP',
-  'exportAsHtml': 'Izvozi kot HTML (Marp, brez povezave)',
-  'exportAsLatex': 'Izvozi kot LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (slika na diapozitiv)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Datoteka HTML (deluje brez povezave)',
+  'exportAsLatex': 'Izvorna koda LaTeX',
 
   'renderingSlides': 'Upodabljanje prosojnic …',
   'buildingHtml': 'Sestavljanje HTML …',
@@ -1183,8 +1183,6 @@ const _dutchSourceSl = {
   'Subkop': 'Podnaslov',
   'Systeem (monospace)': 'Sistemska (monospace)',
   'Platte tekst': 'Golo besedilo',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML se odpre v vsakem brskalniku brez interneta ter izriše kodne bloke, matematiko in diagrame Mermaid.',
   'Laatste slide': 'Zadnja prosojnica',
   'Logo px': 'Logotip px',
   'Markdown voor laatste slide': 'Markdown za zadnjo prosojnico',
@@ -2028,8 +2026,8 @@ const _dutchSourceAddSl = <String, String>{
       'Ciljni disk nima dovolj prostora. Sprostite prostor in poskusite znova.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Pečat tega decka ne ustreza več vsebini — urejan je bil po pečatenju.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML se odpre v katerem koli brskalniku brez interneta in prikaže bloke kode, matematiko in mermaid diagrame. LaTeX (Beamer) se prevede s pdflatex ali xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Datoteka HTML se odpre v katerem koli brskalniku brez interneta in prikaže bloke kode, matematiko in diagrame mermaid. Izvorna koda LaTeX se prevaja s pdflatex ali xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Dokument LaTeX article. Matematika gre neposredno skozi; slike se sklicujejo z relativno potjo. Prevedite s pdflatex ali xelatex.',
   'Afbeelding geplakt': 'Slika prilepljena',

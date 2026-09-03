@@ -65,11 +65,11 @@ const _stringsPt = {
   'compressedHelp':
       'JPEG de menor resolução, destinado a folhetos, com um ficheiro muito menor (guardado separadamente como “-compact”).',
   'losslessHelp': 'Imagens sem perdas em resolução total.',
-  'exportAsPdf': 'Exportar como PDF',
-  'exportAsPptx': 'Exportar como PPTX',
-  'exportAsOdp': 'Exportar como ODP',
-  'exportAsHtml': 'Exportar como HTML (Marp, offline)',
-  'exportAsLatex': 'Exportar como LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (imagem por slide)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Arquivo HTML (funciona offline)',
+  'exportAsLatex': 'Fonte LaTeX',
 
   'renderingSlides': 'A processar slides…',
   'buildingHtml': 'A compor HTML…',
@@ -1202,8 +1202,6 @@ const _dutchSourcePt = {
   'Subkop': 'Subcabeçalho',
   'Systeem (monospace)': 'Sistema (monoespaçado)',
   'Platte tekst': 'Texto simples',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'O HTML abre em qualquer navegador sem internet e apresenta blocos de código, matemática e diagramas Mermaid.',
   'Laatste slide': 'Diapositivo final',
   'Logo px': 'Logótipo px',
   'Markdown voor laatste slide': 'Markdown do diapositivo final',
@@ -2059,8 +2057,8 @@ const _dutchSourceAddPt = <String, String>{
       'O disco de destino não tem espaço suficiente. Liberte espaço e tente novamente.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'O selo deste deck não corresponde mais ao conteúdo — foi editado após a selagem.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML abre em qualquer navegador sem internet e renderiza blocos de código, matemática e diagramas mermaid. LaTeX (Beamer) compila-se com pdflatex ou xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Um arquivo HTML abre em qualquer navegador sem internet e renderiza blocos de código, matemática e diagramas mermaid. A fonte LaTeX é compilada com pdflatex ou xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Um documento LaTeX article. A matemática passa diretamente; as imagens são referenciadas por caminho relativo. Compile com pdflatex ou xelatex.',
   'Afbeelding geplakt': 'Imagem colada',

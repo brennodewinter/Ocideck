@@ -66,11 +66,11 @@ const _stringsPl = {
   'compressedHelp':
       'Plik JPEG o niższej rozdzielczości, przeznaczony do materiałów drukowanych, o znacznie mniejszym rozmiarze (zapisywany osobno jako „-compact”).',
   'losslessHelp': 'Bezstratne obrazy w pełnej rozdzielczości.',
-  'exportAsPdf': 'Eksportuj jako PDF',
-  'exportAsPptx': 'Eksportuj jako PPTX',
-  'exportAsOdp': 'Eksportuj jako ODP',
-  'exportAsHtml': 'Eksportuj jako HTML (Marp, offline)',
-  'exportAsLatex': 'Eksportuj jako LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (obraz na slajd)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Plik HTML (działa offline)',
+  'exportAsLatex': 'Źródło LaTeX',
 
   'renderingSlides': 'Renderowanie slajdów…',
   'buildingHtml': 'Tworzenie HTML…',
@@ -1190,8 +1190,6 @@ const _dutchSourcePl = {
   'Subkop': 'Podtytuł',
   'Systeem (monospace)': 'Systemowa (monospace)',
   'Platte tekst': 'Zwykły tekst',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML otwiera się w każdej przeglądarce bez internetu i renderuje bloki kodu, matematykę oraz diagramy Mermaid.',
   'Laatste slide': 'Slajd końcowy',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown dla slajdu końcowego',
@@ -2041,8 +2039,8 @@ const _dutchSourceAddPl = <String, String>{
       'Dysk docelowy ma niewystarczającą ilość miejsca. Zwolnij miejsce i spróbuj ponownie.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Pieczęć tej talii nie zgadza się już z treścią — była edytowana po zapieczętowaniu.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML otwiera się w każdej przeglądarce bez internetu i renderuje bloki kodu, matematykę i diagramy mermaid. LaTeX (Beamer) kompilujesz pdflatex lub xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Plik HTML otwiera się w każdej przeglądarce bez internetu i renderuje bloki kodu, matematykę i diagramy mermaid. Źródło LaTeX kompilujesz za pomocą pdflatex lub xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Dokument LaTeX article. Matematyka przechodzi bezpośrednio; obrazy są referencjonowane ścieżką względną. Skompiluj za pomocą pdflatex lub xelatex.',
   'Afbeelding geplakt': 'Obraz wklejony',

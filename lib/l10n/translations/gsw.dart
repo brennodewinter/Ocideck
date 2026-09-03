@@ -64,11 +64,11 @@ const _stringsGsw = {
   'compressedHelp':
       'JPEG uf tüüferi Uflösig, gmeint als Handout, mit eme viil chlinere Datei (separat gspeicheret als „-compact“).',
   'losslessHelp': 'Verlustfreii Bilder uf voller Uflösig.',
-  'exportAsPdf': 'Als PDF exportiere',
-  'exportAsPptx': 'Als PPTX exportiere',
-  'exportAsOdp': 'Als ODP exportiere',
-  'exportAsHtml': 'Als HTML exportiere (Marp, offline)',
-  'exportAsLatex': 'Als LaTeX (Beamer) exportiere',
+  'exportAsPdf': 'PDF (Bild pro Folie)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-Datei (funktioniert offline)',
+  'exportAsLatex': 'LaTeX-Quelle',
 
   'renderingSlides': 'Slides rendere…',
   'buildingHtml': 'HTML zämestelle…',
@@ -1185,8 +1185,6 @@ const _dutchSourceGsw = {
   'Subkop': 'Undertitel',
   'Systeem (monospace)': 'Syschtem (monospace)',
   'Platte tekst': 'Reine Täxt',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML gaht i jedem Browser uf ohni Internet und rändered Codeblöck, Mathi und Mermaid-Diagramm.',
   'Laatste slide': 'Letschti Folie',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown für di letschti Folie',
@@ -2032,8 +2030,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Ziil-Festplatte het zwenig Platz. Mach Platz und probier nomal.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'S Siegel vo dem Deck passt nüme zum Inhalt — es isch bearbeitet wore nachem Versigele.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML öffnet sich in jedem Browser ohni Internet und renderet Codeblöck, Mathematik und Mermaid-Diagramm. LaTeX (Beamer) kompilierisch mit pdflatex oder xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'E HTML-Datei öffnet sich in jedem Browser ohni Internet und rendert Codeblöck, Mathematik und Mermaid-Diagramm. D LaTeX-Quelle kompilierisch mit pdflatex oder xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Es LaTeX-Article-Dokumänt. Mathematik gaht diräkt dure; Bilder wärded mit relativem Pfad referenziert. Mit pdflatex oder xelatex kompiliere.',
   'Afbeelding geplakt': 'Bild iifüegt',

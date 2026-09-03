@@ -65,11 +65,11 @@ const _stringsMt = {
   'compressedHelp':
       'JPEG b\'reżoluzzjoni aktar baxxa, maħsub għal handouts, b\'fajl ħafna iżgħar (issejvjat separatament bħala “-compact”).',
   'losslessHelp': 'Immaġni bla telf b\'reżoluzzjoni sħiħa.',
-  'exportAsPdf': 'Esporta bħala PDF',
-  'exportAsPptx': 'Esporta bħala PPTX',
-  'exportAsOdp': 'Esporta bħala ODP',
-  'exportAsHtml': 'Esporta bħala HTML (Marp, offline)',
-  'exportAsLatex': 'Esporta bħala LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (stampa għal kull dija)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Fajl HTML (jaħdem offline)',
+  'exportAsLatex': 'Sors LaTeX',
 
   'renderingSlides': 'Qed jiġu rrenderjati l-islides…',
   'buildingHtml': 'Qed jinbena l-HTML…',
@@ -1193,8 +1193,6 @@ const _dutchSourceMt = {
   'Subkop': 'Sottotitlu',
   'Systeem (monospace)': 'Sistema (monospace)',
   'Platte tekst': 'Test sempliċi',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML jinfetaħ f\'kull browser mingħajr internet u jirrendi blokki ta\' kodiċi, matematika u djagrammi Mermaid.',
   'Laatste slide': 'Islajd finali',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown għall-islajd finali',
@@ -2048,8 +2046,8 @@ const _dutchSourceAddMt = <String, String>{
       'Id-disk ta\' destinazzjoni m\'għandux spazju biżżejjed. Ħallas spazju u erġa\' pprova.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Is-sigill ta\' dan id-deck m\'għadux jikkorrispondi mal-kontenut — ġie editat wara s-sigillar.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML jiftah f\'kwalunkwe browser bla internet u jrenderja blokki ta\' kodiċi, matematika u dijagrammi mermaid. LaTeX (Beamer) tiġi kkompilata b\'pdflatex jew xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Fajl HTML jifta\' f\'kwalunkwe browser bla internet u jirrendi blokki ta\' kodiċi, matematika u dijagrammi mermaid. Is-sors LaTeX jiġi kkompilat b\'pdflatex jew xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Dokument LaTeX article. Il-matematika tgħaddi direttament; l-istampi jirreferenzjaw b\'peress relattiv. Kompila b\'pdflatex jew xelatex.',
   'Afbeelding geplakt': 'Stampa waħħla',

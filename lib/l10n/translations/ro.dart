@@ -65,11 +65,11 @@ const _stringsRo = {
   'compressedHelp':
       'JPEG la rezoluție mai mică, destinat materialelor tipărite, cu un fișier mult mai mic (salvat separat ca „-compact”).',
   'losslessHelp': 'Imagini fără pierderi, la rezoluție completă.',
-  'exportAsPdf': 'Exportă ca PDF',
-  'exportAsPptx': 'Exportă ca PPTX',
-  'exportAsOdp': 'Exportă ca ODP',
-  'exportAsHtml': 'Exportă ca HTML (Marp, offline)',
-  'exportAsLatex': 'Exportă ca LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (imagine per diapozitiv)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Fișier HTML (funcționează offline)',
+  'exportAsLatex': 'Sursă LaTeX',
 
   'renderingSlides': 'Se randează diapozitivele…',
   'buildingHtml': 'Se construiește HTML…',
@@ -1192,8 +1192,6 @@ const _dutchSourceRo = {
   'Subkop': 'Subtitlu',
   'Systeem (monospace)': 'Sistem (monospațiat)',
   'Platte tekst': 'Text simplu',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML se deschide în orice browser fără internet și randează blocuri de cod, formule matematice și diagrame Mermaid.',
   'Laatste slide': 'Slide final',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown pentru slide-ul final',
@@ -2046,8 +2044,8 @@ const _dutchSourceAddRo = <String, String>{
       'Discul de destinație nu are suficient spațiu. Eliberați spațiu și încercați din nou.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Sigiliul acestui deck nu mai corespunde conținutului — a fost editat după sigilare.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. LaTeX (Beamer) se compilează cu pdflatex sau xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Un fișier HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. Sursa LaTeX se compilează cu pdflatex sau xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Un document LaTeX article. Matematica trece direct; imaginile sunt referențiate cu cale relativă. Compilați cu pdflatex sau xelatex.',
   'Afbeelding geplakt': 'Imagine lipită',

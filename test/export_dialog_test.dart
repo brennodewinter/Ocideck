@@ -89,7 +89,7 @@ void main() {
       find.widgetWithText(SegmentedButton<bool>, 'Gecomprimeerd'),
       findsOneWidget,
     );
-    expect(find.text('Exporteer als PDF'), findsOneWidget);
+    expect(find.text('PDF (plaatje per dia)'), findsOneWidget);
   });
 
   group('het sleutelbestand wordt bij naam genoemd', () {
@@ -253,7 +253,7 @@ void main() {
       find.text('Export geblokkeerd vanwege ernstige kwaliteitsproblemen.'),
       findsOneWidget,
     );
-    expect(find.text('Exporteer als PDF'), findsNothing);
+    expect(find.text('PDF (plaatje per dia)'), findsNothing);
   });
 
   testWidgets('de groene balk belooft niets als de privacycontrole uit staat', (

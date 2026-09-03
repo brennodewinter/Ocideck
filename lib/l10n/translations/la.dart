@@ -66,11 +66,11 @@ const _stringsLa = {
   'compressedHelp':
       'JPEG resolutione minore, ad tradendum destinatum, cum plica multo minore (seorsum servatum ut “-compact”).',
   'losslessHelp': 'Imagines integrae plena resolutione sine damno.',
-  'exportAsPdf': 'Exportare ut PDF',
-  'exportAsPptx': 'Exportare ut PPTX',
-  'exportAsOdp': 'Exporta ut ODP',
-  'exportAsHtml': 'Exportare ut HTML (Marp, sine rete)',
-  'exportAsLatex': 'Exporta ut LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (imago per lamina)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Fasciculus HTML (sine rete operatur)',
+  'exportAsLatex': 'Fons LaTeX',
 
   'renderingSlides': 'Diapositivae exhibentur…',
   'buildingHtml': 'HTML componitur…',
@@ -1190,8 +1190,6 @@ const _dutchSourceLa = {
   'Subkop': 'Subcaput',
   'Systeem (monospace)': 'Systema (monospatium)',
   'Platte tekst': 'Textus simplex',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML in quovis navigatro sine interrete aperitur et blocos codicis, mathematicam et diagrammata Mermaid reddit.',
   'Laatste slide': 'Tabella ultima',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown pro tabella ultima',
@@ -2046,8 +2044,8 @@ const _dutchSourceAddLa = <String, String>{
       'Discus destinationis spatium non sufficit. Fac spatium et rursus conare.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Sigillum huius deck non iam correspondet contentui — post signandum editum est.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML in quovis navigatro sine internet aperit et codicis fragmenta, mathematicam, mermaid diagrammata reddit. LaTeX (Beamer) cum pdflatex aut xelatex compilatur.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Fasciculus HTML in quovis navigatro sine interrete aperit et codicis fragmenta, mathematicam, schemata mermaid rendit. Fons LaTeX cum pdflatex vel xelatex compilatur.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Documentum LaTeX article. Mathematica directe transit; imagines via relativa referuntur. Compila cum pdflatex aut xelatex.',
   'Afbeelding geplakt': 'Imago infixa',

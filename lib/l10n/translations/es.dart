@@ -65,11 +65,11 @@ const _stringsEs = {
   'compressedHelp':
       'JPEG de menor resolución, pensado para documentos, con un archivo mucho más pequeño (guardado aparte como “-compact”).',
   'losslessHelp': 'Imágenes sin pérdida a resolución completa.',
-  'exportAsPdf': 'Exportar como PDF',
-  'exportAsPptx': 'Exportar como PPTX',
-  'exportAsOdp': 'Exportar como ODP',
-  'exportAsHtml': 'Exportar como HTML (Marp, sin conexión)',
-  'exportAsLatex': 'Exportar como LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (imagen por diapositiva)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Archivo HTML (funciona sin conexión)',
+  'exportAsLatex': 'Fuente LaTeX',
 
   'renderingSlides': 'Renderizando diapositivas…',
   'buildingHtml': 'Creando HTML…',
@@ -1062,8 +1062,8 @@ const _dutchSourceAddEs = {
       'El disco de destino no tiene espacio suficiente. Libere espacio e inténtelo de nuevo.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'El sello de este deck ya no coincide con su contenido — fue editado después del sellado.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML se abre en cualquier navegador sin internet y renderiza bloques de código, matemáticas y diagramas mermaid. LaTeX (Beamer) se compila con pdflatex o xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Un archivo HTML se abre en cualquier navegador sin internet y renderiza bloques de código, matemáticas y diagramas mermaid. La fuente LaTeX se compila con pdflatex o xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Un documento LaTeX article. Las matemáticas pasan directamente; las imágenes se referencian con ruta relativa. Compila con pdflatex o xelatex.',
   'Afbeelding geplakt': 'Imagen pegada',
@@ -4139,8 +4139,6 @@ const _dutchSourceAddEs = {
   'Geen slides gevonden voor': 'No se encontraron diapositivas para',
   'Geen slides met': 'No hay diapositivas con',
   'Geselecteerd': 'Seleccionado',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'El HTML se abre en cualquier navegador sin internet y renderiza bloques de código, matemáticas y diagramas Mermaid.',
   'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
       'El archivo se eliminará permanentemente del disco. Esta acción no se puede deshacer.',
   'Ingezoomd': 'Ampliado',

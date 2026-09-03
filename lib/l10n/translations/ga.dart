@@ -66,11 +66,11 @@ const _stringsGa = {
   'compressedHelp':
       'JPEG ar thaifeach níos ísle, ceaptha mar bhileog láimhe, le comhad i bhfad níos lú (sábháilte ar leithligh mar “-compact”).',
   'losslessHelp': 'Íomhánna gan chailliúint ar lánthaifeach.',
-  'exportAsPdf': 'Easpórtáil mar PDF',
-  'exportAsPptx': 'Easpórtáil mar PPTX',
-  'exportAsOdp': 'Easpórtáil mar ODP',
-  'exportAsHtml': 'Easpórtáil mar HTML (Marp, as líne)',
-  'exportAsLatex': 'Easpórtáil mar LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (íomhá in aghaidh an tsleamhnáin)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Comhad HTML (oibríonn as líne)',
+  'exportAsLatex': 'Foinse LaTeX',
 
   'renderingSlides': 'Sleamhnáin á rindreáil…',
   'buildingHtml': 'HTML á thógáil…',
@@ -1204,8 +1204,6 @@ const _dutchSourceGa = {
   'Subkop': 'Focheannteideal',
   'Systeem (monospace)': 'Córas (aonleithead)',
   'Platte tekst': 'Gnáth-théacs',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus rindreálann sé bloic chóid, matamaitic agus léaráidí Mermaid.',
   'Laatste slide': 'Sleamhnán deiridh',
   'Logo px': 'Lógó px',
   'Markdown voor laatste slide': 'Markdown don sleamhnán deiridh',
@@ -2062,8 +2060,8 @@ const _dutchSourceAddGa = <String, String>{
       'Níl go leor spás ar an diosca sprice. Déan spás a shaoradh agus bain triail as arís.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Níl séal an deck seo ag teacht lena ábhar a thuilleadh — cuireadh in eagar é tar éis an séala.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus renderálann sé blocanna cód, matamaitic agus léaráidí mermaid. Tiomsaítear LaTeX (Beamer) le pdflatex nó xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Osclaíonn comhad HTML in aon bhrabhsálaí gan idirlín agus rindreálann sé bloic cóid, matamaitic agus léaráidí mermaid. Déantar foinse LaTeX a thiomsú le pdflatex nó xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Cáipéis LaTeX article. Téann matamaitic díreach tríd; tagraítear íomhánna le cosán coibhneasta. Tiomsaigh le pdflatex nó xelatex.',
   'Afbeelding geplakt': 'Íomhá ghreamaithe',

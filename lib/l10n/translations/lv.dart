@@ -64,11 +64,11 @@ const _stringsLv = {
   'compressedHelp':
       'Zemākas izšķirtspējas JPEG, paredzēts izdales materiāliem, ar daudz mazāku failu (saglabāts atsevišķi kā “-compact”).',
   'losslessHelp': 'Bezzudumu pilnas izšķirtspējas attēli.',
-  'exportAsPdf': 'Eksportēt kā PDF',
-  'exportAsPptx': 'Eksportēt kā PPTX',
-  'exportAsOdp': 'Eksportēt kā ODP',
-  'exportAsHtml': 'Eksportēt kā HTML (Marp, bezsaistē)',
-  'exportAsLatex': 'Eksportēt kā LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (attēls uz slaida)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML fails (strādā bezsaistē)',
+  'exportAsLatex': 'LaTeX avots',
 
   'renderingSlides': 'Renderē slaidus…',
   'buildingHtml': 'Veido HTML…',
@@ -1182,8 +1182,6 @@ const _dutchSourceLv = {
   'Subkop': 'Apakšvirsraksts',
   'Systeem (monospace)': 'Sistēmas (monospace)',
   'Platte tekst': 'Vienkāršs teksts',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un Mermaid diagrammas.',
   'Laatste slide': 'Pēdējais slaids',
   'Logo px': 'Logotips px',
   'Markdown voor laatste slide': 'Markdown pēdējam slaidam',
@@ -2026,8 +2024,8 @@ const _dutchSourceAddLv = <String, String>{
       'Mērķa diskam nav pietiekami daudz vietas. Atbrīvojiet vietu un mēģiniet vēlreiz.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Šī deka zīmogs vairs neatbilst saturam — tas tika rediģēts pēc zīmogošanas.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un mermaid diagrammas. LaTeX (Beamer) kompilē ar pdflatex vai xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML fails atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un mermaid diagrammas. LaTeX avotu kompilē ar pdflatex vai xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article dokuments. Matemātika iet tieši cauri; attēli tiek atsaukti ar relatīvo ceļu. Kompilējiet ar pdflatex vai xelatex.',
   'Afbeelding geplakt': 'Attēls ielīmēts',

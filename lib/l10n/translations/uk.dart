@@ -65,11 +65,11 @@ const _stringsUk = {
   'compressedHelp':
       'JPEG з нижчою роздільною здатністю, призначений для роздаткових матеріалів, зі значно меншим файлом (зберігається окремо як «-compact»).',
   'losslessHelp': 'Зображення без втрат у повній роздільній здатності.',
-  'exportAsPdf': 'Експортувати як PDF',
-  'exportAsPptx': 'Експортувати як PPTX',
-  'exportAsOdp': 'Експортувати як ODP',
-  'exportAsHtml': 'Експортувати як HTML (Marp, офлайн)',
-  'exportAsLatex': 'Експортувати як LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (зображення на слайд)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-файл (працює офлайн)',
+  'exportAsLatex': 'Вихідний код LaTeX',
 
   'renderingSlides': 'Рендеринг слайдів…',
   'buildingHtml': 'Складання HTML…',
@@ -1195,8 +1195,6 @@ const _dutchSourceUk = {
   'Subkop': 'Підзаголовок',
   'Systeem (monospace)': 'Системний (моноширинний)',
   'Platte tekst': 'Звичайний текст',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML відкривається в будь-якому браузері без інтернету та відображає блоки коду, математику й діаграми Mermaid.',
   'Laatste slide': 'Останній слайд',
   'Logo px': 'Лого px',
   'Markdown voor laatste slide': 'Markdown для останнього слайда',
@@ -2043,8 +2041,8 @@ const _dutchSourceAddUk = <String, String>{
       'На цільовому диску недостатньо місця. Звільніть місце і спробуйте знову.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Печатка цієї презентації більше не відповідає вмісту — її було змінено після запечатування.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML відкривається в будь-якому браузері без інтернету та рендерить блоки коду, математику та діаграми mermaid. LaTeX (Beamer) компілюється pdflatex або xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML-файл відкривається в будь-якому браузері без інтернету та рендерить блоки коду, математику та діаграми mermaid. Вихідний код LaTeX компілюється pdflatex або xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Документ LaTeX article. Математика проходить безпосередньо; зображення посилаються відносним шляхом. Компілюйте pdflatex або xelatex.',
   'Afbeelding geplakt': 'Зображення вставлено',

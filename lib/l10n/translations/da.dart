@@ -64,11 +64,11 @@ const _stringsDa = {
   'compressedHelp':
       'JPEG i lavere opløsning, beregnet til uddelingskopier, med en langt mindre fil (gemt separat som “-compact”).',
   'losslessHelp': 'Tabsfrie billeder i fuld opløsning.',
-  'exportAsPdf': 'Eksportér som PDF',
-  'exportAsPptx': 'Eksportér som PPTX',
-  'exportAsOdp': 'Eksporter som ODP',
-  'exportAsHtml': 'Eksportér som HTML (Marp, offline)',
-  'exportAsLatex': 'Eksportér som LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (billede pr. dias)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-fil (virker offline)',
+  'exportAsLatex': 'LaTeX-kilde',
 
   'renderingSlides': 'Gengiver slides…',
   'buildingHtml': 'Bygger HTML…',
@@ -1181,8 +1181,6 @@ const _dutchSourceDa = {
   'Subkop': 'Underoverskrift',
   'Systeem (monospace)': 'System (monospace)',
   'Platte tekst': 'Almindelig tekst',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML åbner i enhver browser uden internet og gengiver kodeblokke, matematik og Mermaid-diagrammer.',
   'Laatste slide': 'Sidste slide',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown til sidste slide',
@@ -2029,8 +2027,8 @@ const _dutchSourceAddDa = <String, String>{
       'Destinationsdisken har ikke tilstrækkelig plads. Frigør plads og prøv igen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Dette deks segl matcher ikke længere indholdet — det er redigeret efter forseglingen.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML åbner i enhver browser uden internet og renderer kodeblokke, matematik og mermaid-diagrammer. LaTeX (Beamer) kompileres med pdflatex eller xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'En HTML-fil åbnes i enhver browser uden internet og renderer kodeblokke, matematik og mermaid-diagrammer. LaTeX-kilden kompileres med pdflatex eller xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Et LaTeX article-dokument. Matematik går direkte igennem; billeder refereres med relativ sti. Kompilér med pdflatex eller xelatex.',
   'Afbeelding geplakt': 'Billede indsat',

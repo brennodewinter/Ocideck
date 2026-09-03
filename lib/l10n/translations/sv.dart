@@ -64,11 +64,11 @@ const _stringsSv = {
   'compressedHelp':
       'JPEG med lägre upplösning, avsedd för utdelningsblad, med en mycket mindre fil (sparas separat som ”-compact”).',
   'losslessHelp': 'Förlustfria bilder i full upplösning.',
-  'exportAsPdf': 'Exportera som PDF',
-  'exportAsPptx': 'Exportera som PPTX',
-  'exportAsOdp': 'Exportera som ODP',
-  'exportAsHtml': 'Exportera som HTML (Marp, offline)',
-  'exportAsLatex': 'Exportera som LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (bild per bild)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-fil (fungerar offline)',
+  'exportAsLatex': 'LaTeX-källa',
 
   'renderingSlides': 'Renderar bilder…',
   'buildingHtml': 'Bygger HTML…',
@@ -1181,8 +1181,6 @@ const _dutchSourceSv = {
   'Subkop': 'Underrubrik',
   'Systeem (monospace)': 'System (monospace)',
   'Platte tekst': 'Vanlig text',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML öppnas i vilken webbläsare som helst utan internet och renderar kodblock, matematik och Mermaid-diagram.',
   'Laatste slide': 'Sista bilden',
   'Logo px': 'Logotyp px',
   'Markdown voor laatste slide': 'Markdown för sista bilden',
@@ -2029,8 +2027,8 @@ const _dutchSourceAddSv = <String, String>{
       'Måldisken har inte tillräckligt med utrymme. Frigör utrymme och försök igen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Detta decks sigill matchar inte längre innehållet — det redigerades efter förseglingen.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML öppnas i vilken browser som helst utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX (Beamer) kompileras med pdflatex eller xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'En HTML-fil öppnas i valfri webbläsare utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX-källan kompileras med pdflatex eller xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Ett LaTeX article-dokument. Matematik går direkt igenom; bilder refereras med relativ sökväg. Kompilera med pdflatex eller xelatex.',
   'Afbeelding geplakt': 'Bild klistrad',
