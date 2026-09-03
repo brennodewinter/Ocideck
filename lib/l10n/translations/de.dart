@@ -675,6 +675,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Folie, präsentieren, als PDF oder PowerPoint exportieren',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Fortlaufender Text, Seiten, als PDF oder Word exportieren',
   'Dit bestand is elders gewijzigd': 'Diese Datei wurde woanders geändert',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Die Datei auf der Festplatte hat sich seit dem Öffnen geändert — wahrscheinlich in einem anderen Fenster oder von einem anderen Programm. Überschreiben verwirft diese Änderungen.',

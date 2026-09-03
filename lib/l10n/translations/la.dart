@@ -1657,6 +1657,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Laminae, praesentare, in PDF vel PowerPoint exportare',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Textus continuus, paginae, in PDF vel Word exportare',
   'Dit bestand is elders gewijzigd': 'Hic fasciculus alibi mutatus est',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Fasciculus in disco mutatus est ex quo aperuisti — probabiliter in alia fenestra aut ab alio programma. Superscribere eas mutationes abiicit.',

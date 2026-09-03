@@ -1643,6 +1643,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Snímky, prezentovat, exportovat do PDF nebo PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Souvislý text, stránky, exportovat do PDF nebo Word',
   'Dit bestand is elders gewijzigd': 'Tento soubor byl upraven jinde',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Soubor na disku se změnil od doby, kdy jste jej otevřeli — pravděpodobně v jiném okně nebo jiným programem. Přepsání zahodí tyto změny.',

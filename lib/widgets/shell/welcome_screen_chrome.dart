@@ -39,19 +39,38 @@ ButtonStyle _secondaryButtonStyle(ColorScheme scheme) =>
 /// Een volle-breedte primaire startknop: dezelfde vorm en uitlijning als
 /// [_wideSecondaryButton], maar gevuld in de accentkleur. Gedeeld door de twee
 /// manieren om te beginnen (presentatie en document), zodat ze er als
-/// gelijkwaardige keuzes uitzien.
+/// gelijkwaardige keuzes uitzien. De optionele [subtitle] komt onder het label
+/// in kleinere, gedempte tekst — één regel die zegt wat je krijgt, zonder jargon
+/// (#1961).
 Widget _widePrimaryButton({
   required ButtonStyle style,
   required IconData icon,
   required Widget label,
   required VoidCallback onPressed,
+  Widget? subtitle,
 }) => SizedBox(
   width: double.infinity,
   child: ElevatedButton.icon(
     style: style,
     onPressed: onPressed,
     icon: Icon(icon, size: 18),
-    label: label,
+    label: subtitle == null
+        ? label
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              label,
+              DefaultTextStyle.merge(
+                style: const TextStyle(
+                  fontSize: 12,
+                  height: 1.3,
+                  fontWeight: FontWeight.normal,
+                ),
+                child: subtitle,
+              ),
+            ],
+          ),
   ),
 );
 

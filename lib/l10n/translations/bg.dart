@@ -1662,6 +1662,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Слайдове, презентирай, експортирай в PDF или PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Непрекъснат текст, страници, експортирай в PDF или Word',
   'Dit bestand is elders gewijzigd': 'Този файл е променен на друго място',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Файлът на диска се е променил откакто го отворихте — вероятно в друг прозорец или от друга програма. Презаписването отхвърля тези промени.',

@@ -65,6 +65,19 @@ void main() {
   });
 
   testWidgets(
+    'de twee maakknoppen dragen een ondertitel die zegt wat je krijgt',
+    (tester) async {
+      // De knoppen heten 'Nieuwe presentatie' en 'Nieuw document' — twee namen
+      // die voor een nieuweling hetzelfde klinken. Een ondertitel in gewone taal
+      // maakt het verschil zichtbaar vóór de klik (#1961).
+      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      await tester.pumpAndSettle();
+      expect(find.textContaining("Dia's, presenteren"), findsOneWidget);
+      expect(find.textContaining('Doorlopende tekst'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'procesverbetering voegt geen losse aanmaakknop aan het openscherm toe',
     (tester) async {
       await tester.pumpWidget(

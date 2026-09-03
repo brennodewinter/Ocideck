@@ -1642,6 +1642,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slide, presentasi, ekspor ke PDF atau PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Teks berkelanjutan, halaman, ekspor ke PDF atau Word',
   'Dit bestand is elders gewijzigd': 'Berkas ini telah diubah di tempat lain',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Berkas di disk telah berubah sejak Anda membukanya — mungkin di jendela lain atau oleh program lain. Menimpa membuang perubahan tersebut.',

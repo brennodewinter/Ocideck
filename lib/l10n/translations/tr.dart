@@ -2559,6 +2559,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slaytlar, sunum, PDF veya PowerPoint\'e aktar',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Sürekli metin, sayfalar, PDF veya Word\'e aktar',
   'Dit bestand is elders gewijzigd': 'Bu dosya başka bir yerde değiştirildi',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Diskteki dosya, açtığınızdan beri değişti — muhtemelen başka bir pencerede veya başka bir program tarafından. Üzerine yazmak bu değişiklikleri atar.',

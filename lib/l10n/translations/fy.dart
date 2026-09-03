@@ -675,6 +675,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Dia\'s, presintearje, eksportearje nei PDF of PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Trochrinnende tekst, siden, eksportearje nei PDF of Word',
   'Dit bestand is elders gewijzigd': 'Dit bestân is earne oars wizige',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'It bestân op skiif is feroare sûnt jo it iepenen — wierskynlik yn in oar finster of troch in oar programma. Oerskriuwen smyt dy wizigingen wei.',

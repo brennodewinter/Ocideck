@@ -1649,6 +1649,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Skaidrės, pristatyti, eksportuoti į PDF arba PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Ištisinis tekstas, puslapiai, eksportuoti į PDF arba Word',
   'Dit bestand is elders gewijzigd': 'Šis failas buvo modifikuotas kitur',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Failas diske pasikeitė nuo tada, kai jį atvėrėte — tikriausiai kitame lange arba kita programa. Perrašymas išmeta tuos pakeitimus.',

@@ -1658,6 +1658,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slide-uri, prezintă, exportă în PDF sau PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Text continuu, pagini, exportă în PDF sau Word',
   'Dit bestand is elders gewijzigd':
       'Acest fișier a fost modificat în altă parte',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
