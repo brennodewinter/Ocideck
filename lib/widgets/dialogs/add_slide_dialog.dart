@@ -64,12 +64,14 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.quote,
     SlideType.table,
     SlideType.chart,
-    SlideType.cockpit,
-    SlideType.scorecard,
     SlideType.timeline,
     SlideType.question,
     SlideType.code,
     SlideType.freeMarkdown,
+    // Cockpit en scorecard zijn specialismes, geen algemeen slidetype —
+    // onderaan de algemene lijst, niet tussen tabel en tijdlijn (#1957).
+    SlideType.cockpit,
+    SlideType.scorecard,
     // Informatieveiligheid-module — grouped last; shown under their own picker
     // tab (P0-PICK) once the category carries types.
     SlideType.assets,

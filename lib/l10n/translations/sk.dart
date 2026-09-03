@@ -282,8 +282,6 @@ const _dutchSourceSk = {
   'Uitbreidingen': 'Rozšírenia',
   'Gegevens opschonen': 'Vyčistiť údaje',
   'Gegevens lokaal beschikbaar': 'Údaje dostupné lokálne',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Licencia a súkromie.',
   'Op het web nog niet beschikbaar': 'Na webe zatiaľ nedostupné',
   'Nog niet opgehaald': 'Zatiaľ nestiahnuté',
   'AI-assistentie': 'Asistencia AI',
@@ -297,8 +295,6 @@ const _dutchSourceSk = {
   'Cloud (externe dienst)': 'Cloud (externá služba)',
   'Modelnaam': 'Názov modelu',
   'API-sleutel (optioneel)': 'Kľúč API (voliteľné)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Cloudová služba najprv vyžaduje váš súhlas so súkromím v časti "Licencia a súkromie" a vo webovej verzii nefunguje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Rozumiem, že sa údaje odosielajú tejto externej službe',
   'Zoek een slidetype': 'Vyhľadať typ snímky',
@@ -1552,14 +1548,11 @@ const _dutchSourceSk = {
       'Maskotmi OciDeck a súvisiacich projektov sú ocicati Brenna de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Nadácia bola založená 23. októbra 2025 notárskou zápisnicou v Leeuwardene a má svoje sídlo v Noordwijku.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Tieto nastavenia určujú, čo môže OciDeck načítať z internetu a aké stopy zostávajú na tomto zariadení. Sú nezávislé od vášho vyhlásenia o ochrane súkromia a súhlasu, ktoré nájdete v časti „Licencia a súkromie”.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Ciele nadácie:\n\n•  Podporovať open source softvér a hardvér pre bezpečné digitálne infraštruktúry.\n•  Presadzovať transparentnosť a reprodukovateľnosť v bezpečnostných procesoch.\n•  Organizovať výskum, školenia a aktivity v oblasti digitálnej odolnosti.\n•  Prepájať občanov, firmy, verejnú správu a spoločenské organizácie.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Základné hodnoty: bezpečnosť, sloboda a otvorenosť, suverenita, integrita, zdieľanie vedomostí, spoľahlivosť, ľudskosť, počúvanie a prepájanie, „just culture” a udržateľnosť.',
-  'Licentie en Privacy': 'Licencia a súkromie',
   'Mascotte van MIAUW.': 'Maskot MIAUW.',
   'Mascotte van OpenKAT.': 'Maskot OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskot nástroja na kontrolné zoznamy.',
@@ -1654,6 +1647,17 @@ const _dutchSourceAddSk = <String, String>{
       'Snímky, prezentovať, exportovať do PDF alebo PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Súvislý text, strany, exportovať do PDF alebo Word',
+  'Uiterlijk van de app': 'Vzhľad aplikácie',
+  'Uiterlijk van dia\'s': 'Vzhľad snímok',
+  'Privacy en classificatie': 'Súkromie a klasifikácia',
+  'Uiterlijk van documenten': 'Vzhľad dokumentov',
+  'Exportkwaliteit': 'Kvalita exportu',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Súkromie a klasifikácia.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Cloudová služba najprv vyžaduje váš súhlas so súkromím v časti "Súkromie a klasifikácia" a vo webovej verzii nefunguje.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Tieto nastavenia určujú, čo môže OciDeck načítať z internetu a aké stopy zostávajú na tomto zariadení. Sú nezávislé od vášho vyhlásenia o ochrane súkromia a súhlasu, ktoré nájdete v časti „Súkromie a klasifikácia”.',
   'Dit bestand is elders gewijzigd': 'Tento súbor bol upravený inde',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Súbor na disku sa zmenil odvtedy, ako ste ho otvorili — pravdepodobne v inom okne alebo iným programom. Prepísanie zahodí tieto zmeny.',

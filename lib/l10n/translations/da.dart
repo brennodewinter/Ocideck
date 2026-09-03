@@ -281,8 +281,6 @@ const _dutchSourceDa = {
   'Uitbreidingen': 'Udvidelser',
   'Gegevens opschonen': 'Ryd data',
   'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Giv først samtykke til udgående trafik under Licens og privatliv.',
   'Op het web nog niet beschikbaar': 'Endnu ikke tilgængelig på nettet',
   'Nog niet opgehaald': 'Endnu ikke hentet',
   'AI-assistentie': 'AI-assistance',
@@ -296,8 +294,6 @@ const _dutchSourceDa = {
   'Cloud (externe dienst)': 'Sky (ekstern tjeneste)',
   'Modelnaam': 'Modelnavn',
   'API-sleutel (optioneel)': 'API-nøgle (valgfri)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'En skytjeneste kræver først dit privatlivssamtykke under "Licens og privatliv" og virker ikke i webversionen.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Jeg forstår, at data sendes til denne eksterne tjeneste',
   'Zoek een slidetype': 'Søg efter en slidetype',
@@ -1545,14 +1541,11 @@ const _dutchSourceDa = {
       'Maskotterne for OciDeck og beslægtede projekter er Brenno de Winters ocicats.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Fonden blev oprettet den 23. oktober 2025 ved notarialt dokument i Leeuwarden og har sit vedtægtsmæssige hjemsted i Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Disse indstillinger afgør, hvad OciDeck må hente fra internettet, og hvilke spor der efterlades på denne enhed. De er uafhængige af din privatlivserklæring og dit samtykke, som du finder under "Licens og Privatliv".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Fondens formål:\n\n•  Fremme open source-software og -hardware til sikker digital infrastruktur.\n•  Fremme gennemsigtighed og reproducerbarhed i sikkerhedsprocesser.\n•  Organisere forskning, uddannelse og aktiviteter inden for digital modstandsdygtighed.\n•  Forbinde borgere, virksomheder, det offentlige og civilsamfundsorganisationer med hinanden.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Kerneværdier: sikkerhed, frihed og åbenhed, suverænitet, integritet, videndeling, pålidelighed, menneskelighed, at lytte og forbinde, "just culture" og bæredygtighed.',
-  'Licentie en Privacy': 'Licens og Privatliv',
   'Mascotte van MIAUW.': 'Maskot for MIAUW.',
   'Mascotte van OpenKAT.': 'Maskot for OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskot for checklisteværktøjet.',
@@ -1648,6 +1641,17 @@ const _dutchSourceAddDa = <String, String>{
       'Slides, præsenter, eksporter til PDF eller PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Løbende tekst, sider, eksporter til PDF eller Word',
+  'Uiterlijk van de app': 'App-udseende',
+  'Uiterlijk van dia\'s': 'Slide-udseende',
+  'Privacy en classificatie': 'Privatliv og klassifikation',
+  'Uiterlijk van documenten': 'Dokumentudseende',
+  'Exportkwaliteit': 'Eksportkvalitet',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Giv først samtykke til udgående trafik under Privatliv og klassifikation.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'En skytjeneste kræver først dit privatlivssamtykke under "Privatliv og klassifikation" og virker ikke i webversionen.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Disse indstillinger afgør, hvad OciDeck må hente fra internettet, og hvilke spor der efterlades på denne enhed. De er uafhængige af din privatlivserklæring og dit samtykke, som du finder under "Privatliv og klassifikation".',
   'Dit bestand is elders gewijzigd': 'Denne fil er blevet ændret et andet sted',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Filen på disken er ændret siden du åbnede den — sandsynligvis i et andet vindue eller af et andet program. Overskrivning kasserer disse ændringer.',

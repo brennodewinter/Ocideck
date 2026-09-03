@@ -26,7 +26,6 @@ import '../../services/export_metadata.dart';
 import '../../services/file_service.dart';
 import '../../services/git/outbox.dart';
 import '../../services/recovery_service.dart';
-import '../../services/classification_enforcement_policy.dart';
 import '../../utils/net_guard.dart';
 import 'certificate_trust_dialog.dart';
 import '../../models/local_cve_status.dart';
@@ -876,7 +875,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           SettingsSection.collaboration => _collaborationTab(),
           SettingsSection.appearance => _appearanceTab(),
           SettingsSection.presentation => _presentationStyleTab(profiles),
-          SettingsSection.cockpit => _cockpitTab(),
           SettingsSection.privacy => _privacyTab(),
           SettingsSection.security => _securityTab(),
           SettingsSection.ai => _aiTab(),

@@ -281,8 +281,6 @@ const _dutchSourceGsw = {
   'Uitbreidingen': 'Erwyterige',
   'Gegevens opschonen': 'Date ufruume',
   'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
   'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
   'Nog niet opgehaald': 'No nöd glade',
   'AI-assistentie': 'KI-Unterstützig',
@@ -296,8 +294,6 @@ const _dutchSourceGsw = {
   'Cloud (externe dienst)': 'Cloud (externe Dienscht)',
   'Modelnaam': 'Modällname',
   'API-sleutel (optioneel)': 'API-Schlüssel (fakultativ)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'E Cloud-Dienscht bruucht zerscht dini Dateschutz-Iiwilligung under "Lizänz und Datenschutz" und lauft nöd i de Web-Version.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Mir isch bewusst, dass Date a de externi Dienscht gschickt werded',
   'Zoek een slidetype': 'Slide-Typ suech',
@@ -1547,14 +1543,11 @@ const _dutchSourceGsw = {
       'D Maskottli vo OciDeck und de verwandte Projäkt sind d Ocicats vom Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'D Stiftig isch am 23. Oktober 2025 mit notarielle Urkund z Leeuwarden gründet worde und het ihre statutarisch Sitz z Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Die Iischtellige beschtimme, was OciDeck vom Internet ladä darf und weli Spure uf däm Grät zrugg blibe. Si sind unabhängig vo dinere Datäschutzerklärig und Iiwilligung, wo du under "Lizänz und Privatsphäre" findsch.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Ziel vo de Stiftig:\n\n•  Opensource-Software und -Hardware für sicheri digitali Infrastrukture förderä.\n•  Transparänz und Reproduzierbarkeit i de Sicherheitsprozäss förderä.\n•  Forschig, Schuälige und Aktivitäte rund um digitali Widerschtandschraft organisierä.\n•  Bürger, Firme, Bhörde und gsellschaftlichi Organisatione mitenand verbindä.',
   'E-mail': 'E-Mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Kärnwärt: Sicherheit, Freiheit und Offeheit, Souveränität, Integrität, Wüsseteilig, Zuäverlässigkeit, Menschlichkeit, Zuälosä und Verbindä, "just culture" und Nachhaltigkeit.',
-  'Licentie en Privacy': 'Lizänz und Privatsphäre',
   'Mascotte van MIAUW.': 'Maskottli vo MIAUW.',
   'Mascotte van OpenKAT.': 'Maskottli vo OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskottli vom Checkischte-Tool.',
@@ -1651,6 +1644,17 @@ const _dutchSourceAddGsw = <String, String>{
       'Folie, präsentiere, als PDF oder PowerPoint exportiere',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Fortlaufende Text, Sitte, als PDF oder Word exportiere',
+  'Uiterlijk van de app': 'Ussgseh vo de App',
+  'Uiterlijk van dia\'s': 'Ussgseh vo de Slides',
+  'Privacy en classificatie': 'Dateschutz und Klassifizierig',
+  'Uiterlijk van documenten': 'Ussgseh vo de Dokumänt',
+  'Exportkwaliteit': 'Exportqualität',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Dateschutz und Klassifizierig.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'E Cloud-Dienscht bruucht zerscht dini Dateschutz-Iiwilligung under "Dateschutz und Klassifizierig" und lauft nöd i de Web-Version.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Die Iischtellige beschtimme, was OciDeck vom Internet ladä darf und weli Spure uf däm Grät zrugg blibe. Si sind unabhängig vo dinere Datäschutzerklärig und Iiwilligung, wo du under "Dateschutz und Klassifizierig" findsch.',
   'Dit bestand is elders gewijzigd':
       'Die Datei isch wo anderscht gänderet worde',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':

@@ -281,8 +281,6 @@ const _dutchSourceTr = {
   'Uitbreidingen': 'Eklentiler',
   'Gegevens opschonen': 'Verileri temizle',
   'Gegevens lokaal beschikbaar': 'Veriler yerel olarak mevcut',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Önce Lisans ve Gizlilik bölümünden giden trafiğe izin verin.',
   'Op het web nog niet beschikbaar': 'Web\'de henüz kullanılamıyor',
   'Nog niet opgehaald': 'Henüz alınmadı',
   'AI-assistentie': 'AI yardımı',
@@ -296,8 +294,6 @@ const _dutchSourceTr = {
   'Cloud (externe dienst)': 'Bulut (harici hizmet)',
   'Modelnaam': 'Model adı',
   'API-sleutel (optioneel)': 'API anahtarı (isteğe bağlı)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Bulut hizmeti için önce "Lisans ve Gizlilik" bölümünde gizlilik izniniz gerekir; web sürümünde çalışmaz.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Verilerin bu harici hizmete gönderileceğini anlıyorum',
   'Zoek een slidetype': 'Slayt türü ara',
@@ -795,14 +791,11 @@ const _dutchSourceTr = {
       'OciDeck\'in ve ilgili projelerin maskotları, Brenno de Winter\'ın ocicat kedileridir.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Vakıf, 23 Ekim 2025\'te Leeuwarden\'de noter senediyle kuruldu ve resmî merkezi Noordwijk\'tedir.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Bu ayarlar, OciDeck\'in internetten neleri yükleyebileceğini ve bu cihazda hangi izlerin kalacağını belirler. Bu ayarlar, "Lisans ve Gizlilik" bölümünde bulacağınız gizlilik bildiriminden ve rızadan bağımsızdır.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Vakfın amaçları:\n\n•  Güvenli dijital altyapılar için açık kaynaklı yazılım ve donanımı teşvik etmek.\n•  Güvenlik süreçlerinde şeffaflığı ve yeniden üretilebilirliği geliştirmek.\n•  Dijital dayanıklılık üzerine araştırma, eğitim ve etkinlikler düzenlemek.\n•  Vatandaşları, şirketleri, kamu kurumlarını ve sivil toplum kuruluşlarını birbirine bağlamak.',
   'E-mail': 'E-posta',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Temel değerler: güvenlik, özgürlük ve açıklık, egemenlik, dürüstlük, bilgi paylaşımı, güvenilirlik, insanilik, dinleme ve bağ kurma, "just culture" ve sürdürülebilirlik.',
-  'Licentie en Privacy': 'Lisans ve Gizlilik',
   'Mascotte van MIAUW.': 'MIAUW\'un maskotu.',
   'Mascotte van OpenKAT.': 'OpenKAT\'ın maskotu.',
   'Mascotte van de checklisttool.': 'Kontrol listesi aracının maskotu.',
@@ -2565,6 +2558,17 @@ const _dutchSourceAddTr = <String, String>{
       'Slaytlar, sunum, PDF veya PowerPoint\'e aktar',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Sürekli metin, sayfalar, PDF veya Word\'e aktar',
+  'Uiterlijk van de app': 'Uygulama görünümü',
+  'Uiterlijk van dia\'s': 'Slayt görünümü',
+  'Privacy en classificatie': 'Gizlilik ve sınıflandırma',
+  'Uiterlijk van documenten': 'Belge görünümü',
+  'Exportkwaliteit': 'Dışa aktarma kalitesi',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Önce Gizlilik ve sınıflandırma bölümünden giden trafiğe izin verin.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Bulut hizmeti için önce "Gizlilik ve sınıflandırma" bölümünde gizlilik izniniz gerekir; web sürümünde çalışmaz.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Bu ayarlar, OciDeck\'in internetten neleri yükleyebileceğini ve bu cihazda hangi izlerin kalacağını belirler. Bu ayarlar, "Gizlilik ve sınıflandırma" bölümünde bulacağınız gizlilik bildiriminden ve rızadan bağımsızdır.',
   'Dit bestand is elders gewijzigd': 'Bu dosya başka bir yerde değiştirildi',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Diskteki dosya, açtığınızdan beri değişti — muhtemelen başka bir pencerede veya başka bir program tarafından. Üzerine yazmak bu değişiklikleri atar.',

@@ -284,8 +284,6 @@ const _dutchSourceEl = {
   'Uitbreidingen': 'Επεκτάσεις',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Άδεια και Απόρρητο.',
   'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
   'Nog niet opgehaald': 'Δεν έχει ληφθεί ακόμη',
   'AI-assistentie': 'Υποστήριξη AI',
@@ -299,8 +297,6 @@ const _dutchSourceEl = {
   'Cloud (externe dienst)': 'Cloud (εξωτερική υπηρεσία)',
   'Modelnaam': 'Όνομα μοντέλου',
   'API-sleutel (optioneel)': 'Κλειδί API (προαιρετικό)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Άδεια και Απόρρητο" και δεν λειτουργεί στην έκδοση web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Κατανοώ ότι δεδομένα αποστέλλονται σε αυτή την εξωτερική υπηρεσία',
   'Zoek een slidetype': 'Αναζήτηση τύπου διαφάνειας',
@@ -1567,14 +1563,11 @@ const _dutchSourceEl = {
       'Οι μασκότ του OciDeck και των συναφών έργων είναι οι γάτες ocicat του Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Το ίδρυμα συστάθηκε στις 23 Οκτωβρίου 2025 με συμβολαιογραφική πράξη στο Leeuwarden και έχει την καταστατική του έδρα στο Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Αυτές οι ρυθμίσεις καθορίζουν τι μπορεί να φορτώνει το OciDeck από το διαδίκτυο και ποια ίχνη παραμένουν σε αυτή τη συσκευή. Είναι ανεξάρτητες από τη δήλωση απορρήτου και τη συγκατάθεσή σου, που θα βρεις στο "Άδεια και Απόρρητο".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Στόχοι του ιδρύματος:\n\n•  Προώθηση λογισμικού και υλικού ανοιχτού κώδικα για ασφαλείς ψηφιακές υποδομές.\n•  Ενίσχυση της διαφάνειας και της αναπαραγωγιμότητας στις διαδικασίες ασφαλείας.\n•  Οργάνωση έρευνας, εκπαιδεύσεων και δραστηριοτήτων γύρω από την ψηφιακή ανθεκτικότητα.\n•  Σύνδεση πολιτών, επιχειρήσεων, δημόσιου τομέα και κοινωνικών οργανώσεων μεταξύ τους.',
   'E-mail': 'Email',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Βασικές αξίες: ασφάλεια, ελευθερία και ανοιχτότητα, κυριαρχία, ακεραιότητα, διαμοιρασμός γνώσης, αξιοπιστία, ανθρωπιά, ακρόαση και σύνδεση, "just culture" και βιωσιμότητα.',
-  'Licentie en Privacy': 'Άδεια και Απόρρητο',
   'Mascotte van MIAUW.': 'Μασκότ του MIAUW.',
   'Mascotte van OpenKAT.': 'Μασκότ του OpenKAT.',
   'Mascotte van de checklisttool.': 'Μασκότ του εργαλείου λιστών ελέγχου.',
@@ -1673,6 +1666,17 @@ const _dutchSourceAddEl = <String, String>{
       'Διαφάνειες, παρουσίαση, εξαγωγή σε PDF ή PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Συνεχές κείμενο, σελίδες, εξαγωγή σε PDF ή Word',
+  'Uiterlijk van de app': 'Εμφάνιση εφαρμογής',
+  'Uiterlijk van dia\'s': 'Εμφάνιση διαφανειών',
+  'Privacy en classificatie': 'Απόρρητο και Ταξινόμηση',
+  'Uiterlijk van documenten': 'Εμφάνιση εγγράφων',
+  'Exportkwaliteit': 'Ποιότητα εξαγωγής',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Απόρρητο και Ταξινόμηση.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Απόρρητο και Ταξινόμηση" και δεν λειτουργεί στην έκδοση web.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Αυτές οι ρυθμίσεις καθορίζουν τι μπορεί να φορτώνει το OciDeck από το διαδίκτυο και ποια ίχνη παραμένουν σε αυτή τη συσκευή. Είναι ανεξάρτητες από τη δήλωση απορρήτου και τη συγκατάθεσή σου, που θα βρεις στο "Απόρρητο και Ταξινόμηση".',
   'Dit bestand is elders gewijzigd': 'Αυτό το αρχείο έχει τροποποιηθεί αλλού',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Το αρχείο στον δίσκο έχει αλλάξει από όταν το ανοίξατε — πιθανώς σε άλλο παράθυρο ή από άλλο πρόγραμμα. Η αντικατάσταση απορρίπτει αυτές τις αλλαγές.',

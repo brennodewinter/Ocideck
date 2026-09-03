@@ -280,8 +280,6 @@ const _dutchSourceLv = {
   'Uitbreidingen': 'Paplašinājumi',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
@@ -295,8 +293,6 @@ const _dutchSourceLv = {
   'Cloud (externe dienst)': 'Mākonis (ārējs pakalpojums)',
   'Modelnaam': 'Modeļa nosaukums',
   'API-sleutel (optioneel)': 'API atslēga (neobligāti)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Licence un privātums", un tas nedarbojas tīmekļa versijā.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Es saprotu, ka dati tiek nosūtīti šim ārējam pakalpojumam',
   'Zoek een slidetype': 'Meklēt slaida tipu',
@@ -1544,14 +1540,11 @@ const _dutchSourceLv = {
       'OciDeck un saistīto projektu maskoti ir Brenno de Winter ocicat kaķi.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Nodibinājums tika izveidots ar notariālu aktu 2025. gada 23. oktobrī Leeuwarden, un tā juridiskā adrese ir Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Šie iestatījumi nosaka, ko OciDeck drīkst ielādēt no interneta un kādas pēdas paliek šajā ierīcē. Tie ir nošķirti no tavas privātuma paziņojuma un piekrišanas, kuras atrodamas sadaļā "Licence un privātums".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Nodibinājuma mērķi:\n\n•  Veicināt atvērtā koda programmatūru un aparatūru drošai digitālajai infrastruktūrai.\n•  Sekmēt caurspīdīgumu un atkārtojamību drošības procesos.\n•  Organizēt pētniecību, apmācības un aktivitātes par digitālo noturību.\n•  Savstarpēji savienot iedzīvotājus, uzņēmumus, valsti un sabiedriskās organizācijas.',
   'E-mail': 'E-pasts',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Pamatvērtības: drošība, brīvība un atklātība, suverenitāte, integritāte, zināšanu apmaiņa, uzticamība, cilvēcīgums, klausīšanās un savienošana, "just culture" un ilgtspēja.',
-  'Licentie en Privacy': 'Licence un privātums',
   'Mascotte van MIAUW.': 'MIAUW maskots.',
   'Mascotte van OpenKAT.': 'OpenKAT maskots.',
   'Mascotte van de checklisttool.': 'Kontrolsaraksta rīka maskots.',
@@ -1646,6 +1639,17 @@ const _dutchSourceAddLv = <String, String>{
       'Slaidi, prezentēt, eksportēt uz PDF vai PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Nepārtraukts teksts, lapas, eksportēt uz PDF vai Word',
+  'Uiterlijk van de app': 'Lietotnes izskats',
+  'Uiterlijk van dia\'s': 'Slaidu izskats',
+  'Privacy en classificatie': 'Privātums un klasifikācija',
+  'Uiterlijk van documenten': 'Dokumentu izskats',
+  'Exportkwaliteit': 'Eksporta kvalitāte',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Privātums un klasifikācija.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Privātums un klasifikācija", un tas nedarbojas tīmekļa versijā.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Šie iestatījumi nosaka, ko OciDeck drīkst ielādēt no interneta un kādas pēdas paliek šajā ierīcē. Tie ir nošķirti no tavas privātuma paziņojuma un piekrišanas, kuras atrodamas sadaļā "Privātums un klasifikācija".',
   'Dit bestand is elders gewijzigd': 'Šis fails ir mainīts citur',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Fails uz diska ir mainījies kopš jūs to atvērāt — droši vien citā logā vai ar citu programmu. Pārrakstīšana izmet šīs izmaiņas.',

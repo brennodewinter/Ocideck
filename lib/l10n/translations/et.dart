@@ -280,8 +280,6 @@ const _dutchSourceEt = {
   'Uitbreidingen': 'Laiendused',
   'Gegevens opschonen': 'Puhasta andmed',
   'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Andke esmalt nõusolek väljuvale liiklusele jaotises Litsents ja privaatsus.',
   'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
   'Nog niet opgehaald': 'Pole veel alla laaditud',
   'AI-assistentie': 'Tehisintellekti abi',
@@ -295,8 +293,6 @@ const _dutchSourceEt = {
   'Cloud (externe dienst)': 'Pilv (väline teenus)',
   'Modelnaam': 'Mudeli nimi',
   'API-sleutel (optioneel)': 'API-võti (valikuline)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Pilveteenus nõuab kõigepealt teie privaatsusnõusolekut jaotises "Litsents ja privaatsus" ega tööta veebiversioonis.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Saan aru, et andmed saadetakse sellele välisele teenusele',
   'Zoek een slidetype': 'Otsi slaiditüüpi',
@@ -1538,14 +1534,11 @@ const _dutchSourceEt = {
       'OciDecki ja seotud projektide maskotid on Brenno de Winteri ocicatid.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Sihtasutus asutati notariaalse aktiga 23. oktoobril 2025 Leeuwardenis ning selle registrijärgne asukoht on Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Need seaded määravad, mida OciDeck tohib internetist laadida ja millised jäljed sellele seadmele jäävad. Need on eraldi sinu privaatsusavaldusest ja nõusolekust, mille leiad jaotisest "Litsents ja privaatsus".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Sihtasutuse eesmärgid:\n\n•  Edendada avatud lähtekoodiga tarkvara ja riistvara turvaliste digitaristute jaoks.\n•  Soodustada läbipaistvust ja korratavust turvaprotsessides.\n•  Korraldada digitaalse vastupidavusega seotud uuringuid, koolitusi ja tegevusi.\n•  Ühendada omavahel kodanikke, ettevõtteid, riiki ja ühiskondlikke organisatsioone.',
   'E-mail': 'E-post',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Põhiväärtused: turvalisus, vabadus ja avatus, suveräänsus, ausus, teadmiste jagamine, usaldusväärsus, inimlikkus, kuulamine ja ühendamine, "just culture" ning jätkusuutlikkus.',
-  'Licentie en Privacy': 'Litsents ja privaatsus',
   'Mascotte van MIAUW.': 'MIAUW maskott.',
   'Mascotte van OpenKAT.': 'OpenKAT maskott.',
   'Mascotte van de checklisttool.': 'Kontrollnimekirja tööriista maskott.',
@@ -1641,6 +1634,17 @@ const _dutchSourceAddEt = <String, String>{
       'Slaidid, esitle, ekspordi PDF-isse või PowerPointi',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Pidev tekst, leheküljed, ekspordi PDF-i või Wordi',
+  'Uiterlijk van de app': 'Rakenduse välimus',
+  'Uiterlijk van dia\'s': 'Slaidide välimus',
+  'Privacy en classificatie': 'Privaatsus ja klassifikatsioon',
+  'Uiterlijk van documenten': 'Dokumentide välimus',
+  'Exportkwaliteit': 'Ekspordi kvaliteet',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Andke esmalt nõusolek väljuvale liiklusele jaotises Privaatsus ja klassifikatsioon.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Pilveteenus nõuab kõigepealt teie privaatsusnõusolekut jaotises "Privaatsus ja klassifikatsioon" ega tööta veebiversioonis.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Need seaded määravad, mida OciDeck tohib internetist laadida ja millised jäljed sellele seadmele jäävad. Need on eraldi sinu privaatsusavaldusest ja nõusolekust, mille leiad jaotisest "Privaatsus ja klassifikatsioon".',
   'Dit bestand is elders gewijzigd': 'Seda faili on muudetud kusagil mujal',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Kettal olev fail on muutunud alates selle avamisest — arvatavasti teises aknas või teise programmiga. Ülekirjutamine viskab need muudatused minema.',

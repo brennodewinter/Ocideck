@@ -281,8 +281,6 @@ const _dutchSourceHu = {
   'Uitbreidingen': 'Bővítmények',
   'Gegevens opschonen': 'Adatok törlése',
   'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
   'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
   'Nog niet opgehaald': 'Még nincs letöltve',
   'AI-assistentie': 'MI-segítség',
@@ -296,8 +294,6 @@ const _dutchSourceHu = {
   'Cloud (externe dienst)': 'Felhő (külső szolgáltatás)',
   'Modelnaam': 'Modell neve',
   'API-sleutel (optioneel)': 'API-kulcs (opcionális)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Licenc és adatvédelem" részben, és a webes verzióban nem működik.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Megértem, hogy adatok kerülnek elküldésre ehhez a külső szolgáltatáshoz',
   'Zoek een slidetype': 'Diatípus keresése',
@@ -1547,14 +1543,11 @@ const _dutchSourceHu = {
       'Az OciDeck és a kapcsolódó projektek kabalái Brenno de Winter ocicatjai.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Az alapítványt 2025. október 23-án közjegyzői okirattal alapították Leeuwardenben, székhelye Noordwijkban van.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Ezek a beállítások határozzák meg, hogy az OciDeck mit tölthet be az internetről, és milyen nyomok maradnak ezen az eszközön. Függetlenek az adatvédelmi nyilatkozatodtól és hozzájárulásodtól, amelyet a „Licenc és adatvédelem” alatt találsz.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Az alapítvány céljai:\n\n•  A biztonságos digitális infrastruktúrákat szolgáló nyílt forráskódú szoftverek és hardverek ösztönzése.\n•  Az átláthatóság és a reprodukálhatóság előmozdítása a biztonsági folyamatokban.\n•  Kutatások, képzések és tevékenységek szervezése a digitális ellenálló képesség terén.\n•  A polgárok, vállalkozások, kormányzat és társadalmi szervezetek összekapcsolása.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Alapértékek: biztonság, szabadság és nyitottság, szuverenitás, integritás, tudásmegosztás, megbízhatóság, emberség, meghallgatás és összekapcsolás, „just culture” és fenntarthatóság.',
-  'Licentie en Privacy': 'Licenc és adatvédelem',
   'Mascotte van MIAUW.': 'A MIAUW kabalája.',
   'Mascotte van OpenKAT.': 'Az OpenKAT kabalája.',
   'Mascotte van de checklisttool.': 'Az ellenőrzőlista-eszköz kabalája.',
@@ -1650,6 +1643,17 @@ const _dutchSourceAddHu = <String, String>{
       'Diák, bemutatás, exportálás PDF-be vagy PowerPointba',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Folyamatos szöveg, oldalak, exportálás PDF-be vagy Word-be',
+  'Uiterlijk van de app': 'Alkalmazás megjelenése',
+  'Uiterlijk van dia\'s': 'Diák megjelenése',
+  'Privacy en classificatie': 'Adatvédelem és besorolás',
+  'Uiterlijk van documenten': 'Dokumentumok megjelenése',
+  'Exportkwaliteit': 'Exportálás minősége',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Először adjon hozzájárulást a kimenő forgalomhoz a Adatvédelem és besorolás részben.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Adatvédelem és besorolás" részben, és a webes verzióban nem működik.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Ezek a beállítások határozzák meg, hogy az OciDeck mit tölthet be az internetről, és milyen nyomok maradnak ezen az eszközön. Függetlenek az adatvédelmi nyilatkozatodtól és hozzájárulásodtól, amelyet a „Adatvédelem és besorolás” alatt találsz.',
   'Dit bestand is elders gewijzigd': 'Ezt a fájlt máshol módosították',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'A lemezen lévő fájl megváltozott azóta, hogy megnyitottad — valószínűleg egy másik ablakban vagy egy másik program által. Felülírás eldobja ezeket a módosításokat.',

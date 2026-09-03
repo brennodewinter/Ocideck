@@ -52,6 +52,11 @@ extension _SettingsPrivacy on _SettingsDialogState {
             ),
           ),
         ),
+        const SizedBox(height: 24),
+        // Classificatie-handhaving hoort bij privacy en classificatie, niet
+        // bij Algemeen — wie "TLP" of "classificatie" zoekt landt hier (#1955).
+        _sectionTitle(l10n.d('Classificatie-handhaving')),
+        _classificationEnforcementSection(l10n),
       ],
     );
   }

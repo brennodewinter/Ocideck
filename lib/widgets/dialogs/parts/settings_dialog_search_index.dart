@@ -63,13 +63,13 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   SettingsSearchEntry(
     tab: SettingsSection.general,
     label: 'Waarschuwing bij export',
-    section: 'Toegankelijkheid',
+    section: 'Exportkwaliteit',
     keywords: ['kwaliteit', 'export', 'waarschuwing'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.general,
     label: 'Blokkeer export bij ernstige kwaliteitsproblemen',
-    section: 'Toegankelijkheid',
+    section: 'Exportkwaliteit',
     keywords: ['kwaliteit', 'export', 'blokkeren', 'fouten'],
   ),
   SettingsSearchEntry(
@@ -79,12 +79,19 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['contrast', 'wcag', 'kleurcontrast', 'leesbaarheid'],
   ),
 
-  // ── App-thema ─────────────────────────────────────────────────────────────
+  // ── Uiterlijk van de app ───────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.appearance,
     label: 'Donkere interface',
     section: 'Look-and-feel',
-    keywords: ['donker', 'dark mode', 'nachtmodus', 'licht'],
+    keywords: [
+      'donker',
+      'dark mode',
+      'nachtmodus',
+      'licht',
+      'uiterlijk',
+      'app',
+    ],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.appearance,
@@ -117,12 +124,12 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['thema', 'naam', 'profiel'],
   ),
 
-  // ── Presentatiestijl ──────────────────────────────────────────────────────
+  // ── Uiterlijk van dia's ────────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
     label: 'Stijlprofiel',
     sectionKey: 'styleProfile',
-    keywords: ['profiel', 'stijl', 'huisstijl', 'thema'],
+    keywords: ['profiel', 'stijl', 'huisstijl', 'thema', 'uiterlijk', 'dia'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
@@ -233,20 +240,45 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['slotslide', 'afsluiting', 'laatste'],
   ),
 
-  // ── Cockpit ───────────────────────────────────────────────────────────────
+  // ── Cockpit (onder Uiterlijk van dia's, ingeklapt) ─────────────────────────
   SettingsSearchEntry(
-    tab: SettingsSection.cockpit,
+    tab: SettingsSection.presentation,
     label: 'Cockpit-kleurschema',
     section: 'Cockpit-kleurschema',
     keywords: ['cockpit', 'meter', 'kleur', 'dashboard'],
   ),
 
-  // ── Licentie en Privacy ───────────────────────────────────────────────────
+  // ── Privacy en classificatie ───────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.privacy,
     label: 'Toestemming intrekken',
     section: 'Toestemming',
     keywords: ['consent', 'toestemming', 'privacy', 'intrekken', 'licentie'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.privacy,
+    label: 'Vrijgaveplafond',
+    section: 'Classificatie-handhaving',
+    keywords: [
+      'tlp',
+      'classificatie',
+      'vrijgave',
+      'plafond',
+      'export',
+      'niveau',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.privacy,
+    label: 'Classificatie verplicht',
+    section: 'Classificatie-handhaving',
+    keywords: ['tlp', 'classificatie', 'verplicht', 'export'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.privacy,
+    label: 'Classificatie-watermerk',
+    section: 'Classificatie-handhaving',
+    keywords: ['tlp', 'classificatie', 'watermerk', 'merk'],
   ),
 
   // ── Beveiliging ───────────────────────────────────────────────────────────
@@ -548,7 +580,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   // brengen. `section: null` omdat de reader met DocSection werkt in plaats van
   // _sectionTitle — er is geen anker om naartoe te scrollen, en het tabblad
   // openen is genoeg. Bewust géén licentie-ingang: wie "licentie" zoekt wil de
-  // echte toestemming onder Licentie en Privacy, niet de reader.
+  // echte toestemming onder Privacy en classificatie, niet de reader.
   SettingsSearchEntry(
     tab: SettingsSection.documentation,
     label: 'Documentatie',

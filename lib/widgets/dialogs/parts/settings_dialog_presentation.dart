@@ -77,6 +77,15 @@ extension _SettingsPresentationTab on _SettingsDialogState {
             );
           },
         ),
+        const SizedBox(height: 24),
+        // Cockpit is een specialisme, geen algemeen slidetype — de kleuren
+        // horen bij de dia-stijl, maar staan ingeklapt zodat ze niet op het
+        // hoofdpad liggen (#1957).
+        AdvancedSection(
+          title: l10n.d('Cockpit'),
+          initiallyExpanded: false,
+          children: [_cockpitTab()],
+        ),
       ],
     );
   }

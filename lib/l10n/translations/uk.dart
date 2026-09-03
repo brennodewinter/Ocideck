@@ -283,8 +283,6 @@ const _dutchSourceUk = {
   'Uitbreidingen': 'Розширення',
   'Gegevens opschonen': 'Очистити дані',
   'Gegevens lokaal beschikbaar': 'Дані доступні локально',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Спершу надайте згоду на вихідний трафік у розділі «Ліцензія та конфіденційність».',
   'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
   'Nog niet opgehaald': 'Ще не завантажено',
   'AI-assistentie': 'Підтримка ШІ',
@@ -298,8 +296,6 @@ const _dutchSourceUk = {
   'Cloud (externe dienst)': 'Хмара (зовнішній сервіс)',
   'Modelnaam': 'Назва моделі',
   'API-sleutel (optioneel)': 'Ключ API (необов\'язково)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Хмарний сервіс спершу потребує вашої згоди на конфіденційність у розділі "Ліцензія та конфіденційність" і не працює у веб-версії.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Я розумію, що дані надсилаються до цього зовнішнього сервісу',
   'Zoek een slidetype': 'Пошук типу слайда',
@@ -1559,14 +1555,11 @@ const _dutchSourceUk = {
       'Маскоти OciDeck і споріднених проєктів — це оцикети Бренно де Вінтера.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Фундацію було засновано 23 жовтня 2025 року нотаріальним актом у Леувардені, її статутне місце перебування — у Нордвейку.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Ці налаштування визначають, що OciDeck може завантажувати з інтернету та які сліди залишаються на цьому пристрої. Вони не пов\'язані з твоєю заявою про конфіденційність і згодою, які ти знайдеш у розділі "Ліцензія та конфіденційність".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Цілі фундації:\n\n•  Сприяти програмному та апаратному забезпеченню з відкритим кодом для безпечних цифрових інфраструктур.\n•  Сприяти прозорості та відтворюваності в процесах безпеки.\n•  Організовувати дослідження, тренінги та заходи щодо цифрової стійкості.\n•  Об\'єднувати громадян, підприємства, державу та організації громадянського суспільства.',
   'E-mail': 'Електронна пошта',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Основні цінності: безпека, свобода й відкритість, суверенітет, доброчесність, обмін знаннями, надійність, людяність, уміння слухати й об\'єднувати, "just culture" та сталість.',
-  'Licentie en Privacy': 'Ліцензія та конфіденційність',
   'Mascotte van MIAUW.': 'Маскот проєкту MIAUW.',
   'Mascotte van OpenKAT.': 'Маскот проєкту OpenKAT.',
   'Mascotte van de checklisttool.':
@@ -1663,6 +1656,17 @@ const _dutchSourceAddUk = <String, String>{
       'Слайди, презентація, експорт у PDF або PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Неперервний текст, сторінки, експорт у PDF або Word',
+  'Uiterlijk van de app': 'Вигляд застосунку',
+  'Uiterlijk van dia\'s': 'Вигляд слайдів',
+  'Privacy en classificatie': 'Конфіденційність та класифікація',
+  'Uiterlijk van documenten': 'Вигляд документів',
+  'Exportkwaliteit': 'Якість експорту',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Спершу надайте згоду на вихідний трафік у розділі «Конфіденційність та класифікація».',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Хмарний сервіс спершу потребує вашої згоди на конфіденційність у розділі "Конфіденційність та класифікація" і не працює у веб-версії.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Ці налаштування визначають, що OciDeck може завантажувати з інтернету та які сліди залишаються на цьому пристрої. Вони не пов\'язані з твоєю заявою про конфіденційність і згодою, які ти знайдеш у розділі "Конфіденційність та класифікація".',
   'Dit bestand is elders gewijzigd': 'Цей файл було змінено в іншому місці',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Файл на диску змінився з моменту відкриття — ймовірно, в іншому вікні або іншою програмою. Перезапис відкидає ці зміни.',

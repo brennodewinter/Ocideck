@@ -275,8 +275,6 @@ const _dutchSourceTlh = {
   'Uitbreidingen': 'chelwI\'mey',
   'Gegevens opschonen': 'De\' Say\'moH',
   'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'wa\'DIch Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
   'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
   'Nog niet opgehaald': 'SuqluHbe\'taH',
   'AI-assistentie': 'AI QaH',
@@ -290,8 +288,6 @@ const _dutchSourceTlh = {
   'Cloud (externe dienst)': 'cloud (Hur Qu\')',
   'Modelnaam': 'model pong',
   'API-sleutel (optioneel)': 'API ngaQHa\'moHwI\' (DaH DaneHchugh)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      '"chIrgh \'ej peghmey" Daq peghmey chaw\'lIj poQ cloud Qu\'; web mIlloghDaq vumbe\'.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Hur Qu\' vamvaD De\' ngeHlu\' \'e\' vISov',
   'Zoek een slidetype': '\'echletHom Segh yInej',
@@ -1523,14 +1519,11 @@ const _dutchSourceTlh = {
       'OciDeck Damey je rurbogh nabmey Damey, chaH Brenno de Winter ocicats.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'cha\'maH wejDIch jar wa\'maH DIS 2025 Leeuwarden Sep DaqDaq ghItlhwI\' HablI\' chenmoH je Noordwijk Daq chuvmey Daq.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Dochvammey lugh \'e\' bopjup nuq OciDeck internet vo\' pol \'ej nuq lo\'meH Daq ratlh. quv privacy jatlh je chaw\' vo\' pIm; "chaw\' je privacy" DaqDaq DatI\'nes.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'che\'wI\' ngoQmey:\n\n•  QaphengHa\' De\'wI\' vum je De\'wI\' Doch Hubqu\'ghach chenmoH.\n•  Hubqu\'ghach vangmeH lugh je choHlaHqu\'ghach QaphengHa\'.\n•  ghoj, ghojmoH je vangHa\' De\'wI\' HeghlaHbe\'ghach malja\' chenmoH.\n•  nughmey, malja\'mey, wo\' je ghom malja\'mey rar.',
   'E-mail': 'QIn',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       '\'oy\'naQ \'ej\': Hubqu\', tlhab je poSmoHghach, che\'ghach, batlh, Sovmey ngeHmeH, voqmoH, Human, \'IjmeH \'ej rarmeH, "just culture" je ruch.',
-  'Licentie en Privacy': 'chaw\' je privacy',
   'Mascotte van MIAUW.': 'MIAUW Damey.',
   'Mascotte van OpenKAT.': 'OpenKAT Damey.',
   'Mascotte van de checklisttool.': 'checklist jonta\' Damey.',
@@ -1625,6 +1618,17 @@ const _dutchSourceAddTlh = <String, String>{
       'nagh beQmey, nIH, PDF pagh PowerPointvaD ngeH',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'tlhagh qaS, naghmey, PDF pagh WordvaD ngeH',
+  'Uiterlijk van de app': 'De\'wI\' legh',
+  'Uiterlijk van dia\'s': '\'echletHom legh',
+  'Privacy en classificatie': 'privacy je Segh',
+  'Uiterlijk van documenten': 'ghItlh legh',
+  'Exportkwaliteit': 'DoQmeH ngeH QaQ',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'privacy je Segh Daq Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      '"privacy je Segh" Daq peghmey chaw\'lIj poQ cloud Qu\'; web mIlloghDaq vumbe\'.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Dochvammey lugh \'e\' bopjup nuq OciDeck internet vo\' pol \'ej nuq lo\'meH Daq ratlh. quv privacy jatlh je chaw\' vo\' pIm; "privacy je Segh" DaqDaq DatI\'nes.',
   'Dit bestand is elders gewijzigd': 'Dat nav choHlu\'pu\' latlhDaq',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Dat nav choHpu\' DI\' DapuQmoH — nItebHa\' latlh windowsDaq ghobe\' latlh software. SIchchugh, choHmeyvetlh lulIjlu\'.',

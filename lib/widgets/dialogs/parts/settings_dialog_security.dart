@@ -12,7 +12,7 @@ extension _SettingsSecurity on _SettingsDialogState {
       children: [
         Text(
           l10n.d(
-            'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.',
+            'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.',
           ),
           style: const TextStyle(fontSize: 12, height: 1.4),
         ),

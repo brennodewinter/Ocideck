@@ -357,7 +357,11 @@ const Map<String, int> classSizeBaseline = {
       // +26 (#1885): flexibel zoekveld (ConstrainedBox i.p.v. vaste 260 px),
       // SegmentedButton-iconen weg op smal, _profileSelector in Wrap op smal.
       // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
-      6246,
+      // +16 (#1955–#1959): instellingen-herindeling — cockpit-tab verwijderd
+      // (−3), exportkwaliteit verhuisd van Toegankelijkheid naar eigen kop
+      // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
+      // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
+      6262,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —

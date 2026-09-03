@@ -281,8 +281,6 @@ const _dutchSourceHr = {
   'Uitbreidingen': 'Proširenja',
   'Gegevens opschonen': 'Očisti podatke',
   'Gegevens lokaal beschikbaar': 'Podaci dostupni lokalno',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Najprije dajte privolu za izlazni promet u odjeljku Licenca i privatnost.',
   'Op het web nog niet beschikbaar': 'Još nije dostupno na webu',
   'Nog niet opgehaald': 'Još nije preuzeto',
   'AI-assistentie': 'AI pomoć',
@@ -296,8 +294,6 @@ const _dutchSourceHr = {
   'Cloud (externe dienst)': 'Oblak (vanjska usluga)',
   'Modelnaam': 'Naziv modela',
   'API-sleutel (optioneel)': 'API ključ (neobavezno)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Usluga u oblaku najprije zahtijeva vaš pristanak na privatnost pod "Licenca i privatnost" i ne radi u web verziji.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Razumijem da se podaci šalju ovoj vanjskoj usluzi',
   'Zoek een slidetype': 'Pretraži vrstu slajda',
@@ -1550,14 +1546,11 @@ const _dutchSourceHr = {
       'Maskote OciDecka i srodnih projekata su ocicati Brenna de Wintera.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Zaklada je 23. listopada 2025. osnovana javnobilježničkim aktom u Leeuwardenu i ima svoje statutarno sjedište u Noordwijku.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Ove postavke određuju što OciDeck smije učitavati s interneta i koji tragovi ostaju na ovom uređaju. Odvojene su od tvoje izjave o privatnosti i privole, koje pronalaziš pod "Licenca i privatnost".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Ciljevi zaklade:\n\n•  Poticati softver i hardver otvorenog koda za sigurne digitalne infrastrukture.\n•  Promicati transparentnost i ponovljivost u sigurnosnim procesima.\n•  Organizirati istraživanja, obuke i aktivnosti oko digitalne otpornosti.\n•  Povezivati građane, tvrtke, državu i organizacije civilnog društva.',
   'E-mail': 'E-pošta',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Temeljne vrijednosti: sigurnost, sloboda i otvorenost, suverenost, integritet, dijeljenje znanja, pouzdanost, ljudskost, slušanje i povezivanje, "just culture" i održivost.',
-  'Licentie en Privacy': 'Licenca i privatnost',
   'Mascotte van MIAUW.': 'Maskota projekta MIAUW.',
   'Mascotte van OpenKAT.': 'Maskota projekta OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskota alata za popise obveza.',
@@ -1652,6 +1645,17 @@ const _dutchSourceAddHr = <String, String>{
       'Slajdovi, prezentiraj, izvezi u PDF ili PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Neprekinuti tekst, stranice, izvezi u PDF ili Word',
+  'Uiterlijk van de app': 'Izgled aplikacije',
+  'Uiterlijk van dia\'s': 'Izgled slajdova',
+  'Privacy en classificatie': 'Privatnost i klasifikacija',
+  'Uiterlijk van documenten': 'Izgled dokumenata',
+  'Exportkwaliteit': 'Kvaliteta izvoza',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Najprije dajte privolu za izlazni promet u odjeljku Privatnost i klasifikacija.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Usluga u oblaku najprije zahtijeva vaš pristanak na privatnost pod "Privatnost i klasifikacija" i ne radi u web verziji.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Ove postavke određuju što OciDeck smije učitavati s interneta i koji tragovi ostaju na ovom uređaju. Odvojene su od tvoje izjave o privatnosti i privole, koje pronalaziš pod "Privatnost i klasifikacija".',
   'Dit bestand is elders gewijzigd':
       'Ova datoteka je izmijenjena negdje drugdje',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
