@@ -47,6 +47,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(document): visuele weergave toont dezelfde puntmaat als de PDF (#1947)
 - fix(export): één download per webexport, en alleen melden wat we weten (#1902) (#1906)
 - fix(release): de webbundel raakte .htaccess en security.txt kwijt (#1888) (#1903)
 - fix(quality): golden-suite in make check, ratchet-venster van 90 naar 30 dagen (#1886, #1887) (#1900)
@@ -2464,6 +2465,15 @@ that before deciding whether this alpha fits what you are doing.
   derde vindplaats, `SWIFT_STDLIB_PATH` in `Pods-Runner-frameworks.sh`, blijft
   met opzet staan: die regel zit achter `if [ "${XCODE_VERSION_MAJOR}" -lt 7 ]`
   en wordt nooit uitgevoerd.
+- **De visuele documentweergave toonde een kleinere letter dan de PDF (#1947).**
+  De basislettergrootte van een documentstijl is 11, en dat is een typografisch
+  punt: de PDF zette hem zo, op 1/72 duim. Het scherm, het schrijfvlak en de
+  HTML-export zetten dezelfde 11 als CSS-pixels, op 1/96 duim. Op een pagina die
+  in beeldpunten op 96 dpi wordt uitgemeten was de bodytekst daardoor een derde
+  kleiner op het scherm dan op papier. De omzetting `documentBodyFontSizeToCssPx`
+  (96/72) brengt scherm en HTML op dezelfde fysieke maat als de PDF; de
+  opgeslagen waarde in het stijlprofiel blijft 11. Het schuiflabel zegt nu `pt`
+  in plaats van `px`, want dat was de eenheid al.
 
 - **Een webexport meldde "geëxporteerd" ook als er niets vertrok (#1902).** In
   de browser is elke uitgang een download, en de app las het uitblijven van een

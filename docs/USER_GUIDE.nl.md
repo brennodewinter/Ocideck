@@ -4790,7 +4790,10 @@ staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
 presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
 en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
 ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
-de maat van het presentatielogo. Daar staat ook de **kopkleur** van een document.
+de maat van het presentatielogo. Daar stel je ook de **basislettergrootte** in, van
+9 tot 28 pt (standaard 11 pt): dat is de puntmaat van de broodtekst, dezelfde
+eenheid als de PDF. Het scherm zet die punten om naar CSS-pixels, zodat 11 pt op
+het scherm dezelfde fysieke maat is als 11 pt in de PDF. Daar staat ook de **kopkleur** van een document.
 Zet je die niet, dan blijft het zoals het altijd was: een hoofdstukkop (`#`) volgt
 de tekstkleur en een subkop (`##` en dieper) het accent. Zet je hem wél, dan
 dragen álle kopniveaus die ene kleur — het geval waarvoor hij bestaat is een

@@ -1326,11 +1326,13 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
   themselves come from `parts/settings_dialog_colors.dart`
   (`_generalColorChildren` for the shared ones, `_slideColorChildren` for the
   title/section colours a document does not have). The document panel owns
-  `ThemeProfile.documentBodyFontSize` — the base type size of a page, which
-  `documentHeadingSize`, the footnote list, the timeline cards, the visual
-  editor's typography, `documentKeepWithNextHeight` and the exported
-  `.document{font-size:…}` all derive from, so screen, writing surface and print
-  stay one size.
+  `ThemeProfile.documentBodyFontSize` — the base type size of a page in
+  typographic points, which `documentHeadingSize`, the footnote list, the
+  timeline cards, the visual editor's typography, `documentKeepWithNextHeight`
+  and the exported `.document{font-size:…}` all derive from via
+  `documentBodyFontSizeToCssPx` (96 CSS pixels per 72 pt), so screen, writing
+  surface and PDF stay one physical size. The PDF reads the stored point value
+  directly.
   `parts/settings_dialog_style_preview.dart` holds one preview per surface —
   a chrome-less sheet for the shared settings, the A4 title/content sheet with
   header and footer bands for a document, and the real 16:9 slide renderer for a
