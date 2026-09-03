@@ -1641,6 +1641,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Den här filen har ändrats på ett annat ställe',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Filen på disken har ändrats sedan du öppnade den — förmodligen i ett annat fönster eller av ett annat program. Att skriva över kastar dessa ändringar.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Kraschåterställning fungerar inte just nu — återställningsmappen är inte skrivbar. Spara ditt arbete manuellt.',
   'Donker logo kiezen': 'Välj mörkt logo',

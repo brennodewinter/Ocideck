@@ -1662,6 +1662,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Този файл е променен на друго място',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Файлът на диска се е променил откакто го отворихте — вероятно в друг прозорец или от друга програма. Презаписването отхвърля тези промени.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Възстановяването след срив не работи в момента — папката за възстановяване не е достъпна за запис. Запазете работата си ръчно.',
   'Donker logo kiezen': 'Избери тъмно лого',

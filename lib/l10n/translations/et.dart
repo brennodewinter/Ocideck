@@ -1635,6 +1635,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Seda faili on muudetud kusagil mujal',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Kettal olev fail on muutunud alates selle avamisest — arvatavasti teises aknas või teise programmiga. Ülekirjutamine viskab need muudatused minema.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Krahhi taastamine ei tööta praegu — taastamiskausta ei saa kirjutada. Salvesta oma töö käsitsi.',
   'Donker logo kiezen': 'Vali tume logo',

@@ -1645,6 +1645,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Die Datei isch wo anderscht gänderet worde',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Die Datei uf de Feschtplatte hät sich sit em Öppnige gänderet — wohrschinli im ene andere Fänschter oder vo eme andere Programm. Überschrybe wirft die Änderige wäg.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Absturz-Widerherstellig funktioniere grad nöd — de Widerherstelligsordner isch nöd schribbar. Speichere dini Arbet vo Hand.',
   'Donker logo kiezen': 'Dunkels Logo wääle',

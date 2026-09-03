@@ -1657,6 +1657,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Hic fasciculus alibi mutatus est',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Fasciculus in disco mutatus est ex quo aperuisti — probabiliter in alia fenestra aut ab alio programma. Superscribere eas mutationes abiicit.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Restauratio post ruinam nunc non operatur — dossier restitutionis inscribi non potest. Opus tuum manualiter serva.',
   'Donker logo kiezen': 'Elige logotypum obscurum',

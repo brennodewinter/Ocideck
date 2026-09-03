@@ -1657,6 +1657,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Цей файл було змінено в іншому місці',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Файл на диску змінився з моменту відкриття — ймовірно, в іншому вікні або іншою програмою. Перезапис відкидає ці зміни.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Відновлення після збою зараз не працює — папку відновлення не можна записати. Збережіть свою роботу вручну.',
   'Donker logo kiezen': 'Обрати темне лого',

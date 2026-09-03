@@ -1644,6 +1644,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Ezt a fájlt máshol módosították',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'A lemezen lévő fájl megváltozott azóta, hogy megnyitottad — valószínűleg egy másik ablakban vagy egy másik program által. Felülírás eldobja ezeket a módosításokat.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Az összeomlás utáni helyreállítás most nem működik — a helyreállítási mappa nem írható. Mentsd el a munkádat kézzel.',
   'Donker logo kiezen': 'Sötét logo választása',

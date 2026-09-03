@@ -1649,6 +1649,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Šis failas buvo modifikuotas kitur',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Failas diske pasikeitė nuo tada, kai jį atvėrėte — tikriausiai kitame lange arba kita programa. Perrašymas išmeta tuos pakeitimus.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Avarinis atstatymas dabar neveikia — atstatymo aplankas nėra įrašomas. Išsaugokite savo darbą rankiniu būdu.',
   'Donker logo kiezen': 'Pasirinkti tamsų logotipą',

@@ -2559,6 +2559,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Bu dosya başka bir yerde değiştirildi',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Diskteki dosya, açtığınızdan beri değişti — muhtemelen başka bir pencerede veya başka bir program tarafından. Üzerine yazmak bu değişiklikleri atar.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Çöküş kurtarma şu an çalışmıyor — kurtarma klasörü yazılabilir değil. Çalışmanızı manuel olarak kaydedin.',
   'Donker logo kiezen': 'Koyu logo seç',

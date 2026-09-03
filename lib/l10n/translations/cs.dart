@@ -1643,6 +1643,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Tento soubor byl upraven jinde',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Soubor na disku se změnil od doby, kdy jste jej otevřeli — pravděpodobně v jiném okně nebo jiným programem. Přepsání zahodí tyto změny.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Obnovení po pádu nyní nefunguje — složka obnovení není zapisovatelná. Uložte svou práci ručně.',
   'Donker logo kiezen': 'Vybrat tmavé logo',

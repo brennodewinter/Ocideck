@@ -1658,6 +1658,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Acest fișier a fost modificat în altă parte',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Fișierul de pe disc s-a schimbat de când l-ai deschis — probabil într-o altă fereastră sau de un alt program. Suprascrierea aruncă acele modificări.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Recuperarea după crash nu funcționează acum — dosarul de recuperare nu este inscriptibil. Salvează-ți munca manual.',
   'Donker logo kiezen': 'Alege logo întunecat',

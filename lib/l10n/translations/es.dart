@@ -672,6 +672,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Dit bestand is elders gewijzigd':
+      'Este archivo ha sido modificado en otro lugar',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'El archivo en el disco ha cambiado desde que lo abriste — probablemente en otra ventana o por otro programa. Sobrescribir descarta esos cambios.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'La recuperación tras cuelgue no funciona ahora — la carpeta de recuperación no se puede escribir. Guarda tu trabajo manualmente.',
   'Donker logo kiezen': 'Elegir logo oscuro',

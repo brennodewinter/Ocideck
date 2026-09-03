@@ -1642,6 +1642,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Ta datoteka je bila spremenjena drugje',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Datoteka na disku se je spremenila, odkar ste jo odprli — verjetno v drugem oknu ali z drugim programom. Prepis zavrže te spremembe.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Obnovitev po zrušitvi zdaj ne deluje — mapa za obnovitev ni zapisljiva. Ročno shrani svoje delo.',
   'Donker logo kiezen': 'Izberi temno logotip',

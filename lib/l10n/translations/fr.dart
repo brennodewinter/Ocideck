@@ -675,6 +675,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Dit bestand is elders gewijzigd': 'Ce fichier a été modifié ailleurs',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Le fichier sur le disque a changé depuis que vous l\'avez ouvert — probablement dans une autre fenêtre ou par un autre programme. Écraser supprime ces modifications.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'La récupération après crash ne fonctionne pas — le dossier de récupération n\'est pas inscriptible. Enregistrez votre travail manuellement.',
   'Donker logo kiezen': 'Choisir un logo sombre',

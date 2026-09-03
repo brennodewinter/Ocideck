@@ -1670,6 +1670,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Este arquivo foi modificado em outro lugar',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'O arquivo no disco mudou desde que você o abriu — provavelmente em outra janela ou por outro programa. Substituir descarta essas alterações.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'A recuperação de crash não está funcionando agora — a pasta de recuperação não é gravável. Salve seu trabalho manualmente.',
   'Donker logo kiezen': 'Escolher logo escuro',

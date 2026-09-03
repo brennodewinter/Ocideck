@@ -1642,6 +1642,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Tämä tiedosto on muutettu toisaalla',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Tiedosto levyllä on muuttunut sen jälkeen kun avasit sen — todennäköisesti toisessa ikkunassa tai toisella ohjelmalla. Ylikirjoittaminen hävittää nämä muutokset.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Kaatumispalautus ei toimi nyt — palautuskansioon ei voi kirjoittaa. Tallenna työsi manuaalisesti.',
   'Donker logo kiezen': 'Valitse tumma logo',

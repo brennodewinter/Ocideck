@@ -1654,6 +1654,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Ten plik został zmodyfikowany w innym miejscu',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Plik na dysku zmienił się od czasu jego otwarcia — prawdopodobnie w innym oknie lub przez inny program. Nadpisanie odrzuca te zmiany.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Odzyskiwanie po awarii teraz nie działa — folder odzyskiwania nie jest zapisywalny. Zapisz swoją pracę ręcznie.',
   'Donker logo kiezen': 'Wybierz ciemne logo',

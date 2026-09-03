@@ -672,6 +672,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Dit bestand is elders gewijzigd': 'Questo file è stato modificato altrove',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Il file su disco è cambiato da quando lo hai aperto — probabilmente in un\'altra finestra o da un altro programma. Sovrascrivere scarta quelle modifiche.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Il ripristino dopo crash non funziona ora — la cartella di ripristino non è scrivibile. Salva il lavoro manualmente.',
   'Donker logo kiezen': 'Scegli logo scuro',

@@ -1642,6 +1642,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Berkas ini telah diubah di tempat lain',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Berkas di disk telah berubah sejak Anda membukanya — mungkin di jendela lain atau oleh program lain. Menimpa membuang perubahan tersebut.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Pemulihan crash tidak berfungsi sekarang — folder pemulihan tidak dapat ditulis. Simpan pekerjaan Anda secara manual.',
   'Donker logo kiezen': 'Pilih logo gelap',

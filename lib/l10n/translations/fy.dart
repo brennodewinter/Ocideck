@@ -675,6 +675,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit bestand is elders gewijzigd': 'Dit bestân is earne oars wizige',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'It bestân op skiif is feroare sûnt jo it iepenen — wierskynlik yn in oar finster of troch in oar programma. Oerskriuwen smyt dy wizigingen wei.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Crashherstel wurket no net — de herstelmap is net skriuwber. Bewarje jo wurk mei de hân.',
   'Donker logo kiezen': 'Donker logo kieze',

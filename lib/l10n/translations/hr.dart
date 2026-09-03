@@ -1646,6 +1646,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit bestand is elders gewijzigd':
+      'Ova datoteka je izmijenjena negdje drugdje',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Datoteka na disku se promijenila otkad ste je otvorili — vjerojatno u drugom prozoru ili drugim programom. Prepisivanje odbacuje te promjene.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Oporavak nakon rušenja trenutno ne radi — mapa za oporavak nije zapisiva. Spremite svoj rad ručno.',
   'Donker logo kiezen': 'Odaberi tamno logo',

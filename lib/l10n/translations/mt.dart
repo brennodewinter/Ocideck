@@ -1660,6 +1660,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Din il-fajl ġiet modifikata mkien ieħor',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Il-fajl fuq id-disk nbidel minn meta ftaħtu — probabbilment f\'window ieħor jew minn programm ieħor. L-overwrite tarmi dawk it-tibdiliet.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Ir-rikupru wara crash mhu jaħdimx issa — il-folder ta\' rikupru mhuwiex jista\' jinkiteb. Salvax xogħol tiegħek manwalment.',
   'Donker logo kiezen': 'Agħżel logo skur',
