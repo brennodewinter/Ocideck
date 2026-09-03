@@ -1633,6 +1633,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Følg præsentationen: dette slide gør, hvad præsentationen som helhed gør. Kun rapportér: fundet tælles, men modtageren ser intet — dataene er bare der. Acceptér: dataene hører her, og advarslen forsvinder. Acceptér + advar: modtageren ser et badge, at der er persondata på slidet. Udelad: de fundne data gøres ulæselige på skærmen og i eksporten — din markdown-fil bevarer den originale tekst.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML åbner i enhver browser uden internet og renderer kodeblokke, matematik og mermaid-diagrammer. LaTeX er kildekode, du kompilerer med pdflatex eller xelatex.',
   'Nu niet': 'Ikke nu',

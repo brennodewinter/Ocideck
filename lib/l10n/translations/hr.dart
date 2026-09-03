@@ -1637,6 +1637,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Slijedi prezentaciju: ovaj slajd radi ono što prezentacija u cjelini radi. Samo prijavi: nalaz se broji, ali primatelj ne vidi ništa — podaci su jednostavno tamo. Prihvati: podaci pripadaju ovdje i upozorenje nestaje. Prihvati + upozori: primatelj vidi značku da na slajdu ima osobnih podataka. Izostavi: pronađeni podaci postaju nečitljivi na ekranu i u izvozu — vaša markdown datoteka zadržava izvorni tekst.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX je izvorni kod koji kompilirate s pdflatex ili xelatex.',
   'Nu niet': 'Ne sada',
