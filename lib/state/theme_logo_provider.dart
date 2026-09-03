@@ -8,6 +8,8 @@ import '../models/markdown_validation.dart';
 import '../models/settings.dart';
 import '../models/slide_quality.dart';
 import '../services/web_asset_store.dart';
+import '../theme/app_theme.dart';
+import '../theme/brand_logo.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/project_path.dart';
 import 'deck_provider.dart';
@@ -61,6 +63,35 @@ SlideQualityIssue? themeLogoIssueFor({
   );
 }
 
+/// Deckbrede waarschuwing wanneer de dia-achtergrond donker is maar het logo
+/// geen donkere variant heeft — lichte inkt op een donkere dia is vrijwel
+/// onzichtbaar. Geldt alleen voor eigen logo's: een gebundeld merk-logo kiest
+/// automatisch zijn donkere variant via [BrandLogo].
+@visibleForTesting
+SlideQualityIssue? themeLogoDarkIssueFor(ThemeProfile theme) {
+  final path = theme.logoPath?.trim();
+  if (path == null || path.isEmpty) return null;
+  // Gebundeld merk-logo: kiest automatisch, geen waarschuwing nodig.
+  if (isBundledAssetPath(path) &&
+      BrandLogo.forAssetKey(bundledAssetKey(path)) != null) {
+    return null;
+  }
+  // Donkere variant ingesteld: geen waarschuwing.
+  final darkPath = theme.logoDarkPath?.trim();
+  if (darkPath != null && darkPath.isNotEmpty) return null;
+  // Is de achtergrond donker?
+  final bg = AppTheme.parseHexColor(theme.slideBackgroundColor);
+  if (bg.computeLuminance() > 0.5) return null; // lichte achtergrond
+  return SlideQualityIssue(
+    slideIndex: kDeckWideSlideIndex,
+    kind: SlideQualityIssueKind.themeLogoDarkMissing,
+    category: SlideQualityCategory.content,
+    severity: MarkdownValidationSeverity.warning,
+    field: 'logoDarkPath',
+    args: {'background': theme.slideBackgroundColor},
+  );
+}
+
 /// De asset-sleutels van de meegebundelde assets, bij de eerste aanvraag uit de
 /// asset-manifest geladen en daarna procesbreed bewaard: de bundel verandert
 /// niet tijdens een sessie, en deze provider herloopt bij elke deckwijziging.
@@ -90,7 +121,8 @@ Future<List<SlideQualityIssue>> computeThemeLogoIssues(Ref ref) async {
     bundledAssetExists: assetKeys?.contains ?? (_) => false,
     fileExists: (resolved) => File(resolved).existsSync(),
   );
-  return issue == null ? const [] : [issue];
+  final darkIssue = themeLogoDarkIssueFor(theme);
+  return [?issue, ?darkIssue];
 }
 
 /// Asynchrone kwaliteitscontrole voor het stijlprofiel-logo. Apart van de

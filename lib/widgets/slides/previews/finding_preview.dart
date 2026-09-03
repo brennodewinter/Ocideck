@@ -85,7 +85,7 @@ class _FindingPreview extends StatelessWidget {
     // sparse one at the ceiling. Measured on the paginated page, so a finding
     // that legitimately spans slides still splits — this only sizes the type.
     final reserve = slide.showLogo
-        ? logoSafeReserve(kReferenceSlideWidth, profile)
+        ? logoSafeReserve(kReferenceSlideWidth, profile, corner: true)
         : 0.0;
     final fit =
         fitScaleOverride ??

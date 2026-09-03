@@ -2559,6 +2559,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Donker logo kiezen': 'Koyu logo seç',
+  'Geen donker logo ingesteld': 'Koyu logo ayarlanmadı',
+  'Verwijder donker logo': 'Koyu logoyu kaldır',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Slayt arka planı koyu, ancak logonun koyu bir varyantı yok. Logo slaytta neredeyse görünmez. Sunum ayarlarında koyu bir logo ayarlayın.',
   'Aangeboden als download:': 'İndirme olarak sunuldu:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Tarayıcı indirmeyi kabul etmedi. Bu site için indirmelere izin verin ve yeniden deneyin.',

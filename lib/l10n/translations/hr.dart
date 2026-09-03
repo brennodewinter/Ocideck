@@ -1646,6 +1646,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Donker logo kiezen': 'Odaberi tamno logo',
+  'Geen donker logo ingesteld': 'Nema postavljenog tamnog loga',
+  'Verwijder donker logo': 'Ukloni tamno logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Pozadina slajda je tamna, ali logo nema tamnu varijantu. Logo je na slajdu gotovo nevidljiv. Postavite tamni logo u postavkama prezentacije.',
   'Aangeboden als download:': 'Ponuđeno kao preuzimanje:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Preglednik nije prihvatio preuzimanje. Dopustite preuzimanja za ovo mjesto i pokušajte ponovno.',

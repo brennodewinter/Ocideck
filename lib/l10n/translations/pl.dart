@@ -1654,6 +1654,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Donker logo kiezen': 'Wybierz ciemne logo',
+  'Geen donker logo ingesteld': 'Brak ustawionego ciemnego logo',
+  'Verwijder donker logo': 'Usuń ciemne logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Tło slajdu jest ciemne, ale logo nie ma ciemnej warianty. Logo jest na slajdzie prawie niewidoczne. Ustaw ciemne logo w ustawieniach prezentacji.',
   'Aangeboden als download:': 'Zaoferowano do pobrania:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Przeglądarka nie przyjęła pobierania. Zezwól na pobieranie dla tej witryny i spróbuj ponownie.',

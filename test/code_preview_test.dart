@@ -187,44 +187,45 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('code panel uses bottom logo space up to the logo reserve', (
-    tester,
-  ) async {
-    final slide = Slide.create(SlideType.code).copyWith(
-      title: 'Voorbeeld',
-      customMarkdown: 'print("hi")',
-      showLogo: true,
-    );
-    const profile = ThemeProfile(
-      logoPath: 'logo.png',
-      logoPosition: 'bottom-right',
-      logoSize: 128,
-      codeHighlightSyntax: false,
-    );
+  testWidgets(
+    'code panel extends to full height — logo sits in the corner (#1932)',
+    (tester) async {
+      final slide = Slide.create(SlideType.code).copyWith(
+        title: 'Voorbeeld',
+        customMarkdown: 'print("hi")',
+        showLogo: true,
+      );
+      const profile = ThemeProfile(
+        logoPath: 'logo.png',
+        logoPosition: 'bottom-right',
+        logoSize: 128,
+        codeHighlightSyntax: false,
+      );
 
-    await tester.pumpWidget(_host(slide, profile));
-    await tester.pump();
+      await tester.pumpWidget(_host(slide, profile));
+      await tester.pump();
 
-    final codePanel = tester
-        .widgetList<Container>(find.byType(Container))
-        .where((c) {
-          final d = c.decoration;
-          return d is BoxDecoration &&
-              d.color == _hex(profile.codeBackgroundColor);
-        })
-        .single;
-    final panelBottom = tester.getBottomLeft(find.byWidget(codePanel)).dy;
-    final slideTop = tester.getTopLeft(find.byType(SlidePreviewWidget)).dy;
+      final codePanel = tester
+          .widgetList<Container>(find.byType(Container))
+          .where((c) {
+            final d = c.decoration;
+            return d is BoxDecoration &&
+                d.color == _hex(profile.codeBackgroundColor);
+          })
+          .single;
+      final panelBottom = tester.getBottomLeft(find.byWidget(codePanel)).dy;
+      final slideBottom = tester
+          .getBottomLeft(find.byType(SlidePreviewWidget))
+          .dy;
 
-    // Mirrors _logoReserveExtent: the logo's far edge (its height plus the
-    // 0.12*size bottom inset from _LogoOverlay) plus a small breathing gap, so
-    // the panel clears the whole logo and not just its height.
-    const logoW = 800 * (128 / 1280);
-    const logoReserve = logoW * 1.12 + 800 * 0.014;
-    expect(panelBottom, greaterThan(slideTop + 450 - logoReserve - 2));
-    expect(panelBottom, lessThanOrEqualTo(slideTop + 450 - logoReserve + 2));
-    expect(tester.takeException(), isNull);
-  });
+      // #1932: code is a panel slide — the logo sits on top in the corner,
+      // so the panel extends to the full slide height (no vertical reserve).
+      // #1932: panel-slide — logo in hoek, geen verticale reserve.
+      expect(panelBottom, greaterThan(slideBottom - 50));
+      expect(panelBottom, lessThanOrEqualTo(slideBottom));
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('code uses the chosen monospace font family', (tester) async {
     final slide = Slide.create(

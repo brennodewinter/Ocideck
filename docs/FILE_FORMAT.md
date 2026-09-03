@@ -541,6 +541,7 @@ these fields (with defaults):
 | `codeHighlightSyntax` | `true` | Syntax highlighting on/off. Off = everything in one color (for example green on black for a CRT look). |
 | `codeFontFamily` | `monospace` | Font family for source-code slides (for example `Courier New`). |
 | `logoPath` | `null` | Path to the logo (relative path in `logos/`). |
+| `logoDarkPath` | `null` | Dark variant of the logo, shown on dark slide backgrounds (#1931). `null` for bundled brand logos (they switch automatically). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logo size in px. |
 | `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |

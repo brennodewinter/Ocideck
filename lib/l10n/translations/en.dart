@@ -838,6 +838,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Donker logo kiezen': 'Choose dark logo',
+  'Geen donker logo ingesteld': 'No dark logo set',
+  'Verwijder donker logo': 'Remove dark logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'The slide background is dark, but the logo has no dark variant. The logo is nearly invisible on the slide. Set a dark logo in the presentation settings.',
   'Aangeboden als download:': 'Offered as a download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'The browser did not accept the download. Allow downloads for this site and try again.',

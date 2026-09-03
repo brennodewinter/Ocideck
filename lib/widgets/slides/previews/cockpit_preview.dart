@@ -87,7 +87,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     final textColor = AppTheme.parseHexColor(widget.profile.textColor);
     final pad = widget.w * 0.04;
     final logoSafe = widget.slide.showLogo
-        ? _logoSafeInsets(widget.w, widget.profile)
+        ? _logoSafeInsets(widget.w, widget.profile, corner: true)
         : EdgeInsets.zero;
     final outerPadding = EdgeInsets.fromLTRB(
       pad + logoSafe.left,

@@ -685,6 +685,22 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     }
   }
 
+  Future<void> _pickLogoDark() async {
+    if (!supportsLocalProjectFolders) return;
+    final file = await FilePicker.pickFile(
+      dialogTitle: context.l10n.d('Donker logo kiezen'),
+      type: FileType.image,
+    );
+    if (!mounted) return;
+    final path = file?.path;
+    if (path != null) {
+      setState(() {
+        _themeProfile = _themeProfile.copyWith(logoDarkPath: path);
+        _profileTouched = true;
+      });
+    }
+  }
+
   void _selectProfile(String name) {
     _adoptProfile(_profiles.firstWhere((p) => p.name == name));
   }

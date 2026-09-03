@@ -1619,6 +1619,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Donker logo kiezen': 'wIv qIj wo\'Del',
+  'Geen donker logo ingesteld': 'qIj wo\'Del tu\'lu\'be\'',
+  'Verwijder donker logo': 'qIj wo\'Del teq',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'nargh \'ej qIj tlhoy, \'ach wo\'Del qIj mI\' tu\'lu\'be\'. narghbe\'qu\' wo\'Del. wo\'Del qIj yIvIHmoH presentation nughDat.',
   'Aangeboden als download:': 'download nobta\':',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'download lajbe\' browser. DaqvamvaD downloadmey yIchaw\' \'ej yInID.',

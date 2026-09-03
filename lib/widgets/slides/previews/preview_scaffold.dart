@@ -56,8 +56,12 @@ class _PreviewScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Panel slides (chart, code, table, ...) have opaque content that the logo
+    // can sit on top of — no vertical strip needed (#1932). Text slides keep
+    // a reduced strip so the text stops above the logo.
+    final isPanel = !slideUsesRichText(slide);
     final safe = slide.showLogo
-        ? _logoSafeInsets(width, profile)
+        ? _logoSafeInsets(width, profile, corner: isPanel)
         : EdgeInsets.zero;
 
     // De logostrook reserveren we búiten de `FittedBox`, niet als padding in de
@@ -114,8 +118,12 @@ class _PreviewScaffold extends StatelessWidget {
 /// De logo-vrije zone als insets, gedeeld door alle previews die een logo
 /// ontwijken (bullets, chart, code, cockpit). Hier omdat de scaffold al de
 /// logo-bewuste marge kent; `slide_preview.dart` zit op zijn regelplafond.
-EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile);
+EdgeInsets _logoSafeInsets(
+  double w,
+  ThemeProfile profile, {
+  bool corner = false,
+}) {
+  final (top, bottom) = logoSafeReserveEdges(w, profile, corner: corner);
   return EdgeInsets.only(top: top, bottom: bottom);
 }
 

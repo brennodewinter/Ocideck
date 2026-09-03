@@ -262,7 +262,10 @@ const Map<String, int> fileSizeBaseline = {
   // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
   // import van de paginamaat-lokalisatie.
   // Verlaagd van 1034 naar 1033: het bestand meet 1033.
-  'lib/widgets/dialogs/settings_dialog.dart': 1030,
+  // +16 (#1931): _pickLogoDark + _resolveLogoDarkPath.
+  'lib/widgets/dialogs/settings_dialog.dart': 1046,
+  // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
+  'lib/services/file_service.dart': 1024,
   // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
@@ -328,6 +331,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1153,
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
+  // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
       // +78 (#1500): de tabelstijl-controls (randstijl, zebra, celopvulling,
       // accentlijn) en de paginamaat-/margecontrols. Ze staan in eigen parts
@@ -349,7 +353,8 @@ const Map<String, int> classSizeBaseline = {
       // zichzelf zo terug.
       // +26 (#1885): flexibel zoekveld (ConstrainedBox i.p.v. vaste 260 px),
       // SegmentedButton-iconen weg op smal, _profileSelector in Wrap op smal.
-      6203,
+      // +43 (#1931): _pickLogoDark + donkere-logo-UI in settings_dialog_colors.
+      6246,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -393,7 +398,8 @@ const Map<String, int> classSizeBaseline = {
   // +34 (#1804): `_writeMarpConfig` + `.marprc.yml`-lid in het pakket, zodat
   // een gewone `marp deck.md` de gegenereerde thema-CSS laadt. Beide horen bij
   // het opslaan/pakken en raken velden die al in deze klasse leven.
-  'lib/services/file_service.dart#FileService': 2764,
+  // +58 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
+  'lib/services/file_service.dart#FileService': 2822,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a

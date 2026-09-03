@@ -672,6 +672,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Donker logo kiezen': 'Elegir logo oscuro',
+  'Geen donker logo ingesteld': 'Sin logo oscuro configurado',
+  'Verwijder donker logo': 'Quitar logo oscuro',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'El fondo de la diapositiva es oscuro, pero el logo no tiene una variante oscura. El logo es casi invisible en la diapositiva. Configura un logo oscuro en los ajustes de presentación.',
   'Aangeboden als download:': 'Ofrecido como descarga:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'El navegador no ha aceptado la descarga. Permite las descargas para este sitio e inténtalo de nuevo.',

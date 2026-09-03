@@ -55,6 +55,7 @@ import 'menu_blocks.dart';
 import 'rich_text_layout.dart';
 import 'scene/scene.dart';
 import 'markdown_service.dart';
+import '../theme/brand_logo.dart';
 
 part 'marp_html/marp_html_service_cockpit.dart';
 part 'marp_html/marp_html_service_charts.dart';

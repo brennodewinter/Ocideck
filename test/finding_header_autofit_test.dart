@@ -140,9 +140,12 @@ void main() {
     // (a) It remains effectively full-width: the scaffold may absorb a few
     // percent of font-metric drift, but must not shrink and park the page
     // top-left (pre-fix this content rendered at ~0.68 scale).
+    // #1932: finding is een panel-slide — het logo zit in de hoek, de
+    // inhoud gebruikt de volle hoogte. De autofit-schaal verschilt daardoor
+    // licht van de oude situatie met een logo-strook.
     expect(
       r.scaleDown,
-      greaterThan(0.95),
+      greaterThan(0.89),
       reason: 'content should stay effectively full-width, not be parked',
     );
 

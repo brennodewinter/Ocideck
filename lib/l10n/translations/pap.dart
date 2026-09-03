@@ -674,6 +674,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Donker logo kiezen': 'Skoha logo skuru',
+  'Geen donker logo ingesteld': 'Sin logo skuru establesí',
+  'Verwijder donker logo': 'Kita logo skuru',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'E fondo di e dia ta skuru, pero e logo no tin un variante skuru. E logo ta kasi invisibel riba e dia. Konfigura un logo skuru den e settingnan di presentashon.',
   'Aangeboden als download:': 'Ofresé komo download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'E browser no a aseptá e download. Permití download pa e sitio aki i purba atrobe.',

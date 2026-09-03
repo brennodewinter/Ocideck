@@ -1658,6 +1658,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Donker logo kiezen': 'Alege logo întunecat',
+  'Geen donker logo ingesteld': 'Niciun logo întunecat setat',
+  'Verwijder donker logo': 'Șterge logo întunecat',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Fundalul slide-ului este întunecat, dar logo-ul nu are o variantă întunecată. Logo-ul este aproape invizibil pe slide. Setați un logo întunecat în setările prezentării.',
   'Aangeboden als download:': 'Oferit ca descărcare:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Browserul nu a acceptat descărcarea. Permiteți descărcările pentru acest site și încercați din nou.',

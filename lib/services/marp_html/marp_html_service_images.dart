@@ -81,8 +81,8 @@ Future<String> _presentationLogoCss(
   HtmlImageResolver? embedImage,
   Future<Uint8List> Function(String asset) loadBytes,
 ) async {
-  final path = theme.logoPath?.trim();
-  if (path == null || path.isEmpty) return '';
+  final path = effectiveSlideLogoPath(theme);
+  if (path == null || path.trim().isEmpty) return '';
   final uri = await _themeLogoDataUri(path, embedImage, loadBytes);
   if (uri == null) return '';
 

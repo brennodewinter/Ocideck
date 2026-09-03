@@ -1667,6 +1667,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Donker logo kiezen': 'Επιλογή σκοτεινού λογοτύπου',
+  'Geen donker logo ingesteld': 'Δεν ορίστηκε σκοτεινό λογότυπο',
+  'Verwijder donker logo': 'Αφαίρεση σκοτεινού λογοτύπου',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Το φόντο της διαφάνειας είναι σκοτεινό, αλλά το λογότυπο δεν έχει σκοτεινή παραλλαγή. Το λογότυπο είναι σχεδόν αόρατο στη διαφάνεια. Ορίστε ένα σκοτεινό λογότυπο στις ρυθμίσεις παρουσίασης.',
   'Aangeboden als download:': 'Προσφέρθηκε ως λήψη:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Το πρόγραμμα περιήγησης δεν δέχτηκε τη λήψη. Επιτρέψτε τις λήψεις για αυτόν τον ιστότοπο και δοκιμάστε ξανά.',

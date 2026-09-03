@@ -334,6 +334,6 @@ FindingSpec firstRenderPageSpec(Slide slide, {ThemeProfile? profile}) {
   if (profile == null || !slide.showLogo) {
     return (font: font, extraVReserve: 0);
   }
-  final reserve = logoSafeReserve(kReferenceSlideWidth, profile);
+  final reserve = logoSafeReserve(kReferenceSlideWidth, profile, corner: true);
   return (font: font, extraVReserve: reserve);
 }

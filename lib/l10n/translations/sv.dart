@@ -1641,6 +1641,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Donker logo kiezen': 'Välj mörkt logo',
+  'Geen donker logo ingesteld': 'Inget mörkt logo valt',
+  'Verwijder donker logo': 'Ta bort mörkt logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Diabakgrunden är mörk, men logotypen har ingen mörk variant. Logotypen är nästan osynlig på diabilden. Ställ in ett mörkt logo i presentationsinställningarna.',
   'Aangeboden als download:': 'Erbjuden som nedladdning:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Webbläsaren tog inte emot nedladdningen. Tillåt nedladdningar för den här webbplatsen och försök igen.',

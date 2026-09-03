@@ -1660,6 +1660,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Donker logo kiezen': 'Agħżel logo skur',
+  'Geen donker logo ingesteld': 'L-ebda logo skur mhux issettjat',
+  'Verwijder donker logo': 'Neħħi logo skur',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'L-isfond tal-islajd huwa skur, iżda l-logo m\'għandux variant skur. Il-logo huwa kważi inviżibbli fuq l-islajd. Issettja logo skur fl-issettjar tal-preżentazzjoni.',
   'Aangeboden als download:': 'Offrut bħala tniżżil:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Il-browser ma aċċettax it-tniżżil. Ippermetti t-tniżżil għal dan is-sit u erġa\' pprova.',

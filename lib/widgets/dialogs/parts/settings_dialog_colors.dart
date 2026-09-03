@@ -544,6 +544,60 @@ extension _SettingsColors on _SettingsDialogState {
           },
         ),
         const SizedBox(height: 14),
+        // Donkere logo-variant: alleen zinnig met een lichte logo ingesteld.
+        // Gebundelde merken kiezen automatisch; dit veld is voor een eigen logo.
+        if (_themeProfile.logoPath != null) ...[
+          _themeColorAnchor(
+            'logoDarkPath',
+            Row(
+              children: [
+                Container(
+                  key: const Key('style-logo-dark-preview'),
+                  width: 64,
+                  height: 52,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: AppTheme.chartTooltipBg,
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(color: AppTheme.slate700),
+                  ),
+                  child: ThemeProfileLogo(
+                    profile: _themeProfile,
+                    logoPath: _themeProfile.logoDarkPath,
+                    width: 54,
+                    height: 42,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: _pathBox(
+                    _themeProfile.logoDarkPath ??
+                        l10n.d('Geen donker logo ingesteld'),
+                    muted: _themeProfile.logoDarkPath == null,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton.icon(
+                  onPressed: _pickLogoDark,
+                  icon: const Icon(Icons.nights_stay_outlined, size: 16),
+                  label: Text(l10n.d('Kiezen')),
+                ),
+                if (_themeProfile.logoDarkPath != null)
+                  IconButton(
+                    onPressed: () => _rebuild(() {
+                      _themeProfile = _themeProfile.copyWith(
+                        clearLogoDark: true,
+                      );
+                      _profileTouched = true;
+                    }),
+                    icon: const Icon(Icons.clear, size: 18),
+                    tooltip: l10n.d('Verwijder donker logo'),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+        ],
         SizedBox(
           width: 160,
           child: TextField(
