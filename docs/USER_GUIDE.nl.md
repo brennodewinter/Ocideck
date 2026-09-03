@@ -1186,6 +1186,24 @@ Elk instrument heeft een eigen label en de velden die passen bij zijn type:
 - **Koersindicator** toont de huidige koers, een aparte streefkoers en
   een optioneel markeringslabel.
 
+**Hoe een cel is ingedeeld.** Elk instrument krijgt dezelfde drie zones, en op
+de wijzerplaat staat nooit vrije tekst: de plaat draagt alleen schaal,
+kleurbanden, naald en de twee schaalcijfers (de thermometer toont zijn bereik
+naast de buis, de klim-/daalmeter leest "+max / 0 / min"). Waarde en eenheid
+staan in een **uitleesvenster** naast de wijzerplaat — in de flank die vroeger
+leeg bleef — met één getalmaat per slide, afgeleid van het langste getal erop,
+zodat alle uitlezingen op één lijn staan en de rollende uitlezing nooit van
+maat verandert. Een korte eenheid als "%" of "/10" staat inline achter het
+getal; een langere ("ml per uur") krijgt er een of twee regels onder. Het label
+spant de volle celbreedte onder de groep en groeit met de cel mee: op een
+1080p-beamer met zes meters is het ruim 30 px, op één regel tot ongeveer dertig
+tekens, daarna twee regels. Lange tekst krimpt eerst iets, wikkelt dan, en
+eindigt alleen in uiterste nood in een ellipsis. Cellen smaller dan 1,35 : 1
+(twee meters op een 16:9-slide, of drie op één rij) zetten de uitlezing onder
+de wijzerplaat. Drie meters delen één rij en vijf meters centreren hun tweede
+rij, zodat een dashboard nooit een leeg vak toont. Dezelfde regels sturen de
+HTML-export, dus de geëxporteerde pagina breekt regels waar de app dat doet.
+
 Het uiterlijk is een applicatie-instelling, geen eigenschap van één slide. Ga naar
 **Instellingen → Cockpit → Weergave** en kies:
 

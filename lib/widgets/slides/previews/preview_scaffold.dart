@@ -110,3 +110,14 @@ class _PreviewScaffold extends StatelessWidget {
     );
   }
 }
+
+/// De logo-vrije zone als insets, gedeeld door alle previews die een logo
+/// ontwijken (bullets, chart, code, cockpit). Hier omdat de scaffold al de
+/// logo-bewuste marge kent; `slide_preview.dart` zit op zijn regelplafond.
+EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
+  final (top, bottom) = logoSafeReserveEdges(w, profile);
+  return EdgeInsets.only(top: top, bottom: bottom);
+}
+
+double _logoAwareBottomPadding(double defaultPad, double safeBottom) =>
+    safeBottom <= 0 ? defaultPad : math.max(defaultPad, safeBottom);

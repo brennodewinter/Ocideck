@@ -61,6 +61,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/cockpit_layout.dart';
 import '../../services/finding_pagination.dart';
 import '../../services/display_window_service.dart';
 import '../../services/markdown_body_blocks.dart';
@@ -126,6 +127,7 @@ part 'previews/chart_preview_bullet.dart';
 part 'previews/chart_preview_improvement.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/cockpit_painter_support.dart';
+part 'previews/cockpit_instrument_painter.dart';
 part 'previews/question_preview.dart';
 part 'previews/question_preview_answers.dart';
 part 'previews/timeline_preview.dart';
@@ -192,14 +194,6 @@ Widget _md(
     trailing: trailing,
   );
 }
-
-EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile);
-  return EdgeInsets.only(top: top, bottom: bottom);
-}
-
-double _logoAwareBottomPadding(double defaultPad, double safeBottom) =>
-    safeBottom <= 0 ? defaultPad : math.max(defaultPad, safeBottom);
 
 /// De dikte van een voortgangsbalk in een preview, afgeleid van de breedte
 /// waarop de dia wordt opgemaakt.

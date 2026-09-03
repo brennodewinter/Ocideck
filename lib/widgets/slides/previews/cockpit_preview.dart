@@ -130,7 +130,9 @@ class _CockpitPreviewState extends State<_CockpitPreview>
                   accent: accent,
                   surface: bg,
                   textColor: textColor,
-                  mutedColor: textColor.withValues(alpha: 0.62),
+                  // 0,75 in plaats van 0,62: eenheid en schaalcijfers in
+                  // klassiek halen dan AA op de dia-achtergrond.
+                  mutedColor: textColor.withValues(alpha: 0.75),
                   scheme: widget.scheme,
                   bootProgress: boot,
                   font: widget.font,
@@ -144,6 +146,10 @@ class _CockpitPreviewState extends State<_CockpitPreview>
   }
 }
 
+/// Het instrumentenraster. De rekenkern (`CockpitGridPlan`/`CockpitCellPlan`
+/// in services/cockpit_layout.dart) bepaalt cellen, wijzerplaat, venster en
+/// label; hier worden de cellen alleen neergezet. Dezelfde rekenkern voedt de
+/// SVG van de HTML-export, zodat beide werelden dezelfde indeling tekenen.
 class _CockpitGrid extends StatelessWidget {
   final List<CockpitMeterSpec> meters;
   final Color accent;
@@ -168,29 +174,42 @@ class _CockpitGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final count = meters.length.clamp(1, cockpitMaxMeters);
-    final columns = count == 1
-        ? 1
-        : count == 2
-        ? 2
-        : count <= 4
-        ? 2
-        : 3;
     final grid = LayoutBuilder(
       builder: (context, constraints) {
-        final gap = constraints.maxWidth * 0.018;
-        final rows = (count / columns).ceil();
-        final cellW = (constraints.maxWidth - gap * (columns - 1)) / columns;
-        final cellH = (constraints.maxHeight - gap * (rows - 1)) / rows;
-        return Wrap(
-          spacing: gap,
-          runSpacing: gap,
+        final width = math.max(1.0, constraints.maxWidth);
+        final height = math.max(1.0, constraints.maxHeight);
+        final gridPlan = CockpitGridPlan.compute(
+          count: count,
+          width: width,
+          height: height,
+        );
+        final cellPlan = CockpitCellPlan.compute(
+          width: gridPlan.cellWidth,
+          height: gridPlan.cellHeight,
+          longestDigits: cockpitLongestDigits(meters),
+        );
+        // Eén krimpfactor voor de hele dia, zodat een cel met twee
+        // eenheidregels niet als enige een kleiner getal krijgt.
+        final readoutScale = cockpitReadoutScale(
+          meters,
+          cellPlan,
+          attitudeTemplate: context.l10n.d('P {pitch}  B {bank}'),
+          actualTemplate: context.l10n.d('ACT {value}°'),
+          targetTemplate: context.l10n.d('TGT {heading}°'),
+        );
+        return Stack(
+          clipBehavior: Clip.none,
           children: [
             for (var i = 0; i < count; i++)
-              SizedBox(
-                width: cellW,
-                height: cellH,
+              Positioned(
+                left: gridPlan.cells[i].x,
+                top: gridPlan.cells[i].y,
+                width: gridPlan.cells[i].w,
+                height: gridPlan.cells[i].h,
                 child: _CockpitInstrument(
                   meter: meters[i],
+                  plan: cellPlan,
+                  readoutScale: readoutScale,
                   progress: _stagger(
                     bootProgress,
                     i,
@@ -245,8 +264,13 @@ class _CockpitGrid extends StatelessWidget {
   }
 }
 
+/// Eén cel: de painter tekent instrument en uitleesvenster; het label is een
+/// `Text` in de labelstrook, al door de cascade gehaald (grootte en regelval
+/// uit `CockpitCellPlan.fitLabel`), zodat het nooit over de bezel valt.
 class _CockpitInstrument extends StatelessWidget {
   final CockpitMeterSpec meter;
+  final CockpitCellPlan plan;
+  final double readoutScale;
   final double progress;
   final CockpitVisualStyle visualStyle;
   final Color accent;
@@ -263,6 +287,8 @@ class _CockpitInstrument extends StatelessWidget {
 
   const _CockpitInstrument({
     required this.meter,
+    required this.plan,
+    required this.readoutScale,
     required this.progress,
     required this.visualStyle,
     required this.accent,
@@ -283,709 +309,67 @@ class _CockpitInstrument extends StatelessWidget {
     final label = meter.label.isEmpty
         ? cockpitMeterTypeLabel(meter.type).toUpperCase()
         : meter.label;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final labelSize = (constraints.maxWidth * 0.058).clamp(13.0, 18.0);
-        return Column(
-          children: [
-            Expanded(
-              child: CustomPaint(
-                painter: _CockpitInstrumentPainter(
-                  meter: meter,
-                  progress: progress.clamp(0, 1).toDouble(),
-                  visualStyle: visualStyle,
-                  accent: accent,
-                  surface: surface,
-                  textColor: textColor,
-                  mutedColor: mutedColor,
-                  good: good,
-                  warning: warning,
-                  critical: critical,
-                  cold: cold,
-                  sky: sky,
-                  ground: ground,
-                  font: font,
-                  faceText: (
-                    attitude: context.l10n.d('P {pitch}  B {bank}'),
-                    actual: context.l10n.d('ACT {value}°'),
-                    target: context.l10n.d('TGT {heading}°'),
-                  ),
+    final fit = plan.fitLabel(label);
+    final box = plan.labelBox;
+    final labelColor = visualStyle == CockpitVisualStyle.authentic
+        ? AppTheme.cockpitPaletteFor(surface).label.withValues(alpha: 0.92)
+        : mutedColor;
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: CustomPaint(
+            painter: _CockpitInstrumentPainter(
+              meter: meter,
+              plan: plan,
+              readoutScale: readoutScale,
+              progress: progress.clamp(0, 1).toDouble(),
+              visualStyle: visualStyle,
+              accent: accent,
+              surface: surface,
+              textColor: textColor,
+              mutedColor: mutedColor,
+              good: good,
+              warning: warning,
+              critical: critical,
+              cold: cold,
+              sky: sky,
+              ground: ground,
+              font: font,
+              faceText: (
+                attitude: context.l10n.d('P {pitch}  B {bank}'),
+                actual: context.l10n.d('ACT {value}°'),
+                target: context.l10n.d('TGT {heading}°'),
+              ),
+            ),
+          ),
+        ),
+        // In de miniatuur van de slidestrook is een label van een paar pixels
+        // alleen een streep; dan liever een eerlijke mini-meter zonder tekst.
+        if (fit.size >= cockpitMinTextPx && fit.lines.isNotEmpty)
+          Positioned(
+            left: box.x,
+            top: box.y,
+            width: box.w,
+            height: box.h,
+            child: Center(
+              child: Text(
+                fit.lines.join('\n'),
+                maxLines: fit.lines.length,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: labelColor,
+                  fontSize: fit.size,
+                  fontFamily: font,
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.none,
+                  height: cockpitLineHeight,
                 ),
-                child: const SizedBox.expand(),
               ),
             ),
-            SizedBox(height: math.max(3, 6 * progress)),
-            Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: visualStyle == CockpitVisualStyle.authentic
-                    ? AppTheme.cockpitPaletteFor(
-                        surface,
-                      ).label.withValues(alpha: 0.82)
-                    : mutedColor,
-                fontSize: labelSize,
-                fontFamily: font,
-                fontWeight: FontWeight.w700,
-                decoration: TextDecoration.none,
-                height: 1.12,
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+      ],
     );
   }
 }
-
-class _CockpitInstrumentPainter extends CustomPainter {
-  final CockpitMeterSpec meter;
-  final double progress;
-  final CockpitVisualStyle visualStyle;
-  final Color accent;
-  final Color surface;
-  final Color textColor;
-  final Color mutedColor;
-
-  /// Status zone colours from the active cockpit colour scheme.
-  final Color good;
-  final Color warning;
-  final Color critical;
-  final Color cold;
-
-  /// Artificial-horizon sky and ground colours.
-  final Color sky;
-  final Color ground;
-  final String font;
-
-  /// De teksten op de instrumentglazen, al vertaald, met plaatshouders voor de
-  /// meterwaarden. Een painter heeft geen BuildContext, dus ze komen van
-  /// buiten; een record omdat dat waarde-gelijkheid heeft en [shouldRepaint]
-  /// er dus in één vergelijking op kan afgaan.
-  final ({String attitude, String actual, String target}) faceText;
-
-  _CockpitInstrumentPainter({
-    required this.meter,
-    required this.progress,
-    required this.visualStyle,
-    required this.accent,
-    required this.surface,
-    required this.textColor,
-    required this.mutedColor,
-    required this.good,
-    required this.warning,
-    required this.critical,
-    required this.cold,
-    required this.sky,
-    required this.ground,
-    required this.font,
-    required this.faceText,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (_authentic) {
-      _authenticFrame(canvas, size);
-    } else {
-      _classicFrame(canvas, size);
-    }
-    switch (meter.type) {
-      case CockpitMeterType.speedometer:
-        _arcGauge(canvas, size, sweep: 250, startDeg: 145);
-        break;
-      case CockpitMeterType.voltmeter:
-        _arcGauge(canvas, size, sweep: 180, startDeg: 180, compact: true);
-        break;
-      case CockpitMeterType.thermometer:
-        _thermometer(canvas, size);
-        break;
-      case CockpitMeterType.altimeter:
-        _arcGauge(canvas, size, sweep: 300, startDeg: 120, altimeter: true);
-        break;
-      case CockpitMeterType.climbDescent:
-        _climb(canvas, size);
-        break;
-      case CockpitMeterType.horizon:
-        _horizon(canvas, size);
-        break;
-      case CockpitMeterType.heading:
-        _heading(canvas, size);
-        break;
-    }
-    if (_authentic) _authenticGlass(canvas, size);
-  }
-
-  void _classicFrame(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    final r = math.min(size.width, size.height) * 0.07;
-    final bg = Paint()..color = surface;
-    canvas.drawRRect(RRect.fromRectAndRadius(rect, Radius.circular(r)), bg);
-    final borderW = math.max(1.0, size.shortestSide * 0.008);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(rect.deflate(borderW / 2), Radius.circular(r)),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = borderW
-        ..color = accent.withValues(alpha: 0.42 + progress * 0.22),
-    );
-    // Thin inner hairline for a machined "bezel" depth, derived from the slide
-    // text colour so it works on any background.
-    //
-    // The corner radius is floored at zero, which `RRect` requires: the outer
-    // radius follows the meter's size while the border width has a fixed pixel
-    // as its floor, so on a meter shorter than some fifteen pixels — a preview
-    // being *measured* at zero width, or simply a great many meters side by
-    // side — that floor wins and the difference goes negative. A sharp corner
-    // is the right answer there (#782).
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        rect.deflate(borderW + 1.5),
-        Radius.circular(math.max(0, r - borderW)),
-      ),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1
-        ..color = _line(0.06 + progress * 0.04),
-    );
-  }
-
-  void _arcGauge(
-    Canvas canvas,
-    Size size, {
-    required double sweep,
-    required double startDeg,
-    bool compact = false,
-    bool altimeter = false,
-  }) {
-    final c = _authentic
-        ? Offset(size.width * 0.50, size.height * 0.50)
-        : Offset(size.width * 0.40, size.height * (compact ? 0.52 : 0.50));
-    final radius =
-        math.min(size.width, size.height) *
-        (_authentic ? 0.335 : (compact ? 0.34 : 0.37));
-    final stroke = math.max(3.0, size.shortestSide * 0.035);
-    final rect = Rect.fromCircle(center: c, radius: radius);
-    void arc(double from, double to, Color color) {
-      final a0 = _angleFor(from, startDeg, sweep);
-      final a1 = _angleFor(to, startDeg, sweep);
-      canvas.drawArc(
-        rect,
-        _rad(a0),
-        _rad(a1 - a0),
-        false,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeCap = StrokeCap.round
-          ..strokeWidth = stroke
-          ..color = color.withValues(alpha: 0.86 * _power),
-      );
-    }
-
-    canvas.drawArc(
-      rect,
-      _rad(startDeg),
-      _rad(sweep),
-      false,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = stroke
-        ..strokeCap = StrokeCap.round
-        ..color = _line(0.16),
-    );
-    final greenStart = math.min(meter.greenFrom, meter.greenTo);
-    final greenEnd = math.max(meter.greenFrom, meter.greenTo);
-    if (meter.redFrom > greenEnd) {
-      arc(meter.min, greenStart, warning);
-      arc(greenStart, greenEnd, good);
-      arc(greenEnd, meter.redFrom, warning);
-      arc(meter.redFrom, meter.max, critical);
-    } else {
-      arc(meter.min, meter.redFrom, critical);
-      arc(meter.redFrom, greenStart, warning);
-      arc(greenStart, greenEnd, good);
-      arc(greenEnd, meter.max, warning);
-    }
-
-    final tickPaint = Paint();
-    for (var i = 0; i <= 10; i++) {
-      final major = i % 5 == 0;
-      final angle = _rad(startDeg + sweep * i / 10);
-      final dir = Offset(math.cos(angle), math.sin(angle));
-      final outer = c + dir * (radius + 2);
-      final inner = c + dir * (radius - stroke * (major ? 1.45 : 0.75));
-      tickPaint
-        ..color = _line(major ? 0.62 : 0.30)
-        ..strokeWidth = major
-            ? math.max(1.5, size.shortestSide * 0.009)
-            : math.max(1, size.shortestSide * 0.005);
-      canvas.drawLine(inner, outer, tickPaint);
-    }
-
-    final shown = _animatedValue(meter.value);
-    final angle = _rad(_angleFor(shown, startDeg, sweep));
-    _needle(canvas, c, angle, radius - stroke * 1.35, size.shortestSide);
-    _hub(canvas, c, size.shortestSide);
-    _valueText(
-      canvas,
-      _authentic
-          ? Offset(size.width * 0.50, size.height * 0.70)
-          : Offset(size.width * 0.75, size.height * 0.50),
-      size.width * (_authentic ? 0.070 : 0.092),
-      number: _fmt(shown),
-      unit: meter.unit,
-    );
-    if (_authentic) {
-      final minLabel = _arcScaleLabel(c, radius, sweep, right: false);
-      final maxLabel = _arcScaleLabel(c, radius, sweep, right: true);
-      _text(
-        canvas,
-        _fmt(meter.min),
-        minLabel,
-        size.width * 0.032,
-        _instrumentMuted,
-        anchor: _Anchor.center,
-      );
-      _text(
-        canvas,
-        _fmt(meter.max),
-        maxLabel,
-        size.width * 0.032,
-        _instrumentMuted,
-        anchor: _Anchor.center,
-      );
-    }
-  }
-
-  void _thermometer(Canvas canvas, Size size) {
-    final w = size.width;
-    final h = size.height;
-    final s = math.min(w, h);
-    final dialCenter = Offset(w * 0.50, h * 0.50);
-    // The classic card reserved its left column for a tall thermometer. An
-    // authentic instrument is a round bezel: derive the tube from that circle
-    // instead of from the whole (wide) cell, otherwise both tube and bulb land
-    // outside the glass.
-    // Authentic: centre the tube on the bezel axis with the digital readout
-    // below it, so the instrument reads as centred instead of shoved left to
-    // make room for a value beside it.
-    final cx = _authentic ? dialCenter.dx : w * 0.30;
-    final tubeWidth = s * (_authentic ? 0.11 : 0.14);
-    final bulbRadius = tubeWidth * (_authentic ? 0.82 : 0.95);
-    final topY = _authentic ? dialCenter.dy - s * 0.32 : h * 0.16;
-    final bulbCenter = _authentic
-        ? Offset(cx, dialCenter.dy + s * 0.10)
-        : Offset(cx, h * 0.82);
-    final channelTop = topY + tubeWidth * 0.5;
-    final channelBottom = bulbCenter.dy;
-    final span = channelBottom - channelTop;
-
-    // Glass body: a capsule tube (rounded top) fused with the bulb so the
-    // junction reads as a single piece of glass instead of two overlapping
-    // outlines.
-    final tubeRect = Rect.fromLTRB(
-      cx - tubeWidth / 2,
-      topY,
-      cx + tubeWidth / 2,
-      bulbCenter.dy + bulbRadius * 0.25,
-    );
-    final body = Path.combine(
-      PathOperation.union,
-      Path()..addRRect(
-        RRect.fromRectAndCorners(
-          tubeRect,
-          topLeft: Radius.circular(tubeWidth / 2),
-          topRight: Radius.circular(tubeWidth / 2),
-        ),
-      ),
-      Path()..addOval(Rect.fromCircle(center: bulbCenter, radius: bulbRadius)),
-    );
-    canvas.drawPath(body, Paint()..color = _line(0.08));
-
-    final t = _norm(_animatedValue(meter.value));
-    final levelY = channelBottom - span * t;
-
-    // Fill the fluid with the full palette (green → amber → red across the
-    // scale, aligned to the meter's zones) so the colour itself is the legend;
-    // the marker further down shows where the current value sits.
-    final greenStart = math.min(meter.greenFrom, meter.greenTo);
-    final greenEnd = math.max(meter.greenFrom, meter.greenTo);
-    final redHigh = meter.redFrom > greenEnd;
-    double n(double v) => _norm(v).clamp(0.0, 1.0).toDouble();
-    final List<Color> paletteColors;
-    final List<double> paletteStops;
-    if (redHigh) {
-      final gs = n(greenStart);
-      final ge = math.max(gs, n(greenEnd));
-      final rf = math.max(ge, n(meter.redFrom));
-      // Below the green zone's lower bound reads as "too cold" → blue, then
-      // green in range, warming through amber to red at the top.
-      paletteColors = [cold, cold, good, good, warning, critical, critical];
-      paletteStops = [0.0, gs * 0.55, gs, ge, (ge + rf) / 2, rf, 1.0];
-    } else {
-      final rr = n(meter.redFrom);
-      final g = math.max(rr, n(greenStart));
-      paletteColors = [critical, critical, warning, good, good];
-      paletteStops = [0.0, rr, (rr + g) / 2, g, 1.0];
-    }
-    final bounds = body.getBounds();
-    canvas.save();
-    canvas.clipPath(body);
-    canvas.drawRect(
-      bounds,
-      Paint()
-        ..shader = LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: paletteColors,
-          stops: paletteStops,
-        ).createShader(bounds),
-    );
-    canvas.restore();
-
-    // Glass outline and a slim gloss highlight for depth.
-    canvas.drawPath(
-      body,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1.5, w * 0.006)
-        ..color = _line(0.42),
-    );
-    final glossW = tubeWidth * 0.13;
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(
-          cx - tubeWidth * 0.30,
-          topY + tubeWidth * 0.55,
-          glossW,
-          span * 0.5,
-        ),
-        Radius.circular(glossW),
-      ),
-      Paint()..color = _line(0.20),
-    );
-
-    // Marker ("streepje") indicating where the current value sits.
-    final markLeft = cx - tubeWidth / 2;
-    final markRight = cx + tubeWidth / 2;
-    final markPaint = Paint()
-      ..color = _instrumentInk
-      ..strokeWidth = math.max(2.0, w * 0.008)
-      ..strokeCap = StrokeCap.round;
-    canvas.drawLine(
-      Offset(markLeft - tubeWidth * 0.24, levelY),
-      Offset(markRight + tubeWidth * 0.24, levelY),
-      markPaint,
-    );
-    final tri = Path()
-      ..moveTo(markRight + tubeWidth * 0.24, levelY)
-      ..lineTo(markRight + tubeWidth * 0.62, levelY - tubeWidth * 0.30)
-      ..lineTo(markRight + tubeWidth * 0.62, levelY + tubeWidth * 0.30)
-      ..close();
-    canvas.drawPath(tri, Paint()..color = _instrumentInk);
-
-    _valueText(
-      canvas,
-      _authentic
-          ? Offset(dialCenter.dx, dialCenter.dy + s * 0.31)
-          : Offset(w * 0.72, h * 0.5),
-      _authentic ? s * 0.12 : w * 0.092,
-      number: _fmt(_animatedValue(meter.value)),
-      unit: meter.unit,
-    );
-  }
-
-  void _climb(Canvas canvas, Size size) {
-    final c = Offset(
-      size.width * (_authentic ? 0.50 : 0.42),
-      size.height * 0.50,
-    );
-    final r = math.min(size.width, size.height) * (_authentic ? 0.33 : 0.36);
-    canvas.drawCircle(
-      c,
-      r,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = size.width * 0.016
-        ..color = _line(0.30),
-    );
-    final tickPaint = Paint()
-      ..color = _line(0.44)
-      ..strokeWidth = math.max(1, size.shortestSide * 0.007);
-    for (var i = 0; i <= 10; i++) {
-      final a = _rad(90 - 180 * i / 10);
-      final long = i % 5 == 0;
-      canvas.drawLine(
-        c + Offset(math.cos(a), math.sin(a)) * (r * (long ? 0.72 : 0.82)),
-        c + Offset(math.cos(a), math.sin(a)) * (r * 0.95),
-        tickPaint..strokeWidth = long ? 2 : 1,
-      );
-    }
-    _text(
-      canvas,
-      '+',
-      c + Offset(0, -r * 0.58),
-      size.width * 0.065,
-      _instrumentMuted,
-      anchor: _Anchor.center,
-      align: TextAlign.center,
-      weight: FontWeight.w800,
-    );
-    _text(
-      canvas,
-      '0',
-      c + Offset(r * 0.60, 0),
-      size.width * 0.052,
-      _instrumentMuted,
-      anchor: _Anchor.center,
-      align: TextAlign.center,
-    );
-    _text(
-      canvas,
-      '-',
-      c + Offset(0, r * 0.66),
-      size.width * 0.075,
-      _instrumentMuted,
-      anchor: _Anchor.center,
-      align: TextAlign.center,
-      weight: FontWeight.w800,
-    );
-    final shown = _animatedValue(meter.value);
-    final angle = _rad(90 - 180 * _norm(shown));
-    _needle(canvas, c, angle, r * 0.76, size.shortestSide);
-    _hub(canvas, c, size.shortestSide);
-    _valueText(
-      canvas,
-      _authentic
-          // The complete left semicircle is intentionally free of scale ticks;
-          // use it as the read-out window instead of printing through the
-          // bottom ticks and the minus marker.
-          ? c + Offset(-r * 0.48, r * 0.12)
-          : Offset(size.width * 0.77, size.height * 0.50),
-      _authentic ? size.shortestSide * 0.13 : size.width * 0.092,
-      number: '${shown > 0 ? '+' : ''}${_fmt(shown)}',
-      unit: meter.unit,
-    );
-  }
-
-  void _horizon(Canvas canvas, Size size) {
-    final c = Offset(
-      size.width * (_authentic ? 0.50 : 0.42),
-      size.height * 0.50,
-    );
-    final r = math.min(size.width, size.height) * (_authentic ? 0.34 : 0.35);
-    canvas.save();
-    canvas.clipPath(Path()..addOval(Rect.fromCircle(center: c, radius: r)));
-    canvas.translate(c.dx, c.dy);
-    canvas.rotate(_rad(meter.bank * progress));
-    final pitch = meter.pitch * progress * r / 45;
-    canvas.drawRect(
-      Rect.fromLTWH(-r * 1.6, -r * 1.6 + pitch, r * 3.2, r * 1.6),
-      Paint()..color = sky,
-    );
-    canvas.drawRect(
-      Rect.fromLTWH(-r * 1.6, pitch, r * 3.2, r * 1.6),
-      Paint()..color = ground,
-    );
-    canvas.drawLine(
-      Offset(-r * 1.4, pitch),
-      Offset(r * 1.4, pitch),
-      Paint()
-        ..color = Colors.white
-        ..strokeWidth = r * 0.035,
-    );
-    canvas.restore();
-    canvas.drawCircle(
-      c,
-      r,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = size.width * 0.018
-        ..color = _line(0.55),
-    );
-    canvas.drawLine(
-      Offset(c.dx - r * 0.38, c.dy),
-      Offset(c.dx + r * 0.38, c.dy),
-      Paint()
-        ..color = accent
-        ..strokeWidth = size.width * 0.018
-        ..strokeCap = StrokeCap.round,
-    );
-    _text(
-      canvas,
-      faceText.attitude
-          .replaceAll('{pitch}', _fmt(meter.pitch * progress))
-          .replaceAll('{bank}', _fmt(meter.bank * progress)),
-      _authentic
-          ? Offset(size.width * 0.50, size.height * 0.78)
-          : Offset(size.width * 0.80, size.height * 0.50),
-      size.width * (_authentic ? 0.032 : 0.04),
-      _instrumentInk,
-      align: TextAlign.center,
-      anchor: _Anchor.center,
-      weight: FontWeight.w700,
-    );
-  }
-
-  void _heading(Canvas canvas, Size size) {
-    final dial = cockpitHeadingDial(size, authentic: _authentic);
-    final c = dial.center;
-    final r = dial.radius;
-    canvas.drawCircle(
-      c,
-      r,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = size.width * 0.017
-        ..color = _line(0.30),
-    );
-    for (var i = 0; i < 36; i++) {
-      final a = _rad(i * 10 - 90);
-      final long = i % 3 == 0;
-      canvas.drawLine(
-        c + Offset(math.cos(a), math.sin(a)) * (r * (long ? 0.82 : 0.90)),
-        c + Offset(math.cos(a), math.sin(a)) * r,
-        Paint()
-          ..color = _line(long ? 0.62 : 0.32)
-          ..strokeWidth = long ? 2 : 1,
-      );
-    }
-    const labels = {'N': -90.0, 'E': 0.0, 'S': 90.0, 'W': 180.0};
-    for (final entry in labels.entries) {
-      final a = _rad(entry.value);
-      _text(
-        canvas,
-        entry.key,
-        c + Offset(math.cos(a), math.sin(a)) * (r * 0.66),
-        size.width * 0.038,
-        _instrumentMuted,
-        anchor: _Anchor.center,
-        align: TextAlign.center,
-        weight: FontWeight.w600,
-      );
-    }
-    final targetAngle = _rad(meter.heading - 90);
-    final markerOuter =
-        c + Offset(math.cos(targetAngle), math.sin(targetAngle)) * (r * 1.02);
-    final markerLeft =
-        c +
-        Offset(math.cos(targetAngle + 0.12), math.sin(targetAngle + 0.12)) *
-            (r * 0.83);
-    final markerRight =
-        c +
-        Offset(math.cos(targetAngle - 0.12), math.sin(targetAngle - 0.12)) *
-            (r * 0.83);
-    final marker = Path()
-      ..moveTo(markerOuter.dx, markerOuter.dy)
-      ..lineTo(markerLeft.dx, markerLeft.dy)
-      ..lineTo(markerRight.dx, markerRight.dy)
-      ..close();
-    canvas.drawPath(marker, Paint()..color = accent.withValues(alpha: 0.95));
-
-    final angle = _rad(_animatedHeading(meter.value) - 90);
-    final needle = Path()
-      ..moveTo(
-        c.dx + math.cos(angle) * r * 0.72,
-        c.dy + math.sin(angle) * r * 0.72,
-      )
-      ..lineTo(
-        c.dx + math.cos(angle + 2.6) * r * 0.18,
-        c.dy + math.sin(angle + 2.6) * r * 0.18,
-      )
-      ..lineTo(
-        c.dx + math.cos(angle - 2.6) * r * 0.18,
-        c.dy + math.sin(angle - 2.6) * r * 0.18,
-      )
-      ..close();
-    canvas.drawPath(
-      needle,
-      Paint()..color = _authentic ? _instrumentInk : accent,
-    );
-    _hub(canvas, c, size.shortestSide);
-    // De roos draagt streepjes en N/E/S/W-labels rondom, dus geen vrij venster
-    // zoals de andere instrumenten. Klassiek: een rechterkolom naast de roos.
-    // Authentiek (ronde bezel vult de cel): een uitleesvenster laag op de plaat.
-    // In beide gevallen begrensd, zodat een lange markerregel met een ellipsis
-    // binnen het instrument blijft i.p.v. over roos of bezel te lopen (#1110).
-    final readouts = cockpitHeadingReadouts(size, c, r, authentic: _authentic);
-    final window = readouts.window;
-    if (window != null) _drawReadoutWindow(canvas, size, window);
-    final anchor = readouts.anchorRight ? _Anchor.centerRight : _Anchor.center;
-    _text(
-      canvas,
-      faceText.actual.replaceAll(
-        '{value}',
-        _fmt(_animatedHeading(meter.value) % 360).padLeft(3, '0'),
-      ),
-      readouts.actualCenter,
-      readouts.actualFont,
-      _instrumentInk,
-      align: readouts.align,
-      anchor: anchor,
-      weight: FontWeight.w800,
-      maxWidth: readouts.maxWidth,
-    );
-    _text(
-      canvas,
-      faceText.target.replaceAll(
-        '{heading}',
-        _fmt(meter.heading).padLeft(3, '0'),
-      ),
-      readouts.targetCenter,
-      readouts.targetFont,
-      _instrumentMuted,
-      align: readouts.align,
-      anchor: anchor,
-      weight: FontWeight.w600,
-      maxWidth: readouts.maxWidth,
-    );
-    if (meter.markerLabel.isNotEmpty) {
-      _text(
-        canvas,
-        meter.markerLabel,
-        readouts.markerCenter,
-        readouts.markerFont,
-        _instrumentMuted,
-        align: readouts.align,
-        anchor: anchor,
-        maxWidth: readouts.maxWidth,
-      );
-    }
-  }
-
-  double _angleFor(double value, double startDeg, double sweep) =>
-      startDeg + sweep * _norm(value).clamp(0, 1);
-
-  double _norm(double value) {
-    final span = meter.max - meter.min;
-    if (span <= 0) return 0;
-    return ((value - meter.min) / span).clamp(0, 1).toDouble();
-  }
-
-  double _rad(double deg) => deg * math.pi / 180;
-
-  String _fmt(double value) => value == value.roundToDouble()
-      ? value.toStringAsFixed(0)
-      : value.toStringAsFixed(1);
-
-  @override
-  bool shouldRepaint(_CockpitInstrumentPainter oldDelegate) =>
-      oldDelegate.meter != meter ||
-      oldDelegate.progress != progress ||
-      oldDelegate.visualStyle != visualStyle ||
-      oldDelegate.accent != accent ||
-      oldDelegate.surface != surface ||
-      oldDelegate.textColor != textColor ||
-      oldDelegate.mutedColor != mutedColor ||
-      oldDelegate.good != good ||
-      oldDelegate.warning != warning ||
-      oldDelegate.critical != critical ||
-      oldDelegate.cold != cold ||
-      oldDelegate.sky != sky ||
-      oldDelegate.ground != ground ||
-      oldDelegate.font != font ||
-      oldDelegate.faceText != faceText;
-}
-
-enum _Anchor { topLeft, topCenter, center, centerRight }

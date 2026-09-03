@@ -1139,6 +1139,24 @@ Each instrument has its own label and the fields that make sense for its type:
 - **Heading indicator** shows the current course, a separate target heading and
   an optional marker label.
 
+**How a cell is laid out.** Every instrument gets the same three zones, and no
+free text is ever painted on the dial face: the dial carries only its scale,
+colour bands, needle and the two scale numerals (the thermometer shows its
+range beside the tube, the climb/descent dial reads "+max / 0 / min"). The
+value and its unit sit in a **read-out window** beside the dial — in the flank
+that used to stay empty — with one number size per slide, derived from the
+longest number on it, so all read-outs line up and the rolling read-out never
+changes size. A short unit such as "%" or "/10" sits inline behind the number;
+a longer one ("ml per hour") gets its own line or two underneath. The label
+spans the full width of the cell below the group and grows with the cell: on a
+1080p beamer with six meters it is over 30 px, on one line up to some thirty
+characters, then two lines. Long text shrinks a little, then wraps, and only as
+a last resort ends in an ellipsis. Cells narrower than 1.35 : 1 (two meters on
+a 16:9 slide, or three on one row) stack the read-out under the dial instead.
+Three meters share one row and five meters centre their second row, so a
+dashboard never shows an empty place. The same rules drive the HTML export, so
+the exported page breaks lines where the app does.
+
 The look is an application setting, not a property of one slide. Go to
 **Settings → Cockpit → Display** and choose:
 

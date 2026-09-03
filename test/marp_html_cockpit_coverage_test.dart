@@ -65,9 +65,14 @@ void main() {
       },
     ], scheme: customScheme);
     expect(speed, contains('Speed'));
-    expect(speed, contains('78%'));
+    // Getal en korte eenheid staan als aparte tekstknopen in het venster.
+    expect(speed, contains('>78<tspan'));
+    expect(speed, contains('>%</tspan>'));
     expect(speed, contains('#101010')); // good zone
     expect(speed, contains('#303030')); // critical zone
+    // Schaalcijfers op volle dekking: met 0,85 alfa bleven ze in de lichte
+    // export op 4,05:1, onder AA.
+    expect(speed, isNot(contains('fill-opacity=".85"')));
 
     // Voltmeter: redFrom (50) < greenFrom (75) → green-high "if" branch.
     final volt = renderMeters([
@@ -83,7 +88,8 @@ void main() {
         'value': 92,
       },
     ], scheme: customScheme);
-    expect(volt, contains('92V'));
+    expect(volt, contains('>92<tspan'));
+    expect(volt, contains('>V</tspan>'));
     expect(volt, contains('#101010')); // good zone
     expect(volt, contains('#303030')); // critical zone
 
@@ -101,7 +107,8 @@ void main() {
         'value': 3200,
       },
     ]);
-    expect(alt, contains('3200ft'));
+    expect(alt, contains('>3200<tspan'));
+    expect(alt, contains('>ft</tspan>'));
     expect(alt, contains('<svg'));
   });
 
@@ -162,9 +169,31 @@ void main() {
         'value': -8,
       },
     ]);
-    // No leading + for a non-positive value.
-    expect(down, contains('-8'));
-    expect(down, isNot(contains('+-8')));
+    // No leading + for a non-positive value; a real minus sign (U+2212)
+    // beside the plus, not a hyphen.
+    expect(down, contains('\u22128'));
+    expect(down, isNot(contains('-8')));
+  });
+
+  test('cells keep their translate when the power-on animation scales', () {
+    // De cockpitPowerOn-keyframes zetten `transform:scale()` als CSS op
+    // `.cockpit-meter`; een transform-attribuut op datzelfde element werd
+    // overschreven en alle meters vielen op cel 0. De verplaatsing staat
+    // daarom op een eigen buitenste <g>.
+    final svg = renderMeters([
+      {'type': 'speedometer', 'label': 'A', 'value': 10},
+      {'type': 'speedometer', 'label': 'B', 'value': 20},
+    ]);
+    final translated = RegExp(
+      r'<g transform="translate\([^"]+\)"><g class="cockpit-meter"',
+    );
+    expect(translated.allMatches(svg), hasLength(2));
+    expect(
+      svg,
+      isNot(
+        contains('class="cockpit-meter" style="--meter-index:0" transform='),
+      ),
+    );
   });
 
   test('horizon renders sky/ground bands and a clip path', () {
@@ -173,8 +202,13 @@ void main() {
     ], scheme: customScheme);
     expect(svg, contains('#505050')); // sky
     expect(svg, contains('#606060')); // ground
-    expect(svg, contains('cockpit-horizon-0'));
-    expect(svg, contains('P 20 / B 15'));
+    // Het clip-id draagt een suffix per SVG: meerdere cockpit-dia's delen
+    // één HTML-document en één id-namespace.
+    expect(svg, contains('cockpit-horizon-0-'));
+    // Pitch en bank staan als twee regels in het uitleesvenster, niet meer
+    // op de grond van de horizon.
+    expect(svg, contains('>P 20<'));
+    expect(svg, contains('>B 15<'));
   });
 
   test('horizon clamps extreme pitch and bank', () {
@@ -182,7 +216,8 @@ void main() {
     final svg = renderMeters([
       {'type': 'horizon', 'label': 'Att', 'pitch': 60, 'bank': -80},
     ]);
-    expect(svg, contains('P 45 / B -60'));
+    expect(svg, contains('>P 45<'));
+    expect(svg, contains('>B \u221260<'));
   });
 
   test('heading renders compass, actual/target and a marker label', () {
@@ -220,13 +255,15 @@ void main() {
   });
 
   test('theme accent colour is threaded into the gauge, default otherwise', () {
+    // Authentiek draagt het accent op de kompasmarker, net als de app; de
+    // naald is inkt en het horizonsymbool is wit met een donkere rand.
     final themed = renderMeters([
-      {'type': 'speedometer', 'label': 'S', 'value': 30},
+      {'type': 'heading', 'label': 'S', 'value': 0, 'heading': 90},
     ], theme: const ThemeProfile(accentColor: '#123456'));
     expect(themed, contains('#123456'));
 
     final plain = renderMeters([
-      {'type': 'speedometer', 'label': 'S', 'value': 30},
+      {'type': 'heading', 'label': 'S', 'value': 0, 'heading': 90},
     ]);
     // Falls back to the built-in accent when no theme is supplied.
     expect(plain, contains('#38BDF8'));

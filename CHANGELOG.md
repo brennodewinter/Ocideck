@@ -500,6 +500,42 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Cockpit: de waarde-uitlezing liep door de meter heen. Getal en eenheid
+  stonden als één ongebonden regel ín de wijzerplaat, precies op de hoogte van
+  de schaalcijfers en de bandeinden; een eenheid als "% van maximale hartslag"
+  liep dwars door "50" en "100" en tot op de bezel, klassiek werd hij aan de
+  kaartrand afgekapt en in de HTML-export liep hij het buurinstrument in. Het
+  label eronder zat vast op 18 px, ook op een beamer van 1920 px breed, en de
+  flanken naast de ronde bezel bleven leeg. De cockpit-dia is herontworpen
+  (docs/design/COCKPIT_LAYOUT.md): op de wijzerplaat staat geen vrije tekst
+  meer, alleen schaal, banden, naald en de twee schaalcijfers — de thermometer
+  krijgt die nu ook, klim/daling toont "+max / 0 / min" en de horizon draagt
+  geen tekst meer op de bruine grond. Getal en eenheid krijgen een
+  uitleesvenster in de flank (een plaat in face-kleur, zoals het kompasvenster
+  van #1110, nu voor elk instrument), met één getalmaat per dia zodat de
+  rollende uitlezing nooit van maat springt; een korte eenheid ("%", "/10")
+  staat inline achter het getal, een lange op eigen regels eronder. Het label
+  krijgt de volle celbreedte onder de groep en schaalt met de cel mee. Drie
+  meters staan nu op één rij en vijf krijgen een gecentreerde tweede rij: een
+  dashboard heeft geen leeg vak. Elke passingsbeslissing volgt uit tekenaantal
+  en celmaat, niet uit gemeten pixels, in één rekenkern
+  (`services/cockpit_layout.dart`) die de Flutter-painter én de SVG van de
+  HTML-export delen — de export tekent daardoor ook dezelfde thermometer en
+  horizon als de app, en zijn paneel heeft de verhouding van het app-paneel op
+  een 16:9-dia, zodat beide dezelfde breed/gestapeld-keuze maken. Het
+  bestandsformaat is onaangeroerd; er kwam geen vertaalstring bij. Een
+  geometrietest (`cockpit_layout_test.dart`) bewijst dat het venster buiten de
+  bezel valt en dat de zes meters uit de aanleiding zonder ellipsis passen; de
+  clip-ids in de export dragen nu een suffix per SVG, want twee cockpit-dia's in
+  één document deelden `#cockpit-horizon-0` en de tweede verloor zijn tekst.
+  Uit de beeldkeuring in de echte renderer: de rollende uitlezing houdt de
+  decimalen van de eindwaarde (geen "1450.3…" meer buiten het venster), de
+  thermometerbuis begint onder de testlampjes, de klim/daling-cijfers staan in
+  de vrije linkerhelft (de naald liep door de "0"), het horizonsymbool is wit
+  met een donkere rand (accent op lucht was 2,5:1), schaalcijfers en eenheid
+  staan op volle dekking (AA), een negatief getal draagt een echt minteken, en
+  een stapel die niet past krimpt rasterbreed zodat de getalmaat per dia gelijk
+  blijft.
 - fix(document): een ```mermaid-fence tekent nu ook in de visuele editor als
   diagram (#1920). `DOCUMENT_MODE.md` §4.3 belooft mermaid als gerenderde kaart
   in de visuele modus, en lezer, voorvertoning, Pagina's, PDF en HTML-export

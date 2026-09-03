@@ -478,11 +478,12 @@ void main() {}
 
     final html = MarpHtmlService.renderCockpitBlocks(slide);
 
-    // De volledige lange marker staat er niet meer in; hij is afgekapt.
+    // De volledige lange marker staat er niet meer in; hij is gewikkeld en
+    // afgekapt binnen het uitleesvenster naast de roos, in een clip van dat
+    // venster als laatste vangnet.
     expect(html, isNot(contains(longMarker)));
     expect(html, contains('…'));
-    // Rechts uitgelijnd i.p.v. het oude center-anchored op .78·breedte.
-    expect(html, contains('text-anchor="end"'));
+    expect(html, contains('clip-path="url(#cockpit-readout-1-'));
     // De korte readouts blijven voluit leesbaar.
     expect(html, contains('ACT 187°'));
     expect(html, contains('TGT 090°'));
@@ -1323,10 +1324,10 @@ void _videoTests() {
 
     // Lichte dia → licht instrumentpaneel; donkere dia → het zwarte. De
     // export volgt zo hetzelfde dia-thema als de app-render.
-    expect(light, contains('#E9EBEE'));
-    expect(light, isNot(contains('#07111F')));
-    expect(dark, contains('#07111F'));
-    expect(dark, isNot(contains('#E9EBEE')));
+    expect(light, contains('#CED2D6'));
+    expect(light, isNot(contains('#202223')));
+    expect(dark, contains('#202223'));
+    expect(dark, isNot(contains('#CED2D6')));
 
     // De hardgecodeerde Engelse header hoort nergens meer te staan.
     expect(light, isNot(contains('COCKPIT VIEW')));
