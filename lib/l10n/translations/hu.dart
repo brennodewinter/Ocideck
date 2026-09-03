@@ -1790,7 +1790,7 @@ const _dutchSourceAddHu = <String, String>{
   'waarden herkend.': 'elismert értékek.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'az értékeket nem ismerik fel. Ezek a sorok a jelenlegi sorrendben alul maradnak.',
-  'Basislettergrootte: {px} px': 'Alap betűméret: {px} px',
+  'Basislettergrootte: {pt} pt': 'Alap betűméret: {pt} pt',
   'Basislettergrootte': 'Alap betűméret',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'A címsorok, a lábjegyzetek és az idővonalkártyák ezzel a mérettel együtt méreteződnek.',

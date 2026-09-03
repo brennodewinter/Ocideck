@@ -47,9 +47,10 @@ const int kThemeMaxAnimationDurationMs = 30000;
 int clampThemeAnimationDuration(int ms) =>
     ms.clamp(kThemeMinAnimationDurationMs, kThemeMaxAnimationDurationMs);
 
-/// De basislettergrootte van een document, in beeldpunten — de maat waarin de
-/// gewone tekst staat, en waar de koppen, de noten en de tijdlijnkaartjes zich
-/// naar verhouden.
+/// De basislettergrootte van een document, in typografische punten — de maat
+/// waarin de gewone tekst staat, en waar de koppen, de noten en de
+/// tijdlijnkaartjes zich naar verhouden. Dezelfde eenheid als de PDF: een punt
+/// is 1/72 duim.
 ///
 /// Alleen voor documenten. Een dia schaalt haar tekst naar het 16:9-kader en
 /// heeft dus geen vaste maat; een blad heeft er wel een, en dat is precies wat
@@ -62,9 +63,21 @@ const double kDocumentDefaultBodyFontSize = 11.0;
 const double kDocumentMinBodyFontSize = 9.0;
 const double kDocumentMaxBodyFontSize = 28.0;
 
+/// CSS-pixels per typografisch punt. De pagina-meetkunde van het document
+/// staat op 96 dpi (`kPxPerMm` in de paginaweergave); een punt is 1/72 duim.
+/// Zonder deze factor is een body van 11 pt op het scherm 11 CSS-pixels — een
+/// derde kleiner dan dezelfde 11 pt in de PDF, en dat is hoe het blad op het
+/// scherm kleiner las dan op papier (#1947).
+const double kCssPxPerPoint = 96 / 72;
+
 /// Klem een opgeslagen of bewerkte documentlettergrootte binnen het bereik.
-double clampDocumentBodyFontSize(double px) =>
-    px.clamp(kDocumentMinBodyFontSize, kDocumentMaxBodyFontSize);
+double clampDocumentBodyFontSize(double pt) =>
+    pt.clamp(kDocumentMinBodyFontSize, kDocumentMaxBodyFontSize);
+
+/// Zet de opgeslagen puntmaat om naar CSS-pixels, zodat scherm, schrijfvlak
+/// en HTML-export dezelfde fysieke letter tonen als de PDF.
+double documentBodyFontSizeToCssPx(double pt) =>
+    clampDocumentBodyFontSize(pt) * kCssPxPerPoint;
 
 /// Op welke breedte je in de visuele documentmodus schrijft.
 ///
@@ -647,6 +660,12 @@ class ThemeProfile {
   double get documentFontScale =>
       clampDocumentBodyFontSize(documentBodyFontSize) /
       kDocumentDefaultBodyFontSize;
+
+  /// De bodymaat in CSS-pixels — wat de weergave, het schrijfvlak en de
+  /// HTML-export zetten. De PDF leest [documentBodyFontSize] rechtstreeks als
+  /// punten: zonder deze omzetting is 11 pt op het scherm 11 px (#1947).
+  double get documentBodyFontSizeCssPx =>
+      documentBodyFontSizeToCssPx(documentBodyFontSize);
 
   /// De kopkleur van een document, met de oude verdeling als terugval: een
   /// hoofdstukkop volgt de tekstkleur, een subkop het accent. Zo verandert er

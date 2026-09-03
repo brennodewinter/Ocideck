@@ -1786,7 +1786,7 @@ const _dutchSourceAddLv = <String, String>{
   'waarden herkend.': 'atzītas vērtības.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vērtības nav atpazītas. Šīs rindas paliek apakšā to pašreizējā secībā.',
-  'Basislettergrootte: {px} px': 'Pamata fonta lielums: {px} px',
+  'Basislettergrootte: {pt} pt': 'Pamata fonta lielums: {pt} pt',
   'Basislettergrootte': 'Pamata fonta lielums',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Virsraksti, vēres un laika joslas kartītes mērogojas līdzi šim izmēram.',

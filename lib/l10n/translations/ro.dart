@@ -1804,7 +1804,7 @@ const _dutchSourceAddRo = <String, String>{
   'waarden herkend.': 'valori recunoscute.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valori nerecunoscute. Aceste rânduri rămân în partea de jos în ordinea lor curentă.',
-  'Basislettergrootte: {px} px': 'Dimensiunea de bază a fontului: {px} px',
+  'Basislettergrootte: {pt} pt': 'Dimensiunea de bază a fontului: {pt} pt',
   'Basislettergrootte': 'Dimensiunea de bază a fontului',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Titlurile, notele de subsol și cardurile cronologiei se scalează odată cu această dimensiune.',

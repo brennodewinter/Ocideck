@@ -1806,7 +1806,7 @@ const _dutchSourceAddMt = <String, String>{
   'waarden herkend.': 'valuri rikonoxxuti.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valuri mhux rikonoxxuti. Dawk ir-ringieli jibqgħu fil-qiegħ fl-ordni attwali tagħhom.',
-  'Basislettergrootte: {px} px': 'Daqs bażiku tat-tipa: {px} px',
+  'Basislettergrootte: {pt} pt': 'Daqs bażiku tat-tipa: {pt} pt',
   'Basislettergrootte': 'Daqs bażiku tat-tipa',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'L-intestaturi, in-noti f\'qiegħ il-paġna u l-kartuni tal-linja taż-żmien jiskalaw ma\' dan id-daqs.',

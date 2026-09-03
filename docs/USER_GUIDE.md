@@ -5293,12 +5293,16 @@ find it.
     and the animation duration.
 
   The **base font size** is the size ordinary body text is set in, from 9 to
-  28 px, 11 px by default — a page size rather than a screen size.
+  28 pt, 11 pt by default — a page size rather than a screen size.
   Headings, footnotes and timeline cards are proportions of it, so one slider
   resets a document's whole typography. It is a document setting because only a
   page has a fixed type size: a slide scales its text to the 16:9 frame. The
   size travels with the profile, so it holds in the reader, in the visual
-  editor, in where the page breaks fall, and in the HTML/PDF export.
+  editor, in where the page breaks fall, and in the HTML/PDF export. The visual
+  view converts the point size to CSS pixels (96/72) so 11 pt on screen matches
+  11 pt in the PDF; without that conversion the same number was 11 CSS pixels
+  on screen and 11 pt on paper, and the page read a third smaller than it
+  printed.
 
   The **heading colour** is the colour a document's headings are set in. Leave it
   unset and it stays as it always was: a chapter heading (`#`) follows the text

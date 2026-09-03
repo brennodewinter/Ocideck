@@ -1819,7 +1819,7 @@ const _dutchSourceAddGa = <String, String>{
   'waarden herkend.': 'luachanna aitheanta.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'luachanna nach n-aithnítear. Fanann na sraitheanna sin ag bun an ord reatha.',
-  'Basislettergrootte: {px} px': 'Bunmhéid an chló: {px} px',
+  'Basislettergrootte: {pt} pt': 'Bunmhéid an chló: {pt} pt',
   'Basislettergrootte': 'Bunmhéid an chló',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Athraíonn ceannteidil, fonótaí agus cártaí amlíne de réir an mhéid seo.',

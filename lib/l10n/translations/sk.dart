@@ -1794,7 +1794,7 @@ const _dutchSourceAddSk = <String, String>{
   'waarden herkend.': 'uznávané hodnoty.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'hodnoty nie sú uznané. Tieto riadky zostanú naspodku v aktuálnom poradí.',
-  'Basislettergrootte: {px} px': 'Základná veľkosť písma: {px} px',
+  'Basislettergrootte: {pt} pt': 'Základná veľkosť písma: {pt} pt',
   'Basislettergrootte': 'Základná veľkosť písma',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Nadpisy, poznámky pod čiarou a karty časovej osi sa škálujú s touto veľkosťou.',

@@ -536,6 +536,7 @@ deze velden (met standaardwaarden):
 | `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |
 | `documentLogoPosition` | `top-right` | Positie van het effectieve documentlogo in de kop- of voettekst. |
 | `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
+| `documentBodyFontSize` | `11` | Basisgrootte van de broodtekst van een document, in typografische punten (`9`–`28`) — dezelfde eenheid als de PDF. Koppen, voetnoten en tijdlijnkaarten zijn verhoudingen daarvan. De visuele editor, de lezer, de pagina-eindeberekening en de HTML-export zetten die puntmaat om naar CSS-pixels met 96/72 (dus 11 pt op het scherm is dezelfde fysieke maat als 11 pt in de PDF). Een dia blijft onaangetast: die schaalt haar tekst naar het 16:9-kader. |
 | `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
 | `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
 | `documentHeadingColor` | `null` | Kleur van de koppen van een document, alle niveaus. `null` houdt de verdeling die er altijd was: een hoofdstukkop volgt `textColor`, een subkop `accentColor`. |

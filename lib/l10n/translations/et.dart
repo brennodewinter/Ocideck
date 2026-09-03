@@ -1781,7 +1781,7 @@ const _dutchSourceAddEt = <String, String>{
   'waarden herkend.': 'tunnustatud väärtused.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'väärtusi ei tuvastata. Need read jäävad praeguses järjekorras alumisse ossa.',
-  'Basislettergrootte: {px} px': 'Kirja põhisuurus: {px} px',
+  'Basislettergrootte: {pt} pt': 'Kirja põhisuurus: {pt} pt',
   'Basislettergrootte': 'Kirja põhisuurus',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Pealkirjad, joonealused märkused ja ajatelje kaardid skaleeruvad selle suurusega.',

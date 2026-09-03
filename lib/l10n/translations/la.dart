@@ -1804,7 +1804,7 @@ const _dutchSourceAddLa = <String, String>{
   'waarden herkend.': 'bona cognoscuntur.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'values ​​​​novit. Illi ordines in fundo manent in currenti ordine.',
-  'Basislettergrootte: {px} px': 'Magnitudo litterarum basalis: {px} px',
+  'Basislettergrootte: {pt} pt': 'Magnitudo litterarum basalis: {pt} pt',
   'Basislettergrootte': 'Magnitudo litterarum basalis',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Tituli, notae infimae et schedae temporum cum hac magnitudine crescunt.',

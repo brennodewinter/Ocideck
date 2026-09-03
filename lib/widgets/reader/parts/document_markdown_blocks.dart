@@ -326,7 +326,7 @@ class _Theme {
     ThemeProfile? profile, {
     this.footnoteNumbers = const {},
   }) : dark = theme.brightness == Brightness.dark,
-       bodyFontSize = clampDocumentBodyFontSize(
+       bodyFontSize = documentBodyFontSizeToCssPx(
          profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
        ),
        paper = _profileColor(
@@ -335,7 +335,7 @@ class _Theme {
        ),
        body = TextStyle(
          fontFamily: profile?.fontFamily,
-         fontSize: clampDocumentBodyFontSize(
+         fontSize: documentBodyFontSizeToCssPx(
            profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
          ),
          height: kDocumentBodyLineHeight,

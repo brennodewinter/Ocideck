@@ -819,7 +819,7 @@ const _dutchSourceAddIt = {
   'waarden herkend.': 'valori riconosciuti.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valori non riconosciuti. Tali righe rimangono in fondo nell\'ordine corrente.',
-  'Basislettergrootte: {px} px': 'Dimensione base del carattere: {px} px',
+  'Basislettergrootte: {pt} pt': 'Dimensione base del carattere: {pt} pt',
   'Basislettergrootte': 'Dimensione base del carattere',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Titoli, note a piè di pagina e schede della timeline si adattano a questa dimensione.',

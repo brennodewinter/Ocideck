@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
+import 'package:ocideck/services/pdf/document_pdf_style.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 
@@ -61,6 +62,26 @@ void main() {
       final legacy = ThemeProfile.fromJson({'name': 'Oud'});
       expect(legacy.documentBodyFontSize, kDocumentDefaultBodyFontSize);
     });
+
+    // 11 is een puntmaat (de PDF zet hem zo), geen CSS-pixel. Zonder de
+    // omzetting 96/72 is dezelfde 11 op het scherm een derde kleiner dan op
+    // papier — precies #1947.
+    test('de schermmaat is de puntmaat in CSS-pixels', () {
+      expect(kCssPxPerPoint, closeTo(96 / 72, 0.0001));
+      expect(
+        documentBodyFontSizeToCssPx(kDocumentDefaultBodyFontSize),
+        closeTo(kDocumentDefaultBodyFontSize * kCssPxPerPoint, 0.0001),
+      );
+      const profile = ThemeProfile(name: 'Standaard');
+      expect(profile.documentBodyFontSizeCssPx, closeTo(14 + 2 / 3, 0.0001));
+    });
+
+    test('de PDF houdt de opgeslagen maat in punten', () {
+      const profile = ThemeProfile(name: 'Standaard');
+      expect(DocumentPdfStyle.fromTheme(profile).bodyFontSize, 11);
+      const large = ThemeProfile(name: 'Groot', documentBodyFontSize: 18);
+      expect(DocumentPdfStyle.fromTheme(large).bodyFontSize, 18);
+    });
   });
 
   group('weergave', () {
@@ -113,7 +134,7 @@ void main() {
       final body = tester.widget<InlineMarkdownText>(
         find.byType(InlineMarkdownText).first,
       );
-      expect(body.style.fontSize, 22.0);
+      expect(body.style.fontSize, closeTo(22.0 * kCssPxPerPoint, 0.001));
     });
   });
 
@@ -122,16 +143,23 @@ void main() {
       loadAsset: (asset) => File(asset).readAsString(),
     ).build(_md, continuous: true, theme: theme);
 
-    test('de documentexport draagt de gekozen maat in zijn CSS', () async {
+    test('de documentexport draagt de gekozen maat in CSS-pixels', () async {
       const profile = ThemeProfile(name: 'Groot', documentBodyFontSize: 21.5);
-      expect(await documentHtml(profile), contains('font-size:21.5px'));
+      expect(
+        await documentHtml(profile),
+        contains(
+          'font-size:${documentBodyFontSizeToCssPx(21.5).toStringAsFixed(1)}px',
+        ),
+      );
     });
 
-    test('de standaardmaat komt ook in de CSS terecht', () async {
+    test('de standaardmaat komt ook in de CSS terecht, als CSS-pixels', () async {
       const profile = ThemeProfile(name: 'Standaard');
       expect(
         await documentHtml(profile),
-        contains('font-size:${kDocumentDefaultBodyFontSize}px'),
+        contains(
+          'font-size:${documentBodyFontSizeToCssPx(kDocumentDefaultBodyFontSize).toStringAsFixed(1)}px',
+        ),
       );
     });
   });
