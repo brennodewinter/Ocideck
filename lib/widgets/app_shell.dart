@@ -281,7 +281,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     final snapshots = await recovery.loadAll();
     if (snapshots.isEmpty || !mounted) return;
 
-    final restore = await showDialog<bool>(
+    final restore = await showDialog<bool?>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) {
@@ -353,12 +353,19 @@ class _AppShellState extends ConsumerState<AppShell> {
           ),
           actions: [
             TextButton(
+              // "Nu niet" laat de snapshots liggen en toont het welkomstscherm.
+              // De gebruiker hoeft niet te kiezen tussen weggooien en openen
+              // voordat hij de app mag gebruiken (#1960).
+              onPressed: () => Navigator.pop(ctx, null),
+              child: Text(l10n.d('Nu niet')),
+            ),
+            TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: Text(l10n.d('Verwijderen')),
+              child: Text(l10n.d('Herstelkopie weggooien')),
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: Text(l10n.d('Herstellen')),
+              child: Text(l10n.d('Openen en verder werken')),
             ),
           ],
         );
@@ -370,8 +377,8 @@ class _AppShellState extends ConsumerState<AppShell> {
           .read(tabsProvider.notifier)
           .restoreRecovered(snapshots);
       // Zwijgen bij een mislukking is hier het ergst denkbare: de gebruiker
-      // klikt "Herstellen", ziet een leeg tabblad, en concludeert dat het werk
-      // weg is. Het staat er nog — dat hoort hij te horen.
+      // klikt "Openen en verder werken", ziet een leeg tabblad, en concludeert
+      // dat het werk weg is. Het staat er nog — dat hoort hij te horen.
       if (unreadable > 0 && mounted) {
         final l10n = context.l10n;
         showErrorSnackBar(
@@ -382,11 +389,13 @@ class _AppShellState extends ConsumerState<AppShell> {
           ),
         );
       }
-    } else {
+    } else if (restore == false) {
       // Alleen wat zojuist is getoond en geweigerd — niet de map leegvegen, waar
       // ook de herstelbestanden van een tweede venster in kunnen liggen.
       await recovery.discardEach(snapshots.map((s) => s.id));
     }
+    // restore == null: "Nu niet" — snapshots blijven liggen, welkomstscherm
+    // verschijnt. De volgende start stelt de vraag opnieuw.
   }
 
   String _formatWhen(DateTime t) {

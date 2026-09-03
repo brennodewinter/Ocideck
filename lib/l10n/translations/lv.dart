@@ -1633,6 +1633,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nu niet': 'Ne tagad',
+  'Herstelkopie weggooien': 'Izmest atjaunošanas kopiju',
+  'Openen en verder werken': 'Atvērt un turpināt',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Šajā(s) mapē(s) nav atrastas prezentācijas vai dokumentus. Izvēlieties citu mapi augšā vai pārlūkojiet failu šajā datorā.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1845,8 +1848,6 @@ const _dutchSourceAddLv = <String, String>{
   'Bestanden zoeken op deze computer': 'Atrast failus šajā datorā',
   'Dubbele bestanden opruimen': 'Sakārtot dublētos failus',
   'bestand(en) gevonden': 'fails(-i) atrasts(-i)',
-  'Geen presentaties of documenten gevonden.':
-      'Nav atrastas prezentācijas vai dokumenti.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Zināmajās mapēs nav atrastas prezentācijas vai dokumenti.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

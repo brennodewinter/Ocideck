@@ -1650,6 +1650,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nu niet': 'Nunc non',
+  'Herstelkopie weggooien': 'Recuperationis exemplar abiice',
+  'Openen en verder werken': 'Aperi et perge',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Nullae presentationes aut documenta in hoc/his folder repertae. Alteram capsam supra elige, aut fasciculum in hoc computatro quaere.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1864,8 +1867,6 @@ const _dutchSourceAddLa = <String, String>{
   'Bestanden zoeken op deze computer': 'Fasciculos in hoc computatro invenire',
   'Dubbele bestanden opruimen': 'Fasciculos duplicatos purgare',
   'bestand(en) gevonden': 'fasciculi inventi',
-  'Geen presentaties of documenten gevonden.':
-      'Nullae praesentationes vel documenta inventa.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Nullae praesentationes vel documenta in plicis notis inventa.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

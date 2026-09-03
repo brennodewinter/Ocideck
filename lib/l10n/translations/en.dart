@@ -831,6 +831,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nu niet': 'Not now',
+  'Herstelkopie weggooien': 'Discard recovery copy',
+  'Openen en verder werken': 'Open and continue',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'No presentations or documents found in this folder(s). Choose a different folder above, or browse for a file on this computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1045,8 +1048,6 @@ const _dutchSourceAddEn = {
   'Bestanden zoeken op deze computer': 'Find files on this computer',
   'Dubbele bestanden opruimen': 'Clean up duplicate files',
   'bestand(en) gevonden': 'file(s) found',
-  'Geen presentaties of documenten gevonden.':
-      'No presentations or documents found.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'No presentations or documents found in the known folders.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

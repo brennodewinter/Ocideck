@@ -1635,6 +1635,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nu niet': 'Ne zdaj',
+  'Herstelkopie weggooien': 'Zavrzi kopijo za obnovitev',
+  'Openen en verder werken': 'Odpri in nadaljuj',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'V tej/teh mapi/ah ni najdenih prezentacij ali dokumentov. Izberite drugo mapo zgoraj ali brskajte po datoteki na tem računalniku.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1847,8 +1850,6 @@ const _dutchSourceAddSl = <String, String>{
   'Bestanden zoeken op deze computer': 'Poišči datoteke na tem računalniku',
   'Dubbele bestanden opruimen': 'Počisti podvojene datoteke',
   'bestand(en) gevonden': 'datotek najdenih',
-  'Geen presentaties of documenten gevonden.':
-      'Ni najdenih predstavitev ali dokumentov.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'V znanih mapah ni bilo najdenih predstavitev ali dokumentov.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

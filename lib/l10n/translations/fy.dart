@@ -668,6 +668,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nu niet': 'No net',
+  'Herstelkopie weggooien': 'Werstelkopy fuortsmite',
+  'Openen en verder werken': 'Iepenje en fierder gean',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Gjin presintaasjes of dokuminten fûn yn dizze map(pen). Kies hjirboppe in oare map, of blêdzje nei in bestân op dizze kompjûter.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -881,8 +884,6 @@ const _dutchSourceAddFy = {
   'Bestanden zoeken op deze computer': 'Bestannen op dizze kompjûter sykje',
   'Dubbele bestanden opruimen': 'Dûbele bestannen opromje',
   'bestand(en) gevonden': 'bestân(nen) fûn',
-  'Geen presentaties of documenten gevonden.':
-      'Gjin presintaasjes of dokuminten fûn.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Gjin presintaasjes of dokuminten fûn yn de bekende mappen.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

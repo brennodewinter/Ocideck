@@ -2552,6 +2552,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nu niet': 'Şimdi değil',
+  'Herstelkopie weggooien': 'Kurtarma kopyasını at',
+  'Openen en verder werken': 'Aç ve devam et',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Bu klasörlerde sunu veya belge bulunamadı. Yukarıdan başka bir klasör seçin veya bu bilgisayarda bir dosyaya göz atın.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -2764,7 +2767,6 @@ const _dutchSourceAddTr = <String, String>{
   'Bestanden zoeken op deze computer': 'Bu bilgisayarda dosya ara',
   'Dubbele bestanden opruimen': 'Yinelenen dosyaları temizle',
   'bestand(en) gevonden': 'dosya bulundu',
-  'Geen presentaties of documenten gevonden.': 'Sunum veya belge bulunamadı.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Bilinen klasörlerde sunum veya belge bulunamadı.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

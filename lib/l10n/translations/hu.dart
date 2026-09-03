@@ -1637,6 +1637,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nu niet': 'Most nem',
+  'Herstelkopie weggooien': 'Helyreállítási másolat elvetése',
+  'Openen en verder werken': 'Megnyitás és folytatás',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Nem található prezentáció vagy dokumentum ebben(ezekben) a mappában. Válassz másik mappát fent, vagy tallózz egy fájlt ezen a számítógépen.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1851,8 +1854,6 @@ const _dutchSourceAddHu = <String, String>{
   'Bestanden zoeken op deze computer': 'Fájlok keresése ezen a számítógépen',
   'Dubbele bestanden opruimen': 'Duplikált fájlok rendbetétele',
   'bestand(en) gevonden': 'fájl található',
-  'Geen presentaties of documenten gevonden.':
-      'Nem található prezentáció vagy dokumentum.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Nem található prezentáció vagy dokumentum az ismert mappákban.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

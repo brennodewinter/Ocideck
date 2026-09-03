@@ -1635,6 +1635,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nu niet': 'Ei nyt',
+  'Herstelkopie weggooien': 'Hylkää palautuskopio',
+  'Openen en verder werken': 'Avaa ja jatka',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Ei esityksiä tai asiakirjoja tässä kansiossa. Valitse toinen kansio yläpuolelta tai selaa tiedostoa tällä tietokoneella.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1847,8 +1850,6 @@ const _dutchSourceAddFi = <String, String>{
   'Bestanden zoeken op deze computer': 'Etsi tiedostoja tältä tietokoneelta',
   'Dubbele bestanden opruimen': 'Siivoa päällekkäiset tiedostot',
   'bestand(en) gevonden': 'tiedosto(a) löydetty',
-  'Geen presentaties of documenten gevonden.':
-      'Esityksiä tai asiakirjoja ei löytynyt.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Tunnetuista kansioista ei löytynyt esityksiä eikä asiakirjoja.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

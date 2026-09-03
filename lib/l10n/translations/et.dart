@@ -1628,6 +1628,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nu niet': 'Mitte praegu',
+  'Herstelkopie weggooien': 'Hülga taastekoopia',
+  'Openen en verder werken': 'Ava ja jätka',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Selles/ nendes kaustas ei leitud esitlusi ega dokumente. Vali ülal teine kaust või sirvi faili selles arvutis.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1841,8 +1844,6 @@ const _dutchSourceAddEt = <String, String>{
   'Bestanden zoeken op deze computer': 'Leia failid sellest arvutist',
   'Dubbele bestanden opruimen': 'Korista topeltfailid',
   'bestand(en) gevonden': 'faili leitud',
-  'Geen presentaties of documenten gevonden.':
-      'Esitlusi ega dokumente ei leitud.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Tuntud kaustadest ei leitud esitlusi ega dokumente.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

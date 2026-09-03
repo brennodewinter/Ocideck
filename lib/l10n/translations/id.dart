@@ -1635,6 +1635,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nu niet': 'Sekarang tidak',
+  'Herstelkopie weggooien': 'Buang salinan pemulihan',
+  'Openen en verder werken': 'Buka dan lanjutkan',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Tidak ada presentasi atau dokumen yang ditemukan di folder ini. Pilih folder lain di atas, atau telusuri file di komputer ini.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1849,8 +1852,6 @@ const _dutchSourceAddId = <String, String>{
   'Bestanden zoeken op deze computer': 'Temukan berkas di komputer ini',
   'Dubbele bestanden opruimen': 'Bersihkan berkas duplikat',
   'bestand(en) gevonden': 'berkas ditemukan',
-  'Geen presentaties of documenten gevonden.':
-      'Tidak ada presentasi atau dokumen yang ditemukan.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Tidak ada presentasi atau dokumen yang ditemukan di folder yang dikenal.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

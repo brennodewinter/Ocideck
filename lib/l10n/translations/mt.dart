@@ -1653,6 +1653,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nu niet': 'Le issa',
+  'Herstelkopie weggooien': 'Warrab il-kopja ta\' rkupru',
+  'Openen en verder werken': 'Iftaħ u kompli',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'L-ebda preżentazzjonijiet jew dokumenti ma nstabu f\'dan/dawn il-folder(s). Agħżel folder ieħor minn fuq, jew fittex fajl fuq dan il-kompjuter.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1866,8 +1869,6 @@ const _dutchSourceAddMt = <String, String>{
   'Bestanden zoeken op deze computer': 'Sib fajls fuq dan il-kompjuter',
   'Dubbele bestanden opruimen': 'Naddaf il-fajls duplikati',
   'bestand(en) gevonden': 'fajl(s) instabu',
-  'Geen presentaties of documenten gevonden.':
-      'Ma nstabet l-ebda preżentazzjoni jew dokument.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Ma nstabet l-ebda preżentazzjoni jew dokument fil-folders magħrufa.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

@@ -1634,6 +1634,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nu niet': 'Inte nu',
+  'Herstelkopie weggooien': 'Kassera återställningskopia',
+  'Openen en verder werken': 'Öppna och fortsätt',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Inga presentationer eller dokument hittades i denna/dessa mapp(ar). Välj en annan mapp ovan, eller bläddra efter en fil på denna dator.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1848,8 +1851,6 @@ const _dutchSourceAddSv = <String, String>{
   'Bestanden zoeken op deze computer': 'Hitta filer på den här datorn',
   'Dubbele bestanden opruimen': 'Rensa dubblerade filer',
   'bestand(en) gevonden': 'fil(er) hittade',
-  'Geen presentaties of documenten gevonden.':
-      'Inga presentationer eller dokument hittades.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Inga presentationer eller dokument hittades i de kända mapparna.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

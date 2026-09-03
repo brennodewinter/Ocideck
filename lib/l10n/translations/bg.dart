@@ -1655,6 +1655,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nu niet': 'Не сега',
+  'Herstelkopie weggooien': 'Изхвърли копието за възстановяване',
+  'Openen en verder werken': 'Отвори и продължи',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Не са намерени презентации или документи в тази/тези папка/и. Изберете друга папка по-горе или разгледайте за файл на този компютър.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1866,8 +1869,6 @@ const _dutchSourceAddBg = <String, String>{
   'Bestanden zoeken op deze computer': 'Намиране на файлове на този компютър',
   'Dubbele bestanden opruimen': 'Разчистване на дублирани файлове',
   'bestand(en) gevonden': 'файл(ове) намерени',
-  'Geen presentaties of documenten gevonden.':
-      'Не са намерени презентации или документи.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Не са намерени презентации или документи в известните папки.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

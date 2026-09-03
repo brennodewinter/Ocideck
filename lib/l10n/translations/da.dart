@@ -1635,6 +1635,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nu niet': 'Ikke nu',
+  'Herstelkopie weggooien': 'Kassér gendannelseskopi',
+  'Openen en verder werken': 'Åbn og fortsæt',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Ingen præsentationer eller dokumenter fundet i denne/disse mappe(r). Vælg en anden mappe ovenfor, eller gennemse for en fil på denne computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1848,8 +1851,6 @@ const _dutchSourceAddDa = <String, String>{
   'Bestanden zoeken op deze computer': 'Find filer på denne computer',
   'Dubbele bestanden opruimen': 'Ryd op i dublerede filer',
   'bestand(en) gevonden': 'fil(er) fundet',
-  'Geen presentaties of documenten gevonden.':
-      'Ingen præsentationer eller dokumenter fundet.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Ingen præsentationer eller dokumenter fundet i de kendte mapper.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':
