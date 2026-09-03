@@ -30,43 +30,65 @@
 # Op `continue-on-error`: valt de cache-API weg, dan compileert/haalt de stap
 # gewoon opnieuw, en de poort blijft de poort.
 #
-# **Alleen op `push` naar `main` (detectie) — de per-PR-run uit #1123 is
-# teruggedraaid.** #1123 zette deze poort er ook per PR naast, als preventie:
-# dezelfde volle `make check-no-coverage` vóór de merge, op een eigen
-# `linux-serial`-runner (capacity 1) om I/O-contentie tussen gelijktijdige PR-runs
-# te voorkomen. In de praktijk draaide de suite daardoor twee keer per wijziging
-# — één keer op de PR, één keer post-merge — en de PR-run was de duurste van de
-# twee op een runner die al de flessenhals is. De post-merge-run vangt hetzelfde
-# (Linux-specifieke of load-gevoelige tests die groen zijn op de maintainer-Mac
-# en rood pas hier), alleen ná de merge in plaats van ervoor; `static-gate.yml`
-# blijft de required check per PR voor de statische poorten en de
-# registratietests. Dus: de per-PR-run gaat eraf, de `push`-naar-`main`-run blijft
-# als detectievangnet, en `workflow_dispatch` voor vóór een release of bij
-# pad/subproces/git-wijzigingen.
+# **Eén keer per nacht, niet meer per merge.** De trigger is twee keer verhuisd
+# en beide keren om dezelfde reden: deze poort is de duurste bewoner van de
+# traagste runner. #1123 zette hem er ook per PR naast; dat draaide de suite
+# twee keer per wijziging en werd teruggedraaid. Wat overbleef was
+# `push: [main]` — één volle suite per merge.
+#
+# Nagemeten op 2026-09-03 verdient dat zichzelf niet terug. Bij 7,6 merges per
+# dag maal ongeveer 51 minuten kostte dat ~6,5 uur per dag op een runner met
+# capaciteit 1. Wat het in 24 dagen opleverde: **nul** productregressies, één
+# echte rode `main` (een test die na #1777 was blijven staan — die faalde óók op
+# macOS en Windows, dus een lokale `make check` ving hem net zo goed), en twaalf
+# alarmen over tests die op tijd gokten in plaats van op een voorwaarde te
+# wachten. Die laatste klasse is reëel en was hier alleen zichtbaar omdat deze
+# machine traag is — maar #1911 heeft er een ratchet op `Future.delayed` in
+# `test/` overheen gezet, dus ze wordt nu bij de bron tegengehouden.
+#
+# Daar komt de vertraging bij die hij anderen aandoet. Hij deelt één host met de
+# capacity-4-baan, dus terwijl hij draait wachten de `static-gate`-runs die wél
+# per PR nodig zijn. En met `block_on_outdated_branch` aan verjaart een groene
+# PR-basis sneller naarmate de wachtrij langer is.
+#
+# Dus: één geplande run per nacht op de tip van `main`, plus
+# `workflow_dispatch` vóór een release of bij een wijziging aan paden,
+# subprocessen of `git`-aanroepen. Wat je inlevert is de **toewijzing** — rood
+# wijst nu naar een nacht in plaats van naar één merge. Dat is goedkoop terug te
+# vinden: de faaltest noemt zichzelf, en er zitten hooguit een handvol commits
+# tussen. Wat je niet inlevert is de detectie zelf; `main` kan nog steeds niet
+# stil rood staan.
+#
+# **Wat de preventie per PR blijft doen.** `static-gate.yml` is de required
+# check en draait óók op `push: main`, in minuten op de capacity-4-baan. Die
+# vangt de merge-drift (twee PR's die apart groen zijn en samen over een plafond
+# gaan) binnen minuten in plaats van na deze suite.
 #
 # **Serialisatie blijft.** `linux-serial` (capacity 1) staat nog steeds: een
-# handmatige dispatch en een merge die toevallig samenvallen mogen niet tegelijk
-# draaien, en `static-gate`/`scans` houden de capacity-4-baan. De
-# dekkingsvloer blijft ook hier weg (`check-no-coverage`); die hoort op de
-# machine van de committer, zie docs/CHECKS.md.
+# handmatige dispatch en de nachtelijke run mogen niet tegelijk draaien, en
+# `static-gate`/`scans` houden de capacity-4-baan. De dekkingsvloer blijft ook
+# hier weg (`check-no-coverage`); die hoort op de machine van de committer, zie
+# docs/CHECKS.md.
 name: linux-gate
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
+  schedule:
+    # 02:11 UTC. Ruim vóór de andere geplande controles (05:17 tap-mirror,
+    # 05:33 tijdsvervallend), want deze run trekt de machine een uur lang leeg
+    # en die twee zouden er dan achter aansluiten.
+    - cron: '11 2 * * *'
 
-# De serialisatie zit in de runner (`linux-serial`, capacity 1), niet hier: deze
-# `concurrency` zorgt er alleen voor dat `main` zijn eigen lopende run opzij zet
-# bij een nieuwere merge. `workflow_dispatch` zit via `github.event_name` in een
-# eigen groep, zodat een druk-op-de-knop en een merge elkaar nooit afbreken.
+# De serialisatie zit in de runner (`linux-serial`, capacity 1), niet hier.
+# `workflow_dispatch` zit via `github.event_name` in een eigen groep, zodat een
+# druk-op-de-knop en de nachtelijke run elkaar nooit afbreken.
 #
 # `cancel-in-progress: false` (#1890): bij `true` werd één op de drie runs
-# afgebroken — een nieuwe merge op `main` veegt de lopende run weg, en dat
-# meldt zich als "failure / Has been cancelled", niet als "skipped". De
-# afgebroken runs verhullen echte fouten en maken de poort onbetrouwbaar.
-# Met `false` wacht de nieuwe run tot de vorige klaar is; de capacity-1-runner
-# serialiseert toch al, dus de wachttijd is beperkt tot één run.
+# afgebroken en dat meldde zich als "failure / Has been cancelled", niet als
+# "skipped" — afgebroken runs verhullen echte fouten. Sinds de trigger van
+# `push` naar `schedule` ging, stapelen er sowieso geen runs meer op elkaar;
+# `false` blijft staan omdat een handmatige dispatch tijdens een lopende
+# nachtrun nog steeds niet weggeveegd moet worden.
 concurrency:
   group: linux-gate-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: false
