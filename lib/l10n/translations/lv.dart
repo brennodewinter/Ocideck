@@ -1640,6 +1640,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Šis fails ir mainīts citur',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Fails uz diska ir mainījies kopš jūs to atvērāt — droši vien citā logā vai ar citu programmu. Pārrakstīšana izmet šīs izmaiņas.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Avārijas atjaunošana šobrīd nedarbojas — atjaunošanas mape nav rakstāma. Saglabājiet savu darbu manuāli.',
   'Donker logo kiezen': 'Izvēlēties tumšu logo',

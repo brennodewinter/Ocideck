@@ -1642,6 +1642,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Denne fil er blevet ændret et andet sted',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Filen på disken er ændret siden du åbnede den — sandsynligvis i et andet vindue eller af et andet program. Overskrivning kasserer disse ændringer.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Nedbrudsgendannelse virker ikke lige nu — gendannelsesmappen er ikke skrivbar. Gem dit arbejde manuelt.',
   'Donker logo kiezen': 'Vælg mørkt logo',

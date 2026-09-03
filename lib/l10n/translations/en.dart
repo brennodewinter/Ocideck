@@ -838,6 +838,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit bestand is elders gewijzigd': 'This file has been modified elsewhere',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'The file on disk has changed since you opened it — probably in another window or by another program. Overwriting discards those changes.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Crash recovery is not working right now — the recovery folder is not writable. Save your work manually.',
   'Donker logo kiezen': 'Choose dark logo',

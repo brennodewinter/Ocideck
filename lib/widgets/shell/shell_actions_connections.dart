@@ -139,6 +139,36 @@ Future<bool> saveDeckWithDestination(
     }
   }
 
+  // #1951: als het bestand op schijf is gewijzigd sinds openen — door een ander
+  // venster of een ander programma — vraag dan wat de gebruiker wil doen. Niet
+  // stil overschrijven: wie het laatst opslaat wint en de andere kant is kwijt.
+  if (supportsLocalProjectFolders &&
+      deckNotifier.currentState.filePath != null &&
+      await deckNotifier.fileChangedExternally() &&
+      context.mounted) {
+    final choice = await _showLocalConflictDialog(context);
+    if (choice == null || !context.mounted) return false;
+    switch (choice) {
+      case _LocalConflictChoice.overwrite:
+        break; // ga door naar de gewone opslaan hieronder
+      case _LocalConflictChoice.reload:
+        return withSaveProgress(
+          ref,
+          SaveTarget.local,
+          deckNotifier.reloadFromDisk,
+        );
+      case _LocalConflictChoice.saveAs:
+        if (!context.mounted) return false;
+        return withSaveProgress(
+          ref,
+          SaveTarget.local,
+          () => deckNotifier.saveAs(
+            initialDirectory: ref.read(settingsProvider).homeDirectory,
+          ),
+        );
+    }
+  }
+
   final settings = ref.read(settingsProvider);
   if (!shouldAskDestination(
     isNewDeck: deckNotifier.currentState.filePath == null,
@@ -190,6 +220,52 @@ Future<bool?> _confirmWebAssetLoss(BuildContext context) {
         ElevatedButton(
           onPressed: () => Navigator.pop(ctx, true),
           child: Text(ctx.l10n.d('Doorgaan')),
+        ),
+      ],
+    ),
+  );
+}
+
+/// #1951: keuzes in de dialoog wanneer het bestand op schijf is gewijzigd
+/// sinds openen.
+enum _LocalConflictChoice { overwrite, reload, saveAs }
+
+/// #1951: toon een dialoog wanneer het bestand op schijf is gewijzigd sinds
+/// openen — door een ander venster of een ander programma. De gebruiker kan
+/// overschrijven (gooit de andere wijzigingen weg), herladen (laadt de versie
+/// van schijf in, verliest lokale wijzigingen) of opslaan als (bewaart beide).
+Future<_LocalConflictChoice?> _showLocalConflictDialog(BuildContext context) {
+  final l10n = context.l10n;
+  return showDialog<_LocalConflictChoice>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Dit bestand is elders gewijzigd')),
+      content: Text(
+        // Eén stringliteral: de l10n-extractie leest naast-elkaar-geplaatste
+        // literals als losse sleutels, en dan matcht de vertaling niet.
+        // ignore: lines_longer_than_80_chars
+        l10n.d(
+          'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.t('cancel')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.overwrite),
+          child: Text(l10n.d('Overschrijven')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.reload),
+          child: Text(l10n.d('Herladen')),
+        ),
+        // Als voorkeursknop rechts: hij behoudt beide versies, en dat is wat
+        // je wilt aanraden aan iemand die dit scherm onverwacht krijgt.
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, _LocalConflictChoice.saveAs),
+          child: Text(l10n.d('Opslaan als')),
         ),
       ],
     ),

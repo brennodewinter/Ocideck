@@ -1672,6 +1672,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Athraíodh an comhad seo áit eile',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Athraigh an comhad ar an diosca ó d\'oscail tú é — is dócha i bhfuinneog eile nó ag clár eile. Má forscríobhann tú, cailltear na hathruithe sin.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Níl aisghabháil tuairteála ag obair faoi láthair — ní féidir scríobh chuig fillteán na haisghabhála. Sábháil do chuid oibre de láimh.',
   'Donker logo kiezen': 'Roghnaigh logo dorcha',

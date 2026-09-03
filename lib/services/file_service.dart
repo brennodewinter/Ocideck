@@ -623,6 +623,32 @@ class FileService {
   Future<Deck?> openDeck(String filePath, {String? content}) async =>
       (await openDeckDetailed(filePath, content: content)).deck;
 
+  /// #1951: de laatste-wijzigingstijd van [filePath], of null als het bestand
+  /// niet bestaat of niet gelezen kan worden. Gebruikt om te detecteren of
+  /// een ander venster of programma het bestand ondertussen heeft geschreven.
+  Future<DateTime?> fileMtime(String filePath) async {
+    try {
+      return await File(filePath).lastModified();
+    } on FileSystemException {
+      return null;
+    }
+  }
+
+  /// #1951: of het bestand op [filePath] sinds [knownMtime] is gewijzigd of
+  /// verwijderd. Geeft false als er niets om te vergelijken is (geen mtime
+  /// bij openen) of als het bestand niet gelezen kan worden — kan het niet
+  /// vaststellen, dus niet blokkeren.
+  Future<bool> fileChangedSince(String filePath, DateTime? knownMtime) async {
+    if (knownMtime == null) return false;
+    try {
+      final file = File(filePath);
+      if (!await file.exists()) return true;
+      return await file.lastModified() != knownMtime;
+    } on FileSystemException {
+      return false;
+    }
+  }
+
   /// Like [openDeck], but reports *why* it could not open a file so callers can
   /// tell the user (e.g. "this isn't a presentation") instead of a generic
   /// failure. Returns `(deck: <deck>, failure: null)` on success, or

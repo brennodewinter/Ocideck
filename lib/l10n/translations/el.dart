@@ -1667,6 +1667,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Αυτό το αρχείο έχει τροποποιηθεί αλλού',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Το αρχείο στον δίσκο έχει αλλάξει από όταν το ανοίξατε — πιθανώς σε άλλο παράθυρο ή από άλλο πρόγραμμα. Η αντικατάσταση απορρίπτει αυτές τις αλλαγές.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Η ανάκτηση μετά από κατάρρευση δεν λειτουργεί τώρα — ο φάκελος ανάκτησης δεν είναι εγγράψιμος. Αποθηκεύστε τη δουλειά σας χειροκίνητα.',
   'Donker logo kiezen': 'Επιλογή σκοτεινού λογοτύπου',

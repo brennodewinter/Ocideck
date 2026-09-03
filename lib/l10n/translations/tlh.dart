@@ -1619,6 +1619,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dit bestand is elders gewijzigd': 'Dat nav choHlu\'pu\' latlhDaq',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'Dat nav choHpu\' DI\' DapuQmoH — nItebHa\' latlh windowsDaq ghobe\' latlh software. SIchchugh, choHmeyvetlh lulIjlu\'.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'DI\' chImtaHghach vangqelbe\' — chImtaH mIch vlh. nIteQ nIH DI\' De\' Qup.',
   'Donker logo kiezen': 'wIv qIj wo\'Del',

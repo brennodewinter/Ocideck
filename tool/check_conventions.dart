@@ -267,7 +267,8 @@ const Map<String, int> fileSizeBaseline = {
   // +16 (#1931): _pickLogoDark + _resolveLogoDarkPath.
   'lib/widgets/dialogs/settings_dialog.dart': 1046,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
-  'lib/services/file_service.dart': 1024,
+  'lib/services/file_service.dart':
+      1050, // +26 (#1951): fileMtime + fileChangedSince.
   // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
@@ -406,7 +407,8 @@ const Map<String, int> classSizeBaseline = {
   // en die komt uit `_d()` — een instantiemethode, want de taalcode hangt aan
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
-  'lib/services/file_service.dart#FileService': 2849, // +1 (#1949): sidecars
+  'lib/services/file_service.dart#FileService':
+      2875, // +26 (#1951): fileMtime + fileChangedSince.
   // vóór de .md schrijven (commit-punt) — markdown + recordWrittenBytes
   // gaan vooraf, zodat het zegel de juiste hash draagt.
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
@@ -505,7 +507,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1403, // +7 (#1954): _saveAsDownload houdt isDirty bij mem:-assets.
+      1460, // +57 (#1951): _fileMtime, fileChangedExternally, reloadFromDisk.
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening

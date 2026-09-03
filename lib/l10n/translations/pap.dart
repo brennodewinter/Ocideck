@@ -674,6 +674,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit bestand is elders gewijzigd': 'E archivo aki a kambia na otro lugá',
+  'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
+      'E archivo riba disk a kambia for di bo a habrié — probablemente na otro bentana of pa otro programa. Sobreskirbi ta bai kuné esnan kambio ei.',
   'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
       'Rekuperashon di crash no ta funshoná awor — e map di rekuperashon no ta skribí. Warda bo trabou manualmente.',
   'Donker logo kiezen': 'Skoha logo skuru',
