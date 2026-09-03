@@ -301,8 +301,9 @@ the only place the coverage floors run at all.** The one exception is
 `.forgejo/workflows/scans.yml` (#778), which runs the secret and SAST scans on
 every pull request and push — seconds rather than minutes, and for a credential
 the moment it is found is not interchangeable. The Linux gate
-(`.forgejo/workflows/linux-gate.yml`) and the desktop bundles
-(`linux-build.yml`, `macos-build.yml`) run on demand. See
+(`.forgejo/workflows/linux-gate.yml`) runs nightly on the tip of `main` and on
+demand; the desktop bundles (`linux-build.yml`, `macos-build.yml`) run after a
+merge that can break them, and on demand. See
 [`docs/CHECKS.md`](docs/CHECKS.md).
 
 A `v*` tag runs `.forgejo/workflows/release.yml`: web, macOS and Linux builds

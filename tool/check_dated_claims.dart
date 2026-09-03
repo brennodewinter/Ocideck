@@ -119,13 +119,12 @@ const List<GemetenBewering> gemetenBeweringen = [
     id: 'linux-gate-oordeel',
     bestand: 'docs/CHECKS.md',
     anker: 'measured 2026-09-03',
-    grootheid:
-        'van merge tot oordeel van linux-gate.yml, mediaan en 90e percentiel',
+    grootheid: 'de looptijd van een linux-gate-run, mediaan en 90e percentiel',
     gemetenOp: '2026-09-03',
     houdbaarDagen: 120,
     hermeetMet:
-        'percentielen over action_run op de forge, gefilterd op '
-        "workflow_id='linux-gate.yml' en trigger_event='push'",
+        'percentielen over (stopped-started) in action_run op de forge, '
+        "gefilterd op workflow_id='linux-gate.yml'",
   ),
   GemetenBewering(
     id: 'make-check-looptijd',
@@ -150,7 +149,6 @@ const List<GemetenBewering> gemetenBeweringen = [
 const Map<String, Map<String, int>> looptijdBasislijn = {
   'docs/CHECKS.md': {
     '13 minutes': 2,
-    '151 minutes': 1,
     '17.5 minutes': 2,
     '19 seconds': 1,
     '2 seconds': 2,
@@ -161,10 +159,12 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '33 min': 2,
     '46 minute': 3,
     '46 minutes': 1,
-    '51 minutes': 1,
+    '51 minutes': 2,
     '54 minutes': 1,
-    'about an hour': 1,
-    'an hour or so': 1,
+    // De dagkosten van de oude per-merge-cadence (7,6 merges maal 51 minuten),
+    // het cijfer dat de wissel naar `schedule` droeg. Geschiedenis: het gaat
+    // over een trigger die niet meer bestaat.
+    '6.5 hours': 1,
     'half an hour': 1,
   },
   'CONTRIBUTING.md': {'2.5 minutes': 1, '22 minutes': 1},

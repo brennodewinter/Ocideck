@@ -20,24 +20,29 @@ is a required status check** (branch protection on `main`): a PR does not merge
 until it passes, via the web UI or the REST/`tea` merge API. That is the
 prevention layer — drift is stopped at the PR instead of landing. Two things it
 still does **not** hard-block, on purpose: the **coverage floors** and the
-**full test suite**. The full test suite runs **post-merge on every push to
-`main`** — `linux-gate.yml`,
-`make check-no-coverage` — as a detection smoke alarm: a Linux-specific or
-load-sensitive test (path separators, subprocess timeouts, I/O races) can be
-green on the fast maintainer Mac and red only on the Linux runner, and this
-surfaces that within an hour or so of the merge (measured below, queue
-included) instead of only when someone tries to land a fix on top. It is
-**detection, not prevention**: the merge is not blocked. (#1123 also ran this
-gate per PR as prevention; that was reverted — the suite ran twice per change,
-on the PR and again post-merge, and the PR run was the expensive one on a
-runner that is already the bottleneck. The per-PR
-prevention layer that remains is `static-gate`, the required check.) The heavy
-gate is **serialized**: it runs on a dedicated **`linux-serial` runner with
-capacity 1**, so a manual dispatch and a merge never run at once, while
-`static-gate`/`scans` keep the capacity-4 lane. The coverage floors still run
-nowhere but in `make check` on your own machine. So: the per-PR static gate
-blocks, the main-push run alarms, the tag is the release gate, and you are
-still the coverage gate.
+**full test suite**. The full test suite runs **once a night on the tip of
+`main`** — `linux-gate.yml`, `make check-no-coverage` — as a detection smoke
+alarm: a Linux-specific or load-sensitive test (path separators, subprocess
+timeouts, I/O races) can be green on the fast maintainer Mac and red only on
+the Linux runner. It is **detection, not prevention**: the merge is not
+blocked, and a red night points at a handful of commits rather than at one
+merge.
+
+That trigger has moved twice, both times because this gate is the most
+expensive tenant of the slowest runner. #1123 also ran it per PR; that doubled
+the suite per change and was reverted. What remained was one full run per merge,
+and measured over 24 days that did not earn its keep either — see
+[`linux-gate.yml`](#forgejoworkflowslinux-gateyml--nightly-schedule-and-on-demand-workflow_dispatch)
+for the numbers and what was given up. The per-PR prevention layer is
+`static-gate`, the required check, which also runs on `push` to `main` and
+catches merge drift within minutes on the capacity-4 lane.
+
+The heavy gate is **serialized**: it runs on a dedicated **`linux-serial` runner
+with capacity 1**, so a manual dispatch and the nightly run never run at once,
+while `static-gate`/`scans` keep the capacity-4 lane. The coverage floors still
+run nowhere but in `make check` on your own machine. So: the per-PR static gate
+blocks, the nightly run alarms, the tag is the release gate, and you are still
+the coverage gate.
 
 > **Escape hatch.** If the runner is down or saturated and a green PR cannot
 > merge because its required `static-gate` check never ran, a repo admin removes
@@ -429,7 +434,7 @@ now the only passing state.
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ | local only (post-merge on `main`) |
+| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ | local only (nightly on `main`) |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) | local only |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | local only |
 | [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | required (via `static-gate`) |
@@ -2064,7 +2069,7 @@ that reaches beyond `build/test_cache`.
   the whole bundle at the newest commit, so a later run covers everything an
   aborted one would have seen.
 
-### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`) **and on every push to `main`** (#1123)
+### `.forgejo/workflows/linux-gate.yml` — nightly `schedule` **and on demand** (`workflow_dispatch`)
 - **gate-linux** — the gate that `ci.yml` used to be, now on the prebaked CI
   image (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
   `static-gate.yml`): the OS, node, build-toolchain and the **official**,
@@ -2077,33 +2082,51 @@ that reaches beyond `build/test_cache`.
   pinned stable release. The tag *is* the pin, so a stale image fails fail-closed.
 - **When to press it:** before a release, and whenever a change touches paths,
   subprocesses or `git` invocations.
-- **Why it also fires on `push` to `main` (#1123):** `static-gate.yml` runs the
-  static gates per PR but **not** the test suite, so a registration gate that is
-  *a test* (`source_map_coverage_test`, the docs-registration, SBOM and l10n
-  invariants) could still land red on `main` — and between releases nothing ran
-  the full suite. Now every merge to `main` runs `make check-no-coverage`, so a
-  `main` that went red surfaces as a failed run (and mail) within about an hour
-  instead of only when someone tries to land a fix on top of it. It is a
-  **detection** net, not prevention: the merge is not blocked. (#1123 also ran
-  this gate per PR as prevention; that was reverted — the suite ran twice per
-  change, on the PR and again post-merge, and the PR run was the expensive one on
-  a runner that is already the bottleneck. The per-PR prevention layer that
-  remains is `static-gate`, the required check.) `main` can no longer sit
-  **silently** red. The coverage floor still stays out (`check-no-coverage`); it
-  belongs on the committer's machine (see above). Concurrency is scoped by event,
-  so a manual dispatch and a merge never cancel each other; rapid merges do
-  supersede one another (the latest run tests the newest tip, which is what "is
-  `main` green?" asks).
-- **How long that hour actually is, measured 2026-09-03** against `action_run`
-  on the forge, over the post-merge runs of this workflow. In the last ten days
-  (61 runs) the gate itself takes a median of **51 minutes**, and merge to
-  verdict a median of **54**, with **85** at the 90th percentile. That is
-  roughly double what it was: over the ten days before, the median was 29
-  minutes, and it stepped up around 2026-08-23 without this workflow changing.
-  The capacity-1 runner queues on top of that when merges land close together —
-  the longest merge-to-verdict in the window was 151 minutes. **This claim
-  decays while the tree stands still**: the suite grows, the runner does not,
-  and no gate measures it. Re-measure rather than trust the number above.
+- **Why it runs at all:** `static-gate.yml` runs the static gates per PR but
+  **not** the test suite, so a registration gate that is *a test*
+  (`source_map_coverage_test`, the docs-registration, SBOM and l10n invariants)
+  could land red on `main` — and between releases nothing else runs the full
+  suite. One scheduled run on the tip keeps `main` from sitting **silently**
+  red. It is a **detection** net, not prevention: no merge is blocked. The
+  coverage floor still stays out (`check-no-coverage`); it belongs on the
+  committer's machine (see above).
+- **Why nightly and not per merge, measured 2026-09-03.** This trigger has moved
+  twice and both times for the same reason: this gate is the most expensive
+  tenant of the slowest runner. #1123 also ran it per PR — the suite twice per
+  change, the PR run being the expensive one — and that was reverted. What
+  remained was `push: [main]`, one full run per merge, and the numbers do not
+  carry it. At 7.6 merges a day against a median of 51 minutes it cost about
+  **6.5 hours of runner time a day** on a capacity-1 runner. What it returned
+  over 24 days: **zero** product regressions; **one** genuinely red `main` (a
+  test left stale by #1777, which also failed on macOS and Windows, so a local
+  `make check` caught it just as well); and **twelve** alarms about tests that
+  guessed at time instead of waiting for a condition. That last class was real
+  and only visible because this machine is slow — but #1911 put a ratchet on
+  `Future.delayed` in `test/` over it, so it is now stopped at the source.
+- **What the change costs, hardop.** Attribution. A red night points at the
+  commits of that night instead of at one merge. That is cheap to recover — the
+  failing test names itself and there are only a handful of commits — and it
+  buys back the queue: this gate shares one host with the capacity-4 lane, so
+  while it runs the `static-gate` runs that *are* needed per PR wait behind it,
+  and with `block_on_outdated_branch` on, a green PR base ages faster the longer
+  that queue is.
+- **Concurrency.** Scoped by event, so a manual dispatch and the nightly run
+  never cancel each other. `cancel-in-progress: false` (#1890) stays: an aborted
+  run reports as "failure / Has been cancelled" rather than "skipped", and those
+  hide real failures. Since the trigger moved off `push`, runs no longer stack
+  in the first place.
+- **How long the run itself takes, measured 2026-09-03** against `action_run` on
+  the forge, over the 61 runs of the ten days before the trigger moved: a median
+  of **51 minutes**, **66** at the 90th percentile. That is roughly double what
+  it was — over the ten days before those, the median was 29 minutes — and it
+  stepped up around 2026-08-23 without this workflow changing. CI run volume *fell* over
+  the same period, so host contention does not explain it; the cause is in the
+  tree and has not been traced to a commit. **This claim decays while the tree
+  stands still**: the suite grows, the runner does not, and no gate measures the
+  duration itself. `make check-dated-claims` guards that the claim carries a
+  date and that this paragraph has not been rewritten out from under the
+  register — it cannot tell you the number is still true. Re-measure rather than
+  trust it.
 
 ### `.forgejo/workflows/ci-image.yml` — the prebaked Linux CI image (`workflow_dispatch` + on pin/Dockerfile change)
 
@@ -2341,7 +2364,7 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   all — unverified code from a moving pointer, setting up tools that silently
   redefined what green meant. They now come from a pinned release, sha256-checked
   against the published manifest, in the same shape the Flutter tarball already
-  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--on-demand-workflow_dispatch-and-on-every-push-to-main-1123)
+  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--nightly-schedule-and-on-demand-workflow_dispatch)
   — `test -n "$SHA"` included, so a renamed release asset fails loudly instead of
   turning the check into a complaint about `sha256sum`'s input. The checkout also
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read

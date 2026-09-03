@@ -141,9 +141,9 @@ artefacts. See [`SECURITY.md`](SECURITY.md), *Supported versions*.
       [`SECURITY.md`](SECURITY.md)
 - [x] **QA.04 — Repeatable test procedures.**
       [`docs/CHECKS.md`](docs/CHECKS.md) and the [`Makefile`](Makefile). They run
-      locally and on the forge: `static-gate` and `scans` per PR, `linux-gate`
-      post-merge, and `ci.yml` on tag pushes (see QA.06 for the contributor
-      gap).
+      locally and on the forge: `static-gate` and `scans` per PR (`static-gate`
+      also on every push to `main`), `linux-gate` nightly on the tip of `main`,
+      and `ci.yml` on tag pushes (see QA.06 for the contributor gap).
 - [x] **QA.05 — Memory-safety mitigations.** One dependency is not memory-safe:
       `opencv_core` → `dartcv` (C++), which decodes untrusted image data. The
       mitigations, and — measured, not assumed — exactly which malformed inputs
