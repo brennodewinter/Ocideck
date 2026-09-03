@@ -1670,6 +1670,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Donker logo kiezen': 'Escolher logo escuro',
+  'Geen donker logo ingesteld': 'Sem logo escuro definido',
+  'Verwijder donker logo': 'Remover logo escuro',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'O fundo do slide é escuro, mas o logo não tem uma variante escura. O logo é quase invisível no slide. Defina um logo escuro nas configurações de apresentação.',
   'Aangeboden als download:': 'Oferecido como transferência:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'O navegador não aceitou a transferência. Permita transferências para este site e tente novamente.',

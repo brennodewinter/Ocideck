@@ -1657,6 +1657,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Donker logo kiezen': 'Обрати темне лого',
+  'Geen donker logo ingesteld': 'Темне лого не встановлено',
+  'Verwijder donker logo': 'Видалити темне лого',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Фон слайда темний, але логотип не має темного варіанту. Логотип на слайді майже невидимий. Встановіть темний логотип у налаштуваннях презентації.',
   'Aangeboden als download:': 'Запропоновано як завантаження:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Браузер не прийняв завантаження. Дозвольте завантаження для цього сайту та спробуйте ще раз.',

@@ -71,28 +71,28 @@ void main() {
     final html = await _service().build(_md, theme: bottomRight);
 
     // De eerste dia toont het logo en houdt er ruimte voor vrij (logoSafeReserve
-    // bij 1280px), de tweede zet het uit.
+    // bij 1280px, #1932: gereduceerd tot size*edgeInset + gap), de tweede zet
+    // het uit.
     expect(html, contains('<section class="slide logo-safe">'));
-    expect(html, contains('.slide.logo-safe{padding-bottom:125px}'));
+    // 96*0.12 + 1280*0.014 = 11.52 + 17.92 ≈ 29px.
+    expect(html, contains('.slide.logo-safe{padding-bottom:29px}'));
     // De no-logo-dia blijft een kale dia zonder de logo-safe-haak.
     expect(html, contains('<section class="slide">'));
   });
 
-  test(
-    'een linksboven-logo krijgt de spiegelbeeldige hoek en strook',
-    () async {
-      const topLeft = ThemeProfile(
-        logoPath: 'asset:assets/images/vigilis-logo.png',
-        logoPosition: 'top-left',
-        logoSize: 96,
-      );
-      final html = await _service().build(_md, theme: topLeft);
+  test('een linksboven-logo krijgt de spiegelbeeldige hoek en strook', () async {
+    const topLeft = ThemeProfile(
+      logoPath: 'asset:assets/images/vigilis-logo.png',
+      logoPosition: 'top-left',
+      logoSize: 96,
+    );
+    final html = await _service().build(_md, theme: topLeft);
 
-      // 96·0.42 vanaf boven, 96·0.28 vanaf links; de strook staat nu bovenaan.
-      expect(html, contains('top:40px;left:27px'));
-      expect(html, contains('.slide.logo-safe{padding-top:154px}'));
-    },
-  );
+    // 96·0.42 vanaf boven, 96·0.28 vanaf links; de strook staat nu bovenaan.
+    // #1932: gereduceerd tot size*edgeInset + gap = 96*0.42 + 1280*0.014 ≈ 58px.
+    expect(html, contains('top:40px;left:27px'));
+    expect(html, contains('.slide.logo-safe{padding-top:58px}'));
+  });
 
   test('een thema zonder logo laat de dia-export ongemoeid', () async {
     const noLogo = ThemeProfile(logoPath: null);

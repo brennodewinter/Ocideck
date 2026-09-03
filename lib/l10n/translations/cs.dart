@@ -1643,6 +1643,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Donker logo kiezen': 'Vybrat tmavé logo',
+  'Geen donker logo ingesteld': 'Není nastaveno tmavé logo',
+  'Verwijder donker logo': 'Odstranit tmavé logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Pozadí snímku je tmavé, ale logo nemá tmavou variantu. Logo je na snímku téměř neviditelné. Nastavte tmavé logo v nastavení prezentace.',
   'Aangeboden als download:': 'Nabídnuto ke stažení:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Prohlížeč stahování nepřijal. Povolte stahování pro tento web a zkuste to znovu.',

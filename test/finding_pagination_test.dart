@@ -262,14 +262,10 @@ void main() {
       logoSize: 160,
     );
 
-    test('een bevinding die past zonder logo splitst met logo', () {
-      // Twee secties die samen net onder de enkel-pagina-drempel blijven
-      // (≥0.70 breedte) zonder logo, maar een logo verkleint het budget genoeg
-      // om onder die drempel te zakken → splitsen tussen de secties, zodat de
-      // tekst niet onder het logo doorloopt. De secties zijn meegegroeid met de
-      // #1163/#1198-herkalibratie (grotere capaciteit door de kleinere letter en
-      // de op het echte kaartje geijkte header-kost), zodat de drempel nog
-      // steeds precies tussen "met" en "zonder logo" ligt.
+    test('een bevinding die past zonder logo splitst niet met logo (#1932)', () {
+      // #1932: finding is een panel-slide — het logo zit in de hoek op top
+      // van de inhoud, en reserveert geen verticale strook meer. De paginering
+      // wordt daardoor niet meer beïnvloed door het logo.
       final finding = Slide.create(SlideType.finding).copyWith(
         customMarkdown: FindingSpec(
           heading: heading,
@@ -281,11 +277,11 @@ void main() {
       // Zonder logo: één pagina.
       expect(expandFindingsForRender([finding]), hasLength(1));
 
-      // Met logo: meer dan één pagina.
+      // Met logo: nog steeds één pagina (corner-mode, geen reserve).
       final withLogo = expandFindingsForRender([
         finding,
       ], profile: profileWithLogo);
-      expect(withLogo.length, greaterThan(1));
+      expect(withLogo.length, 1);
     });
 
     test('een profiel zonder logo verandert de paginering niet', () {

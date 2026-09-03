@@ -1635,6 +1635,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Donker logo kiezen': 'Vali tume logo',
+  'Geen donker logo ingesteld': 'Tume logo pole seatud',
+  'Verwijder donker logo': 'Eemalda tume logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Slaidi taust on tume, kuid logol pole tummat varianti. Logo on slaidil peaaegu nähtamatu. Määra tume logo esitluse sätetes.',
   'Aangeboden als download:': 'Pakutud allalaadimisena:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Brauser ei võtnud allalaadimist vastu. Lubage sellel saidil allalaadimised ja proovige uuesti.',

@@ -172,6 +172,7 @@ void main() {
         'path': '/elders/x.png',
       },
       SlideQualityIssueKind.themeLogoMissing: {'path': 'asset:images/x.png'},
+      SlideQualityIssueKind.themeLogoDarkMissing: {'background': '#0F172A'},
       SlideQualityIssueKind.textDensityWarning: {'percent': '80%'},
       SlideQualityIssueKind.textDensityCritical: {'percent': '55%'},
       SlideQualityIssueKind.splitRunDragged: {

@@ -1642,6 +1642,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Donker logo kiezen': 'Pilih logo gelap',
+  'Geen donker logo ingesteld': 'Logo gelap belum diatur',
+  'Verwijder donker logo': 'Hapus logo gelap',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Latar belakang slide gelap, tetapi logo tidak memiliki varian gelap. Logo hampir tidak terlihat di slide. Atur logo gelap di pengaturan presentasi.',
   'Aangeboden als download:': 'Ditawarkan sebagai unduhan:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Peramban tidak menerima unduhan. Izinkan unduhan untuk situs ini dan coba lagi.',

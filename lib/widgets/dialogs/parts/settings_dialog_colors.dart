@@ -557,7 +557,7 @@ extension _SettingsColors on _SettingsDialogState {
                   height: 52,
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0F172A),
+                    color: AppTheme.chartTooltipBg,
                     borderRadius: BorderRadius.circular(7),
                     border: Border.all(color: AppTheme.slate700),
                   ),

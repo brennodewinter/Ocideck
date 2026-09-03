@@ -59,6 +59,17 @@ const Map<String, int> methodLengthBaseline = {
   // teruggebracht tot 41 regels.
   'lib/widgets/editors/callout_editor.dart::_CalloutEditorDialogState.build':
       41,
+  // +1 (#1931): themeLogoDarkMissing case in formatSlideQualityIssue.
+  'lib/l10n/slide_quality_localization.dart::formatSlideQualityIssue': 151,
+  // +3 (#1931): logoDarkRel in _buildPackageArchive.
+  'lib/services/file/file_service_package.dart::FileServicePackage._buildPackageArchive':
+      153,
+  // +1 (#1931): donkere logo-import in importStyleProfileBytes.
+  'lib/services/file/file_service_style_profile.dart::FileServiceStyleProfile.importStyleProfileBytes':
+      151,
+  // +12 (#1931): donkere-logo-UI in _slideLogoChildren.
+  'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._slideLogoChildren':
+      162,
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).

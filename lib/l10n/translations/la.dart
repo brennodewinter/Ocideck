@@ -1657,6 +1657,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Donker logo kiezen': 'Elige logotypum obscurum',
+  'Geen donker logo ingesteld': 'Nullum logotypum obscurum positum',
+  'Verwijder donker logo': 'Tolle logotypum obscurum',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Diapositivi fundus obscurus est, sed logotypum nullam variantem obscuram habet. Logotypum in diapositivo fere invisibile est. Pone logotypum obscurum in praesentationis optionibus.',
   'Aangeboden als download:': 'Ut receptum oblatum:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Navigatrum receptum non accepit. Recepta huic loco permitte et itera.',

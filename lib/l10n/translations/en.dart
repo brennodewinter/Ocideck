@@ -514,9 +514,6 @@ const _dutchSourceEn = {
   'Map met presentaties kiezen': 'Choose presentation folder',
   'Map voor exports': 'Export folder',
   'Logo kiezen': 'Choose logo',
-  'Donker logo kiezen': 'Choose dark logo',
-  'Geen donker logo ingesteld': 'No dark logo set',
-  'Verwijder donker logo': 'Remove dark logo',
   'Kies een afbeelding': 'Choose an image',
   'Kies een video': 'Choose a video',
   'Kies een audiobestand': 'Choose an audio file',
@@ -841,6 +838,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Donker logo kiezen': 'Choose dark logo',
+  'Geen donker logo ingesteld': 'No dark logo set',
+  'Verwijder donker logo': 'Remove dark logo',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'The slide background is dark, but the logo has no dark variant. The logo is nearly invisible on the slide. Set a dark logo in the presentation settings.',
   'Aangeboden als download:': 'Offered as a download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'The browser did not accept the download. Allow downloads for this site and try again.',
@@ -1225,8 +1227,6 @@ const _dutchSourceAddEn = {
   'dia\'s uit dit document.': 'slides from this document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'The logo of this style profile was not found and is not shown (path: {pad}). Choose a logo in the presentation settings.',
-  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
-      'The slide background is dark, but the logo has no dark variant. The logo is nearly invisible on the slide. Set a dark logo in the presentation settings.',
   'Converteer naar document…': 'Convert to document…',
   'Converteer naar presentatie…': 'Convert to presentation…',
   'Converteren': 'Convert',

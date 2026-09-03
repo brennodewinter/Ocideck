@@ -1645,6 +1645,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Donker logo kiezen': 'Dunkels Logo wääle',
+  'Geen donker logo ingesteld': 'Kei dunkels Logo gstellt',
+  'Verwijder donker logo': 'Dunkels Logo entferne',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Dr Foliehintgrund isch dunkel, aber s Logo hät kei dunkli Variante. S Logo isch uf dr Folie fascht unsichtbar. Stell es dunkles Logo ii i de Präsentationsistellige.',
   'Aangeboden als download:': 'Als Download aabotte:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'De Browser hät de Download nöd aagno. Erlaub Downloads für die Site und probier\'s nomal.',

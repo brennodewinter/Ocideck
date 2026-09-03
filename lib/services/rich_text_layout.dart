@@ -401,16 +401,27 @@ const double kLogoHorizontalInsetFraction = 0.28;
 const double kLogoTopInsetFraction = 0.42;
 const double kLogoBottomInsetFraction = 0.12;
 
-/// Vertical space a shown logo reserves from its slide edge: the logo's far edge
-/// (its size plus the top/bottom inset) with a small breathing gap, so text
-/// clears the whole logo and not just its height. 0 when the profile has no logo.
-double logoSafeReserve(double w, ThemeProfile profile) {
+/// Vertical space a shown logo reserves from its slide edge.
+///
+/// When [corner] is false (text slides: bullets, freeMarkdown), the reserve is
+/// the logo's edge inset plus a small gap — the content extends to just above
+/// the logo's bottom edge, gaining the logo's own height back compared to the
+/// old full-height strip. The logo sits below the text, not overlapping.
+///
+/// When [corner] is true (panel slides: cockpit, chart, table, ...), the reserve
+/// is 0: the panel extends to full height and the logo sits on top in the
+/// corner (#1932). For opaque panels the logo covers only the corner; for a
+/// circular gauge (cockpit) that corner is empty anyway.
+double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
   if (profile.logoPath?.isEmpty ?? true) return 0;
+  if (corner) return 0;
   final size = w * (profile.logoSize / 1280);
   final edgeInset = profile.logoPosition.startsWith('top')
       ? kLogoTopInsetFraction
       : kLogoBottomInsetFraction;
-  return size * (1 + edgeInset) + w * 0.014;
+  // #1932: reduced from size*(1+edgeInset) to size*edgeInset — the content
+  // now clears the logo's edge inset + gap, not the full logo height.
+  return size * edgeInset + w * 0.014;
 }
 
 /// Waar de logostrook aan de boven- en onderkant ruimte opeist, als `(boven,
@@ -428,10 +439,11 @@ double logoSafeReserve(double w, ThemeProfile profile) {
   double w,
   ThemeProfile profile, {
   bool splitText = false,
+  bool corner = false,
 }) {
   if (profile.logoPath?.isEmpty ?? true) return (0, 0);
   if (splitText && profile.logoPosition.endsWith('right')) return (0, 0);
-  final reserved = logoSafeReserve(w, profile);
+  final reserved = logoSafeReserve(w, profile, corner: corner);
   return profile.logoPosition.startsWith('top') ? (reserved, 0) : (0, reserved);
 }
 

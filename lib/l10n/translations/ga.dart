@@ -1672,6 +1672,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Donker logo kiezen': 'Roghnaigh logo dorcha',
+  'Geen donker logo ingesteld': 'Níl logo dorcha socraithe',
+  'Verwijder donker logo': 'Bain logo dorcha',
+  'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
+      'Tá cúlra an tsleamhnáin dorcha, ach níl leagan dorcha ag an lógó. Tá an lógó beagnach dofheicthe ar an sleamhnán. Socraigh lógó dorcha i socruithe na láithreoide.',
   'Aangeboden als download:': 'Tairgthe mar íoslódáil:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Níor ghlac an brabhsálaí leis an íoslódáil. Ceadaigh íoslódálacha don suíomh seo agus bain triail eile as.',

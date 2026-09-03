@@ -530,6 +530,7 @@ deze velden (met standaardwaarden):
 | `codeHighlightSyntax` | `true` | Syntaxiskleuring aan/uit. Uit = alles in één kleur (bijvoorbeeld groen op zwart voor een CRT-look). |
 | `codeFontFamily` | `monospace` | Lettertypefamilie voor broncodeslides (bijvoorbeeld `Courier New`). |
 | `logoPath` | `null` | Pad naar het logo (relatief pad in `logos/`). |
+| `logoDarkPath` | `null` | Donkere variant van het logo, getoond op donkere dia-achtergronden (#1931). `null` voor gebundelde merk-logo's (die schakelen automatisch). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |
 | `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |

@@ -141,7 +141,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
 
     final pad = widget.w * 0.045;
     final logoSafe = widget.slide.showLogo
-        ? _logoSafeInsets(widget.w, widget.profile)
+        ? _logoSafeInsets(widget.w, widget.profile, corner: true)
         : EdgeInsets.zero;
     final outerPadding = EdgeInsets.fromLTRB(
       pad + logoSafe.left,
