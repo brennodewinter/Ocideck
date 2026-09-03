@@ -739,7 +739,7 @@ class _ExportDialogState extends State<ExportDialog> {
           padding: const EdgeInsets.only(top: 4),
           child: Text(
             l10n.d(
-              'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.',
+              'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),

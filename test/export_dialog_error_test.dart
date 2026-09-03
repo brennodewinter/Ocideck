@@ -85,7 +85,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Exporteer als HTML (Marp, offline)'));
+    await tester.tap(find.text('HTML-bestand (werkt offline)'));
     // Bewust pump() in stappen en géén pumpAndSettle: een draaiende spinner
     // "settelt" nooit, dus pumpAndSettle zou hier juist bij de bug voor altijd
     // wachten — precies het gedrag dat we willen uitsluiten.

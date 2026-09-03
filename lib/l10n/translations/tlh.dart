@@ -62,11 +62,11 @@ const _stringsTlh = {
   'compressedHelp':
       'JPEG \'ISmoHlu\'bogh, ghItlhmeH \'oH, De\'wI\' nav mach law\' (latlh Daq choqlu\' “-compact”).',
   'losslessHelp': 'chIlbe\'lu\'bogh naghmey QaQ naQ.',
-  'exportAsPdf': 'PDF ghaH \'e\' ngeH',
-  'exportAsPptx': 'PPTX ghaH \'e\' ngeH',
-  'exportAsOdp': 'ODP ghaH \'e\' ngeH',
-  'exportAsHtml': 'HTML ghaH \'e\' ngeH (Marp, offline)',
-  'exportAsLatex': 'LaTeX (Beamer) buvmeH lo\'',
+  'exportAsPdf': 'PDF (mIl \'agh DI\'SIc)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML mI\' (offline Dajatlh)',
+  'exportAsLatex': 'LaTeX ngerIq',
 
   'renderingSlides': '\'echletHommey chenmoHlu\'…',
   'buildingHtml': 'HTML chenmoHlu\'…',
@@ -1164,8 +1164,6 @@ const _dutchSourceTlh = {
   'Subkop': 'nach bIng',
   'Systeem (monospace)': 'pat (mI\' rap)',
   'Platte tekst': 'mu\'ghom nap',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'internet Hutlh Hoch browserDaq HTML poSmoH \'ej De\' mob \'ay\', mI\' QeD, \'ej mermaid De\'wI\'ghommey \'ang.',
   'Laatste slide': '\'echletHom Qav',
   'Logo px': 'logo px',
   'Markdown voor laatste slide': '\'echletHom Qav Markdown',
@@ -2002,8 +2000,8 @@ const _dutchSourceAddTlh = <String, String>{
       'nargh chuQut Qav. chuQut narghmoH \'ej nIDqa\'.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'tamwI\' ngeDbe\'chuq cha\'navvam ngeD — ngeDlIjmoHpu\' tammoH.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'internet Hutlh Hoch browserDaq HTML poSmoH \'ej De\' mob \'ay\', mI\' QeD, \'ej mermaid De\'wI\'ghommey \'ang. LaTeX (Beamer) DachenmoHmeH pdflatex ghap xelatex yIlo\'.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML mI\' nIq naQ browsers Dalo\'be\' internet \'e\' chImmoH code blocks, math, mermaid diagrams. LaTeX ngerIq pdflatex pagh xelatex tlhIl.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article narmev. mI\' narghchu\'; ngermey lo\'lu\'ta\'vIS nughHom. pdflatex qo\' xelatex lo\' Dalo\'taHvIS chovetlh.',
   'Afbeelding geplakt': 'nagh bej ghop',

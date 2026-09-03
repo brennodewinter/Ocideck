@@ -64,11 +64,11 @@ const _stringsFi = {
   'compressedHelp':
       'Matalamman tarkkuuden JPEG, tarkoitettu jaettavaksi materiaaliksi, huomattavasti pienempi tiedosto (tallennetaan erikseen nimellä “-compact”).',
   'losslessHelp': 'Häviöttömät täystarkkuuskuvat.',
-  'exportAsPdf': 'Vie PDF-muodossa',
-  'exportAsPptx': 'Vie PPTX-muodossa',
-  'exportAsOdp': 'Vie ODP-muotoon',
-  'exportAsHtml': 'Vie HTML-muodossa (Marp, offline)',
-  'exportAsLatex': 'Vie LaTeXina (Beamer)',
+  'exportAsPdf': 'PDF (kuva per dia)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-tiedosto (toimii offline-tilassa)',
+  'exportAsLatex': 'LaTeX-lähde',
 
   'renderingSlides': 'Renderöidään dioja…',
   'buildingHtml': 'Kootaan HTML-tiedostoa…',
@@ -1184,8 +1184,6 @@ const _dutchSourceFi = {
   'Subkop': 'Alaotsikko',
   'Systeem (monospace)': 'Järjestelmä (monospace)',
   'Platte tekst': 'Pelkkä teksti',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja Mermaid-kaaviot.',
   'Laatste slide': 'Viimeinen dia',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown viimeiselle dialle',
@@ -2028,8 +2026,8 @@ const _dutchSourceAddFi = <String, String>{
       'Kohdelevyllä ei ole tarpeeksi tilaa. Vapauta tilaa ja yritä uudelleen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Tämän deckin sinetti ei enää vastaa sisältöä — sitä muokattiin sinetöinnin jälkeen.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja mermaid-kaaviot. LaTeX (Beamer) käännetään pdflatex- tai xelatex-komennolla.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML-tiedosto avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja mermaid-kaaviot. LaTeX-lähde käännetään pdflatex- tai xelatex-kääntäjällä.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article -asiakirja. Matematiikka kulkee suoraan läpi; kuvat viitataan suhteellisella polulla. Käännä pdflatex- tai xelatex-komennolla.',
   'Afbeelding geplakt': 'Kuva liitetty',

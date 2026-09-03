@@ -65,11 +65,11 @@ const _stringsSk = {
   'compressedHelp':
       'JPEG v nižšom rozlíšení – určené ako podklad, oveľa menší súbor (uložený samostatne ako „-compact“).',
   'losslessHelp': 'Bezstratové obrázky v plnom rozlíšení.',
-  'exportAsPdf': 'Exportovať ako PDF',
-  'exportAsPptx': 'Exportovať ako PPTX',
-  'exportAsOdp': 'Exportovať ako ODP',
-  'exportAsHtml': 'Exportovať ako HTML (Marp, offline)',
-  'exportAsLatex': 'Exportovať ako LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (obrázok na snímku)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Súbor HTML (funguje offline)',
+  'exportAsLatex': 'Zdroj LaTeX',
 
   'renderingSlides': 'Vykresľovanie snímok…',
   'buildingHtml': 'Zostavovanie HTML…',
@@ -1188,8 +1188,6 @@ const _dutchSourceSk = {
   'Subkop': 'Podnadpis',
   'Systeem (monospace)': 'Systémové (monospace)',
   'Platte tekst': 'Obyčajný text',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML sa otvorí v ľubovoľnom prehliadači bez internetu a vykreslí bloky kódu, matematiku a diagramy Mermaid.',
   'Laatste slide': 'Posledná snímka',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown pre poslednú snímku',
@@ -2034,8 +2032,8 @@ const _dutchSourceAddSk = <String, String>{
       'Cieľový disk nemá dostatok miesta. Uvoľnite miesto a skúste to znova.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Pečať tohto decku sa už nezhoduje s obsahom — bola upravená po pečatení.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML sa otvorí v akomkoľvek prehliadači bez internetu a renderuje bloky kódu, matematiku a mermaid diagramy. LaTeX (Beamer) skompilujete pomocou pdflatex alebo xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Súbor HTML sa otvorí v akomkoľvek prehliadači bez internetu a vykreslí bloky kódu, matematiku a mermaid diagramy. Zdroj LaTeX sa kompiluje pomocou pdflatex alebo xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Dokument LaTeX article. Matematika prechádza priamo; obrázky sú referencované relatívnou cestou. Skompilujte pomocou pdflatex alebo xelatex.',
   'Afbeelding geplakt': 'Obrázok vložený',

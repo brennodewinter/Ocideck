@@ -64,11 +64,11 @@ const _stringsLt = {
   'compressedHelp':
       'Mažesnės raiškos JPEG, skirtas dalomajai medžiagai, gerokai mažesnis failas (įrašomas atskirai kaip „-compact“).',
   'losslessHelp': 'Be nuostolių, visos raiškos paveikslėliai.',
-  'exportAsPdf': 'Eksportuoti kaip PDF',
-  'exportAsPptx': 'Eksportuoti kaip PPTX',
-  'exportAsOdp': 'Eksportuoti kaip ODP',
-  'exportAsHtml': 'Eksportuoti kaip HTML (Marp, neprisijungus)',
-  'exportAsLatex': 'Eksportuoti kaip LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (paveikslėlis ant skaidrės)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML failas (veikia neprisijungus)',
+  'exportAsLatex': 'LaTeX šaltinis',
 
   'renderingSlides': 'Atvaizduojamos skaidrės…',
   'buildingHtml': 'Kuriamas HTML…',
@@ -1187,8 +1187,6 @@ const _dutchSourceLt = {
   'Subkop': 'Paantraštė',
   'Systeem (monospace)': 'Sistema (vienodo pločio)',
   'Platte tekst': 'Grynasis tekstas',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML atsidaro bet kurioje naršyklėje be interneto ir atvaizduoja kodo blokus, matematiką ir Mermaid diagramas.',
   'Laatste slide': 'Paskutinė skaidrė',
   'Logo px': 'Logotipas px',
   'Markdown voor laatste slide': 'Markdown paskutinei skaidrei',
@@ -2036,8 +2034,8 @@ const _dutchSourceAddLt = <String, String>{
       'Paskirties diskas neturi pakankamai vietos. Atlaisvinkite vietos ir bandykite dar kartą.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Šio deko antspaudas nebeatitinka turinio — jis buvo redaguotas po antspaudavimo.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML atsidaro bet kurioje naršyklėje be interneto ir renderuoja kodo blokus, matematiką ir mermaid diagramas. LaTeX (Beamer) kompiliuojamas su pdflatex arba xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML failas atveriamas bet kurioje naršyklėje be interneto ir atvaizduoja kodo blokus, matematiką ir mermaid diagramas. LaTeX šaltinis kompiliuojamas su pdflatex arba xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'LaTeX article dokumentas. Matematika eina tiesiogiai; vaizdai rodomi santykiniu keliu. Kompiliuokite su pdflatex arba xelatex.',
   'Afbeelding geplakt': 'Vaizdas įklijuotas',

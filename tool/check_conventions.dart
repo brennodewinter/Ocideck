@@ -183,6 +183,10 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1670): body i.p.v. source voor headingBlockIndex in _scrollToHeading.
   // +3 (#1759): stripLeadingFrontMatterLeakage op drie plekken in de editor.
   'lib/widgets/document_editor_screen.dart': 1153,
+  // +37 (#1963): _jumpToFirstFinding — statusbalk-chip springt naar de
+  // eerste slide met een openstaande bevinding. Cohesief met de export-
+  // readiness-berekening die al in dit part-bestand staat.
+  'lib/widgets/app_shell_main_layout.dart': 1037,
   // +27 (#1758): keep-with-next voor sub-hoofdstukken — alinea-split en
   // orland-guard in build(), de split-functie staat in document_pdf_blocks.dart.
   'lib/services/pdf/document_pdf_widgets.dart': 850,
@@ -489,7 +493,9 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/app_shell.dart#_MainLayoutState':
       // +10 (#1881): showRail-guard die de rail laat invallen op smal web,
       // anders gooit num.clamp ArgumentError onder 210 px vensterbreedte.
-      1449,
+      // +37 (#1963): _jumpToFirstFinding — statusbalk-chip springt naar de
+      // eerste slide met een openstaande bevinding in plaats van de export.
+      1486,
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de

@@ -64,11 +64,11 @@ const _stringsId = {
   'compressedHelp':
       'JPEG resolusi lebih rendah, ditujukan untuk handout, dengan berkas yang jauh lebih kecil (disimpan terpisah sebagai “-compact”).',
   'losslessHelp': 'Gambar resolusi penuh tanpa kehilangan kualitas.',
-  'exportAsPdf': 'Ekspor sebagai PDF',
-  'exportAsPptx': 'Ekspor sebagai PPTX',
-  'exportAsOdp': 'Ekspor sebagai ODP',
-  'exportAsHtml': 'Ekspor sebagai HTML (Marp, offline)',
-  'exportAsLatex': 'Ekspor sebagai LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (gambar per slide)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Berkas HTML (bekerja offline)',
+  'exportAsLatex': 'Sumber LaTeX',
 
   'renderingSlides': 'Merender slide…',
   'buildingHtml': 'Menyusun HTML…',
@@ -1182,8 +1182,6 @@ const _dutchSourceId = {
   'Subkop': 'Subjudul',
   'Systeem (monospace)': 'Sistem (monospace)',
   'Platte tekst': 'Teks biasa',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML terbuka di browser mana pun tanpa internet dan merender blok kode, matematika, serta diagram Mermaid.',
   'Laatste slide': 'Slide terakhir',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown untuk slide terakhir',
@@ -2030,8 +2028,8 @@ const _dutchSourceAddId = <String, String>{
       'Disk tujuan tidak memiliki ruang cukup. Kosongkan ruang dan coba lagi.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Segel deck ini tidak lagi cocok dengan isinya — diedit setelah disegel.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. LaTeX (Beamer) dikompilasi dengan pdflatex atau xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'File HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. Sumber LaTeX dikompilasi dengan pdflatex atau xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Dokumen LaTeX article. Matematika langsung masuk; gambar direferensikan dengan path relatif. Kompilasi dengan pdflatex atau xelatex.',
   'Afbeelding geplakt': 'Gambar ditempel',

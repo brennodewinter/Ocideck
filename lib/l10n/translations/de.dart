@@ -64,11 +64,11 @@ const _stringsDe = {
   'compressedHelp':
       'JPEG mit niedrigerer Auflösung, gedacht als Handout, mit deutlich kleinerer Datei (separat als „-compact“ gespeichert).',
   'losslessHelp': 'Verlustfreie Bilder in voller Auflösung.',
-  'exportAsPdf': 'Als PDF exportieren',
-  'exportAsPptx': 'Als PPTX exportieren',
-  'exportAsOdp': 'Als ODP exportieren',
-  'exportAsHtml': 'Als HTML exportieren (Marp, offline)',
-  'exportAsLatex': 'Als LaTeX (Beamer) exportieren',
+  'exportAsPdf': 'PDF (Bild pro Folie)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-Datei (funktioniert offline)',
+  'exportAsLatex': 'LaTeX-Quelle',
 
   'renderingSlides': 'Folien werden gerendert…',
   'buildingHtml': 'HTML wird erstellt…',
@@ -1063,8 +1063,8 @@ const _dutchSourceAddDe = {
       'Das Ziellaufwerk hat nicht genügend Speicherplatz. Schaffen Sie Platz und versuchen Sie es erneut.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Das Siegel dieses Decks stimmt nicht mehr mit dem Inhalt überein — es wurde nach dem Versiegeln bearbeitet.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML öffnet sich in jedem Browser ohne Internet und rendert Codeblöcke, Mathematik und Mermaid-Diagramme. LaTeX (Beamer) kompilierst du mit pdflatex oder xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Eine HTML-Datei öffnet sich in jedem Browser ohne Internet und rendert Codeblöcke, Mathematik und Mermaid-Diagramme. Die LaTeX-Quelle kompilierst du mit pdflatex oder xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Ein LaTeX-Article-Dokument. Mathematik geht direkt durch; Bilder werden mit relativem Pfad referenziert. Mit pdflatex oder xelatex kompilieren.',
   'Afbeelding geplakt': 'Bild eingefügt',
@@ -4130,8 +4130,6 @@ const _dutchSourceAddDe = {
   'Geen slides gevonden voor': 'Keine Folien gefunden für',
   'Geen slides met': 'Keine Folien mit',
   'Geselecteerd': 'Ausgewählt',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML öffnet sich in jedem Browser ohne Internet und rendert Codeblöcke, Mathematik und Mermaid-Diagramme.',
   'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
       'Die Datei wird dauerhaft von der Festplatte gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.',
   'Ingezoomd': 'Vergrößert',

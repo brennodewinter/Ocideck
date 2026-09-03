@@ -32,7 +32,8 @@ const int maxMethodLines = 150;
 const Map<String, int> methodLengthBaseline = {
   // +8 (#1881): showRail-guard die de rail laat invallen op smal web.
   // De methode stond al op de limiet.
-  'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 158,
+  // +1 (#1963): onJumpToFindings-callback in _DeckStatusBar-aanroep.
+  'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 159,
   // +12 (#1879): de "paneelvullend"-checkbox voor bulletsImage. De methode
   // stond al op de limiet.
   'lib/widgets/editors/bullets_image_editor.dart::_BulletsImageEditorState.build':

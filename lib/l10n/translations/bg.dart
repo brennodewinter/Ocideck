@@ -65,11 +65,11 @@ const _stringsBg = {
   'compressedHelp':
       'JPEG с по-ниска резолюция, предназначен за раздаване, с много по-малък файл (запазен отделно като „-compact“).',
   'losslessHelp': 'Изображения без загуба на пълна резолюция.',
-  'exportAsPdf': 'Експортиране като PDF',
-  'exportAsPptx': 'Експортиране като PPTX',
-  'exportAsOdp': 'Експортирай като ODP',
-  'exportAsHtml': 'Експортиране като HTML (Marp, офлайн)',
-  'exportAsLatex': 'Експортирай като LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (изображение на слайд)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML файл (работи офлайн)',
+  'exportAsLatex': 'LaTeX източник',
 
   'renderingSlides': 'Рендиране на слайдове…',
   'buildingHtml': 'Съставяне на HTML…',
@@ -1195,8 +1195,6 @@ const _dutchSourceBg = {
   'Subkop': 'Подзаглавие',
   'Systeem (monospace)': 'Системен (моноширинен)',
   'Platte tekst': 'Обикновен текст',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML се отваря във всеки браузър без интернет и рендира кодови блокове, математика и Mermaid диаграми.',
   'Laatste slide': 'Последен слайд',
   'Logo px': 'Лого px',
   'Markdown voor laatste slide': 'Markdown за последния слайд',
@@ -2048,8 +2046,8 @@ const _dutchSourceAddBg = <String, String>{
       'Дестинационният диск няма достатъчно пространство. Освободете място и опитайте отново.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Печатът на това deck вече не съответства на съдържанието — редактиран е след запечатването.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML се отваря във всеки браузър без интернет и рендерира блокове код, математика и mermaid диаграми. LaTeX (Beamer) се компилира с pdflatex или xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'HTML файл се отваря във всеки браузър без интернет и рендерира блокове с код, математика и mermaid диаграми. Източникът LaTeX се компилира с pdflatex или xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Документ LaTeX article. Математиката преминава директно; изображенията се реферират с относителен път. Компилирайте с pdflatex или xelatex.',
   'Afbeelding geplakt': 'Изображението е поставено',

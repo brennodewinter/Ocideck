@@ -64,11 +64,11 @@ const _stringsEl = {
   'compressedHelp':
       'JPEG χαμηλότερης ανάλυσης, προορίζεται για διανομές, με πολύ μικρότερο αρχείο (αποθηκεύεται ξεχωριστά ως «-compact»).',
   'losslessHelp': 'Εικόνες πλήρους ανάλυσης χωρίς απώλειες.',
-  'exportAsPdf': 'Εξαγωγή ως PDF',
-  'exportAsPptx': 'Εξαγωγή ως PPTX',
-  'exportAsOdp': 'Εξαγωγή ως ODP',
-  'exportAsHtml': 'Εξαγωγή ως HTML (Marp, εκτός σύνδεσης)',
-  'exportAsLatex': 'Εξαγωγή ως LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (εικόνα ανά διαφάνεια)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'Αρχείο HTML (λειτουργεί εκτός σύνδεσης)',
+  'exportAsLatex': 'Πηγαίος κώδικας LaTeX',
 
   'renderingSlides': 'Απόδοση διαφανειών…',
   'buildingHtml': 'Δημιουργία HTML…',
@@ -1198,8 +1198,6 @@ const _dutchSourceEl = {
   'Subkop': 'Υποεπικεφαλίδα',
   'Systeem (monospace)': 'Σύστημα (monospace)',
   'Platte tekst': 'Απλό κείμενο',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'Το HTML ανοίγει σε οποιονδήποτε browser χωρίς internet και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα Mermaid.',
   'Laatste slide': 'Τελική διαφάνεια',
   'Logo px': 'Λογότυπο px',
   'Markdown voor laatste slide': 'Markdown για την τελική διαφάνεια',
@@ -2056,8 +2054,8 @@ const _dutchSourceAddEl = <String, String>{
       'Ο προορισμός δίσκος δεν έχει επαρκή χώρο. Απελευθερώστε χώρο και δοκιμάστε ξανά.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Η σφραγίδα αυτής της παρουσίασης δεν ταιριάζει πια με το περιεχόμενο — τροποποιήθηκε μετά τη σφράγιση.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'Το HTML ανοίγει σε οποιονδήποτε browser χωρίς ίντερνετ και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα mermaid. Το LaTeX (Beamer) μεταγλωττίζεται με pdflatex ή xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Ένα αρχείο HTML ανοίγει σε οποιονδήποτε περιηγητή χωρίς ίντερνετ και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα mermaid. Η πηγή LaTeX μεταγλωττίζεται με pdflatex ή xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Ένα έγγραφο LaTeX article. Τα μαθηματικά περνούν απευθείας; οι εικόνες αναφέρονται με σχετική διαδρομή. Μεταγλωττίστε με pdflatex ή xelatex.',
   'Afbeelding geplakt': 'Η εικόνα επικολλήθηκε',

@@ -64,11 +64,11 @@ const _stringsHu = {
   'compressedHelp':
       'Alacsonyabb felbontású JPEG, kiosztáshoz szánva, sokkal kisebb fájlmérettel (külön mentve „-compact” néven).',
   'losslessHelp': 'Veszteségmentes, teljes felbontású képek.',
-  'exportAsPdf': 'Exportálás PDF-ként',
-  'exportAsPptx': 'Exportálás PPTX-ként',
-  'exportAsOdp': 'Exportálás ODP-ként',
-  'exportAsHtml': 'Exportálás HTML-ként (Marp, offline)',
-  'exportAsLatex': 'Exportálás LaTeX-ként (Beamer)',
+  'exportAsPdf': 'PDF (kép diánként)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-fájl (offline működik)',
+  'exportAsLatex': 'LaTeX forrás',
 
   'renderingSlides': 'Diák renderelése…',
   'buildingHtml': 'HTML összeállítása…',
@@ -1183,8 +1183,6 @@ const _dutchSourceHu = {
   'Subkop': 'Alcím',
   'Systeem (monospace)': 'Rendszer (állandó szélességű)',
   'Platte tekst': 'Egyszerű szöveg',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'A HTML internet nélkül bármely böngészőben megnyílik, és megjeleníti a kódblokkokat, matematikát és Mermaid-diagramokat.',
   'Laatste slide': 'Utolsó dia',
   'Logo px': 'Logó px',
   'Markdown voor laatste slide': 'Markdown az utolsó diához',
@@ -2033,8 +2031,8 @@ const _dutchSourceAddHu = <String, String>{
       'A céllemez nem rendelkezik elegendő hellyel. Szabadítson fel helyet, és próbálja újra.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Ezen deck pecsétje már nem egyezik a tartalommal — a pecsételés után szerkesztették.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML bármely böngészőben megnyílik internet nélkül és rendereli a kódblokkokat, matematikát és mermaid diagramokat. A LaTeX (Beamer) pdflatex vagy xelatex segítségével fordítható.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Egy HTML-fájl bármelyik böngészőben megnyílik internet nélkül, és kódblokkokat, matematikát és mermaid-diagramokat jelenít meg. A LaTeX forrás pdflatex vagy xelatex segítségével fordítható.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Egy LaTeX article dokumentum. A matematika közvetlenül átmegy; a képek relatív útvonallal hivatkozott. Fordítsd pdflatex vagy xelatex segítségével.',
   'Afbeelding geplakt': 'Kép beillesztve',

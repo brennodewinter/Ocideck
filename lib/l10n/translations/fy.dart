@@ -64,11 +64,11 @@ const _stringsFy = {
   'compressedHelp':
       'JPEG op legere resolúsje, bedoeld as handout, mei in folle lytser bestân (apart bewarre as “-compact”).',
   'losslessHelp': 'Ferliesfrije ôfbyldings op folsleine resolúsje.',
-  'exportAsPdf': 'Eksportearje as PDF',
-  'exportAsPptx': 'Eksportearje as PPTX',
-  'exportAsOdp': 'Eksportearje as ODP',
-  'exportAsHtml': 'Eksportearje as HTML (Marp, offline)',
-  'exportAsLatex': 'Eksportearje as LaTeX (Beamer)',
+  'exportAsPdf': 'PDF (byldje per dia)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML-bestân (wurkt offline)',
+  'exportAsLatex': 'LaTeX-boarne',
 
   'renderingSlides': 'Slides renderje…',
   'buildingHtml': 'HTML bouwe…',
@@ -1063,8 +1063,8 @@ const _dutchSourceAddFy = {
       'De bestimmingsskiif hat net genôch romte. Meitsje romte frij en besykje it op \'e nij.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'It segel fan dit deck kloppet net mear mei de ynhâld — it is bewurke nei it segeljen.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML iepent yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) kompilearst mei pdflatex of xelatex.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'In HTML-bestân iepent yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en mermaid-diagrammen. De LaTeX-boarne kompilearje jo mei pdflatex of xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'In LaTeX-artikeldokumint. Wiskunde giet streekrjocht troch; ôfbyldings wurde mei relatyf paad ferwiisd. Kompilearje mei pdflatex of xelatex.',
   'Afbeelding geplakt': 'Ofbylding plakt',
@@ -4098,8 +4098,6 @@ const _dutchSourceAddFy = {
   'Geen slides gevonden voor': 'Gjin dia\'s fûn foar',
   'Geen slides met': 'Gjin dia\'s mei',
   'Geselecteerd': 'Selektearre',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML iepenet yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en Mermaid-diagrammen.',
   'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
       'It bestân wurdt permanint fan skiif fuortsmiten. Dizze aksje kin net ûngedien makke wurde.',
   'Ingezoomd': 'Ynzoomd',

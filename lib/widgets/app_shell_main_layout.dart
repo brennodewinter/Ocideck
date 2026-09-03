@@ -127,6 +127,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             readiness: readiness,
             quality: quality,
             remoteOrigin: deckState.remoteOrigin,
+            onJumpToFindings: () => _jumpToFirstFinding(quality),
           ),
           body: Builder(
             builder: (ctx) {
@@ -656,6 +657,42 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   /// vanaf hier" in het diamenu blijft voor wie een andere dia wil kiezen
   /// zonder er eerst naartoe te navigeren; "alleen afspelen" begint bij dia 1.
   void _presentDeck() => presentDeck(context, ref);
+
+  /// Spring naar de eerste slide met een openstaande kwaliteits- of
+  /// privacybevinding. Kwaliteit gaat vóór privacy (net als in de export-gate),
+  /// en binnen elke soort naar de laagste slide-index.
+  ///
+  /// De statusbalk-chip opent niet meer de exportdialoog bij deze statussen —
+  /// de werkplek waar je de keuze per bevinding maakt zit bij de slide, niet
+  /// in de export (#1963).
+  void _jumpToFirstFinding(SlideQualityResult quality) {
+    // Kwaliteit: de eerste slide met een actieerbare bevinding.
+    int? qualitySlide;
+    for (final i in quality.actionableIssues) {
+      if (i.slideIndex < 0) continue;
+      if (qualitySlide == null || i.slideIndex < qualitySlide) {
+        qualitySlide = i.slideIndex;
+      }
+    }
+
+    if (qualitySlide != null) {
+      ref.read(editorProvider.notifier).select(qualitySlide);
+      return;
+    }
+
+    // Privacy: de eerste slide met een zekere, onopgeloste bevinding.
+    int? privacySlide;
+    for (final f in ref.read(privacyScanProvider).certain) {
+      if (f.slideIndex < 0) continue;
+      if (privacySlide == null || f.slideIndex < privacySlide) {
+        privacySlide = f.slideIndex;
+      }
+    }
+
+    if (privacySlide != null) {
+      ref.read(editorProvider.notifier).select(privacySlide);
+    }
+  }
 
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);

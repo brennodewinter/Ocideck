@@ -64,11 +64,11 @@ const _stringsTr = {
   'compressedHelp':
       'Daha düşük çözünürlüklü JPEG — dağıtım notu olarak düşünülmüştür, çok daha küçük dosya (ayrıca “-compact” olarak kaydedilir).',
   'losslessHelp': 'Tam çözünürlükte kayıpsız görseller.',
-  'exportAsPdf': 'PDF olarak dışa aktar',
-  'exportAsPptx': 'PPTX olarak dışa aktar',
-  'exportAsOdp': 'ODP olarak dışa aktar',
-  'exportAsHtml': 'HTML olarak dışa aktar (Marp, çevrimdışı)',
-  'exportAsLatex': 'LaTeX (Beamer) olarak dışa aktar',
+  'exportAsPdf': 'PDF (slayt başına görsel)',
+  'exportAsPptx': 'PowerPoint',
+  'exportAsOdp': 'OpenDocument',
+  'exportAsHtml': 'HTML dosyası (çevrimdışı çalışır)',
+  'exportAsLatex': 'LaTeX kaynağı',
 
   'renderingSlides': 'Slaytlar işleniyor…',
   'buildingHtml': 'HTML oluşturuluyor…',
@@ -2155,8 +2155,6 @@ const _dutchSourceTr = {
   'Systeem (monospace)': 'Sistem (eş aralıklı)',
   'Platte tekst': 'Düz metin',
   'Titel (optioneel)': 'Başlık (isteğe bağlı)',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
-      'HTML, internet olmadan her tarayıcıda açılır; kod bloklarını, matematik ifadelerini ve Mermaid diyagramlarını işler.',
   'Laatste slide': 'Son slayt',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Son slayt için Markdown',
@@ -2944,8 +2942,8 @@ const _dutchSourceAddTr = <String, String>{
       'Hedef diskte yeterli alan yok. Alan boşaltın ve tekrar deneyin.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
       'Bu deckin mührü artık içeriğiyle eşleşmiyor — mühürlenmeden sonra düzenlendi.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
-      'HTML internet olmadan herhangi bir tarayıcıda açılır ve kod bloklarını, matematik ve mermaid diyagramlarını renderlar. LaTeX (Beamer) pdflatex veya xelatex ile derlenir.',
+  'HTML-bestand opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX-bron compileer je met pdflatex of xelatex.':
+      'Bir HTML dosyası internet olmadan herhangi bir tarayıcıda açılır ve kod bloklarını, matematiği ve mermaid diyagramlarını işler. LaTeX kaynağı pdflatex veya xelatex ile derlenir.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
       'Bir LaTeX article belgesi. Matematik doğrudan geçer; görüntüler göreli yolla referanslanır. pdflatex veya xelatex ile derleyin.',
   'Afbeelding geplakt': 'Görsel yapıştırıldı',
