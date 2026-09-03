@@ -859,16 +859,19 @@ void main() {
       await withBundle((bundle) async {
         final unsupported = <Set<int>>[];
         final coarse = <LogoResolution>[];
+        final tooWide = <int>[];
         await buildDocumentExportBytes(
           bundle,
           DocumentExportFormat.pdf,
           html: MarpHtmlService(loadAsset: _diskLoader),
           onPdfUnsupportedCharacters: unsupported.add,
           onPdfCoarseLogo: coarse.add,
+          onPdfTablesTooWide: tooWide.add,
         );
         // Gewone Nederlandse tekst zonder exotische tekens → geen melding.
         expect(unsupported, isEmpty);
         expect(coarse, isEmpty);
+        expect(tooWide, isEmpty);
       });
     });
 
@@ -891,6 +894,38 @@ void main() {
       );
       expect(unsupported, hasLength(1));
       expect(unsupported.single.map(String.fromCharCode).join(), contains('日'));
+    });
+
+    test('pdf-callback vuurt bij een tabel die niet op het blad past', () async {
+      // Dat de renderer zo'n tabel telt staat vast in
+      // pdf_table_column_widths_test. Hier staat vast dat het getal ook
+      // wérkelijk de schil bereikt. Die schakel was alleen bewaakt met een
+      // greep in de brontekst van het bewerkscherm, en die blijft groen als de
+      // doorgifte in deze dienst wegvalt: met `onPdfTablesTooWide` uitgezet
+      // bleven alle 153 tests in test/pdf/ staan (#1789).
+      //
+      // 64 plus 128 hexadecimale tekens naast elkaar passen op geen enkele
+      // maat — dezelfde vorm als de renderertoets, nu door de hele keten.
+      final bundle = await buildDocumentExportBundle(
+        '# Verslag\n\n'
+        '| Bestandstype | Bestandsnaam | SHA-256 | SHA-512 |\n'
+        '|---|---|---|---|\n'
+        '| EVTX | `RD01-SecurityLogs.evtx` | `${'a' * 64}` | `${'b' * 128}` |\n',
+        projectPath: null,
+        profile: PrivacyExportProfile.full,
+        ownIdentity: OwnIdentity.empty,
+        regions: defaultPrivacyRegions,
+        disabledRules: const {},
+        markdownService: MarkdownService(),
+      );
+      final tooWide = <int>[];
+      await buildDocumentExportBytes(
+        bundle,
+        DocumentExportFormat.pdf,
+        html: MarpHtmlService(loadAsset: _diskLoader),
+        onPdfTablesTooWide: tooWide.add,
+      );
+      expect(tooWide, [1]);
     });
 
     test('sourcePath null → geen rebasing in md-bytes', () async {
