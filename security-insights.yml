@@ -66,7 +66,7 @@ repository:
   bug-fixes-only: false
   accepts-change-request: true
   # No bots, no Dependabot. There IS a CI runner on the forge since
-  # 23-07-2026 (static-gate + scans per PR, linux-gate post-merge), but
+  # 23-07-2026 (static-gate + scans per PR, linux-gate nightly), but
   # automated change requests would still land unreviewed by a human —
   # `make check` runs on the maintainer's machine before the merge, and
   # the forge gates are detection, not approval.

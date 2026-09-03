@@ -7,6 +7,10 @@ name: Tijdsvervallende controles
 # (standaardversies), `check_licenses`, en `check-pins` draaiden alleen als iemand
 # ze met de hand typte. Een CVE op marked kon wekenlang onopgemerkt blijven.
 #
+# Daar hoort ook een controle bij die niet over andermans releases gaat maar
+# over onze eigen metingen: een looptijdbelofte in de documentatie
+# verrot net zo goed zonder dat er iets verandert.
+#
 # Deze werkstroom draait ze dagelijks en bij handmatige dispatch. De zware
 # geheimen/SAST-scan zit er niet in — die reageren op code, niet op tijd, en
 # staan al in `scans.yml` per PR. Hier gaat het om de controles die rood worden
@@ -48,3 +52,11 @@ jobs:
 
       - name: GitHub-actie-pins tegen de laatste release
         run: dart run tool/check_pinned_versions.dart
+
+      # Onze eigen metingen, niet die van een ander. Een looptijdbelofte in de
+      # documentatie verrot terwijl de boom stilstaat: `docs/CHECKS.md` beloofde
+      # "within ~half an hour" terwijl de meting op 54 minuten stond, en geen
+      # poort kon dat zien. De structurele helft draait per PR in
+      # `make check-static`; alleen de houdbaarheid hoort hier, tegen de klok.
+      - name: Gemeten beweringen in de documentatie tegen hun houdbaarheid
+        run: dart run tool/check_dated_claims.dart --tegen-de-klok
