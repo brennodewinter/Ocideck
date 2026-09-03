@@ -66,7 +66,12 @@ Future<void> importPresentation(
 
   final picked =
       filesOverride ??
-      (fileOverride != null ? [fileOverride] : await _pickPresentations(l10n));
+      (fileOverride != null
+          ? [fileOverride]
+          : await _pickPresentations(
+              l10n,
+              initialDirectory: ref.read(settingsProvider).homeDirectory,
+            ));
   if (picked == null || picked.isEmpty || !context.mounted) return;
 
   if (picked.length > 1) {
@@ -253,15 +258,21 @@ Future<void> _importQueue(
 /// De bestandskiezer, apart gehouden zodat de import zelf één rechte lijn
 /// blijft. `null` betekent: niets gekozen; bestanden zonder bytes vallen af,
 /// want zonder inhoud valt er niets om te zetten.
+///
+/// [initialDirectory] is de thuismap uit de instellingen (de eerste bibliotheek),
+/// zodat de kiezer daar opent in plaats van op een door het OS onthouden
+/// willekeurige map (#1943).
 Future<List<PickedPresentation>?> _pickPresentations(
-  AppLocalizations l10n,
-) async {
+  AppLocalizations l10n, {
+  String? initialDirectory,
+}) async {
   final picked = await FilePicker.pickFiles(
     type: FileType.custom,
     allowedExtensions: presentationImportExtensions,
     // Meer tegelijk mag: wie een stapel presentaties overzet, doet dat zelden
     // één voor één. Bij precies één blijft het gedrag ongewijzigd.
     dialogTitle: l10n.d('Presentatie kiezen'),
+    initialDirectory: initialDirectory,
   );
   if (picked.isEmpty) return null;
   return [
