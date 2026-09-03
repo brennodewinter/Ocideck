@@ -195,6 +195,16 @@ class MarkdownToDelta extends Converter<String, Delta>
     _currentBlockTag ??= tag;
     _lastTag = tag;
 
+    // Blokinhoud (codeblok of embed) die binnen een lijstitem staat, kan in
+    // Quills vlakke model niet als kind van de lijstregel reizen — `list` en
+    // `codeBlock` zijn exclusieve blokattributen, en een embed wordt aan de
+    // bulletregel geplakt. Sluit in plaats daarvan de lijstitem-regel af en
+    // draag het blok als `x-embed-list-block`-embed met zijn inspringing. (#1925)
+    if (_listItemIndent >= 0 && (tag == 'pre' || _isEmbedElement(element))) {
+      _emitNestedBlockAsEmbed(element);
+      return false;
+    }
+
     if (_haveBlockAttrs(element)) {
       _addBlockAttrs(_toBlockAttributes(element));
     }
@@ -263,6 +273,55 @@ class MarkdownToDelta extends Converter<String, Delta>
     _delta.insert('\n', _effectiveBlockAttrs());
   }
 
+  /// Sluit de huidige lijstitem-regel af en draagt het geneste blok als
+  /// `x-embed-list-block`-embed met zijn inspringing. Zie `visitElementBefore`.
+  void _emitNestedBlockAsEmbed(md.Element element) {
+    // Sluit de huidige lijstitem-regel (met de lijst-attributen).
+    _insertNewLine();
+
+    // Reconstrueer de ruwe markdown van het geneste blok.
+    final raw = element.tag == 'pre'
+        ? _reconstructCodeFence(element)
+        : (element.attributes['data'] ?? '');
+
+    // Inspringing die het blok een kind van het lijstitem maakt: 2 spaties
+    // per niveau voor ongeordende lijsten, 3 voor geordende (`1. ` is 3 breed).
+    final isOrdered = _activeBlockAttributes
+        .expand((e) => e)
+        .any((a) => a.key == Attribute.list.key && a.value == 'ordered');
+    final spacesPerLevel = isOrdered ? 3 : 2;
+    final indent = ' ' * spacesPerLevel * (_listItemIndent + 1);
+
+    final indented = raw
+        .split('\n')
+        .map((line) => line.isEmpty ? line : '$indent$line')
+        .join('\n');
+
+    _delta.insert(BlockEmbed('x-embed-list-block', indented).toJson());
+    // De inspringing op de afsluitende regel markeert de embed als inhoud van
+    // het lijstitem — zodat de terugweg de lijstnummering niet verbreekt.
+    _delta.insert('\n', <String, dynamic>{
+      Attribute.indent.key: _listItemIndent + 1,
+    });
+    _justPreviousBlockExit = true;
+  }
+
+  /// Herstelt de fence van een `pre > code`-element naar ruwe markdown.
+  String _reconstructCodeFence(md.Element pre) {
+    final codeChild = pre.children!.first as md.Element;
+    final language = (codeChild.attributes['class'] ?? '')
+        .split(' ')
+        .where((c) => c.startsWith('language-'))
+        .firstOrNull
+        ?.split('-')
+        .lastOrNull;
+    final content = (codeChild.children!.first as md.Text).text;
+    final trimmed = content.endsWith('\n')
+        ? content.substring(0, content.length - 1)
+        : content;
+    return '```${language ?? ''}\n$trimmed\n```';
+  }
+
   void _insertNewLineBeforeElementIfNeeded(md.Element element) {
     if (!_isInBlockQuote &&
         _lastTag == 'blockquote' &&
@@ -301,7 +360,10 @@ class MarkdownToDelta extends Converter<String, Delta>
 
     // if all the p children are embeddable add a new line
     // example: images in a single line
+    // Binnen een lijstitem neemt de embed-onderschepping de nieuwe regel
+    // voor haar rekening; deze extra regel zou een leeg lijstitem maken.
     if (element.tag == 'p' &&
+        _listItemIndent < 0 &&
         (element.children?.every(
               (child) => child is md.Element && _isEmbedElement(child),
             ) ??

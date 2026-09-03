@@ -4,6 +4,7 @@ import 'package:markdown_quill/markdown_quill.dart';
 
 import 'footnote_embed_syntax.dart';
 import 'image_embed_syntax.dart';
+import 'list_block_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
 import 'mermaid_embed_syntax.dart';
 import 'pentest_block_embed_syntax.dart';
@@ -89,6 +90,7 @@ class MarkdownQuillCodec {
       EmbeddableFootnoteRef.footnoteRefType: EmbeddableFootnoteRef.toMdSyntax,
       EmbeddableFootnoteDef.footnoteDefType: EmbeddableFootnoteDef.toMdSyntax,
       EmbeddableMarkdownImage.imageType: EmbeddableMarkdownImage.toMdSyntax,
+      EmbeddableListBlock.listBlockType: EmbeddableListBlock.toMdSyntax,
     },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(

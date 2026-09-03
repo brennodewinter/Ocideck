@@ -473,6 +473,10 @@ String _prefixNumber(Node node, int indentLevel) {
     final isOrdered = nodeBeforeListType == 'ordered';
 
     if (nodeBeforeListType == null) {
+      // Een regel zonder lijst-attribuut maar mét inspringing hoort bij de
+      // inhoud van een lijstitem (bijv. een x-embed-list-block). Tel door
+      // in plaats van de nummering te verbreken. (#1925)
+      if (nodeBeforeIndentLevel > 0) continue;
       break;
     }
     if (nodeBeforeIndentLevel < indentLevel) {
