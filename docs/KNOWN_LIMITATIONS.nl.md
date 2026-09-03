@@ -84,6 +84,20 @@ browser, of naar LaTeX voor gezette wiskunde. *(Toegevoegd 2026-08-20; nog
 dezelfde dag ingeperkt van "toont altijd de bron" toen de tekeningen er waren, en
 nogmaals gecorrigeerd toen de platformgrenzen werkelijk gemeten waren.)*
 
+## De visuele bewerker tekent een mermaid-diagram, maar geen grafiek
+
+De visuele modus van een document tekent de blokken die als embed reizen:
+tabellen, tijdlijnen, de inhoudsopgave, voetnoten, pentest-enveloppen en — sinds
+#1920 — een mermaid-fence. De grafiek-fence is degene die overblijft: die heeft
+geen eigen embed, dus de visuele bewerker toont zijn bron in een monospace-kader
+terwijl de lezer, de voorvertoning, de weergave Pagina's, de PDF en de
+HTML-export de grafiek wél tekenen. De cijfers bewerk je door naar Bron te
+wisselen.
+
+Er gaat hoe dan ook niets verloren: de fence is gewone Markdown, de bron blijft
+byte-getrouw door een visuele bewerking heen, en elke andere weergave tekent
+hem. *(Toegevoegd 2026-09-02.)*
+
 ## Een document exporteren komt in de webversie als download, niet als opgeslagen bestand
 
 Alle zes formaten exporteren in de browser, maar je kunt ze geen map aanwijzen: de

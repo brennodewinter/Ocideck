@@ -3952,6 +3952,12 @@ op de weg naar buiten:
   verwijderen één documenthandeling is en er nooit een marker zonder tabel kan
   achterblijven — precies het gebrek waartegen de atomiciteit hierboven bestaat.
 
+De tijdlijn is daarmee de één chronologievorm die in **elke** weergave werkt:
+lezer, voorvertoning, Pagina's, PDF, HTML-export en de visuele bewerker tekenen
+hem allemaal, op elk platform, omdat hij in Dart getekend wordt en geen eigen
+renderer nodig heeft. Een `gantt` in mermaid is het rijkere plaatje; een
+gemarkeerde GFM-tabel is degene die altijd aankomt.
+
 ### 14.12 Documentvelden en sjablonen voor kop en voet *(toegevoegd 2026-08-19)*
 
 Een document kan in zijn leidende YAML-front-matter een open verzameling
@@ -4006,3 +4012,55 @@ bestaande titel-/beschrijving-/auteurpaden; eigen velden gebruiken het
 documentveldpad. Alleen de geprojecteerde veldmap voedt daarna Markdown, HTML en
 LaTeX. Een te groot veld wordt niet gedeeltelijk gescand maar laat de export
 gesloten mislukken.
+
+### 14.13 Mermaid-diagram — een mermaid-fence *(toegevoegd 2026-09-02)*
+
+Ook een diagram is geen nieuw gegevensformaat. Het is een gewoon afgebakend
+codeblok met `mermaid` als taal:
+
+````markdown
+```mermaid
+graph TD;
+  A[Melding] --> B{Bevestigd?};
+  B -->|ja| C[Onderzoek];
+  B -->|nee| D[Afgesloten];
+```
+````
+
+Elke Markdown-lezer die mermaid niet kent, toont de bron als codeblok — en daar
+is de fence om gekozen: het bestand blijft leesbaar en er komt geen
+OciDeck-eigen syntaxis bij. De omgekeerde handeling is niets verwijderen; er is
+geen marker om weg te halen.
+
+OciDeck tekent het diagram in de lezer, de voorvertoning, de weergave Pagina's,
+de PDF-export, de HTML-export en de visuele bewerker. De bron reist er
+byte-getrouw doorheen; de rijke-tekstlaag herschrijft hem nooit.
+
+**Renderregels.** De renderer is mermaid zelf, geïnitialiseerd vanuit één
+gedeelde configuratie (`kMermaidInitConfig`), en de SVG die eruit komt gaat door
+dezelfde allow-list-opschoning als elke andere tekening:
+
+- `htmlLabels` staat **uit**. Een regeleinde in een label is `<br/>`; HTML in een
+  label wordt niet getekend.
+- `securityLevel` is `strict`, en een `%%{init: …}%%`-directive per diagram wordt
+  gehonoreerd **behalve** voor de zes vastgezette sleutels `secure`,
+  `securityLevel`, `startOnLoad`, `maxTextSize`, `suppressErrorRendering` en
+  `htmlLabels`. Een diagram mag dus zijn eigen thema of themavariabelen zetten,
+  maar kan de beveiligingshouding van het document dat hem draagt niet oprekken.
+- De SVG-allow-list houdt containers, verwijzingen en vormen. `<style>` wordt
+  ingelijnd vóór het opschonen; `<marker>`, `<filter>` en `<foreignObject>`
+  worden weggehaald — vandaar dat pijlpunten als gebakken polygonen aankomen in
+  plaats van als markerverwijzingen.
+- In de lezer wordt het diagram op **ware grootte** getekend en schuift zijn blok
+  horizontaal zodra het breder is dan de kolom, zodat een brede stroomschema in
+  zijn geheel bereikbaar blijft zonder dat een tweede verticale schuiver met de
+  paginaschuif vecht. In **Pagina's en de PDF** wordt het diagram juist
+  **afgeschaald** naar de tekstkolom, omdat een vel een vaste breedte heeft en
+  een schuifbalk het zou afsnijden. Een diagram binnen de tekstkolom houden
+  (642 px bij A4 met marges van 20 mm) voorkomt dus elke schaling.
+- Waar geen renderer beschikbaar is, valt de fence terug op het gewone codeblok,
+  zodat de bron zichtbaar is in plaats van een leeg kader. Op het scherm zijn dat
+  **Windows en Linux**, waar de verborgen WebView die de renderer nodig heeft
+  geen platformimplementatie kent; macOS, Android, iOS en de webversie (die via
+  de gebundelde `mermaid.min.js` rechtstreeks tekent) tekenen allemaal. Voor de
+  **PDF** ligt die verzameling weer anders — zie KNOWN_LIMITATIONS.nl.md.

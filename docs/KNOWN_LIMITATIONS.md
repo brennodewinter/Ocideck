@@ -80,6 +80,19 @@ to LaTeX for typeset maths. *(Added 2026-08-20; narrowed the same day from
 "always shows source" once the drawings landed, and corrected again once the
 platform limits were actually measured.)*
 
+## The visual editor draws a Mermaid diagram, but not a chart
+
+A document's visual mode renders the blocks that travel as embeds: tables,
+timelines, the table of contents, footnotes, pentest envelopes, and — since
+#1920 — a ```mermaid fence. A ```chart fence is the one that is left: it has no
+embed of its own, so the visual editor shows its source in a monospaced box
+while the reader, the preview, the Pagina's view, the PDF and the HTML export
+all draw the chart. Editing the numbers means switching to Bron.
+
+Nothing is lost either way: the fence is ordinary Markdown, the source stays
+byte-faithful through a visual edit, and every other view draws it. *(Added
+2026-09-02.)*
+
 ## Exporting a document on the web build arrives as a download, not a saved file
 
 All six formats export in the browser, but you cannot point them at a folder: the
