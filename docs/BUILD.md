@@ -336,10 +336,13 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
 
 ### macOS notes
 
-- **Swift Package Manager is disabled** for this project (`flutter:` →
-  `config: enable-swift-package-manager: false` in `pubspec.yaml`); CocoaPods is
-  used instead. The "plugin does not support Swift Package Manager" message
-  during a build is therefore expected and harmless.
+- **Swift Package Manager is enabled** for this project (since #1733); it is
+  Flutter's default and `pubspec.yaml` no longer turns it off. Most plugins are
+  resolved through SPM, and CocoaPods only handles the ones that have not
+  adopted it — today just `desktop_multi_window`, which is why the build prints
+  "The following plugins do not support Swift Package Manager for macos". That
+  message is expected and harmless. The `Podfile` still matters for those
+  leftovers.
 - **`video_player_avfoundation` is pinned** (see `dependency_overrides`) because a
   newer release ships a Swift module whose private Objective-C dependency isn't
   packaged correctly by CocoaPods on recent Xcode.

@@ -509,6 +509,12 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- docs(build): [`docs/BUILD.md`](docs/BUILD.md) beweerde dat Swift Package
+  Manager uitstaat en CocoaPods al het pluginwerk doet. Sinds #1733 staat SPM
+  juist aan, en houdt CocoaPods nog precies één plugin over
+  (`desktop_multi_window`). De alinea beschrijft nu wat er werkelijk gebeurt,
+  inclusief waarom de build meldt dat een plugin SPM niet ondersteunt.
+
 - docs: dank **Mieke van Oers** in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
   Toegevoegd aan de danklijst, alfabetisch op achternaam tussen van Leeuwen en
   Oosenbrug. De app rendert dat bestand rechtstreeks, dus ze staat meteen in de
