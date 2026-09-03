@@ -371,13 +371,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null) return false;
     final undoLenBefore = _undoStack.length;
     final String? path;
+    var incomplete = false;
     try {
       final written = await _file.saveDeckAsDetailed(
         deck,
         initialDirectory: initialDirectory,
       );
       path = written.path;
-      _reportChartWarnings(written.chartWarnings);
+      incomplete = _reportChartWarnings(written.chartWarnings);
     } catch (e, s) {
       logError('DeckNotifier.saveAs: write deck', e, s);
       // Keep isDirty so the work still counts as unsaved.
@@ -408,7 +409,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       state = state.copyWith(
         deck: settled,
         filePath: path,
-        isDirty: userEdited,
+        isDirty: userEdited || incomplete,
         error:
             'Opgeslagen, maar het bestand kon niet opnieuw worden gelezen:\n$path',
       );
@@ -416,7 +417,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       state = state.copyWith(
         deck: settled,
         filePath: path,
-        isDirty: userEdited,
+        isDirty: userEdited || incomplete,
       );
     }
     return true;
@@ -424,8 +425,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   /// Meld grafieken die hun cijfers niet naar hun databestand kwijt konden.
   /// Alleen wanneer er iets te melden is — een lege lijst is het normale geval.
-  void _reportChartWarnings(List<String> sources) {
+  /// Geeft terug of er waarschuwingen waren (#1950: dan blijft het tabblad vuil).
+  bool _reportChartWarnings(List<String> sources) {
     if (sources.isNotEmpty) onChartDataWarnings?.call(sources);
+    return sources.isNotEmpty;
   }
 
   Future<bool> _saveToPath(String path) async {
@@ -433,10 +436,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null) return false;
     final undoLenBefore = _undoStack.length;
     final Deck savedDeck;
+    var incomplete = false;
     try {
       final written = await _file.saveDeckDetailed(deck, path);
       savedDeck = written.deck;
-      _reportChartWarnings(written.chartWarnings);
+      incomplete = _reportChartWarnings(written.chartWarnings);
     } catch (e, s) {
       logError('DeckNotifier._saveToPath: write deck', e, s);
       // Keep isDirty so the work still counts as unsaved.
@@ -453,7 +457,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final deckChanged = !identical(state.deck, deck);
     final userEdited = deckChanged && _undoStack.length > undoLenBefore;
     if (userEdited) return true;
-    state = state.copyWith(deck: savedDeck, isDirty: false);
+    state = state.copyWith(deck: savedDeck, isDirty: incomplete);
     return true;
   }
 

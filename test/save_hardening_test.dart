@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -83,6 +84,65 @@ void main() {
       gate.complete();
       expect(await first, isTrue);
       expect(fs.calls, 1, reason: 'only one write must reach disk');
+    });
+  });
+
+  group('transactional save (#1949)', () {
+    late FileService service;
+    late MarkdownService md;
+    late Directory temp;
+
+    setUp(() async {
+      md = MarkdownService();
+      service = FileService(md, ImageService(), () => const ThemeProfile());
+      temp = await Directory.systemTemp.createTemp('ocideck_txn_');
+    });
+    tearDown(() => temp.delete(recursive: true));
+
+    test('a sidecar failure leaves the old .md on disk', () async {
+      final slide = Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Eerste', bullets: ['a']);
+      final deck = Deck(
+        title: 'Tx',
+        slides: [slide],
+        annotations: {
+          slide.id: [
+            InkStroke(
+              tool: InkTool.pen,
+              color: 0xFF000000,
+              width: 0.005,
+              points: const [Offset(0.1, 0.1), Offset(0.2, 0.2)],
+              id: 's1',
+            ),
+          ],
+        },
+      );
+      final mdPath = p.join(temp.path, 'deck.md');
+      // Eerste opslag slaagt — baseline .md en .ink.json op schijf.
+      await service.saveDeck(deck, mdPath);
+      final originalMd = await File(mdPath).readAsString();
+
+      // Blokkeer de annotatie-sidecar: vervang het bestand door een map.
+      final inkPath = p.setExtension(mdPath, '.ink.json');
+      await File(inkPath).delete();
+      await Directory(inkPath).create();
+
+      // Tweede opslag met gewijzigde inhoud moet falen bij de sidecar-stap.
+      final modified = deck.copyWith(
+        slides: [
+          ...deck.slides,
+          Slide.create(SlideType.bullets).copyWith(title: 'Tweede'),
+        ],
+      );
+      await expectLater(
+        service.saveDeck(modified, mdPath),
+        throwsA(isA<FileSystemException>()),
+      );
+
+      // De .md op schijf is nog steeds het origineel — de nieuwe is nooit
+      // geschreven, want sidecars gaan vóór de .md.
+      expect(await File(mdPath).readAsString(), originalMd);
     });
   });
 
