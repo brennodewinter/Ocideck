@@ -1,10 +1,6 @@
-> 🤖 Machinevertaling — het Engelse bronbestand is leidend.
->
-> _Machine translation — the English source document is authoritative. _
-
 # OciDeck — Sneltoetsen
 
-> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-09-03 · **Uitgegeven door:** Stichting LibreKAT
 
 `Ctrl` wordt getoond voor Windows/Linux; gebruik `Cmd` (⌘) op macOS.
 
@@ -13,20 +9,35 @@
 | Sneltoets | Actie |
 | --- | --- |
 | `Ctrl/Cmd + K` | Open het opdrachtenpalet (doorzoekbare lijst met acties) |
-| `Ctrl/Cmd + O` | Open een presentatie |
-| `Ctrl/Cmd + S` | Sla het actieve deck op |
+| `Ctrl/Cmd + O` | Open een presentatie (in de dialoog: `Ctrl/Cmd`-klik of `Shift`-klik op rijen om er meerdere tegelijk te openen) |
+| `Ctrl/Cmd + W` | Sluit het actieve tabblad (vraagt eerst als er niet-opgeslagen werk is) |
+| `Ctrl/Cmd + S` | Sla het actieve tabblad op — een presentatie of een document (*gecorrigeerd 2026-08-08: slaat ook een document op, in elke modus, niet alleen een deck*) |
 | `Ctrl/Cmd + Z` | Ongedaan maken |
 | `Ctrl/Cmd + Shift + Z` | Opnieuw uitvoeren |
 | `Ctrl + Y` | Opnieuw uitvoeren (alternatief) |
-| `Ctrl/Cmd + F` | Zoeken (visuele modus: het dialoogvenster zoeken en vervangen; markdown-modus: de balk in de editor — zie hieronder) |
-| `Ctrl/Cmd + H` | Zoeken en vervangen (visuele modus: dialoogvenster; markdown-modus: balk in de editor — zie hieronder) |
+| `Ctrl/Cmd + F` | Zoeken (presentatie: dialoogvenster in visuele modus, balk in de editor in markdown-modus; document: balk in de editor, ongeacht waar het tabblad focus heeft) |
+| `Ctrl/Cmd + H` | Zoeken en vervangen (presentatie: dialoogvenster in visuele modus, balk in de editor in markdown-modus; document: balk in de editor, ongeacht waar het tabblad focus heeft) |
 | `Ctrl/Cmd + V` (in een tabelcel) | Plak een selectie uit een spreadsheet/CSV/markdown als tabel (ook `Shift + Insert`) |
+| `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (documentmodus) | Zoom het schrijfvlak in · uit |
+| `Ctrl/Cmd + 0` (documentmodus) | Terug naar ware grootte |
+| `←` `→` (in een tabelcel) | Verplaats de cursor door de celtekst; aan de rand naar de buurcel |
+| `↑` `↓` (in een tabelcel) | Eén rij omhoog · omlaag, als de cursor op de eerste · laatste regel van de cel staat |
 | `Tab` naar de paneelscheiding, dan `←` / `→` | Pas de breedte van het slidepaneel aan |
 | `←` `↑` `Page Up` · `→` `↓` `Page Down` (klik eerst op de voorvertoning) | Vorige · volgende slide, waarbij je door de pagina's van een lange rich-text-slide of een overlopende bevinding stapt voordat je verdergaat |
 
 *Toegevoegd 2026-07-22: `Ctrl/Cmd + F` was in de hele app gekoppeld maar alleen
 vermeld onder de markdown-modus, waardoor het in de visuele modus leek alsof er
 geen zoektoets was.*
+
+*Toegevoegd 2026-09-02: `Ctrl/Cmd + W` was sinds 0.5.0 in de hele app gekoppeld
+maar alleen vermeld voor de presentator, waardoor het sluiten van een tabblad
+via het toetsenbord ongedocumenteerd was.*
+
+De sneltoetsen in deze tabel werken op de editor achter wat er ook voor staat,
+dus ze doen niets terwijl een dialoog, de documentatielezer of het
+presentatiescherm bovenop ligt — druk eerst op `Esc`. Voor 2026-09-02 gingen
+ze er dwars doorheen, en twee keer snel `Ctrl/Cmd + O` liet twee
+'Presentatie openen'-dialogen op elkaar gestapeld staan (#1927).
 
 In het **dialoogvenster slide toevoegen** verplaatst `Tab` de focus tussen de
 typekaarten, kiest `Enter` de gefocuste kaart en annuleert `Esc`. De kaart die
@@ -100,6 +111,9 @@ Navigatie:
 | `Backspace` | Wis het laatste cijfer van een getypt slidenummer |
 | `Home` · `End` | Eerste · laatste slide |
 | `G` | Overzicht in sliderooster (pijlen + `Enter` om te springen) |
+| `Tab` · `⇧Tab` | Op een keuzemenu-slide: door de categorieën en blokken lopen |
+| `Enter` · `Space` (met een blok gefocust) | Dat blok volgen, of categorie wisselen |
+| `Escape` (met een blok gefocust) | Toetsen teruggeven aan de slide |
 
 *Volgende* en *vorige* bewegen eerst **binnen** een slide die meer te tonen heeft:
 de pagina's van een rich-text-tekst die te lang is voor één slide (de

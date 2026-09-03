@@ -73,6 +73,12 @@ const List<String> translatableDocs = [
 /// stay English-only until a human translates them (#1181).
 const Set<String> excludedDocs = {'docs/PRIVACY.md', 'docs/SECURITY_DESIGN.md'};
 
+/// `(doc, lang)` pairs that have been human-reviewed and must not be overwritten
+/// by the machine translator. The consistency checker ([docVariantProblems])
+/// still validates them, so a reviewed variant that falls behind its source is
+/// caught — only the banner and the machine rendering are skipped (#1965).
+const Set<String> humanReviewedVariants = {'docs/SHORTCUTS.md:nl'};
+
 /// The canonical banner prepended to every generated variant, before it is run
 /// through the translator so the reader sees it in their own language. The
 /// English source line is kept verbatim underneath so the authoritative-source
@@ -174,6 +180,7 @@ Future<int> _run(List<String> args) async {
     }
     final body = base.readAsStringSync();
     for (final lang in languages) {
+      if (humanReviewedVariants.contains('$doc:$lang')) continue;
       final banner = await translate(bannerSourceLine, lang);
       final translated = await translate(body, lang);
       File(
