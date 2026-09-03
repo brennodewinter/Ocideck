@@ -1660,6 +1660,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nu niet': 'Όχι τώρα',
+  'Herstelkopie weggooien': 'Απόρριψη αντιγράφου ανάκτησης',
+  'Openen en verder werken': 'Άνοιγμα και συνέχεια',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα σε αυτόν τον φάκελο. Επιλέξτε διαφορετικό φάκελο παραπάνω ή αναζητήστε αρχείο σε αυτόν τον υπολογιστή.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1874,8 +1877,6 @@ const _dutchSourceAddEl = <String, String>{
   'Bestanden zoeken op deze computer': 'Εύρεση αρχείων σε αυτόν τον υπολογιστή',
   'Dubbele bestanden opruimen': 'Εκκαθάριση διπλότυπων αρχείων',
   'bestand(en) gevonden': 'αρχείο(α) βρέθηκαν',
-  'Geen presentaties of documenten gevonden.':
-      'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα στους γνωστούς φακέλους.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

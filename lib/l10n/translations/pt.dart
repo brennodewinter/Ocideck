@@ -1663,6 +1663,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nu niet': 'Agora não',
+  'Herstelkopie weggooien': 'Descartar cópia de recuperação',
+  'Openen en verder werken': 'Abrir e continuar',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Nenhuma apresentação ou documento encontrado nesta(s) pasta(s). Escolha outra pasta acima, ou procure um arquivo neste computador.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1878,8 +1881,6 @@ const _dutchSourceAddPt = <String, String>{
   'Bestanden zoeken op deze computer': 'Encontrar ficheiros neste computador',
   'Dubbele bestanden opruimen': 'Limpar ficheiros duplicados',
   'bestand(en) gevonden': 'ficheiro(s) encontrado(s)',
-  'Geen presentaties of documenten gevonden.':
-      'Nenhuma apresentação ou documento encontrado.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Nenhuma apresentação ou documento encontrado nas pastas conhecidas.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

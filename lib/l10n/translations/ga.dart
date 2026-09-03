@@ -1665,6 +1665,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nu niet': 'Ní anois',
+  'Herstelkopie weggooien': 'Cuir an cóip aisghabhála i leataobh',
+  'Openen en verder werken': 'Oscail agus lean ar aghaidh',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Níor aimsíodh aon láithreoideanna nó doiciméid san bhfillteán seo. Roghnaigh fillteán eile thuas, nó brabhsáil le haghaidh comhad ar an ríomhaire seo.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1880,8 +1883,6 @@ const _dutchSourceAddGa = <String, String>{
   'Bestanden zoeken op deze computer': 'Aimsigh comhaid ar an ríomhaire seo',
   'Dubbele bestanden opruimen': 'Glan suas comhaid dhúbailte',
   'bestand(en) gevonden': 'comhad(comhaid) aimsithe',
-  'Geen presentaties of documenten gevonden.':
-      'Níor aimsíodh aon láithreoireacht ná cáipéis.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Níor aimsíodh aon láithreoireacht ná cáipéis sna fillteáin aitheanta.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

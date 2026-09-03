@@ -1641,6 +1641,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nu niet': 'Teraz nie',
+  'Herstelkopie weggooien': 'Zahodiť kópiu na obnovenie',
+  'Openen en verder werken': 'Otvoriť a pokračovať',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'V tomto/týchto priečinku/och sa nenašli žiadne prezentácie ani dokumenty. Vyberte iný priečinok vyššie alebo prehľadávajte súbor v tomto počítači.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1853,8 +1856,6 @@ const _dutchSourceAddSk = <String, String>{
   'Bestanden zoeken op deze computer': 'Nájsť súbory v tomto počítači',
   'Dubbele bestanden opruimen': 'Upratať duplicitné súbory',
   'bestand(en) gevonden': 'súbor(y) nájdený(é)',
-  'Geen presentaties of documenten gevonden.':
-      'Nenašli sa žiadne prezentácie ani dokumenty.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'V známych priečinkoch sa nenašli žiadne prezentácie ani dokumenty.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

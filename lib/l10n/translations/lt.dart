@@ -1642,6 +1642,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nu niet': 'Ne dabar',
+  'Herstelkopie weggooien': 'Šalinti atkūrimo kopiją',
+  'Openen en verder werken': 'Atverti ir tęsti',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Šiame/šiuose aplanke(uose) nerasta prezentacijų ar dokumentų. Pasirinkite kitą aplanką aukščiau arba naršykite failą šiame kompiuteryje.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1854,8 +1857,6 @@ const _dutchSourceAddLt = <String, String>{
   'Bestanden zoeken op deze computer': 'Rasti failus šiame kompiuteryje',
   'Dubbele bestanden opruimen': 'Sutvarkyti pasikartojančius failus',
   'bestand(en) gevonden': 'failas (-ai) rastas (-i)',
-  'Geen presentaties of documenten gevonden.':
-      'Pristatymų ar dokumentų nerasta.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Žinomuose aplankuose pristatymų ar dokumentų nerasta.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

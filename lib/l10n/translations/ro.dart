@@ -1651,6 +1651,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nu niet': 'Nu acum',
+  'Herstelkopie weggooien': 'Renunță la copia de recuperare',
+  'Openen en verder werken': 'Deschide și continuă',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Nicio prezentare sau document găsit în acest(e) folder. Alegeți alt folder de mai sus, sau răsfoiți după un fișier pe acest computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1865,8 +1868,6 @@ const _dutchSourceAddRo = <String, String>{
   'Bestanden zoeken op deze computer': 'Găsește fișiere pe acest computer',
   'Dubbele bestanden opruimen': 'Curăță fișierele duplicate',
   'bestand(en) gevonden': 'fișier(e) găsit(e)',
-  'Geen presentaties of documenten gevonden.':
-      'Nu s-au găsit prezentări sau documente.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Nicio prezentare sau document găsit în folderele cunoscute.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

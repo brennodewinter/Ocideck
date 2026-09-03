@@ -1612,6 +1612,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nu niet': 'DaHbe\'',
+  'Herstelkopie weggooien': 'Qaw\'Ha\'qaS ngeH',
+  'Openen en verder werken': 'poSmoH \'ej ratlh',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'nagh beQmey pagh nagh teywImey Samlu\'pu\'be\' mIvvamDaq. latlh mIv yIwIv bIng, pagh De\' naw\' naQvam.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1823,8 +1826,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Bestanden zoeken op deze computer': 'De\'wI\' vamDaq ghItlhmey yISam',
   'Dubbele bestanden opruimen': 'ghItlhmey nIb Say\'moH',
   'bestand(en) gevonden': 'ghItlh(mey) tu\'lu\'',
-  'Geen presentaties of documenten gevonden.':
-      'cha\'navmey ghItlhmey je tu\'be\'lu\'.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Sovlu\' ghommeyDaq cha\'navmey ghItlhmey je tu\'be\'lu\'.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

@@ -1650,6 +1650,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nu niet': 'Не зараз',
+  'Herstelkopie weggooien': 'Видалити копію відновлення',
+  'Openen en verder werken': 'Відкрити та продовжити',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Не знайдено презентацій або документів у цій/цих теці(ах). Виберіть іншу теку вище або знайдіть файл на цьому комп\'ютері.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1862,8 +1865,6 @@ const _dutchSourceAddUk = <String, String>{
   'Bestanden zoeken op deze computer': 'Знайти файли на цьому комп’ютері',
   'Dubbele bestanden opruimen': 'Прибрати дубльовані файли',
   'bestand(en) gevonden': 'файл(и) знайдено',
-  'Geen presentaties of documenten gevonden.':
-      'Презентацій чи документів не знайдено.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'У відомих теках не знайдено презентацій чи документів.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

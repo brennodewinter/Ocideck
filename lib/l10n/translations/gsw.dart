@@ -1638,6 +1638,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nu niet': 'Jetz nöd',
+  'Herstelkopie weggooien': 'Widerherstelligskopii wegwerfe',
+  'Openen en verder werken': 'Öffne und witer schaffe',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Kei Präsentatione oder Dokument i dem/dene Ordner gfunde. Wähl obe en andere Ordner, oder dursuech nachere Datei uf dem Computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -1851,8 +1854,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Bestanden zoeken op deze computer': 'Dateie uf däm Computer finde',
   'Dubbele bestanden opruimen': 'Doppleti Dateie uufruume',
   'bestand(en) gevonden': 'Datei(e) gfunde',
-  'Geen presentaties of documenten gevonden.':
-      'Kei Präsentatione oder Dokumänt gfunde.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Kei Präsentatione oder Dokumänt in de bekannte Ordner gfunde.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

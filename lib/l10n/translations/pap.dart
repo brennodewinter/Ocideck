@@ -667,6 +667,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nu niet': 'Awor no',
+  'Herstelkopie weggooien': 'Gitu e kopia di restòr',
+  'Openen en verder werken': 'Habri i sigui',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'No ta haña presentashon of dokümentu den e mapa(s) aki. Skohe un otro mapa ariba, of nafta pa un fail riba e kompiuter aki.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -881,8 +884,6 @@ const _dutchSourceAddPap = {
   'Bestanden zoeken op deze computer': 'Haña archivo riba e computer aki',
   'Dubbele bestanden opruimen': 'Limpia archivonan duplá',
   'bestand(en) gevonden': 'archivo(nan) hañá',
-  'Geen presentaties of documenten gevonden.':
-      'No a haña presentashon ni dokumento.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'No a haña presentashon ni dokumento den e mapnan konosí.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':

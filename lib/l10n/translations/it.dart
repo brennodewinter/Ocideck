@@ -665,6 +665,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nu niet': 'Non ora',
+  'Herstelkopie weggooien': 'Scarta la copia di ripristino',
+  'Openen en verder werken': 'Apri e continua',
   'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
       'Nessuna presentazione o documento trovato in questa/e cartella/e. Scegli un\'altra cartella sopra, o sfoglia per un file su questo computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
@@ -878,8 +881,6 @@ const _dutchSourceAddIt = {
   'Bestanden zoeken op deze computer': 'Trova file su questo computer',
   'Dubbele bestanden opruimen': 'Ripulisci file duplicati',
   'bestand(en) gevonden': 'file trovati',
-  'Geen presentaties of documenten gevonden.':
-      'Nessuna presentazione o documento trovato.',
   'Geen presentaties of documenten gevonden in de bekende mappen.':
       'Nessuna presentazione o documento trovato nelle cartelle note.',
   'Zoek op bestandsnaam, titel of tekst in het bestand…':
