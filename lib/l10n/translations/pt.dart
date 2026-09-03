@@ -1670,6 +1670,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Nenhuma apresentação ou documento encontrado nesta(s) pasta(s). Escolha outra pasta acima, ou procure um arquivo neste computador.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slides, apresentar, exportar para PDF ou PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

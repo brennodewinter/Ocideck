@@ -1642,6 +1642,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Ei esityksiä tai asiakirjoja tässä kansiossa. Valitse toinen kansio yläpuolelta tai selaa tiedostoa tällä tietokoneella.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Diat, esitä, vie PDF- tai PowerPoint-muotoon',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

@@ -614,7 +614,14 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     if (_files.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        l10n.d('Geen presentaties of documenten gevonden.'),
+        l10n.d(
+          'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.',
+        ),
+        action: OutlinedButton.icon(
+          onPressed: _browse,
+          icon: const Icon(Icons.insert_drive_file_outlined, size: 16),
+          label: Text(l10n.d('Bladeren…')),
+        ),
       );
     }
     if (visible.isEmpty) {
@@ -654,7 +661,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  Widget _empty(IconData icon, String message) {
+  Widget _empty(IconData icon, String message, {Widget? action}) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -666,6 +673,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
             textAlign: TextAlign.center,
             style: TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
+          if (action != null) ...[const SizedBox(height: 16), action],
         ],
       ),
     );

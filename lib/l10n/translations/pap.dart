@@ -674,6 +674,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'No ta haña presentashon of dokümentu den e mapa(s) aki. Skohe un otro mapa ariba, of nafta pa un fail riba e kompiuter aki.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slaidi, presenta, eksportá pa PDF of PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

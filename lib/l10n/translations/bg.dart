@@ -1662,6 +1662,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Не са намерени презентации или документи в тази/тези папка/и. Изберете друга папка по-горе или разгледайте за файл на този компютър.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Слайдове, презентирай, експортирай в PDF или PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

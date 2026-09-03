@@ -1657,6 +1657,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Не знайдено презентацій або документів у цій/цих теці(ах). Виберіть іншу теку вище або знайдіть файл на цьому комп\'ютері.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Слайди, презентація, експорт у PDF або PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

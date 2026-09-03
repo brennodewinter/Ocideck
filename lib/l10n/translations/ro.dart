@@ -1658,6 +1658,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Nicio prezentare sau document găsit în acest(e) folder. Alegeți alt folder de mai sus, sau răsfoiți după un fișier pe acest computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slide-uri, prezintă, exportă în PDF sau PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

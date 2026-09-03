@@ -1642,6 +1642,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Ingen præsentationer eller dokumenter fundet i denne/disse mappe(r). Vælg en anden mappe ovenfor, eller gennemse for en fil på denne computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slides, præsenter, eksporter til PDF eller PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

@@ -1642,6 +1642,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'V tej/teh mapi/ah ni najdenih prezentacij ali dokumentov. Izberite drugo mapo zgoraj ali brskajte po datoteki na tem računalniku.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Diapozitivi, predstavitev, izvozi v PDF ali PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

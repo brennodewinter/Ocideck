@@ -1648,6 +1648,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'V tomto/týchto priečinku/och sa nenašli žiadne prezentácie ani dokumenty. Vyberte iný priečinok vyššie alebo prehľadávajte súbor v tomto počítači.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Snímky, prezentovať, exportovať do PDF alebo PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

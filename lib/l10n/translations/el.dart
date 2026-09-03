@@ -1667,6 +1667,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Δεν βρέθηκαν παρουσιάσεις ή έγγραφα σε αυτόν τον φάκελο. Επιλέξτε διαφορετικό φάκελο παραπάνω ή αναζητήστε αρχείο σε αυτόν τον υπολογιστή.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Διαφάνειες, παρουσίαση, εξαγωγή σε PDF ή PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
