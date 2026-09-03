@@ -146,4 +146,35 @@ void main() {
       expect(prepare(rommel).size, isNull);
     });
   });
+  // Wat er in een tekening als tekst gezet wordt (#1942). Krap gelezen met
+  // opzet: een teken dat ten onrechte als "ontbreekt" gemeld wordt, leert de
+  // gebruiker de melding negeren.
+  group('svgTextContent', () {
+    test('leest de tekst uit text- en tspan-knopen', () {
+      const svg =
+          '<svg viewBox="0 0 10 10">'
+          '<text x="1" y="2">Bevindingen — per kwartaal</text>'
+          '<text x="1" y="8"><tspan>Kritiek</tspan><tspan> → hoog</tspan></text>'
+          '</svg>';
+      final text = svgTextContent(svg);
+      expect(text, contains('Bevindingen — per kwartaal'));
+      expect(text, contains('Kritiek'));
+      expect(text, contains('→ hoog'));
+    });
+
+    test('leest geen attribuutwaarden en geen opmaak', () {
+      // Een `font-family` of een `id` staat niet op het papier; hem meetellen
+      // zou een teken melden dat gewoon in het bestand staat.
+      const svg =
+          '<svg viewBox="0 0 10 10">'
+          '<rect id="vlak—één" fill="#eee"/>'
+          '<path d="M0 0 L9 9" font-family="Grüße→"/>'
+          '</svg>';
+      expect(svgTextContent(svg).trim(), isEmpty);
+    });
+
+    test('een tekening zonder tekst levert niets op', () {
+      expect(svgTextContent('<svg><path d="M0 0"/></svg>').trim(), isEmpty);
+    });
+  });
 }

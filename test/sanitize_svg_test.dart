@@ -291,4 +291,31 @@ void main() {
     expect(safe, isNot(contains('<marker')));
     expect(safe, isNot(contains('marker-end')));
   });
+  // Een `<defs>` die leeg overblijft (#1942): mermaid vult hem met `<marker>`
+  // en `<style>`, allebei gaan ze eruit, en de serializer schrijft wat overblijft
+  // als `<defs/>`. Juist die zelfsluitende vorm handelt de parser van
+  // vector_graphics_compiler níet af — vandaar "unhandled element <defs/>" in
+  // elke debug-run. Er ging niets verloren, maar de melding hoort weg.
+  group('een leeggelopen defs', () {
+    test('verdwijnt in plaats van als <defs/> te blijven staan', () {
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<defs><marker id="arrow"><path d="M0 0 L1 1"/></marker></defs>'
+          '<path d="M0 0 L9 9"/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, isNot(contains('defs')));
+      expect(safe, contains('<path d="M0 0 L9 9"'));
+    });
+
+    test('een defs met iets erin blijft staan', () {
+      const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg">'
+          '<defs><linearGradient id="g"><stop offset="0" stop-color="#fff"/>'
+          '</linearGradient></defs>'
+          '<rect width="10" height="10" fill="url(#g)"/></svg>';
+      final safe = sanitizeMermaidSvg(svg)!;
+      expect(safe, contains('<defs>'));
+      expect(safe, contains('linearGradient'));
+    });
+  });
 }

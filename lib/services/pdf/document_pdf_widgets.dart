@@ -612,6 +612,21 @@ class DocumentPdfWidgets {
     }
     final svg = graphic.svg;
     if (svg == null) return null;
+    // De tekst ín de tekening gaat langs de SVG-lezer van `package:pdf` en niet
+    // langs het thema; zie [DocumentPdfFonts.svgFont] voor waarom die lezer op
+    // Latin-1 vastloopt. Draagt de tekening zulke tekens en is er geen snede die
+    // ze kan zetten, dan is de bron meer waard dan een export die halverwege
+    // afbreekt — dat is dezelfde afweging als hierboven, alleen kan de `try`
+    // hem niet maken: de worp komt pas bij `save()`.
+    final typesetting = fonts.svgTypesetting(svg);
+    if (!typesetting.settable) {
+      logWarning(
+        'DocumentPdf: tekening bevat tekens buiten Latin-1 en er is geen '
+        'Unicode-snede; de bron wordt getoond',
+      );
+      return null;
+    }
+    final svgFont = typesetting.font;
     try {
       // Nooit breder dan de bladspiegel, en nooit groter opgeblazen dan de
       // tekening zelf bedoelt. Zonder dat tweede wordt een driehoekje van drie
@@ -630,6 +645,7 @@ class DocumentPdfWidgets {
               ? maxImageHeight
               : naturalHeight,
           fit: pw.BoxFit.contain,
+          customFontLookup: svgFont == null ? null : (_, _, _) => svgFont,
         ),
       );
     } catch (error) {
@@ -765,6 +781,7 @@ class DocumentPdfWidgets {
         fontSize: size,
         maxWidth: maxImageWidth,
         graphics: graphics,
+        fonts: fonts,
         fallback: (source) => _span(PdfSpan(source), size),
       );
     }

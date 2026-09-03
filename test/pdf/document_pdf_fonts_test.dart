@@ -80,6 +80,40 @@ void main() {
       expect(missing, isNotEmpty);
       expect(missing.map(String.fromCharCode).join(), contains('本'));
     });
+
+    // De tekst in een ingesloten tekening gaat niet door het thema maar door de
+    // SVG-lezer van `package:pdf`, en die kent alleen Latin-1 (#1942).
+    group('de snede voor een ingesloten tekening', () {
+      const latin = '<svg><text>Bevindingen per kwartaal</text></svg>';
+      const typographic = '<svg><text>Bevindingen — per kwartaal</text></svg>';
+
+      test('Latin-1 laat de lezer zijn eigen standaardsneden kiezen', () {
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFont: roboto(),
+        );
+        final typesetting = fonts.svgTypesetting(latin);
+        expect(typesetting.settable, isTrue);
+        expect(typesetting.font, isNull);
+      });
+
+      test('een gedachtestreepje vraagt om het Unicode-font', () {
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFont: roboto(),
+        );
+        final typesetting = fonts.svgTypesetting(typographic);
+        expect(typesetting.settable, isTrue);
+        expect(typesetting.font, same(fonts.unicode));
+      });
+
+      test('zonder Unicode-font is de tekening niet te zetten', () {
+        // En dan is de bron meer waard dan een export die bij `save()` werpt.
+        final fonts = DocumentPdfFonts.forFamily('Arial');
+        expect(fonts.svgTypesetting(typographic).settable, isFalse);
+        expect(fonts.svgTypesetting(latin).settable, isTrue);
+      });
+    });
   });
 
   group('DocumentPdfStyle', () {

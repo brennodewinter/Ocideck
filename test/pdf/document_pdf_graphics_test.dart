@@ -47,15 +47,29 @@ const _svg =
     'font-size="16" fill="#000000">GETEKEND</text>'
     '</svg>';
 
+/// Dezelfde grafiek, maar met de leestekens die een tekstverwerker vanzelf
+/// maakt: een gedachtestreepje in de titel. Latin-1 kent dat teken niet.
+const _typographyChart = '''
+```chart
+{
+  "type": "bar",
+  "title": "Bevindingen — per kwartaal",
+  "x": ["Q1", "Q2"],
+  "series": [{"name": "Kritiek", "data": [3, 5]}]
+}
+```
+''';
+
 void main() {
   ByteData fallbackFont() => File(
     'assets/fonts/Roboto-Variable.ttf',
   ).readAsBytesSync().buffer.asByteData();
 
-  Future<String> exportText(
+  Future<DocumentPdfResult> exportResult(
     String document, {
     MermaidSvgResolver? renderMermaid,
     MathSvgResolver? renderMath,
+    bool withFallbackFont = true,
   }) async {
     final bundle = await buildDocumentExportBundle(
       document,
@@ -69,12 +83,38 @@ void main() {
     final result = await buildDocumentExportPdf(
       bundle,
       labels: _labels,
-      fallbackFont: fallbackFont(),
+      fallbackFont: withFallbackFont ? fallbackFont() : null,
       renderMermaid: renderMermaid,
       renderMath: renderMath,
     );
-    return pdfVisibleText(result.bytes);
+    return result;
   }
+
+  Future<Uint8List> exportBytes(
+    String document, {
+    MermaidSvgResolver? renderMermaid,
+    MathSvgResolver? renderMath,
+    bool withFallbackFont = true,
+  }) async => (await exportResult(
+    document,
+    renderMermaid: renderMermaid,
+    renderMath: renderMath,
+    withFallbackFont: withFallbackFont,
+  )).bytes;
+
+  Future<String> exportText(
+    String document, {
+    MermaidSvgResolver? renderMermaid,
+    MathSvgResolver? renderMath,
+    bool withFallbackFont = true,
+  }) async => pdfVisibleText(
+    await exportBytes(
+      document,
+      renderMermaid: renderMermaid,
+      renderMath: renderMath,
+      withFallbackFont: withFallbackFont,
+    ),
+  );
 
   group('grafieken', () {
     test('een grafiek wordt getekend, niet als bron afgedrukt', () async {
@@ -292,5 +332,97 @@ void main() {
         expect(text, contains('GETEKEND'));
       },
     );
+  });
+  // Tekens boven U+00FF in een tekening (#1942).
+  //
+  // De SVG-lezer van `package:pdf` kiest voor `<text>` hardgecodeerd een van de
+  // veertien standaardsneden — en die reiken tot Latin-1. Alles daarboven laat
+  // `stringMetrics` werpen, en wel vanuit `SvgImage.paint`: dat is tijdens
+  // `document.save()`, ruim buiten de `try` die de tekening zelf omsluit. Eén
+  // gedachtestreepje in een grafiektitel kostte zo het hele document.
+  group('tekens buiten Latin-1 in een tekening', () {
+    test(
+      'een gedachtestreepje in een grafiektitel breekt de export niet',
+      () async {
+        final text = await exportText('# Rapport\n\n$_typographyChart');
+        // Het document is er, met de tekening erin en niet met de bron.
+        expect(text, contains('Rapport'));
+        expect(text, isNot(contains('Grafiek (bron)')));
+        expect(text, isNot(contains('"type": "bar"')));
+      },
+    );
+
+    test('de tekening wordt dan op het Unicode-font gezet', () async {
+      final bytes = await exportBytes('# Rapport\n\n$_typographyChart');
+      // Het bewijs dat de tekening niet stilletjes leeg bleef: het bestand roept
+      // een ingebedde snede aan, en die staat er alleen in omdat de tekening
+      // hem nodig had — de lopende tekst van dit document is Latin-1.
+      expect(
+        pdfBaseFonts(bytes).any((name) => name.contains('Roboto')),
+        isTrue,
+        reason: 'de SVG-tekst hoort op het gebundelde Unicode-font te staan',
+      );
+    });
+
+    test('een Cyrillisch diagramlabel breekt de export niet', () async {
+      const diagram = '```mermaid\ngraph TD;\n  A-->B;\n```\n';
+      final text = await exportText(
+        '# Rapport\n\n$diagram',
+        renderMermaid: (_) async =>
+            '<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">'
+            '<text x="10" y="50" font-size="16">Пример</text></svg>',
+      );
+      expect(text, contains('Rapport'));
+      expect(text, isNot(contains('Diagram (bron)')));
+    });
+
+    test('zonder Unicode-font valt de tekening terug op haar bron', () async {
+      // Er is dan geen snede die deze tekens kán zetten. Dan is de bron meer
+      // waard dan een export die halverwege afbreekt.
+      final text = await exportText(
+        '# Rapport\n\n$_typographyChart',
+        withFallbackFont: false,
+      );
+      expect(text, contains('Rapport'));
+      expect(text, contains('Grafiek (bron)'));
+    });
+
+    test(
+      'een tekening zonder zulke tekens blijft op de standaardsneden',
+      () async {
+        // Geen bijwerking op het gewone geval: de standaardsneden dragen een
+        // echte vette en cursieve snede, en dat is precies waarom ze gekozen
+        // zijn.
+        final bytes = await exportBytes('# Rapport\n\n$_chartBlock');
+        expect(pdfVisibleText(bytes), contains('Bevindingen per kwartaal'));
+      },
+    );
+
+    test('een teken dat ook het Unicode-font niet kent wordt gemeld', () async {
+      // De pijl staat niet in het gebundelde Roboto. Vóór deze reparatie brak
+      // hij de export af; nu wordt hij een leeg blokje in de tekening — en dan
+      // hoort de gebruiker dat te horen in plaats van het zelf te ontdekken.
+      // De melding zelf bestond al, maar hield op bij de rand van de tekening.
+      const chart = '''
+```chart
+{
+  "type": "bar",
+  "title": "Bevindingen",
+  "x": ["Q1"],
+  "series": [{"name": "Kritiek → hoog", "data": [3]}]
+}
+```
+''';
+      final result = await exportResult('# Rapport\n\n$chart');
+      expect(result.bytes, isNotEmpty);
+      expect(result.unsupportedCharacters, contains(0x2192));
+      expect(result.isComplete, isFalse);
+    });
+
+    test('een tekening met alleen zetbare tekens meldt niets', () async {
+      final result = await exportResult('# Rapport\n\n$_typographyChart');
+      expect(result.unsupportedCharacters, isEmpty);
+      expect(result.isComplete, isTrue);
+    });
   });
 }
