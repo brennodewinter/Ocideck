@@ -272,4 +272,24 @@ void main() {
     );
     expect(tabs.clampedIndex, 1);
   });
+
+  testWidgets('een aangewezen rij ziet er anders uit dan een gewone', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(_fileService(dir.path), dir.path, (_) {}));
+    await _openAndScan(tester);
+
+    // Vóór het aanwijzen belooft elke rij "dit opent": drie pijltjes, geen
+    // vinkje.
+    expect(find.byIcon(Icons.north_east), findsNWidgets(3));
+    expect(find.byIcon(Icons.check_circle), findsNothing);
+
+    await _tapRow(tester, 'Bravo', modifier: LogicalKeyboardKey.controlLeft);
+
+    // De aangewezen rij wacht op "Openen (n)" en zegt dat ook: het pijltje
+    // maakt plaats voor een vinkje. Zonder dit verschil is de selectie
+    // onzichtbaar.
+    expect(find.byIcon(Icons.north_east), findsNWidgets(2));
+    expect(find.byIcon(Icons.check_circle), findsOneWidget);
+  });
 }
