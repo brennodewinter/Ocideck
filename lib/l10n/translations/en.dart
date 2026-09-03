@@ -838,6 +838,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'No presentations or documents found in this folder(s). Choose a different folder above, or browse for a file on this computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slides, present, export to PDF or PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

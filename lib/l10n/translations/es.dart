@@ -672,6 +672,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'No se encontraron presentaciones o documentos en esta(s) carpeta(s). Elige otra carpeta arriba, o explora para buscar un archivo en esta computadora.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Diapositivas, presentar, exportar a PDF o PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

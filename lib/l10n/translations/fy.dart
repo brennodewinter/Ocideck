@@ -675,6 +675,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Gjin presintaasjes of dokuminten fûn yn dizze map(pen). Kies hjirboppe in oare map, of blêdzje nei in bestân op dizze kompjûter.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Dia\'s, presintearje, eksportearje nei PDF of PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

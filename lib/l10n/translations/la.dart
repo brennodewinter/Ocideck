@@ -1657,6 +1657,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Nullae presentationes aut documenta in hoc/his folder repertae. Alteram capsam supra elige, aut fasciculum in hoc computatro quaere.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Laminae, praesentare, in PDF vel PowerPoint exportare',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

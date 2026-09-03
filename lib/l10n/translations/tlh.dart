@@ -1619,6 +1619,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'nagh beQmey pagh nagh teywImey Samlu\'pu\'be\' mIvvamDaq. latlh mIv yIwIv bIng, pagh De\' naw\' naQvam.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'nagh beQmey, nIH, PDF pagh PowerPointvaD ngeH',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

@@ -1649,6 +1649,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Šiame/šiuose aplanke(uose) nerasta prezentacijų ar dokumentų. Pasirinkite kitą aplanką aukščiau arba naršykite failą šiame kompiuteryje.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Skaidrės, pristatyti, eksportuoti į PDF arba PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

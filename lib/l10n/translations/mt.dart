@@ -1660,6 +1660,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'L-ebda preżentazzjonijiet jew dokumenti ma nstabu f\'dan/dawn il-folder(s). Agħżel folder ieħor minn fuq, jew fittex fajl fuq dan il-kompjuter.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slajds, preżenta, esporta għal PDF jew PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

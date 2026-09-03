@@ -1640,6 +1640,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Šajā(s) mapē(s) nav atrastas prezentācijas vai dokumentus. Izvēlieties citu mapi augšā vai pārlūkojiet failu šajā datorā.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slaidi, prezentēt, eksportēt uz PDF vai PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

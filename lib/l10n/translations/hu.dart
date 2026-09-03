@@ -1644,6 +1644,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Nem található prezentáció vagy dokumentum ebben(ezekben) a mappában. Válassz másik mappát fent, vagy tallózz egy fájlt ezen a számítógépen.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Diák, bemutatás, exportálás PDF-be vagy PowerPointba',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

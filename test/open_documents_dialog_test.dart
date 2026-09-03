@@ -163,6 +163,30 @@ void main() {
     expect(find.text('Presentaties (1)'), findsOneWidget);
   });
 
+  testWidgets('een lege bibliotheekmap zegt wat je kunt doen', (tester) async {
+    // De map bestaat maar bevat geen markdown: de lege staat moet wijzen
+    // naar Bladeren en een andere map, niet alleen 'geen treffers' tonen (#1962).
+    final emptyDir = Directory.systemTemp.createTempSync('open_empty_test');
+    addTearDown(() => emptyDir.deleteSync(recursive: true));
+    final service = _fileService(emptyDir.path);
+    await tester.pumpWidget(
+      _host(
+        (context) => OpenPresentationDialog.show(
+          context,
+          fileService: service,
+          libraries: [LibraryFolder(name: 'Leeg', path: emptyDir.path)],
+        ),
+      ),
+    );
+    await _openAndScan(tester);
+    expect(
+      find.textContaining('Geen presentaties of documenten gevonden'),
+      findsOneWidget,
+    );
+    // De Bladeren-knop staat in het lege vlak, niet alleen in de voet.
+    expect(find.widgetWithText(OutlinedButton, 'Bladeren…'), findsWidgets);
+  });
+
   testWidgets('the broad scan lists documents too', (tester) async {
     final service = _fileService(dir.path);
     await tester.pumpWidget(

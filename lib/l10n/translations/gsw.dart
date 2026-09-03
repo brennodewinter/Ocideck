@@ -1645,6 +1645,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Kei Präsentatione oder Dokument i dem/dene Ordner gfunde. Wähl obe en andere Ordner, oder dursuech nachere Datei uf dem Computer.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Folie, präsentiere, als PDF oder PowerPoint exportiere',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':

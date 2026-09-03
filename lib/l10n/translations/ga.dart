@@ -1672,6 +1672,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Geen presentaties of documenten gevonden in deze map(pen). Kies hierboven een andere map, of bladeren naar een bestand op deze computer.':
+      'Níor aimsíodh aon láithreoideanna nó doiciméid san bhfillteán seo. Roghnaigh fillteán eile thuas, nó brabhsáil le haghaidh comhad ar an ríomhaire seo.',
   'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
       'Slaidí, láithrigh, onnmhairigh go PDF nó PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
