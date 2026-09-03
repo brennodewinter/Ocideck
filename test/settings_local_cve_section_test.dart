@@ -300,8 +300,8 @@ void main() {
       await failure(tester, CveIngestFailure.noConsent);
       expect(
         find.text(
-          'Geef eerst toestemming voor uitgaand verkeer bij Licentie en '
-          'Privacy.',
+          'Geef eerst toestemming voor uitgaand verkeer bij Privacy en '
+          'classificatie.',
         ),
         findsOneWidget,
         reason: 'zeg waar de gebruiker het aan kan zetten',

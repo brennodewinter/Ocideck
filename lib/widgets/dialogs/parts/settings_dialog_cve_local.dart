@@ -200,7 +200,7 @@ extension _SettingsCveLocal on _SettingsDialogState {
         return l10n.d('Op het web nog niet beschikbaar');
       case CveIngestFailure.noConsent:
         return l10n.d(
-          'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.',
+          'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.',
         );
       case CveIngestFailure.networkFailed:
         return l10n.d(

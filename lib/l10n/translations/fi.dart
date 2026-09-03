@@ -281,8 +281,6 @@ const _dutchSourceFi = {
   'Uitbreidingen': 'Laajennukset',
   'Gegevens opschonen': 'Siivoa tiedot',
   'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
   'Nog niet opgehaald': 'Ei vielä haettu',
   'AI-assistentie': 'Tekoälyavustus',
@@ -296,8 +294,6 @@ const _dutchSourceFi = {
   'Cloud (externe dienst)': 'Pilvi (ulkoinen palvelu)',
   'Modelnaam': 'Mallin nimi',
   'API-sleutel (optioneel)': 'API-avain (valinnainen)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Lisenssi ja yksityisyys" eikä toimi verkkoversiossa.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Ymmärrän, että tietoja lähetetään tähän ulkoiseen palveluun',
   'Zoek een slidetype': 'Etsi diatyyppiä',
@@ -1545,14 +1541,11 @@ const _dutchSourceFi = {
       'OciDeckin ja siihen liittyvien projektien maskotit ovat Brenno de Winterin ocicatit.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Säätiö perustettiin 23. lokakuuta 2025 notaarin vahvistamalla asiakirjalla Leeuwardenissa, ja sen sääntömääräinen kotipaikka on Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Nämä asetukset määrittävät, mitä OciDeck saa ladata internetistä ja mitä jälkiä tälle laitteelle jää. Ne ovat erillisiä tietosuojaselosteesta ja suostumuksesta, jotka löydät kohdasta "Lisenssi ja Tietosuoja".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Säätiön tavoitteet:\n\n•  Edistää avoimen lähdekoodin ohjelmistoja ja laitteistoja turvallisen digitaalisen infrastruktuurin hyväksi.\n•  Edistää läpinäkyvyyttä ja toistettavuutta tietoturvaprosesseissa.\n•  Järjestää tutkimusta, koulutusta ja toimintaa digitaalisen kestävyyden ympärillä.\n•  Yhdistää kansalaisia, yrityksiä, julkishallintoa ja kansalaisjärjestöjä toisiinsa.',
   'E-mail': 'Sähköposti',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Ydinarvot: turvallisuus, vapaus ja avoimuus, suvereniteetti, rehellisyys, tiedon jakaminen, luotettavuus, inhimillisyys, kuunteleminen ja yhdistäminen, "just culture" ja kestävyys.',
-  'Licentie en Privacy': 'Lisenssi ja Tietosuoja',
   'Mascotte van MIAUW.': 'MIAUW:n maskotti.',
   'Mascotte van OpenKAT.': 'OpenKAT:n maskotti.',
   'Mascotte van de checklisttool.': 'Tarkistuslistatyökalun maskotti.',
@@ -1648,6 +1641,17 @@ const _dutchSourceAddFi = <String, String>{
       'Diat, esitä, vie PDF- tai PowerPoint-muotoon',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Jatkuva teksti, sivut, vie PDF- tai Word-muotoon',
+  'Uiterlijk van de app': 'Sovelluksen ulkoasu',
+  'Uiterlijk van dia\'s': 'Dian ulkoasu',
+  'Privacy en classificatie': 'Tietosuoja ja luokittelu',
+  'Uiterlijk van documenten': 'Asiakirjojen ulkoasu',
+  'Exportkwaliteit': 'Viennin laatu',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Anna ensin suostumus lähtevään liikenteeseen kohdassa Tietosuoja ja luokittelu.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Tietosuoja ja luokittelu" eikä toimi verkkoversiossa.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Nämä asetukset määrittävät, mitä OciDeck saa ladata internetistä ja mitä jälkiä tälle laitteelle jää. Ne ovat erillisiä tietosuojaselosteesta ja suostumuksesta, jotka löydät kohdasta "Tietosuoja ja luokittelu".',
   'Dit bestand is elders gewijzigd': 'Tämä tiedosto on muutettu toisaalla',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Tiedosto levyllä on muuttunut sen jälkeen kun avasit sen — todennäköisesti toisessa ikkunassa tai toisella ohjelmalla. Ylikirjoittaminen hävittää nämä muutokset.',

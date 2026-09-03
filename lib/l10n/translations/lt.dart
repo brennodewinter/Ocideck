@@ -280,8 +280,6 @@ const _dutchSourceLt = {
   'Uitbreidingen': 'Plėtiniai',
   'Gegevens opschonen': 'Išvalyti duomenis',
   'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
   'Nog niet opgehaald': 'Dar neatsisiųsta',
   'AI-assistentie': 'DI pagalba',
@@ -295,8 +293,6 @@ const _dutchSourceLt = {
   'Cloud (externe dienst)': 'Debesis (išorinė paslauga)',
   'Modelnaam': 'Modelio pavadinimas',
   'API-sleutel (optioneel)': 'API raktas (neprivaloma)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Debesijos paslaugai pirmiausia reikia jūsų privatumo sutikimo skiltyje "Licencija ir privatumas" ir ji neveikia žiniatinklio versijoje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Suprantu, kad duomenys siunčiami į šią išorinę paslaugą',
   'Zoek een slidetype': 'Ieškoti skaidrės tipo',
@@ -1550,14 +1546,11 @@ const _dutchSourceLt = {
       'OciDeck ir susijusių projektų talismanai yra Brenno de Winter ocicatės.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Fondas įsteigtas notariniu aktu 2025 m. spalio 23 d. Leeuwarden mieste, o jo registruota buveinė yra Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Šie nustatymai nulemia, ką OciDeck gali įkelti iš interneto ir kokie pėdsakai lieka šiame įrenginyje. Jie atskirti nuo tavo privatumo pareiškimo ir sutikimo, kuriuos rasi skiltyje "Licencija ir privatumas".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Fondo tikslai:\n\n•  Skatinti atvirojo kodo programinę ir aparatinę įrangą saugioms skaitmeninėms infrastruktūroms.\n•  Ugdyti skaidrumą ir atkuriamumą saugumo procesuose.\n•  Organizuoti su skaitmeniniu atsparumu susijusius tyrimus, mokymus ir veiklas.\n•  Sujungti tarpusavyje piliečius, įmones, valdžią ir visuomenines organizacijas.',
   'E-mail': 'El. paštas',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Pagrindinės vertybės: saugumas, laisvė ir atvirumas, suverenumas, sąžiningumas, žinių dalijimasis, patikimumas, žmoniškumas, įsiklausymas ir jungimas, "just culture" bei tvarumas.',
-  'Licentie en Privacy': 'Licencija ir privatumas',
   'Mascotte van MIAUW.': 'MIAUW talismanas.',
   'Mascotte van OpenKAT.': 'OpenKAT talismanas.',
   'Mascotte van de checklisttool.': 'Kontrolinio sąrašo įrankio talismanas.',
@@ -1655,6 +1648,17 @@ const _dutchSourceAddLt = <String, String>{
       'Skaidrės, pristatyti, eksportuoti į PDF arba PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Ištisinis tekstas, puslapiai, eksportuoti į PDF arba Word',
+  'Uiterlijk van de app': 'Programos išvaizda',
+  'Uiterlijk van dia\'s': 'Skaidrių išvaizda',
+  'Privacy en classificatie': 'Privatumas ir klasifikacija',
+  'Uiterlijk van documenten': 'Dokumentų išvaizda',
+  'Exportkwaliteit': 'Eksporto kokybė',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Privatumas ir klasifikacija.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Debesijos paslaugai pirmiausia reikia jūsų privatumo sutikimo skiltyje "Privatumas ir klasifikacija" ir ji neveikia žiniatinklio versijoje.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Šie nustatymai nulemia, ką OciDeck gali įkelti iš interneto ir kokie pėdsakai lieka šiame įrenginyje. Jie atskirti nuo tavo privatumo pareiškimo ir sutikimo, kuriuos rasi skiltyje "Privatumas ir klasifikacija".',
   'Dit bestand is elders gewijzigd': 'Šis failas buvo modifikuotas kitur',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Failas diske pasikeitė nuo tada, kai jį atvėrėte — tikriausiai kitame lange arba kita programa. Perrašymas išmeta tuos pakeitimus.',

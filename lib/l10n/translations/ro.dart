@@ -283,8 +283,6 @@ const _dutchSourceRo = {
   'Uitbreidingen': 'Extensii',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
   'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
   'Nog niet opgehaald': 'Încă nedescărcat',
   'AI-assistentie': 'Asistență IA',
@@ -298,8 +296,6 @@ const _dutchSourceRo = {
   'Cloud (externe dienst)': 'Cloud (serviciu extern)',
   'Modelnaam': 'Numele modelului',
   'API-sleutel (optioneel)': 'Cheie API (opțional)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Licență și confidențialitate" și nu funcționează în versiunea web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Înțeleg că datele sunt trimise către acest serviciu extern',
   'Zoek een slidetype': 'Căutați un tip de slide',
@@ -1558,14 +1554,11 @@ const _dutchSourceRo = {
       'Mascotele OciDeck și ale proiectelor conexe sunt pisicile ocicat ale lui Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Fundația a fost înființată la 23 octombrie 2025 prin act notarial la Leeuwarden și are sediul statutar în Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Aceste setări stabilesc ce poate încărca OciDeck de pe internet și ce urme rămân pe acest dispozitiv. Sunt independente de declarația ta de confidențialitate și de consimțământ, pe care le găsești la "Licență și Confidențialitate".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Obiectivele fundației:\n\n•  Promovarea software-ului și hardware-ului open source pentru infrastructuri digitale sigure.\n•  Stimularea transparenței și reproductibilității în procesele de securitate.\n•  Organizarea de cercetări, instruiri și activități privind reziliența digitală.\n•  Conectarea între ei a cetățenilor, întreprinderilor, autorităților și organizațiilor societății civile.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Valori fundamentale: securitate, libertate și deschidere, suveranitate, integritate, împărtășirea cunoștințelor, fiabilitate, umanitate, ascultare și conectare, "just culture" și durabilitate.',
-  'Licentie en Privacy': 'Licență și Confidențialitate',
   'Mascotte van MIAUW.': 'Mascota MIAUW.',
   'Mascotte van OpenKAT.': 'Mascota OpenKAT.',
   'Mascotte van de checklisttool.':
@@ -1664,6 +1657,17 @@ const _dutchSourceAddRo = <String, String>{
       'Slide-uri, prezintă, exportă în PDF sau PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Text continuu, pagini, exportă în PDF sau Word',
+  'Uiterlijk van de app': 'Aspectul aplicației',
+  'Uiterlijk van dia\'s': 'Aspectul diapozitivelor',
+  'Privacy en classificatie': 'Confidențialitate și clasificare',
+  'Uiterlijk van documenten': 'Aspectul documentelor',
+  'Exportkwaliteit': 'Calitatea exportului',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Acordați mai întâi consimțământul pentru traficul de ieșire la Confidențialitate și clasificare.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Confidențialitate și clasificare" și nu funcționează în versiunea web.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Aceste setări stabilesc ce poate încărca OciDeck de pe internet și ce urme rămân pe acest dispozitiv. Sunt independente de declarația ta de confidențialitate și de consimțământ, pe care le găsești la "Confidențialitate și clasificare".',
   'Dit bestand is elders gewijzigd':
       'Acest fișier a fost modificat în altă parte',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':

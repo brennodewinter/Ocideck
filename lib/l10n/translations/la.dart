@@ -283,8 +283,6 @@ const _dutchSourceLa = {
   'Uitbreidingen': 'Extensiones',
   'Gegevens opschonen': 'Data purgare',
   'Gegevens lokaal beschikbaar': 'Data localiter praesto',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
   'Nog niet opgehaald': 'Nondum accersitum',
   'AI-assistentie': 'Auxilium IA',
@@ -298,8 +296,6 @@ const _dutchSourceLa = {
   'Cloud (externe dienst)': 'Nubes (servitium externum)',
   'Modelnaam': 'Nomen exemplaris',
   'API-sleutel (optioneel)': 'Clavis API (optionalis)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Servitium nubis primum consensum tuum de privata re requirit apud "Licentia et Privata" nec in versione interretiali operatur.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Intellego data ad hoc servitium externum mitti',
   'Zoek een slidetype': 'Quaere genus paginae',
@@ -1558,14 +1554,11 @@ const _dutchSourceLa = {
       'Insignia OciDeck et operum affinium sunt ocicatti Brennonis de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Fundatio die 23 Octobris anno 2025 instrumento notariali Leeuwardae condita est et sedem statutariam Noordwijci habet.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Hae optiones determinant quid OciDeck ex interrete onerare liceat et quae vestigia in hoc instrumento remaneant. A declaratione privatitatis et consensu tuo sunt seiunctae, quae apud "Licentia et Privatitas" invenies.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Proposita fundationis:\n\n•  Programmata et machinas fonte aperto pro infrastructuris digitalibus tutis promovere.\n•  Perspicuitatem et reproducibilitatem in processibus securitatis fovere.\n•  Investigationem, institutiones et actiones de firmitate digitali disponere.\n•  Cives, societates, imperium et instituta civilia inter se coniungere.',
   'E-mail': 'Epistula electronica',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Valores praecipui: securitas, libertas et apertio, superioritas, integritas, communicatio scientiae, fidelitas, humanitas, auscultatio et coniunctio, "just culture" et sustentabilitas.',
-  'Licentie en Privacy': 'Licentia et Privatitas',
   'Mascotte van MIAUW.': 'Insigne MIAUW.',
   'Mascotte van OpenKAT.': 'Insigne OpenKAT.',
   'Mascotte van de checklisttool.': 'Insigne instrumenti indicis.',
@@ -1663,6 +1656,17 @@ const _dutchSourceAddLa = <String, String>{
       'Laminae, praesentare, in PDF vel PowerPoint exportare',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Textus continuus, paginae, in PDF vel Word exportare',
+  'Uiterlijk van de app': 'Aspectus applicationis',
+  'Uiterlijk van dia\'s': 'Aspectus diapositivarum',
+  'Privacy en classificatie': 'Privatitas et Classificatio',
+  'Uiterlijk van documenten': 'Aspectus documentorum',
+  'Exportkwaliteit': 'Qualitas exportationis',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Primum consensum ad commercium exiens sub Privatitas et Classificatio concede.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Servitium nubis primum consensum tuum de privata re requirit apud "Privatitas et Classificatio" nec in versione interretiali operatur.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Hae optiones determinant quid OciDeck ex interrete onerare liceat et quae vestigia in hoc instrumento remaneant. A declaratione privatitatis et consensu tuo sunt seiunctae, quae apud "Privatitas et Classificatio" invenies.',
   'Dit bestand is elders gewijzigd': 'Hic fasciculus alibi mutatus est',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Fasciculus in disco mutatus est ex quo aperuisti — probabiliter in alia fenestra aut ab alio programma. Superscribere eas mutationes abiicit.',

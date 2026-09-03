@@ -58,17 +58,9 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         const SizedBox(height: 16),
         ..._accessibilitySettings(),
         const SizedBox(height: 16),
-        ..._documentStyleSection(ref, l10n),
+        ..._exportQualitySettings(),
         const SizedBox(height: 16),
-        // Handhavingsbeleid is voor de meeste gebruikers niet aan de orde;
-        // ingeklapt tenzij er al een regel actief is (die verstop je niet).
-        AdvancedSection(
-          title: l10n.d('Classificatie-handhaving'),
-          initiallyExpanded: ClassificationEnforcementPolicy.fromAppSettings(
-            ref.read(settingsProvider),
-          ).hasGate,
-          children: [_classificationEnforcementSection(l10n)],
-        ),
+        ..._documentStyleSection(ref, l10n),
       ],
     );
   }
@@ -88,44 +80,6 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 8),
-      SwitchListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          l10n.d('Waarschuwing bij export'),
-          style: const TextStyle(fontSize: 13),
-        ),
-        subtitle: Text(
-          l10n.d(
-            'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
-          ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
-        value: ref.watch(
-          settingsProvider.select((s) => s.qualityWarningsOnExport),
-        ),
-        onChanged: (value) => ref
-            .read(settingsProvider.notifier)
-            .setQualityWarningsOnExport(value),
-      ),
-      SwitchListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          l10n.d('Blokkeer export bij ernstige kwaliteitsproblemen'),
-          style: const TextStyle(fontSize: 13),
-        ),
-        subtitle: Text(
-          l10n.d(
-            'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
-          ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
-        value: ref.watch(
-          settingsProvider.select((s) => s.qualityBlockExportOnErrors),
-        ),
-        onChanged: (value) => ref
-            .read(settingsProvider.notifier)
-            .setQualityBlockExportOnErrors(value),
-      ),
       Builder(
         builder: (context) {
           const presets = <double>[4.5, 4.0, 3.5, 3.0];
@@ -164,6 +118,55 @@ extension _SettingsGeneralTab on _SettingsDialogState {
             ),
           );
         },
+      ),
+    ];
+  }
+
+  /// Exportkwaliteit: waarschuwen en blokkeren bij slide-kwaliteitsproblemen.
+  /// Dit is slide-kwaliteit (te veel bullets, contrast op de dia), niet
+  /// toegankelijkheid van de interface — vandaar een eigen kop, niet onder
+  /// Toegankelijkheid (#1956).
+  List<Widget> _exportQualitySettings() {
+    final l10n = context.l10n;
+    return [
+      _sectionTitle(l10n.d('Exportkwaliteit')),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Waarschuwing bij export'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        value: ref.watch(
+          settingsProvider.select((s) => s.qualityWarningsOnExport),
+        ),
+        onChanged: (value) => ref
+            .read(settingsProvider.notifier)
+            .setQualityWarningsOnExport(value),
+      ),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Blokkeer export bij ernstige kwaliteitsproblemen'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        value: ref.watch(
+          settingsProvider.select((s) => s.qualityBlockExportOnErrors),
+        ),
+        onChanged: (value) => ref
+            .read(settingsProvider.notifier)
+            .setQualityBlockExportOnErrors(value),
       ),
     ];
   }
@@ -530,7 +533,7 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
   // Een sinds verwijderd profiel mag de kiezer niet laten crashen.
   final value = profileNames.contains(defaultStyle) ? defaultStyle : null;
   return [
-    SettingsSectionTitle(l10n.d('Documentstijl')),
+    SettingsSectionTitle(l10n.d('Uiterlijk van documenten')),
     Text(
       l10n.d(
         'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.',

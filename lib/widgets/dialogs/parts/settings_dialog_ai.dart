@@ -186,7 +186,7 @@ extension _SettingsAi on _SettingsDialogState {
         padding: const EdgeInsets.only(top: 4, bottom: 4),
         child: Text(
           l10n.d(
-            'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.',
+            'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.',
           ),
           style: TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),

@@ -241,7 +241,13 @@ void main() {
     // De opslagwijzen renderen hun sectiekop in een eigen paneel in plaats van
     // in de body van het tabblad, dus de scan hieronder vindt ze niet vanzelf.
     // Ze horen wél bij Opslag: het paneel klapt binnen dat tabblad open.
-    const extraOwners = {'_webdavPanel': 'storage', '_gitPanel': 'storage'};
+    const extraOwners = {
+      '_webdavPanel': 'storage',
+      '_gitPanel': 'storage',
+      // _cockpitTab wordt sinds #1957 ingeklapt aangeroepen vanuit
+      // _presentationStyleTab, dus zijn secties horen bij presentatie.
+      '_cockpitTab': 'presentation',
+    };
     final ownerOf = <String, String>{
       for (final e in builders.entries) e.value: e.key,
       ...extraOwners,

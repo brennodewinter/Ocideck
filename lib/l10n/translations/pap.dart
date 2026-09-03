@@ -282,8 +282,6 @@ const _dutchSourcePap = {
   'Uitbreidingen': 'Ekstenshonnan',
   'Gegevens opschonen': 'Limpia datonan',
   'Gegevens lokaal beschikbaar': 'Datonan disponibel lokalmente',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Duna promé permit pa tráfiko saliente na Lisensia i Privasidat.',
   'Op het web nog niet beschikbaar': 'Ainda no disponibel riba web',
   'Nog niet opgehaald': 'Ainda no a baha',
   'AI-assistentie': 'Asistensia di IA',
@@ -297,8 +295,6 @@ const _dutchSourcePap = {
   'Cloud (externe dienst)': 'Nubia (servisio èksterno)',
   'Modelnaam': 'Nòmber di modelo',
   'API-sleutel (optioneel)': 'Yabi di API (opcional)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Un servisio di nubia ta rekerí promé bo konsentimentu di privasidat na "Lisensia i Privasidat" i no ta funshoná den e version web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Mi ta komprendé ku datos ta wòrdu mandá na e servisio èksterno aki',
   'Zoek een slidetype': 'Buska un tipo di slide',
@@ -632,14 +628,11 @@ const _dutchSourcePap = {
       'E maskotnan di OciDeck i proyektonan relashoná ta e ocicats di Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'E fundashon a wòrdu fundá riba 23 di òktober 2025 pa medio di akta notarial na Leeuwarden i tin su sede statutario na Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'E konfigurashonnan aki ta determiná kiko OciDeck por karga for di internet i ki rastronan ta keda atras riba e aparato aki. Nan ta separá for di bo deklarashon di privasidat i konsentimentu, ku bo ta haña na "Lisensia i Privasidat".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Metanan di e fundashon:\n\n•  Stimulá software i hardware opensource pa infrastruktura digital sigur.\n•  Promové transparensia i reproducibilidat den prosesonan di seguridat.\n•  Organisá investigashon, entrenamentu i aktividatnan tokante resiliensia digital.\n•  Konektá siudadanonan, empresanan, gobièrnu i organisashonnan sosial ku otro.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Balornan fundamental: seguridat, libertat i apertura, soberania, integridat, kompartimentu di konosementu, konfiabilidat, humanidat, skucha i konektá, "just culture" i sustenabilidat.',
-  'Licentie en Privacy': 'Lisensia i Privasidat',
   'Mascotte van MIAUW.': 'Maskòt di MIAUW.',
   'Mascotte van OpenKAT.': 'Maskòt di OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskòt di e hèrmènt di checklist.',
@@ -680,6 +673,17 @@ const _dutchSourceAddPap = {
       'Slaidi, presenta, eksportá pa PDF of PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Teksto kontínuo, páginanan, eksportá pa PDF of Word',
+  'Uiterlijk van de app': 'Aparensia di e app',
+  'Uiterlijk van dia\'s': 'Aparensia di e slidenan',
+  'Privacy en classificatie': 'Privasidat i klasifikashon',
+  'Uiterlijk van documenten': 'Aparensia di e dokumentonan',
+  'Exportkwaliteit': 'Kalidat di eksportashon',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Duna promé permit pa tráfiko saliente na Privasidat i klasifikashon.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Un servisio di nubia ta rekerí promé bo konsentimentu di privasidat na "Privasidat i klasifikashon" i no ta funshoná den e version web.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'E konfigurashonnan aki ta determiná kiko OciDeck por karga for di internet i ki rastronan ta keda atras riba e aparato aki. Nan ta separá for di bo deklarashon di privasidat i konsentimentu, ku bo ta haña na "Privasidat i klasifikashon".',
   'Dit bestand is elders gewijzigd': 'E archivo aki a kambia na otro lugá',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'E archivo riba disk a kambia for di bo a habrié — probablemente na otro bentana of pa otro programa. Sobreskirbi ta bai kuné esnan kambio ei.',

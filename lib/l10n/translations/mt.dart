@@ -282,8 +282,6 @@ const _dutchSourceMt = {
   'Uitbreidingen': 'Estensjonijiet',
   'Gegevens opschonen': 'Naddaf id-dejta',
   'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
   'Nog niet opgehaald': 'Għadha ma tniżżlitx',
   'AI-assistentie': 'Assistenza AI',
@@ -297,8 +295,6 @@ const _dutchSourceMt = {
   'Cloud (externe dienst)': 'Cloud (servizz estern)',
   'Modelnaam': 'Isem tal-mudell',
   'API-sleutel (optioneel)': 'Ċavetta API (fakultattiva)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Servizz tal-cloud l-ewwel jeħtieġ il-kunsens tiegħek għall-privatezza taħt "Liċenzja u Privatezza" u ma jaħdimx fil-verżjoni web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Nifhem li d-data tintbagħat lil dan is-servizz estern',
   'Zoek een slidetype': 'Fittex it-tip ta\' slide',
@@ -1561,14 +1557,11 @@ const _dutchSourceMt = {
       'Il-mascots ta\' OciDeck u tal-proġetti relatati huma l-ocicats ta\' Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Il-fondazzjoni twaqqfet fit-23 ta\' Ottubru 2025 b\'att notarili f\'Leeuwarden u għandha s-sede statutorja tagħha f\'Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Dawn is-settings jiddeterminaw x\'jista\' jgħabbi OciDeck mill-internet u liema traċċi jibqgħu fuq dan l-apparat. Huma indipendenti mid-dikjarazzjoni tal-privatezza u l-kunsens tiegħek, li ssibhom taħt „Liċenzja u Privatezza”.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'L-objettivi tal-fondazzjoni:\n\n•  Nistimulaw softwer u ħardwer open source għal infrastrutturi diġitali siguri.\n•  Nippromwovu t-trasparenza u r-riproduċibbiltà fil-proċessi tas-sigurtà.\n•  Norganizzaw riċerka, taħriġ u attivitajiet madwar ir-reżiljenza diġitali.\n•  Ngħaqqdu ċittadini, negozji, gvern u organizzazzjonijiet soċjali flimkien.',
   'E-mail': 'Email',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Valuri ewlenin: sigurtà, libertà u ftuħ, sovranità, integrità, kondiviżjoni tal-għarfien, affidabbiltà, umanità, smigħ u konnessjoni, „just culture” u sostenibbiltà.',
-  'Licentie en Privacy': 'Liċenzja u Privatezza',
   'Mascotte van MIAUW.': 'Il-mascot ta\' MIAUW.',
   'Mascotte van OpenKAT.': 'Il-mascot ta\' OpenKAT.',
   'Mascotte van de checklisttool.': 'Il-mascot tal-għodda taċ-checklist.',
@@ -1666,6 +1659,17 @@ const _dutchSourceAddMt = <String, String>{
       'Slajds, preżenta, esporta għal PDF jew PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Test kontinwu, paġni, esporta għal PDF jew Word',
+  'Uiterlijk van de app': 'Dehra tal-app',
+  'Uiterlijk van dia\'s': 'Dehra tas-slajds',
+  'Privacy en classificatie': 'Privatezza u klassifikazzjoni',
+  'Uiterlijk van documenten': 'Dehra tad-dokumenti',
+  'Exportkwaliteit': 'Kwalità tal-esportazzjoni',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Privatezza u klassifikazzjoni.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Servizz tal-cloud l-ewwel jeħtieġ il-kunsens tiegħek għall-privatezza taħt "Privatezza u klassifikazzjoni" u ma jaħdimx fil-verżjoni web.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Dawn is-settings jiddeterminaw x\'jista\' jgħabbi OciDeck mill-internet u liema traċċi jibqgħu fuq dan l-apparat. Huma indipendenti mid-dikjarazzjoni tal-privatezza u l-kunsens tiegħek, li ssibhom taħt „Privatezza u klassifikazzjoni”.',
   'Dit bestand is elders gewijzigd': 'Din il-fajl ġiet modifikata mkien ieħor',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Il-fajl fuq id-disk nbidel minn meta ftaħtu — probabbilment f\'window ieħor jew minn programm ieħor. L-overwrite tarmi dawk it-tibdiliet.',

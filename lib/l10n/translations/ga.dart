@@ -284,8 +284,6 @@ const _dutchSourceGa = {
   'Uitbreidingen': 'Breiseáin',
   'Gegevens opschonen': 'Glan na sonraí',
   'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
   'Nog niet opgehaald': 'Gan íoslódáil fós',
   'AI-assistentie': 'Cúnamh II',
@@ -299,8 +297,6 @@ const _dutchSourceGa = {
   'Cloud (externe dienst)': 'Néal (seirbhís sheachtrach)',
   'Modelnaam': 'Ainm an mhúnla',
   'API-sleutel (optioneel)': 'Eochair API (roghnach)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Ceadúnas agus Príobháideachas" agus ní oibríonn sí sa leagan gréasáin.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Tuigim go seoltar sonraí chuig an tseirbhís sheachtrach seo',
   'Zoek een slidetype': 'Cuardaigh cineál sleamhnáin',
@@ -1573,14 +1569,11 @@ const _dutchSourceGa = {
       'Is iad ocicats Brenno de Winter mascotaí OciDeck agus na dtionscadal gaolmhar.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Bunaíodh an fhondúireacht le gníomhas nótaireachta ar 23 Deireadh Fómhair 2025 i Leeuwarden agus tá a suíomh reachtúil in Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Cinneann na socruithe seo cad is féidir le OciDeck a luchtú ón idirlíon agus cé na rianta a fhanann ar an ngléas seo. Tá siad neamhspleách ar do ráiteas príobháideachta agus toiliú, atá le fáil faoi „Ceadúnas agus Príobháideacht”.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Cuspóirí na fondúireachta:\n\n•  Bogearraí agus crua-earraí foinse oscailte a spreagadh le haghaidh bonneagair dhigiteacha shábháilte.\n•  Trédhearcacht agus in-atáirgeacht i bpróisis slándála a chur chun cinn.\n•  Taighde, oiliúint agus gníomhaíochtaí a bhaineann le hathléimneacht dhigiteach a eagrú.\n•  Saoránaigh, gnólachtaí, rialtas agus eagraíochtaí sochaíocha a nascadh le chéile.',
   'E-mail': 'Ríomhphost',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Croíluachanna: sábháilteacht, saoirse agus oscailteacht, ceannasacht, ionracas, comhroinnt eolais, iontaofacht, daonnacht, éisteacht agus nascadh, „just culture” agus inbhuanaitheacht.',
-  'Licentie en Privacy': 'Ceadúnas agus Príobháideacht',
   'Mascotte van MIAUW.': 'Mascota MIAUW.',
   'Mascotte van OpenKAT.': 'Mascota OpenKAT.',
   'Mascotte van de checklisttool.': 'Mascota na huirlise seicliosta.',
@@ -1678,6 +1671,17 @@ const _dutchSourceAddGa = <String, String>{
       'Slaidí, láithrigh, onnmhairigh go PDF nó PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Téacs leanúnach, leathanaigh, onnmhairigh go PDF nó Word',
+  'Uiterlijk van de app': 'Cuma na haipe',
+  'Uiterlijk van dia\'s': 'Cuma na sleamhnán',
+  'Privacy en classificatie': 'Príobháideacht agus Aicmiú',
+  'Uiterlijk van documenten': 'Cuma na gcáipéisí',
+  'Exportkwaliteit': 'Cáilíocht easpórtála',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Tabhair toiliú do thrácht amach ar dtús faoi Príobháideacht agus Aicmiú.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Príobháideacht agus Aicmiú" agus ní oibríonn sí sa leagan gréasáin.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Cinneann na socruithe seo cad is féidir le OciDeck a luchtú ón idirlíon agus cé na rianta a fhanann ar an ngléas seo. Tá siad neamhspleách ar do ráiteas príobháideachta agus toiliú, atá le fáil faoi „Príobháideacht agus Aicmiú”.',
   'Dit bestand is elders gewijzigd': 'Athraíodh an comhad seo áit eile',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Athraigh an comhad ar an diosca ó d\'oscail tú é — is dócha i bhfuinneog eile nó ag clár eile. Má forscríobhann tú, cailltear na hathruithe sin.',

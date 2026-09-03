@@ -281,8 +281,6 @@ const _dutchSourceFy = {
   'Uitbreidingen': 'Utwreidingen',
   'Gegevens opschonen': 'Gegevens opromje',
   'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Jou earst tastimming foar útgeand ferkear by Lisinsje en Privacy.',
   'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
   'Nog niet opgehaald': 'Noch net ophelle',
   'AI-assistentie': 'AI-stipe',
@@ -296,8 +294,6 @@ const _dutchSourceFy = {
   'Cloud (externe dienst)': 'Cloud (eksterne tsjinst)',
   'Modelnaam': 'Modelnamme',
   'API-sleutel (optioneel)': 'API-kaai (opsjoneel)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'In clouddienst freget earst dyn privacytastimming by "Lisinsje en Privacy" en wurket net yn de webferzje.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Ik begryp dat gegevens nei dizze eksterne tsjinst ferstjoerd wurde',
   'Zoek een slidetype': 'Sykje in slidetype',
@@ -633,14 +629,11 @@ const _dutchSourceFy = {
       'De maskottes fan OciDeck en besibbe projekten binne de ocicats fan Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'De stichting is op 23 oktober 2025 by notariële akte oprjochte te Leeuwarden en hat har statutêre sit yn Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Dizze ynstellingen bepale wat OciDeck fan it ynternet ôf lade mei en hokker spoaren op dit apparaat efterbliuwe. Se steane los fan dyn privacyferklearring en tastimming, dy\'tst by "Lisinsje en Privacy" fynst.',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Doelstellingen fan de stichting:\n\n•  Opensource-software en -hardware foar feilige digitale ynfrastruktueren stimulearje.\n•  Transparânsje en reprodusearberens yn befeiligingsprosessen befoarderje.\n•  Ûndersyk, trainingen en aktiviteiten oer digitale wjerberens organisearje.\n•  Boargers, bedriuwen, oerheid en maatskiplike organisaasjes mei-inoar ferbine.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Kearnwearden: feiligens, frijheid en iepenheid, soevereiniteit, yntegriteit, kennisdieling, betrouberens, minsklikheid, harkje en ferbine, "just culture" en duorsumens.',
-  'Licentie en Privacy': 'Lisinsje en Privacy',
   'Mascotte van MIAUW.': 'Maskotte fan MIAUW.',
   'Mascotte van OpenKAT.': 'Maskotte fan OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskotte fan it checklisttool.',
@@ -681,6 +674,17 @@ const _dutchSourceAddFy = {
       'Dia\'s, presintearje, eksportearje nei PDF of PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Trochrinnende tekst, siden, eksportearje nei PDF of Word',
+  'Uiterlijk van de app': 'Uterlik fan de app',
+  'Uiterlijk van dia\'s': 'Uterlik fan \'e slides',
+  'Privacy en classificatie': 'Privacy en klassifikaasje',
+  'Uiterlijk van documenten': 'Uterlik fan dokuminten',
+  'Exportkwaliteit': 'Eksportkwaliteit',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Jou earst tastimming foar útgeand ferkear by Privacy en klassifikaasje.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'In clouddienst freget earst dyn privacytastimming by "Privacy en klassifikaasje" en wurket net yn de webferzje.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Dizze ynstellingen bepale wat OciDeck fan it ynternet ôf lade mei en hokker spoaren op dit apparaat efterbliuwe. Se steane los fan dyn privacyferklearring en tastimming, dy\'tst by "Privacy en klassifikaasje" fynst.',
   'Dit bestand is elders gewijzigd': 'Dit bestân is earne oars wizige',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'It bestân op skiif is feroare sûnt jo it iepenen — wierskynlik yn in oar finster of troch in oar programma. Oerskriuwen smyt dy wizigingen wei.',

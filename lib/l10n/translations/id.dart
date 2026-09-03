@@ -280,8 +280,6 @@ const _dutchSourceId = {
   'Uitbreidingen': 'Ekstensi',
   'Gegevens opschonen': 'Bersihkan data',
   'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
-  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
-      'Berikan dulu persetujuan untuk lalu lintas keluar di Lisensi dan Privasi.',
   'Op het web nog niet beschikbaar': 'Belum tersedia di web',
   'Nog niet opgehaald': 'Belum diambil',
   'AI-assistentie': 'Bantuan AI',
@@ -295,8 +293,6 @@ const _dutchSourceId = {
   'Cloud (externe dienst)': 'Cloud (layanan eksternal)',
   'Modelnaam': 'Nama model',
   'API-sleutel (optioneel)': 'Kunci API (opsional)',
-  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
-      'Layanan cloud terlebih dahulu memerlukan persetujuan privasi Anda di "Lisensi dan Privasi" dan tidak berfungsi di versi web.',
   'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
       'Saya memahami bahwa data dikirim ke layanan eksternal ini',
   'Zoek een slidetype': 'Cari tipe slide',
@@ -1546,14 +1542,11 @@ const _dutchSourceId = {
       'Maskot OciDeck dan proyek-proyek terkait adalah para ocicat milik Brenno de Winter.',
   'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
       'Yayasan ini didirikan pada 23 Oktober 2025 dengan akta notaris di Leeuwarden dan berkedudukan hukum di Noordwijk.',
-  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
-      'Pengaturan ini menentukan apa yang boleh dimuat OciDeck dari internet dan jejak mana yang tertinggal di perangkat ini. Pengaturan ini terpisah dari pernyataan privasi dan persetujuanmu, yang dapat kamu temukan di "Lisensi dan Privasi".',
   'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
       'Tujuan yayasan:\n\n•  Mendorong perangkat lunak dan perangkat keras sumber terbuka untuk infrastruktur digital yang aman.\n•  Memajukan transparansi dan keterulangan dalam proses keamanan.\n•  Menyelenggarakan penelitian, pelatihan, dan kegiatan seputar ketahanan digital.\n•  Menghubungkan warga, perusahaan, pemerintah, dan organisasi masyarakat satu sama lain.',
   'E-mail': 'E-mail',
   'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
       'Nilai inti: keamanan, kebebasan dan keterbukaan, kedaulatan, integritas, berbagi pengetahuan, keandalan, kemanusiaan, mendengarkan dan menghubungkan, "just culture" dan keberlanjutan.',
-  'Licentie en Privacy': 'Lisensi dan Privasi',
   'Mascotte van MIAUW.': 'Maskot MIAUW.',
   'Mascotte van OpenKAT.': 'Maskot OpenKAT.',
   'Mascotte van de checklisttool.': 'Maskot alat daftar periksa.',
@@ -1648,6 +1641,17 @@ const _dutchSourceAddId = <String, String>{
       'Slide, presentasi, ekspor ke PDF atau PowerPoint',
   'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
       'Teks berkelanjutan, halaman, ekspor ke PDF atau Word',
+  'Uiterlijk van de app': 'Tampilan aplikasi',
+  'Uiterlijk van dia\'s': 'Tampilan slide',
+  'Privacy en classificatie': 'Privasi dan klasifikasi',
+  'Uiterlijk van documenten': 'Tampilan dokumen',
+  'Exportkwaliteit': 'Kualitas ekspor',
+  'Geef eerst toestemming voor uitgaand verkeer bij Privacy en classificatie.':
+      'Berikan dulu persetujuan untuk lalu lintas keluar di Privasi dan klasifikasi.',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Privacy en classificatie" en werkt niet in de webversie.':
+      'Layanan cloud terlebih dahulu memerlukan persetujuan privasi Anda di "Privasi dan klasifikasi" dan tidak berfungsi di versi web.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Privacy en classificatie" vindt.':
+      'Pengaturan ini menentukan apa yang boleh dimuat OciDeck dari internet dan jejak mana yang tertinggal di perangkat ini. Pengaturan ini terpisah dari pernyataan privasi dan persetujuanmu, yang dapat kamu temukan di "Privasi dan klasifikasi".',
   'Dit bestand is elders gewijzigd': 'Berkas ini telah diubah di tempat lain',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Berkas di disk telah berubah sejak Anda membukanya — mungkin di jendela lain atau oleh program lain. Menimpa membuang perubahan tersebut.',
