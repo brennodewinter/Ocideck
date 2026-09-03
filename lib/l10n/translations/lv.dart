@@ -66,8 +66,8 @@ const _stringsLv = {
   'losslessHelp': 'Bezzudumu pilnas izšķirtspējas attēli.',
   'exportAsPdf': 'PDF (attēls uz slaida)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML fails (strādā bezsaistē)',
+  'exportAsOdp': 'OpenDocument prezentācija',
   'exportAsLatex': 'LaTeX avots',
 
   'renderingSlides': 'Renderē slaidus…',
@@ -1631,6 +1631,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un mermaid diagrammas. LaTeX ir pirmkods, ko kompilējat ar pdflatex vai xelatex.',
   'Nu niet': 'Ne tagad',
   'Herstelkopie weggooien': 'Izmest atjaunošanas kopiju',
   'Openen en verder werken': 'Atvērt un turpināt',

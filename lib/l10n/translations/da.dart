@@ -66,7 +66,7 @@ const _stringsDa = {
   'losslessHelp': 'Tabsfrie billeder i fuld opløsning.',
   'exportAsPdf': 'PDF (billede pr. dias)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument-præsentation',
   'exportAsHtml': 'HTML-fil (virker offline)',
   'exportAsLatex': 'LaTeX-kilde',
 
@@ -1633,6 +1633,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML åbner i enhver browser uden internet og renderer kodeblokke, matematik og mermaid-diagrammer. LaTeX er kildekode, du kompilerer med pdflatex eller xelatex.',
   'Nu niet': 'Ikke nu',
   'Herstelkopie weggooien': 'Kassér gendannelseskopi',
   'Openen en verder werken': 'Åbn og fortsæt',

@@ -67,7 +67,7 @@ const _stringsMt = {
   'losslessHelp': 'Immaġni bla telf b\'reżoluzzjoni sħiħa.',
   'exportAsPdf': 'PDF (stampa għal kull dija)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'Preżentazzjoni OpenDocument',
   'exportAsHtml': 'Fajl HTML (jaħdem offline)',
   'exportAsLatex': 'Sors LaTeX',
 
@@ -1651,6 +1651,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML jifta\' f\'kull browser bla internet u jirrenda blokki ta\' kodiċi, matematika u dijagrammi mermaid. LaTeX huwa kodiċi sors li tikkompila b\'pdflatex jew xelatex.',
   'Nu niet': 'Le issa',
   'Herstelkopie weggooien': 'Warrab il-kopja ta\' rkupru',
   'Openen en verder werken': 'Iftaħ u kompli',

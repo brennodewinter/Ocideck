@@ -67,9 +67,9 @@ const _stringsBg = {
   'losslessHelp': 'Изображения без загуба на пълна резолюция.',
   'exportAsPdf': 'PDF (изображение на слайд)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML файл (работи офлайн)',
   'exportAsLatex': 'LaTeX източник',
+  'exportAsOdp': 'Презентация OpenDocument',
 
   'renderingSlides': 'Рендиране на слайдове…',
   'buildingHtml': 'Съставяне на HTML…',
@@ -1653,6 +1653,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML се отваря във всеки браузър без интернет и рендерира блокове код, математика и mermaid диаграми. LaTeX е изходен код, който компилирате с pdflatex или xelatex.',
   'Nu niet': 'Не сега',
   'Herstelkopie weggooien': 'Изхвърли копието за възстановяване',
   'Openen en verder werken': 'Отвори и продължи',

@@ -66,7 +66,7 @@ const _stringsTr = {
   'losslessHelp': 'Tam çözünürlükte kayıpsız görseller.',
   'exportAsPdf': 'PDF (slayt başına görsel)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument sunumu',
   'exportAsHtml': 'HTML dosyası (çevrimdışı çalışır)',
   'exportAsLatex': 'LaTeX kaynağı',
 
@@ -2550,6 +2550,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML internet olmadan herhangi bir tarayıcıda açılır ve kod bloklarını, matematik ve mermaid diyagramlarını işler. LaTeX, pdflatex veya xelatex ile derlediğiniz bir kaynak kodudur.',
   'Nu niet': 'Şimdi değil',
   'Herstelkopie weggooien': 'Kurtarma kopyasını at',
   'Openen en verder werken': 'Aç ve devam et',

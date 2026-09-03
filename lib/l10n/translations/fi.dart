@@ -66,8 +66,8 @@ const _stringsFi = {
   'losslessHelp': 'Häviöttömät täystarkkuuskuvat.',
   'exportAsPdf': 'PDF (kuva per dia)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML-tiedosto (toimii offline-tilassa)',
+  'exportAsOdp': 'OpenDocument-esitys',
   'exportAsLatex': 'LaTeX-lähde',
 
   'renderingSlides': 'Renderöidään dioja…',
@@ -1633,6 +1633,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja mermaid-kaaviot. LaTeX on lähdekoodi, jonka käännet pdflatex- tai xelatex-ohjelmalla.',
   'Nu niet': 'Ei nyt',
   'Herstelkopie weggooien': 'Hylkää palautuskopio',
   'Openen en verder werken': 'Avaa ja jatka',

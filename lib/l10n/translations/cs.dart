@@ -67,9 +67,9 @@ const _stringsCs = {
   'losslessHelp': 'Bezztrátové obrázky v plném rozlišení.',
   'exportAsPdf': 'PDF (obrázek na snímek)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'Soubor HTML (funguje offline)',
   'exportAsLatex': 'Zdroj LaTeX',
+  'exportAsOdp': 'Prezentace OpenDocument',
 
   'renderingSlides': 'Vykreslování snímků…',
   'buildingHtml': 'Sestavování HTML…',
@@ -1634,6 +1634,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML se otevírá v jakémkoli prohlížeči bez internetu a vykresluje bloky kódu, matematiku a mermaid diagramy. LaTeX je zdrojový kód, který kompilujete pomocí pdflatex nebo xelatex.',
   'Nu niet': 'Teď ne',
   'Herstelkopie weggooien': 'Zahodit kopii pro obnovu',
   'Openen en verder werken': 'Otevřít a pokračovat',

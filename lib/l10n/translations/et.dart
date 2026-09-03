@@ -65,7 +65,7 @@ const _stringsEt = {
   'losslessHelp': 'Kadudeta täiseraldusvõimega pildid.',
   'exportAsPdf': 'PDF (pilt slaidi kohta)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'OpenDocument-esitlus',
   'exportAsHtml': 'HTML-fail (töötab võrguta)',
   'exportAsLatex': 'LaTeX-allikas',
 
@@ -1626,6 +1626,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML avaneb igas brauseris ilma internetita ja renderdab koodiplokid, matemaatika ja mermaid-diagrammid. LaTeX on lähtekood, mis kompileerid pdflatex või xelatex abil.',
   'Nu niet': 'Mitte praegu',
   'Herstelkopie weggooien': 'Hülga taastekoopia',
   'Openen en verder werken': 'Ava ja jätka',

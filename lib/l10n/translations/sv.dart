@@ -66,9 +66,9 @@ const _stringsSv = {
   'losslessHelp': 'Förlustfria bilder i full upplösning.',
   'exportAsPdf': 'PDF (bild per bild)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML-fil (fungerar offline)',
   'exportAsLatex': 'LaTeX-källa',
+  'exportAsOdp': 'OpenDocument-presentation',
 
   'renderingSlides': 'Renderar bilder…',
   'buildingHtml': 'Bygger HTML…',
@@ -1632,6 +1632,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML öppnas i valfri webbläsare utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX är källkod som du kompilerar med pdflatex eller xelatex.',
   'Nu niet': 'Inte nu',
   'Herstelkopie weggooien': 'Kassera återställningskopia',
   'Openen en verder werken': 'Öppna och fortsätt',

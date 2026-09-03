@@ -67,7 +67,7 @@ const _stringsRo = {
   'losslessHelp': 'Imagini fără pierderi, la rezoluție completă.',
   'exportAsPdf': 'PDF (imagine per diapozitiv)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
+  'exportAsOdp': 'Prezentare OpenDocument',
   'exportAsHtml': 'Fișier HTML (funcționează offline)',
   'exportAsLatex': 'Sursă LaTeX',
 
@@ -1649,6 +1649,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. LaTeX este cod sursă pe care îl compilați cu pdflatex sau xelatex.',
   'Nu niet': 'Nu acum',
   'Herstelkopie weggooien': 'Renunță la copia de recuperare',
   'Openen en verder werken': 'Deschide și continuă',

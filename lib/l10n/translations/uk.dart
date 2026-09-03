@@ -67,8 +67,8 @@ const _stringsUk = {
   'losslessHelp': 'Зображення без втрат у повній роздільній здатності.',
   'exportAsPdf': 'PDF (зображення на слайд)',
   'exportAsPptx': 'PowerPoint',
-  'exportAsOdp': 'OpenDocument',
   'exportAsHtml': 'HTML-файл (працює офлайн)',
+  'exportAsOdp': 'Презентація OpenDocument',
   'exportAsLatex': 'Вихідний код LaTeX',
 
   'renderingSlides': 'Рендеринг слайдів…',
@@ -1648,6 +1648,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
+      'HTML відкривається в будь-якому браузері без інтернету та рендерить блоки коду, математику та діаграми mermaid. LaTeX — це вихідний код, який ви компілюєте за допомогою pdflatex або xelatex.',
   'Nu niet': 'Не зараз',
   'Herstelkopie weggooien': 'Видалити копію відновлення',
   'Openen en verder werken': 'Відкрити та продовжити',
