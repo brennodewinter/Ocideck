@@ -1642,6 +1642,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Diat, esitä, vie PDF- tai PowerPoint-muotoon',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Jatkuva teksti, sivut, vie PDF- tai Word-muotoon',
   'Dit bestand is elders gewijzigd': 'Tämä tiedosto on muutettu toisaalla',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Tiedosto levyllä on muuttunut sen jälkeen kun avasit sen — todennäköisesti toisessa ikkunassa tai toisella ohjelmalla. Ylikirjoittaminen hävittää nämä muutokset.',

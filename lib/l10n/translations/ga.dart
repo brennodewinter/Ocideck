@@ -1672,6 +1672,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slaidí, láithrigh, onnmhairigh go PDF nó PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Téacs leanúnach, leathanaigh, onnmhairigh go PDF nó Word',
   'Dit bestand is elders gewijzigd': 'Athraíodh an comhad seo áit eile',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Athraigh an comhad ar an diosca ó d\'oscail tú é — is dócha i bhfuinneog eile nó ag clár eile. Má forscríobhann tú, cailltear na hathruithe sin.',

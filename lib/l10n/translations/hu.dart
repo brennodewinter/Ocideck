@@ -1644,6 +1644,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Diák, bemutatás, exportálás PDF-be vagy PowerPointba',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Folyamatos szöveg, oldalak, exportálás PDF-be vagy Word-be',
   'Dit bestand is elders gewijzigd': 'Ezt a fájlt máshol módosították',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'A lemezen lévő fájl megváltozott azóta, hogy megnyitottad — valószínűleg egy másik ablakban vagy egy másik program által. Felülírás eldobja ezeket a módosításokat.',

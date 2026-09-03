@@ -1654,6 +1654,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slajdy, prezentuj, eksportuj do PDF lub PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Tekst ciągły, strony, eksportuj do PDF lub Word',
   'Dit bestand is elders gewijzigd':
       'Ten plik został zmodyfikowany w innym miejscu',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':

@@ -1635,6 +1635,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slaidid, esitle, ekspordi PDF-isse või PowerPointi',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Pidev tekst, leheküljed, ekspordi PDF-i või Wordi',
   'Dit bestand is elders gewijzigd': 'Seda faili on muudetud kusagil mujal',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Kettal olev fail on muutunud alates selle avamisest — arvatavasti teises aknas või teise programmiga. Ülekirjutamine viskab need muudatused minema.',

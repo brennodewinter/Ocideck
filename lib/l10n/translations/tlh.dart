@@ -1619,6 +1619,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'nagh beQmey, nIH, PDF pagh PowerPointvaD ngeH',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'tlhagh qaS, naghmey, PDF pagh WordvaD ngeH',
   'Dit bestand is elders gewijzigd': 'Dat nav choHlu\'pu\' latlhDaq',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Dat nav choHpu\' DI\' DapuQmoH — nItebHa\' latlh windowsDaq ghobe\' latlh software. SIchchugh, choHmeyvetlh lulIjlu\'.',

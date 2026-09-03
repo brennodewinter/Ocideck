@@ -1657,6 +1657,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Слайди, презентація, експорт у PDF або PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Неперервний текст, сторінки, експорт у PDF або Word',
   'Dit bestand is elders gewijzigd': 'Цей файл було змінено в іншому місці',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Файл на диску змінився з моменту відкриття — ймовірно, в іншому вікні або іншою програмою. Перезапис відкидає ці зміни.',

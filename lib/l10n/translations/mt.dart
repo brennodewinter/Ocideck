@@ -1660,6 +1660,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slajds, preżenta, esporta għal PDF jew PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Test kontinwu, paġni, esporta għal PDF jew Word',
   'Dit bestand is elders gewijzigd': 'Din il-fajl ġiet modifikata mkien ieħor',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Il-fajl fuq id-disk nbidel minn meta ftaħtu — probabbilment f\'window ieħor jew minn programm ieħor. L-overwrite tarmi dawk it-tibdiliet.',

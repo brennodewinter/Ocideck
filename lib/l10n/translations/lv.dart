@@ -1640,6 +1640,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slaidi, prezentēt, eksportēt uz PDF vai PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Nepārtraukts teksts, lapas, eksportēt uz PDF vai Word',
   'Dit bestand is elders gewijzigd': 'Šis fails ir mainīts citur',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Fails uz diska ir mainījies kopš jūs to atvērāt — droši vien citā logā vai ar citu programmu. Pārrakstīšana izmet šīs izmaiņas.',

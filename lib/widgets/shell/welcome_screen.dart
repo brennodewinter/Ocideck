@@ -295,6 +295,9 @@ class _WelcomeScreen extends ConsumerWidget {
           style: primaryStyle,
           icon: Icons.slideshow_outlined,
           label: Text(l10n.t('newPresentation')),
+          subtitle: Text(
+            l10n.d("Dia's, presenteren, exporteren naar PDF of PowerPoint"),
+          ),
           onPressed: () => _newDeck(context, ref),
         ),
       ),
@@ -511,6 +514,9 @@ class _WelcomeScreen extends ConsumerWidget {
       style: _primaryButtonStyle(),
       icon: Icons.description_outlined,
       label: Text(l10n.d('Nieuw document')),
+      subtitle: Text(
+        l10n.d("Doorlopende tekst, pagina's, exporteren naar PDF of Word"),
+      ),
       onPressed: () => ref.read(tabsProvider.notifier).newDocument(),
     ),
   ];

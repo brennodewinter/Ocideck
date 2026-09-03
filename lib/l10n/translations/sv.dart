@@ -1641,6 +1641,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slides, presentera, exportera till PDF eller PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Löpande text, sidor, exportera till PDF eller Word',
   'Dit bestand is elders gewijzigd':
       'Den här filen har ändrats på ett annat ställe',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':

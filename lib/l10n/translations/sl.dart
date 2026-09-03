@@ -1642,6 +1642,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Diapozitivi, predstavitev, izvozi v PDF ali PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Neprekinjeno besedilo, strani, izvozi v PDF ali Word',
   'Dit bestand is elders gewijzigd': 'Ta datoteka je bila spremenjena drugje',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Datoteka na disku se je spremenila, odkar ste jo odprli — verjetno v drugem oknu ali z drugim programom. Prepis zavrže te spremembe.',

@@ -674,6 +674,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slaidi, presenta, eksportá pa PDF of PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Teksto kontínuo, páginanan, eksportá pa PDF of Word',
   'Dit bestand is elders gewijzigd': 'E archivo aki a kambia na otro lugá',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'E archivo riba disk a kambia for di bo a habrié — probablemente na otro bentana of pa otro programa. Sobreskirbi ta bai kuné esnan kambio ei.',

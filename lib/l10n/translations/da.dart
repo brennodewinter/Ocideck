@@ -1642,6 +1642,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slides, præsenter, eksporter til PDF eller PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Løbende tekst, sider, eksporter til PDF eller Word',
   'Dit bestand is elders gewijzigd': 'Denne fil er blevet ændret et andet sted',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
       'Filen på disken er ændret siden du åbnede den — sandsynligvis i et andet vindue eller af et andet program. Overskrivning kasserer disse ændringer.',

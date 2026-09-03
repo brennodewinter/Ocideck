@@ -1646,6 +1646,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Slajdovi, prezentiraj, izvezi u PDF ili PowerPoint',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Neprekinuti tekst, stranice, izvezi u PDF ili Word',
   'Dit bestand is elders gewijzigd':
       'Ova datoteka je izmijenjena negdje drugdje',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':

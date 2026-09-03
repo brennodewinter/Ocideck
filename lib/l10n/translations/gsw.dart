@@ -1645,6 +1645,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dia\'s, presenteren, exporteren naar PDF of PowerPoint':
+      'Folie, präsentiere, als PDF oder PowerPoint exportiere',
+  'Doorlopende tekst, pagina\'s, exporteren naar PDF of Word':
+      'Fortlaufende Text, Sitte, als PDF oder Word exportiere',
   'Dit bestand is elders gewijzigd':
       'Die Datei isch wo anderscht gänderet worde',
   'Het bestand op schijf is veranderd sinds je het opende — waarschijnlijk in een ander venster of door een ander programma. Overschrijven gooit die wijzigingen weg.':
