@@ -1788,7 +1788,7 @@ const _dutchSourceAddSl = <String, String>{
   'waarden herkend.': 'vrednote priznane.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'vrednote niso prepoznane. Te vrstice ostanejo na dnu v trenutnem vrstnem redu.',
-  'Basislettergrootte: {px} px': 'Osnovna velikost pisave: {px} px',
+  'Basislettergrootte: {pt} pt': 'Osnovna velikost pisave: {pt} pt',
   'Basislettergrootte': 'Osnovna velikost pisave',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Naslovi, sprotne opombe in kartice časovnice se prilagajajo tej velikosti.',

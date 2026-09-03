@@ -414,8 +414,8 @@ class _DocumentStyleBuilder {
         // ingebakken waarde is per definitie onvertaalbaar, en dezelfde vorm
         // draagt de celopvulling hierboven al.
         l10n
-            .d('Basislettergrootte: {px} px')
-            .replaceAll('{px}', size.toStringAsFixed(1)),
+            .d('Basislettergrootte: {pt} pt')
+            .replaceAll('{pt}', size.toStringAsFixed(1)),
         style: const TextStyle(fontSize: 13),
       ),
       Slider(

@@ -1764,7 +1764,7 @@ const _dutchSourceAddTlh = <String, String>{
   'waarden herkend.': 'De\' luqellu\'.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'De\' \'op ngoQlu\'. rowmey bIngDaq pat DaH luntaH.',
-  'Basislettergrootte: {px} px': 'ngutlh tIn motlh: {px} px',
+  'Basislettergrootte: {pt} pt': 'ngutlh tIn motlh: {pt} pt',
   'Basislettergrootte': 'ngutlh tIn motlh',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'peQ, mu\'meyHom je poH tlhegh nav je nIQ vam luqel.',

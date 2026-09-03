@@ -821,7 +821,7 @@ const _dutchSourceAddFy = {
   'waarden herkend.': 'wearden erkend.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'wearden net erkend. Dy rigen bliuwe ûnderoan yn harren hjoeddeistige folchoarder.',
-  'Basislettergrootte: {px} px': 'Basisletterjitte: {px} px',
+  'Basislettergrootte: {pt} pt': 'Basisletterjitte: {pt} pt',
   'Basislettergrootte': 'Basisletterjitte',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Kopkes, fuotnoaten en tiidlynkaarten skale mei dizze grutte mei.',

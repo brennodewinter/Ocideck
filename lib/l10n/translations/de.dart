@@ -821,7 +821,7 @@ const _dutchSourceAddDe = {
   'waarden herkend.': 'Werte anerkannt.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'Werte nicht erkannt. Diese Zeilen bleiben in ihrer aktuellen Reihenfolge unten.',
-  'Basislettergrootte: {px} px': 'Basisschriftgröße: {px} px',
+  'Basislettergrootte: {pt} pt': 'Basisschriftgröße: {pt} pt',
   'Basislettergrootte': 'Basisschriftgröße',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Überschriften, Fußnoten und Zeitstrahlkarten skalieren mit dieser Größe.',

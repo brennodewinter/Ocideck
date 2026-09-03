@@ -1816,7 +1816,7 @@ const _dutchSourceAddPt = <String, String>{
   'waarden herkend.': 'valores reconhecidos.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'valores não reconhecidos. Essas linhas permanecem na parte inferior na ordem atual.',
-  'Basislettergrootte: {px} px': 'Tamanho base da fonte: {px} px',
+  'Basislettergrootte: {pt} pt': 'Tamanho base da fonte: {pt} pt',
   'Basislettergrootte': 'Tamanho base da fonte',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Os títulos, as notas de rodapé e os cartões da linha do tempo acompanham este tamanho.',

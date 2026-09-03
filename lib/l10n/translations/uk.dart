@@ -1803,7 +1803,7 @@ const _dutchSourceAddUk = <String, String>{
   'waarden herkend.': 'визнані цінності.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'значення не розпізнаються. Ці рядки залишаються внизу в поточному порядку.',
-  'Basislettergrootte: {px} px': 'Базовий розмір шрифту: {px} px',
+  'Basislettergrootte: {pt} pt': 'Базовий розмір шрифту: {pt} pt',
   'Basislettergrootte': 'Базовий розмір шрифту',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Заголовки, виноски та картки хронології масштабуються разом із цим розміром.',

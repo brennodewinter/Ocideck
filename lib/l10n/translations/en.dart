@@ -985,7 +985,7 @@ const _dutchSourceAddEn = {
   'waarden herkend.': 'values ​​recognized.',
   'waarden niet herkend. Die rijen blijven onderaan in hun huidige volgorde.':
       'values ​​not recognized. Those rows remain at the bottom in their current order.',
-  'Basislettergrootte: {px} px': 'Base font size: {px} px',
+  'Basislettergrootte: {pt} pt': 'Base font size: {pt} pt',
   'Basislettergrootte': 'Base font size',
   'Koppen, voetnoten en tijdlijnkaarten schalen mee met deze maat.':
       'Headings, footnotes and timeline cards scale with this size.',
