@@ -330,6 +330,9 @@ String _formatWithAuthorText(
           'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.',
         )
         .replaceAll('{pad}', issue.args['path'] ?? ''),
+  SlideQualityIssueKind.themeLogoDarkMissing => l10n.d(
+    'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.',
+  ),
   // Non-lineaire navigatie (#1162): het label van het blok dat nergens meer
   // uitkomt.
   SlideQualityIssueKind.danglingJump =>
@@ -441,6 +444,7 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
           '${issue.args['path'] ?? ''}). '
           '${l10n.d('Sla de presentatie op om een kopie te maken.')}',
     SlideQualityIssueKind.themeLogoMissing ||
+    SlideQualityIssueKind.themeLogoDarkMissing ||
     SlideQualityIssueKind.danglingJump ||
     SlideQualityIssueKind.findingUnknownSection => _formatWithAuthorText(
       l10n,

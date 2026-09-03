@@ -24,6 +24,7 @@ import 'slide_layout_metrics.dart';
 import '../widgets/document_signature_view.dart'
     show decodeEmbeddedSignatureImage;
 import '../widgets/slides/slide_preview.dart';
+import '../theme/brand_logo.dart';
 
 /// De export kon geen frame krijgen om de dia in te tekenen.
 ///
@@ -179,7 +180,10 @@ class SlideRasterizer {
     // The logo is trusted style-profile config (not deck content), so it may
     // live outside the project — unlike slide images, which stay contained.
     // Een `asset:`-logo (ingebouwd profiel) heeft geen bestandsresolutie.
-    final rawLogo = themeProfile.logoPath ?? '';
+    // #1931: effectiveSlideLogoPath kiest de donkere variant op een donkere
+    // dia-achtergrond (gebundeld merk-logo automatisch, eigen logo via
+    // logoDarkPath).
+    final rawLogo = effectiveSlideLogoPath(themeProfile) ?? '';
     final logo = isBundledAssetPath(rawLogo)
         ? rawLogo
         : resolveTrustedAssetPath(rawLogo, projectPath);

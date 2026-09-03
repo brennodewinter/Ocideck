@@ -1,4 +1,6 @@
 import 'app_theme.dart';
+import '../models/settings.dart';
+import '../utils/bundled_asset.dart';
 
 /// The bundled brand marks, each paired with the variant for a dark surface.
 ///
@@ -48,4 +50,38 @@ enum BrandLogo {
   /// profile changes, so there is nothing to listen to here that the theme does
   /// not already carry.
   String get assetKey => AppTheme.isDark ? darkAsset : lightAsset;
+
+  /// De asset-sleutel voor een oppervlak met de gegeven [surfaceLuminance].
+  ///
+  /// In tegenstelling tot [assetKey] (die de app-chrome-modus leest), kiest dit
+  /// op basis van de daadwerkelijke dia-achtergrond (#1931).
+  String effectiveAssetKey(double surfaceLuminance) =>
+      surfaceLuminance < 0.5 ? darkAsset : lightAsset;
+
+  /// Vindt het gebundelde merk-logo wiens lichte asset-sleutel [key] is, of
+  /// `null` als het geen gebundeld merk is.
+  static BrandLogo? forAssetKey(String key) {
+    for (final logo in BrandLogo.values) {
+      if (logo.lightAsset == key) return logo;
+    }
+    return null;
+  }
+}
+
+/// Resolves the effective logo path for a slide with the profile's background
+/// color (#1931). For bundled brand logos, selects the dark variant
+/// automatically when the background is dark. For custom logos, uses
+/// [ThemeProfile.logoDarkPath] if set. Falls back to the light logo.
+String? effectiveSlideLogoPath(ThemeProfile profile) {
+  final path = profile.logoPath;
+  if (path == null || path.trim().isEmpty) return null;
+  final bg = AppTheme.parseHexColor(profile.slideBackgroundColor);
+  if (bg.computeLuminance() >= 0.5) return path;
+  if (isBundledAssetPath(path)) {
+    final brand = BrandLogo.forAssetKey(bundledAssetKey(path));
+    if (brand != null) return 'asset:${brand.darkAsset}';
+  }
+  final darkPath = profile.logoDarkPath;
+  if (darkPath != null && darkPath.trim().isNotEmpty) return darkPath;
+  return path;
 }

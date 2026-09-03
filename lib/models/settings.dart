@@ -136,6 +136,11 @@ class ThemeProfile {
   final String logoPosition;
   final int logoSize;
 
+  /// Donkere variant van het logo, gekozen op donkere dia-achtergronden (#1931).
+  /// `null` betekent: geen donkere variant. Gebundelde merk-logo's kiezen
+  /// automatisch via [BrandLogo.effectiveAssetKey] en hebben dit veld niet nodig.
+  final String? logoDarkPath;
+
   /// Documenten delen standaard het presentatielogo; `null` deelt en leeg zet het uit.
   final String? documentLogoPath;
   final String documentLogoPosition;
@@ -204,6 +209,7 @@ class ThemeProfile {
     this.logoPath,
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
+    this.logoDarkPath,
     this.documentLogoPath,
     this.documentLogoPosition = 'top-right',
     this.documentLogoSize,
@@ -369,6 +375,7 @@ class ThemeProfile {
     String? logoPath,
     String? logoPosition,
     int? logoSize,
+    String? logoDarkPath,
     String? documentLogoPath,
     String? documentLogoPosition,
     int? documentLogoSize,
@@ -392,6 +399,7 @@ class ThemeProfile {
     String? severityLowColor,
     String? severityNoneColor,
     bool clearLogo = false,
+    bool clearLogoDark = false,
     bool clearDocumentLogoOverride = false,
   }) {
     return ThemeProfile(
@@ -428,6 +436,7 @@ class ThemeProfile {
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
+      logoDarkPath: clearLogoDark ? null : (logoDarkPath ?? this.logoDarkPath),
       documentLogoPath: clearDocumentLogoOverride
           ? null
           : (documentLogoPath ?? this.documentLogoPath),
@@ -489,6 +498,7 @@ class ThemeProfile {
       'logoPath': logoPath,
       'logoPosition': logoPosition,
       'logoSize': logoSize,
+      'logoDarkPath': logoDarkPath,
       'documentLogoPath': documentLogoPath,
       'documentLogoPosition': documentLogoPosition,
       'documentLogoSize': documentLogoSize,
@@ -576,6 +586,7 @@ class ThemeProfile {
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
+      logoDarkPath: json['logoDarkPath'] as String?,
       documentLogoPath: json['documentLogoPath'] as String?,
       documentLogoPosition:
           json['documentLogoPosition'] as String? ?? 'top-right',

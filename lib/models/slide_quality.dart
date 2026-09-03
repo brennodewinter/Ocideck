@@ -31,6 +31,10 @@ enum SlideQualityIssueKind {
   // vallen (vertrouwde stijl-config toont nooit een placeholder), dus zonder
   // deze melding staat de gebruiker voor een lege hoek zonder te weten waarom.
   themeLogoMissing,
+  // Deckbreed: de dia-achtergrond is donker, maar het logo is lichte inkt
+  // zonder donkere variant — het logo is op de dia vrijwel onzichtbaar.
+  // Geldt alleen voor eigen logo's; een gebundeld merk-logo kiest automatisch.
+  themeLogoDarkMissing,
   textDensityWarning,
   textDensityCritical,
   splitRunDragged,

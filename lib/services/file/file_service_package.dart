@@ -191,8 +191,15 @@ extension FileServicePackage on FileService {
     ];
 
     final logoRel = await addAsset(deck.themeProfile.logoPath ?? '', 'logos');
-    final profile = logoRel != null
-        ? deck.themeProfile.copyWith(logoPath: logoRel)
+    final logoDarkRel = await addAsset(
+      deck.themeProfile.logoDarkPath ?? '',
+      'logos',
+    );
+    final profile = (logoRel != null || logoDarkRel != null)
+        ? deck.themeProfile.copyWith(
+            logoPath: logoRel ?? deck.themeProfile.logoPath,
+            logoDarkPath: logoDarkRel ?? deck.themeProfile.logoDarkPath,
+          )
         : deck.themeProfile;
 
     final packDeck = deck.copyWith(slides: packedSlides, themeProfile: profile);

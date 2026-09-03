@@ -74,6 +74,75 @@ void main() {
     expect(issue, isNotNull);
     expect(issue!.args['path'], 'images/logo.png');
   });
+
+  group('themeLogoDarkIssueFor (#1931)', () {
+    ThemeProfile darkBgProfile({String? logoPath, String? logoDarkPath}) =>
+        ThemeProfile(
+          logoPath: logoPath,
+          logoDarkPath: logoDarkPath,
+          slideBackgroundColor: '#0F172A', // donker
+        );
+
+    test('geen logo → geen melding', () {
+      expect(themeLogoDarkIssueFor(darkBgProfile()), isNull);
+    });
+
+    test(
+      'donkere achtergrond + eigen logo zonder donkere variant → melding',
+      () {
+        final issue = themeLogoDarkIssueFor(
+          darkBgProfile(logoPath: '/abs/logo.png'),
+        );
+        expect(issue, isNotNull);
+        expect(issue!.kind, SlideQualityIssueKind.themeLogoDarkMissing);
+        expect(issue.isDeckWide, isTrue);
+        expect(issue.severity, MarkdownValidationSeverity.warning);
+        expect(issue.field, 'logoDarkPath');
+      },
+    );
+
+    test(
+      'donkere achtergrond + eigen logo met donkere variant → geen melding',
+      () {
+        expect(
+          themeLogoDarkIssueFor(
+            darkBgProfile(
+              logoPath: '/abs/logo.png',
+              logoDarkPath: '/abs/logo-dark.png',
+            ),
+          ),
+          isNull,
+        );
+      },
+    );
+
+    test(
+      'lichte achtergrond + eigen logo zonder donkere variant → geen melding',
+      () {
+        expect(
+          themeLogoDarkIssueFor(
+            ThemeProfile(
+              logoPath: '/abs/logo.png',
+              slideBackgroundColor: '#FFFFFF',
+            ),
+          ),
+          isNull,
+        );
+      },
+    );
+
+    test('gebundeld merk-logo → geen melding (kiest automatisch)', () {
+      expect(
+        themeLogoDarkIssueFor(
+          ThemeProfile(
+            logoPath: 'asset:assets/images/librekat-logo.png',
+            slideBackgroundColor: '#0F172A',
+          ),
+        ),
+        isNull,
+      );
+    });
+  });
 }
 
 bool _never(String _) => false;

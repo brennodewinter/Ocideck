@@ -58,6 +58,7 @@ import '../../services/menu_blocks.dart';
 import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/brand_logo.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
@@ -668,7 +669,7 @@ class SlidePreviewWidget extends StatelessWidget {
                       if (themeProfile.logoPath?.isNotEmpty == true &&
                           slide.showLogo)
                         _LogoOverlay(
-                          logoPath: themeProfile.logoPath!,
+                          logoPath: effectiveSlideLogoPath(themeProfile)!,
                           projectPath: projectPath,
                           position: themeProfile.logoPosition,
                           size: w * (themeProfile.logoSize / 1280),

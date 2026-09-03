@@ -194,6 +194,11 @@ StyleProfileBytes _encodeStyleProfileEnvelope(
 
   var bytes = encode();
   if (bytes.length > FileService.maxStyleProfileBytes &&
+      envelope.remove('logoDark') != null) {
+    (envelope['profile']! as Map<String, Object?>)['logoDarkPath'] = null;
+    bytes = encode();
+  }
+  if (bytes.length > FileService.maxStyleProfileBytes &&
       envelope.remove('documentLogo') != null) {
     (envelope['profile']! as Map<String, Object?>)['documentLogoPath'] = '';
     logoOmitted = true;
@@ -222,6 +227,7 @@ extension FileServiceStyleProfile on FileService {
   }) async {
     final json = profile.toJson();
     final logo = await _encodeStyleLogo(profile.logoPath, projectPath);
+    final logoDark = await _encodeStyleLogo(profile.logoDarkPath, projectPath);
     final documentLogo = await _encodeStyleLogo(
       profile.documentLogoPath,
       projectPath,
@@ -229,6 +235,10 @@ extension FileServiceStyleProfile on FileService {
     if (profile.logoPath?.trim().isNotEmpty == true &&
         !isBundledAssetPath(profile.logoPath!.trim())) {
       json['logoPath'] = null;
+    }
+    if (profile.logoDarkPath?.trim().isNotEmpty == true &&
+        !isBundledAssetPath(profile.logoDarkPath!.trim())) {
+      json['logoDarkPath'] = null;
     }
     if (profile.documentLogoPath?.trim().isNotEmpty == true &&
         !isBundledAssetPath(profile.documentLogoPath!.trim())) {
@@ -240,11 +250,12 @@ extension FileServiceStyleProfile on FileService {
       'version': _styleProfileFormatVersion,
       'profile': json,
       'logo': ?logo.embedded,
+      'logoDark': ?logoDark.embedded,
       'documentLogo': ?documentLogo.embedded,
     };
     return _encodeStyleProfileEnvelope(
       envelope,
-      logoOmitted: logo.omitted || documentLogo.omitted,
+      logoOmitted: logo.omitted || logoDark.omitted || documentLogo.omitted,
     );
   }
 
@@ -378,6 +389,40 @@ extension FileServiceStyleProfile on FileService {
           logoPath.isNotEmpty &&
           !isBundledAssetPath(logoPath)) {
         profile = profile.copyWith(clearLogo: true);
+      }
+    }
+
+    // Donkere logo-variant: zelfde behandeling als het lichte logo (#1931).
+    final rawLogoDark = envelope['logoDark'];
+    final embeddedLogoDark = _embeddedLogo(rawLogoDark);
+    if (embeddedLogoDark != null) {
+      final materializedDark = await _materializeStyleLogoSafely(
+        () => _materializeStyleLogo(
+          embeddedLogoDark.bytes,
+          embeddedLogoDark.mime,
+          '${profile.name}-dark',
+          logoBaseDir,
+        ),
+      );
+      if (materializedDark.budgetExceeded) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.memoryBudgetExceeded,
+        );
+      }
+      final darkPath = materializedDark.path;
+      profile = darkPath == null
+          ? profile.copyWith(clearLogoDark: true)
+          : profile.copyWith(logoDarkPath: darkPath);
+      logoOmitted = logoOmitted || darkPath == null;
+    } else if (rawLogoDark != null) {
+      profile = profile.copyWith(clearLogoDark: true);
+      logoOmitted = true;
+    } else {
+      final logoDarkPath = profile.logoDarkPath?.trim();
+      if (logoDarkPath != null &&
+          logoDarkPath.isNotEmpty &&
+          !isBundledAssetPath(logoDarkPath)) {
+        profile = profile.copyWith(clearLogoDark: true);
       }
     }
 

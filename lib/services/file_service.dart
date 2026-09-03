@@ -350,14 +350,39 @@ class FileService {
         isBundledAssetPath(logoPath) ||
         kIsWeb ||
         p.isAbsolute(logoPath)) {
-      return profile;
+      return _resolveLogoDarkPath(profile, projectPath);
     }
 
     final bases = [?projectPath, ?_homeDirectory()];
     for (final base in bases) {
       final candidate = p.normalize(p.join(base, logoPath));
       if (File(candidate).existsSync()) {
-        return profile.copyWith(logoPath: candidate);
+        return _resolveLogoDarkPath(
+          profile.copyWith(logoPath: candidate),
+          projectPath,
+        );
+      }
+    }
+    return _resolveLogoDarkPath(profile, projectPath);
+  }
+
+  /// Resolveert [ThemeProfile.logoDarkPath] op dezelfde manier als het lichte
+  /// logo in [resolveThemeProfile]: relatief t.o.v. het project, tenzij het
+  /// al absoluut, gebundeld of leeg is.
+  ThemeProfile _resolveLogoDarkPath(ThemeProfile profile, String? projectPath) {
+    final darkPath = profile.logoDarkPath;
+    if (darkPath == null ||
+        darkPath.trim().isEmpty ||
+        isBundledAssetPath(darkPath) ||
+        kIsWeb ||
+        p.isAbsolute(darkPath)) {
+      return profile;
+    }
+    final bases = [?projectPath, ?_homeDirectory()];
+    for (final base in bases) {
+      final candidate = p.normalize(p.join(base, darkPath));
+      if (File(candidate).existsSync()) {
+        return profile.copyWith(logoDarkPath: candidate);
       }
     }
     return profile;
