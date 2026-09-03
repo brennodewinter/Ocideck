@@ -420,6 +420,7 @@ now the only passing state.
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | required (via `static-gate`) |
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-dated-claims`](#make-check-dated-claims) | Every registered measurement in the docs still has its anchor, and no unregistered duration claim was added (`looptijdBasislijn` ratchet). Staleness itself runs daily, not here | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | required (via `static-gate`) |
@@ -765,6 +766,49 @@ also declares them, but see the [CI note](#continuous-integration).)
   of noise with somebody else's reasoning under your name in `git blame`. They
   fall away as those blocks get edited for other reasons. Every one of them was
   hand-checked when the ratchet was set, and every one is real.
+
+### `make check-dated-claims`
+- **Runs:** `dart run tool/check_dated_claims.dart`, and with
+  `--tegen-de-klok` the staleness half on top
+- **Covers:** claims about a *measured* quantity — how long something of ours
+  takes. This document promised on two lines that a red `main` surfaces well
+  under the time it actually takes; on 2026-09-03 the measured median from merge
+  to verdict was 54 minutes. The claim was true when it was written and stepped
+  up around 2026-08-23 without this repository changing. Nothing saw it, and
+  nothing could: there was no date to check against.
+- **Why this is its own class.** The gates on the code are strong, and
+  `docs_claims_match_code_test.dart` holds the numbers that have a constant
+  behind them. A duration has no constant. It decays while the tree stands
+  still, which makes it the documentation counterpart of
+  `check_reference_data.dart` — the same question, asked about our own
+  measurements instead of somebody else's releases.
+- **How it measures — two halves, and the second keeps the first honest.**
+  `gemetenBeweringen` is the register of live claims: where each one sits, what
+  was measured, when, and how to measure it again. Each entry carries a literal
+  anchor that must still appear in the document, and that anchor contains the
+  measurement date, so the register and the prose cannot drift apart on the one
+  number that matters. `looptijdBasislijn` then counts *every* duration
+  expression in `docs/CHECKS.md`, `CONTRIBUTING.md` and `docs/BUILD.md`. Without
+  that second half the register would only guard what somebody remembered to add
+  to it, and the next undated promise would be exactly as invisible as the last.
+  A new expression fails the gate with a choice: measure it and register it, or
+  put it on the baseline because it is history.
+- **Word forms count too.** The claim that caused this gate carried no digit at
+  all. A pattern that only looks for `\d+ minutes` would never have seen it, so
+  `half an hour`, `about an hour`, `an hour or so` and `a few minutes` are in
+  the pattern by name.
+- **Not covered on purpose — placement.** The baseline is a multiset of
+  expressions, not a set of locations. Removing one `22 minutes` from a file and
+  adding another elsewhere in the same file passes silently. That is the price
+  of a counter that does not sit on line numbers, which would fail on every
+  reflow of a paragraph and get switched off within a week. The limit is written
+  down here because a gate whose blind spot nobody knows gets taken for more
+  proof than it delivers.
+- **Not covered on purpose — staleness, per PR.** Whether a measurement is past
+  its shelf life changes without a commit, so it runs daily in
+  `.forgejo/workflows/time-degrading-checks.yml` and not in this gate. Were it
+  here, some unrelated pull request would one day fail on a claim its author
+  never touched, and the answer to that is always to disable the gate.
 
 ### `make check-hardcoded-text`
 - **Runs:** `dart run tool/check_hardcoded_text.dart` (`--list` prints the full

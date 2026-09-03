@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -827,6 +827,28 @@ check-comment-language:
 	@echo "        Volledige lijst: dart run tool/check_comment_language.dart --list"
 	dart run tool/check_comment_language.dart
 
+# Een bewering over een *gemeten* grootheid verrot terwijl de boom stilstaat.
+# `docs/CHECKS.md` beloofde op twee plekken "within ~half an hour" terwijl de
+# meting op 54 minuten stond; er zat geen datum bij, dus er viel niets tegen te
+# toetsen. Dit doel draait de structurele helft: staan de ankers er nog, en zijn
+# er looptijduitdrukkingen bij gekomen die niemand heeft geregistreerd.
+#
+# De houdbaarheid zelf zit hier bewust níet in — die verandert zonder commit en
+# draait tegen de klok in .forgejo/workflows/time-degrading-checks.yml. Zat ze
+# hier, dan viel op een dag een willekeurige PR om op andermans bewering.
+check-dated-claims:
+	@echo "== OciDeck check: gedateerde beweringen =="
+	@echo "Command: dart run tool/check_dated_claims.dart"
+	@echo "Covers: de ankers van de geregistreerde metingen in de documentatie,"
+	@echo "        en de basislijn van looptijduitdrukkingen in CHECKS.md,"
+	@echo "        CONTRIBUTING.md en BUILD.md."
+	@echo "Failure means: er is een gemeten bewering herschreven zonder het"
+	@echo "        register bij te werken, of er staat een looptijdbelofte bij die"
+	@echo "        niet geregistreerd is. Meet hem en zet de datum erbij, of werk"
+	@echo "        looptijdBasislijn bij als het geschiedenis is."
+	@echo "        Houdbaarheid: dart run tool/check_dated_claims.dart --tegen-de-klok"
+	dart run tool/check_dated_claims.dart
+
 # Elke groene poort is een uitspraak over de toolchain die hem draaide (#598).
 # Eén Flutter per machine, de laatste stable uit het officiële kanaal, en de pin
 # volgt die installatie — niet andersom.
@@ -1282,7 +1304,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
