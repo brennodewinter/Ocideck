@@ -838,6 +838,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Crash recovery is not working right now — the recovery folder is not writable. Save your work manually.',
   'Donker logo kiezen': 'Choose dark logo',
   'Geen donker logo ingesteld': 'No dark logo set',
   'Verwijder donker logo': 'Remove dark logo',

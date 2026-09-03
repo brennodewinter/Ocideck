@@ -1662,6 +1662,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Възстановяването след срив не работи в момента — папката за възстановяване не е достъпна за запис. Запазете работата си ръчно.',
   'Donker logo kiezen': 'Избери тъмно лого',
   'Geen donker logo ingesteld': 'Няма зададено тъмно лого',
   'Verwijder donker logo': 'Премахни тъмно лого',

@@ -1640,6 +1640,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Avārijas atjaunošana šobrīd nedarbojas — atjaunošanas mape nav rakstāma. Saglabājiet savu darbu manuāli.',
   'Donker logo kiezen': 'Izvēlēties tumšu logo',
   'Geen donker logo ingesteld': 'Nav iestatīts tumšs logo',
   'Verwijder donker logo': 'Noņemt tumšu logo',

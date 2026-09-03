@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.": {
+      "en": "Crash recovery is not working right now — the recovery folder is not writable. Save your work manually.",
+      "it": "Il ripristino dopo crash non funziona ora — la cartella di ripristino non è scrivibile. Salva il lavoro manualmente.",
+      "de": "Absturzwiederherstellung funktioniert derzeit nicht — der Wiederherstellungsordner ist nicht beschreibbar. Speichere deine Arbeit manuell.",
+      "fr": "La récupération après crash ne fonctionne pas — le dossier de récupération n'est pas inscriptible. Enregistrez votre travail manuellement.",
+      "es": "La recuperación tras cuelgue no funciona ahora — la carpeta de recuperación no se puede escribir. Guarda tu trabajo manualmente.",
+      "fy": "Crashherstel wurket no net — de herstelmap is net skriuwber. Bewarje jo wurk mei de hân.",
+      "pap": "Rekuperashon di crash no ta funshoná awor — e map di rekuperashon no ta skribí. Warda bo trabou manualmente.",
+      "la": "Restauratio post ruinam nunc non operatur — dossier restitutionis inscribi non potest. Opus tuum manualiter serva.",
+      "id": "Pemulihan crash tidak berfungsi sekarang — folder pemulihan tidak dapat ditulis. Simpan pekerjaan Anda secara manual.",
+      "pl": "Odzyskiwanie po awarii teraz nie działa — folder odzyskiwania nie jest zapisywalny. Zapisz swoją pracę ręcznie.",
+      "uk": "Відновлення після збою зараз не працює — папку відновлення не можна записати. Збережіть свою роботу вручну.",
+      "gsw": "Absturz-Widerherstellig funktioniere grad nöd — de Widerherstelligsordner isch nöd schribbar. Speichere dini Arbet vo Hand.",
+      "el": "Η ανάκτηση μετά από κατάρρευση δεν λειτουργεί τώρα — ο φάκελος ανάκτησης δεν είναι εγγράψιμος. Αποθηκεύστε τη δουλειά σας χειροκίνητα.",
+      "da": "Nedbrudsgendannelse virker ikke lige nu — gendannelsesmappen er ikke skrivbar. Gem dit arbejde manuelt.",
+      "sv": "Kraschåterställning fungerar inte just nu — återställningsmappen är inte skrivbar. Spara ditt arbete manuellt.",
+      "hr": "Oporavak nakon rušenja trenutno ne radi — mapa za oporavak nije zapisiva. Spremite svoj rad ručno.",
+      "cs": "Obnovení po pádu nyní nefunguje — složka obnovení není zapisovatelná. Uložte svou práci ručně.",
+      "fi": "Kaatumispalautus ei toimi nyt — palautuskansioon ei voi kirjoittaa. Tallenna työsi manuaalisesti.",
+      "bg": "Възстановяването след срив не работи в момента — папката за възстановяване не е достъпна за запис. Запазете работата си ръчно.",
+      "lv": "Avārijas atjaunošana šobrīd nedarbojas — atjaunošanas mape nav rakstāma. Saglabājiet savu darbu manuāli.",
+      "lt": "Avarinis atstatymas dabar neveikia — atstatymo aplankas nėra įrašomas. Išsaugokite savo darbą rankiniu būdu.",
+      "mt": "Ir-rikupru wara crash mhu jaħdimx issa — il-folder ta' rikupru mhuwiex jista' jinkiteb. Salvax xogħol tiegħek manwalment.",
+      "et": "Krahhi taastamine ei tööta praegu — taastamiskausta ei saa kirjutada. Salvesta oma töö käsitsi.",
+      "hu": "Az összeomlás utáni helyreállítás most nem működik — a helyreállítási mappa nem írható. Mentsd el a munkádat kézzel.",
+      "ga": "Níl aisghabháil tuairteála ag obair faoi láthair — ní féidir scríobh chuig fillteán na haisghabhála. Sábháil do chuid oibre de láimh.",
+      "pt": "A recuperação de crash não está funcionando agora — a pasta de recuperação não é gravável. Salve seu trabalho manualmente.",
+      "ro": "Recuperarea după crash nu funcționează acum — dosarul de recuperare nu este inscriptibil. Salvează-ți munca manual.",
+      "sl": "Obnovitev po zrušitvi zdaj ne deluje — mapa za obnovitev ni zapisljiva. Ročno shrani svoje delo.",
+      "sk": "Obnovenie po páde teraz nefunguje — priečinok obnovenia nie je zapisovateľný. Uložte svoju prácu ručne.",
+      "tlh": "DI' chImtaHghach vangqelbe' — chImtaH mIch vlh. nIteQ nIH DI' De' Qup.",
+      "tr": "Çöküş kurtarma şu an çalışmıyor — kurtarma klasörü yazılabilir değil. Çalışmanızı manuel olarak kaydedin."
+    }
+  }
+}

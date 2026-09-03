@@ -1658,6 +1658,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Recuperarea după crash nu funcționează acum — dosarul de recuperare nu este inscriptibil. Salvează-ți munca manual.',
   'Donker logo kiezen': 'Alege logo întunecat',
   'Geen donker logo ingesteld': 'Niciun logo întunecat setat',
   'Verwijder donker logo': 'Șterge logo întunecat',

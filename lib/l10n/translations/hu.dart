@@ -1644,6 +1644,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Az összeomlás utáni helyreállítás most nem működik — a helyreállítási mappa nem írható. Mentsd el a munkádat kézzel.',
   'Donker logo kiezen': 'Sötét logo választása',
   'Geen donker logo ingesteld': 'Nincs sötét logo beállítva',
   'Verwijder donker logo': 'Sötét logo eltávolítása',

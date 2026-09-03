@@ -675,6 +675,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Crashherstel wurket no net — de herstelmap is net skriuwber. Bewarje jo wurk mei de hân.',
   'Donker logo kiezen': 'Donker logo kieze',
   'Geen donker logo ingesteld': 'Gjin donker logo ynsteld',
   'Verwijder donker logo': 'Donker logo fuortsmite',

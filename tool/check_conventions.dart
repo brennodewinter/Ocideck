@@ -157,7 +157,9 @@ const Map<String, int> fileSizeBaseline = {
   // cohesief met de bytes-open-lus.
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
-  'lib/state/tabs_provider.dart': 1042,
+  'lib/state/tabs_provider.dart':
+      1052, // +10 (#1953): recoveryWriteErrorProvider
+  // + onWriteError-callback bedrading in de constructor.
   // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
   // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
   // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
@@ -442,7 +444,8 @@ const Map<String, int> classSizeBaseline = {
   // +12 (#1637): notPresentation→document-router in openDeckFromBytes.
   // +11 (#1646): projectPath-parameter door newDocumentFromMarkdown en
   // _placeDocumentTab — cohesief met de tab-aanmaak-lus.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2279,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2284, // +5 (#1953): onWriteError
+  // bedrading in constructor + recoveryWriteErrorProvider.
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`

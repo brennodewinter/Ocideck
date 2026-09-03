@@ -2559,6 +2559,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Çöküş kurtarma şu an çalışmıyor — kurtarma klasörü yazılabilir değil. Çalışmanızı manuel olarak kaydedin.',
   'Donker logo kiezen': 'Koyu logo seç',
   'Geen donker logo ingesteld': 'Koyu logo ayarlanmadı',
   'Verwijder donker logo': 'Koyu logoyu kaldır',

@@ -672,6 +672,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Il ripristino dopo crash non funziona ora — la cartella di ripristino non è scrivibile. Salva il lavoro manualmente.',
   'Donker logo kiezen': 'Scegli logo scuro',
   'Geen donker logo ingesteld': 'Nessun logo scuro impostato',
   'Verwijder donker logo': 'Rimuovi logo scuro',

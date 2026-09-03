@@ -672,6 +672,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'La recuperación tras cuelgue no funciona ahora — la carpeta de recuperación no se puede escribir. Guarda tu trabajo manualmente.',
   'Donker logo kiezen': 'Elegir logo oscuro',
   'Geen donker logo ingesteld': 'Sin logo oscuro configurado',
   'Verwijder donker logo': 'Quitar logo oscuro',

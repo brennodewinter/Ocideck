@@ -1643,6 +1643,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Obnovení po pádu nyní nefunguje — složka obnovení není zapisovatelná. Uložte svou práci ručně.',
   'Donker logo kiezen': 'Vybrat tmavé logo',
   'Geen donker logo ingesteld': 'Není nastaveno tmavé logo',
   'Verwijder donker logo': 'Odstranit tmavé logo',

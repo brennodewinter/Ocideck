@@ -1657,6 +1657,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Restauratio post ruinam nunc non operatur — dossier restitutionis inscribi non potest. Opus tuum manualiter serva.',
   'Donker logo kiezen': 'Elige logotypum obscurum',
   'Geen donker logo ingesteld': 'Nullum logotypum obscurum positum',
   'Verwijder donker logo': 'Tolle logotypum obscurum',

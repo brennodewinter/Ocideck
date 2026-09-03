@@ -1642,6 +1642,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Nedbrudsgendannelse virker ikke lige nu — gendannelsesmappen er ikke skrivbar. Gem dit arbejde manuelt.',
   'Donker logo kiezen': 'Vælg mørkt logo',
   'Geen donker logo ingesteld': 'Intet mørkt logo valgt',
   'Verwijder donker logo': 'Fjern mørkt logo',

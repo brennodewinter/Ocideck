@@ -1642,6 +1642,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Kaatumispalautus ei toimi nyt — palautuskansioon ei voi kirjoittaa. Tallenna työsi manuaalisesti.',
   'Donker logo kiezen': 'Valitse tumma logo',
   'Geen donker logo ingesteld': 'Tummaa logoa ei asetettu',
   'Verwijder donker logo': 'Poista tumma logo',

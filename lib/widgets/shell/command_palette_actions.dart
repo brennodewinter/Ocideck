@@ -625,6 +625,24 @@ void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
   });
 }
 
+/// #1953: het crashherstel kon zijn snapshot niet wegschrijven. Eén keer per
+/// sessie — niet elke 25 s herhalen. Foutkleur: de belofte dat onopgeslagen
+/// werk terugkomt na een crash geldt nu niet, en dat is iets dat de gebruiker
+/// moet weten vóórdat hij op de vangnetten leunt.
+void _listenRecoveryWriteError(BuildContext context, WidgetRef ref) {
+  ref.listen<bool>(recoveryWriteErrorProvider, (_, failed) {
+    if (!failed) return;
+    ref.read(recoveryWriteErrorProvider.notifier).state = false;
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      context.l10n.d(
+        'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.',
+      ),
+    );
+  });
+}
+
 /// Een zojuist geopend bestand heeft elders een byte-identieke kopie:
 /// niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
 /// opruimdialoog als directe ingang. Top-level (net als [_listenChartDataWarning])

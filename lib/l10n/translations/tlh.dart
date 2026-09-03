@@ -1619,6 +1619,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'DI\' chImtaHghach vangqelbe\' — chImtaH mIch vlh. nIteQ nIH DI\' De\' Qup.',
   'Donker logo kiezen': 'wIv qIj wo\'Del',
   'Geen donker logo ingesteld': 'qIj wo\'Del tu\'lu\'be\'',
   'Verwijder donker logo': 'qIj wo\'Del teq',

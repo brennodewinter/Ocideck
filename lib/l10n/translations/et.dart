@@ -1635,6 +1635,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Krahhi taastamine ei tööta praegu — taastamiskausta ei saa kirjutada. Salvesta oma töö käsitsi.',
   'Donker logo kiezen': 'Vali tume logo',
   'Geen donker logo ingesteld': 'Tume logo pole seatud',
   'Verwijder donker logo': 'Eemalda tume logo',
