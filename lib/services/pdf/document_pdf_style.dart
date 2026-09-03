@@ -1,9 +1,9 @@
 // Het stijlprofiel van het document, vertaald naar wat een PDF begrijpt.
 //
-// De app bewaart kleuren als `#RRGGBB`-tekst en maten in pixels; `package:pdf`
-// wil `PdfColor` en punten. Deze laag doet die omzetting één keer, zodat de
-// renderer verderop alleen nog tekent en niet meer hoeft te weten dat een thema
-// uit strings bestaat.
+// De app bewaart kleuren als `#RRGGBB`-tekst en de meeste maten in CSS-pixels;
+// de bodylettergrootte is al een typografisch punt — dezelfde eenheid als
+// `package:pdf`. Celopvulling gaat hier van px naar pt (`× 0.75`). Deze laag
+// doet die omzetting één keer, zodat de renderer verderop alleen nog tekent.
 //
 // De typografie (koptrapjes, regelafstand, witruimte) staat hier ook, en met
 // opzet als getallen bij elkaar: dat maakt de verhoudingen van het document

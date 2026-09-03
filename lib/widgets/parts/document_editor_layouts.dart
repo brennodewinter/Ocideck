@@ -244,9 +244,10 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
                   child: WritingPageBreakOverlay(
                     editorKey: _visualEditorKey,
                     pageContentHeight: pageContentHeight,
-                    bodyFontSize:
-                        _styleProfile?.documentBodyFontSize ??
-                        kDocumentDefaultBodyFontSize,
+                    bodyFontSize: documentBodyFontSizeToCssPx(
+                      _styleProfile?.documentBodyFontSize ??
+                          kDocumentDefaultBodyFontSize,
+                    ),
                     // De einden gelden alleen op paginabreedte: op een andere
                     // maat breekt het vel ergens anders dan de lijn zegt.
                     enabled:

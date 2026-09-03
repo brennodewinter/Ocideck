@@ -185,7 +185,7 @@ class MarkdownEditorTheme {
       // schreef je in de standaardmaat en drukte je in een andere, en dan valt
       // de pagina-eindlijn op de verkeerde regel.
       fontSize: documentTypography
-          ? clampDocumentBodyFontSize(
+          ? documentBodyFontSizeToCssPx(
               profile?.documentBodyFontSize ?? kDocumentBodyFontSize,
             )
           : fontSize,

@@ -290,10 +290,11 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
   final bandText = t.effectiveDocumentBandTextColor;
   final bandBackground = t.effectiveDocumentBandBackgroundColor;
   final logoHeight = (logoSize * 0.5).round().clamp(32, 240);
-  // De basislettergrootte van de documentstijl, in px. De koppen, noten en
-  // tijdlijnkaartjes van `.document` staan in `em`, dus ze schalen vanzelf mee —
-  // net als in de app, waar dezelfde maat de kopmaten schaalt.
-  final bodyFontSize = clampDocumentBodyFontSize(t.documentBodyFontSize);
+  // De basislettergrootte van de documentstijl, in CSS-pixels van de
+  // puntmaat. De koppen, noten en tijdlijnkaartjes van `.document` staan in
+  // `em`, dus ze schalen vanzelf mee — net als in de app. Zonder de omzetting
+  // pt→px was 11 pt hier 11 px: een derde kleiner dan de PDF (#1947).
+  final bodyFontSize = documentBodyFontSizeToCssPx(t.documentBodyFontSize);
   return '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
       'background:${t.slideBackgroundColor};color:${t.textColor};'
       '--ocideck-accent:${t.accentColor};'

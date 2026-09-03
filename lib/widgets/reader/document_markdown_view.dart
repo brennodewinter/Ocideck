@@ -10,7 +10,7 @@ import '../../models/settings.dart'
     show
         ThemeProfile,
         TableBorderStyle,
-        clampDocumentBodyFontSize,
+        documentBodyFontSizeToCssPx,
         kDocumentDefaultBodyFontSize;
 import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
