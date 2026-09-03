@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
@@ -10,6 +12,8 @@ import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/editors/expanded_markdown_dialog.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'support/pump_until.dart';
 
 /// Stresspoort tegen RenderFlex-overflows in de interface.
 ///
@@ -140,7 +144,60 @@ final _surfaces = <_Surface>[
     },
     sizes: _dialogViewportSizes,
   ),
+  // Het openen-dialoog met een selectie erin. Sinds #1928 draagt de voet drie
+  // knoppen (Bladeren…, Annuleren, Openen (n)) plus de regel die de
+  // meervoudige selectie uitlegt; bij 200% tekst moet die rij wikkelen in
+  // plaats van overlopen. Mét selectie, want de derde knop bestaat pas dan —
+  // en juist die maakt de rij te lang.
+  (
+    name: 'openen-dialoog met selectie',
+    pump: _pumpOpenDialogWithSelection,
+    sizes: _dialogViewportSizes,
+  ),
 ];
+
+/// Opent het openen-dialoog met twee aangewezen bestanden, zodat de voet zijn
+/// zwaarste stand draagt. Schrijft twee echte decks: de dialoog leest zijn
+/// lijst van schijf, en zonder rijen valt er niets aan te wijzen.
+Future<void> _pumpOpenDialogWithSelection(WidgetTester tester) async {
+  final dir = Directory.systemTemp.createTempSync('overflow_open_dialog');
+  addTearDown(() {
+    if (dir.existsSync()) dir.deleteSync(recursive: true);
+  });
+  for (final name in ['Alfa', 'Bravo']) {
+    File('${dir.path}/${name.toLowerCase()}.md').writeAsStringSync(
+      '---\nmarp: true\ntheme: ocideck\ntitle: $name\n---\n\n# $name\n',
+    );
+  }
+  SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+  await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+  await tester.pumpAndSettle();
+  final container = ProviderScope.containerOf(
+    tester.element(find.byType(AppShell)),
+  );
+  await container.read(settingsProvider.notifier).addLibrary('Test', dir.path);
+  await tester.pumpAndSettle();
+
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  await tester.sendKeyEvent(LogicalKeyboardKey.keyO);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  await tester.pump();
+  // De mapscan leest écht van schijf; dat is geen microtask die pumpAndSettle
+  // uitzit.
+  await pumpUntil(
+    tester,
+    () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+    reason: 'de mapscan bleef laden',
+  );
+
+  for (final title in ['Alfa', 'Bravo']) {
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.tap(find.text(title));
+    await tester.pump();
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  }
+  await tester.pumpAndSettle();
+}
 
 /// Smalle web-viewports voor het instellingen-dialoog. Op het web is er geen
 /// minimum vensterbreedte, dus de dialoogbreedte zakt naar zijn eigen vloer en
