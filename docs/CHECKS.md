@@ -25,11 +25,12 @@ still does **not** hard-block, on purpose: the **coverage floors** and the
 `make check-no-coverage` — as a detection smoke alarm: a Linux-specific or
 load-sensitive test (path separators, subprocess timeouts, I/O races) can be
 green on the fast maintainer Mac and red only on the Linux runner, and this
-surfaces that within ~half an hour of the merge instead of only when someone
-tries to land a fix on top. It is **detection, not prevention**: the merge is
-not blocked. (#1123 also ran this gate per PR as prevention; that was reverted —
-the suite ran twice per change, on the PR and again post-merge, and the PR run
-was the expensive one on a runner that is already the bottleneck. The per-PR
+surfaces that within an hour or so of the merge (measured below, queue
+included) instead of only when someone tries to land a fix on top. It is
+**detection, not prevention**: the merge is not blocked. (#1123 also ran this
+gate per PR as prevention; that was reverted — the suite ran twice per change,
+on the PR and again post-merge, and the PR run was the expensive one on a
+runner that is already the bottleneck. The per-PR
 prevention layer that remains is `static-gate`, the required check.) The heavy
 gate is **serialized**: it runs on a dedicated **`linux-serial` runner with
 capacity 1**, so a manual dispatch and a merge never run at once, while
@@ -2037,7 +2038,7 @@ that reaches beyond `build/test_cache`.
   *a test* (`source_map_coverage_test`, the docs-registration, SBOM and l10n
   invariants) could still land red on `main` — and between releases nothing ran
   the full suite. Now every merge to `main` runs `make check-no-coverage`, so a
-  `main` that went red surfaces as a failed run (and mail) within ~half an hour
+  `main` that went red surfaces as a failed run (and mail) within about an hour
   instead of only when someone tries to land a fix on top of it. It is a
   **detection** net, not prevention: the merge is not blocked. (#1123 also ran
   this gate per PR as prevention; that was reverted — the suite ran twice per
@@ -2049,6 +2050,16 @@ that reaches beyond `build/test_cache`.
   so a manual dispatch and a merge never cancel each other; rapid merges do
   supersede one another (the latest run tests the newest tip, which is what "is
   `main` green?" asks).
+- **How long that hour actually is, measured 2026-09-03** against `action_run`
+  on the forge, over the post-merge runs of this workflow. In the last ten days
+  (61 runs) the gate itself takes a median of **51 minutes**, and merge to
+  verdict a median of **54**, with **85** at the 90th percentile. That is
+  roughly double what it was: over the ten days before, the median was 29
+  minutes, and it stepped up around 2026-08-23 without this workflow changing.
+  The capacity-1 runner queues on top of that when merges land close together —
+  the longest merge-to-verdict in the window was 151 minutes. **This claim
+  decays while the tree stands still**: the suite grows, the runner does not,
+  and no gate measures it. Re-measure rather than trust the number above.
 
 ### `.forgejo/workflows/ci-image.yml` — the prebaked Linux CI image (`workflow_dispatch` + on pin/Dockerfile change)
 
