@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:markdown_quill/markdown_quill.dart';
+import 'package:ocideck/utils/list_block_embed_syntax.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/toc_embed_syntax.dart';
 
@@ -175,5 +176,92 @@ Tekst.
 
     expect(restored, contains('---'));
     expect(restored, isNot(contains('- - -')));
+  });
+
+  group('blokinhoud in een lijstitem reist verliesvrij (#1925)', () {
+    // De visuele modus herschreef blokinhoud in een lijstitem stil: een
+    // codeblok verloor zijn fences, een tabel verloor zijn bullet, en een
+    // mermaid-diagram plakte aan de bulletregel. Quill's vlakke model kan een
+    // codeblok niet als kind van een lijstitem dragen (`list` en `codeBlock`
+    // zijn exclusief), dus de codec voert het blok nu als `x-embed-list-block`
+    // met de inspringing bewaard.
+
+    String roundTrip(String markdown) =>
+        MarkdownQuillCodec.markdownFromDocument(
+          MarkdownQuillCodec.documentFromMarkdown(markdown),
+        );
+
+    test('een codeblok in een lijstitem behoudt zijn fences en inspringing', () {
+      const source =
+          '- Stap een:\n\n  ```dart\n  void main() {}\n  ```\n\n- Stap twee\n';
+
+      final document = MarkdownQuillCodec.documentFromMarkdown(source);
+
+      // Het codeblok reist als x-embed-list-block, niet als platte tekst in
+      // de bulletregel.
+      final embeds = document
+          .toDelta()
+          .toList()
+          .where((op) => op.data is Map)
+          .map((op) => (op.data as Map).keys.first)
+          .toList();
+      expect(
+        embeds,
+        contains(EmbeddableListBlock.listBlockType),
+        reason: 'het codeblok moet als embed in het document staan',
+      );
+
+      final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+      // De fences en de inspringing overleven de rondgang.
+      expect(restored, contains('  ```dart'));
+      expect(restored, contains('  void main() {}'));
+      expect(restored, contains('  ```'));
+      expect(restored, contains('- Stap een:'));
+      expect(restored, contains('- Stap twee'));
+      // De inhoud is niet aan de bulletregel geplakt.
+      expect(restored, isNot(contains('- Stap een:void main')));
+    });
+
+    test('een tabel in een lijstitem behoudt zijn bullet en inspringing', () {
+      const source =
+          '- Stap een:\n\n  | A | B |\n  | --- | --- |\n  | 1 | 2 |\n\n- Stap twee\n';
+
+      final restored = roundTrip(source);
+
+      expect(restored, contains('- Stap een:'));
+      expect(restored, contains('  | A | B |'));
+      expect(restored, contains('  | --- | --- |'));
+      expect(restored, contains('  | 1 | 2 |'));
+      expect(restored, contains('- Stap twee'));
+      // Het item verliest zijn bullet niet aan de tabel.
+      expect(restored, isNot(contains('Stap een:\n\n- | A | B |')));
+    });
+
+    test('een mermaid-diagram in een lijstitem behoudt zijn fence en inhoud', () {
+      const source =
+          '- Stap een:\n\n  ```mermaid\n  graph TD; A-->B;\n  ```\n\n- Stap twee\n';
+
+      final restored = roundTrip(source);
+
+      expect(restored, contains('  ```mermaid'));
+      expect(restored, contains('  graph TD; A-->B;'));
+      expect(restored, contains('- Stap een:'));
+      expect(restored, contains('- Stap twee'));
+      // Het diagram is niet aan de bulletregel geplakt.
+      expect(restored, isNot(contains('- Stap een:```mermaid')));
+    });
+
+    test('een geordende lijst met een codeblok behoudt zijn nummering', () {
+      const source =
+          '1. Stap een:\n\n   ```dart\n   void main() {}\n   ```\n\n2. Stap twee\n';
+
+      final restored = roundTrip(source);
+
+      expect(restored, contains('1. Stap een:'));
+      expect(restored, contains('   ```dart'));
+      expect(restored, contains('   void main() {}'));
+      expect(restored, contains('2. Stap twee'));
+    });
   });
 }
