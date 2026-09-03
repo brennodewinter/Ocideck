@@ -126,11 +126,25 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// aangewezen bestand. Null zolang er niets is aangewezen.
   String? _anchor;
 
+  /// De met het toetsenbord aangewezen rij (null = niets gekozen). Pijltje
+  /// omlaag vanuit null kiest de eerste rij; Enter opent hem. Visueel los
+  /// van [_selected]: de focusrand markeert waar de pijl staat, de
+  /// blauwe achtergrond markeert wat Ctrl/Cmd heeft aangewezen.
+  int? _focusedIndex;
+
+  final _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
     _roots = List.of(widget.libraries);
     if (_roots.isNotEmpty) _scan();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   /// De eerste wortel als startmap voor de native pickers.
@@ -234,6 +248,76 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     // Sluit eerst: zie [OpenSearchResult.browseRequested]. De startmap geeft
     // de aanroeper mee via de geconfigureerde wortels (eerste bibliotheek).
     Navigator.pop(context, const OpenSearchResult.browse());
+  }
+
+  /// Pijltje/Enter/Home/End op de dialoog. Deze handler zit op een `Focus`
+  /// om de hele dialoog-content, dus hij krijgt alleen toetsen die het
+  /// gefocuste widget (bijv. het zoekveld) niet zelf consumeert — pijltjes
+  /// in het zoekveld bewegen de cursor en borrelen niet op, Enter wel.
+  KeyEventResult _onDialogKey(FocusNode node, KeyEvent event) {
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    final visible = _visibleList();
+    if (visible.isEmpty) return KeyEventResult.ignored;
+    switch (event.logicalKey) {
+      case LogicalKeyboardKey.arrowDown:
+      case LogicalKeyboardKey.arrowRight:
+        _focusIndex((_focusedIndex ?? -1) + 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowUp:
+      case LogicalKeyboardKey.arrowLeft:
+        _focusIndex((_focusedIndex ?? visible.length) - 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.home:
+        _focusIndex(0, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.end:
+        _focusIndex(visible.length - 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.enter:
+        final i = _focusedIndex ?? 0;
+        if (i >= visible.length) return KeyEventResult.ignored;
+        Navigator.pop(context, OpenSearchResult(visible[i].$1.primary.path));
+        return KeyEventResult.handled;
+      default:
+        return KeyEventResult.ignored;
+    }
+  }
+
+  void _focusIndex(
+    int i,
+    List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> visible,
+  ) {
+    final clamped = i.clamp(0, visible.length - 1);
+    setState(() {
+      _focusedIndex = clamped;
+      if (widget.showPreview) {
+        _previewPath = visible[clamped].$1.primary.path;
+      }
+    });
+    _scrollToIndex(clamped, visible.length);
+  }
+
+  List<(DuplicateInfo<ScannedMarkdown>, List<_Hit>)> _visibleList() {
+    final found = _matching();
+    return [
+      for (final entry in found)
+        if (_kind.accepts(entry.$1.primary.kind)) entry,
+    ];
+  }
+
+  void _scrollToIndex(int index, int total) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_scrollController.hasClients) return;
+      final position = _scrollController.position;
+      if (total <= 1) return;
+      final avgItem =
+          (position.maxScrollExtent + position.viewportDimension) / total;
+      _scrollController.animateTo(
+        (avgItem * index).clamp(0.0, position.maxScrollExtent),
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeOut,
+      );
+    });
   }
 
   /// Label van de mapkeuze-knop: bij meerdere wortels "Alle bibliotheken", bij
@@ -377,45 +461,51 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       content: ResizableDialogBox(
         initialWidth: widget.showPreview ? 1020 : 760,
         height: 560,
-        builder: (context, handle) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _toolbar(),
-            const SizedBox(height: 8),
-            OpenKindFilterBar(
-              value: _kind,
-              onChanged: (v) => setState(() => _kind = v),
-              presentationCount: found.length - documents,
-              documentCount: documents,
-            ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: _withPreview(
-                // Het soortlabel per rij alleen wanneer er écht twee soorten
-                // gevonden zijn: in een lijst waarin alles een presentatie is,
-                // zegt "Presentatie" bij elke regel niets meer.
-                (previewShown) => _body(
-                  visible,
-                  previewShown,
-                  documents > 0 && documents < found.length,
-                ),
+        builder: (context, handle) => Focus(
+          onKeyEvent: _onDialogKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _toolbar(),
+              const SizedBox(height: 8),
+              OpenKindFilterBar(
+                value: _kind,
+                onChanged: (v) => setState(() {
+                  _kind = v;
+                  _focusedIndex = null;
+                }),
+                presentationCount: found.length - documents,
+                documentCount: documents,
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    l10n.d(
-                      'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.',
-                    ),
-                    style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                    overflow: TextOverflow.ellipsis,
+              const SizedBox(height: 8),
+              Expanded(
+                child: _withPreview(
+                  // Het soortlabel per rij alleen wanneer er écht twee soorten
+                  // gevonden zijn: in een lijst waarin alles een presentatie is,
+                  // zegt "Presentatie" bij elke regel niets meer.
+                  (previewShown) => _body(
+                    visible,
+                    previewShown,
+                    documents > 0 && documents < found.length,
                   ),
                 ),
-                handle,
-              ],
-            ),
-          ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.d(
+                        'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.',
+                      ),
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  handle,
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       actions: [
@@ -480,7 +570,10 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
                 'Zoek op bestandsnaam, titel of tekst in het bestand…',
               ),
             ),
-            onChanged: (v) => setState(() => _query = v),
+            onChanged: (v) => setState(() {
+              _query = v;
+              _focusedIndex = null;
+            }),
           ),
         ),
         const SizedBox(width: 8),
@@ -533,6 +626,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
 
     final visiblePaths = [for (final e in visible) e.$1.primary.path];
     return ListView.separated(
+      controller: _scrollController,
       itemCount: visible.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (_, i) {
@@ -547,6 +641,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           showKind: showKind,
           showPreview: previewShown,
           selected: _selected.contains(info.primary.path),
+          focused: _focusedIndex == i,
           onTap: () => _onRowTap(visiblePaths, i),
           onPreview: (path) => setState(() => _previewPath = path),
           onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
@@ -604,6 +699,10 @@ class _FileRow extends StatelessWidget {
   /// Of dit bestand is aangewezen om samen met andere geopend te worden.
   final bool selected;
 
+  /// Of deze rij de toetsenbordfocus draagt — de zichtbare focusrand, los
+  /// van de [selected]-achtergrond.
+  final bool focused;
+
   /// Klik op de rij. De dialoog leest de modificatietoetsen: kaal openen,
   /// met Ctrl/Cmd of Shift de selectie veranderen.
   final VoidCallback onTap;
@@ -622,6 +721,7 @@ class _FileRow extends StatelessWidget {
     required this.showKind,
     required this.showPreview,
     required this.selected,
+    required this.focused,
     required this.onTap,
     required this.onPreview,
     required this.onOpen,
@@ -650,6 +750,11 @@ class _FileRow extends StatelessWidget {
                   // licht en donker.
                   color: selected ? AppTheme.infoBg : null,
                   borderRadius: BorderRadius.circular(6),
+                  // Toetsenbordfocusrand: een blauwe contour los van de
+                  // selectie-achtergrond, zodat beide tegelijk zichtbaar zijn.
+                  border: focused
+                      ? Border.all(color: AppTheme.accentFg, width: 1.6)
+                      : null,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                 child: Row(
